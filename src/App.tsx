@@ -1,10 +1,11 @@
-import * as React from 'react';
-import './App.css';
+import * as React from "react";
+import "./App.css";
 
-const logo = require('./logo.svg');
+// tslint:disable-next-line:no-var-requires
+const logo = require("./logo.svg");
 
 class App extends React.Component {
-  render() {
+  public render() {
     return (
       <div className="App">
         <header className="App-header">
