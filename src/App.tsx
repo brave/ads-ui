@@ -1,34 +1,23 @@
-import AppBar from "material-ui/AppBar";
-import Button from "material-ui/Button";
-import Toolbar from "material-ui/Toolbar";
-import Typography from "material-ui/Typography";
 import * as React from "react";
-import {
-  Link,
-  Route,
-} from "react-router-dom";
 
-import Dashboard from "./Dashboard/Dashboard";
+import Body from "./containers/Body";
+import Footer from "./containers/Footer";
+import Header from "./containers/Header";
 
 import "./App.css";
 
-class App extends React.Component {
+class App extends React.Component<any, any> {
+
+  constructor(props: any) {
+    super(props);
+  }
+
   public render() {
     return (
       <div>
-        <AppBar position="static">
-          <Toolbar>
-            <Typography variant="title" color="inherit">
-              ADS UI
-          </Typography>
-            <Link to="/dashboard">
-              <Button color="inherit">Dashboard</Button>
-            </Link>
-          </Toolbar>
-        </AppBar>
-        <div>
-          <Route path="/dashboard" component={Dashboard} />
-        </div>
+        <Header></Header>
+        <Body></Body>
+        <Footer></Footer>
       </div>
     );
   }
