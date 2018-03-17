@@ -27,8 +27,6 @@ export const SignOut = (payload: any) => ({
 export const SignIn = (payload: any) => {
     return (dispatch: any) => {
         dispatch(SignInStart({}));
-        // tslint:disable-next-line:no-console
-        console.log(payload);
         return fetch(`http://localhost:4000/user`, {
             body: JSON.stringify(payload),
             headers: {

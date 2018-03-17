@@ -16,8 +16,6 @@ class Authentication extends React.Component<any, any> {
   public render() {
     const { tabValue } = this.state;
     const SignUpHandler = (value: any) => {
-      // tslint:disable-next-line:no-console
-      console.log(value);
       this.props.dispatch(SignInAction(value));
     };
     return (
