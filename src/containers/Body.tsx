@@ -1,6 +1,11 @@
 import { connect } from "react-redux";
 
-import { login, logout } from "../actions";
+import {
+    SignInFailed,
+    SignInStart,
+    SignInSuccessful,
+    SignOut,
+} from "../actions";
 
 import Dashboard from "../components/Dashboard/Dashboard";
 
@@ -9,8 +14,10 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-    logIn: ({ }) => dispatch(login({})),
-    logOut: ({ }) => dispatch(logout({})),
+    SignInFailed: ({ }) => dispatch(SignInFailed({})),
+    SignInStart: ({ }) => dispatch(SignInStart({})),
+    SignInSuccessful: ({ }) => dispatch(SignInSuccessful({})),
+    SignOut: ({ }) => dispatch(SignOut({})),
 });
 
 export default connect(
