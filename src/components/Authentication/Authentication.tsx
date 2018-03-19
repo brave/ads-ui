@@ -11,7 +11,7 @@ import Signup from "./Signup";
 
 class Authentication extends React.Component<any, any> {
   public state = {
-    tabValue: "SignUp",
+    tabValue: "SignIn",
   };
 
   public render() {

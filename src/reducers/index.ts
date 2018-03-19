@@ -1,9 +1,11 @@
 import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
 
+import drawerReducer from "./drawer";
 import userReducer from "./user";
 
 export default combineReducers({
-    form: formReducer,
-    userReducer,
+  drawerReducer,
+  form: formReducer,
+  userReducer,
 });

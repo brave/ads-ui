@@ -1,6 +1,11 @@
-import { connect } from "react-redux";
+import * as React from "react";
 
-import Appbar from "../components/Appbar/Appbar";
+class Header extends React.Component<any, any> {
+  public render() {
+    return (
+      <span></span>
+    );
+  }
+}
 
-export default connect(
-)(Appbar);
+export default Header;

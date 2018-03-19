@@ -1,3 +1,4 @@
+import CssBaseline from "material-ui/CssBaseline";
 import * as React from "react";
 
 import Body from "./containers/Body";
@@ -15,6 +16,7 @@ class App extends React.Component<any, any> {
   public render() {
     return (
       <div>
+        <CssBaseline />
         <div>
           <Header></Header>
         </div>
