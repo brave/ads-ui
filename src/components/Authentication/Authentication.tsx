@@ -3,7 +3,7 @@ import Tabs, { Tab } from "material-ui/Tabs";
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { SignIn as SignInAction } from "../../actions";
+import { SignIn as SignInAction, SignUp as SignUpAction } from "../../actions";
 
 import SignIn from "./Signin";
 import Signup from "./Signup";
@@ -16,6 +16,9 @@ class Authentication extends React.Component<any, any> {
   public render() {
     const { tabValue } = this.state;
     const SignUpHandler = (value: any) => {
+      this.props.dispatch(SignUpAction(value));
+    };
+    const SignInHandler = (value: any) => {
       this.props.dispatch(SignInAction(value));
     };
     return (
@@ -26,7 +29,7 @@ class Authentication extends React.Component<any, any> {
             <Tab label="Sign In" value="SignIn" />
           </Tabs>
         </AppBar>
-        {tabValue === "SignIn" && <SignIn />}
+        {tabValue === "SignIn" && <SignIn onSubmit={SignInHandler} />}
         {tabValue === "SignUp" && <Signup onSubmit={SignUpHandler} />}
       </div>
     );
