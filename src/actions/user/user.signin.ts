@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { ISignInPayload, IUserAction } from "./user.interface";
+import { ISignInPayload, ISignInSuccessfulPayload, IUserAction } from "./user.interface";
 
 export const SIGN_IN_START = "SIGNINSTART";
 export const SignInStart = (payload: ISignInPayload): IUserAction => ({
@@ -9,7 +9,7 @@ export const SignInStart = (payload: ISignInPayload): IUserAction => ({
 });
 
 export const SIGN_IN_SUCCESSFUL = "SIGNINSUCCESSFUL";
-export const SignInSuccessful = (payload: any): IUserAction => ({
+export const SignInSuccessful = (payload: ISignInSuccessfulPayload): IUserAction => ({
   payload,
   type: SIGN_IN_SUCCESSFUL,
 });

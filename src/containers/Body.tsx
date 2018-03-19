@@ -11,7 +11,7 @@ class Body extends React.Component<any, any> {
       <div>
         <Switch>
           <Route path="/dashboard" component={Dashboard} />
-          <Route path="/signup" component={Authentication} />
+          <Route path="/auth" component={Authentication} />
           {this.getRedirect()}
         </Switch>
       </div>
@@ -22,13 +22,13 @@ class Body extends React.Component<any, any> {
     if (this.props.user && this.props.user.signedIn) {
       return <Redirect to="/dashboard" />;
     } else {
-      return <Redirect to="/signup" />;
+      return <Redirect to="/auth" />;
     }
   }
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
-  user: state.user,
+  user: state.userReducer,
 });
 
 export default withRouter(connect(mapStateToProps)(Body));

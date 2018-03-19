@@ -11,6 +11,7 @@ const userReducer = (
     accessToken: "",
     email: "",
     error: false,
+    id: "",
     processing: false,
     signedIn: false,
     success: false,

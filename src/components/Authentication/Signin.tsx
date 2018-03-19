@@ -18,6 +18,8 @@ const renderTextField = (
 class SignInForm extends React.Component<InjectedFormProps<any, any>> {
 
   public render() {
+    // tslint:disable-next-line:no-console
+    console.log(this.props);
     const { handleSubmit } = this.props;
     return (
       <div>

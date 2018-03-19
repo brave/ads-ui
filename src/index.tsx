@@ -2,30 +2,23 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { applyMiddleware, createStore } from "redux";
-import { createLogger } from "redux-logger";
-import thunkMiddleware from "redux-thunk";
-
-import rootReducer from "./reducers";
+import { PersistGate } from "redux-persist/integration/react";
+import configureStore from "./Store";
 
 import registerServiceWorker from "./registerServiceWorker";
 
 import App from "./App";
 import "./index.css";
 
-const loggerMiddleware = createLogger();
-
-const store = createStore(rootReducer,
-  applyMiddleware(
-    loggerMiddleware,
-    thunkMiddleware,
-  ));
+const { persistor, store } = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <PersistGate loading={null} persistor={persistor}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </PersistGate>
   </Provider>,
   document.getElementById("root") as HTMLElement,
 );
