@@ -1,7 +1,5 @@
 import * as React from "react";
 
-import Authentication from "../Authentication/Authentication";
-
 import "./Dashboard.css";
 
 class Dashboard extends React.Component<any, any> {
@@ -11,7 +9,7 @@ class Dashboard extends React.Component<any, any> {
       <div>
         <h1>Dashboard Component</h1>
         <div>
-          <Authentication />
+          Dashboard
         </div>
       </div>
     );

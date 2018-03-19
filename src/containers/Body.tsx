@@ -1,26 +1,19 @@
+import * as React from "react";
 import { connect } from "react-redux";
+import { Route } from "react-router-dom";
 
-import {
-    SignInFailed,
-    SignInStart,
-    SignInSuccessful,
-    SignOut,
-} from "../actions";
-
+import Authentication from "../components/Authentication/Authentication";
 import Dashboard from "../components/Dashboard/Dashboard";
 
-const mapStateToProps = (state: any) => ({
-    user: state.user,
-});
+class Body extends React.Component<any, any> {
+  public render() {
+    return (
+      <div>
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/signup" component={Authentication} />
+      </div>
+    );
+  }
+}
 
-const mapDispatchToProps = (dispatch: any) => ({
-    SignInFailed: ({ }) => dispatch(SignInFailed({})),
-    SignInStart: ({ }) => dispatch(SignInStart({})),
-    SignInSuccessful: ({ }) => dispatch(SignInSuccessful({})),
-    SignOut: ({ }) => dispatch(SignOut({})),
-});
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(Dashboard);
+export default connect()(Body);

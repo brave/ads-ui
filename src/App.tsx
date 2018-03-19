@@ -15,9 +15,15 @@ class App extends React.Component<any, any> {
   public render() {
     return (
       <div>
-        <Header></Header>
-        <Body></Body>
-        <Footer></Footer>
+        <div>
+          <Header></Header>
+        </div>
+        <div>
+          <Body></Body>
+        </div>
+        <div>
+          <Footer></Footer>
+        </div>
       </div>
     );
   }
