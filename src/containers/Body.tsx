@@ -3,14 +3,14 @@ import { connect } from "react-redux";
 import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 
 import Authentication from "../components/Authentication/Authentication";
-import Dashboard from "../components/Dashboard/Dashboard";
+import Main from "../components/Main/Main";
 
 class Body extends React.Component<any, any> {
   public render() {
     return (
       <div>
         <Switch>
-          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/main" component={Main} />
           <Route path="/auth" component={Authentication} />
           {this.getRedirect()}
         </Switch>
@@ -20,7 +20,7 @@ class Body extends React.Component<any, any> {
 
   private getRedirect() {
     if (this.props.user && this.props.user.signedIn) {
-      return <Redirect to="/dashboard" />;
+      return <Redirect to="/main" />;
     } else {
       return <Redirect to="/auth" />;
     }
