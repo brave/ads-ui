@@ -20,6 +20,9 @@ export const styles = (theme: any) => ({
       width: theme.spacing.unit * 9,
     },
   },
+  link: {
+    textDecoration: "none",
+  },
   root: {
     display: "flex",
     flexGrow: 1,

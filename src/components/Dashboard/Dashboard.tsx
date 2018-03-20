@@ -1,30 +1,28 @@
 import * as classNames from "classnames";
+import Divider from "material-ui/Divider";
 import Drawer from "material-ui/Drawer";
 import Icon from "material-ui/Icon";
 import IconButton from "material-ui/IconButton";
-// import { withStyles } from "material-ui/styles";
+import List from "material-ui/List";
+import { ListItem, ListItemIcon, ListItemText } from "material-ui/List";
 import { withStyles } from "material-ui/styles";
-import Typography from "material-ui/Typography";
 import * as React from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect, Route, Switch } from "react-router-dom";
 
 import { CloseDrawer } from "../../actions";
 import Appbar from "../Appbar/Appbar";
+import FirstTab from "../FirstTab/FirstTab";
 
-import Divider from "material-ui/Divider";
-import List from "material-ui/List";
-import { ListItem, ListItemIcon, ListItemText } from "material-ui/List";
 import { styles } from "./Dashboard.style";
 
 class Dashboard extends React.Component<any, any> {
 
-  public render() {
+  public render(): any {
     if (!this.props.user || !this.props.user.signedIn) {
       return (<Redirect to="/auth" />);
     }
     const { classes } = this.props;
-
     return (
       <div className={classes.root}>
         <Appbar />
@@ -38,12 +36,14 @@ class Dashboard extends React.Component<any, any> {
           </div>
           <Divider />
           <List>
-            <ListItem button>
-              <ListItemIcon>
-                <Icon>inbox</Icon>
-              </ListItemIcon>
-              <ListItemText primary="Inbox" />
-            </ListItem>
+            <Link to="/dashboard/inbox" className={classes.link}>
+              <ListItem button>
+                <ListItemIcon>
+                  <Icon>inbox</Icon>
+                </ListItemIcon>
+                <ListItemText primary="Inbox" />
+              </ListItem>
+            </Link>
             <ListItem button>
               <ListItemIcon>
                 <Icon>star</Icon>
@@ -66,7 +66,9 @@ class Dashboard extends React.Component<any, any> {
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <Typography noWrap>Content Here</Typography>
+          <Switch>
+            <Route path={this.props.match.url + "/inbox"} component={FirstTab} />
+          </Switch>
         </main>
       </div>
     );
@@ -83,5 +85,4 @@ const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
   Signout: () => dispatch(CloseDrawer({})),
 });
 
-// export default connect(mapStateToProps)(Dashboard);
 export default withStyles(styles, { withTheme: true })(connect(mapStateToProps, mapDispatchToProps)(Dashboard));
