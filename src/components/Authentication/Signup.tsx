@@ -23,6 +23,7 @@ class SignupForm extends React.Component<InjectedFormProps<any, any>> {
         <form onSubmit={handleSubmit}>
           <Field name="email" type="text" component={renderTextField} label="Email" />
           <Field name="password" type="password" component={renderTextField} label="Password" />
+          <Field name="organizationName" type="text" component={renderTextField} label="Organization Name" />
           <Button variant="raised" type="submit">Sign Up</Button>
         </form>
       </div>
