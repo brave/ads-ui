@@ -10,14 +10,7 @@ import styles from "./CreativeItem.style";
 
 class CreativeItem extends React.Component<any, any> {
   public render() {
-    const { classes } = this.props;
-    const creative = {
-      caption: "lorem ipsum",
-      code: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum",
-      imgUrl: "http://www.sample-videos.com/img/Sample-jpg-image-200kb.jpg",
-      targetUrl: "http://google.com",
-    };
-
+    const { classes, creative } = this.props;
     return (
       <Card className={classes.card}>
         <CardMedia
