@@ -1,7 +1,10 @@
 import Button from "material-ui/Button";
+import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
 import * as React from "react";
-import { Field, InjectedFormProps, reduxForm } from "redux-form";
+import { Field, reduxForm } from "redux-form";
+
+import { styles } from "./SignIn.style";
 
 const renderTextField = (
   props: any,
@@ -15,18 +18,22 @@ const renderTextField = (
     />
   );
 
-class SignInForm extends React.Component<InjectedFormProps<any, any>> {
+class SignInForm extends React.Component<any, any> {
 
   public render() {
-    // tslint:disable-next-line:no-console
-    console.log(this.props);
-    const { handleSubmit } = this.props;
+    const { classes, handleSubmit } = this.props;
     return (
-      <div>
-        <form onSubmit={handleSubmit}>
-          <Field name="email" type="text" component={renderTextField} label="Email" />
-          <Field name="password" type="password" component={renderTextField} label="Password" />
-          <Button variant="raised" type="submit">Sign In</Button>
+      <div className={classes.root}>
+        <form onSubmit={handleSubmit} className={classes.form}>
+          <div>
+            <Field name="email" type="text" component={renderTextField} label="Email" />
+          </div>
+          <div>
+            <Field name="password" type="password" component={renderTextField} label="Password" />
+          </div>
+          <div>
+            <Button variant="raised" type="submit">Sign In</Button>
+          </div>
         </form>
       </div>
     );
@@ -35,6 +42,6 @@ class SignInForm extends React.Component<InjectedFormProps<any, any>> {
 
 const SignInFormRedux = reduxForm({
   form: "signin",
-})(SignInForm);
+})(withStyles(styles)(SignInForm));
 
 export default SignInFormRedux;
