@@ -17,17 +17,17 @@ class Authentication extends React.Component<any, any> {
     tabValue: "SignIn",
   };
 
-  public SignUpHandler(value: any) {
-    this.props.dispatch(SignUpAction(value));
-  }
-
-  public SignInHandler(value: any) {
-    this.props.dispatch(SignInAction(value));
-  }
-
   public render() {
     const { tabValue } = this.state;
     const { classes } = this.props;
+
+    const SignUpHandler = (value: any) => {
+      this.props.dispatch(SignUpAction(value));
+    };
+
+    const SignInHandler = (value: any) => {
+      this.props.dispatch(SignInAction(value));
+    };
 
     if (this.props.user && this.props.user.signedIn) {
       return (<Redirect to="/dashboard" />);
@@ -40,8 +40,8 @@ class Authentication extends React.Component<any, any> {
             <Tab label="Sign In" value="SignIn" />
           </Tabs>
           <div className={classes.tabContent}>
-            {tabValue === "SignIn" && <SignIn onSubmit={this.SignInHandler} />}
-            {tabValue === "SignUp" && <Signup onSubmit={this.SignUpHandler} />}
+            {tabValue === "SignIn" && <SignIn onSubmit={SignInHandler} />}
+            {tabValue === "SignUp" && <Signup onSubmit={SignUpHandler} />}
           </div>
         </Paper>
       </div>
