@@ -1,5 +1,6 @@
-import CssBaseline from "material-ui/CssBaseline";
 import * as React from "react";
+
+import { CssBaseline } from "material-ui";
 
 import Body from "./containers/Body";
 import Footer from "./containers/Footer";

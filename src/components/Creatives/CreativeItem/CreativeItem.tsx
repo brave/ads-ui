@@ -1,10 +1,6 @@
 import * as React from "react";
 
-import Card, { CardActions, CardContent, CardMedia } from "material-ui/Card";
-import Icon from "material-ui/Icon";
-import IconButton from "material-ui/IconButton";
-import { withStyles } from "material-ui/styles";
-import Typography from "material-ui/Typography";
+import { Card, CardActions, CardContent, CardMedia, Icon, IconButton, Typography, withStyles } from "material-ui";
 
 import styles from "./CreativeItem.style";
 

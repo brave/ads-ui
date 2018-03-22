@@ -29,7 +29,7 @@ export const signInReducer = (state: IUserState, action: IUserAction): IUserStat
       return {
         accessToken: "",
         email: "",
-        error: false,
+        error: true,
         id: "",
         processing: false,
         signedIn: false,

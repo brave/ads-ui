@@ -1,6 +1,5 @@
+import { TextField, withStyles } from "material-ui";
 import Button from "material-ui/Button";
-import { withStyles } from "material-ui/styles";
-import TextField from "material-ui/TextField";
 import * as React from "react";
 import { Field, reduxForm } from "redux-form";
 
@@ -11,16 +10,33 @@ const renderTextField = (
 ) => (
     <TextField
       label={props.label}
-      error={props.touched && props.error}
+      error={props.meta.touched && props.meta.invalid}
       type={props.type}
+      helperText={props.meta.touched && props.meta.error}
       {...props.input}
       {...props.custom}
     />
   );
 
+const validate = (values: any) => {
+  const errors: any = {};
+  if (!values.email) {
+    errors.email = "Required";
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = "Invalid email address";
+  }
+  if (!values.password) {
+    errors.password = "Required";
+  }
+  if (!values.organizationName) {
+    errors.organizationName = "Required";
+  }
+  return errors;
+};
+
 class SignupForm extends React.Component<any, any> {
   public render() {
-    const { classes, handleSubmit } = this.props;
+    const { classes, handleSubmit, submitting, invalid } = this.props;
     return (
       <div className={classes.root}>
         <form onSubmit={handleSubmit} className={classes.form}>
@@ -34,7 +50,7 @@ class SignupForm extends React.Component<any, any> {
             <Field name="organizationName" type="text" component={renderTextField} label="Organization Name" />
           </div>
           <div>
-            <Button variant="raised" type="submit">Sign Up</Button>
+            <Button variant="raised" disabled={submitting || invalid} color="primary" type="submit">Sign Up</Button>
           </div>
         </form>
       </div>
@@ -44,6 +60,7 @@ class SignupForm extends React.Component<any, any> {
 
 const SignupFormRedux = reduxForm({
   form: "signup",
+  validate,
 })(withStyles(styles)(SignupForm));
 
 export default SignupFormRedux;

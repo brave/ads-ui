@@ -1,11 +1,5 @@
 import * as classNames from "classnames";
-import Divider from "material-ui/Divider";
-import Drawer from "material-ui/Drawer";
-import Icon from "material-ui/Icon";
-import IconButton from "material-ui/IconButton";
-import List from "material-ui/List";
-import { ListItem, ListItemIcon, ListItemText } from "material-ui/List";
-import { withStyles } from "material-ui/styles";
+import { Divider, Drawer, Icon, IconButton, List, ListItem, ListItemIcon, ListItemText, withStyles } from "material-ui";
 import * as React from "react";
 import { connect } from "react-redux";
 import { Link, Redirect, Route, Switch } from "react-router-dom";

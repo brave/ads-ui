@@ -1,6 +1,9 @@
 const drawerWidth = 240;
 
 export const styles = (theme: any) => ({
+  content: {
+    width: "100%",
+  },
   drawerPaper: {
     position: "relative",
     transition: theme.transitions.create("width", {

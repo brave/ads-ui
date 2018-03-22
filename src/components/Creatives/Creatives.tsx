@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { GetCreatives } from "../../actions";
 
 import CreativeItem from "./CreativeItem/CreativeItem";
+import CreativesFilter from "./CreativesFilter/CreativesFilter";
 
 class Creatives extends React.Component<any, any> {
   public componentDidMount() {
@@ -18,9 +19,7 @@ class Creatives extends React.Component<any, any> {
     });
     return (
       <div>
-        <div>
-          Creatives
-        </div>
+        <CreativesFilter />
         <div>
           {listItems}
         </div>
