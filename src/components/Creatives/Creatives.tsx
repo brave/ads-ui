@@ -1,3 +1,4 @@
+import { withStyles } from "material-ui";
 import * as React from "react";
 import { connect } from "react-redux";
 
@@ -6,21 +7,26 @@ import { GetCreatives } from "../../actions";
 import CreativeItem from "./CreativeItem/CreativeItem";
 import CreativesFilter from "./CreativesFilter/CreativesFilter";
 
+import { styles } from "./Creatives.style";
+
 class Creatives extends React.Component<any, any> {
   public componentDidMount() {
     this.props.GetCreatives(this.props.userReducer);
   }
   public render() {
+    const { classes } = this.props;
     const { creatives } = this.props.creativeReducer;
     const listItems = creatives.map((item: any) => {
       return (
-        <CreativeItem creative={item}/>
+        <div key={item.id} className={classes.item}>
+          <CreativeItem creative={item} />
+        </div>
       );
     });
     return (
       <div>
         <CreativesFilter />
-        <div>
+        <div className={classes.list}>
           {listItems}
         </div>
       </div>
@@ -37,4 +43,4 @@ const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
   GetCreatives: (user: any) => dispatch(GetCreatives(user)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Creatives);
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Creatives));
