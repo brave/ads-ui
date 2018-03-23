@@ -18,6 +18,9 @@ const styles: any = {
   leftActions: {
     flex: "1",
   },
+  link: {
+    textDecoration: "none",
+  },
   media: {
     height: 200,
   },

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 
 import {
   Avatar,
@@ -16,7 +17,7 @@ import styles from "./CreativeItem.style";
 
 class CreativeItem extends React.Component<any, any> {
   public render() {
-    const { classes, creative } = this.props;
+    const { classes, creative, match } = this.props;
     return (
       <Card className={classes.card}>
         <CardMedia
@@ -44,6 +45,11 @@ class CreativeItem extends React.Component<any, any> {
         </CardContent>
         <CardActions className={classes.actions}>
           <div className={classes.leftActions}>
+            <Link className={classes.link} to={`${match.url}/${creative.id}`}>
+              <IconButton color="primary">
+                <Icon>list</Icon>
+              </IconButton>
+            </Link>
             <IconButton color="primary">
               <Icon>pause</Icon>
             </IconButton>
