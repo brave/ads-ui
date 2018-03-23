@@ -1,25 +1,10 @@
-import { TextField, withStyles } from "material-ui";
+import { withStyles } from "material-ui";
 import * as React from "react";
 import { Field, initialize, reduxForm } from "redux-form";
 
-import { styles } from "./CreativeForm.style";
+import { renderTextField } from "../../../containers/field-material";
 
-const renderTextField = ({
-  input,
-  label,
-  meta,
-  type,
-  ...custom,
-}: any) => (
-    <TextField
-      label={label}
-      error={meta.touched && meta.invalid}
-      type={type}
-      helperText={meta.touched && meta.error}
-      {...input}
-      {...custom}
-    />
-  );
+import { styles } from "./CreativeForm.style";
 
 const validate = (values: any) => {
   const errors: any = {};

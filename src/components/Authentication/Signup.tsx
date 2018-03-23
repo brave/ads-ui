@@ -1,22 +1,11 @@
-import { TextField, withStyles } from "material-ui";
+import { withStyles } from "material-ui";
 import Button from "material-ui/Button";
 import * as React from "react";
 import { Field, reduxForm } from "redux-form";
 
-import { styles } from "./Signup.style";
+import { renderTextField } from "../../containers/field-material";
 
-const renderTextField = (
-  props: any,
-) => (
-    <TextField
-      label={props.label}
-      error={props.meta.touched && props.meta.invalid}
-      type={props.type}
-      helperText={props.meta.touched && props.meta.error}
-      {...props.input}
-      {...props.custom}
-    />
-  );
+import { styles } from "./Signup.style";
 
 const validate = (values: any) => {
   const errors: any = {};
