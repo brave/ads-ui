@@ -1,4 +1,8 @@
 export const styles: any = {
+  fab: {
+    alignSelf: "flex-end",
+    margin: "20px",
+  },
   item: {
     flex: "345px 0 0",
   },
@@ -6,5 +10,11 @@ export const styles: any = {
     display: "flex",
     justifyContent: "space-around",
     marginTop: "15px",
+  },
+  root: {
+    display: "flex",
+    flex: "1",
+    flexDirection: "column",
+    justifyContent: "space-between",
   },
 };

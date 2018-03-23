@@ -2,6 +2,8 @@ const drawerWidth = 240;
 
 export const styles = (theme: any) => ({
   content: {
+    display: "flex",
+    flexDirection: "column",
     width: "100%",
   },
   drawerPaper: {

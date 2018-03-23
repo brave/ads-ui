@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import {
-  Button,
+  Avatar,
   Card,
   CardActions,
   CardContent,
@@ -37,9 +37,9 @@ class CreativeItem extends React.Component<any, any> {
             </Typography>
           </div>
           <div className={classes.indicator}>
-            <Button variant="fab" color="primary">
-              {creative.campaigns.length}
-            </Button>
+            <Avatar>
+              {creative.campaigns.length.toString()}
+            </Avatar>
           </div>
         </CardContent>
         <CardActions className={classes.actions}>

@@ -1,4 +1,4 @@
-import { withStyles } from "material-ui";
+import { Button, Icon, withStyles } from "material-ui";
 import * as React from "react";
 import { connect } from "react-redux";
 
@@ -24,11 +24,14 @@ class Creatives extends React.Component<any, any> {
       );
     });
     return (
-      <div>
+      <div className={classes.root}>
         <CreativesFilter />
         <div className={classes.list}>
           {listItems}
         </div>
+        <Button color="secondary" className={classes.fab} variant="fab">
+          <Icon>add</Icon>
+        </Button>
       </div>
     );
   }
