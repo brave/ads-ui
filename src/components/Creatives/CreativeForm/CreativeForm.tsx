@@ -25,26 +25,30 @@ const validate = (values: any) => {
 
 class CreativeForm extends React.Component<any, any> {
   public render() {
-    const { classes, creative, dispatch, handleSubmit, submitting, invalid, unlock } = this.props;
-    if (creative) {
+    const { classes, creative, dispatch, handleSubmit, submitting, invalid, initialized, unlock } = this.props;
+    if (creative && !initialized) {
+      delete creative.createdAt;
+      delete creative.modifiedAt;
       dispatch(initialize("CreativeForm", creative));
     }
     return (
       <div className={classes.root}>
         <form onSubmit={handleSubmit} className={classes.form}>
           <div>
-            <Field className={classes.textField}
+            <Field className={classes.textField} disabled={!unlock}
               name="caption" type="text" component={renderTextField} label="Caption" />
           </div>
           <div>
-            <Field className={classes.textField} name="body" type="text" component={renderTextField} label="Body" />
+            <Field className={classes.textField} disabled={!unlock}
+              name="body" type="text" component={renderTextField} label="Body" />
           </div>
           <div>
-            <Field className={classes.textField}
+            <Field className={classes.textField} disabled={!unlock}
               name="targetUrl" type="text" component={renderTextField} label="Target" />
           </div>
           <div>
-            <Field className={classes.textField} name="imgUrl" type="text" component={renderTextField} label="Image" />
+            <Field className={classes.textField} disabled={!unlock}
+              name="imgUrl" type="text" component={renderTextField} label="Image" />
           </div>
           {unlock &&
             <div>
