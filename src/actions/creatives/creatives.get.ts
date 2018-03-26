@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import { OpenSnackBar } from "../snackbar";
+
 export const GET_CREATIVES_START = "GETCREATIVESSTART";
 export const GetCreativesStart = (payload: any) => ({
   payload,
@@ -26,7 +28,17 @@ export const GetCreatives = (user: any) => {
         "Authorization": `Bearer ${user.accessToken}`,
         "Content-Type": "application/json",
       },
-    }).then((response: any) => dispatch(GetCreativesSuccessful(response.data)))
-      .catch((error: any) => dispatch(GetCreativesFailed(error)));
+    }).then((response: any) => {
+      dispatch(GetCreativesSuccessful(response.data));
+    }).catch((error: any) => {
+      dispatch(GetCreativesFailed(error));
+      if (error.response) {
+        dispatch(OpenSnackBar(`Get Creatives Faild: ${error.response.data.message}`));
+      } else if (error.request) {
+        dispatch(OpenSnackBar(`Get Creatives Faild: Network Error`));
+      } else {
+        dispatch(OpenSnackBar(`Get Creatives Faild: ${error.message}`));
+      }
+    });
   };
 };
