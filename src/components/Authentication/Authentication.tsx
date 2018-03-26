@@ -1,5 +1,4 @@
-import { Tab, Tabs, withStyles } from "material-ui";
-import Paper from "material-ui/Paper";
+import { Paper, Tab, Tabs, withStyles } from "material-ui";
 import * as React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
@@ -18,17 +17,17 @@ class Authentication extends React.Component<any, any> {
 
   public render() {
     const { tabValue } = this.state;
-    const { classes } = this.props;
+    const { classes, user, dispatch } = this.props;
 
     const SignUpHandler = (value: any) => {
-      this.props.dispatch(SignUpAction(value));
+      dispatch(SignUpAction(value));
     };
 
     const SignInHandler = (value: any) => {
-      this.props.dispatch(SignInAction(value));
+      dispatch(SignInAction(value));
     };
 
-    if (this.props.user && this.props.user.signedIn) {
+    if (user && user.signedIn) {
       return (<Redirect to="/dashboard" />);
     }
     return (

@@ -9,41 +9,29 @@ export const signInReducer = (state: IUserState, action: IUserAction): IUserStat
       return {
         accessToken: "",
         email: action.payload.email,
-        error: false,
         id: "",
-        processing: true,
         signedIn: false,
-        success: false,
       };
     case SIGN_IN_SUCCESSFUL:
       return {
         accessToken: (action.payload as ISignInSuccessfulPayload).accessToken,
         email: action.payload.email,
-        error: false,
         id: (action.payload as ISignInSuccessfulPayload).id,
-        processing: false,
         signedIn: true,
-        success: true,
       };
     case SIGN_IN_FAILED:
       return {
         accessToken: "",
         email: "",
-        error: true,
         id: "",
-        processing: false,
         signedIn: false,
-        success: false,
       };
     case SIGN_OUT:
       return {
         accessToken: "",
         email: "",
-        error: false,
         id: "",
-        processing: false,
         signedIn: false,
-        success: true,
       };
     default:
       return state;

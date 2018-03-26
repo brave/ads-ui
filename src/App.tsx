@@ -1,6 +1,9 @@
+import { CssBaseline, Snackbar } from "material-ui";
 import * as React from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
-import { CssBaseline } from "material-ui";
+import { CloseSnackBar as close } from "./actions";
 
 import Body from "./containers/Body";
 import Footer from "./containers/Footer";
@@ -15,6 +18,8 @@ class App extends React.Component<any, any> {
   }
 
   public render() {
+    const { CloseSnackBar, snackbar } = this.props;
+
     return (
       <div>
         <CssBaseline />
@@ -27,9 +32,27 @@ class App extends React.Component<any, any> {
         <div>
           <Footer></Footer>
         </div>
+        <Snackbar
+          anchorOrigin={{
+            horizontal: "right",
+            vertical: "top",
+          }}
+          message={<span>{snackbar.message}</span>}
+          open={snackbar.open}
+          autoHideDuration={3000}
+          onClose={CloseSnackBar}
+          />
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state: any, ownProps: any) => ({
+  snackbar: state.snackBarReducer,
+});
+
+const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
+  CloseSnackBar: () => dispatch(close({})),
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

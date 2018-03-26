@@ -10,11 +10,8 @@ const userReducer = (
   state: IUserState = {
     accessToken: "",
     email: "",
-    error: false,
     id: "",
-    processing: false,
     signedIn: false,
-    success: false,
   },
   action: IUserAction,
 ) => {

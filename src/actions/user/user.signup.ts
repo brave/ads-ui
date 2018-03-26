@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import { OpenSnackBar } from "../snackbar";
+
 import { ISignUpPayload, IUserAction } from "./user.interface";
 
 export const SIGN_UP_START = "SIGNUPSTART";
@@ -27,7 +29,18 @@ export const SignUp = (payload: ISignUpPayload) => {
       headers: {
         "Content-Type": "application/json",
       },
-    }).then((response: any) => dispatch(SignUpSuccessful(response.data)))
-      .catch((error: any) => dispatch(SignUpFailed(error)));
+    }).then((response: any) => {
+      dispatch(SignUpSuccessful(response.data));
+      dispatch(OpenSnackBar("Signed Up Successfully"));
+    }).catch((error: any) => {
+      dispatch(SignUpFailed(error));
+      if (error.response) {
+        dispatch(OpenSnackBar(`Sign Up Faild: ${error.response.data.message}`));
+      } else if (error.request) {
+        dispatch(OpenSnackBar(`Sign Up Faild: Network Error`));
+      } else {
+        dispatch(OpenSnackBar(`Sign Up Faild: ${error.message}`));
+      }
+    });
   };
 };
