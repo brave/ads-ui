@@ -30,6 +30,7 @@ export const GetCreatives = (user: any) => {
       },
     }).then((response: any) => {
       dispatch(GetCreativesSuccessful(response.data));
+      dispatch(OpenSnackBar("Creative get Successfully"));
     }).catch((error: any) => {
       dispatch(GetCreativesFailed(error));
       if (error.response) {

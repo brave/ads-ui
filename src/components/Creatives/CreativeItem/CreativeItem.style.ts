@@ -4,6 +4,7 @@ const styles: any = {
     flexGrow: "1",
   },
   card: {
+    marginBottom: "15px",
     maxWidth: 345,
   },
   content: {

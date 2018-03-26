@@ -9,6 +9,7 @@ export const styles: any = {
   },
   list: {
     display: "flex",
+    flexWrap: "wrap",
     justifyContent: "space-around",
     marginTop: "15px",
   },
