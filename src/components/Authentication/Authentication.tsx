@@ -17,14 +17,14 @@ class Authentication extends React.Component<any, any> {
 
   public render() {
     const { tabValue } = this.state;
-    const { classes, user, dispatch } = this.props;
+    const { classes, user, signIn, signUp } = this.props;
 
     const SignUpHandler = (value: any) => {
-      dispatch(SignUpAction(value));
+      signUp(value);
     };
 
     const SignInHandler = (value: any) => {
-      dispatch(SignInAction(value));
+      signIn(value);
     };
 
     if (user && user.signedIn) {
@@ -55,4 +55,9 @@ const mapStateToProps = (state: any, ownProps: any) => ({
   user: state.userReducer,
 });
 
-export default withStyles(styles)(connect(mapStateToProps)(Authentication));
+const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
+  signIn: (value: any) => dispatch(SignInAction(value)),
+  signUp: (value: any) => dispatch(SignUpAction(value)),
+});
+
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Authentication));

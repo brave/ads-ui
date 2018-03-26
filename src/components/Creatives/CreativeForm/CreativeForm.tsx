@@ -1,4 +1,4 @@
-import { withStyles } from "material-ui";
+import { Button, withStyles } from "material-ui";
 import * as React from "react";
 import { Field, initialize, reduxForm } from "redux-form";
 
@@ -17,21 +17,21 @@ const validate = (values: any) => {
   if (!values.targetUrl) {
     errors.targetUrl = "Required";
   }
-  if (!values.imageUrl) {
-    errors.imageUrl = "Required";
+  if (!values.imgUrl) {
+    errors.imgUrl = "Required";
   }
   return errors;
 };
 
 class CreativeForm extends React.Component<any, any> {
   public render() {
-    const { classes, creative, dispatch } = this.props;
+    const { classes, creative, dispatch, handleSubmit, submitting, invalid, unlock } = this.props;
     if (creative) {
       dispatch(initialize("CreativeForm", creative));
     }
     return (
       <div className={classes.root}>
-        <form className={classes.form}>
+        <form onSubmit={handleSubmit} className={classes.form}>
           <div>
             <Field className={classes.textField}
               name="caption" type="text" component={renderTextField} label="Caption" />
@@ -41,11 +41,18 @@ class CreativeForm extends React.Component<any, any> {
           </div>
           <div>
             <Field className={classes.textField}
-            name="targetUrl" type="text" component={renderTextField} label="Target" />
+              name="targetUrl" type="text" component={renderTextField} label="Target" />
           </div>
           <div>
             <Field className={classes.textField} name="imgUrl" type="text" component={renderTextField} label="Image" />
           </div>
+          {unlock &&
+            <div>
+              <Button variant="raised" disabled={submitting || invalid} color="primary" type="submit">
+                Save
+            </Button>
+            </div>
+          }
         </form>
       </div>
     );

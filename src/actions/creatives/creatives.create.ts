@@ -29,7 +29,9 @@ export const CreateCreatives = (creative: any, user: any) => {
         "Content-Type": "application/json",
       },
     }).then((response: any) => {
+      dispatch(OpenSnackBar("Creative created Successfully"));
       dispatch(CreateCreativesSuccessful(response.data));
+      return Promise.resolve(response.data);
     }).catch((error: any) => {
       dispatch(CreateCreativesFailed(error));
       if (error.response) {
