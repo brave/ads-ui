@@ -35,7 +35,7 @@ export const SignUp = (payload: ISignUpPayload) => {
     }).catch((error: any) => {
       dispatch(SignUpFailed(error));
       if (error.response) {
-        dispatch(OpenSnackBar(`Sign Up Faild: ${error.response.data.message}`));
+        dispatch(OpenSnackBar(`Sign Up Faild: ${error.response.data.error}`));
       } else if (error.request) {
         dispatch(OpenSnackBar(`Sign Up Faild: Network Error`));
       } else {
