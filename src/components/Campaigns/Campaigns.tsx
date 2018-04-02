@@ -3,6 +3,7 @@ import * as React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import CampaignList from "./CampaignList/CampaignList";
+import CampaignNew from "./CampaignNew/CampaignNew";
 
 import { styles } from "./Campaign.style";
 
@@ -13,7 +14,7 @@ class Campaigns extends React.Component<any, any> {
       <div className={classes.root}>
         <Switch>
           <Route exact path={match.url} component={CampaignList} />
-          {/* <Route exact path={match.url + "/new"} component={} /> */}
+          <Route exact path={match.url + "/new"} component={CampaignNew} />
           {/* <Route exact path={match.url + "/:id"} component={} /> */}
           <Redirect to={match.url} />
         </Switch>

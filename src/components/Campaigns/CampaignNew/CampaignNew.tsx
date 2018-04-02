@@ -3,29 +3,28 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
-import { CreateCreatives } from "../../../actions";
-import CreativeForm from "../CreativeForm/CreativeForm";
+import { CreateCampaigns } from "../../../actions";
+import CampaignForm from "../CampaignForm/CampaignForm";
 
-import { style } from "./CreativesNew.style";
+import { styles } from "./CampaignNew.style";
 
-class CreativesNew extends React.Component<any, any> {
+class CampaignNew extends React.Component<any, any> {
   public render() {
     const { classes, create, user, history } = this.props;
     const handleSubmit = async (value: any) => {
       const result = await create(value, user);
-      history.push(`/main/creatives/${result.id}`);
+      history.push(`/main/campaigns/${result.id}`);
     };
-
     return (
       <div className={classes.root}>
         <AppBar position="static" color="default">
           <Toolbar>
-            <Typography variant="title">New Creative</Typography>
+            <Typography variant="title">New Campaign</Typography>
           </Toolbar>
         </AppBar>
-        <Card className={classes.card}>
+        <Card  className={classes.card}>
           <CardContent>
-            <CreativeForm unlock={true} onSubmit={handleSubmit} />
+            <CampaignForm unlock={true} onSubmit={handleSubmit} />
           </CardContent>
         </Card>
       </div>
@@ -38,7 +37,7 @@ const mapStateToProps = (state: any, ownProps: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
-  create: (value: any, user: any) => dispatch(CreateCreatives(value, user)),
+  create: (value: any, user: any) => dispatch((CreateCampaigns(value, user))),
 });
 
-export default withRouter(withStyles(style)(connect(mapStateToProps, mapDispatchToProps)(CreativesNew)));
+export default withRouter(withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(CampaignNew)));
