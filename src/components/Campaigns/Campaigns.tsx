@@ -1,11 +1,25 @@
+import { withStyles } from "material-ui";
 import * as React from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
 
-class Creatives extends React.Component<any, any> {
+import CampaignList from "./CampaignList/CampaignList";
+
+import { styles } from "./Campaign.style";
+
+class Campaigns extends React.Component<any, any> {
   public render() {
+    const { match, classes } = this.props;
     return (
-      <div>Campaigns</div>
+      <div className={classes.root}>
+        <Switch>
+          <Route exact path={match.url} component={CampaignList} />
+          {/* <Route exact path={match.url + "/new"} component={} /> */}
+          {/* <Route exact path={match.url + "/:id"} component={} /> */}
+          <Redirect to={match.url} />
+        </Switch>
+      </div>
     );
   }
 }
 
-export default Creatives;
+export default withStyles(styles)(Campaigns);

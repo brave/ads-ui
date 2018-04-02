@@ -21,18 +21,19 @@ export const CreateCreativesFailed = (payload: any) => ({
 });
 
 export const CreateCreatives = (creative: any, user: any) => {
-  return (dispatch: any) => {
-    dispatch(CreateCreativesStart(creative));
-    return axios.post(`http://localhost:4000/creative`, creative, {
-      headers: {
-        "Authorization": `Bearer ${user.accessToken}`,
-        "Content-Type": "application/json",
-      },
-    }).then((response: any) => {
+  return async (dispatch: any) => {
+    try {
+      dispatch(CreateCreativesStart(creative));
+      const response = await axios.post(`http://localhost:4000/creative`, creative, {
+        headers: {
+          "Authorization": `Bearer ${user.accessToken}`,
+          "Content-Type": "application/json",
+        },
+      });
       dispatch(OpenSnackBar("Creative created Successfully"));
       dispatch(CreateCreativesSuccessful(response.data));
       return Promise.resolve(response.data);
-    }).catch((error: any) => {
+    } catch (error) {
       dispatch(CreateCreativesFailed(error));
       if (error.response) {
         dispatch(OpenSnackBar(`Create Creatives Faild: ${error.response.data.message}`));
@@ -41,6 +42,6 @@ export const CreateCreatives = (creative: any, user: any) => {
       } else {
         dispatch(OpenSnackBar(`Create Creatives Faild: ${error.message}`));
       }
-    });
+    }
   };
 };

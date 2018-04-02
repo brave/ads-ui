@@ -21,17 +21,18 @@ export const GetCreativesFailed = (payload: any) => ({
 });
 
 export const GetCreatives = (user: any) => {
-  return (dispatch: any) => {
-    dispatch(GetCreativesStart(user));
-    return axios.get(`http://localhost:4000/creative`, {
-      headers: {
-        "Authorization": `Bearer ${user.accessToken}`,
-        "Content-Type": "application/json",
-      },
-    }).then((response: any) => {
+  return async (dispatch: any) => {
+    try {
+      dispatch(GetCreativesStart(user));
+      const response = await axios.get(`http://localhost:4000/creative`, {
+        headers: {
+          "Authorization": `Bearer ${user.accessToken}`,
+          "Content-Type": "application/json",
+        },
+      });
       dispatch(GetCreativesSuccessful(response.data));
       dispatch(OpenSnackBar("Creative get Successfully"));
-    }).catch((error: any) => {
+    } catch (error) {
       dispatch(GetCreativesFailed(error));
       if (error.response) {
         dispatch(OpenSnackBar(`Get Creatives Faild: ${error.response.data.message}`));
@@ -40,6 +41,6 @@ export const GetCreatives = (user: any) => {
       } else {
         dispatch(OpenSnackBar(`Get Creatives Faild: ${error.message}`));
       }
-    });
+    }
   };
 };
