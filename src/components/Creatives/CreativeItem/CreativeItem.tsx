@@ -1,6 +1,3 @@
-import * as React from "react";
-import { Link } from "react-router-dom";
-
 import {
   Avatar,
   Card,
@@ -12,6 +9,8 @@ import {
   Typography,
   withStyles,
 } from "material-ui";
+import * as React from "react";
+import { Link } from "react-router-dom";
 
 import styles from "./CreativeItem.style";
 
