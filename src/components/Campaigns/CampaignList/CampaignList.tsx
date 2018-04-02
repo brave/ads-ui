@@ -8,6 +8,9 @@ import { GetCampaigns } from "../../../actions";
 import { styles } from "./CampaignList.style";
 
 class CampaignList extends React.Component<any, any> {
+  public componentDidMount() {
+    this.props.GetCampaigns(this.props.userReducer);
+  }
   public render() {
     const { classes } = this.props;
     const { campaigns } = this.props.campaignReducer;

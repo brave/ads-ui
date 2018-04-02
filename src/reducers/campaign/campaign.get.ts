@@ -8,7 +8,7 @@ export const getCampaignReducer = (state: any, action: any) => {
       };
     case GET_CAMPAIGNS_SUCCESSFUL:
       return {
-        creatives: action.payload,
+        campaigns: action.payload,
       };
     case GET_CAMPAIGNS_FAILD:
       return {
