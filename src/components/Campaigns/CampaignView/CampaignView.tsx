@@ -36,7 +36,7 @@ class CampaignView extends React.Component<any, any> {
             <Typography variant="title">{campaign.name}</Typography>
           </Toolbar>
         </AppBar>
-        <Card className={classes.root}>
+        <Card className={classes.infoCard}>
           <CardHeader title="Details" />
           <CardContent className={classes.content}>
             <CampaignForm campaign={campaign} unlock={unlock} onSubmit={handleSubmit} />
