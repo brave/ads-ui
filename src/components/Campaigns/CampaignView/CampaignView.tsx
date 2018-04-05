@@ -4,6 +4,8 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import { UpdateCampaigns } from "../../../actions";
+
+import FlightNew from "../../Flights/FlightNew/FlightNew";
 import CampaignForm from "../CampaignForm/CampaignForm";
 
 import { styles } from "./CampaignView.style";
@@ -52,6 +54,15 @@ class CampaignView extends React.Component<any, any> {
                 </IconButton>
               }
             </div>
+          </CardContent>
+        </Card>
+        <Card className={classes.infoCard}>
+          <CardHeader title="Flights" />
+          <CardContent>
+            <IconButton color="primary">
+              <Icon>add</Icon>
+            </IconButton>
+            <FlightNew open={true}></FlightNew>
           </CardContent>
         </Card>
       </div>
