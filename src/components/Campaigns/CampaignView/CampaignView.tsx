@@ -18,7 +18,7 @@ class CampaignView extends React.Component<any, any> {
 
   public render() {
     const { classes, match, campaigns, update, user } = this.props;
-    const { unlock } = this.state;
+    const { unlock, open } = this.state;
     const id = match.params.id;
     const campaign = _.find(campaigns, (item) => {
       return item.id === id;
@@ -27,6 +27,12 @@ class CampaignView extends React.Component<any, any> {
       this.setState({
         unlock: !unlock,
       });
+    };
+    const handleClickOpen = () => {
+      this.setState({ open: true });
+    };
+    const handleClose = () => {
+      this.setState({ open: false });
     };
     const handleSubmit = async (value: any, e: Event) => {
       await update(value, user);
@@ -59,10 +65,10 @@ class CampaignView extends React.Component<any, any> {
         <Card className={classes.infoCard}>
           <CardHeader title="Flights" />
           <CardContent>
-            <IconButton color="primary">
+            <IconButton onClick={handleClickOpen} color="primary">
               <Icon>add</Icon>
             </IconButton>
-            <FlightNew open={true}></FlightNew>
+            <FlightNew open={open} handleClose={handleClose}></FlightNew>
           </CardContent>
         </Card>
       </div>
