@@ -3,7 +3,7 @@ import { AppBar, Card, CardContent, CardHeader, Icon, IconButton, Toolbar, Typog
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { UpdateCampaigns } from "../../../actions";
+import { CreateFlights, UpdateCampaigns } from "../../../actions";
 
 import FlightNew from "../../Flights/FlightNew/FlightNew";
 import CampaignForm from "../CampaignForm/CampaignForm";
@@ -13,11 +13,14 @@ import { styles } from "./CampaignView.style";
 class CampaignView extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
-    this.state = {};
+    this.state = {
+      open: false,
+      unlock: false,
+    };
   }
 
   public render() {
-    const { classes, match, campaigns, update, user } = this.props;
+    const { classes, createFlight, match, campaigns, update, user } = this.props;
     const { unlock, open } = this.state;
     const id = match.params.id;
     const campaign = _.find(campaigns, (item) => {
@@ -33,6 +36,16 @@ class CampaignView extends React.Component<any, any> {
     };
     const handleClose = () => {
       this.setState({ open: false });
+    };
+    const handleOk = (modalState: any) => {
+      const flight = {
+        campaign: campaign.id,
+        endAt: modalState.selectedStartDate,
+        geoOperator: "and",
+        order: 1,
+        startedAt: modalState.selectedStartDate,
+      };
+      createFlight(flight, user);
     };
     const handleSubmit = async (value: any, e: Event) => {
       await update(value, user);
@@ -68,7 +81,7 @@ class CampaignView extends React.Component<any, any> {
             <IconButton onClick={handleClickOpen} color="primary">
               <Icon>add</Icon>
             </IconButton>
-            <FlightNew open={open} handleClose={handleClose}></FlightNew>
+            <FlightNew open={open} handleClose={handleClose} handleOk={handleOk}></FlightNew>
           </CardContent>
         </Card>
       </div>
@@ -82,6 +95,7 @@ const mapStateToProps = (state: any, ownProps: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
+  createFlight: (value: any, user: any) => dispatch(CreateFlights(value, user)),
   update: (value: any, user: any) => dispatch(UpdateCampaigns(value, user)),
 });
 

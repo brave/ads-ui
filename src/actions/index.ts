@@ -3,3 +3,4 @@ export * from "./campaigns";
 export * from "./creatives";
 export * from "./drawer";
 export * from "./snackbar";
+export * from "./flights";
