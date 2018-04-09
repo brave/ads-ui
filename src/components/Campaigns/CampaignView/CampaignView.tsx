@@ -1,9 +1,25 @@
 import * as _ from "lodash";
-import { AppBar, Card, CardContent, CardHeader, Icon, IconButton, Toolbar, Typography, withStyles } from "material-ui";
+import {
+  AppBar,
+  Card,
+  CardContent,
+  CardHeader,
+  Icon,
+  IconButton,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Toolbar,
+  Typography,
+  withStyles,
+} from "material-ui";
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { CreateFlights, UpdateCampaigns } from "../../../actions";
+import { CreateFlights, GetCampaigns, UpdateCampaigns } from "../../../actions";
 
 import FlightNew from "../../Flights/FlightNew/FlightNew";
 import CampaignForm from "../CampaignForm/CampaignForm";
@@ -20,7 +36,7 @@ class CampaignView extends React.Component<any, any> {
   }
 
   public render() {
-    const { classes, createFlight, match, campaigns, update, user } = this.props;
+    const { classes, createFlight, getCampaigns, match, campaigns, update, user } = this.props;
     const { unlock, open } = this.state;
     const id = match.params.id;
     const campaign = _.find(campaigns, (item) => {
@@ -37,7 +53,7 @@ class CampaignView extends React.Component<any, any> {
     const handleClose = () => {
       this.setState({ open: false });
     };
-    const handleOk = (modalState: any) => {
+    const handleOk = async (modalState: any) => {
       const flight = {
         campaign: campaign.id,
         endAt: modalState.selectedStartDate,
@@ -45,11 +61,27 @@ class CampaignView extends React.Component<any, any> {
         order: 1,
         startedAt: modalState.selectedStartDate,
       };
-      createFlight(flight, user);
+      await createFlight(flight, user);
+      getCampaigns(user);
     };
     const handleSubmit = async (value: any, e: Event) => {
       await update(value, user);
     };
+    const tableBodyRows = campaign.flights.map((item: any, index: number) => {
+      return (
+        <TableRow key={item.id}>
+          <TableCell>
+            {index}
+          </TableCell>
+          <TableCell>
+            {item.startedAt}
+          </TableCell>
+          <TableCell>
+            {item.endAt}
+          </TableCell>
+        </TableRow>
+      );
+    });
     return (
       <div className={classes.root}>
         <AppBar position="static" color="default">
@@ -82,6 +114,26 @@ class CampaignView extends React.Component<any, any> {
               <Icon>add</Icon>
             </IconButton>
             <FlightNew open={open} handleClose={handleClose} handleOk={handleOk}></FlightNew>
+            <Paper>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>
+                      Flight
+                  </TableCell>
+                    <TableCell>
+                      Start Date
+                  </TableCell>
+                    <TableCell>
+                      End Date
+                  </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {tableBodyRows}
+                </TableBody>
+              </Table>
+            </Paper>
           </CardContent>
         </Card>
       </div>
@@ -96,6 +148,7 @@ const mapStateToProps = (state: any, ownProps: any) => ({
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
   createFlight: (value: any, user: any) => dispatch(CreateFlights(value, user)),
+  getCampaigns: (user: any) => dispatch(GetCampaigns(user)),
   update: (value: any, user: any) => dispatch(UpdateCampaigns(value, user)),
 });
 
