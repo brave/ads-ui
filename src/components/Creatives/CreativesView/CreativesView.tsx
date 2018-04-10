@@ -54,7 +54,7 @@ class CreativesView extends React.Component<any, any> {
       return (
         <TableRow key={item.id}>
           <TableCell>
-            {item.name}
+            {item.campaign.name}
           </TableCell>
           <TableCell>
             1000
