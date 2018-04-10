@@ -6,12 +6,6 @@ import {
   CardHeader,
   Icon,
   IconButton,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
   Toolbar,
   Typography,
   withStyles,
@@ -21,6 +15,7 @@ import { connect } from "react-redux";
 
 import { UpdateCreatives } from "../../../actions";
 import CreativeForm from "../CreativeForm/CreativeForm";
+import CampaignTable from "./CampaignTable/CampaignTable";
 
 import { styles } from "./CreativesView.style";
 
@@ -49,27 +44,6 @@ class CreativesView extends React.Component<any, any> {
     const id = match.params.id;
     const creative = _.find(creatives, (item) => {
       return item.id === id;
-    });
-    const tableBodyRows = creative.campaigns.map((item: any) => {
-      return (
-        <TableRow key={item.id}>
-          <TableCell>
-            {item.campaign.name}
-          </TableCell>
-          <TableCell>
-            1000
-          </TableCell>
-          <TableCell>
-            1000
-          </TableCell>
-          <TableCell>
-            1000
-          </TableCell>
-          <TableCell>
-            {this.getActionButtons()}
-          </TableCell>
-        </TableRow>
-      );
     });
     const switchLock = () => {
       this.setState({
@@ -107,49 +81,7 @@ class CreativesView extends React.Component<any, any> {
         <Card className={classes.campaignCard}>
           <CardHeader title="Campaigns" action={this.getActionButtons()} />
           <CardContent>
-            <Paper>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>
-                      Campaigns
-                  </TableCell>
-                    <TableCell>
-                      Impressions
-                  </TableCell>
-                    <TableCell>
-                      Interactions
-                  </TableCell>
-                    <TableCell>
-                      Performance
-                  </TableCell>
-                    <TableCell>
-                      Controlls
-                  </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  <TableRow>
-                    <TableCell>
-                      test
-                    </TableCell>
-                    <TableCell>
-                      1000
-                    </TableCell>
-                    <TableCell>
-                      1000
-                    </TableCell>
-                    <TableCell>
-                      1000
-                    </TableCell>
-                    <TableCell>
-                      {this.getActionButtons()}
-                    </TableCell>
-                  </TableRow>
-                  {tableBodyRows}
-                </TableBody>
-              </Table>
-            </Paper>
+            <CampaignTable campaigns={creative.campaigns} />
           </CardContent>
         </Card>
       </div>
