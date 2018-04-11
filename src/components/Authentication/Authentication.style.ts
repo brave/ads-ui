@@ -3,6 +3,7 @@ export const styles: any = {
     display: "flex",
     flexDirection: "column",
     height: "300px",
+    width: "300px",
   },
   root: {
     alignItems: "center",

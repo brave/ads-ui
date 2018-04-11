@@ -33,7 +33,7 @@ class Authentication extends React.Component<any, any> {
     return (
       <div className={classes.root}>
         <Paper className={classes.paper}>
-          <Tabs value={tabValue} onChange={this.handleChange}>
+          <Tabs value={tabValue} onChange={this.handleChange} fullWidth>
             <Tab label="Sign Up" value="SignUp" />
             <Tab label="Sign In" value="SignIn" />
           </Tabs>
