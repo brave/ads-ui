@@ -5,7 +5,9 @@ export const styles: any = {
     height: "300px",
   },
   root: {
+    alignItems: "center",
     display: "flex",
+    height: "100%",
     justifyContent: "center",
   },
   tabContent: {

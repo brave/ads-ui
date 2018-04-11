@@ -1,4 +1,4 @@
-import { CssBaseline, Snackbar } from "material-ui";
+import { CssBaseline, Snackbar, withStyles } from "material-ui";
 import * as React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -9,7 +9,7 @@ import Body from "./containers/Body";
 import Footer from "./containers/Footer";
 import Header from "./containers/Header";
 
-import "./App.css";
+import { styles } from "./App.styles";
 
 class App extends React.Component<any, any> {
 
@@ -18,20 +18,16 @@ class App extends React.Component<any, any> {
   }
 
   public render() {
-    const { CloseSnackBar, snackbar } = this.props;
+    const { classes, CloseSnackBar, snackbar } = this.props;
 
     return (
-      <div>
+      <div className={classes.root}>
         <CssBaseline />
-        <div>
-          <Header></Header>
-        </div>
-        <div>
+        <Header></Header>
+        <div className={classes.body}>
           <Body></Body>
         </div>
-        <div>
-          <Footer></Footer>
-        </div>
+        <Footer></Footer>
         <Snackbar
           anchorOrigin={{
             horizontal: "right",
@@ -41,7 +37,7 @@ class App extends React.Component<any, any> {
           open={snackbar.open}
           autoHideDuration={3000}
           onClose={CloseSnackBar}
-          />
+        />
       </div>
     );
   }
@@ -55,4 +51,4 @@ const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
   CloseSnackBar: () => dispatch(close({})),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(App)));

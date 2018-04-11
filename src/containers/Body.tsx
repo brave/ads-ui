@@ -8,13 +8,11 @@ import Main from "../components/Main/Main";
 class Body extends React.Component<any, any> {
   public render() {
     return (
-      <div>
         <Switch>
           <Route path="/main" component={Main} />
           <Route path="/auth" component={Authentication} />
           {this.getRedirect()}
         </Switch>
-      </div>
     );
   }
 
