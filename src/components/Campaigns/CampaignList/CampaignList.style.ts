@@ -17,6 +17,6 @@ export const styles: any = {
     display: "flex",
     flex: "1",
     flexDirection: "column",
-    justifyContent: "space-between",
+    justifyContent: "center",
   },
 };

@@ -70,23 +70,6 @@ class CampaignTable extends React.Component<any, any> {
               </TableRow>
             </TableHead>
             <TableBody>
-              <TableRow>
-                <TableCell>
-                  test
-                    </TableCell>
-                <TableCell>
-                  1000
-                    </TableCell>
-                <TableCell>
-                  1000
-                    </TableCell>
-                <TableCell>
-                  1000
-                    </TableCell>
-                <TableCell>
-                  {this.getActionButtons()}
-                </TableCell>
-              </TableRow>
               {tableBodyRows}
             </TableBody>
           </Table>

@@ -10,3 +10,9 @@ export const CloseDrawer = (payload: any) => ({
   payload,
   type: CLOSE_DRAWER,
 });
+
+export const TOGGLE_DRAWER = "TOGGLEDRAWER";
+export const ToggleDrawer = (payload: any) => ({
+  payload,
+  type: TOGGLE_DRAWER,
+});

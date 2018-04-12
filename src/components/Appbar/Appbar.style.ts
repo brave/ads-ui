@@ -9,12 +9,14 @@ export const styles = (theme: any) => ({
     zIndex: theme.zIndex.drawer + 1,
   },
   appBarShift: {
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(["width", "margin"], {
-      duration: theme.transitions.duration.enteringScreen,
-      easing: theme.transitions.easing.sharp,
-    }),
-    width: `calc(100% - ${drawerWidth}px)`,
+    [theme.breakpoints.up("md")]: {
+      marginLeft: drawerWidth,
+      transition: theme.transitions.create(["width", "margin"], {
+        duration: theme.transitions.duration.enteringScreen,
+        easing: theme.transitions.easing.sharp,
+      }),
+      width: `calc(100% - ${drawerWidth}px)`,
+    },
   },
   flex: {
     flex: 1,
