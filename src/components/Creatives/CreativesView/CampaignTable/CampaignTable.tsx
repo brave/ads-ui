@@ -1,14 +1,16 @@
 import {
   Icon,
   IconButton,
-  Paper,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
+  withStyles,
 } from "material-ui";
 import * as React from "react";
+
+import { styles } from "./CampaignTable.style";
 
 class CampaignTable extends React.Component<any, any> {
   public getActionButtons() {
@@ -24,7 +26,7 @@ class CampaignTable extends React.Component<any, any> {
     );
   }
   public render() {
-    const { campaigns } = this.props;
+    const { campaigns, classes } = this.props;
     const tableBodyRows = campaigns.map((item: any) => {
       return (
         <TableRow key={item.id}>
@@ -47,8 +49,7 @@ class CampaignTable extends React.Component<any, any> {
       );
     });
     return (
-      <div>
-        <Paper>
+      <div className={classes.root}>
           <Table>
             <TableHead>
               <TableRow>
@@ -73,10 +74,9 @@ class CampaignTable extends React.Component<any, any> {
               {tableBodyRows}
             </TableBody>
           </Table>
-        </Paper>
       </div>
     );
   }
 }
 
-export default CampaignTable;
+export default withStyles(styles)(CampaignTable);

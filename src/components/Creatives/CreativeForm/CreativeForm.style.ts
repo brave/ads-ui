@@ -5,8 +5,11 @@ export const styles: any = {
     justifyContent: "space-between",
     width: "100%",
   },
+  root: {
+    width: "100%",
+  },
   textField: {
     height: "70px",
-    width: "500px",
+    width: "100%",
   },
 };
