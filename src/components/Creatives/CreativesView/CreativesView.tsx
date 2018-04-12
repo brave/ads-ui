@@ -53,6 +53,21 @@ class CreativesView extends React.Component<any, any> {
     const handleSubmit = async (value: any, e: Event) => {
       await update(value, user);
     };
+    const getLockButton = () => {
+      if (!unlock) {
+        return (
+          <IconButton onClick={switchLock} color="primary">
+            <Icon>lock</Icon>
+          </IconButton>
+        );
+      } else {
+        return (
+          <IconButton onClick={switchLock} color="primary">
+            <Icon>lock_open</Icon>
+          </IconButton>
+        );
+      }
+    };
     return (
       <div className={classes.root}>
         <AppBar position="static" color="default">
@@ -61,21 +76,9 @@ class CreativesView extends React.Component<any, any> {
           </Toolbar>
         </AppBar>
         <Card className={classes.infoCard}>
-          <CardHeader title="Detail" />
+          <CardHeader title="Detail" action={getLockButton()}/>
           <CardContent className={classes.content}>
             <CreativeForm creative={creative} unlock={unlock} onSubmit={handleSubmit} />
-            <div>
-              {!unlock &&
-                <IconButton onClick={switchLock} color="primary">
-                  <Icon>lock</Icon>
-                </IconButton>
-              }
-              {unlock &&
-                <IconButton onClick={switchLock} color="primary">
-                  <Icon>lock_open</Icon>
-                </IconButton>
-              }
-            </div>
           </CardContent>
         </Card>
         <Card className={classes.campaignCard}>

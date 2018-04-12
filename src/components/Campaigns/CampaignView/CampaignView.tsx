@@ -57,6 +57,21 @@ class CampaignView extends React.Component<any, any> {
         </div>
       );
     };
+    const getLockButton = () => {
+      if (!unlock) {
+        return (
+          <IconButton onClick={switchLock} color="primary">
+            <Icon>lock</Icon>
+          </IconButton>
+        );
+      } else {
+        return (
+          <IconButton onClick={switchLock} color="primary">
+            <Icon>lock_open</Icon>
+          </IconButton>
+        );
+      }
+    };
     const handleOk = async (modalState: any) => {
       const flight = {
         campaign: campaign.id,
@@ -78,25 +93,13 @@ class CampaignView extends React.Component<any, any> {
           </Toolbar>
         </AppBar>
         <Card className={classes.infoCard}>
-          <CardHeader title="Details" />
+          <CardHeader title="Details" action={getLockButton()} />
           <CardContent className={classes.content}>
             <CampaignForm campaign={campaign} unlock={unlock} onSubmit={handleSubmit} />
-            <div>
-              {!unlock &&
-                <IconButton onClick={switchLock} color="primary">
-                  <Icon>lock</Icon>
-                </IconButton>
-              }
-              {unlock &&
-                <IconButton onClick={switchLock} color="primary">
-                  <Icon>lock_open</Icon>
-                </IconButton>
-              }
-            </div>
           </CardContent>
         </Card>
         <Card className={classes.infoCard}>
-          <CardHeader title="Flights" action={getAddButton()}/>
+          <CardHeader title="Flights" action={getAddButton()} />
           <CardContent>
             <FlightNew open={open} handleClose={handleClose} handleOk={handleOk}></FlightNew>
             <FlightTable flights={campaign.flights} />

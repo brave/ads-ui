@@ -22,6 +22,10 @@ export const styles = (theme: any) => ({
   hide: {
     display: "none",
   },
+  logo: {
+    height: "40px",
+    width: "40px",
+  },
   menuButton: {
     marginLeft: 12,
     marginRight: 36,

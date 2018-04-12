@@ -3,10 +3,10 @@ export const styles: any = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    minHeight: "100px",
     width: "100%",
   },
   textField: {
+    height: "70px",
     width: "500px",
   },
 };

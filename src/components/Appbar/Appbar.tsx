@@ -29,6 +29,7 @@ class Appbar extends React.Component<any, any> {
             >
               <Icon>menu</Icon>
             </IconButton>
+            <img src="/favicon.png" className={classes.logo}/>
             <Typography className={classes.flex} variant="title" color="inherit">
               ADS UI
             </Typography>
