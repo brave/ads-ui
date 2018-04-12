@@ -1,9 +1,11 @@
 export const styles: any = {
   formControl: {
-    marginLeft: "10px",
-    marginRight: "10px",
+    margin: "10px",
   },
   select: {
     minWidth: "200px",
+  },
+  toolbar: {
+    flexWrap: "wrap",
   },
 };

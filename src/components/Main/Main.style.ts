@@ -31,6 +31,7 @@ export const styles = (theme: any) => ({
   root: {
     display: "flex",
     flexGrow: 1,
+    height: "100%",
     overflow: "hidden",
     position: "relative",
     zIndex: 1,

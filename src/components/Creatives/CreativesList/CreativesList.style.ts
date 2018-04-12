@@ -5,7 +5,7 @@ export const styles: any = {
     textDecoration: "none",
   },
   item: {
-    flex: "345px 0 0",
+    flex: "345px 0 1",
   },
   list: {
     display: "flex",

@@ -10,8 +10,10 @@ class CreativesFilter extends React.Component<any, any> {
     return (
       <div>
         <AppBar position="static" color="default">
-          <Toolbar>
-            <TextField label="Search" />
+          <Toolbar className={classes.toolbar}>
+            <FormControl className={classes.formControl}>
+              <TextField className={classes.input} label="Search" />
+            </FormControl>
             <FormControl className={classes.formControl}>
               <InputLabel>Sort</InputLabel>
               <Select className={classes.select} value="" displayEmpty name="age">

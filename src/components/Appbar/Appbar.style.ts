@@ -30,6 +30,6 @@ export const styles = (theme: any) => ({
   },
   menuButton: {
     marginLeft: 12,
-    marginRight: 36,
+    marginRight: 12,
   },
 } as any);

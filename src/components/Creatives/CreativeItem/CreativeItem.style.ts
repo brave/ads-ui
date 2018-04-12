@@ -5,7 +5,7 @@ const styles: any = {
   },
   card: {
     marginBottom: "15px",
-    maxWidth: 345,
+    maxWidth: 328,
   },
   content: {
     display: "flex",
