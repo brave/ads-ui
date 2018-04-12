@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 import { GetCampaigns } from "../../../actions";
 
+import CampaignFilter from "../CampaignFilter/CampaignFilter";
 import CampaignItem from "../CampaignItem/CampaignItem";
 
 import { styles } from "./CampaignList.style";
@@ -25,6 +26,7 @@ class CampaignList extends React.Component<any, any> {
     });
     return (
       <div className={classes.root}>
+        <CampaignFilter />
         <div className={classes.list}>
           {listItems}
         </div>
