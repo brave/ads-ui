@@ -36,7 +36,7 @@ class FlightAddSegment extends React.Component<any, any> {
     };
     const getSelectItems = segments.map((item: any, index: number) => {
       return (
-        <MenuItem value={item}>{item.code}</MenuItem>
+        <MenuItem value={item}>{item.name}</MenuItem>
       );
     });
     const handleChange = (event: any) => {
