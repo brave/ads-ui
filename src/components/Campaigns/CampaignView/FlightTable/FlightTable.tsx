@@ -6,6 +6,7 @@ import {
   TableRow,
   withStyles,
 } from "material-ui";
+import * as moment from "moment";
 import * as React from "react";
 
 import { styles } from "./FlightTable.style";
@@ -20,10 +21,13 @@ class FlightTable extends React.Component<any, any> {
             {index}
           </TableCell>
           <TableCell>
-            {item.startedAt}
+            {moment(item.startedAt).format("DD-MM-YYYY")}
           </TableCell>
           <TableCell>
-            {item.endAt}
+            {moment(item.endAt).format("DD-MM-YYYY")}
+          </TableCell>
+          <TableCell>
+            {item.active.toString()}
           </TableCell>
         </TableRow>
       );
@@ -35,13 +39,16 @@ class FlightTable extends React.Component<any, any> {
             <TableRow>
               <TableCell>
                 Flight
-                  </TableCell>
+              </TableCell>
               <TableCell>
                 Start Date
-                  </TableCell>
+              </TableCell>
               <TableCell>
                 End Date
-                  </TableCell>
+              </TableCell>
+              <TableCell>
+                Active
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

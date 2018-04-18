@@ -4,6 +4,17 @@ export const styles: any = {
     display: "flex",
     justifyContent: "space-between",
   },
+  currentExpansion: {
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
+  },
+  flightButtonIcons: {
+    margin: "3px",
+  },
+  flightButtons: {
+    margin: "5px",
+  },
   infoCard: {
     margin: "15px",
   },

@@ -1,6 +1,5 @@
 export const styles: any = {
-  root: {
-    overflowX: "auto",
+  formControl: {
     width: "100%",
   },
 };

@@ -17,7 +17,7 @@ class CampaignItem extends React.Component<any, any> {
           </div>
           <div className={classes.indicator}>
             <Avatar>
-              {campaign.flights.length.toString()}
+              {campaign.creatives.length.toString()}
             </Avatar>
           </div>
         </CardContent>
