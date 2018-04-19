@@ -34,7 +34,7 @@ class FlightAddGeocode extends React.Component<any, any> {
     };
     const getSelectItems = geocodes.map((item: any, index: number) => {
       return (
-        <MenuItem value={item}>{item.name}</MenuItem>
+        <MenuItem key={item.code} value={item}>{item.name}</MenuItem>
       );
     });
     const handleChange = (event: any) => {
