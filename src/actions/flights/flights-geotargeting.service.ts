@@ -1,29 +1,31 @@
 import axios from "axios";
 
+import { IFlightAction, IFlightGeoTargetingPayload } from ".";
+import { IUserPayload } from "..";
 import { OpenSnackBar } from "../snackbar";
 
 export const ADD_FLIGHT_GEOTARGETING_START = "ADDFLIGHTGEOTARGETINGSTART";
-export const AddFlightGeoTargetingStart = (payload: any) => ({
+export const AddFlightGeoTargetingStart = (payload: IFlightGeoTargetingPayload): IFlightAction => ({
   payload,
   type: ADD_FLIGHT_GEOTARGETING_START,
 });
 
 export const ADD_FLIGHT_GEOTARGETING_SUCCESSFUL = "ADDFLIGHTGEOTARGETINGSUCCESSFUL";
-export const AddFlightGeoTargetingSuccessful = (payload: any) => ({
+export const AddFlightGeoTargetingSuccessful = (payload: any): IFlightAction => ({
   payload,
   type: ADD_FLIGHT_GEOTARGETING_SUCCESSFUL,
 });
 
 export const ADD_FLIGHT_GEOTARGETING_FAILD = "ADDFLIGHTGEOTARGETINGFAILD";
-export const AddFlightGeoTargetingFaild = (payload: any) => ({
-  payload,
+export const AddFlightGeoTargetingFaild = (): IFlightAction => ({
+  payload: null,
   type: ADD_FLIGHT_GEOTARGETING_FAILD,
 });
 
-export const AddFlightGeoTargeting = (flightID: string, user: any, geocode: any) => {
+export const AddFlightGeoTargeting = (flightID: string, user: IUserPayload, geocode: IFlightGeoTargetingPayload) => {
   return async (dispatch: any) => {
     try {
-      dispatch(AddFlightGeoTargetingStart);
+      dispatch(AddFlightGeoTargetingStart(geocode));
       const response = await axios.post(`http://localhost:4000/flight/${flightID}/geocode`, geocode, {
         headers: {
           "Authorization": `Bearer ${user.accessToken}`,
@@ -33,7 +35,7 @@ export const AddFlightGeoTargeting = (flightID: string, user: any, geocode: any)
       dispatch(AddFlightGeoTargetingSuccessful(response.data));
       dispatch(OpenSnackBar("Add Flight Geocode Successfully"));
     } catch (error) {
-      dispatch(AddFlightGeoTargetingFaild(error));
+      dispatch(AddFlightGeoTargetingFaild());
       if (error.response) {
         dispatch(OpenSnackBar(`Add Flight Geocode Faild: ${error.response.data.message}`));
       } else if (error.request) {

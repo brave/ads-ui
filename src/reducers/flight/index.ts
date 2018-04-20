@@ -5,6 +5,7 @@ import {
   GET_FLIGHTS_FAILD,
   GET_FLIGHTS_START,
   GET_FLIGHTS_SUCCESSFUL,
+  IFlightAction,
   UPDATE_FLIGHTS_FAILED,
   UPDATE_FLIGHTS_START,
   UPDATE_FLIGHTS_SUCCESSFUL,
@@ -12,13 +13,14 @@ import {
 
 import { createFlightReducer } from "./flight.create";
 import { getFlightReducer } from "./flight.get";
+import { IFlightState } from "./flight.interface";
 import { updateFlightReducer } from "./flight.update";
 
 const flightReducer = (
-  state = {
+  state: IFlightState = {
     flights: [],
   },
-  action: any,
+  action: IFlightAction,
 ) => {
   switch (action.type) {
     case GET_FLIGHTS_START:

@@ -2,15 +2,17 @@ import {
   GET_GEOCODES_FAILD,
   GET_GEOCODES_START,
   GET_GEOCODES_SUCCESSFUL,
+  IGeocodeAction,
 } from "../../actions";
 
 import { getGeocodeReducer } from "./geocode.get";
+import { IGeocodeState } from "./geocode.interface";
 
 const geoCodeReducer = (
-  state = {
-    flights: [],
+  state: IGeocodeState = {
+    geocodes: [],
   },
-  action: any,
+  action: IGeocodeAction,
 ) => {
   switch (action.type) {
     case GET_GEOCODES_START:

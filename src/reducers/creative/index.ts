@@ -5,6 +5,7 @@ import {
   GET_CREATIVES_FAILED,
   GET_CREATIVES_START,
   GET_CREATIVES_SUCCESSFUL,
+  ICreativeAction,
   UPDATE_CREATIVES_FAILED,
   UPDATE_CREATIVES_START,
   UPDATE_CREATIVES_SUCCESSFUL,
@@ -12,13 +13,14 @@ import {
 
 import { createCreativeReducer } from "./creative.create";
 import { getCreativeReducer } from "./creative.get";
+import { ICreativeState } from "./creative.interface";
 import { updateCreativeReducer } from "./creative.update";
 
 const creativeReducer = (
-  state = {
+  state: ICreativeState = {
     creatives: [],
   },
-  action: any,
+  action: ICreativeAction,
 ) => {
   switch (action.type) {
     case GET_CREATIVES_START:

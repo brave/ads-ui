@@ -1,3 +1,4 @@
+import * as _ from "lodash";
 import {
   Button,
   Dialog,
@@ -22,8 +23,10 @@ class FlightAddSegment extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      proirity: 0,
-      segment: "",
+      priority: 0,
+      segment: {
+        code: "",
+      },
     };
   }
 
@@ -36,14 +39,19 @@ class FlightAddSegment extends React.Component<any, any> {
     };
     const getSelectItems = segments.map((item: any, index: number) => {
       return (
-        <MenuItem key={item.code} value={item}>{item.name}</MenuItem>
+        <MenuItem key={item.code} value={item.code}>{item.name}</MenuItem>
       );
     });
     const handleChange = (event: any) => {
-      this.setState({ segment: event.target.value });
+      const selectedSegment = _.find(segments, { code: event.target.value });
+      this.setState({ segment: selectedSegment });
     };
     const handlePriority = (event: any) => {
-      this.setState({ priority: parseInt(event.target.value, 10) });
+      if (event.target.value) {
+        this.setState({ priority: parseInt(event.target.value, 10) });
+      } else {
+        this.setState({ priority: 0 });
+      }
     };
     return (
       <div>
@@ -56,7 +64,7 @@ class FlightAddSegment extends React.Component<any, any> {
             <div>
               <FormControl required className={classes.formControl}>
                 <InputLabel>Segment</InputLabel>
-                <Select value={segment} onChange={handleChange}>
+                <Select value={segment.code} onChange={handleChange}>
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>

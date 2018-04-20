@@ -1,29 +1,31 @@
 import axios from "axios";
 
+import { ICreativeAction, ICreativePayload } from ".";
+import { IUserPayload } from "..";
 import { OpenSnackBar } from "../snackbar";
 
 export const UPDATE_CREATIVES_START = "UPDATECREATIVESSTART";
-export const UpdateCreativesStart = (payload: any) => ({
+export const UpdateCreativesStart = (payload: Partial<ICreativePayload>): ICreativeAction => ({
   payload,
   type: UPDATE_CREATIVES_START,
 });
 
 export const UPDATE_CREATIVES_SUCCESSFUL = "UPDATECREATIVESSUCCESSFUL";
-export const UpdateCreativesSuccessful = (payload: any) => ({
+export const UpdateCreativesSuccessful = (payload: ICreativePayload): ICreativeAction => ({
   payload,
   type: UPDATE_CREATIVES_SUCCESSFUL,
 });
 
 export const UPDATE_CREATIVES_FAILED = "UPDATECREATIVEFAILED";
-export const UpdateCreativesFailed = (payload: any) => ({
-  payload,
+export const UpdateCreativesFailed = (): ICreativeAction => ({
+  payload: null,
   type: UPDATE_CREATIVES_FAILED,
 });
 
-export const UpdateCreatives = (creative: any, user: any) => {
+export const UpdateCreatives = (creative: Partial<ICreativePayload>, user: IUserPayload) => {
   return async (dispatch: any) => {
     try {
-      dispatch(UpdateCreativesStart(user));
+      dispatch(UpdateCreativesStart(creative));
       const response = await axios.put(`http://localhost:4000/creative/${creative.id}`, creative, {
         headers: {
           "Authorization": `Bearer ${user.accessToken}`,
@@ -33,7 +35,7 @@ export const UpdateCreatives = (creative: any, user: any) => {
       dispatch(UpdateCreativesSuccessful(response.data));
       dispatch(OpenSnackBar("Creative updated Successfully"));
     } catch (error) {
-      dispatch(UpdateCreativesFailed(error));
+      dispatch(UpdateCreativesFailed());
       if (error.response) {
         dispatch(OpenSnackBar(`Update Creatives Faild: ${error.response.data.message}`));
       } else if (error.request) {

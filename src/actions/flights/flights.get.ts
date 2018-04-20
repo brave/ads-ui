@@ -1,29 +1,31 @@
 import axios from "axios";
 
+import { IFlightAction, IFlightPayload } from ".";
+import { IUserPayload } from "..";
 import { OpenSnackBar } from "../snackbar";
 
 export const GET_FLIGHTS_START = "GETFLIGHTSSTART";
-export const GetFlightsStart = (payload: any) => ({
-  payload,
+export const GetFlightsStart = (): IFlightAction => ({
+  payload: null,
   type: GET_FLIGHTS_START,
 });
 
 export const GET_FLIGHTS_SUCCESSFUL = "GETFLIGHTSUCCESSFUL";
-export const GetFlightSuccessful = (payload: any) => ({
+export const GetFlightSuccessful = (payload: IFlightPayload[]): IFlightAction => ({
   payload,
   type: GET_FLIGHTS_SUCCESSFUL,
 });
 
 export const GET_FLIGHTS_FAILD = "GETFLIGHTSFAILD";
-export const GetFlightsFaild = (payload: any) => ({
-  payload,
+export const GetFlightsFaild = (): IFlightAction => ({
+  payload: null,
   type: GET_FLIGHTS_FAILD,
 });
 
-export const GetFlights = (user: any) => {
+export const GetFlights = (user: IUserPayload) => {
   return async (dispatch: any) => {
     try {
-      dispatch(GetFlightsStart);
+      dispatch(GetFlightsStart());
       const response = await axios.get(`http://localhost:4000/flight`, {
         headers: {
           "Authorization": `Bearer ${user.accessToken}`,
@@ -33,7 +35,7 @@ export const GetFlights = (user: any) => {
       dispatch(GetFlightSuccessful(response.data));
       dispatch(OpenSnackBar("Flight Get Successfully"));
     } catch (error) {
-      dispatch(GetFlightsFaild(error));
+      dispatch(GetFlightsFaild());
       if (error.response) {
         dispatch(OpenSnackBar(`Get Flights Faild: ${error.response.data.message}`));
       } else if (error.request) {

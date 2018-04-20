@@ -1,5 +1,5 @@
-import { SIGN_IN_FAILED, SIGN_IN_START, SIGN_IN_SUCCESSFUL, SIGN_OUT } from "../../actions";
-import { ISignInSuccessfulPayload, IUserAction } from "../../actions";
+import { ISignInPayload, SIGN_IN_FAILED, SIGN_IN_START, SIGN_IN_SUCCESSFUL, SIGN_OUT } from "../../actions";
+import { IUserAction, IUserPayload } from "../../actions";
 
 import { IUserState } from "./user.interface";
 
@@ -8,15 +8,15 @@ export const signInReducer = (state: IUserState, action: IUserAction): IUserStat
     case SIGN_IN_START:
       return {
         accessToken: "",
-        email: action.payload.email,
+        email: (action.payload as ISignInPayload).email,
         id: "",
         signedIn: false,
       };
     case SIGN_IN_SUCCESSFUL:
       return {
-        accessToken: (action.payload as ISignInSuccessfulPayload).accessToken,
-        email: action.payload.email,
-        id: (action.payload as ISignInSuccessfulPayload).id,
+        accessToken: (action.payload as IUserPayload).accessToken,
+        email: (action.payload as IUserPayload).email,
+        id: (action.payload as IUserPayload).id,
         signedIn: true,
       };
     case SIGN_IN_FAILED:

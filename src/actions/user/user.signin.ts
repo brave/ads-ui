@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { OpenSnackBar } from "../snackbar";
 
-import { ISignInPayload, ISignInSuccessfulPayload, IUserAction } from "./user.interface";
+import { ISignInPayload, IUserAction, IUserPayload } from "./user.interface";
 
 export const SIGN_IN_START = "SIGNINSTART";
 export const SignInStart = (payload: ISignInPayload): IUserAction => ({
@@ -11,7 +11,7 @@ export const SignInStart = (payload: ISignInPayload): IUserAction => ({
 });
 
 export const SIGN_IN_SUCCESSFUL = "SIGNINSUCCESSFUL";
-export const SignInSuccessful = (payload: ISignInSuccessfulPayload): IUserAction => ({
+export const SignInSuccessful = (payload: IUserPayload): IUserAction => ({
   payload,
   type: SIGN_IN_SUCCESSFUL,
 });

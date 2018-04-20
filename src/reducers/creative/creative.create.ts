@@ -1,6 +1,13 @@
-import { CREATE_CREATIVES_FAILED, CREATE_CREATIVES_START, CREATE_CREATIVES_SUCCESSFUL } from "../../actions";
+import {
+  CREATE_CREATIVES_FAILED,
+  CREATE_CREATIVES_START,
+  CREATE_CREATIVES_SUCCESSFUL,
+  ICreativeAction,
+  ICreativePayload,
+} from "../../actions";
+import { ICreativeState } from "./creative.interface";
 
-export const createCreativeReducer = (state: any, action: any) => {
+export const createCreativeReducer = (state: ICreativeState, action: ICreativeAction): ICreativeState => {
   switch (action.type) {
     case CREATE_CREATIVES_START:
       return {
@@ -9,7 +16,7 @@ export const createCreativeReducer = (state: any, action: any) => {
     case CREATE_CREATIVES_SUCCESSFUL:
       return {
         creatives: [
-          action.payload,
+          action.payload as ICreativePayload,
           ...state.creatives,
         ],
       };

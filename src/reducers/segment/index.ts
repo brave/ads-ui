@@ -2,15 +2,17 @@ import {
   GET_SEGMENTS_FAILD,
   GET_SEGMENTS_START,
   GET_SEGMENTS_SUCCESSFUL,
+  ISegmentAction,
 } from "../../actions";
 
 import { getSegmentReducer } from "./segment.get";
+import { ISegmentState } from "./segment.interface";
 
 const segmentReducer = (
-  state = {
-    flights: [],
+  state: ISegmentState = {
+    segments: [],
   },
-  action: any,
+  action: ISegmentAction,
 ) => {
   switch (action.type) {
     case GET_SEGMENTS_START:

@@ -1,26 +1,29 @@
 import axios from "axios";
 
+import { IUserPayload } from "../user";
+
+import { ICampaignAction, ICampaignPayload, ICreateCampaignPayload } from ".";
 import { OpenSnackBar } from "../snackbar";
 
 export const CREATE_CAMPAIGNS_START = "CREATECAMPAIGNSSTART";
-export const CreateCampaignsStart = (payload: any) => ({
+export const CreateCampaignsStart = (payload: ICreateCampaignPayload): ICampaignAction => ({
   payload,
   type: CREATE_CAMPAIGNS_START,
 });
 
 export const CREATE_CAMPAIGNS_SUCCESSFUL = "CREATECAMPAIGNSSUCCESSFUL";
-export const CreateCampaignsSuccessful = (payload: any) => ({
+export const CreateCampaignsSuccessful = (payload: ICampaignPayload): ICampaignAction => ({
   payload,
   type: CREATE_CAMPAIGNS_SUCCESSFUL,
 });
 
 export const CREATE_CAMPAIGNS_FAILED = "CREATECAMPAIGNFAILED";
-export const CreateCampaignsFailed = (payload: any) => ({
-  payload,
+export const CreateCampaignsFailed = () => ({
+  payload: null,
   type: CREATE_CAMPAIGNS_FAILED,
 });
 
-export const CreateCampaigns = (campaign: any, user: any) => {
+export const CreateCampaigns = (campaign: ICreateCampaignPayload, user: IUserPayload) => {
   return async (dispatch: any) => {
     try {
       dispatch(CreateCampaignsStart(campaign));
@@ -34,7 +37,7 @@ export const CreateCampaigns = (campaign: any, user: any) => {
       dispatch(CreateCampaignsSuccessful(response.data));
       return Promise.resolve(response.data);
     } catch (error) {
-      dispatch(CreateCampaignsFailed(error));
+      dispatch(CreateCampaignsFailed());
       if (error.response) {
         dispatch(OpenSnackBar(`Create Campaigns Faild: ${error.response.data.message}`));
       } else if (error.request) {

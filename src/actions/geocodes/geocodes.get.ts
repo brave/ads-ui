@@ -1,29 +1,30 @@
 import axios from "axios";
 
+import { IGeocodePayload, IUserPayload } from "..";
 import { OpenSnackBar } from "../snackbar";
 
 export const GET_GEOCODES_START = "GETGEOCODESSTART";
-export const GetGeocodesStart = (payload: any) => ({
-  payload,
+export const GetGeocodesStart = () => ({
+  payload: null,
   type: GET_GEOCODES_START,
 });
 
 export const GET_GEOCODES_SUCCESSFUL = "GETGEOCODESUCCESSFUL";
-export const GetGeocodeSuccessful = (payload: any) => ({
+export const GetGeocodeSuccessful = (payload: IGeocodePayload) => ({
   payload,
   type: GET_GEOCODES_SUCCESSFUL,
 });
 
 export const GET_GEOCODES_FAILD = "GETGEOCODESFAILD";
-export const GetGeocodesFaild = (payload: any) => ({
-  payload,
+export const GetGeocodesFaild = () => ({
+  payload: null,
   type: GET_GEOCODES_FAILD,
 });
 
-export const GetGeocodes = (user: any) => {
+export const GetGeocodes = (user: IUserPayload) => {
   return async (dispatch: any) => {
     try {
-      dispatch(GetGeocodesStart);
+      dispatch(GetGeocodesStart());
       const response = await axios.get(`http://localhost:4000/geocode`, {
         headers: {
           "Authorization": `Bearer ${user.accessToken}`,
@@ -33,7 +34,7 @@ export const GetGeocodes = (user: any) => {
       dispatch(GetGeocodeSuccessful(response.data));
       dispatch(OpenSnackBar("Geocode Get Successfully"));
     } catch (error) {
-      dispatch(GetGeocodesFaild(error));
+      dispatch(GetGeocodesFaild());
       if (error.response) {
         dispatch(OpenSnackBar(`Get Geocodes Faild: ${error.response.data.message}`));
       } else if (error.request) {

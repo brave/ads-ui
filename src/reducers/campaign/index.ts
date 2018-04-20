@@ -7,6 +7,7 @@ import {
   GET_CAMPAIGNS_FAILD,
   GET_CAMPAIGNS_START,
   GET_CAMPAIGNS_SUCCESSFUL,
+  ICampaignAction,
   UPDATE_CAMPAIGNS_FAILED,
   UPDATE_CAMPAIGNS_START,
   UPDATE_CAMPAIGNS_SUCCESSFUL,
@@ -14,14 +15,15 @@ import {
 
 import { createCampaignReducer } from "./campaign.create";
 import { getCampaignReducer } from "./campaign.get";
+import { ICampaignState } from "./campaign.interface";
 import { serviceCampaignReducer } from "./campaign.service";
 import { updateCampaignReducer } from "./campaign.update";
 
 const campaignReducer = (
-  state = {
+  state: ICampaignState = {
     campaigns: [],
   },
-  action: any,
+  action: ICampaignAction,
 ) => {
   switch (action.type) {
     case GET_CAMPAIGNS_START:

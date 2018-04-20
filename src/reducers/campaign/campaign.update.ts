@@ -1,8 +1,15 @@
 import * as _ from "lodash";
 
-import { UPDATE_CAMPAIGNS_FAILED, UPDATE_CAMPAIGNS_START, UPDATE_CAMPAIGNS_SUCCESSFUL } from "../../actions";
+import {
+  ICampaignAction,
+  ICampaignPayload,
+  UPDATE_CAMPAIGNS_FAILED,
+  UPDATE_CAMPAIGNS_START,
+  UPDATE_CAMPAIGNS_SUCCESSFUL,
+} from "../../actions";
+import { ICampaignState } from "./campaign.interface";
 
-export const updateCampaignReducer = (state: any, action: any) => {
+export const updateCampaignReducer = (state: ICampaignState, action: ICampaignAction): ICampaignState => {
   switch (action.type) {
     case UPDATE_CAMPAIGNS_START:
       return {
@@ -10,9 +17,9 @@ export const updateCampaignReducer = (state: any, action: any) => {
       };
     case UPDATE_CAMPAIGNS_SUCCESSFUL:
       const campaigns = _.filter(state.campaigns, (item, index) => {
-        return item.id !== action.payload.id;
+        return item.id !== (action.payload as ICampaignPayload).id;
       });
-      campaigns.unshift(action.payload);
+      campaigns.unshift(action.payload as ICampaignPayload);
       return {
         campaigns,
       };

@@ -1,6 +1,13 @@
-import { GET_CAMPAIGNS_FAILD, GET_CAMPAIGNS_START, GET_CAMPAIGNS_SUCCESSFUL } from "../../actions";
+import {
+  GET_CAMPAIGNS_FAILD,
+  GET_CAMPAIGNS_START,
+  GET_CAMPAIGNS_SUCCESSFUL,
+  ICampaignAction,
+  ICampaignPayload,
+} from "../../actions";
+import { ICampaignState } from "./campaign.interface";
 
-export const getCampaignReducer = (state: any, action: any) => {
+export const getCampaignReducer = (state: ICampaignState, action: ICampaignAction): ICampaignState => {
   switch (action.type) {
     case GET_CAMPAIGNS_START:
       return {
@@ -8,7 +15,7 @@ export const getCampaignReducer = (state: any, action: any) => {
       };
     case GET_CAMPAIGNS_SUCCESSFUL:
       return {
-        campaigns: action.payload,
+        campaigns: action.payload as ICampaignPayload[],
       };
     case GET_CAMPAIGNS_FAILD:
       return {

@@ -1,8 +1,9 @@
 import axios from "axios";
+import { Dispatch } from "react-redux";
 
 import { OpenSnackBar } from "../snackbar";
 
-import { ISignUpPayload, IUserAction } from "./user.interface";
+import { ISignUpPayload, ISignUpSuccessfulPayload, IUserAction } from "./user.interface";
 
 export const SIGN_UP_START = "SIGNUPSTART";
 export const SignUpStart = (payload: ISignUpPayload): IUserAction => ({
@@ -11,19 +12,19 @@ export const SignUpStart = (payload: ISignUpPayload): IUserAction => ({
 });
 
 export const SIGN_UP_SUCCESSFUL = "SIGNUPSUCCESSFUL";
-export const SignUpSuccessful = (payload: any): IUserAction => ({
+export const SignUpSuccessful = (payload: ISignUpSuccessfulPayload): IUserAction => ({
   payload,
   type: SIGN_UP_SUCCESSFUL,
 });
 
 export const SIGN_UP_FAILED = "SIGNUPFAILED";
-export const SignUpFailed = (payload: any): IUserAction => ({
-  payload,
+export const SignUpFailed = (): IUserAction => ({
+  payload: null,
   type: SIGN_UP_FAILED,
 });
 
 export const SignUp = (payload: ISignUpPayload) => {
-  return (dispatch: any) => {
+  return (dispatch: Dispatch<ISignUpPayload>) => {
     dispatch(SignUpStart(payload));
     return axios.post(`http://localhost:4000/user`, payload, {
       headers: {
@@ -33,7 +34,7 @@ export const SignUp = (payload: ISignUpPayload) => {
       dispatch(SignUpSuccessful(response.data));
       dispatch(OpenSnackBar("Signed Up Successfully"));
     }).catch((error: any) => {
-      dispatch(SignUpFailed(error));
+      dispatch(SignUpFailed());
       if (error.response) {
         dispatch(OpenSnackBar(`Sign Up Faild: ${error.response.data.error}`));
       } else if (error.request) {

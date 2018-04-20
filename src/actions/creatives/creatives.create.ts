@@ -1,26 +1,28 @@
 import axios from "axios";
 
+import { ICreateCreativePayload, ICreativeAction, ICreativePayload } from ".";
+import { IUserPayload } from "..";
 import { OpenSnackBar } from "../snackbar";
 
 export const CREATE_CREATIVES_START = "CREATECREATIVESSTART";
-export const CreateCreativesStart = (payload: any) => ({
-  payload,
+export const CreateCreativesStart = (payload: ICreateCreativePayload): ICreativeAction => ({
+  payload: null,
   type: CREATE_CREATIVES_START,
 });
 
 export const CREATE_CREATIVES_SUCCESSFUL = "CREATECREATIVESSUCCESSFUL";
-export const CreateCreativesSuccessful = (payload: any) => ({
+export const CreateCreativesSuccessful = (payload: ICreativePayload): ICreativeAction => ({
   payload,
   type: CREATE_CREATIVES_SUCCESSFUL,
 });
 
 export const CREATE_CREATIVES_FAILED = "CREATECREATIVEFAILED";
-export const CreateCreativesFailed = (payload: any) => ({
-  payload,
+export const CreateCreativesFailed = (): ICreativeAction => ({
+  payload: null,
   type: CREATE_CREATIVES_FAILED,
 });
 
-export const CreateCreatives = (creative: any, user: any) => {
+export const CreateCreatives = (creative: ICreateCreativePayload, user: IUserPayload) => {
   return async (dispatch: any) => {
     try {
       dispatch(CreateCreativesStart(creative));
@@ -34,7 +36,7 @@ export const CreateCreatives = (creative: any, user: any) => {
       dispatch(CreateCreativesSuccessful(response.data));
       return Promise.resolve(response.data);
     } catch (error) {
-      dispatch(CreateCreativesFailed(error));
+      dispatch(CreateCreativesFailed());
       if (error.response) {
         dispatch(OpenSnackBar(`Create Creatives Faild: ${error.response.data.message}`));
       } else if (error.request) {
