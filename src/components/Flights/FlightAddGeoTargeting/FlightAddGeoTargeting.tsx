@@ -1,3 +1,4 @@
+import * as _ from "lodash";
 import {
   Button,
   Dialog,
@@ -15,13 +16,15 @@ import { connect } from "react-redux";
 
 import * as React from "react";
 
-import { styles } from "./FlightAddGeocode.style";
+import { styles } from "./FlightAddGeoTargeting.style";
 
-class FlightAddGeocode extends React.Component<any, any> {
+class FlightAddGeoTargeting extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      geocode: "",
+      geocode: {
+        code: "",
+      },
     };
   }
 
@@ -34,24 +37,25 @@ class FlightAddGeocode extends React.Component<any, any> {
     };
     const getSelectItems = geocodes.map((item: any, index: number) => {
       return (
-        <MenuItem key={item.code} value={item}>{item.name}</MenuItem>
+        <MenuItem key={item.code} value={item.code}>{item.name}</MenuItem>
       );
     });
     const handleChange = (event: any) => {
-      this.setState({ geocode: event.target.value });
+      const selectedGeocode = _.find(geocodes, { code: event.target.value });
+      this.setState({ geocode: selectedGeocode });
     };
     return (
       <div>
         <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Add Flight Geocode</DialogTitle>
+          <DialogTitle>Add Flight Geo Targeting</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              To add a geo code...
+              To add a geo targeting...
             </DialogContentText>
             <div>
               <FormControl required className={classes.formControl}>
                 <InputLabel>Geo Code</InputLabel>
-                <Select value={geocode} onChange={handleChange}>
+                <Select value={geocode.code} onChange={handleChange}>
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
@@ -79,8 +83,4 @@ const mapStateToProps = (state: any, ownProps: any) => ({
   user: state.userReducer,
 });
 
-const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
-  // createFlight: (value: any, user: any) => dispatch(CreateFlights(value, user)),
-});
-
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(FlightAddGeocode)) as any;
+export default withStyles(styles)(connect(mapStateToProps)(FlightAddGeoTargeting)) as any;

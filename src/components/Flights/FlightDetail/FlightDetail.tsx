@@ -1,5 +1,8 @@
 import {
   Button,
+  Card,
+  CardActions,
+  CardContent,
   Icon,
   withStyles,
 } from "material-ui";
@@ -14,8 +17,9 @@ import {
 } from "../../../actions";
 
 import FlightAddDayParting from "../FlightAddDayParting/FlightAddDayParting";
-import FlightAddGeocode from "../FlightAddGeocode/FlightAddGeocode";
+import FlightAddGeoTargeting from "../FlightAddGeoTargeting/FlightAddGeoTargeting";
 import FlightAddSegment from "../FlightAddSegment/FlightAddSegment";
+import FlightItemDetail from "../FlightItemDetail/FlightItemDetail";
 
 import { styles } from "./FlightDetail.style";
 
@@ -77,43 +81,45 @@ class FlightDetail extends React.Component<any, any> {
     };
     return (
       <div className={classes.currentExpansion}>
-        <div>
-          <Button
-            onClick={handleClickOpenGeo}
-            variant="raised"
-            color="primary"
-            className={classes.flightButtons}>
-            Add Geocode
+        <Card>
+          <CardContent>
+            <FlightItemDetail flight={flight} />
+          </CardContent>
+          <CardActions>
+            <Button
+              onClick={handleClickOpenGeo}
+              variant="raised"
+              color="primary"
+              className={classes.flightButtons}>
+              Add Geo Targeting
             <Icon className={classes.flightButtonIcons}>place</Icon>
-          </Button>
-          <Button
-            onClick={handleClickOpenSegment}
-            variant="raised"
-            color="primary"
-            className={classes.flightButtons}>
-            Add Segment
+            </Button>
+            <Button
+              onClick={handleClickOpenSegment}
+              variant="raised"
+              color="primary"
+              className={classes.flightButtons}>
+              Add Segment
             <Icon className={classes.flightButtonIcons}>bookmark</Icon>
-          </Button>
-          <Button
-            onClick={handleClickOpenDayParting}
-            variant="raised"
-            color="primary"
-            className={classes.flightButtons}>
-            Add Day Parting
+            </Button>
+            <Button
+              onClick={handleClickOpenDayParting}
+              variant="raised"
+              color="primary"
+              className={classes.flightButtons}>
+              Add Day Parting
             <Icon className={classes.flightButtonIcons}>flight_takeoff</Icon>
-          </Button>
-        </div>
-        <div>
-          {flight.id}
-        </div>
+            </Button>
+          </CardActions>
+        </Card>
         <FlightAddDayParting
           open={openDayParting}
           handleClose={handleCloseDayParting}
           handleOk={handleOkDayParting}></FlightAddDayParting>
-        <FlightAddGeocode
+        <FlightAddGeoTargeting
           open={openGeo}
           handleClose={handleCloseGeo}
-          handleOk={handleOkGeo}></FlightAddGeocode>
+          handleOk={handleOkGeo}></FlightAddGeoTargeting>
         <FlightAddSegment
           open={openSegment}
           handleClose={handleCloseSegment}

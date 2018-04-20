@@ -94,7 +94,4 @@ const mapStateToProps = (state: any, ownProps: any) => ({
   segments: state.segmentReducer.segments,
 });
 
-const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
-});
-
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(FlightAddSegment)) as any;
+export default withStyles(styles)(connect(mapStateToProps)(FlightAddSegment)) as any;
