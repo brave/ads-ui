@@ -10,7 +10,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import {
-  AddFlightGeoCode,
+  AddFlightGeoTargeting,
   AddFlightSegment,
   GetGeocodes,
   GetSegments,
@@ -134,8 +134,12 @@ const mapStateToProps = (state: any, ownProps: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
-  addFlightGeoCode: (flightID: any, user: any, geoCode: any) => dispatch(AddFlightGeoCode(flightID, user, geoCode)),
-  addFlightSegment: (flightID: any, user: any, segment: any) => dispatch(AddFlightSegment(flightID, user, segment)),
+  addFlightGeoCode: (flightID: any, user: any, geoCode: any) => {
+    return dispatch(AddFlightGeoTargeting(flightID, user, geoCode));
+  },
+  addFlightSegment: (flightID: any, user: any, segment: any) => {
+    return dispatch(AddFlightSegment(flightID, user, segment));
+  },
   getGeocodes: (user: any) => dispatch(GetGeocodes(user)),
   getSegments: (user: any) => dispatch(GetSegments(user)),
 });

@@ -2,38 +2,38 @@ import axios from "axios";
 
 import { OpenSnackBar } from "../snackbar";
 
-export const ADD_FLIGHT_GEOCODE_START = "ADDFLIGHTGEOCODESTART";
-export const AddFlightGeocodeStart = (payload: any) => ({
+export const ADD_FLIGHT_GEOTARGETING_START = "ADDFLIGHTGEOTARGETINGSTART";
+export const AddFlightGeoTargetingStart = (payload: any) => ({
   payload,
-  type: ADD_FLIGHT_GEOCODE_START,
+  type: ADD_FLIGHT_GEOTARGETING_START,
 });
 
-export const ADD_FLIGHT_GEOCODE_SUCCESSFUL = "ADDFLIGHTGEOCODESUCCESSFUL";
-export const AddFlightGeocodeSuccessful = (payload: any) => ({
+export const ADD_FLIGHT_GEOTARGETING_SUCCESSFUL = "ADDFLIGHTGEOTARGETINGSUCCESSFUL";
+export const AddFlightGeoTargetingSuccessful = (payload: any) => ({
   payload,
-  type: ADD_FLIGHT_GEOCODE_SUCCESSFUL,
+  type: ADD_FLIGHT_GEOTARGETING_SUCCESSFUL,
 });
 
-export const ADD_FLIGHT_GEOCODE_FAILD = "ADDFLIGHTGEOCODEFAILD";
-export const AddFlightGeocodeFaild = (payload: any) => ({
+export const ADD_FLIGHT_GEOTARGETING_FAILD = "ADDFLIGHTGEOTARGETINGFAILD";
+export const AddFlightGeoTargetingFaild = (payload: any) => ({
   payload,
-  type: ADD_FLIGHT_GEOCODE_FAILD,
+  type: ADD_FLIGHT_GEOTARGETING_FAILD,
 });
 
-export const AddFlightGeoCode = (flightID: string, user: any, geocode: any) => {
+export const AddFlightGeoTargeting = (flightID: string, user: any, geocode: any) => {
   return async (dispatch: any) => {
     try {
-      dispatch(AddFlightGeocodeStart);
+      dispatch(AddFlightGeoTargetingStart);
       const response = await axios.post(`http://localhost:4000/flight/${flightID}/geocode`, geocode, {
         headers: {
           "Authorization": `Bearer ${user.accessToken}`,
           "Content-Type": "application/json",
         },
       });
-      dispatch(AddFlightGeocodeSuccessful(response.data));
+      dispatch(AddFlightGeoTargetingSuccessful(response.data));
       dispatch(OpenSnackBar("Add Flight Geocode Successfully"));
     } catch (error) {
-      dispatch(AddFlightGeocodeFaild(error));
+      dispatch(AddFlightGeoTargetingFaild(error));
       if (error.response) {
         dispatch(OpenSnackBar(`Add Flight Geocode Faild: ${error.response.data.message}`));
       } else if (error.request) {
