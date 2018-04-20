@@ -14,8 +14,8 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import { UpdateCreatives } from "../../../actions";
-import CreativeForm from "../CreativeForm/CreativeForm";
-import CampaignTable from "./CampaignTable/CampaignTable";
+import CampaignTable from "../../../components/Campaigns/CampaignTable/CampaignTable";
+import CreativeForm from "../../../components/Creatives/CreativeForm/CreativeForm";
 
 import { styles } from "./CreativesView.style";
 

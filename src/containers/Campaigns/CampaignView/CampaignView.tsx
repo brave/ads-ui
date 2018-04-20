@@ -21,10 +21,10 @@ import {
   UpdateCampaigns,
 } from "../../../actions";
 
-import FlightDetail from "../../Flights/FlightDetail/FlightDetail";
-import FlightNew from "../../Flights/FlightNew/FlightNew";
-import CampaignForm from "../CampaignForm/CampaignForm";
-import FlightTable from "./FlightTable/FlightTable";
+import CampaignForm from "../../../components/Campaigns/CampaignForm/CampaignForm";
+import FlightDetail from "../../../components/Flights/FlightDetail/FlightDetail";
+import FlightNew from "../../../components/Flights/FlightNew/FlightNew";
+import FlightTable from "../../../components/Flights/FlightTable/FlightTable";
 
 import { styles } from "./CampaignView.style";
 

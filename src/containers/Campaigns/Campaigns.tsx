@@ -2,8 +2,8 @@ import { withStyles } from "material-ui";
 import * as React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
-import CampaignList from "./CampaignList/CampaignList";
-import CampaignNew from "./CampaignNew/CampaignNew";
+import CampaignList from "../../components/Campaigns/CampaignList/CampaignList";
+import CampaignNew from "../../components/Campaigns/CampaignNew/CampaignNew";
 import CampaignView from "./CampaignView/CampaignView";
 
 import { styles } from "./Campaign.style";

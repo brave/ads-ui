@@ -13,10 +13,6 @@ import { styles } from "./App.styles";
 
 class App extends React.Component<any, any> {
 
-  constructor(props: any) {
-    super(props);
-  }
-
   public render() {
     const { classes, CloseSnackBar, snackbar } = this.props;
 

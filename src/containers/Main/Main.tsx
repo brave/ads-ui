@@ -15,7 +15,7 @@ import { connect } from "react-redux";
 import { Link, Redirect, Route, Switch } from "react-router-dom";
 
 import { CloseDrawer } from "../../actions";
-import Appbar from "../Appbar/Appbar";
+import Appbar from "../../components/Appbar/Appbar";
 import Campaigns from "../Campaigns/Campaigns";
 import Creatives from "../Creatives/Creatives";
 import Dashboard from "../Dashboard/Dashboard";
