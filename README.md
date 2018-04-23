@@ -17,3 +17,6 @@ npm i
 ```
 npm start
 ```
+
+## Dockerfile
+Build the image and run the container, set ```REACT_APP_SERVER_ADDRESS``` environment variable
