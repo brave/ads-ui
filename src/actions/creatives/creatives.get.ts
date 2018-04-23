@@ -25,7 +25,7 @@ export const GetCreatives = (user: any) => {
   return async (dispatch: any) => {
     try {
       dispatch(GetCreativesStart());
-      const response = await axios.get(`http://localhost:4000/creative`, {
+      const response = await axios.get(`${process.env.REACT_APP_SERVER_ADDRESS}/creative`, {
         headers: {
           "Authorization": `Bearer ${user.accessToken}`,
           "Content-Type": "application/json",

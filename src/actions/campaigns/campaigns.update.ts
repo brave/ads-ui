@@ -26,7 +26,7 @@ export const UpdateCampaigns = (campaign: Partial<ICampaignPayload>, user: IUser
   return async (dispatch: any) => {
     try {
       dispatch(UpdateCampaignsStart(campaign));
-      const response = await axios.put(`http://localhost:4000/campaign/${campaign.id}`, campaign, {
+      const response = await axios.put(`${process.env.REACT_APP_SERVER_ADDRESS}/campaign/${campaign.id}`, campaign, {
         headers: {
           "Authorization": `Bearer ${user.accessToken}`,
           "Content-Type": "application/json",

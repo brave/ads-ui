@@ -24,7 +24,7 @@ export const UpdateFlights = (flight: any, user: any) => {
   return async (dispatch: any) => {
     try {
       dispatch(UpdateFlightsStart(user));
-      const response = await axios.put(`http://localhost:4000/flight/${flight.id}`, flight, {
+      const response = await axios.put(`${process.env.REACT_APP_SERVER_ADDRESS}/flight/${flight.id}`, flight, {
         headers: {
           "Authorization": `Bearer ${user.accessToken}`,
           "Content-Type": "application/json",

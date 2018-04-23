@@ -25,7 +25,7 @@ export const SignInFailed = (payload: any): IUserAction => ({
 export const SignIn = (payload: ISignInPayload) => {
   return (dispatch: any) => {
     dispatch(SignInStart(payload));
-    return axios.post(`http://localhost:4000/auth/token`, payload, {
+    return axios.post(`${process.env.REACT_APP_SERVER_ADDRESS}/auth/token`, payload, {
       headers: {
         "Content-Type": "application/json",
       },

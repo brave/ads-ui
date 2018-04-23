@@ -26,7 +26,7 @@ export const CreateFlights = (flight: ICreateFlightPayload, user: IUserPayload) 
   return async (dispatch: any) => {
     try {
       dispatch(CreateFlightsStart(flight));
-      const response = await axios.post(`http://localhost:4000/flight`, flight, {
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_ADDRESS}/flight`, flight, {
         headers: {
           "Authorization": `Bearer ${user.accessToken}`,
           "Content-Type": "application/json",

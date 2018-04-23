@@ -26,7 +26,7 @@ export const CreateCreatives = (creative: ICreateCreativePayload, user: IUserPay
   return async (dispatch: any) => {
     try {
       dispatch(CreateCreativesStart(creative));
-      const response = await axios.post(`http://localhost:4000/creative`, creative, {
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_ADDRESS}/creative`, creative, {
         headers: {
           "Authorization": `Bearer ${user.accessToken}`,
           "Content-Type": "application/json",

@@ -26,7 +26,7 @@ export const SignUpFailed = (): IUserAction => ({
 export const SignUp = (payload: ISignUpPayload) => {
   return (dispatch: Dispatch<ISignUpPayload>) => {
     dispatch(SignUpStart(payload));
-    return axios.post(`http://localhost:4000/user`, payload, {
+    return axios.post(`${process.env.REACT_APP_SERVER_ADDRESS}/user`, payload, {
       headers: {
         "Content-Type": "application/json",
       },

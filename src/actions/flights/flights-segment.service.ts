@@ -26,7 +26,7 @@ export const AddFlightSegment = (flightID: string, user: IUserPayload, segment: 
   return async (dispatch: any) => {
     try {
       dispatch(AddFlightSegmentStart(segment));
-      const response = await axios.post(`http://localhost:4000/flight/${flightID}/segment`, segment, {
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_ADDRESS}/flight/${flightID}/segment`, segment, {
         headers: {
           "Authorization": `Bearer ${user.accessToken}`,
           "Content-Type": "application/json",

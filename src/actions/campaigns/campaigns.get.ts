@@ -26,7 +26,7 @@ export const GetCampaigns = (user: IUserPayload) => {
   return async (dispatch: any) => {
     try {
       dispatch(GetCampaignsStart);
-      const response = await axios.get(`http://localhost:4000/campaign`, {
+      const response = await axios.get(`${process.env.REACT_APP_SERVER_ADDRESS}/campaign`, {
         headers: {
           "Authorization": `Bearer ${user.accessToken}`,
           "Content-Type": "application/json",

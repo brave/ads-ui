@@ -26,12 +26,14 @@ export const AddFlightDayparting = (flightID: string, user: IUserPayload, daypar
   return async (dispatch: any) => {
     try {
       dispatch(AddFlightDaypartingStart(dayparting));
-      const response = await axios.post(`http://localhost:4000/flight/${flightID}/dayparting`, dayparting, {
-        headers: {
-          "Authorization": `Bearer ${user.accessToken}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_ADDRESS}/flight/${flightID}/dayparting`,
+        dayparting,
+        {
+          headers: {
+            "Authorization": `Bearer ${user.accessToken}`,
+            "Content-Type": "application/json",
+          },
+        });
       dispatch(AddFlightDaypartingSuccessful(response.data));
       dispatch(OpenSnackBar("Add Flight Dayparting Successfully"));
     } catch (error) {

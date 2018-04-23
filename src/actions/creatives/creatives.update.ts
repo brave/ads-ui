@@ -26,7 +26,7 @@ export const UpdateCreatives = (creative: Partial<ICreativePayload>, user: IUser
   return async (dispatch: any) => {
     try {
       dispatch(UpdateCreativesStart(creative));
-      const response = await axios.put(`http://localhost:4000/creative/${creative.id}`, creative, {
+      const response = await axios.put(`${process.env.REACT_APP_SERVER_ADDRESS}/creative/${creative.id}`, creative, {
         headers: {
           "Authorization": `Bearer ${user.accessToken}`,
           "Content-Type": "application/json",

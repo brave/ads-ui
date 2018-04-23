@@ -26,7 +26,7 @@ export const GetSegments = (user: IUserPayload) => {
   return async (dispatch: any) => {
     try {
       dispatch(GetSegmentsStart());
-      const response = await axios.get(`http://localhost:4000/segment`, {
+      const response = await axios.get(`${process.env.REACT_APP_SERVER_ADDRESS}/segment`, {
         headers: {
           "Authorization": `Bearer ${user.accessToken}`,
           "Content-Type": "application/json",

@@ -26,7 +26,7 @@ export const GetFlights = (user: IUserPayload) => {
   return async (dispatch: any) => {
     try {
       dispatch(GetFlightsStart());
-      const response = await axios.get(`http://localhost:4000/flight`, {
+      const response = await axios.get(`${process.env.REACT_APP_SERVER_ADDRESS}/flight`, {
         headers: {
           "Authorization": `Bearer ${user.accessToken}`,
           "Content-Type": "application/json",

@@ -25,7 +25,7 @@ export const GetGeocodes = (user: IUserPayload) => {
   return async (dispatch: any) => {
     try {
       dispatch(GetGeocodesStart());
-      const response = await axios.get(`http://localhost:4000/geocode`, {
+      const response = await axios.get(`${process.env.REACT_APP_SERVER_ADDRESS}/geocode`, {
         headers: {
           "Authorization": `Bearer ${user.accessToken}`,
           "Content-Type": "application/json",

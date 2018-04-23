@@ -27,7 +27,7 @@ export const CreateCampaigns = (campaign: ICreateCampaignPayload, user: IUserPay
   return async (dispatch: any) => {
     try {
       dispatch(CreateCampaignsStart(campaign));
-      const response = await axios.post(`http://localhost:4000/campaign`, campaign, {
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_ADDRESS}/campaign`, campaign, {
         headers: {
           "Authorization": `Bearer ${user.accessToken}`,
           "Content-Type": "application/json",

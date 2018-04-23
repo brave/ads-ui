@@ -26,7 +26,7 @@ export const AddFlightGeoTargeting = (flightID: string, user: IUserPayload, geoc
   return async (dispatch: any) => {
     try {
       dispatch(AddFlightGeoTargetingStart(geocode));
-      const response = await axios.post(`http://localhost:4000/flight/${flightID}/geocode`, geocode, {
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_ADDRESS}/flight/${flightID}/geocode`, geocode, {
         headers: {
           "Authorization": `Bearer ${user.accessToken}`,
           "Content-Type": "application/json",
