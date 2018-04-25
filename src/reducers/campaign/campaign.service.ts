@@ -48,7 +48,7 @@ export const serviceCampaignReducer = (state: ICampaignState, action: ICampaignA
         if (campaign.id === (action.payload as any).flight.campaign.id) {
           campaign.flights = _.map(campaign.flights, (flight) => {
             if (flight.id === (action.payload as any).flight.id) {
-              flight.segments.push((action.payload as any).segment);
+              flight.segments.push((action.payload as any));
             }
             return flight;
           });
