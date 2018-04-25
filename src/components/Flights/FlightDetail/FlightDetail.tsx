@@ -44,12 +44,6 @@ class FlightDetail extends React.Component<any, any> {
     };
   }
 
-  public componentDidUpdate(prevProps: any, prevState: any) {
-    if (prevState.flight !== this.state.flight) {
-      this.setState({ flight: this.state.flight });
-    }
-  }
-
   public render() {
     const { classes } = this.props;
     const { openGeo, openSegment, openDayParting, flight } = this.state;
@@ -165,4 +159,4 @@ const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
   getSegments: (user: any) => dispatch(GetSegments(user)),
 });
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(FlightDetail as any));
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(FlightDetail));

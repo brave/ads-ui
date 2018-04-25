@@ -32,7 +32,7 @@ export const serviceCampaignReducer = (state: ICampaignState, action: ICampaignA
       campaigns = _.map(state.campaigns, (campaign) => {
         campaign.flights = _.map(campaign.flights, (flight) => {
           if (flight.id === (action.payload as any).flight) {
-            flight.geoTargetings.push((action.payload as any));
+            flight.geoTargetings.push(action.payload);
           }
           return flight;
         });
@@ -45,7 +45,7 @@ export const serviceCampaignReducer = (state: ICampaignState, action: ICampaignA
       campaigns = _.map(state.campaigns, (campaign) => {
         campaign.flights = _.map(campaign.flights, (flight) => {
           if (flight.id === (action.payload as any).flight) {
-            flight.segments.push((action.payload as any));
+            flight.segments.push(action.payload);
           }
           return flight;
         });
@@ -58,7 +58,7 @@ export const serviceCampaignReducer = (state: ICampaignState, action: ICampaignA
       campaigns = _.map(state.campaigns, (campaign) => {
         campaign.flights = _.map(campaign.flights, (flight) => {
           if (flight.id === (action.payload as any).flight) {
-            flight.dayPartings.push((action.payload as any));
+            flight.dayPartings.push(action.payload);
           }
           return flight;
         });

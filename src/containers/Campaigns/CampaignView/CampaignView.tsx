@@ -31,8 +31,14 @@ import { styles } from "./CampaignView.style";
 class CampaignView extends React.Component<any, any> {
   public static getDerivedStateFromProps(nextProps: any, prevState: any) {
     if (prevState.campaigns !== nextProps.campaigns) {
+      const campaign = _.find(nextProps.campaigns, { id: nextProps.match.params.id }) as any;
+      const activeFlight = _.cloneDeep(_.find(campaign.flights, { active: true }));
+      const notActiveFlights = _.filter(campaign.flights, { active: false });
       return {
+        activeFlight,
+        campaign,
         campaigns: nextProps.campaigns,
+        notActiveFlights,
       };
     }
     return null;
@@ -51,20 +57,6 @@ class CampaignView extends React.Component<any, any> {
       openNew: false,
       unlock: false,
     };
-  }
-
-  public componentDidUpdate(prevProps: any, prevState: any) {
-    if (prevState.campaigns !== this.state.campaigns) {
-      const campaign = _.find(this.state.campaigns, { id: this.props.match.params.id }) as any;
-      const activeFlight = _.find(campaign.flights, { active: true });
-      const notActiveFlights = _.filter(campaign.flights, { active: false });
-      this.setState({
-        activeFlight,
-        campaign,
-        campaigns: this.state.campaigns,
-        notActiveFlights,
-      });
-    }
   }
 
   public render() {

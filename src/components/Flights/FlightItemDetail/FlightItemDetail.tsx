@@ -26,12 +26,6 @@ class FlightItemDetail extends React.Component<any, any> {
     };
   }
 
-  public componentDidUpdate(prevProps: any, prevState: any) {
-    if (prevState.flight !== this.state.flight) {
-      this.setState({ flight: this.state.flight });
-    }
-  }
-
   public render() {
     const { classes } = this.props;
     const { flight } = this.state;
