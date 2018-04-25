@@ -3,10 +3,10 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-import { SignIn as SignInAction, SignUp as SignUpAction } from "../../actions";
+import { ISignInPayload, ISignUpPayload, SignIn, SignUp } from "../../actions";
 
-import SignIn from "./Signin";
-import Signup from "./Signup";
+import SignInComponent from "./Signin";
+import SignupComponent from "./Signup";
 
 import { styles } from "./Authentication.style";
 
@@ -38,8 +38,8 @@ class Authentication extends React.Component<any, any> {
             <Tab label="Sign In" value="SignIn" />
           </Tabs>
           <div className={classes.tabContent}>
-            {tabValue === "SignIn" && <SignIn onSubmit={SignInHandler} />}
-            {tabValue === "SignUp" && <Signup onSubmit={SignUpHandler} />}
+            {tabValue === "SignIn" && <SignInComponent onSubmit={SignInHandler} />}
+            {tabValue === "SignUp" && <SignupComponent onSubmit={SignUpHandler} />}
           </div>
         </Paper>
       </div>
@@ -56,8 +56,8 @@ const mapStateToProps = (state: any, ownProps: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
-  signIn: (value: any) => dispatch(SignInAction(value)),
-  signUp: (value: any) => dispatch(SignUpAction(value)),
+  signIn: (value: ISignInPayload) => dispatch(SignIn(value)),
+  signUp: (value: ISignUpPayload) => dispatch(SignUp(value)),
 });
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Authentication));

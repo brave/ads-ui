@@ -46,7 +46,7 @@ export const SignIn = (payload: ISignInPayload) => {
 };
 
 export const SIGN_OUT = "SIGNOUT";
-export const SignOut = (payload: any): IUserAction => ({
-  payload,
+export const SignOut = (): IUserAction => ({
+  payload: null,
   type: SIGN_OUT,
 });
