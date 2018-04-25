@@ -11,9 +11,12 @@ import { styles } from "./FlightItemDetail.styles";
 
 class FlightItemDetail extends React.Component<any, any> {
   public static getDerivedStateFromProps(nextProps: any, prevState: any) {
-    return {
-      flight: nextProps.flight,
-    };
+    if (prevState.flight !== nextProps.flight) {
+      return {
+        flight: nextProps.flight,
+      };
+    }
+    return null;
   }
 
   constructor(props: any) {
@@ -23,19 +26,15 @@ class FlightItemDetail extends React.Component<any, any> {
     };
   }
 
+  public componentDidUpdate(prevProps: any, prevState: any) {
+    if (prevState.flight !== this.state.flight) {
+      this.setState({ flight: this.state.flight });
+    }
+  }
+
   public render() {
     const { classes } = this.props;
     const { flight } = this.state;
-    const segmentChips = flight.segments.map((item: any, index: number) => {
-      return (
-        <Chip key={item.code} label={item.name} />
-      );
-    });
-    const geoTargetingChips = flight.geoTargetings.map((item: any, index: number) => {
-      return (
-        <Chip key={item.code} label={item.name} />
-      );
-    });
     return (
       <div className={classes.root}>
         <Card>
@@ -53,15 +52,31 @@ class FlightItemDetail extends React.Component<any, any> {
               End At: {moment(flight.endAt).format("DD-MM-YYYY")}
             </div>
             <div>
-              Segments: {segmentChips}
+              Segments: {this.segmentChips()}
             </div>
             <div>
-              Geo Targetings: {geoTargetingChips}
+              Geo Targetings: {this.geoTargetingChips()}
             </div>
           </CardContent>
         </Card>
       </div>
     );
+  }
+
+  private segmentChips() {
+    return this.state.flight.segments.map((item: any, index: number) => {
+      return (
+        <Chip key={Math.random()} label={`${item.name} P:${item.priority}`} />
+      );
+    });
+  }
+
+  private geoTargetingChips() {
+    return this.state.flight.geoTargetings.map((item: any, index: number) => {
+      return (
+        <Chip key={Math.random()} label={item.name} />
+      );
+    });
   }
 }
 

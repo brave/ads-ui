@@ -1,5 +1,4 @@
 import axios from "axios";
-import { Dispatch } from "react-redux";
 
 import { OpenSnackBar } from "../snackbar";
 
@@ -24,7 +23,7 @@ export const SignUpFailed = (): IUserAction => ({
 });
 
 export const SignUp = (payload: ISignUpPayload) => {
-  return (dispatch: Dispatch<ISignUpPayload>) => {
+  return (dispatch: any) => {
     dispatch(SignUpStart(payload));
     return axios.post(`${process.env.REACT_APP_SERVER_ADDRESS}/user`, payload, {
       headers: {

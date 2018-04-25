@@ -29,78 +29,48 @@ import FlightTable from "../../../components/Flights/FlightTable/FlightTable";
 import { styles } from "./CampaignView.style";
 
 class CampaignView extends React.Component<any, any> {
+  public static getDerivedStateFromProps(nextProps: any, prevState: any) {
+    if (prevState.campaigns !== nextProps.campaigns) {
+      return {
+        campaigns: nextProps.campaigns,
+      };
+    }
+    return null;
+  }
+
   constructor(props: any) {
     super(props);
+    const campaign = _.find(props.campaigns, { id: this.props.match.params.id }) as any;
+    const activeFlight = _.find(campaign.flights, { active: true });
+    const notActiveFlights = _.filter(campaign.flights, { active: false });
     this.state = {
+      activeFlight,
+      campaign,
+      campaigns: props.campaigns,
+      notActiveFlights,
       openNew: false,
       unlock: false,
     };
   }
 
-  public render() {
-    const {
-      classes,
-      createFlight,
-      match,
-      campaigns,
-      update,
-      user,
-    } = this.props;
-    const { unlock, openNew } = this.state;
-    const id = match.params.id;
-    const campaign = _.find(campaigns, (item) => {
-      return item.id === id;
-    });
-    const notActiveFlights = _.filter(campaign.flights, { active: false });
-    const activeFlight = _.find<any>(campaign.flights, { active: true });
-    const switchLock = () => {
+  public componentDidUpdate(prevProps: any, prevState: any) {
+    if (prevState.campaigns !== this.state.campaigns) {
+      const campaign = _.find(this.state.campaigns, { id: this.props.match.params.id }) as any;
+      const activeFlight = _.find(campaign.flights, { active: true });
+      const notActiveFlights = _.filter(campaign.flights, { active: false });
       this.setState({
-        unlock: !unlock,
+        activeFlight,
+        campaign,
+        campaigns: this.state.campaigns,
+        notActiveFlights,
       });
-    };
-    const handleClickOpenNew = () => {
-      this.setState({ openNew: true });
-    };
-    const handleCloseNew = () => {
-      this.setState({ openNew: false });
-    };
-    const handleOkNew = async (modalState: any) => {
-      const flight = {
-        campaign: campaign.id,
-        endAt: modalState.selectedEndDate,
-        geoOperator: "and",
-        order: 1,
-        startedAt: modalState.selectedStartDate,
-      };
-      await createFlight(flight, user);
-    };
-    const getAddButton = () => {
-      return (
-        <div>
-          <IconButton onClick={handleClickOpenNew} color="primary">
-            <Icon>add</Icon>
-          </IconButton>
-        </div>
-      );
-    };
-    const getLockButton = () => {
-      if (!unlock) {
-        return (
-          <IconButton onClick={switchLock} color="primary">
-            <Icon>lock</Icon>
-          </IconButton>
-        );
-      } else {
-        return (
-          <IconButton onClick={switchLock} color="primary">
-            <Icon>lock_open</Icon>
-          </IconButton>
-        );
-      }
-    };
-    const handleSubmit = async (value: any, e: Event) => {
-      await update(value, user);
-    };
+    }
+  }
+
+  public render() {
+    const { classes } = this.props;
+    const { campaign, notActiveFlights, activeFlight } = this.state;
+    const { unlock, openNew } = this.state;
     return (
       <div className={classes.root}>
         <AppBar position="static" color="default">
@@ -109,23 +79,24 @@ class CampaignView extends React.Component<any, any> {
           </Toolbar>
         </AppBar>
         <Card className={classes.infoCard}>
-          <CardHeader title="Details" action={getLockButton()} />
+          <CardHeader title="Details" action={this.getLockButton()} />
           <CardContent className={classes.content}>
-            <CampaignForm campaign={campaign} unlock={unlock} onSubmit={handleSubmit} />
+            <CampaignForm campaign={campaign} unlock={unlock} onSubmit={(value: string) => this.handleSubmit(value)} />
           </CardContent>
         </Card>
         <Card className={classes.infoCard}>
-          <CardHeader title="Flights" action={getAddButton()} />
+          <CardHeader title="Flights" action={this.getAddButton()} />
           <CardContent>
-            <FlightNew open={openNew} handleClose={handleCloseNew} handleOk={handleOkNew}></FlightNew>
+            <FlightNew
+              open={openNew}
+              handleClose={() => this.handleCloseNew()}
+              handleOk={(modalState: any) => this.handleOkNew(modalState)}></FlightNew>
             <ExpansionPanel disabled={!activeFlight}>
               <ExpansionPanelSummary expandIcon={<Icon>expand</Icon>}>
                 Current Flight Detail
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-                {!!activeFlight &&
-                  <FlightDetail flight={activeFlight} />
-                }
+                {this.getFlightDetail()}
               </ExpansionPanelDetails>
             </ExpansionPanel>
             <ExpansionPanel disabled={notActiveFlights.length < 1}>
@@ -140,6 +111,68 @@ class CampaignView extends React.Component<any, any> {
         </Card>
       </div>
     );
+  }
+
+  private getFlightDetail() {
+    if (this.state.activeFlight) {
+      return (<FlightDetail flight={this.state.activeFlight} />);
+    }
+    return (<div></div>);
+  }
+
+  private getAddButton() {
+    return (
+      <div>
+        <IconButton onClick={() => this.handleClickOpenNew()} color="primary">
+          <Icon>add</Icon>
+        </IconButton>
+      </div>
+    );
+  }
+
+  private getLockButton = () => {
+    if (!this.state.unlock) {
+      return (
+        <IconButton onClick={() => this.switchLock()} color="primary">
+          <Icon>lock</Icon>
+        </IconButton>
+      );
+    } else {
+      return (
+        <IconButton onClick={() => this.switchLock()} color="primary">
+          <Icon>lock_open</Icon>
+        </IconButton>
+      );
+    }
+  }
+
+  private async handleSubmit(value: any) {
+    await this.props.update(value, this.props.user);
+  }
+
+  private switchLock() {
+    this.setState({
+      unlock: !this.state.unlock,
+    });
+  }
+
+  private handleClickOpenNew() {
+    this.setState({ openNew: true });
+  }
+
+  private handleCloseNew() {
+    this.setState({ openNew: false });
+  }
+
+  private async handleOkNew(modalState: any) {
+    const flight = {
+      campaign: this.state.campaign.id,
+      endAt: modalState.selectedEndDate,
+      geoOperator: "and",
+      order: 1,
+      startedAt: modalState.selectedStartDate,
+    };
+    await this.props.createFlight(flight, this.props.user);
   }
 }
 

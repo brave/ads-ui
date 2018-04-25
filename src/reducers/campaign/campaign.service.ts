@@ -30,14 +30,12 @@ export const serviceCampaignReducer = (state: ICampaignState, action: ICampaignA
       };
     case ADD_FLIGHT_GEOTARGETING_SUCCESSFUL:
       campaigns = _.map(state.campaigns, (campaign) => {
-        if (campaign.id === (action.payload as any).flight.campaign.id) {
-          campaign.flights = _.map(campaign.flights, (flight) => {
-            if (flight.id === (action.payload as any).flight.id) {
-              flight.geoTargetings.push((action.payload as any).geoCode);
-            }
-            return flight;
-          });
-        }
+        campaign.flights = _.map(campaign.flights, (flight) => {
+          if (flight.id === (action.payload as any).flight) {
+            flight.geoTargetings.push((action.payload as any));
+          }
+          return flight;
+        });
         return campaign;
       });
       return {
@@ -45,14 +43,12 @@ export const serviceCampaignReducer = (state: ICampaignState, action: ICampaignA
       };
     case ADD_FLIGHT_SEGMENT_SUCCESSFUL:
       campaigns = _.map(state.campaigns, (campaign) => {
-        if (campaign.id === (action.payload as any).flight.campaign.id) {
-          campaign.flights = _.map(campaign.flights, (flight) => {
-            if (flight.id === (action.payload as any).flight.id) {
-              flight.segments.push((action.payload as any));
-            }
-            return flight;
-          });
-        }
+        campaign.flights = _.map(campaign.flights, (flight) => {
+          if (flight.id === (action.payload as any).flight) {
+            flight.segments.push((action.payload as any));
+          }
+          return flight;
+        });
         return campaign;
       });
       return {
@@ -60,14 +56,12 @@ export const serviceCampaignReducer = (state: ICampaignState, action: ICampaignA
       };
     case ADD_FLIGHT_DAYPARTING_SUCCESSFUL:
       campaigns = _.map(state.campaigns, (campaign) => {
-        if (campaign.id === (action.payload as any).flight.campaign.id) {
-          campaign.flights = _.map(campaign.flights, (flight) => {
-            if (flight.id === (action.payload as any).flight.id) {
-              flight.dayPartings.push((action.payload as any));
-            }
-            return flight;
-          });
-        }
+        campaign.flights = _.map(campaign.flights, (flight) => {
+          if (flight.id === (action.payload as any).flight) {
+            flight.dayPartings.push((action.payload as any));
+          }
+          return flight;
+        });
         return campaign;
       });
       return {

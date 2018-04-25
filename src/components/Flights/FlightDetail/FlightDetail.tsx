@@ -26,9 +26,12 @@ import { styles } from "./FlightDetail.style";
 
 class FlightDetail extends React.Component<any, any> {
   public static getDerivedStateFromProps(nextProps: any, prevState: any) {
-    return {
-      flight: nextProps.flight,
-    };
+    if (nextProps.flight !== prevState.flight) {
+      return {
+        flight: nextProps.flight,
+      };
+    }
+    return null;
   }
 
   constructor(props: any) {
@@ -40,53 +43,16 @@ class FlightDetail extends React.Component<any, any> {
       openSegment: false,
     };
   }
-  public render() {
-    const {
-      addFightDayParting,
-      addFlightGeoCode,
-      addFlightSegment,
-      classes,
-      getSegments,
-      getGeocodes,
-      user,
-    } = this.props;
-    const { openGeo, openSegment, openDayParting, flight } = this.state;
 
-    const handleClickOpenGeo = async () => {
-      await getGeocodes(user);
-      this.setState({ openGeo: true });
-    };
-    const handleCloseGeo = () => {
-      this.setState({ openGeo: false });
-    };
-    const handleOkGeo = async (modalState: any) => {
-      const { geocode } = modalState;
-      await addFlightGeoCode(flight.id, user, geocode);
-    };
-    const handleClickOpenSegment = async () => {
-      await getSegments(user);
-      this.setState({ openSegment: true });
-    };
-    const handleCloseSegment = () => {
-      this.setState({ openSegment: false });
-    };
-    const handleOkSegment = async (modalState: any) => {
-      const { segment, priority } = modalState;
-      const segmentRequest = {
-        code: segment.code,
-        priority,
-      };
-      await addFlightSegment(flight.id, user, segmentRequest);
-    };
-    const handleClickOpenDayParting = () => {
-      this.setState({ openDayParting: true });
-    };
-    const handleCloseDayParting = () => {
-      this.setState({ openDayParting: false });
-    };
-    const handleOkDayParting = async (modalState: any) => {
-      await addFightDayParting(flight.id, user, modalState);
-    };
+  public componentDidUpdate(prevProps: any, prevState: any) {
+    if (prevState.flight !== this.state.flight) {
+      this.setState({ flight: this.state.flight });
+    }
+  }
+
+  public render() {
+    const { classes } = this.props;
+    const { openGeo, openSegment, openDayParting, flight } = this.state;
     return (
       <div className={classes.currentExpansion}>
         <Card>
@@ -95,7 +61,7 @@ class FlightDetail extends React.Component<any, any> {
           </CardContent>
           <CardActions>
             <Button
-              onClick={handleClickOpenGeo}
+              onClick={() => this.handleClickOpenGeo()}
               variant="raised"
               color="primary"
               className={classes.flightButtons}>
@@ -103,7 +69,7 @@ class FlightDetail extends React.Component<any, any> {
             <Icon className={classes.flightButtonIcons}>place</Icon>
             </Button>
             <Button
-              onClick={handleClickOpenSegment}
+              onClick={() => this.handleClickOpenSegment()}
               variant="raised"
               color="primary"
               className={classes.flightButtons}>
@@ -111,7 +77,7 @@ class FlightDetail extends React.Component<any, any> {
             <Icon className={classes.flightButtonIcons}>bookmark</Icon>
             </Button>
             <Button
-              onClick={handleClickOpenDayParting}
+              onClick={() => this.handleClickOpenDayParting()}
               variant="raised"
               color="primary"
               className={classes.flightButtons}>
@@ -122,18 +88,62 @@ class FlightDetail extends React.Component<any, any> {
         </Card>
         <FlightAddDayParting
           open={openDayParting}
-          handleClose={handleCloseDayParting}
-          handleOk={handleOkDayParting}></FlightAddDayParting>
+          handleClose={() => this.handleCloseDayParting()}
+          handleOk={(modalState: any) => this.handleOkDayParting(modalState)}></FlightAddDayParting>
         <FlightAddGeoTargeting
           open={openGeo}
-          handleClose={handleCloseGeo}
-          handleOk={handleOkGeo}></FlightAddGeoTargeting>
+          handleClose={() => this.handleCloseGeo()}
+          handleOk={(modalState: any) => this.handleOkGeo(modalState)}></FlightAddGeoTargeting>
         <FlightAddSegment
           open={openSegment}
-          handleClose={handleCloseSegment}
-          handleOk={handleOkSegment}></FlightAddSegment>
+          handleClose={() => this.handleCloseSegment()}
+          handleOk={(modalState: any) => this.handleOkSegment(modalState)}></FlightAddSegment>
       </div>
     );
+  }
+
+  private async handleClickOpenGeo() {
+    await this.props.getGeocodes(this.props.user);
+    this.setState({ openGeo: true });
+  }
+
+  private handleCloseGeo() {
+    this.setState({ openGeo: false });
+  }
+
+  private async handleOkGeo(modalState: any) {
+    const { geocode } = modalState;
+    await this.props.addFlightGeoCode(this.state.flight.id, this.props.user, geocode);
+  }
+
+  private async handleClickOpenSegment() {
+    await this.props.getSegments(this.props.user);
+    this.setState({ openSegment: true });
+  }
+
+  private handleCloseSegment() {
+    this.setState({ openSegment: false });
+  }
+
+  private async handleOkSegment(modalState: any) {
+    const { segment, priority } = modalState;
+    const segmentRequest = {
+      code: segment.code,
+      priority,
+    };
+    await this.props.addFlightSegment(this.state.flight.id, this.props.user, segmentRequest);
+  }
+
+  private handleClickOpenDayParting() {
+    this.setState({ openDayParting: true });
+  }
+
+  private handleCloseDayParting() {
+    this.setState({ openDayParting: false });
+  }
+
+  private async handleOkDayParting(modalState: any) {
+    await this.props.addFightDayParting(this.state.flight.id, this.props.user, modalState);
   }
 }
 
