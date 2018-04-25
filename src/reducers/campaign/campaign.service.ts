@@ -1,6 +1,12 @@
 import * as _ from "lodash";
 
-import { ADD_FLIGHT_GEOTARGETING_SUCCESSFUL, CREATE_FLIGHTS_SUCCESSFUL, ICampaignAction } from "../../actions";
+import {
+  ADD_FLIGHT_DAYPARTING_SUCCESSFUL,
+  ADD_FLIGHT_GEOTARGETING_SUCCESSFUL,
+  ADD_FLIGHT_SEGMENT_SUCCESSFUL,
+  CREATE_FLIGHTS_SUCCESSFUL,
+  ICampaignAction,
+} from "../../actions";
 import { ICampaignState } from "./campaign.interface";
 
 export const serviceCampaignReducer = (state: ICampaignState, action: ICampaignAction): ICampaignState => {
@@ -28,6 +34,36 @@ export const serviceCampaignReducer = (state: ICampaignState, action: ICampaignA
           campaign.flights = _.map(campaign.flights, (flight) => {
             if (flight.id === (action.payload as any).flight.id) {
               flight.geoTargetings.push((action.payload as any).geoCode);
+            }
+            return flight;
+          });
+        }
+        return campaign;
+      });
+      return {
+        campaigns,
+      };
+    case ADD_FLIGHT_SEGMENT_SUCCESSFUL:
+      campaigns = _.map(state.campaigns, (campaign) => {
+        if (campaign.id === (action.payload as any).flight.campaign.id) {
+          campaign.flights = _.map(campaign.flights, (flight) => {
+            if (flight.id === (action.payload as any).flight.id) {
+              flight.segments.push((action.payload as any).segment);
+            }
+            return flight;
+          });
+        }
+        return campaign;
+      });
+      return {
+        campaigns,
+      };
+    case ADD_FLIGHT_DAYPARTING_SUCCESSFUL:
+      campaigns = _.map(state.campaigns, (campaign) => {
+        if (campaign.id === (action.payload as any).flight.campaign.id) {
+          campaign.flights = _.map(campaign.flights, (flight) => {
+            if (flight.id === (action.payload as any).flight.id) {
+              flight.dayPartings.push((action.payload as any));
             }
             return flight;
           });

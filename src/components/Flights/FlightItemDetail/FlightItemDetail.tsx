@@ -10,15 +10,29 @@ import * as React from "react";
 import { styles } from "./FlightItemDetail.styles";
 
 class FlightItemDetail extends React.Component<any, any> {
+  public static getDerivedStateFromProps(nextProps: any, prevState: any) {
+    return {
+      flight: nextProps.flight,
+    };
+  }
+
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      flight: props.flight,
+    };
+  }
+
   public render() {
-    const { classes, flight } = this.props;
+    const { classes } = this.props;
+    const { flight } = this.state;
     const segmentChips = flight.segments.map((item: any, index: number) => {
-      return(
+      return (
         <Chip key={item.code} label={item.name} />
       );
     });
     const geoTargetingChips = flight.geoTargetings.map((item: any, index: number) => {
-      return(
+      return (
         <Chip key={item.code} label={item.name} />
       );
     });

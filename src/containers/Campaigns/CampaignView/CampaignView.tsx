@@ -52,7 +52,7 @@ class CampaignView extends React.Component<any, any> {
       return item.id === id;
     });
     const notActiveFlights = _.filter(campaign.flights, { active: false });
-    const activeFlights = _.filter<any>(campaign.flights, { active: true });
+    const activeFlight = _.find<any>(campaign.flights, { active: true });
     const switchLock = () => {
       this.setState({
         unlock: !unlock,
@@ -118,13 +118,13 @@ class CampaignView extends React.Component<any, any> {
           <CardHeader title="Flights" action={getAddButton()} />
           <CardContent>
             <FlightNew open={openNew} handleClose={handleCloseNew} handleOk={handleOkNew}></FlightNew>
-            <ExpansionPanel disabled={activeFlights.length < 1}>
+            <ExpansionPanel disabled={!activeFlight}>
               <ExpansionPanelSummary expandIcon={<Icon>expand</Icon>}>
                 Current Flight Detail
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-                {activeFlights.length > 0 &&
-                  <FlightDetail flight={activeFlights[0]} />
+                {!!activeFlight &&
+                  <FlightDetail flight={activeFlight} />
                 }
               </ExpansionPanelDetails>
             </ExpansionPanel>

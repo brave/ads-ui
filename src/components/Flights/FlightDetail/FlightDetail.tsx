@@ -10,6 +10,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import {
+  AddFlightDayparting,
   AddFlightGeoTargeting,
   AddFlightSegment,
   GetGeocodes,
@@ -24,9 +25,16 @@ import FlightItemDetail from "../FlightItemDetail/FlightItemDetail";
 import { styles } from "./FlightDetail.style";
 
 class FlightDetail extends React.Component<any, any> {
+  public static getDerivedStateFromProps(nextProps: any, prevState: any) {
+    return {
+      flight: nextProps.flight,
+    };
+  }
+
   constructor(props: any) {
     super(props);
     this.state = {
+      flight: props.flight,
       openDayParting: false,
       openGeo: false,
       openSegment: false,
@@ -34,15 +42,15 @@ class FlightDetail extends React.Component<any, any> {
   }
   public render() {
     const {
+      addFightDayParting,
       addFlightGeoCode,
       addFlightSegment,
       classes,
       getSegments,
       getGeocodes,
-      flight,
       user,
     } = this.props;
-    const { openGeo, openSegment, openDayParting } = this.state;
+    const { openGeo, openSegment, openDayParting, flight } = this.state;
 
     const handleClickOpenGeo = async () => {
       await getGeocodes(user);
@@ -77,7 +85,7 @@ class FlightDetail extends React.Component<any, any> {
       this.setState({ openDayParting: false });
     };
     const handleOkDayParting = async (modalState: any) => {
-      this.setState({ openDayParting: false });
+      await addFightDayParting(flight.id, user, modalState);
     };
     return (
       <div className={classes.currentExpansion}>
@@ -134,6 +142,9 @@ const mapStateToProps = (state: any, ownProps: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
+  addFightDayParting: (flightID: any, user: any, dayParting: any) => {
+    return dispatch(AddFlightDayparting(flightID, user, dayParting));
+  },
   addFlightGeoCode: (flightID: any, user: any, geoCode: any) => {
     return dispatch(AddFlightGeoTargeting(flightID, user, geoCode));
   },
@@ -144,4 +155,4 @@ const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
   getSegments: (user: any) => dispatch(GetSegments(user)),
 });
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(FlightDetail));
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(FlightDetail as any));

@@ -1,5 +1,7 @@
 import {
+  ADD_FLIGHT_DAYPARTING_SUCCESSFUL,
   ADD_FLIGHT_GEOTARGETING_SUCCESSFUL,
+  ADD_FLIGHT_SEGMENT_SUCCESSFUL,
   CREATE_CAMPAIGNS_FAILED,
   CREATE_CAMPAIGNS_START,
   CREATE_CAMPAIGNS_SUCCESSFUL,
@@ -40,6 +42,8 @@ const campaignReducer = (
       return createCampaignReducer(state, action);
     case CREATE_FLIGHTS_SUCCESSFUL:
     case ADD_FLIGHT_GEOTARGETING_SUCCESSFUL:
+    case ADD_FLIGHT_DAYPARTING_SUCCESSFUL:
+    case ADD_FLIGHT_SEGMENT_SUCCESSFUL:
       return serviceCampaignReducer(state, action);
     default:
       return state;
