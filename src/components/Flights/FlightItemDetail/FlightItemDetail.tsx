@@ -51,6 +51,9 @@ class FlightItemDetail extends React.Component<any, any> {
             <div>
               Geo Targetings: {this.geoTargetingChips()}
             </div>
+            <div>
+              Day Partings: {this.dayPartingChips()}
+            </div>
           </CardContent>
         </Card>
       </div>
@@ -69,6 +72,14 @@ class FlightItemDetail extends React.Component<any, any> {
     return this.state.flight.geoTargetings.map((item: any, index: number) => {
       return (
         <Chip key={Math.random()} label={item.name} />
+      );
+    });
+  }
+
+  private dayPartingChips() {
+    return this.state.flight.dayPartings.map((item: any, index: number) => {
+      return (
+        <Chip key={Math.random()} label={item.dow} />
       );
     });
   }
