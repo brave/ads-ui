@@ -63,7 +63,7 @@ class FlightItemDetail extends React.Component<any, any> {
   private segmentChips() {
     return this.state.flight.segments.map((item: any, index: number) => {
       return (
-        <Chip key={Math.random()} label={`${item.name} P:${item.priority}`} />
+        <Chip className={this.props.classes.chip} key={Math.random()} label={`${item.name} P:${item.priority}`} />
       );
     });
   }
@@ -71,7 +71,7 @@ class FlightItemDetail extends React.Component<any, any> {
   private geoTargetingChips() {
     return this.state.flight.geoTargetings.map((item: any, index: number) => {
       return (
-        <Chip key={Math.random()} label={item.name} />
+        <Chip className={this.props.classes.chip} key={Math.random()} label={item.name} />
       );
     });
   }
@@ -83,7 +83,8 @@ class FlightItemDetail extends React.Component<any, any> {
         return day.format("dddd");
       };
       return (
-        <Chip key={Math.random()} label={`${getDay(item.dow)} s: ${item.startHour} e: ${item.endHour}`} />
+        <Chip className={this.props.classes.chip}
+          key={Math.random()} label={`${getDay(item.dow)} s: ${item.startHour} e: ${item.endHour}`} />
       );
     });
   }
