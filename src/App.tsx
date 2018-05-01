@@ -1,4 +1,4 @@
-import { CssBaseline, Snackbar, withStyles } from "material-ui";
+import { createMuiTheme, CssBaseline, MuiThemeProvider, Snackbar, withStyles } from "material-ui";
 import * as React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -13,10 +13,24 @@ import { styles } from "./App.styles";
 
 class App extends React.Component<any, any> {
 
-  public render() {
-    const { classes, CloseSnackBar, snackbar } = this.props;
+  private theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: "#fb542b",
+      },
+      secondary: {
+        contrastText: "#ffcc00",
+        light: "#0066ff",
+        main: "#0044ff",
+      },
+    },
+  });
 
-    return (
+  public render() {
+  const { classes, CloseSnackBar, snackbar } = this.props;
+
+  return (
+    <MuiThemeProvider theme={this.theme}>
       <div className={classes.root}>
         <CssBaseline />
         <Header></Header>
@@ -35,8 +49,9 @@ class App extends React.Component<any, any> {
           onClose={CloseSnackBar}
         />
       </div>
-    );
-  }
+    </MuiThemeProvider>
+  );
+}
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
