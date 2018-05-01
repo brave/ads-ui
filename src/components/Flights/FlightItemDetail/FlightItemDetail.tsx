@@ -78,8 +78,12 @@ class FlightItemDetail extends React.Component<any, any> {
 
   private dayPartingChips() {
     return this.state.flight.dayPartings.map((item: any, index: number) => {
+      const getDay = (dayNumber: number) => {
+        const day = moment().day(dayNumber);
+        return day.format("dddd");
+      };
       return (
-        <Chip key={Math.random()} label={item.dow} />
+        <Chip key={Math.random()} label={`${getDay(item.dow)} s: ${item.startHour} e: ${item.endHour}`} />
       );
     });
   }

@@ -26,12 +26,13 @@ export const AddFlightGeoTargeting = (flightID: string, user: IUserPayload, geoc
   return async (dispatch: any) => {
     try {
       dispatch(AddFlightGeoTargetingStart(geocode));
-      const response = await axios.post(`${process.env.REACT_APP_SERVER_ADDRESS}/flight/${flightID}/geocode`, geocode, {
-        headers: {
-          "Authorization": `Bearer ${user.accessToken}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_ADDRESS}/flight/${flightID}/geotargeting`,
+        geocode, {
+          headers: {
+            "Authorization": `Bearer ${user.accessToken}`,
+            "Content-Type": "application/json",
+          },
+        });
       dispatch(AddFlightGeoTargetingSuccessful(response.data));
       dispatch(OpenSnackBar("Add Flight Geocode Successfully"));
     } catch (error) {

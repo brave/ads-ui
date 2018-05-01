@@ -56,13 +56,13 @@ class FlightAddDayparting extends React.Component<any, any> {
               <FormControl required className={classes.formControl}>
                 <InputLabel>Day of Week</InputLabel>
                 <Select value={dow} onChange={handleDOW}>
+                  <MenuItem value={0}>Sunday</MenuItem>
                   <MenuItem value={1}>Monday</MenuItem>
                   <MenuItem value={2}>Tuesday</MenuItem>
                   <MenuItem value={3}>Wednesday</MenuItem>
                   <MenuItem value={4}>Thursday</MenuItem>
                   <MenuItem value={5}>Friday</MenuItem>
                   <MenuItem value={6}>Saturday</MenuItem>
-                  <MenuItem value={7}>Sunday</MenuItem>
                 </Select>
               </FormControl>
             </div>
