@@ -1,4 +1,4 @@
-import { Paper, Tab, Tabs, withStyles } from "material-ui";
+import { Paper, Tab, Tabs, withStyles } from "@material-ui/core";
 import * as React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";

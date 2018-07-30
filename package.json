@@ -3,22 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^1.4.2",
     "axios": "^0.18.0",
-    "classnames": "^2.2.5",
-    "lodash": "^4.17.5",
-    "material-ui": "^1.0.0-beta.41",
-    "material-ui-pickers": "^1.0.0-rc.5",
-    "moment": "^2.22.0",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
+    "classnames": "^2.2.6",
+    "lodash": "^4.17.10",
+    "material-ui-pickers": "^1.0.0-rc.12",
+    "moment": "^2.22.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",
-    "react-router-dom": "^4.2.2",
-    "react-scripts-ts": "2.15.1",
-    "redux": "^3.7.2",
-    "redux-form": "^7.3.0",
+    "react-router-dom": "^4.3.1",
+    "react-scripts-ts": "^2.16.0",
+    "redux": "^4.0.0",
+    "redux-form": "^7.4.2",
     "redux-logger": "^3.0.6",
-    "redux-persist": "^5.9.1",
-    "redux-thunk": "^2.2.0"
+    "redux-persist": "^5.10.0",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts-ts start",
@@ -28,16 +28,16 @@
     "container": "npm install && npm start"
   },
   "devDependencies": {
-    "@types/classnames": "^2.2.3",
-    "@types/jest": "^22.2.0",
-    "@types/lodash": "^4.14.106",
-    "@types/node": "^9.4.7",
-    "@types/react": "^16.3.10",
-    "@types/react-dom": "^16.0.5",
-    "@types/react-redux": "^5.0.16",
-    "@types/react-router-dom": "^4.2.6",
-    "@types/redux-form": "^7.2.2",
-    "@types/redux-logger": "^3.0.5",
-    "typescript": "^2.8.1"
+    "@types/classnames": "^2.2.6",
+    "@types/jest": "^23.3.1",
+    "@types/lodash": "^4.14.115",
+    "@types/node": "^10.5.4",
+    "@types/react": "^16.4.7",
+    "@types/react-dom": "^16.0.6",
+    "@types/react-redux": "^6.0.5",
+    "@types/react-router-dom": "^4.3.0",
+    "@types/redux-form": "^7.4.3",
+    "@types/redux-logger": "^3.0.6",
+    "typescript": "^2.9.2"
   }
 }

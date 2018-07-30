@@ -5,7 +5,7 @@ import {
   TableHead,
   TableRow,
   withStyles,
-} from "material-ui";
+} from "@material-ui/core";
 import * as moment from "moment";
 import * as React from "react";
 

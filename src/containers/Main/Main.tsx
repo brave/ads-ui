@@ -1,4 +1,3 @@
-import * as classNames from "classnames";
 import {
   Divider,
   Drawer,
@@ -9,7 +8,8 @@ import {
   ListItemIcon,
   ListItemText,
   withStyles,
-} from "material-ui";
+} from "@material-ui/core";
+import * as classNames from "classnames";
 import * as React from "react";
 import { connect } from "react-redux";
 import { Link, Redirect, Route, Switch } from "react-router-dom";

@@ -1,7 +1,7 @@
+import { AppBar, Button, Icon, IconButton, withStyles } from "@material-ui/core";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
 import * as classNames from "classnames";
-import { AppBar, Button, Icon, IconButton, withStyles } from "material-ui";
-import Toolbar from "material-ui/Toolbar";
-import Typography from "material-ui/Typography";
 import * as React from "react";
 import { connect } from "react-redux";
 

@@ -1,4 +1,4 @@
-import { TextField } from "material-ui";
+import { TextField } from "@material-ui/core";
 import * as React from "react";
 
 export const renderTextField = ({
@@ -6,7 +6,8 @@ export const renderTextField = ({
   label,
   meta,
   type,
-  ...custom,
+  // tslint:disable-next-line:trailing-comma
+  ...custom
 }: any) => (
     <TextField
       label={label}

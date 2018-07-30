@@ -1,4 +1,4 @@
-import { AppBar, Card, CardContent, Toolbar, Typography, withStyles } from "material-ui";
+import { AppBar, Card, CardContent, Toolbar, Typography, withStyles } from "@material-ui/core";
 import * as React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -22,7 +22,7 @@ class CampaignNew extends React.Component<any, any> {
             <Typography variant="title">New Campaign</Typography>
           </Toolbar>
         </AppBar>
-        <Card  className={classes.card}>
+        <Card className={classes.card}>
           <CardContent>
             <CampaignForm unlock={true} onSubmit={handleSubmit} />
           </CardContent>
@@ -40,4 +40,4 @@ const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
   create: (value: any, user: any) => dispatch((CreateCampaigns(value, user))),
 });
 
-export default withRouter(withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(CampaignNew)));
+export default withRouter(withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(CampaignNew)) as any);

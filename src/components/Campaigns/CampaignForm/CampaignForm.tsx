@@ -1,4 +1,4 @@
-import { Button, withStyles } from "material-ui";
+import { Button, withStyles } from "@material-ui/core";
 import * as React from "react";
 import { Field, initialize, reduxForm } from "redux-form";
 
@@ -45,6 +45,6 @@ class CampaignForm extends React.Component<any, any> {
 const CampaignFormRedux = reduxForm({
   form: "CampaignForm",
   validate,
-})(withStyles(styles)(CampaignForm));
+})(withStyles(styles)(CampaignForm) as any);
 
 export default CampaignFormRedux as any;

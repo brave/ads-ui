@@ -1,4 +1,3 @@
-import * as _ from "lodash";
 import {
   Button,
   Dialog,
@@ -12,7 +11,8 @@ import {
   Select,
   TextField,
   withStyles,
-} from "material-ui";
+} from "@material-ui/core";
+import * as _ from "lodash";
 import { connect } from "react-redux";
 
 import * as React from "react";

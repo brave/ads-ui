@@ -1,4 +1,4 @@
-import { AppBar, Card, CardContent, Toolbar, Typography, withStyles } from "material-ui";
+import { AppBar, Card, CardContent, Toolbar, Typography, withStyles } from "@material-ui/core";
 import * as React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -41,4 +41,4 @@ const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
   create: (value: any, user: any) => dispatch(CreateCreatives(value, user)),
 });
 
-export default withRouter(withStyles(style)(connect(mapStateToProps, mapDispatchToProps)(CreativesNew)));
+export default withRouter(withStyles(style)(connect(mapStateToProps, mapDispatchToProps)(CreativesNew)) as any);

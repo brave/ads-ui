@@ -1,4 +1,4 @@
-import { withStyles } from "material-ui";
+import { withStyles } from "@material-ui/core";
 import * as React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 

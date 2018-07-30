@@ -1,5 +1,5 @@
-import { withStyles } from "material-ui";
-import Button from "material-ui/Button";
+import { withStyles } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 import * as React from "react";
 import { Field, reduxForm } from "redux-form";
 
@@ -50,6 +50,6 @@ class SignupForm extends React.Component<any, any> {
 const SignupFormRedux = reduxForm({
   form: "signup",
   validate,
-})(withStyles(styles)(SignupForm));
+})(withStyles(styles)(SignupForm) as any);
 
 export default SignupFormRedux;

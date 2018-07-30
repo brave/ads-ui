@@ -1,4 +1,3 @@
-import * as _ from "lodash";
 import {
   AppBar,
   Card,
@@ -9,7 +8,8 @@ import {
   Toolbar,
   Typography,
   withStyles,
-} from "material-ui";
+} from "@material-ui/core";
+import * as _ from "lodash";
 import * as React from "react";
 import { connect } from "react-redux";
 
