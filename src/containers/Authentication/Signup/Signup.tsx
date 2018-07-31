@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 import * as React from "react";
 import { Field, reduxForm } from "redux-form";
 
-import { renderTextField } from "../../containers/field-material";
+import { renderTextField } from "../../field-material";
 
 import { styles } from "./Signup.style";
 

@@ -3,4 +3,5 @@ export interface IUserState {
   email: string;
   id: string;
   signedIn: boolean;
+  role: string;
 }

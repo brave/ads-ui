@@ -16,6 +16,7 @@ export const signUpReducer = (state: IUserState, action: IUserAction): IUserStat
         accessToken: "",
         email: (action.payload as ISignUpPayload).email,
         id: "",
+        role: "",
         signedIn: false,
       };
     case SIGN_UP_SUCCESSFUL:
@@ -23,6 +24,7 @@ export const signUpReducer = (state: IUserState, action: IUserAction): IUserStat
         accessToken: "",
         email: (action.payload as ISignUpSuccessfulPayload).email,
         id: "",
+        role: "",
         signedIn: false,
       };
     case SIGN_UP_FAILED:
@@ -30,6 +32,7 @@ export const signUpReducer = (state: IUserState, action: IUserAction): IUserStat
         accessToken: "",
         email: "",
         id: "",
+        role: "",
         signedIn: false,
       };
     default:

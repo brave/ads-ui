@@ -14,13 +14,13 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Link, Redirect, Route, Switch } from "react-router-dom";
 
-import { CloseDrawer } from "../../actions";
-import Appbar from "../../components/Appbar/Appbar";
-import Campaigns from "../Campaigns/Campaigns";
-import Creatives from "../Creatives/Creatives";
-import Dashboard from "../Dashboard/Dashboard";
-import Performances from "../Performances/Performances";
-import Preferences from "../Preferences/Preferences";
+import { CloseDrawer } from "../../../actions";
+import Appbar from "../../../components/Appbar/Appbar";
+import Campaigns from "../../Campaigns/Campaigns";
+import Creatives from "../../Creatives/Creatives";
+import Dashboard from "../../Dashboard/Advertiser/Dashboard";
+import Performances from "../../Performances/Performances";
+import Preferences from "../../Preferences/Preferences";
 
 import { styles } from "./Main.style";
 
@@ -28,7 +28,7 @@ class Main extends React.Component<any, any> {
 
   public render(): any {
     if (!this.props.user || !this.props.user.signedIn) {
-      return (<Redirect to="/auth" />);
+      return (<Redirect to="/auth/signin" />);
     }
     const { classes } = this.props;
     const drawerItems = (

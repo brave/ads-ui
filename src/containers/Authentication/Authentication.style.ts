@@ -2,8 +2,8 @@ export const styles: any = {
   paper: {
     display: "flex",
     flexDirection: "column",
-    height: "300px",
-    width: "300px",
+    minHeight: "300px",
+    minWidth: "300px",
   },
   root: {
     alignItems: "center",

@@ -23,16 +23,18 @@ export const SignInFailed = (payload: any): IUserAction => ({
 });
 
 export const SignIn = (payload: ISignInPayload) => {
-  return (dispatch: any) => {
-    dispatch(SignInStart(payload));
-    return axios.post(`${process.env.REACT_APP_SERVER_ADDRESS}/auth/token`, payload, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((response: any) => {
+  return async (dispatch: any) => {
+    try {
+      dispatch(SignInStart(payload));
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_ADDRESS}/auth/token`, payload, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       dispatch(SignInSuccessful(response.data));
       dispatch(OpenSnackBar("Signed In Successfully"));
-    }).catch((error: any) => {
+      return Promise.resolve(response.data);
+    } catch (error) {
       dispatch(SignInFailed(error));
       if (error.response) {
         dispatch(OpenSnackBar(`Sign In Faild: ${error.response.data.error}`));
@@ -41,7 +43,8 @@ export const SignIn = (payload: ISignInPayload) => {
       } else {
         dispatch(OpenSnackBar(`Sign In Faild: ${error.message}`));
       }
-    });
+      return Promise.reject(error);
+    }
   };
 };
 

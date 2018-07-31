@@ -24,7 +24,4 @@ export interface ISignUpSuccessfulPayload {
 
 export interface IUserPayload {
   accessToken: string;
-  expiresIn: number;
-  email: string;
-  id: string;
 }

@@ -11,6 +11,7 @@ const userReducer = (
     accessToken: "",
     email: "",
     id: "",
+    role: "",
     signedIn: false,
   },
   action: IUserAction,
