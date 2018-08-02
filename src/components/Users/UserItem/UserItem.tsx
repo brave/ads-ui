@@ -4,15 +4,23 @@ import { Link } from "react-router-dom";
 
 import { styles } from "./UserItem.style";
 
-class CampaignItem extends React.Component<any, any> {
+class UserItem extends React.Component<any, any> {
   public render() {
     const { classes, user, match } = this.props;
     return (
       <TableRow className={classes.table}>
-        <TableCell>{user.email}</TableCell>
-        <TableCell>{user.fullName}</TableCell>
-        <TableCell>{user.emailVerified}</TableCell>
-        <TableCell>{user.role}</TableCell>
+        <TableCell>
+          <div>{user.email}</div>
+        </TableCell>
+        <TableCell>
+          <div>{user.fullName}</div>
+        </TableCell>
+        <TableCell>
+          <div>{user.emailVerified.toString()}</div>
+        </TableCell>
+        <TableCell>
+          <div>{user.role}</div>
+        </TableCell>
         <TableCell>
           <Link to={`${match.url}/${user.id}`}>
             <IconButton color="primary">
@@ -53,4 +61,4 @@ class CampaignItem extends React.Component<any, any> {
   }
 }
 
-export default withStyles(styles)(CampaignItem);
+export default withStyles(styles)(UserItem);

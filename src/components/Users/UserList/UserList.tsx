@@ -1,11 +1,21 @@
-import { Button, Card, CardContent, Icon, Table, TableCell, TableHead, TableRow, withStyles } from "@material-ui/core";
+import {
+  Button,
+  Card, CardContent,
+  Icon,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  withStyles,
+} from "@material-ui/core";
 import * as React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { GetAllUser } from "../../../actions";
 
-// import UserItem from "../UserItem/UserItem";
+import UserItem from "../UserItem/UserItem";
 
 import { styles } from "./UserList.style";
 
@@ -14,15 +24,13 @@ class UserList extends React.Component<any, any> {
     this.props.GetAllUsers(this.props.auth);
   }
   public render() {
-    const { classes } = this.props;
+    const { classes, users, match } = this.props;
     // const { campaigns } = this.props.campaignReducer;
-    // const listItems = campaigns.map((item: any) => {
-    //   return (
-    //     <div key={item.id} className={classes.item}>
-    //       <UserItem match={match} campaign={item} />
-    //     </div>
-    //   );
-    // });
+    const listItems = users.map((item: any) => {
+      return (
+        <UserItem key={item.id} match={match} user={item} />
+      );
+    });
     return (
       <div className={classes.root}>
         <Card>
@@ -47,12 +55,12 @@ class UserList extends React.Component<any, any> {
               </TableCell>
                 </TableRow>
               </TableHead>
+              <TableBody>
+                {listItems}
+              </TableBody>
             </Table>
           </CardContent>
         </Card>
-        {/* <div className={classes.list}>
-          {listItems}
-        </div> */}
         <Link className={classes.fab} to="/main/campaigns/new">
           <Button color="secondary" variant="fab">
             <Icon>add</Icon>
@@ -65,7 +73,7 @@ class UserList extends React.Component<any, any> {
 
 const mapStateToProps = (state: any, ownProps: any) => ({
   auth: state.authReducer,
-  users: state.userReducer,
+  users: state.userReducer.users,
 });
 
 const mapDispathToProps = (dispatch: any, ownProps: any) => ({
