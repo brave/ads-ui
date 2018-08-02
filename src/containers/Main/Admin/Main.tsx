@@ -16,11 +16,8 @@ import { Link, Redirect, Route, Switch } from "react-router-dom";
 
 import { CloseDrawer } from "../../../actions";
 import Appbar from "../../../components/Appbar/Appbar";
-import Campaigns from "../../Campaigns/Campaigns";
-import Creatives from "../../Creatives/Creatives";
 import Dashboard from "../../Dashboard/Admin/Dashboard";
-import Performances from "../../Performances/Performances";
-import Preferences from "../../Preferences/Preferences";
+import Users from "../../Users/Users";
 
 import { styles } from "./Main.style";
 
@@ -33,7 +30,7 @@ class Main extends React.Component<any, any> {
     const { classes } = this.props;
     const drawerItems = (
       <List>
-        <Link to="/main/dashboard" className={classes.link}>
+        <Link to="/admin/main/dashboard" className={classes.link}>
           <ListItem button>
             <ListItemIcon>
               <Icon>dashboard</Icon>
@@ -41,36 +38,12 @@ class Main extends React.Component<any, any> {
             <ListItemText primary="Dashboard" />
           </ListItem>
         </Link>
-        <Link to="/main/creatives" className={classes.link}>
+        <Link to="/admin/main/users" className={classes.link}>
           <ListItem button>
             <ListItemIcon>
-              <Icon>apps</Icon>
+              <Icon>person</Icon>
             </ListItemIcon>
-            <ListItemText primary="Creative Library" />
-          </ListItem>
-        </Link>
-        <Link to="/main/campaigns" className={classes.link}>
-          <ListItem button>
-            <ListItemIcon>
-              <Icon>next_week</Icon>
-            </ListItemIcon>
-            <ListItemText primary="Campaigns" />
-          </ListItem>
-        </Link>
-        <Link to="/main/performances" className={classes.link}>
-          <ListItem button>
-            <ListItemIcon>
-              <Icon>timeline</Icon>
-            </ListItemIcon>
-            <ListItemText primary="Performances" />
-          </ListItem>
-        </Link>
-        <Link to="/main/preferences" className={classes.link}>
-          <ListItem button>
-            <ListItemIcon>
-              <Icon>settings</Icon>
-            </ListItemIcon>
-            <ListItemText primary="Preferences" />
+            <ListItemText primary="Users" />
           </ListItem>
         </Link>
       </List>
@@ -100,10 +73,7 @@ class Main extends React.Component<any, any> {
           <div className={classes.toolbar} />
           <Switch>
             <Route path={this.props.match.url + "/dashboard"} component={Dashboard} />
-            <Route path={this.props.match.url + "/creatives"} component={Creatives} />
-            <Route path={this.props.match.url + "/campaigns"} component={Campaigns} />
-            <Route path={this.props.match.url + "/performances"} component={Performances} />
-            <Route path={this.props.match.url + "/preferences"} component={Preferences} />
+            <Route path={this.props.match.url + "/users"} component={Users} />
             <Redirect to={this.props.match.url + "/dashboard"} />
           </Switch>
         </main>
