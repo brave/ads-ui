@@ -2,29 +2,30 @@ import axios from "axios";
 
 import { OpenSnackBar } from "../snackbar";
 
-import { IAuthAction, IAuthPayload, ISignUpSuccessfulPayload } from "../auth/user.interface";
+import { IAuthPayload } from "../auth";
+import { IUserAction, IUserPayload } from "./users.interface";
 
 export const GETALL_USER_START = "GETALLUSERSTART";
-export const GetAllUserStart = (payload: IAuthPayload): IAuthAction => ({
-  payload,
+export const GetAllUserStart = (): IUserAction => ({
+  payload: null,
   type: GETALL_USER_START,
 });
 
 export const GETALL_USER_SUCCESSFUL = "GETALLUSERSUCCESSFUL";
-export const GetAllUserSuccessful = (payload: ISignUpSuccessfulPayload[]): IAuthAction => ({
+export const GetAllUserSuccessful = (payload: IUserPayload[]): IUserAction => ({
   payload,
   type: GETALL_USER_SUCCESSFUL,
 });
 
 export const GETALL_USER_FAILED = "GETALLUSERFAILED";
-export const GetAllUserFailed = (): IAuthAction => ({
+export const GetAllUserFailed = (): IUserAction => ({
   payload: null,
   type: GETALL_USER_FAILED,
 });
 
 export const GetAllUser = (user: IAuthPayload) => {
   return (dispatch: any) => {
-    dispatch(GetAllUserStart(user));
+    dispatch(GetAllUserStart());
     return axios.get(`${process.env.REACT_APP_SERVER_ADDRESS}/user`, {
       headers: {
         "Authorization": `Bearer ${user.accessToken}`,

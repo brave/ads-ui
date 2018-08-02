@@ -8,6 +8,7 @@ import drawerReducer from "./drawer";
 import geoCodeReducer from "./geocode";
 import segmentReducer from "./segment";
 import snackBarReducer from "./snackbar";
+import userReducer from "./user";
 
 export default combineReducers({
   authReducer,
@@ -18,4 +19,5 @@ export default combineReducers({
   geoCodeReducer,
   segmentReducer,
   snackBarReducer,
+  userReducer,
 });

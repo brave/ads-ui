@@ -1,3 +1,3 @@
-export * from "./user.interface";
-export * from "./user.signin";
-export * from "./user.signup";
+export * from "./auth.interface";
+export * from "./auth.signin";
+export * from "./auth.signup";

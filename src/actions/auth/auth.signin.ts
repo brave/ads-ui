@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { OpenSnackBar } from "../snackbar";
 
-import { IAuthAction, IAuthPayload, ISignInPayload } from "./user.interface";
+import { IAuthAction, IAuthPayload, ISignInPayload } from "./auth.interface";
 
 export const SIGN_IN_START = "SIGNINSTART";
 export const SignInStart = (payload: ISignInPayload): IAuthAction => ({
