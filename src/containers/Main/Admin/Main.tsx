@@ -23,13 +23,13 @@ import { styles } from "./Main.style";
 class Main extends React.Component<any, any> {
 
   public render(): any {
-    const { auth, classes } = this.props;
+    const { auth, classes, drawer, match } = this.props;
     if (!auth || !auth.signedIn) {
       return (<Redirect to="/auth/signin" />);
     }
     const drawerItems = (
       <List>
-        <Link to="/admin/main/dashboard" className={classes.link}>
+        <Link to={match.url + "/dashboard"} className={classes.link}>
           <ListItem button>
             <ListItemIcon>
               <Icon>dashboard</Icon>
@@ -37,7 +37,7 @@ class Main extends React.Component<any, any> {
             <ListItemText primary="Dashboard" />
           </ListItem>
         </Link>
-        <Link to="/admin/main/users" className={classes.link}>
+        <Link to={match.url + "/users"} className={classes.link}>
           <ListItem button>
             <ListItemIcon>
               <Icon>person</Icon>
@@ -52,7 +52,7 @@ class Main extends React.Component<any, any> {
         <Appbar />
         <Hidden smDown implementation="css">
           <Drawer variant="permanent" open={false} classes={{
-            paper: classNames(classes.drawerPaper, !this.props.drawer.open && classes.drawerPaperClose),
+            paper: classNames(classes.drawerPaper, !drawer.open && classes.drawerPaperClose),
           }}>
             <div className={classes.toolbar}>
             </div>
@@ -61,7 +61,7 @@ class Main extends React.Component<any, any> {
           </Drawer>
         </Hidden>
         <Hidden mdUp>
-          <Drawer variant="persistent" anchor="left" open={this.props.drawer.open}>
+          <Drawer variant="persistent" anchor="left" open={drawer.open}>
             <div className={classes.toolbar}>
             </div>
             <Divider />
@@ -71,9 +71,9 @@ class Main extends React.Component<any, any> {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Switch>
-            <Route path={this.props.match.url + "/dashboard"} component={Dashboard} />
-            <Route path={this.props.match.url + "/users"} component={Users} />
-            <Redirect to={this.props.match.url + "/dashboard"} />
+            <Route path={match.url + "/dashboard"} component={Dashboard} />
+            <Route path={match.url + "/users"} component={Users} />
+            <Redirect to={match.url + "/dashboard"} />
           </Switch>
         </main>
       </div>

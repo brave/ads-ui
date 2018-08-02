@@ -24,8 +24,7 @@ class UserList extends React.Component<any, any> {
     this.props.GetAllUsers(this.props.auth);
   }
   public render() {
-    const { classes, users, match } = this.props;
-    // const { campaigns } = this.props.campaignReducer;
+    const { classes, match, users } = this.props;
     const listItems = users.map((item: any) => {
       return (
         <UserItem key={item.id} match={match} user={item} />
@@ -61,7 +60,7 @@ class UserList extends React.Component<any, any> {
             </Table>
           </CardContent>
         </Card>
-        <Link className={classes.fab} to="/main/campaigns/new">
+        <Link className={classes.fab} to={match.url + "/new"}>
           <Button color="secondary" variant="fab">
             <Icon>add</Icon>
           </Button>
