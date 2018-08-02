@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { ICreateFlightPayload, IFlightAction, IFlightPayload } from ".";
-import { IUserPayload } from "..";
+import { IAuthPayload } from "../auth";
 import { OpenSnackBar } from "../snackbar";
 
 export const CREATE_FLIGHTS_START = "CREATEFLIGHTSSTART";
@@ -22,7 +22,7 @@ export const CreateFlightsFailed = (): IFlightAction => ({
   type: CREATE_FLIGHTS_FAILED,
 });
 
-export const CreateFlights = (flight: ICreateFlightPayload, user: IUserPayload) => {
+export const CreateFlights = (flight: ICreateFlightPayload, user: IAuthPayload) => {
   return async (dispatch: any) => {
     try {
       dispatch(CreateFlightsStart(flight));

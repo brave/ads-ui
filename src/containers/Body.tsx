@@ -19,12 +19,12 @@ class Body extends React.Component<any, any> {
   }
 
   private getRedirect() {
-    const { user } = this.props;
-    if (user && user.signedIn) {
-      if (user.role === "admin") {
+    const { auth } = this.props;
+    if (auth && auth.signedIn) {
+      if (auth.role === "admin") {
         return <Redirect to="/admin/main" />;
       } else {
-        return <Redirect to="/main" />;
+        return <Redirect to="/user/main" />;
       }
     } else {
       return <Redirect to="/auth/signin" />;
@@ -33,7 +33,7 @@ class Body extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
-  user: state.userReducer,
+  auth: state.authReducer,
 });
 
 export default withRouter(connect(mapStateToProps)(Body));

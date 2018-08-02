@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { IFlightAction, IFlightGeoTargetingPayload } from ".";
-import { IUserPayload } from "..";
+import { IAuthPayload } from "../auth";
 import { OpenSnackBar } from "../snackbar";
 
 export const ADD_FLIGHT_GEOTARGETING_START = "ADDFLIGHTGEOTARGETINGSTART";
@@ -22,7 +22,7 @@ export const AddFlightGeoTargetingFaild = (): IFlightAction => ({
   type: ADD_FLIGHT_GEOTARGETING_FAILD,
 });
 
-export const AddFlightGeoTargeting = (flightID: string, user: IUserPayload, geocode: IFlightGeoTargetingPayload) => {
+export const AddFlightGeoTargeting = (flightID: string, user: IAuthPayload, geocode: IFlightGeoTargetingPayload) => {
   return async (dispatch: any) => {
     try {
       dispatch(AddFlightGeoTargetingStart(geocode));

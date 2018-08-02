@@ -14,7 +14,6 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Link, Redirect, Route, Switch } from "react-router-dom";
 
-import { CloseDrawer } from "../../../actions";
 import Appbar from "../../../components/Appbar/Appbar";
 import Dashboard from "../../Dashboard/Admin/Dashboard";
 import Users from "../../Users/Users";
@@ -24,10 +23,10 @@ import { styles } from "./Main.style";
 class Main extends React.Component<any, any> {
 
   public render(): any {
-    if (!this.props.user || !this.props.user.signedIn) {
+    const { auth, classes } = this.props;
+    if (!auth || !auth.signedIn) {
       return (<Redirect to="/auth/signin" />);
     }
-    const { classes } = this.props;
     const drawerItems = (
       <List>
         <Link to="/admin/main/dashboard" className={classes.link}>
@@ -83,13 +82,8 @@ class Main extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
+  auth: state.authReducer,
   drawer: state.drawerReducer,
-  user: state.userReducer,
 });
 
-const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
-  CloseDrawer: () => dispatch(CloseDrawer({})),
-  Signout: () => dispatch(CloseDrawer({})),
-});
-
-export default withStyles(styles, { withTheme: true })(connect(mapStateToProps, mapDispatchToProps)(Main));
+export default withStyles(styles, { withTheme: true })(connect(mapStateToProps)(Main));

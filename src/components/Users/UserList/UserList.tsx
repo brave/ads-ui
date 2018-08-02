@@ -3,7 +3,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { GetCampaigns } from "../../../actions";
+import { GetAllUser } from "../../../actions";
 
 // import UserItem from "../UserItem/UserItem";
 
@@ -11,7 +11,7 @@ import { styles } from "./UserList.style";
 
 class UserList extends React.Component<any, any> {
   public componentDidMount() {
-    this.props.GetCampaigns(this.props.userReducer);
+    this.props.GetAllUsers(this.props.auth);
   }
   public render() {
     const { classes } = this.props;
@@ -64,12 +64,12 @@ class UserList extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
-  campaignReducer: state.campaignReducer,
-  userReducer: state.userReducer,
+  auth: state.authReducer,
+  users: state.userReducer,
 });
 
 const mapDispathToProps = (dispatch: any, ownProps: any) => ({
-  GetCampaigns: (user: any) => dispatch(GetCampaigns(user)),
+  GetAllUsers: (user: any) => dispatch(GetAllUser(user)),
 });
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispathToProps)(UserList));

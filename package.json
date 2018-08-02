@@ -40,6 +40,6 @@
     "@types/react-router-dom": "^4.3.0",
     "@types/redux-form": "^7.4.3",
     "@types/redux-logger": "^3.0.6",
-    "typescript": "^2.9.2"
+    "typescript": "^3.0.1"
   }
 }

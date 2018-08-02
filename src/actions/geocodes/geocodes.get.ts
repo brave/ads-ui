@@ -1,6 +1,7 @@
 import axios from "axios";
 
-import { IGeocodePayload, IUserPayload } from "..";
+import { IGeocodePayload } from ".";
+import { IAuthPayload } from "../auth";
 import { OpenSnackBar } from "../snackbar";
 
 export const GET_GEOCODES_START = "GETGEOCODESSTART";
@@ -21,7 +22,7 @@ export const GetGeocodesFaild = () => ({
   type: GET_GEOCODES_FAILD,
 });
 
-export const GetGeocodes = (user: IUserPayload) => {
+export const GetGeocodes = (user: IAuthPayload) => {
   return async (dispatch: any) => {
     try {
       dispatch(GetGeocodesStart());

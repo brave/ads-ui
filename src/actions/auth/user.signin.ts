@@ -2,22 +2,22 @@ import axios from "axios";
 
 import { OpenSnackBar } from "../snackbar";
 
-import { ISignInPayload, IUserAction, IUserPayload } from "./user.interface";
+import { IAuthAction, IAuthPayload, ISignInPayload } from "./user.interface";
 
 export const SIGN_IN_START = "SIGNINSTART";
-export const SignInStart = (payload: ISignInPayload): IUserAction => ({
+export const SignInStart = (payload: ISignInPayload): IAuthAction => ({
   payload,
   type: SIGN_IN_START,
 });
 
 export const SIGN_IN_SUCCESSFUL = "SIGNINSUCCESSFUL";
-export const SignInSuccessful = (payload: IUserPayload): IUserAction => ({
+export const SignInSuccessful = (payload: IAuthPayload): IAuthAction => ({
   payload,
   type: SIGN_IN_SUCCESSFUL,
 });
 
 export const SIGN_IN_FAILED = "SIGNINFAILED";
-export const SignInFailed = (payload: any): IUserAction => ({
+export const SignInFailed = (payload: any): IAuthAction => ({
   payload,
   type: SIGN_IN_FAILED,
 });
@@ -49,7 +49,7 @@ export const SignIn = (payload: ISignInPayload) => {
 };
 
 export const SIGN_OUT = "SIGNOUT";
-export const SignOut = (): IUserAction => ({
+export const SignOut = (): IAuthAction => ({
   payload: null,
   type: SIGN_OUT,
 });

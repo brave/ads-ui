@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { ICreativeAction, ICreativePayload } from ".";
-import { IUserPayload } from "..";
+import { IAuthPayload } from "../auth";
 import { OpenSnackBar } from "../snackbar";
 
 export const UPDATE_CREATIVES_START = "UPDATECREATIVESSTART";
@@ -22,7 +22,7 @@ export const UpdateCreativesFailed = (): ICreativeAction => ({
   type: UPDATE_CREATIVES_FAILED,
 });
 
-export const UpdateCreatives = (creative: Partial<ICreativePayload>, user: IUserPayload) => {
+export const UpdateCreatives = (creative: Partial<ICreativePayload>, user: IAuthPayload) => {
   return async (dispatch: any) => {
     try {
       dispatch(UpdateCreativesStart(creative));

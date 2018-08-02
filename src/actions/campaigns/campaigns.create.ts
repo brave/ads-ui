@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { IUserPayload } from "../user";
+import { IAuthPayload } from "../auth";
 
 import { ICampaignAction, ICampaignPayload, ICreateCampaignPayload } from ".";
 import { OpenSnackBar } from "../snackbar";
@@ -23,7 +23,7 @@ export const CreateCampaignsFailed = () => ({
   type: CREATE_CAMPAIGNS_FAILED,
 });
 
-export const CreateCampaigns = (campaign: ICreateCampaignPayload, user: IUserPayload) => {
+export const CreateCampaigns = (campaign: ICreateCampaignPayload, user: IAuthPayload) => {
   return async (dispatch: any) => {
     try {
       dispatch(CreateCampaignsStart(campaign));

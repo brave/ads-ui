@@ -1,20 +1,20 @@
 import { SIGN_IN_FAILED, SIGN_IN_START, SIGN_IN_SUCCESSFUL, SIGN_OUT } from "../../actions";
 import { SIGN_UP_FAILED, SIGN_UP_START, SIGN_UP_SUCCESSFUL } from "../../actions";
-import { IUserAction } from "../../actions";
+import { IAuthAction } from "../../actions";
 
-import { IUserState } from "./user.interface";
-import { signInReducer } from "./user.signin";
-import { signUpReducer } from "./user.signup";
+import { IAuthState } from "./auth.interface";
+import { signInReducer } from "./auth.signin";
+import { signUpReducer } from "./auth.signup";
 
-const userReducer = (
-  state: IUserState = {
+const authReducer = (
+  state: IAuthState = {
     accessToken: "",
     email: "",
     id: "",
     role: "",
     signedIn: false,
   },
-  action: IUserAction,
+  action: IAuthAction,
 ) => {
   switch (action.type) {
     case SIGN_IN_START:
@@ -31,4 +31,4 @@ const userReducer = (
   }
 };
 
-export default userReducer;
+export default authReducer;

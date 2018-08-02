@@ -1,6 +1,11 @@
-export interface IUserAction {
+export interface IAuthAction {
   type: string;
-  payload: ISignInPayload | ISignUpPayload | IUserPayload | ISignUpSuccessfulPayload | null;
+  payload: ISignInPayload |
+  ISignUpPayload |
+  IAuthPayload |
+  ISignUpSuccessfulPayload |
+  ISignUpSuccessfulPayload[] |
+  null;
 }
 
 export interface ISignInPayload {
@@ -19,9 +24,9 @@ export interface ISignUpSuccessfulPayload {
   organizationName: string;
   modifiedAt: string;
   createdAt: string;
-  username: string;
+  role: string;
 }
 
-export interface IUserPayload {
+export interface IAuthPayload {
   accessToken: string;
 }

@@ -1,11 +1,11 @@
 import * as jwtDecode from "jwt-decode";
 
 import { ISignInPayload, SIGN_IN_FAILED, SIGN_IN_START, SIGN_IN_SUCCESSFUL, SIGN_OUT } from "../../actions";
-import { IUserAction, IUserPayload } from "../../actions";
+import { IAuthAction, IAuthPayload } from "../../actions";
 
-import { IUserState } from "./user.interface";
+import { IAuthState } from "./auth.interface";
 
-export const signInReducer = (state: IUserState, action: IUserAction): IUserState => {
+export const signInReducer = (state: IAuthState, action: IAuthAction): IAuthState => {
   switch (action.type) {
     case SIGN_IN_START:
       return {
@@ -16,7 +16,7 @@ export const signInReducer = (state: IUserState, action: IUserAction): IUserStat
         signedIn: false,
       };
     case SIGN_IN_SUCCESSFUL:
-      const accessToken = (action.payload as IUserPayload).accessToken;
+      const accessToken = (action.payload as IAuthPayload).accessToken;
       const decodedToken = jwtDecode(accessToken) as any;
       return {
         accessToken,

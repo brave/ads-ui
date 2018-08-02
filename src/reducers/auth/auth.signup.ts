@@ -1,15 +1,15 @@
 import {
+  IAuthAction,
   ISignUpPayload,
   ISignUpSuccessfulPayload,
-  IUserAction,
   SIGN_UP_FAILED,
   SIGN_UP_START,
   SIGN_UP_SUCCESSFUL,
 } from "../../actions";
 
-import { IUserState } from "./user.interface";
+import { IAuthState } from "./auth.interface";
 
-export const signUpReducer = (state: IUserState, action: IUserAction): IUserState => {
+export const signUpReducer = (state: IAuthState, action: IAuthAction): IAuthState => {
   switch (action.type) {
     case SIGN_UP_START:
       return {

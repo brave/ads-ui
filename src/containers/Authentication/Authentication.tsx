@@ -13,10 +13,14 @@ class Authentication extends React.Component<any, any> {
   };
 
   public render() {
-    const { classes, user } = this.props;
+    const { classes, auth } = this.props;
 
-    if (user && user.signedIn) {
-      return (<Redirect to="/dashboard" />);
+    if (auth && auth.signedIn) {
+      if (auth.role === "admin") {
+        return <Redirect to="/admin/main" />;
+      } else {
+        return <Redirect to="/user/main" />;
+      }
     }
     return (
       <div className={classes.root}>
@@ -30,7 +34,7 @@ class Authentication extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
-  user: state.userReducer,
+  auth: state.authReducer,
 });
 
 export default  withStyles(styles)(connect(mapStateToProps)(Authentication));

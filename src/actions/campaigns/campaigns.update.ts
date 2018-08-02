@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { ICampaignAction, ICampaignPayload } from ".";
-import { IUserPayload } from "..";
+import { IAuthPayload } from "../auth";
 import { OpenSnackBar } from "../snackbar";
 
 export const UPDATE_CAMPAIGNS_START = "UPDATECAMPAIGNSSTART";
@@ -22,7 +22,7 @@ export const UpdateCampaignsFailed = (): ICampaignAction => ({
   type: UPDATE_CAMPAIGNS_FAILED,
 });
 
-export const UpdateCampaigns = (campaign: Partial<ICampaignPayload>, user: IUserPayload) => {
+export const UpdateCampaigns = (campaign: Partial<ICampaignPayload>, user: IAuthPayload) => {
   return async (dispatch: any) => {
     try {
       dispatch(UpdateCampaignsStart(campaign));
