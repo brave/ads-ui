@@ -12,7 +12,7 @@ import { styles } from "./CampaignList.style";
 
 class CampaignList extends React.Component<any, any> {
   public componentDidMount() {
-    this.props.GetCampaigns(this.props.userReducer);
+    this.props.GetCampaigns(this.props.auth);
   }
   public render() {
     const { classes, match } = this.props;
@@ -41,8 +41,8 @@ class CampaignList extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
+  auth: state.authReducer,
   campaignReducer: state.campaignReducer,
-  userReducer: state.userReducer,
 });
 
 const mapDispathToProps = (dispatch: any, ownProps: any) => ({

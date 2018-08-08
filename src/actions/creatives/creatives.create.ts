@@ -38,7 +38,7 @@ export const CreateCreatives = (creative: ICreateCreativePayload, user: IAuthPay
     } catch (error) {
       dispatch(CreateCreativesFailed());
       if (error.response) {
-        dispatch(OpenSnackBar(`Create Creatives Faild: ${error.response.data.message}`));
+        dispatch(OpenSnackBar(`Create Creatives Faild: ${error.response.data.error}`));
       } else if (error.request) {
         dispatch(OpenSnackBar(`Create Creatives Faild: Network Error`));
       } else {

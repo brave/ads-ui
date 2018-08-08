@@ -26,7 +26,7 @@ export const UserCreateFailed = (): IUserAction => ({
 export const UserCreate = (payload: IUserPayload, user: IAuthPayload) => {
   return (dispatch: any) => {
     dispatch(UserCreateStart(payload));
-    return axios.post(`${process.env.REACT_APP_SERVER_ADDRESS}/user`, payload, {
+    return axios.post(`${process.env.REACT_APP_SERVER_ADDRESS}/user/admin`, payload, {
       headers: {
         "Authorization": `Bearer ${user.accessToken}`,
         "Content-Type": "application/json",

@@ -27,13 +27,13 @@ import { styles } from "./Main.style";
 class Main extends React.Component<any, any> {
 
   public render(): any {
-    if (!this.props.user || !this.props.user.signedIn) {
+    if (!this.props.auth || !this.props.auth.signedIn) {
       return (<Redirect to="/auth/signin" />);
     }
-    const { classes } = this.props;
+    const { classes, match } = this.props;
     const drawerItems = (
       <List>
-        <Link to="/main/dashboard" className={classes.link}>
+        <Link to={match.url + "/dashboard"} className={classes.link}>
           <ListItem button>
             <ListItemIcon>
               <Icon>dashboard</Icon>
@@ -41,7 +41,7 @@ class Main extends React.Component<any, any> {
             <ListItemText primary="Dashboard" />
           </ListItem>
         </Link>
-        <Link to="/main/creatives" className={classes.link}>
+        <Link to={match.url + "/creatives"} className={classes.link}>
           <ListItem button>
             <ListItemIcon>
               <Icon>apps</Icon>
@@ -49,7 +49,7 @@ class Main extends React.Component<any, any> {
             <ListItemText primary="Creative Library" />
           </ListItem>
         </Link>
-        <Link to="/main/campaigns" className={classes.link}>
+        <Link to={match.url + "/campaigns"} className={classes.link}>
           <ListItem button>
             <ListItemIcon>
               <Icon>next_week</Icon>
@@ -57,7 +57,7 @@ class Main extends React.Component<any, any> {
             <ListItemText primary="Campaigns" />
           </ListItem>
         </Link>
-        <Link to="/main/performances" className={classes.link}>
+        <Link to={match.url + "/performances"} className={classes.link}>
           <ListItem button>
             <ListItemIcon>
               <Icon>timeline</Icon>
@@ -65,7 +65,7 @@ class Main extends React.Component<any, any> {
             <ListItemText primary="Performances" />
           </ListItem>
         </Link>
-        <Link to="/main/preferences" className={classes.link}>
+        <Link to={match.url + "/preferences"} className={classes.link}>
           <ListItem button>
             <ListItemIcon>
               <Icon>settings</Icon>
@@ -99,12 +99,12 @@ class Main extends React.Component<any, any> {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Switch>
-            <Route path={this.props.match.url + "/dashboard"} component={Dashboard} />
-            <Route path={this.props.match.url + "/creatives"} component={Creatives} />
-            <Route path={this.props.match.url + "/campaigns"} component={Campaigns} />
-            <Route path={this.props.match.url + "/performances"} component={Performances} />
-            <Route path={this.props.match.url + "/preferences"} component={Preferences} />
-            <Redirect to={this.props.match.url + "/dashboard"} />
+            <Route path={match.url + "/dashboard"} component={Dashboard} />
+            <Route path={match.url + "/creatives"} component={Creatives} />
+            <Route path={match.url + "/campaigns"} component={Campaigns} />
+            <Route path={match.url + "/performances"} component={Performances} />
+            <Route path={match.url + "/preferences"} component={Preferences} />
+            <Redirect to={match.url + "/dashboard"} />
           </Switch>
         </main>
       </div>
@@ -113,8 +113,8 @@ class Main extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
+  auth: state.authReducer,
   drawer: state.drawerReducer,
-  user: state.userReducer,
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({

@@ -37,7 +37,7 @@ export const GetCampaigns = (user: IAuthPayload) => {
     } catch (error) {
       dispatch(GetCampaignsFaild());
       if (error.response) {
-        dispatch(OpenSnackBar(`Get Campaigns Faild: ${error.response.data.message}`));
+        dispatch(OpenSnackBar(`Get Campaigns Faild: ${error.response.data.error}`));
       } else if (error.request) {
         dispatch(OpenSnackBar(`Get Campaigns Faild: Network Error`));
       } else {

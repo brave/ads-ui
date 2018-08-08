@@ -37,7 +37,7 @@ export const UpdateCampaigns = (campaign: Partial<ICampaignPayload>, user: IAuth
     } catch (error) {
       dispatch(UpdateCampaignsFailed());
       if (error.response) {
-        dispatch(OpenSnackBar(`Update Campaigns Faild: ${error.response.data.message}`));
+        dispatch(OpenSnackBar(`Update Campaigns Faild: ${error.response.data.error}`));
       } else if (error.request) {
         dispatch(OpenSnackBar(`Update Campaigns Faild: Network Error`));
       } else {

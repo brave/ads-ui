@@ -10,9 +10,9 @@ import { styles } from "./CampaignNew.style";
 
 class CampaignNew extends React.Component<any, any> {
   public render() {
-    const { classes, create, user, history } = this.props;
+    const { classes, create, auth, history } = this.props;
     const handleSubmit = async (value: any) => {
-      const result = await create(value, user);
+      const result = await create(value, auth);
       history.push(`/main/campaigns/${result.id}`);
     };
     return (
@@ -33,7 +33,7 @@ class CampaignNew extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
-  user: state.userReducer,
+  auth: state.authReducer,
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
