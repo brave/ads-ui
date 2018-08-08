@@ -52,6 +52,7 @@ class Main extends React.Component<any, any> {
         <Appbar />
         <Hidden smDown implementation="css">
           <Drawer variant="permanent" open={false} classes={{
+            docked: classNames(classes.docked),
             paper: classNames(classes.drawerPaper, !drawer.open && classes.drawerPaperClose),
           }}>
             <div className={classes.toolbar}>

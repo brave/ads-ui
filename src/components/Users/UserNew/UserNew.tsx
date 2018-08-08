@@ -3,17 +3,20 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
-import { CreateCampaigns } from "../../../actions";
+import { UserCreate } from "../../../actions";
 import UserForm from "../UserForm/UserForm";
 
 import { styles } from "./UserNew.style";
 
 class UserNew extends React.Component<any, any> {
   public render() {
-    const { classes, create, auth, history } = this.props;
+    const { classes, create, auth, history, match } = this.props;
     const handleSubmit = async (value: any) => {
       const result = await create(value, auth);
-      history.push(`/main/campaigns/${result.id}`);
+      // tslint:disable-next-line:no-console
+      console.log(result);
+      const url = match.url.replace("/new", "");
+      history.push(`${url}/${result.id}`);
     };
     return (
       <div className={classes.root}>
@@ -37,7 +40,7 @@ const mapStateToProps = (state: any, ownProps: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
-  create: (value: any, user: any) => dispatch((CreateCampaigns(value, user))),
+  create: (value: any, user: any) => dispatch((UserCreate(value, user))),
 });
 
 export default withRouter(withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(UserNew)) as any);

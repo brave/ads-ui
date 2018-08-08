@@ -13,7 +13,7 @@ import * as _ from "lodash";
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { UpdateCreatives } from "../../../actions";
+import { UserUpdate } from "../../../actions";
 
 import UserForm from "../../../components/Users/UserForm/UserForm";
 
@@ -92,7 +92,7 @@ const mapStateToProps = (state: any, ownProps: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
-  update: (value: any, user: any) => dispatch(UpdateCreatives(value, user)),
+  update: (value: any, user: any) => dispatch(UserUpdate(value, user)),
 });
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(CreativesView));

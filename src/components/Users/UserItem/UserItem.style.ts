@@ -27,4 +27,7 @@ export const styles: any = {
     flex: "1",
     justifyContent: "flex-end",
   },
+  viewButton: {
+    textDecoration: "none",
+  },
 };

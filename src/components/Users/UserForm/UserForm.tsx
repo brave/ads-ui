@@ -15,13 +15,12 @@ const validate = (values: any) => {
 };
 
 class UserForm extends React.Component<any, any> {
+
   public render() {
     const { user, classes, dispatch, handleSubmit, invalid, initialized, submitting, unlock } = this.props;
     if (user && !initialized) {
       delete user.createdAt;
       delete user.modifiedAt;
-      // tslint:disable-next-line:no-console
-      console.log(user);
       dispatch(initialize("UserForm", user));
     }
     return (
@@ -34,6 +33,10 @@ class UserForm extends React.Component<any, any> {
           <div>
             <Field className={classes.textField} disabled={!unlock}
               name="password" type="password" component={renderTextField} label="Password" />
+          </div>
+          <div>
+            <Field className={classes.textField} disabled={!unlock}
+              name="fullName" type="text" component={renderTextField} label="Full Name" />
           </div>
           <div>
             <Field disabled={!unlock}

@@ -1,12 +1,12 @@
 export interface IUserAction {
   type: string;
-  payload: IUserPayload[] | null;
+  payload: IUserPayload[] | IUserPayload | null;
 }
 
 export interface IUserPayload {
   id: string;
   email: string;
-  organizationName: string;
+  fullName: string;
   modifiedAt: string;
   createdAt: string;
   role: string;

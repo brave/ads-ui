@@ -22,41 +22,13 @@ class UserItem extends React.Component<any, any> {
           <div>{user.role}</div>
         </TableCell>
         <TableCell>
-          <Link to={`${match.url}/${user.id}`}>
+          <Link className={classes.viewButton} to={`${match.url}/${user.id}`}>
             <IconButton color="primary">
               <Icon>list</Icon>
             </IconButton>
           </Link>
         </TableCell>
       </TableRow>
-      // <Card className={classes.card}>
-      //   <CardContent className={classes.content}>
-      //     <div>
-      //       <Typography gutterBottom variant="headline" component="h2">
-      //         {campaign.name}
-      //       </Typography>
-      //     </div>
-      //     <div className={classes.indicator}>
-      //       <Avatar>
-      //         {campaign.creatives.length.toString()}
-      //       </Avatar>
-      //     </div>
-      //   </CardContent>
-      //   <CardActions className={classes.actions}>
-      //     <div className={classes.leftActions}>
-      //       <Link className={classes.link} to={`${match.url}/${campaign.id}`}>
-      //         <IconButton color="primary">
-      //           <Icon>list</Icon>
-      //         </IconButton>
-      //       </Link>
-      //     </div>
-      //     <div className={classes.rightActions}>
-      //       <IconButton color="primary">
-      //         <Icon>equalizer</Icon>
-      //       </IconButton>
-      //     </div>
-      //   </CardActions>
-      // </Card>
     );
   }
 }

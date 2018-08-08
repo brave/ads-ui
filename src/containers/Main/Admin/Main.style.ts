@@ -6,7 +6,11 @@ export const styles = (theme: any) => ({
     flexDirection: "column",
     width: "100%",
   },
+  docked: {
+    height: "100%",
+  },
   drawerPaper: {
+    height: "100%",
     position: "relative",
     transition: theme.transitions.create("width", {
       duration: theme.transitions.duration.enteringScreen,

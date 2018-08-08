@@ -28,6 +28,7 @@ export const renderCheckbox = ({
     <FormControlLabel label={label} control={
       <Checkbox
         checked={input.value ? true : false}
+        onChange={input.onChange}
         {...custom}
       />
     } />
@@ -35,13 +36,11 @@ export const renderCheckbox = ({
 
 export const renderSelectField = ({
   input,
-  meta: { touched, error },
   children,
   // tslint:disable-next-line:trailing-comma
   ...custom
 }: any) => (
     <Select
-      errorText={touched && error}
       {...input}
       onChange={(value) => input.onChange(value)}
       children={children}

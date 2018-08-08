@@ -21,7 +21,7 @@ export interface ISignUpPayload {
 export interface ISignUpSuccessfulPayload {
   id: string;
   email: string;
-  organizationName: string;
+  fullName: string;
   modifiedAt: string;
   createdAt: string;
   role: string;

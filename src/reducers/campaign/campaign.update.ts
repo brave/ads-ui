@@ -16,7 +16,7 @@ export const updateCampaignReducer = (state: ICampaignState, action: ICampaignAc
         ...state,
       };
     case UPDATE_CAMPAIGNS_SUCCESSFUL:
-      const campaigns = _.filter(state.campaigns, (item, index) => {
+      const campaigns = _.filter(state.campaigns, (item) => {
         return item.id !== (action.payload as ICampaignPayload).id;
       });
       campaigns.unshift(action.payload as ICampaignPayload);
