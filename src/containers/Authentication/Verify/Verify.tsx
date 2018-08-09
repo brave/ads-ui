@@ -19,13 +19,11 @@ class VerifyContainer extends React.Component<any, any> {
   }
 
   public render() {
-    const { advertiser, auth, classes, signinForm, signout } = this.props;
-    if (auth && auth.signedIn && auth.emailVerified) {
-      if (advertiser.advertisers && advertiser.advertisers.length > 0) {
-        return (<Redirect to="/" />);
-      } else {
-        return (<Redirect to="/auth" />);
-      }
+    const { auth, classes, signinForm, signout } = this.props;
+    if (!auth || !auth.signedIn) {
+      return (<Redirect to="/" />);
+    } else if (auth.emailVerified) {
+      return (<Redirect to="/" />);
     }
     return (
       <div className={classes.root}>
@@ -78,7 +76,6 @@ class VerifyContainer extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
-  advertiser: state.advertiserReducer,
   auth: state.authReducer,
   verifyForm: state.form.verify,
 });

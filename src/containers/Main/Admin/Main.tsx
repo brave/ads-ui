@@ -24,8 +24,8 @@ class Main extends React.Component<any, any> {
 
   public render(): any {
     const { auth, classes, drawer, match } = this.props;
-    if (!auth || !auth.signedIn || !auth.emailVerified) {
-      return (<Redirect to="/auth" />);
+    if (!auth || !auth.signedIn || !auth.emailVerified || auth.role !== "admin") {
+      return (<Redirect to="/" />);
     }
     const drawerItems = (
       <List>

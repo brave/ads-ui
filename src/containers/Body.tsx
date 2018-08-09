@@ -1,3 +1,4 @@
+import * as _ from "lodash";
 import * as React from "react";
 import { connect } from "react-redux";
 import { Redirect, Route, Switch, withRouter } from "react-router-dom";
@@ -19,12 +20,13 @@ class Body extends React.Component<any, any> {
   }
 
   private getRedirect() {
-    const { advertiser, auth } = this.props;
+    const { advertisers, auth } = this.props;
     if (auth && auth.signedIn && auth.emailVerified) {
       if (auth.role === "admin") {
         return <Redirect to="/admin/main" />;
       } else {
-        if (!advertiser || advertiser.advertisers.length > 0) {
+        const activeAdvertiser = _.find(advertisers, { state: "active" });
+        if (advertisers.length > 0 && activeAdvertiser) {
           return <Redirect to="/user/main" />;
         } else {
           return <Redirect to="/auth" />;
@@ -37,7 +39,7 @@ class Body extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
-  advertiser: state.advertiserReducer,
+  advertisers: state.advertiserReducer.advertisers,
   auth: state.authReducer,
 });
 

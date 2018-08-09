@@ -10,6 +10,7 @@ import {
   withStyles,
 } from "@material-ui/core";
 import * as classNames from "classnames";
+import * as _ from "lodash";
 import * as React from "react";
 import { connect } from "react-redux";
 import { Link, Redirect, Route, Switch } from "react-router-dom";
@@ -27,10 +28,11 @@ import { styles } from "./Main.style";
 class Main extends React.Component<any, any> {
 
   public render(): any {
-    if (!this.props.auth || !this.props.auth.signedIn || !this.props.auth.emailVerified) {
-      return (<Redirect to="/auth" />);
+    const { advertisers, auth, classes, match } = this.props;
+    const activeAdvertiser = _.find(advertisers, { state: "active" });
+    if (!auth || !auth.signedIn || !auth.emailVerified || auth.role !== "user" && !activeAdvertiser) {
+      return (<Redirect to="/" />);
     }
-    const { classes, match } = this.props;
     const drawerItems = (
       <List>
         <Link to={match.url + "/dashboard"} className={classes.link}>
@@ -113,6 +115,7 @@ class Main extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
+  advertisers: state.advertiserReducer.advertisers,
   auth: state.authReducer,
   drawer: state.drawerReducer,
 });

@@ -6,6 +6,7 @@ import {
   GET_ADVERTISERS_START,
   GET_ADVERTISERS_SUCCESSFUL,
   IAdvertiserAction,
+  SIGN_OUT,
 } from "../../actions";
 
 import { IAdvertiserState } from "./advertiser.interface";
@@ -28,6 +29,10 @@ const advertiserReducer = (
     case CREATE_ADVERTISERS_START:
     case CREATE_ADVERTISERS_SUCCESSFUL:
       return createAdvertiserReducer(state, action);
+    case SIGN_OUT:
+      return {
+        advertisers: [],
+      };
     default:
       return state;
   }

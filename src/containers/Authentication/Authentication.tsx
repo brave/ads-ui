@@ -1,4 +1,5 @@
 import { Paper, withStyles } from "@material-ui/core";
+import * as _ from "lodash";
 import * as React from "react";
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
@@ -9,6 +10,7 @@ import AdvertiserContainer from "./Advertiser/Advertiser";
 import SigninContainer from "./Signin/Signin";
 import SignupContainer from "./Signup/Signup";
 import VerifyContainer from "./Verify/Verify";
+import WaitContainer from "./Wait/Wait";
 
 class Authentication extends React.Component<any, any> {
   public state = {
@@ -25,6 +27,7 @@ class Authentication extends React.Component<any, any> {
             <Route path="/auth/signup" component={SignupContainer} />
             <Route path="/auth/verify" component={VerifyContainer} />
             <Route path="/auth/advertiser" component={AdvertiserContainer} />
+            <Route path="/auth/wait" component={WaitContainer} />
             {this.getRedirect()}
           </Switch>
         </Paper>
@@ -33,18 +36,21 @@ class Authentication extends React.Component<any, any> {
   }
 
   private getRedirect() {
-    const { advertiser, auth } = this.props;
+    const { advertisers, auth } = this.props;
     if (auth && auth.signedIn) {
       if (!auth.emailVerified) {
         return <Redirect to="/auth/verify" />;
       } else {
         if (auth.role === "admin") {
-          return <Redirect to="/admin/main" />;
+          return <Redirect to="/" />;
         } else {
-          if (!advertiser.advertisers || advertiser.advertisers.length < 1) {
+          const activeAdvertiser = _.find(advertisers, { state: "active" });
+          if (advertisers.length < 1) {
             return <Redirect to="/auth/advertiser" />;
+          } else if (!activeAdvertiser) {
+            return <Redirect to="/auth/wait" />;
           } else {
-            return <Redirect to="/user/main" />;
+            return <Redirect to="/" />;
           }
         }
       }
@@ -55,7 +61,7 @@ class Authentication extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
-  advertiser: state.advertiserReducer,
+  advertisers: state.advertiserReducer.advertisers,
   auth: state.authReducer,
 });
 

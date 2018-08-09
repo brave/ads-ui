@@ -3,6 +3,7 @@ import {
   GETALL_USER_START,
   GETALL_USER_SUCCESSFUL,
   IUserAction,
+  SIGN_OUT,
   USER_CREATE_FAILED,
   USER_CREATE_START,
   USER_CREATE_SUCCESSFUL,
@@ -33,6 +34,10 @@ const userReducer = (
     case USER_UPDATE_START:
     case USER_UPDATE_SUCCESSFUL:
       return createUserReducer(state, action);
+    case SIGN_OUT:
+      return {
+        users: [],
+      };
     default:
       return state;
   }

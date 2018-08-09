@@ -19,13 +19,9 @@ class SignInContainer extends React.Component<any, any> {
   }
 
   public render() {
-    const { auth, advertiser, classes, signinForm } = this.props;
+    const { auth, classes, signinForm } = this.props;
     if (auth && auth.signedIn) {
-      if (advertiser.advertisers && advertiser.advertisers.length > 0) {
-        return (<Redirect to="/" />);
-      } else {
-        return (<Redirect to="/auth" />);
-      }
+      return <Redirect to="/" />;
     }
     return (
       <div className={classes.root}>
@@ -71,7 +67,6 @@ class SignInContainer extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
-  advertiser: state.advertiserReducer,
   auth: state.authReducer,
   signinForm: state.form.signin,
 });
