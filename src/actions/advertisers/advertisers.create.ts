@@ -46,6 +46,7 @@ export const CreateAdvertisers = (advertiser: ICreateAdvertiserPayload, auth: IA
       } else {
         dispatch(OpenSnackBar(`Create Advertiser Faild: ${error.message}`));
       }
+      return Promise.reject(error);
     }
   };
 };

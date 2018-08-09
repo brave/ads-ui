@@ -19,12 +19,16 @@ class Body extends React.Component<any, any> {
   }
 
   private getRedirect() {
-    const { auth } = this.props;
+    const { advertiser, auth } = this.props;
     if (auth && auth.signedIn && auth.emailVerified) {
       if (auth.role === "admin") {
         return <Redirect to="/admin/main" />;
       } else {
-        return <Redirect to="/user/main" />;
+        if (!advertiser || advertiser.advertisers.length > 0) {
+          return <Redirect to="/user/main" />;
+        } else {
+          return <Redirect to="/auth" />;
+        }
       }
     } else {
       return <Redirect to="/auth" />;
@@ -33,6 +37,7 @@ class Body extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
+  advertiser: state.advertiserReducer,
   auth: state.authReducer,
 });
 

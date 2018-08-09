@@ -3,7 +3,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 
-import { SignIn } from "../../../actions";
+import { GetAdvertisers, SignIn } from "../../../actions";
 
 import { styles } from "./SignIn.style";
 
@@ -19,9 +19,13 @@ class SignInContainer extends React.Component<any, any> {
   }
 
   public render() {
-    const { auth, classes, signinForm } = this.props;
+    const { auth, advertiser, classes, signinForm } = this.props;
     if (auth && auth.signedIn) {
-      return (<Redirect to="/" />);
+      if (advertiser.advertisers && advertiser.advertisers.length > 0) {
+        return (<Redirect to="/" />);
+      } else {
+        return (<Redirect to="/auth" />);
+      }
     }
     return (
       <div className={classes.root}>
@@ -58,7 +62,8 @@ class SignInContainer extends React.Component<any, any> {
     const { signinForm } = this.props;
     const { values } = signinForm;
     try {
-      await this.props.signin(values);
+      const auth = await this.props.signin(values);
+      await this.props.getAdvertiser(auth);
     } catch (err) {
       this.toggleSubmitting();
     }
@@ -66,11 +71,13 @@ class SignInContainer extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
+  advertiser: state.advertiserReducer,
   auth: state.authReducer,
   signinForm: state.form.signin,
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
+  getAdvertiser: (value: any) => dispatch(GetAdvertisers(value)),
   signin: (value: any) => dispatch(SignIn(value)),
 });
 

@@ -7,12 +7,24 @@ export interface ICreateAdvertiserPayload {
   name: string;
 }
 
+export interface IAdvertiserAddressPayload {
+  id: string;
+  street1: string;
+  street2: string;
+  city: string;
+  state: string;
+  country: string;
+  zipcode: string;
+}
+
 export interface IAdvertiserPayload {
   id: string;
   name: string;
-  status: string;
+  state: string;
   createdAt: string;
   modifiedAt: string;
-  code: string;
-  flights: any[];
+  phone: string;
+  billingEmail: any[];
+  mailingAddress: IAdvertiserAddressPayload;
+  billingAddress: IAdvertiserPayload;
 }

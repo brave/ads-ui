@@ -36,6 +36,7 @@ export const UpdateAdvertisers = (advertiser: Partial<IAdvertiserPayload>, auth:
         });
       dispatch(UpdateAdvertisersSuccessful(response.data));
       dispatch(OpenSnackBar("Advertiser updated Successfully"));
+      return Promise.resolve(response.data);
     } catch (error) {
       dispatch(UpdateAdvertisersFailed());
       if (error.response) {
@@ -45,6 +46,7 @@ export const UpdateAdvertisers = (advertiser: Partial<IAdvertiserPayload>, auth:
       } else {
         dispatch(OpenSnackBar(`Update Advertiser Faild: ${error.message}`));
       }
+      return Promise.reject(error);
     }
   };
 };
