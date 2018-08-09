@@ -15,6 +15,7 @@ export const signUpReducer = (state: IAuthState, action: IAuthAction): IAuthStat
       return {
         accessToken: "",
         email: (action.payload as ISignUpPayload).email,
+        emailVerified: false,
         id: "",
         role: "",
         signedIn: false,
@@ -23,6 +24,7 @@ export const signUpReducer = (state: IAuthState, action: IAuthAction): IAuthStat
       return {
         accessToken: "",
         email: (action.payload as ISignUpSuccessfulPayload).email,
+        emailVerified: false,
         id: "",
         role: "",
         signedIn: false,
@@ -31,6 +33,7 @@ export const signUpReducer = (state: IAuthState, action: IAuthAction): IAuthStat
       return {
         accessToken: "",
         email: "",
+        emailVerified: false,
         id: "",
         role: "",
         signedIn: false,

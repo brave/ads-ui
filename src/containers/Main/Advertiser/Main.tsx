@@ -27,8 +27,8 @@ import { styles } from "./Main.style";
 class Main extends React.Component<any, any> {
 
   public render(): any {
-    if (!this.props.auth || !this.props.auth.signedIn) {
-      return (<Redirect to="/auth/signin" />);
+    if (!this.props.auth || !this.props.auth.signedIn || !this.props.auth.emailVerified) {
+      return (<Redirect to="/auth" />);
     }
     const { classes, match } = this.props;
     const drawerItems = (

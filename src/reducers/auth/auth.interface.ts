@@ -4,4 +4,5 @@ export interface IAuthState {
   id: string;
   signedIn: boolean;
   role: string;
+  emailVerified: boolean;
 }

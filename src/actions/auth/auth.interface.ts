@@ -24,6 +24,7 @@ export interface ISignUpSuccessfulPayload {
   fullName: string;
   modifiedAt: string;
   createdAt: string;
+  emailVerified: boolean;
   role: string;
 }
 

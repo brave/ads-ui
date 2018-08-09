@@ -1,6 +1,7 @@
 import { Button, withStyles } from "@material-ui/core";
 import * as React from "react";
 import { connect } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
 
 import { SignIn } from "../../../actions";
 
@@ -18,7 +19,10 @@ class SignInContainer extends React.Component<any, any> {
   }
 
   public render() {
-    const { classes, signinForm } = this.props;
+    const { auth, classes, signinForm } = this.props;
+    if (auth && auth.signedIn) {
+      return (<Redirect to="/" />);
+    }
     return (
       <div className={classes.root}>
         <div className={classes.row1}>
@@ -33,6 +37,11 @@ class SignInContainer extends React.Component<any, any> {
           <Button variant="raised" color="primary"
             disabled={(signinForm && signinForm.syncErrors !== undefined) || this.state.submitting}
             type="button" onClick={this.submit}>Sign In</Button>
+          <Link className={classes.signuplink} to={`/auth/signup`}>
+            <Button variant="raised" color="primary">
+              Sign Up
+            </Button>
+          </Link>
         </div>
       </div>
     );
@@ -57,6 +66,7 @@ class SignInContainer extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
+  auth: state.authReducer,
   signinForm: state.form.signin,
 });
 

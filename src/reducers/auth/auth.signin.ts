@@ -11,16 +11,18 @@ export const signInReducer = (state: IAuthState, action: IAuthAction): IAuthStat
       return {
         accessToken: "",
         email: (action.payload as ISignInPayload).email,
+        emailVerified: false,
         id: "",
         role: "",
         signedIn: false,
       };
     case SIGN_IN_SUCCESSFUL:
       const accessToken = (action.payload as IAuthPayload).accessToken;
-      const decodedToken = jwtDecode(accessToken) as any;
+      const decodedToken = jwtDecode(accessToken) as IAuthState;
       return {
         accessToken,
         email: decodedToken.email,
+        emailVerified: decodedToken.emailVerified,
         id: decodedToken.id,
         role: decodedToken.role,
         signedIn: true,
@@ -29,6 +31,7 @@ export const signInReducer = (state: IAuthState, action: IAuthAction): IAuthStat
       return {
         accessToken: "",
         email: "",
+        emailVerified: false,
         id: "",
         role: "",
         signedIn: false,
@@ -37,6 +40,7 @@ export const signInReducer = (state: IAuthState, action: IAuthAction): IAuthStat
       return {
         accessToken: "",
         email: "",
+        emailVerified: false,
         id: "",
         role: "",
         signedIn: false,

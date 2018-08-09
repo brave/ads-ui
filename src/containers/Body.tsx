@@ -12,7 +12,7 @@ class Body extends React.Component<any, any> {
       <Switch>
         <Route path="/user/main" component={AdvertiserMain} />
         <Route path="/admin/main" component={AdminMain} />
-        <Route path="/auth/signin" component={Authentication} />
+        <Route path="/auth" component={Authentication} />
         {this.getRedirect()}
       </Switch>
     );
@@ -20,14 +20,14 @@ class Body extends React.Component<any, any> {
 
   private getRedirect() {
     const { auth } = this.props;
-    if (auth && auth.signedIn) {
+    if (auth && auth.signedIn && auth.emailVerified) {
       if (auth.role === "admin") {
         return <Redirect to="/admin/main" />;
       } else {
         return <Redirect to="/user/main" />;
       }
     } else {
-      return <Redirect to="/auth/signin" />;
+      return <Redirect to="/auth" />;
     }
   }
 }

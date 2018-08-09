@@ -1,55 +1,79 @@
-import { withStyles } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
+import { Button, withStyles } from "@material-ui/core";
 import * as React from "react";
-import { Field, reduxForm } from "redux-form";
+import { connect } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
 
-import { renderTextField } from "../../field-material";
+import { SignIn, SignUp } from "../../../actions";
 
 import { styles } from "./Signup.style";
 
-const validate = (values: any) => {
-  const errors: any = {};
-  if (!values.email) {
-    errors.email = "Required";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = "Invalid email address";
-  }
-  if (!values.password) {
-    errors.password = "Required";
-  }
-  if (!values.organizationName) {
-    errors.organizationName = "Required";
-  }
-  return errors;
-};
+import SignupForm from "../../../components/SignupForm/Signup-form";
 
-class SignupForm extends React.Component<any, any> {
+class SignInContainer extends React.Component<any, any> {
+
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      submitting: false,
+    };
+  }
+
   public render() {
-    const { classes, handleSubmit, submitting, invalid } = this.props;
+    const { auth, classes, signupForm } = this.props;
+    if (auth && auth.signedIn) {
+      return (<Redirect to="/" />);
+    }
     return (
       <div className={classes.root}>
-        <form onSubmit={handleSubmit} className={classes.form}>
-          <div>
-            <Field name="email" type="text" component={renderTextField} label="Email" />
+        <div className={classes.row1}>
+          <div className={classes.row1_column1}>
+            <SignupForm />
           </div>
-          <div>
-            <Field name="password" type="password" component={renderTextField} label="Password" />
+          <div className={classes.row1_column2}>
+            <img className={classes.image} src="/favicon.png" />
           </div>
-          <div>
-            <Field name="organizationName" type="text" component={renderTextField} label="Organization Name" />
-          </div>
-          <div>
-            <Button variant="raised" disabled={submitting || invalid} color="primary" type="submit">Sign Up</Button>
-          </div>
-        </form>
+        </div>
+        <div className={classes.row2}>
+          <Button variant="raised" color="primary"
+            disabled={(signupForm && signupForm.syncErrors !== undefined) || this.state.submitting}
+            type="button" onClick={this.submit}>Sign Up</Button>
+          <Link className={classes.signinlink} to={`/auth/signin`}>
+            <Button variant="raised" color="primary">
+              Sign In
+            </Button>
+          </Link>
+        </div>
       </div>
     );
   }
+
+  private toggleSubmitting = () => {
+    this.setState({
+      submitting: !this.state.submitting,
+    });
+  }
+
+  private submit = async (event: any) => {
+    this.toggleSubmitting();
+    const { signupForm } = this.props;
+    const { values } = signupForm;
+    try {
+      await this.props.signup(values);
+      await this.props.signin(values);
+    } catch (err) {
+      this.toggleSubmitting();
+    }
+  }
 }
 
-const SignupFormRedux = reduxForm({
-  form: "signup",
-  validate,
-})(withStyles(styles)(SignupForm) as any);
+const mapStateToProps = (state: any, ownProps: any) => ({
+  auth: state.authReducer,
+  signupForm: state.form.signup,
+});
 
-export default SignupFormRedux;
+const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
+  signin: (value: any) => dispatch(SignIn(value)),
+  signup: (value: any) => dispatch(SignUp(value)),
+});
+
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(SignInContainer));
