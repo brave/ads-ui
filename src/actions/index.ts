@@ -7,3 +7,4 @@ export * from "./flights";
 export * from "./segments";
 export * from "./geocodes";
 export * from "./auth";
+export * from "./advertisers";
