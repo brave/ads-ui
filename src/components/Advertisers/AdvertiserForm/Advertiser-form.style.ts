@@ -1,6 +1,6 @@
 export const styles: any = {
   form: {
-    alignItems: "center",
+    alignItems: "start",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-around",

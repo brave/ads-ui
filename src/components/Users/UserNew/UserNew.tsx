@@ -13,8 +13,6 @@ class UserNew extends React.Component<any, any> {
     const { classes, create, auth, history, match } = this.props;
     const handleSubmit = async (value: any) => {
       const result = await create(value, auth);
-      // tslint:disable-next-line:no-console
-      console.log(result);
       const url = match.url.replace("/new", "");
       history.push(`${url}/${result.id}`);
     };

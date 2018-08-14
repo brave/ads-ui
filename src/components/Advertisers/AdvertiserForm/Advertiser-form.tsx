@@ -1,8 +1,8 @@
-import { withStyles } from "@material-ui/core";
+import { Button, FormControl, InputLabel, MenuItem, withStyles } from "@material-ui/core";
 import * as React from "react";
-import { Field, reduxForm } from "redux-form";
+import { Field, initialize, reduxForm } from "redux-form";
 
-import { renderCheckbox, renderTextField } from "../../../containers/field-material";
+import { renderCheckbox, renderSelectField, renderTextField } from "../../../containers/field-material";
 
 import { styles } from "./Advertiser-form.style";
 
@@ -35,51 +35,97 @@ const validate = (values: any) => {
   return errors;
 };
 
-class SignupForm extends React.Component<any, any> {
+class AdvertiserForm extends React.Component<any, any> {
   public render() {
-    const { classes } = this.props;
+    const { classes, advertiser, initialized, handleSubmit, dispatch, unlock, auth, submitting, invalid } = this.props;
+    if (advertiser && !initialized) {
+      const formValues = {
+        ad_state: advertiser.state,
+        billingEmail: advertiser.billingEmail,
+        city: advertiser.mailingAddress.city,
+        country: advertiser.mailingAddress.country,
+        name: advertiser.name,
+        phone: advertiser.phone,
+        state: advertiser.mailingAddress.state,
+        street1: advertiser.mailingAddress.street1,
+        street2: advertiser.mailingAddress.street2,
+        zipcode: advertiser.mailingAddress.zipcode,
+      };
+      dispatch(initialize("advertiserForm", formValues));
+    }
     return (
       <div className={classes.root}>
-        <form className={classes.form}>
+        <form onSubmit={handleSubmit} className={classes.form}>
           <div>
-            <Field name="name" type="text" component={renderTextField} label="Name" />
+            <Field disabled={!unlock && unlock !== undefined}
+              name="name" type="text" component={renderTextField} label="Name" />
           </div>
           <div>
-            <Field name="phone" type="text" component={renderTextField} label="Phone" />
+            <Field disabled={!unlock && unlock !== undefined}
+              name="phone" type="text" component={renderTextField} label="Phone" />
           </div>
           <div>
-            <Field name="billingEmail" type="text" component={renderTextField} label="Billing Email" />
+            <Field disabled={!unlock && unlock !== undefined}
+              name="billingEmail" type="text" component={renderTextField} label="Billing Email" />
           </div>
           <div>
-            <Field name="street1" type="text" component={renderTextField} label="Street 1" />
+            <Field disabled={!unlock && unlock !== undefined}
+              name="street1" type="text" component={renderTextField} label="Street 1" />
           </div>
           <div>
-            <Field name="street2" type="text" component={renderTextField} label="Street 2" />
+            <Field disabled={!unlock && unlock !== undefined}
+              name="street2" type="text" component={renderTextField} label="Street 2" />
           </div>
           <div>
-            <Field name="city" type="text" component={renderTextField} label="City" />
+            <Field disabled={!unlock && unlock !== undefined}
+              name="city" type="text" component={renderTextField} label="City" />
           </div>
           <div>
-            <Field name="state" type="text" component={renderTextField} label="State" />
+            <Field disabled={!unlock && unlock !== undefined}
+              name="state" type="text" component={renderTextField} label="State" />
           </div>
           <div>
-            <Field name="country" type="text" component={renderTextField} label="Country" />
+            <Field disabled={!unlock && unlock !== undefined}
+              name="country" type="text" component={renderTextField} label="Country" />
           </div>
           <div>
-            <Field name="zipcode" type="text" component={renderTextField} label="Zip Code" />
+            <Field disabled={!unlock && unlock !== undefined}
+              name="zipcode" type="text" component={renderTextField} label="Zip Code" />
           </div>
-          <div>
-            <Field component={renderCheckbox} name="agreed" label="Agree to terms" />
-          </div>
+          {auth && auth.role === "admin" &&
+            <div>
+              <FormControl>
+                <InputLabel htmlFor="age-native-simple">Advertiser State</InputLabel>
+                <Field disabled={!unlock && unlock !== undefined}
+                  component={renderSelectField} name="ad_state" label="State">
+                  <MenuItem value={"under_review"}>Under Review</MenuItem>
+                  <MenuItem value={"active"}>Active</MenuItem>
+                </Field>
+              </FormControl>
+            </div>
+          }
+          {!auth &&
+            <div>
+              <Field disabled={!unlock && unlock !== undefined}
+                component={renderCheckbox} name="agreed" label="Agree to terms" />
+            </div>
+          }
+          {unlock && auth && auth.role === "admin" &&
+            <div>
+              <Button variant="raised" disabled={submitting || invalid} color="primary" type="submit">
+                Save
+            </Button>
+            </div>
+          }
         </form>
       </div>
     );
   }
 }
 
-const SignupFormRedux = reduxForm({
-  form: "advertiser",
+const AdvertiserFormRedux = reduxForm({
+  form: "advertiserForm",
   validate,
-})(withStyles(styles)(SignupForm) as any);
+})(withStyles(styles)(AdvertiserForm) as any);
 
-export default SignupFormRedux;
+export default AdvertiserFormRedux as any;

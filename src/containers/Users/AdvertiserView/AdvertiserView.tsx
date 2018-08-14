@@ -13,26 +13,30 @@ import * as _ from "lodash";
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { UserUpdate } from "../../../actions";
+import { UpdateAdvertisers } from "../../../actions";
 
-import UserForm from "../../../components/Users/UserForm/UserForm";
+import AdvertiserForm from "../../../components/Advertisers/AdvertiserForm/Advertiser-form";
 
-import AdvertiserList from "../../../components/Advertisers/AdvertiserList/AdvertiserList";
+import { styles } from "./AdvertiserView.style";
 
-import { styles } from "./UserView.style";
-
-class UserView extends React.Component<any, any> {
+class AdvertiserView extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
-    this.state = {};
+    this.state = {
+      unlock: false,
+    };
   }
 
   public render() {
-    const { classes, match, auth, update, users } = this.props;
+    const { classes, match, auth, update, advertisers, users } = this.props;
     const { unlock } = this.state;
     const id = match.params.id;
+    const advertiserId = match.params.advertiserId;
     const user = _.find(users, (item) => {
       return item.id === id;
+    });
+    const advertiser = _.find(advertisers, (item) => {
+      return item.id === advertiserId;
     });
     const switchLock = () => {
       this.setState({
@@ -40,7 +44,20 @@ class UserView extends React.Component<any, any> {
       });
     };
     const handleSubmit = async (value: any, e: Event) => {
-      await update(value, auth);
+      const userId = user.id;
+      const values = value;
+      values.id = advertiser.id;
+      values.mailingAddress = {
+        city: values.city,
+        country: values.country,
+        state: values.state,
+        street1: values.street1,
+        street2: values.street2,
+        zipcode: values.zipcode,
+      };
+      values.billingAddress = values.mailingAddress;
+      values.state = value.ad_state;
+      await update(values, auth, userId);
     };
     const getLockButton = () => {
       if (!unlock) {
@@ -61,19 +78,13 @@ class UserView extends React.Component<any, any> {
       <div className={classes.root}>
         <AppBar position="static" color="default">
           <Toolbar>
-            <Typography variant="title">{user.fullName}</Typography>
+            <Typography variant="title">{advertiser.name}</Typography>
           </Toolbar>
         </AppBar>
         <Card className={classes.infoCard}>
-          <CardHeader title="Detail" action={getLockButton()}/>
+          <CardHeader title="Detail" action={getLockButton()} />
           <CardContent className={classes.content}>
-            <UserForm user={user} unlock={unlock} onSubmit={handleSubmit} />
-          </CardContent>
-        </Card>
-        <Card className={classes.infoCard}>
-          <CardHeader title="Advertisers"/>
-            <AdvertiserList match={match} userId={user.id} />
-          <CardContent className={classes.content}>
+            <AdvertiserForm auth={auth} advertiser={advertiser} unlock={unlock} onSubmit={handleSubmit} />
           </CardContent>
         </Card>
       </div>
@@ -82,12 +93,13 @@ class UserView extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
+  advertisers: state.advertiserReducer.advertisers,
   auth: state.authReducer,
   users: state.userReducer.users,
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
-  update: (value: any, user: any) => dispatch(UserUpdate(value, user)),
+  update: (value: any, auth: any, userId: string) => dispatch(UpdateAdvertisers(value, auth, userId)),
 });
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(UserView));
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(AdvertiserView));

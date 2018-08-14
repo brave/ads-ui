@@ -66,6 +66,7 @@ class SignInContainer extends React.Component<any, any> {
       zipcode: values.zipcode,
     };
     values.billingAddress = values.mailingAddress;
+    delete values.state;
     try {
       await this.props.submit(auth, values);
     } catch (err) {
@@ -75,7 +76,7 @@ class SignInContainer extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
-  advertiserForm: state.form.advertiser,
+  advertiserForm: state.form.advertiserForm,
   advertisers: state.advertiserReducer.advertisers,
   auth: state.authReducer,
 });
