@@ -19,7 +19,7 @@ export const getAdvertiserReducer = (state: IAdvertiserState, action: IAdvertise
       };
     case GET_ADVERTISERS_FAILD:
       return {
-        ...state,
+        advertisers: [],
       };
     default:
       return state;

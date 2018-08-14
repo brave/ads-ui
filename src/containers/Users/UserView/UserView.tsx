@@ -17,6 +17,8 @@ import { UserUpdate } from "../../../actions";
 
 import UserForm from "../../../components/Users/UserForm/UserForm";
 
+import AdvertiserList from "../../../components/Advertisers/AdvertiserList/AdvertiserList";
+
 import { styles } from "./UserView.style";
 
 class CreativesView extends React.Component<any, any> {
@@ -79,6 +81,12 @@ class CreativesView extends React.Component<any, any> {
           <CardHeader title="Detail" action={getLockButton()}/>
           <CardContent className={classes.content}>
             <UserForm user={user} unlock={unlock} onSubmit={handleSubmit} />
+          </CardContent>
+        </Card>
+        <Card className={classes.infoCard}>
+          <CardHeader title="Advertisers"/>
+            <AdvertiserList match={match} userId={user.id} />
+          <CardContent className={classes.content}>
           </CardContent>
         </Card>
       </div>
