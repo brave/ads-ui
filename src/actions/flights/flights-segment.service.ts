@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { IFlightSegmentPayload } from ".";
-import { IUserPayload } from "..";
+import { IAuthPayload } from "../auth";
 import { OpenSnackBar } from "../snackbar";
 
 export const ADD_FLIGHT_SEGMENT_START = "ADDFLIGHTSEGMENTSTART";
@@ -22,7 +22,7 @@ export const AddFlightSegmentFaild = () => ({
   type: ADD_FLIGHT_SEGMENT_FAILD,
 });
 
-export const AddFlightSegment = (flightID: string, user: IUserPayload, segment: IFlightSegmentPayload) => {
+export const AddFlightSegment = (flightID: string, user: IAuthPayload, segment: IFlightSegmentPayload) => {
   return async (dispatch: any) => {
     try {
       dispatch(AddFlightSegmentStart(segment));

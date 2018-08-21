@@ -1,4 +1,4 @@
-import { Button, withStyles } from "material-ui";
+import { Button, withStyles } from "@material-ui/core";
 import * as React from "react";
 import { Field, initialize, reduxForm } from "redux-form";
 
@@ -66,6 +66,6 @@ class CreativeForm extends React.Component<any, any> {
 const CreativeFormRedux = reduxForm({
   form: "CreativeForm",
   validate,
-})(withStyles(styles)(CreativeForm));
+})(withStyles(styles)(CreativeForm) as any);
 
 export default CreativeFormRedux as any;

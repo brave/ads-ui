@@ -36,7 +36,7 @@ export const GetCreatives = (user: any) => {
     } catch (error) {
       dispatch(GetCreativesFailed());
       if (error.response) {
-        dispatch(OpenSnackBar(`Get Creatives Faild: ${error.response.data.message}`));
+        dispatch(OpenSnackBar(`Get Creatives Faild: ${error.response.data.error}`));
       } else if (error.request) {
         dispatch(OpenSnackBar(`Get Creatives Faild: Network Error`));
       } else {

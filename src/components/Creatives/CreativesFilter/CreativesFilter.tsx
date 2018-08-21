@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { AppBar, FormControl, InputLabel, MenuItem, Select, TextField, Toolbar, withStyles } from "material-ui";
+import { AppBar, FormControl, InputLabel, MenuItem, Select, TextField, Toolbar, withStyles } from "@material-ui/core";
 
 import { styles } from "./CreativesFilter.style";
 

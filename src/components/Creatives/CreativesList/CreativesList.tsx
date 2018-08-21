@@ -1,4 +1,4 @@
-import { Button, Icon, withStyles } from "material-ui";
+import { Button, Icon, withStyles } from "@material-ui/core";
 import * as React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -12,7 +12,7 @@ import { styles } from "./CreativesList.style";
 
 class CreativesList extends React.Component<any, any> {
   public componentDidMount() {
-    this.props.GetCreatives(this.props.userReducer);
+    this.props.GetCreatives(this.props.auth);
   }
   public render() {
     const { classes, match } = this.props;
@@ -41,8 +41,8 @@ class CreativesList extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
+  auth: state.authReducer,
   creativeReducer: state.creativeReducer,
-  userReducer: state.userReducer,
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { ICampaignAction, ICampaignPayload } from ".";
-import { IUserPayload } from "..";
+import { IAuthPayload } from "../auth";
 import { OpenSnackBar } from "../snackbar";
 
 export const UPDATE_CAMPAIGNS_START = "UPDATECAMPAIGNSSTART";
@@ -22,7 +22,7 @@ export const UpdateCampaignsFailed = (): ICampaignAction => ({
   type: UPDATE_CAMPAIGNS_FAILED,
 });
 
-export const UpdateCampaigns = (campaign: Partial<ICampaignPayload>, user: IUserPayload) => {
+export const UpdateCampaigns = (campaign: Partial<ICampaignPayload>, user: IAuthPayload) => {
   return async (dispatch: any) => {
     try {
       dispatch(UpdateCampaignsStart(campaign));
@@ -37,7 +37,7 @@ export const UpdateCampaigns = (campaign: Partial<ICampaignPayload>, user: IUser
     } catch (error) {
       dispatch(UpdateCampaignsFailed());
       if (error.response) {
-        dispatch(OpenSnackBar(`Update Campaigns Faild: ${error.response.data.message}`));
+        dispatch(OpenSnackBar(`Update Campaigns Faild: ${error.response.data.error}`));
       } else if (error.request) {
         dispatch(OpenSnackBar(`Update Campaigns Faild: Network Error`));
       } else {

@@ -1,30 +1,43 @@
-import { SIGN_IN_FAILED, SIGN_IN_START, SIGN_IN_SUCCESSFUL, SIGN_OUT } from "../../actions";
-import { SIGN_UP_FAILED, SIGN_UP_START, SIGN_UP_SUCCESSFUL } from "../../actions";
-import { IUserAction } from "../../actions";
-
+import {
+  GETALL_USER_FAILED,
+  GETALL_USER_START,
+  GETALL_USER_SUCCESSFUL,
+  IUserAction,
+  SIGN_OUT,
+  USER_CREATE_FAILED,
+  USER_CREATE_START,
+  USER_CREATE_SUCCESSFUL,
+  USER_UPDATE_FAILED,
+  USER_UPDATE_START,
+  USER_UPDATE_SUCCESSFUL,
+} from "../../actions";
+import { createUserReducer } from "./user.create";
+import { getUserReducer } from "./user.get";
 import { IUserState } from "./user.interface";
-import { signInReducer } from "./user.signin";
-import { signUpReducer } from "./user.signup";
 
 const userReducer = (
   state: IUserState = {
-    accessToken: "",
-    email: "",
-    id: "",
-    signedIn: false,
+    users: [],
   },
   action: IUserAction,
 ) => {
   switch (action.type) {
-    case SIGN_IN_START:
-    case SIGN_IN_SUCCESSFUL:
-    case SIGN_IN_FAILED:
+    case GETALL_USER_START:
+    case GETALL_USER_FAILED:
+    case GETALL_USER_SUCCESSFUL:
+      return getUserReducer(state, action);
+    case USER_CREATE_FAILED:
+    case USER_CREATE_START:
+    case USER_CREATE_SUCCESSFUL:
+      return createUserReducer(state, action);
+    case USER_UPDATE_FAILED:
+    case USER_UPDATE_START:
+    case USER_UPDATE_SUCCESSFUL:
+      return createUserReducer(state, action);
     case SIGN_OUT:
-      return signInReducer(state, action);
-    case SIGN_UP_START:
-    case SIGN_UP_SUCCESSFUL:
-    case SIGN_UP_FAILED:
-      return signUpReducer(state, action);
+      return {
+        users: [],
+      };
     default:
       return state;
   }

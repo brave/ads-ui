@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { ISegmentAction, ISegmentPayload } from ".";
-import { IUserPayload } from "..";
+import { IAuthPayload } from "../auth";
 import { OpenSnackBar } from "../snackbar";
 
 export const GET_SEGMENTS_START = "GETSEGMENTSSTART";
@@ -22,7 +22,7 @@ export const GetSegmentsFaild = (): ISegmentAction => ({
   type: GET_SEGMENTS_FAILD,
 });
 
-export const GetSegments = (user: IUserPayload) => {
+export const GetSegments = (user: IAuthPayload) => {
   return async (dispatch: any) => {
     try {
       dispatch(GetSegmentsStart());

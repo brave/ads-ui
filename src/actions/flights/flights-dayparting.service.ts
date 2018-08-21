@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { IFlightAction, IFlightDayPartingPayload } from ".";
-import { IUserPayload } from "..";
+import { IAuthPayload } from "../auth";
 import { OpenSnackBar } from "../snackbar";
 
 export const ADD_FLIGHT_DAYPARTING_START = "ADDFLIGHTDAYPARTINGSTART";
@@ -22,7 +22,7 @@ export const AddFlightDaypartingFaild = (): IFlightAction => ({
   type: ADD_FLIGHT_DAYPARTING_FAILD,
 });
 
-export const AddFlightDayparting = (flightID: string, user: IUserPayload, dayparting: IFlightDayPartingPayload) => {
+export const AddFlightDayparting = (flightID: string, user: IAuthPayload, dayparting: IFlightDayPartingPayload) => {
   return async (dispatch: any) => {
     try {
       dispatch(AddFlightDaypartingStart(dayparting));

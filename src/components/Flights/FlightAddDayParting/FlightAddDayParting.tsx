@@ -11,7 +11,7 @@ import {
   Select,
   TextField,
   withStyles,
-} from "material-ui";
+} from "@material-ui/core";
 import { connect } from "react-redux";
 
 import * as React from "react";

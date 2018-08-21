@@ -10,6 +10,7 @@ import {
   GET_CAMPAIGNS_START,
   GET_CAMPAIGNS_SUCCESSFUL,
   ICampaignAction,
+  SIGN_OUT,
   UPDATE_CAMPAIGNS_FAILED,
   UPDATE_CAMPAIGNS_START,
   UPDATE_CAMPAIGNS_SUCCESSFUL,
@@ -45,6 +46,10 @@ const campaignReducer = (
     case ADD_FLIGHT_DAYPARTING_SUCCESSFUL:
     case ADD_FLIGHT_SEGMENT_SUCCESSFUL:
       return serviceCampaignReducer(state, action);
+    case SIGN_OUT:
+      return {
+        campaigns: [],
+      };
     default:
       return state;
   }
