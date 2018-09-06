@@ -8,3 +8,4 @@ export * from "./segments";
 export * from "./geocodes";
 export * from "./auth";
 export * from "./advertisers";
+export * from "./reports";
