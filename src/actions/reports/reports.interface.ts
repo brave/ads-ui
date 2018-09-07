@@ -3,13 +3,14 @@ export interface IReportAction {
   payload: IReportPayload | IReportPayload[] | null;
 }
 
-export interface IReportCreatives {
+export interface IReportConfirmations {
   creativeInstanceId: string;
   creativeId: string;
   confirmationDate: Date;
+  confirmationType: string;
 }
 
 export interface IReportPayload {
   campaignId: string;
-  creatives: IReportCreatives[];
+  confirmations: IReportConfirmations[];
 }

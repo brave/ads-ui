@@ -58,8 +58,8 @@ class Performances extends React.Component<any, any> {
         labels: [] as any[],
       };
       const report = _.find(reports, { campaignId: this.state.campaign }) as any;
-      for (const creative of report.creatives) {
-        const month = moment(creative.confirmationDate).format("MMMM");
+      for (const confirmation of report.confirmations) {
+        const month = moment(confirmation.confirmationDate).format("MMMM");
         const i = _.findIndex(dataObject.labels, (o) => {
           return o === month;
         });
