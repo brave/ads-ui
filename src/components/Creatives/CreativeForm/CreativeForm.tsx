@@ -36,7 +36,7 @@ class CreativeForm extends React.Component<any, any> {
         <form onSubmit={handleSubmit} className={classes.form}>
           <div>
             <Field className={classes.textField} disabled={!unlock}
-              name="caption" type="text" component={renderTextField} label="Caption" />
+              name="type" type="text" component={renderTextField} label="Type" />
           </div>
           <div>
             <Field className={classes.textField} disabled={!unlock}

@@ -2,7 +2,7 @@ import { FormControl, InputLabel, MenuItem, Select, withStyles } from "@material
 import * as _ from "lodash";
 import * as moment from "moment";
 import * as React from "react";
-import { Line } from "react-chartjs-2";
+import { Doughnut, Line } from "react-chartjs-2";
 import { connect } from "react-redux";
 
 import { GetCampaigns, GetReports } from "../../actions";
@@ -30,7 +30,7 @@ class Performances extends React.Component<any, any> {
 
     const { classes, campaigns, reports } = this.props;
 
-    const data = () => {
+    const lineData = () => {
       const dataObject = {
         datasets: [
           {
@@ -58,16 +58,53 @@ class Performances extends React.Component<any, any> {
         labels: [] as any[],
       };
       const report = _.find(reports, { campaignId: this.state.campaign }) as any;
-      for (const confirmation of report.confirmations) {
-        const month = moment(confirmation.confirmationDate).format("MMMM");
-        const i = _.findIndex(dataObject.labels, (o) => {
-          return o === month;
-        });
-        if (i < 0) {
-          dataObject.labels.push(month);
-          dataObject.datasets[0].data.push(1);
-        } else {
-          dataObject.datasets[0].data[i]++;
+      if (report) {
+        for (const confirmation of report.confirmations) {
+          const month = moment(confirmation.confirmationDate).format("MMMM");
+          const i = _.findIndex(dataObject.labels, (o) => {
+            return o === month;
+          });
+          if (i < 0) {
+            dataObject.labels.push(month);
+            dataObject.datasets[0].data.push(1);
+          } else {
+            dataObject.datasets[0].data[i]++;
+          }
+        }
+      }
+      return dataObject;
+    };
+
+    const doughnutData = () => {
+      const dataObject = {
+        datasets: [{
+          backgroundColor: [
+            "#FF6384",
+            "#36A2EB",
+            "#FFCE56",
+          ],
+          data: [] as any,
+          hoverBackgroundColor: [
+            "#FF6384",
+            "#36A2EB",
+            "#FFCE56",
+          ],
+        }],
+        labels: [] as any,
+      };
+      const report = _.find(reports, { campaignId: this.state.campaign }) as any;
+      if (report) {
+        for (const confirmation of report.confirmations) {
+          const type = confirmation.confirmationType;
+          const i = _.findIndex(dataObject.labels, (o) => {
+            return o === type;
+          });
+          if (i < 0) {
+            dataObject.labels.push(type);
+            dataObject.datasets[0].data.push(1);
+          } else {
+            dataObject.datasets[0].data[i]++;
+          }
         }
       }
       return dataObject;
@@ -93,7 +130,14 @@ class Performances extends React.Component<any, any> {
         </div>
         <div>
           {this.state.campaign !== "" &&
-            <Line data={data} height={300} options={{
+            <Line data={lineData} height={300} options={{
+              maintainAspectRatio: false,
+            }} />
+          }
+        </div>
+        <div>
+          {this.state.campaign !== "" &&
+            <Doughnut data={doughnutData} height={300} options={{
               maintainAspectRatio: false,
             }} />
           }

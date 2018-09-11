@@ -14,7 +14,6 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import { UpdateCreatives } from "../../../actions";
-import CampaignTable from "../../../components/Campaigns/CampaignTable/CampaignTable";
 import CreativeForm from "../../../components/Creatives/CreativeForm/CreativeForm";
 
 import { styles } from "./CreativesView.style";
@@ -79,12 +78,6 @@ class CreativesView extends React.Component<any, any> {
           <CardHeader title="Detail" action={getLockButton()}/>
           <CardContent className={classes.content}>
             <CreativeForm creative={creative} unlock={unlock} onSubmit={handleSubmit} />
-          </CardContent>
-        </Card>
-        <Card className={classes.campaignCard}>
-          <CardHeader title="Campaigns" action={this.getActionButtons()} />
-          <CardContent>
-            <CampaignTable campaigns={creative.campaigns} />
           </CardContent>
         </Card>
       </div>
