@@ -90,7 +90,7 @@ class CampaignView extends React.Component<any, any> {
   }
 
   private async handleSubmit(value: any) {
-    await this.props.update(value, this.props.user);
+    await this.props.update(value, this.props.auth);
   }
 
   private switchLock() {
@@ -101,8 +101,8 @@ class CampaignView extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
+  auth: state.authReducer,
   campaigns: state.campaignReducer.campaigns,
-  user: state.userReducer,
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({

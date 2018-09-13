@@ -38,7 +38,7 @@ class CreativesView extends React.Component<any, any> {
   }
 
   public render() {
-    const { classes, match, creatives, update, user } = this.props;
+    const { classes, match, creatives, update, auth } = this.props;
     const { unlock } = this.state;
     const id = match.params.id;
     const creative = _.find(creatives, (item) => {
@@ -50,7 +50,7 @@ class CreativesView extends React.Component<any, any> {
       });
     };
     const handleSubmit = async (value: any, e: Event) => {
-      await update(value, user);
+      await update(value, auth);
     };
     const getLockButton = () => {
       if (!unlock) {
@@ -86,8 +86,8 @@ class CreativesView extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
+  auth: state.authReducer,
   creatives: state.creativeReducer.creatives,
-  user: state.userReducer,
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({

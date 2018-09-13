@@ -40,15 +40,15 @@ class CreativeForm extends React.Component<any, any> {
           </div>
           <div>
             <Field className={classes.textField} disabled={!unlock}
-              name="body" type="text" component={renderTextField} label="Body" />
+              name="payload.body" type="text" component={renderTextField} label="Body" />
           </div>
           <div>
             <Field className={classes.textField} disabled={!unlock}
-              name="targetUrl" type="text" component={renderTextField} label="Target" />
+              name="payload.title" type="text" component={renderTextField} label="Title" />
           </div>
           <div>
             <Field className={classes.textField} disabled={!unlock}
-              name="imgUrl" type="text" component={renderTextField} label="Image" />
+              name="payload.targetUrl" type="text" component={renderTextField} label="Target" />
           </div>
           {unlock &&
             <div>
