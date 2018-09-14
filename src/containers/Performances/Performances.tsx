@@ -59,16 +59,19 @@ class Performances extends React.Component<any, any> {
       };
       const report = _.find(reports, { campaignId: this.state.campaign }) as any;
       if (report) {
+        report.confirmations = _.sortBy(report.confirmations, (dateObj) => {
+          return new Date(dateObj.confirmationDate);
+        });
         for (const confirmation of report.confirmations) {
-          const month = moment(confirmation.confirmationDate).format("MMMM");
+          const label = moment(confirmation.confirmationDate).format("MMMM Do HH");
           const i = _.findIndex(dataObject.labels, (o) => {
-            return o === month;
+            return o === label;
           });
           if (i < 0) {
-            dataObject.labels.push(month);
+            dataObject.labels.push(label);
             dataObject.datasets[0].data.push(1);
           } else {
-            dataObject.datasets[0].data[i]++;
+            dataObject.datasets[0].data[i] = dataObject.datasets[0].data[i] + 1;
           }
         }
       }
@@ -103,7 +106,7 @@ class Performances extends React.Component<any, any> {
             dataObject.labels.push(type);
             dataObject.datasets[0].data.push(1);
           } else {
-            dataObject.datasets[0].data[i]++;
+            dataObject.datasets[0].data[i] = dataObject.datasets[0].data[i] + 1;
           }
         }
       }

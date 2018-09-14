@@ -30,7 +30,7 @@ class CampaignList extends React.Component<any, any> {
         <div className={classes.list}>
           {listItems}
         </div>
-        <Link className={classes.fab} to="/main/campaigns/new">
+        <Link className={classes.fab} to={match.url + "/new"}>
           <Button color="secondary" variant="fab">
             <Icon>add</Icon>
           </Button>
