@@ -10,10 +10,13 @@ import { style } from "./CreativesNew.style";
 
 class CreativesNew extends React.Component<any, any> {
   public render() {
-    const { classes, create, auth, history } = this.props;
+    const { classes, create, auth, history, match } = this.props;
     const handleSubmit = async (value: any) => {
+      value.advertiserId = this.props.advertisers[0].id;
       const result = await create(value, auth);
-      history.push(`/main/creatives/${result.id}`);
+      const url = match.url.replace("/new", "");
+
+      history.push(`${url}/${result.id}`);
     };
 
     return (
@@ -34,6 +37,7 @@ class CreativesNew extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
+  advertisers: state.advertiserReducer.advertisers,
   auth: state.authReducer,
 });
 

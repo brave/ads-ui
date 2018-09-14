@@ -30,7 +30,7 @@ class CreativesList extends React.Component<any, any> {
         <div className={classes.list}>
           {listItems}
         </div>
-        <Link className={classes.fab} to="/main/creatives/new">
+        <Link className={classes.fab} to={match.url + "/new"}>
           <Button color="secondary" variant="fab">
             <Icon>add</Icon>
           </Button>
