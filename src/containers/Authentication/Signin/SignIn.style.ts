@@ -32,6 +32,7 @@ export const styles: any = {
     flexBasis: "50px",
   },
   signuplink: {
+    margin: "15px",
     textDecoration: "none",
   },
 };

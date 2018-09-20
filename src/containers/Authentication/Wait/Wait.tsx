@@ -1,4 +1,4 @@
-import { Button, withStyles } from "@material-ui/core";
+import { Button, Typography, withStyles } from "@material-ui/core";
 import * as _ from "lodash";
 import * as React from "react";
 import { connect } from "react-redux";
@@ -29,7 +29,10 @@ class WaitContainer extends React.Component<any, any> {
       <div className={classes.root}>
         <div className={classes.row1}>
           <div className={classes.row1_column1}>
-            Wait
+            <Typography variant="title">Review</Typography>
+            <Typography variant="body1" gutterBottom>
+              Your Application is under review.<br/>One of our representatives will review and contact you shortly.
+            </Typography>
           </div>
           <div className={classes.row1_column2}>
             <img className={classes.image} src="/favicon.png" />
