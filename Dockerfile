@@ -1,7 +1,7 @@
 FROM node:latest
 
-COPY . /ui
 WORKDIR /ui
+COPY . .
 
 ENV PORT 3000
 
