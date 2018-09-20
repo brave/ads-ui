@@ -14,7 +14,6 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import { UpdateCreatives } from "../../../actions";
-import CampaignTable from "../../../components/Campaigns/CampaignTable/CampaignTable";
 import CreativeForm from "../../../components/Creatives/CreativeForm/CreativeForm";
 
 import { styles } from "./CreativesView.style";
@@ -39,7 +38,7 @@ class CreativesView extends React.Component<any, any> {
   }
 
   public render() {
-    const { classes, match, creatives, update, user } = this.props;
+    const { classes, match, creatives, update, auth } = this.props;
     const { unlock } = this.state;
     const id = match.params.id;
     const creative = _.find(creatives, (item) => {
@@ -51,7 +50,7 @@ class CreativesView extends React.Component<any, any> {
       });
     };
     const handleSubmit = async (value: any, e: Event) => {
-      await update(value, user);
+      await update(value, auth);
     };
     const getLockButton = () => {
       if (!unlock) {
@@ -81,20 +80,14 @@ class CreativesView extends React.Component<any, any> {
             <CreativeForm creative={creative} unlock={unlock} onSubmit={handleSubmit} />
           </CardContent>
         </Card>
-        <Card className={classes.campaignCard}>
-          <CardHeader title="Campaigns" action={this.getActionButtons()} />
-          <CardContent>
-            <CampaignTable campaigns={creative.campaigns} />
-          </CardContent>
-        </Card>
       </div>
     );
   }
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
+  auth: state.authReducer,
   creatives: state.creativeReducer.creatives,
-  user: state.userReducer,
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({

@@ -3,9 +3,6 @@ import {
   Card,
   CardContent,
   CardHeader,
-  ExpansionPanel,
-  ExpansionPanelDetails,
-  ExpansionPanelSummary,
   Icon,
   IconButton,
   Toolbar,
@@ -17,14 +14,10 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import {
-  CreateFlights,
   UpdateCampaigns,
 } from "../../../actions";
 
 import CampaignForm from "../../../components/Campaigns/CampaignForm/CampaignForm";
-import FlightDetail from "../../../components/Flights/FlightDetail/FlightDetail";
-import FlightNew from "../../../components/Flights/FlightNew/FlightNew";
-import FlightTable from "../../../components/Flights/FlightTable/FlightTable";
 
 import { styles } from "./CampaignView.style";
 
@@ -61,8 +54,8 @@ class CampaignView extends React.Component<any, any> {
 
   public render() {
     const { classes } = this.props;
-    const { campaign, notActiveFlights, activeFlight } = this.state;
-    const { unlock, openNew } = this.state;
+    const { campaign} = this.state;
+    const { unlock } = this.state;
     return (
       <div className={classes.root}>
         <AppBar position="static" color="default">
@@ -76,48 +69,6 @@ class CampaignView extends React.Component<any, any> {
             <CampaignForm campaign={campaign} unlock={unlock} onSubmit={(value: string) => this.handleSubmit(value)} />
           </CardContent>
         </Card>
-        <Card className={classes.infoCard}>
-          <CardHeader title="Flights" action={this.getAddButton()} />
-          <CardContent>
-            <FlightNew
-              open={openNew}
-              handleClose={() => this.handleCloseNew()}
-              handleOk={(modalState: any) => this.handleOkNew(modalState)}></FlightNew>
-            <ExpansionPanel disabled={!activeFlight}>
-              <ExpansionPanelSummary expandIcon={<Icon>expand</Icon>}>
-                Current Flight Detail
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                {this.getFlightDetail()}
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
-            <ExpansionPanel disabled={notActiveFlights.length < 1}>
-              <ExpansionPanelSummary expandIcon={<Icon>expand</Icon>}>
-                <Typography className={classes.heading}>Previous History</Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <FlightTable flights={notActiveFlights} />
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
-
-  private getFlightDetail() {
-    if (this.state.activeFlight) {
-      return (<FlightDetail flight={this.state.activeFlight} />);
-    }
-    return (<div></div>);
-  }
-
-  private getAddButton() {
-    return (
-      <div>
-        <IconButton onClick={() => this.handleClickOpenNew()} color="primary">
-          <Icon>add</Icon>
-        </IconButton>
       </div>
     );
   }
@@ -139,7 +90,7 @@ class CampaignView extends React.Component<any, any> {
   }
 
   private async handleSubmit(value: any) {
-    await this.props.update(value, this.props.user);
+    await this.props.update(value, this.props.auth);
   }
 
   private switchLock() {
@@ -147,34 +98,14 @@ class CampaignView extends React.Component<any, any> {
       unlock: !this.state.unlock,
     });
   }
-
-  private handleClickOpenNew() {
-    this.setState({ openNew: true });
-  }
-
-  private handleCloseNew() {
-    this.setState({ openNew: false });
-  }
-
-  private async handleOkNew(modalState: any) {
-    const flight = {
-      campaign: this.state.campaign.id,
-      endAt: modalState.selectedEndDate,
-      geoOperator: "and",
-      order: 1,
-      startedAt: modalState.selectedStartDate,
-    };
-    await this.props.createFlight(flight, this.props.user);
-  }
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
+  auth: state.authReducer,
   campaigns: state.campaignReducer.campaigns,
-  user: state.userReducer,
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
-  createFlight: (value: any, user: any) => dispatch(CreateFlights(value, user)),
   update: (value: any, user: any) => dispatch(UpdateCampaigns(value, user)),
 });
 

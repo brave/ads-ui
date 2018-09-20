@@ -3,7 +3,6 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardMedia,
   Icon,
   IconButton,
   Typography,
@@ -19,27 +18,24 @@ class CreativeItem extends React.Component<any, any> {
     const { classes, creative, match } = this.props;
     return (
       <Card className={classes.card}>
-        <CardMedia
-          className={classes.media}
-          image={creative.imgUrl}
-          title="Contemplative Reptile"
-        />
         <CardContent className={classes.content}>
           <div>
             <Typography gutterBottom variant="headline" component="h2">
-              {creative.caption}
+              {creative.payload.title}
             </Typography>
             <Typography component="p">
-              {creative.body}
+              {creative.type} | {creative.state}
             </Typography>
             <Typography>
-              <a href={creative.targetUrl}>{creative.targetUrl}</a>
+              <a href={creative.payload.targetUrl}>{creative.payload.targetUrl}</a>
             </Typography>
           </div>
           <div className={classes.indicator}>
-            <Avatar>
-              {creative.campaigns.length.toString()}
-            </Avatar>
+            {creative.campaigns &&
+              <Avatar>
+                {creative.campaigns.length.toString()}
+              </Avatar>
+            }
           </div>
         </CardContent>
         <CardActions className={classes.actions}>
@@ -49,17 +45,8 @@ class CreativeItem extends React.Component<any, any> {
                 <Icon>list</Icon>
               </IconButton>
             </Link>
-            <IconButton color="primary">
-              <Icon>pause</Icon>
-            </IconButton>
-            <IconButton color="primary">
-              <Icon>play_arrow</Icon>
-            </IconButton>
           </div>
           <div className={classes.rightActions}>
-            <IconButton color="primary">
-              <Icon>equalizer</Icon>
-            </IconButton>
           </div>
         </CardActions>
       </Card>

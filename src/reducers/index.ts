@@ -7,6 +7,7 @@ import campaignReducer from "./campaign";
 import creativeReducer from "./creative";
 import drawerReducer from "./drawer";
 import geoCodeReducer from "./geocode";
+import reportReducer from "./report";
 import segmentReducer from "./segment";
 import snackBarReducer from "./snackbar";
 import userReducer from "./user";
@@ -19,6 +20,7 @@ export default combineReducers({
   drawerReducer,
   form: formReducer,
   geoCodeReducer,
+  reportReducer,
   segmentReducer,
   snackBarReducer,
   userReducer,
