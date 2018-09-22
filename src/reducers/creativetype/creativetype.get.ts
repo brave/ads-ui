@@ -1,7 +1,7 @@
 import {
-  GET_CREATIVES_SUCCESSFUL,
   GET_CREATIVETYPES_FAILD,
   GET_CREATIVETYPES_START,
+  GET_CREATIVETYPES_SUCCESSFUL,
   ICreativeTypeAction,
   ICreativeTypePayload,
 } from "../../actions";
@@ -13,9 +13,9 @@ export const getCreativeTypeReducer = (state: ICreativeTypeState, action: ICreat
       return {
         ...state,
       };
-    case GET_CREATIVES_SUCCESSFUL:
+    case GET_CREATIVETYPES_SUCCESSFUL:
       return {
-        creativetypes: action.payload as ICreativeTypePayload[],
+        creativeTypes: action.payload as ICreativeTypePayload[],
       };
     case GET_CREATIVETYPES_FAILD:
       return {

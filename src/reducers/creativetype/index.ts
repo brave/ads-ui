@@ -10,7 +10,7 @@ import { ICreativeTypeState } from "./creativetype.interface";
 
 const creativeTypeReducer = (
   state: ICreativeTypeState = {
-    creativetypes: [],
+    creativeTypes: [],
   },
   action: ICreativeTypeAction,
 ) => {
