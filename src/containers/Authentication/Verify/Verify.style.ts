@@ -1,4 +1,7 @@
 export const styles: any = {
+  buttons: {
+    margin: "15px",
+  },
   image: {
     width: "100px",
   },

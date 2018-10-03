@@ -5,6 +5,7 @@ import advertiserReducer from "./advertiser";
 import authReducer from "./auth";
 import campaignReducer from "./campaign";
 import creativeReducer from "./creative";
+import creativeTypeReducer from "./creativetype";
 import drawerReducer from "./drawer";
 import geoCodeReducer from "./geocode";
 import reportReducer from "./report";
@@ -17,6 +18,7 @@ export default combineReducers({
   authReducer,
   campaignReducer,
   creativeReducer,
+  creativeTypeReducer,
   drawerReducer,
   form: formReducer,
   geoCodeReducer,

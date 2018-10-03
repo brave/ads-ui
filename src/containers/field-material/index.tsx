@@ -1,4 +1,7 @@
 import { Checkbox, FormControlLabel, Select, TextField } from "@material-ui/core";
+import DatePicker from "material-ui-pickers/DatePicker";
+import MomentUtils from "material-ui-pickers/utils/moment-utils";
+import MuiPickersUtilsProvider from "material-ui-pickers/utils/MuiPickersUtilsProvider";
 import * as React from "react";
 
 export const renderTextField = ({
@@ -46,4 +49,21 @@ export const renderSelectField = ({
       children={children}
       {...custom}
     />
+  );
+
+export const renderDateField = ({
+  input,
+  children,
+  label,
+  // tslint:disable-next-line:trailing-comma
+  ...custom
+}: any) => (
+    <MuiPickersUtilsProvider utils={MomentUtils}>
+      <DatePicker
+        {...input}
+        label={label}
+        onChange={(value) => input.onChange(value)}
+        {...custom}
+      />
+    </MuiPickersUtilsProvider>
   );

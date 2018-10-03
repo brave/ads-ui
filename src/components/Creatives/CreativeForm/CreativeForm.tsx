@@ -1,8 +1,11 @@
-import { Button, withStyles } from "@material-ui/core";
+import { Button, FormControl, InputLabel, MenuItem, withStyles } from "@material-ui/core";
 import * as React from "react";
+import { connect } from "react-redux";
 import { Field, initialize, reduxForm } from "redux-form";
 
-import { renderTextField } from "../../../containers/field-material";
+import { renderSelectField, renderTextField } from "../../../containers/field-material";
+
+import { GetCreativeTypes } from "../../../actions";
 
 import { styles } from "./CreativeForm.style";
 
@@ -24,19 +27,41 @@ const validate = (values: any) => {
 };
 
 class CreativeForm extends React.Component<any, any> {
+  public componentDidMount() {
+    this.props.GetCreativeTypes(this.props.auth);
+  }
   public render() {
-    const { classes, creative, dispatch, handleSubmit, submitting, invalid, initialized, unlock } = this.props;
+    const {
+      classes,
+      creative,
+      creativeTypes,
+      dispatch,
+      handleSubmit,
+      submitting,
+      invalid,
+      initialized,
+      unlock,
+    } = this.props;
     if (creative && !initialized) {
       delete creative.createdAt;
       delete creative.modifiedAt;
       dispatch(initialize("CreativeForm", creative));
     }
+    const creativeTypeList = creativeTypes.map((item: any) => {
+      return (
+        <MenuItem key={item.code} value={item.code}>{item.name}</MenuItem>
+      );
+    });
     return (
       <div className={classes.root}>
         <form onSubmit={handleSubmit} className={classes.form}>
           <div>
-            <Field className={classes.textField} disabled={!unlock}
-              name="type" type="text" component={renderTextField} label="Type" />
+            <FormControl>
+              <InputLabel>Type</InputLabel>
+              <Field disabled={!unlock} component={renderSelectField} name="type.code" label="Creative Type">
+                {creativeTypeList}
+              </Field>
+            </FormControl>
           </div>
           <div>
             <Field className={classes.textField} disabled={!unlock}
@@ -63,9 +88,18 @@ class CreativeForm extends React.Component<any, any> {
   }
 }
 
+const mapStateToProps = (state: any, ownProps: any) => ({
+  auth: state.authReducer,
+  creativeTypes: state.creativeTypeReducer.creativeTypes,
+});
+
+const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
+  GetCreativeTypes: (auth: any) => dispatch(GetCreativeTypes(auth)),
+});
+
 const CreativeFormRedux = reduxForm({
   form: "CreativeForm",
   validate,
-})(withStyles(styles)(CreativeForm) as any);
+})(withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(CreativeForm)) as any);
 
 export default CreativeFormRedux as any;

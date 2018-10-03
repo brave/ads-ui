@@ -1,4 +1,4 @@
-import { FormControl, InputLabel, MenuItem, Select, withStyles } from "@material-ui/core";
+import { FormControl, InputLabel, MenuItem, Select, Typography, withStyles } from "@material-ui/core";
 import * as _ from "lodash";
 import * as moment from "moment";
 import * as React from "react";
@@ -63,7 +63,7 @@ class Performances extends React.Component<any, any> {
           return new Date(dateObj.confirmationDate);
         });
         for (const confirmation of report.confirmations) {
-          const label = moment(confirmation.confirmationDate).format("MMMM Do HH");
+          const label = moment(confirmation.confirmationDate).format("MMMM Do HA");
           const i = _.findIndex(dataObject.labels, (o) => {
             return o === label;
           });
@@ -120,10 +120,12 @@ class Performances extends React.Component<any, any> {
     });
     return (
       <div className={classes.root}>
-        Performances
+        <div style={{ margin: "15px" }}>
+          <Typography variant="title">Campaign Performances</Typography>
+        </div>
         <div className={classes.select}>
           <FormControl className={classes.formControl}>
-            <InputLabel>Campaign</InputLabel>
+            <InputLabel>Select Campaign</InputLabel>
             <Select inputProps={{
               name: "campaign",
             }} onChange={this.handleChange} value={this.state.campaign} name="role">

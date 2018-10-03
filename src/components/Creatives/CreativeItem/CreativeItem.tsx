@@ -24,7 +24,7 @@ class CreativeItem extends React.Component<any, any> {
               {creative.payload.title}
             </Typography>
             <Typography component="p">
-              {creative.type} | {creative.state}
+              {creative.type.code} | {creative.state}
             </Typography>
             <Typography>
               <a href={creative.payload.targetUrl}>{creative.payload.targetUrl}</a>

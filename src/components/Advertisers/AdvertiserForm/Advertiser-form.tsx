@@ -95,7 +95,7 @@ class AdvertiserForm extends React.Component<any, any> {
           {auth && auth.role === "admin" &&
             <div>
               <FormControl>
-                <InputLabel htmlFor="age-native-simple">Advertiser State</InputLabel>
+                <InputLabel>Advertiser State</InputLabel>
                 <Field disabled={!unlock && unlock !== undefined}
                   component={renderSelectField} name="ad_state" label="State">
                   <MenuItem value={"under_review"}>Under Review</MenuItem>
