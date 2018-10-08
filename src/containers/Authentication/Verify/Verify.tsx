@@ -37,19 +37,19 @@ class VerifyContainer extends React.Component<any, any> {
         </div>
         <div className={classes.row2}>
           <span className={classes.buttons}>
-            <Button variant="raised" color="primary"
+            <Button variant="contained" color="primary"
               disabled={(signinForm && signinForm.syncErrors !== undefined) || this.state.submitting}
               type="button" onClick={this.submit}>
               Verify
           </Button>
           </span>
           <span>
-            <Button onClick={this.resend} variant="raised" color="primary">
+            <Button onClick={this.resend} variant="contained" color="primary">
               Resend
           </Button>
           </span>
           <span className={classes.buttons}>
-            <Button onClick={signout} variant="raised" color="primary">
+            <Button onClick={signout} variant="contained" color="primary">
               Sign Out
           </Button>
           </span>

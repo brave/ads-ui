@@ -1,8 +1,8 @@
 import { Button, withStyles } from "@material-ui/core";
 import * as React from "react";
-import { Field, initialize, reduxForm } from "redux-form";
+import { Field, FieldArray, initialize, reduxForm } from "redux-form";
 
-import { renderDateField, renderTextField } from "../../../containers/field-material";
+import { renderChipField, renderDateField, renderTextField } from "../../../containers/field-material";
 
 import { styles } from "./CampaignForm.style";
 
@@ -16,7 +16,8 @@ const validate = (values: any) => {
 
 class CampaignForm extends React.Component<any, any> {
   public render() {
-    const { campaign, classes, dispatch, handleSubmit, invalid, initialized, submitting, unlock } = this.props;
+    const { campaign, classes, dispatch, geocodes,
+      handleSubmit, invalid, initialized, submitting, unlock } = this.props;
     if (campaign && !initialized) {
       delete campaign.createdAt;
       delete campaign.modifiedAt;
@@ -39,15 +40,19 @@ class CampaignForm extends React.Component<any, any> {
           </div>
           <div>
             <Field className={classes.textField} disabled={!unlock}
-             name="startAt" component={renderDateField} label="Start Date"/>
+              name="startAt" component={renderDateField} label="Start Date" />
           </div>
           <div>
             <Field className={classes.textField} disabled={!unlock}
-             name="endAt" component={renderDateField} label="End Date"/>
+              name="endAt" component={renderDateField} label="End Date" />
+          </div>
+          <div>
+            <FieldArray disabled={!unlock} options={geocodes}
+              name="geoTargets" component={renderChipField} />
           </div>
           {unlock &&
             <div>
-              <Button variant="raised" disabled={submitting || invalid} color="primary" type="submit">
+              <Button variant="contained" disabled={submitting || invalid} color="primary" type="submit">
                 Save
             </Button>
             </div>

@@ -33,7 +33,7 @@ class AdvertiserNew extends React.Component<any, any> {
       <div className={classes.root}>
         <AppBar position="static" color="default">
           <Toolbar>
-            <Typography variant="title">New Advertiser</Typography>
+            <Typography variant="h5">New Advertiser</Typography>
           </Toolbar>
         </AppBar>
         <Card className={classes.card}>

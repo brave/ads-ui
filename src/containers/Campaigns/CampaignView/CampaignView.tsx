@@ -14,7 +14,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import {
-  UpdateCampaigns,
+  GetGeocodes, UpdateCampaigns,
 } from "../../../actions";
 
 import CampaignForm from "../../../components/Campaigns/CampaignForm/CampaignForm";
@@ -22,51 +22,31 @@ import CampaignForm from "../../../components/Campaigns/CampaignForm/CampaignFor
 import { styles } from "./CampaignView.style";
 
 class CampaignView extends React.Component<any, any> {
-  public static getDerivedStateFromProps(nextProps: any, prevState: any) {
-    if (prevState.campaigns !== nextProps.campaigns) {
-      const campaign = _.find(nextProps.campaigns, { id: nextProps.match.params.id }) as any;
-      const activeFlight = _.cloneDeep(_.find(campaign.flights, { active: true }));
-      const notActiveFlights = _.filter(campaign.flights, { active: false });
-      return {
-        activeFlight,
-        campaign,
-        campaigns: nextProps.campaigns,
-        notActiveFlights,
-      };
-    }
-    return null;
-  }
-
   constructor(props: any) {
     super(props);
     const campaign = _.find(props.campaigns, { id: this.props.match.params.id }) as any;
-    const activeFlight = _.find(campaign.flights, { active: true });
-    const notActiveFlights = _.filter(campaign.flights, { active: false });
+    props.getGeocodes(props.auth);
     this.state = {
-      activeFlight,
       campaign,
-      campaigns: props.campaigns,
-      notActiveFlights,
-      openNew: false,
       unlock: false,
     };
   }
 
   public render() {
-    const { classes } = this.props;
-    const { campaign} = this.state;
-    const { unlock } = this.state;
+    const { classes, geocodes } = this.props;
+    const { campaign, unlock } = this.state;
     return (
       <div className={classes.root}>
         <AppBar position="static" color="default">
           <Toolbar>
-            <Typography variant="title">{campaign.name}</Typography>
+            <Typography variant="h5">{campaign.name}</Typography>
           </Toolbar>
         </AppBar>
         <Card className={classes.infoCard}>
           <CardHeader title="Details" action={this.getLockButton()} />
           <CardContent className={classes.content}>
-            <CampaignForm campaign={campaign} unlock={unlock} onSubmit={(value: string) => this.handleSubmit(value)} />
+            <CampaignForm campaign={campaign} geocodes={geocodes}
+              unlock={unlock} onSubmit={(value: string) => this.handleSubmit(value)} />
           </CardContent>
         </Card>
       </div>
@@ -103,9 +83,11 @@ class CampaignView extends React.Component<any, any> {
 const mapStateToProps = (state: any, ownProps: any) => ({
   auth: state.authReducer,
   campaigns: state.campaignReducer.campaigns,
+  geocodes: state.geoCodeReducer.geocodes,
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
+  getGeocodes: (user: any) => dispatch(GetGeocodes(user)),
   update: (value: any, user: any) => dispatch(UpdateCampaigns(value, user)),
 });
 

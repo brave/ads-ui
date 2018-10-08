@@ -12,7 +12,7 @@ class CampaignItem extends React.Component<any, any> {
       <Card className={classes.card}>
         <CardContent className={classes.content}>
           <div>
-            <Typography gutterBottom variant="headline" component="h2">
+            <Typography gutterBottom variant="h2">
               {campaign.name}
             </Typography>
             <Typography component="p">

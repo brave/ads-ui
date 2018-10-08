@@ -19,7 +19,7 @@ class CampaignNew extends React.Component<any, any> {
       <div className={classes.root}>
         <AppBar position="static" color="default">
           <Toolbar>
-            <Typography variant="title">New Campaign</Typography>
+            <Typography variant="h5">New Campaign</Typography>
           </Toolbar>
         </AppBar>
         <Card className={classes.card}>

@@ -112,7 +112,7 @@ class AdvertiserForm extends React.Component<any, any> {
           }
           {unlock && auth && auth.role === "admin" &&
             <div>
-              <Button variant="raised" disabled={submitting || invalid} color="primary" type="submit">
+              <Button variant="contained" disabled={submitting || invalid} color="primary" type="submit">
                 Save
             </Button>
             </div>
