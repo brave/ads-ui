@@ -1,7 +1,7 @@
 import {
-  GET_CAMPAIGNS_FAILD,
-  GET_CAMPAIGNS_START,
-  GET_CAMPAIGNS_SUCCESSFUL,
+  GET_CREATIVESETS_FAILD,
+  GET_CREATIVESETS_START,
+  GET_CREATIVESETS_SUCCESSFUL,
   ICreativeSetAction,
   ICreativeSetPayload,
 } from "../../actions";
@@ -9,15 +9,15 @@ import { ICreativeSetState } from "./creativeset.interface";
 
 export const getCreativeSetReducer = (state: ICreativeSetState, action: ICreativeSetAction): ICreativeSetState => {
   switch (action.type) {
-    case GET_CAMPAIGNS_START:
+    case GET_CREATIVESETS_START:
       return {
         ...state,
       };
-    case GET_CAMPAIGNS_SUCCESSFUL:
+    case GET_CREATIVESETS_SUCCESSFUL:
       return {
         creativesets: action.payload as ICreativeSetPayload[],
       };
-    case GET_CAMPAIGNS_FAILD:
+    case GET_CREATIVESETS_FAILD:
       return {
         ...state,
       };

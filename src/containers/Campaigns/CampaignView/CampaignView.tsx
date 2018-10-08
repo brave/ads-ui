@@ -14,10 +14,11 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import {
-  GetGeocodes, UpdateCampaigns,
+  GetCreativeSets, GetGeocodes, UpdateCampaigns,
 } from "../../../actions";
 
 import CampaignForm from "../../../components/Campaigns/CampaignForm/CampaignForm";
+import CreativeSetList from "../../../components/CreativeSets/CreativeSetList/CreativeSetList";
 
 import { styles } from "./CampaignView.style";
 
@@ -26,6 +27,7 @@ class CampaignView extends React.Component<any, any> {
     super(props);
     const campaign = _.find(props.campaigns, { id: this.props.match.params.id }) as any;
     props.getGeocodes(props.auth);
+    props.getCreativeSets(campaign.id, props.auth);
     this.state = {
       campaign,
       unlock: false,
@@ -33,7 +35,7 @@ class CampaignView extends React.Component<any, any> {
   }
 
   public render() {
-    const { classes, geocodes } = this.props;
+    const { classes, creativesets, geocodes, match } = this.props;
     const { campaign, unlock } = this.state;
     return (
       <div className={classes.root}>
@@ -52,6 +54,7 @@ class CampaignView extends React.Component<any, any> {
         <Card className={classes.infoCard}>
           <CardHeader title="Creative Sets" />
           <CardContent className={classes.content}>
+            <CreativeSetList creativeSets={creativesets} match={match}></CreativeSetList>
           </CardContent>
         </Card>
       </div>
@@ -88,10 +91,12 @@ class CampaignView extends React.Component<any, any> {
 const mapStateToProps = (state: any, ownProps: any) => ({
   auth: state.authReducer,
   campaigns: state.campaignReducer.campaigns,
+  creativesets: state.creativeSetReducer.creativesets,
   geocodes: state.geoCodeReducer.geocodes,
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
+  getCreativeSets: (campaignId: string, user: any) => dispatch(GetCreativeSets(campaignId, user)),
   getGeocodes: (user: any) => dispatch(GetGeocodes(user)),
   update: (value: any, user: any) => dispatch(UpdateCampaigns(value, user)),
 });

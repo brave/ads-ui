@@ -26,7 +26,7 @@ export const GetCreativeSets = (campaignId: string, auth: IAuthPayload) => {
   return async (dispatch: any) => {
     try {
       dispatch(GetCreativeSetsStart);
-      const response = await axios.get(`${process.env.REACT_APP_SERVER_ADDRESS}/campaign/${campaignId}`, {
+      const response = await axios.get(`${process.env.REACT_APP_SERVER_ADDRESS}/campaign/${campaignId}/creativeSet`, {
         headers: {
           "Authorization": `Bearer ${auth.accessToken}`,
           "Content-Type": "application/json",
