@@ -49,6 +49,11 @@ class CampaignView extends React.Component<any, any> {
               unlock={unlock} onSubmit={(value: string) => this.handleSubmit(value)} />
           </CardContent>
         </Card>
+        <Card className={classes.infoCard}>
+          <CardHeader title="Creative Sets" />
+          <CardContent className={classes.content}>
+          </CardContent>
+        </Card>
       </div>
     );
   }
