@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Checkbox,
   Chip,
   FormControl,
@@ -90,22 +89,20 @@ export const renderChipField = ({
   {
     return (
       <div>
-        <Typography variant="body1">Geo Targets</Typography>
-        {custom.disabled &&
+        <Typography variant="body1">{label}</Typography>
+        {custom.disabled && fields.getAll() &&
           fields.getAll().map((field: any, index: number) => {
             return (
               <Chip
-                avatar={<Avatar>{field.code}</Avatar>}
                 key={field.code}
                 label={field.name}{...custom} />
             );
           })
         }
-        {!custom.disabled &&
+        {!custom.disabled && fields.getAll() &&
           fields.getAll().map((field: any, index: number) => {
             return (
               <Chip
-                avatar={<Avatar>{field.code}</Avatar>}
                 key={field.code}
                 label={field.name}
                 color="primary"
@@ -120,11 +117,9 @@ export const renderChipField = ({
         {!custom.disabled &&
           <div>
             <FormControl style={{ margin: "10px", width: "100%" }}>
-              <InputLabel>Select Region to Add</InputLabel>
+              <InputLabel>Select {label} to Add</InputLabel>
               <Select onChange={(event: any) => {
                 const selected = _.find(custom.options, { code: event.target.value });
-                // tslint:disable-next-line:no-console
-                console.log(selected);
                 fields.push(selected);
               }} value="">
                 <MenuItem value="">

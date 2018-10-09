@@ -3,32 +3,30 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
-import { CreateCampaigns } from "../../../actions";
-import CampaignForm from "../CampaignForm/CampaignForm";
+import { CreateCreativeSets } from "../../../actions";
+import CreativeSetForm from "../CreatoveSetForm/CreativeSetForm";
 
-import { styles } from "./CampaignNew.style";
+import { styles } from "./CreativeSetNew.style";
 
 class CampaignNew extends React.Component<any, any> {
   public render() {
-    const { classes, create, auth, advertisers, history, geocodes } = this.props;
+    const { classes, create, auth, history, match, segments } = this.props;
     const handleSubmit = async (value: any) => {
-      value.advertiserId = advertisers[0].id;
-      value.type = "paid";
-      value.budget = parseFloat(value.budget);
-      value.dailyCap = parseFloat(value.dailyCap);
-      const result = await create(value, auth);
-      history.push(`/user/main/campaigns/${result.id}`);
+      value.totalMax = parseFloat(value.totalMax);
+      value.perDay = parseFloat(value.perDay);
+      const result = await create(match.params.id, value, auth);
+      history.push(`/user/main/campaigns/${match.params.id}/creativeSet/${result.id}`);
     };
     return (
       <div className={classes.root}>
         <AppBar position="static" color="default">
           <Toolbar>
-            <Typography variant="h5">New Campaign</Typography>
+            <Typography variant="h5">New CreativeSet</Typography>
           </Toolbar>
         </AppBar>
         <Card className={classes.card}>
           <CardContent>
-            <CampaignForm geocodes={geocodes} unlock={true} onSubmit={handleSubmit} />
+            <CreativeSetForm segments={segments} unlock={true} onSubmit={handleSubmit} />
           </CardContent>
         </Card>
       </div>
@@ -37,13 +35,12 @@ class CampaignNew extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
-  advertisers: state.advertiserReducer.advertisers,
   auth: state.authReducer,
-  geocodes: state.geoCodeReducer.geocodes,
+  segments: state.segmentReducer.segments,
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
-  create: (value: any, user: any) => dispatch((CreateCampaigns(value, user))),
+  create: (campaignId: string, value: any, user: any) => dispatch((CreateCreativeSets(campaignId, value, user))),
 });
 
 export default withRouter(withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(CampaignNew)) as any);

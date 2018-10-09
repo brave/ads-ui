@@ -27,12 +27,13 @@ export const CreateCreativeSets = (campaignId: string, creativeSet: ICreateCreat
   return async (dispatch: any) => {
     try {
       dispatch(CreateCreativeSetsStart(creativeSet));
-      const response = await axios.post(`${process.env.REACT_APP_SERVER_ADDRESS}/campaign/${campaignId}`, creativeSet, {
-        headers: {
-          "Authorization": `Bearer ${user.accessToken}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_ADDRESS}/campaign/${campaignId}/creativeSet`,
+        creativeSet, {
+          headers: {
+            "Authorization": `Bearer ${user.accessToken}`,
+            "Content-Type": "application/json",
+          },
+        });
       dispatch(OpenSnackBar("CreativeSet created Successfully"));
       dispatch(CreateCreativeSetsSuccessful(response.data));
       return Promise.resolve(response.data);

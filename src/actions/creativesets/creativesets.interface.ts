@@ -13,7 +13,6 @@ export interface ICreateCreativeSetPayload {
 
 export interface ICreativeSetPayload {
   id: string;
-  campaignId: string;
   state: string;
   createdAt: string;
   modifiedAt: string;

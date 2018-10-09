@@ -48,7 +48,7 @@ class CampaignForm extends React.Component<any, any> {
           </div>
           <div>
             <FieldArray disabled={!unlock} options={geocodes}
-              name="geoTargets" component={renderChipField} />
+              name="geoTargets" component={renderChipField} label="Geo Targets" />
           </div>
           {unlock &&
             <div>
