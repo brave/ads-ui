@@ -59,7 +59,7 @@ class CreativeInstanceList extends React.Component<any, any> {
                     Creative Platform
               </TableCell>
                   <TableCell>
-                    Total Max
+                    Actions
               </TableCell>
                 </TableRow>
               </TableHead>
