@@ -14,9 +14,10 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import {
-   GetSegments, UpdateCreativeSets,
+   GetCreativeInstances, GetSegments, UpdateCreativeSets,
 } from "../../../actions";
 
+import CreativeInstanceList from "../../../components/CreativeInstances/CreativeInstanceList/CreativeInstanceList";
 import CreativeSetForm from "../../../components/CreativeSets/CreatoveSetForm/CreativeSetForm";
 
 import { styles } from "./CreativeSetView.style";
@@ -27,6 +28,7 @@ class CampaignView extends React.Component<any, any> {
     const campaign = _.find(props.campaigns, { id: this.props.match.params.id }) as any;
     const creativeSet = _.find(props.creativeSets, { id: this.props.match.params.creativeSetId }) as any;
     props.getSegments(props.auth);
+    props.getCreativeInstances(creativeSet.id, props.auth);
     this.state = {
       campaign,
       creativeSet,
@@ -35,7 +37,7 @@ class CampaignView extends React.Component<any, any> {
   }
 
   public render() {
-    const { classes, segments } = this.props;
+    const { classes, segments, creativeInstances, match } = this.props;
     const { campaign, creativeSet, unlock } = this.state;
     return (
       <div className={classes.root}>
@@ -54,7 +56,7 @@ class CampaignView extends React.Component<any, any> {
         <Card className={classes.infoCard}>
           <CardHeader title="Creatives" />
           <CardContent className={classes.content}>
-            Test
+            <CreativeInstanceList match={match} creativeInstances={creativeInstances} />
           </CardContent>
         </Card>
       </div>
@@ -91,11 +93,13 @@ class CampaignView extends React.Component<any, any> {
 const mapStateToProps = (state: any, ownProps: any) => ({
   auth: state.authReducer,
   campaigns: state.campaignReducer.campaigns,
+  creativeInstances: state.creativeInstanceReducer.creativeInstances,
   creativeSets: state.creativeSetReducer.creativesets,
   segments: state.segmentReducer.segments,
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
+  getCreativeInstances: (creativeSetId: string, user: any) => dispatch(GetCreativeInstances(creativeSetId, user)),
   getSegments: (user: any) => dispatch(GetSegments(user)),
   update: (campaignId: string, value: any, user: any) => dispatch(UpdateCreativeSets(campaignId, value, user)),
 });

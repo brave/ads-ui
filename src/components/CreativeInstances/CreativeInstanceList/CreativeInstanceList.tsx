@@ -14,11 +14,11 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import CreativeSetItem from "../CreativeSetItem/CreativeSetItem";
+import CreativeInstanceItem from "../CreativeInstanceItem/CreativeInstanceItem";
 
-import { styles } from "./CreativeSetList.style";
+import { styles } from "./CreativeInstanceList.style";
 
-class CreativeSetList extends React.Component<any, any> {
+class CreativeInstanceList extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -36,13 +36,13 @@ class CreativeSetList extends React.Component<any, any> {
   }
 
   public render() {
-    const { classes, match, creativeSets } = this.props;
+    const { classes, match, creativeInstances } = this.props;
     const { rowsPerPage, page } = this.state;
-    const listItems = creativeSets
+    const listItems = creativeInstances
       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
       .map((item: any) => {
         return (
-          <CreativeSetItem key={item.id} match={match} creativeSet={item} />
+          <CreativeInstanceItem key={item.id} match={match} creativeInstance={item} />
         );
       });
     return (
@@ -53,19 +53,13 @@ class CreativeSetList extends React.Component<any, any> {
               <TableHead>
                 <TableRow>
                   <TableCell>
-                    Execution
+                    Creative Type
               </TableCell>
                   <TableCell>
-                    Per Day
+                    Creative Platform
               </TableCell>
                   <TableCell>
                     Total Max
-              </TableCell>
-                  <TableCell>
-                    State
-              </TableCell>
-                  <TableCell>
-                    Action
               </TableCell>
                 </TableRow>
               </TableHead>
@@ -75,7 +69,7 @@ class CreativeSetList extends React.Component<any, any> {
             </Table>
             <TablePagination
               component="div"
-              count={creativeSets.length}
+              count={creativeInstances.length}
               rowsPerPage={rowsPerPage}
               page={page}
               backIconButtonProps={{
@@ -105,4 +99,4 @@ const mapStateToProps = (state: any, ownProps: any) => ({
 const mapDispathToProps = (dispatch: any, ownProps: any) => ({
 });
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispathToProps)(CreativeSetList));
+export default withStyles(styles)(connect(mapStateToProps, mapDispathToProps)(CreativeInstanceList));
