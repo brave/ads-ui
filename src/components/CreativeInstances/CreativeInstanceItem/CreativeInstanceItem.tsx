@@ -7,6 +7,9 @@ import { styles } from "./CreativeInstanceItem.style";
 class CreativeListItem extends React.Component<any, any> {
   public render() {
     const { classes, creativeInstance, match } = this.props;
+    const url = match.url.replace(/campaigns.*/, `creatives/${creativeInstance.creative.id}`);
+    // tslint:disable-next-line:no-console
+    console.log(url);
     return (
       <TableRow className={classes.table}>
         <TableCell>
@@ -16,7 +19,7 @@ class CreativeListItem extends React.Component<any, any> {
           <div>{creativeInstance.creative.type.platform}</div>
         </TableCell>
         <TableCell>
-          <Link className={classes.viewButton} to={`${match.url}/creativeSet/${creativeInstance.id}`}>
+          <Link className={classes.viewButton} to={`${url}`}>
             <IconButton color="primary">
               <Icon>list</Icon>
             </IconButton>
