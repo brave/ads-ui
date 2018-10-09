@@ -8,8 +8,6 @@ class CreativeListItem extends React.Component<any, any> {
   public render() {
     const { classes, creativeInstance, match } = this.props;
     const url = match.url.replace(/campaigns.*/, `creatives/${creativeInstance.creative.id}`);
-    // tslint:disable-next-line:no-console
-    console.log(url);
     return (
       <TableRow className={classes.table}>
         <TableCell>
