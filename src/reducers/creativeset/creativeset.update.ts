@@ -3,19 +3,19 @@ import * as _ from "lodash";
 import {
   ICreativeSetAction,
   ICreativeSetPayload,
-  UPDATE_CAMPAIGNS_FAILED,
-  UPDATE_CAMPAIGNS_START,
-  UPDATE_CAMPAIGNS_SUCCESSFUL,
+  UPDATE_CREATIVESETS_FAILED,
+  UPDATE_CREATIVESETS_START,
+  UPDATE_CREATIVESETS_SUCCESSFUL,
 } from "../../actions";
 import { ICreativeSetState } from "./creativeset.interface";
 
 export const updateCreativeSetReducer = (state: ICreativeSetState, action: ICreativeSetAction): ICreativeSetState => {
   switch (action.type) {
-    case UPDATE_CAMPAIGNS_START:
+    case UPDATE_CREATIVESETS_START:
       return {
         ...state,
       };
-    case UPDATE_CAMPAIGNS_SUCCESSFUL:
+    case UPDATE_CREATIVESETS_SUCCESSFUL:
       const creativesets = _.filter(state.creativesets, (item) => {
         return item.id !== (action.payload as ICreativeSetPayload).id;
       });
@@ -23,7 +23,7 @@ export const updateCreativeSetReducer = (state: ICreativeSetState, action: ICrea
       return {
         creativesets,
       };
-    case UPDATE_CAMPAIGNS_FAILED:
+    case UPDATE_CREATIVESETS_FAILED:
       return {
         ...state,
       };

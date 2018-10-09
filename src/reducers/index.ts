@@ -5,6 +5,7 @@ import advertiserReducer from "./advertiser";
 import authReducer from "./auth";
 import campaignReducer from "./campaign";
 import creativeReducer from "./creative";
+import creativeInstanceReducer from "./creativeinstance";
 import creativeSetReducer from "./creativeset";
 import creativeTypeReducer from "./creativetype";
 import drawerReducer from "./drawer";
@@ -18,6 +19,7 @@ export default combineReducers({
   advertiserReducer,
   authReducer,
   campaignReducer,
+  creativeInstanceReducer,
   creativeReducer,
   creativeSetReducer,
   creativeTypeReducer,
