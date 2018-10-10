@@ -23,8 +23,6 @@ class Guard extends React.Component<any, any> {
     } else if (auth.role === "user") {
       redirectUrl = "/main/user";
     }
-    // tslint:disable-next-line:no-console
-    console.log(redirectUrl, match.url);
     if (redirectUrl && redirectUrl !== match.url) {
       return (<Redirect to={redirectUrl} />);
     }

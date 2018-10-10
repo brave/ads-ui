@@ -49,13 +49,11 @@ class CreativeInstanceList extends React.Component<any, any> {
     this.setState({
       open: false,
     });
-    if (action === "submit") {
+    if (action === "submit" && creative) {
       const creativeInstance = {
         creativeId: creative,
         creativeSetId: this.props.match.params.creativeSetId,
       };
-      // tslint:disable-next-line:no-console
-      console.log(creativeInstance);
       this.props.createCreativeInstance(creativeInstance, this.props.auth);
     }
   }
