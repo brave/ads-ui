@@ -32,6 +32,7 @@ class CampaignView extends React.Component<any, any> {
     this.state = {
       campaign,
       creativeSet,
+      open: false,
       unlock: false,
     };
   }
@@ -95,6 +96,7 @@ const mapStateToProps = (state: any, ownProps: any) => ({
   campaigns: state.campaignReducer.campaigns,
   creativeInstances: state.creativeInstanceReducer.creativeInstances,
   creativeSets: state.creativeSetReducer.creativesets,
+  creatives: state.creativeReducer.creatives,
   segments: state.segmentReducer.segments,
 });
 

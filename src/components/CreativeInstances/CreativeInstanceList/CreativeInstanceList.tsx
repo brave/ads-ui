@@ -12,7 +12,10 @@ import {
 } from "@material-ui/core";
 import * as React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+
+import { CreateCreativeInstances } from "../../../actions";
+
+import CreativeSetAddCreative from "../../CreativeSets/CreativeSetAddCreative/CreativeSetAddCreative";
 
 import CreativeInstanceItem from "../CreativeInstanceItem/CreativeInstanceItem";
 
@@ -22,6 +25,7 @@ class CreativeInstanceList extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
+      open: false,
       page: 0,
       rowsPerPage: 10,
     };
@@ -33,6 +37,27 @@ class CreativeInstanceList extends React.Component<any, any> {
 
   public handleChangeRowsPerPage = (event: any) => {
     this.setState({ rowsPerPage: event.target.value });
+  }
+
+  public openDialog = () => {
+    this.setState({
+      open: true,
+    });
+  }
+
+  public handleDialogClose = (action: any, creative: any) => {
+    this.setState({
+      open: false,
+    });
+    if (action === "submit") {
+      const creativeInstance = {
+        creativeId: creative,
+        creativeSetId: this.props.match.params.creativeSetId,
+      };
+      // tslint:disable-next-line:no-console
+      console.log(creativeInstance);
+      this.props.createCreativeInstance(creativeInstance, this.props.auth);
+    }
   }
 
   public render() {
@@ -87,20 +112,24 @@ class CreativeInstanceList extends React.Component<any, any> {
             />
           </CardContent>
         </Card>
-        <Link className={classes.fab} to={match.url + "/creativeSet/new"}>
-          <Button color="secondary" variant="fab">
-            <Icon>add</Icon>
-          </Button>
-        </Link>
+        <Button className={classes.fab} color="secondary" variant="fab" onClick={this.openDialog}>
+          <Icon>add</Icon>
+        </Button>
+        <CreativeSetAddCreative open={this.state.open} creatives={this.props.creatives}
+          handleClose={this.handleDialogClose} />
       </div>
     );
   }
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
+  auth: state.authReducer,
+  creatives: state.creativeReducer.creatives,
 });
 
 const mapDispathToProps = (dispatch: any, ownProps: any) => ({
+  createCreativeInstance: (creativeInstance: any, auth: any) =>
+    dispatch((CreateCreativeInstances(creativeInstance, auth))),
 });
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispathToProps)(CreativeInstanceList));

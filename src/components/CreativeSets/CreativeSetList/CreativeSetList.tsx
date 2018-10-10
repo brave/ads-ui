@@ -104,6 +104,7 @@ class CreativeSetList extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
+  creatives: state.creativeReducer.creatives,
 });
 
 const mapDispathToProps = (dispatch: any, ownProps: any) => ({
