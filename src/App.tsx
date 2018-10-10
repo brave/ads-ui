@@ -43,8 +43,8 @@ class App extends React.Component<any, any> {
           <Footer></Footer>
           <Snackbar
             anchorOrigin={{
-              horizontal: "right",
-              vertical: "top",
+              horizontal: "left",
+              vertical: "bottom",
             }}
             message={<span>{snackbar.message}</span>}
             open={snackbar.open}

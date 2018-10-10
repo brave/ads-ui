@@ -36,7 +36,11 @@ class CreativeSetList extends React.Component<any, any> {
   }
 
   public render() {
-    const { classes, match, creativeSets } = this.props;
+    const { classes, match } = this.props;
+    let { creativeSets } = this.props;
+    if (!creativeSets) {
+      creativeSets = [];
+    }
     const { rowsPerPage, page } = this.state;
     const listItems = creativeSets
       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)

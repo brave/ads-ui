@@ -36,8 +36,12 @@ class CreativeInstanceList extends React.Component<any, any> {
   }
 
   public render() {
-    const { classes, match, creativeInstances } = this.props;
+    const { classes, match } = this.props;
+    let { creativeInstances } = this.props;
     const { rowsPerPage, page } = this.state;
+    if (!creativeInstances) {
+      creativeInstances = [];
+    }
     const listItems = creativeInstances
       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
       .map((item: any) => {

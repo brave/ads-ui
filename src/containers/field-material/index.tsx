@@ -114,7 +114,7 @@ export const renderChipField = ({
             );
           })
         }
-        {!custom.disabled &&
+        {!custom.disabled && custom.options &&
           <div>
             <FormControl style={{ margin: "10px", width: "100%" }}>
               <InputLabel>Select {label} to Add</InputLabel>
