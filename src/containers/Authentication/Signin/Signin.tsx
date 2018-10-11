@@ -34,11 +34,11 @@ class SignInContainer extends React.Component<any, any> {
           </div>
         </div>
         <div className={classes.row2}>
-          <Button variant="raised" color="primary"
+          <Button variant="contained" color="primary"
             disabled={(signinForm && signinForm.syncErrors !== undefined) || this.state.submitting}
             type="button" onClick={this.submit}>Sign In</Button>
           <Link className={classes.signuplink} to={`/auth/signup`}>
-            <Button variant="raised" color="primary">
+            <Button variant="contained" color="primary">
               Sign Up
             </Button>
           </Link>

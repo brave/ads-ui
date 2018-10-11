@@ -36,7 +36,7 @@ class Appbar extends React.Component<any, any> {
                 {getMenuItem()}
               </IconButton>
             <img src="/favicon.png" className={classes.logo} />
-            <Typography className={classes.flex} variant="title" color="inherit">
+            <Typography className={classes.flex} variant="h5" color="inherit">
               Brave Advertisment
             </Typography>
             <Button color="inherit" onClick={signOut}>Logout</Button>

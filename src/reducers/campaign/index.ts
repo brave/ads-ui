@@ -1,11 +1,7 @@
 import {
-  ADD_FLIGHT_DAYPARTING_SUCCESSFUL,
-  ADD_FLIGHT_GEOTARGETING_SUCCESSFUL,
-  ADD_FLIGHT_SEGMENT_SUCCESSFUL,
   CREATE_CAMPAIGNS_FAILED,
   CREATE_CAMPAIGNS_START,
   CREATE_CAMPAIGNS_SUCCESSFUL,
-  CREATE_FLIGHTS_SUCCESSFUL,
   GET_CAMPAIGNS_FAILD,
   GET_CAMPAIGNS_START,
   GET_CAMPAIGNS_SUCCESSFUL,
@@ -19,7 +15,6 @@ import {
 import { createCampaignReducer } from "./campaign.create";
 import { getCampaignReducer } from "./campaign.get";
 import { ICampaignState } from "./campaign.interface";
-import { serviceCampaignReducer } from "./campaign.service";
 import { updateCampaignReducer } from "./campaign.update";
 
 const campaignReducer = (
@@ -41,11 +36,6 @@ const campaignReducer = (
     case CREATE_CAMPAIGNS_START:
     case CREATE_CAMPAIGNS_SUCCESSFUL:
       return createCampaignReducer(state, action);
-    case CREATE_FLIGHTS_SUCCESSFUL:
-    case ADD_FLIGHT_GEOTARGETING_SUCCESSFUL:
-    case ADD_FLIGHT_DAYPARTING_SUCCESSFUL:
-    case ADD_FLIGHT_SEGMENT_SUCCESSFUL:
-      return serviceCampaignReducer(state, action);
     case SIGN_OUT:
       return {
         campaigns: [],

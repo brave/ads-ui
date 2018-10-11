@@ -20,7 +20,7 @@ class UserNew extends React.Component<any, any> {
       <div className={classes.root}>
         <AppBar position="static" color="default">
           <Toolbar>
-            <Typography variant="title">New User</Typography>
+            <Typography variant="h5">New User</Typography>
           </Toolbar>
         </AppBar>
         <Card className={classes.card}>

@@ -78,7 +78,7 @@ class AdvertiserView extends React.Component<any, any> {
       <div className={classes.root}>
         <AppBar position="static" color="default">
           <Toolbar>
-            <Typography variant="title">{advertiser.name}</Typography>
+            <Typography variant="h5">{advertiser.name}</Typography>
           </Toolbar>
         </AppBar>
         <Card className={classes.infoCard}>

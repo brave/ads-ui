@@ -71,7 +71,7 @@ class CreativesView extends React.Component<any, any> {
       <div className={classes.root}>
         <AppBar position="static" color="default">
           <Toolbar>
-            <Typography variant="title">{creative.caption}</Typography>
+            <Typography variant="h5">{creative.caption}</Typography>
           </Toolbar>
         </AppBar>
         <Card className={classes.infoCard}>

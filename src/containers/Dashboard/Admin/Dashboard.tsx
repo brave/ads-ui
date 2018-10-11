@@ -5,7 +5,7 @@ class Dashboard extends React.Component<any, any> {
   public render() {
     return (
       <div style={{ margin: "15px" }}>
-        <Typography variant="title">Admin Dashboard</Typography>
+        <Typography variant="h5">Admin Dashboard</Typography>
       </div>
     );
   }

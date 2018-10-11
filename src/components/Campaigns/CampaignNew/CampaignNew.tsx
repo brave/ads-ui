@@ -10,21 +10,25 @@ import { styles } from "./CampaignNew.style";
 
 class CampaignNew extends React.Component<any, any> {
   public render() {
-    const { classes, create, auth, history } = this.props;
+    const { classes, create, auth, advertisers, history, geocodes } = this.props;
     const handleSubmit = async (value: any) => {
+      value.advertiserId = advertisers[0].id;
+      value.type = "paid";
+      value.budget = parseFloat(value.budget);
+      value.dailyCap = parseFloat(value.dailyCap);
       const result = await create(value, auth);
-      history.push(`/main/campaigns/${result.id}`);
+      history.push(`/user/main/campaigns/${result.id}`);
     };
     return (
       <div className={classes.root}>
         <AppBar position="static" color="default">
           <Toolbar>
-            <Typography variant="title">New Campaign</Typography>
+            <Typography variant="h5">New Campaign</Typography>
           </Toolbar>
         </AppBar>
         <Card className={classes.card}>
           <CardContent>
-            <CampaignForm unlock={true} onSubmit={handleSubmit} />
+            <CampaignForm geocodes={geocodes} unlock={true} onSubmit={handleSubmit} />
           </CardContent>
         </Card>
       </div>
@@ -33,7 +37,9 @@ class CampaignNew extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
+  advertisers: state.advertiserReducer.advertisers,
   auth: state.authReducer,
+  geocodes: state.geoCodeReducer.geocodes,
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({

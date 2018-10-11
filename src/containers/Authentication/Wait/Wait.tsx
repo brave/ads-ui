@@ -29,7 +29,7 @@ class WaitContainer extends React.Component<any, any> {
       <div className={classes.root}>
         <div className={classes.row1}>
           <div className={classes.row1_column1}>
-            <Typography variant="title">Review</Typography>
+            <Typography variant="h5">Review</Typography>
             <Typography variant="body1" gutterBottom>
               Your Application is under review.<br/>One of our representatives will review and contact you shortly.
             </Typography>
@@ -39,7 +39,7 @@ class WaitContainer extends React.Component<any, any> {
           </div>
         </div>
         <div className={classes.row2}>
-          <Button onClick={signout} variant="raised" color="primary">
+          <Button onClick={signout} variant="contained" color="primary">
             Sign Out
           </Button>
         </div>

@@ -121,7 +121,7 @@ class Performances extends React.Component<any, any> {
     return (
       <div className={classes.root}>
         <div style={{ margin: "15px" }}>
-          <Typography variant="title">Campaign Performances</Typography>
+          <Typography variant="h5">Campaign Performances</Typography>
         </div>
         <div className={classes.select}>
           <FormControl className={classes.formControl}>

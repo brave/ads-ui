@@ -20,8 +20,8 @@ class CreativeItem extends React.Component<any, any> {
       <Card className={classes.card}>
         <CardContent className={classes.content}>
           <div>
-            <Typography gutterBottom variant="headline" component="h2">
-              {creative.payload.title}
+            <Typography gutterBottom variant="h2">
+              {creative.payload.h5}
             </Typography>
             <Typography component="p">
               {creative.type.code} | {creative.state}

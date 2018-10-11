@@ -1,4 +1,15 @@
-import { Checkbox, FormControlLabel, Select, TextField } from "@material-ui/core";
+import {
+  Checkbox,
+  Chip,
+  FormControl,
+  FormControlLabel,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from "@material-ui/core";
+import * as _ from "lodash";
 import DatePicker from "material-ui-pickers/DatePicker";
 import MomentUtils from "material-ui-pickers/utils/moment-utils";
 import MuiPickersUtilsProvider from "material-ui-pickers/utils/MuiPickersUtilsProvider";
@@ -62,8 +73,67 @@ export const renderDateField = ({
       <DatePicker
         {...input}
         label={label}
-        onChange={(value) => input.onChange(value)}
+        onChange={(value: any) => input.onChange(value)}
         {...custom}
       />
     </MuiPickersUtilsProvider>
   );
+
+export const renderChipField = ({
+  fields,
+  children,
+  label,
+  // tslint:disable-next-line:trailing-comma
+  ...custom
+}: any) => {
+  {
+    return (
+      <div>
+        <Typography variant="body1">{label}</Typography>
+        {custom.disabled && fields.getAll() &&
+          fields.getAll().map((field: any, index: number) => {
+            return (
+              <Chip
+                key={field.code}
+                label={field.name}{...custom} />
+            );
+          })
+        }
+        {!custom.disabled && fields.getAll() &&
+          fields.getAll().map((field: any, index: number) => {
+            return (
+              <Chip
+                key={field.code}
+                label={field.name}
+                color="primary"
+                onDelete={() => {
+                  if (!custom.disabled) {
+                    fields.remove(index);
+                  }
+                }} {...custom} />
+            );
+          })
+        }
+        {!custom.disabled && custom.options &&
+          <div>
+            <FormControl style={{ margin: "10px", width: "100%" }}>
+              <InputLabel>Select {label} to Add</InputLabel>
+              <Select onChange={(event: any) => {
+                const selected = _.find(custom.options, { code: event.target.value });
+                fields.push(selected);
+              }} value="">
+                <MenuItem value="">
+                </MenuItem>
+                {
+                  custom.options.map((value: any) => {
+                    return (<MenuItem key={value.code} value={value.code}>{value.name}</MenuItem>);
+                  })
+                }
+              </Select>
+            </FormControl>
+          </div>
+        }
+      </div>
+    );
+  }
+};

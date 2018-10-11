@@ -37,12 +37,12 @@ class SignInContainer extends React.Component<any, any> {
         </div>
         <div className={classes.row2}>
           <span className={classes.buttons}>
-            <Button variant="raised" color="primary"
+            <Button variant="contained" color="primary"
               disabled={(advertiserForm && advertiserForm.syncErrors !== undefined) || this.state.submitting}
               type="button" onClick={this.submit}>Submit</Button>
           </span>
           <span>
-            <Button onClick={signout} variant="raised" color="primary">
+            <Button onClick={signout} variant="contained" color="primary">
               Sign Out
           </Button>
           </span>

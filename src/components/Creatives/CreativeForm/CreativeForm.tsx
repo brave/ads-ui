@@ -77,7 +77,7 @@ class CreativeForm extends React.Component<any, any> {
           </div>
           {unlock &&
             <div>
-              <Button variant="raised" disabled={submitting || invalid} color="primary" type="submit">
+              <Button variant="contained" disabled={submitting || invalid} color="primary" type="submit">
                 Save
             </Button>
             </div>
