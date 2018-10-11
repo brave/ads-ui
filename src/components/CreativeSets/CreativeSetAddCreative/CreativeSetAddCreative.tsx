@@ -19,7 +19,7 @@ class CreativeSetAddCreative extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      creative: null,
+      creative: props.creatives[0].id,
       open: props.open,
     };
   }
