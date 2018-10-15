@@ -10,16 +10,25 @@ class InvoiceItem extends React.Component<any, any> {
     return (
       <TableRow className={classes.table}>
         <TableCell>
-          <div>{invoice.execution}</div>
+          <div>{invoice.balance}</div>
         </TableCell>
         <TableCell>
-          <div>{invoice.perDay}</div>
+          <div>{invoice.startDate}</div>
         </TableCell>
         <TableCell>
-          <div>{invoice.totalMax}</div>
+          <div>{invoice.endDate}</div>
+        </TableCell>
+        <TableCell>
+          <div>{invoice.confirmationCount}</div>
         </TableCell>
         <TableCell>
           <div>{invoice.state}</div>
+        </TableCell>
+        <TableCell>
+          <div>{invoice.paidAt}</div>
+        </TableCell>
+        <TableCell>
+          <div>{invoice.paid}</div>
         </TableCell>
         <TableCell>
           <Link className={classes.viewButton} to={`${match.url}/invoices/${invoice.id}`}>

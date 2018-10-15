@@ -54,16 +54,25 @@ class CreativeSetList extends React.Component<any, any> {
               <TableHead>
                 <TableRow>
                   <TableCell>
-                    Execution
+                    Balance
               </TableCell>
                   <TableCell>
-                    Per Day
+                    Start Date
               </TableCell>
                   <TableCell>
-                    Total Max
+                    End Date
+              </TableCell>
+              <TableCell>
+                    Confirmations
               </TableCell>
                   <TableCell>
                     State
+              </TableCell>
+              <TableCell>
+                    Paid At
+              </TableCell>
+              <TableCell>
+                    Paid
               </TableCell>
                   <TableCell>
                     Action
