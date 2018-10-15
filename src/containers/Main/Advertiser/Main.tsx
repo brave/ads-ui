@@ -20,6 +20,7 @@ import Appbar from "../../../components/Appbar/Appbar";
 import Campaigns from "../../Campaigns/Campaigns";
 import Creatives from "../../Creatives/Creatives";
 import Dashboard from "../../Dashboard/Advertiser/Dashboard";
+import Invoices from "../../Invoices/Invoices";
 import Performances from "../../Performances/Performances";
 import Preferences from "../../Preferences/Preferences";
 
@@ -67,6 +68,14 @@ class Main extends React.Component<any, any> {
             <ListItemText primary="Performances" />
           </ListItem>
         </Link>
+        <Link to={match.url + "/invoices"} className={classes.link}>
+          <ListItem button>
+            <ListItemIcon>
+              <Icon>receipt</Icon>
+            </ListItemIcon>
+            <ListItemText primary="Invoices" />
+          </ListItem>
+        </Link>
         <Link to={match.url + "/preferences"} className={classes.link}>
           <ListItem button>
             <ListItemIcon>
@@ -106,6 +115,7 @@ class Main extends React.Component<any, any> {
             <Route path={match.url + "/creatives"} component={Creatives} />
             <Route path={match.url + "/campaigns"} component={Campaigns} />
             <Route path={match.url + "/performances"} component={Performances} />
+            <Route path={match.url + "/invoices"} component={Invoices} />
             <Route path={match.url + "/preferences"} component={Preferences} />
             <Redirect to={match.url + "/dashboard"} />
           </Switch>
