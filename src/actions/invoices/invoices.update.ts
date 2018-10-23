@@ -22,11 +22,11 @@ export const UpdateInvoicesFailed = (): IInvoiceAction => ({
   type: UPDATE_INVOICES_FAILED,
 });
 
-export const UpdateInvoices = (creative: Partial<IInvoicePayload>, user: IAuthPayload, userId?: string) => {
+export const UpdateInvoices = (invoice: Partial<IInvoicePayload>, user: IAuthPayload, userId?: string) => {
   return async (dispatch: any) => {
     try {
-      dispatch(UpdateInvoicesStart(creative));
-      const response = await axios.put(`${process.env.REACT_APP_SERVER_ADDRESS}/invoice/${creative.id}`, creative, {
+      dispatch(UpdateInvoicesStart(invoice));
+      const response = await axios.put(`${process.env.REACT_APP_SERVER_ADDRESS}/invoice/${invoice.id}`, invoice, {
         headers: {
           "-x-user": userId,
           "Authorization": `Bearer ${user.accessToken}`,

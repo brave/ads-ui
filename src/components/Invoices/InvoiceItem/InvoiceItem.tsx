@@ -28,10 +28,10 @@ class InvoiceItem extends React.Component<any, any> {
           <div>{invoice.paidAt}</div>
         </TableCell>
         <TableCell>
-          <div>{invoice.paid}</div>
+          <div>{invoice.paid}BAT</div>
         </TableCell>
         <TableCell>
-          <Link className={classes.viewButton} to={`${match.url}/invoices/${invoice.id}`}>
+          <Link className={classes.viewButton} to={`${match.url}/invoice/${invoice.id}`}>
             <IconButton color="primary">
               <Icon>list</Icon>
             </IconButton>
