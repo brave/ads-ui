@@ -1,7 +1,9 @@
 import axios from "axios";
 
-import { IInvoiceAction, IInvoicePayload } from ".";
+import { IAuthPayload } from "../auth";
 import { OpenSnackBar } from "../snackbar";
+
+import { IInvoiceAction, IInvoicePayload } from ".";
 
 export const GET_INVOICES_START = "GETINVOICESSTART";
 export const GetInvoicesStart = (): IInvoiceAction => ({
@@ -21,13 +23,14 @@ export const GetInvoicesFailed = (): IInvoiceAction => ({
   type: GET_INVOICES_FAILED,
 });
 
-export const GetInvoices = (user: any) => {
+export const GetInvoices = (auth: IAuthPayload,  userId?: string) => {
   return async (dispatch: any) => {
     try {
       dispatch(GetInvoicesStart());
       const response = await axios.get(`${process.env.REACT_APP_SERVER_ADDRESS}/invoice`, {
         headers: {
-          "Authorization": `Bearer ${user.accessToken}`,
+          "-x-user": userId,
+          "Authorization": `Bearer ${auth.accessToken}`,
           "Content-Type": "application/json",
         },
       });

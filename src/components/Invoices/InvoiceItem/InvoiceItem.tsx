@@ -10,7 +10,7 @@ class InvoiceItem extends React.Component<any, any> {
     return (
       <TableRow className={classes.table}>
         <TableCell>
-          <div>{invoice.balance}</div>
+          <div>{invoice.balance}BAT</div>
         </TableCell>
         <TableCell>
           <div>{invoice.startDate}</div>
