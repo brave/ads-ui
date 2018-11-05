@@ -10,6 +10,7 @@ import creativeSetReducer from "./creativeset";
 import creativeTypeReducer from "./creativetype";
 import drawerReducer from "./drawer";
 import geoCodeReducer from "./geocode";
+import invoiceReducer from "./invoice";
 import reportReducer from "./report";
 import segmentReducer from "./segment";
 import snackBarReducer from "./snackbar";
@@ -26,6 +27,7 @@ export default combineReducers({
   drawerReducer,
   form: formReducer,
   geoCodeReducer,
+  invoiceReducer,
   reportReducer,
   segmentReducer,
   snackBarReducer,

@@ -6,6 +6,7 @@ import AdvertiserNew from "../../components/Advertisers/AdvertiserNew/Advertiser
 
 import UserList from "../../components/Users/UserList/UserList";
 import UserNew from "../../components/Users/UserNew/UserNew";
+import InvoiceView from "../Invoices/InvoicesView/InvoiceView";
 import AdvertiserView from "./AdvertiserView/AdvertiserView";
 import UserView from "./UserView/UserView";
 
@@ -22,6 +23,8 @@ class Users extends React.Component<any, any> {
           <Route exact path={match.url + "/:id"} component={UserView} />
           <Route exact path={match.url + "/:id/advertiser/new"} component={AdvertiserNew} />
           <Route exact path={match.url + "/:id/advertiser/:advertiserId"} component={AdvertiserView} />
+          <Route exact path={match.url + "/:id/advertiser/:advertiserId/invoice/:invoiceId"}
+            component={InvoiceView} />
           <Redirect to={match.url} />
         </Switch>
       </div>

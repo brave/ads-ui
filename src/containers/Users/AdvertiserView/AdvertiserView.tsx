@@ -13,9 +13,10 @@ import * as _ from "lodash";
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { UpdateAdvertisers } from "../../../actions";
+import { GetInvoices, UpdateAdvertisers } from "../../../actions";
 
 import AdvertiserForm from "../../../components/Advertisers/AdvertiserForm/Advertiser-form";
+import InvoiceList from "../../../components/Invoices/InvoiceList/InvoiceList";
 
 import { styles } from "./AdvertiserView.style";
 
@@ -27,8 +28,17 @@ class AdvertiserView extends React.Component<any, any> {
     };
   }
 
+  public componentDidMount() {
+    const id = this.props.match.params.id;
+    const user = _.find(this.props.users, (item) => {
+      return item.id === id;
+    });
+    this.props.GetInvoices(this.props.auth, user.id);
+
+  }
+
   public render() {
-    const { classes, match, auth, update, advertisers, users } = this.props;
+    const { classes, match, auth, update, advertisers, invoices, users } = this.props;
     const { unlock } = this.state;
     const id = match.params.id;
     const advertiserId = match.params.advertiserId;
@@ -87,6 +97,12 @@ class AdvertiserView extends React.Component<any, any> {
             <AdvertiserForm auth={auth} advertiser={advertiser} unlock={unlock} onSubmit={handleSubmit} />
           </CardContent>
         </Card>
+        <Card className={classes.infoCard}>
+          <CardHeader title="Invoices" />
+          <CardContent className={classes.content}>
+            <InvoiceList invoices={invoices} match={match} />
+          </CardContent>
+        </Card>
       </div>
     );
   }
@@ -95,10 +111,12 @@ class AdvertiserView extends React.Component<any, any> {
 const mapStateToProps = (state: any, ownProps: any) => ({
   advertisers: state.advertiserReducer.advertisers,
   auth: state.authReducer,
+  invoices: state.invoiceReducer.invoices,
   users: state.userReducer.users,
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
+  GetInvoices: (auth: any, userId: string) => dispatch(GetInvoices(auth, userId)),
   update: (value: any, auth: any, userId: string) => dispatch(UpdateAdvertisers(value, auth, userId)),
 });
 
