@@ -37,7 +37,7 @@ class Appbar extends React.Component<any, any> {
               </IconButton>
             <img src="/favicon.png" className={classes.logo} />
             <Typography className={classes.flex} variant="h5" color="inherit">
-              Brave Advertisment
+              Brave Advertisement
             </Typography>
             <Button color="inherit" onClick={signOut}>Logout</Button>
           </Toolbar>
