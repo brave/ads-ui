@@ -40,7 +40,7 @@ class CreativesView extends React.Component<any, any> {
   public render() {
     const { classes, match, creatives, update, auth } = this.props;
     const { unlock } = this.state;
-    const id = match.params.id;
+    const id = match.params.creativeId;
     const creative = _.find(creatives, (item) => {
       return item.id === id;
     });

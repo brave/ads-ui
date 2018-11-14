@@ -25,7 +25,7 @@ import { styles } from "./CampaignView.style";
 class CampaignView extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
-    const campaign = _.find(props.campaigns, { id: this.props.match.params.id }) as any;
+    const campaign = _.find(props.campaigns, { id: this.props.match.params.campaignId }) as any;
     props.getGeocodes(props.auth);
     props.getCreativeSets(campaign.id, props.auth);
     this.state = {
@@ -78,7 +78,7 @@ class CampaignView extends React.Component<any, any> {
   }
 
   private async handleSubmit(value: any) {
-    await this.props.update(value, this.props.auth);
+    await this.props.update(value, this.props.auth, this.props.match.params.userId);
   }
 
   private switchLock() {
@@ -98,7 +98,7 @@ const mapStateToProps = (state: any, ownProps: any) => ({
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
   getCreativeSets: (campaignId: string, user: any) => dispatch(GetCreativeSets(campaignId, user)),
   getGeocodes: (user: any) => dispatch(GetGeocodes(user)),
-  update: (value: any, user: any) => dispatch(UpdateCampaigns(value, user)),
+  update: (value: any, user: any, userId: string) => dispatch(UpdateCampaigns(value, user, userId)),
 });
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(CampaignView));

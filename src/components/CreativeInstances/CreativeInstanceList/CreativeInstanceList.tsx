@@ -85,6 +85,9 @@ class CreativeInstanceList extends React.Component<any, any> {
                   <TableCell>
                     Creative Platform
               </TableCell>
+              <TableCell>
+                    Creative State
+              </TableCell>
                   <TableCell>
                     Actions
               </TableCell>

@@ -1,5 +1,7 @@
 import {
-  Card, CardContent,
+  Button, Card,
+  CardContent,
+  Icon,
   Table,
   TableBody,
   TableCell,
@@ -10,6 +12,7 @@ import {
 } from "@material-ui/core";
 import * as React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import CreativeTableItem from "../CreativeTableItem/CreativeTableItem";
 
@@ -62,7 +65,7 @@ class CreativeList extends React.Component<any, any> {
                   <TableCell>
                     Body
               </TableCell>
-              <TableCell>
+                  <TableCell>
                     State
               </TableCell>
                   <TableCell>
@@ -90,6 +93,11 @@ class CreativeList extends React.Component<any, any> {
             />
           </CardContent>
         </Card>
+        <Link className={classes.fab} to={match.url + "/creative/new"}>
+          <Button color="secondary" variant="fab">
+            <Icon>add</Icon>
+          </Button>
+        </Link>
       </div>
     );
   }

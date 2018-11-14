@@ -17,6 +17,9 @@ class CreativeListItem extends React.Component<any, any> {
           <div>{creativeInstance.creative.type.platform}</div>
         </TableCell>
         <TableCell>
+          <div>{creativeInstance.creative.state}</div>
+        </TableCell>
+        <TableCell>
           <Link className={classes.viewButton} to={`${url}`}>
             <IconButton color="primary">
               <Icon>list</Icon>
