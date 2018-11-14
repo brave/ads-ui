@@ -135,7 +135,7 @@ class Performances extends React.Component<any, any> {
         </div>
         <div>
           {this.state.campaign !== "" &&
-            <Line data={lineData} height={300} options={{
+            <Line data={lineData as any} height={300} options={{
               maintainAspectRatio: false,
             }} />
           }

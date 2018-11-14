@@ -52,6 +52,11 @@ class CreativeForm extends React.Component<any, any> {
         <MenuItem key={item.code} value={item.code}>{item.name}</MenuItem>
       );
     });
+    const creativeStateList = ["draft", "under_review", "active"].map((item: any) => {
+      return (
+        <MenuItem key={item} value={item}>{item}</MenuItem>
+      );
+    });
     return (
       <div className={classes.root}>
         <form onSubmit={handleSubmit} className={classes.form}>
@@ -74,6 +79,14 @@ class CreativeForm extends React.Component<any, any> {
           <div>
             <Field className={classes.textField} disabled={!unlock}
               name="payload.targetUrl" type="text" component={renderTextField} label="Target" />
+          </div>
+          <div>
+            <FormControl>
+              <InputLabel>State</InputLabel>
+              <Field disabled={!unlock} component={renderSelectField} name="state" label="Creative State">
+                {creativeStateList}
+              </Field>
+            </FormControl>
           </div>
           {unlock &&
             <div>

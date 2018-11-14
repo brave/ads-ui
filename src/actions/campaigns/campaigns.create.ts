@@ -45,6 +45,7 @@ export const CreateCampaigns = (campaign: ICreateCampaignPayload, user: IAuthPay
       } else {
         dispatch(OpenSnackBar(`Create Campaigns Faild: ${error.message}`));
       }
+      return Promise.reject(error);
     }
   };
 };

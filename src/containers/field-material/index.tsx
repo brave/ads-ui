@@ -1,3 +1,4 @@
+import MomentUtils from "@date-io/moment";
 import {
   Checkbox,
   Chip,
@@ -11,8 +12,7 @@ import {
 } from "@material-ui/core";
 import * as _ from "lodash";
 import DatePicker from "material-ui-pickers/DatePicker";
-import MomentUtils from "material-ui-pickers/utils/moment-utils";
-import MuiPickersUtilsProvider from "material-ui-pickers/utils/MuiPickersUtilsProvider";
+import MuiPickersUtilsProvider from "material-ui-pickers/MuiPickersUtilsProvider";
 import * as React from "react";
 
 export const renderTextField = ({
