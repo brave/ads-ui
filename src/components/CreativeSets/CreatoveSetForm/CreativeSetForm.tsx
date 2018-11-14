@@ -1,8 +1,8 @@
-import { Button, withStyles } from "@material-ui/core";
+import { Button, FormControl, InputLabel, MenuItem, withStyles } from "@material-ui/core";
 import * as React from "react";
 import { Field, FieldArray, initialize, reduxForm } from "redux-form";
 
-import { renderChipField, renderTextField } from "../../../containers/field-material";
+import { renderChipField, renderSelectField, renderTextField } from "../../../containers/field-material";
 
 import { styles } from "./CreativeSetForm.style";
 
@@ -23,12 +23,21 @@ class CampaignForm extends React.Component<any, any> {
       delete creativeSet.modifiedAt;
       dispatch(initialize("CreativeSetForm", creativeSet));
     }
+    const executionList = ["per_click", "round_robin"].map((item: any) => {
+      return (
+        <MenuItem key={item} value={item}>{item}</MenuItem>
+      );
+    });
     return (
       <div className={classes.root}>
         <form onSubmit={handleSubmit} className={classes.form}>
-          <div>
-            <Field className={classes.textField} disabled={!unlock}
-              name="execution" type="text" component={renderTextField} label="Execution" />
+        <div>
+            <FormControl>
+              <InputLabel>Execution</InputLabel>
+              <Field disabled={!unlock} component={renderSelectField} name="execution" label="Execution">
+                {executionList}
+              </Field>
+            </FormControl>
           </div>
           <div>
             <Field className={classes.textField} disabled={!unlock}

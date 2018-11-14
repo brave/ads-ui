@@ -15,7 +15,7 @@ import InvoiceItem from "../InvoiceItem/InvoiceItem";
 
 import { styles } from "./InvoiceList.style";
 
-class CreativeSetList extends React.Component<any, any> {
+class InvoiceList extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -111,4 +111,4 @@ const mapStateToProps = (state: any, ownProps: any) => ({
 const mapDispathToProps = (dispatch: any, ownProps: any) => ({
 });
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispathToProps)(CreativeSetList));
+export default withStyles(styles)(connect(mapStateToProps, mapDispathToProps)(InvoiceList));

@@ -19,9 +19,9 @@ class Campaigns extends React.Component<any, any> {
         <Switch>
           <Route exact path={match.url} component={CampaignList} />
           <Route exact path={match.url + "/new"} component={CampaignNew} />
-          <Route exact path={match.url + "/:id"} component={CampaignView} />
-          <Route exact path={match.url + "/:id/creativeSet/new"} component={CreativeSetNew} />
-          <Route exact path={match.url + "/:id/creativeSet/:creativeSetId"} component={CreativeSetView} />
+          <Route exact path={match.url + "/:campaignId"} component={CampaignView} />
+          <Route exact path={match.url + "/:campaignId/creativeSet/new"} component={CreativeSetNew} />
+          <Route exact path={match.url + "/:campaignId/creativeSet/:creativeSetId"} component={CreativeSetView} />
           <Redirect to={match.url} />
         </Switch>
       </div>

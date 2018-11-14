@@ -30,7 +30,7 @@ class UserView extends React.Component<any, any> {
   public render() {
     const { classes, match, auth, update, users } = this.props;
     const { unlock } = this.state;
-    const id = match.params.id;
+    const id = match.params.userId;
     const user = _.find(users, (item) => {
       return item.id === id;
     });

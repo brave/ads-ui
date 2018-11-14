@@ -14,8 +14,11 @@ class CampaignNew extends React.Component<any, any> {
     const handleSubmit = async (value: any) => {
       value.totalMax = parseFloat(value.totalMax);
       value.perDay = parseFloat(value.perDay);
-      const result = await create(match.params.id, value, auth);
-      history.push(`/user/main/campaigns/${match.params.id}/creativeSet/${result.id}`);
+      const result = await create(match.params.campaignId, value, auth);
+      const url = match.url.replace("/new", "");
+      // tslint:disable-next-line:no-console
+      console.log(url, result.id);
+      history.push(`${url}/${result.id}`);
     };
     return (
       <div className={classes.root}>

@@ -27,8 +27,6 @@ class CreativesView extends React.Component<any, any> {
 
   public render() {
     const { classes, match, invoices, update, auth } = this.props;
-    // tslint:disable-next-line:no-console
-    console.log(invoices);
     const { unlock } = this.state;
     const invoiceId = match.params.invoiceId;
     const invoice = _.find(invoices, (item) => {

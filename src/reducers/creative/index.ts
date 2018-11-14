@@ -6,6 +6,7 @@ import {
   GET_CREATIVES_START,
   GET_CREATIVES_SUCCESSFUL,
   ICreativeAction,
+  SIGN_OUT,
   UPDATE_CREATIVES_FAILED,
   UPDATE_CREATIVES_START,
   UPDATE_CREATIVES_SUCCESSFUL,
@@ -35,6 +36,10 @@ const creativeReducer = (
     case UPDATE_CREATIVES_START:
     case UPDATE_CREATIVES_SUCCESSFUL:
       return updateCreativeReducer(state, action);
+    case SIGN_OUT:
+      return {
+        creatives: [],
+      };
     default:
       return state;
   }

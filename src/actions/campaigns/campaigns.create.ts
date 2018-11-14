@@ -23,13 +23,14 @@ export const CreateCampaignsFailed = () => ({
   type: CREATE_CAMPAIGNS_FAILED,
 });
 
-export const CreateCampaigns = (campaign: ICreateCampaignPayload, user: IAuthPayload) => {
+export const CreateCampaigns = (campaign: ICreateCampaignPayload, auth: IAuthPayload, userId?: string) => {
   return async (dispatch: any) => {
     try {
       dispatch(CreateCampaignsStart(campaign));
       const response = await axios.post(`${process.env.REACT_APP_SERVER_ADDRESS}/campaign`, campaign, {
         headers: {
-          "Authorization": `Bearer ${user.accessToken}`,
+          "-x-user": userId,
+          "Authorization": `Bearer ${auth.accessToken}`,
           "Content-Type": "application/json",
         },
       });
@@ -45,6 +46,7 @@ export const CreateCampaigns = (campaign: ICreateCampaignPayload, user: IAuthPay
       } else {
         dispatch(OpenSnackBar(`Create Campaigns Faild: ${error.message}`));
       }
+      return Promise.reject(error);
     }
   };
 };

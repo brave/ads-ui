@@ -1,8 +1,13 @@
-import { Button, withStyles } from "@material-ui/core";
+import { Button, FormControl, InputLabel, MenuItem, withStyles } from "@material-ui/core";
 import * as React from "react";
 import { Field, FieldArray, initialize, reduxForm } from "redux-form";
 
-import { renderChipField, renderDateField, renderTextField } from "../../../containers/field-material";
+import {
+  renderChipField,
+  renderDateField,
+  renderSelectField,
+  renderTextField,
+} from "../../../containers/field-material";
 
 import { styles } from "./CampaignForm.style";
 
@@ -10,6 +15,16 @@ const validate = (values: any) => {
   const errors: any = {};
   if (!values.name) {
     errors.name = "Required";
+  }
+  if (!values.budget) {
+    errors.budget = "Required";
+  }
+  if (!values.dailyCap) {
+    errors.dailyCap = "Required";
+  }
+  if (parseInt(values.budget, 10) < parseInt(values.dailyCap, 10)) {
+    errors.budget = "Budget should be more than daily cap";
+    errors.dailyCap = "DailyCap should be less than budget";
   }
   return errors;
 };
@@ -23,6 +38,11 @@ class CampaignForm extends React.Component<any, any> {
       delete campaign.modifiedAt;
       dispatch(initialize("CampaignForm", campaign));
     }
+    const campaignStateList = ["draft", "under_review", "active"].map((item: any) => {
+      return (
+        <MenuItem key={item} value={item}>{item}</MenuItem>
+      );
+    });
     return (
       <div className={classes.root}>
         <form onSubmit={handleSubmit} className={classes.form}>
@@ -49,6 +69,14 @@ class CampaignForm extends React.Component<any, any> {
           <div>
             <FieldArray disabled={!unlock} options={geocodes}
               name="geoTargets" component={renderChipField} label="Geo Targets" />
+          </div>
+          <div>
+            <FormControl>
+              <InputLabel>State</InputLabel>
+              <Field disabled={!unlock} component={renderSelectField} name="state" label="Creative State">
+                {campaignStateList}
+              </Field>
+            </FormControl>
           </div>
           {unlock &&
             <div>

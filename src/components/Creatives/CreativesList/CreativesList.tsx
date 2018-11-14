@@ -15,8 +15,7 @@ class CreativesList extends React.Component<any, any> {
     this.props.GetCreatives(this.props.auth);
   }
   public render() {
-    const { classes, match } = this.props;
-    const { creatives } = this.props.creativeReducer;
+    const { classes, match, creatives } = this.props;
     const listItems = creatives.map((item: any) => {
       return (
         <div key={item.id} className={classes.item}>
@@ -42,7 +41,7 @@ class CreativesList extends React.Component<any, any> {
 
 const mapStateToProps = (state: any, ownProps: any) => ({
   auth: state.authReducer,
-  creativeReducer: state.creativeReducer,
+  creatives: state.creativeReducer.creatives,
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({

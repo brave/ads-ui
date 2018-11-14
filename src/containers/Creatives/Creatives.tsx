@@ -16,7 +16,7 @@ class Creatives extends React.Component<any, any> {
         <Switch>
           <Route exact path={match.url} component={CreativesList} />
           <Route exact path={match.url + "/new"} component={CreativesNew} />
-          <Route exact path={match.url + "/:id"} component={CreativesView} />
+          <Route exact path={match.url + "/:creativeId"} component={CreativesView} />
           <Redirect to={match.url} />
         </Switch>
       </div>

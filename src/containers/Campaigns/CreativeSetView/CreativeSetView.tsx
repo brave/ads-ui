@@ -25,7 +25,7 @@ import { styles } from "./CreativeSetView.style";
 class CampaignView extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
-    const campaign = _.find(props.campaigns, { id: this.props.match.params.id }) as any;
+    const campaign = _.find(props.campaigns, { id: this.props.match.params.campaignId }) as any;
     const creativeSet = _.find(props.creativeSets, { id: this.props.match.params.creativeSetId }) as any;
     props.getSegments(props.auth);
     props.getCreativeInstances(creativeSet.id, props.auth);

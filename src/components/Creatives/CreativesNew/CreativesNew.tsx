@@ -13,7 +13,7 @@ class CreativesNew extends React.Component<any, any> {
     const { classes, create, auth, history, match } = this.props;
     const handleSubmit = async (value: any) => {
       value.advertiserId = this.props.advertisers[0].id;
-      const result = await create(value, auth);
+      const result = await create(value, auth, match.params.userId);
       const url = match.url.replace("/new", "");
 
       history.push(`${url}/${result.id}`);
@@ -42,7 +42,7 @@ const mapStateToProps = (state: any, ownProps: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
-  create: (value: any, user: any) => dispatch(CreateCreatives(value, user)),
+  create: (value: any, user: any, userId: string) => dispatch(CreateCreatives(value, user, userId)),
 });
 
 export default withRouter(withStyles(style)(connect(mapStateToProps, mapDispatchToProps)(CreativesNew)) as any);

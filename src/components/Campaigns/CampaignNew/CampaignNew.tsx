@@ -17,7 +17,8 @@ class CampaignNew extends React.Component<any, any> {
       value.budget = parseFloat(value.budget);
       value.dailyCap = parseFloat(value.dailyCap);
       const result = await create(value, auth);
-      history.push(`/user/main/campaigns/${result.id}`);
+      const url = this.props.match.url.replace("/new", "");
+      history.push(`${url}/${result.id}`);
     };
     return (
       <div className={classes.root}>

@@ -1,6 +1,6 @@
 import {
-  Button,
-  Card, CardContent,
+  Button, Card,
+  CardContent,
   Icon,
   Table,
   TableBody,
@@ -12,20 +12,16 @@ import {
 } from "@material-ui/core";
 import * as React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
-import { CreateCreativeInstances } from "../../../actions";
+import CampaignTableItem from "../CampaignTableItem/CampaignTableItem";
 
-import CreativeSetAddCreative from "../../CreativeSets/CreativeSetAddCreative/CreativeSetAddCreative";
+import { styles } from "./CampaignTableList.style";
 
-import CreativeInstanceItem from "../CreativeInstanceItem/CreativeInstanceItem";
-
-import { styles } from "./CreativeInstanceList.style";
-
-class CreativeInstanceList extends React.Component<any, any> {
+class CampaignList extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      open: false,
       page: 0,
       rowsPerPage: 10,
     };
@@ -39,37 +35,18 @@ class CreativeInstanceList extends React.Component<any, any> {
     this.setState({ rowsPerPage: event.target.value });
   }
 
-  public openDialog = () => {
-    this.setState({
-      open: true,
-    });
-  }
-
-  public handleDialogClose = (action: any, creative: any) => {
-    this.setState({
-      open: false,
-    });
-    if (action === "submit" && creative) {
-      const creativeInstance = {
-        creativeId: creative,
-        creativeSetId: this.props.match.params.creativeSetId,
-      };
-      this.props.createCreativeInstance(creativeInstance, this.props.auth);
-    }
-  }
-
   public render() {
     const { classes, match } = this.props;
-    let { creativeInstances } = this.props;
-    const { rowsPerPage, page } = this.state;
-    if (!creativeInstances) {
-      creativeInstances = [];
+    let { campaigns } = this.props;
+    if (!campaigns) {
+      campaigns = [];
     }
-    const listItems = creativeInstances
+    const { rowsPerPage, page } = this.state;
+    const listItems = campaigns
       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
       .map((item: any) => {
         return (
-          <CreativeInstanceItem key={item.id} match={match} creativeInstance={item} />
+          <CampaignTableItem key={item.id} match={match} campaign={item} />
         );
       });
     return (
@@ -80,16 +57,25 @@ class CreativeInstanceList extends React.Component<any, any> {
               <TableHead>
                 <TableRow>
                   <TableCell>
-                    Creative Type
+                    Name
               </TableCell>
                   <TableCell>
-                    Creative Platform
+                    Budget
+              </TableCell>
+                  <TableCell>
+                    Daily Cap
               </TableCell>
               <TableCell>
-                    Creative State
+                    Start At
+              </TableCell>
+              <TableCell>
+                    End At
               </TableCell>
                   <TableCell>
-                    Actions
+                    State
+              </TableCell>
+                  <TableCell>
+                    Action
               </TableCell>
                 </TableRow>
               </TableHead>
@@ -99,7 +85,7 @@ class CreativeInstanceList extends React.Component<any, any> {
             </Table>
             <TablePagination
               component="div"
-              count={creativeInstances.length}
+              count={campaigns.length}
               rowsPerPage={rowsPerPage}
               page={page}
               backIconButtonProps={{
@@ -113,24 +99,21 @@ class CreativeInstanceList extends React.Component<any, any> {
             />
           </CardContent>
         </Card>
-        <Button className={classes.fab} color="secondary" variant="fab" onClick={this.openDialog}>
-          <Icon>add</Icon>
-        </Button>
-        <CreativeSetAddCreative open={this.state.open} creatives={this.props.creatives}
-          handleClose={this.handleDialogClose} />
+        <Link className={classes.fab} to={match.url + "/campaign/new"}>
+          <Button color="secondary" variant="fab">
+            <Icon>add</Icon>
+          </Button>
+        </Link>
       </div>
     );
   }
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
-  auth: state.authReducer,
-  creatives: state.creativeReducer.creatives,
+  campaigns: state.campaignReducer.campaigns,
 });
 
 const mapDispathToProps = (dispatch: any, ownProps: any) => ({
-  createCreativeInstance: (creativeInstance: any, auth: any) =>
-    dispatch((CreateCreativeInstances(creativeInstance, auth))),
 });
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispathToProps)(CreativeInstanceList));
+export default withStyles(styles)(connect(mapStateToProps, mapDispathToProps)(CampaignList));

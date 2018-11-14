@@ -15,8 +15,7 @@ class CampaignList extends React.Component<any, any> {
     this.props.GetCampaigns(this.props.auth);
   }
   public render() {
-    const { classes, match } = this.props;
-    const { campaigns } = this.props.campaignReducer;
+    const { classes, match, campaigns } = this.props;
     const listItems = campaigns.map((item: any) => {
       return (
         <div key={item.id} className={classes.item}>
@@ -42,7 +41,7 @@ class CampaignList extends React.Component<any, any> {
 
 const mapStateToProps = (state: any, ownProps: any) => ({
   auth: state.authReducer,
-  campaignReducer: state.campaignReducer,
+  campaigns: state.campaignReducer.campaigns,
 });
 
 const mapDispathToProps = (dispatch: any, ownProps: any) => ({
