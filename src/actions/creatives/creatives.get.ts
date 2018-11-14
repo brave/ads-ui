@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import { ICreativeAction, ICreativePayload } from ".";
+import { IAuthPayload } from "../auth";
 import { OpenSnackBar } from "../snackbar";
 
 export const GET_CREATIVES_START = "GETCREATIVESSTART";
@@ -21,18 +22,20 @@ export const GetCreativesFailed = (): ICreativeAction => ({
   type: GET_CREATIVES_FAILED,
 });
 
-export const GetCreatives = (user: any) => {
+export const GetCreatives = (auth: IAuthPayload, userId?: string) => {
   return async (dispatch: any) => {
     try {
       dispatch(GetCreativesStart());
       const response = await axios.get(`${process.env.REACT_APP_SERVER_ADDRESS}/creative`, {
         headers: {
-          "Authorization": `Bearer ${user.accessToken}`,
+          "-x-user": userId,
+          "Authorization": `Bearer ${auth.accessToken}`,
           "Content-Type": "application/json",
         },
       });
       dispatch(GetCreativesSuccessful(response.data));
       dispatch(OpenSnackBar("Creative get Successfully"));
+      return Promise.resolve(response.data);
     } catch (error) {
       dispatch(GetCreativesFailed());
       if (error.response) {
@@ -42,6 +45,7 @@ export const GetCreatives = (user: any) => {
       } else {
         dispatch(OpenSnackBar(`Get Creatives Faild: ${error.message}`));
       }
+      return Promise.reject(error);
     }
   };
 };

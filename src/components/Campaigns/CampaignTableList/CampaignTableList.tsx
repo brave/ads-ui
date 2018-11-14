@@ -11,11 +11,11 @@ import {
 import * as React from "react";
 import { connect } from "react-redux";
 
-import InvoiceItem from "../InvoiceItem/InvoiceItem";
+import CampaignTableItem from "../CampaignTableItem/CampaignTableItem";
 
-import { styles } from "./InvoiceList.style";
+import { styles } from "./CampaignTableList.style";
 
-class InvoiceList extends React.Component<any, any> {
+class CampaignList extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -34,16 +34,16 @@ class InvoiceList extends React.Component<any, any> {
 
   public render() {
     const { classes, match } = this.props;
-    let { invoices } = this.props;
-    if (!invoices) {
-      invoices = [];
+    let { campaigns } = this.props;
+    if (!campaigns) {
+      campaigns = [];
     }
     const { rowsPerPage, page } = this.state;
-    const listItems = invoices
+    const listItems = campaigns
       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
       .map((item: any) => {
         return (
-          <InvoiceItem key={item.id} match={match} invoice={item} />
+          <CampaignTableItem key={item.id} match={match} campaign={item} />
         );
       });
     return (
@@ -54,25 +54,22 @@ class InvoiceList extends React.Component<any, any> {
               <TableHead>
                 <TableRow>
                   <TableCell>
-                    Balance
+                    Name
               </TableCell>
                   <TableCell>
-                    Start Date
+                    Budget
               </TableCell>
                   <TableCell>
-                    End Date
+                    Daily Cap
               </TableCell>
               <TableCell>
-                    Confirmations
+                    Start At
+              </TableCell>
+              <TableCell>
+                    End At
               </TableCell>
                   <TableCell>
                     State
-              </TableCell>
-              <TableCell>
-                    Paid At
-              </TableCell>
-              <TableCell>
-                    Paid
               </TableCell>
                   <TableCell>
                     Action
@@ -85,7 +82,7 @@ class InvoiceList extends React.Component<any, any> {
             </Table>
             <TablePagination
               component="div"
-              count={invoices.length}
+              count={campaigns.length}
               rowsPerPage={rowsPerPage}
               page={page}
               backIconButtonProps={{
@@ -105,10 +102,10 @@ class InvoiceList extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
-  invoices: state.invoiceReducer.invoices,
+  campaigns: state.campaignReducer.campaigns,
 });
 
 const mapDispathToProps = (dispatch: any, ownProps: any) => ({
 });
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispathToProps)(InvoiceList));
+export default withStyles(styles)(connect(mapStateToProps, mapDispathToProps)(CampaignList));

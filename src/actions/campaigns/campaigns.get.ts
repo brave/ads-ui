@@ -22,12 +22,13 @@ export const GetCampaignsFaild = (): ICampaignAction => ({
   type: GET_CAMPAIGNS_FAILD,
 });
 
-export const GetCampaigns = (auth: IAuthPayload) => {
+export const GetCampaigns = (auth: IAuthPayload, userId?: string) => {
   return async (dispatch: any) => {
     try {
       dispatch(GetCampaignsStart);
       const response = await axios.get(`${process.env.REACT_APP_SERVER_ADDRESS}/campaign`, {
         headers: {
+          "-x-user": userId,
           "Authorization": `Bearer ${auth.accessToken}`,
           "Content-Type": "application/json",
         },
@@ -44,6 +45,7 @@ export const GetCampaigns = (auth: IAuthPayload) => {
       } else {
         dispatch(OpenSnackBar(`Get Campaigns Faild: ${error.message}`));
       }
+      return Promise.reject(error);
     }
   };
 };

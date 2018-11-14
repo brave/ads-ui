@@ -13,10 +13,13 @@ import * as _ from "lodash";
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { GetInvoices, UpdateAdvertisers } from "../../../actions";
+import { GetCampaigns, GetCreatives, GetInvoices, UpdateAdvertisers } from "../../../actions";
 
 import AdvertiserForm from "../../../components/Advertisers/AdvertiserForm/Advertiser-form";
 import InvoiceList from "../../../components/Invoices/InvoiceList/InvoiceList";
+
+import CampaignTableList from "../../../components/Campaigns/CampaignTableList/CampaignTableList";
+import CreativeTableList from "../../../components/Creatives/CreativeTableList/CreativeTableList";
 
 import { styles } from "./AdvertiserView.style";
 
@@ -34,11 +37,12 @@ class AdvertiserView extends React.Component<any, any> {
       return item.id === id;
     });
     this.props.GetInvoices(this.props.auth, user.id);
-
+    this.props.GetCampaigns(this.props.auth, user.id);
+    this.props.GetCreatives(this.props.auth, user.id);
   }
 
   public render() {
-    const { classes, match, auth, update, advertisers, invoices, users } = this.props;
+    const { classes, match, auth, update, advertisers, invoices, creatives, campaigns, users } = this.props;
     const { unlock } = this.state;
     const id = match.params.id;
     const advertiserId = match.params.advertiserId;
@@ -103,6 +107,18 @@ class AdvertiserView extends React.Component<any, any> {
             <InvoiceList invoices={invoices} match={match} />
           </CardContent>
         </Card>
+        <Card className={classes.infoCard}>
+          <CardHeader title="Campaigns" />
+          <CardContent className={classes.content}>
+            <CampaignTableList campaigns={campaigns} match={match} />
+          </CardContent>
+        </Card>
+        <Card className={classes.infoCard}>
+          <CardHeader title="Creatives" />
+          <CardContent className={classes.content}>
+            <CreativeTableList creatives={creatives} match={match} />
+          </CardContent>
+        </Card>
       </div>
     );
   }
@@ -111,11 +127,15 @@ class AdvertiserView extends React.Component<any, any> {
 const mapStateToProps = (state: any, ownProps: any) => ({
   advertisers: state.advertiserReducer.advertisers,
   auth: state.authReducer,
+  campaigns: state.campaignReducer.campaigns,
+  creatives: state.creativeReducer.creatives,
   invoices: state.invoiceReducer.invoices,
   users: state.userReducer.users,
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
+  GetCampaigns: (auth: any, userId: string) => dispatch(GetCampaigns(auth, userId)),
+  GetCreatives: (auth: any, userId: string) => dispatch(GetCreatives(auth, userId)),
   GetInvoices: (auth: any, userId: string) => dispatch(GetInvoices(auth, userId)),
   update: (value: any, auth: any, userId: string) => dispatch(UpdateAdvertisers(value, auth, userId)),
 });

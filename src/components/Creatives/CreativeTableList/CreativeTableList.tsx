@@ -11,11 +11,11 @@ import {
 import * as React from "react";
 import { connect } from "react-redux";
 
-import InvoiceItem from "../InvoiceItem/InvoiceItem";
+import CreativeTableItem from "../CreativeTableItem/CreativeTableItem";
 
-import { styles } from "./InvoiceList.style";
+import { styles } from "./CreativeTableList.style";
 
-class InvoiceList extends React.Component<any, any> {
+class CreativeList extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -34,16 +34,16 @@ class InvoiceList extends React.Component<any, any> {
 
   public render() {
     const { classes, match } = this.props;
-    let { invoices } = this.props;
-    if (!invoices) {
-      invoices = [];
+    let { creatives } = this.props;
+    if (!creatives) {
+      creatives = [];
     }
     const { rowsPerPage, page } = this.state;
-    const listItems = invoices
+    const listItems = creatives
       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
       .map((item: any) => {
         return (
-          <InvoiceItem key={item.id} match={match} invoice={item} />
+          <CreativeTableItem key={item.id} match={match} creative={item} />
         );
       });
     return (
@@ -54,25 +54,16 @@ class InvoiceList extends React.Component<any, any> {
               <TableHead>
                 <TableRow>
                   <TableCell>
-                    Balance
+                    Type
               </TableCell>
                   <TableCell>
-                    Start Date
+                    Title
               </TableCell>
                   <TableCell>
-                    End Date
+                    Body
               </TableCell>
               <TableCell>
-                    Confirmations
-              </TableCell>
-                  <TableCell>
                     State
-              </TableCell>
-              <TableCell>
-                    Paid At
-              </TableCell>
-              <TableCell>
-                    Paid
               </TableCell>
                   <TableCell>
                     Action
@@ -85,7 +76,7 @@ class InvoiceList extends React.Component<any, any> {
             </Table>
             <TablePagination
               component="div"
-              count={invoices.length}
+              count={creatives.length}
               rowsPerPage={rowsPerPage}
               page={page}
               backIconButtonProps={{
@@ -105,10 +96,10 @@ class InvoiceList extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
-  invoices: state.invoiceReducer.invoices,
+  creatives: state.creativeReducer.creatives,
 });
 
 const mapDispathToProps = (dispatch: any, ownProps: any) => ({
 });
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispathToProps)(InvoiceList));
+export default withStyles(styles)(connect(mapStateToProps, mapDispathToProps)(CreativeList));

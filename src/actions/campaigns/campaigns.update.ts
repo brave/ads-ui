@@ -22,18 +22,20 @@ export const UpdateCampaignsFailed = (): ICampaignAction => ({
   type: UPDATE_CAMPAIGNS_FAILED,
 });
 
-export const UpdateCampaigns = (campaign: Partial<ICampaignPayload>, user: IAuthPayload) => {
+export const UpdateCampaigns = (campaign: Partial<ICampaignPayload>, auth: IAuthPayload, userId?: string) => {
   return async (dispatch: any) => {
     try {
       dispatch(UpdateCampaignsStart(campaign));
       const response = await axios.put(`${process.env.REACT_APP_SERVER_ADDRESS}/campaign/${campaign.id}`, campaign, {
         headers: {
-          "Authorization": `Bearer ${user.accessToken}`,
+          "-x-user": userId,
+          "Authorization": `Bearer ${auth.accessToken}`,
           "Content-Type": "application/json",
         },
       });
       dispatch(UpdateCampaignsSuccessful(response.data));
       dispatch(OpenSnackBar("Campaign updated Successfully"));
+      return Promise.resolve(response.data);
     } catch (error) {
       dispatch(UpdateCampaignsFailed());
       if (error.response) {
@@ -43,6 +45,7 @@ export const UpdateCampaigns = (campaign: Partial<ICampaignPayload>, user: IAuth
       } else {
         dispatch(OpenSnackBar(`Update Campaigns Faild: ${error.message}`));
       }
+      return Promise.reject(error);
     }
   };
 };

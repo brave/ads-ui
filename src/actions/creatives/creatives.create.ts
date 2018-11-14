@@ -22,12 +22,13 @@ export const CreateCreativesFailed = (): ICreativeAction => ({
   type: CREATE_CREATIVES_FAILED,
 });
 
-export const CreateCreatives = (creative: ICreateCreativePayload, auth: IAuthPayload) => {
+export const CreateCreatives = (creative: ICreateCreativePayload, auth: IAuthPayload, userId?: string) => {
   return async (dispatch: any) => {
     try {
       dispatch(CreateCreativesStart(creative));
       const response = await axios.post(`${process.env.REACT_APP_SERVER_ADDRESS}/creative`, creative, {
         headers: {
+          "-x-user": userId,
           "Authorization": `Bearer ${auth.accessToken}`,
           "Content-Type": "application/json",
         },
@@ -44,6 +45,7 @@ export const CreateCreatives = (creative: ICreateCreativePayload, auth: IAuthPay
       } else {
         dispatch(OpenSnackBar(`Create Creatives Faild: ${error.message}`));
       }
+      return Promise.reject(error);
     }
   };
 };
