@@ -1,5 +1,5 @@
 import { withStyles } from "@material-ui/core";
-import * as React from "react";
+import React from "react";
 import { Field, reduxForm } from "redux-form";
 
 import { renderTextField } from "../../containers/field-material";

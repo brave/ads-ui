@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 class Preferences extends React.Component<any, any> {
   public render() {

@@ -10,10 +10,10 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import * as _ from "lodash";
+import _ from "lodash";
 import DatePicker from "material-ui-pickers/DatePicker";
 import MuiPickersUtilsProvider from "material-ui-pickers/MuiPickersUtilsProvider";
-import * as React from "react";
+import React from "react";
 
 export const renderTextField = ({
   input,
