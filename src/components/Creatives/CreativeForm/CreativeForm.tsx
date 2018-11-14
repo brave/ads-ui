@@ -1,5 +1,5 @@
 import { Button, FormControl, InputLabel, MenuItem, withStyles } from "@material-ui/core";
-import * as React from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Field, initialize, reduxForm } from "redux-form";
 

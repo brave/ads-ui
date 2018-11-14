@@ -1,5 +1,5 @@
 import { withStyles } from "@material-ui/core";
-import * as React from "react";
+import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import CampaignList from "../../components/Campaigns/CampaignList/CampaignList";

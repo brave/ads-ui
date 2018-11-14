@@ -1,7 +1,7 @@
 import { FormControl, InputLabel, MenuItem, Select, Typography, withStyles } from "@material-ui/core";
-import * as _ from "lodash";
-import * as moment from "moment";
-import * as React from "react";
+import _ from "lodash";
+import moment from "moment";
+import React from "react";
 import { Doughnut, Line } from "react-chartjs-2";
 import { connect } from "react-redux";
 

@@ -10,7 +10,7 @@ import {
   TableRow,
   withStyles,
 } from "@material-ui/core";
-import * as React from "react";
+import React from "react";
 import { connect } from "react-redux";
 
 import { CreateCreativeInstances } from "../../../actions";

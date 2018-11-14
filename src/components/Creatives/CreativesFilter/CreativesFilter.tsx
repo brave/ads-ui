@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 import { AppBar, FormControl, InputLabel, MenuItem, Select, TextField, Toolbar, withStyles } from "@material-ui/core";
 

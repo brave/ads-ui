@@ -1,5 +1,5 @@
 import { Button, FormControl, InputLabel, MenuItem, withStyles } from "@material-ui/core";
-import * as React from "react";
+import React from "react";
 import { Field, FieldArray, initialize, reduxForm } from "redux-form";
 
 import { renderChipField, renderSelectField, renderTextField } from "../../../containers/field-material";

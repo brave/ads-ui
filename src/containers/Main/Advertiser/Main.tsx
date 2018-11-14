@@ -9,9 +9,9 @@ import {
   ListItemText,
   withStyles,
 } from "@material-ui/core";
-import * as classNames from "classnames";
-import * as _ from "lodash";
-import * as React from "react";
+import classNames from "classnames";
+import _ from "lodash";
+import React from "react";
 import { connect } from "react-redux";
 import { Link, Redirect, Route, Switch } from "react-router-dom";
 

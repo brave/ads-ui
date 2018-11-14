@@ -9,8 +9,8 @@ import {
   Typography,
   withStyles,
 } from "@material-ui/core";
-import * as _ from "lodash";
-import * as React from "react";
+import _ from "lodash";
+import React from "react";
 import { connect } from "react-redux";
 
 import { GetCampaigns, GetCreatives, GetInvoices, UpdateAdvertisers } from "../../../actions";

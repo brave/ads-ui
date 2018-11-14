@@ -1,6 +1,6 @@
 import { Avatar, Card, CardActions, CardContent, Icon, IconButton, Typography, withStyles } from "@material-ui/core";
-import * as moment from "moment";
-import * as React from "react";
+import moment from "moment";
+import React from "react";
 import { Link } from "react-router-dom";
 
 import { styles } from "./CampaignItem.style";
