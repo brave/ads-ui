@@ -40,7 +40,7 @@ class CreativesView extends React.Component<any, any> {
       }
     };
     const handleSubmit = async (value: any, e: Event) => {
-      const userId = match.params.id;
+      const userId = match.params.userId;
       value.paid = parseFloat(value.paid);
       await update(value, auth, userId);
     };
