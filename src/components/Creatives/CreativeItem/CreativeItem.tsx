@@ -21,7 +21,7 @@ class CreativeItem extends React.Component<any, any> {
         <CardContent className={classes.content}>
           <div>
             <Typography gutterBottom variant="h5">
-              {creative.payload.title}
+              {creative.name}
             </Typography>
             <Typography component="p">
               {creative.type.code} | {creative.state}

@@ -10,6 +10,9 @@ class CreativeTableItem extends React.Component<any, any> {
     return (
       <TableRow className={classes.table}>
         <TableCell>
+          <div>{creative.name}</div>
+        </TableCell>
+        <TableCell>
           <div>{creative.type.code}</div>
         </TableCell>
         <TableCell>
