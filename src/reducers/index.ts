@@ -16,7 +16,7 @@ import segmentReducer from "./segment";
 import snackBarReducer from "./snackbar";
 import userReducer from "./user";
 
-export default combineReducers({
+export default combineReducers<any, any>({
   advertiserReducer,
   authReducer,
   campaignReducer,

@@ -18,7 +18,7 @@ export const CreateAdvertisersSuccessful = (payload: IAdvertiserPayload): IAdver
 });
 
 export const CREATE_ADVERTISERS_FAILED = "CREATEADVERTISERSFAILED";
-export const CreateAdvertisersFailed = () => ({
+export const CreateAdvertisersFailed = (): IAdvertiserAction => ({
   payload: null,
   type: CREATE_ADVERTISERS_FAILED,
 });
