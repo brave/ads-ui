@@ -70,6 +70,10 @@ class CreativeForm extends React.Component<any, any> {
           </div>
           <div>
             <Field className={classes.textField} disabled={!unlock}
+              name="name" type="text" component={renderTextField} label="Name" />
+          </div>
+          <div>
+            <Field className={classes.textField} disabled={!unlock}
               name="payload.body" type="text" component={renderTextField} label="Body" />
           </div>
           <div>

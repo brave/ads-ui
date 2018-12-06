@@ -7,19 +7,18 @@ export interface ICreativeAction {
 
 export interface ICreateCreativePayload {
   caption: string;
-  imgUrl: string;
   body: string;
   targetUrl: string;
+  name: string;
 }
 
 export interface ICreativePayload {
   id: string;
   caption: string;
-  imgUrl: string;
   targetUrl: string;
   body: string;
   createdAt: string;
   modifiedAt: string;
-  code: string;
+  name: string;
   campaigns: ICampaignPayload[];
 }

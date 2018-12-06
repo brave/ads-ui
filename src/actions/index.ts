@@ -10,5 +10,6 @@ export * from "./advertisers";
 export * from "./reports";
 export * from "./creativeTypes";
 export * from "./creativesets";
+export * from "./confirmationTypes";
 export * from "./creativeinstances";
 export * from "./invoices";

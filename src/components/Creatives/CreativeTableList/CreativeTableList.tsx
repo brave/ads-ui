@@ -56,6 +56,9 @@ class CreativeList extends React.Component<any, any> {
             <Table>
               <TableHead>
                 <TableRow>
+                <TableCell>
+                    Name
+              </TableCell>
                   <TableCell>
                     Type
               </TableCell>

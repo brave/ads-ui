@@ -4,6 +4,7 @@ import { reducer as formReducer } from "redux-form";
 import advertiserReducer from "./advertiser";
 import authReducer from "./auth";
 import campaignReducer from "./campaign";
+import confirmationTypeReducer from "./confirmationType";
 import creativeReducer from "./creative";
 import creativeInstanceReducer from "./creativeinstance";
 import creativeSetReducer from "./creativeset";
@@ -16,10 +17,11 @@ import segmentReducer from "./segment";
 import snackBarReducer from "./snackbar";
 import userReducer from "./user";
 
-export default combineReducers({
+export default combineReducers<any, any>({
   advertiserReducer,
   authReducer,
   campaignReducer,
+  confirmationTypeReducer,
   creativeInstanceReducer,
   creativeReducer,
   creativeSetReducer,

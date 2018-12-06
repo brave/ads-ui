@@ -17,7 +17,7 @@
     "react-dom": "^16.6.3",
     "react-redux": "^5.1.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts-ts": "^3.1.0",
+    "react-scripts": "^2.1.1",
     "redux": "^4.0.1",
     "redux-form": "^7.4.2",
     "redux-logger": "^3.0.6",
@@ -25,10 +25,10 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "react-scripts-ts start",
-    "build": "react-scripts-ts build",
-    "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
     "serve": "http-server ./build -p 3000",
     "container": "npm install && npm run build && npm run serve"
   },
@@ -39,13 +39,19 @@
     "@types/jwt-decode": "^2.2.1",
     "@types/lodash": "^4.14.118",
     "@types/node": "^10.12.7",
-    "@types/react": "^16.7.5",
-    "@types/react-dom": "^16.0.9",
-    "@types/react-redux": "^6.0.9",
+    "@types/react": "^16.7.7",
+    "@types/react-dom": "^16.0.10",
+    "@types/react-redux": "^6.0.10",
     "@types/react-router-dom": "^4.3.1",
     "@types/redux-form": "^7.4.12",
     "@types/redux-logger": "^3.0.6",
     "http-server": "^0.11.1",
-    "typescript": "^3.1.1"
-  }
+    "typescript": "^3.1.6"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

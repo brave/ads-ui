@@ -2,7 +2,7 @@ import { AppBar, Button, Icon, IconButton, withStyles } from "@material-ui/core"
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import classNames from "classnames";
-import React from "react";
+import * as React from "react";
 import { connect } from "react-redux";
 
 import { SignOut, ToggleDrawer } from "../../actions";
