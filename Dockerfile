@@ -11,4 +11,4 @@ EXPOSE ${PORT}
 
 RUN npm install
 
-ENTRYPOINT [ "npm", "run", "container" ]
+CMD [ "npm", "run", "container" ]
