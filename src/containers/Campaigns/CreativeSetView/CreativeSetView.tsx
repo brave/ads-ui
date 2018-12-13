@@ -14,7 +14,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import {
-   GetCreativeInstances, GetSegments, UpdateCreativeSets,
+   GetCreativeInstances, GetSegments, UpdateCreativeSets, GetConfirmationTypes,
 } from "../../../actions";
 
 import CreativeInstanceList from "../../../components/CreativeInstances/CreativeInstanceList/CreativeInstanceList";
@@ -28,6 +28,7 @@ class CampaignView extends React.Component<any, any> {
     const campaign = _.find(props.campaigns, { id: this.props.match.params.campaignId }) as any;
     const creativeSet = _.find(props.creativeSets, { id: this.props.match.params.creativeSetId }) as any;
     props.getSegments(props.auth);
+    props.getConfirmationTypes(props.auth);
     props.getCreativeInstances(creativeSet.id, props.auth);
     this.state = {
       campaign,
@@ -103,6 +104,7 @@ const mapStateToProps = (state: any, ownProps: any) => ({
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
   getCreativeInstances: (creativeSetId: string, user: any) => dispatch(GetCreativeInstances(creativeSetId, user)),
   getSegments: (user: any) => dispatch(GetSegments(user)),
+  getConfirmationTypes: (user: any) => dispatch(GetConfirmationTypes(user)),
   update: (campaignId: string, value: any, user: any) => dispatch(UpdateCreativeSets(campaignId, value, user)),
 });
 
