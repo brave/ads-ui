@@ -3,6 +3,7 @@ import {
   GET_SEGMENTS_START,
   GET_SEGMENTS_SUCCESSFUL,
   ISegmentAction,
+  SIGN_OUT,
 } from "../../actions";
 
 import { getSegmentReducer } from "./segment.get";
@@ -19,6 +20,10 @@ const segmentReducer = (
     case GET_SEGMENTS_FAILD:
     case GET_SEGMENTS_SUCCESSFUL:
       return getSegmentReducer(state, action);
+    case SIGN_OUT:
+      return {
+        segments: [],
+      };
     default:
       return state;
   }

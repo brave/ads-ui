@@ -3,12 +3,15 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
-import { CreateCreativeSets } from "../../../actions";
+import { CreateCreativeSets, GetSegments } from "../../../actions";
 import CreativeSetForm from "../CreatoveSetForm/CreativeSetForm";
 
 import { styles } from "./CreativeSetNew.style";
 
-class CampaignNew extends React.Component<any, any> {
+class CreativeSetNew extends React.Component<any, any> {
+  public componentDidMount(){
+    this.props.getSegments(this.props.auth);
+  }
   public render() {
     const { classes, create, auth, history, match, segments } = this.props;
     const handleSubmit = async (value: any) => {
@@ -16,8 +19,6 @@ class CampaignNew extends React.Component<any, any> {
       value.perDay = parseFloat(value.perDay);
       const result = await create(match.params.campaignId, value, auth);
       const url = match.url.replace("/new", "");
-      // tslint:disable-next-line:no-console
-      console.log(url, result.id);
       history.push(`${url}/${result.id}`);
     };
     return (
@@ -44,6 +45,7 @@ const mapStateToProps = (state: any, ownProps: any) => ({
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
   create: (campaignId: string, value: any, user: any) => dispatch((CreateCreativeSets(campaignId, value, user))),
+  getSegments: (user: any) => dispatch(GetSegments(user)),
 });
 
-export default withRouter(withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(CampaignNew)) as any);
+export default withRouter(withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(CreativeSetNew)) as any);

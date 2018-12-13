@@ -45,14 +45,18 @@ class CreativeInstanceList extends React.Component<any, any> {
     });
   }
 
-  public handleDialogClose = (action: any, creative: any) => {
+  public handleDialogClose = (action: any, state: any) => {
     this.setState({
       open: false,
     });
-    if (action === "submit" && creative) {
+    if (action === "submit" && state.creative) {
       const creativeInstance = {
-        creativeId: creative,
+        creativeId: state.creative,
         creativeSetId: this.props.match.params.creativeSetId,
+        prices: [{
+          amount: state.amount,
+          type: state.confirmationType
+        }]
       };
       this.props.createCreativeInstance(creativeInstance, this.props.auth);
     }
@@ -80,13 +84,13 @@ class CreativeInstanceList extends React.Component<any, any> {
               <TableHead>
                 <TableRow>
                   <TableCell>
-                    Creative Type
+                    Creative Name
               </TableCell>
                   <TableCell>
-                    Creative Platform
+                    Confirmation Type
               </TableCell>
               <TableCell>
-                    Creative State
+                    Price
               </TableCell>
                   <TableCell>
                     Actions
@@ -116,7 +120,7 @@ class CreativeInstanceList extends React.Component<any, any> {
         <Button className={classes.fab} color="secondary" variant="fab" onClick={this.openDialog}>
           <Icon>add</Icon>
         </Button>
-        <CreativeSetAddCreative open={this.state.open} creatives={this.props.creatives}
+        <CreativeSetAddCreative open={this.state.open} creatives={this.props.creatives} confirmationTypes={this.props.confirmationTypes}
           handleClose={this.handleDialogClose} />
       </div>
     );
@@ -126,6 +130,7 @@ class CreativeInstanceList extends React.Component<any, any> {
 const mapStateToProps = (state: any, ownProps: any) => ({
   auth: state.authReducer,
   creatives: state.creativeReducer.creatives,
+  confirmationTypes: state.confirmationTypeReducer.confirmationTypes,
 });
 
 const mapDispathToProps = (dispatch: any, ownProps: any) => ({

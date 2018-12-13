@@ -46,6 +46,7 @@ export const CreateCreativeSets = (campaignId: string, creativeSet: ICreateCreat
       } else {
         dispatch(OpenSnackBar(`Create CreativeSets Faild: ${error.message}`));
       }
+      return Promise.reject(error);
     }
   };
 };

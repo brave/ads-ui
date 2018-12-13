@@ -55,6 +55,15 @@ class CampaignForm extends React.Component<any, any> {
               name="budget" type="number" component={renderTextField} label="Budget" />
           </div>
           <div>
+            <FormControl>
+              <InputLabel>Currency</InputLabel>
+              <Field disabled={!unlock} component={renderSelectField} name="currency" label="Creative Type">
+                <MenuItem key="USD" value="USD">USD</MenuItem>
+                <MenuItem key="BAT" value="BAT">BAT</MenuItem>
+              </Field>
+            </FormControl>
+          </div>
+          <div>
             <Field className={classes.textField} disabled={!unlock}
               name="dailyCap" type="number" component={renderTextField} label="Daily Cap" />
           </div>

@@ -12,7 +12,7 @@ class AdvertiserNew extends React.Component<any, any> {
   public render() {
     const { classes, create, auth, history, match } = this.props;
     const handleSubmit = async (value: any) => {
-      const userId = match.params.id;
+      const userId = match.params.userId;
       const values = value;
       values.mailingAddress = {
         city: values.city,

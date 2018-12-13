@@ -46,6 +46,7 @@ export const CreateCreativeInstances = (creativeInstance: ICreateCreativeInstanc
       } else {
         dispatch(OpenSnackBar(`Create CreativeInstances Faild: ${error.message}`));
       }
+      return Promise.reject(error);
     }
   };
 };

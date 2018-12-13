@@ -11,13 +11,13 @@ class CreativeListItem extends React.Component<any, any> {
     return (
       <TableRow className={classes.table}>
         <TableCell>
-          <div>{creativeInstance.creative.type.name}</div>
+          <div>{creativeInstance.creative.name}</div>
         </TableCell>
         <TableCell>
-          <div>{creativeInstance.creative.type.platform}</div>
+          <div>{creativeInstance.prices[0].type}</div>
         </TableCell>
         <TableCell>
-          <div>{creativeInstance.creative.state}</div>
+          <div>{creativeInstance.prices[0].amount}</div>
         </TableCell>
         <TableCell>
           <Link className={classes.viewButton} to={`${url}`}>
