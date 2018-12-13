@@ -30,7 +30,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "serve": "http-server ./build -p 3000",
-    "container": "npm install && npm run build && npm run serve"
+    "container": "npm run serve"
   },
   "devDependencies": {
     "@types/chart.js": "^2.7.40",
