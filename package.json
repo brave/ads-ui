@@ -29,7 +29,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "serve": "http-server ./build -p 3000",
+    "serve": "cd build && ws --spa index.html -p 3000",
     "container": "npm run serve"
   },
   "devDependencies": {
@@ -45,7 +45,7 @@
     "@types/react-router-dom": "^4.3.1",
     "@types/redux-form": "^7.4.12",
     "@types/redux-logger": "^3.0.6",
-    "http-server": "^0.11.1",
+    "local-web-server": "^2.6.0",
     "typescript": "^3.1.6"
   },
   "browserslist": [
