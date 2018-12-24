@@ -3,12 +3,15 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
-import { CreateCampaigns } from "../../../actions";
+import { CreateCampaigns, GetGeocodes } from "../../../actions";
 import CampaignForm from "../CampaignForm/CampaignForm";
 
 import { styles } from "./CampaignNew.style";
 
 class CampaignNew extends React.Component<any, any> {
+  public componentDidMount(){
+    this.props.getGeoCodes(this.props.auth);
+  }
   public render() {
     const { classes, create, auth, advertisers, history, geocodes } = this.props;
     const handleSubmit = async (value: any) => {
@@ -45,6 +48,7 @@ const mapStateToProps = (state: any, ownProps: any) => ({
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
   create: (value: any, user: any) => dispatch((CreateCampaigns(value, user))),
+  getGeoCodes: (user: any) => dispatch(GetGeocodes(user)),
 });
 
 export default withRouter(withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(CampaignNew)) as any);
