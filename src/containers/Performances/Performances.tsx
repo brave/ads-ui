@@ -59,19 +59,20 @@ class Performances extends React.Component<any, any> {
       };
       const report = _.find(reports, { campaignId: this.state.campaign }) as any;
       if (report) {
-        report.confirmations = _.sortBy(report.confirmations, (dateObj) => {
+        report.reports = _.sortBy(report.reports, (dateObj) => {
           return new Date(dateObj.confirmationDate);
         });
-        for (const confirmation of report.confirmations) {
-          const label = moment(confirmation.confirmationDate).format("MMMM Do HA");
+        for (const record of report.reports) {
+          const label = moment(record.confirmationsDate).format("MMMM Do HA");
+          console.log(label);
           const i = _.findIndex(dataObject.labels, (o) => {
             return o === label;
           });
           if (i < 0) {
             dataObject.labels.push(label);
-            dataObject.datasets[0].data.push(1);
+            dataObject.datasets[0].data.push(record.count);
           } else {
-            dataObject.datasets[0].data[i] = dataObject.datasets[0].data[i] + 1;
+            dataObject.datasets[0].data[i] = dataObject.datasets[0].data[i] + record.count;
           }
         }
       }
@@ -97,16 +98,16 @@ class Performances extends React.Component<any, any> {
       };
       const report = _.find(reports, { campaignId: this.state.campaign }) as any;
       if (report) {
-        for (const confirmation of report.confirmations) {
-          const type = confirmation.confirmationType;
+        for (const record of report.reports) {
+          const type = record.confirmationsType;
           const i = _.findIndex(dataObject.labels, (o) => {
             return o === type;
           });
           if (i < 0) {
             dataObject.labels.push(type);
-            dataObject.datasets[0].data.push(1);
+            dataObject.datasets[0].data.push(record.count);
           } else {
-            dataObject.datasets[0].data[i] = dataObject.datasets[0].data[i] + 1;
+            dataObject.datasets[0].data[i] = dataObject.datasets[0].data[i] + record.count;
           }
         }
       }
