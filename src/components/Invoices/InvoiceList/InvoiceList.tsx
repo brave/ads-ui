@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import { connect } from "react-redux";
+import * as _ from "lodash";
 
 import InvoiceItem from "../InvoiceItem/InvoiceItem";
 
@@ -37,6 +38,11 @@ class InvoiceList extends React.Component<any, any> {
     let { invoices } = this.props;
     if (!invoices) {
       invoices = [];
+    }
+    if (match.params.advertiserId) {
+      invoices = _.filter(invoices, (obj) => {
+        return obj.advertiserId === match.params.advertiserId;
+      });
     }
     const { rowsPerPage, page } = this.state;
     const listItems = invoices

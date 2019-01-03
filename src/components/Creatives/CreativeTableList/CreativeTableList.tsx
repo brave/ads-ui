@@ -13,6 +13,7 @@ import {
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import * as _ from "lodash";
 
 import CreativeTableItem from "../CreativeTableItem/CreativeTableItem";
 
@@ -40,6 +41,11 @@ class CreativeList extends React.Component<any, any> {
     let { creatives } = this.props;
     if (!creatives) {
       creatives = [];
+    }
+    if (match.params.advertiserId) {
+      creatives = _.filter(creatives, (obj) => {
+        return obj.advertiserId === match.params.advertiserId;
+      });
     }
     const { rowsPerPage, page } = this.state;
     const listItems = creatives

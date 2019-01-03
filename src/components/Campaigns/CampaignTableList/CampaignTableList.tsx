@@ -13,6 +13,7 @@ import {
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import * as _ from "lodash";
 
 import CampaignTableItem from "../CampaignTableItem/CampaignTableItem";
 
@@ -41,6 +42,11 @@ class CampaignList extends React.Component<any, any> {
     if (!campaigns) {
       campaigns = [];
     }
+    if (match.params.advertiserId) {
+      campaigns = _.filter(campaigns, (obj) => {
+        return obj.advertiserId === match.params.advertiserId;
+      });
+    }
     const { rowsPerPage, page } = this.state;
     const listItems = campaigns
       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -65,10 +71,10 @@ class CampaignList extends React.Component<any, any> {
                   <TableCell>
                     Daily Cap
               </TableCell>
-              <TableCell>
+                  <TableCell>
                     Start At
               </TableCell>
-              <TableCell>
+                  <TableCell>
                     End At
               </TableCell>
                   <TableCell>
