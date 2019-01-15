@@ -23,7 +23,7 @@ class CampaignForm extends React.Component<any, any> {
       delete creativeSet.modifiedAt;
       dispatch(initialize("CreativeSetForm", creativeSet));
     }
-    const executionList = ["per_click", "round_robin"].map((item: any) => {
+    const executionList = ["per_click"].map((item: any) => {
       return (
         <MenuItem key={item} value={item}>{item}</MenuItem>
       );

@@ -78,6 +78,8 @@ class CampaignView extends React.Component<any, any> {
   }
 
   private async handleSubmit(value: any) {
+    value.budget = parseFloat(value.budget);
+    value.dailyCap = parseFloat(value.dailyCap);
     await this.props.update(value, this.props.auth, this.props.match.params.userId);
   }
 
