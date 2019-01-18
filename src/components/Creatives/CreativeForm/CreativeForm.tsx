@@ -52,7 +52,7 @@ class CreativeForm extends React.Component<any, any> {
         <MenuItem key={item.code} value={item.code}>{item.name}</MenuItem>
       );
     });
-    const creativeStateList = ["draft", "under_review", "active"].map((item: any) => {
+    const creativeStateList = ["draft", "under_review", "active", "paused"].map((item: any) => {
       return (
         <MenuItem key={item} value={item}>{item}</MenuItem>
       );
