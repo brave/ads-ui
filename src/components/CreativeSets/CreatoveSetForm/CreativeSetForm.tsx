@@ -28,6 +28,11 @@ class CampaignForm extends React.Component<any, any> {
         <MenuItem key={item} value={item}>{item}</MenuItem>
       );
     });
+    const creativeSetStateList = ["active", "suspended"].map((item: any) => {
+      return (
+        <MenuItem key={item} value={item}>{item}</MenuItem>
+      );
+    });
     return (
       <div className={classes.root}>
         <form onSubmit={handleSubmit} className={classes.form}>
@@ -50,6 +55,14 @@ class CampaignForm extends React.Component<any, any> {
           <div>
             <FieldArray disabled={!unlock} options={segments}
               name="segments" component={renderChipField} label="Segments"/>
+          </div>
+          <div>
+            <FormControl>
+              <InputLabel>State</InputLabel>
+              <Field disabled={!unlock} component={renderSelectField} name="state" label="CreativeSet State">
+                {creativeSetStateList}
+              </Field>
+            </FormControl>
           </div>
           {unlock &&
             <div>
