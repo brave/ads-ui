@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import _ from "lodash";
-import DatePicker from "material-ui-pickers/DatePicker";
+import DateTimePicker from "material-ui-pickers/DateTimePicker";
 import MuiPickersUtilsProvider from "material-ui-pickers/MuiPickersUtilsProvider";
 import React from "react";
 
@@ -62,7 +62,7 @@ export const renderSelectField = ({
     />
   );
 
-export const renderDateField = ({
+export const renderDateTimeField = ({
   input,
   children,
   label,
@@ -70,7 +70,7 @@ export const renderDateField = ({
   ...custom
 }: any) => (
     <MuiPickersUtilsProvider utils={MomentUtils}>
-      <DatePicker
+      <DateTimePicker
         {...input}
         label={label}
         onChange={(value: any) => input.onChange(value)}

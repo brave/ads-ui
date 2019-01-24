@@ -4,7 +4,7 @@ import { Field, FieldArray, initialize, reduxForm } from "redux-form";
 
 import {
   renderChipField,
-  renderDateField,
+  renderDateTimeField,
   renderSelectField,
   renderTextField,
 } from "../../../containers/field-material";
@@ -69,11 +69,11 @@ class CampaignForm extends React.Component<any, any> {
           </div>
           <div>
             <Field className={classes.textField} disabled={!unlock}
-              name="startAt" component={renderDateField} label="Start Date" />
+              name="startAt" component={renderDateTimeField} label="Start Date" />
           </div>
           <div>
             <Field className={classes.textField} disabled={!unlock}
-              name="endAt" component={renderDateField} label="End Date" />
+              name="endAt" component={renderDateTimeField} label="End Date" />
           </div>
           <div>
             <FieldArray disabled={!unlock} options={geocodes}
