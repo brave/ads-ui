@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@date-io/moment": "0.0.2",
+    "@date-io/moment": "1.0.1",
     "@material-ui/core": "^3.5.1",
     "axios": "^0.18.0",
     "chart.js": "^2.7.3",
