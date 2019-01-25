@@ -1,4 +1,4 @@
-import * as jwtDecode from "jwt-decode";
+import jwtDecode from "jwt-decode";
 
 import { ISignInPayload, SIGN_IN_FAILED, SIGN_IN_START, SIGN_IN_SUCCESSFUL, SIGN_OUT } from "../../actions";
 import { IAuthAction, IAuthPayload } from "../../actions";

@@ -1,5 +1,5 @@
 import { Button, withStyles } from "@material-ui/core";
-import * as React from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 
@@ -34,11 +34,11 @@ class SignInContainer extends React.Component<any, any> {
           </div>
         </div>
         <div className={classes.row2}>
-          <Button variant="raised" color="primary"
+          <Button variant="contained" color="primary"
             disabled={(signupForm && signupForm.syncErrors !== undefined) || this.state.submitting}
             type="button" onClick={this.submit}>Sign Up</Button>
           <Link className={classes.signinlink} to={`/auth/signin`}>
-            <Button variant="raised" color="primary">
+            <Button variant="contained" color="primary">
               Sign In
             </Button>
           </Link>

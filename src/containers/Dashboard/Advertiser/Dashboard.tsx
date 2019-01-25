@@ -1,9 +1,12 @@
-import * as React from "react";
+import { Typography } from "@material-ui/core";
+import React from "react";
 
 class Dashboard extends React.Component<any, any> {
   public render() {
     return (
-      <div>Advertiser Dashboard</div>
+      <div style={{ margin: "15px" }}>
+        <Typography variant="h5">Advertiser Dashboard</Typography>
+      </div>
     );
   }
 }

@@ -1,5 +1,5 @@
 import { AppBar, Card, CardContent, Toolbar, Typography, withStyles } from "@material-ui/core";
-import * as React from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
@@ -12,7 +12,7 @@ class AdvertiserNew extends React.Component<any, any> {
   public render() {
     const { classes, create, auth, history, match } = this.props;
     const handleSubmit = async (value: any) => {
-      const userId = match.params.id;
+      const userId = match.params.userId;
       const values = value;
       values.mailingAddress = {
         city: values.city,
@@ -33,7 +33,7 @@ class AdvertiserNew extends React.Component<any, any> {
       <div className={classes.root}>
         <AppBar position="static" color="default">
           <Toolbar>
-            <Typography variant="title">New User</Typography>
+            <Typography variant="h5">New Advertiser</Typography>
           </Toolbar>
         </AppBar>
         <Card className={classes.card}>

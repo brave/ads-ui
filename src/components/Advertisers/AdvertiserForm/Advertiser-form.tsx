@@ -1,5 +1,5 @@
 import { Button, FormControl, InputLabel, MenuItem, withStyles } from "@material-ui/core";
-import * as React from "react";
+import React from "react";
 import { Field, initialize, reduxForm } from "redux-form";
 
 import { renderCheckbox, renderSelectField, renderTextField } from "../../../containers/field-material";
@@ -95,7 +95,7 @@ class AdvertiserForm extends React.Component<any, any> {
           {auth && auth.role === "admin" &&
             <div>
               <FormControl>
-                <InputLabel htmlFor="age-native-simple">Advertiser State</InputLabel>
+                <InputLabel>Advertiser State</InputLabel>
                 <Field disabled={!unlock && unlock !== undefined}
                   component={renderSelectField} name="ad_state" label="State">
                   <MenuItem value={"under_review"}>Under Review</MenuItem>
@@ -112,7 +112,7 @@ class AdvertiserForm extends React.Component<any, any> {
           }
           {unlock && auth && auth.role === "admin" &&
             <div>
-              <Button variant="raised" disabled={submitting || invalid} color="primary" type="submit">
+              <Button variant="contained" disabled={submitting || invalid} color="primary" type="submit">
                 Save
             </Button>
             </div>

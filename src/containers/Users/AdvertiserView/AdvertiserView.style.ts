@@ -4,6 +4,11 @@ export const styles: any = {
     display: "flex",
     justifyContent: "space-between",
   },
+  fab: {
+    alignSelf: "flex-end",
+    margin: "20px",
+    textDecoration: "none",
+  },
   infoCard: {
     margin: "15px",
   },

@@ -1,5 +1,5 @@
-import * as _ from "lodash";
-import * as React from "react";
+import _ from "lodash";
+import React from "react";
 import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router";
 
@@ -23,8 +23,6 @@ class Guard extends React.Component<any, any> {
     } else if (auth.role === "user") {
       redirectUrl = "/main/user";
     }
-    // tslint:disable-next-line:no-console
-    console.log(redirectUrl, match.url);
     if (redirectUrl && redirectUrl !== match.url) {
       return (<Redirect to={redirectUrl} />);
     }

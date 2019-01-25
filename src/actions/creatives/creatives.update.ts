@@ -22,13 +22,14 @@ export const UpdateCreativesFailed = (): ICreativeAction => ({
   type: UPDATE_CREATIVES_FAILED,
 });
 
-export const UpdateCreatives = (creative: Partial<ICreativePayload>, user: IAuthPayload) => {
+export const UpdateCreatives = (creative: Partial<ICreativePayload>, auth: IAuthPayload, userId?: string) => {
   return async (dispatch: any) => {
     try {
       dispatch(UpdateCreativesStart(creative));
       const response = await axios.put(`${process.env.REACT_APP_SERVER_ADDRESS}/creative/${creative.id}`, creative, {
         headers: {
-          "Authorization": `Bearer ${user.accessToken}`,
+          "-x-user": userId,
+          "Authorization": `Bearer ${auth.accessToken}`,
           "Content-Type": "application/json",
         },
       });

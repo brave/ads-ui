@@ -1,7 +1,7 @@
 import { AppBar, Button, Icon, IconButton, withStyles } from "@material-ui/core";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import * as classNames from "classnames";
+import classNames from "classnames";
 import * as React from "react";
 import { connect } from "react-redux";
 
@@ -36,8 +36,8 @@ class Appbar extends React.Component<any, any> {
                 {getMenuItem()}
               </IconButton>
             <img src="/favicon.png" className={classes.logo} />
-            <Typography className={classes.flex} variant="title" color="inherit">
-              Brave Advertisment
+            <Typography className={classes.flex} variant="h5" color="inherit">
+              Brave Advertisement
             </Typography>
             <Button color="inherit" onClick={signOut}>Logout</Button>
           </Toolbar>

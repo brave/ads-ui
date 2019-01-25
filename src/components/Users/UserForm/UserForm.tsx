@@ -1,5 +1,5 @@
 import { Button, FormControl, InputLabel, MenuItem, withStyles } from "@material-ui/core";
-import * as React from "react";
+import React from "react";
 import { Field, initialize, reduxForm } from "redux-form";
 
 import { renderCheckbox, renderSelectField, renderTextField } from "../../../containers/field-material";
@@ -54,7 +54,7 @@ class UserForm extends React.Component<any, any> {
           </div>
           {unlock &&
             <div>
-              <Button variant="raised" disabled={submitting || invalid} color="primary" type="submit">
+              <Button variant="contained" disabled={submitting || invalid} color="primary" type="submit">
                 Save
             </Button>
             </div>

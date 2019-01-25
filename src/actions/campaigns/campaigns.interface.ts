@@ -1,5 +1,3 @@
-import { ICreativePayload } from "../creatives";
-
 export interface ICampaignAction {
   type: string;
   payload: ICreateCampaignPayload | ICampaignPayload[] | ICampaignPayload | Partial<ICampaignPayload> | null;
@@ -7,6 +5,12 @@ export interface ICampaignAction {
 
 export interface ICreateCampaignPayload {
   name: string;
+  advertiserId: string;
+  startat: Date;
+  endAt: Date;
+  type: string;
+  budget: number;
+  dailyCap: number;
 }
 
 export interface ICampaignPayload {
@@ -16,6 +20,5 @@ export interface ICampaignPayload {
   createdAt: string;
   modifiedAt: string;
   code: string;
-  creatives: ICreativePayload[];
-  flights: any[];
+  geotargets: any[];
 }

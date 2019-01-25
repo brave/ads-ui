@@ -3,121 +3,60 @@ import {
   Card,
   CardContent,
   CardHeader,
-  ExpansionPanel,
-  ExpansionPanelDetails,
-  ExpansionPanelSummary,
   Icon,
   IconButton,
   Toolbar,
   Typography,
   withStyles,
 } from "@material-ui/core";
-import * as _ from "lodash";
-import * as React from "react";
+import _ from "lodash";
+import React from "react";
 import { connect } from "react-redux";
 
 import {
-  CreateFlights,
-  UpdateCampaigns,
+  GetCreativeSets, GetGeocodes, UpdateCampaigns,
 } from "../../../actions";
 
 import CampaignForm from "../../../components/Campaigns/CampaignForm/CampaignForm";
-import FlightDetail from "../../../components/Flights/FlightDetail/FlightDetail";
-import FlightNew from "../../../components/Flights/FlightNew/FlightNew";
-import FlightTable from "../../../components/Flights/FlightTable/FlightTable";
+import CreativeSetList from "../../../components/CreativeSets/CreativeSetList/CreativeSetList";
 
 import { styles } from "./CampaignView.style";
 
 class CampaignView extends React.Component<any, any> {
-  public static getDerivedStateFromProps(nextProps: any, prevState: any) {
-    if (prevState.campaigns !== nextProps.campaigns) {
-      const campaign = _.find(nextProps.campaigns, { id: nextProps.match.params.id }) as any;
-      const activeFlight = _.cloneDeep(_.find(campaign.flights, { active: true }));
-      const notActiveFlights = _.filter(campaign.flights, { active: false });
-      return {
-        activeFlight,
-        campaign,
-        campaigns: nextProps.campaigns,
-        notActiveFlights,
-      };
-    }
-    return null;
-  }
-
   constructor(props: any) {
     super(props);
-    const campaign = _.find(props.campaigns, { id: this.props.match.params.id }) as any;
-    const activeFlight = _.find(campaign.flights, { active: true });
-    const notActiveFlights = _.filter(campaign.flights, { active: false });
+    const campaign = _.find(props.campaigns, { id: this.props.match.params.campaignId }) as any;
+    props.getGeocodes(props.auth);
+    props.getCreativeSets(campaign.id, props.auth);
     this.state = {
-      activeFlight,
       campaign,
-      campaigns: props.campaigns,
-      notActiveFlights,
-      openNew: false,
       unlock: false,
     };
   }
 
   public render() {
-    const { classes } = this.props;
-    const { campaign, notActiveFlights, activeFlight } = this.state;
-    const { unlock, openNew } = this.state;
+    const { classes, creativesets, geocodes, match } = this.props;
+    const { campaign, unlock } = this.state;
     return (
       <div className={classes.root}>
         <AppBar position="static" color="default">
           <Toolbar>
-            <Typography variant="title">{campaign.name}</Typography>
+            <Typography variant="h5">{campaign.name}</Typography>
           </Toolbar>
         </AppBar>
         <Card className={classes.infoCard}>
           <CardHeader title="Details" action={this.getLockButton()} />
           <CardContent className={classes.content}>
-            <CampaignForm campaign={campaign} unlock={unlock} onSubmit={(value: string) => this.handleSubmit(value)} />
+            <CampaignForm campaign={campaign} geocodes={geocodes}
+              unlock={unlock} onSubmit={(value: string) => this.handleSubmit(value)} />
           </CardContent>
         </Card>
         <Card className={classes.infoCard}>
-          <CardHeader title="Flights" action={this.getAddButton()} />
-          <CardContent>
-            <FlightNew
-              open={openNew}
-              handleClose={() => this.handleCloseNew()}
-              handleOk={(modalState: any) => this.handleOkNew(modalState)}></FlightNew>
-            <ExpansionPanel disabled={!activeFlight}>
-              <ExpansionPanelSummary expandIcon={<Icon>expand</Icon>}>
-                Current Flight Detail
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                {this.getFlightDetail()}
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
-            <ExpansionPanel disabled={notActiveFlights.length < 1}>
-              <ExpansionPanelSummary expandIcon={<Icon>expand</Icon>}>
-                <Typography className={classes.heading}>Previous History</Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <FlightTable flights={notActiveFlights} />
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
+          <CardHeader title="Creative Sets" />
+          <CardContent className={classes.content}>
+            <CreativeSetList creativeSets={creativesets} match={match}></CreativeSetList>
           </CardContent>
         </Card>
-      </div>
-    );
-  }
-
-  private getFlightDetail() {
-    if (this.state.activeFlight) {
-      return (<FlightDetail flight={this.state.activeFlight} />);
-    }
-    return (<div></div>);
-  }
-
-  private getAddButton() {
-    return (
-      <div>
-        <IconButton onClick={() => this.handleClickOpenNew()} color="primary">
-          <Icon>add</Icon>
-        </IconButton>
       </div>
     );
   }
@@ -139,7 +78,9 @@ class CampaignView extends React.Component<any, any> {
   }
 
   private async handleSubmit(value: any) {
-    await this.props.update(value, this.props.user);
+    value.budget = parseFloat(value.budget);
+    value.dailyCap = parseFloat(value.dailyCap);
+    await this.props.update(value, this.props.auth, this.props.match.params.userId);
   }
 
   private switchLock() {
@@ -147,35 +88,19 @@ class CampaignView extends React.Component<any, any> {
       unlock: !this.state.unlock,
     });
   }
-
-  private handleClickOpenNew() {
-    this.setState({ openNew: true });
-  }
-
-  private handleCloseNew() {
-    this.setState({ openNew: false });
-  }
-
-  private async handleOkNew(modalState: any) {
-    const flight = {
-      campaign: this.state.campaign.id,
-      endAt: modalState.selectedEndDate,
-      geoOperator: "and",
-      order: 1,
-      startedAt: modalState.selectedStartDate,
-    };
-    await this.props.createFlight(flight, this.props.user);
-  }
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
+  auth: state.authReducer,
   campaigns: state.campaignReducer.campaigns,
-  user: state.userReducer,
+  creativesets: state.creativeSetReducer.creativesets,
+  geocodes: state.geoCodeReducer.geocodes,
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
-  createFlight: (value: any, user: any) => dispatch(CreateFlights(value, user)),
-  update: (value: any, user: any) => dispatch(UpdateCampaigns(value, user)),
+  getCreativeSets: (campaignId: string, user: any) => dispatch(GetCreativeSets(campaignId, user)),
+  getGeocodes: (user: any) => dispatch(GetGeocodes(user)),
+  update: (value: any, user: any, userId: string) => dispatch(UpdateCampaigns(value, user, userId)),
 });
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(CampaignView));

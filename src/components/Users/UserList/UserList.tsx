@@ -6,10 +6,11 @@ import {
   TableBody,
   TableCell,
   TableHead,
+  TablePagination,
   TableRow,
   withStyles,
 } from "@material-ui/core";
-import * as React from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -20,16 +21,35 @@ import UserItem from "../UserItem/UserItem";
 import { styles } from "./UserList.style";
 
 class UserList extends React.Component<any, any> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      page: 0,
+      rowsPerPage: 10,
+    };
+  }
   public componentDidMount() {
     this.props.GetAllUsers(this.props.auth);
   }
+
+  public handleChangePage = (event: any, page: number) => {
+    this.setState({ page });
+  }
+
+  public handleChangeRowsPerPage = (event: any) => {
+    this.setState({ rowsPerPage: event.target.value });
+  }
+
   public render() {
     const { classes, match, users } = this.props;
-    const listItems = users.map((item: any) => {
-      return (
-        <UserItem key={item.id} match={match} user={item} />
-      );
-    });
+    const { rowsPerPage, page } = this.state;
+    const listItems = users
+      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+      .map((item: any) => {
+        return (
+          <UserItem key={item.id} match={match} user={item} />
+        );
+      });
     return (
       <div className={classes.root}>
         <Card>
@@ -58,6 +78,20 @@ class UserList extends React.Component<any, any> {
                 {listItems}
               </TableBody>
             </Table>
+            <TablePagination
+              component="div"
+              count={users.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              backIconButtonProps={{
+                "aria-label": "Previous Page",
+              }}
+              nextIconButtonProps={{
+                "aria-label": "Next Page",
+              }}
+              onChangePage={this.handleChangePage}
+              onChangeRowsPerPage={this.handleChangeRowsPerPage}
+            />
           </CardContent>
         </Card>
         <Link className={classes.fab} to={match.url + "/new"}>

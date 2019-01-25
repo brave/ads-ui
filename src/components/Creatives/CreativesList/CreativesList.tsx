@@ -1,5 +1,5 @@
 import { Button, Icon, withStyles } from "@material-ui/core";
-import * as React from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -15,8 +15,7 @@ class CreativesList extends React.Component<any, any> {
     this.props.GetCreatives(this.props.auth);
   }
   public render() {
-    const { classes, match } = this.props;
-    const { creatives } = this.props.creativeReducer;
+    const { classes, match, creatives } = this.props;
     const listItems = creatives.map((item: any) => {
       return (
         <div key={item.id} className={classes.item}>
@@ -30,7 +29,7 @@ class CreativesList extends React.Component<any, any> {
         <div className={classes.list}>
           {listItems}
         </div>
-        <Link className={classes.fab} to="/main/creatives/new">
+        <Link className={classes.fab} to={match.url + "/new"}>
           <Button color="secondary" variant="fab">
             <Icon>add</Icon>
           </Button>
@@ -42,7 +41,7 @@ class CreativesList extends React.Component<any, any> {
 
 const mapStateToProps = (state: any, ownProps: any) => ({
   auth: state.authReducer,
-  creativeReducer: state.creativeReducer,
+  creatives: state.creativeReducer.creatives,
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({

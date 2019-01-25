@@ -1,5 +1,5 @@
 import { Button, Icon, withStyles } from "@material-ui/core";
-import * as React from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -15,8 +15,7 @@ class CampaignList extends React.Component<any, any> {
     this.props.GetCampaigns(this.props.auth);
   }
   public render() {
-    const { classes, match } = this.props;
-    const { campaigns } = this.props.campaignReducer;
+    const { classes, match, campaigns } = this.props;
     const listItems = campaigns.map((item: any) => {
       return (
         <div key={item.id} className={classes.item}>
@@ -30,7 +29,7 @@ class CampaignList extends React.Component<any, any> {
         <div className={classes.list}>
           {listItems}
         </div>
-        <Link className={classes.fab} to="/main/campaigns/new">
+        <Link className={classes.fab} to={match.url + "/new"}>
           <Button color="secondary" variant="fab">
             <Icon>add</Icon>
           </Button>
@@ -42,7 +41,7 @@ class CampaignList extends React.Component<any, any> {
 
 const mapStateToProps = (state: any, ownProps: any) => ({
   auth: state.authReducer,
-  campaignReducer: state.campaignReducer,
+  campaigns: state.campaignReducer.campaigns,
 });
 
 const mapDispathToProps = (dispatch: any, ownProps: any) => ({

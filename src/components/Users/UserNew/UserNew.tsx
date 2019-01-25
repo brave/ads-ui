@@ -1,5 +1,5 @@
 import { AppBar, Card, CardContent, Toolbar, Typography, withStyles } from "@material-ui/core";
-import * as React from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
@@ -20,7 +20,7 @@ class UserNew extends React.Component<any, any> {
       <div className={classes.root}>
         <AppBar position="static" color="default">
           <Toolbar>
-            <Typography variant="title">New User</Typography>
+            <Typography variant="h5">New User</Typography>
           </Toolbar>
         </AppBar>
         <Card className={classes.card}>

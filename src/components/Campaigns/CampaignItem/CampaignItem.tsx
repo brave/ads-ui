@@ -1,5 +1,6 @@
 import { Avatar, Card, CardActions, CardContent, Icon, IconButton, Typography, withStyles } from "@material-ui/core";
-import * as React from "react";
+import moment from "moment";
+import React from "react";
 import { Link } from "react-router-dom";
 
 import { styles } from "./CampaignItem.style";
@@ -11,14 +12,20 @@ class CampaignItem extends React.Component<any, any> {
       <Card className={classes.card}>
         <CardContent className={classes.content}>
           <div>
-            <Typography gutterBottom variant="headline" component="h2">
+            <Typography gutterBottom variant="h5">
               {campaign.name}
+            </Typography>
+            <Typography component="p">
+              {moment(campaign.startAt).format("MMMM Do YYYY")} to&nbsp;
+              {moment(campaign.endAt).format("MMMM Do YYYY")}
             </Typography>
           </div>
           <div className={classes.indicator}>
-            <Avatar>
-              {campaign.creatives.length.toString()}
-            </Avatar>
+            {campaign.creatives &&
+              <Avatar>
+                {campaign.creatives.length.toString()}
+              </Avatar>
+            }
           </div>
         </CardContent>
         <CardActions className={classes.actions}>
@@ -30,9 +37,6 @@ class CampaignItem extends React.Component<any, any> {
             </Link>
           </div>
           <div className={classes.rightActions}>
-            <IconButton color="primary">
-              <Icon>equalizer</Icon>
-            </IconButton>
           </div>
         </CardActions>
       </Card>

@@ -1,30 +1,38 @@
 import { AppBar, Card, CardContent, Toolbar, Typography, withStyles } from "@material-ui/core";
-import * as React from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
-import { CreateCampaigns } from "../../../actions";
+import { CreateCampaigns, GetGeocodes } from "../../../actions";
 import CampaignForm from "../CampaignForm/CampaignForm";
 
 import { styles } from "./CampaignNew.style";
 
 class CampaignNew extends React.Component<any, any> {
+  public componentDidMount(){
+    this.props.getGeoCodes(this.props.auth);
+  }
   public render() {
-    const { classes, create, auth, history } = this.props;
+    const { classes, create, auth, advertisers, history, geocodes } = this.props;
     const handleSubmit = async (value: any) => {
+      value.advertiserId = advertisers[0].id;
+      value.type = "paid";
+      value.budget = parseFloat(value.budget);
+      value.dailyCap = parseFloat(value.dailyCap);
       const result = await create(value, auth);
-      history.push(`/main/campaigns/${result.id}`);
+      const url = this.props.match.url.replace("/new", "");
+      history.push(`${url}/${result.id}`);
     };
     return (
       <div className={classes.root}>
         <AppBar position="static" color="default">
           <Toolbar>
-            <Typography variant="title">New Campaign</Typography>
+            <Typography variant="h5">New Campaign</Typography>
           </Toolbar>
         </AppBar>
         <Card className={classes.card}>
           <CardContent>
-            <CampaignForm unlock={true} onSubmit={handleSubmit} />
+            <CampaignForm geocodes={geocodes} unlock={true} onSubmit={handleSubmit} />
           </CardContent>
         </Card>
       </div>
@@ -33,11 +41,14 @@ class CampaignNew extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
+  advertisers: state.advertiserReducer.advertisers,
   auth: state.authReducer,
+  geocodes: state.geoCodeReducer.geocodes,
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
   create: (value: any, user: any) => dispatch((CreateCampaigns(value, user))),
+  getGeoCodes: (user: any) => dispatch(GetGeocodes(user)),
 });
 
 export default withRouter(withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(CampaignNew)) as any);

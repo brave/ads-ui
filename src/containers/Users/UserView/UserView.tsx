@@ -9,8 +9,8 @@ import {
   Typography,
   withStyles,
 } from "@material-ui/core";
-import * as _ from "lodash";
-import * as React from "react";
+import _ from "lodash";
+import React from "react";
 import { connect } from "react-redux";
 
 import { UserUpdate } from "../../../actions";
@@ -30,7 +30,7 @@ class UserView extends React.Component<any, any> {
   public render() {
     const { classes, match, auth, update, users } = this.props;
     const { unlock } = this.state;
-    const id = match.params.id;
+    const id = match.params.userId;
     const user = _.find(users, (item) => {
       return item.id === id;
     });
@@ -61,7 +61,7 @@ class UserView extends React.Component<any, any> {
       <div className={classes.root}>
         <AppBar position="static" color="default">
           <Toolbar>
-            <Typography variant="title">{user.fullName}</Typography>
+            <Typography variant="h5">{user.fullName}</Typography>
           </Toolbar>
         </AppBar>
         <Card className={classes.infoCard}>
