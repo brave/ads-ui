@@ -12,10 +12,9 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { CreateCreativeInstances } from "../../../actions";
-
-import CreativeSetAddCreative from "../../CreativeSets/CreativeSetAddCreative/CreativeSetAddCreative";
 
 import CreativeInstanceItem from "../CreativeInstanceItem/CreativeInstanceItem";
 
@@ -89,7 +88,7 @@ class CreativeInstanceList extends React.Component<any, any> {
                   <TableCell>
                     Confirmation Type
               </TableCell>
-              <TableCell>
+                  <TableCell>
                     Price
               </TableCell>
                   <TableCell>
@@ -117,11 +116,11 @@ class CreativeInstanceList extends React.Component<any, any> {
             />
           </CardContent>
         </Card>
-        <Button className={classes.fab} color="secondary" variant="fab" onClick={this.openDialog}>
-          <Icon>add</Icon>
-        </Button>
-        <CreativeSetAddCreative open={this.state.open} creatives={this.props.creatives} confirmationTypes={this.props.confirmationTypes}
-          handleClose={this.handleDialogClose} />
+        <Link className={classes.fab} to={match.url + "/creativeInstance/new"}>
+          <Button color="secondary" variant="fab">
+            <Icon>add</Icon>
+          </Button>
+        </Link>
       </div>
     );
   }
