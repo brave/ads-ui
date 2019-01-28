@@ -14,7 +14,7 @@ const validate = (values: any) => {
   return errors;
 };
 
-class CampaignForm extends React.Component<any, any> {
+class CreativeSetForm extends React.Component<any, any> {
   public render() {
     const { creativeSet, classes, dispatch, segments,
       handleSubmit, invalid, initialized, submitting, unlock } = this.props;
@@ -80,6 +80,6 @@ class CampaignForm extends React.Component<any, any> {
 const CreativeSetFormRedux = reduxForm({
   form: "CreativeSetForm",
   validate,
-})(withStyles(styles)(CampaignForm) as any);
+})(withStyles(styles)(CreativeSetForm) as any);
 
 export default CreativeSetFormRedux as any;

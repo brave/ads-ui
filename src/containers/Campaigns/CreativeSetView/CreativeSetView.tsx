@@ -22,7 +22,7 @@ import CreativeSetForm from "../../../components/CreativeSets/CreatoveSetForm/Cr
 
 import { styles } from "./CreativeSetView.style";
 
-class CampaignView extends React.Component<any, any> {
+class CreativeSetView extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     const campaign = _.find(props.campaigns, { id: this.props.match.params.campaignId }) as any;
@@ -56,7 +56,7 @@ class CampaignView extends React.Component<any, any> {
           </CardContent>
         </Card>
         <Card className={classes.infoCard}>
-          <CardHeader title="Creatives" />
+          <CardHeader title="Creative Instances" />
           <CardContent className={classes.content}>
             <CreativeInstanceList match={match} creativeInstances={creativeInstances} />
           </CardContent>
@@ -108,4 +108,4 @@ const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
   update: (campaignId: string, value: any, user: any) => dispatch(UpdateCreativeSets(campaignId, value, user)),
 });
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(CampaignView));
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(CreativeSetView));

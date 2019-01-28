@@ -64,7 +64,6 @@ class Performances extends React.Component<any, any> {
         });
         for (const record of report.reports) {
           const label = moment(record.confirmationsDate).format("MMMM Do HA");
-          console.log(label);
           const i = _.findIndex(dataObject.labels, (o) => {
             return o === label;
           });

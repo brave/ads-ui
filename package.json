@@ -43,7 +43,7 @@
     "@types/react-dom": "^16.0.10",
     "@types/react-redux": "^6.0.10",
     "@types/react-router-dom": "^4.3.1",
-    "@types/redux-form": "^7.4.12",
+    "@types/redux-form": "^7.4.16",
     "@types/redux-logger": "^3.0.6",
     "local-web-server": "^2.6.0",
     "typescript": "^3.1.6"
