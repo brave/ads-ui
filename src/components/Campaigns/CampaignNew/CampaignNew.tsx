@@ -13,9 +13,9 @@ class CampaignNew extends React.Component<any, any> {
     this.props.getGeoCodes(this.props.auth);
   }
   public render() {
-    const { classes, create, auth, advertisers, history, geocodes } = this.props;
+    const { classes, create, auth, advertisers, history, geocodes, match } = this.props;
     const handleSubmit = async (value: any) => {
-      value.advertiserId = advertisers[0].id;
+      value.advertiserId = match.params.advertiserId || advertisers[0].id;
       value.type = "paid";
       value.budget = parseFloat(value.budget);
       value.dailyCap = parseFloat(value.dailyCap);
