@@ -15,7 +15,7 @@ import {
 import { createCreativeIstanceReducer } from "./creativeinstance.create";
 import { getCreativeInstanceReducer } from "./creativeinstance.get";
 import { ICreativeInstanceState } from "./creativeinstance.interface";
-import { deleteCreativeInstanceReducer } from "./creativeinstance.update";
+import { deleteCreativeInstanceReducer } from "./creativeinstance.delete";
 
 const creativeSetReducer = (
   state: ICreativeInstanceState = {

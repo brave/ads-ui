@@ -14,6 +14,10 @@ class Body extends React.Component<any, any> {
         <Route path="/user/main" component={AdvertiserMain} />
         <Route path="/admin/main" component={AdminMain} />
         <Route path="/auth" component={Authentication} />
+        <Route path='/' exact={true} component={() => {
+          window.location.href = "https://brave.com/brave-ads-waitlist/";
+          return null;
+        }} />
         {this.getRedirect()}
       </Switch>
     );
