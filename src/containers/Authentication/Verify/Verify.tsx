@@ -21,9 +21,9 @@ class VerifyContainer extends React.Component<any, any> {
   public render() {
     const { auth, classes, signinForm, signout } = this.props;
     if (!auth || !auth.signedIn) {
-      return (<Redirect to="/" />);
+      return (<Redirect to="/a" />);
     } else if (auth.emailVerified) {
-      return (<Redirect to="/" />);
+      return (<Redirect to="/a" />);
     }
     return (
       <div className={classes.root}>
