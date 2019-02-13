@@ -14,7 +14,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { CreateCreativeInstances } from "../../../actions";
+import { CreateCreativeInstances, DeleteCreativeInstances } from "../../../actions";
 
 import CreativeInstanceItem from "../CreativeInstanceItem/CreativeInstanceItem";
 
@@ -32,6 +32,10 @@ class CreativeInstanceList extends React.Component<any, any> {
 
   public handleChangePage = (event: any, page: number) => {
     this.setState({ page });
+  }
+
+  public handleDelete = (creativeInstance: any) => {
+    this.props.deleteCreativeInstance(this.props.auth, creativeInstance);
   }
 
   public handleChangeRowsPerPage = (event: any) => {
@@ -72,7 +76,7 @@ class CreativeInstanceList extends React.Component<any, any> {
       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
       .map((item: any) => {
         return (
-          <CreativeInstanceItem key={item.id} match={match} creativeInstance={item} />
+          <CreativeInstanceItem handleDelete={this.handleDelete} key={item.id} match={match} creativeInstance={item} />
         );
       });
     return (
@@ -135,6 +139,8 @@ const mapStateToProps = (state: any, ownProps: any) => ({
 const mapDispathToProps = (dispatch: any, ownProps: any) => ({
   createCreativeInstance: (creativeInstance: any, auth: any) =>
     dispatch((CreateCreativeInstances(creativeInstance, auth))),
+  deleteCreativeInstance: (auth: any, creativeInstance: any) =>
+    dispatch((DeleteCreativeInstances(creativeInstance, auth)))
 });
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispathToProps)(CreativeInstanceList));
