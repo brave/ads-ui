@@ -21,9 +21,9 @@ class SignInContainer extends React.Component<any, any> {
   public render() {
     const { advertisers, auth, classes, advertiserForm, signout } = this.props;
     if (!auth || !auth.signedIn || !auth.emailVerified) {
-      return (<Redirect to="/" />);
+      return (<Redirect to="/a" />);
     } else if (advertisers.length > 0) {
-      return (<Redirect to="/" />);
+      return (<Redirect to="/a" />);
     }
     return (
       <div className={classes.root}>

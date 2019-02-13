@@ -17,7 +17,7 @@ class Guard extends React.Component<any, any> {
     } else if (auth.role !== "admin" && !activeAdvertiser) {
       redirectUrl = "/auth/wait";
     } else if (match.url === "/auth/signup") {
-      redirectUrl = "/";
+      redirectUrl = "/a";
     } else if (auth.role === "admin") {
       redirectUrl = "/main/admin";
     } else if (auth.role === "user") {
