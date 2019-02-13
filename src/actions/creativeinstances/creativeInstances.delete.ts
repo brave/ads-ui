@@ -34,8 +34,8 @@ export const DeleteCreativeInstances = (creativeInstance: ICreativeInstancePaylo
             "Content-Type": "application/json",
           },
         });
-      dispatch(DeleteCreativeInstancesSuccessful(response.data));
-      dispatch(OpenSnackBar("CreativeInstance updated Successfully"));
+      dispatch(DeleteCreativeInstancesSuccessful(creativeInstance));
+      dispatch(OpenSnackBar("CreativeInstance deleted Successfully"));
     } catch (error) {
       dispatch(DeleteCreativeInstancesFailed());
       if (error.response) {

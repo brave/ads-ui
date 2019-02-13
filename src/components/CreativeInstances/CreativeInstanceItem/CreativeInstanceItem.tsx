@@ -6,8 +6,11 @@ import { styles } from "./CreativeInstanceItem.style";
 
 class CreativeListItem extends React.Component<any, any> {
   public render() {
-    const { classes, creativeInstance, match } = this.props;
+    const { classes, creativeInstance, match, handleDelete } = this.props;
     const url = match.url;
+    const submitDelete = ()=>{
+      handleDelete(creativeInstance);
+    };
     return (
       <TableRow className={classes.table}>
         <TableCell>
@@ -29,6 +32,9 @@ class CreativeListItem extends React.Component<any, any> {
               <Icon>list</Icon>
             </IconButton>
           </Link>
+          <IconButton onClick={submitDelete} color="primary">
+            <Icon>delete</Icon>
+          </IconButton>
         </TableCell>
       </TableRow>
     );
