@@ -32,7 +32,7 @@ class Main extends React.Component<any, any> {
     const { advertisers, auth, classes, match } = this.props;
     const activeAdvertiser = _.find(advertisers, { state: "active" });
     if (!auth || !auth.signedIn || !auth.emailVerified || auth.role !== "user" && !activeAdvertiser) {
-      return (<Redirect to="/" />);
+      return (<Redirect to="/a" />);
     }
     const drawerItems = (
       <List>

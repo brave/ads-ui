@@ -21,9 +21,9 @@ class WaitContainer extends React.Component<any, any> {
     const { auth, advertisers, classes, signout } = this.props;
     const activeAdvertiser = _.find(advertisers, { state: "active" });
     if (!auth || !auth.signedIn || !auth.emailVerified) {
-      return (<Redirect to="/" />);
+      return (<Redirect to="/a" />);
     } else if (activeAdvertiser) {
-      return (<Redirect to="/" />);
+      return (<Redirect to="/a" />);
     }
     return (
       <div className={classes.root}>

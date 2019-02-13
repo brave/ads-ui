@@ -42,7 +42,7 @@ class Authentication extends React.Component<any, any> {
         return <Redirect to="/auth/verify" />;
       } else {
         if (auth.role === "admin") {
-          return <Redirect to="/" />;
+          return <Redirect to="/a" />;
         } else {
           const activeAdvertiser = _.find(advertisers, { state: "active" });
           if (advertisers.length < 1) {
@@ -50,7 +50,7 @@ class Authentication extends React.Component<any, any> {
           } else if (!activeAdvertiser) {
             return <Redirect to="/auth/wait" />;
           } else {
-            return <Redirect to="/" />;
+            return <Redirect to="/a" />;
           }
         }
       }
