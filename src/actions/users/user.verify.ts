@@ -38,11 +38,11 @@ export const UserVerify = (user: IUserPayload, auth: IAuthPayload, code: string)
     }).catch((error: any) => {
       dispatch(UserVerifyFailed());
       if (error.response) {
-        dispatch(OpenSnackBar(`Verify Email Faild: ${error.response.data.error}`));
+        dispatch(OpenSnackBar(`Verify Email  Failed: ${error.response.data.error}`));
       } else if (error.request) {
-        dispatch(OpenSnackBar(`Verify Email Faild: Network Error`));
+        dispatch(OpenSnackBar(`Verify Email  Failed: Network Error`));
       } else {
-        dispatch(OpenSnackBar(`Verify Email Faild: ${error.message}`));
+        dispatch(OpenSnackBar(`Verify Email  Failed: ${error.message}`));
       }
       return Promise.reject(error);
     });

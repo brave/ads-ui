@@ -40,11 +40,11 @@ export const CreateCampaigns = (campaign: ICreateCampaignPayload, auth: IAuthPay
     } catch (error) {
       dispatch(CreateCampaignsFailed());
       if (error.response) {
-        dispatch(OpenSnackBar(`Create Campaigns Faild: ${error.response.data.error}`));
+        dispatch(OpenSnackBar(`Create Campaigns  Failed: ${error.response.data.error}`));
       } else if (error.request) {
-        dispatch(OpenSnackBar(`Create Campaigns Faild: Network Error`));
+        dispatch(OpenSnackBar(`Create Campaigns  Failed: Network Error`));
       } else {
-        dispatch(OpenSnackBar(`Create Campaigns Faild: ${error.message}`));
+        dispatch(OpenSnackBar(`Create Campaigns  Failed: ${error.message}`));
       }
       return Promise.reject(error);
     }

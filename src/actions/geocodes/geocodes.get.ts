@@ -37,11 +37,11 @@ export const GetGeocodes = (user: IAuthPayload) => {
     } catch (error) {
       dispatch(GetGeocodesFaild());
       if (error.response) {
-        dispatch(OpenSnackBar(`Get Geocodes Faild: ${error.response.data.message}`));
+        dispatch(OpenSnackBar(`Get Geocodes  Failed: ${error.response.data.message}`));
       } else if (error.request) {
-        dispatch(OpenSnackBar(`Get Geocodes Faild: Network Error`));
+        dispatch(OpenSnackBar(`Get Geocodes  Failed: Network Error`));
       } else {
-        dispatch(OpenSnackBar(`Get Geocodes Faild: ${error.message}`));
+        dispatch(OpenSnackBar(`Get Geocodes  Failed: ${error.message}`));
       }
     }
   };

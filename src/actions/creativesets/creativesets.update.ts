@@ -39,11 +39,11 @@ export const UpdateCreativeSets = (campaignId: string, creativeSet: Partial<ICre
     } catch (error) {
       dispatch(UpdateCreativeSetsFailed());
       if (error.response) {
-        dispatch(OpenSnackBar(`Update CreativeSets Faild: ${error.response.data.error}`));
+        dispatch(OpenSnackBar(`Update CreativeSets  Failed: ${error.response.data.error}`));
       } else if (error.request) {
-        dispatch(OpenSnackBar(`Update CreativeSets Faild: Network Error`));
+        dispatch(OpenSnackBar(`Update CreativeSets  Failed: Network Error`));
       } else {
-        dispatch(OpenSnackBar(`Update CreativeSets Faild: ${error.message}`));
+        dispatch(OpenSnackBar(`Update CreativeSets  Failed: ${error.message}`));
       }
     }
   };

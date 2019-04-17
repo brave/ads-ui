@@ -39,11 +39,11 @@ export const GetInvoices = (auth: IAuthPayload,  userId?: string) => {
     } catch (error) {
       dispatch(GetInvoicesFailed());
       if (error.response) {
-        dispatch(OpenSnackBar(`Get Invoices Faild: ${error.response.data.error}`));
+        dispatch(OpenSnackBar(`Get Invoices  Failed: ${error.response.data.error}`));
       } else if (error.request) {
-        dispatch(OpenSnackBar(`Get Invoices Faild: Network Error`));
+        dispatch(OpenSnackBar(`Get Invoices  Failed: Network Error`));
       } else {
-        dispatch(OpenSnackBar(`Get Invoices Faild: ${error.message}`));
+        dispatch(OpenSnackBar(`Get Invoices  Failed: ${error.message}`));
       }
     }
   };

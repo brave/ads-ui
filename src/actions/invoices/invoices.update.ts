@@ -38,11 +38,11 @@ export const UpdateInvoices = (invoice: Partial<IInvoicePayload>, user: IAuthPay
     } catch (error) {
       dispatch(UpdateInvoicesFailed());
       if (error.response) {
-        dispatch(OpenSnackBar(`Update Invoices Faild: ${error.response.data.error}`));
+        dispatch(OpenSnackBar(`Update Invoices  Failed: ${error.response.data.error}`));
       } else if (error.request) {
-        dispatch(OpenSnackBar(`Update Invoices Faild: Network Error`));
+        dispatch(OpenSnackBar(`Update Invoices  Failed: Network Error`));
       } else {
-        dispatch(OpenSnackBar(`Update Invoices Faild: ${error.message}`));
+        dispatch(OpenSnackBar(`Update Invoices  Failed: ${error.message}`));
       }
     }
   };

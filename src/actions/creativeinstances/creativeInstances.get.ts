@@ -39,11 +39,11 @@ export const GetCreativeInstances = (creativeInstanceId: string, auth: IAuthPayl
     } catch (error) {
       dispatch(GetCreativeInstancesFaild());
       if (error.response) {
-        dispatch(OpenSnackBar(`Get CreativeInstances Faild: ${error.response.data.error}`));
+        dispatch(OpenSnackBar(`Get CreativeInstances  Failed: ${error.response.data.error}`));
       } else if (error.request) {
-        dispatch(OpenSnackBar(`Get CreativeInstances Faild: Network Error`));
+        dispatch(OpenSnackBar(`Get CreativeInstances  Failed: Network Error`));
       } else {
-        dispatch(OpenSnackBar(`Get CreativeInstances Faild: ${error.message}`));
+        dispatch(OpenSnackBar(`Get CreativeInstances  Failed: ${error.message}`));
       }
     }
   };

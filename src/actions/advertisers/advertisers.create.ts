@@ -40,11 +40,11 @@ export const CreateAdvertisers = (advertiser: ICreateAdvertiserPayload, auth: IA
     } catch (error) {
       dispatch(CreateAdvertisersFailed());
       if (error.response) {
-        dispatch(OpenSnackBar(`Create Advertiser Faild: ${error.response.data.error}`));
+        dispatch(OpenSnackBar(`Create Advertiser Failed: ${error.response.data.error}`));
       } else if (error.request) {
-        dispatch(OpenSnackBar(`Create Advertiser Faild: Network Error`));
+        dispatch(OpenSnackBar(`Create Advertiser Failed: Network Error`));
       } else {
-        dispatch(OpenSnackBar(`Create Advertiser Faild: ${error.message}`));
+        dispatch(OpenSnackBar(`Create Advertiser Failed: ${error.message}`));
       }
       return Promise.reject(error);
     }
