@@ -37,7 +37,7 @@ class CampaignPerformance extends React.Component<any, any> {
   public render() {
     const { classes, reports } = this.props;
     const { campaign } = this.state;
-    console.log(campaign);
+    console.log(reports);
 
     const lineData = () => {
       const dataObject = {
@@ -66,7 +66,7 @@ class CampaignPerformance extends React.Component<any, any> {
         ],
         labels: [] as any[],
       };
-      const report = _.find(reports, { campaignId: this.state.campaign }) as any;
+      const report = _.find(reports, { campaignId: this.state.campaign.id }) as any;
       if (report) {
         report.reports = _.sortBy(report.reports, (dateObj) => {
           return new Date(dateObj.confirmationDate);
@@ -104,7 +104,7 @@ class CampaignPerformance extends React.Component<any, any> {
         }],
         labels: [] as any,
       };
-      const report = _.find(reports, { campaignId: this.state.campaign }) as any;
+      const report = _.find(reports, { campaignId: this.state.campaign.id }) as any;
       if (report) {
         for (const record of report.reports) {
           const type = record.confirmationsType;
@@ -133,7 +133,7 @@ class CampaignPerformance extends React.Component<any, any> {
         <Card className={classes.infoCard}>
           <CardHeader title="Timeline" />
           <CardContent className={classes.content}>
-            <div>
+            <div className={classes.row}>
               {this.state.campaign !== "" &&
                 <Line data={lineData as any} height={300} options={{
                   maintainAspectRatio: false,
