@@ -16,8 +16,9 @@ export const getReportReducer = (state: IReportState, action: IReportAction): IR
         ...state,
       };
     case GET_REPORTS_SUCCESSFUL:
-      const reports = _.filter(state.reports, {
-        campaignId: (action.payload as IReportPayload).campaignId,
+      const reports = _.filter(state.reports, (report)=>{
+        const campaignId = (action.payload as IReportPayload).campaignId;
+        return campaignId !== report.campaignId;
       });
       reports.unshift(action.payload as IReportPayload);
       return {
