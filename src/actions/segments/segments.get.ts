@@ -37,11 +37,11 @@ export const GetSegments = (user: IAuthPayload) => {
     } catch (error) {
       dispatch(GetSegmentsFaild());
       if (error.response) {
-        dispatch(OpenSnackBar(`Get Segments Faild: ${error.response.data.message}`));
+        dispatch(OpenSnackBar(`Get Segments  Failed: ${error.response.data.message}`));
       } else if (error.request) {
-        dispatch(OpenSnackBar(`Get Segments Faild: Network Error`));
+        dispatch(OpenSnackBar(`Get Segments  Failed: Network Error`));
       } else {
-        dispatch(OpenSnackBar(`Get Segments Faild: ${error.message}`));
+        dispatch(OpenSnackBar(`Get Segments  Failed: ${error.message}`));
       }
     }
   };

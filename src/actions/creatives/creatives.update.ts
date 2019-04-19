@@ -38,11 +38,11 @@ export const UpdateCreatives = (creative: Partial<ICreativePayload>, auth: IAuth
     } catch (error) {
       dispatch(UpdateCreativesFailed());
       if (error.response) {
-        dispatch(OpenSnackBar(`Update Creatives Faild: ${error.response.data.error}`));
+        dispatch(OpenSnackBar(`Update Creatives  Failed: ${error.response.data.error}`));
       } else if (error.request) {
-        dispatch(OpenSnackBar(`Update Creatives Faild: Network Error`));
+        dispatch(OpenSnackBar(`Update Creatives  Failed: Network Error`));
       } else {
-        dispatch(OpenSnackBar(`Update Creatives Faild: ${error.message}`));
+        dispatch(OpenSnackBar(`Update Creatives  Failed: ${error.message}`));
       }
     }
   };

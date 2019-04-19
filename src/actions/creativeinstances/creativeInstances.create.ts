@@ -40,11 +40,11 @@ export const CreateCreativeInstances = (creativeInstance: ICreateCreativeInstanc
     } catch (error) {
       dispatch(CreateCreativeInstancesFailed());
       if (error.response) {
-        dispatch(OpenSnackBar(`Create CreativeInstances Faild: ${error.response.data.error}`));
+        dispatch(OpenSnackBar(`Create CreativeInstances  Failed: ${error.response.data.error}`));
       } else if (error.request) {
-        dispatch(OpenSnackBar(`Create CreativeInstances Faild: Network Error`));
+        dispatch(OpenSnackBar(`Create CreativeInstances  Failed: Network Error`));
       } else {
-        dispatch(OpenSnackBar(`Create CreativeInstances Faild: ${error.message}`));
+        dispatch(OpenSnackBar(`Create CreativeInstances  Failed: ${error.message}`));
       }
       return Promise.reject(error);
     }

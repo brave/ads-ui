@@ -39,11 +39,11 @@ export const GetCreatives = (auth: IAuthPayload, userId?: string) => {
     } catch (error) {
       dispatch(GetCreativesFailed());
       if (error.response) {
-        dispatch(OpenSnackBar(`Get Creatives Faild: ${error.response.data.error}`));
+        dispatch(OpenSnackBar(`Get Creatives  Failed: ${error.response.data.error}`));
       } else if (error.request) {
-        dispatch(OpenSnackBar(`Get Creatives Faild: Network Error`));
+        dispatch(OpenSnackBar(`Get Creatives  Failed: Network Error`));
       } else {
-        dispatch(OpenSnackBar(`Get Creatives Faild: ${error.message}`));
+        dispatch(OpenSnackBar(`Get Creatives  Failed: ${error.message}`));
       }
       return Promise.reject(error);
     }

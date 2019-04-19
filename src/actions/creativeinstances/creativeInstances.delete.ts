@@ -39,11 +39,11 @@ export const DeleteCreativeInstances = (creativeInstance: ICreativeInstancePaylo
     } catch (error) {
       dispatch(DeleteCreativeInstancesFailed());
       if (error.response) {
-        dispatch(OpenSnackBar(`Delete CreativeInstances Faild: ${error.response.data.error}`));
+        dispatch(OpenSnackBar(`Delete CreativeInstances  Failed: ${error.response.data.error}`));
       } else if (error.request) {
-        dispatch(OpenSnackBar(`Delete CreativeInstances Faild: Network Error`));
+        dispatch(OpenSnackBar(`Delete CreativeInstances  Failed: Network Error`));
       } else {
-        dispatch(OpenSnackBar(`Delete CreativeInstances Faild: ${error.message}`));
+        dispatch(OpenSnackBar(`Delete CreativeInstances  Failed: ${error.message}`));
       }
     }
   };

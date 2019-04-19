@@ -39,11 +39,11 @@ export const GetCampaigns = (auth: IAuthPayload, userId?: string) => {
     } catch (error) {
       dispatch(GetCampaignsFaild());
       if (error.response) {
-        dispatch(OpenSnackBar(`Get Campaigns Faild: ${error.response.data.error}`));
+        dispatch(OpenSnackBar(`Get Campaigns  Failed: ${error.response.data.error}`));
       } else if (error.request) {
-        dispatch(OpenSnackBar(`Get Campaigns Faild: Network Error`));
+        dispatch(OpenSnackBar(`Get Campaigns  Failed: Network Error`));
       } else {
-        dispatch(OpenSnackBar(`Get Campaigns Faild: ${error.message}`));
+        dispatch(OpenSnackBar(`Get Campaigns  Failed: ${error.message}`));
       }
       return Promise.reject(error);
     }

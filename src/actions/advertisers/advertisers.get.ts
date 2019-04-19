@@ -39,11 +39,11 @@ export const GetAdvertisers = (auth: IAuthPayload, userId?: string) => {
     } catch (error) {
       dispatch(GetAdvertisersFaild());
       if (error.response) {
-        dispatch(OpenSnackBar(`Get Advertisers Faild: ${error.response.data.error}`));
+        dispatch(OpenSnackBar(`Get Advertisers  failed: ${error.response.data.error}`));
       } else if (error.request) {
-        dispatch(OpenSnackBar(`Get Advertisers Faild: Network Error`));
+        dispatch(OpenSnackBar(`Get Advertisers  Failed: Network Error`));
       } else {
-        dispatch(OpenSnackBar(`Get Advertisers Faild: ${error.message}`));
+        dispatch(OpenSnackBar(`Get Advertisers  Failed: ${error.message}`));
       }
       return Promise.reject(error);
     }

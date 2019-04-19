@@ -40,11 +40,11 @@ export const CreateCreativeSets = (campaignId: string, creativeSet: ICreateCreat
     } catch (error) {
       dispatch(CreateCreativeSetsFailed());
       if (error.response) {
-        dispatch(OpenSnackBar(`Create CreativeSets Faild: ${error.response.data.error}`));
+        dispatch(OpenSnackBar(`Create CreativeSets  Failed: ${error.response.data.error}`));
       } else if (error.request) {
-        dispatch(OpenSnackBar(`Create CreativeSets Faild: Network Error`));
+        dispatch(OpenSnackBar(`Create CreativeSets  Failed: Network Error`));
       } else {
-        dispatch(OpenSnackBar(`Create CreativeSets Faild: ${error.message}`));
+        dispatch(OpenSnackBar(`Create CreativeSets  Failed: ${error.message}`));
       }
       return Promise.reject(error);
     }

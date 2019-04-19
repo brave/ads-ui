@@ -38,11 +38,11 @@ export const GetReports = (user: IAuthPayload, campaignId: string) => {
     } catch (error) {
       dispatch(GetReportsFaild());
       if (error.response) {
-        dispatch(OpenSnackBar(`Get Reports Faild: ${error.response.data.message}`));
+        dispatch(OpenSnackBar(`Get Reports  Failed: ${error.response.data.message}`));
       } else if (error.request) {
-        dispatch(OpenSnackBar(`Get Reports Faild: Network Error`));
+        dispatch(OpenSnackBar(`Get Reports  Failed: Network Error`));
       } else {
-        dispatch(OpenSnackBar(`Get Reports Faild: ${error.message}`));
+        dispatch(OpenSnackBar(`Get Reports  Failed: ${error.message}`));
       }
     }
   };

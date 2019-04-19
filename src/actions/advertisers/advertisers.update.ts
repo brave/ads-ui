@@ -40,11 +40,11 @@ export const UpdateAdvertisers = (advertiser: Partial<IAdvertiserPayload>, auth:
     } catch (error) {
       dispatch(UpdateAdvertisersFailed());
       if (error.response) {
-        dispatch(OpenSnackBar(`Update Advertiser Faild: ${error.response.data.error}`));
+        dispatch(OpenSnackBar(`Update Advertiser  Failed: ${error.response.data.error}`));
       } else if (error.request) {
-        dispatch(OpenSnackBar(`Update Advertiser Faild: Network Error`));
+        dispatch(OpenSnackBar(`Update Advertiser  Failed: Network Error`));
       } else {
-        dispatch(OpenSnackBar(`Update Advertiser Faild: ${error.message}`));
+        dispatch(OpenSnackBar(`Update Advertiser  Failed: ${error.message}`));
       }
       return Promise.reject(error);
     }
