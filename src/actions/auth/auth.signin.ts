@@ -37,11 +37,11 @@ export const SignIn = (payload: ISignInPayload) => {
     } catch (error) {
       dispatch(SignInFailed(error));
       if (error.response) {
-        dispatch(OpenSnackBar(`Sign In Faild: ${error.response.data.error}`));
+        dispatch(OpenSnackBar(`Sign In  Failed: ${error.response.data.error}`));
       } else if (error.request) {
-        dispatch(OpenSnackBar(`Sign In Faild: Network Error`));
+        dispatch(OpenSnackBar(`Sign In  Failed: Network Error`));
       } else {
-        dispatch(OpenSnackBar(`Sign In Faild: ${error.message}`));
+        dispatch(OpenSnackBar(`Sign In  Failed: ${error.message}`));
       }
       return Promise.reject(error);
     }

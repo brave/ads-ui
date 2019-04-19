@@ -37,11 +37,11 @@ export const GetAllUser = (user: IAuthPayload) => {
     }).catch((error: any) => {
       dispatch(GetAllUserFailed());
       if (error.response) {
-        dispatch(OpenSnackBar(`Get All Users Faild: ${error.response.data.error}`));
+        dispatch(OpenSnackBar(`Get All Users Failed: ${error.response.data.error}`));
       } else if (error.request) {
-        dispatch(OpenSnackBar(`Get All Users Faild: Network Error`));
+        dispatch(OpenSnackBar(`Get All Users Failed: Network Error`));
       } else {
-        dispatch(OpenSnackBar(`Get All Users Faild: ${error.message}`));
+        dispatch(OpenSnackBar(`Get All Users Failed: ${error.message}`));
       }
     });
   };

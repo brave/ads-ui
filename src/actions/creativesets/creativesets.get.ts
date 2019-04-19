@@ -38,11 +38,11 @@ export const GetCreativeSets = (campaignId: string, auth: IAuthPayload) => {
     } catch (error) {
       dispatch(GetCreativeSetsFaild());
       if (error.response) {
-        dispatch(OpenSnackBar(`Get CreativeSets Faild: ${error.response.data.error}`));
+        dispatch(OpenSnackBar(`Get CreativeSets  Failed: ${error.response.data.error}`));
       } else if (error.request) {
-        dispatch(OpenSnackBar(`Get CreativeSets Faild: Network Error`));
+        dispatch(OpenSnackBar(`Get CreativeSets  Failed: Network Error`));
       } else {
-        dispatch(OpenSnackBar(`Get CreativeSets Faild: ${error.message}`));
+        dispatch(OpenSnackBar(`Get CreativeSets  Failed: ${error.message}`));
       }
     }
   };

@@ -37,11 +37,11 @@ export const GetConfirmationTypes = (user: IAuthPayload) => {
     } catch (error) {
       dispatch(GetConfirmationTypesFaild());
       if (error.response) {
-        dispatch(OpenSnackBar(`Get ConfirmationTypes Faild: ${error.response.data.message}`));
+        dispatch(OpenSnackBar(`Get ConfirmationTypes  Failed: ${error.response.data.message}`));
       } else if (error.request) {
-        dispatch(OpenSnackBar(`Get ConfirmationTypes Faild: Network Error`));
+        dispatch(OpenSnackBar(`Get ConfirmationTypes  Failed: Network Error`));
       } else {
-        dispatch(OpenSnackBar(`Get ConfirmationTypes Faild: ${error.message}`));
+        dispatch(OpenSnackBar(`Get ConfirmationTypes  Failed: ${error.message}`));
       }
     }
   };

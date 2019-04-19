@@ -38,11 +38,11 @@ export const UserUpdate = (payload: IUserPayload, user: IAuthPayload) => {
     }).catch((error: any) => {
       dispatch(UserUpdateFailed());
       if (error.response) {
-        dispatch(OpenSnackBar(`Update User Faild: ${error.response.data.error}`));
+        dispatch(OpenSnackBar(`Update User  Failed: ${error.response.data.error}`));
       } else if (error.request) {
-        dispatch(OpenSnackBar(`Update User Faild: Network Error`));
+        dispatch(OpenSnackBar(`Update User  Failed: Network Error`));
       } else {
-        dispatch(OpenSnackBar(`Update User Faild: ${error.message}`));
+        dispatch(OpenSnackBar(`Update User  Failed: ${error.message}`));
       }
     });
   };

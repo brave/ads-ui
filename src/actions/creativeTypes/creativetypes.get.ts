@@ -38,11 +38,11 @@ export const GetCreativeTypes = (auth: IAuthPayload) => {
     } catch (error) {
       dispatch(GetCreativeTypesFaild());
       if (error.response) {
-        dispatch(OpenSnackBar(`Get Creative Types Faild: ${error.response.data.message}`));
+        dispatch(OpenSnackBar(`Get Creative Types  Failed: ${error.response.data.message}`));
       } else if (error.request) {
-        dispatch(OpenSnackBar(`Get Creative Types Faild: Network Error`));
+        dispatch(OpenSnackBar(`Get Creative Types  Failed: Network Error`));
       } else {
-        dispatch(OpenSnackBar(`Get Creative Types Faild: ${error.message}`));
+        dispatch(OpenSnackBar(`Get Creative Types  Failed: ${error.message}`));
       }
       return Promise.reject(error);
     }

@@ -38,11 +38,11 @@ export const UserResend = (user: IUserPayload, auth: IAuthPayload) => {
     }).catch((error: any) => {
       dispatch(UserResendFailed());
       if (error.response) {
-        dispatch(OpenSnackBar(`Resend Verification Faild: ${error.response.data.error}`));
+        dispatch(OpenSnackBar(`Resend Verification  Failed: ${error.response.data.error}`));
       } else if (error.request) {
-        dispatch(OpenSnackBar(`Resend Verification Faild: Network Error`));
+        dispatch(OpenSnackBar(`Resend Verification  Failed: Network Error`));
       } else {
-        dispatch(OpenSnackBar(`Resend Verification Faild: ${error.message}`));
+        dispatch(OpenSnackBar(`Resend Verification  Failed: ${error.message}`));
       }
       return Promise.reject(error);
     });

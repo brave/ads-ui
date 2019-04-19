@@ -33,6 +33,11 @@ class CampaignTableItem extends React.Component<any, any> {
               <Icon>list</Icon>
             </IconButton>
           </Link>
+          <Link className={classes.viewButton} to={`${match.url}/campaign/${campaign.id}/report`}>
+            <IconButton color="primary">
+              <Icon>timeline</Icon>
+            </IconButton>
+          </Link>
         </TableCell>
       </TableRow>
     );

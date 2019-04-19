@@ -38,11 +38,11 @@ export const UserCreate = (payload: IUserPayload, user: IAuthPayload) => {
     }).catch((error: any) => {
       dispatch(UserCreateFailed());
       if (error.response) {
-        dispatch(OpenSnackBar(`Create User Faild: ${error.response.data.error}`));
+        dispatch(OpenSnackBar(`Create User  Failed: ${error.response.data.error}`));
       } else if (error.request) {
-        dispatch(OpenSnackBar(`Create User Faild: Network Error`));
+        dispatch(OpenSnackBar(`Create User  Failed: Network Error`));
       } else {
-        dispatch(OpenSnackBar(`Create User Faild: ${error.message}`));
+        dispatch(OpenSnackBar(`Create User  Failed: ${error.message}`));
       }
     });
   };
