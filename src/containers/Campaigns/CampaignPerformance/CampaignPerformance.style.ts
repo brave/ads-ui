@@ -1,16 +1,17 @@
 export const styles: any = {
   content: {
-    alignItems: "flex-start",
+    alignItems: "stretch",
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "stretch",
+    flexDirection: "column"
   },
   infoCard: {
     margin: "15px",
   },
-  link: {
-    textDecoration: "none",
-  },
   root: {
     width: "100%",
   },
+  row: {
+
+  }
 };

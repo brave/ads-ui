@@ -9,6 +9,7 @@ import {
   Typography,
   withStyles,
 } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import _ from "lodash";
 import React from "react";
 import { connect } from "react-redux";
@@ -42,6 +43,11 @@ class CampaignView extends React.Component<any, any> {
         <AppBar position="static" color="default">
           <Toolbar>
             <Typography variant="h5">{campaign.name}</Typography>
+            <Link className={classes.link} to={`${match.url}/report`}>
+              <IconButton color="primary">
+                <Icon>timeline</Icon>
+              </IconButton>
+            </Link>
           </Toolbar>
         </AppBar>
         <Card className={classes.infoCard}>
