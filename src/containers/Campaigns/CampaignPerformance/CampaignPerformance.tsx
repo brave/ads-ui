@@ -37,7 +37,6 @@ class CampaignPerformance extends React.Component<any, any> {
   public render() {
     const { classes, reports } = this.props;
     const { campaign } = this.state;
-    console.log(reports);
 
     const lineData = () => {
       const dataObject = {
@@ -69,7 +68,7 @@ class CampaignPerformance extends React.Component<any, any> {
       const report = _.find(reports, { campaignId: this.state.campaign.id }) as any;
       if (report) {
         report.reports = _.sortBy(report.reports, (dateObj) => {
-          return new Date(dateObj.confirmationDate);
+          return moment(dateObj.confirmationsDate).unix();
         });
         for (const record of report.reports) {
           const label = moment(record.confirmationsDate).format("MMMM Do HA");
