@@ -3,8 +3,6 @@ import {
   Card,
   CardContent,
   CardHeader,
-  Icon,
-  IconButton,
   Toolbar,
   Typography,
   withStyles,
@@ -42,25 +40,31 @@ class CampaignPerformance extends React.Component<any, any> {
       const dataObject = {
         datasets: [
           {
-            backgroundColor: "rgba(75,192,192,0.4)",
-            borderCapStyle: "butt",
-            borderColor: "rgba(75,192,192,1)",
-            borderDash: [] as any[],
-            borderDashOffset: 0.0,
-            borderJoinStyle: "miter",
             data: [] as any[],
-            fill: false,
-            label: "Campaign Confirmation",
-            lineTension: 0.1,
-            pointBackgroundColor: "#fff",
-            pointBorderColor: "rgba(75,192,192,1)",
-            pointBorderWidth: 1,
-            pointHitRadius: 10,
-            pointHoverBackgroundColor: "rgba(75,192,192,1)",
-            pointHoverBorderColor: "rgba(220,220,220,1)",
-            pointHoverBorderWidth: 2,
-            pointHoverRadius: 5,
-            pointRadius: 1,
+            backgroundColor: 'rgba(75,192,192,0.4)',
+            label: "Total Confirmations",
+            lineTension: 0.02
+          },
+          {
+            backgroundColor: 'rgba(192,75,192,0.4)',
+            data: [] as any[],
+            label: "view",
+            lineTension: 0.02
+          },
+          {
+            backgroundColor: 'rgba(192,192,75,0.4)',
+            data: [] as any[],
+            label: "click",
+          },
+          {
+            backgroundColor: 'rgba(192,192,192,0.4)',
+            data: [] as any[],
+            label: "dismiss",
+          },
+          {
+            backgroundColor: 'rgba(192,75,75,0.4)',
+            data: [] as any[],
+            label: "landed",
           },
         ],
         labels: [] as any[],
@@ -78,9 +82,24 @@ class CampaignPerformance extends React.Component<any, any> {
           if (i < 0) {
             dataObject.labels.push(label);
             dataObject.datasets[0].data.push(record.count);
+
+            const dataset = _.find(dataObject.datasets, {
+              label: record.confirmationsType,
+            });
+            if (dataset) {
+              (dataset as any).data[dataObject.labels.length - 1] = record.count;
+            }
           } else {
             dataObject.datasets[0].data[i] = dataObject.datasets[0].data[i] + record.count;
+
+            const dataset = _.find(dataObject.datasets, {
+              label: record.confirmationsType,
+            });
+            if (dataset) {
+              (dataset as any).data[i] = record.count;
+            }
           }
+
         }
       }
       return dataObject;
