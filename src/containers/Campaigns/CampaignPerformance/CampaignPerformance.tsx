@@ -144,26 +144,24 @@ class CampaignPerformance extends React.Component<any, any> {
         });
         for (const record of report.reports) {
           const label = moment(record.confirmationsDate).format("MMMM Do HA");
-          const i = _.findIndex(dataObject.labels, (o) => {
+          let i = _.findIndex(dataObject.labels, (o) => {
             return o === label;
           });
           if (i < 0) {
             dataObject.labels.push(label);
             dataObject.datasets[0].data.push(record.count);
-
-            const dataset = _.find(dataObject.datasets, {
-              label: record.confirmationsType,
-            });
-            if (dataset) {
-              (dataset as any).data[dataObject.labels.length - 1] = record.count;
-            }
+            i = dataObject.labels.length - 1;
           } else {
             dataObject.datasets[0].data[i] = dataObject.datasets[0].data[i] + record.count;
+          }
 
-            const dataset = _.find(dataObject.datasets, {
-              label: record.confirmationsType,
-            });
-            if (dataset) {
+          const dataset = _.find(dataObject.datasets, {
+            label: record.confirmationsType,
+          });
+          if (dataset) {
+            if ((dataset as any).data[i]) {
+              (dataset as any).data[i] = (dataset as any).data[i] + record.count;
+            } else {
               (dataset as any).data[i] = record.count;
             }
           }
