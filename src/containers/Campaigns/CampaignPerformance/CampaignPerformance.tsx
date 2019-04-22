@@ -150,6 +150,10 @@ class CampaignPerformance extends React.Component<any, any> {
           if (i < 0) {
             dataObject.labels.push(label);
             dataObject.datasets[0].data.push(record.count);
+            dataObject.datasets[1].data.push(0);
+            dataObject.datasets[2].data.push(0);
+            dataObject.datasets[3].data.push(0);
+            dataObject.datasets[4].data.push(0);
             i = dataObject.labels.length - 1;
           } else {
             dataObject.datasets[0].data[i] = dataObject.datasets[0].data[i] + record.count;
