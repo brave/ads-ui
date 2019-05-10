@@ -3,9 +3,10 @@ import _ from "lodash";
 import React from "react";
 import { connect } from "react-redux";
 
-import { GetCampaigns, GetReports } from "../../actions";
+import { GetCampaigns, GetReports, GetCreatives } from "../../actions";
 
 import { styles } from "./Performances.style";
+
 import PerformancesCharts from "../../components/Performances/PerformancesCharts";
 
 class Performances extends React.Component<any, any> {
@@ -19,6 +20,7 @@ class Performances extends React.Component<any, any> {
 
   public componentDidMount() {
     this.props.GetCampaigns(this.props.auth);
+    this.props.GetCreatives(this.props.auth);
   }
 
   public handleChange = async (event: any) => {
@@ -27,14 +29,15 @@ class Performances extends React.Component<any, any> {
       campaignName: campaign.name,
     });
     await this.props.GetReports(this.props.auth, event.target.value);
-    this.setState({ campaign });
+    this.setState({ campaign: event.target.value });
   }
 
   public render() {
 
-    const { classes, campaigns, reports } = this.props;
+    const { classes, campaigns, reports, creatives, advertisers } = this.props;
 
-    const report = _.find(reports, { campaignId: this.state.campaign.id }) as any;
+    const report = _.find(reports, { campaignId: this.state.campaign }) as any;
+    const campaign = _.find(campaigns, { id: this.state.campaign }) as any;
 
     const listItems = campaigns.map((item: any) => {
       return (
@@ -56,13 +59,13 @@ class Performances extends React.Component<any, any> {
               <InputLabel>Select Campaign</InputLabel>
               <Select inputProps={{
                 name: "campaign",
-              }} onChange={this.handleChange} value={this.state.campaign.id} name="role">
+              }} onChange={this.handleChange} value={this.state.campaign} name="role">
                 {listItems}
               </Select>
             </FormControl>
           </CardContent>
         </Card>
-        <PerformancesCharts campaign={this.state.campaign} report={report}/>
+        <PerformancesCharts campaign={campaign} report={report} advertiser={advertisers[0]} creatives={creatives}/>
       </div>
     );
   }
@@ -72,10 +75,13 @@ const mapStateToProps = (state: any, ownProps: any) => ({
   auth: state.authReducer,
   campaigns: state.campaignReducer.campaigns,
   reports: state.reportReducer.reports,
+  creatives: state.creativeReducer.creatives,
+  advertisers: state.advertiserReducer.advertisers,
 });
 
 const mapDispathToProps = (dispatch: any, ownProps: any) => ({
   GetCampaigns: (auth: any) => dispatch(GetCampaigns(auth)),
+  GetCreatives: (auth: any) => dispatch(GetCreatives(auth)),
   GetReports: (auth: any, campaignId: string) => dispatch(GetReports(auth, campaignId)),
 });
 

@@ -1,16 +1,11 @@
 import {
   AppBar,
-  Card,
-  CardContent,
-  CardHeader,
   Toolbar,
   Typography,
   withStyles,
 } from "@material-ui/core";
 import _ from "lodash";
 import React from "react";
-import moment from "moment";
-import { Doughnut, Line } from "react-chartjs-2";
 import { connect } from "react-redux";
 
 import {
@@ -34,9 +29,10 @@ class CampaignPerformance extends React.Component<any, any> {
   }
 
   public render() {
-    const { classes, reports } = this.props;
+    const { classes, reports, advertisers, creatives } = this.props;
     const { campaign } = this.state;
     const report = _.find(reports, { campaignId: campaign.id }) as any;
+    const advertiser = _.find(advertisers, { id: this.props.match.params.advertiserId });
 
 
     return (
@@ -46,7 +42,7 @@ class CampaignPerformance extends React.Component<any, any> {
             <Typography variant="h5">{campaign.name}</Typography>
           </Toolbar>
         </AppBar>
-        <PerformancesCharts campaign={campaign} report={report} />
+        <PerformancesCharts campaign={campaign} report={report} advertiser={advertiser} creatives={creatives} />
       </div>
     );
   }
@@ -56,6 +52,8 @@ const mapStateToProps = (state: any, ownProps: any) => ({
   auth: state.authReducer,
   campaigns: state.campaignReducer.campaigns,
   reports: state.reportReducer.reports,
+  creatives: state.creativeReducer.creatives,
+  advertisers: state.advertiserReducer.advertisers,
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({

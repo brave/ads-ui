@@ -1,8 +1,11 @@
 export const styles: any = {
-    infoCard: {
-      margin: "15px",
-    },
-    root: {
-      width: "100%",
-    },
-  };
+  csv: {
+    textDecoration: "none",
+  },
+  infoCard: {
+    margin: "15px",
+  },
+  root: {
+    width: "100%",
+  },
+};

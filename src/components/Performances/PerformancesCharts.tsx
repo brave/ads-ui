@@ -3,7 +3,7 @@ import _ from "lodash";
 import moment from "moment";
 import React from "react";
 import { Doughnut, Line } from "react-chartjs-2";
-
+import { CSVLink, CSVDownload } from "react-csv";
 
 import { styles } from "./PerformancesCharts.style";
 
@@ -12,9 +12,11 @@ class PerformancesCharts extends React.Component<any, any> {
     super(props);
   }
 
+  public csv = "";
+
   public render() {
 
-    const { classes, campaign, report } = this.props;
+    const { classes, campaign, report, advertiser, creatives } = this.props;
 
     const lineData = () => {
       const dataObject = {
@@ -188,47 +190,111 @@ class PerformancesCharts extends React.Component<any, any> {
       return dataObject;
     };
 
-    const downloadCSV = () => {
+    const generateCSV = () => {
+      const data: any = {};
+      if (report) {
+        for (const record of report.reports) {
+          const confirmationsDate = record.confirmationsDate;
 
+          const confirmationDate = data[confirmationsDate]
+          if (confirmationDate) {
+            const creativeInstanceId = confirmationDate[record.creativeInstanceId];
+            if (creativeInstanceId) {
+              const confirmationType = creativeInstanceId[record.confirmationsType];
+              if (confirmationType) {
+                confirmationType.count += record.count;
+              } else {
+                confirmationDate[record.creativeInstanceId][record.confirmationsType] = {
+                  count: record.count,
+                };
+              }
+            } else {
+              const creative: any = _.find(creatives, { id: record.creativeId });
+              confirmationDate[record.creativeInstanceId] = {
+                advertiserName: advertiser.name,
+                creativeTitle: creative.title,
+                creativeBody: creative.body,
+                campaignName: campaign.name,
+              };
+              confirmationDate[record.creativeInstanceId][record.confirmationsType] = {
+                count: record.count,
+              };
+            }
+          } else {
+            const creative: any = _.find(creatives, { id: record.creativeId });
+            data[confirmationsDate] = {};
+            data[confirmationsDate][record.creativeInstanceId] = {
+              advertiserName: advertiser.name,
+              creativeTitle: creative.payload.title,
+              creativeBody: creative.payload.body,
+              campaignName: campaign.name,
+            };
+            data[confirmationsDate][record.creativeInstanceId][record.confirmationsType] = {
+              count: record.count,
+            };
+          }
+        }
+      }
+
+      this.csv = "Day/Hour,Advertiser Name,Campaign Name,Creative Instance ID,Creative Title,Creative Body,View Counts,Click Counts,Landed Counts,Dismissed Counts";
+      _.forEach(data, (d, i) => {
+        _.forEach(d, (d2: any, i2: string) => {
+          this.csv += `\n${i},`;
+          this.csv += `${d2.advertiserName},`;
+          this.csv += `${d2.campaignName},`;
+          this.csv += `${i2},`;
+          this.csv += `${d2.creativeTitle},`;
+          this.csv += `${d2.creativeBody},`;
+          this.csv += `${d2.view.count},`;
+          this.csv += `${d2.click.count},`;
+          this.csv += `${d2.landed.count},`;
+          this.csv += `${d2.dismiss.count},`;
+        });
+      });
+      return true;
     };
 
     const getActionButtons = () => {
       return (
         <React.Fragment>
-          <Button onClick={downloadCSV} color="primary">
-            <Icon>get_app</Icon> Download CSV
+          {campaign && campaign.name &&
+            <CSVLink className={classes.csv} filename={`campaign-${campaign.name}.csv`} data={this.csv}>
+              <Button color="primary">
+                <Icon>get_app</Icon> Download CSV
           </Button>
+            </CSVLink>
+          }
         </React.Fragment>
       )
     };
 
+    generateCSV();
+
     return (
       <div className={classes.root}>
-        <Card className={classes.infoCard}>
-          <CardHeader action={getActionButtons()} />
-          <CardContent>
-            <Card className={classes.infoCard}>
-              <CardHeader title="Daily Delivery" />
-              <CardContent>
-                {campaign !== "" &&
+        {campaign &&
+          <Card className={classes.infoCard}>
+            <CardHeader action={getActionButtons()} />
+            <CardContent>
+              <Card className={classes.infoCard}>
+                <CardHeader title="Daily Delivery" />
+                <CardContent>
                   <Line data={lineData as any} height={300} options={{
                     maintainAspectRatio: false,
                   }} />
-                }
-              </CardContent>
-            </Card>
-            <Card className={classes.infoCard}>
-              <CardHeader title="Performance Metrics" />
-              <CardContent>
-                {campaign !== "" &&
+                </CardContent>
+              </Card>
+              <Card className={classes.infoCard}>
+                <CardHeader title="Performance Metrics" />
+                <CardContent>
                   <Doughnut data={doughnutData} height={300} options={{
                     maintainAspectRatio: false,
                   }} />
-                }
-              </CardContent>
-            </Card>
-          </CardContent>
-        </Card>
+                </CardContent>
+              </Card>
+            </CardContent>
+          </Card>
+        }
       </div>
     );
   }
