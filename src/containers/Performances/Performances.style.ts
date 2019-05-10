@@ -1,10 +1,11 @@
 export const styles: any = {
   formControl: {
-    minWidth: "100px",
+    minWidth: "200px",
+  },
+  infoCard: {
+    margin: "15px",
   },
   root: {
-    display: "flex",
-    flex: "1",
-    flexDirection: "column",
+    width: "100%",
   },
 };
