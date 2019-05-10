@@ -56,7 +56,7 @@ class Performances extends React.Component<any, any> {
               <InputLabel>Select Campaign</InputLabel>
               <Select inputProps={{
                 name: "campaign",
-              }} onChange={this.handleChange} value={this.state.campaign} name="role">
+              }} onChange={this.handleChange} value={this.state.campaign.id} name="role">
                 {listItems}
               </Select>
             </FormControl>
