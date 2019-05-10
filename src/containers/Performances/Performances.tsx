@@ -27,14 +27,14 @@ class Performances extends React.Component<any, any> {
       campaignName: campaign.name,
     });
     await this.props.GetReports(this.props.auth, event.target.value);
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({ campaign });
   }
 
   public render() {
 
     const { classes, campaigns, reports } = this.props;
 
-    const report = _.find(reports, { campaignId: this.state.campaign }) as any;
+    const report = _.find(reports, { campaignId: this.state.campaign.id }) as any;
 
     const listItems = campaigns.map((item: any) => {
       return (
