@@ -36,7 +36,7 @@ class Main extends React.Component<any, any> {
     }
     const drawerItems = (
       <List>
-        <Link to={match.url + "/dashboard"} className={classes.link}>
+        {/* <Link to={match.url + "/dashboard"} className={classes.link}>
           <ListItem button>
             <ListItemIcon>
               <Icon>dashboard</Icon>
@@ -59,16 +59,16 @@ class Main extends React.Component<any, any> {
             </ListItemIcon>
             <ListItemText primary="Campaigns" />
           </ListItem>
-        </Link>
+        </Link> */}
         <Link to={match.url + "/performances"} className={classes.link}>
           <ListItem button>
             <ListItemIcon>
               <Icon>timeline</Icon>
             </ListItemIcon>
-            <ListItemText primary="Performances" />
+            <ListItemText primary="Performance" />
           </ListItem>
         </Link>
-        <Link to={match.url + "/invoices"} className={classes.link}>
+        {/* <Link to={match.url + "/invoices"} className={classes.link}>
           <ListItem button>
             <ListItemIcon>
               <Icon>receipt</Icon>
@@ -83,8 +83,8 @@ class Main extends React.Component<any, any> {
             </ListItemIcon>
             <ListItemText primary="Preferences" />
           </ListItem>
-        </Link>
-      </List>
+        </Link> */}
+      </List> 
     );
     return (
       <div className={classes.root}>
@@ -111,13 +111,13 @@ class Main extends React.Component<any, any> {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Switch>
-            <Route path={match.url + "/dashboard"} component={Dashboard} />
+            {/* <Route path={match.url + "/dashboard"} component={Dashboard} />
             <Route path={match.url + "/creatives"} component={Creatives} />
-            <Route path={match.url + "/campaigns"} component={Campaigns} />
+            <Route path={match.url + "/campaigns"} component={Campaigns} /> */}
             <Route path={match.url + "/performances"} component={Performances} />
-            <Route path={match.url + "/invoices"} component={Invoices} />
-            <Route path={match.url + "/preferences"} component={Preferences} />
-            <Redirect to={match.url + "/dashboard"} />
+            {/* <Route path={match.url + "/invoices"} component={Invoices} /> */}
+            {/* <Route path={match.url + "/preferences"} component={Preferences} /> */}
+            <Redirect to={match.url + "/performances"} />
           </Switch>
         </main>
       </div>

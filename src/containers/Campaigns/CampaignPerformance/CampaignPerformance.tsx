@@ -18,6 +18,7 @@ import {
 } from "../../../actions";
 
 import { styles } from "./CampaignPerformance.style";
+import PerformancesCharts from "../../../components/Performances/PerformancesCharts";
 
 class CampaignPerformance extends React.Component<any, any> {
   constructor(props: any) {
@@ -35,180 +36,7 @@ class CampaignPerformance extends React.Component<any, any> {
   public render() {
     const { classes, reports } = this.props;
     const { campaign } = this.state;
-
-    const lineData = () => {
-      const dataObject = {
-        datasets: [
-          {
-            data: [] as any[],
-            backgroundColor: 'rgba(75,192,192,0.4)',
-            label: "Total Confirmations",
-            lineTension: 0.1,
-            borderCapStyle: "butt",
-            borderColor: "rgba(75,192,192,1)",
-            borderDash: [] as any[],
-            borderDashOffset: 0.0,
-            pointBackgroundColor: "#fff",
-            pointBorderColor: "rgba(75,192,192,1)",
-            pointBorderWidth: 1,
-            pointHitRadius: 10,
-            pointHoverBackgroundColor: "rgba(75,192,192,1)",
-            pointHoverBorderColor: "rgba(220,220,220,1)",
-            pointHoverBorderWidth: 2,
-            pointHoverRadius: 5,
-            pointRadius: 1,
-          },
-          {
-            backgroundColor: 'rgba(192,75,192,0.4)',
-            data: [] as any[],
-            label: "view",
-            lineTension: 0.1,
-            borderCapStyle: "butt",
-            borderColor: "rgba(192,75,192,1)",
-            borderDash: [] as any[],
-            borderDashOffset: 0.0,
-            pointBackgroundColor: "#fff",
-            pointBorderColor: "rgba(192,75,192,1)",
-            pointBorderWidth: 1,
-            pointHitRadius: 10,
-            pointHoverBackgroundColor: "rgba(192,75,192,1)",
-            pointHoverBorderColor: "rgba(192,75,192,1)",
-            pointHoverBorderWidth: 2,
-            pointHoverRadius: 5,
-            pointRadius: 1,
-          },
-          {
-            backgroundColor: 'rgba(192,192,75,0.4)',
-            data: [] as any[],
-            label: "click",
-            lineTension: 0.1,
-            borderCapStyle: "butt",
-            borderColor: "rgba(192,192,75,1)",
-            borderDash: [] as any[],
-            borderDashOffset: 0.0,
-            pointBackgroundColor: "#fff",
-            pointBorderColor: "rgba(192,192,75,1)",
-            pointBorderWidth: 1,
-            pointHitRadius: 10,
-            pointHoverBackgroundColor: "rgba(192,192,75,1)",
-            pointHoverBorderColor: "rgba(192,192,75,1)",
-            pointHoverBorderWidth: 2,
-            pointHoverRadius: 5,
-            pointRadius: 1,
-          },
-          {
-            backgroundColor: 'rgba(192,192,192,0.4)',
-            data: [] as any[],
-            label: "dismiss",
-            lineTension: 0.1,
-            borderCapStyle: "butt",
-            borderColor: "rgba(192,192,192,1)",
-            borderDash: [] as any[],
-            borderDashOffset: 0.0,
-            pointBackgroundColor: "#fff",
-            pointBorderColor: "rgba(192,192,192,1)",
-            pointBorderWidth: 1,
-            pointHitRadius: 10,
-            pointHoverBackgroundColor: "rgba(192,192,192,1)",
-            pointHoverBorderColor: "rgba(192,192,192,1)",
-            pointHoverBorderWidth: 2,
-            pointHoverRadius: 5,
-            pointRadius: 1,
-          },
-          {
-            backgroundColor: 'rgba(192,75,75,0.4)',
-            data: [] as any[],
-            label: "landed",
-            lineTension: 0.1,
-            borderCapStyle: "butt",
-            borderColor: "rgba(192,75,75,1)",
-            borderDash: [] as any[],
-            borderDashOffset: 0.0,
-            pointBackgroundColor: "#fff",
-            pointBorderColor: "rgba(192,75,75,1)",
-            pointBorderWidth: 1,
-            pointHitRadius: 10,
-            pointHoverBackgroundColor: "rgba(192,75,75,1)",
-            pointHoverBorderColor: "rgba(192,75,75,1)",
-            pointHoverBorderWidth: 2,
-            pointHoverRadius: 5,
-            pointRadius: 1,
-          },
-        ],
-        labels: [] as any[],
-      };
-      const report = _.find(reports, { campaignId: this.state.campaign.id }) as any;
-      if (report) {
-        report.reports = _.sortBy(report.reports, (dateObj) => {
-          return moment(dateObj.confirmationsDate).unix();
-        });
-        for (const record of report.reports) {
-          const label = moment(record.confirmationsDate).format("MMMM Do HA");
-          let i = _.findIndex(dataObject.labels, (o) => {
-            return o === label;
-          });
-          if (i < 0) {
-            dataObject.labels.push(label);
-            dataObject.datasets[0].data.push(record.count);
-            dataObject.datasets[1].data.push(0);
-            dataObject.datasets[2].data.push(0);
-            dataObject.datasets[3].data.push(0);
-            dataObject.datasets[4].data.push(0);
-            i = dataObject.labels.length - 1;
-          } else {
-            dataObject.datasets[0].data[i] = dataObject.datasets[0].data[i] + record.count;
-          }
-
-          const dataset = _.find(dataObject.datasets, {
-            label: record.confirmationsType,
-          });
-          if (dataset) {
-            if ((dataset as any).data[i]) {
-              (dataset as any).data[i] = (dataset as any).data[i] + record.count;
-            } else {
-              (dataset as any).data[i] = record.count;
-            }
-          }
-
-        }
-      }
-      return dataObject;
-    };
-
-    const doughnutData = () => {
-      const dataObject = {
-        datasets: [{
-          backgroundColor: [
-            "#FF6384",
-            "#36A2EB",
-            "#FFCE56",
-          ],
-          data: [] as any,
-          hoverBackgroundColor: [
-            "#FF6384",
-            "#36A2EB",
-            "#FFCE56",
-          ],
-        }],
-        labels: [] as any,
-      };
-      const report = _.find(reports, { campaignId: this.state.campaign.id }) as any;
-      if (report) {
-        for (const record of report.reports) {
-          const type = record.confirmationsType;
-          const i = _.findIndex(dataObject.labels, (o) => {
-            return o === type;
-          });
-          if (i < 0) {
-            dataObject.labels.push(type);
-            dataObject.datasets[0].data.push(record.count);
-          } else {
-            dataObject.datasets[0].data[i] = dataObject.datasets[0].data[i] + record.count;
-          }
-        }
-      }
-      return dataObject;
-    };
+    const report = _.find(reports, { campaignId: this.state.campaign }) as any;
 
 
     return (
@@ -218,25 +46,7 @@ class CampaignPerformance extends React.Component<any, any> {
             <Typography variant="h5">{campaign.name}</Typography>
           </Toolbar>
         </AppBar>
-        <Card className={classes.infoCard}>
-          <CardHeader title="Timeline" />
-          <CardContent className={classes.content}>
-            <div className={classes.row}>
-              {this.state.campaign !== "" &&
-                <Line data={lineData as any} height={300} options={{
-                  maintainAspectRatio: false,
-                }} />
-              }
-            </div>
-            <div>
-              {this.state.campaign !== "" &&
-                <Doughnut data={doughnutData} height={300} options={{
-                  maintainAspectRatio: false,
-                }} />
-              }
-            </div>
-          </CardContent>
-        </Card>
+        <PerformancesCharts campaign={campaign} report={report} />
       </div>
     );
   }
