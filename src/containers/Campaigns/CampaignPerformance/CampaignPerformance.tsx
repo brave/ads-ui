@@ -36,7 +36,7 @@ class CampaignPerformance extends React.Component<any, any> {
   public render() {
     const { classes, reports } = this.props;
     const { campaign } = this.state;
-    const report = _.find(reports, { campaignId: campaign }) as any;
+    const report = _.find(reports, { campaignId: campaign.id }) as any;
 
 
     return (
