@@ -1,6 +1,6 @@
 export const styles: any = {
-  formControl: {
-    minWidth: "200px",
+  csv: {
+    textDecoration: "none",
   },
   infoCard: {
     margin: "15px",
