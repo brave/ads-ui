@@ -193,6 +193,9 @@ class PerformancesCharts extends React.Component<any, any> {
     const generateCSV = () => {
       const data: any = {};
       if (report) {
+        report.reports = _.sortBy(report.reports, (dateObj) => {
+          return moment(dateObj.confirmationsDate).unix();
+        });
         for (const record of report.reports) {
           const confirmationsDate = record.confirmationsDate;
 
@@ -245,10 +248,10 @@ class PerformancesCharts extends React.Component<any, any> {
           this.csv += `${i2},`;
           this.csv += `${d2.creativeTitle},`;
           this.csv += `${d2.creativeBody},`;
-          this.csv += `${d2.view?d2.view.count:0},`;
-          this.csv += `${d2.click?d2.click.count:0},`;
-          this.csv += `${d2.landed?d2.landed.count:0},`;
-          this.csv += `${d2.dismiss?d2.dismiss.count:0},`;
+          this.csv += `${d2.view ? d2.view.count : 0},`;
+          this.csv += `${d2.click ? d2.click.count : 0},`;
+          this.csv += `${d2.landed ? d2.landed.count : 0},`;
+          this.csv += `${d2.dismiss ? d2.dismiss.count : 0},`;
         });
       });
       return true;
