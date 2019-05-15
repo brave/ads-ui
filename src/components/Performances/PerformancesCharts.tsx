@@ -215,8 +215,8 @@ class PerformancesCharts extends React.Component<any, any> {
               const creative: any = _.find(creatives, { id: record.creativeId });
               confirmationDate[record.creativeInstanceId] = {
                 advertiserName: advertiser.name,
-                creativeTitle: creative.title,
-                creativeBody: creative.body,
+                creativeTitle: creative.payload.title,
+                creativeBody: creative.payload.body,
                 campaignName: campaign.name,
               };
               confirmationDate[record.creativeInstanceId][record.confirmationsType] = {
