@@ -13,9 +13,12 @@ class CreativesNew extends React.Component<any, any> {
     const { classes, create, auth, history, match } = this.props;
     const handleSubmit = async (value: any) => {
       value.advertiserId = this.props.advertisers[0].id;
+      if (match.params.advertiserId) {
+        value.advertiserId = match.params.advertiserId;
+      }
       const result = await create(value, auth, match.params.userId);
       const url = match.url.replace("/new", "");
-
+      
       history.push(`${url}/${result.id}`);
     };
 
