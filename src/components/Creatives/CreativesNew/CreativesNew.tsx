@@ -18,7 +18,7 @@ class CreativesNew extends React.Component<any, any> {
       }
       const result = await create(value, auth, match.params.userId);
       const url = match.url.replace("/new", "");
-      
+
       history.push(`${url}/${result.id}`);
     };
 
