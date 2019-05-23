@@ -243,11 +243,11 @@ class PerformancesCharts extends React.Component<any, any> {
       _.forEach(data, (d, i) => {
         _.forEach(d, (d2: any, i2: string) => {
           this.csv += `\n${i},`;
-          this.csv += `${d2.advertiserName},`;
-          this.csv += `${d2.campaignName},`;
+          this.csv += `"${d2.advertiserName}",`;
+          this.csv += `"${d2.campaignName}",`;
           this.csv += `${i2},`;
-          this.csv += `${d2.creativeTitle},`;
-          this.csv += `${d2.creativeBody},`;
+          this.csv += `"${d2.creativeTitle}",`;
+          this.csv += `"${d2.creativeBody}",`;
           this.csv += `${d2.view ? d2.view.count : 0},`;
           this.csv += `${d2.click ? d2.click.count : 0},`;
           this.csv += `${d2.landed ? d2.landed.count : 0},`;
