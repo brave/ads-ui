@@ -38,7 +38,7 @@ class CampaignForm extends React.Component<any, any> {
       delete campaign.modifiedAt;
       dispatch(initialize("CampaignForm", campaign));
     }
-    const campaignStateList = ["draft", "under_review", "active", "deleted", "paused", "suspended"].map((item: any) => {
+    const campaignStateList = ["draft", "under_review", "active", "deleted", "paused", "suspended", "daycomplete"].map((item: any) => {
       return (
         <MenuItem key={item} value={item}>{item}</MenuItem>
       );
