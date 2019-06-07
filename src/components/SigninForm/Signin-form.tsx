@@ -27,11 +27,31 @@ class SigninForm extends React.Component<any, any> {
     return (
       <div>
         <form className={classes.form} autoComplete="nope">
-          <div>
-            <Field name="email" type="text" component={renderTextField} label="Email" />
+          <div
+            style={{
+              marginBottom: "24px"
+            }}
+          >
+            <Field
+              style={{ width: "100%" }}
+              name="email"
+              type="text"
+              component={renderTextField}
+              label="Email"
+            />
           </div>
-          <div>
-            <Field name="password" type="password" component={renderTextField} label="Password" />
+          <div
+            style={{
+              marginBottom: "24px"
+            }}
+          >
+            <Field
+              style={{ width: "100%" }}
+              name="password"
+              type="password"
+              component={renderTextField}
+              label="Password"
+            />
           </div>
         </form>
       </div>
@@ -41,7 +61,7 @@ class SigninForm extends React.Component<any, any> {
 
 const SigninFormRedux = reduxForm({
   form: "signin",
-  validate,
+  validate
 })(withStyles(styles)(SigninForm) as any);
 
 export default SigninFormRedux;
