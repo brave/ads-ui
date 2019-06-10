@@ -24,10 +24,10 @@ export const Container = styled("div")`
     width: 100%;
   }
   @media (min-width: ${Breakpoint.md}) and (max-width: ${Breakpoint.lg}) {
-    width: 420px;
+    width: 440px;
   }
   @media (min-width: ${Breakpoint.lg}) {
-    width: 420px;
+    width: 440px;
   }
 `;
 
@@ -37,8 +37,9 @@ export const Content = styled("div")`
 
 export const Header = styled("div")`
   display: flex;
-  justify-content: center;
-  margin-bottom: 24px;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 12px;
 `;
 
 export const ButtonContainer = styled("div")`

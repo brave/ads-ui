@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 interface ButtonProps {
+  type: string;
   size: string;
   disabled?: boolean;
 }
@@ -9,12 +10,23 @@ export const Button = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ff7654;
-  cursor: pointer;
-  color: white;
-  user-select: none;
-  transition: 0.3s ease all;
 
+  // ** Type ** 
+  ${(props: Partial<ButtonProps>) =>
+    props.type === "primary" &&
+    `
+    background-color: #ff7654;
+    transition: 0.3s ease all;
+    cursor: pointer;
+    color: white;
+    user-select: none;
+
+    &:hover {
+      background-color: #e56a4b;
+    }
+  `}
+
+  // ** Size ** 
   ${(props: Partial<ButtonProps>) =>
     props.size === "large" &&
     `
@@ -32,17 +44,22 @@ export const Button = styled.div`
     width: 130px;
     font-size: 19px;
   `}
+
+  ${(props: Partial<ButtonProps>) =>
+    props.size === "small" &&
+    `
+    border-radius: 100px 100px 100px 100px;
+    height: 35px;
+    width: 110px;
+    font-size: 15px;
+  `}
   
-  
+  // ** Disabled **
   ${(props: Partial<ButtonProps>) =>
     props.disabled &&
     `
       visibility: hidden;
   `}
-
-  &:hover {
-    background-color: #e56a4b;
-  }
 `;
 
 export default Button;

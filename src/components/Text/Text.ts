@@ -45,6 +45,38 @@ export const H1 = styled("div")`
   }
 `;
 
+export const H2 = styled("div")`
+  font-size: 32px;
+  ${(props: TextProps) =>
+    `
+    font-family: ${props.fontFamily};
+
+    `}
+
+  ${props =>
+    props.link &&
+    `
+    color: #ff7654;
+    cursor: pointer;
+  `}
+  
+  @media (max-width: ${Breakpoint.xs}) {
+    font-size: 26px;
+  }
+  @media (min-width: ${Breakpoint.xs}) and (max-width: ${Breakpoint.sm}) {
+    font-size: 26px;
+  }
+  @media (min-width: ${Breakpoint.sm}) and (max-width: ${Breakpoint.md}) {
+    font-size: 26px;
+  }
+  @media (min-width: ${Breakpoint.md}) and (max-width: ${Breakpoint.lg}) {
+    font-size: 30px;
+  }
+  @media (min-width: ${Breakpoint.lg}) {
+    font-size: 30px;
+  }
+`;
+
 export const H6 = styled("div")`
   font-size: 18px;
   ${(props: TextProps) =>

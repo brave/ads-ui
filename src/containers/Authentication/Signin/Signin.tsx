@@ -2,12 +2,13 @@ import { withStyles } from "@material-ui/core";
 import React from "react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
-import styled from "styled-components";
 import "../../../assets/fonts/fonts.css";
+import locale from "../../../locales/en";
+import BraveLogo from "../../../assets/images/brave-logotype-full-color.png";
 
 import Button from "../../../components/Button/Button";
 import Card from "../../../components/Card/Card";
-import { H1, H6 } from "../../../components/Text/Text";
+import { H1, H2, H6 } from "../../../components/Text/Text";
 // import Button from "brave-ui/components/buttonsIndicators/button";
 
 import { GetAdvertisers, SignIn } from "../../../actions";
@@ -35,26 +36,32 @@ class SignInContainer extends React.Component<any, any> {
         <S.Container>
           <S.Content>
             <S.Header>
-              <H1 fontFamily={"Poppins"}>Sign into your account</H1>
+              <img
+                style={{ width: "150px", marginBottom: "24px" }}
+                src={BraveLogo}
+              />
+              <H2 style={{ color: "#434251" }} fontFamily={"Poppins"}>
+                {locale.SignIn.header}
+              </H2>
             </S.Header>
             <SigninForm />
             <S.ButtonContainer>
-              <Button onClick={this.submit} size={"medium"}>
-                Sign in
+              <Button onClick={this.submit} type={"primary"} size={"medium"}>
+                {locale.SignIn.signIn}
               </Button>
             </S.ButtonContainer>
-            <S.Footer>
+            {/* <S.Footer>
               <H6 fontFamily={"Muli"} style={{ paddingRight: "8px" }}>
-                Don't have an account?
+                {locale.SignIn.noAccount}
               </H6>
               <H6
                 fontFamily={"Muli"}
                 link={true}
                 onClick={() => (window.location.href = "/auth/signup")}
               >
-                Sign up
+                {locale.SignIn.signUp}
               </H6>
-            </S.Footer>
+            </S.Footer> */}
           </S.Content>
         </S.Container>
       </Card>

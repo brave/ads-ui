@@ -21,7 +21,7 @@ export const Container = styled("div")`
 `;
 
 export const Content = styled("div")`
-  height: 500px;
+  height: 520px;
   margin: 28px;
 
   @media (max-width: ${Breakpoint.xs}) {
