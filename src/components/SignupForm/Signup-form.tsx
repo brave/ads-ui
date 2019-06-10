@@ -29,13 +29,28 @@ class SignupForm extends React.Component<any, any> {
       <div className={classes.root}>
         <form className={classes.form}>
           <div>
-            <Field name="email" type="text" component={renderTextField} label="Email" />
+            <Field
+              name="email"
+              type="text"
+              component={renderTextField}
+              label="Email"
+            />
           </div>
           <div>
-            <Field name="password" type="password" component={renderTextField} label="Password" />
+            <Field
+              name="password"
+              type="password"
+              component={renderTextField}
+              label="Password"
+            />
           </div>
           <div>
-            <Field name="fullName" type="text" component={renderTextField} label="Full Name" />
+            <Field
+              name="fullName"
+              type="text"
+              component={renderTextField}
+              label="Full Name"
+            />
           </div>
         </form>
       </div>
@@ -45,7 +60,7 @@ class SignupForm extends React.Component<any, any> {
 
 const SignupFormRedux = reduxForm({
   form: "signup",
-  validate,
+  validate
 })(withStyles(styles)(SignupForm) as any);
 
 export default SignupFormRedux;
