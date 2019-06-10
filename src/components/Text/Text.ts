@@ -3,6 +3,7 @@ import styled from "styled-components";
 interface TextProps {
   fontFamily: string;
   fontWeight?: number;
+  color?: string;
   link?: boolean;
 }
 
@@ -42,6 +43,13 @@ export const H1 = styled("div")`
   ${(props: TextProps) =>
     `
     font-weight: ${props.fontWeight};
+
+    `}
+
+  // ** Color **
+  ${(props: TextProps) =>
+    `
+    color: ${props.color};
 
     `}
 
@@ -85,6 +93,13 @@ export const H2 = styled("div")`
     font-weight: ${props.fontWeight};
 
     `}
+  
+  // ** Color **
+  ${(props: TextProps) =>
+    `
+    color: ${props.color};
+
+    `}
 
   // ** Link ** 
   ${props =>
@@ -124,6 +139,13 @@ export const H6 = styled("div")`
   ${(props: TextProps) =>
     `
     font-weight: ${props.fontWeight};
+
+    `}
+
+  // ** Color **
+  ${(props: TextProps) =>
+    `
+    color: ${props.color};
 
     `}
 

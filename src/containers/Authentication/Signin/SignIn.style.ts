@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import BraveLogo from "../../../assets/images/brave-logotype-full-color.png";
 
 enum Breakpoint {
   xs = "576px",
@@ -40,6 +41,14 @@ export const Header = styled("div")`
   flex-direction: column;
   align-items: center;
   margin-bottom: 12px;
+`;
+
+export const Logo = styled("div")`
+  width: 150px;
+  height: 50px;
+  margin-bottom: 24px;
+  background: url(${BraveLogo}) no-repeat center;
+  background-size: 100%;
 `;
 
 export const ButtonContainer = styled("div")`

@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import "../../../assets/fonts/fonts.css";
 import locale from "../../../locales/en";
-import BraveLogo from "../../../assets/images/brave-logotype-full-color.png";
 
 import Button from "../../../components/Button/Button";
 import Card from "../../../components/Card/Card";
@@ -36,11 +35,8 @@ class SignInContainer extends React.Component<any, any> {
         <S.Container>
           <S.Content>
             <S.Header>
-              <img
-                style={{ width: "150px", marginBottom: "24px" }}
-                src={BraveLogo}
-              />
-              <H2 style={{ color: "#434251" }} fontFamily={"Poppins"}>
+              <S.Logo />
+              <H2 fontFamily={"Poppins"} color={"#434251"}>
                 {locale.SignIn.header}
               </H2>
             </S.Header>
