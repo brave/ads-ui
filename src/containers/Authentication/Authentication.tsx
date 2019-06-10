@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import { styles } from "./Authentication.style";
+import * as S from "./Authentication.style";
 
 import AdvertiserContainer from "./Advertiser/Advertiser";
 import SigninContainer from "./Signin/Signin";
@@ -14,14 +15,14 @@ import WaitContainer from "./Wait/Wait";
 
 class Authentication extends React.Component<any, any> {
   public state = {
-    tabValue: "SignIn",
+    tabValue: "SignIn"
   };
 
   public render() {
     const { classes } = this.props;
     return (
-      <div className={classes.root}>
-        <Paper className={classes.paper}>
+      <S.Container>
+        <S.Content>
           <Switch>
             <Route path="/auth/signin" component={SigninContainer} />
             <Route path="/auth/signup" component={SignupContainer} />
@@ -30,8 +31,8 @@ class Authentication extends React.Component<any, any> {
             <Route path="/auth/wait" component={WaitContainer} />
             {this.getRedirect()}
           </Switch>
-        </Paper>
-      </div>
+        </S.Content>
+      </S.Container>
     );
   }
 
@@ -62,7 +63,7 @@ class Authentication extends React.Component<any, any> {
 
 const mapStateToProps = (state: any, ownProps: any) => ({
   advertisers: state.advertiserReducer.advertisers,
-  auth: state.authReducer,
+  auth: state.authReducer
 });
 
 export default withStyles(styles)(connect(mapStateToProps)(Authentication));
