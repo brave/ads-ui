@@ -5,7 +5,6 @@ import { Field, reduxForm } from "redux-form";
 import { renderTextField } from "../../containers/field-material";
 
 import { styles } from "./Signup-form.style";
-import * as S from "./Signup-form.style";
 
 const validate = (values: any) => {
   const errors: any = {};

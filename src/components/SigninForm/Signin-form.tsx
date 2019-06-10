@@ -21,6 +21,7 @@ const validate = (values: any) => {
   return errors;
 };
 
+// TODO - Replace redux forms with our custom styling / validation
 class SigninForm extends React.Component<any, any> {
   public render() {
     const { classes } = this.props;

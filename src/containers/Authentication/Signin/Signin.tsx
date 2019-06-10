@@ -8,7 +8,7 @@ import BraveLogo from "../../../assets/images/brave-logotype-full-color.png";
 
 import Button from "../../../components/Button/Button";
 import Card from "../../../components/Card/Card";
-import { H1, H2, H6 } from "../../../components/Text/Text";
+import { H2 } from "../../../components/Text/Text";
 // import Button from "brave-ui/components/buttonsIndicators/button";
 
 import { GetAdvertisers, SignIn } from "../../../actions";
@@ -78,8 +78,6 @@ class SignInContainer extends React.Component<any, any> {
     this.toggleSubmitting();
     const { signinForm } = this.props;
     const { values } = signinForm;
-    console.log("hello" + JSON.stringify(values));
-    console.log("hello" + JSON.stringify(signinForm));
     try {
       const auth = await this.props.signin(values);
       await this.props.getAdvertiser(auth);
