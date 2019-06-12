@@ -82,6 +82,8 @@ class CreativeSetView extends React.Component<any, any> {
   }
 
   private async handleSubmit(value: any) {
+    value.totalMax = Number(value.totalMax).valueOf();
+    value.perDay = Number(value.perDay).valueOf();
     await this.props.update(this.state.campaign.id, value, this.props.auth);
   }
 
