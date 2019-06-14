@@ -110,6 +110,54 @@ export const H2 = styled("div")`
   `}
 `;
 
+export const H5 = styled("div")`
+  // ** Font Size **
+  @media (max-width: ${Breakpoint.xs}) {
+    font-size: 18px;
+  }
+  @media (min-width: ${Breakpoint.xs}) and (max-width: ${Breakpoint.sm}) {
+    font-size: 18px;
+  }
+  @media (min-width: ${Breakpoint.sm}) and (max-width: ${Breakpoint.md}) {
+    font-size: 18px;
+  }
+  @media (min-width: ${Breakpoint.md}) and (max-width: ${Breakpoint.lg}) {
+    font-size: 22px;
+  }
+  @media (min-width: ${Breakpoint.lg}) {
+    font-size: 16px;
+  }
+
+  // ** Font Family **
+  ${(props: TextProps) =>
+    `
+    font-family: ${props.fontFamily};
+
+    `}
+
+  // ** Font Weight **
+  ${(props: TextProps) =>
+    `
+    font-weight: ${props.fontWeight};
+
+    `}
+
+  // ** Color **
+  ${(props: TextProps) =>
+    `
+    color: ${props.color};
+
+    `}
+
+  // ** Link ** 
+  ${props =>
+    props.link &&
+    `
+    color: #ff7654;
+    cursor: pointer;
+  `}
+`;
+
 export const H6 = styled("div")`
   // ** Font Size **
   @media (max-width: ${Breakpoint.xs}) {

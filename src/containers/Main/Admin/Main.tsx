@@ -7,25 +7,29 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  withStyles,
+  withStyles
 } from "@material-ui/core";
 import classNames from "classnames";
 import React from "react";
 import { connect } from "react-redux";
 import { Link, Redirect, Route, Switch } from "react-router-dom";
 
-import Appbar from "../../../components/Appbar/Appbar";
+import AppBar from "../../../components/AppBar/AppBar";
 import Dashboard from "../../Dashboard/Admin/Dashboard";
 import Users from "../../Users/Users";
 
 import { styles } from "./Main.style";
 
 class Main extends React.Component<any, any> {
-
   public render(): any {
     const { auth, classes, drawer, match } = this.props;
-    if (!auth || !auth.signedIn || !auth.emailVerified || auth.role !== "admin") {
-      return (<Redirect to="/a" />);
+    if (
+      !auth ||
+      !auth.signedIn ||
+      !auth.emailVerified ||
+      auth.role !== "admin"
+    ) {
+      return <Redirect to="/a" />;
     }
     const drawerItems = (
       <List>
@@ -49,22 +53,27 @@ class Main extends React.Component<any, any> {
     );
     return (
       <div className={classes.root}>
-        <Appbar />
+        <AppBar />
         <Hidden smDown implementation="css">
-          <Drawer variant="permanent" open={false} classes={{
-            docked: classNames(classes.docked),
-            paper: classNames(classes.drawerPaper, !drawer.open && classes.drawerPaperClose),
-          }}>
-            <div className={classes.toolbar}>
-            </div>
+          <Drawer
+            variant="permanent"
+            open={false}
+            classes={{
+              docked: classNames(classes.docked),
+              paper: classNames(
+                classes.drawerPaper,
+                !drawer.open && classes.drawerPaperClose
+              )
+            }}
+          >
+            <div className={classes.toolbar} />
             <Divider />
             {drawerItems}
           </Drawer>
         </Hidden>
         <Hidden mdUp>
           <Drawer variant="persistent" anchor="left" open={drawer.open}>
-            <div className={classes.toolbar}>
-            </div>
+            <div className={classes.toolbar} />
             <Divider />
             {drawerItems}
           </Drawer>
@@ -84,7 +93,9 @@ class Main extends React.Component<any, any> {
 
 const mapStateToProps = (state: any, ownProps: any) => ({
   auth: state.authReducer,
-  drawer: state.drawerReducer,
+  drawer: state.drawerReducer
 });
 
-export default withStyles(styles, { withTheme: true })(connect(mapStateToProps)(Main));
+export default withStyles(styles, { withTheme: true })(
+  connect(mapStateToProps)(Main)
+);
