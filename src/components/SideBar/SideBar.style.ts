@@ -4,6 +4,16 @@ interface NavProps {
   selected: boolean;
 }
 
+export const Container = styled("div")`
+  @media (max-width: 992px) {
+    display: none;
+  }
+  height: 100vh;
+  background-color: white;
+  width: 300px;
+  padding-top: 24px;
+`;
+
 export const Nav = styled("div")`
   height: 60px;
   display: flex;
@@ -14,6 +24,7 @@ export const Nav = styled("div")`
   padding-left: 24px;
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
+  user-select: none;
 
   // ** Selected **
   ${(props: NavProps) => ``}

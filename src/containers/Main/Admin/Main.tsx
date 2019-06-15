@@ -15,6 +15,7 @@ import { connect } from "react-redux";
 import { Link, Redirect, Route, Switch } from "react-router-dom";
 
 import AppBar from "../../../components/AppBar/AppBar";
+import SideBar from "../../../components/SideBar/SideBar";
 import Dashboard from "../../Dashboard/Admin/Dashboard";
 import Users from "../../Users/Users";
 
@@ -52,40 +53,24 @@ class Main extends React.Component<any, any> {
       </List>
     );
     return (
-      <div className={classes.root}>
+      <div>
         <AppBar />
-        <Hidden smDown implementation="css">
-          <Drawer
-            variant="permanent"
-            open={false}
-            classes={{
-              docked: classNames(classes.docked),
-              paper: classNames(
-                classes.drawerPaper,
-                !drawer.open && classes.drawerPaperClose
-              )
+        <div style={{ display: "flex" }}>
+          <SideBar type={"admin"} match={match} />
+          <main
+            style={{
+              padding: "24px",
+              width: "100%",
+              height: "100%"
             }}
           >
-            <div className={classes.toolbar} />
-            <Divider />
-            {drawerItems}
-          </Drawer>
-        </Hidden>
-        <Hidden mdUp>
-          <Drawer variant="persistent" anchor="left" open={drawer.open}>
-            <div className={classes.toolbar} />
-            <Divider />
-            {drawerItems}
-          </Drawer>
-        </Hidden>
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-          <Switch>
-            <Route path={match.url + "/dashboard"} component={Dashboard} />
-            <Route path={match.url + "/users"} component={Users} />
-            <Redirect to={match.url + "/dashboard"} />
-          </Switch>
-        </main>
+            <Switch>
+              <Route path={match.url + "/dashboard"} component={Dashboard} />
+              <Route path={match.url + "/users"} component={Users} />
+              <Redirect to={match.url + "/dashboard"} />
+            </Switch>
+          </main>
+        </div>
       </div>
     );
   }

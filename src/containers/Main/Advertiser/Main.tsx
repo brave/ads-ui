@@ -40,68 +40,16 @@ class Main extends React.Component<any, any> {
     ) {
       return <Redirect to="/a" />;
     }
-    const drawerItems = (
-      <List>
-        {/* <Link to={match.url + "/dashboard"} className={classes.link}>
-          <ListItem button>
-            <ListItemIcon>
-              <Icon>dashboard</Icon>
-            </ListItemIcon>
-            <ListItemText primary="Dashboard" />
-          </ListItem>
-        </Link>
-        <Link to={match.url + "/creatives"} className={classes.link}>
-          <ListItem button>
-            <ListItemIcon>
-              <Icon>apps</Icon>
-            </ListItemIcon>
-            <ListItemText primary="Creative Library" />
-          </ListItem>
-        </Link>
-        <Link to={match.url + "/campaigns"} className={classes.link}>
-          <ListItem button>
-            <ListItemIcon>
-              <Icon>next_week</Icon>
-            </ListItemIcon>
-            <ListItemText primary="Campaigns" />
-          </ListItem>
-        </Link> */}
-        <Link to={match.url + "/performances"} className={classes.link}>
-          <ListItem button>
-            <ListItemIcon>
-              <Icon>timeline</Icon>
-            </ListItemIcon>
-            <ListItemText primary="Performance" />
-          </ListItem>
-        </Link>
-        {/* <Link to={match.url + "/invoices"} className={classes.link}>
-          <ListItem button>
-            <ListItemIcon>
-              <Icon>receipt</Icon>
-            </ListItemIcon>
-            <ListItemText primary="Invoices" />
-          </ListItem>
-        </Link>
-        <Link to={match.url + "/preferences"} className={classes.link}>
-          <ListItem button>
-            <ListItemIcon>
-              <Icon>settings</Icon>
-            </ListItemIcon>
-            <ListItemText primary="Preferences" />
-          </ListItem>
-        </Link> */}
-      </List>
-    );
+
     return (
       <div>
         <AppBar />
 
         <div style={{ display: "flex" }}>
-          <SideBar />
+          <SideBar type={"user"} match={match} />
           <main
             style={{
-              paddingTop: "24px",
-              paddingLeft: "24px",
+              padding: "24px",
               width: "100%",
               height: "100%"
             }}

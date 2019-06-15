@@ -27,28 +27,48 @@ export const SubContainer = styled("div")`
   align-items: center;
 `;
 
+export const SearchContainer = styled("div")`
+  display: flex;
+  align-items: center;
+  border: 1px solid #dbdbdb;
+  height: 36px;
+  width: 478px;
+  border-radius: 4px;
+`;
+
+export const SearchInput = styled("input")`
+  border: none;
+  width: 90%;
+  height: 90%;
+  fontsize: 14px;
+  fontfamily: Poppins;
+  fontweight: 400;
+`;
+
+export const Logo = styled("img")`
+  @media (max-width: ${Breakpoint.xs}) {
+    height: 26px;
+  }
+  @media (min-width: ${Breakpoint.xs}) and (max-width: ${Breakpoint.sm}) {
+    height: 26px;
+  }
+  @media (min-width: ${Breakpoint.sm}) and (max-width: ${Breakpoint.md}) {
+    height: 26px;
+  }
+  @media (min-width: ${Breakpoint.md}) and (max-width: ${Breakpoint.lg}) {
+    height: 30px;
+  }
+  @media (min-width: ${Breakpoint.lg}) {
+    height: 30px;
+  }
+`;
+
 // export const Container = styled("div")`
 //   display: flex;
 //   justify-content: center;
 //   align-items: center;
 //   height: 100%;
 //   margin: auto;
-
-//   @media (max-width: ${Breakpoint.xs}) {
-//     width: 100%;
-//   }
-//   @media (min-width: ${Breakpoint.xs}) and (max-width: ${Breakpoint.sm}) {
-//     width: 100%;
-//   }
-//   @media (min-width: ${Breakpoint.sm}) and (max-width: ${Breakpoint.md}) {
-//     width: 100%;
-//   }
-//   @media (min-width: ${Breakpoint.md}) and (max-width: ${Breakpoint.lg}) {
-//     width: 440px;
-//   }
-//   @media (min-width: ${Breakpoint.lg}) {
-//     width: 440px;
-//   }
 // `;
 
 export const styles = (theme: any) =>
