@@ -28,6 +28,10 @@ const validate = (values: any) => {
   if (!values.dailyBudget) {
     errors.dailyBudget = "Required";
   }
+  if (parseInt(values.budget, 10) < parseInt(values.dailyBudget, 10)) {	
+    errors.budget = "Budget should be more than daily cap";	
+    errors.dailyBudget = "DailyBudget should be less than budget";	
+  }
   if (!values.dailyCap) {
     errors.dailyCap = "Required";
   }
