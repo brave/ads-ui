@@ -39,6 +39,12 @@ const validate = (values: any) => {
 };
 
 class CampaignForm extends React.Component<any, any> {
+  componentDidMount() {
+    const initData = {
+      dailyCap: 1
+    };
+    this.props.initialize(initData);
+  }
   public render() {
     const {
       campaign,
