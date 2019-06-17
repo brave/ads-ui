@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Link, Redirect, Route, Switch } from "react-router-dom";
 import * as S from "./SideBar.style";
+import BATLogo from "../../assets/images/basic-attention-token-logo.png";
 
 import {
   Icon,
@@ -9,13 +10,20 @@ import {
   TableRow,
   withStyles
 } from "@material-ui/core";
-import { H6, H5 } from "../Text/Text";
+import { H6, H5, Text } from "../Text/Text";
 
 const linkStyle = { textDecoration: "none", color: "inherit" };
 
 class SideBar extends React.Component<any, any> {
   public render() {
-    return <S.Container>{renderNav(this.props)}</S.Container>;
+    return (
+      <S.Container>
+        <React.Fragment>{renderNav(this.props)}</React.Fragment>
+        {/* <S.BATContainer>
+          <img style={{ height: "45px" }} src={BATLogo} />
+        </S.BATContainer> */}
+      </S.Container>
+    );
   }
 }
 
@@ -44,14 +52,16 @@ function renderNav(props) {
           </S.Nav> */}
           <Link style={linkStyle} to={props.match.url + "/performances"}>
             <S.Nav
-              selected={
-                props.match.url + "/performances" === window.location.pathname
-              }
+              selected={window.location.pathname.includes(
+                props.match.url + "/performances"
+              )}
             >
               <S.SubContainer>
                 <Icon>bar_chart</Icon>
               </S.SubContainer>
-              <H5 fontFamily={"Poppins"}>Performance</H5>
+              <Text sizes={[16, 16, 16, 16, 16]} fontFamily={"Poppins"}>
+                Performance
+              </Text>
             </S.Nav>
           </Link>
           {/* <S.Nav selected={false}>
@@ -74,24 +84,30 @@ function renderNav(props) {
         <div>
           <Link style={linkStyle} to={props.match.url + "/dashboard"}>
             <S.Nav
-              selected={
-                props.match.url + "/dashboard" === window.location.pathname
-              }
+              selected={window.location.pathname.includes(
+                props.match.url + "/dashboard"
+              )}
             >
               <S.SubContainer>
                 <Icon>dashboard</Icon>
               </S.SubContainer>
-              <H5 fontFamily={"Poppins"}>Dashboard</H5>
+              <Text sizes={[16, 16, 16, 16, 16]} fontFamily={"Poppins"}>
+                Dashboard
+              </Text>
             </S.Nav>
           </Link>
           <Link style={linkStyle} to={props.match.url + "/users"}>
             <S.Nav
-              selected={props.match.url + "/users" === window.location.pathname}
+              selected={window.location.pathname.includes(
+                props.match.url + "/users"
+              )}
             >
               <S.SubContainer>
                 <Icon>person</Icon>
               </S.SubContainer>
-              <H5 fontFamily={"Poppins"}>Users</H5>
+              <Text sizes={[16, 16, 16, 16, 16]} fontFamily={"Poppins"}>
+                Users
+              </Text>
             </S.Nav>
           </Link>
           {/* <S.Nav selected={false}>

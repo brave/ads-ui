@@ -8,10 +8,12 @@ export const Container = styled("div")`
   @media (max-width: 992px) {
     display: none;
   }
-  height: 100vh;
+  height: calc(100vh - 64px);
   background-color: white;
   width: 300px;
   padding-top: 24px;
+  border-right: 2px solid #f6f6f5;
+  position: relative;
 `;
 
 export const Nav = styled("div")`
@@ -52,4 +54,17 @@ export const SubContainer = styled("div")`
   display: flex;
   align-items: center;
   margin-right: 12px;
+`;
+
+export const BATContainer = styled("div")`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.6;
+  filter: grayscale(0.8);
 `;

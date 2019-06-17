@@ -9,6 +9,8 @@ import * as S from "./AppBar.style";
 import Button from "../Button/Button";
 import { H6 } from "../Text/Text";
 import BottomNav from "./components/BottomNav/BottomNav";
+const linkStyle = { textDecoration: "none", color: "inherit" };
+import { Link, Redirect, Route, Switch } from "react-router-dom";
 import "../OutsideAlerter/OutSideAlerter";
 
 import UserMenu from "../UserMenu/UserMenu";
@@ -48,7 +50,9 @@ class AppBar extends React.Component<any, any> {
       <div>
         <S.Container>
           <S.SubContainer>
+            {/* <Link style={linkStyle} to={"/"}> */}
             <S.Logo src={BraveAdsLogo} />
+            {/* </Link> */}
           </S.SubContainer>
 
           {/* 

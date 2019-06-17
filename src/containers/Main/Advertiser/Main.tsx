@@ -25,8 +25,16 @@ import Performances from "../../Performances/Performances";
 import Preferences from "../../Preferences/Preferences";
 import SideBar from "../../../components/SideBar/SideBar";
 
+import * as S from "./Main.style";
 import { styles } from "./Main.style";
 import App from "../../../App";
+
+const mainStyle = {
+  padding: "24px",
+  width: "100%",
+  height: "100%",
+  overflow: "scroll"
+};
 
 class Main extends React.Component<any, any> {
   public render(): any {
@@ -42,18 +50,11 @@ class Main extends React.Component<any, any> {
     }
 
     return (
-      <div>
+      <S.Container>
         <AppBar />
-
-        <div style={{ display: "flex" }}>
+        <S.Content>
           <SideBar type={"user"} match={match} />
-          <main
-            style={{
-              padding: "24px",
-              width: "100%",
-              height: "100%"
-            }}
-          >
+          <main style={mainStyle}>
             <Switch>
               {/* <Route path={match.url + "/dashboard"} component={Dashboard} />
             <Route path={match.url + "/creatives"} component={Creatives} />
@@ -67,8 +68,8 @@ class Main extends React.Component<any, any> {
               <Redirect to={match.url + "/performances"} />
             </Switch>
           </main>
-        </div>
-      </div>
+        </S.Content>
+      </S.Container>
     );
   }
 }

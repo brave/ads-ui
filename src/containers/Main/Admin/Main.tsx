@@ -19,7 +19,15 @@ import SideBar from "../../../components/SideBar/SideBar";
 import Dashboard from "../../Dashboard/Admin/Dashboard";
 import Users from "../../Users/Users";
 
+import * as S from "./Main.style";
 import { styles } from "./Main.style";
+
+const mainStyle = {
+  padding: "24px",
+  width: "100%",
+  height: "100%",
+  overflow: "scroll"
+};
 
 class Main extends React.Component<any, any> {
   public render(): any {
@@ -53,25 +61,19 @@ class Main extends React.Component<any, any> {
       </List>
     );
     return (
-      <div>
+      <S.Container>
         <AppBar />
-        <div style={{ display: "flex" }}>
+        <S.Content>
           <SideBar type={"admin"} match={match} />
-          <main
-            style={{
-              padding: "24px",
-              width: "100%",
-              height: "100%"
-            }}
-          >
+          <main style={mainStyle}>
             <Switch>
               <Route path={match.url + "/dashboard"} component={Dashboard} />
               <Route path={match.url + "/users"} component={Users} />
               <Redirect to={match.url + "/dashboard"} />
             </Switch>
           </main>
-        </div>
-      </div>
+        </S.Content>
+      </S.Container>
     );
   }
 }

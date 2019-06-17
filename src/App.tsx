@@ -1,4 +1,10 @@
-import { createMuiTheme, CssBaseline, MuiThemeProvider, Snackbar, withStyles } from "@material-ui/core";
+import {
+  createMuiTheme,
+  CssBaseline,
+  MuiThemeProvider,
+  Snackbar,
+  withStyles
+} from "@material-ui/core";
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -12,21 +18,20 @@ import Header from "./containers/Header";
 import { styles } from "./App.styles";
 
 class App extends React.Component<any, any> {
-
   private theme = createMuiTheme({
     palette: {
       primary: {
-        main: "#fb542b",
+        main: "#fb542b"
       },
       secondary: {
         contrastText: "#ffcc00",
         light: "#0066ff",
-        main: "#0044ff",
-      },
+        main: "#0044ff"
+      }
     },
     typography: {
-      useNextVariants: true,
-    },
+      useNextVariants: true
+    }
   });
 
   public render() {
@@ -36,15 +41,18 @@ class App extends React.Component<any, any> {
       <MuiThemeProvider theme={this.theme}>
         <div className={classes.root}>
           <CssBaseline />
-          <Header></Header>
-          <div className={classes.body}>
-            <Body></Body>
+          <Header />
+          <div
+            style={{ height: "100%", overflow: "hidden" }}
+            className={classes.body}
+          >
+            <Body />
           </div>
-          <Footer></Footer>
+          <Footer />
           <Snackbar
             anchorOrigin={{
               horizontal: "left",
-              vertical: "bottom",
+              vertical: "bottom"
             }}
             message={<span>{snackbar.message}</span>}
             open={snackbar.open}
@@ -58,11 +66,16 @@ class App extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
-  snackbar: state.snackBarReducer,
+  snackbar: state.snackBarReducer
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
-  CloseSnackBar: () => dispatch(close({})),
+  CloseSnackBar: () => dispatch(close({}))
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(App)));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(withStyles(styles)(App))
+);

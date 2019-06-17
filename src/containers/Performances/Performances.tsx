@@ -1,4 +1,16 @@
-import { FormControl, InputLabel, MenuItem, Select, Typography, withStyles, AppBar, Toolbar, Card, CardHeader, CardContent } from "@material-ui/core";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Typography,
+  withStyles,
+  AppBar,
+  Toolbar,
+  Card,
+  CardHeader,
+  CardContent
+} from "@material-ui/core";
 import _ from "lodash";
 import React from "react";
 import { connect } from "react-redux";
@@ -14,7 +26,7 @@ class Performances extends React.Component<any, any> {
     super(props);
     this.state = {
       campaign: "",
-      campaignName: "",
+      campaignName: ""
     };
   }
 
@@ -24,16 +36,17 @@ class Performances extends React.Component<any, any> {
   }
 
   public handleChange = async (event: any) => {
-    const campaign: any = _.find(this.props.campaigns, { id: event.target.value });
+    const campaign: any = _.find(this.props.campaigns, {
+      id: event.target.value
+    });
     this.setState({
-      campaignName: campaign.name,
+      campaignName: campaign.name
     });
     await this.props.GetReports(this.props.auth, event.target.value);
     this.setState({ campaign: event.target.value });
-  }
+  };
 
   public render() {
-
     const { classes, campaigns, reports, creatives, advertisers } = this.props;
 
     const report = _.find(reports, { campaignId: this.state.campaign }) as any;
@@ -41,7 +54,9 @@ class Performances extends React.Component<any, any> {
 
     const listItems = campaigns.map((item: any) => {
       return (
-        <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
+        <MenuItem key={item.id} value={item.id}>
+          {item.name}
+        </MenuItem>
       );
     });
 
@@ -57,15 +72,25 @@ class Performances extends React.Component<any, any> {
           <CardContent>
             <FormControl className={classes.formControl}>
               <InputLabel>Select Campaign</InputLabel>
-              <Select inputProps={{
-                name: "campaign",
-              }} onChange={this.handleChange} value={this.state.campaign} name="role">
+              <Select
+                inputProps={{
+                  name: "campaign"
+                }}
+                onChange={this.handleChange}
+                value={this.state.campaign}
+                name="role"
+              >
                 {listItems}
               </Select>
             </FormControl>
           </CardContent>
         </Card>
-        <PerformancesCharts campaign={campaign} report={report} advertiser={advertisers[0]} creatives={creatives}/>
+        <PerformancesCharts
+          campaign={campaign}
+          report={report}
+          advertiser={advertisers[0]}
+          creatives={creatives}
+        />
       </div>
     );
   }
@@ -76,13 +101,19 @@ const mapStateToProps = (state: any, ownProps: any) => ({
   campaigns: state.campaignReducer.campaigns,
   reports: state.reportReducer.reports,
   creatives: state.creativeReducer.creatives,
-  advertisers: state.advertiserReducer.advertisers,
+  advertisers: state.advertiserReducer.advertisers
 });
 
 const mapDispathToProps = (dispatch: any, ownProps: any) => ({
   GetCampaigns: (auth: any) => dispatch(GetCampaigns(auth)),
   GetCreatives: (auth: any) => dispatch(GetCreatives(auth)),
-  GetReports: (auth: any, campaignId: string) => dispatch(GetReports(auth, campaignId)),
+  GetReports: (auth: any, campaignId: string) =>
+    dispatch(GetReports(auth, campaignId))
 });
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispathToProps)(Performances));
+export default withStyles(styles)(
+  connect(
+    mapStateToProps,
+    mapDispathToProps
+  )(Performances)
+);
