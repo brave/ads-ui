@@ -26,22 +26,6 @@ export const Button = styled.div`
     }
   `}
 
-  ${(props: Partial<ButtonProps>) =>
-    props.type === "primary-outline" &&
-    `
-    background-color: white;
-    border: 1px solid #ff7654;
-    transition: 0.3s ease all;
-    cursor: pointer;
-    color: #ff7654;
-    user-select: none;
-
-    &:hover {
-      background-color: #ff7654;
-      color: white;
-    }
-  `}
-
   // ** Size ** 
   ${(props: Partial<ButtonProps>) =>
     props.size === "large" &&
@@ -57,9 +41,8 @@ export const Button = styled.div`
     `
     border-radius: 100px 100px 100px 100px;
     height: 45px;
-    width: 150px;
-    font-size: 14px;
-    font-weight: 600;
+    width: 130px;
+    font-size: 19px;
   `}
 
   ${(props: Partial<ButtonProps>) =>
