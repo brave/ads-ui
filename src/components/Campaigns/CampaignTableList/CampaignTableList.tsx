@@ -69,7 +69,10 @@ class CampaignList extends React.Component<any, any> {
                     Budget
               </TableCell>
                   <TableCell>
-                    Daily Cap
+                    Daily Budget
+              </TableCell>
+                  <TableCell>
+                    Campaign Daily Frequency Cap
               </TableCell>
                   <TableCell>
                     Start At

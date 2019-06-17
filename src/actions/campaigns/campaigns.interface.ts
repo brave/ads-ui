@@ -1,6 +1,11 @@
 export interface ICampaignAction {
   type: string;
-  payload: ICreateCampaignPayload | ICampaignPayload[] | ICampaignPayload | Partial<ICampaignPayload> | null;
+  payload:
+    | ICreateCampaignPayload
+    | ICampaignPayload[]
+    | ICampaignPayload
+    | Partial<ICampaignPayload>
+    | null;
 }
 
 export interface ICreateCampaignPayload {
@@ -10,6 +15,7 @@ export interface ICreateCampaignPayload {
   endAt: Date;
   type: string;
   budget: number;
+  dailyBudget: number;
   dailyCap: number;
 }
 
