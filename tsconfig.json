@@ -11,8 +11,15 @@
     "noImplicitAny": false,
     "noEmit": true,
     "jsx": "preserve",
-    "lib": ["es2015", "dom"],
-    "isolatedModules": true
+    "lib": [
+      "es2015",
+      "dom"
+    ],
+    "isolatedModules": true,
+    "module": "esnext",
+    "resolveJsonModule": true
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }
