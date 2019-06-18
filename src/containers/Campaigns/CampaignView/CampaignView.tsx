@@ -7,7 +7,7 @@ import {
   IconButton,
   Toolbar,
   Typography,
-  withStyles,
+  withStyles
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import _ from "lodash";
@@ -15,7 +15,9 @@ import React from "react";
 import { connect } from "react-redux";
 
 import {
-  GetCreativeSets, GetGeocodes, UpdateCampaigns,
+  GetCreativeSets,
+  GetGeocodes,
+  UpdateCampaigns
 } from "../../../actions";
 
 import CampaignForm from "../../../components/Campaigns/CampaignForm/CampaignForm";
@@ -26,12 +28,14 @@ import { styles } from "./CampaignView.style";
 class CampaignView extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
-    const campaign = _.find(props.campaigns, { id: this.props.match.params.campaignId }) as any;
+    const campaign = _.find(props.campaigns, {
+      id: this.props.match.params.campaignId
+    }) as any;
     props.getGeocodes(props.auth);
     props.getCreativeSets(campaign.id, props.auth);
     this.state = {
       campaign,
-      unlock: false,
+      unlock: false
     };
   }
 
@@ -53,14 +57,18 @@ class CampaignView extends React.Component<any, any> {
         <Card className={classes.infoCard}>
           <CardHeader title="Details" action={this.getLockButton()} />
           <CardContent className={classes.content}>
-            <CampaignForm campaign={campaign} geocodes={geocodes}
-              unlock={unlock} onSubmit={(value: string) => this.handleSubmit(value)} />
+            <CampaignForm
+              campaign={campaign}
+              geocodes={geocodes}
+              unlock={unlock}
+              onSubmit={(value: string) => this.handleSubmit(value)}
+            />
           </CardContent>
         </Card>
         <Card className={classes.infoCard}>
           <CardHeader title="Creative Sets" />
           <CardContent className={classes.content}>
-            <CreativeSetList creativeSets={creativesets} match={match}></CreativeSetList>
+            <CreativeSetList creativeSets={creativesets} match={match} />
           </CardContent>
         </Card>
       </div>
@@ -81,17 +89,22 @@ class CampaignView extends React.Component<any, any> {
         </IconButton>
       );
     }
-  }
+  };
 
   private async handleSubmit(value: any) {
     value.budget = parseFloat(value.budget);
+    value.dailyBudget = parseFloat(value.dailyBudget);
     value.dailyCap = parseFloat(value.dailyCap);
-    await this.props.update(value, this.props.auth, this.props.match.params.userId);
+    await this.props.update(
+      value,
+      this.props.auth,
+      this.props.match.params.userId
+    );
   }
 
   private switchLock() {
     this.setState({
-      unlock: !this.state.unlock,
+      unlock: !this.state.unlock
     });
   }
 }
@@ -100,13 +113,20 @@ const mapStateToProps = (state: any, ownProps: any) => ({
   auth: state.authReducer,
   campaigns: state.campaignReducer.campaigns,
   creativesets: state.creativeSetReducer.creativesets,
-  geocodes: state.geoCodeReducer.geocodes,
+  geocodes: state.geoCodeReducer.geocodes
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
-  getCreativeSets: (campaignId: string, user: any) => dispatch(GetCreativeSets(campaignId, user)),
+  getCreativeSets: (campaignId: string, user: any) =>
+    dispatch(GetCreativeSets(campaignId, user)),
   getGeocodes: (user: any) => dispatch(GetGeocodes(user)),
-  update: (value: any, user: any, userId: string) => dispatch(UpdateCampaigns(value, user, userId)),
+  update: (value: any, user: any, userId: string) =>
+    dispatch(UpdateCampaigns(value, user, userId))
 });
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(CampaignView));
+export default withStyles(styles)(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(CampaignView)
+);
