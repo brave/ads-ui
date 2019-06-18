@@ -9,12 +9,11 @@
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "noImplicitAny": false,
     "resolveJsonModule": true,
+    "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
-    "lib": ["es2015", "dom"],
-    "isolatedModules": true
+    "lib": ["es2015", "dom"]
   },
   "include": ["src"]
 }

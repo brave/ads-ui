@@ -1,4 +1,10 @@
-import { Icon, IconButton, TableCell, TableRow, withStyles } from "@material-ui/core";
+import {
+  Icon,
+  IconButton,
+  TableCell,
+  TableRow,
+  withStyles
+} from "@material-ui/core";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -16,6 +22,9 @@ class CampaignTableItem extends React.Component<any, any> {
           <div>{campaign.budget}</div>
         </TableCell>
         <TableCell>
+          <div>{campaign.dailyBudget}</div>
+        </TableCell>
+        <TableCell>
           <div>{campaign.dailyCap}</div>
         </TableCell>
         <TableCell>
@@ -28,12 +37,18 @@ class CampaignTableItem extends React.Component<any, any> {
           <div>{campaign.state}</div>
         </TableCell>
         <TableCell>
-          <Link className={classes.viewButton} to={`${match.url}/campaign/${campaign.id}`}>
+          <Link
+            className={classes.viewButton}
+            to={`${match.url}/campaign/${campaign.id}`}
+          >
             <IconButton color="primary">
               <Icon>list</Icon>
             </IconButton>
           </Link>
-          <Link className={classes.viewButton} to={`${match.url}/campaign/${campaign.id}/report`}>
+          <Link
+            className={classes.viewButton}
+            to={`${match.url}/campaign/${campaign.id}/report`}
+          >
             <IconButton color="primary">
               <Icon>timeline</Icon>
             </IconButton>
