@@ -28,9 +28,9 @@ const validate = (values: any) => {
   if (!values.dailyBudget) {
     errors.dailyBudget = "Required";
   }
-  if (parseInt(values.budget, 10) < parseInt(values.dailyBudget, 10)) {	
-    errors.budget = "Budget should be more than daily cap";	
-    errors.dailyBudget = "DailyBudget should be less than budget";	
+  if (parseInt(values.budget, 10) < parseInt(values.dailyBudget, 10)) {
+    errors.budget = "Budget should be more than daily cap";
+    errors.dailyBudget = "DailyBudget should be less than budget";
   }
   if (!values.dailyCap) {
     errors.dailyCap = "Required";
@@ -39,12 +39,12 @@ const validate = (values: any) => {
 };
 
 class CampaignForm extends React.Component<any, any> {
-  componentDidMount() {
-    const initData = {
-      dailyCap: 1
-    };
-    this.props.initialize(initData);
-  }
+  // componentDidMount() {
+  //   const initData = {
+  //     dailyCap: 1
+  //   };
+  //   this.props.initialize(initData);
+  // }
   public render() {
     const {
       campaign,
