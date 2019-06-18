@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   backend:
@@ -17,17 +17,17 @@ services:
   postgres-ads:
     image: postgres
     environment:
-     - POSTGRES_PASSWORD=postgres
-     - POSTGRES_DB=ads
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=ads
     volumes:
-     - "../dbdata/ad:/var/lib/postgresql/data"
+      - "../dbdata/ad:/var/lib/postgresql/data"
   postgres-challenge:
     image: postgres
     environment:
-     - POSTGRES_PASSWORD=postgres
-     - POSTGRES_DB=challenge
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=challenge
     volumes:
-     - "../dbdata/challenge:/var/lib/postgresql/data"
+      - "../dbdata/challenge:/var/lib/postgresql/data"
   frontend:
     build: .
     ports:
@@ -39,12 +39,10 @@ services:
     environment:
       - REACT_APP_SERVER_ADDRESS=http://localhost:4001/v1
   challenge:
-      build: ../challenge-bypass-server
-      depends_on:
-        - postgres-challenge
-      links:
-        - postgres-challenge
-      environment:
-        - DATABASE_URL=postgres://postgres:postgres@postgres-challenge:5432/challenge?sslmode=disable
-
-
+    build: ../challenge-bypass-server
+    depends_on:
+      - postgres-challenge
+    links:
+      - postgres-challenge
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@postgres-challenge:5432/challenge?sslmode=disable
