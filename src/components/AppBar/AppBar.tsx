@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import * as S from "./AppBar.style";
 import Button from "../Button/Button";
 import { H6 } from "../Text/Text";
-import BottomNav from "./components/BottomNav/BottomNav";
+// import BottomNav from "./components/BottomNav/BottomNav";
 const linkStyle = { textDecoration: "none", color: "inherit" };
 import { Link, Redirect, Route, Switch } from "react-router-dom";
 import "../OutsideAlerter/OutSideAlerter";
