@@ -1,11 +1,4 @@
-import {
-  AppBar,
-  Card,
-  CardContent,
-  Toolbar,
-  Typography,
-  withStyles
-} from "@material-ui/core";
+import { AppBar, Card, CardContent, Toolbar, Typography, withStyles } from "@material-ui/core";
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -20,21 +13,15 @@ class CampaignNew extends React.Component<any, any> {
     this.props.getGeoCodes(this.props.auth);
   }
   public render() {
-    const {
-      classes,
-      create,
-      auth,
-      advertisers,
-      history,
-      geocodes,
-      match
-    } = this.props;
+    const { classes, create, auth, advertisers, history, geocodes, match } = this.props;
     const handleSubmit = async (value: any) => {
       value.advertiserId = match.params.advertiserId || advertisers[0].id;
       value.type = "paid";
+      value.source = "direct";
       value.budget = parseFloat(value.budget);
       value.dailyBudget = parseFloat(value.dailyBudget);
       value.dailyCap = parseFloat(value.dailyCap);
+
       const result = await create(value, auth);
       const url = this.props.match.url.replace("/new", "");
       history.push(`${url}/${result.id}`);
@@ -48,11 +35,7 @@ class CampaignNew extends React.Component<any, any> {
         </AppBar>
         <Card className={classes.card}>
           <CardContent>
-            <CampaignForm
-              geocodes={geocodes}
-              unlock={true}
-              onSubmit={handleSubmit}
-            />
+            <CampaignForm geocodes={geocodes} unlock={true} onSubmit={handleSubmit} />
           </CardContent>
         </Card>
       </div>
