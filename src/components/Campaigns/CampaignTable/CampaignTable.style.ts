@@ -16,12 +16,12 @@ export const TableHeader = styled("div")`
 export const HeaderCell = styled("div")`
   text-transform: uppercase;
   opacity: 0.85;
-  width: 110px;
+  width:130px;
 `;
 
 export const TableRow = styled("div")`
   display: flex;
-  height: 65px;
+  height: 95px;
   justify-content: space-between;
   border-bottom: 1px solid #e0e0e0;
   align-items: center;
@@ -30,7 +30,10 @@ export const TableRow = styled("div")`
 `;
 
 export const RowCell = styled("div")`
-  width: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width:130px;
   opacity: 0.9;
 `;
 

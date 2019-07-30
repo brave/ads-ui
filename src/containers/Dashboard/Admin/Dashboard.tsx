@@ -18,7 +18,7 @@ class Dashboard extends React.Component<any, any> {
         <Card>
           <S.CardHeader>
             <Text fontFamily={"Poppins"} sizes={[24, 24, 24, 24, 24]}>
-              Current Campaigns
+              Campaigns
             </Text>
           </S.CardHeader>
           <CampaignTable campaigns={null} match={null} />
