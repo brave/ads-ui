@@ -127,17 +127,17 @@ class PerformancesCharts extends React.Component<any, any> {
         labels: [] as any[]
       };
       if (report) {
-        report.reports = _.sortBy(report.reports, dateObj => {
+        report.records = _.sortBy(report.records, dateObj => {
           return moment(dateObj.confirmationsDate).unix();
         });
-        for (const record of report.reports) {
+        for (const record of report.records) {
           const label = moment(record.confirmationsDate).format("MMMM Do HA");
           let i = _.findIndex(dataObject.labels, o => {
             return o === label;
           });
           if (i < 0) {
             dataObject.labels.push(label);
-            dataObject.datasets[0].data.push(record.count);
+            dataObject.datasets[0].data.push(record.confirmationsCount);
             dataObject.datasets[1].data.push(0);
             dataObject.datasets[2].data.push(0);
             dataObject.datasets[3].data.push(0);
@@ -145,7 +145,7 @@ class PerformancesCharts extends React.Component<any, any> {
             i = dataObject.labels.length - 1;
           } else {
             dataObject.datasets[0].data[i] =
-              dataObject.datasets[0].data[i] + record.count;
+              dataObject.datasets[0].data[i] + record.confirmationsCount;
           }
 
           const dataset = _.find(dataObject.datasets, {
@@ -154,9 +154,9 @@ class PerformancesCharts extends React.Component<any, any> {
           if (dataset) {
             if ((dataset as any).data[i]) {
               (dataset as any).data[i] =
-                (dataset as any).data[i] + record.count;
+                (dataset as any).data[i] + record.confirmationsCount;
             } else {
-              (dataset as any).data[i] = record.count;
+              (dataset as any).data[i] = record.confirmationsCount;
             }
           }
         }
@@ -176,17 +176,17 @@ class PerformancesCharts extends React.Component<any, any> {
         labels: [] as any
       };
       if (report) {
-        for (const record of report.reports) {
+        for (const record of report.records) {
           const type = record.confirmationsType;
           const i = _.findIndex(dataObject.labels, o => {
             return o === type;
           });
           if (i < 0) {
             dataObject.labels.push(type);
-            dataObject.datasets[0].data.push(record.count);
+            dataObject.datasets[0].data.push(record.confirmationsCount);
           } else {
             dataObject.datasets[0].data[i] =
-              dataObject.datasets[0].data[i] + record.count;
+              dataObject.datasets[0].data[i] + record.confirmationsCount;
           }
         }
       }
@@ -215,8 +215,8 @@ class PerformancesCharts extends React.Component<any, any> {
                 confirmationDate[record.creativeInstanceId][
                   record.confirmationsType
                 ] = {
-                  count: record.count
-                };
+                    count: record.count
+                  };
               }
             } else {
               const creative: any = _.find(creatives, {
@@ -231,8 +231,8 @@ class PerformancesCharts extends React.Component<any, any> {
               confirmationDate[record.creativeInstanceId][
                 record.confirmationsType
               ] = {
-                count: record.count
-              };
+                  count: record.count
+                };
             }
           } else {
             const creative: any = _.find(creatives, { id: record.creativeId });
@@ -246,8 +246,8 @@ class PerformancesCharts extends React.Component<any, any> {
             data[confirmationsDate][record.creativeInstanceId][
               record.confirmationsType
             ] = {
-              count: record.count
-            };
+                count: record.count
+              };
           }
         }
       }
