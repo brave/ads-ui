@@ -26,9 +26,7 @@ class CampaignList extends React.Component<any, any> {
     return (
       <div className={classes.root}>
         <CampaignFilter />
-        <div className={classes.list}>
-          {listItems}
-        </div>
+        <div className={classes.list}>{listItems}</div>
         <Link className={classes.fab} to={match.url + "/new"}>
           <Button color="secondary" variant="fab">
             <Icon>add</Icon>
@@ -41,11 +39,16 @@ class CampaignList extends React.Component<any, any> {
 
 const mapStateToProps = (state: any, ownProps: any) => ({
   auth: state.authReducer,
-  campaigns: state.campaignReducer.campaigns,
+  campaigns: state.campaignReducer.campaigns
 });
 
 const mapDispathToProps = (dispatch: any, ownProps: any) => ({
-  GetCampaigns: (user: any) => dispatch(GetCampaigns(user)),
+  GetCampaigns: (user: any) => dispatch(GetCampaigns(user))
 });
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispathToProps)(CampaignList));
+export default withStyles(styles)(
+  connect(
+    mapStateToProps,
+    mapDispathToProps
+  )(CampaignList)
+);
