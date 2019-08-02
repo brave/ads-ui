@@ -12,10 +12,12 @@ import React from "react";
 import { Doughnut, Line } from "react-chartjs-2";
 import { CSVLink, CSVDownload } from "react-csv";
 import { Text } from "../Text/Text";
+import axios from "axios";
 
 import { styles } from "./PerformancesCharts.style";
 
 class PerformancesCharts extends React.Component<any, any> {
+
   constructor(props: any) {
     super(props);
   }
@@ -193,103 +195,15 @@ class PerformancesCharts extends React.Component<any, any> {
       return dataObject;
     };
 
-    const generateCSV = () => {
-      const data: any = {};
-      if (report) {
-        report.reports = _.sortBy(report.reports, dateObj => {
-          return moment(dateObj.confirmationsDate).unix();
-        });
-        for (const record of report.reports) {
-          const confirmationsDate = record.confirmationsDate;
-
-          const confirmationDate = data[confirmationsDate];
-          if (confirmationDate) {
-            const creativeInstanceId =
-              confirmationDate[record.creativeInstanceId];
-            if (creativeInstanceId) {
-              const confirmationType =
-                creativeInstanceId[record.confirmationsType];
-              if (confirmationType) {
-                confirmationType.count += record.count;
-              } else {
-                confirmationDate[record.creativeInstanceId][
-                  record.confirmationsType
-                ] = {
-                    count: record.count
-                  };
-              }
-            } else {
-              const creative: any = _.find(creatives, {
-                id: record.creativeId
-              });
-              confirmationDate[record.creativeInstanceId] = {
-                advertiserName: advertiser.name,
-                creativeTitle: creative.payload.title,
-                creativeBody: creative.payload.body,
-                campaignName: campaign.name
-              };
-              confirmationDate[record.creativeInstanceId][
-                record.confirmationsType
-              ] = {
-                  count: record.count
-                };
-            }
-          } else {
-            const creative: any = _.find(creatives, { id: record.creativeId });
-            data[confirmationsDate] = {};
-            data[confirmationsDate][record.creativeInstanceId] = {
-              advertiserName: advertiser.name,
-              creativeTitle: creative.payload.title,
-              creativeBody: creative.payload.body,
-              campaignName: campaign.name
-            };
-            data[confirmationsDate][record.creativeInstanceId][
-              record.confirmationsType
-            ] = {
-                count: record.count
-              };
-          }
-        }
-      }
-
-      this.csv =
-        "Day/Hour,Advertiser Name,Campaign Name,Creative Instance ID,Creative Title,Creative Body,View Counts,Click Counts,Landed Counts,Dismissed Counts";
-      _.forEach(data, (d, i) => {
-        _.forEach(d, (d2: any, i2: string) => {
-          this.csv += `\n${i},`;
-          this.csv += `"${d2.advertiserName}",`;
-          this.csv += `"${d2.campaignName}",`;
-          this.csv += `${i2},`;
-          this.csv += `"${d2.creativeTitle}",`;
-          this.csv += `"${d2.creativeBody}",`;
-          this.csv += `${d2.view ? d2.view.count : 0},`;
-          this.csv += `${d2.click ? d2.click.count : 0},`;
-          this.csv += `${d2.landed ? d2.landed.count : 0},`;
-          this.csv += `${d2.dismiss ? d2.dismiss.count : 0},`;
-        });
-      });
-      return true;
-    };
-
     const getActionButtons = () => {
       return (
         <React.Fragment>
-          {campaign && campaign.name && (
-            <CSVLink
-              className={classes.csv}
-              filename={`campaign-${campaign.name}.csv`}
-              data={this.csv}
-            >
-              <Button color="primary">
-                <Icon>get_app</Icon> Download CSV
-              </Button>
-            </CSVLink>
-          )}
+          <Button onClick={() => { this.downloadCSV() }} color="primary">
+            <Icon>get_app</Icon> Download CSV
+          </Button>
         </React.Fragment>
       );
     };
-
-    generateCSV();
 
     return (
       <div className={classes.root}>
@@ -339,6 +253,30 @@ class PerformancesCharts extends React.Component<any, any> {
       </div>
     );
   }
+
+  async downloadCSV() {
+    var url = window.location.href.split("/");
+    var userId = url[url.length - 6];
+    let campaignId = url[url.length - 2];
+
+    axios(`${process.env.REACT_APP_SERVER_ADDRESS}/report/campaign/csv/${campaignId}`, {
+      headers: {
+        "Authorization": `Bearer ${this.props.auth.accessToken}`,
+        "-x-user": userId,
+        "Content-Type": "application/json",
+      }
+    })
+      .then(response => {
+        const file = new Blob(
+          [response.data],
+          { type: 'text/csv' });
+        const fileURL = URL.createObjectURL(file);
+        window.open(fileURL);
+      })
+      .catch(error => {
+      });
+  }
+
 }
 
 export default withStyles(styles)(PerformancesCharts);

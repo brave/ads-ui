@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Text } from "../../../components/Text/Text";
 import * as S from "./CampaignTable.style";
+import { Link } from "react-router-dom";
 
 interface ICampaignTableProps {
   campaigns: any;
@@ -15,8 +16,7 @@ interface ICampaignTableState {
   campaignsPerPage: any;
 }
 
-//#d1d1da
-//#fc4145
+const linkStyle = { textDecoration: "none", color: "inherit" };
 
 export default class CampaignTable extends React.Component<ICampaignTableProps, ICampaignTableState> {
   constructor(props) {
@@ -24,7 +24,7 @@ export default class CampaignTable extends React.Component<ICampaignTableProps, 
     this.state = {
       data: [],
       currentPage: 1,
-      campaignsPerPage: 2
+      campaignsPerPage: 10
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -137,6 +137,13 @@ function Status(state) {
           {state.charAt(0).toUpperCase() + state.slice(1)}
         </Text>
       </div>)
+    case 'under_review':
+      return (<div style={{ display: "flex" }}>
+        <S.PendingSymbol />
+        <Text fontFamily={"Muli"} sizes={[16, 16, 16, 16, 16]}>
+          Review
+          </Text>
+      </div>)
     default:
       return (<div style={{ display: "flex" }}>
         <S.PendingSymbol />
@@ -151,7 +158,7 @@ function Pacing(index) {
 
   if (index >= 1.50) {
     return (<React.Fragment>
-      <Text color={"#07C806"} fontFamily={"Muli"} sizes={[16, 16, 24, 24, 24]}>
+      <Text color={"#fc4145"} fontFamily={"Muli"} sizes={[16, 16, 24, 24, 24]}>
         {index.toFixed(2)}
       </Text>
     </React.Fragment>)
@@ -165,7 +172,7 @@ function Pacing(index) {
   }
   else if (index > 0.01 && index <= 0.50) {
     return (<React.Fragment>
-      <Text color={"#07C806"} fontFamily={"Muli"} sizes={[16, 16, 24, 24, 24]}>
+      <Text color={"#fc4145"} fontFamily={"Muli"} sizes={[16, 16, 24, 24, 24]}>
         {index.toFixed(2)}
       </Text>
     </React.Fragment>)
@@ -181,18 +188,17 @@ function Pacing(index) {
 
 function TableRows(props) {
   const { data, currentPage, campaignsPerPage } = props;
-
   // Logic for displaying todos
   const indexOfLastCampaign = currentPage * campaignsPerPage;
   const indexOfFirstCampaign = indexOfLastCampaign - campaignsPerPage;
   const currentCampaigns = data.slice(indexOfFirstCampaign, indexOfLastCampaign);
-  console.log(props);
   const tableRows = currentCampaigns.map((campaign, index) =>
+    // <Link style={linkStyle} to={`/admin/main/users/${campaign.userId}/advertiser/${campaign.advertiserId}/campaign/${campaign.id}`}>
     <S.TableRow key={index}>
       <S.RowCell>
         <div>
           <Text fontFamily={"Muli"} sizes={[16, 16, 16, 16, 16]}>
-            {campaign.advertiserName}
+            {campaign.brand}
           </Text>
         </div>
       </S.RowCell>
@@ -270,6 +276,7 @@ function TableRows(props) {
         </Text>
       </S.RowCell>
     </S.TableRow>
+    // </Link>
   );
 
   return (

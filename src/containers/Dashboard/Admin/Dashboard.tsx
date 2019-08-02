@@ -26,14 +26,12 @@ class Dashboard extends React.Component<any, IDashboardState> {
   }
 
   async fetchCampaigns() {
-    console.log(`requesting with ${this.props.auth.accessToken}`)
     const response = await axios.get(`${process.env.REACT_APP_SERVER_ADDRESS}/report/campaign/list`, {
       headers: {
         "Authorization": `Bearer ${this.props.auth.accessToken}`,
         "Content-Type": "application/json",
       },
     });
-    console.log(response);
     this.setState({ data: response.data })
   }
 

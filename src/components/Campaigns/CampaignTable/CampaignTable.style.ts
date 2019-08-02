@@ -27,6 +27,10 @@ export const TableRow = styled("div")`
   align-items: center;
   padding-left: 12px;
   padding-right: 12px;
+  &:hover {
+    background-color: #fafafa;
+    color: #3f404b;
+  }
 `;
 
 export const RowCell = styled("div")`
