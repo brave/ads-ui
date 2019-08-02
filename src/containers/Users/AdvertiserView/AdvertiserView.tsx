@@ -144,7 +144,7 @@ class AdvertiserView extends React.Component<any, any> {
           </CardContent>
         </Card>
         {/* New */}
-        <Card>
+        {/* <Card>
           <Text fontFamily={"Poppins"} sizes={[24, 24, 24, 24, 24]}>
             Campaigns
           </Text>
@@ -155,9 +155,8 @@ class AdvertiserView extends React.Component<any, any> {
               marginRight: "12px"
             }}
           >
-            <CampaignTable campaigns={campaigns} match={match} />
           </div>
-        </Card>
+        </Card> */}
         <Card>
           <CardHeader title="Creatives" />
           <CardContent className={classes.content}>

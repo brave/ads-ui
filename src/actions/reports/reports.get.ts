@@ -26,7 +26,7 @@ export const GetReports = (user: IAuthPayload, campaignId: string) => {
   return async (dispatch: any) => {
     try {
       dispatch(GetReportsStart());
-      const response = await axios.get(`${process.env.REACT_APP_SERVER_ADDRESS}/report/campaign/${campaignId}`, {
+      const response = await axios.get(`${process.env.REACT_APP_SERVER_ADDRESS}/report/campaign/list`, {
         headers: {
           "Authorization": `Bearer ${user.accessToken}`,
           "Content-Type": "application/json",

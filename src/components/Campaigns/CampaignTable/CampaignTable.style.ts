@@ -16,12 +16,12 @@ export const TableHeader = styled("div")`
 export const HeaderCell = styled("div")`
   text-transform: uppercase;
   opacity: 0.85;
-  width:130px;
+  width:110px;
 `;
 
 export const TableRow = styled("div")`
   display: flex;
-  height: 95px;
+  height: 85px;
   justify-content: space-between;
   border-bottom: 1px solid #e0e0e0;
   align-items: center;
@@ -33,7 +33,7 @@ export const RowCell = styled("div")`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width:130px;
+  width: 110px;
   opacity: 0.9;
 `;
 
@@ -49,7 +49,18 @@ export const ActiveSymbol = styled("div")`
   border-radius: 100%;
   height: 10px;
   width: 10px;
-  background-color: #20c997;
+  background-color: #07C806;
   opacity: 0.9;
-  margin-right: 4px;
+  margin-right: 5px;
+  margin-top: 6px;
+`;
+
+export const PendingSymbol = styled("div")`
+  border-radius: 100%;
+  height: 10px;
+  width: 10px;
+  background-color: #d1d1da;
+  opacity: 0.9;
+  margin-right: 5px;
+  margin-top: 6px;
 `;

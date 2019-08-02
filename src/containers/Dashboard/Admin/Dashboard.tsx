@@ -5,23 +5,48 @@ import Card from "../../../components/Card/Card";
 import { Text } from "../../../components/Text/Text";
 import CampaignTable from "../../../components/Campaigns/CampaignTable/CampaignTable";
 import * as S from "./Dashboard.style";
+import axios from "axios";
 
-import { GetAllCampaigns } from "../../../actions";
+import { GetCampaigns } from "../../../actions";
 
-class Dashboard extends React.Component<any, any> {
+interface IDashboardState {
+  data: any;
+}
+
+class Dashboard extends React.Component<any, IDashboardState> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: []
+    }
+  }
   public componentDidMount() {
     this.props.GetAllCampaigns(this.props.auth);
+    this.fetchCampaigns();
   }
+
+  async fetchCampaigns() {
+    console.log(`requesting with ${this.props.auth.accessToken}`)
+    const response = await axios.get(`${process.env.REACT_APP_SERVER_ADDRESS}/report/campaign/list`, {
+      headers: {
+        "Authorization": `Bearer ${this.props.auth.accessToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(response);
+    this.setState({ data: response.data })
+  }
+
   public render() {
     return (
       <div>
         <Card>
           <S.CardHeader>
-            <Text fontFamily={"Poppins"} sizes={[24, 24, 24, 24, 24]}>
+            <Text fontFamily={"Poppins"} sizes={[20, 20, 20, 20, 20]}>
               Campaigns
             </Text>
           </S.CardHeader>
-          <CampaignTable campaigns={null} match={null} />
+          <CampaignTable campaigns={null} match={null} auth={this.props.auth} data={this.state.data} />
         </Card>
       </div>
     );
@@ -34,7 +59,7 @@ const mapStateToProps = (state: any, ownProps: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
-  GetAllCampaigns: (auth: any) => dispatch(GetAllCampaigns(auth))
+  GetAllCampaigns: (auth: any) => dispatch(GetCampaigns(auth))
 });
 
 export default connect(

@@ -7,19 +7,19 @@ import { OpenSnackBar } from "../snackbar";
 export const GET_CAMPAIGNS_START = "GETCAMPAIGNSSTART";
 export const GetCampaignsStart = (): ICampaignAction => ({
   payload: null,
-  type: GET_CAMPAIGNS_START
+  type: GET_CAMPAIGNS_START,
 });
 
 export const GET_CAMPAIGNS_SUCCESSFUL = "GETCAMPAIGNSUCCESSFUL";
 export const GetCampaignSuccessful = (payload: ICampaignPayload[]): ICampaignAction => ({
   payload,
-  type: GET_CAMPAIGNS_SUCCESSFUL
+  type: GET_CAMPAIGNS_SUCCESSFUL,
 });
 
 export const GET_CAMPAIGNS_FAILD = "GETCAMPAIGNSFAILD";
 export const GetCampaignsFaild = (): ICampaignAction => ({
   payload: null,
-  type: GET_CAMPAIGNS_FAILD
+  type: GET_CAMPAIGNS_FAILD,
 });
 
 export const GetCampaigns = (auth: IAuthPayload, userId?: string) => {
@@ -29,41 +29,12 @@ export const GetCampaigns = (auth: IAuthPayload, userId?: string) => {
       const response = await axios.get(`${process.env.REACT_APP_SERVER_ADDRESS}/campaign`, {
         headers: {
           "-x-user": userId,
-          Authorization: `Bearer ${auth.accessToken}`,
-          "Content-Type": "application/json"
-        }
+          "Authorization": `Bearer ${auth.accessToken}`,
+          "Content-Type": "application/json",
+        },
       });
       dispatch(GetCampaignSuccessful(response.data));
       dispatch(OpenSnackBar("Campaign Get Successfully"));
-      return Promise.resolve(response.data);
-    } catch (error) {
-      dispatch(GetCampaignsFaild());
-      if (error.response) {
-        dispatch(OpenSnackBar(`Get Campaigns  Failed: ${error.response.data.error}`));
-      } else if (error.request) {
-        dispatch(OpenSnackBar(`Get Campaigns  Failed: Network Error`));
-      } else {
-        dispatch(OpenSnackBar(`Get Campaigns  Failed: ${error.message}`));
-      }
-      return Promise.reject(error);
-    }
-  };
-};
-
-export const GetAllCampaigns = (auth: IAuthPayload) => {
-  return async (dispatch: any) => {
-    try {
-      dispatch(GetCampaignsStart);
-      const response = await axios.get(`${process.env.REACT_APP_SERVER_ADDRESS}/campaign/test`, {
-        headers: {
-          Authorization: `Bearer ${auth.accessToken}`,
-          "Content-Type": "application/json"
-        }
-      });
-      dispatch(GetCampaignSuccessful(response.data));
-      dispatch(OpenSnackBar("Get All Campaigns Successfully"));
-      console.log("heelo");
-      console.log(response.data);
       return Promise.resolve(response.data);
     } catch (error) {
       dispatch(GetCampaignsFaild());
