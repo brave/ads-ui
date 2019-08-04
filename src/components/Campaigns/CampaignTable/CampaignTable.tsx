@@ -2,6 +2,7 @@ import * as React from "react";
 import { Text } from "../../../components/Text/Text";
 import * as S from "./CampaignTable.style";
 import { Link } from "react-router-dom";
+import { Icon } from "@material-ui/core";
 
 interface ICampaignTableProps {
   campaigns: any;
@@ -27,12 +28,26 @@ export default class CampaignTable extends React.Component<ICampaignTableProps, 
       campaignsPerPage: 10
     };
     this.handleClick = this.handleClick.bind(this);
+    this.incrementPage = this.incrementPage.bind(this);
+    this.decrementPage = this.decrementPage.bind(this);
   }
 
   handleClick(event) {
     this.setState({
       currentPage: Number(event.target.id)
     });
+  }
+
+  incrementPage() {
+    if (this.state.currentPage < Math.ceil(this.props.data.length / this.state.campaignsPerPage)) {
+      this.setState({ currentPage: this.state.currentPage + 1 })
+    }
+  }
+
+  decrementPage() {
+    if (this.state.currentPage > 1) {
+      this.setState({ currentPage: this.state.currentPage - 1 })
+    }
   }
 
   public render() {
@@ -42,16 +57,18 @@ export default class CampaignTable extends React.Component<ICampaignTableProps, 
     }
 
     const renderPageNumbers = pageNumbers.map(number => {
-      return (
-        <li
-          key={number}
-          id={number.toString()}
-          onClick={this.handleClick}
-          style={{ display: "flex", cursor: 'pointer', marginLeft: "4px", marginRight: "4px" }}
-        >
-          {number}
-        </li>
-      );
+      if (number === this.state.currentPage) {
+        return (
+          <li
+            key={number}
+            id={number.toString()}
+            onClick={this.handleClick}
+            style={{ display: "flex", cursor: 'pointer', marginLeft: "4px", marginRight: "4px" }}
+          >
+            {number} of {Math.ceil(this.props.data.length / this.state.campaignsPerPage)}
+          </li>
+        );
+      }
     });
     return (
 
@@ -95,16 +112,6 @@ export default class CampaignTable extends React.Component<ICampaignTableProps, 
             </S.HeaderCell>
             <S.HeaderCell>
               <Text fontFamily={"Poppins"} fontWeight={500} color={"#7c7d8c"} sizes={[13, 13, 13, 13, 13]}>
-                Dismiss
-            </Text>
-            </S.HeaderCell>
-            <S.HeaderCell>
-              <Text fontFamily={"Poppins"} fontWeight={500} color={"#7c7d8c"} sizes={[13, 13, 13, 13, 13]}>
-                Clicks
-            </Text>
-            </S.HeaderCell>
-            <S.HeaderCell>
-              <Text fontFamily={"Poppins"} fontWeight={500} color={"#7c7d8c"} sizes={[13, 13, 13, 13, 13]}>
                 Lands
             </Text>
             </S.HeaderCell>
@@ -117,11 +124,11 @@ export default class CampaignTable extends React.Component<ICampaignTableProps, 
           <TableRows data={this.props.data} currentPage={this.state.currentPage} campaignsPerPage={this.state.campaignsPerPage} />
         </React.Fragment>
         <div style={{ width: "100%", display: "flex", justifyContent: "flex-end", paddingTop: "28px", paddingRight: '14px' }}>
-
-          <ul style={{ display: "flex" }}>
+          <Icon style={{ cursor: "pointer" }} onClick={this.decrementPage}>chevron_left</Icon>
+          <ul style={{ display: "flex", marginTop: "3.5px", paddingLeft: "0" }}>
             {renderPageNumbers}
           </ul>
-
+          <Icon style={{ cursor: "pointer" }} onClick={this.incrementPage}>chevron_right</Icon>
         </div>
       </React.Fragment>
     );
@@ -133,21 +140,21 @@ function Status(state) {
     case 'active':
       return (<div style={{ display: "flex" }}>
         <S.ActiveSymbol />
-        <Text fontFamily={"Muli"} sizes={[16, 16, 16, 16, 16]}>
+        <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
           {state.charAt(0).toUpperCase() + state.slice(1)}
         </Text>
       </div>)
     case 'under_review':
       return (<div style={{ display: "flex" }}>
         <S.PendingSymbol />
-        <Text fontFamily={"Muli"} sizes={[16, 16, 16, 16, 16]}>
+        <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
           Review
           </Text>
       </div>)
     default:
       return (<div style={{ display: "flex" }}>
         <S.PendingSymbol />
-        <Text fontFamily={"Muli"} sizes={[16, 16, 16, 16, 16]}>
+        <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
           {state.charAt(0).toUpperCase() + state.slice(1)}
         </Text>
       </div>)
@@ -158,28 +165,28 @@ function Pacing(index) {
 
   if (index >= 1.50) {
     return (<React.Fragment>
-      <Text color={"#fc4145"} fontFamily={"Muli"} sizes={[16, 16, 24, 24, 24]}>
+      <Text color={"#fc4145"} fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
         {index.toFixed(2)}
       </Text>
     </React.Fragment>)
   }
   else if (index >= 0.50 && index <= 1.50) {
     return (<React.Fragment>
-      <Text color={"#07C806"} fontFamily={"Muli"} sizes={[16, 16, 24, 24, 24]}>
+      <Text color={"#07C806"} fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
         {index.toFixed(2)}
       </Text>
     </React.Fragment>)
   }
   else if (index > 0.01 && index <= 0.50) {
     return (<React.Fragment>
-      <Text color={"#fc4145"} fontFamily={"Muli"} sizes={[16, 16, 24, 24, 24]}>
+      <Text color={"#fc4145"} fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
         {index.toFixed(2)}
       </Text>
     </React.Fragment>)
   }
   else {
     return (<React.Fragment>
-      <Text color={"#1C1C1C"} fontFamily={"Muli"} sizes={[16, 16, 24, 24, 24]}>
+      <Text color={"#1C1C1C"} fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
         N/A
       </Text>
     </React.Fragment>)
@@ -197,14 +204,14 @@ function TableRows(props) {
     <S.TableRow key={index}>
       <S.RowCell>
         <div>
-          <Text fontFamily={"Muli"} sizes={[16, 16, 16, 16, 16]}>
+          <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
             {campaign.brand}
           </Text>
         </div>
       </S.RowCell>
       <S.RowCell>
         <div>
-          <Text fontFamily={"Muli"} sizes={[16, 16, 16, 16, 16]}>
+          <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
             {campaign.name}
           </Text>
         </div>
@@ -219,10 +226,10 @@ function TableRows(props) {
       <S.RowCell>
         <div>
           {campaign.currency === "USD" ?
-            <Text fontFamily={"Muli"} sizes={[16, 16, 16, 16, 16]}>
+            <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
               ${parseFloat(campaign.budget).toLocaleString('en')}
             </Text> :
-            <Text fontFamily={"Muli"} sizes={[16, 16, 16, 16, 16]}>
+            <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
               {parseFloat(campaign.budget).toLocaleString('en')} BAT
           </Text>
           }
@@ -230,42 +237,28 @@ function TableRows(props) {
       </S.RowCell>
       <S.RowCell>
         <div>
-          <Text fontFamily={"Muli"} sizes={[16, 16, 16, 16, 16]}>
+          <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
             {new Date(campaign.startAt).toLocaleDateString("en-US")}
           </Text>
         </div>
       </S.RowCell>
       <S.RowCell>
         <div>
-          <Text fontFamily={"Muli"} sizes={[16, 16, 16, 16, 16]}>
+          <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
             {new Date(campaign.endAt).toLocaleDateString("en-US")}
           </Text>
         </div>
       </S.RowCell>
       <S.RowCell>
         <div>
-          <Text fontFamily={"Muli"} sizes={[16, 16, 16, 16, 16]}>
+          <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
             {parseInt(campaign.view).toLocaleString('en')}
           </Text>
         </div>
       </S.RowCell>
       <S.RowCell>
         <div>
-          <Text fontFamily={"Muli"} sizes={[16, 16, 16, 16, 16]}>
-            {parseInt(campaign.dismiss).toLocaleString('en')}
-          </Text>
-        </div>
-      </S.RowCell>
-      <S.RowCell>
-        <div>
-          <Text fontFamily={"Muli"} sizes={[16, 16, 16, 16, 16]}>
-            {parseInt(campaign.click).toLocaleString('en')}
-          </Text>
-        </div>
-      </S.RowCell>
-      <S.RowCell>
-        <div>
-          <Text fontFamily={"Muli"} sizes={[16, 16, 16, 16, 16]}>
+          <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
             {parseInt(campaign.landed).toLocaleString('en')}
           </Text>
         </div>
