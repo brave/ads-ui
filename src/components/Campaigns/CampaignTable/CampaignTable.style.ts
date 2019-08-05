@@ -16,7 +16,7 @@ export const TableHeader = styled("div")`
 export const HeaderCell = styled("div")`
   text-transform: uppercase;
   opacity: 0.85;
-  width:110px;
+  width:125px;
 `;
 
 export const TableRow = styled("div")`
@@ -31,14 +31,18 @@ export const TableRow = styled("div")`
     background-color: #fafafa;
     color: #3f404b;
   }
+  overflow-wrap: break-word;
 `;
 
 export const RowCell = styled("div")`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 110px;
+  width: 125px;
+  height: 100%;
   opacity: 0.9;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const RejectedSymbol = styled("div")`
@@ -51,20 +55,22 @@ export const RejectedSymbol = styled("div")`
 
 export const ActiveSymbol = styled("div")`
   border-radius: 100%;
-  height: 10px;
-  width: 10px;
+  height: 9px;
+  width: 9px;
   background-color: #07C806;
   opacity: 0.9;
   margin-right: 5px;
   margin-top: 6px;
+  margin-bottom: 1px;
 `;
 
 export const PendingSymbol = styled("div")`
   border-radius: 100%;
-  height: 10px;
-  width: 10px;
+  height: 9px;
+  width: 9px;
   background-color: #d1d1da;
   opacity: 0.9;
   margin-right: 5px;
   margin-top: 6px;
+  margin-bottom: 1px;
 `;

@@ -43,7 +43,7 @@ class CampaignPerformance extends React.Component<any, any> {
           report={report}
           advertiser={advertiser}
           creatives={creatives}
-          user={this.props.user}
+          userId={this.props.match.params.userId}
           auth={this.props.auth}
         />
       </div>
