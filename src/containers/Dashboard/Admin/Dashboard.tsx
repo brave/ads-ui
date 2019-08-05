@@ -44,7 +44,7 @@ class Dashboard extends React.Component<any, IDashboardState> {
               Campaigns
             </Text>
           </S.CardHeader>
-          {/* <CampaignTable campaigns={null} match={null} auth={this.props.auth} data={this.state.data} /> */}
+          <CampaignTable campaigns={null} match={null} auth={this.props.auth} data={this.state.data} />
         </Card>
       </div>
     );
