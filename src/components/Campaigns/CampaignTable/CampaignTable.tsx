@@ -123,7 +123,7 @@ export default class CampaignTable extends React.Component<ICampaignTableProps, 
           </S.TableHeader>
           <TableRows data={this.props.data} currentPage={this.state.currentPage} campaignsPerPage={this.state.campaignsPerPage} />
         </React.Fragment>
-        <div style={{ width: "100%", display: "flex", justifyContent: "flex-end", paddingTop: "28px", paddingRight: '14px' }}>
+        <div style={{ width: "100%", display: "flex", justifyContent: "flex-end", paddingTop: "28px", paddingBottom: "28px", paddingRight: '14px' }}>
           <Icon style={{ cursor: "pointer" }} onClick={this.decrementPage}>chevron_left</Icon>
           <ul style={{ display: "flex", marginTop: "3.5px", paddingLeft: "0" }}>
             {renderPageNumbers}
