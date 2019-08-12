@@ -31,8 +31,10 @@ import App from "../../../App";
 
 const mainStyle = {
   padding: "24px",
-  width: "100%",
   height: "100%",
+  width: "1200px",
+  marginLeft: "auto",
+  marginRight: "auto",
   overflow: "scroll"
 };
 
