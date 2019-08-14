@@ -58,7 +58,7 @@ class CampaignList extends React.Component<any, any> {
     return (
       <div className={classes.root}>
         <Card>
-          <CardContent>
+          <CardContent style={{ padding: "0" }}>
             <Table>
               <TableHead>
                 <TableRow>

@@ -5,33 +5,57 @@ import { Link } from "react-router-dom";
 
 import { GetCampaigns } from "../../../actions";
 
-import CampaignFilter from "../CampaignFilter/CampaignFilter";
-import CampaignItem from "../CampaignItem/CampaignItem";
+import axios from "axios";
+import CampaignTable from "../CampaignTable/CampaignTable";
 
-import { styles } from "./CampaignList.style";
+import * as S from "./CampaignList.style";
+import Card from "../../Card/Card";
+import { Text } from "../../Text/Text";
 
-class CampaignList extends React.Component<any, any> {
+import {
+  GetCampaignList,
+} from "../../../actions";
+
+interface ICampaignListState {
+  data: any;
+}
+
+class CampaignList extends React.Component<any, ICampaignListState> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: []
+    }
+  }
   public componentDidMount() {
-    this.props.GetCampaigns(this.props.auth);
+    this.fetchCampaigns();
+    this.props.GetCampaignList(this.props.auth);
+    console.log("hehe")
+    console.log(this.props.campaignList)
+  }
+
+  async fetchCampaigns() {
+    const response = await axios.get(`${process.env.REACT_APP_SERVER_ADDRESS}/report/campaign/list`, {
+      headers: {
+        "Authorization": `Bearer ${this.props.auth.accessToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+    this.setState({ data: response.data })
   }
   public render() {
-    const { classes, match, campaigns } = this.props;
-    const listItems = campaigns.map((item: any) => {
-      return (
-        <div key={item.id} className={classes.item}>
-          <CampaignItem match={match} campaign={item} />
-        </div>
-      );
-    });
+    const { campaignList } = this.props;
     return (
-      <div className={classes.root}>
-        <CampaignFilter />
-        <div className={classes.list}>{listItems}</div>
-        <Link className={classes.fab} to={match.url + "/new"}>
-          <Button color="secondary" variant="fab">
-            <Icon>add</Icon>
-          </Button>
-        </Link>
+      <div>
+        <Card>
+          <S.CardHeader>
+            <Text fontFamily={"Poppins"} sizes={[20, 20, 20, 20, 20]}>
+              Campaigns
+              {campaignList}
+            </Text>
+          </S.CardHeader>
+          <CampaignTable campaigns={null} match={null} auth={this.props.auth} data={this.state.data} />
+        </Card>
       </div>
     );
   }
@@ -39,16 +63,16 @@ class CampaignList extends React.Component<any, any> {
 
 const mapStateToProps = (state: any, ownProps: any) => ({
   auth: state.authReducer,
-  campaigns: state.campaignReducer.campaigns
+  campaigns: state.campaignReducer.campaigns,
+  campaignList: state.campaignListReducer.campaignList
 });
 
-const mapDispathToProps = (dispatch: any, ownProps: any) => ({
-  GetCampaigns: (user: any) => dispatch(GetCampaigns(user))
+const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
+  GetCampaignList: (auth: any) => dispatch(GetCampaignList(auth))
 });
 
-export default withStyles(styles)(
+export default
   connect(
     mapStateToProps,
-    mapDispathToProps
-  )(CampaignList)
-);
+    mapDispatchToProps
+  )(CampaignList);

@@ -130,7 +130,9 @@ export default class CampaignTable extends React.Component<ICampaignTableProps, 
           </ul>
           <Icon style={{ cursor: "pointer" }} onClick={this.incrementPage}>chevron_right</Icon>
         </div>
-      </React.Fragment>
+
+
+      </React.Fragment >
     );
   }
 }

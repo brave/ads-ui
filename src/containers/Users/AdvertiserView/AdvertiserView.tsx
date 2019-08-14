@@ -114,11 +114,11 @@ class AdvertiserView extends React.Component<any, any> {
           marginBottom: "72px"
         }}
       >
-        <Card>
-          <Text fontFamily={"Poppins"} sizes={[24, 24, 24, 24, 24]}>
-            {advertiser.name}
-          </Text>
-        </Card>
+
+        <Text fontFamily={"Poppins"} sizes={[24, 24, 24, 24, 24]}>
+          {advertiser.name}
+        </Text>
+
         {/* <Card>
           <CardHeader title="Detail" action={getLockButton()} />
           <CardContent className={classes.content}>
@@ -137,12 +137,12 @@ class AdvertiserView extends React.Component<any, any> {
           </CardContent>
         </Card> */}
         {/* Old */}
-        <Card>
-          <CardHeader title="Campaigns" />
-          <CardContent className={classes.content}>
-            <CampaignTableList campaigns={campaigns} match={match} />
-          </CardContent>
-        </Card>
+
+        <CardHeader style={{ padding: "0" }} title="Campaigns" />
+        <CardContent style={{ padding: "0", marginLeft: "-30px" }} className={classes.content}>
+          <CampaignTableList style={{ padding: "0" }} campaigns={campaigns} match={match} />
+        </CardContent>
+
         {/* New */}
         {/* <Card>
           <Text fontFamily={"Poppins"} sizes={[24, 24, 24, 24, 24]}>
@@ -157,12 +157,12 @@ class AdvertiserView extends React.Component<any, any> {
           >
           </div>
         </Card> */}
-        <Card>
-          <CardHeader title="Creatives" />
-          <CardContent className={classes.content}>
-            <CreativeTableList creatives={creatives} match={match} />
-          </CardContent>
-        </Card>
+
+        <CardHeader title="Creatives" />
+        <CardContent style={{ padding: "0", marginLeft: "-30px" }} className={classes.content}>
+          <CreativeTableList creatives={creatives} match={match} />
+        </CardContent>
+
       </div>
     );
   }
