@@ -24,7 +24,7 @@ class CampaignList extends React.Component<any, any> {
     super(props);
     this.state = {
       page: 0,
-      rowsPerPage: 10,
+      rowsPerPage: 100,
     };
   }
 
