@@ -23,10 +23,10 @@ export const TableRow = styled("div")`
   display: flex;
   height: 55px;
   justify-content: space-between;
-  border-bottom: 1px solid #e0e0e0;
   align-items: center;
   padding-left: 12px;
   padding-right: 12px;
+  border-bottom: 1px solid #e6eaea;
   &:hover {
     background-color: #fafafa;
     color: #3f404b;
@@ -43,6 +43,7 @@ export const RowCell = styled("div")`
   opacity: 0.9;
   overflow: hidden;
   text-overflow: ellipsis;
+
 `;
 
 export const RejectedSymbol = styled("div")`
