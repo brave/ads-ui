@@ -21,7 +21,7 @@ export const HeaderCell = styled("div")`
 
 export const TableRow = styled("div")`
   display: flex;
-  height: 85px;
+  height: 55px;
   justify-content: space-between;
   border-bottom: 1px solid #e0e0e0;
   align-items: center;
