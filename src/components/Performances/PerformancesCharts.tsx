@@ -195,10 +195,10 @@ class PerformancesCharts extends React.Component<any, any> {
       return dataObject;
     };
 
-    const getActionButtons = () => {
+    const getActionButtons = (campaign) => {
       return (
         <React.Fragment>
-          <Button onClick={() => { this.downloadCSV() }} color="primary">
+          <Button onClick={() => { this.downloadCSV(campaign) }} color="primary">
             <Icon>get_app</Icon> Download CSV
           </Button>
         </React.Fragment>
@@ -209,7 +209,7 @@ class PerformancesCharts extends React.Component<any, any> {
       <div className={classes.root}>
         {campaign && (
           <Card className={classes.infoCard}>
-            <CardHeader action={getActionButtons()} />
+            <CardHeader action={getActionButtons(campaign)} />
             <CardContent>
               <Card className={classes.infoCard}>
                 <Text
@@ -254,7 +254,7 @@ class PerformancesCharts extends React.Component<any, any> {
     );
   }
 
-  async downloadCSV() {
+  async downloadCSV(campaign) {
     var url = window.location.href.split("/");
     var userId = url[url.length - 6];
     let campaignId = url[url.length - 2];
@@ -263,15 +263,19 @@ class PerformancesCharts extends React.Component<any, any> {
       headers: {
         "Authorization": `Bearer ${this.props.auth.accessToken}`,
         "-x-user": userId,
-        "Content-Type": "application/json",
+        "Content-Type": "text/csv",
       }
     })
       .then(response => {
         const file = new Blob(
           [response.data],
-          { type: 'text/csv' });
+          { type: 'text/csv', endings: 'transparent' });
         const fileURL = URL.createObjectURL(file);
-        window.open(fileURL);
+        const link = document.createElement('a');
+        link.href = fileURL;
+        link.setAttribute('download', `${campaign.name}.csv`);
+        document.body.appendChild(link);
+        link.click();
       })
       .catch(error => {
       });
