@@ -38,14 +38,6 @@ class Dashboard extends React.Component<any, IDashboardState> {
   public render() {
     return (
       <div>
-        <Card>
-          <S.CardHeader>
-            <Text fontFamily={"Poppins"} sizes={[20, 20, 20, 20, 20]}>
-              Campaigns
-            </Text>
-          </S.CardHeader>
-          <CampaignTable campaigns={null} match={null} auth={this.props.auth} data={this.state.data} />
-        </Card>
       </div>
     );
   }

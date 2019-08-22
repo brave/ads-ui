@@ -110,12 +110,21 @@ function renderNav(props) {
               </Text>
             </S.Nav>
           </Link>
-          {/* <S.Nav selected={false}>
-            <S.SubContainer>
-              <Icon>apps</Icon>
-            </S.SubContainer>
-            <H5 fontFamily={"Poppins"}>Campaigns</H5>
-          </S.Nav>
+          <Link style={linkStyle} to={props.match.url + "/campaigns"}>
+            <S.Nav
+              selected={window.location.pathname.includes(
+                props.match.url + "/campaigns"
+              )}
+            >
+              <S.SubContainer>
+                <Icon>apps</Icon>
+              </S.SubContainer>
+              <Text sizes={[16, 16, 16, 16, 16]} fontFamily={"Poppins"}>
+                Campaigns
+              </Text>
+            </S.Nav>
+          </Link>
+          {/* 
           <S.Nav selected={false}>
             <S.SubContainer>
               <Icon>bar_chart</Icon>

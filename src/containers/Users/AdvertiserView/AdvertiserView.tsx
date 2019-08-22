@@ -95,30 +95,30 @@ class AdvertiserView extends React.Component<any, any> {
             <Typography variant="h5">{advertiser.name}</Typography>
           </Toolbar>
         </AppBar>
-        <Card className={classes.infoCard}>
-          <CardHeader title="Detail" action={getLockButton()} />
-          <CardContent className={classes.content}>
-            <AdvertiserForm auth={auth} advertiser={advertiser} unlock={unlock} onSubmit={handleSubmit} />
-          </CardContent>
-        </Card>
-        <Card className={classes.infoCard}>
-          <CardHeader title="Invoices" />
-          <CardContent className={classes.content}>
-            <InvoiceList invoices={invoices} match={match} />
-          </CardContent>
-        </Card>
-        <Card className={classes.infoCard}>
-          <CardHeader title="Campaigns" />
-          <CardContent className={classes.content}>
-            <CampaignTableList campaigns={campaigns} match={match} />
-          </CardContent>
-        </Card>
-        <Card className={classes.infoCard}>
-          <CardHeader title="Creatives" />
-          <CardContent className={classes.content}>
-            <CreativeTableList creatives={creatives} match={match} />
-          </CardContent>
-        </Card>
+
+        <CardHeader title="Detail" action={getLockButton()} />
+        <CardContent className={classes.content}>
+          <AdvertiserForm auth={auth} advertiser={advertiser} unlock={unlock} onSubmit={handleSubmit} />
+        </CardContent>
+
+
+        <CardHeader title="Invoices" />
+        <CardContent className={classes.content}>
+          <InvoiceList invoices={invoices} match={match} />
+        </CardContent>
+
+
+        <CardHeader style={{ padding: "0" }} title="Campaigns" />
+        <CardContent style={{ padding: "0" }} className={classes.content}>
+          <CampaignTableList campaigns={campaigns} match={match} />
+        </CardContent>
+
+
+        <CardHeader title="Creatives" />
+        <CardContent className={classes.content}>
+          <CreativeTableList creatives={creatives} match={match} />
+        </CardContent>
+
       </div>
     );
   }

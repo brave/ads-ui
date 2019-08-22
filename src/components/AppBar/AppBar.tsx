@@ -25,37 +25,37 @@ import OutsideAlerter from "../OutsideAlerter/OutSideAlerter";
 let iconStyle = { cursor: "pointer", color: "#ff7654", fontSize: "28px" };
 
 class AppBar extends React.Component<any, any> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      menuOpen: false
+    constructor(props) {
+        super(props);
+        this.state = {
+            menuOpen: false
+        };
+    }
+
+    public toggleMenu = () => {
+        this.setState(prevState => ({
+            menuOpen: !prevState.menuOpen
+        }));
     };
-  }
 
-  public toggleMenu = () => {
-    this.setState(prevState => ({
-      menuOpen: !prevState.menuOpen
-    }));
-  };
+    public closeMenu = () => {
+        this.setState({
+            menuOpen: false
+        });
+    };
 
-  public closeMenu = () => {
-    this.setState({
-      menuOpen: false
-    });
-  };
+    public render() {
+        const { classes, toggleDrawer, open, signOut } = this.props;
+        return (
+            <div>
+                <S.Container>
+                    <S.SubContainer>
+                        {/* <Link style={linkStyle} to={"/"}> */}
+                        <S.Logo src={BraveAdsLogo} />
+                        {/* </Link> */}
+                    </S.SubContainer>
 
-  public render() {
-    const { classes, toggleDrawer, open, signOut } = this.props;
-    return (
-      <div>
-        <S.Container>
-          <S.SubContainer>
-            {/* <Link style={linkStyle} to={"/"}> */}
-            <S.Logo src={BraveAdsLogo} />
-            {/* </Link> */}
-          </S.SubContainer>
-
-          {/* 
+                    {/* 
           // Search for Campaigns and Creatives
 
           <S.SubContainer>
@@ -69,43 +69,43 @@ class AppBar extends React.Component<any, any> {
               <S.SearchInput type="text" placeholder="Search" name="name" />
             </S.SearchContainer>
           </S.SubContainer> */}
-          <S.SubContainer
-            style={{ justifyContent: "space-between", width: "120px" }}
-          >
-            <S.SubContainer style={{ visibility: "hidden" }}>
-              <Icon style={iconStyle}>add_to_photos</Icon>
-            </S.SubContainer>
-            <S.SubContainer style={{ visibility: "hidden" }}>
-              <Icon style={iconStyle}>notifications</Icon>
-            </S.SubContainer>
-            <OutsideAlerter onOutsideClick={this.closeMenu}>
-              <S.SubContainer style={{ position: "relative" }}>
-                <Icon onClick={this.toggleMenu} style={iconStyle}>
-                  account_circle
+                    <S.SubContainer
+                        style={{ justifyContent: "space-between", width: "120px" }}
+                    >
+                        <S.SubContainer style={{ visibility: "hidden" }}>
+                            <Icon style={iconStyle}>add_to_photos</Icon>
+                        </S.SubContainer>
+                        <S.SubContainer style={{ visibility: "hidden" }}>
+                            <Icon style={iconStyle}>notifications</Icon>
+                        </S.SubContainer>
+                        <OutsideAlerter onOutsideClick={this.closeMenu}>
+                            <S.SubContainer style={{ position: "relative" }}>
+                                <Icon onClick={this.toggleMenu} style={iconStyle}>
+                                    account_circle
                 </Icon>
-                <UserMenu menuOpen={this.state.menuOpen} signOut={signOut} />
-              </S.SubContainer>
-            </OutsideAlerter>
-          </S.SubContainer>
-        </S.Container>
-        {/* <BottomNav /> */}
-      </div>
-    );
-  }
+                                <UserMenu menuOpen={this.state.menuOpen} signOut={signOut} />
+                            </S.SubContainer>
+                        </OutsideAlerter>
+                    </S.SubContainer>
+                </S.Container>
+                {/* <BottomNav /> */}
+            </div>
+        );
+    }
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
-  open: state.drawerReducer.open
+    open: state.drawerReducer.open
 });
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
-  signOut: () => dispatch(SignOut()),
-  toggleDrawer: () => dispatch(ToggleDrawer())
+    signOut: () => dispatch(SignOut()),
+    toggleDrawer: () => dispatch(ToggleDrawer())
 });
 
 export default withStyles(styles, { withTheme: true })(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(AppBar)
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(AppBar)
 );

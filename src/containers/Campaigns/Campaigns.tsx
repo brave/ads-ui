@@ -18,7 +18,7 @@ class Campaigns extends React.Component<any, any> {
   public render() {
     const { match, classes } = this.props;
     return (
-      <div className={classes.root}>
+      <div>
         <Switch>
           <Route exact path={match.url} component={CampaignList} />
           <Route exact path={match.url + "/new"} component={CampaignNew} />
