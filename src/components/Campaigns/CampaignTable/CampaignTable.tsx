@@ -1,143 +1,228 @@
-import * as React from "react";
-import { Text } from "../../../components/Text/Text";
+import React, { Component } from 'react';
 import * as S from "./CampaignTable.style";
+import { Text } from "../../Text/Text";
 import { Link } from "react-router-dom";
-import { Icon } from "@material-ui/core";
+import { PageInputContainer } from "../../Table/Table";
 
-interface ICampaignTableProps {
-  campaigns: any;
-  match: any;
-  auth: any;
-  data: any;
-}
+import {
+  useTable,
+  useSortBy,
+  useTableState,
+  usePagination,
+} from 'react-table'
+import { connect } from 'react-redux';
 
-interface ICampaignTableState {
-  data: any;
-  currentPage: any;
-  campaignsPerPage: any;
-}
+// Table Data
+import columns from "./data/columns";
 
-const linkStyle = { textDecoration: "none", color: "inherit" };
+class CampaignTable extends Component<any, any> {
 
-export default class CampaignTable extends React.Component<ICampaignTableProps, ICampaignTableState> {
   constructor(props) {
     super(props);
-    this.state = {
-      data: [],
-      currentPage: 1,
-      campaignsPerPage: 10
-    };
-    this.handleClick = this.handleClick.bind(this);
-    this.incrementPage = this.incrementPage.bind(this);
-    this.decrementPage = this.decrementPage.bind(this);
   }
-
-  handleClick(event) {
-    this.setState({
-      currentPage: Number(event.target.id)
-    });
-  }
-
-  incrementPage() {
-    if (this.state.currentPage < Math.ceil(this.props.data.length / this.state.campaignsPerPage)) {
-      this.setState({ currentPage: this.state.currentPage + 1 })
-    }
-  }
-
-  decrementPage() {
-    if (this.state.currentPage > 1) {
-      this.setState({ currentPage: this.state.currentPage - 1 })
-    }
-  }
-
-  public render() {
-    const pageNumbers = [] as number[];
-    for (let i = 1 as number; i <= Math.ceil(this.props.data.length / this.state.campaignsPerPage); i++) {
-      pageNumbers.push(i);
-    }
-
-    const renderPageNumbers = pageNumbers.map(number => {
-      if (number === this.state.currentPage) {
-        return (
-          <li
-            key={number}
-            id={number.toString()}
-            onClick={this.handleClick}
-            style={{ display: "flex", cursor: 'pointer', marginLeft: "4px", marginRight: "4px" }}
-          >
-            {number} of {Math.ceil(this.props.data.length / this.state.campaignsPerPage)}
-          </li>
-        );
-      }
-    });
+  render() {
     return (
-
       <React.Fragment>
-        <React.Fragment>
-          <S.TableHeader>
-            <S.HeaderCell>
-              <Text fontFamily={"Poppins"} fontWeight={500} color={"#7c7d8c"} sizes={[13, 13, 13, 13, 13]}>
-                Brand
-            </Text>
-            </S.HeaderCell>
-            <S.HeaderCell>
-              <Text fontFamily={"Poppins"} fontWeight={500} color={"#7c7d8c"} sizes={[13, 13, 13, 13, 13]}>
-                Campaign
-            </Text>
-            </S.HeaderCell>
-            <S.HeaderCell>
-              <Text fontFamily={"Poppins"} fontWeight={500} color={"#7c7d8c"} sizes={[13, 13, 13, 13, 13]}>
-                Status
-            </Text>
-            </S.HeaderCell>
-            <S.HeaderCell>
-              <Text fontFamily={"Poppins"} fontWeight={500} color={"#7c7d8c"} sizes={[13, 13, 13, 13, 13]}>
-                Budget
-            </Text>
-            </S.HeaderCell>
-            <S.HeaderCell>
-              <Text fontFamily={"Poppins"} fontWeight={500} color={"#7c7d8c"} sizes={[13, 13, 13, 13, 13]}>
-                Start Date
-            </Text>
-            </S.HeaderCell>
-            <S.HeaderCell>
-              <Text fontFamily={"Poppins"} fontWeight={500} color={"#7c7d8c"} sizes={[13, 13, 13, 13, 13]}>
-                End Date
-            </Text>
-            </S.HeaderCell>
-            <S.HeaderCell>
-              <Text fontFamily={"Poppins"} fontWeight={500} color={"#7c7d8c"} sizes={[13, 13, 13, 13, 13]}>
-                Views
-            </Text>
-            </S.HeaderCell>
-            <S.HeaderCell>
-              <Text fontFamily={"Poppins"} fontWeight={500} color={"#7c7d8c"} sizes={[13, 13, 13, 13, 13]}>
-                Lands
-            </Text>
-            </S.HeaderCell>
-            <S.HeaderCell>
-              <Text fontFamily={"Poppins"} fontWeight={500} color={"#7c7d8c"} sizes={[13, 13, 13, 13, 13]}>
-                Pacing
-            </Text>
-            </S.HeaderCell>
-          </S.TableHeader>
-          <TableRows data={this.props.data} currentPage={this.state.currentPage} campaignsPerPage={this.state.campaignsPerPage} />
-        </React.Fragment>
-        <div style={{ width: "100%", display: "flex", justifyContent: "flex-end", paddingTop: "28px", paddingBottom: "28px", paddingRight: '14px' }}>
-          <Icon style={{ cursor: "pointer" }} onClick={this.decrementPage}>chevron_left</Icon>
-          <ul style={{ display: "flex", marginTop: "3.5px", paddingLeft: "0" }}>
-            {renderPageNumbers}
-          </ul>
-          <Icon style={{ cursor: "pointer" }} onClick={this.incrementPage}>chevron_right</Icon>
-        </div>
-
-
-      </React.Fragment >
-    );
+        <Table columns={columns} data={this.props.data} match={this.props.match} />
+      </React.Fragment>
+    )
   }
 }
 
-function Status(state) {
+function Table({ columns, data, match }) {
+
+  const tableState = useTableState({ pageIndex: 0, pageSize: 10 })
+
+  const {
+    getTableProps,
+    headerGroups,
+    prepareRow,
+    page,
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    setPageSize,
+    state: [{ pageIndex, pageSize }],
+  } = useTable(
+    {
+      columns,
+      data,
+      state: tableState,
+    },
+    useSortBy,
+    usePagination,
+  )
+
+  return (
+    <React.Fragment>
+      <S.Table {...getTableProps()}>
+        <S.TableHeader>
+          {headerGroups.map(headerGroup => (
+            <S.HeaderRow {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map(column => (
+                <S.HeaderCell {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  <Text fontFamily={"Poppins"} fontWeight={500} color={"#7c7d8c"} sizes={[13, 13, 13, 13, 13]}>{column.render('Header')}</Text>
+                  <div style={{ paddingLeft: "4px", fontSize: "8px", opacity: .85 }}>
+                    {column.sorted
+                      ? column.sortedDesc
+                        ? ' ▼'
+                        : ' ▲'
+                      : ''}
+                  </div>
+                </S.HeaderCell>
+              ))}
+            </S.HeaderRow>
+          ))}
+        </S.TableHeader>
+        <div>
+          {page.map(
+            (row, i) =>
+
+              prepareRow(row) || (
+                <Link style={{ textDecoration: "none", color: "inherit" }} to={`/admin/main/users/${row.original.userId}/advertiser/${row.original.advertiserId}/campaign/${row.original.id}`}>
+                  <S.TableRow {...row.getRowProps()}>
+                    {row.cells.map(cell => {
+                      return renderRow(cell)
+                    })}
+                  </S.TableRow>
+                </Link>
+              )
+          )}
+        </div>
+      </S.Table>
+      <div style={{ width: "100%", display: "flex", justifyContent: "space-between", marginLeft: "12px", marginRight: "12px" }}>
+        <div style={{ marginTop: '36px' }}>
+          <div style={{ display: "flex" }}>
+            <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>Go to page:</Text>
+            <PageInputContainer>
+              <input
+                type="number"
+                min={0}
+                defaultValue={pageIndex + 1}
+                style={{ height: "100%", width: "100%", border: "none", fontSize: "14px", paddingLeft: "4px", userSelect: "none" }}
+                onChange={e => {
+                  const page = e.target.value ? Number(e.target.value) - 1 : 0
+                  gotoPage(page)
+                }}
+              />
+            </PageInputContainer>
+
+            <select
+              value={pageSize}
+              style={{ marginTop: "-5px", backgroundColor: "white" }}
+              onChange={e => {
+                setPageSize(Number(e.target.value))
+              }}
+            >
+              {[10, 50, 100].map(pageSize => (
+                <option key={pageSize} value={pageSize}>
+                  Show {pageSize}
+                </option>
+              ))}
+            </select>
+
+          </div>
+        </div>
+        <div style={{ marginTop: '36px', display: "flex" }}>
+          <button style={{ marginTop: "-5px", backgroundColor: "#fafafa", borderRadius: "6px", marginLeft: "2px", marginRight: "2px" }} onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+            {'<<'}
+          </button>{' '}
+          <button style={{ marginTop: "-5px", backgroundColor: "#fafafa", borderRadius: "6px", marginLeft: "2px", marginRight: "10px" }} onClick={() => previousPage()} disabled={!canPreviousPage}>
+            {'<'}
+          </button>{' '}
+          <span>
+            <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>Page {pageIndex + 1} of {pageOptions.length}</Text>
+          </span>
+          <button style={{ marginTop: "-5px", backgroundColor: "#fafafa", borderRadius: "6px", marginLeft: "10px", marginRight: "2px" }} onClick={() => nextPage()} disabled={!canNextPage}>
+            {'>'}
+          </button>{' '}
+          <button style={{ marginTop: "-5px", backgroundColor: "#fafafa", borderRadius: "6px", marginLeft: "2px", marginRight: "2px" }} onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+            {'>>'}
+          </button>{' '}
+        </div>
+      </div>
+    </React.Fragment>
+  )
+}
+
+function renderRow(cell) {
+  switch (cell.column.id) {
+    case "brand":
+      return (<S.RowCell><Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
+        {renderName(cell.value)}
+      </Text></S.RowCell>)
+    case "name":
+      return (<S.RowCell><Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 13]}>
+        {renderName(cell.value)}
+      </Text></S.RowCell>)
+    case "state":
+      return (<S.RowCell><Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
+        {renderStatus(cell.value)}
+      </Text></S.RowCell>)
+    case "budget":
+      return (<S.RowCell><Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
+        {renderMonetaryAmount(cell.value, cell.row.original.currency)}
+      </Text></S.RowCell>)
+    case "spent":
+      return (<S.RowCell><Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
+        {renderMonetaryAmount(cell.value, cell.row.original.currency)}
+      </Text></S.RowCell>)
+    case "startAt":
+      return (<S.RowCell><Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
+        {renderDate(cell.value)}
+      </Text></S.RowCell>)
+    case "endAt":
+      return (<S.RowCell><Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
+        {renderDate(cell.value)}
+      </Text></S.RowCell>)
+    case "view":
+      return (<S.RowCell><Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
+        {renderStat(cell.value)}
+      </Text></S.RowCell>)
+    case "pacingIndex":
+      return (<S.RowCell><Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
+        {renderPacingIndex(cell.value)}</Text></S.RowCell>)
+  }
+}
+
+function renderPacingIndex(value) {
+
+  let index = parseFloat(value);
+  if (index >= 1.50) {
+    return (<React.Fragment>
+      <Text color={"#fc4145"} fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
+        {(index * 100).toFixed(0)}
+      </Text>
+    </React.Fragment>)
+  }
+  else if (index >= 0.50 && index <= 1.50) {
+    return (<React.Fragment>
+      <Text color={"#07C806"} fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
+        {(index * 100).toFixed(0)}
+      </Text>
+    </React.Fragment>)
+  }
+  else if (index > 0.01 && index <= 0.50) {
+    return (<React.Fragment>
+      <Text color={"#fc4145"} fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
+        {(index * 100).toFixed(0)}
+      </Text>
+    </React.Fragment>)
+  }
+  else {
+    return (<React.Fragment>
+      <Text color={"#1C1C1C"} fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
+        N/A
+        </Text>
+    </React.Fragment>)
+  }
+}
+
+function renderStatus(state) {
   switch (state) {
     case 'active':
       return (<div style={{ display: "flex" }}>
@@ -151,7 +236,7 @@ function Status(state) {
         <S.PendingSymbol />
         <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
           Review
-          </Text>
+            </Text>
       </div>)
     default:
       return (<div style={{ display: "flex" }}>
@@ -163,119 +248,45 @@ function Status(state) {
   }
 }
 
-function Pacing(index) {
-
-  if (index >= 1.50) {
-    return (<React.Fragment>
-      <Text color={"#fc4145"} fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
-        {index.toFixed(2)}
-      </Text>
-    </React.Fragment>)
-  }
-  else if (index >= 0.50 && index <= 1.50) {
-    return (<React.Fragment>
-      <Text color={"#07C806"} fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
-        {index.toFixed(2)}
-      </Text>
-    </React.Fragment>)
-  }
-  else if (index > 0.01 && index <= 0.50) {
-    return (<React.Fragment>
-      <Text color={"#fc4145"} fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
-        {index.toFixed(2)}
-      </Text>
-    </React.Fragment>)
+function renderMonetaryAmount(value, currency) {
+  if (currency === "USD") {
+    return `$${parseFloat(value).toLocaleString('en')}`
   }
   else {
-    return (<React.Fragment>
-      <Text color={"#1C1C1C"} fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
-        N/A
-      </Text>
-    </React.Fragment>)
+    return `${parseFloat(value).toLocaleString('en')} BAT`
+
   }
 }
 
-function TableRows(props) {
-  const { data, currentPage, campaignsPerPage } = props;
-  // Logic for displaying todos
-  const indexOfLastCampaign = currentPage * campaignsPerPage;
-  const indexOfFirstCampaign = indexOfLastCampaign - campaignsPerPage;
-  const currentCampaigns = data.slice(indexOfFirstCampaign, indexOfLastCampaign);
-  const tableRows = currentCampaigns.map((campaign, index) =>
-    // <Link style={linkStyle} to={`/admin/main/users/${campaign.userId}/advertiser/${campaign.advertiserId}/campaign/${campaign.id}`}>
-    <S.TableRow key={index}>
-      <S.RowCell>
-        <div>
-          <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
-            {campaign.brand}
-          </Text>
-        </div>
-      </S.RowCell>
-      <S.RowCell>
-        <div>
-          <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
-            {campaign.name}
-          </Text>
-        </div>
-      </S.RowCell>
-      <S.RowCell>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          {
-            Status(campaign.state)
-          }
-        </div>
-      </S.RowCell>
-      <S.RowCell>
-        <div>
-          {campaign.currency === "USD" ?
-            <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
-              ${parseFloat(campaign.budget).toLocaleString('en')}
-            </Text> :
-            <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
-              {parseFloat(campaign.budget).toLocaleString('en')} BAT
-          </Text>
-          }
-        </div>
-      </S.RowCell>
-      <S.RowCell>
-        <div>
-          <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
-            {new Date(campaign.startAt).toLocaleDateString("en-US")}
-          </Text>
-        </div>
-      </S.RowCell>
-      <S.RowCell>
-        <div>
-          <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
-            {new Date(campaign.endAt).toLocaleDateString("en-US")}
-          </Text>
-        </div>
-      </S.RowCell>
-      <S.RowCell>
-        <div>
-          <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
-            {parseInt(campaign.view).toLocaleString('en')}
-          </Text>
-        </div>
-      </S.RowCell>
-      <S.RowCell>
-        <div>
-          <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
-            {parseInt(campaign.landed).toLocaleString('en')}
-          </Text>
-        </div>
-      </S.RowCell>
-      <S.RowCell>
-        <Text color={"#07C806"} fontFamily={"Muli"} sizes={[16, 16, 24, 24, 24]}>
-          {Pacing(parseFloat(campaign.pacingIndex))}
-        </Text>
-      </S.RowCell>
-    </S.TableRow>
-    // </Link>
-  );
-
-  return (
-    <div>{tableRows}</div>
-  )
+function renderName(value) {
+  if (value.length > 40) {
+    return <S.RowCell><Text fontFamily={"Muli"} sizes={[15, 15, 12, 12, 12]}>{value}</Text></S.RowCell>
+  }
+  else {
+    return <S.RowCell><Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>{value}</Text></S.RowCell>
+  }
 }
+
+function renderDate(value) {
+  return new Date(value).toLocaleDateString("en-US")
+}
+
+function renderStat(value) {
+  return parseInt(value).toLocaleString('en')
+}
+
+const mapStateToProps = (state: any, ownProps: any) => ({
+  advertisers: state.advertiserReducer.advertisers,
+  auth: state.authReducer,
+  drawer: state.drawerReducer
+});
+
+const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
+});
+
+export default
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(CampaignTable);
 

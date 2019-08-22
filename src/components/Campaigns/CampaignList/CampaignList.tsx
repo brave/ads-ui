@@ -34,8 +34,7 @@ class CampaignList extends React.Component<any, any> {
               Campaigns
             </Text>
           </S.CardHeader>
-          {/* <CampaignTable campaigns={null} match={null} auth={this.props.auth} data={campaignList} /> */}
-          <TestTable match={match} data={campaignList} />
+          <CampaignTable match={match} data={campaignList} />
         </Card>
       </div>
     );
