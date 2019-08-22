@@ -7,6 +7,8 @@ import * as S from "./CampaignList.style";
 import Card from "../../Card/Card";
 import { Text } from "../../Text/Text";
 
+import TestTable from "../testTable/testTable";
+
 import {
   GetCampaignList,
 } from "../../../actions";
@@ -18,9 +20,11 @@ class CampaignList extends React.Component<any, any> {
   }
   public componentDidMount() {
     this.props.GetCampaignList(this.props.auth);
+    console.log(this.props.campaignList)
   }
 
   public render() {
+    const { match } = this.props;
     const { campaignList } = this.props;
     return (
       <div>
@@ -30,7 +34,8 @@ class CampaignList extends React.Component<any, any> {
               Campaigns
             </Text>
           </S.CardHeader>
-          <CampaignTable campaigns={null} match={null} auth={this.props.auth} data={campaignList} />
+          {/* <CampaignTable campaigns={null} match={null} auth={this.props.auth} data={campaignList} /> */}
+          <TestTable match={match} data={campaignList} />
         </Card>
       </div>
     );

@@ -142,21 +142,21 @@ function Status(state) {
     case 'active':
       return (<div style={{ display: "flex" }}>
         <S.ActiveSymbol />
-        <Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+        <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
           {state.charAt(0).toUpperCase() + state.slice(1)}
         </Text>
       </div>)
     case 'under_review':
       return (<div style={{ display: "flex" }}>
         <S.PendingSymbol />
-        <Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+        <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
           Review
           </Text>
       </div>)
     default:
       return (<div style={{ display: "flex" }}>
         <S.PendingSymbol />
-        <Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+        <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
           {state.charAt(0).toUpperCase() + state.slice(1)}
         </Text>
       </div>)
@@ -167,28 +167,28 @@ function Pacing(index) {
 
   if (index >= 1.50) {
     return (<React.Fragment>
-      <Text color={"#fc4145"} fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+      <Text color={"#fc4145"} fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
         {index.toFixed(2)}
       </Text>
     </React.Fragment>)
   }
   else if (index >= 0.50 && index <= 1.50) {
     return (<React.Fragment>
-      <Text color={"#07C806"} fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+      <Text color={"#07C806"} fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
         {index.toFixed(2)}
       </Text>
     </React.Fragment>)
   }
   else if (index > 0.01 && index <= 0.50) {
     return (<React.Fragment>
-      <Text color={"#fc4145"} fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+      <Text color={"#fc4145"} fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
         {index.toFixed(2)}
       </Text>
     </React.Fragment>)
   }
   else {
     return (<React.Fragment>
-      <Text color={"#1C1C1C"} fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+      <Text color={"#1C1C1C"} fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
         N/A
       </Text>
     </React.Fragment>)
@@ -206,14 +206,14 @@ function TableRows(props) {
     <S.TableRow key={index}>
       <S.RowCell>
         <div>
-          <Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+          <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
             {campaign.brand}
           </Text>
         </div>
       </S.RowCell>
       <S.RowCell>
         <div>
-          <Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+          <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
             {campaign.name}
           </Text>
         </div>
@@ -228,10 +228,10 @@ function TableRows(props) {
       <S.RowCell>
         <div>
           {campaign.currency === "USD" ?
-            <Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+            <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
               ${parseFloat(campaign.budget).toLocaleString('en')}
             </Text> :
-            <Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+            <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
               {parseFloat(campaign.budget).toLocaleString('en')} BAT
           </Text>
           }
@@ -239,28 +239,28 @@ function TableRows(props) {
       </S.RowCell>
       <S.RowCell>
         <div>
-          <Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+          <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
             {new Date(campaign.startAt).toLocaleDateString("en-US")}
           </Text>
         </div>
       </S.RowCell>
       <S.RowCell>
         <div>
-          <Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+          <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
             {new Date(campaign.endAt).toLocaleDateString("en-US")}
           </Text>
         </div>
       </S.RowCell>
       <S.RowCell>
         <div>
-          <Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+          <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
             {parseInt(campaign.view).toLocaleString('en')}
           </Text>
         </div>
       </S.RowCell>
       <S.RowCell>
         <div>
-          <Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+          <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
             {parseInt(campaign.landed).toLocaleString('en')}
           </Text>
         </div>
@@ -278,3 +278,4 @@ function TableRows(props) {
     <div>{tableRows}</div>
   )
 }
+
