@@ -3,19 +3,19 @@ import {
   CssBaseline,
   MuiThemeProvider,
   Snackbar,
-  withStyles
 } from "@material-ui/core";
+
 import React from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-
+import { Redirect, Route, Switch, withRouter } from "react-router-dom";
+import _ from "lodash";
 import { CloseSnackBar as close } from "./actions";
 
-import Body from "./containers/Body";
-import Footer from "./containers/Footer";
-import Header from "./containers/Header";
+import * as S from "./App.style";
 
-import { styles } from "./App.styles";
+import Authentication from "./containers/Authentication/Authentication";
+import AdminMain from "./containers/Main/Admin/Main";
+import AdvertiserMain from "./containers/Main/Advertiser/Main";
 
 class App extends React.Component<any, any> {
   private theme = createMuiTheme({
@@ -34,38 +34,62 @@ class App extends React.Component<any, any> {
     }
   });
 
+  private anchorSettings = {
+    horizontal: "left",
+    vertical: "bottom"
+  } as any;
+
   public render() {
-    const { classes, CloseSnackBar, snackbar } = this.props;
+    const { CloseSnackBar, snackbar } = this.props;
 
     return (
       <MuiThemeProvider theme={this.theme}>
-        <div className={classes.root}>
-          <CssBaseline />
-          <Header />
-          <div
-            style={{ height: "100%", overflow: "hidden" }}
-            className={classes.body}
-          >
-            <Body />
-          </div>
-          <Footer />
+        <React.Fragment>
+          <Switch>
+            <Route path="/user/main" component={AdvertiserMain} />
+            <Route path="/admin/main" component={AdminMain} />
+            <Route path="/auth" component={Authentication} />
+            <Route path='/' exact={true} component={() => {
+              window.location.href = "https://brave.com/brave-ads-waitlist/";
+              return null;
+            }} />
+            {this.getRedirect()}
+          </Switch>
           <Snackbar
-            anchorOrigin={{
-              horizontal: "left",
-              vertical: "bottom"
-            }}
+            anchorOrigin={this.anchorSettings}
             message={<span>{snackbar.message}</span>}
             open={snackbar.open}
             autoHideDuration={3000}
             onClose={CloseSnackBar}
           />
-        </div>
+        </React.Fragment>
+        <CssBaseline />
       </MuiThemeProvider>
     );
+  }
+
+  private getRedirect() {
+    const { advertisers, auth } = this.props;
+    if (auth && auth.signedIn && auth.emailVerified) {
+      if (auth.role === "admin") {
+        return <Redirect to="/admin/main" />;
+      } else {
+        const activeAdvertiser = _.find(advertisers, { state: "active" });
+        if (advertisers.length > 0 && activeAdvertiser) {
+          return <Redirect to="/user/main" />;
+        } else {
+          return <Redirect to="/auth" />;
+        }
+      }
+    } else {
+      return <Redirect to="/auth" />;
+    }
   }
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
+  advertisers: state.advertiserReducer.advertisers,
+  auth: state.authReducer,
   snackbar: state.snackBarReducer
 });
 
@@ -77,5 +101,5 @@ export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(withStyles(styles)(App))
+  )(App)
 );

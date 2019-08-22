@@ -1,37 +1,41 @@
-import { Button, Icon, withStyles } from "@material-ui/core";
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 
-import { GetCampaigns } from "../../../actions";
+import CampaignTable from "../CampaignTable/CampaignTable";
 
-import CampaignFilter from "../CampaignFilter/CampaignFilter";
-import CampaignItem from "../CampaignItem/CampaignItem";
+import * as S from "./CampaignList.style";
+import Card from "../../Card/Card";
+import { Text } from "../../Text/Text";
 
-import { styles } from "./CampaignList.style";
+import TestTable from "../testTable/testTable";
+
+import {
+  GetCampaignList,
+} from "../../../actions";
+
 
 class CampaignList extends React.Component<any, any> {
-  public componentDidMount() {
-    this.props.GetCampaigns(this.props.auth);
+  constructor(props) {
+    super(props);
   }
+  public componentDidMount() {
+    this.props.GetCampaignList(this.props.auth);
+    console.log(this.props.campaignList)
+  }
+
   public render() {
-    const { classes, match, campaigns } = this.props;
-    const listItems = campaigns.map((item: any) => {
-      return (
-        <div key={item.id} className={classes.item}>
-          <CampaignItem match={match} campaign={item} />
-        </div>
-      );
-    });
+    const { match } = this.props;
+    const { campaignList } = this.props;
     return (
-      <div className={classes.root}>
-        <CampaignFilter />
-        <div className={classes.list}>{listItems}</div>
-        <Link className={classes.fab} to={match.url + "/new"}>
-          <Button color="secondary" variant="fab">
-            <Icon>add</Icon>
-          </Button>
-        </Link>
+      <div>
+        <Card>
+          <S.CardHeader>
+            <Text fontFamily={"Poppins"} sizes={[20, 20, 20, 20, 20]}>
+              Campaigns
+            </Text>
+          </S.CardHeader>
+          <CampaignTable match={match} data={campaignList} />
+        </Card>
       </div>
     );
   }
@@ -39,16 +43,16 @@ class CampaignList extends React.Component<any, any> {
 
 const mapStateToProps = (state: any, ownProps: any) => ({
   auth: state.authReducer,
-  campaigns: state.campaignReducer.campaigns
+  campaigns: state.campaignReducer.campaigns,
+  campaignList: state.campaignListReducer.campaignList
 });
 
-const mapDispathToProps = (dispatch: any, ownProps: any) => ({
-  GetCampaigns: (user: any) => dispatch(GetCampaigns(user))
+const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
+  GetCampaignList: (auth: any) => dispatch(GetCampaignList(auth))
 });
 
-export default withStyles(styles)(
+export default
   connect(
     mapStateToProps,
-    mapDispathToProps
-  )(CampaignList)
-);
+    mapDispatchToProps
+  )(CampaignList);

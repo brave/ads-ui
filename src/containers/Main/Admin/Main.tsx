@@ -1,7 +1,4 @@
 import {
-  Divider,
-  Drawer,
-  Hidden,
   Icon,
   List,
   ListItem,
@@ -9,7 +6,6 @@ import {
   ListItemText,
   withStyles
 } from "@material-ui/core";
-import classNames from "classnames";
 import React from "react";
 import { connect } from "react-redux";
 import { Link, Redirect, Route, Switch } from "react-router-dom";
@@ -18,16 +14,10 @@ import AppBar from "../../../components/AppBar/AppBar";
 import SideBar from "../../../components/SideBar/SideBar";
 import Dashboard from "../../Dashboard/Admin/Dashboard";
 import Users from "../../Users/Users";
+import Campaigns from "../../Campaigns/Campaigns";
 
 import * as S from "./Main.style";
 import { styles } from "./Main.style";
-
-const mainStyle = {
-  padding: "24px",
-  width: "100%",
-  height: "100%",
-  overflow: "scroll"
-};
 
 class Main extends React.Component<any, any> {
   public render(): any {
@@ -40,38 +30,19 @@ class Main extends React.Component<any, any> {
     ) {
       return <Redirect to="/a" />;
     }
-    const drawerItems = (
-      <List>
-        <Link to={match.url + "/dashboard"} className={classes.link}>
-          <ListItem button>
-            <ListItemIcon>
-              <Icon>dashboard</Icon>
-            </ListItemIcon>
-            <ListItemText primary="Dashboard" />
-          </ListItem>
-        </Link>
-        <Link to={match.url + "/users"} className={classes.link}>
-          <ListItem button>
-            <ListItemIcon>
-              <Icon>person</Icon>
-            </ListItemIcon>
-            <ListItemText primary="Users" />
-          </ListItem>
-        </Link>
-      </List>
-    );
     return (
       <S.Container>
         <AppBar />
         <S.Content>
           <SideBar type={"admin"} match={match} />
-          <main style={mainStyle}>
+          <S.Main>
             <Switch>
               <Route path={match.url + "/dashboard"} component={Dashboard} />
               <Route path={match.url + "/users"} component={Users} />
+              <Route path={match.url + "/campaigns"} component={Campaigns} />
               <Redirect to={match.url + "/dashboard"} />
             </Switch>
-          </main>
+          </S.Main>
         </S.Content>
       </S.Container>
     );
