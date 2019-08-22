@@ -17,7 +17,6 @@ export const deleteCreativeInstanceReducer = (state: ICreativeInstanceState, act
         ...state,
       };
     case DELETE_CREATIVEINSTANCES_SUCCESSFUL:
-      console.log(action.payload);
       const creativeInstances = _.filter(state.creativeInstances, (item) => {
         return item.id !== (action.payload as ICreativeInstancePayload).id;
       });
