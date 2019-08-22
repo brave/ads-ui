@@ -20,7 +20,6 @@ class CreativeInstanceNew extends React.Component<any, any> {
       advertiserCreatives = _.filter(advertiserCreatives, { advertiserId: this.props.match.params.advertiserId })
     }
     const handleSubmit = async (value: any) => {
-      console.log(value);
       if (value) {
         if (value.prices && value.prices.length > 0) {
           for (const price of value.prices) {
