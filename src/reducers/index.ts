@@ -3,6 +3,7 @@ import { reducer as formReducer } from "redux-form";
 
 import advertiserReducer from "./advertiser";
 import authReducer from "./auth";
+import campaignListReducer from "./campaignList";
 import campaignReducer from "./campaign";
 import confirmationTypeReducer from "./confirmationType";
 import creativeReducer from "./creative";
@@ -20,6 +21,7 @@ import userReducer from "./user";
 export default combineReducers<any, any>({
   advertiserReducer,
   authReducer,
+  campaignListReducer,
   campaignReducer,
   confirmationTypeReducer,
   creativeInstanceReducer,

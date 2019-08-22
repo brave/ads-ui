@@ -49,3 +49,30 @@ export const GetCampaigns = (auth: IAuthPayload, userId?: string) => {
     }
   };
 };
+
+export const GetCampaignsList = (auth: IAuthPayload, userId?: string) => {
+  return async (dispatch: any) => {
+    try {
+      dispatch(GetCampaignsStart);
+      const response = await axios.get(`${process.env.REACT_APP_SERVER_ADDRESS}/report/campaign/list`, {
+        headers: {
+          "Authorization": `Bearer ${auth.accessToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+      dispatch(GetCampaignSuccessful(response.data));
+      dispatch(OpenSnackBar("Campaign Get Successfully"));
+      return Promise.resolve(response.data);
+    } catch (error) {
+      dispatch(GetCampaignsFaild());
+      if (error.response) {
+        dispatch(OpenSnackBar(`Get Campaigns  Failed: ${error.response.data.error}`));
+      } else if (error.request) {
+        dispatch(OpenSnackBar(`Get Campaigns  Failed: Network Error`));
+      } else {
+        dispatch(OpenSnackBar(`Get Campaigns  Failed: ${error.message}`));
+      }
+      return Promise.reject(error);
+    }
+  };
+};

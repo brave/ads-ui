@@ -1,5 +1,6 @@
 export * from "./users";
 export * from "./campaigns";
+export * from "./campaignList";
 export * from "./creatives";
 export * from "./drawer";
 export * from "./snackbar";
