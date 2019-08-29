@@ -47,7 +47,7 @@ class AppBar extends React.Component<any, any> {
     public render() {
         const { classes, toggleDrawer, open, signOut } = this.props;
         return (
-            <div>
+            <div style={{ position: "sticky", top: "0px", zIndex: 9001 }}>
                 <S.Container>
                     <S.SubContainer>
                         {/* <Link style={linkStyle} to={"/"}> */}

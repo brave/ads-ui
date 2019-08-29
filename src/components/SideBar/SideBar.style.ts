@@ -8,12 +8,13 @@ export const Container = styled("div")`
   @media (max-width: 992px) {
     display: none;
   }
+  position: sticky;
+  top: 64px;
   height: calc(100vh - 64px);
   background-color: white;
   width: 300px;
   padding-top: 24px;
   border-right: 2px solid #f6f6f5;
-  position: relative;
 `;
 
 export const Nav = styled("div")`

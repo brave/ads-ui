@@ -56,7 +56,7 @@ class Main extends React.Component<any, any> {
         <AppBar />
         <S.Content>
           <SideBar type={"user"} match={match} />
-          <main style={mainStyle}>
+          <S.Main>
             <Switch>
               {/* <Route path={match.url + "/dashboard"} component={Dashboard} />
             <Route path={match.url + "/creatives"} component={Creatives} />
@@ -69,7 +69,7 @@ class Main extends React.Component<any, any> {
               {/* <Route path={match.url + "/preferences"} component={Preferences} /> */}
               <Redirect to={match.url + "/performances"} />
             </Switch>
-          </main>
+          </S.Main>
         </S.Content>
       </S.Container>
     );
