@@ -255,14 +255,11 @@ class PerformancesCharts extends React.Component<any, any> {
   }
 
   async downloadCSV(campaign) {
-    var url = window.location.href.split("/");
-    var userId = url[url.length - 6];
-    let campaignId = url[url.length - 2];
 
-    axios(`${process.env.REACT_APP_SERVER_ADDRESS}/report/campaign/csv/${campaignId}`, {
+    axios(`${process.env.REACT_APP_SERVER_ADDRESS}/report/campaign/csv/${campaign.id}`, {
       headers: {
         "Authorization": `Bearer ${this.props.auth.accessToken}`,
-        "-x-user": userId,
+        "-x-user": this.props.auth.id,
         "Content-Type": "text/csv",
       }
     })
