@@ -20,6 +20,7 @@ import { GetCampaigns, GetReports, GetCreatives } from "../../actions";
 import { styles } from "./Performances.style";
 
 import PerformancesCharts from "../../components/Performances/PerformancesCharts";
+import CampaignReport from "../../components/Campaigns/CampaignReport/CampaignReport";
 
 class Performances extends React.Component<any, any> {
   constructor(props: any) {
@@ -47,7 +48,7 @@ class Performances extends React.Component<any, any> {
   };
 
   public render() {
-    const { classes, campaigns, reports, creatives, advertisers } = this.props;
+    const { auth, classes, campaigns, reports, creatives, advertisers } = this.props;
 
     const report = _.find(reports, { campaignId: this.state.campaign }) as any;
     const campaign = _.find(campaigns, { id: this.state.campaign }) as any;
@@ -85,11 +86,11 @@ class Performances extends React.Component<any, any> {
             </FormControl>
           </CardContent>
         </Card>
-        <PerformancesCharts
+        <CampaignReport
+          auth={auth}
           campaign={campaign}
           report={report}
           advertiser={advertisers[0]}
-          creatives={creatives}
         />
       </div>
     );

@@ -7,6 +7,7 @@ import { GetReports } from "../../../actions";
 
 import { styles } from "./CampaignPerformance.style";
 import PerformancesCharts from "../../../components/Performances/PerformancesCharts";
+import CampaignReport from "../../../components/Campaigns/CampaignReport/CampaignReport";
 
 class CampaignPerformance extends React.Component<any, any> {
   constructor(props: any) {
@@ -24,7 +25,7 @@ class CampaignPerformance extends React.Component<any, any> {
   }
 
   public render() {
-    const { classes, reports, advertisers, creatives } = this.props;
+    const { auth, classes, reports, advertisers, creatives } = this.props;
     const { campaign } = this.state;
     const report = _.find(reports, { campaignId: campaign.id }) as any;
     const advertiser = _.find(advertisers, {
@@ -33,18 +34,11 @@ class CampaignPerformance extends React.Component<any, any> {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static" color="default">
-          <Toolbar>
-            <Typography variant="h5">{campaign.name}</Typography>
-          </Toolbar>
-        </AppBar>
-        <PerformancesCharts
+        <CampaignReport
+          auth={auth}
           campaign={campaign}
           report={report}
-          advertiser={advertiser}
-          creatives={creatives}
-          userId={this.props.match.params.userId}
-          auth={this.props.auth}
+          advertiser={advertisers[0]}
         />
       </div>
     );

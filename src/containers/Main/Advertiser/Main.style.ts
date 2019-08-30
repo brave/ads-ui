@@ -17,6 +17,7 @@ export const Main = styled("div")`
   padding: 24px;
   height: 100%;
   overflow: scroll;
+  margin-top: 64px;
 
   @media (max-width: ${Breakpoint.xs}) {
     width: 100%;

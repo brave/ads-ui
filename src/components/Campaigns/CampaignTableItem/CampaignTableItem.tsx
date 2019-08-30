@@ -35,14 +35,6 @@ class CampaignTableItem extends React.Component<any, any> {
         </TableCell>
         <TableCell>
           <div>{campaign.state}</div>
-          <Link
-            className={classes.viewButton}
-            to={`${match.url}/campaign/${campaign.id}/reporttwo`}
-          >
-            <IconButton color="primary">
-              <Icon>timeline</Icon>
-            </IconButton>
-          </Link>
         </TableCell>
         <TableCell>
           <Link

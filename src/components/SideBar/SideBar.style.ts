@@ -9,6 +9,7 @@ export const Container = styled("div")`
     display: none;
   }
   position: sticky;
+  margin-top: 64px;
   top: 64px;
   height: calc(100vh - 64px);
   background-color: white;
