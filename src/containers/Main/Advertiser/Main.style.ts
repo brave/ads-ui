@@ -1,13 +1,52 @@
 import styled from "styled-components";
+
+enum Breakpoint {
+  xs = "576px",
+  sm = "768px",
+  md = "992px",
+  lg = "1200px"
+}
+
 export const Container = styled("div")`
   height: 100%;
 `;
-
 export const Content = styled("div")`
   display: flex;
-  height: 100%;
-  overflow: hidden;
 `;
+export const Main = styled("div")`
+  padding: 24px;
+  height: 100%;
+  overflow: scroll;
+  margin-top: 64px;
+
+  @media (max-width: ${Breakpoint.xs}) {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media (min-width: ${Breakpoint.xs}) and (max-width: ${Breakpoint.sm}) {
+    width: 576px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media (min-width: ${Breakpoint.sm}) and (max-width: ${Breakpoint.md}) {
+    width: 768px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media (min-width: ${Breakpoint.md}) and (max-width: ${Breakpoint.lg}) {
+    width: 992px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media (min-width: ${Breakpoint.lg}) {
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+`;
+
+
 
 const drawerWidth = 240;
 

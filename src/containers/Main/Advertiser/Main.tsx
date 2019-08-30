@@ -31,8 +31,10 @@ import App from "../../../App";
 
 const mainStyle = {
   padding: "24px",
-  width: "100%",
   height: "100%",
+  width: "1200px",
+  marginLeft: "auto",
+  marginRight: "auto",
   overflow: "scroll"
 };
 
@@ -54,7 +56,7 @@ class Main extends React.Component<any, any> {
         <AppBar />
         <S.Content>
           <SideBar type={"user"} match={match} />
-          <main style={mainStyle}>
+          <S.Main>
             <Switch>
               {/* <Route path={match.url + "/dashboard"} component={Dashboard} />
             <Route path={match.url + "/creatives"} component={Creatives} />
@@ -67,7 +69,7 @@ class Main extends React.Component<any, any> {
               {/* <Route path={match.url + "/preferences"} component={Preferences} /> */}
               <Redirect to={match.url + "/performances"} />
             </Switch>
-          </main>
+          </S.Main>
         </S.Content>
       </S.Container>
     );
