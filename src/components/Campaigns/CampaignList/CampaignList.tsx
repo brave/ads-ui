@@ -25,14 +25,12 @@ class CampaignList extends React.Component<any, any> {
     const { campaignList } = this.props;
     return (
       <div>
-        <Card>
           <S.CardHeader>
-            <Text fontFamily={"Poppins"} sizes={[20, 20, 20, 20, 20]}>
+            <Text fontFamily={"Poppins"} sizes={[20, 20, 32, 32, 32]}>
               Campaigns
             </Text>
           </S.CardHeader>
           <CampaignTable match={match} data={campaignList} />
-        </Card>
       </div>
     );
   }
