@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import { connect } from "react-redux";
-import { Link, Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 
 import AppBar from "../../../components/AppBar/AppBar";
 import SideBar from "../../../components/SideBar/SideBar";

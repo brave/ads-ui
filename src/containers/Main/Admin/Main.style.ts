@@ -12,11 +12,13 @@ export const Container = styled("div")`
 `;
 export const Content = styled("div")`
   display: flex;
+  background-color: white;
 `;
 export const Main = styled("div")`
   padding: 24px;
-  height: calc(100vh - 64px);
+  height: 100%;
   overflow: scroll;
+  margin-top: 64px;
 
   @media (max-width: ${Breakpoint.xs}) {
     width: 100%;
