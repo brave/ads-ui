@@ -20,6 +20,7 @@ import { GetCampaigns, GetReports, GetCreatives } from "../../actions";
 import { styles } from "./Performances.style";
 
 import PerformancesCharts from "../../components/Performances/PerformancesCharts";
+import CampaignReport from "../../components/Campaigns/CampaignReport/CampaignReport";
 
 class Performances extends React.Component<any, any> {
   constructor(props: any) {
@@ -85,13 +86,14 @@ class Performances extends React.Component<any, any> {
             </FormControl>
           </CardContent>
         </Card>
-        <PerformancesCharts
+        { report !== undefined && 
+        <CampaignReport key={campaign.name}
           auth={auth}
           campaign={campaign}
           report={report}
           advertiser={advertisers[0]}
-          creatives={creatives}
         />
+        }
       </div>
     );
   }
