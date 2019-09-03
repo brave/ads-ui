@@ -359,7 +359,7 @@ class CampaignReport extends Component<any, any> {
                         </div>
                     </div>
                     <div>
-                        <OutsideAlerter onOutsideClick={this.closeMenu}>
+                        {/* <OutsideAlerter onOutsideClick={this.closeMenu}>
                             <div style={{ position: "relative" }}>
                                 <Icon onClick={this.toggleMenu} style={iconStyle}>
                                     more_vertical
@@ -372,7 +372,16 @@ class CampaignReport extends Component<any, any> {
                                     </S.MenuItem>
                                 </S.Menu>
                             </div>
-                        </OutsideAlerter>
+                        </OutsideAlerter> */}
+                    </div>
+                    <div style={{display: "flex", alignItems: "center", cursor: "pointer"}} onClick={() => { this.downloadCSV(campaign) }}>
+
+                                    <Text style={{marginBottom: "2px", marginRight: "8px"}} fontFamily={"Muli"} sizes={[18, 18, 18, 18, 17]}>
+                                Download CSV
+                            </Text>
+                            <Icon onClick={this.toggleMenu} style={iconStyle}>
+                                    vertical_align_bottom
+                                    </Icon>
                     </div>
 
                 </div>
