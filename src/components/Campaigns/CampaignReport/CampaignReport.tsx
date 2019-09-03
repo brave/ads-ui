@@ -4,7 +4,7 @@ import { Text } from "../../Text/Text";
 import { Progress } from 'react-sweet-progress';
 import "react-sweet-progress/lib/style.css";
 import * as Highcharts from "highcharts";
-// import testData from "./testdata";
+import testData from "./testdata3";
 import * as _ from "lodash";
 import * as S from "./CampaignReport.style";
 import moment from "moment";
@@ -110,10 +110,12 @@ class CampaignReport extends Component<any, any> {
                 dismissCount += data.dismissCount;
                 landCount += data.landCount;
             });
+            if(!isNaN(new Date(key).getTime())){
             viewData.push([new Date(key).getTime(), viewCount])
             clickData.push([new Date(key).getTime(), clickCount])
             dismissData.push([new Date(key).getTime(), dismissCount])
             landData.push([new Date(key).getTime(), landCount])
+            }
         });
 
         viewData = _.sortBy(viewData, (element) => {
@@ -170,29 +172,38 @@ class CampaignReport extends Component<any, any> {
             legend: {
                 enabled: false
             },
+            plotOptions: {
+                spline: {
+                    connectNulls: true
+                }
+            },
             series: [{
                 name: 'Views',
                 data: viewData,
                 color: Colors.Primary,
-                turboThreshold: 1000000
+                turboThreshold: 1000000,
+                connectNulls: true
             },
             {
                 name: 'Clicks',
                 data: clickData,
                 color: Colors.Secondary,
-                turboThreshold: 1000000
+                turboThreshold: 1000000,
+                connectNulls: true
             },
             {
                 name: 'Dismissed',
                 data: dismissData,
                 color: Colors.Tertiary,
-                turboThreshold: 1000000
+                turboThreshold: 1000000,
+                connectNulls: true
             },
             {
                 name: '10s Visits',
                 data: landData,
                 color: Colors.Quaternary,
-                turboThreshold: 1000000
+                turboThreshold: 1000000,
+                connectNulls: true
             }] as any
         });
 
@@ -443,7 +454,16 @@ class CampaignReport extends Component<any, any> {
                                     <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>Click-Through Rate</Text>
                                 </RowCell>
                                 <RowCell style={{}}>
-                                    <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>{((this.state.clickCount / this.state.viewCount) * 100).toFixed(1)}%</Text>
+                                    {
+                                        !isNaN((this.state.clickCount / this.state.viewCount)) && isFinite((this.state.clickCount / this.state.viewCount)) ?
+                                    <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>{
+                                        ((this.state.clickCount / this.state.viewCount) * 100).toFixed(1)}%
+                                    </Text>
+                                    :
+                                    <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
+                                        N/A
+                                    </Text>
+                                    }
                                 </RowCell>
                             </TableRow>
                             <TableRow>
@@ -451,7 +471,16 @@ class CampaignReport extends Component<any, any> {
                                     <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>10s Visit Rate</Text>
                                 </RowCell>
                                 <RowCell style={{}}>
-                                    <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>{((this.state.landedCount / this.state.viewCount) * 100).toFixed(1)}%</Text>
+                                {
+                                        !isNaN((this.state.landedCount / this.state.viewCount)) && isFinite((this.state.landedCount / this.state.viewCount)) ?
+                                    <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>{
+                                        ((this.state.landedCount / this.state.viewCount) * 100).toFixed(1)}%
+                                    </Text>
+                                    :
+                                    <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
+                                        N/A
+                                    </Text>
+                                    }
                                 </RowCell>
                             </TableRow>
                             <TableRow>
@@ -459,7 +488,16 @@ class CampaignReport extends Component<any, any> {
                                     <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>Dismiss Rate</Text>
                                 </RowCell>
                                 <RowCell style={{}}>
-                                    <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>{((this.state.dismissCount / this.state.viewCount) * 100).toFixed(1)}%</Text>
+                                {
+                                        !isNaN((this.state.dismissCount / this.state.viewCount)) && isFinite((this.state.dismissCount / this.state.viewCount)) ?
+                                    <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>{
+                                        ((this.state.dismissCount / this.state.viewCount) * 100).toFixed(1)}%
+                                    </Text>
+                                    :
+                                    <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
+                                        N/A
+                                    </Text>
+                                    }
                                 </RowCell>
                             </TableRow>
                             <TableRow>
@@ -467,7 +505,16 @@ class CampaignReport extends Component<any, any> {
                                     <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>Click to 10s Visit Rate</Text>
                                 </RowCell>
                                 <RowCell style={{}}>
-                                    <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>{((this.state.landedCount / this.state.clickCount) * 100).toFixed(1)}%</Text>
+                                {
+                                        !isNaN((this.state.landedCount / this.state.clickCount)) && isFinite((this.state.landedCount / this.state.clickCount)) ?
+                                    <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>{
+                                        ((this.state.landedCount / this.state.clickCount) * 100).toFixed(1)}%
+                                    </Text>
+                                    :
+                                    <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
+                                        N/A
+                                    </Text>
+                                    }
                                 </RowCell>
                             </TableRow>
                             <TableRow>

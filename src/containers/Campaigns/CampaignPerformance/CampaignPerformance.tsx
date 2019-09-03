@@ -36,7 +36,7 @@ class CampaignPerformance extends React.Component<any, any> {
       
       <div className={classes.root}>
         {
-          !report ? <div>noreport</div> :
+          !report ? <div></div> :
         <CampaignReport
           auth={auth}
           campaign={campaign}
