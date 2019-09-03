@@ -33,13 +33,17 @@ class CampaignPerformance extends React.Component<any, any> {
     });
 
     return (
+      
       <div className={classes.root}>
+        {
+          !report ? <div>noreport</div> :
         <CampaignReport
           auth={auth}
           campaign={campaign}
           report={report}
           advertiser={advertisers[0]}
         />
+        }
       </div>
     );
   }

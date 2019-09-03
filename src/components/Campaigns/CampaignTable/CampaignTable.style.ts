@@ -7,10 +7,9 @@ export const Table = styled("div")`
 export const TableHeader = styled("div")`
   display: flex;
   width: 100%;
-  height: 65px;
+  height: 48px;
   align-items: center;
-  background-color: #fafafa;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 2px solid #f4f4f5;
   user-select: none;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
@@ -20,40 +19,34 @@ export const HeaderRow = styled("div")`
   display: flex;
   width: 100%;
   justify-content: space-between;
-  padding-left: 12px;
-  padding-right: 12px;
 `;
 
 export const HeaderCell = styled("div")`
   display: flex;
   align-items: center;
-  text-transform: uppercase;
   opacity: 0.85;
   width:115px;
 `;
 
 export const TableRow = styled("div")`
   display: flex;
-  height: 85px;
+  height: 60px;
   justify-content: space-between;
   align-items: center;
-  padding-left: 12px;
-  padding-right: 12px;
-  border-bottom: 1px solid #e6eaea;
+  border-bottom: 2px solid #f4f4f5;
   &:hover {
-    background-color: #fafafa;
-    color: #3f404b;
+    background-color: #fcfcfc;
   }
   overflow-wrap: break-word;
 `;
 
 export const RowCell = styled("div")`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  align-items: center;
   width: 115px;
   height: 100%;
   opacity: 0.9;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 

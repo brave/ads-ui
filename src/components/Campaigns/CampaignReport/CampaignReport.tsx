@@ -40,10 +40,8 @@ class CampaignReport extends Component<any, any> {
     }
 
     componentDidMount() {
-        this.sumConfirmationTypes(this.props.report.records);
-        this.formatChartData(this.props.report.records);
-        // this.sumConfirmationTypes(this.props.report.records);
-        // this.formatChartData(this.props.report.records);
+            this.sumConfirmationTypes(this.props.report.records);
+            this.formatChartData(this.props.report.records);
     }
 
     sumConfirmationTypes(data) {
@@ -336,16 +334,16 @@ class CampaignReport extends Component<any, any> {
     render() {
         const { campaign, report, advertiser } = this.props;
         return (
-            <Card>
+            <div key={campaign.name}>
                 {/* Row 1 */}
                 <div style={{ display: "flex", justifyContent: "space-between", paddingLeft: "14px", paddingRight: "14px" }}>
                     <div style={{ width: "30%" }} key='a1'>
                         <div style={{}}>
                             <Text fontFamily={"Poppins"} sizes={[18, 18, 24, 24, 24]}>
-                                {advertiser.name}
+                                {this.props.advertiser.name}
                             </Text>
                             <Text style={{ marginTop: "8px" }} fontFamily={"Muli"} sizes={[18, 18, 18, 18, 17]}>
-                                {campaign.name}
+                                {this.props.campaign.name}
                             </Text>
                         </div>
                     </div>
@@ -501,17 +499,7 @@ class CampaignReport extends Component<any, any> {
 
                 {/* Row 5 */}
                 <div style={{ display: "flex", marginTop: "36px", paddingLeft: "14px", paddingRight: "14px" }}>
-                    <div style={{ width: "50%", height: "100%", display: "flex" }} key='c1'>
-                        <Text style={{ marginTop: "8px", marginBottom: "8px" }} fontFamily={"Muli"} sizes={[18, 18, 18, 18, 17]}>
-                            Platform Statistics
-                                </Text>
-                        <Badge style={{marginRight: "20px", marginTop: "7px"}}>
-                            <Text fontFamily={"Poppins"} sizes={[18, 18, 15, 15, 15]}>
-                                Coming Soon!
-                                </Text>
-                        </Badge>
-                    </div>
-                    <div style={{ width: "50%", marginLeft: "14px" }} key='d'>
+                    <div style={{ width: "50%"}} key='d'>
                         <Text style={{ marginTop: "8px", marginBottom: "8px" }} fontFamily={"Muli"} sizes={[18, 18, 18, 18, 17]}>
                             Decision Curve
                                 </Text>
@@ -519,7 +507,7 @@ class CampaignReport extends Component<any, any> {
                         </div>
                     </div>
                 </div>
-            </Card >
+            </div >
         );
     }
     async downloadCSV(campaign) {

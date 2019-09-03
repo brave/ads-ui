@@ -12,6 +12,7 @@ export const Container = styled("div")`
 `;
 export const Content = styled("div")`
   display: flex;
+  background-color: white;
 `;
 export const Main = styled("div")`
   padding: 24px;

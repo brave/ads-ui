@@ -86,12 +86,14 @@ class Performances extends React.Component<any, any> {
             </FormControl>
           </CardContent>
         </Card>
-        <CampaignReport
+        { report !== undefined && 
+        <CampaignReport key={campaign.name}
           auth={auth}
           campaign={campaign}
           report={report}
           advertiser={advertisers[0]}
         />
+        }
       </div>
     );
   }
