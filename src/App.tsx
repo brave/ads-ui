@@ -14,6 +14,7 @@ import { CloseSnackBar as close } from "./actions";
 import * as S from "./App.style";
 
 import Authentication from "./containers/Authentication/Authentication";
+import Admin from "./views/admin/Admin";
 import AdminMain from "./containers/Main/Admin/Main";
 import AdvertiserMain from "./containers/Main/Advertiser/Main";
 
@@ -47,7 +48,7 @@ class App extends React.Component<any, any> {
         <React.Fragment>
           <Switch>
             <Route path="/user/main" component={AdvertiserMain} />
-            <Route path="/admin/main" component={AdminMain} />
+            <Route path="/admin/main" component={Admin} />
             <Route path="/auth" component={Authentication} />
             <Route path='/' exact={true} component={() => {
               window.location.href = "https://brave.com/brave-ads-waitlist/";
