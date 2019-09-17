@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as S from "./CampaignTable.style";
 import { Text } from "../../Text/Text";
 import { Link } from "react-router-dom";
-import { PageInputContainer } from "../../Table/Table";
+import { PageInputContainer, Pagination, Button, ButtonContainer, PageSelect, Container, Table, TableHeader, HeaderRow, HeaderCell, Row, Cell, UpArrow, DownArrow } from "../../../components/Table/Table";
 
 import {
   useTable,
@@ -14,6 +14,8 @@ import { connect } from 'react-redux';
 
 // Table Data
 import columns from "./data/columns";
+const tableWidth = 1200;
+const columnCount = 9;
 
 class CampaignTable extends Component<any, any> {
 
@@ -21,16 +23,16 @@ class CampaignTable extends Component<any, any> {
     super(props);
   }
   render() {
+    console.log(this.props.data);
     return (
       <React.Fragment>
-        <Table columns={columns} data={this.props.data} match={this.props.match} />
+        <TableWrapper columns={columns} data={this.props.data} match={this.props.match} />
       </React.Fragment>
     )
   }
 }
 
-function Table({ columns, data, match }) {
-
+function TableWrapper({ columns, data, match }) {
   const tableState = useTableState({ pageIndex: 0, pageSize: 10 })
 
   const {
@@ -58,121 +60,116 @@ function Table({ columns, data, match }) {
   )
 
   return (
-    <React.Fragment>
-      <S.Table {...getTableProps()}>
-        <S.TableHeader>
+    <Container>
+      <Table {...getTableProps()}>
+        <React.Fragment>
           {headerGroups.map(headerGroup => (
-            <S.HeaderRow {...headerGroup.getHeaderGroupProps()}>
+            <HeaderRow {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => {
                 return renderHeader(column)
               })}
-            </S.HeaderRow>
+            </HeaderRow>
           ))}
-        </S.TableHeader>
+        </React.Fragment>
         <div>
           {page.map(
             (row, i) =>
 
               prepareRow(row) || (
-                <Link style={{ textDecoration: "none", color: "inherit" }} to={`/admin/main/users/${row.original.userId}/advertiser/${row.original.advertiserId}/campaign/${row.original.id}`}>
-                  <S.TableRow {...row.getRowProps()}>
-                    {row.cells.map(cell => {
-                      return renderRow(cell)
-                    })}
-                  </S.TableRow>
-                </Link>
+                // <Link style={{ textDecoration: "none", color: "inherit" }} to={`/admin/main/users/${row.original.userId}/advertiser/${row.original.advertiserId}/campaign/${row.original.id}`}>
+                <Row {...row.getRowProps()}>
+                  {row.cells.map(cell => {
+                    return renderRow(cell)
+                  })}
+                </Row>
+                // </Link>
               )
           )}
         </div>
-      </S.Table>
-      <div style={{ width: "100%", display: "flex", justifyContent: "space-between"}}>
-        <div style={{ marginTop: '36px' }}>
-          <div style={{ display: "flex" }}>
-            <Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>Go to page:</Text>
-            <PageInputContainer>
-              <input
-                type="number"
-                min={0}
-                defaultValue={pageIndex + 1}
-                style={{ height: "100%", width: "100%", border: "none", fontSize: "14px", paddingLeft: "4px", userSelect: "none" }}
-                onChange={e => {
-                  const page = e.target.value ? Number(e.target.value) - 1 : 0
-                  gotoPage(page)
-                }}
-              />
-            </PageInputContainer>
-
-            <select
-              value={pageSize}
-              style={{ marginTop: "-5px", backgroundColor: "white" }}
+      </Table>
+      <Pagination>
+        <PageSelect>
+          <Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>Go to page:</Text>
+          <PageInputContainer>
+            <input
+              type="number"
+              min={0}
+              defaultValue={pageIndex + 1}
+              style={{ height: "100%", width: "100%", border: "none", fontSize: "14px", paddingLeft: "4px", userSelect: "none" }}
               onChange={e => {
-                setPageSize(Number(e.target.value))
+                const page = e.target.value ? Number(e.target.value) - 1 : 0
+                gotoPage(page)
               }}
-            >
-              {[10, 50, 100].map(pageSize => (
-                <option key={pageSize} value={pageSize}>
-                  Show {pageSize}
-                </option>
-              ))}
-            </select>
+            />
+          </PageInputContainer>
 
-          </div>
-        </div>
-        <div style={{ marginTop: '36px', display: "flex" }}>
-          <button style={{ marginTop: "-5px", backgroundColor: "#fafafa", borderRadius: "6px", marginLeft: "2px", marginRight: "2px" }} onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          <select
+            value={pageSize}
+            style={{ marginTop: "-5px", backgroundColor: "white" }}
+            onChange={e => {
+              setPageSize(Number(e.target.value))
+            }}
+          >
+            {[10, 50, 100].map(pageSize => (
+              <option key={pageSize} value={pageSize}>
+                Show {pageSize}
+              </option>
+            ))}
+          </select>
+        </PageSelect>
+        <ButtonContainer style={{ marginLeft: "auto" }}>
+          <Button style={{ marginLeft: "2px", marginRight: "2px" }} onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
             {'<<'}
-          </button>{' '}
-          <button style={{ marginTop: "-5px", backgroundColor: "#fafafa", borderRadius: "6px", marginLeft: "2px", marginRight: "10px" }} onClick={() => previousPage()} disabled={!canPreviousPage}>
+          </Button>{' '}
+          <Button style={{ marginLeft: "2px", marginRight: "10px" }} onClick={() => previousPage()} disabled={!canPreviousPage}>
             {'<'}
-          </button>{' '}
-          <span>
-            <Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>Page {pageIndex + 1} of {pageOptions.length}</Text>
+          </Button>{' '}
+          <span style={{ marginTop: "1px" }}>
+            <Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>{pageIndex + 1} of {pageOptions.length}</Text>
           </span>
-          <button style={{ marginTop: "-5px", backgroundColor: "#fafafa", borderRadius: "6px", marginLeft: "10px", marginRight: "2px" }} onClick={() => nextPage()} disabled={!canNextPage}>
+          <Button style={{ marginLeft: "10px", marginRight: "2px" }} onClick={() => nextPage()} disabled={!canNextPage}>
             {'>'}
-          </button>{' '}
-          <button style={{ marginTop: "-5px", backgroundColor: "#fafafa", borderRadius: "6px", marginLeft: "2px", marginRight: "2px" }} onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+          </Button>{' '}
+          <Button style={{ marginLeft: "2px", marginRight: "2px" }} onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
             {'>>'}
-          </button>{' '}
-        </div>
-      </div>
-    </React.Fragment>
+          </Button>{' '}
+        </ButtonContainer>
+      </Pagination>
+    </Container>
   )
 }
 
 function renderHeader(column) {
-  if(column.id === 'state'){
+  if (column.id === 'state') {
     return (
-      <div {...column.getHeaderProps(column.getSortByToggleProps())}>
-                    <S.HeaderCell>
-                      <div style={{marginLeft: "auto", marginRight: "auto"}}>
-                    <Text fontFamily={"Poppins"} fontWeight={500}  sizes={[13, 13, 13, 13, 13]}>{column.render('Header')}</Text>
-                    <div style={{ paddingLeft: "4px", fontSize: "8px", opacity: .85 }}>
-                      {column.sorted
-                        ? column.sortedDesc
-                          ? ' ▼'
-                          : ' ▲'
-                        : ''}
-                    </div>
-                    </div>
-                    </S.HeaderCell>
-                  </div>
+      <HeaderCell width={`calc(${tableWidth}px / ${columnCount})`} justifyContent={"center"} {...column.getHeaderProps(column.getSortByToggleProps())}>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          {column.render('Header')}
+          <div>
+            {column.sorted
+              ? column.sortedDesc
+                ? <UpArrow></UpArrow>
+                : <DownArrow></DownArrow>
+              : ''}
+          </div>
+        </div>
+      </HeaderCell>
     )
   }
-  else{
+  else {
     return (
-      <div {...column.getHeaderProps(column.getSortByToggleProps())}>
-                    <S.HeaderCell >
-                    <Text fontFamily={"Poppins"} fontWeight={500}  sizes={[13, 13, 13, 13, 13]}>{column.render('Header')}</Text>
-                    <div style={{ paddingLeft: "4px", fontSize: "8px", opacity: .85 }}>
-                      {column.sorted
-                        ? column.sortedDesc
-                          ? ' ▼'
-                          : ' ▲'
-                        : ''}
-                    </div>
-                    </S.HeaderCell>
-                  </div>
+      <HeaderCell width={`calc(${tableWidth}px / ${columnCount})`} {...column.getHeaderProps(column.getSortByToggleProps())}>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          {column.render('Header')}
+          <div>
+            {column.sorted
+              ? column.sortedDesc
+                ? <UpArrow></UpArrow>
+                : <DownArrow></DownArrow>
+              : ''}
+          </div>
+        </div>
+      </HeaderCell>
     )
   }
 }
@@ -184,30 +181,30 @@ function renderRow(cell) {
     case "name":
       return renderName(cell.value)
     case "state":
-      return (<S.RowCell>{renderStatus(cell.value)}</S.RowCell>)
+      return (<Cell width={`calc(${tableWidth}px / ${columnCount})`} justifyContent={"center"}>{renderStatus(cell.value)}</Cell>)
     case "budget":
-      return (<S.RowCell><Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+      return (<Cell width={`calc(${tableWidth}px / ${columnCount})`}><Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
         {renderMonetaryAmount(cell.value, cell.row.original.currency)}
-      </Text></S.RowCell>)
+      </Text></Cell>)
     case "spent":
-      return (<S.RowCell><Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+      return (<Cell width={`calc(${tableWidth}px / ${columnCount})`}><Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
         {renderMonetaryAmount(cell.value, cell.row.original.currency)}
-      </Text></S.RowCell>)
+      </Text></Cell>)
     case "startAt":
-      return (<S.RowCell><Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+      return (<Cell width={`calc(${tableWidth}px / ${columnCount})`}><Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
         {renderDate(cell.value)}
-      </Text></S.RowCell>)
+      </Text></Cell>)
     case "endAt":
-      return (<S.RowCell><Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+      return (<Cell width={`calc(${tableWidth}px / ${columnCount})`}><Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
         {renderDate(cell.value)}
-      </Text></S.RowCell>)
+      </Text></Cell>)
     case "view":
-      return (<S.RowCell><Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+      return (<Cell width={`calc(${tableWidth}px / ${columnCount})`}><Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
         {renderStat(cell.value)}
-      </Text></S.RowCell>)
+      </Text></Cell>)
     case "pacingIndex":
-      return (<S.RowCell><Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
-        {renderPacingIndex(cell.value)}</Text></S.RowCell>)
+      return (<Cell width={`calc(${tableWidth}px / ${columnCount})`}><Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+        {renderPacingIndex(cell.value)}</Text></Cell>)
   }
 }
 
@@ -247,25 +244,16 @@ function renderPacingIndex(value) {
 function renderStatus(state) {
   switch (state) {
     case 'active':
-      return (<div style={{marginLeft: "auto", marginRight: "auto"}}>
+      return (<div>
         <S.ActiveSymbol title="Active" />
-        {/* <Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
-          {state.charAt(0).toUpperCase() + state.slice(1)}
-        </Text> */}
       </div>)
     case 'under_review':
-      return (<div style={{marginLeft: "auto", marginRight: "auto"}}>
+      return (<div>
         <S.PendingSymbol title="Under Review" />
-        {/* <Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
-          Review
-            </Text> */}
       </div>)
     default:
-      return (<div style={{marginLeft: "auto", marginRight: "auto"}}>
+      return (<div>
         <S.PendingSymbol title={state.charAt(0).toUpperCase() + state.slice(1)} />
-        {/* <Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
-          {state.charAt(0).toUpperCase() + state.slice(1)}
-        </Text> */}
       </div>)
   }
 }
@@ -281,7 +269,7 @@ function renderMonetaryAmount(value, currency) {
 }
 
 function renderName(value) {
-    return <S.RowCell title={value}><Text style={{textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden"}} fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>{value}</Text></S.RowCell>
+  return <Cell width={`calc(${tableWidth}px / ${columnCount})`}><Text style={{ textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden" }} fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>{value}</Text></Cell>
 }
 
 function renderDate(value) {
