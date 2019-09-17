@@ -15,7 +15,9 @@ class CampaignsPerCountryTable extends Component<any, any> {
     constructor(props) {
         super(props);
     }
+
     render() {
+        console.log(this.props.data);
         return (
             <React.Fragment>
                 <TableWrapper columns={columns} data={this.props.data} />

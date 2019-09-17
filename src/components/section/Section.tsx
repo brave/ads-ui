@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import * as S from "./Section.style";
-import { Text } from "../Text/Text";
 
 class Section extends Component<any, any> {
 
     render() {
 
         const children = React.Children.map(this.props.children, child => {
-            // if items # is set, space items evenly. Else use flow layout. 
-            if (this.props.items) {
+            if (this.props.equalWidthChildren) {
                 return (
-                    <S.Section width={`${100 / this.props.items}%`}>
+                    <S.Section width={`${100 / React.Children.count(this.props.children)}%`}>
                         {child}
                     </S.Section>
                 )
@@ -30,7 +28,6 @@ class Section extends Component<any, any> {
             </React.Fragment>
         );
     }
-
 }
 
 export default Section;

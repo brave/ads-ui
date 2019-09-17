@@ -47,7 +47,6 @@ class Dashboard extends React.Component<any, any> {
   }
 
   public processData(data) {
-    console.log(data);
     let processedData = {} as any;
 
     processedData.campaignCount = data.campaignCount;

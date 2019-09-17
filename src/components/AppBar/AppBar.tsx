@@ -21,11 +21,25 @@ import BraveAdsLogo from "../../assets/images/Subdomains_Rewards_Ads_Default.png
 
 import { styles } from "./AppBar.style";
 import OutsideAlerter from "../OutsideAlerter/OutSideAlerter";
+import TopBarProgress from "react-topbar-progress-indicator";
+import "./lib/AppBar.css"
+
+import Context from "../../state/context";
 
 let iconStyle = { cursor: "pointer", color: "#ff7654", fontSize: "28px" };
 const linkStyle = { textDecoration: "none", color: "inherit" };
 
+TopBarProgress.config({
+    barColors: {
+        "0": "#FB7959"
+    },
+    shadowBlur: 0,
+    shadowColor: undefined,
+    barThickness: 2,
+});
+
 class AppBar extends React.Component<any, any> {
+    static contextType = Context;
     constructor(props) {
         super(props);
         this.state = {
@@ -49,7 +63,8 @@ class AppBar extends React.Component<any, any> {
         const { classes, toggleDrawer, open, signOut } = this.props;
         return (
             <div style={{ position: "fixed", width: "100%", top: "0px", zIndex: 9001 }}>
-                <S.Container>
+                <S.Container loading={this.context.loading}>
+                    {this.context.loading && <TopBarProgress />}
                     <S.SubContainer>
                         {/* <Link style={linkStyle} to={"/"}> */}
                         <S.Logo src={BraveAdsLogo} />

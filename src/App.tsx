@@ -18,6 +18,8 @@ import Admin from "./views/admin/Admin";
 import AdminMain from "./containers/Main/Admin/Main";
 import AdvertiserMain from "./containers/Main/Advertiser/Main";
 
+import Context from "./state/context";
+
 class App extends React.Component<any, any> {
   private theme = createMuiTheme({
     palette: {
@@ -40,29 +42,42 @@ class App extends React.Component<any, any> {
     vertical: "bottom"
   } as any;
 
+  state = {
+    loading: false
+  }
+
+  public setLoading = loading => {
+    this.setState({ loading });
+  }
+
   public render() {
     const { CloseSnackBar, snackbar } = this.props;
 
     return (
       <MuiThemeProvider theme={this.theme}>
         <React.Fragment>
-          <Switch>
-            <Route path="/user/main" component={AdvertiserMain} />
-            <Route path="/admin/main" component={Admin} />
-            <Route path="/auth" component={Authentication} />
-            <Route path='/' exact={true} component={() => {
-              window.location.href = "https://brave.com/brave-ads-waitlist/";
-              return null;
-            }} />
-            {this.getRedirect()}
-          </Switch>
-          <Snackbar
-            anchorOrigin={this.anchorSettings}
-            message={<span>{snackbar.message}</span>}
-            open={snackbar.open}
-            autoHideDuration={3000}
-            onClose={CloseSnackBar}
-          />
+          <Context.Provider value={{
+            loading: this.state.loading,
+            setLoading: this.setLoading
+          }}>
+            <Switch>
+              <Route path="/user/main" component={AdvertiserMain} />
+              <Route path="/admin/main" component={Admin} />
+              <Route path="/auth" component={Authentication} />
+              <Route path='/' exact={true} component={() => {
+                window.location.href = "https://brave.com/brave-ads-waitlist/";
+                return null;
+              }} />
+              {this.getRedirect()}
+            </Switch>
+            <Snackbar
+              anchorOrigin={this.anchorSettings}
+              message={<span>{snackbar.message}</span>}
+              open={snackbar.open}
+              autoHideDuration={3000}
+              onClose={CloseSnackBar}
+            />
+          </Context.Provider>
         </React.Fragment>
         <CssBaseline />
       </MuiThemeProvider>

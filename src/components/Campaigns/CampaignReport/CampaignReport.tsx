@@ -10,6 +10,7 @@ import * as S from "./CampaignReport.style";
 import moment from "moment";
 import OutsideAlerter from "../../OutsideAlerter/OutSideAlerter";
 import axios from "axios";
+import Context from "../../../state/context";
 
 
 import { Table, TableHeader, HeaderRow, HeaderCell, TableRow, Cell } from "../../Table/Table";
@@ -26,6 +27,7 @@ enum Colors {
 }
 
 class CampaignReport extends Component<any, any> {
+    static contextType = Context;
     constructor(props) {
         super(props);
         this.state = {
@@ -145,8 +147,6 @@ class CampaignReport extends Component<any, any> {
         if (!this.state.metricSelected[3]) {
             landData = [];
         }
-
-        console.log(viewData);
 
         var myChart = Highcharts.chart('container', {
             chart: {
@@ -298,22 +298,6 @@ class CampaignReport extends Component<any, any> {
                 color: Colors.Primary
             }] as any
         });
-
-
-        // var test = _.groupBy(hourlyData, function (date) {
-        //     return moment(date.index).startOf('day').format();
-        // });
-
-        // var test2 = _.groupBy(hourlyData, function (date) {
-        //     return moment(date.index).startOf('week').format();
-        // });
-
-        // var test3 = _.groupBy(hourlyData, function (date) {
-        //     return moment(date.index).startOf('month').format();
-        // });
-        // console.log(test);
-        // console.log(test2);
-        // console.log(test3);
     }
 
     public toggleMenu = () => {
@@ -569,7 +553,7 @@ class CampaignReport extends Component<any, any> {
         );
     }
     async downloadCSV(campaign) {
-
+        this.context.setLoading(true);
         axios(`${process.env.REACT_APP_SERVER_ADDRESS}/report/campaign/csv/${campaign.id}`, {
             headers: {
                 "Authorization": `Bearer ${this.props.auth.accessToken}`,
@@ -586,6 +570,7 @@ class CampaignReport extends Component<any, any> {
                 link.href = fileURL;
                 link.setAttribute('download', `${campaign.name}.csv`);
                 document.body.appendChild(link);
+                this.context.setLoading(false);
                 link.click();
             })
             .catch(error => {

@@ -23,6 +23,7 @@ class CampaignTable extends Component<any, any> {
     super(props);
   }
   render() {
+    console.log(this.props.data);
     return (
       <React.Fragment>
         <TableWrapper columns={columns} data={this.props.data} match={this.props.match} />
