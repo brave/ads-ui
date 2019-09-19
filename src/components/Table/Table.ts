@@ -1,59 +1,135 @@
 import styled from "styled-components";
 
-export const Table = styled("div")`
-  width: 100%;
+export const Container = styled("div")`
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
-export const TableHeader = styled("div")`
-  display: flex;
+export const Table = styled("div")`
   width: 100%;
-  height: 65px;
-  align-items: center;
-  background-color: #fafafa;
-  border-bottom: 1px solid #e0e0e0;
-  user-select: none;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
 `;
 
 export const HeaderRow = styled("div")`
   display: flex;
   width: 100%;
-  justify-content: space-between;
-  padding-left: 12px;
-  padding-right: 12px;
+  height: 48px;
+  border-bottom: 2px solid #f4f4f5;
 `;
 
+interface HeaderCellProps {
+  width: string;
+  justifyContent?: string;
+}
+
 export const HeaderCell = styled("div")`
+${(props: HeaderCellProps) => `
   display: flex;
+  height: 100%;
+  width: ${props.width};
+  justify-content: ${props.justifyContent};
+  padding: 4px;
   align-items: center;
-  text-transform: uppercase;
   opacity: 0.85;
-  width:115px;
+  font-family: "Poppins";
+  font-weight: 500;
+  font-size: 13px;
+  user-select: none;
+
+`}
+`;
+
+export const UpArrow = styled("div")`
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid black;
+  margin-left: 4px;
+`;
+
+export const DownArrow = styled("div")`
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid black;
+  margin-left: 4px;
+`;
+
+export const Row = styled("div")`
+  display: flex;
+  width: 100%;
+  height: 60px;
+  border-bottom: 2px solid #f4f4f5;
+  &:hover {
+    background-color: #fcfcfc;
+  }
+  overflow-wrap: break-word;
+`;
+
+interface CellProps {
+  width: string;
+  justifyContent?: string;
+}
+
+export const Cell = styled("div")`
+${(props: CellProps) => `
+  display: flex;
+  height: 100%;
+  width: ${props.width};
+  justify-content: ${props.justifyContent};
+  padding: 4px;
+  align-items: center;
+  font-family: "Muli";
+  font-size: 14px;
+  color: #1C1C1CE6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  `}
+`;
+
+export const Pagination = styled("div")`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 28px;
+`;
+
+export const PageSelect = styled("div")`
+  display: flex;
+`;
+
+export const ButtonContainer = styled("div")`
+  display: flex;
+`;
+
+export const Button = styled("button")`
+  margin-top: -5px;
+  background-color: #fafafa;
+  border-radius: 6px;
 `;
 
 export const TableRow = styled("div")`
   display: flex;
-  height: 85px;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 12px;
-  padding-right: 12px;
-  border-bottom: 1px solid #e6eaea;
+  width: 100%;
+  height: 60px;
+  border-bottom: 2px solid #f4f4f5;
   &:hover {
-    background-color: #fafafa;
-    color: #3f404b;
+    background-color: #fcfcfc;
   }
   overflow-wrap: break-word;
 `;
 
 export const RowCell = styled("div")`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 115px;
   height: 100%;
+  align-items: center;
+  // put in text
   opacity: 0.9;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 `;
@@ -77,4 +153,16 @@ export const PageInput = styled("div")`
     fontsize: 14px;
     fontfamily: Poppins;
     fontweight: 400;
+`;
+
+// To Delete
+export const TableHeader = styled("div")`
+  display: flex;
+  width: 100%;
+  height: 48px;
+  align-items: center;
+  border-bottom: 2px solid #f4f4f5;
+  user-select: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
 `;
