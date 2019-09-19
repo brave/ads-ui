@@ -13,8 +13,9 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import AppBar from "../../components/AppBar/AppBar";
 import SideBar from "../../components/SideBar/SideBar";
 import Dashboard from "./views/dashboard/Dashboard";
-import Users from "../../containers/Users/Users";
-import Campaigns from "../../containers/Campaigns/Campaigns";
+import Campaigns from "./views/campaigns/Campaigns";
+import Users from "./views/users/Users";
+
 
 import * as S from "./Admin.style";
 import { styles } from "./Admin.style";

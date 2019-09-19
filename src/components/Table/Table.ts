@@ -83,12 +83,15 @@ ${(props: CellProps) => `
   padding: 4px;
   align-items: center;
   font-family: "Muli";
-  font-size: 14px;
+  font-size: 13px;
   color: #1C1C1CE6;
+  `}
+`;
+
+export const CellText = styled("span")`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  `}
 `;
 
 export const Pagination = styled("div")`

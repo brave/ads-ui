@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as S from "./CampaignTable.style";
 import { Text } from "../../Text/Text";
 import { Link } from "react-router-dom";
-import { PageInputContainer, Pagination, Button, ButtonContainer, PageSelect, Container, Table, TableHeader, HeaderRow, HeaderCell, Row, Cell, UpArrow, DownArrow } from "../../../components/Table/Table";
+import { PageInputContainer, CellText, Pagination, Button, ButtonContainer, PageSelect, Container, Table, TableHeader, HeaderRow, HeaderCell, Row, Cell, UpArrow, DownArrow } from "../../../components/Table/Table";
 
 import {
   useTable,
@@ -14,8 +14,8 @@ import { connect } from 'react-redux';
 
 // Table Data
 import columns from "./data/columns";
-const tableWidth = 1200;
-const columnCount = 9;
+const tableWidth = 1100;
+const columnCount = 8;
 
 class CampaignTable extends Component<any, any> {
 
@@ -183,28 +183,28 @@ function renderRow(cell) {
     case "state":
       return (<Cell width={`calc(${tableWidth}px / ${columnCount})`} justifyContent={"center"}>{renderStatus(cell.value)}</Cell>)
     case "budget":
-      return (<Cell width={`calc(${tableWidth}px / ${columnCount})`}><Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+      return (<Cell width={`calc(${tableWidth}px / ${columnCount})`}><CellText>
         {renderMonetaryAmount(cell.value, cell.row.original.currency)}
-      </Text></Cell>)
+      </CellText></Cell>)
     case "spent":
-      return (<Cell width={`calc(${tableWidth}px / ${columnCount})`}><Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+      return (<Cell width={`calc(${tableWidth}px / ${columnCount})`}><CellText>
         {renderMonetaryAmount(cell.value, cell.row.original.currency)}
-      </Text></Cell>)
+      </CellText></Cell>)
     case "startAt":
-      return (<Cell width={`calc(${tableWidth}px / ${columnCount})`}><Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+      return (<Cell width={`calc(${tableWidth}px / ${columnCount})`}><CellText>
         {renderDate(cell.value)}
-      </Text></Cell>)
+      </CellText></Cell>)
     case "endAt":
-      return (<Cell width={`calc(${tableWidth}px / ${columnCount})`}><Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+      return (<Cell width={`calc(${tableWidth}px / ${columnCount})`}><CellText>
         {renderDate(cell.value)}
-      </Text></Cell>)
+      </CellText></Cell>)
     case "view":
-      return (<Cell width={`calc(${tableWidth}px / ${columnCount})`}><Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+      return (<Cell width={`calc(${tableWidth}px / ${columnCount})`}><CellText>
         {renderStat(cell.value)}
-      </Text></Cell>)
+      </CellText></Cell>)
     case "pacingIndex":
-      return (<Cell width={`calc(${tableWidth}px / ${columnCount})`}><Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
-        {renderPacingIndex(cell.value)}</Text></Cell>)
+      return (<Cell width={`calc(${tableWidth}px / ${columnCount})`}><CellText>
+        {renderPacingIndex(cell.value)}</CellText></Cell>)
   }
 }
 
@@ -213,21 +213,21 @@ function renderPacingIndex(value) {
   let index = parseFloat(value);
   if (index >= 1.50) {
     return (<React.Fragment>
-      <Text color={"#fc4145"} fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+      <Text color={"#1C1C1C"} fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
         {(index * 100).toFixed(0)}
       </Text>
     </React.Fragment>)
   }
   else if (index >= 0.50 && index <= 1.50) {
     return (<React.Fragment>
-      <Text color={"#07C806"} fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+      <Text color={"#1C1C1C"} fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
         {(index * 100).toFixed(0)}
       </Text>
     </React.Fragment>)
   }
   else if (index > 0.01 && index <= 0.50) {
     return (<React.Fragment>
-      <Text color={"#fc4145"} fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
+      <Text color={"#1C1C1C"} fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>
         {(index * 100).toFixed(0)}
       </Text>
     </React.Fragment>)
@@ -269,7 +269,7 @@ function renderMonetaryAmount(value, currency) {
 }
 
 function renderName(value) {
-  return <Cell width={`calc(${tableWidth}px / ${columnCount})`}><Text style={{ textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden" }} fontFamily={"Muli"} sizes={[14, 14, 14, 14, 14]}>{value}</Text></Cell>
+  return <Cell width={`calc(${tableWidth}px / ${columnCount})`}><CellText>{value}</CellText></Cell>
 }
 
 function renderDate(value) {

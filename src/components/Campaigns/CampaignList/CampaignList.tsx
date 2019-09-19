@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import CampaignTable from "../CampaignTable/CampaignTable";
 
 import * as S from "./CampaignList.style";
-import Card from "../../Card/Card";
+import Section from "../../section/Section";
 import { Text } from "../../Text/Text";
 
 import {
@@ -25,12 +25,12 @@ class CampaignList extends React.Component<any, any> {
     const { campaignList } = this.props;
     return (
       <div>
-          <S.CardHeader>
+        {/* <S.CardHeader>
             <Text fontFamily={"Poppins"} sizes={[20, 20, 32, 32, 32]}>
               Campaigns
             </Text>
-          </S.CardHeader>
-          <CampaignTable match={match} data={campaignList} />
+          </S.CardHeader> */}
+        <Section header={"Campaigns"}><CampaignTable match={match} data={campaignList} /></Section>
       </div>
     );
   }
