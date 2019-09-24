@@ -10,11 +10,14 @@ import * as S from "./CampaignReport.style";
 import moment from "moment";
 import OutsideAlerter from "../../OutsideAlerter/OutSideAlerter";
 import axios from "axios";
-let iconStyle = { cursor: "pointer", fontSize: "24px" };
+import Context from "../../../state/context";
 
-import { Table, TableHeader, HeaderRow, HeaderCell, TableRow, RowCell } from "../../Table/Table";
+
+import { Table, TableHeader, HeaderRow, HeaderCell, TableRow, Cell } from "../../Table/Table";
 import { Icon } from '@material-ui/core';
 import Badge from "../../Badge/Badge";
+
+let iconStyle = { cursor: "pointer", fontSize: "24px" };
 
 enum Colors {
     Primary = "#4C54D2CC",
@@ -24,6 +27,7 @@ enum Colors {
 }
 
 class CampaignReport extends Component<any, any> {
+    static contextType = Context;
     constructor(props) {
         super(props);
         this.state = {
@@ -40,8 +44,8 @@ class CampaignReport extends Component<any, any> {
     }
 
     componentDidMount() {
-            this.sumConfirmationTypes(this.props.report.records);
-            this.formatChartData(this.props.report.records);
+        this.sumConfirmationTypes(this.props.report.records);
+        this.formatChartData(this.props.report.records);
     }
 
     sumConfirmationTypes(data) {
@@ -68,34 +72,34 @@ class CampaignReport extends Component<any, any> {
                     break;
             }
         });
-        this.setState({ viewCount, clickCount, dismissCount, landedCount, upvotedCount, downvotedCount }, 
-            () => {this.formatChartData(this.props.report.records)})
+        this.setState({ viewCount, clickCount, dismissCount, landedCount, upvotedCount, downvotedCount },
+            () => { this.formatChartData(this.props.report.records) })
     }
 
     formatChartData(data) {
 
         let processedData = processData(data);
-        switch(this.state.timeInterval){
+        switch (this.state.timeInterval) {
             case 'Hourly':
-            processedData = _.groupBy(processedData, function (date) {
-                return moment(date.index).startOf('hour').format();
-            });
-            break;
+                processedData = _.groupBy(processedData, function (date) {
+                    return moment(date.index).startOf('hour').format();
+                });
+                break;
             case 'Daily':
-            processedData = _.groupBy(processedData, function (date) {
-                return moment(date.index).startOf('day').format();
-                    });
-            break;
-            case 'Weekly': 
-            processedData = _.groupBy(processedData, function (date) {
-                return moment(date.index).startOf('week').format();
-            });
-            break;
+                processedData = _.groupBy(processedData, function (date) {
+                    return moment(date.index).startOf('day').format();
+                });
+                break;
+            case 'Weekly':
+                processedData = _.groupBy(processedData, function (date) {
+                    return moment(date.index).startOf('week').format();
+                });
+                break;
             case 'Monthly':
-            processedData = _.groupBy(processedData, function (date) {
-                return moment(date.index).startOf('month').format();
-            });
-            break;
+                processedData = _.groupBy(processedData, function (date) {
+                    return moment(date.index).startOf('month').format();
+                });
+                break;
         }
 
         let viewData = [] as any;
@@ -110,11 +114,11 @@ class CampaignReport extends Component<any, any> {
                 dismissCount += data.dismissCount;
                 landCount += data.landCount;
             });
-            if(!isNaN(new Date(key).getTime())){
-            viewData.push([new Date(key).getTime(), viewCount])
-            clickData.push([new Date(key).getTime(), clickCount])
-            dismissData.push([new Date(key).getTime(), dismissCount])
-            landData.push([new Date(key).getTime(), landCount])
+            if (!isNaN(new Date(key).getTime())) {
+                viewData.push([new Date(key).getTime(), viewCount])
+                clickData.push([new Date(key).getTime(), clickCount])
+                dismissData.push([new Date(key).getTime(), dismissCount])
+                landData.push([new Date(key).getTime(), landCount])
             }
         });
 
@@ -131,20 +135,18 @@ class CampaignReport extends Component<any, any> {
             return Object.values(element)[0]
         });
 
-        if(!this.state.metricSelected[0]){
+        if (!this.state.metricSelected[0]) {
             viewData = [];
         }
-        if(!this.state.metricSelected[1]){
+        if (!this.state.metricSelected[1]) {
             clickData = [];
         }
-        if(!this.state.metricSelected[2]){
+        if (!this.state.metricSelected[2]) {
             dismissData = [];
         }
-        if(!this.state.metricSelected[3]){
+        if (!this.state.metricSelected[3]) {
             landData = [];
         }
-
-        console.log(viewData);
 
         var myChart = Highcharts.chart('container', {
             chart: {
@@ -296,22 +298,6 @@ class CampaignReport extends Component<any, any> {
                 color: Colors.Primary
             }] as any
         });
-
-
-        // var test = _.groupBy(hourlyData, function (date) {
-        //     return moment(date.index).startOf('day').format();
-        // });
-
-        // var test2 = _.groupBy(hourlyData, function (date) {
-        //     return moment(date.index).startOf('week').format();
-        // });
-
-        // var test3 = _.groupBy(hourlyData, function (date) {
-        //     return moment(date.index).startOf('month').format();
-        // });
-        // console.log(test);
-        // console.log(test2);
-        // console.log(test3);
     }
 
     public toggleMenu = () => {
@@ -337,7 +323,7 @@ class CampaignReport extends Component<any, any> {
 
     public setTimeInterval = (e) => {
         let that = this;
-        this.setState({timeInterval: e.target.value}, () => {
+        this.setState({ timeInterval: e.target.value }, () => {
             that.formatChartData(this.props.report.records);
         });
     }
@@ -374,13 +360,13 @@ class CampaignReport extends Component<any, any> {
                             </div>
                         </OutsideAlerter> */}
                     </div>
-                    <div style={{display: "flex", alignItems: "center", cursor: "pointer"}} onClick={() => { this.downloadCSV(campaign) }}>
+                    <div style={{ display: "flex", alignItems: "center", cursor: "pointer" }} onClick={() => { this.downloadCSV(campaign) }}>
 
-                                    <Text style={{marginBottom: "2px", marginRight: "8px"}} fontFamily={"Muli"} sizes={[18, 18, 18, 18, 17]}>
-                                Download CSV
+                        <Text style={{ marginBottom: "2px", marginRight: "8px" }} fontFamily={"Muli"} sizes={[18, 18, 18, 18, 17]}>
+                            Download CSV
                             </Text>
-                            <Icon onClick={this.toggleMenu} style={iconStyle}>
-                                    vertical_align_bottom
+                        <Icon onClick={this.toggleMenu} style={iconStyle}>
+                            vertical_align_bottom
                                     </Icon>
                     </div>
 
@@ -430,7 +416,7 @@ class CampaignReport extends Component<any, any> {
                         </div>
                     </S.Statistic>
                     <div style={{ marginLeft: "auto", marginTop: "auto" }}>
-                        <select value={this.state.timeInterval} onChange={(e) => {this.setTimeInterval(e)}}
+                        <select value={this.state.timeInterval} onChange={(e) => { this.setTimeInterval(e) }}
                             style={{ marginTop: "-5px", backgroundColor: "white", height: "30px" }}
                         >
                             {["Hourly", "Daily", "Weekly", "Monthly"].map(pageSize => (
@@ -459,88 +445,88 @@ class CampaignReport extends Component<any, any> {
                                 </Text>
                         <Table>
                             <TableRow>
-                                <RowCell style={{}}>
+                                <Cell width={"50%"} style={{}}>
                                     <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>Click-Through Rate</Text>
-                                </RowCell>
-                                <RowCell style={{}}>
+                                </Cell>
+                                <Cell width={"50%"} style={{}}>
                                     {
                                         !isNaN((this.state.clickCount / this.state.viewCount)) && isFinite((this.state.clickCount / this.state.viewCount)) ?
-                                    <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>{
-                                        ((this.state.clickCount / this.state.viewCount) * 100).toFixed(1)}%
+                                            <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>{
+                                                ((this.state.clickCount / this.state.viewCount) * 100).toFixed(1)}%
                                     </Text>
-                                    :
-                                    <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
-                                        N/A
+                                            :
+                                            <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
+                                                N/A
                                     </Text>
                                     }
-                                </RowCell>
+                                </Cell>
                             </TableRow>
                             <TableRow>
-                                <RowCell style={{}}>
+                                <Cell width={"50%"} style={{}}>
                                     <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>10s Visit Rate</Text>
-                                </RowCell>
-                                <RowCell style={{}}>
-                                {
+                                </Cell>
+                                <Cell width={"50%"} style={{}}>
+                                    {
                                         !isNaN((this.state.landedCount / this.state.viewCount)) && isFinite((this.state.landedCount / this.state.viewCount)) ?
-                                    <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>{
-                                        ((this.state.landedCount / this.state.viewCount) * 100).toFixed(1)}%
+                                            <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>{
+                                                ((this.state.landedCount / this.state.viewCount) * 100).toFixed(1)}%
                                     </Text>
-                                    :
-                                    <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
-                                        N/A
+                                            :
+                                            <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
+                                                N/A
                                     </Text>
                                     }
-                                </RowCell>
+                                </Cell>
                             </TableRow>
                             <TableRow>
-                                <RowCell style={{}}>
+                                <Cell width={"50%"} style={{}}>
                                     <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>Dismiss Rate</Text>
-                                </RowCell>
-                                <RowCell style={{}}>
-                                {
+                                </Cell>
+                                <Cell width={"50%"} style={{}}>
+                                    {
                                         !isNaN((this.state.dismissCount / this.state.viewCount)) && isFinite((this.state.dismissCount / this.state.viewCount)) ?
-                                    <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>{
-                                        ((this.state.dismissCount / this.state.viewCount) * 100).toFixed(1)}%
+                                            <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>{
+                                                ((this.state.dismissCount / this.state.viewCount) * 100).toFixed(1)}%
                                     </Text>
-                                    :
-                                    <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
-                                        N/A
+                                            :
+                                            <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
+                                                N/A
                                     </Text>
                                     }
-                                </RowCell>
+                                </Cell>
                             </TableRow>
                             <TableRow>
-                                <RowCell style={{}}>
+                                <Cell width={"50%"} style={{}}>
                                     <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>Click to 10s Visit Rate</Text>
-                                </RowCell>
-                                <RowCell style={{}}>
-                                {
+                                </Cell>
+                                <Cell width={"50%"} style={{}}>
+                                    {
                                         !isNaN((this.state.landedCount / this.state.clickCount)) && isFinite((this.state.landedCount / this.state.clickCount)) ?
-                                    <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>{
-                                        ((this.state.landedCount / this.state.clickCount) * 100).toFixed(1)}%
+                                            <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>{
+                                                ((this.state.landedCount / this.state.clickCount) * 100).toFixed(1)}%
                                     </Text>
-                                    :
-                                    <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
-                                        N/A
+                                            :
+                                            <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>
+                                                N/A
                                     </Text>
                                     }
-                                </RowCell>
+                                </Cell>
                             </TableRow>
                             <TableRow>
-                                <RowCell>
+                                <Cell width={"50%"}>
                                     <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>Upvotes</Text>
-                                </RowCell>
-                                <RowCell>
-                                <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>{this.state.upvotedCount}</Text>
-                                </RowCell>
+                                </Cell>
+                                <Cell width={"50%"}>
+                                    <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>{this.state.upvotedCount}</Text>
+                                </Cell>
                             </TableRow>
                             <TableRow>
-                                <RowCell style={{}}>
+                                <Cell width={"50%"} style={{}}>
                                     <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>Downvotes</Text>
-                                </RowCell>
-                                <RowCell>
-                                <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>{this.state.downvotedCount}</Text>
-                                </RowCell>
+                                </Cell>
+                                <Cell width={"50%"}>
+                                    <Text fontFamily={"Muli"} sizes={[15, 15, 15, 15, 15]}>{this.state.downvotedCount}</Text>
+                                </Cell>
                             </TableRow>
                         </Table>
                     </div>
@@ -548,14 +534,14 @@ class CampaignReport extends Component<any, any> {
                         <Text style={{ marginTop: "8px", marginBottom: "8px" }} fontFamily={"Muli"} sizes={[18, 18, 18, 18, 17]}>
                             Recent Statistics
                                 </Text>
-                        <div id="container2" style={{ width: "100%", paddingTop: "36px", height: "545px" }}>
+                        <div id="container2" style={{ width: "100%", paddingTop: "36px", height: "394px" }}>
                         </div>
                     </div>
                 </div>
 
                 {/* Row 5 */}
                 <div style={{ display: "flex", marginTop: "36px", paddingLeft: "14px", paddingRight: "14px" }}>
-                    <div style={{ width: "50%"}} key='d'>
+                    <div style={{ width: "50%" }} key='d'>
                         <Text style={{ marginTop: "8px", marginBottom: "8px" }} fontFamily={"Muli"} sizes={[18, 18, 18, 18, 17]}>
                             Decision Curve
                                 </Text>
@@ -567,7 +553,7 @@ class CampaignReport extends Component<any, any> {
         );
     }
     async downloadCSV(campaign) {
-
+        this.context.setLoading(true);
         axios(`${process.env.REACT_APP_SERVER_ADDRESS}/report/campaign/csv/${campaign.id}`, {
             headers: {
                 "Authorization": `Bearer ${this.props.auth.accessToken}`,
@@ -584,6 +570,7 @@ class CampaignReport extends Component<any, any> {
                 link.href = fileURL;
                 link.setAttribute('download', `${campaign.name}.csv`);
                 document.body.appendChild(link);
+                this.context.setLoading(false);
                 link.click();
             })
             .catch(error => {
@@ -591,7 +578,7 @@ class CampaignReport extends Component<any, any> {
     }
 }
 
-function processData(data){
+function processData(data) {
     let groups = Object.create(null);
     data.forEach(record => {
         if (!groups[record.confirmationsDate]) {
@@ -633,8 +620,8 @@ function processData(data){
     return processedData
 }
 
-function renderMetric(value){
-    return 
+function renderMetric(value) {
+    return
 }
 
 export default CampaignReport;

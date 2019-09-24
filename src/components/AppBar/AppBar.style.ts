@@ -1,7 +1,9 @@
-const drawerWidth = 240;
+
 
 import styled from "styled-components";
 import BraveLogo from "../../../assets/images/brave-logotype-full-color.png";
+
+const drawerWidth = 240;
 
 enum Breakpoint {
   xs = "576px",
@@ -10,16 +12,21 @@ enum Breakpoint {
   lg = "1200px"
 }
 
+interface ContainerProps {
+  loading: boolean;
+}
 export const Container = styled("div")`
+${(props: ContainerProps) => `
   display: flex;
   width: 100%;
   height: 64px;
+  border-bottom: ${props.loading ? "2px solid #F6F6F5" : "2px solid #FB7959"}
   align-items: center;
   justify-content: space-between;
   background-color: white;
-  border-bottom: 2px solid #f8542bb3;
   padding-left: 24px;
   padding-right: 24px;
+`}
 `;
 
 export const SubContainer = styled("div")`
