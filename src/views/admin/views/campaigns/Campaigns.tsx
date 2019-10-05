@@ -1,33 +1,50 @@
 import React from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
 
-import CampaignList from "../../../../components/Campaigns/CampaignList/CampaignList";
-import Campaign from "./views/Campaign";
+import CampaignTable from "./components/campaignTable/CampaignTable";
+import Section from "../../../../components/section/Section";
+
+import {
+    GetCampaignList,
+} from "../../../../actions";
 
 
 
 class Campaigns extends React.Component<any, any> {
+    constructor(props) {
+        super(props);
+    }
+    public componentDidMount() {
+        this.props.GetCampaignList(this.props.auth);
+    }
+
     public render() {
         const { match } = this.props;
+        const { campaignList } = this.props;
         return (
-            <div>
-                <Switch>
-                    <Route exact path={match.url} component={CampaignList} />
-                    <Route exact path={match.url + "/:campaignId"} component={Campaign} />
-                    {/* <Route exact path={match.url + "/new"} component={CampaignNew} />
-          <Route exact path={match.url + "/:campaignId"} component={CampaignView} />
-          <Route exact path={match.url + "/:campaignId/report"} component={CampaignPerformance} />
-          <Route exact path={match.url + "/:campaignId/creativeSet/new"} component={CreativeSetNew} />
-          <Route exact path={match.url + "/:campaignId/creativeSet/:creativeSetId"} component={CreativeSetView} />
-          <Route exact path={match.url + "/:campaignId/creativeSet/:creativeSetId/creativeInstance/new"}
-            component={CreativeInstanceNew} />
-          <Route exact path={match.url + "/:campaignId/creativeSet/:creativeSetId/creativeInstance/:creativeInstanceId"}
-            component={CreativeInstanceView} />
-          <Redirect to={match.url} /> */}
-                </Switch>
-            </div>
+            <React.Fragment>
+                <Section header={"Campaigns"}>
+                    {/* Filters / Charts will go here */}
+                    <CampaignTable match={match} data={campaignList} />
+                </Section>
+            </React.Fragment>
         );
     }
 }
 
-export default Campaigns;
+const mapStateToProps = (state: any, ownProps: any) => ({
+    auth: state.authReducer,
+    campaigns: state.campaignReducer.campaigns,
+    campaignList: state.campaignListReducer.campaignList
+});
+
+const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
+    GetCampaignList: (auth: any) => dispatch(GetCampaignList(auth))
+});
+
+export default
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(Campaigns);
+

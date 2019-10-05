@@ -1,5 +1,5 @@
 import { AppBar, Card, CardContent, Toolbar, Typography, withStyles } from "@material-ui/core";
-import React from "react";
+import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
@@ -8,7 +8,7 @@ import UserForm from "../UserForm/UserForm";
 
 import { styles } from "./UserNew.style";
 
-class UserNew extends React.Component<any, any> {
+class UserNew extends Component<any, any> {
   public render() {
     const { classes, create, auth, history, match } = this.props;
     const handleSubmit = async (value: any) => {

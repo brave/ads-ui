@@ -15,7 +15,10 @@ export const HeaderRow = styled("div")`
   display: flex;
   width: 100%;
   height: 48px;
-  border-bottom: 2px solid #f4f4f5;
+  border-bottom: 1px solid #ededed;
+  // Set border-radius for bottom left, bottom right corners
+  // border-top-left-radius: 4px;
+  // border-top-right-radius: 4px;
 `;
 
 interface HeaderCellProps {
@@ -29,12 +32,13 @@ ${(props: HeaderCellProps) => `
   height: 100%;
   width: ${props.width};
   justify-content: ${props.justifyContent};
-  padding: 4px;
+  color: #1C1C1C;
+  padding: 12px;
   align-items: center;
   opacity: 0.85;
   font-family: "Poppins";
   font-weight: 500;
-  font-size: 13px;
+  font-size: 12px;
   user-select: none;
 
 `}
@@ -45,7 +49,7 @@ export const UpArrow = styled("div")`
   height: 0;
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
-  border-top: 4px solid black;
+  border-bottom: 4px solid black;
   margin-left: 4px;
 `;
 
@@ -54,7 +58,7 @@ export const DownArrow = styled("div")`
   height: 0;
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
-  border-bottom: 4px solid black;
+  border-top: 4px solid black;
   margin-left: 4px;
 `;
 
@@ -62,7 +66,7 @@ export const Row = styled("div")`
   display: flex;
   width: 100%;
   height: 60px;
-  border-bottom: 2px solid #f4f4f5;
+  border-bottom: 1px solid #EDEDED;
   &:hover {
     background-color: #fcfcfc;
   }
@@ -80,7 +84,7 @@ ${(props: CellProps) => `
   height: 100%;
   width: ${props.width};
   justify-content: ${props.justifyContent};
-  padding: 4px;
+  padding: 12px;
   align-items: center;
   font-family: "Muli";
   font-size: 13px;
@@ -99,6 +103,8 @@ export const Pagination = styled("div")`
   width: 100%;
   justify-content: space-between;
   margin-top: 28px;
+  margin-right: 12px;
+  margin-left: 12px;
 `;
 
 export const PageSelect = styled("div")`

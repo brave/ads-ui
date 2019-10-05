@@ -98,7 +98,7 @@ class AppBar extends React.Component<any, any> {
                             <S.SubContainer style={{ position: "relative" }}>
                                 <Icon onClick={this.toggleMenu} style={iconStyle}>
                                     account_circle
-                </Icon>
+                                </Icon>
                                 <UserMenu menuOpen={this.state.menuOpen} signOut={signOut} />
                             </S.SubContainer>
                         </OutsideAlerter>

@@ -35,7 +35,7 @@ const columns = [
         Header: 'Pacing',
         accessor: 'pacingIndex',
         sortDescFirst: true,
-    },
+    }
 ];
 
 export default columns;

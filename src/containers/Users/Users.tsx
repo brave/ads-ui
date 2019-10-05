@@ -31,7 +31,7 @@ class Users extends React.Component<any, any> {
       <div className={classes.root}>
         <Switch>
           <Route exact path={match.url} component={UserList} />
-          <Route exact path={match.url + "/new"} component={UserNew} />
+          {/* <Route exact path={match.url + "/new"} component={UserNew} /> */}
           <Route exact path={match.url + "/:userId"} component={UserView} />
           <Route exact path={match.url + "/:userId/advertiser/new"} component={AdvertiserNew} />
           <Route exact path={match.url + "/:userId/advertiser/:advertiserId"} component={AdvertiserView} />

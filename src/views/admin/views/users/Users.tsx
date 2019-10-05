@@ -8,7 +8,7 @@ import AdvertiserView from "../../../../containers/Users/AdvertiserView/Advertis
 // import CreativesNew from "../../components/Creatives/CreativesNew/CreativesNew";
 // import CreativeSetNew from "../../components/CreativeSets/CreativeSetNew/CreativeSetNew";
 import UserList from "../../../../components/Users/UserList/UserList";
-import UserNew from "../../../../components/Users/UserNew/UserNew";
+
 // import CreativeInstanceNew from "../../components/CreativeInstances/CreativeInstanceNew/CreativeInstanceNew";
 // import CreativeInstanceView from "../Campaigns/CreativeInstanceView/CreativeInstanceView";
 // import CampaignPerformance from "../Campaigns/CampaignPerformance/CampaignPerformance";
@@ -22,45 +22,14 @@ import UserNew from "../../../../components/Users/UserNew/UserNew";
 import UserView from "../../../../containers/Users/UserView/UserView";
 
 class Users extends React.Component<any, any> {
-    public render() {
-        const { match } = this.props;
-        return (
-            <div>
-                <Switch>
-                    <Route exact path={match.url} component={UserList} />
-                    {/* <Route exact path={match.url + "/new"} component={UserNew} />
-                    <Route exact path={match.url + "/:userId"} component={UserView} /> */}
-                    {/* <Route exact path={match.url + "/:userId/advertiser/new"} component={AdvertiserNew} />
-                    <Route exact path={match.url + "/:userId/advertiser/:advertiserId"} component={AdvertiserView} />
-                    <Route exact path={match.url + "/:userId/advertiser/:advertiserId/campaign/:campaignId"} component={Campaign} /> */}
-                    {/* <Route exact path={match.url + "/:userId/advertiser/:advertiserId/invoice/:invoiceId"}
-            component={InvoiceView} />
-          <Route exact path={match.url + "/:userId/advertiser/:advertiserId/campaign/new"}
-            component={CampaignNew} />
-          <Route exact path={match.url + "/:userId/advertiser/:advertiserId/campaign/:campaignId"}
-            component={CampaignView} />
-          <Route exact path={match.url + "/:userId/advertiser/:advertiserId/campaign/:campaignId/report"}
-            component={CampaignPerformance} />
-          <Route exact path={match.url + "/:userId/advertiser/:advertiserId/campaign/:campaignId/reporttwo"}
-            component={CampaignReport} />
-          <Route exact path={match.url + "/:userId/advertiser/:advertiserId/campaign/:campaignId/creativeSet/new"}
-            component={CreativeSetNew} />
-          <Route exact path={
-            match.url + "/:userId/advertiser/:advertiserId/campaign/:campaignId/creativeSet/:creativeSetId"}
-            component={CreativeSetView} />
-          <Route exact path={match.url + "/:userId/advertiser/:advertiserId/campaign/:campaignId/creativeSet/:creativeSetId/creativeInstance/new"}
-            component={CreativeInstanceNew} />
-          <Route exact path={match.url + "/:userId/advertiser/:advertiserId/campaign/:campaignId/creativeSet/:creativeSetId/creativeInstance/:creativeInstanceId"}
-            component={CreativeInstanceView} />
-          <Route exact path={match.url + "/:userId/advertiser/:advertiserId/creative/new"}
-            component={CreativesNew} />
-          <Route exact path={match.url + "/:userId/advertiser/:advertiserId/creative/:creativeId"}
-            component={CreativesView} />
-          <Redirect to={match.url} /> */}
-                </Switch>
-            </div>
-        );
-    }
+  public render() {
+    const { match } = this.props;
+    return (
+      <div>
+        <UserList match={match} />
+      </div>
+    );
+  }
 }
 
 export default Users;
