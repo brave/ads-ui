@@ -20,7 +20,9 @@ import { GetCampaigns, GetReports, GetCreatives } from "../../actions";
 import { styles } from "./Performances.style";
 
 import PerformancesCharts from "../../components/Performances/PerformancesCharts";
-import CampaignReport from "../../components/Campaigns/CampaignReport/CampaignReport";
+
+// Temporary use until User routes are refactored. 
+import CampaignReport from "./CampaignReport";
 
 class Performances extends React.Component<any, any> {
   constructor(props: any) {
@@ -48,7 +50,7 @@ class Performances extends React.Component<any, any> {
   };
 
   public render() {
-    const { auth, classes, campaigns, reports, creatives, advertisers } = this.props;
+    const { auth, classes, campaigns, reports, creatives, match, advertisers } = this.props;
 
     const report = _.find(reports, { campaignId: this.state.campaign }) as any;
     const campaign = _.find(campaigns, { id: this.state.campaign }) as any;
@@ -86,13 +88,14 @@ class Performances extends React.Component<any, any> {
             </FormControl>
           </CardContent>
         </Card>
-        { report !== undefined && 
-        <CampaignReport key={campaign.name}
-          auth={auth}
-          campaign={campaign}
-          report={report}
-          advertiser={advertisers[0]}
-        />
+        {report !== undefined &&
+          <CampaignReport key={campaign.name}
+            auth={auth}
+            campaign={campaign}
+            match={match}
+            report={report}
+            advertiser={advertisers[0]}
+          />
         }
       </div>
     );

@@ -11,10 +11,8 @@ import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import _ from "lodash";
 import { CloseSnackBar as close } from "./actions";
 
-import * as S from "./App.style";
-
 import Authentication from "./containers/Authentication/Authentication";
-import Admin from "./views/admin/Admin";
+import Admin from "./admin/Admin";
 import AdminMain from "./containers/Main/Admin/Main";
 import AdvertiserMain from "./containers/Main/Advertiser/Main";
 
