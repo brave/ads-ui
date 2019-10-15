@@ -270,10 +270,9 @@ class CampaignReport extends Component<any, any> {
                 text: "Avg. Engagement by Platform",
             },
             tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                pointFormat: '<b>{point.percentage:.1f}%</b>'
             },
             series: [{
-                name: 'Brands',
                 colorByPoint: true,
                 data: [
                     {
