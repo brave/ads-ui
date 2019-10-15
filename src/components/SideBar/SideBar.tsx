@@ -59,7 +59,7 @@ function renderNav(props) {
               <S.SubContainer>
                 <Icon>bar_chart</Icon>
               </S.SubContainer>
-              <Text sizes={[16, 16, 16, 16, 16]} fontFamily={"Poppins"}>
+              <Text sizes={[16, 16, 15, 15, 15]} fontFamily={"Poppins"}>
                 Performance
               </Text>
             </S.Nav>
@@ -91,7 +91,7 @@ function renderNav(props) {
               <S.SubContainer>
                 <Icon>dashboard</Icon>
               </S.SubContainer>
-              <Text sizes={[16, 16, 16, 16, 16]} fontFamily={"Poppins"}>
+              <Text sizes={[16, 16, 15, 15, 15]} fontFamily={"Poppins"}>
                 Dashboard
               </Text>
             </S.Nav>
@@ -105,7 +105,7 @@ function renderNav(props) {
               <S.SubContainer>
                 <Icon>person</Icon>
               </S.SubContainer>
-              <Text sizes={[16, 16, 16, 16, 16]} fontFamily={"Poppins"}>
+              <Text sizes={[16, 16, 15, 15, 15]} fontFamily={"Poppins"}>
                 Users
               </Text>
             </S.Nav>
@@ -119,7 +119,7 @@ function renderNav(props) {
               <S.SubContainer>
                 <Icon>apps</Icon>
               </S.SubContainer>
-              <Text sizes={[16, 16, 16, 16, 16]} fontFamily={"Poppins"}>
+              <Text sizes={[16, 16, 15, 15, 15]} fontFamily={"Poppins"}>
                 Campaigns
               </Text>
             </S.Nav>

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface IMenuProps {
-  open: boolean;
+    open: boolean;
 }
 export const Menu = styled("div")`
   position: absolute;
@@ -13,8 +13,8 @@ export const Menu = styled("div")`
   left: -190px;
   z-index: 9001;
   ${(props: Partial<IMenuProps>) =>
-    props.open === false &&
-    `
+        props.open === false &&
+        `
       visibility: hidden;
   `}
 `;
@@ -36,8 +36,8 @@ export const MenuItem = styled("div")`
 `;
 
 interface IStatisticProps {
-  selected: boolean;
-  color: string;
+    selected: boolean;
+    color: string;
 }
 export const Statistic = styled("div")`
     display: flex; 
@@ -54,9 +54,9 @@ export const Statistic = styled("div")`
     transition: border-bottom 0.1s linear;
 
     ${(props: Partial<IStatisticProps>) =>
-    props.selected === true &&
-    `
+        props.selected === true &&
+        `
         border-bottom: 2px solid ${props.color}
         `
-  }
+    }
 `;

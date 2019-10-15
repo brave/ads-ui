@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { PageInputContainer, Pagination, Button, ButtonContainer, PageSelect, Container, Table, TableHeader, HeaderRow, HeaderCell, Row, Cell, UpArrow, DownArrow } from "../../../../../../../../components/Table/Table";
-import { Text } from "../../../../../../../../components/Text/Text";
+import { PageInputContainer, Pagination, Button, ButtonContainer, PageSelect, Container, Table, TableHeader, HeaderRow, HeaderCell, Row, Cell, UpArrow, DownArrow } from "../../../../../../../components/Table/Table";
+import { Text } from "../../../../../../../components/Text/Text";
 
 import columns from "./lib/Columns";
 
