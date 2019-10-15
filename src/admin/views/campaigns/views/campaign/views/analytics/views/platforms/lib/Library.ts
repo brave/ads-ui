@@ -107,10 +107,9 @@ export function createPlatformChart(data, platform) {
             text: `Engagement ${platform.charAt(0).toUpperCase() + platform.slice(1)}`,
         },
         tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            pointFormat: '<b>{point.percentage:.1f}%</b>'
         },
         series: [{
-            name: 'Brands',
             colorByPoint: true,
             data: [
                 {
