@@ -12,11 +12,6 @@ const columns = [
         accessor: 'state',
     },
     {
-        Header: 'Views',
-        accessor: 'view',
-        sortDescFirst: true,
-    },
-    {
         Header: 'Budget',
         accessor: 'budget',
         sortDescFirst: true,
@@ -40,7 +35,7 @@ const columns = [
         Header: 'Pacing',
         accessor: 'pacingIndex',
         sortDescFirst: true,
-    },
+    }
 ];
 
 export default columns;

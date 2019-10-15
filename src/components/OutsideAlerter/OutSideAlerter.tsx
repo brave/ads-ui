@@ -7,12 +7,13 @@ import * as React from "react";
 interface IOutsideAlerterProps {
   onOutsideClick: () => void;
   outsideAlerterStyle?: any;
+  outsideAlerterId?: any;
 }
 
 export default class OutsideAlerter extends React.Component<
   IOutsideAlerterProps,
   any
-> {
+  > {
   public wrapperRef;
 
   constructor(props) {
@@ -45,7 +46,7 @@ export default class OutsideAlerter extends React.Component<
 
   public render() {
     return (
-      <span style={this.props.outsideAlerterStyle} ref={this.setWrapperRef}>
+      <span id={this.props.outsideAlerterId} style={this.props.outsideAlerterStyle} ref={this.setWrapperRef}>
         {this.props.children}
       </span>
     );

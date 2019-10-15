@@ -6,7 +6,7 @@ import Users from "./views/users/Users";
 import Campaigns from "./views/campaigns/Campaigns";
 
 import { Redirect, Route, Switch, Link } from "react-router-dom";
-import TabSelector from '../../../../components/tabSelector/TabSelector';
+import TabSelector from '../../../components/tabSelector/TabSelector';
 
 class Dashboard extends Component<any, any> {
     constructor(props) {
