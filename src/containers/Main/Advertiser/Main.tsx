@@ -22,6 +22,7 @@ import Creatives from "../../Creatives/Creatives";
 import Dashboard from "../../Dashboard/Advertiser/Dashboard";
 import Invoices from "../../Invoices/Invoices";
 import Performances from "../../Performances/Performances";
+import Platforms from "../../../admin/views/campaigns/views/campaign/views/analytics/views/platforms/Platforms";
 import Preferences from "../../Preferences/Preferences";
 import SideBar from "../../../components/SideBar/SideBar";
 
@@ -61,9 +62,13 @@ class Main extends React.Component<any, any> {
               {/* <Route path={match.url + "/dashboard"} component={Dashboard} />
             <Route path={match.url + "/creatives"} component={Creatives} />
             <Route path={match.url + "/campaigns"} component={Campaigns} /> */}
-              <Route
+              <Route exact
                 path={match.url + "/performances"}
                 component={Performances}
+              />
+              <Route exact
+                path={match.url + "/performances/:campaignId/platforms"}
+                component={Platforms}
               />
               {/* <Route path={match.url + "/invoices"} component={Invoices} /> */}
               {/* <Route path={match.url + "/preferences"} component={Preferences} /> */}

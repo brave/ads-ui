@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
-import { Text } from "../../../../../../components/Text/Text";
+import { Text } from "../../../../../components/Text/Text";
 import * as S from "./Overview.style";
 import * as Highcharts from "highcharts/highmaps";
 import HighchartsReact from 'highcharts-react-official'
-import Section from "../../../../../../components/section/Section";
-import Context from "../../../../../../state/context";
+import Section from "../../../../../components/section/Section";
+import Context from "../../../../../state/context";
 
 import { fetchData, processData, } from "./lib/Library";
 

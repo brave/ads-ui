@@ -2,7 +2,6 @@ import { withStyles } from "@material-ui/core";
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
-import CampaignList from "../../components/Campaigns/CampaignList/CampaignList";
 import CampaignNew from "../../components/Campaigns/CampaignNew/CampaignNew";
 import CampaignView from "./CampaignView/CampaignView";
 
@@ -20,7 +19,6 @@ class Campaigns extends React.Component<any, any> {
     return (
       <div>
         <Switch>
-          <Route exact path={match.url} component={CampaignList} />
           <Route exact path={match.url + "/new"} component={CampaignNew} />
           <Route exact path={match.url + "/:campaignId"} component={CampaignView} />
           <Route exact path={match.url + "/:campaignId/report"} component={CampaignPerformance} />

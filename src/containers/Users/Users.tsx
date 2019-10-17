@@ -12,7 +12,6 @@ import UserNew from "../../components/Users/UserNew/UserNew";
 import CreativeInstanceNew from "../../components/CreativeInstances/CreativeInstanceNew/CreativeInstanceNew";
 import CreativeInstanceView from "../Campaigns/CreativeInstanceView/CreativeInstanceView";
 import CampaignPerformance from "../Campaigns/CampaignPerformance/CampaignPerformance";
-import CampaignReport from "../../components/Campaigns/CampaignReport/CampaignReport";
 
 import CampaignView from "../Campaigns/CampaignView/CampaignView";
 import CreativeSetView from "../Campaigns/CreativeSetView/CreativeSetView";
@@ -31,7 +30,7 @@ class Users extends React.Component<any, any> {
       <div className={classes.root}>
         <Switch>
           <Route exact path={match.url} component={UserList} />
-          <Route exact path={match.url + "/new"} component={UserNew} />
+          {/* <Route exact path={match.url + "/new"} component={UserNew} /> */}
           <Route exact path={match.url + "/:userId"} component={UserView} />
           <Route exact path={match.url + "/:userId/advertiser/new"} component={AdvertiserNew} />
           <Route exact path={match.url + "/:userId/advertiser/:advertiserId"} component={AdvertiserView} />
@@ -43,8 +42,6 @@ class Users extends React.Component<any, any> {
             component={CampaignView} />
           <Route exact path={match.url + "/:userId/advertiser/:advertiserId/campaign/:campaignId/report"}
             component={CampaignPerformance} />
-          <Route exact path={match.url + "/:userId/advertiser/:advertiserId/campaign/:campaignId/reporttwo"}
-            component={CampaignReport} />
           <Route exact path={match.url + "/:userId/advertiser/:advertiserId/campaign/:campaignId/creativeSet/new"}
             component={CreativeSetNew} />
           <Route exact path={

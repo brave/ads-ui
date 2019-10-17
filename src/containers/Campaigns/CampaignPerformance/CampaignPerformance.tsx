@@ -7,7 +7,6 @@ import { GetReports } from "../../../actions";
 
 import { styles } from "./CampaignPerformance.style";
 import PerformancesCharts from "../../../components/Performances/PerformancesCharts";
-import CampaignReport from "../../../components/Campaigns/CampaignReport/CampaignReport";
 
 class CampaignPerformance extends React.Component<any, any> {
   constructor(props: any) {
@@ -33,17 +32,8 @@ class CampaignPerformance extends React.Component<any, any> {
     });
 
     return (
-      
+
       <div className={classes.root}>
-        {
-          !report ? <div></div> :
-        <CampaignReport
-          auth={auth}
-          campaign={campaign}
-          report={report}
-          advertiser={advertisers[0]}
-        />
-        }
       </div>
     );
   }
