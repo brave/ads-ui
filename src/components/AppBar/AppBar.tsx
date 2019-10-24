@@ -22,6 +22,7 @@ import BraveAdsLogo from "../../assets/images/Subdomains_Rewards_Ads_Default.png
 import { styles } from "./AppBar.style";
 import OutsideAlerter from "../OutsideAlerter/OutSideAlerter";
 import TopBarProgress from "react-topbar-progress-indicator";
+import { Text } from "../Text/Text";
 import "./lib/AppBar.css"
 
 import Context from "../../state/context";
@@ -60,7 +61,7 @@ class AppBar extends React.Component<any, any> {
     };
 
     public render() {
-        const { classes, toggleDrawer, open, signOut } = this.props;
+        const { classes, toggleDrawer, open, signOut, match } = this.props;
         return (
             <div style={{ position: "fixed", width: "100%", top: "0px", zIndex: 9001 }}>
                 <S.Container loading={this.context.loading}>
@@ -86,20 +87,37 @@ class AppBar extends React.Component<any, any> {
             </S.SearchContainer>
           </S.SubContainer> */}
                     <S.SubContainer
-                        style={{ justifyContent: "space-between", width: "120px" }}
+                        style={{ justifyContent: "space-between", width: "400px" }}
                     >
-                        <S.SubContainer style={{ visibility: "hidden" }}>
-                            <Icon style={iconStyle}>add_to_photos</Icon>
+                        <S.SubContainer>
+                            <Link style={linkStyle} to={"/admin/main/adsmanager/selection"}>
+                                <div style={{ padding: "0px 20px", background: "#4C54D2", color: "white", border: "none", borderRadius: "100px 100px 100px 100px" }}>
+                                    <span>
+                                        <Text style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"}>
+                                            New Campaign
+                                    </Text>
+                                    </span>
+                                </div>
+                            </Link>
                         </S.SubContainer>
-                        <S.SubContainer style={{ visibility: "hidden" }}>
-                            <Icon style={iconStyle}>notifications</Icon>
+                        <S.SubContainer>
+                            <div style={{ width: "1px", height: "20px", borderLeft: "2px solid #EDEDED" }}></div>
+                        </S.SubContainer>
+                        <S.SubContainer style={{}}>
+                            <Text style={{ marginTop: "6px", marginBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"}>
+                                Support
+                                    </Text>
+                        </S.SubContainer>
+                        <S.SubContainer style={{}}>
+                            <Text style={{ marginTop: "6px", marginBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"}>
+                                Messages
+                                    </Text>
                         </S.SubContainer>
                         <OutsideAlerter onOutsideClick={this.closeMenu}>
                             <S.SubContainer style={{ position: "relative" }}>
-                                <Icon onClick={this.toggleMenu} style={iconStyle}>
-                                    account_circle
-                                </Icon>
-                                <UserMenu menuOpen={this.state.menuOpen} signOut={signOut} />
+                                <Text style={{ marginTop: "6px", marginBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"}>
+                                    Account
+                                    </Text>
                             </S.SubContainer>
                         </OutsideAlerter>
                     </S.SubContainer>

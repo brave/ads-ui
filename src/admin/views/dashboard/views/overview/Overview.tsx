@@ -17,9 +17,6 @@ class Overview extends React.Component<any, any> {
   static contextType = Context;
   constructor(props) {
     super(props);
-    this.state = {
-      loading: true
-    }
   }
   public componentDidMount() {
     this.initialize();
@@ -31,13 +28,16 @@ class Overview extends React.Component<any, any> {
     let processedData = processData(data);
     this.setState(processedData, () => {
       this.context.setLoading(false);
-      this.setState({ loading: false })
     });
+  }
+
+  public componentWillUnmount() {
+    this.context.setLoading(undefined);
   }
 
   public render() {
     return (
-      !this.state.loading &&
+      this.context.loading === false &&
       <React.Fragment>
         <Section header={"Key Statistics"}>
           {renderStat("Users", this.state.userCount)}

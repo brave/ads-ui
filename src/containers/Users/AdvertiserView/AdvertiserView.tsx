@@ -59,7 +59,7 @@ class AdvertiserView extends React.Component<any, any> {
     };
     const handleSubmit = async (value: any, e: Event) => {
       const userId = user.id;
-      const values = value;
+      let values = value;
       values.id = advertiser.id;
       values.mailingAddress = {
         city: values.city,
@@ -70,6 +70,7 @@ class AdvertiserView extends React.Component<any, any> {
         zipcode: values.zipcode,
       };
       values.billingAddress = values.mailingAddress;
+      alert(values.state);
       values.state = value.ad_state;
       await update(values, auth, userId);
     };
