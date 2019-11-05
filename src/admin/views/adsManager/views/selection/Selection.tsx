@@ -6,6 +6,8 @@ import "./lib/corner-ribbon.css";
 import Test from "./lib/advanced_create2.png";
 import Test1 from "./lib/quick_create5.png";
 import Test2 from "./lib/automated_create.png";
+import { Link } from 'react-router-dom';
+const linkStyle = { textDecoration: "none", color: "inherit" };
 
 class Selection extends Component {
     static contextType = Context;
@@ -46,28 +48,29 @@ class Selection extends Component {
                         <Text style={{ marginTop: "16px" }} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"}>
                             Quick Order
                         </Text>
-                        <Text style={{ marginTop: "12px" }} sizes={[16, 16, 15, 15, 15]} fontFamily={"Muli"}>
-                            Go from start to finish in less than 5 minutes!
+                        <Text style={{ marginTop: "12px", marginLeft: "6px", marginRight: "1px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Muli"}>
+                            Publish a campaign in less than 5 minutes. Define your creatives and audience and you're on your way!
                     </Text>
                     </div>
+                    <Link style={linkStyle} to={`/admin/main/adsmanager/advanced?test=hello`}>
+                        <div className={"box"} style={{ display: "flex", width: "340px", height: "370px", borderRadius: "4px", border: "1px solid #ededed", padding: "28px", flexDirection: "column", alignItems: "center" }}>
 
-                    <div className={"box"} style={{ display: "flex", width: "340px", height: "370px", borderRadius: "4px", border: "1px solid #ededed", padding: "28px", flexDirection: "column", alignItems: "center" }}>
-
-                        <img style={{ height: "180px", transform: "scale(-1, 1)" }} src={Test} />
-                        <Text style={{ marginTop: "16px" }} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"}>
-                            Advanced Order
+                            <img style={{ height: "180px", transform: "scale(-1, 1)" }} src={Test} />
+                            <Text style={{ marginTop: "16px" }} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"}>
+                                Advanced Order
                         </Text>
-                        <Text style={{ marginTop: "12px" }} sizes={[16, 16, 15, 15, 15]} fontFamily={"Muli"}>
-                            Go from start to finish in less than 5 minutes!
+                            <Text style={{ marginTop: "12px", marginLeft: "6px", marginRight: "6px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Muli"}>
+                                Have complete control of your campaign, choose multiple ad sets, and fine tune your creatives.
                     </Text>
-                    </div>
+                        </div>
+                    </Link>
                     <div className={"box"} style={{ display: "flex", width: "340px", height: "370px", borderRadius: "4px", border: "1px solid #ededed", padding: "28px", flexDirection: "column", alignItems: "center" }}>
                         <img style={{ height: "180px", marginTop: "0px", marginLeft: "auto", marginRight: "auto" }} src={Test2} />
                         <Text style={{ marginTop: "16px" }} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"}>
                             Automated Order
                         </Text>
-                        <Text style={{ marginTop: "12px" }} sizes={[16, 16, 15, 15, 15]} fontFamily={"Muli"}>
-                            Go from start to finish in less than 5 minutes!
+                        <Text style={{ marginTop: "12px", marginLeft: "6px", marginRight: "6px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Muli"}>
+                            Upload a prepared CSV or script and we'll convert it into a campaign for your review.
                     </Text>
                     </div>
                 </div>

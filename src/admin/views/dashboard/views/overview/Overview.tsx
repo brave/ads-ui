@@ -26,6 +26,7 @@ class Overview extends React.Component<any, any> {
     this.context.setLoading(true);
     let data = await fetchData(this.props.auth.accessToken);
     let processedData = processData(data);
+    console.log(processedData);
     this.setState(processedData, () => {
       this.context.setLoading(false);
     });

@@ -39,6 +39,7 @@ import Platforms from "./views/campaigns/views/campaign/views/analytics/views/pl
 import * as S from "./Admin.style";
 import { styles } from "./Admin.style";
 import Context from "../state/context";
+import Advanced from "./views/adsManager/views/advanced/Advanced";
 
 class Admin extends React.Component<any, any> {
     static contextType = Context;
@@ -64,7 +65,9 @@ class Admin extends React.Component<any, any> {
                     }
                     <S.Main>
                         <Switch>
+                            {/* /adsmanager */}
                             <Route exact path={match.url + "/adsmanager/selection"} component={Selection} />
+                            <Route exact path={match.url + "/adsmanager/advanced"} component={Advanced} />
                             {/* /dashboard */}
                             <Route path={match.url + "/dashboard"} component={Dashboard} />
                             {/* /users */}
