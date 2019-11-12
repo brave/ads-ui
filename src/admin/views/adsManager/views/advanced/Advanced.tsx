@@ -86,6 +86,7 @@ class Advanced extends Component<any, any> {
 
     public componentWillUnmount() {
         this.context.setLoading(undefined);
+        this.context.setSidebar("visible");
     }
 
     public renderForm() {

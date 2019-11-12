@@ -89,7 +89,7 @@ class AppBar extends React.Component<any, any> {
                     <S.SubContainer
                         style={{ justifyContent: "space-between", width: "400px" }}
                     >
-                        <S.SubContainer>
+                        <S.SubContainer style={{ visibility: "hidden" }}>
                             <Link style={linkStyle} to={"/admin/main/adsmanager/selection"}>
                                 <div style={{ padding: "0px 20px", background: "#4C54D2", color: "white", border: "none", borderRadius: "100px 100px 100px 100px" }}>
                                     <span>
@@ -100,24 +100,23 @@ class AppBar extends React.Component<any, any> {
                                 </div>
                             </Link>
                         </S.SubContainer>
-                        <S.SubContainer>
+                        <S.SubContainer style={{ visibility: "hidden" }}>
                             <div style={{ width: "1px", height: "20px", borderLeft: "2px solid #EDEDED" }}></div>
                         </S.SubContainer>
-                        <S.SubContainer style={{}}>
+                        <S.SubContainer style={{ visibility: "hidden" }}>
                             <Text style={{ marginTop: "6px", marginBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"}>
                                 Support
                                     </Text>
                         </S.SubContainer>
-                        <S.SubContainer style={{}}>
+                        <S.SubContainer style={{ visibility: "hidden" }}>
                             <Text style={{ marginTop: "6px", marginBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"}>
                                 Messages
                                     </Text>
                         </S.SubContainer>
                         <OutsideAlerter onOutsideClick={this.closeMenu}>
                             <S.SubContainer style={{ position: "relative" }}>
-                                <Text style={{ marginTop: "6px", marginBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"}>
-                                    Account
-                                    </Text>
+                                <Text onClick={this.toggleMenu} content={"Account"} style={{ marginTop: "6px", marginBottom: "6px", cursor: "pointer" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
+                                <UserMenu menuOpen={this.state.menuOpen} signOut={signOut} />
                             </S.SubContainer>
                         </OutsideAlerter>
                     </S.SubContainer>

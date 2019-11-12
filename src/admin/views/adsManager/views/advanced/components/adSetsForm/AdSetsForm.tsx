@@ -102,71 +102,78 @@ class AdSetsForm extends Component<any, any> {
     render() {
         return (
             <React.Fragment>
-                <Section fullWidthChild={true}>
-                    <S.Container>
-                        <S.LeftColumn>
-                            <Text content={"Ad Sets"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
-                            <Text content={"Ad Sets are used to define your audience from interests, location, and platform."} style={{ marginTop: "16px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
-                            <S.LeftColumnContainer>
-                                <S.AdSetsTabs>
-                                    {this.renderAdSetsTabs()}
-                                    <S.AdSetsTabButtonContainer>
-                                        <S.Button onClick={() => { this.addAdSet() }} style={{ marginLeft: "auto", marginRight: "auto", width: "175px", backgroundColor: "white", color: "black", border: "1px solid #d6d6d6" }}>
-                                            <Text content={"New Ad Set"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
-                                        </S.Button>
-                                    </S.AdSetsTabButtonContainer>
-                                </S.AdSetsTabs>
-                            </S.LeftColumnContainer>
-                        </S.LeftColumn>
-                        <S.RightColumn>
-
-                            {/* Lifetime impressions */}
-                            <S.InputContainer>
-                                <Text content={"Lifetime impressions"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
-                                <S.Input value={this.props.adSets[this.state.selectedAdSet].lifetimeImpressions} onChange={(e) => this.handleLifetimeImpressions(e)} placeholder="Enter a number of impressions..." type="number" name="name" />
-                            </S.InputContainer>
-
-                            {/* Daily impressions */}
-                            <S.InputContainer>
-                                <Text content={"Daily impressions"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
-                                <S.Input value={this.props.adSets[this.state.selectedAdSet].dailyImpressions} onChange={(e) => this.handleDailyImpressions(e)} placeholder="Enter a number of impressions..." type="number" name="name" />
-                            </S.InputContainer>
-
-                            {/* Audiences */}
-                            <S.InputContainer>
-                                <Text content={"Audiences"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
-                                <div style={{ marginTop: "28px" }}>
-                                    <Select
-                                        value={this.props.adSets[this.state.selectedAdSet].audiences}
-                                        onChange={this.handleAudiences}
-                                        isMulti={true}
-                                        options={options}
-                                    />
-                                </div>
-                            </S.InputContainer>
-
-                            {/* Status */}
-                            <S.InputContainer>
-                                <Text content={"Status"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
-
-                                <div style={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
-                                    <Switch checked={this.props.adSets[this.state.selectedAdSet].status} onChange={(status) => { this.handleStatus(status) }} onColor="#FB7959" uncheckedIcon={false} checkedIcon={false} height={23} width={45} />
-                                    <Text style={{ marginLeft: "12px", marginBottom: "3px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Muli"}>
-                                        {this.props.adSets[this.state.selectedAdSet].status ? "Active" : "Paused"}
-                                    </Text>
-                                </div>
-                            </S.InputContainer>
-
-                            {/* Nav Buttons */}
-                            <S.Container>
-                                <S.Button onClick={() => { this.props.setForm("adsForm") }} style={{ marginLeft: "auto" }}>
-                                    <Text content={"Next"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                <div style={{ display: "flex" }}>
+                    <div style={{ width: "" }}>
+                        <S.AdSetsTabs>
+                            {this.renderAdSetsTabs()}
+                            <S.AdSetsTabButtonContainer>
+                                <S.Button onClick={() => { this.addAdSet() }} style={{ marginLeft: "auto", marginRight: "auto", width: "175px", backgroundColor: "white", color: "black", border: "1px solid #d6d6d6" }}>
+                                    <Text content={"New Ad Set"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
                                 </S.Button>
-                            </S.Container>
-                        </S.RightColumn>
+                            </S.AdSetsTabButtonContainer>
+                        </S.AdSetsTabs>
+                    </div>
+                    <div style={{ width: "856px", marginLeft: "auto", marginRight: "auto" }}>
+                        <Section fullWidthChild={true}>
+                            <S.Container>
+                                <S.LeftColumn>
+                                    <Text content={"Ad Sets"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
+                                    <Text content={"Ad Sets are used to define your audience from interests, location, and platform."} style={{ marginTop: "16px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
+                                    <S.LeftColumnContainer>
 
-                    </S.Container>
-                </Section>
+                                    </S.LeftColumnContainer>
+                                </S.LeftColumn>
+                                <S.RightColumn>
+
+                                    {/* Lifetime impressions */}
+                                    <S.InputContainer>
+                                        <Text content={"Lifetime impressions"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
+                                        <S.Input value={this.props.adSets[this.state.selectedAdSet].lifetimeImpressions} onChange={(e) => this.handleLifetimeImpressions(e)} placeholder="Enter a number of impressions..." type="number" name="name" />
+                                    </S.InputContainer>
+
+                                    {/* Daily impressions */}
+                                    <S.InputContainer>
+                                        <Text content={"Daily impressions"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
+                                        <S.Input value={this.props.adSets[this.state.selectedAdSet].dailyImpressions} onChange={(e) => this.handleDailyImpressions(e)} placeholder="Enter a number of impressions..." type="number" name="name" />
+                                    </S.InputContainer>
+
+                                    {/* Audiences */}
+                                    <S.InputContainer>
+                                        <Text content={"Audiences"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
+                                        <div style={{ marginTop: "28px" }}>
+                                            <Select
+                                                value={this.props.adSets[this.state.selectedAdSet].audiences}
+                                                onChange={this.handleAudiences}
+                                                isMulti={true}
+                                                options={options}
+                                            />
+                                        </div>
+                                    </S.InputContainer>
+
+                                    {/* Status */}
+                                    <S.InputContainer>
+                                        <Text content={"Status"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
+
+                                        <div style={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
+                                            <Switch checked={this.props.adSets[this.state.selectedAdSet].status} onChange={(status) => { this.handleStatus(status) }} onColor="#FB7959" uncheckedIcon={false} checkedIcon={false} height={23} width={45} />
+                                            <Text style={{ marginLeft: "12px", marginBottom: "3px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Muli"}>
+                                                {this.props.adSets[this.state.selectedAdSet].status ? "Active" : "Paused"}
+                                            </Text>
+                                        </div>
+                                    </S.InputContainer>
+
+                                    {/* Nav Buttons */}
+                                    <S.Container>
+                                        <S.Button onClick={() => { this.props.setForm("adsForm") }} style={{ marginLeft: "auto" }}>
+                                            <Text content={"Next"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                                        </S.Button>
+                                    </S.Container>
+                                </S.RightColumn>
+
+                            </S.Container>
+                        </Section>
+                    </div>
+                </div>
             </React.Fragment >
         );
     }

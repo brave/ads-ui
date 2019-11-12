@@ -110,7 +110,7 @@ class FormProgress extends Component<any, any> {
         }
         else if (this.props.form !== "adsForm" && validateAdsForm(this.props.ads) === 'valid') {
             return (
-                <S.NavContainer onClick={() => this.props.setForm("adSetsForm")}>
+                <S.NavContainer onClick={() => this.props.setForm("adsForm")}>
                     <S.ValidIcon>
                         <Icon style={{ color: "white" }}>done</Icon>
                     </S.ValidIcon>

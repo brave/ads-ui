@@ -12,7 +12,7 @@ class ReviewForm extends Component<any, any> {
             return <div>
                 <S.Item>
                     <Text content={`Ad Set ${index + 1}`} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
-                    <Text content={adSet.audiences} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
+                    <Text content={adSet.audiences.map((audience) => { return ` ${audience.label}` })} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
                 </S.Item>
             </div>
         });
@@ -24,11 +24,8 @@ class ReviewForm extends Component<any, any> {
             return <div>
                 <S.Item>
                     <Text content={`Ad ${index + 1}`} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
-                    <Text content={ad.creative} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
-                </S.Item>
-                <S.Item>
-                    <Text content={`Ad Sets`} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
-                    <Text content={ad.adSets} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
+                    <Text content={ad.creative.label} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
+                    <Text content={ad.adSets.map((adSet, index) => { return ` Ad Set #${index + 1}` })} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
                 </S.Item>
             </div>
         });
@@ -56,11 +53,11 @@ class ReviewForm extends Component<any, any> {
                                 </S.Item>
                                 <S.Item>
                                     <Text content={"Daily Budget"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
-                                    <Text content={`${this.props.campaign.dailyBudget} ${this.props.campaign.currency}`} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
+                                    <Text content={`${this.props.campaign.dailyBudget} ${this.props.campaign.currency.label}`} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
                                 </S.Item>
                                 <S.Item>
                                     <Text content={"Lifetime Budget"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
-                                    <Text content={`${this.props.campaign.totalBudget} ${this.props.campaign.currency}`} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
+                                    <Text content={`${this.props.campaign.totalBudget} ${this.props.campaign.currency.label}`} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
                                 </S.Item>
                                 <S.Item>
                                     <Text content={"Status"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
@@ -75,7 +72,7 @@ class ReviewForm extends Component<any, any> {
                 </S.FlexContainer>
                 <S.FlexContainer>
                     <S.LeftColumn>
-                        <Section fullWidthChild={true} header="Ad Sets">
+                        <Section equalWidthChildren={true} header="Ad Sets">
                             {this.renderAdSets()}
                         </Section>
                     </S.LeftColumn>
@@ -85,7 +82,7 @@ class ReviewForm extends Component<any, any> {
                 </S.FlexContainer>
                 <S.FlexContainer>
                     <S.LeftColumn>
-                        <Section fullWidthChild={true} header="Ads">
+                        <Section equalWidthChildren={true} header="Ads">
                             {this.renderAds()}
                         </Section>
                     </S.LeftColumn>

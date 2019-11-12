@@ -30,6 +30,7 @@ class Selection extends Component {
 
     public componentWillUnmount() {
         this.context.setLoading(undefined);
+        this.context.setSidebar("visible");
     }
     render() {
         return (

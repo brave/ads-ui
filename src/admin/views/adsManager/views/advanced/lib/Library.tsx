@@ -1,9 +1,9 @@
 export function processData(data) {
     let processedData = {} as any;
     processedData.campaign = initializeCampaign();
-    processedData.adSets = processAdSets();
-    processedData.ads = processAds();
-    processedData.form = "reviewForm";
+    processedData.adSets = initializeAdSets();
+    processedData.ads = initializeAds();
+    processedData.form = "campaignForm";
     return processedData;
 }
 
@@ -47,11 +47,17 @@ export function validateAdSetsForm(adSets) {
 export function validateAdsForm(ads) {
     let errors = [] as any;
 
+    ads.forEach((ad, index) => {
+        if (ad.adSets === '') {
+            errors.push(`Error in ad ${index + 1}, please add to an ad set`)
+        }
+    });
+
     if (errors.length > 0) {
         return errors;
     }
     else {
-        return 'validnot';
+        return 'valid';
     }
 }
 
@@ -70,7 +76,7 @@ function initializeCampaign() {
     return campaign;
 }
 
-function processAdSets() {
+function initializeAdSets() {
     let adSets = [
         {
             lifetimeImpressions: '',
@@ -82,7 +88,7 @@ function processAdSets() {
     return adSets;
 }
 
-function processAds() {
+function initializeAds() {
     let ads = [
         {
             creative: '',

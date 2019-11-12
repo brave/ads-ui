@@ -20,8 +20,12 @@ import InvoiceList from "../../../components/Invoices/InvoiceList/InvoiceList";
 
 import CampaignTableList from "../../../components/Campaigns/CampaignTableList/CampaignTableList";
 import CreativeTableList from "../../../components/Creatives/CreativeTableList/CreativeTableList";
+import { Text } from "../../../components/Text/Text";
 
 import { styles } from "./AdvertiserView.style";
+import { Link } from "react-router-dom";
+
+const linkStyle = { textDecoration: "none", color: "inherit", marginLeft: "auto" };
 
 class AdvertiserView extends React.Component<any, any> {
   constructor(props: any) {
@@ -42,7 +46,7 @@ class AdvertiserView extends React.Component<any, any> {
   }
 
   public render() {
-    const { classes, match, auth, update, advertisers, invoices, creatives, campaigns, users } = this.props;
+    const { classes, match, auth, update, advertisers, invoices, creatives, campaigns, users, location } = this.props;
     const { unlock } = this.state;
     const id = match.params.userId;
     const advertiserId = match.params.advertiserId;
@@ -94,6 +98,15 @@ class AdvertiserView extends React.Component<any, any> {
         <AppBar position="static" color="default">
           <Toolbar>
             <Typography variant="h5">{advertiser.name}</Typography>
+            <Link style={linkStyle} to={`/admin/main/adsmanager/selection?userId=${match.params.userId}&advertiserId=${match.params.advertiserId}`}>
+              <div style={{ padding: "0px 20px", background: "#4C54D2", color: "white", border: "none", borderRadius: "100px 100px 100px 100px" }}>
+                <span>
+                  <Text style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"}>
+                    New Campaign
+                                    </Text>
+                </span>
+              </div>
+            </Link>
           </Toolbar>
         </AppBar>
 

@@ -12,8 +12,8 @@ class CompletionForm extends Component<any, any> {
     }
 
     public async initialize() {
-        this.context.setLoading(true);
-        this.context.setLoading(false);
+        // this.context.setLoading(true);
+        // this.context.setLoading(false);
     }
 
     // public componentWillUnmount() {
@@ -21,7 +21,7 @@ class CompletionForm extends Component<any, any> {
     // }
     render() {
         return (
-            this.context.loading === false &&
+            // this.context.loading === false &&
             <div>
                 <Confetti colors={["#FB7959", "#4C54D2"]} />
             </div>
