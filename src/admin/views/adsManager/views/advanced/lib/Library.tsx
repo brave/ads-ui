@@ -1,10 +1,17 @@
-export function processData(data) {
-    let processedData = {} as any;
-    processedData.campaign = initializeCampaign();
-    processedData.adSets = initializeAdSets();
-    processedData.ads = initializeAds();
-    processedData.form = "campaignForm";
-    return processedData;
+import { activeGeocodesQuery, creativesQuery, segmentsQuery } from "./Queries";
+
+export async function initializeData(context) {
+    let initializedData = {} as any;
+    initializedData.userId = getSearchParameters(context.props.location).userId;
+    initializedData.advertiserId = getSearchParameters(context.props.location).advertiserId;
+    initializedData.geoCodes = await initializeGeoCodes(activeGeocodesQuery, context.props.auth.accessToken);
+    initializedData.segments = await initializeSegments(segmentsQuery, context.props.auth.accessToken);
+    initializedData.creatives = await initializeCreatives(creativesQuery, context.props.auth.accessToken, initializedData.advertiserId);
+    initializedData.campaign = initializeCampaign();
+    initializedData.adSets = initializeAdSets();
+    initializedData.ads = initializeAds();
+    initializedData.form = "campaignForm";
+    return initializedData;
 }
 
 export function validateCampaignForm(campaign) {
@@ -61,6 +68,21 @@ export function validateAdsForm(ads) {
     }
 }
 
+async function initializeGeoCodes(query, accessToken) {
+    let response = await fetchData(query, accessToken);
+    return response.activeGeocodes.data;
+}
+
+async function initializeSegments(query, accessToken) {
+    let response = await fetchData(query, accessToken);
+    return response.segments.data;
+}
+
+async function initializeCreatives(query, accessToken, advertiserId) {
+    let response = await fetchData(query(advertiserId), accessToken);
+    return response.advertiser.creativeList.data;
+}
+
 function initializeCampaign() {
     let campaign = {
         name: '',
@@ -100,5 +122,36 @@ function initializeAds() {
         }
     ]
     return ads;
+}
+
+export function getSearchParameters(location) {
+    var prmstr = location.search.substr(1);
+    return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {} as any;
+}
+
+function transformToAssocArray(prmstr) {
+    var params = {};
+    var prmarr = prmstr.split("&");
+    for (var i = 0; i < prmarr.length; i++) {
+        var tmparr = prmarr[i].split("=");
+        params[tmparr[0]] = tmparr[1];
+    }
+    return params as any;
+}
+
+async function fetchData(query, accessToken) {
+    let url = `${process.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql");
+    const options = {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${accessToken}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ query })
+    };
+
+    let response = await fetch(url, options);
+    let json = await response.json();
+    return json.data;
 }
 

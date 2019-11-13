@@ -8,7 +8,8 @@ import AdsForm from './components/adsForm/AdsForm';
 import ReviewForm from './components/reviewForm/ReviewForm';
 import CompletionForm from './components/completionForm/CompletionForm';
 
-import { processData, validateAdSetsForm } from "./lib/Library";
+import { initializeData, validateAdSetsForm, getSearchParameters } from "./lib/Library";
+import { connect } from 'react-redux';
 
 class Advanced extends Component<any, any> {
     static contextType = Context;
@@ -34,8 +35,9 @@ class Advanced extends Component<any, any> {
         this.context.setLoading(true);
         this.context.setSidebar("hidden");
         this.handleBrowserNav();
-        let processedData = processData(undefined);
-        this.setState(processedData, () => {
+        let that = this;
+        let initializedData = await initializeData(that);
+        this.setState(initializedData, () => {
             this.context.setLoading(false);
         });
     }
@@ -109,6 +111,7 @@ class Advanced extends Component<any, any> {
         return (
             this.context.loading === false &&
             <React.Fragment>
+                {JSON.stringify(this.state)}
                 <FormProgress form={this.state.form} setForm={this.setForm} errors={this.state.errors} campaign={this.state.campaign} adSets={this.state.adSets} ads={this.state.ads} />
                 {this.renderForm()}
             </React.Fragment>
@@ -116,4 +119,14 @@ class Advanced extends Component<any, any> {
     }
 }
 
-export default Advanced;
+const mapStateToProps = (state: any, ownProps: any) => ({
+    auth: state.authReducer,
+});
+
+const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Advanced);
