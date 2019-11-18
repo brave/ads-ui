@@ -6,19 +6,6 @@ import * as S from "./AdsForm.style";
 import Switch from "react-switch";
 import Select from 'react-select';
 
-const options = [
-    { value: 'technology', label: 'Technology' },
-    { value: 'sports', label: 'Sports' },
-    { value: 'music', label: 'Music' },
-];
-
-const creatives = [
-    { value: 'creative1', label: 'Creative 1' },
-    { value: 'creative2', label: 'Creative 2' },
-    { value: 'creative3', label: 'Creative 3' },
-];
-
-
 class AdsForm extends Component<any, any> {
     constructor(props) {
         super(props);
@@ -74,9 +61,21 @@ class AdsForm extends Component<any, any> {
         this.props.setAds(ads);
     }
 
-    handleWebhookURL(e) {
+    handleViewWebhook(e) {
         let ads = this.props.ads;
-        ads[this.state.selectedAd].webhookURL = e.target.value;
+        ads[this.state.selectedAd].viewWebhook = e.target.value;
+        this.props.setAds(ads);
+    }
+
+    handleClickWebhook(e) {
+        let ads = this.props.ads;
+        ads[this.state.selectedAd].clickWebhook = e.target.value;
+        this.props.setAds(ads);
+    }
+
+    handleConversionWebhook(e) {
+        let ads = this.props.ads;
+        ads[this.state.selectedAd].conversionWebhook = e.target.value;
         this.props.setAds(ads);
     }
 
@@ -163,7 +162,20 @@ class AdsForm extends Component<any, any> {
                                             <Select
                                                 value={this.props.ads[this.state.selectedAd].creative}
                                                 onChange={this.handleCreative}
-                                                options={creatives}
+                                                options={this.props.creativeOptions}
+                                            />
+                                        </div>
+                                    </S.InputContainer>
+
+                                    {/* Ad Set */}
+                                    <S.InputContainer>
+                                        <Text content={"Choose Ad Sets"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
+                                        <div style={{ marginTop: "28px" }}>
+                                            <Select
+                                                value={this.props.ads[this.state.selectedAd].adSets}
+                                                onChange={this.handleAdSets}
+                                                isMulti={true}
+                                                options={this.mapAdSets()}
                                             />
                                         </div>
                                     </S.InputContainer>
@@ -188,21 +200,20 @@ class AdsForm extends Component<any, any> {
 
                                     {/* Webhook URL */}
                                     <S.InputContainer>
-                                        <Text content={"Webhook URL"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
-                                        <S.Input value={this.props.ads[this.state.selectedAd].webhookURL} onChange={(e) => this.handleWebhookURL(e)} placeholder="Enter a webhook URL..." type="text" name="name" />
+                                        <Text content={"View Webhook"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
+                                        <S.Input value={this.props.ads[this.state.selectedAd].viewWebhook} onChange={(e) => this.handleViewWebhook(e)} placeholder="Enter a webhook URL..." type="text" name="name" />
                                     </S.InputContainer>
 
-                                    {/* Ad Set */}
+                                    {/* Webhook URL */}
                                     <S.InputContainer>
-                                        <Text content={"Choose Ad Sets"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
-                                        <div style={{ marginTop: "28px" }}>
-                                            <Select
-                                                value={this.props.ads[this.state.selectedAd].adSets}
-                                                onChange={this.handleAdSets}
-                                                isMulti={true}
-                                                options={this.mapAdSets()}
-                                            />
-                                        </div>
+                                        <Text content={"Click Webhook"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
+                                        <S.Input value={this.props.ads[this.state.selectedAd].clickWebhook} onChange={(e) => this.handleClickWebhook(e)} placeholder="Enter a webhook URL..." type="text" name="name" />
+                                    </S.InputContainer>
+
+                                    {/* Webhook URL */}
+                                    <S.InputContainer>
+                                        <Text content={"Conversion Webhook"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
+                                        <S.Input value={this.props.ads[this.state.selectedAd].conversionWebhook} onChange={(e) => this.handleConversionWebhook(e)} placeholder="Enter a webhook URL..." type="text" name="name" />
                                     </S.InputContainer>
 
                                     {/* Nav Buttons */}

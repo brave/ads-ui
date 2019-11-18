@@ -6,12 +6,6 @@ import * as S from "./AdSetsForm.style";
 import Switch from "react-switch";
 import Select from 'react-select';
 
-const options = [
-    { value: 'technology', label: 'Technology' },
-    { value: 'sports', label: 'Sports' },
-    { value: 'music', label: 'Music' },
-];
-
 class AdSetsForm extends Component<any, any> {
     constructor(props) {
         super(props);
@@ -145,7 +139,7 @@ class AdSetsForm extends Component<any, any> {
                                                 value={this.props.adSets[this.state.selectedAdSet].audiences}
                                                 onChange={this.handleAudiences}
                                                 isMulti={true}
-                                                options={options}
+                                                options={this.props.segments}
                                             />
                                         </div>
                                     </S.InputContainer>

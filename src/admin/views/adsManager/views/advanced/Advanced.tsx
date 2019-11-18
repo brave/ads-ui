@@ -8,7 +8,7 @@ import AdsForm from './components/adsForm/AdsForm';
 import ReviewForm from './components/reviewForm/ReviewForm';
 import CompletionForm from './components/completionForm/CompletionForm';
 
-import { initializeData, validateAdSetsForm, getSearchParameters } from "./lib/Library";
+import { initializeData, validateAdSetsForm, getSearchParameters, validateCampaignForm } from "./lib/Library";
 import { connect } from 'react-redux';
 
 class Advanced extends Component<any, any> {
@@ -32,7 +32,7 @@ class Advanced extends Component<any, any> {
     }
 
     public async initialize() {
-        this.context.setLoading(true);
+        let start = await this.context.setLoading(true);
         this.context.setSidebar("hidden");
         this.handleBrowserNav();
         let that = this;
@@ -54,13 +54,13 @@ class Advanced extends Component<any, any> {
         let result;
         switch (this.state.form) {
             case "campaignForm":
-                result = 'valid';
+                result = validateCampaignForm(this.state.campaign);
                 break;
             case "adSetsForm":
                 result = validateAdSetsForm(this.state.adSets);
                 break;
             case "adsForm":
-                result = 'valid';
+                result = validateAdSetsForm(this.state.ads);
                 break;
             case "reviewForm":
                 result = 'valid';
@@ -86,32 +86,30 @@ class Advanced extends Component<any, any> {
         this.setState({ ads })
     }
 
-    public componentWillUnmount() {
-        this.context.setLoading(undefined);
-        this.context.setSidebar("visible");
+    public async componentWillUnmount() {
+        await this.context.setLoading(undefined);
+        await this.context.setSidebar("visible");
     }
 
     public renderForm() {
         switch (this.state.form) {
             case "campaignForm":
-                return <CampaignForm campaign={this.state.campaign} setCampaign={this.setCampaign} setForm={this.setForm} />
+                return <CampaignForm campaign={this.state.campaign} setCampaign={this.setCampaign} setForm={this.setForm} geoCodes={this.state.geoCodes} />
             case "adSetsForm":
-                return <AdSetsForm adSets={this.state.adSets} setAdSets={this.setAdSets} setForm={this.setForm} />
+                return <AdSetsForm adSets={this.state.adSets} setAdSets={this.setAdSets} setForm={this.setForm} segments={this.state.segments} />
             case "adsForm":
-                return <AdsForm ads={this.state.ads} setAds={this.setAds} adSets={this.state.adSets} setForm={this.setForm} />
+                return <AdsForm ads={this.state.ads} setAds={this.setAds} adSets={this.state.adSets} setForm={this.setForm} creativeOptions={this.state.creativeOptions} />
             case "reviewForm":
                 return <ReviewForm campaign={this.state.campaign} adSets={this.state.adSets} ads={this.state.ads} setForm={this.setForm} />
             case "completionForm":
-                return <CompletionForm />
+                return <CompletionForm campaign={this.state.campaign} adSets={this.state.adSets} ads={this.state.ads} auth={this.props.auth} advertiserId={this.state.advertiserId} userId={this.state.userId} />
         }
     }
 
     render() {
-        let { location } = this.props;
         return (
             this.context.loading === false &&
             <React.Fragment>
-                {JSON.stringify(this.state)}
                 <FormProgress form={this.state.form} setForm={this.setForm} errors={this.state.errors} campaign={this.state.campaign} adSets={this.state.adSets} ads={this.state.ads} />
                 {this.renderForm()}
             </React.Fragment>

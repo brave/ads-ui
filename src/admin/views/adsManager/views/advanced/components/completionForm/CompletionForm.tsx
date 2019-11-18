@@ -2,29 +2,55 @@ import React, { Component } from 'react';
 import Context from "../../../../../../../state/context";
 import Confetti from 'react-confetti'
 
+import { createAd, createAdSet, createCampaign, prepareCreateCampaignInput, prepareCreateAdInput, prepareCreateAdSetsInput } from "./lib/CompletionFormLibrary";
+
 class CompletionForm extends Component<any, any> {
-    static contextType = Context;
     constructor(props) {
         super(props);
+        this.state = {
+            saving: undefined
+        }
     }
     public componentDidMount() {
         this.initialize();
     }
 
     public async initialize() {
-        // this.context.setLoading(true);
-        // this.context.setLoading(false);
+        let createCampaignInput = prepareCreateCampaignInput(this.props.userId, this.props.advertiserId, this.props.campaign);
+        let createCampaignResponse = await createCampaign(createCampaignInput, this.props.auth.accessToken);
+        let campaignId = createCampaignResponse.createCampaign.id;
+        let createAdSetsInput = prepareCreateAdSetsInput(campaignId, this.props.adSets);
+        if (createAdSetsInput) {
+            createAdSetsInput.forEach(async (createAdSetInput, index) => {
+                let createAdSetResponse = await createAdSet(createAdSetInput, this.props.auth.accessToken);
+                let adSetId = createAdSetResponse.createAdSet.id;
+                // Create ads for each ad set, where that ad is assigned to given ad set. 
+                if (this.props.ads) {
+                    this.props.ads.forEach((ad) => {
+                        if (ad.adSets) {
+                            ad.adSets.forEach(async (adSet) => {
+                                if (adSet.value === index) {
+                                    let createAdInput = prepareCreateAdInput(adSetId, this.props.ads[index])
+                                    let createAdResponse = await createAd(createAdInput, this.props.auth.accessToken);
+                                }
+                            });
+                        }
+                    });
+                }
+
+            });
+        }
     }
 
-    // public componentWillUnmount() {
-    //     this.context.setLoading(undefined);
-    // }
     render() {
         return (
-            // this.context.loading === false &&
-            <div>
+            this.state.saving === false ?
+                (<div>
+                    {JSON.stringify(this.props.auth)}
+                    hello
                 <Confetti colors={["#FB7959", "#4C54D2"]} />
-            </div>
+                </div>) :
+                (<div>Saving!!</div>)
         );
     }
 }

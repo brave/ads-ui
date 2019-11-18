@@ -27,6 +27,10 @@ export function creativesQuery(advertiserId) {
             creativeList{
                 data{
                     id
+                    name
+                    payload
+                    type
+                    state
                 }
             }
         }

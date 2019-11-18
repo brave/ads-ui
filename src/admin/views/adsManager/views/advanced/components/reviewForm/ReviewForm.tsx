@@ -68,13 +68,16 @@ class ReviewForm extends Component<any, any> {
                     </S.LeftColumn>
                     <S.RightColumn>
                         {/* Forecasting, etc. */}
+                        {JSON.stringify(this.props.campaign)}
+                        {JSON.stringify(this.props.adSets)}
+                        {JSON.stringify(this.props.ads)}
                     </S.RightColumn>
                 </S.FlexContainer>
                 <S.FlexContainer>
                     <S.LeftColumn>
-                        <Section equalWidthChildren={true} header="Ad Sets">
+                        {/* <Section equalWidthChildren={true} header="Ad Sets">
                             {this.renderAdSets()}
-                        </Section>
+                        </Section> */}
                     </S.LeftColumn>
                     <S.RightColumn>
                         {/* Forecasting, etc. */}
@@ -82,9 +85,9 @@ class ReviewForm extends Component<any, any> {
                 </S.FlexContainer>
                 <S.FlexContainer>
                     <S.LeftColumn>
-                        <Section equalWidthChildren={true} header="Ads">
+                        {/* <Section equalWidthChildren={true} header="Ads">
                             {this.renderAds()}
-                        </Section>
+                        </Section> */}
                     </S.LeftColumn>
                     <S.RightColumn>
                         {/* Forecasting, etc. */}

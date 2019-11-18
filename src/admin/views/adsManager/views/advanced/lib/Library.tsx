@@ -7,6 +7,7 @@ export async function initializeData(context) {
     initializedData.geoCodes = await initializeGeoCodes(activeGeocodesQuery, context.props.auth.accessToken);
     initializedData.segments = await initializeSegments(segmentsQuery, context.props.auth.accessToken);
     initializedData.creatives = await initializeCreatives(creativesQuery, context.props.auth.accessToken, initializedData.advertiserId);
+    initializedData.creativeOptions = initializeCreativeOptions(initializedData.creatives);
     initializedData.campaign = initializeCampaign();
     initializedData.adSets = initializeAdSets();
     initializedData.ads = initializeAds();
@@ -16,6 +17,31 @@ export async function initializeData(context) {
 
 export function validateCampaignForm(campaign) {
     let errors = [] as any;
+
+    if (campaign.name === '') {
+        errors.push(`Error in campaign, please enter a name`)
+    }
+    if (campaign.startTime > campaign.endTime) {
+        errors.push(`Error in campaign, start time must be before end time`)
+    }
+    if (campaign.dailyFrequencyCap === '') {
+        errors.push(`Error in campaign, please enter a daily frequency cap`)
+    }
+    if (campaign.geoTargets === '') {
+        errors.push(`Error in campaign, please select geo targets`)
+    }
+    if (campaign.currency === '') {
+        errors.push(`Error in campaign, please select a currency`)
+    }
+    if (campaign.dailyBudget === '') {
+        errors.push(`Error in campaign, please enter a daily budget`)
+    }
+    if (campaign.totalBudget === '') {
+        errors.push(`Error in campaign, please enter a total budget`)
+    }
+    if (campaign.status === '') {
+        errors.push(`Error in campaign, please enter a status`)
+    }
 
     if (errors.length > 0) {
         return errors;
@@ -55,6 +81,9 @@ export function validateAdsForm(ads) {
     let errors = [] as any;
 
     ads.forEach((ad, index) => {
+        if (ad.creative === '') {
+            errors.push(`Error in ad ${index + 1}, please select a creative`)
+        }
         if (ad.adSets === '') {
             errors.push(`Error in ad ${index + 1}, please add to an ad set`)
         }
@@ -69,18 +98,40 @@ export function validateAdsForm(ads) {
 }
 
 async function initializeGeoCodes(query, accessToken) {
-    let response = await fetchData(query, accessToken);
-    return response.activeGeocodes.data;
+    let data = await fetchData(query, accessToken)
+    let response = [] as any;
+    data.activeGeocodes.data.forEach((geocode) => {
+        response.push({ value: geocode.code, label: geocode.name })
+    });
+    return response;
 }
 
 async function initializeSegments(query, accessToken) {
-    let response = await fetchData(query, accessToken);
-    return response.segments.data;
+    let data = await fetchData(query, accessToken)
+    let response = [] as any;
+    data.segments.data.forEach((segment) => {
+        response.push({ value: segment.code, label: segment.name })
+    });
+    return response;
 }
 
 async function initializeCreatives(query, accessToken, advertiserId) {
-    let response = await fetchData(query(advertiserId), accessToken);
-    return response.advertiser.creativeList.data;
+    let data = await fetchData(query(advertiserId), accessToken)
+    let response = [] as any;
+    data.advertiser.creativeList.data.forEach((creative) => {
+        response.push({ id: creative.id, name: creative.name, state: creative.state, payload: creative.payload, type: creative.type })
+    });
+    return response;
+}
+
+function initializeCreativeOptions(creatives) {
+    let creativeOptions = [] as any;
+    creatives.forEach((creative) => {
+        creativeOptions.push({
+            value: creative.id, label: creative.name
+        });
+    });
+    return creativeOptions;
 }
 
 function initializeCampaign() {
@@ -93,7 +144,7 @@ function initializeCampaign() {
         currency: '',
         dailyBudget: '',
         totalBudget: '',
-        status: '',
+        status: true,
     }
     return campaign;
 }
@@ -117,7 +168,9 @@ function initializeAds() {
             viewPricing: '',
             clickPricing: '',
             conversionPricing: '',
-            webookURL: '',
+            viewWebhook: '',
+            clickWebhook: '',
+            conversionWebhook: '',
             adSets: '',
         }
     ]

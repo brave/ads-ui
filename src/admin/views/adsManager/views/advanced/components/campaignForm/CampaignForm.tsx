@@ -123,6 +123,7 @@ class CampaignForm extends Component<any, any> {
 
                                 <S.InputContainer>
                                     <Text content={"Status"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
+                                    {this.props.campaign.status}
                                     <div style={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
                                         <Switch checked={this.props.campaign.status} onChange={(status) => { this.handleStatus(status) }} onColor="#FB7959" uncheckedIcon={false} checkedIcon={false} height={23} width={45} />
                                         <Text style={{ marginLeft: "12px", marginBottom: "3px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Muli"}>
@@ -153,14 +154,15 @@ class CampaignForm extends Component<any, any> {
                                 </S.InputContainer>
 
                                 <S.InputContainer>
+                                    <Text content={"Lifetime Budget"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
+                                    <S.Input value={this.props.campaign.lifetimeBudget} onChange={(e) => this.handleLifetimeBudget(e)} placeholder="Enter a lifetime budget..." type="number" name="name" />
+                                </S.InputContainer>
+
+                                <S.InputContainer>
                                     <Text content={"Daily Budget"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
                                     <S.Input value={this.props.campaign.dailyBudget} onChange={(e) => this.handleDailyBudget(e)} placeholder="Enter a daily budget..." type="number" name="name" />
                                 </S.InputContainer>
 
-                                <S.InputContainer>
-                                    <Text content={"Lifetime Budget"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
-                                    <S.Input value={this.props.campaign.lifetimeBudget} onChange={(e) => this.handleLifetimeBudget(e)} placeholder="Enter a lifetime budget..." type="number" name="name" />
-                                </S.InputContainer>
                             </S.RightColumn>
                         </S.InnerContainer>
                     </Section>
@@ -174,7 +176,7 @@ class CampaignForm extends Component<any, any> {
 
                                 <S.InputContainer>
                                     <Text content={"Daily Frequency Cap"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
-                                    <S.Input value={this.props.campaign.dailyFrequencyCap} onChange={(e) => this.handleDailyFrequencyCap(e)} placeholder="Enter a daily frequency cap..." type="text" name="name" />
+                                    <S.Input value={this.props.campaign.dailyFrequencyCap} onChange={(e) => this.handleDailyFrequencyCap(e)} placeholder="Enter a daily frequency cap..." type="number" name="name" />
                                 </S.InputContainer>
 
                                 <S.InputContainer>
@@ -184,7 +186,7 @@ class CampaignForm extends Component<any, any> {
                                             value={this.props.campaign.geoTargets}
                                             onChange={this.handleGeoTargets}
                                             isMulti={true}
-                                            options={countries}
+                                            options={this.props.geoCodes}
                                         />
                                     </div>
                                 </S.InputContainer>
