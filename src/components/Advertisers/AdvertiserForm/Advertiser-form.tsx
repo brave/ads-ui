@@ -97,7 +97,7 @@ class AdvertiserForm extends React.Component<any, any> {
               <FormControl>
                 <InputLabel>Advertiser State</InputLabel>
                 <Field disabled={!unlock && unlock !== undefined}
-                  component={renderSelectField} name="ad_state" label="State">
+                  component={renderSelectField} name="ad_state" label="Advertiser State">
                   <MenuItem value={"under_review"}>Under Review</MenuItem>
                   <MenuItem value={"active"}>Active</MenuItem>
                 </Field>

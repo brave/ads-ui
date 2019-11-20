@@ -32,14 +32,18 @@ import AdvertiserView from "../containers/Users/AdvertiserView/AdvertiserView";
 import AdvertiserNew from "../components/Advertisers/AdvertiserNew/AdvertiserNew";
 import UserView from "../containers/Users/UserView/UserView";
 
+import Selection from "./views/adsManager/views/selection/Selection";
 import Overview from "./views/campaigns/views/campaign/views/analytics/views/overview/Overview";
 import Platforms from "./views/campaigns/views/campaign/views/analytics/views/platforms/Platforms";
 
 import * as S from "./Admin.style";
 import { styles } from "./Admin.style";
 import AdvertiserOverview from "./views/advertisers/views/advertiserOverview/AdvertiserOverview";
+import Context from "../state/context";
+import Advanced from "./views/adsManager/views/advanced/Advanced";
 
 class Admin extends React.Component<any, any> {
+    static contextType = Context;
     public render(): any {
         const { auth, classes, drawer, match } = this.props;
         if (
@@ -54,9 +58,17 @@ class Admin extends React.Component<any, any> {
             <S.Container>
                 <AppBar />
                 <S.Content>
-                    <SideBar type={"admin"} match={match} />
+                    {
+                        this.context.sidebar === "visible" ?
+                            <SideBar type={"admin"} match={match} />
+                            :
+                            <React.Fragment />
+                    }
                     <S.Main>
                         <Switch>
+                            {/* /adsmanager */}
+                            <Route exact path={match.url + "/adsmanager/selection"} component={Selection} />
+                            <Route exact path={match.url + "/adsmanager/advanced"} component={Advanced} />
                             {/* /dashboard */}
                             <Route path={match.url + "/dashboard"} component={Dashboard} />
 
