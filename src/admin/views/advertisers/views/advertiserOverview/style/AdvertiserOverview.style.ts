@@ -21,7 +21,7 @@ export const RightColumn = styled("div")`
 `;
 
 export const InputContainer = styled("div")`
-  margin-bottom: 56px;
+  margin-bottom: 32px;
 `;
 
 export const SwitchContainer = styled("div")`
@@ -30,13 +30,13 @@ export const SwitchContainer = styled("div")`
 
 export const Input = styled("input")`
   width: 100%;
-  height: 45px;
+  height: 36px;
   border-radius: 4px;
   border: 1px solid #dfdfdf;
   background-color: #fafafa;
-  margin-top: 28px;
+  margin-top: 4px;
   padding-left: 14px;
-  font-size: 16px;
+  font-size: 14px;
   font-family: Muli;
 `
 

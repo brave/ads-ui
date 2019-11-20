@@ -11,6 +11,15 @@ export function advertiserQuery(advertiserId) {
             state
             phone
             billingEmail
+            mailingAddress {
+                modifiedAt
+                street1
+                street2
+                city
+                state
+                country
+                zipcode
+            }
         }
     }
 `};

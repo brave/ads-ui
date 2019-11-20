@@ -39,6 +39,9 @@ import Platforms from "./views/campaigns/views/campaign/views/analytics/views/pl
 import * as S from "./Admin.style";
 import { styles } from "./Admin.style";
 import AdvertiserOverview from "./views/advertisers/views/advertiserOverview/AdvertiserOverview";
+import AdvertiserCampaigns from "./views/advertisers/views/advertiserCampaigns/AdvertiserCampaigns";
+import AdvertiserInvoices from "./views/advertisers/views/advertiserInvoices/AdvertiserInvoices";
+import AdvertiserCreatives from "./views/advertisers/views/advertiserCreatives/AdvertiserCreatives";
 import Context from "../state/context";
 import Advanced from "./views/adsManager/views/advanced/Advanced";
 
@@ -92,13 +95,11 @@ class Admin extends React.Component<any, any> {
                             {/* Want to remove this route */}
                             <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId"} component={AdvertiserView} />
 
-                            {/* Want to add these routes */}
                             <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/overview"} component={AdvertiserOverview} />
-                            {/* 
                             <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/campaign"} component={AdvertiserCampaigns} />
                             <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/creative"} component={AdvertiserCreatives} />
-                            <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/invoice"} component={AdvertiserInvoices} /> 
-                            */}
+                            <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/invoice"} component={AdvertiserInvoices} />
+
 
 
                             <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/invoice/:invoiceId"}
