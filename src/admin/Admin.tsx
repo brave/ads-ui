@@ -37,6 +37,7 @@ import Platforms from "./views/campaigns/views/campaign/views/analytics/views/pl
 
 import * as S from "./Admin.style";
 import { styles } from "./Admin.style";
+import AdvertiserOverview from "./views/advertisers/views/advertiserOverview/AdvertiserOverview";
 
 class Admin extends React.Component<any, any> {
     public render(): any {
@@ -58,12 +59,36 @@ class Admin extends React.Component<any, any> {
                         <Switch>
                             {/* /dashboard */}
                             <Route path={match.url + "/dashboard"} component={Dashboard} />
-                            {/* /users */}
+
+                            {/* /user(s) - eventually want to remove this */}
                             <Route exact path={match.url + "/users"} component={UserList} />
                             <Route exact path={match.url + "/users/new"} component={UserNew} />
+
+                            {/* Want to remove this route */}
                             <Route exact path={match.url + "/users/:userId"} component={UserView} />
+
+                            {/* Want to add these routes */}
+                            {/* 
+                            <Route exact path={match.url + "/users/:userId/overview"} component={UserOverview} />
+                            <Route exact path={match.url + "/users/:userId/advertiser"} component={UserAdvertisers} /> 
+                            */}
+
+                            {/* /advertiser */}
+                            {/* Need to rework this route */}
                             <Route exact path={match.url + "/users/:userId/advertiser/new"} component={AdvertiserNew} />
+
+                            {/* Want to remove this route */}
                             <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId"} component={AdvertiserView} />
+
+                            {/* Want to add these routes */}
+                            <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/overview"} component={AdvertiserOverview} />
+                            {/* 
+                            <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/campaign"} component={AdvertiserCampaigns} />
+                            <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/creative"} component={AdvertiserCreatives} />
+                            <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/invoice"} component={AdvertiserInvoices} /> 
+                            */}
+
+
                             <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/invoice/:invoiceId"}
                                 component={InvoiceView} />
                             <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/campaign/new"}
