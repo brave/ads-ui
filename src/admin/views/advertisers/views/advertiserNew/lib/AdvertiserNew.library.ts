@@ -1,42 +1,53 @@
-import { advertiserQuery, updateAdvertiserMutation } from "./AdvertiserOverviewQueries";
+import { createAdvertiserMutation } from "./AdvertiserNew.queries";
 import _ from "lodash";
 
 export async function initializeData(context) {
     let initializedData = {} as any;
-    let advertiser = await initializeAdvertiser(context.props.match.params.advertiserId, context.props.auth.accessToken);
-    initializedData.originalAdvertiser = _.cloneDeep(advertiser);
-    initializedData.newAdvertiser = _.cloneDeep(advertiser);
+    initializedData.advertiser = initializeAdvertiser();
     initializedData.validations = {};
     return initializedData;
 }
 
-async function initializeAdvertiser(advertiserId, accessToken) {
-    let data = await fetchData(advertiserQuery(advertiserId), accessToken)
-    let response = data.advertiser;
-    return response;
+function initializeAdvertiser() {
+    return {
+        name: '',
+        billingEmail: '',
+        phone: '',
+        mailingAddress: {
+            street1: '',
+            street2: '',
+            city: '',
+            state: '',
+            country: '',
+            zipcode: '',
+        },
+        state: 'active',
+    }
 }
 
-export async function updateAdvertiser(advertiserId, advertiser, accessToken, context) {
+export async function createAdvertiser(userId, advertiser, accessToken, context) {
 
-    // Mailing and Billing Address will be the same for now
-    let updateAdvertiserInput = {
-        id: advertiser.id,
+    // Mailing and Billing Address will be the same for now.
+    // Agreed defaults to true for now. 
+    let createAdvertiserInput = {
+        userId: userId,
         name: advertiser.name,
         phone: advertiser.phone,
         billingEmail: advertiser.billingEmail,
         mailingAddress: advertiser.mailingAddress,
         billingAddress: advertiser.mailingAddress,
-        state: advertiser.state
+        state: advertiser.state,
+        agreed: true,
     }
     context.setState({
         saving: true,
     }, async () => {
-        let data = await fetchData(updateAdvertiserMutation(updateAdvertiserInput), accessToken)
+        let data = await fetchData(createAdvertiserMutation(createAdvertiserInput), accessToken)
         context.setState({
             saving: false,
         },
             () => {
-                alert("Save successful!")
+                window.location.href = context.props.match.url.replace("/new", `/${data.createAdvertiser.id}/overview`);
             }
         );
     });
@@ -69,12 +80,12 @@ async function fetchData(query, accessToken) {
 }
 
 function validateName(context) {
-    if (context.state.newAdvertiser.name === '') {
+    if (context.state.advertiser.name === '') {
         let validations = context.state.validations;
         validations.name = { name: "Name", state: "pending", error: undefined }
         context.setState({ validations })
     }
-    else if (context.state.newAdvertiser.name === '123') {
+    else if (context.state.advertiser.name === '123') {
         let validations = context.state.validations;
         validations.name = { name: "Name", state: "error", error: "Field cannot contain numbers." }
         context.setState({ validations })
@@ -88,12 +99,12 @@ function validateName(context) {
 
 function validateEmail(context) {
     let emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (context.state.newAdvertiser.billingEmail === '') {
+    if (context.state.advertiser.billingEmail === '') {
         let validations = context.state.validations;
         validations.billingEmail = { name: "E-mail Address", state: "pending", error: undefined }
         context.setState({ validations })
     }
-    else if (!emailRegex.test(context.state.newAdvertiser.billingEmail)) {
+    else if (!emailRegex.test(context.state.advertiser.billingEmail)) {
         let validations = context.state.validations;
         validations.billingEmail = { name: "E-mail Address", state: "error", error: "Please enter a valid e-mail address." }
         context.setState({ validations })
@@ -106,12 +117,12 @@ function validateEmail(context) {
 }
 
 function validatePhone(context) {
-    if (context.state.newAdvertiser.phone === '') {
+    if (context.state.advertiser.phone === '') {
         let validations = context.state.validations;
         validations.phone = { name: "Phone Number", state: "pending", error: undefined }
         context.setState({ validations })
     }
-    else if (context.state.newAdvertiser.phone.length > 23) {
+    else if (context.state.advertiser.phone.length > 23) {
         let validations = context.state.validations;
         validations.phone = { name: "Phone Number", state: "error", error: "Please enter a valid phone number." }
         context.setState({ validations })
@@ -125,17 +136,17 @@ function validatePhone(context) {
 
 function validateMailingAddress(context) {
     if (
-        context.state.newAdvertiser.mailingAddress.street1 === '' ||
-        context.state.newAdvertiser.mailingAddress.city === '' ||
-        context.state.newAdvertiser.mailingAddress.state === '' ||
-        context.state.newAdvertiser.mailingAddress.country === '' ||
-        context.state.newAdvertiser.mailingAddress.zipcode === ''
+        context.state.advertiser.mailingAddress.street1 === '' ||
+        context.state.advertiser.mailingAddress.city === '' ||
+        context.state.advertiser.mailingAddress.state === '' ||
+        context.state.advertiser.mailingAddress.country === '' ||
+        context.state.advertiser.mailingAddress.zipcode === ''
     ) {
         let validations = context.state.validations;
         validations.mailingAddress = { name: "Address", state: "pending", error: undefined }
         context.setState({ validations })
     }
-    else if (context.state.newAdvertiser.mailingAddress.zipcode.length > 15) {
+    else if (context.state.advertiser.mailingAddress.zipcode.length > 15) {
         let validations = context.state.validations;
         validations.mailingAddress = { name: "Address", state: "error", error: "Please enter a valid zip code." }
         context.setState({ validations })
@@ -148,7 +159,7 @@ function validateMailingAddress(context) {
 }
 
 function validateStatus(context) {
-    if (context.state.newAdvertiser.state === '') {
+    if (context.state.advertiser.state === '') {
         let validations = context.state.validations;
         validations.state = { name: "Advertiser Status", state: "pending", error: undefined }
         context.setState({ validations })
@@ -180,5 +191,14 @@ function validateSaveButton(context) {
             state: "pending"
         }
         context.setState({ validations })
+    }
+}
+
+export function mapState(state) {
+    switch (state) {
+        case 'active':
+            return "Active"
+        case "under_review":
+            return "Under Review"
     }
 }

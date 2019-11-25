@@ -4,15 +4,12 @@ export function advertiserQuery(advertiserId) {
         advertiser(id: "${advertiserId}")
         {
             id
-            createdAt
-            modifiedAt
             name
             agreed
             state
             phone
             billingEmail
             mailingAddress {
-                modifiedAt
                 street1
                 street2
                 city
@@ -23,3 +20,15 @@ export function advertiserQuery(advertiserId) {
         }
     }
 `};
+
+export function updateAdvertiserMutation(updateAdvertiserInput) {
+    return `
+    mutation{
+        updateAdvertiser(
+        updateAdvertiserInput: ${JSON.stringify(updateAdvertiserInput).replace(/\"([^(\")"]+)\":/g, "$1:")}
+        ){
+            id
+        }
+    }
+    `
+};

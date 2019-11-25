@@ -7,17 +7,19 @@ import TabSelector from '../../../../../components/tabSelector/TabSelector';
 import Section from '../../../../../components/section/Section';
 import { Text } from "../../../../../components/Text/Text";
 import Context from "../../../../../state/context";
-import { initializeData, updateAdvertiser, validate } from './lib/AdvertiserOverviewLibrary';
+import { initializeData, mapState, createAdvertiser, validate } from './lib/AdvertiserNew.library';
 
-import * as S from "./style/AdvertiserOverview.style";
+import * as S from "./style/AdvertiserNew.style";
 
-class AdvertiserOverview extends Component<any, any> {
+class AdvertiserNew extends Component<any, any> {
     static contextType = Context;
 
     constructor(props) {
         super(props);
         this.state = {
-            advertiser: {}
+            advertiser: {
+                mailingAddress: {}
+            }
         };
     }
 
@@ -37,96 +39,87 @@ class AdvertiserOverview extends Component<any, any> {
     public handleName(e) {
         let alphaOnly = /^[a-zA-Z ]*$/;
         if (alphaOnly.test(e.target.value)) {
-            let advertiser = this.state.newAdvertiser
+            let advertiser = this.state.advertiser
             advertiser.name = e.target.value
-            this.setState({ newAdvertiser: advertiser }, () => validate(this))
+            this.setState({ advertiser: advertiser }, () => validate(this))
         }
     }
 
     public handlePhone(e) {
         let numericOnly = /^[0-9-]*$/;
         if (numericOnly.test(e.target.value)) {
-            let advertiser = this.state.newAdvertiser
+            let advertiser = this.state.advertiser
             advertiser.phone = e.target.value
-            this.setState({ newAdvertiser: advertiser }, () => validate(this))
+            this.setState({ advertiser: advertiser }, () => validate(this))
         }
     }
 
     public handleEmail(e) {
-        let advertiser = this.state.newAdvertiser
+        let advertiser = this.state.advertiser
         advertiser.billingEmail = e.target.value
         // consider not validating until focusOut
-        this.setState({ newAdvertiser: advertiser }, () => validate(this))
+        this.setState({ advertiser: advertiser }, () => validate(this))
     }
 
     public handleStreetOne(e) {
         let alphaNumericOnly = /^[a-zA-Z0-9 ]*$/;
         if (alphaNumericOnly.test(e.target.value)) {
-            let advertiser = this.state.newAdvertiser
+            let advertiser = this.state.advertiser
             advertiser.mailingAddress.street1 = e.target.value
-            this.setState({ newAdvertiser: advertiser }, () => validate(this))
+            this.setState({ advertiser: advertiser }, () => validate(this))
         }
     }
 
     public handleStreetTwo(e) {
         let alphaNumericOnly = /^[a-zA-Z0-9 ]*$/;
         if (alphaNumericOnly.test(e.target.value)) {
-            let advertiser = this.state.newAdvertiser
+            let advertiser = this.state.advertiser
             advertiser.mailingAddress.street2 = e.target.value
-            this.setState({ newAdvertiser: advertiser }, () => validate(this))
+            this.setState({ advertiser: advertiser }, () => validate(this))
         }
     }
 
     public handleCity(e) {
         let alphaOnly = /^[a-zA-Z ]*$/;
         if (alphaOnly.test(e.target.value)) {
-            let advertiser = this.state.newAdvertiser
+            let advertiser = this.state.advertiser
             advertiser.mailingAddress.city = e.target.value
-            this.setState({ newAdvertiser: advertiser }, () => validate(this))
+            this.setState({ advertiser: advertiser }, () => validate(this))
         }
     }
 
     public handleState(e) {
         let alphaOnly = /^[a-zA-Z ]*$/;
         if (alphaOnly.test(e.target.value)) {
-            let advertiser = this.state.newAdvertiser
+            let advertiser = this.state.advertiser
             advertiser.mailingAddress.state = e.target.value
-            this.setState({ newAdvertiser: advertiser }, () => validate(this))
+            this.setState({ advertiser: advertiser }, () => validate(this))
         }
     }
 
     public handleCountry(e) {
         let alphaOnly = /^[a-zA-Z ]*$/;
         if (alphaOnly.test(e.target.value)) {
-            let advertiser = this.state.newAdvertiser
+            let advertiser = this.state.advertiser
             advertiser.mailingAddress.country = e.target.value
-            this.setState({ newAdvertiser: advertiser }, () => validate(this))
+            this.setState({ advertiser: advertiser }, () => validate(this))
         }
     }
 
     public handleZipcode(e) {
         let numericOnly = /^[0-9-]*$/;
         if (numericOnly.test(e.target.value)) {
-            let advertiser = this.state.newAdvertiser
+            let advertiser = this.state.advertiser
             advertiser.mailingAddress.zipcode = e.target.value
-            this.setState({ newAdvertiser: advertiser }, () => validate(this))
+            this.setState({ advertiser: advertiser }, () => validate(this))
         }
     }
 
     public handleStatus = selectedOption => {
-        let advertiser = this.state.newAdvertiser
+        let advertiser = this.state.advertiser
         advertiser.state = selectedOption.value;
-        this.setState({ newAdvertiser: advertiser }, () => validate(this))
+        this.setState({ advertiser: advertiser }, () => validate(this))
     };
-
-    public mapState = (state) => {
-        switch (state) {
-            case 'active':
-                return "Active"
-            case "under_review":
-                return "Under Review"
-        }
-    }
 
     public renderValidation(field) {
         let name = this.state.validations[field].name;
@@ -162,16 +155,9 @@ class AdvertiserOverview extends Component<any, any> {
 
         const { match } = this.props;
 
-        const tabConfig = [
-            { label: "Overview", selected: true, link: match.url.replace("/overview", "") + "/overview" },
-            { label: "Campaigns", selected: false, link: match.url.replace("/overview", "") + "/campaign" },
-            { label: "Creatives", selected: false, link: match.url.replace("/overview", "") + "/creative" },
-            { label: "Invoices", selected: false, link: match.url.replace("/overview", "") + "/invoice" },
-        ]
         return (
             this.context.loading === false &&
             <React.Fragment>
-                <TabSelector config={tabConfig} />
                 <div style={{ display: "flex", position: "relative" }}>
                     <S.Container>
                         <Section fullWidthChild={true}>
@@ -184,15 +170,15 @@ class AdvertiserOverview extends Component<any, any> {
                                     <S.RightColumn>
                                         <S.InputContainer>
                                             <Text content={"Name"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <S.Input value={this.state.newAdvertiser.name} onChange={(e) => { this.handleName(e) }} placeholder="Enter a name..." type="text" name="name" />
+                                            <S.Input value={this.state.advertiser.name} onChange={(e) => { this.handleName(e) }} placeholder="Enter a name..." type="text" name="name" />
                                         </S.InputContainer>
                                         <S.InputContainer>
                                             <Text content={"E-Mail Address"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <S.Input value={this.state.newAdvertiser.billingEmail} onChange={(e) => { this.handleEmail(e) }} placeholder="Enter an e-mail address..." type="text" name="name" />
+                                            <S.Input value={this.state.advertiser.billingEmail} onChange={(e) => { this.handleEmail(e) }} placeholder="Enter an e-mail address..." type="text" name="name" />
                                         </S.InputContainer>
                                         <S.InputContainer>
                                             <Text content={"Phone Number"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <S.Input value={this.state.newAdvertiser.phone} onChange={(e) => { this.handlePhone(e) }} placeholder="Enter a phone number..." type="text" name="name" />
+                                            <S.Input value={this.state.advertiser.phone} onChange={(e) => { this.handlePhone(e) }} placeholder="Enter a phone number..." type="text" name="name" />
                                         </S.InputContainer>
                                     </S.RightColumn>
                                 </S.InnerContainer>
@@ -206,27 +192,27 @@ class AdvertiserOverview extends Component<any, any> {
                                     <S.RightColumn>
                                         <S.InputContainer>
                                             <Text content={"Street Address Line 1"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <S.Input value={this.state.newAdvertiser.mailingAddress.street1} onChange={(e) => { this.handleStreetOne(e) }} placeholder="Enter a street address..." type="text" name="name" />
+                                            <S.Input value={this.state.advertiser.mailingAddress.street1} onChange={(e) => { this.handleStreetOne(e) }} placeholder="Enter a street address..." type="text" name="name" />
                                         </S.InputContainer>
                                         <S.InputContainer>
                                             <Text content={"Street Address Line 2"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <S.Input value={this.state.newAdvertiser.mailingAddress.street2} onChange={(e) => { this.handleStreetTwo(e) }} placeholder="Enter a street address... (Optional)" type="text" name="name" />
+                                            <S.Input value={this.state.advertiser.mailingAddress.street2} onChange={(e) => { this.handleStreetTwo(e) }} placeholder="Enter a street address... (Optional)" type="text" name="name" />
                                         </S.InputContainer>
                                         <S.InputContainer>
                                             <Text content={"City"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <S.Input value={this.state.newAdvertiser.mailingAddress.city} onChange={(e) => { this.handleCity(e) }} placeholder="Enter a city..." type="text" name="name" />
+                                            <S.Input value={this.state.advertiser.mailingAddress.city} onChange={(e) => { this.handleCity(e) }} placeholder="Enter a city..." type="text" name="name" />
                                         </S.InputContainer>
                                         <S.InputContainer>
                                             <Text content={"State"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <S.Input value={this.state.newAdvertiser.mailingAddress.state} onChange={(e) => { this.handleState(e) }} placeholder="Enter a state..." type="text" name="name" />
+                                            <S.Input value={this.state.advertiser.mailingAddress.state} onChange={(e) => { this.handleState(e) }} placeholder="Enter a state..." type="text" name="name" />
                                         </S.InputContainer>
                                         <S.InputContainer>
                                             <Text content={"Country"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <S.Input value={this.state.newAdvertiser.mailingAddress.country} onChange={(e) => { this.handleCountry(e) }} placeholder="Enter a country..." type="text" name="name" />
+                                            <S.Input value={this.state.advertiser.mailingAddress.country} onChange={(e) => { this.handleCountry(e) }} placeholder="Enter a country..." type="text" name="name" />
                                         </S.InputContainer>
                                         <S.InputContainer>
                                             <Text content={"Zip Code"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <S.Input value={this.state.newAdvertiser.mailingAddress.zipcode} onChange={(e) => { this.handleZipcode(e) }} placeholder="Enter a zip code..." type="text" name="name" />
+                                            <S.Input value={this.state.advertiser.mailingAddress.zipcode} onChange={(e) => { this.handleZipcode(e) }} placeholder="Enter a zip code..." type="text" name="name" />
                                         </S.InputContainer>
                                     </S.RightColumn>
                                 </S.InnerContainer>
@@ -242,7 +228,7 @@ class AdvertiserOverview extends Component<any, any> {
                                             <Text content={"Status"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                             <div style={{ marginTop: "6px" }}>
                                                 <Select
-                                                    value={{ value: this.state.newAdvertiser.state, label: this.mapState(this.state.newAdvertiser.state) }}
+                                                    value={{ value: this.state.advertiser.state, label: mapState(this.state.advertiser.state) }}
                                                     onChange={this.handleStatus}
                                                     options={[{ value: "active", label: "Active" }, { value: "under_review", label: "Under Review" }]}
                                                 />
@@ -280,7 +266,7 @@ class AdvertiserOverview extends Component<any, any> {
                                         {this.state.saving !== true ?
 
                                             this.state.validations.saveButton.state === 'valid' ?
-                                                <S.Button onClick={() => { updateAdvertiser(this.props.match.params.advertiserId, this.state.newAdvertiser, this.props.auth.accessToken, this) }} style={{ marginLeft: "auto", marginTop: "24px" }}>
+                                                <S.Button onClick={() => { createAdvertiser(this.props.match.params.userId, this.state.advertiser, this.props.auth.accessToken, this) }} style={{ marginLeft: "auto", marginTop: "24px" }}>
                                                     <Text content={"Save"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
                                                 </S.Button> :
                                                 <S.Button style={{ marginLeft: "auto", marginTop: "24px", backgroundColor: "#e2e2e2", cursor: "not-allowed" }}>
@@ -312,4 +298,4 @@ const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AdvertiserOverview); 
+)(AdvertiserNew); 
