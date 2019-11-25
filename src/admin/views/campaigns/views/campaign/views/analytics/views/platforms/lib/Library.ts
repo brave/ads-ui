@@ -94,6 +94,15 @@ function processPlatformEngagements(data, platform) {
 }
 
 export function createPlatformChart(data, platform) {
+
+    let text;
+    if (platform === 'iOS') {
+        text = `Engagement ${platform}`;
+    }
+    else {
+        text = `Engagement ${platform.charAt(0).toUpperCase() + platform.slice(1)}`
+    }
+
     var platformChart = Highcharts.chart(platform, {
         chart: {
             type: 'pie',
@@ -104,7 +113,7 @@ export function createPlatformChart(data, platform) {
             enabled: false
         },
         title: {
-            text: `Engagement ${platform.charAt(0).toUpperCase() + platform.slice(1)}`,
+            text,
         },
         tooltip: {
             pointFormat: '<b>{point.percentage:.1f}%</b>'

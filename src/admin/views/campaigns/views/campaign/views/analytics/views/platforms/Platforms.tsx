@@ -28,6 +28,7 @@ class Platforms extends Component<any, any> {
 
     createCharts() {
         createPlatformChart(this.state.androidEngagements, "android")
+        createPlatformChart(this.state.macOSEngagements, "iOS")
         createPlatformChart(this.state.macOSEngagements, "macOS")
         createPlatformChart(this.state.windowsEngagements, "windows")
         createPlatformChart(this.state.linuxEngagements, "linux")
@@ -52,6 +53,7 @@ class Platforms extends Component<any, any> {
                 </Section>
                 <Section>
                     <div id="android" />
+                    <div id="iOS" />
                     <div id="other" />
                 </Section>
             </div>
