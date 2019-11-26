@@ -1,6 +1,8 @@
 import React from "react";
 
 export default React.createContext({
-    loading: false,
-    setLoading: (loading) => { }
+    loading: undefined,
+    sidebar: "visible",
+    setLoading: (loading) => { },
+    setSidebar: (sidebar) => { },
 })

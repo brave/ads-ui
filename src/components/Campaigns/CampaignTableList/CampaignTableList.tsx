@@ -108,7 +108,7 @@ class CampaignList extends React.Component<any, any> {
             />
           </CardContent>
         </Card>
-        <Link className={classes.fab} to={match.url + "/campaign/new"}>
+        <Link target="_self" className={classes.fab} to={match.url + "/new"}>
           <Button color="secondary" variant="fab">
             <Icon>add</Icon>
           </Button>
