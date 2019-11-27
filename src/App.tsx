@@ -41,11 +41,16 @@ class App extends React.Component<any, any> {
   } as any;
 
   state = {
-    loading: false
+    loading: undefined,
+    sidebar: "visible",
   }
 
   public setLoading = loading => {
     this.setState({ loading });
+  }
+
+  public setSidebar = sidebar => {
+    this.setState({ sidebar });
   }
 
   public render() {
@@ -56,7 +61,9 @@ class App extends React.Component<any, any> {
         <React.Fragment>
           <Context.Provider value={{
             loading: this.state.loading,
-            setLoading: this.setLoading
+            setLoading: this.setLoading,
+            sidebar: this.state.sidebar,
+            setSidebar: this.setSidebar,
           }}>
             <Switch>
               <Route path="/user/main" component={AdvertiserMain} />

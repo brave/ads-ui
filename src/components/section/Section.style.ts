@@ -11,7 +11,7 @@ ${(props: SectionProps) => `
     margin-bottom: ${props.marginBottom}
     margin-right: 28px;
     border-radius: 4px;
-    border: 1px solid #ededed;
+    border: 1px solid #e2e2e2;
     padding: 28px;`
     }
 `;

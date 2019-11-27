@@ -18,6 +18,13 @@ class Section extends Component<any, any> {
                     </S.Section>
                 )
             }
+            else if (this.props.fullWidthChild) {
+                return (
+                    <S.Section style={{ marginRight: "0px" }} marginBottom={marginBottom} width={`${100 / React.Children.count(this.props.children)}%`}>
+                        {child}
+                    </S.Section>
+                )
+            }
             else {
                 return (
                     <S.Section marginBottom={marginBottom}>
