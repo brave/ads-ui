@@ -118,8 +118,8 @@ async function initializeSegments(query, accessToken) {
 async function initializeCreatives(query, accessToken, advertiserId) {
     let data = await fetchData(query(advertiserId), accessToken)
     let response = [] as any;
-    data.advertiser.creativeList.data.forEach((creative) => {
-        response.push({ id: creative.id, name: creative.name, state: creative.state, payload: creative.payload, type: creative.type })
+    data.advertiser.creatives.forEach((creative) => {
+        response.push({ id: creative.id, name: creative.name, state: creative.state })
     });
     return response;
 }

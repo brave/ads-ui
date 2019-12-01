@@ -24,14 +24,10 @@ export function creativesQuery(advertiserId) {
     return `
     query{
         advertiser(id: "${advertiserId}"){
-            creativeList{
-                data{
+            creatives{
                     id
                     name
-                    payload
-                    type
                     state
-                }
             }
         }
     }
