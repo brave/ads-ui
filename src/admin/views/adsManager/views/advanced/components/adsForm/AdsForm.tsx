@@ -133,17 +133,7 @@ class AdsForm extends Component<any, any> {
         return (
             <React.Fragment>
                 <div style={{ display: "flex" }}>
-                    <div style={{}}>
-                        <S.AdSetsTabs>
-                            {this.renderAdSetsTabs()}
-                            <S.AdSetsTabButtonContainer>
-                                <S.Button onClick={() => { this.addAd() }} style={{ marginLeft: "auto", marginRight: "auto", width: "175px", backgroundColor: "white", color: "black", border: "1px solid #d6d6d6" }}>
-                                    <Text content={"New Ad"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
-                                </S.Button>
-                            </S.AdSetsTabButtonContainer>
-                        </S.AdSetsTabs>
-                    </div>
-                    <div style={{ width: "856px", marginLeft: "auto", marginRight: "auto" }}>
+                    <div style={{ width: "843px", marginLeft: "auto", marginRight: "auto" }}>
                         <Section fullWidthChild={true}>
                             <S.Container>
                                 <S.LeftColumn>
@@ -157,8 +147,8 @@ class AdsForm extends Component<any, any> {
 
                                     {/* Creative */}
                                     <S.InputContainer>
-                                        <Text content={"Choose Creative "} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
-                                        <div style={{ marginTop: "28px" }}>
+                                        <Text content={"Choose Creative "} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                        <div style={{ marginTop: "4px" }}>
                                             <Select
                                                 value={this.props.ads[this.state.selectedAd].creative}
                                                 onChange={this.handleCreative}
@@ -169,8 +159,8 @@ class AdsForm extends Component<any, any> {
 
                                     {/* Ad Set */}
                                     <S.InputContainer>
-                                        <Text content={"Choose Ad Sets"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
-                                        <div style={{ marginTop: "28px" }}>
+                                        <Text content={"Choose Ad Sets"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                        <div style={{ marginTop: "4px" }}>
                                             <Select
                                                 value={this.props.ads[this.state.selectedAd].adSets}
                                                 onChange={this.handleAdSets}
@@ -178,42 +168,6 @@ class AdsForm extends Component<any, any> {
                                                 options={this.mapAdSets()}
                                             />
                                         </div>
-                                    </S.InputContainer>
-
-                                    {/* View Pricing */}
-                                    <S.InputContainer>
-                                        <Text content={"View Pricing"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
-                                        <S.Input value={this.props.ads[this.state.selectedAd].viewPricing} onChange={(e) => this.handleViewPricing(e)} placeholder="Enter a price for views..." type="number" name="name" />
-                                    </S.InputContainer>
-
-                                    {/* Click Pricing */}
-                                    <S.InputContainer>
-                                        <Text content={"Click Pricing"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
-                                        <S.Input value={this.props.ads[this.state.selectedAd].clickPricing} onChange={(e) => this.handleClickPricing(e)} placeholder="Enter a price for clicks..." type="number" name="name" />
-                                    </S.InputContainer>
-
-                                    {/* Conversion Pricing */}
-                                    <S.InputContainer>
-                                        <Text content={"Conversion Pricing"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
-                                        <S.Input value={this.props.ads[this.state.selectedAd].conversionPricing} onChange={(e) => this.handleConversionPricing(e)} placeholder="Enter a price for conversions..." type="number" name="name" />
-                                    </S.InputContainer>
-
-                                    {/* Webhook URL */}
-                                    <S.InputContainer>
-                                        <Text content={"View Webhook"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
-                                        <S.Input value={this.props.ads[this.state.selectedAd].viewWebhook} onChange={(e) => this.handleViewWebhook(e)} placeholder="Enter a webhook URL..." type="text" name="name" />
-                                    </S.InputContainer>
-
-                                    {/* Webhook URL */}
-                                    <S.InputContainer>
-                                        <Text content={"Click Webhook"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
-                                        <S.Input value={this.props.ads[this.state.selectedAd].clickWebhook} onChange={(e) => this.handleClickWebhook(e)} placeholder="Enter a webhook URL..." type="text" name="name" />
-                                    </S.InputContainer>
-
-                                    {/* Webhook URL */}
-                                    <S.InputContainer>
-                                        <Text content={"Conversion Webhook"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
-                                        <S.Input value={this.props.ads[this.state.selectedAd].conversionWebhook} onChange={(e) => this.handleConversionWebhook(e)} placeholder="Enter a webhook URL..." type="text" name="name" />
                                     </S.InputContainer>
 
                                     {/* Nav Buttons */}
@@ -226,6 +180,16 @@ class AdsForm extends Component<any, any> {
 
                             </S.Container>
                         </Section>
+                    </div>
+                    <div style={{ width: "253px", marginLeft: "28px" }}>
+                        <S.AdSetsTabs>
+                            {this.renderAdSetsTabs()}
+                            <S.AdSetsTabButtonContainer>
+                                <S.Button onClick={() => { this.addAd() }} style={{ marginLeft: "auto", marginRight: "auto", width: "175px", backgroundColor: "white", color: "black", border: "1px solid #d6d6d6" }}>
+                                    <Text content={"New Ad"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                                </S.Button>
+                            </S.AdSetsTabButtonContainer>
+                        </S.AdSetsTabs>
                     </div>
                 </div>
             </React.Fragment >

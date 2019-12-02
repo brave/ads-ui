@@ -39,9 +39,6 @@ export function validateCampaignForm(campaign) {
     if (campaign.totalBudget === '') {
         errors.push(`Error in campaign, please enter a total budget`)
     }
-    if (campaign.status === '') {
-        errors.push(`Error in campaign, please enter a status`)
-    }
 
     if (errors.length > 0) {
         return errors;
@@ -63,9 +60,6 @@ export function validateAdSetsForm(adSets) {
         }
         if (adSet.audiences === '') {
             errors.push(`Error in ad set ${index + 1}, please select at least one audience`)
-        }
-        if (adSet.audiences === '') {
-            errors.push(`Error in ad set ${index + 1}, please select a status`)
         }
     });
 
