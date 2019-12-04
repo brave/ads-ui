@@ -22,7 +22,7 @@ class UserItem extends React.Component<any, any> {
           <div>{advertiser.state}</div>
         </TableCell>
         <TableCell>
-          <Link className={classes.viewButton} to={`${match.url}/advertiser/${advertiser.id}/overview`}>
+          <Link className={classes.viewButton} to={`${match.url}/advertiser/${advertiser.id}`}>
             <IconButton color="primary">
               <Icon>list</Icon>
             </IconButton>

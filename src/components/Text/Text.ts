@@ -4,7 +4,6 @@ import styled from "styled-components";
 // ["xs", "sm", "md", "lg", "xl"]
 interface TextProps {
   fontFamily: string;
-  content?: string;
   sizes?: any[];
   fontWeight?: number;
   color?: string;
@@ -37,7 +36,7 @@ export const Text = styled("div")`
       font-size: ${props.sizes![4] + "px"};
     }
   `}
-
+  
   // ** Font Family **
   ${(props: TextProps) =>
     `
@@ -65,14 +64,6 @@ export const Text = styled("div")`
     `
     color: #ff7654;
     cursor: pointer;
-  `}
-
-  ${props =>
-    props.content &&
-    `
-    &::after {
-      content: "${props.content}";
-    }
   `}
 `;
 
