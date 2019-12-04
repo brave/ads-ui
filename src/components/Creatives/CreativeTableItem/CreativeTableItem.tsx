@@ -25,7 +25,7 @@ class CreativeTableItem extends React.Component<any, any> {
           <div>{creative.state}</div>
         </TableCell>
         <TableCell>
-          <Link className={classes.viewButton} to={`${match.url}/${creative.id}`}>
+          <Link className={classes.viewButton} to={`${match.url}/creative/${creative.id}`}>
             <IconButton color="primary">
               <Icon>list</Icon>
             </IconButton>

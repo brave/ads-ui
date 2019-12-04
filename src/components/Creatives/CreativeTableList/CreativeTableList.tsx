@@ -62,7 +62,7 @@ class CreativeList extends React.Component<any, any> {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>
+                <TableCell>
                     Name
               </TableCell>
                   <TableCell>
@@ -102,7 +102,7 @@ class CreativeList extends React.Component<any, any> {
             />
           </CardContent>
         </Card>
-        <Link target="_self" className={classes.fab} to={match.url + "/new"}>
+        <Link className={classes.fab} to={match.url + "/creative/new"}>
           <Button color="secondary" variant="fab">
             <Icon>add</Icon>
           </Button>

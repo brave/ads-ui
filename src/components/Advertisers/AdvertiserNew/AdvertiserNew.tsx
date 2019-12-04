@@ -13,7 +13,7 @@ class AdvertiserNew extends React.Component<any, any> {
     const { classes, create, auth, history, match } = this.props;
     const handleSubmit = async (value: any) => {
       const userId = match.params.userId;
-      const values = {} as any;
+      const values = value;
       values.mailingAddress = {
         city: values.city,
         country: values.country,
@@ -23,7 +23,7 @@ class AdvertiserNew extends React.Component<any, any> {
         zipcode: values.zipcode,
       };
       values.billingAddress = values.mailingAddress;
-      values.ad_state = value.ad_state;
+      values.state = value.ad_state;
       values.agreed = true;
       const result = await create(values, auth, userId);
       const url = match.url.replace("/new", "");
