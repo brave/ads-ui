@@ -29,16 +29,25 @@ import CreativeSetView from "../containers/Campaigns/CreativeSetView/CreativeSet
 import CreativesView from "../containers/Creatives/CreativesView/CreativesView";
 import InvoiceView from "../containers/Invoices/InvoicesView/InvoiceView";
 import AdvertiserView from "../containers/Users/AdvertiserView/AdvertiserView";
-import AdvertiserNew from "../components/Advertisers/AdvertiserNew/AdvertiserNew";
+
 import UserView from "../containers/Users/UserView/UserView";
 
+import Selection from "./views/adsManager/views/selection/Selection";
 import Overview from "./views/campaigns/views/campaign/views/analytics/views/overview/Overview";
 import Platforms from "./views/campaigns/views/campaign/views/analytics/views/platforms/Platforms";
 
 import * as S from "./Admin.style";
 import { styles } from "./Admin.style";
+import AdvertiserNew from "./views/advertisers/views/advertiserNew/AdvertiserNew";
+import AdvertiserOverview from "./views/advertisers/views/advertiserOverview/AdvertiserOverview";
+import AdvertiserCampaigns from "./views/advertisers/views/advertiserCampaigns/AdvertiserCampaigns";
+import AdvertiserInvoices from "./views/advertisers/views/advertiserInvoices/AdvertiserInvoices";
+import AdvertiserCreatives from "./views/advertisers/views/advertiserCreatives/AdvertiserCreatives";
+import Context from "../state/context";
+import Advanced from "./views/adsManager/views/advanced/Advanced";
 
 class Admin extends React.Component<any, any> {
+    static contextType = Context;
     public render(): any {
         const { auth, classes, drawer, match } = this.props;
         if (
@@ -53,17 +62,39 @@ class Admin extends React.Component<any, any> {
             <S.Container>
                 <AppBar />
                 <S.Content>
-                    <SideBar type={"admin"} match={match} />
+                    {
+                        this.context.sidebar === "visible" ?
+                            <SideBar type={"admin"} match={match} />
+                            :
+                            <React.Fragment />
+                    }
                     <S.Main>
                         <Switch>
+                            {/* /adsmanager */}
+                            <Route exact path={match.url + "/adsmanager/selection"} component={Selection} />
+                            <Route exact path={match.url + "/adsmanager/advanced"} component={Advanced} />
                             {/* /dashboard */}
                             <Route path={match.url + "/dashboard"} component={Dashboard} />
-                            {/* /users */}
+
+                            {/* /user(s) - eventually want to remove this */}
                             <Route exact path={match.url + "/users"} component={UserList} />
                             <Route exact path={match.url + "/users/new"} component={UserNew} />
+
+                            {/* Want to remove this route */}
                             <Route exact path={match.url + "/users/:userId"} component={UserView} />
+
+                            {/* Want to add these routes */}
+                            {/* 
+                            <Route exact path={match.url + "/users/:userId/overview"} component={UserOverview} />
+                            <Route exact path={match.url + "/users/:userId/advertiser"} component={UserAdvertisers} /> 
+                            */}
+
+                            {/* /advertiser */}
                             <Route exact path={match.url + "/users/:userId/advertiser/new"} component={AdvertiserNew} />
-                            <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId"} component={AdvertiserView} />
+                            <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/overview"} component={AdvertiserOverview} />
+                            <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/campaign"} component={AdvertiserCampaigns} />
+                            <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/creative"} component={AdvertiserCreatives} />
+                            <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/invoice"} component={AdvertiserInvoices} />
                             <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/invoice/:invoiceId"}
                                 component={InvoiceView} />
                             <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/campaign/new"}
