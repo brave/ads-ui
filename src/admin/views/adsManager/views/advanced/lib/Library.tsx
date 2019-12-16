@@ -55,12 +55,12 @@ export function validateAdSetsForm(adSets) {
         if (adSet.lifetimeImpressions === '') {
             errors.push(`Error in ad set ${index + 1}, please enter a number for lifetime impressions`)
         }
-        if (adSet.dailyImpressions === '') {
-            errors.push(`Error in ad set ${index + 1}, please enter a number for daily impressions`)
-        }
-        if (adSet.audiences === '') {
-            errors.push(`Error in ad set ${index + 1}, please select at least one audience`)
-        }
+        // if (adSet.dailyImpressions === '') {
+        //     errors.push(`Error in ad set ${index + 1}, please enter a number for daily impressions`)
+        // }
+        // if (adSet.audiences === '') {
+        //     errors.push(`Error in ad set ${index + 1}, please select at least one audience`)
+        // }
     });
 
     if (errors.length > 0) {
@@ -104,7 +104,9 @@ async function initializeSegments(query, accessToken) {
     let data = await fetchData(query, accessToken)
     let response = [] as any;
     data.segments.data.forEach((segment) => {
-        response.push({ value: segment.code, label: segment.name })
+        if (segment.name !== 'untargeted') {
+            response.push({ value: segment.code, label: segment.name })
+        }
     });
     return response;
 }
@@ -129,16 +131,28 @@ function initializeCreativeOptions(creatives) {
 }
 
 function initializeCampaign() {
+
+    var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+
+    var localISOTime = (new Date(Date.now() - tzoffset)).toISOString().slice(0, -1);
+
+
+
+
+    // endTime: new Date().setHours(23, 59, 59, 999),
+
     let campaign = {
         name: '',
-        startTime: new Date(),
-        endTime: new Date().setHours(23, 59, 59, 999),
+        startTime: (new Date(Date.now() - tzoffset)).toISOString().slice(0, -5),
+        endTime: (new Date(new Date().setHours(23, 59, 59, 999) - tzoffset)).toISOString().slice(0, -5),
         dailyFrequencyCap: '',
         geoTargets: '',
         currency: '',
         dailyBudget: '',
         totalBudget: '',
-        status: true,
+        cpm: true,
+        cpc: false,
+        bid: '',
     }
     return campaign;
 }
@@ -148,8 +162,14 @@ function initializeAdSets() {
         {
             lifetimeImpressions: '',
             dailyImpressions: '',
+            braveML: true,
             audiences: '',
-            status: '',
+            conversionsCheckbox: true,
+            conversion: {
+                type: 'post-view',
+                url: '',
+                observationWindow: { value: 7, label: "7" },
+            },
         }
     ]
     return adSets;
@@ -159,13 +179,12 @@ function initializeAds() {
     let ads = [
         {
             creative: '',
-            viewPricing: '',
-            clickPricing: '',
-            conversionPricing: '',
-            viewWebhook: '',
-            clickWebhook: '',
-            conversionWebhook: '',
             adSets: '',
+            newCreative: true,
+            name: '',
+            title: '',
+            body: '',
+            targetUrl: '',
         }
     ]
     return ads;

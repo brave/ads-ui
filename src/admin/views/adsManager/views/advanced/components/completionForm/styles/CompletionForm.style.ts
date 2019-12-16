@@ -1,6 +1,11 @@
 import styled from "styled-components";
 
 export const Container = styled("div")`
+  width: 75%;
+  margin-right: auto;
+`;
+
+export const InnerContainer = styled("div")`
   display: flex;
   width: 100%;
 `;
@@ -11,11 +16,11 @@ export const LeftColumn = styled("div")`
 `;
 
 export const RightColumn = styled("div")`
-  width: 100%;
+  width: 70%;
 `;
 
 export const InputContainer = styled("div")`
-  margin-bottom: 56px;
+  margin-bottom: 32px;
 `;
 
 export const SwitchContainer = styled("div")`

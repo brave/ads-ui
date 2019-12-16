@@ -33,7 +33,7 @@ class Advanced extends Component<any, any> {
 
     public async initialize() {
         let start = await this.context.setLoading(true);
-        this.context.setSidebar("hidden");
+        // this.context.setSidebar("hidden");
         this.handleBrowserNav();
         let that = this;
         let initializedData = await initializeData(that);

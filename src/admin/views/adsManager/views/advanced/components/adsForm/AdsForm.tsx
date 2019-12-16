@@ -6,6 +6,13 @@ import * as S from "./AdsForm.style";
 import Switch from "react-switch";
 import Select from 'react-select';
 
+const customStyles = {
+    control: (provided, state) => ({
+        ...provided,
+        backgroundColor: "#fafafa"
+    }),
+}
+
 class AdsForm extends Component<any, any> {
     constructor(props) {
         super(props);
@@ -19,11 +26,12 @@ class AdsForm extends Component<any, any> {
         let ads = this.props.ads;
         ads.push({
             creative: '',
-            viewPricing: '',
-            clickPricing: '',
-            conversionPricing: '',
-            webookURL: '',
             adSets: '',
+            newCreative: true,
+            name: '',
+            title: '',
+            body: '',
+            targetUrl: '',
         })
         this.props.setAds(ads);
     }
@@ -91,6 +99,46 @@ class AdsForm extends Component<any, any> {
         this.props.setAds(ads);
     };
 
+    handleNewCreative(value) {
+
+        let ads = this.props.ads;
+        ads[this.state.selectedAd].newCreative = value;
+
+        // Clear existing
+        ads[this.state.selectedAd].creative = '';
+        ads[this.state.selectedAd].name = '';
+        ads[this.state.selectedAd].body = '';
+        ads[this.state.selectedAd].title = '';
+        ads[this.state.selectedAd].targetUrl = '';
+
+        this.props.setAds(ads);
+
+    }
+
+    handleName(e) {
+        let ads = this.props.ads;
+        ads[this.state.selectedAd].name = e.target.value;
+        this.props.setAds(ads);
+    }
+
+    handleTitle(e) {
+        let ads = this.props.ads;
+        ads[this.state.selectedAd].title = e.target.value;
+        this.props.setAds(ads);
+    }
+
+    handleBody(e) {
+        let ads = this.props.ads;
+        ads[this.state.selectedAd].body = e.target.value;
+        this.props.setAds(ads);
+    }
+
+    handleTargetUrl(e) {
+        let ads = this.props.ads;
+        ads[this.state.selectedAd].targetUrl = e.target.value;
+        this.props.setAds(ads);
+    }
+
     mapAdSets() {
         let adSetOptions = this.props.adSets.map((adSet, index) => {
             return {
@@ -135,50 +183,115 @@ class AdsForm extends Component<any, any> {
                 <div style={{ display: "flex" }}>
                     <div style={{ width: "843px", marginLeft: "auto", marginRight: "auto" }}>
                         <Section fullWidthChild={true}>
-                            <S.Container>
-                                <S.LeftColumn>
-                                    <Text content={"Ads"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
-                                    <Text content={"Ads are used to define your creative text and messaging"} style={{ marginTop: "16px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
-                                    <S.LeftColumnContainer>
+                            <>
+                                <S.Container>
+                                    <S.LeftColumn>
+                                        <Text content={"Ads"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
+                                        <Text content={"Ads are used to define your creative text and messaging"} style={{ marginTop: "16px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
+                                        <S.LeftColumnContainer>
 
-                                    </S.LeftColumnContainer>
-                                </S.LeftColumn>
-                                <S.RightColumn>
+                                        </S.LeftColumnContainer>
+                                    </S.LeftColumn>
+                                    <S.RightColumn>
 
-                                    {/* Creative */}
-                                    <S.InputContainer>
-                                        <Text content={"Choose Creative "} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                        <div style={{ marginTop: "4px" }}>
-                                            <Select
-                                                value={this.props.ads[this.state.selectedAd].creative}
-                                                onChange={this.handleCreative}
-                                                options={this.props.creativeOptions}
-                                            />
+                                        {/* Ad Set */}
+                                        <S.InputContainer>
+                                            <Text content={"Choose Ad Sets"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                            <div style={{ marginTop: "4px" }}>
+                                                <Select
+                                                    styles={customStyles}
+                                                    value={this.props.ads[this.state.selectedAd].adSets}
+                                                    onChange={this.handleAdSets}
+                                                    isMulti={true}
+                                                    options={this.mapAdSets()}
+                                                />
+                                            </div>
+                                        </S.InputContainer>
+
+                                        {/* Nav Buttons */}
+
+                                    </S.RightColumn>
+
+
+
+                                </S.Container>
+                                <div style={{ width: "100%", borderBottom: "1px solid #e2e2e2", marginTop: "28px", marginBottom: "56px" }}></div>
+                                <div style={{ display: "flex" }}>
+                                    <div style={{ width: "50%", paddingRight: '28px' }}>
+
+                                        <div style={{ display: "flex", marginTop: "8px", marginBottom: "12px" }}>
+                                            <input style={{ marginRight: "8px" }} type="radio" checked={this.props.ads[this.state.selectedAd].newCreative} onChange={(e) => this.handleNewCreative(true)} />
+                                            <Text content={"New Creative"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                         </div>
-                                    </S.InputContainer>
 
-                                    {/* Ad Set */}
-                                    <S.InputContainer>
-                                        <Text content={"Choose Ad Sets"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                        <div style={{ marginTop: "4px" }}>
-                                            <Select
-                                                value={this.props.ads[this.state.selectedAd].adSets}
-                                                onChange={this.handleAdSets}
-                                                isMulti={true}
-                                                options={this.mapAdSets()}
-                                            />
+
+                                        <div style={{ display: "flex", marginTop: "8px", marginBottom: "8px" }}>
+                                            <input style={{ marginRight: "8px" }} type="radio" checked={!this.props.ads[this.state.selectedAd].newCreative} onChange={(e) => this.handleNewCreative(false)} />
+                                            <Text content={"Use Existing Creative"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                         </div>
-                                    </S.InputContainer>
 
-                                    {/* Nav Buttons */}
-                                    <S.Container>
-                                        <S.Button onClick={() => { this.props.setForm("reviewForm") }} style={{ marginLeft: "auto" }}>
-                                            <Text content={"Next"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
-                                        </S.Button>
-                                    </S.Container>
-                                </S.RightColumn>
+                                        <div style={{ height: "28px" }}></div>
 
-                            </S.Container>
+
+
+                                        {
+                                            this.props.ads[this.state.selectedAd].newCreative === false ?
+                                                < S.InputContainer >
+                                                    <Text content={"Choose Creative "} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                    <div style={{ marginTop: "4px" }}>
+                                                        <Select
+                                                            styles={customStyles}
+                                                            value={this.props.ads[this.state.selectedAd].creative}
+                                                            onChange={this.handleCreative}
+                                                            options={this.props.creativeOptions}
+                                                        />
+                                                    </div>
+                                                </S.InputContainer>
+                                                :
+                                                <>
+                                                    <S.InputContainer>
+                                                        <Text content={"Creative Name"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                        <S.Input value={this.props.ads[this.state.selectedAd].name} onChange={(e) => this.handleName(e)} placeholder="Enter a name..." />
+                                                    </S.InputContainer>
+
+                                                    <S.InputContainer>
+                                                        <Text content={"Creative Title"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                        <S.Input value={this.props.ads[this.state.selectedAd].title} onChange={(e) => this.handleTitle(e)} placeholder="Enter a title..." />
+                                                    </S.InputContainer>
+
+                                                    <S.InputContainer>
+                                                        <Text content={"Creative Body"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                        <S.Input value={this.props.ads[this.state.selectedAd].body} onChange={(e) => this.handleBody(e)} placeholder="Enter a body..." />
+                                                    </S.InputContainer>
+
+                                                    <S.InputContainer>
+                                                        <Text content={"Creative Target URL"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                        <S.Input value={this.props.ads[this.state.selectedAd].targetUrl} onChange={(e) => this.handleTargetUrl(e)} placeholder="Enter a target url..." />
+                                                    </S.InputContainer>
+                                                </>
+                                        }
+
+                                    </div>
+
+                                    <div style={{ width: "50%" }}>
+                                        <Text content={"Preview coming soon!"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+
+
+                                    </div>
+
+
+
+
+
+
+
+                                </div>
+                                <S.Container>
+                                    <S.Button onClick={() => { this.props.setForm("reviewForm") }} style={{ marginLeft: "auto" }}>
+                                        <Text content={"Next"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                                    </S.Button>
+                                </S.Container>
+                            </>
                         </Section>
                     </div>
                     <div style={{ width: "253px", marginLeft: "28px" }}>

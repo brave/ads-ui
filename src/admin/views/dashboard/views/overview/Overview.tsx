@@ -7,6 +7,7 @@ import * as Highcharts from "highcharts/highmaps";
 import HighchartsReact from 'highcharts-react-official'
 import Section from "../../../../../components/section/Section";
 import Context from "../../../../../state/context";
+import { withRouter } from 'react-router-dom';
 
 import { fetchData, processData, } from "./lib/Library";
 
@@ -18,6 +19,7 @@ class Overview extends React.Component<any, any> {
   constructor(props) {
     super(props);
   }
+
   public componentDidMount() {
     this.initialize();
   }
@@ -79,9 +81,9 @@ const mapStateToProps = (state: any, ownProps: any) => ({
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
 });
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Overview);
+)(Overview));
 
 

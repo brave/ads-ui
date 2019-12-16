@@ -7,24 +7,19 @@ import Select from 'react-select';
 import DateTimePicker from "material-ui-pickers/DateTimePicker";
 import MuiPickersUtilsProvider from "material-ui-pickers/MuiPickersUtilsProvider";
 import MomentUtils from "@date-io/moment";
-
-const options = [
-    { value: 'technology', label: 'Technology' },
-    { value: 'sports', label: 'Sports' },
-    { value: 'music', label: 'Music' },
-];
-
-const countries = [
-    { value: 'United States', label: 'United States' },
-    { value: 'France', label: 'France' },
-    { value: 'Spain', label: 'Spain' },
-    { value: 'England', label: 'England' },
-];
+import './styles/campaignForm.style.css';
 
 const currencies = [
     { value: 'usd', label: 'USD' },
     { value: 'bat', label: 'BAT' },
 ]
+
+const customStyles = {
+    control: (provided, state) => ({
+        ...provided,
+        backgroundColor: "#fafafa"
+    }),
+}
 
 class CampaignForm extends Component<any, any> {
 
@@ -34,21 +29,41 @@ class CampaignForm extends Component<any, any> {
         this.props.setCampaign(campaign);
     }
 
-    handleStartTime(value) {
+    handleStartTime(e) {
         let campaign = this.props.campaign;
-        campaign.startTime = value
+        campaign.startTime = e.target.value;
         this.props.setCampaign(campaign);
     }
 
-    handleEndTime(value) {
+    handleEndTime(e) {
         let campaign = this.props.campaign;
-        campaign.endTime = value
+        campaign.endTime = e.target.value;
         this.props.setCampaign(campaign);
     }
 
     handleDailyFrequencyCap(e) {
         let campaign = this.props.campaign;
         campaign.dailyFrequencyCap = e.target.value
+        this.props.setCampaign(campaign);
+    }
+
+    handleBid(e) {
+        let campaign = this.props.campaign;
+        campaign.bid = e.target.value
+        this.props.setCampaign(campaign);
+    }
+
+    formatBid(e) {
+        let campaign = this.props.campaign;
+        let formattedString = e.target.value.replace(/[^\d.]/g, '');
+        formattedString = parseFloat(formattedString).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        if (campaign.currency.label === "USD") {
+            formattedString = "$" + formattedString;
+        }
+        else {
+            formattedString = formattedString + " BAT";
+        }
+        campaign.bid = formattedString;
         this.props.setCampaign(campaign);
     }
 
@@ -70,9 +85,37 @@ class CampaignForm extends Component<any, any> {
         this.props.setCampaign(campaign);
     }
 
+    formatDailyBudget(e) {
+        let campaign = this.props.campaign;
+        let formattedString = e.target.value.replace(/[^\d.]/g, '');
+        formattedString = parseFloat(formattedString).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        if (campaign.currency.label === "USD") {
+            formattedString = "$" + formattedString;
+        }
+        else {
+            formattedString = formattedString + " BAT";
+        }
+        campaign.dailyBudget = formattedString;
+        this.props.setCampaign(campaign);
+    }
+
     handleLifetimeBudget(e) {
         let campaign = this.props.campaign;
         campaign.totalBudget = e.target.value
+        this.props.setCampaign(campaign);
+    }
+
+    formatLifetimeBudget(e) {
+        let campaign = this.props.campaign;
+        let formattedString = e.target.value.replace(/[^\d.]/g, '');
+        formattedString = parseFloat(formattedString).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        if (campaign.currency.label === "USD") {
+            formattedString = "$" + formattedString;
+        }
+        else {
+            formattedString = formattedString + " BAT";
+        }
+        campaign.totalBudget = formattedString;
         this.props.setCampaign(campaign);
     }
 
@@ -82,11 +125,24 @@ class CampaignForm extends Component<any, any> {
         this.props.setCampaign(campaign);
     }
 
+    handlePricingType(e, pricingType) {
+        let campaign = this.props.campaign;
+        if (pricingType === 'cpm') {
+            campaign.cpm = true;
+            campaign.cpc = false;
+        }
+        if (pricingType === 'cpc') {
+            campaign.cpm = false;
+            campaign.cpc = true;
+        }
+        this.props.setCampaign(campaign);
+    }
+
     render() {
         return (
             <React.Fragment>
                 <div style={{ display: "flex" }}>
-                    <div style={{ width: "843px" }}>
+                    <div style={{ width: "843px", marginLeft: "auto", marginRight: "auto" }}>
                         <Section fullWidthChild={true}>
                             <>
                                 <S.InnerContainer>
@@ -101,38 +157,43 @@ class CampaignForm extends Component<any, any> {
                                             <S.Input value={this.props.campaign.name} onChange={(e) => this.handleCampaignName(e)} placeholder="Enter a campaign name..." type="text" name="name" />
                                         </S.InputContainer>
 
+
+                                        <S.InputContainer>
+                                            <Text content={`Start Time (${(new Date).toString().split('(')[1].slice(0, -1)})`} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                            <S.Input type="datetime-local" defaultValue={this.props.campaign.startTime} onChange={(e) => this.handleStartTime(e)} />
+                                            {/* <MuiPickersUtilsProvider utils={MomentUtils}>
+                                                <DateTimePicker
+                                                    style={{ width: "100%", marginTop: "8px" }}
+                                                    value={this.props.campaign.startTime}
+                                                    onChange={(value) => this.handleStartTime(value)}
+                                                />
+                                            </MuiPickersUtilsProvider> */}
+                                        </S.InputContainer>
+
+                                        <S.InputContainer>
+                                            <Text content={`End Time (${(new Date).toString().split('(')[1].slice(0, -1)})`} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                            <S.Input type="datetime-local" defaultValue={this.props.campaign.endTime} onChange={(e) => this.handleEndTime(e)} />
+                                            {/* <MuiPickersUtilsProvider utils={MomentUtils}>
+                                                <DateTimePicker
+                                                    style={{ width: "100%", marginTop: "8px" }}
+                                                    value={this.props.campaign.endTime}
+                                                    onChange={(value) => this.handleEndTime(value)}
+                                                />
+                                            </MuiPickersUtilsProvider> */}
+                                        </S.InputContainer>
+
+
                                         <S.InputContainer>
                                             <Text content={"Locations"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                             <div style={{ marginTop: "4px" }}>
                                                 <Select
+                                                    styles={customStyles}
                                                     value={this.props.campaign.geoTargets}
                                                     onChange={this.handleGeoTargets}
                                                     isMulti={true}
                                                     options={this.props.geoCodes}
                                                 />
                                             </div>
-                                        </S.InputContainer>
-
-                                        <S.InputContainer>
-                                            <Text content={"Start Time"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <MuiPickersUtilsProvider utils={MomentUtils}>
-                                                <DateTimePicker
-                                                    style={{ width: "100%", marginTop: "8px" }}
-                                                    value={this.props.campaign.startTime}
-                                                    onChange={(value) => this.handleStartTime(value)}
-                                                />
-                                            </MuiPickersUtilsProvider>
-                                        </S.InputContainer>
-
-                                        <S.InputContainer>
-                                            <Text content={"End Time"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <MuiPickersUtilsProvider utils={MomentUtils}>
-                                                <DateTimePicker
-                                                    style={{ width: "100%", marginTop: "8px" }}
-                                                    value={this.props.campaign.endTime}
-                                                    onChange={(value) => this.handleEndTime(value)}
-                                                />
-                                            </MuiPickersUtilsProvider>
                                         </S.InputContainer>
 
 
@@ -150,6 +211,7 @@ class CampaignForm extends Component<any, any> {
                                             <Text content={"Currency"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                             <div style={{ marginTop: "4px" }}>
                                                 <Select
+                                                    styles={customStyles}
                                                     value={this.props.campaign.currency}
                                                     onChange={this.handleCurrency}
                                                     options={currencies}
@@ -159,12 +221,12 @@ class CampaignForm extends Component<any, any> {
 
                                         <S.InputContainer>
                                             <Text content={"Lifetime Budget"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <S.Input value={this.props.campaign.lifetimeBudget} onChange={(e) => this.handleLifetimeBudget(e)} placeholder="Enter a lifetime budget..." type="number" name="name" />
+                                            <S.Input value={this.props.campaign.totalBudget} onChange={(e) => this.handleLifetimeBudget(e)} onBlur={(e) => this.formatLifetimeBudget(e)} placeholder="Enter a lifetime budget..." />
                                         </S.InputContainer>
 
                                         <S.InputContainer>
                                             <Text content={"Daily Budget"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <S.Input value={this.props.campaign.dailyBudget} onChange={(e) => this.handleDailyBudget(e)} placeholder="Enter a daily budget..." type="number" name="name" />
+                                            <S.Input value={this.props.campaign.dailyBudget} onChange={(e) => this.handleDailyBudget(e)} onBlur={(e) => this.formatDailyBudget(e)} placeholder="Enter a daily budget..." />
                                         </S.InputContainer>
 
                                     </S.RightColumn>
@@ -177,9 +239,20 @@ class CampaignForm extends Component<any, any> {
                                     </S.LeftColumn>
                                     <S.RightColumn>
 
+                                        {/* CPM / CPC */}
+                                        <S.InputContainer>
+                                            <Text content={"Pricing Type"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                            <div style={{ display: "flex", marginTop: "8px", marginBottom: "-4px" }}>
+                                                <input onClick={(e) => this.handlePricingType(e, "cpm")} checked={this.props.campaign.cpm} type="radio" />
+                                                <Text style={{ marginLeft: "7px", marginRight: "7px" }} content={"CPM"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                <input onClick={(e) => this.handlePricingType(e, "cpc")} checked={this.props.campaign.cpc} type="radio" />
+                                                <Text style={{ marginLeft: "7px", marginRight: "7px" }} content={"CPC"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                            </div>
+                                        </S.InputContainer>
+
                                         <S.InputContainer>
                                             <Text content={"Bid"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <S.Input value={this.props.campaign.dailyBudget} onChange={(e) => this.handleDailyBudget(e)} placeholder="Enter a bid..." type="number" name="name" />
+                                            <S.Input value={this.props.campaign.bid} onChange={(e) => this.handleBid(e)} onBlur={(e) => this.formatBid(e)} placeholder="Enter a bid..." />
                                         </S.InputContainer>
 
                                     </S.RightColumn>
@@ -200,7 +273,7 @@ class CampaignForm extends Component<any, any> {
                                             <span>
                                                 <Text style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"}>
                                                     Next
-                                    </Text>
+                                                </Text>
                                             </span>
                                         </div>
                                     </S.RightColumn>
@@ -210,7 +283,7 @@ class CampaignForm extends Component<any, any> {
                         </Section>
 
                     </div>
-                    <div style={{ width: "253px", marginLeft: "28px" }}><Section fullWidthChild={true}>Hello</Section></div>
+                    {/* <div style={{ width: "253px", marginLeft: "28px" }}><Section fullWidthChild={true}><div></div></Section></div> */}
                 </div>
             </React.Fragment>
         );

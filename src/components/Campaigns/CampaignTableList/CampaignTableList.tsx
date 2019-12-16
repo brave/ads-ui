@@ -108,7 +108,7 @@ class CampaignList extends React.Component<any, any> {
             />
           </CardContent>
         </Card>
-        <Link target="_self" className={classes.fab} to={`/admin/main/adsmanager/selection?userId=${match.params.userId}&advertiserId=${match.params.advertiserId}`}>
+        <Link className={classes.fab} to={this.props.match.url + "/new"}>
           <Button color="secondary" variant="fab">
             <Icon>add</Icon>
           </Button>

@@ -10,7 +10,6 @@ import Context from "../../../../../state/context";
 import { initializeData, updateAdvertiser, validate } from './lib/AdvertiserOverviewLibrary';
 
 import * as S from "./style/AdvertiserOverview.style";
-import { Icon } from '@material-ui/core';
 
 class AdvertiserOverview extends Component<any, any> {
     static contextType = Context;
@@ -33,6 +32,10 @@ class AdvertiserOverview extends Component<any, any> {
             validate(this)
             this.context.setLoading(false);
         });
+    }
+
+    public componentWillUnmount() {
+        this.context.setLoading(undefined);
     }
 
     public handleName(e) {
@@ -255,30 +258,9 @@ class AdvertiserOverview extends Component<any, any> {
                             </>
                         </Section>
                     </S.Container>
-                    <div style={{ height: "100%", width: "25%", marginLeft: "28px" }}>
+                    <div style={{ height: "100%", width: "25%", position: "relative", marginLeft: "28px" }}>
                         <div style={{ position: "fixed", width: "253px" }}>
                             <Section fullWidthChild={true}>
-                                <div>
-                                    <Text content={"Your Advertiser"} sizes={[16, 16, 15, 15, 17]} fontFamily={"Poppins"} />
-                                    <div style={{ marginTop: "14px" }}></div>
-                                    <div style={{ display: "flex", alignItems: "center" }}>
-                                        <Icon style={{ fontSize: "27px", color: "#bebebe", marginRight: "28px" }}>person</Icon>
-                                        <Text content={`${this.state.newAdvertiser.name}, ${this.state.newAdvertiser.billingEmail}, ${this.state.newAdvertiser.phone}`} style={{ marginTop: "16px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Muli"} />
-                                    </div>
-                                    <div style={{ marginTop: "14px" }}></div>
-                                    <div style={{ display: "flex", alignItems: "center" }}>
-                                        <Icon style={{ fontSize: "27px", color: "#bebebe", marginRight: "28px" }}>room</Icon>
-                                        <Text content={`${this.state.newAdvertiser.name}, ${this.state.newAdvertiser.billingEmail}, ${this.state.newAdvertiser.phone}`} style={{ marginTop: "16px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Muli"} />
-                                    </div>
-                                    <div style={{ marginTop: "14px" }}></div>
-                                    <div style={{ display: "flex", alignItems: "center" }}>
-                                        <Icon style={{ fontSize: "27px", color: "#bebebe", marginRight: "28px" }}>toggle_on</Icon>
-                                        <Text content={`${this.state.newAdvertiser.name}, ${this.state.newAdvertiser.billingEmail}, ${this.state.newAdvertiser.phone}`} style={{ marginTop: "16px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Muli"} />
-                                    </div>
-                                </div>
-                            </Section>
-
-                            {/* <Section fullWidthChild={true}>
                                 <div>
                                     <Text style={{ textAlign: "center" }} content={"Advertiser"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
                                     <div style={{ width: "100%", borderBottom: "1px solid #e2e2e2", marginTop: "4px", marginBottom: "12px" }}></div>
@@ -315,7 +297,7 @@ class AdvertiserOverview extends Component<any, any> {
                                         }
                                     </S.Container>
                                 </div>
-                            </Section> */}
+                            </Section>
                         </div>
                     </div>
                 </div>
