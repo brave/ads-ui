@@ -82,7 +82,7 @@ function renderNav(props) {
     case "admin":
       return (
         <div>
-          <Link target="_self" style={linkStyle} to={props.match.url + "/dashboard"}>
+          <Link style={linkStyle} to={props.match.url + "/dashboard"}>
             <S.Nav
               selected={window.location.pathname.includes(
                 props.match.url + "/dashboard"
@@ -96,7 +96,7 @@ function renderNav(props) {
               </Text>
             </S.Nav>
           </Link>
-          <Link target="_self" style={linkStyle} to={props.match.url + "/users"}>
+          <Link style={linkStyle} to={props.match.url + "/users"}>
             <S.Nav
               selected={window.location.pathname.includes(
                 props.match.url + "/users"
@@ -110,10 +110,12 @@ function renderNav(props) {
               </Text>
             </S.Nav>
           </Link>
-          <Link target="_self" style={linkStyle} to={props.match.url + "/campaigns"}>
+          <Link style={linkStyle} to={props.match.url + "/campaigns"}>
             <S.Nav
               selected={window.location.pathname.includes(
                 props.match.url + "/campaigns"
+              ) || window.location.pathname.includes(
+                props.match.url + "/adsmanager"
               )}
             >
               <S.SubContainer>

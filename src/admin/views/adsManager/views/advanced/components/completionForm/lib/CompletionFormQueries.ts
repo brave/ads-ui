@@ -3,8 +3,7 @@ export function createCampaignMutation(createCampaignInput) {
     mutation{
         createCampaign(
             createCampaignInput: {
-            userId: "${createCampaignInput.userId}"
-            createCampaignRequestDTO: {
+                userId: "${createCampaignInput.userId}"
                 advertiserId: "${createCampaignInput.advertiserId}"
                 name: "${createCampaignInput.name}"
                 startAt: "${createCampaignInput.startAt}"
@@ -17,8 +16,8 @@ export function createCampaignMutation(createCampaignInput) {
                 dailyBudget: ${createCampaignInput.dailyBudget}
                 geoTargets: ${createCampaignInput.geoTargets}
                 state: "${createCampaignInput.state}"
+                adSets: ${createCampaignInput.adSets}
             }
-        }
         ){
             id
         }
@@ -30,14 +29,12 @@ export function createAdSetMutation(createAdSetInput) {
     mutation{
         createAdSet(
             createAdSetInput: {
-            campaignId: "${createAdSetInput.campaignId}"
-            createCreativeSetRequestDTO: {
+                campaignId: "${createAdSetInput.campaignId}"
                 execution: "${createAdSetInput.execution}"
                 perDay: ${createAdSetInput.perDay}
                 totalMax: ${createAdSetInput.totalMax}
                 segments: ${createAdSetInput.segments}
             }
-        }
         ){
             id
         }
@@ -49,13 +46,27 @@ export function createAdMutation(createAdInput) {
     mutation{
         createAd(
             createAdInput: {
-            createCreativeInstanceRequestDTO: {
                 creativeSetId: "${createAdInput.creativeSetId}"
                 creativeId: "${createAdInput.creativeId}"
-                prices: [{amount: 123, type: "view"}, {amount: 567, type: "click"}]
-                webhooks: [{type: "click", url: "https://www.google.com"}]
+                prices: ${createAdInput.price}
+                webhooks: []
             }
+        ){
+            id
         }
+    }
+`};
+
+export function createCreativeMutation(createCreativeInput) {
+    return `
+    mutation{
+        createCreative(
+            createCreativeInput: {
+                advertiserId: "${createCreativeInput.advertiserId}"
+                name: "${createCreativeInput.name}"
+                payload: ${createCreativeInput.payload}
+                type: ${createCreativeInput.type}
+            }
         ){
             id
         }

@@ -16,6 +16,7 @@ export const Container = styled("div")`
   width: 255px;
   padding-top: 24px;
   border-right: 2px solid #f6f6f5;
+  z-index: 5;
 `;
 
 export const Nav = styled("div")`

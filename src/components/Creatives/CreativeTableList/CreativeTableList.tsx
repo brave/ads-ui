@@ -102,7 +102,7 @@ class CreativeList extends React.Component<any, any> {
             />
           </CardContent>
         </Card>
-        <Link target="_self" className={classes.fab} to={match.url + "/new"}>
+        <Link className={classes.fab} to={match.url + "/new"}>
           <Button color="secondary" variant="fab">
             <Icon>add</Icon>
           </Button>

@@ -25,6 +25,7 @@ import { Text } from "../../../../../components/Text/Text";
 
 import { Link } from "react-router-dom";
 import TabSelector from '../../../../../components/tabSelector/TabSelector';
+import Section from '../../../../../components/section/Section';
 
 let styles = {
     content: {
@@ -86,6 +87,15 @@ class AdvertiserCampaigns extends Component<any, any> {
         return (
             <div className={classes.root}>
                 <TabSelector config={tabConfig} />
+                <Section fullWidthChild={true}>
+                    <div>
+                        <Link className={classes.fab} to={`/admin/main/adsmanager/selection?userId=${match.params.userId}&advertiserId=${match.params.advertiserId}`}>
+                            <Text content={"Try the new Campaign Creator!"} fontFamily={"Muli"} sizes={[12, 12, 12, 12, 18]} />
+                        </Link>
+                        <Text style={{ marginTop: "8px" }} content={"We would love to get your feedback on this new feature, please send any comments, questions, or requests to @dan"} fontFamily={"Muli"} sizes={[12, 12, 12, 12, 15]} />
+                    </div>
+
+                </Section>
                 <CardContent style={{ padding: "0" }} className={classes.content}>
                     <CampaignTableList campaigns={campaigns} match={match} />
                 </CardContent>

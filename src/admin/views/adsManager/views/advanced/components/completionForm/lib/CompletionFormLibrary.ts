@@ -1,26 +1,24 @@
 import { createAdMutation, createAdSetMutation, createCampaignMutation } from "./CompletionFormQueries";
 
-export function prepareCreateCampaignInput(userId, advertiserId, campaign) {
+export function prepareCreateCampaignInput(userId, advertiserId, campaign, adSets) {
+
+    let startTime = new Date(campaign.startTime);
+    let endTime = new Date(campaign.endTime);
+
     let createCampaignInput = {
         userId,
         advertiserId,
         name: campaign.name,
-        startAt: campaign.startTime._d,
-        endAt: campaign.endTime._d,
+        startAt: startTime,
+        endAt: endTime,
         type: "paid",
         source: "direct",
         currency: campaign.currency.label,
-        budget: campaign.totalBudget,
-        dailyBudget: campaign.dailyBudget,
+        budget: campaign.totalBudget.replace(/[^0-9\.]/g, ''),
+        dailyBudget: campaign.dailyBudget.replace(/[^0-9\.]/g, ''),
         dailyCap: campaign.dailyFrequencyCap,
+        state: "under_review"
     } as any;
-
-    if (campaign.status === true) {
-        createCampaignInput.state = "active";
-    }
-    else {
-        createCampaignInput.state = "draft";
-    }
 
     let geoTargets = [] as any;
     if (campaign.geoTargets) {
@@ -34,30 +32,44 @@ export function prepareCreateCampaignInput(userId, advertiserId, campaign) {
     }
     geoTargets = JSON.stringify(geoTargets).replace(/\"([^(\")"]+)\":/g, "$1:");
     createCampaignInput.geoTargets = geoTargets;
+    let adSetsInput = prepareCreateAdSetsInput(adSets);
+    createCampaignInput.adSets = adSetNumberFilter(JSON.stringify(adSetsInput).replace(/\"([^(\")"]+)\":/g, "$1:"));
     return createCampaignInput;
 }
 
-export function prepareCreateAdSetsInput(campaignId, adSets) {
+function adSetNumberFilter(adsets) {
+    return adsets.replace(/"([0-9]+\.{0,1}[0-9]*)"/g, "$1");
+}
+
+export function prepareCreateAdSetsInput(adSets) {
     let createAdSetsInput = [] as any;
     if (adSets) {
         adSets.forEach((adSet) => {
             let createAdSetInput = {
-                campaignId,
                 execution: "per_click",
                 perDay: adSet.dailyImpressions,
                 totalMax: adSet.lifetimeImpressions,
             } as any;
             let segments = [] as any;
-            if (adSet.audiences) {
-                adSet.audiences.forEach((audience) => {
-                    let entry = {
-                        code: audience.value,
-                        name: audience.label
-                    }
-                    segments.push(entry);
-                })
+
+            if (adSet.braveML === true) {
+                segments.push({
+                    code: "Svp7l-zGN",
+                    name: "untargeted"
+                });
             }
-            segments = JSON.stringify(segments).replace(/\"([^(\")"]+)\":/g, "$1:");
+            else {
+                if (adSet.audiences) {
+                    adSet.audiences.forEach((audience) => {
+                        let entry = {
+                            code: audience.value,
+                            name: audience.label
+                        }
+                        segments.push(entry);
+                    })
+                }
+            }
+            segments = segments;
             createAdSetInput.segments = segments;
             createAdSetsInput.push(createAdSetInput);
         });
@@ -65,63 +77,19 @@ export function prepareCreateAdSetsInput(campaignId, adSets) {
     return createAdSetsInput;
 }
 
-export function prepareCreateAdInput(adSetId, ad) {
+export function prepareCreateAdInput(adSetId, ad, campaign) {
     let createAdInput = {
         creativeSetId: adSetId,
         creativeId: ad.creative.value,
     } as any;
 
-    let prices = [] as any;
-
-    if (ad.viewPricing) {
-        prices.push({
-            type: "view",
-            amount: ad.viewPricing
-        })
+    if (campaign.cpm) {
+        createAdInput.price = `[{ amount: ${campaign.bid.replace(/[^0-9\.]/g, '')}, type: "view" }]`
+    }
+    else {
+        createAdInput.price = `[{ amount: ${campaign.bid.replace(/[^0-9\.]/g, '')}, type: "click" }]`
     }
 
-    if (ad.clickPricing) {
-        prices.push({
-            type: "click",
-            amount: ad.clickPricing
-        })
-    }
-
-    if (ad.conversionPricing) {
-        prices.push({
-            type: "conversion",
-            amount: ad.conversionPricing
-        })
-    }
-
-    prices = JSON.stringify(prices).replace(/\"([^(\")"]+)\":/g, "$1:");
-    createAdInput.prices = prices;
-
-    let webhooks = [] as any;
-
-    if (ad.viewWebhook) {
-        webhooks.push({
-            type: "view",
-            url: ad.viewWebhook
-        })
-    }
-
-    if (ad.clickWebhook) {
-        webhooks.push({
-            type: "click",
-            url: ad.clickWebhook
-        })
-    }
-
-    if (ad.conversionWebhook) {
-        webhooks.push({
-            type: "conversion",
-            url: ad.conversionWebhook
-        })
-    }
-
-    webhooks = JSON.stringify(webhooks).replace(/\"([^(\")"]+)\":/g, "$1:");
-    createAdInput.webhooks = webhooks;
     return createAdInput;
 }
 
@@ -142,9 +110,6 @@ export async function createAd(createAdInput, accessToken) {
     let response = await graphQLRequest(query, accessToken);
     return response;
 }
-
-
-
 
 async function graphQLRequest(query, accessToken) {
     let url = `${process.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql");
