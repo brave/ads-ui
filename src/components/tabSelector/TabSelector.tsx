@@ -9,7 +9,7 @@ class TabSelector extends Component<any, any> {
         const { config } = this.props;
         const tabs = config.map((item) => {
             return (
-                <Link style={linkStyle} to={item.link}>
+                <Link target="_self" style={linkStyle} to={item.link}>
                     <S.Tab selected={item.selected}>
                         {item.label}
                     </S.Tab>

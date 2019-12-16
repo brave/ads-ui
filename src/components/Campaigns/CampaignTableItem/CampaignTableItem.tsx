@@ -39,7 +39,7 @@ class CampaignTableItem extends React.Component<any, any> {
         <TableCell>
           <Link
             className={classes.viewButton}
-            to={`${match.url}/campaign/${campaign.id}`}
+            to={`${match.url}/${campaign.id}`}
           >
             <IconButton color="primary">
               <Icon>list</Icon>
@@ -47,7 +47,7 @@ class CampaignTableItem extends React.Component<any, any> {
           </Link>
           <Link
             className={classes.viewButton}
-            to={`${match.url}/campaign/${campaign.id}/analytics/overview`}
+            to={`${match.url}/${campaign.id}/analytics/overview`}
           >
             <IconButton color="primary">
               <Icon>timeline</Icon>
