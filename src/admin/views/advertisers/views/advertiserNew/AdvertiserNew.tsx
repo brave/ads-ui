@@ -36,6 +36,10 @@ class AdvertiserNew extends Component<any, any> {
         });
     }
 
+    public componentWillUnmount() {
+        this.context.setLoading(undefined);
+    }
+
     public handleName(e) {
         let alphaOnly = /^[a-zA-Z ]*$/;
         if (alphaOnly.test(e.target.value)) {
