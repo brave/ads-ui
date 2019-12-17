@@ -7,6 +7,7 @@ import * as Highcharts from "highcharts/highmaps";
 import HighchartsReact from 'highcharts-react-official'
 import Section from "../../../../../components/section/Section";
 import Context from "../../../../../state/context";
+import { withRouter } from 'react-router-dom';
 
 import { fetchData, processData, } from "./lib/Library";
 
@@ -17,10 +18,8 @@ class Overview extends React.Component<any, any> {
   static contextType = Context;
   constructor(props) {
     super(props);
-    this.state = {
-      loading: true
-    }
   }
+
   public componentDidMount() {
     this.initialize();
   }
@@ -29,15 +28,19 @@ class Overview extends React.Component<any, any> {
     this.context.setLoading(true);
     let data = await fetchData(this.props.auth.accessToken);
     let processedData = processData(data);
+    console.log(processedData);
     this.setState(processedData, () => {
       this.context.setLoading(false);
-      this.setState({ loading: false })
     });
+  }
+
+  public componentWillUnmount() {
+    this.context.setLoading(undefined);
   }
 
   public render() {
     return (
-      !this.state.loading &&
+      this.context.loading === false &&
       <React.Fragment>
         <Section header={"Key Statistics"}>
           {renderStat("Users", this.state.userCount)}
@@ -78,9 +81,9 @@ const mapStateToProps = (state: any, ownProps: any) => ({
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
 });
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Overview);
+)(Overview));
 
 

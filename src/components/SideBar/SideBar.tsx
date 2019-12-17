@@ -11,6 +11,7 @@ import {
   withStyles
 } from "@material-ui/core";
 import { H6, H5, Text } from "../Text/Text";
+import AdsManager from "../../admin/views/adsManager/AdsManager";
 
 const linkStyle = { textDecoration: "none", color: "inherit" };
 
@@ -78,7 +79,6 @@ function renderNav(props) {
           </S.Nav> */}
         </div>
       );
-      break;
     case "admin":
       return (
         <div>
@@ -114,6 +114,8 @@ function renderNav(props) {
             <S.Nav
               selected={window.location.pathname.includes(
                 props.match.url + "/campaigns"
+              ) || window.location.pathname.includes(
+                props.match.url + "/adsmanager"
               )}
             >
               <S.SubContainer>
@@ -145,7 +147,6 @@ function renderNav(props) {
           </S.Nav> */}
         </div>
       );
-      break;
   }
 }
 
