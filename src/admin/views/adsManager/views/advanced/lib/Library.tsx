@@ -11,7 +11,7 @@ export async function initializeData(context) {
     initializedData.campaign = initializeCampaign();
     initializedData.adSets = initializeAdSets();
     initializedData.ads = initializeAds();
-    initializedData.form = "campaignForm";
+    initializedData.form = "adsForm";
     return initializedData;
 }
 

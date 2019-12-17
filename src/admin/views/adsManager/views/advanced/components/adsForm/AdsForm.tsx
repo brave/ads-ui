@@ -5,6 +5,7 @@ import { Text } from "../../../../../../../components/Text/Text";
 import * as S from "./AdsForm.style";
 import Switch from "react-switch";
 import Select from 'react-select';
+import BraveLogo from "./assets/brave_logo_icon.png";
 
 const customStyles = {
     control: (provided, state) => ({
@@ -274,7 +275,52 @@ class AdsForm extends Component<any, any> {
                                     </div>
 
                                     <div style={{ width: "50%" }}>
-                                        <Text content={"Preview coming soon!"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                        <div className="OSNotificationCreativePreview">
+                                            <>
+                                                <Text content={"iOS"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                <div style={{ backgroundColor: "white", borderRadius: "4px", width: "100%", height: "133px", border: "1px solid #dfdfdf", marginTop: "16px", marginBottom: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+
+                                                    <div style={{ height: "106px", width: "359px", borderRadius: "13px", backgroundColor: "rgba(248, 248, 248, 0.82)", padding: "8px" }}>
+                                                        <div style={{ display: "flex", width: "100%" }}>
+                                                            <img src={BraveLogo} style={{ height: "26px", width: "26px" }} />
+                                                            <Text content={"BRAVE REWARDS"} color={"rgb(142, 142, 147)"} style={{ paddingTop: "3px", paddingLeft: "3px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                            <Text content={"now"} style={{ marginLeft: "auto", paddingTop: "5px", paddingRight: "4px" }} color={"rgb(142, 142, 147)"} sizes={[16, 16, 15, 15, 11]} fontFamily={"Poppins"} />
+                                                        </div>
+                                                        <div style={{ display: "flex", width: "100%", marginTop: "12px" }}>
+                                                            <Text content={"Creative Title"} style={{ paddingLeft: '5px' }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Muli"} fontWeight={600} />
+                                                        </div>
+                                                        <div style={{ display: "flex", width: "100%", marginTop: "4px" }}>
+                                                            <Text content={"Creative body text goes here......"} style={{ paddingLeft: '5px' }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Muli"} />
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                                <Text content={"Android"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+
+                                                <div style={{ backgroundColor: "white", borderRadius: "4px", width: "100%", height: "133px", border: "1px solid #dfdfdf", marginTop: "16px", marginBottom: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                                    <div style={{ height: "82px", width: "326px", borderRadius: "13px", backgroundColor: "rgb(250, 250, 250)", padding: "8px" }}>
+                                                        <div style={{ display: "flex", width: "100%" }}>
+                                                            <img src={BraveLogo} style={{ height: "44px", width: "44px" }} />
+                                                            <div style={{ display: "flex", width: "100%", marginTop: "4px" }}>
+                                                                <Text content={"Creative Title"} style={{ paddingLeft: '5px' }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Muli"} fontWeight={600} />
+                                                                <Text content={"now"} style={{ marginLeft: "auto", paddingRight: "4px" }} color={"rgb(142, 142, 147)"} sizes={[16, 16, 15, 15, 11]} fontFamily={"Poppins"} />
+                                                            </div>
+                                                        </div>
+                                                        <Text content={"Creative body text goes here......"} style={{ paddingLeft: '49px', marginTop: "-20px" }} sizes={[16, 16, 15, 15, 12]} fontFamily={"Muli"} />
+
+                                                    </div>
+                                                </div>
+
+
+                                                <Text content={"Mac OS"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                <div style={{ backgroundColor: "#fafafa", borderRadius: "4px", width: "100%", height: "133px", border: "1px solid #dfdfdf", marginTop: "16px", marginBottom: "16px" }}></div>
+                                                <Text content={"Windows"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                <div style={{ backgroundColor: "#fafafa", borderRadius: "4px", width: "100%", height: "133px", border: "1px solid #dfdfdf", marginTop: "16px", marginBottom: "16px" }}></div>
+                                                <Text content={"* Please note, we're working on getting the preview just right, this is a close approximation to what OS vendors will display"} sizes={[16, 16, 15, 15, 11]} fontFamily={"Poppins"} />
+
+                                            </>
+                                        </div>
 
 
                                     </div>
