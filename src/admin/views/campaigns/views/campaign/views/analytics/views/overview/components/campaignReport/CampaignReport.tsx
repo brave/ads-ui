@@ -99,7 +99,7 @@ class CampaignReport extends Component<any, any> {
                 break;
             case 'Daily':
                 processedData = _.groupBy(processedData, function (date) {
-                    return moment(date.index).startOf('day').format();
+                    return moment(date.index).utc().startOf('day').format();
                 });
                 break;
             case 'Weekly':
