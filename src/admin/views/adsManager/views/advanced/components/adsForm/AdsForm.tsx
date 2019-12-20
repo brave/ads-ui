@@ -6,6 +6,8 @@ import * as S from "./AdsForm.style";
 import Switch from "react-switch";
 import Select from 'react-select';
 import BraveLogo from "./assets/brave_logo_icon.png";
+import OSNotificationCreativePreview from '../../../../../../../components/creativePreview/OSNotificationCreativePreview/OSNotificationCreativePreview';
+import { fetchCreativeAssets } from "./lib/AdsForm.library";
 
 const customStyles = {
     control: (provided, state) => ({
@@ -33,6 +35,10 @@ class AdsForm extends Component<any, any> {
             title: '',
             body: '',
             targetUrl: '',
+            previewAssets: {
+                title: null,
+                body: null,
+            }
         })
         this.props.setAds(ads);
     }
@@ -88,9 +94,12 @@ class AdsForm extends Component<any, any> {
         this.props.setAds(ads);
     }
 
-    handleCreative = selectedOption => {
+    handleCreative = async (selectedOption) => {
         let ads = this.props.ads;
         ads[this.state.selectedAd].creative = selectedOption;
+        let data = await fetchCreativeAssets(selectedOption.value, this.props.auth.accessToken);
+        ads[this.state.selectedAd].previewAssets.title = data.creative.payload.title;
+        ads[this.state.selectedAd].previewAssets.body = data.creative.payload.body;
         this.props.setAds(ads);
     };
 
@@ -111,6 +120,8 @@ class AdsForm extends Component<any, any> {
         ads[this.state.selectedAd].body = '';
         ads[this.state.selectedAd].title = '';
         ads[this.state.selectedAd].targetUrl = '';
+        ads[this.state.selectedAd].previewAssets.title = null;
+        ads[this.state.selectedAd].previewAssets.body = null;
 
         this.props.setAds(ads);
 
@@ -125,12 +136,14 @@ class AdsForm extends Component<any, any> {
     handleTitle(e) {
         let ads = this.props.ads;
         ads[this.state.selectedAd].title = e.target.value;
+        ads[this.state.selectedAd].previewAssets.title = e.target.value;
         this.props.setAds(ads);
     }
 
     handleBody(e) {
         let ads = this.props.ads;
         ads[this.state.selectedAd].body = e.target.value;
+        ads[this.state.selectedAd].previewAssets.body = e.target.value;
         this.props.setAds(ads);
     }
 
@@ -217,8 +230,14 @@ class AdsForm extends Component<any, any> {
 
                                 </S.Container>
                                 <div style={{ width: "100%", borderBottom: "1px solid #e2e2e2", marginTop: "28px", marginBottom: "56px" }}></div>
+
                                 <div style={{ display: "flex" }}>
                                     <div style={{ width: "50%", paddingRight: '28px' }}>
+
+                                        <div style={{ marginBottom: "56px", width: "168px" }}>
+                                            <Text content={"Creative"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
+                                            <Text content={"Preview your creative text and messaging"} style={{ marginTop: "16px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
+                                        </div>
 
                                         <div style={{ display: "flex", marginTop: "8px", marginBottom: "12px" }}>
                                             <input style={{ marginRight: "8px" }} type="radio" checked={this.props.ads[this.state.selectedAd].newCreative} onChange={(e) => this.handleNewCreative(true)} />
@@ -275,61 +294,8 @@ class AdsForm extends Component<any, any> {
                                     </div>
 
                                     <div style={{ width: "50%" }}>
-                                        <div className="OSNotificationCreativePreview">
-                                            <>
-                                                <Text content={"iOS"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                <div style={{ backgroundColor: "white", borderRadius: "4px", width: "100%", height: "133px", border: "1px solid #dfdfdf", marginTop: "16px", marginBottom: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-
-                                                    <div style={{ height: "106px", width: "359px", borderRadius: "13px", backgroundColor: "rgba(248, 248, 248, 0.82)", padding: "8px" }}>
-                                                        <div style={{ display: "flex", width: "100%" }}>
-                                                            <img src={BraveLogo} style={{ height: "26px", width: "26px" }} />
-                                                            <Text content={"BRAVE REWARDS"} color={"rgb(142, 142, 147)"} style={{ paddingTop: "3px", paddingLeft: "3px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                            <Text content={"now"} style={{ marginLeft: "auto", paddingTop: "5px", paddingRight: "4px" }} color={"rgb(142, 142, 147)"} sizes={[16, 16, 15, 15, 11]} fontFamily={"Poppins"} />
-                                                        </div>
-                                                        <div style={{ display: "flex", width: "100%", marginTop: "12px" }}>
-                                                            <Text content={"Creative Title"} style={{ paddingLeft: '5px' }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Muli"} fontWeight={600} />
-                                                        </div>
-                                                        <div style={{ display: "flex", width: "100%", marginTop: "4px" }}>
-                                                            <Text content={"Creative body text goes here......"} style={{ paddingLeft: '5px' }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Muli"} />
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-                                                <Text content={"Android"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-
-                                                <div style={{ backgroundColor: "white", borderRadius: "4px", width: "100%", height: "133px", border: "1px solid #dfdfdf", marginTop: "16px", marginBottom: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                                    <div style={{ height: "82px", width: "326px", borderRadius: "13px", backgroundColor: "rgb(250, 250, 250)", padding: "8px" }}>
-                                                        <div style={{ display: "flex", width: "100%" }}>
-                                                            <img src={BraveLogo} style={{ height: "44px", width: "44px" }} />
-                                                            <div style={{ display: "flex", width: "100%", marginTop: "4px" }}>
-                                                                <Text content={"Creative Title"} style={{ paddingLeft: '5px' }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Muli"} fontWeight={600} />
-                                                                <Text content={"now"} style={{ marginLeft: "auto", paddingRight: "4px" }} color={"rgb(142, 142, 147)"} sizes={[16, 16, 15, 15, 11]} fontFamily={"Poppins"} />
-                                                            </div>
-                                                        </div>
-                                                        <Text content={"Creative body text goes here......"} style={{ paddingLeft: '49px', marginTop: "-20px" }} sizes={[16, 16, 15, 15, 12]} fontFamily={"Muli"} />
-
-                                                    </div>
-                                                </div>
-
-
-                                                <Text content={"Mac OS"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                <div style={{ backgroundColor: "#fafafa", borderRadius: "4px", width: "100%", height: "133px", border: "1px solid #dfdfdf", marginTop: "16px", marginBottom: "16px" }}></div>
-                                                <Text content={"Windows"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                <div style={{ backgroundColor: "#fafafa", borderRadius: "4px", width: "100%", height: "133px", border: "1px solid #dfdfdf", marginTop: "16px", marginBottom: "16px" }}></div>
-                                                <Text content={"* Please note, we're working on getting the preview just right, this is a close approximation to what OS vendors will display"} sizes={[16, 16, 15, 15, 11]} fontFamily={"Poppins"} />
-
-                                            </>
-                                        </div>
-
-
+                                        <OSNotificationCreativePreview title={this.props.ads[this.state.selectedAd].previewAssets.title} body={this.props.ads[this.state.selectedAd].previewAssets.body} />
                                     </div>
-
-
-
-
-
-
 
                                 </div>
                                 <S.Container>

@@ -185,6 +185,10 @@ function initializeAds() {
             title: '',
             body: '',
             targetUrl: '',
+            previewAssets: {
+                title: null,
+                body: null,
+            }
         }
     ]
     return ads;
