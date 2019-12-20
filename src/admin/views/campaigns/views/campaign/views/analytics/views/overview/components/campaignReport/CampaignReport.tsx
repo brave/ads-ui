@@ -91,8 +91,6 @@ class CampaignReport extends Component<any, any> {
     formatChartData(data) {
 
         let processedData = processData(data);
-
-        console.log(processedData);
         switch (this.state.timeInterval) {
             case 'Hourly':
                 processedData = _.groupBy(processedData, function (date) {
