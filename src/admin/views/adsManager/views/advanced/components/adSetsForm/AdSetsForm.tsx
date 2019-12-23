@@ -29,7 +29,7 @@ class AdSetsForm extends Component<any, any> {
             dailyImpressions: '',
             braveML: true,
             audiences: '',
-            conversionsCheckbox: true,
+            conversionsCheckbox: false,
             status: '',
             conversion: {
                 type: 'post-view',

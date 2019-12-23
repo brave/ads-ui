@@ -11,34 +11,34 @@ export async function initializeData(context) {
     initializedData.campaign = initializeCampaign();
     initializedData.adSets = initializeAdSets();
     initializedData.ads = initializeAds();
-    initializedData.form = "adsForm";
+    initializedData.form = "campaignForm";
     return initializedData;
 }
 
 export function validateCampaignForm(campaign) {
     let errors = [] as any;
 
-    if (campaign.name === '') {
-        errors.push(`Error in campaign, please enter a name`)
-    }
-    if (campaign.startTime > campaign.endTime) {
-        errors.push(`Error in campaign, start time must be before end time`)
-    }
-    if (campaign.dailyFrequencyCap === '') {
-        errors.push(`Error in campaign, please enter a daily frequency cap`)
-    }
-    if (campaign.geoTargets === '') {
-        errors.push(`Error in campaign, please select geo targets`)
-    }
-    if (campaign.currency === '') {
-        errors.push(`Error in campaign, please select a currency`)
-    }
-    if (campaign.dailyBudget === '') {
-        errors.push(`Error in campaign, please enter a daily budget`)
-    }
-    if (campaign.totalBudget === '') {
-        errors.push(`Error in campaign, please enter a total budget`)
-    }
+    // if (campaign.name === '') {
+    //     errors.push(`Error in campaign, please enter a name`)
+    // }
+    // if (campaign.startTime > campaign.endTime) {
+    //     errors.push(`Error in campaign, start time must be before end time`)
+    // }
+    // if (campaign.dailyFrequencyCap === '') {
+    //     errors.push(`Error in campaign, please enter a daily frequency cap`)
+    // }
+    // if (campaign.geoTargets === '') {
+    //     errors.push(`Error in campaign, please select geo targets`)
+    // }
+    // if (campaign.currency === '') {
+    //     errors.push(`Error in campaign, please select a currency`)
+    // }
+    // if (campaign.dailyBudget === '') {
+    //     errors.push(`Error in campaign, please enter a daily budget`)
+    // }
+    // if (campaign.totalBudget === '') {
+    //     errors.push(`Error in campaign, please enter a total budget`)
+    // }
 
     if (errors.length > 0) {
         return errors;
@@ -51,17 +51,17 @@ export function validateCampaignForm(campaign) {
 export function validateAdSetsForm(adSets) {
     let errors = [] as any;
 
-    adSets.forEach((adSet, index) => {
-        if (adSet.lifetimeImpressions === '') {
-            errors.push(`Error in ad set ${index + 1}, please enter a number for lifetime impressions`)
-        }
-        // if (adSet.dailyImpressions === '') {
-        //     errors.push(`Error in ad set ${index + 1}, please enter a number for daily impressions`)
-        // }
-        // if (adSet.audiences === '') {
-        //     errors.push(`Error in ad set ${index + 1}, please select at least one audience`)
-        // }
-    });
+    // adSets.forEach((adSet, index) => {
+    // if (adSet.lifetimeImpressions === '') {
+    //     errors.push(`Error in ad set ${index + 1}, please enter a number for lifetime impressions`)
+    // }
+    // if (adSet.dailyImpressions === '') {
+    //     errors.push(`Error in ad set ${index + 1}, please enter a number for daily impressions`)
+    // }
+    // if (adSet.audiences === '') {
+    //     errors.push(`Error in ad set ${index + 1}, please select at least one audience`)
+    // }
+    // });
 
     if (errors.length > 0) {
         return errors;
@@ -74,14 +74,14 @@ export function validateAdSetsForm(adSets) {
 export function validateAdsForm(ads) {
     let errors = [] as any;
 
-    ads.forEach((ad, index) => {
-        if (ad.creative === '') {
-            errors.push(`Error in ad ${index + 1}, please select a creative`)
-        }
-        if (ad.adSets === '') {
-            errors.push(`Error in ad ${index + 1}, please add to an ad set`)
-        }
-    });
+    // ads.forEach((ad, index) => {
+    //     if (ad.creative === '') {
+    //         errors.push(`Error in ad ${index + 1}, please select a creative`)
+    //     }
+    //     if (ad.adSets === '') {
+    //         errors.push(`Error in ad ${index + 1}, please add to an ad set`)
+    //     }
+    // });
 
     if (errors.length > 0) {
         return errors;
@@ -164,7 +164,7 @@ function initializeAdSets() {
             dailyImpressions: '',
             braveML: true,
             audiences: '',
-            conversionsCheckbox: true,
+            conversionsCheckbox: false,
             conversion: {
                 type: 'post-view',
                 url: '',

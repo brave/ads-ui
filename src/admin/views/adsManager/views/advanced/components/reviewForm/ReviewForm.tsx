@@ -15,9 +15,11 @@ class ReviewForm extends Component<any, any> {
 
     formatGeoTargets(geoTargets) {
         let formattedGeoTargets = '';
-        geoTargets.forEach((geoTarget) => {
-            formattedGeoTargets += geoTarget.label + ", ";
-        });
+        if (geoTargets) {
+            geoTargets.forEach((geoTarget) => {
+                formattedGeoTargets += geoTarget.label + ", ";
+            });
+        }
         return formattedGeoTargets;
     }
 
@@ -61,9 +63,32 @@ class ReviewForm extends Component<any, any> {
                     <Text style={{ marginTop: "4px" }} content={adSet.dailyImpressions} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
                 </>
                 <div style={{ marginBottom: '8px' }}></div>
+                <div style={{ width: "100%", borderBottom: "1px solid #e2e2e2", marginTop: "28px", marginBottom: "28px" }}></div>
+                {this.renderAdSetAds(index)}
             </div>
         });
         return adSets;
+    }
+
+    renderAdSetAds(adSetIndex) {
+        let ads;
+        if (this.props.ads) {
+            ads = this.props.ads.map((ad, index) => {
+                if (ad.adSets) {
+                    return ad.adSets.map((adSet) => {
+                        if (adSet.value === adSetIndex) {
+                            return <>
+                                <Text content={`Ad ${index + 1}`} sizes={[16, 16, 15, 15, 16]} fontFamily={"Poppins"} />
+                                <Text style={{ marginTop: "16px" }} color={"grey"} content={"Creative"} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
+                                <Text style={{ marginTop: "4px" }} content={ad.creative.label} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
+                                <div style={{ width: "100%", borderBottom: "1px solid #e2e2e2", marginTop: "28px", marginBottom: "28px" }}></div>
+                            </>
+                        }
+                    })
+                }
+            });
+        }
+        return ads;
     }
 
     renderAds() {
@@ -194,21 +219,6 @@ class ReviewForm extends Component<any, any> {
                                             {this.renderAdSets()}
                                         </S.InputContainer>
 
-                                    </S.RightColumn>
-                                </S.InnerContainer>
-
-                                <div style={{ width: "100%", borderBottom: "1px solid #e2e2e2", marginTop: "28px", marginBottom: "56px" }}></div>
-
-                                <S.InnerContainer>
-                                    <S.LeftColumn>
-                                        <Text content={"Ads"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
-                                        <Text content={"Campaigns are used to define your budgets and advertising objectives."} style={{ marginTop: "16px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
-                                    </S.LeftColumn>
-                                    <S.RightColumn>
-
-                                        <S.InputContainer>
-                                            {this.renderAds()}
-                                        </S.InputContainer>
 
                                         <S.Button onClick={() => { this.props.setForm("completionForm") }} style={{ marginLeft: "auto", width: "200px" }}>
                                             <Text content={"Publish Campaign"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
