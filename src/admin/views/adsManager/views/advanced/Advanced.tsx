@@ -8,7 +8,7 @@ import AdsForm from './components/adsForm/AdsForm';
 import ReviewForm from './components/reviewForm/ReviewForm';
 import CompletionForm from './components/completionForm/CompletionForm';
 
-import { initializeData, validateAdSetsForm, getSearchParameters, validateCampaignForm } from "./lib/Library";
+import { initializeData, validateAdSetsForm, getSearchParameters, validateCampaignForm, performValidation } from "./lib/Library";
 import { connect } from 'react-redux';
 
 class Advanced extends Component<any, any> {
@@ -26,6 +26,7 @@ class Advanced extends Component<any, any> {
         this.setCampaign = this.setCampaign.bind(this);
         this.setAdSets = this.setAdSets.bind(this);
         this.setAds = this.setAds.bind(this);
+        this.validate = this.validate.bind(this);
     }
     public componentDidMount() {
         this.initialize();
@@ -50,40 +51,31 @@ class Advanced extends Component<any, any> {
         });
     }
 
+    public validate() {
+        performValidation(this, this.state.campaign, this.state.adSets, this.state.ads);
+    }
+
     public setForm(form) {
-        let result;
-        switch (this.state.form) {
-            case "campaignForm":
-                result = validateCampaignForm(this.state.campaign);
-                break;
-            case "adSetsForm":
-                result = validateAdSetsForm(this.state.adSets);
-                break;
-            case "adsForm":
-                result = validateAdSetsForm(this.state.ads);
-                break;
-            case "reviewForm":
-                result = 'valid';
-                break;
-        }
-        if (result === 'valid') {
-            this.setState({ form, errors: undefined })
-        }
-        else {
-            this.setState({ errors: result })
-        }
+        this.validate();
+        this.setState({ form })
     }
 
     public setCampaign(campaign) {
-        this.setState({ campaign })
+        this.setState({ campaign }, () => {
+            this.validate();
+        })
     }
 
     public setAdSets(adSets) {
-        this.setState({ adSets })
+        this.setState({ adSets }, () => {
+            this.validate();
+        })
     }
 
     public setAds(ads) {
-        this.setState({ ads })
+        this.setState({ ads }, () => {
+            this.validate();
+        })
     }
 
     public async componentWillUnmount() {
@@ -94,13 +86,13 @@ class Advanced extends Component<any, any> {
     public renderForm() {
         switch (this.state.form) {
             case "campaignForm":
-                return <CampaignForm campaign={this.state.campaign} setCampaign={this.setCampaign} setForm={this.setForm} geoCodes={this.state.geoCodes} />
+                return <CampaignForm campaign={this.state.campaign} setCampaign={this.setCampaign} setForm={this.setForm} geoCodes={this.state.geoCodes} validations={this.state.validations} validate={this.validate} />
             case "adSetsForm":
-                return <AdSetsForm adSets={this.state.adSets} setAdSets={this.setAdSets} setForm={this.setForm} segments={this.state.segments} />
+                return <AdSetsForm adSets={this.state.adSets} setAdSets={this.setAdSets} setForm={this.setForm} segments={this.state.segments} validations={this.state.validations} validate={this.validate} />
             case "adsForm":
-                return <AdsForm ads={this.state.ads} setAds={this.setAds} adSets={this.state.adSets} setForm={this.setForm} creativeOptions={this.state.creativeOptions} auth={this.props.auth} />
+                return <AdsForm ads={this.state.ads} setAds={this.setAds} adSets={this.state.adSets} setForm={this.setForm} creativeOptions={this.state.creativeOptions} auth={this.props.auth} validations={this.state.validations} validate={this.validate} />
             case "reviewForm":
-                return <ReviewForm campaign={this.state.campaign} adSets={this.state.adSets} ads={this.state.ads} setForm={this.setForm} />
+                return <ReviewForm campaign={this.state.campaign} adSets={this.state.adSets} ads={this.state.ads} setForm={this.setForm} validations={this.state.validations} validate={this.validate} />
             case "completionForm":
                 return <CompletionForm campaign={this.state.campaign} adSets={this.state.adSets} ads={this.state.ads} auth={this.props.auth} advertiserId={this.state.advertiserId} userId={this.state.userId} />
         }

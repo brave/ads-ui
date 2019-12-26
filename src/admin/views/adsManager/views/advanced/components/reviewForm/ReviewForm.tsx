@@ -4,7 +4,7 @@ import Section from '../../../../../../../components/section/Section';
 import { Text } from "../../../../../../../components/Text/Text";
 
 import * as S from "./ReviewForm.style";
-import { InputContainer } from '../../../../../advertisers/views/advertiserNew/style/AdvertiserNew.style';
+import { Icon } from '@material-ui/core';
 
 class ReviewForm extends Component<any, any> {
 
@@ -21,6 +21,55 @@ class ReviewForm extends Component<any, any> {
             });
         }
         return formattedGeoTargets;
+    }
+
+    renderErrors() {
+        let errors;
+        let keys = Object.keys(this.props.validations);
+        if (keys) {
+            errors = keys.map((key) => {
+
+                if (key !== 'valid' && key !== 'adSets' && key !== 'ads') {
+                    if (this.props.validations[key].valid === false) {
+                        return <Text content={`• ${this.props.validations[key].errorMessage}`} sizes={[16, 16, 15, 15, 15]} style={{ marginTop: "12px" }} fontFamily={"Muli"} />
+                    }
+                }
+                if (key === 'adSets') {
+                    if (this.props.validations.adSets) {
+                        return this.props.validations.adSets.map((adSet, index) => {
+                            if (Object.keys(adSet)) {
+                                let counter = 0;
+                                return Object.keys(adSet).map((key) => {
+                                    if (adSet[key].valid === false && counter < 1) {
+                                        counter++;
+                                        return <Text content={`• Invalid Ad Set: Ad Set ${index + 1}`} sizes={[16, 16, 15, 15, 15]} style={{ marginTop: "12px" }} fontFamily={"Muli"} />
+                                    }
+                                })
+                            }
+                        })
+                    }
+                }
+                if (key === 'ads') {
+                    if (this.props.validations.ads) {
+                        return this.props.validations.ads.map((ad, index) => {
+                            if (Object.keys(ad)) {
+                                let counter = 0;
+                                return Object.keys(ad).map((key) => {
+                                    if (ad[key].valid === false && counter < 1) {
+                                        counter++;
+                                        return <Text content={`• Invalid Ad: Ad ${index + 1}`} sizes={[16, 16, 15, 15, 15]} style={{ marginTop: "12px" }} fontFamily={"Muli"} />
+                                    }
+                                })
+                            }
+                        })
+                    }
+                }
+
+            });
+        }
+
+        console.log(errors);
+        return errors.reverse();
     }
 
     renderAdSets() {
@@ -113,6 +162,18 @@ class ReviewForm extends Component<any, any> {
             <React.Fragment>
                 <S.FlexContainer>
                     <div style={{ width: "843px", marginLeft: "auto", marginRight: "auto" }}>
+
+                        {this.props.validations.valid === false &&
+                            <div style={{ width: "100%", borderRadius: "4px", display: "flex", marginBottom: "28px" }}>
+                                <div style={{ backgroundColor: "#e32444", width: "96px", borderTopLeftRadius: "4px", borderBottomLeftRadius: "4px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                    <Icon style={{ color: "white", fontSize: "32px" }}>info</Icon>
+                                </div>
+                                <div style={{ padding: "28px", borderTop: "1px solid #e2e2e2", borderRight: "1px solid #e2e2e2", borderBottom: "1px solid #e2e2e2", width: "100%", borderTopRightRadius: "4px", borderBottomRightRadius: "4px" }}>
+                                    <Text style={{ marginBottom: "12px" }} content={"Please fix the following errors to continue:"} color={"#e32444"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
+                                    {this.renderErrors()}
+                                </div>
+                            </div>
+                        }
                         <Section header={this.props.campaign.name} fullWidthChild={true}>
                             <>
                                 <S.InnerContainer>
@@ -218,12 +279,16 @@ class ReviewForm extends Component<any, any> {
                                         <S.InputContainer>
                                             {this.renderAdSets()}
                                         </S.InputContainer>
-
-
-                                        <S.Button onClick={() => { this.props.setForm("completionForm") }} style={{ marginLeft: "auto", width: "200px" }}>
-                                            <Text content={"Publish Campaign"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
-                                        </S.Button>
-
+                                        {
+                                            this.props.validations.valid === false ?
+                                                <S.Button style={{ marginLeft: "auto", width: "200px", opacity: .7, cursor: 'default' }}>
+                                                    <Text content={"Publish Campaign"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                                                </S.Button>
+                                                :
+                                                <S.Button onClick={() => { this.props.setForm("completionForm") }} style={{ marginLeft: "auto", width: "200px" }}>
+                                                    <Text content={"Publish Campaign"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                                                </S.Button>
+                                        }
                                     </S.RightColumn>
                                 </S.InnerContainer>
                             </>

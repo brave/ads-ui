@@ -11,34 +11,16 @@ export async function initializeData(context) {
     initializedData.campaign = initializeCampaign();
     initializedData.adSets = initializeAdSets();
     initializedData.ads = initializeAds();
-    initializedData.form = "campaignForm";
+    initializedData.validations = initializeValidations();
+    initializedData.form = "reviewForm";
     return initializedData;
 }
 
 export function validateCampaignForm(campaign) {
     let errors = [] as any;
 
-    // if (campaign.name === '') {
-    //     errors.push(`Error in campaign, please enter a name`)
-    // }
-    // if (campaign.startTime > campaign.endTime) {
-    //     errors.push(`Error in campaign, start time must be before end time`)
-    // }
-    // if (campaign.dailyFrequencyCap === '') {
-    //     errors.push(`Error in campaign, please enter a daily frequency cap`)
-    // }
-    // if (campaign.geoTargets === '') {
-    //     errors.push(`Error in campaign, please select geo targets`)
-    // }
-    // if (campaign.currency === '') {
-    //     errors.push(`Error in campaign, please select a currency`)
-    // }
-    // if (campaign.dailyBudget === '') {
-    //     errors.push(`Error in campaign, please enter a daily budget`)
-    // }
-    // if (campaign.totalBudget === '') {
-    //     errors.push(`Error in campaign, please enter a total budget`)
-    // }
+
+
 
     if (errors.length > 0) {
         return errors;
@@ -192,6 +174,138 @@ function initializeAds() {
         }
     ]
     return ads;
+}
+
+export function performValidation(context, campaign, adSets, ads) {
+
+    let validations = initializeValidations();
+
+    // TODO 
+    // Add validations.campaignName.resolveMessage = null and validations.campaignName.resolveHook = null;
+    // These can be displayed next to the error as a link back to the corresponding form element
+
+    if (campaign.name === '') {
+        validations.campaignName = {} as any;
+        validations.campaignName.valid = false;
+        validations.campaignName.errorMessage = "Campaign name is required";
+    }
+    if (campaign.startTime > campaign.endTime) {
+        validations.schedule = {} as any;
+        validations.schedule.valid = false;
+        validations.schedule.errorMessage = "Campaign end date cannot be before start date";
+    }
+    if (campaign.dailyFrequencyCap === '') {
+        validations.dailyFrequencyCap = {} as any;
+        validations.dailyFrequencyCap.valid = false;
+        validations.dailyFrequencyCap.errorMessage = "Daily Frequency Cap is required";
+    }
+    if (campaign.geoTargets === '') {
+        validations.geoTargets = {} as any;
+        validations.geoTargets.valid = false;
+        validations.geoTargets.errorMessage = "Geo Targets are required";
+    }
+    if (campaign.currency === '') {
+        validations.currency = {} as any;
+        validations.currency.valid = false;
+        validations.currency.errorMessage = "Currency is required";
+    }
+    if (campaign.dailyBudget === '') {
+        validations.dailyBudget = {} as any;
+        validations.dailyBudget.valid = false;
+        validations.dailyBudget.errorMessage = "Daily budget is required";
+    }
+    if (campaign.totalBudget === '') {
+        validations.totalBudget = {} as any;
+        validations.totalBudget.valid = false;
+        validations.totalBudget.errorMessage = "Total budget is required";
+    }
+
+    if (adSets) {
+        adSets.forEach((adSet, index) => {
+            validations.adSets.push({} as any);
+            if (adSet.lifetimeImpressions === '') {
+                validations.adSets[index].lifetimeImpressions = {} as any;
+                validations.adSets[index].lifetimeImpressions.valid = false;
+                validations.adSets[index].lifetimeImpressions.errorMessage = `Lifetime impressions is required in Ad Set ${index + 1}`;
+            }
+            if (adSet.dailyImpressions === '') {
+                validations.adSets[index].dailyImpressions = {} as any;
+                validations.adSets[index].dailyImpressions.valid = false;
+                validations.adSets[index].dailyImpressions.errorMessage = `Daily impressions is required in Ad Set ${index + 1}`;
+            }
+            if (adSet.audiences === '') {
+                validations.adSets[index].audiences = {} as any;
+                validations.adSets[index].audiences.valid = false;
+                validations.adSets[index].audiences.errorMessage = `Audiences are required in Ad Set ${index + 1}`;
+            }
+        })
+    }
+
+    if (ads) {
+        ads.forEach((ad, index) => {
+            validations.ads.push({} as any);
+            if (ad.creative === '') {
+                validations.ads[index].creative = {} as any;
+                validations.ads[index].creative.valid = false;
+                validations.ads[index].creative.errorMessage = `Ad creative is required in Ad ${index + 1}`;
+            }
+            if (ad.adSets === '') {
+                validations.ads[index].adSets = {} as any;
+                validations.ads[index].adSets.valid = false;
+                validations.ads[index].adSets.errorMessage = `Ad sets are required in Ad ${index + 1}`;
+            }
+        })
+    }
+
+    Object.keys(validations).forEach((key) => {
+        // If campaign validation triggered, set form to invalid
+        if (key !== 'valid' && key !== 'adSets' && key !== 'ads') {
+            if (validations[key].valid === false) {
+                validations.valid = false;
+            }
+        }
+
+        // If ad set validation triggered, set form to invalid
+        if (key === 'adSets') {
+            if (validations.adSets) {
+                validations.adSets.forEach((adSet) => {
+                    if (Object.keys(adSet)) {
+                        Object.keys(adSet).forEach((key) => {
+                            if (adSet[key].valid === false) {
+                                validations.valid = false;
+                            }
+                        });
+                    }
+                })
+            }
+        }
+
+        // If ads validation triggered, set form to invalid
+        if (key === 'ads') {
+            if (validations.ads) {
+                validations.ads.forEach((ad) => {
+                    if (Object.keys(ad)) {
+                        Object.keys(ad).forEach((key) => {
+                            if (ad[key].valid === false) {
+                                validations.valid = false;
+                            }
+                        });
+                    }
+                })
+            }
+        }
+    });
+
+    context.setState({ validations });
+}
+
+function initializeValidations() {
+    let validations = {
+        valid: null,
+        adSets: [] as any,
+        ads: [] as any
+    } as any;
+    return validations;
 }
 
 export function getSearchParameters(location) {
