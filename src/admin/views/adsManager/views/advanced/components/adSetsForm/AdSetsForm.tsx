@@ -17,7 +17,6 @@ class AdSetsForm extends Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
-            selectedAdSet: 0,
             selectedOption: null
         };
     }
@@ -35,15 +34,35 @@ class AdSetsForm extends Component<any, any> {
                 type: 'post-view',
                 url: '',
                 observationWindow: { value: 7, label: "7" },
-            }
+            },
+            ads: [
+                {
+                    creative: '',
+                    newCreative: true,
+                    name: '',
+                    title: '',
+                    body: '',
+                    targetUrl: '',
+                    creativeUrl: '',
+                    creativeSize: '',
+                    channels: '',
+                    notificationAd: true,
+                    inPageAd: false,
+                    previewAssets: {
+                        title: null,
+                        body: null,
+                    }
+                }
+            ]
         })
         this.props.setAdSets(adSets);
     }
 
     setSelectedAdSet(selectedAdSet) {
-        this.setState({ selectedAdSet })
+        this.props.setSelectedAdSet(selectedAdSet);
     }
 
+    //Fix 
     deleteSelectedAdSet(e, deletedAdSet) {
         e.preventDefault();
         let adSets = this.props.adSets;
@@ -57,21 +76,21 @@ class AdSetsForm extends Component<any, any> {
 
     handleLifetimeImpressions(e) {
         let adSets = this.props.adSets;
-        adSets[this.state.selectedAdSet].lifetimeImpressions = e.target.value;
+        adSets[this.props.selectedAdSet].lifetimeImpressions = e.target.value;
         this.props.setAdSets(adSets);
     }
 
     handleDailyImpressions(e) {
         let adSets = this.props.adSets;
-        adSets[this.state.selectedAdSet].dailyImpressions = e.target.value;
+        adSets[this.props.selectedAdSet].dailyImpressions = e.target.value;
         this.props.setAdSets(adSets);
     }
 
     handleBraveML(value) {
         let adSets = this.props.adSets;
-        adSets[this.state.selectedAdSet].braveML = value;
+        adSets[this.props.selectedAdSet].braveML = value;
         if (value) {
-            adSets[this.state.selectedAdSet].audiences = '';
+            adSets[this.props.selectedAdSet].audiences = '';
         }
         this.props.setAdSets(adSets);
     }
@@ -79,11 +98,11 @@ class AdSetsForm extends Component<any, any> {
     handleConversionsCheckbox(e) {
         let adSets = this.props.adSets;
         if (e.target.checked) {
-            adSets[this.state.selectedAdSet].conversionsCheckbox = true;
+            adSets[this.props.selectedAdSet].conversionsCheckbox = true;
         }
         else {
-            adSets[this.state.selectedAdSet].conversionsCheckbox = false;
-            adSets[this.state.selectedAdSet].conversion = {
+            adSets[this.props.selectedAdSet].conversionsCheckbox = false;
+            adSets[this.props.selectedAdSet].conversion = {
                 type: 'post-view',
                 url: '',
                 observationWindow: { value: 7, label: "7" },
@@ -95,43 +114,59 @@ class AdSetsForm extends Component<any, any> {
     handleConversionType(value) {
         let adSets = this.props.adSets;
         if (value === 'post-view') {
-            adSets[this.state.selectedAdSet].conversion.type = 'post-view';
+            adSets[this.props.selectedAdSet].conversion.type = 'post-view';
         }
         if (value === 'post-click') {
-            adSets[this.state.selectedAdSet].conversion.type = 'post-click';
+            adSets[this.props.selectedAdSet].conversion.type = 'post-click';
         }
         this.props.setAdSets(adSets);
     }
 
     handleConversionURL(e) {
         let adSets = this.props.adSets;
-        adSets[this.state.selectedAdSet].conversion.url = e.target.value;
+        adSets[this.props.selectedAdSet].conversion.url = e.target.value;
         this.props.setAdSets(adSets);
     }
 
     handleConversionObservationWindow = selectedOption => {
         let adSets = this.props.adSets;
-        adSets[this.state.selectedAdSet].conversion.observationWindow = selectedOption;
+        adSets[this.props.selectedAdSet].conversion.observationWindow = selectedOption;
         this.props.setAdSets(adSets);
     };
 
     handleAudiences = selectedOption => {
         let adSets = this.props.adSets;
-        adSets[this.state.selectedAdSet].audiences = selectedOption;
+        adSets[this.props.selectedAdSet].audiences = selectedOption;
         this.props.setAdSets(adSets);
     };
 
     handleStatus(status) {
         let adSets = this.props.adSets;
-        adSets[this.state.selectedAdSet].status = status;
+        adSets[this.props.selectedAdSet].status = status;
         this.props.setAdSets(adSets);
+    }
+
+    handleNext() {
+        this.props.setSelectedAd(0);
+        this.props.setForm("adsForm")
+    }
+
+    handleBack() {
+        if (this.props.selectedAdSet - 1 >= 0) {
+            this.props.setSelectedAd(0);
+            this.props.setSelectedAdSet(this.props.selectedAdSet - 1)
+            this.props.setForm("adSetsForm")
+        }
+        else {
+            this.props.setForm("campaignForm")
+        }
     }
 
     renderAdSetsTabs() {
         // alert(JSON.stringify(this.props.adSets))
         if (this.props.adSets) {
             let adSetsTabs = this.props.adSets.map((adSet, index) => {
-                if (index === this.state.selectedAdSet) {
+                if (index === this.props.selectedAdSet) {
                     return (
                         <S.ActiveAdSetsTab onContextMenu={(e) => this.deleteSelectedAdSet(e, index)} key={index}>
                             <Text content={`Ad Set #${index + 1}`} sizes={[16, 16, 15, 15, 16]} fontFamily={"Poppins"} />
@@ -158,37 +193,33 @@ class AdSetsForm extends Component<any, any> {
     render() {
         return (
             <React.Fragment>
-                <div style={{ display: "flex" }}>
-                    <div style={{ width: "843px" }}>
+                <div style={{ display: "flex", position: "relative", marginTop: "28px", width: "100%" }}>
+                    <div style={{ width: "660px" }}>
                         <Section fullWidthChild={true}>
                             <>
                                 <S.InnerContainer>
-                                    <S.LeftColumn>
-                                        <Text content={"Audience"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
-                                        <Text content={"Ad Sets are used to define your audience from interests, location, and platform."} style={{ marginTop: "16px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
-                                        <S.LeftColumnContainer>
-
-                                        </S.LeftColumnContainer>
-                                    </S.LeftColumn>
                                     <S.RightColumn>
+                                        <Text content={"Audiences"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
+                                        <div style={{ display: "flex" }}>
+                                            <Text content={"Select the audience you would like to advertise to by interests."} style={{ marginTop: "2px", marginBottom: "28px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                            <Text content={"Learn More."} color={"#E0694C"} style={{ marginTop: "2px", marginBottom: "28px", marginLeft: "4px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                        </div>
                                         {/* Audiences */}
                                         <S.InputContainer>
-                                            <Text content={"Audiences"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-
                                             <div style={{ display: "flex", marginTop: "8px", marginBottom: "8px" }}>
-                                                <input style={{ marginRight: "8px" }} type="radio" checked={this.props.adSets[this.state.selectedAdSet].braveML} onChange={(e) => this.handleBraveML(true)} />
+                                                <input style={{ marginRight: "8px" }} type="radio" checked={this.props.adSets[this.props.selectedAdSet].braveML} onChange={(e) => this.handleBraveML(true)} />
                                                 <Text content={"Let Brave determine best audience."} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                             </div>
 
                                             <div style={{ display: "flex", marginTop: "8px", marginBottom: "12px" }}>
-                                                <input style={{ marginRight: "8px" }} type="radio" checked={!this.props.adSets[this.state.selectedAdSet].braveML} onChange={(e) => this.handleBraveML(false)} />
+                                                <input style={{ marginRight: "8px" }} type="radio" checked={!this.props.adSets[this.props.selectedAdSet].braveML} onChange={(e) => this.handleBraveML(false)} />
                                                 <Text content={"Select custom audience."} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                             </div>
-                                            {!this.props.adSets[this.state.selectedAdSet].braveML &&
+                                            {!this.props.adSets[this.props.selectedAdSet].braveML &&
                                                 <div style={{ marginTop: "4px" }}>
                                                     <Select
                                                         styles={customStyles}
-                                                        value={this.props.adSets[this.state.selectedAdSet].audiences}
+                                                        value={this.props.adSets[this.props.selectedAdSet].audiences}
                                                         onChange={this.handleAudiences}
                                                         isMulti={true}
                                                         options={this.props.segments}
@@ -202,20 +233,18 @@ class AdSetsForm extends Component<any, any> {
                                 <div style={{ width: "100%", borderBottom: "1px solid #e2e2e2", marginTop: "28px", marginBottom: "56px" }}></div>
 
                                 <S.InnerContainer>
-                                    <S.LeftColumn>
-                                        <Text content={"Conversions"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
-                                        <Text content={"Ad Sets are used to define your audience from interests, location, and platform."} style={{ marginTop: "16px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
-                                        <S.LeftColumnContainer>
 
-                                        </S.LeftColumnContainer>
-                                    </S.LeftColumn>
                                     <S.RightColumn>
 
-                                        <S.InputContainer>
-                                            <Text content={"Conversion tracking"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                        <Text content={"Conversion"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
+                                        <div style={{ display: "flex" }}>
+                                            <Text content={"Define post-engagement analytics."} style={{ marginTop: "2px", marginBottom: "28px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                            <Text content={"Learn More."} color={"#E0694C"} style={{ marginTop: "2px", marginBottom: "28px", marginLeft: "4px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                        </div>
 
+                                        <S.InputContainer>
                                             <div style={{ display: "flex", marginTop: "8px", marginBottom: "8px" }}>
-                                                <input checked={this.props.adSets[this.state.selectedAdSet].conversionsCheckbox} onClick={(e) => this.handleConversionsCheckbox(e)} style={{ marginRight: "8px" }} type="checkbox" />
+                                                <input checked={this.props.adSets[this.props.selectedAdSet].conversionsCheckbox} onClick={(e) => this.handleConversionsCheckbox(e)} style={{ marginRight: "8px" }} type="checkbox" />
                                                 <Text content={"Track conversions on this ad set"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                             </div>
 
@@ -223,18 +252,18 @@ class AdSetsForm extends Component<any, any> {
                                         </S.InputContainer>
 
                                         {
-                                            this.props.adSets[this.state.selectedAdSet].conversionsCheckbox &&
+                                            this.props.adSets[this.props.selectedAdSet].conversionsCheckbox &&
                                             <>
                                                 <S.InputContainer>
                                                     <Text content={"Select an event to track conversions."} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
 
                                                     <div style={{ display: "flex", marginTop: "8px", marginBottom: "8px" }}>
-                                                        <input checked={this.props.adSets[this.state.selectedAdSet].conversion.type === 'post-view'} onClick={(e) => this.handleConversionType("post-view")} style={{ marginRight: "8px" }} type="radio" name="gender" value="male" />
+                                                        <input checked={this.props.adSets[this.props.selectedAdSet].conversion.type === 'post-view'} onClick={(e) => this.handleConversionType("post-view")} style={{ marginRight: "8px" }} type="radio" name="gender" value="male" />
                                                         <Text content={"Post-View"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                                     </div>
 
                                                     <div style={{ display: "flex", marginTop: "8px", marginBottom: "12px" }}>
-                                                        <input checked={this.props.adSets[this.state.selectedAdSet].conversion.type === 'post-click'} onClick={(e) => this.handleConversionType("post-click")} style={{ marginRight: "8px" }} type="radio" name="gender" value="male" />
+                                                        <input checked={this.props.adSets[this.props.selectedAdSet].conversion.type === 'post-click'} onClick={(e) => this.handleConversionType("post-click")} style={{ marginRight: "8px" }} type="radio" name="gender" value="male" />
                                                         <Text content={"Post-Click"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                                     </div>
 
@@ -249,7 +278,7 @@ class AdSetsForm extends Component<any, any> {
                                                     <Text content={"https://brave.com/checkout/*/confirmation"} color={"grey"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
 
                                                     <div style={{ display: "flex", alignItems: "center", marginTop: "8px", marginBottom: "8px" }}>
-                                                        <S.Input value={this.props.adSets[this.state.selectedAdSet].conversion.url} onChange={(e) => this.handleConversionURL(e)} placeholder="Enter a URL..." />
+                                                        <S.Input value={this.props.adSets[this.props.selectedAdSet].conversion.url} onChange={(e) => this.handleConversionURL(e)} placeholder="Enter a URL..." />
                                                     </div>
 
                                                     <div style={{ display: "flex", alignItems: "center", marginTop: "14px", marginBottom: "8px" }}>
@@ -257,7 +286,7 @@ class AdSetsForm extends Component<any, any> {
                                                         <div style={{ marginLeft: "12px", marginRight: "12px", width: "75px" }}>
                                                             <Select
                                                                 styles={customStyles}
-                                                                value={this.props.adSets[this.state.selectedAdSet].conversion.observationWindow}
+                                                                value={this.props.adSets[this.props.selectedAdSet].conversion.observationWindow}
                                                                 onChange={this.handleConversionObservationWindow}
                                                                 multi={false}
                                                                 options={[{ value: 1, label: "1" }, { value: 7, label: "7" }, { value: 30, label: "30" }]}
@@ -276,39 +305,38 @@ class AdSetsForm extends Component<any, any> {
                                 <div style={{ width: "100%", borderBottom: "1px solid #e2e2e2", marginTop: "28px", marginBottom: "56px" }}></div>
 
                                 <S.InnerContainer>
-                                    <S.LeftColumn>
-                                        <Text content={"Etc."} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
-                                        <Text content={"Ad Sets are used to define your audience from interests, location, and platform."} style={{ marginTop: "16px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
-                                        <S.LeftColumnContainer>
-
-                                        </S.LeftColumnContainer>
-                                    </S.LeftColumn>
                                     <S.RightColumn>
+
+                                        <Text content={"Etc."} style={{ marginBottom: "8px" }} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
 
                                         {/* Lifetime impressions */}
                                         <S.InputContainer>
                                             <Text content={"Impressions per user over lifetime"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <S.Input value={this.props.adSets[this.state.selectedAdSet].lifetimeImpressions} onChange={(e) => this.handleLifetimeImpressions(e)} placeholder="Enter a number of impressions..." type="number" name="name" />
+                                            <S.Input value={this.props.adSets[this.props.selectedAdSet].lifetimeImpressions} onChange={(e) => this.handleLifetimeImpressions(e)} placeholder="Enter a number of impressions..." type="number" name="name" />
                                         </S.InputContainer>
 
                                         {/* Daily impressions */}
                                         <S.InputContainer>
                                             <Text content={"Impressions per user per day"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <S.Input value={this.props.adSets[this.state.selectedAdSet].dailyImpressions} onChange={(e) => this.handleDailyImpressions(e)} placeholder="Enter a number of impressions..." type="number" name="name" />
+                                            <S.Input value={this.props.adSets[this.props.selectedAdSet].dailyImpressions} onChange={(e) => this.handleDailyImpressions(e)} placeholder="Enter a number of impressions..." type="number" name="name" />
                                         </S.InputContainer>
 
-                                        {/* Nav Buttons */}
-                                        <>
-                                            <S.Button onClick={() => { this.props.setForm("adsForm") }} style={{ marginLeft: "auto", marginTop: "56px" }}>
-                                                <Text content={"Next"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
-                                            </S.Button>
-                                        </>
                                     </S.RightColumn>
+                                    {/* Nav Buttons */}
+
                                 </S.InnerContainer>
+                                <div style={{ display: "flex" }}>
+                                    <S.SecondaryButton onClick={() => this.handleBack()} style={{ marginRight: "auto", marginTop: "56px" }}>
+                                        <Text content={"Back"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                                    </S.SecondaryButton>
+                                    <S.Button onClick={() => this.handleNext()} style={{ marginLeft: "auto", marginTop: "56px" }}>
+                                        <Text content={"Next"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                                    </S.Button>
+                                </div>
                             </>
                         </Section>
                     </div>
-                    <div style={{ width: "253px", marginLeft: "28px" }}>
+                    <div style={{ width: "30%", position: "relative", marginLeft: "28px" }}>
                         <S.AdSetsTabs>
                             {this.renderAdSetsTabs()}
                             <S.AdSetsTabButtonContainer>
@@ -319,6 +347,7 @@ class AdSetsForm extends Component<any, any> {
                         </S.AdSetsTabs>
                     </div>
                 </div>
+
             </React.Fragment >
         );
     }

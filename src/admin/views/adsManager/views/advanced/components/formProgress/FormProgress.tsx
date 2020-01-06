@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Text } from "../../../../../../../components/Text/Text";
 import { Icon } from '@material-ui/core';
 import * as S from "./FormProgress.style";
-import { validateAdSetsForm, validateCampaignForm, validateAdsForm } from '../../lib/Library';
 
 class FormProgress extends Component<any, any> {
 

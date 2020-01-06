@@ -69,7 +69,7 @@
     "@types/redux-form": "^7.5.5",
     "@types/redux-logger": "^3.0.7",
     "local-web-server": "^2.6.0",
-    "typescript": "^3.5.3"
+    "typescript": "^3.7.4"
   },
   "browserslist": [
     ">0.2%",

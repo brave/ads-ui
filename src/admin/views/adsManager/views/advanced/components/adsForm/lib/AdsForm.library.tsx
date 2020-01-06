@@ -1,4 +1,4 @@
-import { creativeAssetsQuery } from "./AdsForm.queries";
+import { creativeAssetsQuery, creativeTypeQuery } from "./AdsForm.queries";
 
 // import ApolloClient from 'apollo-boost';
 // import { gql } from 'apollo-boost';
@@ -28,6 +28,10 @@ import { creativeAssetsQuery } from "./AdsForm.queries";
 
 export async function fetchCreativeAssets(creativeId, accessToken) {
     return await fetchData(creativeAssetsQuery(creativeId), accessToken);
+}
+
+export async function fetchCreativeType(creativeId, accessToken) {
+    return await fetchData(creativeTypeQuery(creativeId), accessToken);
 }
 
 

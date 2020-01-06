@@ -10,67 +10,11 @@ export async function initializeData(context) {
     initializedData.creativeOptions = initializeCreativeOptions(initializedData.creatives);
     initializedData.campaign = initializeCampaign();
     initializedData.adSets = initializeAdSets();
-    initializedData.ads = initializeAds();
+    initializedData.selectedAdSet = 0;
+    initializedData.selectedAd = 0;
     initializedData.validations = initializeValidations();
-    initializedData.form = "reviewForm";
+    initializedData.form = "adsForm";
     return initializedData;
-}
-
-export function validateCampaignForm(campaign) {
-    let errors = [] as any;
-
-
-
-
-    if (errors.length > 0) {
-        return errors;
-    }
-    else {
-        return 'valid';
-    }
-}
-
-export function validateAdSetsForm(adSets) {
-    let errors = [] as any;
-
-    // adSets.forEach((adSet, index) => {
-    // if (adSet.lifetimeImpressions === '') {
-    //     errors.push(`Error in ad set ${index + 1}, please enter a number for lifetime impressions`)
-    // }
-    // if (adSet.dailyImpressions === '') {
-    //     errors.push(`Error in ad set ${index + 1}, please enter a number for daily impressions`)
-    // }
-    // if (adSet.audiences === '') {
-    //     errors.push(`Error in ad set ${index + 1}, please select at least one audience`)
-    // }
-    // });
-
-    if (errors.length > 0) {
-        return errors;
-    }
-    else {
-        return 'valid';
-    }
-}
-
-export function validateAdsForm(ads) {
-    let errors = [] as any;
-
-    // ads.forEach((ad, index) => {
-    //     if (ad.creative === '') {
-    //         errors.push(`Error in ad ${index + 1}, please select a creative`)
-    //     }
-    //     if (ad.adSets === '') {
-    //         errors.push(`Error in ad ${index + 1}, please add to an ad set`)
-    //     }
-    // });
-
-    if (errors.length > 0) {
-        return errors;
-    }
-    else {
-        return 'valid';
-    }
 }
 
 async function initializeGeoCodes(query, accessToken) {
@@ -114,14 +58,8 @@ function initializeCreativeOptions(creatives) {
 
 function initializeCampaign() {
 
-    var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
-
-    var localISOTime = (new Date(Date.now() - tzoffset)).toISOString().slice(0, -1);
-
-
-
-
-    // endTime: new Date().setHours(23, 59, 59, 999),
+    // Calculate timezone offset in ms
+    var tzoffset = (new Date()).getTimezoneOffset() * 60000;
 
     let campaign = {
         name: '',
@@ -129,7 +67,7 @@ function initializeCampaign() {
         endTime: (new Date(new Date().setHours(23, 59, 59, 999) - tzoffset)).toISOString().slice(0, -5),
         dailyFrequencyCap: '',
         geoTargets: '',
-        currency: '',
+        currency: "BAT",
         dailyBudget: '',
         totalBudget: '',
         cpm: true,
@@ -152,33 +90,54 @@ function initializeAdSets() {
                 url: '',
                 observationWindow: { value: 7, label: "7" },
             },
+            ads: [
+                {
+                    creative: '',
+                    newCreative: true,
+                    name: '',
+                    title: '',
+                    body: '',
+                    targetUrl: '',
+                    creativeUrl: '',
+                    size: '',
+                    notificationAd: true,
+                    inPageAd: false,
+                    channels: '',
+                    previewAssets: {
+                        title: '',
+                        body: '',
+                        creativeUrl: '',
+                    }
+                }
+            ]
         }
     ]
     return adSets;
 }
 
-function initializeAds() {
-    let ads = [
-        {
-            creative: '',
-            adSets: '',
-            newCreative: true,
-            name: '',
-            title: '',
-            body: '',
-            targetUrl: '',
-            previewAssets: {
-                title: null,
-                body: null,
-            }
-        }
-    ]
-    return ads;
-}
+// function initializeAds() {
+//     let ads = [
+//         {
+//             creative: '',
+//             adSets: '',
+//             newCreative: true,
+//             name: '',
+//             title: '',
+//             body: '',
+//             targetUrl: '',
+//             previewAssets: {
+//                 title: null,
+//                 body: null,
+//             }
+//         }
+//     ]
+//     return ads;
+// }
 
-export function performValidation(context, campaign, adSets, ads) {
+export function performValidation(context, validationRule, campaign, adSets, ads) {
 
     let validations = initializeValidations();
+    validations.adSets = [] as any;
 
     // TODO 
     // Add validations.campaignName.resolveMessage = null and validations.campaignName.resolveHook = null;
@@ -189,10 +148,16 @@ export function performValidation(context, campaign, adSets, ads) {
         validations.campaignName.valid = false;
         validations.campaignName.errorMessage = "Campaign name is required";
     }
-    if (campaign.startTime > campaign.endTime) {
+    if (campaign.startTime > campaign.endTime && (validationRule === "campaignForm" || validationRule === 'all')) {
         validations.schedule = {} as any;
         validations.schedule.valid = false;
         validations.schedule.errorMessage = "Campaign end date cannot be before start date";
+    }
+
+    if (parseFloat(campaign.dailyBudget.replace(/[^\d.]/g, '')) > parseFloat(campaign.totalBudget.replace(/[^\d.]/g, '')) && (validationRule === "campaignForm" || validationRule === 'all')) {
+        validations.budget = {} as any;
+        validations.budget.valid = false;
+        validations.budget.errorMessage = "Daily budget cannot be greater than Lifetime budget";
     }
     if (campaign.dailyFrequencyCap === '') {
         validations.dailyFrequencyCap = {} as any;
@@ -219,43 +184,51 @@ export function performValidation(context, campaign, adSets, ads) {
         validations.totalBudget.valid = false;
         validations.totalBudget.errorMessage = "Total budget is required";
     }
+    if (campaign.bid === '') {
+        validations.totalBudget = {} as any;
+        validations.totalBudget.valid = false;
+        validations.totalBudget.errorMessage = "Bid is required";
+    }
 
     if (adSets) {
-        adSets.forEach((adSet, index) => {
+        adSets.forEach((adSet, adSetIndex) => {
             validations.adSets.push({} as any);
             if (adSet.lifetimeImpressions === '') {
-                validations.adSets[index].lifetimeImpressions = {} as any;
-                validations.adSets[index].lifetimeImpressions.valid = false;
-                validations.adSets[index].lifetimeImpressions.errorMessage = `Lifetime impressions is required in Ad Set ${index + 1}`;
+                validations.adSets[adSetIndex].lifetimeImpressions = {} as any;
+                validations.adSets[adSetIndex].lifetimeImpressions.valid = false;
+                validations.adSets[adSetIndex].lifetimeImpressions.errorMessage = `Lifetime impressions is required in Ad Set ${adSetIndex + 1}`;
             }
             if (adSet.dailyImpressions === '') {
-                validations.adSets[index].dailyImpressions = {} as any;
-                validations.adSets[index].dailyImpressions.valid = false;
-                validations.adSets[index].dailyImpressions.errorMessage = `Daily impressions is required in Ad Set ${index + 1}`;
+                validations.adSets[adSetIndex].dailyImpressions = {} as any;
+                validations.adSets[adSetIndex].dailyImpressions.valid = false;
+                validations.adSets[adSetIndex].dailyImpressions.errorMessage = `Daily impressions is required in Ad Set ${adSetIndex + 1}`;
             }
             if (adSet.audiences === '') {
-                validations.adSets[index].audiences = {} as any;
-                validations.adSets[index].audiences.valid = false;
-                validations.adSets[index].audiences.errorMessage = `Audiences are required in Ad Set ${index + 1}`;
+                validations.adSets[adSetIndex].audiences = {} as any;
+                validations.adSets[adSetIndex].audiences.valid = false;
+                validations.adSets[adSetIndex].audiences.errorMessage = `Audiences are required in Ad Set ${adSetIndex + 1}`;
+            }
+
+            if (adSet.ads) {
+                validations.adSets[adSetIndex].ads = [] as any;
+                adSet.ads.forEach((ad, index) => {
+                    validations.adSets[adSetIndex].ads.push({} as any);
+                    if (ad.creative === '') {
+                        validations.adSets[adSetIndex].ads[index].creative = {} as any;
+                        validations.adSets[adSetIndex].ads[index].creative.valid = false;
+                        validations.adSets[adSetIndex].ads[index].creative.errorMessage = `Ad creative is required in Ad ${index + 1} of Ad Set ${adSetIndex + 1}`;
+                    }
+                    if (ad.adSets === '') {
+                        validations.adSets[adSetIndex].ads[index].adSets = {} as any;
+                        validations.adSets[adSetIndex].ads[index].adSets.valid = false;
+                        validations.adSets[adSetIndex].ads[index].adSets.errorMessage = `Ad sets are required in Ad ${index + 1} of Ad Set ${adSetIndex + 1}`;
+                    }
+                })
             }
         })
     }
 
-    if (ads) {
-        ads.forEach((ad, index) => {
-            validations.ads.push({} as any);
-            if (ad.creative === '') {
-                validations.ads[index].creative = {} as any;
-                validations.ads[index].creative.valid = false;
-                validations.ads[index].creative.errorMessage = `Ad creative is required in Ad ${index + 1}`;
-            }
-            if (ad.adSets === '') {
-                validations.ads[index].adSets = {} as any;
-                validations.ads[index].adSets.valid = false;
-                validations.ads[index].adSets.errorMessage = `Ad sets are required in Ad ${index + 1}`;
-            }
-        })
-    }
+
 
     Object.keys(validations).forEach((key) => {
         // If campaign validation triggered, set form to invalid
@@ -278,22 +251,7 @@ export function performValidation(context, campaign, adSets, ads) {
                     }
                 })
             }
-        }
-
-        // If ads validation triggered, set form to invalid
-        if (key === 'ads') {
-            if (validations.ads) {
-                validations.ads.forEach((ad) => {
-                    if (Object.keys(ad)) {
-                        Object.keys(ad).forEach((key) => {
-                            if (ad[key].valid === false) {
-                                validations.valid = false;
-                            }
-                        });
-                    }
-                })
-            }
-        }
+        };
     });
 
     context.setState({ validations });
@@ -302,8 +260,6 @@ export function performValidation(context, campaign, adSets, ads) {
 function initializeValidations() {
     let validations = {
         valid: null,
-        adSets: [] as any,
-        ads: [] as any
     } as any;
     return validations;
 }

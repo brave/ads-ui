@@ -7,8 +7,8 @@ class OSNotificationCreativePreview extends Component<any, any> {
         return (
             <div>
                 <>
-                    <Text content={"iOS"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                    <div style={{ backgroundColor: "rgb(197, 197, 211)", borderRadius: "4px", width: "100%", height: "133px", border: "1px solid #dfdfdf", marginTop: "16px", marginBottom: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+
+                    <div style={{ backgroundColor: "rgb(197, 197, 211)", borderRadius: "4px", width: "100%", height: "133px", border: "1px solid #dfdfdf", marginBottom: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
 
                         <div style={{ height: "106px", width: "359px", borderRadius: "13px", backgroundColor: "rgba(248, 248, 248, 0.82)", padding: "8px" }}>
                             <div style={{ display: "flex", width: "100%" }}>
@@ -25,7 +25,7 @@ class OSNotificationCreativePreview extends Component<any, any> {
                         </div>
                     </div>
 
-                    <Text content={"Android"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+
                     <div style={{ backgroundColor: "rgb(197, 197, 211)", borderRadius: "4px", width: "100%", height: "133px", border: "1px solid #dfdfdf", marginTop: "16px", marginBottom: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
                         <div style={{ height: "82px", width: "326px", borderRadius: "13px", backgroundColor: "rgb(250, 250, 250)", padding: "8px" }}>
                             <div style={{ display: "flex", width: "100%" }}>
@@ -40,7 +40,7 @@ class OSNotificationCreativePreview extends Component<any, any> {
                         </div>
                     </div>
 
-                    <Text content={"Windows"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+
                     <div style={{ backgroundColor: "rgb(197, 197, 211)", borderRadius: "4px", width: "100%", height: "133px", border: "1px solid #dfdfdf", marginTop: "16px", marginBottom: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
                         <div style={{ height: "126px", width: "273px", backgroundColor: "rgb(61, 61, 61)", padding: "8px" }}>
                             <div style={{ display: "flex", width: "100%" }}>
@@ -57,7 +57,7 @@ class OSNotificationCreativePreview extends Component<any, any> {
                     </div>
 
 
-                    <Text content={"Mac OS"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+
                     <div style={{ backgroundColor: "rgb(197, 197, 211)", borderRadius: "4px", width: "100%", height: "133px", border: "1px solid #dfdfdf", marginTop: "16px", marginBottom: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
                         <div style={{ height: "72px", width: "326px", borderRadius: "13px", backgroundColor: "rgb(250, 250, 250)", padding: "8px" }}>
                             <div style={{ display: "flex", width: "100%" }}>
