@@ -9,7 +9,7 @@ import CreativeSetForm from "../CreatoveSetForm/CreativeSetForm";
 import { styles } from "./CreativeSetNew.style";
 
 class CreativeSetNew extends React.Component<any, any> {
-  public componentDidMount(){
+  public componentDidMount() {
     this.props.getSegments(this.props.auth);
   }
   public render() {
