@@ -1,10 +1,5 @@
 import styled from "styled-components";
 
-export const Container = styled("div")`
-  width: 75%;
-  margin-right: auto;
-`;
-
 export const InnerContainer = styled("div")`
   display: flex;
   width: 100%;
@@ -12,11 +7,10 @@ export const InnerContainer = styled("div")`
 
 export const LeftColumn = styled("div")`
   width: 30%;
-  margin-right: 56px;
 `;
 
 export const RightColumn = styled("div")`
-  width: 70%;
+  width: 100%;
 `;
 
 export const InputContainer = styled("div")`
@@ -74,9 +68,21 @@ export const Button = styled("div")`
   justify-content: center;
   padding: 0px 20px;
   width: 100px; 
-  background: #4C54D2;
+  background: #F87454;
   color: white;
   border: none;
+  border-radius: 100px 100px 100px 100px;
+  cursor: pointer;
+`;
+
+export const SecondaryButton = styled("div")`
+  display: flex;
+  justify-content: center;
+  padding: 0px 20px;
+  width: 100px; 
+  background: #fafafa;
+  color: black;
+  border: 1px solid #e2e2e2;
   border-radius: 100px 100px 100px 100px;
   cursor: pointer;
 `;
@@ -85,3 +91,29 @@ export const LeftColumnContainer = styled("div")`
   width: 100%;
   margin-top: 64px;
 `;
+
+export const Container = styled("div")`
+  display: flex; 
+  margin-top: 28px; 
+  margin-bottom: 28px; 
+  border-bottom: 1px solid #ededed;
+`;
+
+interface TabProps {
+  selected: boolean;
+}
+export const Tab = styled("div")`
+
+margin-right: 28px;
+margin-bottom: 0px;
+padding-bottom: 14px;
+font-family: "Muli";
+font-size: 16px;
+${(props: TabProps) =>
+    props.selected === true &&
+    `
+    border-bottom: 3px solid #FA8A73;
+    `
+  }
+`;
+
