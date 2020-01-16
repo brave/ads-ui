@@ -74,7 +74,6 @@ class AdvertiserView extends React.Component<any, any> {
         zipcode: values.zipcode,
       };
       values.billingAddress = values.mailingAddress;
-      alert(values.state);
       values.state = value.ad_state;
       await update(values, auth, userId);
     };

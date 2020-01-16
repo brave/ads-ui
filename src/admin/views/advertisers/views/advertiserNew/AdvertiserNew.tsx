@@ -168,7 +168,7 @@ class AdvertiserNew extends Component<any, any> {
                             <>
                                 <S.InnerContainer>
                                     <S.LeftColumn>
-                                        <Text content={"Profile"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
+                                        <Text content={"Profile"} sizes={[16, 16, 15, 15, 20]} fontFamily={"Poppins"} />
                                         <Text content={"Set the advertiser name, e-mail, and phone number."} style={{ marginTop: "16px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
                                     </S.LeftColumn>
                                     <S.RightColumn>
@@ -190,7 +190,7 @@ class AdvertiserNew extends Component<any, any> {
 
                                 <S.InnerContainer>
                                     <S.LeftColumn>
-                                        <Text content={"Billing Address"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
+                                        <Text content={"Billing Address"} sizes={[16, 16, 15, 15, 20]} fontFamily={"Poppins"} />
                                         <Text content={"Set the advertiser's billing address, to be used for invoicing."} style={{ marginTop: "16px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
                                     </S.LeftColumn>
                                     <S.RightColumn>
@@ -224,7 +224,7 @@ class AdvertiserNew extends Component<any, any> {
 
                                 <S.InnerContainer>
                                     <S.LeftColumn>
-                                        <Text content={"Status"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
+                                        <Text content={"Status"} sizes={[16, 16, 15, 15, 20]} fontFamily={"Poppins"} />
                                         <Text content={"Set the advertiser name as well as e-mail and phone number."} style={{ marginTop: "16px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
                                     </S.LeftColumn>
                                     <S.RightColumn>
@@ -248,7 +248,7 @@ class AdvertiserNew extends Component<any, any> {
                         <div style={{ position: "fixed", width: "253px" }}>
                             <Section fullWidthChild={true}>
                                 <div>
-                                    <Text style={{ textAlign: "center" }} content={"Advertiser"} sizes={[16, 16, 15, 15, 21]} fontFamily={"Poppins"} />
+                                    <Text style={{ textAlign: "center" }} content={"Advertiser"} sizes={[16, 16, 15, 15, 20]} fontFamily={"Poppins"} />
                                     <div style={{ width: "100%", borderBottom: "1px solid #e2e2e2", marginTop: "4px", marginBottom: "12px" }}></div>
                                     <Text style={{ marginBottom: "8px" }} content={"Profile"} sizes={[16, 16, 15, 15, 15]} fontFamily={"Poppins"} />
 

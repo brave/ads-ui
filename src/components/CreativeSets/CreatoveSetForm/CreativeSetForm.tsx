@@ -56,6 +56,13 @@ class CreativeSetForm extends React.Component<any, any> {
         </MenuItem>
       );
     });
+    const creativeSetBillingTypeList = ["cpm", "cpc", "cpl", "cpx", "rev_share", "other"].map((item: any) => {
+      return (
+        <MenuItem key={item} value={item}>
+          {item}
+        </MenuItem>
+      );
+    });
     return (
       <div className={classes.root}>
         <form onSubmit={handleSubmit} className={classes.form}>
@@ -91,6 +98,19 @@ class CreativeSetForm extends React.Component<any, any> {
               component={renderTextField}
               label="Impressions per user per day"
             />
+          </div>
+          <div>
+            <FormControl>
+              <InputLabel>Billing Type</InputLabel>
+              <Field
+                disabled={!unlock}
+                component={renderSelectField}
+                name="billingType"
+                label="Billing Type"
+              >
+                {creativeSetBillingTypeList}
+              </Field>
+            </FormControl>
           </div>
           <div>
             <FieldArray
