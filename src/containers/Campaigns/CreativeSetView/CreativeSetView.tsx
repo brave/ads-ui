@@ -14,7 +14,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import {
-   GetCreativeInstances, GetSegments, UpdateCreativeSets, GetConfirmationTypes,
+  GetCreativeInstances, GetSegments, UpdateCreativeSets, GetConfirmationTypes,
 } from "../../../actions";
 
 import CreativeInstanceList from "../../../components/CreativeInstances/CreativeInstanceList/CreativeInstanceList";

@@ -63,10 +63,22 @@ class Admin extends React.Component<any, any> {
                 <AppBar />
                 <S.Content>
                     {
-                        this.context.sidebar === "visible" ?
-                            <SideBar type={"admin"} match={match} />
-                            :
-                            <React.Fragment />
+                        this.context.sidebar === "visible" &&
+                        <SideBar type={"admin"} match={match} />
+                    }
+                    {
+                        this.context.sidebar === "hidden" &&
+                        // placeholder to keep layout normal, todo - cleanup
+                        <div style={{
+                            position: "sticky",
+                            visibility: "hidden",
+                            marginTop: "64px",
+                            top: "64px",
+                            opacity: 0,
+                            height: "calc(100vh - 64px)",
+                            width: "255px",
+                            borderRight: "2px solid #f6f6f5"
+                        }} />
                     }
                     <S.Main>
                         <Switch>

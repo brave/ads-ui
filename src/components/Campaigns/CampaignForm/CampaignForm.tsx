@@ -77,6 +77,19 @@ class CampaignForm extends React.Component<any, any> {
         </MenuItem>
       );
     });
+    const campaignTypeList = [
+      "paid",
+      "barter",
+      "make_good",
+      "house",
+      "cause"
+    ].map((item: any) => {
+      return (
+        <MenuItem key={item} value={item}>
+          {item}
+        </MenuItem>
+      );
+    });
     return (
       <div className={classes.root}>
         <form onSubmit={handleSubmit} className={classes.form}>
@@ -164,6 +177,19 @@ class CampaignForm extends React.Component<any, any> {
               component={renderChipField}
               label="Geo Targets"
             />
+          </div>
+          <div>
+            <FormControl>
+              <InputLabel>Type</InputLabel>
+              <Field
+                disabled={!unlock}
+                component={renderSelectField}
+                name="type"
+                label="Campaign Type"
+              >
+                {campaignTypeList}
+              </Field>
+            </FormControl>
           </div>
           <div>
             <FormControl>

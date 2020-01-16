@@ -16,7 +16,7 @@ export const LeftColumn = styled("div")`
 `;
 
 export const RightColumn = styled("div")`
-  width: 70%;
+  width: 100%;
 `;
 
 export const InputContainer = styled("div")`
@@ -57,6 +57,30 @@ export const AdSetsTabButtonContainer = styled("div")`
   border-bottom-left-radius: 4px;
 `;
 
+interface CurrencySelectionProps {
+  selected: boolean;
+}
+
+export const CurrencySelection = styled("div")`
+  width: 130px;
+  height: 80px;
+  border-radius: 4px;
+  border: 1px solid #e2e2e2;
+  margin-right: 28px;
+  cursor: pointer;
+
+  ${(props: CurrencySelectionProps) =>
+    props.selected === true &&
+    `
+    border: 1px solid #F97555;
+    `
+  }
+`;
+
+interface InputProps {
+  error?: boolean;
+}
+
 export const Input = styled("input")`
   width: 100%;
   height: 42px;
@@ -67,6 +91,24 @@ export const Input = styled("input")`
   padding-left: 14px;
   font-size: 14px;
   font-family: Muli;
+
+  :focus{
+    outline-width: 0;
+    border: 1px solid #F97555;
+    transition: border .25s;
+  }
+
+  ${(props: InputProps) =>
+    props.error === true &&
+    `
+    border: 1px solid #E32444;
+
+    :focus{
+      border: 1px solid #E32444;
+    }
+    `
+  }
+  
 `
 
 export const Button = styled("div")`

@@ -16,7 +16,7 @@ class CampaignNew extends React.Component<any, any> {
     const { classes, create, auth, advertisers, history, geocodes, match } = this.props;
     const handleSubmit = async (value: any) => {
       value.advertiserId = match.params.advertiserId || advertisers[0].id;
-      value.type = "paid";
+      value.type = value.type;
       value.source = "direct";
       value.budget = parseFloat(value.budget);
       value.dailyBudget = parseFloat(value.dailyBudget);
