@@ -41,8 +41,6 @@ async function processAdSets(adSets, userId, advertiserId, accessToken) {
             createAdSetsInput.push(createAdSetInput);
         }
     }
-    console.log("whagwan here??");
-    console.log(createAdSetsInput);
     return createAdSetsInput;
 }
 
@@ -80,16 +78,11 @@ async function processCampaign(userId, advertiserId, campaign, adSets, accessTok
 
     // Good up to here, now process Ad Sets. 
     let adSetsInput = await processAdSets(adSets, userId, advertiserId, accessToken);
-    console.log("please");
-    console.log(adSetsInput);
 
     // createCampaignInput.adSets = JSON.stringify(adSetsInput);
 
 
     createCampaignInput.adSets = adSetNumberFilter(JSON.stringify(await processAdSets(adSets, userId, advertiserId, accessToken)).replace(/\"([^(\")"]+)\":/g, "$1:"));
-
-    console.log("whats going on?");
-    console.log(createCampaignInput.adSets)
 
     return createCampaignInput;
 }
@@ -177,5 +170,4 @@ async function graphQLRequest(query, accessToken) {
 export async function submitOrder(userId, advertiserId, campaign, adSets, accessToken) {
     let processedCampaign = await processCampaign(userId, advertiserId, campaign, adSets, accessToken)
     let test = await graphQLRequest(createCampaignMutation(processedCampaign), accessToken);
-    console.log(test);
 }
