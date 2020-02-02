@@ -20,7 +20,7 @@ export const LeftColumn = styled("div")`
 `;
 
 export const RightColumn = styled("div")`
-  width: 70%;
+  width: 100%;
 `;
 
 export const InputContainer = styled("div")`
@@ -89,3 +89,31 @@ export const LeftColumnContainer = styled("div")`
   width: 100%;
   margin-top: 64px;
 `;
+
+export const ErrorContainer = styled("div")`
+  display: flex;
+  width: 100%;
+  border-radius: 4px;
+  margin-top: 16px;
+`;
+
+export const ErrorIcon = styled("div")`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  background-color: #e32444;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+`;
+
+export const ErrorMessage = styled("div")`
+  width: 100%;
+  padding: 20px;
+  border-top: 1px solid #e2e2e2;
+  border-right: 1px solid #e2e2e2;
+  border-bottom: 1px solid #e2e2e2;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+`;
+

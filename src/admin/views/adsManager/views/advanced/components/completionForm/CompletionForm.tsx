@@ -28,12 +28,12 @@ class CompletionForm extends Component<any, any> {
     public async initialize() {
         // let createCampaignInput = prepareCreateCampaignInput(this.props.userId, this.props.advertiserId, this.props.campaign, this.props.adSets);
         // let createCampaignResponse = await createCampaign(createCampaignInput, this.props.auth.accessToken);
-        submitOrder(this.props.userId, this.props.advertiserId, this.props.campaign, this.props.adSets, this.props.ads, this.props.auth.accessToken);
+        submitOrder(this.props.userId, this.props.advertiserId, this.props.campaign, this.props.adSets, this.props.auth.accessToken);
     }
 
     render() {
         return (
-            <div style={{}}>
+            <div style={{ marginLeft: "-255px" }}>
                 <Confetti style={{ top: "-62px" }} colors={["#FB7959", "#4C54D2"]} />
                 <div style={{ width: "843px", height: "100%", marginLeft: "auto", marginRight: "auto", display: "flex", alignItems: "center" }}>
                     <Section style={{ marginTop: "auto", marginBottom: "auto" }} fullWidthChild={true}>

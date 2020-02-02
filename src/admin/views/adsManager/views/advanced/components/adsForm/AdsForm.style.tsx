@@ -115,7 +115,7 @@ export const Tab = styled("div")`
 
 margin-right: 28px;
 margin-bottom: 0px;
-padding-bottom: 14px;
+padding-bottom: 0px;
 font-family: "Muli";
 font-size: 16px;
 cursor: pointer;
@@ -132,8 +132,8 @@ interface CreativeSelectionProps {
 }
 
 export const CreativeSelection = styled("div")`
-  width: 220px;
-  height: 133px;
+  width: 130px;
+  height: 90px;
   border-radius: 4px;
   border: 1px solid #e2e2e2;
   margin-right: 28px;
