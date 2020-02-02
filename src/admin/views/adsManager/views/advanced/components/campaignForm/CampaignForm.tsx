@@ -60,7 +60,7 @@ class CampaignForm extends Component<any, any> {
         let campaign = this.props.campaign;
         let formattedString = e.target.value.replace(/[^\d.]/g, '');
         formattedString = parseFloat(formattedString).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        if (campaign.currency.label === "USD") {
+        if (campaign.currency === "USD") {
             formattedString = "$" + formattedString;
         }
         else {
@@ -99,7 +99,7 @@ class CampaignForm extends Component<any, any> {
         let campaign = this.props.campaign;
         let formattedString = e.target.value.replace(/[^\d.]/g, '');
         formattedString = parseFloat(formattedString).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        if (campaign.currency.label === "USD") {
+        if (campaign.currency === "USD") {
             formattedString = "$" + formattedString;
         }
         else {
@@ -123,7 +123,7 @@ class CampaignForm extends Component<any, any> {
         let campaign = this.props.campaign;
         let formattedString = e.target.value.replace(/[^\d.]/g, '');
         formattedString = parseFloat(formattedString).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        if (campaign.currency.label === "USD") {
+        if (campaign.currency === "USD") {
             formattedString = "$" + formattedString;
         }
         else {
