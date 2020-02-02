@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import Section from '../../../../../../../components/section/Section';
 import { Text } from "../../../../../../../components/Text/Text";
 import * as S from "./CampaignForm.style";
-import Switch from "react-switch";
 import Select from 'react-select';
-import DateTimePicker from "material-ui-pickers/DateTimePicker";
-import MuiPickersUtilsProvider from "material-ui-pickers/MuiPickersUtilsProvider";
-import MomentUtils from "@date-io/moment";
 import './styles/campaignForm.style.css';
 import { Icon } from '@material-ui/core';
 
@@ -21,7 +17,8 @@ const currencies = [
 const customStyles = {
     control: (provided, state) => ({
         ...provided,
-        backgroundColor: "#fafafa"
+        backgroundColor: "#fafafa",
+        height: "42px"
     }),
 }
 
@@ -63,7 +60,7 @@ class CampaignForm extends Component<any, any> {
         let campaign = this.props.campaign;
         let formattedString = e.target.value.replace(/[^\d.]/g, '');
         formattedString = parseFloat(formattedString).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        if (campaign.currency === "USD") {
+        if (campaign.currency.label === "USD") {
             formattedString = "$" + formattedString;
         }
         else {
@@ -102,7 +99,7 @@ class CampaignForm extends Component<any, any> {
         let campaign = this.props.campaign;
         let formattedString = e.target.value.replace(/[^\d.]/g, '');
         formattedString = parseFloat(formattedString).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        if (campaign.currency === "USD") {
+        if (campaign.currency.label === "USD") {
             formattedString = "$" + formattedString;
         }
         else {
@@ -126,7 +123,7 @@ class CampaignForm extends Component<any, any> {
         let campaign = this.props.campaign;
         let formattedString = e.target.value.replace(/[^\d.]/g, '');
         formattedString = parseFloat(formattedString).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        if (campaign.currency === "USD") {
+        if (campaign.currency.label === "USD") {
             formattedString = "$" + formattedString;
         }
         else {
@@ -159,18 +156,99 @@ class CampaignForm extends Component<any, any> {
         this.props.setCampaign(campaign);
     }
 
+    handleObjective(objective) {
+        let campaign = this.props.campaign;
+        campaign.objective = objective;
+        this.props.setCampaign(campaign);
+    }
+
     handleNext() {
         this.props.setSelectedAdSet(0);
         this.props.setForm("adSetsForm");
     }
 
+    addAdSet() {
+        let adSets = this.props.adSets;
+        adSets.push({
+            pricingType: '',
+            bid: '',
+            lifetimeImpressions: '',
+            dailyImpressions: '',
+            braveML: true,
+            audiences: '',
+            conversionsCheckbox: false,
+            platforms: [
+                { value: 'android', label: 'Android' },
+                { value: 'ios', label: 'iOS' },
+                { value: 'macos', label: 'Mac OS' },
+                { value: 'windows', label: 'Windows' },
+                { value: 'linux', label: 'Linux' }
+            ],
+            conversion: {
+                type: 'post-view',
+                url: '',
+                observationWindow: { value: 7, label: "7" },
+            },
+            ads: [
+                {
+                    creative: '',
+                    newCreative: true,
+                    name: '',
+                    title: '',
+                    body: '',
+                    targetUrl: '',
+                    creativeUrl: '',
+                    size: '',
+                    notificationAd: true,
+                    inPageAd: false,
+                    channels: '',
+                    previewAssets: {
+                        title: '',
+                        body: '',
+                        creativeUrl: '',
+                    }
+                }
+            ]
+        })
+        this.props.setAdSets(adSets);
+    }
+
     render() {
         return (
             <React.Fragment>
-                <div style={{ display: "flex", position: "relative", marginTop: "28px", width: "100%" }}>
-                    <div style={{ width: "660px" }}>
+                <div style={{ display: "flex", position: "relative", marginTop: "28px", width: "100%", marginBottom: "220px" }}>
+                    <div style={{ width: "720px" }}>
                         <Section fullWidthChild={true}>
                             <>
+                                <S.InnerContainer>
+                                    <S.RightColumn>
+                                        <Text content={"Campaign Objective"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
+                                        <div style={{ display: "flex" }}>
+                                            <Text content={"Choose a campaign objective that fits your business goals."} style={{ marginTop: "2px", marginBottom: "28px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                            <Text title="Wiki's coming soon!" content={"Learn More."} color={"#E0694C"} style={{ marginTop: "2px", marginBottom: "28px", marginLeft: "4px", cursor: "pointer" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                        </div>
+
+                                        <S.InputContainer style={{ width: "100%" }}>
+                                            <div style={{ display: "flex", justifyContent: "space-between", width: "100%", marginTop: "14px", marginBottom: "-14px" }}>
+                                                <S.Objective selected={this.props.campaign.objective === 'awareness'} onClick={() => this.handleObjective("awareness")}>
+                                                    <Text content={"Awareness"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                    <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "-2px", marginLeft: "3px" }}>info</Icon>
+                                                </S.Objective>
+                                                <S.Objective selected={this.props.campaign.objective === 'engagement'} onClick={() => this.handleObjective("engagement")}>
+                                                    <Text content={"Engagement"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                    <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "-2px", marginLeft: "3px" }}>info</Icon>
+                                                </S.Objective>
+                                                <S.Objective selected={this.props.campaign.objective === 'conversion'} onClick={() => this.handleObjective("conversion")}>
+                                                    <Text content={"Conversion"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                    <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "-2px", marginLeft: "3px" }}>info</Icon>
+                                                </S.Objective>
+                                            </div>
+                                        </S.InputContainer>
+
+                                    </S.RightColumn>
+                                </S.InnerContainer>
+
+                                <div style={{ width: "100%", borderBottom: "1px solid #e2e2e2", marginTop: "28px", marginBottom: "28px" }}></div>
                                 <S.InnerContainer>
                                     <S.RightColumn>
                                         <Text content={"Campaign Details"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
@@ -180,10 +258,16 @@ class CampaignForm extends Component<any, any> {
                                         </div>
 
 
+
+
                                         <S.InputContainer>
                                             <Text content={"Campaign Name"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                             <S.Input value={this.props.campaign.name} onChange={(e) => this.handleCampaignName(e)} placeholder="Enter a campaign name..." autoComplete="off" type="text" />
                                         </S.InputContainer>
+
+                                        <div style={{ width: "99%", display: "flex", marginTop: "-12px", marginRight: "8px", marginBottom: "12px" }}>
+                                            <Text content={"+ Create new ad set"} onClick={() => this.addAdSet()} color={"#E0694C"} style={{ marginTop: "2px", marginLeft: "auto", cursor: "pointer" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                        </div>
 
                                         <div style={{ display: "flex", width: "100%", alignItems: "center" }}>
                                             <S.InputContainer style={{ width: "45%" }}>
@@ -229,6 +313,8 @@ class CampaignForm extends Component<any, any> {
                                             </div>
                                         }
 
+
+
                                     </S.RightColumn>
                                 </S.InnerContainer>
 
@@ -241,12 +327,12 @@ class CampaignForm extends Component<any, any> {
                                             <Text content={"Set a limit on how much your campaign will spend."} style={{ marginTop: "2px", marginBottom: "28px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                             <Text title="Wiki's coming soon!" content={"Learn More."} color={"#E0694C"} style={{ marginTop: "2px", marginBottom: "28px", marginLeft: "4px", cursor: "pointer" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />                                        </div>
 
-                                        <div style={{ display: "flex" }}>
+                                        {/* <div style={{ display: "flex" }}>
                                             <Text content={"Currency"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                             <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "1px", marginLeft: "2px" }}>info</Icon>
-                                        </div>
+                                        </div> */}
 
-                                        <div style={{ display: "flex", marginBottom: "22px", marginTop: "6px" }}>
+                                        {/* <div style={{ display: "flex", marginBottom: "22px", marginTop: "6px" }}>
 
                                             <S.CurrencySelection onClick={() => { this.handleCurrency("BAT") }} selected={this.props.campaign.currency === "BAT"}>
                                                 <img style={{ display: "block", height: "30px", marginLeft: "auto", marginRight: "auto", marginTop: "18px", userSelect: "none" }} src={BAT}></img>
@@ -259,18 +345,11 @@ class CampaignForm extends Component<any, any> {
                                             </S.CurrencySelection>
 
 
-                                        </div>
+                                        </div> */}
 
                                         {/* <S.InputContainer>
                                             <Text content={"Currency"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <div style={{ marginTop: "4px" }}>
-                                                <Select
-                                                    styles={customStyles}
-                                                    value={this.props.campaign.currency}
-                                                    onChange={this.handleCurrency}
-                                                    options={currencies}
-                                                />
-                                            </div>
+                                            
                                         </S.InputContainer> */}
 
                                         <S.InputContainer>
@@ -278,7 +357,17 @@ class CampaignForm extends Component<any, any> {
                                                 <Text content={"Lifetime Budget"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                                 <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "1px", marginLeft: "2px" }}>info</Icon>
                                             </div>
-                                            <S.Input value={this.props.campaign.totalBudget} onChange={(e) => this.handleLifetimeBudget(e)} onBlur={(e) => this.formatLifetimeBudget(e)} placeholder="Enter a lifetime budget..." error={this.props.validations?.budget?.valid === false} />
+                                            <div style={{ display: "flex" }}>
+                                                <S.Input style={{ marginRight: "12px" }} value={this.props.campaign.totalBudget} onChange={(e) => this.handleLifetimeBudget(e)} onBlur={(e) => this.formatLifetimeBudget(e)} placeholder="Enter a lifetime budget..." error={this.props.validations?.budget?.valid === false} />
+                                                <div style={{ marginTop: "4px", width: "160px" }}>
+                                                    <Select
+                                                        styles={customStyles}
+                                                        value={this.props.campaign.currency}
+                                                        onChange={this.handleCurrency}
+                                                        options={currencies}
+                                                    />
+                                                </div>
+                                            </div>
                                         </S.InputContainer>
 
                                         <S.InputContainer>
@@ -286,7 +375,17 @@ class CampaignForm extends Component<any, any> {
                                                 <Text content={"Daily Budget"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                                 <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "1px", marginLeft: "2px" }}>info</Icon>
                                             </div>
-                                            <S.Input value={this.props.campaign.dailyBudget} onChange={(e) => this.handleDailyBudget(e)} onBlur={(e) => this.formatDailyBudget(e)} placeholder="Enter a daily budget..." error={this.props.validations?.budget?.valid === false} />
+                                            <div style={{ display: "flex" }}>
+                                                <S.Input style={{ marginRight: "12px" }} value={this.props.campaign.dailyBudget} onChange={(e) => this.handleDailyBudget(e)} onBlur={(e) => this.formatDailyBudget(e)} placeholder="Enter a daily budget..." error={this.props.validations?.budget?.valid === false} />
+                                                <div style={{ marginTop: "4px", width: "160px" }}>
+                                                    <Select
+                                                        styles={customStyles}
+                                                        value={this.props.campaign.currency}
+                                                        onChange={this.handleCurrency}
+                                                        options={currencies}
+                                                    />
+                                                </div>
+                                            </div>
                                         </S.InputContainer>
 
                                         {
@@ -304,14 +403,14 @@ class CampaignForm extends Component<any, any> {
                                     </S.RightColumn>
                                 </S.InnerContainer>
                                 <div style={{ width: "100%", borderBottom: "1px solid #e2e2e2", marginTop: "28px", marginBottom: "56px" }}></div>
-                                <S.InnerContainer>
+
+                                {/* <S.InnerContainer>
                                     <S.RightColumn>
                                         <Text content={"Pricing"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
                                         <div style={{ display: "flex" }}>
                                             <Text content={"Decide how your budget will be spent."} style={{ marginTop: "2px", marginBottom: "28px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                             <Text title="Wiki's coming soon!" content={"Learn More."} color={"#E0694C"} style={{ marginTop: "2px", marginBottom: "28px", marginLeft: "4px", cursor: "pointer" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />                                        </div>
 
-                                        {/* CPM / CPC */}
                                         <S.InputContainer>
                                             <div style={{ display: "flex" }}>
                                                 <Text content={"Pricing Type"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
@@ -335,7 +434,7 @@ class CampaignForm extends Component<any, any> {
 
                                     </S.RightColumn>
                                 </S.InnerContainer>
-                                <div style={{ width: "100%", borderBottom: "1px solid #e2e2e2", marginTop: "28px", marginBottom: "56px" }}></div>
+                                <div style={{ width: "100%", borderBottom: "1px solid #e2e2e2", marginTop: "28px", marginBottom: "56px" }}></div> */}
 
                                 <S.InnerContainer>
                                     {/* <S.LeftColumn>
@@ -365,15 +464,23 @@ class CampaignForm extends Component<any, any> {
                                             </div>
                                         </S.InputContainer>
 
+                                        <div onClick={() => this.handleNext()} style={{ display: "flex", justifyContent: "center", padding: "0px 20px", width: "100px", background: "#F87454", color: "white", border: "none", borderRadius: "100px 100px 100px 100px", marginLeft: "auto", marginTop: "56px", cursor: "pointer" }}>
+                                            <span>
+                                                <Text style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"}>
+                                                    Next
+                                                </Text>
+                                            </span>
+                                        </div>
+
                                     </S.RightColumn>
                                 </S.InnerContainer>
 
-                                <div style={{ width: "100%", borderBottom: "1px solid #e2e2e2", marginTop: "28px", marginBottom: "56px" }}></div>
+                                {/* <div style={{ width: "100%", borderBottom: "1px solid #e2e2e2", marginTop: "28px", marginBottom: "56px" }}></div> */}
                                 <S.InnerContainer>
 
 
 
-                                    <S.RightColumn>
+                                    {/* <S.RightColumn>
                                         <Text content={"Etc."} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
                                         <Text content={""} style={{ marginTop: "2px", marginBottom: "28px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
 
@@ -391,7 +498,7 @@ class CampaignForm extends Component<any, any> {
                                                 </Text>
                                             </span>
                                         </div>
-                                    </S.RightColumn>
+                                    </S.RightColumn> */}
 
                                 </S.InnerContainer>
                             </>

@@ -8,9 +8,9 @@ class OSNotificationCreativePreview extends Component<any, any> {
             <div>
                 <>
 
-                    <div style={{ backgroundColor: "rgb(197, 197, 211)", borderRadius: "4px", width: "100%", height: "133px", border: "1px solid #dfdfdf", marginBottom: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <div style={{ backgroundColor: "white", borderRadius: "4px", width: "100%", height: "133px", marginBottom: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
 
-                        <div style={{ height: "106px", width: "359px", borderRadius: "13px", backgroundColor: "rgba(248, 248, 248, 0.82)", padding: "8px" }}>
+                        <div style={{ height: "106px", width: "359px", borderRadius: "13px", border: "1px solid #e2e2e2", backgroundColor: "rgba(248, 248, 248, 0.82)", padding: "8px" }}>
                             <div style={{ display: "flex", width: "100%" }}>
                                 <img src={BraveLogo} style={{ height: "26px", width: "26px" }} />
                                 <Text content={"BRAVE REWARDS"} color={"rgb(142, 142, 147)"} style={{ paddingTop: "3px", paddingLeft: "3px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
@@ -26,8 +26,8 @@ class OSNotificationCreativePreview extends Component<any, any> {
                     </div>
 
 
-                    <div style={{ backgroundColor: "rgb(197, 197, 211)", borderRadius: "4px", width: "100%", height: "133px", border: "1px solid #dfdfdf", marginTop: "16px", marginBottom: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                        <div style={{ height: "82px", width: "326px", borderRadius: "13px", backgroundColor: "rgb(250, 250, 250)", padding: "8px" }}>
+                    <div style={{ backgroundColor: "white", borderRadius: "4px", width: "100%", height: "133px", marginTop: "16px", marginBottom: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <div style={{ height: "82px", width: "326px", borderRadius: "13px", border: "1px solid #e2e2e2", backgroundColor: "rgb(250, 250, 250)", padding: "8px" }}>
                             <div style={{ display: "flex", width: "100%" }}>
                                 <img src={BraveLogo} style={{ height: "44px", width: "44px" }} />
                                 <div style={{ display: "flex", width: "100%", marginTop: "4px" }}>
@@ -41,7 +41,7 @@ class OSNotificationCreativePreview extends Component<any, any> {
                     </div>
 
 
-                    <div style={{ backgroundColor: "rgb(197, 197, 211)", borderRadius: "4px", width: "100%", height: "133px", border: "1px solid #dfdfdf", marginTop: "16px", marginBottom: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <div style={{ backgroundColor: "white", borderRadius: "4px", width: "100%", height: "133px", marginTop: "16px", marginBottom: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
                         <div style={{ height: "126px", width: "273px", backgroundColor: "rgb(61, 61, 61)", padding: "8px" }}>
                             <div style={{ display: "flex", width: "100%" }}>
                                 <img src={BraveLogo} style={{ height: "44px", width: "44px", marginTop: "5px" }} />
@@ -58,8 +58,8 @@ class OSNotificationCreativePreview extends Component<any, any> {
 
 
 
-                    <div style={{ backgroundColor: "rgb(197, 197, 211)", borderRadius: "4px", width: "100%", height: "133px", border: "1px solid #dfdfdf", marginTop: "16px", marginBottom: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                        <div style={{ height: "72px", width: "326px", borderRadius: "13px", backgroundColor: "rgb(250, 250, 250)", padding: "8px" }}>
+                    <div style={{ backgroundColor: "white", borderRadius: "4px", width: "100%", height: "133px", marginTop: "16px", marginBottom: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <div style={{ height: "72px", width: "326px", borderRadius: "13px", border: "1px solid #e2e2e2", backgroundColor: "rgb(250, 250, 250)", padding: "8px" }}>
                             <div style={{ display: "flex", width: "100%" }}>
                                 <img src={BraveLogo} style={{ height: "44px", width: "44px", marginTop: "5px" }} />
                                 <div style={{ marginTop: '12px' }}>
@@ -79,7 +79,7 @@ class OSNotificationCreativePreview extends Component<any, any> {
                         </div>
                     </div>
 
-                    <Text style={{ marginBottom: "28px" }} content={"* Please note, we're working on getting the preview just right, this is a close approximation to what OS vendors will display"} sizes={[16, 16, 15, 15, 11]} fontFamily={"Poppins"} />
+                    {/* <Text style={{ marginBottom: "28px" }} content={"* Please note, we're working on getting the preview just right, this is a close approximation to what OS vendors will display"} sizes={[16, 16, 15, 15, 11]} fontFamily={"Poppins"} /> */}
                 </>
             </div>
         );
