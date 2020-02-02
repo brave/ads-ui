@@ -9,6 +9,7 @@ import { fetchCreativeAssets, fetchCreativeType } from "./lib/AdsForm.library";
 
 import Notification from "./assets/notification.png";
 import PublisherAd from "./assets/publisher_ad.png";
+import { Icon } from '@material-ui/core';
 
 const customStyles = {
     control: (provided, state) => ({
@@ -263,7 +264,7 @@ class AdsForm extends Component<any, any> {
                 if (index === this.props.selectedAd) {
                     return (
                         <S.Tab selected={true} onContextMenu={(e) => this.deleteSelectedAd(e, index)} key={index}>
-                            <Text content={`Ad ${index + 1}`} sizes={[16, 16, 15, 15, 16]} fontFamily={"Poppins"} />
+                            <Text content={`Ad ${index + 1}`} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
                         </S.Tab>
                     )
                 }
@@ -271,7 +272,7 @@ class AdsForm extends Component<any, any> {
                     return (
                         <S.Tab selected={false} onClick={() => this.setSelectedAd(index)} onContextMenu={(e) => this.deleteSelectedAd(e, index)} key={index}>
                             <div style={{ opacity: .5 }}>
-                                <Text content={`Ad ${index + 1}`} sizes={[16, 16, 15, 15, 16]} fontFamily={"Poppins"} />
+                                <Text content={`Ad ${index + 1}`} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
                             </div>
                         </S.Tab>
                     );
@@ -296,14 +297,32 @@ class AdsForm extends Component<any, any> {
                         </S.AdSetsTabButtonContainer>
                     </S.AdSetsTabs>
                 </div> */}
-                <div style={{ display: "flex", marginTop: "28px" }}>
-                    <div style={{ width: "1152px" }}>
+                <div style={{ display: "flex", position: "relative", marginTop: "28px", width: "100%" }}>
+                    <div style={{ width: "720px" }}>
                         <Section fullWidthChild={true}>
                             <>
-                                <S.Container>
+
+                                {/* <Text content={"Ads"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
+                                <div style={{ display: "flex" }}>
+                                    <Text content={"Define one or many advertisements that promote your business."} style={{ marginTop: "2px", marginBottom: "14px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    <Text content={"Learn More."} color={"#E0694C"} style={{ marginTop: "2px", marginBottom: "14px", marginLeft: "4px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                </div> */}
+
+                                {/* <div style={{ display: "flex" }}>
+                                    <Text content={"Number of Ads"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "1px", marginLeft: "2px" }}>info</Icon>
+                                </div> */}
+
+                                <S.Container style={{ marginTop: "8px" }}>
                                     {this.renderAdSetsTabs()}
-                                    <S.Tab selected={false} onClick={() => { this.addAd() }}> <Text content={`Create New Ad +`} sizes={[16, 16, 15, 15, 16]} fontFamily={"Poppins"} /></S.Tab>
+                                    {/* <S.Tab selected={false} onClick={() => { this.addAd() }}> <Text content={`+ Create new ad`} sizes={[16, 16, 15, 15, 15]} fontFamily={"Poppins"} /></S.Tab> */}
                                 </S.Container>
+
+                                <div style={{ width: "99%", display: "flex", marginTop: "-12px", marginRight: "8px", marginBottom: "12px" }}>
+                                    <Text content={"+ Create new ad"} color={"#E0694C"} onClick={() => { this.addAd() }} style={{ marginTop: "2px", marginLeft: "auto", cursor: "pointer" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                </div>
+
+                                {/* <div style={{ width: "100%", borderBottom: "1px solid #e2e2e2", marginTop: "28px", marginBottom: "28px" }}></div> */}
 
                                 <Text content={"Creative"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
                                 <div style={{ display: "flex" }}>
@@ -312,7 +331,7 @@ class AdsForm extends Component<any, any> {
                                 </div>
 
 
-                                <div style={{ display: "flex", marginBottom: "14px" }}>
+                                {/* <div style={{ display: "flex", marginBottom: "14px" }}>
 
                                     <div style={{ display: "flex", marginTop: "8px", marginBottom: "12px" }}>
                                         <input style={{ marginRight: "8px" }} type="radio" checked={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].newCreative} onChange={(e) => this.handleNewCreative(true)} />
@@ -324,12 +343,36 @@ class AdsForm extends Component<any, any> {
                                         <Text content={"Use Existing Creative"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                     </div>
 
+                                </div> */}
+
+                                <div style={{ display: "flex", marginTop: "8px" }}>
+                                    <Text content={"Creative Type"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "1px", marginLeft: "2px" }}>info</Icon>
                                 </div>
 
+                                <div style={{ display: "flex", marginBottom: "24px", marginTop: "12px" }}>
+                                    <S.CreativeSelection onClick={() => this.handleCreativeSelection("notificationAd")} selected={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].notificationAd}>
+                                        <img style={{ display: "block", height: "60px", marginLeft: "auto", marginRight: "auto" }} src={Notification}></img>
+                                        <Text style={{ textAlign: "center" }} content={"Notification Ad"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    </S.CreativeSelection>
+
+                                    {/* <S.CreativeSelection onClick={() => this.handleCreativeSelection("inPageAd")} selected={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].inPageAd}>
+                                        <img style={{ display: "block", height: "60px", marginLeft: "auto", marginRight: "auto" }} src={PublisherAd}></img>
+                                        <Text style={{ textAlign: "center" }} content={"In Page Ad"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    </S.CreativeSelection> */}
+                                </div>
+
+                                <div style={{ width: "100%", borderBottom: "1px solid #e2e2e2", marginTop: "28px", marginBottom: "28px" }}></div>
+
+
+                                <Text content={"Creative Details"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
                                 <div style={{ display: "flex" }}>
+                                    <Text content={"Define the look and feel of your ads."} style={{ marginTop: "2px", marginBottom: "14px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    <Text content={"Learn More."} color={"#E0694C"} style={{ marginTop: "2px", marginBottom: "14px", marginLeft: "4px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                </div>
 
-                                    <div style={{ width: "45%", marginRight: "56px" }}>
-
+                                <div>
+                                    <div style={{}}>
                                         {
                                             this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].newCreative === false ?
                                                 <>
@@ -359,17 +402,7 @@ class AdsForm extends Component<any, any> {
 
                                                 :
                                                 <>
-                                                    <div style={{ display: "flex", marginBottom: "24px" }}>
-                                                        <S.CreativeSelection onClick={() => this.handleCreativeSelection("notificationAd")} selected={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].notificationAd}>
-                                                            <img style={{ display: "block", height: "100px", marginLeft: "auto", marginRight: "auto" }} src={Notification}></img>
-                                                            <Text style={{ textAlign: "center" }} content={"Notification Ad"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                        </S.CreativeSelection>
 
-                                                        <S.CreativeSelection onClick={() => this.handleCreativeSelection("inPageAd")} selected={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].inPageAd}>
-                                                            <img style={{ display: "block", height: "100px", marginLeft: "auto", marginRight: "auto" }} src={PublisherAd}></img>
-                                                            <Text style={{ textAlign: "center" }} content={"In Page Ad"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                        </S.CreativeSelection>
-                                                    </div>
 
                                                     {
                                                         this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].notificationAd &&
@@ -431,18 +464,22 @@ class AdsForm extends Component<any, any> {
 
                                     </div>
 
-                                    <div style={{ width: "55%" }}>
-                                        {
-                                            this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].notificationAd &&
-                                            <OSNotificationCreativePreview title={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].previewAssets.title} body={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].previewAssets.body} />
-                                        }
-                                        {/* {
-                                            this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].inPageAd &&
-                                             <div>In Page creative preview coming soon!</div>
-                                        } */}
-                                    </div>
+                                    {/* <div style={{ width: "50%", marginLeft: "28px", marginTop: "23px" }}>
+                                        <div>
+                                            {
+                                                this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].notificationAd &&
+                                                <OSNotificationCreativePreview title={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].previewAssets.title} body={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].previewAssets.body} />
+                                            }
+                                            {
+                                                this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].inPageAd &&
+                                                <div>In Page creative preview coming soon!</div>
+                                            }
+                                        </div>
+
+                                    </div> */}
 
                                 </div>
+
                                 <div style={{ display: "flex" }}>
                                     <S.SecondaryButton onClick={() => this.handleBack()} style={{ marginRight: "auto" }}>
                                         <Text content={"Back"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
@@ -454,6 +491,22 @@ class AdsForm extends Component<any, any> {
 
                             </>
                         </Section>
+                    </div>
+                    <div style={{ width: "350px", height: "700px", position: "relative", marginLeft: "28px", border: "1px solid #e2e2e2", borderRadius: "4px", padding: "28px" }}>
+                        <Text content={"Creative Preview"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
+                        <div style={{ display: "flex" }}>
+                            <Text content={"Preview your creatives as you design them."} style={{ marginTop: "2px", marginBottom: "14px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                        </div>
+                        <div>
+                            {
+                                this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].notificationAd &&
+                                <OSNotificationCreativePreview title={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].previewAssets.title} body={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].previewAssets.body} />
+                            }
+                            {
+                                this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].inPageAd &&
+                                <div>In Page creative preview coming soon!</div>
+                            }
+                        </div>
                     </div>
                 </div>
             </React.Fragment >

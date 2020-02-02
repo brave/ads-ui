@@ -111,6 +111,28 @@ export const Input = styled("input")`
   
 `
 
+interface ObjectiveProps {
+  selected: boolean;
+}
+
+export const Objective = styled("div")`
+  width: 200px;
+  border: 1px solid #e2e2e2;
+  border-radius: 4px;
+  height: 48px; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  cursor: pointer;
+
+  ${(props: ObjectiveProps) =>
+    props.selected === true &&
+    `
+    border: 1px solid #E0694C;
+    `
+  }
+`;
+
 export const Button = styled("div")`
   display: flex;
   justify-content: center;

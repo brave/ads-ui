@@ -22,11 +22,11 @@ class AdvancedOrderSidebar extends Component<any, any> {
                             <S.NavSubHeader>
                                 <S.NavSubItem>
                                     <S.Bracket></S.Bracket>
-                                    <Text style={{ marginTop: "10px", marginLeft: "8px" }} content={"Audiences"} sizes={[16, 16, 15, 15, 12]} fontFamily={"Poppins"} />
+                                    <Text style={{ marginTop: "10px", marginLeft: "8px" }} content={"Ad Set Details"} sizes={[16, 16, 15, 15, 12]} fontFamily={"Poppins"} />
                                 </S.NavSubItem>
                                 <S.NavSubItem>
                                     <S.Bracket></S.Bracket>
-                                    <Text style={{ marginTop: "10px", marginLeft: "8px" }} content={"Conversions"} sizes={[16, 16, 15, 15, 12]} fontFamily={"Poppins"} />
+                                    <Text style={{ marginTop: "10px", marginLeft: "8px" }} content={"Audiences"} sizes={[16, 16, 15, 15, 12]} fontFamily={"Poppins"} />
                                 </S.NavSubItem>
                                 <S.NavSubItem>
                                     <S.Bracket></S.Bracket>
@@ -54,15 +54,15 @@ class AdvancedOrderSidebar extends Component<any, any> {
                                 <S.NavSubHeader>
                                     <S.NavSubItem>
                                         <S.Bracket></S.Bracket>
+                                        <Text style={{ marginTop: "10px", marginLeft: "8px" }} content={"Objective"} sizes={[16, 16, 15, 15, 12]} fontFamily={"Poppins"} />
+                                    </S.NavSubItem>
+                                    <S.NavSubItem>
+                                        <S.Bracket></S.Bracket>
                                         <Text style={{ marginTop: "10px", marginLeft: "8px" }} content={"Campaign Details"} sizes={[16, 16, 15, 15, 12]} fontFamily={"Poppins"} />
                                     </S.NavSubItem>
                                     <S.NavSubItem>
                                         <S.Bracket></S.Bracket>
                                         <Text style={{ marginTop: "10px", marginLeft: "8px" }} content={"Budget"} sizes={[16, 16, 15, 15, 12]} fontFamily={"Poppins"} />
-                                    </S.NavSubItem>
-                                    <S.NavSubItem>
-                                        <S.Bracket></S.Bracket>
-                                        <Text style={{ marginTop: "10px", marginLeft: "8px" }} content={"Location"} sizes={[16, 16, 15, 15, 12]} fontFamily={"Poppins"} />
                                     </S.NavSubItem>
                                 </S.NavSubHeader>
                             </S.NavInnerContainer>
