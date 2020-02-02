@@ -17,3 +17,10 @@ body {
   height: 100%;
 }
 
+input[type="datetime-local"]::-webkit-clear-button {
+  display: none;
+}
+
+input[type="datetime-local"]::-webkit-inner-spin-button {
+  display: none;
+}
