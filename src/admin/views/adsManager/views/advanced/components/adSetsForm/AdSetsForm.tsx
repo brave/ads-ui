@@ -217,7 +217,7 @@ class AdSetsForm extends Component<any, any> {
                                     <S.RightColumn>
                                         <Text content={"Ad Set Details"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
                                         <div style={{ display: "flex" }}>
-                                            <Text content={"Select the audience you would like to advertise to by interests."} style={{ marginTop: "2px", marginBottom: "28px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                            <Text content={"Ad sets are used to define your audience and how budget is spent."} style={{ marginTop: "2px", marginBottom: "28px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                             <Text content={"Learn More."} color={"#E0694C"} style={{ marginTop: "2px", marginBottom: "28px", marginLeft: "4px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                         </div>
                                         {/* Audiences */}

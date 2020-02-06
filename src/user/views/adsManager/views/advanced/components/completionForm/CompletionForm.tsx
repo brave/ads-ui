@@ -1,35 +1,14 @@
 import React, { Component } from 'react';
-import Context from "../../../../../../../state/context";
 import Confetti from 'react-confetti'
 
-import { createAd, createAdSet, createCampaign, prepareCreateCampaignInput, prepareCreateAdInput, prepareCreateAdSetsInput } from "./lib/CompletionFormLibrary";
 import Section from '../../../../../../../components/section/Section';
 import { Text } from "../../../../../../../components/Text/Text";
 import present from "./assets/present.png";
 import { Link } from 'react-router-dom';
 
-import gql from 'graphql-tag';
-import { useMutation } from '@apollo/react-hooks';
-import { submitOrder } from './lib/CompletionForm.library';
-
 const linkStyle = { textDecoration: "none", color: "inherit" };
 
 class CompletionForm extends Component<any, any> {
-    constructor(props) {
-        super(props);
-        this.state = {
-            saving: undefined
-        }
-    }
-    public componentDidMount() {
-        this.initialize();
-    }
-
-    public async initialize() {
-        // let createCampaignInput = prepareCreateCampaignInput(this.props.userId, this.props.advertiserId, this.props.campaign, this.props.adSets);
-        // let createCampaignResponse = await createCampaign(createCampaignInput, this.props.auth.accessToken);
-        submitOrder(this.props.userId, this.props.advertiserId, this.props.campaign, this.props.adSets, this.props.auth.accessToken);
-    }
 
     render() {
         return (

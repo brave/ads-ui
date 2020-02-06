@@ -81,7 +81,7 @@ function initializeCampaign() {
 function initializeAdSets() {
     let adSets = [
         {
-            pricingType: '',
+            pricingType: { value: 'cpm', label: 'Impressions (cpm)' },
             bid: '',
             lifetimeImpressions: '',
             dailyImpressions: '',
@@ -218,11 +218,17 @@ export function performValidation(context, validationRule, campaign, adSets, ads
                 validations.adSets[adSetIndex].pricingType.errorMessage = `Pricing type required, please select a pricing type.`;
             }
 
-            if (adSet.bid === '') {
-                validations.adSets[adSetIndex].bid = {} as any;
-                validations.adSets[adSetIndex].bid.valid = false;
-                validations.adSets[adSetIndex].bid.errorMessage = `Bid is required, please enter a bid.`;
-            }
+            // if (adSet.bid === '') {
+            //     validations.adSets[adSetIndex].bid = {} as any;
+            //     validations.adSets[adSetIndex].bid.valid = false;
+            //     validations.adSets[adSetIndex].bid.errorMessage = `Bid is required, please enter a bid.`;
+            // }
+
+            // if (parseFloat(adSet.bid.replace(/[^\d.]/g, '')) > parseFloat(campaign.dailyBudget.replace(/[^\d.]/g, ''))) {
+            //     validations.adSets[adSetIndex].bidBudget = {} as any;
+            //     validations.adSets[adSetIndex].bidBudget.valid = false;
+            //     validations.adSets[adSetIndex].bidBudget.errorMessage = `Bid cannot be greater than daily budget, please update bid.`;
+            // }
 
             if (adSet.platforms === '' || adSet.platforms === null) {
                 validations.adSets[adSetIndex].platforms = {} as any;
@@ -277,6 +283,19 @@ export function performValidation(context, validationRule, campaign, adSets, ads
                         Object.keys(adSet).forEach((key) => {
                             if (adSet[key].valid === false) {
                                 validations.valid = false;
+                            }
+                            if (key === "ads") {
+                                if (adSet["ads"]) {
+                                    adSet["ads"].forEach((ad) => {
+                                        if (Object.keys(ad)) {
+                                            Object.keys(ad).forEach((key) => {
+                                                if (ad[key].valid === false) {
+                                                    validations.valid = false;
+                                                }
+                                            });
+                                        }
+                                    })
+                                }
                             }
                         });
                     }

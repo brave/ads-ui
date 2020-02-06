@@ -66,10 +66,10 @@ class Selection extends Component<any, any> {
                     </Text>
                     </div>
                     <div style={{ width: "100%", height: "400px", marginLeft: "auto", marginRight: "auto", marginTop: "12px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                        <div className={"box"} style={{ display: "flex", width: "340px", height: "370px", borderRadius: "4px", border: "1px solid #ededed", padding: "28px", flexDirection: "column", alignItems: "center" }}>
+                        <div className={"box"} style={{ cursor: "not-allowed", display: "flex", width: "340px", height: "370px", borderRadius: "4px", border: "1px solid #ededed", padding: "28px", flexDirection: "column", alignItems: "center" }}>
                             <img style={{ height: "180px", marginTop: "0px", marginLeft: "auto", marginRight: "auto", transform: "scale(-1, 1)" }} src={Test1} />
                             <Text style={{ marginTop: "16px" }} sizes={[16, 16, 15, 15, 20]} fontFamily={"Poppins"}>
-                                Quick Order
+                                Coming Soon!
                         </Text>
                             <Text style={{ marginTop: "12px", marginLeft: "6px", marginRight: "1px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Muli"}>
                                 Publish a campaign in less than 5 minutes. Define your creatives and audience and you're on your way!
@@ -87,10 +87,10 @@ class Selection extends Component<any, any> {
                     </Text>
                             </div>
                         </Link>
-                        <div className={"box"} style={{ display: "flex", width: "340px", height: "370px", borderRadius: "4px", border: "1px solid #ededed", padding: "28px", flexDirection: "column", alignItems: "center" }}>
+                        <div className={"box"} style={{ cursor: "not-allowed", display: "flex", width: "340px", height: "370px", borderRadius: "4px", border: "1px solid #ededed", padding: "28px", flexDirection: "column", alignItems: "center" }}>
                             <img style={{ height: "180px", marginTop: "0px", marginLeft: "auto", marginRight: "auto" }} src={Test2} />
                             <Text style={{ marginTop: "16px" }} sizes={[16, 16, 15, 15, 20]} fontFamily={"Poppins"}>
-                                Automated Order
+                                Coming Soon!
                         </Text>
                             <Text style={{ marginTop: "12px", marginLeft: "6px", marginRight: "6px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Muli"}>
                                 Upload a prepared CSV or script and we'll convert it into a campaign for your review.

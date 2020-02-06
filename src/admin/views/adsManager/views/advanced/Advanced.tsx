@@ -104,9 +104,9 @@ class Advanced extends Component<any, any> {
             case "adsForm":
                 return <AdsForm setAdSets={this.setAdSets} adSets={this.state.adSets} selectedAdSet={this.state.selectedAdSet} setSelectedAdSet={this.setSelectedAdSet} selectedAd={this.state.selectedAd} setSelectedAd={this.setSelectedAd} setForm={this.setForm} creativeOptions={this.state.creativeOptions} auth={this.props.auth} validations={this.state.validations} validate={this.validate} />
             case "reviewForm":
-                return <ReviewForm campaign={this.state.campaign} adSets={this.state.adSets} ads={this.state.ads} setForm={this.setForm} validations={this.state.validations} validate={this.validate} />
+                return <ReviewForm campaign={this.state.campaign} adSets={this.state.adSets} ads={this.state.ads} setForm={this.setForm} auth={this.props.auth} advertiserId={this.state.advertiserId} userId={this.state.userId} setSelectedAdSet={this.setSelectedAdSet} setSelectedAd={this.setSelectedAd} validations={this.state.validations} validate={this.validate} />
             case "completionForm":
-                return <CompletionForm campaign={this.state.campaign} adSets={this.state.adSets} ads={this.state.ads} auth={this.props.auth} advertiserId={this.state.advertiserId} userId={this.state.userId} />
+                return <CompletionForm />
         }
     }
 
@@ -114,8 +114,10 @@ class Advanced extends Component<any, any> {
         return (
             this.context.loading === false &&
             <>
+                {/* <div style={{ position: "absolute", width: "100%", height: "100%", backgroundColor: "green" }}></div> */}
+
                 {this.state.form !== "completionForm" &&
-                    <AdvancedOrderSidebar campaign={this.state.campaign} adSets={this.state.adSets} selectedAdSet={this.state.selectedAdSet} setSelectedAdSet={this.setSelectedAdSet} form={this.state.form} setForm={this.setForm} />
+                    <AdvancedOrderSidebar campaign={this.state.campaign} adSets={this.state.adSets} setAdSets={this.setAdSets} selectedAdSet={this.state.selectedAdSet} setSelectedAdSet={this.setSelectedAdSet} form={this.state.form} setForm={this.setForm} />
                 }
                 {/* <FormProgress form={this.state.form} setForm={this.setForm} errors={this.state.errors} campaign={this.state.campaign} adSets={this.state.adSets} ads={this.state.ads} /> */}
                 {this.renderForm()}

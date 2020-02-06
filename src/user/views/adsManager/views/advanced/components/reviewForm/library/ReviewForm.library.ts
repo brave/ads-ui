@@ -1,7 +1,8 @@
-import { createAdMutation, createAdSetMutation, createCampaignMutation, createCreativeMutation } from "./CompletionFormQueries";
+import { createCampaignMutation, createCreativeMutation } from "./ReviewForm.queries";
+import normalizeUrl from 'normalize-url';
 
 
-async function processAdSets(adSets, userId, advertiserId, accessToken) {
+async function processAdSets(adSets, userId, advertiserId, accessToken, campaign) {
     let createAdSetsInput = [] as any;
     if (adSets) {
         for (const adSet of adSets) {
@@ -36,7 +37,7 @@ async function processAdSets(adSets, userId, advertiserId, accessToken) {
             // Impl. Platforms and Conversion
             // Good Up to here
 
-            let ads = await processAds(adSet, userId, advertiserId, accessToken);
+            let ads = await processAds(adSet, userId, advertiserId, accessToken, campaign);
             createAdSetInput.ads = ads;
             createAdSetsInput.push(createAdSetInput);
         }
@@ -77,12 +78,12 @@ async function processCampaign(userId, advertiserId, campaign, adSets, accessTok
     createCampaignInput.geoTargets = geoTargets;
 
     // Good up to here, now process Ad Sets. 
-    let adSetsInput = await processAdSets(adSets, userId, advertiserId, accessToken);
+    // let adSetsInput = await processAdSets(adSets, userId, advertiserId, accessToken);
 
     // createCampaignInput.adSets = JSON.stringify(adSetsInput);
 
 
-    createCampaignInput.adSets = adSetNumberFilter(JSON.stringify(await processAdSets(adSets, userId, advertiserId, accessToken)).replace(/\"([^(\")"]+)\":/g, "$1:"));
+    createCampaignInput.adSets = adSetNumberFilter(JSON.stringify(await processAdSets(adSets, userId, advertiserId, accessToken, campaign)).replace(/\"([^(\")"]+)\":/g, "$1:"));
 
     return createCampaignInput;
 }
@@ -91,7 +92,7 @@ function adSetNumberFilter(adsets) {
     return adsets.replace(/"([0-9]+\.{0,1}[0-9]*)"/g, "$1");
 }
 
-async function processAds(adSet, userId, advertiserId, accessToken) {
+async function processAds(adSet, userId, advertiserId, accessToken, campaign) {
 
     let createAdInput = [] as any;
 
@@ -99,17 +100,27 @@ async function processAds(adSet, userId, advertiserId, accessToken) {
 
         for (const ad of adSet.ads) {
 
-            let creativeId = await processCreativeId(ad, advertiserId, userId, accessToken);
+            let creativeId = await processCreativeId(ad, advertiserId, accessToken, userId);
 
             let entry = {} as any;
 
             entry.creativeId = creativeId;
 
-            if (adSet.pricingType.value === "cpm") {
-                entry.prices = [{ amount: adSet.bid.replace(/[^0-9\.]/g, ''), type: "view" }]
+            if (adSet.pricingType.value === "cpm" && campaign.currency.label === "USD") {
+                entry.prices = [{ amount: 20, type: "view" }]
+                console.log(entry.prices);
             }
-            else {
-                entry.prices = [{ amount: adSet.bid.replace(/[^0-9\.]/g, ''), type: "click" }]
+            else if (adSet.pricingType.value === "cpm" && campaign.currency.label === "BAT") {
+                entry.prices = [{ amount: 70, type: "view" }]
+                console.log(entry.prices);
+            }
+            else if (adSet.pricingType.value === "cpc" && campaign.currency.label === "USD") {
+                entry.prices = [{ amount: .20, type: "click" }]
+                console.log(entry.prices);
+            }
+            else if (adSet.pricingType.value === "cpc" && campaign.currency.label === "BAT") {
+                entry.prices = [{ amount: 1, type: "click" }]
+                console.log(entry.prices);
             }
 
             entry.webhooks = [];
@@ -123,7 +134,7 @@ async function processAds(adSet, userId, advertiserId, accessToken) {
     }
 }
 
-async function processCreativeId(ad, advertiserId, userId, accessToken) {
+async function processCreativeId(ad, advertiserId, accessToken, userId) {
 
     if (ad.creative !== '') {
         return ad.creative.value;
@@ -143,7 +154,7 @@ async function processCreativeId(ad, advertiserId, userId, accessToken) {
         let payload = JSON.stringify({
             title: ad.title,
             body: ad.body,
-            targetUrl: ad.targetUrl
+            targetUrl: normalizeUrl(ad.targetUrl, { forceHttps: true })
         }).replace(/\"([^(\")"]+)\":/g, "$1:");
 
         createCreativeInput.payload = payload;
