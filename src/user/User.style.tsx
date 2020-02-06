@@ -9,6 +9,7 @@ enum Breakpoint {
 
 export const Container = styled("div")`
   height: 100%;
+  background-color: white;
 `;
 export const Content = styled("div")`
   display: flex;
