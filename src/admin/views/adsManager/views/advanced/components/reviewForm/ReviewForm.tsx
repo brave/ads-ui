@@ -6,7 +6,47 @@ import { Text } from "../../../../../../../components/Text/Text";
 import * as S from "./ReviewForm.style";
 import { Icon } from '@material-ui/core';
 
+import { submitOrder } from './library/ReviewForm.library';
+
 class ReviewForm extends Component<any, any> {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            saving: false
+        }
+    }
+
+    handleCampaignEdit() {
+        this.props.setForm("campaignForm");
+    }
+
+    handleAdSetEdit(adSetIndex) {
+        this.props.setSelectedAdSet(adSetIndex);
+        this.props.setSelectedAd(0);
+        this.props.setForm("adSetsForm");
+    }
+
+    handleAdEdit(adSetIndex, adIndex) {
+        this.props.setSelectedAdSet(adSetIndex);
+        this.props.setSelectedAd(adIndex);
+        this.props.setForm("adsForm");
+    }
+
+    async handleSubmit() {
+        // Improve error finding and handling
+        this.setState({ saving: true }, async () => {
+            try {
+                await submitOrder(this.props.userId, this.props.advertiserId, this.props.campaign, this.props.adSets, this.props.auth.accessToken);
+            }
+            catch (e) {
+                alert("Oops! We apologize for the inconvenience: Something went wrong, please contact Ads Support" + e)
+            }
+            finally {
+                this.props.setForm("completionForm")
+            }
+        })
+    }
 
     formatDate(date) {
         var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: "numeric" };
@@ -67,11 +107,11 @@ class ReviewForm extends Component<any, any> {
                     <>
                         <div style={{ display: "flex", width: "100%", marginBottom: "28px" }}>
                             <Text style={{ marginBottom: "" }} content={`Ad Set ${index + 1}`} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
-                            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "0px 20px", width: "100px", border: "1px solid #e2e2e2", borderRadius: "100px 100px 100px 100px", marginLeft: "auto", cursor: "pointer" }}>
+                            <div onClick={() => { this.handleAdSetEdit(index) }} style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "0px 20px", width: "100px", border: "1px solid #e2e2e2", borderRadius: "100px 100px 100px 100px", marginLeft: "auto", cursor: "pointer" }}>
                                 <span>
                                     <Text style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"}>
                                         Edit
-                                                    </Text>
+                                    </Text>
                                 </span>
                             </div>
                         </div>
@@ -102,6 +142,18 @@ class ReviewForm extends Component<any, any> {
                                 </S.ErrorIcon>
                                 <S.ErrorMessage>
                                     <Text content={this.props.validations.adSets[index].bid?.errorMessage} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                </S.ErrorMessage>
+                            </S.ErrorContainer>
+                        }
+
+                        {
+                            this.props.validations.adSets[index].bidBudget?.valid === false &&
+                            <S.ErrorContainer>
+                                <S.ErrorIcon>
+                                    <Icon style={{ color: "white", fontSize: "24px" }}>info</Icon>
+                                </S.ErrorIcon>
+                                <S.ErrorMessage>
+                                    <Text content={this.props.validations.adSets[index].bidBudget?.errorMessage} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                 </S.ErrorMessage>
                             </S.ErrorContainer>
                         }
@@ -181,7 +233,7 @@ class ReviewForm extends Component<any, any> {
                 return <>
                     <div style={{ display: "flex", width: "100%", marginBottom: "28px" }}>
                         <Text style={{ marginBottom: "" }} content={`Ad ${index + 1}`} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
-                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "0px 20px", width: "100px", border: "1px solid #e2e2e2", borderRadius: "100px 100px 100px 100px", marginLeft: "auto", cursor: "pointer" }}>
+                        <div onClick={() => { this.handleAdEdit(adSetIndex, index) }} style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "0px 20px", width: "100px", border: "1px solid #e2e2e2", borderRadius: "100px 100px 100px 100px", marginLeft: "auto", cursor: "pointer" }}>
                             <span>
                                 <Text style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"}>
                                     Edit
@@ -304,7 +356,7 @@ class ReviewForm extends Component<any, any> {
                                     <S.RightColumn>
                                         <div style={{ display: "flex", width: "100%", marginBottom: "28px" }}>
                                             <Text style={{ marginBottom: "" }} content={"Campaign"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
-                                            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "0px 20px", width: "100px", border: "1px solid #e2e2e2", borderRadius: "100px 100px 100px 100px", marginLeft: "auto", cursor: "pointer" }}>
+                                            <div onClick={() => { this.handleCampaignEdit() }} style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "0px 20px", width: "100px", border: "1px solid #e2e2e2", borderRadius: "100px 100px 100px 100px", marginLeft: "auto", cursor: "pointer" }}>
                                                 <span>
                                                     <Text style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"}>
                                                         Edit
@@ -444,14 +496,22 @@ class ReviewForm extends Component<any, any> {
                         {this.renderAdSets()}
                         <div>
                             {
-                                this.props.validations.valid === false ?
-                                    <S.Button style={{ marginLeft: "auto", width: "200px", opacity: .7, cursor: 'default' }}>
-                                        <Text content={"Publish Campaign"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
-                                    </S.Button>
-                                    :
-                                    <S.Button onClick={() => { this.props.setForm("completionForm") }} style={{ marginLeft: "auto", width: "200px" }}>
-                                        <Text content={"Publish Campaign"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
-                                    </S.Button>
+                                this.props.validations.valid === false &&
+                                <S.Button style={{ marginLeft: "auto", width: "200px", opacity: .7, cursor: 'default' }}>
+                                    <Text content={"Publish Campaign"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                                </S.Button>
+                            }
+                            {
+                                (this.props.validations.valid !== false && this.state.saving === false) &&
+                                <S.Button onClick={() => { this.handleSubmit() }} style={{ marginLeft: "auto", width: "200px" }}>
+                                    <Text content={"Publish Campaign"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                                </S.Button>
+                            }
+                            {
+                                (this.props.validations.valid !== false && this.state.saving === true) &&
+                                <S.Button style={{ marginLeft: "auto", width: "200px", opacity: .7, cursor: 'default' }}>
+                                    <Text content={"Saving..."} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                                </S.Button>
                             }
                         </div>
                         <div style={{ width: "25%", position: "relative", marginLeft: "28px" }}></div>

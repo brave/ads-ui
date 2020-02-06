@@ -50,30 +50,6 @@ class CampaignForm extends Component<any, any> {
         this.props.setCampaign(campaign);
     }
 
-    handleBid(e) {
-        let campaign = this.props.campaign;
-        campaign.bid = e.target.value
-        this.props.setCampaign(campaign);
-    }
-
-    formatBid(e) {
-        let campaign = this.props.campaign;
-        let formattedString = e.target.value.replace(/[^\d.]/g, '');
-        formattedString = parseFloat(formattedString).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        if (campaign.currency === "USD") {
-            formattedString = "$" + formattedString;
-        }
-        else {
-            formattedString = formattedString + " BAT";
-        }
-        if (formattedString.includes("NaN")) {
-            formattedString = '';
-        }
-        campaign.bid = formattedString;
-
-        this.props.setCampaign(campaign);
-    }
-
     handleGeoTargets = selectedOption => {
         let campaign = this.props.campaign;
         campaign.geoTargets = selectedOption;
@@ -81,6 +57,7 @@ class CampaignForm extends Component<any, any> {
     };
 
     handleCurrency = selectedOption => {
+        this.clearBids();
         let campaign = this.props.campaign;
         campaign.currency = selectedOption;
         campaign.dailyBudget = '';
@@ -99,7 +76,7 @@ class CampaignForm extends Component<any, any> {
         let campaign = this.props.campaign;
         let formattedString = e.target.value.replace(/[^\d.]/g, '');
         formattedString = parseFloat(formattedString).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        if (campaign.currency === "USD") {
+        if (campaign.currency.label === "USD") {
             formattedString = "$" + formattedString;
         }
         else {
@@ -123,7 +100,7 @@ class CampaignForm extends Component<any, any> {
         let campaign = this.props.campaign;
         let formattedString = e.target.value.replace(/[^\d.]/g, '');
         formattedString = parseFloat(formattedString).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        if (campaign.currency === "USD") {
+        if (campaign.currency.label === "USD") {
             formattedString = "$" + formattedString;
         }
         else {
@@ -210,6 +187,16 @@ class CampaignForm extends Component<any, any> {
                 }
             ]
         })
+        this.props.setAdSets(adSets);
+    }
+
+    clearBids() {
+        let adSets = this.props.adSets;
+        if (adSets) {
+            adSets.forEach((adSet) => {
+                adSet.bid = '';
+            });
+        }
         this.props.setAdSets(adSets);
     }
 

@@ -62,8 +62,8 @@ export function createCreativeMutation(createCreativeInput) {
     mutation{
         createNotificationCreative(
             createNotificationCreativeInput: {
-                advertiserId: "${createCreativeInput.advertiserId}"
                 userId: "${createCreativeInput.userId}"
+                advertiserId: "${createCreativeInput.advertiserId}"
                 name: "${createCreativeInput.name}"
                 payload: ${createCreativeInput.payload}
                 type: ${createCreativeInput.type}

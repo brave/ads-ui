@@ -37,6 +37,7 @@ export const NavSubItem = styled("div")`
 
 export const Nav = styled("div")`
 display: flex;
+position: relative;
 align-items: center; 
 border-top: 1px solid #e2e2e2;
 width: 100%;

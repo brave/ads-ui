@@ -1,4 +1,5 @@
-import { createAdMutation, createAdSetMutation, createCampaignMutation, createCreativeMutation } from "./CompletionFormQueries";
+import { createCampaignMutation, createCreativeMutation } from "./ReviewForm.queries";
+import normalizeUrl from 'normalize-url';
 
 
 async function processAdSets(adSets, userId, advertiserId, accessToken) {
@@ -142,7 +143,7 @@ async function processCreativeId(ad, advertiserId, accessToken) {
         let payload = JSON.stringify({
             title: ad.title,
             body: ad.body,
-            targetUrl: ad.targetUrl
+            targetUrl: normalizeUrl(ad.targetUrl, { forceHttps: true })
         }).replace(/\"([^(\")"]+)\":/g, "$1:");
 
         createCreativeInput.payload = payload;

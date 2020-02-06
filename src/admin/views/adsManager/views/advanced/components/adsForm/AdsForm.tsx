@@ -10,6 +10,7 @@ import { fetchCreativeAssets, fetchCreativeType } from "./lib/AdsForm.library";
 import Notification from "./assets/notification.png";
 import PublisherAd from "./assets/publisher_ad.png";
 import { Icon } from '@material-ui/core';
+import Modal from '../../../../../../../components/modal/Modal';
 
 const customStyles = {
     control: (provided, state) => ({
@@ -52,15 +53,14 @@ class AdsForm extends Component<any, any> {
         this.props.setSelectedAd(selectedAd);
     }
 
-    deleteSelectedAd(e, deletedAd) {
-        e.preventDefault();
+    deleteSelectedAd(deletedAd) {
         let adSets = this.props.adSets;
         if (adSets[this.props.selectedAdSet].ads.length > 1) {
             this.setSelectedAd(0);
             adSets[this.props.selectedAdSet].ads.splice(deletedAd, 1);
             this.props.setAdSets(adSets);
-
         }
+        this.showDeleteAdModal(false);
     }
 
     handleViewPricing(e) {
@@ -263,14 +263,14 @@ class AdsForm extends Component<any, any> {
             let adSetsTabs = this.props.adSets[this.props.selectedAdSet].ads.map((ad, index) => {
                 if (index === this.props.selectedAd) {
                     return (
-                        <S.Tab selected={true} onContextMenu={(e) => this.deleteSelectedAd(e, index)} key={index}>
+                        <S.Tab selected={true} key={index}>
                             <Text content={`Ad ${index + 1}`} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
                         </S.Tab>
                     )
                 }
                 else {
                     return (
-                        <S.Tab selected={false} onClick={() => this.setSelectedAd(index)} onContextMenu={(e) => this.deleteSelectedAd(e, index)} key={index}>
+                        <S.Tab selected={false} onClick={() => this.setSelectedAd(index)} key={index}>
                             <div style={{ opacity: .5 }}>
                                 <Text content={`Ad ${index + 1}`} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
                             </div>
@@ -278,8 +278,41 @@ class AdsForm extends Component<any, any> {
                     );
                 }
             });
-
             return adSetsTabs;
+        }
+    }
+
+    showDeleteAdModal(visible) {
+        this.setState({ deleteAdModalVisible: visible })
+    }
+
+    renderModal(index) {
+        if (this.state.deleteAdModalVisible) {
+            return <Modal>
+                <div style={{ width: "500px" }}>
+                    <div style={{ display: "flex" }}>
+                        <Text content={"Delete this Ad?"} sizes={[16, 16, 15, 15, 22]} color={"#E0694C"} fontFamily={"Poppins"} />
+                        <Icon onClick={(e) => this.showDeleteAdModal(false)} style={{ marginLeft: "auto", color: "grey", cursor: "pointer" }}>clear</Icon>
+                    </div>
+                    <Text style={{ marginTop: "42px" }} content={`Do you want to delete Ad ${index + 1}? This action cannot be undone.`} sizes={[16, 16, 15, 15, 16]} fontFamily={"Muli"} />
+                    <div style={{ display: "flex", width: "100%", marginTop: "42px" }}>
+                        <div onClick={(e) => this.showDeleteAdModal(false)} style={{ marginLeft: "auto", marginRight: "28px", display: "flex", justifyContent: "center", alignItems: "center", padding: "0px 20px", width: "100px", border: "1px solid #e2e2e2", borderRadius: "100px 100px 100px 100px", cursor: "pointer" }}>
+                            <span>
+                                <Text style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"}>
+                                    Cancel
+            </Text>
+                            </span>
+                        </div>
+                        <div onClick={() => { this.deleteSelectedAd(index) }} style={{ display: "flex", justifyContent: "center", padding: "0px 20px", width: "100px", background: "#F87454", color: "white", border: "none", borderRadius: "100px 100px 100px 100px", cursor: "pointer" }}>
+                            <span>
+                                <Text style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"}>
+                                    Delete
+                        </Text>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </Modal>
         }
     }
 
@@ -313,11 +346,19 @@ class AdsForm extends Component<any, any> {
                                     <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "1px", marginLeft: "2px" }}>info</Icon>
                                 </div> */}
 
-                                <S.Container style={{ marginTop: "8px" }}>
-                                    {this.renderAdSetsTabs()}
-                                    {/* <S.Tab selected={false} onClick={() => { this.addAd() }}> <Text content={`+ Create new ad`} sizes={[16, 16, 15, 15, 15]} fontFamily={"Poppins"} /></S.Tab> */}
-                                </S.Container>
+                                <div style={{ width: "100%", display: "flex" }}>
+                                </div>
 
+                                {this.renderModal(this.props.selectedAd)}
+
+                                <div style={{ display: "flex", width: "100%" }}>
+                                    <S.Container style={{ width: "620px" }}>
+                                        {this.renderAdSetsTabs()}
+                                    </S.Container>
+                                    <Icon onClick={() => { this.showDeleteAdModal(true) }} style={{ marginLeft: "auto", fontSize: "18px", cursor: "pointer" }}>more_vert</Icon>
+                                </div>
+
+                                {/* Refactor to add this to menu */}
                                 <div style={{ width: "99%", display: "flex", marginTop: "-12px", marginRight: "8px", marginBottom: "12px" }}>
                                     <Text content={"+ Create new ad"} color={"#E0694C"} onClick={() => { this.addAd() }} style={{ marginTop: "2px", marginLeft: "auto", cursor: "pointer" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                 </div>
@@ -413,13 +454,13 @@ class AdsForm extends Component<any, any> {
                                                             </S.InputContainer>
 
                                                             <S.InputContainer>
-                                                                <Text content={"Creative Title"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                                <S.Input value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].title} onChange={(e) => this.handleTitle(e)} placeholder="Enter a title..." />
+                                                                <Text content={"Creative Title (30 Characters)"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                                <S.Input maxLength={30} value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].title} onChange={(e) => this.handleTitle(e)} placeholder="Enter a title..." />
                                                             </S.InputContainer>
 
                                                             <S.InputContainer>
-                                                                <Text content={"Creative Body"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                                <S.TextArea value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].body} onChange={(e) => this.handleBody(e)} placeholder="Enter a body..." />
+                                                                <Text content={"Creative Body (60 Characters)"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                                <S.TextArea maxLength={60} value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].body} onChange={(e) => this.handleBody(e)} placeholder="Enter a body..." />
                                                             </S.InputContainer>
 
                                                             <S.InputContainer>
@@ -501,6 +542,8 @@ class AdsForm extends Component<any, any> {
                             {
                                 this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].notificationAd &&
                                 <OSNotificationCreativePreview title={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].previewAssets.title} body={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].previewAssets.body} />
+                                // <OSNotificationCreativePreview title={"012345678901234567890123456789"} body={"012345678901234567890123456789012345678901234567890123456789"} />
+
                             }
                             {
                                 this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].inPageAd &&
