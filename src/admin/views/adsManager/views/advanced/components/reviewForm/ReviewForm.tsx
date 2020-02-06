@@ -5,7 +5,6 @@ import { Text } from "../../../../../../../components/Text/Text";
 
 import * as S from "./ReviewForm.style";
 import { Icon } from '@material-ui/core';
-
 import { submitOrder } from './library/ReviewForm.library';
 
 class ReviewForm extends Component<any, any> {
@@ -338,7 +337,6 @@ class ReviewForm extends Component<any, any> {
     render() {
         return (
             <React.Fragment>
-
                 <div style={{ display: "flex", position: "relative", marginTop: "28px", width: "100%", marginBottom: "220px" }}>
                     <div style={{ width: "720px" }}>
                         <Section fullWidthChild={true}>

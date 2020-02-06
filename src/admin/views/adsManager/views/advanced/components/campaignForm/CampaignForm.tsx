@@ -76,7 +76,7 @@ class CampaignForm extends Component<any, any> {
         let campaign = this.props.campaign;
         let formattedString = e.target.value.replace(/[^\d.]/g, '');
         formattedString = parseFloat(formattedString).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        if (campaign.currency.label === "USD") {
+        if (campaign.currency === "USD") {
             formattedString = "$" + formattedString;
         }
         else {
@@ -100,7 +100,7 @@ class CampaignForm extends Component<any, any> {
         let campaign = this.props.campaign;
         let formattedString = e.target.value.replace(/[^\d.]/g, '');
         formattedString = parseFloat(formattedString).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        if (campaign.currency.label === "USD") {
+        if (campaign.currency === "USD") {
             formattedString = "$" + formattedString;
         }
         else {
@@ -243,9 +243,6 @@ class CampaignForm extends Component<any, any> {
                                             <Text content={"Campaigns are used to define your budgets and advertising objectives."} style={{ marginTop: "2px", marginBottom: "28px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                             <Text title="Wiki's coming soon!" content={"Learn More."} color={"#E0694C"} style={{ marginTop: "2px", marginBottom: "28px", marginLeft: "4px", cursor: "pointer" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                         </div>
-
-
-
 
                                         <S.InputContainer>
                                             <Text content={"Campaign Name"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
@@ -421,6 +418,7 @@ class CampaignForm extends Component<any, any> {
 
                                     </S.RightColumn>
                                 </S.InnerContainer>
+
                                 <div style={{ width: "100%", borderBottom: "1px solid #e2e2e2", marginTop: "28px", marginBottom: "56px" }}></div> */}
 
                                 <S.InnerContainer>

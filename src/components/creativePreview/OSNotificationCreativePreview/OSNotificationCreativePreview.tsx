@@ -61,8 +61,6 @@ class OSNotificationCreativePreview extends Component<any, any> {
                             </div>
                         </div>
                     </div>
-
-
                     <Text content={"Android"} style={{ marginBottom: "-36px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                     <div style={{ backgroundColor: "white", borderRadius: "4px", width: "100%", height: "120px", marginTop: "16px", marginBottom: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
                         <div style={{ height: "72px", width: "340px", borderRadius: "13px", border: "1px solid #e2e2e2", backgroundColor: "rgb(250, 250, 250)", padding: "8px" }}>

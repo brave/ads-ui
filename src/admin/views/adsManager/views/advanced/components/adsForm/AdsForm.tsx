@@ -379,11 +379,11 @@ class AdsForm extends Component<any, any> {
                                         <Text content={"New Creative"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                     </div>
 
+
                                     <div style={{ display: "flex", marginTop: "8px", marginBottom: "8px", marginLeft: "8px" }}>
                                         <input style={{ marginRight: "8px" }} type="radio" checked={!this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].newCreative} onChange={(e) => this.handleNewCreative(false)} />
                                         <Text content={"Use Existing Creative"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                     </div>
-
                                 </div> */}
 
                                 <div style={{ display: "flex", marginTop: "8px" }}>
@@ -520,7 +520,6 @@ class AdsForm extends Component<any, any> {
                                     </div> */}
 
                                 </div>
-
                                 <div style={{ display: "flex" }}>
                                     <S.SecondaryButton onClick={() => this.handleBack()} style={{ marginRight: "auto" }}>
                                         <Text content={"Back"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
