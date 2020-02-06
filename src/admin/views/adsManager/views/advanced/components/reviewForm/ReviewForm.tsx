@@ -68,7 +68,6 @@ class ReviewForm extends Component<any, any> {
         console.log(keys);
         if (keys) {
             errors = keys.map((key) => {
-
                 if (key !== 'valid' && key !== 'adSets') {
                     if (this.props.validations[key].valid === false) {
                         return <Text content={`• ${this.props.validations[key].errorMessage}`} sizes={[16, 16, 15, 15, 15]} style={{ marginTop: "12px" }} fontFamily={"Muli"} />
