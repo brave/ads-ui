@@ -21,6 +21,7 @@
     "lodash": "^4.17.15",
     "material-ui-pickers": "^2.2.4",
     "moment": "^2.24.0",
+    "normalize-url": "^4.5.0",
     "rc-menu": "^7.4.29",
     "react": "^16.9.0",
     "react-apollo": "^3.1.3",

@@ -13,10 +13,9 @@ import { CloseSnackBar as close } from "./actions";
 
 import Authentication from "./containers/Authentication/Authentication";
 import Admin from "./admin/Admin";
-import AdminMain from "./containers/Main/Admin/Main";
-import AdvertiserMain from "./containers/Main/Advertiser/Main";
 
 import Context from "./state/context";
+import User from "./user/User";
 
 class App extends React.Component<any, any> {
   private theme = createMuiTheme({
@@ -66,7 +65,7 @@ class App extends React.Component<any, any> {
             setSidebar: this.setSidebar,
           }}>
             <Switch>
-              <Route path="/user/main" component={AdvertiserMain} />
+              <Route path="/user/main" component={User} />
               <Route path="/admin/main" component={Admin} />
               <Route path="/auth" component={Authentication} />
               <Route path='/' exact={true} component={() => {

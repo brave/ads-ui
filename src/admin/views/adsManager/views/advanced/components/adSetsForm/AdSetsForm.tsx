@@ -5,6 +5,8 @@ import { Text } from "../../../../../../../components/Text/Text";
 import * as S from "./AdSetsForm.style";
 import Switch from "react-switch";
 import Select from 'react-select';
+import { Icon } from '@material-ui/core';
+import RadioButton from '../../../../../../../components/radioButton/RadioButton';
 
 const customStyles = {
     control: (provided, state) => ({
@@ -13,49 +15,27 @@ const customStyles = {
     }),
 }
 
+const pricingTypes = [
+    { value: 'cpm', label: 'Impressions (cpm)' },
+    { value: 'cpc', label: 'Clicks (cpc)' },
+    { value: 'cpl', label: 'Landings (cpl)' },
+    { value: 'cpx', label: 'Conversions (cpx)' },
+]
+
+const platforms = [
+    { value: 'android', label: 'Android' },
+    { value: 'ios', label: 'iOS' },
+    { value: 'macos', label: 'Mac OS' },
+    { value: 'windows', label: 'Windows' },
+    { value: 'linux', label: 'Linux' },
+]
+
 class AdSetsForm extends Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
             selectedOption: null
         };
-    }
-
-    addAdSet() {
-        let adSets = this.props.adSets;
-        adSets.push({
-            lifetimeImpressions: '',
-            dailyImpressions: '',
-            braveML: true,
-            audiences: '',
-            conversionsCheckbox: false,
-            status: '',
-            conversion: {
-                type: 'post-view',
-                url: '',
-                observationWindow: { value: 7, label: "7" },
-            },
-            ads: [
-                {
-                    creative: '',
-                    newCreative: true,
-                    name: '',
-                    title: '',
-                    body: '',
-                    targetUrl: '',
-                    creativeUrl: '',
-                    creativeSize: '',
-                    channels: '',
-                    notificationAd: true,
-                    inPageAd: false,
-                    previewAssets: {
-                        title: null,
-                        body: null,
-                    }
-                }
-            ]
-        })
-        this.props.setAdSets(adSets);
     }
 
     setSelectedAdSet(selectedAdSet) {
@@ -128,6 +108,30 @@ class AdSetsForm extends Component<any, any> {
         this.props.setAdSets(adSets);
     }
 
+    handleBid(e) {
+        let adSets = this.props.adSets;
+        adSets[this.props.selectedAdSet].bid = e.target.value;
+        this.props.setAdSets(adSets);
+    }
+
+    formatBid(e) {
+        let campaign = this.props.campaign;
+        let adSets = this.props.adSets;
+        let formattedString = e.target.value.replace(/[^\d.]/g, '');
+        formattedString = parseFloat(formattedString).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        if (campaign.currency.label === "USD") {
+            formattedString = "$" + formattedString;
+        }
+        else {
+            formattedString = formattedString + " BAT";
+        }
+        if (formattedString.includes("NaN")) {
+            formattedString = '';
+        }
+        adSets[this.props.selectedAdSet].bid = formattedString;
+        this.props.setAdSets(adSets);
+    }
+
     handleConversionObservationWindow = selectedOption => {
         let adSets = this.props.adSets;
         adSets[this.props.selectedAdSet].conversion.observationWindow = selectedOption;
@@ -139,6 +143,18 @@ class AdSetsForm extends Component<any, any> {
         adSets[this.props.selectedAdSet].audiences = selectedOption;
         this.props.setAdSets(adSets);
     };
+
+    handlePlatforms = selectedOption => {
+        let adSets = this.props.adSets;
+        adSets[this.props.selectedAdSet].platforms = selectedOption;
+        this.props.setAdSets(adSets);
+    };
+
+    handlePricingType = selectedOption => {
+        let adSets = this.props.adSets;
+        adSets[this.props.selectedAdSet].pricingType = selectedOption;
+        this.props.setAdSets(adSets);
+    }
 
     handleStatus(status) {
         let adSets = this.props.adSets;
@@ -194,26 +210,78 @@ class AdSetsForm extends Component<any, any> {
         return (
             <React.Fragment>
                 <div style={{ display: "flex", position: "relative", marginTop: "28px", width: "100%" }}>
-                    <div style={{ width: "660px" }}>
+                    <div style={{ width: "720px" }}>
                         <Section fullWidthChild={true}>
                             <>
                                 <S.InnerContainer>
                                     <S.RightColumn>
-                                        <Text content={"Audiences"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
+                                        <Text content={"Ad Set Details"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
+                                        <div style={{ display: "flex" }}>
+                                            <Text content={"Ad sets are used to define your audience and how budget is spent."} style={{ marginTop: "2px", marginBottom: "28px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                            <Text content={"Learn More."} color={"#E0694C"} style={{ marginTop: "2px", marginBottom: "28px", marginLeft: "4px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                        </div>
+                                        {/* Audiences */}
+                                        <S.InputContainer>
+                                            <div style={{ display: "flex" }}>
+                                                <Text content={"Pricing Type"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "1px", marginLeft: "2px" }}>info</Icon>
+                                            </div>
+                                            <div style={{ marginTop: "4px" }}>
+                                                <Select
+                                                    styles={customStyles}
+                                                    value={this.props.adSets[this.props.selectedAdSet].pricingType}
+                                                    onChange={this.handlePricingType}
+                                                    options={pricingTypes}
+                                                />
+                                            </div>
+                                        </S.InputContainer>
+                                        <S.InputContainer>
+                                            <div style={{ display: "flex" }}>
+                                                <Text content={"Bid"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "1px", marginLeft: "2px" }}>info</Icon>
+                                            </div>
+                                            <div style={{ display: "flex", alignItems: "center" }}>
+                                                <S.Input value={this.props.adSets[this.props.selectedAdSet].bid} onChange={(e) => this.handleBid(e)} onBlur={(e) => this.formatBid(e)} style={{ width: "175px" }} placeholder="Enter a bid..." />
+                                                {
+                                                    this.props.adSets[this.props.selectedAdSet].pricingType.value === 'cpm' &&
+                                                    <Text style={{ marginLeft: "14px", marginTop: "2px" }} content={"Per 1000 Impressions."} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                }
+                                                {
+                                                    this.props.adSets[this.props.selectedAdSet].pricingType.value === 'cpc' &&
+                                                    <Text style={{ marginLeft: "14px", marginTop: "2px" }} content={"Per Click."} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                }
+                                                {
+                                                    this.props.adSets[this.props.selectedAdSet].pricingType.value === 'cpl' &&
+                                                    <Text style={{ marginLeft: "14px", marginTop: "2px" }} content={"Per Landing."} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                }
+                                                {
+                                                    this.props.adSets[this.props.selectedAdSet].pricingType.value === 'cpx' &&
+                                                    <Text style={{ marginLeft: "14px", marginTop: "2px" }} content={"Per Conversion."} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                }
+                                            </div>
+                                        </S.InputContainer>
+                                    </S.RightColumn>
+                                </S.InnerContainer>
+                                <div style={{ width: "100%", borderBottom: "1px solid #e2e2e2", marginTop: "28px", marginBottom: "56px" }}></div>
+
+                                <S.InnerContainer>
+                                    <S.RightColumn>
+                                        <Text content={"Categories"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
                                         <div style={{ display: "flex" }}>
                                             <Text content={"Select the audience you would like to advertise to by interests."} style={{ marginTop: "2px", marginBottom: "28px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                             <Text content={"Learn More."} color={"#E0694C"} style={{ marginTop: "2px", marginBottom: "28px", marginLeft: "4px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                         </div>
                                         {/* Audiences */}
+
                                         <S.InputContainer>
                                             <div style={{ display: "flex", marginTop: "8px", marginBottom: "8px" }}>
-                                                <input style={{ marginRight: "8px" }} type="radio" checked={this.props.adSets[this.props.selectedAdSet].braveML} onChange={(e) => this.handleBraveML(true)} />
-                                                <Text content={"Let Brave determine best audience."} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                <RadioButton checked={this.props.adSets[this.props.selectedAdSet].braveML} onClick={(e) => this.handleBraveML(true)} />
+                                                <Text style={{ marginTop: "-1px", marginLeft: "8px" }} content={"Let Brave determine best audience."} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                             </div>
 
-                                            <div style={{ display: "flex", marginTop: "8px", marginBottom: "12px" }}>
-                                                <input style={{ marginRight: "8px" }} type="radio" checked={!this.props.adSets[this.props.selectedAdSet].braveML} onChange={(e) => this.handleBraveML(false)} />
-                                                <Text content={"Select custom audience."} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                            <div style={{ display: "flex", marginTop: "12px", marginBottom: "12px" }}>
+                                                <RadioButton checked={!this.props.adSets[this.props.selectedAdSet].braveML} onClick={(e) => this.handleBraveML(false)} />
+                                                <Text style={{ marginTop: "-1px", marginLeft: "8px" }} content={"Select custom audience."} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                             </div>
                                             {!this.props.adSets[this.props.selectedAdSet].braveML &&
                                                 <div style={{ marginTop: "4px" }}>
@@ -226,6 +294,33 @@ class AdSetsForm extends Component<any, any> {
                                                     />
                                                 </div>
                                             }
+                                        </S.InputContainer>
+                                    </S.RightColumn>
+                                </S.InnerContainer>
+
+                                <div style={{ width: "100%", borderBottom: "1px solid #e2e2e2", marginTop: "28px", marginBottom: "56px" }}></div>
+
+                                <S.InnerContainer>
+                                    <S.RightColumn>
+                                        <Text content={"Platforms"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
+                                        <div style={{ display: "flex" }}>
+                                            <Text content={"Select the devices and platforms you would like to advertise to."} style={{ marginTop: "2px", marginBottom: "28px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                            <Text content={"Learn More."} color={"#E0694C"} style={{ marginTop: "2px", marginBottom: "28px", marginLeft: "4px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                        </div>
+                                        <S.InputContainer>
+                                            <div style={{ display: "flex" }}>
+                                                <Text content={"Platform"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "1px", marginLeft: "2px" }}>info</Icon>
+                                            </div>
+                                            <div style={{ marginTop: "4px" }}>
+                                                <Select
+                                                    styles={customStyles}
+                                                    value={this.props.adSets[this.props.selectedAdSet].platforms}
+                                                    onChange={this.handlePlatforms}
+                                                    isMulti={true}
+                                                    options={platforms}
+                                                />
+                                            </div>
                                         </S.InputContainer>
                                     </S.RightColumn>
                                 </S.InnerContainer>
@@ -258,13 +353,13 @@ class AdSetsForm extends Component<any, any> {
                                                     <Text content={"Select an event to track conversions."} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
 
                                                     <div style={{ display: "flex", marginTop: "8px", marginBottom: "8px" }}>
-                                                        <input checked={this.props.adSets[this.props.selectedAdSet].conversion.type === 'post-view'} onClick={(e) => this.handleConversionType("post-view")} style={{ marginRight: "8px" }} type="radio" name="gender" value="male" />
-                                                        <Text content={"Post-View"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                        <RadioButton checked={this.props.adSets[this.props.selectedAdSet].conversion.type === 'post-view'} onClick={(e) => this.handleConversionType("post-view")} style={{ marginRight: "8px" }} type="radio" name="gender" value="male" />
+                                                        <Text style={{ marginTop: "-1px", marginLeft: "8px" }} content={"Post-View"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                                     </div>
 
                                                     <div style={{ display: "flex", marginTop: "8px", marginBottom: "12px" }}>
-                                                        <input checked={this.props.adSets[this.props.selectedAdSet].conversion.type === 'post-click'} onClick={(e) => this.handleConversionType("post-click")} style={{ marginRight: "8px" }} type="radio" name="gender" value="male" />
-                                                        <Text content={"Post-Click"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                        <RadioButton checked={this.props.adSets[this.props.selectedAdSet].conversion.type === 'post-click'} onClick={(e) => this.handleConversionType("post-click")} style={{ marginRight: "8px" }} type="radio" name="gender" value="male" />
+                                                        <Text style={{ marginTop: "-1px", marginLeft: "8px" }} content={"Post-Click"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                                     </div>
 
                                                 </S.InputContainer>
@@ -302,29 +397,23 @@ class AdSetsForm extends Component<any, any> {
                                     </S.RightColumn>
                                 </S.InnerContainer>
 
-                                <div style={{ width: "100%", borderBottom: "1px solid #e2e2e2", marginTop: "28px", marginBottom: "56px" }}></div>
-
-                                <S.InnerContainer>
+                                {/* <S.InnerContainer>
                                     <S.RightColumn>
 
                                         <Text content={"Etc."} style={{ marginBottom: "8px" }} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
 
-                                        {/* Lifetime impressions */}
                                         <S.InputContainer>
                                             <Text content={"Impressions per user over lifetime"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                             <S.Input value={this.props.adSets[this.props.selectedAdSet].lifetimeImpressions} onChange={(e) => this.handleLifetimeImpressions(e)} placeholder="Enter a number of impressions..." type="number" name="name" />
                                         </S.InputContainer>
 
-                                        {/* Daily impressions */}
                                         <S.InputContainer>
                                             <Text content={"Impressions per user per day"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                             <S.Input value={this.props.adSets[this.props.selectedAdSet].dailyImpressions} onChange={(e) => this.handleDailyImpressions(e)} placeholder="Enter a number of impressions..." type="number" name="name" />
                                         </S.InputContainer>
 
                                     </S.RightColumn>
-                                    {/* Nav Buttons */}
-
-                                </S.InnerContainer>
+                                </S.InnerContainer> */}
                                 <div style={{ display: "flex" }}>
                                     <S.SecondaryButton onClick={() => this.handleBack()} style={{ marginRight: "auto", marginTop: "56px" }}>
                                         <Text content={"Back"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
@@ -337,14 +426,14 @@ class AdSetsForm extends Component<any, any> {
                         </Section>
                     </div>
                     <div style={{ width: "30%", position: "relative", marginLeft: "28px" }}>
-                        <S.AdSetsTabs>
+                        {/* <S.AdSetsTabs>
                             {this.renderAdSetsTabs()}
                             <S.AdSetsTabButtonContainer>
                                 <S.Button onClick={() => { this.addAdSet() }} style={{ width: "150px", marginLeft: "auto", marginRight: "auto", backgroundColor: "white", color: "black", border: "1px solid #d6d6d6" }}>
                                     <Text content={"New Ad Set"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
                                 </S.Button>
                             </S.AdSetsTabButtonContainer>
-                        </S.AdSetsTabs>
+                        </S.AdSetsTabs> */}
                     </div>
                 </div>
 

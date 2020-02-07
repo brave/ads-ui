@@ -60,8 +60,9 @@ export function createAdMutation(createAdInput) {
 export function createCreativeMutation(createCreativeInput) {
     return `
     mutation{
-        createCreative(
-            createCreativeInput: {
+        createNotificationCreative(
+            createNotificationCreativeInput: {
+                userId: "${createCreativeInput.userId}"
                 advertiserId: "${createCreativeInput.advertiserId}"
                 name: "${createCreativeInput.name}"
                 payload: ${createCreativeInput.payload}
