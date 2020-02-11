@@ -9,6 +9,7 @@
     "@material-ui/core": "^3.9.3",
     "@types/styled-components": "^4.1.18",
     "apollo-boost": "^0.4.7",
+    "apollo-link-context": "^1.0.19",
     "axios": "^0.18.1",
     "brave-ui": "^0.38.0",
     "chart.js": "^2.8.0",
