@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Icon } from '@material-ui/core';
 
 import * as S from "./styles/Creative.style";
@@ -7,10 +7,10 @@ import { Divider, Input, InputContainer, Selection, Button, MessageContainer, Er
 import { Text } from "../../../../components/Text/Text";
 
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import { CREATIVE, UPDATE_NOTIFICATION_CREATIVE } from "./lib/Creative.queries";
+import { CREATIVE, UPDATE_NOTIFICATION_CREATIVE, UPDATE_IN_PAGE_CREATIVE } from "./lib/Creative.queries";
 
 import Context from "../../../../state/context";
-import { validate } from 'graphql';
+import normalizeUrl from 'normalize-url';
 
 const Creative = props => {
 
@@ -23,18 +23,18 @@ const Creative = props => {
     const [size, setSize] = useState('');
     const [creativeUrl, setCreativeUrl] = useState('');
     const [type, setType] = useState('');
-    const [originalCreative, setOriginalCreative] = useState({} as any);
-    const [updated, setUpdated] = useState(false);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
+    const [saving, setSaving] = useState(false);
     const [validations, setValidations] = useState({} as any);
 
     const updateCreative = data => {
-        console.log("Updated!");
-        console.log(data);
+        setError(false);
+        setSuccess(true);
+        setSaving(false);
     }
 
-    const [updateNotificationCreative, { loading: mutationLoading, error: mutationError }] =
+    const [updateNotificationCreative, { loading: updateNotificationCreativeLoading, error: updateNotificationCreativeError }] =
         useMutation(UPDATE_NOTIFICATION_CREATIVE, {
             variables: {
                 updateNotificationCreativeInput: {
@@ -56,6 +56,28 @@ const Creative = props => {
             onCompleted: updateCreative
         });
 
+    const [updateInPageCreative, { loading: mutationLoading, error: mutationError }] =
+        useMutation(UPDATE_IN_PAGE_CREATIVE, {
+            variables: {
+                updateInPageCreativeInput: {
+                    userId: props.match.params.userId,
+                    advertiserId: props.match.params.advertiserId,
+                    creativeId: props.match.params.creativeId,
+                    name,
+                    type: {
+                        code: "in_page_all_v1",
+                        name: "in_page"
+                    },
+                    payload: {
+                        size,
+                        creativeUrl,
+                        targetUrl
+                    }
+                }
+            },
+            onCompleted: updateCreative
+        });
+
 
     const initializeCreative = data => {
         setName(data.creative.name);
@@ -65,24 +87,10 @@ const Creative = props => {
         if (data.creative.type.code === "notification_all_v1") {
             setTitle(data.creative.payload.title);
             setBody(data.creative.payload.body);
-            setOriginalCreative({
-                name: data.creative.name,
-                type: data.creative.type.code,
-                title: data.creative.payload.title,
-                body: data.creative.payload.body,
-                targetUrl: data.creative.payload.targetUrl,
-            })
         }
         else if (data.creative.type.code === "in_page_all_v1") {
             setSize(data.creative.payload.size);
             setCreativeUrl(data.creative.payload.creativeUrl);
-            setOriginalCreative({
-                name: data.creative.name,
-                type: data.creative.type.code,
-                size: data.creative.payload.size,
-                creativeUrl: data.creative.payload.creativeUrl,
-                targetUrl: data.creative.payload.targetUrl,
-            })
         }
 
         if (context.loading === true) {
@@ -92,64 +100,54 @@ const Creative = props => {
 
     const validateForm = () => {
         let validations = {} as any;
+        setSuccess(false);
+        setSaving(true);
 
         // Validate form
         if (name === '') {
-            validations.nameValidation = "Creative name field is required";
+            validations.nameValidation = "Name field is required";
         }
         if (targetUrl === '') {
             validations.targetUrlValidation = "Website URL field is required";
+        }
+        if (title === '' && type === "notification_all_v1") {
+            validations.titleRequired = "Title field is required";
+        }
+        if (body === '' && type === "notification_all_v1") {
+            validations.bodyRequired = "Body field is required";
+        }
+        if (size === '' && type === "in_page_all_v1") {
+            validations.sizeRequired = "Size field is required";
+        }
+        if (creativeUrl === '' && type === "in_page_all_v1") {
+            validations.creativeUrlRequired = "Image URL field is required";
         }
 
         // If errors: set error state true and set validations object
         if (Object.entries(validations).length > 0) {
             setValidations(validations);
             setError(true);
+            setSaving(false);
             return false;
         }
         else {
+            setValidations({} as any);
             return true;
         }
     }
 
-    const handleType = type => {
-        setType(type);
+    const formatTargetUrl = () => {
+        try {
+            setTargetUrl(normalizeUrl(targetUrl, { forceHttps: true }));
+        }
+        catch (e) {
+
+        }
     }
 
     useEffect(() => {
         context.setLoading(true);
     }, [])
-
-    useEffect(() => {
-
-
-        console.log("again");
-        if (originalCreative.type !== type) {
-            setUpdated(true);
-        }
-        else if (originalCreative.name !== name) {
-            setUpdated(true);
-        }
-        else if (originalCreative.targetUrl !== targetUrl) {
-            setUpdated(true);
-        }
-        else if (type === "notification_all_v1" && originalCreative.title !== title) {
-            setUpdated(true);
-        }
-        else if (type === "notification_all_v1" && originalCreative.body !== body) {
-            setUpdated(true);
-        }
-        else if (type === "in_page_all_v1" && originalCreative.size !== size) {
-            setUpdated(true);
-        }
-        else if (type === "in_page_all_v1" && originalCreative.creativeUrl !== creativeUrl) {
-            setUpdated(true);
-        }
-        else {
-            setUpdated(false);
-        }
-    }, [name, type, title, body, targetUrl, size, creativeUrl])
-
 
     const { loading: queryLoading, error: queryError, data } = useQuery(CREATIVE, {
         variables: { id: props.match.params.creativeId },
@@ -205,14 +203,20 @@ const Creative = props => {
                                     <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "1px", marginLeft: "2px" }}>info</Icon>
                                 </div>
                                 <div style={{ display: "flex", justifyContent: "space-between", marginTop: "4px" }}>
-                                    <Selection onClick={() => { handleType("notification_all_v1") }} selected={type === "notification_all_v1"}>
-                                        <Text content={"OS Notification"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                        <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "-2px", marginLeft: "3px" }}>info</Icon>
-                                    </Selection>
-                                    <Selection onClick={() => { handleType("in_page_all_v1") }} selected={type === "in_page_all_v1"}>
-                                        <Text content={"In-Page Image"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                        <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "-2px", marginLeft: "3px" }}>info</Icon>
-                                    </Selection>
+                                    {
+                                        type === "notification_all_v1" &&
+                                        <Selection style={{ cursor: "default" }} selected={true}>
+                                            <Text content={"OS Notification"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                            <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "-2px", marginLeft: "3px" }}>info</Icon>
+                                        </Selection>
+                                    }
+                                    {
+                                        type === "in_page_all_v1" &&
+                                        <Selection style={{ cursor: "default" }} selected={type === "in_page_all_v1"}>
+                                            <Text content={"In-Page Image"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                            <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "-2px", marginLeft: "3px" }}>info</Icon>
+                                        </Selection>
+                                    }
                                     <Selection selected={false} style={{ visibility: "hidden" }}></Selection>
                                 </div>
                             </InputContainer>
@@ -239,10 +243,10 @@ const Creative = props => {
                                 </div>
                                 {
                                     !validations.targetUrlValidation ?
-                                        <Input value={targetUrl} onChange={event => setTargetUrl(event.target.value)}></Input>
+                                        <Input value={targetUrl} onChange={event => setTargetUrl(event.target.value)} onBlur={() => { formatTargetUrl() }}></Input>
                                         :
                                         <>
-                                            <Input error={true} value={targetUrl} onChange={event => setTargetUrl(event.target.value)}></Input>
+                                            <Input error={true} value={targetUrl} onChange={event => setTargetUrl(event.target.value)} onBlur={() => { formatTargetUrl() }}></Input>
                                             <Text style={{ marginTop: "4px" }} color={"#E32444"} content={validations.targetUrlValidation} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                         </>
                                 }
@@ -265,13 +269,29 @@ const Creative = props => {
                                             <div style={{ display: "flex" }}>
                                                 <Text content={"Title"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                             </div>
-                                            <Input value={title} onChange={(e) => { setTitle(e.target.value) }}></Input>
+                                            {
+                                                !validations.titleRequired ?
+                                                    <Input value={title} onChange={event => setTitle(event.target.value)}></Input>
+                                                    :
+                                                    <>
+                                                        <Input error={true} value={title} onChange={event => setTitle(event.target.value)}></Input>
+                                                        <Text style={{ marginTop: "4px" }} color={"#E32444"} content={validations.titleRequired} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                    </>
+                                            }
                                         </InputContainer>
                                         <InputContainer>
                                             <div style={{ display: "flex" }}>
                                                 <Text content={"Body"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                             </div>
-                                            <Input value={body} onChange={(e) => { setBody(e.target.value) }}></Input>
+                                            {
+                                                !validations.bodyRequired ?
+                                                    <Input value={body} onChange={event => setBody(event.target.value)}></Input>
+                                                    :
+                                                    <>
+                                                        <Input error={true} value={body} onChange={event => setBody(event.target.value)}></Input>
+                                                        <Text style={{ marginTop: "4px" }} color={"#E32444"} content={validations.bodyRequired} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                    </>
+                                            }
                                         </InputContainer>
                                     </>
                                     :
@@ -280,26 +300,42 @@ const Creative = props => {
                                             <div style={{ display: "flex" }}>
                                                 <Text content={"Size"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                             </div>
-                                            <Input value={size}></Input>
+                                            {
+                                                !validations.sizeRequired ?
+                                                    <Input value={size} onChange={event => setSize(event.target.value)}></Input>
+                                                    :
+                                                    <>
+                                                        <Input error={true} value={size} onChange={event => setSize(event.target.value)}></Input>
+                                                        <Text style={{ marginTop: "4px" }} color={"#E32444"} content={validations.sizeRequired} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                    </>
+                                            }
                                         </InputContainer>
                                         <InputContainer>
                                             <div style={{ display: "flex" }}>
                                                 <Text content={"Image URL"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                             </div>
-                                            <Input value={creativeUrl}></Input>
+                                            {
+                                                !validations.creativeUrlRequired ?
+                                                    <Input value={creativeUrl} onChange={event => setCreativeUrl(event.target.value)}></Input>
+                                                    :
+                                                    <>
+                                                        <Input error={true} value={creativeUrl} onChange={event => setCreativeUrl(event.target.value)}></Input>
+                                                        <Text style={{ marginTop: "4px" }} color={"#E32444"} content={validations.creativeUrlRequired} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                    </>
+                                            }
                                         </InputContainer>
                                     </>
                             }
                             <div style={{ display: "flex" }}>
                                 {
-                                    updated ?
-                                        <Button onClick={() => {
-                                            validateForm() && updateNotificationCreative()
-                                        }} style={{ marginLeft: "auto", marginTop: "28px" }}>
-                                            <Text content={"Save"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                                    saving ?
+                                        <Button style={{ marginLeft: "auto", marginTop: "28px", opacity: .7, cursor: "default" }}>
+                                            <Text content={"Saving..."} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
                                         </Button>
                                         :
-                                        <Button style={{ marginLeft: "auto", marginTop: "28px", opacity: .7 }}>
+                                        <Button onClick={() => {
+                                            validateForm() && (type === "notification_all_v1" ? updateNotificationCreative() : updateInPageCreative())
+                                        }} style={{ marginLeft: "auto", marginTop: "28px" }}>
                                             <Text content={"Save"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
                                         </Button>
                                 }

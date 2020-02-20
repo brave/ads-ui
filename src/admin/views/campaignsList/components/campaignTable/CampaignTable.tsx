@@ -8,7 +8,6 @@ import { PageInputContainer, CellText, Pagination, Button, ButtonContainer, Page
 import {
     useTable,
     useSortBy,
-    useTableState,
     usePagination,
 } from 'react-table'
 
@@ -27,7 +26,6 @@ const columnCount = 8;
 
 const CampaignTable = (props) => {
     let data = props.data;
-    const tableState = useTableState({ pageIndex: 0, pageSize: 10 })
     const buttonStyle = (enabled) => {
         if (enabled) {
             return { color: "#272727", fontSize: "20px", cursor: "pointer", marginLeft: "10px", marginRight: "10px" }
@@ -50,12 +48,12 @@ const CampaignTable = (props) => {
         nextPage,
         previousPage,
         setPageSize,
-        state: [{ pageIndex, pageSize }],
+        state: { pageIndex, pageSize },
     } = useTable(
         {
             columns,
             data,
-            state: tableState,
+            initialState: { pageIndex: 0, pageSize: 10 },
         },
         useSortBy,
         usePagination,

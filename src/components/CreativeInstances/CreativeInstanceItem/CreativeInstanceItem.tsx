@@ -8,7 +8,7 @@ class CreativeListItem extends React.Component<any, any> {
   public render() {
     const { classes, creativeInstance, match, handleDelete } = this.props;
     const url = match.url;
-    const submitDelete = ()=>{
+    const submitDelete = () => {
       handleDelete(creativeInstance);
     };
     return (
@@ -27,7 +27,7 @@ class CreativeListItem extends React.Component<any, any> {
           })}</div>
         </TableCell>
         <TableCell>
-          <Link className={classes.viewButton} to={`${url}/creativeInstance/${creativeInstance.id}`}>
+          <Link className={classes.viewButton} to={`${url.replace("/ads", "")}/creativeInstance/${creativeInstance.id}`}>
             <IconButton color="primary">
               <Icon>list</Icon>
             </IconButton>

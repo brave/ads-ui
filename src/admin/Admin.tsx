@@ -16,7 +16,6 @@ import Dashboard from "./views/dashboard/Dashboard";
 import CampaignsList from "./views/campaignsList/CampaignsList";
 
 import CampaignNew from "../components/Campaigns/CampaignNew/CampaignNew";
-import CreativesNew from "../components/Creatives/CreativesNew/CreativesNew";
 import CreativeSetNew from "../components/CreativeSets/CreativeSetNew/CreativeSetNew";
 import UserList from "../components/Users/UserList/UserList";
 import UserNew from "../components/Users/UserNew/UserNew";
@@ -25,11 +24,13 @@ import CreativeInstanceView from "../containers/Campaigns/CreativeInstanceView/C
 import CampaignPerformance from "../containers/Campaigns/CampaignPerformance/CampaignPerformance";
 
 import CampaignView from "../containers/Campaigns/CampaignView/CampaignView";
-import CreativeSetView from "../containers/Campaigns/CreativeSetView/CreativeSetView";
-import CreativesView from "../containers/Creatives/CreativesView/CreativesView";
 import Creative from "./views/creatives/creative/Creative";
+import CreativeNew from "./views/creatives/creativeNew/CreativeNew";
 import InvoiceView from "../containers/Invoices/InvoicesView/InvoiceView";
 import AdvertiserView from "../containers/Users/AdvertiserView/AdvertiserView";
+
+import AdSet from "./views/adSets/adSet/AdSet";
+import AdSetNew from "./views/adSets/adSetNew/AdSetNew";
 
 import UserView from "../containers/Users/UserView/UserView";
 
@@ -50,11 +51,11 @@ import Advanced from "./views/adsManager/views/advanced/Advanced";
 // GraphQL 
 import ApolloClient from 'apollo-client';
 import { ApolloProvider } from "@apollo/react-hooks";
-import { useQuery } from '@apollo/react-hooks';
-import { gql } from "apollo-boost";
 import { createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import AdSetAds from "./views/adSets/adSetAds/AdSetAds";
+
 
 
 
@@ -157,20 +158,26 @@ class Admin extends React.Component<any, any> {
                                     component={Overview} />
                                 <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/campaign/:campaignId/analytics/platforms"}
                                     component={Platforms} />
+
+                                {/* /creativeSet */}
                                 <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/campaign/:campaignId/creativeSet/new"}
-                                    component={CreativeSetNew} />
+                                    component={AdSetNew} />
                                 <Route exact path={
                                     match.url + "/users/:userId/advertiser/:advertiserId/campaign/:campaignId/creativeSet/:creativeSetId"}
-                                    component={CreativeSetView} />
+                                    component={AdSet} />
+                                <Route exact path={
+                                    match.url + "/users/:userId/advertiser/:advertiserId/campaign/:campaignId/creativeSet/:creativeSetId/ads"}
+                                    component={AdSetAds} />
+
+                                {/* /creativeInstance */}
                                 <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/campaign/:campaignId/creativeSet/:creativeSetId/creativeInstance/new"}
                                     component={CreativeInstanceNew} />
                                 <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/campaign/:campaignId/creativeSet/:creativeSetId/creativeInstance/:creativeInstanceId"}
                                     component={CreativeInstanceView} />
 
-                                {/* Updating */}
                                 {/* /advertiser/:advertiserId/creative */}
                                 <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/creative/new"}
-                                    component={CreativesNew} />
+                                    component={CreativeNew} />
                                 <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/creative/:creativeId"}
                                     component={Creative} />
 

@@ -16,6 +16,8 @@ query creative($id: String!){
             body
             title
             targetUrl
+            size
+            creativeUrl
         }
     }
 }
@@ -36,6 +38,27 @@ mutation updateNotificationCreative($updateNotificationCreativeInput: UpdateNoti
         payload {
             body
             title
+            targetUrl
+        }
+    }
+}
+`;
+
+export const UPDATE_IN_PAGE_CREATIVE = gql`
+mutation updateInPageCreative($updateInPageCreativeInput: UpdateInPageCreativeInput!){
+    updateInPageCreative(updateInPageCreativeInput: $updateInPageCreativeInput) {
+        id
+        createdAt
+        modifiedAt
+        name
+        state
+        type {
+            code 
+            name
+        }
+        payload {
+            size
+            creativeUrl
             targetUrl
         }
     }

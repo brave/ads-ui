@@ -46,7 +46,7 @@ export const Selection = styled("div")`
     width: 200px;
     border: 1px solid #e2e2e2;
     border-radius: 4px;
-    height: 48px; 
+    height: 42px; 
     display: flex; 
     justify-content: center; 
     align-items: center;
