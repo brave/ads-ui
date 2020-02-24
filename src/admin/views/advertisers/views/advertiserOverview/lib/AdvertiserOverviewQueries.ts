@@ -9,6 +9,7 @@ export function advertiserQuery(advertiserId) {
             state
             phone
             billingEmail
+            referrer
             mailingAddress {
                 street1
                 street2
