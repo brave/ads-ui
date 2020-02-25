@@ -9,6 +9,8 @@ import { Text } from "../../../../../components/Text/Text";
 import Context from "../../../../../state/context";
 import { initializeData, mapState, createAdvertiser, validate } from './lib/AdvertiserNew.library';
 
+import { Divider, Input, InputContainer, Selection, Button, MessageContainer, ErrorIcon, SuccessIcon, Message } from "../../../../../components/formElements/formElements";
+
 import * as S from "./style/AdvertiserNew.style";
 
 class AdvertiserNew extends Component<any, any> {
@@ -56,6 +58,12 @@ class AdvertiserNew extends Component<any, any> {
             advertiser.phone = e.target.value
             this.setState({ advertiser: advertiser }, () => validate(this))
         }
+    }
+
+    public handleReferrer(e) {
+        let advertiser = this.state.advertiser
+        advertiser.referrer = e.target.value
+        this.setState({ advertiser: advertiser }, () => validate(this))
     }
 
     public handleEmail(e) {
@@ -162,129 +170,99 @@ class AdvertiserNew extends Component<any, any> {
         return (
             this.context.loading === false &&
             <React.Fragment>
-                <div style={{ display: "flex", position: "relative" }}>
-                    <S.Container>
+                <div style={{ display: "flex", marginTop: "28px", width: "100%" }}>
+                    <div style={{ width: "720px" }}>
                         <Section fullWidthChild={true}>
                             <>
-                                <S.InnerContainer>
-                                    <S.LeftColumn>
-                                        <Text content={"Profile"} sizes={[16, 16, 15, 15, 20]} fontFamily={"Poppins"} />
-                                        <Text content={"Set the advertiser name, e-mail, and phone number."} style={{ marginTop: "16px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
-                                    </S.LeftColumn>
-                                    <S.RightColumn>
-                                        <S.InputContainer>
-                                            <Text content={"Name"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <S.Input value={this.state.advertiser.name} onChange={(e) => { this.handleName(e) }} placeholder="Enter a name..." type="text" name="name" />
-                                        </S.InputContainer>
-                                        <S.InputContainer>
-                                            <Text content={"E-Mail Address"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <S.Input value={this.state.advertiser.billingEmail} onChange={(e) => { this.handleEmail(e) }} placeholder="Enter an e-mail address..." type="text" name="name" />
-                                        </S.InputContainer>
-                                        <S.InputContainer>
-                                            <Text content={"Phone Number"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <S.Input value={this.state.advertiser.phone} onChange={(e) => { this.handlePhone(e) }} placeholder="Enter a phone number..." type="text" name="name" />
-                                        </S.InputContainer>
-                                    </S.RightColumn>
-                                </S.InnerContainer>
+                                <Text content={"Advertiser Details"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
+                                <div style={{ display: "flex" }}>
+                                    <Text content={"Define the look and feel of your Ads."} style={{ marginTop: "2px", marginBottom: "28px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    <Text title="Wiki's coming soon!" content={"Learn More."} color={"#E0694C"} style={{ marginTop: "2px", marginBottom: "28px", marginLeft: "4px", cursor: "pointer" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                </div>
+                                <InputContainer>
+                                    <Text content={"Name"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    <Input value={this.state.advertiser.name} onChange={(e) => { this.handleName(e) }} placeholder="Enter a name..." type="text" name="name" />
+                                </InputContainer>
+                                <InputContainer>
+                                    <Text content={"E-Mail Address"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    <Input value={this.state.advertiser.billingEmail} onChange={(e) => { this.handleEmail(e) }} placeholder="Enter an e-mail address..." type="text" name="name" />
+                                </InputContainer>
+                                <InputContainer>
+                                    <Text content={"Phone Number"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    <Input value={this.state.advertiser.phone} onChange={(e) => { this.handlePhone(e) }} placeholder="Enter a phone number..." type="text" name="name" />
+                                </InputContainer>
                                 <div style={{ width: "100%", borderBottom: "1px solid #e2e2e2", marginTop: "28px", marginBottom: "56px" }}></div>
 
-                                <S.InnerContainer>
-                                    <S.LeftColumn>
-                                        <Text content={"Billing Address"} sizes={[16, 16, 15, 15, 20]} fontFamily={"Poppins"} />
-                                        <Text content={"Set the advertiser's billing address, to be used for invoicing."} style={{ marginTop: "16px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
-                                    </S.LeftColumn>
-                                    <S.RightColumn>
-                                        <S.InputContainer>
-                                            <Text content={"Street Address Line 1"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <S.Input value={this.state.advertiser.mailingAddress.street1} onChange={(e) => { this.handleStreetOne(e) }} placeholder="Enter a street address..." type="text" name="name" />
-                                        </S.InputContainer>
-                                        <S.InputContainer>
-                                            <Text content={"Street Address Line 2"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <S.Input value={this.state.advertiser.mailingAddress.street2} onChange={(e) => { this.handleStreetTwo(e) }} placeholder="Enter a street address... (Optional)" type="text" name="name" />
-                                        </S.InputContainer>
-                                        <S.InputContainer>
-                                            <Text content={"City"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <S.Input value={this.state.advertiser.mailingAddress.city} onChange={(e) => { this.handleCity(e) }} placeholder="Enter a city..." type="text" name="name" />
-                                        </S.InputContainer>
-                                        <S.InputContainer>
-                                            <Text content={"State"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <S.Input value={this.state.advertiser.mailingAddress.state} onChange={(e) => { this.handleState(e) }} placeholder="Enter a state..." type="text" name="name" />
-                                        </S.InputContainer>
-                                        <S.InputContainer>
-                                            <Text content={"Country"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <S.Input value={this.state.advertiser.mailingAddress.country} onChange={(e) => { this.handleCountry(e) }} placeholder="Enter a country..." type="text" name="name" />
-                                        </S.InputContainer>
-                                        <S.InputContainer>
-                                            <Text content={"Zip Code"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <S.Input value={this.state.advertiser.mailingAddress.zipcode} onChange={(e) => { this.handleZipcode(e) }} placeholder="Enter a zip code..." type="text" name="name" />
-                                        </S.InputContainer>
-                                    </S.RightColumn>
-                                </S.InnerContainer>
+                                <Text content={"Sales Representative"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
+                                <div style={{ display: "flex" }}>
+                                    <Text content={"Representative who referred advertiser to Brave Ads"} style={{ marginTop: "2px", marginBottom: "28px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    <Text title="Wiki's coming soon!" content={"Learn More."} color={"#E0694C"} style={{ marginTop: "2px", marginBottom: "28px", marginLeft: "4px", cursor: "pointer" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                </div>
+                                <InputContainer>
+                                    <Text content={"Sales Rep"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    <Input value={this.state.advertiser.referrer} onChange={(e) => { this.handleReferrer(e) }} placeholder="Enter a referrer id..." type="text" name="name" />
+                                </InputContainer>
                                 <div style={{ width: "100%", borderBottom: "1px solid #e2e2e2", marginTop: "28px", marginBottom: "56px" }}></div>
 
-                                <S.InnerContainer>
-                                    <S.LeftColumn>
-                                        <Text content={"Status"} sizes={[16, 16, 15, 15, 20]} fontFamily={"Poppins"} />
-                                        <Text content={"Set the advertiser name as well as e-mail and phone number."} style={{ marginTop: "16px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
-                                    </S.LeftColumn>
-                                    <S.RightColumn>
-                                        <S.InputContainer>
-                                            <Text content={"Status"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <div style={{ marginTop: "6px" }}>
-                                                <Select
-                                                    value={{ value: this.state.advertiser.state, label: mapState(this.state.advertiser.state) }}
-                                                    onChange={this.handleStatus}
-                                                    options={[{ value: "active", label: "Active" }, { value: "under_review", label: "Under Review" }]}
-                                                />
-                                            </div>
-                                        </S.InputContainer>
+                                <Text content={"Billing Address"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
+                                <div style={{ display: "flex" }}>
+                                    <Text content={"Set the advertiser's billing address, used for invoicing."} style={{ marginTop: "2px", marginBottom: "28px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    <Text title="Wiki's coming soon!" content={"Learn More."} color={"#E0694C"} style={{ marginTop: "2px", marginBottom: "28px", marginLeft: "4px", cursor: "pointer" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                </div>
 
-                                    </S.RightColumn>
-                                </S.InnerContainer>
+                                <InputContainer>
+                                    <Text content={"Street Address Line 1"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    <Input value={this.state.advertiser.mailingAddress.street1} onChange={(e) => { this.handleStreetOne(e) }} placeholder="Enter a street address..." type="text" name="name" />
+                                </InputContainer>
+                                <InputContainer>
+                                    <Text content={"Street Address Line 2"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    <Input value={this.state.advertiser.mailingAddress.street2} onChange={(e) => { this.handleStreetTwo(e) }} placeholder="Enter a street address... (Optional)" type="text" name="name" />
+                                </InputContainer>
+                                <InputContainer>
+                                    <Text content={"City"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    <Input value={this.state.advertiser.mailingAddress.city} onChange={(e) => { this.handleCity(e) }} placeholder="Enter a city..." type="text" name="name" />
+                                </InputContainer>
+                                <InputContainer>
+                                    <Text content={"State"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    <Input value={this.state.advertiser.mailingAddress.state} onChange={(e) => { this.handleState(e) }} placeholder="Enter a state..." type="text" name="name" />
+                                </InputContainer>
+                                <InputContainer>
+                                    <Text content={"Country"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    <Input value={this.state.advertiser.mailingAddress.country} onChange={(e) => { this.handleCountry(e) }} placeholder="Enter a country..." type="text" name="name" />
+                                </InputContainer>
+                                <InputContainer>
+                                    <Text content={"Zip Code"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    <Input value={this.state.advertiser.mailingAddress.zipcode} onChange={(e) => { this.handleZipcode(e) }} placeholder="Enter a zip code..." type="text" name="name" />
+                                </InputContainer>
+                                <div style={{ width: "100%", borderBottom: "1px solid #e2e2e2", marginTop: "28px", marginBottom: "56px" }}></div>
+
+                                <Text content={"Status"} sizes={[16, 16, 15, 15, 20]} fontFamily={"Poppins"} />
+                                <Text content={"Set the advertiser name as well as e-mail and phone number."} style={{ marginTop: "16px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
+                                <InputContainer>
+                                    <Text content={"Status"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    <div style={{ marginTop: "6px" }}>
+                                        <Select
+                                            value={{ value: this.state.advertiser.state, label: mapState(this.state.advertiser.state) }}
+                                            onChange={this.handleStatus}
+                                            options={[{ value: "active", label: "Active" }, { value: "under_review", label: "Under Review" }]}
+                                        />
+                                    </div>
+                                </InputContainer>
+                                {this.state.saving !== true ?
+                                    this.state.validations.saveButton.state === 'valid' ?
+                                        <Button onClick={() => { createAdvertiser(this.props.match.params.userId, this.state.advertiser, this.props.auth.accessToken, this) }} style={{ marginLeft: "auto", marginTop: "24px" }}>
+                                            <Text content={"Save"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                                        </Button> :
+                                        <Button style={{ marginLeft: "auto", marginTop: "24px", backgroundColor: "#e2e2e2", cursor: "not-allowed" }}>
+                                            <Text content={"Save"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                                        </Button>
+                                    :
+                                    <Button style={{ marginLeft: "auto", marginTop: "24px", cursor: "not-allowed" }}>
+                                        <Text content={"Saving..."} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                                    </Button>
+                                }
                             </>
                         </Section>
-                    </S.Container>
-                    <div style={{ height: "100%", width: "25%", position: "relative", marginLeft: "28px" }}>
-                        <div style={{ position: "fixed", width: "253px" }}>
-                            <Section fullWidthChild={true}>
-                                <div>
-                                    <Text style={{ textAlign: "center" }} content={"Advertiser"} sizes={[16, 16, 15, 15, 20]} fontFamily={"Poppins"} />
-                                    <div style={{ width: "100%", borderBottom: "1px solid #e2e2e2", marginTop: "4px", marginBottom: "12px" }}></div>
-                                    <Text style={{ marginBottom: "8px" }} content={"Profile"} sizes={[16, 16, 15, 15, 15]} fontFamily={"Poppins"} />
-
-                                    {this.renderValidation("name")}
-                                    {this.renderValidation("billingEmail")}
-                                    {this.renderValidation("phone")}
-
-                                    <div style={{ marginTop: "16px" }}></div>
-                                    <Text style={{ marginBottom: "8px" }} content={"Billing Address"} sizes={[16, 16, 15, 15, 15]} fontFamily={"Poppins"} />
-
-                                    {this.renderValidation("mailingAddress")}
-
-                                    <div style={{ marginTop: "16px" }}></div>
-                                    <Text style={{ marginBottom: "8px" }} content={"Status"} sizes={[16, 16, 15, 15, 15]} fontFamily={"Poppins"} />
-
-                                    {this.renderValidation("state")}
-
-                                    <S.Container>
-                                        {this.state.saving !== true ?
-
-                                            this.state.validations.saveButton.state === 'valid' ?
-                                                <S.Button onClick={() => { createAdvertiser(this.props.match.params.userId, this.state.advertiser, this.props.auth.accessToken, this) }} style={{ marginLeft: "auto", marginTop: "24px" }}>
-                                                    <Text content={"Save"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
-                                                </S.Button> :
-                                                <S.Button style={{ marginLeft: "auto", marginTop: "24px", backgroundColor: "#e2e2e2", cursor: "not-allowed" }}>
-                                                    <Text content={"Save"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
-                                                </S.Button>
-                                            :
-                                            <S.Button style={{ marginLeft: "auto", marginTop: "24px", cursor: "not-allowed" }}>
-                                                <Text content={"Saving..."} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
-                                            </S.Button>
-                                        }
-                                    </S.Container>
-                                </div>
-                            </Section>
-                        </div>
                     </div>
                 </div>
             </React.Fragment >

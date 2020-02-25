@@ -13,6 +13,7 @@ function initializeAdvertiser() {
         name: '',
         billingEmail: '',
         phone: '',
+        referrer: '',
         mailingAddress: {
             street1: '',
             street2: '',
@@ -33,6 +34,7 @@ export async function createAdvertiser(userId, advertiser, accessToken, context)
         userId: userId,
         name: advertiser.name,
         phone: advertiser.phone,
+        referrer: advertiser.referrer,
         billingEmail: advertiser.billingEmail,
         mailingAddress: advertiser.mailingAddress,
         billingAddress: advertiser.mailingAddress,
