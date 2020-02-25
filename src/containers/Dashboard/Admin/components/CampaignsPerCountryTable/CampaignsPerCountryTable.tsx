@@ -7,9 +7,8 @@ import columns from "./lib/Columns";
 import {
     useTable,
     useSortBy,
-    useTableState,
     usePagination,
-} from 'react-table'
+} from 'react-table';
 
 class CampaignsPerCountryTable extends Component<any, any> {
     constructor(props) {
@@ -26,8 +25,6 @@ class CampaignsPerCountryTable extends Component<any, any> {
 
 function TableWrapper({ columns, data }) {
 
-    const tableState = useTableState({ pageIndex: 0, pageSize: 5 })
-
     const {
         getTableProps,
         headerGroups,
@@ -41,12 +38,12 @@ function TableWrapper({ columns, data }) {
         nextPage,
         previousPage,
         setPageSize,
-        state: [{ pageIndex, pageSize }],
+        state: { pageIndex, pageSize },
     } = useTable(
         {
             columns,
             data,
-            state: tableState,
+            initialState: { pageIndex: 0, pageSize: 5 },
         },
         useSortBy,
         usePagination,

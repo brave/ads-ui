@@ -120,7 +120,7 @@ class CreativeInstanceList extends React.Component<any, any> {
             />
           </CardContent>
         </Card>
-        <Link className={classes.fab} to={match.url + "/creativeInstance/new"}>
+        <Link className={classes.fab} to={match.url.replace("/ads", "") + "/creativeInstance/new"}>
           <Button color="secondary" variant="fab">
             <Icon>add</Icon>
           </Button>
