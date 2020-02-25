@@ -200,62 +200,6 @@ class CampaignForm extends Component<any, any> {
         this.props.setAdSets(adSets);
     }
 
-    addAdSet() {
-        let adSets = this.props.adSets;
-        adSets.push({
-            pricingType: '',
-            bid: '',
-            lifetimeImpressions: '',
-            dailyImpressions: '',
-            braveML: true,
-            audiences: '',
-            conversionsCheckbox: false,
-            platforms: [
-                { value: 'android', label: 'Android' },
-                { value: 'ios', label: 'iOS' },
-                { value: 'macos', label: 'Mac OS' },
-                { value: 'windows', label: 'Windows' },
-                { value: 'linux', label: 'Linux' }
-            ],
-            conversion: {
-                type: 'post-view',
-                url: '',
-                observationWindow: { value: 7, label: "7" },
-            },
-            ads: [
-                {
-                    creative: '',
-                    newCreative: true,
-                    name: '',
-                    title: '',
-                    body: '',
-                    targetUrl: '',
-                    creativeUrl: '',
-                    size: '',
-                    notificationAd: true,
-                    inPageAd: false,
-                    channels: '',
-                    previewAssets: {
-                        title: '',
-                        body: '',
-                        creativeUrl: '',
-                    }
-                }
-            ]
-        })
-        this.props.setAdSets(adSets);
-    }
-
-    clearBids() {
-        let adSets = this.props.adSets;
-        if (adSets) {
-            adSets.forEach((adSet) => {
-                adSet.bid = '';
-            });
-        }
-        this.props.setAdSets(adSets);
-    }
-
     render() {
         return (
             <React.Fragment>
