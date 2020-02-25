@@ -413,7 +413,6 @@ class AdSetsForm extends Component<any, any> {
                                         </S.InputContainer>
 
                                     </S.RightColumn>
-
                                 </S.InnerContainer> */}
                                 <div style={{ display: "flex" }}>
                                     <S.SecondaryButton onClick={() => this.handleBack()} style={{ marginRight: "auto", marginTop: "56px" }}>

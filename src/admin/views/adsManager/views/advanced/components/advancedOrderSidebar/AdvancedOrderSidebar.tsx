@@ -132,7 +132,6 @@ class AdvancedOrderSidebar extends Component<any, any> {
                                     <S.NavSubItem>
                                         <S.Bracket></S.Bracket>
                                         <Text style={{ marginTop: "10px", marginLeft: "8px" }} content={"Budget"} sizes={[16, 16, 15, 15, 12]} fontFamily={"Poppins"} />
-
                                     </S.NavSubItem>
                                 </S.NavSubHeader>
                             </S.NavInnerContainer>

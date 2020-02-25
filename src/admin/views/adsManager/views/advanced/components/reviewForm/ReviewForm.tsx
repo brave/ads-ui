@@ -68,7 +68,6 @@ class ReviewForm extends Component<any, any> {
         console.log(keys);
         if (keys) {
             errors = keys.map((key) => {
-
                 if (key !== 'valid' && key !== 'adSets') {
                     if (this.props.validations[key].valid === false) {
                         return <Text content={`• ${this.props.validations[key].errorMessage}`} sizes={[16, 16, 15, 15, 15]} style={{ marginTop: "12px" }} fontFamily={"Muli"} />
@@ -114,7 +113,6 @@ class ReviewForm extends Component<any, any> {
                                 </span>
                             </div>
                         </div>
-
                         <Text style={{ marginTop: "16px" }} color={"grey"} content={"Pricing Type"} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
                         <Text style={{ marginTop: "16px" }} content={adSet.pricingType.label} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
 
@@ -211,8 +209,6 @@ class ReviewForm extends Component<any, any> {
                                 <Text style={{ marginTop: "4px" }} content={adSet.conversion.url} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
                                 <Text style={{ marginTop: "4px" }} content={adSet.conversion.observationWindow.label + " day observation window"} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
                             </>
-
-
                         }
 
                     </>
