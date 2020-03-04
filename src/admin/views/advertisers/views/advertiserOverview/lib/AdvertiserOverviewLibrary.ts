@@ -23,6 +23,7 @@ export async function updateAdvertiser(advertiserId, advertiser, accessToken, co
         id: advertiser.id,
         name: advertiser.name,
         phone: advertiser.phone,
+        referrer: advertiser.referrer,
         billingEmail: advertiser.billingEmail,
         mailingAddress: advertiser.mailingAddress,
         billingAddress: advertiser.mailingAddress,

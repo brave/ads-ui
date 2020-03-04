@@ -143,6 +143,7 @@ class CampaignForm extends Component<any, any> {
         this.props.setSelectedAdSet(0);
         this.props.setForm("adSetsForm");
     }
+
     addAdSet() {
         let adSets = this.props.adSets;
         adSets.push({
@@ -295,6 +296,8 @@ class CampaignForm extends Component<any, any> {
                                                 </div>
                                             </div>
                                         }
+
+
 
                                     </S.RightColumn>
                                 </S.InnerContainer>
