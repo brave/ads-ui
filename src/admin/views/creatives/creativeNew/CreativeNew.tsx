@@ -7,12 +7,28 @@ import { Text } from "../../../../components/Text/Text";
 
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { CREATE_NOTIFICATION_CREATIVE, CREATE_IN_PAGE_CREATIVE } from "./lib/CreativeNew.queries";
+import Select from 'react-select';
 
-import normalizeUrl from 'normalize-url';
+const customStyles = {
+    control: (provided, state) => ({
+        ...provided,
+        backgroundColor: "#fafafa"
+    }),
+}
+
+const statusTypes = [
+    { value: 'draft', label: 'Draft' },
+    { value: 'under_review', label: 'Under Review' },
+    { value: 'active', label: 'Active' },
+    { value: 'suspended', label: 'Suspended' },
+    { value: 'deleted', label: 'Deleted' },
+    { value: 'paused', label: 'Paused' },
+]
 
 const CreativeNew = props => {
 
     const [name, setName] = useState('');
+    const [status, setStatus] = useState({ value: 'active', label: 'Active' });
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [targetUrl, setTargetUrl] = useState('');
@@ -50,6 +66,7 @@ const CreativeNew = props => {
                     userId: props.match.params.userId,
                     advertiserId: props.match.params.advertiserId,
                     creativeId: props.match.params.creativeId,
+                    state: status.value,
                     name,
                     type: {
                         code: "notification_all_v1",
@@ -73,6 +90,7 @@ const CreativeNew = props => {
                     advertiserId: props.match.params.advertiserId,
                     creativeId: props.match.params.creativeId,
                     name,
+                    state: status.value,
                     type: {
                         code: "in_page_all_v1",
                         name: "in_page"
@@ -122,15 +140,6 @@ const CreativeNew = props => {
         else {
             setValidations({} as any);
             return true;
-        }
-    }
-
-    const formatTargetUrl = () => {
-        try {
-            setTargetUrl(normalizeUrl(targetUrl, { forceHttps: true }));
-        }
-        catch (e) {
-
         }
     }
 
@@ -213,13 +222,26 @@ const CreativeNew = props => {
                                 </div>
                                 {
                                     !validations.targetUrlValidation ?
-                                        <Input value={targetUrl} onChange={event => setTargetUrl(event.target.value)} onBlur={() => { formatTargetUrl() }}></Input>
+                                        <Input value={targetUrl} onChange={event => setTargetUrl(event.target.value)}></Input>
                                         :
                                         <>
-                                            <Input error={true} value={targetUrl} onChange={event => setTargetUrl(event.target.value)} onBlur={() => { formatTargetUrl() }}></Input>
+                                            <Input error={true} value={targetUrl} onChange={event => setTargetUrl(event.target.value)}></Input>
                                             <Text style={{ marginTop: "4px" }} color={"#E32444"} content={validations.targetUrlValidation} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                         </>
                                 }
+                            </InputContainer>
+
+                            <InputContainer>
+                                <div style={{ display: "flex", marginBottom: "4px" }}>
+                                    <Text content={"State"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                </div>
+                                <Select
+                                    styles={customStyles}
+                                    onChange={setStatus}
+                                    value={status}
+                                    options={statusTypes}
+                                />
+
                             </InputContainer>
 
                             <Divider />

@@ -55,6 +55,7 @@ import { createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import AdSetAds from "./views/adSets/adSetAds/AdSetAds";
+import CampaignListOverview from "./views/campaignsList/campaignListOverview/CampaignListOverview";
 
 
 
@@ -181,8 +182,9 @@ class Admin extends React.Component<any, any> {
                                 <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/creative/:creativeId"}
                                     component={Creative} />
 
-
-                                <Route path={match.url + "/campaigns"} component={CampaignsList} />
+                                <Route path={match.url + "/campaigns/overview"} component={CampaignListOverview} />
+                                <Route path={match.url + "/campaigns/pacing"} component={CampaignsList} />
+                                <Route path={match.url + "/campaigns/approvals"} component={CampaignsList} />
                                 <Redirect to={match.url + "/dashboard"} />
                             </Switch>
                         </S.Main>
