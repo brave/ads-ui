@@ -5,18 +5,34 @@ import * as S from "./styles/Creative.style";
 import Section from '../../../../components/section/Section';
 import { Divider, Input, InputContainer, Selection, Button, MessageContainer, ErrorIcon, SuccessIcon, Message } from "../../../../components/formElements/formElements";
 import { Text } from "../../../../components/Text/Text";
+import Select from 'react-select';
 
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { CREATIVE, UPDATE_NOTIFICATION_CREATIVE, UPDATE_IN_PAGE_CREATIVE } from "./lib/Creative.queries";
 
 import Context from "../../../../state/context";
-import normalizeUrl from 'normalize-url';
+const customStyles = {
+    control: (provided, state) => ({
+        ...provided,
+        backgroundColor: "#fafafa"
+    }),
+}
+
+const statusTypes = [
+    { value: 'draft', label: 'Draft' },
+    { value: 'under_review', label: 'Under Review' },
+    { value: 'active', label: 'Active' },
+    { value: 'suspended', label: 'Suspended' },
+    { value: 'deleted', label: 'Deleted' },
+    { value: 'paused', label: 'Paused' },
+]
 
 const Creative = props => {
 
     const context = useContext(Context);
 
     const [name, setName] = useState('');
+    const [status, setStatus] = useState({} as any);
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [targetUrl, setTargetUrl] = useState('');
@@ -42,6 +58,7 @@ const Creative = props => {
                     advertiserId: props.match.params.advertiserId,
                     creativeId: props.match.params.creativeId,
                     name,
+                    state: status.value,
                     type: {
                         code: "notification_all_v1",
                         name: "notification"
@@ -64,6 +81,7 @@ const Creative = props => {
                     advertiserId: props.match.params.advertiserId,
                     creativeId: props.match.params.creativeId,
                     name,
+                    state: status.value,
                     type: {
                         code: "in_page_all_v1",
                         name: "in_page"
@@ -83,6 +101,7 @@ const Creative = props => {
         setName(data.creative.name);
         setType(data.creative.type.code);
         setTargetUrl(data.creative.payload.targetUrl);
+        setStatus({ value: data.creative.state, label: data.creative.state });
 
         if (data.creative.type.code === "notification_all_v1") {
             setTitle(data.creative.payload.title);
@@ -133,15 +152,6 @@ const Creative = props => {
         else {
             setValidations({} as any);
             return true;
-        }
-    }
-
-    const formatTargetUrl = () => {
-        try {
-            setTargetUrl(normalizeUrl(targetUrl, { forceHttps: true }));
-        }
-        catch (e) {
-
         }
     }
 
@@ -243,13 +253,26 @@ const Creative = props => {
                                 </div>
                                 {
                                     !validations.targetUrlValidation ?
-                                        <Input value={targetUrl} onChange={event => setTargetUrl(event.target.value)} onBlur={() => { formatTargetUrl() }}></Input>
+                                        <Input value={targetUrl} onChange={event => setTargetUrl(event.target.value)}></Input>
                                         :
                                         <>
-                                            <Input error={true} value={targetUrl} onChange={event => setTargetUrl(event.target.value)} onBlur={() => { formatTargetUrl() }}></Input>
+                                            <Input error={true} value={targetUrl} onChange={event => setTargetUrl(event.target.value)}></Input>
                                             <Text style={{ marginTop: "4px" }} color={"#E32444"} content={validations.targetUrlValidation} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                         </>
                                 }
+                            </InputContainer>
+
+                            <InputContainer>
+                                <div style={{ display: "flex", marginBottom: "4px" }}>
+                                    <Text content={"State"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                </div>
+                                <Select
+                                    styles={customStyles}
+                                    onChange={setStatus}
+                                    value={status}
+                                    options={statusTypes}
+                                />
+
                             </InputContainer>
 
                             <Divider />
