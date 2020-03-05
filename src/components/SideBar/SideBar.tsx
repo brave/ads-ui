@@ -110,7 +110,7 @@ function renderNav(props) {
               </Text>
             </S.Nav>
           </Link>
-          <Link style={linkStyle} to={props.match.url + "/campaigns"}>
+          <Link style={linkStyle} to={props.match.url + "/campaigns/overview"}>
             <S.Nav
               selected={window.location.pathname.includes(
                 props.match.url + "/campaigns"
