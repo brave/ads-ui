@@ -132,22 +132,7 @@ class ReviewForm extends Component<any, any> {
                         }
 
                         <Text style={{ marginTop: "16px" }} color={"grey"} content={"Bid"} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
-                        {
-                            (this.props.adSets[index].pricingType.value === 'cpm' && this.props.campaign.currency.label === "USD") &&
-                            <Text style={{ marginTop: "16px" }} content={"$20 Per 1000 Impressions."} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
-                        }
-                        {
-                            (this.props.adSets[index].pricingType.value === 'cpm' && this.props.campaign.currency.label === "BAT") &&
-                            <Text style={{ marginTop: "16px" }} content={"70 BAT Per 1000 Impressions."} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
-                        }
-                        {
-                            (this.props.adSets[index].pricingType.value === 'cpc' && this.props.campaign.currency.label === "USD") &&
-                            <Text style={{ marginTop: "16px" }} content={"$0.20 Per Click."} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
-                        }
-                        {
-                            (this.props.adSets[index].pricingType.value === 'cpc' && this.props.campaign.currency.label === "BAT") &&
-                            <Text style={{ marginTop: "16px" }} content={"1 BAT Per Click."} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
-                        }
+                        <Text style={{ marginTop: "16px" }} content={adSet.bid} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
 
                         {
                             this.props.validations.adSets[index].bid?.valid === false &&
