@@ -21,9 +21,9 @@ const CampaignListOverview = props => {
     const { match } = props;
 
     const tabConfig = [
-        { label: "Overview", selected: true, link: match.url.replace("/ads", "") },
-        { label: "Pacing", selected: false, link: match.url.replace("/ads", "") },
-        { label: "Approvals", selected: false, link: match.url.replace("/ads", "") },
+        { label: "Overview", selected: true, link: match.url },
+        { label: "Pacing", selected: false, link: match.url.replace("/overview", "/pacing") },
+        { label: "Approvals", selected: false, link: match.url.replace("/overview", "/approvals") },
     ]
 
     const processData = data => {

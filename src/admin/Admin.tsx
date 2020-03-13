@@ -56,6 +56,8 @@ import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import AdSetAds from "./views/adSets/adSetAds/AdSetAds";
 import CampaignListOverview from "./views/campaignsList/campaignListOverview/CampaignListOverview";
+import CampaignListApprovals from "./views/campaignsList/campaignListApprovals/CampaignListApprovals";
+import CampaignListPacing from "./views/campaignsList/campaignListPacing/CampaignListPacing";
 
 
 class Admin extends React.Component<any, any> {
@@ -180,8 +182,8 @@ class Admin extends React.Component<any, any> {
                                 <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/creative/:creativeId"}
                                     component={Creative} />
                                 <Route path={match.url + "/campaigns/overview"} component={CampaignListOverview} />
-                                <Route path={match.url + "/campaigns/pacing"} component={CampaignsList} />
-                                <Route path={match.url + "/campaigns/approvals"} component={CampaignsList} />
+                                <Route path={match.url + "/campaigns/pacing"} component={CampaignListPacing} />
+                                <Route path={match.url + "/campaigns/approvals"} component={CampaignListApprovals} />
                                 <Redirect to={match.url + "/dashboard"} />
                             </Switch>
                         </S.Main>

@@ -38,6 +38,37 @@ export const Input = styled("input")`
     
   `
 
+export const TextArea = styled("textarea")`
+  width: 100%;
+  height: 126px;
+  border-radius: 4px;
+  border: 1px solid #dfdfdf;
+  background-color: #fafafa;
+  margin-top: 4px;
+  padding-left: 14px;
+  font-size: 14px;
+  font-family: Muli;
+  resize: none;
+
+  :focus{
+    outline-width: 0;
+    border: 1px solid #F97555;
+    transition: border .25s;
+  }
+
+  ${(props: InputProps) =>
+    props.error === true &&
+    `
+    border: 1px solid #E32444;
+
+    :focus{
+      border: 1px solid #E32444;
+    }
+    `
+  }
+  
+`
+
 interface SelectionProps {
   selected: boolean;
 }
