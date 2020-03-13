@@ -181,7 +181,6 @@ class Admin extends React.Component<any, any> {
                                     component={CreativeNew} />
                                 <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/creative/:creativeId"}
                                     component={Creative} />
-
                                 <Route path={match.url + "/campaigns/overview"} component={CampaignListOverview} />
                                 <Route path={match.url + "/campaigns/pacing"} component={CampaignListPacing} />
                                 <Route path={match.url + "/campaigns/approvals"} component={CampaignListApprovals} />
