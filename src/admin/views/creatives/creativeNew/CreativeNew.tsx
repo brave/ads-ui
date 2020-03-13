@@ -243,7 +243,6 @@ const CreativeNew = props => {
                                 />
 
                             </InputContainer>
-
                             <Divider />
 
                             <Text content={"Creative"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
