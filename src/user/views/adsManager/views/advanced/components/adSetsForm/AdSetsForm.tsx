@@ -234,7 +234,7 @@ class AdSetsForm extends Component<any, any> {
                                             </div>
                                         </S.InputContainer>
                                         <S.InputContainer>
-                                            <div style={{ display: "flex" }}>
+                                            {/* <div style={{ display: "flex" }}>
                                                 <Text content={"Bid"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                                 <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "1px", marginLeft: "2px" }}>info</Icon>
                                                 {
@@ -253,10 +253,9 @@ class AdSetsForm extends Component<any, any> {
                                                     (this.props.adSets[this.props.selectedAdSet].pricingType.value === 'cpc' && this.props.campaign.currency.label === "BAT") &&
                                                     <Text style={{ marginLeft: "14px" }} content={"1 BAT Per Click."} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                                 }
-                                            </div>
+                                            </div> */}
                                             <div style={{ display: "flex", alignItems: "center" }}>
-                                                {/* <S.Input value={this.props.adSets[this.props.selectedAdSet].bid} onChange={(e) => this.handleBid(e)} onBlur={(e) => this.formatBid(e)} style={{ width: "175px" }} placeholder="Enter a bid..." /> */}
-
+                                                <S.Input value={this.props.adSets[this.props.selectedAdSet].bid} onChange={(e) => this.handleBid(e)} onBlur={(e) => this.formatBid(e)} style={{ width: "175px" }} placeholder="Enter a bid..." />
                                             </div>
                                         </S.InputContainer>
                                     </S.RightColumn>

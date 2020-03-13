@@ -106,22 +106,29 @@ async function processAds(adSet, userId, advertiserId, accessToken, campaign) {
 
             entry.creativeId = creativeId;
 
-            if (adSet.pricingType.value === "cpm" && campaign.currency.label === "USD") {
-                entry.prices = [{ amount: 20, type: "view" }]
-                console.log(entry.prices);
+            if (adSet.pricingType.value === "cpm") {
+                entry.prices = [{ amount: adSet.bid.replace(/[^0-9\.]/g, ''), type: "view" }]
             }
-            else if (adSet.pricingType.value === "cpm" && campaign.currency.label === "BAT") {
-                entry.prices = [{ amount: 70, type: "view" }]
-                console.log(entry.prices);
+            else {
+                entry.prices = [{ amount: adSet.bid.replace(/[^0-9\.]/g, ''), type: "click" }]
             }
-            else if (adSet.pricingType.value === "cpc" && campaign.currency.label === "USD") {
-                entry.prices = [{ amount: .20, type: "click" }]
-                console.log(entry.prices);
-            }
-            else if (adSet.pricingType.value === "cpc" && campaign.currency.label === "BAT") {
-                entry.prices = [{ amount: 1, type: "click" }]
-                console.log(entry.prices);
-            }
+
+            // if (adSet.pricingType.value === "cpm" && campaign.currency.label === "USD") {
+            //     entry.prices = [{ amount: 20, type: "view" }]
+            //     console.log(entry.prices);
+            // }
+            // else if (adSet.pricingType.value === "cpm" && campaign.currency.label === "BAT") {
+            //     entry.prices = [{ amount: 70, type: "view" }]
+            //     console.log(entry.prices);
+            // }
+            // else if (adSet.pricingType.value === "cpc" && campaign.currency.label === "USD") {
+            //     entry.prices = [{ amount: .20, type: "click" }]
+            //     console.log(entry.prices);
+            // }
+            // else if (adSet.pricingType.value === "cpc" && campaign.currency.label === "BAT") {
+            //     entry.prices = [{ amount: 1, type: "click" }]
+            //     console.log(entry.prices);
+            // }
 
             entry.webhooks = [];
 
