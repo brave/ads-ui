@@ -43,9 +43,9 @@ const platformTypes = [
 ]
 
 const windowTypes = [
-    { value: '1', label: '1' },
-    { value: '7', label: '7' },
-    { value: '30', label: '30' }
+    { value: 1, label: '1 Day' },
+    { value: 7, label: '7 Days' },
+    { value: 30, label: '30 Days' }
 ]
 
 
@@ -60,6 +60,9 @@ const AdSetNew = props => {
     const [eligibleChannels, setEligibleChannels] = useState([]);
     const [platforms, setPlatforms] = useState([]);
     const [channels, setChannels] = useState([]);
+    const [conversionType, setConversionType] = useState("postview");
+    const [conversionUrl, setConversionUrl] = useState('');
+    const [conversionWindow, setConversionWindow] = useState({ value: 1, label: "1 Day" })
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
     const [saving, setSaving] = useState(false);
@@ -127,6 +130,19 @@ const AdSetNew = props => {
         return channelsInput
     }
 
+    const prepareConversionsInput = () => {
+        let conversionsInput = [] as any;
+
+        if (conversionUrl !== '') {
+            conversionsInput.push({
+                urlPattern: conversionUrl,
+                type: conversionType,
+                observationWindow: conversionWindow.value
+            });
+        }
+        return conversionsInput
+    }
+
     const [createAdSet, { loading: mutationLoading, error: mutationError }] =
         useMutation(CREATE_AD_SET, {
             variables: {
@@ -139,7 +155,8 @@ const AdSetNew = props => {
                     billingType: pricingType.value,
                     segments: prepareSegmentInput(selectedAudiences),
                     oses: prepareOSesInput(platforms),
-                    channels: prepareChannelsInput(channels)
+                    channels: prepareChannelsInput(channels),
+                    conversions: prepareConversionsInput(),
                 }
             },
             onCompleted: createAdSetForm
@@ -352,7 +369,7 @@ const AdSetNew = props => {
 
                             </InputContainer>
 
-                            {/* <Divider />
+                            <Divider />
 
                             <Text content={"Conversion"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
                             <div style={{ display: "flex" }}>
@@ -363,12 +380,12 @@ const AdSetNew = props => {
                             <InputContainer>
 
                                 <div style={{ display: "flex", marginTop: "8px", marginBottom: "8px" }}>
-                                    <RadioButton checked={true} style={{ marginRight: "8px" }} type="radio" name="gender" value="male" />
+                                    <RadioButton checked={conversionType === "postview"} onClick={(e) => { setConversionType("postview") }} style={{ marginRight: "8px" }} type="radio" name="gender" value="male" />
                                     <Text style={{ marginTop: "-1px", marginLeft: "8px" }} content={"Post-View"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                 </div>
 
                                 <div style={{ display: "flex", marginTop: "8px", marginBottom: "12px" }}>
-                                    <RadioButton checked={false} style={{ marginRight: "8px" }} type="radio" name="gender" value="male" />
+                                    <RadioButton checked={conversionType === "postclick"} onClick={(e) => { setConversionType("postclick") }} style={{ marginRight: "8px" }} type="radio" name="gender" value="male" />
                                     <Text style={{ marginTop: "-1px", marginLeft: "8px" }} content={"Post-Click"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                 </div>
 
@@ -378,7 +395,7 @@ const AdSetNew = props => {
                                 <div style={{ display: "flex" }}>
                                     <Text content={"URL Pattern"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                 </div>
-                                <Input value={dailyImpressions} onChange={event => setDailyImpressions(event.target.value)}></Input>
+                                <Input placeholder="Enter a conversion url..." value={conversionUrl} onChange={event => setConversionUrl(event.target.value)}></Input>
                             </InputContainer>
 
                             <InputContainer>
@@ -387,11 +404,11 @@ const AdSetNew = props => {
                                 </div>
                                 <Select
                                     styles={customStyles}
-                                    onChange={setSelectedAudieces}
-                                    value={selectedAudiences}
+                                    onChange={setConversionWindow}
+                                    value={conversionWindow}
                                     options={windowTypes}
                                 />
-                            </InputContainer> */}
+                            </InputContainer>
 
 
 
