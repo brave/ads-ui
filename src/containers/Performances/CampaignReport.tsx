@@ -35,6 +35,7 @@ class CampaignReport extends Component<any, any> {
             clickCount: 0,
             dismissCount: 0,
             landedCount: 0,
+            conversionCount: 0,
             androidCount: 0,
             iosCount: 0,
             macosCount: 0,
@@ -43,7 +44,7 @@ class CampaignReport extends Component<any, any> {
             otherCount: 0,
             upvotedCount: null,
             downvotedCount: null,
-            metricSelected: [true, true, true, true],
+            metricSelected: [true, true, true, true, true],
             timeInterval: 'Daily'
         }
     }
@@ -54,7 +55,7 @@ class CampaignReport extends Component<any, any> {
     }
 
     sumConfirmationTypes(data) {
-        let [viewCount, clickCount, dismissCount, landedCount, upvotedCount, downvotedCount] = [0, 0, 0, 0, 0, 0];
+        let [viewCount, clickCount, dismissCount, landedCount, upvotedCount, downvotedCount, conversionCount] = [0, 0, 0, 0, 0, 0, 0];
         let [androidCount, iosCount, macosCount, linuxCount, windowsCount, otherCount] = [0, 0, 0, 0, 0, 0];
         data.forEach((record) => {
             androidCount += record.confirmationsAndroid;
@@ -76,6 +77,9 @@ class CampaignReport extends Component<any, any> {
                 case "landed":
                     landedCount += record.confirmationsCount;
                     break;
+                case "conversion":
+                    conversionCount += record.confirmationsCount;
+                    break;
                 case "upvote":
                     upvotedCount += record.confirmationsCount;
                     break;
@@ -84,7 +88,7 @@ class CampaignReport extends Component<any, any> {
                     break;
             }
         });
-        this.setState({ viewCount, clickCount, dismissCount, landedCount, upvotedCount, downvotedCount, androidCount, iosCount, macosCount, linuxCount, windowsCount, otherCount },
+        this.setState({ viewCount, clickCount, dismissCount, landedCount, upvotedCount, downvotedCount, conversionCount, androidCount, iosCount, macosCount, linuxCount, windowsCount, otherCount },
             () => { this.formatChartData(this.props.report.records) })
     }
 
@@ -118,19 +122,23 @@ class CampaignReport extends Component<any, any> {
         let clickData = [] as any;
         let dismissData = [] as any;
         let landData = [] as any;
+        let conversionData = [] as any;
+
         Object.keys(processedData).forEach((key) => {
-            let viewCount = 0; let clickCount = 0; let dismissCount = 0; let landCount = 0;
+            let viewCount = 0; let clickCount = 0; let dismissCount = 0; let landCount = 0; let conversionCount = 0;
             processedData[key].forEach((data) => {
                 viewCount += data.viewCount;
                 clickCount += data.clickCount;
                 dismissCount += data.dismissCount;
                 landCount += data.landCount;
+                conversionCount += data.conversionCount;
             });
             if (!isNaN(new Date(key).getTime())) {
                 viewData.push([new Date(key).getTime(), viewCount])
                 clickData.push([new Date(key).getTime(), clickCount])
                 dismissData.push([new Date(key).getTime(), dismissCount])
                 landData.push([new Date(key).getTime(), landCount])
+                conversionData.push([new Date(key).getTime(), conversionCount])
             }
         });
 
@@ -146,6 +154,9 @@ class CampaignReport extends Component<any, any> {
         landData = _.sortBy(landData, (element) => {
             return Object.values(element)[0]
         });
+        conversionData = _.sortBy(conversionData, (element) => {
+            return Object.values(element)[0]
+        });
 
         if (!this.state.metricSelected[0]) {
             viewData = [];
@@ -158,6 +169,9 @@ class CampaignReport extends Component<any, any> {
         }
         if (!this.state.metricSelected[3]) {
             landData = [];
+        }
+        if (!this.state.metricSelected[4]) {
+            conversionData = [];
         }
 
         var myChart = Highcharts.chart('container', {
@@ -219,6 +233,13 @@ class CampaignReport extends Component<any, any> {
                 name: '10s Visits',
                 data: landData,
                 color: Colors.Quaternary,
+                turboThreshold: 1000000,
+                connectNulls: true
+            },
+            {
+                name: 'Conversions',
+                data: conversionData,
+                color: Colors.Fifth,
                 turboThreshold: 1000000,
                 connectNulls: true
             }] as any
@@ -382,6 +403,16 @@ class CampaignReport extends Component<any, any> {
                                 </Text>
                             <Text style={{ marginTop: "6px" }} fontFamily={"Poppins"} sizes={[18, 18, 42, 42, 24]}>
                                 {this.state.landedCount.toLocaleString('en')}
+                            </Text>
+                        </div>
+                    </S.Statistic>
+                    <S.Statistic selected={this.state.metricSelected[4]} color={Colors.Fifth} onClick={() => { this.toggleMetric(4) }} >
+                        <div>
+                            <Text style={{ marginLeft: "2px" }} fontFamily={"Muli"} sizes={[18, 18, 20, 20, 14]}>
+                                Conversions
+                                </Text>
+                            <Text style={{ marginTop: "6px" }} fontFamily={"Poppins"} sizes={[18, 18, 42, 42, 24]}>
+                                {this.state.conversionCount.toLocaleString('en')}
                             </Text>
                         </div>
                     </S.Statistic>
@@ -564,7 +595,7 @@ function processData(data) {
 
     result.forEach((record) => {
         let index = Object.keys(record)[0] as any;
-        let dataPoint = { index, viewCount: 0, clickCount: 0, dismissCount: 0, landCount: 0 }
+        let dataPoint = { index, viewCount: 0, clickCount: 0, dismissCount: 0, landCount: 0, conversionCount: 0 }
         //@ts-ignore
         record[index].forEach((datum) => {
             switch (datum.confirmationsType) {
@@ -579,6 +610,9 @@ function processData(data) {
                     return;
                 case "landed":
                     dataPoint.landCount += datum.confirmationsCount;
+                    return;
+                case "conversion":
+                    dataPoint.conversionCount += datum.confirmationsCount;
                     return;
             }
         });
