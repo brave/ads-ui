@@ -93,7 +93,7 @@ class CreativeSetList extends React.Component<any, any> {
             />
           </CardContent>
         </Card>
-        <Link className={classes.fab} to={match.url + "/creativeSet/new"}>
+        <Link className={classes.fab} to={match.url + "/new"}>
           <Button color="secondary" variant="fab">
             <Icon>add</Icon>
           </Button>
