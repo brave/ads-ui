@@ -50,6 +50,7 @@ import CampaignListApprovals from "./views/campaignsList/campaignListApprovals/C
 import CampaignListPacing from "./views/campaignsList/campaignListPacing/CampaignListPacing";
 import Campaign from "./views/campaigns/campaign/Campaign";
 import CampaignNew from "./views/campaigns/campaignNew/CampaignNew";
+import CampaignAdSets from "./views/campaigns/campaignAdSets/CampaignAdSets";
 
 
 class Admin extends React.Component<any, any> {
@@ -144,6 +145,7 @@ class Admin extends React.Component<any, any> {
                                 {/* /campaign */}
                                 <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/campaign/new"} component={CampaignNew} />
                                 <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/campaign/:campaignId"} component={Campaign} />
+                                <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/campaign/:campaignId/creativeSet"} component={CampaignAdSets} />
                                 <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/campaign/:campaignId/report"} component={CampaignPerformance} />
                                 <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/campaign/:campaignId/analytics/overview"} component={Overview} />
                                 <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/campaign/:campaignId/analytics/platforms"} component={Platforms} />

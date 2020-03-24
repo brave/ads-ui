@@ -22,7 +22,7 @@ class CreativeSetItem extends React.Component<any, any> {
           <div>{creativeSet.state}</div>
         </TableCell>
         <TableCell>
-          <Link className={classes.viewButton} to={`${match.url}/creativeSet/${creativeSet.id}`}>
+          <Link className={classes.viewButton} to={`${match.url}/${creativeSet.id}`}>
             <IconButton color="primary">
               <Icon>list</Icon>
             </IconButton>
