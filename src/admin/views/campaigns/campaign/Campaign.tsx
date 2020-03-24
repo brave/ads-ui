@@ -10,6 +10,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import { CAMPAIGN, UPDATE_CAMPAIGN } from "./lib/Campaign.queries";
 
 import Context from "../../../../state/context";
+import TabSelector from '../../../../components/tabSelector/TabSelector';
 const customStyles = {
     control: (provided, state) => ({
         ...provided,
@@ -43,6 +44,8 @@ const campaignTypes = [
     { value: 'cause', label: 'Cause' },
 ]
 
+
+
 const Campaign = props => {
 
     const context = useContext(Context);
@@ -65,6 +68,11 @@ const Campaign = props => {
     const [error, setError] = useState(false);
     const [saving, setSaving] = useState(false);
     const [validations, setValidations] = useState({} as any);
+
+    const tabConfig = [
+        { label: "Overview", selected: true, link: props.match.url },
+        { label: "Ad Sets", selected: false, link: props.match.url.concat("/creativeSet") },
+    ]
 
     const handleUpdateCampaign = data => {
         setError(false);
@@ -280,6 +288,7 @@ const Campaign = props => {
                         </MessageContainer>
                     }
 
+                    <TabSelector config={tabConfig} />
                     <Section fullWidthChild={true}>
                         <>
                             <Text content={"Campaign Details"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
