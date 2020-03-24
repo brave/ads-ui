@@ -24,3 +24,8 @@ input[type="datetime-local"]::-webkit-clear-button {
 input[type="datetime-local"]::-webkit-inner-spin-button {
   display: none;
 }
+
+.ReactModal__Overlay {
+  z-index: 100000;
+  background-color: rgb(0,0,0,0.3) !important;
+}
