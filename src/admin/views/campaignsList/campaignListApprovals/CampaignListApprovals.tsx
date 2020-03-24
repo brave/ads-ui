@@ -14,7 +14,6 @@ import Table from "../../../../components/Table/TableComponent";
 import { Link } from "react-router-dom";
 import { Icon } from "@material-ui/core";
 import { SecondaryButton, TextArea } from "../../../../components/formElements/formElements";
-
 import Modal from 'react-modal';
 import ReactDOM from "react-dom";
 import RadioButton from "../../../../components/radioButton/RadioButton";

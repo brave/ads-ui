@@ -11,6 +11,7 @@ import { CAMPAIGN, UPDATE_CAMPAIGN } from "./lib/Campaign.queries";
 
 import Context from "../../../../state/context";
 import TabSelector from '../../../../components/tabSelector/TabSelector';
+
 const customStyles = {
     control: (provided, state) => ({
         ...provided,
@@ -43,8 +44,6 @@ const campaignTypes = [
     { value: 'house', label: 'House' },
     { value: 'cause', label: 'Cause' },
 ]
-
-
 
 const Campaign = props => {
 
@@ -289,6 +288,7 @@ const Campaign = props => {
                     }
 
                     <TabSelector config={tabConfig} />
+
                     <Section fullWidthChild={true}>
                         <>
                             <Text content={"Campaign Details"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
