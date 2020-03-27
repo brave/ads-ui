@@ -21,11 +21,11 @@ const pricingTypes = [
 ]
 
 const platforms = [
-    { value: 'android', label: 'Android' },
-    { value: 'ios', label: 'iOS' },
-    { value: 'macos', label: 'Mac OS' },
-    { value: 'windows', label: 'Windows' },
-    { value: 'linux', label: 'Linux' },
+    { value: "_Bt5nxrNo", label: "macos" },
+    { value: "k80syyzDa", label: "ios" },
+    { value: "i1g4cO6Pl", label: "windows" },
+    { value: "-Ug5OXisJ", label: "linux" },
+    { value: "mbwfZU-4W", label: "android" },
 ]
 
 class AdSetsForm extends Component<any, any> {
@@ -73,29 +73,13 @@ class AdSetsForm extends Component<any, any> {
         this.props.setAdSets(adSets);
     }
 
-    handleConversionsCheckbox(e) {
-        let adSets = this.props.adSets;
-        if (e.target.checked) {
-            adSets[this.props.selectedAdSet].conversionsCheckbox = true;
-        }
-        else {
-            adSets[this.props.selectedAdSet].conversionsCheckbox = false;
-            adSets[this.props.selectedAdSet].conversion = {
-                type: 'post-view',
-                url: '',
-                observationWindow: { value: 7, label: "7" },
-            };
-        }
-        this.props.setAdSets(adSets);
-    }
-
     handleConversionType(value) {
         let adSets = this.props.adSets;
-        if (value === 'post-view') {
-            adSets[this.props.selectedAdSet].conversion.type = 'post-view';
+        if (value === 'postview') {
+            adSets[this.props.selectedAdSet].conversion.type = 'postview';
         }
-        if (value === 'post-click') {
-            adSets[this.props.selectedAdSet].conversion.type = 'post-click';
+        if (value === 'postclick') {
+            adSets[this.props.selectedAdSet].conversion.type = 'postclick';
         }
         this.props.setAdSets(adSets);
     }

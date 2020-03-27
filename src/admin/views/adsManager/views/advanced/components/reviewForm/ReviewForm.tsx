@@ -197,11 +197,11 @@ class ReviewForm extends Component<any, any> {
                                 <Text style={{ marginTop: "4px" }} content={adSet.platforms.map((platform) => { return ` ${platform.label}` })} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
                         }
 
-                        <Text style={{ marginTop: "16px" }} color={"grey"} content={"Conversion"} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
+                        <Text style={{ marginTop: "16px" }} color={"grey"} content={"Conversion Measurement"} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
 
-                        {!adSet.conversionsCheckbox ?
+                        {adSet.conversion.url === '' ?
 
-                            <Text style={{ marginTop: "4px" }} content={"No conversion tracking set."} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
+                            <Text style={{ marginTop: "4px" }} content={"No conversion measurements set."} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
 
                             :
                             <>

@@ -31,11 +31,34 @@ async function processAdSets(adSets, userId, advertiserId, accessToken) {
                     })
                 }
             }
-            segments = segments;
+
             createAdSetInput.segments = segments;
 
-            // Impl. Platforms and Conversion
-            // Good Up to here
+            let platforms = [] as any;
+
+            if (adSet.platforms) {
+                adSet.platforms.forEach((platform) => {
+                    let entry = {
+                        code: platform.value,
+                        name: platform.label
+                    }
+                    platforms.push(entry);
+                });
+            }
+
+            createAdSetInput.oses = platforms;
+
+            let conversions = [] as any;
+
+            if (adSet.conversion.url !== '') {
+                conversions.push({
+                    urlPattern: adSet.conversion.url,
+                    type: adSet.conversion.type,
+                    observationWindow: adSet.conversion.observationWindow.value
+                })
+            }
+
+            createAdSetInput.conversions = conversions;
 
             let ads = await processAds(adSet, userId, advertiserId, accessToken);
             createAdSetInput.ads = ads;
