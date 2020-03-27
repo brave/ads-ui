@@ -66,6 +66,7 @@ export function createCreativeMutation(createCreativeInput) {
                 name: "${createCreativeInput.name}"
                 payload: ${createCreativeInput.payload}
                 type: ${createCreativeInput.type}
+                state: "active"
             }
         ){
             id
