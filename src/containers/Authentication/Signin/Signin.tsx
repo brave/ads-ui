@@ -3,7 +3,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import "../../../assets/fonts/fonts.css";
-import locale from "../../../locales/en";
 
 import Button from "../../../components/Button/Button";
 import Card from "../../../components/Card/Card";
@@ -37,13 +36,13 @@ class SignInContainer extends React.Component<any, any> {
             <S.Header>
               <S.Logo />
               <H2 fontFamily={"Poppins"} color={"#434251"}>
-                {locale.SignIn.header}
+                Sign into your brave account
               </H2>
             </S.Header>
             <SigninForm />
             <S.ButtonContainer>
               <Button onClick={this.submit} type={"primary"} size={"medium"}>
-                {locale.SignIn.signIn}
+                Sign in
               </Button>
             </S.ButtonContainer>
             {/* <S.Footer>

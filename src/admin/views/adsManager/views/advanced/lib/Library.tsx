@@ -87,16 +87,15 @@ function initializeAdSets() {
             dailyImpressions: '',
             braveML: true,
             audiences: '',
-            conversionsCheckbox: false,
             platforms: [
-                { value: 'android', label: 'Android' },
-                { value: 'ios', label: 'iOS' },
-                { value: 'macos', label: 'Mac OS' },
-                { value: 'windows', label: 'Windows' },
-                { value: 'linux', label: 'Linux' }
+                { value: "_Bt5nxrNo", label: "macos" },
+                { value: "k80syyzDa", label: "ios" },
+                { value: "i1g4cO6Pl", label: "windows" },
+                { value: "-Ug5OXisJ", label: "linux" },
+                { value: "mbwfZU-4W", label: "android" },
             ],
             conversion: {
-                type: 'post-view',
+                type: 'postview',
                 url: '',
                 observationWindow: { value: 7, label: "7" },
             },
@@ -124,25 +123,6 @@ function initializeAdSets() {
     ]
     return adSets;
 }
-
-// function initializeAds() {
-//     let ads = [
-//         {
-//             creative: '',
-//             adSets: '',
-//             newCreative: true,
-//             name: '',
-//             title: '',
-//             body: '',
-//             targetUrl: '',
-//             previewAssets: {
-//                 title: null,
-//                 body: null,
-//             }
-//         }
-//     ]
-//     return ads;
-// }
 
 export function performValidation(context, validationRule, campaign, adSets, ads) {
 

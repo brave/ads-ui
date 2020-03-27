@@ -23,11 +23,11 @@ const pricingTypes = [
 ]
 
 const platforms = [
-    { value: 'android', label: 'Android' },
-    { value: 'ios', label: 'iOS' },
-    { value: 'macos', label: 'Mac OS' },
-    { value: 'windows', label: 'Windows' },
-    { value: 'linux', label: 'Linux' },
+    { value: "_Bt5nxrNo", label: "macos" },
+    { value: "k80syyzDa", label: "ios" },
+    { value: "i1g4cO6Pl", label: "windows" },
+    { value: "-Ug5OXisJ", label: "linux" },
+    { value: "mbwfZU-4W", label: "android" },
 ]
 
 class AdSetsForm extends Component<any, any> {
@@ -75,29 +75,13 @@ class AdSetsForm extends Component<any, any> {
         this.props.setAdSets(adSets);
     }
 
-    handleConversionsCheckbox(e) {
-        let adSets = this.props.adSets;
-        if (e.target.checked) {
-            adSets[this.props.selectedAdSet].conversionsCheckbox = true;
-        }
-        else {
-            adSets[this.props.selectedAdSet].conversionsCheckbox = false;
-            adSets[this.props.selectedAdSet].conversion = {
-                type: 'post-view',
-                url: '',
-                observationWindow: { value: 7, label: "7" },
-            };
-        }
-        this.props.setAdSets(adSets);
-    }
-
     handleConversionType(value) {
         let adSets = this.props.adSets;
-        if (value === 'post-view') {
-            adSets[this.props.selectedAdSet].conversion.type = 'post-view';
+        if (value === 'postview') {
+            adSets[this.props.selectedAdSet].conversion.type = 'postview';
         }
-        if (value === 'post-click') {
-            adSets[this.props.selectedAdSet].conversion.type = 'post-click';
+        if (value === 'postclick') {
+            adSets[this.props.selectedAdSet].conversion.type = 'postclick';
         }
         this.props.setAdSets(adSets);
     }
@@ -337,62 +321,52 @@ class AdSetsForm extends Component<any, any> {
                                             <Text content={"Learn More."} color={"#E0694C"} style={{ marginTop: "2px", marginBottom: "28px", marginLeft: "4px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                         </div>
 
-                                        <S.InputContainer>
-                                            <div style={{ display: "flex", marginTop: "8px", marginBottom: "8px" }}>
-                                                <input checked={this.props.adSets[this.props.selectedAdSet].conversionsCheckbox} onClick={(e) => this.handleConversionsCheckbox(e)} style={{ marginRight: "8px" }} type="checkbox" />
-                                                <Text content={"Track conversions on this ad set"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            </div>
 
 
-                                        </S.InputContainer>
+                                        <>
+                                            <S.InputContainer>
+                                                <Text content={"Select an event to measure conversions."} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
 
-                                        {
-                                            this.props.adSets[this.props.selectedAdSet].conversionsCheckbox &&
-                                            <>
-                                                <S.InputContainer>
-                                                    <Text content={"Select an event to track conversions."} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                <div style={{ display: "flex", marginTop: "8px", marginBottom: "8px" }}>
+                                                    <RadioButton checked={this.props.adSets[this.props.selectedAdSet].conversion.type === 'postview'} onClick={(e) => this.handleConversionType("postview")} style={{ marginRight: "8px" }} type="radio" name="gender" value="male" />
+                                                    <Text style={{ marginTop: "-1px", marginLeft: "8px" }} content={"Post-View"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                </div>
 
-                                                    <div style={{ display: "flex", marginTop: "8px", marginBottom: "8px" }}>
-                                                        <RadioButton checked={this.props.adSets[this.props.selectedAdSet].conversion.type === 'post-view'} onClick={(e) => this.handleConversionType("post-view")} style={{ marginRight: "8px" }} type="radio" name="gender" value="male" />
-                                                        <Text style={{ marginTop: "-1px", marginLeft: "8px" }} content={"Post-View"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                <div style={{ display: "flex", marginTop: "8px", marginBottom: "12px" }}>
+                                                    <RadioButton checked={this.props.adSets[this.props.selectedAdSet].conversion.type === 'postclick'} onClick={(e) => this.handleConversionType("postclick")} style={{ marginRight: "8px" }} type="radio" name="gender" value="male" />
+                                                    <Text style={{ marginTop: "-1px", marginLeft: "8px" }} content={"Post-Click"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                </div>
+
+                                            </S.InputContainer>
+
+
+                                            <S.InputContainer>
+                                                <Text content={"Count conversions when visitors land on the following URL pattern"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                <Text content={"Examples:"} color={"grey"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                <Text content={"https://www.brave.com*"} color={"grey"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                <Text content={"https://www.brave.com/products*"} color={"grey"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                <Text content={"https://brave.com/checkout/*/confirmation"} color={"grey"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+
+                                                <div style={{ display: "flex", alignItems: "center", marginTop: "14px", marginBottom: "18px" }}>
+                                                    <S.Input value={this.props.adSets[this.props.selectedAdSet].conversion.url} onChange={(e) => this.handleConversionURL(e)} placeholder="Enter a URL..." />
+                                                </div>
+
+                                                <div style={{ display: "flex", alignItems: "center", marginTop: "14px", marginBottom: "8px" }}>
+                                                    <Text content={"within"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                    <div style={{ marginLeft: "12px", marginRight: "12px", width: "75px" }}>
+                                                        <Select
+                                                            styles={customStyles}
+                                                            value={this.props.adSets[this.props.selectedAdSet].conversion.observationWindow}
+                                                            onChange={this.handleConversionObservationWindow}
+                                                            multi={false}
+                                                            options={[{ value: 1, label: "1" }, { value: 7, label: "7" }, { value: 30, label: "30" }]}
+                                                        />
                                                     </div>
+                                                    <Text content={"days of an impression."} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                </div>
 
-                                                    <div style={{ display: "flex", marginTop: "8px", marginBottom: "12px" }}>
-                                                        <RadioButton checked={this.props.adSets[this.props.selectedAdSet].conversion.type === 'post-click'} onClick={(e) => this.handleConversionType("post-click")} style={{ marginRight: "8px" }} type="radio" name="gender" value="male" />
-                                                        <Text style={{ marginTop: "-1px", marginLeft: "8px" }} content={"Post-Click"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                    </div>
-
-                                                </S.InputContainer>
-
-
-                                                <S.InputContainer>
-                                                    <Text content={"Count conversions when visitors land on the following URL pattern"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                    <Text content={"Examples:"} color={"grey"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                    <Text content={"https://www.brave.com*"} color={"grey"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                    <Text content={"https://www.brave.com/products*"} color={"grey"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                    <Text content={"https://brave.com/checkout/*/confirmation"} color={"grey"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-
-                                                    <div style={{ display: "flex", alignItems: "center", marginTop: "8px", marginBottom: "8px" }}>
-                                                        <S.Input value={this.props.adSets[this.props.selectedAdSet].conversion.url} onChange={(e) => this.handleConversionURL(e)} placeholder="Enter a URL..." />
-                                                    </div>
-
-                                                    <div style={{ display: "flex", alignItems: "center", marginTop: "14px", marginBottom: "8px" }}>
-                                                        <Text content={"within"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                        <div style={{ marginLeft: "12px", marginRight: "12px", width: "75px" }}>
-                                                            <Select
-                                                                styles={customStyles}
-                                                                value={this.props.adSets[this.props.selectedAdSet].conversion.observationWindow}
-                                                                onChange={this.handleConversionObservationWindow}
-                                                                multi={false}
-                                                                options={[{ value: 1, label: "1" }, { value: 7, label: "7" }, { value: 30, label: "30" }]}
-                                                            />
-                                                        </div>
-                                                        <Text content={"days of an impression."} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                    </div>
-
-                                                </S.InputContainer>
-                                            </>
-                                        }
+                                            </S.InputContainer>
+                                        </>
 
                                     </S.RightColumn>
                                 </S.InnerContainer>
