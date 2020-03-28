@@ -221,11 +221,11 @@ class AdSetsForm extends Component<any, any> {
                                         </S.InputContainer>
                                         <S.InputContainer>
                                             <div style={{ display: "flex" }}>
-                                                <Text content={"Bid"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                <Text content={"Price"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                                 <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "1px", marginLeft: "2px" }}>info</Icon>
                                             </div>
                                             <div style={{ display: "flex", alignItems: "center" }}>
-                                                <S.Input value={this.props.adSets[this.props.selectedAdSet].bid} onChange={(e) => this.handleBid(e)} onBlur={(e) => this.formatBid(e)} style={{ width: "175px" }} placeholder="Enter a bid..." />
+                                                <S.Input value={this.props.adSets[this.props.selectedAdSet].bid} onChange={(e) => this.handleBid(e)} onBlur={(e) => this.formatBid(e)} style={{ width: "175px" }} placeholder="Enter a price..." />
                                                 {
                                                     this.props.adSets[this.props.selectedAdSet].pricingType.value === 'cpm' &&
                                                     <Text style={{ marginLeft: "14px", marginTop: "2px" }} content={"Per 1000 Impressions."} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />

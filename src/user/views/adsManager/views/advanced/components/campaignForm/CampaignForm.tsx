@@ -412,7 +412,7 @@ class CampaignForm extends Component<any, any> {
 
                                         <S.InputContainer>
                                             <div style={{ display: "flex" }}>
-                                                <Text content={"Bid"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                <Text content={"Price"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                                 <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "1px", marginLeft: "2px" }}>info</Icon>
                                             </div>
                                             <S.Input value={this.props.campaign.bid} onChange={(e) => this.handleBid(e)} onBlur={(e) => this.formatBid(e)} placeholder="Enter a bid..." />
