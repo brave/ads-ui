@@ -131,7 +131,7 @@ class ReviewForm extends Component<any, any> {
                             </S.ErrorContainer>
                         }
 
-                        <Text style={{ marginTop: "16px" }} color={"grey"} content={"Bid"} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
+                        <Text style={{ marginTop: "16px" }} color={"grey"} content={"Price"} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
                         <Text style={{ marginTop: "16px" }} content={adSet.bid} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
 
                         {
@@ -202,9 +202,9 @@ class ReviewForm extends Component<any, any> {
 
                         <Text style={{ marginTop: "16px" }} color={"grey"} content={"Conversion"} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
 
-                        {true ?
+                        {adSet.conversion.url === '' ?
 
-                            <Text style={{ marginTop: "4px" }} content={"No conversion tracking set."} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
+                            <Text style={{ marginTop: "4px" }} content={"No conversion measurement set."} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
 
                             :
                             <>
