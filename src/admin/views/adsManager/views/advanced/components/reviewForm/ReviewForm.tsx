@@ -128,7 +128,7 @@ class ReviewForm extends Component<any, any> {
                             </S.ErrorContainer>
                         }
 
-                        <Text style={{ marginTop: "16px" }} color={"grey"} content={"Bid"} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
+                        <Text style={{ marginTop: "16px" }} color={"grey"} content={"Price"} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
                         <Text style={{ marginTop: "16px" }} content={adSet.bid} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
 
                         {
