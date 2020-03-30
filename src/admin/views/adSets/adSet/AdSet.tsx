@@ -57,9 +57,9 @@ const AdSet = props => {
     const [status, setStatus] = useState({ value: "active", label: "Active" });
     const [selectedAudiences, setSelectedAudieces] = useState([]);
     const [availableAudiences, setAvailableAudiences] = useState([]);
-    const [eligibleChannels, setEligibleChannels] = useState([]);
+    // const [eligibleChannels, setEligibleChannels] = useState([]);
     const [platforms, setPlatforms] = useState([]);
-    const [channels, setChannels] = useState([]);
+    // const [channels, setChannels] = useState([]);
     const [conversionType, setConversionType] = useState("postview");
     const [conversionUrl, setConversionUrl] = useState('');
     const [conversionWindow, setConversionWindow] = useState({ value: 1, label: "1 Day" })
@@ -112,17 +112,17 @@ const AdSet = props => {
         return oses
     }
 
-    const prepareChannelsInput = channels => {
-        let channelsInput = [] as any;
-        if (channels) {
-            channels.forEach((channel) => {
-                channelsInput.push({
-                    channelId: channel.value
-                })
-            });
-        }
-        return channelsInput
-    }
+    // const prepareChannelsInput = channels => {
+    //     let channelsInput = [] as any;
+    //     if (channels) {
+    //         channels.forEach((channel) => {
+    //             channelsInput.push({
+    //                 channelId: channel.value
+    //             })
+    //         });
+    //     }
+    //     return channelsInput
+    // }
 
     const prepareConversionsInput = () => {
         let conversionsInput = [] as any;
@@ -149,7 +149,6 @@ const AdSet = props => {
                     state: status.value,
                     segments: prepareSegmentInput(selectedAudiences),
                     oses: prepareOSesInput(platforms),
-                    channels: prepareChannelsInput(channels),
                     conversions: prepareConversionsInput(),
                 }
             },
@@ -192,9 +191,9 @@ const AdSet = props => {
 
         let audiences = [] as any;
         let selectedAudiences = [] as any;
-        let channelsTemp = [] as any;
+        // let channelsTemp = [] as any;
         let platformsTemp = [] as any;
-        let selectedChannelsTemp = [] as any;
+        // let selectedChannelsTemp = [] as any;
 
         if (data.segments.data) {
             data.segments.data.forEach((segment) => {
@@ -208,11 +207,11 @@ const AdSet = props => {
             })
         }
 
-        if (data.eligibleChannels) {
-            data.eligibleChannels.forEach((channel, index) => {
-                channelsTemp.push({ value: channel, label: channel })
-            });
-        }
+        // if (data.eligibleChannels) {
+        //     data.eligibleChannels.forEach((channel, index) => {
+        //         channelsTemp.push({ value: channel, label: channel })
+        //     });
+        // }
 
         if (data.adSet.oses) {
             data.adSet.oses.forEach((os) => {
@@ -220,11 +219,11 @@ const AdSet = props => {
             })
         }
 
-        if (data.adSet.channels) {
-            data.adSet.channels.forEach((channel) => {
-                selectedChannelsTemp.push({ value: channel.channelId, label: channel.channelId })
-            })
-        }
+        // if (data.adSet.channels) {
+        //     data.adSet.channels.forEach((channel) => {
+        //         selectedChannelsTemp.push({ value: channel.channelId, label: channel.channelId })
+        //     })
+        // }
 
         if (data.adSet.conversions) {
             data.adSet.conversions.forEach((conversion) => {
@@ -241,9 +240,9 @@ const AdSet = props => {
 
         setAvailableAudiences(audiences);
         setSelectedAudieces(selectedAudiences);
-        setEligibleChannels(channelsTemp);
+        // setEligibleChannels(channelsTemp);
         setPlatforms(platformsTemp);
-        setChannels(selectedChannelsTemp);
+        // setChannels(selectedChannelsTemp);
 
         if (data.adSet.billingType) {
             setPricingType({ value: data.adSet.billingType, label: data.adSet.billingType });
@@ -397,7 +396,7 @@ const AdSet = props => {
 
                             </InputContainer>
 
-                            <InputContainer>
+                            {/* <InputContainer>
                                 <div style={{ display: "flex", marginBottom: "4px" }}>
                                     <Text content={"Channels"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                 </div>
@@ -410,7 +409,7 @@ const AdSet = props => {
                                     isMulti={true}
                                 />
 
-                            </InputContainer>
+                            </InputContainer> */}
 
                             <Divider />
 
