@@ -8,7 +8,6 @@ query {
             name
         }
     }
-    eligibleChannels
 }
 `;
 
