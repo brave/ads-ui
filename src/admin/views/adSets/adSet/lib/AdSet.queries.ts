@@ -19,9 +19,6 @@ query adSet($id: String!){
             code
             name
         }
-        channels {
-            channelId
-        }
         conversions {
            urlPattern
            type
@@ -34,7 +31,6 @@ query adSet($id: String!){
             name
         }
     }
-    eligibleChannels
 }
 `;
 

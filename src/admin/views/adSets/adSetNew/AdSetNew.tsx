@@ -57,9 +57,9 @@ const AdSetNew = props => {
     const [status, setStatus] = useState({ value: "active", label: "Active" });
     const [selectedAudiences, setSelectedAudieces] = useState([]);
     const [availableAudiences, setAvailableAudiences] = useState([]);
-    const [eligibleChannels, setEligibleChannels] = useState([]);
+    // const [eligibleChannels, setEligibleChannels] = useState([]);
     const [platforms, setPlatforms] = useState([]);
-    const [channels, setChannels] = useState([]);
+    // const [channels, setChannels] = useState([]);
     const [conversionType, setConversionType] = useState("postview");
     const [conversionUrl, setConversionUrl] = useState('');
     const [conversionWindow, setConversionWindow] = useState({ value: 1, label: "1 Day" })
@@ -118,17 +118,17 @@ const AdSetNew = props => {
         return oses
     }
 
-    const prepareChannelsInput = channels => {
-        let channelsInput = [] as any;
-        if (channels) {
-            channels.forEach((channel) => {
-                channelsInput.push({
-                    channelId: channel.value
-                })
-            });
-        }
-        return channelsInput
-    }
+    // const prepareChannelsInput = channels => {
+    //     let channelsInput = [] as any;
+    //     if (channels) {
+    //         channels.forEach((channel) => {
+    //             channelsInput.push({
+    //                 channelId: channel.value
+    //             })
+    //         });
+    //     }
+    //     return channelsInput
+    // }
 
     const prepareConversionsInput = () => {
         let conversionsInput = [] as any;
@@ -155,7 +155,6 @@ const AdSetNew = props => {
                     billingType: pricingType.value,
                     segments: prepareSegmentInput(selectedAudiences),
                     oses: prepareOSesInput(platforms),
-                    channels: prepareChannelsInput(channels),
                     conversions: prepareConversionsInput(),
                 }
             },
@@ -192,7 +191,7 @@ const AdSetNew = props => {
     const initializeAdSetNew = data => {
 
         let audiences = [] as any;
-        let channelsTemp = [] as any;
+        // let channelsTemp = [] as any;
 
         if (data.segments.data) {
             data.segments.data.forEach((segment) => {
@@ -200,14 +199,14 @@ const AdSetNew = props => {
             })
         }
 
-        if (data.eligibleChannels) {
-            data.eligibleChannels.forEach((channel, index) => {
-                channelsTemp.push({ value: channel, label: channel })
-            });
-        }
+        // if (data.eligibleChannels) {
+        //     data.eligibleChannels.forEach((channel, index) => {
+        //         channelsTemp.push({ value: channel, label: channel })
+        //     });
+        // }
 
         setAvailableAudiences(audiences);
-        setEligibleChannels(channelsTemp);
+        // setEligibleChannels(channelsTemp);
 
         if (context.loading === true) {
             context.setLoading(undefined);
@@ -354,7 +353,7 @@ const AdSetNew = props => {
 
                             </InputContainer>
 
-                            <InputContainer>
+                            {/* <InputContainer>
                                 <div style={{ display: "flex", marginBottom: "4px" }}>
                                     <Text content={"Channels"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                 </div>
@@ -367,7 +366,7 @@ const AdSetNew = props => {
                                     isMulti={true}
                                 />
 
-                            </InputContainer>
+                            </InputContainer> */}
 
                             <Divider />
 
