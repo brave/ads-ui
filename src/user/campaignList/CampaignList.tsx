@@ -22,7 +22,7 @@ const CampaignList = props => {
     const { match } = props;
 
     const { loading, error, data } = useQuery(CAMPAIGN_LIST, {
-        variables: { id: "f4e8d92e-11b5-470e-8eb5-57e25ebf5ae5" }
+        variables: { id: props.advertiserId }
     });
 
     const columns = [
