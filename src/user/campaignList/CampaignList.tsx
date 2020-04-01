@@ -17,7 +17,6 @@ import * as S from "./style/CampaignList.style";
 
 
 
-
 const CampaignList = props => {
 
 
