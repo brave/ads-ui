@@ -101,7 +101,7 @@ class User extends React.Component<any, any> {
                                 <Route exact path={match.url + "/performances/:campaignId/platforms"} component={Platforms} />
 
                                 {/* /campaigns */}
-                                <Route exact path={match.url + "/campaigns"} component={CampaignList} />
+                                <Route exact path={match.url + "/campaigns"} render={(props) => <CampaignList {...props} userId={auth.id} advertiserId={activeAdvertiser.id} />} />
 
                                 {/* default */}
                                 <Redirect to={match.url + "/performances"} />
