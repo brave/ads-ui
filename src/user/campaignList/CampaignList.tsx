@@ -82,7 +82,7 @@ const CampaignList = props => {
             accessor: 'endAt',
             sortDescFirst: true,
             Cell: (props) => {
-                return new Date(props.row.original.startAt).toLocaleDateString("en-US")
+                return new Date(props.row.original.endAt).toLocaleDateString("en-US")
             },
         },
         {
