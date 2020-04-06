@@ -29,6 +29,7 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import { createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import AnalyticsOverview from "./analytics/analyticsOverview/AnalyticsOverview";
 
 class User extends React.Component<any, any> {
     static contextType = Context;
@@ -102,6 +103,12 @@ class User extends React.Component<any, any> {
 
                                 {/* /campaigns */}
                                 <Route exact path={match.url + "/campaigns"} render={(props) => <CampaignList {...props} userId={auth.id} advertiserId={activeAdvertiser.id} />} />
+
+                                {/* /campaigns/:campaignId/analytics - */}
+                                <Route exact path={match.url + "/campaign/:campaignId/analytics/overview"} render={(props) => <AnalyticsOverview {...props} userId={auth.id} advertiserId={activeAdvertiser.id} />} />
+                                <Route exact path={match.url + "/campaign/:campaignId/analytics/audiences"} render={(props) => <CampaignList {...props} userId={auth.id} advertiserId={activeAdvertiser.id} />} />
+                                <Route exact path={match.url + "/campaign/:campaignId/analytics/locations"} render={(props) => <CampaignList {...props} userId={auth.id} advertiserId={activeAdvertiser.id} />} />
+                                <Route exact path={match.url + "/campaign/:campaignId/analytics/platforms"} render={(props) => <CampaignList {...props} userId={auth.id} advertiserId={activeAdvertiser.id} />} />
 
                                 {/* default */}
                                 <Redirect to={match.url + "/performances"} />
