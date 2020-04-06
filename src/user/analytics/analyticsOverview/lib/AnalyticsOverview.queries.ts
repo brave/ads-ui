@@ -1,9 +1,8 @@
 import { gql } from "apollo-boost";
 
-export const CAMPAIGN_LIST = gql`
-query advertiser($id: String!) {
-advertiser(id: $id){
-    campaigns {
+export const ANALYTICS_OVERVIEW = gql`
+query campaign($id: String!) {
+campaign(id: $id){
         id
         name
         state
@@ -29,7 +28,6 @@ advertiser(id: $id){
             windows
             other
         }
-    }
 }
 }
 `;
