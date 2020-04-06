@@ -88,14 +88,19 @@ const CampaignList = props => {
         {
             accessor: 'currency',
             Cell: (props) => {
-                return <div style={{ display: "flex", cursor: "pointer", color: "rgb(251, 84, 43)" }}><Icon title="Analytics">bar_chart</Icon></div>
+                return (
+                    <div style={{ display: "flex", cursor: "pointer", color: "rgb(251, 84, 43)" }}><Icon title="Analytics">bar_chart</Icon></div>
+                )
             },
         },
     ];
 
+    // For analytics icon 
+    // <Link style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} to={`campaign/${props.row.original.id}/analytics/overview`}></Link>
+
     if (loading) return <></>;
 
-    // console.log(data.campaigns);
+    console.log(data.campaigns);
 
     return (
         <div>
