@@ -66,6 +66,8 @@ function renderNav(props) {
         <S.Nav
           selected={window.location.pathname.includes(
             props.match.url + "/campaigns"
+          ) || window.location.pathname.includes(
+            props.match.url + "/campaign"
           )}
         >
           <S.SubContainer>
