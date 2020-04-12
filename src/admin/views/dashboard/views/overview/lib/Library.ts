@@ -34,6 +34,9 @@ export function processData(data) {
     processedData.percentCampaignsBAT =
         processPercentCampaignsBAT(data.campaignsPerCurrency.data);
 
+    processedData.campaignsUnderReview =
+        processCampaignsUnderReview(data.campaigns).toLocaleString();
+
     return {
         loading: false,
         campaignCount: processedData.campaignCount,
@@ -41,6 +44,7 @@ export function processData(data) {
         userCount: processedData.userCount,
         campaignsPerCountryChartOptions: processedData.campaignsPerCountryChartOptions,
         campaignsPerCountryTableData: processedData.campaignsPerCountryTableData,
+        campaignsUnderReview: processedData.campaignsUnderReview,
         percentCampaignsBAT: processedData.percentCampaignsBAT
     };
 }
@@ -89,7 +93,11 @@ export function processCampaignsPerCountryChartOptions(data) {
 export function processCampaignsPerCountryTableData(data) {
 
     const activatedCountries = ["CA", "US", "GB", "FR", "DE", "IE", "AU", "NZ", "AR", "AT", "BR", "CH", "CL", "CO",
-        "DK", "EC", "IL", "IN", "IT", "JP", "KR", "MX", "NL", "PE", "PH", "PL", "SE", "SG", "VE", "ZA"];
+        "DK", "EC", "IL", "IN", "IT", "JP", "KR", "MX", "NL", "PE", "PH", "PL", "SE", "SG", "VE", "ZA", "KY", "AE",
+        "AL", "AZ", "BD", "BE", "BG", "CN", "CZ", "DZ", "EG", "ES", "FI", "GR", "HK", "HR", "HU", "ID", "IQ", "KH",
+        "LT", "MA", "MY", "NG", "NO", "PK", "PT", "RO", "RS", "RU", "SA", "SI", "SK", "TH", "TR", "TW", "UA", "VN",
+        "OTHER"
+    ];
 
     let tableData: any[] = []
 
@@ -129,8 +137,20 @@ export function processCampaignsPerCountryTableData(data) {
     return tableData;
 }
 
+export function processCampaignsUnderReview(data) {
+    let campaignsUnderReview = 0;
+    if (data) {
+        data.forEach((campaign) => {
+            if (campaign.state === "under_review") {
+                campaignsUnderReview++;
+            }
+        })
+    }
+    return campaignsUnderReview;
+}
+
 export function processPercentCampaignsBAT(data) {
-    let BATCount = 25;
+    let BATCount = 0;
     let USDCount = 0;
     data.forEach((entry) => {
         switch (entry.currency) {
