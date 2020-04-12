@@ -2,21 +2,20 @@ import React, { useContext, useEffect, useState, useRef } from "react";
 
 import * as _ from "lodash";
 
-import Section from "../../../../components/section/Section";
+import Section from "../../../components/section/Section";
 
-import { Text } from "../../../../components/Text/Text";
-import TabSelector from "../../../../components/tabSelector/TabSelector";
-import { CAMPAIGN_LIST_APPROVALS, APPROVE_CAMPAIGN, REJECT_CAMPAIGN } from "./lib/CampaignListApprovals.queries";
+import { Text } from "../../../components/Text/Text";
+import { CAMPAIGN_LIST_APPROVALS, APPROVE_CAMPAIGN, REJECT_CAMPAIGN } from "./lib/Approvals.queries";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 
 import moment from "moment";
-import Table from "../../../../components/Table/TableComponent";
+import Table from "../../../components/Table/TableComponent";
 import { Link } from "react-router-dom";
 import { Icon } from "@material-ui/core";
-import { SecondaryButton, TextArea } from "../../../../components/formElements/formElements";
+import { SecondaryButton, TextArea } from "../../../components/formElements/formElements";
 import Modal from 'react-modal';
 import ReactDOM from "react-dom";
-import RadioButton from "../../../../components/radioButton/RadioButton";
+import RadioButton from "../../../components/radioButton/RadioButton";
 
 const customStyles = {
     content: {
@@ -33,7 +32,7 @@ const customStyles = {
     }
 };
 
-const CampaignListApprovals = props => {
+const Approvals = props => {
 
 
     // Approve Campaign Modal State
@@ -49,12 +48,6 @@ const CampaignListApprovals = props => {
     const [rejectionMessage, setRejectionMessage] = useState('');
 
     const { match } = props;
-
-    const tabConfig = [
-        { label: "Overview", selected: false, link: match.url.replace("/approvals", "/overview") },
-        { label: "Pacing", selected: false, link: match.url.replace("/approvals", "/pacing") },
-        { label: "Approvals", selected: true, link: match.url },
-    ]
 
     const openApproveCampaignModal = (approveCampaignName, approveCampaignId) => {
         setApproveCampaignName(approveCampaignName);
@@ -156,8 +149,7 @@ const CampaignListApprovals = props => {
 
     return (
         <div>
-            <TabSelector config={tabConfig} />
-            <Section fullWidthChild={true}>
+            <Section header={"Campaign Approvals"} fullWidthChild={true}>
                 <Table data={filterCampaigns(data.campaigns)} columns={columns} tableWidth={1094} columnCount={5} />
             </Section>
             <Modal
@@ -242,5 +234,5 @@ const CampaignListApprovals = props => {
 }
 
 
-export default CampaignListApprovals;
+export default Approvals;
 

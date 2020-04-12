@@ -21,9 +21,7 @@ const CampaignListOverview = props => {
     const { match } = props;
 
     const tabConfig = [
-        { label: "Overview", selected: true, link: match.url },
-        { label: "Pacing", selected: false, link: match.url.replace("/overview", "/pacing") },
-        { label: "Approvals", selected: false, link: match.url.replace("/overview", "/approvals") },
+        { label: "Campaigns", selected: true, link: match.url },
     ]
 
     const processData = data => {
@@ -69,7 +67,6 @@ const CampaignListOverview = props => {
 
             <TabSelector config={tabConfig} />
 
-            <Text content={"Filters:"} fontFamily={"Poppins"} sizes={[14, 14, 14, 14, 14]} />
             <div style={{ display: "flex", alignItems: "center", height: "60px" }}>
                 <Chip selected={(filters.indexOf("current") > -1)} onClick={() => toggleFilter("current")} marginRight={"12px"} content={"Current"}></Chip>
                 <Chip selected={(filters.indexOf("active") > -1)} onClick={() => toggleFilter("active")} marginRight={"12px"} content={"Active"}></Chip>

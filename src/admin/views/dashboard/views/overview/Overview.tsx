@@ -47,6 +47,7 @@ class Overview extends React.Component<any, any> {
           {renderStat("Campaigns", this.state.campaignCount)}
           {renderStat("Confirmations", this.state.confirmationCount)}
           {renderStat("% Campaigns in BAT", `${this.state.percentCampaignsBAT}%`)}
+          {renderStat("Campaigns Under Review", this.state.campaignsUnderReview)}
         </Section>
         <Section header={"Active Campaigns"} equalWidthChildren={true}>
           <CampaignsPerCountryTable data={this.state.campaignsPerCountryTableData} />
