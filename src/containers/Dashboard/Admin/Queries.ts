@@ -15,6 +15,9 @@ let dashboardQuery = `
           count
         }
       }
+      campaigns{
+        state
+      }
     }
     `;
 

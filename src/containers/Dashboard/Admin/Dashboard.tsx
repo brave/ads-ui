@@ -61,6 +61,8 @@ class Dashboard extends React.Component<any, any> {
     processedData.percentCampaignsBAT =
       processPercentCampaignsBAT(data.campaignsPerCurrency.data);
 
+    processedData.campaignsUnderReview = processCampaignsUnderReview(data.campaigns)
+
     return {
       loading: false,
       campaignCount: processedData.campaignCount,
@@ -160,8 +162,16 @@ class Dashboard extends React.Component<any, any> {
   }
 }
 
+function processCampaignsUnderReview(data) {
+  let campaignsUnderReview = 0;
+  console.log(data);
+  return;
+}
+
+
+
 function processPercentCampaignsBAT(data) {
-  let BATCount = 25;
+  let BATCount = 0;
   let USDCount = 0;
   data.forEach((entry) => {
     switch (entry.currency) {

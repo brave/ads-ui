@@ -46,11 +46,11 @@ import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import AdSetAds from "./views/adSets/adSetAds/AdSetAds";
 import CampaignListOverview from "./views/campaignsList/campaignListOverview/CampaignListOverview";
-import CampaignListApprovals from "./views/campaignsList/campaignListApprovals/CampaignListApprovals";
-import CampaignListPacing from "./views/campaignsList/campaignListPacing/CampaignListPacing";
 import Campaign from "./views/campaigns/campaign/Campaign";
 import CampaignNew from "./views/campaigns/campaignNew/CampaignNew";
 import CampaignAdSets from "./views/campaigns/campaignAdSets/CampaignAdSets";
+import Approvals from "./views/approvals/Approvals";
+import Pacing from "./views/pacing/Pacing";
 
 
 class Admin extends React.Component<any, any> {
@@ -165,8 +165,12 @@ class Admin extends React.Component<any, any> {
 
                                 {/* /campaigns */}
                                 <Route path={match.url + "/campaigns/overview"} component={CampaignListOverview} />
-                                <Route path={match.url + "/campaigns/pacing"} component={CampaignListPacing} />
-                                <Route path={match.url + "/campaigns/approvals"} component={CampaignListApprovals} />
+
+                                {/* /pacing */}
+                                <Route path={match.url + "/pacing"} component={Pacing} />
+
+                                {/* /approvals */}
+                                <Route path={match.url + "/approvals"} component={Approvals} />
 
                                 {/* Redirect to dashboard */}
                                 <Redirect to={match.url + "/dashboard"} />
