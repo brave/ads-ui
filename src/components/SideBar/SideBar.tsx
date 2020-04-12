@@ -126,6 +126,35 @@ function renderNav(props) {
               </Text>
             </S.Nav>
           </Link>
+          <Link style={linkStyle} to={props.match.url + "/pacing"}>
+            <S.Nav
+              selected={window.location.pathname.includes(
+                props.match.url + "/pacing"
+              )}
+            >
+              <S.SubContainer>
+                <Icon>bar_chart</Icon>
+              </S.SubContainer>
+              <Text sizes={[16, 16, 15, 15, 15]} fontFamily={"Poppins"}>
+                Pacing
+              </Text>
+            </S.Nav>
+          </Link>
+          <Link style={linkStyle} to={props.match.url + "/approvals"}>
+            <S.Nav
+              selected={window.location.pathname.includes(
+                props.match.url + "/approvals"
+              )}
+            >
+              <S.SubContainer>
+                <Icon>done</Icon>
+              </S.SubContainer>
+              <Text sizes={[16, 16, 15, 15, 15]} fontFamily={"Poppins"}>
+                Approvals
+              </Text>
+            </S.Nav>
+          </Link>
+
           {/* 
           <S.Nav selected={false}>
             <S.SubContainer>
