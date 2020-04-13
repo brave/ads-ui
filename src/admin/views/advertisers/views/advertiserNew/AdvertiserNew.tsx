@@ -43,12 +43,9 @@ class AdvertiserNew extends Component<any, any> {
     }
 
     public handleName(e) {
-        let alphaOnly = /^[a-zA-Z ]*$/;
-        if (alphaOnly.test(e.target.value)) {
-            let advertiser = this.state.advertiser
-            advertiser.name = e.target.value
-            this.setState({ advertiser: advertiser }, () => validate(this))
-        }
+        let advertiser = this.state.advertiser
+        advertiser.name = e.target.value
+        this.setState({ advertiser: advertiser }, () => validate(this))
     }
 
     public handlePhone(e) {
@@ -74,21 +71,15 @@ class AdvertiserNew extends Component<any, any> {
     }
 
     public handleStreetOne(e) {
-        let alphaNumericOnly = /^[a-zA-Z0-9 ]*$/;
-        if (alphaNumericOnly.test(e.target.value)) {
-            let advertiser = this.state.advertiser
-            advertiser.mailingAddress.street1 = e.target.value
-            this.setState({ advertiser: advertiser }, () => validate(this))
-        }
+        let advertiser = this.state.advertiser
+        advertiser.mailingAddress.street1 = e.target.value
+        this.setState({ advertiser: advertiser }, () => validate(this))
     }
 
     public handleStreetTwo(e) {
-        let alphaNumericOnly = /^[a-zA-Z0-9 ]*$/;
-        if (alphaNumericOnly.test(e.target.value)) {
-            let advertiser = this.state.advertiser
-            advertiser.mailingAddress.street2 = e.target.value
-            this.setState({ advertiser: advertiser }, () => validate(this))
-        }
+        let advertiser = this.state.advertiser
+        advertiser.mailingAddress.street2 = e.target.value
+        this.setState({ advertiser: advertiser }, () => validate(this))
     }
 
     public handleCity(e) {
@@ -119,12 +110,9 @@ class AdvertiserNew extends Component<any, any> {
     }
 
     public handleZipcode(e) {
-        let numericOnly = /^[0-9-]*$/;
-        if (numericOnly.test(e.target.value)) {
-            let advertiser = this.state.advertiser
-            advertiser.mailingAddress.zipcode = e.target.value
-            this.setState({ advertiser: advertiser }, () => validate(this))
-        }
+        let advertiser = this.state.advertiser
+        advertiser.mailingAddress.zipcode = e.target.value
+        this.setState({ advertiser: advertiser }, () => validate(this))
     }
 
     public handleStatus = selectedOption => {
@@ -223,7 +211,7 @@ class AdvertiserNew extends Component<any, any> {
                                     <Input value={this.state.advertiser.mailingAddress.city} onChange={(e) => { this.handleCity(e) }} placeholder="Enter a city..." type="text" name="name" />
                                 </InputContainer>
                                 <InputContainer>
-                                    <Text content={"State"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    <Text content={"State / Province"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                     <Input value={this.state.advertiser.mailingAddress.state} onChange={(e) => { this.handleState(e) }} placeholder="Enter a state..." type="text" name="name" />
                                 </InputContainer>
                                 <InputContainer>

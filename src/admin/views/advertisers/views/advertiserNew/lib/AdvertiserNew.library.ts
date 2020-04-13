@@ -140,17 +140,10 @@ function validateMailingAddress(context) {
     if (
         context.state.advertiser.mailingAddress.street1 === '' ||
         context.state.advertiser.mailingAddress.city === '' ||
-        context.state.advertiser.mailingAddress.state === '' ||
-        context.state.advertiser.mailingAddress.country === '' ||
-        context.state.advertiser.mailingAddress.zipcode === ''
+        context.state.advertiser.mailingAddress.country === ''
     ) {
         let validations = context.state.validations;
         validations.mailingAddress = { name: "Address", state: "pending", error: undefined }
-        context.setState({ validations })
-    }
-    else if (context.state.advertiser.mailingAddress.zipcode.length > 15) {
-        let validations = context.state.validations;
-        validations.mailingAddress = { name: "Address", state: "error", error: "Please enter a valid zip code." }
         context.setState({ validations })
     }
     else {
