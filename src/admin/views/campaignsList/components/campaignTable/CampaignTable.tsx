@@ -255,7 +255,7 @@ function renderPacingIndex(value) {
     else {
         return (<React.Fragment>
             N/A
-    </React.Fragment>)
+        </React.Fragment>)
     }
 }
 

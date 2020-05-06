@@ -96,17 +96,22 @@ function renderNav(props) {
               </Text>
             </S.Nav>
           </Link>
-          <Link style={linkStyle} to={props.match.url + "/users"}>
+          <Link style={linkStyle} to={props.match.url + "/organizations"}>
             <S.Nav
               selected={window.location.pathname.includes(
-                props.match.url + "/users"
-              )}
+                props.match.url + "/organizations"
+              )
+                ||
+                window.location.pathname.includes(
+                  props.match.url + "/organization"
+                )
+              }
             >
               <S.SubContainer>
-                <Icon>person</Icon>
+                <Icon>people</Icon>
               </S.SubContainer>
               <Text sizes={[16, 16, 15, 15, 15]} fontFamily={"Poppins"}>
-                Users
+                Organizations
               </Text>
             </S.Nav>
           </Link>
@@ -123,6 +128,20 @@ function renderNav(props) {
               </S.SubContainer>
               <Text sizes={[16, 16, 15, 15, 15]} fontFamily={"Poppins"}>
                 Campaigns
+              </Text>
+            </S.Nav>
+          </Link>
+          <Link style={linkStyle} to={props.match.url + "/users"}>
+            <S.Nav
+              selected={window.location.pathname.includes(
+                props.match.url + "/users"
+              )}
+            >
+              <S.SubContainer>
+                <Icon>person</Icon>
+              </S.SubContainer>
+              <Text sizes={[16, 16, 15, 15, 15]} fontFamily={"Poppins"}>
+                Users
               </Text>
             </S.Nav>
           </Link>
