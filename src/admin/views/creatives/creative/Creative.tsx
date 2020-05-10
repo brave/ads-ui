@@ -155,14 +155,9 @@ const Creative = props => {
         }
     }
 
-    useEffect(() => {
-        context.setLoading(true);
-    }, [])
-
     const { loading: queryLoading, error: queryError, data } = useQuery(CREATIVE, {
         variables: { id: props.match.params.creativeId },
         onCompleted: initializeCreative,
-        skip: !context.loading
     });
 
 
