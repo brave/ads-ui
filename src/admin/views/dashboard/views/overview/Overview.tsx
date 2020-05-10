@@ -42,21 +42,32 @@ class Overview extends React.Component<any, any> {
     return (
       this.context.loading === false &&
       <React.Fragment>
-        <Section header={"Key Statistics"}>
-          {renderStat("Users", this.state.userCount)}
-          {renderStat("Campaigns", this.state.campaignCount)}
-          {renderStat("Confirmations", this.state.confirmationCount)}
-          {renderStat("% Campaigns in BAT", `${this.state.percentCampaignsBAT}%`)}
-          {renderStat("Campaigns Under Review", this.state.campaignsUnderReview)}
-        </Section>
-        <Section header={"Active Campaigns"} equalWidthChildren={true}>
-          <CampaignsPerCountryTable data={this.state.campaignsPerCountryTableData} />
-          <HighchartsReact
-            highcharts={Highcharts}
-            constructorType={'mapChart'}
-            options={this.state.campaignsPerCountryChartOptions}
-          />
-        </Section>
+        <div style={{ display: "flex", marginBottom: "28px" }}>
+          <div style={{ border: "1px solid #e2e2e2", borderRadius: "4px", padding: "28px", marginRight: "28px" }}>
+            {renderStat("Users", this.state.userCount)}
+          </div>
+          <div style={{ border: "1px solid #e2e2e2", borderRadius: "4px", padding: "28px", marginRight: "28px" }}>
+            {renderStat("Campaigns", this.state.campaignCount)}
+          </div>
+          <div style={{ border: "1px solid #e2e2e2", borderRadius: "4px", padding: "28px", marginRight: "28px" }}>
+            {renderStat("Confirmations", this.state.confirmationCount)}
+          </div>
+          <div style={{ border: "1px solid #e2e2e2", borderRadius: "4px", padding: "28px", marginRight: "28px" }}>
+            {renderStat("Campaigns Under Review", this.state.campaignsUnderReview)}
+          </div>
+        </div>
+        <div style={{ display: "flex", marginBottom: "28px" }}>
+          <div style={{ border: "1px solid #e2e2e2", borderRadius: "4px", padding: "28px", marginRight: "28px" }}>
+            <CampaignsPerCountryTable data={this.state.campaignsPerCountryTableData} />
+          </div>
+          <div style={{ border: "1px solid #e2e2e2", borderRadius: "4px", padding: "28px", marginRight: "28px" }}>
+            <HighchartsReact
+              highcharts={Highcharts}
+              constructorType={'mapChart'}
+              options={this.state.campaignsPerCountryChartOptions}
+            />
+          </div>
+        </div>
       </React.Fragment>
     );
   }
