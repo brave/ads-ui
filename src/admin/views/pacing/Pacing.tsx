@@ -109,7 +109,7 @@ const Pacing = props => {
     return (
         <React.Fragment>
             <Section header={"Campaign Pacing"} fullWidthChild={true}>
-                <Table data={filterCampaigns(data.campaigns)} columns={columns} tableWidth={1094} columnCount={4} />
+                <Table data={filterCampaigns(data.campaigns)} columns={columns} tableWidth={1094} columnCount={5} />
             </Section>
         </React.Fragment>
     );

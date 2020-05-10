@@ -22,8 +22,8 @@ export const HeaderRow = styled("div")`
 `;
 
 interface HeaderCellProps {
-    width: string;
-    justifyContent?: string;
+  width: string;
+  justifyContent?: string;
 }
 
 export const HeaderCell = styled("div")`
@@ -31,7 +31,7 @@ ${(props: HeaderCellProps) => `
   display: flex;
   height: 100%;
   width: ${props.width};
-  justify-content: ${props.justifyContent};
+  justify-content: left;
   color: #1C1C1C;
   padding: 12px;
   align-items: center;
@@ -74,8 +74,8 @@ export const Row = styled("div")`
 `;
 
 interface CellProps {
-    width: string;
-    justifyContent?: string;
+  width: string;
+  justifyContent?: string;
 }
 
 export const Cell = styled("div")`
@@ -83,7 +83,7 @@ ${(props: CellProps) => `
   display: flex;
   height: 100%;
   width: ${props.width};
-  justify-content: center;
+  justify-content: left;
   padding: 12px;
   align-items: center;
   font-family: "Muli";
