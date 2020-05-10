@@ -53,7 +53,6 @@ import OrganizationsList from "./views/organizations/organizationsList/Organizat
 import OrganizationOverview from "./views/organizations/organizationOverview/OrganizationOverview";
 import OrganizationCampaigns from "./views/organizations/organizationCampaigns/OrganizationCampaigns";
 
-
 class Admin extends React.Component<any, any> {
     static contextType = Context;
 
