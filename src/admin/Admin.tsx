@@ -15,7 +15,6 @@ import CreativeInstanceNew from "../components/CreativeInstances/CreativeInstanc
 import CreativeInstanceView from "../containers/Campaigns/CreativeInstanceView/CreativeInstanceView";
 import CampaignPerformance from "../containers/Campaigns/CampaignPerformance/CampaignPerformance";
 
-
 import Creative from "./views/creatives/creative/Creative";
 import CreativeNew from "./views/creatives/creativeNew/CreativeNew";
 import InvoiceView from "../containers/Invoices/InvoicesView/InvoiceView";
@@ -38,7 +37,6 @@ import AdvertiserCreatives from "./views/advertisers/views/advertiserCreatives/A
 import Context from "../state/context";
 import Advanced from "./views/adsManager/views/advanced/Advanced";
 
-// GraphQL 
 import ApolloClient from 'apollo-client';
 import { ApolloProvider } from "@apollo/react-hooks";
 import { createHttpLink } from 'apollo-link-http';
@@ -51,7 +49,9 @@ import CampaignNew from "./views/campaigns/campaignNew/CampaignNew";
 import CampaignAdSets from "./views/campaigns/campaignAdSets/CampaignAdSets";
 import Approvals from "./views/approvals/Approvals";
 import Pacing from "./views/pacing/Pacing";
-
+import OrganizationsList from "./views/organizations/organizationsList/OrganizationsList";
+import OrganizationOverview from "./views/organizations/organizationOverview/OrganizationOverview";
+import OrganizationCampaigns from "./views/organizations/organizationCampaigns/OrganizationCampaigns";
 
 class Admin extends React.Component<any, any> {
     static contextType = Context;
@@ -133,6 +133,12 @@ class Admin extends React.Component<any, any> {
                             <Route exact path={match.url + "/users/:userId/overview"} component={UserOverview} />
                             <Route exact path={match.url + "/users/:userId/advertiser"} component={UserAdvertisers} /> 
                             */}
+
+                                {/* /organizations */}
+                                <Route exact path={match.url + "/organizations"} component={OrganizationsList} />
+                                <Route exact path={match.url + "/organization/new"} component={AdvertiserNew} />
+                                <Route exact path={match.url + "/organization/:advertiserId/overview"} component={OrganizationOverview} />
+                                <Route exact path={match.url + "/organization/:advertiserId/campaigns"} component={OrganizationCampaigns} />
 
                                 {/* /advertiser */}
                                 <Route exact path={match.url + "/users/:userId/advertiser/new"} component={AdvertiserNew} />

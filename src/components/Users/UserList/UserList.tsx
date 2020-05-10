@@ -95,7 +95,7 @@ class UserList extends React.Component<any, any> {
           </CardContent>
         </Card>
         <Link className={classes.fab} to={match.url + "/new"}>
-          <Button color="secondary" variant="fab">
+          <Button color="secondary">
             <Icon>add</Icon>
           </Button>
         </Link>
