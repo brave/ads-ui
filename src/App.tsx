@@ -28,9 +28,6 @@ class App extends React.Component<any, any> {
         light: "#0066ff",
         main: "#0044ff"
       }
-    },
-    typography: {
-      useNextVariants: true
     }
   });
 

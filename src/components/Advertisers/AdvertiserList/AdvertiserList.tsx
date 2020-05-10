@@ -21,7 +21,7 @@ import { styles } from "./AdvertiserList.style";
 
 class UserList extends React.Component<any, any> {
   public componentDidMount() {
-    this.props.getAdvertiser(this.props.auth, this.props.userId );
+    this.props.getAdvertiser(this.props.auth, this.props.userId);
   }
   public render() {
     const { classes, match, advertisers } = this.props;
@@ -61,7 +61,7 @@ class UserList extends React.Component<any, any> {
           </CardContent>
         </Card>
         <Link className={classes.fab} to={match.url + "/advertiser/new"}>
-          <Button color="secondary" variant="fab">
+          <Button color="secondary">
             <Icon>add</Icon>
           </Button>
         </Link>
