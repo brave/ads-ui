@@ -76,10 +76,6 @@ const AdSet = props => {
 
     const context = useContext(Context);
 
-    useEffect(() => {
-        context.setLoading(true);
-    }, [])
-
     const updateAdSetForm = data => {
         setError(false);
         setSuccess(true);
@@ -258,7 +254,6 @@ const AdSet = props => {
     const { loading: queryLoading, error: queryError, data } = useQuery(AD_SET, {
         variables: { id: props.match.params.creativeSetId },
         onCompleted: initializeAdSet,
-        skip: !context.loading
     });
 
 

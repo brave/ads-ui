@@ -196,13 +196,8 @@ const CampaignNew = props => {
         }
     }
 
-    useEffect(() => {
-        context.setLoading(true);
-    }, [])
-
     const { loading: queryLoading, error: queryError, data } = useQuery(CAMPAIGN_NEW, {
         onCompleted: initializeCampaign,
-        skip: !context.loading
     });
 
 
