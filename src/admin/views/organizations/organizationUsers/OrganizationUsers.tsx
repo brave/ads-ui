@@ -3,18 +3,17 @@ import React, { useContext, useEffect, useState } from "react";
 import Section from "../../../../components/section/Section";
 
 import { Text } from "../../../../components/Text/Text";
-import { ORGANIZATION_CAMPAIGNS } from "./lib/OrganizationCampaigns.queries";
+import { ORGANIZATION_USERS } from "./lib/OrganizationUsers.queries";
 import { useQuery } from "@apollo/react-hooks";
 
 import { Link } from "react-router-dom";
 import Table from "../../../../components/Table/TableComponent";
-import { columns } from "./lib/OrganizationCampaigns.library";
+import { columns } from "./lib/OrganizationUsers.library";
 import { Icon } from "@material-ui/core";
 
 import { Button } from "../../../../components/formElements/formElements";
-import OrganizationImage from "./assets/Organization.png";
 
-import * as S from "./styles/OrganizationCampaigns.style";
+import * as S from "./styles/OrganizationUsers.style";
 import TabSelector from "../../../../components/tabSelector/TabSelector";
 
 const OrganizationCampaigns = props => {
@@ -23,26 +22,15 @@ const OrganizationCampaigns = props => {
 
     const { match } = props;
 
-    const search = campaigns => {
-        if (searchQuery !== '') {
-            return campaigns.filter(campaign =>
-                campaign.name.toLowerCase().search(searchQuery.toLowerCase()) > -1
-            )
-        }
-        else {
-            return campaigns;
-        }
-    }
-
     const tabConfig = [
-        { label: "Overview", selected: false, link: match.url.replace("/campaigns", "") + "/overview" },
-        { label: "Users", selected: false, link: match.url.replace("/campaigns", "") + "/users" },
-        { label: "Campaigns", selected: true, link: match.url.replace("/campaigns", "") + "/campaigns" },
-        { label: "Creatives", selected: false, link: match.url.replace("/campaigns", "") + "/creatives" },
-        { label: "Invoices", selected: false, link: match.url.replace("/campaigns", "") + "/invoices" },
+        { label: "Overview", selected: false, link: match.url.replace("/users", "") + "/overview" },
+        { label: "Users", selected: true, link: match.url.replace("/users", "") + "/users" },
+        { label: "Campaigns", selected: false, link: match.url.replace("/users", "") + "/campaigns" },
+        { label: "Creatives", selected: false, link: match.url.replace("/users", "") + "/creatives" },
+        { label: "Invoices", selected: false, link: match.url.replace("/users", "") + "/invoices" },
     ]
 
-    const { loading, error, data } = useQuery(ORGANIZATION_CAMPAIGNS, {
+    const { loading, error, data } = useQuery(ORGANIZATION_USERS, {
         variables: { id: match.params.advertiserId }
     });
 
@@ -51,13 +39,7 @@ const OrganizationCampaigns = props => {
     console.log(data);
 
     let newData = [] as any;
-
-    data.advertiser.campaigns.forEach((campaign) => {
-        campaign.userId = data.advertiser.userAdvertisers[0].userId;
-        campaign.advertiserId = data.advertiser.id;
-        newData.push(campaign);
-    })
-
+    newData.push(data.advertiser.userAdvertisers[0].user);
 
     return (
         <div style={{ overflow: "hidden" }}>
@@ -68,8 +50,7 @@ const OrganizationCampaigns = props => {
                 <>
                     <div style={{ marginBottom: "56px" }}>
                         <div style={{ width: "100%", display: "flex", alignItems: "center", marginTop: "7px" }}>
-
-                            <div style={{
+                            {/* <div style={{
                                 display: "flex", alignItems: "center", border: "1px solid #e2e2e2", height: "36px", width: "1100px", borderRadius: "4px", marginBottom: "7px"
                             }}>
                                 <Icon
@@ -79,7 +60,7 @@ const OrganizationCampaigns = props => {
                                 </Icon>
                                 <S.SearchInput onChange={event => setSearchQuery(event.target.value)} type="text" placeholder="Search" />
 
-                            </div>
+                            </div> */}
 
                         </div>
                         {/* <div style={{ display: "flex" }}>
@@ -92,7 +73,7 @@ const OrganizationCampaigns = props => {
                             </div>
                         </div> */}
                     </div>
-                    <Table data={search(newData)} columns={columns} tableWidth={1094} columnCount={8} />
+                    <Table data={newData} columns={columns} tableWidth={1094} columnCount={4} />
                 </>
             </Section>
         </div>

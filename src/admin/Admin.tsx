@@ -52,6 +52,9 @@ import Pacing from "./views/pacing/Pacing";
 import OrganizationsList from "./views/organizations/organizationsList/OrganizationsList";
 import OrganizationOverview from "./views/organizations/organizationOverview/OrganizationOverview";
 import OrganizationCampaigns from "./views/organizations/organizationCampaigns/OrganizationCampaigns";
+import OrganizationInvoices from "./views/organizations/organizationInvoices/OrganizationInvoices";
+import OrganizationUsers from "./views/organizations/organizationUsers/OrganizationUsers";
+import OrganizationCreatives from "./views/organizations/organizationCreatives/OrganizationCreatives";
 
 class Admin extends React.Component<any, any> {
     static contextType = Context;
@@ -138,7 +141,10 @@ class Admin extends React.Component<any, any> {
                                 <Route exact path={match.url + "/organizations"} component={OrganizationsList} />
                                 <Route exact path={match.url + "/organization/new"} component={AdvertiserNew} />
                                 <Route exact path={match.url + "/organization/:advertiserId/overview"} component={OrganizationOverview} />
+                                <Route exact path={match.url + "/organization/:advertiserId/users"} component={OrganizationUsers} />
                                 <Route exact path={match.url + "/organization/:advertiserId/campaigns"} component={OrganizationCampaigns} />
+                                <Route exact path={match.url + "/organization/:advertiserId/creatives"} component={OrganizationCreatives} />
+                                <Route exact path={match.url + "/organization/:advertiserId/invoices"} component={OrganizationInvoices} />
 
                                 {/* /advertiser */}
                                 <Route exact path={match.url + "/users/:userId/advertiser/new"} component={AdvertiserNew} />

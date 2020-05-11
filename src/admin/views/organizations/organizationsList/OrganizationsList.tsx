@@ -68,7 +68,7 @@ const OrganizationsList = props => {
                                 </Icon>
                             <S.SearchInput onChange={event => setSearchQuery(event.target.value)} type="text" placeholder="Search" />
                         </div>
-                        <div style={{ display: "flex" }}>
+                        {/* <div style={{ display: "flex" }}>
                             <div style={{ marginLeft: "auto" }}>
                                 <Link style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} to={`/admin/main/organization/new`}>
                                     <Button style={{ width: "175px", marginTop: "14px" }}>
@@ -76,7 +76,7 @@ const OrganizationsList = props => {
                                     </Button>
                                 </Link>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     <Table data={search(data.advertisers)} columns={columns} tableWidth={1094} columnCount={3} />
                 </>
