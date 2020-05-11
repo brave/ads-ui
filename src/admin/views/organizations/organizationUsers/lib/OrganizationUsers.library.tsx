@@ -43,39 +43,34 @@ const renderState = state => {
 
 export const columns = [
     {
-        Header: 'Organization',
-        accessor: 'name',
+        Header: 'Name',
+        accessor: 'fullName',
         Cell: (props) => {
             return (
                 <div style={{ width: "100%" }}>
                     <div style={{ display: "flex", width: "100%", justifyContent: "space-between" }}>
-                        <Link style={{ width: "200px", textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} to={`/admin/main/organization/${props.row.original.id}/overview`}>
-                            <div title={props.row.original.name}>{props.row.original.name}</div>
+                        <Link style={{ width: "120px", textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} to={`/admin/main/users/${props.row.original.id}`}>
+                            <div title={props.row.original.fullName}>{props.row.original.fullName}</div>
                         </Link>
                     </div>
                 </div>)
         }
     },
     {
-        Header: '',
-        accessor: 'state',
-        Cell: (props) => {
-            return (
-                <div style={{ marginLeft: "75px" }}>
-                    {
-                        renderState(props.row.original.state)
-                    }
-                </div>)
-        }
+        Header: 'E-Mail',
+        accessor: 'email',
     },
     {
-        Header: 'Email',
-        accessor: 'billingEmail',
+        Header: 'Date Added',
+        accessor: 'createdAt',
         sortDescFirst: true,
+        Cell: (props) => {
+            return new Date(props.row.original.createdAt).toLocaleDateString("en-US")
+        },
     },
     {
-        Header: 'Referrer',
-        accessor: 'referrer'
-    }
+        Header: 'Role',
+        accessor: 'role'
+    },
 ];
 

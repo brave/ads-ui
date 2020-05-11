@@ -366,7 +366,8 @@ class CampaignReport extends Component<any, any> {
                 <TabSelector config={tabConfig} />
 
                 {/* Row 2 */}
-                <Section header={campaign.name} marginBottom={"28px"}>
+                <div style={{ fontSize: "22px", fontFamily: "Poppins" }}> {campaign.name}</div>
+                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "28px", marginTop: "28px" }}>
                     <S.Statistic selected={this.state.metricSelected[0]} color={Colors.Primary} onClick={() => { this.toggleMetric(0) }} >
                         <div>
                             <Text style={{ marginLeft: "2px" }} fontFamily={"Muli"} sizes={[18, 18, 20, 20, 14]}>
@@ -427,7 +428,7 @@ class CampaignReport extends Component<any, any> {
                                     </Icon>
                         </div>
                     </div>
-                </Section>
+                </div>
                 {/* <div style={{ marginLeft: "auto", marginTop: "auto" }}>
                         <select value={this.state.timeInterval} onChange={(e) => { this.setTimeInterval(e) }}
                             style={{ marginTop: "-5px", backgroundColor: "white", height: "30px" }}
@@ -442,25 +443,27 @@ class CampaignReport extends Component<any, any> {
 
 
                 {/* Row 3 */}
-                <Section marginBottom={"28px"}>
-                    <div style={{ position: "relative", marginTop: "-12px" }}>
-                        <div style={{ position: "absolute", zIndex: 300, right: "28px" }}>
-                            <div style={{ marginLeft: "auto" }}>
-                                <select value={this.state.timeInterval} onChange={(e) => { this.setTimeInterval(e) }}
-                                    style={{ marginTop: "-5px", backgroundColor: "white", height: "30px" }}
-                                >
-                                    {["Hourly", "Daily", "Weekly", "Monthly"].map(pageSize => (
-                                        <option key={pageSize} value={pageSize}>
-                                            Show {pageSize}
-                                        </option>
-                                    ))}
-                                </select>
+                <div style={{ marginTop: "28px", marginBottom: "28px" }}>
+                    <Section marginBottom={"28px"}>
+                        <div style={{ position: "relative", marginTop: "-12px" }}>
+                            <div style={{ position: "absolute", zIndex: 300, right: "28px" }}>
+                                <div style={{ marginLeft: "auto" }}>
+                                    <select value={this.state.timeInterval} onChange={(e) => { this.setTimeInterval(e) }}
+                                        style={{ marginTop: "-5px", backgroundColor: "white", height: "30px" }}
+                                    >
+                                        {["Hourly", "Daily", "Weekly", "Monthly"].map(pageSize => (
+                                            <option key={pageSize} value={pageSize}>
+                                                Show {pageSize}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
                             </div>
-                        </div>
 
-                        <div id="container"></div>
-                    </div>
-                </Section>
+                            <div id="container"></div>
+                        </div>
+                    </Section>
+                </div>
 
                 {/* Row 4 */}
 

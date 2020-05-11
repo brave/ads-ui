@@ -164,7 +164,10 @@ class OrganizationOverview extends Component<any, any> {
 
         const tabConfig = [
             { label: "Overview", selected: true, link: match.url.replace("/overview", "") + "/overview" },
+            { label: "Users", selected: false, link: match.url.replace("/overview", "") + "/users" },
             { label: "Campaigns", selected: false, link: match.url.replace("/overview", "") + "/campaigns" },
+            { label: "Creatives", selected: false, link: match.url.replace("/overview", "") + "/creatives" },
+            { label: "Invoices", selected: false, link: match.url.replace("/overview", "") + "/invoices" },
         ]
         return (
             this.context.loading === false &&
