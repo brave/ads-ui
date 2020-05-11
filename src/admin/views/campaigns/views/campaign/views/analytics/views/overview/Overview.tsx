@@ -2,7 +2,7 @@ import _ from "lodash";
 import React from "react";
 import { connect } from "react-redux";
 
-import { GetCampaigns, GetReports } from "../../../../../../../../../actions";
+import { GetCampaigns, GetReports, GetAllUser } from "../../../../../../../../../actions";
 
 // Eventually remove this component, this component is what Overview should be. 
 import CampaignReport from "./components/campaignReport/CampaignReport";
@@ -64,8 +64,8 @@ const mapStateToProps = (state: any, ownProps: any) => ({
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
     GetCampaigns: (auth: any, userId: string) => dispatch(GetCampaigns(auth, userId)),
-    GetReports: (auth: any, campaignId: string) =>
-        dispatch(GetReports(auth, campaignId))
+    GetReports: (auth: any, campaignId: string) => dispatch(GetReports(auth, campaignId)),
+    GetAllUsers: (user: any) => dispatch(GetAllUser(user)),
 });
 
 export default (

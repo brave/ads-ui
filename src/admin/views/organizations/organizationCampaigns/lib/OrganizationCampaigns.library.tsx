@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom"
 import styled from "styled-components";
+import { Icon } from "@material-ui/core";
 
 const RejectedSymbol = styled("div")`
   border-left: 6px solid transparent;
@@ -49,7 +50,7 @@ export const columns = [
             return (
                 <div style={{ width: "100%" }}>
                     <div style={{ display: "flex", width: "100%", justifyContent: "space-between" }}>
-                        <Link style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} to={`/admin/main/users/${props.row.original.userId}/advertiser/${props.row.original.advertiserId}/campaign/${props.row.original.id}`}>
+                        <Link style={{ width: "120px", textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} to={`/admin/main/users/${props.row.original.userId}/advertiser/${props.row.original.advertiserId}/campaign/${props.row.original.id}`}>
                             <div title={props.row.original.name}>{props.row.original.name}</div>
                         </Link>
                     </div>
@@ -103,6 +104,14 @@ export const columns = [
         accessor: 'pacingIndex',
         Cell: (props) => {
             return props.row.original.pacingIndex ? props.row.original.pacingIndex.toFixed(2) : "N/A"
+        },
+    },
+    {
+        Header: 'Analytics',
+        Cell: (props) => {
+            return <Link style={{ width: "120px", textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} to={`/admin/main/users/${props.row.original.userId}/advertiser/${props.row.original.advertiserId}/campaign/${props.row.original.id}/analytics/overview`}>
+                <Icon style={{ color: "rgb(251, 84, 43)", cursor: "pointer" }}>bar_chart</Icon>
+            </Link>
         },
     },
 ];
