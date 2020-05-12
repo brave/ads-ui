@@ -55,6 +55,7 @@ import OrganizationCampaigns from "./views/organizations/organizationCampaigns/O
 import OrganizationInvoices from "./views/organizations/organizationInvoices/OrganizationInvoices";
 import OrganizationUsers from "./views/organizations/organizationUsers/OrganizationUsers";
 import OrganizationCreatives from "./views/organizations/organizationCreatives/OrganizationCreatives";
+import TestSignin from "./views/test/TestSignin";
 
 class Admin extends React.Component<any, any> {
     static contextType = Context;
@@ -183,6 +184,9 @@ class Admin extends React.Component<any, any> {
 
                                 {/* /approvals */}
                                 <Route path={match.url + "/approvals"} component={Approvals} />
+
+                                {/* /signuptesting */}
+                                {/* <Route path={match.url + "/signuptesting"} component={TestSignin} /> */}
 
                                 {/* Redirect to dashboard */}
                                 <Redirect to={match.url + "/dashboard"} />
