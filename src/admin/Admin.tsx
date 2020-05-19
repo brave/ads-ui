@@ -193,7 +193,7 @@ class Admin extends React.Component<any, any> {
                                 <Route path={match.url + "/approvals"} component={Approvals} />
 
                                 {/* /signuptesting */}
-                                <Route path={match.url + "/signuptesting"} component={TestSignin} />
+                                {/* <Route path={match.url + "/signuptesting"} component={TestSignin} /> */}
 
                                 {/* Redirect to dashboard */}
                                 <Redirect to={match.url + "/dashboard"} />

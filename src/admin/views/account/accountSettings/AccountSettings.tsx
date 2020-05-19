@@ -22,7 +22,7 @@ class AccountSettings extends Component<any, any> {
 
             <Section fullWidthChild={true} header={"Security"}>
                 <div style={{ width: "100%" }}>
-                    <Text content={"Two Factor Authentication: On"} fontFamily={"Poppins"} sizes={[20, 20, 16, 16, 18]} />
+                    <Text content={"Two Factor Authentication: Off"} fontFamily={"Poppins"} sizes={[20, 20, 16, 16, 18]} />
                 </div>
             </Section>
         </div>
