@@ -16,6 +16,7 @@ import Admin from "./admin/Admin";
 
 import Context from "./state/context";
 import User from "./user/User";
+import TestSignin from "./admin/views/test/TestSignin";
 
 class App extends React.Component<any, any> {
   private theme = createMuiTheme({
@@ -65,6 +66,7 @@ class App extends React.Component<any, any> {
               <Route path="/user/main" component={User} />
               <Route path="/admin/main" component={Admin} />
               <Route path="/auth" component={Authentication} />
+              {/* <Route path="/auth" component={TestSignin} /> */}
               <Route path='/' exact={true} component={() => {
                 window.location.href = "https://brave.com/brave-ads-waitlist/";
                 return null;
