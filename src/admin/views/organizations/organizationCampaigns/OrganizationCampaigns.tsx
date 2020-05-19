@@ -92,7 +92,7 @@ const OrganizationCampaigns = props => {
                             </div>
                         </div> */}
                     </div>
-                    <Table data={search(newData)} columns={columns} tableWidth={1094} columnCount={7} />
+                    <Table data={search(newData)} columns={columns} tableWidth={1094} columnCount={8} />
                 </>
             </Section>
         </div>
