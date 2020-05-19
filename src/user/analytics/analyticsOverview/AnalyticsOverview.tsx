@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useEffect, useState, useRef, useMemo } from "react";
 
 import * as _ from "lodash";
 
@@ -16,234 +16,117 @@ import { Icon } from "@material-ui/core";
 import { useQuery } from "@apollo/react-hooks";
 import { ANALYTICS_OVERVIEW } from "./lib/AnalyticsOverview.queries";
 import TabSelector from "../../../components/tabSelector/TabSelector";
+import { downloadCSV, testing, processData, prepareChart, prepareSankey, formatMetric } from "./lib/AnalyticsOverview.library";
+import PopoutExample from "./lib/Popout";
+
+import * as S from "./styles/AnalyticsOverview.style";
 
 HighchartsSankey(Highcharts);
 highcharts3d(Highcharts);
 
 const AnalyticsOverview = props => {
 
-    const { match } = props;
+    const { auth, match } = props;
+
+    const tabConfig = [
+        { label: "Overview", selected: true, link: match.url }
+    ]
+
+    const [metric1, setMetric1] = useState("impressions");
+    const [metric2, setMetric2] = useState("clicks");
+    const [metric3, setMetric3] = useState("landings");
+    const [metric4, setMetric4] = useState("conversions");
+    const [grouping, setGrouping] = useState("daily")
+    const [downloadingCSV, setDownloadingCSV] = useState(false);
 
     const { loading, error, data } = useQuery(ANALYTICS_OVERVIEW, {
         variables: { id: match.params.campaignId }
     });
 
-    const tabConfig = [
-        { label: "Overview", selected: true, link: match.url.replace("/pacing", "/overview") },
-        { label: "Audience", selected: false, link: match.url },
-        { label: "Engagement", selected: false, link: match.url },
-        { label: "Performance", selected: false, link: match.url },
-    ]
+    let campaign;
+    let processedData;
+    let options;
+    let options2;
 
-    if (loading) return <></>;
-
-    console.log(data);
-    console.log(match);
-
-    const campaign = data.campaign;
-
-    function randomDate(start, end) {
-        return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    if (data) {
+        campaign = testing.data.campaign;
+        processedData = processData(campaign.engagements, metric1, metric2, metric3, metric4, grouping);
+        options = prepareChart(metric1, processedData.metric1DataSet, metric2, processedData.metric2DataSet, metric3, processedData.metric3DataSet, metric4, processedData.metric4DataSet);
+        options2 = prepareSankey(processedData.impressions, processedData.clicks, processedData.landings, processedData.conversions);
+        console.log(JSON.stringify(processedData));
     }
 
-    const options = {
-        chart: {
-            type: "spline",
-            zoomType: "x",
-            height: "394",
-            spacingTop: 0,
-            spacingBottom: 0,
-            spacingRight: 0,
-            spacingLeft: 0,
-        },
-        title: {
-            text: undefined
-        },
-        credits: {
-            enabled: false
-        },
-        tooltip: {
-            shared: true
-        },
-        xAxis: {
-            type: 'datetime'
-        },
-        yAxis: {
-            opposite: true,
-            title: {
-                text: undefined
-            },
-            tickAmount: 4
-        },
-        legend: {
-            enabled: false
-        },
-        plotOptions: {
-            spline: {
-                connectNulls: true
-            }
-        },
-        series: [{
-            name: 'Views',
-            data: [[randomDate(new Date(2012, 0, 1), new Date()).getTime(), 123], [new Date().getTime(), 123]],
-            connectNulls: true
-        },
-        {
-            name: 'Clicks',
-            data: [[new Date().getTime(), 123]],
-            connectNulls: true
-        },
-        {
-            name: 'Dismissed',
-            data: [[new Date().getTime(), 123]],
-            connectNulls: true
-        },
-        {
-            name: '10s Visits',
-            data: [[new Date().getTime(), 123]],
-            connectNulls: true
-        }] as any
-    } as any;
-
-    const sankey = {
-        chart: {
-            height: "169px",
-            spacingTop: 0,
-            spacingBottom: 0,
-            spacingRight: 0,
-            spacingLeft: 0,
-        },
-        title: {
-            text: undefined
-        },
-        credits: {
-            enabled: false
-        },
-        accessibility: {
-            point: {
-                valueDescriptionFormat: '{index}. {point.from} to {point.to}, {point.weight}.'
-            }
-        },
-        series: [{
-            keys: ['from', 'to', 'weight'],
-            data: [
-                ['Impressions', 'Clicks', 1300],
-                ['Clicks', '10s Visit', 325],
-                ['Clicks', 'Conversion', 30],
-            ],
-            type: 'sankey',
-            name: 'Sankey demo series'
-        }]
-    } as any;
-
-    const donut = {
-        chart: {
-            type: 'pie',
-            options3d: {
-                enabled: true,
-                alpha: 50,
-                beta: 0
-            },
-            height: "169px",
-            spacingTop: 0,
-            spacingBottom: 0,
-            spacingRight: 0,
-            spacingLeft: 0,
-        },
-        title: {
-            text: undefined
-        },
-        credits: {
-            enabled: false
-        },
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                depth: 35,
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        series: [{
-            type: 'pie',
-            name: 'Browser share',
-            data: [
-                ['Firefox', 45.0],
-                ['IE', 26.8],
-                ['Safari', 8.5],
-                ['Opera', 6.2],
-                ['Others', 0.7]
-            ]
-        }]
-    } as any;
-
+    if (loading) return <></>;
     return (
         <div>
 
-            <div style={{ display: "flex", width: "100%", justifyContent: "space-between", marginBottom: "-14px" }}>
+            {/* Top Row */}
+            <div style={{ display: "flex", width: "100%", justifyContent: "space-between", marginBottom: "28px" }}>
                 <Text content={campaign.name} fontFamily={"Poppins"} sizes={[18, 18, 42, 42, 26]} />
-                <div style={{ display: "flex", alignItems: "center" }}><Text content={"Download Report"} fontFamily={"Poppins"} sizes={[18, 18, 42, 42, 14]} /><Icon style={{ fontSize: "17px", marginLeft: "8px", marginBottom: "4px" }}>save_alt</Icon></div>
+                {
+                    downloadingCSV ?
+                        <div style={{ display: "flex", alignItems: "center", cursor: "pointer" }}><Text content={"Downloading Report..."} fontFamily={"Poppins"} sizes={[18, 18, 42, 42, 14]} /><Icon style={{ fontSize: "17px", marginLeft: "8px", marginBottom: "4px" }}>save_alt</Icon></div> :
+                        <div onClick={() => downloadCSV(campaign.id, campaign.name, auth.accessToken, auth.id, setDownloadingCSV)} style={{ display: "flex", alignItems: "center", cursor: "pointer" }}><Text content={"Download Report"} fontFamily={"Poppins"} sizes={[18, 18, 42, 42, 14]} /><Icon style={{ fontSize: "17px", marginLeft: "8px", marginBottom: "4px" }}>save_alt</Icon></div>
+                }
             </div>
+
             <TabSelector config={tabConfig} />
+
             <div style={{ display: "flex" }}>
+
+                {/* Left Side (Metrics + Chart) */}
                 <div style={{ width: "75%" }}>
                     <div style={{ display: "flex", marginBottom: "28px", marginTop: "14px" }}>
                         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #ededed", borderRadius: "4px", height: "110px", width: "195px", marginRight: "28px", padding: "28px" }}>
                             <div style={{ width: "100%" }}>
-                                <div style={{ display: "flex", marginBottom: "7px" }}>
-                                    <Text content={"Impressions"} fontFamily={"Muli"} sizes={[18, 18, 42, 42, 14]} />
+                                <div style={{ display: "flex", alignItems: "center", marginBottom: "7px" }}>
+                                    <PopoutExample setMetric1={setMetric1} initialValue={{ value: "impressions", label: "Impressions" }} />
                                 </div>
                                 <div>
-                                    <Text content={"1,000,000"} fontFamily={"Poppins"} sizes={[18, 18, 42, 42, 22]} />
+                                    <Text content={formatMetric(processedData, metric1)} fontFamily={"Poppins"} sizes={[18, 18, 42, 42, 22]} />
                                 </div>
                             </div>
                         </div>
                         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #ededed", borderRadius: "4px", height: "110px", width: "195px", marginRight: "28px", padding: "28px" }}>
                             <div style={{ width: "100%" }}>
                                 <div style={{ display: "flex", marginBottom: "7px" }}>
-                                    <Text content={"Clicks"} fontFamily={"Muli"} sizes={[18, 18, 42, 42, 14]} />
+                                    <PopoutExample setMetric1={setMetric2} initialValue={{ value: "clicks", label: "Clicks" }} />
                                 </div>
                                 <div>
-                                    <Text content={"1,000"} fontFamily={"Poppins"} sizes={[18, 18, 42, 42, 22]} />
+                                    <Text content={formatMetric(processedData, metric2)} fontFamily={"Poppins"} sizes={[18, 18, 42, 42, 22]} />
                                 </div>
                             </div>
                         </div>
                         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #ededed", borderRadius: "4px", height: "110px", width: "195px", marginRight: "28px", padding: "28px" }}>
                             <div style={{ width: "100%" }}>
                                 <div style={{ display: "flex", marginBottom: "7px" }}>
-                                    <Text content={"Conversions"} fontFamily={"Muli"} sizes={[18, 18, 42, 42, 14]} />
+                                    <PopoutExample setMetric1={setMetric3} initialValue={{ value: "landings", label: "10s Landings" }} />
                                 </div>
                                 <div>
-                                    <Text content={"300,000"} fontFamily={"Poppins"} sizes={[18, 18, 42, 42, 22]} />
+                                    <Text content={formatMetric(processedData, metric3)} fontFamily={"Poppins"} sizes={[18, 18, 42, 42, 22]} />
                                 </div>
                             </div>
                         </div>
                         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #ededed", borderRadius: "4px", height: "110px", width: "195px", padding: "28px" }}>
                             <div style={{ width: "100%" }}>
                                 <div style={{ display: "flex", marginBottom: "7px" }}>
-                                    <Text content={"10s Visit"} fontFamily={"Muli"} sizes={[18, 18, 42, 42, 14]} />
+                                    <PopoutExample setMetric1={setMetric4} initialValue={{ value: "conversions", label: "Conversions" }} />
                                 </div>
                                 <div>
-                                    <Text content={"12,000"} fontFamily={"Poppins"} sizes={[18, 18, 42, 42, 22]} />
+                                    <Text content={formatMetric(processedData, metric4)} fontFamily={"Poppins"} sizes={[18, 18, 42, 42, 22]} />
                                 </div>
                             </div>
                         </div>
-                        {/* <div style={{ display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #ededed", borderRadius: "4px", height: "110px", width: "340px", padding: "28px" }}>
 
-                </div> */}
                     </div>
                     <div style={{ border: "1px solid #ededed", borderRadius: "4px", height: "450px", marginBottom: "28px", padding: "28px" }}>
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                            <S.Grouping style={{ marginLeft: "auto", color: "grey", cursor: "default" }} selected={grouping === "null"}>Group By:</S.Grouping>
+                            <S.Grouping onClick={() => setGrouping("hourly")} selected={grouping === "hourly"}>Hour</S.Grouping>
+                            <S.Grouping onClick={() => setGrouping("daily")} selected={grouping === "daily"}>Day</S.Grouping>
+                            <S.Grouping onClick={() => setGrouping("weekly")} selected={grouping === "weekly"}>Week</S.Grouping>
+                            <S.Grouping onClick={() => setGrouping("monthly")} selected={grouping === "monthly"}>Month</S.Grouping>
+                        </div>
                         <HighchartsReact
                             highcharts={Highcharts}
                             options={options}
@@ -251,9 +134,13 @@ const AnalyticsOverview = props => {
                     </div>
 
                 </div>
-                <div style={{ width: "25%" }}>
-                    <div style={{ marginTop: "14px", border: "1px solid #ededed", borderRadius: "4px", height: "588px", marginLeft: "28px" }}>
 
+                {/* Right Side (Live Feed) */}
+                <div style={{ width: "25%" }}>
+                    <div style={{ marginTop: "14px", border: "1px solid #ededed", borderRadius: "4px", height: "588px", marginLeft: "28px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <div style={{ width: "125px", height: "35px", borderRadius: "4px", backgroundColor: "#FB7959", color: "white", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                            <Text content={"Coming Soon!"} fontFamily={"Poppins"} sizes={[18, 18, 42, 42, 14]} />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -262,14 +149,13 @@ const AnalyticsOverview = props => {
                 <div style={{ border: "1px solid #ededed", borderRadius: "4px", height: "225px", width: "50%", marginRight: "14px", padding: "28px" }}>
                     <HighchartsReact
                         highcharts={Highcharts}
-                        options={sankey}
+                        options={options2}
                     />
                 </div>
-                <div style={{ border: "1px solid #ededed", borderRadius: "4px", height: "225px", width: "50%", marginLeft: "14px", padding: "28px" }}>
-                    <HighchartsReact
-                        highcharts={Highcharts}
-                        options={donut}
-                    />
+                <div style={{ border: "1px solid #ededed", borderRadius: "4px", height: "225px", width: "50%", marginLeft: "14px", padding: "28px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                    <div style={{ width: "125px", height: "35px", borderRadius: "4px", backgroundColor: "#FB7959", color: "white", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <Text content={"Coming Soon!"} fontFamily={"Poppins"} sizes={[18, 18, 42, 42, 14]} />
+                    </div>
                 </div>
             </div>
         </div >
