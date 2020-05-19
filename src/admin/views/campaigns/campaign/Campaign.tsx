@@ -11,6 +11,7 @@ import { CAMPAIGN, UPDATE_CAMPAIGN } from "./lib/Campaign.queries";
 
 import Context from "../../../../state/context";
 import TabSelector from '../../../../components/tabSelector/TabSelector';
+import { Link } from 'react-router-dom';
 
 const customStyles = {
     control: (provided, state) => ({
@@ -67,6 +68,8 @@ const Campaign = props => {
     const [error, setError] = useState(false);
     const [saving, setSaving] = useState(false);
     const [validations, setValidations] = useState({} as any);
+
+    const { match } = props;
 
     const tabConfig = [
         { label: "Overview", selected: true, link: props.match.url },
@@ -282,7 +285,28 @@ const Campaign = props => {
                         </MessageContainer>
                     }
 
-                    <TabSelector config={tabConfig} />
+                    <div style={{ display: "flex", marginBottom: "28px", alignItems: "center" }}>
+
+                        <Link style={{ textDecoration: "none", color: "#2C2C2C", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} to={`/admin/main/organization/${match.params.advertiserId}/overview`}>
+                            <Text style={{ cursor: "pointer" }} content={"Advertiser"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
+                        </Link>
+
+                        <Icon style={{ fontSize: "25px", marginTop: "2px" }}>chevron_right</Icon>
+
+                        <Link style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} to={match.url}>
+                            <Text style={{ cursor: "pointer" }} content={"Campaign"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
+                        </Link>
+
+                        <Link style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} to={`/admin/main/organization/${match.params.advertiserId}/campaign/${match.params.campaignId}/analytics/overview`}>
+                            <Icon style={{ fontSize: "22px", marginLeft: "6px", marginTop: "4px" }}>bar_chart_vertical</Icon>
+                        </Link>
+
+                        <Icon style={{ fontSize: "25px", marginTop: "2px" }}>chevron_right</Icon>
+                        <Link style={{ textDecoration: "none", color: "#2C2C2C", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} to={match.url.concat("/creativeSet")}>
+                            <Text style={{ cursor: "pointer" }} content={"Ad Sets"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
+                        </Link>
+
+                    </div>
 
                     <Section fullWidthChild={true}>
                         <>

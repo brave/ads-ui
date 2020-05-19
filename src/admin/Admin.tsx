@@ -55,6 +55,9 @@ import OrganizationCampaigns from "./views/organizations/organizationCampaigns/O
 import OrganizationInvoices from "./views/organizations/organizationInvoices/OrganizationInvoices";
 import OrganizationUsers from "./views/organizations/organizationUsers/OrganizationUsers";
 import OrganizationCreatives from "./views/organizations/organizationCreatives/OrganizationCreatives";
+import TestSignin from "./views/test/TestSignin";
+import AccountSettings from "./views/account/accountSettings/AccountSettings";
+import AnalyticsOverview from "../user/analytics/analyticsOverview/AnalyticsOverview";
 
 class Admin extends React.Component<any, any> {
     static contextType = Context;
@@ -128,6 +131,9 @@ class Admin extends React.Component<any, any> {
                                 <Route exact path={match.url + "/users"} component={UserList} />
                                 <Route exact path={match.url + "/users/new"} component={UserNew} />
 
+                                {/* /account */}
+                                <Route exact path={match.url + "/account/settings"} component={AccountSettings} />
+
                                 {/* Want to remove this route */}
                                 <Route exact path={match.url + "/users/:userId"} component={UserView} />
 
@@ -143,6 +149,7 @@ class Admin extends React.Component<any, any> {
                                 <Route exact path={match.url + "/organization/:advertiserId/overview"} component={OrganizationOverview} />
                                 <Route exact path={match.url + "/organization/:advertiserId/users"} component={OrganizationUsers} />
                                 <Route exact path={match.url + "/organization/:advertiserId/campaigns"} component={OrganizationCampaigns} />
+                                <Route exact path={match.url + "/organization/:advertiserId/campaign/:campaignId/analytics/overview"} render={(props) => <AnalyticsOverview {...props} auth={auth} />} />
                                 <Route exact path={match.url + "/organization/:advertiserId/creatives"} component={OrganizationCreatives} />
                                 <Route exact path={match.url + "/organization/:advertiserId/invoices"} component={OrganizationInvoices} />
 
@@ -161,6 +168,7 @@ class Admin extends React.Component<any, any> {
                                 <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/campaign/:campaignId/report"} component={CampaignPerformance} />
                                 <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/campaign/:campaignId/analytics/overview"} component={Overview} />
                                 <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/campaign/:campaignId/analytics/platforms"} component={Platforms} />
+
 
                                 {/* /creativeSet */}
                                 <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/campaign/:campaignId/creativeSet/new"} component={AdSetNew} />
@@ -183,6 +191,9 @@ class Admin extends React.Component<any, any> {
 
                                 {/* /approvals */}
                                 <Route path={match.url + "/approvals"} component={Approvals} />
+
+                                {/* /signuptesting */}
+                                {/* <Route path={match.url + "/signuptesting"} component={TestSignin} /> */}
 
                                 {/* Redirect to dashboard */}
                                 <Redirect to={match.url + "/dashboard"} />
