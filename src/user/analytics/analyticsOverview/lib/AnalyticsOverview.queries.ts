@@ -19,8 +19,6 @@ campaign(id: $id){
             createdat
             type
             count
-            currency
-            price
             android
             ios
             linux
