@@ -16,13 +16,19 @@ import { Icon } from "@material-ui/core";
 import { useQuery } from "@apollo/react-hooks";
 import { ANALYTICS_OVERVIEW } from "./lib/AnalyticsOverview.queries";
 import TabSelector from "../../../components/tabSelector/TabSelector";
-import { downloadCSV, testing, processData, prepareChart, prepareSankey, formatMetric } from "./lib/AnalyticsOverview.library";
+import { downloadCSV, processData, prepareChart, prepareSankey, formatMetric } from "./lib/AnalyticsOverview.library";
 import PopoutExample from "./lib/Popout";
 
 import * as S from "./styles/AnalyticsOverview.style";
 
 HighchartsSankey(Highcharts);
 highcharts3d(Highcharts);
+
+Highcharts.setOptions({
+    lang: {
+        thousandsSep: ','
+    }
+});
 
 const AnalyticsOverview = props => {
 
@@ -49,7 +55,7 @@ const AnalyticsOverview = props => {
     let options2;
 
     if (data) {
-        campaign = testing.data.campaign;
+        campaign = data.campaign;
         processedData = processData(campaign.engagements, metric1, metric2, metric3, metric4, grouping);
         options = prepareChart(metric1, processedData.metric1DataSet, metric2, processedData.metric2DataSet, metric3, processedData.metric3DataSet, metric4, processedData.metric4DataSet);
         options2 = prepareSankey(processedData.impressions, processedData.clicks, processedData.landings, processedData.conversions);

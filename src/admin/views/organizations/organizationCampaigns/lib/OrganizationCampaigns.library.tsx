@@ -105,14 +105,6 @@ export const columns = [
         Cell: (props) => {
             return props.row.original.pacingIndex ? props.row.original.pacingIndex.toFixed(2) : "N/A"
         },
-    },
-    {
-        Header: 'Analytics',
-        Cell: (props) => {
-            return <Link style={{ width: "120px", textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} to={`/admin/main/organization/${props.row.original.advertiserId}/campaign/${props.row.original.id}/analytics/overview`}>
-                <Icon style={{ color: "rgb(251, 84, 43)", cursor: "pointer" }}>bar_chart</Icon>
-            </Link>
-        },
-    },
+    }
 ];
 
