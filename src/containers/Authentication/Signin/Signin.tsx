@@ -7,6 +7,7 @@ import "../../../assets/fonts/fonts.css";
 import Button from "../../../components/Button/Button";
 import Card from "../../../components/Card/Card";
 import { H2 } from "../../../components/Text/Text";
+import { Text } from "../../../components/Text/Text";
 // import Button from "brave-ui/components/buttonsIndicators/button";
 
 import { GetAdvertisers, SignIn } from "../../../actions";
@@ -15,13 +16,136 @@ import { styles } from "./SignIn.style";
 import * as S from "./SignIn.style";
 
 import SigninForm from "../../../components/SigninForm/Signin-form";
+import { Input } from "../../../components/formElements/formElements";
+
+import base64url from "base64url";
 
 class SignInContainer extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      submitting: false
+      submitting: false,
+      email: '',
+      password: '',
     };
+    this.submit = this.submit.bind(this);
+  }
+
+  async submit() {
+    const resp = await fetch(`${process.env.REACT_APP_SERVER_ADDRESS}/auth/token`,
+      {
+        method: 'POST',
+        mode: 'cors',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: this.state.email,
+          password: this.state.password
+        })
+      } as any);
+    let data = await resp.json();
+
+    if (data.accessToken) {
+      const auth = await this.props.signin({ email: this.state.email, password: this.state.password, accessToken: data.accessToken });
+      await this.props.getAdvertiser(data);
+    }
+
+    if (data.error) {
+      alert("Error " + data.error)
+    }
+
+    if (data.allowCredentials) {
+      this.get(data)
+    }
+
+    this.toggleSubmitting();
+
+  };
+
+  toggleSubmitting() {
+    this.setState({
+      submitting: !this.state.submitting
+    });
+  }
+
+  get(attestationObj) {
+
+    attestationObj.challenge = base64url.toBuffer(attestationObj.challenge);
+
+    attestationObj.allowCredentials.forEach((allowedCredential) => {
+      allowedCredential.id = base64url.toBuffer(allowedCredential.id);
+    });
+
+    navigator.credentials.get({ publicKey: attestationObj })
+      .then(async (cred: any) => {
+        await this.sendClientCredential(cred, attestationObj.userId);
+      })
+      .catch((err) => {
+        console.log("ERROR", err);
+      });
+  }
+
+  publicKeyCredentialToJSON(pubKeyCred) {
+    if (pubKeyCred instanceof Array) {
+      let arr = [];
+      for (let i of pubKeyCred)
+        //@ts-ignore
+        arr.push(publicKeyCredentialToJSON(i));
+
+      return arr
+    }
+
+    if (pubKeyCred instanceof ArrayBuffer) {
+      //@ts-ignore
+      return base64url.encode(pubKeyCred)
+    }
+
+    if (pubKeyCred instanceof Object) {
+      let obj = {};
+
+      for (let key in pubKeyCred) {
+        obj[key] = this.publicKeyCredentialToJSON(pubKeyCred[key])
+      }
+
+      return obj
+    }
+
+    return pubKeyCred
+  }
+
+
+  async sendClientCredential(clientCredential, userId) {
+    const resp = await fetch(`${process.env.REACT_APP_SERVER_ADDRESS}/auth/challenge/${userId}`,
+      {
+        method: 'POST',
+        mode: 'cors',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(this.publicKeyCredentialToJSON(clientCredential))
+      });
+    let data = await resp.json();
+    try {
+      const auth = await this.props.signin({ email: this.state.email, password: this.state.password, accessToken: data.accessToken });
+      await this.props.getAdvertiser(data);
+    } catch (err) {
+      this.toggleSubmitting();
+    }
+  }
+
+  handleEmail(e) {
+    this.setState({
+      email: e.target.value
+    });
+  }
+
+  handlePassword(e) {
+    this.setState({
+      password: e.target.value
+    });
   }
 
   public render() {
@@ -39,7 +163,19 @@ class SignInContainer extends React.Component<any, any> {
                 Sign into your brave account
               </H2>
             </S.Header>
-            <SigninForm />
+            <div style={{ marginBottom: "32px", marginTop: "22px" }}>
+              <div style={{ display: "flex" }}>
+                <Text content={"Email"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+              </div>
+              <Input value={this.state.email} onChange={(e) => { this.handleEmail(e) }} placeholder={"Enter your email..."}></Input>
+            </div>
+            <div style={{ marginBottom: "32px" }}>
+              <div style={{ display: "flex" }}>
+                <Text content={"Password"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+              </div>
+              <Input value={this.state.password} onChange={(e) => { this.handlePassword(e) }} placeholder={"Enter your password..."} type={"password"}></Input>
+            </div>
+
             <S.ButtonContainer>
               <Button onClick={this.submit} type={"primary"} size={"medium"}>
                 Sign in
@@ -62,24 +198,6 @@ class SignInContainer extends React.Component<any, any> {
       </Card>
     );
   }
-
-  private toggleSubmitting = () => {
-    this.setState({
-      submitting: !this.state.submitting
-    });
-  };
-
-  private submit = async (event: any) => {
-    this.toggleSubmitting();
-    const { signinForm } = this.props;
-    const { values } = signinForm;
-    try {
-      const auth = await this.props.signin(values);
-      await this.props.getAdvertiser(auth);
-    } catch (err) {
-      this.toggleSubmitting();
-    }
-  };
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
@@ -98,3 +216,5 @@ export default withStyles(styles)(
     mapDispatchToProps
   )(SignInContainer)
 );
+
+
