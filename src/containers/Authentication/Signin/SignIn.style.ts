@@ -54,7 +54,7 @@ export const Logo = styled("div")`
 export const ButtonContainer = styled("div")`
   display: flex;
   justify-content: center;
-  margin-top: 48px;
+  margin-top: 38px;
 `;
 
 export const Footer = styled("div")`
