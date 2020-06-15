@@ -156,7 +156,6 @@ const AccountSettings = props => {
         </Section>
     </div>
 
-
 }
 
 export default AccountSettings; 
