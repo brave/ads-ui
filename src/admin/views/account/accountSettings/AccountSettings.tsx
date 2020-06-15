@@ -120,7 +120,7 @@ const AccountSettings = props => {
                 body: JSON.stringify(publicKeyCredentialToJSON(clientCredential))
             });
         let data = await resp.json();
-        console.log(data);
+        window.location.reload();
     }
     useEffect(() => {
         getAuthenticators();
