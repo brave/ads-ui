@@ -18,7 +18,7 @@
     "classnames": "^2.2.6",
     "graphql": "^15.0.0",
     "graphql-tag": "^2.10.3",
-    "highcharts": "^8.1.0",
+    "highcharts": "^8.1.1",
     "highcharts-react-official": "^3.0.0",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.15",
