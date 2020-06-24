@@ -77,6 +77,16 @@ const AccountSettings = props => {
         makeCredReq.challenge = base64url.toBuffer(makeCredReq.challenge);
         makeCredReq.user.id = base64url.toBuffer(makeCredReq.user.id);
 
+        let excludeCredentials = [] as any;
+        if (authenticators) {
+            authenticators.forEach((authenticator) => {
+                excludeCredentials.push({
+                    type: "public-key",
+                    id: base64url.toBuffer(authenticator.credID)
+                });
+            })
+        }
+        makeCredReq.excludeCredentials = excludeCredentials;
         return makeCredReq
     }
 
