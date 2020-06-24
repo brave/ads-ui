@@ -132,7 +132,7 @@ class Admin extends React.Component<any, any> {
                                 <Route exact path={match.url + "/users/new"} component={UserNew} />
 
                                 {/* /account */}
-                                <Route exact path={match.url + "/account/settings"} component={AccountSettings} />
+                                <Route exact path={match.url + "/account/settings"} render={(props) => <AccountSettings {...props} auth={auth} />} />
 
                                 {/* Want to remove this route */}
                                 <Route exact path={match.url + "/users/:userId"} component={UserView} />
