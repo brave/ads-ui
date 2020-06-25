@@ -46,14 +46,6 @@ const campaignTypes = [
     { value: 'cause', label: 'Cause' },
 ]
 
-const priorityTypes = [
-    { value: 1, label: '1' },
-    { value: 2, label: '2' },
-    { value: 3, label: '3' },
-    { value: 4, label: '4' },
-    { value: 5, label: '5' },
-]
-
 const Campaign = props => {
 
     const context = useContext(Context);
@@ -62,7 +54,6 @@ const Campaign = props => {
 
     const [name, setName] = useState('');
     const [frequency, setFrequency] = useState('');
-    const [priority, setPriority] = useState({ value: 1, label: "1" });
     const [startDate, setStartDate] = useState((new Date(Date.now() - tzoffset)).toISOString().slice(0, -5) as any);
     const [endDate, setEndDate] = useState((new Date(new Date().setHours(23, 59, 59, 999) - tzoffset)).toISOString().slice(0, -5));
     const [campaignType, setCampaignType] = useState({ value: "paid", label: "Paid" });
@@ -112,7 +103,6 @@ const Campaign = props => {
                     name,
                     state: status.value,
                     dailyCap: parseInt(frequency),
-                    priority: priority.value,
                     currency: currency.value,
                     budget: parseFloat(lifetimeBudget.replace(/[^\d.]/g, '')),
                     dailyBudget: parseFloat(dailyBudget.replace(/[^\d.]/g, '')),
@@ -165,7 +155,6 @@ const Campaign = props => {
     const initializeCampaign = data => {
         setName(data.campaign.name);
         setFrequency(data.campaign.dailyCap);
-        setPriority({ value: data.campaign.priority, label: data.campaign.priority.toString() });
 
         setStartDate(new Date(data.campaign.startAt).toISOString().slice(0, -5));
         setEndDate(new Date(data.campaign.endAt).toISOString().slice(0, -5));
@@ -357,19 +346,6 @@ const Campaign = props => {
                                             <Text style={{ marginTop: "4px" }} color={"#E32444"} content={validations.frequencyValidation} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                         </>
                                 }
-
-                            </InputContainer>
-
-                            <InputContainer>
-                                <div style={{ display: "flex", marginBottom: "4px" }}>
-                                    <Text content={"Priority"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                </div>
-                                <Select
-                                    styles={customStyles}
-                                    onChange={setPriority}
-                                    value={priority}
-                                    options={priorityTypes}
-                                />
 
                             </InputContainer>
 

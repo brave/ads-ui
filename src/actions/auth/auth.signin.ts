@@ -24,38 +24,26 @@ export const SignInFailed = (payload: any): IAuthAction => ({
 
 export const SignIn = (payload: ISignInPayload) => {
   return async (dispatch: any) => {
-    if (payload.accessToken) {
-      try {
-        dispatch(SignInStart(payload));
-        dispatch(SignInSuccessful({ accessToken: payload.accessToken }));
-        dispatch(OpenSnackBar("Signed In Successfully"));
-        return Promise.resolve({ accessToken: payload.accessToken });
-      } catch (error) {
-        dispatch(SignInFailed(error));
+    try {
+      dispatch(SignInStart(payload));
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_ADDRESS}/auth/token`, payload, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      dispatch(SignInSuccessful(response.data));
+      dispatch(OpenSnackBar("Signed In Successfully"));
+      return Promise.resolve(response.data);
+    } catch (error) {
+      dispatch(SignInFailed(error));
+      if (error.response) {
+        dispatch(OpenSnackBar(`Sign In  Failed: ${error.response.data.error}`));
+      } else if (error.request) {
+        dispatch(OpenSnackBar(`Sign In  Failed: Network Error`));
+      } else {
+        dispatch(OpenSnackBar(`Sign In  Failed: ${error.message}`));
       }
-    }
-    else {
-      try {
-        dispatch(SignInStart(payload));
-        const response = await axios.post(`${process.env.REACT_APP_SERVER_ADDRESS}/auth/token`, payload, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        dispatch(SignInSuccessful(response.data));
-        dispatch(OpenSnackBar("Signed In Successfully"));
-        return Promise.resolve(response.data);
-      } catch (error) {
-        dispatch(SignInFailed(error));
-        if (error.response) {
-          dispatch(OpenSnackBar(`Sign In  Failed: ${error.response.data.error}`));
-        } else if (error.request) {
-          dispatch(OpenSnackBar(`Sign In  Failed: Network Error`));
-        } else {
-          dispatch(OpenSnackBar(`Sign In  Failed: ${error.message}`));
-        }
-        return Promise.reject(error);
-      }
+      return Promise.reject(error);
     }
   };
 };

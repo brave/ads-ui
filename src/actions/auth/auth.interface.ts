@@ -11,7 +11,6 @@ export interface IAuthAction {
 export interface ISignInPayload {
   email: string;
   password: string;
-  accessToken?: any;
 }
 
 export interface ISignUpPayload {
