@@ -48,7 +48,7 @@ function renderNav(props) {
             </S.SubContainer>
             <H5 fontFamily={"Poppins"}>Campaigns</H5>
           </S.Nav> */}
-      <Link style={linkStyle} to={props.match.url + "/performances"}>
+      {/* <Link style={linkStyle} to={props.match.url + "/performances"}>
         <S.Nav
           selected={window.location.pathname.includes(
             props.match.url + "/performances"
@@ -61,7 +61,7 @@ function renderNav(props) {
             Performance
               </Text>
         </S.Nav>
-      </Link>
+      </Link> */}
       <Link style={linkStyle} to={props.match.url + "/campaigns"}>
         <S.Nav
           selected={window.location.pathname.includes(

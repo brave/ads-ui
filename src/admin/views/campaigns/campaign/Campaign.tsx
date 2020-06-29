@@ -308,13 +308,15 @@ const Campaign = props => {
                             <Text style={{ cursor: "pointer" }} content={"Campaign"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
                         </Link>
 
-                        <Link style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} to={`/admin/main/organization/${match.params.advertiserId}/campaign/${match.params.campaignId}/analytics/overview`}>
-                            <Icon style={{ fontSize: "22px", marginLeft: "6px", marginTop: "4px" }}>bar_chart_vertical</Icon>
-                        </Link>
-
                         <Icon style={{ fontSize: "25px", marginTop: "2px" }}>chevron_right</Icon>
                         <Link style={{ textDecoration: "none", color: "#2C2C2C", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} to={match.url.concat("/creativeSet")}>
                             <Text style={{ cursor: "pointer" }} content={"Ad Sets"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
+                        </Link>
+
+                        <Link style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", marginLeft: "auto" }} to={`/admin/main/organization/${match.params.advertiserId}/campaign/${match.params.campaignId}/analytics/overview`}>
+                            <Button style={{ width: "140px", marginTop: "2px" }}>
+                                <Text content={"View Reporting"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                            </Button>
                         </Link>
 
                     </div>
