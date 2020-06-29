@@ -47,7 +47,7 @@ class CampaignTableItem extends React.Component<any, any> {
           </Link>
           <Link
             className={classes.viewButton}
-            to={`${match.url}/${campaign.id}/analytics/overview`}
+            to={`/admin/main/organization/${match.params.advertiserId}/campaign/${campaign.id}/analytics/overview`}
           >
             <IconButton color="primary">
               <Icon>timeline</Icon>

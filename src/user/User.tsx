@@ -8,13 +8,8 @@ import { Link, Redirect, Route, Switch } from "react-router-dom";
 
 import { CloseDrawer } from "../actions";
 import Navbar from "./components/navbar/Navbar";
-import Performances from "../containers/Performances/Performances";
 import Selection from "./views/adsManager/views/selection/Selection";
 import Advanced from "./views/adsManager/views/advanced/Advanced";
-
-// Refactor
-import Platforms from "../admin/views/campaigns/views/campaign/views/analytics/views/platforms/Platforms";
-
 
 import Sidebar from "./components/sidebar/Sidebar";
 
@@ -97,21 +92,17 @@ class User extends React.Component<any, any> {
                                 <Route exact path={match.url + "/adsmanager/selection"} component={Selection} />
                                 <Route exact path={match.url + "/adsmanager/advanced"} component={Advanced} />
 
-                                {/* /performances */}
-                                <Route exact path={match.url + "/performances"} component={Performances} />
-                                <Route exact path={match.url + "/performances/:campaignId/platforms"} component={Platforms} />
-
                                 {/* /campaigns */}
                                 <Route exact path={match.url + "/campaigns"} render={(props) => <CampaignList {...props} userId={auth.id} advertiserId={activeAdvertiser.id} />} />
 
                                 {/* /campaigns/:campaignId/analytics - */}
-                                <Route exact path={match.url + "/campaign/:campaignId/analytics/overview"} render={(props) => <AnalyticsOverview {...props} userId={auth.id} advertiserId={activeAdvertiser.id} />} />
+                                <Route exact path={match.url + "/campaign/:campaignId/analytics/overview"} render={(props) => <AnalyticsOverview {...props} auth={auth} userId={auth.id} advertiserId={activeAdvertiser.id} />} />
                                 <Route exact path={match.url + "/campaign/:campaignId/analytics/audiences"} render={(props) => <CampaignList {...props} userId={auth.id} advertiserId={activeAdvertiser.id} />} />
                                 <Route exact path={match.url + "/campaign/:campaignId/analytics/locations"} render={(props) => <CampaignList {...props} userId={auth.id} advertiserId={activeAdvertiser.id} />} />
                                 <Route exact path={match.url + "/campaign/:campaignId/analytics/platforms"} render={(props) => <CampaignList {...props} userId={auth.id} advertiserId={activeAdvertiser.id} />} />
 
                                 {/* default */}
-                                <Redirect to={match.url + "/performances"} />
+                                <Redirect to={match.url + "/campaigns"} />
                             </Switch>
                         </S.Main>
                     </S.Content>

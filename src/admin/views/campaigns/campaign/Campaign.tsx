@@ -46,6 +46,14 @@ const campaignTypes = [
     { value: 'cause', label: 'Cause' },
 ]
 
+const priorityTypes = [
+    { value: 1, label: '1' },
+    { value: 2, label: '2' },
+    { value: 3, label: '3' },
+    { value: 4, label: '4' },
+    { value: 5, label: '5' },
+]
+
 const Campaign = props => {
 
     const context = useContext(Context);
@@ -54,6 +62,7 @@ const Campaign = props => {
 
     const [name, setName] = useState('');
     const [frequency, setFrequency] = useState('');
+    const [priority, setPriority] = useState({ value: 1, label: "1" });
     const [startDate, setStartDate] = useState((new Date(Date.now() - tzoffset)).toISOString().slice(0, -5) as any);
     const [endDate, setEndDate] = useState((new Date(new Date().setHours(23, 59, 59, 999) - tzoffset)).toISOString().slice(0, -5));
     const [campaignType, setCampaignType] = useState({ value: "paid", label: "Paid" });
@@ -103,6 +112,7 @@ const Campaign = props => {
                     name,
                     state: status.value,
                     dailyCap: parseInt(frequency),
+                    priority: priority.value,
                     currency: currency.value,
                     budget: parseFloat(lifetimeBudget.replace(/[^\d.]/g, '')),
                     dailyBudget: parseFloat(dailyBudget.replace(/[^\d.]/g, '')),
@@ -155,6 +165,7 @@ const Campaign = props => {
     const initializeCampaign = data => {
         setName(data.campaign.name);
         setFrequency(data.campaign.dailyCap);
+        setPriority({ value: data.campaign.priority, label: data.campaign.priority.toString() });
 
         setStartDate(new Date(data.campaign.startAt).toISOString().slice(0, -5));
         setEndDate(new Date(data.campaign.endAt).toISOString().slice(0, -5));
@@ -297,13 +308,15 @@ const Campaign = props => {
                             <Text style={{ cursor: "pointer" }} content={"Campaign"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
                         </Link>
 
-                        <Link style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} to={`/admin/main/organization/${match.params.advertiserId}/campaign/${match.params.campaignId}/analytics/overview`}>
-                            <Icon style={{ fontSize: "22px", marginLeft: "6px", marginTop: "4px" }}>bar_chart_vertical</Icon>
-                        </Link>
-
                         <Icon style={{ fontSize: "25px", marginTop: "2px" }}>chevron_right</Icon>
                         <Link style={{ textDecoration: "none", color: "#2C2C2C", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} to={match.url.concat("/creativeSet")}>
                             <Text style={{ cursor: "pointer" }} content={"Ad Sets"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
+                        </Link>
+
+                        <Link style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", marginLeft: "auto" }} to={`/admin/main/organization/${match.params.advertiserId}/campaign/${match.params.campaignId}/analytics/overview`}>
+                            <Button style={{ width: "140px", marginTop: "2px" }}>
+                                <Text content={"View Reporting"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                            </Button>
                         </Link>
 
                     </div>
@@ -346,6 +359,19 @@ const Campaign = props => {
                                             <Text style={{ marginTop: "4px" }} color={"#E32444"} content={validations.frequencyValidation} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                         </>
                                 }
+
+                            </InputContainer>
+
+                            <InputContainer>
+                                <div style={{ display: "flex", marginBottom: "4px" }}>
+                                    <Text content={"Priority"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                </div>
+                                <Select
+                                    styles={customStyles}
+                                    onChange={setPriority}
+                                    value={priority}
+                                    options={priorityTypes}
+                                />
 
                             </InputContainer>
 
