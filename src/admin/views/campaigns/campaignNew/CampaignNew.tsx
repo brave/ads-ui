@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Icon } from '@material-ui/core';
+import moment from "moment";
 
 import Section from '../../../../components/section/Section';
 import { Divider, Input, InputContainer, Selection, Button, MessageContainer, ErrorIcon, SuccessIcon, Message } from "../../../../components/formElements/formElements";
@@ -48,12 +49,10 @@ const CampaignNew = props => {
 
     const context = useContext(Context);
 
-    var tzoffset = (new Date()).getTimezoneOffset() * 60000;
-
     const [name, setName] = useState('');
     const [frequency, setFrequency] = useState('');
-    const [startDate, setStartDate] = useState((new Date(Date.now() - tzoffset)).toISOString().slice(0, -5) as any);
-    const [endDate, setEndDate] = useState((new Date(new Date().setHours(23, 59, 59, 999) - tzoffset)).toISOString().slice(0, -5));
+    const [startDate, setStartDate] = useState(moment().format('YYYY-MM-DD[T]HH:mm'));
+    const [endDate, setEndDate] = useState(moment().add(1, "month").format('YYYY-MM-DD[T]HH:mm'));
     const [campaignType, setCampaignType] = useState({ value: "paid", label: "Paid" });
     const [status, setStatus] = useState({ value: "active", label: "Active" });
     const [currency, setCurrency] = useState({ value: "USD", label: "USD" });
@@ -103,7 +102,7 @@ const CampaignNew = props => {
                     currency: currency.value,
                     budget: parseFloat(lifetimeBudget.replace(/[^\d.]/g, '')),
                     dailyBudget: parseFloat(dailyBudget.replace(/[^\d.]/g, '')),
-                    startAt: new Date(startDate),
+                    startAt: moment(startDate).toISOString(),
                     endAt: new Date(endDate),
                     type: campaignType.value,
                     source: "direct",
@@ -294,7 +293,7 @@ const CampaignNew = props => {
                             </div>
 
                             <div style={{ width: "99%", display: "flex", marginTop: "-12px", marginRight: "8px", marginBottom: "8px" }}>
-                                <Text style={{ marginLeft: "auto" }} content={`${(new Date).toString().split('(')[1].slice(0, -1)}`} sizes={[16, 16, 15, 15, 12]} fontFamily={"Poppins"} />
+                                <Text style={{ marginLeft: "auto" }} content={`${(new Date).toString().split('(')[1].slice(0, -1)} (UTC ${moment().format('Z')})`} sizes={[16, 16, 15, 15, 12]} fontFamily={"Poppins"} />
                             </div>
 
                             <InputContainer>

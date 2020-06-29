@@ -32,9 +32,9 @@ const CampaignList = props => {
             accessor: 'name',
             Cell: (props) => {
                 return (
-                    // <Link style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} to={match.url}>
-                    <div style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} title={props.row.original.name}>{props.row.original.name}</div>
-                    // </Link>)
+                    <Link style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} to={`campaign/${props.row.original.id}/analytics/overview`}>
+                        <div style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} title={props.row.original.name}>{props.row.original.name}</div>
+                    </Link>
                 )
             }
         },
@@ -84,19 +84,11 @@ const CampaignList = props => {
             Cell: (props) => {
                 return new Date(props.row.original.endAt).toLocaleDateString("en-US")
             },
-        },
-        {
-            accessor: 'currency',
-            Cell: (props) => {
-                return (
-                    <div style={{ display: "flex", cursor: "pointer", color: "rgb(251, 84, 43)" }}><Icon title="Analytics">bar_chart</Icon></div>
-                )
-            },
-        },
+        }
     ];
 
     // For analytics icon 
-    // <Link style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} to={`campaign/${props.row.original.id}/analytics/overview`}></Link>
+    // 
 
     if (loading) return <></>;
 
@@ -105,7 +97,7 @@ const CampaignList = props => {
     return (
         <div>
             <Section fullWidthChild={true}>
-                <Table data={data.advertiser.campaigns} columns={columns} tableWidth={1094} columnCount={8} />
+                <Table data={data.advertiser.campaigns} columns={columns} tableWidth={1094} columnCount={7} />
             </Section>
         </div>
     );
