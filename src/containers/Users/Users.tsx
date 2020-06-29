@@ -11,7 +11,6 @@ import UserList from "../../components/Users/UserList/UserList";
 import UserNew from "../../components/Users/UserNew/UserNew";
 import CreativeInstanceNew from "../../components/CreativeInstances/CreativeInstanceNew/CreativeInstanceNew";
 import CreativeInstanceView from "../Campaigns/CreativeInstanceView/CreativeInstanceView";
-import CampaignPerformance from "../Campaigns/CampaignPerformance/CampaignPerformance";
 
 import CampaignView from "../Campaigns/CampaignView/CampaignView";
 import CreativeSetView from "../Campaigns/CreativeSetView/CreativeSetView";
@@ -40,8 +39,6 @@ class Users extends React.Component<any, any> {
             component={CampaignNew} />
           <Route exact path={match.url + "/:userId/advertiser/:advertiserId/campaign/:campaignId"}
             component={CampaignView} />
-          <Route exact path={match.url + "/:userId/advertiser/:advertiserId/campaign/:campaignId/report"}
-            component={CampaignPerformance} />
           <Route exact path={match.url + "/:userId/advertiser/:advertiserId/campaign/:campaignId/creativeSet/new"}
             component={CreativeSetNew} />
           <Route exact path={

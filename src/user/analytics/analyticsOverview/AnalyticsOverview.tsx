@@ -65,7 +65,6 @@ const AnalyticsOverview = props => {
     if (loading) return <></>;
     return (
         <div>
-
             {/* Top Row */}
             <div style={{ display: "flex", width: "100%", justifyContent: "space-between", marginBottom: "28px" }}>
                 <Text content={campaign.name} fontFamily={"Poppins"} sizes={[18, 18, 42, 42, 26]} />

@@ -13,7 +13,6 @@ import UserList from "../components/Users/UserList/UserList";
 import UserNew from "../components/Users/UserNew/UserNew";
 import CreativeInstanceNew from "../components/CreativeInstances/CreativeInstanceNew/CreativeInstanceNew";
 import CreativeInstanceView from "../containers/Campaigns/CreativeInstanceView/CreativeInstanceView";
-import CampaignPerformance from "../containers/Campaigns/CampaignPerformance/CampaignPerformance";
 
 import Creative from "./views/creatives/creative/Creative";
 import CreativeNew from "./views/creatives/creativeNew/CreativeNew";
@@ -24,8 +23,6 @@ import AdSetNew from "./views/adSets/adSetNew/AdSetNew";
 import UserView from "../containers/Users/UserView/UserView";
 
 import Selection from "./views/adsManager/views/selection/Selection";
-import Overview from "./views/campaigns/views/campaign/views/analytics/views/overview/Overview";
-import Platforms from "./views/campaigns/views/campaign/views/analytics/views/platforms/Platforms";
 
 import * as S from "./Admin.style";
 import { styles } from "./Admin.style";
@@ -165,10 +162,6 @@ class Admin extends React.Component<any, any> {
                                 <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/campaign/new"} component={CampaignNew} />
                                 <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/campaign/:campaignId"} component={Campaign} />
                                 <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/campaign/:campaignId/creativeSet"} component={CampaignAdSets} />
-                                <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/campaign/:campaignId/report"} component={CampaignPerformance} />
-                                <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/campaign/:campaignId/analytics/overview"} component={Overview} />
-                                <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/campaign/:campaignId/analytics/platforms"} component={Platforms} />
-
 
                                 {/* /creativeSet */}
                                 <Route exact path={match.url + "/users/:userId/advertiser/:advertiserId/campaign/:campaignId/creativeSet/new"} component={AdSetNew} />
