@@ -16,19 +16,6 @@ advertiser(id: $id){
         endAt
         currency
         pacingIndex
-        engagements {
-            createdat
-            type
-            count
-            currency
-            price
-            android
-            ios
-            linux
-            macos
-            windows
-            other
-        }
     }
 }
 }
