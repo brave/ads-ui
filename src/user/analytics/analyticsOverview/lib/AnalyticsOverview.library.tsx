@@ -52,7 +52,7 @@ export const prepareSankey = (impressions, clicks, landings, conversions) => {
             enabled: false
         },
         xAxis: {
-            categories: ["Impressions", "Clicks", "10s Landings"],
+            categories: ["Impressions", "Clicks", "10s Visits"],
         },
         yAxis: {
             title: {
@@ -134,7 +134,7 @@ export const prepareChart = (metric1, metric1DataSet, metric2, metric2DataSet, m
             case 'convRate':
                 return "Conversion Rate";
             case 'landingRate':
-                return "10s Landing Rate";
+                return "10s Visit Rate";
         }
     }
 
