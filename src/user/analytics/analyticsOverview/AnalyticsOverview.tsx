@@ -40,8 +40,8 @@ const AnalyticsOverview = props => {
 
     const [metric1, setMetric1] = useState("impressions");
     const [metric2, setMetric2] = useState("clicks");
-    const [metric3, setMetric3] = useState("landings");
-    const [metric4, setMetric4] = useState("conversions");
+    const [metric3, setMetric3] = useState("dismissals");
+    const [metric4, setMetric4] = useState("landings");
     const [grouping, setGrouping] = useState("daily")
     const [downloadingCSV, setDownloadingCSV] = useState(false);
 
@@ -129,7 +129,7 @@ const AnalyticsOverview = props => {
                         <div style={{ border: "1px solid #ededed", borderRadius: "4px", height: "130px", width: "195px" }}>
 
                             <div style={{ width: "100%", height: "56px", backgroundColor: "white", borderBottom: "1px solid #ededed", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                <PopoutExample setMetric1={setMetric4} initialValue={{ value: "landings", label: "10s Landings" }} />
+                                <PopoutExample setMetric1={setMetric4} initialValue={{ value: "landings", label: "10s Visits" }} />
                             </div>
                             <div style={{ display: "flex", height: "74px", justifyContent: "center", alignItems: "center", width: "100%" }}>
                                 <Text content={formatMetric(processedData, metric4)} fontFamily={"Poppins"} sizes={[18, 18, 42, 42, 22]} />

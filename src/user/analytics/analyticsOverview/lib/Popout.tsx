@@ -55,7 +55,7 @@ export default class PopoutExample extends Component<any, State> {
                     isClearable={false}
                     menuIsOpen
                     onChange={this.onSelectChange}
-                    options={[{ value: "impressions", label: "Impressions" }, { value: "clicks", label: "Clicks" }, { value: "ctr", label: "CTR" }, { value: "landings", label: "10s Landings" }, { value: "conversions", label: "Conversions" }, { value: "dismissals", label: "Dismissals" }, { value: "upvotes", label: "Upvotes" }, { value: "downvotes", label: "Downvotes" }, { value: "convRate", label: "Conversion Rate" }, { value: "landingRate", label: "10s Landing Rate" }]}
+                    options={[{ value: "impressions", label: "Impressions" }, { value: "clicks", label: "Clicks" }, { value: "ctr", label: "CTR" }, { value: "landings", label: "10s Visits" }, { value: "conversions", label: "Conversions" }, { value: "dismissals", label: "Dismissals" }, { value: "upvotes", label: "Upvotes" }, { value: "downvotes", label: "Downvotes" }, { value: "convRate", label: "Conversion Rate" }, { value: "landingRate", label: "10s Visit Rate" }]}
                     styles={selectStyles}
                     tabSelectsValue={false}
                 />
