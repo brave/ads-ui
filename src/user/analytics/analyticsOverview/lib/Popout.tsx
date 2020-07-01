@@ -39,8 +39,8 @@ export default class PopoutExample extends Component<any, State> {
                 onClose={this.toggleOpen}
                 target={
                     <div onClick={this.toggleOpen}>
-                        <div style={{ display: "flex", alignItems: "center", marginBottom: "7px", cursor: "pointer" }}>
-                            <Text style={{ marginBottom: "2px" }} content={value?.label} fontFamily={"Muli"} sizes={[18, 18, 42, 42, 14]} />
+                        <div style={{ display: "flex", alignItems: "center", cursor: "pointer" }}>
+                            <Text style={{ marginBottom: "2px" }} content={value?.label} fontFamily={"Poppins"} sizes={[14, 14, 14, 14, 14]} />
                             <Icon style={{ fontSize: "22px", marginLeft: "0px" }}>arrow_drop_down</Icon>
                         </div>
                     </div>
