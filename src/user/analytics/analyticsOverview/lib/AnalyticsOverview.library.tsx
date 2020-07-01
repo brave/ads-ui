@@ -478,3 +478,16 @@ export const formatMetric = (data, metric) => {
             return (data[metric] * 100).toFixed(2) + "%";
     }
 }
+
+export const tempMetric = (data, metric) => {
+    switch (metric) {
+        case 'viewVisitRate':
+            return ((data["landings"] / data["impressions"] * 100).toFixed(2) + "%");
+        case 'viewDismissalRate':
+            return ((data["dismissals"] / data["impressions"] * 100).toFixed(2) + "%");
+    }
+}
+
+export const budgetMetric = (budget, currency) => {
+    return budget + " " + currency;
+}
