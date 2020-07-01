@@ -7,7 +7,7 @@ interface GroupingProps {
 export const Grouping = styled("div")`
 ${(props: GroupingProps) => `
     font-size: 14px;
-    font-family: Muli;
+    font-family: Poppins;
     margin-right: 28px;
     cursor: pointer;
     color: ${props.selected ? "#FB7959;" : "black;"}
