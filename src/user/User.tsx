@@ -25,12 +25,28 @@ import { createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import AnalyticsOverview from "./analytics/analyticsOverview/AnalyticsOverview";
+import Settings from "./settings/Settings";
 
 class User extends React.Component<any, any> {
     static contextType = Context;
+    constructor(props) {
+        super(props);
+        this.state = {
+            activeAdvertiser: _.find(props.advertisers, { state: "active" })
+        }
+        this.setActiveAdvertiser = this.setActiveAdvertiser.bind(this);
+    }
+
+    setActiveAdvertiser = (activeAdvertiser) => {
+        this.setState({ activeAdvertiser });
+    }
+
     public render(): any {
+
         const { advertisers, auth, classes, match } = this.props;
         const activeAdvertiser = _.find(advertisers, { state: "active" });
+
+
 
         const httpLink = createHttpLink({
             uri: `${process.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql"),
@@ -60,6 +76,8 @@ class User extends React.Component<any, any> {
         ) {
             return <Redirect to="/a" />;
         }
+
+
 
         return (
             <ApolloProvider client={client}>
@@ -92,14 +110,17 @@ class User extends React.Component<any, any> {
                                 <Route exact path={match.url + "/adsmanager/selection"} component={Selection} />
                                 <Route exact path={match.url + "/adsmanager/advanced"} component={Advanced} />
 
+                                {/* /settings */}
+                                <Route exact path={match.url + "/settings"} render={(props) => <Settings {...props} userId={auth.id} advertisers={advertisers} activeAdvertiser={this.state.activeAdvertiser} setActiveAdvertiser={this.setActiveAdvertiser} />} />
+
                                 {/* /campaigns */}
-                                <Route exact path={match.url + "/campaigns"} render={(props) => <CampaignList {...props} userId={auth.id} advertiserId={activeAdvertiser.id} />} />
+                                <Route exact path={match.url + "/campaigns"} render={(props) => <CampaignList {...props} userId={auth.id} advertiserId={this.state.activeAdvertiser.id} />} />
 
                                 {/* /campaigns/:campaignId/analytics - */}
-                                <Route exact path={match.url + "/campaign/:campaignId/analytics/overview"} render={(props) => <AnalyticsOverview {...props} auth={auth} userId={auth.id} advertiserId={activeAdvertiser.id} />} />
-                                <Route exact path={match.url + "/campaign/:campaignId/analytics/audiences"} render={(props) => <CampaignList {...props} userId={auth.id} advertiserId={activeAdvertiser.id} />} />
-                                <Route exact path={match.url + "/campaign/:campaignId/analytics/locations"} render={(props) => <CampaignList {...props} userId={auth.id} advertiserId={activeAdvertiser.id} />} />
-                                <Route exact path={match.url + "/campaign/:campaignId/analytics/platforms"} render={(props) => <CampaignList {...props} userId={auth.id} advertiserId={activeAdvertiser.id} />} />
+                                <Route exact path={match.url + "/campaign/:campaignId/analytics/overview"} render={(props) => <AnalyticsOverview {...props} auth={auth} userId={auth.id} advertiserId={this.state.activeAdvertiser.id} />} />
+                                <Route exact path={match.url + "/campaign/:campaignId/analytics/audiences"} render={(props) => <CampaignList {...props} userId={auth.id} advertiserId={this.state.activeAdvertiser.id} />} />
+                                <Route exact path={match.url + "/campaign/:campaignId/analytics/locations"} render={(props) => <CampaignList {...props} userId={auth.id} advertiserId={this.state.activeAdvertiser.id} />} />
+                                <Route exact path={match.url + "/campaign/:campaignId/analytics/platforms"} render={(props) => <CampaignList {...props} userId={auth.id} advertiserId={this.state.activeAdvertiser.id} />} />
 
                                 {/* default */}
                                 <Redirect to={match.url + "/campaigns"} />
