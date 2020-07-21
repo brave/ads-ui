@@ -7,7 +7,7 @@ import * as S from "./style/Navbar.style";
 
 import { Link, Redirect, Route, Switch } from "react-router-dom";
 
-import UserMenu from "../../../components/UserMenu/UserMenu";
+import UserMenu from "./components/UserMenu/UserMenu";
 
 import { SignOut, ToggleDrawer, UserResend } from "../../../actions";
 
