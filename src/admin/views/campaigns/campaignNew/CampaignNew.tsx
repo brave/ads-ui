@@ -102,8 +102,8 @@ const CampaignNew = props => {
                     currency: currency.value,
                     budget: parseFloat(lifetimeBudget.replace(/[^\d.]/g, '')),
                     dailyBudget: parseFloat(dailyBudget.replace(/[^\d.]/g, '')),
-                    startAt: moment(startDate).toISOString(),
-                    endAt: new Date(endDate),
+                    startAt: moment(startDate).utc().format("YYYY-MM-DD[T]HH:mm:SS.000[Z]"),
+                    endAt: moment(endDate).utc().format("YYYY-MM-DD[T]HH:mm:SS.000[Z]"),
                     type: campaignType.value,
                     source: "direct",
                     geoTargets: prepareGeoTargetsInput()
