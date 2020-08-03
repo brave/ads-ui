@@ -12,6 +12,7 @@ import { CAMPAIGN, UPDATE_CAMPAIGN } from "./lib/Campaign.queries";
 import Context from "../../../../state/context";
 import TabSelector from '../../../../components/tabSelector/TabSelector';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 const customStyles = {
     control: (provided, state) => ({
@@ -63,8 +64,8 @@ const Campaign = props => {
     const [name, setName] = useState('');
     const [frequency, setFrequency] = useState('');
     const [priority, setPriority] = useState({ value: 1, label: "1" });
-    const [startDate, setStartDate] = useState((new Date(Date.now() - tzoffset)).toISOString().slice(0, -5) as any);
-    const [endDate, setEndDate] = useState((new Date(new Date().setHours(23, 59, 59, 999) - tzoffset)).toISOString().slice(0, -5));
+    const [startDate, setStartDate] = useState(moment().format('YYYY-MM-DD[T]HH:mm'));
+    const [endDate, setEndDate] = useState(moment().add(1, "month").format('YYYY-MM-DD[T]HH:mm'));
     const [campaignType, setCampaignType] = useState({ value: "paid", label: "Paid" });
     const [status, setStatus] = useState({ value: "active", label: "Active" });
     const [currency, setCurrency] = useState({ value: "USD", label: "USD" });
@@ -116,8 +117,8 @@ const Campaign = props => {
                     currency: currency.value,
                     budget: parseFloat(lifetimeBudget.replace(/[^\d.]/g, '')),
                     dailyBudget: parseFloat(dailyBudget.replace(/[^\d.]/g, '')),
-                    startAt: new Date(startDate),
-                    endAt: new Date(endDate),
+                    startAt: moment(startDate).utc().format("YYYY-MM-DD[T]HH:mm:SS.000[Z]"),
+                    endAt: moment(endDate).utc().format("YYYY-MM-DD[T]HH:mm:SS.000[Z]"),
                     type: campaignType.value,
                     geoTargets: prepareGeoTargetsInput()
                 }
@@ -167,8 +168,8 @@ const Campaign = props => {
         setFrequency(data.campaign.dailyCap);
         setPriority({ value: data.campaign.priority, label: data.campaign.priority.toString() });
 
-        setStartDate(new Date(data.campaign.startAt).toISOString().slice(0, -5));
-        setEndDate(new Date(data.campaign.endAt).toISOString().slice(0, -5));
+        setStartDate(moment(data.campaign.startAt).format('YYYY-MM-DD[T]HH:mm'));
+        setEndDate(moment(data.campaign.endAt).format('YYYY-MM-DD[T]HH:mm'));
 
         setCampaignType({ value: data.campaign.type, label: data.campaign.type })
         setStatus({ value: data.campaign.state, label: data.campaign.state })
@@ -396,7 +397,7 @@ const Campaign = props => {
                             </div>
 
                             <div style={{ width: "99%", display: "flex", marginTop: "-12px", marginRight: "8px", marginBottom: "8px" }}>
-                                <Text style={{ marginLeft: "auto" }} content={`${(new Date).toString().split('(')[1].slice(0, -1)}`} sizes={[16, 16, 15, 15, 12]} fontFamily={"Poppins"} />
+                                <Text style={{ marginLeft: "auto" }} content={`${(new Date).toString().split('(')[1].slice(0, -1)} (UTC ${moment().format('Z')})`} sizes={[16, 16, 15, 15, 12]} fontFamily={"Poppins"} />
                             </div>
 
                             <InputContainer>
