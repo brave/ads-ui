@@ -8,6 +8,7 @@ query campaign($id: String!){
         state
         dailyCap
         priority
+        passThroughRate
         currency
         budget
         dailyBudget
@@ -36,6 +37,7 @@ mutation updateCampaign($updateCampaignInput: UpdateCampaignInput!){
         state
         dailyCap
         priority
+        passThroughRate
         currency
         budget
         dailyBudget
