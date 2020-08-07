@@ -64,6 +64,7 @@ const Campaign = props => {
     const [name, setName] = useState('');
     const [frequency, setFrequency] = useState('');
     const [priority, setPriority] = useState({ value: 1, label: "1" });
+    const [passThroughRate, setPassThroughRate] = useState('');
     const [startDate, setStartDate] = useState(moment().format('YYYY-MM-DD[T]HH:mm'));
     const [endDate, setEndDate] = useState(moment().add(1, "month").format('YYYY-MM-DD[T]HH:mm'));
     const [campaignType, setCampaignType] = useState({ value: "paid", label: "Paid" });
@@ -114,6 +115,7 @@ const Campaign = props => {
                     state: status.value,
                     dailyCap: parseInt(frequency),
                     priority: priority.value,
+                    passThroughRate: parseFloat(passThroughRate),
                     currency: currency.value,
                     budget: parseFloat(lifetimeBudget.replace(/[^\d.]/g, '')),
                     dailyBudget: parseFloat(dailyBudget.replace(/[^\d.]/g, '')),
@@ -167,6 +169,7 @@ const Campaign = props => {
         setName(data.campaign.name);
         setFrequency(data.campaign.dailyCap);
         setPriority({ value: data.campaign.priority, label: data.campaign.priority.toString() });
+        setPassThroughRate(data.campaign.passThroughRate);
 
         setStartDate(moment(data.campaign.startAt).format('YYYY-MM-DD[T]HH:mm'));
         setEndDate(moment(data.campaign.endAt).format('YYYY-MM-DD[T]HH:mm'));
@@ -374,6 +377,13 @@ const Campaign = props => {
                                     options={priorityTypes}
                                 />
 
+                            </InputContainer>
+
+                            <InputContainer>
+                                <div style={{ display: "flex" }}>
+                                    <Text content={"Pass Through Rate"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                </div>
+                                <Input value={passThroughRate} onChange={event => setPassThroughRate(event.target.value)}></Input>
                             </InputContainer>
 
                             <div style={{ display: "flex", width: "100%", alignItems: "center" }}>
