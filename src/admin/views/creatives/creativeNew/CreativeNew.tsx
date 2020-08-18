@@ -34,6 +34,10 @@ const CreativeNew = props => {
     const [targetUrl, setTargetUrl] = useState('');
     const [size, setSize] = useState('');
     const [creativeUrl, setCreativeUrl] = useState('');
+    const [logoUrl, setLogoUrl] = useState('');
+    const [logoAltText, setLogoAltText] = useState('');
+    const [logoCompanyName, setLogoCompanyName] = useState('');
+    const [wallpapers, setWallpapers] = useState([{ imageUrl: '', x: '', y: '' }]);
     const [type, setType] = useState('notification_all_v1');
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
@@ -196,7 +200,10 @@ const CreativeNew = props => {
                                         <Text content={"In-Page Image"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                         <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "-2px", marginLeft: "3px" }}>info</Icon>
                                     </Selection>
-                                    <Selection selected={false} style={{ visibility: "hidden" }}></Selection>
+                                    <Selection onClick={() => { setType("new_tab_page_all_v1"); setValidations({}); setError(false); setName(''); setTargetUrl('') }} selected={type === "new_tab_page_all_v1"}>
+                                        <Text content={"New Tab Page"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                        <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "-2px", marginLeft: "3px" }}>info</Icon>
+                                    </Selection>
                                 </div>
                             </InputContainer>
 
@@ -245,77 +252,133 @@ const CreativeNew = props => {
                             </InputContainer>
                             <Divider />
 
-                            <Text content={"Creative"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
-                            <div style={{ display: "flex" }}>
-                                <Text content={"Define the copy and text used in your creative."} style={{ marginTop: "2px", marginBottom: "28px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                <Text title="Wiki's coming soon!" content={"Learn More."} color={"#E0694C"} style={{ marginTop: "2px", marginBottom: "28px", marginLeft: "4px", cursor: "pointer" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                            </div>
-
-
-
                             {
-                                type === "notification_all_v1" ?
-                                    <>
-                                        <InputContainer>
-                                            <div style={{ display: "flex" }}>
-                                                <Text content={"Title"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            </div>
-                                            {
-                                                !validations.titleRequired ?
-                                                    <Input value={title} onChange={event => setTitle(event.target.value)}></Input>
-                                                    :
-                                                    <>
-                                                        <Input error={true} value={title} onChange={event => setTitle(event.target.value)}></Input>
-                                                        <Text style={{ marginTop: "4px" }} color={"#E32444"} content={validations.titleRequired} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                    </>
-                                            }
-                                        </InputContainer>
-                                        <InputContainer>
-                                            <div style={{ display: "flex" }}>
-                                                <Text content={"Body"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            </div>
-                                            {
-                                                !validations.bodyRequired ?
-                                                    <Input value={body} onChange={event => setBody(event.target.value)}></Input>
-                                                    :
-                                                    <>
-                                                        <Input error={true} value={body} onChange={event => setBody(event.target.value)}></Input>
-                                                        <Text style={{ marginTop: "4px" }} color={"#E32444"} content={validations.bodyRequired} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                    </>
-                                            }
-                                        </InputContainer>
-                                    </>
-                                    :
-                                    <>
-                                        <InputContainer>
-                                            <div style={{ display: "flex" }}>
-                                                <Text content={"Size"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            </div>
-                                            {
-                                                !validations.sizeRequired ?
-                                                    <Input value={size} onChange={event => setSize(event.target.value)}></Input>
-                                                    :
-                                                    <>
-                                                        <Input error={true} value={size} onChange={event => setSize(event.target.value)}></Input>
-                                                        <Text style={{ marginTop: "4px" }} color={"#E32444"} content={validations.sizeRequired} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                    </>
-                                            }
-                                        </InputContainer>
-                                        <InputContainer>
-                                            <div style={{ display: "flex" }}>
-                                                <Text content={"Image URL"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            </div>
-                                            {
-                                                !validations.creativeUrlRequired ?
-                                                    <Input value={creativeUrl} onChange={event => setCreativeUrl(event.target.value)}></Input>
-                                                    :
-                                                    <>
-                                                        <Input error={true} value={creativeUrl} onChange={event => setCreativeUrl(event.target.value)}></Input>
-                                                        <Text style={{ marginTop: "4px" }} color={"#E32444"} content={validations.creativeUrlRequired} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                    </>
-                                            }
-                                        </InputContainer>
-                                    </>
+                                type === "notification_all_v1" &&
+                                <>
+                                    <Text content={"Creative"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
+                                    <div style={{ display: "flex" }}>
+                                        <Text content={"Define the copy and text used in your creative."} style={{ marginTop: "2px", marginBottom: "28px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                        <Text title="Wiki's coming soon!" content={"Learn More."} color={"#E0694C"} style={{ marginTop: "2px", marginBottom: "28px", marginLeft: "4px", cursor: "pointer" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    </div>
+                                    <InputContainer>
+                                        <div style={{ display: "flex" }}>
+                                            <Text content={"Title"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                        </div>
+                                        {
+                                            !validations.titleRequired ?
+                                                <Input value={title} onChange={event => setTitle(event.target.value)}></Input>
+                                                :
+                                                <>
+                                                    <Input error={true} value={title} onChange={event => setTitle(event.target.value)}></Input>
+                                                    <Text style={{ marginTop: "4px" }} color={"#E32444"} content={validations.titleRequired} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                </>
+                                        }
+                                    </InputContainer>
+                                    <InputContainer>
+                                        <div style={{ display: "flex" }}>
+                                            <Text content={"Body"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                        </div>
+                                        {
+                                            !validations.bodyRequired ?
+                                                <Input value={body} onChange={event => setBody(event.target.value)}></Input>
+                                                :
+                                                <>
+                                                    <Input error={true} value={body} onChange={event => setBody(event.target.value)}></Input>
+                                                    <Text style={{ marginTop: "4px" }} color={"#E32444"} content={validations.bodyRequired} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                </>
+                                        }
+                                    </InputContainer>
+                                </>
+
+                            }
+                            {
+                                type === "in_page_all_v1" &&
+                                <>
+                                    <Text content={"Creative"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
+                                    <div style={{ display: "flex" }}>
+                                        <Text content={"Define the copy and text used in your creative."} style={{ marginTop: "2px", marginBottom: "28px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                        <Text title="Wiki's coming soon!" content={"Learn More."} color={"#E0694C"} style={{ marginTop: "2px", marginBottom: "28px", marginLeft: "4px", cursor: "pointer" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    </div>
+                                    <InputContainer>
+                                        <div style={{ display: "flex" }}>
+                                            <Text content={"Size"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                        </div>
+                                        {
+                                            !validations.sizeRequired ?
+                                                <Input value={size} onChange={event => setSize(event.target.value)}></Input>
+                                                :
+                                                <>
+                                                    <Input error={true} value={size} onChange={event => setSize(event.target.value)}></Input>
+                                                    <Text style={{ marginTop: "4px" }} color={"#E32444"} content={validations.sizeRequired} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                </>
+                                        }
+                                    </InputContainer>
+                                    <InputContainer>
+                                        <div style={{ display: "flex" }}>
+                                            <Text content={"Image URL"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                        </div>
+                                        {
+                                            !validations.creativeUrlRequired ?
+                                                <Input value={creativeUrl} onChange={event => setCreativeUrl(event.target.value)}></Input>
+                                                :
+                                                <>
+                                                    <Input error={true} value={creativeUrl} onChange={event => setCreativeUrl(event.target.value)}></Input>
+                                                    <Text style={{ marginTop: "4px" }} color={"#E32444"} content={validations.creativeUrlRequired} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                </>
+                                        }
+                                    </InputContainer>
+                                </>
+                            }
+                            {
+                                type === "new_tab_page_all_v1" &&
+                                <>
+                                    <Text content={"Logo"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
+                                    <div style={{ display: "flex" }}>
+                                        <Text content={"Define the copy and text used in your logo."} style={{ marginTop: "2px", marginBottom: "28px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                        <Text title="Wiki's coming soon!" content={"Learn More."} color={"#E0694C"} style={{ marginTop: "2px", marginBottom: "28px", marginLeft: "4px", cursor: "pointer" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    </div>
+                                    <InputContainer>
+                                        <div style={{ display: "flex" }}>
+                                            <Text content={"Image URL"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                        </div>
+                                        <Input value={size} onChange={event => setLogoUrl(event.target.value)}></Input>
+                                    </InputContainer>
+                                    <InputContainer>
+                                        <div style={{ display: "flex" }}>
+                                            <Text content={"Alt Text"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                        </div>
+                                        <Input value={size} onChange={event => setLogoAltText(event.target.value)}></Input>
+                                    </InputContainer>
+                                    <InputContainer>
+                                        <div style={{ display: "flex" }}>
+                                            <Text content={"Company Name"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                        </div>
+                                        <Input value={size} onChange={event => setLogoCompanyName(event.target.value)}></Input>
+                                    </InputContainer>
+                                    <Text content={"Wallpapers"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
+                                    <div style={{ display: "flex" }}>
+                                        <Text content={"Define the copy and text used in your wallpapers."} style={{ marginTop: "2px", marginBottom: "28px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                        <Text title="Wiki's coming soon!" content={"Learn More."} color={"#E0694C"} style={{ marginTop: "2px", marginBottom: "28px", marginLeft: "4px", cursor: "pointer" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    </div>
+                                    <InputContainer>
+                                        <div style={{ display: "flex" }}>
+                                            <Text content={"Image URL"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                        </div>
+                                        <Input value={wallpapers[0].imageUrl} onChange={event => setSize(event.target.value)}></Input>
+                                    </InputContainer>
+                                    <InputContainer>
+                                        <div style={{ display: "flex" }}>
+                                            <Text content={"X-Focal-Point"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                        </div>
+                                        <Input value={wallpapers[0].x} onChange={event => setSize(event.target.value)}></Input>
+                                    </InputContainer>
+                                    <InputContainer>
+                                        <div style={{ display: "flex" }}>
+                                            <Text content={"Y-Focal-Point"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                        </div>
+                                        <Input value={wallpapers[0].y} onChange={event => setSize(event.target.value)}></Input>
+                                    </InputContainer>
+                                </>
                             }
                             <div style={{ display: "flex" }}>
                                 {
