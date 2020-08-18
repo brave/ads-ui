@@ -47,6 +47,10 @@ class SignInContainer extends React.Component<any, any> {
       } as any);
     let data = await resp.json();
 
+    if (data === `Error in authentication Error: {"error":"Invalid email or password","statusCode":400}`) {
+      alert("The username or password did not match our records. Please try again.");
+    }
+
     if (data.accessToken) {
       const auth = await this.props.signin({ email: this.state.email, password: this.state.password, accessToken: data.accessToken });
       await this.props.getAdvertiser(data);
@@ -216,5 +220,3 @@ export default withStyles(styles)(
     mapDispatchToProps
   )(SignInContainer)
 );
-
-
