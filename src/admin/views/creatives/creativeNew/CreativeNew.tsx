@@ -6,7 +6,7 @@ import { Divider, Input, InputContainer, Selection, Button, MessageContainer, Er
 import { Text } from "../../../../components/Text/Text";
 
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import { CREATE_NOTIFICATION_CREATIVE, CREATE_IN_PAGE_CREATIVE } from "./lib/CreativeNew.queries";
+import { CREATE_NOTIFICATION_CREATIVE, CREATE_IN_PAGE_CREATIVE, CREATE_NEW_TAB_PAGE_CREATIVE } from "./lib/CreativeNew.queries";
 import Select from 'react-select';
 
 const customStyles = {
@@ -37,7 +37,7 @@ const CreativeNew = props => {
     const [logoUrl, setLogoUrl] = useState('');
     const [logoAltText, setLogoAltText] = useState('');
     const [logoCompanyName, setLogoCompanyName] = useState('');
-    const [wallpapers, setWallpapers] = useState([{ imageUrl: '', x: '', y: '' }]);
+    const [wallpapers, setWallpapers] = useState([{ imageUrl: '', focalPoint: { x: undefined, y: undefined } }]);
     const [type, setType] = useState('notification_all_v1');
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
@@ -53,8 +53,11 @@ const CreativeNew = props => {
         if (data.createNotificationCreative) {
             creativeId = data.createNotificationCreative.id
         }
-        else {
+        else if (data.createInPageCreative) {
             creativeId = data.createInPageCreative.id
+        }
+        else if (data.createNewTabPageCreative) {
+            creativeId = data.createNewTabPageCreative.id
         }
 
         setTimeout(() => {
@@ -109,6 +112,32 @@ const CreativeNew = props => {
             onCompleted: updateCreative
         });
 
+    const [createNewTabPageCreative, { loading: newTabPageLoading, error: newTabPageError }] =
+        useMutation(CREATE_NEW_TAB_PAGE_CREATIVE, {
+            variables: {
+                createNewTabPageCreativeInput: {
+                    advertiserId: props.match.params.advertiserId,
+                    creativeId: props.match.params.creativeId,
+                    name,
+                    state: status.value,
+                    type: {
+                        code: "new_tab_page_all_v1",
+                        name: "new_tab_page"
+                    },
+                    payload: {
+                        logo: {
+                            imageUrl: logoUrl,
+                            alt: logoAltText,
+                            companyName: logoCompanyName,
+                            destinationUrl: targetUrl
+                        },
+                        wallpapers: wallpapers
+                    }
+                }
+            },
+            onCompleted: updateCreative
+        });
+
     const validateForm = () => {
         let validations = {} as any;
         setSuccess(false);
@@ -145,6 +174,75 @@ const CreativeNew = props => {
             setValidations({} as any);
             return true;
         }
+    }
+
+    const handleLogoUpload = () => {
+        document.getElementById("logoUpload")?.click();
+    }
+
+    const handleWallpaperUpload = (i) => {
+        document.getElementById(`wallpaperUpload-${i}`)?.click();
+    }
+
+    const setWallpaperImageUrl = (imageUrl, i) => {
+        let wallpapersTemp = [...wallpapers];
+        wallpapersTemp[i].imageUrl = imageUrl;
+        //@ts-ignore
+        setWallpapers(wallpapersTemp);
+    }
+
+    const setWallpaperX = (x, i) => {
+        let wallpapersTemp = [...wallpapers];
+        wallpapersTemp[i].focalPoint.x = x;
+        //@ts-ignore
+        setWallpapers(wallpapersTemp);
+    }
+
+    const setWallpaperY = (y, i) => {
+        let wallpapersTemp = [...wallpapers];
+        wallpapersTemp[i].focalPoint.y = y;
+        //@ts-ignore
+        setWallpapers(wallpapersTemp);
+    }
+
+    const addWallpaper = () => {
+        let wallpapersTemp = [...wallpapers];
+        wallpapersTemp.push({ imageUrl: '', focalPoint: { x: undefined, y: undefined } });
+        //@ts-ignore
+        setWallpapers(wallpapersTemp);
+    }
+
+
+    const renderWallpapers = () => {
+        return wallpapers.map((wallpaper, i) => {
+            return <>
+                {i > 0 && <Divider />}
+                <div style={{ display: "flex" }}>
+                    <InputContainer style={{ width: "100%", marginRight: "24px" }}>
+                        <div style={{ display: "flex" }}>
+                            <Text content={"Image URL"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                        </div>
+                        <Input value={wallpapers[i].imageUrl} onChange={event => setWallpaperImageUrl(event.target.value, i)}></Input>
+                    </InputContainer>
+                    <Input id={`wallpaperUpload-${i}`} onChange={event => setWallpaperImageUrl(event.target.value, i)} type="file" style={{ display: "none" }} />
+                    <Button onClick={() => { handleWallpaperUpload(i) }} style={{ height: "32px", marginTop: "26px", marginLeft: "auto", backgroundColor: "#4C54D2" }}>
+                        <Text content={"Upload"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                    </Button>
+                </div>
+                <InputContainer>
+                    <div style={{ display: "flex" }}>
+                        <Text content={"X-Focal-Point"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                    </div>
+                    <Input value={wallpapers[i].focalPoint.x} onChange={event => setWallpaperX(Number(event.target.value), i)}></Input>
+                </InputContainer>
+                <InputContainer>
+                    <div style={{ display: "flex" }}>
+                        <Text content={"Y-Focal-Point"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                    </div>
+                    <Input value={wallpapers[i].focalPoint.y} onChange={event => setWallpaperY(Number(event.target.value), i)}></Input>
+                </InputContainer>
+            </>
+        })
     }
 
     return (
@@ -337,47 +435,41 @@ const CreativeNew = props => {
                                         <Text content={"Define the copy and text used in your logo."} style={{ marginTop: "2px", marginBottom: "28px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                         <Text title="Wiki's coming soon!" content={"Learn More."} color={"#E0694C"} style={{ marginTop: "2px", marginBottom: "28px", marginLeft: "4px", cursor: "pointer" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                     </div>
-                                    <InputContainer>
-                                        <div style={{ display: "flex" }}>
-                                            <Text content={"Image URL"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                        </div>
-                                        <Input value={size} onChange={event => setLogoUrl(event.target.value)}></Input>
-                                    </InputContainer>
+                                    <div style={{ display: "flex" }}>
+                                        <InputContainer style={{ width: "100%", marginRight: "24px" }}>
+                                            <div style={{ display: "flex" }}>
+                                                <Text content={"Image URL"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                            </div>
+                                            <Input value={logoUrl} onChange={event => setLogoUrl(event.target.value)}></Input>
+                                        </InputContainer>
+                                        <Input onChange={event => setLogoUrl(event.target.value)} id="logoUpload" type="file" style={{ display: "none" }} />
+                                        <Button onClick={() => { handleLogoUpload() }} style={{ height: "32px", marginTop: "26px", marginLeft: "auto", backgroundColor: "#4C54D2" }}>
+                                            <Text content={"Upload"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                                        </Button>
+
+                                    </div>
                                     <InputContainer>
                                         <div style={{ display: "flex" }}>
                                             <Text content={"Alt Text"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                         </div>
-                                        <Input value={size} onChange={event => setLogoAltText(event.target.value)}></Input>
+                                        <Input value={logoAltText} onChange={event => setLogoAltText(event.target.value)}></Input>
                                     </InputContainer>
                                     <InputContainer>
                                         <div style={{ display: "flex" }}>
                                             <Text content={"Company Name"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                         </div>
-                                        <Input value={size} onChange={event => setLogoCompanyName(event.target.value)}></Input>
+                                        <Input value={logoCompanyName} onChange={event => setLogoCompanyName(event.target.value)}></Input>
                                     </InputContainer>
+                                    <Divider />
                                     <Text content={"Wallpapers"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
                                     <div style={{ display: "flex" }}>
                                         <Text content={"Define the copy and text used in your wallpapers."} style={{ marginTop: "2px", marginBottom: "28px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                         <Text title="Wiki's coming soon!" content={"Learn More."} color={"#E0694C"} style={{ marginTop: "2px", marginBottom: "28px", marginLeft: "4px", cursor: "pointer" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                     </div>
-                                    <InputContainer>
-                                        <div style={{ display: "flex" }}>
-                                            <Text content={"Image URL"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                        </div>
-                                        <Input value={wallpapers[0].imageUrl} onChange={event => setSize(event.target.value)}></Input>
-                                    </InputContainer>
-                                    <InputContainer>
-                                        <div style={{ display: "flex" }}>
-                                            <Text content={"X-Focal-Point"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                        </div>
-                                        <Input value={wallpapers[0].x} onChange={event => setSize(event.target.value)}></Input>
-                                    </InputContainer>
-                                    <InputContainer>
-                                        <div style={{ display: "flex" }}>
-                                            <Text content={"Y-Focal-Point"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                        </div>
-                                        <Input value={wallpapers[0].y} onChange={event => setSize(event.target.value)}></Input>
-                                    </InputContainer>
+                                    {renderWallpapers()}
+                                    <div style={{ width: "99%", display: "flex", marginTop: "-12px", marginRight: "8px", marginBottom: "12px" }}>
+                                        <Text onClick={() => { addWallpaper() }} content={"+ Create new wallpaper"} color={"#E0694C"} style={{ marginTop: "2px", marginLeft: "auto", cursor: "pointer" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    </div>
                                 </>
                             }
                             <div style={{ display: "flex" }}>
@@ -388,7 +480,7 @@ const CreativeNew = props => {
                                         </Button>
                                         :
                                         <Button onClick={() => {
-                                            validateForm() && (type === "notification_all_v1" ? createNotificationCreative() : createInPageCreative())
+                                            validateForm() && (type === "notification_all_v1" && createNotificationCreative() || type === "in_page_all_v1" && createInPageCreative() || type === "new_tab_page_all_v1" && createNewTabPageCreative())
                                         }} style={{ marginLeft: "auto", marginTop: "28px" }}>
                                             <Text content={"Save"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
                                         </Button>
