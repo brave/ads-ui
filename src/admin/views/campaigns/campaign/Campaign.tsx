@@ -67,6 +67,7 @@ const Campaign = props => {
     var tzoffset = (new Date()).getTimezoneOffset() * 60000;
 
     const [name, setName] = useState('');
+    const [externalId, setExternalId] = useState('');
     const [frequency, setFrequency] = useState('');
     const [priority, setPriority] = useState({ value: 1, label: "1" });
     const [passThroughRate, setPassThroughRate] = useState('');
@@ -117,6 +118,7 @@ const Campaign = props => {
                 updateCampaignInput: {
                     id: props.match.params.campaignId,
                     name,
+                    externalId,
                     state: status.value,
                     dailyCap: parseInt(frequency),
                     priority: priority.value,
@@ -174,6 +176,7 @@ const Campaign = props => {
         setName(data.campaign.name);
         setFrequency(data.campaign.dailyCap);
         setPriority({ value: data.campaign.priority, label: data.campaign.priority.toString() });
+        setExternalId(data.campaign.externalId);
         setPassThroughRate(data.campaign.passThroughRate);
 
         setStartDate(moment(data.campaign.startAt).format('YYYY-MM-DD[T]HH:mm'));
@@ -354,6 +357,14 @@ const Campaign = props => {
                                 }
 
                             </InputContainer>
+
+                            <InputContainer>
+                                <div style={{ display: "flex" }}>
+                                    <Text content={"External ID"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                </div>
+                                <Input value={externalId} onChange={event => setExternalId(event.target.value)}></Input>
+                            </InputContainer>
+
 
                             <InputContainer>
                                 <div style={{ display: "flex" }}>

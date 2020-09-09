@@ -4,6 +4,7 @@ export const CAMPAIGN = gql`
 query campaign($id: String!){
     campaign(id: $id) {
         id
+        externalId
         name
         state
         dailyCap
@@ -33,6 +34,7 @@ export const UPDATE_CAMPAIGN = gql`
 mutation updateCampaign($updateCampaignInput: UpdateCampaignInput!){
     updateCampaign(updateCampaignInput: $updateCampaignInput) {
         id
+        externalId
         name
         state
         dailyCap
