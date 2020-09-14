@@ -20,6 +20,7 @@ mutation createCampaign($createCampaignInput: CreateCampaignInput!){
         dailyCap
         currency
         budget
+        externalId
         dailyBudget
         startAt
         endAt
