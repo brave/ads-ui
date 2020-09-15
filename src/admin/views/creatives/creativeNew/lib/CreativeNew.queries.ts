@@ -41,3 +41,11 @@ mutation createInPageCreative($createInPageCreativeInput: CreateInPageCreativeIn
     }
 }
 `;
+
+export const CREATE_NEW_TAB_PAGE_CREATIVE = gql`
+mutation createNewTabPageCreative($createNewTabPageCreativeInput: CreateNewTabPageCreativeInput!){
+    createNewTabPageCreative(createNewTabPageCreativeInput: $createNewTabPageCreativeInput) {
+        id
+    }
+}
+`;
