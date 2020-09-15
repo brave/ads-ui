@@ -18,6 +18,19 @@ query creative($id: String!){
             targetUrl
             size
             creativeUrl
+            logo {
+                destinationUrl
+                alt
+                companyName
+                imageUrl
+            }
+            wallpapers {
+                imageUrl
+                focalPoint {
+                    x
+                    y
+                }
+            }
         }
     }
 }
@@ -62,5 +75,34 @@ mutation updateInPageCreative($updateInPageCreativeInput: UpdateInPageCreativeIn
             targetUrl
         }
     }
-}
-`;
+}`
+
+export const UPDATE_NEW_TAB_PAGE_CREATIVE = gql`
+mutation updateNewTabPageCreative($updateNewTabPageCreativeInput: UpdateNewTabPageCreativeInput!){
+    updateNewTabPageCreative(updateNewTabPageCreativeInput: $updateNewTabPageCreativeInput) {
+        id
+        createdAt
+        modifiedAt
+        name
+        state
+        type {
+            code
+            name
+        }
+        payload {
+            logo {
+                imageUrl
+                alt
+                companyName
+                destinationUrl
+            }
+            wallpapers {
+                imageUrl
+                focalPoint {
+                    x
+                    y
+                }
+            }
+        }
+    }
+}`;
