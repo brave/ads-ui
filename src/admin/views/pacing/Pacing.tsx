@@ -9,7 +9,6 @@ import TabSelector from "../../../components/tabSelector/TabSelector";
 import { CAMPAIGN_LIST_OVERVIEW } from "./lib/Pacing.queries";
 import { useQuery } from "@apollo/react-hooks";
 
-import { processData } from "../dashboard/views/overview/lib/Library";
 import { Link } from "react-router-dom";
 import Table from "../../../components/Table/TableComponent";
 import Chip from "../../../components/chip/Chip";

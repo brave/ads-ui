@@ -1,8 +1,9 @@
-let dashboardQuery = `
-    query {
+import gql from "graphql-tag";
+
+const DASHBOARD_QUERY = gql`
+query {
       userCount
       campaignCount
-      confirmationCount
       campaignsPerCountry {
         data {
           country
@@ -19,6 +20,7 @@ let dashboardQuery = `
         state
       }
     }
-    `;
+`;
 
-export default dashboardQuery;
+
+export default DASHBOARD_QUERY;
