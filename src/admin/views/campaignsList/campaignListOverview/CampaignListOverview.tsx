@@ -10,7 +10,6 @@ import TabSelector from "../../../../components/tabSelector/TabSelector";
 import { CAMPAIGN_LIST_OVERVIEW } from "./lib/CampaignListOverview.queries";
 import { useQuery } from "@apollo/react-hooks";
 
-import { processData } from "../../dashboard/views/overview/lib/Library";
 import Chip from "../../../../components/chip/Chip";
 import moment from "moment";
 import { Icon } from "@material-ui/core";
