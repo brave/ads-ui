@@ -8,6 +8,7 @@ export function createCampaignMutation(createCampaignInput) {
                 name: "${createCampaignInput.name}"
                 startAt: "${createCampaignInput.startAt}"
                 endAt: "${createCampaignInput.endAt}"
+                externalId: ""
                 type: "paid"
                 source: "direct"
                 currency: "${createCampaignInput.currency}"
