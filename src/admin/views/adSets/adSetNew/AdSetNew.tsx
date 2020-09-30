@@ -401,6 +401,7 @@ const AdSetNew = props => {
                                     onChange={setConversionWindow}
                                     value={conversionWindow}
                                     options={windowTypes}
+                                    defaultValue={{ value: 30, label: '30 Days' }}
                                 />
                             </InputContainer>
 
