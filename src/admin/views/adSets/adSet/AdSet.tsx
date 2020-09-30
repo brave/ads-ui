@@ -443,6 +443,7 @@ const AdSet = props => {
                                     styles={customStyles}
                                     onChange={setConversionWindow}
                                     value={conversionWindow}
+                                    defaultValue={{ value: 30, label: '30 Days' }}
                                     options={windowTypes}
                                 />
                             </InputContainer>
