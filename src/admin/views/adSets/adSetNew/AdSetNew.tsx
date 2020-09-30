@@ -62,7 +62,7 @@ const AdSetNew = props => {
     // const [channels, setChannels] = useState([]);
     const [conversionType, setConversionType] = useState("postview");
     const [conversionUrl, setConversionUrl] = useState('');
-    const [conversionWindow, setConversionWindow] = useState({ value: 1, label: "1 Day" })
+    const [conversionWindow, setConversionWindow] = useState({ value: 30, label: '30 Days' })
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
     const [saving, setSaving] = useState(false);
