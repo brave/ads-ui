@@ -97,7 +97,7 @@ function initializeAdSets() {
             conversion: {
                 type: 'postview',
                 url: '',
-                observationWindow: { value: 7, label: "7" },
+                observationWindow: { value: 30, label: "30" },
             },
             ads: [
                 {
