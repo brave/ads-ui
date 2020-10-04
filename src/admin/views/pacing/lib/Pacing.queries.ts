@@ -20,6 +20,7 @@ query{
         startAt
         endAt
         currency
+        type
         pacingIndex
     }
 }
