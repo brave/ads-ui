@@ -21,6 +21,7 @@ query{
         endAt
         currency
         type
+        dailyPacingIndex
         pacingIndex
     }
 }
