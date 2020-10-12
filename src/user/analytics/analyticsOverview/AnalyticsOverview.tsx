@@ -20,6 +20,8 @@ import { downloadCSV, processData, prepareChart, prepareSankey, formatMetric, te
 import PopoutExample from "./lib/Popout";
 
 import * as S from "./styles/AnalyticsOverview.style";
+import { Input, InputContainer } from "../../../components/formElements/formElements";
+import moment from "moment";
 
 HighchartsSankey(Highcharts);
 highcharts3d(Highcharts);
@@ -42,11 +44,19 @@ const AnalyticsOverview = props => {
     const [metric2, setMetric2] = useState("clicks");
     const [metric3, setMetric3] = useState("dismissals");
     const [metric4, setMetric4] = useState("landings");
+    const [startDate, setStartDate] = useState(moment().format('YYYY-MM-DD[T]HH:mm'));
+    const [endDate, setEndDate] = useState(moment().format('YYYY-MM-DD[T]HH:mm'));
     const [grouping, setGrouping] = useState("daily")
     const [downloadingCSV, setDownloadingCSV] = useState(false);
 
+    const initializeStartDate = data => {
+        console.log(data);
+        setStartDate(moment(data.campaign.startAt).format('YYYY-MM-DD[T]HH:mm'));
+    }
+
     const { loading, error, data } = useQuery(ANALYTICS_OVERVIEW, {
-        variables: { id: match.params.campaignId }
+        variables: { id: match.params.campaignId },
+        onCompleted: initializeStartDate,
     });
 
     let campaign;
@@ -70,26 +80,54 @@ const AnalyticsOverview = props => {
         spend = campaign.spent.toLocaleString();
         currency = campaign.currency.toUpperCase();
         state = capitalizeFirstLetter(campaign.state);
-        processedData = processData(campaign.engagements, metric1, metric2, metric3, metric4, grouping);
+        let engagements = campaign.engagements;
+        let filteredEngagements = [] as any;
+        if (engagements) {
+            engagements.forEach((engagement) => {
+                if (moment(engagement.createdat) >= moment(startDate) && moment(engagement.createdat) <= moment(endDate)) {
+                    filteredEngagements.push(engagement);
+                }
+            });
+        }
+        processedData = processData(filteredEngagements, metric1, metric2, metric3, metric4, grouping);
         options = prepareChart(metric1, processedData.metric1DataSet, metric2, processedData.metric2DataSet, metric3, processedData.metric3DataSet, metric4, processedData.metric4DataSet);
         options2 = prepareSankey(processedData.impressions, processedData.clicks, processedData.landings, processedData.conversions);
-        console.log(JSON.stringify(processedData));
     }
 
     if (loading) return <></>;
     return (
         <div>
-            {/* Top Row */}
-            <div style={{ display: "flex", width: "100%", justifyContent: "space-between", marginBottom: "28px" }}>
+
+            <div style={{ width: "100%", height: "60px", marginBottom: "28px", display: "flex", alignItems: "center" }}>
                 <Text content={campaign.name} fontFamily={"Poppins"} sizes={[18, 18, 42, 42, 26]} />
                 {
                     downloadingCSV ?
-                        <div style={{ display: "flex", alignItems: "center", cursor: "pointer" }}><Text content={"Downloading Report..."} fontFamily={"Poppins"} sizes={[18, 18, 42, 42, 14]} /><Icon style={{ fontSize: "17px", marginLeft: "8px", marginBottom: "4px" }}>save_alt</Icon></div> :
-                        <div onClick={() => downloadCSV(campaign.id, campaign.name, auth.accessToken, auth.id, setDownloadingCSV)} style={{ display: "flex", alignItems: "center", cursor: "pointer" }}><Text content={"Download Report"} fontFamily={"Poppins"} sizes={[18, 18, 42, 42, 14]} /><Icon style={{ fontSize: "17px", marginLeft: "8px", marginBottom: "4px" }}>save_alt</Icon></div>
+                        <div style={{ padding: "0px 20px", background: "#FB7959", color: "white", border: "none", borderRadius: "100px 100px 100px 100px", marginLeft: "auto", minWidth: "165px", display: "flex", justifyContent: "center" }}>
+                            <span>
+                                <Text content={"Downloading..."} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                            </span>
+                        </div> :
+                        <div onClick={() => downloadCSV(campaign.id, campaign.name, auth.accessToken, auth.id, setDownloadingCSV)} style={{ padding: "0px 20px", background: "#FB7959", color: "white", border: "none", borderRadius: "100px 100px 100px 100px", marginLeft: "auto", cursor: "pointer", minWidth: "165px", display: "flex", justifyContent: "center" }}>
+                            <span>
+                                <Text content={"Download Report"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                            </span>
+                        </div>
                 }
             </div>
 
-            <TabSelector config={tabConfig} />
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", marginBottom: "28px" }}>
+                <div style={{ width: "258px" }}>
+                    <Input value={startDate} onChange={event => setStartDate(event.target.value)} style={{ height: "36px" }} type="datetime-local" />
+                </div>
+
+                <div style={{ width: "41px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                    <Icon style={{ fontSize: "20px", color: "grey", marginTop: "5px" }}>arrow_forward</Icon>
+                </div>
+
+                <div style={{ width: "258px" }}>
+                    <Input value={endDate} onChange={event => setEndDate(event.target.value)} style={{ height: "36px" }} type="datetime-local" />
+                </div>
+            </div>
 
             <div style={{ display: "flex" }}>
 
