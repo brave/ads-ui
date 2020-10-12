@@ -369,7 +369,7 @@ export const processData = (engagements, metric1, metric2, metric3, metric4, gro
     // Group data by user setting
     let groupedData = _.groupBy(engagements, function (engagement) {
         //@ts-ignore
-        return moment(engagement.createdat).utc().startOf(mapGroupingName(grouping));
+        return moment(engagement.createdat).startOf(mapGroupingName(grouping));
     });
 
     // Calculate totals
