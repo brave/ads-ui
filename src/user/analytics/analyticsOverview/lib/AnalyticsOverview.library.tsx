@@ -414,7 +414,7 @@ export const processData = (engagements, metric1, metric2, metric3, metric4, gro
 
     for (var key in groupedData) {
 
-        let date = new Date(key).getTime();
+        let date = moment(key).valueOf();
         let metric1Value = initializeMetricValue(metric1);
         let metric2Value = initializeMetricValue(metric2);
         let metric3Value = initializeMetricValue(metric3);
