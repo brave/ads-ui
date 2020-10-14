@@ -44,14 +44,13 @@ const AnalyticsOverview = props => {
     const [metric2, setMetric2] = useState("clicks");
     const [metric3, setMetric3] = useState("dismissals");
     const [metric4, setMetric4] = useState("landings");
-    const [startDate, setStartDate] = useState(moment().format('YYYY-MM-DD[T]HH:mm'));
-    const [endDate, setEndDate] = useState(moment().format('YYYY-MM-DD[T]HH:mm'));
+    const [startDate, setStartDate] = useState(moment().utc().format('YYYY-MM-DD[T]HH:mm'));
+    const [endDate, setEndDate] = useState(moment().utc().format('YYYY-MM-DD[T]HH:mm'));
     const [grouping, setGrouping] = useState("daily")
     const [downloadingCSV, setDownloadingCSV] = useState(false);
 
     const initializeStartDate = data => {
-        console.log(data);
-        setStartDate(moment(data.campaign.startAt).format('YYYY-MM-DD[T]HH:mm'));
+        setStartDate(moment(data.campaign.startAt).utc().format('YYYY-MM-DD[T]HH:mm'));
     }
 
     const { loading, error, data } = useQuery(ANALYTICS_OVERVIEW, {
@@ -127,6 +126,7 @@ const AnalyticsOverview = props => {
                 <div style={{ width: "258px" }}>
                     <Input value={endDate} onChange={event => setEndDate(event.target.value)} style={{ height: "36px" }} type="datetime-local" />
                 </div>
+                <div style={{ marginLeft: '14px' }}>(UTC)</div>
             </div>
 
             <div style={{ display: "flex" }}>
