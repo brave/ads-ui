@@ -11,7 +11,8 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import { CAMPAIGN_NEW, CREATE_CAMPAIGN } from "./lib/CampaignNew.queries";
 
 import Context from "../../../../state/context";
-import { createCampaignMutation } from '../../adsManager/views/advanced/components/reviewForm/library/ReviewForm.queries';
+import RadioButton from '../../../../components/radioButton/RadioButton';
+
 const customStyles = {
     control: (provided, state) => ({
         ...provided,
@@ -43,6 +44,7 @@ const campaignTypes = [
     { value: 'make_good', label: 'Make Good' },
     { value: 'house', label: 'House' },
     { value: 'cause', label: 'Cause' },
+    { value: 'fixed', label: 'Fixed' }
 ]
 
 const CampaignNew = props => {
@@ -60,7 +62,19 @@ const CampaignNew = props => {
     const [lifetimeBudget, setLifetimeBudget] = useState('');
     const [dailyBudget, setDailyBudget] = useState('');
     const [locations, setLocations] = useState([] as any);
-    const [activeLocations, setActiveLocations] = useState([])
+    const [activeLocations, setActiveLocations] = useState([]);
+    const [onSchedule, setOnSchedule] = useState(false);
+    const [schedule, setSchedule] = useState(
+        {
+            sunday: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+            monday: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+            tuesday: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+            wednesday: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+            thursday: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+            friday: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+            saturday: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+        }
+    );
 
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
@@ -90,6 +104,34 @@ const CampaignNew = props => {
         return temp;
     }
 
+    const convertScheduleToDayPart = () => {
+        if (onSchedule) {
+            let dayPartings = [] as any;
+            let startMinute: any = null;
+            let endMinute: any = null;
+            Object.keys(schedule).forEach((day, i) => {
+                schedule[day].forEach((segment, j) => {
+                    if (segment === true && startMinute === null) {
+                        startMinute = j * 60;
+                    }
+                    if ((segment === false || j === 23) && startMinute !== null && endMinute === null) {
+                        if (j !== 23) {
+                            endMinute = j * 60;
+                        } else {
+                            endMinute = 1440;
+                        }
+                        dayPartings.push({ dow: i.toString(), startMinute, endMinute });
+                        startMinute = null;
+                        endMinute = null;
+                    }
+                });
+            })
+            return dayPartings;
+        } else {
+            return [];
+        }
+    }
+
     const [createCampaign, { loading: updateNotificationCreativeLoading, error: updateNotificationCreativeError }] =
         useMutation(CREATE_CAMPAIGN, {
             variables: {
@@ -108,7 +150,8 @@ const CampaignNew = props => {
                     endAt: moment(endDate).utc().format("YYYY-MM-DD[T]HH:mm:SS.000[Z]"),
                     type: campaignType.value,
                     source: "direct",
-                    geoTargets: prepareGeoTargetsInput()
+                    geoTargets: prepareGeoTargetsInput(),
+                    dayPartings: convertScheduleToDayPart()
                 }
             },
             onCompleted: handleUpdateCampaign
@@ -195,6 +238,129 @@ const CampaignNew = props => {
             setValidations({} as any);
             return true;
         }
+    }
+
+    const updateSchedule = (day, index, value, e?) => {
+        if (e.buttons == 1 || e.buttons == 3) {
+            let temp = { ...schedule };
+            temp[day][index] = value;
+            setSchedule(temp);
+        }
+    }
+
+    const renderSchedule = () => {
+        return <div style={{ width: "100%", marginTop: "24px" }}>
+            <div style={{ display: "flex", width: "100%", marginLeft: "110px", marginBottom: "2px" }}>
+                <div style={{ width: "69px" }}>
+                    <Text content={"12am"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                </div>
+                <div style={{ width: "69px" }}>
+                    <Text content={"3am"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                </div>
+                <div style={{ width: "69px" }}>
+                    <Text content={"6am"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                </div>
+                <div style={{ width: "69px" }}>
+                    <Text content={"9am"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                </div>
+                <div style={{ width: "69px" }}>
+                    <Text content={"12pm"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                </div>
+                <div style={{ width: "69px" }}>
+                    <Text content={"3pm"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                </div>
+                <div style={{ width: "69px" }}>
+                    <Text content={"6pm"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                </div>
+                <div style={{ width: "69px" }}>
+                    <Text content={"9pm"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                </div>
+            </div>
+            <div style={{ display: "flex", width: "100%", paddingBottom: "8px", paddingTop: "8px", borderBottom: "1px solid #e2e2e2" }}>
+                <div style={{ display: "flex", width: "110px", height: "34px", alignItems: "center" }}>
+                    <Text content={"Monday"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                </div>
+                {schedule.monday.map((hour, i) => {
+                    if (hour) {
+                        return <div onMouseDown={(e) => updateSchedule("monday", i, false, e)} style={{ width: "21px", height: "34px", backgroundColor: "#F87454", borderRadius: "4px", marginRight: "2px", cursor: "pointer" }}></div>
+                    } else {
+                        return <div onMouseDown={(e) => updateSchedule("monday", i, true, e)} onMouseOver={(e) => updateSchedule("monday", i, true, e)} style={{ width: "21px", height: "34px", backgroundColor: "#FAFAFA", borderRadius: "4px", border: "1px solid #e2e2e2", marginRight: "2px", cursor: "pointer" }}></div>
+                    }
+                })}
+            </div>
+            <div style={{ display: "flex", width: "100%", paddingBottom: "8px", paddingTop: "8px", borderBottom: "1px solid #e2e2e2" }}>
+                <div style={{ display: "flex", width: "110px", height: "34px", alignItems: "center" }}>
+                    <Text content={"Tuesday"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                </div>
+                {schedule.tuesday.map((hour, i) => {
+                    if (hour) {
+                        return <div onMouseDown={(e) => updateSchedule("tuesday", i, false, e)} style={{ width: "21px", height: "34px", backgroundColor: "#F87454", borderRadius: "4px", marginRight: "2px", cursor: "pointer" }}></div>
+                    } else {
+                        return <div onMouseDown={(e) => updateSchedule("tuesday", i, true, e)} onMouseOver={(e) => updateSchedule("tuesday", i, true, e)} style={{ width: "21px", height: "34px", backgroundColor: "#FAFAFA", borderRadius: "4px", border: "1px solid #e2e2e2", marginRight: "2px", cursor: "pointer" }}></div>
+                    }
+                })}
+            </div>
+            <div style={{ display: "flex", width: "100%", paddingBottom: "8px", paddingTop: "8px", borderBottom: "1px solid #e2e2e2" }}>
+                <div style={{ display: "flex", width: "110px", height: "34px", alignItems: "center" }}>
+                    <Text content={"Wednesday"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                </div>
+                {schedule.wednesday.map((hour, i) => {
+                    if (hour) {
+                        return <div onMouseDown={(e) => updateSchedule("wednesday", i, false, e)} style={{ width: "21px", height: "34px", backgroundColor: "#F87454", borderRadius: "4px", marginRight: "2px", cursor: "pointer" }}></div>
+                    } else {
+                        return <div onMouseDown={(e) => updateSchedule("wednesday", i, true, e)} onMouseOver={(e) => updateSchedule("wednesday", i, true, e)} style={{ width: "21px", height: "34px", backgroundColor: "#FAFAFA", borderRadius: "4px", border: "1px solid #e2e2e2", marginRight: "2px", cursor: "pointer" }}></div>
+                    }
+                })}
+            </div>
+            <div style={{ display: "flex", width: "100%", paddingBottom: "8px", paddingTop: "8px", borderBottom: "1px solid #e2e2e2" }}>
+                <div style={{ display: "flex", width: "110px", height: "34px", alignItems: "center" }}>
+                    <Text content={"Thursday"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                </div>
+                {schedule.thursday.map((hour, i) => {
+                    if (hour) {
+                        return <div onMouseDown={(e) => updateSchedule("thursday", i, false, e)} style={{ width: "21px", height: "34px", backgroundColor: "#F87454", borderRadius: "4px", marginRight: "2px", cursor: "pointer" }}></div>
+                    } else {
+                        return <div onMouseDown={(e) => updateSchedule("thursday", i, true, e)} onMouseOver={(e) => updateSchedule("thursday", i, true, e)} style={{ width: "21px", height: "34px", backgroundColor: "#FAFAFA", borderRadius: "4px", border: "1px solid #e2e2e2", marginRight: "2px", cursor: "pointer" }}></div>
+                    }
+                })}
+            </div>
+            <div style={{ display: "flex", width: "100%", paddingBottom: "8px", paddingTop: "8px", borderBottom: "1px solid #e2e2e2" }}>
+                <div style={{ display: "flex", width: "110px", height: "34px", alignItems: "center" }}>
+                    <Text content={"Friday"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                </div>
+                {schedule.friday.map((hour, i) => {
+                    if (hour) {
+                        return <div onMouseDown={(e) => updateSchedule("friday", i, false, e)} style={{ width: "21px", height: "34px", backgroundColor: "#F87454", borderRadius: "4px", marginRight: "2px", cursor: "pointer" }}></div>
+                    } else {
+                        return <div onMouseDown={(e) => updateSchedule("friday", i, true, e)} onMouseOver={(e) => updateSchedule("friday", i, true, e)} style={{ width: "21px", height: "34px", backgroundColor: "#FAFAFA", borderRadius: "4px", border: "1px solid #e2e2e2", marginRight: "2px", cursor: "pointer" }}></div>
+                    }
+                })}
+            </div>
+            <div style={{ display: "flex", width: "100%", paddingBottom: "8px", paddingTop: "8px", borderBottom: "1px solid #e2e2e2" }}>
+                <div style={{ display: "flex", width: "110px", height: "34px", alignItems: "center" }}>
+                    <Text content={"Saturday"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                </div>
+                {schedule.saturday.map((hour, i) => {
+                    if (hour) {
+                        return <div onMouseDown={(e) => updateSchedule("saturday", i, false, e)} style={{ width: "21px", height: "34px", backgroundColor: "#F87454", borderRadius: "4px", marginRight: "2px", cursor: "pointer" }}></div>
+                    } else {
+                        return <div onMouseDown={(e) => updateSchedule("saturday", i, true, e)} onMouseOver={(e) => updateSchedule("saturday", i, true, e)} style={{ width: "21px", height: "34px", backgroundColor: "#FAFAFA", borderRadius: "4px", border: "1px solid #e2e2e2", marginRight: "2px", cursor: "pointer" }}></div>
+                    }
+                })}
+            </div>
+            <div style={{ display: "flex", width: "100%", paddingBottom: "8px", paddingTop: "8px", borderBottom: "1px solid #e2e2e2" }}>
+                <div style={{ display: "flex", width: "110px", height: "34px", alignItems: "center" }}>
+                    <Text content={"Sunday"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                </div>
+                {schedule.sunday.map((hour, i) => {
+                    if (hour) {
+                        return <div onMouseDown={(e) => updateSchedule("sunday", i, false, e)} style={{ width: "21px", height: "34px", backgroundColor: "#F87454", borderRadius: "4px", marginRight: "2px", cursor: "pointer" }}></div>
+                    } else {
+                        return <div onMouseDown={(e) => updateSchedule("sunday", i, true, e)} onMouseOver={(e) => updateSchedule("sunday", i, true, e)} style={{ width: "21px", height: "34px", backgroundColor: "#FAFAFA", borderRadius: "4px", border: "1px solid #e2e2e2", marginRight: "2px", cursor: "pointer" }}></div>
+                    }
+                })}
+            </div>
+        </div>
     }
 
     const { loading: queryLoading, error: queryError, data } = useQuery(CAMPAIGN_NEW, {
@@ -304,6 +470,21 @@ const CampaignNew = props => {
                             <div style={{ width: "99%", display: "flex", marginTop: "-12px", marginRight: "8px", marginBottom: "8px" }}>
                                 <Text style={{ marginLeft: "auto" }} content={`${(new Date).toString().split('(')[1].slice(0, -1)} (UTC ${moment().format('Z')})`} sizes={[16, 16, 15, 15, 12]} fontFamily={"Poppins"} />
                             </div>
+
+                            <InputContainer>
+                                <div style={{ display: "flex" }}>
+                                    <Text content={"Scheduling"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                </div>
+                                <div style={{ display: "flex", marginTop: "16px", marginBottom: "8px" }}>
+                                    <RadioButton checked={!onSchedule} onClick={() => setOnSchedule(false)} style={{ marginRight: "8px" }} type="radio" name="gender" value="male" />
+                                    <Text style={{ marginTop: "-1px", marginLeft: "8px", marginRight: "16px" }} content={"Run ads all the time"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                </div>
+                                <div style={{ display: "flex", marginTop: "8px", marginBottom: "8px" }}>
+                                    <RadioButton checked={onSchedule} onClick={() => setOnSchedule(true)} style={{ marginRight: "8px" }} type="radio" name="gender" value="male" />
+                                    <Text style={{ marginTop: "-1px", marginLeft: "8px" }} content={"Run ads on a schedule"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                </div>
+                                {onSchedule && renderSchedule()}
+                            </InputContainer>
 
                             <InputContainer>
                                 <div style={{ display: "flex", marginBottom: "4px" }}>

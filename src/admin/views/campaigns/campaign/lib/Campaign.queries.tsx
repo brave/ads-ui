@@ -16,6 +16,11 @@ query campaign($id: String!){
         startAt
         endAt
         type
+        dayPartings{
+            dow
+            startMinute
+            endMinute
+        }
         geoTargets{
             code
             name
@@ -46,6 +51,11 @@ mutation updateCampaign($updateCampaignInput: UpdateCampaignInput!){
         startAt
         endAt
         type
+        dayPartings{
+            dow
+            startMinute
+            endMinute
+        }
         geoTargets{
             code
             name
