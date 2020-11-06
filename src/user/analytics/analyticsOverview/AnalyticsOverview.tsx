@@ -49,12 +49,12 @@ const AnalyticsOverview = props => {
     const [metric3, setMetric3] = useState("dismissals");
     const [metric4, setMetric4] = useState("landings");
     const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState(moment().utc().endOf('day').format('MM/DD/YYYY'));
+    const [endDate, setEndDate] = useState(moment().utc().endOf('day').format('YYYY-MM-DD[T]HH:mm'));
     const [grouping, setGrouping] = useState("daily")
     const [downloadingCSV, setDownloadingCSV] = useState(false);
 
     const initializeStartDate = data => {
-        setStartDate(moment(data.campaign.startAt).utc().startOf('day').format('MM/DD/YYYY'));
+        setStartDate(moment(data.campaign.startAt).utc().startOf('day').format('YYYY-MM-DD[T]HH:mm'));
     }
 
     const { loading, error, data } = useQuery(ANALYTICS_OVERVIEW, {
