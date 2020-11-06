@@ -10,6 +10,10 @@ import HighchartsReact from 'highcharts-react-official'
 import HighchartsSankey from "highcharts/modules/sankey";
 import highcharts3d from 'highcharts/highcharts-3d'
 
+import DateRangePicker from 'react-bootstrap-daterangepicker';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-daterangepicker/daterangepicker.css';
+
 import { Link } from "react-router-dom";
 import { Icon } from "@material-ui/core";
 
@@ -44,19 +48,24 @@ const AnalyticsOverview = props => {
     const [metric2, setMetric2] = useState("clicks");
     const [metric3, setMetric3] = useState("dismissals");
     const [metric4, setMetric4] = useState("landings");
-    const [startDate, setStartDate] = useState(moment().utc().format('YYYY-MM-DD[T]HH:mm'));
-    const [endDate, setEndDate] = useState(moment().utc().format('YYYY-MM-DD[T]HH:mm'));
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState(moment().utc().endOf('day').format('MM/DD/YYYY'));
     const [grouping, setGrouping] = useState("daily")
     const [downloadingCSV, setDownloadingCSV] = useState(false);
 
     const initializeStartDate = data => {
-        setStartDate(moment(data.campaign.startAt).utc().format('YYYY-MM-DD[T]HH:mm'));
+        setStartDate(moment(data.campaign.startAt).utc().startOf('day').format('MM/DD/YYYY'));
     }
 
     const { loading, error, data } = useQuery(ANALYTICS_OVERVIEW, {
         variables: { id: match.params.campaignId },
         onCompleted: initializeStartDate,
     });
+
+    const handleCallback = (start, end, label) => {
+        setStartDate(moment(start).startOf("day").format('YYYY-MM-DD[T]HH:mm'));
+        setEndDate(moment(end).endOf("day").format('YYYY-MM-DD[T]HH:mm'));
+    }
 
     let campaign;
     let processedData;
@@ -83,11 +92,12 @@ const AnalyticsOverview = props => {
         let filteredEngagements = [] as any;
         if (engagements) {
             engagements.forEach((engagement) => {
-                if (moment(engagement.createdat) >= moment(startDate) && moment(engagement.createdat) <= moment(endDate)) {
+                if (moment(engagement.createdat) >= moment.utc(startDate) && moment(engagement.createdat) <= moment.utc(endDate)) {
                     filteredEngagements.push(engagement);
                 }
             });
         }
+
         processedData = processData(filteredEngagements, metric1, metric2, metric3, metric4, grouping);
         options = prepareChart(metric1, processedData.metric1DataSet, metric2, processedData.metric2DataSet, metric3, processedData.metric3DataSet, metric4, processedData.metric4DataSet);
         options2 = prepareSankey(processedData.impressions, processedData.clicks, processedData.landings, processedData.conversions);
@@ -96,37 +106,38 @@ const AnalyticsOverview = props => {
     if (loading) return <></>;
     return (
         <div>
+            <div style={{ width: "100%", display: "flex", alignItems: "center", marginBottom: "28px" }}>
+                <Text content={campaign.name} fontFamily={"Poppins"} sizes={[18, 18, 42, 42, 22]} />
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", marginLeft: "auto" }}>
 
-            <div style={{ width: "100%", height: "60px", marginBottom: "28px", display: "flex", alignItems: "center" }}>
-                <Text content={campaign.name} fontFamily={"Poppins"} sizes={[18, 18, 42, 42, 26]} />
-                {
-                    downloadingCSV ?
-                        <div style={{ padding: "0px 20px", background: "#FB7959", color: "white", border: "none", borderRadius: "100px 100px 100px 100px", marginLeft: "auto", minWidth: "165px", display: "flex", justifyContent: "center" }}>
-                            <span>
-                                <Text content={"Downloading..."} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
-                            </span>
-                        </div> :
-                        <div onClick={() => downloadCSV(campaign.id, campaign.name, auth.accessToken, auth.id, setDownloadingCSV)} style={{ padding: "0px 20px", background: "#FB7959", color: "white", border: "none", borderRadius: "100px 100px 100px 100px", marginLeft: "auto", cursor: "pointer", minWidth: "165px", display: "flex", justifyContent: "center" }}>
-                            <span>
-                                <Text content={"Download Report"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
-                            </span>
-                        </div>
-                }
-            </div>
+                    {
+                        startDate !== '' &&
+                        <DateRangePicker
+                            initialSettings={{ startDate, endDate }}
+                            onCallback={handleCallback}
+                        >
+                            <div style={{ padding: "0px 20px", background: "#fafafa", color: "black", border: "1px solid #e2e2e2", borderRadius: "100px 100px 100px 100px", marginLeft: "auto", cursor: "pointer", minWidth: "165px", display: "flex", justifyContent: "center", marginRight: "14px" }}>
+                                <span>
+                                    <Text content={`${moment(startDate).format("MM/DD/YYYY")} - ${moment(endDate).format("MM/DD/YYYY")}`} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                                </span>
+                            </div>
+                        </DateRangePicker>
+                    }
 
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", marginBottom: "28px" }}>
-                <div style={{ width: "258px" }}>
-                    <Input value={startDate} onChange={event => setStartDate(event.target.value)} style={{ height: "36px" }} type="datetime-local" />
+                    {
+                        downloadingCSV ?
+                            <div style={{ padding: "0px 20px", background: "#FB7959", color: "white", border: "none", borderRadius: "100px 100px 100px 100px", marginLeft: "auto", minWidth: "165px", display: "flex", justifyContent: "center" }}>
+                                <span>
+                                    <Text content={"Downloading..."} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                                </span>
+                            </div> :
+                            <div onClick={() => downloadCSV(campaign.id, campaign.name, auth.accessToken, auth.id, setDownloadingCSV)} style={{ padding: "0px 20px", background: "#FB7959", color: "white", border: "none", borderRadius: "100px 100px 100px 100px", marginLeft: "auto", cursor: "pointer", minWidth: "165px", display: "flex", justifyContent: "center" }}>
+                                <span>
+                                    <Text content={"Download Report"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                                </span>
+                            </div>
+                    }
                 </div>
-
-                <div style={{ width: "41px", display: "flex", justifyContent: "center", alignItems: "center" }}>
-                    <Icon style={{ fontSize: "20px", color: "grey", marginTop: "5px" }}>arrow_forward</Icon>
-                </div>
-
-                <div style={{ width: "258px" }}>
-                    <Input value={endDate} onChange={event => setEndDate(event.target.value)} style={{ height: "36px" }} type="datetime-local" />
-                </div>
-                <div style={{ marginLeft: '14px' }}>(UTC)</div>
             </div>
 
             <div style={{ display: "flex" }}>
@@ -246,6 +257,16 @@ const AnalyticsOverview = props => {
                 </div>
             </div>
 
+            {/* Campaign Insights */}
+            {/* <div style={{ width: "100%", marginBottom: "28px", border: "1px solid #ededed", borderRadius: "4px" }}>
+
+
+
+                <div style={{ display: "flex", width: "100%", height: "30px", alignItems: "center", marginBottom: "28px", paddingLeft: "40px", paddingRight: "40px", paddingTop: "28px", paddingBottom: "28px" }}>
+
+                </div>
+            </div> */}
+
             <div style={{ display: "flex", marginBottom: "28px" }}>
                 <div style={{ border: "1px solid #ededed", borderRadius: "4px", height: "253px", width: "50%", marginRight: "14px" }}>
                     <div style={{ width: "100%", height: "56px", backgroundColor: "white", borderBottom: "1px solid #ededed", display: "flex", alignItems: "center" }}>
@@ -269,4 +290,5 @@ const AnalyticsOverview = props => {
 
 
 export default AnalyticsOverview;
+
 
