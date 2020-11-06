@@ -9,6 +9,7 @@ query campaign($id: String!){
         dailyCap
         priority
         passThroughRate
+        pacingOverride
         externalId
         currency
         budget
@@ -44,6 +45,7 @@ mutation updateCampaign($updateCampaignInput: UpdateCampaignInput!){
         dailyCap
         priority
         passThroughRate
+        pacingOverride
         externalId
         currency
         budget

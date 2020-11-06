@@ -75,6 +75,7 @@ const Campaign = props => {
     const [externalId, setExternalId] = useState('');
     const [startDate, setStartDate] = useState(moment().format('YYYY-MM-DD[T]HH:mm'));
     const [endDate, setEndDate] = useState(moment().add(1, "month").format('YYYY-MM-DD[T]HH:mm'));
+    const [pacingOverride, setPacingOverride] = useState(false);
     const [campaignType, setCampaignType] = useState({ value: "paid", label: "Paid" });
     const [status, setStatus] = useState({ value: "active", label: "Active" });
     const [currency, setCurrency] = useState({ value: "USD", label: "USD" });
@@ -170,6 +171,7 @@ const Campaign = props => {
                     dailyBudget: parseFloat(dailyBudget.replace(/[^\d.]/g, '')),
                     startAt: moment(startDate).utc().format("YYYY-MM-DD[T]HH:mm:SS.000[Z]"),
                     endAt: moment(endDate).utc().format("YYYY-MM-DD[T]HH:mm:SS.000[Z]"),
+                    pacingOverride,
                     dayPartings: convertScheduleToDayPart(),
                     type: campaignType.value,
                     geoTargets: prepareGeoTargetsInput()
@@ -240,6 +242,7 @@ const Campaign = props => {
         setFrequency(data.campaign.dailyCap);
         setPriority({ value: data.campaign.priority, label: data.campaign.priority.toString() });
         setPassThroughRate(data.campaign.passThroughRate);
+        setPacingOverride(data.campaign.pacingOverride);
         setExternalId(data.campaign.externalId);
 
         setStartDate(moment(data.campaign.startAt).format('YYYY-MM-DD[T]HH:mm'));
@@ -603,6 +606,11 @@ const Campaign = props => {
                                 </div>
                                 <Input value={passThroughRate} onChange={event => setPassThroughRate(event.target.value)}></Input>
                             </InputContainer>
+
+                            <div style={{ width: "99%", display: "flex", marginTop: "-12px", marginRight: "8px", marginBottom: "8px" }}>
+                                <Text style={{ marginLeft: "auto" }} content={`Pacing Override`} sizes={[16, 16, 15, 15, 12]} fontFamily={"Poppins"} />
+                                <input checked={pacingOverride} onChange={event => setPacingOverride(event.target.checked)} type="checkbox"></input>
+                            </div>
 
                             <InputContainer>
                                 <div style={{ display: "flex" }}>
