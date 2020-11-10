@@ -3,10 +3,6 @@ import _ from "lodash";
 import moment from "moment";
 import { useState } from "react";
 
-function randomDate(start, end) {
-    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-}
-
 
 const colors = ["#4C54D2CC", "#A0A5EBCC", "#9370DBCC", "#8B008BCC"];
 
@@ -369,7 +365,7 @@ export const processData = (engagements, metric1, metric2, metric3, metric4, gro
     // Group data by user setting
     let groupedData = _.groupBy(engagements, function (engagement) {
         //@ts-ignore
-        return moment(engagement.createdat).utc().startOf(mapGroupingName(grouping));
+        return moment.utc(engagement.createdat).startOf(mapGroupingName(grouping));
     });
 
     // Calculate totals
