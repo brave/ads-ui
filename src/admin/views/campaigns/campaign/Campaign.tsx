@@ -608,7 +608,7 @@ const Campaign = props => {
                             </InputContainer>
 
                             <div style={{ width: "99%", display: "flex", marginTop: "-12px", marginRight: "8px", marginBottom: "8px" }}>
-                                <Text style={{ marginLeft: "auto" }} content={`Pacing Override`} sizes={[16, 16, 15, 15, 12]} fontFamily={"Poppins"} />
+                                <Text style={{ marginLeft: "auto" }} content={`Pacing Override `} sizes={[16, 16, 15, 15, 12]} fontFamily={"Poppins"} />
                                 <input checked={pacingOverride} onChange={event => setPacingOverride(event.target.checked)} type="checkbox"></input>
                             </div>
 
