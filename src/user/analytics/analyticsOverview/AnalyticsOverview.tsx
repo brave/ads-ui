@@ -113,7 +113,7 @@ const AnalyticsOverview = props => {
                     {
                         startDate !== '' &&
                         <DateRangePicker
-                            initialSettings={{ startDate, endDate }}
+                            initialSettings={{ startDate: moment(startDate).format("MM/DD/YYYY"), endDate: moment(endDate).format("MM/DD/YYYY") }}
                             onCallback={handleCallback}
                         >
                             <div style={{ padding: "0px 20px", background: "#fafafa", color: "black", border: "1px solid #e2e2e2", borderRadius: "100px 100px 100px 100px", marginLeft: "auto", cursor: "pointer", minWidth: "165px", display: "flex", justifyContent: "center", marginRight: "14px" }}>
@@ -290,5 +290,3 @@ const AnalyticsOverview = props => {
 
 
 export default AnalyticsOverview;
-
-
