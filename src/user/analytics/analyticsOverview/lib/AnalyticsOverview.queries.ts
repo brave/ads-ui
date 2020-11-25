@@ -15,6 +15,7 @@ campaign(id: $id){
         endAt
         currency
         pacingIndex
+        type
         engagements {
             createdat
             type
