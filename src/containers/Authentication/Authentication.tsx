@@ -8,8 +8,6 @@ import { styles } from "./Authentication.style";
 import * as S from "./Authentication.style";
 
 import SigninContainer from "./Signin/Signin";
-import VerifyContainer from "./Verify/Verify";
-import WaitContainer from "./Wait/Wait";
 
 class Authentication extends React.Component<any, any> {
   public state = {
@@ -23,8 +21,6 @@ class Authentication extends React.Component<any, any> {
         <S.Content>
           <Switch>
             <Route path="/auth/signin" component={SigninContainer} />
-            <Route path="/auth/verify" component={VerifyContainer} />
-            <Route path="/auth/wait" component={WaitContainer} />
             {this.getRedirect()}
           </Switch>
         </S.Content>
@@ -35,17 +31,10 @@ class Authentication extends React.Component<any, any> {
   private getRedirect() {
     const { advertisers, auth } = this.props;
     if (auth && auth.signedIn) {
-      if (!auth.emailVerified) {
-        return <Redirect to="/auth/verify" />;
-      } else {
-        const activeAdvertiser = _.find(advertisers, { state: "active" });
-        if (!activeAdvertiser) {
-          return <Redirect to="/auth/wait" />;
-        } else {
-          return <Redirect to="/a" />;
-        }
-      }
-    } else {
+      const activeAdvertiser = _.find(advertisers, { state: "active" });
+      return <Redirect to="/a" />;
+    }
+    else {
       return <Redirect to="/auth/signin" />;
     }
   }

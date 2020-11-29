@@ -87,16 +87,13 @@ class App extends React.Component<any, any> {
   private getRedirect() {
     const { advertisers, auth } = this.props;
     if (auth && auth.signedIn && auth.emailVerified) {
-      if (auth.role === "admin") {
-        return <Redirect to="/admin/main" />;
+      const activeAdvertiser = _.find(advertisers, { state: "active" });
+      if (advertisers.length > 0 && activeAdvertiser) {
+        return <Redirect to="/user/main" />;
       } else {
-        const activeAdvertiser = _.find(advertisers, { state: "active" });
-        if (advertisers.length > 0 && activeAdvertiser) {
-          return <Redirect to="/user/main" />;
-        } else {
-          return <Redirect to="/auth" />;
-        }
+        return <Redirect to="/auth" />;
       }
+
     } else {
       return <Redirect to="/auth" />;
     }
