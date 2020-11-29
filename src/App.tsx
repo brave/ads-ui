@@ -12,11 +12,9 @@ import _ from "lodash";
 import { CloseSnackBar as close } from "./actions";
 
 import Authentication from "./containers/Authentication/Authentication";
-import Admin from "./admin/Admin";
 
 import Context from "./state/context";
 import User from "./user/User";
-import TestSignin from "./admin/views/test/TestSignin";
 
 class App extends React.Component<any, any> {
   private theme = createMuiTheme({
@@ -64,7 +62,6 @@ class App extends React.Component<any, any> {
           }}>
             <Switch>
               <Route path="/user/main" component={User} />
-              <Route path="/admin/main" component={Admin} />
               <Route path="/auth" component={Authentication} />
               {/* <Route path="/auth" component={TestSignin} /> */}
               <Route path='/' exact={true} component={() => {
