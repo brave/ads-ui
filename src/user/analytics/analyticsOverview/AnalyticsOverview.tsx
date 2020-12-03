@@ -107,7 +107,7 @@ const AnalyticsOverview = props => {
     return (
         <div>
             {
-                campaign.type !== "fixed" &&
+                campaign.type === "fixed" &&
                 <div>
 
                     <div style={{ width: "100%", display: "flex", alignItems: "center", marginBottom: "28px" }}>
