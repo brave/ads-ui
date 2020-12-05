@@ -11,7 +11,6 @@ import {
   withStyles
 } from "@material-ui/core";
 import { H6, H5, Text } from "../Text/Text";
-import AdsManager from "../../admin/views/adsManager/AdsManager";
 
 const linkStyle = { textDecoration: "none", color: "inherit" };
 
