@@ -256,6 +256,11 @@ const AnalyticsOverview = props => {
                     </div>
                 </div>
 
+                {campaign.type === "fixed" &&
+                    <Text style={{ marginLeft: "4px" }} content={"Sponsored Image reporting is a statistical approximation, derived from the percentage of Brave users that are opted-in to Brave Ads."} fontFamily={"Poppins"} sizes={[18, 18, 42, 42, 14]} />
+                }
+
+
             </div >
         </div>
     );
