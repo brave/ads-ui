@@ -1,4 +1,4 @@
-import { createCampaignMutation, createCreativeMutation } from "./ReviewForm.queries";
+import { createAdMutation, createAdSetMutation, createCampaignMutation, createCreativeMutation, updateAdMutation, updateAdSetMutation, updateCampaignMutation } from "./ReviewForm.queries";
 import normalizeUrl from 'normalize-url';
 
 
@@ -7,6 +7,7 @@ async function processAdSets(adSets, userId, advertiserId, accessToken, campaign
     if (adSets) {
         for (const adSet of adSets) {
             let createAdSetInput = {
+                id: adSet.id,
                 execution: "per_click",
                 perDay: 1,
                 totalMax: 10,
@@ -68,11 +69,78 @@ async function processAdSets(adSets, userId, advertiserId, accessToken, campaign
     return createAdSetsInput;
 }
 
+async function processAdSet(adSets, userId, advertiserId, accessToken, campaign) {
+    let createAdSetsInput = [] as any;
+    if (adSets) {
+        for (const adSet of adSets) {
+            let createAdSetInput = {
+                id: adSet.id,
+                campaignId: campaign.id,
+                execution: "per_click",
+                perDay: 1,
+                totalMax: 10,
+                billingType: adSet.pricingType.value,
+            } as any;
+            let segments = [] as any;
+
+            if (adSet.braveML === true) {
+                segments.push({
+                    code: "Svp7l-zGN",
+                    name: "untargeted"
+                });
+            }
+            else {
+                if (adSet.audiences) {
+                    adSet.audiences.forEach((audience) => {
+                        let entry = {
+                            code: audience.value,
+                            name: audience.label
+                        }
+                        segments.push(entry);
+                    })
+                }
+            }
+            segments = JSON.stringify(segments).replace(/\"([^(\")"]+)\":/g, "$1:");
+            createAdSetInput.segments = segments;
+
+            let platforms = [] as any;
+
+            if (adSet.platforms) {
+                adSet.platforms.forEach((platform) => {
+                    let entry = {
+                        code: platform.value,
+                        name: platform.label
+                    }
+                    platforms.push(entry);
+                });
+            }
+            platforms = JSON.stringify(platforms).replace(/\"([^(\")"]+)\":/g, "$1:");
+            createAdSetInput.oses = platforms;
+
+            let conversions = [] as any;
+
+            if (adSet.conversion.url !== '') {
+                conversions.push({
+                    urlPattern: adSet.conversion.url,
+                    type: adSet.conversion.type,
+                    observationWindow: adSet.conversion.observationWindow.value
+                })
+            }
+            conversions = JSON.stringify(conversions).replace(/\"([^(\")"]+)\":/g, "$1:");
+            createAdSetInput.conversions = conversions;
+
+            createAdSetsInput.push(createAdSetInput);
+        }
+    }
+    return createAdSetsInput;
+}
+
 
 // Prepare the graphql input for requesting 
 async function processCampaign(userId, advertiserId, campaign, adSets, accessToken) {
 
     let createCampaignInput = {
+        id: campaign.id,
         userId,
         advertiserId,
         name: campaign.name,
@@ -86,6 +154,14 @@ async function processCampaign(userId, advertiserId, campaign, adSets, accessTok
         dailyCap: 1,
         state: "under_review"
     } as any;
+
+    if (campaign.editMode) {
+        if (campaign.state === "active") {
+            createCampaignInput.state = 'active'
+        } else {
+            createCampaignInput.state = 'paused'
+        }
+    }
 
     let geoTargets = [] as any;
     if (campaign.geoTargets) {
@@ -127,7 +203,9 @@ async function processAds(adSet, userId, advertiserId, accessToken, campaign) {
 
             let entry = {} as any;
 
+            entry.id = ad.id;
             entry.creativeId = creativeId;
+
 
             if (adSet.pricingType.value === "cpm") {
                 entry.prices = [{ amount: adSet.bid.replace(/[^0-9\.]/g, ''), type: "view" }]
@@ -164,10 +242,41 @@ async function processAds(adSet, userId, advertiserId, accessToken, campaign) {
     }
 }
 
+async function processAd(ad, adSetId, pricingType, bid, userId, advertiserId, accessToken) {
+
+    let createAdInput = [] as any;
+
+    let creativeId = await processCreativeId(ad, advertiserId, accessToken, userId);
+
+    let entry = {} as any;
+
+    entry.id = ad.id;
+    entry.creativeId = creativeId;
+    entry.creativeSetId = adSetId;
+    entry.state = 'active';
+
+    if (pricingType.value === "cpm") {
+        entry.prices = `[{ amount: ${parseFloat(bid.replace(/[^0-9\.]/g, ''))}, type: "view" }]`
+    }
+    else {
+        entry.prices = `[{ amount: ${parseFloat(bid.replace(/[^0-9\.]/g, ''))}, type: "click" }]`
+    }
+
+    entry.webhooks = [];
+
+    createAdInput.push(entry);
+
+
+    return createAdInput;
+
+}
+
+
+
 async function processCreativeId(ad, advertiserId, accessToken, userId) {
 
     if (ad.creative !== '') {
-        return ad.creative.value;
+        return ad.creative
     }
     else {
         let createCreativeInput = {
@@ -210,6 +319,36 @@ async function graphQLRequest(query, accessToken) {
 }
 
 export async function submitOrder(userId, advertiserId, campaign, adSets, accessToken) {
+    console.log(adSets);
     let processedCampaign = await processCampaign(userId, advertiserId, campaign, adSets, accessToken)
-    let test = await graphQLRequest(createCampaignMutation(processedCampaign), accessToken);
+    if (!campaign.editMode) {
+        let response = await graphQLRequest(createCampaignMutation(processedCampaign), accessToken);
+    } else {
+        let response = await graphQLRequest(updateCampaignMutation(processedCampaign), accessToken);
+        for (const adSet of adSets) {
+            if (adSet.newAdSet === true) {
+                let temp = [] as any;
+                temp.push(adSet);
+                let processedAdSet = await processAdSet(temp, userId, advertiserId, accessToken, campaign);
+                let response = await graphQLRequest(createAdSetMutation(processedAdSet[0]), accessToken);
+                adSet.id = response.createAdSet.id;
+            } else {
+                let temp = [] as any;
+                temp.push(adSet);
+                let processedAdSet = await processAdSet(temp, userId, advertiserId, accessToken, campaign);
+                let response = await graphQLRequest(updateAdSetMutation(processedAdSet[0]), accessToken);
+            }
+
+            for (const ad of adSet.ads) {
+                if (ad.newCreative === true) {
+                    console.log(adSet.id);
+                    let processedAd = await processAd(ad, adSet.id, adSet.pricingType, adSet.bid, userId, advertiserId, accessToken);
+                    let response = await graphQLRequest(createAdMutation(processedAd[0]), accessToken);
+                } else {
+                    let processedAd = await processAd(ad, adSet.id, adSet.pricingType, adSet.bid, userId, advertiserId, accessToken);
+                    let response = await graphQLRequest(updateAdMutation(processedAd[0]), accessToken);
+                }
+            }
+        }
+    }
 }

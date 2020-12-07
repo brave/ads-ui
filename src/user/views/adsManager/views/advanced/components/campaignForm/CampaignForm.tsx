@@ -4,6 +4,7 @@ import { Text } from "../../../../../../../components/Text/Text";
 import * as S from "./CampaignForm.style";
 import Select from 'react-select';
 import './styles/campaignForm.style.css';
+import Switch from "react-switch";
 import { Icon } from '@material-ui/core';
 
 import USD from "./assets/usd.png";
@@ -116,7 +117,11 @@ class CampaignForm extends Component<any, any> {
 
     handleStatus(status) {
         let campaign = this.props.campaign;
-        campaign.status = status;
+        if (status) {
+            campaign.state = 'active';
+        } else {
+            campaign.state = 'paused';
+        }
         this.props.setCampaign(campaign);
     }
 
@@ -147,7 +152,9 @@ class CampaignForm extends Component<any, any> {
     addAdSet() {
         let adSets = this.props.adSets;
         adSets.push({
+            id: '',
             pricingType: '',
+            newAdSet: true,
             bid: '',
             lifetimeImpressions: '',
             dailyImpressions: '',
@@ -299,7 +306,18 @@ class CampaignForm extends Component<any, any> {
                                             </div>
                                         }
 
-
+                                        {this.props.campaign.editMode &&
+                                            <div style={{ width: "45%" }}>
+                                                <div style={{ display: "flex" }}>
+                                                    <Text content={"Campaign State"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                    <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "1px", marginLeft: "2px" }}>info</Icon>
+                                                </div>
+                                                <div style={{ display: "flex", marginTop: "12px", marginLeft: "0px", alignItems: "center" }}>
+                                                    <Switch checked={this.props.campaign.state === 'active'} onChange={(status) => { this.handleStatus(status) }} onColor="#FB7959" uncheckedIcon={false} checkedIcon={false} height={23} width={45} />
+                                                    <Text style={{ marginLeft: "6px" }} content={this.props.campaign.state === 'active' ? "Active" : "Paused"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                </div>
+                                            </div>
+                                        }
 
                                     </S.RightColumn>
                                 </S.InnerContainer>

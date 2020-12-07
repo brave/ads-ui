@@ -25,16 +25,65 @@ export function createCampaignMutation(createCampaignInput) {
     }
 `};
 
+export function updateCampaignMutation(updateCampaignInput) {
+    return `
+    mutation{
+        updateCampaign(
+            updateCampaignInput: {
+                id: "${updateCampaignInput.id}"
+                name: "${updateCampaignInput.name}"
+                startAt: "${updateCampaignInput.startAt}"
+                endAt: "${updateCampaignInput.endAt}"
+                externalId: ""
+                type: "paid"
+                currency: "${updateCampaignInput.currency}"
+                budget: ${updateCampaignInput.budget}
+                dailyCap: ${updateCampaignInput.dailyCap}
+                dailyBudget: ${updateCampaignInput.dailyBudget}
+                geoTargets: ${updateCampaignInput.geoTargets}
+                state: "${updateCampaignInput.state}"
+            }
+        ){
+            id
+        }
+    }
+`};
+
 export function createAdSetMutation(createAdSetInput) {
     return `
     mutation{
         createAdSet(
             createAdSetInput: {
                 campaignId: "${createAdSetInput.campaignId}"
+                billingType: "${createAdSetInput.billingType}"
                 execution: "${createAdSetInput.execution}"
                 perDay: ${createAdSetInput.perDay}
                 totalMax: ${createAdSetInput.totalMax}
                 segments: ${createAdSetInput.segments}
+                oses: ${createAdSetInput.oses}
+                conversions: ${createAdSetInput.conversions}
+            }
+        ){
+            id
+        }
+    }
+`};
+
+export function updateAdSetMutation(createAdSetInput) {
+    console.log(createAdSetInput);
+    return `
+    mutation{
+        updateAdSet(
+            updateAdSetInput: {
+                id: "${createAdSetInput.id}"
+                campaignId: "${createAdSetInput.campaignId}"
+                billingType: "${createAdSetInput.billingType}"
+                execution: "${createAdSetInput.execution}"
+                perDay: ${createAdSetInput.perDay}
+                totalMax: ${createAdSetInput.totalMax}
+                segments: ${createAdSetInput.segments}
+                oses: ${createAdSetInput.oses}
+                conversions: ${createAdSetInput.conversions}
             }
         ){
             id
@@ -48,8 +97,26 @@ export function createAdMutation(createAdInput) {
         createAd(
             createAdInput: {
                 creativeSetId: "${createAdInput.creativeSetId}"
+                state: "${createAdInput.state}"
                 creativeId: "${createAdInput.creativeId}"
-                prices: ${createAdInput.price}
+                prices: ${createAdInput.prices}
+                webhooks: []
+            }
+        ){
+            id
+        }
+    }
+`};
+
+export function updateAdMutation(createAdInput) {
+    return `
+    mutation{
+        updateAd(
+            updateAdInput: {
+                creativeSetId: "${createAdInput.creativeSetId}"
+                state: "${createAdInput.state}"
+                creativeId: "${createAdInput.creativeId}"
+                prices: ${createAdInput.prices}
                 webhooks: []
             }
         ){
@@ -63,6 +130,24 @@ export function createCreativeMutation(createCreativeInput) {
     mutation{
         createNotificationCreative(
             createNotificationCreativeInput: {
+                userId: "${createCreativeInput.userId}"
+                advertiserId: "${createCreativeInput.advertiserId}"
+                name: "${createCreativeInput.name}"
+                payload: ${createCreativeInput.payload}
+                type: ${createCreativeInput.type}
+                state: "active"
+            }
+        ){
+            id
+        }
+    }
+`};
+
+export function updateCreativeMutation(createCreativeInput) {
+    return `
+    mutation{
+        updateNotificationCreative(
+            updateNotificationCreativeInput: {
                 userId: "${createCreativeInput.userId}"
                 advertiserId: "${createCreativeInput.advertiserId}"
                 name: "${createCreativeInput.name}"

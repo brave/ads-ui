@@ -11,6 +11,7 @@ import Notification from "./assets/notification.png";
 import PublisherAd from "./assets/publisher_ad.png";
 import { Icon } from '@material-ui/core';
 import Modal from '../../../../../../../components/modal/Modal';
+import Switch from "react-switch";
 
 const customStyles = {
     control: (provided, state) => ({
@@ -131,36 +132,6 @@ class AdsForm extends Component<any, any> {
         this.props.setAdSets(adSets);
     };
 
-    handleNewCreative(value) {
-
-        let adSets = this.props.adSets;
-        adSets[this.props.selectedAdSet].ads[this.props.selectedAd].newCreative = value;
-
-        // Clear existing
-        adSets[this.props.selectedAdSet].ads[this.props.selectedAd].creative = '';
-        adSets[this.props.selectedAdSet].ads[this.props.selectedAd].name = '';
-        adSets[this.props.selectedAdSet].ads[this.props.selectedAd].body = '';
-        adSets[this.props.selectedAdSet].ads[this.props.selectedAd].title = '';
-        adSets[this.props.selectedAdSet].ads[this.props.selectedAd].creativeUrl = '';
-        adSets[this.props.selectedAdSet].ads[this.props.selectedAd].creativeSize = '';
-        adSets[this.props.selectedAdSet].ads[this.props.selectedAd].channels = '';
-        adSets[this.props.selectedAdSet].ads[this.props.selectedAd].targetUrl = '';
-        adSets[this.props.selectedAdSet].ads[this.props.selectedAd].previewAssets.title = '';
-        adSets[this.props.selectedAdSet].ads[this.props.selectedAd].previewAssets.body = '';
-
-        if (value) {
-            adSets[this.props.selectedAdSet].ads[this.props.selectedAd].notificationAd = true;
-            adSets[this.props.selectedAdSet].ads[this.props.selectedAd].inPageAd = false;
-        }
-        else {
-            adSets[this.props.selectedAdSet].ads[this.props.selectedAd].notificationAd = false;
-            adSets[this.props.selectedAdSet].ads[this.props.selectedAd].inPageAd = false;
-        }
-
-        this.props.setAdSets(adSets);
-
-    }
-
     handleName(e) {
         let adSets = this.props.adSets;
         adSets[this.props.selectedAdSet].ads[this.props.selectedAd].name = e.target.value;
@@ -202,6 +173,16 @@ class AdsForm extends Component<any, any> {
     handleTargetUrl(e) {
         let adSets = this.props.adSets;
         adSets[this.props.selectedAdSet].ads[this.props.selectedAd].targetUrl = e.target.value;
+        this.props.setAdSets(adSets);
+    }
+
+    handleStatus(status) {
+        let adSets = this.props.adSets;
+        if (status) {
+            adSets[this.props.selectedAdSet].ads[this.props.selectedAd].state = 'active';
+        } else {
+            adSets[this.props.selectedAdSet].ads[this.props.selectedAd].state = 'paused';
+        }
         this.props.setAdSets(adSets);
     }
 
@@ -300,14 +281,14 @@ class AdsForm extends Component<any, any> {
                             <span>
                                 <Text style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"}>
                                     Cancel
-            </Text>
+                                </Text>
                             </span>
                         </div>
                         <div onClick={() => { this.deleteSelectedAd(index) }} style={{ display: "flex", justifyContent: "center", padding: "0px 20px", width: "100px", background: "#F87454", color: "white", border: "none", borderRadius: "100px 100px 100px 100px", cursor: "pointer" }}>
                             <span>
                                 <Text style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"}>
                                     Delete
-                        </Text>
+                                </Text>
                             </span>
                         </div>
                     </div>
@@ -355,7 +336,10 @@ class AdsForm extends Component<any, any> {
                                     <S.Container style={{ width: "620px" }}>
                                         {this.renderAdSetsTabs()}
                                     </S.Container>
-                                    <Icon onClick={() => { this.showDeleteAdModal(true) }} style={{ marginLeft: "auto", fontSize: "18px", cursor: "pointer" }}>more_vert</Icon>
+                                    {
+                                        this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].newCreative &&
+                                        <Icon onClick={() => { this.showDeleteAdModal(true) }} style={{ marginLeft: "auto", fontSize: "18px", cursor: "pointer" }}>more_vert</Icon>
+                                    }
                                 </div>
 
                                 {/* Refactor to add this to menu */}
@@ -414,94 +398,74 @@ class AdsForm extends Component<any, any> {
 
                                 <div>
                                     <div style={{}}>
-                                        {
-                                            this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].newCreative === false ?
-                                                <>
-                                                    <div style={{ display: "flex", marginBottom: "24px" }}>
-                                                        <S.CreativeSelection selected={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].notificationAd}>
-                                                            <img style={{ display: "block", height: "100px", marginLeft: "auto", marginRight: "auto" }} src={Notification}></img>
-                                                            <Text style={{ textAlign: "center" }} content={"Notification Ad"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                        </S.CreativeSelection>
 
-                                                        <S.CreativeSelection selected={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].inPageAd}>
-                                                            <img style={{ display: "block", height: "100px", marginLeft: "auto", marginRight: "auto" }} src={PublisherAd}></img>
-                                                            <Text style={{ textAlign: "center" }} content={"In Page Ad"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                        </S.CreativeSelection>
-                                                    </div>
-                                                    < S.InputContainer >
-                                                        <Text content={"Choose Creative "} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                        <div>
-                                                            <Select
-                                                                styles={customStyles}
-                                                                value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].creative}
-                                                                onChange={this.handleCreative}
-                                                                options={this.props.creativeOptions}
-                                                            />
-                                                        </div>
+                                        <>
+                                            {
+                                                this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].notificationAd &&
+                                                <>
+                                                    <S.InputContainer>
+                                                        <Text content={"Creative Name"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                        <S.Input value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].name} onChange={(e) => this.handleName(e)} placeholder="Enter a name..." />
+                                                    </S.InputContainer>
+
+                                                    <S.InputContainer>
+                                                        <Text content={"Creative Title (30 Characters)"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                        <S.Input maxLength={30} value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].title} onChange={(e) => this.handleTitle(e)} placeholder="Enter a title..." />
+                                                    </S.InputContainer>
+
+                                                    <S.InputContainer>
+                                                        <Text content={"Creative Body (60 Characters)"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                        <S.TextArea maxLength={60} value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].body} onChange={(e) => this.handleBody(e)} placeholder="Enter a body..." />
+                                                    </S.InputContainer>
+
+                                                    <S.InputContainer>
+                                                        <Text content={"Creative Target URL"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                        <S.Input value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].targetUrl} onChange={(e) => this.handleTargetUrl(e)} placeholder="Enter a target url..." />
                                                     </S.InputContainer>
                                                 </>
-
-                                                :
+                                            }
+                                            {
+                                                this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].inPageAd &&
                                                 <>
+                                                    <S.InputContainer>
+                                                        <Text content={"Creative Name"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                        <S.Input value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].name} onChange={(e) => this.handleName(e)} placeholder="Enter a name..." />
+                                                    </S.InputContainer>
 
+                                                    <S.InputContainer>
+                                                        <Text content={"Creative URL"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                        <S.Input value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].creativeUrl} onChange={(e) => this.handleCreativeUrl(e)} placeholder="Enter a title..." />
+                                                    </S.InputContainer>
 
-                                                    {
-                                                        this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].notificationAd &&
-                                                        <>
-                                                            <S.InputContainer>
-                                                                <Text content={"Creative Name"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                                <S.Input value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].name} onChange={(e) => this.handleName(e)} placeholder="Enter a name..." />
-                                                            </S.InputContainer>
+                                                    <S.InputContainer>
+                                                        <Text content={"Creative Size"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                        <S.Input value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].creativeSize} onChange={(e) => this.handleCreativeSize(e)} placeholder="Enter a body..." />
+                                                    </S.InputContainer>
 
-                                                            <S.InputContainer>
-                                                                <Text content={"Creative Title (30 Characters)"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                                <S.Input maxLength={30} value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].title} onChange={(e) => this.handleTitle(e)} placeholder="Enter a title..." />
-                                                            </S.InputContainer>
+                                                    <S.InputContainer>
+                                                        <Text content={"Channels, (separate by comma)"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                        <S.Input value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].channels} onChange={(e) => this.handleChannels(e)} placeholder="Enter a body..." />
+                                                    </S.InputContainer>
 
-                                                            <S.InputContainer>
-                                                                <Text content={"Creative Body (60 Characters)"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                                <S.TextArea maxLength={60} value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].body} onChange={(e) => this.handleBody(e)} placeholder="Enter a body..." />
-                                                            </S.InputContainer>
-
-                                                            <S.InputContainer>
-                                                                <Text content={"Creative Target URL"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                                <S.Input value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].targetUrl} onChange={(e) => this.handleTargetUrl(e)} placeholder="Enter a target url..." />
-                                                            </S.InputContainer>
-                                                        </>
-                                                    }
-                                                    {
-                                                        this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].inPageAd &&
-                                                        <>
-                                                            <S.InputContainer>
-                                                                <Text content={"Creative Name"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                                <S.Input value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].name} onChange={(e) => this.handleName(e)} placeholder="Enter a name..." />
-                                                            </S.InputContainer>
-
-                                                            <S.InputContainer>
-                                                                <Text content={"Creative URL"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                                <S.Input value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].creativeUrl} onChange={(e) => this.handleCreativeUrl(e)} placeholder="Enter a title..." />
-                                                            </S.InputContainer>
-
-                                                            <S.InputContainer>
-                                                                <Text content={"Creative Size"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                                <S.Input value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].creativeSize} onChange={(e) => this.handleCreativeSize(e)} placeholder="Enter a body..." />
-                                                            </S.InputContainer>
-
-                                                            <S.InputContainer>
-                                                                <Text content={"Channels, (separate by comma)"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                                <S.Input value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].channels} onChange={(e) => this.handleChannels(e)} placeholder="Enter a body..." />
-                                                            </S.InputContainer>
-
-                                                            <S.InputContainer>
-                                                                <Text content={"Creative Target URL"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                                <S.Input value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].targetUrl} onChange={(e) => this.handleTargetUrl(e)} placeholder="Enter a target url..." />
-                                                            </S.InputContainer>
-                                                        </>
-
-
-                                                    }
+                                                    <S.InputContainer>
+                                                        <Text content={"Creative Target URL"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                        <S.Input value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].targetUrl} onChange={(e) => this.handleTargetUrl(e)} placeholder="Enter a target url..." />
+                                                    </S.InputContainer>
                                                 </>
-                                        }
+                                            }
+                                            {(!this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].newCreative) &&
+                                                <div style={{ width: "45%", marginBottom: "28px" }}>
+                                                    <div style={{ display: "flex" }}>
+                                                        <Text content={"Ad State"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                        <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "1px", marginLeft: "2px" }}>info</Icon>
+                                                    </div>
+                                                    <div style={{ display: "flex", marginTop: "12px", marginLeft: "0px", alignItems: "center" }}>
+                                                        <Switch checked={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].state === 'active'} onChange={(status) => { this.handleStatus(status) }} onColor="#FB7959" uncheckedIcon={false} checkedIcon={false} height={23} width={45} />
+                                                        <Text style={{ marginLeft: "6px" }} content={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].state === 'active' ? "Active" : "Paused"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                    </div>
+                                                </div>
+                                            }
+                                        </>
 
                                     </div>
 

@@ -115,7 +115,6 @@ class Advanced extends Component<any, any> {
             this.context.loading === false &&
             <>
                 {/* <div style={{ position: "absolute", width: "100%", height: "100%", backgroundColor: "green" }}></div> */}
-
                 {this.state.form !== "completionForm" &&
                     <AdvancedOrderSidebar campaign={this.state.campaign} adSets={this.state.adSets} setAdSets={this.setAdSets} selectedAdSet={this.state.selectedAdSet} setSelectedAdSet={this.setSelectedAdSet} form={this.state.form} setForm={this.setForm} />
                 }

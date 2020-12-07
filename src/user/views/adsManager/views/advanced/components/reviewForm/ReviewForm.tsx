@@ -326,7 +326,7 @@ class ReviewForm extends Component<any, any> {
 
                     }
 
-                    {adSet.ads.length > 1 &&
+                    {(adSet.ads.length > 1 && index < adSet.ads.length - 1) &&
                         <div style={{ width: "100%", borderBottom: "1px solid #e2e2e2", marginTop: "28px", marginBottom: "28px" }}></div>
                     }
                 </>

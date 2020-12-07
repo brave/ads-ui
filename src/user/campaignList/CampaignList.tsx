@@ -4,14 +4,11 @@ import * as _ from "lodash";
 
 import Section from "../../components/section/Section";
 
-import { Text } from "../../components/Text/Text";
 import { CAMPAIGN_LIST } from "./lib/CampaignList.queries";
 import { useQuery } from "@apollo/react-hooks";
 
 import Table from "../../components/Table/TableComponent";
 import { Link } from "react-router-dom";
-
-import { Icon } from "@material-ui/core";
 
 import * as S from "./style/CampaignList.style";
 
@@ -21,6 +18,9 @@ const CampaignList = props => {
 
 
     const { match } = props;
+
+    const userId = props.userId;
+    const advertiserId = props.advertiserId;
 
     const { loading, error, data } = useQuery(CAMPAIGN_LIST, {
         variables: { id: props.advertiserId }
@@ -32,9 +32,15 @@ const CampaignList = props => {
             accessor: 'name',
             Cell: (props) => {
                 return (
-                    <Link style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} to={`campaign/${props.row.original.id}/analytics/overview`}>
-                        <div style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} title={props.row.original.name}>{props.row.original.name}</div>
-                    </Link>
+                    <div>
+                        <Link style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} to={`campaign/${props.row.original.id}/analytics/overview`}>
+                            <div style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} title={props.row.original.name}>{props.row.original.name}</div>
+                        </Link>
+
+                        <Link style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", marginTop: '8px', fontSize: "10px" }} to={`/user/main/adsmanager/advanced?userId=${userId}&advertiserId=${advertiserId}&campaignId=${props.row.original.id}`}>
+                            <div style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} title={props.row.original.name}>Edit</div>
+                        </Link>
+                    </div>
                 )
             }
         },
@@ -87,12 +93,8 @@ const CampaignList = props => {
         }
     ];
 
-    // For analytics icon 
-    // 
 
     if (loading) return <></>;
-
-    console.log(data.campaigns);
 
     return (
         <div>
