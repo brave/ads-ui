@@ -467,7 +467,7 @@ export const formatMetric = (data, metric) => {
         case 'dismissals':
         case 'upvotes':
         case 'downvotes':
-            return data[metric].toLocaleString();
+            return parseInt(data[metric]).toLocaleString();
         case 'ctr':
         case 'convRate':
         case 'landingRate':
