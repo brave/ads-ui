@@ -102,6 +102,8 @@ async function initializeCampaign(query, campaignId, accessToken) {
 
         if (data.campaign.state === "active" || data.campaign.state === "daycomplete") {
             state = 'active'
+        } else if (data.campaign.state === "under_review") {
+            state = 'under_review'
         } else {
             state = 'paused'
         }
@@ -118,7 +120,7 @@ async function initializeCampaign(query, campaignId, accessToken) {
             currency,
             dailyBudget: formatBudget(data.campaign.dailyBudget),
             totalBudget: formatBudget(data.campaign.budget),
-            spend: data.campaign.spent,
+            spend: formatBudget(data.campaign.spent),
             editMode: true,
         }
 
@@ -225,15 +227,12 @@ async function initializeCampaign(query, campaignId, accessToken) {
         });
     } else {
 
-        // Calculate timezone offset in ms
-        var tzoffset = (new Date()).getTimezoneOffset() * 60000;
-
         campaign = {
             objective: '',
             id: '',
             name: '',
-            startTime: (new Date(Date.now() - tzoffset)).toISOString().slice(0, -5),
-            endTime: (new Date(new Date().setHours(23, 59, 59, 999) - tzoffset)).toISOString().slice(0, -5),
+            startTime: moment().format('YYYY-MM-DD[T]HH:mm'),
+            endTime: moment().add(1, "month").format('YYYY-MM-DD[T]HH:mm'),
             dailyFrequencyCap: '',
             geoTargets: '',
             currency: { value: 'usd', label: 'USD' },
@@ -333,10 +332,18 @@ export function performValidation(context, validationRule, campaign, adSets, ads
         validations.campaignName.valid = false;
         validations.campaignName.errorMessage = "Campaign name is required, please set a campaign name.";
     }
-    if (campaign.startTime > campaign.endTime && (validationRule === "campaignForm" || validationRule === 'all')) {
+    if (moment(campaign.startTime) > moment(campaign.endTime) && (validationRule === "campaignForm" || validationRule === 'all')) {
         validations.schedule = {} as any;
         validations.schedule.valid = false;
         validations.schedule.errorMessage = "Campaign end date cannot be before start date";
+    }
+
+    if (campaign.editMode) {
+        if (moment(campaign.endTime) < moment() && (validationRule === "campaignForm" || validationRule === 'all')) {
+            validations.endTimeSchedule = {} as any;
+            validations.endTimeSchedule.valid = false;
+            validations.endTimeSchedule.errorMessage = "Campaign end date can only be updated to the future";
+        }
     }
 
     let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: "numeric" };
@@ -360,6 +367,16 @@ export function performValidation(context, validationRule, campaign, adSets, ads
         validations.budget.valid = false;
         validations.budget.errorMessage = "Daily budget cannot be greater than lifetime budget.";
     }
+
+    if (campaign.editMode) {
+        if (parseFloat(campaign.totalBudget.replace(/[^\d.]/g, '')) < parseFloat(campaign.spend.replace(/[^\d.]/g, '')) && (validationRule === "campaignForm" || validationRule === 'all')) {
+            validations.budgetSpend = {} as any;
+            validations.budgetSpend.valid = false;
+            validations.budgetSpend.errorMessage = "Budget cannot be less than current campaign spend.";
+        }
+    }
+
+
     if (campaign.geoTargets === '' || campaign.geoTargets === null) {
         validations.geoTargets = {} as any;
         validations.geoTargets.valid = false;

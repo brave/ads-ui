@@ -106,7 +106,7 @@ class Advanced extends Component<any, any> {
             case "reviewForm":
                 return <ReviewForm campaign={this.state.campaign} adSets={this.state.adSets} ads={this.state.ads} setForm={this.setForm} auth={this.props.auth} advertiserId={this.state.advertiserId} userId={this.state.userId} setSelectedAdSet={this.setSelectedAdSet} setSelectedAd={this.setSelectedAd} validations={this.state.validations} validate={this.validate} />
             case "completionForm":
-                return <CompletionForm />
+                return <CompletionForm editMode={this.state.campaign.editMode} />
         }
     }
 

@@ -424,6 +424,18 @@ class ReviewForm extends Component<any, any> {
                                                     </S.ErrorMessage>
                                                 </S.ErrorContainer>
                                             }
+
+                                            {
+                                                this.props.validations?.endTimeSchedule?.valid === false &&
+                                                <S.ErrorContainer>
+                                                    <S.ErrorIcon>
+                                                        <Icon style={{ color: "white", fontSize: "24px" }}>info</Icon>
+                                                    </S.ErrorIcon>
+                                                    <S.ErrorMessage>
+                                                        <Text content={this.props.validations?.endTimeSchedule?.errorMessage} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                    </S.ErrorMessage>
+                                                </S.ErrorContainer>
+                                            }
                                         </S.InputContainer>
 
                                         <S.InputContainer>
@@ -438,6 +450,18 @@ class ReviewForm extends Component<any, any> {
                                                     </S.ErrorIcon>
                                                     <S.ErrorMessage>
                                                         <Text content={this.props.validations?.totalBudget?.errorMessage} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                    </S.ErrorMessage>
+                                                </S.ErrorContainer>
+                                            }
+
+                                            {
+                                                this.props.validations?.budgetSpend?.valid === false &&
+                                                <S.ErrorContainer>
+                                                    <S.ErrorIcon>
+                                                        <Icon style={{ color: "white", fontSize: "24px" }}>info</Icon>
+                                                    </S.ErrorIcon>
+                                                    <S.ErrorMessage>
+                                                        <Text content={this.props.validations?.budgetSpend?.errorMessage} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                                     </S.ErrorMessage>
                                                 </S.ErrorContainer>
                                             }
@@ -495,16 +519,29 @@ class ReviewForm extends Component<any, any> {
                         </Section>
                         {this.renderAdSets()}
                         <div>
+                            {/* {
+                                this.props.validations.valid === false && (
+                                    <>
+                                        {this.props.campaign.editMode ?
+                                            <S.Button style={{ marginLeft: "auto", width: "200px", opacity: .7, cursor: 'default' }}>
+                                                <Text content={"Update Campaign"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                                            </S.Button>
+                                            :
+                                            <S.Button style={{ marginLeft: "auto", width: "200px", opacity: .7, cursor: 'default' }}>
+                                                <Text content={"Publish Campaign"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                                            </S.Button>
+                                        }
+                                    </>
+                                )
+                            } */}
                             {
-                                this.props.validations.valid === false &&
-                                <S.Button style={{ marginLeft: "auto", width: "200px", opacity: .7, cursor: 'default' }}>
-                                    <Text content={"Publish Campaign"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
-                                </S.Button>
-                            }
-                            {
-                                (this.props.validations.valid !== false && this.state.saving === false) &&
+                                (this.state.saving === false) &&
                                 <S.Button onClick={() => { this.handleSubmit() }} style={{ marginLeft: "auto", width: "200px" }}>
-                                    <Text content={"Publish Campaign"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                                    {this.props.campaign.editMode ?
+                                        <Text content={"Update Campaign"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                                        :
+                                        <Text content={"Publish Campaign"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
+                                    }
                                 </S.Button>
                             }
                             {
