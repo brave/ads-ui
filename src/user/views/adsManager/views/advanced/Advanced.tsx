@@ -102,7 +102,7 @@ class Advanced extends Component<any, any> {
             case "adSetsForm":
                 return <AdSetsForm adSets={this.state.adSets} campaign={this.state.campaign} setAdSets={this.setAdSets} setSelectedAdSet={this.setSelectedAdSet} selectedAdSet={this.state.selectedAdSet} setSelectedAd={this.setSelectedAd} setForm={this.setForm} segments={this.state.segments} validations={this.state.validations} validate={this.validate} />
             case "adsForm":
-                return <AdsForm setAdSets={this.setAdSets} adSets={this.state.adSets} selectedAdSet={this.state.selectedAdSet} setSelectedAdSet={this.setSelectedAdSet} selectedAd={this.state.selectedAd} setSelectedAd={this.setSelectedAd} setForm={this.setForm} creativeOptions={this.state.creativeOptions} auth={this.props.auth} validations={this.state.validations} validate={this.validate} />
+                return <AdsForm campaign={this.state.campaign} setAdSets={this.setAdSets} adSets={this.state.adSets} selectedAdSet={this.state.selectedAdSet} setSelectedAdSet={this.setSelectedAdSet} selectedAd={this.state.selectedAd} setSelectedAd={this.setSelectedAd} setForm={this.setForm} creativeOptions={this.state.creativeOptions} auth={this.props.auth} validations={this.state.validations} validate={this.validate} />
             case "reviewForm":
                 return <ReviewForm campaign={this.state.campaign} adSets={this.state.adSets} ads={this.state.ads} setForm={this.setForm} auth={this.props.auth} advertiserId={this.state.advertiserId} userId={this.state.userId} setSelectedAdSet={this.setSelectedAdSet} setSelectedAd={this.setSelectedAd} validations={this.state.validations} validate={this.validate} />
             case "completionForm":

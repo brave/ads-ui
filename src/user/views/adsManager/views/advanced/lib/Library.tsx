@@ -180,12 +180,15 @@ async function initializeCampaign(query, campaignId, accessToken) {
             let ads = [] as any;
 
             adSet.ads.forEach((ad) => {
-                if (ad.state !== 'deleted') {
+                if (ad.creative.state !== 'deleted') {
                     let state = 'active'
 
-                    if (ad.state === "active") {
+                    if (ad.creative.state === "active") {
                         state = 'active'
-                    } else {
+                    } else if (ad.creative.state === "under_review") {
+                        state = 'under_review'
+                    }
+                    else {
                         state = 'paused'
                     }
                     ads.push({
@@ -250,7 +253,7 @@ async function initializeCampaign(query, campaignId, accessToken) {
         adSets = [
             {
                 id: '',
-                newAdSet: false,
+                newAdSet: true,
                 pricingType: { value: 'cpm', label: 'Impressions (cpm)' },
                 bid: '',
                 lifetimeImpressions: '',

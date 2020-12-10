@@ -405,22 +405,22 @@ class AdsForm extends Component<any, any> {
                                                 <>
                                                     <S.InputContainer>
                                                         <Text content={"Creative Name"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                        <S.Input value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].name} onChange={(e) => this.handleName(e)} placeholder="Enter a name..." />
+                                                        <S.Input style={{ opacity: this.props.campaign.editMode && !this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].newCreative ? .5 : 1 }} readOnly={this.props.campaign.editMode && !this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].newCreative} value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].name} onChange={(e) => this.handleName(e)} placeholder="Enter a name..." />
                                                     </S.InputContainer>
 
                                                     <S.InputContainer>
                                                         <Text content={"Creative Title (30 Characters)"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                        <S.Input maxLength={30} value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].title} onChange={(e) => this.handleTitle(e)} placeholder="Enter a title..." />
+                                                        <S.Input style={{ opacity: this.props.campaign.editMode && !this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].newCreative ? .5 : 1 }} readOnly={this.props.campaign.editMode && !this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].newCreative} maxLength={30} value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].title} onChange={(e) => this.handleTitle(e)} placeholder="Enter a title..." />
                                                     </S.InputContainer>
 
                                                     <S.InputContainer>
                                                         <Text content={"Creative Body (60 Characters)"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                        <S.TextArea maxLength={60} value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].body} onChange={(e) => this.handleBody(e)} placeholder="Enter a body..." />
+                                                        <S.TextArea style={{ opacity: this.props.campaign.editMode && !this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].newCreative ? .5 : 1 }} readOnly={this.props.campaign.editMode && !this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].newCreative} maxLength={60} value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].body} onChange={(e) => this.handleBody(e)} placeholder="Enter a body..." />
                                                     </S.InputContainer>
 
                                                     <S.InputContainer>
                                                         <Text content={"Creative Target URL"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                        <S.Input value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].targetUrl} onChange={(e) => this.handleTargetUrl(e)} placeholder="Enter a target url..." />
+                                                        <S.Input style={{ opacity: this.props.campaign.editMode && !this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].newCreative ? .5 : 1 }} readOnly={this.props.campaign.editMode && !this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].newCreative} value={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].targetUrl} onChange={(e) => this.handleTargetUrl(e)} placeholder="Enter a target url..." />
                                                     </S.InputContainer>
                                                 </>
                                             }

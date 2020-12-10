@@ -71,12 +71,12 @@ export function campaignQuery(campaignId) {
         ads {
           id
           name
-          state
           prices{
             amount
           }
           creative{
             id
+            state
             name
             payload {
             title
