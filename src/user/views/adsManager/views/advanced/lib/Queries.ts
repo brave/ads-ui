@@ -21,7 +21,7 @@ export const segmentsQuery = `
 `;
 
 export function creativesQuery(advertiserId) {
-    return `
+  return `
     query{
         advertiser(id: "${advertiserId}"){
             creatives{
@@ -31,5 +31,63 @@ export function creativesQuery(advertiserId) {
             }
         }
     }
+`};
+
+export function campaignQuery(campaignId) {
+  return `
+    query{campaign(id: "${campaignId}"){
+      id
+      name
+      state
+      startAt
+      endAt
+      dailyCap
+      currency
+      dailyBudget
+      budget
+      spent
+      geoTargets{
+        code
+        name
+      }
+      adSets{
+        id
+        perDay
+        totalMax
+        billingType
+        conversions{
+          urlPattern
+          type
+          observationWindow
+        }
+        oses{
+          code
+          name     
+        }
+        segments{
+          code 
+          name
+        }
+        ads {
+          id
+          name
+          state
+          prices{
+            amount
+          }
+          creative{
+            id
+            state
+            name
+            payload {
+            title
+              body
+              targetUrl
+            }
+          }
+        }
+      }
+    }
+  }
 `};
 
