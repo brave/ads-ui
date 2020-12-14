@@ -4,10 +4,12 @@ import { Text } from "../../../../../../../components/Text/Text";
 import * as S from "./CampaignForm.style";
 import Select from 'react-select';
 import './styles/campaignForm.style.css';
+import Switch from "react-switch";
 import { Icon } from '@material-ui/core';
 
 import USD from "./assets/usd.png";
 import BAT from "./assets/bat.png";
+import moment from 'moment';
 
 const currencies = [
     { value: 'usd', label: 'USD' },
@@ -116,7 +118,11 @@ class CampaignForm extends Component<any, any> {
 
     handleStatus(status) {
         let campaign = this.props.campaign;
-        campaign.status = status;
+        if (status) {
+            campaign.state = 'active';
+        } else {
+            campaign.state = 'paused';
+        }
         this.props.setCampaign(campaign);
     }
 
@@ -145,10 +151,18 @@ class CampaignForm extends Component<any, any> {
     }
 
     addAdSet() {
+        let pricingType = '';
+        let bid = '';
+        if (this.props.campaign.editMode) {
+            pricingType = this.props.campaign.globalBillingType;
+            bid = this.props.campaign.price;
+        }
         let adSets = this.props.adSets;
         adSets.push({
-            pricingType: '',
-            bid: '',
+            id: '',
+            pricingType,
+            newAdSet: true,
+            bid,
             lifetimeImpressions: '',
             dailyImpressions: '',
             braveML: true,
@@ -256,13 +270,23 @@ class CampaignForm extends Component<any, any> {
                                         </div>
 
                                         <div style={{ display: "flex", width: "100%", alignItems: "center" }}>
-                                            <S.InputContainer style={{ width: "45%" }}>
-                                                <div style={{ display: "flex" }}>
-                                                    <Text content={"Start Date"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                    <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "1px", marginLeft: "2px" }}>info</Icon>
-                                                </div>
-                                                <S.Input type="datetime-local" defaultValue={this.props.campaign.startTime} onChange={(e) => this.handleStartTime(e)} error={this.props.validations?.schedule?.valid === false} />
-                                            </S.InputContainer>
+                                            {(moment(this.props.campaign.startTime) <= moment() && this.props.campaign.editMode) ?
+                                                <S.InputContainer style={{ width: "45%" }}>
+                                                    <div style={{ display: "flex" }}>
+                                                        <Text content={"Start Date"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                        <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "1px", marginLeft: "2px" }}>info</Icon>
+                                                    </div>
+                                                    <S.Input readOnly={true} type="datetime-local" defaultValue={this.props.campaign.startTime} error={this.props.validations?.schedule?.valid === false} />
+                                                </S.InputContainer>
+                                                :
+                                                <S.InputContainer style={{ width: "45%" }}>
+                                                    <div style={{ display: "flex" }}>
+                                                        <Text content={"Start Date"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                        <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "1px", marginLeft: "2px" }}>info</Icon>
+                                                    </div>
+                                                    <S.Input type="datetime-local" defaultValue={this.props.campaign.startTime} onChange={(e) => this.handleStartTime(e)} error={this.props.validations?.schedule?.valid === false} />
+                                                </S.InputContainer>
+                                            }
 
                                             <div style={{ width: "10%", marginLeft: "auto", marginRight: "auto", display: "flex", justifyContent: "center" }}>
                                                 <Icon style={{ fontSize: "20px", marginBottom: "6px", color: "grey" }}>arrow_forward</Icon>
@@ -299,7 +323,30 @@ class CampaignForm extends Component<any, any> {
                                             </div>
                                         }
 
+                                        {
+                                            this.props.validations?.endTimeSchedule?.valid === false &&
+                                            <div style={{ width: "100%", borderRadius: "4px", display: "flex" }}>
+                                                <div style={{ backgroundColor: "#e32444", width: "96px", borderTopLeftRadius: "4px", borderBottomLeftRadius: "4px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                                    <Icon style={{ color: "white", fontSize: "24px" }}>info</Icon>
+                                                </div>
+                                                <div style={{ padding: "28px", borderTop: "1px solid #e2e2e2", borderRight: "1px solid #e2e2e2", borderBottom: "1px solid #e2e2e2", width: "100%", borderTopRightRadius: "4px", borderBottomRightRadius: "4px" }}>
+                                                    <Text content={"Oops! Campaign End Date can only be moved forward."} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                </div>
+                                            </div>
+                                        }
 
+                                        {this.props.campaign.editMode && this.props.campaign.state !== 'under_review' &&
+                                            <div style={{ width: "45%" }}>
+                                                <div style={{ display: "flex" }}>
+                                                    <Text content={"Campaign State"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                    <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "1px", marginLeft: "2px" }}>info</Icon>
+                                                </div>
+                                                <div style={{ display: "flex", marginTop: "12px", marginLeft: "0px", alignItems: "center" }}>
+                                                    <Switch checked={this.props.campaign.state === 'active'} onChange={(status) => { this.handleStatus(status) }} onColor="#FB7959" uncheckedIcon={false} checkedIcon={false} height={23} width={45} />
+                                                    <Text style={{ marginLeft: "6px" }} content={this.props.campaign.state === 'active' ? "Active" : "Paused"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                </div>
+                                            </div>
+                                        }
 
                                     </S.RightColumn>
                                 </S.InnerContainer>
@@ -351,6 +398,7 @@ class CampaignForm extends Component<any, any> {
                                                         value={this.props.campaign.currency}
                                                         onChange={this.handleCurrency}
                                                         options={currencies}
+                                                        isDisabled={this.props.campaign.editMode}
                                                     />
                                                 </div>
                                             </div>
@@ -369,6 +417,7 @@ class CampaignForm extends Component<any, any> {
                                                         value={this.props.campaign.currency}
                                                         onChange={this.handleCurrency}
                                                         options={currencies}
+                                                        isDisabled={this.props.campaign.editMode}
                                                     />
                                                 </div>
                                             </div>
@@ -382,6 +431,18 @@ class CampaignForm extends Component<any, any> {
                                                 </div>
                                                 <div style={{ padding: "28px", borderTop: "1px solid #e2e2e2", borderRight: "1px solid #e2e2e2", borderBottom: "1px solid #e2e2e2", width: "100%", borderTopRightRadius: "4px", borderBottomRightRadius: "4px" }}>
                                                     <Text content={"Oops! Daily Budget cannot be greater than Lifetime Budget."} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                                </div>
+                                            </div>
+                                        }
+
+                                        {
+                                            this.props.validations?.budgetSpend?.valid === false &&
+                                            <div style={{ width: "100%", borderRadius: "4px", display: "flex" }}>
+                                                <div style={{ backgroundColor: "#e32444", width: "96px", borderTopLeftRadius: "4px", borderBottomLeftRadius: "4px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                                    <Icon style={{ color: "white", fontSize: "24px" }}>info</Icon>
+                                                </div>
+                                                <div style={{ padding: "28px", borderTop: "1px solid #e2e2e2", borderRight: "1px solid #e2e2e2", borderBottom: "1px solid #e2e2e2", width: "100%", borderTopRightRadius: "4px", borderBottomRightRadius: "4px" }}>
+                                                    <Text content={`Oops! Lifetime Budget cannot be less than Campaign Spend (${this.props.campaign.spend}).`} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                                 </div>
                                             </div>
                                         }

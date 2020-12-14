@@ -1,19 +1,24 @@
-import { activeGeocodesQuery, creativesQuery, segmentsQuery } from "./Queries";
+import moment from "moment";
+import { activeGeocodesQuery, campaignQuery, creativesQuery, segmentsQuery } from "./Queries";
 
 export async function initializeData(context) {
     let initializedData = {} as any;
     initializedData.userId = getSearchParameters(context.props.location).userId;
     initializedData.advertiserId = getSearchParameters(context.props.location).advertiserId;
+    initializedData.campaignId = getSearchParameters(context.props.location).campaignId;
     initializedData.geoCodes = await initializeGeoCodes(activeGeocodesQuery, context.props.auth.accessToken);
     initializedData.segments = await initializeSegments(segmentsQuery, context.props.auth.accessToken);
-    // initializedData.creatives = await initializeCreatives(creativesQuery, context.props.auth.accessToken, initializedData.advertiserId);
-    // initializedData.creativeOptions = initializeCreativeOptions(initializedData.creatives);
-    initializedData.campaign = initializeCampaign();
-    initializedData.adSets = initializeAdSets();
+    // TODO - Merge these two vars into one
+
+    let values = await initializeCampaign(campaignQuery, initializedData.campaignId, context.props.auth.accessToken);
+    [initializedData.campaign, initializedData.adSets] = await initializeCampaign(campaignQuery, initializedData.campaignId, context.props.auth.accessToken);
     initializedData.selectedAdSet = 0;
     initializedData.selectedAd = 0;
     initializedData.validations = initializeValidations();
     initializedData.form = "campaignForm";
+
+    console.log(initializedData);
+
     return initializedData;
 }
 
@@ -56,72 +61,252 @@ function initializeCreativeOptions(creatives) {
     return creativeOptions;
 }
 
-function initializeCampaign() {
+async function initializeCampaign(query, campaignId, accessToken) {
 
-    // Calculate timezone offset in ms
-    var tzoffset = (new Date()).getTimezoneOffset() * 60000;
+    let campaign;
+    let adSets = [] as any;
 
-    let campaign = {
-        objective: '',
-        name: '',
-        startTime: (new Date(Date.now() - tzoffset)).toISOString().slice(0, -5),
-        endTime: (new Date(new Date().setHours(23, 59, 59, 999) - tzoffset)).toISOString().slice(0, -5),
-        dailyFrequencyCap: '',
-        geoTargets: '',
-        currency: { value: 'usd', label: 'USD' },
-        dailyBudget: '',
-        totalBudget: '',
-        cpm: true,
-        cpc: false,
-        bid: '',
-    }
-    return campaign;
-}
 
-function initializeAdSets() {
-    let adSets = [
-        {
-            pricingType: { value: 'cpm', label: 'Impressions (cpm)' },
-            bid: '',
-            lifetimeImpressions: '',
-            dailyImpressions: '',
-            braveML: true,
-            audiences: '',
-            platforms: [
-                { value: "_Bt5nxrNo", label: "macos" },
-                { value: "k80syyzDa", label: "ios" },
-                { value: "i1g4cO6Pl", label: "windows" },
-                { value: "-Ug5OXisJ", label: "linux" },
-                { value: "mbwfZU-4W", label: "android" },
-            ],
-            conversion: {
+    if (campaignId) {
+        let data = await fetchData(query(campaignId), accessToken)
+
+        let geoTargets = [] as any;
+        data.campaign.geoTargets.forEach((geoCode) => {
+            geoTargets.push({ value: geoCode.code, label: geoCode.name })
+        });
+        if (geoTargets.length === 0) {
+            geoTargets = '';
+        }
+
+        let currency = { value: 'usd', label: 'USD' };
+        if (data.campaign.currency === "BAT") {
+            currency = { value: 'bat', label: 'BAT' };
+        }
+
+        let formatBudget = (budget) => {
+            let formattedString = budget.toString().replace(/[^\d.]/g, '');
+            formattedString = parseFloat(formattedString).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            if (currency.label === "USD") {
+                formattedString = "$" + formattedString;
+            }
+            else {
+                formattedString = formattedString + " BAT";
+            }
+            if (formattedString.includes("NaN")) {
+                formattedString = '';
+            }
+            return formattedString
+        }
+
+        let state = 'active'
+
+        if (data.campaign.state === "active" || data.campaign.state === "daycomplete") {
+            state = 'active'
+        } else if (data.campaign.state === "under_review") {
+            state = 'under_review'
+        } else {
+            state = 'paused'
+        }
+
+        let price = data.campaign.adSets[0].ads[0].prices[0].amount;
+
+        let globalBillingType = { value: 'cpm', label: 'Impressions (cpm)' };
+        if (data.campaign.adSets[0].billingType === 'cpc') {
+            globalBillingType = { value: 'cpc', label: 'Clicks (cpc)' };
+        }
+
+        campaign = {
+            objective: '',
+            id: campaignId,
+            state,
+            name: data.campaign.name,
+            startTime: moment(data.campaign.startAt).format('YYYY-MM-DD[T]HH:mm'),
+            endTime: moment(data.campaign.endAt).format('YYYY-MM-DD[T]HH:mm'),
+            dailyFrequencyCap: data.campaign.dailyCap,
+            geoTargets,
+            currency,
+            dailyBudget: formatBudget(data.campaign.dailyBudget),
+            totalBudget: formatBudget(data.campaign.budget),
+            spend: formatBudget(data.campaign.spent),
+            editMode: true,
+            price: formatBudget(price),
+            globalBillingType
+        }
+
+        data.campaign.adSets.forEach((adSet) => {
+            let pricingType = { value: 'cpm', label: 'Impressions (cpm)' };
+            if (adSet.billingType === 'cpc') {
+                pricingType = { value: 'cpc', label: 'Clicks (cpc)' };
+            }
+            let audiences = [] as any;
+            let braveML = false;
+            adSet.segments.forEach((segment) => {
+                audiences.push({ value: segment.code, label: segment.name })
+            })
+            if (audiences.length === 0) {
+                audiences = '';
+                braveML = true;
+            }
+            let platforms = [] as any;
+            adSet.oses.forEach((os) => {
+                platforms.push({ value: os.code, label: os.name })
+            })
+            if (platforms.length === 0) {
+                platforms = [
+                    { value: "_Bt5nxrNo", label: "macos" },
+                    { value: "k80syyzDa", label: "ios" },
+                    { value: "i1g4cO6Pl", label: "windows" },
+                    { value: "-Ug5OXisJ", label: "linux" },
+                    { value: "mbwfZU-4W", label: "android" },
+                ];
+            }
+            if (platforms.length === 0) {
+                platforms = [
+                    { value: "_Bt5nxrNo", label: "macos" },
+                    { value: "k80syyzDa", label: "ios" },
+                    { value: "i1g4cO6Pl", label: "windows" },
+                    { value: "-Ug5OXisJ", label: "linux" },
+                    { value: "mbwfZU-4W", label: "android" },
+                ];
+            }
+
+            let conversion = {
                 type: 'postview',
                 url: '',
                 observationWindow: { value: 30, label: "30" },
-            },
-            ads: [
-                {
-                    creative: '',
-                    newCreative: true,
-                    name: '',
-                    title: '',
-                    body: '',
-                    targetUrl: '',
-                    creativeUrl: '',
-                    size: '',
-                    notificationAd: true,
-                    inPageAd: false,
-                    channels: '',
-                    previewAssets: {
+            } as any;
+
+            if (adSet.conversions[0]) {
+                conversion = {
+                    type: adSet.conversions[0].type,
+                    url: adSet.conversions[0].urlPattern,
+                    observationWindow: { value: adSet.conversions[0].observationWindow, label: adSet.conversions[0].observationWindow.toString() }
+                }
+            }
+
+            let ads = [] as any;
+
+            adSet.ads.forEach((ad) => {
+                if (ad.state !== 'deleted') {
+                    let state = 'active'
+
+                    if (ad.creative.state === "active") {
+                        state = 'active'
+                    } else if (ad.creative.state === "under_review") {
+                        state = 'under_review'
+                    }
+                    else {
+                        state = 'paused'
+                    }
+                    ads.push({
+                        id: ad.id,
+                        creative: ad.creative.id,
+                        newCreative: false,
+                        state,
+                        name: ad.creative.name,
+                        title: ad.creative.payload.title,
+                        body: ad.creative.payload.body,
+                        targetUrl: ad.creative.payload.targetUrl,
+                        creativeUrl: '',
+                        size: '',
+                        notificationAd: true,
+                        inPageAd: false,
+                        channels: '',
+                        previewAssets: {
+                            title: ad.creative.payload.title,
+                            body: ad.creative.payload.body,
+                            creativeUrl: '',
+                        }
+                    });
+                }
+            })
+
+            adSets.push({
+                id: adSet.id,
+                newAdSet: false,
+                pricingType,
+                bid: formatBudget(price),
+                lifeTimeImpressions: adSet.totalMax,
+                dailyImpressions: adSet.perDay,
+                braveML,
+                audiences,
+                platforms,
+                conversion,
+                ads
+            })
+        });
+    } else {
+
+        campaign = {
+            objective: '',
+            id: '',
+            name: '',
+            startTime: moment().format('YYYY-MM-DD[T]HH:mm'),
+            endTime: moment().add(1, "month").format('YYYY-MM-DD[T]HH:mm'),
+            dailyFrequencyCap: '',
+            geoTargets: '',
+            currency: { value: 'usd', label: 'USD' },
+            dailyBudget: '',
+            totalBudget: '',
+            cpm: true,
+            cpc: false,
+            bid: '',
+            state: "active",
+            editMode: false
+        }
+
+
+
+        adSets = [
+            {
+                id: '',
+                newAdSet: true,
+                pricingType: { value: 'cpm', label: 'Impressions (cpm)' },
+                bid: '',
+                lifetimeImpressions: '',
+                dailyImpressions: '',
+                braveML: true,
+                audiences: '',
+                platforms: [
+                    { value: "_Bt5nxrNo", label: "macos" },
+                    { value: "k80syyzDa", label: "ios" },
+                    { value: "i1g4cO6Pl", label: "windows" },
+                    { value: "-Ug5OXisJ", label: "linux" },
+                    { value: "mbwfZU-4W", label: "android" },
+                ],
+                conversion: {
+                    type: 'postview',
+                    url: '',
+                    observationWindow: { value: 30, label: "30" },
+                },
+                ads: [
+                    {
+                        id: '',
+                        creative: '',
+                        newCreative: true,
+                        state: 'under_review',
+                        name: '',
                         title: '',
                         body: '',
+                        targetUrl: '',
                         creativeUrl: '',
+                        size: '',
+                        notificationAd: true,
+                        inPageAd: false,
+                        channels: '',
+                        previewAssets: {
+                            title: '',
+                            body: '',
+                            creativeUrl: '',
+                        }
                     }
-                }
-            ]
-        }
-    ]
-    return adSets;
+                ]
+            }
+        ]
+
+    }
+
+    return [campaign, adSets];
 }
 
 // function initializeAds() {
@@ -157,10 +342,18 @@ export function performValidation(context, validationRule, campaign, adSets, ads
         validations.campaignName.valid = false;
         validations.campaignName.errorMessage = "Campaign name is required, please set a campaign name.";
     }
-    if (campaign.startTime > campaign.endTime && (validationRule === "campaignForm" || validationRule === 'all')) {
+    if (moment(campaign.startTime) > moment(campaign.endTime) && (validationRule === "campaignForm" || validationRule === 'all')) {
         validations.schedule = {} as any;
         validations.schedule.valid = false;
         validations.schedule.errorMessage = "Campaign end date cannot be before start date";
+    }
+
+    if (campaign.editMode) {
+        if (moment(campaign.endTime) < moment() && (validationRule === "campaignForm" || validationRule === 'all')) {
+            validations.endTimeSchedule = {} as any;
+            validations.endTimeSchedule.valid = false;
+            validations.endTimeSchedule.errorMessage = "Campaign end date can only be updated to the future";
+        }
     }
 
     let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: "numeric" };
@@ -184,6 +377,16 @@ export function performValidation(context, validationRule, campaign, adSets, ads
         validations.budget.valid = false;
         validations.budget.errorMessage = "Daily budget cannot be greater than lifetime budget.";
     }
+
+    if (campaign.editMode) {
+        if (parseFloat(campaign.totalBudget.replace(/[^\d.]/g, '')) < parseFloat(campaign.spend.replace(/[^\d.]/g, '')) && (validationRule === "campaignForm" || validationRule === 'all')) {
+            validations.budgetSpend = {} as any;
+            validations.budgetSpend.valid = false;
+            validations.budgetSpend.errorMessage = "Budget cannot be less than current campaign spend.";
+        }
+    }
+
+
     if (campaign.geoTargets === '' || campaign.geoTargets === null) {
         validations.geoTargets = {} as any;
         validations.geoTargets.valid = false;

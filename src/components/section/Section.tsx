@@ -5,7 +5,7 @@ class Section extends Component<any, any> {
 
     render() {
 
-        let marginBottom = "56px";
+        let marginBottom = "56px;";
         if (this.props.marginBottom) {
             marginBottom = this.props.marginBottom;
         }
