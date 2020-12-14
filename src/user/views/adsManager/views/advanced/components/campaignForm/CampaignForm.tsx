@@ -151,12 +151,18 @@ class CampaignForm extends Component<any, any> {
     }
 
     addAdSet() {
+        let pricingType = '';
+        let bid = '';
+        if (this.props.campaign.editMode) {
+            pricingType = this.props.campaign.globalBillingType;
+            bid = this.props.campaign.price;
+        }
         let adSets = this.props.adSets;
         adSets.push({
             id: '',
-            pricingType: '',
+            pricingType,
             newAdSet: true,
-            bid: '',
+            bid,
             lifetimeImpressions: '',
             dailyImpressions: '',
             braveML: true,
@@ -264,7 +270,7 @@ class CampaignForm extends Component<any, any> {
                                         </div>
 
                                         <div style={{ display: "flex", width: "100%", alignItems: "center" }}>
-                                            {moment(this.props.campaign.startTime) <= moment() ?
+                                            {(moment(this.props.campaign.startTime) <= moment() && this.props.campaign.editMode) ?
                                                 <S.InputContainer style={{ width: "45%" }}>
                                                     <div style={{ display: "flex" }}>
                                                         <Text content={"Start Date"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />

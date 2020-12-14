@@ -33,6 +33,7 @@ class AdsForm extends Component<any, any> {
         adSets[this.props.selectedAdSet].ads.push({
             creative: '',
             newCreative: true,
+            state: 'active',
             name: '',
             title: '',
             body: '',
@@ -453,7 +454,7 @@ class AdsForm extends Component<any, any> {
                                                     </S.InputContainer>
                                                 </>
                                             }
-                                            {(!this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].newCreative) &&
+                                            {(!this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].newCreative && this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].state !== "under_review") &&
                                                 <div style={{ width: "45%", marginBottom: "28px" }}>
                                                     <div style={{ display: "flex" }}>
                                                         <Text content={"Ad State"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />

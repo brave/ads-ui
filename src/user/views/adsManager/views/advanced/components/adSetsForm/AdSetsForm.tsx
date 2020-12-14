@@ -195,7 +195,7 @@ class AdSetsForm extends Component<any, any> {
                     <div style={{ width: "720px" }}>
                         <Section fullWidthChild={true}>
                             <>
-                                {this.props.adSets[this.props.selectedAdSet].newAdSet &&
+                                {!this.props.campaign.editMode &&
                                     <>
                                         <S.InnerContainer>
                                             <S.RightColumn>

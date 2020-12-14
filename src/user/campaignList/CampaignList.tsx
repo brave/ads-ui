@@ -36,10 +36,11 @@ const CampaignList = props => {
                         <Link style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} to={`campaign/${props.row.original.id}/analytics/overview`}>
                             <div style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} title={props.row.original.name}>{props.row.original.name}</div>
                         </Link>
-
-                        <Link style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", marginTop: '8px', fontSize: "10px" }} to={`/user/main/adsmanager/advanced?userId=${userId}&advertiserId=${advertiserId}&campaignId=${props.row.original.id}`}>
-                            <div style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} title={props.row.original.name}>Edit</div>
-                        </Link>
+                        { advertiserId === '84f72479-ede2-4b74-8ca4-11f3c0b276ba' &&
+                            <Link style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", marginTop: '8px', fontSize: "10px" }} to={`/user/main/adsmanager/advanced?userId=${userId}&advertiserId=${advertiserId}&campaignId=${props.row.original.id}`}>
+                                <div style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} title={props.row.original.name}>Edit</div>
+                            </Link>
+                        }
                     </div>
                 )
             }

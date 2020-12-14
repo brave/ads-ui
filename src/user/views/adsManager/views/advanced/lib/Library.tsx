@@ -108,6 +108,13 @@ async function initializeCampaign(query, campaignId, accessToken) {
             state = 'paused'
         }
 
+        let price = data.campaign.adSets[0].ads[0].prices[0].amount;
+
+        let globalBillingType = { value: 'cpm', label: 'Impressions (cpm)' };
+        if (data.campaign.adSets[0].billingType === 'cpc') {
+            globalBillingType = { value: 'cpc', label: 'Clicks (cpc)' };
+        }
+
         campaign = {
             objective: '',
             id: campaignId,
@@ -122,9 +129,9 @@ async function initializeCampaign(query, campaignId, accessToken) {
             totalBudget: formatBudget(data.campaign.budget),
             spend: formatBudget(data.campaign.spent),
             editMode: true,
+            price: formatBudget(price),
+            globalBillingType
         }
-
-        let price = data.campaign.adSets[0].ads[0].prices[0].amount;
 
         data.campaign.adSets.forEach((adSet) => {
             let pricingType = { value: 'cpm', label: 'Impressions (cpm)' };
@@ -180,7 +187,7 @@ async function initializeCampaign(query, campaignId, accessToken) {
             let ads = [] as any;
 
             adSet.ads.forEach((ad) => {
-                if (ad.creative.state !== 'deleted') {
+                if (ad.state !== 'deleted') {
                     let state = 'active'
 
                     if (ad.creative.state === "active") {
@@ -277,7 +284,7 @@ async function initializeCampaign(query, campaignId, accessToken) {
                         id: '',
                         creative: '',
                         newCreative: true,
-                        state: 'active',
+                        state: 'under_review',
                         name: '',
                         title: '',
                         body: '',

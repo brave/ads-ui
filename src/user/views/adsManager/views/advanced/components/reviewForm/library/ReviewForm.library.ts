@@ -7,7 +7,6 @@ async function processAdSets(adSets, userId, advertiserId, accessToken, campaign
     if (adSets) {
         for (const adSet of adSets) {
             let createAdSetInput = {
-                id: adSet.id,
                 execution: "per_click",
                 perDay: 1,
                 totalMax: 10,
@@ -253,7 +252,7 @@ async function processAd(ad, adSetId, pricingType, bid, userId, advertiserId, ac
     entry.id = ad.id;
     entry.creativeId = creativeId;
     entry.creativeSetId = adSetId;
-    entry.state = 'active';
+    entry.state = ad.state;
 
     if (pricingType.value === "cpm") {
         entry.prices = `[{ amount: ${parseFloat(bid.replace(/[^0-9\.]/g, ''))}, type: "view" }]`
@@ -341,10 +340,10 @@ export async function submitOrder(userId, advertiserId, campaign, adSets, access
 
             for (const ad of adSet.ads) {
                 if (ad.newCreative === true) {
-                    console.log(adSet.id);
                     let processedAd = await processAd(ad, adSet.id, adSet.pricingType, adSet.bid, userId, advertiserId, accessToken);
                     let response = await graphQLRequest(createAdMutation(processedAd[0]), accessToken);
                 } else {
+                    console.log("processing " + ad.id);
                     let processedAd = await processAd(ad, adSet.id, adSet.pricingType, adSet.bid, userId, advertiserId, accessToken);
                     let response = await graphQLRequest(updateAdMutation(processedAd[0]), accessToken);
                 }

@@ -70,7 +70,6 @@ export function createAdSetMutation(createAdSetInput) {
 `};
 
 export function updateAdSetMutation(createAdSetInput) {
-    console.log(createAdSetInput);
     return `
     mutation{
         updateAdSet(
@@ -92,6 +91,7 @@ export function updateAdSetMutation(createAdSetInput) {
 `};
 
 export function createAdMutation(createAdInput) {
+    console.log(createAdInput);
     return `
     mutation{
         createAd(
@@ -113,11 +113,8 @@ export function updateAdMutation(createAdInput) {
     mutation{
         updateAd(
             updateAdInput: {
-                creativeSetId: "${createAdInput.creativeSetId}"
+                id: "${createAdInput.id}"
                 state: "${createAdInput.state}"
-                creativeId: "${createAdInput.creativeId}"
-                prices: ${createAdInput.prices}
-                webhooks: []
             }
         ){
             id

@@ -519,7 +519,7 @@ class ReviewForm extends Component<any, any> {
                         </Section>
                         {this.renderAdSets()}
                         <div>
-                            {/* {
+                            {
                                 this.props.validations.valid === false && (
                                     <>
                                         {this.props.campaign.editMode ?
@@ -533,9 +533,9 @@ class ReviewForm extends Component<any, any> {
                                         }
                                     </>
                                 )
-                            } */}
+                            }
                             {
-                                (this.state.saving === false) &&
+                                (this.props.validations.valid !== false && this.state.saving === false) &&
                                 <S.Button onClick={() => { this.handleSubmit() }} style={{ marginLeft: "auto", width: "200px" }}>
                                     {this.props.campaign.editMode ?
                                         <Text content={"Update Campaign"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
