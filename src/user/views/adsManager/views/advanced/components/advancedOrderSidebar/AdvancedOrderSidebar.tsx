@@ -79,7 +79,9 @@ class AdvancedOrderSidebar extends Component<any, any> {
             adSets = this.props.adSets.map((adSet, index) => {
                 return (
                     <S.Nav onClick={() => clickHandler(index)} selected={(this.props.form === "adSetsForm" || this.props.form === "adsForm") && this.props.selectedAdSet === index}>
-                        <div onClick={(e) => this.showDeleteAdSetModal(e, true, index)} style={((this.props.form === "adSetsForm" || this.props.form === "adsForm") && this.props.selectedAdSet === index) ? { top: 10, right: 7, position: "absolute" } : { top: 10, right: 10, position: "absolute" }}><Icon style={{ fontSize: "18px" }}>more_vert</Icon></div>
+                        { adSet.newAdSet &&
+                            <div onClick={(e) => this.showDeleteAdSetModal(e, true, index)} style={((this.props.form === "adSetsForm" || this.props.form === "adsForm") && this.props.selectedAdSet === index) ? { top: 10, right: 7, position: "absolute" } : { top: 10, right: 10, position: "absolute" }}><Icon style={{ fontSize: "18px" }}>more_vert</Icon></div>
+                        }
                         {
                             this.renderModal(index)
                         }

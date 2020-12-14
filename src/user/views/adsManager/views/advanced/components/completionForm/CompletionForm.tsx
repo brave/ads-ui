@@ -21,7 +21,11 @@ class CompletionForm extends Component<any, any> {
                                 <img src={present} style={{ width: "400px", marginLeft: "auto", marginRight: "auto" }} />
                                 <Text content={"Congratulations!"} sizes={[16, 16, 15, 15, 28]} fontFamily={"Poppins"} />
                                 <div style={{ width: "75%" }}>
-                                    <Text style={{ textAlign: "center", marginTop: "8px" }} content={"Your campaign has been created and is now being reviewed by our ads team, we'll send you an e-mail as soon as your campaign is approved and activated. Thank you for using Brave Ads!"} sizes={[16, 16, 15, 15, 15]} fontFamily={"Poppins"} />
+                                    {this.props.editMode ?
+                                        <Text style={{ textAlign: "center", marginTop: "8px" }} content={"Your campaign has been updated and new creatives will be reviewed by our ads team, we'll send you an e-mail as soon as your creatives are approved and activated. Thank you for using Brave Ads!"} sizes={[16, 16, 15, 15, 15]} fontFamily={"Poppins"} />
+                                        :
+                                        <Text style={{ textAlign: "center", marginTop: "8px" }} content={"Your campaign has been created and is now being reviewed by our ads team, we'll send you an e-mail as soon as your campaign is approved and activated. Thank you for using Brave Ads!"} sizes={[16, 16, 15, 15, 15]} fontFamily={"Poppins"} />
+                                    }
                                 </div>
                                 <Link style={linkStyle} to={"/admin/main/dashboard"}>
                                     <div onClick={() => { }} style={{ display: "flex", justifyContent: "center", padding: "0px 20px", width: "100px", background: "#4C54D2", color: "white", border: "none", borderRadius: "100px 100px 100px 100px", marginTop: "16px", cursor: "pointer" }}>
