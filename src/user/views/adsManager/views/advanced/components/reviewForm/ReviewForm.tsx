@@ -520,6 +520,17 @@ class ReviewForm extends Component<any, any> {
                         {this.renderAdSets()}
                         <div>
                             {
+                                this.props.campaign.editMode &&
+                                <S.ErrorContainer style={{ marginTop: "0px", marginBottom: "16px" }}>
+                                    <S.ErrorIcon>
+                                        <Icon style={{ color: "white", fontSize: "24px" }}>info</Icon>
+                                    </S.ErrorIcon>
+                                    <S.ErrorMessage>
+                                        <Text content={"Please note, changes may not take full effect until start of the next day (UTC)"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
+                                    </S.ErrorMessage>
+                                </S.ErrorContainer>
+                            }
+                            {
                                 this.props.validations.valid === false && (
                                     <>
                                         {this.props.campaign.editMode ?
