@@ -70,7 +70,6 @@ export function campaignQuery(campaignId) {
         }
         ads {
           id
-          name
           state
           prices{
             amount
