@@ -157,6 +157,8 @@ async function processCampaign(userId, advertiserId, campaign, adSets, accessTok
     if (campaign.editMode) {
         if (campaign.state === "active") {
             createCampaignInput.state = 'active'
+        } else if (campaign.state === "under_review") {
+            createCampaignInput.state = 'under_review"'
         } else {
             createCampaignInput.state = 'paused'
         }
