@@ -31,10 +31,17 @@ class Authentication extends React.Component<any, any> {
   private getRedirect() {
     const { advertisers, auth } = this.props;
     if (auth && auth.signedIn) {
-      const activeAdvertiser = _.find(advertisers, { state: "active" });
-      return <Redirect to="/a" />;
-    }
-    else {
+      if (!auth.emailVerified) {
+        return <Redirect to="/auth/verify" />;
+      } else {
+        const activeAdvertiser = _.find(advertisers, { state: "active" });
+        if (!activeAdvertiser) {
+          return <Redirect to="/auth/wait" />;
+        } else {
+          return <Redirect to="/a" />;
+        }
+      }
+    } else {
       return <Redirect to="/auth/signin" />;
     }
   }
