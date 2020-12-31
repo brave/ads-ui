@@ -141,6 +141,9 @@ async function initializeCampaign(query, campaignId, accessToken) {
             let audiences = [] as any;
             let braveML = false;
             adSet.segments.forEach((segment) => {
+                if (segment.name = 'untargeted') {
+                    braveML = true;
+                }
                 audiences.push({ value: segment.code, label: segment.name })
             })
             if (audiences.length === 0) {
