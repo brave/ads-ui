@@ -294,7 +294,7 @@ async function processCreativeId(ad, advertiserId, accessToken, userId) {
         let payload = JSON.stringify({
             title: ad.title,
             body: ad.body,
-            targetUrl: normalizeUrl(ad.targetUrl, { forceHttps: true })
+            targetUrl: normalizeUrl(ad.targetUrl, { forceHttps: true, removeQueryParameters: undefined, sortQueryParameters: false, stripWWW: false })
         }).replace(/\"([^(\")"]+)\":/g, "$1:");
 
         createCreativeInput.payload = payload;
