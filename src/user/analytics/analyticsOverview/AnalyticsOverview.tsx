@@ -74,6 +74,10 @@ const AnalyticsOverview = props => {
     let currency;
     let state;
 
+    // This is an display a notification banner at the top of reporting pages
+    let showNotificationBanner = false;  // set to true if necessary
+    let bannerMessage = "NOTICE: We are experiencing trouble with our reporting dashboard. If you have questions, please contact your Account Manager.";
+
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
@@ -139,6 +143,14 @@ const AnalyticsOverview = props => {
                             }
                         </div>
                     </div>
+
+								{/* Notification Banner */}
+                {
+                  showNotificationBanner &&
+                  <div style={{ width: "100%", display: "flex", alignItems: "center", marginBottom: "28px", borderRadius: "4px", border: "1px solid #E32444", justifyContent: "center"}}>
+                    <Text style={{ marginTop: "4px" }} color={"#E32444"} content={bannerMessage} fontFamily={"Poppins"} sizes={[16, 16, 15, 15, 14]} />
+                  </div>
+                }
 
                     <div style={{ display: "flex" }}>
 
