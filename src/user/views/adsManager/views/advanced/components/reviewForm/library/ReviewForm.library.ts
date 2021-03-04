@@ -1,6 +1,4 @@
 import { createAdMutation, createAdSetMutation, createCampaignMutation, createCreativeMutation, updateAdMutation, updateAdSetMutation, updateCampaignMutation } from "./ReviewForm.queries";
-import normalizeUrl from 'normalize-url';
-
 
 async function processAdSets(adSets, userId, advertiserId, accessToken, campaign) {
     let createAdSetsInput = [] as any;
@@ -291,10 +289,13 @@ async function processCreativeId(ad, advertiserId, accessToken, userId) {
         }).replace(/\"([^(\")"]+)\":/g, "$1:");
         createCreativeInput.type = type;
 
+        let targetUrl = ad.targetUrl;
+        targetUrl = targetUrl.replace(/^http:\/\//i, 'https://');
+
         let payload = JSON.stringify({
             title: ad.title,
             body: ad.body,
-            targetUrl: normalizeUrl(ad.targetUrl, { forceHttps: true })
+            targetUrl: targetUrl
         }).replace(/\"([^(\")"]+)\":/g, "$1:");
 
         createCreativeInput.payload = payload;
