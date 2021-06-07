@@ -88,7 +88,7 @@ class Navbar extends React.Component<any, any> {
                                     <span>
                                         <Text style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"}>
                                             New Campaign
-                                    </Text>
+                                      </Text>
                                     </span>
                                 </div>
                             </Link>
@@ -96,6 +96,8 @@ class Navbar extends React.Component<any, any> {
                         <S.SubContainer>
                             <div style={{ width: "1px", height: "20px", borderLeft: "2px solid #EDEDED" }}></div>
                         </S.SubContainer>
+
+                        {/* COMMENT OUT UNTIL FUNCTIONAL
                         <S.SubContainer>
                             <Text style={{ marginTop: "6px", marginBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"}>
                                 Help Center
@@ -104,8 +106,10 @@ class Navbar extends React.Component<any, any> {
                         <S.SubContainer>
                             <Text style={{ marginTop: "6px", marginBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"}>
                                 Messages
-                                    </Text>
+                            </Text>
                         </S.SubContainer>
+                        */}
+
                         <OutsideAlerter onOutsideClick={this.closeMenu}>
                             <S.SubContainer style={{ position: "relative" }}>
                                 <Text onClick={this.toggleMenu} content={"Account"} style={{ marginTop: "6px", marginBottom: "6px", cursor: "pointer" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
