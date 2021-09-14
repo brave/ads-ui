@@ -1,0 +1,25 @@
+name: Deploy to Production
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Deploy static files
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_PRODUCTION_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PRODUCTION_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-west-2
+          CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_PRODUCTION_DISTRIBUTION_ID_PREMIUM }}
+          REACT_APP_SERVER_ADDRESS: ${{ secrets.REACT_PRODUCTION_APP_SERVER_ADDRESS }}
+        run: |
+          cd ./html
+          aws s3 sync . s3://ads-ui-production/ --delete
+          aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
+
