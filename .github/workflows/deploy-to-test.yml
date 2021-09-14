@@ -1,7 +1,7 @@
 name: Deploy to Staging
 on:
   push:
-    branches: [ dev ]
+    branches: [ linh-add-github-action ]
   workflow_dispatch:
 
 jobs:
