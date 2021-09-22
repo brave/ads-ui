@@ -20,6 +20,6 @@ jobs:
           REACT_APP_SERVER_ADDRESS: ${{ secrets.REACT_STAGING_APP_SERVER_ADDRESS }}
         run: |
           npm install
-          npm run build
+          CI=false npm run build
           aws s3 sync build/ s3://ads-ui-staging/ --delete
           aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
