@@ -44,12 +44,23 @@ class SignInContainer extends React.Component<any, any> {
           email: this.state.email,
           password: this.state.password
         })
-      } as any);
-    let data = await resp.json();
+      });
 
-    if (data === `Error in authentication Error: {"error":"Invalid email or password","statusCode":400}`) {
-      alert("The username or password did not match our records. Please try again.");
+    if (resp.status === 400) {
+      alert(
+        "The username or password did not match our records. Please try again."
+      );
+      return;
     }
+
+    if (!resp.ok) {
+      alert(
+        `Unexpected error ${resp.status} validating your credentials. Please try again later.`
+      );
+      return;
+    }
+  
+    let data = await resp.json();
 
     if (data.accessToken) {
       const auth = await this.props.signin({ email: this.state.email, password: this.state.password, accessToken: data.accessToken });
@@ -57,7 +68,8 @@ class SignInContainer extends React.Component<any, any> {
     }
 
     if (data.error) {
-      alert("Error " + data.error)
+      alert("Error " + data.error);
+      return;
     }
 
     if (data.allowCredentials) {
