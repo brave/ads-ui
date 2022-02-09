@@ -11,6 +11,7 @@ export function createCampaignMutation(createCampaignInput) {
                 externalId: ""
                 type: "paid"
                 source: "direct"
+                format: PUSH_NOTIFICATION,
                 currency: "${createCampaignInput.currency}"
                 budget: ${createCampaignInput.budget}
                 dailyCap: ${createCampaignInput.dailyCap}

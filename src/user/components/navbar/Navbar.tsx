@@ -34,6 +34,16 @@ TopBarProgress.config({
     barThickness: 2,
 });
 
+const NEW_CAMPAIGN_ADVERTISER_ALLOW_LIST = [
+  "8cfac071-75f8-46ab-9c7f-4f8420d914d7",  // bsa
+  "8fc27541-4933-447b-93eb-50b4e4714fbb",  // graham's test advertiser (staging)
+  "93130af3-2def-4ecb-b836-b3772e73b3c9", // Fung (staging)
+];
+
+function shouldShowNewCampaign(advertiserId: string): boolean {
+    return NEW_CAMPAIGN_ADVERTISER_ALLOW_LIST.includes(advertiserId);
+}
+
 class Navbar extends React.Component<any, any> {
     static contextType = Context;
     constructor(props) {
@@ -80,32 +90,26 @@ class Navbar extends React.Component<any, any> {
                         </S.SearchContainer>
                     </S.SubContainer> */}
                     <S.SubContainer
-                        style={{ justifyContent: "space-between", width: "450px" }}
+                        style={{ justifyContent: "flex-end", gap: "16px" }}
                     >
-                        <S.SubContainer>
-                            <Link style={linkStyle} to={`/user/main/adsmanager/selection?userId=${this.props.userId}&advertiserId=${this.props.advertiserId}`}>
-                                <div style={{ padding: "0px 20px", background: "#4C54D2", color: "white", border: "none", borderRadius: "100px 100px 100px 100px" }}>
-                                    <span>
-                                        <Text style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"}>
-                                            New Campaign
-                                    </Text>
-                                    </span>
-                                </div>
-                            </Link>
-                        </S.SubContainer>
-                        <S.SubContainer>
-                            <div style={{ width: "1px", height: "20px", borderLeft: "2px solid #EDEDED" }}></div>
-                        </S.SubContainer>
-                        <S.SubContainer>
-                            <Text style={{ marginTop: "6px", marginBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"}>
-                                Help Center
-                            </Text>
-                        </S.SubContainer>
-                        <S.SubContainer>
-                            <Text style={{ marginTop: "6px", marginBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"}>
-                                Messages
-                                    </Text>
-                        </S.SubContainer>
+                        {shouldShowNewCampaign(this.props.advertiserId) &&
+                        <>
+                            <S.SubContainer>
+                                <Link style={linkStyle} to={`/user/main/adsmanager/selection?userId=${this.props.userId}&advertiserId=${this.props.advertiserId}`}>
+                                    <div style={{ padding: "0px 20px", background: "#4C54D2", color: "white", border: "none", borderRadius: "100px 100px 100px 100px" }}>
+                                        <span>
+                                            <Text style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"}>
+                                                New Campaign
+                                        </Text>
+                                        </span>
+                                    </div>
+                                </Link>
+                            </S.SubContainer>
+                            <S.SubContainer>
+                                <div style={{ width: "1px", height: "20px", borderLeft: "2px solid #EDEDED" }}></div>
+                            </S.SubContainer>
+                        </>
+                        }
                         <OutsideAlerter onOutsideClick={this.closeMenu}>
                             <S.SubContainer style={{ position: "relative" }}>
                                 <Text onClick={this.toggleMenu} content={"Account"} style={{ marginTop: "6px", marginBottom: "6px", cursor: "pointer" }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Poppins"} />
