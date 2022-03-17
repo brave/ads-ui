@@ -16,6 +16,7 @@ campaign(id: $id){
         currency
         pacingIndex
         type
+        format
         engagements {
             createdat
             type
