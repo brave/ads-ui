@@ -102,7 +102,7 @@ const AnalyticsOverview = props => {
 
     if (loading) return <></>;
 
-    if (campaign.type === "fixed" || campaign.format !== "PUSH_NOTIFICATION") {
+    if (campaign.type === "fixed") {
         return <Text content="Reporting for this type of campaign is not yet available in self-serve reporting. Please contact your Account Manager for performance report requests."
          style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} 
          fontWeight={500} fontFamily={"Poppins"} />
