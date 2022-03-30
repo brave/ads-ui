@@ -1,6 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
-
-import * as _ from "lodash";
+import React, {  } from "react";
 
 import Section from "../../components/section/Section";
 
@@ -17,12 +15,11 @@ import * as S from "./style/CampaignList.style";
 const CampaignList = props => {
 
 
-    const { match } = props;
 
     const userId = props.userId;
     const advertiserId = props.advertiserId;
 
-    const { loading, error, data } = useQuery(CAMPAIGN_LIST, {
+    const { loading, data } = useQuery(CAMPAIGN_LIST, {
         variables: { id: props.advertiserId }
     });
 

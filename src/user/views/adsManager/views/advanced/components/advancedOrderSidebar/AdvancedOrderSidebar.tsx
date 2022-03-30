@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { Text } from "../../../../../../../components/Text/Text";
 
 import * as S from "./styles/AdvancedOrderSidebar.style";
@@ -7,8 +6,7 @@ import { Icon } from '@material-ui/core';
 import Modal from '../../../../../../../components/modal/Modal';
 
 
-const unselectedStyle = { top: 10, right: 10, position: "absolute" }
-const selectedStyle = { top: 10, right: 10, position: "absolute" }
+
 
 class AdvancedOrderSidebar extends Component<any, any> {
 

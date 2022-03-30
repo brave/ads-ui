@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Context from "../../../../../state/context";
 
 
-import FormProgress from './components/formProgress/FormProgress';
 import CampaignForm from './components/campaignForm/CampaignForm';
 import AdSetsForm from './components/adSetsForm/AdSetsForm';
 import AdsForm from './components/adsForm/AdsForm';
@@ -37,7 +36,6 @@ class Advanced extends Component<any, any> {
     }
 
     public async initialize() {
-        let start = await this.context.setLoading(true);
         this.context.setSidebar("hidden");
         this.handleBrowserNav();
         let that = this;
@@ -48,7 +46,7 @@ class Advanced extends Component<any, any> {
     }
 
     handleBrowserNav() {
-        window.addEventListener("popstate", e => {
+        window.addEventListener("popstate", () => {
             // Nope, go back to your page
             this.setForm("campaignForm");
             this.props.history.go(1);
@@ -125,11 +123,11 @@ class Advanced extends Component<any, any> {
     }
 }
 
-const mapStateToProps = (state: any, ownProps: any) => ({
+const mapStateToProps = (state: any) => ({
     auth: state.authReducer,
 });
 
-const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
+const mapDispatchToProps = () => ({
 });
 
 export default connect(

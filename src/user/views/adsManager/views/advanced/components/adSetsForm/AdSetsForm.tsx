@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import Section from '../../../../../../../components/section/Section';
 import { Text } from "../../../../../../../components/Text/Text";
 import * as S from "./AdSetsForm.style";
-import Switch from "react-switch";
 import Select from 'react-select';
 import { Icon } from '@material-ui/core';
 import RadioButton from '../../../../../../../components/radioButton/RadioButton';

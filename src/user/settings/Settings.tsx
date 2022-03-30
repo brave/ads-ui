@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
-import Section from "../../components/section/Section";
+import React, { useState } from "react";
 import { Text } from "../../components/Text/Text";
-import { Button, Input, InputContainer, TextArea } from "../../components/formElements/formElements";
+import { Button, Input, InputContainer } from "../../components/formElements/formElements";
 import Select from 'react-select';
 import _ from "lodash";
 import * as tweetnacl from "tweetnacl";
@@ -36,7 +35,7 @@ const Settings = props => {
     const [newKeypairModalState, setNewKeypairModalState] = useState('disclaimer');
 
     const customStyles = {
-        control: (provided, state) => ({
+        control: (provided) => ({
             ...provided,
             backgroundColor: "#fafafa"
         }),
@@ -97,7 +96,7 @@ const Settings = props => {
     }
 
 
-    const [updateAdvertiser, { loading: updateAdvertiserLoading, error: updateAdvertiserError }] =
+    const [updateAdvertiser] =
         useMutation(UPDATE_ADVERTISER, {
             variables: {
                 updateAdvertiserInput: {
@@ -108,7 +107,7 @@ const Settings = props => {
             onCompleted: handleUpdateAdvertiser
         });
 
-    const { loading: queryLoading, error: queryError, data } = useQuery(ADVERTISER, {
+    const { loading: queryLoading } = useQuery(ADVERTISER, {
         variables: { id: props.activeAdvertiser.id },
         onCompleted: initializeAdvertiser,
     });
@@ -176,20 +175,20 @@ const Settings = props => {
             >
                 {newKeypairModalState === 'disclaimer' &&
                     <div style={{ width: "600px" }}>
-                        <div onClick={(e) => { closeNewKeypairModal() }} style={{ display: "flex" }}>
+                        <div onClick={() => { closeNewKeypairModal() }} style={{ display: "flex" }}>
                             <Text content={`Create new keypair?`} sizes={[16, 16, 15, 15, 22]} color={"#E0694C"} fontFamily={"Poppins"} />
                             <Icon style={{ marginLeft: "auto", color: "grey", cursor: "pointer" }}>clear</Icon>
                         </div>
                         <Text style={{ marginTop: "42px" }} content={`You are attempting to create a new keypair, this will replace any of your organization's existing keypairs. Please note, previous keypairs cannot be retrieved or used once replaced.`} sizes={[16, 16, 15, 15, 16]} fontFamily={"Muli"} />
                         <div style={{ display: "flex", width: "100%", marginTop: "42px" }}>
-                            <div onClick={(e) => { closeNewKeypairModal() }} style={{ marginLeft: "auto", marginRight: "28px", display: "flex", justifyContent: "center", alignItems: "center", padding: "0px 20px", width: "100px", border: "1px solid #e2e2e2", borderRadius: "100px 100px 100px 100px", cursor: "pointer" }}>
+                            <div onClick={() => { closeNewKeypairModal() }} style={{ marginLeft: "auto", marginRight: "28px", display: "flex", justifyContent: "center", alignItems: "center", padding: "0px 20px", width: "100px", border: "1px solid #e2e2e2", borderRadius: "100px 100px 100px 100px", cursor: "pointer" }}>
                                 <span>
                                     <Text style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"}>
                                         Cancel
                                 </Text>
                                 </span>
                             </div>
-                            <div onClick={(e) => { setNewKeypairModalState('privateKey') }} style={{ display: "flex", justifyContent: "center", padding: "0px 20px", width: "100px", background: "#F87454", color: "white", border: "none", borderRadius: "100px 100px 100px 100px", cursor: "pointer" }}>
+                            <div onClick={() => { setNewKeypairModalState('privateKey') }} style={{ display: "flex", justifyContent: "center", padding: "0px 20px", width: "100px", background: "#F87454", color: "white", border: "none", borderRadius: "100px 100px 100px 100px", cursor: "pointer" }}>
                                 <span>
                                     <Text style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"}>
                                         Continue
@@ -201,7 +200,7 @@ const Settings = props => {
                 }
                 {newKeypairModalState === 'privateKey' &&
                     <div style={{ width: "600px" }}>
-                        <div onClick={(e) => { closeNewKeypairModal() }} style={{ display: "flex" }}>
+                        <div onClick={() => { closeNewKeypairModal() }} style={{ display: "flex" }}>
                             <Text content={`Create new keypair?`} sizes={[16, 16, 15, 15, 22]} color={"#E0694C"} fontFamily={"Poppins"} />
                             <Icon style={{ marginLeft: "auto", color: "grey", cursor: "pointer" }}>clear</Icon>
                         </div>
@@ -209,14 +208,14 @@ const Settings = props => {
                         <Input value={privateKey}></Input>
                         <Text style={{ marginTop: "28px", color: "#4C54D2" }} content={"Keep this safe! Brave cannot recover this key. Please note, you will have a chance to confirm your private key before changes are saved."} sizes={[16, 16, 15, 15, 15]} fontFamily={"Poppins"} />
                         <div style={{ display: "flex", width: "100%", marginTop: "42px" }}>
-                            <div onClick={(e) => { closeNewKeypairModal() }} style={{ marginLeft: "auto", marginRight: "28px", display: "flex", justifyContent: "center", alignItems: "center", padding: "0px 20px", width: "100px", border: "1px solid #e2e2e2", borderRadius: "100px 100px 100px 100px", cursor: "pointer" }}>
+                            <div onClick={() => { closeNewKeypairModal() }} style={{ marginLeft: "auto", marginRight: "28px", display: "flex", justifyContent: "center", alignItems: "center", padding: "0px 20px", width: "100px", border: "1px solid #e2e2e2", borderRadius: "100px 100px 100px 100px", cursor: "pointer" }}>
                                 <span>
                                     <Text style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"}>
                                         Cancel
                                 </Text>
                                 </span>
                             </div>
-                            <div onClick={(e) => { setNewKeypairModalState('confirmation') }} style={{ display: "flex", justifyContent: "center", padding: "0px 20px", width: "100px", background: "#F87454", color: "white", border: "none", borderRadius: "100px 100px 100px 100px", cursor: "pointer" }}>
+                            <div onClick={() => { setNewKeypairModalState('confirmation') }} style={{ display: "flex", justifyContent: "center", padding: "0px 20px", width: "100px", background: "#F87454", color: "white", border: "none", borderRadius: "100px 100px 100px 100px", cursor: "pointer" }}>
                                 <span>
                                     <Text style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"}>
                                         Continue
@@ -228,7 +227,7 @@ const Settings = props => {
                 }
                 {newKeypairModalState === 'confirmation' &&
                     <div style={{ width: "600px" }}>
-                        <div onClick={(e) => { closeNewKeypairModal() }} style={{ display: "flex" }}>
+                        <div onClick={() => { closeNewKeypairModal() }} style={{ display: "flex" }}>
                             <Text content={`Create new keypair?`} sizes={[16, 16, 15, 15, 22]} color={"#E0694C"} fontFamily={"Poppins"} />
                             <Icon style={{ marginLeft: "auto", color: "grey", cursor: "pointer" }}>clear</Icon>
                         </div>
@@ -236,7 +235,7 @@ const Settings = props => {
                         <Input value={newPrivateKey} onChange={(e) => { setNewPrivateKey(e.target.value) }}></Input>
                         <Text style={{ marginTop: "28px", color: "#4C54D2" }} content={"Once confirmed, your organization's keypair will be replaced with the new keypair."} sizes={[16, 16, 15, 15, 15]} fontFamily={"Poppins"} />
                         <div style={{ display: "flex", width: "100%", marginTop: "42px" }}>
-                            <div onClick={(e) => { closeNewKeypairModal() }} style={{ marginLeft: "auto", marginRight: "28px", display: "flex", justifyContent: "center", alignItems: "center", padding: "0px 20px", width: "100px", border: "1px solid #e2e2e2", borderRadius: "100px 100px 100px 100px", cursor: "pointer" }}>
+                            <div onClick={() => { closeNewKeypairModal() }} style={{ marginLeft: "auto", marginRight: "28px", display: "flex", justifyContent: "center", alignItems: "center", padding: "0px 20px", width: "100px", border: "1px solid #e2e2e2", borderRadius: "100px 100px 100px 100px", cursor: "pointer" }}>
                                 <span>
                                     <Text style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"}>
                                         Cancel
@@ -245,7 +244,7 @@ const Settings = props => {
                             </div>
                             {
                                 privateKey === newPrivateKey && !loading &&
-                                <div onClick={(e) => { saveKeypair() }} style={{ display: "flex", justifyContent: "center", padding: "0px 20px", width: "100px", background: "#F87454", color: "white", border: "none", borderRadius: "100px 100px 100px 100px", cursor: "pointer" }}>
+                                <div onClick={() => { saveKeypair() }} style={{ display: "flex", justifyContent: "center", padding: "0px 20px", width: "100px", background: "#F87454", color: "white", border: "none", borderRadius: "100px 100px 100px 100px", cursor: "pointer" }}>
                                     <span>
                                         <Text style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"}>
                                             Save

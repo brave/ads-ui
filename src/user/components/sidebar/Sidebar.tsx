@@ -1,16 +1,10 @@
 import * as React from "react";
-import { Link, Redirect, Route, Switch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as S from "./Sidebar.style";
-import BATLogo from "../../assets/images/basic-attention-token-logo.png";
 
 import {
-  Icon,
-  IconButton,
-  TableCell,
-  TableRow,
-  withStyles
-} from "@material-ui/core";
-import { H6, H5, Text } from "../../../components/Text/Text";
+  Icon} from "@material-ui/core";
+import { Text } from "../../../components/Text/Text";
 
 const linkStyle = { textDecoration: "none", color: "inherit" };
 

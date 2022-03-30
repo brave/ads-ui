@@ -67,11 +67,6 @@ const mapStateToProps = (state: any, ownProps: any) => ({
   snackbar: state.snackBarReducer
 });
 
-const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
-  signOut: () => dispatch(SignOut()),
-});
-
-
 export default withRouter(
   connect(
     mapStateToProps

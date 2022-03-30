@@ -1,8 +1,7 @@
 import * as React from "react";
 import * as S from "./UserMenu.style";
 
-import Icon from "@material-ui/core";
-import { H6, H5 } from "../../../../../components/Text/Text";
+import { H5 } from "../../../../../components/Text/Text";
 import { Link } from "react-router-dom";
 
 class UserMenu extends React.Component<any, any> {
