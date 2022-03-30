@@ -1,12 +1,15 @@
 name: Deploy to Staging
 on:
   push:
-    branches: [ stage ]
-  workflow_dispatch:
+    branches: [master]
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+
+    environment:
+      name: staging
+      url: https://ads.bravesoftware.com
 
     steps:
       - uses: actions/checkout@v2
@@ -23,6 +26,7 @@ jobs:
           # setting CI to false is temporary, while we still have lint errors
           CI: false
         run: npm run build
+      - run: npm audit --production
       - name: Deploy static files
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_STAGING_ACCESS_KEY_ID }}
