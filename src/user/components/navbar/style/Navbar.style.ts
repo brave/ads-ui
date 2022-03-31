@@ -1,7 +1,6 @@
 
 
 import styled from "styled-components";
-import BraveLogo from "../../../assets/images/brave-logotype-full-color.png";
 
 const drawerWidth = 240;
 

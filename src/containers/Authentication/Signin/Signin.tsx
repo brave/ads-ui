@@ -1,7 +1,7 @@
 import { withStyles } from "@material-ui/core";
 import React from "react";
 import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import "../../../assets/fonts/fonts.css";
 
 import Button from "../../../components/Button/Button";
@@ -15,7 +15,6 @@ import { GetAdvertisers, SignIn } from "../../../actions";
 import { styles } from "./SignIn.style";
 import * as S from "./SignIn.style";
 
-import SigninForm from "../../../components/SigninForm/Signin-form";
 import { Input } from "../../../components/formElements/formElements";
 
 import base64url from "base64url";
@@ -63,7 +62,7 @@ class SignInContainer extends React.Component<any, any> {
     let data = await resp.json();
 
     if (data.accessToken) {
-      const auth = await this.props.signin({ email: this.state.email, password: this.state.password, accessToken: data.accessToken });
+      await this.props.signin({ email: this.state.email, password: this.state.password, accessToken: data.accessToken });
       await this.props.getAdvertiser(data);
     }
 
@@ -145,7 +144,7 @@ class SignInContainer extends React.Component<any, any> {
       });
     let data = await resp.json();
     try {
-      const auth = await this.props.signin({ email: this.state.email, password: this.state.password, accessToken: data.accessToken });
+      await this.props.signin({ email: this.state.email, password: this.state.password, accessToken: data.accessToken });
       await this.props.getAdvertiser(data);
     } catch (err) {
       this.toggleSubmitting();
@@ -165,7 +164,7 @@ class SignInContainer extends React.Component<any, any> {
   }
 
   public render() {
-    const { auth, classes, signinForm } = this.props;
+    const { auth } = this.props;
     if (auth && auth.signedIn) {
       return <Redirect to="/a" />;
     }
@@ -176,7 +175,7 @@ class SignInContainer extends React.Component<any, any> {
             <S.Header>
               <S.Logo />
               <H2 fontFamily={"Poppins"} color={"#434251"}>
-                Sign into your brave account
+                Sign into your Brave account
               </H2>
             </S.Header>
             <div style={{ marginBottom: "32px", marginTop: "22px" }}>
@@ -216,12 +215,12 @@ class SignInContainer extends React.Component<any, any> {
   }
 }
 
-const mapStateToProps = (state: any, ownProps: any) => ({
+const mapStateToProps = (state: any) => ({
   auth: state.authReducer,
   signinForm: state.form.signin
 });
 
-const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
+const mapDispatchToProps = (dispatch: any) => ({
   getAdvertiser: (value: any) => dispatch(GetAdvertisers(value)),
   signin: (value: any) => dispatch(SignIn(value))
 });

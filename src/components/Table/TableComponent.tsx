@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import {
     useTable,
     useSortBy,
@@ -11,7 +11,7 @@ import { Icon } from "@material-ui/core";
 import { Text } from "../../components/Text/Text";
 import OutsideAlerter from "../OutsideAlerter/OutSideAlerter";
 import ReactDOM from "react-dom";
-import Menu, { SubMenu, Item as MenuItem, Divider } from 'rc-menu';
+import Menu, { Item as MenuItem } from 'rc-menu';
 
 
 const buttonStyle = (enabled) => {
@@ -35,7 +35,6 @@ const Table = props => {
         page,
         canPreviousPage,
         canNextPage,
-        pageOptions,
         pageCount,
         gotoPage,
         nextPage,
@@ -62,9 +61,6 @@ const Table = props => {
     }
 
     function renderMenu(container) {
-        function destroy() {
-            ReactDOM.unmountComponentAtNode(container);
-        }
 
         const leftMenu = (
             <Menu
@@ -125,11 +121,11 @@ const Table = props => {
                     </React.Fragment>
                     <div className="table">
                         {page.map(
-                            (row, i) => {
+                            (row) => {
                                 prepareRow(row)
                                 return (
                                     <S.Row style={{ display: "flex", width: "100%" }} {...row.getRowProps()}>
-                                        {row.cells.map((cell, i) => {
+                                        {row.cells.map((cell) => {
                                             return <S.Cell width={`calc(${tableWidth}px / ${columnCount})`} {...cell.getCellProps()}><S.CellText>{cell.render('Cell')}</S.CellText></S.Cell>
                                         })}
                                     </S.Row>

@@ -1,5 +1,5 @@
 import moment from "moment";
-import { activeGeocodesQuery, campaignQuery, creativesQuery, segmentsQuery } from "./Queries";
+import { activeGeocodesQuery, campaignQuery, segmentsQuery } from "./Queries";
 
 export async function initializeData(context) {
     let initializedData = {} as any;

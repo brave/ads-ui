@@ -1,15 +1,15 @@
-import { Icon, IconButton, withStyles } from "@material-ui/core";
+import { withStyles } from "@material-ui/core";
 
 import * as React from "react";
 import { connect } from "react-redux";
 
 import * as S from "./style/Navbar.style";
 
-import { Link, Redirect, Route, Switch } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import UserMenu from "./components/UserMenu/UserMenu";
 
-import { SignOut, ToggleDrawer, UserResend } from "../../../actions";
+import { SignOut, ToggleDrawer } from "../../../actions";
 
 import BraveAdsLogo from "../../../assets/images/Subdomains_Rewards_Ads_Default.png";
 
@@ -21,7 +21,6 @@ import "./style/Navbar.style.css"
 
 import Context from "../../../state/context";
 
-let iconStyle = { cursor: "pointer", color: "#ff7654", fontSize: "28px" };
 const linkStyle = { textDecoration: "none", color: "inherit" };
 const logoStyle = { textDecoration: "none", color: "inherit", marginTop: "3px" };
 
@@ -66,7 +65,7 @@ class Navbar extends React.Component<any, any> {
     };
 
     public render() {
-        const { classes, toggleDrawer, open, signOut, match } = this.props;
+        const { signOut } = this.props;
         return (
             <div style={{ position: "fixed", width: "100%", top: "0px", zIndex: 9001 }}>
                 <S.Container loading={this.context.loading}>
@@ -124,11 +123,11 @@ class Navbar extends React.Component<any, any> {
     }
 }
 
-const mapStateToProps = (state: any, ownProps: any) => ({
+const mapStateToProps = (state: any) => ({
     open: state.drawerReducer.open
 });
 
-const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
+const mapDispatchToProps = (dispatch: any) => ({
     signOut: () => dispatch(SignOut()),
     toggleDrawer: () => dispatch(ToggleDrawer())
 });

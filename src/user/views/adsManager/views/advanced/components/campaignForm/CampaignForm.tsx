@@ -7,8 +7,6 @@ import './styles/campaignForm.style.css';
 import Switch from "react-switch";
 import { Icon } from '@material-ui/core';
 
-import USD from "./assets/usd.png";
-import BAT from "./assets/bat.png";
 import moment from 'moment';
 
 const currencies = [
@@ -17,7 +15,7 @@ const currencies = [
 ]
 
 const customStyles = {
-    control: (provided, state) => ({
+    control: (provided) => ({
         ...provided,
         backgroundColor: "#fafafa",
         height: "42px"
@@ -126,7 +124,7 @@ class CampaignForm extends Component<any, any> {
         this.props.setCampaign(campaign);
     }
 
-    handlePricingType(e, pricingType) {
+    handlePricingType(pricingType) {
         let campaign = this.props.campaign;
         if (pricingType === 'cpm') {
             campaign.cpm = true;

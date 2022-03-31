@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "ads-ui",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -14,7 +14,6 @@
     "base64url": "^3.0.1",
     "bootstrap": "^4.5.3",
     "bootstrap-daterangepicker": "^3.1.0",
-    "brave-ui": "^0.38.0",
     "chart.js": "^2.9.3",
     "classnames": "^2.2.6",
     "graphql": "^15.0.0",
@@ -60,8 +59,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "serve": "cd build && ws --spa index.html -p 3000",
-    "container": "npm run serve"
+    "tsc": "tsc"
   },
   "devDependencies": {
     "@types/chart.js": "^2.9.20",

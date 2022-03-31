@@ -3,22 +3,14 @@ import React, { Component } from 'react';
 import Section from '../../../../../../../components/section/Section';
 import { Text } from "../../../../../../../components/Text/Text";
 import * as S from "./AdsForm.style";
-import Select from 'react-select';
 import OSNotificationCreativePreview from '../../../../../../../components/creativePreview/OSNotificationCreativePreview/OSNotificationCreativePreview';
 import { fetchCreativeAssets, fetchCreativeType } from "./lib/AdsForm.library";
 
 import Notification from "./assets/notification.png";
-import PublisherAd from "./assets/publisher_ad.png";
 import { Icon } from '@material-ui/core';
 import Modal from '../../../../../../../components/modal/Modal';
 import Switch from "react-switch";
 
-const customStyles = {
-    control: (provided, state) => ({
-        ...provided,
-        backgroundColor: "#fafafa"
-    }),
-}
 
 class AdsForm extends Component<any, any> {
     constructor(props) {
@@ -274,11 +266,11 @@ class AdsForm extends Component<any, any> {
                 <div style={{ width: "500px" }}>
                     <div style={{ display: "flex" }}>
                         <Text content={"Delete this Ad?"} sizes={[16, 16, 15, 15, 22]} color={"#E0694C"} fontFamily={"Poppins"} />
-                        <Icon onClick={(e) => this.showDeleteAdModal(false)} style={{ marginLeft: "auto", color: "grey", cursor: "pointer" }}>clear</Icon>
+                        <Icon onClick={() => this.showDeleteAdModal(false)} style={{ marginLeft: "auto", color: "grey", cursor: "pointer" }}>clear</Icon>
                     </div>
                     <Text style={{ marginTop: "42px" }} content={`Do you want to delete Ad ${index + 1}? This action cannot be undone.`} sizes={[16, 16, 15, 15, 16]} fontFamily={"Muli"} />
                     <div style={{ display: "flex", width: "100%", marginTop: "42px" }}>
-                        <div onClick={(e) => this.showDeleteAdModal(false)} style={{ marginLeft: "auto", marginRight: "28px", display: "flex", justifyContent: "center", alignItems: "center", padding: "0px 20px", width: "100px", border: "1px solid #e2e2e2", borderRadius: "100px 100px 100px 100px", cursor: "pointer" }}>
+                        <div onClick={() => this.showDeleteAdModal(false)} style={{ marginLeft: "auto", marginRight: "28px", display: "flex", justifyContent: "center", alignItems: "center", padding: "0px 20px", width: "100px", border: "1px solid #e2e2e2", borderRadius: "100px 100px 100px 100px", cursor: "pointer" }}>
                             <span>
                                 <Text style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"}>
                                     Cancel

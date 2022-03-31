@@ -4,7 +4,7 @@ import {
 import _ from "lodash";
 import React from "react";
 import { connect } from "react-redux";
-import { Link, Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 
 import { CloseDrawer } from "../actions";
 import Navbar from "./components/navbar/Navbar";
@@ -43,7 +43,7 @@ class User extends React.Component<any, any> {
 
     public render(): any {
 
-        const { advertisers, auth, classes, match } = this.props;
+        const { advertisers, auth, match } = this.props;
         const activeAdvertiser = _.find(advertisers, { state: "active" });
 
 

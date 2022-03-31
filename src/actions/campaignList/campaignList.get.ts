@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { ICampaignListAction, ICampaignListPayload } from ".";
+import { ICampaignListAction } from ".";
 import { IAuthPayload } from "../auth";
 import { OpenSnackBar } from "../snackbar";
 

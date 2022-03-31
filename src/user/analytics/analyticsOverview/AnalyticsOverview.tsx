@@ -1,8 +1,4 @@
-import React, { useContext, useEffect, useState, useRef, useMemo } from "react";
-
-import * as _ from "lodash";
-
-import Section from "../../../components/section/Section";
+import React, { useState } from "react";
 
 import { Text } from "../../../components/Text/Text";
 import * as Highcharts from "highcharts";
@@ -16,12 +12,10 @@ import 'bootstrap-daterangepicker/daterangepicker.css';
 
 import { useQuery } from "@apollo/react-hooks";
 import { ANALYTICS_OVERVIEW } from "./lib/AnalyticsOverview.queries";
-import TabSelector from "../../../components/tabSelector/TabSelector";
 import { downloadCSV, processData, prepareChart, prepareSankey, formatMetric, tempMetric, budgetMetric } from "./lib/AnalyticsOverview.library";
 import PopoutExample from "./lib/Popout";
 
 import * as S from "./styles/AnalyticsOverview.style";
-import { Input, InputContainer } from "../../../components/formElements/formElements";
 import moment from "moment";
 
 HighchartsSankey(Highcharts);
@@ -37,9 +31,6 @@ const AnalyticsOverview = props => {
 
     const { auth, match } = props;
 
-    const tabConfig = [
-        { label: "Overview", selected: true, link: match.url }
-    ]
 
     const [metric1, setMetric1] = useState("impressions");
     const [metric2, setMetric2] = useState("clicks");
@@ -54,12 +45,12 @@ const AnalyticsOverview = props => {
         setStartDate(moment(data.campaign.startAt).utc().startOf('day').format('YYYY-MM-DD[T]HH:mm'));
     }
 
-    const { loading, error, data } = useQuery(ANALYTICS_OVERVIEW, {
+    const { loading, data } = useQuery(ANALYTICS_OVERVIEW, {
         variables: { id: match.params.campaignId },
         onCompleted: initializeStartDate,
     });
 
-    const handleCallback = (start, end, label) => {
+    const handleCallback = (start, end) => {
         setStartDate(moment(start).startOf("day").format('YYYY-MM-DD[T]HH:mm'));
         setEndDate(moment(end).endOf("day").format('YYYY-MM-DD[T]HH:mm'));
     }
@@ -67,7 +58,6 @@ const AnalyticsOverview = props => {
     let campaign;
     let processedData;
     let options;
-    let options2;
     let dailyBudget;
     let budget;
     let spend;
@@ -97,7 +87,6 @@ const AnalyticsOverview = props => {
 
         processedData = processData(filteredEngagements, metric1, metric2, metric3, metric4, grouping);
         options = prepareChart(metric1, processedData.metric1DataSet, metric2, processedData.metric2DataSet, metric3, processedData.metric3DataSet, metric4, processedData.metric4DataSet);
-        options2 = prepareSankey(processedData.impressions, processedData.clicks, processedData.landings, processedData.conversions);
     }
 
     if (loading) return <></>;
