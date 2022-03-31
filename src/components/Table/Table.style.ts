@@ -7,13 +7,11 @@ export const Container = styled("div")`
   justify-content: space-between;
 `;
 
-export const Table = styled("div")`
+export const Table = styled("table")`
   width: 100%;
 `;
 
-export const HeaderRow = styled("div")`
-  display: flex;
-  width: 100%;
+export const HeaderRow = styled("tr")`
   height: 48px;
   border-bottom: 1px solid #ededed;
   // Set border-radius for bottom left, bottom right corners
@@ -26,11 +24,8 @@ interface HeaderCellProps {
   justifyContent?: string;
 }
 
-export const HeaderCell = styled("div")`
-${(props: HeaderCellProps) => `
-  display: flex;
+export const HeaderCell = styled("td")`
   height: 100%;
-  width: ${props.width};
   justify-content: left;
   color: #1C1C1C;
   padding: 12px;
@@ -40,8 +35,6 @@ ${(props: HeaderCellProps) => `
   font-weight: 500;
   font-size: 12px;
   user-select: none;
-
-`}
 `;
 
 export const UpArrow = styled("div")`
@@ -62,10 +55,7 @@ export const DownArrow = styled("div")`
   margin-left: 4px;
 `;
 
-export const Row = styled("div")`
-  display: flex;
-  width: 100%;
-  height: 60px;
+export const Row = styled("tr")`
   border-bottom: 1px solid #EDEDED;
   &:hover {
     background-color: #fcfcfc;
@@ -78,18 +68,14 @@ interface CellProps {
   justifyContent?: string;
 }
 
-export const Cell = styled("div")`
-${(props: CellProps) => `
-  display: flex;
+export const Cell = styled("td")`
   height: 100%;
-  width: ${props.width};
   justify-content: left;
   padding: 12px;
   align-items: center;
   font-family: "Muli";
   font-size: 13px;
   color: #1C1C1CE6;
-  `}
 `;
 
 export const CellText = styled("span")`

@@ -96,9 +96,7 @@ const CampaignList = props => {
 
     return (
         <div>
-            <Section fullWidthChild={true}>
-                <Table data={data.advertiser.campaigns} columns={columns} tableWidth={1094} columnCount={7} />
-            </Section>
+           <Table data={data.advertiser.campaigns} columns={columns} tableWidth={1094} columnCount={7} />
         </div>
     );
 }
