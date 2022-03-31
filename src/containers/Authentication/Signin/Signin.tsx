@@ -62,6 +62,7 @@ class SignInContainer extends React.Component<any, any> {
     let data = await resp.json();
 
     if (data.accessToken) {
+      await this.props.signin({ email: this.state.email, password: this.state.password, accessToken: data.accessToken });
       await this.props.getAdvertiser(data);
     }
 
@@ -143,6 +144,7 @@ class SignInContainer extends React.Component<any, any> {
       });
     let data = await resp.json();
     try {
+      await this.props.signin({ email: this.state.email, password: this.state.password, accessToken: data.accessToken });
       await this.props.getAdvertiser(data);
     } catch (err) {
       this.toggleSubmitting();
@@ -173,7 +175,7 @@ class SignInContainer extends React.Component<any, any> {
             <S.Header>
               <S.Logo />
               <H2 fontFamily={"Poppins"} color={"#434251"}>
-                Sign into your brave account
+                Sign into your Brave account
               </H2>
             </S.Header>
             <div style={{ marginBottom: "32px", marginTop: "22px" }}>
