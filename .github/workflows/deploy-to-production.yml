@@ -27,6 +27,7 @@ jobs:
           CI: false
         run: npm run build
       - run: npm audit --production
+      - run: npm test
       - name: Deploy static files
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_PRODUCTION_ACCESS_KEY_ID }}

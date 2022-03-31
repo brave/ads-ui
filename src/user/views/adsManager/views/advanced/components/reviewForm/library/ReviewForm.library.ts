@@ -1,6 +1,4 @@
 import { createAdMutation, createAdSetMutation, createCampaignMutation, createCreativeMutation, updateAdMutation, updateAdSetMutation, updateCampaignMutation } from "./ReviewForm.queries";
-import normalizeUrl from 'normalize-url';
-
 
 async function processAdSets(adSets, userId, advertiserId, accessToken, campaign) {
     let createAdSetsInput = [] as any;
@@ -272,7 +270,16 @@ async function processAd(ad, adSetId, pricingType, bid, userId, advertiserId, ac
 
 }
 
+export function cleanUpUrl(url: string): string {
+    if (!url.includes(":"))
+        url = "https:" + url;
 
+    const urlObject = new URL(url);
+    if (urlObject.protocol === "http:") {
+        urlObject.protocol = "https:";
+    }
+    return urlObject.toString();
+}
 
 async function processCreativeId(ad, advertiserId, accessToken, userId) {
 
@@ -294,7 +301,7 @@ async function processCreativeId(ad, advertiserId, accessToken, userId) {
         let payload = JSON.stringify({
             title: ad.title,
             body: ad.body,
-            targetUrl: normalizeUrl(ad.targetUrl, { forceHttps: true, removeQueryParameters: undefined, sortQueryParameters: false, stripWWW: false })
+            targetUrl: cleanUpUrl(ad.targetUrl)
         }).replace(/\"([^(\")"]+)\":/g, "$1:");
 
         createCreativeInput.payload = payload;
