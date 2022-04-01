@@ -1,6 +1,4 @@
-/** @jsx jsx */
 import { Component } from 'react';
-import { jsx } from '@emotion/core';
 
 import Select from 'react-select';
 import { defaultTheme } from 'react-select';
@@ -70,7 +68,7 @@ const Menu = props => {
     const shadow = 'hsla(218, 50%, 10%, 0.1)';
     return (
         <div
-            css={{
+            style={{
                 backgroundColor: 'white',
                 borderRadius: 4,
                 boxShadow: `0 0 0 1px ${shadow}, 0 4px 11px ${shadow}`,
@@ -84,7 +82,7 @@ const Menu = props => {
 };
 const Blanket = props => (
     <div
-        css={{
+        style={{
             bottom: 0,
             left: 0,
             top: 0,
@@ -96,7 +94,7 @@ const Blanket = props => (
     />
 );
 const Dropdown = ({ children, isOpen, target, onClose }) => (
-    <div css={{ position: 'relative' }}>
+    <div style={{ position: 'relative' }}>
         {target}
         {isOpen ? <Menu>{children}</Menu> : null}
         {isOpen ? <Blanket onClick={onClose} /> : null}
@@ -113,7 +111,7 @@ const Svg = p => (
     />
 );
 const DropdownIndicator = () => (
-    <div css={{ color: colors.neutral20, height: 24, width: 32 }}>
+    <div style={{ color: colors.neutral20, height: 24, width: 32 }}>
         <Svg>
             <path
                 d="M16.436 15.085l3.94 4.01a1 1 0 0 1-1.425 1.402l-3.938-4.006a7.5 7.5 0 1 1 1.423-1.406zM10.5 16a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11z"

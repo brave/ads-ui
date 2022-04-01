@@ -18,3 +18,4 @@ jobs:
       - run: npm ci
       - run: npm run tsc
       - run: npm audit --production
+      - run: npm test
