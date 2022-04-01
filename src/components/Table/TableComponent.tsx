@@ -25,7 +25,6 @@ const buttonStyle = (enabled) => {
 
 const Table = props => {
 
-    const tableWidth = props.tableWidth;
     const columnCount = props.columnCount;
 
     const {
@@ -97,12 +96,12 @@ const Table = props => {
         <React.Fragment>
             <S.Container>
                 <S.Table {...getTableProps()}>
-                    <React.Fragment>
+                    <thead>
                         {headerGroups.map(headerGroup => (
                             <S.HeaderRow {...headerGroup.getHeaderGroupProps()}>
                                 {headerGroup.headers.map(column => {
                                     return (
-                                        <S.HeaderCell width={`calc(${tableWidth}px / ${columnCount})`} justifyContent={"center"} {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                        <S.HeaderCell justifyContent={"center"} {...column.getHeaderProps(column.getSortByToggleProps())}>
                                             <div style={{ display: "flex", alignItems: "center" }}>
                                                 {column.render('Header')}
                                                 <div>
@@ -118,43 +117,44 @@ const Table = props => {
                                 })}
                             </S.HeaderRow>
                         ))}
-                    </React.Fragment>
-                    <div className="table">
+                    </thead>
+                    <tbody className="table">
                         {page.map(
                             (row) => {
                                 prepareRow(row)
                                 return (
-                                    <S.Row style={{ display: "flex", width: "100%" }} {...row.getRowProps()}>
+                                    <S.Row {...row.getRowProps()}>
                                         {row.cells.map((cell) => {
-                                            return <S.Cell width={`calc(${tableWidth}px / ${columnCount})`} {...cell.getCellProps()}><S.CellText>{cell.render('Cell')}</S.CellText></S.Cell>
+                                            return <S.Cell {...cell.getCellProps()}><S.CellText>{cell.render('Cell')}</S.CellText></S.Cell>
                                         })}
                                     </S.Row>
                                 )
                             })}
-                    </div>
-                    <S.Pagination>
-                        <S.PageSelect>
-                            <div style={{ display: "flex", alignItems: "center" }}>
-                                <Text content={'Rows per page:'} style={{ marginBottom: "2px" }} fontFamily={"Muli"} sizes={[14, 14, 14, 14, 12]}></Text>
-                                <div style={{ display: "flex", alignItems: "center", cursor: "pointer" }} onClick={toggleMenu}>
-                                    <Text style={{ marginLeft: "12px" }} fontFamily={"Muli"} sizes={[14, 14, 14, 14, 12]}>{pageSize}</Text>
-                                    <S.DownArrow style={{ marginTop: "4px", marginLeft: "8px" }}></S.DownArrow>
-                                </div>
-                            </div>
-
-                            <OutsideAlerter outsideAlerterId="menu" onOutsideClick={closeMenu} />
-                        </S.PageSelect>
-                        <S.ButtonContainer style={{ marginLeft: "auto", marginRight: "-2px" }}>
-                            <div style={{ marginTop: "2px", marginRight: "20px" }}>
-                                <Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 12]}>  {(pageIndex * pageSize) + 1} - {(pageIndex * pageSize) + page.length} of {props.data.length}</Text>
-                            </div>
-                            <Icon onClick={() => gotoPage(0)} style={buttonStyle(canPreviousPage)}>first_page</Icon>
-                            <Icon onClick={() => previousPage()} style={buttonStyle(canPreviousPage)}>chevron_left</Icon>
-                            <Icon onClick={() => nextPage()} style={buttonStyle(canNextPage)}>chevron_right</Icon>
-                            <Icon onClick={() => gotoPage(pageCount - 1)} style={buttonStyle(canNextPage)} >last_page</Icon>
-                        </S.ButtonContainer>
-                    </S.Pagination >
+                    </tbody>
                 </S.Table>
+
+                <S.Pagination>
+                    <S.PageSelect>
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                            <Text content={'Rows per page:'} style={{ marginBottom: "2px" }} fontFamily={"Muli"} sizes={[14, 14, 14, 14, 12]}></Text>
+                            <div style={{ display: "flex", alignItems: "center", cursor: "pointer" }} onClick={toggleMenu}>
+                                <Text style={{ marginLeft: "12px" }} fontFamily={"Muli"} sizes={[14, 14, 14, 14, 12]}>{pageSize}</Text>
+                                <S.DownArrow style={{ marginTop: "4px", marginLeft: "8px" }}></S.DownArrow>
+                            </div>
+                        </div>
+
+                        <OutsideAlerter outsideAlerterId="menu" onOutsideClick={closeMenu} />
+                    </S.PageSelect>
+                    <S.ButtonContainer style={{ marginLeft: "auto", marginRight: "-2px" }}>
+                        <div style={{ marginTop: "2px", marginRight: "20px" }}>
+                            <Text fontFamily={"Muli"} sizes={[14, 14, 14, 14, 12]}>  {(pageIndex * pageSize) + 1} - {(pageIndex * pageSize) + page.length} of {props.data.length}</Text>
+                        </div>
+                        <Icon onClick={() => gotoPage(0)} style={buttonStyle(canPreviousPage)}>first_page</Icon>
+                        <Icon onClick={() => previousPage()} style={buttonStyle(canPreviousPage)}>chevron_left</Icon>
+                        <Icon onClick={() => nextPage()} style={buttonStyle(canNextPage)}>chevron_right</Icon>
+                        <Icon onClick={() => gotoPage(pageCount - 1)} style={buttonStyle(canNextPage)} >last_page</Icon>
+                    </S.ButtonContainer>
+                </S.Pagination >
 
             </S.Container>
         </React.Fragment>
