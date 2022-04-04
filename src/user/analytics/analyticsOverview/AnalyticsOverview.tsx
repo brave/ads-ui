@@ -17,6 +17,7 @@ import PopoutExample from "./lib/Popout";
 
 import * as S from "./styles/AnalyticsOverview.style";
 import moment from "moment";
+import { CircularProgress } from "@material-ui/core";
 
 HighchartsSankey(Highcharts);
 highcharts3d(Highcharts);
@@ -89,7 +90,7 @@ const AnalyticsOverview = props => {
         options = prepareChart(metric1, processedData.metric1DataSet, metric2, processedData.metric2DataSet, metric3, processedData.metric3DataSet, metric4, processedData.metric4DataSet);
     }
 
-    if (loading) return <></>;
+    if (loading) return <CircularProgress />;
 
     if (campaign.type === "fixed") {
         return <Text content="Reporting for this type of campaign is not yet available in self-serve reporting. Please contact your Account Manager for performance report requests."
