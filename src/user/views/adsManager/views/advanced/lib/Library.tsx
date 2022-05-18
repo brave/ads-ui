@@ -464,8 +464,7 @@ export function performValidation(context, validationRule, campaign, adSets, ads
                         validations.adSets[adSetIndex].ads[index].targetUrl = {} as any;
                         validations.adSets[adSetIndex].ads[index].targetUrl.valid = false;
                         validations.adSets[adSetIndex].ads[index].targetUrl.errorMessage = `Creative target url is required, please enter a target url for your creative.`;
-                    }
-                    if (!ad.targetUrl?.startsWith("https://")) {
+                    } else if (!ad.targetUrl?.startsWith("https://")) {
                         validations.adSets[adSetIndex].ads[index].targetUrl = {} as any;
                         validations.adSets[adSetIndex].ads[index].targetUrl.valid = false;
                         validations.adSets[adSetIndex].ads[index].targetUrl.errorMessage = `Creative target url must start with https://`;
