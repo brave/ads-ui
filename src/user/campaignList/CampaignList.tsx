@@ -1,21 +1,11 @@
-import React, {  } from "react";
-
-import Section from "../../components/section/Section";
-
+import React from "react";
 import { CAMPAIGN_LIST } from "./lib/CampaignList.queries";
-import { useQuery } from "@apollo/react-hooks";
-
 import Table from "../../components/Table/TableComponent";
 import { Link } from "react-router-dom";
-
 import * as S from "./style/CampaignList.style";
-
-
+import { useQuery } from "@apollo/client";
 
 const CampaignList = props => {
-
-
-
     const userId = props.userId;
     const advertiserId = props.advertiserId;
 

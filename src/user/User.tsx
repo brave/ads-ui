@@ -2,7 +2,7 @@ import {
     withStyles
 } from "@material-ui/core";
 import _ from "lodash";
-import React from "react";
+import React, {useMemo} from "react";
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 
@@ -19,13 +19,30 @@ import { styles } from "./User.style";
 import Context from "../state/context";
 import CampaignList from "./campaignList/CampaignList";
 
-import ApolloClient from 'apollo-client';
-import { ApolloProvider } from "@apollo/react-hooks";
-import { createHttpLink } from 'apollo-link-http';
-import { setContext } from 'apollo-link-context';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import {
+  ApolloClient,
+  ApolloProvider,
+  createHttpLink,
+  InMemoryCache,
+} from "@apollo/client";
 import AnalyticsOverview from "./analytics/analyticsOverview/AnalyticsOverview";
 import Settings from "./settings/Settings";
+
+const buildApolloClient = (accessToken: string) => {
+  const httpLink = createHttpLink({
+    uri: `${process.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql"),
+    headers: {
+      authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  const client = new ApolloClient({
+    link: httpLink,
+    cache: new InMemoryCache(),
+  });
+
+  return client;
+};
 
 class User extends React.Component<any, any> {
     static contextType = Context;
@@ -42,31 +59,10 @@ class User extends React.Component<any, any> {
     }
 
     public render(): any {
-
         const { advertisers, auth, match } = this.props;
         const activeAdvertiser = _.find(advertisers, { state: "active" });
 
-
-
-        const httpLink = createHttpLink({
-            uri: `${process.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql"),
-        });
-
-        const authLink = setContext((_, { headers }) => {
-            // get the authentication token from local storage if it exists
-            // return the headers to the context so httpLink can read them
-            return {
-                headers: {
-                    ...headers,
-                    authorization: `Bearer ${auth.accessToken}`,
-                }
-            }
-        });
-
-        const client = new ApolloClient({
-            link: authLink.concat(httpLink),
-            cache: new InMemoryCache()
-        });
+        const client = buildApolloClient(auth.accessToken);
 
         if (
             !auth ||
@@ -76,8 +72,6 @@ class User extends React.Component<any, any> {
         ) {
             return <Redirect to="/a" />;
         }
-
-
 
         return (
             <ApolloProvider client={client}>

@@ -336,7 +336,7 @@ export function performValidation(context, validationRule, campaign, adSets, ads
     let validations = initializeValidations();
     validations.adSets = [] as any;
 
-    // TODO 
+    // TODO
     // Add validations.campaignName.resolveMessage = null and validations.campaignName.resolveHook = null;
     // These can be displayed next to the error as a link back to the corresponding form element
 
@@ -359,7 +359,7 @@ export function performValidation(context, validationRule, campaign, adSets, ads
         }
     }
 
-    let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: "numeric" };
+    let options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: "numeric" };
     let startTime = new Date(campaign.startTime).toLocaleDateString("en-US", options);
     let endTime = new Date(campaign.endTime).toLocaleDateString("en-US", options);
 

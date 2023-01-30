@@ -37,7 +37,7 @@ export const CreateCreativeInstances = (creativeInstance: ICreateCreativeInstanc
       dispatch(OpenSnackBar("CreativeInstance created Successfully"));
       dispatch(CreateCreativeInstancesSuccessful(response.data));
       return Promise.resolve(response.data);
-    } catch (error) {
+    } catch (error: any) {
       dispatch(CreateCreativeInstancesFailed());
       if (error.response) {
         dispatch(OpenSnackBar(`Create CreativeInstances  Failed: ${error.response.data.error}`));

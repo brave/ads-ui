@@ -10,7 +10,7 @@ import DateRangePicker from 'react-bootstrap-daterangepicker';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-daterangepicker/daterangepicker.css';
 
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import { ANALYTICS_OVERVIEW } from "./lib/AnalyticsOverview.queries";
 import { downloadCSV, processData, prepareChart, prepareSankey, formatMetric, tempMetric, budgetMetric } from "./lib/AnalyticsOverview.library";
 import PopoutExample from "./lib/Popout";
@@ -94,7 +94,7 @@ const AnalyticsOverview = props => {
 
     if (campaign.type === "fixed") {
         return <Text content="Reporting for this type of campaign is not yet available in self-serve reporting. Please contact your Account Manager for performance report requests."
-         style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} 
+         style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]}
          fontWeight={500} fontFamily={"Poppins"} />
     }
 

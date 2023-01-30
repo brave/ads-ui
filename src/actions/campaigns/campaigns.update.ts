@@ -36,7 +36,8 @@ export const UpdateCampaigns = (campaign: Partial<ICampaignPayload>, auth: IAuth
       dispatch(UpdateCampaignsSuccessful(response.data));
       dispatch(OpenSnackBar("Campaign updated Successfully"));
       return Promise.resolve(response.data);
-    } catch (error) {
+      // TODO: Remove w/ redux
+    } catch (error: any) {
       dispatch(UpdateCampaignsFailed());
       if (error.response) {
         dispatch(OpenSnackBar(`Update Campaigns  Failed: ${error.response.data.error}`));

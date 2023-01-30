@@ -36,7 +36,7 @@ export const GetCampaigns = (auth: IAuthPayload, userId?: string) => {
       dispatch(GetCampaignSuccessful(response.data));
       dispatch(OpenSnackBar("Campaign Get Successfully"));
       return Promise.resolve(response.data);
-    } catch (error) {
+    } catch (error: any) {
       dispatch(GetCampaignsFaild());
       if (error.response) {
         dispatch(OpenSnackBar(`Get Campaigns  Failed: ${error.response.data.error}`));
@@ -63,7 +63,8 @@ export const GetCampaignsList = (auth: IAuthPayload, userId?: string) => {
       dispatch(GetCampaignSuccessful(response.data));
       dispatch(OpenSnackBar("Campaign Get Successfully"));
       return Promise.resolve(response.data);
-    } catch (error) {
+      // TODO: Remove w/ redux
+    } catch (error: any) {
       dispatch(GetCampaignsFaild());
       if (error.response) {
         dispatch(OpenSnackBar(`Get Campaigns  Failed: ${error.response.data.error}`));

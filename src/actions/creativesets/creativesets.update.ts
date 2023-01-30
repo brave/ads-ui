@@ -36,7 +36,7 @@ export const UpdateCreativeSets = (campaignId: string, creativeSet: Partial<ICre
         });
       dispatch(UpdateCreativeSetsSuccessful(response.data));
       dispatch(OpenSnackBar("CreativeSet updated Successfully"));
-    } catch (error) {
+    } catch (error: any) {
       dispatch(UpdateCreativeSetsFailed());
       if (error.response) {
         dispatch(OpenSnackBar(`Update CreativeSets  Failed: ${error.response.data.error}`));

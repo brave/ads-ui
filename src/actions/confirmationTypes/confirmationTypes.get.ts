@@ -34,7 +34,8 @@ export const GetConfirmationTypes = (user: IAuthPayload) => {
       });
       dispatch(GetConfirmationTypeSuccessful(response.data));
       dispatch(OpenSnackBar("ConfirmationTypes Get Successfully"));
-    } catch (error) {
+      // TODO: Remove w/ redux
+    } catch (error: any) {
       dispatch(GetConfirmationTypesFaild());
       if (error.response) {
         dispatch(OpenSnackBar(`Get ConfirmationTypes  Failed: ${error.response.data.message}`));

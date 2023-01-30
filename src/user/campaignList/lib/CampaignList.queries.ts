@@ -1,4 +1,4 @@
-import { gql } from "apollo-boost";
+import { gql } from "@apollo/client";
 
 export const CAMPAIGN_LIST = gql`
 query advertiser($id: String!) {

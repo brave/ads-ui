@@ -36,7 +36,7 @@ export const GetCreatives = (auth: IAuthPayload, userId?: string) => {
       dispatch(GetCreativesSuccessful(response.data));
       dispatch(OpenSnackBar("Creative get Successfully"));
       return Promise.resolve(response.data);
-    } catch (error) {
+    } catch (error: any) {
       dispatch(GetCreativesFailed());
       if (error.response) {
         dispatch(OpenSnackBar(`Get Creatives  Failed: ${error.response.data.error}`));

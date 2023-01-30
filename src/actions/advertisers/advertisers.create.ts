@@ -37,7 +37,8 @@ export const CreateAdvertisers = (advertiser: ICreateAdvertiserPayload, auth: IA
       dispatch(OpenSnackBar("Advertiser created Successfully"));
       dispatch(CreateAdvertisersSuccessful(response.data));
       return Promise.resolve(response.data);
-    } catch (error) {
+      // TODO: Remove w/ redux
+    } catch (error: any) {
       dispatch(CreateAdvertisersFailed());
       if (error.response) {
         dispatch(OpenSnackBar(`Create Advertiser Failed: ${error.response.data.error}`));

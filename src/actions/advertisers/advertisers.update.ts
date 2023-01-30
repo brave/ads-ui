@@ -37,7 +37,8 @@ export const UpdateAdvertisers = (advertiser: Partial<IAdvertiserPayload>, auth:
       dispatch(UpdateAdvertisersSuccessful(response.data));
       dispatch(OpenSnackBar("Advertiser updated Successfully"));
       return Promise.resolve(response.data);
-    } catch (error) {
+      // TODO: Remove w/ redux
+    } catch (error: any) {
       dispatch(UpdateAdvertisersFailed());
       if (error.response) {
         dispatch(OpenSnackBar(`Update Advertiser  Failed: ${error.response.data.error}`));

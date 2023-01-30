@@ -37,7 +37,7 @@ export const CreateCreativeSets = (campaignId: string, creativeSet: ICreateCreat
       dispatch(OpenSnackBar("CreativeSet created Successfully"));
       dispatch(CreateCreativeSetsSuccessful(response.data));
       return Promise.resolve(response.data);
-    } catch (error) {
+    } catch (error: any) {
       dispatch(CreateCreativeSetsFailed());
       if (error.response) {
         dispatch(OpenSnackBar(`Create CreativeSets  Failed: ${error.response.data.error}`));

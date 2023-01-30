@@ -35,7 +35,7 @@ export const UpdateCreatives = (creative: Partial<ICreativePayload>, auth: IAuth
       });
       dispatch(UpdateCreativesSuccessful(response.data));
       dispatch(OpenSnackBar("Creative updated Successfully"));
-    } catch (error) {
+    } catch (error: any) {
       dispatch(UpdateCreativesFailed());
       if (error.response) {
         dispatch(OpenSnackBar(`Update Creatives  Failed: ${error.response.data.error}`));

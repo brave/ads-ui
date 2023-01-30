@@ -10,7 +10,6 @@ import _ from "lodash";
 import moment from "moment";
 import React from "react";
 import { Doughnut, Line } from "react-chartjs-2";
-import { CSVLink, CSVDownload } from "react-csv";
 import { Text } from "../Text/Text";
 import axios from "axios";
 

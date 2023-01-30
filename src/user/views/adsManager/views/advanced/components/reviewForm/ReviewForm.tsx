@@ -49,7 +49,7 @@ class ReviewForm extends Component<any, any> {
     }
 
     formatDate(date) {
-        var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: "numeric" };
+        const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: "numeric" };
         return new Date(date).toLocaleDateString("en-US", options);
     }
 

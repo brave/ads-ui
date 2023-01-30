@@ -36,7 +36,7 @@ export const GetCreativeInstances = (creativeInstanceId: string, auth: IAuthPayl
       dispatch(GetCreativeInstanceSuccessful(response.data));
       dispatch(OpenSnackBar("CreativeInstance Get Successfully"));
       return Promise.resolve(response.data);
-    } catch (error) {
+    } catch (error: any) {
       dispatch(GetCreativeInstancesFaild());
       if (error.response) {
         dispatch(OpenSnackBar(`Get CreativeInstances  Failed: ${error.response.data.error}`));
