@@ -20,6 +20,7 @@
     "graphql-tag": "^2.10.3",
     "highcharts": "^9.0.0",
     "highcharts-react-official": "^3.0.0",
+    "http-proxy-middleware": "^2.0.6",
     "jquery": "^3.5.1",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.19",
