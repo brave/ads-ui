@@ -13,8 +13,7 @@ const CampaignList = props => {
         variables: { id: props.advertiserId }
     });
 
-    const canEdit = true;// advertiserId === '84f72479-ede2-4b74-8ca4-11f3c0b276ba' || advertiserId === '8cfac071-75f8-46ab-9c7f-4f8420d914d7';
-
+    const canEdit =  advertiserId === '84f72479-ede2-4b74-8ca4-11f3c0b276ba' || advertiserId === '8cfac071-75f8-46ab-9c7f-4f8420d914d7';
     const columns = [
         {
             Header: 'Campaign',
