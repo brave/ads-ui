@@ -5,7 +5,7 @@ import Select from 'react-select';
 import _ from "lodash";
 import * as tweetnacl from "tweetnacl";
 import { ADVERTISER, UPDATE_ADVERTISER } from "./queries/Settings.queries";
-import { useMutation, useQuery } from "react-apollo";
+import { useQuery, useMutation } from "@apollo/client";
 import Modal from 'react-modal';
 import { Icon } from "@material-ui/core";
 

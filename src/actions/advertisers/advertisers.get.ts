@@ -36,7 +36,8 @@ export const GetAdvertisers = (auth: IAuthPayload, userId?: string) => {
       dispatch(GetAdvertiserSuccessful(response.data));
       dispatch(OpenSnackBar("Advertiser Get Successfully"));
       return Promise.resolve(response.data);
-    } catch (error) {
+      // TODO: Remove w/ redux
+    } catch (error: any) {
       dispatch(GetAdvertisersFaild());
       if (error.response) {
         dispatch(OpenSnackBar(`Get Advertisers  failed: ${error.response.data.error}`));

@@ -18,4 +18,4 @@ This bundle is then served to users as a static asset by [AWS CloudFront CDN](ht
 
 ### Local Development
 - Create a `.env.local` file.
-- Set `PROXY_URL=<>` to the endpoint you wish to pull data from
+- Set `BACKEND_URL=<>` to the endpoint you wish to pull data from

@@ -37,7 +37,8 @@ export const CreateCampaigns = (campaign: ICreateCampaignPayload, auth: IAuthPay
       dispatch(OpenSnackBar("Campaign created Successfully"));
       dispatch(CreateCampaignsSuccessful(response.data));
       return Promise.resolve(response.data);
-    } catch (error) {
+      // TODO: Remove w/ redux
+    } catch (error: any) {
       dispatch(CreateCampaignsFailed());
       if (error.response) {
         dispatch(OpenSnackBar(`Create Campaigns  Failed: ${error.response.data.error}`));

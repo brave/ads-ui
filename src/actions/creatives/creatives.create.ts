@@ -36,7 +36,7 @@ export const CreateCreatives = (creative: ICreateCreativePayload, auth: IAuthPay
       dispatch(OpenSnackBar("Creative created Successfully"));
       dispatch(CreateCreativesSuccessful(response.data));
       return Promise.resolve(response.data);
-    } catch (error) {
+    } catch (error: any) {
       dispatch(CreateCreativesFailed());
       if (error.response) {
         dispatch(OpenSnackBar(`Create Creatives  Failed: ${error.response.data.error}`));

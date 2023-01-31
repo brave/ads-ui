@@ -35,7 +35,7 @@ export const UpdateInvoices = (invoice: Partial<IInvoicePayload>, user: IAuthPay
       });
       dispatch(UpdateInvoicesSuccessful(response.data));
       dispatch(OpenSnackBar("Invoice updated Successfully"));
-    } catch (error) {
+    } catch (error: any) {
       dispatch(UpdateInvoicesFailed());
       if (error.response) {
         dispatch(OpenSnackBar(`Update Invoices  Failed: ${error.response.data.error}`));

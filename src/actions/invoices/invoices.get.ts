@@ -36,7 +36,7 @@ export const GetInvoices = (auth: IAuthPayload,  userId?: string) => {
       });
       dispatch(GetInvoicesSuccessful(response.data));
       dispatch(OpenSnackBar("Invoice get Successfully"));
-    } catch (error) {
+    } catch (error: any) {
       dispatch(GetInvoicesFailed());
       if (error.response) {
         dispatch(OpenSnackBar(`Get Invoices  Failed: ${error.response.data.error}`));

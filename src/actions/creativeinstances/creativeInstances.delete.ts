@@ -36,7 +36,7 @@ export const DeleteCreativeInstances = (creativeInstance: ICreativeInstancePaylo
         });
       dispatch(DeleteCreativeInstancesSuccessful(creativeInstance));
       dispatch(OpenSnackBar("CreativeInstance deleted Successfully"));
-    } catch (error) {
+    } catch (error: any) {
       dispatch(DeleteCreativeInstancesFailed());
       if (error.response) {
         dispatch(OpenSnackBar(`Delete CreativeInstances  Failed: ${error.response.data.error}`));

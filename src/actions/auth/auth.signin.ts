@@ -30,7 +30,7 @@ export const SignIn = (payload: ISignInPayload) => {
         dispatch(SignInSuccessful({ accessToken: payload.accessToken }));
         dispatch(OpenSnackBar("Signed In Successfully"));
         return Promise.resolve({ accessToken: payload.accessToken });
-      } catch (error) {
+      } catch (error: any) {
         dispatch(SignInFailed(error));
       }
     }
@@ -45,7 +45,8 @@ export const SignIn = (payload: ISignInPayload) => {
         dispatch(SignInSuccessful(response.data));
         dispatch(OpenSnackBar("Signed In Successfully"));
         return Promise.resolve(response.data);
-      } catch (error) {
+        // TODO: Remove w/ redux
+      } catch (error: any) {
         dispatch(SignInFailed(error));
         if (error.response) {
           dispatch(OpenSnackBar(`Sign In  Failed: ${error.response.data.error}`));

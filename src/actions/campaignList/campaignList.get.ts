@@ -35,7 +35,8 @@ export const GetCampaignList = (auth: IAuthPayload, userId?: string) => {
             dispatch(GetCampaignListSuccessful(response.data));
             dispatch(OpenSnackBar("Campaign List retrieved successfully"));
             return Promise.resolve(response.data);
-        } catch (error) {
+          // TODO: Remove w/ redux
+        } catch (error: any) {
             dispatch(GetCampaignListFailed());
             if (error.response) {
                 dispatch(OpenSnackBar(`Get Campaigns List  Failed: ${error.response.data.error}`));

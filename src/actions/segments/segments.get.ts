@@ -34,7 +34,7 @@ export const GetSegments = (user: IAuthPayload) => {
       });
       dispatch(GetSegmentSuccessful(response.data));
       dispatch(OpenSnackBar("Segment Get Successfully"));
-    } catch (error) {
+    } catch (error: any) {
       dispatch(GetSegmentsFaild());
       if (error.response) {
         dispatch(OpenSnackBar(`Get Segments  Failed: ${error.response.data.message}`));

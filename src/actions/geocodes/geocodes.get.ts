@@ -34,7 +34,7 @@ export const GetGeocodes = (user: IAuthPayload) => {
       });
       dispatch(GetGeocodeSuccessful(response.data));
       dispatch(OpenSnackBar("Geocode Get Successfully"));
-    } catch (error) {
+    } catch (error: any) {
       dispatch(GetGeocodesFaild());
       if (error.response) {
         dispatch(OpenSnackBar(`Get Geocodes  Failed: ${error.response.data.message}`));

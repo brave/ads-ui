@@ -35,7 +35,8 @@ export const GetReports = (user: IAuthPayload, campaignId: string) => {
       dispatch(GetReportSuccessful(response.data));
       dispatch(OpenSnackBar("Report Get Successfully"));
       return Promise.resolve(response.data);
-    } catch (error) {
+      // TODO: Remove w/ redux
+    } catch (error: any) {
       dispatch(GetReportsFaild());
       if (error.response) {
         dispatch(OpenSnackBar(`Get Reports  Failed: ${error.response.data.message}`));
