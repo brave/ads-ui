@@ -7,15 +7,11 @@ import {
   GET_CREATIVES_SUCCESSFUL,
   ICreativeAction,
   SIGN_OUT,
-  UPDATE_CREATIVES_FAILED,
-  UPDATE_CREATIVES_START,
-  UPDATE_CREATIVES_SUCCESSFUL,
 } from "../../actions";
 
 import { createCreativeReducer } from "./creative.create";
 import { getCreativeReducer } from "./creative.get";
 import { ICreativeState } from "./creative.interface";
-import { updateCreativeReducer } from "./creative.update";
 
 const creativeReducer = (
   state: ICreativeState = {
@@ -32,10 +28,6 @@ const creativeReducer = (
     case CREATE_CREATIVES_START:
     case CREATE_CREATIVES_SUCCESSFUL:
       return createCreativeReducer(state, action);
-    case UPDATE_CREATIVES_FAILED:
-    case UPDATE_CREATIVES_START:
-    case UPDATE_CREATIVES_SUCCESSFUL:
-      return updateCreativeReducer(state, action);
     case SIGN_OUT:
       return {
         creatives: [],
