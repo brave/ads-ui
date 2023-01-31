@@ -60,7 +60,7 @@
     "@types/redux-form": "8.2.5",
     "@types/redux-logger": "3.0.7",
     "local-web-server": "4.0.0",
-    "react-scripts": "5.0.1",
+    "react-scripts": "5.0.0",
     "typescript": "4.9.4"
   },
   "overrides": {
