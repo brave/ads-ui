@@ -36,12 +36,10 @@ const buildApolloClient = (accessToken: string) => {
     },
   });
 
-  const client = new ApolloClient({
+  return new ApolloClient({
     link: httpLink,
     cache: new InMemoryCache(),
   });
-
-  return client;
 };
 
 class User extends React.Component<any, any> {
