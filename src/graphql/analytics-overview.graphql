@@ -1,0 +1,33 @@
+fragment Engagement on Engagement {
+  createdat
+  type
+  count
+  android
+  ios
+  linux
+  macos
+  windows
+  other
+}
+
+query analyticOverview($id: String!) {
+  campaign(id: $id){
+    id
+    name
+    state
+    dailyBudget
+    budget
+    spent
+    currency
+    createdAt
+    startAt
+    endAt
+    currency
+    pacingIndex
+    type
+    format
+    engagements {
+      ...Engagement
+    }
+  }
+}
