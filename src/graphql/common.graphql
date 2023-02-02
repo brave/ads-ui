@@ -1,0 +1,17 @@
+query ActiveGeocodes {
+  activeGeocodes {
+    data {
+      code
+      name
+    }
+  }
+}
+
+query Segments {
+  segments {
+    data {
+      code
+      name
+    }
+  }
+}

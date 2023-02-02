@@ -4,7 +4,6 @@ import Section from '../../../../../../../components/section/Section';
 import { Text } from "../../../../../../../components/Text/Text";
 import * as S from "./AdsForm.style";
 import OSNotificationCreativePreview from '../../../../../../../components/creativePreview/OSNotificationCreativePreview/OSNotificationCreativePreview';
-import { fetchCreativeAssets, fetchCreativeType } from "./lib/AdsForm.library";
 
 import Notification from "./assets/notification.png";
 import { Icon } from '@material-ui/core';
@@ -56,74 +55,6 @@ class AdsForm extends Component<any, any> {
         }
         this.showDeleteAdModal(false);
     }
-
-    handleViewPricing(e) {
-        let adSets = this.props.adSets;
-        adSets[this.props.selectedAdSet].ads[this.props.selectedAd].viewPricing = e.target.value;
-        this.props.setAdSets(adSets);
-    }
-
-    handleClickPricing(e) {
-        let adSets = this.props.adSets;
-        adSets[this.props.selectedAdSet].ads[this.props.selectedAd].clickPricing = e.target.value;
-        this.props.setAdSets(adSets);
-    }
-
-    handleConversionPricing(e) {
-        let adSets = this.props.adSets;
-        adSets[this.props.selectedAdSet].ads[this.props.selectedAd].conversionPricing = e.target.value;
-        this.props.setAdSets(adSets);
-    }
-
-    handleViewWebhook(e) {
-        let adSets = this.props.adSets;
-        adSets[this.props.selectedAdSet].ads[this.props.selectedAd].viewWebhook = e.target.value;
-        this.props.setAdSets(adSets);
-    }
-
-    handleClickWebhook(e) {
-        let adSets = this.props.adSets;
-        adSets[this.props.selectedAdSet].ads[this.props.selectedAd].clickWebhook = e.target.value;
-        this.props.setAdSets(adSets);
-    }
-
-    handleConversionWebhook(e) {
-        let adSets = this.props.adSets;
-        adSets[this.props.selectedAdSet].ads[this.props.selectedAd].conversionWebhook = e.target.value;
-        this.props.setAdSets(adSets);
-    }
-
-    handleCreative = async (selectedOption) => {
-        let adSets = this.props.adSets;
-        adSets[this.props.selectedAdSet].ads[this.props.selectedAd].creative = selectedOption;
-        let data = await fetchCreativeType(selectedOption.value, this.props.auth.accessToken);
-
-
-        if (data.creative.type.code === "notification_all_v1") {
-            let data2 = await fetchCreativeAssets(selectedOption.value, this.props.auth.accessToken);
-            adSets[this.props.selectedAdSet].ads[this.props.selectedAd].name = data2.creative.name;
-            adSets[this.props.selectedAdSet].ads[this.props.selectedAd].title = data2.creative.payload.title;
-            adSets[this.props.selectedAdSet].ads[this.props.selectedAd].body = data2.creative.payload.body;
-            adSets[this.props.selectedAdSet].ads[this.props.selectedAd].targetUrl = data2.creative.payload.targetUrl;
-            adSets[this.props.selectedAdSet].ads[this.props.selectedAd].previewAssets.body = data2.creative.payload.body;
-            adSets[this.props.selectedAdSet].ads[this.props.selectedAd].previewAssets.title = data2.creative.payload.title;
-            adSets[this.props.selectedAdSet].ads[this.props.selectedAd].previewAssets.body = data2.creative.payload.body;
-            adSets[this.props.selectedAdSet].ads[this.props.selectedAd].inPageAd = false;
-            adSets[this.props.selectedAdSet].ads[this.props.selectedAd].notificationAd = true;
-        }
-        else {
-            adSets[this.props.selectedAdSet].ads[this.props.selectedAd].notificationAd = false;
-            adSets[this.props.selectedAdSet].ads[this.props.selectedAd].inPageAd = true;
-        }
-
-        this.props.setAdSets(adSets);
-    };
-
-    handleAdSets = selectedOption => {
-        let adSets = this.props.adSets;
-        adSets[this.props.selectedAdSet].ads[this.props.selectedAd].adSets = selectedOption;
-        this.props.setAdSets(adSets);
-    };
 
     handleName(e) {
         let adSets = this.props.adSets;

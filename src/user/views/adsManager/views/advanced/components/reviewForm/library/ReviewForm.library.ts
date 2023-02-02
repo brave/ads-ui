@@ -133,7 +133,7 @@ async function processAdSet(adSets, userId, advertiserId, accessToken, campaign)
 }
 
 
-// Prepare the graphql input for requesting 
+// Prepare the graphql input for requesting
 async function processCampaign(userId, advertiserId, campaign, adSets, accessToken) {
 
     let createCampaignInput = {
@@ -175,7 +175,7 @@ async function processCampaign(userId, advertiserId, campaign, adSets, accessTok
     geoTargets = JSON.stringify(geoTargets).replace(/\"([^(\")"]+)\":/g, "$1:");
     createCampaignInput.geoTargets = geoTargets;
 
-    // Good up to here, now process Ad Sets. 
+    // Good up to here, now process Ad Sets.
     // let adSetsInput = await processAdSets(adSets, userId, advertiserId, accessToken);
 
     // createCampaignInput.adSets = JSON.stringify(adSetsInput);

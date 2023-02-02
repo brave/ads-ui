@@ -10,14 +10,13 @@ import DateRangePicker from 'react-bootstrap-daterangepicker';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-daterangepicker/daterangepicker.css';
 
-import { useQuery } from "@apollo/client";
-import { ANALYTICS_OVERVIEW } from "./lib/AnalyticsOverview.queries";
-import { downloadCSV, processData, prepareChart, prepareSankey, formatMetric, tempMetric, budgetMetric } from "./lib/AnalyticsOverview.library";
+import { downloadCSV, processData, prepareChart, formatMetric, tempMetric, budgetMetric } from "./lib/AnalyticsOverview.library";
 import PopoutExample from "./lib/Popout";
 
 import * as S from "./styles/AnalyticsOverview.style";
 import moment from "moment";
 import { CircularProgress } from "@material-ui/core";
+import { useAnalyticOverviewQuery } from "../../../graphql/analytics-overview.generated";
 
 HighchartsSankey(Highcharts);
 highcharts3d(Highcharts);
@@ -46,9 +45,9 @@ const AnalyticsOverview = props => {
         setStartDate(moment(data.campaign.startAt).utc().startOf('day').format('YYYY-MM-DD[T]HH:mm'));
     }
 
-    const { loading, data } = useQuery(ANALYTICS_OVERVIEW, {
-        variables: { id: match.params.campaignId },
-        onCompleted: initializeStartDate,
+    const { loading, data } = useAnalyticOverviewQuery({
+      variables: { id: match.params.campaignId },
+      onCompleted: initializeStartDate,
     });
 
     const handleCallback = (start, end) => {

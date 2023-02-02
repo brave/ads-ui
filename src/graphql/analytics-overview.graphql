@@ -1,0 +1,20 @@
+fragment Engagement on Engagement {
+  createdat
+  type
+  count
+  android
+  ios
+  linux
+  macos
+  windows
+  other
+}
+
+query analyticOverview($id: String!) {
+  campaign(id: $id){
+    ...Campaign
+    engagements {
+      ...Engagement
+    }
+  }
+}

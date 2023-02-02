@@ -40,7 +40,7 @@ const NEW_CAMPAIGN_ADVERTISER_ALLOW_LIST = [
 ];
 
 function shouldShowNewCampaign(advertiserId: string): boolean {
-    return NEW_CAMPAIGN_ADVERTISER_ALLOW_LIST.includes(advertiserId);
+    return process.env.REACT_APP_ENABLE_FEATURES === "true" || NEW_CAMPAIGN_ADVERTISER_ALLOW_LIST.includes(advertiserId);
 }
 
 class Navbar extends React.Component<any, any> {
