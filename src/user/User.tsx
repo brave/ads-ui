@@ -1,6 +1,6 @@
 import _ from "lodash";
 import React, {useContext, useMemo, useState} from "react";
-import {Redirect, Route, Switch} from "react-router-dom";
+import {Redirect, Route, Switch, useRouteMatch} from "react-router-dom";
 
 import Navbar from "./components/navbar/Navbar";
 import Selection from "./views/adsManager/views/selection/Selection";
@@ -44,9 +44,9 @@ interface Props {
 
 function User({advertisers, auth}: Props) {
   const context = useContext(Context);
+  const match = useRouteMatch();
   const [activeAdvertiser, setActiveAdvertiser] = useState(_.find(advertisers, {state: "active"}));
   const client = useMemo(() => buildApolloClient(auth.accessToken), [auth.accessToken])
-
 
   if (
     !auth ||
@@ -83,11 +83,11 @@ function User({advertisers, auth}: Props) {
           <S.Main>
             <Switch>
               {/* /adsmanager */}
-              <Route path={"/adsmanager/selection"} component={Selection}/>
-              <Route path="/adsmanager/advanced" component={Advanced}/>
+              <Route path={`${match.path}/adsmanager/selection`} component={Selection}/>
+              <Route path={`${match.path}/adsmanager/advanced`} component={Advanced}/>
 
               {/* /settings */}
-              <Route path="/settings">
+              <Route path={`${match.path}/settings`}>
                 <Settings
                   userId={auth.id}
                   advertisers={advertisers}
@@ -97,17 +97,17 @@ function User({advertisers, auth}: Props) {
               </Route>
 
               {/* /campaigns */}
-              <Route path="/campaigns">
+              <Route path={`${match.path}/campaigns`}>
                 <CampaignList userId={auth.id} advertiserId={activeAdvertiser.id}/>
               </Route>
 
               {/* /campaigns/:campaignId/analytics - */}
-              <Route path="/campaign/:campaignId/analytics/overview">
+              <Route path={`${match.path}/campaign/:campaignId/analytics/overview`}>
                 <AnalyticsOverview auth={auth} />
               </Route>
 
               {/* default */}
-              <Redirect to="/campaigns"/>
+              <Redirect to={`${match.path}/campaigns`}/>
             </Switch>
           </S.Main>
         </S.Content>

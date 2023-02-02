@@ -11,7 +11,6 @@ import {SignOut} from "../../../actions";
 
 import BraveAdsLogo from "../../../assets/images/Subdomains_Rewards_Ads_Default.png";
 
-import {styles} from "./style/Navbar.style";
 import OutsideAlerter from "../../../components/OutsideAlerter/OutSideAlerter";
 import TopBarProgress from "react-topbar-progress-indicator";
 import {Text} from "../../../components/Text/Text";
@@ -122,15 +121,10 @@ class Navbar extends React.Component<any, any> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
-  open: state.drawerReducer.open
-});
-
 const mapDispatchToProps = (dispatch: any) => ({
   signOut: () => dispatch(SignOut()),
 });
 
 export default connect(
-  mapStateToProps,
   mapDispatchToProps
 )(Navbar);
