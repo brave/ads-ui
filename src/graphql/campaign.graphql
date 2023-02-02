@@ -1,0 +1,46 @@
+fragment Campaign on Campaign {
+  id
+  name
+  state
+  dailyCap
+  priority
+  passThroughRate
+  pacingOverride
+  pacingStrategy
+  externalId
+  currency
+  budget
+  dailyBudget
+  spent
+  createdAt
+  startAt
+  endAt
+  type
+  format
+  dayProportion
+  geoTargets {
+    code
+    name
+  }
+  adSets {
+    ...AdSet
+  }
+}
+
+query LoadCampaign($id: String!) {
+  campaign(id: $id) {
+    ...Campaign
+  }
+}
+
+mutation CreateCampaign($input: CreateCampaignInput!) {
+  createCampaign(createCampaignInput: $input) {
+    id
+  }
+}
+
+mutation UpdateCampaign($input: UpdateCampaignInput!) {
+  updateCampaign(updateCampaignInput: $input) {
+    id
+  }
+}

@@ -1,19 +1,18 @@
 import React from "react";
-import { CAMPAIGN_LIST } from "./lib/CampaignList.queries";
 import Table from "../../components/Table/TableComponent";
 import { Link } from "react-router-dom";
 import * as S from "./style/CampaignList.style";
-import { useQuery } from "@apollo/client";
+import {useAdvertiserCampaignsQuery} from "../../graphql/advertiser.generated";
 
 const CampaignList = props => {
     const userId = props.userId;
     const advertiserId = props.advertiserId;
 
-    const { loading, data } = useQuery(CAMPAIGN_LIST, {
+    const { loading, data } = useAdvertiserCampaignsQuery({
         variables: { id: props.advertiserId }
     });
 
-    const canEdit =  advertiserId === '84f72479-ede2-4b74-8ca4-11f3c0b276ba' || advertiserId === '8cfac071-75f8-46ab-9c7f-4f8420d914d7';
+    const canEdit = process.env.REACT_APP_ENABLE_FEATURES === "true" || (advertiserId === '84f72479-ede2-4b74-8ca4-11f3c0b276ba' || advertiserId === '8cfac071-75f8-46ab-9c7f-4f8420d914d7');
     const columns = [
         {
             Header: 'Campaign',
@@ -87,7 +86,7 @@ const CampaignList = props => {
 
     return (
         <div>
-           <Table data={data.advertiser.campaigns} columns={columns} tableWidth={1094} columnCount={7} />
+           <Table data={data?.advertiser?.campaigns} columns={columns} tableWidth={1094} columnCount={7} />
         </div>
     );
 }

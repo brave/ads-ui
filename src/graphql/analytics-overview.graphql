@@ -12,20 +12,7 @@ fragment Engagement on Engagement {
 
 query analyticOverview($id: String!) {
   campaign(id: $id){
-    id
-    name
-    state
-    dailyBudget
-    budget
-    spent
-    currency
-    createdAt
-    startAt
-    endAt
-    currency
-    pacingIndex
-    type
-    format
+    ...Campaign
     engagements {
       ...Engagement
     }

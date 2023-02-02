@@ -16,7 +16,7 @@ import PopoutExample from "./lib/Popout";
 import * as S from "./styles/AnalyticsOverview.style";
 import moment from "moment";
 import { CircularProgress } from "@material-ui/core";
-import { useAnalyticOverviewQuery } from "../../../graphql/graphql.generated";
+import { useAnalyticOverviewQuery } from "../../../graphql/analytics-overview.generated";
 
 HighchartsSankey(Highcharts);
 highcharts3d(Highcharts);

@@ -4,10 +4,9 @@ import { Button, Input, InputContainer } from "../../components/formElements/for
 import Select from 'react-select';
 import _ from "lodash";
 import * as tweetnacl from "tweetnacl";
-import { ADVERTISER, UPDATE_ADVERTISER } from "./queries/Settings.queries";
-import { useQuery, useMutation } from "@apollo/client";
 import Modal from 'react-modal';
 import { Icon } from "@material-ui/core";
+import {useAdvertiserQuery, useUpdateAdvertiserMutation} from "../../graphql/advertiser.generated";
 
 const modalStyles = {
     content: {
@@ -96,18 +95,15 @@ const Settings = props => {
     }
 
 
-    const [updateAdvertiser] =
-        useMutation(UPDATE_ADVERTISER, {
-            variables: {
-                updateAdvertiserInput: {
-                    id: props.activeAdvertiser.id,
-                    publicKey: publicKey
-                }
-            },
-            onCompleted: handleUpdateAdvertiser
-        });
+    const [updateAdvertiser] = useUpdateAdvertiserMutation({
+      variables: { updateAdvertiserInput: {
+        id: props.activeAdvertiser.id,
+        publicKey: publicKey
+      }},
+      onCompleted: handleUpdateAdvertiser,
+    });
 
-    const { loading: queryLoading } = useQuery(ADVERTISER, {
+    const { loading: queryLoading } = useAdvertiserQuery({
         variables: { id: props.activeAdvertiser.id },
         onCompleted: initializeAdvertiser,
     });

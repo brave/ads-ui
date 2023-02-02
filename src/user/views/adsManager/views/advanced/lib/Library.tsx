@@ -10,7 +10,6 @@ export async function initializeData(context) {
     initializedData.segments = await initializeSegments(segmentsQuery, context.props.auth.accessToken);
     // TODO - Merge these two vars into one
 
-    let values = await initializeCampaign(campaignQuery, initializedData.campaignId, context.props.auth.accessToken);
     [initializedData.campaign, initializedData.adSets] = await initializeCampaign(campaignQuery, initializedData.campaignId, context.props.auth.accessToken);
     initializedData.selectedAdSet = 0;
     initializedData.selectedAd = 0;

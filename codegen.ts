@@ -11,11 +11,11 @@ const config: CodegenConfig = {
         baseTypesPath: 'graphql/types.ts',
       },
       plugins: ['typescript-operations', 'typescript-react-apollo'],
-      config: { withHooks: true },
+      config: { withHooks: true, withRefetchFn: true },
     },
     'src/graphql/types.ts': {
-      plugins: ['typescript', 'addScalars'],
-      config: { onlyEnums: true },
+      plugins: ['typescript'],
+      config: { onlyOperationTypes: true },
     },
     'src/gql/ads-ui-types.json': {
       // Nicety for fragment autocompletion, don't need to check in
