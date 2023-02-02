@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "@mui/material";
 
 export const InnerContainer = styled("div")`
   display: flex;
@@ -67,7 +67,7 @@ export const Button = styled("div")`
   display: flex;
   justify-content: center;
   padding: 0px 20px;
-  width: 100px; 
+  width: 100px;
   background: #F87454;
   color: white;
   border: none;
@@ -79,7 +79,7 @@ export const SecondaryButton = styled("div")`
   display: flex;
   justify-content: center;
   padding: 0px 20px;
-  width: 100px; 
+  width: 100px;
   background: #fafafa;
   color: black;
   border: 1px solid #e2e2e2;
@@ -93,9 +93,9 @@ export const LeftColumnContainer = styled("div")`
 `;
 
 export const Container = styled("div")`
-  display: flex; 
-  margin-top: 28px; 
-  margin-bottom: 28px; 
+  display: flex;
+  margin-top: 28px;
+  margin-bottom: 28px;
   border-bottom: 1px solid #ededed;
 `;
 

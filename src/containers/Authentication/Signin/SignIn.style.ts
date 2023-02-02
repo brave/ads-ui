@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "@mui/material";
 import BraveLogo from "../../../assets/images/brave-logotype-full-color.png";
 
 enum Breakpoint {

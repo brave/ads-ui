@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "@mui/material";
 
 export const Container = styled("div")`
   width: 75%;
@@ -108,7 +108,7 @@ export const Input = styled("input")`
     }
     `
   }
-  
+
 `
 
 interface ObjectiveProps {
@@ -119,9 +119,9 @@ export const Objective = styled("div")`
   width: 200px;
   border: 1px solid #e2e2e2;
   border-radius: 4px;
-  height: 48px; 
-  display: flex; 
-  justify-content: center; 
+  height: 48px;
+  display: flex;
+  justify-content: center;
   align-items: center;
   cursor: pointer;
 
@@ -137,7 +137,7 @@ export const Button = styled("div")`
   display: flex;
   justify-content: center;
   padding: 0px 20px;
-  width: 100px; 
+  width: 100px;
   background: #4C54D2;
   color: white;
   border: none;

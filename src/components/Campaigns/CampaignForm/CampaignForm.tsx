@@ -1,10 +1,3 @@
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  withStyles
-} from "@material-ui/core";
 import React from "react";
 import { Field, FieldArray, initialize, reduxForm } from "redux-form";
 
@@ -15,7 +8,7 @@ import {
   renderTextField
 } from "../../../containers/field-material";
 
-import { styles } from "./CampaignForm.style";
+import {Button, FormControl, InputLabel, MenuItem} from "@mui/material";
 
 const validate = (values: any) => {
   const errors: any = {};
@@ -39,12 +32,6 @@ const validate = (values: any) => {
 };
 
 class CampaignForm extends React.Component<any, any> {
-  // componentDidMount() {
-  //   const initData = {
-  //     dailyCap: 1
-  //   };
-  //   this.props.initialize(initData);
-  // }
   public render() {
     const {
       campaign,
@@ -225,6 +212,6 @@ class CampaignForm extends React.Component<any, any> {
 const CampaignFormRedux = reduxForm({
   form: "CampaignForm",
   validate
-})(withStyles(styles)(CampaignForm) as any);
+})(CampaignForm as any);
 
 export default CampaignFormRedux as any;

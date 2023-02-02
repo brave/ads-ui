@@ -1,21 +1,8 @@
 import React, { Component } from 'react';
 import { Text } from "../../../../../../../components/Text/Text";
-import { Icon } from '@material-ui/core';
 import * as S from "./FormProgress.style";
 
 class FormProgress extends Component<any, any> {
-
-    renderOrderTypeIcon() {
-        return (
-            <React.Fragment>
-                <S.InactiveIcon />
-                <Text style={{ marginLeft: "12px", opacity: .5 }} sizes={[16, 16, 15, 15, 14]} fontFamily={"Muli"}>
-                    Order Type
-                </Text>
-                <S.Line />
-            </React.Fragment>
-        )
-    }
 
     renderCampaignIcon() {
         if (this.props.form === "campaignForm") {

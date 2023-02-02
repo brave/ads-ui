@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "@mui/material";
 
 interface NavProps {
     selected: boolean;
@@ -9,7 +9,7 @@ export const SideBar = styled("div")`
     min-height: 150vh;
     position: absolute;
     left: 0;
-    top: 64px; 
+    top: 64px;
     bottom: 0;
     padding-top: 56px;
     border-right: 1px solid #e2e2e2;
@@ -38,7 +38,7 @@ export const NavSubItem = styled("div")`
 export const Nav = styled("div")`
 display: flex;
 position: relative;
-align-items: center; 
+align-items: center;
 border-top: 1px solid #e2e2e2;
 width: 100%;
 cursor: pointer;
@@ -55,7 +55,7 @@ cursor: pointer;
   ${props =>
         props.selected
         && `
-      border-right: 3px solid #F8532BCC; 
+      border-right: 3px solid #F8532BCC;
       box-shadow: 1px 0px 0px 0px #F8532BCC;
       `}
 `;
@@ -78,7 +78,7 @@ export const OrangeBracket = styled("div")`
 
 export const ReviewNav = styled("div")`
 display: flex;
-align-items: center; 
+align-items: center;
 justify-content: center;
 border-top: 1px solid #e2e2e2;
 border-bottom: 1px solid #e2e2e2;
@@ -97,7 +97,7 @@ cursor: pointer;
   ${props =>
         props.selected
         && `
-      border-right: 3px solid #F8532BCC; 
+      border-right: 3px solid #F8532BCC;
       box-shadow: 1px 0px 0px 0px #F8532BCC;
       `}
 `;

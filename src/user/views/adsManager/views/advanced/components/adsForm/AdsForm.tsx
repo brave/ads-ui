@@ -6,9 +6,10 @@ import * as S from "./AdsForm.style";
 import OSNotificationCreativePreview from '../../../../../../../components/creativePreview/OSNotificationCreativePreview/OSNotificationCreativePreview';
 
 import Notification from "./assets/notification.png";
-import { Icon } from '@material-ui/core';
 import Modal from '../../../../../../../components/modal/Modal';
-import Switch from "react-switch";
+import ClearIcon from '@mui/icons-material/Clear';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import InfoIcon from "@mui/icons-material/Info";
 
 
 class AdsForm extends Component<any, any> {
@@ -197,7 +198,7 @@ class AdsForm extends Component<any, any> {
                 <div style={{ width: "500px" }}>
                     <div style={{ display: "flex" }}>
                         <Text content={"Delete this Ad?"} sizes={[16, 16, 15, 15, 22]} color={"#E0694C"} fontFamily={"Poppins"} />
-                        <Icon onClick={() => this.showDeleteAdModal(false)} style={{ marginLeft: "auto", color: "grey", cursor: "pointer" }}>clear</Icon>
+                        <ClearIcon />
                     </div>
                     <Text style={{ marginTop: "42px" }} content={`Do you want to delete Ad ${index + 1}? This action cannot be undone.`} sizes={[16, 16, 15, 15, 16]} fontFamily={"Muli"} />
                     <div style={{ display: "flex", width: "100%", marginTop: "42px" }}>
@@ -224,33 +225,10 @@ class AdsForm extends Component<any, any> {
     render() {
         return (
             <React.Fragment>
-
-                {/* <div style={{ width: "280px" }}>
-                    <S.AdSetsTabs>
-                        {this.renderAdSetsTabs()}
-                        <S.AdSetsTabButtonContainer>
-                            <S.Button onClick={() => { this.addAd() }} style={{ marginLeft: "auto", marginRight: "auto", width: "175px", backgroundColor: "white", color: "black", border: "1px solid #d6d6d6" }}>
-                                <Text content={"New Ad"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
-                            </S.Button>
-                        </S.AdSetsTabButtonContainer>
-                    </S.AdSetsTabs>
-                </div> */}
                 <div style={{ display: "flex", position: "relative", marginTop: "28px", width: "100%" }}>
                     <div style={{ width: "720px" }}>
                         <Section fullWidthChild={true}>
                             <>
-
-                                {/* <Text content={"Ads"} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
-                                <div style={{ display: "flex" }}>
-                                    <Text content={"Define one or many advertisements that promote your business."} style={{ marginTop: "2px", marginBottom: "14px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                    <Text content={"Learn More."} color={"#E0694C"} style={{ marginTop: "2px", marginBottom: "14px", marginLeft: "4px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                </div> */}
-
-                                {/* <div style={{ display: "flex" }}>
-                                    <Text content={"Number of Ads"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                    <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "1px", marginLeft: "2px" }}>info</Icon>
-                                </div> */}
-
                                 <div style={{ width: "100%", display: "flex" }}>
                                 </div>
 
@@ -262,7 +240,7 @@ class AdsForm extends Component<any, any> {
                                     </S.Container>
                                     {
                                         this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].newCreative &&
-                                        <Icon onClick={() => { this.showDeleteAdModal(true) }} style={{ marginLeft: "auto", fontSize: "18px", cursor: "pointer" }}>more_vert</Icon>
+                                        <MoreVertIcon />
                                     }
                                 </div>
 
@@ -279,24 +257,9 @@ class AdsForm extends Component<any, any> {
                                     <Text content={"Learn More."} color={"#E0694C"} style={{ marginTop: "2px", marginBottom: "14px", marginLeft: "4px" }} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                 </div>
 
-
-                                {/* <div style={{ display: "flex", marginBottom: "14px" }}>
-
-                                    <div style={{ display: "flex", marginTop: "8px", marginBottom: "12px" }}>
-                                        <input style={{ marginRight: "8px" }} type="radio" checked={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].newCreative} onChange={(e) => this.handleNewCreative(true)} />
-                                        <Text content={"New Creative"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                    </div>
-
-                                    <div style={{ display: "flex", marginTop: "8px", marginBottom: "8px", marginLeft: "8px" }}>
-                                        <input style={{ marginRight: "8px" }} type="radio" checked={!this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].newCreative} onChange={(e) => this.handleNewCreative(false)} />
-                                        <Text content={"Use Existing Creative"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                    </div>
-
-                                </div> */}
-
                                 <div style={{ display: "flex", marginTop: "8px" }}>
                                     <Text content={"Creative Type"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                    <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "1px", marginLeft: "2px" }}>info</Icon>
+                                    <InfoIcon />
                                 </div>
 
                                 <div style={{ display: "flex", marginBottom: "24px", marginTop: "12px" }}>
@@ -381,32 +344,16 @@ class AdsForm extends Component<any, any> {
                                                 <div style={{ width: "45%", marginBottom: "28px" }}>
                                                     <div style={{ display: "flex" }}>
                                                         <Text content={"Ad State"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                        <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "1px", marginLeft: "2px" }}>info</Icon>
+                                                        <InfoIcon />
                                                     </div>
                                                     <div style={{ display: "flex", marginTop: "12px", marginLeft: "0px", alignItems: "center" }}>
-                                                        <Switch checked={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].state === 'active'} onChange={(status) => { this.handleStatus(status) }} onColor="#FB7959" uncheckedIcon={false} checkedIcon={false} height={23} width={45} />
+                                                        {/*<Switch checked={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].state === 'active'} onChange={(status) => { this.handleStatus(status) }} onColor="#FB7959" uncheckedIcon={false} checkedIcon={false} height={23} width={45} />*/}
                                                         <Text style={{ marginLeft: "6px" }} content={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].state === 'active' ? "Active" : "Paused"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                                     </div>
                                                 </div>
                                             }
                                         </>
-
                                     </div>
-
-                                    {/* <div style={{ width: "50%", marginLeft: "28px", marginTop: "23px" }}>
-                                        <div>
-                                            {
-                                                this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].notificationAd &&
-                                                <OSNotificationCreativePreview title={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].previewAssets.title} body={this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].previewAssets.body} />
-                                            }
-                                            {
-                                                this.props.adSets[this.props.selectedAdSet].ads[this.props.selectedAd].inPageAd &&
-                                                <div>In Page creative preview coming soon!</div>
-                                            }
-                                        </div>
-
-                                    </div> */}
-
                                 </div>
 
                                 <div style={{ display: "flex" }}>

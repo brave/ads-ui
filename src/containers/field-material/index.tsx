@@ -1,4 +1,6 @@
 import MomentUtils from "@date-io/moment";
+import _ from "lodash";
+import React from "react";
 import {
   Checkbox,
   Chip,
@@ -8,12 +10,10 @@ import {
   MenuItem,
   Select,
   TextField,
-  Typography,
-} from "@material-ui/core";
-import _ from "lodash";
-import DateTimePicker from "material-ui-pickers/DateTimePicker";
-import MuiPickersUtilsProvider from "material-ui-pickers/MuiPickersUtilsProvider";
-import React from "react";
+  Typography
+} from "@mui/material";
+import {DateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 
 export const renderTextField = ({
   input,
@@ -69,14 +69,14 @@ export const renderDateTimeField = ({
   // tslint:disable-next-line:trailing-comma
   ...custom
 }: any) => (
-    <MuiPickersUtilsProvider utils={MomentUtils}>
+    <LocalizationProvider dateAdapter={AdapterMoment}>
       <DateTimePicker
         {...input}
         label={label}
         onChange={(value: any) => input.onChange(value)}
         {...custom}
       />
-    </MuiPickersUtilsProvider>
+    </LocalizationProvider>
   );
 
 export const renderChipField = ({

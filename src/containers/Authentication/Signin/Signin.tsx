@@ -1,23 +1,18 @@
-import { withStyles } from "@material-ui/core";
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import "../../../assets/fonts/fonts.css";
-
-import Button from "../../../components/Button/Button";
-import Card from "../../../components/Card/Card";
 import { H2 } from "../../../components/Text/Text";
 import { Text } from "../../../components/Text/Text";
-// import Button from "brave-ui/components/buttonsIndicators/button";
 
 import { GetAdvertisers, SignIn } from "../../../actions";
 
-import { styles } from "./SignIn.style";
 import * as S from "./SignIn.style";
 
 import { Input } from "../../../components/formElements/formElements";
 
 import base64url from "base64url";
+import {Button, Card} from "@mui/material";
 
 class SignInContainer extends React.Component<any, any> {
   constructor(props: any) {
@@ -58,7 +53,7 @@ class SignInContainer extends React.Component<any, any> {
       );
       return;
     }
-  
+
     let data = await resp.json();
 
     if (data.accessToken) {
@@ -192,22 +187,10 @@ class SignInContainer extends React.Component<any, any> {
             </div>
 
             <S.ButtonContainer>
-              <Button onClick={this.submit} type={"primary"} size={"medium"}>
+              <Button onClick={this.submit} variant="contained" size="medium">
                 Sign in
               </Button>
             </S.ButtonContainer>
-            {/* <S.Footer>
-              <H6 fontFamily={"Muli"} style={{ paddingRight: "8px" }}>
-                {locale.SignIn.noAccount}
-              </H6>
-              <H6
-                fontFamily={"Muli"}
-                link={true}
-                onClick={() => (window.location.href = "/auth/signup")}
-              >
-                {locale.SignIn.signUp}
-              </H6>
-            </S.Footer> */}
           </S.Content>
         </S.Container>
       </Card>
@@ -225,9 +208,4 @@ const mapDispatchToProps = (dispatch: any) => ({
   signin: (value: any) => dispatch(SignIn(value))
 });
 
-export default withStyles(styles)(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(SignInContainer)
-);
+export default connect( mapStateToProps, mapDispatchToProps)(SignInContainer);

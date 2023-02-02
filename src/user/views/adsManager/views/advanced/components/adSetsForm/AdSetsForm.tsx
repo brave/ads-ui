@@ -3,9 +3,8 @@ import React, { Component } from 'react';
 import Section from '../../../../../../../components/section/Section';
 import { Text } from "../../../../../../../components/Text/Text";
 import * as S from "./AdSetsForm.style";
-import Select from 'react-select';
-import { Icon } from '@material-ui/core';
 import RadioButton from '../../../../../../../components/radioButton/RadioButton';
+import InfoIcon from "@mui/icons-material/Info";
 
 const customStyles = {
     control: (provided, state) => ({
@@ -39,7 +38,7 @@ class AdSetsForm extends Component<any, any> {
         this.props.setSelectedAdSet(selectedAdSet);
     }
 
-    //Fix 
+    //Fix
     deleteSelectedAdSet(e, deletedAdSet) {
         e.preventDefault();
         let adSets = this.props.adSets;
@@ -207,15 +206,15 @@ class AdSetsForm extends Component<any, any> {
                                                 <S.InputContainer>
                                                     <div style={{ display: "flex" }}>
                                                         <Text content={"Pricing Type"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                        <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "1px", marginLeft: "2px" }}>info</Icon>
+                                                        <InfoIcon />
                                                     </div>
                                                     <div style={{ marginTop: "4px" }}>
-                                                        <Select
-                                                            styles={customStyles}
-                                                            value={this.props.adSets[this.props.selectedAdSet].pricingType}
-                                                            onChange={this.handlePricingType}
-                                                            options={pricingTypes}
-                                                        />
+                                                        {/*<Select*/}
+                                                        {/*    styles={customStyles}*/}
+                                                        {/*    value={this.props.adSets[this.props.selectedAdSet].pricingType}*/}
+                                                        {/*    onChange={this.handlePricingType}*/}
+                                                        {/*    options={pricingTypes}*/}
+                                                        {/*/>*/}
                                                     </div>
                                                 </S.InputContainer>
                                                 <S.InputContainer>
@@ -249,13 +248,13 @@ class AdSetsForm extends Component<any, any> {
                                             </div>
                                             {!this.props.adSets[this.props.selectedAdSet].braveML &&
                                                 <div style={{ marginTop: "4px", marginBottom: "212px" }}>
-                                                    <Select
-                                                        styles={customStyles}
-                                                        value={this.props.adSets[this.props.selectedAdSet].audiences}
-                                                        onChange={this.handleAudiences}
-                                                        isMulti={true}
-                                                        options={this.props.segments}
-                                                    />
+                                                    {/*<Select*/}
+                                                    {/*    styles={customStyles}*/}
+                                                    {/*    value={this.props.adSets[this.props.selectedAdSet].audiences}*/}
+                                                    {/*    onChange={this.handleAudiences}*/}
+                                                    {/*    isMulti={true}*/}
+                                                    {/*    options={this.props.segments}*/}
+                                                    {/*/>*/}
                                                 </div>
                                             }
                                         </S.InputContainer>
@@ -274,16 +273,16 @@ class AdSetsForm extends Component<any, any> {
                                         <S.InputContainer>
                                             <div style={{ display: "flex" }}>
                                                 <Text content={"Platform"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                <Icon style={{ fontSize: "16px", color: "#ACB0B5", marginTop: "1px", marginLeft: "2px" }}>info</Icon>
+                                                <InfoIcon />
                                             </div>
                                             <div style={{ marginTop: "4px" }}>
-                                                <Select
-                                                    styles={customStyles}
-                                                    value={this.props.adSets[this.props.selectedAdSet].platforms}
-                                                    onChange={this.handlePlatforms}
-                                                    isMulti={true}
-                                                    options={platforms}
-                                                />
+                                                {/*<Select*/}
+                                                {/*    styles={customStyles}*/}
+                                                {/*    value={this.props.adSets[this.props.selectedAdSet].platforms}*/}
+                                                {/*    onChange={this.handlePlatforms}*/}
+                                                {/*    isMulti={true}*/}
+                                                {/*    options={platforms}*/}
+                                                {/*/>*/}
                                             </div>
                                         </S.InputContainer>
                                     </S.RightColumn>
@@ -335,13 +334,13 @@ class AdSetsForm extends Component<any, any> {
                                                         <div style={{ display: "flex", alignItems: "center", marginTop: "14px", marginBottom: "8px" }}>
                                                             <Text content={"within"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                                             <div style={{ marginLeft: "12px", marginRight: "12px", width: "75px" }}>
-                                                                <Select
-                                                                    styles={customStyles}
-                                                                    value={this.props.adSets[this.props.selectedAdSet].conversion.observationWindow}
-                                                                    onChange={this.handleConversionObservationWindow}
-                                                                    multi={false}
-                                                                    options={[{ value: 1, label: "1" }, { value: 7, label: "7" }, { value: 30, label: "30" }]}
-                                                                />
+                                                                {/*<Select*/}
+                                                                {/*    styles={customStyles}*/}
+                                                                {/*    value={this.props.adSets[this.props.selectedAdSet].conversion.observationWindow}*/}
+                                                                {/*    onChange={this.handleConversionObservationWindow}*/}
+                                                                {/*    multi={false}*/}
+                                                                {/*    options={[{ value: 1, label: "1" }, { value: 7, label: "7" }, { value: 30, label: "30" }]}*/}
+                                                                {/*/>*/}
                                                             </div>
                                                             <Text content={"days of an impression."} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
                                                         </div>
@@ -353,25 +352,6 @@ class AdSetsForm extends Component<any, any> {
                                         </S.InnerContainer>
                                     </>
                                 }
-
-                                {/* <S.InnerContainer>
-                                    <S.RightColumn>
-
-                                        <Text content={"Etc."} style={{ marginBottom: "8px" }} sizes={[16, 16, 15, 15, 18]} fontFamily={"Poppins"} />
-
-                                        <S.InputContainer>
-                                            <Text content={"Impressions per user over lifetime"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <S.Input value={this.props.adSets[this.props.selectedAdSet].lifetimeImpressions} onChange={(e) => this.handleLifetimeImpressions(e)} placeholder="Enter a number of impressions..." type="number" name="name" />
-                                        </S.InputContainer>
-
-                                        <S.InputContainer>
-                                            <Text content={"Impressions per user per day"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                            <S.Input value={this.props.adSets[this.props.selectedAdSet].dailyImpressions} onChange={(e) => this.handleDailyImpressions(e)} placeholder="Enter a number of impressions..." type="number" name="name" />
-                                        </S.InputContainer>
-
-                                    </S.RightColumn>
-
-                                </S.InnerContainer> */}
                                 <div style={{ display: "flex" }}>
                                     <S.SecondaryButton onClick={() => this.handleBack()} style={{ marginRight: "auto", marginTop: "56px" }}>
                                         <Text content={"Back"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
@@ -383,18 +363,7 @@ class AdSetsForm extends Component<any, any> {
                             </>
                         </Section>
                     </div>
-                    <div style={{ width: "30%", position: "relative", marginLeft: "28px" }}>
-                        {/* <S.AdSetsTabs>
-                            {this.renderAdSetsTabs()}
-                            <S.AdSetsTabButtonContainer>
-                                <S.Button onClick={() => { this.addAdSet() }} style={{ width: "150px", marginLeft: "auto", marginRight: "auto", backgroundColor: "white", color: "black", border: "1px solid #d6d6d6" }}>
-                                    <Text content={"New Ad Set"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
-                                </S.Button>
-                            </S.AdSetsTabButtonContainer>
-                        </S.AdSetsTabs> */}
-                    </div>
                 </div>
-
             </React.Fragment >
         );
     }

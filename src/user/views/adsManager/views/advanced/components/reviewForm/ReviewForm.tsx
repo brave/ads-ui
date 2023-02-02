@@ -4,9 +4,9 @@ import Section from '../../../../../../../components/section/Section';
 import { Text } from "../../../../../../../components/Text/Text";
 
 import * as S from "./ReviewForm.style";
-import { Icon } from '@material-ui/core';
 
 import { submitOrder } from './library/ReviewForm.library';
+import InfoIcon from '@mui/icons-material/Info';
 
 class ReviewForm extends Component<any, any> {
 
@@ -63,43 +63,6 @@ class ReviewForm extends Component<any, any> {
         return formattedGeoTargets;
     }
 
-    renderErrors() {
-        let errors;
-        let keys = Object.keys(this.props.validations);
-        console.log(keys);
-        if (keys) {
-            errors = keys.map((key) => {
-
-                if (key !== 'valid' && key !== 'adSets') {
-                    if (this.props.validations[key].valid === false) {
-                        return <Text content={`• ${this.props.validations[key].errorMessage}`} sizes={[16, 16, 15, 15, 15]} style={{ marginTop: "12px" }} fontFamily={"Muli"} />
-                    }
-                }
-                if (key === 'adSets') {
-                    if (this.props.validations.adSets) {
-                        return this.props.validations.adSets.map((adSet, index) => {
-                            if (Object.keys(adSet)) {
-                                let counter = 0;
-                                return Object.keys(adSet).map((key) => {
-
-
-                                    if (adSet[key].valid === false && counter < 1) {
-                                        counter++;
-                                        return <Text content={`• Invalid Ad Set: Ad Set ${index + 1}`} sizes={[16, 16, 15, 15, 15]} style={{ marginTop: "12px" }} fontFamily={"Muli"} />
-                                    }
-
-
-                                })
-                            }
-                        })
-                    }
-                }
-            });
-        }
-
-        return errors.reverse();
-    }
-
     renderAdSets() {
         let adSets = this.props.adSets.map((adSet, index) => {
             return <Section fullWidthChild={true} key={index}>
@@ -123,7 +86,7 @@ class ReviewForm extends Component<any, any> {
                             this.props.validations.adSets[index].pricingType?.valid === false &&
                             <S.ErrorContainer>
                                 <S.ErrorIcon>
-                                    <Icon style={{ color: "white", fontSize: "24px" }}>info</Icon>
+                                    <InfoIcon />
                                 </S.ErrorIcon>
                                 <S.ErrorMessage>
                                     <Text content={this.props.validations.adSets[index].pricingType?.errorMessage} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
@@ -138,7 +101,7 @@ class ReviewForm extends Component<any, any> {
                             this.props.validations.adSets[index].bid?.valid === false &&
                             <S.ErrorContainer>
                                 <S.ErrorIcon>
-                                    <Icon style={{ color: "white", fontSize: "24px" }}>info</Icon>
+                                  <InfoIcon />
                                 </S.ErrorIcon>
                                 <S.ErrorMessage>
                                     <Text content={this.props.validations.adSets[index].bid?.errorMessage} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
@@ -150,7 +113,7 @@ class ReviewForm extends Component<any, any> {
                             this.props.validations.adSets[index].bidBudget?.valid === false &&
                             <S.ErrorContainer>
                                 <S.ErrorIcon>
-                                    <Icon style={{ color: "white", fontSize: "24px" }}>info</Icon>
+                                  <InfoIcon />
                                 </S.ErrorIcon>
                                 <S.ErrorMessage>
                                     <Text content={this.props.validations.adSets[index].bidBudget?.errorMessage} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
@@ -171,7 +134,7 @@ class ReviewForm extends Component<any, any> {
                                     this.props.validations.adSets[index].audiences?.valid === false ?
                                         <S.ErrorContainer>
                                             <S.ErrorIcon>
-                                                <Icon style={{ color: "white", fontSize: "24px" }}>info</Icon>
+                                              <InfoIcon />
                                             </S.ErrorIcon>
                                             <S.ErrorMessage>
                                                 <Text content={this.props.validations.adSets[index].audiences?.errorMessage} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
@@ -190,7 +153,7 @@ class ReviewForm extends Component<any, any> {
                             this.props.validations.adSets[index].platforms?.valid === false ?
                                 <S.ErrorContainer>
                                     <S.ErrorIcon>
-                                        <Icon style={{ color: "white", fontSize: "24px" }}>info</Icon>
+                                      <InfoIcon />
                                     </S.ErrorIcon>
                                     <S.ErrorMessage>
                                         <Text content={this.props.validations.adSets[index].platforms?.errorMessage} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
@@ -248,7 +211,7 @@ class ReviewForm extends Component<any, any> {
                         this.props.validations.adSets[adSetIndex].ads[index].name?.valid === false &&
                         <S.ErrorContainer>
                             <S.ErrorIcon>
-                                <Icon style={{ color: "white", fontSize: "24px" }}>info</Icon>
+                                <InfoIcon />
                             </S.ErrorIcon>
                             <S.ErrorMessage>
                                 <Text content={this.props.validations.adSets[adSetIndex].ads[index].name?.errorMessage} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
@@ -268,7 +231,7 @@ class ReviewForm extends Component<any, any> {
                                 this.props.validations.adSets[adSetIndex].ads[index].title?.valid === false &&
                                 <S.ErrorContainer>
                                     <S.ErrorIcon>
-                                        <Icon style={{ color: "white", fontSize: "24px" }}>info</Icon>
+                                        <InfoIcon />
                                     </S.ErrorIcon>
                                     <S.ErrorMessage>
                                         <Text content={this.props.validations.adSets[adSetIndex].ads[index].title?.errorMessage} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
@@ -283,7 +246,7 @@ class ReviewForm extends Component<any, any> {
                                 this.props.validations.adSets[adSetIndex].ads[index].body?.valid === false &&
                                 <S.ErrorContainer>
                                     <S.ErrorIcon>
-                                        <Icon style={{ color: "white", fontSize: "24px" }}>info</Icon>
+                                        <InfoIcon />
                                     </S.ErrorIcon>
                                     <S.ErrorMessage>
                                         <Text content={this.props.validations.adSets[adSetIndex].ads[index].body?.errorMessage} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
@@ -299,7 +262,7 @@ class ReviewForm extends Component<any, any> {
                                 this.props.validations.adSets[adSetIndex].ads[index].targetUrl?.valid === false &&
                                 <S.ErrorContainer>
                                     <S.ErrorIcon>
-                                        <Icon style={{ color: "white", fontSize: "24px" }}>info</Icon>
+                                        <InfoIcon />
                                     </S.ErrorIcon>
                                     <S.ErrorMessage>
                                         <Text content={this.props.validations.adSets[adSetIndex].ads[index].targetUrl?.errorMessage} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
@@ -371,7 +334,7 @@ class ReviewForm extends Component<any, any> {
                                                 this.props.validations?.campaignName?.valid === false &&
                                                 <S.ErrorContainer>
                                                     <S.ErrorIcon>
-                                                        <Icon style={{ color: "white", fontSize: "24px" }}>info</Icon>
+                                                        <InfoIcon />
                                                     </S.ErrorIcon>
                                                     <S.ErrorMessage>
                                                         <Text content={this.props.validations?.campaignName?.errorMessage} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
@@ -388,7 +351,7 @@ class ReviewForm extends Component<any, any> {
                                                 this.props.validations?.startTime?.valid === false &&
                                                 <S.ErrorContainer>
                                                     <S.ErrorIcon>
-                                                        <Icon style={{ color: "white", fontSize: "24px" }}>info</Icon>
+                                                        <InfoIcon />
                                                     </S.ErrorIcon>
                                                     <S.ErrorMessage>
                                                         <Text content={this.props.validations?.startTime?.errorMessage} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
@@ -405,7 +368,7 @@ class ReviewForm extends Component<any, any> {
                                                 this.props.validations?.endTime?.valid === false &&
                                                 <S.ErrorContainer>
                                                     <S.ErrorIcon>
-                                                        <Icon style={{ color: "white", fontSize: "24px" }}>info</Icon>
+                                                        <InfoIcon />
                                                     </S.ErrorIcon>
                                                     <S.ErrorMessage>
                                                         <Text content={this.props.validations?.endTime?.errorMessage} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
@@ -417,7 +380,7 @@ class ReviewForm extends Component<any, any> {
                                                 this.props.validations?.schedule?.valid === false &&
                                                 <S.ErrorContainer>
                                                     <S.ErrorIcon>
-                                                        <Icon style={{ color: "white", fontSize: "24px" }}>info</Icon>
+                                                        <InfoIcon />
                                                     </S.ErrorIcon>
                                                     <S.ErrorMessage>
                                                         <Text content={this.props.validations?.schedule?.errorMessage} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
@@ -429,7 +392,7 @@ class ReviewForm extends Component<any, any> {
                                                 this.props.validations?.endTimeSchedule?.valid === false &&
                                                 <S.ErrorContainer>
                                                     <S.ErrorIcon>
-                                                        <Icon style={{ color: "white", fontSize: "24px" }}>info</Icon>
+                                                        <InfoIcon />
                                                     </S.ErrorIcon>
                                                     <S.ErrorMessage>
                                                         <Text content={this.props.validations?.endTimeSchedule?.errorMessage} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
@@ -446,7 +409,7 @@ class ReviewForm extends Component<any, any> {
                                                 this.props.validations?.totalBudget?.valid === false &&
                                                 <S.ErrorContainer>
                                                     <S.ErrorIcon>
-                                                        <Icon style={{ color: "white", fontSize: "24px" }}>info</Icon>
+                                                        <InfoIcon />
                                                     </S.ErrorIcon>
                                                     <S.ErrorMessage>
                                                         <Text content={this.props.validations?.totalBudget?.errorMessage} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
@@ -458,7 +421,7 @@ class ReviewForm extends Component<any, any> {
                                                 this.props.validations?.budgetSpend?.valid === false &&
                                                 <S.ErrorContainer>
                                                     <S.ErrorIcon>
-                                                        <Icon style={{ color: "white", fontSize: "24px" }}>info</Icon>
+                                                        <InfoIcon />
                                                     </S.ErrorIcon>
                                                     <S.ErrorMessage>
                                                         <Text content={this.props.validations?.budgetSpend?.errorMessage} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
@@ -475,7 +438,7 @@ class ReviewForm extends Component<any, any> {
                                                 this.props.validations?.dailyBudget?.valid === false &&
                                                 <S.ErrorContainer>
                                                     <S.ErrorIcon>
-                                                        <Icon style={{ color: "white", fontSize: "24px" }}>info</Icon>
+                                                        <InfoIcon />
                                                     </S.ErrorIcon>
                                                     <S.ErrorMessage>
                                                         <Text content={this.props.validations?.dailyBudget?.errorMessage} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
@@ -487,7 +450,7 @@ class ReviewForm extends Component<any, any> {
                                                 this.props.validations?.budget?.valid === false &&
                                                 <S.ErrorContainer>
                                                     <S.ErrorIcon>
-                                                        <Icon style={{ color: "white", fontSize: "24px" }}>info</Icon>
+                                                        <InfoIcon />
                                                     </S.ErrorIcon>
                                                     <S.ErrorMessage>
                                                         <Text content={this.props.validations?.budget?.errorMessage} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
@@ -503,7 +466,7 @@ class ReviewForm extends Component<any, any> {
                                                 this.props.validations?.geoTargets?.valid === false &&
                                                 <S.ErrorContainer>
                                                     <S.ErrorIcon>
-                                                        <Icon style={{ color: "white", fontSize: "24px" }}>info</Icon>
+                                                        <InfoIcon />
                                                     </S.ErrorIcon>
                                                     <S.ErrorMessage>
                                                         <Text content={this.props.validations?.geoTargets?.errorMessage} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
@@ -523,7 +486,7 @@ class ReviewForm extends Component<any, any> {
                                 this.props.campaign.editMode &&
                                 <S.ErrorContainer style={{ marginTop: "0px", marginBottom: "16px" }}>
                                     <S.ErrorIcon>
-                                        <Icon style={{ color: "white", fontSize: "24px" }}>info</Icon>
+                                        <InfoIcon />
                                     </S.ErrorIcon>
                                     <S.ErrorMessage>
                                         <Text content={"Please note, changes may not take full effect until start of the next day (UTC)"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
@@ -565,11 +528,6 @@ class ReviewForm extends Component<any, any> {
                         <div style={{ width: "25%", position: "relative", marginLeft: "28px" }}></div>
                     </div>
                 </div>
-                <S.Container>
-
-
-
-                </S.Container>
             </React.Fragment >
         );
     }

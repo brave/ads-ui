@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import { Text } from "../../../../../../../components/Text/Text";
 
 import * as S from "./styles/AdvancedOrderSidebar.style";
-import { Icon } from '@material-ui/core';
 import Modal from '../../../../../../../components/modal/Modal';
-
-
-
+import ClearIcon from '@mui/icons-material/Clear';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 class AdvancedOrderSidebar extends Component<any, any> {
 
@@ -42,7 +40,7 @@ class AdvancedOrderSidebar extends Component<any, any> {
                 <div style={{ width: "500px" }}>
                     <div style={{ display: "flex" }}>
                         <Text content={"Delete this Ad Set?"} sizes={[16, 16, 15, 15, 22]} color={"#E0694C"} fontFamily={"Poppins"} />
-                        <Icon onClick={(e) => this.showDeleteAdSetModal(e, false, index)} style={{ marginLeft: "auto", color: "grey", cursor: "pointer" }}>clear</Icon>
+                        <ClearIcon />
                     </div>
                     <Text style={{ marginTop: "42px" }} content={`Do you want to delete Ad Set ${index + 1}? This action cannot be undone.`} sizes={[16, 16, 15, 15, 16]} fontFamily={"Muli"} />
                     <div style={{ display: "flex", width: "100%", marginTop: "42px" }}>
@@ -78,7 +76,9 @@ class AdvancedOrderSidebar extends Component<any, any> {
                 return (
                     <S.Nav onClick={() => clickHandler(index)} selected={(this.props.form === "adSetsForm" || this.props.form === "adsForm") && this.props.selectedAdSet === index}>
                         { adSet.newAdSet &&
-                            <div onClick={(e) => this.showDeleteAdSetModal(e, true, index)} style={((this.props.form === "adSetsForm" || this.props.form === "adsForm") && this.props.selectedAdSet === index) ? { top: 10, right: 7, position: "absolute" } : { top: 10, right: 10, position: "absolute" }}><Icon style={{ fontSize: "18px" }}>more_vert</Icon></div>
+                            <div onClick={(e) => this.showDeleteAdSetModal(e, true, index)} style={((this.props.form === "adSetsForm" || this.props.form === "adsForm") && this.props.selectedAdSet === index) ? { top: 10, right: 7, position: "absolute" } : { top: 10, right: 10, position: "absolute" }}>
+                              <MoreVertIcon />
+                            </div>
                         }
                         {
                             this.renderModal(index)

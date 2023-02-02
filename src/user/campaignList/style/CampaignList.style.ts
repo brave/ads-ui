@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "@mui/material";
 
 export const RejectedSymbol = styled("div")`
   border-left: 6px solid transparent;

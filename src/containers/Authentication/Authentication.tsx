@@ -1,4 +1,3 @@
-import { withStyles } from "@material-ui/core";
 import _ from "lodash";
 import React from "react";
 import { connect } from "react-redux";
@@ -51,4 +50,4 @@ const mapStateToProps = (state: any) => ({
   auth: state.authReducer
 });
 
-export default withStyles(styles)(connect(mapStateToProps)(Authentication));
+export default connect(mapStateToProps)(Authentication);

@@ -7,7 +7,6 @@ import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import Context from "./state/context";
 import User from "./user/User";
 import { connect } from "react-redux";
-import { SignOut } from "./actions";
 import jwt_decode from "jwt-decode";
 import moment from "moment";
 
@@ -47,7 +46,9 @@ const App = props => {
         setLoading
       }}>
         <Switch>
-          <Route path="/user/main" component={User} />
+          <Route path="/user/main">
+            <User />
+          </Route>
           <Route path="/auth" component={Authentication} />
           <Route path='/' exact={true} component={() => {
             window.location.href = "https://brave.com/brave-ads-waitlist/";

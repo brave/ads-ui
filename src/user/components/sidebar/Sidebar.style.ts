@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "@mui/material";
 
 interface NavProps {
     selected: boolean;
@@ -49,7 +49,7 @@ export const Nav = styled("div")`
           color: #3F404B;
 
       }
-      
+
       `}
 `;
 

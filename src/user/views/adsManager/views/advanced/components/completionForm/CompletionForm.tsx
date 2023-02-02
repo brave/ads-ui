@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Confetti from 'react-confetti'
 
 import Section from '../../../../../../../components/section/Section';
 import { Text } from "../../../../../../../components/Text/Text";
@@ -13,7 +12,6 @@ class CompletionForm extends Component<any, any> {
     render() {
         return (
             <div style={{ marginLeft: "-255px" }}>
-                <Confetti style={{ top: "-62px" }} colors={["#FB7959", "#4C54D2"]} />
                 <div style={{ width: "843px", height: "100%", marginLeft: "auto", marginRight: "auto", display: "flex", alignItems: "center" }}>
                     <Section style={{ marginTop: "auto", marginBottom: "auto" }} fullWidthChild={true}>
                         <div style={{ zIndex: 5, backgroundColor: "white" }}>
