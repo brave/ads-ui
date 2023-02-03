@@ -11,7 +11,7 @@ import AdvancedOrderSidebar from "./components/advancedOrderSidebar/AdvancedOrde
 
 import { initializeData, performValidation } from "./lib/Library";
 import { connect } from 'react-redux';
-import {CampaignFormV2} from "./components/campaignForm/CampaignFormV2";
+import {CampaignFormV2} from "./components/form/CampaignFormV2";
 import {Box} from "@mui/material";
 
 class Advanced extends Component<any, any> {
