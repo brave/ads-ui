@@ -1,35 +1,35 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
-import * as S from "./Sidebar.style";
-import { Text } from "../../../components/Text/Text";
 import CampaignIcon from '@mui/icons-material/Campaign';
+import {Drawer, List, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
+import {useHistory} from "react-router-dom";
 
-const linkStyle = { textDecoration: "none", color: "inherit" };
+const drawerWidth = 240;
 
-class Sidebar extends React.Component<any, any> {
-  public render() {
-    return (
-      <S.Container>
-        <React.Fragment>{renderNav()}</React.Fragment>
-      </S.Container>
-    );
-  }
-}
+function Sidebar() {
+  const history = useHistory();
 
-function renderNav() {
   return (
-    <div>
-      <Link style={linkStyle} to="/campaigns">
-        <S.Nav selected={true}>
-          <S.SubContainer>
-            <CampaignIcon />
-          </S.SubContainer>
-          <Text sizes={[16, 16, 15, 15, 15]} fontFamily={"Poppins"}>
-            Campaigns
-              </Text>
-        </S.Nav>
-      </Link>
-    </div>
+    <Drawer
+      sx={{
+        width: drawerWidth,
+        flexShrink: 0,
+        '& .MuiDrawer-paper': {
+          width: drawerWidth,
+          boxSizing: 'border-box',
+        },
+      }}
+      variant="permanent"
+      anchor="left"
+    >
+      <List sx={{ mt: 8 }}>
+        <ListItemButton selected onClick={() => history.push("/user/main/campaigns")}>
+          <ListItemText primary="Campaigns"/>
+          <ListItemIcon>
+            <CampaignIcon/>
+          </ListItemIcon>
+        </ListItemButton>
+      </List>
+    </Drawer>
   );
 }
 

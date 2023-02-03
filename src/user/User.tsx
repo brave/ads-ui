@@ -22,6 +22,7 @@ import {
 import AnalyticsOverview from "./analytics/AnalyticsOverview";
 import Settings from "./settings/Settings";
 import {connect} from "react-redux";
+import {Box} from "@mui/material";
 
 const buildApolloClient = (accessToken: string) => {
   const httpLink = createHttpLink({
@@ -43,7 +44,6 @@ interface Props {
 }
 
 function User({advertisers, auth}: Props) {
-  const context = useContext(Context);
   const match = useRouteMatch();
   const [activeAdvertiser, setActiveAdvertiser] = useState(_.find(advertisers, {state: "active"}));
   const client = useMemo(() => buildApolloClient(auth.accessToken), [auth.accessToken])
@@ -59,28 +59,17 @@ function User({advertisers, auth}: Props) {
 
   return (
     <ApolloProvider client={client}>
-      <S.Container>
-
+      <Box height="100%">
         <Navbar userId={auth.id} advertiserId={activeAdvertiser.id}/>
-        <S.Content>
-          {
-            context.sidebar === "visible" && <Sidebar/>
-          }
-          {
-            context.sidebar === "hidden" &&
-            // placeholder to keep layout normal, todo - cleanup
-            <div style={{
-              position: "sticky",
-              visibility: "hidden",
-              marginTop: "64px",
-              top: "64px",
-              opacity: 0,
-              height: "calc(100vh - 64px)",
-              width: "255px",
-              borderRight: "2px solid #f6f6f5"
-            }}/>
-          }
-          <S.Main>
+        <Box display="flex">
+          <Sidebar/>
+          <Box
+            width="100%"
+            height="100%"
+            padding={1}
+            overflow="scroll"
+            marginTop="64px"
+          >
             <Switch>
               {/* /adsmanager */}
               <Route path={`${match.path}/adsmanager/selection`} component={Selection}/>
@@ -103,15 +92,15 @@ function User({advertisers, auth}: Props) {
 
               {/* /campaigns/:campaignId/analytics - */}
               <Route path={`${match.path}/campaign/:campaignId/analytics/overview`}>
-                <AnalyticsOverview auth={auth} />
+                <AnalyticsOverview auth={auth}/>
               </Route>
 
               {/* default */}
               <Redirect to={`${match.path}/campaigns`}/>
             </Switch>
-          </S.Main>
-        </S.Content>
-      </S.Container>
+          </Box>
+        </Box>
+      </Box>
     </ApolloProvider>
   );
 }
