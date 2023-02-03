@@ -9,6 +9,8 @@ import User from "./user/User";
 import { connect } from "react-redux";
 import jwt_decode from "jwt-decode";
 import moment from "moment";
+import {CssBaseline, StyledEngineProvider, ThemeProvider} from "@mui/material";
+import {theme} from "./theme";
 
 const App = props => {
   const [loading, setLoading] = useState(undefined)
@@ -39,25 +41,29 @@ const App = props => {
 
   return (
     <>
-      <Context.Provider value={{
-        loading,
-        sidebar,
-        setSidebar,
-        setLoading
-      }}>
-        <Switch>
-          <Route path="/user/main">
-            <User />
-          </Route>
-          <Route path="/auth" component={Authentication} />
-          <Route path='/' exact={true} component={() => {
-            window.location.href = "https://brave.com/brave-ads-waitlist/";
-            return null;
-          }} />
-          {getRedirect()}
-        </Switch>
-
-      </Context.Provider>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Context.Provider value={{
+            loading,
+            sidebar,
+            setSidebar,
+            setLoading
+          }}>
+            <Switch>
+              <Route path="/user/main">
+                <User />
+              </Route>
+              <Route path="/auth" component={Authentication} />
+              <Route path='/' exact={true} component={() => {
+                window.location.href = "https://brave.com/brave-ads-waitlist/";
+                return null;
+              }} />
+              {getRedirect()}
+            </Switch>
+          </Context.Provider>
+        </ThemeProvider>
+      </StyledEngineProvider>
     </>
   );
 }
