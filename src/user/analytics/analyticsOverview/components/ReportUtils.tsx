@@ -1,8 +1,9 @@
 import { Box } from "@mui/material";
-import {DateRangePicker, LoadingButton} from "@mui/lab";
+import { LoadingButton } from "@mui/lab";
 import SaveIcon from "@mui/icons-material/Save";
 import React, { useState } from "react";
 import {downloadCSV} from "../lib/csv.library";
+import {DateRangePicker} from "../../../../components/Date/DateRangePicker";
 
 interface DownloaderProps {
   startDate: Date | undefined;
@@ -20,7 +21,7 @@ export default function ReportUtils({
   auth,
 }: DownloaderProps) {
   const [downloadingCSV, setDownloadingCSV] = useState(false);
-  const [downloadingCountryCSV, setDownloadingCountryCSV] = useState(false);
+  console.log(startDate);
 
   return (
     <Box
@@ -43,26 +44,6 @@ export default function ReportUtils({
             onToChange={(d) => onSetDate(d, "end")}
           ></DateRangePicker>
         )}
-
-        <LoadingButton
-          variant="outlined"
-          loading={downloadingCountryCSV}
-          loadingPosition="start"
-          startIcon={<SaveIcon />}
-          sx={{ mr: 1 }}
-          onClick={() =>
-            downloadCSV(
-              campaign.id,
-              campaign.name,
-              auth.accessToken,
-              auth.id ?? "",
-              true,
-              setDownloadingCountryCSV
-            )
-          }
-        >
-          Download Country Report
-        </LoadingButton>
 
         <LoadingButton
           variant="contained"

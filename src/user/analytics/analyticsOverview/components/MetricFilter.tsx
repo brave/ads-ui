@@ -3,6 +3,7 @@ import {Box, Typography} from "@mui/material";
 import {BaseMetric, Metrics} from "../types";
 import {decideValueAttribute} from "../lib/overview.library";
 import MetricSelect from "./MetricSelect";
+import { Text } from "../../../../components/Text/Text"
 
 interface FilterValue {
   value: string;
@@ -56,9 +57,11 @@ const FilterBox = ({
         alignItems="center"
         width="100%"
       >
-        <Typography>
-          {attrs.prefix ?? ""}{displayVal}{attrs.suffix ?? ""}
-        </Typography>
+        <Text
+          content={`${attrs.prefix ?? ""}${displayVal}${attrs.suffix ?? ""}`}
+          fontFamily={"Poppins"}
+          sizes={[18, 18, 42, 42, 22]}
+        />
       </Box>
     </Box>
   );

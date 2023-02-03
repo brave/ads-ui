@@ -31,7 +31,8 @@ function CampaignList({ advertiserId, userId }: Props) {
           value: (c) => c.name,
           extendedRenderer: (r) => (
             <Link
-              href={`/campaign/${r.id}`}
+              href={`/user/main/campaign/${r.id}/analytics/overview`}
+              underline="none"
             >
               {r.name}
             </Link>

@@ -5,7 +5,7 @@ import { Button, Menu, MenuItem } from "@mui/material";
 import { useState } from "react";
 
 interface Props {
-  signOut: any;
+  signOut: () => void;
 }
 
 export function UserMenu({ signOut }: Props) {

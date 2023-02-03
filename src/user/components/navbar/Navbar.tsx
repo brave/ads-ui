@@ -36,10 +36,10 @@ function shouldShowNewCampaign(advertiserId: string): boolean {
 interface Props {
   advertiserId: string;
   userId: string;
-  signOut: any;
+  dispatch: any;
 }
 
-function Navbar({ advertiserId, signOut, userId }: Props) {
+function Navbar({ advertiserId, dispatch, userId }: Props) {
   const history = useHistory();
 
   return (
@@ -59,16 +59,10 @@ function Navbar({ advertiserId, signOut, userId }: Props) {
             New Campaign
           </Button>
         )}
-        <UserMenu signOut={signOut}/>
+        <UserMenu signOut={() => dispatch(SignOut())}/>
       </Toolbar>
     </AppBar>
   );
 }
 
-const mapDispatchToProps = (dispatch: any) => ({
-  signOut: () => dispatch(SignOut()),
-});
-
-export default connect(
-  mapDispatchToProps
-)(Navbar);
+export default connect()(Navbar);

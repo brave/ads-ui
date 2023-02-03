@@ -15,14 +15,10 @@ class Authentication extends React.Component<any, any> {
 
   public render() {
     return (
-      <S.Container>
-        <S.Content>
-          <Switch>
-            <Route path="/auth/signin" component={SigninContainer} />
-            {this.getRedirect()}
-          </Switch>
-        </S.Content>
-      </S.Container>
+      <Switch>
+        <Route path="/auth/signin" component={SigninContainer} />
+        {this.getRedirect()}
+      </Switch>
     );
   }
 
