@@ -18,7 +18,7 @@ export function AdField({values, index}: Props) {
             <Card sx={{mt: 2, p: 2}}>
               <Box display="flex" flexDirection="row" alignItems="center">
                 <Divider textAlign="left" sx={{fontSize: "24px", mb: 1, mt: 1, flexGrow: 1}}>
-                  Creative {idx + 1}
+                  Ad {idx + 1}
                 </Divider>
                 {idx > 0 && (
                   <IconButton onClick={() => remove(idx)}>
@@ -59,7 +59,7 @@ function Ad({ad, idx}: AdProps) {
   return (
     <>
       <Typography variant="body2" sx={{mb: 2}}>
-        Define the look and feel of your ads
+        Define the look and feel of your ads.
       </Typography>
       <FormikTextField
         name="test"

@@ -4,7 +4,6 @@ import {Link, useHistory} from "react-router-dom";
 
 import {SignOut} from "../../../actions";
 import TopBarProgress from "react-topbar-progress-indicator";
-import "./style/Navbar.style.css"
 
 
 import {AppBar, Button, Toolbar} from "@mui/material";
