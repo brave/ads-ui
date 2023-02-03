@@ -7,7 +7,6 @@ interface NavProps {
 export const SideBar = styled("div")`
     width: 255px;
     min-height: 150vh;
-    position: absolute;
     left: 0;
     top: 64px;
     bottom: 0;

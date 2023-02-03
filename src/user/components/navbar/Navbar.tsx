@@ -7,11 +7,10 @@ import TopBarProgress from "react-topbar-progress-indicator";
 import "./style/Navbar.style.css"
 
 
-import {AppBar, Box, Button, Toolbar, Typography} from "@mui/material";
+import {AppBar, Button, Toolbar} from "@mui/material";
 import {UserMenu} from "./components/UserMenu/UserMenu";
 import {connect} from "react-redux";
 
-const linkStyle = {textDecoration: "none", color: "inherit"};
 const logoStyle = {textDecoration: "none", color: "inherit", marginTop: "3px"};
 
 TopBarProgress.config({

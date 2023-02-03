@@ -11,6 +11,8 @@ import AdvancedOrderSidebar from "./components/advancedOrderSidebar/AdvancedOrde
 
 import { initializeData, performValidation } from "./lib/Library";
 import { connect } from 'react-redux';
+import {CampaignFormV2} from "./components/campaignForm/CampaignFormV2";
+import {Box} from "@mui/material";
 
 class Advanced extends Component<any, any> {
     static contextType = Context;
@@ -111,15 +113,11 @@ class Advanced extends Component<any, any> {
 
     render() {
         return (
-            this.context.loading === false &&
-            <>
-                {/* <div style={{ position: "absolute", width: "100%", height: "100%", backgroundColor: "green" }}></div> */}
-                {this.state.form !== "completionForm" &&
-                    <AdvancedOrderSidebar campaign={this.state.campaign} adSets={this.state.adSets} setAdSets={this.setAdSets} selectedAdSet={this.state.selectedAdSet} setSelectedAdSet={this.setSelectedAdSet} form={this.state.form} setForm={this.setForm} />
-                }
-                {/* <FormProgress form={this.state.form} setForm={this.setForm} errors={this.state.errors} campaign={this.state.campaign} adSets={this.state.adSets} ads={this.state.ads} /> */}
-                {this.renderForm()}
-            </>
+            <Box display="flex" flexDirection="row">
+              <AdvancedOrderSidebar campaign={this.state.campaign} adSets={this.state.adSets} setAdSets={this.setAdSets} selectedAdSet={this.state.selectedAdSet} setSelectedAdSet={this.setSelectedAdSet} form={this.state.form} setForm={this.setForm} />
+              {this.renderForm()}
+              <CampaignFormV2 />
+            </Box>
         );
     }
 }

@@ -211,15 +211,12 @@ class CampaignForm extends Component<any, any> {
                                             <div style={{ display: "flex", justifyContent: "space-between", width: "100%", marginTop: "14px", marginBottom: "-14px" }}>
                                                 <S.Objective selected={this.props.campaign.objective === 'awareness'} onClick={() => this.handleObjective("awareness")}>
                                                     <Text content={"Awareness"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                    <InfoIcon />
                                                 </S.Objective>
                                                 <S.Objective selected={this.props.campaign.objective === 'engagement'} onClick={() => this.handleObjective("engagement")}>
                                                     <Text content={"Engagement"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                    <InfoIcon />
                                                 </S.Objective>
                                                 <S.Objective selected={this.props.campaign.objective === 'conversion'} onClick={() => this.handleObjective("conversion")}>
                                                     <Text content={"Conversion"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                                                    <InfoIcon />
                                                 </S.Objective>
                                             </div>
                                         </S.InputContainer>
