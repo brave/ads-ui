@@ -60,9 +60,8 @@ function User({advertisers, auth}: Props) {
   return (
     <ApolloProvider client={client}>
       <Box height="100%">
-        <Navbar userId={auth.id} advertiserId={activeAdvertiser.id}/>
         <Box display="flex">
-          <Sidebar/>
+          <Sidebar userId={auth.id} advertiserId={activeAdvertiser.id} />
           <Box
             width="100%"
             height="100%"

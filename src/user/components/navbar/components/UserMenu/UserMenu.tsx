@@ -1,24 +1,47 @@
 import * as React from "react";
-import * as S from "./UserMenu.style";
 
-import { H5 } from "../../../../../components/Text/Text";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { Button, Menu, MenuItem } from "@mui/material";
+import { useState } from "react";
 
-class UserMenu extends React.Component<any, any> {
-  public render() {
-    return (
-      <S.Menu open={this.props.menuOpen}>
-        <Link style={{ textDecoration: "none", color: "inherit" }} to={`/user/main/settings`}>
-          <S.MenuItem>
-            <H5 fontFamily={"Poppins"}>Settings</H5>
-          </S.MenuItem>
-        </Link>
-        <S.MenuItem onClick={this.props.signOut}>
-          <H5 fontFamily={"Poppins"}>Sign out</H5>
-        </S.MenuItem>
-      </S.Menu>
-    );
-  }
+interface Props {
+  signOut: any;
 }
 
-export default UserMenu;
+export function UserMenu({ signOut }: Props) {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const history = useHistory();
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  return (
+    <>
+      <Button onClick={handleClick} sx={{ p: 1, mr: 2 }} size="large">
+        Account
+      </Button>
+      <Menu open={open} anchorEl={anchorEl} onClose={() => setAnchorEl(null)}>
+        <MenuItem
+          onClick={() => {
+            history.push("/user/main/settings");
+            setAnchorEl(null);
+          }}
+          sx={{ pl: 20, pr: 20, pt: 3, pb: 3 }}
+        >
+          Settings
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            signOut();
+            setAnchorEl(null);
+          }}
+          sx={{ pl: 20, pr: 20, pt: 3, pb: 3 }}
+        >
+          Sign Out
+        </MenuItem>
+      </Menu>
+    </>
+  );
+}

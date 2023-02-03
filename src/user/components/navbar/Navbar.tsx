@@ -1,22 +1,15 @@
 import * as React from "react";
-import {connect} from "react-redux";
 
-import * as S from "./style/Navbar.style";
-
-import {Link} from "react-router-dom";
-
-import UserMenu from "./components/UserMenu/UserMenu";
+import {Link, useHistory} from "react-router-dom";
 
 import {SignOut} from "../../../actions";
-
-import BraveAdsLogo from "../../../assets/images/Subdomains_Rewards_Ads_Default.png";
-
-import OutsideAlerter from "../../../components/OutsideAlerter/OutSideAlerter";
 import TopBarProgress from "react-topbar-progress-indicator";
-import {Text} from "../../../components/Text/Text";
 import "./style/Navbar.style.css"
 
-import Context from "../../../state/context";
+
+import {AppBar, Box, Button, Toolbar, Typography} from "@mui/material";
+import {UserMenu} from "./components/UserMenu/UserMenu";
+import {connect} from "react-redux";
 
 const linkStyle = {textDecoration: "none", color: "inherit"};
 const logoStyle = {textDecoration: "none", color: "inherit", marginTop: "3px"};
@@ -40,85 +33,36 @@ function shouldShowNewCampaign(advertiserId: string): boolean {
   return process.env.REACT_APP_ENABLE_FEATURES === "true" || NEW_CAMPAIGN_ADVERTISER_ALLOW_LIST.includes(advertiserId);
 }
 
-class Navbar extends React.Component<any, any> {
-  static contextType = Context;
+interface Props {
+  advertiserId: string;
+  userId: string;
+  signOut: any;
+}
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      menuOpen: false
-    };
-  }
+function Navbar({ advertiserId, signOut, userId }: Props) {
+  const history = useHistory();
 
-  public toggleMenu = () => {
-    this.setState(prevState => ({
-      menuOpen: !prevState.menuOpen
-    }));
-  };
-
-  public closeMenu = () => {
-    this.setState({
-      menuOpen: false
-    });
-  };
-
-  public render() {
-    const {signOut} = this.props;
-    return (
-      <div style={{position: "fixed", width: "100%", top: "0px", zIndex: 9001}}>
-        <S.Container loading={this.context.loading}>
-          {this.context.loading && <TopBarProgress/>}
-          <S.SubContainer>
-            <Link style={logoStyle} to={"/home"}>
-              <S.Logo src={BraveAdsLogo}/>
-            </Link>
-          </S.SubContainer>
-          <S.SubContainer
-            style={{justifyContent: "flex-end", gap: "16px"}}
+  return (
+    <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, bgcolor: "#ffffff" }}>
+      <Toolbar>
+        <Link style={logoStyle} to={"/home"}>
+          <img src="/Subdomains_Rewards_Ads_Default.png" alt="Ads" height="50px" width="500px"/>
+        </Link>
+        <div style={{ flexGrow: 1 }} />
+        {shouldShowNewCampaign(advertiserId) && (
+          <Button
+            onClick={() => history.push(`/user/main/adsmanager/selection?userId=${userId}&advertiserId=${advertiserId}`)}
+            size="large"
+            variant="contained"
+            sx={{ mr: 5 }}
           >
-            {shouldShowNewCampaign(this.props.advertiserId) &&
-              <>
-                <S.SubContainer>
-                  <Link style={linkStyle}
-                        to={`/user/main/adsmanager/selection?userId=${this.props.userId}&advertiserId=${this.props.advertiserId}`}>
-                    <div style={{
-                      padding: "0px 20px",
-                      background: "#4C54D2",
-                      color: "white",
-                      border: "none",
-                      borderRadius: "100px 100px 100px 100px"
-                    }}>
-                      <span>
-                        <Text
-                          style={{paddingTop: "6px", paddingBottom: "6px"}}
-                          sizes={[16, 16, 15, 15, 14]}
-                          fontWeight={500}
-                          fontFamily={"Poppins"}
-                        >
-                          New Campaign
-                      </Text>
-                      </span>
-                    </div>
-                  </Link>
-                </S.SubContainer>
-                <S.SubContainer>
-                  <div style={{width: "1px", height: "20px", borderLeft: "2px solid #EDEDED"}}></div>
-                </S.SubContainer>
-              </>
-            }
-            <OutsideAlerter onOutsideClick={this.closeMenu}>
-              <S.SubContainer style={{position: "relative"}}>
-                <Text onClick={this.toggleMenu} content={"Account"}
-                      style={{marginTop: "6px", marginBottom: "6px", cursor: "pointer"}} sizes={[16, 16, 15, 15, 14]}
-                      fontFamily={"Poppins"}/>
-                <UserMenu menuOpen={this.state.menuOpen} signOut={signOut}/>
-              </S.SubContainer>
-            </OutsideAlerter>
-          </S.SubContainer>
-        </S.Container>
-      </div>
-    );
-  }
+            New Campaign
+          </Button>
+        )}
+        <UserMenu signOut={signOut}/>
+      </Toolbar>
+    </AppBar>
+  );
 }
 
 const mapDispatchToProps = (dispatch: any) => ({

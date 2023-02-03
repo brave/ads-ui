@@ -1,35 +1,45 @@
 import * as React from "react";
 import CampaignIcon from '@mui/icons-material/Campaign';
-import {Drawer, List, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
+import {Box, CssBaseline, Drawer, List, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 import {useHistory} from "react-router-dom";
+import Navbar from "../navbar/Navbar";
 
 const drawerWidth = 240;
 
-function Sidebar() {
+interface Props {
+  userId: string;
+  advertiserId: string
+}
+
+function Sidebar({ advertiserId, userId }: Props) {
   const history = useHistory();
 
   return (
-    <Drawer
-      sx={{
-        width: drawerWidth,
-        flexShrink: 0,
-        '& .MuiDrawer-paper': {
+    <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
+      <Navbar advertiserId={advertiserId} userId={userId} />
+      <Drawer
+        sx={{
           width: drawerWidth,
-          boxSizing: 'border-box',
-        },
-      }}
-      variant="permanent"
-      anchor="left"
-    >
-      <List sx={{ mt: 8 }}>
-        <ListItemButton selected onClick={() => history.push("/user/main/campaigns")}>
-          <ListItemText primary="Campaigns"/>
-          <ListItemIcon>
-            <CampaignIcon/>
-          </ListItemIcon>
-        </ListItemButton>
-      </List>
-    </Drawer>
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+            width: drawerWidth,
+            boxSizing: 'border-box',
+          },
+        }}
+        variant="permanent"
+        anchor="left"
+      >
+        <List sx={{ mt: 8 }}>
+          <ListItemButton selected onClick={() => history.push("/user/main/campaigns")}>
+            <ListItemText primary="Campaigns"/>
+            <ListItemIcon>
+              <CampaignIcon/>
+            </ListItemIcon>
+          </ListItemButton>
+        </List>
+      </Drawer>
+    </Box>
   );
 }
 
