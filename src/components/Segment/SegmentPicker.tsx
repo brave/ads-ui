@@ -44,7 +44,7 @@ export const SegmentPicker: React.FC<Props> = ({ idx }: Props) => {
         <TextField
           {...params}
           label="Audiences"
-          helperText={errorMessage ?? "Select the audience segments to target"}
+          helperText={errorMessage ?? "Select the audience segments to target. Brave will decide if left untargeted."}
           error={!!errorMessage}
         />
       )}
