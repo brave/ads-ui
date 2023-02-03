@@ -1,6 +1,6 @@
 import * as React from "react";
 import CampaignIcon from '@mui/icons-material/Campaign';
-import {Box, CssBaseline, Drawer, List, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
+import {Box, CssBaseline, Drawer, List, ListItemButton, ListItemIcon, ListItemText, Typography} from "@mui/material";
 import {useHistory} from "react-router-dom";
 import Navbar from "../navbar/Navbar";
 
@@ -32,7 +32,11 @@ function Sidebar({ advertiserId, userId }: Props) {
       >
         <List sx={{ mt: 8 }}>
           <ListItemButton selected onClick={() => history.push("/user/main/campaigns")}>
-            <ListItemText primary="Campaigns"/>
+            <ListItemText disableTypography>
+              <Typography variant="h6">
+                Campaigns
+              </Typography>
+            </ListItemText>
             <ListItemIcon>
               <CampaignIcon/>
             </ListItemIcon>
