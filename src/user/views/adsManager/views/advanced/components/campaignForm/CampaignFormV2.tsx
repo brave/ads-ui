@@ -140,56 +140,91 @@ export function CampaignFormV2() {
               </Box>
             </Card>
             <FieldArray name="adSets">
-              {({insert, remove, push}) => (
+              {({remove: removeAdSet, push: pushAdSet}) => (
                 <>
                   {values.adSets.map((ads, index) => (
-                    <Card sx={{mt: 2, p: 2}}>
-                      <Box>
-                        <Divider textAlign="left" sx={{fontSize: "24px", mb: 1}}>
-                          Ad Set Details
-                        </Divider>
-                        <Typography variant="body2" sx={{mb: 2}}>
-                          Ad sets are used to define your audience and how budget is spent
-                        </Typography>
-                        <FormikTextField name={`adSets.${index}.name`} label="AdSet Name"/>
-                        <FormikRadioControl
-                          name="billingType"
-                          label="Pricing Type"
-                          options={[
-                            {value: "cpm", label: "CPM (Impressions)"},
-                            {value: "cpc", label: "CPC (Clicks)"},
-                          ]}
-                        />
+                    <>
+                      <Card sx={{mt: 2, p: 2}}>
+                        <Box>
+                          <Divider textAlign="left" sx={{fontSize: "24px", mb: 1}}>
+                            Ad Set Details
+                          </Divider>
+                          <Typography variant="body2" sx={{mb: 2}}>
+                            Ad sets are used to define your audience and how budget is spent
+                          </Typography>
+                          <FormikTextField name={`adSets.${index}.name`} label="AdSet Name"/>
+                          <FormikRadioControl
+                            name="billingType"
+                            label="Pricing Type"
+                            options={[
+                              {value: "cpm", label: "CPM (Impressions)"},
+                              {value: "cpc", label: "CPC (Clicks)"},
+                            ]}
+                          />
 
-                        <Divider textAlign="left" sx={{fontSize: "24px", mb: 1, mt: 3}}>
-                          Categories
-                        </Divider>
-                        <Typography variant="body2" sx={{mb: 2}}>
-                          Select the audience you would like to advertise to by interests.
-                        </Typography>
-                        <SegmentPicker idx={index}/>
+                          <Divider textAlign="left" sx={{fontSize: "24px", mb: 1, mt: 3}}>
+                            Categories
+                          </Divider>
+                          <Typography variant="body2" sx={{mb: 2}}>
+                            Select the audience you would like to advertise to by interests.
+                          </Typography>
+                          <SegmentPicker idx={index}/>
 
-                        <Divider textAlign="left" sx={{fontSize: "24px", mb: 1, mt: 3}}>
-                          Platforms
-                        </Divider>
-                        <Typography variant="body2" sx={{mb: 2}}>
-                          Select the devices and platforms you would like to advertise to.
-                        </Typography>
-                        <PlatformPicker idx={index}/>
+                          <Divider textAlign="left" sx={{fontSize: "24px", mb: 1, mt: 3}}>
+                            Platforms
+                          </Divider>
+                          <Typography variant="body2" sx={{mb: 2}}>
+                            Select the devices and platforms you would like to advertise to.
+                          </Typography>
+                          <PlatformPicker idx={index}/>
 
-                        <Divider textAlign="left" sx={{fontSize: "24px", mb: 1, mt: 3}}>
-                          Conversion
-                        </Divider>
-                        <Typography variant="body2" sx={{mb: 2}}>
-                          Define post-engagement analytics.
-                        </Typography>
-                        <ConversionFields idx={index}/>
-                      </Box>
-
-                      <Card>
-
+                          <Divider textAlign="left" sx={{fontSize: "24px", mb: 1, mt: 3}}>
+                            Conversion
+                          </Divider>
+                          <Typography variant="body2" sx={{mb: 2}}>
+                            Define post-engagement analytics.
+                          </Typography>
+                          <ConversionFields idx={index}/>
+                        </Box>
                       </Card>
-                    </Card>
+                      <FieldArray name={`adSets.${index}.ads`}>
+                        {({remove: removeAd, push: pushAd}) => (
+                          <>
+                            {values.adSets[index].ads.map((ad, idx) => (
+                              <Card sx={{mt: 2, p: 2}}>
+                                <Divider textAlign="left" sx={{fontSize: "24px", mb: 1, mt: 1}}>
+                                  Creative
+                                </Divider>
+                                <Typography variant="body2" sx={{mb: 2}}>
+                                  Define the look and feel of your ads
+                                </Typography>
+                                <FormikTextField
+                                  name="test"
+                                  label="Creative Name"
+                                />
+
+                                <FormikTextField
+                                  name="test"
+                                  label="Creative Title"
+                                  helperText="Max 30 Characters"
+                                />
+
+                                <FormikTextField
+                                  name="test"
+                                  label="Creative Body"
+                                  helperText="Max 60 Characters"
+                                />
+
+                                <FormikTextField
+                                  name="test"
+                                  label="Creative Target URL"
+                                />
+                              </Card>
+                            ))}
+                          </>
+                        )}
+                      </FieldArray>
+                    </>
                   ))}
                 </>
               )}
