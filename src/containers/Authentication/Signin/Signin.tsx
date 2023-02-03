@@ -198,17 +198,15 @@ class SignInContainer extends React.Component<any, any> {
               <TextField
                 sx={{ mt: 5, mb: 3 }}
                 fullWidth
-                value={this.state.email}
-                onChange={this.handleEmail}
+                onChange={(evt) => this.setState({ email: evt.target.value})}
                 label="Email"
                 placeholder="Enter your email"
               />
               <TextField
                 fullWidth
-                value={this.state.password}
                 type="password"
                 sx={{ mb: 3 }}
-                onChange={this.handlePassword}
+                onChange={(evt) => this.setState({ password: evt.target.value})}
                 label="Password"
                 placeholder="Enter your password"
               />
