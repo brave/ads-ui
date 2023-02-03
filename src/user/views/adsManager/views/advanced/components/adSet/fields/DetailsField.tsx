@@ -1,4 +1,4 @@
-import {Divider, Typography} from "@mui/material";
+import {Typography} from "@mui/material";
 import {FormikRadioControl, FormikTextField} from "../../../../../../../../form/FormikHelpers";
 import React from "react";
 
@@ -9,9 +9,6 @@ interface Props {
 export function DetailsField({ index }: Props) {
   return (
     <>
-      <Divider textAlign="left" sx={{fontSize: "24px", mb: 1}}>
-        Ad Set Details
-      </Divider>
       <Typography variant="body2" sx={{mb: 2}}>
         Ad sets are used to define your audience and how budget is spent
       </Typography>
@@ -23,6 +20,11 @@ export function DetailsField({ index }: Props) {
           {value: "cpm", label: "CPM (Impressions)"},
           {value: "cpc", label: "CPC (Clicks)"},
         ]}
+      />
+      <FormikTextField
+        name={`adSets.${index}.amount`}
+        label="Price"
+        type="number"
       />
     </>
   )
