@@ -11,7 +11,6 @@ import AdvancedOrderSidebar from "./components/advancedOrderSidebar/AdvancedOrde
 
 import { initializeData, performValidation } from "./lib/Library";
 import { connect } from 'react-redux';
-import {CampaignFormV2} from "./components/form/CampaignFormV2";
 import {Box} from "@mui/material";
 
 class Advanced extends Component<any, any> {
@@ -116,7 +115,6 @@ class Advanced extends Component<any, any> {
             <Box display="flex" flexDirection="row">
               <AdvancedOrderSidebar campaign={this.state.campaign} adSets={this.state.adSets} setAdSets={this.setAdSets} selectedAdSet={this.state.selectedAdSet} setSelectedAdSet={this.setSelectedAdSet} form={this.state.form} setForm={this.setForm} />
               {this.renderForm()}
-              <CampaignFormV2 />
             </Box>
         );
     }
@@ -126,10 +124,6 @@ const mapStateToProps = (state: any) => ({
     auth: state.authReducer,
 });
 
-const mapDispatchToProps = () => ({
-});
-
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
 )(Advanced);

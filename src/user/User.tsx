@@ -23,6 +23,7 @@ import AnalyticsOverview from "./analytics/AnalyticsOverview";
 import Settings from "./settings/Settings";
 import {connect} from "react-redux";
 import {Box} from "@mui/material";
+import {CampaignFormV2} from "./views/adsManager/views/advanced/components/form/CampaignFormV2";
 
 const buildApolloClient = (accessToken: string) => {
   const httpLink = createHttpLink({
@@ -72,7 +73,12 @@ function User({advertisers, auth}: Props) {
             <Switch>
               {/* /adsmanager */}
               <Route path={`${match.path}/adsmanager/selection`} component={Selection}/>
-              <Route path={`${match.path}/adsmanager/advanced`} component={Advanced}/>
+              <Route path={`${match.path}/adsmanager/advanced`} component={Advanced}>
+                <>
+                  <Advanced />
+                  <CampaignFormV2 auth={auth} advertiser={activeAdvertiser}/>
+                </>
+              </Route>
 
               {/* /settings */}
               <Route path={`${match.path}/settings`}>

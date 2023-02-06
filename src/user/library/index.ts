@@ -3,7 +3,7 @@ import {
   CreateAdInput,
   CreateAdSetInput,
   CreateCampaignInput,
-  CreateNotificationCreativeInput
+  CreativeInput
 } from "../../graphql/types";
 import axios from "axios";
 import {print} from "graphql";
@@ -11,10 +11,10 @@ import {CreateCreativeDocument} from "../../graphql/creative.generated";
 
 export async function transformNewForm(
   form: CampaignForm,
-  advertiserId: string,
-  userId: string,
-  accessToken: string
+  auth: any,
+  advertiserId: string
 ): Promise<CreateCampaignInput> {
+  console.log(auth);
   const adSets = form.adSets;
   const transformedAdSet: CreateAdSetInput[] = [];
 
@@ -22,16 +22,16 @@ export async function transformNewForm(
     const transformedAd: CreateAdInput[] = [];
 
     for (let ad of adSet.creatives) {
-      const notification: CreateNotificationCreativeInput = {
+      const notification: CreativeInput = {
         advertiserId: advertiserId,
         name: ad.name,
-        payload: { title: ad.title, body: ad.body, targetUrl: ad.targetUrl },
+        payloadNotification: { title: ad.title, body: ad.body, targetUrl: ad.targetUrl },
         state: "under_review",
         type: {
           code: "notification_all_v1",
         }
       }
-      const withId = await createNotification(accessToken, notification);
+      const withId = await createNotification(auth.accessToken, notification);
       transformedAd.push({
         state: "under_review",
         webhooks: [],
@@ -77,7 +77,7 @@ export async function transformNewForm(
 }
 
 // TODO: Get rid of this ASAP
-async function createNotification(accessToken: string, createInput: CreateNotificationCreativeInput) {
+async function createNotification(accessToken: string, createInput: CreativeInput) {
   const response = await axios.post(
     `${process.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql"),
     JSON.stringify({query: print(CreateCreativeDocument), variables: { input: createInput }}),

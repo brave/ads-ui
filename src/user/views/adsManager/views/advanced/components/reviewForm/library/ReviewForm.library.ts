@@ -327,7 +327,6 @@ async function graphQLRequest(query, accessToken) {
 }
 
 export async function submitOrder(userId, advertiserId, campaign, adSets, accessToken) {
-    console.log(adSets);
     let processedCampaign = await processCampaign(userId, advertiserId, campaign, adSets, accessToken)
     if (!campaign.editMode) {
         let response = await graphQLRequest(createCampaignMutation(processedCampaign), accessToken);

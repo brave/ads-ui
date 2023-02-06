@@ -16,9 +16,15 @@ import {useCreateCampaignMutation} from "../../../../../../../graphql/campaign.g
 import {refetchAdvertiserQuery} from "../../../../../../../graphql/advertiser.generated";
 import {useHistory} from "react-router-dom";
 
-export function CampaignFormV2() {
+interface Props {
+  auth: any;
+  advertiser: any;
+}
+
+export function CampaignFormV2({ auth, advertiser }: Props) {
   const [value, setValue] = useState(0);
   const history = useHistory();
+  console.log(advertiser);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -45,7 +51,7 @@ export function CampaignFormV2() {
         initialValues={initialCampaign}
         onSubmit={(v: CampaignForm, {setSubmitting}) => {
           setSubmitting(true);
-          transformNewForm(v, "", "", "")
+          transformNewForm(v, auth, advertiser.id)
             .then((c) => console.log(c))
             .catch((e) => alert("Unable to save Campaign"))
             .finally(() => setSubmitting(false));
