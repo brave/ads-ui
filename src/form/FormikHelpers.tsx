@@ -61,47 +61,6 @@ export const FormikTextField: React.FC<FormikTextFieldProps> = (props) => {
   );
 };
 
-interface FormikSelectProps {
-  name: string;
-  label: string;
-  options: Array<{ label: string; value: string }>;
-  disabled?: boolean;
-  sx?: SxProps<Theme> | undefined;
-  margin?: "normal" | "dense" | "none" | undefined;
-  color?:
-    | "error"
-    | "primary"
-    | "secondary"
-    | "info"
-    | "success"
-    | "warning"
-    | undefined;
-  variant?: "outlined" | "standard" | "filled" | undefined;
-}
-
-export const FormikSelect: React.FC<FormikSelectProps> = (props) => {
-  const [field, meta] = useField(props);
-  return (
-    <FormControl fullWidth={props.sx === undefined} {...props}>
-      <InputLabel id={`select-label-${props.name}`}>{props.label}</InputLabel>
-      <Select
-        error={meta.touched && Boolean(meta.error)}
-        label={props.label}
-        {...field}
-      >
-        {props.options.map((opt) => (
-          <MenuItem key={opt.value} value={opt.value}>
-            {opt.label}
-          </MenuItem>
-        ))}
-      </Select>
-      <ErrorMessage name={field.name}>
-        {(msg) => <FormHelperText error>{msg}</FormHelperText>}
-      </ErrorMessage>
-    </FormControl>
-  );
-};
-
 interface FormikRadioGroupProps {
   name: string;
   row?: boolean;
@@ -150,48 +109,6 @@ export const FormikRadioControl: React.FC<FormikRadioControlProps> = (
   );
 };
 
-interface FormikSwitchProps {
-  name: string;
-  label: string;
-}
-
-export const FormikSwitch: React.FC<FormikSwitchProps> = (props) => {
-  const [field] = useField({ type: "checkbox", name: props.name });
-  return (
-    <>
-      <FormControlLabel control={<Switch {...field} />} label={props.label} />
-      <ErrorMessage name={field.name}>
-        {(msg) => <FormHelperText error>{msg}</FormHelperText>}
-      </ErrorMessage>
-    </>
-  );
-};
-
-interface FormikCheckboxProps {
-  name: string;
-  label: string;
-  disabled?: boolean;
-  helperText?: string;
-}
-
-export const FormikCheckbox: React.FC<FormikCheckboxProps> = (props) => {
-  const [field] = useField({ type: "checkbox", name: props.name });
-  return (
-    <>
-      <FormControlLabel
-        control={<Checkbox {...field} />}
-        label={props.label}
-        componentsProps={{ typography: { variant: "body2" } }}
-        disabled={props.disabled}
-      />
-      {props.helperText && <FormHelperText>{props.helperText}</FormHelperText>}
-      <ErrorMessage name={field.name}>
-        {(msg) => <FormHelperText error>{msg}</FormHelperText>}
-      </ErrorMessage>
-    </>
-  );
-};
-
 interface FormikSubmitButtonProps {
   label?: string;
   inProgressLabel?: String;
@@ -200,7 +117,6 @@ interface FormikSubmitButtonProps {
 }
 
 function extractErrors(errorObject: any): string[] {
-  // @ts-ignore
   return Object.values(errorObject).flatMap((o) =>
     _.isString(o) ? [o] : extractErrors(o)
   );
@@ -262,7 +178,9 @@ export const FormikSubmitButton: React.FC<FormikSubmitButtonProps> = ({
           color="primary"
           variant="contained"
           type="submit"
+          size="large"
           disabled={!saveEnabled}
+          sx={{mt: 2}}
         >
           {formik.isSubmitting ? inProgressLabel : label}
         </Button>

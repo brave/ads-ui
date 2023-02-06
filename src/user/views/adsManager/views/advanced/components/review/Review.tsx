@@ -3,6 +3,7 @@ import {CampaignForm} from "../../../../types";
 import {Box, Card, Divider, List, Typography} from "@mui/material";
 import {CustomListItemText} from "../../../../../../../components/List/CustomListItemText";
 import React from "react";
+import {FormikSubmitButton} from "../../../../../../../form/FormikHelpers";
 
 export function Review() {
   const { values, errors, setFieldTouched } = useFormikContext<CampaignForm>();
@@ -56,6 +57,8 @@ export function Review() {
           ))}
         </Card>
       ))}
+
+      <FormikSubmitButton isCreate={true} label="Publish Campaign" />
     </Box>
   )
 }
