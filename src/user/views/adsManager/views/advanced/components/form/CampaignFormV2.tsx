@@ -10,6 +10,7 @@ import {AdSetFields} from "../adSet/AdSetFields";
 import {initialCampaign} from "../../../../types";
 import {AdField} from "../ads/AdField";
 import {Review} from "../review/Review";
+import {CampaignSchema} from "../../../../../../../validation/CampaignSchema";
 
 export function CampaignFormV2() {
   const [value, setValue] = useState(0);
@@ -29,7 +30,7 @@ export function CampaignFormV2() {
       <Formik
         initialValues={initialCampaign}
         onSubmit={(v) => console.log(v)}
-        // validationSchema={CampaignSchema}
+        validationSchema={CampaignSchema}
       >
         {({values}) => (
           <Form>

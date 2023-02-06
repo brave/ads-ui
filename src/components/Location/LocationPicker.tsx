@@ -23,8 +23,7 @@ export const LocationPicker: React.FC<{
     if (!countries && isCountry) include = false;
     return include;
   });
-  const [formProps, meta, helper] =
-    useField<GeocodeFragment[]>("geoTargets");
+  const [formProps, meta, helper] = useField<GeocodeFragment[]>("geoTargets");
   const errorMessage = meta.error;
 
   return (

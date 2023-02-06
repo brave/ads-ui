@@ -22,9 +22,9 @@ export function DetailsField({ index, onCreate, showCreateNew }: Props) {
           </Link>
         )}
       </Box>
-      <FormikTextField name={`adSets.${index}.name`} label="AdSet Name"/>
+      <FormikTextField name={`adSets.${index}.name`} label="Ad Set Name"/>
       <FormikRadioControl
-        name="billingType"
+        name={`adSets.${index}.billingType`}
         label="Pricing Type"
         options={[
           {value: "cpm", label: "CPM (Impressions)"},

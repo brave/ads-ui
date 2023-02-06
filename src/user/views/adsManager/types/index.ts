@@ -31,6 +31,7 @@ export type OS = {
 
 export type AdSetForm = {
   name: string;
+  price: number;
   billingType: string;
   segments: Segment[];
   oses: OS[];
@@ -41,6 +42,7 @@ export type AdSetForm = {
 export type Conversion = {
   type: string;
   observationWindow: string;
+  urlPattern: string;
 }
 
 export type Segment = {
@@ -66,15 +68,13 @@ export const initialCampaign: CampaignForm = {
   adSets: [{
     name: "",
     billingType: "",
+    price: 0,
     segments: [{
       code: "Svp7l-zGN",
       name: "untargeted"
     }],
     oses: [],
-    conversions: [{
-      type: "",
-      observationWindow: "",
-    }],
+    conversions: [],
     creatives: [{
       name: "",
       title: "",
@@ -93,15 +93,13 @@ export const initialCampaign: CampaignForm = {
 export const initialAdSet: AdSetForm = {
   name: "",
   billingType: "",
+  price: 0,
   segments: [{
     code: "Svp7l-zGN",
     name: "untargeted"
   }],
   oses: [],
-  conversions: [{
-    type: "",
-    observationWindow: "",
-  }],
+  conversions: [],
   creatives: [{
     name: "",
     title: "",
