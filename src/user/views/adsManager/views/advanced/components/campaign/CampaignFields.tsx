@@ -12,7 +12,7 @@ interface Props {
 export function CampaignFields({ onNext }: Props) {
   return (
     <Card sx={{p: 2, mt: 2}}>
-      <ObjectiveField />
+      {/*<ObjectiveField />*/}
 
       <DetailField />
 

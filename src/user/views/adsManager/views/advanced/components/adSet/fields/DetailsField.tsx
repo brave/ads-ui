@@ -32,7 +32,7 @@ export function DetailsField({ index, onCreate, showCreateNew }: Props) {
         ]}
       />
       <FormikTextField
-        name={`adSets.${index}.amount`}
+        name={`adSets.${index}.price`}
         label="Price"
         type="number"
       />

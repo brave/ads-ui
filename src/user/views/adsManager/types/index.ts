@@ -5,9 +5,9 @@ import {defaultEndDate, defaultStartDate} from "../../../../form/DateFieldHelper
 export type CampaignForm = {
   startAt: string;
   endAt: string;
-  budget: string;
+  budget: number;
   currency: string;
-  dailyBudget: string;
+  dailyBudget: number;
   dailyCap: number;
   geoTargets: GeoTarget[];
   adSets: AdSetForm[];
@@ -41,7 +41,7 @@ export type AdSetForm = {
 
 export type Conversion = {
   type: string;
-  observationWindow: string;
+  observationWindow: number;
   urlPattern: string;
 }
 
@@ -60,9 +60,9 @@ export type Creative = {
 export const initialCampaign: CampaignForm = {
   startAt: defaultStartDate(),
   endAt: defaultEndDate(),
-  budget: "",
+  budget: 0,
   currency: "USD",
-  dailyBudget: "",
+  dailyBudget: 0,
   dailyCap: 1,
   geoTargets: [],
   adSets: [{

@@ -4,7 +4,6 @@ import { startOfDay } from "date-fns";
 export const CampaignSchema = object().shape({
   name: string().label("Campaign Name").required(),
   budget: number().label("Lifetime Budget").required().positive(),
-  objective: string().oneOf(["awareness", "engagement", "conversion"]).required("Objective is a required field"),
   dailyBudget: number()
     .label("Daily Budget")
     .required()
@@ -70,10 +69,10 @@ export const CampaignSchema = object().shape({
         ),
       creatives: array().min(1).of(
         object().shape({
-          name: string().required("Ad must have name"),
-          title: string().required("Ad must have title"),
-          body: string().required("Ad must have body"),
-          targetUrl: string().required("Ad must have URL")
+          name: string().label("Creative Name").required("Name is required"),
+          title: string().label("Title").max(30, "Max 30 Characters").required("Title is required"),
+          body: string().label("Body").max(60, "Max 60 Characters").required("Body is required"),
+          targetUrl: string().label("Target Url").required("URL is required")
         })
       )
     })

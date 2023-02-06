@@ -11,7 +11,9 @@ interface Props {
 }
 
 export function AdReview({ ad, adIdx, error }: Props) {
+  const hasError = !!error;
   const adError = error as FormikErrors<Creative>;
+  console.log(ad);
 
   return (
     <>
@@ -22,7 +24,7 @@ export function AdReview({ ad, adIdx, error }: Props) {
         <CustomListItemText
           primary="Creative Name"
           secondary={ad.name}
-          error={adError.name}
+          error={hasError ? adError.name : ""}
         />
         <CustomListItemText
           primary="Creative Type"
@@ -31,17 +33,17 @@ export function AdReview({ ad, adIdx, error }: Props) {
         <CustomListItemText
           primary="Title"
           secondary={ad.title}
-          error={adError.title}
+          error={hasError ? adError.title : ""}
         />
         <CustomListItemText
           primary="Body"
           secondary={ad.body}
-          error={adError.body}
+          error={hasError ? adError.body : ""}
         />
         <CustomListItemText
           primary="Target Url"
           secondary={ad.targetUrl}
-          error={adError.targetUrl}
+          error={hasError ? adError.targetUrl : ""}
         />
       </List>
     </>

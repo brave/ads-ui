@@ -23,7 +23,7 @@ export function CustomListItemText({ primary, secondary, error }: Props) {
   return (
     <ListItem>
       <ListItemText
-        sx={{ mt: 2, mb: 2 }}
+        sx={{ mb: 1 }}
         primary={primary}
         secondary={isError ? getError(error) : secondary}
 

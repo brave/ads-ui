@@ -37,6 +37,10 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
     )
   }
 
+  const billing = (v: string) => {
+    return v === "cpm" ? "Impressions" : "Clicks";
+  }
+
   return (
     <Card sx={{p: 2, mt: 2}}>
       <Typography variant="h6">
@@ -45,7 +49,7 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
       <List>
         <CustomListItemText
           primary="Pricing Type"
-          secondary={adSet.billingType}
+          secondary={billing(adSet.billingType)}
           error={hasErrors ? adSetError.billingType : ""}
         />
         <CustomListItemText
