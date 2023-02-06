@@ -10,10 +10,10 @@ import {CampaignForm, initialAdSet} from "../../../../types";
 interface Props {
   tabValue: number;
   onRemove: () => void;
-  onNext: () => void;
+  onCreate: () => void;
 }
 
-export function AdSetFields({ tabValue, onRemove, onNext }: Props) {
+export function AdSetFields({ tabValue, onRemove, onCreate }: Props) {
   const { values } = useFormikContext<CampaignForm>();
   const index = tabValue - 1;
 
@@ -39,6 +39,7 @@ export function AdSetFields({ tabValue, onRemove, onNext }: Props) {
             <DetailsField
               index={index}
               onCreate={() => {
+                onCreate();
                 push(initialAdSet);
               }}
               showCreateNew={index === values.adSets.length - 1}
@@ -47,10 +48,6 @@ export function AdSetFields({ tabValue, onRemove, onNext }: Props) {
             <PickerFields index={index} />
 
             <ConversionField index={index} />
-
-            <Button variant="contained" size="large" sx={{ mt: 2 }} onClick={onNext}>
-              Next
-            </Button>
           </Box>
         </Card>
       )}

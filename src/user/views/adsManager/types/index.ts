@@ -9,7 +9,7 @@ export type CampaignForm = {
   currency: string;
   dailyBudget: string;
   dailyCap: number;
-  geoTargets: string[];
+  geoTargets: GeoTarget[];
   adSets: AdSetForm[];
   format: CampaignFormat;
   name: string;
@@ -19,11 +19,21 @@ export type CampaignForm = {
   objective: string;
 }
 
+export type GeoTarget = {
+  code: string,
+  name: string,
+}
+
+export type OS = {
+  code: string,
+  name: string,
+}
+
 export type AdSetForm = {
   name: string;
   billingType: string;
   segments: Segment[];
-  oses: string[];
+  oses: OS[];
   conversions: Conversion[]
   creatives: Creative[];
 }

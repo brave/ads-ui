@@ -4,6 +4,7 @@ import { Autocomplete, Checkbox, TextField } from "@mui/material";
 import { useField } from "formik";
 import _ from "lodash";
 import {GeocodeFragment, useActiveGeocodesQuery} from "../../graphql/common.generated";
+import React from "react";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;

@@ -3,20 +3,24 @@ import {
   Tab,
   Tabs,
 } from "@mui/material";
-import {Form, Formik} from "formik";
+import {Form, Formik, FormikValues} from "formik";
 import React, {useState} from "react";
 import {CampaignFields} from "../campaign/CampaignFields";
 import {AdSetFields} from "../adSet/AdSetFields";
 import {initialCampaign} from "../../../../types";
 import {AdField} from "../ads/AdField";
+import {Review} from "../review/Review";
 
 export function CampaignFormV2() {
   const [value, setValue] = useState(0);
-  const [showAd, setShowAd] = useState(false);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+
+  const showCard = (values: FormikValues) => {
+    return value > 0 && value !== values.adSets.length + 1;
+  }
 
   return (
     <Container
@@ -34,27 +38,26 @@ export function CampaignFormV2() {
               {values.adSets.map((a, index) => (
                 <Tab label={`Ad Set ${index + 1}`} value={index + 1} />
               ))}
+              <Tab label="Review" value={values.adSets.length + 1} />
             </Tabs>
 
             {value === 0 && <CampaignFields onNext={() => setValue(value + 1)} />}
 
-            {value > 0 && !showAd && (
-              <AdSetFields
-                tabValue={value}
-                onRemove={() => {
-                  setValue(value - 1);
-                  setShowAd(false);
-                }}
-                onNext={() => setShowAd(true)}
-              />
+            {showCard(values) && (
+              <>
+                <AdSetFields
+                  tabValue={value}
+                  onRemove={() => setValue(value - 1)}
+                  onCreate={() => setValue(value + 1)}
+                />
+                <AdField
+                  index={value - 1}
+                  onNext={() => setValue(values.adSets.length + 1)}
+                />
+              </>
             )}
 
-            {value > 0 && showAd && (
-              <AdField
-                index={value - 1}
-                onBack={() => setShowAd(false)}
-              />
-            )}
+            {value === values.adSets.length + 1 && <Review />}
           </Form>
         )}
       </Formik>

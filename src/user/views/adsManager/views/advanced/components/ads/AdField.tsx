@@ -7,10 +7,10 @@ import {CampaignForm, initialCreative} from "../../../../types";
 
 interface Props {
   index: number;
-  onBack: () => void;
+  onNext: () => void;
 }
 
-export function AdField({ index, onBack }: Props) {
+export function AdField({ index, onNext }: Props) {
   const { values } = useFormikContext<CampaignForm>();
 
   return (
@@ -49,14 +49,15 @@ export function AdField({ index, onBack }: Props) {
               <Ad adSet={index} ad={idx} />
 
               {values.adSets[index].creatives.length - 1 === idx && (
-                <Button
-                  variant="contained"
-                  size="large"
-                  sx={{ mt: 2 }}
-                  onClick={onBack}
-                >
-                  Back
-                </Button>
+                <Box sx={{ mt: 2 }}>
+                  <Button
+                    variant="contained"
+                    size="large"
+                    onClick={onNext}
+                  >
+                    Next
+                  </Button>
+                </Box>
               )}
             </Card>
           ))}
