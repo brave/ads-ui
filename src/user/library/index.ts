@@ -78,7 +78,7 @@ export async function transformNewForm(
 
 // TODO: Get rid of this ASAP
 async function createNotification(accessToken: string, createInput: CreativeInput) {
-  const response = await axios.post(
+  const response = await axios.post<{ createCreative: { id: string } }>(
     `${process.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql"),
     JSON.stringify({query: print(CreateCreativeDocument), variables: { input: createInput }}),
     {
@@ -91,5 +91,5 @@ async function createNotification(accessToken: string, createInput: CreativeInpu
 
   console.log(response.data)
 
-  return response.data;
+  return response.data.createCreative.id;
 }
