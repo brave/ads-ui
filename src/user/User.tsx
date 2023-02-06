@@ -73,11 +73,8 @@ function User({advertisers, auth}: Props) {
             <Switch>
               {/* /adsmanager */}
               <Route path={`${match.path}/adsmanager/selection`} component={Selection}/>
-              <Route path={`${match.path}/adsmanager/advanced`} component={Advanced}>
-                <>
-                  <Advanced />
-                  <CampaignFormV2 auth={auth} advertiser={activeAdvertiser}/>
-                </>
+              <Route path={`${match.path}/adsmanager/advanced`}>
+                <CampaignFormV2 auth={auth} advertiser={activeAdvertiser}/>
               </Route>
 
               {/* /settings */}
