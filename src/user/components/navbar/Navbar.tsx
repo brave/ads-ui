@@ -44,7 +44,11 @@ function Navbar({ advertiserId, dispatch, userId }: Props) {
     <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, bgcolor: "#ffffff" }}>
       <Toolbar>
         <Link style={logoStyle} to={"/home"}>
-          <img src="/Subdomains_Rewards_Ads_Default.png" alt="Ads" height="50px" width="500px"/>
+          <img
+            src="/Subdomains_Rewards_Ads_Default.png"
+            alt="Ads"
+            height="40px"
+          />
         </Link>
         <div style={{ flexGrow: 1 }} />
         {shouldShowNewCampaign(advertiserId) && (

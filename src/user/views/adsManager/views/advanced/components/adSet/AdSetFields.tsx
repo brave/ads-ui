@@ -1,73 +1,58 @@
-import {FieldArray, FormikValues} from "formik";
+import {FieldArray, useFormikContext} from "formik";
 import {Box, Button, Card, Divider, IconButton} from "@mui/material";
 import React from "react";
 import {DetailsField} from "./fields/DetailsField";
 import {PickerFields} from "./fields/PickerFields";
 import {ConversionField} from "./fields/ConversionField";
-import {AdField} from "../ads/AdField";
 import ClearIcon from "@mui/icons-material/Clear";
+import {CampaignForm, initialAdSet} from "../../../../types";
 
 interface Props {
-  values: FormikValues;
+  tabValue: number;
+  onRemove: () => void;
+  onNext: () => void;
 }
 
-export function AdSetFields({ values }: Props) {
+export function AdSetFields({ tabValue, onRemove, onNext }: Props) {
+  const { values } = useFormikContext<CampaignForm>();
+  const index = tabValue - 1;
+
   return (
     <FieldArray name="adSets">
       {({remove, push}) => (
-        <>
-          {values.adSets.map((ads, index) => (
-            <>
-              <Card sx={{mt: 2, p: 2}}>
-                <Box>
-                  <Box display="flex" flexDirection="row" alignItems="center">
-                    <Divider textAlign="left" sx={{fontSize: "24px", mb: 1, flexGrow: 1}}>
-                      Ad Set { index + 1 } Details
-                    </Divider>
-                    {index > 0 && (
-                      <IconButton onClick={() => remove(index)}>
-                        <ClearIcon />
-                      </IconButton>
-                    )}
-                  </Box>
+        <Card sx={{mt: 2, p: 2}}>
+          <Box>
+            <Box display="flex" flexDirection="row" alignItems="center">
+              <Divider textAlign="left" sx={{fontSize: "24px", mb: 1, flexGrow: 1}}>
+                Ad Set { index + 1 } Details
+              </Divider>
+              {index > 0 && (
+                <IconButton onClick={() => {
+                  onRemove();
+                  remove(index);
+                }}>
+                  <ClearIcon />
+                </IconButton>
+              )}
+            </Box>
 
-                  <DetailsField index={index} />
+            <DetailsField
+              index={index}
+              onCreate={() => {
+                push(initialAdSet);
+              }}
+              showCreateNew={index === values.adSets.length - 1}
+            />
 
-                  <PickerFields index={index} />
+            <PickerFields index={index} />
 
-                  <ConversionField index={index} />
-                </Box>
+            <ConversionField index={index} />
 
-                <AdField index={index} values={values} />
-
-                <Button
-                  variant="contained"
-                  size="large"
-                  sx={{mt: 2}}
-                  onClick={() => push({
-                    name: "",
-                    billingType: "",
-                    segments: [{
-                      code: "Svp7l-zGN",
-                      name: "untargeted"
-                    }],
-                    oses: [],
-                    conversions: [{
-                      type: "",
-                      observationWindow: "",
-                    }],
-                    ads: [{
-                      state: "under_review",
-                      creativeId: "",
-                    }]
-                  })}
-                >
-                  Add New Ad Set
-                </Button>
-              </Card>
-            </>
-          ))}
-        </>
+            <Button variant="contained" size="large" sx={{ mt: 2 }} onClick={onNext}>
+              Next
+            </Button>
+          </Box>
+        </Card>
       )}
     </FieldArray>
   )

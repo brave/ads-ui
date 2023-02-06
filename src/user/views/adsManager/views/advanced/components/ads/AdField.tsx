@@ -1,20 +1,23 @@
-import {FieldArray, FormikValues} from "formik";
-import {Box, Button, Card, Divider, IconButton, Typography} from "@mui/material";
+import {FieldArray, FormikValues, useFormikContext} from "formik";
+import {Box, Button, Card, Divider, IconButton, Link, Typography} from "@mui/material";
 import {FormikTextField} from "../../../../../../../form/FormikHelpers";
 import React from "react";
 import ClearIcon from "@mui/icons-material/Clear";
+import {CampaignForm, initialCreative} from "../../../../types";
 
 interface Props {
-  values: FormikValues;
   index: number;
+  onBack: () => void;
 }
 
-export function AdField({values, index}: Props) {
+export function AdField({ index, onBack }: Props) {
+  const { values } = useFormikContext<CampaignForm>();
+
   return (
-    <FieldArray name={`adSets.${index}.ads`}>
+    <FieldArray name={`adSets.${index}.creatives`}>
       {({remove, push}) => (
         <>
-          {values.adSets[index].ads.map((ad, idx) => (
+          {values.adSets[index].creatives.map((ad, idx) => (
             <Card sx={{mt: 2, p: 2}}>
               <Box display="flex" flexDirection="row" alignItems="center">
                 <Divider textAlign="left" sx={{fontSize: "24px", mb: 1, mt: 1, flexGrow: 1}}>
@@ -27,19 +30,32 @@ export function AdField({values, index}: Props) {
                 )}
               </Box>
 
+              <Box display="flex" flexDirection="row" alignItems="center">
+                <Typography variant="body2" sx={{mr: 1}}>
+                  Define the look and feel of your ads.
+                </Typography>
+                {values.adSets[index].creatives.length - 1 === idx && (
+                  <Link
+                    underline="none"
+                    variant="body2"
+                    onClick={() => push(initialCreative)}
+                    sx={{ cursor: "pointer" }}
+                  >
+                    Create new Ad +
+                  </Link>
+                )}
+              </Box>
+
               <Ad ad={ad} idx={idx}/>
 
-              {values.adSets[index].ads.length - 1 === idx && (
+              {values.adSets[index].creatives.length - 1 === idx && (
                 <Button
                   variant="contained"
                   size="large"
-                  sx={{mt: 2}}
-                  onClick={() => push({
-                    state: "under_review",
-                    creativeId: "",
-                  })}
+                  sx={{ mt: 2 }}
+                  onClick={onBack}
                 >
-                  Add New Ad
+                  Back
                 </Button>
               )}
             </Card>
@@ -58,9 +74,6 @@ interface AdProps {
 function Ad({ad, idx}: AdProps) {
   return (
     <>
-      <Typography variant="body2" sx={{mb: 2}}>
-        Define the look and feel of your ads.
-      </Typography>
       <FormikTextField
         name="test"
         label="Creative Name"

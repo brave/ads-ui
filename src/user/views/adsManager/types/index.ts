@@ -1,0 +1,108 @@
+
+import {CampaignFormat, CampaignPacingStrategies} from "../../../../graphql/types";
+import {defaultEndDate, defaultStartDate} from "../../../../form/DateFieldHelpers";
+
+export type CampaignForm = {
+  startAt: string;
+  endAt: string;
+  budget: string;
+  currency: string;
+  dailyBudget: string;
+  dailyCap: number;
+  geoTargets: string[];
+  adSets: AdSetForm[];
+  format: CampaignFormat;
+  name: string;
+  state: "under_review";
+  type: "paid";
+  pacingStrategy: CampaignPacingStrategies;
+  objective: string;
+}
+
+export type AdSetForm = {
+  name: string;
+  billingType: string;
+  segments: Segment[];
+  oses: string[];
+  conversions: Conversion[]
+  creatives: Creative[];
+}
+
+export type Conversion = {
+  type: string;
+  observationWindow: string;
+}
+
+export type Segment = {
+  code: string;
+  name: string;
+}
+
+export type Creative = {
+  name: string;
+  title: string;
+  body: string;
+  targetUrl: string;
+}
+
+export const initialCampaign: CampaignForm = {
+  startAt: defaultStartDate(),
+  endAt: defaultEndDate(),
+  budget: "",
+  currency: "USD",
+  dailyBudget: "",
+  dailyCap: 1,
+  geoTargets: [],
+  adSets: [{
+    name: "",
+    billingType: "",
+    segments: [{
+      code: "Svp7l-zGN",
+      name: "untargeted"
+    }],
+    oses: [],
+    conversions: [{
+      type: "",
+      observationWindow: "",
+    }],
+    creatives: [{
+      name: "",
+      title: "",
+      body: "",
+      targetUrl: ""
+    }]
+  }],
+  format: CampaignFormat.PushNotification,
+  name: "",
+  state: "under_review",
+  type: "paid",
+  pacingStrategy: CampaignPacingStrategies.Original,
+  objective: "",
+}
+
+export const initialAdSet: AdSetForm = {
+  name: "",
+  billingType: "",
+  segments: [{
+    code: "Svp7l-zGN",
+    name: "untargeted"
+  }],
+  oses: [],
+  conversions: [{
+    type: "",
+    observationWindow: "",
+  }],
+  creatives: [{
+    name: "",
+    title: "",
+    body: "",
+    targetUrl: ""
+  }]
+}
+
+export const initialCreative: Creative = {
+  name: "",
+  title: "",
+  body: "",
+  targetUrl: ""
+}

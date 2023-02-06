@@ -1,60 +1,21 @@
 import {
-  Box,
-  Card,
   Container,
-  Divider, InputAdornment,
-  List,
-  ListItemButton,
-  ListItemText,
-  Stack,
-  Typography
+  Tab,
+  Tabs,
 } from "@mui/material";
-import _ from "lodash";
-import {CampaignFormat, CampaignPacingStrategies} from "../../../../../../../graphql/types";
-import {FieldArray, Form, Formik} from "formik";
-import {FormikRadioControl, FormikTextField} from "../../../../../../../form/FormikHelpers";
-import {CampaignDateRange} from "../../../../../../../components/Campaigns/CampaignDateRange";
-import {defaultEndDate, defaultStartDate} from "../../../../../../../form/DateFieldHelpers";
-import {LocationPicker} from "../../../../../../../components/Location/LocationPicker";
-import React from "react";
-import {SegmentPicker} from "../../../../../../../components/Segment/SegmentPicker";
-import {PlatformPicker} from "../../../../../../../components/Platform/PlatformPicker";
-import {ConversionFields} from "../../../../../../../components/Conversion/ConversionFields";
+import {Form, Formik} from "formik";
+import React, {useState} from "react";
 import {CampaignFields} from "../campaign/CampaignFields";
 import {AdSetFields} from "../adSet/AdSetFields";
+import {initialCampaign} from "../../../../types";
+import {AdField} from "../ads/AdField";
 
 export function CampaignFormV2() {
-  const defaultValues = {
-    startAt: defaultStartDate(),
-    endAt: defaultEndDate(),
-    budget: "",
-    currency: "USD",
-    dailyBudget: "",
-    dailyCap: 1,
-    geoTargets: [],
-    adSets: [{
-      name: "",
-      billingType: "",
-      segments: [{
-        code: "Svp7l-zGN",
-        name: "untargeted"
-      }],
-      oses: [],
-      conversions: [{
-        type: "",
-        observationWindow: "",
-      }],
-      ads: [{
-        state: "under_review",
-        creativeId: "",
-      }]
-    }],
-    format: CampaignFormat.PushNotification,
-    name: "",
-    state: "under_review",
-    type: "paid",
-    pacingStrategy: CampaignPacingStrategies.Original,
-    objective: "",
+  const [value, setValue] = useState(0);
+  const [showAd, setShowAd] = useState(false);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
   };
 
   return (
@@ -62,15 +23,38 @@ export function CampaignFormV2() {
       maxWidth={false}
     >
       <Formik
-        initialValues={defaultValues}
+        initialValues={initialCampaign}
         onSubmit={(v) => console.log(v)}
         // validationSchema={CampaignSchema}
       >
         {({values}) => (
           <Form>
-            <CampaignFields />
+            <Tabs value={value} onChange={handleChange}>
+              <Tab label="Campaign" value={0} />
+              {values.adSets.map((a, index) => (
+                <Tab label={`Ad Set ${index + 1}`} value={index + 1} />
+              ))}
+            </Tabs>
 
-            <AdSetFields values={values} />
+            {value === 0 && <CampaignFields onNext={() => setValue(value + 1)} />}
+
+            {value > 0 && !showAd && (
+              <AdSetFields
+                tabValue={value}
+                onRemove={() => {
+                  setValue(value - 1);
+                  setShowAd(false);
+                }}
+                onNext={() => setShowAd(true)}
+              />
+            )}
+
+            {value > 0 && showAd && (
+              <AdField
+                index={value - 1}
+                onBack={() => setShowAd(false)}
+              />
+            )}
           </Form>
         )}
       </Formik>
