@@ -1,4 +1,4 @@
-import {FieldArray, FormikValues, useFormikContext} from "formik";
+import {FieldArray, useFormikContext} from "formik";
 import {Box, Button, Card, Divider, IconButton, Link, Typography} from "@mui/material";
 import {FormikTextField} from "../../../../../../../form/FormikHelpers";
 import React from "react";
@@ -46,7 +46,7 @@ export function AdField({ index, onBack }: Props) {
                 )}
               </Box>
 
-              <Ad ad={ad} idx={idx}/>
+              <Ad adSet={index} ad={idx} />
 
               {values.adSets[index].creatives.length - 1 === idx && (
                 <Button
@@ -67,32 +67,32 @@ export function AdField({ index, onBack }: Props) {
 }
 
 interface AdProps {
-  ad: any;
-  idx: number;
+  adSet: number;
+  ad: number;
 }
 
-function Ad({ad, idx}: AdProps) {
+function Ad({adSet, ad}: AdProps) {
   return (
     <>
       <FormikTextField
-        name="test"
+        name={`adSets.${adSet}.creatives.${ad}.name`}
         label="Creative Name"
       />
 
       <FormikTextField
-        name="test"
+        name={`adSets.${adSet}.creatives.${ad}.title`}
         label="Creative Title"
         helperText="Max 30 Characters"
       />
 
       <FormikTextField
-        name="test"
+        name={`adSets.${adSet}.creatives.${ad}.body`}
         label="Creative Body"
         helperText="Max 60 Characters"
       />
 
       <FormikTextField
-        name="test"
+        name={`adSets.${adSet}.creatives.${ad}.targetUrl`}
         label="Creative Target URL"
       />
     </>
