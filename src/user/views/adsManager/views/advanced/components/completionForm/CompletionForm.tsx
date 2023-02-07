@@ -31,7 +31,7 @@ export function CompletionForm() {
       )}
 
       {params.mode === "new" && (
-        <Typography sx={{ textAlign: "center" }}>
+        <Typography sx={{ textAlign: "center" }} variant="h6">
           Your campaign has been created and is now being reviewed by our ads team. <br />
           We'll send you an e-mail as soon as your campaign is approved and activated. Thank you for using Brave Ads!
         </Typography>

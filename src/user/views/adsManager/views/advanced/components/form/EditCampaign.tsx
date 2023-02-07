@@ -32,7 +32,7 @@ export function EditCampaign({ advertiser }: Props) {
       ...refetchAdvertiserQuery({id: advertiser.id})
     }],
     onCompleted() {
-      history.push("/user/main/campaigns")
+      history.push("/user/main/complete/edit")
     }
   });
 
