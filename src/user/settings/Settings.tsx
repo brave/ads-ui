@@ -6,6 +6,7 @@ import * as tweetnacl from "tweetnacl";
 import Modal from 'react-modal';
 import {useAdvertiserQuery, useUpdateAdvertiserMutation} from "../../graphql/advertiser.generated";
 import ClearIcon from "@mui/icons-material/Clear";
+import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 
 const modalStyles = {
     content: {
@@ -32,15 +33,8 @@ const Settings = props => {
     const [showNewKeypairModal, setShowNewKeypairModal] = useState(false);
     const [newKeypairModalState, setNewKeypairModalState] = useState('disclaimer');
 
-    const customStyles = {
-        control: (provided) => ({
-            ...provided,
-            backgroundColor: "#fafafa"
-        }),
-    }
-
     const setActiveAdvertiser = (e) => {
-        props.setActiveAdvertiser(_.find(props.advertisers, { id: e.value }))
+        props.setActiveAdvertiser(_.find(props.advertisers, { id: e.target.value }))
     }
 
     const advertisers = () => {
@@ -134,7 +128,7 @@ const Settings = props => {
                         </>
                     }
 
-                    <Button onClick={() => openNewKeypairModal()} style={{ height: "32px", marginTop: "22px", marginLeft: "auto", marginRight: "auto", backgroundColor: "#4C54D2", width: "150px" }}>
+                    <Button onClick={() => openNewKeypairModal()} style={{ height: "32px", marginTop: "22px", marginLeft: "auto", marginRight: "auto", backgroundColor: "#F8532BCC", width: "300px" }}>
                         <Text content={"New Keypair"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
                     </Button>
 
@@ -151,16 +145,18 @@ const Settings = props => {
 
             <div style={{ height: "400px" }}>
                 <InputContainer>
-                    <div style={{ display: "flex", marginBottom: "4px" }}>
-                        <Text content={"Select organization"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                    </div>
-                    {/*<Select*/}
-                    {/*    styles={customStyles}*/}
-                    {/*    onChange={setActiveAdvertiser}*/}
-                    {/*    value={{ value: props.activeAdvertiser.id, label: props.activeAdvertiser.name }}*/}
-                    {/*    options={advertisers()}*/}
-                    {/*/>*/}
-
+                    <FormControl fullWidth>
+                      <InputLabel>Select Organization</InputLabel>
+                      <Select
+                        value={props.activeAdvertiser.id}
+                        label="Select Organization"
+                        onChange={(e) => setActiveAdvertiser(e)}
+                      >
+                        {advertisers().map((a) => (
+                          <MenuItem value={a.value}>{a.label}</MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
                 </InputContainer>
             </div>
 
