@@ -17,6 +17,7 @@ import {connect} from "react-redux";
 import {Box} from "@mui/material";
 import {NewCampaign} from "./views/adsManager/views/advanced/components/form/NewCampaign";
 import {EditCampaign} from "./views/adsManager/views/advanced/components/form/EditCampaign";
+import {CompletionForm} from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
 
 const buildApolloClient = (accessToken: string) => {
   const httpLink = createHttpLink({
@@ -71,6 +72,10 @@ function User({advertisers, auth}: Props) {
 
               <Route path={`${match.path}/adsmanager/advanced/:campaignId`}>
                 <EditCampaign advertiser={activeAdvertiser}/>
+              </Route>
+
+              <Route path={`${match.path}/complete/:mode`}>
+                <CompletionForm />
               </Route>
 
               {/* /settings */}

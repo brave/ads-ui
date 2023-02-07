@@ -7,7 +7,11 @@ import _ from "lodash";
 import {CampaignReview} from "./components/CampaignReview";
 import {AdSetReview} from "./components/AdSetReview";
 
-export function Review() {
+interface Props {
+  isEdit: boolean;
+}
+
+export function Review({ isEdit }: Props) {
   const { values, errors, setFieldTouched } = useFormikContext<CampaignForm>();
 
   const touch = (keys: string[]) => {
@@ -39,9 +43,9 @@ export function Review() {
       ))}
 
       <FormikSubmitButton
-        isCreate={true}
-        label="Publish Campaign"
-        allowNavigation={true}
+        isCreate={!isEdit}
+        label={isEdit ? "Update Campaign" : "Publish Campaign"}
+        allowNavigation={!isEdit}
       />
     </Box>
   )

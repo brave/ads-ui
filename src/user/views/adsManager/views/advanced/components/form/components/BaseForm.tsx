@@ -56,7 +56,7 @@ export function BaseForm({isEdit, values}: Props) {
         </>
       )}
 
-      {value === values.adSets.length + 1 && <Review/>}
+      {value === values.adSets.length + 1 && <Review isEdit={isEdit} />}
     </Form>
   )
 }
