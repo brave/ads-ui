@@ -1,16 +1,8 @@
 import _ from "lodash";
-import React, {useContext, useMemo, useState} from "react";
+import React, {useMemo, useState} from "react";
 import {Redirect, Route, Switch, useRouteMatch} from "react-router-dom";
 
-import Navbar from "./components/navbar/Navbar";
-import Selection from "./views/adsManager/views/selection/Selection";
-import Advanced from "./views/adsManager/views/advanced/Advanced";
-
 import Sidebar from "./components/sidebar/Sidebar";
-
-import * as S from "./User.style";
-
-import Context from "../state/context";
 import CampaignList from "./campaignList/CampaignList";
 
 import {
@@ -24,7 +16,6 @@ import Settings from "./settings/Settings";
 import {connect} from "react-redux";
 import {Box} from "@mui/material";
 import {NewCampaign} from "./views/adsManager/views/advanced/components/form/NewCampaign";
-import EditIcon from "@mui/icons-material/Edit";
 import {EditCampaign} from "./views/adsManager/views/advanced/components/form/EditCampaign";
 
 const buildApolloClient = (accessToken: string) => {
