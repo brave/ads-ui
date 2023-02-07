@@ -3,9 +3,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 
-import { styles } from "./Authentication.style";
-import * as S from "./Authentication.style";
-
 import SigninContainer from "./Signin/Signin";
 
 class Authentication extends React.Component<any, any> {
