@@ -31,7 +31,7 @@ function CampaignList({ advertiserId, userId }: Props) {
           value: (c) => c.name,
           extendedRenderer: (r) => (
             <Link
-              href={`/user/main/campaign/${r.id}/analytics/overview`}
+              href={r.state !== "under_review" ? `/user/main/campaign/${r.id}/analytics/overview` : undefined}
               underline="none"
             >
               {r.name}

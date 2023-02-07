@@ -13,25 +13,21 @@ export const CampaignStatus: React.FC<{
   const isAfterEndDate = isPast(parseISO(campaign.endAt));
 
   let label = state;
-  let tooltip = label;
   let color = calcColorForState(state);
 
   if (isAfterEndDate && state === "active") {
     label += "*";
-    tooltip += " (but after end date)";
     color = calcColorForState("completed");
   }
 
   return (
-    <Tooltip title={tooltip}>
-      <Chip
-        label={_.upperCase(label)}
-        size="small"
-        sx={{
-          backgroundColor: color,
-          fontSize: "0.7rem",
-        }}
-      />
-    </Tooltip>
+    <Chip
+      label={_.upperCase(label)}
+      size="small"
+      sx={{
+        backgroundColor: color,
+        fontSize: "0.7rem",
+      }}
+    />
   );
 };
