@@ -11,7 +11,7 @@ export function LocationField() {
       <Typography variant="body2" sx={{mb: 5}}>
         Select the geographic regions where your ads will be shown.
       </Typography>
-      <LocationPicker states={true}/>
+      <LocationPicker />
     </Box>
   )
 }

@@ -53,7 +53,7 @@ function Navbar({ advertiserId, dispatch, userId }: Props) {
         <div style={{ flexGrow: 1 }} />
         {shouldShowNewCampaign(advertiserId) && (
           <Button
-            onClick={() => history.push(`/user/main/adsmanager/advanced?userId=${userId}&advertiserId=${advertiserId}`)}
+            onClick={() => history.push(`/user/main/adsmanager/advanced/new`)}
             size="large"
             variant="contained"
             sx={{ mr: 5 }}

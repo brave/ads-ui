@@ -2,7 +2,7 @@ import {Box, Divider, InputAdornment, Stack, Typography} from "@mui/material";
 import {FormikTextField} from "../../../../../../../../form/FormikHelpers";
 import React from "react";
 
-export function DateField() {
+export function BudgetField() {
   return (
     <Box>
       <Divider textAlign="left" sx={{fontSize: "24px", mb: 1, mt: 2}}>

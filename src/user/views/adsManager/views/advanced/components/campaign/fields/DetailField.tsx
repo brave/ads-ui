@@ -13,7 +13,6 @@ export function DetailField() {
         Campaigns are used to define your budgets and advertising objectives.
       </Typography>
       <FormikTextField name="name" label="Campaign Name" sx={{mb: 3}}/>
-      <CampaignDateRange/>
     </Box>
   )
 }

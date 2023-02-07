@@ -11,10 +11,11 @@ interface Props {
   tabValue: number;
   onRemove: () => void;
   onCreate: () => void;
+  isEdit: boolean;
 }
 
-export function AdSetFields({ tabValue, onRemove, onCreate }: Props) {
-  const { values } = useFormikContext<CampaignForm>();
+export function AdSetFields({tabValue, onRemove, onCreate, isEdit}: Props) {
+  const {values} = useFormikContext<CampaignForm>();
   const index = tabValue - 1;
 
   return (
@@ -22,32 +23,37 @@ export function AdSetFields({ tabValue, onRemove, onCreate }: Props) {
       {({remove, push}) => (
         <Card sx={{mt: 2, p: 2}}>
           <Box>
-            <Box display="flex" flexDirection="row" alignItems="center">
-              <Divider textAlign="left" sx={{fontSize: "24px", mb: 1, flexGrow: 1}}>
-                Ad Set { index + 1 } Details
-              </Divider>
-              {index > 0 && (
-                <IconButton onClick={() => {
-                  onRemove();
-                  remove(index);
-                }}>
-                  <ClearIcon />
-                </IconButton>
-              )}
-            </Box>
+            {!isEdit && (
+              <>
+                <Box display="flex" flexDirection="row" alignItems="center">
+                  <Divider textAlign="left" sx={{fontSize: "24px", mb: 1, flexGrow: 1}}>
+                    Ad Set {index + 1} Details
+                  </Divider>
+                  {index > 0 && (
+                    <IconButton onClick={() => {
+                      onRemove();
+                      remove(index);
+                    }}>
+                      <ClearIcon/>
+                    </IconButton>
+                  )}
+                </Box>
 
-            <DetailsField
-              index={index}
-              onCreate={() => {
-                onCreate();
-                push(initialAdSet);
-              }}
-              showCreateNew={index === values.adSets.length - 1}
-            />
 
-            <PickerFields index={index} />
+                <DetailsField
+                  index={index}
+                  onCreate={() => {
+                    onCreate();
+                    push(initialAdSet);
+                  }}
+                  showCreateNew={index === values.adSets.length - 1}
+                />
+              </>
+            )}
 
-            <ConversionField index={index} />
+            <PickerFields index={index}/>
+
+            {!isEdit && <ConversionField index={index}/>}
           </Box>
         </Card>
       )}

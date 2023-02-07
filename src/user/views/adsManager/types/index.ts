@@ -13,10 +13,9 @@ export type CampaignForm = {
   adSets: AdSetForm[];
   format: CampaignFormat;
   name: string;
-  state: "under_review";
+  state: string;
   type: "paid";
   pacingStrategy: CampaignPacingStrategies;
-  objective: string;
 }
 
 export type GeoTarget = {
@@ -51,6 +50,7 @@ export type Segment = {
 }
 
 export type Creative = {
+  id?: string;
   name: string;
   title: string;
   body: string;
@@ -87,7 +87,6 @@ export const initialCampaign: CampaignForm = {
   state: "under_review",
   type: "paid",
   pacingStrategy: CampaignPacingStrategies.Original,
-  objective: "",
 }
 
 export const initialAdSet: AdSetForm = {

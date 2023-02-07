@@ -3,27 +3,17 @@ import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { Autocomplete, Checkbox, TextField } from "@mui/material";
 import { useField } from "formik";
 import _ from "lodash";
-import {GeocodeFragment, useActiveGeocodesQuery} from "../../graphql/common.generated";
+import {useActiveGeocodesQuery} from "../../graphql/common.generated";
 import React from "react";
+import { GeocodeInput } from "../../graphql/types";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-export const LocationPicker: React.FC<{
-  countries?: boolean;
-  states?: boolean;
-}> = ({ countries = true, states = true }) => {
+export const LocationPicker: React.FC = () => {
   const { data } = useActiveGeocodesQuery();
   const sorted = _.sortBy(data?.activeGeocodes?.data ?? [], "name");
-  const activeLocations = sorted.filter((l) => {
-    const isState = l.code.includes("-");
-    const isCountry = !l.code.includes("-");
-    let include = true;
-    if (!states && isState) include = false;
-    if (!countries && isCountry) include = false;
-    return include;
-  });
-  const [formProps, meta, helper] = useField<GeocodeFragment[]>("geoTargets");
+  const [formProps, meta, helper] = useField<GeocodeInput[]>("geoTargets");
   const errorMessage = meta.error;
 
   return (
@@ -32,8 +22,8 @@ export const LocationPicker: React.FC<{
       limitTags={20}
       getLimitTagsText={(cnt) => `+${cnt} more`}
       multiple
-      loading={activeLocations.length === 0}
-      options={activeLocations}
+      loading={sorted.length === 0}
+      options={sorted}
       disableCloseOnSelect
       autoHighlight
       getOptionLabel={(option) => option.name}

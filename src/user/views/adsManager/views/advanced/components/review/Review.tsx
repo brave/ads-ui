@@ -38,7 +38,11 @@ export function Review() {
         <AdSetReview idx={adSetIdx} adSet={adSet} errors={errors.adSets?.[adSetIdx]} />
       ))}
 
-      <FormikSubmitButton isCreate={true} label="Publish Campaign" />
+      <FormikSubmitButton
+        isCreate={true}
+        label="Publish Campaign"
+        allowNavigation={true}
+      />
     </Box>
   )
 }

@@ -8,9 +8,10 @@ import {CampaignForm, initialCreative} from "../../../../types";
 interface Props {
   index: number;
   onNext: () => void;
+  isEdit: boolean;
 }
 
-export function AdField({ index, onNext }: Props) {
+export function AdField({ index, onNext, isEdit }: Props) {
   const { values } = useFormikContext<CampaignForm>();
 
   return (
@@ -34,7 +35,7 @@ export function AdField({ index, onNext }: Props) {
                 <Typography variant="body2" sx={{mr: 1}}>
                   Define the look and feel of your ads.
                 </Typography>
-                {values.adSets[index].creatives.length - 1 === idx && (
+                {values.adSets[index].creatives.length - 1 === idx && !isEdit && (
                   <Link
                     underline="none"
                     variant="body2"
@@ -46,7 +47,7 @@ export function AdField({ index, onNext }: Props) {
                 )}
               </Box>
 
-              <Ad adSet={index} ad={idx} />
+              <Ad adSet={index} ad={idx} isEdit={isEdit} />
 
               {values.adSets[index].creatives.length - 1 === idx && (
                 <Box sx={{ mt: 2 }}>
@@ -70,31 +71,36 @@ export function AdField({ index, onNext }: Props) {
 interface AdProps {
   adSet: number;
   ad: number;
+  isEdit: boolean;
 }
 
-function Ad({adSet, ad}: AdProps) {
+function Ad({adSet, ad, isEdit}: AdProps) {
   return (
     <>
       <FormikTextField
         name={`adSets.${adSet}.creatives.${ad}.name`}
         label="Creative Name"
+        disabled={isEdit}
       />
 
       <FormikTextField
         name={`adSets.${adSet}.creatives.${ad}.title`}
         label="Creative Title"
         helperText="Max 30 Characters"
+        disabled={isEdit}
       />
 
       <FormikTextField
         name={`adSets.${adSet}.creatives.${ad}.body`}
         label="Creative Body"
         helperText="Max 60 Characters"
+        disabled={isEdit}
       />
 
       <FormikTextField
         name={`adSets.${adSet}.creatives.${ad}.targetUrl`}
         label="Creative Target URL"
+        disabled={isEdit}
       />
     </>
   )

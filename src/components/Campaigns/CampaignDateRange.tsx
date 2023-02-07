@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import {getDefaultTimezone, TimeZonePicker} from "../TimeZonePicker";
 import {TimezoneAwareDatePicker} from "../TimeZonePicker/TimezoneAwareDatePicker";
 
-export const CampaignDateRange: React.FC = () => {
+export const CampaignDateRange: React.FC<{isEdit: boolean}> = ({ isEdit }) => {
   const [tz, setTz] = useState<string>(getDefaultTimezone());
   const [, startMeta, startHelper] = useField("startAt");
   const [, endMeta, endHelper] = useField("endAt");
@@ -21,6 +21,7 @@ export const CampaignDateRange: React.FC = () => {
         error={!!startMeta.error}
         helperText={startMeta.error}
         onChange={(dt) => startHelper.setValue(formatISO(dt))}
+        disabled={isEdit}
       />
 
       <ArrowForwardIcon />

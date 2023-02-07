@@ -1,13 +1,14 @@
-import {CampaignForm} from "../views/adsManager/types";
+import {CampaignForm, OS, Segment} from "../views/adsManager/types";
 import {
   CreateAdInput,
   CreateAdSetInput,
   CreateCampaignInput,
-  CreativeInput
+  CreativeInput, GeocodeInput, UpdateCampaignInput
 } from "../../graphql/types";
 import axios from "axios";
 import {print} from "graphql";
 import {CreateCreativeDocument} from "../../graphql/creative.generated";
+import {CampaignFragment} from "../../graphql/campaign.generated";
 
 export async function transformNewForm(
   form: CampaignForm,
@@ -91,4 +92,57 @@ async function createNotification(accessToken: string, createInput: CreativeInpu
   );
 
   return response.data.data.createCreative.id;
+}
+
+export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
+  return {
+    adSets: campaign.adSets.map((adSet) => ({
+      ...adSet,
+      conversions: adSet.conversions ?? [],
+      oses: adSet.oses ?? [] as OS[],
+      segments: adSet.segments ?? [] as Segment[],
+      billingType: adSet.billingType ?? "cpm",
+      name: adSet.name || adSet.id.split("-")[0],
+      creatives: adSet.ads!.map((ad) => {
+        const c = ad.creative;
+        return {
+          id: c.id,
+          name: c.name,
+          targetUrl: c.payloadNotification!.targetUrl,
+          title: c.payloadNotification!.title,
+          body: c.payloadNotification!.body
+        }
+      }),
+      price: adSet.ads?.[0].prices[0].amount || 0
+    })),
+    budget: campaign.budget,
+    currency: campaign.currency,
+    dailyBudget: campaign.dailyBudget,
+    dailyCap: campaign.dailyCap,
+    endAt: campaign.endAt,
+    format: campaign.format,
+    geoTargets: campaign.geoTargets ?? [] as GeocodeInput[],
+    name: campaign.name,
+    pacingStrategy: campaign.pacingStrategy,
+    startAt: campaign.startAt,
+    state: campaign.state,
+    type: "paid"
+  };
+}
+
+export function transformEditForm(form: CampaignForm, id: string): UpdateCampaignInput {
+  return {
+    budget: form.budget,
+    currency:form.currency,
+    dailyBudget: form.dailyBudget,
+    dailyCap: form.dailyCap,
+    endAt: form.endAt,
+    geoTargets: form.geoTargets,
+    id,
+    name: form.name,
+    startAt: form.startAt,
+    state: form.state,
+    type: form.type,
+    adSets: form.adSets
+  }
 }

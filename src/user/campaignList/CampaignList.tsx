@@ -71,7 +71,7 @@ function CampaignList({ advertiserId, userId }: Props) {
           extendedRenderer: (r) => (
             <>
               {canEdit ? (
-                <IconButton onClick={() => history.push(`/user/main/adsmanager/advanced?userId=${userId}&advertiserId=${advertiserId}&campaignId=${r.id}`)}>
+                <IconButton onClick={() => history.push(`/user/main/adsmanager/advanced/${r.id}`)}>
                   <EditIcon />
                 </IconButton>
               ) : (
