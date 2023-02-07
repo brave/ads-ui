@@ -3,7 +3,7 @@ import {
   CreateAdInput,
   CreateAdSetInput,
   CreateCampaignInput,
-  CreativeInput, GeocodeInput, UpdateCampaignInput
+  CreativeInput, GeocodeInput, UpdateAdSetInput, UpdateCampaignInput
 } from "../../graphql/types";
 import axios from "axios";
 import {print} from "graphql";
@@ -131,18 +131,25 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
 }
 
 export function transformEditForm(form: CampaignForm, id: string): UpdateCampaignInput {
+  console.log(form)
   return {
     budget: form.budget,
     currency:form.currency,
     dailyBudget: form.dailyBudget,
     dailyCap: form.dailyCap,
     endAt: form.endAt,
-    geoTargets: form.geoTargets,
+    geoTargets: form.geoTargets.map((v) => ({ code: v.code, name: v.name })),
     id,
     name: form.name,
     startAt: form.startAt,
     state: form.state,
     type: form.type,
-    adSets: form.adSets
+    adSets: form.adSets.map((ad) => {
+      const updateAdSet: UpdateAdSetInput = {
+        segments: ad.segments.map((v) => ({ code: v.code, name: v.name })),
+        oses: ad.oses.map((v) => ({ code: v.code, name: v.name })),
+      }
+      return updateAdSet;
+    }),
   }
 }
