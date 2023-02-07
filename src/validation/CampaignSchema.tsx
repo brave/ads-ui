@@ -1,6 +1,9 @@
 import { object, string, ref, number, date, array, bool, boolean } from "yup";
 import { startOfDay } from "date-fns";
 
+const HttpsRegex = /^https:\/\//;
+const NoSpacesRegex = /^\S*$/;
+
 export const CampaignSchema = object().shape({
   name: string().label("Campaign Name").required(),
   budget: number().label("Lifetime Budget").required().positive(),
@@ -72,7 +75,10 @@ export const CampaignSchema = object().shape({
           name: string().label("Creative Name").required("Name is required"),
           title: string().label("Title").max(30, "Max 30 Characters").required("Title is required"),
           body: string().label("Body").max(60, "Max 60 Characters").required("Body is required"),
-          targetUrl: string().label("Target Url").required("URL is required")
+          targetUrl: string().label("Target Url")
+            .required("URL is required")
+            .matches(NoSpacesRegex, `URL must not contain any whitespace`)
+            .matches(HttpsRegex, `URL must start with https://`),
         })
       )
     })
