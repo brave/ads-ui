@@ -31,9 +31,9 @@ export const ConversionFields: React.FC<Props> = ({ idx }: Props) => {
           name={`adSets.${idx}.conversions[0].observationWindow`}
           label="Window"
           options={[
-            { value: "1", label: "1 Day" },
-            { value: "7", label: "7 Days" },
-            { value: "30", label: "30 Days" },
+            { value: 1, label: "1 Day" },
+            { value: 7, label: "7 Days" },
+            { value: 30, label: "30 Days" },
           ]}
           helperText="Count conversions within X days of an impression"
         />

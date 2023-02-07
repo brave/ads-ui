@@ -36,7 +36,7 @@ export function CampaignFormV2({ auth, advertiser }: Props) {
 
   const [mutation] = useCreateCampaignMutation({
     refetchQueries: [{
-      ...refetchAdvertiserQuery({id: ""})
+      ...refetchAdvertiserQuery({id: advertiser.id})
     }],
     onCompleted() {
       history.push("/user/main/campaigns")
@@ -45,15 +45,20 @@ export function CampaignFormV2({ auth, advertiser }: Props) {
 
   return (
     <Container
-      maxWidth={false}
+      maxWidth="xl"
     >
       <Formik
         initialValues={initialCampaign}
         onSubmit={(v: CampaignForm, {setSubmitting}) => {
           setSubmitting(true);
           transformNewForm(v, auth, advertiser.id)
-            .then((c) => console.log(c))
-            .catch((e) => alert("Unable to save Campaign"))
+            .then(async (c) => {
+              return await mutation({ variables: { input: c }});
+            })
+            .catch((e) => {
+              console.error(e);
+              alert("Unable to save Campaign")
+            })
             .finally(() => setSubmitting(false));
         }}
         validationSchema={CampaignSchema}

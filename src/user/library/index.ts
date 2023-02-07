@@ -44,10 +44,10 @@ export async function transformNewForm(
     }
 
     const base: CreateAdSetInput = {
-      billingType: `${adSet.price}`,
+      billingType: adSet.billingType,
       execution: "per_click",
       perDay: 1,
-      segments: adSet.segments,
+      segments: adSet.segments.map((s) => ({ code: s.code, name: s.name })),
       oses: adSet.oses,
       totalMax: 10,
       conversions: adSet.conversions,
@@ -57,12 +57,13 @@ export async function transformNewForm(
     transformedAdSet.push(base);
   }
 
+  console.log(form.geoTargets);
   return {
     currency: form.currency,
     dailyCap: form.dailyCap,
     dailyBudget: form.dailyBudget,
     endAt: form.endAt,
-    geoTargets: form.geoTargets,
+    geoTargets: form.geoTargets.map((g) => ({ code: g.code, name: g.name })),
     name: form.name,
     advertiserId: advertiserId,
     externalId: "",
@@ -78,7 +79,7 @@ export async function transformNewForm(
 
 // TODO: Get rid of this ASAP
 async function createNotification(accessToken: string, createInput: CreativeInput) {
-  const response = await axios.post<{ createCreative: { id: string } }>(
+  const response = await axios.post(
     `${process.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql"),
     JSON.stringify({query: print(CreateCreativeDocument), variables: { input: createInput }}),
     {
@@ -89,7 +90,5 @@ async function createNotification(accessToken: string, createInput: CreativeInpu
     }
   );
 
-  console.log(response.data)
-
-  return response.data.createCreative.id;
+  return response.data.data.createCreative.id;
 }
