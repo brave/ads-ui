@@ -14,6 +14,10 @@ interface Props {
 export function AdField({ index, onNext, isEdit }: Props) {
   const { values } = useFormikContext<CampaignForm>();
 
+  const canRemove = (edit: boolean, ads: AdSetForm[]) => {
+    return !edit || (edit && ads.some((set) => set.creatives.some((a) => a.id === undefined)));
+  }
+
   return (
     <FieldArray name={`adSets.${index}.creatives`}>
       {({remove, push}) => (
@@ -24,7 +28,7 @@ export function AdField({ index, onNext, isEdit }: Props) {
                 <Divider textAlign="left" sx={{fontSize: "24px", mb: 1, mt: 1, flexGrow: 1}}>
                   Ad {idx + 1}
                 </Divider>
-                {idx > 0 && (
+                {idx > 0 && canRemove(isEdit, values.adSets) && (
                   <IconButton onClick={() => remove(idx)}>
                     <ClearIcon />
                   </IconButton>

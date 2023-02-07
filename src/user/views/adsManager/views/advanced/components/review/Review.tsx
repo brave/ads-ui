@@ -14,6 +14,10 @@ interface Props {
 export function Review({isEdit}: Props) {
   const {values, errors, setFieldTouched} = useFormikContext<CampaignForm>();
 
+  const canNavigate = (edit: boolean, ads: AdSetForm[]) => {
+    return !edit || (edit && ads.some((set) => set.creatives.some((a) => a.id === undefined)));
+  }
+
   const touch = (keys: string[]) => {
     keys.forEach((k) => {
       setFieldTouched(k, true, true);
@@ -45,9 +49,7 @@ export function Review({isEdit}: Props) {
       <FormikSubmitButton
         isCreate={!isEdit}
         label={isEdit ? "Update Campaign" : "Publish Campaign"}
-        allowNavigation={
-          !isEdit || (isEdit && values.adSets.some((set) => set.creatives.some((a) => a.id === undefined)))
-        }
+        allowNavigation={canNavigate(isEdit, values.adSets)}
       />
     </Box>
   )

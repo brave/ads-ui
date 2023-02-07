@@ -29,7 +29,7 @@ export function AdSetFields({tabValue, onRemove, onCreate, isEdit}: Props) {
                   <Divider textAlign="left" sx={{fontSize: "24px", mb: 1, flexGrow: 1}}>
                     Ad Set {index + 1} Details
                   </Divider>
-                  {index > 0 && (
+                  {index > 0 && !isEdit && (
                     <IconButton onClick={() => {
                       onRemove();
                       remove(index);
