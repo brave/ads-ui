@@ -3,6 +3,7 @@ import { startOfDay } from "date-fns";
 
 const HttpsRegex = /^https:\/\//;
 const NoSpacesRegex = /^\S*$/;
+const TrailingAsteriskRegex = /.*\*$/;
 
 export const CampaignSchema = object().shape({
   name: string().label("Campaign Name").required(),
@@ -63,6 +64,9 @@ export const CampaignSchema = object().shape({
         .max(1)
         .of(
           object().shape({
+            urlPattern: string()
+              .required()
+              .matches(TrailingAsteriskRegex, "Conversion URL must end in trailing asterisk (*)"),
             observationWindow: number().required().default(7),
             type: string()
               .oneOf(["postclick", "postview"])
