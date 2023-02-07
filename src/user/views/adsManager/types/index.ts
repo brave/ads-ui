@@ -29,6 +29,7 @@ export type OS = {
 }
 
 export type AdSetForm = {
+  id?: string;
   name: string;
   price: number;
   billingType: string;

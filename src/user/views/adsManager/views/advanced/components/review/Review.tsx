@@ -11,8 +11,8 @@ interface Props {
   isEdit: boolean;
 }
 
-export function Review({ isEdit }: Props) {
-  const { values, errors, setFieldTouched } = useFormikContext<CampaignForm>();
+export function Review({isEdit}: Props) {
+  const {values, errors, setFieldTouched} = useFormikContext<CampaignForm>();
 
   const touch = (keys: string[]) => {
     keys.forEach((k) => {
@@ -21,7 +21,7 @@ export function Review({ isEdit }: Props) {
   }
 
   useEffect(() => {
-    const campaign: Omit<CampaignForm, "adSets"> = { ..._.omit(values, "adSets")};
+    const campaign: Omit<CampaignForm, "adSets"> = {..._.omit(values, "adSets")};
     touch(Object.keys(campaign));
 
     const adSet: AdSetForm[] = values.adSets
@@ -36,16 +36,18 @@ export function Review({ isEdit }: Props) {
 
   return (
     <Box display="flex" flexDirection="column">
-      <CampaignReview values={values} errors={errors} />
+      <CampaignReview values={values} errors={errors}/>
 
       {values.adSets.map((adSet, adSetIdx) => (
-        <AdSetReview idx={adSetIdx} adSet={adSet} errors={errors.adSets?.[adSetIdx]} />
+        <AdSetReview idx={adSetIdx} adSet={adSet} errors={errors.adSets?.[adSetIdx]}/>
       ))}
 
       <FormikSubmitButton
         isCreate={!isEdit}
         label={isEdit ? "Update Campaign" : "Publish Campaign"}
-        allowNavigation={!isEdit}
+        allowNavigation={
+          !isEdit || (isEdit && values.adSets.some((set) => set.creatives.some((a) => a.id === undefined)))
+        }
       />
     </Box>
   )

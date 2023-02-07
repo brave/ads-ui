@@ -5,7 +5,7 @@ import {Formik} from "formik";
 import React from "react";
 import {CampaignForm} from "../../../../types";
 import {CampaignSchema} from "../../../../../../../validation/CampaignSchema";
-import {editCampaignValues, transformEditForm, transformNewForm} from "../../../../../../library";
+import {editCampaignValues, transformEditForm} from "../../../../../../library";
 import {useLoadCampaignQuery, useUpdateCampaignMutation} from "../../../../../../../graphql/campaign.generated";
 import {refetchAdvertiserQuery} from "../../../../../../../graphql/advertiser.generated";
 import {useHistory, useParams} from "react-router-dom";
@@ -13,13 +13,14 @@ import {BaseForm} from "./components/BaseForm";
 
 interface Props {
   advertiser: any;
+  auth: any;
 }
 
 interface Params {
   campaignId: string
 }
 
-export function EditCampaign({ advertiser }: Props) {
+export function EditCampaign({ advertiser, auth }: Props) {
   const history = useHistory();
   const params = useParams<Params>();
 
@@ -50,8 +51,10 @@ export function EditCampaign({ advertiser }: Props) {
         initialValues={initialValues}
         onSubmit={(v: CampaignForm, {setSubmitting}) => {
           setSubmitting(true);
-          const update = transformEditForm(v, params.campaignId);
-          mutation({variables: { input: update }})
+          transformEditForm(v, params.campaignId, auth, advertiser.id)
+            .then(async (u) => {
+              return await mutation({ variables: { input: u }})
+            })
             .catch((e) => alert("Unable to update Campaign"))
             .finally(() => setSubmitting(false));
         }}

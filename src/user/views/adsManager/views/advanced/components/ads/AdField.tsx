@@ -3,7 +3,7 @@ import {Box, Button, Card, Divider, IconButton, Link, Typography} from "@mui/mat
 import {FormikTextField} from "../../../../../../../form/FormikHelpers";
 import React from "react";
 import ClearIcon from "@mui/icons-material/Clear";
-import {CampaignForm, initialCreative} from "../../../../types";
+import {AdSetForm, CampaignForm, Creative, initialCreative} from "../../../../types";
 
 interface Props {
   index: number;
@@ -35,7 +35,7 @@ export function AdField({ index, onNext, isEdit }: Props) {
                 <Typography variant="body2" sx={{mr: 1}}>
                   Define the look and feel of your ads.
                 </Typography>
-                {values.adSets[index].creatives.length - 1 === idx && !isEdit && (
+                {values.adSets[index].creatives.length - 1 === idx && (
                   <Link
                     underline="none"
                     variant="body2"
@@ -47,7 +47,12 @@ export function AdField({ index, onNext, isEdit }: Props) {
                 )}
               </Box>
 
-              <Ad adSet={index} ad={idx} isEdit={isEdit} />
+              <Ad
+                adSetIdx={index}
+                adIdx={idx}
+                creative={ad}
+                isEdit={isEdit}
+              />
 
               {values.adSets[index].creatives.length - 1 === idx && (
                 <Box sx={{ mt: 2 }}>
@@ -69,38 +74,39 @@ export function AdField({ index, onNext, isEdit }: Props) {
 }
 
 interface AdProps {
-  adSet: number;
-  ad: number;
+  adSetIdx: number;
+  adIdx: number;
+  creative: Creative;
   isEdit: boolean;
 }
 
-function Ad({adSet, ad, isEdit}: AdProps) {
+function Ad({adSetIdx, adIdx, isEdit, creative}: AdProps) {
   return (
     <>
       <FormikTextField
-        name={`adSets.${adSet}.creatives.${ad}.name`}
+        name={`adSets.${adSetIdx}.creatives.${adIdx}.name`}
         label="Creative Name"
-        disabled={isEdit}
+        disabled={isEdit && !!creative.id}
       />
 
       <FormikTextField
-        name={`adSets.${adSet}.creatives.${ad}.title`}
+        name={`adSets.${adSetIdx}.creatives.${adIdx}.title`}
         label="Creative Title"
         helperText="Max 30 Characters"
-        disabled={isEdit}
+        disabled={isEdit && !!creative.id}
       />
 
       <FormikTextField
-        name={`adSets.${adSet}.creatives.${ad}.body`}
+        name={`adSets.${adSetIdx}.creatives.${adIdx}.body`}
         label="Creative Body"
         helperText="Max 60 Characters"
-        disabled={isEdit}
+        disabled={isEdit && !!creative.id}
       />
 
       <FormikTextField
-        name={`adSets.${adSet}.creatives.${ad}.targetUrl`}
+        name={`adSets.${adSetIdx}.creatives.${adIdx}.targetUrl`}
         label="Creative Target URL"
-        disabled={isEdit}
+        disabled={isEdit && !!creative.id}
       />
     </>
   )

@@ -71,7 +71,7 @@ function User({advertisers, auth}: Props) {
               </Route>
 
               <Route path={`${match.path}/adsmanager/advanced/:campaignId`}>
-                <EditCampaign advertiser={activeAdvertiser}/>
+                <EditCampaign advertiser={activeAdvertiser} auth={auth} />
               </Route>
 
               <Route path={`${match.path}/complete/:mode`}>
