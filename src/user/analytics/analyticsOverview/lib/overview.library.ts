@@ -191,6 +191,25 @@ export const reduceMetric = (a: BaseMetric, b: BaseMetric) => {
 export const processStats = (
   engagements: EngagementFragment[]
 ): StatsMetric => {
+  if (engagements.length === 0) {
+    return {
+      clicks: 0,
+      convRate: 0,
+      conversions: 0,
+      cpa: 0,
+      ctr: 0,
+      dismissRate: 0,
+      dismissals: 0,
+      downvotes: 0,
+      landingRate: 0,
+      landings: 0,
+      spend: 0,
+      upvotes: 0,
+      views: 0,
+      visitRate: 0
+    }
+  }
+
   const reduced = engagements.map(mapMetric).reduce(reduceMetric);
 
   return {
