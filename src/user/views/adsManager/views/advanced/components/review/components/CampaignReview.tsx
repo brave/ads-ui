@@ -38,12 +38,12 @@ export function CampaignReview({ values, errors }: Props) {
         />
         <CustomListItemText
           primary="Lifetime Budget"
-          secondary={`$${values.budget}`}
+          secondary={`$${values.budget} ${values.currency}`}
           error={errors.budget}
         />
         <CustomListItemText
           primary="Daily Budget"
-          secondary={`$${values.dailyBudget}`}
+          secondary={`$${values.dailyBudget} ${values.currency}`}
           error={errors.dailyBudget}
         />
         <CustomListItemText

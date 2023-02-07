@@ -1,5 +1,5 @@
 import {Box, Divider, InputAdornment, Stack, Typography} from "@mui/material";
-import {FormikTextField} from "../../../../../../../../form/FormikHelpers";
+import {FormikRadioControl, FormikRadioGroup, FormikTextField} from "../../../../../../../../form/FormikHelpers";
 import React from "react";
 
 export function BudgetField() {
@@ -30,6 +30,15 @@ export function BudgetField() {
           InputProps={{
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
           }}
+        />
+
+        <FormikRadioControl
+          name="currency"
+          label="Currency"
+          options={[
+            { value: "BAT", label: "BAT" },
+            { value: "USD", label: "USD" },
+          ]}
         />
       </Stack>
     </Box>

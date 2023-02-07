@@ -11,7 +11,7 @@ interface Props {
   isEdit: boolean;
 }
 
-export function CampaignFields({ onNext, isEdit}: Props) {
+export function CampaignFields({ onNext, isEdit }: Props) {
   return (
     <Card sx={{p: 2, mt: 2}}>
       {/*<ObjectiveField />*/}
