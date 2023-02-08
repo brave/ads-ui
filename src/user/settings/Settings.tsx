@@ -7,6 +7,7 @@ import Modal from 'react-modal';
 import {useAdvertiserQuery, useUpdateAdvertiserMutation} from "../../graphql/advertiser.generated";
 import ClearIcon from "@mui/icons-material/Clear";
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
+import {setActiveAdvertiser} from "../../state/context";
 
 const modalStyles = {
     content: {
@@ -33,8 +34,10 @@ const Settings = props => {
     const [showNewKeypairModal, setShowNewKeypairModal] = useState(false);
     const [newKeypairModalState, setNewKeypairModalState] = useState('disclaimer');
 
-    const setActiveAdvertiser = (e) => {
-        props.setActiveAdvertiser(_.find(props.advertisers, { id: e.target.value }))
+    const setActiveAdvertiserWithId = (e) => {
+        const adv = _.find(props.advertisers, { id: e.target.value });
+        setActiveAdvertiser(adv);
+        props.setActiveAdvertiser(adv);
     }
 
     const advertisers = () => {
@@ -150,7 +153,7 @@ const Settings = props => {
                       <Select
                         value={props.activeAdvertiser.id}
                         label="Select Organization"
-                        onChange={(e) => setActiveAdvertiser(e)}
+                        onChange={(e) => setActiveAdvertiserWithId(e)}
                       >
                         {advertisers().map((a) => (
                           <MenuItem value={a.value}>{a.label}</MenuItem>

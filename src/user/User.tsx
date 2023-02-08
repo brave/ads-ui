@@ -18,6 +18,7 @@ import {Box} from "@mui/material";
 import {NewCampaign} from "./views/adsManager/views/advanced/components/form/NewCampaign";
 import {EditCampaign} from "./views/adsManager/views/advanced/components/form/EditCampaign";
 import {CompletionForm} from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
+import {getActiveAdvertiser} from "../state/context";
 
 const buildApolloClient = (accessToken: string) => {
   const httpLink = createHttpLink({
@@ -40,14 +41,14 @@ interface Props {
 
 function User({advertisers, auth}: Props) {
   const match = useRouteMatch();
-  const [activeAdvertiser, setActiveAdvertiser] = useState(_.find(advertisers, {state: "active"}));
+  const [activeAdvertiser, setActiveAdvertiser] = useState(getActiveAdvertiser());
   const client = useMemo(() => buildApolloClient(auth.accessToken), [auth.accessToken])
 
   if (
     !auth ||
     !auth.signedIn ||
     !auth.emailVerified ||
-    (auth.role !== "user" && !activeAdvertiser)
+    !activeAdvertiser
   ) {
     return <Redirect to="/a"/>;
   }

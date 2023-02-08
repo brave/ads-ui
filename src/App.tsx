@@ -4,7 +4,7 @@ import _ from "lodash";
 import Authentication from "./containers/Authentication/Authentication";
 import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 
-import Context from "./state/context";
+import Context, {getActiveAdvertiser, setActiveAdvertiser} from "./state/context";
 import User from "./user/User";
 import { connect } from "react-redux";
 import jwt_decode from "jwt-decode";
@@ -28,8 +28,9 @@ const App = props => {
     }
     const { advertisers, auth } = props;
     if (auth && auth.signedIn && auth.emailVerified) {
-      const activeAdvertiser = _.find(advertisers, { state: "active" });
+      const activeAdvertiser = getActiveAdvertiser() || _.find(advertisers, { state: "active" });
       if (advertisers.length > 0 && activeAdvertiser) {
+        setActiveAdvertiser(activeAdvertiser);
         return <Redirect to="/user/main" />;
       } else {
         return <Redirect to="/auth" />;
