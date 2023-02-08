@@ -1,9 +1,8 @@
 import {useFormikContext} from "formik";
-import {AdSetForm, CampaignForm} from "../../../../types";
+import {CampaignForm} from "../../../../types";
 import {Box} from "@mui/material";
 import React, {useEffect} from "react";
 import {FormikSubmitButton} from "../../../../../../../form/FormikHelpers";
-import _ from "lodash";
 import {CampaignReview} from "./components/CampaignReview";
 import {AdSetReview} from "./components/AdSetReview";
 
@@ -12,30 +11,13 @@ interface Props {
 }
 
 export function Review({isEdit}: Props) {
-  const {values, errors, setFieldTouched} = useFormikContext<CampaignForm>();
-
-  const canNavigate = (edit: boolean, ads: AdSetForm[]) => {
-    return !edit || (edit && ads.some((set) => set.creatives.some((a) => a.id === undefined)));
-  }
-
-  const touch = (keys: string[]) => {
-    keys.forEach((k) => {
-      setFieldTouched(k, true, true);
-    })
-  }
+  const {values, errors, setTouched} = useFormikContext<CampaignForm>();
 
   useEffect(() => {
-    const campaign: Omit<CampaignForm, "adSets"> = {..._.omit(values, "adSets")};
-    touch(Object.keys(campaign));
-
-    const adSet: AdSetForm[] = values.adSets
-    adSet.forEach((s) => {
-      const noCreative = _.omit(s, "creatives");
-      touch(Object.keys(noCreative));
-      s.creatives.forEach((c) => {
-        touch(Object.keys(c));
-      })
-    })
+    const toTouch = Object.keys(values)
+      .map((v) => ({ [`${v}`]: true }))
+      .reduce((a, b) => ({ ...a, ...b }));
+    setTouched(toTouch, true)
   }, [values])
 
   return (
@@ -49,7 +31,7 @@ export function Review({isEdit}: Props) {
       <FormikSubmitButton
         isCreate={!isEdit}
         label={isEdit ? "Update Campaign" : "Publish Campaign"}
-        allowNavigation={canNavigate(isEdit, values.adSets)}
+        allowNavigation={true}
       />
     </Box>
   )
