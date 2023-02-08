@@ -146,6 +146,7 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
       }),
       price: adSet.ads?.[0].prices[0].amount || 0
     })),
+    validateStart: false,
     budget: campaign.budget,
     currency: campaign.currency,
     dailyBudget: campaign.dailyBudget,

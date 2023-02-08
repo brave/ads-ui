@@ -1,4 +1,4 @@
-import { object, string, ref, number, date, array, bool, boolean } from "yup";
+import { object, string, ref, number, date, array, boolean } from "yup";
 import { startOfDay } from "date-fns";
 
 const HttpsRegex = /^https:\/\//;
@@ -8,6 +8,7 @@ const TrailingAsteriskRegex = /.*\*$/;
 export const CampaignSchema = object().shape({
   name: string().label("Campaign Name").required(),
   budget: number().label("Lifetime Budget").required().positive(),
+  validateStart: boolean(),
   dailyBudget: number()
     .label("Daily Budget")
     .required()
@@ -15,8 +16,10 @@ export const CampaignSchema = object().shape({
     .max(ref("budget"), "Daily Budget cannot be greater than Lifetime Budget"),
   startAt: date()
     .label("Start Date")
-    .min(startOfDay(new Date()), "Start Date must not be in the past")
-    .required(),
+    .when("validateStart", {
+      is: true,
+      then: date().min(startOfDay(new Date()), "Start Date must not be in the past").required(),
+    }),
   endAt: date()
     .label("End Date")
     .required()

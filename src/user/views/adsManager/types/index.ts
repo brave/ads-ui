@@ -6,6 +6,7 @@ export type CampaignForm = {
   startAt: string;
   endAt: string;
   budget: number;
+  validateStart: boolean;
   currency: string;
   dailyBudget: number;
   dailyCap: number;
@@ -61,6 +62,7 @@ export type Creative = {
 export const initialCampaign: CampaignForm = {
   startAt: defaultStartDate(),
   endAt: defaultEndDate(),
+  validateStart: true,
   budget: 0,
   currency: "USD",
   dailyBudget: 0,
