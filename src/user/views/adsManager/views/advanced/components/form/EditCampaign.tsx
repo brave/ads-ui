@@ -2,7 +2,7 @@ import {
   Container, LinearProgress,
 } from "@mui/material";
 import {Formik} from "formik";
-import React, {useState} from "react";
+import React from "react";
 import {CampaignForm} from "../../../../types";
 import {CampaignSchema} from "../../../../../../../validation/CampaignSchema";
 import {editCampaignValues, transformEditForm} from "../../../../../../library";
@@ -14,10 +14,11 @@ import {
 import {refetchAdvertiserQuery} from "../../../../../../../graphql/advertiser.generated";
 import {useHistory, useParams} from "react-router-dom";
 import {BaseForm} from "./components/BaseForm";
+import {IAdvertiser, IAuthUser} from "../../../../../../../actions";
 
 interface Props {
-  advertiser: any;
-  auth: any;
+  advertiser: IAdvertiser;
+  auth: IAuthUser;
 }
 
 interface Params {

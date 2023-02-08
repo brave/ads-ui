@@ -10,10 +10,11 @@ import {useCreateCampaignMutation} from "../../../../../../../graphql/campaign.g
 import {refetchAdvertiserQuery} from "../../../../../../../graphql/advertiser.generated";
 import {useHistory} from "react-router-dom";
 import {BaseForm} from "./components/BaseForm";
+import {IAdvertiser, IAuthUser} from "../../../../../../../actions";
 
 interface Props {
-  auth: any;
-  advertiser: any;
+  auth: IAuthUser;
+  advertiser: IAdvertiser;
 }
 
 export function NewCampaign({ auth, advertiser }: Props) {

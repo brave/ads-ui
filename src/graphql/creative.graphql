@@ -14,14 +14,8 @@ fragment Creative on Creative {
   }
 }
 
-mutation createCreative($input: CreativeInput!) {
-  createCreative(creative: $input) {
-    id
-  }
-}
-
-mutation updateCreative($id: String!, $input: CreativeInput!) {
-  updateCreative(id: $id, creative: $input) {
+mutation createNotificationCreative($input: CreateNotificationCreativeInput!) {
+  createNotificationCreative(createNotificationCreativeInput: $input) {
     id
   }
 }

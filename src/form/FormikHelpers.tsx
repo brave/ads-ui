@@ -111,7 +111,7 @@ interface FormikSubmitButtonProps {
 }
 
 function extractErrors(errorObject: any): string[] {
-  return Object.values(errorObject).flatMap((o) =>
+  return Object.values(errorObject).filter((v) => !!v).flatMap((o) =>
     _.isString(o) ? [o] : extractErrors(o)
   );
 }
