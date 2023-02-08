@@ -14,10 +14,6 @@ interface Props {
 export function AdField({ index, onNext, isEdit }: Props) {
   const { values } = useFormikContext<CampaignForm>();
 
-  const canRemove = (edit: boolean, ads: AdSetForm[]) => {
-    return !edit || (edit && ads.some((set) => set.creatives.some((a) => a.id === undefined)));
-  }
-
   return (
     <FieldArray name={`adSets.${index}.creatives`}>
       {({remove, push}) => (
@@ -28,7 +24,7 @@ export function AdField({ index, onNext, isEdit }: Props) {
                 <Divider textAlign="left" sx={{fontSize: "24px", mb: 1, mt: 1, flexGrow: 1}}>
                   Ad {idx + 1}
                 </Divider>
-                {idx > 0 && canRemove(isEdit, values.adSets) && (
+                {idx > 0 && (
                   <IconButton onClick={() => remove(idx)}>
                     <ClearIcon />
                   </IconButton>
@@ -39,7 +35,7 @@ export function AdField({ index, onNext, isEdit }: Props) {
                 <Typography variant="body2" sx={{mr: 1}}>
                   Define the look and feel of your ads.
                 </Typography>
-                {values.adSets[index].creatives.length - 1 === idx && (
+                {values.adSets[index].creatives.length - 1 === idx && !isEdit && (
                   <Link
                     underline="none"
                     variant="body2"

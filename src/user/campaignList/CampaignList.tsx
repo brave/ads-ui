@@ -12,13 +12,19 @@ interface Props {
   advertiserId: string;
 }
 
-function CampaignList({ advertiserId, userId }: Props) {
+function CampaignList({ advertiserId }: Props) {
   const {loading, data} = useAdvertiserCampaignsQuery({
     variables: {id: advertiserId}
   });
   const history = useHistory();
 
-  const canEdit = process.env.REACT_APP_ENABLE_FEATURES === "true" || (advertiserId === '84f72479-ede2-4b74-8ca4-11f3c0b276ba' || advertiserId === '8cfac071-75f8-46ab-9c7f-4f8420d914d7');
+  const EDIT_CAMPAIGN_ADVERTISER_ALLOW_LIST = [
+    '84f72479-ede2-4b74-8ca4-11f3c0b276ba',
+    '8cfac071-75f8-46ab-9c7f-4f8420d914d7',
+    '8fc27541-4933-447b-93eb-50b4e4714fbb',
+  ];
+
+  const canEdit = process.env.REACT_APP_ENABLE_FEATURES === "true" || EDIT_CAMPAIGN_ADVERTISER_ALLOW_LIST.includes(advertiserId);
 
   if (loading) return <LinearProgress/>;
 
