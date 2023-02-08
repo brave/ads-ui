@@ -3,6 +3,10 @@ import * as Types from './types';
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
+export type GeocodeFragment = { __typename?: 'ActiveGeocodesEntry', code: string, name: string };
+
+export type SegmentFragment = { __typename?: 'SegmentsEntry', code: string, name: string };
+
 export type ActiveGeocodesQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
@@ -13,17 +17,27 @@ export type SegmentsQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 export type SegmentsQuery = { __typename?: 'Query', segments: { __typename?: 'SegmentsQueryDTO', data: Array<{ __typename?: 'SegmentsEntry', code: string, name: string }> } };
 
-
+export const GeocodeFragmentDoc = gql`
+    fragment Geocode on ActiveGeocodesEntry {
+  code
+  name
+}
+    `;
+export const SegmentFragmentDoc = gql`
+    fragment Segment on SegmentsEntry {
+  code
+  name
+}
+    `;
 export const ActiveGeocodesDocument = gql`
     query ActiveGeocodes {
   activeGeocodes {
     data {
-      code
-      name
+      ...Geocode
     }
   }
 }
-    `;
+    ${GeocodeFragmentDoc}`;
 
 /**
  * __useActiveGeocodesQuery__
@@ -58,12 +72,11 @@ export const SegmentsDocument = gql`
     query Segments {
   segments {
     data {
-      code
-      name
+      ...Segment
     }
   }
 }
-    `;
+    ${SegmentFragmentDoc}`;
 
 /**
  * __useSegmentsQuery__

@@ -2,12 +2,32 @@ fragment Engagement on Engagement {
   createdat
   type
   count
+  cost
   android
   ios
   linux
   macos
   windows
   other
+}
+
+fragment CampaignWithEngagements on Campaign {
+  id
+  name
+  state
+  dailyBudget
+  budget
+  spent
+  currency
+  createdAt
+  startAt
+  endAt
+  currency
+  pacingIndex
+  format
+  engagements {
+    ...Engagement
+  }
 }
 
 query analyticOverview($id: String!) {

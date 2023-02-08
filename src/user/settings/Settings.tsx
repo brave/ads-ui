@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Text } from "../../components/Text/Text";
 import { Button, Input, InputContainer } from "../../components/formElements/formElements";
-import Select from 'react-select';
 import _ from "lodash";
 import * as tweetnacl from "tweetnacl";
 import Modal from 'react-modal';
-import { Icon } from "@material-ui/core";
 import {useAdvertiserQuery, useUpdateAdvertiserMutation} from "../../graphql/advertiser.generated";
+import ClearIcon from "@mui/icons-material/Clear";
+import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
+import {setActiveAdvertiser} from "../../state/context";
 
 const modalStyles = {
     content: {
@@ -33,15 +34,10 @@ const Settings = props => {
     const [showNewKeypairModal, setShowNewKeypairModal] = useState(false);
     const [newKeypairModalState, setNewKeypairModalState] = useState('disclaimer');
 
-    const customStyles = {
-        control: (provided) => ({
-            ...provided,
-            backgroundColor: "#fafafa"
-        }),
-    }
-
-    const setActiveAdvertiser = (e) => {
-        props.setActiveAdvertiser(_.find(props.advertisers, { id: e.value }))
+    const setActiveAdvertiserWithId = (e) => {
+        const adv = _.find(props.advertisers, { id: e.target.value });
+        setActiveAdvertiser(adv);
+        props.setActiveAdvertiser(adv);
     }
 
     const advertisers = () => {
@@ -135,7 +131,7 @@ const Settings = props => {
                         </>
                     }
 
-                    <Button onClick={() => openNewKeypairModal()} style={{ height: "32px", marginTop: "22px", marginLeft: "auto", marginRight: "auto", backgroundColor: "#4C54D2", width: "150px" }}>
+                    <Button onClick={() => openNewKeypairModal()} style={{ height: "32px", marginTop: "22px", marginLeft: "auto", marginRight: "auto", backgroundColor: "#F8532BCC", width: "300px" }}>
                         <Text content={"New Keypair"} style={{ paddingTop: "6px", paddingBottom: "6px" }} sizes={[16, 16, 15, 15, 14]} fontWeight={500} fontFamily={"Poppins"} />
                     </Button>
 
@@ -152,16 +148,18 @@ const Settings = props => {
 
             <div style={{ height: "400px" }}>
                 <InputContainer>
-                    <div style={{ display: "flex", marginBottom: "4px" }}>
-                        <Text content={"Select organization"} sizes={[16, 16, 15, 15, 13]} fontFamily={"Poppins"} />
-                    </div>
-                    <Select
-                        styles={customStyles}
-                        onChange={setActiveAdvertiser}
-                        value={{ value: props.activeAdvertiser.id, label: props.activeAdvertiser.name }}
-                        options={advertisers()}
-                    />
-
+                    <FormControl fullWidth>
+                      <InputLabel>Select Organization</InputLabel>
+                      <Select
+                        value={props.activeAdvertiser.id}
+                        label="Select Organization"
+                        onChange={(e) => setActiveAdvertiserWithId(e)}
+                      >
+                        {advertisers().map((a) => (
+                          <MenuItem value={a.value}>{a.label}</MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
                 </InputContainer>
             </div>
 
@@ -173,7 +171,7 @@ const Settings = props => {
                     <div style={{ width: "600px" }}>
                         <div onClick={() => { closeNewKeypairModal() }} style={{ display: "flex" }}>
                             <Text content={`Create new keypair?`} sizes={[16, 16, 15, 15, 22]} color={"#E0694C"} fontFamily={"Poppins"} />
-                            <Icon style={{ marginLeft: "auto", color: "grey", cursor: "pointer" }}>clear</Icon>
+                            <ClearIcon />
                         </div>
                         <Text style={{ marginTop: "42px" }} content={`You are attempting to create a new keypair, this will replace any of your organization's existing keypairs. Please note, previous keypairs cannot be retrieved or used once replaced.`} sizes={[16, 16, 15, 15, 16]} fontFamily={"Muli"} />
                         <div style={{ display: "flex", width: "100%", marginTop: "42px" }}>
@@ -198,7 +196,7 @@ const Settings = props => {
                     <div style={{ width: "600px" }}>
                         <div onClick={() => { closeNewKeypairModal() }} style={{ display: "flex" }}>
                             <Text content={`Create new keypair?`} sizes={[16, 16, 15, 15, 22]} color={"#E0694C"} fontFamily={"Poppins"} />
-                            <Icon style={{ marginLeft: "auto", color: "grey", cursor: "pointer" }}>clear</Icon>
+                            <ClearIcon />
                         </div>
                         <Text style={{ marginTop: "42px", marginBottom: "16px" }} content={`Your organization's new private key will be:`} sizes={[16, 16, 15, 15, 16]} fontFamily={"Muli"} />
                         <Input value={privateKey}></Input>
@@ -225,7 +223,7 @@ const Settings = props => {
                     <div style={{ width: "600px" }}>
                         <div onClick={() => { closeNewKeypairModal() }} style={{ display: "flex" }}>
                             <Text content={`Create new keypair?`} sizes={[16, 16, 15, 15, 22]} color={"#E0694C"} fontFamily={"Poppins"} />
-                            <Icon style={{ marginLeft: "auto", color: "grey", cursor: "pointer" }}>clear</Icon>
+                            <ClearIcon />
                         </div>
                         <Text style={{ marginTop: "42px", marginBottom: "16px" }} content={`Please confirm your organization's new private key:`} sizes={[16, 16, 15, 15, 16]} fontFamily={"Muli"} />
                         <Input value={newPrivateKey} onChange={(e) => { setNewPrivateKey(e.target.value) }}></Input>

@@ -4,20 +4,23 @@ import { gql } from '@apollo/client';
 import { CampaignFragmentDoc } from './campaign.generated';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
-export type EngagementFragment = { __typename?: 'Engagement', createdat: any, type: string, count: number, android: number, ios: number, linux: number, macos: number, windows: number, other: number };
+export type EngagementFragment = { __typename?: 'Engagement', createdat: any, type: string, count: number, cost: number, android: number, ios: number, linux: number, macos: number, windows: number, other: number };
+
+export type CampaignWithEngagementsFragment = { __typename?: 'Campaign', id: string, name: string, state: string, dailyBudget: number, budget: number, spent: number, currency: string, createdAt: any, startAt: any, endAt: any, pacingIndex?: number | null, format: Types.CampaignFormat, engagements?: Array<{ __typename?: 'Engagement', createdat: any, type: string, count: number, cost: number, android: number, ios: number, linux: number, macos: number, windows: number, other: number }> | null };
 
 export type AnalyticOverviewQueryVariables = Types.Exact<{
   id: Types.Scalars['String'];
 }>;
 
 
-export type AnalyticOverviewQuery = { __typename?: 'Query', campaign?: { __typename?: 'Campaign', id: string, name: string, state: string, dailyCap: number, priority: number, passThroughRate: number, pacingOverride: boolean, pacingStrategy: Types.CampaignPacingStrategies, externalId: string, currency: string, budget: number, dailyBudget: number, spent: number, createdAt: any, startAt: any, endAt: any, type: string, format: Types.CampaignFormat, dayProportion?: number | null, engagements?: Array<{ __typename?: 'Engagement', createdat: any, type: string, count: number, android: number, ios: number, linux: number, macos: number, windows: number, other: number }> | null, geoTargets?: Array<{ __typename?: 'Geocode', code: string, name: string }> | null, adSets: Array<{ __typename?: 'AdSet', id: string, billingType?: string | null, name?: string | null, totalMax: number, perDay: number, state: string, execution: string, keywords?: Array<string> | null, keywordSimilarity?: number | null, negativeKeywords?: Array<string> | null, bannedKeywords?: Array<string> | null, targetingTerms?: Array<string> | null, segments?: Array<{ __typename?: 'Segment', code: string, name: string }> | null, oses?: Array<{ __typename?: 'OS', code: string, name: string }> | null, conversions?: Array<{ __typename?: 'Conversion', id: string, type: string, urlPattern: string, observationWindow: number, extractExternalId: boolean }> | null, ads?: Array<{ __typename?: 'Ad', id: string, state: string, prices: Array<{ __typename?: 'AdPrice', amount: number, type: string }>, webhooks: Array<{ __typename?: 'Webhook', type: string, url: string }>, creative: { __typename?: 'Creative', id: string, createdAt: any, modifiedAt: any, name: string, state: string, type: { __typename?: 'CreativeType', code: string }, payloadNotification?: { __typename?: 'NotificationPayload', body: string, title: string, targetUrl: string } | null } }> | null }> } | null };
+export type AnalyticOverviewQuery = { __typename?: 'Query', campaign?: { __typename?: 'Campaign', id: string, name: string, state: string, dailyCap: number, priority: number, passThroughRate: number, pacingOverride: boolean, pacingStrategy: Types.CampaignPacingStrategies, externalId: string, currency: string, budget: number, dailyBudget: number, spent: number, createdAt: any, startAt: any, endAt: any, type: string, format: Types.CampaignFormat, dayProportion?: number | null, engagements?: Array<{ __typename?: 'Engagement', createdat: any, type: string, count: number, cost: number, android: number, ios: number, linux: number, macos: number, windows: number, other: number }> | null, geoTargets?: Array<{ __typename?: 'Geocode', code: string, name: string }> | null, adSets: Array<{ __typename?: 'AdSet', id: string, billingType?: string | null, name?: string | null, totalMax: number, perDay: number, state: string, execution: string, keywords?: Array<string> | null, keywordSimilarity?: number | null, negativeKeywords?: Array<string> | null, bannedKeywords?: Array<string> | null, targetingTerms?: Array<string> | null, segments?: Array<{ __typename?: 'Segment', code: string, name: string }> | null, oses?: Array<{ __typename?: 'OS', code: string, name: string }> | null, conversions?: Array<{ __typename?: 'Conversion', id: string, type: string, urlPattern: string, observationWindow: number, extractExternalId: boolean }> | null, ads?: Array<{ __typename?: 'Ad', id: string, state: string, prices: Array<{ __typename?: 'AdPrice', amount: number, type: string }>, webhooks: Array<{ __typename?: 'Webhook', type: string, url: string }>, creative: { __typename?: 'Creative', id: string, createdAt: any, modifiedAt: any, name: string, state: string, type: { __typename?: 'CreativeType', code: string }, payloadNotification?: { __typename?: 'NotificationPayload', body: string, title: string, targetUrl: string } | null } }> | null }> } | null };
 
 export const EngagementFragmentDoc = gql`
     fragment Engagement on Engagement {
   createdat
   type
   count
+  cost
   android
   ios
   linux
@@ -26,6 +29,26 @@ export const EngagementFragmentDoc = gql`
   other
 }
     `;
+export const CampaignWithEngagementsFragmentDoc = gql`
+    fragment CampaignWithEngagements on Campaign {
+  id
+  name
+  state
+  dailyBudget
+  budget
+  spent
+  currency
+  createdAt
+  startAt
+  endAt
+  currency
+  pacingIndex
+  format
+  engagements {
+    ...Engagement
+  }
+}
+    ${EngagementFragmentDoc}`;
 export const AnalyticOverviewDocument = gql`
     query analyticOverview($id: String!) {
   campaign(id: $id) {

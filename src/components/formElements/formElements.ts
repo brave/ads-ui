@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "@mui/material";
 
 interface InputProps {
   error?: boolean;
@@ -18,24 +18,24 @@ export const Input = styled("input")`
     padding-left: 14px;
     font-size: 14px;
     font-family: Muli;
-  
+
     :focus{
       outline-width: 0;
       border: 1px solid #F97555;
       transition: border .25s;
     }
-  
+
     ${(props: InputProps) =>
     props.error === true &&
     `
       border: 1px solid #E32444;
-  
+
       :focus{
         border: 1px solid #E32444;
       }
       `
   }
-    
+
   `
 
 export const TextArea = styled("textarea")`
@@ -66,7 +66,7 @@ export const TextArea = styled("textarea")`
     }
     `
   }
-  
+
 `
 
 interface SelectionProps {
@@ -77,12 +77,12 @@ export const Selection = styled("div")`
     width: 200px;
     border: 1px solid #e2e2e2;
     border-radius: 4px;
-    height: 42px; 
-    display: flex; 
-    justify-content: center; 
+    height: 42px;
+    display: flex;
+    justify-content: center;
     align-items: center;
     cursor: pointer;
-  
+
     ${(props: SelectionProps) =>
     props.selected === true &&
     `
@@ -102,7 +102,7 @@ export const Button = styled("div")`
   display: flex;
   justify-content: center;
   padding: 0px 20px;
-  width: 100px; 
+  width: 100px;
   background: #F87454;
   color: white;
   border: none;
@@ -114,7 +114,7 @@ export const SecondaryButton = styled("div")`
   display: flex;
   justify-content: center;
   padding: 0px 20px;
-  width: 100px; 
+  width: 100px;
   background: #fafafa;
   color: black;
   border: 1px solid #e2e2e2;

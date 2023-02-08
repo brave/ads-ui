@@ -1,0 +1,7 @@
+node_modules
+build
+
+# npm and prettier fight over a EOF on these files, let npm win:
+package.json
+package-lock.json
+.npm-upgrade.json

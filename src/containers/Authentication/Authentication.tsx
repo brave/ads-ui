@@ -1,11 +1,7 @@
-import { withStyles } from "@material-ui/core";
 import _ from "lodash";
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
-
-import { styles } from "./Authentication.style";
-import * as S from "./Authentication.style";
 
 import SigninContainer from "./Signin/Signin";
 
@@ -16,14 +12,10 @@ class Authentication extends React.Component<any, any> {
 
   public render() {
     return (
-      <S.Container>
-        <S.Content>
-          <Switch>
-            <Route path="/auth/signin" component={SigninContainer} />
-            {this.getRedirect()}
-          </Switch>
-        </S.Content>
-      </S.Container>
+      <Switch>
+        <Route path="/auth/signin" component={SigninContainer} />
+        {this.getRedirect()}
+      </Switch>
     );
   }
 
@@ -51,4 +43,4 @@ const mapStateToProps = (state: any) => ({
   auth: state.authReducer
 });
 
-export default withStyles(styles)(connect(mapStateToProps)(Authentication));
+export default connect(mapStateToProps)(Authentication);

@@ -1,96 +1,95 @@
 import React from "react";
-import Table from "../../components/Table/TableComponent";
-import { Link } from "react-router-dom";
-import * as S from "./style/CampaignList.style";
 import {useAdvertiserCampaignsQuery} from "../../graphql/advertiser.generated";
+import { EnhancedTable, StandardRenderers } from "../../components/EnhancedTable";
+import {IconButton, LinearProgress, Link} from "@mui/material";
+import {renderMonetaryAmount} from "../../components/EnhancedTable/renderers";
+import EditIcon from '@mui/icons-material/Edit';
+import {useHistory} from "react-router-dom";
+import {CampaignStatus} from "../../components/Campaigns/CampaignStatus";
 
-const CampaignList = props => {
-    const userId = props.userId;
-    const advertiserId = props.advertiserId;
+interface Props {
+  userId: string;
+  advertiserId: string;
+}
 
-    const { loading, data } = useAdvertiserCampaignsQuery({
-        variables: { id: props.advertiserId }
-    });
+function CampaignList({ advertiserId }: Props) {
+  const {loading, data} = useAdvertiserCampaignsQuery({
+    variables: {id: advertiserId}
+  });
+  const history = useHistory();
 
-    const canEdit = process.env.REACT_APP_ENABLE_FEATURES === "true" || (advertiserId === '84f72479-ede2-4b74-8ca4-11f3c0b276ba' || advertiserId === '8cfac071-75f8-46ab-9c7f-4f8420d914d7');
-    const columns = [
+  const EDIT_CAMPAIGN_ADVERTISER_ALLOW_LIST = [
+    '84f72479-ede2-4b74-8ca4-11f3c0b276ba',
+    '8cfac071-75f8-46ab-9c7f-4f8420d914d7',
+    '8fc27541-4933-447b-93eb-50b4e4714fbb',
+  ];
+
+  const canEdit = process.env.REACT_APP_ENABLE_FEATURES === "true" || EDIT_CAMPAIGN_ADVERTISER_ALLOW_LIST.includes(advertiserId);
+
+  if (loading) return <LinearProgress/>;
+
+  return (
+    <EnhancedTable
+      rows={data?.advertiser?.campaigns}
+      columns={[
         {
-            Header: 'Campaign',
-            accessor: 'name',
-            Cell: (props) => {
-                return (
-                    <div>
-                        <Link style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} to={`campaign/${props.row.original.id}/analytics/overview`}>
-                            <div style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} title={props.row.original.name}>{props.row.original.name}</div>
-                        </Link>
-                        {canEdit &&
-                            <Link style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", marginTop: '8px', fontSize: "10px" }} to={`/user/main/adsmanager/advanced?userId=${userId}&advertiserId=${advertiserId}&campaignId=${props.row.original.id}`}>
-                                <div style={{ textDecoration: "none", color: "rgb(251, 84, 43)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} title={props.row.original.name}>Edit</div>
-                            </Link>
-                        }
-                    </div>
-                )
-            }
+          title: "Campaign",
+          value: (c) => c.name,
+          extendedRenderer: (r) => (
+            <Link
+              href={r.state !== "under_review" ? `/user/main/campaign/${r.id}/analytics/overview` : undefined}
+              underline="none"
+            >
+              {r.name}
+            </Link>
+          )
         },
         {
-            Header: 'Status',
-            accessor: 'state',
-            Cell: (props) => {
-                return props.row.original.state === "active" ? <div title="Active"><S.ActiveSymbol /></div> : <div title={props.row.original.state}><S.PendingSymbol /></div>
-            }
+          title: "Status",
+          value: (c) => c.state,
+          extendedRenderer: (r) => <CampaignStatus campaign={{ state: r.state, endAt: r.endAt }} />
         },
         {
-            Header: 'Budget',
-            accessor: 'budget',
-            sortDescFirst: true,
-            Cell: (props) => {
-                return props.row.original.currency === "USD" ? `$${props.row.original.budget.toFixed(2)}` : `${props.row.original.budget.toFixed(2)} BAT`
-            },
+          title: "Budget",
+          value: (c) => c.budget,
+          extendedRenderer: (r) =>
+            renderMonetaryAmount(r.budget, r.currency),
         },
         {
-            Header: 'Daily Budget',
-            accessor: 'dailyBudget',
-            sortDescFirst: true,
-            Cell: (props) => {
-                return props.row.original.currency === "USD" ? `$${props.row.original.dailyBudget.toFixed(2)}` : `${props.row.original.dailyBudget.toFixed(2)} BAT`
-            },
+          title: "Spend",
+          value: (c) => c.spent,
+          extendedRenderer: (r) =>
+            renderMonetaryAmount(r.spent, r.currency),
         },
         {
-            Header: 'Spend',
-            accessor: 'spent',
-            sortDescFirst: true,
-            Cell: (props) => {
-                return props.row.original.currency === "USD" ? `$${props.row.original.spent.toFixed(2)}` : `${props.row.original.spent.toFixed(2)} BAT`
-            },
+          title: "Start",
+          value: (c) => c.startAt,
+          renderer: StandardRenderers.date,
         },
         {
-            Header: 'Start Date',
-            accessor: 'startAt',
-            sortDescFirst: true,
-            Cell: (props) => {
-                return new Date(props.row.original.startAt).toLocaleDateString("en-US")
-            },
+          title: "End",
+          value: (c) => c.endAt,
+          renderer: StandardRenderers.date,
         },
         {
-            Header: 'End Date',
-            accessor: 'endAt',
-            sortDescFirst: true,
-            Cell: (props) => {
-                return new Date(props.row.original.endAt).toLocaleDateString("en-US")
-            },
+          title: "",
+          value: (c) => "",
+          extendedRenderer: (r) => (
+            <>
+              {canEdit ? (
+                <IconButton onClick={() => history.push(`/user/main/adsmanager/advanced/${r.id}`)}>
+                  <EditIcon />
+                </IconButton>
+              ) : (
+                <></>
+              )}
+            </>
+          )
         }
-    ];
-
-
-    if (loading) return <></>;
-
-    return (
-        <div>
-           <Table data={data?.advertiser?.campaigns} columns={columns} tableWidth={1094} columnCount={7} />
-        </div>
-    );
+      ]}
+    />
+  );
 }
 
 
 export default CampaignList;
-

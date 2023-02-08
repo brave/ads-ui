@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "@mui/material";
 
 export const Container = styled("div")`
   width: 75%;
@@ -73,7 +73,7 @@ export const Button = styled("div")`
   display: flex;
   justify-content: center;
   padding: 0px 20px;
-  width: 100px; 
+  width: 100px;
   background: #4C54D2;
   color: white;
   border: none;

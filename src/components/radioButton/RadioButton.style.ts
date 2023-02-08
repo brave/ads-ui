@@ -1,5 +1,4 @@
-import styled from "styled-components";
-
+import {styled} from "@mui/material";
 
 export const UncheckedRadioButton = styled("div")`
 

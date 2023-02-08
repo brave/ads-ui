@@ -1,8 +1,7 @@
 import axios from "axios";
 
-import { OpenSnackBar } from "../snackbar";
-
 import { IAuthAction, IAuthPayload, ISignInPayload } from "./auth.interface";
+import {OpenSnackBar} from "../snackbar";
 
 export const SIGN_IN_START = "SIGNINSTART";
 export const SignInStart = (payload: ISignInPayload): IAuthAction => ({
@@ -28,7 +27,6 @@ export const SignIn = (payload: ISignInPayload) => {
       try {
         dispatch(SignInStart(payload));
         dispatch(SignInSuccessful({ accessToken: payload.accessToken }));
-        dispatch(OpenSnackBar("Signed In Successfully"));
         return Promise.resolve({ accessToken: payload.accessToken });
       } catch (error: any) {
         dispatch(SignInFailed(error));
@@ -43,7 +41,6 @@ export const SignIn = (payload: ISignInPayload) => {
           },
         });
         dispatch(SignInSuccessful(response.data));
-        dispatch(OpenSnackBar("Signed In Successfully"));
         return Promise.resolve(response.data);
         // TODO: Remove w/ redux
       } catch (error: any) {
