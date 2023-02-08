@@ -9,19 +9,14 @@ const validCampaign = {
   currency: "GBP",
   dailyBudget: 100,
   dailyCap: 1,
-  dayProportion: 0.5,
   startAt: parseISO("2030-07-18"),
   endAt: parseISO("2030-07-20"),
   format: CampaignFormat.PushNotification,
   geoTargets: [{code: "a", name: "USA"}],
-  ntpSiScheduleIsValid: true,
   state: "any",
-  type: "any",
-  externalId: "",
+  type: "paid",
   pacingStrategy: CampaignPacingStrategies.Original,
-  passThroughRate: 1,
-  priority: 1,
-  pacingOverride: true,
+  validateStart: true
 };
 
 it("should pass on a valid object", () => {
