@@ -20,7 +20,7 @@ export function CampaignFields({ onNext, isEdit }: Props) {
 
       <CampaignDateRange isEdit={isEdit} />
 
-      <BudgetField />
+      <BudgetField isEdit={isEdit} />
 
       <LocationField />
 

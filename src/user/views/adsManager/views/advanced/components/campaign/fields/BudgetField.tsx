@@ -2,7 +2,11 @@ import {Box, Divider, InputAdornment, Stack, Typography} from "@mui/material";
 import {FormikRadioControl, FormikRadioGroup, FormikTextField} from "../../../../../../../../form/FormikHelpers";
 import React from "react";
 
-export function BudgetField() {
+interface Props {
+  isEdit: boolean;
+}
+
+export function BudgetField({ isEdit }: Props) {
   return (
     <Box>
       <Divider textAlign="left" sx={{fontSize: "24px", mb: 1, mt: 2}}>
@@ -39,6 +43,7 @@ export function BudgetField() {
             { value: "BAT", label: "BAT" },
             { value: "USD", label: "USD" },
           ]}
+          disabled={isEdit}
         />
       </Stack>
     </Box>

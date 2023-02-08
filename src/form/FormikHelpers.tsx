@@ -76,13 +76,14 @@ interface FormikRadioControlProps {
   label: string;
   options: Array<{ label: string; value: string | number }>;
   helperText?: React.ReactNode;
+  disabled?: boolean;
 }
 
 export const FormikRadioControl: React.FC<FormikRadioControlProps> = (
   props
 ) => {
   return (
-    <FormControl component="fieldset" margin="normal">
+    <FormControl component="fieldset" margin="normal" disabled={props.disabled === true}>
       <FormLabel component="legend" color="secondary">
         {props.label}
       </FormLabel>
