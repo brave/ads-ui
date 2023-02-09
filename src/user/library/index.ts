@@ -3,30 +3,34 @@ import {
   CreateAdInput,
   CreateAdSetInput,
   CreateCampaignInput,
-  CreativeInput, GeocodeInput, UpdateAdSetInput, UpdateCampaignInput
+  CreateNotificationCreativeInput,
+  GeocodeInput,
+  UpdateAdSetInput,
+  UpdateCampaignInput
 } from "../../graphql/types";
 import axios from "axios";
 import {print} from "graphql";
-import {CreateCreativeDocument} from "../../graphql/creative.generated";
 import {CampaignFragment} from "../../graphql/campaign.generated";
 import {CreateAdDocument} from "../../graphql/ad-set.generated";
+import {CreateNotificationCreativeDocument} from "../../graphql/creative.generated";
+import {IAuthUser} from "../../actions";
 
 export async function transformNewForm(
   form: CampaignForm,
-  auth: any,
-  advertiserId: string
+  auth: IAuthUser,
+  advertiserId: string,
 ): Promise<CreateCampaignInput> {
   const adSets = form.adSets;
   const transformedAdSet: CreateAdSetInput[] = [];
 
-  for (let adSet of adSets) {
+  for (const adSet of adSets) {
     const ads: CreateAdInput[] = [];
 
-    for (let ad of adSet.creatives) {
+    for (const ad of adSet.creatives) {
       const creative = await transformCreative(
         ad,
         adSet,
-        auth.accessToken,
+        auth,
         advertiserId
       );
       ads.push(creative);
@@ -56,6 +60,7 @@ export async function transformNewForm(
     advertiserId: advertiserId,
     externalId: "",
     format: form.format,
+    userId: auth.id,
     source: "direct",
     startAt: form.startAt,
     state: form.state,
@@ -68,19 +73,20 @@ export async function transformNewForm(
 async function transformCreative(
   creative: Creative,
   adSet: AdSetForm,
-  accessToken: string,
+  auth: IAuthUser,
   advertiserId: string,
 ): Promise<CreateAdInput> {
-  const notification: CreativeInput = {
+  const notification: CreateNotificationCreativeInput = {
     advertiserId: advertiserId,
+    userId: auth.id,
     name: creative.name,
-    payloadNotification: { title: creative.title, body: creative.body, targetUrl: creative.targetUrl },
+    payload: { title: creative.title, body: creative.body, targetUrl: creative.targetUrl },
     state: "under_review",
     type: {
       code: "notification_all_v1",
     }
   }
-  const withId = await createNotification(accessToken, notification);
+  const withId = await createNotification(auth.accessToken, notification);
   return {
     state: "under_review",
     webhooks: [],
@@ -93,10 +99,10 @@ async function transformCreative(
 }
 
 // TODO: Get rid of this ASAP. Currently necessary because when creating a campaign, you need existing creativeId.
-async function createNotification(accessToken: string, createInput: CreativeInput) {
+async function createNotification(accessToken: string, createInput: CreateNotificationCreativeInput) {
   const response = await axios.post(
     `${process.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql"),
-    JSON.stringify({query: print(CreateCreativeDocument), variables: { input: createInput }}),
+    JSON.stringify({query: print(CreateNotificationCreativeDocument), variables: { input: createInput }}),
     {
       headers: {
         "Authorization": `Bearer ${accessToken}`,
@@ -105,7 +111,7 @@ async function createNotification(accessToken: string, createInput: CreativeInpu
     }
   );
 
-  return response.data.data.createCreative.id;
+  return response.data.data.createNotificationCreative.id;
 }
 
 // TODO: Get rid of this ASAP. Currently necessary because when updating a campaign, it does not take into account any new ads.
@@ -165,18 +171,18 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
 export async function transformEditForm(
   form: CampaignForm,
   id: string,
-  auth: any,
+  auth: IAuthUser,
   advertiserId: string
 ): Promise<UpdateCampaignInput> {
   const transformedAdSet: UpdateAdSetInput[] = [];
 
-  for (let adSet of form.adSets) {
+  for (const adSet of form.adSets) {
     const newCreatives = adSet.creatives.filter((c) => c.id === undefined);
-    for (let ad of newCreatives) {
+    for (const ad of newCreatives) {
       const withId = await transformCreative(
         ad,
         adSet,
-        auth.accessToken,
+        auth,
         advertiserId
       );
       await createAd(auth.accessToken, {

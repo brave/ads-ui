@@ -19,6 +19,7 @@ import {NewCampaign} from "./views/adsManager/views/advanced/components/form/New
 import {EditCampaign} from "./views/adsManager/views/advanced/components/form/EditCampaign";
 import {CompletionForm} from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
 import {getActiveAdvertiser} from "../state/context";
+import {IAdvertiser, IAuthUser} from "../actions";
 
 const buildApolloClient = (accessToken: string) => {
   const httpLink = createHttpLink({
@@ -35,8 +36,8 @@ const buildApolloClient = (accessToken: string) => {
 };
 
 interface Props {
-  advertisers: any;
-  auth: any;
+  advertisers: IAdvertiser[];
+  auth: IAuthUser;
 }
 
 function User({advertisers, auth}: Props) {
