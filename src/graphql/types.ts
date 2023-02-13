@@ -146,8 +146,10 @@ export type CreateConversionInput = {
 
 export type CreateInPageCreativeInput = {
   advertiserId: Scalars['String'];
+  endAt?: InputMaybe<Scalars['DateTime']>;
   name: Scalars['String'];
   payload: InPagePayloadInput;
+  startAt?: InputMaybe<Scalars['DateTime']>;
   state: Scalars['String'];
   type: CreateTypeInput;
   userId?: InputMaybe<Scalars['String']>;
@@ -155,16 +157,20 @@ export type CreateInPageCreativeInput = {
 
 export type CreateNewTabPageCreativeInput = {
   advertiserId: Scalars['String'];
+  endAt?: InputMaybe<Scalars['DateTime']>;
   name: Scalars['String'];
   payload: NewTabPagePayloadInput;
+  startAt?: InputMaybe<Scalars['DateTime']>;
   state: Scalars['String'];
   type: CreateTypeInput;
 };
 
 export type CreateNotificationCreativeInput = {
   advertiserId: Scalars['String'];
+  endAt?: InputMaybe<Scalars['DateTime']>;
   name: Scalars['String'];
   payload: NotificationPayloadInput;
+  startAt?: InputMaybe<Scalars['DateTime']>;
   state: Scalars['String'];
   type: CreateTypeInput;
   userId?: InputMaybe<Scalars['String']>;
@@ -206,6 +212,7 @@ export type CreativeFilter = {
 
 export type CreativeInput = {
   advertiserId: Scalars['String'];
+  endAt?: InputMaybe<Scalars['DateTime']>;
   name: Scalars['String'];
   payloadInPage?: InputMaybe<InPagePayloadInput>;
   payloadInlineContent?: InputMaybe<InlineContentPayloadInput>;
@@ -214,6 +221,7 @@ export type CreativeInput = {
   payloadPromotedContent?: InputMaybe<PromotedContentPayloadInput>;
   payloadSearch?: InputMaybe<SearchPayloadInput>;
   payloadSearchHomepage?: InputMaybe<SearchHompagePayloadInput>;
+  startAt?: InputMaybe<Scalars['DateTime']>;
   state: Scalars['String'];
   type: CreateTypeInput;
 };
@@ -398,8 +406,10 @@ export type UpdateConversionsInput = {
 export type UpdateInPageCreativeInput = {
   advertiserId: Scalars['String'];
   creativeId: Scalars['String'];
+  endAt?: InputMaybe<Scalars['DateTime']>;
   name: Scalars['String'];
   payload: InPagePayloadInput;
+  startAt?: InputMaybe<Scalars['DateTime']>;
   state: Scalars['String'];
   type: CreateTypeInput;
   userId: Scalars['String'];
@@ -408,8 +418,10 @@ export type UpdateInPageCreativeInput = {
 export type UpdateNewTabPageCreativeInput = {
   advertiserId: Scalars['String'];
   creativeId: Scalars['String'];
+  endAt?: InputMaybe<Scalars['DateTime']>;
   name: Scalars['String'];
   payload: NewTabPagePayloadInput;
+  startAt?: InputMaybe<Scalars['DateTime']>;
   state: Scalars['String'];
   type: CreateTypeInput;
   userId: Scalars['String'];
@@ -418,8 +430,10 @@ export type UpdateNewTabPageCreativeInput = {
 export type UpdateNotificationCreativeInput = {
   advertiserId?: InputMaybe<Scalars['String']>;
   creativeId?: InputMaybe<Scalars['String']>;
+  endAt?: InputMaybe<Scalars['DateTime']>;
   name?: InputMaybe<Scalars['String']>;
   payload?: InputMaybe<NotificationPayloadInput>;
+  startAt?: InputMaybe<Scalars['DateTime']>;
   state?: InputMaybe<Scalars['String']>;
   type?: InputMaybe<CreateTypeInput>;
   userId?: InputMaybe<Scalars['String']>;
