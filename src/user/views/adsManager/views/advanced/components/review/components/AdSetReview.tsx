@@ -1,4 +1,4 @@
-import {Card, Divider, List, Typography} from "@mui/material";
+import {Card, Divider, List, ListItemText, Typography} from "@mui/material";
 import {CustomListItemText} from "../../../../../../../../components/List/CustomListItemText";
 import React from "react";
 import {AdSetForm, Conversion, OS, Segment} from "../../../../../types";
@@ -31,9 +31,11 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
 
     const conversion = v[0];
     return (
-      <div>
-        { conversion.type } <br /> { conversion.observationWindow } <br /> { conversion.urlPattern }
-      </div>
+      <List>
+        <CustomListItemText primary="Type" secondary={conversion.type} />
+        <CustomListItemText primary="Window" secondary={`${conversion.observationWindow} days`} />
+        <CustomListItemText primary="URL" secondary={conversion.urlPattern} />
+      </List>
     )
   }
 

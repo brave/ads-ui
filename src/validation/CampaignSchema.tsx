@@ -68,7 +68,7 @@ export const CampaignSchema = object().shape({
         .of(
           object().shape({
             urlPattern: string()
-              .required()
+              .required("Conversion URL Required")
               .matches(TrailingAsteriskRegex, "Conversion URL must end in trailing asterisk (*)"),
             observationWindow: number().required().default(7),
             type: string()

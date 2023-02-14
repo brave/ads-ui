@@ -36,6 +36,7 @@ export async function transformNewForm(
       ads.push(creative);
     }
 
+    const conversion = adSet.conversions[0];
     const base: CreateAdSetInput = {
       billingType: adSet.billingType,
       execution: "per_click",
@@ -43,7 +44,12 @@ export async function transformNewForm(
       segments: adSet.segments.map((s) => ({ code: s.code, name: s.name })),
       oses: adSet.oses,
       totalMax: 10,
-      conversions: adSet.conversions,
+      conversions: [{
+        // need to make observationWindow a float
+        observationWindow: conversion.observationWindow * 1.0,
+        urlPattern: conversion.urlPattern,
+        type: conversion.type,
+      }],
       ads: ads,
     }
 

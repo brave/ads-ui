@@ -22,7 +22,7 @@ interface Props {
 }
 
 interface Params {
-  campaignId: string
+  campaignId: string;
 }
 
 export function EditCampaign({ advertiser, auth }: Props) {
