@@ -1,4 +1,4 @@
-import {AdSetForm, CampaignForm, Creative, OS, Segment} from "../views/adsManager/types";
+import {AdSetForm, CampaignForm, Conversion, Creative, OS, Segment} from "../views/adsManager/types";
 import {
   CreateAdInput,
   CreateAdSetInput,
@@ -36,20 +36,14 @@ export async function transformNewForm(
       ads.push(creative);
     }
 
-    const conversion = adSet.conversions[0];
     const base: CreateAdSetInput = {
       billingType: adSet.billingType,
       execution: "per_click",
       perDay: 1,
-      segments: adSet.segments.map((s) => ({ code: s.code, name: s.name })),
+      segments: adSet.segments.map((s) => ({code: s.code, name: s.name})),
       oses: adSet.oses,
       totalMax: 10,
-      conversions: [{
-        // need to make observationWindow a float
-        observationWindow: conversion.observationWindow * 1.0,
-        urlPattern: conversion.urlPattern,
-        type: conversion.type,
-      }],
+      conversions: transformConversion(adSet.conversions),
       ads: ads,
     }
 
@@ -61,7 +55,7 @@ export async function transformNewForm(
     dailyCap: form.dailyCap,
     dailyBudget: form.dailyBudget,
     endAt: form.endAt,
-    geoTargets: form.geoTargets.map((g) => ({ code: g.code, name: g.name })),
+    geoTargets: form.geoTargets.map((g) => ({code: g.code, name: g.name})),
     name: form.name,
     advertiserId: advertiserId,
     externalId: "",
@@ -76,6 +70,20 @@ export async function transformNewForm(
   }
 }
 
+function transformConversion(conv: Conversion[]) {
+  if (conv.length === 0) {
+    return [];
+  }
+
+  const conversion = conv[0];
+  return [{
+    // need to make observationWindow a float
+    observationWindow: conversion.observationWindow,
+    urlPattern: conversion.urlPattern,
+    type: conversion.type,
+  }];
+}
+
 async function transformCreative(
   creative: Creative,
   adSet: AdSetForm,
@@ -86,7 +94,7 @@ async function transformCreative(
     advertiserId: advertiserId,
     userId: auth.id,
     name: creative.name,
-    payload: { title: creative.title, body: creative.body, targetUrl: creative.targetUrl },
+    payload: {title: creative.title, body: creative.body, targetUrl: creative.targetUrl},
     state: "under_review",
     type: {
       code: "notification_all_v1",
@@ -108,7 +116,7 @@ async function transformCreative(
 async function createNotification(accessToken: string, createInput: CreateNotificationCreativeInput) {
   const response = await axios.post(
     `${process.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql"),
-    JSON.stringify({query: print(CreateNotificationCreativeDocument), variables: { input: createInput }}),
+    JSON.stringify({query: print(CreateNotificationCreativeDocument), variables: {input: createInput}}),
     {
       headers: {
         "Authorization": `Bearer ${accessToken}`,
@@ -124,7 +132,7 @@ async function createNotification(accessToken: string, createInput: CreateNotifi
 async function createAd(accessToken: string, createInput: CreateAdInput) {
   const response = await axios.post(
     `${process.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql"),
-    JSON.stringify({query: print(CreateAdDocument), variables: { createAdInput: createInput }}),
+    JSON.stringify({query: print(CreateAdDocument), variables: {createAdInput: createInput}}),
     {
       headers: {
         "Authorization": `Bearer ${accessToken}`,
@@ -198,8 +206,8 @@ export async function transformEditForm(
     }
 
     const base: UpdateAdSetInput = {
-      segments: adSet.segments.map((v) => ({ code: v.code, name: v.name })),
-      oses: adSet.oses.map((v) => ({ code: v.code, name: v.name })),
+      segments: adSet.segments.map((v) => ({code: v.code, name: v.name})),
+      oses: adSet.oses.map((v) => ({code: v.code, name: v.name})),
     }
 
     transformedAdSet.push(base);
@@ -207,11 +215,11 @@ export async function transformEditForm(
 
   return {
     budget: form.budget,
-    currency:form.currency,
+    currency: form.currency,
     dailyBudget: form.dailyBudget,
     dailyCap: form.dailyCap,
     endAt: form.endAt,
-    geoTargets: form.geoTargets.map((v) => ({ code: v.code, name: v.name })),
+    geoTargets: form.geoTargets.map((v) => ({code: v.code, name: v.name})),
     id,
     name: form.name,
     startAt: form.startAt,
