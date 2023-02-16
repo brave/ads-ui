@@ -16,17 +16,16 @@ import Navbar from "../navbar/Navbar";
 const drawerWidth = 240;
 
 interface Props {
-  userId: string;
-  advertiserId: string;
-}
+  canCreate: boolean;
+};
 
-function Sidebar({ advertiserId, userId }: Props) {
+function Sidebar({ canCreate }: Props) {
   const history = useHistory();
 
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <Navbar advertiserId={advertiserId} userId={userId} />
+      <Navbar canCreate={canCreate} />
       <Drawer
         sx={{
           width: drawerWidth,

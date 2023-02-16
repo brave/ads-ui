@@ -21,7 +21,6 @@ export default function ReportUtils({
   auth,
 }: DownloaderProps) {
   const [downloadingCSV, setDownloadingCSV] = useState(false);
-  console.log(startDate);
 
   return (
     <Box

@@ -24,26 +24,12 @@ TopBarProgress.config({
   barThickness: 2,
 });
 
-const NEW_CAMPAIGN_ADVERTISER_ALLOW_LIST = [
-  "8cfac071-75f8-46ab-9c7f-4f8420d914d7", // bsa
-  "8fc27541-4933-447b-93eb-50b4e4714fbb", // graham's test advertiser (staging)
-  "93130af3-2def-4ecb-b836-b3772e73b3c9", // Fung (staging)
-];
-
-function shouldShowNewCampaign(advertiserId: string): boolean {
-  return (
-    process.env.REACT_APP_ENABLE_FEATURES === "true" ||
-    NEW_CAMPAIGN_ADVERTISER_ALLOW_LIST.includes(advertiserId)
-  );
-}
-
 interface Props {
-  advertiserId: string;
-  userId: string;
   dispatch: any;
-}
+  canCreate: boolean;
+};
 
-function Navbar({ advertiserId, dispatch, userId }: Props) {
+function Navbar({ dispatch, canCreate }: Props) {
   const history = useHistory();
 
   return (
@@ -60,7 +46,7 @@ function Navbar({ advertiserId, dispatch, userId }: Props) {
           />
         </Link>
         <div style={{ flexGrow: 1 }} />
-        {shouldShowNewCampaign(advertiserId) && (
+        {canCreate && (
           <Button
             onClick={() => history.push(`/user/main/adsmanager/advanced/new`)}
             size="large"
