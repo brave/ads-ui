@@ -92,10 +92,7 @@ function User({ advertisers, auth }: Props) {
 
               {/* /campaigns */}
               <Route path={`${match.path}/campaigns`}>
-                <CampaignList
-                  userId={auth.id}
-                  advertiserId={activeAdvertiser.id}
-                />
+                <CampaignList canEdit={activeAdvertiser.selfServiceEdit} advertiserId={activeAdvertiser.id}/>
               </Route>
 
               {/* /campaigns/:campaignId/analytics - */}

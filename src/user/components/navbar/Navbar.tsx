@@ -56,7 +56,10 @@ function Navbar({ dispatch, canCreate }: Props) {
             New Campaign
           </Button>
         )}
-        <UserMenu signOut={() => dispatch(SignOut())} />
+        <UserMenu signOut={() => {
+          localStorage.clear();
+          dispatch(SignOut());
+        }}/>
       </Toolbar>
     </AppBar>
   );
