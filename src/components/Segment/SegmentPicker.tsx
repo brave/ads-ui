@@ -3,7 +3,10 @@ import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { Autocomplete, Checkbox, TextField } from "@mui/material";
 import { useField } from "formik";
 import _ from "lodash";
-import {SegmentFragment, useSegmentsQuery} from "../../graphql/common.generated";
+import {
+  SegmentFragment,
+  useSegmentsQuery,
+} from "../../graphql/common.generated";
 import React from "react";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
@@ -15,9 +18,13 @@ interface Props {
 
 export const SegmentPicker: React.FC<Props> = ({ idx }: Props) => {
   const { data } = useSegmentsQuery();
-  const activeSegments = _.sortBy(data?.segments?.data ?? [], (s) => s.name.toLowerCase());
+  const activeSegments = _.sortBy(data?.segments?.data ?? [], (s) =>
+    s.name.toLowerCase()
+  );
 
-  const [formProps, meta, helper] = useField<SegmentFragment[]>(`adSets.${idx}.segments`);
+  const [formProps, meta, helper] = useField<SegmentFragment[]>(
+    `adSets.${idx}.segments`
+  );
   const errorMessage = meta.error;
 
   return (
@@ -44,7 +51,10 @@ export const SegmentPicker: React.FC<Props> = ({ idx }: Props) => {
         <TextField
           {...params}
           label="Audiences"
-          helperText={errorMessage ?? "Select the audience segments to target. Brave will decide if left untargeted."}
+          helperText={
+            errorMessage ??
+            "Select the audience segments to target. Brave will decide if left untargeted."
+          }
           error={!!errorMessage}
         />
       )}

@@ -1,5 +1,5 @@
-import {ListItem, ListItemIcon, ListItemText} from "@mui/material";
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import { ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import React from "react";
 
 interface Props {
@@ -15,10 +15,10 @@ export function CustomListItemText({ primary, secondary, error }: Props) {
     return (
       <ListItemIcon>
         <ErrorOutlineIcon sx={{ color: "#d32f2f", mr: 1 }} />
-        { text }
+        {text}
       </ListItemIcon>
-    )
-  }
+    );
+  };
 
   return (
     <ListItem>
@@ -26,13 +26,11 @@ export function CustomListItemText({ primary, secondary, error }: Props) {
         sx={{ mb: 1 }}
         primary={primary}
         secondary={isError ? getError(error) : secondary}
-
         primaryTypographyProps={{
           fontSize: "16px",
           fontFamily: "Poppins",
           color: "grey",
         }}
-
         secondaryTypographyProps={{
           marginTop: "4px",
           fontSize: "18px",
@@ -44,5 +42,5 @@ export function CustomListItemText({ primary, secondary, error }: Props) {
         }}
       />
     </ListItem>
-  )
+  );
 }

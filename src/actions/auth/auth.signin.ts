@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { IAuthAction, IAuthPayload, ISignInPayload } from "./auth.interface";
-import {OpenSnackBar} from "../snackbar";
+import { OpenSnackBar } from "../snackbar";
 
 export const SIGN_IN_START = "SIGNINSTART";
 export const SignInStart = (payload: ISignInPayload): IAuthAction => ({
@@ -31,22 +31,27 @@ export const SignIn = (payload: ISignInPayload) => {
       } catch (error: any) {
         dispatch(SignInFailed(error));
       }
-    }
-    else {
+    } else {
       try {
         dispatch(SignInStart(payload));
-        const response = await axios.post(`${process.env.REACT_APP_SERVER_ADDRESS}/auth/token`, payload, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await axios.post(
+          `${process.env.REACT_APP_SERVER_ADDRESS}/auth/token`,
+          payload,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
         dispatch(SignInSuccessful(response.data));
         return Promise.resolve(response.data);
         // TODO: Remove w/ redux
       } catch (error: any) {
         dispatch(SignInFailed(error));
         if (error.response) {
-          dispatch(OpenSnackBar(`Sign In  Failed: ${error.response.data.error}`));
+          dispatch(
+            OpenSnackBar(`Sign In  Failed: ${error.response.data.error}`)
+          );
         } else if (error.request) {
           dispatch(OpenSnackBar(`Sign In  Failed: Network Error`));
         } else {

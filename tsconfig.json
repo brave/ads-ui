@@ -17,7 +17,5 @@
     "lib": ["ESNext", "dom"],
     "isolatedModules": true
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

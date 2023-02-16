@@ -1,42 +1,63 @@
-import * as Types from './types';
+import * as Types from "./types";
 
-import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
+import { gql } from "@apollo/client";
+import * as Apollo from "@apollo/client";
 const defaultOptions = {} as const;
-export type CreativeFragment = { __typename?: 'Creative', id: string, createdAt: any, modifiedAt: any, name: string, state: string, type: { __typename?: 'CreativeType', code: string }, payloadNotification?: { __typename?: 'NotificationPayload', body: string, title: string, targetUrl: string } | null };
+export type CreativeFragment = {
+  __typename?: "Creative";
+  id: string;
+  createdAt: any;
+  modifiedAt: any;
+  name: string;
+  state: string;
+  type: { __typename?: "CreativeType"; code: string };
+  payloadNotification?: {
+    __typename?: "NotificationPayload";
+    body: string;
+    title: string;
+    targetUrl: string;
+  } | null;
+};
 
 export type CreateNotificationCreativeMutationVariables = Types.Exact<{
   input: Types.CreateNotificationCreativeInput;
 }>;
 
-
-export type CreateNotificationCreativeMutation = { __typename?: 'Mutation', createNotificationCreative: { __typename?: 'Creative', id: string } };
+export type CreateNotificationCreativeMutation = {
+  __typename?: "Mutation";
+  createNotificationCreative: { __typename?: "Creative"; id: string };
+};
 
 export const CreativeFragmentDoc = gql`
-    fragment Creative on Creative {
-  id
-  createdAt
-  modifiedAt
-  name
-  state
-  type {
-    code
-  }
-  payloadNotification {
-    body
-    title
-    targetUrl
-  }
-}
-    `;
-export const CreateNotificationCreativeDocument = gql`
-    mutation createNotificationCreative($input: CreateNotificationCreativeInput!) {
-  createNotificationCreative(createNotificationCreativeInput: $input) {
+  fragment Creative on Creative {
     id
+    createdAt
+    modifiedAt
+    name
+    state
+    type {
+      code
+    }
+    payloadNotification {
+      body
+      title
+      targetUrl
+    }
   }
-}
-    `;
-export type CreateNotificationCreativeMutationFn = Apollo.MutationFunction<CreateNotificationCreativeMutation, CreateNotificationCreativeMutationVariables>;
+`;
+export const CreateNotificationCreativeDocument = gql`
+  mutation createNotificationCreative(
+    $input: CreateNotificationCreativeInput!
+  ) {
+    createNotificationCreative(createNotificationCreativeInput: $input) {
+      id
+    }
+  }
+`;
+export type CreateNotificationCreativeMutationFn = Apollo.MutationFunction<
+  CreateNotificationCreativeMutation,
+  CreateNotificationCreativeMutationVariables
+>;
 
 /**
  * __useCreateNotificationCreativeMutation__
@@ -55,10 +76,25 @@ export type CreateNotificationCreativeMutationFn = Apollo.MutationFunction<Creat
  *   },
  * });
  */
-export function useCreateNotificationCreativeMutation(baseOptions?: Apollo.MutationHookOptions<CreateNotificationCreativeMutation, CreateNotificationCreativeMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateNotificationCreativeMutation, CreateNotificationCreativeMutationVariables>(CreateNotificationCreativeDocument, options);
-      }
-export type CreateNotificationCreativeMutationHookResult = ReturnType<typeof useCreateNotificationCreativeMutation>;
-export type CreateNotificationCreativeMutationResult = Apollo.MutationResult<CreateNotificationCreativeMutation>;
-export type CreateNotificationCreativeMutationOptions = Apollo.BaseMutationOptions<CreateNotificationCreativeMutation, CreateNotificationCreativeMutationVariables>;
+export function useCreateNotificationCreativeMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateNotificationCreativeMutation,
+    CreateNotificationCreativeMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    CreateNotificationCreativeMutation,
+    CreateNotificationCreativeMutationVariables
+  >(CreateNotificationCreativeDocument, options);
+}
+export type CreateNotificationCreativeMutationHookResult = ReturnType<
+  typeof useCreateNotificationCreativeMutation
+>;
+export type CreateNotificationCreativeMutationResult =
+  Apollo.MutationResult<CreateNotificationCreativeMutation>;
+export type CreateNotificationCreativeMutationOptions =
+  Apollo.BaseMutationOptions<
+    CreateNotificationCreativeMutation,
+    CreateNotificationCreativeMutationVariables
+  >;

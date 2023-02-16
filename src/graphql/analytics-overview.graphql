@@ -30,7 +30,7 @@ fragment CampaignWithEngagements on Campaign {
 }
 
 query analyticOverview($id: String!) {
-  campaign(id: $id){
+  campaign(id: $id) {
     ...Campaign
     engagements {
       ...Engagement

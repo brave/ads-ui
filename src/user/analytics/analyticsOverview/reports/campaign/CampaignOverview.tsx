@@ -2,9 +2,16 @@ import { Box } from "@mui/material";
 import HighchartsReact from "highcharts-react-official";
 import * as Highcharts from "highcharts";
 import React, { useState } from "react";
-import {CampaignWithEngagementsFragment, EngagementFragment} from "../../../../../graphql/analytics-overview.generated";
-import {Metrics} from "../../types";
-import {prepareChart, processData, processStats} from "../../lib/overview.library";
+import {
+  CampaignWithEngagementsFragment,
+  EngagementFragment,
+} from "../../../../../graphql/analytics-overview.generated";
+import { Metrics } from "../../types";
+import {
+  prepareChart,
+  processData,
+  processStats,
+} from "../../lib/overview.library";
 import MetricFilter from "../../components/MetricFilter";
 import EngagementHeader from "../../components/EngagementHeader";
 import LiveFeed from "../../components/LiveFeed";

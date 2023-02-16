@@ -4,10 +4,12 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { formatISO, parseISO } from "date-fns";
 import { useField } from "formik";
 import React, { useState } from "react";
-import {getDefaultTimezone, TimeZonePicker} from "../TimeZonePicker";
-import {TimezoneAwareDatePicker} from "../TimeZonePicker/TimezoneAwareDatePicker";
+import { getDefaultTimezone, TimeZonePicker } from "../TimeZonePicker";
+import { TimezoneAwareDatePicker } from "../TimeZonePicker/TimezoneAwareDatePicker";
 
-export const CampaignDateRange: React.FC<{isEdit: boolean}> = ({ isEdit }) => {
+export const CampaignDateRange: React.FC<{ isEdit: boolean }> = ({
+  isEdit,
+}) => {
   const [tz, setTz] = useState<string>(getDefaultTimezone());
   const [, startMeta, startHelper] = useField("startAt");
   const [, endMeta, endHelper] = useField("endAt");

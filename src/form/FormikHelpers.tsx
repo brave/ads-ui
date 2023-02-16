@@ -83,7 +83,11 @@ export const FormikRadioControl: React.FC<FormikRadioControlProps> = (
   props
 ) => {
   return (
-    <FormControl component="fieldset" margin="normal" disabled={props.disabled === true}>
+    <FormControl
+      component="fieldset"
+      margin="normal"
+      disabled={props.disabled === true}
+    >
       <FormLabel component="legend" color="secondary">
         {props.label}
       </FormLabel>
@@ -111,9 +115,9 @@ interface FormikSubmitButtonProps {
 }
 
 function extractErrors(errorObject: any): string[] {
-  return Object.values(errorObject).filter((v) => !!v).flatMap((o) =>
-    _.isString(o) ? [o] : extractErrors(o)
-  );
+  return Object.values(errorObject)
+    .filter((v) => !!v)
+    .flatMap((o) => (_.isString(o) ? [o] : extractErrors(o)));
 }
 
 export const FormikSubmitButton: React.FC<FormikSubmitButtonProps> = ({
@@ -174,7 +178,7 @@ export const FormikSubmitButton: React.FC<FormikSubmitButtonProps> = ({
           type="submit"
           size="large"
           disabled={!saveEnabled}
-          sx={{mt: 2}}
+          sx={{ mt: 2 }}
         >
           {formik.isSubmitting ? inProgressLabel : label}
         </Button>

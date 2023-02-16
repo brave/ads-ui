@@ -1,9 +1,22 @@
-import {FieldArray, useFormikContext} from "formik";
-import {Box, Button, Card, Divider, IconButton, Link, Typography} from "@mui/material";
-import {FormikTextField} from "../../../../../../../form/FormikHelpers";
+import { FieldArray, useFormikContext } from "formik";
+import {
+  Box,
+  Button,
+  Card,
+  Divider,
+  IconButton,
+  Link,
+  Typography,
+} from "@mui/material";
+import { FormikTextField } from "../../../../../../../form/FormikHelpers";
 import React from "react";
 import ClearIcon from "@mui/icons-material/Clear";
-import {AdSetForm, CampaignForm, Creative, initialCreative} from "../../../../types";
+import {
+  AdSetForm,
+  CampaignForm,
+  Creative,
+  initialCreative,
+} from "../../../../types";
 
 interface Props {
   index: number;
@@ -14,22 +27,31 @@ interface Props {
 export function AdField({ index, onNext, isEdit }: Props) {
   const { values } = useFormikContext<CampaignForm>();
 
-  const canRemove = (edit: boolean, ads: AdSetForm[], adIdx: number, adSetIdx: number) => {
-    return !edit || (
-      edit &&
-      ads.some((set) => set.creatives.some((a) => a.id === undefined)) &&
-      adIdx === ads[adSetIdx].creatives.length - 1
+  const canRemove = (
+    edit: boolean,
+    ads: AdSetForm[],
+    adIdx: number,
+    adSetIdx: number
+  ) => {
+    return (
+      !edit ||
+      (edit &&
+        ads.some((set) => set.creatives.some((a) => a.id === undefined)) &&
+        adIdx === ads[adSetIdx].creatives.length - 1)
     );
-  }
+  };
 
   return (
     <FieldArray name={`adSets.${index}.creatives`}>
-      {({remove, push}) => (
+      {({ remove, push }) => (
         <>
           {values.adSets[index].creatives.map((ad, idx) => (
-            <Card sx={{mt: 2, p: 2}}>
+            <Card sx={{ mt: 2, p: 2 }}>
               <Box display="flex" flexDirection="row" alignItems="center">
-                <Divider textAlign="left" sx={{fontSize: "24px", mb: 1, mt: 1, flexGrow: 1}}>
+                <Divider
+                  textAlign="left"
+                  sx={{ fontSize: "24px", mb: 1, mt: 1, flexGrow: 1 }}
+                >
                   Ad {idx + 1}
                 </Divider>
                 {idx > 0 && canRemove(isEdit, values.adSets, idx, index) && (
@@ -40,7 +62,7 @@ export function AdField({ index, onNext, isEdit }: Props) {
               </Box>
 
               <Box display="flex" flexDirection="row" alignItems="center">
-                <Typography variant="body2" sx={{mr: 1}}>
+                <Typography variant="body2" sx={{ mr: 1 }}>
                   Define the look and feel of your ads.
                 </Typography>
                 {values.adSets[index].creatives.length - 1 === idx && (
@@ -55,20 +77,11 @@ export function AdField({ index, onNext, isEdit }: Props) {
                 )}
               </Box>
 
-              <Ad
-                adSetIdx={index}
-                adIdx={idx}
-                creative={ad}
-                isEdit={isEdit}
-              />
+              <Ad adSetIdx={index} adIdx={idx} creative={ad} isEdit={isEdit} />
 
               {values.adSets[index].creatives.length - 1 === idx && (
-                <Box sx={{ mt: 2 }} >
-                  <Button
-                    variant="contained"
-                    size="large"
-                    onClick={onNext}
-                  >
+                <Box sx={{ mt: 2 }}>
+                  <Button variant="contained" size="large" onClick={onNext}>
                     Next
                   </Button>
                 </Box>
@@ -78,7 +91,7 @@ export function AdField({ index, onNext, isEdit }: Props) {
         </>
       )}
     </FieldArray>
-  )
+  );
 }
 
 interface AdProps {
@@ -88,7 +101,7 @@ interface AdProps {
   isEdit: boolean;
 }
 
-function Ad({adSetIdx, adIdx, isEdit, creative}: AdProps) {
+function Ad({ adSetIdx, adIdx, isEdit, creative }: AdProps) {
   return (
     <>
       <FormikTextField
@@ -117,5 +130,5 @@ function Ad({adSetIdx, adIdx, isEdit, creative}: AdProps) {
         disabled={isEdit && !!creative.id}
       />
     </>
-  )
+  );
 }

@@ -1,6 +1,11 @@
 export interface IAdvertiserAction {
   type: string;
-  payload: ICreateAdvertiserPayload | IAdvertiserPayload[] | IAdvertiserPayload | Partial<IAdvertiserPayload> | null;
+  payload:
+    | ICreateAdvertiserPayload
+    | IAdvertiserPayload[]
+    | IAdvertiserPayload
+    | Partial<IAdvertiserPayload>
+    | null;
 }
 
 export interface ICreateAdvertiserPayload {

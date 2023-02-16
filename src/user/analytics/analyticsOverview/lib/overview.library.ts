@@ -1,8 +1,8 @@
 import _ from "lodash";
 import moment from "moment";
 import { Options } from "highcharts";
-import {BaseMetric, Metrics, StatsMetric, Tooltip} from "../types";
-import {EngagementFragment} from "../../../../graphql/analytics-overview.generated";
+import { BaseMetric, Metrics, StatsMetric, Tooltip } from "../types";
+import { EngagementFragment } from "../../../../graphql/analytics-overview.generated";
 
 const colors = ["#4C54D2CC", "#A0A5EBCC", "#9370DBCC", "#8B008BCC"];
 
@@ -206,8 +206,8 @@ export const processStats = (
       spend: 0,
       upvotes: 0,
       views: 0,
-      visitRate: 0
-    }
+      visitRate: 0,
+    };
   }
 
   const reduced = engagements.map(mapMetric).reduce(reduceMetric);

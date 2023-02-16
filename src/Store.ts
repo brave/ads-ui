@@ -17,10 +17,10 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export default () => {
-  const store = createStore(persistedReducer, applyMiddleware(
-    loggerMiddleware,
-    thunkMiddleware,
-  ));
+  const store = createStore(
+    persistedReducer,
+    applyMiddleware(loggerMiddleware, thunkMiddleware)
+  );
   const persistor = persistStore(store);
   return { store, persistor };
 };

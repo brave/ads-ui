@@ -1,4 +1,11 @@
-import {AdSetForm, CampaignForm, Conversion, Creative, OS, Segment} from "../views/adsManager/types";
+import {
+  AdSetForm,
+  CampaignForm,
+  Conversion,
+  Creative,
+  OS,
+  Segment,
+} from "../views/adsManager/types";
 import {
   CreateAdInput,
   CreateAdSetInput,
@@ -6,19 +13,19 @@ import {
   CreateNotificationCreativeInput,
   GeocodeInput,
   UpdateAdSetInput,
-  UpdateCampaignInput
+  UpdateCampaignInput,
 } from "../../graphql/types";
 import axios from "axios";
-import {print} from "graphql";
-import {CampaignFragment} from "../../graphql/campaign.generated";
-import {CreateAdDocument} from "../../graphql/ad-set.generated";
-import {CreateNotificationCreativeDocument} from "../../graphql/creative.generated";
-import {IAuthUser} from "../../actions";
+import { print } from "graphql";
+import { CampaignFragment } from "../../graphql/campaign.generated";
+import { CreateAdDocument } from "../../graphql/ad-set.generated";
+import { CreateNotificationCreativeDocument } from "../../graphql/creative.generated";
+import { IAuthUser } from "../../actions";
 
 export async function transformNewForm(
   form: CampaignForm,
   auth: IAuthUser,
-  advertiserId: string,
+  advertiserId: string
 ): Promise<CreateCampaignInput> {
   const adSets = form.adSets;
   const transformedAdSet: CreateAdSetInput[] = [];
@@ -27,12 +34,7 @@ export async function transformNewForm(
     const ads: CreateAdInput[] = [];
 
     for (const ad of adSet.creatives) {
-      const creative = await transformCreative(
-        ad,
-        adSet,
-        auth,
-        advertiserId
-      );
+      const creative = await transformCreative(ad, adSet, auth, advertiserId);
       ads.push(creative);
     }
 
@@ -40,12 +42,12 @@ export async function transformNewForm(
       billingType: adSet.billingType,
       execution: "per_click",
       perDay: 1,
-      segments: adSet.segments.map((s) => ({code: s.code, name: s.name})),
+      segments: adSet.segments.map((s) => ({ code: s.code, name: s.name })),
       oses: adSet.oses,
       totalMax: 10,
       conversions: transformConversion(adSet.conversions),
       ads: ads,
-    }
+    };
 
     transformedAdSet.push(base);
   }
@@ -55,7 +57,7 @@ export async function transformNewForm(
     dailyCap: form.dailyCap,
     dailyBudget: form.dailyBudget,
     endAt: form.endAt,
-    geoTargets: form.geoTargets.map((g) => ({code: g.code, name: g.name})),
+    geoTargets: form.geoTargets.map((g) => ({ code: g.code, name: g.name })),
     name: form.name,
     advertiserId: advertiserId,
     externalId: "",
@@ -67,7 +69,7 @@ export async function transformNewForm(
     type: form.type,
     budget: form.budget,
     adSets: transformedAdSet,
-  }
+  };
 }
 
 function transformConversion(conv: Conversion[]) {
@@ -76,52 +78,66 @@ function transformConversion(conv: Conversion[]) {
   }
 
   const conversion = conv[0];
-  return [{
-    // need to make observationWindow a float
-    observationWindow: conversion.observationWindow,
-    urlPattern: conversion.urlPattern,
-    type: conversion.type,
-  }];
+  return [
+    {
+      // need to make observationWindow a float
+      observationWindow: conversion.observationWindow,
+      urlPattern: conversion.urlPattern,
+      type: conversion.type,
+    },
+  ];
 }
 
 async function transformCreative(
   creative: Creative,
   adSet: AdSetForm,
   auth: IAuthUser,
-  advertiserId: string,
+  advertiserId: string
 ): Promise<CreateAdInput> {
   const notification: CreateNotificationCreativeInput = {
     advertiserId: advertiserId,
     userId: auth.id,
     name: creative.name,
-    payload: {title: creative.title, body: creative.body, targetUrl: creative.targetUrl},
+    payload: {
+      title: creative.title,
+      body: creative.body,
+      targetUrl: creative.targetUrl,
+    },
     state: "under_review",
     type: {
       code: "notification_all_v1",
-    }
-  }
+    },
+  };
   const withId = await createNotification(auth.accessToken, notification);
   return {
     state: "under_review",
     webhooks: [],
     creativeId: withId,
-    prices: [{
-      amount: adSet.price,
-      type: adSet.billingType === "cpc" ? "click" : "view"
-    }]
+    prices: [
+      {
+        amount: adSet.price,
+        type: adSet.billingType === "cpc" ? "click" : "view",
+      },
+    ],
   };
 }
 
 // TODO: Get rid of this ASAP. Currently necessary because when creating a campaign, you need existing creativeId.
-async function createNotification(accessToken: string, createInput: CreateNotificationCreativeInput) {
+async function createNotification(
+  accessToken: string,
+  createInput: CreateNotificationCreativeInput
+) {
   const response = await axios.post(
     `${process.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql"),
-    JSON.stringify({query: print(CreateNotificationCreativeDocument), variables: {input: createInput}}),
+    JSON.stringify({
+      query: print(CreateNotificationCreativeDocument),
+      variables: { input: createInput },
+    }),
     {
       headers: {
-        "Authorization": `Bearer ${accessToken}`,
-        "Content-Type": "application/json"
-      }
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
     }
   );
 
@@ -132,12 +148,15 @@ async function createNotification(accessToken: string, createInput: CreateNotifi
 async function createAd(accessToken: string, createInput: CreateAdInput) {
   const response = await axios.post(
     `${process.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql"),
-    JSON.stringify({query: print(CreateAdDocument), variables: {createAdInput: createInput}}),
+    JSON.stringify({
+      query: print(CreateAdDocument),
+      variables: { createAdInput: createInput },
+    }),
     {
       headers: {
-        "Authorization": `Bearer ${accessToken}`,
-        "Content-Type": "application/json"
-      }
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
     }
   );
 
@@ -150,8 +169,8 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
       ...adSet,
       id: adSet.id,
       conversions: adSet.conversions ?? [],
-      oses: adSet.oses ?? [] as OS[],
-      segments: adSet.segments ?? [] as Segment[],
+      oses: adSet.oses ?? ([] as OS[]),
+      segments: adSet.segments ?? ([] as Segment[]),
       billingType: adSet.billingType ?? "cpm",
       name: adSet.name || adSet.id.split("-")[0],
       creatives: adSet.ads!.map((ad) => {
@@ -161,10 +180,10 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
           name: c.name,
           targetUrl: c.payloadNotification!.targetUrl,
           title: c.payloadNotification!.title,
-          body: c.payloadNotification!.body
-        }
+          body: c.payloadNotification!.body,
+        };
       }),
-      price: adSet.ads?.[0].prices[0].amount || 0
+      price: adSet.ads?.[0].prices[0].amount || 0,
     })),
     validateStart: false,
     budget: campaign.budget,
@@ -173,12 +192,12 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
     dailyCap: campaign.dailyCap,
     endAt: campaign.endAt,
     format: campaign.format,
-    geoTargets: campaign.geoTargets ?? [] as GeocodeInput[],
+    geoTargets: campaign.geoTargets ?? ([] as GeocodeInput[]),
     name: campaign.name,
     pacingStrategy: campaign.pacingStrategy,
     startAt: campaign.startAt,
     state: campaign.state,
-    type: "paid"
+    type: "paid",
   };
 }
 
@@ -193,12 +212,7 @@ export async function transformEditForm(
   for (const adSet of form.adSets) {
     const newCreatives = adSet.creatives.filter((c) => c.id === undefined);
     for (const ad of newCreatives) {
-      const withId = await transformCreative(
-        ad,
-        adSet,
-        auth,
-        advertiserId
-      );
+      const withId = await transformCreative(ad, adSet, auth, advertiserId);
       await createAd(auth.accessToken, {
         ...withId,
         creativeSetId: adSet.id,
@@ -206,9 +220,9 @@ export async function transformEditForm(
     }
 
     const base: UpdateAdSetInput = {
-      segments: adSet.segments.map((v) => ({code: v.code, name: v.name})),
-      oses: adSet.oses.map((v) => ({code: v.code, name: v.name})),
-    }
+      segments: adSet.segments.map((v) => ({ code: v.code, name: v.name })),
+      oses: adSet.oses.map((v) => ({ code: v.code, name: v.name })),
+    };
 
     transformedAdSet.push(base);
   }
@@ -219,12 +233,12 @@ export async function transformEditForm(
     dailyBudget: form.dailyBudget,
     dailyCap: form.dailyCap,
     endAt: form.endAt,
-    geoTargets: form.geoTargets.map((v) => ({code: v.code, name: v.name})),
+    geoTargets: form.geoTargets.map((v) => ({ code: v.code, name: v.name })),
     id,
     name: form.name,
     startAt: form.startAt,
     state: form.state,
     type: form.type,
     adSets: transformedAdSet,
-  }
+  };
 }

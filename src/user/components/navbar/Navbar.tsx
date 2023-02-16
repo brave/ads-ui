@@ -1,20 +1,23 @@
 import * as React from "react";
 
-import {Link, useHistory} from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
-import {SignOut} from "../../../actions";
+import { SignOut } from "../../../actions";
 import TopBarProgress from "react-topbar-progress-indicator";
 
+import { AppBar, Button, Toolbar } from "@mui/material";
+import { UserMenu } from "./components/UserMenu/UserMenu";
+import { connect } from "react-redux";
 
-import {AppBar, Button, Toolbar} from "@mui/material";
-import {UserMenu} from "./components/UserMenu/UserMenu";
-import {connect} from "react-redux";
-
-const logoStyle = {textDecoration: "none", color: "inherit", marginTop: "3px"};
+const logoStyle = {
+  textDecoration: "none",
+  color: "inherit",
+  marginTop: "3px",
+};
 
 TopBarProgress.config({
   barColors: {
-    "0": "#FB7959"
+    "0": "#FB7959",
   },
   shadowBlur: 0,
   shadowColor: undefined,
@@ -41,7 +44,10 @@ function Navbar({ advertiserId, dispatch, userId }: Props) {
   const history = useHistory();
 
   return (
-    <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, bgcolor: "#ffffff" }}>
+    <AppBar
+      position="fixed"
+      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, bgcolor: "#ffffff" }}
+    >
       <Toolbar>
         <Link style={logoStyle} to={"/home"}>
           <img

@@ -1,7 +1,7 @@
 import { styled } from "@mui/material";
 
 interface INavTextProps {
-    selected: boolean;
+  selected: boolean;
 }
 
 export const Container = styled("div")`
@@ -44,8 +44,8 @@ export const NavText = styled("div")`
     font-size: 15px;
   }
   ${(props: Partial<INavTextProps>) =>
-        props.selected === true &&
-        `
+    props.selected === true &&
+    `
     color: #737ADE;
   `}
 `;

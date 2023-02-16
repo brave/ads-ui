@@ -1,6 +1,6 @@
 import _ from "lodash";
-import React, {useMemo, useState} from "react";
-import {Redirect, Route, Switch, useRouteMatch} from "react-router-dom";
+import React, { useMemo, useState } from "react";
+import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
 
 import Sidebar from "./components/sidebar/Sidebar";
 import CampaignList from "./campaignList/CampaignList";
@@ -13,13 +13,13 @@ import {
 } from "@apollo/client";
 import AnalyticsOverview from "./analytics/AnalyticsOverview";
 import Settings from "./settings/Settings";
-import {connect} from "react-redux";
-import {Box} from "@mui/material";
-import {NewCampaign} from "./views/adsManager/views/advanced/components/form/NewCampaign";
-import {EditCampaign} from "./views/adsManager/views/advanced/components/form/EditCampaign";
-import {CompletionForm} from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
-import {getActiveAdvertiser} from "../state/context";
-import {IAdvertiser, IAuthUser} from "../actions";
+import { connect } from "react-redux";
+import { Box } from "@mui/material";
+import { NewCampaign } from "./views/adsManager/views/advanced/components/form/NewCampaign";
+import { EditCampaign } from "./views/adsManager/views/advanced/components/form/EditCampaign";
+import { CompletionForm } from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
+import { getActiveAdvertiser } from "../state/context";
+import { IAdvertiser, IAuthUser } from "../actions";
 
 const buildApolloClient = (accessToken: string) => {
   const httpLink = createHttpLink({
@@ -40,18 +40,18 @@ interface Props {
   auth: IAuthUser;
 }
 
-function User({advertisers, auth}: Props) {
+function User({ advertisers, auth }: Props) {
   const match = useRouteMatch();
-  const [activeAdvertiser, setActiveAdvertiser] = useState(getActiveAdvertiser());
-  const client = useMemo(() => buildApolloClient(auth.accessToken), [auth.accessToken])
+  const [activeAdvertiser, setActiveAdvertiser] = useState(
+    getActiveAdvertiser()
+  );
+  const client = useMemo(
+    () => buildApolloClient(auth.accessToken),
+    [auth.accessToken]
+  );
 
-  if (
-    !auth ||
-    !auth.signedIn ||
-    !auth.emailVerified ||
-    !activeAdvertiser
-  ) {
-    return <Redirect to="/a"/>;
+  if (!auth || !auth.signedIn || !auth.emailVerified || !activeAdvertiser) {
+    return <Redirect to="/a" />;
   }
 
   return (
@@ -69,7 +69,7 @@ function User({advertisers, auth}: Props) {
             <Switch>
               {/* /adsmanager */}
               <Route path={`${match.path}/adsmanager/advanced/new`}>
-                <NewCampaign auth={auth} advertiser={activeAdvertiser}/>
+                <NewCampaign auth={auth} advertiser={activeAdvertiser} />
               </Route>
 
               <Route path={`${match.path}/adsmanager/advanced/:campaignId`}>
@@ -96,12 +96,14 @@ function User({advertisers, auth}: Props) {
               </Route>
 
               {/* /campaigns/:campaignId/analytics - */}
-              <Route path={`${match.path}/campaign/:campaignId/analytics/overview`}>
-                <AnalyticsOverview auth={auth}/>
+              <Route
+                path={`${match.path}/campaign/:campaignId/analytics/overview`}
+              >
+                <AnalyticsOverview auth={auth} />
               </Route>
 
               {/* default */}
-              <Redirect to={`${match.path}/campaigns`}/>
+              <Redirect to={`${match.path}/campaigns`} />
             </Switch>
           </Box>
         </Box>
@@ -112,7 +114,7 @@ function User({advertisers, auth}: Props) {
 
 const mapStateToProps = (state: any) => ({
   advertisers: state.advertiserReducer.advertisers,
-  auth: state.authReducer
+  auth: state.authReducer,
 });
 
 export default connect(mapStateToProps)(User);

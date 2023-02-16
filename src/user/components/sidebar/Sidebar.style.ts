@@ -1,7 +1,7 @@
 import { styled } from "@mui/material";
 
 interface NavProps {
-    selected: boolean;
+  selected: boolean;
 }
 
 export const Container = styled("div")`
@@ -34,15 +34,15 @@ export const Nav = styled("div")`
   // ** Selected **
   ${(props: NavProps) => ``}
 
-  ${props =>
-        props.selected
-            ? `
+  ${(props) =>
+    props.selected
+      ? `
         background-color: #F8532BCC;
         color: white;
         font-weight: 500
 
       `
-            : `
+      : `
       background-color: white;
       &:hover{
           background-color: #fafafa;
