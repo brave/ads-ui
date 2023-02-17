@@ -1,5 +1,5 @@
 import React from "react";
-import {IAdvertiser} from "../actions";
+import { IAdvertiser } from "../actions";
 
 export default React.createContext({
   loading: undefined,

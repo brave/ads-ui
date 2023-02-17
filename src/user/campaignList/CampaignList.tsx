@@ -16,11 +16,11 @@ interface Props {
 }
 
 function CampaignList({ advertiserId, canEdit }: Props) {
-  const {loading, data} = useAdvertiserCampaignsQuery({
-    variables: {id: advertiserId}
+  const { loading, data } = useAdvertiserCampaignsQuery({
+    variables: { id: advertiserId },
   });
   const history = useHistory();
-  if (loading) return <LinearProgress/>;
+  if (loading) return <LinearProgress />;
 
   return (
     <EnhancedTable
