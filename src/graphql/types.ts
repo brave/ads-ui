@@ -107,8 +107,6 @@ export type CreateAdvertiserInput = {
   name: Scalars["String"];
   phone?: InputMaybe<Scalars["String"]>;
   referrer?: InputMaybe<Scalars["String"]>;
-  selfServiceCreate?: InputMaybe<Scalars["Boolean"]>;
-  selfServiceEdit?: InputMaybe<Scalars["Boolean"]>;
   state?: InputMaybe<Scalars["String"]>;
   userId?: InputMaybe<Scalars["String"]>;
 };
@@ -373,8 +371,6 @@ export type UpdateAdvertiserInput = {
   phone?: InputMaybe<Scalars["String"]>;
   publicKey?: InputMaybe<Scalars["String"]>;
   referrer?: InputMaybe<Scalars["String"]>;
-  selfServiceCreate?: InputMaybe<Scalars["Boolean"]>;
-  selfServiceEdit?: InputMaybe<Scalars["Boolean"]>;
   state?: InputMaybe<Scalars["String"]>;
 };
 
