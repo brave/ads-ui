@@ -45,4 +45,4 @@ export type IAuthUser = {
 export type IAdvertiser = {
   id: string;
   name: string;
-}
+};

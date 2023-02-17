@@ -17,7 +17,7 @@ const drawerWidth = 240;
 
 interface Props {
   userId: string;
-  advertiserId: string
+  advertiserId: string;
 }
 
 function Sidebar({ advertiserId, userId }: Props) {
