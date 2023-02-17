@@ -17,7 +17,7 @@ const drawerWidth = 240;
 
 interface Props {
   canCreate: boolean;
-};
+}
 
 function Sidebar({ canCreate }: Props) {
   const history = useHistory();

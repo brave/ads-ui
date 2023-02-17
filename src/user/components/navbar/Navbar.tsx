@@ -27,7 +27,7 @@ TopBarProgress.config({
 interface Props {
   dispatch: any;
   canCreate: boolean;
-};
+}
 
 function Navbar({ dispatch, canCreate }: Props) {
   const history = useHistory();
