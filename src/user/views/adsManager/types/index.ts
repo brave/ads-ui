@@ -62,6 +62,7 @@ export type Creative = {
   title: string;
   body: string;
   targetUrl: string;
+  targetUrlValid?: boolean;
 };
 
 export const initialCampaign: CampaignForm = {
