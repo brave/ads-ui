@@ -3,8 +3,8 @@ import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import React from "react";
 
 interface Props {
-  primary: string;
-  secondary: string | React.ReactNode;
+  primary?: string;
+  secondary?: string | React.ReactNode;
   error?: string;
 }
 
@@ -23,7 +23,6 @@ export function CustomListItemText({ primary, secondary, error }: Props) {
   return (
     <ListItem>
       <ListItemText
-        sx={{ mb: 1 }}
         primary={primary}
         secondary={isError ? getError(error) : secondary}
         primaryTypographyProps={{
@@ -32,7 +31,7 @@ export function CustomListItemText({ primary, secondary, error }: Props) {
           color: "grey",
         }}
         secondaryTypographyProps={{
-          marginTop: "4px",
+          marginTop: !!primary ? "4px" : "0",
           fontSize: "18px",
           color: "black",
           p: isError ? 1 : 0,

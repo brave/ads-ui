@@ -181,6 +181,7 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
           targetUrl: c.payloadNotification!.targetUrl,
           title: c.payloadNotification!.title,
           body: c.payloadNotification!.body,
+          targetUrlValid: true,
         };
       }),
       price: adSet.ads?.[0].prices[0].amount || 0,

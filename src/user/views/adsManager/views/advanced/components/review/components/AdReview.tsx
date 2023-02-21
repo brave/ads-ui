@@ -42,6 +42,7 @@ export function AdReview({ ad, adIdx, error }: Props) {
           secondary={ad.targetUrl}
           error={hasError ? adError.targetUrl : ""}
         />
+        <CustomListItemText error={hasError ? adError.targetUrlValid : ""} />
       </List>
     </>
   );

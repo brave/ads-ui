@@ -17,6 +17,7 @@ import {
   Creative,
   initialCreative,
 } from "../../../../types";
+import { UrlResolver } from "../../../../../../../components/Url/UrlResolver";
 
 interface Props {
   index: number;
@@ -124,8 +125,9 @@ function Ad({ adSetIdx, adIdx, isEdit, creative }: AdProps) {
         disabled={isEdit && !!creative.id}
       />
 
-      <FormikTextField
+      <UrlResolver
         name={`adSets.${adSetIdx}.creatives.${adIdx}.targetUrl`}
+        validator={`adSets.${adSetIdx}.creatives.${adIdx}.targetUrlValid`}
         label="Creative Target URL"
         disabled={isEdit && !!creative.id}
       />
