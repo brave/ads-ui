@@ -3,6 +3,7 @@ import { CodegenConfig } from "@graphql-codegen/cli";
 const config: CodegenConfig = {
   schema: "../ads-serve/src/graphql/schema.graphql",
   documents: "./src/**/*.graphql",
+  hooks: { afterAllFileWrite: ["prettier --write"] },
   generates: {
     "src/": {
       preset: "near-operation-file",
