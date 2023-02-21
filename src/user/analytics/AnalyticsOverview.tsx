@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import {Box, Divider, LinearProgress, Typography} from "@mui/material";
+import { Box, Divider, LinearProgress, Typography } from "@mui/material";
 
 import moment from "moment/moment";
-import {useAnalyticOverviewQuery, AnalyticOverviewQuery} from "../../graphql/analytics-overview.generated";
+import {
+  useAnalyticOverviewQuery,
+  AnalyticOverviewQuery,
+} from "../../graphql/analytics-overview.generated";
 import ReportUtils from "./analyticsOverview/components/ReportUtils";
-import {CampaignOverview} from "./analyticsOverview/reports/campaign/CampaignOverview";
-import {CampaignFormat} from "../../graphql/types";
-import {useParams} from "react-router-dom";
+import { CampaignOverview } from "./analyticsOverview/reports/campaign/CampaignOverview";
+import { CampaignFormat } from "../../graphql/types";
+import { useParams } from "react-router-dom";
 
 interface Params {
   campaignId: string;
@@ -49,7 +52,8 @@ const AnalyticsOverview: React.FC<Props> = ({ auth }: Props) => {
     onCompleted: (d) => initializeCampaign(d, today),
   });
 
-  if (loading || !data || !data.campaign || !startDate) return <LinearProgress />
+  if (loading || !data || !data.campaign || !startDate)
+    return <LinearProgress />;
 
   const filteredEngagements = data.campaign.engagements?.filter(
     (engagement) =>
@@ -78,7 +82,8 @@ const AnalyticsOverview: React.FC<Props> = ({ auth }: Props) => {
 
       {data.campaign.format === CampaignFormat.NtpSi && (
         <Typography>
-          Sponsored Image reporting is a statistical approximation, derived from the percentage of Brave users that are opted-in to Brave Ads.
+          Sponsored Image reporting is a statistical approximation, derived from
+          the percentage of Brave users that are opted-in to Brave Ads.
         </Typography>
       )}
     </Box>

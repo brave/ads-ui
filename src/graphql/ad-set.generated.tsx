@@ -1,100 +1,306 @@
-import * as Types from './types';
+import * as Types from "./types";
 
-import { gql } from '@apollo/client';
-import { CreativeFragmentDoc } from './creative.generated';
-import * as Apollo from '@apollo/client';
+import { gql } from "@apollo/client";
+import { CreativeFragmentDoc } from "./creative.generated";
+import * as Apollo from "@apollo/client";
 const defaultOptions = {} as const;
-export type AdSetFragment = { __typename?: 'AdSet', id: string, billingType?: string | null, name?: string | null, totalMax: number, perDay: number, state: string, execution: string, keywords?: Array<string> | null, keywordSimilarity?: number | null, negativeKeywords?: Array<string> | null, bannedKeywords?: Array<string> | null, targetingTerms?: Array<string> | null, segments?: Array<{ __typename?: 'Segment', code: string, name: string }> | null, oses?: Array<{ __typename?: 'OS', code: string, name: string }> | null, conversions?: Array<{ __typename?: 'Conversion', id: string, type: string, urlPattern: string, observationWindow: number, extractExternalId: boolean }> | null, ads?: Array<{ __typename?: 'Ad', id: string, state: string, prices: Array<{ __typename?: 'AdPrice', amount: number, type: string }>, webhooks: Array<{ __typename?: 'Webhook', type: string, url: string }>, creative: { __typename?: 'Creative', id: string, createdAt: any, modifiedAt: any, name: string, state: string, type: { __typename?: 'CreativeType', code: string }, payloadNotification?: { __typename?: 'NotificationPayload', body: string, title: string, targetUrl: string } | null } }> | null };
+export type AdSetFragment = {
+  __typename?: "AdSet";
+  id: string;
+  billingType?: string | null;
+  name?: string | null;
+  totalMax: number;
+  perDay: number;
+  state: string;
+  execution: string;
+  keywords?: Array<string> | null;
+  keywordSimilarity?: number | null;
+  negativeKeywords?: Array<string> | null;
+  bannedKeywords?: Array<string> | null;
+  targetingTerms?: Array<string> | null;
+  segments?: Array<{
+    __typename?: "Segment";
+    code: string;
+    name: string;
+  }> | null;
+  oses?: Array<{ __typename?: "OS"; code: string; name: string }> | null;
+  conversions?: Array<{
+    __typename?: "Conversion";
+    id: string;
+    type: string;
+    urlPattern: string;
+    observationWindow: number;
+    extractExternalId: boolean;
+  }> | null;
+  ads?: Array<{
+    __typename?: "Ad";
+    id: string;
+    state: string;
+    prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
+    webhooks: Array<{ __typename?: "Webhook"; type: string; url: string }>;
+    creative: {
+      __typename?: "Creative";
+      id: string;
+      createdAt: any;
+      modifiedAt: any;
+      name: string;
+      state: string;
+      type: { __typename?: "CreativeType"; code: string };
+      payloadNotification?: {
+        __typename?: "NotificationPayload";
+        body: string;
+        title: string;
+        targetUrl: string;
+      } | null;
+    };
+  }> | null;
+};
 
-export type AdFragment = { __typename?: 'Ad', id: string, state: string, prices: Array<{ __typename?: 'AdPrice', amount: number, type: string }>, webhooks: Array<{ __typename?: 'Webhook', type: string, url: string }>, creative: { __typename?: 'Creative', id: string, createdAt: any, modifiedAt: any, name: string, state: string, type: { __typename?: 'CreativeType', code: string }, payloadNotification?: { __typename?: 'NotificationPayload', body: string, title: string, targetUrl: string } | null } };
+export type AdFragment = {
+  __typename?: "Ad";
+  id: string;
+  state: string;
+  prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
+  webhooks: Array<{ __typename?: "Webhook"; type: string; url: string }>;
+  creative: {
+    __typename?: "Creative";
+    id: string;
+    createdAt: any;
+    modifiedAt: any;
+    name: string;
+    state: string;
+    type: { __typename?: "CreativeType"; code: string };
+    payloadNotification?: {
+      __typename?: "NotificationPayload";
+      body: string;
+      title: string;
+      targetUrl: string;
+    } | null;
+  };
+};
 
 export type CreateAdSetMutationVariables = Types.Exact<{
   createAdSetInput: Types.CreateAdSetInput;
 }>;
 
-
-export type CreateAdSetMutation = { __typename?: 'Mutation', createAdSet: { __typename?: 'AdSet', id: string, billingType?: string | null, name?: string | null, totalMax: number, perDay: number, state: string, execution: string, keywords?: Array<string> | null, keywordSimilarity?: number | null, negativeKeywords?: Array<string> | null, bannedKeywords?: Array<string> | null, targetingTerms?: Array<string> | null, segments?: Array<{ __typename?: 'Segment', code: string, name: string }> | null, oses?: Array<{ __typename?: 'OS', code: string, name: string }> | null, conversions?: Array<{ __typename?: 'Conversion', id: string, type: string, urlPattern: string, observationWindow: number, extractExternalId: boolean }> | null, ads?: Array<{ __typename?: 'Ad', id: string, state: string, prices: Array<{ __typename?: 'AdPrice', amount: number, type: string }>, webhooks: Array<{ __typename?: 'Webhook', type: string, url: string }>, creative: { __typename?: 'Creative', id: string, createdAt: any, modifiedAt: any, name: string, state: string, type: { __typename?: 'CreativeType', code: string }, payloadNotification?: { __typename?: 'NotificationPayload', body: string, title: string, targetUrl: string } | null } }> | null } };
+export type CreateAdSetMutation = {
+  __typename?: "Mutation";
+  createAdSet: {
+    __typename?: "AdSet";
+    id: string;
+    billingType?: string | null;
+    name?: string | null;
+    totalMax: number;
+    perDay: number;
+    state: string;
+    execution: string;
+    keywords?: Array<string> | null;
+    keywordSimilarity?: number | null;
+    negativeKeywords?: Array<string> | null;
+    bannedKeywords?: Array<string> | null;
+    targetingTerms?: Array<string> | null;
+    segments?: Array<{
+      __typename?: "Segment";
+      code: string;
+      name: string;
+    }> | null;
+    oses?: Array<{ __typename?: "OS"; code: string; name: string }> | null;
+    conversions?: Array<{
+      __typename?: "Conversion";
+      id: string;
+      type: string;
+      urlPattern: string;
+      observationWindow: number;
+      extractExternalId: boolean;
+    }> | null;
+    ads?: Array<{
+      __typename?: "Ad";
+      id: string;
+      state: string;
+      prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
+      webhooks: Array<{ __typename?: "Webhook"; type: string; url: string }>;
+      creative: {
+        __typename?: "Creative";
+        id: string;
+        createdAt: any;
+        modifiedAt: any;
+        name: string;
+        state: string;
+        type: { __typename?: "CreativeType"; code: string };
+        payloadNotification?: {
+          __typename?: "NotificationPayload";
+          body: string;
+          title: string;
+          targetUrl: string;
+        } | null;
+      };
+    }> | null;
+  };
+};
 
 export type UpdateAdSetMutationVariables = Types.Exact<{
   updateAdSetInput: Types.UpdateAdSetInput;
 }>;
 
-
-export type UpdateAdSetMutation = { __typename?: 'Mutation', updateAdSet: { __typename?: 'AdSet', id: string, billingType?: string | null, name?: string | null, totalMax: number, perDay: number, state: string, execution: string, keywords?: Array<string> | null, keywordSimilarity?: number | null, negativeKeywords?: Array<string> | null, bannedKeywords?: Array<string> | null, targetingTerms?: Array<string> | null, segments?: Array<{ __typename?: 'Segment', code: string, name: string }> | null, oses?: Array<{ __typename?: 'OS', code: string, name: string }> | null, conversions?: Array<{ __typename?: 'Conversion', id: string, type: string, urlPattern: string, observationWindow: number, extractExternalId: boolean }> | null, ads?: Array<{ __typename?: 'Ad', id: string, state: string, prices: Array<{ __typename?: 'AdPrice', amount: number, type: string }>, webhooks: Array<{ __typename?: 'Webhook', type: string, url: string }>, creative: { __typename?: 'Creative', id: string, createdAt: any, modifiedAt: any, name: string, state: string, type: { __typename?: 'CreativeType', code: string }, payloadNotification?: { __typename?: 'NotificationPayload', body: string, title: string, targetUrl: string } | null } }> | null } };
+export type UpdateAdSetMutation = {
+  __typename?: "Mutation";
+  updateAdSet: {
+    __typename?: "AdSet";
+    id: string;
+    billingType?: string | null;
+    name?: string | null;
+    totalMax: number;
+    perDay: number;
+    state: string;
+    execution: string;
+    keywords?: Array<string> | null;
+    keywordSimilarity?: number | null;
+    negativeKeywords?: Array<string> | null;
+    bannedKeywords?: Array<string> | null;
+    targetingTerms?: Array<string> | null;
+    segments?: Array<{
+      __typename?: "Segment";
+      code: string;
+      name: string;
+    }> | null;
+    oses?: Array<{ __typename?: "OS"; code: string; name: string }> | null;
+    conversions?: Array<{
+      __typename?: "Conversion";
+      id: string;
+      type: string;
+      urlPattern: string;
+      observationWindow: number;
+      extractExternalId: boolean;
+    }> | null;
+    ads?: Array<{
+      __typename?: "Ad";
+      id: string;
+      state: string;
+      prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
+      webhooks: Array<{ __typename?: "Webhook"; type: string; url: string }>;
+      creative: {
+        __typename?: "Creative";
+        id: string;
+        createdAt: any;
+        modifiedAt: any;
+        name: string;
+        state: string;
+        type: { __typename?: "CreativeType"; code: string };
+        payloadNotification?: {
+          __typename?: "NotificationPayload";
+          body: string;
+          title: string;
+          targetUrl: string;
+        } | null;
+      };
+    }> | null;
+  };
+};
 
 export type CreateAdMutationVariables = Types.Exact<{
   createAdInput: Types.CreateAdInput;
 }>;
 
-
-export type CreateAdMutation = { __typename?: 'Mutation', createAd: { __typename?: 'Ad', id: string, state: string, prices: Array<{ __typename?: 'AdPrice', amount: number, type: string }>, webhooks: Array<{ __typename?: 'Webhook', type: string, url: string }>, creative: { __typename?: 'Creative', id: string, createdAt: any, modifiedAt: any, name: string, state: string, type: { __typename?: 'CreativeType', code: string }, payloadNotification?: { __typename?: 'NotificationPayload', body: string, title: string, targetUrl: string } | null } } };
+export type CreateAdMutation = {
+  __typename?: "Mutation";
+  createAd: {
+    __typename?: "Ad";
+    id: string;
+    state: string;
+    prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
+    webhooks: Array<{ __typename?: "Webhook"; type: string; url: string }>;
+    creative: {
+      __typename?: "Creative";
+      id: string;
+      createdAt: any;
+      modifiedAt: any;
+      name: string;
+      state: string;
+      type: { __typename?: "CreativeType"; code: string };
+      payloadNotification?: {
+        __typename?: "NotificationPayload";
+        body: string;
+        title: string;
+        targetUrl: string;
+      } | null;
+    };
+  };
+};
 
 export type UpdateAdMutationVariables = Types.Exact<{
   updateAdInput: Types.UpdateAdInput;
 }>;
 
-
-export type UpdateAdMutation = { __typename?: 'Mutation', updateAd: { __typename?: 'Ad', id: string } };
+export type UpdateAdMutation = {
+  __typename?: "Mutation";
+  updateAd: { __typename?: "Ad"; id: string };
+};
 
 export const AdFragmentDoc = gql`
-    fragment Ad on Ad {
-  id
-  state
-  prices {
-    amount
-    type
-  }
-  webhooks {
-    type
-    url
-  }
-  creative {
-    ...Creative
-  }
-}
-    ${CreativeFragmentDoc}`;
-export const AdSetFragmentDoc = gql`
-    fragment AdSet on AdSet {
-  id
-  billingType
-  name
-  totalMax
-  perDay
-  state
-  execution
-  keywords
-  keywordSimilarity
-  negativeKeywords
-  bannedKeywords
-  targetingTerms
-  segments {
-    code
-    name
-  }
-  oses {
-    code
-    name
-  }
-  conversions {
+  fragment Ad on Ad {
     id
-    type
-    urlPattern
-    observationWindow
-    extractExternalId
+    state
+    prices {
+      amount
+      type
+    }
+    webhooks {
+      type
+      url
+    }
+    creative {
+      ...Creative
+    }
   }
-  ads {
-    ...Ad
+  ${CreativeFragmentDoc}
+`;
+export const AdSetFragmentDoc = gql`
+  fragment AdSet on AdSet {
+    id
+    billingType
+    name
+    totalMax
+    perDay
+    state
+    execution
+    keywords
+    keywordSimilarity
+    negativeKeywords
+    bannedKeywords
+    targetingTerms
+    segments {
+      code
+      name
+    }
+    oses {
+      code
+      name
+    }
+    conversions {
+      id
+      type
+      urlPattern
+      observationWindow
+      extractExternalId
+    }
+    ads {
+      ...Ad
+    }
   }
-}
-    ${AdFragmentDoc}`;
+  ${AdFragmentDoc}
+`;
 export const CreateAdSetDocument = gql`
-    mutation createAdSet($createAdSetInput: CreateAdSetInput!) {
-  createAdSet(createAdSetInput: $createAdSetInput) {
-    ...AdSet
+  mutation createAdSet($createAdSetInput: CreateAdSetInput!) {
+    createAdSet(createAdSetInput: $createAdSetInput) {
+      ...AdSet
+    }
   }
-}
-    ${AdSetFragmentDoc}`;
-export type CreateAdSetMutationFn = Apollo.MutationFunction<CreateAdSetMutation, CreateAdSetMutationVariables>;
+  ${AdSetFragmentDoc}
+`;
+export type CreateAdSetMutationFn = Apollo.MutationFunction<
+  CreateAdSetMutation,
+  CreateAdSetMutationVariables
+>;
 
 /**
  * __useCreateAdSetMutation__
@@ -113,21 +319,39 @@ export type CreateAdSetMutationFn = Apollo.MutationFunction<CreateAdSetMutation,
  *   },
  * });
  */
-export function useCreateAdSetMutation(baseOptions?: Apollo.MutationHookOptions<CreateAdSetMutation, CreateAdSetMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateAdSetMutation, CreateAdSetMutationVariables>(CreateAdSetDocument, options);
-      }
-export type CreateAdSetMutationHookResult = ReturnType<typeof useCreateAdSetMutation>;
-export type CreateAdSetMutationResult = Apollo.MutationResult<CreateAdSetMutation>;
-export type CreateAdSetMutationOptions = Apollo.BaseMutationOptions<CreateAdSetMutation, CreateAdSetMutationVariables>;
-export const UpdateAdSetDocument = gql`
-    mutation updateAdSet($updateAdSetInput: UpdateAdSetInput!) {
-  updateAdSet(updateAdSetInput: $updateAdSetInput) {
-    ...AdSet
-  }
+export function useCreateAdSetMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateAdSetMutation,
+    CreateAdSetMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<CreateAdSetMutation, CreateAdSetMutationVariables>(
+    CreateAdSetDocument,
+    options
+  );
 }
-    ${AdSetFragmentDoc}`;
-export type UpdateAdSetMutationFn = Apollo.MutationFunction<UpdateAdSetMutation, UpdateAdSetMutationVariables>;
+export type CreateAdSetMutationHookResult = ReturnType<
+  typeof useCreateAdSetMutation
+>;
+export type CreateAdSetMutationResult =
+  Apollo.MutationResult<CreateAdSetMutation>;
+export type CreateAdSetMutationOptions = Apollo.BaseMutationOptions<
+  CreateAdSetMutation,
+  CreateAdSetMutationVariables
+>;
+export const UpdateAdSetDocument = gql`
+  mutation updateAdSet($updateAdSetInput: UpdateAdSetInput!) {
+    updateAdSet(updateAdSetInput: $updateAdSetInput) {
+      ...AdSet
+    }
+  }
+  ${AdSetFragmentDoc}
+`;
+export type UpdateAdSetMutationFn = Apollo.MutationFunction<
+  UpdateAdSetMutation,
+  UpdateAdSetMutationVariables
+>;
 
 /**
  * __useUpdateAdSetMutation__
@@ -146,21 +370,39 @@ export type UpdateAdSetMutationFn = Apollo.MutationFunction<UpdateAdSetMutation,
  *   },
  * });
  */
-export function useUpdateAdSetMutation(baseOptions?: Apollo.MutationHookOptions<UpdateAdSetMutation, UpdateAdSetMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateAdSetMutation, UpdateAdSetMutationVariables>(UpdateAdSetDocument, options);
-      }
-export type UpdateAdSetMutationHookResult = ReturnType<typeof useUpdateAdSetMutation>;
-export type UpdateAdSetMutationResult = Apollo.MutationResult<UpdateAdSetMutation>;
-export type UpdateAdSetMutationOptions = Apollo.BaseMutationOptions<UpdateAdSetMutation, UpdateAdSetMutationVariables>;
-export const CreateAdDocument = gql`
-    mutation createAd($createAdInput: CreateAdInput!) {
-  createAd(createAdInput: $createAdInput) {
-    ...Ad
-  }
+export function useUpdateAdSetMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateAdSetMutation,
+    UpdateAdSetMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<UpdateAdSetMutation, UpdateAdSetMutationVariables>(
+    UpdateAdSetDocument,
+    options
+  );
 }
-    ${AdFragmentDoc}`;
-export type CreateAdMutationFn = Apollo.MutationFunction<CreateAdMutation, CreateAdMutationVariables>;
+export type UpdateAdSetMutationHookResult = ReturnType<
+  typeof useUpdateAdSetMutation
+>;
+export type UpdateAdSetMutationResult =
+  Apollo.MutationResult<UpdateAdSetMutation>;
+export type UpdateAdSetMutationOptions = Apollo.BaseMutationOptions<
+  UpdateAdSetMutation,
+  UpdateAdSetMutationVariables
+>;
+export const CreateAdDocument = gql`
+  mutation createAd($createAdInput: CreateAdInput!) {
+    createAd(createAdInput: $createAdInput) {
+      ...Ad
+    }
+  }
+  ${AdFragmentDoc}
+`;
+export type CreateAdMutationFn = Apollo.MutationFunction<
+  CreateAdMutation,
+  CreateAdMutationVariables
+>;
 
 /**
  * __useCreateAdMutation__
@@ -179,21 +421,35 @@ export type CreateAdMutationFn = Apollo.MutationFunction<CreateAdMutation, Creat
  *   },
  * });
  */
-export function useCreateAdMutation(baseOptions?: Apollo.MutationHookOptions<CreateAdMutation, CreateAdMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateAdMutation, CreateAdMutationVariables>(CreateAdDocument, options);
-      }
+export function useCreateAdMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateAdMutation,
+    CreateAdMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<CreateAdMutation, CreateAdMutationVariables>(
+    CreateAdDocument,
+    options
+  );
+}
 export type CreateAdMutationHookResult = ReturnType<typeof useCreateAdMutation>;
 export type CreateAdMutationResult = Apollo.MutationResult<CreateAdMutation>;
-export type CreateAdMutationOptions = Apollo.BaseMutationOptions<CreateAdMutation, CreateAdMutationVariables>;
+export type CreateAdMutationOptions = Apollo.BaseMutationOptions<
+  CreateAdMutation,
+  CreateAdMutationVariables
+>;
 export const UpdateAdDocument = gql`
-    mutation updateAd($updateAdInput: UpdateAdInput!) {
-  updateAd(updateAdInput: $updateAdInput) {
-    id
+  mutation updateAd($updateAdInput: UpdateAdInput!) {
+    updateAd(updateAdInput: $updateAdInput) {
+      id
+    }
   }
-}
-    `;
-export type UpdateAdMutationFn = Apollo.MutationFunction<UpdateAdMutation, UpdateAdMutationVariables>;
+`;
+export type UpdateAdMutationFn = Apollo.MutationFunction<
+  UpdateAdMutation,
+  UpdateAdMutationVariables
+>;
 
 /**
  * __useUpdateAdMutation__
@@ -212,10 +468,21 @@ export type UpdateAdMutationFn = Apollo.MutationFunction<UpdateAdMutation, Updat
  *   },
  * });
  */
-export function useUpdateAdMutation(baseOptions?: Apollo.MutationHookOptions<UpdateAdMutation, UpdateAdMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateAdMutation, UpdateAdMutationVariables>(UpdateAdDocument, options);
-      }
+export function useUpdateAdMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateAdMutation,
+    UpdateAdMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<UpdateAdMutation, UpdateAdMutationVariables>(
+    UpdateAdDocument,
+    options
+  );
+}
 export type UpdateAdMutationHookResult = ReturnType<typeof useUpdateAdMutation>;
 export type UpdateAdMutationResult = Apollo.MutationResult<UpdateAdMutation>;
-export type UpdateAdMutationOptions = Apollo.BaseMutationOptions<UpdateAdMutation, UpdateAdMutationVariables>;
+export type UpdateAdMutationOptions = Apollo.BaseMutationOptions<
+  UpdateAdMutation,
+  UpdateAdMutationVariables
+>;

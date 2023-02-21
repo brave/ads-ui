@@ -13,7 +13,7 @@ interface Props {
   helperText?: string;
   error?: boolean;
   label?: string;
-  disabled? :boolean;
+  disabled?: boolean;
 }
 
 const formatDateForInput = (d: Date, tz: string): string =>

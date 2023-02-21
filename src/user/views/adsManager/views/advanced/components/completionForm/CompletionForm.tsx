@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 
-import Section from '../../../../../../../components/section/Section';
-import {Text} from "../../../../../../../components/Text/Text";
+import Section from "../../../../../../../components/section/Section";
+import { Text } from "../../../../../../../components/Text/Text";
 import present from "./assets/present.png";
-import {Link, useHistory, useParams} from 'react-router-dom';
-import {Box, Button, Card, Typography} from "@mui/material";
+import { Link, useHistory, useParams } from "react-router-dom";
+import { Box, Button, Card, Typography } from "@mui/material";
 
 interface Params {
   mode: "edit" | "new";
@@ -15,9 +15,16 @@ export function CompletionForm() {
   const params = useParams<Params>();
 
   return (
-    <Card sx={{ p: 2, display: "flex", flexDirection: "column", alignItems: "center" }}>
+    <Card
+      sx={{
+        p: 2,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       <Box>
-        <img src={present} width="600px" style={{ marginRight: 50 }}/>
+        <img src={present} width="600px" style={{ marginRight: 50 }} />
       </Box>
 
       <Typography variant="h4" sx={{ textAlign: "center", mb: 3 }}>
@@ -26,14 +33,18 @@ export function CompletionForm() {
 
       {params.mode === "edit" && (
         <Typography sx={{ textAlign: "center" }} variant="h6">
-          Your campaign has been updated and new creatives will be reviewed by our ads team. <br /> We'll send you an e-mail as soon as your creatives are approved and activated. Thank you for using Brave Ads!
+          Your campaign has been updated and new creatives will be reviewed by
+          our ads team. <br /> We'll send you an e-mail as soon as your
+          creatives are approved and activated. Thank you for using Brave Ads!
         </Typography>
       )}
 
       {params.mode === "new" && (
         <Typography sx={{ textAlign: "center" }} variant="h6">
-          Your campaign has been created and is now being reviewed by our ads team. <br />
-          We'll send you an e-mail as soon as your campaign is approved and activated. Thank you for using Brave Ads!
+          Your campaign has been created and is now being reviewed by our ads
+          team. <br />
+          We'll send you an e-mail as soon as your campaign is approved and
+          activated. Thank you for using Brave Ads!
         </Typography>
       )}
 

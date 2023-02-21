@@ -1,18 +1,18 @@
-import {Form, FormikValues, useFormik, useFormikContext} from "formik";
-import {Tab, Tabs} from "@mui/material";
-import {CampaignFields} from "../../campaign/CampaignFields";
-import {AdSetFields} from "../../adSet/AdSetFields";
-import {AdField} from "../../ads/AdField";
-import {Review} from "../../review/Review";
-import React, {useState} from "react";
-import {CampaignForm} from "../../../../../types";
+import { Form, FormikValues, useFormik, useFormikContext } from "formik";
+import { Tab, Tabs } from "@mui/material";
+import { CampaignFields } from "../../campaign/CampaignFields";
+import { AdSetFields } from "../../adSet/AdSetFields";
+import { AdField } from "../../ads/AdField";
+import { Review } from "../../review/Review";
+import React, { useState } from "react";
+import { CampaignForm } from "../../../../../types";
 
 interface Props {
   isEdit: boolean;
   values: CampaignForm;
 }
 
-export function BaseForm({isEdit, values}: Props) {
+export function BaseForm({ isEdit, values }: Props) {
   const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -21,23 +21,20 @@ export function BaseForm({isEdit, values}: Props) {
 
   const showCard = (values: FormikValues) => {
     return value > 0 && value !== values.adSets.length + 1;
-  }
+  };
 
   return (
     <Form>
       <Tabs value={value} onChange={handleChange}>
-        <Tab label="Campaign" value={0}/>
+        <Tab label="Campaign" value={0} />
         {values.adSets.map((a, index) => (
-          <Tab label={`Ad Set ${index + 1}`} value={index + 1}/>
+          <Tab label={`Ad Set ${index + 1}`} value={index + 1} />
         ))}
-        <Tab label="Review" value={values.adSets.length + 1}/>
+        <Tab label="Review" value={values.adSets.length + 1} />
       </Tabs>
 
       {value === 0 && (
-        <CampaignFields
-          onNext={() => setValue(value + 1)}
-          isEdit={isEdit}
-        />
+        <CampaignFields onNext={() => setValue(value + 1)} isEdit={isEdit} />
       )}
 
       {showCard(values) && (
@@ -58,5 +55,5 @@ export function BaseForm({isEdit, values}: Props) {
 
       {value === values.adSets.length + 1 && <Review isEdit={isEdit} />}
     </Form>
-  )
+  );
 }

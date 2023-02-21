@@ -1,10 +1,9 @@
 import { Chip, Tooltip } from "@mui/material";
 import { isPast, parseISO } from "date-fns";
 import React from "react";
-import {CampaignFragment} from "../../graphql/campaign.generated";
-import {calcColorForState} from "./stateColors";
+import { CampaignFragment } from "../../graphql/campaign.generated";
+import { calcColorForState } from "./stateColors";
 import _ from "lodash";
-
 
 export const CampaignStatus: React.FC<{
   campaign: Pick<CampaignFragment, "state" | "endAt">;

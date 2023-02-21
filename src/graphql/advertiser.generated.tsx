@@ -1,39 +1,140 @@
-import * as Types from './types';
+import * as Types from "./types";
 
-import { gql } from '@apollo/client';
-import { CampaignFragmentDoc } from './campaign.generated';
-import * as Apollo from '@apollo/client';
+import { gql } from "@apollo/client";
+import { CampaignFragmentDoc } from "./campaign.generated";
+import * as Apollo from "@apollo/client";
 const defaultOptions = {} as const;
 export type AdvertiserQueryVariables = Types.Exact<{
-  id: Types.Scalars['String'];
+  id: Types.Scalars["String"];
 }>;
 
-
-export type AdvertiserQuery = { __typename?: 'Query', advertiser?: { __typename?: 'Advertiser', id: string, publicKey?: string | null } | null };
+export type AdvertiserQuery = {
+  __typename?: "Query";
+  advertiser?: {
+    __typename?: "Advertiser";
+    id: string;
+    publicKey?: string | null;
+  } | null;
+};
 
 export type UpdateAdvertiserMutationVariables = Types.Exact<{
   updateAdvertiserInput: Types.UpdateAdvertiserInput;
 }>;
 
-
-export type UpdateAdvertiserMutation = { __typename?: 'Mutation', updateAdvertiser: { __typename?: 'Advertiser', id: string, publicKey?: string | null } };
+export type UpdateAdvertiserMutation = {
+  __typename?: "Mutation";
+  updateAdvertiser: {
+    __typename?: "Advertiser";
+    id: string;
+    publicKey?: string | null;
+  };
+};
 
 export type AdvertiserCampaignsQueryVariables = Types.Exact<{
-  id: Types.Scalars['String'];
+  id: Types.Scalars["String"];
 }>;
 
-
-export type AdvertiserCampaignsQuery = { __typename?: 'Query', advertiser?: { __typename?: 'Advertiser', campaigns: Array<{ __typename?: 'Campaign', id: string, name: string, state: string, dailyCap: number, priority: number, passThroughRate: number, pacingOverride: boolean, pacingStrategy: Types.CampaignPacingStrategies, externalId: string, currency: string, budget: number, dailyBudget: number, spent: number, createdAt: any, startAt: any, endAt: any, type: string, format: Types.CampaignFormat, dayProportion?: number | null, geoTargets?: Array<{ __typename?: 'Geocode', code: string, name: string }> | null, adSets: Array<{ __typename?: 'AdSet', id: string, billingType?: string | null, name?: string | null, totalMax: number, perDay: number, state: string, execution: string, keywords?: Array<string> | null, keywordSimilarity?: number | null, negativeKeywords?: Array<string> | null, bannedKeywords?: Array<string> | null, targetingTerms?: Array<string> | null, segments?: Array<{ __typename?: 'Segment', code: string, name: string }> | null, oses?: Array<{ __typename?: 'OS', code: string, name: string }> | null, conversions?: Array<{ __typename?: 'Conversion', id: string, type: string, urlPattern: string, observationWindow: number, extractExternalId: boolean }> | null, ads?: Array<{ __typename?: 'Ad', id: string, state: string, prices: Array<{ __typename?: 'AdPrice', amount: number, type: string }>, webhooks: Array<{ __typename?: 'Webhook', type: string, url: string }>, creative: { __typename?: 'Creative', id: string, createdAt: any, modifiedAt: any, name: string, state: string, type: { __typename?: 'CreativeType', code: string }, payloadNotification?: { __typename?: 'NotificationPayload', body: string, title: string, targetUrl: string } | null } }> | null }> }> } | null };
-
+export type AdvertiserCampaignsQuery = {
+  __typename?: "Query";
+  advertiser?: {
+    __typename?: "Advertiser";
+    campaigns: Array<{
+      __typename?: "Campaign";
+      id: string;
+      name: string;
+      state: string;
+      dailyCap: number;
+      priority: number;
+      passThroughRate: number;
+      pacingOverride: boolean;
+      pacingStrategy: Types.CampaignPacingStrategies;
+      externalId: string;
+      currency: string;
+      budget: number;
+      dailyBudget: number;
+      spent: number;
+      createdAt: any;
+      startAt: any;
+      endAt: any;
+      type: string;
+      format: Types.CampaignFormat;
+      dayProportion?: number | null;
+      geoTargets?: Array<{
+        __typename?: "Geocode";
+        code: string;
+        name: string;
+      }> | null;
+      adSets: Array<{
+        __typename?: "AdSet";
+        id: string;
+        billingType?: string | null;
+        name?: string | null;
+        totalMax: number;
+        perDay: number;
+        state: string;
+        execution: string;
+        keywords?: Array<string> | null;
+        keywordSimilarity?: number | null;
+        negativeKeywords?: Array<string> | null;
+        bannedKeywords?: Array<string> | null;
+        targetingTerms?: Array<string> | null;
+        segments?: Array<{
+          __typename?: "Segment";
+          code: string;
+          name: string;
+        }> | null;
+        oses?: Array<{ __typename?: "OS"; code: string; name: string }> | null;
+        conversions?: Array<{
+          __typename?: "Conversion";
+          id: string;
+          type: string;
+          urlPattern: string;
+          observationWindow: number;
+          extractExternalId: boolean;
+        }> | null;
+        ads?: Array<{
+          __typename?: "Ad";
+          id: string;
+          state: string;
+          prices: Array<{
+            __typename?: "AdPrice";
+            amount: number;
+            type: string;
+          }>;
+          webhooks: Array<{
+            __typename?: "Webhook";
+            type: string;
+            url: string;
+          }>;
+          creative: {
+            __typename?: "Creative";
+            id: string;
+            createdAt: any;
+            modifiedAt: any;
+            name: string;
+            state: string;
+            type: { __typename?: "CreativeType"; code: string };
+            payloadNotification?: {
+              __typename?: "NotificationPayload";
+              body: string;
+              title: string;
+              targetUrl: string;
+            } | null;
+          };
+        }> | null;
+      }>;
+    }>;
+  } | null;
+};
 
 export const AdvertiserDocument = gql`
-    query advertiser($id: String!) {
-  advertiser(id: $id) {
-    id
-    publicKey
+  query advertiser($id: String!) {
+    advertiser(id: $id) {
+      id
+      publicKey
+    }
   }
-}
-    `;
+`;
 
 /**
  * __useAdvertiserQuery__
@@ -51,29 +152,53 @@ export const AdvertiserDocument = gql`
  *   },
  * });
  */
-export function useAdvertiserQuery(baseOptions: Apollo.QueryHookOptions<AdvertiserQuery, AdvertiserQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AdvertiserQuery, AdvertiserQueryVariables>(AdvertiserDocument, options);
-      }
-export function useAdvertiserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdvertiserQuery, AdvertiserQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AdvertiserQuery, AdvertiserQueryVariables>(AdvertiserDocument, options);
-        }
-export type AdvertiserQueryHookResult = ReturnType<typeof useAdvertiserQuery>;
-export type AdvertiserLazyQueryHookResult = ReturnType<typeof useAdvertiserLazyQuery>;
-export type AdvertiserQueryResult = Apollo.QueryResult<AdvertiserQuery, AdvertiserQueryVariables>;
-export function refetchAdvertiserQuery(variables: AdvertiserQueryVariables) {
-      return { query: AdvertiserDocument, variables: variables }
-    }
-export const UpdateAdvertiserDocument = gql`
-    mutation updateAdvertiser($updateAdvertiserInput: UpdateAdvertiserInput!) {
-  updateAdvertiser(updateAdvertiserInput: $updateAdvertiserInput) {
-    id
-    publicKey
-  }
+export function useAdvertiserQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    AdvertiserQuery,
+    AdvertiserQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<AdvertiserQuery, AdvertiserQueryVariables>(
+    AdvertiserDocument,
+    options
+  );
 }
-    `;
-export type UpdateAdvertiserMutationFn = Apollo.MutationFunction<UpdateAdvertiserMutation, UpdateAdvertiserMutationVariables>;
+export function useAdvertiserLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    AdvertiserQuery,
+    AdvertiserQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<AdvertiserQuery, AdvertiserQueryVariables>(
+    AdvertiserDocument,
+    options
+  );
+}
+export type AdvertiserQueryHookResult = ReturnType<typeof useAdvertiserQuery>;
+export type AdvertiserLazyQueryHookResult = ReturnType<
+  typeof useAdvertiserLazyQuery
+>;
+export type AdvertiserQueryResult = Apollo.QueryResult<
+  AdvertiserQuery,
+  AdvertiserQueryVariables
+>;
+export function refetchAdvertiserQuery(variables: AdvertiserQueryVariables) {
+  return { query: AdvertiserDocument, variables: variables };
+}
+export const UpdateAdvertiserDocument = gql`
+  mutation updateAdvertiser($updateAdvertiserInput: UpdateAdvertiserInput!) {
+    updateAdvertiser(updateAdvertiserInput: $updateAdvertiserInput) {
+      id
+      publicKey
+    }
+  }
+`;
+export type UpdateAdvertiserMutationFn = Apollo.MutationFunction<
+  UpdateAdvertiserMutation,
+  UpdateAdvertiserMutationVariables
+>;
 
 /**
  * __useUpdateAdvertiserMutation__
@@ -92,22 +217,37 @@ export type UpdateAdvertiserMutationFn = Apollo.MutationFunction<UpdateAdvertise
  *   },
  * });
  */
-export function useUpdateAdvertiserMutation(baseOptions?: Apollo.MutationHookOptions<UpdateAdvertiserMutation, UpdateAdvertiserMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateAdvertiserMutation, UpdateAdvertiserMutationVariables>(UpdateAdvertiserDocument, options);
-      }
-export type UpdateAdvertiserMutationHookResult = ReturnType<typeof useUpdateAdvertiserMutation>;
-export type UpdateAdvertiserMutationResult = Apollo.MutationResult<UpdateAdvertiserMutation>;
-export type UpdateAdvertiserMutationOptions = Apollo.BaseMutationOptions<UpdateAdvertiserMutation, UpdateAdvertiserMutationVariables>;
+export function useUpdateAdvertiserMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateAdvertiserMutation,
+    UpdateAdvertiserMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UpdateAdvertiserMutation,
+    UpdateAdvertiserMutationVariables
+  >(UpdateAdvertiserDocument, options);
+}
+export type UpdateAdvertiserMutationHookResult = ReturnType<
+  typeof useUpdateAdvertiserMutation
+>;
+export type UpdateAdvertiserMutationResult =
+  Apollo.MutationResult<UpdateAdvertiserMutation>;
+export type UpdateAdvertiserMutationOptions = Apollo.BaseMutationOptions<
+  UpdateAdvertiserMutation,
+  UpdateAdvertiserMutationVariables
+>;
 export const AdvertiserCampaignsDocument = gql`
-    query advertiserCampaigns($id: String!) {
-  advertiser(id: $id) {
-    campaigns {
-      ...Campaign
+  query advertiserCampaigns($id: String!) {
+    advertiser(id: $id) {
+      campaigns {
+        ...Campaign
+      }
     }
   }
-}
-    ${CampaignFragmentDoc}`;
+  ${CampaignFragmentDoc}
+`;
 
 /**
  * __useAdvertiserCampaignsQuery__
@@ -125,17 +265,42 @@ export const AdvertiserCampaignsDocument = gql`
  *   },
  * });
  */
-export function useAdvertiserCampaignsQuery(baseOptions: Apollo.QueryHookOptions<AdvertiserCampaignsQuery, AdvertiserCampaignsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AdvertiserCampaignsQuery, AdvertiserCampaignsQueryVariables>(AdvertiserCampaignsDocument, options);
-      }
-export function useAdvertiserCampaignsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdvertiserCampaignsQuery, AdvertiserCampaignsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AdvertiserCampaignsQuery, AdvertiserCampaignsQueryVariables>(AdvertiserCampaignsDocument, options);
-        }
-export type AdvertiserCampaignsQueryHookResult = ReturnType<typeof useAdvertiserCampaignsQuery>;
-export type AdvertiserCampaignsLazyQueryHookResult = ReturnType<typeof useAdvertiserCampaignsLazyQuery>;
-export type AdvertiserCampaignsQueryResult = Apollo.QueryResult<AdvertiserCampaignsQuery, AdvertiserCampaignsQueryVariables>;
-export function refetchAdvertiserCampaignsQuery(variables: AdvertiserCampaignsQueryVariables) {
-      return { query: AdvertiserCampaignsDocument, variables: variables }
-    }
+export function useAdvertiserCampaignsQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    AdvertiserCampaignsQuery,
+    AdvertiserCampaignsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    AdvertiserCampaignsQuery,
+    AdvertiserCampaignsQueryVariables
+  >(AdvertiserCampaignsDocument, options);
+}
+export function useAdvertiserCampaignsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    AdvertiserCampaignsQuery,
+    AdvertiserCampaignsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    AdvertiserCampaignsQuery,
+    AdvertiserCampaignsQueryVariables
+  >(AdvertiserCampaignsDocument, options);
+}
+export type AdvertiserCampaignsQueryHookResult = ReturnType<
+  typeof useAdvertiserCampaignsQuery
+>;
+export type AdvertiserCampaignsLazyQueryHookResult = ReturnType<
+  typeof useAdvertiserCampaignsLazyQuery
+>;
+export type AdvertiserCampaignsQueryResult = Apollo.QueryResult<
+  AdvertiserCampaignsQuery,
+  AdvertiserCampaignsQueryVariables
+>;
+export function refetchAdvertiserCampaignsQuery(
+  variables: AdvertiserCampaignsQueryVariables
+) {
+  return { query: AdvertiserCampaignsDocument, variables: variables };
+}

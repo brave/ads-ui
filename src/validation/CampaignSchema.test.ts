@@ -1,7 +1,7 @@
 import { parseISO } from "date-fns";
 import { produce } from "immer";
-import {CampaignFormat, CampaignPacingStrategies} from "../graphql/types";
-import {CampaignSchema} from "./CampaignSchema";
+import { CampaignFormat, CampaignPacingStrategies } from "../graphql/types";
+import { CampaignSchema } from "./CampaignSchema";
 
 const validCampaign = {
   name: "some campaign",
@@ -12,11 +12,11 @@ const validCampaign = {
   startAt: parseISO("2030-07-18"),
   endAt: parseISO("2030-07-20"),
   format: CampaignFormat.PushNotification,
-  geoTargets: [{code: "a", name: "USA"}],
+  geoTargets: [{ code: "a", name: "USA" }],
   state: "any",
   type: "paid",
   pacingStrategy: CampaignPacingStrategies.Original,
-  validateStart: true
+  validateStart: true,
 };
 
 it("should pass on a valid object", () => {

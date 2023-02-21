@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
 html {
   height: 100%;
@@ -27,7 +27,7 @@ input[type="datetime-local"]::-webkit-inner-spin-button {
 
 .ReactModal__Overlay {
   z-index: 100000;
-  background-color: rgb(0,0,0,0.3) !important;
+  background-color: rgb(0, 0, 0, 0.3) !important;
 }
 
 .ReactModal__Body--open {

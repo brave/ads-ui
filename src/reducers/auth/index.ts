@@ -18,7 +18,7 @@ const authReducer = (
     role: "",
     signedIn: false,
   },
-  action: IAuthAction,
+  action: IAuthAction
 ) => {
   switch (action.type) {
     case SIGN_IN_START:

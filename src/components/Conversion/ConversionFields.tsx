@@ -1,9 +1,9 @@
 import { Box } from "@mui/material";
-import {FormikRadioControl, FormikTextField} from "../../form/FormikHelpers";
+import { FormikRadioControl, FormikTextField } from "../../form/FormikHelpers";
 import React from "react";
 
 interface Props {
-  idx: number
+  idx: number;
 }
 
 export const ConversionFields: React.FC<Props> = ({ idx }: Props) => {

@@ -13,7 +13,7 @@ const advertiserReducer = (
   state: IAdvertiserState = {
     advertisers: [],
   },
-  action: IAdvertiserAction,
+  action: IAdvertiserAction
 ) => {
   switch (action.type) {
     case GET_ADVERTISERS_FAILD:

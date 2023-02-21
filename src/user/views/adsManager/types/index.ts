@@ -1,6 +1,11 @@
-
-import {CampaignFormat, CampaignPacingStrategies} from "../../../../graphql/types";
-import {defaultEndDate, defaultStartDate} from "../../../../form/DateFieldHelpers";
+import {
+  CampaignFormat,
+  CampaignPacingStrategies,
+} from "../../../../graphql/types";
+import {
+  defaultEndDate,
+  defaultStartDate,
+} from "../../../../form/DateFieldHelpers";
 
 export type CampaignForm = {
   startAt: string;
@@ -17,17 +22,17 @@ export type CampaignForm = {
   state: string;
   type: "paid";
   pacingStrategy: CampaignPacingStrategies;
-}
+};
 
 export type GeoTarget = {
-  code: string,
-  name: string,
-}
+  code: string;
+  name: string;
+};
 
 export type OS = {
-  code: string,
-  name: string,
-}
+  code: string;
+  name: string;
+};
 
 export type AdSetForm = {
   id?: string;
@@ -36,20 +41,20 @@ export type AdSetForm = {
   billingType: string;
   segments: Segment[];
   oses: OS[];
-  conversions: Conversion[]
+  conversions: Conversion[];
   creatives: Creative[];
-}
+};
 
 export type Conversion = {
   type: string;
   observationWindow: number;
   urlPattern: string;
-}
+};
 
 export type Segment = {
   code: string;
   name: string;
-}
+};
 
 export type Creative = {
   id?: string;
@@ -57,7 +62,7 @@ export type Creative = {
   title: string;
   body: string;
   targetUrl: string;
-}
+};
 
 export const initialCampaign: CampaignForm = {
   startAt: defaultStartDate(),
@@ -68,51 +73,61 @@ export const initialCampaign: CampaignForm = {
   dailyBudget: 0,
   dailyCap: 1,
   geoTargets: [],
-  adSets: [{
-    name: "",
-    billingType: "",
-    price: 0,
-    segments: [{
-      code: "Svp7l-zGN",
-      name: "untargeted"
-    }],
-    oses: [],
-    conversions: [],
-    creatives: [{
+  adSets: [
+    {
       name: "",
-      title: "",
-      body: "",
-      targetUrl: ""
-    }]
-  }],
+      billingType: "",
+      price: 0,
+      segments: [
+        {
+          code: "Svp7l-zGN",
+          name: "untargeted",
+        },
+      ],
+      oses: [],
+      conversions: [],
+      creatives: [
+        {
+          name: "",
+          title: "",
+          body: "",
+          targetUrl: "",
+        },
+      ],
+    },
+  ],
   format: CampaignFormat.PushNotification,
   name: "",
   state: "under_review",
   type: "paid",
   pacingStrategy: CampaignPacingStrategies.Original,
-}
+};
 
 export const initialAdSet: AdSetForm = {
   name: "",
   billingType: "",
   price: 0,
-  segments: [{
-    code: "Svp7l-zGN",
-    name: "untargeted"
-  }],
+  segments: [
+    {
+      code: "Svp7l-zGN",
+      name: "untargeted",
+    },
+  ],
   oses: [],
   conversions: [],
-  creatives: [{
-    name: "",
-    title: "",
-    body: "",
-    targetUrl: ""
-  }]
-}
+  creatives: [
+    {
+      name: "",
+      title: "",
+      body: "",
+      targetUrl: "",
+    },
+  ],
+};
 
 export const initialCreative: Creative = {
   name: "",
   title: "",
   body: "",
-  targetUrl: ""
-}
+  targetUrl: "",
+};

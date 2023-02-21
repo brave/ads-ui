@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { Autocomplete, TextField } from "@mui/material";
-import {Metrics} from "../types";
+import { Metrics } from "../types";
 
 interface Option {
   value: string;

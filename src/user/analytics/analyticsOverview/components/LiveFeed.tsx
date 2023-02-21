@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@mui/material";
 import _ from "lodash";
-import {StatsMetric} from "../types";
+import { StatsMetric } from "../types";
 interface CostMetrics {
   currency: string;
   budget: number;

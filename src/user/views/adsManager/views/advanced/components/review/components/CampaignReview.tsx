@@ -1,25 +1,30 @@
-import {Card, List, Typography} from "@mui/material";
-import {CustomListItemText} from "../../../../../../../../components/List/CustomListItemText";
+import { Card, List, Typography } from "@mui/material";
+import { CustomListItemText } from "../../../../../../../../components/List/CustomListItemText";
 import React from "react";
-import {CampaignForm} from "../../../../../types";
-import {FormikErrors} from "formik";
+import { CampaignForm } from "../../../../../types";
+import { FormikErrors } from "formik";
 
 interface Props {
   values: CampaignForm;
-  errors: FormikErrors<CampaignForm>
+  errors: FormikErrors<CampaignForm>;
 }
 
 export function CampaignReview({ values, errors }: Props) {
   const formatDate = (date: string) => {
-    const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: "numeric" };
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    };
     return new Date(date).toLocaleDateString("en-US", options);
-  }
+  };
 
   return (
-    <Card sx={{p: 2, mt: 2}}>
-      <Typography variant="h6">
-        Campaign
-      </Typography>
+    <Card sx={{ p: 2, mt: 2 }}>
+      <Typography variant="h6">Campaign</Typography>
       <List>
         <CustomListItemText
           primary="Name"
@@ -53,5 +58,5 @@ export function CampaignReview({ values, errors }: Props) {
         />
       </List>
     </Card>
-  )
+  );
 }

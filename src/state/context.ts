@@ -1,15 +1,15 @@
 import React from "react";
 
 export default React.createContext({
-    loading: undefined,
-    sidebar: "visible",
-    setLoading: (loading) => { },
-    setSidebar: (sidebar) => { },
-})
+  loading: undefined,
+  sidebar: "visible",
+  setLoading: (loading) => {},
+  setSidebar: (sidebar) => {},
+});
 
 export const setActiveAdvertiser = (advertiser: any) => {
   window.localStorage.setItem("activeAdvertiser", JSON.stringify(advertiser));
-}
+};
 
 export const getActiveAdvertiser = () => {
   const adv = window.localStorage.getItem("activeAdvertiser");
@@ -20,4 +20,4 @@ export const getActiveAdvertiser = () => {
   }
 
   return null;
-}
+};

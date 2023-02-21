@@ -1,9 +1,9 @@
-import {Card, Divider, List, ListItemText, Typography} from "@mui/material";
-import {CustomListItemText} from "../../../../../../../../components/List/CustomListItemText";
+import { Card, Divider, List, ListItemText, Typography } from "@mui/material";
+import { CustomListItemText } from "../../../../../../../../components/List/CustomListItemText";
 import React from "react";
-import {AdSetForm, Conversion, OS, Segment} from "../../../../../types";
-import {FormikErrors} from "formik";
-import {AdReview} from "./AdReview";
+import { AdSetForm, Conversion, OS, Segment } from "../../../../../types";
+import { FormikErrors } from "formik";
+import { AdReview } from "./AdReview";
 import _ from "lodash";
 
 interface Props {
@@ -18,11 +18,11 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
 
   const mapToString = (arr: Segment[] | OS[]) => {
     return arr.map((o) => o.name).join(", ");
-  }
+  };
 
   const segmentValue = (v: string) => {
     return v === "untargeted" ? "Let Brave determine best audience." : v;
-  }
+  };
 
   const conversionValue = (v: Conversion[]) => {
     if (v.length === 0) {
@@ -33,21 +33,22 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
     return (
       <List>
         <CustomListItemText primary="Type" secondary={conversion.type} />
-        <CustomListItemText primary="Window" secondary={`${conversion.observationWindow} days`} />
+        <CustomListItemText
+          primary="Window"
+          secondary={`${conversion.observationWindow} days`}
+        />
         <CustomListItemText primary="URL" secondary={conversion.urlPattern} />
       </List>
-    )
-  }
+    );
+  };
 
   const billing = (v: string) => {
     return v === "cpm" ? "Impressions" : "Clicks";
-  }
+  };
 
   return (
-    <Card sx={{p: 2, mt: 2}}>
-      <Typography variant="h6">
-        Ad Set {idx + 1}
-      </Typography>
+    <Card sx={{ p: 2, mt: 2 }}>
+      <Typography variant="h6">Ad Set {idx + 1}</Typography>
       <List>
         <CustomListItemText
           primary="Pricing Type"
@@ -62,23 +63,23 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
         <CustomListItemText
           primary="Audiences"
           secondary={segmentValue(mapToString(adSet.segments))}
-          error={hasErrors ? adSetError.segments as string : ""}
+          error={hasErrors ? (adSetError.segments as string) : ""}
         />
         <CustomListItemText
           primary="Platforms"
           secondary={mapToString(adSet.oses)}
-          error={hasErrors ? adSetError.oses as string : ""}
+          error={hasErrors ? (adSetError.oses as string) : ""}
         />
         <CustomListItemText
           primary="Conversion"
           secondary={conversionValue(adSet.conversions)}
-          error={hasErrors ? adSetError.conversions?.[0] as string : ""}
+          error={hasErrors ? (adSetError.conversions?.[0] as string) : ""}
         />
       </List>
 
       {adSet.creatives.map((ad, adIdx) => (
         <>
-          <Divider sx={{mt: 2, mb: 2}}/>
+          <Divider sx={{ mt: 2, mb: 2 }} />
 
           <AdReview
             ad={ad}
@@ -87,7 +88,6 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
           />
         </>
       ))}
-
     </Card>
-  )
+  );
 }

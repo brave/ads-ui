@@ -7,33 +7,43 @@ import BraveLogo from "../../../assets/images/brave-logotype-full-color.png";
 import { GetAdvertisers, SignIn } from "../../../actions";
 
 import base64url from "base64url";
-import {Box, Button, Card, CardContent, Container, TextField, Typography} from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Container,
+  TextField,
+  Typography,
+} from "@mui/material";
 
 class SignInContainer extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
       submitting: false,
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     };
     this.submit = this.submit.bind(this);
   }
 
   async submit() {
-    const resp = await fetch(`${process.env.REACT_APP_SERVER_ADDRESS}/auth/token`,
+    const resp = await fetch(
+      `${process.env.REACT_APP_SERVER_ADDRESS}/auth/token`,
       {
-        method: 'POST',
-        mode: 'cors',
-        credentials: 'same-origin',
+        method: "POST",
+        mode: "cors",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email: this.state.email,
-          password: this.state.password
-        })
-      });
+          password: this.state.password,
+        }),
+      }
+    );
 
     if (resp.status === 400) {
       alert(
@@ -52,7 +62,11 @@ class SignInContainer extends React.Component<any, any> {
     let data = await resp.json();
 
     if (data.accessToken) {
-      await this.props.signin({ email: this.state.email, password: this.state.password, accessToken: data.accessToken });
+      await this.props.signin({
+        email: this.state.email,
+        password: this.state.password,
+        accessToken: data.accessToken,
+      });
       await this.props.getAdvertiser(data);
     }
 
@@ -62,28 +76,27 @@ class SignInContainer extends React.Component<any, any> {
     }
 
     if (data.allowCredentials) {
-      this.get(data)
+      this.get(data);
     }
 
     this.toggleSubmitting();
-
-  };
+  }
 
   toggleSubmitting() {
     this.setState({
-      submitting: !this.state.submitting
+      submitting: !this.state.submitting,
     });
   }
 
   get(attestationObj) {
-
     attestationObj.challenge = base64url.toBuffer(attestationObj.challenge);
 
     attestationObj.allowCredentials.forEach((allowedCredential) => {
       allowedCredential.id = base64url.toBuffer(allowedCredential.id);
     });
 
-    navigator.credentials.get({ publicKey: attestationObj })
+    navigator.credentials
+      .get({ publicKey: attestationObj })
       .then(async (cred: any) => {
         await this.sendClientCredential(cred, attestationObj.userId);
       })
@@ -95,46 +108,50 @@ class SignInContainer extends React.Component<any, any> {
   publicKeyCredentialToJSON(pubKeyCred) {
     if (pubKeyCred instanceof Array) {
       let arr = [];
-      for (let i of pubKeyCred)
-        //@ts-ignore
-        arr.push(publicKeyCredentialToJSON(i));
+      //@ts-ignore
+      for (let i of pubKeyCred) arr.push(publicKeyCredentialToJSON(i));
 
-      return arr
+      return arr;
     }
 
     if (pubKeyCred instanceof ArrayBuffer) {
       //@ts-ignore
-      return base64url.encode(pubKeyCred)
+      return base64url.encode(pubKeyCred);
     }
 
     if (pubKeyCred instanceof Object) {
       let obj = {};
 
       for (let key in pubKeyCred) {
-        obj[key] = this.publicKeyCredentialToJSON(pubKeyCred[key])
+        obj[key] = this.publicKeyCredentialToJSON(pubKeyCred[key]);
       }
 
-      return obj
+      return obj;
     }
 
-    return pubKeyCred
+    return pubKeyCred;
   }
 
-
   async sendClientCredential(clientCredential, userId) {
-    const resp = await fetch(`${process.env.REACT_APP_SERVER_ADDRESS}/auth/challenge/${userId}`,
+    const resp = await fetch(
+      `${process.env.REACT_APP_SERVER_ADDRESS}/auth/challenge/${userId}`,
       {
-        method: 'POST',
-        mode: 'cors',
-        credentials: 'same-origin',
+        method: "POST",
+        mode: "cors",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(this.publicKeyCredentialToJSON(clientCredential))
-      });
+        body: JSON.stringify(this.publicKeyCredentialToJSON(clientCredential)),
+      }
+    );
     let data = await resp.json();
     try {
-      await this.props.signin({ email: this.state.email, password: this.state.password, accessToken: data.accessToken });
+      await this.props.signin({
+        email: this.state.email,
+        password: this.state.password,
+        accessToken: data.accessToken,
+      });
       await this.props.getAdvertiser(data);
     } catch (err) {
       this.toggleSubmitting();
@@ -143,13 +160,13 @@ class SignInContainer extends React.Component<any, any> {
 
   handleEmail(e) {
     this.setState({
-      email: e.target.value
+      email: e.target.value,
     });
   }
 
   handlePassword(e) {
     this.setState({
-      password: e.target.value
+      password: e.target.value,
     });
   }
 
@@ -198,7 +215,7 @@ class SignInContainer extends React.Component<any, any> {
               <TextField
                 sx={{ mt: 5, mb: 3 }}
                 fullWidth
-                onChange={(evt) => this.setState({ email: evt.target.value})}
+                onChange={(evt) => this.setState({ email: evt.target.value })}
                 label="Email"
                 placeholder="Enter your email"
               />
@@ -206,7 +223,9 @@ class SignInContainer extends React.Component<any, any> {
                 fullWidth
                 type="password"
                 sx={{ mb: 3 }}
-                onChange={(evt) => this.setState({ password: evt.target.value})}
+                onChange={(evt) =>
+                  this.setState({ password: evt.target.value })
+                }
                 label="Password"
                 placeholder="Enter your password"
               />
@@ -228,12 +247,12 @@ class SignInContainer extends React.Component<any, any> {
 
 const mapStateToProps = (state: any) => ({
   auth: state.authReducer,
-  signinForm: state.form.signin
+  signinForm: state.form.signin,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
   getAdvertiser: (value: any) => dispatch(GetAdvertisers(value)),
-  signin: (value: any) => dispatch(SignIn(value))
+  signin: (value: any) => dispatch(SignIn(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignInContainer);

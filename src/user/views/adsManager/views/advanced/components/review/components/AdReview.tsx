@@ -1,8 +1,8 @@
-import {AdSetForm, Creative} from "../../../../../types";
-import {List, Typography} from "@mui/material";
-import {CustomListItemText} from "../../../../../../../../components/List/CustomListItemText";
+import { AdSetForm, Creative } from "../../../../../types";
+import { List, Typography } from "@mui/material";
+import { CustomListItemText } from "../../../../../../../../components/List/CustomListItemText";
 import React from "react";
-import {FormikErrors} from "formik";
+import { FormikErrors } from "formik";
 
 interface Props {
   ad: Creative;
@@ -16,9 +16,7 @@ export function AdReview({ ad, adIdx, error }: Props) {
 
   return (
     <>
-      <Typography variant="h6">
-        Ad { adIdx + 1 }
-      </Typography>
+      <Typography variant="h6">Ad {adIdx + 1}</Typography>
       <List>
         <CustomListItemText
           primary="Creative Name"
@@ -46,5 +44,5 @@ export function AdReview({ ad, adIdx, error }: Props) {
         />
       </List>
     </>
-  )
+  );
 }

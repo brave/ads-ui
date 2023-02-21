@@ -1,11 +1,11 @@
-query advertiser($id: String!){
+query advertiser($id: String!) {
   advertiser(id: $id) {
     id
     publicKey
   }
 }
 
-mutation updateAdvertiser($updateAdvertiserInput: UpdateAdvertiserInput!){
+mutation updateAdvertiser($updateAdvertiserInput: UpdateAdvertiserInput!) {
   updateAdvertiser(updateAdvertiserInput: $updateAdvertiserInput) {
     id
     publicKey
@@ -13,7 +13,7 @@ mutation updateAdvertiser($updateAdvertiserInput: UpdateAdvertiserInput!){
 }
 
 query advertiserCampaigns($id: String!) {
-  advertiser(id: $id){
+  advertiser(id: $id) {
     campaigns {
       ...Campaign
     }
