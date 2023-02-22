@@ -2,7 +2,7 @@ import { object, string, ref, number, date, array, boolean } from "yup";
 import { startOfDay } from "date-fns";
 import { twoDaysOut } from "../form/DateFieldHelpers";
 
-const HttpsRegex = /^https:\/\//;
+export const SimpleUrlRegexp = /https:\/\/.+\.[a-zA-Z]{2,}\/?.*/g;
 const NoSpacesRegex = /^\S*$/;
 const TrailingAsteriskRegex = /.*\*$/;
 
@@ -120,7 +120,10 @@ export const CampaignSchema = object().shape({
                 .label("Target Url")
                 .required("URL is required")
                 .matches(NoSpacesRegex, `URL must not contain any whitespace`)
-                .matches(HttpsRegex, `URL must start with https://`),
+                .matches(
+                  SimpleUrlRegexp,
+                  `URL has an invalid pattern - valid example: https://brave.com`
+                ),
             })
           ),
       })

@@ -20,11 +20,11 @@ export const ConversionFields: React.FC<Props> = ({ idx }: Props) => {
         helperText={
           <List>
             <ListItemText
-              secondary="Post-View: Viewed Ad and converted without clicking"
+              secondary="Post-View: Viewed Ad and converted by visiting site on their own"
               secondaryTypographyProps={{ fontSize: "0.75rem" }}
             />
             <ListItemText
-              secondary="Post-Click: Viewed Ad and converted by clicking"
+              secondary="Post-Click: Viewed Ad and converted by clicking its link"
               secondaryTypographyProps={{ fontSize: "0.75rem" }}
             />
           </List>

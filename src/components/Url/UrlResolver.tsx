@@ -12,8 +12,7 @@ import _ from "lodash";
 import { useField } from "formik";
 import { useValidateTargetUrlLazyQuery } from "../../graphql/url.generated";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-
-const simpleUrlRegexp = /https:\/\/.+\.[a-zA-Z]{2,}\/?.*/g;
+import { SimpleUrlRegexp } from "../../validation/CampaignSchema";
 
 interface Props {
   name: string;
@@ -39,8 +38,7 @@ export const UrlResolver: React.FC<Props> = ({
       _.debounce(
         (value: string) =>
           value &&
-          !hasError &&
-          simpleUrlRegexp.test(value) &&
+          SimpleUrlRegexp.test(value) &&
           validateUrl({
             variables: {
               url: value,
@@ -55,7 +53,7 @@ export const UrlResolver: React.FC<Props> = ({
   const { setValue } = isValidHelper;
 
   useEffect(() => {
-    if (!disabled) {
+    if (!disabled && nameMeta.value) {
       debouncedValidateUrl.cancel();
       debouncedValidateUrl(nameMeta.value);
 
