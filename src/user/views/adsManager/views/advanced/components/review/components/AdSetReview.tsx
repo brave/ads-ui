@@ -43,7 +43,7 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
   };
 
   const billing = (v: string) => {
-    return v === "cpm" ? "Impressions" : "Clicks";
+    return v === "cpm" ? "Impressions (CPM)" : "Clicks (CPC)";
   };
 
   return (

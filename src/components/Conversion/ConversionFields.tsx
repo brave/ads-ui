@@ -1,6 +1,7 @@
-import { Box } from "@mui/material";
+import { Box, List, ListItemText } from "@mui/material";
 import { FormikRadioControl, FormikTextField } from "../../form/FormikHelpers";
 import React from "react";
+import { CustomListItemText } from "../List/CustomListItemText";
 
 interface Props {
   idx: number;
@@ -16,6 +17,18 @@ export const ConversionFields: React.FC<Props> = ({ idx }: Props) => {
           { value: "postview", label: "Post-View" },
           { value: "postclick", label: "Post-Click" },
         ]}
+        helperText={
+          <List>
+            <ListItemText
+              secondary="Post-View: Viewed Ad and converted without clicking"
+              secondaryTypographyProps={{ fontSize: "0.75rem" }}
+            />
+            <ListItemText
+              secondary="Post-Click: Viewed Ad and converted by clicking"
+              secondaryTypographyProps={{ fontSize: "0.75rem" }}
+            />
+          </List>
+        }
       />
 
       <Box>

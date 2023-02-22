@@ -46,11 +46,11 @@ export function CampaignReview({ values, errors }: Props) {
           secondary={`$${values.budget} ${values.currency}`}
           error={errors.budget}
         />
-        <CustomListItemText
-          primary="Daily Budget"
-          secondary={`$${values.dailyBudget} ${values.currency}`}
-          error={errors.dailyBudget}
-        />
+        {/*<CustomListItemText*/}
+        {/*  primary="Daily Budget"*/}
+        {/*  secondary={`$${values.dailyBudget} ${values.currency}`}*/}
+        {/*  error={errors.dailyBudget}*/}
+        {/*/>*/}
         <CustomListItemText
           primary="Locations"
           secondary={values.geoTargets.map((t) => t.name).join(", ")}

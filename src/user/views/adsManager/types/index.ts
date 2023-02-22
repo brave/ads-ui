@@ -6,6 +6,7 @@ import {
   defaultEndDate,
   defaultStartDate,
 } from "../../../../form/DateFieldHelpers";
+import { MIN_PER_CAMPAIGN } from "../../../../validation/CampaignSchema";
 
 export type CampaignForm = {
   startAt: string;
@@ -65,49 +66,17 @@ export type Creative = {
   targetUrlValid?: boolean;
 };
 
-export const initialCampaign: CampaignForm = {
-  startAt: defaultStartDate(),
-  endAt: defaultEndDate(),
-  validateStart: true,
-  budget: 0,
-  currency: "USD",
-  dailyBudget: 0,
-  dailyCap: 1,
-  geoTargets: [],
-  adSets: [
-    {
-      name: "",
-      billingType: "",
-      price: 0,
-      segments: [
-        {
-          code: "Svp7l-zGN",
-          name: "untargeted",
-        },
-      ],
-      oses: [],
-      conversions: [],
-      creatives: [
-        {
-          name: "",
-          title: "",
-          body: "",
-          targetUrl: "",
-        },
-      ],
-    },
-  ],
-  format: CampaignFormat.PushNotification,
+export const initialCreative: Creative = {
   name: "",
-  state: "under_review",
-  type: "paid",
-  pacingStrategy: CampaignPacingStrategies.Original,
+  title: "",
+  body: "",
+  targetUrl: "",
 };
 
 export const initialAdSet: AdSetForm = {
   name: "",
-  billingType: "",
-  price: 0,
+  billingType: "cpm",
+  price: 6,
   segments: [
     {
       code: "Svp7l-zGN",
@@ -118,17 +87,28 @@ export const initialAdSet: AdSetForm = {
   conversions: [],
   creatives: [
     {
-      name: "",
-      title: "",
-      body: "",
-      targetUrl: "",
+      ...initialCreative,
     },
   ],
 };
 
-export const initialCreative: Creative = {
+export const initialCampaign: CampaignForm = {
+  startAt: defaultStartDate(),
+  endAt: defaultEndDate(),
+  validateStart: true,
+  budget: MIN_PER_CAMPAIGN,
+  currency: "USD",
+  dailyBudget: MIN_PER_CAMPAIGN,
+  dailyCap: 1,
+  geoTargets: [],
+  adSets: [
+    {
+      ...initialAdSet,
+    },
+  ],
+  format: CampaignFormat.PushNotification,
   name: "",
-  title: "",
-  body: "",
-  targetUrl: "",
+  state: "under_review",
+  type: "paid",
+  pacingStrategy: CampaignPacingStrategies.Original,
 };

@@ -4,7 +4,7 @@ import React from "react";
 
 export function LocationField() {
   return (
-    <Box mb={5}>
+    <Box mb={2}>
       <Divider textAlign="left" sx={{ fontSize: "24px", mb: 1, mt: 2 }}>
         Location
       </Divider>

@@ -37,8 +37,12 @@ export const PlatformPicker: React.FC<Props> = ({ idx }: Props) => {
         <TextField
           {...params}
           label="Platforms"
-          helperText={errorMessage ?? "Select the platforms to target"}
-          error={!!errorMessage}
+          helperText={
+            meta.touched && !!errorMessage
+              ? errorMessage
+              : "Select the platforms to target"
+          }
+          error={meta.touched && !!errorMessage}
         />
       )}
       isOptionEqualToValue={(option, value) => option.code === value.code}

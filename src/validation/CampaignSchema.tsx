@@ -1,25 +1,35 @@
 import { object, string, ref, number, date, array, boolean } from "yup";
 import { startOfDay } from "date-fns";
+import { twoDaysOut } from "../form/DateFieldHelpers";
 
 const HttpsRegex = /^https:\/\//;
 const NoSpacesRegex = /^\S*$/;
 const TrailingAsteriskRegex = /.*\*$/;
 
+export const MIN_PER_DAY = 33;
+export const MIN_PER_CAMPAIGN = 1000;
+
 export const CampaignSchema = object().shape({
   name: string().label("Campaign Name").required(),
-  budget: number().label("Lifetime Budget").required().positive(),
+  budget: number()
+    .label("Lifetime Budget")
+    .required()
+    .min(MIN_PER_CAMPAIGN, "Lifetime budget must be $1000 or more"),
   validateStart: boolean(),
   dailyBudget: number()
     .label("Daily Budget")
     .required()
     .positive()
-    .max(ref("budget"), "Daily Budget cannot be greater than Lifetime Budget"),
+    .min(MIN_PER_DAY, "Lifetime budget must be higher for date range provided"),
   startAt: date()
     .label("Start Date")
     .when("validateStart", {
       is: true,
       then: date()
-        .min(startOfDay(new Date()), "Start Date must not be in the past")
+        .min(
+          startOfDay(twoDaysOut()),
+          "Start Date must be minimum of 2 days from today"
+        )
         .required(),
     }),
   endAt: date()
@@ -35,6 +45,7 @@ export const CampaignSchema = object().shape({
       })
     )
     .min(1, "At least one country must be targeted")
+    .max(3, "Maximum of 3 countries can be targeted")
     .default([]),
   adSets: array()
     .min(1)
@@ -103,7 +114,7 @@ export const CampaignSchema = object().shape({
                 .max(60, "Max 60 Characters")
                 .required("Body is required"),
               targetUrlValid: boolean().isTrue(
-                "Target URL is either invalid or still validating, please check Ad for more details."
+                "Target URL is either empty, invalid, or still validating. Please check Ad for more details."
               ),
               targetUrl: string()
                 .label("Target Url")

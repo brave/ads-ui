@@ -102,7 +102,9 @@ export const FormikRadioControl: React.FC<FormikRadioControlProps> = (
         ))}
       </FormikRadioGroup>
 
-      {props.helperText && <FormHelperText>{props.helperText}</FormHelperText>}
+      {props.helperText && (
+        <FormHelperText sx={{ mt: 0 }}>{props.helperText}</FormHelperText>
+      )}
     </FormControl>
   );
 };
