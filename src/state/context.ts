@@ -1,4 +1,5 @@
 import React from "react";
+import { IAdvertiser } from "../actions";
 
 export default React.createContext({
   loading: undefined,
@@ -7,16 +8,16 @@ export default React.createContext({
   setSidebar: (sidebar) => {},
 });
 
-export const setActiveAdvertiser = (advertiser: any) => {
+export const setActiveAdvertiser = (advertiser: IAdvertiser) => {
   window.localStorage.setItem("activeAdvertiser", JSON.stringify(advertiser));
 };
 
-export const getActiveAdvertiser = () => {
+export const getActiveAdvertiser = (): IAdvertiser | null => {
   const adv = window.localStorage.getItem("activeAdvertiser");
 
   if (adv) {
     const parsed = JSON.parse(adv);
-    return { id: parsed.id, name: parsed.name };
+    return { ...parsed };
   }
 
   return null;

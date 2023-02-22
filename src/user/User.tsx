@@ -58,7 +58,7 @@ function User({ advertisers, auth }: Props) {
     <ApolloProvider client={client}>
       <Box height="100%">
         <Box display="flex">
-          <Sidebar userId={auth.id} advertiserId={activeAdvertiser.id} />
+          <Sidebar canCreate={activeAdvertiser.selfServiceCreate} />
           <Box
             width="100%"
             height="100%"
@@ -93,7 +93,7 @@ function User({ advertisers, auth }: Props) {
               {/* /campaigns */}
               <Route path={`${match.path}/campaigns`}>
                 <CampaignList
-                  userId={auth.id}
+                  canEdit={activeAdvertiser.selfServiceEdit}
                   advertiserId={activeAdvertiser.id}
                 />
               </Route>
