@@ -30,5 +30,7 @@ it("should fail if the campaign start date is in past", () => {
 
   expect(() =>
     CampaignSchema.validateSync(c)
-  ).toThrowErrorMatchingInlineSnapshot(`"Start Date must not be in the past"`);
+  ).toThrowErrorMatchingInlineSnapshot(
+    `"Start Date must be minimum of 2 days from today"`
+  );
 });
