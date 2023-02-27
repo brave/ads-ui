@@ -12,9 +12,7 @@ interface Props {
 
 export function AdReview({ ad, adIdx, error }: Props) {
   const hasError = !!error;
-  console.log(error);
   const adError = error as FormikErrors<Creative>;
-  console.log(adError);
 
   return (
     <>
