@@ -65,26 +65,6 @@ export function BudgetField({ isEdit }: Props) {
             flat rate of <strong>${values.adSets[0].price}</strong>.
           </Typography>
         )}
-
-        {/*<FormikTextField*/}
-        {/*  name="dailyBudget"*/}
-        {/*  label="Daily Budget"*/}
-        {/*  type="number"*/}
-        {/*  margin="none"*/}
-        {/*  InputProps={{*/}
-        {/*    startAdornment: <InputAdornment position="start">$</InputAdornment>,*/}
-        {/*  }}*/}
-        {/*/>*/}
-
-        {/*<FormikRadioControl*/}
-        {/*  name="currency"*/}
-        {/*  label="Currency"*/}
-        {/*  options={[*/}
-        {/*    { value: "BAT", label: "BAT" },*/}
-        {/*    { value: "USD", label: "USD" },*/}
-        {/*  ]}*/}
-        {/*  disabled={isEdit}*/}
-        {/*/>*/}
       </Stack>
     </Box>
   );

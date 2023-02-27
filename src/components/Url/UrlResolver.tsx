@@ -9,10 +9,11 @@ import {
 } from "@mui/material";
 import React, { useMemo, useEffect } from "react";
 import _ from "lodash";
-import { useField } from "formik";
+import { useField, useFormikContext } from "formik";
 import { useValidateTargetUrlLazyQuery } from "../../graphql/url.generated";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { SimpleUrlRegexp } from "../../validation/CampaignSchema";
+import { CampaignForm } from "../../user/views/adsManager/types";
 
 interface Props {
   name: string;
@@ -28,7 +29,7 @@ export const UrlResolver: React.FC<Props> = ({
   disabled = false,
 }) => {
   const [nameField, nameMeta] = useField(name);
-  const [isValid, isValidMeta, isValidHelper] = useField(validator);
+  const [, isValidMeta, isValidHelper] = useField(validator);
   const hasError = Boolean(nameMeta.error);
   const showError = hasError && nameMeta.touched;
   const [validateUrl, { loading, data, error }] =
@@ -49,8 +50,8 @@ export const UrlResolver: React.FC<Props> = ({
     []
   );
 
-  const { value } = isValidMeta;
-  const { setValue } = isValidHelper;
+  const { value, error: fieldError } = isValidMeta;
+  const { setValue, setError } = isValidHelper;
 
   useEffect(() => {
     if (!disabled && nameMeta.value) {
@@ -58,7 +59,13 @@ export const UrlResolver: React.FC<Props> = ({
       debouncedValidateUrl(nameMeta.value);
 
       if (value !== !!data?.validateTargetUrl?.isValid) {
-        setValue(!loading && !!data?.validateTargetUrl?.isValid);
+        setValue(!loading && !!data?.validateTargetUrl?.isValid, false);
+      }
+
+      const errors = data?.validateTargetUrl.errors ?? [];
+      const currError = errors.join("#");
+      if (errors.length > 0 && currError !== fieldError) {
+        setError(errors.join("#"));
       }
     }
   });

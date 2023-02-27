@@ -1,5 +1,5 @@
 import { AdSetForm, Creative } from "../../../../../types";
-import { List, Typography } from "@mui/material";
+import { Box, List, Stack, Typography } from "@mui/material";
 import { CustomListItemText } from "../../../../../../../../components/List/CustomListItemText";
 import React from "react";
 import { FormikErrors } from "formik";
@@ -12,7 +12,9 @@ interface Props {
 
 export function AdReview({ ad, adIdx, error }: Props) {
   const hasError = !!error;
+  console.log(error);
   const adError = error as FormikErrors<Creative>;
+  console.log(adError);
 
   return (
     <>
@@ -42,7 +44,19 @@ export function AdReview({ ad, adIdx, error }: Props) {
           secondary={ad.targetUrl}
           error={hasError ? adError.targetUrl : ""}
         />
-        <CustomListItemText error={hasError ? adError.targetUrlValid : ""} />
+        <CustomListItemText
+          error={
+            hasError ? (
+              <Stack display="flex" flexDirection="column" spacing={1}>
+                {adError.targetUrlValid?.split("#").map((e) => (
+                  <Box>{e}</Box>
+                ))}
+              </Stack>
+            ) : (
+              <></>
+            )
+          }
+        />
       </List>
     </>
   );

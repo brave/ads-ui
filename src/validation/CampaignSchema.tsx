@@ -113,16 +113,14 @@ export const CampaignSchema = object().shape({
                 .label("Body")
                 .max(60, "Max 60 Characters")
                 .required("Body is required"),
-              targetUrlValid: boolean().isTrue(
-                "Target URL is either empty, invalid, or still validating. Please check Ad for more details."
-              ),
+              targetUrlValid: boolean().isTrue("Please enter a valid URL."),
               targetUrl: string()
                 .label("Target Url")
                 .required("URL is required")
                 .matches(NoSpacesRegex, `URL must not contain any whitespace`)
                 .matches(
                   SimpleUrlRegexp,
-                  `URL has an invalid pattern - valid example: https://brave.com`
+                  `Please enter a valid URL, for example https://brave.com`
                 ),
             })
           ),

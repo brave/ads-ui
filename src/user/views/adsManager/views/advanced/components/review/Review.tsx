@@ -17,7 +17,7 @@ export function Review({ isEdit }: Props) {
     const toTouch = Object.keys(values)
       .map((v) => ({ [`${v}`]: true }))
       .reduce((a, b) => ({ ...a, ...b }));
-    setTouched(toTouch, true);
+    setTouched(toTouch, false);
   }, [values]);
 
   return (
