@@ -43,10 +43,11 @@ export const LocationPicker: React.FC = () => {
           {...params}
           label="Location"
           helperText={
-            errorMessage ??
-            "Select the geographic regions where your ads will be shown"
+            meta.touched && !!errorMessage
+              ? errorMessage
+              : "Select the geographic regions where your ads will be shown"
           }
-          error={!!errorMessage}
+          error={!!errorMessage && meta.touched}
         />
       )}
       isOptionEqualToValue={(option, value) => option.code === value.code}

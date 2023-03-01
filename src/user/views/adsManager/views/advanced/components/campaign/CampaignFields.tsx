@@ -1,6 +1,5 @@
 import { Button, Card } from "@mui/material";
 import React from "react";
-import { ObjectiveField } from "./fields/ObjectiveField";
 import { DetailField } from "./fields/DetailField";
 import { BudgetField } from "./fields/BudgetField";
 import { LocationField } from "./fields/LocationField";
@@ -22,9 +21,9 @@ export function CampaignFields({ onNext, isEdit }: Props) {
 
       <BudgetField isEdit={isEdit} />
 
-      <LocationField />
+      {!isEdit && <LocationField />}
 
-      <Button variant="contained" size="large" onClick={onNext}>
+      <Button variant="contained" size="large" onClick={onNext} sx={{ mt: 2 }}>
         Next
       </Button>
     </Card>

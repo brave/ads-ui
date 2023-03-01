@@ -5,26 +5,22 @@ import React from "react";
 interface Props {
   primary?: string;
   secondary?: string | React.ReactNode;
-  error?: string;
+  error?: string | React.ReactNode;
 }
 
 export function CustomListItemText({ primary, secondary, error }: Props) {
   const isError = !!error;
 
-  const getError = (text: string) => {
-    return (
-      <ListItemIcon>
-        <ErrorOutlineIcon sx={{ color: "#d32f2f", mr: 1 }} />
-        {text}
-      </ListItemIcon>
-    );
-  };
-
   return (
     <ListItem>
+      {isError && (
+        <ListItemIcon sx={{ flexWrap: 1 }}>
+          <ErrorOutlineIcon sx={{ color: "#d32f2f", mr: 1 }} />
+        </ListItemIcon>
+      )}
       <ListItemText
         primary={primary}
-        secondary={isError ? getError(error) : secondary}
+        secondary={isError ? error : secondary}
         primaryTypographyProps={{
           fontSize: "16px",
           fontFamily: "Poppins",

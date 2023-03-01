@@ -1,8 +1,5 @@
 import { Box, Link, Typography } from "@mui/material";
-import {
-  FormikRadioControl,
-  FormikTextField,
-} from "../../../../../../../../form/FormikHelpers";
+import { FormikTextField } from "../../../../../../../../form/FormikHelpers";
 import React from "react";
 
 interface Props {
@@ -31,19 +28,6 @@ export function DetailsField({ index, onCreate, showCreateNew }: Props) {
         )}
       </Box>
       <FormikTextField name={`adSets.${index}.name`} label="Ad Set Name" />
-      <FormikRadioControl
-        name={`adSets.${index}.billingType`}
-        label="Pricing Type"
-        options={[
-          { value: "cpm", label: "CPM (Impressions)" },
-          { value: "cpc", label: "CPC (Clicks)" },
-        ]}
-      />
-      <FormikTextField
-        name={`adSets.${index}.price`}
-        label="Price"
-        type="number"
-      />
     </>
   );
 }
