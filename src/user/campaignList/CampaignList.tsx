@@ -5,14 +5,16 @@ import {
   StandardRenderers,
 } from "../../components/EnhancedTable";
 import {
-  Box,
   IconButton,
   LinearProgress,
   Link,
   Stack,
   Tooltip,
 } from "@mui/material";
-import { renderMonetaryAmount } from "../../components/EnhancedTable/renderers";
+import {
+  campaignOnOffState,
+  renderMonetaryAmount,
+} from "../../components/EnhancedTable/renderers";
 import EditIcon from "@mui/icons-material/Edit";
 import { useHistory } from "react-router-dom";
 import { CampaignStatus } from "../../components/Campaigns/CampaignStatus";
@@ -32,7 +34,16 @@ function CampaignList({ advertiserId, canEdit }: Props) {
   return (
     <EnhancedTable
       rows={data?.advertiser?.campaigns}
+      initialSortColumn={6}
+      initialSortDirection="desc"
       columns={[
+        {
+          title: "On/Off",
+          value: (c) => c.state,
+          extendedRenderer: (r) => campaignOnOffState(r, advertiserId),
+          sx: { width: "10px" },
+          sortable: false,
+        },
         {
           title: "Campaign",
           value: (c) => c.name,

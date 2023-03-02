@@ -243,3 +243,25 @@ export async function transformEditForm(
     adSets: transformedAdSet,
   };
 }
+
+export function updateCampaignState(
+  c: CampaignFragment,
+  state: string
+): UpdateCampaignInput {
+  return {
+    budget: c.budget,
+    currency: c.currency,
+    dailyBudget: c.dailyBudget,
+    dailyCap: c.dailyCap,
+    endAt: c.endAt,
+    geoTargets: (c.geoTargets ?? []).map((g) => ({
+      name: g.name,
+      code: g.code,
+    })),
+    id: c.id,
+    name: c.name,
+    startAt: c.startAt,
+    state,
+    type: c.type,
+  };
+}
