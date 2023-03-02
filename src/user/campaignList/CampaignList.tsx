@@ -4,7 +4,14 @@ import {
   EnhancedTable,
   StandardRenderers,
 } from "../../components/EnhancedTable";
-import { IconButton, LinearProgress, Link } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  LinearProgress,
+  Link,
+  Stack,
+  Tooltip,
+} from "@mui/material";
 import { renderMonetaryAmount } from "../../components/EnhancedTable/renderers";
 import EditIcon from "@mui/icons-material/Edit";
 import { useHistory } from "react-router-dom";
@@ -30,16 +37,34 @@ function CampaignList({ advertiserId, canEdit }: Props) {
           title: "Campaign",
           value: (c) => c.name,
           extendedRenderer: (r) => (
-            <Link
-              href={
-                r.state !== "under_review"
-                  ? `/user/main/campaign/${r.id}/analytics/overview`
-                  : undefined
-              }
-              underline="none"
+            <Stack
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              direction="row"
             >
-              {r.name}
-            </Link>
+              <Link
+                href={
+                  r.state !== "under_review"
+                    ? `/user/main/campaign/${r.id}/analytics/overview`
+                    : undefined
+                }
+                underline="none"
+              >
+                {r.name}
+              </Link>
+              {canEdit && (
+                <Tooltip title={`Edit ${r.name}`}>
+                  <IconButton
+                    onClick={() =>
+                      history.push(`/user/main/adsmanager/advanced/${r.id}`)
+                    }
+                  >
+                    <EditIcon />
+                  </IconButton>
+                </Tooltip>
+              )}
+            </Stack>
           ),
         },
         {
@@ -68,25 +93,6 @@ function CampaignList({ advertiserId, canEdit }: Props) {
           title: "End",
           value: (c) => c.endAt,
           renderer: StandardRenderers.date,
-        },
-        {
-          title: "",
-          value: (c) => "",
-          extendedRenderer: (r) => (
-            <>
-              {canEdit ? (
-                <IconButton
-                  onClick={() =>
-                    history.push(`/user/main/adsmanager/advanced/${r.id}`)
-                  }
-                >
-                  <EditIcon />
-                </IconButton>
-              ) : (
-                <></>
-              )}
-            </>
-          ),
         },
       ]}
     />
