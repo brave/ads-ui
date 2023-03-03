@@ -74,7 +74,9 @@ export function AdSetList({ campaigns, loading }: Props) {
         {
           title: "State",
           value: (c) => c.state,
-          extendedRenderer: (r) => <Status state={r.state} />,
+          extendedRenderer: (r) => (
+            <Status state={r.state} end={r.campaignEnd} />
+          ),
         },
         {
           title: "Platforms",

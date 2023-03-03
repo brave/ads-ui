@@ -24,7 +24,7 @@ interface Props {
 
 export function Sidebar({ canCreate }: Props) {
   const history = useHistory();
-  const [selected, setSelected] = useState(0);
+  console.log(history.location);
 
   const routes = [
     { path: "campaigns", label: "Campaigns", icon: <CampaignIcon /> },
@@ -49,11 +49,10 @@ export function Sidebar({ canCreate }: Props) {
         anchor="left"
       >
         <List sx={{ mt: 7 }}>
-          {routes.map((r, idx) => (
+          {routes.map((r) => (
             <ListItemButton
-              selected={selected === idx}
+              selected={history.location.pathname.includes(r.path)}
               onClick={() => {
-                setSelected(idx);
                 history.push(`/user/main/${r.path}`);
               }}
               sx={{ mt: 1 }}

@@ -11,6 +11,13 @@ import {
   useUpdateCampaignMutation,
 } from "../../graphql/campaign.generated";
 import { AdvertiserCampaignsDocument } from "../../graphql/advertiser.generated";
+import {
+  AdFragment,
+  useUpdateAdMutation,
+} from "../../graphql/ad-set.generated";
+import { OnOff } from "../Switch/OnOff";
+import { Creative } from "../../user/views/adsManager/types";
+import { CreativeFragment } from "../../graphql/creative.generated";
 
 export type CellValueRenderer = (value: CellValue) => React.ReactNode;
 const ADS_DEFAULT_TIMEZONE = "America/New_York";
@@ -98,31 +105,58 @@ export function campaignOnOffState(
     ],
   });
 
-  const [checked, setChecked] = useState(c.state === "active");
-  const isAfterEndDate = isPast(parseISO(c.endAt));
-  const enabled =
-    (c.state === "active" || c.state === "paused") && !isAfterEndDate;
+  return (
+    <OnOff
+      onChange={(s) => {
+        updateCampaign({
+          variables: { input: updateCampaignState(c, s) },
+        });
+      }}
+      loading={loading}
+      state={c.state}
+      end={c.endAt}
+      type="Campaign"
+    />
+  );
+}
+
+export function adOnOffState(
+  c: CreativeFragment & {
+    creativeSetId: string;
+    campaignEnd: string;
+    creativeInstanceId: string;
+  },
+  advertiserId: string
+): ReactNode {
+  const [updateAd, { loading }] = useUpdateAdMutation({
+    refetchQueries: [
+      {
+        query: AdvertiserCampaignsDocument,
+        variables: { id: advertiserId },
+      },
+    ],
+  });
 
   return (
-    <Tooltip
-      title={
-        enabled
-          ? "Activate or pause campaign"
-          : "Cannot activate campaign in this state"
-      }
-    >
-      {}
-      <Switch
-        onChange={(e) => {
-          const theState = e.target.checked ? "active" : "paused";
-          setChecked(e.target.checked);
-          updateCampaign({
-            variables: { input: updateCampaignState(c, theState) },
+    <OnOff
+      onChange={(s) => {
+        {
+          updateAd({
+            variables: {
+              updateAdInput: {
+                // creativeSetId: c.creativeSetId,
+                // creativeId: c.id,
+                id: c.creativeInstanceId,
+                state: s,
+              },
+            },
           });
-        }}
-        checked={checked}
-        disabled={loading || !enabled}
-      />
-    </Tooltip>
+        }
+      }}
+      loading={loading}
+      state={c.state}
+      end={c.campaignEnd}
+      type="Ad"
+    />
   );
 }

@@ -86,7 +86,7 @@ export function CampaignList({
         {
           title: "Status",
           value: (c) => c.state,
-          extendedRenderer: (r) => <Status state={r.state} />,
+          extendedRenderer: (r) => <Status state={r.state} end={r.endAt} />,
         },
         {
           title: "Budget",

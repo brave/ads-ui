@@ -7,17 +7,30 @@ import _ from "lodash";
 
 export const Status: React.FC<{
   state: string;
-}> = ({ state }) => {
+  end: string;
+}> = ({ state, end }) => {
   let color = calcColorForState(state);
+  const isAfterEndDate = isPast(parseISO(end));
+
+  let label = _.startCase(state);
+  let tooltip = label;
+
+  if (isAfterEndDate && state === "active") {
+    label += "*";
+    tooltip += " (after end date, considered completed)";
+    color = calcColorForState("completed");
+  }
 
   return (
-    <Chip
-      label={_.upperCase(state)}
-      size="small"
-      sx={{
-        backgroundColor: color,
-        fontSize: "0.7rem",
-      }}
-    />
+    <Tooltip title={tooltip}>
+      <Chip
+        label={label}
+        size="small"
+        sx={{
+          backgroundColor: color,
+          fontSize: "0.7rem",
+        }}
+      />
+    </Tooltip>
   );
 };

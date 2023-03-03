@@ -140,6 +140,7 @@ const RoutesWithProps: React.FC<{ advertiser: IAdvertiser }> = ({
         <AdList
           campaigns={data?.advertiser?.campaigns ?? []}
           loading={loading}
+          advertiserId={advertiser.id}
         />
       </Route>
     </>
