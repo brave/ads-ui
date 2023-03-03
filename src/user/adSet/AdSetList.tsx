@@ -72,13 +72,6 @@ export function AdSetList({ campaigns, loading }: Props) {
             c.billingType === "cpm" ? "Impressions (CPM)" : "Clicks (CPC)",
         },
         {
-          title: "State",
-          value: (c) => c.state,
-          extendedRenderer: (r) => (
-            <Status state={r.state} end={r.campaignEnd} />
-          ),
-        },
-        {
           title: "Platforms",
           value: (c) => c.oses?.map((o) => o.name).join(", "),
           extendedRenderer: (r) => <ChipList items={r.oses} />,

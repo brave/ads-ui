@@ -4,25 +4,23 @@ import React from "react";
 import { CampaignFragment } from "../../graphql/campaign.generated";
 import { calcColorForState } from "./stateColors";
 import _ from "lodash";
+import { isAfterEndDate } from "../../util/isAfterEndDate";
 
 export const Status: React.FC<{
   state: string;
   end: string;
 }> = ({ state, end }) => {
   let color = calcColorForState(state);
-  const isAfterEndDate = isPast(parseISO(end));
 
   let label = _.startCase(state);
-  let tooltip = label;
 
-  if (isAfterEndDate && state === "active") {
-    label += "*";
-    tooltip += " (after end date, considered completed)";
+  if (isAfterEndDate(end) && state === "active") {
+    label = "Completed";
     color = calcColorForState("completed");
   }
 
   return (
-    <Tooltip title={tooltip}>
+    <Tooltip title={label}>
       <Chip
         label={label}
         size="small"

@@ -9,6 +9,7 @@ import { CampaignFragment } from "../../graphql/campaign.generated";
 import _ from "lodash";
 import { uiTextForCreativeTypeCode } from "../library";
 import { adOnOffState } from "../../components/EnhancedTable/renderers";
+import { isAfterEndDate } from "../../util/isAfterEndDate";
 
 interface Props {
   campaigns: CampaignFragment[];
@@ -61,7 +62,7 @@ export function AdList({ campaigns, loading, advertiserId }: Props) {
         },
         {
           title: "State",
-          value: (c) => c.state,
+          value: (c) => (isAfterEndDate(c.campaignEnd) ? "completed" : c.state),
           extendedRenderer: (r) => (
             <Status state={r.state} end={r.campaignEnd} />
           ),

@@ -18,6 +18,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useHistory } from "react-router-dom";
 import { Status } from "../../components/Campaigns/Status";
 import { CampaignFragment } from "../../graphql/campaign.generated";
+import { isAfterEndDate } from "../../util/isAfterEndDate";
 
 interface Props {
   campaigns: CampaignFragment[];
@@ -85,7 +86,7 @@ export function CampaignList({
         },
         {
           title: "Status",
-          value: (c) => c.state,
+          value: (c) => (isAfterEndDate(c.endAt) ? "completed" : c.state),
           extendedRenderer: (r) => <Status state={r.state} end={r.endAt} />,
         },
         {
