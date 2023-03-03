@@ -22,6 +22,14 @@ import { CreateAdDocument } from "../../graphql/ad-set.generated";
 import { CreateNotificationCreativeDocument } from "../../graphql/creative.generated";
 import { IAuthUser } from "../../actions";
 
+const TYPE_CODE_LOOKUP = {
+  notification_all_v1: "Push Notification",
+  new_tab_page_all_v1: "Sponsored Image",
+  inline_content_all_v1: "News Display Ad",
+  search_all_v1: "Search SERP",
+  search_homepage_all_v1: "Search Homepage",
+};
+
 export async function transformNewForm(
   form: CampaignForm,
   auth: IAuthUser,
@@ -264,4 +272,14 @@ export function updateCampaignState(
     state,
     type: c.type,
   };
+}
+
+export function uiTextForCreativeType(creativeType: string): string {
+  return TYPE_CODE_LOOKUP[creativeType] ?? creativeType;
+}
+
+export function uiTextForCreativeTypeCode(creativeTypeCode: {
+  code: string;
+}): string {
+  return uiTextForCreativeType(creativeTypeCode.code);
 }

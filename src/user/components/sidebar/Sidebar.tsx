@@ -1,6 +1,7 @@
 import * as React from "react";
 import CampaignIcon from "@mui/icons-material/Campaign";
 import DatasetIcon from "@mui/icons-material/Dataset";
+import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import {
   Box,
   CssBaseline,
@@ -28,6 +29,7 @@ export function Sidebar({ canCreate }: Props) {
   const routes = [
     { path: "campaigns", label: "Campaigns", icon: <CampaignIcon /> },
     { path: "adSets", label: "Ad Sets", icon: <DatasetIcon /> },
+    { path: "ads", label: "Ads", icon: <LibraryBooksIcon /> },
   ];
 
   return (

@@ -21,6 +21,7 @@ import { getActiveAdvertiser } from "../state/context";
 import { IAdvertiser, IAuthUser } from "../actions";
 import { useAdvertiserCampaignsQuery } from "../graphql/advertiser.generated";
 import { AdSetList } from "./adSet/AdSetList";
+import { AdList } from "./ads/AdList";
 
 const buildApolloClient = (accessToken: string) => {
   const httpLink = createHttpLink({
@@ -131,6 +132,12 @@ const RoutesWithProps: React.FC<{ advertiser: IAdvertiser }> = ({
       </Route>
       <Route path={`${match.path}/adsets`}>
         <AdSetList
+          campaigns={data?.advertiser?.campaigns ?? []}
+          loading={loading}
+        />
+      </Route>
+      <Route path={`${match.path}/ads`}>
+        <AdList
           campaigns={data?.advertiser?.campaigns ?? []}
           loading={loading}
         />

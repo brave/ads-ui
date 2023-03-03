@@ -4,7 +4,6 @@ import { Chip, LinearProgress } from "@mui/material";
 import { Status } from "../../components/Campaigns/Status";
 import { CampaignFragment } from "../../graphql/campaign.generated";
 import _ from "lodash";
-import { AdSetFragment } from "../../graphql/ad-set.generated";
 
 interface Props {
   campaigns: CampaignFragment[];
@@ -44,7 +43,12 @@ const ChipList: React.FC<ChipListProps> = ({ items }) => {
 
 export function AdSetList({ campaigns, loading }: Props) {
   const mapAdSetName = campaigns.map((c) => ({
-    adSets: c.adSets.map((a) => ({ ...a, campaignName: c.name })),
+    adSets: c.adSets.map((a) => ({
+      ...a,
+      campaignName: c.name,
+      campaignStart: c.startAt,
+      campaignEnd: c.endAt,
+    })),
   }));
   const adSets = _.flatMap(mapAdSetName, "adSets");
 
