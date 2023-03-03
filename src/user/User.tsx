@@ -101,9 +101,6 @@ function User({ advertisers, auth }: Props) {
               >
                 <AnalyticsOverview auth={auth} />
               </Route>
-
-              {/* default */}
-              <Redirect to={`${match.path}/campaigns`} />
             </Switch>
           </Box>
         </Box>
@@ -143,6 +140,8 @@ const RoutesWithProps: React.FC<{ advertiser: IAdvertiser }> = ({
           advertiserId={advertiser.id}
         />
       </Route>
+      {/* default */}
+      <Redirect to={`${match.path}/campaigns`} />
     </>
   );
 };

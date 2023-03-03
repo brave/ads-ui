@@ -144,8 +144,6 @@ export function adOnOffState(
           updateAd({
             variables: {
               updateAdInput: {
-                // creativeSetId: c.creativeSetId,
-                // creativeId: c.id,
                 id: c.creativeInstanceId,
                 state: s,
               },
