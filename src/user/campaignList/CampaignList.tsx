@@ -1,5 +1,4 @@
 import React from "react";
-import { useAdvertiserCampaignsQuery } from "../../graphql/advertiser.generated";
 import {
   EnhancedTable,
   StandardRenderers,
@@ -17,23 +16,29 @@ import {
 } from "../../components/EnhancedTable/renderers";
 import EditIcon from "@mui/icons-material/Edit";
 import { useHistory } from "react-router-dom";
-import { CampaignStatus } from "../../components/Campaigns/CampaignStatus";
+import { Status } from "../../components/Campaigns/Status";
+import { CampaignFragment } from "../../graphql/campaign.generated";
 
 interface Props {
-  advertiserId: string;
+  campaigns: CampaignFragment[];
   canEdit: boolean;
+  advertiserId: string;
+  loading: boolean;
 }
 
-function CampaignList({ advertiserId, canEdit }: Props) {
-  const { loading, data } = useAdvertiserCampaignsQuery({
-    variables: { id: advertiserId },
-  });
+export function CampaignList({
+  campaigns,
+  canEdit,
+  advertiserId,
+  loading,
+}: Props) {
   const history = useHistory();
+
   if (loading) return <LinearProgress />;
 
   return (
     <EnhancedTable
-      rows={data?.advertiser?.campaigns}
+      rows={campaigns}
       initialSortColumn={6}
       initialSortDirection="desc"
       columns={[
@@ -81,9 +86,7 @@ function CampaignList({ advertiserId, canEdit }: Props) {
         {
           title: "Status",
           value: (c) => c.state,
-          extendedRenderer: (r) => (
-            <CampaignStatus campaign={{ state: r.state, endAt: r.endAt }} />
-          ),
+          extendedRenderer: (r) => <Status state={r.state} />,
         },
         {
           title: "Budget",
@@ -109,5 +112,3 @@ function CampaignList({ advertiserId, canEdit }: Props) {
     />
   );
 }
-
-export default CampaignList;

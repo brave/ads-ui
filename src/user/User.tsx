@@ -1,9 +1,8 @@
-import _ from "lodash";
 import React, { useMemo, useState } from "react";
 import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
 
-import Sidebar from "./components/sidebar/Sidebar";
-import CampaignList from "./campaignList/CampaignList";
+import { Sidebar } from "./components/sidebar/Sidebar";
+import { CampaignList } from "./campaignList/CampaignList";
 
 import {
   ApolloClient,
@@ -20,6 +19,8 @@ import { EditCampaign } from "./views/adsManager/views/advanced/components/form/
 import { CompletionForm } from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
 import { getActiveAdvertiser } from "../state/context";
 import { IAdvertiser, IAuthUser } from "../actions";
+import { useAdvertiserCampaignsQuery } from "../graphql/advertiser.generated";
+import { AdSetList } from "./adSet/AdSetList";
 
 const buildApolloClient = (accessToken: string) => {
   const httpLink = createHttpLink({
@@ -91,12 +92,7 @@ function User({ advertisers, auth }: Props) {
               </Route>
 
               {/* /campaigns */}
-              <Route path={`${match.path}/campaigns`}>
-                <CampaignList
-                  canEdit={activeAdvertiser.selfServiceEdit}
-                  advertiserId={activeAdvertiser.id}
-                />
-              </Route>
+              <RoutesWithProps advertiser={activeAdvertiser} />
 
               {/* /campaigns/:campaignId/analytics - */}
               <Route
@@ -114,6 +110,34 @@ function User({ advertisers, auth }: Props) {
     </ApolloProvider>
   );
 }
+
+const RoutesWithProps: React.FC<{ advertiser: IAdvertiser }> = ({
+  advertiser,
+}) => {
+  const match = useRouteMatch();
+  const { loading, data } = useAdvertiserCampaignsQuery({
+    variables: { id: advertiser.id },
+  });
+
+  return (
+    <>
+      <Route path={`${match.path}/campaigns`}>
+        <CampaignList
+          canEdit={advertiser.selfServiceEdit}
+          campaigns={data?.advertiser?.campaigns ?? []}
+          advertiserId={advertiser.id}
+          loading={loading}
+        />
+      </Route>
+      <Route path={`${match.path}/adsets`}>
+        <AdSetList
+          campaigns={data?.advertiser?.campaigns ?? []}
+          loading={loading}
+        />
+      </Route>
+    </>
+  );
+};
 
 const mapStateToProps = (state: any) => ({
   advertisers: state.advertiserReducer.advertisers,
