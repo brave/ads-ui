@@ -1,10 +1,23 @@
-import { Box, Link, Tooltip } from "@mui/material";
+import { Box, CircularProgress, Link, Switch, Tooltip } from "@mui/material";
 import _ from "lodash";
-import { formatDistanceToNow, format, parseISO } from "date-fns";
+import { formatDistanceToNow, format, parseISO, isPast } from "date-fns";
 import { CellValue } from "./EnhancedTable";
-import { ReactChild, ReactNode } from "react";
+import React, { ChangeEvent, ReactChild, ReactNode, useState } from "react";
 import { formatInTimeZone } from "date-fns-tz";
 import enUS from "date-fns/locale/en-US";
+import { updateCampaignState } from "../../user/library";
+import {
+  CampaignFragment,
+  useUpdateCampaignMutation,
+} from "../../graphql/campaign.generated";
+import { AdvertiserCampaignsDocument } from "../../graphql/advertiser.generated";
+import {
+  AdFragment,
+  useUpdateAdMutation,
+} from "../../graphql/ad-set.generated";
+import { OnOff } from "../Switch/OnOff";
+import { Creative } from "../../user/views/adsManager/types";
+import { CreativeFragment } from "../../graphql/creative.generated";
 
 export type CellValueRenderer = (value: CellValue) => React.ReactNode;
 const ADS_DEFAULT_TIMEZONE = "America/New_York";
@@ -65,22 +78,6 @@ export const StandardRenderers: Record<string, CellValueRenderer> = {
   yesno: (v) => <Box>{v ? "Yes" : "No"}</Box>,
 };
 
-export const fixedWidthStringRenderer = (widthPx: number) => (v: CellValue) => {
-  const asString = `${v}`;
-  return (
-    <Tooltip title={asString}>
-      <Box
-        whiteSpace="nowrap"
-        overflow="hidden"
-        textOverflow="ellipsis"
-        width={`${widthPx}px`}
-      >
-        {asString}
-      </Box>
-    </Tooltip>
-  );
-};
-
 export function renderMonetaryAmount(
   value: number,
   currency: string
@@ -93,4 +90,71 @@ export function renderMonetaryAmount(
   } else {
     return <span>{value.toLocaleString("en")}&nbsp;BAT</span>;
   }
+}
+
+export function campaignOnOffState(
+  c: CampaignFragment,
+  advertiserId: string
+): ReactNode {
+  const [updateCampaign, { loading }] = useUpdateCampaignMutation({
+    refetchQueries: [
+      {
+        query: AdvertiserCampaignsDocument,
+        variables: { id: advertiserId },
+      },
+    ],
+  });
+
+  return (
+    <OnOff
+      onChange={(s) => {
+        updateCampaign({
+          variables: { input: updateCampaignState(c, s) },
+        });
+      }}
+      loading={loading}
+      state={c.state}
+      end={c.endAt}
+      type="Campaign"
+    />
+  );
+}
+
+export function adOnOffState(
+  c: CreativeFragment & {
+    creativeSetId: string;
+    campaignEnd: string;
+    creativeInstanceId: string;
+  },
+  advertiserId: string
+): ReactNode {
+  const [updateAd, { loading }] = useUpdateAdMutation({
+    refetchQueries: [
+      {
+        query: AdvertiserCampaignsDocument,
+        variables: { id: advertiserId },
+      },
+    ],
+  });
+
+  return (
+    <OnOff
+      onChange={(s) => {
+        {
+          updateAd({
+            variables: {
+              updateAdInput: {
+                id: c.creativeInstanceId,
+                state: s,
+              },
+            },
+          });
+        }
+      }}
+      loading={loading}
+      state={c.state}
+      end={c.campaignEnd}
+      type="Ad"
+    />
+  );
 }

@@ -1,5 +1,7 @@
 import * as React from "react";
 import CampaignIcon from "@mui/icons-material/Campaign";
+import DatasetIcon from "@mui/icons-material/Dataset";
+import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import {
   Box,
   CssBaseline,
@@ -12,6 +14,7 @@ import {
 } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import Navbar from "../navbar/Navbar";
+import { useState } from "react";
 
 const drawerWidth = 240;
 
@@ -19,8 +22,15 @@ interface Props {
   canCreate: boolean;
 }
 
-function Sidebar({ canCreate }: Props) {
+export function Sidebar({ canCreate }: Props) {
   const history = useHistory();
+  console.log(history.location);
+
+  const routes = [
+    { path: "campaigns", label: "Campaigns", icon: <CampaignIcon /> },
+    { path: "adSets", label: "Ad Sets", icon: <DatasetIcon /> },
+    { path: "ads", label: "Ads", icon: <LibraryBooksIcon /> },
+  ];
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -38,22 +48,23 @@ function Sidebar({ canCreate }: Props) {
         variant="permanent"
         anchor="left"
       >
-        <List sx={{ mt: 8 }}>
-          <ListItemButton
-            selected
-            onClick={() => history.push("/user/main/campaigns")}
-          >
-            <ListItemText disableTypography>
-              <Typography variant="h6">Campaigns</Typography>
-            </ListItemText>
-            <ListItemIcon>
-              <CampaignIcon />
-            </ListItemIcon>
-          </ListItemButton>
+        <List sx={{ mt: 7 }}>
+          {routes.map((r) => (
+            <ListItemButton
+              selected={history.location.pathname.includes(r.path)}
+              onClick={() => {
+                history.push(`/user/main/${r.path}`);
+              }}
+              sx={{ mt: 1 }}
+            >
+              <ListItemText disableTypography>
+                <Typography variant="h6">{r.label}</Typography>
+              </ListItemText>
+              <ListItemIcon>{r.icon}</ListItemIcon>
+            </ListItemButton>
+          ))}
         </List>
       </Drawer>
     </Box>
   );
 }
-
-export default Sidebar;

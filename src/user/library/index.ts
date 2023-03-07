@@ -12,15 +12,27 @@ import {
   CreateCampaignInput,
   CreateNotificationCreativeInput,
   GeocodeInput,
+  UpdateAdInput,
   UpdateAdSetInput,
   UpdateCampaignInput,
 } from "../../graphql/types";
 import axios from "axios";
-import { print } from "graphql";
+import { DocumentNode, print } from "graphql";
 import { CampaignFragment } from "../../graphql/campaign.generated";
-import { CreateAdDocument } from "../../graphql/ad-set.generated";
+import {
+  CreateAdDocument,
+  UpdateAdDocument,
+} from "../../graphql/ad-set.generated";
 import { CreateNotificationCreativeDocument } from "../../graphql/creative.generated";
 import { IAuthUser } from "../../actions";
+
+const TYPE_CODE_LOOKUP = {
+  notification_all_v1: "Push Notification",
+  new_tab_page_all_v1: "Sponsored Image",
+  inline_content_all_v1: "News Display Ad",
+  search_all_v1: "Search SERP",
+  search_homepage_all_v1: "Search Homepage",
+};
 
 export async function transformNewForm(
   form: CampaignForm,
@@ -122,16 +134,16 @@ async function transformCreative(
   };
 }
 
-// TODO: Get rid of this ASAP. Currently necessary because when creating a campaign, you need existing creativeId.
-async function createNotification(
+async function graphqlRequest<T>(
   accessToken: string,
-  createInput: CreateNotificationCreativeInput
+  node: DocumentNode,
+  input: T
 ) {
   const response = await axios.post(
     `${process.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql"),
     JSON.stringify({
       query: print(CreateNotificationCreativeDocument),
-      variables: { input: createInput },
+      variables: input,
     }),
     {
       headers: {
@@ -141,26 +153,30 @@ async function createNotification(
     }
   );
 
-  return response.data.data.createNotificationCreative.id;
+  return response.data;
+}
+
+// TODO: Get rid of this ASAP. Currently necessary because when creating a campaign, you need existing creativeId.
+async function createNotification(
+  accessToken: string,
+  createInput: CreateNotificationCreativeInput
+) {
+  const response = await graphqlRequest<{
+    input: CreateNotificationCreativeInput;
+  }>(accessToken, CreateNotificationCreativeDocument, { input: createInput });
+
+  return response.data.createNotificationCreative.id;
 }
 
 // TODO: Get rid of this ASAP. Currently necessary because when updating a campaign, it does not take into account any new ads.
 async function createAd(accessToken: string, createInput: CreateAdInput) {
-  const response = await axios.post(
-    `${process.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql"),
-    JSON.stringify({
-      query: print(CreateAdDocument),
-      variables: { createAdInput: createInput },
-    }),
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-    }
+  const response = await graphqlRequest<{ createAdInput: CreateAdInput }>(
+    accessToken,
+    CreateAdDocument,
+    { createAdInput: createInput }
   );
 
-  return response.data.data.createAd.id;
+  return response.data.createAd.id;
 }
 
 export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
@@ -242,4 +258,36 @@ export async function transformEditForm(
     type: form.type,
     adSets: transformedAdSet,
   };
+}
+
+export function updateCampaignState(
+  c: CampaignFragment,
+  state: string
+): UpdateCampaignInput {
+  return {
+    budget: c.budget,
+    currency: c.currency,
+    dailyBudget: c.dailyBudget,
+    dailyCap: c.dailyCap,
+    endAt: c.endAt,
+    geoTargets: (c.geoTargets ?? []).map((g) => ({
+      name: g.name,
+      code: g.code,
+    })),
+    id: c.id,
+    name: c.name,
+    startAt: c.startAt,
+    state,
+    type: c.type,
+  };
+}
+
+export function uiTextForCreativeType(creativeType: string): string {
+  return TYPE_CODE_LOOKUP[creativeType] ?? creativeType;
+}
+
+export function uiTextForCreativeTypeCode(creativeTypeCode: {
+  code: string;
+}): string {
+  return uiTextForCreativeType(creativeTypeCode.code);
 }
