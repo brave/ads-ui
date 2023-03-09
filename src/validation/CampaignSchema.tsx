@@ -79,25 +79,39 @@ export const CampaignSchema = object().shape({
           )
           .min(1, "At least one platform must be targeted")
           .default([]),
-        conversions: array()
-          .label("Conversion")
-          .min(0)
-          .max(1)
-          .of(
-            object().shape({
-              urlPattern: string()
-                .required("Conversion URL Required")
+        conversions: object().shape(
+          {
+            urlPattern: string().when(["observationWindow", "type"], {
+              is: (window, t) => window > 0 || t !== "",
+              then: string()
+                .required("Conversion URL required")
                 .matches(
                   TrailingAsteriskRegex,
                   "Conversion URL must end in trailing asterisk (*)"
                 ),
-              observationWindow: number().required().default(7),
-              type: string()
-                .oneOf(["postclick", "postview"])
-                .required()
-                .default("postview"),
-            })
-          ),
+              otherwise: string(),
+            }),
+            observationWindow: number().when(["urlPattern", "type"], {
+              is: (url, t) => url !== "" || t !== "",
+              then: number()
+                .oneOf([1, 7, 30], "Observation Window required")
+                .required("Observation Window required"),
+              otherwise: number(),
+            }),
+            type: string().when(["observationWindow", "urlPattern"], {
+              is: (window, url) => window > 0 || url !== "",
+              then: string()
+                .oneOf(["postclick", "postview"], "Type required")
+                .required("Type required"),
+              otherwise: string(),
+            }),
+          },
+          [
+            ["type", "observationWindow"],
+            ["type", "urlPattern"],
+            ["observationWindow", "urlPattern"],
+          ]
+        ),
         creatives: array()
           .min(1)
           .of(

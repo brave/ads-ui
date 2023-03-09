@@ -1,7 +1,8 @@
-import { Box, List, ListItemText } from "@mui/material";
+import { Box, List, ListItemText, TextField } from "@mui/material";
 import { FormikRadioControl, FormikTextField } from "../../form/FormikHelpers";
 import React from "react";
-import { CustomListItemText } from "../List/CustomListItemText";
+import { useField, useFormikContext } from "formik";
+import { CampaignForm } from "../../user/views/adsManager/types";
 
 interface Props {
   idx: number;
@@ -11,7 +12,7 @@ export const ConversionFields: React.FC<Props> = ({ idx }: Props) => {
   return (
     <>
       <FormikRadioControl
-        name={`adSets.${idx}.conversions.0.type`}
+        name={`adSets.${idx}.conversions.type`}
         label="Type"
         options={[
           { value: "postview", label: "Post-View" },
@@ -33,7 +34,7 @@ export const ConversionFields: React.FC<Props> = ({ idx }: Props) => {
 
       <Box>
         <FormikTextField
-          name={`adSets.${idx}.conversions.0.urlPattern`}
+          name={`adSets.${idx}.conversions.urlPattern`}
           label="URL Pattern"
           helperText="Example: https://brave.com/products/*"
         />
@@ -41,7 +42,7 @@ export const ConversionFields: React.FC<Props> = ({ idx }: Props) => {
 
       <Box>
         <FormikRadioControl
-          name={`adSets.${idx}.conversions.0.observationWindow`}
+          name={`adSets.${idx}.conversions.observationWindow`}
           label="Window"
           options={[
             { value: 1, label: "1 Day" },

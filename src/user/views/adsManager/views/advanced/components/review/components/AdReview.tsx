@@ -50,9 +50,7 @@ export function AdReview({ ad, adIdx, error }: Props) {
                   <Box>{e}</Box>
                 ))}
               </Stack>
-            ) : (
-              <></>
-            )
+            ) : undefined
           }
         />
       </List>

@@ -3,6 +3,7 @@ import {
   CampaignForm,
   Conversion,
   Creative,
+  initialAdSet,
   OS,
   Segment,
 } from "../views/adsManager/types";
@@ -12,17 +13,13 @@ import {
   CreateCampaignInput,
   CreateNotificationCreativeInput,
   GeocodeInput,
-  UpdateAdInput,
   UpdateAdSetInput,
   UpdateCampaignInput,
 } from "../../graphql/types";
 import axios from "axios";
 import { DocumentNode, print } from "graphql";
 import { CampaignFragment } from "../../graphql/campaign.generated";
-import {
-  CreateAdDocument,
-  UpdateAdDocument,
-} from "../../graphql/ad-set.generated";
+import { CreateAdDocument } from "../../graphql/ad-set.generated";
 import { CreateNotificationCreativeDocument } from "../../graphql/creative.generated";
 import { IAuthUser } from "../../actions";
 
@@ -51,6 +48,7 @@ export async function transformNewForm(
     }
 
     const base: CreateAdSetInput = {
+      name: adSet.name,
       billingType: adSet.billingType,
       execution: "per_click",
       perDay: 1,
@@ -84,18 +82,21 @@ export async function transformNewForm(
   };
 }
 
-function transformConversion(conv: Conversion[]) {
-  if (conv.length === 0) {
+function transformConversion(conv: Conversion) {
+  if (
+    conv.observationWindow === 0 &&
+    conv.type === "" &&
+    conv.urlPattern === ""
+  ) {
     return [];
   }
 
-  const conversion = conv[0];
   return [
     {
       // need to make observationWindow a float
-      observationWindow: conversion.observationWindow,
-      urlPattern: conversion.urlPattern,
-      type: conversion.type,
+      observationWindow: conv.observationWindow * 1.0,
+      urlPattern: conv.urlPattern,
+      type: conv.type,
     },
   ];
 }
@@ -184,7 +185,7 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
     adSets: campaign.adSets.map((adSet) => ({
       ...adSet,
       id: adSet.id,
-      conversions: adSet.conversions ?? [],
+      conversions: adSet.conversions?.[0] ?? initialAdSet.conversions,
       oses: adSet.oses ?? ([] as OS[]),
       segments: adSet.segments ?? ([] as Segment[]),
       billingType: adSet.billingType ?? "cpm",

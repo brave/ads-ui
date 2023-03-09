@@ -24,20 +24,19 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
     return v === "untargeted" ? "Let Brave determine best audience." : v;
   };
 
-  const conversionValue = (v: Conversion[]) => {
-    if (v.length === 0) {
+  const conversionValue = (v: Conversion) => {
+    if (v.type === "" && v.urlPattern === "" && v.observationWindow <= 0) {
       return "No conversion metric set.";
     }
 
-    const conversion = v[0];
     return (
       <List>
-        <CustomListItemText primary="Type" secondary={conversion.type} />
+        <CustomListItemText primary="Type" secondary={v.type} />
         <CustomListItemText
           primary="Window"
-          secondary={`${conversion.observationWindow} days`}
+          secondary={`${v.observationWindow} days`}
         />
-        <CustomListItemText primary="URL" secondary={conversion.urlPattern} />
+        <CustomListItemText primary="URL" secondary={v.urlPattern} />
       </List>
     );
   };
@@ -73,7 +72,17 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
         <CustomListItemText
           primary="Conversion"
           secondary={conversionValue(adSet.conversions)}
-          error={hasErrors ? (adSetError.conversions?.[0] as string) : ""}
+          error={
+            hasErrors ? (
+              <>
+                {adSetError.conversions?.type}
+                <br />
+                {adSetError.conversions?.observationWindow}
+                <br />
+                {adSetError.conversions?.urlPattern}
+              </>
+            ) : undefined
+          }
         />
       </List>
 
