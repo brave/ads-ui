@@ -82,28 +82,31 @@ export const CampaignSchema = object().shape({
         conversions: object().shape(
           {
             urlPattern: string().when(["observationWindow", "type"], {
-              is: (window, t) => window > 0 || t !== "",
+              is: (window, t) => window >= 0 && !!t,
               then: string()
                 .required("Conversion URL required")
                 .matches(
                   TrailingAsteriskRegex,
                   "Conversion URL must end in trailing asterisk (*)"
                 ),
-              otherwise: string(),
             }),
             observationWindow: number().when(["urlPattern", "type"], {
-              is: (url, t) => url !== "" || t !== "",
+              is: (url, t) => !!url || !!t,
               then: number()
-                .oneOf([1, 7, 30], "Observation Window required")
+                .oneOf(
+                  [1, 7, 30],
+                  "Observation Window must be 1, 7, or 30 days."
+                )
                 .required("Observation Window required"),
-              otherwise: number(),
             }),
             type: string().when(["observationWindow", "urlPattern"], {
-              is: (window, url) => window > 0 || url !== "",
+              is: (window, url) => window >= 0 && !!url,
               then: string()
-                .oneOf(["postclick", "postview"], "Type required")
-                .required("Type required"),
-              otherwise: string(),
+                .oneOf(
+                  ["postclick", "postview"],
+                  "Conversion type must be Post Click or Post View"
+                )
+                .required("Conversion Type required"),
             }),
           },
           [
