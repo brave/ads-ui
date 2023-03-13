@@ -5,10 +5,15 @@ import { Status } from "../../components/Campaigns/Status";
 import { CampaignFragment } from "../../graphql/campaign.generated";
 import _ from "lodash";
 import { isAfterEndDate } from "../../util/isAfterEndDate";
+import {
+  adOnOffState,
+  adSetOnOffState,
+} from "../../components/EnhancedTable/renderers";
 
 interface Props {
   campaigns: CampaignFragment[];
   loading: boolean;
+  advertiserId: string;
 }
 
 interface ChipListProps {
@@ -42,13 +47,14 @@ const ChipList: React.FC<ChipListProps> = ({ items }) => {
   );
 };
 
-export function AdSetList({ campaigns, loading }: Props) {
+export function AdSetList({ campaigns, loading, advertiserId }: Props) {
   const mapAdSetName = campaigns.map((c) => ({
     adSets: c.adSets.map((a) => ({
       ...a,
       campaignName: c.name,
       campaignStart: c.startAt,
       campaignEnd: c.endAt,
+      campaignId: c.id,
     })),
   }));
   const adSets = _.flatMap(mapAdSetName, "adSets");
@@ -59,6 +65,13 @@ export function AdSetList({ campaigns, loading }: Props) {
     <EnhancedTable
       rows={adSets}
       columns={[
+        {
+          title: "On/Off",
+          value: (c) => c.state,
+          extendedRenderer: (r) => adSetOnOffState(r, advertiserId),
+          sx: { width: "10px" },
+          sortable: false,
+        },
         {
           title: "Ad Set Name",
           value: (c) => c.name || c.id.substring(0, 8),

@@ -13,7 +13,9 @@ import {
 import { AdvertiserCampaignsDocument } from "../../graphql/advertiser.generated";
 import {
   AdFragment,
+  AdSetFragment,
   useUpdateAdMutation,
+  useUpdateAdSetMutation,
 } from "../../graphql/ad-set.generated";
 import { OnOff } from "../Switch/OnOff";
 import { Creative } from "../../user/views/adsManager/types";
@@ -116,6 +118,42 @@ export function campaignOnOffState(
       state={c.state}
       end={c.endAt}
       type="Campaign"
+    />
+  );
+}
+
+export function adSetOnOffState(
+  c: AdSetFragment & { campaignEnd: string; campaignId: string },
+  advertiserId: string
+): ReactNode {
+  const [updateAdSet, { loading }] = useUpdateAdSetMutation({
+    refetchQueries: [
+      {
+        query: AdvertiserCampaignsDocument,
+        variables: { id: advertiserId },
+      },
+    ],
+  });
+
+  return (
+    <OnOff
+      onChange={(s) => {
+        {
+          updateAdSet({
+            variables: {
+              updateAdSetInput: {
+                state: s === "paused" ? "suspended" : s,
+                id: c.id,
+                campaignId: c.campaignId,
+              },
+            },
+          });
+        }
+      }}
+      loading={loading}
+      state={c.state === "suspended" ? "paused" : c.state}
+      end={c.campaignEnd}
+      type="Ad Set"
     />
   );
 }
