@@ -31,7 +31,6 @@ export function BudgetField({ isEdit }: Props) {
     }
 
     setFieldValue("dailyBudget", dailyBudget);
-    setFieldError("budget", "error");
   }, [campaignRuntime, values.budget, minBudget]);
 
   return (
