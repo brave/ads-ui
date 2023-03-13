@@ -22,8 +22,14 @@ export function BudgetField({ isEdit }: Props) {
   );
 
   useEffect(() => {
-    const dailyBudget = Math.floor(Number(values.budget) / campaignRuntime);
-    const minLifetime = MIN_PER_DAY * campaignRuntime;
+    const dailyBudget =
+      campaignRuntime > 0
+        ? Math.ceil(Number(values.budget) / campaignRuntime)
+        : values.budget;
+    const minLifetime =
+      campaignRuntime > 0 && values.budget >= MIN_PER_CAMPAIGN
+        ? MIN_PER_DAY * campaignRuntime
+        : MIN_PER_CAMPAIGN;
 
     if (values.budget <= minLifetime) {
       setMinBudget(minLifetime);

@@ -62,6 +62,8 @@ export async function transformNewForm(
     transformedAdSet.push(base);
   }
 
+  console.log(form);
+
   return {
     currency: form.currency,
     dailyCap: form.dailyCap,
