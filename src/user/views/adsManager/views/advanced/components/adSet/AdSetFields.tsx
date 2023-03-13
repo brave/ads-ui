@@ -50,7 +50,10 @@ export function AdSetFields({ tabValue, onRemove, onCreate, isEdit }: Props) {
                     onCreate();
                     push(initialAdSet);
                   }}
-                  showCreateNew={index === values.adSets.length - 1}
+                  showCreateNew={
+                    index === values.adSets.length - 1 &&
+                    values.adSets.length <= 5
+                  }
                 />
               </>
             )}
