@@ -24,9 +24,25 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
     return v === "untargeted" ? "Let Brave determine best audience." : v;
   };
 
-  const conversionValue = (v: Conversion) => {
-    if (v.type === "" && v.urlPattern === "" && v.observationWindow <= 0) {
-      return "No conversion metric set.";
+  const conversionValue = (
+    v: Conversion,
+    e?: FormikErrors<Conversion>,
+    isError: boolean = false
+  ) => {
+    const isEmpty =
+      v.type === "" && v.urlPattern === "" && v.observationWindow <= 0;
+    if (isEmpty) {
+      return isError ? undefined : "No conversion metric set.";
+    } else if (!isEmpty && !!e) {
+      return (
+        <>
+          {e.type}
+          <br />
+          {e.observationWindow}
+          <br />
+          {e.urlPattern}
+        </>
+      );
     }
 
     return (
@@ -71,18 +87,12 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
         />
         <CustomListItemText
           primary="Conversion"
-          secondary={conversionValue(adSet.conversions)}
-          error={
-            hasErrors ? (
-              <>
-                {adSetError.conversions?.type}
-                <br />
-                {adSetError.conversions?.observationWindow}
-                <br />
-                {adSetError.conversions?.urlPattern}
-              </>
-            ) : undefined
-          }
+          secondary={conversionValue(adSet.conversions, adSetError.conversions)}
+          error={conversionValue(
+            adSet.conversions,
+            adSetError.conversions,
+            true
+          )}
         />
       </List>
 
