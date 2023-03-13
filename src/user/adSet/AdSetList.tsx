@@ -4,6 +4,7 @@ import { Chip, LinearProgress } from "@mui/material";
 import { Status } from "../../components/Campaigns/Status";
 import { CampaignFragment } from "../../graphql/campaign.generated";
 import _ from "lodash";
+import { isAfterEndDate } from "../../util/isAfterEndDate";
 
 interface Props {
   campaigns: CampaignFragment[];
@@ -61,6 +62,13 @@ export function AdSetList({ campaigns, loading }: Props) {
         {
           title: "Ad Set Name",
           value: (c) => c.name || c.id.substring(0, 8),
+        },
+        {
+          title: "State",
+          value: (c) => (isAfterEndDate(c.campaignEnd) ? "completed" : c.state),
+          extendedRenderer: (r) => (
+            <Status state={r.state} end={r.campaignEnd} />
+          ),
         },
         {
           title: "Campaign Name",
