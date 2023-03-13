@@ -145,6 +145,10 @@ export function adSetOnOffState(
                 state: s === "paused" ? "suspended" : s,
                 id: c.id,
                 campaignId: c.campaignId,
+                segments: c.segments?.map((s) => ({
+                  code: s.code,
+                  name: s.name,
+                })),
               },
             },
           });

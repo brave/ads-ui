@@ -7,6 +7,7 @@ const defaultOptions = {} as const;
 export type AdSetFragment = {
   __typename?: "AdSet";
   id: string;
+  createdAt: any;
   billingType?: string | null;
   name?: string | null;
   totalMax: number;
@@ -88,6 +89,7 @@ export type CreateAdSetMutation = {
   createAdSet: {
     __typename?: "AdSet";
     id: string;
+    createdAt: any;
     billingType?: string | null;
     name?: string | null;
     totalMax: number;
@@ -147,6 +149,7 @@ export type UpdateAdSetMutation = {
   updateAdSet: {
     __typename?: "AdSet";
     id: string;
+    createdAt: any;
     billingType?: string | null;
     name?: string | null;
     totalMax: number;
@@ -257,6 +260,7 @@ export const AdFragmentDoc = gql`
 export const AdSetFragmentDoc = gql`
   fragment AdSet on AdSet {
     id
+    createdAt
     billingType
     name
     totalMax

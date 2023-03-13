@@ -1,5 +1,8 @@
 import React from "react";
-import { EnhancedTable } from "../../components/EnhancedTable";
+import {
+  EnhancedTable,
+  StandardRenderers,
+} from "../../components/EnhancedTable";
 import { Chip, LinearProgress } from "@mui/material";
 import { Status } from "../../components/Campaigns/Status";
 import { CampaignFragment } from "../../graphql/campaign.generated";
@@ -64,6 +67,8 @@ export function AdSetList({ campaigns, loading, advertiserId }: Props) {
   return (
     <EnhancedTable
       rows={adSets}
+      initialSortColumn={7}
+      initialSortDirection="desc"
       columns={[
         {
           title: "On/Off",
@@ -101,6 +106,11 @@ export function AdSetList({ campaigns, loading, advertiserId }: Props) {
           title: "Audiences",
           value: (c) => c.segments?.map((o) => o.name).join(", "),
           extendedRenderer: (r) => <ChipList items={r.segments} />,
+        },
+        {
+          title: "Created",
+          value: (c) => c.createdAt,
+          renderer: StandardRenderers.date,
         },
       ]}
     />

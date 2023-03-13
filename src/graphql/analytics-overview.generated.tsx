@@ -92,6 +92,7 @@ export type AnalyticOverviewQuery = {
     adSets: Array<{
       __typename?: "AdSet";
       id: string;
+      createdAt: any;
       billingType?: string | null;
       name?: string | null;
       totalMax: number;

@@ -107,6 +107,8 @@ export type CreateAdvertiserInput = {
   name: Scalars["String"];
   phone?: InputMaybe<Scalars["String"]>;
   referrer?: InputMaybe<Scalars["String"]>;
+  selfServiceCreate?: InputMaybe<Scalars["Boolean"]>;
+  selfServiceEdit?: InputMaybe<Scalars["Boolean"]>;
   state?: InputMaybe<Scalars["String"]>;
   userId?: InputMaybe<Scalars["String"]>;
 };
@@ -226,7 +228,7 @@ export type CreativeInput = {
   payloadNotification?: InputMaybe<NotificationPayloadInput>;
   payloadPromotedContent?: InputMaybe<PromotedContentPayloadInput>;
   payloadSearch?: InputMaybe<SearchPayloadInput>;
-  payloadSearchHomepage?: InputMaybe<SearchHompagePayloadInput>;
+  payloadSearchHomepage?: InputMaybe<SearchHomepagePayloadInput>;
   startAt?: InputMaybe<Scalars["DateTime"]>;
   state: Scalars["String"];
   type: CreateTypeInput;
@@ -307,8 +309,9 @@ export type RejectCampaignInput = {
   option: Scalars["String"];
 };
 
-export type SearchHompagePayloadInput = {
+export type SearchHomepagePayloadInput = {
   body: Scalars["String"];
+  ctaText?: Scalars["String"];
   imageDarkModeUrl?: InputMaybe<Scalars["String"]>;
   imageUrl: Scalars["String"];
   targetUrl: Scalars["String"];
@@ -371,6 +374,8 @@ export type UpdateAdvertiserInput = {
   phone?: InputMaybe<Scalars["String"]>;
   publicKey?: InputMaybe<Scalars["String"]>;
   referrer?: InputMaybe<Scalars["String"]>;
+  selfServiceCreate?: InputMaybe<Scalars["Boolean"]>;
+  selfServiceEdit?: InputMaybe<Scalars["Boolean"]>;
   state?: InputMaybe<Scalars["String"]>;
 };
 
