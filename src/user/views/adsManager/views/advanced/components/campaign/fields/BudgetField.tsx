@@ -1,9 +1,9 @@
 import { Box, Divider, InputAdornment, Stack, Typography } from "@mui/material";
 import { FormikTextField } from "../../../../../../../../form/FormikHelpers";
-import React, { useEffect } from "react";
-import { useField, useFormikContext } from "formik";
+import React, { useEffect, useState } from "react";
+import { useFormikContext } from "formik";
 import { CampaignForm } from "../../../../../types";
-import { differenceInDays } from "date-fns";
+import { differenceInHours } from "date-fns";
 import {
   MIN_PER_CAMPAIGN,
   MIN_PER_DAY,
@@ -15,27 +15,24 @@ interface Props {
 }
 
 export function BudgetField({ isEdit }: Props) {
-  const { values, setFieldValue } = useFormikContext<CampaignForm>();
-  const campaignRuntime = differenceInDays(
-    new Date(values.endAt),
-    new Date(values.startAt)
+  const { values, setFieldValue, errors, touched, setFieldError } =
+    useFormikContext<CampaignForm>();
+  const [minBudget, setMinBudget] = useState(MIN_PER_CAMPAIGN);
+  const campaignRuntime = Math.floor(
+    differenceInHours(new Date(values.endAt), new Date(values.startAt)) / 24
   );
 
   useEffect(() => {
-    const dailyBudget =
-      campaignRuntime > 0
-        ? Math.ceil(Number(values.budget) / campaignRuntime)
-        : values.budget;
-    const minLifetime =
-      campaignRuntime > 0 && values.budget >= MIN_PER_CAMPAIGN
-        ? MIN_PER_DAY * campaignRuntime
-        : MIN_PER_CAMPAIGN;
+    const dailyBudget = Math.floor(Number(values.budget) / campaignRuntime);
+    const minLifetime = MIN_PER_DAY * campaignRuntime;
 
-    if (minLifetime >= values.budget) {
-      setFieldValue("budget", minLifetime);
+    if (values.budget <= minLifetime) {
+      setMinBudget(minLifetime);
     }
+
     setFieldValue("dailyBudget", dailyBudget);
-  }, [campaignRuntime, values.budget]);
+    setFieldError("budget", "error");
+  }, [campaignRuntime, values.budget, minBudget]);
 
   return (
     <Box>
@@ -56,6 +53,12 @@ export function BudgetField({ isEdit }: Props) {
             endAdornment: <InputAdornment position="end">USD</InputAdornment>,
           }}
           disabled={isEdit}
+          helperText={
+            errors.budget || errors.dailyBudget
+              ? `${errors.dailyBudget}. Minimum $${minBudget}.`
+              : undefined
+          }
+          error={!!errors.budget || !!errors.dailyBudget}
         />
 
         {!isEdit && (
