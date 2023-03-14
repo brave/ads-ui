@@ -50,6 +50,7 @@ const AnalyticsOverview: React.FC<Props> = ({ auth }: Props) => {
       id: params.campaignId,
     },
     onCompleted: (d) => initializeCampaign(d, today),
+    pollInterval: 600_000,
   });
 
   if (loading || !data || !data.campaign || !startDate)

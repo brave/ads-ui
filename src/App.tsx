@@ -39,7 +39,7 @@ const App = (props) => {
         getActiveAdvertiser() || _.find(advertisers, { state: "active" });
       if (advertisers.length > 0 && activeAdvertiser) {
         setActiveAdvertiser(activeAdvertiser);
-        return <Redirect to="/user/main/campaigns" />;
+        return <Redirect to="/user/main" />;
       } else {
         return <Redirect to="/auth" />;
       }
