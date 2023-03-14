@@ -3,10 +3,14 @@ import { FormikErrors } from "formik";
 import { Conversion } from "../../user/views/adsManager/types";
 
 interface Props {
-  errors?: FormikErrors<Conversion>;
+  errors?: FormikErrors<Conversion> | string;
 }
 
 export function ConversionError({ errors }: Props) {
+  if (typeof errors === "string") {
+    return <>{errors}</>;
+  }
+
   const errs: (string | undefined)[] = [
     errors?.type,
     errors?.observationWindow,

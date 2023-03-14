@@ -15,8 +15,12 @@ interface Props {
 }
 
 export function AdSetReview({ adSet, idx, errors }: Props) {
+  if (typeof errors === "string") {
+    return <>{errors}</>;
+  }
+
   const hasErrors = !!errors;
-  const adSetError = errors as FormikErrors<AdSetForm>;
+  const adSetError = errors;
 
   const mapToString = (arr: Segment[] | OS[]) => {
     return arr.map((o) => o.name).join(", ");
@@ -37,31 +41,27 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
         <CustomListItemText
           primary="Pricing Type"
           secondary={billing(adSet.billingType)}
-          error={hasErrors ? adSetError.billingType : ""}
+          error={hasErrors ? adSetError?.billingType : ""}
         />
         <CustomListItemText
           primary="Price"
           secondary={`$${adSet.price}`}
-          error={hasErrors ? adSetError.price : ""}
+          error={hasErrors ? adSetError?.price : ""}
         />
         <CustomListItemText
           primary="Audiences"
           secondary={segmentValue(mapToString(adSet.segments))}
-          error={hasErrors ? (adSetError.segments as string) : ""}
+          error={hasErrors ? (adSetError?.segments as string) : ""}
         />
         <CustomListItemText
           primary="Platforms"
           secondary={mapToString(adSet.oses)}
-          error={hasErrors ? (adSetError.oses as string) : ""}
+          error={hasErrors ? (adSetError?.oses as string) : ""}
         />
-        <CustomListItemText
-          primary="Conversion"
-          secondary={<ConversionDisplay conversion={adSet.conversions} />}
-          error={
-            hasErrors && adSetError.conversions ? (
-              <ConversionError errors={adSetError.conversions} />
-            ) : undefined
-          }
+        <ConversionDisplay
+          conversions={adSet.conversions}
+          hasErrors={hasErrors}
+          convErrors={adSetError?.conversions}
         />
       </List>
 
@@ -72,7 +72,7 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
           <AdReview
             ad={ad}
             adIdx={adIdx}
-            error={hasErrors ? adSetError.creatives?.[adIdx] : ""}
+            error={hasErrors ? adSetError?.creatives?.[adIdx] : ""}
           />
         </>
       ))}

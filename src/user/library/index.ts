@@ -84,23 +84,16 @@ export async function transformNewForm(
   };
 }
 
-function transformConversion(conv: Conversion) {
-  if (
-    conv.observationWindow === 0 &&
-    conv.type === "" &&
-    conv.urlPattern === ""
-  ) {
+function transformConversion(conv: Conversion[]) {
+  if (conv.length <= 0) {
     return [];
   }
 
-  return [
-    {
-      // need to make observationWindow a float
-      observationWindow: conv.observationWindow * 1.0,
-      urlPattern: conv.urlPattern,
-      type: conv.type,
-    },
-  ];
+  return conv.map((c) => ({
+    observationWindow: c.observationWindow * 1.0,
+    urlPattern: c.urlPattern,
+    type: c.type,
+  }));
 }
 
 async function transformCreative(
@@ -187,7 +180,7 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
     adSets: campaign.adSets.map((adSet) => ({
       ...adSet,
       id: adSet.id,
-      conversions: adSet.conversions?.[0] ?? initialAdSet.conversions,
+      conversions: adSet.conversions ?? [],
       oses: adSet.oses ?? ([] as OS[]),
       segments: adSet.segments ?? ([] as Segment[]),
       billingType: adSet.billingType ?? "cpm",

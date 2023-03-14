@@ -42,7 +42,7 @@ export type AdSetForm = {
   billingType: string;
   segments: Segment[];
   oses: OS[];
-  conversions: Conversion;
+  conversions: Conversion[];
   creatives: Creative[];
 };
 
@@ -83,11 +83,7 @@ export const initialAdSet: AdSetForm = {
       name: "untargeted",
     },
   ],
-  conversions: {
-    type: "",
-    urlPattern: "",
-    observationWindow: 0,
-  },
+  conversions: [],
   oses: [],
   creatives: [
     {
