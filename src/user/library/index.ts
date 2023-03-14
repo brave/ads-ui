@@ -231,6 +231,7 @@ export async function transformEditForm(
     }
 
     const base: UpdateAdSetInput = {
+      id: adSet.id,
       segments: adSet.segments.map((v) => ({ code: v.code, name: v.name })),
       oses: adSet.oses.map((v) => ({ code: v.code, name: v.name })),
     };
