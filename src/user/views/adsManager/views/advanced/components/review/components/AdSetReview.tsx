@@ -5,6 +5,8 @@ import { AdSetForm, Conversion, OS, Segment } from "../../../../../types";
 import { FormikErrors } from "formik";
 import { AdReview } from "./AdReview";
 import _ from "lodash";
+import { ConversionError } from "../../../../../../../../components/Conversion/ConversionError";
+import ConversionDisplay from "../../../../../../../../components/Conversion/ConversionDisplay";
 
 interface Props {
   idx: number;
@@ -13,8 +15,12 @@ interface Props {
 }
 
 export function AdSetReview({ adSet, idx, errors }: Props) {
+  if (typeof errors === "string") {
+    return <>{errors}</>;
+  }
+
   const hasErrors = !!errors;
-  const adSetError = errors as FormikErrors<AdSetForm>;
+  const adSetError = errors;
 
   const mapToString = (arr: Segment[] | OS[]) => {
     return arr.map((o) => o.name).join(", ");
@@ -22,24 +28,6 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
 
   const segmentValue = (v: string) => {
     return v === "untargeted" ? "Let Brave determine best audience." : v;
-  };
-
-  const conversionValue = (v: Conversion[]) => {
-    if (v.length === 0) {
-      return "No conversion metric set.";
-    }
-
-    const conversion = v[0];
-    return (
-      <List>
-        <CustomListItemText primary="Type" secondary={conversion.type} />
-        <CustomListItemText
-          primary="Window"
-          secondary={`${conversion.observationWindow} days`}
-        />
-        <CustomListItemText primary="URL" secondary={conversion.urlPattern} />
-      </List>
-    );
   };
 
   const billing = (v: string) => {
@@ -53,27 +41,27 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
         <CustomListItemText
           primary="Pricing Type"
           secondary={billing(adSet.billingType)}
-          error={hasErrors ? adSetError.billingType : ""}
+          error={hasErrors ? adSetError?.billingType : ""}
         />
         <CustomListItemText
           primary="Price"
           secondary={`$${adSet.price}`}
-          error={hasErrors ? adSetError.price : ""}
+          error={hasErrors ? adSetError?.price : ""}
         />
         <CustomListItemText
           primary="Audiences"
           secondary={segmentValue(mapToString(adSet.segments))}
-          error={hasErrors ? (adSetError.segments as string) : ""}
+          error={hasErrors ? (adSetError?.segments as string) : ""}
         />
         <CustomListItemText
           primary="Platforms"
           secondary={mapToString(adSet.oses)}
-          error={hasErrors ? (adSetError.oses as string) : ""}
+          error={hasErrors ? (adSetError?.oses as string) : ""}
         />
-        <CustomListItemText
-          primary="Conversion"
-          secondary={conversionValue(adSet.conversions)}
-          error={hasErrors ? (adSetError.conversions?.[0] as string) : ""}
+        <ConversionDisplay
+          conversions={adSet.conversions}
+          hasErrors={hasErrors}
+          convErrors={adSetError?.conversions}
         />
       </List>
 
@@ -84,7 +72,7 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
           <AdReview
             ad={ad}
             adIdx={adIdx}
-            error={hasErrors ? adSetError.creatives?.[adIdx] : ""}
+            error={hasErrors ? adSetError?.creatives?.[adIdx] : ""}
           />
         </>
       ))}

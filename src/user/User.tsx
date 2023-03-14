@@ -115,6 +115,7 @@ const RoutesWithProps: React.FC<{ advertiser: IAdvertiser }> = ({
   const match = useRouteMatch();
   const { loading, data } = useAdvertiserCampaignsQuery({
     variables: { id: advertiser.id },
+    pollInterval: 600_000,
   });
 
   return (

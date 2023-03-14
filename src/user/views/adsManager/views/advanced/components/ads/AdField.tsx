@@ -66,16 +66,17 @@ export function AdField({ index, onNext, isEdit }: Props) {
                 <Typography variant="body2" sx={{ mr: 1 }}>
                   Define the look and feel of your ads.
                 </Typography>
-                {values.adSets[index].creatives.length - 1 === idx && (
-                  <Link
-                    underline="none"
-                    variant="body2"
-                    onClick={() => push(initialCreative)}
-                    sx={{ cursor: "pointer" }}
-                  >
-                    Create new Ad +
-                  </Link>
-                )}
+                {values.adSets[index].creatives.length - 1 === idx &&
+                  values.adSets[index].creatives.length <= 10 && (
+                    <Link
+                      underline="none"
+                      variant="body2"
+                      onClick={() => push(initialCreative)}
+                      sx={{ cursor: "pointer" }}
+                    >
+                      Create new Ad +
+                    </Link>
+                  )}
               </Box>
 
               <Ad adSetIdx={index} adIdx={idx} creative={ad} isEdit={isEdit} />

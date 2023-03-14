@@ -66,6 +66,12 @@ export type Creative = {
   targetUrlValid?: boolean;
 };
 
+export const initialConversion: Conversion = {
+  type: "",
+  urlPattern: "",
+  observationWindow: 0,
+};
+
 export const initialCreative: Creative = {
   name: "",
   title: "",
@@ -83,8 +89,8 @@ export const initialAdSet: AdSetForm = {
       name: "untargeted",
     },
   ],
-  oses: [],
   conversions: [],
+  oses: [],
   creatives: [
     {
       ...initialCreative,

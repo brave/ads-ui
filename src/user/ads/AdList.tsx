@@ -34,12 +34,10 @@ export function AdList({ campaigns, loading, advertiserId }: Props) {
       })),
     })),
   }));
-  const ads = _.map(
-    _.flatMap(_.flatMap(mapAdName, "adSets"), "ads"),
-    "creative"
+  const ads = _.uniqBy(
+    _.map(_.flatMap(_.flatMap(mapAdName, "adSets"), "ads"), "creative"),
+    "id"
   ).filter((a) => a.state !== "deleted");
-
-  console.log(ads);
 
   if (loading) return <LinearProgress />;
 

@@ -80,22 +80,29 @@ export const CampaignSchema = object().shape({
           .min(1, "At least one platform must be targeted")
           .default([]),
         conversions: array()
-          .label("Conversion")
+          .label("Conversions")
           .min(0)
           .max(1)
           .of(
             object().shape({
               urlPattern: string()
-                .required("Conversion URL Required")
+                .required("Conversion URL required.")
                 .matches(
                   TrailingAsteriskRegex,
                   "Conversion URL must end in trailing asterisk (*)"
                 ),
-              observationWindow: number().required().default(7),
+              observationWindow: number()
+                .oneOf(
+                  [1, 7, 30],
+                  "Observation Window must be 1, 7, or 30 days."
+                )
+                .required("Observation Window required."),
               type: string()
-                .oneOf(["postclick", "postview"])
-                .required()
-                .default("postview"),
+                .oneOf(
+                  ["postclick", "postview"],
+                  "Conversion type must be Post Click or Post View"
+                )
+                .required("Conversion Type required."),
             })
           ),
         creatives: array()

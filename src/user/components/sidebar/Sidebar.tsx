@@ -24,7 +24,6 @@ interface Props {
 
 export function Sidebar({ canCreate }: Props) {
   const history = useHistory();
-  console.log(history.location);
 
   const routes = [
     { path: "campaigns", label: "Campaigns", icon: <CampaignIcon /> },
