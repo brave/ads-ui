@@ -1,13 +1,22 @@
 import React from "react";
-import { EnhancedTable } from "../../components/EnhancedTable";
+import {
+  EnhancedTable,
+  StandardRenderers,
+} from "../../components/EnhancedTable";
 import { Chip, LinearProgress } from "@mui/material";
 import { Status } from "../../components/Campaigns/Status";
 import { CampaignFragment } from "../../graphql/campaign.generated";
 import _ from "lodash";
+import { isAfterEndDate } from "../../util/isAfterEndDate";
+import {
+  adOnOffState,
+  adSetOnOffState,
+} from "../../components/EnhancedTable/renderers";
 
 interface Props {
   campaigns: CampaignFragment[];
   loading: boolean;
+  advertiserId: string;
 }
 
 interface ChipListProps {
@@ -41,13 +50,14 @@ const ChipList: React.FC<ChipListProps> = ({ items }) => {
   );
 };
 
-export function AdSetList({ campaigns, loading }: Props) {
+export function AdSetList({ campaigns, loading, advertiserId }: Props) {
   const mapAdSetName = campaigns.map((c) => ({
     adSets: c.adSets.map((a) => ({
       ...a,
       campaignName: c.name,
       campaignStart: c.startAt,
       campaignEnd: c.endAt,
+      campaignId: c.id,
     })),
   }));
   const adSets = _.flatMap(mapAdSetName, "adSets");
@@ -57,10 +67,26 @@ export function AdSetList({ campaigns, loading }: Props) {
   return (
     <EnhancedTable
       rows={adSets}
+      initialSortColumn={7}
+      initialSortDirection="desc"
       columns={[
+        {
+          title: "On/Off",
+          value: (c) => c.state,
+          extendedRenderer: (r) => adSetOnOffState(r, advertiserId),
+          sx: { width: "10px" },
+          sortable: false,
+        },
         {
           title: "Ad Set Name",
           value: (c) => c.name || c.id.substring(0, 8),
+        },
+        {
+          title: "State",
+          value: (c) => (isAfterEndDate(c.campaignEnd) ? "completed" : c.state),
+          extendedRenderer: (r) => (
+            <Status state={r.state} end={r.campaignEnd} />
+          ),
         },
         {
           title: "Campaign Name",
@@ -80,6 +106,11 @@ export function AdSetList({ campaigns, loading }: Props) {
           title: "Audiences",
           value: (c) => c.segments?.map((o) => o.name).join(", "),
           extendedRenderer: (r) => <ChipList items={r.segments} />,
+        },
+        {
+          title: "Created",
+          value: (c) => c.createdAt,
+          renderer: StandardRenderers.date,
         },
       ]}
     />

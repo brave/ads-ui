@@ -131,6 +131,7 @@ const RoutesWithProps: React.FC<{ advertiser: IAdvertiser }> = ({
         <AdSetList
           campaigns={data?.advertiser?.campaigns ?? []}
           loading={loading}
+          advertiserId={advertiser.id}
         />
       </Route>
       <Route path={`${match.path}/ads`}>
