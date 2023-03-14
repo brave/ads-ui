@@ -79,42 +79,32 @@ export const CampaignSchema = object().shape({
           )
           .min(1, "At least one platform must be targeted")
           .default([]),
-        conversions: object().shape(
-          {
-            urlPattern: string().when(["observationWindow", "type"], {
-              is: (window, t) => window >= 0 && !!t,
-              then: string()
-                .required("Conversion URL required")
+        conversions: array()
+          .label("Conversions")
+          .min(0)
+          .max(1)
+          .of(
+            object().shape({
+              urlPattern: string()
+                .required("Conversion URL required.")
                 .matches(
                   TrailingAsteriskRegex,
                   "Conversion URL must end in trailing asterisk (*)"
                 ),
-            }),
-            observationWindow: number().when(["urlPattern", "type"], {
-              is: (url, t) => !!url || !!t,
-              then: number()
+              observationWindow: number()
                 .oneOf(
                   [1, 7, 30],
                   "Observation Window must be 1, 7, or 30 days."
                 )
-                .required("Observation Window required"),
-            }),
-            type: string().when(["observationWindow", "urlPattern"], {
-              is: (window, url) => window >= 0 && !!url,
-              then: string()
+                .required("Observation Window required."),
+              type: string()
                 .oneOf(
                   ["postclick", "postview"],
                   "Conversion type must be Post Click or Post View"
                 )
-                .required("Conversion Type required"),
-            }),
-          },
-          [
-            ["type", "observationWindow"],
-            ["type", "urlPattern"],
-            ["observationWindow", "urlPattern"],
-          ]
-        ),
+                .required("Conversion Type required."),
+            })
+          ),
         creatives: array()
           .min(1)
           .of(

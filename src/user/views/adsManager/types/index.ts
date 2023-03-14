@@ -66,6 +66,12 @@ export type Creative = {
   targetUrlValid?: boolean;
 };
 
+export const initialConversion: Conversion = {
+  type: "",
+  urlPattern: "",
+  observationWindow: 0,
+};
+
 export const initialCreative: Creative = {
   name: "",
   title: "",
