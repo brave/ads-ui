@@ -92,15 +92,15 @@ function User({ advertisers, auth }: Props) {
                 />
               </Route>
 
-              {/* /campaigns */}
-              <RoutesWithProps advertiser={activeAdvertiser} />
-
               {/* /campaigns/:campaignId/analytics - */}
               <Route
                 path={`${match.path}/campaign/:campaignId/analytics/overview`}
               >
                 <AnalyticsOverview auth={auth} />
               </Route>
+
+              {/* /campaigns */}
+              <RoutesWithProps advertiser={activeAdvertiser} auth={auth} />
             </Switch>
           </Box>
         </Box>
@@ -109,9 +109,10 @@ function User({ advertisers, auth }: Props) {
   );
 }
 
-const RoutesWithProps: React.FC<{ advertiser: IAdvertiser }> = ({
-  advertiser,
-}) => {
+const RoutesWithProps: React.FC<{
+  advertiser: IAdvertiser;
+  auth: IAuthUser;
+}> = ({ advertiser, auth }) => {
   const match = useRouteMatch();
   const { loading, data } = useAdvertiserCampaignsQuery({
     variables: { id: advertiser.id },
@@ -119,7 +120,7 @@ const RoutesWithProps: React.FC<{ advertiser: IAdvertiser }> = ({
   });
 
   return (
-    <>
+    <Switch>
       <Route path={`${match.path}/campaigns`}>
         <CampaignList
           canEdit={advertiser.selfServiceEdit}
@@ -142,9 +143,10 @@ const RoutesWithProps: React.FC<{ advertiser: IAdvertiser }> = ({
           advertiserId={advertiser.id}
         />
       </Route>
+
       {/* default */}
       <Redirect to={`${match.path}/campaigns`} />
-    </>
+    </Switch>
   );
 };
 

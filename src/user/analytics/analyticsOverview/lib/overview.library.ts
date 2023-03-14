@@ -4,8 +4,6 @@ import { Options } from "highcharts";
 import { BaseMetric, Metrics, StatsMetric, Tooltip } from "../types";
 import { EngagementFragment } from "../../../../graphql/analytics-overview.generated";
 
-const colors = ["#4C54D2CC", "#A0A5EBCC", "#9370DBCC", "#8B008BCC"];
-
 export const baseOverviewChart: Options = {
   chart: {
     type: "spline",
@@ -83,7 +81,6 @@ export const prepareChart = (
         yAxis: metricsEntries.length <= 2 ? idx : decideAxis(e[1]),
         data: processedData[`${e[0]}DataSet`],
         connectNulls: true,
-        color: colors[idx],
         tooltip: {
           valueDecimals: attrs.decimal,
           valuePrefix: attrs.prefix,
