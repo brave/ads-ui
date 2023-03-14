@@ -5,6 +5,8 @@ import { AdSetForm, Conversion, OS, Segment } from "../../../../../types";
 import { FormikErrors } from "formik";
 import { AdReview } from "./AdReview";
 import _ from "lodash";
+import { ConversionError } from "../../../../../../../../components/Conversion/ConversionError";
+import ConversionDisplay from "../../../../../../../../components/Conversion/ConversionDisplay";
 
 interface Props {
   idx: number;
@@ -22,25 +24,6 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
 
   const segmentValue = (v: string) => {
     return v === "untargeted" ? "Let Brave determine best audience." : v;
-  };
-
-  const conversionValue = (v: Conversion) => {
-    const isEmpty =
-      v.type === "" && v.urlPattern === "" && v.observationWindow <= 0;
-    if (isEmpty) {
-      return "No conversion metric set.";
-    }
-
-    return (
-      <List>
-        <CustomListItemText primary="Type" secondary={v.type} />
-        <CustomListItemText
-          primary="Window"
-          secondary={`${v.observationWindow} days`}
-        />
-        <CustomListItemText primary="URL" secondary={v.urlPattern} />
-      </List>
-    );
   };
 
   const billing = (v: string) => {
@@ -73,26 +56,10 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
         />
         <CustomListItemText
           primary="Conversion"
-          secondary={conversionValue(adSet.conversions)}
+          secondary={<ConversionDisplay conversion={adSet.conversions} />}
           error={
             hasErrors && adSetError.conversions ? (
-              <>
-                {adSetError.conversions?.type && (
-                  <>
-                    {adSetError.conversions?.type} <br />
-                  </>
-                )}
-                {adSetError.conversions?.observationWindow && (
-                  <>
-                    {adSetError.conversions?.observationWindow} <br />
-                  </>
-                )}
-                {adSetError.conversions?.urlPattern && (
-                  <>
-                    {adSetError.conversions?.urlPattern} <br />
-                  </>
-                )}
-              </>
+              <ConversionError errors={adSetError.conversions} />
             ) : undefined
           }
         />
