@@ -108,20 +108,20 @@ function Ad({ adSetIdx, adIdx, isEdit, creative }: AdProps) {
     <>
       <FormikTextField
         name={`adSets.${adSetIdx}.creatives.${adIdx}.name`}
-        label="Creative Name"
+        label="Ad Name"
         disabled={isEdit && !!creative.id}
       />
 
       <FormikTextField
         name={`adSets.${adSetIdx}.creatives.${adIdx}.title`}
-        label="Creative Title"
+        label="Ad Title"
         helperText="Max 30 Characters"
         disabled={isEdit && !!creative.id}
       />
 
       <FormikTextField
         name={`adSets.${adSetIdx}.creatives.${adIdx}.body`}
-        label="Creative Body"
+        label="Ad Body"
         helperText="Max 60 Characters"
         disabled={isEdit && !!creative.id}
       />
@@ -129,7 +129,7 @@ function Ad({ adSetIdx, adIdx, isEdit, creative }: AdProps) {
       <UrlResolver
         name={`adSets.${adSetIdx}.creatives.${adIdx}.targetUrl`}
         validator={`adSets.${adSetIdx}.creatives.${adIdx}.targetUrlValid`}
-        label="Creative Target URL"
+        label="Ad Target URL"
         disabled={isEdit && !!creative.id}
       />
     </>

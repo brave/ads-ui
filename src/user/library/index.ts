@@ -136,7 +136,7 @@ async function graphqlRequest<T>(
   const response = await axios.post(
     `${process.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql"),
     JSON.stringify({
-      query: print(CreateNotificationCreativeDocument),
+      query: print(node),
       variables: input,
     }),
     {

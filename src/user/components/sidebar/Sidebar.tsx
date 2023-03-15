@@ -50,7 +50,7 @@ export function Sidebar({ canCreate }: Props) {
         <List sx={{ mt: 7 }}>
           {routes.map((r) => (
             <ListItemButton
-              selected={history.location.pathname.includes(r.path)}
+              selected={history.location.pathname === `/user/main/${r.path}`}
               onClick={() => {
                 history.push(`/user/main/${r.path}`);
               }}

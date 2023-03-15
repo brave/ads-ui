@@ -111,23 +111,26 @@ export const CampaignSchema = object().shape({
             object().shape({
               name: string()
                 .label("Creative Name")
-                .required("Name is required"),
+                .required("Ad Name is required"),
               title: string()
                 .label("Title")
                 .max(30, "Max 30 Characters")
-                .required("Title is required"),
+                .required("Ad Title is required"),
               body: string()
                 .label("Body")
                 .max(60, "Max 60 Characters")
-                .required("Body is required"),
-              targetUrlValid: boolean().isTrue("Please enter a valid URL."),
+                .required("Ad Body is required"),
+              targetUrlValid: boolean().isTrue("Please enter a valid Ad URL."),
               targetUrl: string()
                 .label("Target Url")
-                .required("URL is required")
-                .matches(NoSpacesRegex, `URL must not contain any whitespace`)
+                .required("Ad URL is required")
+                .matches(
+                  NoSpacesRegex,
+                  `Ad URL must not contain any whitespace`
+                )
                 .matches(
                   SimpleUrlRegexp,
-                  `Please enter a valid URL, for example https://brave.com`
+                  `Please enter a valid Ad URL, for example https://brave.com`
                 ),
             })
           ),
