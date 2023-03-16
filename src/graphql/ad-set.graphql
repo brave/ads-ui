@@ -1,0 +1,73 @@
+fragment AdSet on AdSet {
+  id
+  createdAt
+  billingType
+  name
+  totalMax
+  perDay
+  state
+  execution
+  keywords
+  keywordSimilarity
+  negativeKeywords
+  bannedKeywords
+  targetingTerms
+  segments {
+    code
+    name
+  }
+  oses {
+    code
+    name
+  }
+  conversions {
+    id
+    type
+    urlPattern
+    observationWindow
+    extractExternalId
+  }
+  ads {
+    ...Ad
+  }
+}
+
+fragment Ad on Ad {
+  id
+  state
+  prices {
+    amount
+    type
+  }
+  webhooks {
+    type
+    url
+  }
+  creative {
+    ...Creative
+  }
+}
+
+mutation createAdSet($createAdSetInput: CreateAdSetInput!) {
+  createAdSet(createAdSetInput: $createAdSetInput) {
+    ...AdSet
+  }
+}
+
+mutation updateAdSet($updateAdSetInput: UpdateAdSetInput!) {
+  updateAdSet(updateAdSetInput: $updateAdSetInput) {
+    ...AdSet
+  }
+}
+
+mutation createAd($createAdInput: CreateAdInput!) {
+  createAd(createAdInput: $createAdInput) {
+    ...Ad
+  }
+}
+
+mutation updateAd($updateAdInput: UpdateAdInput!) {
+  updateAd(updateAdInput: $updateAdInput) {
+    id
+  }
+}

@@ -7,7 +7,10 @@ import {
 } from "../../actions";
 import { IAdvertiserState } from "./advertiser.interface";
 
-export const getAdvertiserReducer = (state: IAdvertiserState, action: IAdvertiserAction): IAdvertiserState => {
+export const getAdvertiserReducer = (
+  state: IAdvertiserState,
+  action: IAdvertiserAction
+): IAdvertiserState => {
   switch (action.type) {
     case GET_ADVERTISERS_START:
       return {

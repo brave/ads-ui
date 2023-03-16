@@ -1,152 +1,158 @@
+import React, { useMemo, useState } from "react";
+import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
+
+import { Sidebar } from "./components/sidebar/Sidebar";
+import { CampaignList } from "./campaignList/CampaignList";
+
 import {
-    withStyles
-} from "@material-ui/core";
-import _ from "lodash";
-import React from "react";
-import { connect } from "react-redux";
-import { Redirect, Route, Switch } from "react-router-dom";
-
-import { CloseDrawer } from "../actions";
-import Navbar from "./components/navbar/Navbar";
-import Selection from "./views/adsManager/views/selection/Selection";
-import Advanced from "./views/adsManager/views/advanced/Advanced";
-
-import Sidebar from "./components/sidebar/Sidebar";
-
-import * as S from "./User.style";
-import { styles } from "./User.style";
-
-import Context from "../state/context";
-import CampaignList from "./campaignList/CampaignList";
-
-import ApolloClient from 'apollo-client';
-import { ApolloProvider } from "@apollo/react-hooks";
-import { createHttpLink } from 'apollo-link-http';
-import { setContext } from 'apollo-link-context';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import AnalyticsOverview from "./analytics/analyticsOverview/AnalyticsOverview";
+  ApolloClient,
+  ApolloProvider,
+  createHttpLink,
+  InMemoryCache,
+} from "@apollo/client";
+import AnalyticsOverview from "./analytics/AnalyticsOverview";
 import Settings from "./settings/Settings";
+import { connect } from "react-redux";
+import { Box } from "@mui/material";
+import { NewCampaign } from "./views/adsManager/views/advanced/components/form/NewCampaign";
+import { EditCampaign } from "./views/adsManager/views/advanced/components/form/EditCampaign";
+import { CompletionForm } from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
+import { getActiveAdvertiser } from "../state/context";
+import { IAdvertiser, IAuthUser } from "../actions";
+import { useAdvertiserCampaignsQuery } from "../graphql/advertiser.generated";
+import { AdSetList } from "./adSet/AdSetList";
+import { AdList } from "./ads/AdList";
 
-class User extends React.Component<any, any> {
-    static contextType = Context;
-    constructor(props) {
-        super(props);
-        this.state = {
-            activeAdvertiser: _.find(props.advertisers, { state: "active" })
-        }
-        this.setActiveAdvertiser = this.setActiveAdvertiser.bind(this);
-    }
+const buildApolloClient = (accessToken: string) => {
+  const httpLink = createHttpLink({
+    uri: `${process.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql"),
+    headers: {
+      authorization: `Bearer ${accessToken}`,
+    },
+  });
 
-    setActiveAdvertiser = (activeAdvertiser) => {
-        this.setState({ activeAdvertiser });
-    }
+  return new ApolloClient({
+    link: httpLink,
+    cache: new InMemoryCache(),
+  });
+};
 
-    public render(): any {
-
-        const { advertisers, auth, match } = this.props;
-        const activeAdvertiser = _.find(advertisers, { state: "active" });
-
-
-
-        const httpLink = createHttpLink({
-            uri: `${process.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql"),
-        });
-
-        const authLink = setContext((_, { headers }) => {
-            // get the authentication token from local storage if it exists
-            // return the headers to the context so httpLink can read them
-            return {
-                headers: {
-                    ...headers,
-                    authorization: `Bearer ${auth.accessToken}`,
-                }
-            }
-        });
-
-        const client = new ApolloClient({
-            link: authLink.concat(httpLink),
-            cache: new InMemoryCache()
-        });
-
-        if (
-            !auth ||
-            !auth.signedIn ||
-            !auth.emailVerified ||
-            (auth.role !== "user" && !activeAdvertiser)
-        ) {
-            return <Redirect to="/a" />;
-        }
-
-
-
-        return (
-            <ApolloProvider client={client}>
-                <S.Container>
-
-                    <Navbar userId={auth.id} advertiserId={activeAdvertiser.id} />
-                    <S.Content>
-
-                        {
-                            this.context.sidebar === "visible" &&
-                            <Sidebar match={match} />
-                        }
-                        {
-                            this.context.sidebar === "hidden" &&
-                            // placeholder to keep layout normal, todo - cleanup
-                            <div style={{
-                                position: "sticky",
-                                visibility: "hidden",
-                                marginTop: "64px",
-                                top: "64px",
-                                opacity: 0,
-                                height: "calc(100vh - 64px)",
-                                width: "255px",
-                                borderRight: "2px solid #f6f6f5"
-                            }} />
-                        }
-                        <S.Main>
-                            <Switch>
-                                {/* /adsmanager */}
-                                <Route exact path={match.url + "/adsmanager/selection"} component={Selection} />
-                                <Route exact path={match.url + "/adsmanager/advanced"} component={Advanced} />
-
-                                {/* /settings */}
-                                <Route exact path={match.url + "/settings"} render={(props) => <Settings {...props} userId={auth.id} advertisers={advertisers} activeAdvertiser={this.state.activeAdvertiser} setActiveAdvertiser={this.setActiveAdvertiser} />} />
-
-                                {/* /campaigns */}
-                                <Route exact path={match.url + "/campaigns"} render={(props) => <CampaignList {...props} userId={auth.id} advertiserId={this.state.activeAdvertiser.id} />} />
-
-                                {/* /campaigns/:campaignId/analytics - */}
-                                <Route exact path={match.url + "/campaign/:campaignId/analytics/overview"} render={(props) => <AnalyticsOverview {...props} auth={auth} userId={auth.id} advertiserId={this.state.activeAdvertiser.id} />} />
-                                <Route exact path={match.url + "/campaign/:campaignId/analytics/audiences"} render={(props) => <CampaignList {...props} userId={auth.id} advertiserId={this.state.activeAdvertiser.id} />} />
-                                <Route exact path={match.url + "/campaign/:campaignId/analytics/locations"} render={(props) => <CampaignList {...props} userId={auth.id} advertiserId={this.state.activeAdvertiser.id} />} />
-                                <Route exact path={match.url + "/campaign/:campaignId/analytics/platforms"} render={(props) => <CampaignList {...props} userId={auth.id} advertiserId={this.state.activeAdvertiser.id} />} />
-
-                                {/* default */}
-                                <Redirect to={match.url + "/campaigns"} />
-                            </Switch>
-                        </S.Main>
-                    </S.Content>
-                </S.Container>
-            </ApolloProvider>
-        );
-    }
+interface Props {
+  advertisers: IAdvertiser[];
+  auth: IAuthUser;
 }
 
-const mapStateToProps = (state: any, ownProps: any) => ({
-    advertisers: state.advertiserReducer.advertisers,
-    auth: state.authReducer,
-    drawer: state.drawerReducer
+function User({ advertisers, auth }: Props) {
+  const match = useRouteMatch();
+  const [activeAdvertiser, setActiveAdvertiser] = useState(
+    getActiveAdvertiser()
+  );
+  const client = useMemo(
+    () => buildApolloClient(auth.accessToken),
+    [auth.accessToken]
+  );
+
+  if (!auth || !auth.signedIn || !auth.emailVerified || !activeAdvertiser) {
+    return <Redirect to="/a" />;
+  }
+
+  return (
+    <ApolloProvider client={client}>
+      <Box height="100%">
+        <Box display="flex">
+          <Sidebar canCreate={activeAdvertiser.selfServiceCreate} />
+          <Box
+            width="100%"
+            height="100%"
+            padding={1}
+            overflow="scroll"
+            marginTop="64px"
+          >
+            <Switch>
+              {/* /adsmanager */}
+              <Route path={`${match.path}/adsmanager/advanced/new`}>
+                <NewCampaign auth={auth} advertiser={activeAdvertiser} />
+              </Route>
+
+              <Route path={`${match.path}/adsmanager/advanced/:campaignId`}>
+                <EditCampaign advertiser={activeAdvertiser} auth={auth} />
+              </Route>
+
+              <Route path={`${match.path}/complete/:mode`}>
+                <CompletionForm />
+              </Route>
+
+              {/* /settings */}
+              <Route path={`${match.path}/settings`}>
+                <Settings
+                  userId={auth.id}
+                  advertisers={advertisers}
+                  activeAdvertiser={activeAdvertiser}
+                  setActiveAdvertiser={setActiveAdvertiser}
+                />
+              </Route>
+
+              {/* /campaigns/:campaignId/analytics - */}
+              <Route
+                path={`${match.path}/campaign/:campaignId/analytics/overview`}
+              >
+                <AnalyticsOverview auth={auth} />
+              </Route>
+
+              {/* /campaigns */}
+              <RoutesWithProps advertiser={activeAdvertiser} auth={auth} />
+            </Switch>
+          </Box>
+        </Box>
+      </Box>
+    </ApolloProvider>
+  );
+}
+
+const RoutesWithProps: React.FC<{
+  advertiser: IAdvertiser;
+  auth: IAuthUser;
+}> = ({ advertiser, auth }) => {
+  const match = useRouteMatch();
+  const { loading, data } = useAdvertiserCampaignsQuery({
+    variables: { id: advertiser.id },
+    pollInterval: 600_000,
+  });
+
+  return (
+    <Switch>
+      <Route path={`${match.path}/campaigns`}>
+        <CampaignList
+          canEdit={advertiser.selfServiceEdit}
+          campaigns={data?.advertiser?.campaigns ?? []}
+          advertiserId={advertiser.id}
+          loading={loading}
+        />
+      </Route>
+      <Route path={`${match.path}/adsets`}>
+        <AdSetList
+          campaigns={data?.advertiser?.campaigns ?? []}
+          loading={loading}
+          advertiserId={advertiser.id}
+        />
+      </Route>
+      <Route path={`${match.path}/ads`}>
+        <AdList
+          campaigns={data?.advertiser?.campaigns ?? []}
+          loading={loading}
+          advertiserId={advertiser.id}
+        />
+      </Route>
+
+      {/* default */}
+      <Redirect to={`${match.path}/campaigns`} />
+    </Switch>
+  );
+};
+
+const mapStateToProps = (state: any) => ({
+  advertisers: state.advertiserReducer.advertisers,
+  auth: state.authReducer,
 });
 
-const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
-    CloseDrawer: () => dispatch(CloseDrawer({})),
-    Signout: () => dispatch(CloseDrawer({}))
-});
-
-export default withStyles(styles, { withTheme: true })(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(User)
-);
+export default connect(mapStateToProps)(User);

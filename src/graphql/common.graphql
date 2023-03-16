@@ -1,0 +1,25 @@
+fragment Geocode on ActiveGeocodesEntry {
+  code
+  name
+}
+
+fragment Segment on SegmentsEntry {
+  code
+  name
+}
+
+query ActiveGeocodes {
+  activeGeocodes {
+    data {
+      ...Geocode
+    }
+  }
+}
+
+query Segments {
+  segments {
+    data {
+      ...Segment
+    }
+  }
+}

@@ -1,92 +1,69 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
-import * as S from "./Sidebar.style";
-
+import CampaignIcon from "@mui/icons-material/Campaign";
+import DatasetIcon from "@mui/icons-material/Dataset";
+import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import {
-  Icon} from "@material-ui/core";
-import { Text } from "../../../components/Text/Text";
+  Box,
+  CssBaseline,
+  Drawer,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+} from "@mui/material";
+import { useHistory } from "react-router-dom";
+import Navbar from "../navbar/Navbar";
+import { useState } from "react";
 
-const linkStyle = { textDecoration: "none", color: "inherit" };
+const drawerWidth = 240;
 
-class Sidebar extends React.Component<any, any> {
-  public render() {
-    return (
-      <S.Container>
-        <React.Fragment>{renderNav(this.props)}</React.Fragment>
-        {/* <S.BATContainer>
-          <img style={{ height: "45px" }} src={BATLogo} />
-        </S.BATContainer> */}
-      </S.Container>
-    );
-  }
+interface Props {
+  canCreate: boolean;
 }
 
-function renderNav(props) {
-  return (
-    <div>
-      {/* <S.Nav selected={true}>
-            <S.SubContainer>
-              <Icon>dashboard</Icon>
-            </S.SubContainer>
-            <H5 fontFamily={"Poppins"}>Dashboard</H5>
-          </S.Nav>
-          <S.Nav selected={false}>
-            <S.SubContainer>
-              <Icon>note</Icon>
-            </S.SubContainer>
-            <H5 fontFamily={"Poppins"}>Creatives</H5>
-          </S.Nav>
-          <S.Nav selected={false}>
-            <S.SubContainer>
-              <Icon>apps</Icon>
-            </S.SubContainer>
-            <H5 fontFamily={"Poppins"}>Campaigns</H5>
-          </S.Nav> */}
-      {/* <Link style={linkStyle} to={props.match.url + "/performances"}>
-        <S.Nav
-          selected={window.location.pathname.includes(
-            props.match.url + "/performances"
-          )}
-        >
-          <S.SubContainer>
-            <Icon>bar_chart</Icon>
-          </S.SubContainer>
-          <Text sizes={[16, 16, 15, 15, 15]} fontFamily={"Poppins"}>
-            Performance
-              </Text>
-        </S.Nav>
-      </Link> */}
-      <Link style={linkStyle} to={props.match.url + "/campaigns"}>
-        <S.Nav
-          selected={window.location.pathname.includes(
-            props.match.url + "/campaigns"
-          ) || window.location.pathname.includes(
-            props.match.url + "/campaign"
-          )}
-        >
-          <S.SubContainer>
-            <Icon>apps</Icon>
-          </S.SubContainer>
-          <Text sizes={[16, 16, 15, 15, 15]} fontFamily={"Poppins"}>
-            Campaigns
-              </Text>
-        </S.Nav>
-      </Link>
+export function Sidebar({ canCreate }: Props) {
+  const history = useHistory();
 
-      {/* <S.Nav selected={false}>
-            <S.SubContainer>
-              <Icon>email</Icon>
-            </S.SubContainer>
-            <H5 fontFamily={"Poppins"}>Invoices</H5>
-          </S.Nav>
-          <S.Nav selected={false}>
-            <S.SubContainer>
-              <Icon>settings</Icon>
-            </S.SubContainer>
-            <H5 fontFamily={"Poppins"}>Preferences</H5>
-          </S.Nav> */}
-    </div>
+  const routes = [
+    { path: "campaigns", label: "Campaigns", icon: <CampaignIcon /> },
+    { path: "adSets", label: "Ad Sets", icon: <DatasetIcon /> },
+    { path: "ads", label: "Ads", icon: <LibraryBooksIcon /> },
+  ];
+
+  return (
+    <Box sx={{ display: "flex" }}>
+      <CssBaseline />
+      <Navbar canCreate={canCreate} />
+      <Drawer
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          "& .MuiDrawer-paper": {
+            width: drawerWidth,
+            boxSizing: "border-box",
+          },
+        }}
+        variant="permanent"
+        anchor="left"
+      >
+        <List sx={{ mt: 7 }}>
+          {routes.map((r) => (
+            <ListItemButton
+              selected={history.location.pathname === `/user/main/${r.path}`}
+              onClick={() => {
+                history.push(`/user/main/${r.path}`);
+              }}
+              sx={{ mt: 1 }}
+            >
+              <ListItemText disableTypography>
+                <Typography variant="h6">{r.label}</Typography>
+              </ListItemText>
+              <ListItemIcon>{r.icon}</ListItemIcon>
+            </ListItemButton>
+          ))}
+        </List>
+      </Drawer>
+    </Box>
   );
 }
-
-export default Sidebar;

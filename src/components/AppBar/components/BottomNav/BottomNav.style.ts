@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import { styled } from "@mui/material";
 
 interface INavTextProps {
-    selected: boolean;
+  selected: boolean;
 }
 
 export const Container = styled("div")`
@@ -16,7 +16,7 @@ export const Container = styled("div")`
   border-top: 2px solid #fafbfa;
 `;
 
-export const InnerContainer = styled.div`
+export const InnerContainer = styled("div")`
   @media (max-width: 768px) {
     max-width: 576px;
   }
@@ -29,14 +29,14 @@ export const InnerContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const InnerNav = styled.div``;
-export const NavIcon = styled.div`
+export const InnerNav = styled("div")``;
+export const NavIcon = styled("div")`
   width: 30px;
   height: 30px;
   margin: auto;
   fill: purple;
 `;
-export const NavText = styled.div`
+export const NavText = styled("div")`
   @media (max-width: 768px) {
     font-size: 13px;
   }
@@ -44,13 +44,13 @@ export const NavText = styled.div`
     font-size: 15px;
   }
   ${(props: Partial<INavTextProps>) =>
-        props.selected === true &&
-        `
+    props.selected === true &&
+    `
     color: #737ADE;
   `}
 `;
 
-export const Nav = styled.div`
+export const Nav = styled("div")`
   width: 100%;
   display: flex;
   justify-content: center;

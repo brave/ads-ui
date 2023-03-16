@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "@mui/system";
 
 // TODO - Define sizes array more formally
 // ["xs", "sm", "md", "lg", "xl"]
@@ -15,11 +15,10 @@ enum Breakpoint {
   xs = "576px",
   sm = "768px",
   md = "992px",
-  lg = "1200px"
+  lg = "1200px",
 }
 
 export const Text = styled("div")`
-
   ${(props: TextProps) => `
     @media (max-width: ${Breakpoint.xs}) {
       font-size: ${props.sizes![0] + "px"};
@@ -59,15 +58,15 @@ export const Text = styled("div")`
 
     `}
 
-  // ** Link ** 
-  ${props =>
+  // ** Link **
+  ${(props) =>
     props.link &&
     `
     color: #ff7654;
     cursor: pointer;
   `}
 
-  ${props =>
+  ${(props) =>
     props.content &&
     `
     &::after {
@@ -115,8 +114,8 @@ export const H1 = styled("div")`
 
     `}
 
-  // ** Link ** 
-  ${props =>
+  // ** Link **
+  ${(props) =>
     props.link &&
     `
     color: #ff7654;
@@ -155,7 +154,7 @@ export const H2 = styled("div")`
     font-weight: ${props.fontWeight};
 
     `}
-  
+
   // ** Color **
   ${(props: TextProps) =>
     `
@@ -163,8 +162,8 @@ export const H2 = styled("div")`
 
     `}
 
-  // ** Link ** 
-  ${props =>
+  // ** Link **
+  ${(props) =>
     props.link &&
     `
     color: #ff7654;
@@ -211,8 +210,8 @@ export const H5 = styled("div")`
 
     `}
 
-  // ** Link ** 
-  ${props =>
+  // ** Link **
+  ${(props) =>
     props.link &&
     `
     color: #ff7654;
@@ -259,8 +258,8 @@ export const H6 = styled("div")`
 
     `}
 
-  // ** Link ** 
-  ${props =>
+  // ** Link **
+  ${(props) =>
     props.link &&
     `
     color: #ff7654;

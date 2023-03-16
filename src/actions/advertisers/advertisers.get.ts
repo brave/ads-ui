@@ -11,7 +11,9 @@ export const GetAdvertisersStart = (): IAdvertiserAction => ({
 });
 
 export const GET_ADVERTISERS_SUCCESSFUL = "GETADVERTISERSUCCESSFUL";
-export const GetAdvertiserSuccessful = (payload: IAdvertiserPayload[]): IAdvertiserAction => ({
+export const GetAdvertiserSuccessful = (
+  payload: IAdvertiserPayload[]
+): IAdvertiserAction => ({
   payload,
   type: GET_ADVERTISERS_SUCCESSFUL,
 });
@@ -26,20 +28,26 @@ export const GetAdvertisers = (auth: IAuthPayload, userId?: string) => {
   return async (dispatch: any) => {
     try {
       dispatch(GetAdvertisersStart);
-      const response = await axios.get(`${process.env.REACT_APP_SERVER_ADDRESS}/advertiser`, {
-        headers: {
-          "-x-user": userId,
-          "Authorization": `Bearer ${auth.accessToken}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.get(
+        `${process.env.REACT_APP_SERVER_ADDRESS}/advertiser`,
+        {
+          headers: {
+            "-x-user": userId,
+            Authorization: `Bearer ${auth.accessToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
       dispatch(GetAdvertiserSuccessful(response.data));
       dispatch(OpenSnackBar("Advertiser Get Successfully"));
       return Promise.resolve(response.data);
-    } catch (error) {
+      // TODO: Remove w/ redux
+    } catch (error: any) {
       dispatch(GetAdvertisersFaild());
       if (error.response) {
-        dispatch(OpenSnackBar(`Get Advertisers  failed: ${error.response.data.error}`));
+        dispatch(
+          OpenSnackBar(`Get Advertisers  failed: ${error.response.data.error}`)
+        );
       } else if (error.request) {
         dispatch(OpenSnackBar(`Get Advertisers  Failed: Network Error`));
       } else {

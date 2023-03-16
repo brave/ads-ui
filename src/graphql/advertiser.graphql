@@ -1,0 +1,21 @@
+query advertiser($id: String!) {
+  advertiser(id: $id) {
+    id
+    publicKey
+  }
+}
+
+mutation updateAdvertiser($updateAdvertiserInput: UpdateAdvertiserInput!) {
+  updateAdvertiser(updateAdvertiserInput: $updateAdvertiserInput) {
+    id
+    publicKey
+  }
+}
+
+query advertiserCampaigns($id: String!) {
+  advertiser(id: $id) {
+    campaigns {
+      ...Campaign
+    }
+  }
+}

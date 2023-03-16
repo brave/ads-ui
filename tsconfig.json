@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ESNext",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -13,14 +13,9 @@
     "resolveJsonModule": true,
     "outDir": "mychart/",
     "noEmit": true,
-    "jsx": "preserve",
-    "lib": [
-      "es2015",
-      "dom"
-    ],
+    "jsx": "react-jsx",
+    "lib": ["ESNext", "dom"],
     "isolatedModules": true
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

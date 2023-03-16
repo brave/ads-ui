@@ -1,0 +1,21 @@
+fragment Creative on Creative {
+  id
+  createdAt
+  modifiedAt
+  name
+  state
+  type {
+    code
+  }
+  payloadNotification {
+    body
+    title
+    targetUrl
+  }
+}
+
+mutation createNotificationCreative($input: CreateNotificationCreativeInput!) {
+  createNotificationCreative(createNotificationCreativeInput: $input) {
+    id
+  }
+}

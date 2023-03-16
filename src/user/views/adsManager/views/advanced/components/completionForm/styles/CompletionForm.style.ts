@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "@mui/material";
 
 export const Container = styled("div")`
   width: 75%;
@@ -35,7 +35,7 @@ export const AdSetsTabs = styled("div")`
 
 export const ActiveAdSetsTab = styled("div")`
   border-bottom: 1px solid #e2e2e2;
-  border-right: 4px solid #FB7959;
+  border-right: 4px solid #fb7959;
   border-top-right-radius: 4px;
   padding: 28px;
 `;
@@ -67,14 +67,14 @@ export const Input = styled("input")`
   padding-left: 14px;
   font-size: 14px;
   font-family: Muli;
-`
+`;
 
 export const Button = styled("div")`
   display: flex;
   justify-content: center;
   padding: 0px 20px;
-  width: 100px; 
-  background: #4C54D2;
+  width: 100px;
+  background: #4c54d2;
   color: white;
   border: none;
   border-radius: 100px 100px 100px 100px;

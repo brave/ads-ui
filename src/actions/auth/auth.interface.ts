@@ -1,11 +1,12 @@
 export interface IAuthAction {
   type: string;
-  payload: ISignInPayload |
-  ISignUpPayload |
-  IAuthPayload |
-  ISignUpSuccessfulPayload |
-  ISignUpSuccessfulPayload[] |
-  null;
+  payload:
+    | ISignInPayload
+    | ISignUpPayload
+    | IAuthPayload
+    | ISignUpSuccessfulPayload
+    | ISignUpSuccessfulPayload[]
+    | null;
 }
 
 export interface ISignInPayload {
@@ -32,3 +33,18 @@ export interface ISignUpSuccessfulPayload {
 export interface IAuthPayload {
   accessToken: string;
 }
+
+export type IAuthUser = {
+  accessToken: string;
+  id: string;
+  role: string;
+  emailVerified: boolean;
+  signedIn: boolean;
+};
+
+export type IAdvertiser = {
+  id: string;
+  name: string;
+  selfServiceCreate: boolean;
+  selfServiceEdit: boolean;
+};

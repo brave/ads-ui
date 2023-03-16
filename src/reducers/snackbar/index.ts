@@ -5,7 +5,7 @@ const snackBarReducer = (
     message: "",
     open: false,
   },
-  action: any,
+  action: any
 ) => {
   switch (action.type) {
     case OPEN_SNACKBAR:
