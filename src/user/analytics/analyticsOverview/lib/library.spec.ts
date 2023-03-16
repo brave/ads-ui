@@ -140,43 +140,43 @@ const engagements: EngagementFragment[] = [
 it("for a number of engagements, should calculate counts correctly", () => {
   const processed = processOs(engagements);
   expect(processed).toMatchInlineSnapshot(`
-    {
-      "click": {
+    Object {
+      "click": Object {
         "android": 0,
         "ios": 1,
         "linux": 0,
         "macos": 1,
         "windows": 2,
       },
-      "conversion": {
+      "conversion": Object {
         "android": 0,
         "ios": 0,
         "linux": 0,
         "macos": 3,
         "windows": 0,
       },
-      "dismiss": {
+      "dismiss": Object {
         "android": 0,
         "ios": 0,
         "linux": 0,
         "macos": 0,
         "windows": 0,
       },
-      "landed": {
+      "landed": Object {
         "android": 0,
         "ios": 0,
         "linux": 2,
         "macos": 3,
         "windows": 0,
       },
-      "spend": {
+      "spend": Object {
         "android": 0.4,
         "ios": 0.6000000000000001,
         "linux": 1.2000000000000002,
         "macos": 2.5,
         "windows": 0,
       },
-      "view": {
+      "view": Object {
         "android": 4,
         "ios": 6,
         "linux": 12,
@@ -192,7 +192,7 @@ it("should calculate device views correctly", () => {
   const device = mapDevice(Object.entries(processed.view));
 
   expect(device).toMatchInlineSnapshot(`
-    {
+    Object {
       "desktop": 37,
       "mobile": 10,
     }
@@ -230,13 +230,13 @@ it("should calculate metrics per creative id", () => {
   );
 
   expect(creatives).toMatchInlineSnapshot(`
-    [
-      {
+    Array [
+      Object {
         "clicks": 2,
         "convRate": 150,
         "conversions": 3,
         "cpa": 0,
-        "creativePayload": {
+        "creativePayload": Object {
           "body": "be cool",
           "title": "name one",
         },
@@ -251,12 +251,12 @@ it("should calculate metrics per creative id", () => {
         "views": 37,
         "visitRate": 5.405405405405405,
       },
-      {
+      Object {
         "clicks": 2,
         "convRate": 0,
         "conversions": 0,
         "cpa": NaN,
-        "creativePayload": {
+        "creativePayload": Object {
           "body": "be uncool",
           "title": "name two",
         },
@@ -278,7 +278,7 @@ it("should calculate metrics per creative id", () => {
 it("should calculate overall stats", () => {
   const stats = processStats(engagements);
   expect(stats).toMatchInlineSnapshot(`
-    {
+    Object {
       "clicks": 4,
       "convRate": 75,
       "conversions": 3,
@@ -307,27 +307,27 @@ it("should calculate specific time series data by time range", () => {
 
   const stats = processData(engagements, metrics, "hourly");
   expect(stats).toMatchInlineSnapshot(`
-    {
-      "metric1DataSet": [
-        [
+    Object {
+      "metric1DataSet": Array [
+        Array [
           1677657600000,
           47,
         ],
       ],
-      "metric2DataSet": [
-        [
+      "metric2DataSet": Array [
+        Array [
           1677657600000,
           4,
         ],
       ],
-      "metric3DataSet": [
-        [
+      "metric3DataSet": Array [
+        Array [
           1677657600000,
           3,
         ],
       ],
-      "metric4DataSet": [
-        [
+      "metric4DataSet": Array [
+        Array [
           1677657600000,
           5,
         ],
