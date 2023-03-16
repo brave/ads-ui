@@ -1,0 +1,3 @@
+*.generated.tsx linguist-generated
+src/graphql/types.ts linguist-generated
+src/graphql/ads-serve.graphql.schema.json linguist-generated
