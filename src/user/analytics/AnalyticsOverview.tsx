@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Divider, LinearProgress } from "@mui/material";
+import { Alert, AlertTitle, Box, Divider, LinearProgress } from "@mui/material";
 import moment from "moment/moment";
 import { CampaignFormat } from "../../graphql/types";
 import {
@@ -65,6 +65,16 @@ const AnalyticsOverview: React.FC<Props> = ({ auth }: Props) => {
       moment(engagement.createdat) >= moment.utc(startDate).startOf("day") &&
       moment(engagement.createdat) <= moment.utc(endDate).endOf("day")
   );
+
+  if (!filteredEngagements || filteredEngagements.length === 0) {
+    return (
+      <Box>
+        <Alert severity="info" sx={{ mt: 2, mb: 10 }}>
+          Reporting not available yet for <strong>{data.campaign.name}</strong>.
+        </Alert>
+      </Box>
+    );
+  }
 
   return (
     <Box>
