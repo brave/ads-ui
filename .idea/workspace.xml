@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="11a69d12-7d42-44df-989c-c3e141cd40fc" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/graphql/analytics-overview.generated.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/analytics-overview.generated.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphql/analytics-overview.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/analytics-overview.graphql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user/analytics/AnalyticsOverview.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/analytics/AnalyticsOverview.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user/analytics/analyticsOverview/components/EngagementHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/analytics/analyticsOverview/components/EngagementHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user/analytics/analyticsOverview/components/LiveFeed.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/analytics/analyticsOverview/components/LiveFeed.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user/analytics/analyticsOverview/components/MetricFilter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/analytics/analyticsOverview/components/MetricFilter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user/analytics/analyticsOverview/components/MetricSelect.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/analytics/analyticsOverview/components/MetricSelect.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user/analytics/analyticsOverview/components/ReportUtils.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/analytics/analyticsOverview/components/ReportUtils.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user/analytics/analyticsOverview/lib/overview.library.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/analytics/analyticsOverview/lib/overview.library.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user/analytics/analyticsOverview/reports/campaign/CampaignOverview.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user/analytics/analyticsOverview/types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/analytics/analyticsOverview/types/index.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="GraphQL File" />
+        <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" url="file:///opt/homebrew/Cellar/go/1.19.4/libexec" />
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="true" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2LpNHAJjMDT9XwrvBOOEs60pUQb" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "/Users/iankrieger/brave/ads-ui",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "/Users/iankrieger/brave/ads-ui/node_modules/typescript/lib"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/user" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src/validation" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/user/analytics/analyticsOverview" />
+      <recent name="$PROJECT_DIR$/src/user/analytics" />
+      <recent name="$PROJECT_DIR$/src/components/Url" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+        <entry key="bd40947a-2722-4459-9420-cf05cbd328e3">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>false</integration-enabled>
+    <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/components/EnhancedTable/renderers.tsx</url>
+          <line>201</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/user/analytics/AnalyticsOverview.tsx</url>
+          <line>70</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/user/analytics/AnalyticsOverview.tsx</url>
+          <line>12</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

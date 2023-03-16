@@ -11,10 +11,7 @@ export type OS = {
   linux: number;
   macos: number;
   windows: number;
-  cost?: number;
 };
-
-export type CalculatedMetric = "cpa" | "landed" | "ctr";
 
 export type BaseMetric = {
   views: number;
@@ -40,8 +37,40 @@ export type Tooltip = {
   suffix?: string;
   prefix?: string;
   decimal?: number;
+  format?: string;
 };
 
 export type CreativeMetric = StatsMetric & {
   creativePayload: { title: string; body: string };
 };
+
+export type EngagementChartType = "campaign" | "creative" | "creativeset";
+
+export interface Option {
+  value: string;
+  label: string;
+}
+
+export interface OverviewDetail {
+  id: string;
+  name?: null | string;
+  state: string;
+}
+
+export interface OSMetric {
+  view: OS;
+  conversion: OS;
+  landed: OS;
+  click: OS;
+  dismiss: OS;
+  spend: OS;
+}
+
+export interface CalculatedOSMetric {
+  ctr: OS;
+  cpa: OS;
+  landingRate: OS;
+  visitRate: OS;
+  dismissRate: OS;
+  convRate: OS;
+}

@@ -6,9 +6,18 @@ import * as Apollo from "@apollo/client";
 const defaultOptions = {} as const;
 export type EngagementFragment = {
   __typename?: "Engagement";
+  creativeinstanceid: string;
   createdat: any;
   type: string;
+  pricetype: string;
+  creativesetname?: string | null;
+  creativesetid: string;
+  creativename: string;
+  creativeid: string;
+  creativestate: string;
+  creativepayload: string;
   count: number;
+  price: number;
   cost: number;
   android: number;
   ios: number;
@@ -33,9 +42,18 @@ export type CampaignWithEngagementsFragment = {
   format: Types.CampaignFormat;
   engagements?: Array<{
     __typename?: "Engagement";
+    creativeinstanceid: string;
     createdat: any;
     type: string;
+    pricetype: string;
+    creativesetname?: string | null;
+    creativesetid: string;
+    creativename: string;
+    creativeid: string;
+    creativestate: string;
+    creativepayload: string;
     count: number;
+    price: number;
     cost: number;
     android: number;
     ios: number;
@@ -74,9 +92,18 @@ export type AnalyticOverviewQuery = {
     dayProportion?: number | null;
     engagements?: Array<{
       __typename?: "Engagement";
+      creativeinstanceid: string;
       createdat: any;
       type: string;
+      pricetype: string;
+      creativesetname?: string | null;
+      creativesetid: string;
+      creativename: string;
+      creativeid: string;
+      creativestate: string;
+      creativepayload: string;
       count: number;
+      price: number;
       cost: number;
       android: number;
       ios: number;
@@ -146,9 +173,18 @@ export type AnalyticOverviewQuery = {
 
 export const EngagementFragmentDoc = gql`
   fragment Engagement on Engagement {
+    creativeinstanceid
     createdat
     type
+    pricetype
+    creativesetname
+    creativesetid
+    creativename
+    creativeid
+    creativestate
+    creativepayload
     count
+    price
     cost
     android
     ios

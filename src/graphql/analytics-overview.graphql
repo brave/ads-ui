@@ -1,7 +1,16 @@
 fragment Engagement on Engagement {
+  creativeinstanceid
   createdat
   type
+  pricetype
+  creativesetname
+  creativesetid
+  creativename
+  creativeid
+  creativestate
+  creativepayload
   count
+  price
   cost
   android
   ios
