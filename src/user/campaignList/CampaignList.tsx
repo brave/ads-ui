@@ -19,23 +19,20 @@ import { useHistory } from "react-router-dom";
 import { Status } from "../../components/Campaigns/Status";
 import { CampaignFragment } from "../../graphql/campaign.generated";
 import { isAfterEndDate } from "../../util/isAfterEndDate";
+import { IAdvertiser } from "../../actions";
 
 interface Props {
   campaigns: CampaignFragment[];
-  canEdit: boolean;
-  advertiserId: string;
+  advertiser: IAdvertiser;
   loading: boolean;
 }
 
-export function CampaignList({
-  campaigns,
-  canEdit,
-  advertiserId,
-  loading,
-}: Props) {
+export function CampaignList({ campaigns, advertiser, loading }: Props) {
   const history = useHistory();
 
   if (loading) return <LinearProgress />;
+
+  const canEdit = advertiser.selfServiceEdit;
 
   return (
     <EnhancedTable
@@ -46,7 +43,7 @@ export function CampaignList({
         {
           title: "On/Off",
           value: (c) => c.state,
-          extendedRenderer: (r) => campaignOnOffState(r, advertiserId),
+          extendedRenderer: (r) => campaignOnOffState(r, advertiser),
           sx: { width: "10px" },
           sortable: false,
         },

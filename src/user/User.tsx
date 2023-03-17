@@ -123,9 +123,8 @@ const RoutesWithProps: React.FC<{
     <Switch>
       <Route path={`${match.path}/campaigns`}>
         <CampaignList
-          canEdit={advertiser.selfServiceEdit}
           campaigns={data?.advertiser?.campaigns ?? []}
-          advertiserId={advertiser.id}
+          advertiser={advertiser}
           loading={loading}
         />
       </Route>
@@ -133,14 +132,14 @@ const RoutesWithProps: React.FC<{
         <AdSetList
           campaigns={data?.advertiser?.campaigns ?? []}
           loading={loading}
-          advertiserId={advertiser.id}
+          advertiser={advertiser}
         />
       </Route>
       <Route path={`${match.path}/ads`}>
         <AdList
           campaigns={data?.advertiser?.campaigns ?? []}
           loading={loading}
-          advertiserId={advertiser.id}
+          advertiser={advertiser}
         />
       </Route>
 
