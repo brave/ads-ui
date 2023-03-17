@@ -1,8 +1,8 @@
-import { Box, CircularProgress, Link, Switch, Tooltip } from "@mui/material";
+import { Box, Tooltip } from "@mui/material";
 import _ from "lodash";
-import { formatDistanceToNow, format, parseISO, isPast } from "date-fns";
+import { formatDistanceToNow, format, parseISO } from "date-fns";
 import { CellValue } from "./EnhancedTable";
-import React, { ChangeEvent, ReactChild, ReactNode, useState } from "react";
+import React, { ReactChild, ReactNode } from "react";
 import { formatInTimeZone } from "date-fns-tz";
 import enUS from "date-fns/locale/en-US";
 import { updateCampaignState } from "../../user/library";
@@ -12,14 +12,13 @@ import {
 } from "../../graphql/campaign.generated";
 import { AdvertiserCampaignsDocument } from "../../graphql/advertiser.generated";
 import {
-  AdFragment,
   AdSetFragment,
   useUpdateAdMutation,
   useUpdateAdSetMutation,
 } from "../../graphql/ad-set.generated";
 import { OnOff } from "../Switch/OnOff";
-import { Creative } from "../../user/views/adsManager/types";
 import { CreativeFragment } from "../../graphql/creative.generated";
+import { IAdvertiser } from "../../actions";
 
 export type CellValueRenderer = (value: CellValue) => React.ReactNode;
 const ADS_DEFAULT_TIMEZONE = "America/New_York";
@@ -96,16 +95,18 @@ export function renderMonetaryAmount(
 
 export function campaignOnOffState(
   c: CampaignFragment,
-  advertiserId: string
+  advertiser: IAdvertiser
 ): ReactNode {
   const [updateCampaign, { loading }] = useUpdateCampaignMutation({
     refetchQueries: [
       {
         query: AdvertiserCampaignsDocument,
-        variables: { id: advertiserId },
+        variables: { id: advertiser.id },
       },
     ],
   });
+
+  if (!advertiser.selfServiceEdit) return null;
 
   return (
     <OnOff
@@ -124,16 +125,18 @@ export function campaignOnOffState(
 
 export function adSetOnOffState(
   c: AdSetFragment & { campaignEnd: string; campaignId: string },
-  advertiserId: string
+  advertiser: IAdvertiser
 ): ReactNode {
   const [updateAdSet, { loading }] = useUpdateAdSetMutation({
     refetchQueries: [
       {
         query: AdvertiserCampaignsDocument,
-        variables: { id: advertiserId },
+        variables: { id: advertiser.id },
       },
     ],
   });
+
+  if (!advertiser.selfServiceEdit) return null;
 
   return (
     <OnOff
@@ -168,16 +171,18 @@ export function adOnOffState(
     campaignEnd: string;
     creativeInstanceId: string;
   },
-  advertiserId: string
+  advertiser: IAdvertiser
 ): ReactNode {
   const [updateAd, { loading }] = useUpdateAdMutation({
     refetchQueries: [
       {
         query: AdvertiserCampaignsDocument,
-        variables: { id: advertiserId },
+        variables: { id: advertiser.id },
       },
     ],
   });
+
+  if (!advertiser.selfServiceEdit) return null;
 
   return (
     <OnOff
