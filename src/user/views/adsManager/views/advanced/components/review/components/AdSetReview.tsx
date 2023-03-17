@@ -1,11 +1,9 @@
 import { Card, Divider, List, ListItemText, Typography } from "@mui/material";
 import { CustomListItemText } from "../../../../../../../../components/List/CustomListItemText";
 import React from "react";
-import { AdSetForm, Conversion, OS, Segment } from "../../../../../types";
+import { AdSetForm, OS, Segment } from "../../../../../types";
 import { FormikErrors } from "formik";
 import { AdReview } from "./AdReview";
-import _ from "lodash";
-import { ConversionError } from "../../../../../../../../components/Conversion/ConversionError";
 import ConversionDisplay from "../../../../../../../../components/Conversion/ConversionDisplay";
 
 interface Props {

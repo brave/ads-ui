@@ -1,4 +1,4 @@
-import { FieldArray, useFormikContext } from "formik";
+import { FieldArray, useField, useFormikContext } from "formik";
 import {
   Box,
   Button,
@@ -6,6 +6,8 @@ import {
   Divider,
   IconButton,
   Link,
+  Paper,
+  Stack,
   Typography,
 } from "@mui/material";
 import { FormikTextField } from "../../../../../../../form/FormikHelpers";
@@ -14,10 +16,12 @@ import ClearIcon from "@mui/icons-material/Clear";
 import {
   AdSetForm,
   CampaignForm,
+  Conversion,
   Creative,
   initialCreative,
 } from "../../../../types";
 import { UrlResolver } from "../../../../../../../components/Url/UrlResolver";
+import BraveLogo from "../../../../../../../components/creativePreview/OSNotificationCreativePreview/assets/brave_logo_icon.png";
 
 interface Props {
   index: number;
@@ -112,19 +116,25 @@ function Ad({ adSetIdx, adIdx, isEdit, creative }: AdProps) {
         disabled={isEdit && !!creative.id}
       />
 
-      <FormikTextField
-        name={`adSets.${adSetIdx}.creatives.${adIdx}.title`}
-        label="Ad Title"
-        helperText="Max 30 Characters"
-        disabled={isEdit && !!creative.id}
-      />
+      <Stack direction="column" alignItems="center">
+        <FormikTextField
+          sx={{ mr: 0.5 }}
+          name={`adSets.${adSetIdx}.creatives.${adIdx}.title`}
+          label="Ad Title"
+          helperText="Max 30 Characters"
+          disabled={isEdit && !!creative.id}
+        />
 
-      <FormikTextField
-        name={`adSets.${adSetIdx}.creatives.${adIdx}.body`}
-        label="Ad Body"
-        helperText="Max 60 Characters"
-        disabled={isEdit && !!creative.id}
-      />
+        <FormikTextField
+          sx={{ ml: 0.5 }}
+          name={`adSets.${adSetIdx}.creatives.${adIdx}.body`}
+          label="Ad Body"
+          helperText="Max 60 Characters"
+          disabled={isEdit && !!creative.id}
+        />
+      </Stack>
+
+      <Preview name={`adSets.${adSetIdx}.creatives.${adIdx}`} />
 
       <UrlResolver
         name={`adSets.${adSetIdx}.creatives.${adIdx}.targetUrl`}
@@ -133,5 +143,45 @@ function Ad({ adSetIdx, adIdx, isEdit, creative }: AdProps) {
         disabled={isEdit && !!creative.id}
       />
     </>
+  );
+}
+
+interface PreviewProp {
+  name: string;
+}
+
+function Preview({ name }: PreviewProp) {
+  const [, meta] = useField<Creative>(name);
+
+  return (
+    <Box display="flex" justifyContent="center">
+      <Paper
+        sx={{
+          height: "80px",
+          width: "350px",
+          borderRadius: "13px",
+          border: "1px solid #e2e2e2",
+          bgcolor: "rgba(248, 248, 248, 0.82)",
+          display: "flex",
+          justifyContent: "left",
+          flexDirection: "row",
+        }}
+      >
+        <Box display="flex" flexDirection="row" justifyContent="center">
+          <img
+            src={BraveLogo}
+            style={{ height: "54px", width: "54px", marginTop: ".75rem" }}
+          />
+          <Stack direction="column" justifyContent="center">
+            <Typography sx={{ fontWeight: 600 }} variant="body2">
+              {meta.value.title || "Title Preview"}
+            </Typography>
+            <Typography variant="body2">
+              {meta.value.body || "Body Preview"}
+            </Typography>
+          </Stack>
+        </Box>
+      </Paper>
+    </Box>
   );
 }
