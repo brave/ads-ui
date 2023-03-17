@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { BaseMetric, Metrics } from "../types";
 import { decideValueAttribute } from "../lib/overview.library";
 import MetricSelect from "./MetricSelect";
@@ -13,6 +13,7 @@ type BoxProps = FilterValue & {
   processedStats: BaseMetric;
   onSetMetric: (key: keyof Metrics, value: string) => void;
   metric: string;
+  isNtp: boolean;
 };
 
 const FilterBox = ({
@@ -20,6 +21,7 @@ const FilterBox = ({
   processedStats,
   onSetMetric,
   metric,
+  isNtp,
 }: BoxProps) => {
   const processed = processedStats[value];
   const attrs = decideValueAttribute(value);
@@ -48,6 +50,7 @@ const FilterBox = ({
           onSetMetric={onSetMetric}
           initialValue={value}
           metric={metric as keyof Metrics}
+          isNtp={isNtp}
         />
       </Box>
       <Box
@@ -71,12 +74,14 @@ interface MetricProps {
   processedStats: BaseMetric;
   onSetMetric: (key: keyof Metrics, value: string) => void;
   metrics: Metrics;
+  isNtp: boolean;
 }
 
 export default function MetricFilter({
   processedStats,
   onSetMetric,
   metrics,
+  isNtp,
 }: MetricProps) {
   return (
     <Box
@@ -92,6 +97,7 @@ export default function MetricFilter({
           onSetMetric={onSetMetric}
           metric={f[0]}
           key={`${f[1]}-${i}`}
+          isNtp={isNtp}
         />
       ))}
     </Box>

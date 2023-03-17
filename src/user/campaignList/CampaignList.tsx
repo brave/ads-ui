@@ -20,6 +20,7 @@ import { Status } from "../../components/Campaigns/Status";
 import { CampaignFragment } from "../../graphql/campaign.generated";
 import { isAfterEndDate } from "../../util/isAfterEndDate";
 import { IAdvertiser } from "../../actions";
+import { CampaignFormat } from "../../graphql/types";
 
 interface Props {
   campaigns: CampaignFragment[];
@@ -67,7 +68,7 @@ export function CampaignList({ campaigns, advertiser, loading }: Props) {
               >
                 {r.name}
               </Link>
-              {canEdit && (
+              {canEdit && r.format === CampaignFormat.PushNotification && (
                 <Tooltip title={`Edit ${r.name}`}>
                   <IconButton
                     onClick={() =>

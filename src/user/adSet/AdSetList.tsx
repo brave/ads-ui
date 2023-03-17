@@ -59,9 +59,22 @@ export function AdSetList({ campaigns, loading, advertiser }: Props) {
       campaignStart: c.startAt,
       campaignEnd: c.endAt,
       campaignId: c.id,
+      campaignState: c.state,
     })),
   }));
   const adSets = _.flatMap(mapAdSetName, "adSets");
+
+  const getState = (c: {
+    campaignState: string;
+    campaignEnd: string;
+    state: string;
+  }) => {
+    return c.campaignState === "under_review"
+      ? "under_review"
+      : isAfterEndDate(c.campaignEnd)
+      ? "completed"
+      : c.state;
+  };
 
   if (loading) return <LinearProgress />;
 
@@ -84,9 +97,9 @@ export function AdSetList({ campaigns, loading, advertiser }: Props) {
         },
         {
           title: "State",
-          value: (c) => (isAfterEndDate(c.campaignEnd) ? "completed" : c.state),
+          value: (c) => getState(c),
           extendedRenderer: (r) => (
-            <Status state={r.state} end={r.campaignEnd} />
+            <Status state={getState(r)} end={r.campaignEnd} />
           ),
         },
         {

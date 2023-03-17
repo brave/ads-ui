@@ -1,22 +1,26 @@
 import React, { useState } from "react";
-import { Box, Divider, LinearProgress, Typography } from "@mui/material";
-
+import { Alert, AlertTitle, Box, Divider, LinearProgress } from "@mui/material";
 import moment from "moment/moment";
-import {
-  useAnalyticOverviewQuery,
-  AnalyticOverviewQuery,
-} from "../../graphql/analytics-overview.generated";
-import ReportUtils from "./analyticsOverview/components/ReportUtils";
-import { CampaignOverview } from "./analyticsOverview/reports/campaign/CampaignOverview";
 import { CampaignFormat } from "../../graphql/types";
+import {
+  AnalyticOverviewQuery,
+  useAnalyticOverviewQuery,
+} from "../../graphql/analytics-overview.generated";
+import { IAuthUser } from "../../actions";
 import { useParams } from "react-router-dom";
+import ReportUtils from "./analyticsOverview/components/ReportUtils";
+import { EngagementsOverview } from "./analyticsOverview/reports/campaign/EngagementsOverview";
+import { DailyCampaignOverview } from "./analyticsOverview/reports/campaign/DailyCampaignOverview";
+import { CreativeOverview } from "./analyticsOverview/reports/creative/CreativeOverview";
+import { OsOverview } from "./analyticsOverview/reports/os/OsOverview";
+import { Text } from "../../components/Text/Text";
 
 interface Params {
   campaignId: string;
 }
 
 interface Props {
-  auth: any;
+  auth: IAuthUser;
 }
 
 const AnalyticsOverview: React.FC<Props> = ({ auth }: Props) => {
@@ -62,6 +66,16 @@ const AnalyticsOverview: React.FC<Props> = ({ auth }: Props) => {
       moment(engagement.createdat) <= moment.utc(endDate).endOf("day")
   );
 
+  if (!filteredEngagements || filteredEngagements.length === 0) {
+    return (
+      <Box>
+        <Alert severity="info" sx={{ mt: 2, mb: 10 }}>
+          Reporting not available yet for <strong>{data.campaign.name}</strong>.
+        </Alert>
+      </Box>
+    );
+  }
+
   return (
     <Box>
       <ReportUtils
@@ -72,20 +86,52 @@ const AnalyticsOverview: React.FC<Props> = ({ auth }: Props) => {
         auth={auth}
       />
 
-      <Divider textAlign="left" sx={{ fontWeight: "600" }}>
-        Campaign Overview
+      <Divider textAlign="left" sx={{ fontWeight: "600", mb: 2 }}>
+        Overview
       </Divider>
 
-      <CampaignOverview
+      <EngagementsOverview
+        engagements={filteredEngagements ?? []}
+        campaign={data.campaign}
+        adSets={data.campaign.adSets}
+      />
+
+      <Divider textAlign="left" sx={{ fontWeight: "600", mt: 5, mb: 3 }}>
+        Daily Performance
+      </Divider>
+
+      <DailyCampaignOverview
+        engagements={filteredEngagements ?? []}
+        campaign={data.campaign}
+      />
+
+      <Divider textAlign="left" sx={{ fontWeight: "600", mt: 5, mb: 3 }}>
+        OS Performance
+      </Divider>
+
+      <OsOverview
+        engagements={filteredEngagements ?? []}
+        campaign={data.campaign}
+      />
+
+      <Divider textAlign="left" sx={{ fontWeight: "600", mt: 5, mb: 3 }}>
+        Creative Performance
+      </Divider>
+
+      <CreativeOverview
         engagements={filteredEngagements ?? []}
         campaign={data.campaign}
       />
 
       {data.campaign.format === CampaignFormat.NtpSi && (
-        <Typography>
-          Sponsored Image reporting is a statistical approximation, derived from
-          the percentage of Brave users that are opted-in to Brave Ads.
-        </Typography>
+        <Text
+          style={{ marginLeft: "4px", marginTop: 10 }}
+          content={
+            "* Sponsored Image reporting is a statistical approximation, derived from the percentage of Brave users that are opted-in to Brave Ads."
+          }
+          fontFamily={"Poppins"}
+          sizes={[18, 18, 42, 42, 14]}
+        />
       )}
     </Box>
   );

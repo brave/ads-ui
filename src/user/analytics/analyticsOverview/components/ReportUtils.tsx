@@ -4,13 +4,14 @@ import SaveIcon from "@mui/icons-material/Save";
 import React, { useState } from "react";
 import { downloadCSV } from "../lib/csv.library";
 import { DateRangePicker } from "../../../../components/Date/DateRangePicker";
+import { IAuthUser } from "../../../../actions";
 
 interface DownloaderProps {
   startDate: Date | undefined;
   endDate: Date;
   campaign: { id: string; name: string };
   onSetDate: (val: Date, type: "start" | "end") => void;
-  auth: any;
+  auth: IAuthUser;
 }
 
 export default function ReportUtils({
