@@ -116,7 +116,7 @@ function Ad({ adSetIdx, adIdx, isEdit, creative }: AdProps) {
         disabled={isEdit && !!creative.id}
       />
 
-      <Stack direction="column" alignItems="center">
+      <Stack direction="row" alignItems="center">
         <FormikTextField
           sx={{ mr: 0.5 }}
           name={`adSets.${adSetIdx}.creatives.${adIdx}.title`}
