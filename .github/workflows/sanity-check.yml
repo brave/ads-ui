@@ -17,5 +17,5 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run tsc
-      - run: npm audit --production
+      - run: npm audit
       - run: npm test
