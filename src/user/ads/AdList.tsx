@@ -1,23 +1,23 @@
-import React from "react";
 import {
   EnhancedTable,
   StandardRenderers,
 } from "../../components/EnhancedTable";
-import { Chip, LinearProgress } from "@mui/material";
+import { LinearProgress } from "@mui/material";
 import { Status } from "../../components/Campaigns/Status";
 import { CampaignFragment } from "../../graphql/campaign.generated";
 import _ from "lodash";
 import { uiTextForCreativeTypeCode } from "../library";
 import { adOnOffState } from "../../components/EnhancedTable/renderers";
 import { isAfterEndDate } from "../../util/isAfterEndDate";
+import { IAdvertiser } from "../../actions";
 
 interface Props {
   campaigns: CampaignFragment[];
   loading: boolean;
-  advertiserId: string;
+  advertiser: IAdvertiser;
 }
 
-export function AdList({ campaigns, loading, advertiserId }: Props) {
+export function AdList({ campaigns, loading, advertiser }: Props) {
   const mapAdName = campaigns.map((c) => ({
     adSets: c.adSets.map((a) => ({
       ads: (a.ads ?? []).map((ad) => ({
@@ -50,7 +50,7 @@ export function AdList({ campaigns, loading, advertiserId }: Props) {
         {
           title: "On/Off",
           value: (c) => c.state,
-          extendedRenderer: (r) => adOnOffState(r, advertiserId),
+          extendedRenderer: (r) => adOnOffState(r, advertiser),
           sx: { width: "10px" },
           sortable: false,
         },

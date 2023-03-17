@@ -12,11 +12,12 @@ import {
   adOnOffState,
   adSetOnOffState,
 } from "../../components/EnhancedTable/renderers";
+import { IAdvertiser } from "../../actions";
 
 interface Props {
   campaigns: CampaignFragment[];
   loading: boolean;
-  advertiserId: string;
+  advertiser: IAdvertiser;
 }
 
 interface ChipListProps {
@@ -50,7 +51,7 @@ const ChipList: React.FC<ChipListProps> = ({ items }) => {
   );
 };
 
-export function AdSetList({ campaigns, loading, advertiserId }: Props) {
+export function AdSetList({ campaigns, loading, advertiser }: Props) {
   const mapAdSetName = campaigns.map((c) => ({
     adSets: c.adSets.map((a) => ({
       ...a,
@@ -73,7 +74,7 @@ export function AdSetList({ campaigns, loading, advertiserId }: Props) {
         {
           title: "On/Off",
           value: (c) => c.state,
-          extendedRenderer: (r) => adSetOnOffState(r, advertiserId),
+          extendedRenderer: (r) => adSetOnOffState(r, advertiser),
           sx: { width: "10px" },
           sortable: false,
         },
