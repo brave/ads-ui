@@ -124,7 +124,11 @@ export function campaignOnOffState(
 }
 
 export function adSetOnOffState(
-  c: AdSetFragment & { campaignEnd: string; campaignId: string },
+  c: AdSetFragment & {
+    campaignEnd: string;
+    campaignId: string;
+    campaignState: string;
+  },
   advertiser: IAdvertiser
 ): ReactNode {
   const [updateAdSet, { loading }] = useUpdateAdSetMutation({
@@ -137,6 +141,13 @@ export function adSetOnOffState(
   });
 
   if (!advertiser.selfServiceEdit) return null;
+
+  const state =
+    c.campaignState === "under_review"
+      ? "under_review"
+      : c.state === "suspended"
+      ? "paused"
+      : c.state;
 
   return (
     <OnOff
@@ -158,7 +169,7 @@ export function adSetOnOffState(
         }
       }}
       loading={loading}
-      state={c.state === "suspended" ? "paused" : c.state}
+      state={state}
       end={c.campaignEnd}
       type="Ad Set"
     />
