@@ -1,23 +1,20 @@
 import { useState } from "react";
 
 import { Autocomplete, TextField } from "@mui/material";
-import { Metrics } from "../types";
-
-interface Option {
-  value: string;
-  label: string;
-}
+import { Metrics, Option } from "../types";
 
 interface PopoutProps {
   onSetMetric: (key: keyof Metrics, value: string) => void;
   initialValue: string;
   metric: keyof Metrics;
+  isNtp: Boolean;
 }
 
 export default function MetricSelect({
   initialValue,
   onSetMetric,
   metric,
+  isNtp,
 }: PopoutProps) {
   const options = [
     // TODO: commented out metrics in live feed, do we really need them in both?
@@ -31,9 +28,14 @@ export default function MetricSelect({
     // { value: "downvotes", label: "Downvotes" },
     { value: "convRate", label: "Conversion Rate" },
     { value: "landingRate", label: "Click to 10s Visit Rate" },
-    // { value: "spend", label: "Spend" },
-    // { value: "cpa", label: "CPA" },
   ];
+
+  if (!isNtp) {
+    options.push(
+      { value: "spend", label: "Spend" },
+      { value: "cpa", label: "CPA" }
+    );
+  }
 
   const [open, setOpen] = useState(false);
   const initial = options.find((o) => o.value === initialValue);

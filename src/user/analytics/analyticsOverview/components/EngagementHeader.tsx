@@ -1,20 +1,32 @@
-import { Text } from "../../../../components/Text/Text";
 import React from "react";
-import { Box, Button } from "@mui/material";
+import {
+  BottomNavigation,
+  BottomNavigationAction,
+  Box,
+  Button,
+  Tab,
+  Tabs,
+  Typography,
+} from "@mui/material";
+import { EngagementChartType } from "../types";
 
 interface HeaderProps {
-  onClick: (s: string) => void;
+  onSetGroup: (s: string) => void;
+  onSetEngagement: (s: EngagementChartType) => void;
+  grouping: string;
+  engagement: string;
+}
+
+interface GroupProps {
+  onSetGroup: (s: string) => void;
+  label: string;
+  group: string;
   grouping: string;
 }
 
-type GroupProps = HeaderProps & {
-  label: string;
-  group: string;
-};
-
 type Group = Pick<GroupProps, "label" | "group">;
 
-const Grouping = ({ onClick, label, group, grouping }: GroupProps) => {
+const Grouping = ({ onSetGroup, label, group, grouping }: GroupProps) => {
   return (
     <Button
       sx={{
@@ -25,14 +37,44 @@ const Grouping = ({ onClick, label, group, grouping }: GroupProps) => {
         cursor: "pointer",
         color: grouping === group ? "#FB7959;" : "black;",
       }}
-      onClick={() => onClick(group)}
+      onClick={() => onSetGroup(group)}
     >
       {label}
     </Button>
   );
 };
 
-export default function EngagementHeader({ onClick, grouping }: HeaderProps) {
+interface EngagementProps {
+  value: string;
+  onSetEngagement: (e: EngagementChartType) => void;
+}
+
+const Engagement = ({ value, onSetEngagement }: EngagementProps) => {
+  return (
+    <Box display="flex" flexDirection="row" alignItems="center" ml={1}>
+      <Typography variant="body2" sx={{ mr: 1 }}>
+        Engagements:
+      </Typography>
+      <Tabs
+        value={value}
+        onChange={(event, newValue) => {
+          onSetEngagement(newValue);
+        }}
+      >
+        <Tab label="Campaign" value="campaign" />
+        <Tab label="Ad Set" value="creativeset" />
+        <Tab label="Creative" value="creative" />
+      </Tabs>
+    </Box>
+  );
+};
+
+export default function EngagementHeader({
+  onSetGroup,
+  grouping,
+  engagement,
+  onSetEngagement,
+}: HeaderProps) {
   const groups: Group[] = [
     { label: "Hour", group: "hourly" },
     { label: "Day", group: "daily" },
@@ -44,24 +86,18 @@ export default function EngagementHeader({ onClick, grouping }: HeaderProps) {
     <Box
       sx={{
         width: "100%",
-        height: "56px",
+        height: "50px",
         backgroundColor: "white",
         borderBottom: "1px solid #ededed",
         display: "flex",
-        alignItems: "center",
         justifyContent: "center",
         paddingRight: "12px",
       }}
     >
-      <Text
-        style={{ marginLeft: "40px" }}
-        content={"Campaign Engagement"}
-        fontFamily={"Poppins"}
-        sizes={[18, 18, 42, 42, 14]}
-      />
+      <Engagement value={engagement} onSetEngagement={onSetEngagement} />
       {groups.map((g) => (
         <Grouping
-          onClick={onClick}
+          onSetGroup={onSetGroup}
           grouping={grouping}
           label={g.label}
           group={g.group}

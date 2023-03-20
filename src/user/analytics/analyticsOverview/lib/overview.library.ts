@@ -71,7 +71,7 @@ export const prepareChart = (
   }
 ) => {
   const metricsEntries = Object.entries(metrics);
-  const opts = {
+  return {
     ...baseOverviewChart,
     series: metricsEntries.map((e, idx) => {
       const attrs = decideValueAttribute(e[1]);
@@ -90,8 +90,6 @@ export const prepareChart = (
       };
     }),
   };
-
-  return opts;
 };
 
 const decideAxis = (metric: string) => {
@@ -110,17 +108,20 @@ export const decideValueAttribute = (metric: string) => {
     suffix: undefined,
     prefix: undefined,
     decimal: undefined,
+    format: "{point.y:,.0f}",
   };
 
   switch (metric) {
     case "ctr":
     case "convRate":
     case "landingRate":
-      attr = { ...attr, suffix: "%", decimal: 2 };
+    case "dismissRate":
+    case "visitRate":
+      attr = { ...attr, suffix: "%", decimal: 2, format: "{point.y:,.2f}%" };
       break;
     case "spend":
     case "cpa":
-      attr = { ...attr, prefix: "$", decimal: 2 };
+      attr = { ...attr, prefix: "$", decimal: 2, format: "${point.y:,.2f}" };
   }
 
   return attr;
@@ -133,11 +134,17 @@ export const decideLabel = (metric: string) => {
     case "convRate":
       return "Conversion Rate";
     case "landingRate":
-      return "10s Visit Rate";
+      return "Click to 10s Visit Rate";
     case "views":
       return "Impressions";
     case "cpa":
       return "CPA";
+    case "visitRate":
+      return "10s visit rate";
+    case "dismissRate":
+      return "Dismissal Rate";
+    case "landings":
+      return " 10s Visits";
     default:
       return _.capitalize(metric);
   }
