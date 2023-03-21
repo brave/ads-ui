@@ -8,6 +8,8 @@ import {
 } from "../../../../form/DateFieldHelpers";
 import { MIN_PER_CAMPAIGN } from "../../../../validation/CampaignSchema";
 
+export type Billing = "cpm" | "cpc";
+
 export type CampaignForm = {
   startAt: string;
   endAt: string;
@@ -22,6 +24,8 @@ export type CampaignForm = {
   name: string;
   state: string;
   type: "paid";
+  price: number;
+  billingType: Billing;
   pacingStrategy: CampaignPacingStrategies;
 };
 
@@ -38,8 +42,6 @@ export type OS = {
 export type AdSetForm = {
   id?: string;
   name: string;
-  price: number;
-  billingType: string;
   segments: Segment[];
   oses: OS[];
   conversions: Conversion[];
@@ -81,8 +83,6 @@ export const initialCreative: Creative = {
 
 export const initialAdSet: AdSetForm = {
   name: "",
-  billingType: "cpm",
-  price: 6,
   segments: [
     {
       code: "Svp7l-zGN",
@@ -107,6 +107,8 @@ export const initialCampaign: CampaignForm = {
   dailyBudget: MIN_PER_CAMPAIGN,
   dailyCap: 1,
   geoTargets: [],
+  billingType: "cpm",
+  price: 6,
   adSets: [
     {
       ...initialAdSet,

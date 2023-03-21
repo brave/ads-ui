@@ -47,18 +47,26 @@ export const CampaignSchema = object().shape({
     )
     .min(1, "At least one country must be targeted")
     .default([]),
+  price: number()
+    .label("Price")
+    .when("billingType", {
+      is: (b) => b === "cpc",
+      then: number().moreThan(0.09, "CPC price must be .10 or higher"),
+    })
+    .when("billingType", {
+      is: (b) => b === "cpm",
+      then: number().moreThan(5, "CPM price must be 6 or higher"),
+    })
+    .required(),
+  billingType: string()
+    .label("Pricing Type")
+    .oneOf(["cpm", "cpc"])
+    .required("Pricing type is a required field"),
   adSets: array()
     .min(1)
     .of(
       object().shape({
         name: string().label("Ad Set Name").optional(),
-        price: number()
-          .label("Price")
-          .moreThan(0, "Price must be greater than 0")
-          .required(),
-        billingType: string()
-          .label("Pricing Type")
-          .required("Pricing type is a required field"),
         segments: array()
           .label("Audiences")
           .of(

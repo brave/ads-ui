@@ -1,5 +1,6 @@
 import {
   AdSetForm,
+  Billing,
   CampaignForm,
   Conversion,
   Creative,
@@ -43,13 +44,13 @@ export async function transformNewForm(
     const ads: CreateAdInput[] = [];
 
     for (const ad of adSet.creatives) {
-      const creative = await transformCreative(ad, adSet, auth, advertiserId);
+      const creative = await transformCreative(ad, form, auth, advertiserId);
       ads.push(creative);
     }
 
     const base: CreateAdSetInput = {
       name: adSet.name,
-      billingType: adSet.billingType,
+      billingType: form.billingType,
       execution: "per_click",
       perDay: 1,
       segments: adSet.segments.map((s) => ({ code: s.code, name: s.name })),
@@ -96,7 +97,7 @@ function transformConversion(conv: Conversion[]) {
 
 async function transformCreative(
   creative: Creative,
-  adSet: AdSetForm,
+  campaign: CampaignForm,
   auth: IAuthUser,
   advertiserId: string
 ): Promise<CreateAdInput> {
@@ -121,8 +122,8 @@ async function transformCreative(
     creativeId: withId,
     prices: [
       {
-        amount: adSet.price,
-        type: adSet.billingType === "cpc" ? "click" : "view",
+        amount: campaign.price,
+        type: campaign.billingType === "cpc" ? "click" : "view",
       },
     ],
   };
@@ -181,7 +182,6 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
       conversions: adSet.conversions ?? [],
       oses: adSet.oses ?? ([] as OS[]),
       segments: adSet.segments ?? ([] as Segment[]),
-      billingType: adSet.billingType ?? "cpm",
       name: adSet.name || adSet.id.split("-")[0],
       creatives: adSet.ads!.map((ad) => {
         const c = ad.creative;
@@ -194,8 +194,9 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
           targetUrlValid: true,
         };
       }),
-      price: adSet.ads?.[0].prices[0].amount || 0,
     })),
+    price: campaign.adSets[0].ads?.[0].prices[0].amount ?? 6,
+    billingType: (campaign.adSets[0].billingType ?? "cpm") as Billing,
     validateStart: false,
     budget: campaign.budget,
     currency: campaign.currency,
@@ -223,7 +224,7 @@ export async function transformEditForm(
   for (const adSet of form.adSets) {
     const newCreatives = adSet.creatives.filter((c) => c.id === undefined);
     for (const ad of newCreatives) {
-      const withId = await transformCreative(ad, adSet, auth, advertiserId);
+      const withId = await transformCreative(ad, form, auth, advertiserId);
       await createAd(auth.accessToken, {
         ...withId,
         creativeSetId: adSet.id,

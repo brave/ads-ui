@@ -40,14 +40,15 @@ export function NewCampaign({ auth, advertiser }: Props) {
               return await mutation({ variables: { input: c } });
             })
             .catch((e) => {
-              console.error(e);
               alert("Unable to save Campaign");
             })
             .finally(() => setSubmitting(false));
         }}
         validationSchema={CampaignSchema}
       >
-        {({ values }) => <BaseForm isEdit={false} values={values} />}
+        {({ values }) => (
+          <BaseForm isEdit={false} values={values} advertiser={advertiser} />
+        )}
       </Formik>
     </Container>
   );

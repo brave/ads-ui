@@ -4,13 +4,15 @@ import { DetailField } from "./fields/DetailField";
 import { BudgetField } from "./fields/BudgetField";
 import { LocationField } from "./fields/LocationField";
 import { CampaignDateRange } from "../../../../../../../components/Campaigns/CampaignDateRange";
+import { IAdvertiser } from "../../../../../../../actions";
 
 interface Props {
   onNext: () => void;
   isEdit: boolean;
+  advertiser: IAdvertiser;
 }
 
-export function CampaignFields({ onNext, isEdit }: Props) {
+export function CampaignFields({ onNext, isEdit, advertiser }: Props) {
   return (
     <Card sx={{ p: 2, mt: 2 }}>
       {/*<ObjectiveField />*/}
@@ -19,7 +21,7 @@ export function CampaignFields({ onNext, isEdit }: Props) {
 
       <CampaignDateRange isEdit={isEdit} />
 
-      <BudgetField isEdit={isEdit} />
+      {!isEdit && <BudgetField canSetPrice={advertiser.selfServiceSetPrice} />}
 
       {!isEdit && <LocationField />}
 
