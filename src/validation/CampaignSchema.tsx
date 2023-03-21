@@ -5,6 +5,7 @@ import { twoDaysOut } from "../form/DateFieldHelpers";
 export const SimpleUrlRegexp = /https:\/\/.+\.[a-zA-Z]{2,}\/?.*/g;
 const NoSpacesRegex = /^\S*$/;
 const TrailingAsteriskRegex = /.*\*$/;
+const HttpsRegex = /^https:\/\//;
 
 export const MIN_PER_DAY = 33;
 export const MIN_PER_CAMPAIGN = 1000;
@@ -127,6 +128,7 @@ export const CampaignSchema = object().shape({
                   NoSpacesRegex,
                   `Ad URL must not contain any whitespace`
                 )
+                .matches(HttpsRegex, `URL must start with https://`)
                 .matches(
                   SimpleUrlRegexp,
                   `Please enter a valid Ad URL, for example https://brave.com`
