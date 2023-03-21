@@ -122,6 +122,7 @@ function Ad({ adSetIdx, adIdx, isEdit, creative }: AdProps) {
           name={`adSets.${adSetIdx}.creatives.${adIdx}.title`}
           label="Ad Title"
           helperText="Max 30 Characters"
+          maxLengthInstantFeedback={30}
           disabled={isEdit && !!creative.id}
         />
 
@@ -130,6 +131,7 @@ function Ad({ adSetIdx, adIdx, isEdit, creative }: AdProps) {
           name={`adSets.${adSetIdx}.creatives.${adIdx}.body`}
           label="Ad Body"
           helperText="Max 60 Characters"
+          maxLengthInstantFeedback={60}
           disabled={isEdit && !!creative.id}
         />
       </Stack>

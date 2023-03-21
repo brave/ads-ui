@@ -36,7 +36,7 @@ export const ConversionFields: React.FC<Props> = ({ name }: Props) => {
         <FormikTextField
           name={`${name}.urlPattern`}
           label="URL Pattern"
-          helperText="Example: https://brave.com/products/*"
+          helperText="URL should have a trailing asterisk - Example: https://brave.com/products/*"
         />
       </Box>
 
