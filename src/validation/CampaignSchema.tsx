@@ -57,7 +57,7 @@ export const CampaignSchema = object().shape({
       is: (b) => b === "cpm",
       then: number().moreThan(5, "CPM price must be 6 or higher"),
     })
-    .required(),
+    .required("Price is a required field"),
   billingType: string()
     .label("Pricing Type")
     .oneOf(["cpm", "cpc"])
