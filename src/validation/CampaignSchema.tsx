@@ -45,7 +45,6 @@ export const CampaignSchema = object().shape({
       })
     )
     .min(1, "At least one country must be targeted")
-    .max(3, "Maximum of 3 countries can be targeted")
     .default([]),
   adSets: array()
     .min(1)
