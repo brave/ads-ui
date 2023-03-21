@@ -114,11 +114,11 @@ export const CampaignSchema = object().shape({
                 .required("Ad Name is required"),
               title: string()
                 .label("Title")
-                .max(30, "Max 30 Characters")
+                .max(30, "Maximum 30 Characters")
                 .required("Ad Title is required"),
               body: string()
                 .label("Body")
-                .max(60, "Max 60 Characters")
+                .max(60, "Maximum 60 Characters")
                 .required("Ad Body is required"),
               targetUrlValid: boolean().isTrue("Please enter a valid Ad URL."),
               targetUrl: string()
