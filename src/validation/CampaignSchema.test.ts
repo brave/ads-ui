@@ -8,6 +8,8 @@ const validCampaign = {
   budget: 1000,
   currency: "GBP",
   dailyBudget: 100,
+  billingType: "cpm",
+  price: 6,
   dailyCap: 1,
   startAt: parseISO("2030-07-18"),
   endAt: parseISO("2030-07-20"),
