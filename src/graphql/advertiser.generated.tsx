@@ -56,6 +56,7 @@ export type AdvertiserCampaignsQuery = {
       createdAt: any;
       startAt: any;
       endAt: any;
+      source: Types.CampaignSource;
       type: string;
       format: Types.CampaignFormat;
       dayProportion?: number | null;

@@ -60,6 +60,7 @@ export function AdSetList({ campaigns, loading, advertiser }: Props) {
       campaignEnd: c.endAt,
       campaignId: c.id,
       campaignState: c.state,
+      campaignSource: c.source,
     })),
   }));
   const adSets = _.flatMap(mapAdSetName, "adSets");

@@ -48,6 +48,13 @@ export enum CampaignPacingStrategies {
   Original = "ORIGINAL",
 }
 
+export enum CampaignSource {
+  Direct = "DIRECT",
+  Managed = "MANAGED",
+  Network = "NETWORK",
+  SelfServe = "SELF_SERVE",
+}
+
 export type ChangeFilter = {
   /** exclude all changes whose time range is completely before this time */
   created?: InputMaybe<Scalars["DateTime"]>;

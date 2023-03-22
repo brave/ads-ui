@@ -15,6 +15,7 @@ fragment Campaign on Campaign {
   createdAt
   startAt
   endAt
+  source
   type
   format
   dayProportion
