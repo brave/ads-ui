@@ -46,6 +46,7 @@ export type AdSetForm = {
   oses: OS[];
   conversions: Conversion[];
   creatives: Creative[];
+  isNotTargeting: boolean;
 };
 
 export type Conversion = {
@@ -85,12 +86,8 @@ export const initialCreative: Creative = {
 
 export const initialAdSet: AdSetForm = {
   name: "",
-  segments: [
-    {
-      code: "Svp7l-zGN",
-      name: "untargeted",
-    },
-  ],
+  isNotTargeting: true,
+  segments: [],
   conversions: [],
   oses: [],
   creatives: [
