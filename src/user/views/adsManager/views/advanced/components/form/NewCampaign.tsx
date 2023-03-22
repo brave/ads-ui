@@ -6,17 +6,28 @@ import { CampaignSchema } from "../../../../../../../validation/CampaignSchema";
 import { transformNewForm } from "../../../../../../library";
 import { useCreateCampaignMutation } from "../../../../../../../graphql/campaign.generated";
 import { refetchAdvertiserQuery } from "../../../../../../../graphql/advertiser.generated";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { BaseForm } from "./components/BaseForm";
 import { IAdvertiser, IAuthUser } from "../../../../../../../actions";
+import { PersistFormValues } from "../../../../../../../form/PersistFormValues";
 
 interface Props {
   auth: IAuthUser;
   advertiser: IAdvertiser;
 }
 
+interface Params {
+  draftId: string;
+}
+
 export function NewCampaign({ auth, advertiser }: Props) {
   const history = useHistory();
+  const params = useParams<Params>();
+
+  const initial: CampaignForm = {
+    ...initialCampaign,
+    draftId: params.draftId,
+  };
 
   const [mutation] = useCreateCampaignMutation({
     refetchQueries: [
@@ -32,7 +43,7 @@ export function NewCampaign({ auth, advertiser }: Props) {
   return (
     <Container maxWidth="xl">
       <Formik
-        initialValues={initialCampaign}
+        initialValues={initial}
         onSubmit={(v: CampaignForm, { setSubmitting }) => {
           setSubmitting(true);
           transformNewForm(v, auth, advertiser.id)
@@ -47,7 +58,10 @@ export function NewCampaign({ auth, advertiser }: Props) {
         validationSchema={CampaignSchema}
       >
         {({ values }) => (
-          <BaseForm isEdit={false} values={values} advertiser={advertiser} />
+          <>
+            <BaseForm isEdit={false} values={values} />
+            <PersistFormValues />
+          </>
         )}
       </Formik>
     </Container>

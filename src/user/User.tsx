@@ -70,7 +70,7 @@ function User({ advertisers, auth }: Props) {
           >
             <Switch>
               {/* /adsmanager */}
-              <Route path={`${match.path}/adsmanager/advanced/new`}>
+              <Route path={`${match.path}/adsmanager/advanced/new/:draftId`}>
                 <NewCampaign auth={auth} advertiser={activeAdvertiser} />
               </Route>
 

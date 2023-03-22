@@ -4,7 +4,8 @@ import _ from "lodash";
 import Authentication from "./containers/Authentication/Authentication";
 import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 
-import Context, {
+import {
+  DraftContext,
   getActiveAdvertiser,
   setActiveAdvertiser,
 } from "./state/context";
@@ -20,8 +21,7 @@ import {
 import { theme } from "./theme";
 
 const App = (props) => {
-  const [loading, setLoading] = useState(undefined);
-  const [sidebar, setSidebar] = useState("visible");
+  const [drafts, setDrafts] = useState(0);
 
   let expTime;
   if (props.auth.accessToken) {
@@ -30,7 +30,7 @@ const App = (props) => {
 
   const getRedirect = () => {
     if (expTime && expTime < moment()) {
-      localStorage.clear();
+      localStorage.removeItem("persist:root");
       window.location.reload();
     }
     const { advertisers, auth } = props;
@@ -53,12 +53,10 @@ const App = (props) => {
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <Context.Provider
+          <DraftContext.Provider
             value={{
-              loading,
-              sidebar,
-              setSidebar,
-              setLoading,
+              drafts,
+              setDrafts,
             }}
           >
             <Switch>
@@ -77,7 +75,7 @@ const App = (props) => {
               />
               {getRedirect()}
             </Switch>
-          </Context.Provider>
+          </DraftContext.Provider>
         </ThemeProvider>
       </StyledEngineProvider>
     </>

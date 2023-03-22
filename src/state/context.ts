@@ -1,11 +1,9 @@
-import React from "react";
+import { createContext } from "react";
 import { IAdvertiser } from "../actions";
 
-export default React.createContext({
-  loading: undefined,
-  sidebar: "visible",
-  setLoading: (loading) => {},
-  setSidebar: (sidebar) => {},
+export const DraftContext = createContext({
+  drafts: 0,
+  setDrafts: (n: number) => {},
 });
 
 export const setActiveAdvertiser = (advertiser: IAdvertiser) => {
