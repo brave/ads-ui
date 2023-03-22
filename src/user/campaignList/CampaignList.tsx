@@ -68,17 +68,19 @@ export function CampaignList({ campaigns, advertiser, loading }: Props) {
               >
                 {r.name}
               </Link>
-              {canEdit && r.format === CampaignFormat.PushNotification && (
-                <Tooltip title={`Edit ${r.name}`}>
-                  <IconButton
-                    onClick={() =>
-                      history.push(`/user/main/adsmanager/advanced/${r.id}`)
-                    }
-                  >
-                    <EditIcon />
-                  </IconButton>
-                </Tooltip>
-              )}
+              {canEdit &&
+                r.format === CampaignFormat.PushNotification &&
+                r.state !== "completed" && (
+                  <Tooltip title={`Edit ${r.name}`}>
+                    <IconButton
+                      onClick={() =>
+                        history.push(`/user/main/adsmanager/advanced/${r.id}`)
+                      }
+                    >
+                      <EditIcon />
+                    </IconButton>
+                  </Tooltip>
+                )}
             </Stack>
           ),
         },
