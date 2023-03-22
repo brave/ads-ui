@@ -82,7 +82,7 @@ function Navbar({ dispatch, canCreate }: Props) {
         )}
         <UserMenu
           signOut={() => {
-            localStorage.clear();
+            localStorage.removeItem("persist:root");
             dispatch(SignOut());
           }}
         />
