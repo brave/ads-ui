@@ -74,7 +74,7 @@ export async function transformNewForm(
     externalId: "",
     format: form.format,
     userId: auth.id,
-    source: "direct",
+    source: "self_serve",
     startAt: form.startAt,
     state: form.state,
     type: form.type,
