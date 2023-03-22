@@ -33,7 +33,9 @@ export const SegmentPicker: React.FC<Props> = ({ idx }: Props) => {
     if (targetMeta.value) {
       helper.setValue([{ code: "Svp7l-zGN", name: "untargeted" }]);
     } else {
-      helper.setValue([]);
+      const onlyUntargeted =
+        meta.value.length === 1 && meta.value[0].code === "Svp7l-zGN";
+      helper.setValue(onlyUntargeted ? [] : meta.value);
     }
   }, [targetMeta.value]);
 
