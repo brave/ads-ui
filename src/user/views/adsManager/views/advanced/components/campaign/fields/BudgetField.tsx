@@ -1,5 +1,8 @@
 import { Box, Divider, InputAdornment, Stack, Typography } from "@mui/material";
-import { FormikTextField } from "../../../../../../../../form/FormikHelpers";
+import {
+  FormikRadioControl,
+  FormikTextField,
+} from "../../../../../../../../form/FormikHelpers";
 import React, { useEffect, useState } from "react";
 import { useFormikContext } from "formik";
 import { CampaignForm } from "../../../../../types";
@@ -11,10 +14,11 @@ import {
 import _ from "lodash";
 
 interface Props {
+  canSetPrice: boolean;
   isEdit: boolean;
 }
 
-export function BudgetField({ isEdit }: Props) {
+export function BudgetField({ canSetPrice, isEdit }: Props) {
   const { values, setFieldValue, errors } = useFormikContext<CampaignForm>();
   const [minBudget, setMinBudget] = useState(MIN_PER_CAMPAIGN);
   const campaignRuntime = Math.floor(
@@ -46,7 +50,7 @@ export function BudgetField({ isEdit }: Props) {
       <Typography variant="body2" sx={{ mb: 5 }}>
         Set a limit on how much your campaign will spend.
       </Typography>
-      <Stack direction="column" spacing={1}>
+      <Stack direction="column" spacing={2}>
         <FormikTextField
           name="budget"
           label="Lifetime Budget"
@@ -56,7 +60,6 @@ export function BudgetField({ isEdit }: Props) {
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
             endAdornment: <InputAdornment position="end">USD</InputAdornment>,
           }}
-          disabled={isEdit}
           helperText={
             errors.budget || errors.dailyBudget
               ? `${errors.dailyBudget}. Minimum $${minBudget}.`
@@ -65,12 +68,35 @@ export function BudgetField({ isEdit }: Props) {
           error={!!errors.budget || !!errors.dailyBudget}
         />
 
-        {!isEdit && (
+        {!canSetPrice ? (
           <Typography variant="body2">
-            Pricing type is{" "}
-            <strong>{_.upperCase(values.adSets[0].billingType)}</strong> with a
-            flat rate of <strong>${values.adSets[0].price}</strong>.
+            Pricing type is <strong>{_.upperCase(values.billingType)}</strong>{" "}
+            with a flat rate of <strong>${values.price}</strong>.
           </Typography>
+        ) : (
+          <Stack direction="row" spacing={2} alignItems="center">
+            <FormikTextField
+              fullWidth={false}
+              name="price"
+              label="Price"
+              type="number"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">$</InputAdornment>
+                ),
+              }}
+              disabled={isEdit}
+            />
+
+            <FormikRadioControl
+              name="billingType"
+              options={[
+                { value: "cpm", label: "CPM (Impressions)" },
+                { value: "cpc", label: "CPC (Clicks)" },
+              ]}
+              disabled={isEdit}
+            />
+          </Stack>
         )}
       </Stack>
     </Box>

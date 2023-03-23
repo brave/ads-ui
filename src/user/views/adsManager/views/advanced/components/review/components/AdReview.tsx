@@ -19,26 +19,23 @@ export function AdReview({ ad, adIdx, error }: Props) {
       <Typography variant="h6">Ad {adIdx + 1}</Typography>
       <List>
         <CustomListItemText
-          primary="Creative Name"
+          primary="Ad Name"
           secondary={ad.name}
           error={hasError ? adError.name : ""}
         />
+        <CustomListItemText primary="Ad Type" secondary="Notification Ad" />
         <CustomListItemText
-          primary="Creative Type"
-          secondary="Notification Ad"
-        />
-        <CustomListItemText
-          primary="Title"
+          primary="Ad Title"
           secondary={ad.title}
           error={hasError ? adError.title : ""}
         />
         <CustomListItemText
-          primary="Body"
+          primary="Ad Body"
           secondary={ad.body}
           error={hasError ? adError.body : ""}
         />
         <CustomListItemText
-          primary="Target Url"
+          primary="Ad Target Url"
           secondary={ad.targetUrl}
           error={hasError ? adError.targetUrl : ""}
         />

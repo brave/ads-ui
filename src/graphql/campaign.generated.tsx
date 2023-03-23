@@ -22,6 +22,7 @@ export type CampaignFragment = {
   createdAt: any;
   startAt: any;
   endAt: any;
+  source: Types.CampaignSource;
   type: string;
   format: Types.CampaignFormat;
   dayProportion?: number | null;
@@ -108,6 +109,7 @@ export type LoadCampaignQuery = {
     createdAt: any;
     startAt: any;
     endAt: any;
+    source: Types.CampaignSource;
     type: string;
     format: Types.CampaignFormat;
     dayProportion?: number | null;
@@ -207,6 +209,7 @@ export const CampaignFragmentDoc = gql`
     createdAt
     startAt
     endAt
+    source
     type
     format
     dayProportion

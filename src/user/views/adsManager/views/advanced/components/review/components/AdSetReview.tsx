@@ -1,4 +1,4 @@
-import { Card, Divider, List, ListItemText, Typography } from "@mui/material";
+import { Card, Divider, List, Typography } from "@mui/material";
 import { CustomListItemText } from "../../../../../../../../components/List/CustomListItemText";
 import React from "react";
 import { AdSetForm, OS, Segment } from "../../../../../types";
@@ -25,11 +25,7 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
   };
 
   const segmentValue = (v: string) => {
-    return v === "untargeted" ? "Let Brave determine best audience." : v;
-  };
-
-  const billing = (v: string) => {
-    return v === "cpm" ? "Impressions (CPM)" : "Clicks (CPC)";
+    return v === "untargeted" ? "Let Brave determine the best audience." : v;
   };
 
   return (
@@ -37,14 +33,9 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
       <Typography variant="h6">Ad Set {idx + 1}</Typography>
       <List>
         <CustomListItemText
-          primary="Pricing Type"
-          secondary={billing(adSet.billingType)}
-          error={hasErrors ? adSetError?.billingType : ""}
-        />
-        <CustomListItemText
-          primary="Price"
-          secondary={`$${adSet.price}`}
-          error={hasErrors ? adSetError?.price : ""}
+          primary="Name"
+          secondary={adSet.name}
+          error={hasErrors ? adSetError?.name : ""}
         />
         <CustomListItemText
           primary="Audiences"

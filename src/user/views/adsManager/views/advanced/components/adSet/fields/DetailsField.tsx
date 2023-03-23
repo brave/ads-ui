@@ -13,7 +13,7 @@ export function DetailsField({ index, onCreate, showCreateNew }: Props) {
     <>
       <Box display="flex" flexDirection="row" alignItems="center">
         <Typography variant="body2" sx={{ mr: 1 }}>
-          Ad sets are used to define your audience and how budget is spent.
+          Ad sets are used to define your audience.
         </Typography>
 
         {showCreateNew && (

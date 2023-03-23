@@ -42,7 +42,6 @@ export const CampaignDateRange: React.FC<{ isEdit: boolean }> = ({
             endHelper.setValue(formatISO(dt));
             endHelper.setTouched(true);
           }}
-          disabled={isEdit}
         />
 
         <TimeZonePicker
