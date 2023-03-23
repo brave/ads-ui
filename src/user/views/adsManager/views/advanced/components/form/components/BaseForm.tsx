@@ -6,13 +6,15 @@ import { AdField } from "../../ads/AdField";
 import { Review } from "../../review/Review";
 import React, { useState } from "react";
 import { CampaignForm } from "../../../../../types";
+import { IAdvertiser } from "../../../../../../../../actions";
 
 interface Props {
   isEdit: boolean;
   values: CampaignForm;
+  advertiser: IAdvertiser;
 }
 
-export function BaseForm({ isEdit, values }: Props) {
+export function BaseForm({ isEdit, values, advertiser }: Props) {
   const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -34,7 +36,11 @@ export function BaseForm({ isEdit, values }: Props) {
       </Tabs>
 
       {value === 0 && (
-        <CampaignFields onNext={() => setValue(value + 1)} isEdit={isEdit} />
+        <CampaignFields
+          onNext={() => setValue(value + 1)}
+          isEdit={isEdit}
+          advertiser={advertiser}
+        />
       )}
 
       {showCard(values) && (

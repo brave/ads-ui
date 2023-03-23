@@ -47,4 +47,5 @@ export type IAdvertiser = {
   name: string;
   selfServiceCreate: boolean;
   selfServiceEdit: boolean;
+  selfServiceSetPrice: boolean;
 };

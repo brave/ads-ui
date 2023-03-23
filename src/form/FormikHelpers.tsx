@@ -73,8 +73,8 @@ export const FormikRadioGroup: React.FC<FormikRadioGroupProps> = (props) => {
 
 interface FormikRadioControlProps {
   name: string;
-  label: string;
   options: Array<{ label: string; value: string | number }>;
+  label?: string;
   helperText?: React.ReactNode;
   disabled?: boolean;
 }

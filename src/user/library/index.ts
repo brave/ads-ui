@@ -1,5 +1,6 @@
 import {
   AdSetForm,
+  Billing,
   CampaignForm,
   Conversion,
   Creative,
@@ -13,13 +14,17 @@ import {
   CreateCampaignInput,
   CreateNotificationCreativeInput,
   GeocodeInput,
+  UpdateAdInput,
   UpdateAdSetInput,
   UpdateCampaignInput,
 } from "../../graphql/types";
 import axios from "axios";
 import { DocumentNode, print } from "graphql";
 import { CampaignFragment } from "../../graphql/campaign.generated";
-import { CreateAdDocument } from "../../graphql/ad-set.generated";
+import {
+  CreateAdDocument,
+  UpdateAdDocument,
+} from "../../graphql/ad-set.generated";
 import { CreateNotificationCreativeDocument } from "../../graphql/creative.generated";
 import { IAuthUser } from "../../actions";
 
@@ -43,13 +48,13 @@ export async function transformNewForm(
     const ads: CreateAdInput[] = [];
 
     for (const ad of adSet.creatives) {
-      const creative = await transformCreative(ad, adSet, auth, advertiserId);
+      const creative = await transformCreative(ad, form, auth, advertiserId);
       ads.push(creative);
     }
 
     const base: CreateAdSetInput = {
       name: adSet.name,
-      billingType: adSet.billingType,
+      billingType: form.billingType,
       execution: "per_click",
       perDay: 1,
       segments: adSet.segments.map((s) => ({ code: s.code, name: s.name })),
@@ -73,7 +78,7 @@ export async function transformNewForm(
     externalId: "",
     format: form.format,
     userId: auth.id,
-    source: "direct",
+    source: "self_serve",
     startAt: form.startAt,
     state: form.state,
     type: form.type,
@@ -96,7 +101,7 @@ function transformConversion(conv: Conversion[]) {
 
 async function transformCreative(
   creative: Creative,
-  adSet: AdSetForm,
+  campaign: CampaignForm,
   auth: IAuthUser,
   advertiserId: string
 ): Promise<CreateAdInput> {
@@ -121,8 +126,8 @@ async function transformCreative(
     creativeId: withId,
     prices: [
       {
-        amount: adSet.price,
-        type: adSet.billingType === "cpc" ? "click" : "view",
+        amount: campaign.price,
+        type: campaign.billingType === "cpc" ? "click" : "view",
       },
     ],
   };
@@ -181,21 +186,23 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
       conversions: adSet.conversions ?? [],
       oses: adSet.oses ?? ([] as OS[]),
       segments: adSet.segments ?? ([] as Segment[]),
-      billingType: adSet.billingType ?? "cpm",
       name: adSet.name || adSet.id.split("-")[0],
       creatives: adSet.ads!.map((ad) => {
         const c = ad.creative;
         return {
+          creativeInstanceId: ad.id,
           id: c.id,
           name: c.name,
           targetUrl: c.payloadNotification!.targetUrl,
           title: c.payloadNotification!.title,
           body: c.payloadNotification!.body,
           targetUrlValid: true,
+          state: c.state,
         };
       }),
-      price: adSet.ads?.[0].prices[0].amount || 0,
     })),
+    price: campaign.adSets[0].ads?.[0].prices[0].amount ?? 6,
+    billingType: (campaign.adSets[0].billingType ?? "cpm") as Billing,
     validateStart: false,
     budget: campaign.budget,
     currency: campaign.currency,
@@ -221,13 +228,15 @@ export async function transformEditForm(
   const transformedAdSet: UpdateAdSetInput[] = [];
 
   for (const adSet of form.adSets) {
-    const newCreatives = adSet.creatives.filter((c) => c.id === undefined);
-    for (const ad of newCreatives) {
-      const withId = await transformCreative(ad, adSet, auth, advertiserId);
-      await createAd(auth.accessToken, {
-        ...withId,
-        creativeSetId: adSet.id,
-      });
+    const creatives = adSet.creatives;
+    for (const ad of creatives) {
+      if (ad.id == null) {
+        const withId = await transformCreative(ad, form, auth, advertiserId);
+        await createAd(auth.accessToken, {
+          ...withId,
+          creativeSetId: adSet.id,
+        });
+      }
     }
 
     const base: UpdateAdSetInput = {
