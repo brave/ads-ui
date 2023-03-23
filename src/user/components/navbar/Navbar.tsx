@@ -5,19 +5,11 @@ import { Link, useHistory } from "react-router-dom";
 import { SignOut } from "../../../actions";
 import TopBarProgress from "react-topbar-progress-indicator";
 
-import {
-  AppBar,
-  Badge,
-  Box,
-  Button,
-  IconButton,
-  Toolbar,
-  Tooltip,
-} from "@mui/material";
+import { AppBar, Button, Toolbar } from "@mui/material";
 import { UserMenu } from "./components/UserMenu/UserMenu";
 import { connect } from "react-redux";
-import { nanoid } from "nanoid/non-secure";
-import DraftsIcon from "@mui/icons-material/Drafts";
+import { DraftMenu } from "./components/DraftMenu/DraftMenu";
+import moment from "moment";
 
 const logoStyle = {
   textDecoration: "none",
@@ -55,27 +47,18 @@ function Navbar({ dispatch, canCreate }: Props) {
             height="40px"
           />
         </Link>
-        {canCreate && (
-          <Tooltip title="Drafts">
-            <IconButton>
-              <Badge color="primary" badgeContent={1}>
-                <DraftsIcon fontSize="large" />
-              </Badge>
-            </IconButton>
-          </Tooltip>
-        )}
+        {canCreate && <DraftMenu />}
         <div style={{ flexGrow: 1 }} />
         {canCreate && (
           <Button
             onClick={() =>
-              history.push(`/user/main/adsmanager/advanced/new/${nanoid(10)}`)
+              history.push(
+                `/user/main/adsmanager/advanced/new/${moment().utc().valueOf()}`
+              )
             }
             size="large"
             variant="contained"
             sx={{ mr: 5 }}
-            disabled={history.location.pathname.includes(
-              "/user/main/adsmanager/advanced/new"
-            )}
           >
             New Campaign
           </Button>

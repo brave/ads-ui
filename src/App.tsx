@@ -7,6 +7,7 @@ import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import {
   DraftContext,
   getActiveAdvertiser,
+  getAllDrafts,
   setActiveAdvertiser,
 } from "./state/context";
 import User from "./user/User";
@@ -19,9 +20,10 @@ import {
   ThemeProvider,
 } from "@mui/material";
 import { theme } from "./theme";
+import { CampaignForm } from "./user/views/adsManager/types";
 
 const App = (props) => {
-  const [drafts, setDrafts] = useState(0);
+  const [drafts, setDrafts] = useState<CampaignForm[]>(getAllDrafts());
 
   let expTime;
   if (props.auth.accessToken) {
@@ -56,7 +58,11 @@ const App = (props) => {
           <DraftContext.Provider
             value={{
               drafts,
-              setDrafts,
+              setDrafts: () => {
+                console.log("here");
+                console.log(getAllDrafts());
+                setDrafts(getAllDrafts());
+              },
             }}
           >
             <Switch>

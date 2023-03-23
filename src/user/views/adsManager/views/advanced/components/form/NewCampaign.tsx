@@ -1,6 +1,6 @@
 import { Container } from "@mui/material";
 import { Formik } from "formik";
-import React from "react";
+import React, { useContext } from "react";
 import { CampaignForm, initialCampaign } from "../../../../types";
 import { CampaignSchema } from "../../../../../../../validation/CampaignSchema";
 import { transformNewForm } from "../../../../../../library";
@@ -10,6 +10,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { BaseForm } from "./components/BaseForm";
 import { IAdvertiser, IAuthUser } from "../../../../../../../actions";
 import { PersistFormValues } from "../../../../../../../form/PersistFormValues";
+import { DraftContext } from "../../../../../../../state/context";
 
 interface Props {
   auth: IAuthUser;
@@ -23,6 +24,7 @@ interface Params {
 export function NewCampaign({ auth, advertiser }: Props) {
   const history = useHistory();
   const params = useParams<Params>();
+  const { setDrafts } = useContext(DraftContext);
 
   const initial: CampaignForm = {
     ...initialCampaign,
@@ -36,6 +38,8 @@ export function NewCampaign({ auth, advertiser }: Props) {
       },
     ],
     onCompleted() {
+      localStorage.removeItem(params.draftId);
+      setDrafts();
       history.push("/user/main/complete/new");
     },
   });
@@ -53,14 +57,16 @@ export function NewCampaign({ auth, advertiser }: Props) {
             .catch((e) => {
               alert("Unable to save Campaign");
             })
-            .finally(() => setSubmitting(false));
+            .finally(() => {
+              setSubmitting(false);
+            });
         }}
         validationSchema={CampaignSchema}
       >
         {({ values }) => (
           <>
             <BaseForm isEdit={false} values={values} advertiser={advertiser} />
-            <PersistFormValues />
+            <PersistFormValues id={params.draftId} />
           </>
         )}
       </Formik>
