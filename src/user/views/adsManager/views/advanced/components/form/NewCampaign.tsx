@@ -59,7 +59,7 @@ export function NewCampaign({ auth, advertiser }: Props) {
       >
         {({ values }) => (
           <>
-            <BaseForm isEdit={false} values={values} />
+            <BaseForm isEdit={false} values={values} advertiser={advertiser} />
             <PersistFormValues />
           </>
         )}
