@@ -15,13 +15,14 @@ interface Props {
 export function CampaignFields({ onNext, isEdit, advertiser }: Props) {
   return (
     <Card sx={{ p: 2, mt: 2 }}>
-      {/*<ObjectiveField />*/}
-
       <DetailField />
 
       <CampaignDateRange isEdit={isEdit} />
 
-      {!isEdit && <BudgetField canSetPrice={advertiser.selfServiceSetPrice} />}
+      <BudgetField
+        canSetPrice={advertiser.selfServiceSetPrice}
+        isEdit={isEdit}
+      />
 
       {!isEdit && <LocationField />}
 

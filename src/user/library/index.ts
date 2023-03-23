@@ -14,13 +14,17 @@ import {
   CreateCampaignInput,
   CreateNotificationCreativeInput,
   GeocodeInput,
+  UpdateAdInput,
   UpdateAdSetInput,
   UpdateCampaignInput,
 } from "../../graphql/types";
 import axios from "axios";
 import { DocumentNode, print } from "graphql";
 import { CampaignFragment } from "../../graphql/campaign.generated";
-import { CreateAdDocument } from "../../graphql/ad-set.generated";
+import {
+  CreateAdDocument,
+  UpdateAdDocument,
+} from "../../graphql/ad-set.generated";
 import { CreateNotificationCreativeDocument } from "../../graphql/creative.generated";
 import { IAuthUser } from "../../actions";
 
@@ -186,12 +190,14 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
       creatives: adSet.ads!.map((ad) => {
         const c = ad.creative;
         return {
+          creativeInstanceId: ad.id,
           id: c.id,
           name: c.name,
           targetUrl: c.payloadNotification!.targetUrl,
           title: c.payloadNotification!.title,
           body: c.payloadNotification!.body,
           targetUrlValid: true,
+          state: c.state,
         };
       }),
     })),
@@ -222,13 +228,15 @@ export async function transformEditForm(
   const transformedAdSet: UpdateAdSetInput[] = [];
 
   for (const adSet of form.adSets) {
-    const newCreatives = adSet.creatives.filter((c) => c.id === undefined);
-    for (const ad of newCreatives) {
-      const withId = await transformCreative(ad, form, auth, advertiserId);
-      await createAd(auth.accessToken, {
-        ...withId,
-        creativeSetId: adSet.id,
-      });
+    const creatives = adSet.creatives;
+    for (const ad of creatives) {
+      if (ad.id == null) {
+        const withId = await transformCreative(ad, form, auth, advertiserId);
+        await createAd(auth.accessToken, {
+          ...withId,
+          creativeSetId: adSet.id,
+        });
+      }
     }
 
     const base: UpdateAdSetInput = {

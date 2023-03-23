@@ -15,9 +15,10 @@ import _ from "lodash";
 
 interface Props {
   canSetPrice: boolean;
+  isEdit: boolean;
 }
 
-export function BudgetField({ canSetPrice }: Props) {
+export function BudgetField({ canSetPrice, isEdit }: Props) {
   const { values, setFieldValue, errors } = useFormikContext<CampaignForm>();
   const [minBudget, setMinBudget] = useState(MIN_PER_CAMPAIGN);
   const campaignRuntime = Math.floor(
@@ -88,6 +89,7 @@ export function BudgetField({ canSetPrice }: Props) {
                   <InputAdornment position="start">$</InputAdornment>
                 ),
               }}
+              disabled={isEdit}
             />
 
             <FormikRadioControl
@@ -96,6 +98,7 @@ export function BudgetField({ canSetPrice }: Props) {
                 { value: "cpm", label: "CPM (Impressions)" },
                 { value: "cpc", label: "CPC (Clicks)" },
               ]}
+              disabled={isEdit}
             />
           </Stack>
         )}

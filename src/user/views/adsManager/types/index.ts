@@ -66,6 +66,8 @@ export type Creative = {
   body: string;
   targetUrl: string;
   targetUrlValid?: boolean;
+  state?: string;
+  creativeInstanceId?: string;
 };
 
 export const initialConversion: Conversion = {
