@@ -30,6 +30,7 @@ export function AdList({ campaigns, loading, advertiser }: Props) {
           campaignName: c.name,
           campaignStart: c.startAt,
           campaignEnd: c.endAt,
+          campaignSource: c.source,
         },
       })),
     })),

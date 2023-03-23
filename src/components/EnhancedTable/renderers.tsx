@@ -1,6 +1,6 @@
 import { Box, Tooltip } from "@mui/material";
 import _ from "lodash";
-import { formatDistanceToNow, format, parseISO } from "date-fns";
+import { format, formatDistanceToNow, parseISO } from "date-fns";
 import { CellValue } from "./EnhancedTable";
 import React, { ReactChild, ReactNode } from "react";
 import { formatInTimeZone } from "date-fns-tz";
@@ -19,6 +19,7 @@ import {
 import { OnOff } from "../Switch/OnOff";
 import { CreativeFragment } from "../../graphql/creative.generated";
 import { IAdvertiser } from "../../actions";
+import { CampaignSource } from "../../graphql/types";
 
 export type CellValueRenderer = (value: CellValue) => React.ReactNode;
 const ADS_DEFAULT_TIMEZONE = "America/New_York";
@@ -106,7 +107,7 @@ export function campaignOnOffState(
     ],
   });
 
-  if (!advertiser.selfServiceEdit) return null;
+  if (c.source !== CampaignSource.SelfServe) return null;
 
   return (
     <OnOff
@@ -128,6 +129,7 @@ export function adSetOnOffState(
     campaignEnd: string;
     campaignId: string;
     campaignState: string;
+    campaignSource: CampaignSource;
   },
   advertiser: IAdvertiser
 ): ReactNode {
@@ -140,7 +142,7 @@ export function adSetOnOffState(
     ],
   });
 
-  if (!advertiser.selfServiceEdit) return null;
+  if (c.campaignSource !== CampaignSource.SelfServe) return null;
 
   const state =
     c.campaignState === "under_review"
@@ -181,6 +183,7 @@ export function adOnOffState(
     creativeSetId: string;
     campaignEnd: string;
     creativeInstanceId: string;
+    campaignSource: CampaignSource;
   },
   advertiser: IAdvertiser
 ): ReactNode {
@@ -193,7 +196,7 @@ export function adOnOffState(
     ],
   });
 
-  if (!advertiser.selfServiceEdit) return null;
+  if (c.campaignSource !== CampaignSource.SelfServe) return null;
 
   return (
     <OnOff
