@@ -43,7 +43,11 @@ export function BudgetField({ canSetPrice, isEdit }: Props) {
   }, [campaignRuntime, values.budget, minBudget]);
 
   useEffect(() => {
-    setFieldValue("price", values.billingType === "cpm" ? 6 : 0.1);
+    if (values.billingType === "cpm" && values.price < 6) {
+      setFieldValue("price", 6);
+    } else if (values.billingType === "cpc" && values.price >= 6) {
+      setFieldValue("price", 0.1);
+    }
   }, [values.billingType]);
 
   return (
