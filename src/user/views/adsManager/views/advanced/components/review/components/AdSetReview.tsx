@@ -25,13 +25,18 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
   };
 
   const segmentValue = (v: string) => {
-    return v === "untargeted" ? "Let Brave determine best audience." : v;
+    return v === "untargeted" ? "Let Brave determine the best audience." : v;
   };
 
   return (
     <Card sx={{ p: 2, mt: 2 }}>
       <Typography variant="h6">Ad Set {idx + 1}</Typography>
       <List>
+        <CustomListItemText
+          primary="Name"
+          secondary={adSet.name}
+          error={hasErrors ? adSetError?.name : ""}
+        />
         <CustomListItemText
           primary="Audiences"
           secondary={segmentValue(mapToString(adSet.segments))}

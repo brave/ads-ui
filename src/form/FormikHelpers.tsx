@@ -7,6 +7,7 @@ import {
   FormLabel,
   Radio,
   RadioGroup,
+  Switch,
   TextField,
   TextFieldProps,
   Tooltip,
@@ -51,6 +52,23 @@ export const FormikTextField: React.FC<FormikTextFieldProps> = (props) => {
       {..._.omit(props, ["small", "maxLengthInstantFeedback", "helperText"])}
       {...field}
     />
+  );
+};
+
+interface FormikSwitchProps {
+  name: string;
+  label: string;
+}
+
+export const FormikSwitch: React.FC<FormikSwitchProps> = (props) => {
+  const [field] = useField({ type: "checkbox", name: props.name });
+  return (
+    <>
+      <FormControlLabel control={<Switch {...field} />} label={props.label} />
+      <ErrorMessage name={field.name}>
+        {(msg) => <FormHelperText error>{msg}</FormHelperText>}
+      </ErrorMessage>
+    </>
   );
 };
 

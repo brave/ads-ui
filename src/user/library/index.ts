@@ -186,6 +186,7 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
       conversions: adSet.conversions ?? [],
       oses: adSet.oses ?? ([] as OS[]),
       segments: adSet.segments ?? ([] as Segment[]),
+      isNotTargeting: (adSet.segments ?? []).length === 0,
       name: adSet.name || adSet.id.split("-")[0],
       creatives: adSet.ads!.map((ad) => {
         const c = ad.creative;
