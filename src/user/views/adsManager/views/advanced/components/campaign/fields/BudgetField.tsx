@@ -42,14 +42,6 @@ export function BudgetField({ canSetPrice, isEdit }: Props) {
     setFieldValue("dailyBudget", dailyBudget);
   }, [campaignRuntime, values.budget, minBudget]);
 
-  useEffect(() => {
-    if (values.billingType === "cpm" && values.price < 6) {
-      setFieldValue("price", 6);
-    } else if (values.billingType === "cpc" && values.price >= 6) {
-      setFieldValue("price", 0.1);
-    }
-  }, [values.billingType]);
-
   return (
     <Box>
       <Divider textAlign="left" sx={{ fontSize: "24px", mb: 1, mt: 2 }}>
