@@ -30,7 +30,6 @@ export function OsPieChart(props: OSMetric & { isNtp: boolean }) {
   ];
 
   const extra = [{ value: "device", label: "Impressions (Device)" }];
-  console.log(props.isNtp);
   if (!props.isNtp) {
     extra.push({ value: "spend", label: "Spend" });
   }

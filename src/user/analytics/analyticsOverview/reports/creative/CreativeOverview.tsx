@@ -30,8 +30,6 @@ export function CreativeOverview({ engagements, campaign }: Props) {
 
   const metrics = creativeEngagements(engagements, campaign.format);
 
-  console.log(metrics);
-
   const mapMetricToSeries = (cm: CreativeMetric[], type: string) => {
     return cm
       .map((m) => {

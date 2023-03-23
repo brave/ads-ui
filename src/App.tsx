@@ -59,8 +59,6 @@ const App = (props) => {
             value={{
               drafts,
               setDrafts: () => {
-                console.log("here");
-                console.log(getAllDrafts());
                 setDrafts(getAllDrafts());
               },
             }}
