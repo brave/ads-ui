@@ -29,7 +29,7 @@ export const PersistFormValues: React.FC<Props> = ({ id }) => {
     setForm(id);
   }, [id]);
 
-  // save the values to the query string on update
+  // save the values to localStorage on update
   useEffect(() => {
     if (values.draftId) {
       localStorage.setItem(values.draftId, JSON.stringify(values));
