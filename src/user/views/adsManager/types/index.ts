@@ -11,6 +11,7 @@ import { MIN_PER_CAMPAIGN } from "../../../../validation/CampaignSchema";
 export type Billing = "cpm" | "cpc";
 
 export type CampaignForm = {
+  draftId?: string;
   startAt: string;
   endAt: string;
   budget: number;

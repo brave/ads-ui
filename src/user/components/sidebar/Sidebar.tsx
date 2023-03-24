@@ -14,7 +14,6 @@ import {
 } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import Navbar from "../navbar/Navbar";
-import { useState } from "react";
 
 const drawerWidth = 240;
 

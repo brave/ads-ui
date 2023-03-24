@@ -4,8 +4,10 @@ import _ from "lodash";
 import Authentication from "./containers/Authentication/Authentication";
 import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 
-import Context, {
+import {
+  DraftContext,
   getActiveAdvertiser,
+  getAllDrafts,
   setActiveAdvertiser,
 } from "./state/context";
 import User from "./user/User";
@@ -18,10 +20,10 @@ import {
   ThemeProvider,
 } from "@mui/material";
 import { theme } from "./theme";
+import { CampaignForm } from "./user/views/adsManager/types";
 
 const App = (props) => {
-  const [loading, setLoading] = useState(undefined);
-  const [sidebar, setSidebar] = useState("visible");
+  const [drafts, setDrafts] = useState<CampaignForm[]>(getAllDrafts());
 
   let expTime;
   if (props.auth.accessToken) {
@@ -30,7 +32,7 @@ const App = (props) => {
 
   const getRedirect = () => {
     if (expTime && expTime < moment()) {
-      localStorage.clear();
+      localStorage.removeItem("persist:root");
       window.location.reload();
     }
     const { advertisers, auth } = props;
@@ -53,12 +55,12 @@ const App = (props) => {
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <Context.Provider
+          <DraftContext.Provider
             value={{
-              loading,
-              sidebar,
-              setSidebar,
-              setLoading,
+              drafts,
+              setDrafts: () => {
+                setDrafts(getAllDrafts());
+              },
             }}
           >
             <Switch>
@@ -77,7 +79,7 @@ const App = (props) => {
               />
               {getRedirect()}
             </Switch>
-          </Context.Provider>
+          </DraftContext.Provider>
         </ThemeProvider>
       </StyledEngineProvider>
     </>
