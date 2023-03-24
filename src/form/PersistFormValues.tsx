@@ -20,7 +20,7 @@ export const PersistFormValues: React.FC<Props> = ({ id }) => {
     }
   };
 
-  // read the values from the query string on load
+  // read the values from localStorage on load
   useEffect(() => {
     setForm(values.draftId);
   }, []);
