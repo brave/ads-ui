@@ -75,11 +75,6 @@ export type AdvertiserCampaignsQuery = {
         perDay: number;
         state: string;
         execution: string;
-        keywords?: Array<string> | null;
-        keywordSimilarity?: number | null;
-        negativeKeywords?: Array<string> | null;
-        bannedKeywords?: Array<string> | null;
-        targetingTerms?: Array<string> | null;
         segments?: Array<{
           __typename?: "Segment";
           code: string;
@@ -92,7 +87,6 @@ export type AdvertiserCampaignsQuery = {
           type: string;
           urlPattern: string;
           observationWindow: number;
-          extractExternalId: boolean;
         }> | null;
         ads?: Array<{
           __typename?: "Ad";
@@ -102,11 +96,6 @@ export type AdvertiserCampaignsQuery = {
             __typename?: "AdPrice";
             amount: number;
             type: string;
-          }>;
-          webhooks: Array<{
-            __typename?: "Webhook";
-            type: string;
-            url: string;
           }>;
           creative: {
             __typename?: "Creative";
