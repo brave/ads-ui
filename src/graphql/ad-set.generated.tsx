@@ -247,10 +247,6 @@ export const AdFragmentDoc = gql`
       amount
       type
     }
-    webhooks {
-      type
-      url
-    }
     creative {
       ...Creative
     }
@@ -267,11 +263,6 @@ export const AdSetFragmentDoc = gql`
     perDay
     state
     execution
-    keywords
-    keywordSimilarity
-    negativeKeywords
-    bannedKeywords
-    targetingTerms
     segments {
       code
       name
@@ -285,7 +276,6 @@ export const AdSetFragmentDoc = gql`
       type
       urlPattern
       observationWindow
-      extractExternalId
     }
     ads {
       ...Ad
