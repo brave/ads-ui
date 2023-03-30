@@ -7,11 +7,6 @@ fragment AdSet on AdSet {
   perDay
   state
   execution
-  keywords
-  keywordSimilarity
-  negativeKeywords
-  bannedKeywords
-  targetingTerms
   segments {
     code
     name
@@ -25,7 +20,6 @@ fragment AdSet on AdSet {
     type
     urlPattern
     observationWindow
-    extractExternalId
   }
   ads {
     ...Ad
@@ -38,10 +32,6 @@ fragment Ad on Ad {
   prices {
     amount
     type
-  }
-  webhooks {
-    type
-    url
   }
   creative {
     ...Creative

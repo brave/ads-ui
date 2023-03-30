@@ -14,11 +14,6 @@ export type AdSetFragment = {
   perDay: number;
   state: string;
   execution: string;
-  keywords?: Array<string> | null;
-  keywordSimilarity?: number | null;
-  negativeKeywords?: Array<string> | null;
-  bannedKeywords?: Array<string> | null;
-  targetingTerms?: Array<string> | null;
   segments?: Array<{
     __typename?: "Segment";
     code: string;
@@ -31,14 +26,12 @@ export type AdSetFragment = {
     type: string;
     urlPattern: string;
     observationWindow: number;
-    extractExternalId: boolean;
   }> | null;
   ads?: Array<{
     __typename?: "Ad";
     id: string;
     state: string;
     prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
-    webhooks: Array<{ __typename?: "Webhook"; type: string; url: string }>;
     creative: {
       __typename?: "Creative";
       id: string;
@@ -62,7 +55,6 @@ export type AdFragment = {
   id: string;
   state: string;
   prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
-  webhooks: Array<{ __typename?: "Webhook"; type: string; url: string }>;
   creative: {
     __typename?: "Creative";
     id: string;
@@ -96,11 +88,6 @@ export type CreateAdSetMutation = {
     perDay: number;
     state: string;
     execution: string;
-    keywords?: Array<string> | null;
-    keywordSimilarity?: number | null;
-    negativeKeywords?: Array<string> | null;
-    bannedKeywords?: Array<string> | null;
-    targetingTerms?: Array<string> | null;
     segments?: Array<{
       __typename?: "Segment";
       code: string;
@@ -113,14 +100,12 @@ export type CreateAdSetMutation = {
       type: string;
       urlPattern: string;
       observationWindow: number;
-      extractExternalId: boolean;
     }> | null;
     ads?: Array<{
       __typename?: "Ad";
       id: string;
       state: string;
       prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
-      webhooks: Array<{ __typename?: "Webhook"; type: string; url: string }>;
       creative: {
         __typename?: "Creative";
         id: string;
@@ -156,11 +141,6 @@ export type UpdateAdSetMutation = {
     perDay: number;
     state: string;
     execution: string;
-    keywords?: Array<string> | null;
-    keywordSimilarity?: number | null;
-    negativeKeywords?: Array<string> | null;
-    bannedKeywords?: Array<string> | null;
-    targetingTerms?: Array<string> | null;
     segments?: Array<{
       __typename?: "Segment";
       code: string;
@@ -173,14 +153,12 @@ export type UpdateAdSetMutation = {
       type: string;
       urlPattern: string;
       observationWindow: number;
-      extractExternalId: boolean;
     }> | null;
     ads?: Array<{
       __typename?: "Ad";
       id: string;
       state: string;
       prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
-      webhooks: Array<{ __typename?: "Webhook"; type: string; url: string }>;
       creative: {
         __typename?: "Creative";
         id: string;
@@ -211,7 +189,6 @@ export type CreateAdMutation = {
     id: string;
     state: string;
     prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
-    webhooks: Array<{ __typename?: "Webhook"; type: string; url: string }>;
     creative: {
       __typename?: "Creative";
       id: string;
@@ -247,10 +224,6 @@ export const AdFragmentDoc = gql`
       amount
       type
     }
-    webhooks {
-      type
-      url
-    }
     creative {
       ...Creative
     }
@@ -267,11 +240,6 @@ export const AdSetFragmentDoc = gql`
     perDay
     state
     execution
-    keywords
-    keywordSimilarity
-    negativeKeywords
-    bannedKeywords
-    targetingTerms
     segments {
       code
       name
@@ -285,7 +253,6 @@ export const AdSetFragmentDoc = gql`
       type
       urlPattern
       observationWindow
-      extractExternalId
     }
     ads {
       ...Ad
