@@ -21,7 +21,6 @@ import {
   initialCreative,
 } from "../../../../types";
 import { UrlResolver } from "../../../../../../../components/Url/UrlResolver";
-import BraveLogo from "../../../../../../../components/creativePreview/OSNotificationCreativePreview/assets/brave_logo_icon.png";
 
 interface Props {
   index: number;
@@ -171,7 +170,7 @@ function Preview({ name }: PreviewProp) {
       >
         <Box display="flex" flexDirection="row" justifyContent="center">
           <img
-            src={BraveLogo}
+            src="/brave_logo_icon.png"
             style={{ height: "54px", width: "54px", marginTop: ".75rem" }}
           />
           <Stack direction="column" justifyContent="center">

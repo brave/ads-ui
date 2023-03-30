@@ -1,9 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 
-import Section from "../../../../../../../components/section/Section";
-import { Text } from "../../../../../../../components/Text/Text";
-import present from "./assets/present.png";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { Box, Button, Card, Typography } from "@mui/material";
 
 interface Params {
@@ -24,7 +21,7 @@ export function CompletionForm() {
       }}
     >
       <Box>
-        <img src={present} width="600px" style={{ marginRight: 50 }} />
+        <img src="/present.png" width="600px" style={{ marginRight: 50 }} />
       </Box>
 
       <Typography variant="h4" sx={{ textAlign: "center", mb: 3 }}>
