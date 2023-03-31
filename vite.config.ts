@@ -19,7 +19,10 @@ export default defineConfig(({ command, mode }) => {
         "/v1": {
           target: `${env.BACKEND_URL}`,
           changeOrigin: true,
-          // rewrite: (path) => path.replace(/^\/v1/, ""),
+        },
+        "/graphql": {
+          target: `${env.BACKEND_URL}`,
+          changeOrigin: true,
         },
       },
     },

@@ -42,8 +42,8 @@
     "yup": "0.32.11"
   },
   "scripts": {
-    "start": "vite start",
-    "build": "vite build",
+    "start": "vite",
+    "build": "NODE_OPTIONS='--max-old-space-size=4096' vite build",
     "test": "vitest",
     "codegen": "graphql-codegen",
     "format": "prettier --write .",
