@@ -142,6 +142,7 @@ function Ad({ adSetIdx, adIdx, isEdit, creative }: AdProps) {
         validator={`adSets.${adSetIdx}.creatives.${adIdx}.targetUrlValid`}
         label="Ad Target URL"
         disabled={isEdit && !!creative.id}
+        helperText={"Example - https://brave.com/brave-rewards/"}
       />
     </>
   );
