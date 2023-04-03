@@ -10,6 +10,7 @@ import { UserMenu } from "./components/UserMenu/UserMenu";
 import { connect } from "react-redux";
 import { DraftMenu } from "./components/DraftMenu/DraftMenu";
 import moment from "moment";
+import rewards from "../../../../Subdomains_Rewards_Ads_Default.png";
 
 const logoStyle = {
   textDecoration: "none",
@@ -41,11 +42,7 @@ function Navbar({ dispatch, canCreate }: Props) {
     >
       <Toolbar>
         <Link style={logoStyle} to={"/home"}>
-          <img
-            src="/Subdomains_Rewards_Ads_Default.png"
-            alt="Ads"
-            height="40px"
-          />
+          <img src={rewards} alt="Ads" height="40px" />
         </Link>
         {canCreate && <DraftMenu />}
         <div style={{ flexGrow: 1 }} />

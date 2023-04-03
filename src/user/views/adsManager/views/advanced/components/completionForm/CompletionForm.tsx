@@ -1,10 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 
-import Section from "../../../../../../../components/section/Section";
-import { Text } from "../../../../../../../components/Text/Text";
-import present from "./assets/present.png";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { Box, Button, Card, Typography } from "@mui/material";
+import present from "../../../../../../../../present.png";
 
 interface Params {
   mode: "edit" | "new";

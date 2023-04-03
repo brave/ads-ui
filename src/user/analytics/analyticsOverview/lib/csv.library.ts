@@ -13,7 +13,9 @@ export const downloadCSV = async (
 
   try {
     const response = await axios(
-      `${process.env.REACT_APP_SERVER_ADDRESS}/report/campaign/csv/${campaignId}`,
+      `${
+        import.meta.env.REACT_APP_SERVER_ADDRESS
+      }/report/campaign/csv/${campaignId}`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,

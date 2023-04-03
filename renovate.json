@@ -1,0 +1,4 @@
+{
+  "extends": ["config:js-app", ":semanticCommitsDisabled"],
+  "labels": ["dependencies"]
+}

@@ -35,7 +35,7 @@ export const SignIn = (payload: ISignInPayload) => {
       try {
         dispatch(SignInStart(payload));
         const response = await axios.post(
-          `${process.env.REACT_APP_SERVER_ADDRESS}/auth/token`,
+          `${import.meta.env.REACT_APP_SERVER_ADDRESS}/auth/token`,
           payload,
           {
             headers: {

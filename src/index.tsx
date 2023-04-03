@@ -3,7 +3,6 @@ import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
-import * as serviceWorker from "./serviceWorker";
 
 import App from "./App";
 
@@ -23,5 +22,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById("root") as HTMLElement
 );
-
-serviceWorker.unregister();

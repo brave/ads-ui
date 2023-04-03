@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import "../../../assets/fonts/fonts.css";
-import BraveLogo from "../../../assets/images/brave-logotype-full-color.png";
 
 import { GetAdvertisers, SignIn } from "../../../actions";
 
@@ -16,6 +15,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import logo from "../../../../brave-logotype-full-color.png";
 
 class SignInContainer extends React.Component<any, any> {
   constructor(props: any) {
@@ -30,7 +30,7 @@ class SignInContainer extends React.Component<any, any> {
 
   async submit() {
     const resp = await fetch(
-      `${process.env.REACT_APP_SERVER_ADDRESS}/auth/token`,
+      `${import.meta.env.REACT_APP_SERVER_ADDRESS}/auth/token`,
       {
         method: "POST",
         mode: "cors",
@@ -202,7 +202,7 @@ class SignInContainer extends React.Component<any, any> {
                 height="60px"
                 marginBottom="24px"
                 sx={{
-                  background: `url(${BraveLogo}) no-repeat center`,
+                  background: `url(${logo}) no-repeat center`,
                   backgroundSize: "100%",
                 }}
               />

@@ -25,7 +25,7 @@ import { AdList } from "./ads/AdList";
 
 const buildApolloClient = (accessToken: string) => {
   const httpLink = createHttpLink({
-    uri: `${process.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql"),
+    uri: `${import.meta.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql"),
     headers: {
       authorization: `Bearer ${accessToken}`,
     },
