@@ -2,6 +2,7 @@ import React from "react";
 
 import { useHistory, useParams } from "react-router-dom";
 import { Box, Button, Card, Typography } from "@mui/material";
+import present from "../../../../../../../../present.png";
 
 interface Params {
   mode: "edit" | "new";
@@ -21,7 +22,7 @@ export function CompletionForm() {
       }}
     >
       <Box>
-        <img src="/present.png" width="600px" style={{ marginRight: 50 }} />
+        <img src={present} width="600px" style={{ marginRight: 50 }} />
       </Box>
 
       <Typography variant="h4" sx={{ textAlign: "center", mb: 3 }}>

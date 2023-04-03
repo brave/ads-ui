@@ -16,11 +16,11 @@ import ClearIcon from "@mui/icons-material/Clear";
 import {
   AdSetForm,
   CampaignForm,
-  Conversion,
   Creative,
   initialCreative,
 } from "../../../../types";
 import { UrlResolver } from "../../../../../../../components/Url/UrlResolver";
+import logo from "../../../../../../../../brave_logo_icon.png";
 
 interface Props {
   index: number;
@@ -170,7 +170,7 @@ function Preview({ name }: PreviewProp) {
       >
         <Box display="flex" flexDirection="row" justifyContent="center">
           <img
-            src="/brave_logo_icon.png"
+            src={logo}
             style={{ height: "54px", width: "54px", marginTop: ".75rem" }}
           />
           <Stack direction="column" justifyContent="center">

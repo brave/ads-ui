@@ -15,6 +15,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import logo from "../../../../brave-logotype-full-color.png";
 
 class SignInContainer extends React.Component<any, any> {
   constructor(props: any) {
@@ -201,7 +202,7 @@ class SignInContainer extends React.Component<any, any> {
                 height="60px"
                 marginBottom="24px"
                 sx={{
-                  background: `url(/brave-logotype-full-color.png) no-repeat center`,
+                  background: `url(${logo}) no-repeat center`,
                   backgroundSize: "100%",
                 }}
               />
