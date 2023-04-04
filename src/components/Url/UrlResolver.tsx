@@ -20,6 +20,7 @@ interface Props {
   validator: string;
   label?: string;
   disabled?: boolean;
+  helperText?: string;
 }
 
 export const UrlResolver: React.FC<Props> = ({
@@ -27,6 +28,7 @@ export const UrlResolver: React.FC<Props> = ({
   validator,
   label = "Website URL",
   disabled = false,
+  helperText,
 }) => {
   const [nameField, nameMeta] = useField(name);
   const [, isValidMeta, isValidHelper] = useField(validator);
@@ -78,7 +80,7 @@ export const UrlResolver: React.FC<Props> = ({
         margin="normal"
         fullWidth
         error={showError}
-        helperText={showError ? nameMeta.error : undefined}
+        helperText={showError ? nameMeta.error : helperText}
         color="secondary"
         autoComplete="off"
         disabled={disabled}
