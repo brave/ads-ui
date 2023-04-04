@@ -259,7 +259,6 @@ export async function transformEditForm(
     dailyBudget: form.dailyBudget,
     dailyCap: form.dailyCap,
     endAt: form.endAt,
-    geoTargets: form.geoTargets.map((v) => ({ code: v.code, name: v.name })),
     id,
     name: form.name,
     startAt: form.startAt,
@@ -279,10 +278,6 @@ export function updateCampaignState(
     dailyBudget: c.dailyBudget,
     dailyCap: c.dailyCap,
     endAt: c.endAt,
-    geoTargets: (c.geoTargets ?? []).map((g) => ({
-      name: g.name,
-      code: g.code,
-    })),
     id: c.id,
     name: c.name,
     startAt: c.startAt,

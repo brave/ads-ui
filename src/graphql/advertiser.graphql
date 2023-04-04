@@ -15,7 +15,7 @@ mutation updateAdvertiser($updateAdvertiserInput: UpdateAdvertiserInput!) {
 query advertiserCampaigns($id: String!, $filter: AdvertiserCampaignFilter) {
   advertiserCampaigns(id: $id, filter: $filter) {
     campaigns {
-      ...Campaign
+      ...CampaignSummary
     }
   }
 }

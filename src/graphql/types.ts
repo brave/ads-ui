@@ -27,8 +27,6 @@ export type AdvertiserCampaignFilter = {
   includeAds?: InputMaybe<Scalars["Boolean"]>;
   /** include creative sets */
   includeCreativeSets?: InputMaybe<Scalars["Boolean"]>;
-  /** include geos */
-  includeGeos?: InputMaybe<Scalars["Boolean"]>;
 };
 
 export type ApproveCampaignInput = {
@@ -407,7 +405,7 @@ export type UpdateCampaignInput = {
   dayProportion?: InputMaybe<Scalars["Float"]>;
   endAt: Scalars["DateTime"];
   externalId?: InputMaybe<Scalars["String"]>;
-  geoTargets: Array<GeocodeInput>;
+  geoTargets?: InputMaybe<Array<GeocodeInput>>;
   id: Scalars["String"];
   name: Scalars["String"];
   pacingOverride?: InputMaybe<Scalars["Boolean"]>;

@@ -126,7 +126,6 @@ const RoutesWithProps: React.FC<{
       filter: {
         includeAds: true,
         includeCreativeSets: true,
-        includeGeos: true,
         from: fromDateFilter,
       },
     },
@@ -145,6 +144,7 @@ const RoutesWithProps: React.FC<{
             campaigns={data?.advertiserCampaigns?.campaigns ?? []}
             advertiser={advertiser}
             loading={loading}
+            fromDate={fromDateFilter}
           />
         </Stack>
       </Route>

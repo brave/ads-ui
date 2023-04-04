@@ -28,6 +28,32 @@ fragment Campaign on Campaign {
   }
 }
 
+fragment CampaignSummary on Campaign {
+  id
+  name
+  state
+  dailyCap
+  priority
+  passThroughRate
+  pacingOverride
+  pacingStrategy
+  externalId
+  currency
+  budget
+  dailyBudget
+  spent
+  createdAt
+  startAt
+  endAt
+  source
+  type
+  format
+  dayProportion
+  adSets {
+    ...AdSet
+  }
+}
+
 query LoadCampaign($id: String!) {
   campaign(id: $id) {
     ...Campaign

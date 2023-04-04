@@ -78,6 +78,75 @@ export type CampaignFragment = {
   }>;
 };
 
+export type CampaignSummaryFragment = {
+  __typename?: "Campaign";
+  id: string;
+  name: string;
+  state: string;
+  dailyCap: number;
+  priority: number;
+  passThroughRate: number;
+  pacingOverride: boolean;
+  pacingStrategy: Types.CampaignPacingStrategies;
+  externalId: string;
+  currency: string;
+  budget: number;
+  dailyBudget: number;
+  spent: number;
+  createdAt: any;
+  startAt: any;
+  endAt: any;
+  source: Types.CampaignSource;
+  type: string;
+  format: Types.CampaignFormat;
+  dayProportion?: number | null;
+  adSets: Array<{
+    __typename?: "AdSet";
+    id: string;
+    createdAt: any;
+    billingType?: string | null;
+    name?: string | null;
+    totalMax: number;
+    perDay: number;
+    state: string;
+    execution: string;
+    segments?: Array<{
+      __typename?: "Segment";
+      code: string;
+      name: string;
+    }> | null;
+    oses?: Array<{ __typename?: "OS"; code: string; name: string }> | null;
+    conversions?: Array<{
+      __typename?: "Conversion";
+      id: string;
+      type: string;
+      urlPattern: string;
+      observationWindow: number;
+    }> | null;
+    ads?: Array<{
+      __typename?: "Ad";
+      id: string;
+      state: string;
+      prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
+      creative: {
+        __typename?: "Creative";
+        id: string;
+        createdAt: any;
+        modifiedAt: any;
+        name: string;
+        state: string;
+        type: { __typename?: "CreativeType"; code: string };
+        payloadNotification?: {
+          __typename?: "NotificationPayload";
+          body: string;
+          title: string;
+          targetUrl: string;
+        } | null;
+      };
+    }> | null;
+  }>;
+};
+
 export type LoadCampaignQueryVariables = Types.Exact<{
   id: Types.Scalars["String"];
 }>;
@@ -203,6 +272,34 @@ export const CampaignFragmentDoc = gql`
       code
       name
     }
+    adSets {
+      ...AdSet
+    }
+  }
+  ${AdSetFragmentDoc}
+`;
+export const CampaignSummaryFragmentDoc = gql`
+  fragment CampaignSummary on Campaign {
+    id
+    name
+    state
+    dailyCap
+    priority
+    passThroughRate
+    pacingOverride
+    pacingStrategy
+    externalId
+    currency
+    budget
+    dailyBudget
+    spent
+    createdAt
+    startAt
+    endAt
+    source
+    type
+    format
+    dayProportion
     adSets {
       ...AdSet
     }
