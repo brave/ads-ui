@@ -32,11 +32,12 @@ export type UpdateAdvertiserMutation = {
 
 export type AdvertiserCampaignsQueryVariables = Types.Exact<{
   id: Types.Scalars["String"];
+  filter?: Types.InputMaybe<Types.AdvertiserCampaignFilter>;
 }>;
 
 export type AdvertiserCampaignsQuery = {
   __typename?: "Query";
-  advertiser?: {
+  advertiserCampaigns?: {
     __typename?: "Advertiser";
     campaigns: Array<{
       __typename?: "Campaign";
@@ -230,8 +231,8 @@ export type UpdateAdvertiserMutationOptions = Apollo.BaseMutationOptions<
   UpdateAdvertiserMutationVariables
 >;
 export const AdvertiserCampaignsDocument = gql`
-  query advertiserCampaigns($id: String!) {
-    advertiser(id: $id) {
+  query advertiserCampaigns($id: String!, $filter: AdvertiserCampaignFilter) {
+    advertiserCampaigns(id: $id, filter: $filter) {
       campaigns {
         ...Campaign
       }
@@ -253,6 +254,7 @@ export const AdvertiserCampaignsDocument = gql`
  * const { data, loading, error } = useAdvertiserCampaignsQuery({
  *   variables: {
  *      id: // value for 'id'
+ *      filter: // value for 'filter'
  *   },
  * });
  */

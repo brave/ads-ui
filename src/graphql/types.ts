@@ -20,6 +20,17 @@ export type Scalars = {
   DateTime: any;
 };
 
+export type AdvertiserCampaignFilter = {
+  /** exclude all campaigns whose time range is completely before this time */
+  from?: InputMaybe<Scalars["DateTime"]>;
+  /** include ads */
+  includeAds?: InputMaybe<Scalars["Boolean"]>;
+  /** include creative sets */
+  includeCreativeSets?: InputMaybe<Scalars["Boolean"]>;
+  /** include geos */
+  includeGeos?: InputMaybe<Scalars["Boolean"]>;
+};
+
 export type ApproveCampaignInput = {
   campaignId: Scalars["String"];
 };
@@ -130,7 +141,7 @@ export type CreateCampaignInput = {
   dayPartings?: InputMaybe<Array<DayPartingInput>>;
   dayProportion?: InputMaybe<Scalars["Float"]>;
   endAt: Scalars["DateTime"];
-  externalId: Scalars["String"];
+  externalId?: InputMaybe<Scalars["String"]>;
   format: CampaignFormat;
   geoTargets: Array<GeocodeInput>;
   name: Scalars["String"];

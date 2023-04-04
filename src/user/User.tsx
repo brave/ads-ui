@@ -13,7 +13,7 @@ import {
 import AnalyticsOverview from "./analytics/AnalyticsOverview";
 import Settings from "./settings/Settings";
 import { connect } from "react-redux";
-import { Box } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import { NewCampaign } from "./views/adsManager/views/advanced/components/form/NewCampaign";
 import { EditCampaign } from "./views/adsManager/views/advanced/components/form/EditCampaign";
 import { CompletionForm } from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
@@ -22,6 +22,8 @@ import { IAdvertiser, IAuthUser } from "../actions";
 import { useAdvertiserCampaignsQuery } from "../graphql/advertiser.generated";
 import { AdSetList } from "./adSet/AdSetList";
 import { AdList } from "./ads/AdList";
+import moment from "moment";
+import { CampaignAgeFilter } from "../components/Campaigns/CampaignAgeFilter";
 
 const buildApolloClient = (accessToken: string) => {
   const httpLink = createHttpLink({
@@ -114,30 +116,48 @@ const RoutesWithProps: React.FC<{
   auth: IAuthUser;
 }> = ({ advertiser, auth }) => {
   const match = useRouteMatch();
+  const [fromDateFilter, setFromDateFilter] = useState<Date | null>(
+    moment().subtract(3, "month").startOf("day").toDate()
+  );
+
   const { loading, data } = useAdvertiserCampaignsQuery({
-    variables: { id: advertiser.id },
+    variables: {
+      id: advertiser.id,
+      filter: {
+        includeAds: true,
+        includeCreativeSets: true,
+        includeGeos: true,
+        from: fromDateFilter,
+      },
+    },
     pollInterval: 600_000,
   });
 
   return (
     <Switch>
       <Route path={`${match.path}/campaigns`}>
-        <CampaignList
-          campaigns={data?.advertiser?.campaigns ?? []}
-          advertiser={advertiser}
-          loading={loading}
-        />
+        <Stack>
+          <CampaignAgeFilter
+            fromDate={fromDateFilter}
+            onChange={setFromDateFilter}
+          />
+          <CampaignList
+            campaigns={data?.advertiserCampaigns?.campaigns ?? []}
+            advertiser={advertiser}
+            loading={loading}
+          />
+        </Stack>
       </Route>
       <Route path={`${match.path}/adsets`}>
         <AdSetList
-          campaigns={data?.advertiser?.campaigns ?? []}
+          campaigns={data?.advertiserCampaigns?.campaigns ?? []}
           loading={loading}
           advertiser={advertiser}
         />
       </Route>
       <Route path={`${match.path}/ads`}>
         <AdList
-          campaigns={data?.advertiser?.campaigns ?? []}
+          campaigns={data?.advertiserCampaigns?.campaigns ?? []}
           loading={loading}
           advertiser={advertiser}
         />
