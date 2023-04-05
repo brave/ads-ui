@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { initialize } from "redux-form";
 import ReactDOM from "react-dom";
 
 class Modal extends Component<any, any> {
