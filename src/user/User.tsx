@@ -117,7 +117,7 @@ const RoutesWithProps: React.FC<{
 }> = ({ advertiser, auth }) => {
   const match = useRouteMatch();
   const [fromDateFilter, setFromDateFilter] = useState<Date | null>(
-    moment().subtract(3, "month").startOf("day").toDate()
+    moment().subtract(6, "month").startOf("day").toDate()
   );
 
   const { loading, data } = useAdvertiserCampaignsQuery({

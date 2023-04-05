@@ -11,7 +11,7 @@ interface Props {
 export const CampaignAgeFilter: React.FC<Props> = ({ fromDate, onChange }) => {
   const onOldCampaignToggle = (showOld: boolean) => {
     onChange(
-      showOld ? null : moment().subtract(3, "month").startOf("day").toDate()
+      showOld ? null : moment().subtract(6, "month").startOf("day").toDate()
     );
   };
 
@@ -27,8 +27,8 @@ export const CampaignAgeFilter: React.FC<Props> = ({ fromDate, onChange }) => {
         />
       }
       label={
-        <Typography variant="body2">
-          Include campaigns that ended over 3 months ago
+        <Typography variant="body1">
+          Include campaigns that ended over 6 months ago
         </Typography>
       }
     />
