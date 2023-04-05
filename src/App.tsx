@@ -40,8 +40,7 @@ const App = (props) => {
       const storageAdvertiser = getActiveAdvertiser();
       let isInGroup = false;
       if (storageAdvertiser) {
-        isInGroup =
-          _.find(advertisers, { id: storageAdvertiser.id }) !== undefined;
+        isInGroup = _.some(advertisers, { id: storageAdvertiser.id });
       }
 
       const activeAdvertiser = isInGroup
