@@ -5,8 +5,8 @@
   "dependencies": {
     "@apollo/client": "3.7.11",
     "@date-io/moment": "2.16.1",
-    "@emotion/react": "11.10.5",
-    "@emotion/styled": "11.10.5",
+    "@emotion/react": "11.10.6",
+    "@emotion/styled": "11.10.6",
     "@mui/icons-material": "5.11.0",
     "@mui/lab": "5.0.0-alpha.115",
     "@mui/material": "5.11.4",
