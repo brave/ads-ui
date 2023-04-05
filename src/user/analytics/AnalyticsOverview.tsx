@@ -66,6 +66,17 @@ const AnalyticsOverview: React.FC<Props> = ({ auth }: Props) => {
       moment(engagement.createdat) <= moment.utc(endDate).endOf("day")
   );
 
+  if (data.campaign.format === CampaignFormat.NtpSi) {
+    return (
+      <Box>
+        <Alert severity="info" sx={{ mt: 2, mb: 10 }}>
+          Please ask your Account Manager for reports on campaigns of this
+          format.
+        </Alert>
+      </Box>
+    );
+  }
+
   if (!filteredEngagements || filteredEngagements.length === 0) {
     return (
       <Box>
@@ -122,17 +133,6 @@ const AnalyticsOverview: React.FC<Props> = ({ auth }: Props) => {
         engagements={filteredEngagements ?? []}
         campaign={data.campaign}
       />
-
-      {data.campaign.format === CampaignFormat.NtpSi && (
-        <Text
-          style={{ marginLeft: "4px", marginTop: 10 }}
-          content={
-            "* Sponsored Image reporting is a statistical approximation, derived from the percentage of Brave users that are opted-in to Brave Ads."
-          }
-          fontFamily={"Poppins"}
-          sizes={[18, 18, 42, 42, 14]}
-        />
-      )}
     </Box>
   );
 };
