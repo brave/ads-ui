@@ -1,8 +1,9 @@
 import * as React from "react";
 
 import { useHistory } from "react-router-dom";
-import { Button, Menu, MenuItem } from "@mui/material";
+import { Badge, Button, Menu, MenuItem } from "@mui/material";
 import { useState } from "react";
+import DraftsIcon from "@mui/icons-material/Drafts";
 
 interface Props {
   signOut: () => void;

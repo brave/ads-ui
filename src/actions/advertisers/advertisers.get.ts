@@ -29,7 +29,7 @@ export const GetAdvertisers = (auth: IAuthPayload, userId?: string) => {
     try {
       dispatch(GetAdvertisersStart);
       const response = await axios.get(
-        `${process.env.REACT_APP_SERVER_ADDRESS}/advertiser`,
+        `${import.meta.env.REACT_APP_SERVER_ADDRESS}/advertiser`,
         {
           headers: {
             "-x-user": userId,

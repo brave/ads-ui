@@ -139,7 +139,7 @@ async function graphqlRequest<T>(
   input: T
 ) {
   const response = await axios.post(
-    `${process.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql"),
+    `${import.meta.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql"),
     JSON.stringify({
       query: print(node),
       variables: input,
@@ -180,28 +180,32 @@ async function createAd(accessToken: string, createInput: CreateAdInput) {
 
 export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
   return {
-    adSets: campaign.adSets.map((adSet) => ({
-      ...adSet,
-      id: adSet.id,
-      conversions: adSet.conversions ?? [],
-      oses: adSet.oses ?? ([] as OS[]),
-      segments: adSet.segments ?? ([] as Segment[]),
-      isNotTargeting: (adSet.segments ?? []).length === 0,
-      name: adSet.name || adSet.id.split("-")[0],
-      creatives: adSet.ads!.map((ad) => {
-        const c = ad.creative;
-        return {
-          creativeInstanceId: ad.id,
-          id: c.id,
-          name: c.name,
-          targetUrl: c.payloadNotification!.targetUrl,
-          title: c.payloadNotification!.title,
-          body: c.payloadNotification!.body,
-          targetUrlValid: true,
-          state: c.state,
-        };
-      }),
-    })),
+    adSets: campaign.adSets.map((adSet) => {
+      const seg = adSet.segments ?? ([] as Segment[]);
+
+      return {
+        ...adSet,
+        id: adSet.id,
+        conversions: adSet.conversions ?? [],
+        oses: adSet.oses ?? ([] as OS[]),
+        segments: adSet.segments ?? ([] as Segment[]),
+        isNotTargeting: seg.length === 1 && seg[0].code === "Svp7l-zGN",
+        name: adSet.name || adSet.id.split("-")[0],
+        creatives: adSet.ads!.map((ad) => {
+          const c = ad.creative;
+          return {
+            creativeInstanceId: ad.id,
+            id: c.id,
+            name: c.name,
+            targetUrl: c.payloadNotification!.targetUrl,
+            title: c.payloadNotification!.title,
+            body: c.payloadNotification!.body,
+            targetUrlValid: true,
+            state: c.state,
+          };
+        }),
+      };
+    }),
     price: campaign.adSets[0].ads?.[0].prices[0].amount ?? 6,
     billingType: (campaign.adSets[0].billingType ?? "cpm") as Billing,
     validateStart: false,

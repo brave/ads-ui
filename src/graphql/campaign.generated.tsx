@@ -41,11 +41,6 @@ export type CampaignFragment = {
     perDay: number;
     state: string;
     execution: string;
-    keywords?: Array<string> | null;
-    keywordSimilarity?: number | null;
-    negativeKeywords?: Array<string> | null;
-    bannedKeywords?: Array<string> | null;
-    targetingTerms?: Array<string> | null;
     segments?: Array<{
       __typename?: "Segment";
       code: string;
@@ -58,14 +53,12 @@ export type CampaignFragment = {
       type: string;
       urlPattern: string;
       observationWindow: number;
-      extractExternalId: boolean;
     }> | null;
     ads?: Array<{
       __typename?: "Ad";
       id: string;
       state: string;
       prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
-      webhooks: Array<{ __typename?: "Webhook"; type: string; url: string }>;
       creative: {
         __typename?: "Creative";
         id: string;
@@ -128,11 +121,6 @@ export type LoadCampaignQuery = {
       perDay: number;
       state: string;
       execution: string;
-      keywords?: Array<string> | null;
-      keywordSimilarity?: number | null;
-      negativeKeywords?: Array<string> | null;
-      bannedKeywords?: Array<string> | null;
-      targetingTerms?: Array<string> | null;
       segments?: Array<{
         __typename?: "Segment";
         code: string;
@@ -145,14 +133,12 @@ export type LoadCampaignQuery = {
         type: string;
         urlPattern: string;
         observationWindow: number;
-        extractExternalId: boolean;
       }> | null;
       ads?: Array<{
         __typename?: "Ad";
         id: string;
         state: string;
         prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
-        webhooks: Array<{ __typename?: "Webhook"; type: string; url: string }>;
         creative: {
           __typename?: "Creative";
           id: string;

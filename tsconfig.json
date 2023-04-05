@@ -11,11 +11,12 @@
     "moduleResolution": "node",
     "noImplicitAny": false,
     "resolveJsonModule": true,
-    "outDir": "mychart/",
     "noEmit": true,
     "jsx": "react-jsx",
     "lib": ["ESNext", "dom"],
-    "isolatedModules": true
+    "isolatedModules": true,
+    "types": ["vitest/globals"],
+    "baseUrl": "src"
   },
   "include": ["src"]
 }

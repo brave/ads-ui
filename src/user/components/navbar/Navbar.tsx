@@ -8,6 +8,9 @@ import TopBarProgress from "react-topbar-progress-indicator";
 import { AppBar, Button, Toolbar } from "@mui/material";
 import { UserMenu } from "./components/UserMenu/UserMenu";
 import { connect } from "react-redux";
+import { DraftMenu } from "./components/DraftMenu/DraftMenu";
+import moment from "moment";
+import rewards from "../../../../Subdomains_Rewards_Ads_Default.png";
 
 const logoStyle = {
   textDecoration: "none",
@@ -39,16 +42,17 @@ function Navbar({ dispatch, canCreate }: Props) {
     >
       <Toolbar>
         <Link style={logoStyle} to={"/home"}>
-          <img
-            src="/Subdomains_Rewards_Ads_Default.png"
-            alt="Ads"
-            height="40px"
-          />
+          <img src={rewards} alt="Ads" height="40px" />
         </Link>
+        {canCreate && <DraftMenu />}
         <div style={{ flexGrow: 1 }} />
         {canCreate && (
           <Button
-            onClick={() => history.push(`/user/main/adsmanager/advanced/new`)}
+            onClick={() =>
+              history.push(
+                `/user/main/adsmanager/advanced/new/${moment().utc().valueOf()}`
+              )
+            }
             size="large"
             variant="contained"
             sx={{ mr: 5 }}
@@ -58,7 +62,7 @@ function Navbar({ dispatch, canCreate }: Props) {
         )}
         <UserMenu
           signOut={() => {
-            localStorage.clear();
+            localStorage.removeItem("persist:root");
             dispatch(SignOut());
           }}
         />
