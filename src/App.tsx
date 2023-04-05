@@ -38,13 +38,13 @@ const App = (props) => {
     const { advertisers, auth } = props;
     if (auth && auth.signedIn && auth.emailVerified) {
       const storageAdvertiser = getActiveAdvertiser();
-      let isValid = false;
+      let isInGroup = false;
       if (storageAdvertiser) {
-        isValid =
+        isInGroup =
           _.find(advertisers, { id: storageAdvertiser.id }) !== undefined;
       }
 
-      const activeAdvertiser = isValid
+      const activeAdvertiser = isInGroup
         ? storageAdvertiser
         : _.find(advertisers, { state: "active" });
       if (advertisers.length > 0 && activeAdvertiser) {
