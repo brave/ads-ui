@@ -37,8 +37,16 @@ const App = (props) => {
     }
     const { advertisers, auth } = props;
     if (auth && auth.signedIn && auth.emailVerified) {
-      const activeAdvertiser =
-        getActiveAdvertiser() || _.find(advertisers, { state: "active" });
+      const storageAdvertiser = getActiveAdvertiser();
+      let isValid = false;
+      if (storageAdvertiser) {
+        isValid =
+          _.find(advertisers, { id: storageAdvertiser.id }) !== undefined;
+      }
+
+      const activeAdvertiser = isValid
+        ? storageAdvertiser
+        : _.find(advertisers, { state: "active" });
       if (advertisers.length > 0 && activeAdvertiser) {
         setActiveAdvertiser(activeAdvertiser);
         return <Redirect to="/user/main" />;
