@@ -95,14 +95,21 @@ export function renderMonetaryAmount(
 }
 
 export function campaignOnOffState(
-  c: CampaignFragment,
+  c: CampaignFragment & { fromDate: Date | null },
   advertiser: IAdvertiser
 ): ReactNode {
   const [updateCampaign, { loading }] = useUpdateCampaignMutation({
     refetchQueries: [
       {
         query: AdvertiserCampaignsDocument,
-        variables: { id: advertiser.id },
+        variables: {
+          id: advertiser.id,
+          filter: {
+            includeAds: true,
+            includeCreativeSets: true,
+            from: c.fromDate,
+          },
+        },
       },
     ],
   });

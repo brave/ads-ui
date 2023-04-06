@@ -28,7 +28,7 @@ export function BudgetField({ canSetPrice, isEdit }: Props) {
   useEffect(() => {
     const dailyBudget =
       campaignRuntime > 0
-        ? Math.ceil(Number(values.budget) / campaignRuntime)
+        ? Math.floor(Number(values.budget) / campaignRuntime)
         : values.budget;
     const minLifetime =
       campaignRuntime > 0 && values.budget >= MIN_PER_CAMPAIGN

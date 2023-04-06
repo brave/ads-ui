@@ -26,9 +26,15 @@ interface Props {
   campaigns: CampaignFragment[];
   advertiser: IAdvertiser;
   loading: boolean;
+  fromDate: Date | null;
 }
 
-export function CampaignList({ campaigns, advertiser, loading }: Props) {
+export function CampaignList({
+  campaigns,
+  advertiser,
+  loading,
+  fromDate,
+}: Props) {
   const history = useHistory();
 
   if (loading) return <LinearProgress />;
@@ -44,7 +50,8 @@ export function CampaignList({ campaigns, advertiser, loading }: Props) {
         {
           title: "On/Off",
           value: (c) => c.state,
-          extendedRenderer: (r) => campaignOnOffState(r, advertiser),
+          extendedRenderer: (r) =>
+            campaignOnOffState({ ...r, fromDate }, advertiser),
           sx: { width: "10px" },
           sortable: false,
         },
