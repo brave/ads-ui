@@ -1,7 +1,7 @@
 import * as Types from "./types";
 
 import { gql } from "@apollo/client";
-import { CampaignFragmentDoc } from "./campaign.generated";
+import { CampaignSummaryFragmentDoc } from "./campaign.generated";
 import * as Apollo from "@apollo/client";
 const defaultOptions = {} as const;
 export type AdvertiserQueryVariables = Types.Exact<{
@@ -32,11 +32,12 @@ export type UpdateAdvertiserMutation = {
 
 export type AdvertiserCampaignsQueryVariables = Types.Exact<{
   id: Types.Scalars["String"];
+  filter?: Types.InputMaybe<Types.AdvertiserCampaignFilter>;
 }>;
 
 export type AdvertiserCampaignsQuery = {
   __typename?: "Query";
-  advertiser?: {
+  advertiserCampaigns?: {
     __typename?: "Advertiser";
     campaigns: Array<{
       __typename?: "Campaign";
@@ -60,11 +61,6 @@ export type AdvertiserCampaignsQuery = {
       type: string;
       format: Types.CampaignFormat;
       dayProportion?: number | null;
-      geoTargets?: Array<{
-        __typename?: "Geocode";
-        code: string;
-        name: string;
-      }> | null;
       adSets: Array<{
         __typename?: "AdSet";
         id: string;
@@ -230,14 +226,14 @@ export type UpdateAdvertiserMutationOptions = Apollo.BaseMutationOptions<
   UpdateAdvertiserMutationVariables
 >;
 export const AdvertiserCampaignsDocument = gql`
-  query advertiserCampaigns($id: String!) {
-    advertiser(id: $id) {
+  query advertiserCampaigns($id: String!, $filter: AdvertiserCampaignFilter) {
+    advertiserCampaigns(id: $id, filter: $filter) {
       campaigns {
-        ...Campaign
+        ...CampaignSummary
       }
     }
   }
-  ${CampaignFragmentDoc}
+  ${CampaignSummaryFragmentDoc}
 `;
 
 /**
@@ -253,6 +249,7 @@ export const AdvertiserCampaignsDocument = gql`
  * const { data, loading, error } = useAdvertiserCampaignsQuery({
  *   variables: {
  *      id: // value for 'id'
+ *      filter: // value for 'filter'
  *   },
  * });
  */
