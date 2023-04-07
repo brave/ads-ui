@@ -11,7 +11,7 @@
     "@mui/lab": "5.0.0-alpha.125",
     "@mui/material": "5.11.16",
     "@mui/styles": "5.11.16",
-    "@mui/x-date-pickers": "5.0.20",
+    "@mui/x-date-pickers": "6.0.4",
     "axios": "1.2.2",
     "base64url": "3.0.1",
     "date-fns": "2.29.3",
