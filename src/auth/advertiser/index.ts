@@ -31,5 +31,5 @@ export const getAdvertisers = async (
     throw new Error();
   }
 
-  return res.json();
+  return await res.json();
 };
