@@ -9,17 +9,19 @@ import _ from "lodash";
 import * as tweetnacl from "tweetnacl";
 import {
   useAdvertiserQuery,
+  useAdvertisersQuery,
   useUpdateAdvertiserMutation,
 } from "../../graphql/advertiser.generated";
 import {
   Box,
   FormControl,
   InputLabel,
+  LinearProgress,
   MenuItem,
   Modal,
   Select,
 } from "@mui/material";
-import { setActiveAdvertiser } from "../../state/context";
+import { useAuthContext } from "../../auth/context/auth.hook";
 
 const modalStyles = {
   position: "absolute" as "absolute",
@@ -36,7 +38,7 @@ const modalStyles = {
   p: 4,
 };
 
-const Settings = (props) => {
+const Settings = () => {
   const [loading, setLoading] = useState(false);
   const [publicKey, setPublicKey] = useState("");
   const [newPublicKey, setNewPublicKey] = useState("");
@@ -45,30 +47,15 @@ const Settings = (props) => {
   const [showNewKeypairModal, setShowNewKeypairModal] = useState(false);
   const [newKeypairModalState, setNewKeypairModalState] =
     useState("disclaimer");
-
-  const setActiveAdvertiserWithId = (e) => {
-    const adv = _.find(props.advertisers, { id: e.target.value });
-    setActiveAdvertiser(adv);
-    props.setActiveAdvertiser(adv);
-  };
-
-  const advertisers = () => {
-    let advertisers = [] as any;
-    props.advertisers.forEach((advertiser) => {
-      advertisers.push({
-        value: advertiser.id,
-        label: advertiser.name,
-      });
-    });
-    return advertisers;
-  };
+  const auth = useAuthContext();
+  const { data, loading: advertiserLoading } = useAdvertisersQuery();
 
   const saveKeypair = () => {
     setLoading(true);
     updateAdvertiser({
       variables: {
         updateAdvertiserInput: {
-          id: props.activeAdvertiser.id,
+          id: auth.advertiser.id,
           publicKey: newPublicKey,
         },
       },
@@ -111,7 +98,7 @@ const Settings = (props) => {
   const [updateAdvertiser] = useUpdateAdvertiserMutation({
     variables: {
       updateAdvertiserInput: {
-        id: props.activeAdvertiser.id,
+        id: auth.advertiser.id,
         publicKey: publicKey,
       },
     },
@@ -119,11 +106,18 @@ const Settings = (props) => {
   });
 
   const { loading: queryLoading } = useAdvertiserQuery({
-    variables: { id: props.activeAdvertiser.id },
+    variables: { id: auth.advertiser.id },
     onCompleted: initializeAdvertiser,
   });
 
-  if (queryLoading) return <></>;
+  if (queryLoading || advertiserLoading || !data || !data.userAdvertisers) {
+    return <LinearProgress />;
+  }
+
+  const setActiveAdvertiserWithId = (e) => {
+    const adv = _.find(data.userAdvertisers, { id: e.target.value });
+    auth.setActiveAdvertiser(adv);
+  };
 
   return (
     <div>
@@ -223,12 +217,12 @@ const Settings = (props) => {
           <FormControl fullWidth>
             <InputLabel>Select Organization</InputLabel>
             <Select
-              value={props.activeAdvertiser.id}
+              value={auth.advertiser.id}
               label="Select Organization"
               onChange={(e) => setActiveAdvertiserWithId(e)}
             >
-              {advertisers().map((a) => (
-                <MenuItem value={a.value}>{a.label}</MenuItem>
+              {data.userAdvertisers.map((a) => (
+                <MenuItem value={a.id}>{a.name}</MenuItem>
               ))}
             </Select>
           </FormControl>

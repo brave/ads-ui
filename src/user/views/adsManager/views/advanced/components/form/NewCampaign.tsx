@@ -11,19 +11,17 @@ import { BaseForm } from "./components/BaseForm";
 import { IAdvertiser, IAuthUser } from "../../../../../../../actions";
 import { PersistFormValues } from "../../../../../../../form/PersistFormValues";
 import { DraftContext } from "../../../../../../../state/context";
-
-interface Props {
-  auth: IAuthUser;
-  advertiser: IAdvertiser;
-}
+import { IAuthState } from "../../../../../../../auth/context/auth.interface";
+import { useAuthContext } from "../../../../../../../auth/context/auth.hook";
 
 interface Params {
   draftId: string;
 }
 
-export function NewCampaign({ auth, advertiser }: Props) {
+export function NewCampaign() {
   const history = useHistory();
   const params = useParams<Params>();
+  const auth = useAuthContext();
   const { setDrafts } = useContext(DraftContext);
 
   const initial: CampaignForm = {
@@ -34,7 +32,7 @@ export function NewCampaign({ auth, advertiser }: Props) {
   const [mutation] = useCreateCampaignMutation({
     refetchQueries: [
       {
-        ...refetchAdvertiserQuery({ id: advertiser.id }),
+        ...refetchAdvertiserQuery({ id: auth.advertiser.id }),
       },
     ],
     onCompleted() {
@@ -50,7 +48,7 @@ export function NewCampaign({ auth, advertiser }: Props) {
         initialValues={initial}
         onSubmit={(v: CampaignForm, { setSubmitting }) => {
           setSubmitting(true);
-          transformNewForm(v, auth, advertiser.id)
+          transformNewForm(v, auth)
             .then(async (c) => {
               return await mutation({ variables: { input: c } });
             })
@@ -68,7 +66,7 @@ export function NewCampaign({ auth, advertiser }: Props) {
             <BaseForm
               isEdit={false}
               values={values}
-              advertiser={advertiser}
+              advertiser={auth.advertiser}
               draftId={params.draftId}
             />
             <PersistFormValues id={params.draftId} />

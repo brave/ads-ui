@@ -19,11 +19,7 @@ interface Params {
   campaignId: string;
 }
 
-interface Props {
-  auth: IAuthUser;
-}
-
-const AnalyticsOverview: React.FC<Props> = ({ auth }: Props) => {
+const AnalyticsOverview: React.FC = () => {
   const params = useParams<Params>();
   const today = new Date();
   const [startDate, setStartDate] = useState<Date | undefined>();
@@ -94,7 +90,6 @@ const AnalyticsOverview: React.FC<Props> = ({ auth }: Props) => {
         endDate={endDate}
         campaign={{ id: data.campaign.id, name: data.campaign.name }}
         onSetDate={setDateRange}
-        auth={auth}
       />
 
       <Divider textAlign="left" sx={{ fontWeight: "600", mb: 2 }}>

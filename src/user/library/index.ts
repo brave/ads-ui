@@ -27,6 +27,7 @@ import {
 } from "../../graphql/ad-set.generated";
 import { CreateNotificationCreativeDocument } from "../../graphql/creative.generated";
 import { IAuthUser } from "../../actions";
+import { IAuthState } from "../../auth/context/auth.interface";
 
 const TYPE_CODE_LOOKUP = {
   notification_all_v1: "Push Notification",
@@ -38,8 +39,7 @@ const TYPE_CODE_LOOKUP = {
 
 export async function transformNewForm(
   form: CampaignForm,
-  auth: IAuthUser,
-  advertiserId: string
+  auth: IAuthState
 ): Promise<CreateCampaignInput> {
   const adSets = form.adSets;
   const transformedAdSet: CreateAdSetInput[] = [];
@@ -48,7 +48,7 @@ export async function transformNewForm(
     const ads: CreateAdInput[] = [];
 
     for (const ad of adSet.creatives) {
-      const creative = await transformCreative(ad, form, auth, advertiserId);
+      const creative = await transformCreative(ad, form, auth);
       ads.push(creative);
     }
 
@@ -74,10 +74,10 @@ export async function transformNewForm(
     endAt: form.endAt,
     geoTargets: form.geoTargets.map((g) => ({ code: g.code, name: g.name })),
     name: form.name,
-    advertiserId: advertiserId,
+    advertiserId: auth.advertiser.id,
     externalId: "",
     format: form.format,
-    userId: auth.id,
+    userId: auth.userId,
     source: "self_serve",
     startAt: form.startAt,
     state: form.state,
@@ -102,12 +102,11 @@ function transformConversion(conv: Conversion[]) {
 async function transformCreative(
   creative: Creative,
   campaign: CampaignForm,
-  auth: IAuthUser,
-  advertiserId: string
+  auth: IAuthState
 ): Promise<CreateAdInput> {
   const notification: CreateNotificationCreativeInput = {
-    advertiserId: advertiserId,
-    userId: auth.id,
+    advertiserId: auth.advertiser.id,
+    userId: auth.userId,
     name: creative.name,
     payload: {
       title: creative.title,
@@ -227,8 +226,7 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
 export async function transformEditForm(
   form: CampaignForm,
   id: string,
-  auth: IAuthUser,
-  advertiserId: string
+  auth: IAuthState
 ): Promise<UpdateCampaignInput> {
   const transformedAdSet: UpdateAdSetInput[] = [];
 
@@ -236,7 +234,7 @@ export async function transformEditForm(
     const creatives = adSet.creatives;
     for (const ad of creatives) {
       if (ad.id == null) {
-        const withId = await transformCreative(ad, form, auth, advertiserId);
+        const withId = await transformCreative(ad, form, auth);
         await createAd(auth.accessToken, {
           ...withId,
           creativeSetId: adSet.id,

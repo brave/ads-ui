@@ -1,3 +1,36 @@
+fragment AdvertiserSummary on Advertiser {
+  id
+  name
+  state
+  billingEmail
+  additionalBillingEmails
+  createdAt
+  modifiedAt
+}
+
+fragment Advertiser on Advertiser {
+  ...AdvertiserSummary
+  referrer
+  phone
+  selfServiceEdit
+  selfServiceCreate
+  selfServiceSetPrice
+  mailingAddress {
+    street1
+    street2
+    city
+    country
+    state
+    zipcode
+  }
+}
+
+query advertisers {
+  userAdvertisers {
+    ...Advertiser
+  }
+}
+
 query advertiser($id: String!) {
   advertiser(id: $id) {
     id

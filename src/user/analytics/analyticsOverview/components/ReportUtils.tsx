@@ -5,13 +5,13 @@ import React, { useState } from "react";
 import { downloadCSV } from "../lib/csv.library";
 import { DateRangePicker } from "../../../../components/Date/DateRangePicker";
 import { IAuthUser } from "../../../../actions";
+import { useAuthContext } from "../../../../auth/context/auth.hook";
 
 interface DownloaderProps {
   startDate: Date | undefined;
   endDate: Date;
   campaign: { id: string; name: string };
   onSetDate: (val: Date, type: "start" | "end") => void;
-  auth: IAuthUser;
 }
 
 export default function ReportUtils({
@@ -19,9 +19,9 @@ export default function ReportUtils({
   endDate,
   campaign,
   onSetDate,
-  auth,
 }: DownloaderProps) {
   const [downloadingCSV, setDownloadingCSV] = useState(false);
+  const auth = useAuthContext();
 
   return (
     <Box
@@ -55,7 +55,7 @@ export default function ReportUtils({
               campaign.id,
               campaign.name,
               auth.accessToken,
-              auth.id ?? "",
+              auth.userId ?? "",
               false,
               setDownloadingCSV
             )

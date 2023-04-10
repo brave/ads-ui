@@ -1,18 +1,21 @@
 import * as React from "react";
 
 import { useHistory } from "react-router-dom";
-import { Badge, Button, Menu, MenuItem } from "@mui/material";
+import { Button, Menu, MenuItem } from "@mui/material";
 import { useState } from "react";
-import DraftsIcon from "@mui/icons-material/Drafts";
+import { useSignOut } from "../../../../../auth/hooks/mutations/useSignOut";
 
-interface Props {
-  signOut: () => void;
-}
-
-export function UserMenu({ signOut }: Props) {
+export function UserMenu() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const history = useHistory();
+
+  const { signOut } = useSignOut({
+    onSuccess() {
+      history.push("/auth/signin");
+      setAnchorEl(null);
+    },
+  });
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);

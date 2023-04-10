@@ -1,19 +1,9 @@
 import React, { useState } from "react";
-import _ from "lodash";
 
-import Authentication from "./containers/Authentication/Authentication";
-import { Redirect, Route, Switch, withRouter } from "react-router-dom";
+import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 
-import {
-  DraftContext,
-  getActiveAdvertiser,
-  getAllDrafts,
-  setActiveAdvertiser,
-} from "./state/context";
-import User from "./user/User";
-import { connect } from "react-redux";
-import jwt_decode from "jwt-decode";
-import moment from "moment";
+import { DraftContext, getAllDrafts } from "./state/context";
+import { User } from "./user/User";
 import {
   CssBaseline,
   StyledEngineProvider,
@@ -21,41 +11,22 @@ import {
 } from "@mui/material";
 import { theme } from "./theme";
 import { CampaignForm } from "./user/views/adsManager/types";
+import { useIsAuthenticated } from "./auth/hooks/queries/useIsAuthenticated";
+import { SignIn } from "./containers/Authentication/Signin/Signin";
 
-const App = (props) => {
+const Protected = () => {
+  return <Redirect to="/auth/signin" />;
+};
+
+export function App() {
   const [drafts, setDrafts] = useState<CampaignForm[]>(getAllDrafts());
 
-  let expTime;
-  if (props.auth.accessToken) {
-    expTime = moment((jwt_decode(props.auth.accessToken) as any).exp * 1000);
+  const history = useHistory();
+  const isAuthenticated = useIsAuthenticated();
+
+  if (isAuthenticated === undefined) {
+    return null;
   }
-
-  const getRedirect = () => {
-    if (expTime && expTime < moment()) {
-      localStorage.removeItem("persist:root");
-      window.location.reload();
-    }
-    const { advertisers, auth } = props;
-    if (auth && auth.signedIn && auth.emailVerified) {
-      const storageAdvertiser = getActiveAdvertiser();
-      let isInGroup = false;
-      if (storageAdvertiser) {
-        isInGroup = _.some(advertisers, { id: storageAdvertiser.id });
-      }
-
-      const activeAdvertiser = isInGroup
-        ? storageAdvertiser
-        : _.find(advertisers, { state: "active" });
-      if (advertisers.length > 0 && activeAdvertiser) {
-        setActiveAdvertiser(activeAdvertiser);
-        return <Redirect to="/user/main" />;
-      } else {
-        return <Redirect to="/auth" />;
-      }
-    } else {
-      return <Redirect to="/auth" />;
-    }
-  };
 
   return (
     <>
@@ -71,32 +42,15 @@ const App = (props) => {
             }}
           >
             <Switch>
-              <Route path="/user/main">
-                <User />
+              <Route path="/auth/signin">
+                <SignIn state={history.location.state} />
               </Route>
-              <Route path="/auth" component={Authentication} />
-              <Route
-                path="/"
-                exact={true}
-                component={() => {
-                  window.location.href =
-                    "https://brave.com/brave-ads-waitlist/";
-                  return null;
-                }}
-              />
-              {getRedirect()}
+              <Route path="*" component={isAuthenticated ? User : Protected} />
+              <Redirect to="/auth/signin" />
             </Switch>
           </DraftContext.Provider>
         </ThemeProvider>
       </StyledEngineProvider>
     </>
   );
-};
-
-const mapStateToProps = (state: any, ownProps: any) => ({
-  advertisers: state.advertiserReducer.advertisers,
-  auth: state.authReducer,
-  snackbar: state.snackBarReducer,
-});
-
-export default withRouter(connect(mapStateToProps)(App));
+}

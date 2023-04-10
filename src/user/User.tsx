@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 
 import { Sidebar } from "./components/sidebar/Sidebar";
 import { CampaignList } from "./campaignList/CampaignList";
@@ -12,18 +12,17 @@ import {
 } from "@apollo/client";
 import AnalyticsOverview from "./analytics/AnalyticsOverview";
 import Settings from "./settings/Settings";
-import { connect } from "react-redux";
 import { Box, Stack } from "@mui/material";
 import { NewCampaign } from "./views/adsManager/views/advanced/components/form/NewCampaign";
 import { EditCampaign } from "./views/adsManager/views/advanced/components/form/EditCampaign";
 import { CompletionForm } from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
-import { getActiveAdvertiser } from "../state/context";
-import { IAdvertiser, IAuthUser } from "../actions";
+import { IAdvertiser } from "../actions";
 import { useAdvertiserCampaignsQuery } from "../graphql/advertiser.generated";
 import { AdSetList } from "./adSet/AdSetList";
 import { AdList } from "./ads/AdList";
 import moment from "moment";
 import { CampaignAgeFilter } from "../components/Campaigns/CampaignAgeFilter";
+import { useAuthContext } from "../auth/context/auth.hook";
 
 const buildApolloClient = (accessToken: string) => {
   const httpLink = createHttpLink({
@@ -39,30 +38,18 @@ const buildApolloClient = (accessToken: string) => {
   });
 };
 
-interface Props {
-  advertisers: IAdvertiser[];
-  auth: IAuthUser;
-}
-
-function User({ advertisers, auth }: Props) {
-  const match = useRouteMatch();
-  const [activeAdvertiser, setActiveAdvertiser] = useState(
-    getActiveAdvertiser()
-  );
+export function User() {
+  const auth = useAuthContext();
   const client = useMemo(
     () => buildApolloClient(auth.accessToken),
     [auth.accessToken]
   );
 
-  if (!auth || !auth.signedIn || !auth.emailVerified || !activeAdvertiser) {
-    return <Redirect to="/a" />;
-  }
-
   return (
     <ApolloProvider client={client}>
       <Box height="100%">
         <Box display="flex">
-          <Sidebar canCreate={activeAdvertiser.selfServiceCreate} />
+          <Sidebar canCreate={auth.advertiser.selfServiceCreate} />
           <Box
             width="100%"
             height="100%"
@@ -72,37 +59,32 @@ function User({ advertisers, auth }: Props) {
           >
             <Switch>
               {/* /adsmanager */}
-              <Route path={`${match.path}/adsmanager/advanced/new/:draftId`}>
-                <NewCampaign auth={auth} advertiser={activeAdvertiser} />
+              <Route path={`/user/main/adsmanager/advanced/new/:draftId`}>
+                <NewCampaign />
               </Route>
 
-              <Route path={`${match.path}/adsmanager/advanced/:campaignId`}>
-                <EditCampaign advertiser={activeAdvertiser} auth={auth} />
+              <Route path={`/user/main/adsmanager/advanced/:campaignId`}>
+                <EditCampaign />
               </Route>
 
-              <Route path={`${match.path}/complete/:mode`}>
+              <Route path={`/user/main/complete/:mode`}>
                 <CompletionForm />
               </Route>
 
               {/* /settings */}
-              <Route path={`${match.path}/settings`}>
-                <Settings
-                  userId={auth.id}
-                  advertisers={advertisers}
-                  activeAdvertiser={activeAdvertiser}
-                  setActiveAdvertiser={setActiveAdvertiser}
-                />
+              <Route path={`/user/main/settings`}>
+                <Settings />
               </Route>
 
               {/* /campaigns/:campaignId/analytics - */}
               <Route
-                path={`${match.path}/campaign/:campaignId/analytics/overview`}
+                path={`/user/main/campaign/:campaignId/analytics/overview`}
               >
-                <AnalyticsOverview auth={auth} />
+                <AnalyticsOverview />
               </Route>
 
               {/* /campaigns */}
-              <RoutesWithProps advertiser={activeAdvertiser} auth={auth} />
+              <RoutesWithProps advertiser={auth.advertiser} />
             </Switch>
           </Box>
         </Box>
@@ -113,9 +95,7 @@ function User({ advertisers, auth }: Props) {
 
 const RoutesWithProps: React.FC<{
   advertiser: IAdvertiser;
-  auth: IAuthUser;
-}> = ({ advertiser, auth }) => {
-  const match = useRouteMatch();
+}> = ({ advertiser }) => {
   const [fromDateFilter, setFromDateFilter] = useState<Date | null>(
     moment().subtract(6, "month").startOf("day").toDate()
   );
@@ -134,7 +114,7 @@ const RoutesWithProps: React.FC<{
 
   return (
     <Switch>
-      <Route path={`${match.path}/campaigns`}>
+      <Route path={`/user/main/campaigns`}>
         <Stack>
           <CampaignAgeFilter
             fromDate={fromDateFilter}
@@ -148,14 +128,14 @@ const RoutesWithProps: React.FC<{
           />
         </Stack>
       </Route>
-      <Route path={`${match.path}/adsets`}>
+      <Route path={`/user/main/adsets`}>
         <AdSetList
           campaigns={data?.advertiserCampaigns?.campaigns ?? []}
           loading={loading}
           advertiser={advertiser}
         />
       </Route>
-      <Route path={`${match.path}/ads`}>
+      <Route path={`/user/main/ads`}>
         <AdList
           campaigns={data?.advertiserCampaigns?.campaigns ?? []}
           loading={loading}
@@ -164,14 +144,7 @@ const RoutesWithProps: React.FC<{
       </Route>
 
       {/* default */}
-      <Redirect to={`${match.path}/campaigns`} />
+      <Redirect to={`/user/main/campaigns`} />
     </Switch>
   );
 };
-
-const mapStateToProps = (state: any) => ({
-  advertisers: state.advertiserReducer.advertisers,
-  auth: state.authReducer,
-});
-
-export default connect(mapStateToProps)(User);

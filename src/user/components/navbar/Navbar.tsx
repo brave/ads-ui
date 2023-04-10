@@ -28,11 +28,10 @@ TopBarProgress.config({
 });
 
 interface Props {
-  dispatch: any;
   canCreate: boolean;
 }
 
-function Navbar({ dispatch, canCreate }: Props) {
+export function Navbar({ canCreate }: Props) {
   const history = useHistory();
 
   return (
@@ -60,15 +59,8 @@ function Navbar({ dispatch, canCreate }: Props) {
             New Campaign
           </Button>
         )}
-        <UserMenu
-          signOut={() => {
-            localStorage.removeItem("persist:root");
-            dispatch(SignOut());
-          }}
-        />
+        <UserMenu />
       </Toolbar>
     </AppBar>
   );
 }
-
-export default connect()(Navbar);

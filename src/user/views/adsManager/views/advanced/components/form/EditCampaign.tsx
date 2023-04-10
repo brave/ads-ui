@@ -15,18 +15,14 @@ import {
 import { refetchAdvertiserQuery } from "../../../../../../../graphql/advertiser.generated";
 import { useHistory, useParams } from "react-router-dom";
 import { BaseForm } from "./components/BaseForm";
-import { IAdvertiser, IAuthUser } from "../../../../../../../actions";
-
-interface Props {
-  advertiser: IAdvertiser;
-  auth: IAuthUser;
-}
+import { useAuthContext } from "../../../../../../../auth/context/auth.hook";
 
 interface Params {
   campaignId: string;
 }
 
-export function EditCampaign({ advertiser, auth }: Props) {
+export function EditCampaign() {
+  const auth = useAuthContext();
   const history = useHistory();
   const params = useParams<Params>();
 
@@ -37,7 +33,7 @@ export function EditCampaign({ advertiser, auth }: Props) {
   const [mutation] = useUpdateCampaignMutation({
     refetchQueries: [
       {
-        ...refetchAdvertiserQuery({ id: advertiser.id }),
+        ...refetchAdvertiserQuery({ id: auth.advertiser.id }),
       },
       {
         ...refetchLoadCampaignQuery({ id: params.campaignId }),
@@ -60,7 +56,7 @@ export function EditCampaign({ advertiser, auth }: Props) {
         initialValues={initialValues}
         onSubmit={(v: CampaignForm, { setSubmitting }) => {
           setSubmitting(true);
-          transformEditForm(v, params.campaignId, auth, advertiser.id)
+          transformEditForm(v, params.campaignId, auth)
             .then(async (u) => {
               return await mutation({ variables: { input: u } });
             })
@@ -70,7 +66,11 @@ export function EditCampaign({ advertiser, auth }: Props) {
         validationSchema={CampaignSchema}
       >
         {({ values }) => (
-          <BaseForm isEdit={true} values={values} advertiser={advertiser} />
+          <BaseForm
+            isEdit={true}
+            values={values}
+            advertiser={auth.advertiser}
+          />
         )}
       </Formik>
     </Container>
