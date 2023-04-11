@@ -13,7 +13,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useHistory } from "react-router-dom";
-import Navbar from "../navbar/Navbar";
+import { Navbar } from "../navbar/Navbar";
 
 const drawerWidth = 240;
 
