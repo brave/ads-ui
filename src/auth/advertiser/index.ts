@@ -7,6 +7,7 @@ type Advertiser = Pick<
   | "selfServiceEdit"
   | "id"
   | "name"
+  | "state"
 >;
 
 export const getAdvertisers = async (

@@ -24,7 +24,7 @@ export function App() {
   const history = useHistory();
   const isAuthenticated = useIsAuthenticated();
 
-  if (isAuthenticated === undefined) {
+  if (isAuthenticated == null) {
     return null;
   }
 
@@ -45,7 +45,7 @@ export function App() {
               <SignIn state={history.location.state} />
             </Route>
             <Route path="*" component={isAuthenticated ? User : Protected} />
-            <Redirect to="/auth/signin" />
+            <Redirect to="/user/main" />
           </Switch>
         </DraftContext.Provider>
       </ThemeProvider>

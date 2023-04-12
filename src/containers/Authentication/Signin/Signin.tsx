@@ -37,7 +37,7 @@ export function SignIn({ state }: Props) {
     if (state) {
       const s = state as { triedAuth: boolean };
 
-      // Catches when a person with the role of "user" tries to login.
+      // Catches when a person with no advertiser tries to login
       if (s.triedAuth) {
         setError("Unable to login to Brave Ads Dashboard");
       }
