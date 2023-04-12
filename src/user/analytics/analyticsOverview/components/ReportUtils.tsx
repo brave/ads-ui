@@ -4,7 +4,6 @@ import SaveIcon from "@mui/icons-material/Save";
 import React, { useState } from "react";
 import { downloadCSV } from "../lib/csv.library";
 import { DateRangePicker } from "../../../../components/Date/DateRangePicker";
-import { IAuthUser } from "../../../../actions";
 import { useAuthContext } from "../../../../auth/context/auth.hook";
 
 interface DownloaderProps {

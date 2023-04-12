@@ -1,5 +1,12 @@
 import React from "react";
-import { IAdvertiser } from "../../actions";
+
+export type IAdvertiser = {
+  id: string;
+  name: string;
+  selfServiceCreate: boolean;
+  selfServiceEdit: boolean;
+  selfServiceSetPrice: boolean;
+};
 
 export interface IJwtPayload {
   email?: string;

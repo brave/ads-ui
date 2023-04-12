@@ -16,13 +16,13 @@ import { Box, Stack } from "@mui/material";
 import { NewCampaign } from "./views/adsManager/views/advanced/components/form/NewCampaign";
 import { EditCampaign } from "./views/adsManager/views/advanced/components/form/EditCampaign";
 import { CompletionForm } from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
-import { IAdvertiser } from "../actions";
 import { useAdvertiserCampaignsQuery } from "../graphql/advertiser.generated";
 import { AdSetList } from "./adSet/AdSetList";
 import { AdList } from "./ads/AdList";
 import moment from "moment";
 import { CampaignAgeFilter } from "../components/Campaigns/CampaignAgeFilter";
 import { useAuthContext } from "../auth/context/auth.hook";
+import { IAdvertiser } from "../auth/context/auth.interface";
 
 const buildApolloClient = (accessToken: string) => {
   const httpLink = createHttpLink({

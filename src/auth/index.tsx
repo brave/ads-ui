@@ -3,11 +3,11 @@ import {
   IAuthState,
   IAuthProviderProps,
   IJwtPayload,
+  IAdvertiser,
 } from "auth/context/auth.interface";
 import { initialState, IAuthContext } from "auth/context/auth.state";
 import jwt_decode from "jwt-decode";
 import { isBefore } from "date-fns";
-import { IAdvertiser } from "../actions";
 import { getAdvertisers } from "./advertiser";
 import _ from "lodash";
 

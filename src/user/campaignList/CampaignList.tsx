@@ -19,8 +19,8 @@ import { useHistory } from "react-router-dom";
 import { Status } from "../../components/Campaigns/Status";
 import { CampaignFragment } from "../../graphql/campaign.generated";
 import { isAfterEndDate } from "../../util/isAfterEndDate";
-import { IAdvertiser } from "../../actions";
 import { CampaignFormat } from "../../graphql/types";
+import { IAdvertiser } from "../../auth/context/auth.interface";
 
 interface Props {
   campaigns: CampaignFragment[];

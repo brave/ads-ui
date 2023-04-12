@@ -2,12 +2,10 @@ import * as React from "react";
 
 import { Link, useHistory } from "react-router-dom";
 
-import { SignOut } from "../../../actions";
 import TopBarProgress from "react-topbar-progress-indicator";
 
 import { AppBar, Button, Toolbar } from "@mui/material";
 import { UserMenu } from "./components/UserMenu/UserMenu";
-import { connect } from "react-redux";
 import { DraftMenu } from "./components/DraftMenu/DraftMenu";
 import moment from "moment";
 import rewards from "../../../../Subdomains_Rewards_Ads_Default.png";

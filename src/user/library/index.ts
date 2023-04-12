@@ -1,10 +1,8 @@
 import {
-  AdSetForm,
   Billing,
   CampaignForm,
   Conversion,
   Creative,
-  initialAdSet,
   OS,
   Segment,
 } from "../views/adsManager/types";
@@ -14,7 +12,6 @@ import {
   CreateCampaignInput,
   CreateNotificationCreativeInput,
   GeocodeInput,
-  UpdateAdInput,
   UpdateAdSetInput,
   UpdateCampaignInput,
 } from "../../graphql/types";
@@ -26,7 +23,6 @@ import {
   UpdateAdDocument,
 } from "../../graphql/ad-set.generated";
 import { CreateNotificationCreativeDocument } from "../../graphql/creative.generated";
-import { IAuthUser } from "../../actions";
 import { IAuthState } from "../../auth/context/auth.interface";
 
 const TYPE_CODE_LOOKUP = {

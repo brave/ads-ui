@@ -8,11 +8,8 @@ import { Status } from "../../components/Campaigns/Status";
 import { CampaignFragment } from "../../graphql/campaign.generated";
 import _ from "lodash";
 import { isAfterEndDate } from "../../util/isAfterEndDate";
-import {
-  adOnOffState,
-  adSetOnOffState,
-} from "../../components/EnhancedTable/renderers";
-import { IAdvertiser } from "../../actions";
+import { adSetOnOffState } from "../../components/EnhancedTable/renderers";
+import { IAdvertiser } from "../../auth/context/auth.interface";
 
 interface Props {
   campaigns: CampaignFragment[];

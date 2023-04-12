@@ -8,10 +8,8 @@ import { useCreateCampaignMutation } from "../../../../../../../graphql/campaign
 import { refetchAdvertiserQuery } from "../../../../../../../graphql/advertiser.generated";
 import { useHistory, useParams } from "react-router-dom";
 import { BaseForm } from "./components/BaseForm";
-import { IAdvertiser, IAuthUser } from "../../../../../../../actions";
 import { PersistFormValues } from "../../../../../../../form/PersistFormValues";
 import { DraftContext } from "../../../../../../../state/context";
-import { IAuthState } from "../../../../../../../auth/context/auth.interface";
 import { useAuthContext } from "../../../../../../../auth/context/auth.hook";
 
 interface Params {

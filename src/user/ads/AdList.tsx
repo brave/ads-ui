@@ -9,7 +9,7 @@ import _ from "lodash";
 import { uiTextForCreativeTypeCode } from "../library";
 import { adOnOffState } from "../../components/EnhancedTable/renderers";
 import { isAfterEndDate } from "../../util/isAfterEndDate";
-import { IAdvertiser } from "../../actions";
+import { IAdvertiser } from "../../auth/context/auth.interface";
 
 interface Props {
   campaigns: CampaignFragment[];

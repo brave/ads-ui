@@ -1,19 +1,17 @@
 import React, { useState } from "react";
-import { Alert, AlertTitle, Box, Divider, LinearProgress } from "@mui/material";
+import { Alert, Box, Divider, LinearProgress } from "@mui/material";
 import moment from "moment/moment";
 import { CampaignFormat } from "../../graphql/types";
 import {
   AnalyticOverviewQuery,
   useAnalyticOverviewQuery,
 } from "../../graphql/analytics-overview.generated";
-import { IAuthUser } from "../../actions";
 import { useParams } from "react-router-dom";
 import ReportUtils from "./analyticsOverview/components/ReportUtils";
 import { EngagementsOverview } from "./analyticsOverview/reports/campaign/EngagementsOverview";
 import { DailyCampaignOverview } from "./analyticsOverview/reports/campaign/DailyCampaignOverview";
 import { CreativeOverview } from "./analyticsOverview/reports/creative/CreativeOverview";
 import { OsOverview } from "./analyticsOverview/reports/os/OsOverview";
-import { Text } from "../../components/Text/Text";
 
 interface Params {
   campaignId: string;
