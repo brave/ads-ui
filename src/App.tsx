@@ -29,28 +29,26 @@ export function App() {
   }
 
   return (
-    <>
-      <StyledEngineProvider injectFirst>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <DraftContext.Provider
-            value={{
-              drafts,
-              setDrafts: () => {
-                setDrafts(getAllDrafts());
-              },
-            }}
-          >
-            <Switch>
-              <Route path="/auth/signin">
-                <SignIn state={history.location.state} />
-              </Route>
-              <Route path="*" component={isAuthenticated ? User : Protected} />
-              <Redirect to="/auth/signin" />
-            </Switch>
-          </DraftContext.Provider>
-        </ThemeProvider>
-      </StyledEngineProvider>
-    </>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <DraftContext.Provider
+          value={{
+            drafts,
+            setDrafts: () => {
+              setDrafts(getAllDrafts());
+            },
+          }}
+        >
+          <Switch>
+            <Route path="/auth/signin">
+              <SignIn state={history.location.state} />
+            </Route>
+            <Route path="*" component={isAuthenticated ? User : Protected} />
+            <Redirect to="/auth/signin" />
+          </Switch>
+        </DraftContext.Provider>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 }

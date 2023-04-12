@@ -10,9 +10,9 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import BraveLogo from "assets/images/brave-logotype-full-color.png";
-import { useSignIn } from "auth/hooks/mutations/useSignIn";
+import BraveLogo from "../../../..//brave-logotype-full-color.png";
 import { useHistory } from "react-router-dom";
+import { useSignIn } from "../../../auth/hooks/mutations/useSignIn";
 
 interface Props {
   state?: unknown;
@@ -57,7 +57,15 @@ export function SignIn({ state }: Props) {
       }}
     >
       <Box height="520px" width="750px">
-        <Card>
+        <Card
+          sx={{
+            width: "100%",
+            height: "100%",
+            padding: "28px",
+            borderRadius: "6px",
+            boxShadow: "rgba(99, 105, 110, 0.18) 0px 1px 12px 0px",
+          }}
+        >
           <CardContent
             sx={{
               display: "flex",
@@ -101,7 +109,8 @@ export function SignIn({ state }: Props) {
             {error && <Alert severity="error">{error}</Alert>}
             <Button
               color="primary"
-              size="medium"
+              size="large"
+              variant="contained"
               sx={{ mt: 4 }}
               disabled={loading}
               onClick={() => {

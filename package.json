@@ -12,6 +12,8 @@
     "@mui/material": "5.11.16",
     "@mui/styles": "5.11.16",
     "@mui/x-date-pickers": "5.0.20",
+    "@fontsource/mulish": "4.5.14",
+    "@fontsource/poppins": "4.5.10",
     "axios": "1.2.2",
     "base64url": "3.0.1",
     "date-fns": "2.29.3",
