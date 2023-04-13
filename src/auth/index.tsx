@@ -17,6 +17,13 @@ export const IAuthProvider: React.FC<IAuthProviderProps> = ({
   const [state, setState] = useState<IAuthState>(initialState);
   const [loading, setLoading] = useState(false);
 
+  const getJwt = () => {
+    const cJwt = document.cookie
+      .split(";")
+      .find((c) => c.trim().includes("jwt="));
+    return cJwt ? cJwt.split("=")[1] : "";
+  };
+
   const setActiveAdvertiser = (advertiser?: IAdvertiser) => {
     if (advertiser) {
       window.localStorage.setItem(
@@ -43,7 +50,7 @@ export const IAuthProvider: React.FC<IAuthProviderProps> = ({
   };
 
   const onTokenExpire = () => {
-    localStorage.removeItem("accessToken");
+    document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;";
     localStorage.removeItem("user");
     window.location.reload();
   };
@@ -58,7 +65,7 @@ export const IAuthProvider: React.FC<IAuthProviderProps> = ({
     if (!!token) {
       parseToken(token);
     } else {
-      localStorage.removeItem("accessToken");
+      document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;";
       localStorage.removeItem("user");
     }
   };
@@ -70,7 +77,6 @@ export const IAuthProvider: React.FC<IAuthProviderProps> = ({
       const now = new Date();
       if (!isBefore(new Date(expInMillis), now)) {
         const user = { emailVerified, email, role, userId: id };
-        localStorage.setItem("accessToken", tk);
         localStorage.setItem("user", JSON.stringify(user));
         advertiser(id ?? "", tk).finally(() => {
           setState((cur) => ({
@@ -106,7 +112,8 @@ export const IAuthProvider: React.FC<IAuthProviderProps> = ({
             advertiser: activeAdvertiser,
           }));
         } else {
-          localStorage.removeItem("accessToken");
+          document.cookie =
+            "jwt=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;";
           localStorage.removeItem("user");
         }
 
@@ -123,7 +130,7 @@ export const IAuthProvider: React.FC<IAuthProviderProps> = ({
 
   useEffect(() => {
     // For each time a user refreshes (or lands on login for first time), check if their token is still valid
-    const sessionToken = localStorage.getItem("accessToken");
+    const sessionToken = getJwt();
     const storageUser = localStorage.getItem("user");
 
     if (sessionToken) {
