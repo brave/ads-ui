@@ -6,6 +6,7 @@ import {
   CircularProgress,
   AlertTitle,
   Tooltip,
+  LinearProgress,
 } from "@mui/material";
 import React, { useMemo, useEffect } from "react";
 import _ from "lodash";
@@ -41,6 +42,7 @@ export const UrlResolver: React.FC<Props> = ({
       _.debounce(
         (value: string) =>
           value &&
+          !hasError &&
           SimpleUrlRegexp.test(value) &&
           validateUrl({
             variables: {
@@ -56,7 +58,7 @@ export const UrlResolver: React.FC<Props> = ({
   const { setValue, setError } = isValidHelper;
 
   useEffect(() => {
-    if (!disabled && nameMeta.value) {
+    if (!disabled) {
       debouncedValidateUrl.cancel();
       debouncedValidateUrl(nameMeta.value);
 
@@ -88,20 +90,23 @@ export const UrlResolver: React.FC<Props> = ({
           endAdornment: (
             <InputAdornment position="end">
               {loading && <CircularProgress />}
-              {data && data.validateTargetUrl.isValid && (
-                <Tooltip title="URL is valid">
-                  <CheckCircleOutlineIcon sx={{ color: "#2e7d32" }} />
-                </Tooltip>
-              )}
             </InputAdornment>
           ),
         }}
         {...nameField}
       />
+      {loading && (
+        <Alert
+          icon={<CircularProgress size={20} color="secondary" />}
+          severity="info"
+        >
+          Validating URL...
+        </Alert>
+      )}
 
       {!!data && (
         <Box mt={2}>
-          {!data.validateTargetUrl.isValid && (
+          {!data.validateTargetUrl.isValid ? (
             <>
               {data.validateTargetUrl.errors.map((e) => (
                 <Alert severity="error" sx={{ mb: 1 }}>
@@ -110,6 +115,10 @@ export const UrlResolver: React.FC<Props> = ({
                 </Alert>
               ))}
             </>
+          ) : (
+            <Alert severity="success" sx={{ mb: 1 }}>
+              URL is valid.
+            </Alert>
           )}
         </Box>
       )}
