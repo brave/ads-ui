@@ -35,14 +35,13 @@ export const UrlResolver: React.FC<Props> = ({
   const [, isValidMeta, isValidHelper] = useField(validator);
   const hasError = Boolean(nameMeta.error);
   const showError = hasError && nameMeta.touched;
-  const [validateUrl, { loading, data, error }] =
-    useValidateTargetUrlLazyQuery();
+  const [validateUrl, { loading, data }] = useValidateTargetUrlLazyQuery();
   const debouncedValidateUrl = useMemo(
     () =>
       _.debounce(
-        (value: string) =>
+        (value: string, err?: string) =>
           value &&
-          !hasError &&
+          err == null &&
           SimpleUrlRegexp.test(value) &&
           validateUrl({
             variables: {
@@ -60,7 +59,7 @@ export const UrlResolver: React.FC<Props> = ({
   useEffect(() => {
     if (!disabled) {
       debouncedValidateUrl.cancel();
-      debouncedValidateUrl(nameMeta.value);
+      debouncedValidateUrl(nameMeta.value, nameMeta.error);
 
       if (value !== !!data?.validateTargetUrl?.isValid) {
         setValue(!loading && !!data?.validateTargetUrl?.isValid, false);
@@ -69,7 +68,7 @@ export const UrlResolver: React.FC<Props> = ({
       const errors = data?.validateTargetUrl.errors ?? [];
       const currError = errors.join("#");
       if (errors.length > 0 && currError !== fieldError) {
-        setError(errors.join("#"));
+        setError(currError);
       }
     }
   });
