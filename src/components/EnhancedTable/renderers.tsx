@@ -1,4 +1,4 @@
-import { Box, Tooltip } from "@mui/material";
+import { Box, IconButton, Link, Stack, Tooltip } from "@mui/material";
 import _ from "lodash";
 import { format, formatDistanceToNow, parseISO } from "date-fns";
 import { CellValue } from "./EnhancedTable";
@@ -19,7 +19,9 @@ import {
 import { OnOff } from "../Switch/OnOff";
 import { CreativeFragment } from "../../graphql/creative.generated";
 import { IAdvertiser } from "../../actions";
-import { CampaignSource } from "../../graphql/types";
+import { CampaignFormat, CampaignSource } from "../../graphql/types";
+import EditIcon from "@mui/icons-material/Edit";
+import { useHistory } from "react-router-dom";
 
 export type CellValueRenderer = (value: CellValue) => React.ReactNode;
 const ADS_DEFAULT_TIMEZONE = "America/New_York";
@@ -92,6 +94,45 @@ export function renderMonetaryAmount(
   } else {
     return <span>{value.toLocaleString("en")}&nbsp;BAT</span>;
   }
+}
+
+export function campaignName(c: CampaignFragment, canEdit: boolean) {
+  const history = useHistory();
+
+  return (
+    <Stack
+      display="flex"
+      justifyContent="space-between"
+      alignItems="center"
+      direction="row"
+    >
+      <Link
+        href={
+          c.state === "active" ||
+          c.state === "daycomplete" ||
+          c.state === "completed"
+            ? `/user/main/campaign/${c.id}/analytics/overview`
+            : undefined
+        }
+        underline="none"
+      >
+        {c.name}
+      </Link>
+      {canEdit &&
+        c.format === CampaignFormat.PushNotification &&
+        c.state !== "completed" && (
+          <Tooltip title={`Edit ${c.name}`}>
+            <IconButton
+              onClick={() =>
+                history.push(`/user/main/adsmanager/advanced/${c.id}`)
+              }
+            >
+              <EditIcon />
+            </IconButton>
+          </Tooltip>
+        )}
+    </Stack>
+  );
 }
 
 export function campaignOnOffState(

@@ -1,15 +1,7 @@
 import * as React from "react";
 
 import { useHistory } from "react-router-dom";
-import {
-  Badge,
-  Button,
-  Divider,
-  IconButton,
-  Menu,
-  MenuItem,
-  Tooltip,
-} from "@mui/material";
+import { Badge, IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
 import { useContext, useState } from "react";
 import DraftsIcon from "@mui/icons-material/Drafts";
 import { DraftContext } from "../../../../../state/context";
