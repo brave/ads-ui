@@ -1,20 +1,35 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useAuthContext } from "auth/context/auth.hook";
+import { clearCredentials } from "../../util";
 
 interface Options {
   onSuccess?: () => void;
+  onError?: (msg: string) => void;
 }
 
-export function useSignOut({ onSuccess }: Options = {}) {
+export function useSignOut({ onSuccess, onError }: Options = {}) {
   const { setAccessToken } = useAuthContext();
-  const signOut = useCallback(() => {
-    document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;";
-    setAccessToken(undefined);
+  const [loading, setLoading] = useState(false);
 
-    if (onSuccess) {
-      onSuccess();
-    }
+  const signOut = useCallback(() => {
+    setLoading(true);
+    clearCredentials()
+      .then(() => {
+        setAccessToken(undefined);
+
+        if (onSuccess) {
+          onSuccess();
+        }
+      })
+      .catch((e: Error) => {
+        if (onError) {
+          onError(e.message);
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
-  return { signOut };
+  return { signOut, loading };
 }

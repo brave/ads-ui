@@ -1,19 +1,29 @@
 import * as React from "react";
 
 import { useHistory } from "react-router-dom";
-import { Button, Menu, MenuItem } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  Menu,
+  MenuItem,
+  Snackbar,
+} from "@mui/material";
 import { useState } from "react";
 import { useSignOut } from "../../../../../auth/hooks/mutations/useSignOut";
 
 export function UserMenu() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const [snackbar, setSnackbar] = useState({ open: false, msg: "" });
   const history = useHistory();
 
-  const { signOut } = useSignOut({
+  const { signOut, loading } = useSignOut({
     onSuccess() {
       history.push("/auth/signin");
       setAnchorEl(null);
+    },
+    onError(msg) {
+      setSnackbar({ open: true, msg });
     },
   });
 
@@ -27,25 +37,37 @@ export function UserMenu() {
         Account
       </Button>
       <Menu open={open} anchorEl={anchorEl} onClose={() => setAnchorEl(null)}>
-        <MenuItem
-          onClick={() => {
-            history.push("/user/main/settings");
-            setAnchorEl(null);
-          }}
-          sx={{ pl: 20, pr: 20, pt: 3, pb: 3 }}
-        >
-          Settings
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            signOut();
-            setAnchorEl(null);
-          }}
-          sx={{ pl: 20, pr: 20, pt: 3, pb: 3 }}
-        >
-          Sign Out
-        </MenuItem>
+        {loading ? (
+          <CircularProgress />
+        ) : (
+          <>
+            <MenuItem
+              onClick={() => {
+                history.push("/user/main/settings");
+                setAnchorEl(null);
+              }}
+              sx={{ pl: 20, pr: 20, pt: 3, pb: 3 }}
+            >
+              Settings
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                signOut();
+                setAnchorEl(null);
+              }}
+              sx={{ pl: 20, pr: 20, pt: 3, pb: 3 }}
+            >
+              Sign Out
+            </MenuItem>
+          </>
+        )}
       </Menu>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        open={snackbar.open}
+        onClose={() => setSnackbar({ open: false, msg: "" })}
+        message={snackbar.msg}
+      />
     </>
   );
 }
