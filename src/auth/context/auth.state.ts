@@ -4,8 +4,7 @@ import { createContext } from "react";
 export const initialState: IAuthState = {
   isInitialized: false,
   isAuthenticated: false,
-  accessToken: "",
-  setAccessToken: () => {},
+  setSessionUser: () => {},
   setActiveAdvertiser: () => {},
   advertiser: {
     selfServiceSetPrice: false,

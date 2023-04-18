@@ -1,25 +1,23 @@
-export const getCredentials = async (
-  method: "GET" | "POST",
-  user?: { email: string; password: string }
-): Promise<{ accessToken?: string }> => {
-  const res = await fetch(
-    `${import.meta.env.REACT_APP_SERVER_ADDRESS}/auth/token`,
-    {
-      method,
-      mode: "cors",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body:
-        method === "POST" && user
-          ? JSON.stringify({
-              email: user.email,
-              password: user.password,
-            })
-          : undefined,
-    }
-  );
+import { UserFragment } from "../../graphql/user.generated";
+
+const url = import.meta.env.REACT_APP_SERVER_ADDRESS.replace("v1", "v2");
+
+export const getCredentials = async (user: {
+  email: string;
+  password: string;
+}): Promise<UserFragment> => {
+  const res = await fetch(`${url}/auth/token`, {
+    method: "POST",
+    mode: "cors",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: user.email,
+      password: user.password,
+    }),
+  });
 
   if (res.status === 400) {
     throw new Error(
@@ -36,18 +34,32 @@ export const getCredentials = async (
   return await res.json();
 };
 
+export const getUser = async (): Promise<UserFragment> => {
+  const res = await fetch(`${url}/auth/user`, {
+    method: "GET",
+    mode: "cors",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("Invalid Session");
+  }
+
+  return await res.json();
+};
+
 export const clearCredentials = async (): Promise<void> => {
-  const res = await fetch(
-    `${import.meta.env.REACT_APP_SERVER_ADDRESS}/auth/logout`,
-    {
-      method: "GET",
-      mode: "cors",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const res = await fetch(`${url}/auth/logout`, {
+    method: "GET",
+    mode: "cors",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
   if (!res.ok) {
     throw new Error("Could not logout at this time. Please try again later.");

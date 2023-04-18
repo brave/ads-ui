@@ -1,4 +1,5 @@
 import React from "react";
+import { UserFragment } from "../../graphql/user.generated";
 
 export type IAdvertiser = {
   id: string;
@@ -8,22 +9,11 @@ export type IAdvertiser = {
   selfServiceSetPrice: boolean;
 };
 
-export interface IJwtPayload {
-  email?: string;
-  emailVerified?: boolean;
-  expiresIn?: number;
-  id?: string;
-  role?: string;
-  iat?: number;
-  exp?: number;
-}
-
 export interface IAuthState {
   isInitialized: boolean;
   isAuthenticated: boolean;
-  accessToken: string;
-  setAccessToken: (token?: string) => void;
   setActiveAdvertiser: (a?: IAdvertiser) => void;
+  setSessionUser: (u?: UserFragment) => void;
   email?: string;
   role?: string;
   userId?: string;

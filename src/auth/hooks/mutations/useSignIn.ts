@@ -8,14 +8,14 @@ interface Options {
 }
 
 export function useSignIn({ onError, onSuccess }: Options = {}) {
-  const { setAccessToken } = useAuthContext();
+  const { setSessionUser } = useAuthContext();
   const [loading, setLoading] = useState(false);
   const signIn = useCallback((email: string, password: string) => {
     setLoading(true);
-    getCredentials("POST", { email, password })
+    getCredentials({ email, password })
       .then((data) => {
-        if (data && data.accessToken) {
-          setAccessToken(data.accessToken);
+        if (data) {
+          setSessionUser(data);
 
           if (onSuccess) {
             onSuccess();

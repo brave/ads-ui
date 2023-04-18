@@ -8,14 +8,14 @@ interface Options {
 }
 
 export function useSignOut({ onSuccess, onError }: Options = {}) {
-  const { setAccessToken } = useAuthContext();
   const [loading, setLoading] = useState(false);
+  const { setSessionUser } = useAuthContext();
 
   const signOut = useCallback(() => {
     setLoading(true);
     clearCredentials()
       .then(() => {
-        setAccessToken(undefined);
+        setSessionUser(undefined);
 
         if (onSuccess) {
           onSuccess();

@@ -19,7 +19,7 @@ export function UserMenu() {
 
   const { signOut, loading } = useSignOut({
     onSuccess() {
-      history.push("/auth/signin");
+      history.push("/", undefined);
       setAnchorEl(null);
     },
     onError(msg) {

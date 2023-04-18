@@ -2,15 +2,13 @@ import React, { useEffect, useState } from "react";
 import {
   IAuthState,
   IAuthProviderProps,
-  IJwtPayload,
   IAdvertiser,
 } from "auth/context/auth.interface";
 import { initialState, IAuthContext } from "auth/context/auth.state";
-import jwt_decode from "jwt-decode";
-import { isBefore } from "date-fns";
 import { getAdvertisers } from "./advertiser";
 import _ from "lodash";
-import { getCredentials } from "./util";
+import { clearCredentials, getUser } from "./util";
+import { UserFragment } from "../graphql/user.generated";
 
 export const IAuthProvider: React.FC<IAuthProviderProps> = ({
   children,
@@ -32,6 +30,28 @@ export const IAuthProvider: React.FC<IAuthProviderProps> = ({
     }
   };
 
+  const setSessionUser = (u?: UserFragment) => {
+    if (u) {
+      setLoading(true);
+      setState((cur) => ({
+        ...cur,
+        email: u.email,
+        emailVerified: u.emailVerified,
+        role: u.role,
+        userId: u.id,
+      }));
+
+      advertiser(u.id).finally(() => {
+        setLoading(false);
+      });
+    } else {
+      setState((cur) => ({
+        ...cur,
+        isAuthenticated: false,
+      }));
+    }
+  };
+
   const getActiveAdvertiser = (): IAdvertiser | null => {
     const adv = window.localStorage.getItem("activeAdvertiser");
 
@@ -43,76 +63,41 @@ export const IAuthProvider: React.FC<IAuthProviderProps> = ({
     return null;
   };
 
-  const onTokenExpire = () => {
-    localStorage.removeItem("user");
-    window.location.reload();
-  };
+  const advertiser = (userId: string) => {
+    return getAdvertisers(userId)
+      .then((a) => {
+        const storageAdvertiser = getActiveAdvertiser();
+        let isInGroup = false;
+        if (storageAdvertiser != null) {
+          isInGroup = _.some(a, { id: storageAdvertiser.id });
+        }
 
-  const setAccessToken = (token?: string) => {
-    setState((cur) => ({
-      ...cur,
-      isAuthenticated: !!token,
-      accessToken: token ?? "",
-    }));
+        const activeAdvertiser = isInGroup
+          ? storageAdvertiser
+          : a.find((adv) => adv.state === "active");
 
-    if (!!token) {
-      parseToken(token);
-    } else {
-      localStorage.removeItem("user");
-    }
-  };
-
-  const parseToken = (tk: string) => {
-    const { exp, emailVerified, email, role, id } = jwt_decode<IJwtPayload>(tk);
-    if (exp) {
-      const expInMillis = exp * 1000;
-      const now = new Date();
-      if (!isBefore(new Date(expInMillis), now)) {
-        const user = { emailVerified, email, role, userId: id };
-        localStorage.setItem("user", JSON.stringify(user));
-        setLoading(true);
-        advertiser(id ?? "", tk).finally(() => {
-          setLoading(false);
+        const hasAdvertiser = activeAdvertiser != null;
+        if (hasAdvertiser) {
+          setActiveAdvertiser(activeAdvertiser);
           setState((cur) => ({
             ...cur,
-            ...user,
+            advertiser: activeAdvertiser,
           }));
-        });
-      } else {
-        onTokenExpire();
-      }
-    }
-  };
+        } else {
+          void clearCredentials();
+        }
 
-  const advertiser = (userId: string, token: string | null) => {
-    return getAdvertisers(userId, token ?? "").then((a) => {
-      const storageAdvertiser = getActiveAdvertiser();
-      let isInGroup = false;
-      if (storageAdvertiser != null) {
-        isInGroup = _.some(a, { id: storageAdvertiser.id });
-      }
-
-      const activeAdvertiser = isInGroup
-        ? storageAdvertiser
-        : a.find((adv) => adv.state === "active");
-
-      const hasAdvertiser = activeAdvertiser != null;
-      if (hasAdvertiser) {
-        setActiveAdvertiser(activeAdvertiser);
         setState((cur) => ({
           ...cur,
-          advertiser: activeAdvertiser,
+          isAuthenticated: hasAdvertiser,
         }));
-      } else {
-        localStorage.removeItem("user");
-      }
-
-      setState((cur) => ({
-        ...cur,
-        accessToken: hasAdvertiser ? token ?? "" : "",
-        isAuthenticated: hasAdvertiser && token != null,
-      }));
-    });
+      })
+      .catch(() => {
+        setState((cur) => ({
+          ...cur,
+          isAuthenticated: false,
+        }));
+      });
   };
 
   useEffect(() => {
@@ -120,26 +105,31 @@ export const IAuthProvider: React.FC<IAuthProviderProps> = ({
     const storageUser = localStorage.getItem("user");
     const userId = storageUser ? JSON.parse(storageUser).userId : "";
     setLoading(true);
-    getCredentials("GET")
+    getUser()
       .then(async (res) => {
-        const sessionToken = res.accessToken;
+        setState((cur) => ({
+          ...cur,
+          email: res.email,
+          emailVerified: res.emailVerified,
+          role: res.role,
+          userId: res.id,
+        }));
 
-        if (!sessionToken) {
-          return;
-        }
-
-        parseToken(sessionToken);
-        return await advertiser(userId, sessionToken).catch((e) => {
-          console.error(`unable to login ${e}`);
-        });
+        return await advertiser(userId);
+      })
+      .catch(() => {
+        setState((cur) => ({
+          ...cur,
+          isAuthenticated: false,
+        }));
       })
       .finally(() => {
         setLoading(false);
         setState((cur) => ({
           ...cur,
-          setAccessToken: setAccessToken,
           isInitialized: true,
-          setActiveAdvertiser: setActiveAdvertiser,
+          setSessionUser,
+          setActiveAdvertiser,
         }));
       });
   }, []);

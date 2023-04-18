@@ -10,10 +10,7 @@ type Advertiser = Pick<
   | "state"
 >;
 
-export const getAdvertisers = async (
-  id: string,
-  accessToken: string
-): Promise<Advertiser[]> => {
+export const getAdvertisers = async (id: string): Promise<Advertiser[]> => {
   const res = await fetch(
     `${import.meta.env.REACT_APP_SERVER_ADDRESS}/advertiser`,
     {
@@ -22,7 +19,6 @@ export const getAdvertisers = async (
       credentials: "same-origin",
       headers: {
         "-x-user": id,
-        Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
     }

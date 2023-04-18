@@ -53,7 +53,6 @@ export default function ReportUtils({
             downloadCSV(
               campaign.id,
               campaign.name,
-              auth.accessToken,
               auth.userId ?? "",
               false,
               setDownloadingCSV

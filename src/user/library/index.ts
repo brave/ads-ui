@@ -114,7 +114,7 @@ async function transformCreative(
       code: "notification_all_v1",
     },
   };
-  const withId = await createNotification(auth.accessToken, notification);
+  const withId = await createNotification(notification);
   return {
     state: "under_review",
     webhooks: [],
@@ -128,11 +128,7 @@ async function transformCreative(
   };
 }
 
-async function graphqlRequest<T>(
-  accessToken: string,
-  node: DocumentNode,
-  input: T
-) {
+async function graphqlRequest<T>(node: DocumentNode, input: T) {
   const response = await axios.post(
     `${import.meta.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql"),
     JSON.stringify({
@@ -141,7 +137,6 @@ async function graphqlRequest<T>(
     }),
     {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
     }
@@ -152,20 +147,18 @@ async function graphqlRequest<T>(
 
 // TODO: Get rid of this ASAP. Currently necessary because when creating a campaign, you need existing creativeId.
 async function createNotification(
-  accessToken: string,
   createInput: CreateNotificationCreativeInput
 ) {
   const response = await graphqlRequest<{
     input: CreateNotificationCreativeInput;
-  }>(accessToken, CreateNotificationCreativeDocument, { input: createInput });
+  }>(CreateNotificationCreativeDocument, { input: createInput });
 
   return response.data.createNotificationCreative.id;
 }
 
 // TODO: Get rid of this ASAP. Currently necessary because when updating a campaign, it does not take into account any new ads.
-async function createAd(accessToken: string, createInput: CreateAdInput) {
+async function createAd(createInput: CreateAdInput) {
   const response = await graphqlRequest<{ createAdInput: CreateAdInput }>(
-    accessToken,
     CreateAdDocument,
     { createAdInput: createInput }
   );
@@ -231,7 +224,7 @@ export async function transformEditForm(
     for (const ad of creatives) {
       if (ad.id == null) {
         const withId = await transformCreative(ad, form, auth);
-        await createAd(auth.accessToken, {
+        await createAd({
           ...withId,
           creativeSetId: adSet.id,
         });

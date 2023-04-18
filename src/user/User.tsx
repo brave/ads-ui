@@ -24,12 +24,9 @@ import { CampaignAgeFilter } from "../components/Campaigns/CampaignAgeFilter";
 import { useAuthContext } from "../auth/context/auth.hook";
 import { IAdvertiser } from "../auth/context/auth.interface";
 
-const buildApolloClient = (accessToken: string) => {
+const buildApolloClient = () => {
   const httpLink = createHttpLink({
     uri: `${import.meta.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql"),
-    headers: {
-      authorization: `Bearer ${accessToken}`,
-    },
   });
 
   return new ApolloClient({
@@ -40,10 +37,7 @@ const buildApolloClient = (accessToken: string) => {
 
 export function User() {
   const auth = useAuthContext();
-  const client = useMemo(
-    () => buildApolloClient(auth.accessToken),
-    [auth.accessToken]
-  );
+  const client = useMemo(() => buildApolloClient(), []);
 
   return (
     <ApolloProvider client={client}>
