@@ -21,25 +21,24 @@ import { CampaignFragment } from "../../graphql/campaign.generated";
 import { isAfterEndDate } from "../../util/isAfterEndDate";
 import { CampaignFormat } from "../../graphql/types";
 import { IAdvertiser } from "../../auth/context/auth.interface";
+import { useAdvertiser } from "../../auth/hooks/queries/useAdvertiser";
+import { AdvertiserCampaignsFragment } from "../../graphql/advertiser.generated";
 
 interface Props {
-  campaigns: CampaignFragment[];
-  advertiser: IAdvertiser;
+  advertiserCampaigns?: AdvertiserCampaignsFragment | null;
   loading: boolean;
   fromDate: Date | null;
 }
 
 export function CampaignList({
-  campaigns,
-  advertiser,
+  advertiserCampaigns,
   loading,
   fromDate,
 }: Props) {
   const history = useHistory();
+  const campaigns = advertiserCampaigns?.campaigns ?? [];
 
   if (loading) return <LinearProgress />;
-
-  const canEdit = advertiser.selfServiceEdit;
 
   return (
     <EnhancedTable
@@ -51,7 +50,11 @@ export function CampaignList({
           title: "On/Off",
           value: (c) => c.state,
           extendedRenderer: (r) =>
-            campaignOnOffState({ ...r, fromDate }, advertiser),
+            campaignOnOffState({
+              ...r,
+              fromDate,
+              advertiserId: advertiserCampaigns?.id ?? "",
+            }),
           sx: { width: "10px" },
           sortable: false,
         },
@@ -75,7 +78,7 @@ export function CampaignList({
               >
                 {r.name}
               </Link>
-              {canEdit &&
+              {advertiserCampaigns?.selfServiceEdit &&
                 r.format === CampaignFormat.PushNotification &&
                 r.state !== "completed" && (
                   <Tooltip title={`Edit ${r.name}`}>

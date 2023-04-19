@@ -13,6 +13,7 @@ export type AdvertiserSummaryFragment = {
   additionalBillingEmails?: Array<string> | null;
   createdAt: any;
   modifiedAt: any;
+  publicKey?: string | null;
 };
 
 export type AdvertiserFragment = {
@@ -29,6 +30,7 @@ export type AdvertiserFragment = {
   additionalBillingEmails?: Array<string> | null;
   createdAt: any;
   modifiedAt: any;
+  publicKey?: string | null;
   mailingAddress: {
     __typename?: "Address";
     street1: string;
@@ -58,6 +60,7 @@ export type AdvertisersQuery = {
     additionalBillingEmails?: Array<string> | null;
     createdAt: any;
     modifiedAt: any;
+    publicKey?: string | null;
     mailingAddress: {
       __typename?: "Address";
       street1: string;
@@ -96,6 +99,83 @@ export type UpdateAdvertiserMutation = {
   };
 };
 
+export type AdvertiserCampaignsFragment = {
+  __typename?: "Advertiser";
+  id: string;
+  name: string;
+  selfServiceEdit: boolean;
+  selfServiceCreate: boolean;
+  selfServiceSetPrice: boolean;
+  campaigns: Array<{
+    __typename?: "Campaign";
+    id: string;
+    name: string;
+    state: string;
+    dailyCap: number;
+    priority: number;
+    passThroughRate: number;
+    pacingOverride: boolean;
+    pacingStrategy: Types.CampaignPacingStrategies;
+    externalId: string;
+    currency: string;
+    budget: number;
+    dailyBudget: number;
+    spent: number;
+    createdAt: any;
+    startAt: any;
+    endAt: any;
+    source: Types.CampaignSource;
+    type: string;
+    format: Types.CampaignFormat;
+    dayProportion?: number | null;
+    adSets: Array<{
+      __typename?: "AdSet";
+      id: string;
+      createdAt: any;
+      billingType?: string | null;
+      name?: string | null;
+      totalMax: number;
+      perDay: number;
+      state: string;
+      execution: string;
+      segments?: Array<{
+        __typename?: "Segment";
+        code: string;
+        name: string;
+      }> | null;
+      oses?: Array<{ __typename?: "OS"; code: string; name: string }> | null;
+      conversions?: Array<{
+        __typename?: "Conversion";
+        id: string;
+        type: string;
+        urlPattern: string;
+        observationWindow: number;
+      }> | null;
+      ads?: Array<{
+        __typename?: "Ad";
+        id: string;
+        state: string;
+        prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
+        creative: {
+          __typename?: "Creative";
+          id: string;
+          createdAt: any;
+          modifiedAt: any;
+          name: string;
+          state: string;
+          type: { __typename?: "CreativeType"; code: string };
+          payloadNotification?: {
+            __typename?: "NotificationPayload";
+            body: string;
+            title: string;
+            targetUrl: string;
+          } | null;
+        };
+      }> | null;
+    }>;
+  }>;
+};
+
 export type AdvertiserCampaignsQueryVariables = Types.Exact<{
   id: Types.Scalars["String"];
   filter?: Types.InputMaybe<Types.AdvertiserCampaignFilter>;
@@ -105,6 +185,11 @@ export type AdvertiserCampaignsQuery = {
   __typename?: "Query";
   advertiserCampaigns?: {
     __typename?: "Advertiser";
+    id: string;
+    name: string;
+    selfServiceEdit: boolean;
+    selfServiceCreate: boolean;
+    selfServiceSetPrice: boolean;
     campaigns: Array<{
       __typename?: "Campaign";
       id: string;
@@ -189,6 +274,7 @@ export const AdvertiserSummaryFragmentDoc = gql`
     additionalBillingEmails
     createdAt
     modifiedAt
+    publicKey
   }
 `;
 export const AdvertiserFragmentDoc = gql`
@@ -209,6 +295,19 @@ export const AdvertiserFragmentDoc = gql`
     }
   }
   ${AdvertiserSummaryFragmentDoc}
+`;
+export const AdvertiserCampaignsFragmentDoc = gql`
+  fragment AdvertiserCampaigns on Advertiser {
+    id
+    name
+    selfServiceEdit
+    selfServiceCreate
+    selfServiceSetPrice
+    campaigns {
+      ...CampaignSummary
+    }
+  }
+  ${CampaignSummaryFragmentDoc}
 `;
 export const AdvertisersDocument = gql`
   query advertisers {
@@ -383,12 +482,10 @@ export type UpdateAdvertiserMutationOptions = Apollo.BaseMutationOptions<
 export const AdvertiserCampaignsDocument = gql`
   query advertiserCampaigns($id: String!, $filter: AdvertiserCampaignFilter) {
     advertiserCampaigns(id: $id, filter: $filter) {
-      campaigns {
-        ...CampaignSummary
-      }
+      ...AdvertiserCampaigns
     }
   }
-  ${CampaignSummaryFragmentDoc}
+  ${AdvertiserCampaignsFragmentDoc}
 `;
 
 /**

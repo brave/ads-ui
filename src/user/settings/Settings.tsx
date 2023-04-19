@@ -8,7 +8,6 @@ import {
 import _ from "lodash";
 import * as tweetnacl from "tweetnacl";
 import {
-  useAdvertiserQuery,
   useAdvertisersQuery,
   useUpdateAdvertiserMutation,
 } from "../../graphql/advertiser.generated";
@@ -22,6 +21,8 @@ import {
   Select,
 } from "@mui/material";
 import { useAuthContext } from "../../auth/context/auth.hook";
+import { useAdvertiser } from "../../auth/hooks/queries/useAdvertiser";
+import { setActiveAdvertiser } from "../../auth/util";
 
 const modalStyles = {
   position: "absolute" as "absolute",
@@ -39,30 +40,28 @@ const modalStyles = {
 };
 
 const Settings = () => {
+  const { advertiser: activeAdvertiser, advertisers } = useAdvertiser();
   const [loading, setLoading] = useState(false);
-  const [publicKey, setPublicKey] = useState("");
+  const [publicKey, setPublicKey] = useState(activeAdvertiser.publicKey);
+  const [advertiserId, setAdvertiserId] = useState(activeAdvertiser.id);
   const [newPublicKey, setNewPublicKey] = useState("");
   const [newPrivateKey, setNewPrivateKey] = useState("");
   const [privateKey, setPrivateKey] = useState("");
   const [showNewKeypairModal, setShowNewKeypairModal] = useState(false);
   const [newKeypairModalState, setNewKeypairModalState] =
     useState("disclaimer");
-  const auth = useAuthContext();
-  const { data, loading: advertiserLoading } = useAdvertisersQuery();
+  // const { data, loading: advertiserLoading } = useAdvertisersQuery();
 
   const saveKeypair = () => {
     setLoading(true);
     updateAdvertiser({
       variables: {
         updateAdvertiserInput: {
-          id: auth.advertiser.id,
+          id: advertiserId,
           publicKey: newPublicKey,
         },
       },
     });
-
-    // function to revert b64 encoded string to UInt8 if needed
-    // let b64decoded = Uint8Array.from(atob(b64encoded), c => c.charCodeAt(0))
   };
 
   const handleUpdateAdvertiser = () => {
@@ -71,10 +70,6 @@ const Settings = () => {
     setPrivateKey("");
     setNewPrivateKey("");
     closeNewKeypairModal();
-  };
-
-  const initializeAdvertiser = (data) => {
-    setPublicKey(data.advertiser.publicKey);
   };
 
   const openNewKeypairModal = () => {
@@ -98,25 +93,18 @@ const Settings = () => {
   const [updateAdvertiser] = useUpdateAdvertiserMutation({
     variables: {
       updateAdvertiserInput: {
-        id: auth.advertiser.id,
+        id: advertiserId,
         publicKey: publicKey,
       },
     },
     onCompleted: handleUpdateAdvertiser,
   });
 
-  const { loading: queryLoading } = useAdvertiserQuery({
-    variables: { id: auth.advertiser.id },
-    onCompleted: initializeAdvertiser,
-  });
-
-  if (queryLoading || advertiserLoading || !data || !data.userAdvertisers) {
-    return <LinearProgress />;
-  }
-
   const setActiveAdvertiserWithId = (e) => {
-    const adv = _.find(data.userAdvertisers, { id: e.target.value });
-    auth.setActiveAdvertiser(adv);
+    const id = e.target.value;
+    setAdvertiserId(id);
+    const adv = _.find(advertisers, { id });
+    setActiveAdvertiser(adv?.id);
   };
 
   return (
@@ -217,11 +205,11 @@ const Settings = () => {
           <FormControl fullWidth>
             <InputLabel>Select Organization</InputLabel>
             <Select
-              value={auth.advertiser.id}
+              value={advertiserId}
               label="Select Organization"
               onChange={(e) => setActiveAdvertiserWithId(e)}
             >
-              {data.userAdvertisers.map((a) => (
+              {advertisers.map((a) => (
                 <MenuItem value={a.id}>{a.name}</MenuItem>
               ))}
             </Select>

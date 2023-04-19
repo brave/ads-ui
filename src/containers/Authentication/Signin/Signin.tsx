@@ -14,11 +14,7 @@ import BraveLogo from "../../../..//brave-logotype-full-color.png";
 import { useHistory } from "react-router-dom";
 import { useSignIn } from "../../../auth/hooks/mutations/useSignIn";
 
-interface Props {
-  state?: unknown;
-}
-
-export function SignIn({ state }: Props) {
+export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string>();
@@ -26,23 +22,12 @@ export function SignIn({ state }: Props) {
 
   const { signIn, loading } = useSignIn({
     onSuccess() {
-      history.push("/", { triedAuth: true });
+      history.push("/");
     },
     onError(msg) {
       setError(msg);
     },
   });
-
-  useEffect(() => {
-    if (state) {
-      const s = state as { triedAuth: boolean };
-
-      // Catches when a person with no advertiser tries to login
-      if (s.triedAuth) {
-        setError("Unable to login to Brave Ads Dashboard");
-      }
-    }
-  }, [state]);
 
   return (
     <Container

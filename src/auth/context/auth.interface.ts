@@ -1,5 +1,5 @@
 import React from "react";
-import { UserFragment } from "../../graphql/user.generated";
+import { ResponseUser } from "../lib";
 
 export type IAdvertiser = {
   id: string;
@@ -7,18 +7,17 @@ export type IAdvertiser = {
   selfServiceCreate: boolean;
   selfServiceEdit: boolean;
   selfServiceSetPrice: boolean;
+  publicKey?: string | null;
 };
 
 export interface IAuthState {
   isInitialized: boolean;
   isAuthenticated: boolean;
-  setActiveAdvertiser: (a?: IAdvertiser) => void;
-  setSessionUser: (u?: UserFragment) => void;
+  setSessionUser: (u?: ResponseUser) => void;
   email?: string;
   role?: string;
   userId?: string;
-  emailVerified?: boolean;
-  advertiser: IAdvertiser;
+  advertisers: IAdvertiser[];
 }
 
 export interface IAuthProviderProps {

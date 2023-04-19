@@ -5,7 +5,7 @@ import { CellValue } from "./EnhancedTable";
 import React, { ReactChild, ReactNode } from "react";
 import { formatInTimeZone } from "date-fns-tz";
 import enUS from "date-fns/locale/en-US";
-import { updateCampaignState } from "../../user/library";
+import { populateFilter, updateCampaignState } from "../../user/library";
 import {
   CampaignFragment,
   useUpdateCampaignMutation,
@@ -95,20 +95,15 @@ export function renderMonetaryAmount(
 }
 
 export function campaignOnOffState(
-  c: CampaignFragment & { fromDate: Date | null },
-  advertiser: IAdvertiser
+  c: CampaignFragment & { fromDate: Date | null; advertiserId: string }
 ): ReactNode {
   const [updateCampaign, { loading }] = useUpdateCampaignMutation({
     refetchQueries: [
       {
         query: AdvertiserCampaignsDocument,
         variables: {
-          id: advertiser.id,
-          filter: {
-            includeAds: true,
-            includeCreativeSets: true,
-            from: c.fromDate,
-          },
+          id: c.advertiserId,
+          filter: populateFilter(c.fromDate),
         },
       },
     ],
@@ -137,14 +132,15 @@ export function adSetOnOffState(
     campaignId: string;
     campaignState: string;
     campaignSource: CampaignSource;
-  },
-  advertiser: IAdvertiser
+    advertiserId: string;
+    fromDate: Date | null;
+  }
 ): ReactNode {
   const [updateAdSet, { loading }] = useUpdateAdSetMutation({
     refetchQueries: [
       {
         query: AdvertiserCampaignsDocument,
-        variables: { id: advertiser.id },
+        variables: { id: c.advertiserId, filter: populateFilter(c.fromDate) },
       },
     ],
   });
@@ -191,14 +187,15 @@ export function adOnOffState(
     campaignEnd: string;
     creativeInstanceId: string;
     campaignSource: CampaignSource;
-  },
-  advertiser: IAdvertiser
+    advertiserId: string;
+    fromDate: Date | null;
+  }
 ): ReactNode {
   const [updateAd, { loading }] = useUpdateAdMutation({
     refetchQueries: [
       {
         query: AdvertiserCampaignsDocument,
-        variables: { id: advertiser.id },
+        variables: { id: c.advertiserId, filter: populateFilter(c.fromDate) },
       },
     ],
   });

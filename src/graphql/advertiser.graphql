@@ -6,6 +6,7 @@ fragment AdvertiserSummary on Advertiser {
   additionalBillingEmails
   createdAt
   modifiedAt
+  publicKey
 }
 
 fragment Advertiser on Advertiser {
@@ -45,10 +46,19 @@ mutation updateAdvertiser($updateAdvertiserInput: UpdateAdvertiserInput!) {
   }
 }
 
+fragment AdvertiserCampaigns on Advertiser {
+  id
+  name
+  selfServiceEdit
+  selfServiceCreate
+  selfServiceSetPrice
+  campaigns {
+    ...CampaignSummary
+  }
+}
+
 query advertiserCampaigns($id: String!, $filter: AdvertiserCampaignFilter) {
   advertiserCampaigns(id: $id, filter: $filter) {
-    campaigns {
-      ...CampaignSummary
-    }
+    ...AdvertiserCampaigns
   }
 }

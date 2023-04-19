@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   IAuthState,
   IAuthProviderProps,
   IAdvertiser,
 } from "auth/context/auth.interface";
 import { initialState, IAuthContext } from "auth/context/auth.state";
-import { getAdvertisers } from "./advertiser";
+import { getUser, ResponseUser } from "./lib";
 import _ from "lodash";
-import { clearCredentials, getUser } from "./util";
-import { UserFragment } from "../graphql/user.generated";
+import { setActiveAdvertiser } from "./util";
 
 export const IAuthProvider: React.FC<IAuthProviderProps> = ({
   children,
@@ -16,34 +15,36 @@ export const IAuthProvider: React.FC<IAuthProviderProps> = ({
   const [state, setState] = useState<IAuthState>(initialState);
   const [loading, setLoading] = useState(false);
 
-  const setActiveAdvertiser = (advertiser?: IAdvertiser) => {
-    if (advertiser) {
-      window.localStorage.setItem(
-        "activeAdvertiser",
-        JSON.stringify(advertiser)
-      );
-
-      setState((cur) => ({
-        ...cur,
-        advertiser,
-      }));
+  const getActiveAdvertiser = (
+    advertisers: IAdvertiser[]
+  ): IAdvertiser | undefined => {
+    const advertiserId = window.localStorage.getItem("activeAdvertiser");
+    if (advertisers.length === 0) {
+      return undefined;
     }
+
+    let isInGroup = false;
+    if (advertiserId != null) {
+      isInGroup = _.some(advertisers, { id: advertiserId });
+    }
+
+    return isInGroup
+      ? advertisers.find((a) => a.id === advertiserId)
+      : advertisers[0];
   };
 
-  const setSessionUser = (u?: UserFragment) => {
+  const setSessionUser = (u?: ResponseUser) => {
     if (u) {
-      setLoading(true);
+      const active = getActiveAdvertiser(u.advertisers);
+      setActiveAdvertiser(active?.id);
       setState((cur) => ({
         ...cur,
         email: u.email,
-        emailVerified: u.emailVerified,
         role: u.role,
         userId: u.id,
+        advertisers: u.advertisers,
+        isAuthenticated: u.advertisers.length > 0 && !!active,
       }));
-
-      advertiser(u.id).finally(() => {
-        setLoading(false);
-      });
     } else {
       setState((cur) => ({
         ...cur,
@@ -52,72 +53,15 @@ export const IAuthProvider: React.FC<IAuthProviderProps> = ({
     }
   };
 
-  const getActiveAdvertiser = (): IAdvertiser | null => {
-    const adv = window.localStorage.getItem("activeAdvertiser");
-
-    if (adv) {
-      const parsed = JSON.parse(adv);
-      return { ...parsed };
-    }
-
-    return null;
-  };
-
-  const advertiser = (userId: string) => {
-    return getAdvertisers(userId)
-      .then((a) => {
-        const storageAdvertiser = getActiveAdvertiser();
-        let isInGroup = false;
-        if (storageAdvertiser != null) {
-          isInGroup = _.some(a, { id: storageAdvertiser.id });
-        }
-
-        const activeAdvertiser = isInGroup
-          ? storageAdvertiser
-          : a.find((adv) => adv.state === "active");
-
-        const hasAdvertiser = activeAdvertiser != null;
-        if (hasAdvertiser) {
-          setActiveAdvertiser(activeAdvertiser);
-          setState((cur) => ({
-            ...cur,
-            advertiser: activeAdvertiser,
-          }));
-        } else {
-          void clearCredentials();
-        }
-
-        setState((cur) => ({
-          ...cur,
-          isAuthenticated: hasAdvertiser,
-        }));
-      })
-      .catch(() => {
-        setState((cur) => ({
-          ...cur,
-          isAuthenticated: false,
-        }));
-      });
-  };
-
   useEffect(() => {
     // For each time a user refreshes (or lands on login for first time), check if their token is still valid
-    const storageUser = localStorage.getItem("user");
-    const userId = storageUser ? JSON.parse(storageUser).userId : "";
     setLoading(true);
     getUser()
       .then(async (res) => {
-        setState((cur) => ({
-          ...cur,
-          email: res.email,
-          emailVerified: res.emailVerified,
-          role: res.role,
-          userId: res.id,
-        }));
-
-        return await advertiser(userId);
+        setSessionUser(res);
       })
-      .catch(() => {
+      .catch((e) => {
+        console.error(e);
         setState((cur) => ({
           ...cur,
           isAuthenticated: false,
@@ -129,7 +73,6 @@ export const IAuthProvider: React.FC<IAuthProviderProps> = ({
           ...cur,
           isInitialized: true,
           setSessionUser,
-          setActiveAdvertiser,
         }));
       });
   }, []);

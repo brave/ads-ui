@@ -20,8 +20,6 @@ const Protected = () => {
 
 export function App() {
   const [drafts, setDrafts] = useState<CampaignForm[]>(getAllDrafts());
-
-  const history = useHistory();
   const isAuthenticated = useIsAuthenticated();
 
   if (isAuthenticated == null) {
@@ -42,7 +40,7 @@ export function App() {
         >
           <Switch>
             <Route path="/auth/signin">
-              <SignIn state={history.location.state} />
+              <SignIn />
             </Route>
             <Route path="*" component={isAuthenticated ? User : Protected} />
             <Redirect to="/user/main" />

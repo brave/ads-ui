@@ -13,7 +13,7 @@ export default defineConfig(({ command, mode }) => {
       react(),
       tsconfigPaths(),
       checker({ typescript: true }),
-      basicSsl(),
+      basicSsl(), // used only to enable https on developer workstations,
     ],
 
     // and these settings are all about maintaining compatibility with

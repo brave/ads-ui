@@ -7,6 +7,7 @@ import {
   Segment,
 } from "../views/adsManager/types";
 import {
+  AdvertiserCampaignFilter,
   CreateAdInput,
   CreateAdSetInput,
   CreateCampaignInput,
@@ -23,7 +24,7 @@ import {
   UpdateAdDocument,
 } from "../../graphql/ad-set.generated";
 import { CreateNotificationCreativeDocument } from "../../graphql/creative.generated";
-import { IAuthState } from "../../auth/context/auth.interface";
+import { IAdvertiser, IAuthState } from "../../auth/context/auth.interface";
 
 const TYPE_CODE_LOOKUP = {
   notification_all_v1: "Push Notification",
@@ -35,7 +36,8 @@ const TYPE_CODE_LOOKUP = {
 
 export async function transformNewForm(
   form: CampaignForm,
-  auth: IAuthState
+  advertiserId: string,
+  userId?: string
 ): Promise<CreateCampaignInput> {
   const adSets = form.adSets;
   const transformedAdSet: CreateAdSetInput[] = [];
@@ -44,7 +46,7 @@ export async function transformNewForm(
     const ads: CreateAdInput[] = [];
 
     for (const ad of adSet.creatives) {
-      const creative = await transformCreative(ad, form, auth);
+      const creative = await transformCreative(ad, form, advertiserId, userId);
       ads.push(creative);
     }
 
@@ -70,10 +72,10 @@ export async function transformNewForm(
     endAt: form.endAt,
     geoTargets: form.geoTargets.map((g) => ({ code: g.code, name: g.name })),
     name: form.name,
-    advertiserId: auth.advertiser.id,
+    advertiserId: advertiserId,
     externalId: "",
     format: form.format,
-    userId: auth.userId,
+    userId: userId,
     source: "self_serve",
     startAt: form.startAt,
     state: form.state,
@@ -98,11 +100,12 @@ function transformConversion(conv: Conversion[]) {
 async function transformCreative(
   creative: Creative,
   campaign: CampaignForm,
-  auth: IAuthState
+  advertiserId: string,
+  userId?: string
 ): Promise<CreateAdInput> {
   const notification: CreateNotificationCreativeInput = {
-    advertiserId: auth.advertiser.id,
-    userId: auth.userId,
+    advertiserId,
+    userId,
     name: creative.name,
     payload: {
       title: creative.title,
@@ -215,7 +218,8 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
 export async function transformEditForm(
   form: CampaignForm,
   id: string,
-  auth: IAuthState
+  advertiserId: string,
+  userId?: string
 ): Promise<UpdateCampaignInput> {
   const transformedAdSet: UpdateAdSetInput[] = [];
 
@@ -223,7 +227,7 @@ export async function transformEditForm(
     const creatives = adSet.creatives;
     for (const ad of creatives) {
       if (ad.id == null) {
-        const withId = await transformCreative(ad, form, auth);
+        const withId = await transformCreative(ad, form, advertiserId, userId);
         await createAd({
           ...withId,
           creativeSetId: adSet.id,
@@ -281,4 +285,14 @@ export function uiTextForCreativeTypeCode(creativeTypeCode: {
   code: string;
 }): string {
   return uiTextForCreativeType(creativeTypeCode.code);
+}
+
+export function populateFilter(
+  fromDate: Date | null
+): AdvertiserCampaignFilter {
+  return {
+    includeAds: true,
+    includeCreativeSets: true,
+    from: fromDate,
+  };
 }

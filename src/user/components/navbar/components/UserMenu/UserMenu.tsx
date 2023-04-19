@@ -1,13 +1,7 @@
 import * as React from "react";
 
 import { useHistory } from "react-router-dom";
-import {
-  Button,
-  CircularProgress,
-  Menu,
-  MenuItem,
-  Snackbar,
-} from "@mui/material";
+import { Button, Menu, MenuItem, Snackbar } from "@mui/material";
 import { useState } from "react";
 import { useSignOut } from "../../../../../auth/hooks/mutations/useSignOut";
 
@@ -17,7 +11,7 @@ export function UserMenu() {
   const [snackbar, setSnackbar] = useState({ open: false, msg: "" });
   const history = useHistory();
 
-  const { signOut, loading } = useSignOut({
+  const { signOut } = useSignOut({
     onSuccess() {
       history.push("/", undefined);
       setAnchorEl(null);
@@ -37,30 +31,24 @@ export function UserMenu() {
         Account
       </Button>
       <Menu open={open} anchorEl={anchorEl} onClose={() => setAnchorEl(null)}>
-        {loading ? (
-          <CircularProgress />
-        ) : (
-          <>
-            <MenuItem
-              onClick={() => {
-                history.push("/user/main/settings");
-                setAnchorEl(null);
-              }}
-              sx={{ pl: 20, pr: 20, pt: 3, pb: 3 }}
-            >
-              Settings
-            </MenuItem>
-            <MenuItem
-              onClick={() => {
-                signOut();
-                setAnchorEl(null);
-              }}
-              sx={{ pl: 20, pr: 20, pt: 3, pb: 3 }}
-            >
-              Sign Out
-            </MenuItem>
-          </>
-        )}
+        <MenuItem
+          onClick={() => {
+            history.push("/user/main/settings");
+            setAnchorEl(null);
+          }}
+          sx={{ pl: 20, pr: 20, pt: 3, pb: 3 }}
+        >
+          Settings
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            signOut();
+            setAnchorEl(null);
+          }}
+          sx={{ pl: 20, pr: 20, pt: 3, pb: 3 }}
+        >
+          Sign Out
+        </MenuItem>
       </Menu>
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "center" }}

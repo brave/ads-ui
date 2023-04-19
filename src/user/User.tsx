@@ -21,8 +21,7 @@ import { AdSetList } from "./adSet/AdSetList";
 import { AdList } from "./ads/AdList";
 import moment from "moment";
 import { CampaignAgeFilter } from "../components/Campaigns/CampaignAgeFilter";
-import { useAuthContext } from "../auth/context/auth.hook";
-import { IAdvertiser } from "../auth/context/auth.interface";
+import { populateFilter } from "./library";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -36,14 +35,24 @@ const buildApolloClient = () => {
 };
 
 export function User() {
-  const auth = useAuthContext();
   const client = useMemo(() => buildApolloClient(), []);
+  const [fromDateFilter, setFromDateFilter] = useState<Date | null>(
+    moment().subtract(6, "month").startOf("day").toDate()
+  );
+
+  const { loading, data } = useAdvertiserCampaignsQuery({
+    variables: {
+      id: window.localStorage.getItem("activeAdvertiser") ?? "",
+      filter: populateFilter(fromDateFilter),
+    },
+    pollInterval: 600_000,
+  });
 
   return (
     <ApolloProvider client={client}>
       <Box height="100%">
         <Box display="flex">
-          <Sidebar canCreate={auth.advertiser.selfServiceCreate} />
+          <Sidebar />
           <Box
             width="100%"
             height="100%"
@@ -54,11 +63,11 @@ export function User() {
             <Switch>
               {/* /adsmanager */}
               <Route path={`/user/main/adsmanager/advanced/new/:draftId`}>
-                <NewCampaign />
+                <NewCampaign fromDate={fromDateFilter} />
               </Route>
 
               <Route path={`/user/main/adsmanager/advanced/:campaignId`}>
-                <EditCampaign />
+                <EditCampaign fromDate={fromDateFilter} />
               </Route>
 
               <Route path={`/user/main/complete/:mode`}>
@@ -78,7 +87,37 @@ export function User() {
               </Route>
 
               {/* /campaigns */}
-              <RoutesWithProps advertiser={auth.advertiser} />
+              <Route path={`/user/main/campaigns`}>
+                <Stack>
+                  <CampaignAgeFilter
+                    fromDate={fromDateFilter}
+                    onChange={setFromDateFilter}
+                  />
+                  <CampaignList
+                    advertiserCampaigns={data?.advertiserCampaigns}
+                    loading={loading}
+                    fromDate={fromDateFilter}
+                  />
+                </Stack>
+              </Route>
+              <Route path={`/user/main/adsets`}>
+                <AdSetList
+                  advertiserCampaigns={data?.advertiserCampaigns}
+                  loading={loading}
+                  fromDate={fromDateFilter}
+                />
+              </Route>
+
+              <Route path={`/user/main/ads`}>
+                <AdList
+                  advertiserCampaigns={data?.advertiserCampaigns}
+                  loading={loading}
+                  fromDate={fromDateFilter}
+                />
+              </Route>
+
+              {/* default */}
+              <Redirect to={`/user/main/campaigns`} />
             </Switch>
           </Box>
         </Box>
@@ -86,59 +125,3 @@ export function User() {
     </ApolloProvider>
   );
 }
-
-const RoutesWithProps: React.FC<{
-  advertiser: IAdvertiser;
-}> = ({ advertiser }) => {
-  const [fromDateFilter, setFromDateFilter] = useState<Date | null>(
-    moment().subtract(6, "month").startOf("day").toDate()
-  );
-
-  const { loading, data } = useAdvertiserCampaignsQuery({
-    variables: {
-      id: advertiser.id,
-      filter: {
-        includeAds: true,
-        includeCreativeSets: true,
-        from: fromDateFilter,
-      },
-    },
-    pollInterval: 600_000,
-  });
-
-  return (
-    <Switch>
-      <Route path={`/user/main/campaigns`}>
-        <Stack>
-          <CampaignAgeFilter
-            fromDate={fromDateFilter}
-            onChange={setFromDateFilter}
-          />
-          <CampaignList
-            campaigns={data?.advertiserCampaigns?.campaigns ?? []}
-            advertiser={advertiser}
-            loading={loading}
-            fromDate={fromDateFilter}
-          />
-        </Stack>
-      </Route>
-      <Route path={`/user/main/adsets`}>
-        <AdSetList
-          campaigns={data?.advertiserCampaigns?.campaigns ?? []}
-          loading={loading}
-          advertiser={advertiser}
-        />
-      </Route>
-      <Route path={`/user/main/ads`}>
-        <AdList
-          campaigns={data?.advertiserCampaigns?.campaigns ?? []}
-          loading={loading}
-          advertiser={advertiser}
-        />
-      </Route>
-
-      {/* default */}
-      <Redirect to={`/user/main/campaigns`} />
-    </Switch>
-  );
-};

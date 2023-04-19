@@ -19,8 +19,12 @@ This bundle is then served to users as a static asset by [AWS CloudFront CDN](ht
 
 ### Local Development
 
-- Create a `.env.local` file.
-- Set `BACKEND_URL=<>` to the endpoint you wish to pull data from
+- Create a `.env.local` file, or update `.env` file provided
+- Set `BACKEND_URL=<>` to the endpoint you wish to pull data from.
+
+**Note:**
+We are using HTTPS in developer mode so that cookie based authentication works properly.
+You mat need to proceed through a certificate warning in order to develop locally.
 
 #### Generating GraphQL Types:
 

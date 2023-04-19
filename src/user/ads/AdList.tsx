@@ -4,20 +4,20 @@ import {
 } from "../../components/EnhancedTable";
 import { LinearProgress } from "@mui/material";
 import { Status } from "../../components/Campaigns/Status";
-import { CampaignFragment } from "../../graphql/campaign.generated";
 import _ from "lodash";
 import { uiTextForCreativeTypeCode } from "../library";
 import { adOnOffState } from "../../components/EnhancedTable/renderers";
 import { isAfterEndDate } from "../../util/isAfterEndDate";
-import { IAdvertiser } from "../../auth/context/auth.interface";
+import { AdvertiserCampaignsFragment } from "../../graphql/advertiser.generated";
 
 interface Props {
-  campaigns: CampaignFragment[];
+  advertiserCampaigns?: AdvertiserCampaignsFragment | null;
   loading: boolean;
-  advertiser: IAdvertiser;
+  fromDate: Date | null;
 }
 
-export function AdList({ campaigns, loading, advertiser }: Props) {
+export function AdList({ advertiserCampaigns, loading, fromDate }: Props) {
+  const campaigns = advertiserCampaigns?.campaigns ?? [];
   const mapAdName = campaigns.map((c) => ({
     adSets: c.adSets.map((a) => ({
       ads: (a.ads ?? []).map((ad) => ({
@@ -31,6 +31,8 @@ export function AdList({ campaigns, loading, advertiser }: Props) {
           campaignStart: c.startAt,
           campaignEnd: c.endAt,
           campaignSource: c.source,
+          advertiserId: advertiserCampaigns?.id,
+          fromDate,
         },
       })),
     })),
@@ -51,7 +53,7 @@ export function AdList({ campaigns, loading, advertiser }: Props) {
         {
           title: "On/Off",
           value: (c) => c.state,
-          extendedRenderer: (r) => adOnOffState(r, advertiser),
+          extendedRenderer: (r) => adOnOffState(r),
           sx: { width: "10px" },
           sortable: false,
         },

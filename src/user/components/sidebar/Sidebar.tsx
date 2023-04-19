@@ -14,14 +14,12 @@ import {
 } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import { Navbar } from "../navbar/Navbar";
+import { useAdvertiser } from "../../../auth/hooks/queries/useAdvertiser";
 
 const drawerWidth = 240;
 
-interface Props {
-  canCreate: boolean;
-}
-
-export function Sidebar({ canCreate }: Props) {
+export function Sidebar() {
+  const { advertiser } = useAdvertiser();
   const history = useHistory();
 
   const routes = [
@@ -33,7 +31,7 @@ export function Sidebar({ canCreate }: Props) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <Navbar canCreate={canCreate} />
+      <Navbar canCreate={advertiser.selfServiceCreate} />
       <Drawer
         sx={{
           width: drawerWidth,
@@ -54,6 +52,7 @@ export function Sidebar({ canCreate }: Props) {
                 history.push(`/user/main/${r.path}`);
               }}
               sx={{ mt: 1 }}
+              key={r.path}
             >
               <ListItemText disableTypography>
                 <Typography variant="h6">{r.label}</Typography>

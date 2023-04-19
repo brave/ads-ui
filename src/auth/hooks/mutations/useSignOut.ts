@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { useAuthContext } from "auth/context/auth.hook";
-import { clearCredentials } from "../../util";
+import { clearCredentials } from "../../lib";
 
 interface Options {
   onSuccess?: () => void;
