@@ -19,7 +19,6 @@ import {
 import { OnOff } from "../Switch/OnOff";
 import { CreativeFragment } from "../../graphql/creative.generated";
 import { CampaignSource } from "../../graphql/types";
-import { IAdvertiser } from "../../auth/context/auth.interface";
 
 export type CellValueRenderer = (value: CellValue) => React.ReactNode;
 const ADS_DEFAULT_TIMEZONE = "America/New_York";
