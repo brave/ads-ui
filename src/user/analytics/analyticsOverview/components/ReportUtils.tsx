@@ -4,7 +4,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import React, { useState } from "react";
 import { downloadCSV } from "../lib/csv.library";
 import { DateRangePicker } from "../../../../components/Date/DateRangePicker";
-import { useAuthContext } from "../../../../auth/context/auth.hook";
+import { useUser } from "../../../../auth/hooks/queries/useUser";
 
 interface DownloaderProps {
   startDate: Date | undefined;
@@ -20,7 +20,7 @@ export default function ReportUtils({
   onSetDate,
 }: DownloaderProps) {
   const [downloadingCSV, setDownloadingCSV] = useState(false);
-  const auth = useAuthContext();
+  const { userId } = useUser();
 
   return (
     <Box
@@ -53,7 +53,7 @@ export default function ReportUtils({
             downloadCSV(
               campaign.id,
               campaign.name,
-              auth.userId ?? "",
+              userId ?? "",
               false,
               setDownloadingCSV
             )
