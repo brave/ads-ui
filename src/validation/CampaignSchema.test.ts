@@ -17,7 +17,7 @@ const validCampaign = {
   geoTargets: [{ code: "a", name: "USA" }],
   state: "any",
   type: "paid",
-  pacingStrategy: CampaignPacingStrategies.Original,
+  pacingStrategy: CampaignPacingStrategies.ModelV1,
   validateStart: true,
 };
 

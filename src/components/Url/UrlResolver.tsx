@@ -6,6 +6,7 @@ import {
   CircularProgress,
   AlertTitle,
   Tooltip,
+  LinearProgress,
 } from "@mui/material";
 import React, { useMemo, useEffect } from "react";
 import _ from "lodash";
@@ -34,13 +35,13 @@ export const UrlResolver: React.FC<Props> = ({
   const [, isValidMeta, isValidHelper] = useField(validator);
   const hasError = Boolean(nameMeta.error);
   const showError = hasError && nameMeta.touched;
-  const [validateUrl, { loading, data, error }] =
-    useValidateTargetUrlLazyQuery();
+  const [validateUrl, { loading, data }] = useValidateTargetUrlLazyQuery();
   const debouncedValidateUrl = useMemo(
     () =>
       _.debounce(
-        (value: string) =>
+        (value: string, err?: string) =>
           value &&
+          err == null &&
           SimpleUrlRegexp.test(value) &&
           validateUrl({
             variables: {
@@ -56,9 +57,9 @@ export const UrlResolver: React.FC<Props> = ({
   const { setValue, setError } = isValidHelper;
 
   useEffect(() => {
-    if (!disabled && nameMeta.value) {
+    if (!disabled) {
       debouncedValidateUrl.cancel();
-      debouncedValidateUrl(nameMeta.value);
+      debouncedValidateUrl(nameMeta.value, nameMeta.error);
 
       if (value !== !!data?.validateTargetUrl?.isValid) {
         setValue(!loading && !!data?.validateTargetUrl?.isValid, false);
@@ -67,7 +68,7 @@ export const UrlResolver: React.FC<Props> = ({
       const errors = data?.validateTargetUrl.errors ?? [];
       const currError = errors.join("#");
       if (errors.length > 0 && currError !== fieldError) {
-        setError(errors.join("#"));
+        setError(currError);
       }
     }
   });
@@ -88,20 +89,23 @@ export const UrlResolver: React.FC<Props> = ({
           endAdornment: (
             <InputAdornment position="end">
               {loading && <CircularProgress />}
-              {data && data.validateTargetUrl.isValid && (
-                <Tooltip title="URL is valid">
-                  <CheckCircleOutlineIcon sx={{ color: "#2e7d32" }} />
-                </Tooltip>
-              )}
             </InputAdornment>
           ),
         }}
         {...nameField}
       />
+      {loading && (
+        <Alert
+          icon={<CircularProgress size={20} color="secondary" />}
+          severity="info"
+        >
+          Validating URL...
+        </Alert>
+      )}
 
       {!!data && (
         <Box mt={2}>
-          {!data.validateTargetUrl.isValid && (
+          {!data.validateTargetUrl.isValid ? (
             <>
               {data.validateTargetUrl.errors.map((e) => (
                 <Alert severity="error" sx={{ mb: 1 }}>
@@ -110,6 +114,10 @@ export const UrlResolver: React.FC<Props> = ({
                 </Alert>
               ))}
             </>
+          ) : (
+            <Alert severity="success" sx={{ mb: 1 }}>
+              URL is valid.
+            </Alert>
           )}
         </Box>
       )}

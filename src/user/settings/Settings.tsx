@@ -7,28 +7,33 @@ import {
 } from "../../components/formElements/formElements";
 import _ from "lodash";
 import * as tweetnacl from "tweetnacl";
-import Modal from "react-modal";
 import {
   useAdvertiserQuery,
   useUpdateAdvertiserMutation,
 } from "../../graphql/advertiser.generated";
-import ClearIcon from "@mui/icons-material/Clear";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import {
+  Box,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Modal,
+  Select,
+} from "@mui/material";
 import { setActiveAdvertiser } from "../../state/context";
 
 const modalStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    zIndex: 5000,
-    borderRadius: "4px",
-    padding: "56px",
-    border: "1px solid #e2e2e2",
-  },
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  right: "auto",
+  bottom: "auto",
+  transform: "translate(-50%, -50%)",
+  width: 650,
+  bgcolor: "background.paper",
+  border: "2px solid #e2e2e2",
+  boxShadow: 24,
+  borderRadius: "4px",
+  p: 4,
 };
 
 const Settings = (props) => {
@@ -230,256 +235,38 @@ const Settings = (props) => {
         </InputContainer>
       </div>
 
-      <Modal isOpen={showNewKeypairModal} style={modalStyles}>
-        {newKeypairModalState === "disclaimer" && (
-          <div style={{ width: "600px" }}>
-            <div
-              onClick={() => {
-                closeNewKeypairModal();
-              }}
-              style={{ display: "flex" }}
-            >
+      <Modal open={showNewKeypairModal} onClose={() => closeNewKeypairModal()}>
+        <Box sx={modalStyles}>
+          {newKeypairModalState === "disclaimer" && (
+            <div style={{ width: "600px" }}>
               <Text
                 content={`Create new keypair?`}
                 sizes={[16, 16, 15, 15, 22]}
                 color={"#E0694C"}
                 fontFamily={"Poppins"}
               />
-              <ClearIcon />
-            </div>
-            <Text
-              style={{ marginTop: "42px" }}
-              content={`You are attempting to create a new keypair, this will replace any of your organization's existing keypairs. Please note, previous keypairs cannot be retrieved or used once replaced.`}
-              sizes={[16, 16, 15, 15, 16]}
-              fontFamily={"Muli"}
-            />
-            <div style={{ display: "flex", width: "100%", marginTop: "42px" }}>
-              <div
-                onClick={() => {
-                  closeNewKeypairModal();
-                }}
-                style={{
-                  marginLeft: "auto",
-                  marginRight: "28px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  padding: "0px 20px",
-                  width: "100px",
-                  border: "1px solid #e2e2e2",
-                  borderRadius: "100px 100px 100px 100px",
-                  cursor: "pointer",
-                }}
-              >
-                <span>
-                  <Text
-                    style={{ paddingTop: "6px", paddingBottom: "6px" }}
-                    sizes={[16, 16, 15, 15, 14]}
-                    fontWeight={500}
-                    fontFamily={"Poppins"}
-                  >
-                    Cancel
-                  </Text>
-                </span>
-              </div>
-              <div
-                onClick={() => {
-                  setNewKeypairModalState("privateKey");
-                }}
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  padding: "0px 20px",
-                  width: "100px",
-                  background: "#F87454",
-                  color: "white",
-                  border: "none",
-                  borderRadius: "100px 100px 100px 100px",
-                  cursor: "pointer",
-                }}
-              >
-                <span>
-                  <Text
-                    style={{ paddingTop: "6px", paddingBottom: "6px" }}
-                    sizes={[16, 16, 15, 15, 14]}
-                    fontWeight={500}
-                    fontFamily={"Poppins"}
-                  >
-                    Continue
-                  </Text>
-                </span>
-              </div>
-            </div>
-          </div>
-        )}
-        {newKeypairModalState === "privateKey" && (
-          <div style={{ width: "600px" }}>
-            <div
-              onClick={() => {
-                closeNewKeypairModal();
-              }}
-              style={{ display: "flex" }}
-            >
               <Text
-                content={`Create new keypair?`}
-                sizes={[16, 16, 15, 15, 22]}
-                color={"#E0694C"}
-                fontFamily={"Poppins"}
+                style={{ marginTop: "42px" }}
+                content={`You are attempting to create a new keypair, this will replace any of your organization's existing keypairs. Please note, previous keypairs cannot be retrieved or used once replaced.`}
+                sizes={[16, 16, 15, 15, 16]}
+                fontFamily={"Muli"}
               />
-              <ClearIcon />
-            </div>
-            <Text
-              style={{ marginTop: "42px", marginBottom: "16px" }}
-              content={`Your organization's new private key will be:`}
-              sizes={[16, 16, 15, 15, 16]}
-              fontFamily={"Muli"}
-            />
-            <Input value={privateKey}></Input>
-            <Text
-              style={{ marginTop: "28px", color: "#4C54D2" }}
-              content={
-                "Keep this safe! Brave cannot recover this key. Please note, you will have a chance to confirm your private key before changes are saved."
-              }
-              sizes={[16, 16, 15, 15, 15]}
-              fontFamily={"Poppins"}
-            />
-            <div style={{ display: "flex", width: "100%", marginTop: "42px" }}>
               <div
-                onClick={() => {
-                  closeNewKeypairModal();
-                }}
-                style={{
-                  marginLeft: "auto",
-                  marginRight: "28px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  padding: "0px 20px",
-                  width: "100px",
-                  border: "1px solid #e2e2e2",
-                  borderRadius: "100px 100px 100px 100px",
-                  cursor: "pointer",
-                }}
+                style={{ display: "flex", width: "100%", marginTop: "42px" }}
               >
-                <span>
-                  <Text
-                    style={{ paddingTop: "6px", paddingBottom: "6px" }}
-                    sizes={[16, 16, 15, 15, 14]}
-                    fontWeight={500}
-                    fontFamily={"Poppins"}
-                  >
-                    Cancel
-                  </Text>
-                </span>
-              </div>
-              <div
-                onClick={() => {
-                  setNewKeypairModalState("confirmation");
-                }}
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  padding: "0px 20px",
-                  width: "100px",
-                  background: "#F87454",
-                  color: "white",
-                  border: "none",
-                  borderRadius: "100px 100px 100px 100px",
-                  cursor: "pointer",
-                }}
-              >
-                <span>
-                  <Text
-                    style={{ paddingTop: "6px", paddingBottom: "6px" }}
-                    sizes={[16, 16, 15, 15, 14]}
-                    fontWeight={500}
-                    fontFamily={"Poppins"}
-                  >
-                    Continue
-                  </Text>
-                </span>
-              </div>
-            </div>
-          </div>
-        )}
-        {newKeypairModalState === "confirmation" && (
-          <div style={{ width: "600px" }}>
-            <div
-              onClick={() => {
-                closeNewKeypairModal();
-              }}
-              style={{ display: "flex" }}
-            >
-              <Text
-                content={`Create new keypair?`}
-                sizes={[16, 16, 15, 15, 22]}
-                color={"#E0694C"}
-                fontFamily={"Poppins"}
-              />
-              <ClearIcon />
-            </div>
-            <Text
-              style={{ marginTop: "42px", marginBottom: "16px" }}
-              content={`Please confirm your organization's new private key:`}
-              sizes={[16, 16, 15, 15, 16]}
-              fontFamily={"Muli"}
-            />
-            <Input
-              value={newPrivateKey}
-              onChange={(e) => {
-                setNewPrivateKey(e.target.value);
-              }}
-            ></Input>
-            <Text
-              style={{ marginTop: "28px", color: "#4C54D2" }}
-              content={
-                "Once confirmed, your organization's keypair will be replaced with the new keypair."
-              }
-              sizes={[16, 16, 15, 15, 15]}
-              fontFamily={"Poppins"}
-            />
-            <div style={{ display: "flex", width: "100%", marginTop: "42px" }}>
-              <div
-                onClick={() => {
-                  closeNewKeypairModal();
-                }}
-                style={{
-                  marginLeft: "auto",
-                  marginRight: "28px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  padding: "0px 20px",
-                  width: "100px",
-                  border: "1px solid #e2e2e2",
-                  borderRadius: "100px 100px 100px 100px",
-                  cursor: "pointer",
-                }}
-              >
-                <span>
-                  <Text
-                    style={{ paddingTop: "6px", paddingBottom: "6px" }}
-                    sizes={[16, 16, 15, 15, 14]}
-                    fontWeight={500}
-                    fontFamily={"Poppins"}
-                  >
-                    Cancel
-                  </Text>
-                </span>
-              </div>
-              {privateKey === newPrivateKey && !loading && (
                 <div
                   onClick={() => {
-                    saveKeypair();
+                    closeNewKeypairModal();
                   }}
                   style={{
+                    marginLeft: "auto",
+                    marginRight: "28px",
                     display: "flex",
                     justifyContent: "center",
+                    alignItems: "center",
                     padding: "0px 20px",
                     width: "100px",
-                    background: "#F87454",
-                    color: "white",
-                    border: "none",
+                    border: "1px solid #e2e2e2",
                     borderRadius: "100px 100px 100px 100px",
                     cursor: "pointer",
                   }}
@@ -491,13 +278,14 @@ const Settings = (props) => {
                       fontWeight={500}
                       fontFamily={"Poppins"}
                     >
-                      Save
+                      Cancel
                     </Text>
                   </span>
                 </div>
-              )}
-              {privateKey === newPrivateKey && loading && (
                 <div
+                  onClick={() => {
+                    setNewKeypairModalState("privateKey");
+                  }}
                   style={{
                     display: "flex",
                     justifyContent: "center",
@@ -508,7 +296,6 @@ const Settings = (props) => {
                     border: "none",
                     borderRadius: "100px 100px 100px 100px",
                     cursor: "pointer",
-                    opacity: 0.5,
                   }}
                 >
                   <span>
@@ -518,41 +305,243 @@ const Settings = (props) => {
                       fontWeight={500}
                       fontFamily={"Poppins"}
                     >
-                      Saving...
+                      Continue
                     </Text>
                   </span>
                 </div>
-              )}
-              {privateKey !== newPrivateKey && !loading && (
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    padding: "0px 20px",
-                    width: "100px",
-                    background: "#F87454",
-                    color: "white",
-                    border: "none",
-                    borderRadius: "100px 100px 100px 100px",
-                    cursor: "pointer",
-                    opacity: 0.5,
-                  }}
-                >
-                  <span>
-                    <Text
-                      style={{ paddingTop: "6px", paddingBottom: "6px" }}
-                      sizes={[16, 16, 15, 15, 14]}
-                      fontWeight={500}
-                      fontFamily={"Poppins"}
-                    >
-                      Save
-                    </Text>
-                  </span>
-                </div>
-              )}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+          {newKeypairModalState === "privateKey" && (
+            <div style={{ width: "600px" }}>
+              <Text
+                content={`Create new keypair?`}
+                sizes={[16, 16, 15, 15, 22]}
+                color={"#E0694C"}
+                fontFamily={"Poppins"}
+              />
+              <Text
+                style={{ marginTop: "42px", marginBottom: "16px" }}
+                content={`Your organization's new private key will be:`}
+                sizes={[16, 16, 15, 15, 16]}
+                fontFamily={"Muli"}
+              />
+              <Input value={privateKey}></Input>
+              <Text
+                style={{ marginTop: "28px", color: "#4C54D2" }}
+                content={
+                  "Keep this safe! Brave cannot recover this key. Please note, you will have a chance to confirm your private key before changes are saved."
+                }
+                sizes={[16, 16, 15, 15, 15]}
+                fontFamily={"Poppins"}
+              />
+              <div
+                style={{ display: "flex", width: "100%", marginTop: "42px" }}
+              >
+                <div
+                  onClick={() => {
+                    closeNewKeypairModal();
+                  }}
+                  style={{
+                    marginLeft: "auto",
+                    marginRight: "28px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    padding: "0px 20px",
+                    width: "100px",
+                    border: "1px solid #e2e2e2",
+                    borderRadius: "100px 100px 100px 100px",
+                    cursor: "pointer",
+                  }}
+                >
+                  <span>
+                    <Text
+                      style={{ paddingTop: "6px", paddingBottom: "6px" }}
+                      sizes={[16, 16, 15, 15, 14]}
+                      fontWeight={500}
+                      fontFamily={"Poppins"}
+                    >
+                      Cancel
+                    </Text>
+                  </span>
+                </div>
+                <div
+                  onClick={() => {
+                    setNewKeypairModalState("confirmation");
+                  }}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    padding: "0px 20px",
+                    width: "100px",
+                    background: "#F87454",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "100px 100px 100px 100px",
+                    cursor: "pointer",
+                  }}
+                >
+                  <span>
+                    <Text
+                      style={{ paddingTop: "6px", paddingBottom: "6px" }}
+                      sizes={[16, 16, 15, 15, 14]}
+                      fontWeight={500}
+                      fontFamily={"Poppins"}
+                    >
+                      Continue
+                    </Text>
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
+          {newKeypairModalState === "confirmation" && (
+            <div style={{ width: "600px" }}>
+              <Text
+                content={`Create new keypair?`}
+                sizes={[16, 16, 15, 15, 22]}
+                color={"#E0694C"}
+                fontFamily={"Poppins"}
+              />
+              <Text
+                style={{ marginTop: "42px", marginBottom: "16px" }}
+                content={`Please confirm your organization's new private key:`}
+                sizes={[16, 16, 15, 15, 16]}
+                fontFamily={"Muli"}
+              />
+              <Input
+                value={newPrivateKey}
+                onChange={(e) => {
+                  setNewPrivateKey(e.target.value);
+                }}
+              ></Input>
+              <Text
+                style={{ marginTop: "28px", color: "#4C54D2" }}
+                content={
+                  "Once confirmed, your organization's keypair will be replaced with the new keypair."
+                }
+                sizes={[16, 16, 15, 15, 15]}
+                fontFamily={"Poppins"}
+              />
+              <div
+                style={{ display: "flex", width: "100%", marginTop: "42px" }}
+              >
+                <div
+                  onClick={() => {
+                    closeNewKeypairModal();
+                  }}
+                  style={{
+                    marginLeft: "auto",
+                    marginRight: "28px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    padding: "0px 20px",
+                    width: "100px",
+                    border: "1px solid #e2e2e2",
+                    borderRadius: "100px 100px 100px 100px",
+                    cursor: "pointer",
+                  }}
+                >
+                  <span>
+                    <Text
+                      style={{ paddingTop: "6px", paddingBottom: "6px" }}
+                      sizes={[16, 16, 15, 15, 14]}
+                      fontWeight={500}
+                      fontFamily={"Poppins"}
+                    >
+                      Cancel
+                    </Text>
+                  </span>
+                </div>
+                {privateKey === newPrivateKey && !loading && (
+                  <div
+                    onClick={() => {
+                      saveKeypair();
+                    }}
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      padding: "0px 20px",
+                      width: "100px",
+                      background: "#F87454",
+                      color: "white",
+                      border: "none",
+                      borderRadius: "100px 100px 100px 100px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <span>
+                      <Text
+                        style={{ paddingTop: "6px", paddingBottom: "6px" }}
+                        sizes={[16, 16, 15, 15, 14]}
+                        fontWeight={500}
+                        fontFamily={"Poppins"}
+                      >
+                        Save
+                      </Text>
+                    </span>
+                  </div>
+                )}
+                {privateKey === newPrivateKey && loading && (
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      padding: "0px 20px",
+                      width: "100px",
+                      background: "#F87454",
+                      color: "white",
+                      border: "none",
+                      borderRadius: "100px 100px 100px 100px",
+                      cursor: "pointer",
+                      opacity: 0.5,
+                    }}
+                  >
+                    <span>
+                      <Text
+                        style={{ paddingTop: "6px", paddingBottom: "6px" }}
+                        sizes={[16, 16, 15, 15, 14]}
+                        fontWeight={500}
+                        fontFamily={"Poppins"}
+                      >
+                        Saving...
+                      </Text>
+                    </span>
+                  </div>
+                )}
+                {privateKey !== newPrivateKey && !loading && (
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      padding: "0px 20px",
+                      width: "100px",
+                      background: "#F87454",
+                      color: "white",
+                      border: "none",
+                      borderRadius: "100px 100px 100px 100px",
+                      cursor: "pointer",
+                      opacity: 0.5,
+                    }}
+                  >
+                    <span>
+                      <Text
+                        style={{ paddingTop: "6px", paddingBottom: "6px" }}
+                        sizes={[16, 16, 15, 15, 14]}
+                        fontWeight={500}
+                        fontFamily={"Poppins"}
+                      >
+                        Save
+                      </Text>
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </Box>
       </Modal>
     </div>
   );

@@ -118,5 +118,5 @@ export const initialCampaign: CampaignForm = {
   name: "",
   state: "under_review",
   type: "paid",
-  pacingStrategy: CampaignPacingStrategies.Original,
+  pacingStrategy: CampaignPacingStrategies.ModelV1,
 };
