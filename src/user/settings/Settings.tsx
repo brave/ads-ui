@@ -7,20 +7,15 @@ import {
 } from "../../components/formElements/formElements";
 import _ from "lodash";
 import * as tweetnacl from "tweetnacl";
-import {
-  useAdvertisersQuery,
-  useUpdateAdvertiserMutation,
-} from "../../graphql/advertiser.generated";
+import { useUpdateAdvertiserMutation } from "../../graphql/advertiser.generated";
 import {
   Box,
   FormControl,
   InputLabel,
-  LinearProgress,
   MenuItem,
   Modal,
   Select,
 } from "@mui/material";
-import { useAuthContext } from "../../auth/context/auth.hook";
 import { useAdvertiser } from "../../auth/hooks/queries/useAdvertiser";
 import { setActiveAdvertiser } from "../../auth/util";
 
@@ -50,7 +45,6 @@ const Settings = () => {
   const [showNewKeypairModal, setShowNewKeypairModal] = useState(false);
   const [newKeypairModalState, setNewKeypairModalState] =
     useState("disclaimer");
-  // const { data, loading: advertiserLoading } = useAdvertisersQuery();
 
   const saveKeypair = () => {
     setLoading(true);
@@ -104,6 +98,7 @@ const Settings = () => {
     const id = e.target.value;
     setAdvertiserId(id);
     const adv = _.find(advertisers, { id });
+    setPublicKey(adv?.publicKey);
     setActiveAdvertiser(adv?.id);
   };
 

@@ -17,11 +17,8 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import { useHistory } from "react-router-dom";
 import { Status } from "../../components/Campaigns/Status";
-import { CampaignFragment } from "../../graphql/campaign.generated";
 import { isAfterEndDate } from "../../util/isAfterEndDate";
-import { CampaignFormat } from "../../graphql/types";
-import { IAdvertiser } from "../../auth/context/auth.interface";
-import { useAdvertiser } from "../../auth/hooks/queries/useAdvertiser";
+import { CampaignFormat, CampaignSource } from "../../graphql/types";
 import { AdvertiserCampaignsFragment } from "../../graphql/advertiser.generated";
 
 interface Props {
@@ -79,6 +76,7 @@ export function CampaignList({
                 {r.name}
               </Link>
               {advertiserCampaigns?.selfServiceEdit &&
+                r.source === CampaignSource.SelfServe &&
                 r.format === CampaignFormat.PushNotification &&
                 r.state !== "completed" && (
                   <Tooltip title={`Edit ${r.name}`}>
