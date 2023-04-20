@@ -139,6 +139,7 @@ async function graphqlRequest<T>(node: DocumentNode, input: T) {
       variables: input,
     }),
     {
+      withCredentials: true,
       headers: {
         "Content-Type": "application/json",
       },

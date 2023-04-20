@@ -16,6 +16,7 @@ export const downloadCSV = async (
         import.meta.env.REACT_APP_SERVER_ADDRESS
       }/report/campaign/csv/${campaignId}`,
       {
+        withCredentials: true,
         headers: {
           "-x-user": userId,
           "Content-Type": "text/csv",
