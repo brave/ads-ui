@@ -26,10 +26,10 @@ import { populateFilter } from "./library";
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
     uri: `${import.meta.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql"),
+    credentials: "include",
   });
 
   return new ApolloClient({
-    credentials: "include",
     link: httpLink,
     cache: new InMemoryCache(),
   });

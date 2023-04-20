@@ -22,6 +22,7 @@ export const getCredentials = async (user: {
   const res = await fetch(`${url}/auth/token`, {
     method: "POST",
     mode: "cors",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -65,6 +66,7 @@ export const clearCredentials = async (): Promise<void> => {
   const res = await fetch(`${url}/auth/logout`, {
     method: "GET",
     mode: "cors",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
