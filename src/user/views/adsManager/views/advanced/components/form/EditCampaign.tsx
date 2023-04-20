@@ -5,28 +5,30 @@ import { CampaignForm } from "../../../../types";
 import { CampaignSchema } from "../../../../../../../validation/CampaignSchema";
 import {
   editCampaignValues,
+  populateFilter,
   transformEditForm,
 } from "../../../../../../library";
 import {
-  refetchLoadCampaignQuery,
   useLoadCampaignQuery,
   useUpdateCampaignMutation,
 } from "../../../../../../../graphql/campaign.generated";
-import { refetchAdvertiserQuery } from "../../../../../../../graphql/advertiser.generated";
+import { refetchAdvertiserCampaignsQuery } from "../../../../../../../graphql/advertiser.generated";
 import { useHistory, useParams } from "react-router-dom";
 import { BaseForm } from "./components/BaseForm";
-import { IAdvertiser, IAuthUser } from "../../../../../../../actions";
-
-interface Props {
-  advertiser: IAdvertiser;
-  auth: IAuthUser;
-}
+import { useAdvertiser } from "../../../../../../../auth/hooks/queries/useAdvertiser";
+import { useUser } from "../../../../../../../auth/hooks/queries/useUser";
 
 interface Params {
   campaignId: string;
 }
 
-export function EditCampaign({ advertiser, auth }: Props) {
+interface Props {
+  fromDate: Date | null;
+}
+
+export function EditCampaign({ fromDate }: Props) {
+  const { advertiser } = useAdvertiser();
+  const { userId } = useUser();
   const history = useHistory();
   const params = useParams<Params>();
 
@@ -37,10 +39,10 @@ export function EditCampaign({ advertiser, auth }: Props) {
   const [mutation] = useUpdateCampaignMutation({
     refetchQueries: [
       {
-        ...refetchAdvertiserQuery({ id: advertiser.id }),
-      },
-      {
-        ...refetchLoadCampaignQuery({ id: params.campaignId }),
+        ...refetchAdvertiserCampaignsQuery({
+          id: advertiser.id,
+          filter: populateFilter(fromDate),
+        }),
       },
     ],
     onCompleted() {
@@ -60,7 +62,7 @@ export function EditCampaign({ advertiser, auth }: Props) {
         initialValues={initialValues}
         onSubmit={(v: CampaignForm, { setSubmitting }) => {
           setSubmitting(true);
-          transformEditForm(v, params.campaignId, auth, advertiser.id)
+          transformEditForm(v, params.campaignId, advertiser.id, userId)
             .then(async (u) => {
               return await mutation({ variables: { input: u } });
             })

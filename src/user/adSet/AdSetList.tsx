@@ -5,19 +5,15 @@ import {
 } from "../../components/EnhancedTable";
 import { Chip, LinearProgress } from "@mui/material";
 import { Status } from "../../components/Campaigns/Status";
-import { CampaignFragment } from "../../graphql/campaign.generated";
 import _ from "lodash";
 import { isAfterEndDate } from "../../util/isAfterEndDate";
-import {
-  adOnOffState,
-  adSetOnOffState,
-} from "../../components/EnhancedTable/renderers";
-import { IAdvertiser } from "../../actions";
+import { adSetOnOffState } from "../../components/EnhancedTable/renderers";
+import { AdvertiserCampaignsFragment } from "../../graphql/advertiser.generated";
 
 interface Props {
-  campaigns: CampaignFragment[];
+  advertiserCampaigns?: AdvertiserCampaignsFragment | null;
   loading: boolean;
-  advertiser: IAdvertiser;
+  fromDate: Date | null;
 }
 
 interface ChipListProps {
@@ -51,7 +47,8 @@ const ChipList: React.FC<ChipListProps> = ({ items }) => {
   );
 };
 
-export function AdSetList({ campaigns, loading, advertiser }: Props) {
+export function AdSetList({ advertiserCampaigns, loading, fromDate }: Props) {
+  const campaigns = advertiserCampaigns?.campaigns ?? [];
   const mapAdSetName = campaigns.map((c) => ({
     adSets: c.adSets.map((a) => ({
       ...a,
@@ -61,6 +58,8 @@ export function AdSetList({ campaigns, loading, advertiser }: Props) {
       campaignId: c.id,
       campaignState: c.state,
       campaignSource: c.source,
+      advertiserId: advertiserCampaigns?.id ?? "",
+      fromDate,
     })),
   }));
   const adSets = _.flatMap(mapAdSetName, "adSets");
@@ -88,7 +87,7 @@ export function AdSetList({ campaigns, loading, advertiser }: Props) {
         {
           title: "On/Off",
           value: (c) => c.state,
-          extendedRenderer: (r) => adSetOnOffState(r, advertiser),
+          extendedRenderer: (r) => adSetOnOffState(r),
           sx: { width: "10px" },
           sortable: false,
         },

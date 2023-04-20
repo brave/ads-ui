@@ -4,6 +4,75 @@ import { gql } from "@apollo/client";
 import { CampaignSummaryFragmentDoc } from "./campaign.generated";
 import * as Apollo from "@apollo/client";
 const defaultOptions = {} as const;
+export type AdvertiserSummaryFragment = {
+  __typename?: "Advertiser";
+  id: string;
+  name: string;
+  state: string;
+  billingEmail?: string | null;
+  additionalBillingEmails?: Array<string> | null;
+  createdAt: any;
+  modifiedAt: any;
+  publicKey?: string | null;
+};
+
+export type AdvertiserFragment = {
+  __typename?: "Advertiser";
+  referrer?: string | null;
+  phone?: string | null;
+  selfServiceEdit: boolean;
+  selfServiceCreate: boolean;
+  selfServiceSetPrice: boolean;
+  id: string;
+  name: string;
+  state: string;
+  billingEmail?: string | null;
+  additionalBillingEmails?: Array<string> | null;
+  createdAt: any;
+  modifiedAt: any;
+  publicKey?: string | null;
+  mailingAddress: {
+    __typename?: "Address";
+    street1: string;
+    street2?: string | null;
+    city: string;
+    country: string;
+    state: string;
+    zipcode: string;
+  };
+};
+
+export type AdvertisersQueryVariables = Types.Exact<{ [key: string]: never }>;
+
+export type AdvertisersQuery = {
+  __typename?: "Query";
+  userAdvertisers?: Array<{
+    __typename?: "Advertiser";
+    referrer?: string | null;
+    phone?: string | null;
+    selfServiceEdit: boolean;
+    selfServiceCreate: boolean;
+    selfServiceSetPrice: boolean;
+    id: string;
+    name: string;
+    state: string;
+    billingEmail?: string | null;
+    additionalBillingEmails?: Array<string> | null;
+    createdAt: any;
+    modifiedAt: any;
+    publicKey?: string | null;
+    mailingAddress: {
+      __typename?: "Address";
+      street1: string;
+      street2?: string | null;
+      city: string;
+      country: string;
+      state: string;
+      zipcode: string;
+    };
+  }> | null;
+};
+
 export type AdvertiserQueryVariables = Types.Exact<{
   id: Types.Scalars["String"];
 }>;
@@ -30,6 +99,83 @@ export type UpdateAdvertiserMutation = {
   };
 };
 
+export type AdvertiserCampaignsFragment = {
+  __typename?: "Advertiser";
+  id: string;
+  name: string;
+  selfServiceEdit: boolean;
+  selfServiceCreate: boolean;
+  selfServiceSetPrice: boolean;
+  campaigns: Array<{
+    __typename?: "Campaign";
+    id: string;
+    name: string;
+    state: string;
+    dailyCap: number;
+    priority: number;
+    passThroughRate: number;
+    pacingOverride: boolean;
+    pacingStrategy: Types.CampaignPacingStrategies;
+    externalId: string;
+    currency: string;
+    budget: number;
+    dailyBudget: number;
+    spent: number;
+    createdAt: any;
+    startAt: any;
+    endAt: any;
+    source: Types.CampaignSource;
+    type: string;
+    format: Types.CampaignFormat;
+    dayProportion?: number | null;
+    adSets: Array<{
+      __typename?: "AdSet";
+      id: string;
+      createdAt: any;
+      billingType?: string | null;
+      name?: string | null;
+      totalMax: number;
+      perDay: number;
+      state: string;
+      execution: string;
+      segments?: Array<{
+        __typename?: "Segment";
+        code: string;
+        name: string;
+      }> | null;
+      oses?: Array<{ __typename?: "OS"; code: string; name: string }> | null;
+      conversions?: Array<{
+        __typename?: "Conversion";
+        id: string;
+        type: string;
+        urlPattern: string;
+        observationWindow: number;
+      }> | null;
+      ads?: Array<{
+        __typename?: "Ad";
+        id: string;
+        state: string;
+        prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
+        creative: {
+          __typename?: "Creative";
+          id: string;
+          createdAt: any;
+          modifiedAt: any;
+          name: string;
+          state: string;
+          type: { __typename?: "CreativeType"; code: string };
+          payloadNotification?: {
+            __typename?: "NotificationPayload";
+            body: string;
+            title: string;
+            targetUrl: string;
+          } | null;
+        };
+      }> | null;
+    }>;
+  }>;
+};
+
 export type AdvertiserCampaignsQueryVariables = Types.Exact<{
   id: Types.Scalars["String"];
   filter?: Types.InputMaybe<Types.AdvertiserCampaignFilter>;
@@ -39,6 +185,11 @@ export type AdvertiserCampaignsQuery = {
   __typename?: "Query";
   advertiserCampaigns?: {
     __typename?: "Advertiser";
+    id: string;
+    name: string;
+    selfServiceEdit: boolean;
+    selfServiceCreate: boolean;
+    selfServiceSetPrice: boolean;
     campaigns: Array<{
       __typename?: "Campaign";
       id: string;
@@ -114,6 +265,109 @@ export type AdvertiserCampaignsQuery = {
   } | null;
 };
 
+export const AdvertiserSummaryFragmentDoc = gql`
+  fragment AdvertiserSummary on Advertiser {
+    id
+    name
+    state
+    billingEmail
+    additionalBillingEmails
+    createdAt
+    modifiedAt
+    publicKey
+  }
+`;
+export const AdvertiserFragmentDoc = gql`
+  fragment Advertiser on Advertiser {
+    ...AdvertiserSummary
+    referrer
+    phone
+    selfServiceEdit
+    selfServiceCreate
+    selfServiceSetPrice
+    mailingAddress {
+      street1
+      street2
+      city
+      country
+      state
+      zipcode
+    }
+  }
+  ${AdvertiserSummaryFragmentDoc}
+`;
+export const AdvertiserCampaignsFragmentDoc = gql`
+  fragment AdvertiserCampaigns on Advertiser {
+    id
+    name
+    selfServiceEdit
+    selfServiceCreate
+    selfServiceSetPrice
+    campaigns {
+      ...CampaignSummary
+    }
+  }
+  ${CampaignSummaryFragmentDoc}
+`;
+export const AdvertisersDocument = gql`
+  query advertisers {
+    userAdvertisers {
+      ...Advertiser
+    }
+  }
+  ${AdvertiserFragmentDoc}
+`;
+
+/**
+ * __useAdvertisersQuery__
+ *
+ * To run a query within a React component, call `useAdvertisersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdvertisersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdvertisersQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAdvertisersQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    AdvertisersQuery,
+    AdvertisersQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<AdvertisersQuery, AdvertisersQueryVariables>(
+    AdvertisersDocument,
+    options
+  );
+}
+export function useAdvertisersLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    AdvertisersQuery,
+    AdvertisersQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<AdvertisersQuery, AdvertisersQueryVariables>(
+    AdvertisersDocument,
+    options
+  );
+}
+export type AdvertisersQueryHookResult = ReturnType<typeof useAdvertisersQuery>;
+export type AdvertisersLazyQueryHookResult = ReturnType<
+  typeof useAdvertisersLazyQuery
+>;
+export type AdvertisersQueryResult = Apollo.QueryResult<
+  AdvertisersQuery,
+  AdvertisersQueryVariables
+>;
+export function refetchAdvertisersQuery(variables?: AdvertisersQueryVariables) {
+  return { query: AdvertisersDocument, variables: variables };
+}
 export const AdvertiserDocument = gql`
   query advertiser($id: String!) {
     advertiser(id: $id) {
@@ -228,12 +482,10 @@ export type UpdateAdvertiserMutationOptions = Apollo.BaseMutationOptions<
 export const AdvertiserCampaignsDocument = gql`
   query advertiserCampaigns($id: String!, $filter: AdvertiserCampaignFilter) {
     advertiserCampaigns(id: $id, filter: $filter) {
-      campaigns {
-        ...CampaignSummary
-      }
+      ...AdvertiserCampaigns
     }
   }
-  ${CampaignSummaryFragmentDoc}
+  ${AdvertiserCampaignsFragmentDoc}
 `;
 
 /**

@@ -17,41 +17,41 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import { useHistory } from "react-router-dom";
 import { Status } from "../../components/Campaigns/Status";
-import { CampaignFragment } from "../../graphql/campaign.generated";
 import { isAfterEndDate } from "../../util/isAfterEndDate";
-import { IAdvertiser } from "../../actions";
-import { CampaignFormat } from "../../graphql/types";
+import { CampaignFormat, CampaignSource } from "../../graphql/types";
+import { AdvertiserCampaignsFragment } from "../../graphql/advertiser.generated";
 
 interface Props {
-  campaigns: CampaignFragment[];
-  advertiser: IAdvertiser;
+  advertiserCampaigns?: AdvertiserCampaignsFragment | null;
   loading: boolean;
   fromDate: Date | null;
 }
 
 export function CampaignList({
-  campaigns,
-  advertiser,
+  advertiserCampaigns,
   loading,
   fromDate,
 }: Props) {
   const history = useHistory();
+  const campaigns = advertiserCampaigns?.campaigns ?? [];
 
   if (loading) return <LinearProgress />;
-
-  const canEdit = advertiser.selfServiceEdit;
 
   return (
     <EnhancedTable
       rows={campaigns}
-      initialSortColumn={6}
+      initialSortColumn={7}
       initialSortDirection="desc"
       columns={[
         {
           title: "On/Off",
           value: (c) => c.state,
           extendedRenderer: (r) =>
-            campaignOnOffState({ ...r, fromDate }, advertiser),
+            campaignOnOffState({
+              ...r,
+              fromDate,
+              advertiserId: advertiserCampaigns?.id ?? "",
+            }),
           sx: { width: "10px" },
           sortable: false,
         },
@@ -75,7 +75,8 @@ export function CampaignList({
               >
                 {r.name}
               </Link>
-              {canEdit &&
+              {advertiserCampaigns?.selfServiceEdit &&
+                r.source === CampaignSource.SelfServe &&
                 r.format === CampaignFormat.PushNotification &&
                 r.state !== "completed" && (
                   <Tooltip title={`Edit ${r.name}`}>
@@ -114,6 +115,11 @@ export function CampaignList({
         {
           title: "End",
           value: (c) => c.endAt,
+          renderer: StandardRenderers.date,
+        },
+        {
+          title: "Created",
+          value: (c) => c.createdAt,
           renderer: StandardRenderers.date,
         },
       ]}

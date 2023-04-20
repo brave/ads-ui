@@ -4,7 +4,7 @@ import { DetailField } from "./fields/DetailField";
 import { BudgetField } from "./fields/BudgetField";
 import { LocationField } from "./fields/LocationField";
 import { CampaignDateRange } from "../../../../../../../components/Campaigns/CampaignDateRange";
-import { IAdvertiser } from "../../../../../../../actions";
+import { IAdvertiser } from "../../../../../../../auth/context/auth.interface";
 
 interface Props {
   onNext: () => void;

@@ -1,16 +1,13 @@
 import { Form, FormikValues } from "formik";
-import { IconButton, Stack, Tab, Tabs, Tooltip } from "@mui/material";
+import { Stack, Tab, Tabs } from "@mui/material";
 import { CampaignFields } from "../../campaign/CampaignFields";
 import { AdSetFields } from "../../adSet/AdSetFields";
 import { AdField } from "../../ads/AdField";
 import { Review } from "../../review/Review";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { CampaignForm } from "../../../../../types";
-import { IAdvertiser } from "../../../../../../../../actions";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { DraftContext } from "../../../../../../../../state/context";
-import { useHistory } from "react-router-dom";
 import { DeleteDraft } from "./DeleteDraft";
+import { IAdvertiser } from "../../../../../../../../auth/context/auth.interface";
 
 interface Props {
   isEdit: boolean;

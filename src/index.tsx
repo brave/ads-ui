@@ -1,24 +1,19 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { PersistGate } from "redux-persist/integration/react";
 
-import App from "./App";
-
-import configureStore from "./Store";
+import { App } from "./App";
 
 import "./index.css";
-
-const { persistor, store } = configureStore();
+import "@fontsource/poppins/latin.css";
+import "@fontsource/mulish/latin.css";
+import { IAuthProvider } from "./auth";
 
 ReactDOM.render(
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </PersistGate>
-  </Provider>,
+  <IAuthProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </IAuthProvider>,
   document.getElementById("root") as HTMLElement
 );

@@ -3,27 +3,30 @@ import { Formik } from "formik";
 import React, { useContext } from "react";
 import { CampaignForm, initialCampaign } from "../../../../types";
 import { CampaignSchema } from "../../../../../../../validation/CampaignSchema";
-import { transformNewForm } from "../../../../../../library";
+import { populateFilter, transformNewForm } from "../../../../../../library";
 import { useCreateCampaignMutation } from "../../../../../../../graphql/campaign.generated";
-import { refetchAdvertiserQuery } from "../../../../../../../graphql/advertiser.generated";
+import { refetchAdvertiserCampaignsQuery } from "../../../../../../../graphql/advertiser.generated";
 import { useHistory, useParams } from "react-router-dom";
 import { BaseForm } from "./components/BaseForm";
-import { IAdvertiser, IAuthUser } from "../../../../../../../actions";
 import { PersistFormValues } from "../../../../../../../form/PersistFormValues";
 import { DraftContext } from "../../../../../../../state/context";
-
-interface Props {
-  auth: IAuthUser;
-  advertiser: IAdvertiser;
-}
+import { useAdvertiser } from "../../../../../../../auth/hooks/queries/useAdvertiser";
+import { useUser } from "../../../../../../../auth/hooks/queries/useUser";
 
 interface Params {
   draftId: string;
 }
 
-export function NewCampaign({ auth, advertiser }: Props) {
+interface Props {
+  fromDate: Date | null;
+}
+
+export function NewCampaign({ fromDate }: Props) {
   const history = useHistory();
   const params = useParams<Params>();
+  const { advertiser } = useAdvertiser();
+  const { userId } = useUser();
+
   const { setDrafts } = useContext(DraftContext);
 
   const initial: CampaignForm = {
@@ -34,7 +37,10 @@ export function NewCampaign({ auth, advertiser }: Props) {
   const [mutation] = useCreateCampaignMutation({
     refetchQueries: [
       {
-        ...refetchAdvertiserQuery({ id: advertiser.id }),
+        ...refetchAdvertiserCampaignsQuery({
+          id: advertiser.id,
+          filter: populateFilter(fromDate),
+        }),
       },
     ],
     onCompleted() {
@@ -50,7 +56,7 @@ export function NewCampaign({ auth, advertiser }: Props) {
         initialValues={initial}
         onSubmit={(v: CampaignForm, { setSubmitting }) => {
           setSubmitting(true);
-          transformNewForm(v, auth, advertiser.id)
+          transformNewForm(v, advertiser.id, userId)
             .then(async (c) => {
               return await mutation({ variables: { input: c } });
             })

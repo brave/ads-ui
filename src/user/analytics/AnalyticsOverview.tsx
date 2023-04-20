@@ -1,29 +1,23 @@
 import React, { useState } from "react";
-import { Alert, AlertTitle, Box, Divider, LinearProgress } from "@mui/material";
+import { Alert, Box, Divider, LinearProgress } from "@mui/material";
 import moment from "moment/moment";
 import { CampaignFormat } from "../../graphql/types";
 import {
   AnalyticOverviewQuery,
   useAnalyticOverviewQuery,
 } from "../../graphql/analytics-overview.generated";
-import { IAuthUser } from "../../actions";
 import { useParams } from "react-router-dom";
 import ReportUtils from "./analyticsOverview/components/ReportUtils";
 import { EngagementsOverview } from "./analyticsOverview/reports/campaign/EngagementsOverview";
 import { DailyCampaignOverview } from "./analyticsOverview/reports/campaign/DailyCampaignOverview";
 import { CreativeOverview } from "./analyticsOverview/reports/creative/CreativeOverview";
 import { OsOverview } from "./analyticsOverview/reports/os/OsOverview";
-import { Text } from "../../components/Text/Text";
 
 interface Params {
   campaignId: string;
 }
 
-interface Props {
-  auth: IAuthUser;
-}
-
-const AnalyticsOverview: React.FC<Props> = ({ auth }: Props) => {
+const AnalyticsOverview: React.FC = () => {
   const params = useParams<Params>();
   const today = new Date();
   const [startDate, setStartDate] = useState<Date | undefined>();
@@ -94,7 +88,6 @@ const AnalyticsOverview: React.FC<Props> = ({ auth }: Props) => {
         endDate={endDate}
         campaign={{ id: data.campaign.id, name: data.campaign.name }}
         onSetDate={setDateRange}
-        auth={auth}
       />
 
       <Divider textAlign="left" sx={{ fontWeight: "600", mb: 2 }}>
