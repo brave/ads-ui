@@ -1,6 +1,8 @@
 import { useAuthContext } from "../../context/auth.hook";
 
-export function useUser() {
+type User = { userId?: string; role?: string; email?: string };
+
+export function useUser(): User {
   const { userId, role, email } = useAuthContext();
 
   return {

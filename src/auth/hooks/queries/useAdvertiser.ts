@@ -1,7 +1,10 @@
 import { useAuthContext } from "../../context/auth.hook";
 import { IAdvertiser } from "../../context/auth.interface";
 
-export function useAdvertiser() {
+export function useAdvertiser(): {
+  advertiser: IAdvertiser;
+  advertisers: IAdvertiser[];
+} {
   const { advertisers } = useAuthContext();
 
   const defaultAdvertiser: IAdvertiser = {

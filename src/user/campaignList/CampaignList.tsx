@@ -40,7 +40,7 @@ export function CampaignList({
   return (
     <EnhancedTable
       rows={campaigns}
-      initialSortColumn={6}
+      initialSortColumn={7}
       initialSortDirection="desc"
       columns={[
         {
@@ -115,6 +115,11 @@ export function CampaignList({
         {
           title: "End",
           value: (c) => c.endAt,
+          renderer: StandardRenderers.date,
+        },
+        {
+          title: "Created",
+          value: (c) => c.createdAt,
           renderer: StandardRenderers.date,
         },
       ]}
