@@ -29,6 +29,7 @@ const buildApolloClient = () => {
   });
 
   return new ApolloClient({
+    credentials: "include",
     link: httpLink,
     cache: new InMemoryCache(),
   });
