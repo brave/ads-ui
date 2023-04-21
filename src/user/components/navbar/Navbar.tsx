@@ -49,16 +49,18 @@ export function Navbar({ canCreate }: Props) {
           <>
             <Button
               onClick={() => {
-                const newPath = `/user/main/adsmanager/advanced/new/${moment()
-                  .utc()
-                  .valueOf()}`;
-                history.push(isNewCampaignPage ? "/user/main" : newPath);
+                history.push(
+                  `/user/main/adsmanager/advanced/new/${moment()
+                    .utc()
+                    .valueOf()}`
+                );
               }}
               size="medium"
               variant="contained"
               sx={{ mr: 5 }}
+              disabled={isNewCampaignPage}
             >
-              {isNewCampaignPage ? "Dashboard" : "New Campaign"}
+              New Campaign
             </Button>
           </>
         )}
