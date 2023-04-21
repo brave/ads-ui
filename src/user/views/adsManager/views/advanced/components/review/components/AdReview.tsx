@@ -1,6 +1,6 @@
 import { Creative } from "../../../../../types";
 import { Box, List, Stack, Typography } from "@mui/material";
-import { CustomListItemText } from "../../../../../../../../components/List/CustomListItemText";
+import { CustomListItemText } from "components/List/CustomListItemText";
 import React from "react";
 import { FormikErrors } from "formik";
 

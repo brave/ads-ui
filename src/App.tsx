@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 
-import { Redirect, Route, Switch, useHistory } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 
-import { DraftContext, getAllDrafts } from "./state/context";
-import { User } from "./user/User";
+import { DraftContext, getAllDrafts } from "state/context";
+import { User } from "user/User";
 import {
   CssBaseline,
   StyledEngineProvider,
   ThemeProvider,
 } from "@mui/material";
-import { theme } from "./theme";
-import { CampaignForm } from "./user/views/adsManager/types";
-import { useIsAuthenticated } from "./auth/hooks/queries/useIsAuthenticated";
-import { SignIn } from "./containers/Authentication/Signin/Signin";
+import { theme } from "theme";
+import { CampaignForm } from "user/views/adsManager/types";
+import { useIsAuthenticated } from "auth/hooks/queries/useIsAuthenticated";
+import { SignIn } from "containers/Authentication/Signin/Signin";
 
 const Protected = () => {
   return <Redirect to="/auth/signin" />;

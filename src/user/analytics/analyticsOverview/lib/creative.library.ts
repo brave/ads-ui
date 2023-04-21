@@ -1,6 +1,6 @@
 import _ from "lodash";
-import { CampaignFormat } from "../../../../graphql/types";
-import { EngagementFragment } from "../../../../graphql/analytics-overview.generated";
+import { CampaignFormat } from "graphql/types";
+import { EngagementFragment } from "graphql/analytics-overview.generated";
 import { CreativeMetric } from "../types";
 import { processStats } from "./overview.library";
 

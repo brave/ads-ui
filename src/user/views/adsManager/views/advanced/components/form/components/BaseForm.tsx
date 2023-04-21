@@ -7,7 +7,7 @@ import { Review } from "../../review/Review";
 import React, { useState } from "react";
 import { CampaignForm } from "../../../../../types";
 import { DeleteDraft } from "./DeleteDraft";
-import { IAdvertiser } from "../../../../../../../../auth/context/auth.interface";
+import { IAdvertiser } from "auth/context/auth.interface";
 
 interface Props {
   isEdit: boolean;

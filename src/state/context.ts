@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { CampaignForm } from "../user/views/adsManager/types";
+import { CampaignForm } from "user/views/adsManager/types";
 import moment from "moment";
 
 export const DraftContext = createContext({

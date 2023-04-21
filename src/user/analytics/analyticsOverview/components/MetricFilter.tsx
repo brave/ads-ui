@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 import { BaseMetric, Metrics } from "../types";
 import { decideValueAttribute } from "../lib/overview.library";
 import MetricSelect from "./MetricSelect";
-import { Text } from "../../../../components/Text/Text";
+import { Text } from "components/Text/Text";
 
 interface FilterValue {
   value: string;

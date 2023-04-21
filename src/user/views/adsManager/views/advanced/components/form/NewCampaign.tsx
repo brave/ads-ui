@@ -2,16 +2,16 @@ import { Container } from "@mui/material";
 import { Formik } from "formik";
 import React, { useContext } from "react";
 import { CampaignForm, initialCampaign } from "../../../../types";
-import { CampaignSchema } from "../../../../../../../validation/CampaignSchema";
-import { populateFilter, transformNewForm } from "../../../../../../library";
-import { useCreateCampaignMutation } from "../../../../../../../graphql/campaign.generated";
-import { refetchAdvertiserCampaignsQuery } from "../../../../../../../graphql/advertiser.generated";
+import { CampaignSchema } from "validation/CampaignSchema";
+import { populateFilter, transformNewForm } from "user/library";
+import { useCreateCampaignMutation } from "graphql/campaign.generated";
+import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
 import { useHistory, useParams } from "react-router-dom";
 import { BaseForm } from "./components/BaseForm";
-import { PersistFormValues } from "../../../../../../../form/PersistFormValues";
-import { DraftContext } from "../../../../../../../state/context";
-import { useAdvertiser } from "../../../../../../../auth/hooks/queries/useAdvertiser";
-import { useUser } from "../../../../../../../auth/hooks/queries/useUser";
+import { PersistFormValues } from "form/PersistFormValues";
+import { DraftContext } from "state/context";
+import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { useUser } from "auth/hooks/queries/useUser";
 
 interface Params {
   draftId: string;

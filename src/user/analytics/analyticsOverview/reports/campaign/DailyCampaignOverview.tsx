@@ -2,11 +2,11 @@ import { Box, Tab, Tabs } from "@mui/material";
 import HighchartsReact from "highcharts-react-official";
 import * as Highcharts from "highcharts";
 import React, { useState } from "react";
-import { EngagementFragment } from "../../../../../graphql/analytics-overview.generated";
+import { EngagementFragment } from "graphql/analytics-overview.generated";
 import { Metrics } from "../../types";
 import { prepareChart, processData } from "../../lib/overview.library";
-import { CampaignFragment } from "../../../../../graphql/campaign.generated";
-import { CampaignFormat } from "../../../../../graphql/types";
+import { CampaignFragment } from "graphql/campaign.generated";
+import { CampaignFormat } from "graphql/types";
 
 interface Props {
   engagements: EngagementFragment[];

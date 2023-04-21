@@ -1,11 +1,11 @@
 import { Box, Stack } from "@mui/material";
 import React from "react";
-import { EngagementFragment } from "../../../../../graphql/analytics-overview.generated";
+import { EngagementFragment } from "graphql/analytics-overview.generated";
 import { mapOsStats, processOs } from "../../lib/os.library";
 import { OsPieChart } from "./components/OsPieChart";
 import { OsBarChart } from "./components/OsBarChart";
-import { CampaignFragment } from "../../../../../graphql/campaign.generated";
-import { CampaignFormat } from "../../../../../graphql/types";
+import { CampaignFragment } from "graphql/campaign.generated";
+import { CampaignFormat } from "graphql/types";
 
 interface Props {
   engagements: EngagementFragment[];

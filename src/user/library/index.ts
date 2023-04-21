@@ -1,12 +1,4 @@
 import {
-  Billing,
-  CampaignForm,
-  Conversion,
-  Creative,
-  OS,
-  Segment,
-} from "../views/adsManager/types";
-import {
   AdvertiserCampaignFilter,
   CreateAdInput,
   CreateAdSetInput,
@@ -15,16 +7,20 @@ import {
   GeocodeInput,
   UpdateAdSetInput,
   UpdateCampaignInput,
-} from "../../graphql/types";
+} from "graphql/types";
 import axios from "axios";
 import { DocumentNode, print } from "graphql";
-import { CampaignFragment } from "../../graphql/campaign.generated";
+import { CampaignFragment } from "graphql/campaign.generated";
+import { CreateAdDocument } from "graphql/ad-set.generated";
+import { CreateNotificationCreativeDocument } from "graphql/creative.generated";
 import {
-  CreateAdDocument,
-  UpdateAdDocument,
-} from "../../graphql/ad-set.generated";
-import { CreateNotificationCreativeDocument } from "../../graphql/creative.generated";
-import { IAdvertiser, IAuthState } from "../../auth/context/auth.interface";
+  Billing,
+  CampaignForm,
+  Conversion,
+  Creative,
+  OS,
+  Segment,
+} from "user/views/adsManager/types";
 
 const TYPE_CODE_LOOKUP = {
   notification_all_v1: "Push Notification",

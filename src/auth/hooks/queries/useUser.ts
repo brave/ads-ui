@@ -1,4 +1,4 @@
-import { useAuthContext } from "../../context/auth.hook";
+import { useAuthContext } from "auth/context/auth.hook";
 
 type User = { userId?: string; role?: string; email?: string };
 

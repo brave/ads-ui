@@ -5,20 +5,20 @@ import { CellValue } from "./EnhancedTable";
 import React, { ReactChild, ReactNode } from "react";
 import { formatInTimeZone } from "date-fns-tz";
 import enUS from "date-fns/locale/en-US";
-import { populateFilter, updateCampaignState } from "../../user/library";
+import { populateFilter, updateCampaignState } from "user/library";
 import {
   CampaignFragment,
   useUpdateCampaignMutation,
-} from "../../graphql/campaign.generated";
-import { AdvertiserCampaignsDocument } from "../../graphql/advertiser.generated";
+} from "graphql/campaign.generated";
+import { AdvertiserCampaignsDocument } from "graphql/advertiser.generated";
 import {
   AdSetFragment,
   useUpdateAdMutation,
   useUpdateAdSetMutation,
-} from "../../graphql/ad-set.generated";
+} from "graphql/ad-set.generated";
 import { OnOff } from "../Switch/OnOff";
-import { CreativeFragment } from "../../graphql/creative.generated";
-import { CampaignSource } from "../../graphql/types";
+import { CreativeFragment } from "graphql/creative.generated";
+import { CampaignSource } from "graphql/types";
 
 export type CellValueRenderer = (value: CellValue) => React.ReactNode;
 const ADS_DEFAULT_TIMEZONE = "America/New_York";

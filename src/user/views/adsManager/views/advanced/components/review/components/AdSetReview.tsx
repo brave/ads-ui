@@ -1,10 +1,10 @@
 import { Card, Divider, List, Typography } from "@mui/material";
-import { CustomListItemText } from "../../../../../../../../components/List/CustomListItemText";
+import { CustomListItemText } from "components/List/CustomListItemText";
 import React from "react";
 import { AdSetForm, OS, Segment } from "../../../../../types";
 import { FormikErrors } from "formik";
 import { AdReview } from "./AdReview";
-import ConversionDisplay from "../../../../../../../../components/Conversion/ConversionDisplay";
+import { ConversionDisplay } from "components/Conversion/ConversionDisplay";
 
 interface Props {
   idx: number;

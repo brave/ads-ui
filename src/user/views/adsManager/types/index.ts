@@ -1,12 +1,6 @@
-import {
-  CampaignFormat,
-  CampaignPacingStrategies,
-} from "../../../../graphql/types";
-import {
-  defaultEndDate,
-  defaultStartDate,
-} from "../../../../form/DateFieldHelpers";
-import { MIN_PER_CAMPAIGN } from "../../../../validation/CampaignSchema";
+import { CampaignFormat, CampaignPacingStrategies } from "graphql/types";
+import { defaultEndDate, defaultStartDate } from "form/DateFieldHelpers";
+import { MIN_PER_CAMPAIGN } from "validation/CampaignSchema";
 
 export type Billing = "cpm" | "cpc";
 

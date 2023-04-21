@@ -1,14 +1,11 @@
-import {
-  EnhancedTable,
-  StandardRenderers,
-} from "../../components/EnhancedTable";
+import { EnhancedTable, StandardRenderers } from "components/EnhancedTable";
 import { LinearProgress } from "@mui/material";
-import { Status } from "../../components/Campaigns/Status";
+import { Status } from "components/Campaigns/Status";
 import _ from "lodash";
 import { uiTextForCreativeTypeCode } from "../library";
-import { adOnOffState } from "../../components/EnhancedTable/renderers";
-import { isAfterEndDate } from "../../util/isAfterEndDate";
-import { AdvertiserCampaignsFragment } from "../../graphql/advertiser.generated";
+import { adOnOffState } from "components/EnhancedTable/renderers";
+import { isAfterEndDate } from "util/isAfterEndDate";
+import { AdvertiserCampaignsFragment } from "graphql/advertiser.generated";
 
 interface Props {
   advertiserCampaigns?: AdvertiserCampaignsFragment | null;

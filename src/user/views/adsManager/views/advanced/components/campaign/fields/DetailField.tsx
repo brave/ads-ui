@@ -1,6 +1,5 @@
 import { Box, Divider, Typography } from "@mui/material";
-import { FormikTextField } from "../../../../../../../../form/FormikHelpers";
-import { CampaignDateRange } from "../../../../../../../../components/Campaigns/CampaignDateRange";
+import { FormikTextField } from "form/FormikHelpers";
 import React from "react";
 
 export function DetailField() {

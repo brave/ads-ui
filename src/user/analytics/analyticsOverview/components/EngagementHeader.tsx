@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  BottomNavigation,
-  BottomNavigationAction,
-  Box,
-  Button,
-  Tab,
-  Tabs,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Tab, Tabs, Typography } from "@mui/material";
 import { EngagementChartType } from "../types";
 
 interface HeaderProps {
