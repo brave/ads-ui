@@ -1,9 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
-import { Sidebar } from "./components/sidebar/Sidebar";
-import { CampaignList } from "./campaignList/CampaignList";
-
 import {
   ApolloClient,
   ApolloProvider,
@@ -16,13 +13,10 @@ import { Box, Stack } from "@mui/material";
 import { NewCampaign } from "./views/adsManager/views/advanced/components/form/NewCampaign";
 import { EditCampaign } from "./views/adsManager/views/advanced/components/form/EditCampaign";
 import { CompletionForm } from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
-import { useAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
-import { AdSetList } from "./adSet/AdSetList";
-import { AdList } from "./ads/AdList";
 import moment from "moment";
-import { CampaignAgeFilter } from "components/Campaigns/CampaignAgeFilter";
-import { populateFilter } from "./library";
 import { MainView } from "user/views/user/MainView";
+import { Navbar } from "user/components/navbar/Navbar";
+import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -38,6 +32,7 @@ const buildApolloClient = () => {
 
 export function User() {
   const client = useMemo(() => buildApolloClient(), []);
+  const { advertiser } = useAdvertiser();
   const [fromDateFilter, setFromDateFilter] = useState<Date | null>(
     moment().subtract(6, "month").startOf("day").toDate()
   );
@@ -46,7 +41,7 @@ export function User() {
     <ApolloProvider client={client}>
       <Box height="100%">
         <Box display="flex">
-          <Sidebar />
+          <Navbar canCreate={advertiser.selfServiceCreate} />
           <Box
             width="100%"
             height="100%"
