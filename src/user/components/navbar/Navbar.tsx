@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useRouteMatch } from "react-router-dom";
 
 import TopBarProgress from "react-topbar-progress-indicator";
 
@@ -31,6 +31,8 @@ interface Props {
 
 export function Navbar({ canCreate }: Props) {
   const history = useHistory();
+  const { url } = useRouteMatch();
+  const isNewCampaignPage = url.includes("/user/main/adsmanager/advanced/new");
 
   return (
     <AppBar
@@ -38,24 +40,27 @@ export function Navbar({ canCreate }: Props) {
       sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, bgcolor: "#ffffff" }}
     >
       <Toolbar>
-        <Link style={logoStyle} to={"/home"}>
+        <Link style={logoStyle} to="/user/main">
           <img src={rewards} alt="Ads" height="40px" />
         </Link>
         {canCreate && <DraftMenu />}
         <div style={{ flexGrow: 1 }} />
         {canCreate && (
-          <Button
-            onClick={() =>
-              history.push(
-                `/user/main/adsmanager/advanced/new/${moment().utc().valueOf()}`
-              )
-            }
-            size="large"
-            variant="contained"
-            sx={{ mr: 5 }}
-          >
-            New Campaign
-          </Button>
+          <>
+            <Button
+              onClick={() => {
+                const newPath = `/user/main/adsmanager/advanced/new/${moment()
+                  .utc()
+                  .valueOf()}`;
+                history.push(isNewCampaignPage ? "/user/main" : newPath);
+              }}
+              size="medium"
+              variant="contained"
+              sx={{ mr: 5 }}
+            >
+              {isNewCampaignPage ? "Dashboard" : "New Campaign"}
+            </Button>
+          </>
         )}
         <UserMenu />
       </Toolbar>

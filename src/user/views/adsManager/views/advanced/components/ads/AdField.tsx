@@ -1,18 +1,19 @@
 import { FieldArray, useField, useFormikContext } from "formik";
 import {
   Box,
-  Button,
   Card,
-  Divider,
   IconButton,
   Link,
   Paper,
   Stack,
+  Tab,
+  Tabs,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import { FormikTextField } from "form/FormikHelpers";
-import React from "react";
-import ClearIcon from "@mui/icons-material/Clear";
+import React, { useState } from "react";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import {
   AdSetForm,
   CampaignForm,
@@ -24,12 +25,12 @@ import logo from "../../../../../../../../brave_logo_icon.png";
 
 interface Props {
   index: number;
-  onNext: () => void;
   isEdit: boolean;
 }
 
-export function AdField({ index, onNext, isEdit }: Props) {
+export function AdField({ index, isEdit }: Props) {
   const { values } = useFormikContext<CampaignForm>();
+  const [selected, setSelected] = useState(0);
 
   const canRemove = (
     edit: boolean,
@@ -48,52 +49,71 @@ export function AdField({ index, onNext, isEdit }: Props) {
   return (
     <FieldArray name={`adSets.${index}.creatives`}>
       {({ remove, push }) => (
-        <>
-          {values.adSets[index].creatives.map((ad, idx) => (
-            <Card sx={{ mt: 2, p: 2 }}>
-              <Box display="flex" flexDirection="row" alignItems="center">
-                <Divider
-                  textAlign="left"
-                  sx={{ fontSize: "24px", mb: 1, mt: 1, flexGrow: 1 }}
+        <Card sx={{ mt: 2, p: 2 }}>
+          <Box sx={{ borderBottom: 1, borderColor: "divider", mb: 2 }}>
+            <Tabs
+              value={selected}
+              onChange={(e, nv) => setSelected(nv)}
+              variant="scrollable"
+              scrollButtons="auto"
+            >
+              {values.adSets[index].creatives.map((ad, idx) => (
+                <Tab value={idx} label={`Ad ${idx + 1}`} />
+              ))}
+            </Tabs>
+          </Box>
+
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Box display="flex" flexDirection="row" alignItems="center">
+              <Typography variant="body2" sx={{ mr: 1 }}>
+                Define the look and feel of your ads.
+              </Typography>
+              {values.adSets[index].creatives.length <= 9 && (
+                <Link
+                  underline="none"
+                  variant="body2"
+                  onClick={() => {
+                    push(initialCreative);
+                    setSelected(selected + 1);
+                  }}
+                  sx={{ cursor: "pointer" }}
                 >
-                  Ad {idx + 1}
-                </Divider>
-                {idx > 0 && canRemove(isEdit, values.adSets, idx, index) && (
-                  <IconButton onClick={() => remove(idx)}>
-                    <ClearIcon />
-                  </IconButton>
-                )}
-              </Box>
-
-              <Box display="flex" flexDirection="row" alignItems="center">
-                <Typography variant="body2" sx={{ mr: 1 }}>
-                  Define the look and feel of your ads.
-                </Typography>
-                {values.adSets[index].creatives.length - 1 === idx &&
-                  values.adSets[index].creatives.length <= 10 && (
-                    <Link
-                      underline="none"
-                      variant="body2"
-                      onClick={() => push(initialCreative)}
-                      sx={{ cursor: "pointer" }}
-                    >
-                      Create new Ad +
-                    </Link>
-                  )}
-              </Box>
-
-              <Ad adSetIdx={index} adIdx={idx} creative={ad} isEdit={isEdit} />
-
-              {values.adSets[index].creatives.length - 1 === idx && (
-                <Box sx={{ mt: 2 }}>
-                  <Button variant="contained" size="large" onClick={onNext}>
-                    Next
-                  </Button>
-                </Box>
+                  Create new Ad +
+                </Link>
               )}
-            </Card>
-          ))}
-        </>
+            </Box>
+
+            <Box display="flex" flexDirection="row" alignItems="center">
+              {selected > 0 &&
+                canRemove(isEdit, values.adSets, selected, index) && (
+                  <Tooltip title="Remove Ad">
+                    <IconButton
+                      onClick={() => {
+                        remove(selected);
+                        setSelected(selected - 1);
+                      }}
+                    >
+                      <RemoveCircleOutlineIcon
+                        fontSize="medium"
+                        color="error"
+                      />
+                    </IconButton>
+                  </Tooltip>
+                )}
+            </Box>
+          </Stack>
+
+          <Ad
+            adSetIdx={index}
+            adIdx={selected}
+            creative={values.adSets[index].creatives[selected]}
+            isEdit={isEdit}
+          />
+        </Card>
       )}
     </FieldArray>
   );

@@ -32,36 +32,36 @@ export function Sidebar() {
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <Navbar canCreate={advertiser.selfServiceCreate} />
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
-            width: drawerWidth,
-            boxSizing: "border-box",
-          },
-        }}
-        variant="permanent"
-        anchor="left"
-      >
-        <List sx={{ mt: 7 }}>
-          {routes.map((r) => (
-            <ListItemButton
-              selected={history.location.pathname === `/user/main/${r.path}`}
-              onClick={() => {
-                history.push(`/user/main/${r.path}`);
-              }}
-              sx={{ mt: 1 }}
-              key={r.path}
-            >
-              <ListItemText disableTypography>
-                <Typography variant="h6">{r.label}</Typography>
-              </ListItemText>
-              <ListItemIcon>{r.icon}</ListItemIcon>
-            </ListItemButton>
-          ))}
-        </List>
-      </Drawer>
+      {/*<Drawer*/}
+      {/*  sx={{*/}
+      {/*    width: drawerWidth,*/}
+      {/*    flexShrink: 0,*/}
+      {/*    "& .MuiDrawer-paper": {*/}
+      {/*      width: drawerWidth,*/}
+      {/*      boxSizing: "border-box",*/}
+      {/*    },*/}
+      {/*  }}*/}
+      {/*  variant="permanent"*/}
+      {/*  anchor="left"*/}
+      {/*>*/}
+      {/*  <List sx={{ mt: 7 }}>*/}
+      {/*    {routes.map((r) => (*/}
+      {/*      <ListItemButton*/}
+      {/*        selected={history.location.pathname === `/user/main/${r.path}`}*/}
+      {/*        onClick={() => {*/}
+      {/*          history.push(`/user/main/${r.path}`);*/}
+      {/*        }}*/}
+      {/*        sx={{ mt: 1 }}*/}
+      {/*        key={r.path}*/}
+      {/*      >*/}
+      {/*        <ListItemText disableTypography>*/}
+      {/*          <Typography variant="h6">{r.label}</Typography>*/}
+      {/*        </ListItemText>*/}
+      {/*        <ListItemIcon>{r.icon}</ListItemIcon>*/}
+      {/*      </ListItemButton>*/}
+      {/*    ))}*/}
+      {/*  </List>*/}
+      {/*</Drawer>*/}
     </Box>
   );
 }

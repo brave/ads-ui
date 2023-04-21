@@ -9,7 +9,6 @@ import { AdvertiserCampaignsFragment } from "graphql/advertiser.generated";
 
 interface Props {
   advertiserCampaigns?: AdvertiserCampaignsFragment | null;
-  loading: boolean;
   fromDate: Date | null;
 }
 
@@ -44,7 +43,7 @@ const ChipList: React.FC<ChipListProps> = ({ items }) => {
   );
 };
 
-export function AdSetList({ advertiserCampaigns, loading, fromDate }: Props) {
+export function AdSetList({ advertiserCampaigns, fromDate }: Props) {
   const campaigns = advertiserCampaigns?.campaigns ?? [];
   const mapAdSetName = campaigns.map((c) => ({
     adSets: c.adSets.map((a) => ({
@@ -72,8 +71,6 @@ export function AdSetList({ advertiserCampaigns, loading, fromDate }: Props) {
       ? "completed"
       : c.state;
   };
-
-  if (loading) return <LinearProgress />;
 
   return (
     <EnhancedTable
