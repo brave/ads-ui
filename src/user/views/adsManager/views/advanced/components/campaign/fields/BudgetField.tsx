@@ -1,16 +1,10 @@
 import { Box, Divider, InputAdornment, Stack, Typography } from "@mui/material";
-import {
-  FormikRadioControl,
-  FormikTextField,
-} from "../../../../../../../../form/FormikHelpers";
+import { FormikRadioControl, FormikTextField } from "form/FormikHelpers";
 import React, { useEffect, useState } from "react";
 import { useFormikContext } from "formik";
 import { CampaignForm } from "../../../../../types";
 import { differenceInHours } from "date-fns";
-import {
-  MIN_PER_CAMPAIGN,
-  MIN_PER_DAY,
-} from "../../../../../../../../validation/CampaignSchema";
+import { MIN_PER_CAMPAIGN, MIN_PER_DAY } from "validation/CampaignSchema";
 import _ from "lodash";
 
 interface Props {

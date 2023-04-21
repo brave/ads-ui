@@ -1,6 +1,6 @@
-import { object, string, ref, number, date, array, boolean } from "yup";
+import { array, boolean, date, number, object, ref, string } from "yup";
 import { startOfDay } from "date-fns";
-import { twoDaysOut } from "../form/DateFieldHelpers";
+import { twoDaysOut } from "form/DateFieldHelpers";
 
 export const SimpleUrlRegexp = /https:\/\/.+\.[a-zA-Z]{2,}\/?.*/g;
 const NoSpacesRegex = /^\S*$/;

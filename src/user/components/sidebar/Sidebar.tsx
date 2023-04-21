@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import { Navbar } from "../navbar/Navbar";
-import { useAdvertiser } from "../../../auth/hooks/queries/useAdvertiser";
+import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 
 const drawerWidth = 240;
 

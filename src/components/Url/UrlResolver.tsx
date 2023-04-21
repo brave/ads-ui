@@ -1,20 +1,16 @@
 import {
   Alert,
-  Box,
-  TextField,
-  InputAdornment,
-  CircularProgress,
   AlertTitle,
-  Tooltip,
-  LinearProgress,
+  Box,
+  CircularProgress,
+  InputAdornment,
+  TextField,
 } from "@mui/material";
-import React, { useMemo, useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import _ from "lodash";
-import { useField, useFormikContext } from "formik";
-import { useValidateTargetUrlLazyQuery } from "../../graphql/url.generated";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import { SimpleUrlRegexp } from "../../validation/CampaignSchema";
-import { CampaignForm } from "../../user/views/adsManager/types";
+import { useField } from "formik";
+import { useValidateTargetUrlLazyQuery } from "graphql/url.generated";
+import { SimpleUrlRegexp } from "validation/CampaignSchema";
 
 interface Props {
   name: string;

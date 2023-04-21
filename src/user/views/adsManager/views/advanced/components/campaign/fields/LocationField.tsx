@@ -1,5 +1,5 @@
 import { Box, Divider, Typography } from "@mui/material";
-import { LocationPicker } from "../../../../../../../../components/Location/LocationPicker";
+import { LocationPicker } from "components/Location/LocationPicker";
 import React from "react";
 
 export function LocationField() {

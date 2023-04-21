@@ -3,8 +3,8 @@ import { LoadingButton } from "@mui/lab";
 import SaveIcon from "@mui/icons-material/Save";
 import React, { useState } from "react";
 import { downloadCSV } from "../lib/csv.library";
-import { DateRangePicker } from "../../../../components/Date/DateRangePicker";
-import { useUser } from "../../../../auth/hooks/queries/useUser";
+import { DateRangePicker } from "components/Date/DateRangePicker";
+import { useUser } from "auth/hooks/queries/useUser";
 
 interface DownloaderProps {
   startDate: Date | undefined;

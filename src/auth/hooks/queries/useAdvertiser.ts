@@ -1,5 +1,5 @@
-import { useAuthContext } from "../../context/auth.hook";
-import { IAdvertiser } from "../../context/auth.interface";
+import { useAuthContext } from "auth/context/auth.hook";
+import { IAdvertiser } from "auth/context/auth.interface";
 
 export function useAdvertiser(): {
   advertiser: IAdvertiser;

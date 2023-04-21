@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  EnhancedTable,
-  StandardRenderers,
-} from "../../components/EnhancedTable";
+import { EnhancedTable, StandardRenderers } from "components/EnhancedTable";
 import {
   IconButton,
   LinearProgress,
@@ -13,13 +10,13 @@ import {
 import {
   campaignOnOffState,
   renderMonetaryAmount,
-} from "../../components/EnhancedTable/renderers";
+} from "components/EnhancedTable/renderers";
 import EditIcon from "@mui/icons-material/Edit";
 import { useHistory } from "react-router-dom";
-import { Status } from "../../components/Campaigns/Status";
-import { isAfterEndDate } from "../../util/isAfterEndDate";
-import { CampaignFormat, CampaignSource } from "../../graphql/types";
-import { AdvertiserCampaignsFragment } from "../../graphql/advertiser.generated";
+import { Status } from "components/Campaigns/Status";
+import { isAfterEndDate } from "util/isAfterEndDate";
+import { CampaignFormat, CampaignSource } from "graphql/types";
+import { AdvertiserCampaignsFragment } from "graphql/advertiser.generated";
 
 interface Props {
   advertiserCampaigns?: AdvertiserCampaignsFragment | null;

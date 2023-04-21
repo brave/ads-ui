@@ -1,6 +1,6 @@
 import React from "react";
 import { FormikErrors } from "formik";
-import { Conversion } from "../../user/views/adsManager/types";
+import { Conversion } from "user/views/adsManager/types";
 
 interface Props {
   errors?: FormikErrors<Conversion> | string;

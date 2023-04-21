@@ -1,5 +1,5 @@
-import { UserFragment } from "../../graphql/user.generated";
-import { AdvertiserFragment } from "../../graphql/advertiser.generated";
+import { UserFragment } from "graphql/user.generated";
+import { AdvertiserFragment } from "graphql/advertiser.generated";
 
 const url = import.meta.env.REACT_APP_SERVER_ADDRESS.replace("v1", "v2");
 

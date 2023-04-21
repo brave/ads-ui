@@ -1,7 +1,7 @@
 import { useFormikContext } from "formik";
 import React, { useContext, useEffect } from "react";
-import { CampaignForm } from "../user/views/adsManager/types";
-import { DraftContext } from "../state/context";
+import { CampaignForm } from "user/views/adsManager/types";
+import { DraftContext } from "state/context";
 
 interface Props {
   id: string;

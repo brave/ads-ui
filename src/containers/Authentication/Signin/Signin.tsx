@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import {
   Alert,
@@ -10,9 +10,9 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import BraveLogo from "../../../..//brave-logotype-full-color.png";
+import BraveLogo from "../../../../brave-logotype-full-color.png";
 import { useHistory } from "react-router-dom";
-import { useSignIn } from "../../../auth/hooks/mutations/useSignIn";
+import { useSignIn } from "auth/hooks/mutations/useSignIn";
 
 export function SignIn() {
   const [email, setEmail] = useState("");

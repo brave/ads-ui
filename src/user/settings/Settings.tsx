@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { Text } from "../../components/Text/Text";
+import { Text } from "components/Text/Text";
 import {
   Button,
   Input,
   InputContainer,
-} from "../../components/formElements/formElements";
+} from "components/formElements/formElements";
 import _ from "lodash";
 import * as tweetnacl from "tweetnacl";
-import { useUpdateAdvertiserMutation } from "../../graphql/advertiser.generated";
+import { useUpdateAdvertiserMutation } from "graphql/advertiser.generated";
 import {
   Box,
   FormControl,
@@ -16,8 +16,8 @@ import {
   Modal,
   Select,
 } from "@mui/material";
-import { useAdvertiser } from "../../auth/hooks/queries/useAdvertiser";
-import { setActiveAdvertiser } from "../../auth/util";
+import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { setActiveAdvertiser } from "auth/util";
 
 const modalStyles = {
   position: "absolute" as "absolute",

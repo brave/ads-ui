@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  IAuthState,
-  IAuthProviderProps,
   IAdvertiser,
+  IAuthProviderProps,
+  IAuthState,
 } from "auth/context/auth.interface";
-import { initialState, IAuthContext } from "auth/context/auth.state";
+import { IAuthContext, initialState } from "auth/context/auth.state";
 import { getUser, ResponseUser } from "./lib";
 import _ from "lodash";
 import { setActiveAdvertiser } from "./util";

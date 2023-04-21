@@ -6,8 +6,8 @@ import _ from "lodash";
 import {
   CampaignWithEngagementsFragment,
   EngagementFragment,
-} from "../../../../../graphql/analytics-overview.generated";
-import { AdSetFragment } from "../../../../../graphql/ad-set.generated";
+} from "graphql/analytics-overview.generated";
+import { AdSetFragment } from "graphql/ad-set.generated";
 import { EngagementChartType, Metrics, OverviewDetail } from "../../types";
 import {
   prepareChart,
@@ -17,7 +17,7 @@ import {
 import MetricFilter from "../../components/MetricFilter";
 import EngagementHeader from "../../components/EngagementHeader";
 import LiveFeed from "../../components/LiveFeed";
-import { CampaignFormat } from "../../../../../graphql/types";
+import { CampaignFormat } from "graphql/types";
 
 interface Props {
   engagements: EngagementFragment[];

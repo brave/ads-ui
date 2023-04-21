@@ -1,9 +1,9 @@
 import * as React from "react";
+import { useState } from "react";
 
 import { useHistory } from "react-router-dom";
 import { Button, Menu, MenuItem, Snackbar } from "@mui/material";
-import { useState } from "react";
-import { useSignOut } from "../../../../../auth/hooks/mutations/useSignOut";
+import { useSignOut } from "auth/hooks/mutations/useSignOut";
 
 export function UserMenu() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

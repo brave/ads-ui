@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Alert, Box, Divider, LinearProgress } from "@mui/material";
 import moment from "moment/moment";
-import { CampaignFormat } from "../../graphql/types";
+import { CampaignFormat } from "graphql/types";
 import {
   AnalyticOverviewQuery,
   useAnalyticOverviewQuery,
-} from "../../graphql/analytics-overview.generated";
+} from "graphql/analytics-overview.generated";
 import { useParams } from "react-router-dom";
 import ReportUtils from "./analyticsOverview/components/ReportUtils";
 import { EngagementsOverview } from "./analyticsOverview/reports/campaign/EngagementsOverview";

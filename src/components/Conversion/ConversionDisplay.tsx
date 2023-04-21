@@ -1,4 +1,4 @@
-import { Conversion } from "../../user/views/adsManager/types";
+import { Conversion } from "user/views/adsManager/types";
 import { CustomListItemText } from "../List/CustomListItemText";
 import React from "react";
 import { ConversionError } from "./ConversionError";
@@ -11,7 +11,7 @@ interface Props {
   convErrors?: FormikErrors<Conversion>[] | string[] | string;
 }
 
-export default function ConversionDisplay({
+export function ConversionDisplay({
   conversions,
   hasErrors,
   convErrors,

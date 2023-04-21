@@ -7,7 +7,7 @@ import {
   OverviewDetail,
   StatsMetric,
 } from "../types";
-import { Text } from "../../../../components/Text/Text";
+import { Text } from "components/Text/Text";
 
 interface OverviewProps extends OverviewDetail {
   currency: string;

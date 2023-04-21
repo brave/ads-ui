@@ -10,7 +10,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { FormikTextField } from "../../../../../../../form/FormikHelpers";
+import { FormikTextField } from "form/FormikHelpers";
 import React from "react";
 import ClearIcon from "@mui/icons-material/Clear";
 import {
@@ -19,7 +19,7 @@ import {
   Creative,
   initialCreative,
 } from "../../../../types";
-import { UrlResolver } from "../../../../../../../components/Url/UrlResolver";
+import { UrlResolver } from "components/Url/UrlResolver";
 import logo from "../../../../../../../../brave_logo_icon.png";
 
 interface Props {
