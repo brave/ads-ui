@@ -34,11 +34,13 @@ export function MainView({ fromDate, onSetDate }: Props) {
     { label: "Ads", icon: <LibraryBooksIcon /> },
   ];
 
-  console.log(tabValue);
-
   return (
     <Box display="flex" flexDirection="column" sx={{ mb: 2, ml: 10, mr: 10 }}>
-      <CampaignAgeFilter fromDate={fromDate} onChange={onSetDate} />
+      <CampaignAgeFilter
+        fromDate={fromDate}
+        onChange={onSetDate}
+        disabled={loading}
+      />
       <Box width="100%" sx={{ mt: 1 }}>
         <Box border="1px solid #ededed">
           <Tabs
