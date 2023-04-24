@@ -14,12 +14,13 @@ interface Props {
 
 interface ChipListProps {
   items?: Array<{ name: string }> | undefined | null;
+  max?: number;
 }
 
-const ChipList: React.FC<ChipListProps> = ({ items }) => {
+const ChipList: React.FC<ChipListProps> = ({ items, max }) => {
   if (!items) return null;
 
-  const MAX_ITEMS = 12;
+  const MAX_ITEMS = max ?? 10;
 
   const sorted = _.sortBy(items, "name");
   const max10 = _.take(sorted, MAX_ITEMS);
@@ -113,7 +114,12 @@ export function AdSetList({ advertiserCampaigns, fromDate }: Props) {
         {
           title: "Audiences",
           value: (c) => c.segments?.map((o) => o.name).join(", "),
-          extendedRenderer: (r) => <ChipList items={r.segments} />,
+          extendedRenderer: (r) => (
+            <ChipList
+              items={r.segments}
+              max={r.segments.join("").length > 100 ? 2 : 5}
+            />
+          ),
         },
         {
           title: "Created",

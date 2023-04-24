@@ -32,7 +32,7 @@ interface Props {
 export function Navbar({ canCreate }: Props) {
   const history = useHistory();
   const { url } = useRouteMatch();
-  const isNewCampaignPage = url.includes("/user/main/adsmanager/advanced/new");
+  const isNewCampaignPage = url.includes("/user/main/adsmanager/advanced");
 
   return (
     <AppBar
