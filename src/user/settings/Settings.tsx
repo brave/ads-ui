@@ -1,16 +1,13 @@
 import React, { useState } from "react";
-import { Text } from "../../components/Text/Text";
+import { Text } from "components/Text/Text";
 import {
   Button,
   Input,
   InputContainer,
-} from "../../components/formElements/formElements";
+} from "components/formElements/formElements";
 import _ from "lodash";
 import * as tweetnacl from "tweetnacl";
-import {
-  useAdvertiserQuery,
-  useUpdateAdvertiserMutation,
-} from "../../graphql/advertiser.generated";
+import { useUpdateAdvertiserMutation } from "graphql/advertiser.generated";
 import {
   Box,
   FormControl,
@@ -19,7 +16,8 @@ import {
   Modal,
   Select,
 } from "@mui/material";
-import { setActiveAdvertiser } from "../../state/context";
+import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { setActiveAdvertiser } from "auth/util";
 
 const modalStyles = {
   position: "absolute" as "absolute",
@@ -36,9 +34,11 @@ const modalStyles = {
   p: 4,
 };
 
-const Settings = (props) => {
+const Settings = () => {
+  const { advertiser: activeAdvertiser, advertisers } = useAdvertiser();
   const [loading, setLoading] = useState(false);
-  const [publicKey, setPublicKey] = useState("");
+  const [publicKey, setPublicKey] = useState(activeAdvertiser.publicKey);
+  const [advertiserId, setAdvertiserId] = useState(activeAdvertiser.id);
   const [newPublicKey, setNewPublicKey] = useState("");
   const [newPrivateKey, setNewPrivateKey] = useState("");
   const [privateKey, setPrivateKey] = useState("");
@@ -46,36 +46,16 @@ const Settings = (props) => {
   const [newKeypairModalState, setNewKeypairModalState] =
     useState("disclaimer");
 
-  const setActiveAdvertiserWithId = (e) => {
-    const adv = _.find(props.advertisers, { id: e.target.value });
-    setActiveAdvertiser(adv);
-    props.setActiveAdvertiser(adv);
-  };
-
-  const advertisers = () => {
-    let advertisers = [] as any;
-    props.advertisers.forEach((advertiser) => {
-      advertisers.push({
-        value: advertiser.id,
-        label: advertiser.name,
-      });
-    });
-    return advertisers;
-  };
-
   const saveKeypair = () => {
     setLoading(true);
     updateAdvertiser({
       variables: {
         updateAdvertiserInput: {
-          id: props.activeAdvertiser.id,
+          id: advertiserId,
           publicKey: newPublicKey,
         },
       },
     });
-
-    // function to revert b64 encoded string to UInt8 if needed
-    // let b64decoded = Uint8Array.from(atob(b64encoded), c => c.charCodeAt(0))
   };
 
   const handleUpdateAdvertiser = () => {
@@ -84,10 +64,6 @@ const Settings = (props) => {
     setPrivateKey("");
     setNewPrivateKey("");
     closeNewKeypairModal();
-  };
-
-  const initializeAdvertiser = (data) => {
-    setPublicKey(data.advertiser.publicKey);
   };
 
   const openNewKeypairModal = () => {
@@ -111,19 +87,20 @@ const Settings = (props) => {
   const [updateAdvertiser] = useUpdateAdvertiserMutation({
     variables: {
       updateAdvertiserInput: {
-        id: props.activeAdvertiser.id,
+        id: advertiserId,
         publicKey: publicKey,
       },
     },
     onCompleted: handleUpdateAdvertiser,
   });
 
-  const { loading: queryLoading } = useAdvertiserQuery({
-    variables: { id: props.activeAdvertiser.id },
-    onCompleted: initializeAdvertiser,
-  });
-
-  if (queryLoading) return <></>;
+  const setActiveAdvertiserWithId = (e) => {
+    const id = e.target.value;
+    setAdvertiserId(id);
+    const adv = _.find(advertisers, { id });
+    setPublicKey(adv?.publicKey);
+    setActiveAdvertiser(adv?.id);
+  };
 
   return (
     <div>
@@ -223,12 +200,12 @@ const Settings = (props) => {
           <FormControl fullWidth>
             <InputLabel>Select Organization</InputLabel>
             <Select
-              value={props.activeAdvertiser.id}
+              value={advertiserId}
               label="Select Organization"
               onChange={(e) => setActiveAdvertiserWithId(e)}
             >
-              {advertisers().map((a) => (
-                <MenuItem value={a.value}>{a.label}</MenuItem>
+              {advertisers.map((a) => (
+                <MenuItem value={a.id}>{a.name}</MenuItem>
               ))}
             </Select>
           </FormControl>

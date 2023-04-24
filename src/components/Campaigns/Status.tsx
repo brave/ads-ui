@@ -1,10 +1,8 @@
 import { Chip, Tooltip } from "@mui/material";
-import { isPast, parseISO } from "date-fns";
 import React from "react";
-import { CampaignFragment } from "../../graphql/campaign.generated";
 import { calcColorForState } from "./stateColors";
 import _ from "lodash";
-import { isAfterEndDate } from "../../util/isAfterEndDate";
+import { isAfterEndDate } from "util/isAfterEndDate";
 
 export const Status: React.FC<{
   state: string;

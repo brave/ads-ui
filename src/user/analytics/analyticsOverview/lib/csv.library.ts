@@ -4,7 +4,6 @@ import axios from "axios";
 export const downloadCSV = async (
   campaignId: string,
   campaignName: string,
-  accessToken: string,
   userId: string,
   includeCountry: boolean,
   setDownloadingCSV: Dispatch<boolean>
@@ -17,8 +16,8 @@ export const downloadCSV = async (
         import.meta.env.REACT_APP_SERVER_ADDRESS
       }/report/campaign/csv/${campaignId}`,
       {
+        withCredentials: true,
         headers: {
-          Authorization: `Bearer ${accessToken}`,
           "-x-user": userId,
           "Content-Type": "text/csv",
         },

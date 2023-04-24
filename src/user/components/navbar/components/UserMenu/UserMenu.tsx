@@ -1,18 +1,25 @@
 import * as React from "react";
+import { useState } from "react";
 
 import { useHistory } from "react-router-dom";
-import { Badge, Button, Menu, MenuItem } from "@mui/material";
-import { useState } from "react";
-import DraftsIcon from "@mui/icons-material/Drafts";
+import { Button, Menu, MenuItem, Snackbar } from "@mui/material";
+import { useSignOut } from "auth/hooks/mutations/useSignOut";
 
-interface Props {
-  signOut: () => void;
-}
-
-export function UserMenu({ signOut }: Props) {
+export function UserMenu() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const [snackbar, setSnackbar] = useState({ open: false, msg: "" });
   const history = useHistory();
+
+  const { signOut } = useSignOut({
+    onSuccess() {
+      history.push("/", undefined);
+      setAnchorEl(null);
+    },
+    onError(msg) {
+      setSnackbar({ open: true, msg });
+    },
+  });
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -43,6 +50,12 @@ export function UserMenu({ signOut }: Props) {
           Sign Out
         </MenuItem>
       </Menu>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        open={snackbar.open}
+        onClose={() => setSnackbar({ open: false, msg: "" })}
+        message={snackbar.msg}
+      />
     </>
   );
 }

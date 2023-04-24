@@ -3,15 +3,14 @@ import { LoadingButton } from "@mui/lab";
 import SaveIcon from "@mui/icons-material/Save";
 import React, { useState } from "react";
 import { downloadCSV } from "../lib/csv.library";
-import { DateRangePicker } from "../../../../components/Date/DateRangePicker";
-import { IAuthUser } from "../../../../actions";
+import { DateRangePicker } from "components/Date/DateRangePicker";
+import { useUser } from "auth/hooks/queries/useUser";
 
 interface DownloaderProps {
   startDate: Date | undefined;
   endDate: Date;
   campaign: { id: string; name: string };
   onSetDate: (val: Date, type: "start" | "end") => void;
-  auth: IAuthUser;
 }
 
 export default function ReportUtils({
@@ -19,9 +18,9 @@ export default function ReportUtils({
   endDate,
   campaign,
   onSetDate,
-  auth,
 }: DownloaderProps) {
   const [downloadingCSV, setDownloadingCSV] = useState(false);
+  const { userId } = useUser();
 
   return (
     <Box
@@ -54,8 +53,7 @@ export default function ReportUtils({
             downloadCSV(
               campaign.id,
               campaign.name,
-              auth.accessToken,
-              auth.id ?? "",
+              userId ?? "",
               false,
               setDownloadingCSV
             )

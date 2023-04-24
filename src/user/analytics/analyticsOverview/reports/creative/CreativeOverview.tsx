@@ -2,20 +2,11 @@ import * as Highcharts from "highcharts";
 import { Options } from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import React, { useState } from "react";
-import {
-  Box,
-  FormControl,
-  MenuItem,
-  Select,
-  Stack,
-  Tab,
-  Tabs,
-  Typography,
-} from "@mui/material";
+import { Box, Stack, Tab, Tabs, Typography } from "@mui/material";
 import { decideValueAttribute } from "../../lib/overview.library";
-import { CampaignFormat } from "../../../../../graphql/types";
-import { EngagementFragment } from "../../../../../graphql/analytics-overview.generated";
-import { CampaignFragment } from "../../../../../graphql/campaign.generated";
+import { CampaignFormat } from "graphql/types";
+import { EngagementFragment } from "graphql/analytics-overview.generated";
+import { CampaignFragment } from "graphql/campaign.generated";
 import { creativeEngagements } from "../../lib/creative.library";
 import { CreativeMetric } from "../../types";
 

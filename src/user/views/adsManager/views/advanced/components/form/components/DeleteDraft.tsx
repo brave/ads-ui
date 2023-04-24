@@ -1,7 +1,7 @@
 import { IconButton, Tooltip } from "@mui/material";
 import DeleteForeverTwoToneIcon from "@mui/icons-material/DeleteForeverTwoTone";
 import React, { useContext } from "react";
-import { DraftContext } from "../../../../../../../../state/context";
+import { DraftContext } from "state/context";
 import { useHistory } from "react-router-dom";
 
 interface Props {

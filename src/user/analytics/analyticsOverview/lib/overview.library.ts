@@ -2,7 +2,7 @@ import _ from "lodash";
 import moment from "moment";
 import { Options } from "highcharts";
 import { BaseMetric, Metrics, StatsMetric, Tooltip } from "../types";
-import { EngagementFragment } from "../../../../graphql/analytics-overview.generated";
+import { EngagementFragment } from "graphql/analytics-overview.generated";
 
 export const baseOverviewChart: Options = {
   chart: {

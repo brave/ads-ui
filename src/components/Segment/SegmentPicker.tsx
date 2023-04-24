@@ -3,12 +3,9 @@ import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { Autocomplete, Box, Checkbox, TextField } from "@mui/material";
 import { useField } from "formik";
 import _ from "lodash";
-import {
-  SegmentFragment,
-  useSegmentsQuery,
-} from "../../graphql/common.generated";
+import { SegmentFragment, useSegmentsQuery } from "graphql/common.generated";
 import React, { useEffect } from "react";
-import { FormikSwitch } from "../../form/FormikHelpers";
+import { FormikSwitch } from "form/FormikHelpers";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;

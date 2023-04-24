@@ -2,13 +2,19 @@ import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import checker from "vite-plugin-checker";
 import tsconfigPaths from "vite-tsconfig-paths";
+import basicSsl from "@vitejs/plugin-basic-ssl";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
 
   return {
-    plugins: [react(), tsconfigPaths(), checker({ typescript: true })],
+    plugins: [
+      react(),
+      tsconfigPaths(),
+      checker({ typescript: true }),
+      basicSsl(), // used only to enable https on developer workstations,
+    ],
 
     // and these settings are all about maintaining compatibility with
     // create-react-app, which this project originally used
@@ -20,11 +26,16 @@ export default defineConfig(({ command, mode }) => {
           target: `${env.BACKEND_URL}`,
           changeOrigin: true,
         },
+        "/v2": {
+          target: `${env.BACKEND_URL}`,
+          changeOrigin: true,
+        },
         "/graphql": {
           target: `${env.BACKEND_URL}`,
           changeOrigin: true,
         },
       },
+      https: true,
     },
     build: {
       outDir: "build",

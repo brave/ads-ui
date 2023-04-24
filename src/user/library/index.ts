@@ -1,32 +1,26 @@
 import {
-  AdSetForm,
-  Billing,
-  CampaignForm,
-  Conversion,
-  Creative,
-  initialAdSet,
-  OS,
-  Segment,
-} from "../views/adsManager/types";
-import {
+  AdvertiserCampaignFilter,
   CreateAdInput,
   CreateAdSetInput,
   CreateCampaignInput,
   CreateNotificationCreativeInput,
   GeocodeInput,
-  UpdateAdInput,
   UpdateAdSetInput,
   UpdateCampaignInput,
-} from "../../graphql/types";
+} from "graphql/types";
 import axios from "axios";
 import { DocumentNode, print } from "graphql";
-import { CampaignFragment } from "../../graphql/campaign.generated";
+import { CampaignFragment } from "graphql/campaign.generated";
+import { CreateAdDocument } from "graphql/ad-set.generated";
+import { CreateNotificationCreativeDocument } from "graphql/creative.generated";
 import {
-  CreateAdDocument,
-  UpdateAdDocument,
-} from "../../graphql/ad-set.generated";
-import { CreateNotificationCreativeDocument } from "../../graphql/creative.generated";
-import { IAuthUser } from "../../actions";
+  Billing,
+  CampaignForm,
+  Conversion,
+  Creative,
+  OS,
+  Segment,
+} from "user/views/adsManager/types";
 
 const TYPE_CODE_LOOKUP = {
   notification_all_v1: "Push Notification",
@@ -38,8 +32,8 @@ const TYPE_CODE_LOOKUP = {
 
 export async function transformNewForm(
   form: CampaignForm,
-  auth: IAuthUser,
-  advertiserId: string
+  advertiserId: string,
+  userId?: string
 ): Promise<CreateCampaignInput> {
   const adSets = form.adSets;
   const transformedAdSet: CreateAdSetInput[] = [];
@@ -48,7 +42,7 @@ export async function transformNewForm(
     const ads: CreateAdInput[] = [];
 
     for (const ad of adSet.creatives) {
-      const creative = await transformCreative(ad, form, auth, advertiserId);
+      const creative = await transformCreative(ad, form, advertiserId, userId);
       ads.push(creative);
     }
 
@@ -77,7 +71,7 @@ export async function transformNewForm(
     advertiserId: advertiserId,
     externalId: "",
     format: form.format,
-    userId: auth.id,
+    userId: userId,
     source: "self_serve",
     startAt: form.startAt,
     state: form.state,
@@ -102,12 +96,12 @@ function transformConversion(conv: Conversion[]) {
 async function transformCreative(
   creative: Creative,
   campaign: CampaignForm,
-  auth: IAuthUser,
-  advertiserId: string
+  advertiserId: string,
+  userId?: string
 ): Promise<CreateAdInput> {
   const notification: CreateNotificationCreativeInput = {
-    advertiserId: advertiserId,
-    userId: auth.id,
+    advertiserId,
+    userId,
     name: creative.name,
     payload: {
       title: creative.title,
@@ -119,7 +113,7 @@ async function transformCreative(
       code: "notification_all_v1",
     },
   };
-  const withId = await createNotification(auth.accessToken, notification);
+  const withId = await createNotification(notification);
   return {
     state: "under_review",
     webhooks: [],
@@ -133,11 +127,7 @@ async function transformCreative(
   };
 }
 
-async function graphqlRequest<T>(
-  accessToken: string,
-  node: DocumentNode,
-  input: T
-) {
+async function graphqlRequest<T>(node: DocumentNode, input: T) {
   const response = await axios.post(
     `${import.meta.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql"),
     JSON.stringify({
@@ -145,8 +135,8 @@ async function graphqlRequest<T>(
       variables: input,
     }),
     {
+      withCredentials: true,
       headers: {
-        Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
     }
@@ -157,20 +147,18 @@ async function graphqlRequest<T>(
 
 // TODO: Get rid of this ASAP. Currently necessary because when creating a campaign, you need existing creativeId.
 async function createNotification(
-  accessToken: string,
   createInput: CreateNotificationCreativeInput
 ) {
   const response = await graphqlRequest<{
     input: CreateNotificationCreativeInput;
-  }>(accessToken, CreateNotificationCreativeDocument, { input: createInput });
+  }>(CreateNotificationCreativeDocument, { input: createInput });
 
   return response.data.createNotificationCreative.id;
 }
 
 // TODO: Get rid of this ASAP. Currently necessary because when updating a campaign, it does not take into account any new ads.
-async function createAd(accessToken: string, createInput: CreateAdInput) {
+async function createAd(createInput: CreateAdInput) {
   const response = await graphqlRequest<{ createAdInput: CreateAdInput }>(
-    accessToken,
     CreateAdDocument,
     { createAdInput: createInput }
   );
@@ -227,8 +215,8 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
 export async function transformEditForm(
   form: CampaignForm,
   id: string,
-  auth: IAuthUser,
-  advertiserId: string
+  advertiserId: string,
+  userId?: string
 ): Promise<UpdateCampaignInput> {
   const transformedAdSet: UpdateAdSetInput[] = [];
 
@@ -236,8 +224,8 @@ export async function transformEditForm(
     const creatives = adSet.creatives;
     for (const ad of creatives) {
       if (ad.id == null) {
-        const withId = await transformCreative(ad, form, auth, advertiserId);
-        await createAd(auth.accessToken, {
+        const withId = await transformCreative(ad, form, advertiserId, userId);
+        await createAd({
           ...withId,
           creativeSetId: adSet.id,
         });
@@ -294,4 +282,14 @@ export function uiTextForCreativeTypeCode(creativeTypeCode: {
   code: string;
 }): string {
   return uiTextForCreativeType(creativeTypeCode.code);
+}
+
+export function populateFilter(
+  fromDate: Date | null
+): AdvertiserCampaignFilter {
+  return {
+    includeAds: true,
+    includeCreativeSets: true,
+    from: fromDate,
+  };
 }

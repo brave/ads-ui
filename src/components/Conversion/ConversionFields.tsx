@@ -1,8 +1,6 @@
-import { Box, List, ListItemText, TextField } from "@mui/material";
-import { FormikRadioControl, FormikTextField } from "../../form/FormikHelpers";
+import { Box, List, ListItemText } from "@mui/material";
+import { FormikRadioControl, FormikTextField } from "form/FormikHelpers";
 import React from "react";
-import { useField, useFormikContext } from "formik";
-import { CampaignForm } from "../../user/views/adsManager/types";
 
 interface Props {
   name: string;

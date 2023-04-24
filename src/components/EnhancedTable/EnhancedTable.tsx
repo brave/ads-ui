@@ -15,12 +15,11 @@ import {
   TableRow,
 } from "@mui/material";
 import _ from "lodash";
-import { ReactNode } from "react";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { EnhancedTableHeader } from "./EnhancedTableHeader";
 import { EnhancedTableRow } from "./EnhancedTableRow";
 import { FilterInput } from "./FilterInput";
-import { StandardRenderers, CellValueRenderer } from "./renderers";
+import { CellValueRenderer, StandardRenderers } from "./renderers";
 import { SxProps } from "@mui/system";
 
 export type CellValue = string | string[] | number | boolean | undefined | null;

@@ -1,6 +1,6 @@
 import moment from "moment";
-import { CampaignFormat } from "../../../../graphql/types";
-import { EngagementFragment } from "../../../../graphql/analytics-overview.generated";
+import { CampaignFormat } from "graphql/types";
+import { EngagementFragment } from "graphql/analytics-overview.generated";
 import { mapDevice, processOs } from "./os.library";
 import { calculateMetric, processData, processStats } from "./overview.library";
 import { creativeEngagements } from "./creative.library";

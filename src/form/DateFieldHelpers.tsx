@@ -1,5 +1,5 @@
 import { utcToZonedTime, zonedTimeToUtc } from "date-fns-tz";
-import { formatISO, addDays, startOfDay, endOfDay } from "date-fns";
+import { addDays, endOfDay, formatISO, startOfDay } from "date-fns";
 
 export const defaultStartDate = () =>
   formatISO(

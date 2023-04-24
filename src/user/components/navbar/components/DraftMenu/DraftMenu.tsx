@@ -1,18 +1,10 @@
 import * as React from "react";
+import { useContext, useState } from "react";
 
 import { useHistory } from "react-router-dom";
-import {
-  Badge,
-  Button,
-  Divider,
-  IconButton,
-  Menu,
-  MenuItem,
-  Tooltip,
-} from "@mui/material";
-import { useContext, useState } from "react";
+import { Badge, IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
 import DraftsIcon from "@mui/icons-material/Drafts";
-import { DraftContext } from "../../../../../state/context";
+import { DraftContext } from "state/context";
 
 export function DraftMenu() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
