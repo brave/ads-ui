@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { Text } from "components/Text/Text";
-import {
-  Button,
-  Input,
-  InputContainer,
-} from "components/formElements/formElements";
+import { Input, InputContainer } from "components/formElements/formElements";
 import _ from "lodash";
 import * as tweetnacl from "tweetnacl";
 import { useUpdateAdvertiserMutation } from "graphql/advertiser.generated";
 import {
   Box,
+  Button,
+  Card,
+  Divider,
   FormControl,
   InputLabel,
   MenuItem,
@@ -18,6 +17,8 @@ import {
 } from "@mui/material";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { setActiveAdvertiser } from "auth/util";
+import ArrowBack from "@mui/icons-material/ArrowBack";
+import { useHistory } from "react-router-dom";
 
 const modalStyles = {
   position: "absolute" as "absolute",
@@ -45,6 +46,7 @@ const Settings = () => {
   const [showNewKeypairModal, setShowNewKeypairModal] = useState(false);
   const [newKeypairModalState, setNewKeypairModalState] =
     useState("disclaimer");
+  const history = useHistory();
 
   const saveKeypair = () => {
     setLoading(true);
@@ -54,6 +56,9 @@ const Settings = () => {
           id: advertiserId,
           publicKey: newPublicKey,
         },
+      },
+      onCompleted() {
+        window.location.reload();
       },
     });
   };
@@ -103,13 +108,22 @@ const Settings = () => {
   };
 
   return (
-    <div>
-      <Text
-        content="Account Settings"
-        fontFamily="Poppins"
-        sizes={[22, 22, 22, 22, 22]}
-      ></Text>
-      <div style={{ marginTop: "48px", marginBottom: "48px" }}></div>
+    <Card
+      sx={{
+        m: 2,
+        p: 3,
+      }}
+    >
+      <Button
+        variant="text"
+        startIcon={<ArrowBack />}
+        onClick={() => history.replace("/user/main")}
+      >
+        Dashboard
+      </Button>
+      <Divider textAlign="left" sx={{ mt: 2, mb: 3, fontSize: "24px" }}>
+        Account Settings
+      </Divider>
 
       <Text
         content="Keypairs"
@@ -126,63 +140,49 @@ const Settings = () => {
         fontFamily={"Poppins"}
       />
 
-      <div style={{ marginTop: "28px" }}></div>
+      <div style={{ marginTop: "10px" }}></div>
 
-      <div style={{ display: "flex" }}>
-        <InputContainer style={{ width: "100%", marginRight: "24px" }}>
-          {publicKey !== "" && (
-            <>
-              <div style={{ display: "flex" }}>
-                <Text
-                  content={"Your organization's public key:"}
-                  sizes={[16, 16, 15, 15, 13]}
-                  fontFamily={"Poppins"}
-                />
-              </div>
-              <div
-                style={{
-                  width: "100%",
-                  marginTop: "22px",
-                  textAlign: "center",
-                  fontSize: 18,
-                  fontFamily: "Poppins",
-                  marginBottom: "6px",
-                }}
-              >
-                {publicKey}
-              </div>
-            </>
-          )}
+      <Box width="100%" marginRight="24px" display="flex">
+        {publicKey !== "" && (
+          <Box>
+            <div style={{ display: "flex" }}>
+              <Text
+                content={"Your organization's public key:"}
+                sizes={[16, 16, 15, 15, 13]}
+                fontFamily={"Poppins"}
+              />
+            </div>
+            <div
+              style={{
+                width: "100%",
+                marginTop: "22px",
+                textAlign: "center",
+                fontSize: 18,
+                fontFamily: "Poppins",
+                marginBottom: "6px",
+              }}
+            >
+              {publicKey}
+            </div>
+          </Box>
+        )}
 
-          <Button
-            onClick={() => openNewKeypairModal()}
-            style={{
-              height: "32px",
-              marginTop: "22px",
-              marginLeft: "auto",
-              marginRight: "auto",
-              backgroundColor: "#F8532BCC",
-              width: "300px",
-            }}
-          >
-            <Text
-              content={"New Keypair"}
-              style={{ paddingTop: "6px", paddingBottom: "6px" }}
-              sizes={[16, 16, 15, 15, 14]}
-              fontWeight={500}
-              fontFamily={"Poppins"}
-            />
-          </Button>
-        </InputContainer>
-      </div>
+        <Button
+          onClick={() => openNewKeypairModal()}
+          variant="contained"
+          style={{
+            marginTop: "22px",
+            width: "300px",
+            alignSelf: "center",
+          }}
+        >
+          New Keypair
+        </Button>
+      </Box>
 
-      <div style={{ marginTop: "24px", marginBottom: "24px" }}></div>
-
-      <Text
-        content="Organization"
-        fontFamily="Poppins"
-        sizes={[22, 22, 22, 22, 18]}
-      ></Text>
+      <Divider textAlign="left" sx={{ mt: 5, mb: 3, fontSize: "24px" }}>
+        Organization
+      </Divider>
 
       <Text
         style={{ marginTop: "28px" }}
@@ -520,7 +520,7 @@ const Settings = () => {
           )}
         </Box>
       </Modal>
-    </div>
+    </Card>
   );
 };
 

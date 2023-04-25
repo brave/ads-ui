@@ -37,7 +37,7 @@ export function DraftMenu() {
                 },
               },
             },
-            width: "250px",
+            minWidth: "250px",
           }}
         >
           Drafts
@@ -48,7 +48,7 @@ export function DraftMenu() {
               history.push(`/user/main/adsmanager/advanced/new/${d.draftId}`);
               setAnchorEl(null);
             }}
-            sx={{ pt: 1, pb: 1, width: "250px" }}
+            sx={{ pt: 1, pb: 1, minWidth: "250px" }}
           >
             {d.name || `Draft ${idx}`}
           </MenuItem>

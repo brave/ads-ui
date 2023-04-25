@@ -1,5 +1,13 @@
 import { Form, FormikValues } from "formik";
-import { Stack, Tab, Tabs } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  Stack,
+  Tab,
+  Tabs,
+  Tooltip,
+} from "@mui/material";
 import { CampaignFields } from "../../campaign/CampaignFields";
 import { AdSetFields } from "../../adSet/AdSetFields";
 import { AdField } from "../../ads/AdField";
@@ -8,6 +16,7 @@ import React, { useState } from "react";
 import { CampaignForm } from "../../../../../types";
 import { DeleteDraft } from "./DeleteDraft";
 import { IAdvertiser } from "auth/context/auth.interface";
+import { DashboardButton } from "user/views/adsManager/views/advanced/components/form/components/DashboardButton";
 
 interface Props {
   isEdit: boolean;
@@ -30,13 +39,16 @@ export function BaseForm({ isEdit, values, advertiser, draftId }: Props) {
   return (
     <Form>
       <Stack alignItems="center" direction="row" justifyContent="space-between">
-        <Tabs value={value} onChange={handleChange}>
-          <Tab label="Campaign" value={0} />
-          {values.adSets.map((a, index) => (
-            <Tab label={`Ad Set ${index + 1}`} value={index + 1} />
-          ))}
-          <Tab label="Review" value={values.adSets.length + 1} />
-        </Tabs>
+        <Stack alignItems="center" direction="row">
+          <DashboardButton />
+          <Tabs value={value} onChange={handleChange}>
+            <Tab label="Campaign" value={0} />
+            {values.adSets.map((a, index) => (
+              <Tab label={`Ad Set ${index + 1}`} value={index + 1} />
+            ))}
+            <Tab label="Review" value={values.adSets.length + 1} />
+          </Tabs>
+        </Stack>
         {draftId && !isEdit && <DeleteDraft draftId={draftId} />}
       </Stack>
 
@@ -56,11 +68,16 @@ export function BaseForm({ isEdit, values, advertiser, draftId }: Props) {
             onCreate={() => setValue(value + 1)}
             isEdit={isEdit}
           />
-          <AdField
-            index={value - 1}
-            onNext={() => setValue(values.adSets.length + 1)}
-            isEdit={isEdit}
-          />
+          <AdField index={value - 1} isEdit={isEdit} />
+          <Box sx={{ mt: 2 }}>
+            <Button
+              variant="contained"
+              size="large"
+              onClick={() => setValue(values.adSets.length + 1)}
+            >
+              Next
+            </Button>
+          </Box>
         </>
       )}
 
