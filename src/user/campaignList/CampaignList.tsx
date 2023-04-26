@@ -20,19 +20,12 @@ import { AdvertiserCampaignsFragment } from "graphql/advertiser.generated";
 
 interface Props {
   advertiserCampaigns?: AdvertiserCampaignsFragment | null;
-  loading: boolean;
   fromDate: Date | null;
 }
 
-export function CampaignList({
-  advertiserCampaigns,
-  loading,
-  fromDate,
-}: Props) {
+export function CampaignList({ advertiserCampaigns, fromDate }: Props) {
   const history = useHistory();
   const campaigns = advertiserCampaigns?.campaigns ?? [];
-
-  if (loading) return <LinearProgress />;
 
   return (
     <EnhancedTable

@@ -1,9 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
-import { Sidebar } from "./components/sidebar/Sidebar";
-import { CampaignList } from "./campaignList/CampaignList";
-
 import {
   ApolloClient,
   ApolloProvider,
@@ -16,12 +13,10 @@ import { Box, Stack } from "@mui/material";
 import { NewCampaign } from "./views/adsManager/views/advanced/components/form/NewCampaign";
 import { EditCampaign } from "./views/adsManager/views/advanced/components/form/EditCampaign";
 import { CompletionForm } from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
-import { useAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
-import { AdSetList } from "./adSet/AdSetList";
-import { AdList } from "./ads/AdList";
 import moment from "moment";
-import { CampaignAgeFilter } from "components/Campaigns/CampaignAgeFilter";
-import { populateFilter } from "./library";
+import { MainView } from "user/views/user/MainView";
+import { Navbar } from "user/components/navbar/Navbar";
+import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -37,97 +32,62 @@ const buildApolloClient = () => {
 
 export function User() {
   const client = useMemo(() => buildApolloClient(), []);
+  const { advertiser } = useAdvertiser();
+  const [fromDateFilter, setFromDateFilter] = useState<Date | null>(
+    moment().subtract(6, "month").startOf("day").toDate()
+  );
 
   return (
     <ApolloProvider client={client}>
       <Box height="100%">
         <Box display="flex">
-          <Sidebar />
-          <Routes />
+          <Navbar canCreate={advertiser.selfServiceCreate} />
+          <Box
+            width="100%"
+            height="100%"
+            padding={1}
+            overflow="scroll"
+            marginTop="64px"
+          >
+            <Switch>
+              {/* /adsmanager */}
+              <Route path={`/user/main/adsmanager/advanced/new/:draftId`}>
+                <NewCampaign fromDate={fromDateFilter} />
+              </Route>
+
+              <Route path={`/user/main/adsmanager/advanced/:campaignId`}>
+                <EditCampaign fromDate={fromDateFilter} />
+              </Route>
+
+              <Route path={`/user/main/complete/:mode`}>
+                <CompletionForm />
+              </Route>
+
+              {/* /settings */}
+              <Route path={`/user/main/settings`}>
+                <Settings />
+              </Route>
+
+              {/* /campaigns/:campaignId/analytics - */}
+              <Route
+                path={`/user/main/campaign/:campaignId/analytics/overview`}
+              >
+                <AnalyticsOverview />
+              </Route>
+
+              <Route path={`/user/main`}>
+                <MainView
+                  fromDate={fromDateFilter}
+                  onSetDate={setFromDateFilter}
+                />
+              </Route>
+
+              {/* default */}
+              <Redirect to={`/user/main`} />
+            </Switch>
+          </Box>
         </Box>
       </Box>
     </ApolloProvider>
   );
 }
-
-const Routes = () => {
-  const [fromDateFilter, setFromDateFilter] = useState<Date | null>(
-    moment().subtract(6, "month").startOf("day").toDate()
-  );
-
-  const { loading, data } = useAdvertiserCampaignsQuery({
-    variables: {
-      id: window.localStorage.getItem("activeAdvertiser") ?? "",
-      filter: populateFilter(fromDateFilter),
-    },
-    pollInterval: 600_000,
-  });
-
-  return (
-    <Box
-      width="100%"
-      height="100%"
-      padding={1}
-      overflow="scroll"
-      marginTop="64px"
-    >
-      <Switch>
-        {/* /adsmanager */}
-        <Route path={`/user/main/adsmanager/advanced/new/:draftId`}>
-          <NewCampaign fromDate={fromDateFilter} />
-        </Route>
-
-        <Route path={`/user/main/adsmanager/advanced/:campaignId`}>
-          <EditCampaign fromDate={fromDateFilter} />
-        </Route>
-
-        <Route path={`/user/main/complete/:mode`}>
-          <CompletionForm />
-        </Route>
-
-        {/* /settings */}
-        <Route path={`/user/main/settings`}>
-          <Settings />
-        </Route>
-
-        {/* /campaigns/:campaignId/analytics - */}
-        <Route path={`/user/main/campaign/:campaignId/analytics/overview`}>
-          <AnalyticsOverview />
-        </Route>
-
-        {/* /campaigns */}
-        <Route path={`/user/main/campaigns`}>
-          <Stack>
-            <CampaignAgeFilter
-              fromDate={fromDateFilter}
-              onChange={setFromDateFilter}
-            />
-            <CampaignList
-              advertiserCampaigns={data?.advertiserCampaigns}
-              loading={loading}
-              fromDate={fromDateFilter}
-            />
-          </Stack>
-        </Route>
-        <Route path={`/user/main/adsets`}>
-          <AdSetList
-            advertiserCampaigns={data?.advertiserCampaigns}
-            loading={loading}
-            fromDate={fromDateFilter}
-          />
-        </Route>
-
-        <Route path={`/user/main/ads`}>
-          <AdList
-            advertiserCampaigns={data?.advertiserCampaigns}
-            loading={loading}
-            fromDate={fromDateFilter}
-          />
-        </Route>
-
-        {/* default */}
-        <Redirect to={`/user/main/campaigns`} />
-      </Switch>
-    </Box>
-  );
-};

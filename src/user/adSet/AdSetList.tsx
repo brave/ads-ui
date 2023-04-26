@@ -9,18 +9,18 @@ import { AdvertiserCampaignsFragment } from "graphql/advertiser.generated";
 
 interface Props {
   advertiserCampaigns?: AdvertiserCampaignsFragment | null;
-  loading: boolean;
   fromDate: Date | null;
 }
 
 interface ChipListProps {
   items?: Array<{ name: string }> | undefined | null;
+  max?: number;
 }
 
-const ChipList: React.FC<ChipListProps> = ({ items }) => {
+const ChipList: React.FC<ChipListProps> = ({ items, max }) => {
   if (!items) return null;
 
-  const MAX_ITEMS = 12;
+  const MAX_ITEMS = max ?? 10;
 
   const sorted = _.sortBy(items, "name");
   const max10 = _.take(sorted, MAX_ITEMS);
@@ -44,7 +44,7 @@ const ChipList: React.FC<ChipListProps> = ({ items }) => {
   );
 };
 
-export function AdSetList({ advertiserCampaigns, loading, fromDate }: Props) {
+export function AdSetList({ advertiserCampaigns, fromDate }: Props) {
   const campaigns = advertiserCampaigns?.campaigns ?? [];
   const mapAdSetName = campaigns.map((c) => ({
     adSets: c.adSets.map((a) => ({
@@ -72,8 +72,6 @@ export function AdSetList({ advertiserCampaigns, loading, fromDate }: Props) {
       ? "completed"
       : c.state;
   };
-
-  if (loading) return <LinearProgress />;
 
   return (
     <EnhancedTable
@@ -116,7 +114,12 @@ export function AdSetList({ advertiserCampaigns, loading, fromDate }: Props) {
         {
           title: "Audiences",
           value: (c) => c.segments?.map((o) => o.name).join(", "),
-          extendedRenderer: (r) => <ChipList items={r.segments} />,
+          extendedRenderer: (r) => (
+            <ChipList
+              items={r.segments}
+              max={r.segments.join("").length > 100 ? 2 : 5}
+            />
+          ),
         },
         {
           title: "Created",

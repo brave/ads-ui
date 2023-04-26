@@ -6,9 +6,14 @@ import React, { Dispatch } from "react";
 interface Props {
   fromDate: Date | null;
   onChange: Dispatch<Date | null>;
+  disabled?: boolean;
 }
 
-export const CampaignAgeFilter: React.FC<Props> = ({ fromDate, onChange }) => {
+export const CampaignAgeFilter: React.FC<Props> = ({
+  fromDate,
+  onChange,
+  disabled,
+}) => {
   const onOldCampaignToggle = (showOld: boolean) => {
     onChange(
       showOld ? null : moment().subtract(6, "month").startOf("day").toDate()
@@ -19,6 +24,7 @@ export const CampaignAgeFilter: React.FC<Props> = ({ fromDate, onChange }) => {
     <FormControlLabel
       labelPlacement="start"
       sx={{ mr: 2 }}
+      disabled={disabled}
       control={
         <Switch
           size="medium"

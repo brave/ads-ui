@@ -47,11 +47,13 @@ export const SegmentPicker: React.FC<Props> = ({ idx }: Props) => {
       {!targetMeta.value && (
         <Autocomplete
           sx={{ mt: 3 }}
+          limitTags={5}
           multiple
           loading={activeSegments.length === 0}
           options={activeSegments}
           disableCloseOnSelect
           autoHighlight
+          groupBy={(option) => option.name.split("-")[0]}
           getOptionLabel={(option) => option.name}
           renderOption={(props, option, { selected }) => (
             <li {...props}>

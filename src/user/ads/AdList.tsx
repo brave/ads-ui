@@ -9,11 +9,10 @@ import { AdvertiserCampaignsFragment } from "graphql/advertiser.generated";
 
 interface Props {
   advertiserCampaigns?: AdvertiserCampaignsFragment | null;
-  loading: boolean;
   fromDate: Date | null;
 }
 
-export function AdList({ advertiserCampaigns, loading, fromDate }: Props) {
+export function AdList({ advertiserCampaigns, fromDate }: Props) {
   const campaigns = advertiserCampaigns?.campaigns ?? [];
   const mapAdName = campaigns.map((c) => ({
     adSets: c.adSets.map((a) => ({
@@ -39,12 +38,10 @@ export function AdList({ advertiserCampaigns, loading, fromDate }: Props) {
     "id"
   ).filter((a) => a.state !== "deleted");
 
-  if (loading) return <LinearProgress />;
-
   return (
     <EnhancedTable
       rows={ads}
-      initialSortColumn={8}
+      initialSortColumn={9}
       initialSortDirection="desc"
       columns={[
         {

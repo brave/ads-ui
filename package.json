@@ -71,7 +71,8 @@
     "vitest": "0.29.8"
   },
   "overrides": {
-    "nth-check": "2.1.1"
+    "nth-check": "2.1.1",
+    "yaml": "2.2.2"
   },
   "browserslist": [
     ">0.2%",
