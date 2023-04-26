@@ -78,3 +78,20 @@ export const clearCredentials = async (): Promise<void> => {
 
   return;
 };
+
+export const getLink = async (user: { email: string }): Promise<void> => {
+  const res = await fetch(`${url}/auth/magic-link?email=${user.email}`, {
+    method: "GET",
+    mode: "cors",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (res.status !== 201) {
+    throw new Error("unable to request secure login link");
+  }
+
+  return;
+};
