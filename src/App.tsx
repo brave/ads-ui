@@ -12,7 +12,7 @@ import {
 import { theme } from "theme";
 import { CampaignForm } from "user/views/adsManager/types";
 import { useIsAuthenticated } from "auth/hooks/queries/useIsAuthenticated";
-import { SignIn } from "containers/Authentication/Signin/Signin";
+import { SignIn } from "auth/views/Signin";
 
 const Protected = () => {
   return <Redirect to="/auth/signin" />;
