@@ -13,6 +13,7 @@ import { theme } from "theme";
 import { CampaignForm } from "user/views/adsManager/types";
 import { useIsAuthenticated } from "auth/hooks/queries/useIsAuthenticated";
 import { SignIn } from "auth/views/Signin";
+import { AuthVerify } from "auth/views/AuthVerify";
 
 const Protected = () => {
   return <Redirect to="/auth/signin" />;
@@ -39,9 +40,8 @@ export function App() {
           }}
         >
           <Switch>
-            <Route path="/auth/signin">
-              <SignIn />
-            </Route>
+            <Route path="/auth/signin" component={SignIn} />
+            <Route path="/auth/verify" component={AuthVerify} />
             <Route path="*" component={isAuthenticated ? User : Protected} />
             <Redirect to="/user/main" />
           </Switch>
