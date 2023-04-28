@@ -12,7 +12,6 @@
     "@mui/icons-material": "5.11.16",
     "@mui/lab": "5.0.0-alpha.128",
     "@mui/material": "5.12.2",
-    "@mui/styles": "5.12.0",
     "@mui/x-date-pickers": "5.0.20",
     "axios": "1.2.2",
     "base64url": "3.0.1",
