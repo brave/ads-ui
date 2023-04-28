@@ -1,8 +1,20 @@
 import _ from "lodash";
 import moment from "moment";
 import { Options } from "highcharts";
-import { BaseMetric, Metrics, StatsMetric, Tooltip } from "../types";
+import {
+  BaseMetric,
+  Metrics,
+  StatsMetric,
+  Tooltip,
+} from "user/analytics/analyticsOverview/types";
 import { EngagementFragment } from "graphql/analytics-overview.generated";
+
+type MetricDataSet = {
+  metric1DataSet: number[][];
+  metric2DataSet: number[][];
+  metric3DataSet: number[][];
+  metric4DataSet: number[][];
+};
 
 export const baseOverviewChart: Options = {
   chart: {
@@ -63,23 +75,19 @@ export const baseOverviewChart: Options = {
 
 export const prepareChart = (
   metrics: Metrics,
-  processedData: {
-    metric1DataSet: number[][];
-    metric2DataSet: number[][];
-    metric3DataSet: number[][];
-    metric4DataSet: number[][];
-  }
+  processedData: MetricDataSet
 ) => {
   const metricsEntries = Object.entries(metrics);
   return {
     ...baseOverviewChart,
     series: metricsEntries.map((e, idx) => {
       const attrs = decideValueAttribute(e[1]);
+      const dataKey = `${e[0]}DataSet` as keyof MetricDataSet;
       return {
         animation: false,
         name: decideLabel(e[1]),
         yAxis: metricsEntries.length <= 2 ? idx : decideAxis(e[1]),
-        data: processedData[`${e[0]}DataSet`],
+        data: processedData[dataKey],
         connectNulls: true,
         tooltip: {
           valueDecimals: attrs.decimal,

@@ -108,12 +108,13 @@ export function AdSetList({ advertiserCampaigns, fromDate }: Props) {
         },
         {
           title: "Platforms",
-          value: (c) => c.oses?.map((o) => o.name).join(", "),
+          value: (c) => c.oses?.map((o: { name: string }) => o.name).join(", "),
           extendedRenderer: (r) => <ChipList items={r.oses} />,
         },
         {
           title: "Audiences",
-          value: (c) => c.segments?.map((o) => o.name).join(", "),
+          value: (c) =>
+            c.segments?.map((o: { name: string }) => o.name).join(", "),
           extendedRenderer: (r) => (
             <ChipList
               items={r.segments}
