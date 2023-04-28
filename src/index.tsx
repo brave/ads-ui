@@ -10,10 +10,12 @@ import "@fontsource/mulish/latin.css";
 import { IAuthProvider } from "auth";
 
 ReactDOM.render(
-  <IAuthProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </IAuthProvider>,
+  <React.StrictMode>
+    <IAuthProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </IAuthProvider>
+  </React.StrictMode>,
   document.getElementById("root") as HTMLElement
 );

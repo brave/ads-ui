@@ -1,4 +1,8 @@
-import React, { HTMLInputTypeAttribute, useEffect } from "react";
+import React, {
+  HTMLInputTypeAttribute,
+  PropsWithChildren,
+  useEffect,
+} from "react";
 import {
   Button,
   FormControl,
@@ -77,7 +81,9 @@ interface FormikRadioGroupProps {
   row?: boolean;
 }
 
-export const FormikRadioGroup: React.FC<FormikRadioGroupProps> = (props) => {
+export const FormikRadioGroup: React.FC<
+  PropsWithChildren<FormikRadioGroupProps>
+> = (props) => {
   const [field] = useField(props);
   return (
     <>
