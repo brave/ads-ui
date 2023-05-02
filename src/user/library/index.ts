@@ -22,7 +22,7 @@ import {
   Segment,
 } from "user/views/adsManager/types";
 
-const TYPE_CODE_LOOKUP = {
+const TYPE_CODE_LOOKUP: Record<string, string> = {
   notification_all_v1: "Push Notification",
   new_tab_page_all_v1: "Sponsored Image",
   inline_content_all_v1: "News Display Ad",

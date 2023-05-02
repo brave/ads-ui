@@ -15,7 +15,7 @@ interface Props {
 
 export function DailyCampaignOverview({ engagements, campaign }: Props) {
   const [type, setType] = useState("views");
-  const initialMetric = { metric1: "views", metric2: "conversions" };
+  const initialMetric: Metrics = { metric1: "views", metric2: "conversions" };
   const [metrics, setMetrics] = useState<Metrics>({
     metric1: "views",
     metric2: "conversions",

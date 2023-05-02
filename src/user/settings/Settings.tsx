@@ -14,6 +14,7 @@ import {
   MenuItem,
   Modal,
   Select,
+  SelectChangeEvent,
 } from "@mui/material";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { setActiveAdvertiser } from "auth/util";
@@ -99,7 +100,7 @@ const Settings = () => {
     onCompleted: handleUpdateAdvertiser,
   });
 
-  const setActiveAdvertiserWithId = (e) => {
+  const setActiveAdvertiserWithId = (e: SelectChangeEvent) => {
     const id = e.target.value;
     setAdvertiserId(id);
     const adv = _.find(advertisers, { id });

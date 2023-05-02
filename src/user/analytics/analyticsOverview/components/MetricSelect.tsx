@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 import { Autocomplete, TextField } from "@mui/material";
-import { Metrics, Option } from "../types";
+import { Metrics, Option, StatsMetric } from "../types";
 
 interface PopoutProps {
-  onSetMetric: (key: keyof Metrics, value: string) => void;
+  onSetMetric: (key: keyof Metrics, value: keyof StatsMetric) => void;
   initialValue: string;
   metric: keyof Metrics;
   isNtp: Boolean;
@@ -49,7 +49,7 @@ export default function MetricSelect({
     toggleOpen();
     if (value) {
       setValue(value);
-      onSetMetric(metric, value.value);
+      onSetMetric(metric, value.value as keyof StatsMetric);
     }
   };
 

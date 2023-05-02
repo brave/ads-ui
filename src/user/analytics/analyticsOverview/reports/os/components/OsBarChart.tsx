@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { SeriesOptionsType } from "highcharts";
+import { CalculatedOSMetric, OS } from "user/analytics/analyticsOverview/types";
 import { BaseBarChart } from "../../../components/BaseBarChart";
-import { CalculatedOSMetric } from "../../../types";
 
 export function OsBarChart(props: CalculatedOSMetric & { isNtp: boolean }) {
-  const validData = Object.entries(props.ctr);
-  const [type, setType] = useState("landingRate");
+  const oses: (keyof OS)[] = ["android", "ios", "linux", "macos", "windows"];
+  const [type, setType] = useState<keyof CalculatedOSMetric>("ctr");
 
   const mapToSeries = (
     metric: keyof CalculatedOSMetric
@@ -13,8 +13,7 @@ export function OsBarChart(props: CalculatedOSMetric & { isNtp: boolean }) {
     let series: SeriesOptionsType = {
       name: "OS",
       type: "column",
-      data: validData.map((s) => {
-        const os = s[0];
+      data: oses.map((os) => {
         return {
           name: os,
           y: props[metric][os],
@@ -42,22 +41,22 @@ export function OsBarChart(props: CalculatedOSMetric & { isNtp: boolean }) {
     ];
   };
 
-  const [validSeries, setValidSeries] = useState(mapToSeries("landingRate"));
+  const [validSeries, setValidSeries] = useState(mapToSeries(type));
 
   const onChange = (val: string) => {
-    setType(val);
     const metric = val as keyof CalculatedOSMetric;
+    setType(metric);
     setValidSeries(mapToSeries(metric));
   };
 
   const extra = !props.isNtp ? [{ value: "cpa", label: "CPA" }] : [];
   return (
     <BaseBarChart
-      categories={validData.map((d) => d[0])}
+      categories={oses.map((d) => d)}
       series={validSeries}
+      type={type}
       onSetType={onChange}
       extraOptions={extra}
-      type={type}
     />
   );
 }

@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+
+import { mapDevice } from "user/analytics/analyticsOverview/lib/os.library";
+import { OS, OSMetric } from "user/analytics/analyticsOverview/types";
 import { BasePieChart } from "../../../components/BasePieChart";
 import { SeriesOptionsType } from "highcharts";
-import { OS, OSMetric } from "../../../types";
-import { mapDevice } from "../../../lib/os.library";
+
+type OSReport = keyof OSMetric | "device";
 
 export function OsPieChart(props: OSMetric & { isNtp: boolean }) {
-  const [type, setType] = useState("view");
+  const [type, setType] = useState<OSReport>("view");
 
   const device = mapDevice(Object.entries(props.view));
   const total = device.mobile + device.desktop;
@@ -14,7 +17,7 @@ export function OsPieChart(props: OSMetric & { isNtp: boolean }) {
     {
       name: type === "device" ? "Device" : "OS",
       type: "pie",
-      data: Object.entries(type === "device" ? device : (props[type] as OS))
+      data: Object.entries(type === "device" ? device : props[type])
         .map((os) => {
           return {
             animation: false,
@@ -37,7 +40,7 @@ export function OsPieChart(props: OSMetric & { isNtp: boolean }) {
   return (
     <BasePieChart
       series={series}
-      onSetType={setType}
+      onSetType={(v) => setType(v as OSReport)}
       extraOptions={extra}
       type={type}
     />
