@@ -9,15 +9,18 @@ interface Options {
 
 export function useGetLink({ onError, onSuccess }: Options = {}) {
   const [loading, setLoading] = useState(false);
-  const link = useCallback((email: string) => {
+  const [error, setError] = useState<string>();
+
+  const link = useCallback(async (email: string) => {
     setLoading(true);
-    getLink({ email })
+    await getLink({ email })
       .then(() => {
         if (onSuccess) {
           onSuccess();
         }
       })
       .catch((e) => {
+        setError(e.message);
         if (onError) {
           onError(e.message);
         }
@@ -27,5 +30,5 @@ export function useGetLink({ onError, onSuccess }: Options = {}) {
       });
   }, []);
 
-  return { link, loading };
+  return { link, loading, error };
 }

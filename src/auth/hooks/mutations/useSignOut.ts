@@ -9,6 +9,7 @@ interface Options {
 
 export function useSignOut({ onSuccess, onError }: Options = {}) {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string>();
   const { setSessionUser } = useAuthContext();
 
   const signOut = useCallback(() => {
@@ -22,6 +23,7 @@ export function useSignOut({ onSuccess, onError }: Options = {}) {
         }
       })
       .catch((e: Error) => {
+        setError(e.message);
         if (onError) {
           onError(e.message);
         }
@@ -31,5 +33,5 @@ export function useSignOut({ onSuccess, onError }: Options = {}) {
       });
   }, []);
 
-  return { signOut, loading };
+  return { signOut, loading, error };
 }

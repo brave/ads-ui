@@ -1,5 +1,6 @@
 import { Box, Card, CardContent, Container } from "@mui/material";
 import React from "react";
+import BraveLogo from "../../../../brave-logotype-full-color.png";
 
 interface Props {
   height?: string;
@@ -37,6 +38,17 @@ export function AuthContainer({ height, width, children }: Props) {
               alignItems: "center",
             }}
           >
+            <Box
+              component="div"
+              width="150px"
+              height="60px"
+              mb={3}
+              sx={{
+                background: `url(${BraveLogo}) no-repeat center`,
+                backgroundSize: "100%",
+              }}
+            />
+
             {children}
           </CardContent>
         </Card>
