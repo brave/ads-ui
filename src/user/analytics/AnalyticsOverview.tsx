@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, Box, Card, Divider, LinearProgress } from "@mui/material";
+import { Alert, Box, Divider, LinearProgress } from "@mui/material";
 import moment from "moment/moment";
 import { CampaignFormat } from "graphql/types";
 import {
@@ -82,7 +82,7 @@ const AnalyticsOverview: React.FC = () => {
   }
 
   return (
-    <Card
+    <Box
       sx={{
         p: 3,
       }}
@@ -130,7 +130,7 @@ const AnalyticsOverview: React.FC = () => {
         engagements={filteredEngagements ?? []}
         campaign={data.campaign}
       />
-    </Card>
+    </Box>
   );
 };
 
