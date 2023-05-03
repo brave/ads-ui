@@ -24,7 +24,7 @@ This bundle is then served to users as a static asset by [AWS CloudFront CDN](ht
 
 **Note:**
 We are using HTTPS in developer mode so that cookie based authentication works properly.
-You mat need to proceed through a certificate warning in order to develop locally.
+You may need to proceed through a certificate warning in order to develop locally.
 
 #### Generating GraphQL Types:
 
