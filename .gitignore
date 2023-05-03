@@ -23,4 +23,6 @@ yarn-error.log*
 rdb.dump
 *.icloud
 
+# IDE
 .vscode/
+.idea/
