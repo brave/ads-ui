@@ -8,7 +8,12 @@ import {
   EngagementFragment,
 } from "graphql/analytics-overview.generated";
 import { AdSetFragment } from "graphql/ad-set.generated";
-import { EngagementChartType, Metrics, OverviewDetail } from "../../types";
+import {
+  EngagementChartType,
+  Metrics,
+  OverviewDetail,
+  StatsMetric,
+} from "../../types";
 import {
   prepareChart,
   processData,
@@ -57,7 +62,7 @@ export function EngagementsOverview({ engagements, campaign, adSets }: Props) {
     metric4: "landings",
   });
 
-  const setActiveMetric = (key: keyof Metrics, value: string) => {
+  const setActiveMetric = (key: keyof Metrics, value: keyof StatsMetric) => {
     const metricsCopy = metrics;
     metricsCopy[key] = value;
     setMetrics({ ...metricsCopy });

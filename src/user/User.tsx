@@ -42,13 +42,7 @@ export function User() {
       <Box height="100%">
         <Box display="flex">
           <Navbar canCreate={advertiser.selfServiceCreate} />
-          <Box
-            width="100%"
-            height="100%"
-            padding={1}
-            overflow="scroll"
-            marginTop="64px"
-          >
+          <Box width="100%" height="100%" padding={1} marginTop="64px">
             <Switch>
               {/* /adsmanager */}
               <Route path={`/user/main/adsmanager/advanced/new/:draftId`}>

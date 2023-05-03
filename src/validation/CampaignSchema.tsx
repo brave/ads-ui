@@ -26,12 +26,13 @@ export const CampaignSchema = object().shape({
     .label("Start Date")
     .when("validateStart", {
       is: true,
-      then: date()
-        .min(
-          startOfDay(twoDaysOut()),
-          "Start Date must be minimum of 2 days from today"
-        )
-        .required(),
+      then: (schema) =>
+        schema
+          .min(
+            startOfDay(twoDaysOut()),
+            "Start Date must be minimum of 2 days from today"
+          )
+          .required(),
     }),
   endAt: date()
     .label("End Date")
@@ -50,12 +51,13 @@ export const CampaignSchema = object().shape({
   price: number()
     .label("Price")
     .when("billingType", {
-      is: (b) => b === "cpc",
-      then: number().moreThan(0.09, "CPC price must be .10 or higher"),
+      is: (b: string) => b === "cpc",
+      then: (schema) =>
+        schema.moreThan(0.09, "CPC price must be .10 or higher"),
     })
     .when("billingType", {
-      is: (b) => b === "cpm",
-      then: number().moreThan(5, "CPM price must be 6 or higher"),
+      is: (b: string) => b === "cpm",
+      then: (schema) => schema.moreThan(5, "git CPM price must be 6 or higher"),
     })
     .required("Price is a required field"),
   billingType: string()

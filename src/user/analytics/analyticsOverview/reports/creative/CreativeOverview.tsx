@@ -8,7 +8,7 @@ import { CampaignFormat } from "graphql/types";
 import { EngagementFragment } from "graphql/analytics-overview.generated";
 import { CampaignFragment } from "graphql/campaign.generated";
 import { creativeEngagements } from "../../lib/creative.library";
-import { CreativeMetric } from "../../types";
+import { CreativeMetric, StatsMetric } from "../../types";
 
 interface Props {
   engagements: EngagementFragment[];
@@ -21,7 +21,7 @@ export function CreativeOverview({ engagements, campaign }: Props) {
 
   const metrics = creativeEngagements(engagements, campaign.format);
 
-  const mapMetricToSeries = (cm: CreativeMetric[], type: string) => {
+  const mapMetricToSeries = (cm: CreativeMetric[], type: keyof StatsMetric) => {
     return cm
       .map((m) => {
         const p = m.creativePayload;
@@ -109,7 +109,7 @@ export function CreativeOverview({ engagements, campaign }: Props) {
     ],
   };
 
-  const onChange = (metric: CreativeMetric[], type: string) => {
+  const onChange = (metric: CreativeMetric[], type: keyof StatsMetric) => {
     setType(type);
     setChart(mapMetricToSeries(metric, type));
   };

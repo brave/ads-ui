@@ -1,17 +1,17 @@
+import MetricSelect from "user/analytics/analyticsOverview/components/MetricSelect";
+import { Text } from "components/Text/Text";
 import React from "react";
 import { Box } from "@mui/material";
-import { BaseMetric, Metrics } from "../types";
-import { decideValueAttribute } from "../lib/overview.library";
-import MetricSelect from "./MetricSelect";
-import { Text } from "components/Text/Text";
+import { decideValueAttribute } from "user/analytics/analyticsOverview/lib/overview.library";
+import { Metrics, StatsMetric } from "user/analytics/analyticsOverview/types";
 
 interface FilterValue {
-  value: string;
+  value: keyof StatsMetric;
 }
 
 type BoxProps = FilterValue & {
-  processedStats: BaseMetric;
-  onSetMetric: (key: keyof Metrics, value: string) => void;
+  processedStats: StatsMetric;
+  onSetMetric: (key: keyof Metrics, value: keyof StatsMetric) => void;
   metric: string;
   isNtp: boolean;
 };
@@ -71,8 +71,8 @@ const FilterBox = ({
 };
 
 interface MetricProps {
-  processedStats: BaseMetric;
-  onSetMetric: (key: keyof Metrics, value: string) => void;
+  processedStats: StatsMetric;
+  onSetMetric: (key: keyof Metrics, value: keyof StatsMetric) => void;
   metrics: Metrics;
   isNtp: boolean;
 }
