@@ -76,15 +76,13 @@ export function MagicLink() {
         Get login link
       </LoadingButton>
 
-      {!requested && (
-        <Link
-          underline="none"
-          sx={{ mt: 1, cursor: "pointer" }}
-          onClick={() => history.replace("/auth/signin")}
-        >
-          or log in in using a password
-        </Link>
-      )}
+      <Link
+        underline="none"
+        sx={{ mt: 1, cursor: "pointer" }}
+        onClick={() => history.replace("/auth/signin")}
+      >
+        or log in in using a password
+      </Link>
     </AuthContainer>
   );
 }
