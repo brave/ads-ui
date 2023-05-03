@@ -16,7 +16,7 @@ import React, { useState } from "react";
 import { CampaignForm } from "../../../../../types";
 import { DeleteDraft } from "./DeleteDraft";
 import { IAdvertiser } from "auth/context/auth.interface";
-import { DashboardButton } from "user/views/adsManager/views/advanced/components/form/components/DashboardButton";
+import { DashboardIconButton } from "components/Button/DashboardIconButton";
 
 interface Props {
   isEdit: boolean;
@@ -40,7 +40,7 @@ export function BaseForm({ isEdit, values, advertiser, draftId }: Props) {
     <Form>
       <Stack alignItems="center" direction="row" justifyContent="space-between">
         <Stack alignItems="center" direction="row">
-          <DashboardButton />
+          <DashboardIconButton />
           <Tabs value={value} onChange={handleChange}>
             <Tab label="Campaign" value={0} />
             {values.adSets.map((a, index) => (

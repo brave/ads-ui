@@ -82,7 +82,11 @@ const AnalyticsOverview: React.FC = () => {
   }
 
   return (
-    <Box>
+    <Box
+      sx={{
+        p: 3,
+      }}
+    >
       <ReportUtils
         startDate={startDate}
         endDate={endDate}
@@ -91,7 +95,7 @@ const AnalyticsOverview: React.FC = () => {
       />
 
       <Divider textAlign="left" sx={{ fontWeight: "600", mb: 2 }}>
-        Overview
+        {data.campaign.name}: Overview
       </Divider>
 
       <EngagementsOverview

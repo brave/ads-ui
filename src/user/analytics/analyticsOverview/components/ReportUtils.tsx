@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { downloadCSV } from "../lib/csv.library";
 import { DateRangePicker } from "components/Date/DateRangePicker";
 import { useUser } from "auth/hooks/queries/useUser";
+import { DashboardButton } from "components/Button/DashboardButton";
 
 interface DownloaderProps {
   startDate: Date | undefined;
@@ -29,6 +30,7 @@ export default function ReportUtils({
       alignItems="center"
       justifyContent="space-between"
     >
+      <DashboardButton />
       <Box
         display="flex"
         alignItems="center"
