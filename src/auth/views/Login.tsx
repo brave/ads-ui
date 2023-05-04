@@ -1,7 +1,7 @@
 import { Alert, Link, TextField, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link as RouterLink } from "react-router-dom";
 import { useSignIn } from "auth/hooks/mutations/useSignIn";
 import { AuthContainer } from "auth/views/components/AuthContainer";
 
@@ -57,8 +57,10 @@ export function Login() {
 
       <Link
         underline="none"
-        sx={{ mt: 1, cursor: "pointer" }}
-        onClick={() => history.replace("/auth/link")}
+        component={RouterLink}
+        sx={{ mt: 1 }}
+        to="/auth/link"
+        replace
       >
         or sign in in using a secure link
       </Link>

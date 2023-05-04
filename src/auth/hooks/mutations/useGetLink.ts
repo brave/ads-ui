@@ -11,7 +11,7 @@ export function useGetLink({ onError, onSuccess }: Options = {}) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
 
-  const link = useCallback(async (email: string) => {
+  const requestLink = useCallback(async (email: string) => {
     setLoading(true);
     await getLink({ email })
       .then(() => {
@@ -30,5 +30,5 @@ export function useGetLink({ onError, onSuccess }: Options = {}) {
       });
   }, []);
 
-  return { link, loading, error };
+  return { requestLink, loading, error };
 }

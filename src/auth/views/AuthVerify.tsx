@@ -3,6 +3,7 @@ import { useAuthorize } from "auth/hooks/queries/useAuthorize";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { CircularProgress, Link, Stack, Typography } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 
@@ -39,8 +40,10 @@ export function AuthVerify() {
           <VerifiedIcon sx={{ fontSize: "100px", mb: 5 }} color="success" />
           <Link
             variant="h5"
-            sx={{ cursor: "pointer", textAlign: "center" }}
-            onClick={() => history.replace("/")}
+            component={RouterLink}
+            sx={{ textAlign: "center" }}
+            to="/"
+            replace
           >
             Not automatically redirected? Click this link to go to the
             dashboard.
@@ -53,11 +56,7 @@ export function AuthVerify() {
             Unable to login, link has expired or has already been used.
           </Typography>
           <CancelOutlinedIcon sx={{ fontSize: "100px", mb: 5 }} color="error" />
-          <Link
-            variant="h5"
-            sx={{ cursor: "pointer" }}
-            onClick={() => history.replace("/auth/link")}
-          >
+          <Link variant="h5" component={RouterLink} to="/auth/link" replace>
             Request another link.
           </Link>
         </Stack>

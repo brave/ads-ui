@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 
-import { Alert, Link, Stack, TextField, Typography } from "@mui/material";
+import { Link, Stack, TextField, Typography } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 import { useGetLink } from "auth/hooks/mutations/useGetLink";
 import { LoadingButton } from "@mui/lab";
 import { AuthContainer } from "auth/views/components/AuthContainer";
-import { useHistory } from "react-router-dom";
 
 export function MagicLink() {
   const [email, setEmail] = useState("");
   const [requested, setRequested] = useState(false);
-  const history = useHistory();
 
-  const { link, loading, error } = useGetLink({
+  const { requestLink, loading, error } = useGetLink({
     onSuccess() {
       setRequested(true);
     },
@@ -70,7 +69,7 @@ export function MagicLink() {
         disabled={loading}
         loading={loading}
         onClick={() => {
-          link(email);
+          requestLink(email);
         }}
       >
         Get login link
@@ -78,8 +77,10 @@ export function MagicLink() {
 
       <Link
         underline="none"
-        sx={{ mt: 1, cursor: "pointer" }}
-        onClick={() => history.replace("/auth/signin")}
+        sx={{ mt: 1 }}
+        component={RouterLink}
+        to="/auth/signin"
+        replace
       >
         or log in in using a password
       </Link>
