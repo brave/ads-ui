@@ -82,7 +82,7 @@ export function MagicLink() {
         to="/auth/signin"
         replace
       >
-        or log in in using a password
+        or sign in using a password
       </Link>
     </AuthContainer>
   );

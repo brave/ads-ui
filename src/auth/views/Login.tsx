@@ -62,7 +62,7 @@ export function Login() {
         to="/auth/link"
         replace
       >
-        or sign in in using a secure link
+        or sign in using a secure link
       </Link>
     </AuthContainer>
   );
