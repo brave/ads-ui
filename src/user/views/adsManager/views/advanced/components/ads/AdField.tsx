@@ -128,12 +128,17 @@ interface AdProps {
 }
 
 function Ad({ adSetIdx, adIdx, isEdit, creative }: AdProps) {
+  const canEdit =
+    isEdit &&
+    creative.id &&
+    creative.state !== "active" &&
+    creative.state !== "paused";
   return (
     <>
       <FormikTextField
         name={`adSets.${adSetIdx}.creatives.${adIdx}.name`}
         label="Ad Name"
-        disabled={isEdit && !!creative.id}
+        disabled={!canEdit}
       />
 
       <Stack direction="row" alignItems="center">
@@ -143,7 +148,7 @@ function Ad({ adSetIdx, adIdx, isEdit, creative }: AdProps) {
           label="Ad Title"
           helperText="Max 30 Characters"
           maxLengthInstantFeedback={30}
-          disabled={isEdit && !!creative.id}
+          disabled={!canEdit}
         />
 
         <FormikTextField
@@ -152,7 +157,7 @@ function Ad({ adSetIdx, adIdx, isEdit, creative }: AdProps) {
           label="Ad Body"
           helperText="Max 60 Characters"
           maxLengthInstantFeedback={60}
-          disabled={isEdit && !!creative.id}
+          disabled={!canEdit}
         />
       </Stack>
 
@@ -162,7 +167,7 @@ function Ad({ adSetIdx, adIdx, isEdit, creative }: AdProps) {
         name={`adSets.${adSetIdx}.creatives.${adIdx}.targetUrl`}
         validator={`adSets.${adSetIdx}.creatives.${adIdx}.targetUrlValid`}
         label="Ad Target URL"
-        disabled={isEdit && !!creative.id}
+        disabled={!canEdit}
         helperText={"Example - https://brave.com/brave-rewards/"}
       />
     </>

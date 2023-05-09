@@ -38,6 +38,8 @@ export type CampaignFilter = {
   format?: InputMaybe<CampaignFormat>;
   /** exclude all campaigns whose time range is completely before this time */
   from?: InputMaybe<Scalars["DateTime"]>;
+  /** only include campaigns with this source */
+  source?: InputMaybe<CampaignSource>;
   /** only include campaigns with this state */
   state?: InputMaybe<Scalars["String"]>;
   /** exclude all campaigns whose time range is completely after this time */
@@ -55,6 +57,13 @@ export enum CampaignFormat {
 export enum CampaignPacingStrategies {
   ModelV1 = "MODEL_V1",
   Original = "ORIGINAL",
+}
+
+export enum CampaignRejection {
+  InappropriateContent = "INAPPROPRIATE_CONTENT",
+  InvalidLandingPage = "INVALID_LANDING_PAGE",
+  Other = "OTHER",
+  ProhibitedCategory = "PROHIBITED_CATEGORY",
 }
 
 export enum CampaignSource {
@@ -225,7 +234,7 @@ export type CreateUserInput = {
   email: Scalars["String"];
   emailVerified: Scalars["Boolean"];
   fullName: Scalars["String"];
-  password: Scalars["String"];
+  password?: InputMaybe<Scalars["String"]>;
   role: Scalars["String"];
 };
 
@@ -322,7 +331,7 @@ export type PromotedContentPayloadInput = {
 export type RejectCampaignInput = {
   campaignId: Scalars["String"];
   message?: InputMaybe<Scalars["String"]>;
-  option: Scalars["String"];
+  option: CampaignRejection;
 };
 
 export type SearchHomepagePayloadInput = {
