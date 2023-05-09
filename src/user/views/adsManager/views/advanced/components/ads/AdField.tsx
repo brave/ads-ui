@@ -22,7 +22,6 @@ import {
 } from "../../../../types";
 import { UrlResolver } from "components/Url/UrlResolver";
 import logo from "../../../../../../../../brave_logo_icon.png";
-import CircleIcon from "@mui/icons-material/Circle";
 import { Status } from "components/Campaigns/Status";
 
 interface Props {
