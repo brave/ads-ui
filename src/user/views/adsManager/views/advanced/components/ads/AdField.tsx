@@ -89,6 +89,9 @@ export function AdField({ index, isEdit }: Props) {
             </Box>
 
             <Box display="flex" flexDirection="row" alignItems="center">
+              <Status
+                state={values.adSets[index].creatives[selected].state ?? "New"}
+              />
               {selected > 0 &&
                 canRemove(isEdit, values.adSets, selected, index) && (
                   <Tooltip title="Remove Ad">
@@ -133,13 +136,6 @@ function Ad({ adSetIdx, adIdx, creative }: AdProps) {
         name={`adSets.${adSetIdx}.creatives.${adIdx}.name`}
         label="Ad Name"
         disabled={cannotEdit}
-        InputProps={
-          creative.id
-            ? {
-                endAdornment: <Status state={creative.state ?? "New"} />,
-              }
-            : undefined
-        }
       />
 
       <Stack direction="row" alignItems="center">
