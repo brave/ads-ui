@@ -11,10 +11,6 @@ export function useSignIn({ onError, onSuccess }: Options = {}) {
   const { setSessionUser } = useAuthContext();
   const [loading, setLoading] = useState(false);
   const signIn = useCallback((email: string, password: string) => {
-    if (email === "" || password === "") {
-      if (onError) onError("Please Fill The Details.");
-      return;
-    }
     setLoading(true);
     getCredentials({ email, password })
       .then((data) => {
