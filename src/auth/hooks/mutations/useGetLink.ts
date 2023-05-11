@@ -1,28 +1,25 @@
 import { useCallback, useState } from "react";
 import { useAuthContext } from "auth/context/auth.hook";
-import { clearCredentials } from "auth/lib";
+import { getCredentials, getLink } from "auth/lib";
 
 interface Options {
-  onSuccess?: () => void;
   onError?: (msg: string) => void;
+  onSuccess?: () => void;
 }
 
-export function useSignOut({ onSuccess, onError }: Options = {}) {
+export function useGetLink({ onError, onSuccess }: Options = {}) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
-  const { setSessionUser } = useAuthContext();
 
-  const signOut = useCallback(() => {
+  const requestLink = useCallback(async (email: string) => {
     setLoading(true);
-    clearCredentials()
+    await getLink({ email })
       .then(() => {
-        setSessionUser(undefined);
-
         if (onSuccess) {
           onSuccess();
         }
       })
-      .catch((e: Error) => {
+      .catch((e) => {
         setError(e.message);
         if (onError) {
           onError(e.message);
@@ -33,5 +30,5 @@ export function useSignOut({ onSuccess, onError }: Options = {}) {
       });
   }, []);
 
-  return { signOut, loading, error };
+  return { requestLink, loading, error };
 }

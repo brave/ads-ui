@@ -6,15 +6,17 @@ import { isAfterEndDate } from "util/isAfterEndDate";
 
 export const Status: React.FC<{
   state: string;
-  end: string;
+  end?: string;
 }> = ({ state, end }) => {
   let color = calcColorForState(state);
 
   let label = _.startCase(state);
 
-  if (isAfterEndDate(end) && state === "active") {
-    label = "Completed";
-    color = calcColorForState("completed");
+  if (end) {
+    if (isAfterEndDate(end) && state === "active") {
+      label = "Completed";
+      color = calcColorForState("completed");
+    }
   }
 
   return (

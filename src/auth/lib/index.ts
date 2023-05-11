@@ -78,3 +78,37 @@ export const clearCredentials = async (): Promise<void> => {
 
   return;
 };
+
+export const getLink = async (user: { email: string }): Promise<void> => {
+  await fetch(`${url}/auth/magic-link?email=${user.email}`, {
+    method: "GET",
+    mode: "cors",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+export const authorize = async (req: {
+  code: string;
+  id: string;
+}): Promise<ResponseUser> => {
+  const res = await fetch(
+    `${url}/auth/authorize?code=${req.code}&id=${req.id}`,
+    {
+      method: "GET",
+      mode: "cors",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error("Invalid Token");
+  }
+
+  return await res.json();
+};

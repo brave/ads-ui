@@ -4,15 +4,23 @@ import {
   CreateAdSetInput,
   CreateCampaignInput,
   CreateNotificationCreativeInput,
+  CreateTypeInput,
   GeocodeInput,
+  InputMaybe,
+  NotificationPayloadInput,
+  Scalars,
   UpdateAdSetInput,
   UpdateCampaignInput,
+  UpdateNotificationCreativeInput,
 } from "graphql/types";
 import axios from "axios";
 import { DocumentNode, print } from "graphql";
 import { CampaignFragment } from "graphql/campaign.generated";
 import { CreateAdDocument } from "graphql/ad-set.generated";
-import { CreateNotificationCreativeDocument } from "graphql/creative.generated";
+import {
+  CreateNotificationCreativeDocument,
+  UpdateNotificationCreativeDocument,
+} from "graphql/creative.generated";
 import {
   Billing,
   CampaignForm,
@@ -99,20 +107,11 @@ async function transformCreative(
   advertiserId: string,
   userId?: string
 ): Promise<CreateAdInput> {
-  const notification: CreateNotificationCreativeInput = {
+  const notification = creativeInput(
     advertiserId,
-    userId,
-    name: creative.name,
-    payload: {
-      title: creative.title,
-      body: creative.body,
-      targetUrl: creative.targetUrl,
-    },
-    state: "under_review",
-    type: {
-      code: "notification_all_v1",
-    },
-  };
+    creative,
+    userId
+  ) as CreateNotificationCreativeInput;
   const withId = await createNotification(notification);
   return {
     state: "under_review",
@@ -124,6 +123,38 @@ async function transformCreative(
         type: campaign.billingType === "cpc" ? "click" : "view",
       },
     ],
+  };
+}
+
+function creativeInput(
+  advertiserId: string,
+  creative: Creative,
+  userId?: string
+): CreateNotificationCreativeInput | UpdateNotificationCreativeInput {
+  const baseNotification = {
+    advertiserId,
+    userId,
+    name: creative.name,
+    payload: {
+      title: creative.title,
+      body: creative.body,
+      targetUrl: creative.targetUrl,
+    },
+    state: "under_review",
+  };
+
+  if (creative.id) {
+    return {
+      ...baseNotification,
+      creativeId: creative.id,
+    };
+  }
+
+  return {
+    ...baseNotification,
+    type: {
+      code: "notification_all_v1",
+    },
   };
 }
 
@@ -154,6 +185,16 @@ async function createNotification(
   }>(CreateNotificationCreativeDocument, { input: createInput });
 
   return response.data.createNotificationCreative.id;
+}
+
+async function updateNotification(
+  updateInput: UpdateNotificationCreativeInput
+) {
+  const response = await graphqlRequest<{
+    input: UpdateNotificationCreativeInput;
+  }>(UpdateNotificationCreativeDocument, { input: updateInput });
+
+  return response.data.updateNotificationCreative.id;
 }
 
 // TODO: Get rid of this ASAP. Currently necessary because when updating a campaign, it does not take into account any new ads.
@@ -229,6 +270,13 @@ export async function transformEditForm(
           ...withId,
           creativeSetId: adSet.id,
         });
+      } else if (ad.state !== "active" && ad.state !== "paused") {
+        const notification = creativeInput(
+          advertiserId,
+          ad,
+          userId
+        ) as UpdateNotificationCreativeInput;
+        await updateNotification(notification);
       }
     }
 
