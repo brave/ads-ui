@@ -1,5 +1,5 @@
 <p align="center">
-<img height="50" src="https://ads.brave.com/static/media/Subdomains_Rewards_Ads_Default.704c7b54.png"/>
+<img height="50" src="./Subdomains_Rewards_Ads_Default.png"/>
 </p>
 <br>
 

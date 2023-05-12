@@ -2,7 +2,6 @@ import { FieldArray, useField, useFormikContext } from "formik";
 import {
   Box,
   Card,
-  Divider,
   IconButton,
   Link,
   Paper,
@@ -23,6 +22,7 @@ import {
 } from "../../../../types";
 import { UrlResolver } from "components/Url/UrlResolver";
 import logo from "../../../../../../../../brave_logo_icon.png";
+import { Status } from "components/Campaigns/Status";
 
 interface Props {
   index: number;
@@ -89,6 +89,9 @@ export function AdField({ index, isEdit }: Props) {
             </Box>
 
             <Box display="flex" flexDirection="row" alignItems="center">
+              <Status
+                state={values.adSets[index].creatives[selected].state ?? "New"}
+              />
               {selected > 0 &&
                 canRemove(isEdit, values.adSets, selected, index) && (
                   <Tooltip title="Remove Ad">
@@ -112,7 +115,6 @@ export function AdField({ index, isEdit }: Props) {
             adSetIdx={index}
             adIdx={selected}
             creative={values.adSets[index].creatives[selected]}
-            isEdit={isEdit}
           />
         </Card>
       )}
@@ -124,16 +126,16 @@ interface AdProps {
   adSetIdx: number;
   adIdx: number;
   creative: Creative;
-  isEdit: boolean;
 }
 
-function Ad({ adSetIdx, adIdx, isEdit, creative }: AdProps) {
+function Ad({ adSetIdx, adIdx, creative }: AdProps) {
+  const cannotEdit = creative.state === "active" || creative.state === "paused";
   return (
     <>
       <FormikTextField
         name={`adSets.${adSetIdx}.creatives.${adIdx}.name`}
         label="Ad Name"
-        disabled={isEdit && !!creative.id}
+        disabled={cannotEdit}
       />
 
       <Stack direction="row" alignItems="center">
@@ -143,7 +145,7 @@ function Ad({ adSetIdx, adIdx, isEdit, creative }: AdProps) {
           label="Ad Title"
           helperText="Max 30 Characters"
           maxLengthInstantFeedback={30}
-          disabled={isEdit && !!creative.id}
+          disabled={cannotEdit}
         />
 
         <FormikTextField
@@ -152,7 +154,7 @@ function Ad({ adSetIdx, adIdx, isEdit, creative }: AdProps) {
           label="Ad Body"
           helperText="Max 60 Characters"
           maxLengthInstantFeedback={60}
-          disabled={isEdit && !!creative.id}
+          disabled={cannotEdit}
         />
       </Stack>
 
@@ -162,7 +164,7 @@ function Ad({ adSetIdx, adIdx, isEdit, creative }: AdProps) {
         name={`adSets.${adSetIdx}.creatives.${adIdx}.targetUrl`}
         validator={`adSets.${adSetIdx}.creatives.${adIdx}.targetUrlValid`}
         label="Ad Target URL"
-        disabled={isEdit && !!creative.id}
+        disabled={cannotEdit}
         helperText={"Example - https://brave.com/brave-rewards/"}
       />
     </>

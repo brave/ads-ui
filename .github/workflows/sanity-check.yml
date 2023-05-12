@@ -3,7 +3,10 @@
 #  - dependencies install
 #  - typescript compiles
 name: Sanity Check
-on: [push]
+on:
+  push:
+  pull_request:
+    branches: [master, prod]
 
 jobs:
   check:

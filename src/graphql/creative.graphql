@@ -19,3 +19,9 @@ mutation createNotificationCreative($input: CreateNotificationCreativeInput!) {
     id
   }
 }
+
+mutation updateNotificationCreative($input: UpdateNotificationCreativeInput!) {
+  updateNotificationCreative(updateNotificationCreativeInput: $input) {
+    id
+  }
+}

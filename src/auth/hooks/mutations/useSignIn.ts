@@ -10,6 +10,8 @@ interface Options {
 export function useSignIn({ onError, onSuccess }: Options = {}) {
   const { setSessionUser } = useAuthContext();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string>();
+
   const signIn = useCallback((email: string, password: string) => {
     setLoading(true);
     getCredentials({ email, password })
@@ -23,6 +25,7 @@ export function useSignIn({ onError, onSuccess }: Options = {}) {
         }
       })
       .catch((e) => {
+        setError(e.message);
         if (onError) {
           onError(e.message);
         }
@@ -32,5 +35,5 @@ export function useSignIn({ onError, onSuccess }: Options = {}) {
       });
   }, []);
 
-  return { signIn, loading };
+  return { signIn, loading, error };
 }
