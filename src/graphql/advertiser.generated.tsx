@@ -42,37 +42,6 @@ export type AdvertiserFragment = {
   };
 };
 
-export type AdvertisersQueryVariables = Types.Exact<{ [key: string]: never }>;
-
-export type AdvertisersQuery = {
-  __typename?: "Query";
-  userAdvertisers?: Array<{
-    __typename?: "Advertiser";
-    referrer?: string | null;
-    phone?: string | null;
-    selfServiceEdit: boolean;
-    selfServiceCreate: boolean;
-    selfServiceSetPrice: boolean;
-    id: string;
-    name: string;
-    state: string;
-    billingEmail?: string | null;
-    additionalBillingEmails?: Array<string> | null;
-    createdAt: any;
-    modifiedAt: any;
-    publicKey?: string | null;
-    mailingAddress: {
-      __typename?: "Address";
-      street1: string;
-      street2?: string | null;
-      city: string;
-      country: string;
-      state: string;
-      zipcode: string;
-    };
-  }> | null;
-};
-
 export type AdvertiserQueryVariables = Types.Exact<{
   id: Types.Scalars["String"];
 }>;
@@ -309,65 +278,6 @@ export const AdvertiserCampaignsFragmentDoc = gql`
   }
   ${CampaignSummaryFragmentDoc}
 `;
-export const AdvertisersDocument = gql`
-  query advertisers {
-    userAdvertisers {
-      ...Advertiser
-    }
-  }
-  ${AdvertiserFragmentDoc}
-`;
-
-/**
- * __useAdvertisersQuery__
- *
- * To run a query within a React component, call `useAdvertisersQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdvertisersQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdvertisersQuery({
- *   variables: {
- *   },
- * });
- */
-export function useAdvertisersQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    AdvertisersQuery,
-    AdvertisersQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<AdvertisersQuery, AdvertisersQueryVariables>(
-    AdvertisersDocument,
-    options
-  );
-}
-export function useAdvertisersLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    AdvertisersQuery,
-    AdvertisersQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<AdvertisersQuery, AdvertisersQueryVariables>(
-    AdvertisersDocument,
-    options
-  );
-}
-export type AdvertisersQueryHookResult = ReturnType<typeof useAdvertisersQuery>;
-export type AdvertisersLazyQueryHookResult = ReturnType<
-  typeof useAdvertisersLazyQuery
->;
-export type AdvertisersQueryResult = Apollo.QueryResult<
-  AdvertisersQuery,
-  AdvertisersQueryVariables
->;
-export function refetchAdvertisersQuery(variables?: AdvertisersQueryVariables) {
-  return { query: AdvertisersDocument, variables: variables };
-}
 export const AdvertiserDocument = gql`
   query advertiser($id: String!) {
     advertiser(id: $id) {

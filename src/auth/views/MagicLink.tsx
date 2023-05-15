@@ -23,7 +23,7 @@ export function MagicLink() {
           A login email is on the way
         </Typography>
         <Typography variant="subtitle1" sx={{ mb: 2 }}>
-          Click on the secure login link in the email to access your brave Ads
+          Click on the secure login link in the email to access your Brave Ads
           account.
         </Typography>
         <Stack direction="row" spacing={0.75}>
@@ -58,7 +58,7 @@ export function MagicLink() {
       />
       <Typography sx={{ textAlign: "center", mb: 1 }}>
         Enter your email address to get a secure login link. Use this link to
-        access your brave Ads account.
+        access your Brave Ads account.
       </Typography>
 
       <LoadingButton

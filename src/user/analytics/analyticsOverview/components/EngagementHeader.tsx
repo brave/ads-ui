@@ -55,7 +55,7 @@ const Engagement = ({ value, onSetEngagement }: EngagementProps) => {
       >
         <Tab label="Campaign" value="campaign" />
         <Tab label="Ad Set" value="creativeset" />
-        <Tab label="Creative" value="creative" />
+        <Tab label="Ad" value="creative" />
       </Tabs>
     </Box>
   );

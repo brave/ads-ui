@@ -26,12 +26,6 @@ fragment Advertiser on Advertiser {
   }
 }
 
-query advertisers {
-  userAdvertisers {
-    ...Advertiser
-  }
-}
-
 query advertiser($id: String!) {
   advertiser(id: $id) {
     id

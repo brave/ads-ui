@@ -19,6 +19,10 @@ export const getCredentials = async (user: {
   email: string;
   password: string;
 }): Promise<ResponseUser> => {
+  if (user.email === "" || user.password === "") {
+    throw new Error("Please enter a username and password");
+  }
+
   const res = await fetch(`${url}/auth/token`, {
     method: "POST",
     mode: "cors",

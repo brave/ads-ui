@@ -82,7 +82,7 @@ export function CreativeOverview({ engagements, campaign }: Props) {
     },
     series: [
       {
-        name: "Creatives",
+        name: "Ads",
         type: "bar",
         data: chart,
         dataLabels: [
