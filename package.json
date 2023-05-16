@@ -13,8 +13,6 @@
     "@mui/lab": "5.0.0-alpha.128",
     "@mui/material": "5.12.2",
     "@mui/x-date-pickers": "5.0.20",
-    "@stripe/react-stripe-js": "^2.1.0",
-    "@stripe/stripe-js": "^1.52.1",
     "axios": "1.2.2",
     "base64url": "3.0.1",
     "date-fns": "2.29.3",
