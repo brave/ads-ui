@@ -1,11 +1,19 @@
-import { Box, Divider, InputAdornment, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Divider,
+  InputAdornment,
+  InputProps,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { FormikRadioControl, FormikTextField } from "form/FormikHelpers";
 import React, { useEffect, useState } from "react";
 import { useFormikContext } from "formik";
 import { CampaignForm } from "../../../../../types";
 import { differenceInHours } from "date-fns";
-import { MIN_PER_CAMPAIGN, MIN_PER_DAY } from "validation/CampaignSchema";
+import { CPM, MIN_PER_CAMPAIGN, MIN_PER_DAY } from "validation/CampaignSchema";
 import _ from "lodash";
+import { adjustToCPM } from "util/billing";
 
 interface Props {
   canSetPrice: boolean;
@@ -65,7 +73,9 @@ export function BudgetField({ canSetPrice, isEdit }: Props) {
         {!canSetPrice ? (
           <Typography variant="body2">
             Pricing type is <strong>{_.upperCase(values.billingType)}</strong>{" "}
-            with a flat rate of <strong>${values.price}</strong>.
+            with a flat rate of <strong>${values.price}</strong>.{" "}
+            {isEdit ? "" : "Charged amount for this campaign will be"}{" "}
+            {!isEdit && <strong>${adjustToCPM(values.budget)}.</strong>}
           </Typography>
         ) : (
           <Stack direction="row" spacing={2} alignItems="center">

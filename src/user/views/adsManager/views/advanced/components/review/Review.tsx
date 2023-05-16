@@ -5,13 +5,18 @@ import React, { useEffect } from "react";
 import { FormikSubmitButton } from "form/FormikHelpers";
 import { CampaignReview } from "./components/CampaignReview";
 import { AdSetReview } from "./components/AdSetReview";
+import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 
 interface Props {
   isEdit: boolean;
 }
 
 export function Review({ isEdit }: Props) {
+  const { advertiser } = useAdvertiser();
   const { values, errors, setTouched } = useFormikContext<CampaignForm>();
+  const buttonText = advertiser.selfServiceSetPrice
+    ? "Publish Campaign"
+    : "Pay and submit for approval";
 
   useEffect(() => {
     const toTouch = Object.keys(values)
@@ -34,7 +39,7 @@ export function Review({ isEdit }: Props) {
 
       <FormikSubmitButton
         isCreate={!isEdit}
-        label={isEdit ? "Update Campaign" : "Publish Campaign"}
+        label={isEdit ? "Update Campaign" : buttonText}
         allowNavigation={true}
       />
     </Box>

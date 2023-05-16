@@ -4,11 +4,7 @@ import {
   CreateAdSetInput,
   CreateCampaignInput,
   CreateNotificationCreativeInput,
-  CreateTypeInput,
   GeocodeInput,
-  InputMaybe,
-  NotificationPayloadInput,
-  Scalars,
   UpdateAdSetInput,
   UpdateCampaignInput,
   UpdateNotificationCreativeInput,
@@ -29,6 +25,7 @@ import {
   OS,
   Segment,
 } from "user/views/adsManager/types";
+import { adjustToCPM } from "util/billing";
 
 const TYPE_CODE_LOOKUP: Record<string, string> = {
   notification_all_v1: "Push Notification",
@@ -84,7 +81,7 @@ export async function transformNewForm(
     startAt: form.startAt,
     state: form.state,
     type: form.type,
-    budget: form.budget,
+    budget: adjustToCPM(form.budget),
     adSets: transformedAdSet,
   };
 }
