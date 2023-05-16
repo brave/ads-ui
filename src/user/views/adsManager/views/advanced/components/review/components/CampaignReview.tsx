@@ -3,6 +3,7 @@ import { CustomListItemText } from "components/List/CustomListItemText";
 import React from "react";
 import { CampaignForm } from "../../../../../types";
 import { FormikErrors } from "formik";
+import { adjustToCPM } from "util/billing";
 
 interface Props {
   values: CampaignForm;
@@ -47,7 +48,7 @@ export function CampaignReview({ values, errors }: Props) {
         />
         <CustomListItemText
           primary="Lifetime Budget"
-          secondary={`$${values.budget} ${values.currency}`}
+          secondary={`$${adjustToCPM(values.budget)} ${values.currency}`}
           error={errors.budget}
         />
         <CustomListItemText

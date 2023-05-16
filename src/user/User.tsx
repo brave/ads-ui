@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import {
@@ -49,21 +49,19 @@ export function User() {
                 component={EditCampaign}
               />
 
-              <Route path={`/user/main/complete/:mode`}>
-                <CompletionForm />
-              </Route>
+              <Route
+                path={`/user/main/complete/:mode`}
+                component={CompletionForm}
+              />
 
               {/* /settings */}
-              <Route path={`/user/main/settings`}>
-                <Settings />
-              </Route>
+              <Route path={`/user/main/settings`} component={Settings} />
 
               {/* /campaigns/:campaignId/analytics - */}
               <Route
                 path={`/user/main/campaign/:campaignId/analytics/overview`}
-              >
-                <AnalyticsOverview />
-              </Route>
+                component={AnalyticsOverview}
+              />
 
               <Route path={`/user/main`} component={MainView} />
 

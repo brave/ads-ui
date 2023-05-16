@@ -9,13 +9,17 @@ const HttpsRegex = /^https:\/\//;
 
 export const MIN_PER_DAY = 33;
 export const MIN_PER_CAMPAIGN = 100;
+export const CPM = 6;
 
 export const CampaignSchema = object().shape({
   name: string().label("Campaign Name").required(),
   budget: number()
     .label("Lifetime Budget")
     .required()
-    .min(MIN_PER_CAMPAIGN, "Lifetime budget must be $1000 or more"),
+    .min(
+      MIN_PER_CAMPAIGN,
+      `Lifetime budget must be ${MIN_PER_CAMPAIGN} or more`
+    ),
   validateStart: boolean(),
   dailyBudget: number()
     .label("Daily Budget")
@@ -57,7 +61,8 @@ export const CampaignSchema = object().shape({
     })
     .when("billingType", {
       is: (b: string) => b === "cpm",
-      then: (schema) => schema.moreThan(5, "CPM price must be 6 or higher"),
+      then: (schema) =>
+        schema.moreThan(5, `CPM price must be ${CPM} or higher`),
     })
     .required("Price is a required field"),
   billingType: string()
