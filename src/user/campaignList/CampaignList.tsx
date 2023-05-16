@@ -12,7 +12,7 @@ import {
   renderMonetaryAmount,
 } from "components/EnhancedTable/renderers";
 import EditIcon from "@mui/icons-material/Edit";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link as RouterLink } from "react-router-dom";
 import { Status } from "components/Campaigns/Status";
 import { isAfterEndDate } from "util/isAfterEndDate";
 import { CampaignFormat, CampaignSource } from "graphql/types";
@@ -55,16 +55,17 @@ export function CampaignList({ advertiserCampaigns, fromDate }: Props) {
               alignItems="center"
               direction="row"
             >
-              <Link
-                href={
-                  r.state !== "under_review"
-                    ? `/user/main/campaign/${r.id}/analytics/overview`
-                    : undefined
-                }
-                underline="none"
-              >
-                {r.name}
-              </Link>
+              {r.state !== "under_review" ? (
+                <Link
+                  component={RouterLink}
+                  to={`/user/main/campaign/${r.id}/analytics/overview`}
+                  underline="none"
+                >
+                  {r.name}
+                </Link>
+              ) : (
+                r.name
+              )}
               {advertiserCampaigns?.selfServiceEdit &&
                 r.source === CampaignSource.SelfServe &&
                 r.format === CampaignFormat.PushNotification &&
