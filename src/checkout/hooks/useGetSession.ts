@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { buildAdServerEndpoint } from "util/environment";
+import { updateCampaign } from "user/library";
 
 interface Props {
-  id: string | null;
+  sessionId: string | null;
+  campaignId: string;
+  advertiserId: string;
 }
 
 interface Payment {
   intent: string;
 }
 
-export function useGetSessionById(props: Props) {
+export function useValidateSession(props: Props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
   const [data, setData] = useState<Payment>();
@@ -30,12 +33,18 @@ export function useGetSessionById(props: Props) {
       }
 
       const { paymentIntent } = await res.json();
+      await updateCampaign({
+        id: props.campaignId,
+        state: "under_review",
+        stripePaymentId: paymentIntent,
+        advertiserId: props.advertiserId,
+      });
       return { paymentIntent };
     };
 
-    setLoading(true);
-    if (props.id) {
-      fetchSession(props.id)
+    if (props.sessionId) {
+      setLoading(true);
+      fetchSession(props.sessionId)
         .then((r) => {
           setData({
             intent: r.paymentIntent,
@@ -48,7 +57,7 @@ export function useGetSessionById(props: Props) {
           setLoading(false);
         });
     }
-  }, [props.id]);
+  }, [props.sessionId]);
 
   return { data, loading, error };
 }

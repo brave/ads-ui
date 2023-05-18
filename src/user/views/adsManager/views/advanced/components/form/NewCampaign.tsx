@@ -1,6 +1,6 @@
 import { Container } from "@mui/material";
 import { Formik } from "formik";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { CampaignForm, initialCampaign } from "../../../../types";
 import { CampaignSchema } from "validation/CampaignSchema";
 import { transformNewForm } from "user/library";
@@ -33,7 +33,6 @@ export function NewCampaign() {
     onCompleted() {
       localStorage.removeItem(params.draftId);
       setDrafts();
-      history.push("/user/main/complete/new");
     },
   });
 

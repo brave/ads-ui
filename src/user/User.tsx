@@ -15,6 +15,7 @@ import { EditCampaign } from "./views/adsManager/views/advanced/components/form/
 import { CompletionForm } from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
 import { MainView } from "user/views/user/MainView";
 import { Navbar } from "user/components/navbar/Navbar";
+import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({

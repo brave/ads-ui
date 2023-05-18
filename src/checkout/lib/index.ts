@@ -1,9 +1,8 @@
 import { buildAdServerEndpoint } from "../../util/environment";
 
 export async function createSession(
-  quantity: number,
   advertiserId: string,
-  referenceId: string
+  campaignId: string
 ): Promise<string> {
   const res = await fetch(
     buildAdServerEndpoint("/ads/create-checkout-session"),
@@ -14,7 +13,7 @@ export async function createSession(
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ quantity, advertiserId, referenceId }),
+      body: JSON.stringify({ advertiserId, campaignId }),
     }
   );
 

@@ -3,7 +3,6 @@ import { CustomListItemText } from "components/List/CustomListItemText";
 import React from "react";
 import { CampaignForm } from "../../../../../types";
 import { FormikErrors } from "formik";
-import { adjustToCPM } from "util/billing";
 
 interface Props {
   values: CampaignForm;
@@ -21,10 +20,6 @@ export function CampaignReview({ values, errors }: Props) {
       minute: "numeric",
     };
     return new Date(date).toLocaleDateString("en-US", options);
-  };
-
-  const billing = (v: string) => {
-    return v === "cpm" ? "Impressions (CPM)" : "Clicks (CPC)";
   };
 
   return (
@@ -48,18 +43,8 @@ export function CampaignReview({ values, errors }: Props) {
         />
         <CustomListItemText
           primary="Lifetime Budget"
-          secondary={`$${adjustToCPM(values.budget)} ${values.currency}`}
+          secondary={`${values.budget} ${values.currency}`}
           error={errors.budget}
-        />
-        <CustomListItemText
-          primary="Pricing Type"
-          secondary={billing(values.billingType)}
-          error={errors.billingType}
-        />
-        <CustomListItemText
-          primary="Price"
-          secondary={`$${values.price}`}
-          error={errors.price}
         />
         <CustomListItemText
           primary="Locations"
