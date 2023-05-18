@@ -150,10 +150,8 @@ export const FormikSubmitButton: React.FC<FormikSubmitButtonProps> = ({
   label = "Save",
   inProgressLabel = "Saving...",
   isCreate,
-  allowNavigation,
 }) => {
   const formik = useFormikContext();
-  const history = useHistory();
 
   let saveButtonTooltip: TooltipProps["title"] = "";
   let saveEnabled = true;
@@ -161,17 +159,6 @@ export const FormikSubmitButton: React.FC<FormikSubmitButtonProps> = ({
   // On create, the save button is initially enabled so the user can click it
   // to see the full set of validation errors.
   // On edit, it should only be enabled once they've made changes.
-  useEffect(() => {
-    const unblock = history.block(
-      !allowNavigation && formik.dirty
-        ? "You’ve got unsaved changes. Are you sure you want to navigate away from this page?"
-        : true
-    );
-
-    return function cleanup() {
-      unblock();
-    };
-  }, [formik.dirty, allowNavigation]);
 
   if (formik.isSubmitting) {
     saveEnabled = false;

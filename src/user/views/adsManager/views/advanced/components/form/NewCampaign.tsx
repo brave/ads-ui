@@ -1,6 +1,6 @@
 import { Container } from "@mui/material";
 import { Formik } from "formik";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { CampaignForm, initialCampaign } from "../../../../types";
 import { CampaignSchema, CPM } from "validation/CampaignSchema";
 import { populateFilter, transformNewForm } from "user/library";
@@ -47,7 +47,6 @@ export function NewCampaign({ fromDate }: Props) {
     onCompleted() {
       localStorage.removeItem(params.draftId);
       setDrafts();
-      history.push("/user/main/complete/new");
     },
   });
 
@@ -58,37 +57,35 @@ export function NewCampaign({ fromDate }: Props) {
         onSubmit={async (v: CampaignForm, { setSubmitting }) => {
           setSubmitting(true);
           try {
-            if (advertiser.selfServiceSetPrice) {
-              const newForm = await transformNewForm(v, advertiser.id, userId);
-              await mutation({ variables: { input: newForm } });
-            } else {
-              const quantity = Math.round(v.budget / CPM);
+            const newForm = await transformNewForm(v, advertiser.id, userId);
+            newForm.state = advertiser.selfServiceSetPrice
+              ? "under_review"
+              : "draft";
+            const res = await mutation({ variables: { input: newForm } });
+            if (!advertiser.selfServiceSetPrice) {
               const url = await createSession(
-                quantity,
                 advertiser.id,
-                params.draftId
+                res.data?.createCampaign.id ?? ""
               );
               window.location.replace(url);
+            } else {
+              history.push("/user/main/complete/new");
             }
           } catch (e) {
             alert("Unable to save Campaign");
-          } finally {
             setSubmitting(false);
           }
         }}
         validationSchema={CampaignSchema}
       >
-        {({ values }) => (
-          <>
-            <BaseForm
-              isEdit={false}
-              values={values}
-              advertiser={advertiser}
-              draftId={params.draftId}
-            />
-            <PersistFormValues id={params.draftId} />
-          </>
-        )}
+        <>
+          <BaseForm
+            isEdit={false}
+            advertiser={advertiser}
+            draftId={params.draftId}
+          />
+          <PersistFormValues id={params.draftId} />
+        </>
       </Formik>
     </Container>
   );

@@ -1,4 +1,4 @@
-import { Form, FormikValues } from "formik";
+import { Form, FormikValues, useFormikContext } from "formik";
 import {
   Box,
   Button,
@@ -20,12 +20,12 @@ import { DashboardIconButton } from "components/Button/DashboardIconButton";
 
 interface Props {
   isEdit: boolean;
-  values: CampaignForm;
   advertiser: IAdvertiser;
   draftId?: string;
 }
 
-export function BaseForm({ isEdit, values, advertiser, draftId }: Props) {
+export function BaseForm({ isEdit, advertiser, draftId }: Props) {
+  const { values } = useFormikContext<CampaignForm>();
   const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {

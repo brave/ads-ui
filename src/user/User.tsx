@@ -17,7 +17,6 @@ import moment from "moment";
 import { MainView } from "user/views/user/MainView";
 import { Navbar } from "user/components/navbar/Navbar";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import { ValidateCampaign } from "./views/adsManager/views/advanced/components/campaign/ValidateCampaign";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -48,12 +47,6 @@ export function User() {
               {/* /adsmanager */}
               <Route path={`/user/main/adsmanager/advanced/new/:draftId`}>
                 <NewCampaign fromDate={fromDateFilter} />
-              </Route>
-
-              <Route
-                path={`/user/main/adsmanager/advanced/complete/:referenceId`}
-              >
-                <ValidateCampaign fromDate={fromDateFilter} />
               </Route>
 
               <Route path={`/user/main/adsmanager/advanced/:campaignId`}>

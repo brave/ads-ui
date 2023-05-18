@@ -11,7 +11,10 @@ import {
 } from "graphql/types";
 import axios from "axios";
 import { DocumentNode, print } from "graphql";
-import { CampaignFragment } from "graphql/campaign.generated";
+import {
+  CampaignFragment,
+  UpdateCampaignDocument,
+} from "graphql/campaign.generated";
 import { CreateAdDocument } from "graphql/ad-set.generated";
 import {
   CreateNotificationCreativeDocument,
@@ -25,7 +28,6 @@ import {
   OS,
   Segment,
 } from "user/views/adsManager/types";
-import { adjustToCPM } from "util/billing";
 
 const TYPE_CODE_LOOKUP: Record<string, string> = {
   notification_all_v1: "Push Notification",
@@ -81,7 +83,7 @@ export async function transformNewForm(
     startAt: form.startAt,
     state: form.state,
     type: form.type,
-    budget: adjustToCPM(form.budget),
+    budget: form.budget,
     adSets: transformedAdSet,
   };
 }
@@ -192,6 +194,14 @@ async function updateNotification(
   }>(UpdateNotificationCreativeDocument, { input: updateInput });
 
   return response.data.updateNotificationCreative.id;
+}
+
+export async function updateCampaign(updateInput: UpdateCampaignInput) {
+  const response = await graphqlRequest<{
+    input: UpdateCampaignInput;
+  }>(UpdateCampaignDocument, { input: updateInput });
+
+  return response.data.updateCampaign.id;
 }
 
 // TODO: Get rid of this ASAP. Currently necessary because when updating a campaign, it does not take into account any new ads.

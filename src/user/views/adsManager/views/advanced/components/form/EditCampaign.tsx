@@ -71,9 +71,7 @@ export function EditCampaign({ fromDate }: Props) {
         }}
         validationSchema={CampaignSchema}
       >
-        {({ values }) => (
-          <BaseForm isEdit={true} values={values} advertiser={advertiser} />
-        )}
+        <BaseForm isEdit={true} advertiser={advertiser} />
       </Formik>
     </Container>
   );

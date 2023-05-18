@@ -15,7 +15,7 @@ export function Review({ isEdit }: Props) {
   const { advertiser } = useAdvertiser();
   const { values, errors, setTouched } = useFormikContext<CampaignForm>();
   const buttonText = advertiser.selfServiceSetPrice
-    ? "Publish Campaign"
+    ? "Publish campaign"
     : "Pay and submit for approval";
 
   useEffect(() => {
@@ -39,8 +39,7 @@ export function Review({ isEdit }: Props) {
 
       <FormikSubmitButton
         isCreate={!isEdit}
-        label={isEdit ? "Update Campaign" : buttonText}
-        allowNavigation={true}
+        label={isEdit ? "Update campaign" : buttonText}
       />
     </Box>
   );

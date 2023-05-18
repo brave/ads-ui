@@ -153,6 +153,7 @@ export type CreateCampaignInput = {
   geoTargets: Array<GeocodeInput>;
   name: Scalars["String"];
   pacingStrategy?: InputMaybe<CampaignPacingStrategies>;
+  paymentType?: InputMaybe<PaymentType>;
   source: Scalars["String"];
   startAt: Scalars["DateTime"];
   state: Scalars["String"];
@@ -222,12 +223,6 @@ export type CreateSegmentInput = {
 export type CreateTypeInput = {
   code: Scalars["String"];
   name?: InputMaybe<Scalars["String"]>;
-};
-
-export type CreateUserAdvertiserInput = {
-  advertiserId: Scalars["String"];
-  user?: InputMaybe<CreateUserInput>;
-  userId?: InputMaybe<Scalars["String"]>;
 };
 
 export type CreateUserInput = {
@@ -318,6 +313,12 @@ export type NotificationPayloadInput = {
   title: Scalars["String"];
 };
 
+export enum PaymentType {
+  ManualBat = "MANUAL_BAT",
+  Netsuite = "NETSUITE",
+  Stripe = "STRIPE",
+}
+
 export type PromotedContentPayloadInput = {
   category: Scalars["String"];
   contentType: Scalars["String"];
@@ -402,28 +403,32 @@ export type UpdateAdvertiserInput = {
   selfServiceCreate?: InputMaybe<Scalars["Boolean"]>;
   selfServiceEdit?: InputMaybe<Scalars["Boolean"]>;
   state?: InputMaybe<Scalars["String"]>;
+  users?: InputMaybe<Array<UpdateUserInput>>;
 };
 
 export type UpdateCampaignInput = {
   adSets?: InputMaybe<Array<UpdateAdSetInput>>;
-  budget: Scalars["Float"];
-  currency: Scalars["String"];
-  dailyBudget: Scalars["Float"];
-  dailyCap: Scalars["Float"];
+  advertiserId?: InputMaybe<Scalars["String"]>;
+  budget?: InputMaybe<Scalars["Float"]>;
+  currency?: InputMaybe<Scalars["String"]>;
+  dailyBudget?: InputMaybe<Scalars["Float"]>;
+  dailyCap?: InputMaybe<Scalars["Float"]>;
   dayPartings?: InputMaybe<Array<DayPartingInput>>;
   dayProportion?: InputMaybe<Scalars["Float"]>;
-  endAt: Scalars["DateTime"];
+  endAt?: InputMaybe<Scalars["DateTime"]>;
   externalId?: InputMaybe<Scalars["String"]>;
   geoTargets?: InputMaybe<Array<GeocodeInput>>;
   id: Scalars["String"];
-  name: Scalars["String"];
+  name?: InputMaybe<Scalars["String"]>;
   pacingOverride?: InputMaybe<Scalars["Boolean"]>;
   pacingStrategy?: InputMaybe<CampaignPacingStrategies>;
   passThroughRate?: InputMaybe<Scalars["Float"]>;
+  paymentType?: InputMaybe<PaymentType>;
   priority?: InputMaybe<Scalars["Float"]>;
-  startAt: Scalars["DateTime"];
-  state: Scalars["String"];
-  type: Scalars["String"];
+  startAt?: InputMaybe<Scalars["DateTime"]>;
+  state?: InputMaybe<Scalars["String"]>;
+  stripePaymentId?: InputMaybe<Scalars["String"]>;
+  type?: InputMaybe<Scalars["String"]>;
 };
 
 export type UpdateChannelsInput = {
@@ -490,7 +495,7 @@ export type UpdateUserInput = {
   email?: InputMaybe<Scalars["String"]>;
   emailVerified?: InputMaybe<Scalars["Boolean"]>;
   fullName?: InputMaybe<Scalars["String"]>;
-  id: Scalars["String"];
+  id?: InputMaybe<Scalars["String"]>;
   password?: InputMaybe<Scalars["String"]>;
   role?: InputMaybe<Scalars["String"]>;
 };
