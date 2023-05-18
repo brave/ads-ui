@@ -1,8 +1,8 @@
 import { Container } from "@mui/material";
 import { Formik } from "formik";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { CampaignForm, initialCampaign } from "../../../../types";
-import { CampaignSchema, CPM } from "validation/CampaignSchema";
+import { CampaignSchema } from "validation/CampaignSchema";
 import { populateFilter, transformNewForm } from "user/library";
 import { useCreateCampaignMutation } from "graphql/campaign.generated";
 import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
@@ -13,6 +13,7 @@ import { DraftContext } from "state/context";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useUser } from "auth/hooks/queries/useUser";
 import { createSession } from "checkout/lib";
+import { PaymentType } from "graphql/types";
 
 interface Params {
   draftId: string;
@@ -61,6 +62,9 @@ export function NewCampaign({ fromDate }: Props) {
             newForm.state = advertiser.selfServiceSetPrice
               ? "under_review"
               : "draft";
+            newForm.paymentType = advertiser.selfServiceSetPrice
+              ? PaymentType.Netsuite
+              : PaymentType.Stripe;
             const res = await mutation({ variables: { input: newForm } });
             if (!advertiser.selfServiceSetPrice) {
               const url = await createSession(
