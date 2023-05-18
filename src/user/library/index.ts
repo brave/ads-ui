@@ -5,6 +5,7 @@ import {
   CreateCampaignInput,
   CreateNotificationCreativeInput,
   GeocodeInput,
+  PaymentType,
   UpdateAdSetInput,
   UpdateCampaignInput,
   UpdateNotificationCreativeInput,
@@ -28,6 +29,7 @@ import {
   OS,
   Segment,
 } from "user/views/adsManager/types";
+import { IAdvertiser } from "auth/context/auth.interface";
 
 const TYPE_CODE_LOOKUP: Record<string, string> = {
   notification_all_v1: "Push Notification",
@@ -39,7 +41,7 @@ const TYPE_CODE_LOOKUP: Record<string, string> = {
 
 export async function transformNewForm(
   form: CampaignForm,
-  advertiserId: string,
+  advertiser: IAdvertiser,
   userId?: string
 ): Promise<CreateCampaignInput> {
   const adSets = form.adSets;
@@ -49,7 +51,7 @@ export async function transformNewForm(
     const ads: CreateAdInput[] = [];
 
     for (const ad of adSet.creatives) {
-      const creative = await transformCreative(ad, form, advertiserId, userId);
+      const creative = await transformCreative(ad, form, advertiser.id, userId);
       ads.push(creative);
     }
 
@@ -75,13 +77,16 @@ export async function transformNewForm(
     endAt: form.endAt,
     geoTargets: form.geoTargets.map((g) => ({ code: g.code, name: g.name })),
     name: form.name,
-    advertiserId: advertiserId,
+    advertiserId: advertiser.id,
     externalId: "",
     format: form.format,
     userId: userId,
     source: "self_serve",
     startAt: form.startAt,
-    state: form.state,
+    state: advertiser.selfServiceSetPrice ? "under_review" : "draft",
+    paymentType: advertiser.selfServiceSetPrice
+      ? PaymentType.Netsuite
+      : PaymentType.Stripe,
     type: form.type,
     budget: form.budget,
     adSets: transformedAdSet,
@@ -244,7 +249,7 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
     }),
     price: campaign.adSets[0].ads?.[0].prices[0].amount ?? 6,
     billingType: (campaign.adSets[0].billingType ?? "cpm") as Billing,
-    validateStart: false,
+    validateStart: campaign.state !== "active" && campaign.state !== "paused",
     budget: campaign.budget,
     currency: campaign.currency,
     dailyBudget: campaign.dailyBudget,
@@ -289,8 +294,10 @@ export async function transformEditForm(
 
     const base: UpdateAdSetInput = {
       id: adSet.id,
+      name: adSet.name,
       segments: adSet.segments.map((v) => ({ code: v.code, name: v.name })),
       oses: adSet.oses.map((v) => ({ code: v.code, name: v.name })),
+      conversions: transformConversion(adSet.conversions),
     };
 
     transformedAdSet.push(base);
@@ -307,25 +314,8 @@ export async function transformEditForm(
     startAt: form.startAt,
     state: form.state,
     type: form.type,
+    geoTargets: form.geoTargets.map((g) => ({ name: g.name, code: g.code })),
     adSets: transformedAdSet,
-  };
-}
-
-export function updateCampaignState(
-  c: CampaignFragment,
-  state: string
-): UpdateCampaignInput {
-  return {
-    budget: c.budget,
-    currency: c.currency,
-    dailyBudget: c.dailyBudget,
-    dailyCap: c.dailyCap,
-    endAt: c.endAt,
-    id: c.id,
-    name: c.name,
-    startAt: c.startAt,
-    state,
-    type: c.type,
   };
 }
 

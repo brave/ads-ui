@@ -13,12 +13,14 @@ interface Props {
   timeZone: string;
   setTimeZone: Dispatch<string>;
   sx?: SxProps;
+  disabled?: boolean;
 }
 
 export const TimeZonePicker: React.FC<Props> = ({
   timeZone,
   setTimeZone,
   sx,
+  disabled,
 }) => {
   const timeZoneList = useTimeZoneList();
 
@@ -27,7 +29,13 @@ export const TimeZonePicker: React.FC<Props> = ({
   };
 
   return (
-    <FormControl variant="outlined" margin="normal" color="secondary" sx={sx}>
+    <FormControl
+      variant="outlined"
+      margin="normal"
+      color="secondary"
+      sx={sx}
+      disabled={disabled}
+    >
       <InputLabel>Time Zone</InputLabel>
       <Select
         value={timeZone}

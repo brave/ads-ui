@@ -9,13 +9,13 @@ import { AdList } from "user/ads/AdList";
 import CampaignIcon from "@mui/icons-material/Campaign";
 import DatasetIcon from "@mui/icons-material/Dataset";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
+import moment from "moment/moment";
 
-interface Props {
-  fromDate: Date | null;
-  onSetDate: (d: Date | null) => void;
-}
+export function MainView() {
+  const [fromDateFilter, setFromDateFilter] = useState<Date | null>(
+    moment().subtract(6, "month").startOf("day").toDate()
+  );
 
-export function MainView({ fromDate, onSetDate }: Props) {
   const [tabValue, setTabValue] = useState(
     Number(window.localStorage.getItem("tabValue") ?? 0)
   );
@@ -23,9 +23,10 @@ export function MainView({ fromDate, onSetDate }: Props) {
   const { loading, data } = useAdvertiserCampaignsQuery({
     variables: {
       id: window.localStorage.getItem("activeAdvertiser") ?? "",
-      filter: populateFilter(fromDate),
+      filter: populateFilter(fromDateFilter),
     },
-    pollInterval: 600_000,
+    pollInterval: 300_000,
+    fetchPolicy: "cache-and-network",
   });
 
   const tabs = [
@@ -37,8 +38,8 @@ export function MainView({ fromDate, onSetDate }: Props) {
   return (
     <Box display="flex" flexDirection="column" sx={{ mb: 2, ml: 10, mr: 10 }}>
       <CampaignAgeFilter
-        fromDate={fromDate}
-        onChange={onSetDate}
+        fromDate={fromDateFilter}
+        onChange={setFromDateFilter}
         disabled={loading}
       />
       <Box width="100%" sx={{ mt: 1 }}>
@@ -74,21 +75,21 @@ export function MainView({ fromDate, onSetDate }: Props) {
               {tabValue === 0 && (
                 <CampaignList
                   advertiserCampaigns={data?.advertiserCampaigns}
-                  fromDate={fromDate}
+                  fromDate={fromDateFilter}
                 />
               )}
 
               {tabValue === 1 && (
                 <AdSetList
                   advertiserCampaigns={data?.advertiserCampaigns}
-                  fromDate={fromDate}
+                  fromDate={fromDateFilter}
                 />
               )}
 
               {tabValue === 2 && (
                 <AdList
                   advertiserCampaigns={data?.advertiserCampaigns}
-                  fromDate={fromDate}
+                  fromDate={fromDateFilter}
                 />
               )}
             </Box>

@@ -3,16 +3,11 @@ import { Formik } from "formik";
 import React from "react";
 import { CampaignForm } from "../../../../types";
 import { CampaignSchema } from "validation/CampaignSchema";
-import {
-  editCampaignValues,
-  populateFilter,
-  transformEditForm,
-} from "user/library";
+import { editCampaignValues, transformEditForm } from "user/library";
 import {
   useLoadCampaignQuery,
   useUpdateCampaignMutation,
 } from "graphql/campaign.generated";
-import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
 import { useHistory, useParams } from "react-router-dom";
 import { BaseForm } from "./components/BaseForm";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
@@ -22,11 +17,7 @@ interface Params {
   campaignId: string;
 }
 
-interface Props {
-  fromDate: Date | null;
-}
-
-export function EditCampaign({ fromDate }: Props) {
+export function EditCampaign() {
   const { advertiser } = useAdvertiser();
   const { userId } = useUser();
   const history = useHistory();
@@ -34,17 +25,10 @@ export function EditCampaign({ fromDate }: Props) {
 
   const { data, loading } = useLoadCampaignQuery({
     variables: { id: params.campaignId },
+    fetchPolicy: "cache-and-network",
   });
 
   const [mutation] = useUpdateCampaignMutation({
-    refetchQueries: [
-      {
-        ...refetchAdvertiserCampaignsQuery({
-          id: advertiser.id,
-          filter: populateFilter(fromDate),
-        }),
-      },
-    ],
     onCompleted() {
       history.push("/user/main/complete/edit");
     },
@@ -71,7 +55,7 @@ export function EditCampaign({ fromDate }: Props) {
         }}
         validationSchema={CampaignSchema}
       >
-        <BaseForm isEdit={true} advertiser={advertiser} />
+        <BaseForm isEdit={true} />
       </Formik>
     </Container>
   );

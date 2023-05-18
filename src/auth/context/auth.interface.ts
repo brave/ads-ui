@@ -8,6 +8,7 @@ export type IAdvertiser = {
   selfServiceEdit: boolean;
   selfServiceSetPrice: boolean;
   publicKey?: string | null;
+  agreed?: boolean;
 };
 
 export interface IAuthState {
