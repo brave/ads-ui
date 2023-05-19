@@ -81,7 +81,9 @@ export function BudgetField({ isEdit }: Props) {
           }
           error={!!errors.budget || !!errors.dailyBudget}
           disabled={
-            isEdit && !advertiser.selfServiceSetPrice && isActiveOrPaused
+            isEdit &&
+            !advertiser.selfServiceSetPrice &&
+            isActiveOrPaused && !!values.stripePaymentId
           }
         />
 
