@@ -61,7 +61,12 @@ export function BudgetField({ isEdit }: Props) {
               : undefined
           }
           error={!!errors.budget || !!errors.dailyBudget}
-          disabled={isEdit && !advertiser.selfServiceSetPrice}
+          disabled={
+            isEdit &&
+            !advertiser.selfServiceSetPrice &&
+            values.state !== "draft" &&
+            (!!values.stripePaymentId || !!values.batWalletId)
+          }
         />
 
         {!advertiser.selfServiceSetPrice ? (

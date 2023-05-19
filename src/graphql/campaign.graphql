@@ -19,6 +19,9 @@ fragment Campaign on Campaign {
   type
   format
   dayProportion
+  stripePaymentId
+  batWalletId
+  paymentType
   geoTargets {
     code
     name

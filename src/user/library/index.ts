@@ -51,7 +51,7 @@ export async function transformNewForm(
     const ads: CreateAdInput[] = [];
 
     for (const ad of adSet.creatives) {
-      const creative = await transformCreative(ad, form, advertiser.id, userId);
+      const creative = await transformCreative(ad, form, advertiser, userId);
       ads.push(creative);
     }
 
@@ -108,17 +108,16 @@ function transformConversion(conv: Conversion[]) {
 async function transformCreative(
   creative: Creative,
   campaign: CampaignForm,
-  advertiserId: string,
+  advertiser: IAdvertiser,
   userId?: string
 ): Promise<CreateAdInput> {
   const notification = creativeInput(
-    advertiserId,
+    advertiser,
     creative,
     userId
   ) as CreateNotificationCreativeInput;
   const withId = await createNotification(notification);
   return {
-    state: "under_review",
     webhooks: [],
     creativeId: withId,
     prices: [
@@ -131,12 +130,12 @@ async function transformCreative(
 }
 
 function creativeInput(
-  advertiserId: string,
+  advertiser: IAdvertiser,
   creative: Creative,
   userId?: string
 ): CreateNotificationCreativeInput | UpdateNotificationCreativeInput {
   const baseNotification = {
-    advertiserId,
+    advertiserId: advertiser.id,
     userId,
     name: creative.name,
     payload: {
@@ -144,7 +143,7 @@ function creativeInput(
       body: creative.body,
       targetUrl: creative.targetUrl,
     },
-    state: "under_review",
+    state: advertiser.selfServiceSetPrice ? "under_review" : "draft",
   };
 
   if (creative.id) {
@@ -262,13 +261,16 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
     startAt: campaign.startAt,
     state: campaign.state,
     type: "paid",
+    stripePaymentId: campaign.stripePaymentId,
+    batWalletId: campaign.batWalletId,
+    paymentType: campaign.paymentType,
   };
 }
 
 export async function transformEditForm(
   form: CampaignForm,
   id: string,
-  advertiserId: string,
+  advertiser: IAdvertiser,
   userId?: string
 ): Promise<UpdateCampaignInput> {
   const transformedAdSet: UpdateAdSetInput[] = [];
@@ -277,14 +279,14 @@ export async function transformEditForm(
     const creatives = adSet.creatives;
     for (const ad of creatives) {
       if (ad.id == null) {
-        const withId = await transformCreative(ad, form, advertiserId, userId);
+        const withId = await transformCreative(ad, form, advertiser, userId);
         await createAd({
           ...withId,
           creativeSetId: adSet.id,
         });
       } else if (ad.state !== "active" && ad.state !== "paused") {
         const notification = creativeInput(
-          advertiserId,
+          advertiser,
           ad,
           userId
         ) as UpdateNotificationCreativeInput;

@@ -22,6 +22,9 @@ export type CampaignForm = {
   price: number;
   billingType: Billing;
   pacingStrategy: CampaignPacingStrategies;
+  batWalletId?: string | null;
+  stripePaymentId?: string | null;
+  paymentType?: string | null;
 };
 
 export type GeoTarget = {

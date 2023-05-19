@@ -26,6 +26,9 @@ export type CampaignFragment = {
   type: string;
   format: Types.CampaignFormat;
   dayProportion?: number | null;
+  stripePaymentId?: string | null;
+  batWalletId?: string | null;
+  paymentType: Types.PaymentType;
   geoTargets?: Array<{
     __typename?: "Geocode";
     code: string;
@@ -175,6 +178,9 @@ export type LoadCampaignQuery = {
     type: string;
     format: Types.CampaignFormat;
     dayProportion?: number | null;
+    stripePaymentId?: string | null;
+    batWalletId?: string | null;
+    paymentType: Types.PaymentType;
     geoTargets?: Array<{
       __typename?: "Geocode";
       code: string;
@@ -268,6 +274,9 @@ export const CampaignFragmentDoc = gql`
     type
     format
     dayProportion
+    stripePaymentId
+    batWalletId
+    paymentType
     geoTargets {
       code
       name

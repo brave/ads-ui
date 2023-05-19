@@ -17,6 +17,12 @@ export function Review({ isEdit }: Props) {
   const buttonText = advertiser.selfServiceSetPrice
     ? "Publish campaign"
     : "Pay and submit for approval";
+  const updateText =
+    advertiser.selfServiceSetPrice ||
+    values.batWalletId ||
+    values.stripePaymentId
+      ? "Update Campaign"
+      : "Pay and submit for approval";
 
   useEffect(() => {
     const toTouch = Object.keys(values)
@@ -39,7 +45,7 @@ export function Review({ isEdit }: Props) {
 
       <FormikSubmitButton
         isCreate={!isEdit}
-        label={isEdit ? "Update campaign" : buttonText}
+        label={isEdit ? updateText : buttonText}
       />
     </Box>
   );

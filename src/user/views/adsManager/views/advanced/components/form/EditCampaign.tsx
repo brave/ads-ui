@@ -1,6 +1,6 @@
 import { Container, LinearProgress } from "@mui/material";
 import { Formik } from "formik";
-import React from "react";
+import React, { useTransition } from "react";
 import { CampaignForm } from "../../../../types";
 import { CampaignSchema } from "validation/CampaignSchema";
 import { editCampaignValues, transformEditForm } from "user/library";
@@ -12,6 +12,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { BaseForm } from "./components/BaseForm";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useUser } from "auth/hooks/queries/useUser";
+import { createSession } from "checkout/lib";
 
 interface Params {
   campaignId: string;
@@ -28,11 +29,7 @@ export function EditCampaign() {
     fetchPolicy: "cache-and-network",
   });
 
-  const [mutation] = useUpdateCampaignMutation({
-    onCompleted() {
-      history.push("/user/main/complete/edit");
-    },
-  });
+  const [mutation] = useUpdateCampaignMutation();
 
   if (!data || !data.campaign || loading) {
     return <LinearProgress />;
@@ -44,14 +41,30 @@ export function EditCampaign() {
     <Container maxWidth="xl">
       <Formik
         initialValues={initialValues}
-        onSubmit={(v: CampaignForm, { setSubmitting }) => {
+        onSubmit={async (v: CampaignForm, { setSubmitting }) => {
           setSubmitting(true);
-          transformEditForm(v, params.campaignId, advertiser.id, userId)
-            .then(async (u) => {
-              return await mutation({ variables: { input: u } });
-            })
-            .catch((e) => alert("Unable to update Campaign"))
-            .finally(() => setSubmitting(false));
+          try {
+            const transform = await transformEditForm(
+              v,
+              params.campaignId,
+              advertiser,
+              userId
+            );
+            if (
+              v.stripePaymentId ||
+              v.batWalletId ||
+              advertiser.selfServiceSetPrice
+            ) {
+              await mutation({ variables: { input: transform } });
+              history.push("/user/main/complete/edit");
+            } else {
+              const url = await createSession(advertiser.id, params.campaignId);
+              window.location.replace(url);
+            }
+          } catch (e) {
+            alert("Unable to update Campaign");
+            setSubmitting(false);
+          }
         }}
         validationSchema={CampaignSchema}
       >
