@@ -14,6 +14,9 @@ import {
   Typography,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
+import { createSession } from "checkout/lib";
+import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { useHistory } from "react-router-dom";
 
 const customStyles = {
   position: "absolute" as "absolute",
@@ -30,15 +33,17 @@ const customStyles = {
 
 interface Props {
   open: boolean;
-  loading: boolean;
-  onClick: () => void;
   onCancel: () => void;
+  campaignId: string;
 }
 
-export function PaymentModal({ open, loading, onClick, onCancel }: Props) {
+export function PaymentModal({ open, onCancel, campaignId }: Props) {
   const [selected, setSelected] = useState(0);
   const [agreed, setAgreed] = useState(selected === 0);
   const [walletId, setWalletId] = useState<string>();
+  const [loading, setLoading] = useState(false);
+  const { advertiser } = useAdvertiser();
+  const history = useHistory();
 
   return (
     <Modal open={open}>
@@ -71,6 +76,7 @@ export function PaymentModal({ open, loading, onClick, onCancel }: Props) {
             onClick={() => {
               setSelected(1);
               setAgreed(false);
+              setWalletId(undefined);
             }}
             sx={{
               p: 2,
@@ -119,11 +125,28 @@ export function PaymentModal({ open, loading, onClick, onCancel }: Props) {
           <LoadingButton
             loading={loading}
             disabled={
-              loading || !agreed || (selected === 1 && !!!walletId?.trim())
+              loading || !agreed || (selected === 1 && !walletId?.trim())
             }
             variant="contained"
             sx={{ borderRadius: "16px" }}
-            onClick={onClick}
+            onClick={async () => {
+              setLoading(true);
+              if (selected === 0) {
+                await createSession(advertiser.id, campaignId ?? "")
+                  .then((url) => {
+                    window.location.replace(url);
+                  })
+                  .catch((e) => {
+                    alert("Unable to create Campaign");
+                    setLoading(false);
+                    onCancel();
+                  });
+              } else {
+                history.push(
+                  `/user/main/complete/new?referenceId=${campaignId}&walletId=${walletId}`
+                );
+              }
+            }}
           >
             Pay with {selected === 0 ? "Stripe" : "BAT"}
           </LoadingButton>

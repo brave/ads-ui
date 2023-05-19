@@ -22,7 +22,6 @@ export function NewCampaign() {
   const history = useHistory();
   const params = useParams<Params>();
   const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [campaignId, setCampaignId] = useState<string>();
   const { advertiser } = useAdvertiser();
   const { userId } = useUser();
@@ -69,19 +68,7 @@ export function NewCampaign() {
           <PaymentModal
             open={open}
             onCancel={() => setOpen(false)}
-            loading={loading}
-            onClick={async () => {
-              setLoading(true);
-              await createSession(advertiser.id, campaignId ?? "")
-                .then((url) => {
-                  window.location.replace(url);
-                })
-                .catch((e) => {
-                  alert("Unable to create Campaign");
-                  setLoading(false);
-                  setOpen(false);
-                });
-            }}
+            campaignId={campaignId ?? params.draftId}
           />
         </>
       </Formik>

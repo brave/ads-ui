@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
 import { buildAdServerEndpoint } from "util/environment";
 import {
-  creativeInput,
   loadCampaignAds,
   updateCampaign,
   updateNotification,
 } from "user/library";
-import { UpdateNotificationCreativeInput } from "graphql/types";
+import {
+  UpdateCampaignInput,
+  UpdateNotificationCreativeInput,
+} from "graphql/types";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useUser } from "auth/hooks/queries/useUser";
 
 interface Props {
   sessionId: string | null;
+  walletId: string | null;
   campaignId: string;
 }
 
@@ -22,26 +25,46 @@ interface Payment {
 export function useValidateSession(props: Props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
-  const [data, setData] = useState<Payment>();
   const { advertiser } = useAdvertiser();
   const { userId } = useUser();
 
   useEffect(() => {
-    const fetchSession = async (id: string) => {
-      const res = await fetch(
-        buildAdServerEndpoint(`/ads/checkout-session?sessionId=${id}`),
-        {
-          method: "GET",
-          mode: "cors",
-          credentials: "include",
-        }
-      );
+    const fetchSession = async (
+      sessionId: string | null,
+      walletId: string | null
+    ) => {
+      let input: UpdateCampaignInput = {
+        id: props.campaignId,
+        state: "under_review",
+        advertiserId: advertiser.id,
+      };
 
-      if (res.status !== 200) {
-        throw new Error("invalid session");
+      if (sessionId) {
+        const res = await fetch(
+          buildAdServerEndpoint(`/ads/checkout-session?sessionId=${sessionId}`),
+          {
+            method: "GET",
+            mode: "cors",
+            credentials: "include",
+          }
+        );
+
+        if (res.status !== 200) {
+          throw new Error("invalid session");
+        }
+
+        const { paymentIntent } = await res.json();
+        input = {
+          ...input,
+          stripePaymentId: paymentIntent,
+        };
+      } else if (walletId) {
+        input = {
+          ...input,
+          batWalletId: walletId,
+        };
       }
 
-      const { paymentIntent } = await res.json();
       const createdAds = await loadCampaignAds(props.campaignId);
 
       for (const adSets of createdAds.adSets) {
@@ -56,23 +79,12 @@ export function useValidateSession(props: Props) {
         }
       }
 
-      await updateCampaign({
-        id: props.campaignId,
-        state: "under_review",
-        stripePaymentId: paymentIntent,
-        advertiserId: advertiser.id,
-      });
-      return { paymentIntent };
+      await updateCampaign(input);
     };
 
-    if (props.sessionId) {
+    if (props.sessionId || props.walletId) {
       setLoading(true);
-      fetchSession(props.sessionId)
-        .then((r) => {
-          setData({
-            intent: r.paymentIntent,
-          });
-        })
+      fetchSession(props.sessionId, props.walletId)
         .catch((e) => {
           setError(e.message);
         })
@@ -82,5 +94,5 @@ export function useValidateSession(props: Props) {
     }
   }, [props.sessionId]);
 
-  return { data, loading, error };
+  return { loading, error };
 }
