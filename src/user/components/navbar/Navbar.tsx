@@ -31,6 +31,7 @@ export function Navbar() {
   const history = useHistory();
   const { url } = useRouteMatch();
   const isNewCampaignPage = url.includes("/user/main/adsmanager/advanced");
+  const isCompletePage = url.includes("/user/main/complete/new");
 
   return (
     <AppBar
@@ -56,7 +57,7 @@ export function Navbar() {
               size="medium"
               variant="contained"
               sx={{ mr: 5 }}
-              disabled={isNewCampaignPage}
+              disabled={isNewCampaignPage || isCompletePage}
             >
               New Campaign
             </Button>

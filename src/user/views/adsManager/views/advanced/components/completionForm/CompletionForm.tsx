@@ -17,6 +17,7 @@ import { useUpdateCampaignMutation } from "graphql/campaign.generated";
 import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
 import { populateFilter } from "user/library";
 import { LoadingButton } from "@mui/lab";
+import { bool } from "yup";
 
 interface Params {
   mode: "edit" | "new";
@@ -85,25 +86,10 @@ export function CompletionForm() {
               </Typography>
             )}
 
-            <Stack
-              direction="row"
-              justifyContent="space-evenly"
-              sx={{ mt: 2 }}
-              spacing={2}
-            >
-              {!clickedSurvey && (
-                <Button
-                  variant="contained"
-                  onClick={() => setClickedSurvey(true)}
-                  href="https://www.surveymonkey.com/r/WSFWF5Y"
-                  target="_blank"
-                >
-                  Take our survey!
-                </Button>
-              )}
-
-              <ValidateCampaignButton clicked={clickedSurvey} />
-            </Stack>
+            <ValidateCampaignButton
+              clicked={clickedSurvey}
+              onClick={() => setClickedSurvey(true)}
+            />
           </>
         )}
       </Box>
@@ -111,7 +97,10 @@ export function CompletionForm() {
   );
 }
 
-function ValidateCampaignButton(props: { clicked: boolean }) {
+function ValidateCampaignButton(props: {
+  clicked: boolean;
+  onClick: () => void;
+}) {
   const history = useHistory();
   const searchParams = new URLSearchParams(window.location.search);
   const session = searchParams.get("sessionId");
@@ -123,15 +112,35 @@ function ValidateCampaignButton(props: { clicked: boolean }) {
   });
 
   return (
-    <LoadingButton
-      variant={props.clicked ? "contained" : "outlined"}
-      onClick={async () => {
-        history.push("/user/main");
-      }}
-      loading={loading}
-      disabled={loading}
+    <Stack
+      direction="row"
+      justifyContent="space-evenly"
+      sx={{ mt: 2 }}
+      spacing={2}
     >
-      {props.clicked ? "Continue" : "Skip survey and continue"}
-    </LoadingButton>
+      {!props.clicked && (
+        <LoadingButton
+          variant="contained"
+          onClick={() => props.onClick()}
+          href="https://www.surveymonkey.com/r/WSFWF5Y"
+          target="_blank"
+          loading={loading}
+          disabled={loading}
+        >
+          Take our survey!
+        </LoadingButton>
+      )}
+
+      <LoadingButton
+        variant={props.clicked ? "contained" : "outlined"}
+        onClick={async () => {
+          history.push("/user/main");
+        }}
+        loading={loading}
+        disabled={loading}
+      >
+        {props.clicked ? "Continue" : "Skip survey and continue"}
+      </LoadingButton>
+    </Stack>
   );
 }
