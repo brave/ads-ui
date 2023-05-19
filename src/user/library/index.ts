@@ -13,7 +13,10 @@ import {
 import axios from "axios";
 import { DocumentNode, print } from "graphql";
 import {
+  CampaignAdsFragment,
   CampaignFragment,
+  LoadCampaignAdsDocument,
+  LoadCampaignDocument,
   UpdateCampaignDocument,
 } from "graphql/campaign.generated";
 import { CreateAdDocument } from "graphql/ad-set.generated";
@@ -129,7 +132,7 @@ async function transformCreative(
   };
 }
 
-function creativeInput(
+export function creativeInput(
   advertiser: IAdvertiser,
   creative: Creative,
   userId?: string
@@ -190,7 +193,7 @@ async function createNotification(
   return response.data.createNotificationCreative.id;
 }
 
-async function updateNotification(
+export async function updateNotification(
   updateInput: UpdateNotificationCreativeInput
 ) {
   const response = await graphqlRequest<{
@@ -206,6 +209,16 @@ export async function updateCampaign(updateInput: UpdateCampaignInput) {
   }>(UpdateCampaignDocument, { input: updateInput });
 
   return response.data.updateCampaign.id;
+}
+
+export async function loadCampaignAds(
+  id: string
+): Promise<CampaignAdsFragment> {
+  const response = await graphqlRequest<{
+    id: string;
+  }>(LoadCampaignAdsDocument, { id });
+
+  return response.data.campaign;
 }
 
 // TODO: Get rid of this ASAP. Currently necessary because when updating a campaign, it does not take into account any new ads.

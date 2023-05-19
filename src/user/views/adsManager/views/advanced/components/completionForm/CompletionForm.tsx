@@ -116,12 +116,10 @@ function ValidateCampaignButton(props: { clicked: boolean }) {
   const searchParams = new URLSearchParams(window.location.search);
   const session = searchParams.get("sessionId");
   const campaign = searchParams.get("referenceId");
-  const { advertiser } = useAdvertiser();
 
   const { loading } = useValidateSession({
     sessionId: session,
     campaignId: campaign ?? "",
-    advertiserId: advertiser.id,
   });
 
   return (

@@ -57,9 +57,24 @@ fragment CampaignSummary on Campaign {
   }
 }
 
+fragment CampaignAds on Campaign {
+  id
+  name
+  state
+  adSets {
+    ...AdSet
+  }
+}
+
 query LoadCampaign($id: String!) {
   campaign(id: $id) {
     ...Campaign
+  }
+}
+
+query LoadCampaignAds($id: String!) {
+  campaign(id: $id) {
+    ...CampaignAds
   }
 }
 
