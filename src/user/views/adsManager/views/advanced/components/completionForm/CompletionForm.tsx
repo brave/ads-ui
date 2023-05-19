@@ -105,10 +105,12 @@ function ValidateCampaignButton(props: {
   const searchParams = new URLSearchParams(window.location.search);
   const session = searchParams.get("sessionId");
   const campaign = searchParams.get("referenceId");
+  const wallet = searchParams.get("walletId");
 
   const { loading } = useValidateSession({
     sessionId: session,
     campaignId: campaign ?? "",
+    walletId: wallet,
   });
 
   return (

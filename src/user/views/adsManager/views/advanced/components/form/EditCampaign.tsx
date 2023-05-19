@@ -77,19 +77,7 @@ export function EditCampaign() {
           <PaymentModal
             open={open}
             onCancel={() => setOpen(false)}
-            loading={loading || qLoading}
-            onClick={async () => {
-              setLoading(true);
-              await createSession(advertiser.id, params.campaignId)
-                .then((url) => {
-                  window.location.replace(url);
-                })
-                .catch((e) => {
-                  alert("Unable to save Campaign");
-                  setLoading(false);
-                  setOpen(false);
-                });
-            }}
+            campaignId={params.campaignId}
           />
         </>
       </Formik>

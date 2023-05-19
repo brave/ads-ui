@@ -11,7 +11,6 @@ import { PersistFormValues } from "form/PersistFormValues";
 import { DraftContext } from "state/context";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useUser } from "auth/hooks/queries/useUser";
-import { createSession } from "checkout/lib";
 import { PaymentModal } from "components/Modal/PaymentModal";
 
 interface Params {
@@ -22,7 +21,6 @@ export function NewCampaign() {
   const history = useHistory();
   const params = useParams<Params>();
   const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [campaignId, setCampaignId] = useState<string>();
   const { advertiser } = useAdvertiser();
   const { userId } = useUser();
@@ -69,19 +67,7 @@ export function NewCampaign() {
           <PaymentModal
             open={open}
             onCancel={() => setOpen(false)}
-            loading={loading}
-            onClick={async () => {
-              setLoading(true);
-              await createSession(advertiser.id, campaignId ?? "")
-                .then((url) => {
-                  window.location.replace(url);
-                })
-                .catch((e) => {
-                  alert("Unable to create Campaign");
-                  setLoading(false);
-                  setOpen(false);
-                });
-            }}
+            campaignId={campaignId ?? params.draftId}
           />
         </>
       </Formik>
