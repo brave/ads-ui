@@ -16,13 +16,13 @@ export function Review({ isEdit }: Props) {
   const { values, errors, setTouched } = useFormikContext<CampaignForm>();
   const buttonText = advertiser.selfServiceSetPrice
     ? "Publish campaign"
-    : "Pay and submit for approval";
+    : "Submit for approval";
   const updateText =
     advertiser.selfServiceSetPrice ||
     values.batWalletId ||
     values.stripePaymentId
       ? "Update Campaign"
-      : "Pay and submit for approval";
+      : "Submit for approval";
 
   useEffect(() => {
     const toTouch = Object.keys(values)

@@ -1,6 +1,6 @@
 import { Container } from "@mui/material";
 import { Formik } from "formik";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { CampaignForm, initialCampaign } from "../../../../types";
 import { CampaignSchema } from "validation/CampaignSchema";
 import { transformNewForm } from "user/library";
@@ -12,7 +12,7 @@ import { DraftContext } from "state/context";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useUser } from "auth/hooks/queries/useUser";
 import { createSession } from "checkout/lib";
-import { PaymentType } from "graphql/types";
+import { PaymentModal } from "components/Modal/PaymentModal";
 
 interface Params {
   draftId: string;
@@ -21,6 +21,9 @@ interface Params {
 export function NewCampaign() {
   const history = useHistory();
   const params = useParams<Params>();
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [campaignId, setCampaignId] = useState<string>();
   const { advertiser } = useAdvertiser();
   const { userId } = useUser();
 
@@ -32,9 +35,16 @@ export function NewCampaign() {
   };
 
   const [mutation] = useCreateCampaignMutation({
-    onCompleted() {
+    onCompleted(data) {
       localStorage.removeItem(params.draftId);
       setDrafts();
+
+      if (advertiser.selfServiceSetPrice) {
+        setOpen(true);
+        setCampaignId(data.createCampaign.id);
+      } else {
+        history.push("/user/main/complete/new");
+      }
     },
   });
 
@@ -46,18 +56,8 @@ export function NewCampaign() {
           setSubmitting(true);
           try {
             const newForm = await transformNewForm(v, advertiser, userId);
-            const res = await mutation({ variables: { input: newForm } });
-            if (!advertiser.selfServiceSetPrice) {
-              const url = await createSession(
-                advertiser.id,
-                res.data?.createCampaign.id ?? ""
-              );
-              window.location.replace(url);
-            } else {
-              history.push("/user/main/complete/new");
-            }
+            await mutation({ variables: { input: newForm } });
           } catch (e) {
-            alert("Unable to save Campaign");
             setSubmitting(false);
           }
         }}
@@ -66,6 +66,23 @@ export function NewCampaign() {
         <>
           <BaseForm isEdit={false} draftId={params.draftId} />
           <PersistFormValues id={params.draftId} />
+          <PaymentModal
+            open={open}
+            onCancel={() => setOpen(false)}
+            loading={loading}
+            onClick={async () => {
+              setLoading(true);
+              await createSession(advertiser.id, campaignId ?? "")
+                .then((url) => {
+                  window.location.replace(url);
+                })
+                .catch((e) => {
+                  alert("Unable to create Campaign");
+                  setLoading(false);
+                  setOpen(false);
+                });
+            }}
+          />
         </>
       </Formik>
     </Container>
