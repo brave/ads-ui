@@ -1,0 +1,134 @@
+import React, { useState } from "react";
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  List,
+  ListItemButton,
+  ListItemText,
+  Modal,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+
+const customStyles = {
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 800,
+  bgcolor: "background.paper",
+  border: "1px solid #e2e2e2",
+  borderRadius: "16px",
+  boxShadow: 24,
+  p: 4,
+};
+
+interface Props {
+  open: boolean;
+  loading: boolean;
+  onClick: () => void;
+  onCancel: () => void;
+}
+
+export function PaymentModal({ open, loading, onClick, onCancel }: Props) {
+  const [selected, setSelected] = useState(0);
+  const [agreed, setAgreed] = useState(selected === 0);
+  const [walletId, setWalletId] = useState<string>();
+
+  return (
+    <Modal open={open}>
+      <Box sx={customStyles}>
+        <Typography variant="h5" sx={{ textAlign: "left", mb: 2 }}>
+          Payment Options
+        </Typography>
+        <Typography variant="body2" sx={{ textAlign: "left", mb: 2 }}>
+          To launch a campaign with Brave, you are required to prepay the full
+          amount you intend to spend.
+        </Typography>
+        <List>
+          <ListItemButton
+            selected={selected === 0}
+            onClick={() => {
+              setSelected(0);
+              setAgreed(true);
+            }}
+            sx={{
+              p: 2,
+              borderRadius: "16px",
+              border: "1px solid #e2e2e2",
+              mb: 1,
+            }}
+          >
+            <ListItemText primary="Pay with Stripe" />
+          </ListItemButton>
+          <ListItemButton
+            selected={selected === 1}
+            onClick={() => {
+              setSelected(1);
+              setAgreed(false);
+            }}
+            sx={{
+              p: 2,
+              borderRadius: "16px",
+              border: "1px solid #e2e2e2",
+              mt: 1,
+            }}
+          >
+            <ListItemText primary="Pay with BAT" />
+          </ListItemButton>
+        </List>
+
+        {selected === 1 && (
+          <FormGroup sx={{ mt: 1 }}>
+            <TextField
+              sx={{ mb: 2 }}
+              variant="filled"
+              size="small"
+              label="Wallet ID"
+              helperText="Enter the Wallet ID you intend to pay with."
+              onChange={(e) => setWalletId(e.target.value)}
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={agreed}
+                  onChange={(e) => setAgreed(e.target.checked)}
+                />
+              }
+              label="I agree that pre-paying with BAT is a manual process, and that if my wallet cannot be verified this campaign will not run."
+              sx={{ textAlign: "left" }}
+            />
+          </FormGroup>
+        )}
+
+        <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
+          <Button
+            variant="outlined"
+            sx={{ borderRadius: "16px" }}
+            onClick={onCancel}
+            disabled={loading}
+          >
+            Cancel
+          </Button>
+
+          <LoadingButton
+            loading={loading}
+            disabled={
+              loading || !agreed || (selected === 1 && !!!walletId?.trim())
+            }
+            variant="contained"
+            sx={{ borderRadius: "16px" }}
+            onClick={onClick}
+          >
+            Pay with {selected === 0 ? "Stripe" : "BAT"}
+          </LoadingButton>
+        </Stack>
+      </Box>
+    </Modal>
+  );
+}
