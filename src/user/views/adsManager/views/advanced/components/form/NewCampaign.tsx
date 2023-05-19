@@ -38,10 +38,10 @@ export function NewCampaign() {
       setDrafts();
 
       if (advertiser.selfServiceSetPrice) {
+        history.push("/user/main/complete/new");
+      } else {
         setOpen(true);
         setCampaignId(data.createCampaign.id);
-      } else {
-        history.push("/user/main/complete/new");
       }
     },
   });
