@@ -79,6 +79,7 @@ export function EditCampaign() {
             onCancel={() => setOpen(false)}
             loading={loading || qLoading}
             onClick={async () => {
+              setLoading(true);
               await createSession(advertiser.id, params.campaignId)
                 .then((url) => {
                   window.location.replace(url);
