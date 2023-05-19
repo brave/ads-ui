@@ -116,7 +116,10 @@ export function PaymentModal({ open, onCancel, campaignId }: Props) {
           <Button
             variant="outlined"
             sx={{ borderRadius: "16px" }}
-            onClick={onCancel}
+            onClick={() => {
+              history.push(`/user/main/adsmanager/advanced/${campaignId}`);
+              onCancel();
+            }}
             disabled={loading}
           >
             Cancel
@@ -139,6 +142,9 @@ export function PaymentModal({ open, onCancel, campaignId }: Props) {
                   .catch((e) => {
                     alert("Unable to create Campaign");
                     setLoading(false);
+                    history.push(
+                      `/user/main/adsmanager/advanced/${campaignId}`
+                    );
                     onCancel();
                   });
               } else {
