@@ -14,12 +14,7 @@ import { useUser } from "auth/hooks/queries/useUser";
 
 interface Props {
   sessionId: string | null;
-  walletId: string | null;
   campaignId: string;
-}
-
-interface Payment {
-  intent: string;
 }
 
 export function useValidateSession(props: Props) {
@@ -29,10 +24,7 @@ export function useValidateSession(props: Props) {
   const { userId } = useUser();
 
   useEffect(() => {
-    const fetchSession = async (
-      sessionId: string | null,
-      walletId: string | null
-    ) => {
+    const fetchSession = async (sessionId: string) => {
       let input: UpdateCampaignInput = {
         id: props.campaignId,
         state: "under_review",
@@ -58,11 +50,6 @@ export function useValidateSession(props: Props) {
           ...input,
           stripePaymentId: paymentIntent,
         };
-      } else if (walletId) {
-        input = {
-          ...input,
-          batWalletId: walletId,
-        };
       }
 
       const createdAds = await loadCampaignAds(props.campaignId);
@@ -82,9 +69,9 @@ export function useValidateSession(props: Props) {
       await updateCampaign(input);
     };
 
-    if (props.sessionId || props.walletId) {
+    if (props.sessionId) {
       setLoading(true);
-      fetchSession(props.sessionId, props.walletId)
+      fetchSession(props.sessionId)
         .catch((e) => {
           setError(e.message);
         })

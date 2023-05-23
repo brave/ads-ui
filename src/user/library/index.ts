@@ -15,7 +15,6 @@ import {
   CampaignAdsFragment,
   CampaignFragment,
   LoadCampaignAdsDocument,
-  LoadCampaignDocument,
   UpdateCampaignDocument,
 } from "graphql/campaign.generated";
 import { CreateAdDocument } from "graphql/ad-set.generated";
@@ -272,6 +271,7 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
     state: campaign.state,
     type: "paid",
     paymentType: campaign.paymentType,
+    stripePaymentId: campaign.stripePaymentId,
   };
 }
 

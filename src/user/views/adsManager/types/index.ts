@@ -27,6 +27,7 @@ export type CampaignForm = {
   billingType: Billing;
   pacingStrategy: CampaignPacingStrategies;
   paymentType: PaymentType;
+  stripePaymentId?: string | null;
 };
 
 export type GeoTarget = {
@@ -115,7 +116,7 @@ export const initialCampaign: CampaignForm = {
   ],
   format: CampaignFormat.PushNotification,
   name: "",
-  state: "under_review",
+  state: "draft",
   type: "paid",
   pacingStrategy: CampaignPacingStrategies.ModelV1,
   paymentType: PaymentType.Netsuite,

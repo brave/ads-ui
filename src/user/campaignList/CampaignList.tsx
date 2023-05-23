@@ -17,7 +17,10 @@ import { Status } from "components/Campaigns/Status";
 import { isAfterEndDate } from "util/isAfterEndDate";
 import { CampaignFormat, CampaignSource } from "graphql/types";
 import { AdvertiserCampaignsFragment } from "graphql/advertiser.generated";
-import { CampaignFragment } from "graphql/campaign.generated";
+import {
+  CampaignFragment,
+  CampaignSummaryFragment,
+} from "graphql/campaign.generated";
 
 interface Props {
   advertiserCampaigns?: AdvertiserCampaignsFragment | null;
@@ -28,13 +31,13 @@ export function CampaignList({ advertiserCampaigns, fromDate }: Props) {
   const history = useHistory();
   const campaigns = advertiserCampaigns?.campaigns ?? [];
 
-  const canSeeWithState = (r: CampaignFragment) => {
+  const canSeeWithState = (r: CampaignSummaryFragment) => {
     return (
       r.state === "active" || r.state === "paused" || r.state === "completed"
     );
   };
 
-  const canEdit = (r: CampaignFragment) => {
+  const canEdit = (r: CampaignSummaryFragment) => {
     return (
       advertiserCampaigns?.selfServiceEdit &&
       r.source === CampaignSource.SelfServe &&

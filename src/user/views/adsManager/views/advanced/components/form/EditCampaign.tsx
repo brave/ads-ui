@@ -12,7 +12,6 @@ import { useHistory, useParams } from "react-router-dom";
 import { BaseForm } from "./components/BaseForm";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useUser } from "auth/hooks/queries/useUser";
-import { createSession } from "checkout/lib";
 import { PaymentModal } from "components/Modal/PaymentModal";
 
 interface Params {
@@ -24,7 +23,6 @@ export function EditCampaign() {
   const { userId } = useUser();
   const history = useHistory();
   const params = useParams<Params>();
-  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
   const { data, loading: qLoading } = useLoadCampaignQuery({
@@ -34,11 +32,7 @@ export function EditCampaign() {
 
   const [mutation] = useUpdateCampaignMutation({
     onCompleted() {
-      if (
-        data?.campaign?.stripePaymentId ||
-        data?.campaign?.batWalletId ||
-        advertiser.selfServiceSetPrice
-      ) {
+      if (data?.campaign?.stripePaymentId || advertiser.selfServiceSetPrice) {
         history.push("/user/main/complete/edit");
       } else {
         setOpen(true);

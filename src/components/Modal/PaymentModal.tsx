@@ -40,7 +40,6 @@ interface Props {
 export function PaymentModal({ open, onCancel, campaignId }: Props) {
   const [selected, setSelected] = useState(0);
   const [agreed, setAgreed] = useState(selected === 0);
-  const [walletId, setWalletId] = useState<string>();
   const [loading, setLoading] = useState(false);
   const { advertiser } = useAdvertiser();
   const history = useHistory();
@@ -76,7 +75,6 @@ export function PaymentModal({ open, onCancel, campaignId }: Props) {
             onClick={() => {
               setSelected(1);
               setAgreed(false);
-              setWalletId(undefined);
             }}
             sx={{
               p: 2,
@@ -91,14 +89,6 @@ export function PaymentModal({ open, onCancel, campaignId }: Props) {
 
         {selected === 1 && (
           <FormGroup sx={{ mt: 1 }}>
-            <TextField
-              sx={{ mb: 2 }}
-              variant="filled"
-              size="small"
-              label="Wallet ID"
-              helperText="Enter the Wallet ID you intend to pay with."
-              onChange={(e) => setWalletId(e.target.value)}
-            />
             <FormControlLabel
               control={
                 <Checkbox
@@ -127,9 +117,7 @@ export function PaymentModal({ open, onCancel, campaignId }: Props) {
 
           <LoadingButton
             loading={loading}
-            disabled={
-              loading || !agreed || (selected === 1 && !walletId?.trim())
-            }
+            disabled={loading || !agreed}
             variant="contained"
             sx={{ borderRadius: "16px" }}
             onClick={async () => {
@@ -149,7 +137,7 @@ export function PaymentModal({ open, onCancel, campaignId }: Props) {
                   });
               } else {
                 history.push(
-                  `/user/main/complete/new?referenceId=${campaignId}&walletId=${walletId}`
+                  `/user/main/complete/new?referenceId=${campaignId}`
                 );
               }
             }}

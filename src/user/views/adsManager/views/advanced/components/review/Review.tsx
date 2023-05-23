@@ -14,15 +14,14 @@ interface Props {
 export function Review({ isEdit }: Props) {
   const { advertiser } = useAdvertiser();
   const { values, errors, setTouched } = useFormikContext<CampaignForm>();
+  const submitMessage = "Submit for approval";
   const buttonText = advertiser.selfServiceSetPrice
     ? "Publish campaign"
-    : "Submit for approval";
+    : submitMessage;
   const updateText =
-    advertiser.selfServiceSetPrice ||
-    values.batWalletId ||
-    values.stripePaymentId
+    advertiser.selfServiceSetPrice || values.stripePaymentId
       ? "Update Campaign"
-      : "Submit for approval";
+      : submitMessage;
 
   useEffect(() => {
     const toTouch = Object.keys(values)
