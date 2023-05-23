@@ -14,7 +14,7 @@ export function CompletionForm() {
   const [clickedSurvey, setClickedSurvey] = useState(false);
 
   return (
-    <Card
+    <Box
       sx={{
         p: 2,
         display: "flex",
@@ -96,6 +96,6 @@ export function CompletionForm() {
           </Stack>
         </>
       )}
-    </Card>
+    </Box>
   );
 }
