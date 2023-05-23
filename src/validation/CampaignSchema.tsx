@@ -57,7 +57,7 @@ export const CampaignSchema = object().shape({
     })
     .when("billingType", {
       is: (b: string) => b === "cpm",
-      then: (schema) => schema.moreThan(5, "git CPM price must be 6 or higher"),
+      then: (schema) => schema.moreThan(5, "CPM price must be 6 or higher"),
     })
     .required("Price is a required field"),
   billingType: string()
