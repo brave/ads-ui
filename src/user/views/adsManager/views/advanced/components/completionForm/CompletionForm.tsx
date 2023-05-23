@@ -59,6 +59,17 @@ export function CompletionForm() {
             activated.
           </Typography>
 
+          {!clickedSurvey && (
+            <Typography sx={{ textAlign: "center", mt: 3 }} variant="h6">
+              We value your feedback and would love to hear your thoughts on
+              your recent experience. <br />
+              Your input will help us improve the Brave Ads platform to better
+              meet your needs. <br />
+              It only takes a few minutes and your participation will be greatly
+              appreciated! <br />
+            </Typography>
+          )}
+
           <Stack
             direction="row"
             justifyContent="space-evenly"

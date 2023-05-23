@@ -38,7 +38,7 @@ export function DetailsField({ index, onCreate, showCreateNew }: Props) {
           )}
         </Stack>
 
-        <Status state={values.adSets[index].state} />
+        <Status state={values.state} />
       </Box>
       <FormikTextField name={`adSets.${index}.name`} label="Ad Set Name" />
     </>

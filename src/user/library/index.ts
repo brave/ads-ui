@@ -79,7 +79,7 @@ export async function transformNewForm(
     userId: userId,
     source: "self_serve",
     startAt: form.startAt,
-    state: advertiser.selfServiceSetPrice ? "under_review" : "draft",
+    state: form.state,
     type: form.type,
     budget: form.budget,
     adSets: transformedAdSet,
