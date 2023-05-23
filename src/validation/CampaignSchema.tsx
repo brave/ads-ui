@@ -8,7 +8,7 @@ const TrailingAsteriskRegex = /.*\*$/;
 const HttpsRegex = /^https:\/\//;
 
 export const MIN_PER_DAY = 33;
-export const MIN_PER_CAMPAIGN = 1000;
+export const MIN_PER_CAMPAIGN = 100;
 
 export const CampaignSchema = object().shape({
   name: string().label("Campaign Name").required(),

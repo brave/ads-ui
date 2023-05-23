@@ -1,5 +1,9 @@
 import { Box, Divider, InputAdornment, Stack, Typography } from "@mui/material";
-import { FormikRadioControl, FormikTextField } from "form/FormikHelpers";
+import {
+  FormikRadioControl,
+  FormikTextField,
+  useIsActiveOrPaused,
+} from "form/FormikHelpers";
 import React, { useEffect, useState } from "react";
 import { useFormikContext } from "formik";
 import { CampaignForm } from "../../../../../types";
@@ -14,6 +18,7 @@ interface Props {
 
 export function BudgetField({ isEdit }: Props) {
   const { advertiser } = useAdvertiser();
+  const { isActiveOrPaused, isNotActiveOrPaused } = useIsActiveOrPaused();
   const { values, setFieldValue, errors } = useFormikContext<CampaignForm>();
   const [minBudget, setMinBudget] = useState(MIN_PER_CAMPAIGN);
   const campaignRuntime = Math.floor(
@@ -61,7 +66,9 @@ export function BudgetField({ isEdit }: Props) {
               : undefined
           }
           error={!!errors.budget || !!errors.dailyBudget}
-          disabled={isEdit && !advertiser.selfServiceSetPrice}
+          disabled={
+            isEdit && !advertiser.selfServiceSetPrice && isActiveOrPaused
+          }
         />
 
         {!advertiser.selfServiceSetPrice ? (
