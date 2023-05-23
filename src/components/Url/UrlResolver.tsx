@@ -53,7 +53,6 @@ export const UrlResolver: React.FC<Props> = ({
   const { setValue, setError } = isValidHelper;
 
   useEffect(() => {
-    setValue(true);
     if (!disabled) {
       debouncedValidateUrl.cancel();
       debouncedValidateUrl(nameMeta.value, nameMeta.error);
@@ -68,7 +67,7 @@ export const UrlResolver: React.FC<Props> = ({
         setError(currError);
       }
     }
-  }, []);
+  });
 
   return (
     <>

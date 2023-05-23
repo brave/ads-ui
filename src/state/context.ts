@@ -22,8 +22,3 @@ export const getAllDrafts = () => {
 
   return campaigns;
 };
-
-export const getDraft = (id: string): CampaignForm => {
-  const item = localStorage.getItem(id);
-  return item ? JSON.parse(item) : null;
-};
