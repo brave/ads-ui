@@ -216,7 +216,10 @@ export const FormikSubmitButton: React.FC<FormikSubmitButtonProps> = ({
 
 export const useIsActiveOrPaused = () => {
   const { values } = useFormikContext<CampaignForm>();
-  const activeOrPaused = values.state === "active" || values.state === "paused";
+  const activeOrPaused =
+    values.state === "active" ||
+    values.state === "paused" ||
+    values.state === "completed";
   return {
     isActiveOrPaused: activeOrPaused,
     isNotActiveOrPaused: !activeOrPaused,

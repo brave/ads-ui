@@ -38,7 +38,6 @@ export type AdSetForm = {
   id?: string;
   name: string;
   segments: Segment[];
-  state: string;
   oses: OS[];
   conversions: Conversion[];
   creatives: Creative[];
@@ -83,7 +82,6 @@ export const initialCreative: Creative = {
 export const initialAdSet: AdSetForm = {
   name: "",
   isNotTargeting: true,
-  state: "draft",
   segments: [],
   conversions: [],
   oses: [],
@@ -112,7 +110,7 @@ export const initialCampaign: CampaignForm = {
   ],
   format: CampaignFormat.PushNotification,
   name: "",
-  state: "draft",
+  state: "under_review",
   type: "paid",
   pacingStrategy: CampaignPacingStrategies.ModelV1,
 };
