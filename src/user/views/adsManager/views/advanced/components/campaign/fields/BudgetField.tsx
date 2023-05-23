@@ -6,13 +6,14 @@ import { CampaignForm } from "../../../../../types";
 import { differenceInHours } from "date-fns";
 import { MIN_PER_CAMPAIGN, MIN_PER_DAY } from "validation/CampaignSchema";
 import _ from "lodash";
+import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 
 interface Props {
-  canSetPrice: boolean;
   isEdit: boolean;
 }
 
-export function BudgetField({ canSetPrice, isEdit }: Props) {
+export function BudgetField({ isEdit }: Props) {
+  const { advertiser } = useAdvertiser();
   const { values, setFieldValue, errors } = useFormikContext<CampaignForm>();
   const [minBudget, setMinBudget] = useState(MIN_PER_CAMPAIGN);
   const campaignRuntime = Math.floor(
@@ -60,9 +61,10 @@ export function BudgetField({ canSetPrice, isEdit }: Props) {
               : undefined
           }
           error={!!errors.budget || !!errors.dailyBudget}
+          disabled={isEdit && !advertiser.selfServiceSetPrice}
         />
 
-        {!canSetPrice ? (
+        {!advertiser.selfServiceSetPrice ? (
           <Typography variant="body2">
             Pricing type is <strong>{_.upperCase(values.billingType)}</strong>{" "}
             with a flat rate of <strong>${values.price}</strong>.

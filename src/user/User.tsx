@@ -9,14 +9,12 @@ import {
 } from "@apollo/client";
 import AnalyticsOverview from "./analytics/AnalyticsOverview";
 import Settings from "./settings/Settings";
-import { Box, Stack } from "@mui/material";
+import { Box } from "@mui/material";
 import { NewCampaign } from "./views/adsManager/views/advanced/components/form/NewCampaign";
 import { EditCampaign } from "./views/adsManager/views/advanced/components/form/EditCampaign";
 import { CompletionForm } from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
-import moment from "moment";
 import { MainView } from "user/views/user/MainView";
 import { Navbar } from "user/components/navbar/Navbar";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -32,9 +30,6 @@ const buildApolloClient = () => {
 
 export function User() {
   const client = useMemo(() => buildApolloClient(), []);
-  const [fromDateFilter, setFromDateFilter] = useState<Date | null>(
-    moment().subtract(6, "month").startOf("day").toDate()
-  );
 
   return (
     <ApolloProvider client={client}>
@@ -44,13 +39,15 @@ export function User() {
           <Box width="100%" height="100%" padding={1} marginTop="64px">
             <Switch>
               {/* /adsmanager */}
-              <Route path={`/user/main/adsmanager/advanced/new/:draftId`}>
-                <NewCampaign fromDate={fromDateFilter} />
-              </Route>
+              <Route
+                path={`/user/main/adsmanager/advanced/new/:draftId`}
+                component={NewCampaign}
+              />
 
-              <Route path={`/user/main/adsmanager/advanced/:campaignId`}>
-                <EditCampaign fromDate={fromDateFilter} />
-              </Route>
+              <Route
+                path={`/user/main/adsmanager/advanced/:campaignId`}
+                component={EditCampaign}
+              />
 
               <Route path={`/user/main/complete/:mode`}>
                 <CompletionForm />
@@ -68,12 +65,7 @@ export function User() {
                 <AnalyticsOverview />
               </Route>
 
-              <Route path={`/user/main`}>
-                <MainView
-                  fromDate={fromDateFilter}
-                  onSetDate={setFromDateFilter}
-                />
-              </Route>
+              <Route path={`/user/main`} component={MainView} />
 
               {/* default */}
               <Redirect to={`/user/main`} />
