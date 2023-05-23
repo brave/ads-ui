@@ -20,6 +20,7 @@ import {
 import { ErrorMessage, useField, useFormikContext } from "formik";
 import { useHistory } from "react-router-dom";
 import _ from "lodash";
+import { CampaignForm } from "user/views/adsManager/types";
 
 type FormikTextFieldProps = TextFieldProps & {
   name: string;
@@ -211,4 +212,16 @@ export const FormikSubmitButton: React.FC<FormikSubmitButtonProps> = ({
       </div>
     </Tooltip>
   );
+};
+
+export const useIsActiveOrPaused = () => {
+  const { values } = useFormikContext<CampaignForm>();
+  const activeOrPaused =
+    values.state === "active" ||
+    values.state === "paused" ||
+    values.state === "completed";
+  return {
+    isActiveOrPaused: activeOrPaused,
+    isNotActiveOrPaused: !activeOrPaused,
+  };
 };
