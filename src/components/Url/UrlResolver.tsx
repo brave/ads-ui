@@ -54,20 +54,20 @@ export const UrlResolver: React.FC<Props> = ({
 
   useEffect(() => {
     setValue(true);
-    // if (!disabled) {
-    //   debouncedValidateUrl.cancel();
-    //   debouncedValidateUrl(nameMeta.value, nameMeta.error);
-    //
-    //   if (value !== !!data?.validateTargetUrl?.isValid) {
-    //     setValue(!loading && !!data?.validateTargetUrl?.isValid, false);
-    //   }
-    //
-    //   const errors = data?.validateTargetUrl.errors ?? [];
-    //   const currError = errors.join("#");
-    //   if (errors.length > 0 && currError !== fieldError) {
-    //     setError(currError);
-    //   }
-    // }
+    if (!disabled) {
+      debouncedValidateUrl.cancel();
+      debouncedValidateUrl(nameMeta.value, nameMeta.error);
+
+      if (value !== !!data?.validateTargetUrl?.isValid) {
+        setValue(!loading && !!data?.validateTargetUrl?.isValid, false);
+      }
+
+      const errors = data?.validateTargetUrl.errors ?? [];
+      const currError = errors.join("#");
+      if (errors.length > 0 && currError !== fieldError) {
+        setError(currError);
+      }
+    }
   }, []);
 
   return (
