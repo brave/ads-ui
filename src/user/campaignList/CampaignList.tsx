@@ -55,7 +55,9 @@ export function CampaignList({ advertiserCampaigns, fromDate }: Props) {
               alignItems="center"
               direction="row"
             >
-              {r.state !== "under_review" ? (
+              {r.state === "active" ||
+              r.state === "paused" ||
+              r.state === "completed" ? (
                 <Link
                   component={RouterLink}
                   to={`/user/main/campaign/${r.id}/analytics/overview`}

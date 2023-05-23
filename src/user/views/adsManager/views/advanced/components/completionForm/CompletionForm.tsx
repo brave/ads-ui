@@ -33,8 +33,7 @@ export function CompletionForm() {
       {params.mode === "edit" && (
         <>
           <Typography sx={{ textAlign: "center" }} variant="h6">
-            Your campaign has been updated and any new creatives will be
-            reviewed by our ads team. <br />
+            Your campaign has been updated! <br />
             If you added new Ads, we'll be in contact as soon as they are
             approved and activated. <br />
             Thank you for using Brave Ads!
@@ -59,17 +58,6 @@ export function CompletionForm() {
             We'll be in contact as soon as your campaign is approved and
             activated.
           </Typography>
-
-          {!clickedSurvey && (
-            <Typography sx={{ textAlign: "center", mt: 3 }} variant="h6">
-              We value your feedback and would love to hear your thoughts on
-              your recent experience. <br />
-              Your input will help us improve the Brave Ads platform to better
-              meet your needs. <br />
-              It only takes a few minutes and your participation will be greatly
-              appreciated! <br />
-            </Typography>
-          )}
 
           <Stack
             direction="row"

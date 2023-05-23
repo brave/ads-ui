@@ -9,6 +9,7 @@ import { UserMenu } from "./components/UserMenu/UserMenu";
 import { DraftMenu } from "./components/DraftMenu/DraftMenu";
 import moment from "moment";
 import rewards from "../../../../Subdomains_Rewards_Ads_Default.png";
+import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 
 const logoStyle = {
   textDecoration: "none",
@@ -25,11 +26,8 @@ TopBarProgress.config({
   barThickness: 2,
 });
 
-interface Props {
-  canCreate: boolean;
-}
-
-export function Navbar({ canCreate }: Props) {
+export function Navbar() {
+  const { advertiser } = useAdvertiser();
   const history = useHistory();
   const { url } = useRouteMatch();
   const isNewCampaignPage = url.includes("/user/main/adsmanager/advanced");
@@ -43,9 +41,9 @@ export function Navbar({ canCreate }: Props) {
         <Link style={logoStyle} to="/user/main">
           <img src={rewards} alt="Ads" height="40px" />
         </Link>
-        {canCreate && <DraftMenu />}
+        {advertiser.selfServiceCreate && <DraftMenu />}
         <div style={{ flexGrow: 1 }} />
-        {canCreate && (
+        {advertiser.selfServiceCreate && (
           <>
             <Button
               onClick={() => {

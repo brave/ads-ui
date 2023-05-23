@@ -6,6 +6,7 @@ import { PickerFields } from "./fields/PickerFields";
 import { ConversionField } from "./fields/ConversionField";
 import ClearIcon from "@mui/icons-material/Clear";
 import { CampaignForm, initialAdSet } from "../../../../types";
+import { useIsActiveOrPaused } from "form/FormikHelpers";
 
 interface Props {
   tabValue: number;
@@ -15,6 +16,7 @@ interface Props {
 }
 
 export function AdSetFields({ tabValue, onRemove, onCreate, isEdit }: Props) {
+  const { isNotActiveOrPaused } = useIsActiveOrPaused();
   const { values } = useFormikContext<CampaignForm>();
   const index = tabValue - 1;
 
@@ -23,41 +25,39 @@ export function AdSetFields({ tabValue, onRemove, onCreate, isEdit }: Props) {
       {({ remove, push }) => (
         <Card sx={{ mt: 2, p: 2 }}>
           <Box>
-            {!isEdit && (
-              <>
-                <Box display="flex" flexDirection="row" alignItems="center">
-                  <Divider
-                    textAlign="left"
-                    sx={{ fontSize: "24px", mb: 1, flexGrow: 1 }}
+            <>
+              <Box display="flex" flexDirection="row" alignItems="center">
+                <Divider
+                  textAlign="left"
+                  sx={{ fontSize: "24px", mb: 1, flexGrow: 1 }}
+                >
+                  Ad Set {index + 1} Details
+                </Divider>
+                {index > 0 && !isEdit && (
+                  <IconButton
+                    onClick={() => {
+                      onRemove();
+                      remove(index);
+                    }}
                   >
-                    Ad Set {index + 1} Details
-                  </Divider>
-                  {index > 0 && !isEdit && (
-                    <IconButton
-                      onClick={() => {
-                        onRemove();
-                        remove(index);
-                      }}
-                    >
-                      <ClearIcon />
-                    </IconButton>
-                  )}
-                </Box>
+                    <ClearIcon />
+                  </IconButton>
+                )}
+              </Box>
 
-                <DetailsField
-                  index={index}
-                  onCreate={() => {
-                    onCreate();
-                    push(initialAdSet);
-                  }}
-                  showCreateNew={values.adSets.length <= 5}
-                />
-              </>
-            )}
+              <DetailsField
+                index={index}
+                onCreate={() => {
+                  onCreate();
+                  push(initialAdSet);
+                }}
+                showCreateNew={values.adSets.length <= 5 && !isEdit}
+              />
+            </>
 
             <PickerFields index={index} />
 
-            {!isEdit && <ConversionField index={index} />}
+            {isNotActiveOrPaused && <ConversionField index={index} />}
           </Box>
         </Card>
       )}

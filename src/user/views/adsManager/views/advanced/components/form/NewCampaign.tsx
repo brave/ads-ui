@@ -3,9 +3,8 @@ import { Formik } from "formik";
 import React, { useContext } from "react";
 import { CampaignForm, initialCampaign } from "../../../../types";
 import { CampaignSchema } from "validation/CampaignSchema";
-import { populateFilter, transformNewForm } from "user/library";
+import { transformNewForm } from "user/library";
 import { useCreateCampaignMutation } from "graphql/campaign.generated";
-import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
 import { useHistory, useParams } from "react-router-dom";
 import { BaseForm } from "./components/BaseForm";
 import { PersistFormValues } from "form/PersistFormValues";
@@ -17,11 +16,7 @@ interface Params {
   draftId: string;
 }
 
-interface Props {
-  fromDate: Date | null;
-}
-
-export function NewCampaign({ fromDate }: Props) {
+export function NewCampaign() {
   const history = useHistory();
   const params = useParams<Params>();
   const { advertiser } = useAdvertiser();
@@ -35,14 +30,6 @@ export function NewCampaign({ fromDate }: Props) {
   };
 
   const [mutation] = useCreateCampaignMutation({
-    refetchQueries: [
-      {
-        ...refetchAdvertiserCampaignsQuery({
-          id: advertiser.id,
-          filter: populateFilter(fromDate),
-        }),
-      },
-    ],
     onCompleted() {
       localStorage.removeItem(params.draftId);
       setDrafts();
@@ -54,32 +41,22 @@ export function NewCampaign({ fromDate }: Props) {
     <Container maxWidth="xl">
       <Formik
         initialValues={initial}
-        onSubmit={(v: CampaignForm, { setSubmitting }) => {
+        onSubmit={async (v: CampaignForm, { setSubmitting }) => {
           setSubmitting(true);
-          transformNewForm(v, advertiser.id, userId)
-            .then(async (c) => {
-              return await mutation({ variables: { input: c } });
-            })
-            .catch((e) => {
-              alert("Unable to save Campaign");
-            })
-            .finally(() => {
-              setSubmitting(false);
-            });
+          try {
+            const newForm = await transformNewForm(v, advertiser, userId);
+            await mutation({ variables: { input: newForm } });
+          } catch (e) {
+            alert("Unable to save Campaign");
+            setSubmitting(false);
+          }
         }}
         validationSchema={CampaignSchema}
       >
-        {({ values }) => (
-          <>
-            <BaseForm
-              isEdit={false}
-              values={values}
-              advertiser={advertiser}
-              draftId={params.draftId}
-            />
-            <PersistFormValues id={params.draftId} />
-          </>
-        )}
+        <>
+          <BaseForm isEdit={false} draftId={params.draftId} />
+          <PersistFormValues id={params.draftId} />
+        </>
       </Formik>
     </Container>
   );
