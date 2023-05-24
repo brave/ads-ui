@@ -82,7 +82,7 @@ export function BudgetField({ isEdit }: Props) {
           error={!!errors.budget || !!errors.dailyBudget}
         />
 
-        <FormControl>
+        <FormControl disabled={isEdit}>
           <FormLabel>Currency</FormLabel>
           <RadioGroup
             row
