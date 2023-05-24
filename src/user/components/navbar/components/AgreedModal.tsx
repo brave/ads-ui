@@ -110,8 +110,9 @@ export default function AgreedModal({ advertiser }: Props) {
                 href="https://brave.com/brave-ads/reporting/"
                 target="_blank"
               >
-                reporting guide.
+                reporting guide
               </Link>
+              .
             </Typography>
             <FormControlLabel
               control={
