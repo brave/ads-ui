@@ -1,10 +1,26 @@
-import { Box, Divider, InputAdornment, Stack, Typography } from "@mui/material";
-import { FormikRadioControl, FormikTextField } from "form/FormikHelpers";
+import {
+  Box,
+  Divider,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  InputAdornment,
+  Radio,
+  RadioGroup,
+  Stack,
+  Typography,
+} from "@mui/material";
+import {
+  FormikRadioControl,
+  FormikTextField,
+} from "form/FormikHelpers";
 import React, { useEffect, useState } from "react";
 import { useFormikContext } from "formik";
 import { CampaignForm } from "../../../../../types";
 import { differenceInHours } from "date-fns";
 import { MIN_PER_CAMPAIGN, MIN_PER_DAY } from "validation/CampaignSchema";
+import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { PaymentType } from "graphql/types";
 import _ from "lodash";
 
 interface Props {
@@ -12,7 +28,9 @@ interface Props {
   isEdit: boolean;
 }
 
-export function BudgetField({ canSetPrice, isEdit }: Props) {
+
+export function BudgetField({ isEdit }: Props) {
+  const { advertiser } = useAdvertiser();
   const { values, setFieldValue, errors } = useFormikContext<CampaignForm>();
   const [minBudget, setMinBudget] = useState(MIN_PER_CAMPAIGN);
   const campaignRuntime = Math.floor(
@@ -52,7 +70,9 @@ export function BudgetField({ canSetPrice, isEdit }: Props) {
           type="number"
           InputProps={{
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
-            endAdornment: <InputAdornment position="end">USD</InputAdornment>,
+            endAdornment: (
+              <InputAdornment position="end">{values.currency}</InputAdornment>
+            ),
           }}
           helperText={
             errors.budget || errors.dailyBudget
@@ -62,10 +82,29 @@ export function BudgetField({ canSetPrice, isEdit }: Props) {
           error={!!errors.budget || !!errors.dailyBudget}
         />
 
-        {!canSetPrice ? (
+        <FormControl>
+          <FormLabel>Currency</FormLabel>
+          <RadioGroup
+            row
+            value={values.currency}
+            onChange={(event, value) => {
+              setFieldValue("currency", value);
+              const payment =
+                value === "USD" ? PaymentType.Netsuite : PaymentType.ManualBat;
+              setFieldValue("paymentType", payment);
+            }}
+          >
+            <FormControlLabel value="USD" control={<Radio />} label="USD" />
+            <FormControlLabel value="BAT" control={<Radio />} label="BAT" />
+          </RadioGroup>
+        </FormControl>
+
+        {!advertiser.selfServiceSetPrice ? (
           <Typography variant="body2">
             Pricing type is <strong>{_.upperCase(values.billingType)}</strong>{" "}
-            with a flat rate of <strong>${values.price}</strong>.
+            with a flat rate of <strong>${values.price}</strong>. Pre-paying
+            with BAT is a manual process, and if the payment cannot be verified this
+            campaign will not run.
           </Typography>
         ) : (
           <Stack direction="row" spacing={2} alignItems="center">

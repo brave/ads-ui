@@ -86,6 +86,7 @@ export async function transformNewForm(
     type: form.type,
     budget: form.budget,
     adSets: transformedAdSet,
+    paymentType: form.paymentType,
   };
 }
 
@@ -250,6 +251,7 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
     startAt: campaign.startAt,
     state: campaign.state,
     type: "paid",
+    paymentType: campaign.paymentType,
   };
 }
 
