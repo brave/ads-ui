@@ -18,6 +18,7 @@ fragment Campaign on Campaign {
   source
   type
   format
+  paymentType
   dayProportion
   geoTargets {
     code
@@ -40,6 +41,7 @@ fragment CampaignSummary on Campaign {
   externalId
   currency
   budget
+  paymentType
   dailyBudget
   spent
   createdAt

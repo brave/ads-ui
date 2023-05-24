@@ -25,6 +25,7 @@ export type CampaignFragment = {
   source: Types.CampaignSource;
   type: string;
   format: Types.CampaignFormat;
+  paymentType: Types.PaymentType;
   dayProportion?: number | null;
   geoTargets?: Array<{
     __typename?: "Geocode";
@@ -91,6 +92,7 @@ export type CampaignSummaryFragment = {
   externalId: string;
   currency: string;
   budget: number;
+  paymentType: Types.PaymentType;
   dailyBudget: number;
   spent: number;
   createdAt: any;
@@ -174,6 +176,7 @@ export type LoadCampaignQuery = {
     source: Types.CampaignSource;
     type: string;
     format: Types.CampaignFormat;
+    paymentType: Types.PaymentType;
     dayProportion?: number | null;
     geoTargets?: Array<{
       __typename?: "Geocode";
@@ -267,6 +270,7 @@ export const CampaignFragmentDoc = gql`
     source
     type
     format
+    paymentType
     dayProportion
     geoTargets {
       code
@@ -291,6 +295,7 @@ export const CampaignSummaryFragmentDoc = gql`
     externalId
     currency
     budget
+    paymentType
     dailyBudget
     spent
     createdAt

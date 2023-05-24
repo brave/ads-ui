@@ -88,6 +88,7 @@ export type AdvertiserCampaignsFragment = {
     externalId: string;
     currency: string;
     budget: number;
+    paymentType: Types.PaymentType;
     dailyBudget: number;
     spent: number;
     createdAt: any;
@@ -172,6 +173,7 @@ export type AdvertiserCampaignsQuery = {
       externalId: string;
       currency: string;
       budget: number;
+      paymentType: Types.PaymentType;
       dailyBudget: number;
       spent: number;
       createdAt: any;
