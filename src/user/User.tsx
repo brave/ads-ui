@@ -32,7 +32,6 @@ const buildApolloClient = () => {
 
 export function User() {
   const client = useMemo(() => buildApolloClient(), []);
-  const { advertiser } = useAdvertiser();
   const [fromDateFilter, setFromDateFilter] = useState<Date | null>(
     moment().subtract(6, "month").startOf("day").toDate()
   );
@@ -41,7 +40,7 @@ export function User() {
     <ApolloProvider client={client}>
       <Box height="100%">
         <Box display="flex">
-          <Navbar canCreate={advertiser.selfServiceCreate} />
+          <Navbar />
           <Box width="100%" height="100%" padding={1} marginTop="64px">
             <Switch>
               {/* /adsmanager */}
