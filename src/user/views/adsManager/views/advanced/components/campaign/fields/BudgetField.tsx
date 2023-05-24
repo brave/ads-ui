@@ -83,7 +83,8 @@ export function BudgetField({ isEdit }: Props) {
           disabled={
             isEdit &&
             !advertiser.selfServiceSetPrice &&
-            isActiveOrPaused && !!values.stripePaymentId
+            isActiveOrPaused &&
+            !!values.stripePaymentId
           }
         />
 
@@ -95,8 +96,11 @@ export function BudgetField({ isEdit }: Props) {
             onChange={(event, value) => {
               setFieldValue("currency", value);
               const payment =
-                value === "USD" ? PaymentType.Netsuite : PaymentType.ManualBat;
-              setFieldValue("paymentType", payment);
+                value === "USD" ? PaymentType.Stripe : PaymentType.ManualBat;
+              setFieldValue(
+                "paymentType",
+                advertiser.selfServiceSetPrice ? PaymentType.Netsuite : payment
+              );
             }}
           >
             <FormControlLabel value="USD" control={<Radio />} label="USD" />

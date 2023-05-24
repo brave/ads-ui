@@ -28,7 +28,6 @@ export type CampaignFragment = {
   paymentType: Types.PaymentType;
   dayProportion?: number | null;
   stripePaymentId?: string | null;
-  paymentType: Types.PaymentType;
   geoTargets?: Array<{
     __typename?: "Geocode";
     code: string;
@@ -233,7 +232,6 @@ export type LoadCampaignQuery = {
     paymentType: Types.PaymentType;
     dayProportion?: number | null;
     stripePaymentId?: string | null;
-    paymentType: Types.PaymentType;
     geoTargets?: Array<{
       __typename?: "Geocode";
       code: string;
@@ -361,7 +359,12 @@ export type UpdateCampaignMutationVariables = Types.Exact<{
 
 export type UpdateCampaignMutation = {
   __typename?: "Mutation";
-  updateCampaign: { __typename?: "Campaign"; id: string };
+  updateCampaign: {
+    __typename?: "Campaign";
+    id: string;
+    paymentType: Types.PaymentType;
+    stripePaymentId?: string | null;
+  };
 };
 
 export const CampaignFragmentDoc = gql`
@@ -388,7 +391,6 @@ export const CampaignFragmentDoc = gql`
     paymentType
     dayProportion
     stripePaymentId
-    paymentType
     geoTargets {
       code
       name
@@ -621,6 +623,8 @@ export const UpdateCampaignDocument = gql`
   mutation UpdateCampaign($input: UpdateCampaignInput!) {
     updateCampaign(updateCampaignInput: $input) {
       id
+      paymentType
+      stripePaymentId
     }
   }
 `;

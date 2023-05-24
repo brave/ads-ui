@@ -5,6 +5,7 @@ import {
   CreateCampaignInput,
   CreateNotificationCreativeInput,
   GeocodeInput,
+  PaymentType,
   UpdateAdSetInput,
   UpdateCampaignInput,
   UpdateNotificationCreativeInput,
@@ -84,7 +85,11 @@ export async function transformNewForm(
     userId: userId,
     source: "self_serve",
     startAt: form.startAt,
-    state: form.state,
+    state:
+      advertiser.selfServiceSetPrice ||
+      form.paymentType === PaymentType.ManualBat
+        ? "under_review"
+        : form.state,
     type: form.type,
     budget: form.budget,
     adSets: transformedAdSet,

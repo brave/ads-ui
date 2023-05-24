@@ -21,7 +21,6 @@ fragment Campaign on Campaign {
   paymentType
   dayProportion
   stripePaymentId
-  paymentType
   geoTargets {
     code
     name
@@ -88,5 +87,7 @@ mutation CreateCampaign($input: CreateCampaignInput!) {
 mutation UpdateCampaign($input: UpdateCampaignInput!) {
   updateCampaign(updateCampaignInput: $input) {
     id
+    paymentType
+    stripePaymentId
   }
 }

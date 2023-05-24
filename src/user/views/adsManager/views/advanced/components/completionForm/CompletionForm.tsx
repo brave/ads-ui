@@ -1,23 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { useHistory, useParams } from "react-router-dom";
-import {
-  Box,
-  Button,
-  Card,
-  Container,
-  LinearProgress,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import present from "../../../../../../../../present.png";
-import { useValidateSession } from "checkout/hooks/useGetSession";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import { useUpdateCampaignMutation } from "graphql/campaign.generated";
-import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
-import { populateFilter } from "user/library";
 import { LoadingButton } from "@mui/lab";
-import { bool } from "yup";
+import { useValidateSession } from "checkout/hooks/useValidateSession";
 
 interface Params {
   mode: "edit" | "new";

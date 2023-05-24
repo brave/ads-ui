@@ -1,4 +1,4 @@
-import { Container } from "@mui/material";
+import { Container, LinearProgress } from "@mui/material";
 import { Formik } from "formik";
 import React, { useContext, useState } from "react";
 import { CampaignForm, initialCampaign } from "../../../../types";
@@ -11,8 +11,7 @@ import { PersistFormValues } from "form/PersistFormValues";
 import { DraftContext } from "state/context";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useUser } from "auth/hooks/queries/useUser";
-import { PaymentModal } from "components/Modal/PaymentModal";
-import { createSession } from "checkout/lib";
+import { useCreateSession } from "checkout/hooks/useCreateSession";
 
 interface Params {
   draftId: string;
@@ -21,10 +20,9 @@ interface Params {
 export function NewCampaign() {
   const history = useHistory();
   const params = useParams<Params>();
-  const [open, setOpen] = useState(false);
-  const [campaignId, setCampaignId] = useState<string>();
   const { advertiser } = useAdvertiser();
   const { userId } = useUser();
+  const { replaceSession, loading } = useCreateSession();
 
   const { setDrafts } = useContext(DraftContext);
 
@@ -41,11 +39,14 @@ export function NewCampaign() {
       if (advertiser.selfServiceSetPrice) {
         history.push("/user/main/complete/new");
       } else {
-        setOpen(true);
-        setCampaignId(data.createCampaign.id);
+        replaceSession(data.createCampaign.id);
       }
     },
   });
+
+  if (loading) {
+    return <LinearProgress />;
+  }
 
   return (
     <Container maxWidth="xl">
@@ -65,11 +66,6 @@ export function NewCampaign() {
         <>
           <BaseForm isEdit={false} draftId={params.draftId} />
           <PersistFormValues id={params.draftId} />
-          <PaymentModal
-            open={open}
-            onCancel={() => setOpen(false)}
-            campaignId={campaignId ?? params.draftId}
-          />
         </>
       </Formik>
     </Container>
