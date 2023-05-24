@@ -72,6 +72,7 @@ export function EditCampaign() {
             open={open}
             onCancel={() => setOpen(false)}
             campaignId={params.campaignId}
+            isEdit={true}
           />
         </>
       </Formik>

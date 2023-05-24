@@ -43,7 +43,7 @@ export function Review({ isEdit }: Props) {
       ))}
 
       <FormikSubmitButton
-        isCreate={!isEdit}
+        isCreate={!isEdit || values.state === "draft"}
         label={isEdit ? updateText : buttonText}
       />
     </Box>

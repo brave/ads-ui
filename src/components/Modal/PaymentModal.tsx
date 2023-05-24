@@ -35,9 +35,10 @@ interface Props {
   open: boolean;
   onCancel: () => void;
   campaignId: string;
+  isEdit?: boolean;
 }
 
-export function PaymentModal({ open, onCancel, campaignId }: Props) {
+export function PaymentModal({ open, onCancel, campaignId, isEdit }: Props) {
   const [selected, setSelected] = useState(0);
   const [agreed, setAgreed] = useState(selected === 0);
   const [loading, setLoading] = useState(false);
@@ -51,7 +52,7 @@ export function PaymentModal({ open, onCancel, campaignId }: Props) {
           Payment Options
         </Typography>
         <Typography variant="body2" sx={{ textAlign: "left", mb: 2 }}>
-          To launch a campaign with Brave, you are required to prepay the full
+          To launch a campaign with Brave, you are required to pre-pay the full
           amount you intend to spend.
         </Typography>
         <List>
@@ -63,7 +64,6 @@ export function PaymentModal({ open, onCancel, campaignId }: Props) {
             }}
             sx={{
               p: 2,
-              borderRadius: "16px",
               border: "1px solid #e2e2e2",
               mb: 1,
             }}
@@ -78,7 +78,6 @@ export function PaymentModal({ open, onCancel, campaignId }: Props) {
             }}
             sx={{
               p: 2,
-              borderRadius: "16px",
               border: "1px solid #e2e2e2",
               mt: 1,
             }}
@@ -96,18 +95,19 @@ export function PaymentModal({ open, onCancel, campaignId }: Props) {
                   onChange={(e) => setAgreed(e.target.checked)}
                 />
               }
-              label="I agree that pre-paying with BAT is a manual process, and that if my wallet cannot be verified this campaign will not run."
+              label="I agree that pre-paying with BAT is a manual process, and that if my payment cannot be verified this campaign will not run."
               sx={{ textAlign: "left" }}
             />
           </FormGroup>
         )}
 
-        <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
+        <Stack direction="row" spacing={1} sx={{ mt: 2 }} alignItems="center">
           <Button
             variant="outlined"
-            sx={{ borderRadius: "16px" }}
             onClick={() => {
-              history.push(`/user/main/adsmanager/advanced/${campaignId}`);
+              if (!isEdit) {
+                history.push(`/user/main/adsmanager/advanced/${campaignId}`);
+              }
               onCancel();
             }}
             disabled={loading}
@@ -119,7 +119,6 @@ export function PaymentModal({ open, onCancel, campaignId }: Props) {
             loading={loading}
             disabled={loading || !agreed}
             variant="contained"
-            sx={{ borderRadius: "16px" }}
             onClick={async () => {
               setLoading(true);
               if (selected === 0) {
