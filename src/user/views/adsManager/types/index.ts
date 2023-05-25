@@ -42,6 +42,7 @@ export type AdSetForm = {
   conversions: Conversion[];
   creatives: Creative[];
   isNotTargeting: boolean;
+  state?: string;
 };
 
 export type Conversion = {

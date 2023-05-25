@@ -17,7 +17,6 @@ interface Props {
 
 export function AdSetFields({ tabValue, onRemove, onCreate, isEdit }: Props) {
   const { isNotActiveOrPaused } = useIsActiveOrPaused();
-  const { values } = useFormikContext<CampaignForm>();
   const index = tabValue - 1;
 
   return (
@@ -51,7 +50,7 @@ export function AdSetFields({ tabValue, onRemove, onCreate, isEdit }: Props) {
                   onCreate();
                   push(initialAdSet);
                 }}
-                showCreateNew={values.adSets.length <= 5 && !isEdit}
+                isEdit={isEdit}
               />
             </>
 

@@ -5,9 +5,13 @@ import _ from "lodash";
 import { isAfterEndDate } from "util/isAfterEndDate";
 
 export const Status: React.FC<{
-  state: string;
+  state?: string;
   end?: string;
 }> = ({ state, end }) => {
+  if (!state) {
+    return null;
+  }
+
   let color = calcColorForState(state);
 
   let label = _.startCase(state);

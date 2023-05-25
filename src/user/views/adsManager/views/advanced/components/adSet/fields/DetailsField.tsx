@@ -1,17 +1,17 @@
 import { Box, Link, Stack, Typography } from "@mui/material";
 import { FormikTextField } from "form/FormikHelpers";
-import React, { useState } from "react";
-import { FormikValues, useFormikContext } from "formik";
+import React from "react";
+import { useFormikContext } from "formik";
 import { Status } from "components/Campaigns/Status";
 import { CampaignForm } from "user/views/adsManager/types";
 
 interface Props {
   index: number;
   onCreate: () => void;
-  showCreateNew: boolean;
+  isEdit: boolean;
 }
 
-export function DetailsField({ index, onCreate, showCreateNew }: Props) {
+export function DetailsField({ index, onCreate, isEdit }: Props) {
   const { values } = useFormikContext<CampaignForm>();
   return (
     <>
@@ -26,7 +26,7 @@ export function DetailsField({ index, onCreate, showCreateNew }: Props) {
             Ad sets are used to define your audience.
           </Typography>
 
-          {showCreateNew && (
+          {!isEdit && values.adSets.length < 5 && (
             <Link
               underline="none"
               variant="body2"
@@ -38,7 +38,7 @@ export function DetailsField({ index, onCreate, showCreateNew }: Props) {
           )}
         </Stack>
 
-        <Status state={values.state} />
+        <Status state={isEdit ? values.adSets[index].state : values.state} />
       </Box>
       <FormikTextField name={`adSets.${index}.name`} label="Ad Set Name" />
     </>

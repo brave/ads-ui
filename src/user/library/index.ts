@@ -212,6 +212,7 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
       return {
         ...adSet,
         id: adSet.id,
+        state: adSet.state,
         conversions: adSet.conversions ?? [],
         oses: adSet.oses ?? ([] as OS[]),
         segments: adSet.segments ?? ([] as Segment[]),
