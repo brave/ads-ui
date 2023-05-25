@@ -114,7 +114,7 @@ export function campaignOnOffState(
     <OnOff
       onChange={(s) => {
         updateCampaign({
-          variables: { input: { id: c.id, state: c.state } },
+          variables: { input: { id: c.id, state: s } },
         });
       }}
       loading={loading}
@@ -160,7 +160,7 @@ export function adSetOnOffState(
           updateAdSet({
             variables: {
               updateAdSetInput: {
-                state: s === "paused" ? "suspended" : s,
+                state: s,
                 id: c.id,
                 campaignId: c.campaignId,
                 segments: c.segments?.map((s) => ({
