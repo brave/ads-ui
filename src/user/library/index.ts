@@ -151,7 +151,7 @@ export function creativeInput(
     },
     state:
       advertiser.selfServiceSetPrice ||
-      campaign.paymentType !== PaymentType.Netsuite
+      campaign.paymentType === PaymentType.Netsuite
         ? "under_review"
         : "draft",
   };
