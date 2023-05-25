@@ -12,6 +12,7 @@ import { DraftContext } from "state/context";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useUser } from "auth/hooks/queries/useUser";
 import { useCreateSession } from "checkout/hooks/useCreateSession";
+import { PaymentType } from "graphql/types";
 
 interface Params {
   draftId: string;
@@ -33,9 +34,13 @@ export function NewCampaign() {
 
   const [mutation] = useCreateCampaignMutation({
     onCompleted(data) {
+      const campaign = data.createCampaign;
       localStorage.removeItem(params.draftId);
       setDrafts();
-      if (advertiser.selfServiceSetPrice) {
+      if (
+        campaign.paymentType === PaymentType.Netsuite ||
+        campaign.paymentType === PaymentType.ManualBat
+      ) {
         history.push("/user/main/complete/new");
       } else {
         replaceSession(data.createCampaign.id);
@@ -48,7 +53,7 @@ export function NewCampaign() {
   }
 
   return (
-    <Container maxWidth="xl" sx={{ mr: "unset", ml: "unset" }}>
+    <Container maxWidth="xl">
       <Formik
         initialValues={initial}
         onSubmit={(v: CampaignForm, { setSubmitting }) => {

@@ -350,7 +350,11 @@ export type CreateCampaignMutationVariables = Types.Exact<{
 
 export type CreateCampaignMutation = {
   __typename?: "Mutation";
-  createCampaign: { __typename?: "Campaign"; id: string };
+  createCampaign: {
+    __typename?: "Campaign";
+    id: string;
+    paymentType: Types.PaymentType;
+  };
 };
 
 export type UpdateCampaignMutationVariables = Types.Exact<{
@@ -573,6 +577,7 @@ export const CreateCampaignDocument = gql`
   mutation CreateCampaign($input: CreateCampaignInput!) {
     createCampaign(createCampaignInput: $input) {
       id
+      paymentType
     }
   }
 `;

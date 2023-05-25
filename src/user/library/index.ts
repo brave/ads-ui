@@ -86,13 +86,11 @@ export async function transformNewForm(
     source: "self_serve",
     startAt: form.startAt,
     state:
-      advertiser.selfServiceSetPrice ||
-      form.paymentType === PaymentType.ManualBat
-        ? "under_review"
-        : form.state,
+      form.paymentType !== PaymentType.Stripe ? "under_review" : form.state,
     type: form.type,
     budget: form.budget,
     adSets: transformedAdSet,
+    // TODO: Makes assumption about advertiser with these permissions. Might need to change in the future.
     paymentType: advertiser.selfServiceSetPrice
       ? PaymentType.Netsuite
       : form.paymentType,
@@ -152,8 +150,8 @@ export function creativeInput(
       targetUrl: creative.targetUrl,
     },
     state:
-      advertiser.selfServiceSetPrice ||
-      campaign.paymentType === PaymentType.Netsuite
+      campaign.paymentType === PaymentType.Netsuite ||
+      campaign.paymentType === PaymentType.ManualBat
         ? "under_review"
         : "draft",
   };
@@ -337,24 +335,6 @@ export async function transformEditForm(
     state: form.state,
     type: form.type,
     adSets: transformedAdSet,
-  };
-}
-
-export function updateCampaignState(
-  c: CampaignFragment,
-  state: string
-): UpdateCampaignInput {
-  return {
-    budget: c.budget,
-    currency: c.currency,
-    dailyBudget: c.dailyBudget,
-    dailyCap: c.dailyCap,
-    endAt: c.endAt,
-    id: c.id,
-    name: c.name,
-    startAt: c.startAt,
-    state,
-    type: c.type,
   };
 }
 

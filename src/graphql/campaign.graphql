@@ -81,6 +81,7 @@ query LoadCampaignAds($id: String!) {
 mutation CreateCampaign($input: CreateCampaignInput!) {
   createCampaign(createCampaignInput: $input) {
     id
+    paymentType
   }
 }
 

@@ -33,10 +33,11 @@ export function EditCampaign() {
 
   const [mutation] = useUpdateCampaignMutation({
     onCompleted(data) {
+      const campaign = initialData?.campaign;
       if (
-        initialData?.campaign?.stripePaymentId ||
-        advertiser.selfServiceSetPrice ||
-        initialData?.campaign?.paymentType === PaymentType.ManualBat
+        campaign?.stripePaymentId ||
+        campaign?.paymentType === PaymentType.Netsuite ||
+        campaign?.paymentType === PaymentType.ManualBat
       ) {
         history.push("/user/main/complete/edit");
       } else {
@@ -52,7 +53,7 @@ export function EditCampaign() {
   const initialValues = editCampaignValues(initialData.campaign);
 
   return (
-    <Container maxWidth="xl" sx={{ mr: "unset", ml: "unset" }}>
+    <Container maxWidth="xl">
       <Formik
         initialValues={initialValues}
         onSubmit={async (v: CampaignForm, { setSubmitting }) => {
