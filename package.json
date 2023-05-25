@@ -13,7 +13,7 @@
     "@mui/lab": "5.0.0-alpha.128",
     "@mui/material": "5.12.2",
     "@mui/x-date-pickers": "5.0.20",
-    "axios": "1.2.2",
+    "axios": "1.4.0",
     "base64url": "3.0.1",
     "date-fns": "2.29.3",
     "date-fns-tz": "2.0.0",
