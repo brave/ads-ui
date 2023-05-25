@@ -428,6 +428,7 @@ export type UpdateCampaignInput = {
   priority?: InputMaybe<Scalars["Float"]>;
   startAt?: InputMaybe<Scalars["DateTime"]>;
   state?: InputMaybe<Scalars["String"]>;
+  stripePaymentId?: InputMaybe<Scalars["String"]>;
   type?: InputMaybe<Scalars["String"]>;
 };
 

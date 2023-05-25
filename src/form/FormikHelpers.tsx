@@ -20,6 +20,7 @@ import {
 import { ErrorMessage, useField, useFormikContext } from "formik";
 import { useHistory } from "react-router-dom";
 import _ from "lodash";
+import { CampaignForm } from "user/views/adsManager/types";
 
 type FormikTextFieldProps = TextFieldProps & {
   name: string;
@@ -137,7 +138,6 @@ interface FormikSubmitButtonProps {
   label?: string;
   inProgressLabel?: String;
   isCreate: boolean;
-  allowNavigation?: boolean;
 }
 
 function extractErrors(errorObject: any): string[] {
@@ -150,10 +150,8 @@ export const FormikSubmitButton: React.FC<FormikSubmitButtonProps> = ({
   label = "Save",
   inProgressLabel = "Saving...",
   isCreate,
-  allowNavigation,
 }) => {
   const formik = useFormikContext();
-  const history = useHistory();
 
   let saveButtonTooltip: TooltipProps["title"] = "";
   let saveEnabled = true;
@@ -161,26 +159,11 @@ export const FormikSubmitButton: React.FC<FormikSubmitButtonProps> = ({
   // On create, the save button is initially enabled so the user can click it
   // to see the full set of validation errors.
   // On edit, it should only be enabled once they've made changes.
-  useEffect(() => {
-    const unblock = history.block(
-      !allowNavigation && formik.dirty
-        ? "You’ve got unsaved changes. Are you sure you want to navigate away from this page?"
-        : true
-    );
-
-    return function cleanup() {
-      unblock();
-    };
-  }, [formik.dirty, allowNavigation]);
-
   if (formik.isSubmitting) {
     saveEnabled = false;
   } else if (!isCreate && !formik.dirty) {
     saveEnabled = false;
     saveButtonTooltip = "Disabled because you haven’t made any changes";
-  } else if (isCreate && formik.submitCount < 1) {
-    // on create, initially enable the button so users can reveal all the required fields
-    saveEnabled = true;
   } else if (!formik.isValid) {
     saveEnabled = false;
     saveButtonTooltip = (

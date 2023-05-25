@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 
 import { useHistory, useParams } from "react-router-dom";
-import { Box, Button, Card, Stack, Typography } from "@mui/material";
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import present from "../../../../../../../../present.png";
+import { LoadingButton } from "@mui/lab";
+import { useValidateSession } from "checkout/hooks/useValidateSession";
 
 interface Params {
   mode: "edit" | "new";
@@ -14,7 +16,7 @@ export function CompletionForm() {
   const [clickedSurvey, setClickedSurvey] = useState(false);
 
   return (
-    <Card
+    <Box
       sx={{
         p: 2,
         display: "flex",
@@ -77,26 +79,61 @@ export function CompletionForm() {
             sx={{ mt: 2 }}
             spacing={2}
           >
-            {!clickedSurvey && (
-              <Button
-                variant="contained"
-                onClick={() => setClickedSurvey(true)}
-                href="https://www.surveymonkey.com/r/WSFWF5Y"
-                target="_blank"
-              >
-                Take our survey!
-              </Button>
-            )}
-
-            <Button
-              variant={clickedSurvey ? "contained" : "outlined"}
-              onClick={() => history.push("/user/main/campaigns")}
-            >
-              {clickedSurvey ? "Continue" : "Skip survey and continue"}
-            </Button>
+            <ValidateCampaignButton
+              clicked={clickedSurvey}
+              onClick={() => setClickedSurvey(true)}
+            />
           </Stack>
         </>
       )}
-    </Card>
+    </Box>
+  );
+}
+
+function ValidateCampaignButton(props: {
+  clicked: boolean;
+  onClick: () => void;
+}) {
+  const history = useHistory();
+  const searchParams = new URLSearchParams(window.location.search);
+  const session = searchParams.get("sessionId");
+  const campaign = searchParams.get("referenceId");
+
+  const { loading } = useValidateSession({
+    sessionId: session,
+    campaignId: campaign ?? "",
+  });
+
+  return (
+    <Stack
+      direction="row"
+      justifyContent="space-evenly"
+      sx={{ mt: 2 }}
+      spacing={2}
+    >
+      {!props.clicked && (
+        <LoadingButton
+          variant="contained"
+          onClick={() => props.onClick()}
+          href="https://www.surveymonkey.com/r/WSFWF5Y"
+          target="_blank"
+          loading={loading}
+          disabled={loading}
+        >
+          Take our survey!
+        </LoadingButton>
+      )}
+
+      <LoadingButton
+        variant={props.clicked ? "contained" : "outlined"}
+        onClick={async () => {
+          history.push("/user/main");
+        }}
+        loading={loading}
+        disabled={loading}
+      >
+        {props.clicked ? "Continue" : "Skip survey and continue"}
+      </LoadingButton>
+    </Stack>
   );
 }

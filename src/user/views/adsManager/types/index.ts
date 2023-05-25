@@ -1,4 +1,8 @@
-import { CampaignFormat, CampaignPacingStrategies } from "graphql/types";
+import {
+  CampaignFormat,
+  CampaignPacingStrategies,
+  PaymentType,
+} from "graphql/types";
 import { defaultEndDate, defaultStartDate } from "form/DateFieldHelpers";
 import { MIN_PER_CAMPAIGN } from "validation/CampaignSchema";
 
@@ -22,6 +26,8 @@ export type CampaignForm = {
   price: number;
   billingType: Billing;
   pacingStrategy: CampaignPacingStrategies;
+  stripePaymentId?: string | null;
+  paymentType: PaymentType;
 };
 
 export type GeoTarget = {
@@ -77,6 +83,7 @@ export const initialCreative: Creative = {
   title: "",
   body: "",
   targetUrl: "",
+  state: "draft",
 };
 
 export const initialAdSet: AdSetForm = {
@@ -110,7 +117,8 @@ export const initialCampaign: CampaignForm = {
   ],
   format: CampaignFormat.PushNotification,
   name: "",
-  state: "under_review",
+  state: "draft",
   type: "paid",
   pacingStrategy: CampaignPacingStrategies.ModelV1,
+  paymentType: PaymentType.Netsuite,
 };

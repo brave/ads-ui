@@ -29,7 +29,6 @@ TopBarProgress.config({
 
 export function Navbar() {
   const { advertiser } = useAdvertiser();
-
   return (
     <AppBar
       position="fixed"

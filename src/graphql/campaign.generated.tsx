@@ -26,6 +26,8 @@ export type CampaignFragment = {
   type: string;
   format: Types.CampaignFormat;
   dayProportion?: number | null;
+  stripePaymentId?: string | null;
+  paymentType: Types.PaymentType;
   geoTargets?: Array<{
     __typename?: "Geocode";
     code: string;
@@ -99,7 +101,60 @@ export type CampaignSummaryFragment = {
   source: Types.CampaignSource;
   type: string;
   format: Types.CampaignFormat;
+  paymentType: Types.PaymentType;
   dayProportion?: number | null;
+  adSets: Array<{
+    __typename?: "AdSet";
+    id: string;
+    createdAt: any;
+    billingType?: string | null;
+    name?: string | null;
+    totalMax: number;
+    perDay: number;
+    state: string;
+    execution: string;
+    segments?: Array<{
+      __typename?: "Segment";
+      code: string;
+      name: string;
+    }> | null;
+    oses?: Array<{ __typename?: "OS"; code: string; name: string }> | null;
+    conversions?: Array<{
+      __typename?: "Conversion";
+      id: string;
+      type: string;
+      urlPattern: string;
+      observationWindow: number;
+    }> | null;
+    ads?: Array<{
+      __typename?: "Ad";
+      id: string;
+      state: string;
+      prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
+      creative: {
+        __typename?: "Creative";
+        id: string;
+        createdAt: any;
+        modifiedAt: any;
+        name: string;
+        state: string;
+        type: { __typename?: "CreativeType"; code: string };
+        payloadNotification?: {
+          __typename?: "NotificationPayload";
+          body: string;
+          title: string;
+          targetUrl: string;
+        } | null;
+      };
+    }> | null;
+  }>;
+};
+
+export type CampaignAdsFragment = {
+  __typename?: "Campaign";
+  id: string;
+  name: string;
+  state: string;
   adSets: Array<{
     __typename?: "AdSet";
     id: string;
@@ -175,11 +230,72 @@ export type LoadCampaignQuery = {
     type: string;
     format: Types.CampaignFormat;
     dayProportion?: number | null;
+    stripePaymentId?: string | null;
+    paymentType: Types.PaymentType;
     geoTargets?: Array<{
       __typename?: "Geocode";
       code: string;
       name: string;
     }> | null;
+    adSets: Array<{
+      __typename?: "AdSet";
+      id: string;
+      createdAt: any;
+      billingType?: string | null;
+      name?: string | null;
+      totalMax: number;
+      perDay: number;
+      state: string;
+      execution: string;
+      segments?: Array<{
+        __typename?: "Segment";
+        code: string;
+        name: string;
+      }> | null;
+      oses?: Array<{ __typename?: "OS"; code: string; name: string }> | null;
+      conversions?: Array<{
+        __typename?: "Conversion";
+        id: string;
+        type: string;
+        urlPattern: string;
+        observationWindow: number;
+      }> | null;
+      ads?: Array<{
+        __typename?: "Ad";
+        id: string;
+        state: string;
+        prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
+        creative: {
+          __typename?: "Creative";
+          id: string;
+          createdAt: any;
+          modifiedAt: any;
+          name: string;
+          state: string;
+          type: { __typename?: "CreativeType"; code: string };
+          payloadNotification?: {
+            __typename?: "NotificationPayload";
+            body: string;
+            title: string;
+            targetUrl: string;
+          } | null;
+        };
+      }> | null;
+    }>;
+  } | null;
+};
+
+export type LoadCampaignAdsQueryVariables = Types.Exact<{
+  id: Types.Scalars["String"];
+}>;
+
+export type LoadCampaignAdsQuery = {
+  __typename?: "Query";
+  campaign?: {
+    __typename?: "Campaign";
+    id: string;
+    name: string;
+    state: string;
     adSets: Array<{
       __typename?: "AdSet";
       id: string;
@@ -243,7 +359,12 @@ export type UpdateCampaignMutationVariables = Types.Exact<{
 
 export type UpdateCampaignMutation = {
   __typename?: "Mutation";
-  updateCampaign: { __typename?: "Campaign"; id: string };
+  updateCampaign: {
+    __typename?: "Campaign";
+    id: string;
+    paymentType: Types.PaymentType;
+    stripePaymentId?: string | null;
+  };
 };
 
 export const CampaignFragmentDoc = gql`
@@ -268,6 +389,8 @@ export const CampaignFragmentDoc = gql`
     type
     format
     dayProportion
+    stripePaymentId
+    paymentType
     geoTargets {
       code
       name
@@ -299,7 +422,19 @@ export const CampaignSummaryFragmentDoc = gql`
     source
     type
     format
+    paymentType
     dayProportion
+    adSets {
+      ...AdSet
+    }
+  }
+  ${AdSetFragmentDoc}
+`;
+export const CampaignAdsFragmentDoc = gql`
+  fragment CampaignAds on Campaign {
+    id
+    name
+    state
     adSets {
       ...AdSet
     }
@@ -370,6 +505,70 @@ export function refetchLoadCampaignQuery(
 ) {
   return { query: LoadCampaignDocument, variables: variables };
 }
+export const LoadCampaignAdsDocument = gql`
+  query LoadCampaignAds($id: String!) {
+    campaign(id: $id) {
+      ...CampaignAds
+    }
+  }
+  ${CampaignAdsFragmentDoc}
+`;
+
+/**
+ * __useLoadCampaignAdsQuery__
+ *
+ * To run a query within a React component, call `useLoadCampaignAdsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLoadCampaignAdsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLoadCampaignAdsQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useLoadCampaignAdsQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    LoadCampaignAdsQuery,
+    LoadCampaignAdsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<LoadCampaignAdsQuery, LoadCampaignAdsQueryVariables>(
+    LoadCampaignAdsDocument,
+    options
+  );
+}
+export function useLoadCampaignAdsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    LoadCampaignAdsQuery,
+    LoadCampaignAdsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    LoadCampaignAdsQuery,
+    LoadCampaignAdsQueryVariables
+  >(LoadCampaignAdsDocument, options);
+}
+export type LoadCampaignAdsQueryHookResult = ReturnType<
+  typeof useLoadCampaignAdsQuery
+>;
+export type LoadCampaignAdsLazyQueryHookResult = ReturnType<
+  typeof useLoadCampaignAdsLazyQuery
+>;
+export type LoadCampaignAdsQueryResult = Apollo.QueryResult<
+  LoadCampaignAdsQuery,
+  LoadCampaignAdsQueryVariables
+>;
+export function refetchLoadCampaignAdsQuery(
+  variables: LoadCampaignAdsQueryVariables
+) {
+  return { query: LoadCampaignAdsDocument, variables: variables };
+}
 export const CreateCampaignDocument = gql`
   mutation CreateCampaign($input: CreateCampaignInput!) {
     createCampaign(createCampaignInput: $input) {
@@ -424,6 +623,8 @@ export const UpdateCampaignDocument = gql`
   mutation UpdateCampaign($input: UpdateCampaignInput!) {
     updateCampaign(updateCampaignInput: $input) {
       id
+      paymentType
+      stripePaymentId
     }
   }
 `;

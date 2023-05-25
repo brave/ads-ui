@@ -4,18 +4,20 @@ import {
   CreateAdSetInput,
   CreateCampaignInput,
   CreateNotificationCreativeInput,
-  CreateTypeInput,
   GeocodeInput,
-  InputMaybe,
-  NotificationPayloadInput,
-  Scalars,
+  PaymentType,
   UpdateAdSetInput,
   UpdateCampaignInput,
   UpdateNotificationCreativeInput,
 } from "graphql/types";
 import axios from "axios";
 import { DocumentNode, print } from "graphql";
-import { CampaignFragment } from "graphql/campaign.generated";
+import {
+  CampaignAdsFragment,
+  CampaignFragment,
+  LoadCampaignAdsDocument,
+  UpdateCampaignDocument,
+} from "graphql/campaign.generated";
 import { CreateAdDocument } from "graphql/ad-set.generated";
 import {
   CreateNotificationCreativeDocument,
@@ -29,6 +31,7 @@ import {
   OS,
   Segment,
 } from "user/views/adsManager/types";
+import { IAdvertiser } from "auth/context/auth.interface";
 
 const TYPE_CODE_LOOKUP: Record<string, string> = {
   notification_all_v1: "Push Notification",
@@ -40,7 +43,7 @@ const TYPE_CODE_LOOKUP: Record<string, string> = {
 
 export async function transformNewForm(
   form: CampaignForm,
-  advertiserId: string,
+  advertiser: IAdvertiser,
   userId?: string
 ): Promise<CreateCampaignInput> {
   const adSets = form.adSets;
@@ -50,7 +53,7 @@ export async function transformNewForm(
     const ads: CreateAdInput[] = [];
 
     for (const ad of adSet.creatives) {
-      const creative = await transformCreative(ad, form, advertiserId, userId);
+      const creative = await transformCreative(ad, form, advertiser, userId);
       ads.push(creative);
     }
 
@@ -76,16 +79,21 @@ export async function transformNewForm(
     endAt: form.endAt,
     geoTargets: form.geoTargets.map((g) => ({ code: g.code, name: g.name })),
     name: form.name,
-    advertiserId: advertiserId,
+    advertiserId: advertiser.id,
     externalId: "",
     format: form.format,
     userId: userId,
     source: "self_serve",
     startAt: form.startAt,
-    state: form.state,
+    state:
+      advertiser.selfServiceSetPrice ||
+      form.paymentType === PaymentType.ManualBat
+        ? "under_review"
+        : form.state,
     type: form.type,
     budget: form.budget,
     adSets: transformedAdSet,
+    paymentType: form.paymentType,
   };
 }
 
@@ -104,17 +112,17 @@ function transformConversion(conv: Conversion[]) {
 async function transformCreative(
   creative: Creative,
   campaign: CampaignForm,
-  advertiserId: string,
+  advertiser: IAdvertiser,
   userId?: string
 ): Promise<CreateAdInput> {
   const notification = creativeInput(
-    advertiserId,
+    advertiser,
     creative,
+    campaign,
     userId
   ) as CreateNotificationCreativeInput;
   const withId = await createNotification(notification);
   return {
-    state: "under_review",
     webhooks: [],
     creativeId: withId,
     prices: [
@@ -126,13 +134,14 @@ async function transformCreative(
   };
 }
 
-function creativeInput(
-  advertiserId: string,
+export function creativeInput(
+  advertiser: IAdvertiser,
   creative: Creative,
+  campaign: CampaignForm,
   userId?: string
 ): CreateNotificationCreativeInput | UpdateNotificationCreativeInput {
   const baseNotification = {
-    advertiserId,
+    advertiserId: advertiser.id,
     userId,
     name: creative.name,
     payload: {
@@ -140,7 +149,11 @@ function creativeInput(
       body: creative.body,
       targetUrl: creative.targetUrl,
     },
-    state: "under_review",
+    state:
+      advertiser.selfServiceSetPrice ||
+      campaign.paymentType !== PaymentType.Netsuite
+        ? "under_review"
+        : "draft",
   };
 
   if (creative.id) {
@@ -187,7 +200,7 @@ async function createNotification(
   return response.data.createNotificationCreative.id;
 }
 
-async function updateNotification(
+export async function updateNotification(
   updateInput: UpdateNotificationCreativeInput
 ) {
   const response = await graphqlRequest<{
@@ -195,6 +208,24 @@ async function updateNotification(
   }>(UpdateNotificationCreativeDocument, { input: updateInput });
 
   return response.data.updateNotificationCreative.id;
+}
+
+export async function updateCampaign(updateInput: UpdateCampaignInput) {
+  const response = await graphqlRequest<{
+    input: UpdateCampaignInput;
+  }>(UpdateCampaignDocument, { input: updateInput });
+
+  return response.data.updateCampaign.id;
+}
+
+export async function loadCampaignAds(
+  id: string
+): Promise<CampaignAdsFragment> {
+  const response = await graphqlRequest<{
+    id: string;
+  }>(LoadCampaignAdsDocument, { id });
+
+  return response.data.campaign;
 }
 
 // TODO: Get rid of this ASAP. Currently necessary because when updating a campaign, it does not take into account any new ads.
@@ -250,13 +281,15 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
     startAt: campaign.startAt,
     state: campaign.state,
     type: "paid",
+    stripePaymentId: campaign.stripePaymentId,
+    paymentType: campaign.paymentType,
   };
 }
 
 export async function transformEditForm(
   form: CampaignForm,
   id: string,
-  advertiserId: string,
+  advertiser: IAdvertiser,
   userId?: string
 ): Promise<UpdateCampaignInput> {
   const transformedAdSet: UpdateAdSetInput[] = [];
@@ -265,15 +298,16 @@ export async function transformEditForm(
     const creatives = adSet.creatives;
     for (const ad of creatives) {
       if (ad.id == null) {
-        const withId = await transformCreative(ad, form, advertiserId, userId);
+        const withId = await transformCreative(ad, form, advertiser, userId);
         await createAd({
           ...withId,
           creativeSetId: adSet.id,
         });
       } else if (ad.state !== "active" && ad.state !== "paused") {
         const notification = creativeInput(
-          advertiserId,
+          advertiser,
           ad,
+          form,
           userId
         ) as UpdateNotificationCreativeInput;
         await updateNotification(notification);

@@ -40,6 +40,7 @@ export default function AgreedModal({ advertiser }: Props) {
   const { setSessionUser } = useAuthContext();
   const history = useHistory();
   const isNewCampaignPage = url.includes("/user/main/adsmanager/advanced");
+  const isCompletePage = url.includes("/user/main/complete/new");
   const newUrl = `/user/main/adsmanager/advanced/new/${moment()
     .utc()
     .valueOf()}`;
@@ -80,7 +81,7 @@ export default function AgreedModal({ advertiser }: Props) {
         size="medium"
         variant="contained"
         sx={{ mr: 5 }}
-        disabled={isNewCampaignPage}
+        disabled={isNewCampaignPage || isCompletePage}
       >
         New Campaign
       </Button>

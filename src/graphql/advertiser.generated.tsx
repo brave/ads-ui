@@ -96,6 +96,7 @@ export type AdvertiserCampaignsFragment = {
     source: Types.CampaignSource;
     type: string;
     format: Types.CampaignFormat;
+    paymentType: Types.PaymentType;
     dayProportion?: number | null;
     adSets: Array<{
       __typename?: "AdSet";
@@ -180,6 +181,7 @@ export type AdvertiserCampaignsQuery = {
       source: Types.CampaignSource;
       type: string;
       format: Types.CampaignFormat;
+      paymentType: Types.PaymentType;
       dayProportion?: number | null;
       adSets: Array<{
         __typename?: "AdSet";
