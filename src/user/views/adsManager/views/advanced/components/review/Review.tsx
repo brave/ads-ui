@@ -6,21 +6,21 @@ import { FormikSubmitButton } from "form/FormikHelpers";
 import { CampaignReview } from "./components/CampaignReview";
 import { AdSetReview } from "./components/AdSetReview";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { PaymentType } from "graphql/types";
 
 interface Props {
   isEdit: boolean;
 }
 
 export function Review({ isEdit }: Props) {
-  const { advertiser } = useAdvertiser();
   const { values, errors, setTouched } = useFormikContext<CampaignForm>();
-  const buttonText = advertiser.selfServiceSetPrice
-    ? "Publish campaign"
-    : "Pay and submit for approval";
-  const updateText =
-    advertiser.selfServiceSetPrice || values.stripePaymentId
-      ? "Update Campaign"
-      : "Pay and submit for approval";
+  const hasPaymentIntent =
+    values.paymentType === PaymentType.Netsuite ||
+    values.paymentType === PaymentType.ManualBat ||
+    values.stripePaymentId;
+  const paymentText = "Make payment & submit for approval";
+  const newCampaignText = hasPaymentIntent ? "Publish Campaign" : paymentText;
+  const updateCampaignText = hasPaymentIntent ? "Update Campaign" : paymentText;
 
   useEffect(() => {
     const toTouch = Object.keys(values)
@@ -43,7 +43,7 @@ export function Review({ isEdit }: Props) {
 
       <FormikSubmitButton
         isCreate={!isEdit}
-        label={isEdit ? updateText : buttonText}
+        label={isEdit ? updateCampaignText : newCampaignText}
       />
     </Box>
   );

@@ -16,7 +16,6 @@ interface Props {
 }
 
 export function BaseForm({ isEdit, draftId }: Props) {
-  const { advertiser } = useAdvertiser();
   const { values } = useFormikContext<CampaignForm>();
   const [value, setValue] = useState(0);
 
@@ -45,11 +44,7 @@ export function BaseForm({ isEdit, draftId }: Props) {
       </Stack>
 
       {value === 0 && (
-        <CampaignFields
-          onNext={() => setValue(value + 1)}
-          isEdit={isEdit}
-          advertiser={advertiser}
-        />
+        <CampaignFields onNext={() => setValue(value + 1)} isEdit={isEdit} />
       )}
 
       {showCard(values) && (

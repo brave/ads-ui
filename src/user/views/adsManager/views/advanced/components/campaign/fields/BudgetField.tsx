@@ -60,6 +60,7 @@ export function BudgetField({ canSetPrice, isEdit }: Props) {
               : undefined
           }
           error={!!errors.budget || !!errors.dailyBudget}
+          disabled={isEdit && !canSetPrice}
         />
 
         {!canSetPrice ? (

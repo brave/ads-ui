@@ -48,7 +48,7 @@ export function NewCampaign() {
   }
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" sx={{ mr: "unset", ml: "unset" }}>
       <Formik
         initialValues={initial}
         onSubmit={(v: CampaignForm, { setSubmitting }) => {

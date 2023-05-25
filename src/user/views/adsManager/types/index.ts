@@ -120,5 +120,5 @@ export const initialCampaign: CampaignForm = {
   state: "draft",
   type: "paid",
   pacingStrategy: CampaignPacingStrategies.ModelV1,
-  paymentType: PaymentType.Netsuite,
+  paymentType: PaymentType.Stripe,
 };

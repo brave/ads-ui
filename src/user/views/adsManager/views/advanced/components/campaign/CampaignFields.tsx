@@ -5,14 +5,15 @@ import { BudgetField } from "./fields/BudgetField";
 import { LocationField } from "./fields/LocationField";
 import { CampaignDateRange } from "components/Campaigns/CampaignDateRange";
 import { IAdvertiser } from "auth/context/auth.interface";
+import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 
 interface Props {
   onNext: () => void;
   isEdit: boolean;
-  advertiser: IAdvertiser;
 }
 
-export function CampaignFields({ onNext, isEdit, advertiser }: Props) {
+export function CampaignFields({ onNext, isEdit }: Props) {
+  const { advertiser } = useAdvertiser();
   return (
     <Card sx={{ p: 2, mt: 2 }}>
       <DetailField />

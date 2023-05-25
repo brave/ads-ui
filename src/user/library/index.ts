@@ -93,7 +93,9 @@ export async function transformNewForm(
     type: form.type,
     budget: form.budget,
     adSets: transformedAdSet,
-    paymentType: form.paymentType,
+    paymentType: advertiser.selfServiceSetPrice
+      ? PaymentType.Netsuite
+      : form.paymentType,
   };
 }
 

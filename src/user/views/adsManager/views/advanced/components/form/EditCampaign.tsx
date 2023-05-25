@@ -52,7 +52,7 @@ export function EditCampaign() {
   const initialValues = editCampaignValues(initialData.campaign);
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" sx={{ mr: "unset", ml: "unset" }}>
       <Formik
         initialValues={initialValues}
         onSubmit={async (v: CampaignForm, { setSubmitting }) => {
