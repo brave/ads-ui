@@ -68,7 +68,7 @@ export function BudgetField({ isEdit }: Props) {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                {values.currency === "USD" ? "$" : "△"}
+                {values.currency === "USD" ? "$" : undefined}
               </InputAdornment>
             ),
             endAdornment: (
@@ -109,8 +109,11 @@ export function BudgetField({ isEdit }: Props) {
 
         {!advertiser.selfServiceSetPrice ? (
           <Typography variant="body2">
-            Pricing type is <strong>{_.upperCase(values.billingType)}</strong>{" "}
-            with a flat rate of <strong>${values.price}</strong>.
+            Campaigns are priced at a flat rate of{" "}
+            <strong>
+              ${values.price} {_.upperCase(values.billingType)}
+            </strong>
+            .
           </Typography>
         ) : (
           <Stack direction="row" spacing={2} alignItems="center">
