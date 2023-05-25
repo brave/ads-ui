@@ -98,10 +98,11 @@ export function BudgetField({ isEdit }: Props) {
             <FormControlLabel value="USD" control={<Radio />} label="USD" />
             <FormControlLabel value="BAT" control={<Radio />} label="BAT" />
           </RadioGroup>
-          {values.paymentType === PaymentType.ManualBat && (
+          {values.paymentType !== PaymentType.Stripe && (
             <FormHelperText>
-              Pre-paying with BAT is a manual process, and if the payment cannot
-              be verified this campaign will not run.
+              Prepayment of the campaign budget is required before your campaign
+              can begin. We will contact you to arrange payment after you submit
+              your campaign for approval.
             </FormHelperText>
           )}
         </FormControl>
