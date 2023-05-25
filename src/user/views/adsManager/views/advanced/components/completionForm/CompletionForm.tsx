@@ -14,7 +14,7 @@ export function CompletionForm() {
   const [clickedSurvey, setClickedSurvey] = useState(false);
 
   return (
-    <Box
+    <Card
       sx={{
         p: 2,
         display: "flex",
@@ -33,7 +33,8 @@ export function CompletionForm() {
       {params.mode === "edit" && (
         <>
           <Typography sx={{ textAlign: "center" }} variant="h6">
-            Your campaign has been updated! <br />
+            Your campaign has been updated and any new creatives will be
+            reviewed by our ads team. <br />
             If you added new Ads, we'll be in contact as soon as they are
             approved and activated. <br />
             Thank you for using Brave Ads!
@@ -96,6 +97,6 @@ export function CompletionForm() {
           </Stack>
         </>
       )}
-    </Box>
+    </Card>
   );
 }
