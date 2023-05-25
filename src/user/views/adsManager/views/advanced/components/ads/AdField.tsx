@@ -23,6 +23,7 @@ import {
 import { UrlResolver } from "components/Url/UrlResolver";
 import logo from "../../../../../../../../brave_logo_icon.png";
 import { Status } from "components/Campaigns/Status";
+import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 
 interface Props {
   index: number;

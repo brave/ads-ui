@@ -28,7 +28,7 @@ export function NewCampaign() {
   const { setDrafts } = useContext(DraftContext);
 
   const initial: CampaignForm = {
-    ...initialCampaign,
+    ...initialCampaign(advertiser),
     draftId: params.draftId,
   };
 
@@ -37,10 +37,7 @@ export function NewCampaign() {
       const campaign = data.createCampaign;
       localStorage.removeItem(params.draftId);
       setDrafts();
-      if (
-        campaign.paymentType === PaymentType.Netsuite ||
-        campaign.paymentType === PaymentType.ManualBat
-      ) {
+      if (campaign.paymentType !== PaymentType.Stripe) {
         history.push("/user/main/complete/new");
       } else {
         replaceSession(data.createCampaign.id);

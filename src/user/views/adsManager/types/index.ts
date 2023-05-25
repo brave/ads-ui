@@ -5,6 +5,7 @@ import {
 } from "graphql/types";
 import { defaultEndDate, defaultStartDate } from "form/DateFieldHelpers";
 import { MIN_PER_CAMPAIGN } from "validation/CampaignSchema";
+import { IAdvertiser } from "auth/context/auth.interface";
 
 export type Billing = "cpm" | "cpc";
 
@@ -99,7 +100,7 @@ export const initialAdSet: AdSetForm = {
   ],
 };
 
-export const initialCampaign: CampaignForm = {
+export const initialCampaign = (advertiser: IAdvertiser): CampaignForm => ({
   startAt: defaultStartDate(),
   endAt: defaultEndDate(),
   validateStart: true,
@@ -120,5 +121,8 @@ export const initialCampaign: CampaignForm = {
   state: "draft",
   type: "paid",
   pacingStrategy: CampaignPacingStrategies.ModelV1,
-  paymentType: PaymentType.Stripe,
-};
+  // TODO: Makes assumption about advertiser with these permissions. Might need to change in the future.
+  paymentType: advertiser.selfServiceSetPrice
+    ? PaymentType.Netsuite
+    : PaymentType.Stripe,
+});

@@ -12,24 +12,19 @@ import { useUser } from "auth/hooks/queries/useUser";
 
 interface Props {
   sessionId: string | null;
-  campaignId: string;
-}
-
-interface Payment {
-  intent: string;
+  campaignId: string | null;
 }
 
 export function useValidateSession(props: Props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
-  const [data, setData] = useState<Payment>();
   const { advertiser } = useAdvertiser();
   const { userId } = useUser();
 
   useEffect(() => {
-    const fetchSession = async (id: string) => {
+    const fetchSession = async (session: string, campaign: string) => {
       const res = await fetch(
-        buildAdServerEndpoint(`/ads/checkout-session?sessionId=${id}`),
+        buildAdServerEndpoint(`/ads/checkout-session?sessionId=${session}`),
         {
           method: "GET",
           mode: "cors",
@@ -42,7 +37,7 @@ export function useValidateSession(props: Props) {
       }
 
       const { paymentIntent } = await res.json();
-      const createdAds = await loadCampaignAds(props.campaignId);
+      const createdAds = await loadCampaignAds(campaign);
 
       for (const adSets of createdAds.adSets) {
         for (const ad of adSets.ads ?? []) {
@@ -57,22 +52,16 @@ export function useValidateSession(props: Props) {
       }
 
       await updateCampaign({
-        id: props.campaignId,
+        id: campaign,
         state: "under_review",
         stripePaymentId: paymentIntent,
         advertiserId: advertiser.id,
       });
-      return { paymentIntent };
     };
 
-    if (props.sessionId) {
+    if (props.sessionId && props.campaignId) {
       setLoading(true);
-      fetchSession(props.sessionId)
-        .then((r) => {
-          setData({
-            intent: r.paymentIntent,
-          });
-        })
+      fetchSession(props.sessionId, props.campaignId)
         .catch((e) => {
           setError(e.message);
         })
@@ -80,7 +69,7 @@ export function useValidateSession(props: Props) {
           setLoading(false);
         });
     }
-  }, [props.sessionId]);
+  }, [props.sessionId, props.campaignId]);
 
-  return { data, loading, error };
+  return { loading, error };
 }

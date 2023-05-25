@@ -101,7 +101,7 @@ function ValidateCampaignButton(props: {
 
   const { loading } = useValidateSession({
     sessionId: session,
-    campaignId: campaign ?? "",
+    campaignId: campaign,
   });
 
   return (

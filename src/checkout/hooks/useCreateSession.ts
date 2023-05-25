@@ -13,6 +13,7 @@ export function useCreateSession() {
         window.location.replace(url);
       })
       .catch((e) => {
+        alert("Unable to create payment session. Please try again.");
         setLoading(false);
       });
   }, []);

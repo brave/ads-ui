@@ -90,10 +90,7 @@ export async function transformNewForm(
     type: form.type,
     budget: form.budget,
     adSets: transformedAdSet,
-    // TODO: Makes assumption about advertiser with these permissions. Might need to change in the future.
-    paymentType: advertiser.selfServiceSetPrice
-      ? PaymentType.Netsuite
-      : form.paymentType,
+    paymentType: form.paymentType,
   };
 }
 
@@ -150,10 +147,7 @@ export function creativeInput(
       targetUrl: creative.targetUrl,
     },
     state:
-      campaign.paymentType === PaymentType.Netsuite ||
-      campaign.paymentType === PaymentType.ManualBat
-        ? "under_review"
-        : "draft",
+      campaign.paymentType !== PaymentType.Stripe ? "under_review" : "draft",
   };
 
   if (creative.id) {
@@ -303,7 +297,11 @@ export async function transformEditForm(
           ...withId,
           creativeSetId: adSet.id,
         });
-      } else if (ad.state !== "active" && ad.state !== "paused") {
+      } else if (
+        ad.state !== "active" &&
+        ad.state !== "paused" &&
+        ad.state !== "complete"
+      ) {
         const notification = creativeInput(
           advertiser,
           ad,
