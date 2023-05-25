@@ -36,7 +36,6 @@ export function UserMenu() {
             history.push("/user/main/settings");
             setAnchorEl(null);
           }}
-          sx={{ pl: 20, pr: 20, pt: 3, pb: 3 }}
         >
           Settings
         </MenuItem>
@@ -45,7 +44,6 @@ export function UserMenu() {
             signOut();
             setAnchorEl(null);
           }}
-          sx={{ pl: 20, pr: 20, pt: 3, pb: 3 }}
         >
           Sign Out
         </MenuItem>
