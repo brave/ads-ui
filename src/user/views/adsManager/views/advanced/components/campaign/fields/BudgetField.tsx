@@ -3,6 +3,7 @@ import {
   Divider,
   FormControl,
   FormControlLabel,
+  FormHelperText,
   FormLabel,
   InputAdornment,
   Radio,
@@ -10,10 +11,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import {
-  FormikRadioControl,
-  FormikTextField,
-} from "form/FormikHelpers";
+import { FormikRadioControl, FormikTextField } from "form/FormikHelpers";
 import React, { useEffect, useState } from "react";
 import { useFormikContext } from "formik";
 import { CampaignForm } from "../../../../../types";
@@ -27,7 +25,6 @@ interface Props {
   canSetPrice: boolean;
   isEdit: boolean;
 }
-
 
 export function BudgetField({ isEdit }: Props) {
   const { advertiser } = useAdvertiser();
@@ -69,7 +66,11 @@ export function BudgetField({ isEdit }: Props) {
           margin="none"
           type="number"
           InputProps={{
-            startAdornment: <InputAdornment position="start">$</InputAdornment>,
+            startAdornment: (
+              <InputAdornment position="start">
+                {values.currency === "USD" ? "$" : "△"}
+              </InputAdornment>
+            ),
             endAdornment: (
               <InputAdornment position="end">{values.currency}</InputAdornment>
             ),
@@ -97,14 +98,18 @@ export function BudgetField({ isEdit }: Props) {
             <FormControlLabel value="USD" control={<Radio />} label="USD" />
             <FormControlLabel value="BAT" control={<Radio />} label="BAT" />
           </RadioGroup>
+          {values.paymentType === PaymentType.ManualBat && (
+            <FormHelperText>
+              Pre-paying with BAT is a manual process, and if the payment cannot
+              be verified this campaign will not run.
+            </FormHelperText>
+          )}
         </FormControl>
 
         {!advertiser.selfServiceSetPrice ? (
           <Typography variant="body2">
             Pricing type is <strong>{_.upperCase(values.billingType)}</strong>{" "}
-            with a flat rate of <strong>${values.price}</strong>. Pre-paying
-            with BAT is a manual process, and if the payment cannot be verified this
-            campaign will not run.
+            with a flat rate of <strong>${values.price}</strong>.
           </Typography>
         ) : (
           <Stack direction="row" spacing={2} alignItems="center">
