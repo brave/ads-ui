@@ -36,8 +36,7 @@ export function EditCampaign() {
       const campaign = initialData?.campaign;
       if (
         campaign?.stripePaymentId ||
-        campaign?.paymentType === PaymentType.Netsuite ||
-        campaign?.paymentType === PaymentType.ManualBat
+        campaign?.paymentType !== PaymentType.Stripe
       ) {
         history.push("/user/main/complete/edit");
       } else {
