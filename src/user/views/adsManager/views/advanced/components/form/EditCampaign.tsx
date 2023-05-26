@@ -3,7 +3,11 @@ import { Formik } from "formik";
 import React from "react";
 import { CampaignForm } from "../../../../types";
 import { CampaignSchema } from "validation/CampaignSchema";
-import { editCampaignValues, transformEditForm } from "user/library";
+import {
+  editCampaignValues,
+  populateFilter,
+  transformEditForm,
+} from "user/library";
 import {
   useLoadCampaignQuery,
   useUpdateCampaignMutation,
@@ -14,6 +18,7 @@ import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useUser } from "auth/hooks/queries/useUser";
 import { useCreateSession } from "checkout/hooks/useCreateSession";
 import { PaymentType } from "graphql/types";
+import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
 
 interface Params {
   campaignId: string;
@@ -36,6 +41,14 @@ export function EditCampaign({ fromDate }: Props) {
   });
 
   const [mutation] = useUpdateCampaignMutation({
+    refetchQueries: [
+      {
+        ...refetchAdvertiserCampaignsQuery({
+          id: advertiser.id,
+          filter: populateFilter(fromDate),
+        }),
+      },
+    ],
     onCompleted(data) {
       const campaign = initialData?.campaign;
       if (

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { useHistory, useParams } from "react-router-dom";
-import { Box, Button, Container, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import present from "../../../../../../../../present.png";
 import { LoadingButton } from "@mui/lab";
 import { useValidateSession } from "checkout/hooks/useValidateSession";

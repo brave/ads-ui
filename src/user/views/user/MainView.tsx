@@ -25,8 +25,7 @@ export function MainView({ fromDate, onSetDate }: Props) {
       id: window.localStorage.getItem("activeAdvertiser") ?? "",
       filter: populateFilter(fromDate),
     },
-    pollInterval: 300_000,
-    fetchPolicy: "cache-and-network",
+    pollInterval: 600_000,
   });
 
   const tabs = [
