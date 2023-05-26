@@ -121,8 +121,5 @@ export const initialCampaign = (advertiser: IAdvertiser): CampaignForm => ({
   state: "draft",
   type: "paid",
   pacingStrategy: CampaignPacingStrategies.ModelV1,
-  // TODO: Makes assumption about advertiser with these permissions. Might need to change in the future.
-  paymentType: advertiser.selfServiceSetPrice
-    ? PaymentType.Netsuite
-    : PaymentType.Stripe,
+  paymentType: advertiser.selfServicePaymentType,
 });

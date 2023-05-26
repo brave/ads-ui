@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import present from "../../../../../../../../present.png";
 import { LoadingButton } from "@mui/lab";
-import { useValidateSession } from "checkout/hooks/useValidateSession";
+import { useValidatePaymentSession } from "checkout/hooks/useValidatePaymentSession";
 
 interface Params {
   mode: "edit" | "new";
@@ -99,7 +99,7 @@ function ValidateCampaignButton(props: {
   const session = searchParams.get("sessionId");
   const campaign = searchParams.get("referenceId");
 
-  const { loading } = useValidateSession({
+  const { loading } = useValidatePaymentSession({
     sessionId: session,
     campaignId: campaign,
   });

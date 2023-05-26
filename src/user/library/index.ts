@@ -5,7 +5,6 @@ import {
   CreateCampaignInput,
   CreateNotificationCreativeInput,
   GeocodeInput,
-  PaymentType,
   UpdateAdSetInput,
   UpdateCampaignInput,
   UpdateNotificationCreativeInput,
@@ -84,8 +83,7 @@ export async function transformNewForm(
     userId: userId,
     source: "self_serve",
     startAt: form.startAt,
-    state:
-      form.paymentType !== PaymentType.Stripe ? "under_review" : form.state,
+    state: form.state,
     type: form.type,
     budget: form.budget,
     adSets: transformedAdSet,
@@ -114,7 +112,6 @@ async function transformCreative(
   const notification = creativeInput(
     advertiserId,
     creative,
-    campaign,
     userId
   ) as CreateNotificationCreativeInput;
   const withId = await createNotification(notification);
@@ -133,7 +130,6 @@ async function transformCreative(
 function creativeInput(
   advertiserId: string,
   creative: Creative,
-  campaign: CampaignForm,
   userId?: string
 ): CreateNotificationCreativeInput | UpdateNotificationCreativeInput {
   const baseNotification = {
@@ -145,8 +141,7 @@ function creativeInput(
       body: creative.body,
       targetUrl: creative.targetUrl,
     },
-    state:
-      campaign.paymentType !== PaymentType.Stripe ? "under_review" : "draft",
+    state: creative.state,
   };
 
   if (creative.id) {
@@ -193,7 +188,7 @@ async function createNotification(
   return response.data.createNotificationCreative.id;
 }
 
-export async function updateNotification(
+async function updateNotification(
   updateInput: UpdateNotificationCreativeInput
 ) {
   const response = await graphqlRequest<{
@@ -201,24 +196,6 @@ export async function updateNotification(
   }>(UpdateNotificationCreativeDocument, { input: updateInput });
 
   return response.data.updateNotificationCreative.id;
-}
-
-export async function updateCampaign(updateInput: UpdateCampaignInput) {
-  const response = await graphqlRequest<{
-    input: UpdateCampaignInput;
-  }>(UpdateCampaignDocument, { input: updateInput });
-
-  return response.data.updateCampaign.id;
-}
-
-export async function loadCampaignAds(
-  id: string
-): Promise<CampaignAdsFragment> {
-  const response = await graphqlRequest<{
-    id: string;
-  }>(LoadCampaignAdsDocument, { id });
-
-  return response.data.campaign;
 }
 
 // TODO: Get rid of this ASAP. Currently necessary because when updating a campaign, it does not take into account any new ads.
@@ -304,7 +281,6 @@ export async function transformEditForm(
         const notification = creativeInput(
           advertiserId,
           ad,
-          form,
           userId
         ) as UpdateNotificationCreativeInput;
         await updateNotification(notification);

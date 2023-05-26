@@ -1,6 +1,6 @@
 import { buildAdServerEndpoint } from "util/environment";
 
-export async function createSession(
+export async function createPaymentSession(
   advertiserId: string,
   campaignId: string
 ): Promise<string> {

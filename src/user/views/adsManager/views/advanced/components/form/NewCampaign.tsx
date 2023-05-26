@@ -11,7 +11,7 @@ import { PersistFormValues } from "form/PersistFormValues";
 import { DraftContext } from "state/context";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useUser } from "auth/hooks/queries/useUser";
-import { useCreateSession } from "checkout/hooks/useCreateSession";
+import { useCreatePaymentSession } from "checkout/hooks/useCreatePaymentSession";
 import { PaymentType } from "graphql/types";
 import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
 
@@ -28,7 +28,7 @@ export function NewCampaign({ fromDate }: Props) {
   const params = useParams<Params>();
   const { advertiser } = useAdvertiser();
   const { userId } = useUser();
-  const { replaceSession, loading } = useCreateSession();
+  const { createPaymentSession, loading } = useCreatePaymentSession();
 
   const { setDrafts } = useContext(DraftContext);
 
@@ -53,7 +53,7 @@ export function NewCampaign({ fromDate }: Props) {
       if (campaign.paymentType !== PaymentType.Stripe) {
         history.push("/user/main/complete/new");
       } else {
-        replaceSession(data.createCampaign.id);
+        createPaymentSession(data.createCampaign.id);
       }
     },
   });

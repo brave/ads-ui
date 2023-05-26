@@ -16,7 +16,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { BaseForm } from "./components/BaseForm";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useUser } from "auth/hooks/queries/useUser";
-import { useCreateSession } from "checkout/hooks/useCreateSession";
+import { useCreatePaymentSession } from "checkout/hooks/useCreatePaymentSession";
 import { PaymentType } from "graphql/types";
 import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
 
@@ -33,7 +33,7 @@ export function EditCampaign({ fromDate }: Props) {
   const { userId } = useUser();
   const history = useHistory();
   const params = useParams<Params>();
-  const { replaceSession, loading } = useCreateSession();
+  const { createPaymentSession, loading } = useCreatePaymentSession();
 
   const { data: initialData, loading: qLoading } = useLoadCampaignQuery({
     variables: { id: params.campaignId },
@@ -57,7 +57,7 @@ export function EditCampaign({ fromDate }: Props) {
       ) {
         history.push("/user/main/complete/edit");
       } else {
-        replaceSession(data.updateCampaign.id);
+        createPaymentSession(data.updateCampaign.id);
       }
     },
   });
