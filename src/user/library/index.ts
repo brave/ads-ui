@@ -5,18 +5,14 @@ import {
   CreateCampaignInput,
   CreateNotificationCreativeInput,
   GeocodeInput,
+  PaymentType,
   UpdateAdSetInput,
   UpdateCampaignInput,
   UpdateNotificationCreativeInput,
 } from "graphql/types";
 import axios from "axios";
 import { DocumentNode, print } from "graphql";
-import {
-  CampaignAdsFragment,
-  CampaignFragment,
-  LoadCampaignAdsDocument,
-  UpdateCampaignDocument,
-} from "graphql/campaign.generated";
+import { CampaignFragment } from "graphql/campaign.generated";
 import { CreateAdDocument } from "graphql/ad-set.generated";
 import {
   CreateNotificationCreativeDocument,
@@ -75,6 +71,7 @@ export async function transformNewForm(
     dailyCap: form.dailyCap,
     dailyBudget: form.dailyBudget,
     endAt: form.endAt,
+    pacingStrategy: form.pacingStrategy,
     geoTargets: form.geoTargets.map((g) => ({ code: g.code, name: g.name })),
     name: form.name,
     advertiserId,
@@ -87,7 +84,7 @@ export async function transformNewForm(
     type: form.type,
     budget: form.budget,
     adSets: transformedAdSet,
-    paymentType: form.paymentType,
+    paymentType: form.paymentType.toUpperCase() as PaymentType,
   };
 }
 
