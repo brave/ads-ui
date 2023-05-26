@@ -31,7 +31,6 @@ import {
   OS,
   Segment,
 } from "user/views/adsManager/types";
-import { IAdvertiser } from "auth/context/auth.interface";
 
 const TYPE_CODE_LOOKUP: Record<string, string> = {
   notification_all_v1: "Push Notification",
