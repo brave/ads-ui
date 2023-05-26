@@ -25,3 +25,23 @@ export async function createPaymentSession(
     throw Error("no session created");
   }
 }
+
+export async function fetchPaymentSession(
+  sessionId: string,
+  campaignId: string
+): Promise<void> {
+  const res = await fetch(
+    buildAdServerEndpoint(
+      `/ads/checkout-session?sessionId=${sessionId}&referenceId=${campaignId}`
+    ),
+    {
+      method: "PUT",
+      mode: "cors",
+      credentials: "include",
+    }
+  );
+
+  if (res.status !== 200) {
+    throw new Error("invalid session");
+  }
+}

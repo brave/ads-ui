@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { buildAdServerEndpoint } from "util/environment";
+import { fetchPaymentSession } from "checkout/lib";
 
 interface Props {
   sessionId: string | null;
@@ -11,26 +12,9 @@ export function useValidatePaymentSession(props: Props) {
   const [error, setError] = useState<string>();
 
   useEffect(() => {
-    const fetchSession = async (session: string, campaign: string) => {
-      const res = await fetch(
-        buildAdServerEndpoint(
-          `/ads/checkout-session?sessionId=${session}&referenceId=${campaign}`
-        ),
-        {
-          method: "PUT",
-          mode: "cors",
-          credentials: "include",
-        }
-      );
-
-      if (res.status !== 200) {
-        throw new Error("invalid session");
-      }
-    };
-
     if (props.sessionId && props.campaignId) {
       setLoading(true);
-      fetchSession(props.sessionId, props.campaignId)
+      fetchPaymentSession(props.sessionId, props.campaignId)
         .catch((e) => {
           setError(e.message);
         })
