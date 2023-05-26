@@ -66,10 +66,17 @@ export function NewCampaign() {
         }}
         validationSchema={CampaignSchema}
       >
-        <>
-          <BaseForm isEdit={false} draftId={params.draftId} />
-          <PersistFormValues id={params.draftId} />
-        </>
+        {({ values }) => (
+          <>
+            <BaseForm
+              isEdit={false}
+              values={values}
+              advertiser={advertiser}
+              draftId={params.draftId}
+            />
+            <PersistFormValues id={params.draftId} />
+          </>
+        )}
       </Formik>
     </Container>
   );

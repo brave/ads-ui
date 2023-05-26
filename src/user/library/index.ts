@@ -336,6 +336,24 @@ export async function transformEditForm(
   };
 }
 
+export function updateCampaignState(
+  c: CampaignFragment,
+  state: string
+): UpdateCampaignInput {
+  return {
+    budget: c.budget,
+    currency: c.currency,
+    dailyBudget: c.dailyBudget,
+    dailyCap: c.dailyCap,
+    endAt: c.endAt,
+    id: c.id,
+    name: c.name,
+    startAt: c.startAt,
+    state,
+    type: c.type,
+  };
+}
+
 export function uiTextForCreativeType(creativeType: string): string {
   return TYPE_CODE_LOOKUP[creativeType] ?? creativeType;
 }
