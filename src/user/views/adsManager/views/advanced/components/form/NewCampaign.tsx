@@ -55,7 +55,7 @@ export function NewCampaign() {
         initialValues={initial}
         onSubmit={(v: CampaignForm, { setSubmitting }) => {
           setSubmitting(true);
-          transformNewForm(v, advertiser, userId)
+          transformNewForm(v, advertiser.id, userId)
             .then(async (c) => {
               return await mutation({ variables: { input: c } });
             })

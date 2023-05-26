@@ -57,18 +57,14 @@ export function EditCampaign() {
         initialValues={initialValues}
         onSubmit={async (v: CampaignForm, { setSubmitting }) => {
           setSubmitting(true);
-          try {
-            const transform = await transformEditForm(
-              v,
-              params.campaignId,
-              advertiser,
-              userId
-            );
-            await mutation({ variables: { input: transform } });
-          } catch (e) {
-            alert("Unable to update Campaign");
-            setSubmitting(false);
-          }
+          transformEditForm(v, params.campaignId, advertiser.id, userId)
+            .then(async (u) => {
+              return await mutation({ variables: { input: u } });
+            })
+            .catch((e) => {
+              alert("Unable to update Campaign");
+              setSubmitting(false);
+            });
         }}
         validationSchema={CampaignSchema}
       >

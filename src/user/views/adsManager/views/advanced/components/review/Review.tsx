@@ -44,6 +44,7 @@ export function Review({ isEdit }: Props) {
       <FormikSubmitButton
         isCreate={!isEdit}
         label={isEdit ? updateCampaignText : newCampaignText}
+        allowNavigation={true}
       />
     </Box>
   );

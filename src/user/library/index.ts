@@ -43,7 +43,7 @@ const TYPE_CODE_LOOKUP: Record<string, string> = {
 
 export async function transformNewForm(
   form: CampaignForm,
-  advertiser: IAdvertiser,
+  advertiserId: string,
   userId?: string
 ): Promise<CreateCampaignInput> {
   const adSets = form.adSets;
@@ -53,7 +53,7 @@ export async function transformNewForm(
     const ads: CreateAdInput[] = [];
 
     for (const ad of adSet.creatives) {
-      const creative = await transformCreative(ad, form, advertiser, userId);
+      const creative = await transformCreative(ad, form, advertiserId, userId);
       ads.push(creative);
     }
 
@@ -79,7 +79,7 @@ export async function transformNewForm(
     endAt: form.endAt,
     geoTargets: form.geoTargets.map((g) => ({ code: g.code, name: g.name })),
     name: form.name,
-    advertiserId: advertiser.id,
+    advertiserId,
     externalId: "",
     format: form.format,
     userId: userId,
@@ -109,11 +109,11 @@ function transformConversion(conv: Conversion[]) {
 async function transformCreative(
   creative: Creative,
   campaign: CampaignForm,
-  advertiser: IAdvertiser,
+  advertiserId: string,
   userId?: string
 ): Promise<CreateAdInput> {
   const notification = creativeInput(
-    advertiser,
+    advertiserId,
     creative,
     campaign,
     userId
@@ -132,13 +132,13 @@ async function transformCreative(
 }
 
 export function creativeInput(
-  advertiser: IAdvertiser,
+  advertiserId: string,
   creative: Creative,
   campaign: CampaignForm,
   userId?: string
 ): CreateNotificationCreativeInput | UpdateNotificationCreativeInput {
   const baseNotification = {
-    advertiserId: advertiser.id,
+    advertiserId,
     userId,
     name: creative.name,
     payload: {
@@ -283,7 +283,7 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
 export async function transformEditForm(
   form: CampaignForm,
   id: string,
-  advertiser: IAdvertiser,
+  advertiserId: string,
   userId?: string
 ): Promise<UpdateCampaignInput> {
   const transformedAdSet: UpdateAdSetInput[] = [];
@@ -292,7 +292,7 @@ export async function transformEditForm(
     const creatives = adSet.creatives;
     for (const ad of creatives) {
       if (ad.id == null) {
-        const withId = await transformCreative(ad, form, advertiser, userId);
+        const withId = await transformCreative(ad, form, advertiserId, userId);
         await createAd({
           ...withId,
           creativeSetId: adSet.id,
@@ -303,7 +303,7 @@ export async function transformEditForm(
         ad.state !== "complete"
       ) {
         const notification = creativeInput(
-          advertiser,
+          advertiserId,
           ad,
           form,
           userId
