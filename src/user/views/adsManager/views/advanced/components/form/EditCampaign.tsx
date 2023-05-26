@@ -55,7 +55,7 @@ export function EditCampaign() {
     <Container maxWidth="xl">
       <Formik
         initialValues={initialValues}
-        onSubmit={async (v: CampaignForm, { setSubmitting }) => {
+        onSubmit={(v: CampaignForm, { setSubmitting }) => {
           setSubmitting(true);
           transformEditForm(v, params.campaignId, advertiser.id, userId)
             .then(async (u) => {
