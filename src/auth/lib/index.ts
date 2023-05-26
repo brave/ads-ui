@@ -1,5 +1,6 @@
 import { UserFragment } from "graphql/user.generated";
 import { AdvertiserFragment } from "graphql/advertiser.generated";
+import { PaymentType } from "graphql/types";
 
 const url = import.meta.env.REACT_APP_SERVER_ADDRESS.replace("v1", "v2");
 
@@ -11,7 +12,7 @@ export type Advertiser = Pick<
   | "id"
   | "name"
   | "publicKey"
->;
+> & { selfServicePaymentType: PaymentType };
 
 export type ResponseUser = UserFragment & { advertisers: Advertiser[] };
 
