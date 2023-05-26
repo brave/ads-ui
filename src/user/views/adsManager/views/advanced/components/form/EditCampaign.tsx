@@ -19,7 +19,11 @@ interface Params {
   campaignId: string;
 }
 
-export function EditCampaign() {
+interface Props {
+  fromDate: Date | null;
+}
+
+export function EditCampaign({ fromDate }: Props) {
   const { advertiser } = useAdvertiser();
   const { userId } = useUser();
   const history = useHistory();

@@ -18,7 +18,11 @@ interface Params {
   draftId: string;
 }
 
-export function NewCampaign() {
+interface Props {
+  fromDate: Date | null;
+}
+
+export function NewCampaign({ fromDate }: Props) {
   const history = useHistory();
   const params = useParams<Params>();
   const { advertiser } = useAdvertiser();

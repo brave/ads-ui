@@ -45,11 +45,11 @@ export function User() {
             <Switch>
               {/* /adsmanager */}
               <Route path={`/user/main/adsmanager/advanced/new/:draftId`}>
-                <NewCampaign />
+                <NewCampaign fromDate={fromDateFilter} />
               </Route>
 
               <Route path={`/user/main/adsmanager/advanced/:campaignId`}>
-                <EditCampaign />
+                <EditCampaign fromDate={fromDateFilter} />
               </Route>
 
               <Route path={`/user/main/complete/:mode`}>
