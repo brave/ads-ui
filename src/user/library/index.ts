@@ -130,7 +130,7 @@ async function transformCreative(
   };
 }
 
-export function creativeInput(
+function creativeInput(
   advertiserId: string,
   creative: Creative,
   campaign: CampaignForm,

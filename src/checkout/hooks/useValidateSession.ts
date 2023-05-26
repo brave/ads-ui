@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { buildAdServerEndpoint } from "util/environment";
 import {
-  creativeInput,
   loadCampaignAds,
   updateCampaign,
   updateNotification,
