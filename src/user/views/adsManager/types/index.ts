@@ -100,26 +100,28 @@ export const initialAdSet: AdSetForm = {
   ],
 };
 
-export const initialCampaign = (advertiser: IAdvertiser): CampaignForm => ({
-  startAt: defaultStartDate(),
-  endAt: defaultEndDate(),
-  validateStart: true,
-  budget: MIN_PER_CAMPAIGN,
-  currency: "USD",
-  dailyBudget: MIN_PER_CAMPAIGN,
-  dailyCap: 1,
-  geoTargets: [],
-  billingType: "cpm",
-  price: 6,
-  adSets: [
-    {
-      ...initialAdSet,
-    },
-  ],
-  format: CampaignFormat.PushNotification,
-  name: "",
-  state: "draft",
-  type: "paid",
-  pacingStrategy: CampaignPacingStrategies.ModelV1,
-  paymentType: advertiser.selfServicePaymentType,
-});
+export const initialCampaign = (advertiser: IAdvertiser): CampaignForm => {
+  return {
+    startAt: defaultStartDate(),
+    endAt: defaultEndDate(),
+    validateStart: true,
+    budget: MIN_PER_CAMPAIGN,
+    currency: "USD",
+    dailyBudget: MIN_PER_CAMPAIGN,
+    dailyCap: 1,
+    geoTargets: [],
+    billingType: "cpm",
+    price: 6,
+    adSets: [
+      {
+        ...initialAdSet,
+      },
+    ],
+    format: CampaignFormat.PushNotification,
+    name: "",
+    state: "draft",
+    type: "paid",
+    pacingStrategy: CampaignPacingStrategies.ModelV1,
+    paymentType: advertiser.selfServicePaymentType,
+  };
+};

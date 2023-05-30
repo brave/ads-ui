@@ -108,8 +108,10 @@ export function BudgetField({ isEdit }: Props) {
           </Typography>
           <Typography variant="body2">
             Prepayment of the campaign budget is required before your campaign
-            can begin. We will contact you to arrange payment after you submit
-            your campaign for approval.
+            can begin.{" "}
+            {values.paymentType !== PaymentType.Stripe
+              ? "We will contact you to arrange payment after you submit your campaign for approval."
+              : ""}
           </Typography>
           <FormikRadioControl
             disabled={isEdit}

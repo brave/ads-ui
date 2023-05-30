@@ -84,7 +84,7 @@ export async function transformNewForm(
     type: form.type,
     budget: form.budget,
     adSets: transformedAdSet,
-    paymentType: form.paymentType.toUpperCase() as PaymentType,
+    paymentType: form.paymentType,
   };
 }
 
