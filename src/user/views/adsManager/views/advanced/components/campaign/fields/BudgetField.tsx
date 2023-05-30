@@ -65,7 +65,7 @@ export function BudgetField({ isEdit }: Props) {
               : undefined
           }
           error={!!errors.budget || !!errors.dailyBudget}
-          disabled={isEdit && !canSetPrice}
+          disabled={isEdit && !advertiser.selfServiceSetPrice}
         />
 
         {!advertiser.selfServiceSetPrice ? (
@@ -115,7 +115,7 @@ export function BudgetField({ isEdit }: Props) {
             disabled={isEdit}
             name="paymentType"
             options={[
-              { label: "USD", value: PaymentType.Netsuite },
+              { label: "USD", value: advertiser.selfServicePaymentType },
               { label: "BAT", value: PaymentType.ManualBat },
             ]}
           />

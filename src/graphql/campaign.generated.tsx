@@ -28,7 +28,6 @@ export type CampaignFragment = {
   paymentType: Types.PaymentType;
   dayProportion?: number | null;
   stripePaymentId?: string | null;
-  paymentType: Types.PaymentType;
   geoTargets?: Array<{
     __typename?: "Geocode";
     code: string;
@@ -103,7 +102,6 @@ export type CampaignSummaryFragment = {
   source: Types.CampaignSource;
   type: string;
   format: Types.CampaignFormat;
-  paymentType: Types.PaymentType;
   dayProportion?: number | null;
   adSets: Array<{
     __typename?: "AdSet";
@@ -234,7 +232,6 @@ export type LoadCampaignQuery = {
     paymentType: Types.PaymentType;
     dayProportion?: number | null;
     stripePaymentId?: string | null;
-    paymentType: Types.PaymentType;
     geoTargets?: Array<{
       __typename?: "Geocode";
       code: string;
