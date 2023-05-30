@@ -114,8 +114,8 @@ export function BudgetField({ isEdit }: Props) {
             disabled={isEdit}
             name="paymentType"
             options={[
-              { label: "BAT", value: PaymentType.ManualBat },
               { label: "USD", value: PaymentType.Netsuite },
+              { label: "BAT", value: PaymentType.ManualBat },
             ]}
           />
         </Stack>
