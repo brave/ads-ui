@@ -90,6 +90,7 @@ export type AnalyticOverviewQuery = {
     source: Types.CampaignSource;
     type: string;
     format: Types.CampaignFormat;
+    paymentType: Types.PaymentType;
     dayProportion?: number | null;
     engagements?: Array<{
       __typename?: "Engagement";
