@@ -1,16 +1,4 @@
-import {
-  Box,
-  Divider,
-  FormControl,
-  FormControlLabel,
-  FormHelperText,
-  FormLabel,
-  InputAdornment,
-  Radio,
-  RadioGroup,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Divider, InputAdornment, Stack, Typography } from "@mui/material";
 import { FormikRadioControl, FormikTextField } from "form/FormikHelpers";
 import React, { useEffect, useState } from "react";
 import { useFormikContext } from "formik";
@@ -66,11 +54,7 @@ export function BudgetField({ isEdit }: Props) {
           margin="none"
           type="number"
           InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                {values.currency === "USD" ? "$" : undefined}
-              </InputAdornment>
-            ),
+            startAdornment: <InputAdornment position="start">$</InputAdornment>,
             endAdornment: (
               <InputAdornment position="end">{values.currency}</InputAdornment>
             ),
@@ -82,30 +66,6 @@ export function BudgetField({ isEdit }: Props) {
           }
           error={!!errors.budget || !!errors.dailyBudget}
         />
-
-        <FormControl disabled={isEdit}>
-          <FormLabel>Currency</FormLabel>
-          <RadioGroup
-            row
-            value={values.currency}
-            onChange={(event, value) => {
-              setFieldValue("currency", value);
-              const payment =
-                value === "USD" ? PaymentType.Netsuite : PaymentType.ManualBat;
-              setFieldValue("paymentType", payment);
-            }}
-          >
-            <FormControlLabel value="USD" control={<Radio />} label="USD" />
-            <FormControlLabel value="BAT" control={<Radio />} label="BAT" />
-          </RadioGroup>
-          {values.paymentType !== PaymentType.Stripe && (
-            <FormHelperText>
-              Prepayment of the campaign budget is required before your campaign
-              can begin. We will contact you to arrange payment after you submit
-              your campaign for approval.
-            </FormHelperText>
-          )}
-        </FormControl>
 
         {!advertiser.selfServiceSetPrice ? (
           <Typography variant="body2">
@@ -140,6 +100,24 @@ export function BudgetField({ isEdit }: Props) {
             />
           </Stack>
         )}
+
+        <Stack spacing={1}>
+          <Typography variant="subtitle1" sx={{ fontWeight: 500, mt: 1 }}>
+            Payment Method
+          </Typography>
+          <Typography variant="body2">
+            Prepayment of the campaign budget is required before your campaign
+            can begin. We will contact you to arrange payment after you submit
+            your campaign for approval.
+          </Typography>
+          <FormikRadioControl
+            name="paymentType"
+            options={[
+              { label: "BAT", value: PaymentType.ManualBat },
+              { label: "USD", value: PaymentType.Netsuite },
+            ]}
+          />
+        </Stack>
       </Stack>
     </Box>
   );
