@@ -5,7 +5,6 @@ import React, { useEffect } from "react";
 import { FormikSubmitButton } from "form/FormikHelpers";
 import { CampaignReview } from "./components/CampaignReview";
 import { AdSetReview } from "./components/AdSetReview";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { PaymentType } from "graphql/types";
 
 interface Props {
@@ -15,9 +14,7 @@ interface Props {
 export function Review({ isEdit }: Props) {
   const { values, errors, setTouched } = useFormikContext<CampaignForm>();
   const hasPaymentIntent =
-    values.paymentType === PaymentType.Netsuite ||
-    values.paymentType === PaymentType.ManualBat ||
-    values.stripePaymentId;
+    values.paymentType !== PaymentType.Stripe || values.stripePaymentId;
   const paymentText = "Make payment & submit for approval";
 
   useEffect(() => {
