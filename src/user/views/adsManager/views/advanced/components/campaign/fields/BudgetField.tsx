@@ -111,6 +111,7 @@ export function BudgetField({ isEdit }: Props) {
             your campaign for approval.
           </Typography>
           <FormikRadioControl
+            disabled={isEdit}
             name="paymentType"
             options={[
               { label: "BAT", value: PaymentType.ManualBat },
