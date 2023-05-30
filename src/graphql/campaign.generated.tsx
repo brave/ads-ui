@@ -25,6 +25,7 @@ export type CampaignFragment = {
   source: Types.CampaignSource;
   type: string;
   format: Types.CampaignFormat;
+  paymentType: Types.PaymentType;
   dayProportion?: number | null;
   stripePaymentId?: string | null;
   paymentType: Types.PaymentType;
@@ -93,6 +94,7 @@ export type CampaignSummaryFragment = {
   externalId: string;
   currency: string;
   budget: number;
+  paymentType: Types.PaymentType;
   dailyBudget: number;
   spent: number;
   createdAt: any;
@@ -229,6 +231,7 @@ export type LoadCampaignQuery = {
     source: Types.CampaignSource;
     type: string;
     format: Types.CampaignFormat;
+    paymentType: Types.PaymentType;
     dayProportion?: number | null;
     stripePaymentId?: string | null;
     paymentType: Types.PaymentType;
@@ -392,6 +395,7 @@ export const CampaignFragmentDoc = gql`
     source
     type
     format
+    paymentType
     dayProportion
     stripePaymentId
     paymentType
@@ -418,6 +422,7 @@ export const CampaignSummaryFragmentDoc = gql`
     externalId
     currency
     budget
+    paymentType
     dailyBudget
     spent
     createdAt

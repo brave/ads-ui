@@ -19,8 +19,6 @@ export function Review({ isEdit }: Props) {
     values.paymentType === PaymentType.ManualBat ||
     values.stripePaymentId;
   const paymentText = "Make payment & submit for approval";
-  const newCampaignText = hasPaymentIntent ? "Publish Campaign" : paymentText;
-  const updateCampaignText = hasPaymentIntent ? "Update Campaign" : paymentText;
 
   useEffect(() => {
     const toTouch = Object.keys(values)
@@ -43,7 +41,11 @@ export function Review({ isEdit }: Props) {
 
       <FormikSubmitButton
         isCreate={!isEdit}
-        label={isEdit ? updateCampaignText : newCampaignText}
+        label={
+          hasPaymentIntent
+            ? `${isEdit ? "Update" : "Create"} & Submit For Approval`
+            : paymentText
+        }
         allowNavigation={true}
       />
     </Box>
