@@ -1,12 +1,6 @@
 import React from "react";
 import { EnhancedTable, StandardRenderers } from "components/EnhancedTable";
-import {
-  IconButton,
-  LinearProgress,
-  Link,
-  Stack,
-  Tooltip,
-} from "@mui/material";
+import { IconButton, Link, Stack, Tooltip } from "@mui/material";
 import {
   campaignOnOffState,
   renderMonetaryAmount,
@@ -17,6 +11,7 @@ import { Status } from "components/Campaigns/Status";
 import { isAfterEndDate } from "util/isAfterEndDate";
 import { CampaignFormat, CampaignSource } from "graphql/types";
 import { AdvertiserCampaignsFragment } from "graphql/advertiser.generated";
+import { CampaignFragment } from "graphql/campaign.generated";
 
 interface Props {
   advertiserCampaigns?: AdvertiserCampaignsFragment | null;
@@ -26,6 +21,24 @@ interface Props {
 export function CampaignList({ advertiserCampaigns, fromDate }: Props) {
   const history = useHistory();
   const campaigns = advertiserCampaigns?.campaigns ?? [];
+
+  const canSeeWithState = (r: CampaignFragment) => {
+    return (
+      r.state === "active" ||
+      r.state === "paused" ||
+      r.state === "completed" ||
+      r.state === "daycomplete"
+    );
+  };
+
+  const canEdit = (r: CampaignFragment) => {
+    return (
+      advertiserCampaigns?.selfServiceEdit &&
+      r.source === CampaignSource.SelfServe &&
+      r.format === CampaignFormat.PushNotification &&
+      r.state !== "completed"
+    );
+  };
 
   return (
     <EnhancedTable
@@ -55,7 +68,7 @@ export function CampaignList({ advertiserCampaigns, fromDate }: Props) {
               alignItems="center"
               direction="row"
             >
-              {r.state !== "under_review" ? (
+              {canSeeWithState(r) ? (
                 <Link
                   component={RouterLink}
                   to={`/user/main/campaign/${r.id}/analytics/overview`}
@@ -66,20 +79,17 @@ export function CampaignList({ advertiserCampaigns, fromDate }: Props) {
               ) : (
                 r.name
               )}
-              {advertiserCampaigns?.selfServiceEdit &&
-                r.source === CampaignSource.SelfServe &&
-                r.format === CampaignFormat.PushNotification &&
-                r.state !== "completed" && (
-                  <Tooltip title={`Edit ${r.name}`}>
-                    <IconButton
-                      onClick={() =>
-                        history.push(`/user/main/adsmanager/advanced/${r.id}`)
-                      }
-                    >
-                      <EditIcon />
-                    </IconButton>
-                  </Tooltip>
-                )}
+              {canEdit(r) && (
+                <Tooltip title={`Edit ${r.name}`}>
+                  <IconButton
+                    onClick={() =>
+                      history.push(`/user/main/adsmanager/advanced/${r.id}`)
+                    }
+                  >
+                    <EditIcon />
+                  </IconButton>
+                </Tooltip>
+              )}
             </Stack>
           ),
         },
