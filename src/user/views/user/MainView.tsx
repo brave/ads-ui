@@ -41,7 +41,7 @@ export function MainView({ fromDate, onSetDate }: Props) {
         onChange={onSetDate}
         disabled={loading}
       />
-      <Box width="100%" sx={{ mt: 1 }}>
+      <Box width="100%" sx={{ mt: 1 }} bgcolor="#fff">
         <Box border="1px solid #ededed">
           <Tabs
             value={tabValue}
@@ -60,7 +60,6 @@ export function MainView({ fromDate, onSetDate }: Props) {
                 sx={{
                   flexGrow: 1,
                   borderBottom: "1px solid #ededed",
-                  backgroundColor: "rgb(252,252,252)",
                   borderLeft:
                     idx !== tabs.length ? "1px solid #ededed" : "none",
                 }}

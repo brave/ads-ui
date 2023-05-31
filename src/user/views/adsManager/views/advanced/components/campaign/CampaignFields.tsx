@@ -1,4 +1,4 @@
-import { Button, Card } from "@mui/material";
+import { Button, Card, Stack } from "@mui/material";
 import React from "react";
 import { DetailField } from "./fields/DetailField";
 import { BudgetField } from "./fields/BudgetField";
@@ -14,10 +14,8 @@ interface Props {
 
 export function CampaignFields({ onNext, isEdit, advertiser }: Props) {
   return (
-    <Card sx={{ p: 2, mt: 2 }}>
-      <DetailField />
-
-      <CampaignDateRange isEdit={isEdit} />
+    <Stack sx={{ p: 2, mt: 2 }} spacing={1}>
+      <DetailField isEdit={isEdit} />
 
       <BudgetField
         canSetPrice={advertiser.selfServiceSetPrice}
@@ -26,9 +24,16 @@ export function CampaignFields({ onNext, isEdit, advertiser }: Props) {
 
       {!isEdit && <LocationField />}
 
-      <Button variant="contained" size="large" onClick={onNext} sx={{ mt: 2 }}>
-        Next
-      </Button>
-    </Card>
+      <div>
+        <Button
+          variant="contained"
+          size="large"
+          onClick={onNext}
+          sx={{ mt: 2 }}
+        >
+          Next
+        </Button>
+      </div>
+    </Stack>
   );
 }

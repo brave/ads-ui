@@ -8,6 +8,7 @@ import { MIN_PER_CAMPAIGN, MIN_PER_DAY } from "validation/CampaignSchema";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { PaymentType } from "graphql/types";
 import _ from "lodash";
+import { CardContainer } from "components/Card/CardContainer";
 
 interface Props {
   canSetPrice: boolean;
@@ -40,10 +41,7 @@ export function BudgetField({ isEdit }: Props) {
   }, [campaignRuntime, values.budget, minBudget]);
 
   return (
-    <Box>
-      <Divider textAlign="left" sx={{ fontSize: "24px", mb: 1, mt: 2 }}>
-        Budget
-      </Divider>
+    <CardContainer header="Budget">
       <Typography variant="body2" sx={{ mb: 5 }}>
         Set a limit on how much your campaign will spend.
       </Typography>
@@ -120,6 +118,6 @@ export function BudgetField({ isEdit }: Props) {
           />
         </Stack>
       </Stack>
-    </Box>
+    </CardContainer>
   );
 }

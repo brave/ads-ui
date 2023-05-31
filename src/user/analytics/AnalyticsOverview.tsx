@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, Box, Divider, LinearProgress } from "@mui/material";
+import { Alert, Box, LinearProgress, Stack } from "@mui/material";
 import moment from "moment/moment";
 import { CampaignFormat } from "graphql/types";
 import {
@@ -85,10 +85,13 @@ const AnalyticsOverview: React.FC = () => {
   }
 
   return (
-    <Box
+    <Stack
       sx={{
         p: 3,
       }}
+      spacing={1}
+      height="100%"
+      width="100%"
     >
       <ReportUtils
         startDate={startDate}
@@ -97,43 +100,27 @@ const AnalyticsOverview: React.FC = () => {
         onSetDate={setDateRange}
       />
 
-      <Divider textAlign="left" sx={{ fontWeight: "600", mb: 2 }}>
-        {data.campaign.name}: Overview
-      </Divider>
-
       <EngagementsOverview
         engagements={filteredEngagements ?? []}
         campaign={data.campaign}
         adSets={data.campaign.adSets}
       />
 
-      <Divider textAlign="left" sx={{ fontWeight: "600", mt: 5, mb: 3 }}>
-        Daily Performance
-      </Divider>
-
       <DailyCampaignOverview
         engagements={filteredEngagements ?? []}
         campaign={data.campaign}
       />
-
-      <Divider textAlign="left" sx={{ fontWeight: "600", mt: 5, mb: 3 }}>
-        OS Performance
-      </Divider>
 
       <OsOverview
         engagements={filteredEngagements ?? []}
         campaign={data.campaign}
       />
 
-      <Divider textAlign="left" sx={{ fontWeight: "600", mt: 5, mb: 3 }}>
-        Creative Performance
-      </Divider>
-
       <CreativeOverview
         engagements={filteredEngagements ?? []}
         campaign={data.campaign}
       />
-    </Box>
+    </Stack>
   );
 };
 

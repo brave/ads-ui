@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, CardContent } from "@mui/material";
 import HighchartsReact from "highcharts-react-official";
 import * as Highcharts from "highcharts";
 import React, { useState } from "react";
@@ -23,6 +23,7 @@ import MetricFilter from "../../components/MetricFilter";
 import EngagementHeader from "../../components/EngagementHeader";
 import LiveFeed from "../../components/LiveFeed";
 import { CampaignFormat } from "graphql/types";
+import { CardContainer } from "components/Card/CardContainer";
 
 interface Props {
   engagements: EngagementFragment[];
@@ -92,54 +93,55 @@ export function EngagementsOverview({ engagements, campaign, adSets }: Props) {
   const options = prepareChart(metrics, processedData);
 
   return (
-    <Box display="flex">
-      {/* Left Side (Metrics + Chart) */}
-      <Box width="75%">
-        <MetricFilter
-          processedStats={processedStats}
-          metrics={metrics}
-          onSetMetric={setActiveMetric}
-          isNtp={isNtp}
-        />
-
-        <Box border="1px solid #ededed" borderRadius="4px" height="450px">
-          <EngagementHeader
-            onSetGroup={setGrouping}
-            grouping={grouping}
-            onSetEngagement={(t: EngagementChartType) => {
-              setEngagementType(t);
-              setActiveDataOverview(t);
-            }}
-            engagement={engagementType}
+    <CardContainer header={`${campaign.name}: Overview`}>
+      <Box display="flex">
+        <Box width="75%">
+          <MetricFilter
+            processedStats={processedStats}
+            metrics={metrics}
+            onSetMetric={setActiveMetric}
+            isNtp={isNtp}
           />
-          <Box
-            paddingLeft="28px"
-            paddingRight="28px"
-            paddingTop="14px"
-            paddingBottom="14px"
-          >
-            <HighchartsReact highcharts={Highcharts} options={options} />
+
+          <Box border="1px solid #ededed" borderRadius="4px" height="450px">
+            <EngagementHeader
+              onSetGroup={setGrouping}
+              grouping={grouping}
+              onSetEngagement={(t: EngagementChartType) => {
+                setEngagementType(t);
+                setActiveDataOverview(t);
+              }}
+              engagement={engagementType}
+            />
+            <Box
+              paddingLeft="28px"
+              paddingRight="28px"
+              paddingTop="14px"
+              paddingBottom="14px"
+            >
+              <HighchartsReact highcharts={Highcharts} options={options} />
+            </Box>
           </Box>
         </Box>
-      </Box>
 
-      {/* Right Side (Live Feed) */}
-      <LiveFeed
-        overview={{
-          currency: campaign.currency,
-          budget: campaign.budget,
-          ...overview,
-        }}
-        onSelect={(id: string) => {
-          setActiveDataOverview(engagementType, id);
-        }}
-        uniqueEngagements={
-          engagementType === "creative" ? mappedAds : mappedAdSets
-        }
-        engagementType={engagementType}
-        processed={processedStats}
-        isNtp={isNtp}
-      />
-    </Box>
+        {/* Right Side (Live Feed) */}
+        <LiveFeed
+          overview={{
+            currency: campaign.currency,
+            budget: campaign.budget,
+            ...overview,
+          }}
+          onSelect={(id: string) => {
+            setActiveDataOverview(engagementType, id);
+          }}
+          uniqueEngagements={
+            engagementType === "creative" ? mappedAds : mappedAdSets
+          }
+          engagementType={engagementType}
+          processed={processedStats}
+          isNtp={isNtp}
+        />
+      </Box>
+    </CardContainer>
   );
 }
