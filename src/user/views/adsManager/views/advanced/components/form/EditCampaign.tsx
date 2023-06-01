@@ -17,6 +17,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { BaseForm } from "./components/BaseForm";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useUser } from "auth/hooks/queries/useUser";
+import { ErrorDetail } from "components/Error/ErrorDetail";
 
 interface Params {
   campaignId: string;
@@ -32,7 +33,7 @@ export function EditCampaign({ fromDate }: Props) {
   const history = useHistory();
   const params = useParams<Params>();
 
-  const { data, loading } = useLoadCampaignQuery({
+  const { data, loading, error } = useLoadCampaignQuery({
     variables: { id: params.campaignId },
   });
 
@@ -48,7 +49,19 @@ export function EditCampaign({ fromDate }: Props) {
     onCompleted() {
       history.push("/user/main/complete/edit");
     },
+    onError() {
+      alert("Unable to Update Campaign.");
+    },
   });
+
+  if (error) {
+    return (
+      <ErrorDetail
+        error={error}
+        additionalDetails="Campaign does not exist, or cannot be edited. Please try again later."
+      />
+    );
+  }
 
   if (!data || !data.campaign || loading) {
     return <LinearProgress />;
@@ -60,14 +73,24 @@ export function EditCampaign({ fromDate }: Props) {
     <Container maxWidth="xl">
       <Formik
         initialValues={initialValues}
-        onSubmit={(v: CampaignForm, { setSubmitting }) => {
+        onSubmit={async (v: CampaignForm, { setSubmitting }) => {
           setSubmitting(true);
-          transformEditForm(v, params.campaignId, advertiser.id, userId)
-            .then(async (u) => {
-              return await mutation({ variables: { input: u } });
-            })
-            .catch((e) => alert("Unable to update Campaign"))
-            .finally(() => setSubmitting(false));
+          let editForm;
+          try {
+            editForm = await transformEditForm(
+              v,
+              params.campaignId,
+              advertiser.id,
+              userId
+            );
+          } catch (e) {
+            alert("Unable to Update Campaign.");
+          }
+
+          if (editForm) {
+            await mutation({ variables: { input: editForm } });
+          }
+          setSubmitting(false);
         }}
         validationSchema={CampaignSchema}
       >

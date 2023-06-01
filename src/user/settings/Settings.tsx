@@ -52,6 +52,28 @@ const Settings = () => {
     useState("disclaimer");
   const history = useHistory();
 
+  const handleUpdateAdvertiser = () => {
+    setSaving(false);
+    setPublicKey(newPublicKey);
+    setPrivateKey("");
+    setNewPrivateKey("");
+    closeNewKeypairModal();
+    window.location.reload();
+  };
+
+  const [updateAdvertiser] = useUpdateAdvertiserMutation({
+    variables: {
+      updateAdvertiserInput: {
+        id: advertiserId,
+        publicKey: publicKey,
+      },
+    },
+    onCompleted: handleUpdateAdvertiser,
+    onError() {
+      alert("Unable to update Advertiser.");
+    },
+  });
+
   const saveKeypair = () => {
     setSaving(true);
     updateAdvertiser({
@@ -61,18 +83,7 @@ const Settings = () => {
           publicKey: newPublicKey,
         },
       },
-      onCompleted() {
-        window.location.reload();
-      },
     });
-  };
-
-  const handleUpdateAdvertiser = () => {
-    setSaving(false);
-    setPublicKey(newPublicKey);
-    setPrivateKey("");
-    setNewPrivateKey("");
-    closeNewKeypairModal();
   };
 
   const openNewKeypairModal = () => {
@@ -92,16 +103,6 @@ const Settings = () => {
     setNewKeypairModalState("disclaimer");
     setShowNewKeypairModal(false);
   };
-
-  const [updateAdvertiser] = useUpdateAdvertiserMutation({
-    variables: {
-      updateAdvertiserInput: {
-        id: advertiserId,
-        publicKey: publicKey,
-      },
-    },
-    onCompleted: handleUpdateAdvertiser,
-  });
 
   const setActiveAdvertiserWithId = (e: SelectChangeEvent) => {
     const id = e.target.value;

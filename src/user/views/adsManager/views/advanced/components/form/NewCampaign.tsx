@@ -48,6 +48,9 @@ export function NewCampaign({ fromDate }: Props) {
       setDrafts();
       history.push("/user/main/complete/new");
     },
+    onError() {
+      alert("Unable to create Campaign.");
+    },
   });
 
   return (
@@ -59,9 +62,6 @@ export function NewCampaign({ fromDate }: Props) {
           transformNewForm(v, advertiser.id, userId)
             .then(async (c) => {
               return await mutation({ variables: { input: c } });
-            })
-            .catch((e) => {
-              alert("Unable to save Campaign");
             })
             .finally(() => {
               setSubmitting(false);

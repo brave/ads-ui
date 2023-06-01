@@ -13,6 +13,7 @@ import { DailyCampaignOverview } from "./analyticsOverview/reports/campaign/Dail
 import { CreativeOverview } from "./analyticsOverview/reports/creative/CreativeOverview";
 import { OsOverview } from "./analyticsOverview/reports/os/OsOverview";
 import { DashboardButton } from "components/Button/DashboardButton";
+import { ErrorDetail } from "components/Error/ErrorDetail";
 
 interface Params {
   campaignId: string;
@@ -44,7 +45,7 @@ const AnalyticsOverview: React.FC = () => {
     }
   };
 
-  const { loading, data } = useAnalyticOverviewQuery({
+  const { loading, data, error } = useAnalyticOverviewQuery({
     variables: {
       id: params.campaignId,
     },
@@ -52,8 +53,18 @@ const AnalyticsOverview: React.FC = () => {
     pollInterval: 600_000,
   });
 
-  if (loading || !data || !data.campaign || !startDate)
+  if (error) {
+    return (
+      <ErrorDetail
+        error={error}
+        additionalDetails="Unable to retrieve reporting data for this Campaign."
+      />
+    );
+  }
+
+  if (loading || !data || !data.campaign || !startDate) {
     return <LinearProgress />;
+  }
 
   const filteredEngagements = data.campaign.engagements?.filter(
     (engagement) =>
