@@ -9,6 +9,7 @@ import {
 } from "@apollo/client";
 import AnalyticsOverview from "./analytics/AnalyticsOverview";
 import Settings from "./settings/Settings";
+import { Box } from "@mui/material";
 import { NewCampaign } from "./views/adsManager/views/advanced/components/form/NewCampaign";
 import { EditCampaign } from "./views/adsManager/views/advanced/components/form/EditCampaign";
 import { CompletionForm } from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
@@ -36,38 +37,55 @@ export function User() {
 
   return (
     <ApolloProvider client={client}>
-      <Navbar />
-      <Switch>
-        {/* /adsmanager */}
-        <Route path={`/user/main/adsmanager/advanced/new/:draftId`}>
-          <NewCampaign fromDate={fromDateFilter} />
-        </Route>
+      <Box height="100%">
+        <Box display="flex">
+          <Navbar />
+          <Box
+            width="100%"
+            height="100%"
+            padding={1}
+            marginTop="64px"
+            bgcolor="background.default"
+          >
+            <Switch>
+              {/* /adsmanager */}
+              <Route path={`/user/main/adsmanager/advanced/new/:draftId`}>
+                <NewCampaign fromDate={fromDateFilter} />
+              </Route>
 
-        <Route path={`/user/main/adsmanager/advanced/:campaignId`}>
-          <EditCampaign fromDate={fromDateFilter} />
-        </Route>
+              <Route path={`/user/main/adsmanager/advanced/:campaignId`}>
+                <EditCampaign fromDate={fromDateFilter} />
+              </Route>
 
-        <Route path={`/user/main/complete/:mode`}>
-          <CompletionForm />
-        </Route>
+              <Route path={`/user/main/complete/:mode`}>
+                <CompletionForm />
+              </Route>
 
-        {/* /settings */}
-        <Route path={`/user/main/settings`}>
-          <Settings />
-        </Route>
+              {/* /settings */}
+              <Route path={`/user/main/settings`}>
+                <Settings />
+              </Route>
 
-        {/* /campaigns/:campaignId/analytics - */}
-        <Route path={`/user/main/campaign/:campaignId/analytics/overview`}>
-          <AnalyticsOverview />
-        </Route>
+              {/* /campaigns/:campaignId/analytics - */}
+              <Route
+                path={`/user/main/campaign/:campaignId/analytics/overview`}
+              >
+                <AnalyticsOverview />
+              </Route>
 
-        <Route path={`/user/main`}>
-          <MainView fromDate={fromDateFilter} onSetDate={setFromDateFilter} />
-        </Route>
+              <Route path={`/user/main`}>
+                <MainView
+                  fromDate={fromDateFilter}
+                  onSetDate={setFromDateFilter}
+                />
+              </Route>
 
-        {/* default */}
-        <Redirect to={`/user/main`} />
-      </Switch>
+              {/* default */}
+              <Redirect to={`/user/main`} />
+            </Switch>
+          </Box>
+        </Box>
+      </Box>
     </ApolloProvider>
   );
 }
