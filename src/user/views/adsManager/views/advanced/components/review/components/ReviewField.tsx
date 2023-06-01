@@ -23,10 +23,9 @@ export function ReviewField({ caption, value, error }: Props) {
 
   return (
     <Box mb={2}>
-      <Typography variant="body1" component="span" fontWeight={600}>
+      <Typography variant="overline" component="span" paddingRight={1}>
         {caption}
       </Typography>
-      &nbsp;
       <Typography variant="body1" component="span">
         {value}
       </Typography>

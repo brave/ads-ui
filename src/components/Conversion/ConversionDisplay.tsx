@@ -43,7 +43,7 @@ export function ConversionDisplay({ conversions, convErrors }: Props) {
             error={extractConversionError(idx, "type")}
           />
           <ReviewField
-            caption="Conversion Window"
+            caption="Observation Window"
             value={`${c.observationWindow} days`}
             error={extractConversionError(idx, "observationWindow")}
           />
