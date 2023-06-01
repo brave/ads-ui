@@ -6,7 +6,7 @@ import { CardContainer } from "components/Card/CardContainer";
 export function LocationField() {
   return (
     <CardContainer header="Location">
-      <Typography variant="body2" sx={{ mb: 5 }}>
+      <Typography variant="body2" gutterBottom>
         Select the geographic regions where your ads will be shown.
       </Typography>
       <LocationPicker />

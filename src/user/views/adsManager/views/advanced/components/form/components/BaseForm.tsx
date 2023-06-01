@@ -44,7 +44,7 @@ export function BaseForm({ isEdit, values, advertiser, draftId }: Props) {
         {draftId && !isEdit && <DeleteDraft draftId={draftId} />}
       </Stack>
 
-      <Stack spacing={1}>
+      <Box>
         {value === 0 && (
           <CampaignFields
             onNext={() => setValue(value + 1)}
@@ -73,7 +73,7 @@ export function BaseForm({ isEdit, values, advertiser, draftId }: Props) {
             </Box>
           </>
         )}
-      </Stack>
+      </Box>
 
       {value === values.adSets.length + 1 && <Review isEdit={isEdit} />}
     </Form>

@@ -25,12 +25,7 @@ export function CampaignFields({ onNext, isEdit, advertiser }: Props) {
       {!isEdit && <LocationField />}
 
       <div>
-        <Button
-          variant="contained"
-          size="large"
-          onClick={onNext}
-          sx={{ mt: 2 }}
-        >
+        <Button variant="contained" size="large" onClick={onNext}>
           Next
         </Button>
       </div>
