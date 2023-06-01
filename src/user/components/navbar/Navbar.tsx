@@ -41,9 +41,7 @@ export function Navbar() {
         </Link>
         {advertiser.selfServiceCreate && <DraftMenu />}
         <div style={{ flexGrow: 1 }} />
-        {advertiser.selfServiceCreate && (
-          <AgreedModal advertiser={advertiser} />
-        )}
+        <AgreedModal />
         <UserMenu />
       </Toolbar>
     </AppBar>

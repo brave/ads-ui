@@ -10,7 +10,6 @@ import { PaymentType } from "graphql/types";
 import _ from "lodash";
 
 interface Props {
-  canSetPrice: boolean;
   isEdit: boolean;
 }
 

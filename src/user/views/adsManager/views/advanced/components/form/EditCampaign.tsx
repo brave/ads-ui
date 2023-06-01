@@ -3,16 +3,11 @@ import { Formik } from "formik";
 import React from "react";
 import { CampaignForm } from "../../../../types";
 import { CampaignSchema } from "validation/CampaignSchema";
-import {
-  editCampaignValues,
-  populateFilter,
-  transformEditForm,
-} from "user/library";
+import { editCampaignValues, transformEditForm } from "user/library";
 import {
   useLoadCampaignQuery,
   useUpdateCampaignMutation,
 } from "graphql/campaign.generated";
-import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
 import { useHistory, useParams } from "react-router-dom";
 import { BaseForm } from "./components/BaseForm";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
@@ -60,9 +55,7 @@ export function EditCampaign() {
         }}
         validationSchema={CampaignSchema}
       >
-        {({ values }) => (
-          <BaseForm isEdit={true} values={values} advertiser={advertiser} />
-        )}
+        <BaseForm isEdit={true} />
       </Formik>
     </Container>
   );
