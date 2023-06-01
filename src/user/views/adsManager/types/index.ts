@@ -66,7 +66,7 @@ export type Creative = {
   title: string;
   body: string;
   targetUrl: string;
-  targetUrlValid?: boolean;
+  targetUrlValidationResult?: string;
   state?: string;
   creativeInstanceId?: string;
 };

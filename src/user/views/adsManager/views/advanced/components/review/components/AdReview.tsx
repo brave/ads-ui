@@ -41,9 +41,9 @@ export function AdReview({ ad, adIdx, error }: Props) {
         />
         <CustomListItemText
           error={
-            hasError && adError.targetUrlValid ? (
+            hasError && adError.targetUrlValidationResult ? (
               <Stack display="flex" flexDirection="column" spacing={1}>
-                {adError.targetUrlValid?.split("#").map((e) => (
+                {adError.targetUrlValidationResult?.split("#").map((e) => (
                   <Box>{e}</Box>
                 ))}
               </Stack>

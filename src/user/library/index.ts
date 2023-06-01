@@ -230,7 +230,7 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
             targetUrl: c.payloadNotification!.targetUrl,
             title: c.payloadNotification!.title,
             body: c.payloadNotification!.body,
-            targetUrlValid: true,
+            targetUrlValidationResult: "",
             state: c.state,
           };
         }),

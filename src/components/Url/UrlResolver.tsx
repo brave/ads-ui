@@ -6,11 +6,10 @@ import {
   InputAdornment,
   TextField,
 } from "@mui/material";
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import _ from "lodash";
 import { useField } from "formik";
-import { useValidateTargetUrlLazyQuery } from "graphql/url.generated";
-import { SimpleUrlRegexp } from "validation/CampaignSchema";
+import { UrlValidationResult, useUrlValidation } from "./use-url-validation";
 
 interface Props {
   name: string;
@@ -18,6 +17,20 @@ interface Props {
   label?: string;
   disabled?: boolean;
   helperText?: string;
+}
+
+interface ValidationDetail {
+  summary: string;
+  detail: string;
+}
+
+function extractViolations(
+  result: UrlValidationResult | undefined
+): ValidationDetail[] {
+  return _.uniqBy(
+    (result?.response?.redirects ?? []).flatMap((r) => r.violations),
+    "summary"
+  );
 }
 
 export const UrlResolver: React.FC<Props> = ({
@@ -28,46 +41,27 @@ export const UrlResolver: React.FC<Props> = ({
   helperText,
 }) => {
   const [nameField, nameMeta] = useField(name);
-  const [, isValidMeta, isValidHelper] = useField(validator);
+  const [, , isValidHelper] = useField(validator);
   const hasError = Boolean(nameMeta.error);
   const showError = hasError && nameMeta.touched;
-  const [validateUrl, { loading, data }] = useValidateTargetUrlLazyQuery();
-  const debouncedValidateUrl = useMemo(
-    () =>
-      _.debounce(
-        (value: string, err?: string) =>
-          value &&
-          err == null &&
-          SimpleUrlRegexp.test(value) &&
-          validateUrl({
-            variables: {
-              url: value,
-            },
-          }),
-        500
-      ),
-    []
-  );
 
-  const { value, error: fieldError } = isValidMeta;
-  const { setValue, setError } = isValidHelper;
+  const urlValidation = useUrlValidation(nameField.value);
 
   useEffect(() => {
-    if (!disabled) {
-      debouncedValidateUrl.cancel();
-      debouncedValidateUrl(nameMeta.value, nameMeta.error);
+    const { isValid } = urlValidation;
 
-      if (value !== !!data?.validateTargetUrl?.isValid) {
-        setValue(!loading && !!data?.validateTargetUrl?.isValid, false);
-      }
-
-      const errors = data?.validateTargetUrl.errors ?? [];
-      const currError = errors.join("#");
-      if (errors.length > 0 && currError !== fieldError) {
-        setError(currError);
-      }
+    if (_.isUndefined(isValid)) {
+      isValidHelper.setValue("Target URL Validation did not complete");
+    } else if (isValid) {
+      isValidHelper.setValue(undefined);
+    } else {
+      const violations = extractViolations(urlValidation);
+      const errorMessage = violations.map((err) => err.summary).join("#");
+      isValidHelper.setValue(errorMessage);
     }
-  });
+  }, [urlValidation.isValid, urlValidation.response]);
+
+  const urlViolations = extractViolations(urlValidation);
 
   return (
     <>
@@ -84,39 +78,35 @@ export const UrlResolver: React.FC<Props> = ({
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              {loading && <CircularProgress />}
+              {urlValidation.validating && <CircularProgress />}
             </InputAdornment>
           ),
         }}
         {...nameField}
       />
-      {loading && (
-        <Alert
-          icon={<CircularProgress size={20} color="secondary" />}
-          severity="info"
-        >
-          Validating URL...
-        </Alert>
-      )}
+      <Box mt={2}>
+        {urlValidation.validating && (
+          <Alert
+            icon={<CircularProgress size={20} color="secondary" />}
+            severity="info"
+          >
+            Validating URL...
+          </Alert>
+        )}
 
-      {!!data && (
-        <Box mt={2}>
-          {!data.validateTargetUrl.isValid ? (
-            <>
-              {data.validateTargetUrl.errors.map((e) => (
-                <Alert severity="error" sx={{ mb: 1 }}>
-                  <AlertTitle>URL Error</AlertTitle>
-                  {e}
-                </Alert>
-              ))}
-            </>
-          ) : (
-            <Alert severity="success" sx={{ mb: 1 }}>
-              URL is valid.
-            </Alert>
-          )}
-        </Box>
-      )}
+        {urlValidation.isValid && (
+          <Alert severity="success" sx={{ mb: 1 }}>
+            URL is valid.
+          </Alert>
+        )}
+
+        {urlViolations.map((e, idx) => (
+          <Alert severity="error" sx={{ mb: 1 }} key={idx}>
+            <AlertTitle>{e.summary}</AlertTitle>
+            {e.detail}
+          </Alert>
+        ))}
+      </Box>
     </>
   );
 };
