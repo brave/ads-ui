@@ -1,4 +1,4 @@
-import { Button, Card, Stack } from "@mui/material";
+import { Box, Button, Card, Stack } from "@mui/material";
 import React from "react";
 import { DetailField } from "./fields/DetailField";
 import { BudgetField } from "./fields/BudgetField";
@@ -14,7 +14,7 @@ interface Props {
 
 export function CampaignFields({ onNext, isEdit, advertiser }: Props) {
   return (
-    <Stack sx={{ p: 2, mt: 2 }} spacing={1}>
+    <Box>
       <DetailField isEdit={isEdit} />
 
       <BudgetField
@@ -34,6 +34,6 @@ export function CampaignFields({ onNext, isEdit, advertiser }: Props) {
           Next
         </Button>
       </div>
-    </Stack>
+    </Box>
   );
 }

@@ -37,10 +37,16 @@ export function User() {
 
   return (
     <ApolloProvider client={client}>
-      <Box height="100%" bgcolor="#FAFAFA">
-        <Box display="flex" bgcolor="#FAFAFA">
+      <Box height="100%">
+        <Box display="flex">
           <Navbar />
-          <Box width="100%" height="100%" padding={1} marginTop="64px">
+          <Box
+            width="100%"
+            height="100%"
+            padding={1}
+            marginTop="64px"
+            bgcolor="background.default"
+          >
             <Switch>
               {/* /adsmanager */}
               <Route path={`/user/main/adsmanager/advanced/new/:draftId`}>
