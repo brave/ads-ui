@@ -9,14 +9,13 @@ import {
 } from "@apollo/client";
 import AnalyticsOverview from "./analytics/AnalyticsOverview";
 import Settings from "./settings/Settings";
-import { Box, Stack } from "@mui/material";
+import { Box } from "@mui/material";
 import { NewCampaign } from "./views/adsManager/views/advanced/components/form/NewCampaign";
 import { EditCampaign } from "./views/adsManager/views/advanced/components/form/EditCampaign";
 import { CompletionForm } from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
 import moment from "moment";
 import { MainView } from "user/views/user/MainView";
 import { Navbar } from "user/components/navbar/Navbar";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -41,7 +40,13 @@ export function User() {
       <Box height="100%">
         <Box display="flex">
           <Navbar />
-          <Box width="100%" height="100%" padding={1} marginTop="64px">
+          <Box
+            width="100%"
+            height="100%"
+            padding={1}
+            marginTop="64px"
+            bgcolor="background.default"
+          >
             <Switch>
               {/* /adsmanager */}
               <Route path={`/user/main/adsmanager/advanced/new/:draftId`}>
