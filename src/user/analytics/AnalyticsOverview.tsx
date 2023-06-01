@@ -88,10 +88,9 @@ const AnalyticsOverview: React.FC = () => {
     <Stack
       sx={{
         p: 3,
+        bgcolor: "background.default",
       }}
       spacing={1}
-      height="100%"
-      width="100%"
     >
       <ReportUtils
         startDate={startDate}

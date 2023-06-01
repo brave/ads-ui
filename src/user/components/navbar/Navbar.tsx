@@ -4,7 +4,7 @@ import { Link, useHistory, useRouteMatch } from "react-router-dom";
 
 import TopBarProgress from "react-topbar-progress-indicator";
 
-import { AppBar, Button, Toolbar } from "@mui/material";
+import { AppBar, Box, Button, Toolbar } from "@mui/material";
 import { UserMenu } from "user/components/navbar/components/UserMenu";
 import { DraftMenu } from "user/components/navbar/components/DraftMenu";
 import moment from "moment";
@@ -31,21 +31,23 @@ export function Navbar() {
   const { advertiser } = useAdvertiser();
 
   return (
-    <AppBar
-      position="fixed"
-      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, bgcolor: "#ffffff" }}
-    >
-      <Toolbar>
-        <Link style={logoStyle} to="/user/main">
-          <img src={rewards} alt="Ads" height="40px" />
-        </Link>
-        {advertiser.selfServiceCreate && <DraftMenu />}
-        <div style={{ flexGrow: 1 }} />
-        {advertiser.selfServiceCreate && (
-          <AgreedModal advertiser={advertiser} />
-        )}
-        <UserMenu />
-      </Toolbar>
-    </AppBar>
+    <Box mb={8.5} bgcolor="background.default">
+      <AppBar
+        position="fixed"
+        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, bgcolor: "#ffffff" }}
+      >
+        <Toolbar>
+          <Link style={logoStyle} to="/user/main">
+            <img src={rewards} alt="Ads" height="40px" />
+          </Link>
+          {advertiser.selfServiceCreate && <DraftMenu />}
+          <div style={{ flexGrow: 1 }} />
+          {advertiser.selfServiceCreate && (
+            <AgreedModal advertiser={advertiser} />
+          )}
+          <UserMenu />
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 }
