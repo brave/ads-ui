@@ -32,10 +32,6 @@ const buildApolloClient = () => {
 
 export function User() {
   const client = useMemo(() => buildApolloClient(), []);
-  const [fromDateFilter, setFromDateFilter] = useState<Date | null>(
-    moment().subtract(6, "month").startOf("day").toDate()
-  );
-
   return (
     <ApolloProvider client={client}>
       <Box height="100%">
@@ -44,36 +40,31 @@ export function User() {
           <Box width="100%" height="100%" padding={1} marginTop="64px">
             <Switch>
               {/* /adsmanager */}
-              <Route path={`/user/main/adsmanager/advanced/new/:draftId`}>
-                <NewCampaign fromDate={fromDateFilter} />
-              </Route>
+              <Route
+                path={`/user/main/adsmanager/advanced/new/:draftId`}
+                component={NewCampaign}
+              />
 
-              <Route path={`/user/main/adsmanager/advanced/:campaignId`}>
-                <EditCampaign fromDate={fromDateFilter} />
-              </Route>
+              <Route
+                path={`/user/main/adsmanager/advanced/:campaignId`}
+                component={EditCampaign}
+              />
 
-              <Route path={`/user/main/complete/:mode`}>
-                <CompletionForm />
-              </Route>
+              <Route
+                path={`/user/main/complete/:mode`}
+                component={CompletionForm}
+              />
 
               {/* /settings */}
-              <Route path={`/user/main/settings`}>
-                <Settings />
-              </Route>
+              <Route path={`/user/main/settings`} component={Settings} />
 
               {/* /campaigns/:campaignId/analytics - */}
               <Route
                 path={`/user/main/campaign/:campaignId/analytics/overview`}
-              >
-                <AnalyticsOverview />
-              </Route>
+                component={AnalyticsOverview}
+              />
 
-              <Route path={`/user/main`}>
-                <MainView
-                  fromDate={fromDateFilter}
-                  onSetDate={setFromDateFilter}
-                />
-              </Route>
+              <Route path={`/user/main`} component={MainView} />
 
               {/* default */}
               <Redirect to={`/user/main`} />

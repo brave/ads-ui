@@ -22,11 +22,7 @@ interface Params {
   campaignId: string;
 }
 
-interface Props {
-  fromDate: Date | null;
-}
-
-export function EditCampaign({ fromDate }: Props) {
+export function EditCampaign() {
   const { advertiser } = useAdvertiser();
   const { userId } = useUser();
   const history = useHistory();
@@ -34,17 +30,10 @@ export function EditCampaign({ fromDate }: Props) {
 
   const { data, loading } = useLoadCampaignQuery({
     variables: { id: params.campaignId },
+    fetchPolicy: "cache-and-network",
   });
 
   const [mutation] = useUpdateCampaignMutation({
-    refetchQueries: [
-      {
-        ...refetchAdvertiserCampaignsQuery({
-          id: advertiser.id,
-          filter: populateFilter(fromDate),
-        }),
-      },
-    ],
     onCompleted() {
       history.push("/user/main/complete/edit");
     },

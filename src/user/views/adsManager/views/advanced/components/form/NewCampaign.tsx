@@ -3,9 +3,8 @@ import { Formik } from "formik";
 import React, { useContext } from "react";
 import { CampaignForm, initialCampaign } from "../../../../types";
 import { CampaignSchema } from "validation/CampaignSchema";
-import { populateFilter, transformNewForm } from "user/library";
+import { transformNewForm } from "user/library";
 import { useCreateCampaignMutation } from "graphql/campaign.generated";
-import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
 import { useHistory, useParams } from "react-router-dom";
 import { BaseForm } from "./components/BaseForm";
 import { PersistFormValues } from "form/PersistFormValues";
@@ -17,11 +16,7 @@ interface Params {
   draftId: string;
 }
 
-interface Props {
-  fromDate: Date | null;
-}
-
-export function NewCampaign({ fromDate }: Props) {
+export function NewCampaign() {
   const history = useHistory();
   const params = useParams<Params>();
   const { advertiser } = useAdvertiser();
@@ -35,14 +30,6 @@ export function NewCampaign({ fromDate }: Props) {
   };
 
   const [mutation] = useCreateCampaignMutation({
-    refetchQueries: [
-      {
-        ...refetchAdvertiserCampaignsQuery({
-          id: advertiser.id,
-          filter: populateFilter(fromDate),
-        }),
-      },
-    ],
     onCompleted() {
       localStorage.removeItem(params.draftId);
       setDrafts();
