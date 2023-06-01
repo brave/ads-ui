@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, Box, LinearProgress, Stack } from "@mui/material";
+import { Alert, Box, LinearProgress } from "@mui/material";
 import moment from "moment/moment";
 import { CampaignFormat } from "graphql/types";
 import {
@@ -85,14 +85,7 @@ const AnalyticsOverview: React.FC = () => {
   }
 
   return (
-    <Stack
-      sx={{
-        p: 3,
-      }}
-      spacing={1}
-      height="100%"
-      width="100%"
-    >
+    <Box padding={2}>
       <ReportUtils
         startDate={startDate}
         endDate={endDate}
@@ -120,7 +113,7 @@ const AnalyticsOverview: React.FC = () => {
         engagements={filteredEngagements ?? []}
         campaign={data.campaign}
       />
-    </Stack>
+    </Box>
   );
 };
 

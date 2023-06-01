@@ -35,7 +35,7 @@ export function MainView({ fromDate, onSetDate }: Props) {
   ];
 
   return (
-    <Box display="flex" flexDirection="column" sx={{ mb: 2, ml: 10, mr: 10 }}>
+    <Box display="flex" flexDirection="column" sx={{ mb: 2, ml: 5, mr: 5 }}>
       <CampaignAgeFilter
         fromDate={fromDate}
         onChange={onSetDate}
