@@ -1,56 +1,59 @@
 import { Conversion } from "user/views/adsManager/types";
-import { CustomListItemText } from "../List/CustomListItemText";
 import React from "react";
-import { ConversionError } from "./ConversionError";
-import { List } from "@mui/material";
 import { FormikErrors } from "formik";
+import { ReviewField } from "user/views/adsManager/views/advanced/components/review/components/ReviewField";
+import _ from "lodash";
 
 interface Props {
   conversions: Conversion[];
-  hasErrors: boolean;
   convErrors?: FormikErrors<Conversion>[] | string[] | string;
 }
 
-export function ConversionDisplay({
-  conversions,
-  hasErrors,
-  convErrors,
-}: Props) {
-  const display = (c: Conversion) => {
+export function ConversionDisplay({ conversions, convErrors }: Props) {
+  if (conversions.length === 0) {
     return (
-      <List>
-        <CustomListItemText primary="Type" secondary={c.type} />
-        <CustomListItemText
-          primary="Window"
-          secondary={`${c.observationWindow} days`}
-        />
-        <CustomListItemText primary="URL" secondary={c.urlPattern} />
-      </List>
+      <ReviewField caption="Conversion" value="No conversion metrics set" />
     );
-  };
+  }
+
+  function extractConversionError(
+    idx: number,
+    field: keyof Conversion
+  ): string | undefined {
+    const errorObj = convErrors?.[idx];
+
+    if (!errorObj) {
+      return undefined;
+    }
+
+    if (_.isString(errorObj)) {
+      return errorObj;
+    }
+
+    return errorObj[field];
+  }
 
   return (
     <>
-      {conversions.length === 0 ? (
-        <CustomListItemText
-          primary="Conversion"
-          secondary="No conversion metrics set"
-        />
-      ) : (
-        <>
-          {conversions.map((c, idx) => (
-            <CustomListItemText
-              primary="Conversion"
-              secondary={display(c)}
-              error={
-                hasErrors && convErrors?.[idx] ? (
-                  <ConversionError errors={convErrors?.[idx]} />
-                ) : undefined
-              }
-            />
-          ))}
-        </>
-      )}
+      {conversions.map((c, idx) => (
+        <React.Fragment key={idx}>
+          <ReviewField
+            caption="Conversion Type"
+            value={c.type}
+            error={extractConversionError(idx, "type")}
+          />
+          <ReviewField
+            caption="Observation Window"
+            value={`${c.observationWindow} days`}
+            error={extractConversionError(idx, "observationWindow")}
+          />
+          <ReviewField
+            caption="Conversion URL Pattern"
+            value={c.urlPattern}
+            error={extractConversionError(idx, "urlPattern")}
+          />
+        </React.Fragment>
+      ))}
     </>
   );
 }

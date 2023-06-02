@@ -23,6 +23,7 @@ import {
 import { UrlResolver } from "components/Url/UrlResolver";
 import logo from "../../../../../../../../brave_logo_icon.png";
 import { Status } from "components/Campaigns/Status";
+import { CardContainer } from "components/Card/CardContainer";
 
 interface Props {
   index: number;
@@ -50,7 +51,7 @@ export function AdField({ index, isEdit }: Props) {
   return (
     <FieldArray name={`adSets.${index}.creatives`}>
       {({ remove, push }) => (
-        <Card sx={{ mt: 2, p: 2 }}>
+        <CardContainer header="Ads">
           <Box sx={{ borderBottom: 1, borderColor: "divider", mb: 2 }}>
             <Tabs
               value={selected}
@@ -116,7 +117,7 @@ export function AdField({ index, isEdit }: Props) {
             adIdx={selected}
             creative={values.adSets[index].creatives[selected]}
           />
-        </Card>
+        </CardContainer>
       )}
     </FieldArray>
   );

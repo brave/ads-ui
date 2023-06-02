@@ -1,4 +1,4 @@
-import { Button, Card } from "@mui/material";
+import { Box, Button, Card, Stack } from "@mui/material";
 import React from "react";
 import { DetailField } from "./fields/DetailField";
 import { BudgetField } from "./fields/BudgetField";
@@ -9,26 +9,22 @@ import { IAdvertiser } from "auth/context/auth.interface";
 interface Props {
   onNext: () => void;
   isEdit: boolean;
-  advertiser: IAdvertiser;
 }
 
-export function CampaignFields({ onNext, isEdit, advertiser }: Props) {
+export function CampaignFields({ onNext, isEdit }: Props) {
   return (
-    <Card sx={{ p: 2, mt: 2 }}>
-      <DetailField />
+    <Box>
+      <DetailField isEdit={isEdit} />
 
-      <CampaignDateRange isEdit={isEdit} />
-
-      <BudgetField
-        canSetPrice={advertiser.selfServiceSetPrice}
-        isEdit={isEdit}
-      />
+      <BudgetField isEdit={isEdit} />
 
       {!isEdit && <LocationField />}
 
-      <Button variant="contained" size="large" onClick={onNext} sx={{ mt: 2 }}>
-        Next
-      </Button>
-    </Card>
+      <div>
+        <Button variant="contained" size="large" onClick={onNext}>
+          Next
+        </Button>
+      </div>
+    </Box>
   );
 }

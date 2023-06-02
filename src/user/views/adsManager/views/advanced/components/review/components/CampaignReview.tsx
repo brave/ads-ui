@@ -1,8 +1,7 @@
-import { Card, List, Typography } from "@mui/material";
-import { CustomListItemText } from "components/List/CustomListItemText";
-import React from "react";
 import { CampaignForm } from "../../../../../types";
 import { FormikErrors } from "formik";
+import { CardContainer } from "components/Card/CardContainer";
+import { ReviewField } from "./ReviewField";
 
 interface Props {
   values: CampaignForm;
@@ -27,45 +26,39 @@ export function CampaignReview({ values, errors }: Props) {
   };
 
   return (
-    <Card sx={{ p: 2, mt: 2 }}>
-      <Typography variant="h6">Campaign</Typography>
-      <List>
-        <CustomListItemText
-          primary="Name"
-          secondary={values.name}
-          error={errors.name}
-        />
-        <CustomListItemText
-          primary="Start Time"
-          secondary={formatDate(values.startAt)}
-          error={errors.startAt}
-        />
-        <CustomListItemText
-          primary="End Time"
-          secondary={formatDate(values.endAt)}
-          error={errors.endAt}
-        />
-        <CustomListItemText
-          primary="Lifetime Budget"
-          secondary={`$${values.budget} ${values.currency}`}
-          error={errors.budget}
-        />
-        <CustomListItemText
-          primary="Pricing Type"
-          secondary={billing(values.billingType)}
-          error={errors.billingType}
-        />
-        <CustomListItemText
-          primary="Price"
-          secondary={`$${values.price}`}
-          error={errors.price}
-        />
-        <CustomListItemText
-          primary="Locations"
-          secondary={values.geoTargets.map((t) => t.name).join(", ")}
-          error={errors.geoTargets as string}
-        />
-      </List>
-    </Card>
+    <CardContainer header="Campaign">
+      <ReviewField caption="Name" value={values.name} error={errors.name} />
+
+      <ReviewField
+        caption="Start Time"
+        value={formatDate(values.startAt)}
+        error={errors.startAt}
+      />
+      <ReviewField
+        caption="End Time"
+        value={formatDate(values.endAt)}
+        error={errors.endAt}
+      />
+      <ReviewField
+        caption="Lifetime Budget"
+        value={`$${values.budget} ${values.currency}`}
+        error={errors.budget}
+      />
+      <ReviewField
+        caption="Pricing Type"
+        value={billing(values.billingType)}
+        error={errors.billingType}
+      />
+      <ReviewField
+        caption="Price"
+        value={`$${values.price}`}
+        error={errors.price}
+      />
+      <ReviewField
+        caption="Locations"
+        value={values.geoTargets.map((t) => t.name).join(", ")}
+        error={errors.geoTargets as string}
+      />
+    </CardContainer>
   );
 }

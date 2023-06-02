@@ -22,6 +22,7 @@ import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { setActiveAdvertiser } from "auth/util";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 import { useHistory } from "react-router-dom";
+import { CardContainer } from "components/Card/CardContainer";
 
 const modalStyles: SxProps = {
   position: "absolute",
@@ -51,6 +52,28 @@ const Settings = () => {
     useState("disclaimer");
   const history = useHistory();
 
+  const handleUpdateAdvertiser = () => {
+    setSaving(false);
+    setPublicKey(newPublicKey);
+    setPrivateKey("");
+    setNewPrivateKey("");
+    closeNewKeypairModal();
+    window.location.reload();
+  };
+
+  const [updateAdvertiser] = useUpdateAdvertiserMutation({
+    variables: {
+      updateAdvertiserInput: {
+        id: advertiserId,
+        publicKey: publicKey,
+      },
+    },
+    onCompleted: handleUpdateAdvertiser,
+    onError() {
+      alert("Unable to update Advertiser.");
+    },
+  });
+
   const saveKeypair = () => {
     setSaving(true);
     updateAdvertiser({
@@ -60,18 +83,7 @@ const Settings = () => {
           publicKey: newPublicKey,
         },
       },
-      onCompleted() {
-        window.location.reload();
-      },
     });
-  };
-
-  const handleUpdateAdvertiser = () => {
-    setSaving(false);
-    setPublicKey(newPublicKey);
-    setPrivateKey("");
-    setNewPrivateKey("");
-    closeNewKeypairModal();
   };
 
   const openNewKeypairModal = () => {
@@ -92,16 +104,6 @@ const Settings = () => {
     setShowNewKeypairModal(false);
   };
 
-  const [updateAdvertiser] = useUpdateAdvertiserMutation({
-    variables: {
-      updateAdvertiserInput: {
-        id: advertiserId,
-        publicKey: publicKey,
-      },
-    },
-    onCompleted: handleUpdateAdvertiser,
-  });
-
   const setActiveAdvertiserWithId = (e: SelectChangeEvent) => {
     const id = e.target.value;
     setAdvertiserId(id);
@@ -119,65 +121,64 @@ const Settings = () => {
       >
         Dashboard
       </Button>
-      <Divider textAlign="left" sx={{ mt: 2, mb: 3, fontSize: "24px" }}>
-        Account Settings
-      </Divider>
+      <Stack spacing={2} mt={1}>
+        <CardContainer header="Account Settings">
+          <Typography variant="h6" gutterBottom>
+            Keypairs
+          </Typography>
 
-      <Typography variant="h6" gutterBottom>
-        Keypairs
-      </Typography>
+          <Typography>
+            Generate a keypair for your organization. Brave Ads will use your
+            organization's public key to sign and encrypt conversion data. Only
+            your organization will have access to the private key, which can be
+            used to decrypt and view conversion data.
+          </Typography>
 
-      <Typography>
-        Generate a keypair for your organization. Brave Ads will use your
-        organization's public key to sign and encrypt conversion data. Only your
-        organization will have access to the private key, which can be used to
-        decrypt and view conversion data.
-      </Typography>
-
-      {publicKey !== "" && (
-        <Box marginTop={1}>
-          <Typography>Your organization's public key:</Typography>
-          <Box component="pre" marginY={0}>
-            {publicKey}
+          {publicKey !== "" && (
+            <Box marginTop={1}>
+              <Typography>Your organization's public key:</Typography>
+              <Box component="pre" marginY={0}>
+                {publicKey}
+              </Box>
+            </Box>
+          )}
+          <Box>
+            <Button
+              onClick={() => openNewKeypairModal()}
+              variant="contained"
+              style={{
+                marginTop: "22px",
+                width: "300px",
+                alignSelf: "center",
+              }}
+            >
+              New Keypair
+            </Button>
           </Box>
-        </Box>
-      )}
-      <Box>
-        <Button
-          onClick={() => openNewKeypairModal()}
-          variant="contained"
-          style={{
-            marginTop: "22px",
-            width: "300px",
-            alignSelf: "center",
-          }}
-        >
-          New Keypair
-        </Button>
-      </Box>
+        </CardContainer>
 
-      <Divider textAlign="left" sx={{ mt: 5, mb: 3, fontSize: "24px" }}>
-        Organization
-      </Divider>
+        <CardContainer header="Organization">
+          <Typography>
+            You may have access to multiple organisations. Switch between them
+            here.
+          </Typography>
 
-      <Typography>
-        You may have access to multiple organisations. Switch between them here.
-      </Typography>
-
-      <Box sx={{ mt: 2 }}>
-        <FormControl fullWidth>
-          <InputLabel>Select Organization</InputLabel>
-          <Select
-            value={advertiserId}
-            label="Select Organization"
-            onChange={(e) => setActiveAdvertiserWithId(e)}
-          >
-            {advertisers.map((a) => (
-              <MenuItem value={a.id}>{a.name}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Box>
+          <Box sx={{ mt: 2 }}>
+            <FormControl fullWidth>
+              <InputLabel>Select Organization</InputLabel>
+              <Select
+                value={advertiserId}
+                label="Select Organization"
+                onChange={(e) => setActiveAdvertiserWithId(e)}
+              >
+                {advertisers.map((a) => (
+                  <MenuItem value={a.id}>{a.name}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+        </CardContainer>
+      </Stack>
 
       <Modal open={showNewKeypairModal} onClose={() => closeNewKeypairModal()}>
         <Box sx={modalStyles}>
