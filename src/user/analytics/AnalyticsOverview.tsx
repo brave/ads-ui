@@ -51,6 +51,7 @@ const AnalyticsOverview: React.FC = () => {
     },
     onCompleted: (d) => initializeCampaign(d, today),
     pollInterval: 600_000,
+    fetchPolicy: "cache-and-network",
   });
 
   if (error) {

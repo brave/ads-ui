@@ -11,7 +11,6 @@ import _ from "lodash";
 import { CardContainer } from "components/Card/CardContainer";
 
 interface Props {
-  canSetPrice: boolean;
   isEdit: boolean;
 }
 

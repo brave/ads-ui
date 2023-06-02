@@ -9,18 +9,14 @@ import { IAdvertiser } from "auth/context/auth.interface";
 interface Props {
   onNext: () => void;
   isEdit: boolean;
-  advertiser: IAdvertiser;
 }
 
-export function CampaignFields({ onNext, isEdit, advertiser }: Props) {
+export function CampaignFields({ onNext, isEdit }: Props) {
   return (
     <Box>
       <DetailField isEdit={isEdit} />
 
-      <BudgetField
-        canSetPrice={advertiser.selfServiceSetPrice}
-        isEdit={isEdit}
-      />
+      <BudgetField isEdit={isEdit} />
 
       {!isEdit && <LocationField />}
 
