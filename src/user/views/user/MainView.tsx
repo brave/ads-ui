@@ -36,13 +36,13 @@ export function MainView() {
   ];
 
   return (
-    <Box display="flex" flexDirection="column" sx={{ mb: 2, ml: 10, mr: 10 }}>
+    <Box display="flex" flexDirection="column" sx={{ mb: 2, ml: 5, mr: 5 }}>
       <CampaignAgeFilter
         fromDate={fromDateFilter}
         onChange={setFromDateFilter}
         disabled={loading}
       />
-      <Box width="100%" sx={{ mt: 1 }}>
+      <Box width="100%" sx={{ mt: 1 }} bgcolor="#fff">
         <Box border="1px solid #ededed">
           <Tabs
             value={tabValue}
@@ -61,7 +61,6 @@ export function MainView() {
                 sx={{
                   flexGrow: 1,
                   borderBottom: "1px solid #ededed",
-                  backgroundColor: "rgb(252,252,252)",
                   borderLeft:
                     idx !== tabs.length ? "1px solid #ededed" : "none",
                 }}

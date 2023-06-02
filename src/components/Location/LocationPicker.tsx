@@ -42,11 +42,7 @@ export const LocationPicker: React.FC = () => {
         <TextField
           {...params}
           label="Location"
-          helperText={
-            meta.touched && !!errorMessage
-              ? errorMessage
-              : "Select the geographic regions where your ads will be shown"
-          }
+          helperText={meta.touched && !!errorMessage ? errorMessage : ""}
           error={!!errorMessage && meta.touched}
         />
       )}

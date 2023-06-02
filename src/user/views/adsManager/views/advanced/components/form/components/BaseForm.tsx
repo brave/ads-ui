@@ -43,30 +43,32 @@ export function BaseForm({ isEdit, draftId }: Props) {
         {draftId && !isEdit && <DeleteDraft draftId={draftId} />}
       </Stack>
 
-      {value === 0 && (
-        <CampaignFields onNext={() => setValue(value + 1)} isEdit={isEdit} />
-      )}
+      <Box>
+        {value === 0 && (
+          <CampaignFields onNext={() => setValue(value + 1)} isEdit={isEdit} />
+        )}
 
-      {showCard(values) && (
-        <>
-          <AdSetFields
-            tabValue={value}
-            onRemove={() => setValue(value - 1)}
-            onCreate={() => setValue(value + 1)}
-            isEdit={isEdit}
-          />
-          <AdField index={value - 1} isEdit={isEdit} />
-          <Box sx={{ mt: 2 }}>
-            <Button
-              variant="contained"
-              size="large"
-              onClick={() => setValue(values.adSets.length + 1)}
-            >
-              Next
-            </Button>
-          </Box>
-        </>
-      )}
+        {showCard(values) && (
+          <>
+            <AdSetFields
+              tabValue={value}
+              onRemove={() => setValue(value - 1)}
+              onCreate={() => setValue(value + 1)}
+              isEdit={isEdit}
+            />
+            <AdField index={value - 1} isEdit={isEdit} />
+            <Box sx={{ mt: 2 }}>
+              <Button
+                variant="contained"
+                size="large"
+                onClick={() => setValue(values.adSets.length + 1)}
+              >
+                Next
+              </Button>
+            </Box>
+          </>
+        )}
+      </Box>
 
       {value === values.adSets.length + 1 && <Review isEdit={isEdit} />}
     </Form>

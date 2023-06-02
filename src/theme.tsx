@@ -7,6 +7,10 @@ export const theme = createTheme({
       fontSize: "18px",
       fontWeight: 400,
     },
+    h2: {
+      fontSize: "14px",
+      fontWeight: 600,
+    },
   },
   palette: {
     primary: {
@@ -14,6 +18,14 @@ export const theme = createTheme({
     },
     secondary: {
       main: "#4C54D2",
+    },
+    background: {
+      default: "#F1F3F5",
+      paper: "white",
+    },
+    text: {
+      primary: "#343546",
+      secondary: "#A0A1B2",
     },
   },
 });
