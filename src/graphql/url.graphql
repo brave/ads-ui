@@ -1,6 +1,12 @@
 query validateTargetUrl($url: String!) {
   validateTargetUrl(targetUrl: $url) {
-    errors
     isValid
+    redirects {
+      url
+      violations {
+        summary
+        detail
+      }
+    }
   }
 }

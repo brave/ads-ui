@@ -163,7 +163,7 @@ function Ad({ adSetIdx, adIdx, creative }: AdProps) {
 
       <UrlResolver
         name={`adSets.${adSetIdx}.creatives.${adIdx}.targetUrl`}
-        validator={`adSets.${adSetIdx}.creatives.${adIdx}.targetUrlValid`}
+        validator={`adSets.${adSetIdx}.creatives.${adIdx}.targetUrlValidationResult`}
         label="Ad Target URL"
         disabled={cannotEdit}
         helperText={"Example - https://brave.com/brave-rewards/"}
