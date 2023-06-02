@@ -125,6 +125,7 @@ export function CreativeOverview({ engagements, campaign }: Props) {
               direction="column"
               alignItems="center"
               flexWrap="wrap"
+              key={`creativeMetric-${idx}`}
             >
               <img
                 src={ntp.creativePayload.body}

@@ -29,7 +29,7 @@ export function AdReview({ ad, adIdx, error }: Props) {
       />
 
       {adError.targetUrlValidationResult?.split("#").map((e, idx) => (
-        <Box>
+        <Box key={`error-${idx}`}>
           <DisplayError error={e} />
         </Box>
       ))}

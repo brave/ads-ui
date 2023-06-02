@@ -172,7 +172,9 @@ const Settings = () => {
                 onChange={(e) => setActiveAdvertiserWithId(e)}
               >
                 {advertisers.map((a) => (
-                  <MenuItem value={a.id}>{a.name}</MenuItem>
+                  <MenuItem key={a.id} value={a.id}>
+                    {a.name}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>

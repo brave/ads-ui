@@ -64,6 +64,7 @@ export function MainView() {
           >
             {tabs.map((t, idx) => (
               <Tab
+                key={t.label}
                 value={idx}
                 label={t.label}
                 icon={t.icon}

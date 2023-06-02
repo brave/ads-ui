@@ -60,7 +60,7 @@ export function AdField({ index, isEdit }: Props) {
               scrollButtons="auto"
             >
               {values.adSets[index].creatives.map((ad, idx) => (
-                <Tab value={idx} label={`Ad ${idx + 1}`} />
+                <Tab key={idx} value={idx} label={`Ad ${idx + 1}`} />
               ))}
             </Tabs>
           </Box>
