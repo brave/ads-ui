@@ -17,7 +17,7 @@
     "base64url": "3.0.1",
     "date-fns": "2.30.0",
     "date-fns-tz": "2.0.0",
-    "formik": "2.2.9",
+    "formik": "2.4.1",
     "graphql": "16.6.0",
     "highcharts": "11.0.1",
     "highcharts-react-official": "3.2.0",
