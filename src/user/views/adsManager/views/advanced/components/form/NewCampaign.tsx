@@ -35,24 +35,28 @@ export function NewCampaign() {
       setDrafts();
       history.push("/user/main/complete/new");
     },
+    onError() {
+      alert("Unable to create Campaign.");
+    },
   });
 
   return (
     <Container maxWidth="xl">
       <Formik
         initialValues={initial}
-        onSubmit={(v: CampaignForm, { setSubmitting }) => {
+        onSubmit={async (v: CampaignForm, { setSubmitting }) => {
           setSubmitting(true);
-          transformNewForm(v, advertiser.id, userId)
-            .then(async (c) => {
-              return await mutation({ variables: { input: c } });
-            })
-            .catch((e) => {
-              alert("Unable to save Campaign");
-            })
-            .finally(() => {
-              setSubmitting(false);
-            });
+          let newForm;
+          try {
+            newForm = await transformNewForm(v, advertiser.id, userId);
+          } catch (e) {
+            alert("Unable to create Campaign.");
+          }
+
+          if (newForm) {
+            await mutation({ variables: { input: newForm } });
+          }
+          setSubmitting(false);
         }}
         validationSchema={CampaignSchema}
       >

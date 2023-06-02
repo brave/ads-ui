@@ -9,6 +9,7 @@ import { AdList } from "user/ads/AdList";
 import CampaignIcon from "@mui/icons-material/Campaign";
 import DatasetIcon from "@mui/icons-material/Dataset";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
+import { ErrorDetail } from "components/Error/ErrorDetail";
 import moment from "moment/moment";
 
 export function MainView() {
@@ -20,7 +21,7 @@ export function MainView() {
     moment().subtract(6, "month").startOf("day").toDate()
   );
 
-  const { loading, data } = useAdvertiserCampaignsQuery({
+  const { loading, data, error } = useAdvertiserCampaignsQuery({
     variables: {
       id: window.localStorage.getItem("activeAdvertiser") ?? "",
       filter: populateFilter(fromDateFilter),
@@ -34,6 +35,15 @@ export function MainView() {
     { label: "Ad Sets", icon: <DatasetIcon /> },
     { label: "Ads", icon: <LibraryBooksIcon /> },
   ];
+
+  if (error) {
+    return (
+      <ErrorDetail
+        error={error}
+        additionalDetails="Unable to retrieve Campaign data."
+      />
+    );
+  }
 
   return (
     <Box display="flex" flexDirection="column" sx={{ mb: 2, ml: 5, mr: 5 }}>
