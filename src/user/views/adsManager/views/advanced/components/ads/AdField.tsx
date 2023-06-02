@@ -91,7 +91,7 @@ export function AdField({ index, isEdit }: Props) {
 
             <Box display="flex" flexDirection="row" alignItems="center">
               <Status
-                state={values.adSets[index].creatives[selected].state ?? "New"}
+                state={values.adSets[index].creatives[selected]?.state ?? "New"}
               />
               {selected > 0 &&
                 canRemove(isEdit, values.adSets, selected, index) && (
@@ -130,7 +130,9 @@ interface AdProps {
 }
 
 function Ad({ adSetIdx, adIdx, creative }: AdProps) {
-  const cannotEdit = creative.state === "active" || creative.state === "paused";
+  const cannotEdit =
+    !!creative.state &&
+    (creative.state === "active" || creative.state === "paused");
   return (
     <>
       <FormikTextField
