@@ -19,7 +19,7 @@
     "date-fns-tz": "2.0.0",
     "formik": "2.2.9",
     "graphql": "16.6.0",
-    "highcharts": "11.0.1",
+    "highcharts": "11.1.0",
     "highcharts-react-official": "3.2.0",
     "immer": "10.0.2",
     "jwt-decode": "3.1.2",
