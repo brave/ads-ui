@@ -7,6 +7,7 @@ import { Metrics } from "../../types";
 import { prepareChart, processData } from "../../lib/overview.library";
 import { CampaignFragment } from "graphql/campaign.generated";
 import { CampaignFormat } from "graphql/types";
+import { CardContainer } from "components/Card/CardContainer";
 
 interface Props {
   engagements: EngagementFragment[];
@@ -53,14 +54,14 @@ export function DailyCampaignOverview({ engagements, campaign }: Props) {
   };
 
   return (
-    <Box border="1px solid #ededed" borderRadius="4px">
+    <CardContainer header="Daily Performance">
       <Box
         width="100%"
         height="50px"
         bgcolor="white"
         borderBottom="1px solid #ededed"
         display="flex"
-        justifyContent="center"
+        justifyContent="left"
       >
         <Tabs
           value={type}
@@ -79,6 +80,6 @@ export function DailyCampaignOverview({ engagements, campaign }: Props) {
         </Tabs>
       </Box>
       <HighchartsReact highcharts={Highcharts} options={options} />
-    </Box>
+    </CardContainer>
   );
 }

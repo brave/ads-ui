@@ -3,11 +3,7 @@ import { Formik } from "formik";
 import React from "react";
 import { CampaignForm } from "../../../../types";
 import { CampaignSchema } from "validation/CampaignSchema";
-import {
-  editCampaignValues,
-  populateFilter,
-  transformEditForm,
-} from "user/library";
+import { editCampaignValues, transformEditForm } from "user/library";
 import {
   useLoadCampaignQuery,
   useUpdateCampaignMutation,
@@ -18,37 +14,29 @@ import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useUser } from "auth/hooks/queries/useUser";
 import { useCreatePaymentSession } from "checkout/hooks/useCreatePaymentSession";
 import { PaymentType } from "graphql/types";
-import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
+import { ErrorDetail } from "components/Error/ErrorDetail";
 
 interface Params {
   campaignId: string;
 }
 
-interface Props {
-  fromDate: Date | null;
-}
-
-export function EditCampaign({ fromDate }: Props) {
+export function EditCampaign() {
   const { advertiser } = useAdvertiser();
   const { userId } = useUser();
   const history = useHistory();
   const params = useParams<Params>();
   const { createPaymentSession, loading } = useCreatePaymentSession();
 
-  const { data: initialData, loading: qLoading } = useLoadCampaignQuery({
+  const {
+    data: initialData,
+    loading: qLoading,
+    error,
+  } = useLoadCampaignQuery({
     variables: { id: params.campaignId },
     fetchPolicy: "cache-and-network",
   });
 
   const [mutation] = useUpdateCampaignMutation({
-    refetchQueries: [
-      {
-        ...refetchAdvertiserCampaignsQuery({
-          id: advertiser.id,
-          filter: populateFilter(fromDate),
-        }),
-      },
-    ],
     onCompleted(data) {
       const campaign = initialData?.campaign;
       if (
@@ -60,7 +48,19 @@ export function EditCampaign({ fromDate }: Props) {
         createPaymentSession(data.updateCampaign.id);
       }
     },
+    onError() {
+      alert("Unable to Update Campaign.");
+    },
   });
+
+  if (error) {
+    return (
+      <ErrorDetail
+        error={error}
+        additionalDetails="Campaign does not exist, or cannot be edited. Please try again later."
+      />
+    );
+  }
 
   if (!initialData || !initialData.campaign || qLoading || loading) {
     return <LinearProgress />;
@@ -72,22 +72,28 @@ export function EditCampaign({ fromDate }: Props) {
     <Container maxWidth="xl">
       <Formik
         initialValues={initialValues}
-        onSubmit={(v: CampaignForm, { setSubmitting }) => {
+        onSubmit={async (v: CampaignForm, { setSubmitting }) => {
           setSubmitting(true);
-          transformEditForm(v, params.campaignId, advertiser.id, userId)
-            .then(async (u) => {
-              return await mutation({ variables: { input: u } });
-            })
-            .catch((e) => {
-              alert("Unable to update Campaign");
-              setSubmitting(false);
-            });
+          let editForm;
+          try {
+            editForm = await transformEditForm(
+              v,
+              params.campaignId,
+              advertiser.id,
+              userId
+            );
+          } catch (e) {
+            alert("Unable to Update Campaign.");
+          }
+
+          if (editForm) {
+            await mutation({ variables: { input: editForm } });
+          }
+          setSubmitting(false);
         }}
         validationSchema={CampaignSchema}
       >
-        {({ values }) => (
-          <BaseForm isEdit={true} values={values} advertiser={advertiser} />
-        )}
+        <BaseForm isEdit={true} />
       </Formik>
     </Container>
   );

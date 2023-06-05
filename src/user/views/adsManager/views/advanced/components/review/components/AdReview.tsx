@@ -1,8 +1,7 @@
 import { Creative } from "../../../../../types";
-import { Box, List, Stack, Typography } from "@mui/material";
-import { CustomListItemText } from "components/List/CustomListItemText";
-import React from "react";
+import { Box, Typography } from "@mui/material";
 import { FormikErrors } from "formik";
+import { DisplayError, ReviewField } from "./ReviewField";
 
 interface Props {
   ad: Creative;
@@ -16,41 +15,24 @@ export function AdReview({ ad, adIdx, error }: Props) {
 
   return (
     <>
-      <Typography variant="h6">Ad {adIdx + 1}</Typography>
-      <List>
-        <CustomListItemText
-          primary="Ad Name"
-          secondary={ad.name}
-          error={hasError ? adError.name : ""}
-        />
-        <CustomListItemText primary="Ad Type" secondary="Notification Ad" />
-        <CustomListItemText
-          primary="Ad Title"
-          secondary={ad.title}
-          error={hasError ? adError.title : ""}
-        />
-        <CustomListItemText
-          primary="Ad Body"
-          secondary={ad.body}
-          error={hasError ? adError.body : ""}
-        />
-        <CustomListItemText
-          primary="Ad Target Url"
-          secondary={ad.targetUrl}
-          error={hasError ? adError.targetUrl : ""}
-        />
-        <CustomListItemText
-          error={
-            hasError && adError.targetUrlValid ? (
-              <Stack display="flex" flexDirection="column" spacing={1}>
-                {adError.targetUrlValid?.split("#").map((e) => (
-                  <Box>{e}</Box>
-                ))}
-              </Stack>
-            ) : undefined
-          }
-        />
-      </List>
+      <Typography variant="h2" gutterBottom>
+        Ad {adIdx + 1}
+      </Typography>
+      <ReviewField caption="Ad Name" value={ad.name} error={adError.name} />
+      <ReviewField caption="Ad Type" value="Notification Ad" />
+      <ReviewField caption="Ad Title" value={ad.title} error={adError.title} />
+      <ReviewField caption="Ad Body" value={ad.body} error={adError.body} />
+      <ReviewField
+        caption="Ad Target Url"
+        value={ad.targetUrl}
+        error={adError.targetUrl}
+      />
+
+      {adError.targetUrlValidationResult?.split("#").map((e, idx) => (
+        <Box key={`error-${idx}`}>
+          <DisplayError error={e} />
+        </Box>
+      ))}
     </>
   );
 }

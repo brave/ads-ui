@@ -3,6 +3,7 @@ import { ConversionFields } from "components/Conversion/ConversionFields";
 import React from "react";
 import { FieldArray, useField } from "formik";
 import { Conversion, initialConversion } from "../../../../../types";
+import { CardContainer } from "components/Card/CardContainer";
 
 interface Props {
   index: number;
@@ -14,13 +15,10 @@ export function ConversionField({ index }: Props) {
   );
 
   return (
-    <>
+    <CardContainer header="Conversion">
       <FieldArray name={`adSets.${index}.conversions`}>
         {({ remove, push }) => (
           <>
-            <Divider textAlign="left" sx={{ fontSize: "24px", mb: 1, mt: 3 }}>
-              Conversion
-            </Divider>
             <Stack direction="row" spacing={1}>
               <Typography variant="body2" sx={{ mb: 2 }}>
                 Define post-engagement analytics.
@@ -48,11 +46,14 @@ export function ConversionField({ index }: Props) {
             </Stack>
 
             {(meta.value ?? []).map((v, idx) => (
-              <ConversionFields name={`adSets.${index}.conversions.${idx}`} />
+              <ConversionFields
+                key={`conversion-${idx}`}
+                name={`adSets.${index}.conversions.${idx}`}
+              />
             ))}
           </>
         )}
       </FieldArray>
-    </>
+    </CardContainer>
   );
 }

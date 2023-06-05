@@ -1,6 +1,8 @@
 import { array, boolean, date, number, object, ref, string } from "yup";
 import { startOfDay } from "date-fns";
 import { twoDaysOut } from "form/DateFieldHelpers";
+import _ from "lodash";
+import { ValidationError } from "yup";
 
 export const SimpleUrlRegexp = /https:\/\/.+\.[a-zA-Z]{2,}\/?.*/g;
 const NoSpacesRegex = /^\S*$/;
@@ -133,9 +135,10 @@ export const CampaignSchema = object().shape({
                 .label("Body")
                 .max(60, "Maximum 60 Characters")
                 .required("Ad Body is required"),
-              targetUrlValid: boolean().isTrue(
-                "Please enter a valid Ad URL, or check URL has finished validating in the Ad Set."
-              ),
+              targetUrlValidationResult: string().test({
+                test: (value) => _.isEmpty(value),
+                message: ({ value }) => value,
+              }),
               targetUrl: string()
                 .label("Target Url")
                 .required("Ad URL is required")

@@ -17,6 +17,7 @@ import { LoadingButton } from "@mui/lab";
 import { useUpdateAdvertiserMutation } from "graphql/advertiser.generated";
 import { useAuthContext } from "auth/context/auth.hook";
 import { getUser } from "auth/lib";
+import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 
 const style = {
   position: "absolute" as "absolute",
@@ -31,11 +32,8 @@ const style = {
   p: 4,
 };
 
-interface Props {
-  advertiser: IAdvertiser;
-}
-
-export default function AgreedModal({ advertiser }: Props) {
+export default function AgreedModal() {
+  const { advertiser } = useAdvertiser();
   const { url } = useRouteMatch();
   const { setSessionUser } = useAuthContext();
   const history = useHistory();
@@ -66,6 +64,10 @@ export default function AgreedModal({ advertiser }: Props) {
       setOpen(false);
     },
   });
+
+  if (!advertiser.selfServiceCreate) {
+    return null;
+  }
 
   const { tracking, payment, terms } = agreed;
   return (

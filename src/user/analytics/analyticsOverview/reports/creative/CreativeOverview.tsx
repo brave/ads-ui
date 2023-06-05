@@ -9,6 +9,7 @@ import { EngagementFragment } from "graphql/analytics-overview.generated";
 import { CampaignFragment } from "graphql/campaign.generated";
 import { creativeEngagements } from "../../lib/creative.library";
 import { CreativeMetric, StatsMetric } from "../../types";
+import { CardContainer } from "components/Card/CardContainer";
 
 interface Props {
   engagements: EngagementFragment[];
@@ -115,7 +116,7 @@ export function CreativeOverview({ engagements, campaign }: Props) {
   };
 
   return (
-    <Box>
+    <CardContainer header="Creative Performance">
       {isNtp && (
         <Stack display="flex" direction="row" justifyContent="space-evenly">
           {metrics.map((ntp, idx) => (
@@ -124,6 +125,7 @@ export function CreativeOverview({ engagements, campaign }: Props) {
               direction="column"
               alignItems="center"
               flexWrap="wrap"
+              key={`creativeMetric-${idx}`}
             >
               <img
                 src={ntp.creativePayload.body}
@@ -136,37 +138,35 @@ export function CreativeOverview({ engagements, campaign }: Props) {
           ))}
         </Stack>
       )}
-      <Box border="1px solid #ededed" borderRadius="4px">
-        <Box
-          sx={{
-            width: "100%",
-            height: "50px",
-            backgroundColor: "white",
-            borderBottom: "1px solid #ededed",
-            display: "flex",
-            justifyContent: "center",
+      <Box
+        sx={{
+          width: "100%",
+          height: "50px",
+          backgroundColor: "white",
+          borderBottom: "1px solid #ededed",
+          display: "flex",
+          justifyContent: "left",
+        }}
+      >
+        <Tabs
+          value={type}
+          onChange={(evt, v) => {
+            onChange(metrics, v);
           }}
+          variant="scrollable"
+          scrollButtons="auto"
         >
-          <Tabs
-            value={type}
-            onChange={(evt, v) => {
-              onChange(metrics, v);
-            }}
-            variant="scrollable"
-            scrollButtons="auto"
-          >
-            <Tab value="ctr" label="CTR" />
-            <Tab value="landingRate" label="Click to 10s visit rate" />
-            <Tab value="visitRate" label="10s Visit Rate" />
-            {!isNtp && <Tab value="cpa" label="CPA" />}
-            <Tab value="views" label="Impressions" />
-            <Tab value="conversions" label="Conversions" />
-            <Tab value="clicks" label="Clicks" />
-            {!isNtp && <Tab value="spend" label="Spend" />}
-          </Tabs>
-        </Box>
-        <HighchartsReact highcharts={Highcharts} options={options} />
+          <Tab value="ctr" label="CTR" />
+          <Tab value="landingRate" label="Click to 10s visit rate" />
+          <Tab value="visitRate" label="10s Visit Rate" />
+          {!isNtp && <Tab value="cpa" label="CPA" />}
+          <Tab value="views" label="Impressions" />
+          <Tab value="conversions" label="Conversions" />
+          <Tab value="clicks" label="Clicks" />
+          {!isNtp && <Tab value="spend" label="Spend" />}
+        </Tabs>
       </Box>
-    </Box>
+      <HighchartsReact highcharts={Highcharts} options={options} />
+    </CardContainer>
   );
 }

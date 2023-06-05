@@ -16,7 +16,7 @@ export const CampaignDateRange: React.FC<{ isEdit: boolean }> = ({
 
   return (
     <Box>
-      <Stack direction="row" spacing={2} alignItems="baseline" mt={2} mb={3}>
+      <Stack direction="row" spacing={2} alignItems="baseline" mt={1} mb={1}>
         <TimezoneAwareDatePicker
           label="Start Date"
           tz={tz}

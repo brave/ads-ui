@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, Box, Divider, LinearProgress } from "@mui/material";
+import { Alert, Box, LinearProgress } from "@mui/material";
 import moment from "moment/moment";
 import { CampaignFormat } from "graphql/types";
 import {
@@ -13,6 +13,7 @@ import { DailyCampaignOverview } from "./analyticsOverview/reports/campaign/Dail
 import { CreativeOverview } from "./analyticsOverview/reports/creative/CreativeOverview";
 import { OsOverview } from "./analyticsOverview/reports/os/OsOverview";
 import { DashboardButton } from "components/Button/DashboardButton";
+import { ErrorDetail } from "components/Error/ErrorDetail";
 
 interface Params {
   campaignId: string;
@@ -44,16 +45,27 @@ const AnalyticsOverview: React.FC = () => {
     }
   };
 
-  const { loading, data } = useAnalyticOverviewQuery({
+  const { loading, data, error } = useAnalyticOverviewQuery({
     variables: {
       id: params.campaignId,
     },
     onCompleted: (d) => initializeCampaign(d, today),
     pollInterval: 600_000,
+    fetchPolicy: "cache-and-network",
   });
 
-  if (loading || !data || !data.campaign || !startDate)
+  if (error) {
+    return (
+      <ErrorDetail
+        error={error}
+        additionalDetails="Unable to retrieve reporting data for this Campaign."
+      />
+    );
+  }
+
+  if (loading || !data || !data.campaign || !startDate) {
     return <LinearProgress />;
+  }
 
   const filteredEngagements = data.campaign.engagements?.filter(
     (engagement) =>
@@ -85,11 +97,7 @@ const AnalyticsOverview: React.FC = () => {
   }
 
   return (
-    <Box
-      sx={{
-        p: 3,
-      }}
-    >
+    <Box padding={2}>
       <ReportUtils
         startDate={startDate}
         endDate={endDate}
@@ -97,37 +105,21 @@ const AnalyticsOverview: React.FC = () => {
         onSetDate={setDateRange}
       />
 
-      <Divider textAlign="left" sx={{ fontWeight: "600", mb: 2 }}>
-        {data.campaign.name}: Overview
-      </Divider>
-
       <EngagementsOverview
         engagements={filteredEngagements ?? []}
         campaign={data.campaign}
         adSets={data.campaign.adSets}
       />
 
-      <Divider textAlign="left" sx={{ fontWeight: "600", mt: 5, mb: 3 }}>
-        Daily Performance
-      </Divider>
-
       <DailyCampaignOverview
         engagements={filteredEngagements ?? []}
         campaign={data.campaign}
       />
 
-      <Divider textAlign="left" sx={{ fontWeight: "600", mt: 5, mb: 3 }}>
-        OS Performance
-      </Divider>
-
       <OsOverview
         engagements={filteredEngagements ?? []}
         campaign={data.campaign}
       />
-
-      <Divider textAlign="left" sx={{ fontWeight: "600", mt: 5, mb: 3 }}>
-        Creative Performance
-      </Divider>
 
       <CreativeOverview
         engagements={filteredEngagements ?? []}

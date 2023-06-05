@@ -53,6 +53,13 @@ export function BaseBarChart({
     series,
   };
 
+  const tabs: Option[] = [
+    { value: "landingRate", label: "Click to 10s Visit Rate" },
+    { value: "ctr", label: "CTR" },
+    { value: "visitRate", label: "10s visit rate" },
+    ...(extraOptions ?? []),
+  ];
+
   return (
     <Box border="1px solid #ededed" borderRadius="4px">
       <Box
@@ -60,7 +67,7 @@ export function BaseBarChart({
         bgcolor="white"
         borderBottom="1px solid #ededed"
         display="flex"
-        justifyContent="center"
+        justifyContent="left"
       >
         <Tabs
           value={type}
@@ -70,11 +77,9 @@ export function BaseBarChart({
           variant="scrollable"
           scrollButtons="auto"
         >
-          <Tab value="landingRate" label="Click to 10s Visit Rate" />
-          <Tab value="ctr" label="CTR" />
-          <Tab value="visitRate" label="10s visit rate" />
-          {!!extraOptions &&
-            extraOptions.map((o) => <Tab value={o.value} label={o.label} />)}
+          {tabs.map((t) => (
+            <Tab key={t.label} value={t.value} label={t.label} />
+          ))}
         </Tabs>
       </Box>
       <HighchartsReact highcharts={Highcharts} options={options} />

@@ -11,16 +11,30 @@ export type ValidateTargetUrlQuery = {
   __typename?: "Query";
   validateTargetUrl: {
     __typename?: "TargetUrlValidation";
-    errors: Array<string>;
     isValid: boolean;
+    redirects: Array<{
+      __typename?: "Redirect";
+      url: string;
+      violations: Array<{
+        __typename?: "ValidationDetail";
+        summary: string;
+        detail: string;
+      }>;
+    }>;
   };
 };
 
 export const ValidateTargetUrlDocument = gql`
   query validateTargetUrl($url: String!) {
     validateTargetUrl(targetUrl: $url) {
-      errors
       isValid
+      redirects {
+        url
+        violations {
+          summary
+          detail
+        }
+      }
     }
   }
 `;
