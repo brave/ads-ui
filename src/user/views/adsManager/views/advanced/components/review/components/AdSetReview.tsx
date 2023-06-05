@@ -1,3 +1,4 @@
+import React from "react";
 import { Divider } from "@mui/material";
 import { AdSetForm, OS, Segment } from "../../../../../types";
 import { FormikErrors } from "formik";
@@ -51,7 +52,7 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
       />
 
       {adSet.creatives.map((ad, adIdx) => (
-        <>
+        <React.Fragment key={`creative-${adIdx}`}>
           <Divider sx={{ mt: 2, mb: 2 }} />
 
           <AdReview
@@ -59,7 +60,7 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
             adIdx={adIdx}
             error={hasErrors ? adSetError?.creatives?.[adIdx] : ""}
           />
-        </>
+        </React.Fragment>
       ))}
     </CardContainer>
   );

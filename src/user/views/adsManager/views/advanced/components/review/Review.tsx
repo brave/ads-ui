@@ -26,6 +26,7 @@ export function Review({ isEdit }: Props) {
 
       {values.adSets.map((adSet, adSetIdx) => (
         <AdSetReview
+          key={`adSetReview-${adSetIdx}`}
           idx={adSetIdx}
           adSet={adSet}
           errors={errors.adSets?.[adSetIdx]}

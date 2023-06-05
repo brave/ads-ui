@@ -19,11 +19,13 @@ export function DraftMenu() {
   return (
     <>
       <Tooltip title="Drafts">
-        <IconButton disabled={drafts.length === 0} onClick={handleClick}>
-          <Badge color="primary" badgeContent={drafts.length}>
-            <DraftsIcon fontSize="large" />
-          </Badge>
-        </IconButton>
+        <span>
+          <IconButton disabled={drafts.length === 0} onClick={handleClick}>
+            <Badge color="primary" badgeContent={drafts.length}>
+              <DraftsIcon fontSize="large" />
+            </Badge>
+          </IconButton>
+        </span>
       </Tooltip>
       <Menu open={open} anchorEl={anchorEl} onClose={() => setAnchorEl(null)}>
         <MenuItem
@@ -44,6 +46,7 @@ export function DraftMenu() {
         </MenuItem>
         {drafts.map((d, idx) => (
           <MenuItem
+            key={`draft-${d.draftId}-${idx}`}
             onClick={() => {
               history.push(`/user/main/adsmanager/advanced/new/${d.draftId}`);
               setAnchorEl(null);

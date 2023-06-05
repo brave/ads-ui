@@ -42,6 +42,14 @@ export function BasePieChart({ series, onSetType, extraOptions, type }: Props) {
     series,
   };
 
+  const tabs: Option[] = [
+    { value: "view", label: "Impressions" },
+    { value: "conversion", label: "Conversions" },
+    { value: "click", label: "Clicks" },
+    { value: "landed", label: "10s visits" },
+    ...(extraOptions ?? []),
+  ];
+
   return (
     <Box border="1px solid #ededed" borderRadius="4px">
       <Box
@@ -59,12 +67,9 @@ export function BasePieChart({ series, onSetType, extraOptions, type }: Props) {
           variant="scrollable"
           scrollButtons="auto"
         >
-          <Tab value="view" label="Impressions" />
-          <Tab value="conversion" label="Conversions" />
-          <Tab value="click" label="Clicks" />
-          <Tab value="landed" label="10s visits" />
-          {!!extraOptions &&
-            extraOptions.map((o) => <Tab value={o.value} label={o.label} />)}
+          {tabs.map((t) => (
+            <Tab key={t.label} value={t.value} label={t.label} />
+          ))}
         </Tabs>
       </Box>
       <HighchartsReact highcharts={Highcharts} options={options} />
