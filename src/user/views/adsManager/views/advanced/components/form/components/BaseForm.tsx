@@ -1,13 +1,5 @@
-import { Form, FormikValues } from "formik";
-import {
-  Box,
-  Button,
-  IconButton,
-  Stack,
-  Tab,
-  Tabs,
-  Tooltip,
-} from "@mui/material";
+import { Form, FormikValues, useFormikContext } from "formik";
+import { Box, Button, Stack, Tab, Tabs } from "@mui/material";
 import { CampaignFields } from "../../campaign/CampaignFields";
 import { AdSetFields } from "../../adSet/AdSetFields";
 import { AdField } from "../../ads/AdField";
@@ -15,17 +7,16 @@ import { Review } from "../../review/Review";
 import React, { useState } from "react";
 import { CampaignForm } from "../../../../../types";
 import { DeleteDraft } from "./DeleteDraft";
-import { IAdvertiser } from "auth/context/auth.interface";
 import { DashboardIconButton } from "components/Button/DashboardIconButton";
+import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 
 interface Props {
   isEdit: boolean;
-  values: CampaignForm;
-  advertiser: IAdvertiser;
   draftId?: string;
 }
 
-export function BaseForm({ isEdit, values, advertiser, draftId }: Props) {
+export function BaseForm({ isEdit, draftId }: Props) {
+  const { values } = useFormikContext<CampaignForm>();
   const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -52,34 +43,32 @@ export function BaseForm({ isEdit, values, advertiser, draftId }: Props) {
         {draftId && !isEdit && <DeleteDraft draftId={draftId} />}
       </Stack>
 
-      {value === 0 && (
-        <CampaignFields
-          onNext={() => setValue(value + 1)}
-          isEdit={isEdit}
-          advertiser={advertiser}
-        />
-      )}
+      <Box>
+        {value === 0 && (
+          <CampaignFields onNext={() => setValue(value + 1)} isEdit={isEdit} />
+        )}
 
-      {showCard(values) && (
-        <>
-          <AdSetFields
-            tabValue={value}
-            onRemove={() => setValue(value - 1)}
-            onCreate={() => setValue(value + 1)}
-            isEdit={isEdit}
-          />
-          <AdField index={value - 1} isEdit={isEdit} />
-          <Box sx={{ mt: 2 }}>
-            <Button
-              variant="contained"
-              size="large"
-              onClick={() => setValue(values.adSets.length + 1)}
-            >
-              Next
-            </Button>
-          </Box>
-        </>
-      )}
+        {showCard(values) && (
+          <>
+            <AdSetFields
+              tabValue={value}
+              onRemove={() => setValue(value - 1)}
+              onCreate={() => setValue(value + 1)}
+              isEdit={isEdit}
+            />
+            <AdField index={value - 1} isEdit={isEdit} />
+            <Box sx={{ mt: 2 }}>
+              <Button
+                variant="contained"
+                size="large"
+                onClick={() => setValue(values.adSets.length + 1)}
+              >
+                Next
+              </Button>
+            </Box>
+          </>
+        )}
+      </Box>
 
       {value === values.adSets.length + 1 && <Review isEdit={isEdit} />}
     </Form>

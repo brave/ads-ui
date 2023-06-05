@@ -1,13 +1,11 @@
-import React, { useState } from "react";
-import { Text } from "components/Text/Text";
-import { Input, InputContainer } from "components/formElements/formElements";
+import { useState } from "react";
 import _ from "lodash";
 import * as tweetnacl from "tweetnacl";
 import { useUpdateAdvertiserMutation } from "graphql/advertiser.generated";
 import {
   Box,
   Button,
-  Card,
+  Container,
   Divider,
   FormControl,
   InputLabel,
@@ -15,14 +13,19 @@ import {
   Modal,
   Select,
   SelectChangeEvent,
+  Stack,
+  SxProps,
+  TextField,
+  Typography,
 } from "@mui/material";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { setActiveAdvertiser } from "auth/util";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 import { useHistory } from "react-router-dom";
+import { CardContainer } from "components/Card/CardContainer";
 
-const modalStyles = {
-  position: "absolute" as "absolute",
+const modalStyles: SxProps = {
+  position: "absolute",
   top: "50%",
   left: "50%",
   right: "auto",
@@ -38,7 +41,7 @@ const modalStyles = {
 
 const Settings = () => {
   const { advertiser: activeAdvertiser, advertisers } = useAdvertiser();
-  const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
   const [publicKey, setPublicKey] = useState(activeAdvertiser.publicKey);
   const [advertiserId, setAdvertiserId] = useState(activeAdvertiser.id);
   const [newPublicKey, setNewPublicKey] = useState("");
@@ -49,8 +52,30 @@ const Settings = () => {
     useState("disclaimer");
   const history = useHistory();
 
+  const handleUpdateAdvertiser = () => {
+    setSaving(false);
+    setPublicKey(newPublicKey);
+    setPrivateKey("");
+    setNewPrivateKey("");
+    closeNewKeypairModal();
+    window.location.reload();
+  };
+
+  const [updateAdvertiser] = useUpdateAdvertiserMutation({
+    variables: {
+      updateAdvertiserInput: {
+        id: advertiserId,
+        publicKey: publicKey,
+      },
+    },
+    onCompleted: handleUpdateAdvertiser,
+    onError() {
+      alert("Unable to update Advertiser.");
+    },
+  });
+
   const saveKeypair = () => {
-    setLoading(true);
+    setSaving(true);
     updateAdvertiser({
       variables: {
         updateAdvertiserInput: {
@@ -58,18 +83,7 @@ const Settings = () => {
           publicKey: newPublicKey,
         },
       },
-      onCompleted() {
-        window.location.reload();
-      },
     });
-  };
-
-  const handleUpdateAdvertiser = () => {
-    setLoading(false);
-    setPublicKey(newPublicKey);
-    setPrivateKey("");
-    setNewPrivateKey("");
-    closeNewKeypairModal();
   };
 
   const openNewKeypairModal = () => {
@@ -90,16 +104,6 @@ const Settings = () => {
     setShowNewKeypairModal(false);
   };
 
-  const [updateAdvertiser] = useUpdateAdvertiserMutation({
-    variables: {
-      updateAdvertiserInput: {
-        id: advertiserId,
-        publicKey: publicKey,
-      },
-    },
-    onCompleted: handleUpdateAdvertiser,
-  });
-
   const setActiveAdvertiserWithId = (e: SelectChangeEvent) => {
     const id = e.target.value;
     setAdvertiserId(id);
@@ -109,12 +113,7 @@ const Settings = () => {
   };
 
   return (
-    <Card
-      sx={{
-        m: 2,
-        p: 3,
-      }}
-    >
+    <Container>
       <Button
         variant="text"
         startIcon={<ArrowBack />}
@@ -122,406 +121,191 @@ const Settings = () => {
       >
         Dashboard
       </Button>
-      <Divider textAlign="left" sx={{ mt: 2, mb: 3, fontSize: "24px" }}>
-        Account Settings
-      </Divider>
+      <Stack spacing={2} mt={1}>
+        <CardContainer header="Account Settings">
+          <Typography variant="h6" gutterBottom>
+            Keypairs
+          </Typography>
 
-      <Text
-        content="Keypairs"
-        fontFamily="Poppins"
-        sizes={[22, 22, 22, 22, 18]}
-      ></Text>
+          <Typography>
+            Generate a keypair for your organization. Brave Ads will use your
+            organization's public key to sign and encrypt conversion data. Only
+            your organization will have access to the private key, which can be
+            used to decrypt and view conversion data.
+          </Typography>
 
-      <Text
-        style={{ marginTop: "28px" }}
-        content={
-          "Generate a keypair for your organization. Brave Ads will use your organization's public key to sign and encrypt conversion data. Only your organization will have access to the private key, which can be used to decrypt and view conversion data."
-        }
-        sizes={[16, 16, 15, 15, 13]}
-        fontFamily={"Poppins"}
-      />
-
-      <div style={{ marginTop: "10px" }}></div>
-
-      <Box width="100%" marginRight="24px" display="flex">
-        {publicKey !== "" && (
+          {publicKey !== "" && (
+            <Box marginTop={1}>
+              <Typography>Your organization's public key:</Typography>
+              <Box component="pre" marginY={0}>
+                {publicKey}
+              </Box>
+            </Box>
+          )}
           <Box>
-            <div style={{ display: "flex" }}>
-              <Text
-                content={"Your organization's public key:"}
-                sizes={[16, 16, 15, 15, 13]}
-                fontFamily={"Poppins"}
-              />
-            </div>
-            <div
+            <Button
+              onClick={() => openNewKeypairModal()}
+              variant="contained"
               style={{
-                width: "100%",
                 marginTop: "22px",
-                textAlign: "center",
-                fontSize: 18,
-                fontFamily: "Poppins",
-                marginBottom: "6px",
+                width: "300px",
+                alignSelf: "center",
               }}
             >
-              {publicKey}
-            </div>
+              New Keypair
+            </Button>
           </Box>
-        )}
+        </CardContainer>
 
-        <Button
-          onClick={() => openNewKeypairModal()}
-          variant="contained"
-          style={{
-            marginTop: "22px",
-            width: "300px",
-            alignSelf: "center",
-          }}
-        >
-          New Keypair
-        </Button>
-      </Box>
+        <CardContainer header="Organization">
+          <Typography>
+            You may have access to multiple organisations. Switch between them
+            here.
+          </Typography>
 
-      <Divider textAlign="left" sx={{ mt: 5, mb: 3, fontSize: "24px" }}>
-        Organization
-      </Divider>
-
-      <Text
-        style={{ marginTop: "28px" }}
-        content={
-          "Choose which organization you would like to view, Brave Ads Users can belong to multiple organizations."
-        }
-        sizes={[16, 16, 15, 15, 13]}
-        fontFamily={"Poppins"}
-      />
-
-      <div style={{ marginBottom: "28px" }}></div>
-
-      <div style={{ height: "400px" }}>
-        <InputContainer>
-          <FormControl fullWidth>
-            <InputLabel>Select Organization</InputLabel>
-            <Select
-              value={advertiserId}
-              label="Select Organization"
-              onChange={(e) => setActiveAdvertiserWithId(e)}
-            >
-              {advertisers.map((a) => (
-                <MenuItem value={a.id}>{a.name}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </InputContainer>
-      </div>
+          <Box sx={{ mt: 2 }}>
+            <FormControl fullWidth>
+              <InputLabel>Select Organization</InputLabel>
+              <Select
+                value={advertiserId}
+                label="Select Organization"
+                onChange={(e) => setActiveAdvertiserWithId(e)}
+              >
+                {advertisers.map((a) => (
+                  <MenuItem value={a.id}>{a.name}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+        </CardContainer>
+      </Stack>
 
       <Modal open={showNewKeypairModal} onClose={() => closeNewKeypairModal()}>
         <Box sx={modalStyles}>
           {newKeypairModalState === "disclaimer" && (
-            <div style={{ width: "600px" }}>
-              <Text
-                content={`Create new keypair?`}
-                sizes={[16, 16, 15, 15, 22]}
-                color={"#E0694C"}
-                fontFamily={"Poppins"}
-              />
-              <Text
-                style={{ marginTop: "42px" }}
-                content={`You are attempting to create a new keypair, this will replace any of your organization's existing keypairs. Please note, previous keypairs cannot be retrieved or used once replaced.`}
-                sizes={[16, 16, 15, 15, 16]}
-                fontFamily={"Muli"}
-              />
-              <div
-                style={{ display: "flex", width: "100%", marginTop: "42px" }}
+            <Box maxWidth={600}>
+              <Typography variant="h6" color="primary" gutterBottom>
+                Create new keypair?
+              </Typography>
+
+              <Typography>
+                You are attempting to create a new keypair, this will replace
+                any of your organization's existing keypairs. Please note,
+                previous keypairs cannot be retrieved or used once replaced.
+              </Typography>
+
+              <Stack
+                direction="row"
+                spacing={2}
+                justifyContent="flex-end"
+                marginTop={4}
               >
-                <div
-                  onClick={() => {
-                    closeNewKeypairModal();
-                  }}
-                  style={{
-                    marginLeft: "auto",
-                    marginRight: "28px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    padding: "0px 20px",
-                    width: "100px",
-                    border: "1px solid #e2e2e2",
-                    borderRadius: "100px 100px 100px 100px",
-                    cursor: "pointer",
-                  }}
+                <Button variant="outlined" onClick={closeNewKeypairModal}>
+                  Cancel
+                </Button>
+
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => setNewKeypairModalState("privateKey")}
                 >
-                  <span>
-                    <Text
-                      style={{ paddingTop: "6px", paddingBottom: "6px" }}
-                      sizes={[16, 16, 15, 15, 14]}
-                      fontWeight={500}
-                      fontFamily={"Poppins"}
-                    >
-                      Cancel
-                    </Text>
-                  </span>
-                </div>
-                <div
-                  onClick={() => {
-                    setNewKeypairModalState("privateKey");
-                  }}
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    padding: "0px 20px",
-                    width: "100px",
-                    background: "#F87454",
-                    color: "white",
-                    border: "none",
-                    borderRadius: "100px 100px 100px 100px",
-                    cursor: "pointer",
-                  }}
-                >
-                  <span>
-                    <Text
-                      style={{ paddingTop: "6px", paddingBottom: "6px" }}
-                      sizes={[16, 16, 15, 15, 14]}
-                      fontWeight={500}
-                      fontFamily={"Poppins"}
-                    >
-                      Continue
-                    </Text>
-                  </span>
-                </div>
-              </div>
-            </div>
+                  Continue
+                </Button>
+              </Stack>
+            </Box>
           )}
           {newKeypairModalState === "privateKey" && (
-            <div style={{ width: "600px" }}>
-              <Text
-                content={`Create new keypair?`}
-                sizes={[16, 16, 15, 15, 22]}
-                color={"#E0694C"}
-                fontFamily={"Poppins"}
+            <Box maxWidth={600}>
+              <Typography variant="h6" color="primary" gutterBottom>
+                Create new keypair?
+              </Typography>
+
+              <Typography gutterBottom>
+                Your organization's new private key will be:
+              </Typography>
+
+              <TextField
+                value={privateKey}
+                InputProps={{
+                  readOnly: true,
+                }}
+                fullWidth
+                sx={{ bgcolor: "#fafafa" }}
               />
-              <Text
-                style={{ marginTop: "42px", marginBottom: "16px" }}
-                content={`Your organization's new private key will be:`}
-                sizes={[16, 16, 15, 15, 16]}
-                fontFamily={"Muli"}
-              />
-              <Input value={privateKey}></Input>
-              <Text
-                style={{ marginTop: "28px", color: "#4C54D2" }}
-                content={
-                  "Keep this safe! Brave cannot recover this key. Please note, you will have a chance to confirm your private key before changes are saved."
-                }
-                sizes={[16, 16, 15, 15, 15]}
-                fontFamily={"Poppins"}
-              />
-              <div
-                style={{ display: "flex", width: "100%", marginTop: "42px" }}
+
+              <Typography mt={2} gutterBottom>
+                Copy this and keep this safe!
+              </Typography>
+              <Typography>
+                Brave cannot recover this key, which has been generated in your
+                browser. You will need to confirm this private key on the next
+                step before changes are saved.
+              </Typography>
+              <Stack
+                direction="row"
+                spacing={2}
+                justifyContent="flex-end"
+                marginTop={4}
               >
-                <div
-                  onClick={() => {
-                    closeNewKeypairModal();
-                  }}
-                  style={{
-                    marginLeft: "auto",
-                    marginRight: "28px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    padding: "0px 20px",
-                    width: "100px",
-                    border: "1px solid #e2e2e2",
-                    borderRadius: "100px 100px 100px 100px",
-                    cursor: "pointer",
-                  }}
+                <Button variant="outlined" onClick={closeNewKeypairModal}>
+                  Cancel
+                </Button>
+
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => setNewKeypairModalState("confirmation")}
                 >
-                  <span>
-                    <Text
-                      style={{ paddingTop: "6px", paddingBottom: "6px" }}
-                      sizes={[16, 16, 15, 15, 14]}
-                      fontWeight={500}
-                      fontFamily={"Poppins"}
-                    >
-                      Cancel
-                    </Text>
-                  </span>
-                </div>
-                <div
-                  onClick={() => {
-                    setNewKeypairModalState("confirmation");
-                  }}
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    padding: "0px 20px",
-                    width: "100px",
-                    background: "#F87454",
-                    color: "white",
-                    border: "none",
-                    borderRadius: "100px 100px 100px 100px",
-                    cursor: "pointer",
-                  }}
-                >
-                  <span>
-                    <Text
-                      style={{ paddingTop: "6px", paddingBottom: "6px" }}
-                      sizes={[16, 16, 15, 15, 14]}
-                      fontWeight={500}
-                      fontFamily={"Poppins"}
-                    >
-                      Continue
-                    </Text>
-                  </span>
-                </div>
-              </div>
-            </div>
+                  Continue
+                </Button>
+              </Stack>
+            </Box>
           )}
           {newKeypairModalState === "confirmation" && (
-            <div style={{ width: "600px" }}>
-              <Text
-                content={`Create new keypair?`}
-                sizes={[16, 16, 15, 15, 22]}
-                color={"#E0694C"}
-                fontFamily={"Poppins"}
-              />
-              <Text
-                style={{ marginTop: "42px", marginBottom: "16px" }}
-                content={`Please confirm your organization's new private key:`}
-                sizes={[16, 16, 15, 15, 16]}
-                fontFamily={"Muli"}
-              />
-              <Input
+            <Box maxWidth={600}>
+              <Typography variant="h6" color="primary" gutterBottom>
+                Create new keypair?
+              </Typography>
+
+              <Typography gutterBottom>
+                Please confirm your organization's new private key:
+              </Typography>
+
+              <TextField
                 value={newPrivateKey}
-                onChange={(e) => {
-                  setNewPrivateKey(e.target.value);
-                }}
-              ></Input>
-              <Text
-                style={{ marginTop: "28px", color: "#4C54D2" }}
-                content={
-                  "Once confirmed, your organization's keypair will be replaced with the new keypair."
-                }
-                sizes={[16, 16, 15, 15, 15]}
-                fontFamily={"Poppins"}
+                fullWidth
+                onChange={(e) => setNewPrivateKey(e.target.value)}
               />
-              <div
-                style={{ display: "flex", width: "100%", marginTop: "42px" }}
+
+              <Typography gutterBottom marginTop={2}>
+                Once confirmed, your organization's keypair will be replaced
+                with the new keypair.
+              </Typography>
+
+              <Stack
+                direction="row"
+                spacing={2}
+                justifyContent="flex-end"
+                marginTop={4}
               >
-                <div
-                  onClick={() => {
-                    closeNewKeypairModal();
-                  }}
-                  style={{
-                    marginLeft: "auto",
-                    marginRight: "28px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    padding: "0px 20px",
-                    width: "100px",
-                    border: "1px solid #e2e2e2",
-                    borderRadius: "100px 100px 100px 100px",
-                    cursor: "pointer",
-                  }}
+                <Button variant="outlined" onClick={closeNewKeypairModal}>
+                  Cancel
+                </Button>
+
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => saveKeypair()}
+                  disabled={saving || privateKey !== newPrivateKey}
                 >
-                  <span>
-                    <Text
-                      style={{ paddingTop: "6px", paddingBottom: "6px" }}
-                      sizes={[16, 16, 15, 15, 14]}
-                      fontWeight={500}
-                      fontFamily={"Poppins"}
-                    >
-                      Cancel
-                    </Text>
-                  </span>
-                </div>
-                {privateKey === newPrivateKey && !loading && (
-                  <div
-                    onClick={() => {
-                      saveKeypair();
-                    }}
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      padding: "0px 20px",
-                      width: "100px",
-                      background: "#F87454",
-                      color: "white",
-                      border: "none",
-                      borderRadius: "100px 100px 100px 100px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    <span>
-                      <Text
-                        style={{ paddingTop: "6px", paddingBottom: "6px" }}
-                        sizes={[16, 16, 15, 15, 14]}
-                        fontWeight={500}
-                        fontFamily={"Poppins"}
-                      >
-                        Save
-                      </Text>
-                    </span>
-                  </div>
-                )}
-                {privateKey === newPrivateKey && loading && (
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      padding: "0px 20px",
-                      width: "100px",
-                      background: "#F87454",
-                      color: "white",
-                      border: "none",
-                      borderRadius: "100px 100px 100px 100px",
-                      cursor: "pointer",
-                      opacity: 0.5,
-                    }}
-                  >
-                    <span>
-                      <Text
-                        style={{ paddingTop: "6px", paddingBottom: "6px" }}
-                        sizes={[16, 16, 15, 15, 14]}
-                        fontWeight={500}
-                        fontFamily={"Poppins"}
-                      >
-                        Saving...
-                      </Text>
-                    </span>
-                  </div>
-                )}
-                {privateKey !== newPrivateKey && !loading && (
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      padding: "0px 20px",
-                      width: "100px",
-                      background: "#F87454",
-                      color: "white",
-                      border: "none",
-                      borderRadius: "100px 100px 100px 100px",
-                      cursor: "pointer",
-                      opacity: 0.5,
-                    }}
-                  >
-                    <span>
-                      <Text
-                        style={{ paddingTop: "6px", paddingBottom: "6px" }}
-                        sizes={[16, 16, 15, 15, 14]}
-                        fontWeight={500}
-                        fontFamily={"Poppins"}
-                      >
-                        Save
-                      </Text>
-                    </span>
-                  </div>
-                )}
-              </div>
-            </div>
+                  {saving ? "Saving..." : "Save"}
+                </Button>
+              </Stack>
+            </Box>
           )}
         </Box>
       </Modal>
-    </Card>
+    </Container>
   );
 };
 

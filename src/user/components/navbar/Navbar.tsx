@@ -5,10 +5,12 @@ import { Link, useHistory, useRouteMatch } from "react-router-dom";
 import TopBarProgress from "react-topbar-progress-indicator";
 
 import { AppBar, Button, Toolbar } from "@mui/material";
-import { UserMenu } from "./components/UserMenu/UserMenu";
-import { DraftMenu } from "./components/DraftMenu/DraftMenu";
+import { UserMenu } from "user/components/navbar/components/UserMenu";
+import { DraftMenu } from "user/components/navbar/components/DraftMenu";
 import moment from "moment";
 import rewards from "../../../../Subdomains_Rewards_Ads_Default.png";
+import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import AgreedModal from "user/components/navbar/components/AgreedModal";
 
 const logoStyle = {
   textDecoration: "none",
@@ -25,14 +27,8 @@ TopBarProgress.config({
   barThickness: 2,
 });
 
-interface Props {
-  canCreate: boolean;
-}
-
-export function Navbar({ canCreate }: Props) {
-  const history = useHistory();
-  const { url } = useRouteMatch();
-  const isNewCampaignPage = url.includes("/user/main/adsmanager/advanced");
+export function Navbar() {
+  const { advertiser } = useAdvertiser();
 
   return (
     <AppBar
@@ -43,27 +39,9 @@ export function Navbar({ canCreate }: Props) {
         <Link style={logoStyle} to="/user/main">
           <img src={rewards} alt="Ads" height="40px" />
         </Link>
-        {canCreate && <DraftMenu />}
+        {advertiser.selfServiceCreate && <DraftMenu />}
         <div style={{ flexGrow: 1 }} />
-        {canCreate && (
-          <>
-            <Button
-              onClick={() => {
-                history.push(
-                  `/user/main/adsmanager/advanced/new/${moment()
-                    .utc()
-                    .valueOf()}`
-                );
-              }}
-              size="medium"
-              variant="contained"
-              sx={{ mr: 5 }}
-              disabled={isNewCampaignPage}
-            >
-              New Campaign
-            </Button>
-          </>
-        )}
+        <AgreedModal />
         <UserMenu />
       </Toolbar>
     </AppBar>

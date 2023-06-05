@@ -1,4 +1,8 @@
-import { CampaignFormat, CampaignPacingStrategies } from "graphql/types";
+import {
+  CampaignFormat,
+  CampaignPacingStrategies,
+  PaymentType,
+} from "graphql/types";
 import { defaultEndDate, defaultStartDate } from "form/DateFieldHelpers";
 import { MIN_PER_CAMPAIGN } from "validation/CampaignSchema";
 
@@ -22,6 +26,7 @@ export type CampaignForm = {
   price: number;
   billingType: Billing;
   pacingStrategy: CampaignPacingStrategies;
+  paymentType: PaymentType;
 };
 
 export type GeoTarget = {
@@ -61,7 +66,7 @@ export type Creative = {
   title: string;
   body: string;
   targetUrl: string;
-  targetUrlValid?: boolean;
+  targetUrlValidationResult?: string;
   state?: string;
   creativeInstanceId?: string;
 };
@@ -113,4 +118,5 @@ export const initialCampaign: CampaignForm = {
   state: "under_review",
   type: "paid",
   pacingStrategy: CampaignPacingStrategies.ModelV1,
+  paymentType: PaymentType.Netsuite,
 };

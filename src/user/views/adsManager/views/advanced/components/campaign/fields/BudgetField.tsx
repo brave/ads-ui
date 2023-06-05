@@ -5,14 +5,17 @@ import { useFormikContext } from "formik";
 import { CampaignForm } from "../../../../../types";
 import { differenceInHours } from "date-fns";
 import { MIN_PER_CAMPAIGN, MIN_PER_DAY } from "validation/CampaignSchema";
+import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { PaymentType } from "graphql/types";
 import _ from "lodash";
+import { CardContainer } from "components/Card/CardContainer";
 
 interface Props {
-  canSetPrice: boolean;
   isEdit: boolean;
 }
 
-export function BudgetField({ canSetPrice, isEdit }: Props) {
+export function BudgetField({ isEdit }: Props) {
+  const { advertiser } = useAdvertiser();
   const { values, setFieldValue, errors } = useFormikContext<CampaignForm>();
   const [minBudget, setMinBudget] = useState(MIN_PER_CAMPAIGN);
   const campaignRuntime = Math.floor(
@@ -37,11 +40,8 @@ export function BudgetField({ canSetPrice, isEdit }: Props) {
   }, [campaignRuntime, values.budget, minBudget]);
 
   return (
-    <Box>
-      <Divider textAlign="left" sx={{ fontSize: "24px", mb: 1, mt: 2 }}>
-        Budget
-      </Divider>
-      <Typography variant="body2" sx={{ mb: 5 }}>
+    <CardContainer header="Budget">
+      <Typography variant="body2" sx={{ mb: 3 }}>
         Set a limit on how much your campaign will spend.
       </Typography>
       <Stack direction="column" spacing={2}>
@@ -52,7 +52,9 @@ export function BudgetField({ canSetPrice, isEdit }: Props) {
           type="number"
           InputProps={{
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
-            endAdornment: <InputAdornment position="end">USD</InputAdornment>,
+            endAdornment: (
+              <InputAdornment position="end">{values.currency}</InputAdornment>
+            ),
           }}
           helperText={
             errors.budget || errors.dailyBudget
@@ -62,10 +64,13 @@ export function BudgetField({ canSetPrice, isEdit }: Props) {
           error={!!errors.budget || !!errors.dailyBudget}
         />
 
-        {!canSetPrice ? (
+        {!advertiser.selfServiceSetPrice ? (
           <Typography variant="body2">
-            Pricing type is <strong>{_.upperCase(values.billingType)}</strong>{" "}
-            with a flat rate of <strong>${values.price}</strong>.
+            Campaigns are priced at a flat rate of{" "}
+            <strong>
+              ${values.price} {_.upperCase(values.billingType)}
+            </strong>
+            .
           </Typography>
         ) : (
           <Stack direction="row" spacing={2} alignItems="center">
@@ -92,7 +97,26 @@ export function BudgetField({ canSetPrice, isEdit }: Props) {
             />
           </Stack>
         )}
+
+        <Stack spacing={1}>
+          <Typography variant="subtitle1" sx={{ fontWeight: 500, mt: 1 }}>
+            Payment Method
+          </Typography>
+          <Typography variant="body2">
+            Prepayment of the campaign budget is required before your campaign
+            can begin. We will contact you to arrange payment after you submit
+            your campaign for approval.
+          </Typography>
+          <FormikRadioControl
+            disabled={isEdit}
+            name="paymentType"
+            options={[
+              { label: "USD", value: PaymentType.Netsuite },
+              { label: "BAT", value: PaymentType.ManualBat },
+            ]}
+          />
+        </Stack>
       </Stack>
-    </Box>
+    </CardContainer>
   );
 }

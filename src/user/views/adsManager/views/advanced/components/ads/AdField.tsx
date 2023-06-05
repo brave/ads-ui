@@ -23,6 +23,7 @@ import {
 import { UrlResolver } from "components/Url/UrlResolver";
 import logo from "../../../../../../../../brave_logo_icon.png";
 import { Status } from "components/Campaigns/Status";
+import { CardContainer } from "components/Card/CardContainer";
 
 interface Props {
   index: number;
@@ -50,7 +51,7 @@ export function AdField({ index, isEdit }: Props) {
   return (
     <FieldArray name={`adSets.${index}.creatives`}>
       {({ remove, push }) => (
-        <Card sx={{ mt: 2, p: 2 }}>
+        <CardContainer header="Ads">
           <Box sx={{ borderBottom: 1, borderColor: "divider", mb: 2 }}>
             <Tabs
               value={selected}
@@ -90,7 +91,7 @@ export function AdField({ index, isEdit }: Props) {
 
             <Box display="flex" flexDirection="row" alignItems="center">
               <Status
-                state={values.adSets[index].creatives[selected].state ?? "New"}
+                state={values.adSets[index].creatives[selected]?.state ?? "New"}
               />
               {selected > 0 &&
                 canRemove(isEdit, values.adSets, selected, index) && (
@@ -116,7 +117,7 @@ export function AdField({ index, isEdit }: Props) {
             adIdx={selected}
             creative={values.adSets[index].creatives[selected]}
           />
-        </Card>
+        </CardContainer>
       )}
     </FieldArray>
   );
@@ -129,7 +130,9 @@ interface AdProps {
 }
 
 function Ad({ adSetIdx, adIdx, creative }: AdProps) {
-  const cannotEdit = creative.state === "active" || creative.state === "paused";
+  const cannotEdit =
+    !!creative.state &&
+    (creative.state === "active" || creative.state === "paused");
   return (
     <>
       <FormikTextField
@@ -162,7 +165,7 @@ function Ad({ adSetIdx, adIdx, creative }: AdProps) {
 
       <UrlResolver
         name={`adSets.${adSetIdx}.creatives.${adIdx}.targetUrl`}
-        validator={`adSets.${adSetIdx}.creatives.${adIdx}.targetUrlValid`}
+        validator={`adSets.${adSetIdx}.creatives.${adIdx}.targetUrlValidationResult`}
         label="Ad Target URL"
         disabled={cannotEdit}
         helperText={"Example - https://brave.com/brave-rewards/"}

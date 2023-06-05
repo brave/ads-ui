@@ -49,7 +49,7 @@ export function BasePieChart({ series, onSetType, extraOptions, type }: Props) {
         bgcolor="white"
         borderBottom="1px solid #ededed"
         display="flex"
-        justifyContent="center"
+        justifyContent="left"
       >
         <Tabs
           value={type}

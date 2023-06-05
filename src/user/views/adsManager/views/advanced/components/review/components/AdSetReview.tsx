@@ -1,10 +1,10 @@
-import { Card, Divider, List, Typography } from "@mui/material";
-import { CustomListItemText } from "components/List/CustomListItemText";
-import React from "react";
+import { Divider } from "@mui/material";
 import { AdSetForm, OS, Segment } from "../../../../../types";
 import { FormikErrors } from "formik";
 import { AdReview } from "./AdReview";
 import { ConversionDisplay } from "components/Conversion/ConversionDisplay";
+import { CardContainer } from "components/Card/CardContainer";
+import { ReviewField } from "./ReviewField";
 
 interface Props {
   idx: number;
@@ -29,30 +29,26 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
   };
 
   return (
-    <Card sx={{ p: 2, mt: 2 }}>
-      <Typography variant="h6">Ad Set {idx + 1}</Typography>
-      <List>
-        <CustomListItemText
-          primary="Name"
-          secondary={adSet.name}
-          error={hasErrors ? adSetError?.name : ""}
-        />
-        <CustomListItemText
-          primary="Audiences"
-          secondary={segmentValue(mapToString(adSet.segments))}
-          error={hasErrors ? (adSetError?.segments as string) : ""}
-        />
-        <CustomListItemText
-          primary="Platforms"
-          secondary={mapToString(adSet.oses)}
-          error={hasErrors ? (adSetError?.oses as string) : ""}
-        />
-        <ConversionDisplay
-          conversions={adSet.conversions}
-          hasErrors={hasErrors}
-          convErrors={adSetError?.conversions}
-        />
-      </List>
+    <CardContainer header={`Ad Set ${idx + 1}`}>
+      <ReviewField
+        caption="Name"
+        value={adSet.name}
+        error={hasErrors ? adSetError?.name : ""}
+      />
+      <ReviewField
+        caption="Audiences"
+        value={segmentValue(mapToString(adSet.segments))}
+        error={hasErrors ? (adSetError?.segments as string) : ""}
+      />
+      <ReviewField
+        caption="Platforms"
+        value={mapToString(adSet.oses)}
+        error={hasErrors ? (adSetError?.oses as string) : ""}
+      />
+      <ConversionDisplay
+        conversions={adSet.conversions}
+        convErrors={adSetError?.conversions}
+      />
 
       {adSet.creatives.map((ad, adIdx) => (
         <>
@@ -65,6 +61,6 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
           />
         </>
       ))}
-    </Card>
+    </CardContainer>
   );
 }
