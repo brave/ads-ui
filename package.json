@@ -67,7 +67,7 @@
     "vite": "4.3.9",
     "vite-plugin-checker": "0.6.0",
     "vite-tsconfig-paths": "4.2.0",
-    "vitest": "0.31.4"
+    "vitest": "0.32.0"
   },
   "overrides": {
     "nth-check": "2.1.1",
