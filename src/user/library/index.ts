@@ -4,11 +4,8 @@ import {
   CreateAdSetInput,
   CreateCampaignInput,
   CreateNotificationCreativeInput,
-  CreateTypeInput,
   GeocodeInput,
-  InputMaybe,
-  NotificationPayloadInput,
-  Scalars,
+  PaymentType,
   UpdateAdSetInput,
   UpdateCampaignInput,
   UpdateNotificationCreativeInput,
@@ -74,9 +71,10 @@ export async function transformNewForm(
     dailyCap: form.dailyCap,
     dailyBudget: form.dailyBudget,
     endAt: form.endAt,
+    pacingStrategy: form.pacingStrategy,
     geoTargets: form.geoTargets.map((g) => ({ code: g.code, name: g.name })),
     name: form.name,
-    advertiserId: advertiserId,
+    advertiserId,
     externalId: "",
     format: form.format,
     userId: userId,
@@ -115,7 +113,6 @@ async function transformCreative(
   ) as CreateNotificationCreativeInput;
   const withId = await createNotification(notification);
   return {
-    state: "under_review",
     webhooks: [],
     creativeId: withId,
     prices: [
@@ -141,7 +138,7 @@ function creativeInput(
       body: creative.body,
       targetUrl: creative.targetUrl,
     },
-    state: "under_review",
+    state: creative.state,
   };
 
   if (creative.id) {
@@ -251,6 +248,7 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
     startAt: campaign.startAt,
     state: campaign.state,
     type: "paid",
+    stripePaymentId: campaign.stripePaymentId,
     paymentType: campaign.paymentType,
   };
 }
@@ -272,7 +270,11 @@ export async function transformEditForm(
           ...withId,
           creativeSetId: adSet.id,
         });
-      } else if (ad.state !== "active" && ad.state !== "paused") {
+      } else if (
+        ad.state !== "active" &&
+        ad.state !== "paused" &&
+        ad.state !== "complete"
+      ) {
         const notification = creativeInput(
           advertiserId,
           ad,

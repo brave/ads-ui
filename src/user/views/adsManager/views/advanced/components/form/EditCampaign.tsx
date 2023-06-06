@@ -12,6 +12,8 @@ import { useHistory, useParams } from "react-router-dom";
 import { BaseForm } from "./components/BaseForm";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useUser } from "auth/hooks/queries/useUser";
+import { useCreatePaymentSession } from "checkout/hooks/useCreatePaymentSession";
+import { PaymentType } from "graphql/types";
 import { ErrorDetail } from "components/Error/ErrorDetail";
 
 interface Params {
@@ -23,15 +25,28 @@ export function EditCampaign() {
   const { userId } = useUser();
   const history = useHistory();
   const params = useParams<Params>();
+  const { createPaymentSession, loading } = useCreatePaymentSession();
 
-  const { data, loading, error } = useLoadCampaignQuery({
+  const {
+    data: initialData,
+    loading: qLoading,
+    error,
+  } = useLoadCampaignQuery({
     variables: { id: params.campaignId },
     fetchPolicy: "cache-and-network",
   });
 
   const [mutation] = useUpdateCampaignMutation({
-    onCompleted() {
-      history.push("/user/main/complete/edit");
+    onCompleted(data) {
+      const campaign = initialData?.campaign;
+      if (
+        campaign?.stripePaymentId ||
+        campaign?.paymentType !== PaymentType.Stripe
+      ) {
+        history.push("/user/main/complete/edit");
+      } else {
+        createPaymentSession(data.updateCampaign.id);
+      }
     },
     onError() {
       alert("Unable to Update Campaign.");
@@ -47,11 +62,11 @@ export function EditCampaign() {
     );
   }
 
-  if (!data || !data.campaign || loading) {
+  if (!initialData || !initialData.campaign || qLoading || loading) {
     return <LinearProgress />;
   }
 
-  const initialValues = editCampaignValues(data.campaign);
+  const initialValues = editCampaignValues(initialData.campaign);
 
   return (
     <Container maxWidth="xl">

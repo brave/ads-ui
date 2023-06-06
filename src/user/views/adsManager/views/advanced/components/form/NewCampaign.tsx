@@ -1,4 +1,4 @@
-import { Container } from "@mui/material";
+import { Container, LinearProgress } from "@mui/material";
 import { Formik } from "formik";
 import React, { useContext } from "react";
 import { CampaignForm, initialCampaign } from "../../../../types";
@@ -11,6 +11,9 @@ import { PersistFormValues } from "form/PersistFormValues";
 import { DraftContext } from "state/context";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useUser } from "auth/hooks/queries/useUser";
+import { useCreatePaymentSession } from "checkout/hooks/useCreatePaymentSession";
+import { PaymentType } from "graphql/types";
+import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
 
 interface Params {
   draftId: string;
@@ -21,24 +24,34 @@ export function NewCampaign() {
   const params = useParams<Params>();
   const { advertiser } = useAdvertiser();
   const { userId } = useUser();
+  const { createPaymentSession, loading } = useCreatePaymentSession();
 
   const { setDrafts } = useContext(DraftContext);
 
   const initial: CampaignForm = {
-    ...initialCampaign,
+    ...initialCampaign(advertiser),
     draftId: params.draftId,
   };
 
   const [mutation] = useCreateCampaignMutation({
-    onCompleted() {
+    onCompleted(data) {
+      const campaign = data.createCampaign;
       localStorage.removeItem(params.draftId);
       setDrafts();
-      history.push("/user/main/complete/new");
+      if (campaign.paymentType !== PaymentType.Stripe) {
+        history.push("/user/main/complete/new");
+      } else {
+        createPaymentSession(data.createCampaign.id);
+      }
     },
     onError() {
       alert("Unable to create Campaign.");
     },
   });
+
+  if (loading) {
+    return <LinearProgress />;
+  }
 
   return (
     <Container maxWidth="xl">

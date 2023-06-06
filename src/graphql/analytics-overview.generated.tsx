@@ -92,6 +92,7 @@ export type AnalyticOverviewQuery = {
     format: Types.CampaignFormat;
     paymentType: Types.PaymentType;
     dayProportion?: number | null;
+    stripePaymentId?: string | null;
     engagements?: Array<{
       __typename?: "Engagement";
       creativeinstanceid: string;

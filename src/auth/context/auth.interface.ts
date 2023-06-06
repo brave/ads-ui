@@ -1,5 +1,6 @@
 import React from "react";
 import { ResponseUser } from "../lib";
+import { PaymentType } from "graphql/types";
 
 export type IAdvertiser = {
   id: string;
@@ -7,6 +8,7 @@ export type IAdvertiser = {
   selfServiceCreate: boolean;
   selfServiceEdit: boolean;
   selfServiceSetPrice: boolean;
+  selfServicePaymentType: PaymentType;
   publicKey?: string | null;
   agreed?: boolean;
 };

@@ -5,6 +5,7 @@ import {
 } from "graphql/types";
 import { defaultEndDate, defaultStartDate } from "form/DateFieldHelpers";
 import { MIN_PER_CAMPAIGN } from "validation/CampaignSchema";
+import { IAdvertiser } from "auth/context/auth.interface";
 
 export type Billing = "cpm" | "cpc";
 
@@ -26,6 +27,7 @@ export type CampaignForm = {
   price: number;
   billingType: Billing;
   pacingStrategy: CampaignPacingStrategies;
+  stripePaymentId?: string | null;
   paymentType: PaymentType;
 };
 
@@ -82,6 +84,7 @@ export const initialCreative: Creative = {
   title: "",
   body: "",
   targetUrl: "",
+  state: "draft",
 };
 
 export const initialAdSet: AdSetForm = {
@@ -97,26 +100,28 @@ export const initialAdSet: AdSetForm = {
   ],
 };
 
-export const initialCampaign: CampaignForm = {
-  startAt: defaultStartDate(),
-  endAt: defaultEndDate(),
-  validateStart: true,
-  budget: MIN_PER_CAMPAIGN,
-  currency: "USD",
-  dailyBudget: MIN_PER_CAMPAIGN,
-  dailyCap: 1,
-  geoTargets: [],
-  billingType: "cpm",
-  price: 6,
-  adSets: [
-    {
-      ...initialAdSet,
-    },
-  ],
-  format: CampaignFormat.PushNotification,
-  name: "",
-  state: "under_review",
-  type: "paid",
-  pacingStrategy: CampaignPacingStrategies.ModelV1,
-  paymentType: PaymentType.Netsuite,
+export const initialCampaign = (advertiser: IAdvertiser): CampaignForm => {
+  return {
+    startAt: defaultStartDate(),
+    endAt: defaultEndDate(),
+    validateStart: true,
+    budget: MIN_PER_CAMPAIGN,
+    currency: "USD",
+    dailyBudget: MIN_PER_CAMPAIGN,
+    dailyCap: 1,
+    geoTargets: [],
+    billingType: "cpm",
+    price: 6,
+    adSets: [
+      {
+        ...initialAdSet,
+      },
+    ],
+    format: CampaignFormat.PushNotification,
+    name: "",
+    state: "draft",
+    type: "paid",
+    pacingStrategy: CampaignPacingStrategies.ModelV1,
+    paymentType: advertiser.selfServicePaymentType,
+  };
 };
