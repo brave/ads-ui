@@ -20,6 +20,7 @@ import {
 import { ErrorMessage, useField, useFormikContext } from "formik";
 import { useHistory } from "react-router-dom";
 import _ from "lodash";
+import { LoadingButton } from "@mui/lab";
 
 type FormikTextFieldProps = TextFieldProps & {
   name: string;
@@ -198,16 +199,17 @@ export const FormikSubmitButton: React.FC<FormikSubmitButtonProps> = ({
   return (
     <Tooltip title={saveButtonTooltip}>
       <div>
-        <Button
+        <LoadingButton
           color="primary"
           variant="contained"
           type="submit"
           size="large"
-          disabled={!saveEnabled}
+          disabled={!saveEnabled || formik.isSubmitting}
           sx={{ mt: 2 }}
+          loading={formik.isSubmitting}
         >
           {formik.isSubmitting ? inProgressLabel : label}
-        </Button>
+        </LoadingButton>
       </div>
     </Tooltip>
   );

@@ -2,7 +2,6 @@ import { array, boolean, date, number, object, ref, string } from "yup";
 import { startOfDay } from "date-fns";
 import { twoDaysOut } from "form/DateFieldHelpers";
 import _ from "lodash";
-import { ValidationError } from "yup";
 
 export const SimpleUrlRegexp = /https:\/\/.+\.[a-zA-Z]{2,}\/?.*/g;
 const NoSpacesRegex = /^\S*$/;

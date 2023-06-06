@@ -1,8 +1,8 @@
 import { UserFragment } from "graphql/user.generated";
 import { AdvertiserFragment } from "graphql/advertiser.generated";
 import { PaymentType } from "graphql/types";
-
-const url = import.meta.env.REACT_APP_SERVER_ADDRESS.replace("v1", "v2");
+import { buildAdServerV2Endpoint } from "util/environment";
+import { RegistrationForm } from "auth/registration/types";
 
 export type Advertiser = Pick<
   AdvertiserFragment,
@@ -24,7 +24,7 @@ export const getCredentials = async (user: {
     throw new Error("Please enter a username and password");
   }
 
-  const res = await fetch(`${url}/auth/token`, {
+  const res = await fetch(buildAdServerV2Endpoint("/auth/token"), {
     method: "POST",
     mode: "cors",
     credentials: "include",
@@ -50,14 +50,42 @@ export const getCredentials = async (user: {
   return await res.json();
 };
 
-export const getUser = async (): Promise<ResponseUser> => {
-  const res = await fetch(`${url}/auth/user`, {
-    method: "GET",
+export async function submitRegistration(form: RegistrationForm) {
+  const res = await fetch(buildAdServerV2Endpoint("/auth/register"), {
+    method: "POST",
     mode: "cors",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
+    body: JSON.stringify({
+      advertiser: {
+        billingEmail: form.email,
+        name: form.advertiser.name,
+        phone: form.advertiser.phone,
+      },
+      address: {
+        ...form.address,
+      },
+      user: {
+        fullName: `${form.firstName} ${form.lastName}`,
+        email: form.email,
+      },
+    }),
+  });
+
+  if (!res.ok) {
+    throw new Error(
+      "Unable to register your organization at this time. Please try again later."
+    );
+  }
+}
+
+export const getUser = async (): Promise<ResponseUser> => {
+  const res = await fetch(buildAdServerV2Endpoint("/auth/user"), {
+    method: "GET",
+    mode: "cors",
+    credentials: "include",
   });
 
   if (!res.ok) {
@@ -68,13 +96,10 @@ export const getUser = async (): Promise<ResponseUser> => {
 };
 
 export const clearCredentials = async (): Promise<void> => {
-  const res = await fetch(`${url}/auth/logout`, {
+  const res = await fetch(buildAdServerV2Endpoint("/auth/logout"), {
     method: "GET",
     mode: "cors",
     credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
   });
 
   if (!res.ok) {
@@ -85,13 +110,10 @@ export const clearCredentials = async (): Promise<void> => {
 };
 
 export const getLink = async (user: { email: string }): Promise<void> => {
-  await fetch(`${url}/auth/magic-link?email=${user.email}`, {
+  await fetch(buildAdServerV2Endpoint(`/auth/magic-link?email=${user.email}`), {
     method: "GET",
     mode: "cors",
     credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
   });
 };
 
@@ -100,14 +122,11 @@ export const authorize = async (req: {
   id: string;
 }): Promise<ResponseUser> => {
   const res = await fetch(
-    `${url}/auth/authorize?code=${req.code}&id=${req.id}`,
+    buildAdServerV2Endpoint(`/auth/authorize?code=${req.code}&id=${req.id}`),
     {
       method: "GET",
       mode: "cors",
       credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
     }
   );
 
