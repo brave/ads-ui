@@ -5,7 +5,7 @@
   "dependencies": {
     "@apollo/client": "3.7.15",
     "@date-io/moment": "2.16.1",
-    "@emotion/react": "11.11.0",
+    "@emotion/react": "11.11.1",
     "@emotion/styled": "11.11.0",
     "@fontsource/mulish": "4.5.14",
     "@fontsource/poppins": "4.5.10",
