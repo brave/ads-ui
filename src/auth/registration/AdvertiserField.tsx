@@ -25,7 +25,11 @@ export function AdvertiserField() {
 
       <FormikTextField name="advertiser.name" label="Organization Name" />
 
-      <FormikTextField name="advertiser.url" label="Organization URL" />
+      <FormikTextField
+        name="advertiser.url"
+        label="Organization URL"
+        autoComplete="tel"
+      />
 
       <FormikTextField
         name="advertiser.phone"

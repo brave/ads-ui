@@ -12,12 +12,27 @@ export function NameField() {
       </Typography>
 
       <Stack direction="row" spacing={1} mb={1} mt={2}>
-        <FormikTextField name="firstName" label="First Name" margin="none" />
+        <FormikTextField
+          name="firstName"
+          label="First Name"
+          margin="none"
+          autoComplete="given-name"
+        />
 
-        <FormikTextField name="lastName" label="Last Name" margin="none" />
+        <FormikTextField
+          name="lastName"
+          label="Last Name"
+          margin="none"
+          autoComplete="family-name"
+        />
       </Stack>
 
-      <FormikTextField name="email" label="Email Address" type="email" />
+      <FormikTextField
+        name="email"
+        label="Email Address"
+        type="email"
+        autoComplete="email"
+      />
     </React.Fragment>
   );
 }

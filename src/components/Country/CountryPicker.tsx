@@ -28,7 +28,7 @@ export const CountryPicker: React.FC<Props> = ({ name }) => {
           label="Country"
           helperText={meta.touched && errorMessage}
           error={meta.touched && !!errorMessage}
-          autoComplete="off"
+          autoComplete="country"
         />
       )}
       isOptionEqualToValue={(option, value) => option.code === value.code}
