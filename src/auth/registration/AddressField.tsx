@@ -28,14 +28,14 @@ export function AddressField() {
       <Stack direction="row" spacing={1} mt={1} mb={2}>
         <FormikTextField
           name="address.state"
-          label="State"
+          label="State / Province / Canton / Post Town"
           margin="none"
           autoComplete="address-level1"
         />
 
         <FormikTextField
           name="address.city"
-          label="City"
+          label="City / Town / Village / Locality"
           margin="none"
           autoComplete="address-level2"
         />
@@ -46,7 +46,7 @@ export function AddressField() {
 
         <FormikTextField
           name="address.zipcode"
-          label="ZipCode"
+          label="Zip / Postal Code"
           margin="none"
           autoComplete="postal-code"
         />

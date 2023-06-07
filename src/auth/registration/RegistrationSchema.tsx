@@ -7,7 +7,7 @@ export const RegistrationSchema = object().shape({
   advertiser: object().shape({
     name: string().label("Organization name").required(),
     url: string().label("Organization URL").required(),
-    phone: string().label("Organization Phone number"),
+    phone: string().label("Organization Phone number").required(),
   }),
   address: object().shape({
     street1: string().label("Street address").required(),
@@ -15,6 +15,6 @@ export const RegistrationSchema = object().shape({
     city: string().label("City").required(),
     state: string().label("State").required(),
     country: string().label("Country").required(),
-    zipcode: string().label("Zip").required(),
+    zipcode: string().label("Zip / Postal Code").required(),
   }),
 });
