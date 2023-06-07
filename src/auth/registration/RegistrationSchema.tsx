@@ -5,8 +5,9 @@ export const RegistrationSchema = object().shape({
   firstName: string().label("First name").required(),
   lastName: string().label("Last name").required(),
   advertiser: object().shape({
-    name: string().label("Advertiser name").required(),
-    phone: string().label("Phone number"),
+    name: string().label("Organization name").required(),
+    url: string().label("Organization URL").required(),
+    phone: string().label("Organization Phone number"),
   }),
   address: object().shape({
     street1: string().label("Street address").required(),
