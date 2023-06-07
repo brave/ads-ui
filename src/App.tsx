@@ -45,7 +45,7 @@ export function App() {
             <Route path="/auth/signin" component={Login} />
             <Route path="/auth/link" component={MagicLink} />
             <Route path="/auth/verify" component={AuthVerify} />
-            <Route path="/auth/register" component={Register} />
+            <Route path="/register" component={Register} />
             <Route path="*" component={isAuthenticated ? User : Protected} />
             <Redirect to="/user/main" />
           </Switch>

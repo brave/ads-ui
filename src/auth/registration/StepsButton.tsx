@@ -1,40 +1,71 @@
-import { Button, Stack } from "@mui/material";
-import React from "react";
+import {
+  Box,
+  Button,
+  Stack,
+  Step,
+  StepLabel,
+  Stepper,
+  Typography,
+} from "@mui/material";
+import React, { useState } from "react";
 
 interface Props {
-  onNext: () => void;
-  onBack: () => void;
-  showBack: boolean;
-  showNext: boolean;
+  steps: {
+    label: string;
+    component: React.ReactNode;
+  }[];
+  finalComponent: React.ReactNode;
 }
 
-export function StepsButton({ onBack, onNext, showNext, showBack }: Props) {
+export function StepsButton({ steps, finalComponent }: Props) {
+  const [activeStep, setActiveStep] = useState(0);
+
   return (
-    <Stack direction="row" spacing={1} mt={2} justifyContent="left">
-      {showBack && (
-        <Button
-          size="large"
-          variant="outlined"
-          onClick={(e) => {
-            e.preventDefault();
-            onBack();
-          }}
-        >
-          Back
-        </Button>
-      )}
-      {showNext && (
-        <Button
-          size="large"
-          variant="contained"
-          onClick={(e) => {
-            e.preventDefault();
-            onNext();
-          }}
-        >
-          Next
-        </Button>
-      )}
-    </Stack>
+    <Box sx={{ width: "100%" }}>
+      {steps[activeStep].component}
+      <Stepper activeStep={activeStep} sx={{ mt: 1 }}>
+        {steps.map((s) => {
+          const stepProps: { completed?: boolean } = {};
+          return (
+            <Step key={s.label} {...stepProps}>
+              <StepLabel>{s.label}</StepLabel>
+            </Step>
+          );
+        })}
+      </Stepper>
+      <Stack
+        direction="row"
+        spacing={1}
+        mt={2}
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        {activeStep !== 0 && (
+          <Button
+            size="large"
+            variant="outlined"
+            onClick={(e) => {
+              e.preventDefault();
+              setActiveStep(activeStep - 1);
+            }}
+          >
+            Back
+          </Button>
+        )}
+        {activeStep < steps.length - 1 && (
+          <Button
+            size="large"
+            variant="contained"
+            onClick={(e) => {
+              e.preventDefault();
+              setActiveStep(activeStep + 1);
+            }}
+          >
+            Next
+          </Button>
+        )}
+        {activeStep === steps.length - 1 && <>{finalComponent}</>}
+      </Stack>
+    </Box>
   );
 }

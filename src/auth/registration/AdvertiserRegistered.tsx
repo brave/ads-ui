@@ -29,10 +29,13 @@ export function AdvertiserRegistered({ error }: Props) {
         <Stack direction="column" alignItems="center">
           <Typography variant="h5" sx={{ mb: 3 }}>
             Success! Our team will now carefully review the provided
-            information. Once the review process is complete, we will send you
-            an email to notify you of the approval status and any further steps
-            required. We look forward to progressing our partnership with you
-            and will be in touch soon.
+            information.
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 3 }}>
+            Once the review process is complete, we will send you an email to
+            notify you of the approval status and any further steps required. We
+            look forward to progressing our partnership with you and will be in
+            touch soon.
           </Typography>
           <VerifiedIcon sx={{ fontSize: "100px", mb: 5 }} color="success" />
         </Stack>

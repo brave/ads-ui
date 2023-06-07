@@ -23,7 +23,7 @@ export function AddressField() {
         <FormikTextField name="address.state" label="State" margin="none" />
       </Stack>
 
-      <Stack direction="row" spacing={1} mt={2} mb={1}>
+      <Stack direction="row" spacing={1} mt={2} mb={2}>
         <CountryPicker name="address.country" />
 
         <FormikTextField name="address.zipcode" label="ZipCode" margin="none" />

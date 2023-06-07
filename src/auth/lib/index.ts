@@ -63,6 +63,7 @@ export async function submitRegistration(form: RegistrationForm) {
         billingEmail: form.email,
         name: form.advertiser.name,
         phone: form.advertiser.phone,
+        url: form.advertiser.url,
       },
       address: {
         ...form.address,

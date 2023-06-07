@@ -13,7 +13,6 @@ import { useRegister } from "auth/hooks/mutations/useRegister";
 import { AdvertiserRegistered } from "auth/registration/AdvertiserRegistered";
 
 export function Register() {
-  const [step, setStep] = useState(0);
   const { register, hasRegistered, error } = useRegister();
 
   if (hasRegistered || error) {
@@ -25,7 +24,7 @@ export function Register() {
   }
 
   return (
-    <AuthContainer height={step === 2 ? "650px" : "475px"}>
+    <AuthContainer>
       <Formik
         initialValues={initialValues}
         onSubmit={async (v: RegistrationForm, { setSubmitting }) => {
@@ -36,23 +35,23 @@ export function Register() {
         validationSchema={RegistrationSchema}
       >
         <Form>
-          {step === 0 && <NameField />}
-
-          {step === 1 && <AdvertiserField />}
-
-          {step === 2 && <AddressField />}
-
           <Stack direction="row" spacing={1}>
             <StepsButton
-              onNext={() => setStep(step + 1)}
-              onBack={() => setStep(step - 1)}
-              showBack={step !== 0}
-              showNext={step < 2}
+              steps={[
+                { label: "Your information", component: <NameField /> },
+                {
+                  label: "Organization details",
+                  component: <AdvertiserField />,
+                },
+                { label: "Organization address", component: <AddressField /> },
+              ]}
+              finalComponent={
+                <FormikSubmitButton
+                  isCreate={true}
+                  label="Submit for approval"
+                />
+              }
             />
-
-            {step === 2 && (
-              <FormikSubmitButton isCreate={true} label="Submit for approval" />
-            )}
           </Stack>
         </Form>
       </Formik>

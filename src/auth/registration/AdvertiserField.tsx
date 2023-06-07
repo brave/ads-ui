@@ -25,9 +25,11 @@ export function AdvertiserField() {
 
       <FormikTextField name="advertiser.name" label="Organization Name" />
 
+      <FormikTextField name="advertiser.url" label="Organization URL" />
+
       <FormikTextField
         name="advertiser.phone"
-        label="Phone Number"
+        label="Organization Phone Number"
         type="tel"
       />
     </React.Fragment>

@@ -205,7 +205,6 @@ export const FormikSubmitButton: React.FC<FormikSubmitButtonProps> = ({
           type="submit"
           size="large"
           disabled={!saveEnabled || formik.isSubmitting}
-          sx={{ mt: 2 }}
           loading={formik.isSubmitting}
         >
           {formik.isSubmitting ? inProgressLabel : label}
