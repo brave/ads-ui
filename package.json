@@ -56,7 +56,7 @@
     "@types/jest": "29.5.2",
     "@types/jwt-decode": "2.2.1",
     "@types/lodash": "4.14.195",
-    "@types/react": "18.2.8",
+    "@types/react": "18.2.9",
     "@types/react-dom": "18.2.4",
     "@types/react-router-dom": "5.3.3",
     "@vitejs/plugin-basic-ssl": "1.0.1",
