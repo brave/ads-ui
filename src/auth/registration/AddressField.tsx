@@ -27,17 +27,17 @@ export function AddressField() {
 
       <Stack direction="row" spacing={1} mt={1} mb={2}>
         <FormikTextField
-          name="address.state"
-          label="State / Province / Canton / Post Town"
-          margin="none"
-          autoComplete="address-level1"
-        />
-
-        <FormikTextField
           name="address.city"
           label="City / Town / Village / Locality"
           margin="none"
           autoComplete="address-level2"
+        />
+
+        <FormikTextField
+          name="address.state"
+          label="State / Province / Canton / Post Town"
+          margin="none"
+          autoComplete="address-level1"
         />
       </Stack>
 
