@@ -13,7 +13,6 @@ import { Box } from "@mui/material";
 import { NewCampaign } from "./views/adsManager/views/advanced/components/form/NewCampaign";
 import { EditCampaign } from "./views/adsManager/views/advanced/components/form/EditCampaign";
 import { CompletionForm } from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
-import moment from "moment";
 import { MainView } from "user/views/user/MainView";
 import { Navbar } from "user/components/navbar/Navbar";
 
