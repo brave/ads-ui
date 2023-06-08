@@ -40,30 +40,30 @@ export function StepsButton({ steps, finalComponent }: Props) {
         justifyContent="space-between"
         alignItems="center"
       >
-        {activeStep !== 0 && (
-          <Button
-            size="large"
-            variant="outlined"
-            onClick={(e) => {
-              e.preventDefault();
-              setActiveStep(activeStep - 1);
-            }}
-          >
-            Back
-          </Button>
-        )}
-        {activeStep < steps.length - 1 && (
-          <Button
-            size="large"
-            variant="contained"
-            onClick={(e) => {
-              e.preventDefault();
-              setActiveStep(activeStep + 1);
-            }}
-          >
-            Next
-          </Button>
-        )}
+        <Button
+          sx={{ visibility: activeStep !== 0 ? "visible" : "hidden" }}
+          size="large"
+          variant="text"
+          onClick={(e) => {
+            e.preventDefault();
+            setActiveStep(activeStep - 1);
+          }}
+        >
+          Back
+        </Button>
+        <Button
+          sx={{
+            visibility: activeStep < steps.length - 1 ? "visible" : "hidden",
+          }}
+          size="large"
+          variant="contained"
+          onClick={(e) => {
+            e.preventDefault();
+            setActiveStep(activeStep + 1);
+          }}
+        >
+          Next
+        </Button>
         {activeStep === steps.length - 1 && <>{finalComponent}</>}
       </Stack>
     </Box>
