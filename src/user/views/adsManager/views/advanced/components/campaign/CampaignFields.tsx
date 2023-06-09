@@ -1,6 +1,6 @@
 import { Box, Button, Card, Stack } from "@mui/material";
 import React from "react";
-import { DetailField } from "./fields/DetailField";
+import { CampaignSettings } from "user/views/adsManager/views/advanced/components/campaign/fields/CampaignSettings";
 import { BudgetField } from "./fields/BudgetField";
 import { LocationField } from "./fields/LocationField";
 import { CampaignDateRange } from "components/Campaigns/CampaignDateRange";
@@ -14,7 +14,7 @@ interface Props {
 export function CampaignFields({ onNext, isEdit }: Props) {
   return (
     <Box>
-      <DetailField isEdit={isEdit} />
+      <CampaignSettings isEdit={isEdit} />
 
       <BudgetField isEdit={isEdit} />
 

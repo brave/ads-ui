@@ -41,9 +41,6 @@ export function BudgetField({ isEdit }: Props) {
 
   return (
     <CardContainer header="Budget">
-      <Typography variant="body2" sx={{ mb: 3 }}>
-        Set a limit on how much your campaign will spend.
-      </Typography>
       <Stack direction="column" spacing={2}>
         <FormikTextField
           name="budget"

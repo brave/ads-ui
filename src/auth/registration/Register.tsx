@@ -5,12 +5,12 @@ import { RegistrationSchema } from "validation/RegistrationSchema";
 import { initialValues, RegistrationForm } from "auth/registration/types";
 import { Stack } from "@mui/material";
 import { NameField } from "auth/registration/NameField";
-import { StepsButton } from "auth/registration/StepsButton";
 import { AdvertiserField } from "auth/registration/AdvertiserField";
 import { AddressField } from "auth/registration/AddressField";
 import { FormikSubmitButton } from "form/FormikHelpers";
 import { useRegister } from "auth/hooks/mutations/useRegister";
 import { AdvertiserRegistered } from "auth/registration/AdvertiserRegistered";
+import { StepsButton } from "components/Steps/StepsButton";
 
 export function Register() {
   const { register, hasRegistered, error } = useRegister();
