@@ -9,8 +9,7 @@ export function AddressField() {
       <Typography variant="body1" gutterBottom>
         We are excited to have the opportunity to work with you! The last bit we
         need is some address info for your organization. This will allow us to
-        set up the necessary financial arrangements and ensure a seamless
-        partnership.
+        set up the necessary financial arrangements.
       </Typography>
 
       <FormikTextField
