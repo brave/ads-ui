@@ -51,7 +51,9 @@ export function AdvertiserAgreed() {
         }}
       >
         <Stack spacing={0.5}>
-          <Typography variant="h4">Welcome to Brave Ads</Typography>
+          <Typography variant="h4">
+            Welcome to Brave Ads, <strong>{advertiser.name}</strong>
+          </Typography>
           <Typography variant="subtitle1">
             Prior to using the dashboard, please take a moment to review the
             following acknowledgements:
