@@ -11,6 +11,7 @@ export type Billing = "cpm" | "cpc";
 
 export type CampaignForm = {
   draftId?: string;
+  advertiserId: string;
   startAt: string;
   endAt: string;
   budget: number;
@@ -102,6 +103,7 @@ export const initialAdSet: AdSetForm = {
 
 export const initialCampaign = (advertiser: IAdvertiser): CampaignForm => {
   return {
+    advertiserId: advertiser.id,
     startAt: defaultStartDate(),
     endAt: defaultEndDate(),
     validateStart: true,

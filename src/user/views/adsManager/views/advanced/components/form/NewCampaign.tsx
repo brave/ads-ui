@@ -10,10 +10,8 @@ import { BaseForm } from "./components/BaseForm";
 import { PersistFormValues } from "form/PersistFormValues";
 import { DraftContext } from "state/context";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import { useUser } from "auth/hooks/queries/useUser";
 import { useCreatePaymentSession } from "checkout/hooks/useCreatePaymentSession";
 import { PaymentType } from "graphql/types";
-import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
 
 interface Params {
   draftId: string;
@@ -23,7 +21,6 @@ export function NewCampaign() {
   const history = useHistory();
   const params = useParams<Params>();
   const { advertiser } = useAdvertiser();
-  const { userId } = useUser();
   const { createPaymentSession, loading } = useCreatePaymentSession();
 
   const { setDrafts } = useContext(DraftContext);
@@ -61,7 +58,7 @@ export function NewCampaign() {
           setSubmitting(true);
           let newForm;
           try {
-            newForm = await transformNewForm(v, advertiser.id, userId);
+            newForm = await transformNewForm(v, advertiser.id);
           } catch (e) {
             alert("Unable to create Campaign.");
           }

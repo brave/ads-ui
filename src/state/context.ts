@@ -8,6 +8,7 @@ export const DraftContext = createContext({
 });
 
 export const getAllDrafts = () => {
+  const advertiserId = window.localStorage.getItem("activeAdvertiser");
   const campaigns: CampaignForm[] = [];
 
   for (let i = 0; i < localStorage.length; i++) {
@@ -15,7 +16,10 @@ export const getAllDrafts = () => {
     if (key && moment(new Date(Number(key))).isValid()) {
       const campaign = localStorage.getItem(key);
       if (campaign) {
-        campaigns.push(JSON.parse(campaign));
+        const parsed: CampaignForm = JSON.parse(campaign);
+        if (parsed.advertiserId === advertiserId) {
+          campaigns.push(JSON.parse(campaign));
+        }
       }
     }
   }
