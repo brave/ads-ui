@@ -5,7 +5,6 @@ import {
   CreateCampaignInput,
   CreateNotificationCreativeInput,
   GeocodeInput,
-  PaymentType,
   UpdateAdSetInput,
   UpdateCampaignInput,
   UpdateNotificationCreativeInput,
@@ -37,7 +36,6 @@ const TYPE_CODE_LOOKUP: Record<string, string> = {
 
 export async function transformNewForm(
   form: CampaignForm,
-  advertiserId: string,
   userId?: string
 ): Promise<CreateCampaignInput> {
   const adSets = form.adSets;
@@ -47,7 +45,7 @@ export async function transformNewForm(
     const ads: CreateAdInput[] = [];
 
     for (const ad of adSet.creatives) {
-      const creative = await transformCreative(ad, form, advertiserId, userId);
+      const creative = await transformCreative(ad, form, userId);
       ads.push(creative);
     }
 
@@ -74,7 +72,7 @@ export async function transformNewForm(
     pacingStrategy: form.pacingStrategy,
     geoTargets: form.geoTargets.map((g) => ({ code: g.code, name: g.name })),
     name: form.name,
-    advertiserId,
+    advertiserId: form.advertiserId,
     externalId: "",
     format: form.format,
     userId: userId,
@@ -103,11 +101,10 @@ function transformConversion(conv: Conversion[]) {
 async function transformCreative(
   creative: Creative,
   campaign: CampaignForm,
-  advertiserId: string,
   userId?: string
 ): Promise<CreateAdInput> {
   const notification = creativeInput(
-    advertiserId,
+    campaign.advertiserId,
     creative,
     userId
   ) as CreateNotificationCreativeInput;
@@ -205,7 +202,10 @@ async function createAd(createInput: CreateAdInput) {
   return response.data.createAd.id;
 }
 
-export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
+export function editCampaignValues(
+  campaign: CampaignFragment,
+  advertiserId: string
+): CampaignForm {
   return {
     adSets: campaign.adSets.map((adSet) => {
       const seg = adSet.segments ?? ([] as Segment[]);
@@ -233,6 +233,7 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
         }),
       };
     }),
+    advertiserId,
     price: campaign.adSets[0].ads?.[0].prices[0].amount ?? 6,
     billingType: (campaign.adSets[0].billingType ?? "cpm") as Billing,
     validateStart: false,
@@ -256,7 +257,6 @@ export function editCampaignValues(campaign: CampaignFragment): CampaignForm {
 export async function transformEditForm(
   form: CampaignForm,
   id: string,
-  advertiserId: string,
   userId?: string
 ): Promise<UpdateCampaignInput> {
   const transformedAdSet: UpdateAdSetInput[] = [];
@@ -265,7 +265,7 @@ export async function transformEditForm(
     const creatives = adSet.creatives;
     for (const ad of creatives) {
       if (ad.id == null) {
-        const withId = await transformCreative(ad, form, advertiserId, userId);
+        const withId = await transformCreative(ad, form, userId);
         await createAd({
           ...withId,
           creativeSetId: adSet.id,
@@ -276,7 +276,7 @@ export async function transformEditForm(
         ad.state !== "complete"
       ) {
         const notification = creativeInput(
-          advertiserId,
+          form.advertiserId,
           ad,
           userId
         ) as UpdateNotificationCreativeInput;

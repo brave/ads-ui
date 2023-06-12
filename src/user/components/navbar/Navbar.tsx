@@ -10,7 +10,6 @@ import { DraftMenu } from "user/components/navbar/components/DraftMenu";
 import moment from "moment";
 import rewards from "../../../../Subdomains_Rewards_Ads_Default.png";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import AgreedModal from "user/components/navbar/components/AgreedModal";
 
 const logoStyle = {
   textDecoration: "none",
@@ -29,6 +28,13 @@ TopBarProgress.config({
 
 export function Navbar() {
   const { advertiser } = useAdvertiser();
+  const history = useHistory();
+  const { url } = useRouteMatch();
+  const isNewCampaignPage = url.includes("/user/main/adsmanager/advanced");
+  const isCompletePage = url.includes("/user/main/complete/new");
+  const newUrl = `/user/main/adsmanager/advanced/new/${moment()
+    .utc()
+    .valueOf()}`;
 
   return (
     <AppBar
@@ -41,7 +47,17 @@ export function Navbar() {
         </Link>
         {advertiser.selfServiceCreate && <DraftMenu />}
         <div style={{ flexGrow: 1 }} />
-        <AgreedModal />
+        {advertiser.selfServiceCreate && (
+          <Button
+            onClick={() => history.push(newUrl)}
+            size="medium"
+            variant="contained"
+            sx={{ mr: 5 }}
+            disabled={isNewCampaignPage || isCompletePage || !advertiser.agreed}
+          >
+            New Campaign
+          </Button>
+        )}
         <UserMenu />
       </Toolbar>
     </AppBar>

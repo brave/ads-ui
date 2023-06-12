@@ -66,7 +66,7 @@ export function EditCampaign() {
     return <LinearProgress />;
   }
 
-  const initialValues = editCampaignValues(initialData.campaign);
+  const initialValues = editCampaignValues(initialData.campaign, advertiser.id);
 
   return (
     <Container maxWidth="xl">
@@ -76,12 +76,7 @@ export function EditCampaign() {
           setSubmitting(true);
           let editForm;
           try {
-            editForm = await transformEditForm(
-              v,
-              params.campaignId,
-              advertiser.id,
-              userId
-            );
+            editForm = await transformEditForm(v, params.campaignId, userId);
           } catch (e) {
             alert("Unable to Update Campaign.");
           }
