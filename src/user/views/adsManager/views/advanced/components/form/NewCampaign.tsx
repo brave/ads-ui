@@ -12,6 +12,7 @@ import { DraftContext } from "state/context";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useCreatePaymentSession } from "checkout/hooks/useCreatePaymentSession";
 import { PaymentType } from "graphql/types";
+import { useUser } from "auth/hooks/queries/useUser";
 
 interface Params {
   draftId: string;
@@ -21,6 +22,7 @@ export function NewCampaign() {
   const history = useHistory();
   const params = useParams<Params>();
   const { advertiser } = useAdvertiser();
+  const { userId } = useUser();
   const { createPaymentSession, loading } = useCreatePaymentSession();
 
   const { setDrafts } = useContext(DraftContext);
@@ -58,7 +60,7 @@ export function NewCampaign() {
           setSubmitting(true);
           let newForm;
           try {
-            newForm = await transformNewForm(v, advertiser.id);
+            newForm = await transformNewForm(v, userId);
           } catch (e) {
             alert("Unable to create Campaign.");
           }
