@@ -74,7 +74,7 @@ export function NewCampaign() {
       >
         <>
           <BaseForm isEdit={false} draftId={params.draftId} />
-          <PersistFormValues id={params.draftId} />
+          <PersistFormValues />
         </>
       </Formik>
     </Container>
