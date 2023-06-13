@@ -26,7 +26,7 @@ export function MainView() {
       id: window.localStorage.getItem("activeAdvertiser") ?? "",
       filter: populateFilter(fromDateFilter),
     },
-    pollInterval: 600_000,
+    pollInterval: 60_000,
     fetchPolicy: "cache-and-network",
   });
 

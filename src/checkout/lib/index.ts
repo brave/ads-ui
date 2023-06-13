@@ -27,19 +27,19 @@ export async function createPaymentSession(
 }
 
 export async function fetchPaymentSession(
-  sessionId: string,
-  campaignId: string
+  campaignId: string,
+  sessionId: string | null
 ): Promise<void> {
-  const res = await fetch(
-    buildAdServerEndpoint(
-      `/ads/checkout-session?sessionId=${sessionId}&referenceId=${campaignId}`
-    ),
-    {
-      method: "PUT",
-      mode: "cors",
-      credentials: "include",
-    }
-  );
+  let baseUrl = `/ads/checkout-session?referenceId=${campaignId}`;
+  if (sessionId) {
+    baseUrl = `${baseUrl}&sessionId=${sessionId}`;
+  }
+
+  const res = await fetch(buildAdServerEndpoint(baseUrl), {
+    method: "PUT",
+    mode: "cors",
+    credentials: "include",
+  });
 
   if (res.status !== 200) {
     throw new Error("invalid session");
