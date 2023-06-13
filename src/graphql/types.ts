@@ -90,7 +90,7 @@ export type CreateAdInput = {
   id?: InputMaybe<Scalars["String"]>;
   prices: Array<CreatePriceInput>;
   state?: InputMaybe<Scalars["String"]>;
-  webhooks: Array<CreateWebhookInput>;
+  webhooks?: InputMaybe<Array<CreateWebhookInput>>;
 };
 
 export type CreateAdSetInput = {
@@ -134,6 +134,7 @@ export type CreateAdvertiserInput = {
   selfServiceCreate?: InputMaybe<Scalars["Boolean"]>;
   selfServiceEdit?: InputMaybe<Scalars["Boolean"]>;
   state?: InputMaybe<Scalars["String"]>;
+  url?: InputMaybe<Scalars["String"]>;
   userId?: InputMaybe<Scalars["String"]>;
 };
 
@@ -404,6 +405,8 @@ export type UpdateAdvertiserInput = {
   selfServiceCreate?: InputMaybe<Scalars["Boolean"]>;
   selfServiceEdit?: InputMaybe<Scalars["Boolean"]>;
   state?: InputMaybe<Scalars["String"]>;
+  url?: InputMaybe<Scalars["String"]>;
+  userId?: InputMaybe<Scalars["String"]>;
   users?: InputMaybe<Array<UpdateUserInput>>;
 };
 

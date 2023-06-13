@@ -6,6 +6,7 @@ import { CampaignSettings } from "user/views/adsManager/views/advanced/component
 import { BudgetField } from "user/views/adsManager/views/advanced/components/campaign/fields/BudgetField";
 import { StepDrawer } from "components/Steps/StepDrawer";
 import { PaymentButton } from "user/views/adsManager/views/advanced/components/form/components/PaymentButton";
+import { NotificationAdForm } from "user/ads/NotificationAdForm";
 
 interface Props {
   isEdit: boolean;
@@ -37,6 +38,11 @@ export function BaseForm({ isEdit, draftId }: Props) {
             label: "Budget",
             description: "Set a limit on how much your campaign will spend.",
             component: <BudgetField isEdit={isEdit} />,
+          },
+          {
+            label: "Ads",
+            description: "Create new ads to be shared across Ad sets",
+            component: <NotificationAdForm />,
           },
           {
             label: "Review",

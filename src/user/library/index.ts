@@ -22,6 +22,7 @@ import {
   CampaignForm,
   Conversion,
   Creative,
+  initialCreative,
   OS,
   Segment,
 } from "user/views/adsManager/types";
@@ -121,7 +122,7 @@ async function transformCreative(
   };
 }
 
-function creativeInput(
+export function creativeInput(
   advertiserId: string,
   creative: Creative,
   userId?: string

@@ -22,6 +22,8 @@ export type CampaignForm = {
   geoTargets: GeoTarget[];
   adSets: AdSetForm[];
   format: CampaignFormat;
+  newCreative?: Creative;
+  creatives?: string[];
   name: string;
   state: string;
   type: "paid";
@@ -125,5 +127,7 @@ export const initialCampaign = (advertiser: IAdvertiser): CampaignForm => {
     type: "paid",
     pacingStrategy: CampaignPacingStrategies.ModelV1,
     paymentType: advertiser.selfServicePaymentType,
+    newCreative: initialCreative,
+    creatives: [],
   };
 };

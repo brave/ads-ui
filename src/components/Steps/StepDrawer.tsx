@@ -8,15 +8,13 @@ import {
   Step,
   StepButton,
   StepContent,
-  StepLabel,
   Stepper,
   Toolbar,
   Typography,
 } from "@mui/material";
 import { NextAndBack } from "components/Steps/NextAndBack";
-import { StepsButton } from "components/Steps/StepsButton";
 
-const drawerWidth = 240;
+const drawerWidth = 250;
 
 interface Props {
   steps: {
@@ -44,7 +42,7 @@ export function StepDrawer({ steps, finalComponent }: Props) {
         }}
       >
         <Toolbar />
-        <Box ml={1} mt={1}>
+        <Box ml={2} mt={1}>
           <Stepper activeStep={activeStep} orientation="vertical">
             {steps.map((step, index) => (
               <Step key={step.label} onClick={() => setActiveStep(index)}>

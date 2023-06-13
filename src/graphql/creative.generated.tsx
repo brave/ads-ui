@@ -19,13 +19,49 @@ export type CreativeFragment = {
   } | null;
 };
 
+export type AdvertiserCreativesQueryVariables = Types.Exact<{
+  advertiserId: Types.Scalars["String"];
+}>;
+
+export type AdvertiserCreativesQuery = {
+  __typename?: "Query";
+  advertiser?: {
+    __typename?: "Advertiser";
+    id: string;
+    creatives: Array<{
+      __typename?: "Creative";
+      id: string;
+      createdAt: any;
+      modifiedAt: any;
+      name: string;
+      state: string;
+      type: { __typename?: "CreativeType"; code: string };
+      payloadNotification?: {
+        __typename?: "NotificationPayload";
+        body: string;
+        title: string;
+        targetUrl: string;
+      } | null;
+    }>;
+  } | null;
+};
+
 export type CreateNotificationCreativeMutationVariables = Types.Exact<{
   input: Types.CreateNotificationCreativeInput;
 }>;
 
 export type CreateNotificationCreativeMutation = {
   __typename?: "Mutation";
-  createNotificationCreative: { __typename?: "Creative"; id: string };
+  createNotificationCreative: {
+    __typename?: "Creative";
+    id: string;
+    payloadNotification?: {
+      __typename?: "NotificationPayload";
+      body: string;
+      title: string;
+      targetUrl: string;
+    } | null;
+  };
 };
 
 export type UpdateNotificationCreativeMutationVariables = Types.Exact<{
@@ -54,12 +90,84 @@ export const CreativeFragmentDoc = gql`
     }
   }
 `;
+export const AdvertiserCreativesDocument = gql`
+  query advertiserCreatives($advertiserId: String!) {
+    advertiser(id: $advertiserId) {
+      id
+      creatives {
+        ...Creative
+      }
+    }
+  }
+  ${CreativeFragmentDoc}
+`;
+
+/**
+ * __useAdvertiserCreativesQuery__
+ *
+ * To run a query within a React component, call `useAdvertiserCreativesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdvertiserCreativesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdvertiserCreativesQuery({
+ *   variables: {
+ *      advertiserId: // value for 'advertiserId'
+ *   },
+ * });
+ */
+export function useAdvertiserCreativesQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    AdvertiserCreativesQuery,
+    AdvertiserCreativesQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    AdvertiserCreativesQuery,
+    AdvertiserCreativesQueryVariables
+  >(AdvertiserCreativesDocument, options);
+}
+export function useAdvertiserCreativesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    AdvertiserCreativesQuery,
+    AdvertiserCreativesQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    AdvertiserCreativesQuery,
+    AdvertiserCreativesQueryVariables
+  >(AdvertiserCreativesDocument, options);
+}
+export type AdvertiserCreativesQueryHookResult = ReturnType<
+  typeof useAdvertiserCreativesQuery
+>;
+export type AdvertiserCreativesLazyQueryHookResult = ReturnType<
+  typeof useAdvertiserCreativesLazyQuery
+>;
+export type AdvertiserCreativesQueryResult = Apollo.QueryResult<
+  AdvertiserCreativesQuery,
+  AdvertiserCreativesQueryVariables
+>;
+export function refetchAdvertiserCreativesQuery(
+  variables: AdvertiserCreativesQueryVariables
+) {
+  return { query: AdvertiserCreativesDocument, variables: variables };
+}
 export const CreateNotificationCreativeDocument = gql`
   mutation createNotificationCreative(
     $input: CreateNotificationCreativeInput!
   ) {
     createNotificationCreative(createNotificationCreativeInput: $input) {
       id
+      payloadNotification {
+        body
+        title
+        targetUrl
+      }
     }
   }
 `;
