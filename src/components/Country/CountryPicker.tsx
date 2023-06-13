@@ -25,6 +25,7 @@ export const CountryPicker: React.FC<Props> = ({ name }) => {
       renderInput={(params) => (
         <TextField
           {...params}
+          required
           label="Country"
           helperText={meta.touched && errorMessage}
           error={meta.touched && !!errorMessage}

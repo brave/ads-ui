@@ -23,17 +23,24 @@ export function AdvertiserField() {
         review and approval procedures.
       </Typography>
 
-      <FormikTextField name="advertiser.name" label="Organization Name" />
-
       <FormikTextField
-        name="advertiser.url"
-        label="Organization URL"
-        autoComplete="tel"
+        required
+        name="advertiser.name"
+        label="Organization Name"
       />
 
       <FormikTextField
+        required
+        name="advertiser.url"
+        label="Organization URL"
+        autoComplete="url"
+      />
+
+      <FormikTextField
+        required
         name="advertiser.phone"
         label="Organization Phone Number"
+        autoComplete="tel"
         type="tel"
       />
     </React.Fragment>
