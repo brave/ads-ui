@@ -13,6 +13,7 @@ export function NameField() {
 
       <Stack direction="row" spacing={1} mb={1} mt={2}>
         <FormikTextField
+          required
           name="firstName"
           label="First Name"
           margin="none"
@@ -20,6 +21,7 @@ export function NameField() {
         />
 
         <FormikTextField
+          required
           name="lastName"
           label="Last Name"
           margin="none"
@@ -28,6 +30,7 @@ export function NameField() {
       </Stack>
 
       <FormikTextField
+        required
         name="email"
         label="Email Address"
         type="email"

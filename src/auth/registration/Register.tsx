@@ -1,7 +1,7 @@
 import { AuthContainer } from "auth/views/components/AuthContainer";
 import { Form, Formik } from "formik";
-import React, { useState } from "react";
-import { RegistrationSchema } from "auth/registration/RegistrationSchema";
+import React from "react";
+import { RegistrationSchema } from "validation/RegistrationSchema";
 import { initialValues, RegistrationForm } from "auth/registration/types";
 import { Stack } from "@mui/material";
 import { NameField } from "auth/registration/NameField";
