@@ -27,7 +27,7 @@ export const PersistFormValues = () => {
       localStorage.setItem(values.draftId, JSON.stringify(values));
     }
     setDrafts();
-  }, [values]);
+  }, [values, dirty]);
 
   return null;
 };
