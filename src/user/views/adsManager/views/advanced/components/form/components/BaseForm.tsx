@@ -31,22 +31,22 @@ export function BaseForm({ isEdit, draftId }: Props) {
         steps={[
           {
             label: "Campaign Settings",
-            description: "Define when and where you want your campaign to run",
             component: <CampaignSettings isEdit={isEdit} />,
           },
           {
             label: "Budget",
-            description: "Set a limit on how much your campaign will spend.",
             component: <BudgetField isEdit={isEdit} />,
           },
           {
             label: "Ads",
-            description: "Create new ads to be shared across Ad sets",
             component: <NotificationAdForm />,
           },
           {
+            label: "Ad Sets",
+            component: <AdSetFields isEdit={isEdit} />,
+          },
+          {
             label: "Review",
-            description: "Review details before submitting for approval",
             component: <Review />,
           },
         ]}

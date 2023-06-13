@@ -53,10 +53,6 @@ export function NotificationAdForm() {
     ],
   });
 
-  useEffect(() => {
-    console.log(screen.availWidth);
-  });
-
   return (
     <React.Fragment>
       <CardContainer header="New Ad">
@@ -113,7 +109,7 @@ export function NotificationAdForm() {
             }
             loading={loading}
           >
-            Save Ad
+            Save and Create New Ad
           </LoadingButton>
         </Stack>
       </CardContainer>
@@ -123,7 +119,8 @@ export function NotificationAdForm() {
             direction="row"
             spacing={1}
             alignItems="center"
-            maxWidth={1100}
+            // todo: not a valid solution
+            maxWidth={1200}
             sx={{ overflowX: "scroll" }}
           >
             {creatives.map((c) => (

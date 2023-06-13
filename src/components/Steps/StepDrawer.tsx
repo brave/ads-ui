@@ -19,7 +19,6 @@ const drawerWidth = 250;
 interface Props {
   steps: {
     label: string;
-    description: string;
     component: React.ReactNode;
   }[];
   finalComponent: React.ReactNode;
@@ -47,9 +46,8 @@ export function StepDrawer({ steps, finalComponent }: Props) {
             {steps.map((step, index) => (
               <Step key={step.label} onClick={() => setActiveStep(index)}>
                 <StepButton>{step.label}</StepButton>
-                <StepContent>
-                  <Typography>{step.description}</Typography>
-                </StepContent>
+                {/*<StepContent>*/}
+                {/*</StepContent>*/}
               </Step>
             ))}
           </Stepper>
