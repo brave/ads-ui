@@ -15,7 +15,6 @@ import { useIsAuthenticated } from "auth/hooks/queries/useIsAuthenticated";
 import { AuthVerify } from "auth/views/AuthVerify";
 import { Login } from "auth/views/Login";
 import { MagicLink } from "auth/views/MagicLink";
-import { Register } from "auth/registration/Register";
 
 const Protected = () => {
   return <Redirect to="/auth/signin" />;
