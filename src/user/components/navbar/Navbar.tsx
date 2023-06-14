@@ -46,7 +46,7 @@ export function Navbar() {
   const isCompletePage = url.includes("/user/main/complete/new");
   const newUrl = `/user/main/adsmanager/advanced/new/${moment()
     .utc()
-    .valueOf()}`;
+    .valueOf()}/settings`;
 
   return (
     <AppBar

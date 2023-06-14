@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { PropsWithChildren, useState } from "react";
 import {
   Box,
   Button,
@@ -14,19 +14,29 @@ import {
   Typography,
 } from "@mui/material";
 import { NextAndBack } from "components/Steps/NextAndBack";
+import { useHistory } from "react-router-dom";
 
 const drawerWidth = 250;
 
 interface Props {
   steps: {
     label: string;
-    component: React.ReactNode;
+    path: string;
+    queryParams?: string;
+    content?: React.ReactNode;
   }[];
   finalComponent: React.ReactNode;
 }
 
-export function StepDrawer({ steps, finalComponent }: Props) {
-  const [activeStep, setActiveStep] = useState(0);
+export function StepDrawer({
+  steps,
+  finalComponent,
+  children,
+}: Props & PropsWithChildren) {
+  const history = useHistory();
+  const [activeStep, setActiveStep] = useState(
+    steps.findIndex((s) => history.location.pathname.includes(s.path))
+  );
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -45,25 +55,33 @@ export function StepDrawer({ steps, finalComponent }: Props) {
         <Box ml={2} mt={1}>
           <Stepper activeStep={activeStep} orientation="vertical">
             {steps.map((step, index) => (
-              <Step key={step.label} onClick={() => setActiveStep(index)}>
+              <Step
+                key={step.label}
+                onClick={() => {
+                  history.push(`${step.path}${step.queryParams ?? ""}`);
+                  setActiveStep(index);
+                }}
+              >
                 <StepButton>{step.label}</StepButton>
-                <StepContent>
-                  <ListItemButton>Ad Set 1</ListItemButton>
-                </StepContent>
-                {/*<StepContent>*/}
-                {/*</StepContent>*/}
+                {step.content && <StepContent>{step.content}</StepContent>}
               </Step>
             ))}
           </Stepper>
         </Box>
       </Drawer>
       <Stack flexGrow={1}>
-        <Box>{steps[activeStep].component}</Box>
+        {children}
         <NextAndBack
           activeStep={activeStep}
           steps={steps.length - 1}
-          onNext={() => setActiveStep(activeStep + 1)}
-          onBack={() => setActiveStep(activeStep - 1)}
+          onNext={() => {
+            setActiveStep(activeStep + 1);
+            history.replace(steps[activeStep + 1].path);
+          }}
+          onBack={() => {
+            setActiveStep(activeStep - 1);
+            history.replace(steps[activeStep - 1].path);
+          }}
           final={finalComponent}
         />
       </Stack>

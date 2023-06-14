@@ -48,7 +48,9 @@ export function DraftMenu() {
           <MenuItem
             key={`draft-${d.draftId}-${idx}`}
             onClick={() => {
-              history.push(`/user/main/adsmanager/advanced/new/${d.draftId}`);
+              history.push(
+                `/user/main/adsmanager/advanced/new/${d.draftId}/settings`
+              );
               setAnchorEl(null);
             }}
             sx={{ pt: 1, pb: 1, minWidth: "250px" }}

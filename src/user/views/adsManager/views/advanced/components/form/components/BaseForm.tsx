@@ -1,79 +1,66 @@
-import { Form, FormikValues, useFormikContext } from "formik";
+import { Form } from "formik";
 import { Review } from "../../review/Review";
-import React, { useState } from "react";
-import { CampaignForm } from "../../../../../types";
+import React from "react";
 import { CampaignSettings } from "user/views/adsManager/views/advanced/components/campaign/fields/CampaignSettings";
 import { BudgetField } from "user/views/adsManager/views/advanced/components/campaign/fields/BudgetField";
 import { StepDrawer } from "components/Steps/StepDrawer";
 import { PaymentButton } from "user/views/adsManager/views/advanced/components/form/components/PaymentButton";
 import { NewAd } from "user/ads/NewAd";
+import { AdSetFields } from "user/views/adsManager/views/advanced/components/adSet/AdSetFields";
+import { NewAdSet } from "user/views/adsManager/views/advanced/components/adSet/NewAdSet";
+import { Route, Switch, useHistory, useRouteMatch } from "react-router-dom";
 
 interface Props {
   isEdit: boolean;
-  draftId?: string;
 }
 
-export function BaseForm({ isEdit, draftId }: Props) {
-  const { values } = useFormikContext<CampaignForm>();
-  const [value, setValue] = useState(0);
+export function BaseForm({ isEdit }: Props) {
+  const { url } = useRouteMatch();
+  const history = useHistory();
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
-
-  const showCard = (values: FormikValues) => {
-    return value > 0 && value !== values.adSets.length + 1;
-  };
+  const steps = [
+    {
+      label: "Campaign Settings",
+      path: `${url}/settings`,
+      component: <CampaignSettings isEdit={isEdit} />,
+    },
+    {
+      label: "Budget",
+      path: `${url}/budget`,
+      component: <BudgetField isEdit={isEdit} />,
+    },
+    {
+      label: "Ads",
+      path: `${url}/ads`,
+      component: <NewAd />,
+    },
+    {
+      label: "Ad Sets",
+      path: `${url}/adSets`,
+      content: <NewAdSet />,
+      component: <AdSetFields isEdit={isEdit} />,
+    },
+    {
+      label: "Review",
+      path: `${url}/review`,
+      component: <Review />,
+    },
+  ];
 
   return (
     <Form>
-      <StepDrawer
-        steps={[
-          {
-            label: "Campaign Settings",
-            component: <CampaignSettings isEdit={isEdit} />,
-          },
-          {
-            label: "Budget",
-            component: <BudgetField isEdit={isEdit} />,
-          },
-          {
-            label: "Ads",
-            component: <NewAd />,
-          },
-          {
-            label: "Ad Sets",
-            component: <AdSetFields isEdit={isEdit} />,
-          },
-          {
-            label: "Review",
-            component: <Review />,
-          },
-        ]}
-        finalComponent={<PaymentButton isEdit={isEdit} />}
-      />
-      {/*<Box>*/}
-      {/*  {showCard(values) && (*/}
-      {/*    <>*/}
-      {/*      <AdSetFields*/}
-      {/*        tabValue={value}*/}
-      {/*        onRemove={() => setValue(value - 1)}*/}
-      {/*        onCreate={() => setValue(value + 1)}*/}
-      {/*        isEdit={isEdit}*/}
-      {/*      />*/}
-      {/*      <AdField index={value - 1} isEdit={isEdit} />*/}
-      {/*      <Box sx={{ mt: 2 }}>*/}
-      {/*        <Button*/}
-      {/*          variant="contained"*/}
-      {/*          size="large"*/}
-      {/*          onClick={() => setValue(values.adSets.length + 1)}*/}
-      {/*        >*/}
-      {/*          Next*/}
-      {/*        </Button>*/}
-      {/*      </Box>*/}
-      {/*    </>*/}
-      {/*  )}*/}
-      {/*</Box>*/}
+      <Switch>
+        <StepDrawer
+          steps={steps}
+          finalComponent={<PaymentButton isEdit={isEdit} />}
+        >
+          {steps.map((s) => (
+            <Route path={s.path} key={s.path}>
+              {s.component}
+            </Route>
+          ))}
+        </StepDrawer>
+      </Switch>
     </Form>
   );
 }

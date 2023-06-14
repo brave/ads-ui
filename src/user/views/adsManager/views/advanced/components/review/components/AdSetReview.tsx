@@ -26,7 +26,7 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
   };
 
   const segmentValue = (v: string) => {
-    return v === "untargeted" ? "Let Brave determine the best audience." : v;
+    return v === "untargeted" ? "Let Brave pick categories for me." : v;
   };
 
   return (
