@@ -4,6 +4,7 @@ import {
   Button,
   CssBaseline,
   Drawer,
+  ListItemButton,
   Stack,
   Step,
   StepButton,
@@ -46,6 +47,9 @@ export function StepDrawer({ steps, finalComponent }: Props) {
             {steps.map((step, index) => (
               <Step key={step.label} onClick={() => setActiveStep(index)}>
                 <StepButton>{step.label}</StepButton>
+                <StepContent>
+                  <ListItemButton>Ad Set 1</ListItemButton>
+                </StepContent>
                 {/*<StepContent>*/}
                 {/*</StepContent>*/}
               </Step>

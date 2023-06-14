@@ -109,7 +109,7 @@ export function NotificationAdForm() {
             }
             loading={loading}
           >
-            Save and Create New Ad
+            Add
           </LoadingButton>
         </Stack>
       </CardContainer>
@@ -117,11 +117,10 @@ export function NotificationAdForm() {
         <CardContainer header="Created Ads">
           <Stack
             direction="row"
-            spacing={1}
+            justifyContent="left"
             alignItems="center"
             // todo: not a valid solution
-            maxWidth={1200}
-            sx={{ overflowX: "scroll" }}
+            flexWrap="wrap"
           >
             {creatives.map((c) => (
               <BoxContainer header={c.name}>

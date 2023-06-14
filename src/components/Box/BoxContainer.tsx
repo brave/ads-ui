@@ -5,9 +5,9 @@ export function BoxContainer(
   props: { header?: React.ReactNode } & PropsWithChildren
 ) {
   return (
-    <Box>
+    <Box mr={2}>
       {props.header && (
-        <Typography variant="h2" marginBottom={2}>
+        <Typography variant="h2" marginBottom={1}>
           {props.header}
         </Typography>
       )}
