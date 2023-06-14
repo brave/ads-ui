@@ -6,7 +6,7 @@ import { CampaignSettings } from "user/views/adsManager/views/advanced/component
 import { BudgetField } from "user/views/adsManager/views/advanced/components/campaign/fields/BudgetField";
 import { StepDrawer } from "components/Steps/StepDrawer";
 import { PaymentButton } from "user/views/adsManager/views/advanced/components/form/components/PaymentButton";
-import { NotificationAdForm } from "user/ads/NotificationAdForm";
+import { NewAd } from "user/ads/NewAd";
 
 interface Props {
   isEdit: boolean;
@@ -39,7 +39,7 @@ export function BaseForm({ isEdit, draftId }: Props) {
           },
           {
             label: "Ads",
-            component: <NotificationAdForm />,
+            component: <NewAd />,
           },
           {
             label: "Ad Sets",
