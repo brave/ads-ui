@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { useHistory, useParams } from "react-router-dom";
-import { Box, Button, Card, Container, Stack, Typography } from "@mui/material";
+import { Box, Card, Container, Stack, Typography } from "@mui/material";
 import present from "../../../../../../../../present.png";
 import { LoadingButton } from "@mui/lab";
 import { useValidatePaymentSession } from "checkout/hooks/useValidatePaymentSession";
@@ -14,6 +14,15 @@ export function CompletionForm() {
   const history = useHistory();
   const params = useParams<Params>();
   const [clickedSurvey, setClickedSurvey] = useState(false);
+  const searchParams = new URLSearchParams(window.location.search);
+
+  const session = searchParams.get("sessionId");
+  const campaign = searchParams.get("referenceId");
+
+  const { loading } = useValidatePaymentSession({
+    sessionId: session,
+    campaignId: campaign,
+  });
 
   return (
     <Container maxWidth="xl">
@@ -42,14 +51,16 @@ export function CompletionForm() {
               Thank you for using Brave Ads!
             </Typography>
 
-            <Button
+            <LoadingButton
               variant="contained"
               size="large"
               sx={{ mt: 2, flexGrow: 0 }}
+              disabled={loading}
+              loading={loading}
               onClick={() => history.push("/user/main/campaigns")}
             >
               Continue
-            </Button>
+            </LoadingButton>
           </>
         )}
 
@@ -81,6 +92,7 @@ export function CompletionForm() {
               spacing={2}
             >
               <ValidateCampaignButton
+                loading={loading}
                 clicked={clickedSurvey}
                 onClick={() => setClickedSurvey(true)}
               />
@@ -94,17 +106,10 @@ export function CompletionForm() {
 
 function ValidateCampaignButton(props: {
   clicked: boolean;
+  loading: boolean;
   onClick: () => void;
 }) {
   const history = useHistory();
-  const searchParams = new URLSearchParams(window.location.search);
-  const session = searchParams.get("sessionId");
-  const campaign = searchParams.get("referenceId");
-
-  const { loading } = useValidatePaymentSession({
-    sessionId: session,
-    campaignId: campaign,
-  });
 
   return (
     <Stack
@@ -119,8 +124,8 @@ function ValidateCampaignButton(props: {
           onClick={() => props.onClick()}
           href="https://www.surveymonkey.com/r/WSFWF5Y"
           target="_blank"
-          loading={loading}
-          disabled={loading}
+          loading={props.loading}
+          disabled={props.loading}
         >
           Take our survey!
         </LoadingButton>
@@ -131,8 +136,8 @@ function ValidateCampaignButton(props: {
         onClick={async () => {
           history.push("/user/main");
         }}
-        loading={loading}
-        disabled={loading}
+        loading={props.loading}
+        disabled={props.loading}
       >
         {props.clicked ? "Continue" : "Skip survey and continue"}
       </LoadingButton>

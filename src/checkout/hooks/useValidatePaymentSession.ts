@@ -12,9 +12,9 @@ export function useValidatePaymentSession(props: Props) {
   const [error, setError] = useState<string>();
 
   useEffect(() => {
-    if (props.sessionId && props.campaignId) {
+    if (props.campaignId) {
       setLoading(true);
-      fetchPaymentSession(props.sessionId, props.campaignId)
+      fetchPaymentSession(props.campaignId, props.sessionId)
         .catch((e) => {
           setError(e.message);
         })
