@@ -15,6 +15,7 @@ import { useIsAuthenticated } from "auth/hooks/queries/useIsAuthenticated";
 import { AuthVerify } from "auth/views/AuthVerify";
 import { Login } from "auth/views/Login";
 import { MagicLink } from "auth/views/MagicLink";
+import { Register } from "auth/registration/Register";
 
 const Protected = () => {
   return <Redirect to="/auth/signin" />;
@@ -44,6 +45,7 @@ export function App() {
             <Route path="/auth/signin" component={Login} />
             <Route path="/auth/link" component={MagicLink} />
             <Route path="/auth/verify" component={AuthVerify} />
+            <Route path="/register" component={Register} />
             <Route path="*" component={isAuthenticated ? User : Protected} />
             <Redirect to="/user/main" />
           </Switch>

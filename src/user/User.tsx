@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import {
@@ -13,9 +13,10 @@ import { Box } from "@mui/material";
 import { NewCampaign } from "./views/adsManager/views/advanced/components/form/NewCampaign";
 import { EditCampaign } from "./views/adsManager/views/advanced/components/form/EditCampaign";
 import { CompletionForm } from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
-import moment from "moment";
 import { MainView } from "user/views/user/MainView";
+import { AdvertiserAgreed } from "auth/components/AdvertiserAgreed";
 import { Navbar } from "user/components/navbar/Navbar";
+import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -45,34 +46,37 @@ export function User() {
           >
             <Switch>
               {/* /adsmanager */}
-              <Route
-                path={`/user/main/adsmanager/advanced/new/:draftId`}
-                component={NewCampaign}
+              <ProtectedRoute
+                path="/user/main/adsmanager/advanced/new/:draftId"
+                authedComponent={NewCampaign}
               />
 
-              <Route
-                path={`/user/main/adsmanager/advanced/:campaignId`}
-                component={EditCampaign}
+              <ProtectedRoute
+                path="/user/main/adsmanager/advanced/:campaignId"
+                authedComponent={EditCampaign}
               />
 
-              <Route
-                path={`/user/main/complete/:mode`}
-                component={CompletionForm}
+              <ProtectedRoute
+                path="/user/main/complete/:mode"
+                authedComponent={CompletionForm}
               />
-
-              {/* /settings */}
-              <Route path={`/user/main/settings`} component={Settings} />
 
               {/* /campaigns/:campaignId/analytics - */}
-              <Route
-                path={`/user/main/campaign/:campaignId/analytics/overview`}
-                component={AnalyticsOverview}
+              <ProtectedRoute
+                path="/user/main/campaign/:campaignId/analytics/overview"
+                authedComponent={AnalyticsOverview}
               />
 
-              <Route path={`/user/main`} component={MainView} />
+              <Route path="/user/main/settings" component={Settings} />
+
+              <ProtectedRoute
+                path="/user/main"
+                authedComponent={MainView}
+                unauthedComponent={AdvertiserAgreed}
+              />
 
               {/* default */}
-              <Redirect to={`/user/main`} />
+              <Redirect to="/user/main" />
             </Switch>
           </Box>
         </Box>
@@ -80,3 +84,28 @@ export function User() {
     </ApolloProvider>
   );
 }
+
+interface ProtectedProps {
+  authedComponent?: React.ComponentType;
+  unauthedComponent?: React.ComponentType;
+  path?: string;
+}
+
+const ProtectedRoute = ({
+  authedComponent,
+  unauthedComponent,
+  path,
+}: ProtectedProps) => {
+  const { advertiser } = useAdvertiser();
+
+  if (!advertiser.agreed && unauthedComponent === undefined) {
+    return <Redirect to="/user/main" />;
+  }
+
+  return (
+    <Route
+      path={path}
+      component={advertiser.agreed ? authedComponent : unauthedComponent}
+    />
+  );
+};

@@ -18,7 +18,7 @@ export function MagicLink() {
 
   if (requested) {
     return (
-      <AuthContainer height="400px">
+      <AuthContainer>
         <Typography variant="h4" sx={{ mb: 3, mt: 2 }}>
           A login email is on the way
         </Typography>
@@ -45,7 +45,7 @@ export function MagicLink() {
   }
 
   return (
-    <AuthContainer height="400px">
+    <AuthContainer>
       <TextField
         sx={{ mb: 2 }}
         fullWidth

@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import { FormikSubmitButton } from "form/FormikHelpers";
 import { CampaignReview } from "./components/CampaignReview";
 import { AdSetReview } from "./components/AdSetReview";
+import { PaymentType } from "graphql/types";
 
 interface Props {
   isEdit: boolean;
@@ -12,6 +13,9 @@ interface Props {
 
 export function Review({ isEdit }: Props) {
   const { values, errors, setTouched } = useFormikContext<CampaignForm>();
+  const hasPaymentIntent =
+    values.paymentType !== PaymentType.Stripe || values.stripePaymentId;
+  const paymentText = "Make payment & submit for approval";
 
   useEffect(() => {
     const toTouch = Object.keys(values)
@@ -26,6 +30,7 @@ export function Review({ isEdit }: Props) {
 
       {values.adSets.map((adSet, adSetIdx) => (
         <AdSetReview
+          key={`adSetReview-${adSetIdx}`}
           idx={adSetIdx}
           adSet={adSet}
           errors={errors.adSets?.[adSetIdx]}
@@ -34,7 +39,11 @@ export function Review({ isEdit }: Props) {
 
       <FormikSubmitButton
         isCreate={!isEdit}
-        label={`${isEdit ? "Update" : "Create"} & Submit For Approval`}
+        label={
+          hasPaymentIntent
+            ? `${isEdit ? "Update" : "Create"} & Submit For Approval`
+            : paymentText
+        }
         allowNavigation={true}
       />
     </Box>

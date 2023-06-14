@@ -3,12 +3,10 @@ import React from "react";
 import BraveLogo from "../../../../brave-logotype-full-color.png";
 
 interface Props {
-  height?: string;
-  width?: string;
   children?: React.ReactNode;
 }
 
-export function AuthContainer({ height, width, children }: Props) {
+export function AuthContainer({ children }: Props) {
   return (
     <Container
       maxWidth={false}
@@ -21,7 +19,7 @@ export function AuthContainer({ height, width, children }: Props) {
         height: "100%",
       }}
     >
-      <Box height={height ?? "520px"} width={width ?? "725px"}>
+      <Box display="flex" width="725px">
         <Card
           sx={{
             width: "100%",

@@ -46,7 +46,10 @@ export function ConversionField({ index }: Props) {
             </Stack>
 
             {(meta.value ?? []).map((v, idx) => (
-              <ConversionFields name={`adSets.${index}.conversions.${idx}`} />
+              <ConversionFields
+                key={`conversion-${idx}`}
+                name={`adSets.${index}.conversions.${idx}`}
+              />
             ))}
           </>
         )}

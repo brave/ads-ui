@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import _ from "lodash";
 import * as tweetnacl from "tweetnacl";
 import { useUpdateAdvertiserMutation } from "graphql/advertiser.generated";
@@ -23,6 +23,7 @@ import { setActiveAdvertiser } from "auth/util";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 import { useHistory } from "react-router-dom";
 import { CardContainer } from "components/Card/CardContainer";
+import { DraftContext } from "state/context";
 
 const modalStyles: SxProps = {
   position: "absolute",
@@ -50,6 +51,7 @@ const Settings = () => {
   const [showNewKeypairModal, setShowNewKeypairModal] = useState(false);
   const [newKeypairModalState, setNewKeypairModalState] =
     useState("disclaimer");
+  const { setDrafts } = useContext(DraftContext);
   const history = useHistory();
 
   const handleUpdateAdvertiser = () => {
@@ -110,6 +112,7 @@ const Settings = () => {
     const adv = _.find(advertisers, { id });
     setPublicKey(adv?.publicKey);
     setActiveAdvertiser(adv?.id);
+    setDrafts();
   };
 
   return (
@@ -172,7 +175,9 @@ const Settings = () => {
                 onChange={(e) => setActiveAdvertiserWithId(e)}
               >
                 {advertisers.map((a) => (
-                  <MenuItem value={a.id}>{a.name}</MenuItem>
+                  <MenuItem key={a.id} value={a.id}>
+                    {a.name}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>

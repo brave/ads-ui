@@ -20,6 +20,8 @@ fragment Campaign on Campaign {
   format
   paymentType
   dayProportion
+  stripePaymentId
+  paymentType
   geoTargets {
     code
     name
@@ -50,7 +52,17 @@ fragment CampaignSummary on Campaign {
   source
   type
   format
+  paymentType
   dayProportion
+  adSets {
+    ...AdSet
+  }
+}
+
+fragment CampaignAds on Campaign {
+  id
+  name
+  state
   adSets {
     ...AdSet
   }
@@ -62,14 +74,23 @@ query LoadCampaign($id: String!) {
   }
 }
 
+query LoadCampaignAds($id: String!) {
+  campaign(id: $id) {
+    ...CampaignAds
+  }
+}
+
 mutation CreateCampaign($input: CreateCampaignInput!) {
   createCampaign(createCampaignInput: $input) {
     id
+    paymentType
   }
 }
 
 mutation UpdateCampaign($input: UpdateCampaignInput!) {
   updateCampaign(updateCampaignInput: $input) {
     id
+    paymentType
+    stripePaymentId
   }
 }

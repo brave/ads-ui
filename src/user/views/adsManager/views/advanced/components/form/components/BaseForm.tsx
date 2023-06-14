@@ -8,7 +8,6 @@ import React, { useState } from "react";
 import { CampaignForm } from "../../../../../types";
 import { DeleteDraft } from "./DeleteDraft";
 import { DashboardIconButton } from "components/Button/DashboardIconButton";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 
 interface Props {
   isEdit: boolean;
@@ -35,7 +34,11 @@ export function BaseForm({ isEdit, draftId }: Props) {
           <Tabs value={value} onChange={handleChange}>
             <Tab label="Campaign" value={0} />
             {values.adSets.map((a, index) => (
-              <Tab label={`Ad Set ${index + 1}`} value={index + 1} />
+              <Tab
+                key={`adset-${index}`}
+                label={`Ad Set ${index + 1}`}
+                value={index + 1}
+              />
             ))}
             <Tab label="Review" value={values.adSets.length + 1} />
           </Tabs>

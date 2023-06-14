@@ -1,4 +1,4 @@
-import { Box, List, ListItemText } from "@mui/material";
+import { Box } from "@mui/material";
 import { FormikRadioControl, FormikTextField } from "form/FormikHelpers";
 import React from "react";
 
@@ -17,16 +17,11 @@ export const ConversionFields: React.FC<Props> = ({ name }: Props) => {
           { value: "postclick", label: "Post-Click" },
         ]}
         helperText={
-          <List>
-            <ListItemText
-              secondary="Post-View: Viewed Ad and converted by visiting site on their own"
-              secondaryTypographyProps={{ fontSize: "0.75rem" }}
-            />
-            <ListItemText
-              secondary="Post-Click: Viewed Ad and converted by clicking its link"
-              secondaryTypographyProps={{ fontSize: "0.75rem" }}
-            />
-          </List>
+          <React.Fragment>
+            Post-View: Viewed Ad and converted by visiting site on their own.{" "}
+            <br />
+            Post-Click: Viewed Ad and converted by clicking its link
+          </React.Fragment>
         }
       />
 

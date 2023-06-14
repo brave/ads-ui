@@ -1,5 +1,6 @@
 import { useAuthContext } from "auth/context/auth.hook";
 import { IAdvertiser } from "auth/context/auth.interface";
+import { PaymentType } from "graphql/types";
 
 export function useAdvertiser(): {
   advertiser: IAdvertiser;
@@ -14,6 +15,7 @@ export function useAdvertiser(): {
     selfServiceEdit: false,
     selfServiceSetPrice: false,
     publicKey: null,
+    selfServicePaymentType: PaymentType.Stripe,
   };
 
   const active = window.localStorage.getItem("activeAdvertiser") ?? "";
