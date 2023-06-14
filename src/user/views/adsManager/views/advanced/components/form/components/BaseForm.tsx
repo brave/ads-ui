@@ -8,7 +8,6 @@ import React, { useState } from "react";
 import { CampaignForm } from "../../../../../types";
 import { DeleteDraft } from "./DeleteDraft";
 import { DashboardIconButton } from "components/Button/DashboardIconButton";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 
 interface Props {
   isEdit: boolean;

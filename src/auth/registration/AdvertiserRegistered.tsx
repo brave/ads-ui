@@ -12,8 +12,12 @@ export function AdvertiserRegistered({ error }: Props) {
     <React.Fragment>
       {!!error ? (
         <Stack direction="column" alignItems="center" sx={{ mt: 5 }}>
-          <Typography variant="h4" sx={{ textAlign: "center", mb: 5 }}>
-            {error}
+          <Typography variant="h4" sx={{ textAlign: "left", mb: 5 }}>
+            We encountered a problem creating your account. Please reach out to
+            <Link sx={{ ml: 1 }} href="mailto:selfserve@brave.com">
+              selfserve@brave.com
+            </Link>{" "}
+            or try again.
           </Typography>
           <CancelOutlinedIcon sx={{ fontSize: "100px", mb: 5 }} color="error" />
           <Link
