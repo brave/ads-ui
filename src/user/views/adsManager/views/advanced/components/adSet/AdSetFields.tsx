@@ -30,7 +30,7 @@ export function AdSetFields({ isEdit }: Props) {
 
       {!isEdit && <ConversionField index={current} />}
 
-      <AdSetAds isEdit={isEdit} index={current} />
+      <AdSetAds index={current} />
     </>
   );
 }

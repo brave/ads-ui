@@ -72,12 +72,11 @@ export function EditCampaign() {
     <Container maxWidth="xl">
       <Formik
         initialValues={initialValues}
-        onSubmit={(v: CampaignForm, { setSubmitting }) => {
+        onSubmit={async (v: CampaignForm, { setSubmitting }) => {
           setSubmitting(true);
           const input = transformEditForm(v, params.campaignId);
-          mutation({ variables: { input } }).catch((e) => {
-            setSubmitting(false);
-          });
+          await mutation({ variables: { input } });
+          setSubmitting(false);
         }}
         validationSchema={CampaignSchema}
       >

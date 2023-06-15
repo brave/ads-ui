@@ -16,6 +16,7 @@ export type CampaignForm = {
   endAt: string;
   budget: number;
   validateStart: boolean;
+  isCreating: boolean;
   currency: string;
   dailyBudget: number;
   dailyCap: number;
@@ -105,6 +106,7 @@ export const initialCampaign = (advertiser: IAdvertiser): CampaignForm => {
     startAt: defaultStartDate(),
     endAt: defaultEndDate(),
     validateStart: true,
+    isCreating: false,
     budget: MIN_PER_CAMPAIGN,
     currency: "USD",
     dailyBudget: MIN_PER_CAMPAIGN,

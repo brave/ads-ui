@@ -30,7 +30,7 @@ export function ActionButtons() {
             history.push("/user/main");
           }}
         >
-          Discard Form
+          Discard form
         </Button>
       )}
     </Stack>

@@ -26,6 +26,7 @@ import {
   OS,
   Segment,
 } from "user/views/adsManager/types";
+import _ from "lodash";
 
 const TYPE_CODE_LOOKUP: Record<string, string> = {
   notification_all_v1: "Push Notification",
@@ -135,6 +136,26 @@ export function editCampaignValues(
   campaign: CampaignFragment,
   advertiserId: string
 ): CampaignForm {
+  const ads = _.flatMap(campaign.adSets, "ads");
+  const creatives = _.uniqBy(
+    (ads ?? [])
+      .filter((ad) => ad.creative != null)
+      .map((ad) => {
+        const c = ad.creative;
+        return {
+          creativeInstanceId: ad.id,
+          id: c.id,
+          name: c.name,
+          targetUrl: c.payloadNotification!.targetUrl,
+          title: c.payloadNotification!.title,
+          body: c.payloadNotification!.body,
+          targetUrlValidationResult: "",
+          state: c.state,
+        };
+      }),
+    "id"
+  );
+
   return {
     adSets: campaign.adSets.map((adSet) => {
       const seg = adSet.segments ?? ([] as Segment[]);
@@ -147,22 +168,13 @@ export function editCampaignValues(
         segments: adSet.segments ?? ([] as Segment[]),
         isNotTargeting: seg.length === 1 && seg[0].code === "Svp7l-zGN",
         name: adSet.name || adSet.id.split("-")[0],
-        creatives: adSet.ads!.map((ad) => {
-          const c = ad.creative;
-          return {
-            creativeInstanceId: ad.id,
-            id: c.id,
-            name: c.name,
-            targetUrl: c.payloadNotification!.targetUrl,
-            title: c.payloadNotification!.title,
-            body: c.payloadNotification!.body,
-            targetUrlValidationResult: "",
-            state: c.state,
-          };
-        }),
+        creatives,
       };
     }),
     advertiserId,
+    creatives: creatives.map((c) => c.id),
+    newCreative: initialCreative,
+    isCreating: false,
     price: campaign.adSets[0].ads?.[0].prices[0].amount ?? 6,
     billingType: (campaign.adSets[0].billingType ?? "cpm") as Billing,
     validateStart: false,
@@ -202,7 +214,10 @@ export function transformEditForm(
       id: adSet.id,
       segments: adSet.segments.map((v) => ({ code: v.code, name: v.name })),
       oses: adSet.oses.map((v) => ({ code: v.code, name: v.name })),
-      ads: adSet.creatives.map((ad) => transformCreative(ad, form)),
+      ads: adSet.creatives.map((ad) => ({
+        ...transformCreative(ad, form),
+        creativeSetId: adSet.id,
+      })),
     })),
   };
 }

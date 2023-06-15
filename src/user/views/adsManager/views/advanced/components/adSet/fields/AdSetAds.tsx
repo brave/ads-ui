@@ -9,11 +9,10 @@ import { Creative } from "user/views/adsManager/types";
 import _ from "lodash";
 
 interface Props {
-  isEdit: boolean;
   index: number;
 }
 
-export function AdSetAds({ isEdit, index }: Props) {
+export function AdSetAds({ index }: Props) {
   const creatives = useRecentlyCreatedAdvertiserCreatives();
 
   const [, meta, helper] = useField<Creative[]>(`adSets.${index}.creatives`);

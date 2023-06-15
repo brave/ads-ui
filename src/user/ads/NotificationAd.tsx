@@ -31,7 +31,7 @@ export function NotificationAd({ onCreate }: Props) {
       newCreativeHelper.setValue(initialCreative);
       newCreativeHelper.setTouched(false);
       creativesHelper.setValue([
-        ...creativesMeta.value,
+        ...(creativesMeta.value ?? []),
         data.createNotificationCreative.id,
       ]);
       onCreate();
@@ -90,7 +90,7 @@ export function NotificationAd({ onCreate }: Props) {
           }}
           disabled={
             !!meta.error ||
-            meta.value.targetUrlValidationResult !== undefined ||
+            meta.value?.targetUrlValidationResult !== undefined ||
             loading
           }
           loading={loading}

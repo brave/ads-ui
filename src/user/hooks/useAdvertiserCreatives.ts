@@ -2,6 +2,7 @@ import { useAdvertiserCreativesQuery } from "graphql/creative.generated";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useFormikContext } from "formik";
 import { CampaignForm, Creative } from "user/views/adsManager/types";
+import _, { flatMap } from "lodash";
 
 export function useAdvertiserCreatives(): Creative[] {
   const { advertiser } = useAdvertiser();
@@ -21,11 +22,13 @@ export function useAdvertiserCreatives(): Creative[] {
 export function useRecentlyCreatedAdvertiserCreatives() {
   const { values } = useFormikContext<CampaignForm>();
   const creatives = useAdvertiserCreatives();
-  return creatives.filter((c) => {
+  const inCampaign = creatives.filter((c) => {
     if (c.id) {
       return (values.creatives ?? []).includes(c.id);
     }
 
     return false;
   });
+
+  return _.uniqBy(inCampaign, "id");
 }

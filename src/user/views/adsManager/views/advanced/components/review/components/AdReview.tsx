@@ -1,26 +1,30 @@
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { useRecentlyCreatedAdvertiserCreatives } from "user/hooks/useAdvertiserCreatives";
 import { BoxContainer } from "components/Box/BoxContainer";
 import { NotificationPreview } from "user/ads/NotificationPreview";
 import React from "react";
+import { ReviewContainer } from "user/views/adsManager/views/advanced/components/review/components/ReviewContainer";
 
 export function AdReview() {
   const creatives = useRecentlyCreatedAdvertiserCreatives();
 
   return (
-    <>
+    <ReviewContainer name="Ads" path="ads">
+      {creatives.length === 0 && (
+        <Typography variant="subtitle1">No Recently Created Ads</Typography>
+      )}
       <Stack
         direction="row"
         justifyContent="left"
         alignItems="center"
         flexWrap="wrap"
       >
-        {(creatives ?? []).map((c) => (
+        {creatives.map((c) => (
           <BoxContainer header={c.name}>
             <NotificationPreview title={c.title} body={c.body} />
           </BoxContainer>
         ))}
       </Stack>
-    </>
+    </ReviewContainer>
   );
 }
