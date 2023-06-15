@@ -13,7 +13,7 @@ import { CampaignForm, initialAdSet } from "user/views/adsManager/types";
 import React, { useRef } from "react";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 
-export function NewAdSet() {
+export function NewAdSet(props: { isEdit: boolean }) {
   const history = useHistory();
   const { values } = useFormikContext<CampaignForm>();
   const params = new URLSearchParams(history.location.search);
@@ -48,7 +48,7 @@ export function NewAdSet() {
                     {adSet.name || `Ad Set ${idx + 1}`}
                   </span>
                 </Link>
-                {idx > 0 && (
+                {idx > 0 && !props.isEdit && (
                   <Tooltip title="Remove">
                     <IconButton
                       onClick={() => {
@@ -64,7 +64,7 @@ export function NewAdSet() {
                 )}
               </Stack>
             ))}
-            {values.adSets.length <= 4 && (
+            {values.adSets.length <= 4 && !props.isEdit && (
               <Box
                 width="100%"
                 pb={0}

@@ -83,7 +83,9 @@ export function CampaignList({ advertiserCampaigns, fromDate }: Props) {
                 <Tooltip title={`Edit ${r.name}`}>
                   <IconButton
                     onClick={() =>
-                      history.push(`/user/main/adsmanager/advanced/${r.id}`)
+                      history.push(
+                        `/user/main/adsmanager/advanced/${r.id}/settings`
+                      )
                     }
                   >
                     <EditIcon />

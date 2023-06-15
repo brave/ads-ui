@@ -17,7 +17,6 @@ interface Props {
 
 export function BaseForm({ isEdit }: Props) {
   const { url } = useRouteMatch();
-  const { values } = useFormikContext<CampaignForm>();
 
   const steps = [
     {
@@ -39,7 +38,7 @@ export function BaseForm({ isEdit }: Props) {
       label: "Ad Sets",
       path: `${url}/adSets`,
       queryParams: "?current=0",
-      content: <NewAdSet />,
+      content: <NewAdSet isEdit={isEdit} />,
       component: <AdSetFields isEdit={isEdit} />,
     },
     {
