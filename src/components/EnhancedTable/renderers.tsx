@@ -5,7 +5,7 @@ import { CellValue } from "./EnhancedTable";
 import React, { ReactChild, ReactNode } from "react";
 import { formatInTimeZone } from "date-fns-tz";
 import enUS from "date-fns/locale/en-US";
-import { populateFilter, updateCampaignState } from "user/library";
+import { populateFilter } from "user/library";
 import {
   CampaignFragment,
   useUpdateCampaignMutation,
@@ -114,7 +114,7 @@ export function campaignOnOffState(
     <OnOff
       onChange={(s) => {
         updateCampaign({
-          variables: { input: updateCampaignState(c, s) },
+          variables: { input: { id: c.id, state: s } },
         });
       }}
       loading={loading}

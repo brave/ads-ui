@@ -10,9 +10,8 @@ interface Props {
 }
 
 export function ConversionField({ index }: Props) {
-  const [form, meta, helper] = useField<Conversion[]>(
-    `adSets.${index}.conversions`
-  );
+  const [, meta] = useField<Conversion[]>(`adSets.${index}.conversions`);
+  const conversions = meta.value ?? [];
 
   return (
     <CardContainer header="Conversion">
@@ -23,7 +22,7 @@ export function ConversionField({ index }: Props) {
               <Typography variant="body2" sx={{ mb: 2 }}>
                 Define post-engagement analytics.
               </Typography>
-              {meta.value.length === 0 && (
+              {conversions.length === 0 && (
                 <Link
                   underline="none"
                   variant="body2"
@@ -33,7 +32,7 @@ export function ConversionField({ index }: Props) {
                   Add Conversion Tracking +
                 </Link>
               )}
-              {meta.value.length === 1 && (
+              {conversions.length === 1 && (
                 <Link
                   underline="none"
                   variant="body2"

@@ -11,7 +11,6 @@ import {
 import { useHistory, useParams } from "react-router-dom";
 import { BaseForm } from "./components/BaseForm";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import { useUser } from "auth/hooks/queries/useUser";
 import { useCreatePaymentSession } from "checkout/hooks/useCreatePaymentSession";
 import { PaymentType } from "graphql/types";
 import { ErrorDetail } from "components/Error/ErrorDetail";
@@ -22,7 +21,6 @@ interface Params {
 
 export function EditCampaign() {
   const { advertiser } = useAdvertiser();
-  const { userId } = useUser();
   const history = useHistory();
   const params = useParams<Params>();
   const { createPaymentSession, loading } = useCreatePaymentSession();
@@ -74,19 +72,12 @@ export function EditCampaign() {
     <Container maxWidth="xl">
       <Formik
         initialValues={initialValues}
-        onSubmit={async (v: CampaignForm, { setSubmitting }) => {
+        onSubmit={(v: CampaignForm, { setSubmitting }) => {
           setSubmitting(true);
-          let editForm;
-          try {
-            editForm = await transformEditForm(v, params.campaignId, userId);
-          } catch (e) {
-            alert("Unable to Update Campaign.");
-          }
-
-          if (editForm) {
-            await mutation({ variables: { input: editForm } });
-          }
-          setSubmitting(false);
+          const input = transformEditForm(v, params.campaignId);
+          mutation({ variables: { input } }).catch((e) => {
+            setSubmitting(false);
+          });
         }}
         validationSchema={CampaignSchema}
       >

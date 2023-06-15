@@ -89,11 +89,8 @@ export function NotificationAd({ onCreate }: Props) {
             create({ variables: { input } });
           }}
           disabled={
-            !meta.value.body ||
-            !meta.value.title ||
-            !meta.value.name ||
-            !meta.value.targetUrl ||
             !!meta.error ||
+            meta.value.targetUrlValidationResult !== undefined ||
             loading
           }
           loading={loading}

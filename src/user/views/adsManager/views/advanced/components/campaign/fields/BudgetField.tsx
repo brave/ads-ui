@@ -48,7 +48,7 @@ export function BudgetField({ isEdit }: Props) {
         <FormikTextField
           name="budget"
           label="Lifetime Budget"
-          margin="none"
+          margin="normal"
           type="number"
           InputProps={{
             startAdornment: <InputAdornment position="start">$</InputAdornment>,

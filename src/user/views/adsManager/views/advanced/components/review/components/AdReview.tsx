@@ -1,37 +1,26 @@
-import { Creative } from "../../../../../types";
-import { Box, Typography } from "@mui/material";
-import { FormikErrors } from "formik";
-import { DisplayError, ReviewField } from "./ReviewField";
+import { Stack } from "@mui/material";
+import { useRecentlyCreatedAdvertiserCreatives } from "user/hooks/useAdvertiserCreatives";
+import { BoxContainer } from "components/Box/BoxContainer";
+import { NotificationPreview } from "user/ads/NotificationPreview";
+import React from "react";
 
-interface Props {
-  ad: Creative;
-  adIdx: number;
-  error?: string | FormikErrors<Creative>;
-}
-
-export function AdReview({ ad, adIdx, error }: Props) {
-  const adError = error as FormikErrors<Creative> | undefined;
+export function AdReview() {
+  const creatives = useRecentlyCreatedAdvertiserCreatives();
 
   return (
     <>
-      <Typography variant="h2" gutterBottom>
-        Ad {adIdx + 1}
-      </Typography>
-      <ReviewField caption="Ad Name" value={ad.name} error={adError?.name} />
-      <ReviewField caption="Ad Type" value="Notification Ad" />
-      <ReviewField caption="Ad Title" value={ad.title} error={adError?.title} />
-      <ReviewField caption="Ad Body" value={ad.body} error={adError?.body} />
-      <ReviewField
-        caption="Ad Target Url"
-        value={ad.targetUrl}
-        error={adError?.targetUrl}
-      />
-
-      {adError?.targetUrlValidationResult?.split("#").map((e, idx) => (
-        <Box key={`error-${idx}`}>
-          <DisplayError error={e} />
-        </Box>
-      ))}
+      <Stack
+        direction="row"
+        justifyContent="left"
+        alignItems="center"
+        flexWrap="wrap"
+      >
+        {(creatives ?? []).map((c) => (
+          <BoxContainer header={c.name}>
+            <NotificationPreview title={c.title} body={c.body} />
+          </BoxContainer>
+        ))}
+      </Stack>
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { Form } from "formik";
+import { Form, useFormikContext } from "formik";
 import { Review } from "../../review/Review";
 import React from "react";
 import { CampaignSettings } from "user/views/adsManager/views/advanced/components/campaign/fields/CampaignSettings";
@@ -9,6 +9,7 @@ import { NewAd } from "user/ads/NewAd";
 import { AdSetFields } from "user/views/adsManager/views/advanced/components/adSet/AdSetFields";
 import { NewAdSet } from "user/views/adsManager/views/advanced/components/adSet/NewAdSet";
 import { Route, Switch, useHistory, useRouteMatch } from "react-router-dom";
+import { CampaignForm } from "user/views/adsManager/types";
 
 interface Props {
   isEdit: boolean;
@@ -16,7 +17,7 @@ interface Props {
 
 export function BaseForm({ isEdit }: Props) {
   const { url } = useRouteMatch();
-  const history = useHistory();
+  const { values } = useFormikContext<CampaignForm>();
 
   const steps = [
     {
@@ -37,6 +38,7 @@ export function BaseForm({ isEdit }: Props) {
     {
       label: "Ad Sets",
       path: `${url}/adSets`,
+      queryParams: "?current=0",
       content: <NewAdSet />,
       component: <AdSetFields isEdit={isEdit} />,
     },
@@ -49,18 +51,18 @@ export function BaseForm({ isEdit }: Props) {
 
   return (
     <Form>
-      <Switch>
-        <StepDrawer
-          steps={steps}
-          finalComponent={<PaymentButton isEdit={isEdit} />}
-        >
+      <StepDrawer
+        steps={steps}
+        finalComponent={<PaymentButton isEdit={isEdit} />}
+      >
+        <Switch>
           {steps.map((s) => (
             <Route path={s.path} key={s.path}>
               {s.component}
             </Route>
           ))}
-        </StepDrawer>
-      </Switch>
+        </Switch>
+      </StepDrawer>
     </Form>
   );
 }
