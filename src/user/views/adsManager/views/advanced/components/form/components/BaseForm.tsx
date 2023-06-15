@@ -1,15 +1,14 @@
-import { Form, useFormikContext } from "formik";
+import { Form } from "formik";
 import { Review } from "../../review/Review";
 import React from "react";
-import { CampaignSettings } from "user/views/adsManager/views/advanced/components/campaign/fields/CampaignSettings";
+import { CampaignSettings } from "user/views/adsManager/views/advanced/components/campaign/CampaignSettings";
 import { BudgetField } from "user/views/adsManager/views/advanced/components/campaign/fields/BudgetField";
 import { StepDrawer } from "components/Steps/StepDrawer";
 import { PaymentButton } from "user/views/adsManager/views/advanced/components/form/components/PaymentButton";
 import { NewAd } from "user/ads/NewAd";
 import { AdSetFields } from "user/views/adsManager/views/advanced/components/adSet/AdSetFields";
 import { NewAdSet } from "user/views/adsManager/views/advanced/components/adSet/NewAdSet";
-import { Route, Switch, useHistory, useRouteMatch } from "react-router-dom";
-import { CampaignForm } from "user/views/adsManager/types";
+import { Route, Switch, useRouteMatch } from "react-router-dom";
 
 interface Props {
   isEdit: boolean;
