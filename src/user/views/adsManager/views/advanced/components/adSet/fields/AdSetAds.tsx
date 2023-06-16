@@ -1,6 +1,6 @@
 import { CardContainer } from "components/Card/CardContainer";
 import { Autocomplete, Checkbox, TextField } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { useRecentlyCreatedAdvertiserCreatives } from "user/hooks/useAdvertiserCreatives";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
@@ -14,13 +14,11 @@ interface Props {
 
 export function AdSetAds({ index }: Props) {
   const creatives = useRecentlyCreatedAdvertiserCreatives();
-
   const [, meta, helper] = useField<Creative[]>(`adSets.${index}.creatives`);
 
   return (
     <CardContainer header="Ads">
       <Autocomplete
-        limitTags={5}
         multiple
         options={creatives}
         disableCloseOnSelect
@@ -41,9 +39,7 @@ export function AdSetAds({ index }: Props) {
           <TextField
             {...params}
             label="Select Ads"
-            helperText={
-              meta.touched && (meta.error ?? "Select the ads for this ad set.")
-            }
+            helperText={meta.error ?? "Select the ads for this ad set."}
             error={meta.touched && !!meta.error}
           />
         )}

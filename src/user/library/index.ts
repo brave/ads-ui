@@ -12,7 +12,7 @@ import {
 import axios from "axios";
 import { DocumentNode, print } from "graphql";
 import { CampaignFragment } from "graphql/campaign.generated";
-import { CreateAdDocument } from "graphql/ad-set.generated";
+import { AdFragment, CreateAdDocument } from "graphql/ad-set.generated";
 import {
   CreateNotificationCreativeDocument,
   UpdateNotificationCreativeDocument,
@@ -136,25 +136,7 @@ export function editCampaignValues(
   campaign: CampaignFragment,
   advertiserId: string
 ): CampaignForm {
-  const ads = _.flatMap(campaign.adSets, "ads");
-  const creatives = _.uniqBy(
-    (ads ?? [])
-      .filter((ad) => ad.creative != null)
-      .map((ad) => {
-        const c = ad.creative;
-        return {
-          creativeInstanceId: ad.id,
-          id: c.id,
-          name: c.name,
-          targetUrl: c.payloadNotification!.targetUrl,
-          title: c.payloadNotification!.title,
-          body: c.payloadNotification!.body,
-          targetUrlValidationResult: "",
-          state: c.state,
-        };
-      }),
-    "id"
-  );
+  const ads: AdFragment[] = _.flatMap(campaign.adSets, "ads");
 
   return {
     adSets: campaign.adSets.map((adSet) => {
@@ -168,11 +150,11 @@ export function editCampaignValues(
         segments: adSet.segments ?? ([] as Segment[]),
         isNotTargeting: seg.length === 1 && seg[0].code === "Svp7l-zGN",
         name: adSet.name || adSet.id.split("-")[0],
-        creatives,
+        creatives: creativeList(adSet.ads),
       };
     }),
     advertiserId,
-    creatives: creatives.map((c) => c.id),
+    creatives: creativeList(ads).map((a) => a.id!),
     newCreative: initialCreative,
     isCreating: false,
     price: campaign.adSets[0].ads?.[0].prices[0].amount ?? 6,
@@ -193,6 +175,27 @@ export function editCampaignValues(
     stripePaymentId: campaign.stripePaymentId,
     paymentType: campaign.paymentType,
   };
+}
+
+function creativeList(ads?: AdFragment[] | null): Creative[] {
+  return _.uniqBy(
+    (ads ?? [])
+      .filter((ad) => ad.creative != null && ad.state !== "deleted")
+      .map((ad) => {
+        const c = ad.creative;
+        return {
+          creativeInstanceId: ad.id,
+          id: c.id,
+          name: c.name,
+          targetUrl: c.payloadNotification!.targetUrl,
+          title: c.payloadNotification!.title,
+          body: c.payloadNotification!.body,
+          targetUrlValidationResult: "",
+          state: c.state,
+        };
+      }),
+    "id"
+  );
 }
 
 export function transformEditForm(
@@ -216,6 +219,7 @@ export function transformEditForm(
       oses: adSet.oses.map((v) => ({ code: v.code, name: v.name })),
       ads: adSet.creatives.map((ad) => ({
         ...transformCreative(ad, form),
+        id: ad.creativeInstanceId,
         creativeSetId: adSet.id,
       })),
     })),
