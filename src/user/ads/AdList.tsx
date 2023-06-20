@@ -1,5 +1,4 @@
 import { EnhancedTable, StandardRenderers } from "components/EnhancedTable";
-import { LinearProgress } from "@mui/material";
 import { Status } from "components/Campaigns/Status";
 import _ from "lodash";
 import { uiTextForCreativeTypeCode } from "../library";

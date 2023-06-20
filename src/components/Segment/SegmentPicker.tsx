@@ -41,7 +41,7 @@ export const SegmentPicker: React.FC<Props> = ({ idx }: Props) => {
       <Box marginTop={3} marginLeft={1}>
         <FormikSwitch
           name={`adSets.${idx}.isNotTargeting`}
-          label="Let Brave determine the best audience for your Campaign."
+          label="Let Brave pick categories for me."
         />
       </Box>
       {!targetMeta.value && (

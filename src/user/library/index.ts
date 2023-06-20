@@ -12,7 +12,7 @@ import {
 import axios from "axios";
 import { DocumentNode, print } from "graphql";
 import { CampaignFragment } from "graphql/campaign.generated";
-import { CreateAdDocument } from "graphql/ad-set.generated";
+import { AdFragment, CreateAdDocument } from "graphql/ad-set.generated";
 import {
   CreateNotificationCreativeDocument,
   UpdateNotificationCreativeDocument,
@@ -22,9 +22,11 @@ import {
   CampaignForm,
   Conversion,
   Creative,
+  initialCreative,
   OS,
   Segment,
 } from "user/views/adsManager/types";
+import _ from "lodash";
 
 const TYPE_CODE_LOOKUP: Record<string, string> = {
   notification_all_v1: "Push Notification",
@@ -34,36 +36,10 @@ const TYPE_CODE_LOOKUP: Record<string, string> = {
   search_homepage_all_v1: "Search Homepage",
 };
 
-export async function transformNewForm(
+export function transformNewForm(
   form: CampaignForm,
   userId?: string
-): Promise<CreateCampaignInput> {
-  const adSets = form.adSets;
-  const transformedAdSet: CreateAdSetInput[] = [];
-
-  for (const adSet of adSets) {
-    const ads: CreateAdInput[] = [];
-
-    for (const ad of adSet.creatives) {
-      const creative = await transformCreative(ad, form, userId);
-      ads.push(creative);
-    }
-
-    const base: CreateAdSetInput = {
-      name: adSet.name,
-      billingType: form.billingType,
-      execution: "per_click",
-      perDay: 1,
-      segments: adSet.segments.map((s) => ({ code: s.code, name: s.name })),
-      oses: adSet.oses,
-      totalMax: 10,
-      conversions: transformConversion(adSet.conversions),
-      ads: ads,
-    };
-
-    transformedAdSet.push(base);
-  }
-
+): CreateCampaignInput {
   return {
     currency: form.currency,
     dailyCap: form.dailyCap,
@@ -81,7 +57,17 @@ export async function transformNewForm(
     state: form.state,
     type: form.type,
     budget: form.budget,
-    adSets: transformedAdSet,
+    adSets: form.adSets.map((adSet) => ({
+      name: adSet.name,
+      billingType: form.billingType,
+      execution: "per_click",
+      perDay: 1,
+      segments: adSet.segments.map((s) => ({ code: s.code, name: s.name })),
+      oses: adSet.oses,
+      totalMax: 10,
+      conversions: transformConversion(adSet.conversions),
+      ads: adSet.creatives.map((ad) => transformCreative(ad, form)),
+    })),
     paymentType: form.paymentType,
   };
 }
@@ -98,20 +84,13 @@ function transformConversion(conv: Conversion[]) {
   }));
 }
 
-async function transformCreative(
+function transformCreative(
   creative: Creative,
-  campaign: CampaignForm,
-  userId?: string
-): Promise<CreateAdInput> {
-  const notification = creativeInput(
-    campaign.advertiserId,
-    creative,
-    userId
-  ) as CreateNotificationCreativeInput;
-  const withId = await createNotification(notification);
+  campaign: CampaignForm
+): CreateAdInput {
   return {
     webhooks: [],
-    creativeId: withId,
+    creativeId: creative.id!,
     prices: [
       {
         amount: campaign.price,
@@ -121,7 +100,7 @@ async function transformCreative(
   };
 }
 
-function creativeInput(
+export function creativeInput(
   advertiserId: string,
   creative: Creative,
   userId?: string
@@ -153,59 +132,12 @@ function creativeInput(
   };
 }
 
-async function graphqlRequest<T>(node: DocumentNode, input: T) {
-  const response = await axios.post(
-    `${import.meta.env.REACT_APP_SERVER_ADDRESS}`.replace("v1", "graphql"),
-    JSON.stringify({
-      query: print(node),
-      variables: input,
-    }),
-    {
-      withCredentials: true,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
-
-  return response.data;
-}
-
-// TODO: Get rid of this ASAP. Currently necessary because when creating a campaign, you need existing creativeId.
-async function createNotification(
-  createInput: CreateNotificationCreativeInput
-) {
-  const response = await graphqlRequest<{
-    input: CreateNotificationCreativeInput;
-  }>(CreateNotificationCreativeDocument, { input: createInput });
-
-  return response.data.createNotificationCreative.id;
-}
-
-async function updateNotification(
-  updateInput: UpdateNotificationCreativeInput
-) {
-  const response = await graphqlRequest<{
-    input: UpdateNotificationCreativeInput;
-  }>(UpdateNotificationCreativeDocument, { input: updateInput });
-
-  return response.data.updateNotificationCreative.id;
-}
-
-// TODO: Get rid of this ASAP. Currently necessary because when updating a campaign, it does not take into account any new ads.
-async function createAd(createInput: CreateAdInput) {
-  const response = await graphqlRequest<{ createAdInput: CreateAdInput }>(
-    CreateAdDocument,
-    { createAdInput: createInput }
-  );
-
-  return response.data.createAd.id;
-}
-
 export function editCampaignValues(
   campaign: CampaignFragment,
   advertiserId: string
 ): CampaignForm {
+  const ads: AdFragment[] = _.flatMap(campaign.adSets, "ads");
+
   return {
     adSets: campaign.adSets.map((adSet) => {
       const seg = adSet.segments ?? ([] as Segment[]);
@@ -218,22 +150,13 @@ export function editCampaignValues(
         segments: adSet.segments ?? ([] as Segment[]),
         isNotTargeting: seg.length === 1 && seg[0].code === "Svp7l-zGN",
         name: adSet.name || adSet.id.split("-")[0],
-        creatives: adSet.ads!.map((ad) => {
-          const c = ad.creative;
-          return {
-            creativeInstanceId: ad.id,
-            id: c.id,
-            name: c.name,
-            targetUrl: c.payloadNotification!.targetUrl,
-            title: c.payloadNotification!.title,
-            body: c.payloadNotification!.body,
-            targetUrlValidationResult: "",
-            state: c.state,
-          };
-        }),
+        creatives: creativeList(adSet.ads),
       };
     }),
     advertiserId,
+    creatives: creativeList(ads).map((a) => a.id!),
+    newCreative: initialCreative,
+    isCreating: false,
     price: campaign.adSets[0].ads?.[0].prices[0].amount ?? 6,
     billingType: (campaign.adSets[0].billingType ?? "cpm") as Billing,
     validateStart: false,
@@ -254,45 +177,31 @@ export function editCampaignValues(
   };
 }
 
-export async function transformEditForm(
+function creativeList(ads?: AdFragment[] | null): Creative[] {
+  return _.uniqBy(
+    (ads ?? [])
+      .filter((ad) => ad.creative != null && ad.state !== "deleted")
+      .map((ad) => {
+        const c = ad.creative;
+        return {
+          creativeInstanceId: ad.id,
+          id: c.id,
+          name: c.name,
+          targetUrl: c.payloadNotification!.targetUrl,
+          title: c.payloadNotification!.title,
+          body: c.payloadNotification!.body,
+          targetUrlValidationResult: "",
+          state: c.state,
+        };
+      }),
+    "id"
+  );
+}
+
+export function transformEditForm(
   form: CampaignForm,
-  id: string,
-  userId?: string
-): Promise<UpdateCampaignInput> {
-  const transformedAdSet: UpdateAdSetInput[] = [];
-
-  for (const adSet of form.adSets) {
-    const creatives = adSet.creatives;
-    for (const ad of creatives) {
-      if (ad.id == null) {
-        const withId = await transformCreative(ad, form, userId);
-        await createAd({
-          ...withId,
-          creativeSetId: adSet.id,
-        });
-      } else if (
-        ad.state !== "active" &&
-        ad.state !== "paused" &&
-        ad.state !== "complete"
-      ) {
-        const notification = creativeInput(
-          form.advertiserId,
-          ad,
-          userId
-        ) as UpdateNotificationCreativeInput;
-        await updateNotification(notification);
-      }
-    }
-
-    const base: UpdateAdSetInput = {
-      id: adSet.id,
-      segments: adSet.segments.map((v) => ({ code: v.code, name: v.name })),
-      oses: adSet.oses.map((v) => ({ code: v.code, name: v.name })),
-    };
-
-    transformedAdSet.push(base);
-  }
-
+  id: string
+): UpdateCampaignInput {
   return {
     budget: form.budget,
     currency: form.currency,
@@ -304,25 +213,16 @@ export async function transformEditForm(
     startAt: form.startAt,
     state: form.state,
     type: form.type,
-    adSets: transformedAdSet,
-  };
-}
-
-export function updateCampaignState(
-  c: CampaignFragment,
-  state: string
-): UpdateCampaignInput {
-  return {
-    budget: c.budget,
-    currency: c.currency,
-    dailyBudget: c.dailyBudget,
-    dailyCap: c.dailyCap,
-    endAt: c.endAt,
-    id: c.id,
-    name: c.name,
-    startAt: c.startAt,
-    state,
-    type: c.type,
+    adSets: form.adSets.map((adSet) => ({
+      id: adSet.id,
+      segments: adSet.segments.map((v) => ({ code: v.code, name: v.name })),
+      oses: adSet.oses.map((v) => ({ code: v.code, name: v.name })),
+      ads: adSet.creatives.map((ad) => ({
+        ...transformCreative(ad, form),
+        id: ad.creativeInstanceId,
+        creativeSetId: adSet.id,
+      })),
+    })),
   };
 }
 

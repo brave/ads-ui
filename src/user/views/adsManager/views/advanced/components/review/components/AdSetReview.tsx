@@ -1,11 +1,9 @@
 import React from "react";
-import { Divider } from "@mui/material";
-import { AdSetForm, OS, Segment } from "../../../../../types";
+import { AdSetForm, Creative, OS, Segment } from "../../../../../types";
 import { FormikErrors } from "formik";
-import { AdReview } from "./AdReview";
 import { ConversionDisplay } from "components/Conversion/ConversionDisplay";
-import { CardContainer } from "components/Card/CardContainer";
 import { ReviewField } from "./ReviewField";
+import { ReviewContainer } from "user/views/adsManager/views/advanced/components/review/components/ReviewContainer";
 
 interface Props {
   idx: number;
@@ -21,19 +19,19 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
   const hasErrors = !!errors;
   const adSetError = errors;
 
-  const mapToString = (arr: Segment[] | OS[]) => {
+  const mapToString = (arr: Segment[] | OS[] | Creative[]) => {
     return arr.map((o) => o.name).join(", ");
   };
 
   const segmentValue = (v: string) => {
-    return v === "untargeted" ? "Let Brave determine the best audience." : v;
+    return v === "untargeted" ? "Let Brave pick categories for me." : v;
   };
 
   return (
-    <CardContainer header={`Ad Set ${idx + 1}`}>
+    <ReviewContainer name={`Ad Set ${idx + 1}`} path={`adSets?current=${idx}`}>
       <ReviewField
         caption="Name"
-        value={adSet.name}
+        value={adSet.name || `Ad Set ${idx + 1}`}
         error={hasErrors ? adSetError?.name : ""}
       />
       <ReviewField
@@ -50,18 +48,11 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
         conversions={adSet.conversions}
         convErrors={adSetError?.conversions}
       />
-
-      {adSet.creatives.map((ad, adIdx) => (
-        <React.Fragment key={`creative-${adIdx}`}>
-          <Divider sx={{ mt: 2, mb: 2 }} />
-
-          <AdReview
-            ad={ad}
-            adIdx={adIdx}
-            error={hasErrors ? adSetError?.creatives?.[adIdx] : ""}
-          />
-        </React.Fragment>
-      ))}
-    </CardContainer>
+      <ReviewField
+        caption="Ads"
+        value={mapToString(adSet.creatives)}
+        error={hasErrors ? (adSetError?.creatives as string) : ""}
+      />
+    </ReviewContainer>
   );
 }

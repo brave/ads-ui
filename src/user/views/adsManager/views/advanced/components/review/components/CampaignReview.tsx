@@ -1,7 +1,7 @@
 import { CampaignForm } from "../../../../../types";
 import { FormikErrors } from "formik";
-import { CardContainer } from "components/Card/CardContainer";
 import { ReviewField } from "./ReviewField";
+import { ReviewContainer } from "user/views/adsManager/views/advanced/components/review/components/ReviewContainer";
 
 interface Props {
   values: CampaignForm;
@@ -26,7 +26,7 @@ export function CampaignReview({ values, errors }: Props) {
   };
 
   return (
-    <CardContainer header="Campaign">
+    <ReviewContainer name="Campaign" path="settings">
       <ReviewField caption="Name" value={values.name} error={errors.name} />
 
       <ReviewField
@@ -59,6 +59,6 @@ export function CampaignReview({ values, errors }: Props) {
         value={values.geoTargets.map((t) => t.name).join(", ")}
         error={errors.geoTargets as string}
       />
-    </CardContainer>
+    </ReviewContainer>
   );
 }

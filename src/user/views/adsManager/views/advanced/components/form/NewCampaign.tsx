@@ -58,22 +58,14 @@ export function NewCampaign() {
         initialValues={initial}
         onSubmit={async (v: CampaignForm, { setSubmitting }) => {
           setSubmitting(true);
-          let newForm;
-          try {
-            newForm = await transformNewForm(v, userId);
-          } catch (e) {
-            alert("Unable to create Campaign.");
-          }
-
-          if (newForm) {
-            await mutation({ variables: { input: newForm } });
-          }
+          const input = transformNewForm(v, userId);
+          await mutation({ variables: { input } });
           setSubmitting(false);
         }}
         validationSchema={CampaignSchema}
       >
         <>
-          <BaseForm isEdit={false} draftId={params.draftId} />
+          <BaseForm isEdit={false} />
           <PersistFormValues />
         </>
       </Formik>
