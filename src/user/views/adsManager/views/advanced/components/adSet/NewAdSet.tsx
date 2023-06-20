@@ -3,10 +3,10 @@ import {
   Box,
   Button,
   IconButton,
+  Link,
   Stack,
   Tooltip,
   Typography,
-  Link,
 } from "@mui/material";
 import { Link as RouterLink, useHistory } from "react-router-dom";
 import { CampaignForm, initialAdSet } from "user/views/adsManager/types";
@@ -18,8 +18,7 @@ export function NewAdSet(props: { isEdit: boolean }) {
   const { values } = useFormikContext<CampaignForm>();
   const params = new URLSearchParams(history.location.search);
   const selected = useRef(0);
-  const current = Number(params.get("current") ?? 0);
-  selected.current = current;
+  selected.current = Number(params.get("current") ?? 0);
 
   return (
     <>

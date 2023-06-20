@@ -22,7 +22,7 @@ export function DraftMenu() {
         <span>
           <IconButton disabled={drafts.length === 0} onClick={handleClick}>
             <Badge color="primary" badgeContent={drafts.length}>
-              <DraftsIcon fontSize="large" />
+              <DraftsIcon fontSize="medium" />
             </Badge>
           </IconButton>
         </span>
