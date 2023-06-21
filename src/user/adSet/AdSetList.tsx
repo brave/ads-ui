@@ -91,7 +91,7 @@ export function AdSetList({ advertiserCampaigns, fromDate }: Props) {
           value: (c) => c.name || c.id.substring(0, 8),
         },
         {
-          title: "State",
+          title: "Status",
           value: (c) => getState(c),
           extendedRenderer: (r) => (
             <Status state={getState(r)} end={r.campaignEnd} />
