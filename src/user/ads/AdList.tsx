@@ -1,87 +1,67 @@
 import { EnhancedTable, StandardRenderers } from "components/EnhancedTable";
-import { Status } from "components/Campaigns/Status";
 import _ from "lodash";
-import { uiTextForCreativeTypeCode } from "../library";
-import { adOnOffState } from "components/EnhancedTable/renderers";
 import { isAfterEndDate } from "util/isAfterEndDate";
 import { AdvertiserCampaignsFragment } from "graphql/advertiser.generated";
+import { AdFragment } from "graphql/ad-set.generated";
+import { CampaignSource } from "graphql/types";
 
 interface Props {
   advertiserCampaigns?: AdvertiserCampaignsFragment | null;
   fromDate: Date | null;
 }
 
+export type AdDetails = AdFragment & {
+  adSetName: string;
+  campaignName: string;
+  campaignEnd: string;
+  campaignSource: CampaignSource;
+  advertiserId: string;
+  fromDate: Date | null;
+};
+
 export function AdList({ advertiserCampaigns, fromDate }: Props) {
   const campaigns = advertiserCampaigns?.campaigns ?? [];
-  const mapAdName = campaigns.map((c) => ({
-    adSets: c.adSets.map((a) => ({
-      ads: (a.ads ?? []).map((ad) => ({
-        ...ad,
-        creative: {
-          ...ad.creative,
-          creativeInstanceId: ad.id,
-          creativeSetId: a.id,
-          adSetName: a.name || a.id.substring(0, 8),
-          campaignName: c.name,
-          campaignStart: c.startAt,
-          campaignEnd: c.endAt,
-          campaignSource: c.source,
-          advertiserId: advertiserCampaigns?.id,
-          fromDate,
-        },
+  const adSets = _.flatMap(
+    campaigns.map((c) => ({
+      adSets: c.adSets.map((a) => ({
+        ads: (a.ads ?? [])
+          .filter((ad) => ad.state !== "deleted")
+          .map((ad) => ({
+            ...ad,
+            state: isAfterEndDate(c.endAt) ? "completed" : c.state,
+            adSetName: a.name || a.id.substring(0, 8),
+            campaignName: c.name,
+            campaignEnd: c.endAt,
+            campaignSource: c.source,
+            advertiserId: advertiserCampaigns?.id,
+            fromDate,
+          })),
       })),
     })),
-  }));
-  const ads = _.uniqBy(
-    _.map(_.flatMap(_.flatMap(mapAdName, "adSets"), "ads"), "creative"),
-    "id"
-  ).filter((a) => a.state !== "deleted");
+    "adSets"
+  );
+
+  const ads: AdDetails[] = _.flatMap(adSets, "ads").filter(
+    (ad) => ad.creative.type.code === "notification_all_v1"
+  );
 
   return (
     <EnhancedTable
       rows={ads}
-      initialSortColumn={9}
+      initialSortColumn={6}
       initialSortDirection="desc"
       columns={[
         {
-          title: "On/Off",
-          value: (c) => c.state,
-          extendedRenderer: (r) => adOnOffState(r),
-          sx: { width: "10px" },
-          sortable: false,
-        },
-        {
           title: "Ad Name",
-          value: (c) => c.name,
-        },
-        {
-          title: "State",
-          value: (c) => (isAfterEndDate(c.campaignEnd) ? "completed" : c.state),
-          extendedRenderer: (r) => (
-            <Status state={r.state} end={r.campaignEnd} />
-          ),
-        },
-        {
-          title: "Type",
-          value: (c) => uiTextForCreativeTypeCode(c.type),
+          value: (c) => c.creative.name,
         },
         {
           title: "Title",
-          value: (c) =>
-            c.payloadInlineContent?.title ??
-            c.payloadNotification?.title ??
-            c.payloadPromotedContent?.title ??
-            c.payloadSearch?.title ??
-            c.payloadSearchHomepage?.title,
+          value: (c) => c.creative.payloadNotification?.title,
         },
         {
           title: "Body",
-          value: (c) =>
-            c.payloadInlineContent?.description ??
-            c.payloadNotification?.body ??
-            c.payloadPromotedContent?.description ??
-            c.payloadSearch?.body ??
-            c.payloadSearchHomepage?.body,
+          value: (c) => c.creative.payloadNotification?.body,
         },
         {
           title: "Ad Set Name",
@@ -98,7 +78,7 @@ export function AdList({ advertiserCampaigns, fromDate }: Props) {
         },
         {
           title: "Created",
-          value: (c) => c.createdAt,
+          value: (c) => c.creative.createdAt,
           renderer: StandardRenderers.date,
         },
       ]}

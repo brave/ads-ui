@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { isPast, parseISO } from "date-fns";
 import { Switch, Tooltip } from "@mui/material";
+import { CampaignSource } from "graphql/types";
 
 interface Props {
   onChange: (s: string) => void;
@@ -8,34 +9,36 @@ interface Props {
   state: string;
   end: string;
   type: string;
+  source: CampaignSource;
 }
 
-export function OnOff({ state, loading, end, onChange, type }: Props) {
+export function OnOff({ state, loading, end, onChange, type, source }: Props) {
   const [checked, setChecked] = useState(state === "active");
   const isAfterEnd = isPast(parseISO(end));
-  const enabled = (state === "active" || state === "paused") && !isAfterEnd;
+  const enabled =
+    source === CampaignSource.SelfServe &&
+    (state === "active" || state === "paused") &&
+    !isAfterEnd;
 
   return (
-    <>
-      {enabled && (
-        <Tooltip
-          title={
-            enabled
-              ? `Activate or pause ${type}`
-              : `Cannot activate ${type} in this state`
-          }
-        >
-          <Switch
-            onChange={(e) => {
-              const theState = e.target.checked ? "active" : "paused";
-              setChecked(e.target.checked);
-              onChange(theState);
-            }}
-            checked={checked}
-            disabled={loading}
-          />
-        </Tooltip>
-      )}
-    </>
+    <Tooltip
+      title={
+        enabled
+          ? `Activate or pause ${type}`
+          : `${type} status cannot be updated`
+      }
+    >
+      <span>
+        <Switch
+          onChange={(e) => {
+            const theState = e.target.checked ? "active" : "paused";
+            setChecked(e.target.checked);
+            onChange(theState);
+          }}
+          checked={checked}
+          disabled={loading || !enabled}
+        />
+      </span>
+    </Tooltip>
   );
 }

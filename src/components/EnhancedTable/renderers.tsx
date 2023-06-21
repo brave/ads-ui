@@ -19,6 +19,7 @@ import {
 import { OnOff } from "../Switch/OnOff";
 import { CreativeFragment } from "graphql/creative.generated";
 import { CampaignSource } from "graphql/types";
+import { AdDetails } from "user/ads/AdList";
 
 export type CellValueRenderer = (value: CellValue) => React.ReactNode;
 const ADS_DEFAULT_TIMEZONE = "America/New_York";
@@ -108,8 +109,6 @@ export function campaignOnOffState(
     ],
   });
 
-  if (c.source !== CampaignSource.SelfServe) return null;
-
   return (
     <OnOff
       onChange={(s) => {
@@ -120,6 +119,7 @@ export function campaignOnOffState(
       loading={loading}
       state={c.state}
       end={c.endAt}
+      source={c.source}
       type="Campaign"
     />
   );
@@ -144,8 +144,6 @@ export function adSetOnOffState(
     ],
   });
 
-  if (c.campaignSource !== CampaignSource.SelfServe) return null;
-
   const state =
     c.campaignState === "under_review"
       ? "under_review"
@@ -160,7 +158,7 @@ export function adSetOnOffState(
           updateAdSet({
             variables: {
               updateAdSetInput: {
-                state: s === "paused" ? "suspended" : s,
+                state: s,
                 id: c.id,
                 campaignId: c.campaignId,
                 segments: c.segments?.map((s) => ({
@@ -175,21 +173,13 @@ export function adSetOnOffState(
       loading={loading}
       state={state}
       end={c.campaignEnd}
+      source={c.campaignSource}
       type="Ad Set"
     />
   );
 }
 
-export function adOnOffState(
-  c: CreativeFragment & {
-    creativeSetId: string;
-    campaignEnd: string;
-    creativeInstanceId: string;
-    campaignSource: CampaignSource;
-    advertiserId: string;
-    fromDate: Date | null;
-  }
-): ReactNode {
+export function adOnOffState(c: AdDetails): ReactNode {
   const [updateAd, { loading }] = useUpdateAdMutation({
     refetchQueries: [
       {
@@ -199,8 +189,6 @@ export function adOnOffState(
     ],
   });
 
-  if (c.campaignSource !== CampaignSource.SelfServe) return null;
-
   return (
     <OnOff
       onChange={(s) => {
@@ -208,7 +196,7 @@ export function adOnOffState(
           updateAd({
             variables: {
               updateAdInput: {
-                id: c.creativeInstanceId,
+                id: c.id,
                 state: s,
               },
             },
@@ -218,6 +206,7 @@ export function adOnOffState(
       loading={loading}
       state={c.state}
       end={c.campaignEnd}
+      source={c.campaignSource}
       type="Ad"
     />
   );
