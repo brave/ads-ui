@@ -213,7 +213,7 @@ export type UpdateAdMutationVariables = Types.Exact<{
 
 export type UpdateAdMutation = {
   __typename?: "Mutation";
-  updateAd: { __typename?: "Ad"; id: string };
+  updateCreativeInstanceState: { __typename?: "Ad"; id: string };
 };
 
 export const AdFragmentDoc = gql`
@@ -412,7 +412,7 @@ export type CreateAdMutationOptions = Apollo.BaseMutationOptions<
 >;
 export const UpdateAdDocument = gql`
   mutation updateAd($updateAdInput: UpdateAdInput!) {
-    updateAd(updateAdInput: $updateAdInput) {
+    updateCreativeInstanceState(updateAdInput: $updateAdInput) {
       id
     }
   }

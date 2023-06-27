@@ -57,7 +57,7 @@ mutation createAd($createAdInput: CreateAdInput!) {
 }
 
 mutation updateAd($updateAdInput: UpdateAdInput!) {
-  updateAd(updateAdInput: $updateAdInput) {
+  updateCreativeInstanceState(updateAdInput: $updateAdInput) {
     id
   }
 }

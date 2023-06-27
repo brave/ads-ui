@@ -16,12 +16,15 @@ export type CampaignForm = {
   endAt: string;
   budget: number;
   validateStart: boolean;
+  isCreating: boolean;
   currency: string;
   dailyBudget: number;
   dailyCap: number;
   geoTargets: GeoTarget[];
   adSets: AdSetForm[];
   format: CampaignFormat;
+  newCreative?: Creative;
+  creatives?: string[];
   name: string;
   state: string;
   type: "paid";
@@ -91,14 +94,10 @@ export const initialCreative: Creative = {
 export const initialAdSet: AdSetForm = {
   name: "",
   isNotTargeting: true,
-  segments: [],
+  segments: [{ code: "Svp7l-zGN", name: "untargeted" }],
   conversions: [],
   oses: [],
-  creatives: [
-    {
-      ...initialCreative,
-    },
-  ],
+  creatives: [],
 };
 
 export const initialCampaign = (advertiser: IAdvertiser): CampaignForm => {
@@ -107,6 +106,7 @@ export const initialCampaign = (advertiser: IAdvertiser): CampaignForm => {
     startAt: defaultStartDate(),
     endAt: defaultEndDate(),
     validateStart: true,
+    isCreating: false,
     budget: MIN_PER_CAMPAIGN,
     currency: "USD",
     dailyBudget: MIN_PER_CAMPAIGN,
@@ -125,5 +125,7 @@ export const initialCampaign = (advertiser: IAdvertiser): CampaignForm => {
     type: "paid",
     pacingStrategy: CampaignPacingStrategies.ModelV1,
     paymentType: advertiser.selfServicePaymentType,
+    newCreative: initialCreative,
+    creatives: [],
   };
 };
