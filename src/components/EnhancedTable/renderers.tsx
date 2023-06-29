@@ -8,6 +8,7 @@ import enUS from "date-fns/locale/en-US";
 import { populateFilter } from "user/library";
 import {
   CampaignFragment,
+  CampaignSummaryFragment,
   useUpdateCampaignMutation,
 } from "graphql/campaign.generated";
 import { AdvertiserCampaignsDocument } from "graphql/advertiser.generated";
@@ -95,7 +96,7 @@ export function renderMonetaryAmount(
 }
 
 export function campaignOnOffState(
-  c: CampaignFragment & { fromDate: Date | null; advertiserId: string }
+  c: CampaignSummaryFragment & { fromDate: Date | null; advertiserId: string }
 ): ReactNode {
   const [updateCampaign, { loading }] = useUpdateCampaignMutation({
     refetchQueries: [
@@ -103,7 +104,7 @@ export function campaignOnOffState(
         query: AdvertiserCampaignsDocument,
         variables: {
           id: c.advertiserId,
-          filter: populateFilter(c.fromDate),
+          filter: { from: c.fromDate },
         },
       },
     ],
@@ -139,7 +140,7 @@ export function adSetOnOffState(
     refetchQueries: [
       {
         query: AdvertiserCampaignsDocument,
-        variables: { id: c.advertiserId, filter: populateFilter(c.fromDate) },
+        variables: { id: c.advertiserId, filter: { from: c.fromDate } },
       },
     ],
   });

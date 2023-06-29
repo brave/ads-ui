@@ -46,3 +46,14 @@ query analyticOverview($id: String!) {
     }
   }
 }
+
+query engagementOverview($advertiserId: String!, $filter: CampaignFilter) {
+  engagementsOverview(advertiserId: $advertiserId, filter: $filter) {
+    date
+    click
+    view
+    landed
+    spend
+    campaignId
+  }
+}

@@ -1,12 +1,12 @@
 import { EnhancedTable, StandardRenderers } from "components/EnhancedTable";
 import _ from "lodash";
 import { isAfterEndDate } from "util/isAfterEndDate";
-import { AdvertiserCampaignsFragment } from "graphql/advertiser.generated";
 import { AdFragment } from "graphql/ad-set.generated";
 import { CampaignSource } from "graphql/types";
+import { CampaignFragment } from "graphql/campaign.generated";
 
 interface Props {
-  advertiserCampaigns?: AdvertiserCampaignsFragment | null;
+  campaign?: CampaignFragment | null;
   fromDate: Date | null;
 }
 
@@ -19,27 +19,18 @@ export type AdDetails = AdFragment & {
   fromDate: Date | null;
 };
 
-export function AdList({ advertiserCampaigns, fromDate }: Props) {
-  const campaigns = advertiserCampaigns?.campaigns ?? [];
-  const adSets = _.flatMap(
-    campaigns.map((c) => ({
-      adSets: c.adSets.map((a) => ({
-        ads: (a.ads ?? [])
-          .filter((ad) => ad.state !== "deleted")
-          .map((ad) => ({
-            ...ad,
-            state: isAfterEndDate(c.endAt) ? "completed" : c.state,
-            adSetName: a.name || a.id.substring(0, 8),
-            campaignName: c.name,
-            campaignEnd: c.endAt,
-            campaignSource: c.source,
-            advertiserId: advertiserCampaigns?.id,
-            fromDate,
-          })),
+export function AdList({ campaign, fromDate }: Props) {
+  const adSets = campaign?.adSets?.map((c) => ({
+    ads: (c.ads ?? [])
+      .filter((ad) => ad.state !== "deleted")
+      .map((ad) => ({
+        ...ad,
+        state: isAfterEndDate(campaign?.endAt) ? "completed" : c.state,
+        adSetName: c.name || c.id.substring(0, 8),
+        campaignSource: campaign?.source,
+        advertiserId: fromDate,
       })),
-    })),
-    "adSets"
-  );
+  }));
 
   const ads: AdDetails[] = _.flatMap(adSets, "ads").filter(
     (ad) => ad.creative.type.code === "notification_all_v1"
@@ -66,15 +57,6 @@ export function AdList({ advertiserCampaigns, fromDate }: Props) {
         {
           title: "Ad Set Name",
           value: (c) => c.adSetName,
-        },
-        {
-          title: "Campaign Name",
-          value: (c) => c.campaignName,
-        },
-        {
-          title: "Campaign End",
-          value: (c) => c.campaignEnd,
-          renderer: StandardRenderers.date,
         },
         {
           title: "Created",

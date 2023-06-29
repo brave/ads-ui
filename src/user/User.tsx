@@ -13,11 +13,10 @@ import { Box } from "@mui/material";
 import { NewCampaign } from "./views/adsManager/views/advanced/components/form/NewCampaign";
 import { EditCampaign } from "./views/adsManager/views/advanced/components/form/EditCampaign";
 import { CompletionForm } from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
-import { MainView } from "user/views/user/MainView";
 import { AdvertiserAgreed } from "auth/components/AdvertiserAgreed";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { Navbar } from "components/Navigation/Navbar";
-import SideNav from "components/Navigation/SideNav";
+import { CampaignView } from "user/views/user/CampaignView";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -37,7 +36,7 @@ export function User() {
     <ApolloProvider client={client}>
       <Box height="100%">
         <Box display="flex">
-          <SideNav />
+          <Navbar />
           <Box
             width="100%"
             height="100%"
@@ -64,20 +63,20 @@ export function User() {
 
               {/* /campaigns/:campaignId/analytics - */}
               <ProtectedRoute
-                path="/user/main/campaign/:campaignId/analytics/overview"
+                path="/user/main/campaign/:campaignId"
                 authedComponent={AnalyticsOverview}
               />
 
               <Route path="/user/main/settings" component={Settings} />
 
               <ProtectedRoute
-                path="/user/main"
-                authedComponent={MainView}
+                path="/user/main/campaign"
+                authedComponent={CampaignView}
                 unauthedComponent={AdvertiserAgreed}
               />
 
               {/* default */}
-              <Redirect to="/user/main" />
+              <Redirect to="/user/main/campaign" />
             </Switch>
           </Box>
         </Box>

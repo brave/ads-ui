@@ -29,6 +29,9 @@ fragment Campaign on Campaign {
   adSets {
     ...AdSet
   }
+  advertiser {
+    id
+  }
 }
 
 fragment CampaignSummary on Campaign {
@@ -54,9 +57,6 @@ fragment CampaignSummary on Campaign {
   format
   paymentType
   dayProportion
-  adSets {
-    ...AdSet
-  }
 }
 
 fragment CampaignAds on Campaign {

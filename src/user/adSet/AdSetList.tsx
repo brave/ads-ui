@@ -1,14 +1,14 @@
 import React from "react";
 import { EnhancedTable, StandardRenderers } from "components/EnhancedTable";
-import { Chip, LinearProgress } from "@mui/material";
+import { Chip } from "@mui/material";
 import { Status } from "components/Campaigns/Status";
 import _ from "lodash";
 import { isAfterEndDate } from "util/isAfterEndDate";
 import { adSetOnOffState } from "components/EnhancedTable/renderers";
-import { AdvertiserCampaignsFragment } from "graphql/advertiser.generated";
+import { CampaignFragment } from "graphql/campaign.generated";
 
 interface Props {
-  advertiserCampaigns?: AdvertiserCampaignsFragment | null;
+  campaign?: CampaignFragment | null;
   fromDate: Date | null;
 }
 
@@ -44,20 +44,17 @@ const ChipList: React.FC<ChipListProps> = ({ items, max }) => {
   );
 };
 
-export function AdSetList({ advertiserCampaigns, fromDate }: Props) {
-  const campaigns = advertiserCampaigns?.campaigns ?? [];
-  const mapAdSetName = campaigns.map((c) => ({
-    adSets: c.adSets.map((a) => ({
-      ...a,
-      campaignName: c.name,
-      campaignStart: c.startAt,
-      campaignEnd: c.endAt,
-      campaignId: c.id,
-      campaignState: c.state,
-      campaignSource: c.source,
-      advertiserId: advertiserCampaigns?.id ?? "",
-      fromDate,
-    })),
+export function AdSetList({ campaign, fromDate }: Props) {
+  const mapAdSetName = campaign?.adSets.map((c) => ({
+    ...c,
+    campaignName: c.name,
+    campaignStart: campaign.startAt,
+    campaignEnd: campaign.endAt,
+    campaignId: c.id,
+    campaignState: c.state,
+    campaignSource: campaign.source,
+    advertiserId: campaign?.advertiser.id,
+    fromDate,
   }));
   const adSets = _.flatMap(mapAdSetName, "adSets");
 

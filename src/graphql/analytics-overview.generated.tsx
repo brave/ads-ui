@@ -164,7 +164,26 @@ export type AnalyticOverviewQuery = {
         };
       }> | null;
     }>;
+    advertiser: { __typename?: "Advertiser"; id: string };
   } | null;
+};
+
+export type EngagementOverviewQueryVariables = Types.Exact<{
+  advertiserId: Types.Scalars["String"];
+  filter?: Types.InputMaybe<Types.CampaignFilter>;
+}>;
+
+export type EngagementOverviewQuery = {
+  __typename?: "Query";
+  engagementsOverview?: Array<{
+    __typename?: "EngagementOverview";
+    date: any;
+    click: number;
+    view: number;
+    landed: number;
+    spend: number;
+    campaignId: string;
+  }> | null;
 };
 
 export const EngagementFragmentDoc = gql`
@@ -277,4 +296,73 @@ export function refetchAnalyticOverviewQuery(
   variables: AnalyticOverviewQueryVariables
 ) {
   return { query: AnalyticOverviewDocument, variables: variables };
+}
+export const EngagementOverviewDocument = gql`
+  query engagementOverview($advertiserId: String!, $filter: CampaignFilter) {
+    engagementsOverview(advertiserId: $advertiserId, filter: $filter) {
+      date
+      click
+      view
+      landed
+      spend
+      campaignId
+    }
+  }
+`;
+
+/**
+ * __useEngagementOverviewQuery__
+ *
+ * To run a query within a React component, call `useEngagementOverviewQuery` and pass it any options that fit your needs.
+ * When your component renders, `useEngagementOverviewQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useEngagementOverviewQuery({
+ *   variables: {
+ *      advertiserId: // value for 'advertiserId'
+ *      filter: // value for 'filter'
+ *   },
+ * });
+ */
+export function useEngagementOverviewQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    EngagementOverviewQuery,
+    EngagementOverviewQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    EngagementOverviewQuery,
+    EngagementOverviewQueryVariables
+  >(EngagementOverviewDocument, options);
+}
+export function useEngagementOverviewLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    EngagementOverviewQuery,
+    EngagementOverviewQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    EngagementOverviewQuery,
+    EngagementOverviewQueryVariables
+  >(EngagementOverviewDocument, options);
+}
+export type EngagementOverviewQueryHookResult = ReturnType<
+  typeof useEngagementOverviewQuery
+>;
+export type EngagementOverviewLazyQueryHookResult = ReturnType<
+  typeof useEngagementOverviewLazyQuery
+>;
+export type EngagementOverviewQueryResult = Apollo.QueryResult<
+  EngagementOverviewQuery,
+  EngagementOverviewQueryVariables
+>;
+export function refetchEngagementOverviewQuery(
+  variables: EngagementOverviewQueryVariables
+) {
+  return { query: EngagementOverviewDocument, variables: variables };
 }
