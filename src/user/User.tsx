@@ -15,8 +15,9 @@ import { EditCampaign } from "./views/adsManager/views/advanced/components/form/
 import { CompletionForm } from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
 import { MainView } from "user/views/user/MainView";
 import { AdvertiserAgreed } from "auth/components/AdvertiserAgreed";
-import { Navbar } from "user/components/navbar/Navbar";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { Navbar } from "components/Navigation/Navbar";
+import SideNav from "components/Navigation/SideNav";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -36,7 +37,7 @@ export function User() {
     <ApolloProvider client={client}>
       <Box height="100%">
         <Box display="flex">
-          <Navbar />
+          <SideNav />
           <Box
             width="100%"
             height="100%"
