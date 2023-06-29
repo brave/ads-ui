@@ -1,17 +1,11 @@
 import React, { useState } from "react";
-import { Alert, Box, LinearProgress } from "@mui/material";
+import { Alert, Box, LinearProgress, Stack } from "@mui/material";
 import moment from "moment/moment";
 import { CampaignFormat } from "graphql/types";
-import {
-  AnalyticOverviewQuery,
-  useAnalyticOverviewQuery,
-} from "graphql/analytics-overview.generated";
+import { useAnalyticOverviewQuery } from "graphql/analytics-overview.generated";
 import { useParams } from "react-router-dom";
 import ReportUtils from "./analyticsOverview/components/ReportUtils";
 import { EngagementsOverview } from "./analyticsOverview/reports/campaign/EngagementsOverview";
-import { DailyCampaignOverview } from "./analyticsOverview/reports/campaign/DailyCampaignOverview";
-import { CreativeOverview } from "./analyticsOverview/reports/creative/CreativeOverview";
-import { OsOverview } from "./analyticsOverview/reports/os/OsOverview";
 import { DashboardButton } from "components/Button/DashboardButton";
 import { ErrorDetail } from "components/Error/ErrorDetail";
 
@@ -19,23 +13,11 @@ interface Params {
   campaignId: string;
 }
 
-const AnalyticsOverview: React.FC = () => {
+export function AnalyticsOverview() {
   const params = useParams<Params>();
   const today = new Date();
   const [startDate, setStartDate] = useState<Date | undefined>();
   const [endDate, setEndDate] = useState<Date>(today);
-
-  const initializeCampaign = (data: AnalyticOverviewQuery, now: Date) => {
-    if (data.campaign) {
-      setStartDate(data.campaign.startAt);
-
-      const end = new Date(data.campaign.endAt);
-      if (end.getTime() < now.getTime()) {
-        end.setDate(end.getDate() + 2);
-        setEndDate(end);
-      }
-    }
-  };
 
   const setDateRange = (d: Date, type: "start" | "end") => {
     if (type === "start") {
@@ -49,7 +31,17 @@ const AnalyticsOverview: React.FC = () => {
     variables: {
       id: params.campaignId,
     },
-    onCompleted: (d) => initializeCampaign(d, today),
+    onCompleted(d) {
+      if (d.campaign) {
+        setStartDate(d.campaign.startAt);
+
+        const end = new Date(d.campaign.endAt);
+        if (end.getTime() < today.getTime()) {
+          end.setDate(end.getDate() + 2);
+          setEndDate(end);
+        }
+      }
+    },
     pollInterval: 600_000,
     fetchPolicy: "cache-and-network",
   });
@@ -105,28 +97,31 @@ const AnalyticsOverview: React.FC = () => {
         onSetDate={setDateRange}
       />
 
+      {/*<EngagementsOverviewV2*/}
+      {/*  engagements={filteredEngagements ?? []}*/}
+      {/*  campaign={data.campaign}*/}
+      {/*  adSets={data.campaign.adSets}*/}
+      {/*/>*/}
+
       <EngagementsOverview
         engagements={filteredEngagements ?? []}
         campaign={data.campaign}
-        adSets={data.campaign.adSets}
       />
 
-      <DailyCampaignOverview
-        engagements={filteredEngagements ?? []}
-        campaign={data.campaign}
-      />
+      {/*<DailyCampaignOverview*/}
+      {/*  engagements={filteredEngagements ?? []}*/}
+      {/*  campaign={data.campaign}*/}
+      {/*/>*/}
 
-      <OsOverview
-        engagements={filteredEngagements ?? []}
-        campaign={data.campaign}
-      />
+      {/*<OsOverview*/}
+      {/*  engagements={filteredEngagements ?? []}*/}
+      {/*  campaign={data.campaign}*/}
+      {/*/>*/}
 
-      <CreativeOverview
-        engagements={filteredEngagements ?? []}
-        campaign={data.campaign}
-      />
+      {/*<CreativeOverview*/}
+      {/*  engagements={filteredEngagements ?? []}*/}
+      {/*  campaign={data.campaign}*/}
+      {/*/>*/}
     </Box>
   );
-};
-
-export default AnalyticsOverview;
+}

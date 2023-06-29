@@ -1,7 +1,7 @@
 import MetricSelect from "user/analytics/analyticsOverview/components/MetricSelect";
 import { Text } from "components/Text/Text";
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, Divider, Stack, Typography } from "@mui/material";
 import { decideValueAttribute } from "user/analytics/analyticsOverview/lib/overview.library";
 import { Metrics, StatsMetric } from "user/analytics/analyticsOverview/types";
 
@@ -34,25 +34,17 @@ const FilterBox = ({
       border="1px solid #ededed"
       borderRadius="4px"
       height="130px"
-      width="195px"
+      width="180px"
       marginRight="28px"
+      bgcolor="#fff"
+      sx={{ borderRadius: "12px" }}
     >
-      <Box
-        width="100%"
-        height="56px"
-        bgcolor="white"
-        borderBottom="1px solid #ededed"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-      >
-        <MetricSelect
-          onSetMetric={onSetMetric}
-          initialValue={value}
-          metric={metric as keyof Metrics}
-          isNtp={isNtp}
-        />
-      </Box>
+      <MetricSelect
+        onSetMetric={onSetMetric}
+        initialValue={value}
+        metric={metric as keyof Metrics}
+        isNtp={isNtp}
+      />
       <Box
         display="flex"
         height="74px"
@@ -60,11 +52,9 @@ const FilterBox = ({
         alignItems="center"
         width="100%"
       >
-        <Text
-          content={`${attrs.prefix ?? ""}${displayVal}${attrs.suffix ?? ""}`}
-          fontFamily={"Poppins"}
-          sizes={[18, 18, 42, 42, 22]}
-        />
+        <Typography>
+          {attrs.prefix ?? ""} {displayVal} {attrs.suffix ?? ""}
+        </Typography>
       </Box>
     </Box>
   );
@@ -84,12 +74,7 @@ export default function MetricFilter({
   isNtp,
 }: MetricProps) {
   return (
-    <Box
-      display="flex"
-      marginBottom="28px"
-      marginTop="14px"
-      justifyContent="space-evenly"
-    >
+    <Stack direction="column" spacing={1}>
       {Object.entries(metrics).map((f, i) => (
         <FilterBox
           value={f[1]}
@@ -100,6 +85,6 @@ export default function MetricFilter({
           isNtp={isNtp}
         />
       ))}
-    </Box>
+    </Stack>
   );
 }

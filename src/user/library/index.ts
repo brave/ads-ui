@@ -235,13 +235,3 @@ export function uiTextForCreativeTypeCode(creativeTypeCode: {
 }): string {
   return uiTextForCreativeType(creativeTypeCode.code);
 }
-
-export function populateFilter(
-  fromDate: Date | null
-): AdvertiserCampaignFilter {
-  return {
-    includeAds: true,
-    includeCreativeSets: true,
-    from: fromDate,
-  };
-}

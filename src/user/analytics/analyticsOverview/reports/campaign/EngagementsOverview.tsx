@@ -1,4 +1,4 @@
-import { Box, CardContent } from "@mui/material";
+import { Box, CardContent, Divider, Stack, Typography } from "@mui/material";
 import HighchartsReact from "highcharts-react-official";
 import * as Highcharts from "highcharts";
 import React, { useState } from "react";
@@ -23,38 +23,15 @@ import MetricFilter from "../../components/MetricFilter";
 import EngagementHeader from "../../components/EngagementHeader";
 import LiveFeed from "../../components/LiveFeed";
 import { CampaignFormat } from "graphql/types";
-import { CardContainer } from "components/Card/CardContainer";
 
 interface Props {
   engagements: EngagementFragment[];
   campaign: Omit<CampaignWithEngagementsFragment, "engagements">;
-  adSets: AdSetFragment[];
 }
 
-export function EngagementsOverview({ engagements, campaign, adSets }: Props) {
-  const campaignOverview = {
-    name: campaign.name,
-    state: campaign.state,
-    id: campaign.id,
-  };
+export function EngagementsOverview({ engagements, campaign }: Props) {
   const [grouping, setGrouping] = useState("daily");
-  const [engagementType, setEngagementType] =
-    useState<EngagementChartType>("campaign");
-  const [overview, setOverview] = useState<OverviewDetail>(campaignOverview);
   const isNtp = campaign.format == CampaignFormat.NtpSi;
-
-  // Only care about name / id / state
-  const mappedAdSets: OverviewDetail[] = _.map(adSets, (i) =>
-    _.pick(i, ["id", "name", "state"])
-  );
-  const mappedAds: OverviewDetail[] = _.uniqBy(
-    _.map(_.flatMap(adSets, "ads"), (i) => ({
-      id: i.creative.id,
-      name: i.creative.name,
-      state: i.creative.state,
-    })),
-    "id"
-  );
 
   const [metrics, setMetrics] = useState<Metrics>({
     metric1: "views",
@@ -69,79 +46,46 @@ export function EngagementsOverview({ engagements, campaign, adSets }: Props) {
     setMetrics({ ...metricsCopy });
   };
 
-  const setActiveDataOverview = (type: EngagementChartType, id?: string) => {
-    if (type === "campaign") {
-      setOverview(campaignOverview);
-      return engagements;
-    }
-
-    const filterId = !!id ? id : engagements[0][`${type}id`];
-    const activeOverviewList =
-      type === "creativeset" ? mappedAdSets : mappedAds;
-    const detail = activeOverviewList.find((o) => o.id === filterId);
-    if (detail) {
-      setOverview({ id: detail.id, state: detail.state, name: detail.name });
-    }
-  };
-
-  const filtered =
-    engagementType === "campaign"
-      ? engagements
-      : engagements.filter((e) => e[`${engagementType}id`] === overview.id);
-  const processedData = processData(filtered, metrics, grouping);
-  const processedStats = processStats(filtered);
+  const processedData = processData(engagements, metrics, grouping);
+  const processedStats = processStats(engagements);
   const options = prepareChart(metrics, processedData);
 
   return (
-    <CardContainer header={`${campaign.name}: Overview`}>
-      <Box display="flex">
-        <Box width="75%">
-          <MetricFilter
-            processedStats={processedStats}
-            metrics={metrics}
-            onSetMetric={setActiveMetric}
-            isNtp={isNtp}
-          />
-
-          <Box border="1px solid #ededed" borderRadius="4px" height="450px">
-            <EngagementHeader
-              onSetGroup={setGrouping}
-              grouping={grouping}
-              onSetEngagement={(t: EngagementChartType) => {
-                setEngagementType(t);
-                setActiveDataOverview(t);
-              }}
-              engagement={engagementType}
-            />
-            <Box
-              paddingLeft="28px"
-              paddingRight="28px"
-              paddingTop="14px"
-              paddingBottom="14px"
-            >
-              <HighchartsReact highcharts={Highcharts} options={options} />
-            </Box>
-          </Box>
+    <Stack direction="row">
+      <MetricFilter
+        processedStats={processedStats}
+        metrics={metrics}
+        onSetMetric={setActiveMetric}
+        isNtp={isNtp}
+      />
+      <Box flexGrow={1} bgcolor="#fff" sx={{ borderRadius: "12px" }}>
+        <EngagementHeader
+          campaign={campaign}
+          onSetGroup={setGrouping}
+          grouping={grouping}
+        />
+        <Box
+          paddingLeft="28px"
+          paddingRight="28px"
+          paddingTop="14px"
+          paddingBottom="14px"
+        >
+          <HighchartsReact highcharts={Highcharts} options={options} />
         </Box>
 
-        {/* Right Side (Live Feed) */}
+        <Divider />
         <LiveFeed
           overview={{
             currency: campaign.currency,
             budget: campaign.budget,
-            ...overview,
+            name: campaign.name,
+            state: campaign.state,
+            id: campaign.id,
           }}
-          onSelect={(id: string) => {
-            setActiveDataOverview(engagementType, id);
-          }}
-          uniqueEngagements={
-            engagementType === "creative" ? mappedAds : mappedAdSets
-          }
-          engagementType={engagementType}
           processed={processedStats}
           isNtp={isNtp}
         />
       </Box>
-    </CardContainer>
+    </Stack>
   );
 }

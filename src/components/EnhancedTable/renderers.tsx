@@ -5,10 +5,9 @@ import { CellValue } from "./EnhancedTable";
 import React, { ReactChild, ReactNode } from "react";
 import { formatInTimeZone } from "date-fns-tz";
 import enUS from "date-fns/locale/en-US";
-import { populateFilter } from "user/library";
 import {
-  CampaignFragment,
   CampaignSummaryFragment,
+  LoadCampaignAdsDocument,
   useUpdateCampaignMutation,
 } from "graphql/campaign.generated";
 import { AdvertiserCampaignsDocument } from "graphql/advertiser.generated";
@@ -18,7 +17,6 @@ import {
   useUpdateAdSetMutation,
 } from "graphql/ad-set.generated";
 import { OnOff } from "../Switch/OnOff";
-import { CreativeFragment } from "graphql/creative.generated";
 import { CampaignSource } from "graphql/types";
 import { AdDetails } from "user/ads/AdList";
 
@@ -133,14 +131,13 @@ export function adSetOnOffState(
     campaignState: string;
     campaignSource: CampaignSource;
     advertiserId: string;
-    fromDate: Date | null;
   }
 ): ReactNode {
   const [updateAdSet, { loading }] = useUpdateAdSetMutation({
     refetchQueries: [
       {
-        query: AdvertiserCampaignsDocument,
-        variables: { id: c.advertiserId, filter: { from: c.fromDate } },
+        query: LoadCampaignAdsDocument,
+        variables: { id: c.campaignId },
       },
     ],
   });
@@ -185,7 +182,7 @@ export function adOnOffState(c: AdDetails): ReactNode {
     refetchQueries: [
       {
         query: AdvertiserCampaignsDocument,
-        variables: { id: c.advertiserId, filter: populateFilter(c.fromDate) },
+        variables: { id: c.campaignId },
       },
     ],
   });

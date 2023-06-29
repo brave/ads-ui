@@ -66,6 +66,7 @@ export default function MetricSelect({
         "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
           border: "none",
         },
+        borderBottom: "1px solid #ededed",
       }}
       value={value}
       isOptionEqualToValue={(v, o) => v.value === o.value}

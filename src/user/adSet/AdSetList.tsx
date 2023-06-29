@@ -5,11 +5,11 @@ import { Status } from "components/Campaigns/Status";
 import _ from "lodash";
 import { isAfterEndDate } from "util/isAfterEndDate";
 import { adSetOnOffState } from "components/EnhancedTable/renderers";
-import { CampaignFragment } from "graphql/campaign.generated";
+import { CampaignAdsFragment } from "graphql/campaign.generated";
+import { CampaignSource } from "graphql/types";
 
 interface Props {
-  campaign?: CampaignFragment | null;
-  fromDate: Date | null;
+  campaign?: CampaignAdsFragment | null;
 }
 
 interface ChipListProps {
@@ -44,19 +44,17 @@ const ChipList: React.FC<ChipListProps> = ({ items, max }) => {
   );
 };
 
-export function AdSetList({ campaign, fromDate }: Props) {
-  const mapAdSetName = campaign?.adSets.map((c) => ({
+export function AdSetList({ campaign }: Props) {
+  const adSets = (campaign?.adSets ?? []).map((c) => ({
     ...c,
-    campaignName: c.name,
-    campaignStart: campaign.startAt,
-    campaignEnd: campaign.endAt,
+    createdAt: c.createdAt,
+    campaignStart: campaign?.startAt ?? "",
+    campaignEnd: campaign?.endAt ?? "",
     campaignId: c.id,
     campaignState: c.state,
-    campaignSource: campaign.source,
-    advertiserId: campaign?.advertiser.id,
-    fromDate,
+    campaignSource: campaign?.source ?? CampaignSource.SelfServe,
+    advertiserId: campaign?.advertiser.id ?? "",
   }));
-  const adSets = _.flatMap(mapAdSetName, "adSets");
 
   const getState = (c: {
     campaignState: string;
@@ -73,8 +71,8 @@ export function AdSetList({ campaign, fromDate }: Props) {
   return (
     <EnhancedTable
       rows={adSets}
-      initialSortColumn={7}
-      initialSortDirection="desc"
+      filterable={false}
+      initialRowsPerPage={5}
       columns={[
         {
           title: "On/Off",
@@ -95,10 +93,6 @@ export function AdSetList({ campaign, fromDate }: Props) {
           ),
         },
         {
-          title: "Campaign Name",
-          value: (c) => c.campaignName,
-        },
-        {
           title: "Type",
           value: (c) =>
             c.billingType === "cpm" ? "Impressions (CPM)" : "Clicks (CPC)",
@@ -115,7 +109,7 @@ export function AdSetList({ campaign, fromDate }: Props) {
           extendedRenderer: (r) => (
             <ChipList
               items={r.segments}
-              max={r.segments.join("").length > 100 ? 2 : 5}
+              max={(r.segments ?? []).join("").length > 100 ? 2 : 5}
             />
           ),
         },

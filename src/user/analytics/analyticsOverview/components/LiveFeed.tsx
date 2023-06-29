@@ -1,13 +1,6 @@
 import React from "react";
-import { Autocomplete, Box, TextField } from "@mui/material";
-import _ from "lodash";
-import {
-  EngagementChartType,
-  Option,
-  OverviewDetail,
-  StatsMetric,
-} from "../types";
-import { Text } from "components/Text/Text";
+import { Chip, Stack, Typography } from "@mui/material";
+import { OverviewDetail, StatsMetric } from "../types";
 
 interface OverviewProps extends OverviewDetail {
   currency: string;
@@ -17,9 +10,6 @@ interface OverviewProps extends OverviewDetail {
 interface LiveFeedProps {
   overview: OverviewProps;
   processed: StatsMetric;
-  engagementType: EngagementChartType;
-  uniqueEngagements: OverviewDetail[];
-  onSelect: (id: string) => void;
   isNtp: boolean;
 }
 
@@ -28,81 +18,12 @@ interface Feed {
   value: string;
 }
 
-const FeedMetric = ({ label, value }: Feed) => {
-  return (
-    <Box
-      width="100%"
-      display="flex"
-      marginLeft="28px"
-      alignItems="center"
-      marginTop="28px"
-    >
-      <Text
-        style={{ marginRight: "14px" }}
-        content={`${label}:`}
-        fontFamily={"Poppins"}
-        sizes={[18, 18, 42, 42, 14]}
-      />
-      <Text
-        content={value}
-        fontFamily={"Poppins"}
-        sizes={[18, 18, 42, 42, 18]}
-      />
-    </Box>
-  );
-};
-
-interface SelectProps {
-  options: OverviewDetail[];
-  onSelect: (id: string) => void;
-  type: "creative" | "creativeset";
-  value: OverviewDetail;
-}
-
-const UniqueEngagementSelect = ({
-  options,
-  onSelect,
-  type,
-  value,
-}: SelectProps) => {
-  const label = type === "creative" ? "Ad" : "Ad Set";
-  const parseName = (details: OverviewDetail, t: string): Option => {
-    const id = details.id.split("-")[0];
-    const idx = options.findIndex((o) => o.id === details.id);
-    const noName = `Ad ${t === "creativeset" ? "Set" : ""} ${idx + 1}`;
-    return {
-      label: details.name || `${id} - (${noName})`,
-      value: details.id,
-    };
-  };
-
-  return (
-    <Autocomplete
-      disablePortal
-      disableClearable
-      sx={{ flexGrow: 1 }}
-      options={options.map((e, i) => parseName(e, type))}
-      value={parseName(value, type)}
-      isOptionEqualToValue={(v, o) => v.value === o.value}
-      onChange={(e, v) => {
-        onSelect(v.value);
-      }}
-      renderInput={(params) => (
-        <TextField {...params} label={`${label} insights filter`} autoFocus />
-      )}
-    />
-  );
-};
-
 export default function LiveFeed({
   overview,
   processed,
-  engagementType,
-  uniqueEngagements,
-  onSelect,
   isNtp,
 }: LiveFeedProps) {
-  const { budget, currency, state } = overview;
+  const { budget, currency } = overview;
   const realSpend = processed.spend > budget ? budget : processed.spend;
 
   const feedValues: Feed[] = [
@@ -128,10 +49,6 @@ export default function LiveFeed({
       label: "Budget",
       value: `${budget.toLocaleString()} ${currency}`,
     },
-    {
-      label: "State",
-      value: _.capitalize(state),
-    },
   ];
 
   if (!isNtp) {
@@ -142,43 +59,16 @@ export default function LiveFeed({
   }
 
   return (
-    <Box width="25%">
-      <Box
-        marginTop="14px"
-        border="1px solid #ededed"
-        borderTop={engagementType !== "campaign" ? "none" : "1px solid #ededed"}
-        borderRadius="4px"
-        height="608px"
-        marginLeft="28px"
-      >
-        <Box
-          width="100%"
-          height="56px"
-          bgcolor="white"
-          borderBottom="1px solid #ededed"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          {engagementType !== "campaign" ? (
-            <UniqueEngagementSelect
-              options={uniqueEngagements}
-              onSelect={onSelect}
-              type={engagementType}
-              value={overview}
-            />
-          ) : (
-            <Text
-              content={"Campaign Insights"}
-              fontFamily={"Poppins"}
-              sizes={[18, 18, 42, 42, 14]}
-            />
-          )}
-        </Box>
-        {feedValues.map((f, idx) => (
-          <FeedMetric label={f.label} value={f.value} key={idx} />
-        ))}
-      </Box>
-    </Box>
+    <Stack
+      direction="row"
+      alignItems="center"
+      justifyContent="space-evenly"
+      mt={4}
+    >
+      <Typography sx={{ fontWeight: 600 }}>Key Statistics</Typography>
+      {feedValues.map((f, idx) => (
+        <Chip label={`${f.label}: ${f.value}`} variant="outlined" key={idx} />
+      ))}
+    </Stack>
   );
 }

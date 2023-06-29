@@ -1,7 +1,6 @@
 import { Box, Skeleton } from "@mui/material";
 import React, { useState } from "react";
 import { useAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
-import { populateFilter } from "user/library";
 import { CampaignAgeFilter } from "components/Campaigns/CampaignAgeFilter";
 import { CampaignList } from "user/campaignList/CampaignList";
 import { ErrorDetail } from "components/Error/ErrorDetail";
@@ -16,7 +15,7 @@ export function CampaignView() {
   const { loading, data, error } = useAdvertiserCampaignsQuery({
     variables: {
       id: window.localStorage.getItem("activeAdvertiser") ?? "",
-      filter: populateFilter(fromDateFilter),
+      filter: { from: fromDateFilter },
     },
     pollInterval: 60_000,
     fetchPolicy: "cache-and-network",

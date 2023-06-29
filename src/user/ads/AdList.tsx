@@ -3,11 +3,10 @@ import _ from "lodash";
 import { isAfterEndDate } from "util/isAfterEndDate";
 import { AdFragment } from "graphql/ad-set.generated";
 import { CampaignSource } from "graphql/types";
-import { CampaignFragment } from "graphql/campaign.generated";
+import { CampaignAdsFragment } from "graphql/campaign.generated";
 
 interface Props {
-  campaign?: CampaignFragment | null;
-  fromDate: Date | null;
+  campaign?: CampaignAdsFragment | null;
 }
 
 export type AdDetails = AdFragment & {
@@ -16,30 +15,36 @@ export type AdDetails = AdFragment & {
   campaignEnd: string;
   campaignSource: CampaignSource;
   advertiserId: string;
-  fromDate: Date | null;
+  campaignId: string;
 };
 
-export function AdList({ campaign, fromDate }: Props) {
+export function AdList({ campaign }: Props) {
   const adSets = campaign?.adSets?.map((c) => ({
     ads: (c.ads ?? [])
       .filter((ad) => ad.state !== "deleted")
-      .map((ad) => ({
-        ...ad,
-        state: isAfterEndDate(campaign?.endAt) ? "completed" : c.state,
-        adSetName: c.name || c.id.substring(0, 8),
-        campaignSource: campaign?.source,
-        advertiserId: fromDate,
-      })),
+      .map((ad) => {
+        const detail: AdDetails = {
+          ...ad,
+          state: isAfterEndDate(campaign?.endAt) ? "completed" : c.state,
+          adSetName: c.name || c.id.substring(0, 8),
+          campaignId: campaign?.id,
+          campaignName: campaign?.name,
+          campaignEnd: campaign?.endAt,
+          campaignSource: campaign?.source,
+          advertiserId: campaign?.advertiser.id,
+        };
+
+        return detail;
+      }),
   }));
 
-  const ads: AdDetails[] = _.flatMap(adSets, "ads").filter(
-    (ad) => ad.creative.type.code === "notification_all_v1"
-  );
+  const ads: AdDetails[] = _.flatMap(adSets, "ads");
 
   return (
     <EnhancedTable
       rows={ads}
-      initialSortColumn={6}
+      filterable={false}
+      initialSortColumn={4}
       initialSortDirection="desc"
       columns={[
         {

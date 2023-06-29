@@ -61,7 +61,7 @@ interface EnhancedTableProps<T> {
   // defaults to 0
   initialSortColumn?: number;
   initialSortDirection?: SortDirection;
-  initialRowsPerPage?: 10 | 25 | 100 | -1;
+  initialRowsPerPage?: 5 | 10 | 25 | 100 | -1;
 
   additionalFilters?: ReactNode;
   filterable?: boolean;
@@ -241,7 +241,13 @@ export function EnhancedTable<T>(props: EnhancedTableProps<T>) {
           <TableFooter>
             <TableRow>
               <TablePagination
-                rowsPerPageOptions={[10, 25, 100, { value: -1, label: "All" }]}
+                rowsPerPageOptions={[
+                  5,
+                  10,
+                  25,
+                  100,
+                  { value: -1, label: "All" },
+                ]}
                 count={filteredRows.length}
                 rowsPerPage={rowsPerPage}
                 page={page}

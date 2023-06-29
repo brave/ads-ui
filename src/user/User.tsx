@@ -7,7 +7,6 @@ import {
   createHttpLink,
   InMemoryCache,
 } from "@apollo/client";
-import AnalyticsOverview from "./analytics/AnalyticsOverview";
 import Settings from "./settings/Settings";
 import { Box } from "@mui/material";
 import { NewCampaign } from "./views/adsManager/views/advanced/components/form/NewCampaign";
@@ -17,6 +16,8 @@ import { AdvertiserAgreed } from "auth/components/AdvertiserAgreed";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { Navbar } from "components/Navigation/Navbar";
 import { CampaignView } from "user/views/user/CampaignView";
+import { CampaignDetails } from "user/views/user/CampaignDetails";
+import { AnalyticsOverview } from "user/analytics/AnalyticsOverview";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -64,7 +65,7 @@ export function User() {
               {/* /campaigns/:campaignId/analytics - */}
               <ProtectedRoute
                 path="/user/main/campaign/:campaignId"
-                authedComponent={AnalyticsOverview}
+                authedComponent={TempAnalytic}
               />
 
               <Route path="/user/main/settings" component={Settings} />
@@ -82,6 +83,15 @@ export function User() {
         </Box>
       </Box>
     </ApolloProvider>
+  );
+}
+
+function TempAnalytic() {
+  return (
+    <Box>
+      <AnalyticsOverview />
+      <CampaignDetails />
+    </Box>
   );
 }
 
