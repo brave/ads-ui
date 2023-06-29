@@ -43,7 +43,7 @@ export function CampaignList({ advertiser, fromDate }: Props) {
   return (
     <EnhancedTable
       rows={advertiser?.campaigns ?? []}
-      initialSortColumn={10}
+      initialSortColumn={8}
       initialSortDirection="desc"
       columns={[
         {
@@ -74,7 +74,9 @@ export function CampaignList({ advertiser, fromDate }: Props) {
         {
           title: "Status",
           value: (c) => (isAfterEndDate(c.endAt) ? "completed" : c.state),
-          extendedRenderer: (r) => <Status state={r.state} end={r.endAt} />,
+          extendedRenderer: (r) => (
+            <Status state={r.state} start={r.startAt} end={r.endAt} />
+          ),
         },
         {
           title: "Budget",
