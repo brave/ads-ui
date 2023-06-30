@@ -71,13 +71,9 @@ export function EngagementsOverview({
 
   if (campaign?.format === CampaignFormat.NtpSi) {
     return (
-      <Box p={3}>
-        <DashboardButton />
-        <Alert severity="info" sx={{ mt: 2, mb: 10 }}>
-          Please ask your Account Manager for reports on campaigns of this
-          format.
-        </Alert>
-      </Box>
+      <Alert severity="info" sx={{ mt: 2, mb: 2 }}>
+        Please ask your Account Manager for reports on campaigns of this format.
+      </Alert>
     );
   }
 

@@ -1,14 +1,19 @@
 import React from "react";
-import { EnhancedTable, StandardRenderers } from "components/EnhancedTable";
+import {
+  ColumnDescriptor,
+  EnhancedTable,
+  StandardRenderers,
+} from "components/EnhancedTable";
 import { Chip } from "@mui/material";
 import { Status } from "components/Campaigns/Status";
 import _ from "lodash";
 import { isAfterEndDate } from "util/isAfterEndDate";
 import { adSetOnOffState } from "components/EnhancedTable/renderers";
 import { CampaignAdsFragment } from "graphql/campaign.generated";
-import { CampaignSource } from "graphql/types";
+import { CampaignFormat, CampaignSource } from "graphql/types";
 import { StatsMetric } from "user/analytics/analyticsOverview/types";
 import { renderStatsCell } from "user/analytics/renderers";
+import { AdSetFragment } from "graphql/ad-set.generated";
 
 interface Props {
   loading: boolean;
@@ -48,14 +53,22 @@ const ChipList: React.FC<ChipListProps> = ({ items, max }) => {
   );
 };
 
+type AdSetDetails = AdSetFragment & {
+  campaignStart: string;
+  campaignEnd: string;
+  campaignId: string;
+  campaignState: string;
+  campaignSource: CampaignSource;
+  advertiserId: string;
+};
+
 export function AdSetList({ campaign, loading, engagements }: Props) {
-  const adSets = (campaign?.adSets ?? []).map((c) => ({
+  const adSets: AdSetDetails[] = (campaign?.adSets ?? []).map((c) => ({
     ...c,
-    createdAt: c.createdAt,
     campaignStart: campaign?.startAt ?? "",
     campaignEnd: campaign?.endAt ?? "",
-    campaignId: c.id,
-    campaignState: c.state,
+    campaignId: campaign?.id ?? "",
+    campaignState: campaign?.state ?? "draft",
     campaignSource: campaign?.source ?? CampaignSource.SelfServe,
     advertiserId: campaign?.advertiser.id ?? "",
   }));
@@ -72,91 +85,98 @@ export function AdSetList({ campaign, loading, engagements }: Props) {
       : c.state;
   };
 
+  const columns: ColumnDescriptor<AdSetDetails>[] = [
+    {
+      title: "On/Off",
+      value: (c) => c.state,
+      extendedRenderer: (r) => adSetOnOffState(r),
+      sx: { width: "10px" },
+      sortable: false,
+    },
+    {
+      title: "Created",
+      value: (c) => c.createdAt,
+      renderer: StandardRenderers.date,
+    },
+    {
+      title: "Name",
+      value: (c) => c.name || c.id.substring(0, 8),
+    },
+    {
+      title: "Status",
+      value: (c) => getState(c),
+      extendedRenderer: (r) => (
+        <Status state={getState(r)} end={r.campaignEnd} />
+      ),
+    },
+    {
+      title: "Type",
+      value: (c) =>
+        c.billingType === "cpm" ? "Impressions (CPM)" : "Clicks (CPC)",
+    },
+    {
+      title: "Platforms",
+      value: (c) => c.oses?.map((o: { name: string }) => o.name).join(", "),
+      extendedRenderer: (r) => <ChipList items={r.oses} />,
+    },
+    {
+      title: "Audiences",
+      value: (c) => c.segments?.map((o: { name: string }) => o.name).join(", "),
+      extendedRenderer: (r) => (
+        <ChipList
+          items={r.segments}
+          max={(r.segments ?? []).join("").length > 100 ? 2 : 5}
+        />
+      ),
+    },
+  ];
+
+  if (campaign?.format !== CampaignFormat.NtpSi) {
+    columns.push(
+      {
+        title: "Spend",
+        value: (c) => engagements.get(c.id)?.spend ?? "N/A",
+        extendedRenderer: (r) =>
+          renderStatsCell(
+            loading,
+            "spend",
+            engagements.get(r.id),
+            campaign?.currency
+          ),
+        align: "right",
+      },
+      {
+        title: "Impressions",
+        value: (c) => engagements.get(c.id)?.views ?? "N/A",
+        extendedRenderer: (r) =>
+          renderStatsCell(loading, "views", engagements.get(r.id)),
+        align: "right",
+      },
+      {
+        title: "Clicks",
+        value: (c) => engagements.get(c.id)?.clicks,
+        extendedRenderer: (r) =>
+          renderStatsCell(loading, "clicks", engagements.get(r.id)),
+        align: "right",
+      },
+      {
+        title: "10s Visits",
+        value: (c) => engagements.get(c.id)?.landings,
+        extendedRenderer: (r) =>
+          renderStatsCell(loading, "landings", engagements.get(r.id)),
+        align: "right",
+      }
+    );
+  }
+
   return (
     <EnhancedTable
       rows={adSets}
       filterable={false}
+      initialSortColumn={2}
+      initialSortDirection="desc"
       initialRowsPerPage={5}
-      columns={[
-        {
-          title: "On/Off",
-          value: (c) => c.state,
-          extendedRenderer: (r) => adSetOnOffState(r),
-          sx: { width: "10px" },
-          sortable: false,
-        },
-        {
-          title: "Name",
-          value: (c) => c.name || c.id.substring(0, 8),
-        },
-        {
-          title: "Status",
-          value: (c) => getState(c),
-          extendedRenderer: (r) => (
-            <Status state={getState(r)} end={r.campaignEnd} />
-          ),
-        },
-        {
-          title: "Type",
-          value: (c) =>
-            c.billingType === "cpm" ? "Impressions (CPM)" : "Clicks (CPC)",
-        },
-        {
-          title: "Platforms",
-          value: (c) => c.oses?.map((o: { name: string }) => o.name).join(", "),
-          extendedRenderer: (r) => <ChipList items={r.oses} />,
-        },
-        {
-          title: "Audiences",
-          value: (c) =>
-            c.segments?.map((o: { name: string }) => o.name).join(", "),
-          extendedRenderer: (r) => (
-            <ChipList
-              items={r.segments}
-              max={(r.segments ?? []).join("").length > 100 ? 2 : 5}
-            />
-          ),
-        },
-        {
-          title: "Spend",
-          value: (c) => engagements.get(c.id)?.spend ?? "N/A",
-          extendedRenderer: (r) =>
-            renderStatsCell(
-              loading,
-              "spend",
-              engagements.get(r.id),
-              campaign?.currency
-            ),
-          align: "right",
-        },
-        {
-          title: "Impressions",
-          value: (c) => engagements.get(c.id)?.views ?? "N/A",
-          extendedRenderer: (r) =>
-            renderStatsCell(loading, "views", engagements.get(r.id)),
-          align: "right",
-        },
-        {
-          title: "Clicks",
-          value: (c) => engagements.get(c.id)?.clicks,
-          extendedRenderer: (r) =>
-            renderStatsCell(loading, "clicks", engagements.get(r.id)),
-          align: "right",
-        },
-        {
-          title: "10s Visits",
-          value: (c) => engagements.get(c.id)?.landings,
-          extendedRenderer: (r) =>
-            renderStatsCell(loading, "landings", engagements.get(r.id)),
-          align: "right",
-        },
-        {
-          title: "Created",
-          value: (c) => c.createdAt,
-          renderer: StandardRenderers.date,
-          align: "right",
-        },
-      ]}
+      columns={columns}
     />
   );
 }

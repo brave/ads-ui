@@ -16,6 +16,7 @@ import {
   renderEngagementCell,
 } from "user/analytics/renderers";
 import _ from "lodash";
+import { uiTextForCampaignFormat } from "user/library";
 
 interface Props {
   advertiser?: AdvertiserCampaignsFragment | null;
@@ -43,7 +44,7 @@ export function CampaignList({ advertiser, fromDate }: Props) {
   return (
     <EnhancedTable
       rows={advertiser?.campaigns ?? []}
-      initialSortColumn={8}
+      initialSortColumn={9}
       initialSortDirection="desc"
       columns={[
         {
@@ -70,6 +71,10 @@ export function CampaignList({ advertiser, fromDate }: Props) {
               {r.name}
             </Link>
           ),
+        },
+        {
+          title: "Format",
+          value: (c) => uiTextForCampaignFormat(c.format),
         },
         {
           title: "Status",

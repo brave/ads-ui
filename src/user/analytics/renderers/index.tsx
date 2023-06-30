@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Skeleton } from "@mui/material";
+import { Box, Skeleton, Typography } from "@mui/material";
 import { renderMonetaryAmount } from "components/EnhancedTable/renderers";
 import { CampaignSummaryFragment } from "graphql/campaign.generated";
 import { CampaignFormat } from "graphql/types";
@@ -35,11 +35,14 @@ export const renderEngagementCell = (
     return <Skeleton />;
   }
 
+  if (fragment.format === CampaignFormat.NtpSi) {
+    return <Typography>-</Typography>;
+  }
+
   const val = map?.get(fragment.id);
   if (type === "spend") {
     const s = val?.spend ?? fragment.spent;
-    const realSpend = fragment.format === CampaignFormat.NtpSi ? 1 : s;
-    return renderMonetaryAmount(realSpend, fragment.currency);
+    return renderMonetaryAmount(s, fragment.currency);
   }
 
   if (!map || !val) {

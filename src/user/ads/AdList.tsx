@@ -1,8 +1,12 @@
-import { EnhancedTable, StandardRenderers } from "components/EnhancedTable";
+import {
+  ColumnDescriptor,
+  EnhancedTable,
+  StandardRenderers,
+} from "components/EnhancedTable";
 import _ from "lodash";
 import { isAfterEndDate } from "util/isAfterEndDate";
 import { AdFragment } from "graphql/ad-set.generated";
-import { CampaignSource } from "graphql/types";
+import { CampaignFormat, CampaignSource } from "graphql/types";
 import { CampaignAdsFragment } from "graphql/campaign.generated";
 import { StatsMetric } from "user/analytics/analyticsOverview/types";
 import React from "react";
@@ -45,68 +49,75 @@ export function AdList({ campaign, loading, engagements }: Props) {
 
   const ads: AdDetails[] = _.flatMap(adSets, "ads");
 
+  const columns: ColumnDescriptor<AdDetails>[] = [
+    {
+      title: "Created",
+      value: (c) => c.creative.createdAt,
+      renderer: StandardRenderers.date,
+    },
+    {
+      title: "Ad Name",
+      value: (c) => c.creative.name,
+    },
+    {
+      title: "Ad Set Name",
+      value: (c) => c.adSetName,
+    },
+    {
+      title: "Title",
+      value: (c) => c.creative.payloadNotification?.title,
+    },
+    {
+      title: "Body",
+      value: (c) => c.creative.payloadNotification?.body,
+    },
+  ];
+
+  if (campaign?.format !== CampaignFormat.NtpSi) {
+    columns.push(
+      {
+        title: "Spend",
+        value: (c) => engagements.get(c.id)?.spend ?? "N/A",
+        extendedRenderer: (r) =>
+          renderStatsCell(
+            loading,
+            "spend",
+            engagements.get(r.id),
+            campaign?.currency
+          ),
+        align: "right",
+      },
+      {
+        title: "Impressions",
+        value: (c) => engagements.get(c.id)?.views ?? "N/A",
+        extendedRenderer: (r) =>
+          renderStatsCell(loading, "views", engagements.get(r.id)),
+        align: "right",
+      },
+      {
+        title: "Clicks",
+        value: (c) => engagements.get(c.id)?.clicks,
+        extendedRenderer: (r) =>
+          renderStatsCell(loading, "clicks", engagements.get(r.id)),
+        align: "right",
+      },
+      {
+        title: "10s Visits",
+        value: (c) => engagements.get(c.id)?.landings,
+        extendedRenderer: (r) =>
+          renderStatsCell(loading, "landings", engagements.get(r.id)),
+        align: "right",
+      }
+    );
+  }
+
   return (
     <EnhancedTable
       rows={ads}
       filterable={false}
       initialSortColumn={0}
       initialSortDirection="desc"
-      columns={[
-        {
-          title: "Created",
-          value: (c) => c.creative.createdAt,
-          renderer: StandardRenderers.date,
-        },
-        {
-          title: "Ad Name",
-          value: (c) => c.creative.name,
-        },
-        {
-          title: "Ad Set Name",
-          value: (c) => c.adSetName,
-        },
-        {
-          title: "Title",
-          value: (c) => c.creative.payloadNotification?.title,
-        },
-        {
-          title: "Body",
-          value: (c) => c.creative.payloadNotification?.body,
-        },
-        {
-          title: "Spend",
-          value: (c) => engagements.get(c.id)?.spend ?? "N/A",
-          extendedRenderer: (r) =>
-            renderStatsCell(
-              loading,
-              "spend",
-              engagements.get(r.id),
-              campaign?.currency
-            ),
-          align: "right",
-        },
-        {
-          title: "Impressions",
-          value: (c) => engagements.get(c.id)?.views ?? "N/A",
-          extendedRenderer: (r) =>
-            renderStatsCell(loading, "views", engagements.get(r.id)),
-          align: "right",
-        },
-        {
-          title: "Clicks",
-          value: (c) => engagements.get(c.id)?.clicks,
-          extendedRenderer: (r) =>
-            renderStatsCell(loading, "clicks", engagements.get(r.id)),
-          align: "right",
-        },
-        {
-          title: "10s Visits",
-          value: (c) => engagements.get(c.id)?.landings,
-          extendedRenderer: (r) =>
-            renderStatsCell(loading, "landings", engagements.get(r.id)),
-          align: "right",
-        },
-      ]}
+      columns={columns}
     />
   );
 }

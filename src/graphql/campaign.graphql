@@ -67,6 +67,7 @@ fragment CampaignAds on Campaign {
   endAt
   source
   currency
+  format
   advertiser {
     id
   }

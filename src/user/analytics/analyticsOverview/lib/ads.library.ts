@@ -1,10 +1,6 @@
-import { EngagementOverview } from "user/analytics/renderers";
 import _ from "lodash";
 import { EngagementFragment } from "graphql/analytics-overview.generated";
-import {
-  CreativeMetric,
-  StatsMetric,
-} from "user/analytics/analyticsOverview/types";
+import { StatsMetric } from "user/analytics/analyticsOverview/types";
 import { processStats } from "user/analytics/analyticsOverview/lib/overview.library";
 
 export function adEngagements(
