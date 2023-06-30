@@ -4,9 +4,14 @@ import { isAfterEndDate } from "util/isAfterEndDate";
 import { AdFragment } from "graphql/ad-set.generated";
 import { CampaignSource } from "graphql/types";
 import { CampaignAdsFragment } from "graphql/campaign.generated";
+import { StatsMetric } from "user/analytics/analyticsOverview/types";
+import React from "react";
+import { renderStatsCell } from "user/analytics/renderers";
 
 interface Props {
   campaign?: CampaignAdsFragment | null;
+  loading: boolean;
+  engagements: Map<string, StatsMetric>;
 }
 
 export type AdDetails = AdFragment & {
@@ -18,7 +23,7 @@ export type AdDetails = AdFragment & {
   campaignId: string;
 };
 
-export function AdList({ campaign }: Props) {
+export function AdList({ campaign, loading, engagements }: Props) {
   const adSets = campaign?.adSets?.map((c) => ({
     ads: (c.ads ?? [])
       .filter((ad) => ad.state !== "deleted")
@@ -44,12 +49,21 @@ export function AdList({ campaign }: Props) {
     <EnhancedTable
       rows={ads}
       filterable={false}
-      initialSortColumn={4}
+      initialSortColumn={0}
       initialSortDirection="desc"
       columns={[
         {
+          title: "Created",
+          value: (c) => c.creative.createdAt,
+          renderer: StandardRenderers.date,
+        },
+        {
           title: "Ad Name",
           value: (c) => c.creative.name,
+        },
+        {
+          title: "Ad Set Name",
+          value: (c) => c.adSetName,
         },
         {
           title: "Title",
@@ -60,13 +74,37 @@ export function AdList({ campaign }: Props) {
           value: (c) => c.creative.payloadNotification?.body,
         },
         {
-          title: "Ad Set Name",
-          value: (c) => c.adSetName,
+          title: "Spend",
+          value: (c) => engagements.get(c.id)?.spend ?? "N/A",
+          extendedRenderer: (r) =>
+            renderStatsCell(
+              loading,
+              "spend",
+              engagements.get(r.id),
+              campaign?.currency
+            ),
+          align: "right",
         },
         {
-          title: "Created",
-          value: (c) => c.creative.createdAt,
-          renderer: StandardRenderers.date,
+          title: "Impressions",
+          value: (c) => engagements.get(c.id)?.views ?? "N/A",
+          extendedRenderer: (r) =>
+            renderStatsCell(loading, "views", engagements.get(r.id)),
+          align: "right",
+        },
+        {
+          title: "Clicks",
+          value: (c) => engagements.get(c.id)?.clicks,
+          extendedRenderer: (r) =>
+            renderStatsCell(loading, "clicks", engagements.get(r.id)),
+          align: "right",
+        },
+        {
+          title: "10s Visits",
+          value: (c) => engagements.get(c.id)?.landings,
+          extendedRenderer: (r) =>
+            renderStatsCell(loading, "landings", engagements.get(r.id)),
+          align: "right",
         },
       ]}
     />

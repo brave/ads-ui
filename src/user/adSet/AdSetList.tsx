@@ -4,17 +4,11 @@ import { Chip } from "@mui/material";
 import { Status } from "components/Campaigns/Status";
 import _ from "lodash";
 import { isAfterEndDate } from "util/isAfterEndDate";
-import {
-  adSetOnOffState,
-  renderMonetaryAmount,
-} from "components/EnhancedTable/renderers";
+import { adSetOnOffState } from "components/EnhancedTable/renderers";
 import { CampaignAdsFragment } from "graphql/campaign.generated";
 import { CampaignSource } from "graphql/types";
 import { StatsMetric } from "user/analytics/analyticsOverview/types";
-import {
-  renderEngagementCell,
-  renderStatsCell,
-} from "user/analytics/renderers";
+import { renderStatsCell } from "user/analytics/renderers";
 
 interface Props {
   loading: boolean;

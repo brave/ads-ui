@@ -80,7 +80,13 @@ export function CampaignDetails({ engagements, engagementLoading }: Props) {
             />
           )}
 
-          {tabValue === 1 && <AdList campaign={data?.campaign} />}
+          {tabValue === 1 && (
+            <AdList
+              campaign={data?.campaign}
+              engagements={adEngagements(engagements, "creativeinstance")}
+              loading={loading || engagementLoading}
+            />
+          )}
         </Box>
       ) : (
         <Box p={3}>
