@@ -1,5 +1,5 @@
 import React from "react";
-import { Chip, Stack, Typography } from "@mui/material";
+import { Box, Chip, Stack, Typography } from "@mui/material";
 import { OverviewDetail, StatsMetric } from "../types";
 
 interface OverviewProps extends OverviewDetail {
@@ -10,7 +10,6 @@ interface OverviewProps extends OverviewDetail {
 interface LiveFeedProps {
   overview: OverviewProps;
   processed: StatsMetric;
-  isNtp: boolean;
 }
 
 interface Feed {
@@ -18,11 +17,7 @@ interface Feed {
   value: string;
 }
 
-export default function LiveFeed({
-  overview,
-  processed,
-  isNtp,
-}: LiveFeedProps) {
+export default function LiveFeed({ overview, processed }: LiveFeedProps) {
   const { budget, currency } = overview;
   const realSpend = processed.spend > budget ? budget : processed.spend;
 
@@ -46,29 +41,29 @@ export default function LiveFeed({
     { label: "Upvotes", value: `${processed.upvotes}` },
     { label: "Downvotes", value: `${processed.downvotes}` },
     {
+      label: "Spend",
+      value: `${realSpend.toLocaleString()} ${currency}`,
+    },
+    {
       label: "Budget",
       value: `${budget.toLocaleString()} ${currency}`,
     },
   ];
 
-  if (!isNtp) {
-    feedValues.splice(6, 0, {
-      label: "Spend",
-      value: `${realSpend.toLocaleString()} ${currency}`,
-    });
-  }
-
   return (
-    <Stack
-      direction="row"
+    <Box
+      flexDirection="row"
       alignItems="center"
       justifyContent="space-evenly"
-      mt={4}
+      flexWrap="wrap"
+      display="flex"
+      gap="5px"
+      p={2}
     >
       <Typography sx={{ fontWeight: 600 }}>Key Statistics</Typography>
       {feedValues.map((f, idx) => (
         <Chip label={`${f.label}: ${f.value}`} variant="outlined" key={idx} />
       ))}
-    </Stack>
+    </Box>
   );
 }

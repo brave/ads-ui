@@ -18,6 +18,7 @@ import { Navbar } from "components/Navigation/Navbar";
 import { CampaignView } from "user/views/user/CampaignView";
 import { CampaignDetails } from "user/views/user/CampaignDetails";
 import { AnalyticsOverview } from "user/analytics/AnalyticsOverview";
+import { CampaignReportView } from "user/views/user/CampaignReportView";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -65,7 +66,7 @@ export function User() {
               {/* /campaigns/:campaignId/analytics - */}
               <ProtectedRoute
                 path="/user/main/campaign/:campaignId"
-                authedComponent={TempAnalytic}
+                authedComponent={CampaignReportView}
               />
 
               <Route path="/user/main/settings" component={Settings} />
@@ -83,15 +84,6 @@ export function User() {
         </Box>
       </Box>
     </ApolloProvider>
-  );
-}
-
-function TempAnalytic() {
-  return (
-    <Box>
-      <AnalyticsOverview />
-      <CampaignDetails />
-    </Box>
   );
 }
 

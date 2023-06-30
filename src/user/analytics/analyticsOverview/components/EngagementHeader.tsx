@@ -80,7 +80,6 @@ export default function EngagementHeader({
   return (
     <Box
       sx={{
-        width: "100%",
         height: "50px",
         backgroundColor: "white",
         display: "flex",

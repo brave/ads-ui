@@ -13,7 +13,6 @@ type BoxProps = FilterValue & {
   processedStats: StatsMetric;
   onSetMetric: (key: keyof Metrics, value: keyof StatsMetric) => void;
   metric: string;
-  isNtp: boolean;
 };
 
 const FilterBox = ({
@@ -21,7 +20,6 @@ const FilterBox = ({
   processedStats,
   onSetMetric,
   metric,
-  isNtp,
 }: BoxProps) => {
   const processed = processedStats[value];
   const attrs = decideValueAttribute(value);
@@ -43,7 +41,6 @@ const FilterBox = ({
         onSetMetric={onSetMetric}
         initialValue={value}
         metric={metric as keyof Metrics}
-        isNtp={isNtp}
       />
       <Box
         display="flex"
@@ -64,14 +61,12 @@ interface MetricProps {
   processedStats: StatsMetric;
   onSetMetric: (key: keyof Metrics, value: keyof StatsMetric) => void;
   metrics: Metrics;
-  isNtp: boolean;
 }
 
 export default function MetricFilter({
   processedStats,
   onSetMetric,
   metrics,
-  isNtp,
 }: MetricProps) {
   return (
     <Stack direction="column" spacing={1}>
@@ -82,7 +77,6 @@ export default function MetricFilter({
           onSetMetric={onSetMetric}
           metric={f[0]}
           key={`${f[1]}-${i}`}
-          isNtp={isNtp}
         />
       ))}
     </Stack>

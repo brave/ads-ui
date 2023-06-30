@@ -4,11 +4,21 @@ import { Chip } from "@mui/material";
 import { Status } from "components/Campaigns/Status";
 import _ from "lodash";
 import { isAfterEndDate } from "util/isAfterEndDate";
-import { adSetOnOffState } from "components/EnhancedTable/renderers";
+import {
+  adSetOnOffState,
+  renderMonetaryAmount,
+} from "components/EnhancedTable/renderers";
 import { CampaignAdsFragment } from "graphql/campaign.generated";
 import { CampaignSource } from "graphql/types";
+import { StatsMetric } from "user/analytics/analyticsOverview/types";
+import {
+  renderEngagementCell,
+  renderStatsCell,
+} from "user/analytics/renderers";
 
 interface Props {
+  loading: boolean;
+  engagements: Map<string, StatsMetric>;
   campaign?: CampaignAdsFragment | null;
 }
 
@@ -44,7 +54,7 @@ const ChipList: React.FC<ChipListProps> = ({ items, max }) => {
   );
 };
 
-export function AdSetList({ campaign }: Props) {
+export function AdSetList({ campaign, loading, engagements }: Props) {
   const adSets = (campaign?.adSets ?? []).map((c) => ({
     ...c,
     createdAt: c.createdAt,
@@ -82,7 +92,7 @@ export function AdSetList({ campaign }: Props) {
           sortable: false,
         },
         {
-          title: "Ad Set Name",
+          title: "Name",
           value: (c) => c.name || c.id.substring(0, 8),
         },
         {
@@ -114,9 +124,43 @@ export function AdSetList({ campaign }: Props) {
           ),
         },
         {
+          title: "Spend",
+          value: (c) => engagements.get(c.id)?.spend ?? "N/A",
+          extendedRenderer: (r) =>
+            renderStatsCell(
+              loading,
+              "spend",
+              engagements.get(r.id),
+              campaign?.currency
+            ),
+          align: "right",
+        },
+        {
+          title: "Impressions",
+          value: (c) => engagements.get(c.id)?.views ?? "N/A",
+          extendedRenderer: (r) =>
+            renderStatsCell(loading, "views", engagements.get(r.id)),
+          align: "right",
+        },
+        {
+          title: "Clicks",
+          value: (c) => engagements.get(c.id)?.clicks,
+          extendedRenderer: (r) =>
+            renderStatsCell(loading, "clicks", engagements.get(r.id)),
+          align: "right",
+        },
+        {
+          title: "10s Visits",
+          value: (c) => engagements.get(c.id)?.landings,
+          extendedRenderer: (r) =>
+            renderStatsCell(loading, "landings", engagements.get(r.id)),
+          align: "right",
+        },
+        {
           title: "Created",
           value: (c) => c.createdAt,
           renderer: StandardRenderers.date,
+          align: "right",
         },
       ]}
     />

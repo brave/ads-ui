@@ -1,7 +1,6 @@
 import * as Types from "./types";
 
 import { gql } from "@apollo/client";
-import { CampaignFragmentDoc } from "./campaign.generated";
 import * as Apollo from "@apollo/client";
 const defaultOptions = {} as const;
 export type EngagementFragment = {
@@ -74,25 +73,15 @@ export type AnalyticOverviewQuery = {
     id: string;
     name: string;
     state: string;
-    dailyCap: number;
-    priority: number;
-    passThroughRate: number;
-    pacingOverride: boolean;
-    pacingStrategy: Types.CampaignPacingStrategies;
-    externalId: string;
-    currency: string;
-    budget: number;
     dailyBudget: number;
+    budget: number;
     spent: number;
+    currency: string;
     createdAt: any;
     startAt: any;
     endAt: any;
-    source: Types.CampaignSource;
-    type: string;
+    pacingIndex?: number | null;
     format: Types.CampaignFormat;
-    paymentType: Types.PaymentType;
-    dayProportion?: number | null;
-    stripePaymentId?: string | null;
     engagements?: Array<{
       __typename?: "Engagement";
       creativeinstanceid: string;
@@ -114,57 +103,6 @@ export type AnalyticOverviewQuery = {
       macos: number;
       windows: number;
     }> | null;
-    geoTargets?: Array<{
-      __typename?: "Geocode";
-      code: string;
-      name: string;
-    }> | null;
-    adSets: Array<{
-      __typename?: "AdSet";
-      id: string;
-      createdAt: any;
-      billingType?: string | null;
-      name?: string | null;
-      totalMax: number;
-      perDay: number;
-      state: string;
-      execution: string;
-      segments?: Array<{
-        __typename?: "Segment";
-        code: string;
-        name: string;
-      }> | null;
-      oses?: Array<{ __typename?: "OS"; code: string; name: string }> | null;
-      conversions?: Array<{
-        __typename?: "Conversion";
-        id: string;
-        type: string;
-        urlPattern: string;
-        observationWindow: number;
-      }> | null;
-      ads?: Array<{
-        __typename?: "Ad";
-        id: string;
-        state: string;
-        prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
-        creative: {
-          __typename?: "Creative";
-          id: string;
-          createdAt: any;
-          modifiedAt: any;
-          name: string;
-          state: string;
-          type: { __typename?: "CreativeType"; code: string };
-          payloadNotification?: {
-            __typename?: "NotificationPayload";
-            body: string;
-            title: string;
-            targetUrl: string;
-          } | null;
-        };
-      }> | null;
-    }>;
-    advertiser: { __typename?: "Advertiser"; id: string };
   } | null;
 };
 
@@ -232,14 +170,10 @@ export const CampaignWithEngagementsFragmentDoc = gql`
 export const AnalyticOverviewDocument = gql`
   query analyticOverview($id: String!) {
     campaign(id: $id) {
-      ...Campaign
-      engagements {
-        ...Engagement
-      }
+      ...CampaignWithEngagements
     }
   }
-  ${CampaignFragmentDoc}
-  ${EngagementFragmentDoc}
+  ${CampaignWithEngagementsFragmentDoc}
 `;
 
 /**

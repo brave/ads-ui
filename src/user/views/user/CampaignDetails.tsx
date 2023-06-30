@@ -1,21 +1,25 @@
 import React, { useState } from "react";
 import DatasetIcon from "@mui/icons-material/Dataset";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
-import {
-  useLoadCampaignAdsQuery,
-  useLoadCampaignQuery,
-} from "graphql/campaign.generated";
+import { useLoadCampaignAdsQuery } from "graphql/campaign.generated";
 import { useParams } from "react-router-dom";
 import { ErrorDetail } from "components/Error/ErrorDetail";
 import { Box, Skeleton, Tab, Tabs } from "@mui/material";
 import { AdSetList } from "user/adSet/AdSetList";
 import { AdList } from "user/ads/AdList";
+import { EngagementFragment } from "graphql/analytics-overview.generated";
+import { adEngagements } from "user/analytics/analyticsOverview/lib/ads.library";
 
 interface Params {
   campaignId: string;
 }
 
-export function CampaignDetails() {
+interface Props {
+  engagementLoading: boolean;
+  engagements: EngagementFragment[];
+}
+
+export function CampaignDetails({ engagements, engagementLoading }: Props) {
   const params = useParams<Params>();
   const { data, loading, error } = useLoadCampaignAdsQuery({
     variables: { id: params.campaignId },
@@ -41,7 +45,7 @@ export function CampaignDetails() {
   }
 
   return (
-    <Box width="100%" sx={{ mt: 5, borderRadius: "12px" }} bgcolor="#fff">
+    <Box sx={{ borderRadius: "12px" }} bgcolor="#fff">
       <Tabs
         value={tabValue}
         variant="fullWidth"
@@ -68,13 +72,19 @@ export function CampaignDetails() {
 
       {!loading ? (
         <Box display="flex" flexDirection="column" mt={1}>
-          {tabValue === 0 && <AdSetList campaign={data?.campaign} />}
+          {tabValue === 0 && (
+            <AdSetList
+              engagements={adEngagements(engagements, "creativeset")}
+              loading={loading || engagementLoading}
+              campaign={data?.campaign}
+            />
+          )}
 
           {tabValue === 1 && <AdList campaign={data?.campaign} />}
         </Box>
       ) : (
-        <Box m={3}>
-          <Skeleton variant="rounded" height={200} />
+        <Box p={3}>
+          <Skeleton variant="rounded" height={300} />
         </Box>
       )}
     </Box>

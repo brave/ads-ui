@@ -3,6 +3,7 @@ import { Box, Skeleton } from "@mui/material";
 import { renderMonetaryAmount } from "components/EnhancedTable/renderers";
 import { CampaignSummaryFragment } from "graphql/campaign.generated";
 import { CampaignFormat } from "graphql/types";
+import { StatsMetric } from "user/analytics/analyticsOverview/types";
 
 export type EngagementOverview = {
   campaignId: string;
@@ -43,6 +44,28 @@ export const renderEngagementCell = (
 
   if (!map || !val) {
     return <Box>N/A</Box>;
+  }
+
+  return <Box>{val[type].toLocaleString()}</Box>;
+};
+
+export const renderStatsCell = (
+  loading: boolean,
+  type: keyof StatsMetric,
+  val?: StatsMetric,
+  currency?: string
+) => {
+  if (loading) {
+    return <Skeleton />;
+  }
+
+  if (!val) {
+    return <Box>N/A</Box>;
+  }
+
+  if (type === "spend") {
+    const c = currency ? currency : "USD";
+    return renderMonetaryAmount(val.spend, c);
   }
 
   return <Box>{val[type].toLocaleString()}</Box>;

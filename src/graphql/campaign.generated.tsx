@@ -114,6 +114,7 @@ export type CampaignAdsFragment = {
   startAt: any;
   endAt: any;
   source: Types.CampaignSource;
+  currency: string;
   advertiser: { __typename?: "Advertiser"; id: string };
   adSets: Array<{
     __typename?: "AdSet";
@@ -260,6 +261,7 @@ export type LoadCampaignAdsQuery = {
     startAt: any;
     endAt: any;
     source: Types.CampaignSource;
+    currency: string;
     advertiser: { __typename?: "Advertiser"; id: string };
     adSets: Array<{
       __typename?: "AdSet";
@@ -408,6 +410,7 @@ export const CampaignAdsFragmentDoc = gql`
     startAt
     endAt
     source
+    currency
     advertiser {
       id
     }
