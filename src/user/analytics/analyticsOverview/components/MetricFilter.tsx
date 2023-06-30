@@ -1,5 +1,4 @@
 import MetricSelect from "user/analytics/analyticsOverview/components/MetricSelect";
-import { Text } from "components/Text/Text";
 import React from "react";
 import { Box, Divider, Stack, Typography } from "@mui/material";
 import { decideValueAttribute } from "user/analytics/analyticsOverview/lib/overview.library";
@@ -33,7 +32,7 @@ const FilterBox = ({
       borderRadius="4px"
       height="130px"
       width="180px"
-      marginRight="28px"
+      marginRight="20px"
       bgcolor="#fff"
       sx={{ borderRadius: "12px" }}
     >

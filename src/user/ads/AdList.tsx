@@ -116,6 +116,7 @@ export function AdList({ campaign, loading, engagements }: Props) {
       rows={ads}
       filterable={false}
       initialSortColumn={0}
+      initialRowsPerPage={10}
       initialSortDirection="desc"
       columns={columns}
     />

@@ -57,7 +57,11 @@ export function CampaignReportView() {
       <ReportUtils
         startDate={startDate}
         endDate={endDate}
-        campaign={{ id: params.campaignId, name: data?.campaign?.name ?? "" }}
+        campaign={{
+          id: params.campaignId,
+          name: data?.campaign?.name ?? "",
+          format: data?.campaign?.format,
+        }}
         onSetDate={setDateRange}
       />
 
