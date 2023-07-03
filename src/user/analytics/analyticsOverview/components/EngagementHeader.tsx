@@ -40,31 +40,6 @@ const Grouping = ({ onSetGroup, label, group, grouping }: GroupProps) => {
   );
 };
 
-interface EngagementProps {
-  value: string;
-  onSetEngagement: (e: EngagementChartType) => void;
-}
-
-// const Engagement = ({ value, onSetEngagement }: EngagementProps) => {
-//   return (
-//     <Box display="flex" flexDirection="row" alignItems="center" ml={1}>
-//       <Typography variant="body2" sx={{ mr: 1 }}>
-//         Engagements:
-//       </Typography>
-//       <Tabs
-//         value={value}
-//         onChange={(event, newValue) => {
-//           onSetEngagement(newValue);
-//         }}
-//       >
-//         <Tab label="Campaign" value="campaign" />
-//         <Tab label="Ad Set" value="creativeset" />
-//         <Tab label="Ad" value="creative" />
-//       </Tabs>
-//     </Box>
-//   );
-// };
-
 export default function EngagementHeader({
   onSetGroup,
   grouping,

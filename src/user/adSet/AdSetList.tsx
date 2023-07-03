@@ -1,19 +1,15 @@
 import React from "react";
-import {
-  ColumnDescriptor,
-  EnhancedTable,
-  StandardRenderers,
-} from "components/EnhancedTable";
+import { ColumnDescriptor, StandardRenderers } from "components/EnhancedTable";
 import { Chip } from "@mui/material";
 import { Status } from "components/Campaigns/Status";
 import _ from "lodash";
 import { isAfterEndDate } from "util/isAfterEndDate";
 import { adSetOnOffState } from "components/EnhancedTable/renderers";
 import { CampaignAdsFragment } from "graphql/campaign.generated";
-import { CampaignFormat, CampaignSource } from "graphql/types";
+import { CampaignSource } from "graphql/types";
 import { StatsMetric } from "user/analytics/analyticsOverview/types";
-import { renderStatsCell } from "user/analytics/renderers";
 import { AdSetFragment } from "graphql/ad-set.generated";
+import { AdDetailTable } from "user/views/user/AdDetailTable";
 
 interface Props {
   loading: boolean;
@@ -53,7 +49,7 @@ const ChipList: React.FC<ChipListProps> = ({ items, max }) => {
   );
 };
 
-type AdSetDetails = AdSetFragment & {
+export type AdSetDetails = AdSetFragment & {
   campaignStart: string;
   campaignEnd: string;
   campaignId: string;
@@ -131,69 +127,12 @@ export function AdSetList({ campaign, loading, engagements }: Props) {
     },
   ];
 
-  if (campaign?.format !== CampaignFormat.NtpSi) {
-    columns.push(
-      {
-        title: "Spend",
-        value: (c) => engagements.get(c.id)?.spend ?? "N/A",
-        extendedRenderer: (r) =>
-          renderStatsCell(
-            loading,
-            "spend",
-            engagements.get(r.id),
-            campaign?.currency
-          ),
-        align: "right",
-      },
-      {
-        title: "Impressions",
-        value: (c) => engagements.get(c.id)?.views ?? "N/A",
-        extendedRenderer: (r) =>
-          renderStatsCell(loading, "views", engagements.get(r.id)),
-        align: "right",
-      },
-      {
-        title: "Clicks",
-        value: (c) => engagements.get(c.id)?.clicks,
-        extendedRenderer: (r) =>
-          renderStatsCell(loading, "clicks", engagements.get(r.id)),
-        align: "right",
-      },
-      {
-        title: "10s Visits",
-        value: (c) => engagements.get(c.id)?.landings,
-        extendedRenderer: (r) =>
-          renderStatsCell(loading, "landings", engagements.get(r.id)),
-        align: "right",
-      },
-      {
-        title: "CTR",
-        value: (c) => engagements.get(c.id)?.ctr,
-        extendedRenderer: (r) =>
-          renderStatsCell(loading, "ctr", engagements.get(r.id)),
-        align: "right",
-      }
-    );
-
-    if (engagements.get(campaign?.id ?? "") ?? 0 > 0) {
-      columns.push({
-        title: "CPA",
-        value: (c) => engagements.get(c.id)?.cpa,
-        extendedRenderer: (r) =>
-          renderStatsCell(loading, "cpa", engagements.get(r.id)),
-        align: "right",
-      });
-    }
-  }
-
   return (
-    <EnhancedTable
+    <AdDetailTable
       rows={adSets}
-      filterable={false}
-      initialSortColumn={1}
-      initialSortDirection="desc"
-      initialRowsPerPage={5}
       columns={columns}
+      engagements={engagements}
+      loading={loading}
     />
   );
 }

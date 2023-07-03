@@ -66,6 +66,10 @@ export const renderStatsCell = (
     return <Box>N/A</Box>;
   }
 
+  if (val[type] <= 0) {
+    return <Box>-</Box>;
+  }
+
   switch (type) {
     case "ctr":
     case "convRate":

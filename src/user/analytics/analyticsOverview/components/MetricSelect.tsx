@@ -14,7 +14,7 @@ export default function MetricSelect({
   onSetMetric,
   metric,
 }: PopoutProps) {
-  const options = [
+  const options: { value: keyof StatsMetric; label: string }[] = [
     // TODO: commented out metrics in live feed, do we really need them in both?
     { value: "views", label: "Impressions" },
     { value: "clicks", label: "Clicks" },
@@ -26,6 +26,8 @@ export default function MetricSelect({
     // { value: "downvotes", label: "Downvotes" },
     { value: "convRate", label: "Conversion Rate" },
     { value: "landingRate", label: "Click to 10s Visit Rate" },
+    { value: "visitRate", label: "10s Visit Rate" },
+    { value: "dismissRate", label: "Dismissal Rate" },
     { value: "spend", label: "Spend" },
     { value: "cpa", label: "CPA" },
   ];

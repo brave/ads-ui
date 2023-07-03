@@ -19,6 +19,7 @@ import { CampaignFormat } from "graphql/types";
 import { ErrorDetail } from "components/Error/ErrorDetail";
 import { DashboardButton } from "components/Button/DashboardButton";
 import { ApolloError } from "@apollo/client";
+import _ from "lodash";
 
 interface Props {
   loading: boolean;
@@ -76,15 +77,24 @@ export function EngagementsOverview({
   const [grouping, setGrouping] = useState("daily");
 
   const [metrics, setMetrics] = useState<Metrics>({
-    metric1: "views",
-    metric2: "clicks",
-    metric3: "conversions",
-    metric4: "landings",
+    metric1: { key: "views", active: true },
+    metric2: { key: "clicks", active: false },
+    metric3: { key: "dismissals", active: false },
+    metric4: { key: "landings", active: false },
   });
 
-  const setActiveMetric = (key: keyof Metrics, value: keyof StatsMetric) => {
-    const metricsCopy = metrics;
-    metricsCopy[key] = value;
+  const setActiveMetric = (
+    metric: keyof Metrics,
+    value: keyof StatsMetric,
+    active: boolean
+  ) => {
+    const metricsCopy = _.cloneDeep(metrics);
+    const selectedMetric = metricsCopy[metric];
+
+    if (selectedMetric) {
+      selectedMetric.key = value;
+      selectedMetric.active = active;
+    }
     setMetrics({ ...metricsCopy });
   };
 

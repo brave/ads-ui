@@ -83,31 +83,35 @@ export const prepareChart = (
   const metricsEntries = Object.entries(metrics);
   return {
     ...baseOverviewChart,
-    series: metricsEntries.map((e, idx) => {
-      const attrs = decideValueAttribute(e[1]);
-      const dataKey = `${e[0]}DataSet` as keyof MetricDataSet;
-      return {
-        animation: false,
-        name: decideLabel(e[1]),
-        yAxis: metricsEntries.length <= 2 ? idx : decideAxis(e[1]),
-        data: processedData[dataKey],
-        connectNulls: true,
-        tooltip: {
-          valueDecimals: attrs.decimal,
-          valuePrefix: attrs.prefix,
-          valueSuffix: attrs.suffix,
-        },
-        type: "spline",
-      };
-    }),
+    series: metricsEntries
+      .filter((m) => m[1].active)
+      .map((e, idx) => {
+        const attrs = decideValueAttribute(e[1].key);
+        const dataKey = `${e[0]}DataSet` as keyof MetricDataSet;
+        return {
+          animation: false,
+          name: decideLabel(e[1].key),
+          yAxis: metricsEntries.length <= 2 ? idx : decideAxis(e[1].key),
+          data: processedData[dataKey],
+          connectNulls: true,
+          tooltip: {
+            valueDecimals: attrs.decimal,
+            valuePrefix: attrs.prefix,
+            valueSuffix: attrs.suffix,
+          },
+          type: "spline",
+        };
+      }),
   };
 };
 
-const decideAxis = (metric: string) => {
+const decideAxis = (metric: keyof StatsMetric) => {
   switch (metric) {
     case "ctr":
     case "convRate":
     case "landingRate":
+    case "dismissRate":
+    case "visitRate":
       return 1;
     default:
       return 0;
@@ -141,7 +145,7 @@ export const decideValueAttribute = (metric: string) => {
 export const decideLabel = (metric: string) => {
   switch (metric) {
     case "ctr":
-      return "C.T.R.";
+      return "CTR";
     case "convRate":
       return "Conversion Rate";
     case "landingRate":
@@ -280,19 +284,19 @@ export const processData = (
     const processed = processStats(data);
 
     if (metric1) {
-      metric1DataSet.push([date, processed[metric1]]);
+      metric1DataSet.push([date, processed[metric1.key]]);
     }
 
     if (metric2) {
-      metric2DataSet.push([date, processed[metric2]]);
+      metric2DataSet.push([date, processed[metric2.key]]);
     }
 
     if (metric3) {
-      metric3DataSet.push([date, processed[metric3]]);
+      metric3DataSet.push([date, processed[metric3.key]]);
     }
 
     if (metric4) {
-      metric4DataSet.push([date, processed[metric4]]);
+      metric4DataSet.push([date, processed[metric4.key]]);
     }
   }
 
