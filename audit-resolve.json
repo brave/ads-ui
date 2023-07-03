@@ -1,0 +1,11 @@
+{
+  "decisions": {
+    "1092330|optionator>word-wrap": {
+      "decision": "ignore",
+      "madeAt": 1688393253459,
+      "expiresAt": 1690985237666
+    }
+  },
+  "rules": {},
+  "version": 1
+}

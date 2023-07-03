@@ -25,6 +25,7 @@
     "jwt-decode": "3.1.2",
     "lodash": "4.17.21",
     "moment": "2.29.4",
+    "npm-audit-resolver": "^3.0.0-RC.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "5.3.4",
@@ -41,7 +42,11 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "tsc": "tsc",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "check:audit": "check-audit",
+    "audit:resolve": "resolve-audit",
+    "check:lint": "eslint src --ext .ts",
+    "lint:fix": "eslint --fix src --ext .ts"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "2.16.5",
