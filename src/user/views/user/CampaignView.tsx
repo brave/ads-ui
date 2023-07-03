@@ -31,7 +31,7 @@ export function CampaignView() {
   }
 
   return (
-    <Box display="flex" flexDirection="column" sx={{ mb: 2, ml: 5, mr: 5 }}>
+    <Box display="flex" flexDirection="column" sx={{ mb: 2, ml: 2, mr: 2 }}>
       <CardContainer
         header="Campaigns"
         additionalAction={

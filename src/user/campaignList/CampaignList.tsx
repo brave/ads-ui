@@ -56,7 +56,7 @@ export function CampaignList({ advertiser, fromDate }: Props) {
               fromDate,
               advertiserId: advertiser?.id ?? "",
             }),
-          sx: { width: "10px" },
+          sx: { width: "1px" },
           sortable: false,
         },
         {
@@ -82,6 +82,7 @@ export function CampaignList({ advertiser, fromDate }: Props) {
           extendedRenderer: (r) => (
             <Status state={r.state} start={r.startAt} end={r.endAt} />
           ),
+          sx: { width: "10px" },
         },
         {
           title: "Budget",

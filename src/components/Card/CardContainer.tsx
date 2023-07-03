@@ -21,7 +21,7 @@ export function CardContainer(
         </Stack>
       )}
       <Card>
-        <CardContent sx={{ p: 3 }}>{props.children}</CardContent>
+        <CardContent sx={{ p: 1 }}>{props.children}</CardContent>
       </Card>
     </Box>
   );
