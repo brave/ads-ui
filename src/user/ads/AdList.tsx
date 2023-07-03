@@ -11,6 +11,7 @@ import { CampaignAdsFragment } from "graphql/campaign.generated";
 import { StatsMetric } from "user/analytics/analyticsOverview/types";
 import React from "react";
 import { renderStatsCell } from "user/analytics/renderers";
+import { Tab } from "@mui/material";
 
 interface Props {
   campaign?: CampaignAdsFragment | null;
@@ -107,8 +108,25 @@ export function AdList({ campaign, loading, engagements }: Props) {
         extendedRenderer: (r) =>
           renderStatsCell(loading, "landings", engagements.get(r.id)),
         align: "right",
+      },
+      {
+        title: "CTR",
+        value: (c) => engagements.get(c.id)?.ctr,
+        extendedRenderer: (r) =>
+          renderStatsCell(loading, "ctr", engagements.get(r.id)),
+        align: "right",
       }
     );
+
+    if (engagements.get(campaign?.id ?? "")?.conversions ?? 0 > 0) {
+      columns.push({
+        title: "CPA",
+        value: (c) => engagements.get(c.id)?.cpa,
+        extendedRenderer: (r) =>
+          renderStatsCell(loading, "cpa", engagements.get(r.id)),
+        align: "right",
+      });
+    }
   }
 
   return (

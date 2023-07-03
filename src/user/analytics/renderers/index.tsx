@@ -66,10 +66,17 @@ export const renderStatsCell = (
     return <Box>N/A</Box>;
   }
 
-  if (type === "spend") {
-    const c = currency ? currency : "USD";
-    return renderMonetaryAmount(val.spend, c);
+  switch (type) {
+    case "ctr":
+    case "convRate":
+    case "dismissRate":
+    case "landingRate":
+    case "visitRate":
+      return <Box>{val[type].toLocaleString()}%</Box>;
+    case "spend":
+    case "cpa":
+      return renderMonetaryAmount(val.spend, currency ?? "USD");
+    default:
+      return <Box>{val[type].toLocaleString()}</Box>;
   }
-
-  return <Box>{val[type].toLocaleString()}</Box>;
 };

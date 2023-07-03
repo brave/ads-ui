@@ -1,27 +1,12 @@
-import {
-  Alert,
-  Box,
-  CardContent,
-  Divider,
-  Skeleton,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Alert, Box, Divider, Skeleton } from "@mui/material";
 import HighchartsReact from "highcharts-react-official";
 import * as Highcharts from "highcharts";
 import React, { useState } from "react";
-import _ from "lodash";
 import {
   CampaignWithEngagementsFragment,
   EngagementFragment,
 } from "graphql/analytics-overview.generated";
-import { AdSetFragment } from "graphql/ad-set.generated";
-import {
-  EngagementChartType,
-  Metrics,
-  OverviewDetail,
-  StatsMetric,
-} from "../../types";
+import { Metrics, StatsMetric } from "../../types";
 import {
   prepareChart,
   processData,
@@ -60,7 +45,7 @@ export function EngagementsOverview({
   if (loading) {
     return (
       <Box padding={2}>
-        <Skeleton variant="rounded" height={"400px"} />
+        <Skeleton variant="rounded" height="250px" />
       </Box>
     );
   }

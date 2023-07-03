@@ -3,7 +3,7 @@ import { SeriesOptionsType } from "highcharts";
 import { CalculatedOSMetric, OS } from "user/analytics/analyticsOverview/types";
 import { BaseBarChart } from "../../../components/BaseBarChart";
 
-export function OsBarChart(props: CalculatedOSMetric & { isNtp: boolean }) {
+export function OsBarChart(props: CalculatedOSMetric) {
   const oses: (keyof OS)[] = ["android", "ios", "linux", "macos", "windows"];
   const [type, setType] = useState<keyof CalculatedOSMetric>("ctr");
 
@@ -49,7 +49,7 @@ export function OsBarChart(props: CalculatedOSMetric & { isNtp: boolean }) {
     setValidSeries(mapToSeries(metric));
   };
 
-  const extra = !props.isNtp ? [{ value: "cpa", label: "CPA" }] : [];
+  const extra = [{ value: "cpa", label: "CPA" }];
   return (
     <BaseBarChart
       categories={oses.map((d) => d)}

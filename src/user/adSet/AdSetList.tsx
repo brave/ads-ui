@@ -165,15 +165,32 @@ export function AdSetList({ campaign, loading, engagements }: Props) {
         extendedRenderer: (r) =>
           renderStatsCell(loading, "landings", engagements.get(r.id)),
         align: "right",
+      },
+      {
+        title: "CTR",
+        value: (c) => engagements.get(c.id)?.ctr,
+        extendedRenderer: (r) =>
+          renderStatsCell(loading, "ctr", engagements.get(r.id)),
+        align: "right",
       }
     );
+
+    if (engagements.get(campaign?.id ?? "") ?? 0 > 0) {
+      columns.push({
+        title: "CPA",
+        value: (c) => engagements.get(c.id)?.cpa,
+        extendedRenderer: (r) =>
+          renderStatsCell(loading, "cpa", engagements.get(r.id)),
+        align: "right",
+      });
+    }
   }
 
   return (
     <EnhancedTable
       rows={adSets}
       filterable={false}
-      initialSortColumn={2}
+      initialSortColumn={1}
       initialSortDirection="desc"
       initialRowsPerPage={5}
       columns={columns}

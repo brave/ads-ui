@@ -28,6 +28,11 @@ import {
   Segment,
 } from "user/views/adsManager/types";
 import _ from "lodash";
+import { renderStatsCell } from "user/analytics/renderers";
+import { ColumnDescriptor } from "components/EnhancedTable";
+import { AdDetails } from "user/ads/AdList";
+import { EngagementFragment } from "graphql/analytics-overview.generated";
+import { StatsMetric } from "user/analytics/analyticsOverview/types";
 
 const TYPE_CODE_LOOKUP: Record<string, string> = {
   notification_all_v1: "Push Notification",

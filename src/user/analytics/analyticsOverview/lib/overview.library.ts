@@ -22,7 +22,7 @@ type MetricDataSet = {
 export const baseOverviewChart: Options = {
   chart: {
     type: "spline",
-    height: "364",
+    height: "300",
     spacingTop: 40,
     spacingBottom: 10,
     spacingRight: 0,

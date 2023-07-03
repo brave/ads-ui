@@ -7,7 +7,7 @@ import { SeriesOptionsType } from "highcharts";
 
 type OSReport = keyof OSMetric | "device";
 
-export function OsPieChart(props: OSMetric & { isNtp: boolean }) {
+export function OsPieChart(props: OSMetric) {
   const [type, setType] = useState<OSReport>("view");
 
   const device = mapDevice(Object.entries(props.view));
@@ -32,11 +32,10 @@ export function OsPieChart(props: OSMetric & { isNtp: boolean }) {
     },
   ];
 
-  const extra = [{ value: "device", label: "Impressions (Device)" }];
-  if (!props.isNtp) {
-    extra.push({ value: "spend", label: "Spend" });
-  }
-
+  const extra = [
+    { value: "device", label: "Impressions (Device)" },
+    { value: "spend", label: "Spend" },
+  ];
   return (
     <BasePieChart
       series={series}

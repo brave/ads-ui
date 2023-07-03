@@ -1,6 +1,6 @@
 import MetricSelect from "user/analytics/analyticsOverview/components/MetricSelect";
 import React from "react";
-import { Box, Divider, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { decideValueAttribute } from "user/analytics/analyticsOverview/lib/overview.library";
 import { Metrics, StatsMetric } from "user/analytics/analyticsOverview/types";
 
@@ -30,7 +30,7 @@ const FilterBox = ({
     <Box
       border="1px solid #ededed"
       borderRadius="4px"
-      height="130px"
+      height="120px"
       width="180px"
       marginRight="20px"
       bgcolor="#fff"
@@ -43,7 +43,7 @@ const FilterBox = ({
       />
       <Box
         display="flex"
-        height="74px"
+        height="65px"
         justifyContent="center"
         alignItems="center"
         width="100%"

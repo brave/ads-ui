@@ -6,6 +6,9 @@ import moment from "moment";
 import ReportUtils from "user/analytics/analyticsOverview/components/ReportUtils";
 import { EngagementsOverview } from "user/analytics/analyticsOverview/reports/campaign/EngagementsOverview";
 import { CampaignDetails } from "user/views/user/CampaignDetails";
+import { CollapseBox } from "components/Collapse/CollapseBox";
+import { OsOverview } from "user/analytics/analyticsOverview/reports/os/OsOverview";
+import { CampaignFormat } from "graphql/types";
 
 interface Params {
   campaignId: string;
@@ -51,6 +54,9 @@ export function CampaignReportView() {
   );
 
   const isLoading = loading || !data || !data.campaign || !startDate;
+  const campaign = data?.campaign;
+  const showReport =
+    campaign && campaign.format !== CampaignFormat.NtpSi && !loading && !error;
 
   return (
     <Box padding={2}>
@@ -59,8 +65,8 @@ export function CampaignReportView() {
         endDate={endDate}
         campaign={{
           id: params.campaignId,
-          name: data?.campaign?.name ?? "",
-          format: data?.campaign?.format,
+          name: campaign?.name ?? "",
+          format: campaign?.format,
         }}
         onSetDate={setDateRange}
       />
@@ -78,6 +84,12 @@ export function CampaignReportView() {
         engagementLoading={isLoading}
         engagements={filteredEngagements}
       />
+
+      {showReport && (
+        <CollapseBox header="Additional Report: OS Performance">
+          <OsOverview engagements={filteredEngagements} />
+        </CollapseBox>
+      )}
     </Box>
   );
 }
