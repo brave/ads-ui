@@ -26,6 +26,7 @@ jobs:
           # setting CI to false is temporary, while we still have lint errors
           CI: false
         run: npm run build
+      - run: npm check:audit
       - run: npm test
       - name: Deploy static files
         env:
