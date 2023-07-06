@@ -41,7 +41,7 @@ export function NewCampaign() {
         campaign.paymentType === PaymentType.Netsuite ||
         campaign.paymentType === PaymentType.ManualBat
       ) {
-        history.push("/user/main/complete/new");
+        history.push(`/user/main/complete/new?referenceId=${campaign.id}`);
       } else {
         createPaymentSession(data.createCampaign.id);
       }
