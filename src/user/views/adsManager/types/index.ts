@@ -31,7 +31,9 @@ export type CampaignForm = {
   price: number;
   billingType: Billing;
   pacingStrategy: CampaignPacingStrategies;
+  hasPaymentIntent: boolean;
   stripePaymentId?: string | null;
+  radomPaymentId?: string | null;
   paymentType: PaymentType;
 };
 
@@ -108,6 +110,7 @@ export const initialCampaign = (advertiser: IAdvertiser): CampaignForm => {
     validateStart: true,
     isCreating: false,
     budget: MIN_PER_CAMPAIGN,
+    hasPaymentIntent: false,
     currency: "USD",
     dailyBudget: MIN_PER_CAMPAIGN,
     dailyCap: 1,

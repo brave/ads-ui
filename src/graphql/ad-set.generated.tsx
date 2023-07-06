@@ -294,12 +294,12 @@ export function useCreateAdSetMutation(
   baseOptions?: Apollo.MutationHookOptions<
     CreateAdSetMutation,
     CreateAdSetMutationVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<CreateAdSetMutation, CreateAdSetMutationVariables>(
     CreateAdSetDocument,
-    options
+    options,
   );
 }
 export type CreateAdSetMutationHookResult = ReturnType<
@@ -345,12 +345,12 @@ export function useUpdateAdSetMutation(
   baseOptions?: Apollo.MutationHookOptions<
     UpdateAdSetMutation,
     UpdateAdSetMutationVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<UpdateAdSetMutation, UpdateAdSetMutationVariables>(
     UpdateAdSetDocument,
-    options
+    options,
   );
 }
 export type UpdateAdSetMutationHookResult = ReturnType<
@@ -396,12 +396,12 @@ export function useCreateAdMutation(
   baseOptions?: Apollo.MutationHookOptions<
     CreateAdMutation,
     CreateAdMutationVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<CreateAdMutation, CreateAdMutationVariables>(
     CreateAdDocument,
-    options
+    options,
   );
 }
 export type CreateAdMutationHookResult = ReturnType<typeof useCreateAdMutation>;
@@ -443,12 +443,12 @@ export function useUpdateAdMutation(
   baseOptions?: Apollo.MutationHookOptions<
     UpdateAdMutation,
     UpdateAdMutationVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<UpdateAdMutation, UpdateAdMutationVariables>(
     UpdateAdDocument,
-    options
+    options,
   );
 }
 export type UpdateAdMutationHookResult = ReturnType<typeof useUpdateAdMutation>;

@@ -337,6 +337,7 @@ export type NotificationPayloadInput = {
 export enum PaymentType {
   ManualBat = "MANUAL_BAT",
   Netsuite = "NETSUITE",
+  Radom = "RADOM",
   Stripe = "STRIPE",
 }
 

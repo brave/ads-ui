@@ -160,6 +160,7 @@ export function editCampaignValues(
       };
     }),
     advertiserId,
+    hasPaymentIntent: campaign.hasPaymentIntent ?? false,
     creatives: creativeList(ads).map((a) => a.id!),
     newCreative: initialCreative,
     isCreating: false,

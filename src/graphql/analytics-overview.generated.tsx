@@ -196,19 +196,19 @@ export function useAnalyticOverviewQuery(
   baseOptions: Apollo.QueryHookOptions<
     AnalyticOverviewQuery,
     AnalyticOverviewQueryVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<AnalyticOverviewQuery, AnalyticOverviewQueryVariables>(
     AnalyticOverviewDocument,
-    options
+    options,
   );
 }
 export function useAnalyticOverviewLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     AnalyticOverviewQuery,
     AnalyticOverviewQueryVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<
@@ -227,7 +227,7 @@ export type AnalyticOverviewQueryResult = Apollo.QueryResult<
   AnalyticOverviewQueryVariables
 >;
 export function refetchAnalyticOverviewQuery(
-  variables: AnalyticOverviewQueryVariables
+  variables: AnalyticOverviewQueryVariables,
 ) {
   return { query: AnalyticOverviewDocument, variables: variables };
 }
@@ -265,7 +265,7 @@ export function useEngagementOverviewQuery(
   baseOptions: Apollo.QueryHookOptions<
     EngagementOverviewQuery,
     EngagementOverviewQueryVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<
@@ -277,7 +277,7 @@ export function useEngagementOverviewLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     EngagementOverviewQuery,
     EngagementOverviewQueryVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<
@@ -296,7 +296,7 @@ export type EngagementOverviewQueryResult = Apollo.QueryResult<
   EngagementOverviewQueryVariables
 >;
 export function refetchEngagementOverviewQuery(
-  variables: EngagementOverviewQueryVariables
+  variables: EngagementOverviewQueryVariables,
 ) {
   return { query: EngagementOverviewDocument, variables: variables };
 }

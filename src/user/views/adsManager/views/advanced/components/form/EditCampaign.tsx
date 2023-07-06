@@ -12,7 +12,6 @@ import { useHistory, useParams } from "react-router-dom";
 import { BaseForm } from "./components/BaseForm";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useCreatePaymentSession } from "checkout/hooks/useCreatePaymentSession";
-import { PaymentType } from "graphql/types";
 import { ErrorDetail } from "components/Error/ErrorDetail";
 
 interface Params {
@@ -36,11 +35,7 @@ export function EditCampaign() {
 
   const [mutation] = useUpdateCampaignMutation({
     onCompleted(data) {
-      const campaign = initialData?.campaign;
-      if (
-        campaign?.stripePaymentId ||
-        campaign?.paymentType !== PaymentType.Stripe
-      ) {
+      if (initialData?.campaign?.hasPaymentIntent) {
         history.push(
           `/user/main/complete/edit?referenceId=${data.updateCampaign.id}`
         );
@@ -67,7 +62,6 @@ export function EditCampaign() {
   }
 
   const initialValues = editCampaignValues(initialData.campaign, advertiser.id);
-
   return (
     <Container maxWidth="xl">
       <Formik

@@ -28,6 +28,7 @@ export type CampaignFragment = {
   paymentType: Types.PaymentType;
   dayProportion?: number | null;
   stripePaymentId?: string | null;
+  hasPaymentIntent?: boolean | null;
   geoTargets?: Array<{
     __typename?: "Geocode";
     code: string;
@@ -194,6 +195,7 @@ export type LoadCampaignQuery = {
     paymentType: Types.PaymentType;
     dayProportion?: number | null;
     stripePaymentId?: string | null;
+    hasPaymentIntent?: boolean | null;
     geoTargets?: Array<{
       __typename?: "Geocode";
       code: string;
@@ -365,6 +367,7 @@ export const CampaignFragmentDoc = gql`
     dayProportion
     stripePaymentId
     paymentType
+    hasPaymentIntent
     geoTargets {
       code
       name
@@ -452,24 +455,24 @@ export function useLoadCampaignQuery(
   baseOptions: Apollo.QueryHookOptions<
     LoadCampaignQuery,
     LoadCampaignQueryVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<LoadCampaignQuery, LoadCampaignQueryVariables>(
     LoadCampaignDocument,
-    options
+    options,
   );
 }
 export function useLoadCampaignLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     LoadCampaignQuery,
     LoadCampaignQueryVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<LoadCampaignQuery, LoadCampaignQueryVariables>(
     LoadCampaignDocument,
-    options
+    options,
   );
 }
 export type LoadCampaignQueryHookResult = ReturnType<
@@ -483,7 +486,7 @@ export type LoadCampaignQueryResult = Apollo.QueryResult<
   LoadCampaignQueryVariables
 >;
 export function refetchLoadCampaignQuery(
-  variables: LoadCampaignQueryVariables
+  variables: LoadCampaignQueryVariables,
 ) {
   return { query: LoadCampaignDocument, variables: variables };
 }
@@ -516,19 +519,19 @@ export function useLoadCampaignAdsQuery(
   baseOptions: Apollo.QueryHookOptions<
     LoadCampaignAdsQuery,
     LoadCampaignAdsQueryVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<LoadCampaignAdsQuery, LoadCampaignAdsQueryVariables>(
     LoadCampaignAdsDocument,
-    options
+    options,
   );
 }
 export function useLoadCampaignAdsLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     LoadCampaignAdsQuery,
     LoadCampaignAdsQueryVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<
@@ -547,7 +550,7 @@ export type LoadCampaignAdsQueryResult = Apollo.QueryResult<
   LoadCampaignAdsQueryVariables
 >;
 export function refetchLoadCampaignAdsQuery(
-  variables: LoadCampaignAdsQueryVariables
+  variables: LoadCampaignAdsQueryVariables,
 ) {
   return { query: LoadCampaignAdsDocument, variables: variables };
 }
@@ -585,7 +588,7 @@ export function useCreateCampaignMutation(
   baseOptions?: Apollo.MutationHookOptions<
     CreateCampaignMutation,
     CreateCampaignMutationVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<
@@ -637,7 +640,7 @@ export function useUpdateCampaignMutation(
   baseOptions?: Apollo.MutationHookOptions<
     UpdateCampaignMutation,
     UpdateCampaignMutationVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<
