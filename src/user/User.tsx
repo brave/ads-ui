@@ -16,8 +16,6 @@ import { AdvertiserAgreed } from "auth/components/AdvertiserAgreed";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { Navbar } from "components/Navigation/Navbar";
 import { CampaignView } from "user/views/user/CampaignView";
-import { CampaignDetails } from "user/views/user/CampaignDetails";
-import { AnalyticsOverview } from "user/analytics/AnalyticsOverview";
 import { CampaignReportView } from "user/views/user/CampaignReportView";
 
 const buildApolloClient = () => {

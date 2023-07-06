@@ -19,6 +19,8 @@ import {
 import { OnOff } from "../Switch/OnOff";
 import { CampaignSource } from "graphql/types";
 import { AdDetails } from "user/ads/AdList";
+import { displayFromCampaignState } from "util/displayState";
+import { AdSetDetails } from "user/adSet/AdSetList";
 
 export type CellValueRenderer = (value: CellValue) => React.ReactNode;
 const ADS_DEFAULT_TIMEZONE = "America/New_York";
@@ -124,15 +126,7 @@ export function campaignOnOffState(
   );
 }
 
-export function adSetOnOffState(
-  c: AdSetFragment & {
-    campaignEnd: string;
-    campaignId: string;
-    campaignState: string;
-    campaignSource: CampaignSource;
-    advertiserId: string;
-  }
-): ReactNode {
+export function adSetOnOffState(c: AdSetDetails): ReactNode {
   const [updateAdSet, { loading }] = useUpdateAdSetMutation({
     refetchQueries: [
       {
@@ -142,12 +136,7 @@ export function adSetOnOffState(
     ],
   });
 
-  const state =
-    c.campaignState === "under_review"
-      ? "under_review"
-      : c.state === "suspended"
-      ? "paused"
-      : c.state;
+  const state = displayFromCampaignState(c);
 
   return (
     <OnOff

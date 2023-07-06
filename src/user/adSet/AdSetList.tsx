@@ -10,6 +10,7 @@ import { CampaignSource } from "graphql/types";
 import { StatsMetric } from "user/analytics/analyticsOverview/types";
 import { AdSetFragment } from "graphql/ad-set.generated";
 import { AdDetailTable } from "user/views/user/AdDetailTable";
+import { displayFromCampaignState } from "util/displayState";
 
 interface Props {
   loading: boolean;
@@ -69,18 +70,6 @@ export function AdSetList({ campaign, loading, engagements }: Props) {
     advertiserId: campaign?.advertiser.id ?? "",
   }));
 
-  const getState = (c: {
-    campaignState: string;
-    campaignEnd: string;
-    state: string;
-  }) => {
-    return c.campaignState === "under_review"
-      ? "under_review"
-      : isAfterEndDate(c.campaignEnd)
-      ? "completed"
-      : c.state;
-  };
-
   const columns: ColumnDescriptor<AdSetDetails>[] = [
     {
       title: "On/Off",
@@ -100,9 +89,13 @@ export function AdSetList({ campaign, loading, engagements }: Props) {
     },
     {
       title: "Status",
-      value: (c) => getState(c),
+      value: (c) => displayFromCampaignState(c),
       extendedRenderer: (r) => (
-        <Status state={getState(r)} end={r.campaignEnd} />
+        <Status
+          state={displayFromCampaignState(r)}
+          end={r.campaignEnd}
+          start={r.campaignStart}
+        />
       ),
     },
     {

@@ -85,7 +85,7 @@ export function CampaignReportView() {
         engagements={filteredEngagements}
       />
 
-      {showReport && (
+      {showReport && filteredEngagements.length > 0 && (
         <CollapseBox header="Additional Report: OS Performance">
           <OsOverview engagements={filteredEngagements} />
         </CollapseBox>

@@ -13,11 +13,11 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
+import { UserMenu } from "components/Navigation/UserMenu";
+import { DraftMenu } from "components/Navigation/DraftMenu";
 import moment from "moment";
 import ads from "../../../brave-ads-black.svg";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import { DraftMenu } from "components/Navigation/DraftMenu";
-import { UserMenu } from "components/Navigation/UserMenu";
 
 TopBarProgress.config({
   barColors: {

@@ -65,12 +65,9 @@ export function EngagementsOverview({
 
   if (!engagements || engagements.length === 0) {
     return (
-      <Box p={3}>
-        <DashboardButton />
-        <Alert severity="info" sx={{ mt: 2, mb: 10 }}>
-          Reporting not available yet for <strong>{campaign.name}</strong>.
-        </Alert>
-      </Box>
+      <Alert severity="info" sx={{ mt: 2, mb: 3 }}>
+        Reporting not available yet for <strong>{campaign.name}</strong>.
+      </Alert>
     );
   }
 
