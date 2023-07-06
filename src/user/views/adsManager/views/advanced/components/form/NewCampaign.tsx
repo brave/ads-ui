@@ -37,8 +37,11 @@ export function NewCampaign() {
       const campaign = data.createCampaign;
       localStorage.removeItem(params.draftId);
       setDrafts();
-      if (campaign.paymentType !== PaymentType.Stripe) {
-        history.push("/user/main/complete/new");
+      if (
+        campaign.paymentType === PaymentType.Netsuite ||
+        campaign.paymentType === PaymentType.ManualBat
+      ) {
+        history.push(`/user/main/complete/new?referenceId=${campaign.id}`);
       } else {
         createPaymentSession(data.createCampaign.id);
       }
