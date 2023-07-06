@@ -111,11 +111,15 @@ export const clearCredentials = async (): Promise<void> => {
 };
 
 export const getLink = async (user: { email: string }): Promise<void> => {
-  await fetch(buildAdServerV2Endpoint(`/auth/magic-link?email=${user.email}`), {
-    method: "GET",
-    mode: "cors",
-    credentials: "include",
-  });
+  const encodedEmail = encodeURIComponent(user.email.trim());
+  await fetch(
+    buildAdServerV2Endpoint(`/auth/magic-link?email=${encodedEmail}`),
+    {
+      method: "GET",
+      mode: "cors",
+      credentials: "include",
+    }
+  );
 };
 
 export const authorize = async (req: {

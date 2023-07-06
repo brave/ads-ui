@@ -70,7 +70,8 @@
     "vitest": "0.31.4"
   },
   "overrides": {
-    "semver": "7.5.2"
+    "semver": "7.5.2",
+    "optionator": "0.9.3"
   },
   "browserslist": [
     ">0.2%",
