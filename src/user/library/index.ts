@@ -220,6 +220,7 @@ export function transformEditForm(
     startAt: form.startAt,
     state: form.state,
     type: form.type,
+    paymentType: form.paymentType,
     adSets: form.adSets.map((adSet) => ({
       id: adSet.id,
       segments: adSet.segments.map((v) => ({ code: v.code, name: v.name })),

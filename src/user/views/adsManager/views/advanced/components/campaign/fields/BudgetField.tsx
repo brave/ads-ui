@@ -1,4 +1,4 @@
-import { Box, Divider, InputAdornment, Stack, Typography } from "@mui/material";
+import { InputAdornment, Stack, Typography } from "@mui/material";
 import { FormikRadioControl, FormikTextField } from "form/FormikHelpers";
 import React, { useEffect, useState } from "react";
 import { useFormikContext } from "formik";
@@ -62,7 +62,11 @@ export function BudgetField({ isEdit }: Props) {
               : undefined
           }
           error={!!errors.budget || !!errors.dailyBudget}
-          disabled={isEdit && !advertiser.selfServiceSetPrice}
+          disabled={
+            isEdit &&
+            !advertiser.selfServiceSetPrice &&
+            values.state !== "draft"
+          }
         />
 
         {!advertiser.selfServiceSetPrice ? (
@@ -85,7 +89,7 @@ export function BudgetField({ isEdit }: Props) {
                   <InputAdornment position="start">$</InputAdornment>
                 ),
               }}
-              disabled={isEdit}
+              disabled={isEdit && values.state !== "draft"}
             />
 
             <FormikRadioControl
@@ -94,7 +98,7 @@ export function BudgetField({ isEdit }: Props) {
                 { value: "cpm", label: "CPM (Impressions)" },
                 { value: "cpc", label: "CPC (Clicks)" },
               ]}
-              disabled={isEdit}
+              disabled={isEdit && values.state !== "draft"}
             />
           </Stack>
         )}
@@ -108,7 +112,7 @@ export function BudgetField({ isEdit }: Props) {
             can begin.
           </Typography>
           <FormikRadioControl
-            disabled={isEdit}
+            disabled={isEdit && values.state !== "draft"}
             name="paymentType"
             options={[
               { label: "USD", value: advertiser.selfServicePaymentType },
