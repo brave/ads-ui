@@ -299,10 +299,10 @@ it("should calculate overall stats", () => {
 
 it("should calculate specific time series data by time range", () => {
   const metrics: Metrics = {
-    metric1: "views",
-    metric2: "clicks",
-    metric3: "conversions",
-    metric4: "landings",
+    metric1: { key: "views", active: true },
+    metric2: { key: "clicks", active: true },
+    metric3: { key: "conversions", active: true },
+    metric4: { key: "landings", active: true },
   };
 
   const stats = processData(engagements, metrics, "hourly");

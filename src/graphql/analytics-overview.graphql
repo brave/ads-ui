@@ -40,9 +40,17 @@ fragment CampaignWithEngagements on Campaign {
 
 query analyticOverview($id: String!) {
   campaign(id: $id) {
-    ...Campaign
-    engagements {
-      ...Engagement
-    }
+    ...CampaignWithEngagements
+  }
+}
+
+query engagementOverview($advertiserId: String!, $filter: CampaignFilter) {
+  engagementsOverview(advertiserId: $advertiserId, filter: $filter) {
+    date
+    click
+    view
+    landed
+    spend
+    campaignId
   }
 }

@@ -1,12 +1,16 @@
 import React from "react";
-import { Box, Button, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Button, Stack, Tab, Tabs, Typography } from "@mui/material";
 import { EngagementChartType } from "../types";
+import { Status } from "components/Campaigns/Status";
+import { CampaignSummaryFragment } from "graphql/campaign.generated";
 
 interface HeaderProps {
   onSetGroup: (s: string) => void;
-  onSetEngagement: (s: EngagementChartType) => void;
   grouping: string;
-  engagement: string;
+  campaign: Pick<
+    CampaignSummaryFragment,
+    "startAt" | "endAt" | "state" | "name"
+  >;
 }
 
 interface GroupProps {
@@ -36,36 +40,10 @@ const Grouping = ({ onSetGroup, label, group, grouping }: GroupProps) => {
   );
 };
 
-interface EngagementProps {
-  value: string;
-  onSetEngagement: (e: EngagementChartType) => void;
-}
-
-const Engagement = ({ value, onSetEngagement }: EngagementProps) => {
-  return (
-    <Box display="flex" flexDirection="row" alignItems="center" ml={1}>
-      <Typography variant="body2" sx={{ mr: 1 }}>
-        Engagements:
-      </Typography>
-      <Tabs
-        value={value}
-        onChange={(event, newValue) => {
-          onSetEngagement(newValue);
-        }}
-      >
-        <Tab label="Campaign" value="campaign" />
-        <Tab label="Ad Set" value="creativeset" />
-        <Tab label="Ad" value="creative" />
-      </Tabs>
-    </Box>
-  );
-};
-
 export default function EngagementHeader({
   onSetGroup,
   grouping,
-  engagement,
-  onSetEngagement,
+  campaign,
 }: HeaderProps) {
   const groups: Group[] = [
     { label: "Hour", group: "hourly" },
@@ -77,16 +55,22 @@ export default function EngagementHeader({
   return (
     <Box
       sx={{
-        width: "100%",
         height: "50px",
         backgroundColor: "white",
-        borderBottom: "1px solid #ededed",
         display: "flex",
         justifyContent: "center",
         paddingRight: "12px",
+        borderRadius: "12px",
       }}
     >
-      <Engagement value={engagement} onSetEngagement={onSetEngagement} />
+      <Stack direction="row" spacing={2} p={2} alignItems="center">
+        <Typography variant="h2">{campaign.name}</Typography>
+        <Status
+          state={campaign.state}
+          start={campaign.startAt}
+          end={campaign.endAt}
+        />
+      </Stack>
       {groups.map((g) => (
         <Grouping
           onSetGroup={onSetGroup}

@@ -1,19 +1,12 @@
-import { Box, CardContent } from "@mui/material";
+import { Alert, Box, Divider, Skeleton } from "@mui/material";
 import HighchartsReact from "highcharts-react-official";
 import * as Highcharts from "highcharts";
 import React, { useState } from "react";
-import _ from "lodash";
 import {
   CampaignWithEngagementsFragment,
   EngagementFragment,
 } from "graphql/analytics-overview.generated";
-import { AdSetFragment } from "graphql/ad-set.generated";
-import {
-  EngagementChartType,
-  Metrics,
-  OverviewDetail,
-  StatsMetric,
-} from "../../types";
+import { Metrics, StatsMetric } from "../../types";
 import {
   prepareChart,
   processData,
@@ -23,125 +16,125 @@ import MetricFilter from "../../components/MetricFilter";
 import EngagementHeader from "../../components/EngagementHeader";
 import LiveFeed from "../../components/LiveFeed";
 import { CampaignFormat } from "graphql/types";
-import { CardContainer } from "components/Card/CardContainer";
+import { ErrorDetail } from "components/Error/ErrorDetail";
+import { DashboardButton } from "components/Button/DashboardButton";
+import { ApolloError } from "@apollo/client";
+import _ from "lodash";
 
 interface Props {
-  engagements: EngagementFragment[];
-  campaign: Omit<CampaignWithEngagementsFragment, "engagements">;
-  adSets: AdSetFragment[];
+  loading: boolean;
+  campaign?: Omit<CampaignWithEngagementsFragment, "engagements"> | null;
+  engagements?: EngagementFragment[];
+  error?: ApolloError;
 }
 
-export function EngagementsOverview({ engagements, campaign, adSets }: Props) {
-  const campaignOverview = {
-    name: campaign.name,
-    state: campaign.state,
-    id: campaign.id,
-  };
-  const [grouping, setGrouping] = useState("daily");
-  const [engagementType, setEngagementType] =
-    useState<EngagementChartType>("campaign");
-  const [overview, setOverview] = useState<OverviewDetail>(campaignOverview);
-  const isNtp = campaign.format == CampaignFormat.NtpSi;
+export function EngagementsOverview({
+  engagements,
+  campaign,
+  error,
+  loading,
+}: Props) {
+  if (error) {
+    return (
+      <ErrorDetail
+        error={error}
+        additionalDetails="Unable to retrieve reporting data for this Campaign."
+      />
+    );
+  }
 
-  // Only care about name / id / state
-  const mappedAdSets: OverviewDetail[] = _.map(adSets, (i) =>
-    _.pick(i, ["id", "name", "state"])
-  );
-  const mappedAds: OverviewDetail[] = _.uniqBy(
-    _.map(_.flatMap(adSets, "ads"), (i) => ({
-      id: i.creative.id,
-      name: i.creative.name,
-      state: i.creative.state,
-    })),
-    "id"
-  );
+  if (loading) {
+    return (
+      <Box padding={2}>
+        <Skeleton variant="rounded" height="250px" />
+      </Box>
+    );
+  }
+
+  if (!campaign) {
+    return null;
+  }
+
+  if (campaign?.format === CampaignFormat.NtpSi) {
+    return (
+      <Alert severity="info" sx={{ mt: 2, mb: 2 }}>
+        Please ask your Account Manager for reports on campaigns of this format.
+      </Alert>
+    );
+  }
+
+  if (!engagements || engagements.length === 0) {
+    return (
+      <Alert severity="info" sx={{ mt: 2, mb: 3 }}>
+        Reporting not available yet for <strong>{campaign.name}</strong>.
+      </Alert>
+    );
+  }
+
+  const [grouping, setGrouping] = useState("daily");
 
   const [metrics, setMetrics] = useState<Metrics>({
-    metric1: "views",
-    metric2: "clicks",
-    metric3: "conversions",
-    metric4: "landings",
+    metric1: { key: "views", active: true },
+    metric2: { key: "clicks", active: false },
+    metric3: { key: "dismissals", active: false },
+    metric4: { key: "landings", active: false },
   });
 
-  const setActiveMetric = (key: keyof Metrics, value: keyof StatsMetric) => {
-    const metricsCopy = metrics;
-    metricsCopy[key] = value;
+  const setActiveMetric = (
+    metric: keyof Metrics,
+    value: keyof StatsMetric,
+    active: boolean
+  ) => {
+    const metricsCopy = _.cloneDeep(metrics);
+    const selectedMetric = metricsCopy[metric];
+
+    if (selectedMetric) {
+      selectedMetric.key = value;
+      selectedMetric.active = active;
+    }
     setMetrics({ ...metricsCopy });
   };
 
-  const setActiveDataOverview = (type: EngagementChartType, id?: string) => {
-    if (type === "campaign") {
-      setOverview(campaignOverview);
-      return engagements;
-    }
-
-    const filterId = !!id ? id : engagements[0][`${type}id`];
-    const activeOverviewList =
-      type === "creativeset" ? mappedAdSets : mappedAds;
-    const detail = activeOverviewList.find((o) => o.id === filterId);
-    if (detail) {
-      setOverview({ id: detail.id, state: detail.state, name: detail.name });
-    }
-  };
-
-  const filtered =
-    engagementType === "campaign"
-      ? engagements
-      : engagements.filter((e) => e[`${engagementType}id`] === overview.id);
-  const processedData = processData(filtered, metrics, grouping);
-  const processedStats = processStats(filtered);
+  const processedData = processData(engagements, metrics, grouping);
+  const processedStats = processStats(engagements);
   const options = prepareChart(metrics, processedData);
 
   return (
-    <CardContainer header={`${campaign.name}: Overview`}>
-      <Box display="flex">
-        <Box width="75%">
-          <MetricFilter
-            processedStats={processedStats}
-            metrics={metrics}
-            onSetMetric={setActiveMetric}
-            isNtp={isNtp}
-          />
-
-          <Box border="1px solid #ededed" borderRadius="4px" height="450px">
-            <EngagementHeader
-              onSetGroup={setGrouping}
-              grouping={grouping}
-              onSetEngagement={(t: EngagementChartType) => {
-                setEngagementType(t);
-                setActiveDataOverview(t);
-              }}
-              engagement={engagementType}
-            />
-            <Box
-              paddingLeft="28px"
-              paddingRight="28px"
-              paddingTop="14px"
-              paddingBottom="14px"
-            >
-              <HighchartsReact highcharts={Highcharts} options={options} />
-            </Box>
+    <Box display="flex" flexDirection="row">
+      <MetricFilter
+        processedStats={processedStats}
+        metrics={metrics}
+        onSetMetric={setActiveMetric}
+      />
+      <Box flexGrow={1} bgcolor="#fff" sx={{ borderRadius: "12px" }}>
+        <EngagementHeader
+          campaign={campaign}
+          onSetGroup={setGrouping}
+          grouping={grouping}
+        />
+        <Box
+          paddingLeft="28px"
+          paddingRight="28px"
+          paddingTop="14px"
+          paddingBottom="14px"
+        >
+          <Box>
+            <HighchartsReact highcharts={Highcharts} options={options} />
           </Box>
         </Box>
 
-        {/* Right Side (Live Feed) */}
+        <Divider />
         <LiveFeed
           overview={{
             currency: campaign.currency,
             budget: campaign.budget,
-            ...overview,
+            name: campaign.name,
+            state: campaign.state,
+            id: campaign.id,
           }}
-          onSelect={(id: string) => {
-            setActiveDataOverview(engagementType, id);
-          }}
-          uniqueEngagements={
-            engagementType === "creative" ? mappedAds : mappedAdSets
-          }
-          engagementType={engagementType}
           processed={processedStats}
-          isNtp={isNtp}
         />
       </Box>
-    </CardContainer>
+    </Box>
   );
 }

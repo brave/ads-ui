@@ -7,16 +7,16 @@ import {
   createHttpLink,
   InMemoryCache,
 } from "@apollo/client";
-import AnalyticsOverview from "./analytics/AnalyticsOverview";
 import Settings from "./settings/Settings";
 import { Box } from "@mui/material";
 import { NewCampaign } from "./views/adsManager/views/advanced/components/form/NewCampaign";
 import { EditCampaign } from "./views/adsManager/views/advanced/components/form/EditCampaign";
 import { CompletionForm } from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
-import { MainView } from "user/views/user/MainView";
 import { AdvertiserAgreed } from "auth/components/AdvertiserAgreed";
-import { Navbar } from "user/components/navbar/Navbar";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { Navbar } from "components/Navigation/Navbar";
+import { CampaignView } from "user/views/user/CampaignView";
+import { CampaignReportView } from "user/views/user/CampaignReportView";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -63,20 +63,20 @@ export function User() {
 
               {/* /campaigns/:campaignId/analytics - */}
               <ProtectedRoute
-                path="/user/main/campaign/:campaignId/analytics/overview"
-                authedComponent={AnalyticsOverview}
+                path="/user/main/campaign/:campaignId"
+                authedComponent={CampaignReportView}
               />
 
               <Route path="/user/main/settings" component={Settings} />
 
               <ProtectedRoute
-                path="/user/main"
-                authedComponent={MainView}
+                path="/user/main/campaign"
+                authedComponent={CampaignView}
                 unauthedComponent={AdvertiserAgreed}
               />
 
               {/* default */}
-              <Redirect to="/user/main" />
+              <Redirect to="/user/main/campaign" />
             </Switch>
           </Box>
         </Box>

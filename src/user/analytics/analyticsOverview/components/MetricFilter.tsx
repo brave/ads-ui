@@ -1,30 +1,35 @@
 import MetricSelect from "user/analytics/analyticsOverview/components/MetricSelect";
-import { Text } from "components/Text/Text";
-import React from "react";
-import { Box } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Stack, Switch, Tooltip, Typography } from "@mui/material";
 import { decideValueAttribute } from "user/analytics/analyticsOverview/lib/overview.library";
 import { Metrics, StatsMetric } from "user/analytics/analyticsOverview/types";
 
-interface FilterValue {
-  value: keyof StatsMetric;
-}
+type FilterMetric = {
+  key: keyof StatsMetric;
+  active: boolean;
+};
 
-type BoxProps = FilterValue & {
+type SetMetricFunc = (
+  key: keyof Metrics,
+  value: keyof StatsMetric,
+  active: boolean
+) => void;
+
+type BoxProps = {
+  filter: FilterMetric;
   processedStats: StatsMetric;
-  onSetMetric: (key: keyof Metrics, value: keyof StatsMetric) => void;
+  onSetMetric: SetMetricFunc;
   metric: string;
-  isNtp: boolean;
 };
 
 const FilterBox = ({
-  value,
+  filter,
   processedStats,
   onSetMetric,
   metric,
-  isNtp,
 }: BoxProps) => {
-  const processed = processedStats[value];
-  const attrs = decideValueAttribute(value);
+  const processed = processedStats[filter.key];
+  const attrs = decideValueAttribute(filter.key);
   const displayVal = attrs.decimal
     ? processed.toFixed(attrs.decimal)
     : processed.toLocaleString();
@@ -33,38 +38,35 @@ const FilterBox = ({
     <Box
       border="1px solid #ededed"
       borderRadius="4px"
-      height="130px"
-      width="195px"
-      marginRight="28px"
+      height="120px"
+      width="180px"
+      marginRight="20px"
+      bgcolor="#fff"
+      sx={{ borderRadius: "12px" }}
     >
-      <Box
-        width="100%"
-        height="56px"
-        bgcolor="white"
-        borderBottom="1px solid #ededed"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-      >
-        <MetricSelect
-          onSetMetric={onSetMetric}
-          initialValue={value}
-          metric={metric as keyof Metrics}
-          isNtp={isNtp}
-        />
-      </Box>
+      <MetricSelect
+        onSetMetric={(key, value) => onSetMetric(key, value, filter.active)}
+        initialValue={filter.key}
+        metric={metric as keyof Metrics}
+      />
       <Box
         display="flex"
-        height="74px"
-        justifyContent="center"
+        height="65px"
+        justifyContent="space-evenly"
         alignItems="center"
         width="100%"
       >
-        <Text
-          content={`${attrs.prefix ?? ""}${displayVal}${attrs.suffix ?? ""}`}
-          fontFamily={"Poppins"}
-          sizes={[18, 18, 42, 42, 22]}
-        />
+        <Typography>
+          {attrs.prefix ?? ""} {displayVal} {attrs.suffix ?? ""}
+        </Typography>
+        <Tooltip title={filter.active ? "Hide" : "Show"}>
+          <Switch
+            checked={filter.active}
+            onChange={() => {
+              onSetMetric(metric as keyof Metrics, filter.key, !filter.active);
+            }}
+          />
+        </Tooltip>
       </Box>
     </Box>
   );
@@ -72,34 +74,26 @@ const FilterBox = ({
 
 interface MetricProps {
   processedStats: StatsMetric;
-  onSetMetric: (key: keyof Metrics, value: keyof StatsMetric) => void;
+  onSetMetric: SetMetricFunc;
   metrics: Metrics;
-  isNtp: boolean;
 }
 
 export default function MetricFilter({
   processedStats,
   onSetMetric,
   metrics,
-  isNtp,
 }: MetricProps) {
   return (
-    <Box
-      display="flex"
-      marginBottom="28px"
-      marginTop="14px"
-      justifyContent="space-evenly"
-    >
+    <Stack direction="column" spacing={1}>
       {Object.entries(metrics).map((f, i) => (
         <FilterBox
-          value={f[1]}
+          filter={f[1]}
           processedStats={processedStats}
           onSetMetric={onSetMetric}
           metric={f[0]}
-          key={`${f[1]}-${i}`}
-          isNtp={isNtp}
+          key={`${f[1].key}-${i}`}
         />
       ))}
-    </Box>
+    </Stack>
   );
 }

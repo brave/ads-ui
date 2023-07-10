@@ -18,6 +18,8 @@ export type Scalars = {
   Float: number;
   /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
   DateTime: any;
+  /** The `Numeric` datatype represents a fixed-precision number, which does not suffer from the rounding errors of a javascript floating point number. It's always returned as a string, but for input types either a string or number can be used, though strings are preferred to avoid risk of inaccuracy. */
+  Numeric: any;
 };
 
 export type AdvertiserCampaignFilter = {
@@ -84,11 +86,30 @@ export type ChangeFilter = {
   referenceId?: InputMaybe<Scalars["String"]>;
 };
 
+export enum ConfirmationType {
+  Bookmark = "BOOKMARK",
+  Click = "CLICK",
+  ClientView = "CLIENT_VIEW",
+  Conversion = "CONVERSION",
+  Dismiss = "DISMISS",
+  Downvote = "DOWNVOTE",
+  Flag = "FLAG",
+  Land30 = "LAND30",
+  Land60 = "LAND60",
+  Landclick = "LANDCLICK",
+  Landed = "LANDED",
+  Upvote = "UPVOTE",
+  View = "VIEW",
+}
+
 export type CreateAdInput = {
   creativeId: Scalars["String"];
   creativeSetId?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["String"]>;
-  prices: Array<CreatePriceInput>;
+  /** The price in the owning campaign's currency for each single confirmation of the priceType specified. Note therefore that the caller is responsible for dividing cost-per-mille by 1000. */
+  price?: InputMaybe<Scalars["Numeric"]>;
+  priceType?: InputMaybe<ConfirmationType>;
+  prices?: InputMaybe<Array<CreatePriceInput>>;
   state?: InputMaybe<Scalars["String"]>;
   webhooks?: InputMaybe<Array<CreateWebhookInput>>;
 };
