@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { EnhancedTable, StandardRenderers } from "components/EnhancedTable";
-import { Link } from "@mui/material";
+import { IconButton, Link, Stack, Tooltip } from "@mui/material";
 import {
   campaignOnOffState,
   renderMonetaryAmount,
 } from "components/EnhancedTable/renderers";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 import { Status } from "components/Campaigns/Status";
 import { isAfterEndDate } from "util/isAfterEndDate";
 import { AdvertiserCampaignsFragment } from "graphql/advertiser.generated";
@@ -17,6 +17,9 @@ import {
 } from "user/analytics/renderers";
 import _ from "lodash";
 import { uiTextForCampaignFormat } from "user/library";
+import { CampaignSummaryFragment } from "graphql/campaign.generated";
+import { CampaignFormat, CampaignSource } from "graphql/types";
+import EditIcon from "@mui/icons-material/Edit";
 
 interface Props {
   advertiser?: AdvertiserCampaignsFragment | null;
@@ -63,13 +66,10 @@ export function CampaignList({ advertiser, fromDate }: Props) {
           title: "Campaign",
           value: (c) => c.name,
           extendedRenderer: (r) => (
-            <Link
-              component={RouterLink}
-              to={`/user/main/campaign/${r.id}`}
-              underline="none"
-            >
-              {r.name}
-            </Link>
+            <CampaignRow
+              campaign={r}
+              canEdit={advertiser?.selfServiceEdit ?? false}
+            />
           ),
         },
         {
@@ -138,5 +138,53 @@ export function CampaignList({ advertiser, fromDate }: Props) {
         },
       ]}
     />
+  );
+}
+
+function CampaignRow(props: {
+  canEdit: boolean;
+  campaign: CampaignSummaryFragment;
+}) {
+  const campaign = props.campaign;
+  const history = useHistory();
+  const canEdit = (r: CampaignSummaryFragment) => {
+    return (
+      props.canEdit &&
+      r.source === CampaignSource.SelfServe &&
+      r.format === CampaignFormat.PushNotification &&
+      r.state !== "completed"
+    );
+  };
+
+  return (
+    <Stack
+      display="flex"
+      justifyContent="space-between"
+      alignItems="center"
+      direction="row"
+    >
+      <Link
+        component={RouterLink}
+        to={`/user/main/campaign/${campaign.id}`}
+        underline="none"
+      >
+        {props.campaign.name}
+      </Link>
+      {canEdit(props.campaign) && (
+        <Tooltip title={`Edit ${campaign.name}`}>
+          <IconButton
+            size="small"
+            color="secondary"
+            onClick={() =>
+              history.push(
+                `/user/main/adsmanager/advanced/${campaign.id}/settings`,
+              )
+            }
+          >
+            <EditIcon />
+          </IconButton>
+        </Tooltip>
+      )}
+    </Stack>
   );
 }
