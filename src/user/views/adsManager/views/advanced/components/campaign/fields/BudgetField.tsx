@@ -6,7 +6,6 @@ import { CampaignForm } from "../../../../../types";
 import { differenceInHours } from "date-fns";
 import { MIN_PER_CAMPAIGN, MIN_PER_DAY } from "validation/CampaignSchema";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import { PaymentType } from "graphql/types";
 import _ from "lodash";
 import { CardContainer } from "components/Card/CardContainer";
 
@@ -102,24 +101,6 @@ export function BudgetField({ isEdit }: Props) {
             />
           </Stack>
         )}
-
-        <Stack spacing={1}>
-          <Typography variant="subtitle1" sx={{ fontWeight: 500, mt: 1 }}>
-            Payment Method
-          </Typography>
-          <Typography variant="body2">
-            Prepayment of the campaign budget is required before your campaign
-            can begin.
-          </Typography>
-          <FormikRadioControl
-            disabled={isEdit && values.state !== "draft"}
-            name="paymentType"
-            options={[
-              { label: "USD", value: advertiser.selfServicePaymentType },
-              { label: "BAT", value: PaymentType.Radom },
-            ]}
-          />
-        </Stack>
       </Stack>
     </CardContainer>
   );
