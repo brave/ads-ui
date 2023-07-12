@@ -28,6 +28,7 @@ export type CampaignForm = {
   name: string;
   state: string;
   type: "paid";
+  // this is per click for CPC campaigns, but per thousand views for CPM campaigns
   price: number;
   billingType: Billing;
   pacingStrategy: CampaignPacingStrategies;
