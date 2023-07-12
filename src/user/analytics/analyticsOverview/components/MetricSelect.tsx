@@ -7,16 +7,14 @@ interface PopoutProps {
   onSetMetric: (key: keyof Metrics, value: keyof StatsMetric) => void;
   initialValue: string;
   metric: keyof Metrics;
-  isNtp: Boolean;
 }
 
 export default function MetricSelect({
   initialValue,
   onSetMetric,
   metric,
-  isNtp,
 }: PopoutProps) {
-  const options = [
+  const options: { value: keyof StatsMetric; label: string }[] = [
     // TODO: commented out metrics in live feed, do we really need them in both?
     { value: "views", label: "Impressions" },
     { value: "clicks", label: "Clicks" },
@@ -28,14 +26,11 @@ export default function MetricSelect({
     // { value: "downvotes", label: "Downvotes" },
     { value: "convRate", label: "Conversion Rate" },
     { value: "landingRate", label: "Click to 10s Visit Rate" },
+    { value: "visitRate", label: "10s Visit Rate" },
+    { value: "dismissRate", label: "Dismissal Rate" },
+    { value: "spend", label: "Spend" },
+    { value: "cpa", label: "CPA" },
   ];
-
-  if (!isNtp) {
-    options.push(
-      { value: "spend", label: "Spend" },
-      { value: "cpa", label: "CPA" }
-    );
-  }
 
   const [open, setOpen] = useState(false);
   const initial = options.find((o) => o.value === initialValue);
@@ -66,6 +61,7 @@ export default function MetricSelect({
         "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
           border: "none",
         },
+        borderBottom: "1px solid #ededed",
       }}
       value={value}
       isOptionEqualToValue={(v, o) => v.value === o.value}

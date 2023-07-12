@@ -1,8 +1,8 @@
 export type Metrics = {
-  metric1?: keyof StatsMetric;
-  metric2?: keyof StatsMetric;
-  metric3?: keyof StatsMetric;
-  metric4?: keyof StatsMetric;
+  metric1?: { key: keyof StatsMetric; active: boolean };
+  metric2?: { key: keyof StatsMetric; active: boolean };
+  metric3?: { key: keyof StatsMetric; active: boolean };
+  metric4?: { key: keyof StatsMetric; active: boolean };
 };
 
 export type OS = {

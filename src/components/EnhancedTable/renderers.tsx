@@ -5,9 +5,9 @@ import { CellValue } from "./EnhancedTable";
 import React, { ReactChild, ReactNode } from "react";
 import { formatInTimeZone } from "date-fns-tz";
 import enUS from "date-fns/locale/en-US";
-import { populateFilter } from "user/library";
 import {
-  CampaignFragment,
+  CampaignSummaryFragment,
+  LoadCampaignAdsDocument,
   useUpdateCampaignMutation,
 } from "graphql/campaign.generated";
 import { AdvertiserCampaignsDocument } from "graphql/advertiser.generated";
@@ -17,9 +17,10 @@ import {
   useUpdateAdSetMutation,
 } from "graphql/ad-set.generated";
 import { OnOff } from "../Switch/OnOff";
-import { CreativeFragment } from "graphql/creative.generated";
 import { CampaignSource } from "graphql/types";
 import { AdDetails } from "user/ads/AdList";
+import { displayFromCampaignState } from "util/displayState";
+import { AdSetDetails } from "user/adSet/AdSetList";
 
 export type CellValueRenderer = (value: CellValue) => React.ReactNode;
 const ADS_DEFAULT_TIMEZONE = "America/New_York";
@@ -95,7 +96,7 @@ export function renderMonetaryAmount(
 }
 
 export function campaignOnOffState(
-  c: CampaignFragment & { fromDate: Date | null; advertiserId: string }
+  c: CampaignSummaryFragment & { fromDate: Date | null; advertiserId: string }
 ): ReactNode {
   const [updateCampaign, { loading }] = useUpdateCampaignMutation({
     refetchQueries: [
@@ -103,7 +104,7 @@ export function campaignOnOffState(
         query: AdvertiserCampaignsDocument,
         variables: {
           id: c.advertiserId,
-          filter: populateFilter(c.fromDate),
+          filter: { from: c.fromDate },
         },
       },
     ],
@@ -125,31 +126,17 @@ export function campaignOnOffState(
   );
 }
 
-export function adSetOnOffState(
-  c: AdSetFragment & {
-    campaignEnd: string;
-    campaignId: string;
-    campaignState: string;
-    campaignSource: CampaignSource;
-    advertiserId: string;
-    fromDate: Date | null;
-  }
-): ReactNode {
+export function adSetOnOffState(c: AdSetDetails): ReactNode {
   const [updateAdSet, { loading }] = useUpdateAdSetMutation({
     refetchQueries: [
       {
-        query: AdvertiserCampaignsDocument,
-        variables: { id: c.advertiserId, filter: populateFilter(c.fromDate) },
+        query: LoadCampaignAdsDocument,
+        variables: { id: c.campaignId },
       },
     ],
   });
 
-  const state =
-    c.campaignState === "under_review"
-      ? "under_review"
-      : c.state === "suspended"
-      ? "paused"
-      : c.state;
+  const state = displayFromCampaignState(c);
 
   return (
     <OnOff
@@ -184,7 +171,7 @@ export function adOnOffState(c: AdDetails): ReactNode {
     refetchQueries: [
       {
         query: AdvertiserCampaignsDocument,
-        variables: { id: c.advertiserId, filter: populateFilter(c.fromDate) },
+        variables: { id: c.campaignId },
       },
     ],
   });

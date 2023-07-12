@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { isPast, parseISO } from "date-fns";
-import { Switch, Tooltip } from "@mui/material";
+import { Switch, Tooltip, Typography } from "@mui/material";
 import { CampaignSource } from "graphql/types";
 
 interface Props {
@@ -29,15 +29,19 @@ export function OnOff({ state, loading, end, onChange, type, source }: Props) {
       }
     >
       <span>
-        <Switch
-          onChange={(e) => {
-            const theState = e.target.checked ? "active" : "paused";
-            setChecked(e.target.checked);
-            onChange(theState);
-          }}
-          checked={checked}
-          disabled={loading || !enabled}
-        />
+        {enabled ? (
+          <Switch
+            onChange={(e) => {
+              const theState = e.target.checked ? "active" : "paused";
+              setChecked(e.target.checked);
+              onChange(theState);
+            }}
+            checked={checked}
+            disabled={loading}
+          />
+        ) : (
+          <Typography sx={{ textAlign: "center" }}>-</Typography>
+        )}
       </span>
     </Tooltip>
   );

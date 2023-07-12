@@ -6,11 +6,12 @@ import { downloadCSV } from "../lib/csv.library";
 import { DateRangePicker } from "components/Date/DateRangePicker";
 import { useUser } from "auth/hooks/queries/useUser";
 import { DashboardButton } from "components/Button/DashboardButton";
+import { CampaignFormat } from "graphql/types";
 
 interface DownloaderProps {
   startDate: Date | undefined;
   endDate: Date;
-  campaign: { id: string; name: string };
+  campaign: { id: string; name: string; format?: CampaignFormat };
   onSetDate: (val: Date, type: "start" | "end") => void;
 }
 
@@ -51,6 +52,7 @@ export default function ReportUtils({
           loading={downloadingCSV}
           loadingPosition="start"
           startIcon={<SaveIcon />}
+          disabled={campaign.format === CampaignFormat.NtpSi}
           onClick={() =>
             downloadCSV(
               campaign.id,

@@ -11,7 +11,9 @@ export function BoxContainer(
           {props.header}
         </Typography>
       )}
-      <Box mb={2}>{props.children}</Box>
+      <Box mb={2} display="flex">
+        {props.children}
+      </Box>
     </Box>
   );
 }
