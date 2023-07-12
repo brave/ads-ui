@@ -17,7 +17,7 @@ export function useCreatePaymentSession() {
       .catch((e) => {
         alert("Unable to create payment session. Please try again.");
         setLoading(false);
-        history.push(`/user/main/adsmanager/advanced/${campaignId}`);
+        history.push(`/user/main/adsmanager/advanced/${campaignId}/settings`);
       });
   }, []);
 
