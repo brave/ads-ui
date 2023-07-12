@@ -4,6 +4,11 @@ const config: CodegenConfig = {
   schema: "../ads-serve/src/graphql/schema.graphql",
   documents: "./src/**/*.graphql",
   hooks: { afterAllFileWrite: ["prettier --write"] },
+  config: {
+    scalars: {
+      Numeric: "string",
+    },
+  },
   generates: {
     "src/": {
       preset: "near-operation-file",

@@ -61,7 +61,8 @@ export type CampaignFragment = {
       __typename?: "Ad";
       id: string;
       state: string;
-      prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
+      price: string;
+      priceType: Types.ConfirmationType;
       creative: {
         __typename?: "Creative";
         id: string;
@@ -145,7 +146,8 @@ export type CampaignAdsFragment = {
       __typename?: "Ad";
       id: string;
       state: string;
-      prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
+      price: string;
+      priceType: Types.ConfirmationType;
       creative: {
         __typename?: "Creative";
         id: string;
@@ -228,7 +230,8 @@ export type LoadCampaignQuery = {
         __typename?: "Ad";
         id: string;
         state: string;
-        prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
+        price: string;
+        priceType: Types.ConfirmationType;
         creative: {
           __typename?: "Creative";
           id: string;
@@ -294,7 +297,8 @@ export type LoadCampaignAdsQuery = {
         __typename?: "Ad";
         id: string;
         state: string;
-        prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
+        price: string;
+        priceType: Types.ConfirmationType;
         creative: {
           __typename?: "Creative";
           id: string;
