@@ -18,7 +18,7 @@ export function ConversionDisplay({ conversions, convErrors }: Props) {
 
   function extractConversionError(
     idx: number,
-    field: keyof Conversion
+    field: keyof Conversion,
   ): string | undefined {
     const errorObj = convErrors?.[idx];
 

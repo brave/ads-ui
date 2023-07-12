@@ -35,7 +35,7 @@ export function useUrlValidation(url: string): UrlValidationResult {
 
   const debouncedSetUrlToCheck = useMemo(
     () => _.debounce(setUrlToCheck, 2000),
-    [setUrlToCheck]
+    [setUrlToCheck],
   );
 
   // cancel the debounce on onmount

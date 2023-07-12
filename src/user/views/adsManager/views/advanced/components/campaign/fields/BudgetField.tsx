@@ -19,7 +19,7 @@ export function BudgetField({ isEdit }: Props) {
   const { values, setFieldValue, errors } = useFormikContext<CampaignForm>();
   const [minBudget, setMinBudget] = useState(MIN_PER_CAMPAIGN);
   const campaignRuntime = Math.floor(
-    differenceInHours(new Date(values.endAt), new Date(values.startAt)) / 24
+    differenceInHours(new Date(values.endAt), new Date(values.startAt)) / 24,
   );
 
   useEffect(() => {

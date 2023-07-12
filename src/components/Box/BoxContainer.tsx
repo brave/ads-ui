@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from "react";
 import { Box, Container, Typography } from "@mui/material";
 
 export function BoxContainer(
-  props: { header?: React.ReactNode } & PropsWithChildren
+  props: { header?: React.ReactNode } & PropsWithChildren,
 ) {
   return (
     <Box mr={2}>

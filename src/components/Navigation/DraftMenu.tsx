@@ -49,7 +49,7 @@ export function DraftMenu() {
             key={`draft-${d.draftId}-${idx}`}
             onClick={() => {
               history.push(
-                `/user/main/adsmanager/advanced/new/${d.draftId}/settings`
+                `/user/main/adsmanager/advanced/new/${d.draftId}/settings`,
               );
               setAnchorEl(null);
             }}

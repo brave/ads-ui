@@ -59,7 +59,7 @@ export default function ReportUtils({
               campaign.name,
               userId ?? "",
               false,
-              setDownloadingCSV
+              setDownloadingCSV,
             )
           }
         >

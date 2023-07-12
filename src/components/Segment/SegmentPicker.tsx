@@ -17,13 +17,13 @@ interface Props {
 export const SegmentPicker: React.FC<Props> = ({ idx }: Props) => {
   const { data } = useSegmentsQuery();
   const activeSegments = _.sortBy(data?.segments?.data ?? [], (s) =>
-    s.name.toLowerCase()
+    s.name.toLowerCase(),
   );
 
   const [, targetMeta] = useField<boolean>(`adSets.${idx}.isNotTargeting`);
 
   const [, meta, helper] = useField<SegmentFragment[]>(
-    `adSets.${idx}.segments`
+    `adSets.${idx}.segments`,
   );
 
   useEffect(() => {

@@ -83,7 +83,7 @@ export const StandardRenderers: Record<string, CellValueRenderer> = {
 
 export function renderMonetaryAmount(
   value: number,
-  currency: string
+  currency: string,
 ): ReactNode {
   if (currency === "USD") {
     return `$${value.toLocaleString("en", {
@@ -96,7 +96,7 @@ export function renderMonetaryAmount(
 }
 
 export function campaignOnOffState(
-  c: CampaignSummaryFragment & { fromDate: Date | null; advertiserId: string }
+  c: CampaignSummaryFragment & { fromDate: Date | null; advertiserId: string },
 ): ReactNode {
   const [updateCampaign, { loading }] = useUpdateCampaignMutation({
     refetchQueries: [

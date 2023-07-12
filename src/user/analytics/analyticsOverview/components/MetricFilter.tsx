@@ -12,7 +12,7 @@ type FilterMetric = {
 type SetMetricFunc = (
   key: keyof Metrics,
   value: keyof StatsMetric,
-  active: boolean
+  active: boolean,
 ) => void;
 
 type BoxProps = {

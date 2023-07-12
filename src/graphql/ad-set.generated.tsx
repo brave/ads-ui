@@ -31,7 +31,8 @@ export type AdSetFragment = {
     __typename?: "Ad";
     id: string;
     state: string;
-    prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
+    price: string;
+    priceType: Types.ConfirmationType;
     creative: {
       __typename?: "Creative";
       id: string;
@@ -54,7 +55,8 @@ export type AdFragment = {
   __typename?: "Ad";
   id: string;
   state: string;
-  prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
+  price: string;
+  priceType: Types.ConfirmationType;
   creative: {
     __typename?: "Creative";
     id: string;
@@ -105,7 +107,8 @@ export type CreateAdSetMutation = {
       __typename?: "Ad";
       id: string;
       state: string;
-      prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
+      price: string;
+      priceType: Types.ConfirmationType;
       creative: {
         __typename?: "Creative";
         id: string;
@@ -158,7 +161,8 @@ export type UpdateAdSetMutation = {
       __typename?: "Ad";
       id: string;
       state: string;
-      prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
+      price: string;
+      priceType: Types.ConfirmationType;
       creative: {
         __typename?: "Creative";
         id: string;
@@ -178,35 +182,6 @@ export type UpdateAdSetMutation = {
   };
 };
 
-export type CreateAdMutationVariables = Types.Exact<{
-  createAdInput: Types.CreateAdInput;
-}>;
-
-export type CreateAdMutation = {
-  __typename?: "Mutation";
-  createAd: {
-    __typename?: "Ad";
-    id: string;
-    state: string;
-    prices: Array<{ __typename?: "AdPrice"; amount: number; type: string }>;
-    creative: {
-      __typename?: "Creative";
-      id: string;
-      createdAt: any;
-      modifiedAt: any;
-      name: string;
-      state: string;
-      type: { __typename?: "CreativeType"; code: string };
-      payloadNotification?: {
-        __typename?: "NotificationPayload";
-        body: string;
-        title: string;
-        targetUrl: string;
-      } | null;
-    };
-  };
-};
-
 export type UpdateAdMutationVariables = Types.Exact<{
   updateAdInput: Types.UpdateAdInput;
 }>;
@@ -220,10 +195,8 @@ export const AdFragmentDoc = gql`
   fragment Ad on Ad {
     id
     state
-    prices {
-      amount
-      type
-    }
+    price
+    priceType
     creative {
       ...Creative
     }
@@ -294,12 +267,12 @@ export function useCreateAdSetMutation(
   baseOptions?: Apollo.MutationHookOptions<
     CreateAdSetMutation,
     CreateAdSetMutationVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<CreateAdSetMutation, CreateAdSetMutationVariables>(
     CreateAdSetDocument,
-    options
+    options,
   );
 }
 export type CreateAdSetMutationHookResult = ReturnType<
@@ -345,12 +318,12 @@ export function useUpdateAdSetMutation(
   baseOptions?: Apollo.MutationHookOptions<
     UpdateAdSetMutation,
     UpdateAdSetMutationVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<UpdateAdSetMutation, UpdateAdSetMutationVariables>(
     UpdateAdSetDocument,
-    options
+    options,
   );
 }
 export type UpdateAdSetMutationHookResult = ReturnType<
@@ -361,54 +334,6 @@ export type UpdateAdSetMutationResult =
 export type UpdateAdSetMutationOptions = Apollo.BaseMutationOptions<
   UpdateAdSetMutation,
   UpdateAdSetMutationVariables
->;
-export const CreateAdDocument = gql`
-  mutation createAd($createAdInput: CreateAdInput!) {
-    createAd(createAdInput: $createAdInput) {
-      ...Ad
-    }
-  }
-  ${AdFragmentDoc}
-`;
-export type CreateAdMutationFn = Apollo.MutationFunction<
-  CreateAdMutation,
-  CreateAdMutationVariables
->;
-
-/**
- * __useCreateAdMutation__
- *
- * To run a mutation, you first call `useCreateAdMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateAdMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createAdMutation, { data, loading, error }] = useCreateAdMutation({
- *   variables: {
- *      createAdInput: // value for 'createAdInput'
- *   },
- * });
- */
-export function useCreateAdMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    CreateAdMutation,
-    CreateAdMutationVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CreateAdMutation, CreateAdMutationVariables>(
-    CreateAdDocument,
-    options
-  );
-}
-export type CreateAdMutationHookResult = ReturnType<typeof useCreateAdMutation>;
-export type CreateAdMutationResult = Apollo.MutationResult<CreateAdMutation>;
-export type CreateAdMutationOptions = Apollo.BaseMutationOptions<
-  CreateAdMutation,
-  CreateAdMutationVariables
 >;
 export const UpdateAdDocument = gql`
   mutation updateAd($updateAdInput: UpdateAdInput!) {
@@ -443,12 +368,12 @@ export function useUpdateAdMutation(
   baseOptions?: Apollo.MutationHookOptions<
     UpdateAdMutation,
     UpdateAdMutationVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<UpdateAdMutation, UpdateAdMutationVariables>(
     UpdateAdDocument,
-    options
+    options,
   );
 }
 export type UpdateAdMutationHookResult = ReturnType<typeof useUpdateAdMutation>;

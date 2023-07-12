@@ -1,23 +1,15 @@
 import {
-  AdvertiserCampaignFilter,
   CampaignFormat,
+  ConfirmationType,
   CreateAdInput,
-  CreateAdSetInput,
   CreateCampaignInput,
   CreateNotificationCreativeInput,
   GeocodeInput,
-  UpdateAdSetInput,
   UpdateCampaignInput,
   UpdateNotificationCreativeInput,
 } from "graphql/types";
-import axios from "axios";
-import { DocumentNode, print } from "graphql";
 import { CampaignFragment } from "graphql/campaign.generated";
-import { AdFragment, CreateAdDocument } from "graphql/ad-set.generated";
-import {
-  CreateNotificationCreativeDocument,
-  UpdateNotificationCreativeDocument,
-} from "graphql/creative.generated";
+import { AdFragment } from "graphql/ad-set.generated";
 import {
   Billing,
   CampaignForm,
@@ -28,11 +20,7 @@ import {
   Segment,
 } from "user/views/adsManager/types";
 import _ from "lodash";
-import { renderStatsCell } from "user/analytics/renderers";
-import { ColumnDescriptor } from "components/EnhancedTable";
-import { AdDetails } from "user/ads/AdList";
-import { EngagementFragment } from "graphql/analytics-overview.generated";
-import { StatsMetric } from "user/analytics/analyticsOverview/types";
+import BigNumber from "bignumber.js";
 
 const TYPE_CODE_LOOKUP: Record<string, string> = {
   notification_all_v1: "Push Notification",
@@ -44,7 +32,7 @@ const TYPE_CODE_LOOKUP: Record<string, string> = {
 
 export function transformNewForm(
   form: CampaignForm,
-  userId?: string
+  userId?: string,
 ): CreateCampaignInput {
   return {
     currency: form.currency,
@@ -90,26 +78,33 @@ function transformConversion(conv: Conversion[]) {
   }));
 }
 
-function transformCreative(
+export function transformCreative(
   creative: Creative,
-  campaign: CampaignForm
+  campaign: Pick<CampaignForm, "price" | "billingType">,
 ): CreateAdInput {
+  let price: BigNumber;
+  let priceType: ConfirmationType;
+
+  if (campaign.billingType === "cpm") {
+    price = BigNumber(campaign.price).dividedBy(1000);
+    priceType = ConfirmationType.View;
+  } else {
+    price = BigNumber(campaign.price);
+    priceType = ConfirmationType.Click;
+  }
+
   return {
     webhooks: [],
     creativeId: creative.id!,
-    prices: [
-      {
-        amount: campaign.price,
-        type: campaign.billingType === "cpc" ? "click" : "view",
-      },
-    ],
+    price: price.toString(),
+    priceType: priceType,
   };
 }
 
 export function creativeInput(
   advertiserId: string,
   creative: Creative,
-  userId?: string
+  userId?: string,
 ): CreateNotificationCreativeInput | UpdateNotificationCreativeInput {
   const baseNotification = {
     advertiserId,
@@ -140,9 +135,14 @@ export function creativeInput(
 
 export function editCampaignValues(
   campaign: CampaignFragment,
-  advertiserId: string
+  advertiserId: string,
 ): CampaignForm {
   const ads: AdFragment[] = _.flatMap(campaign.adSets, "ads");
+
+  const billingType = (_.head(campaign.adSets)?.billingType ??
+    "cpm") as Billing;
+  const rawPrice = BigNumber(_.head(ads)?.price ?? "0.006");
+  const price = billingType === "cpm" ? rawPrice.multipliedBy(1000) : rawPrice;
 
   return {
     adSets: campaign.adSets.map((adSet) => {
@@ -163,8 +163,8 @@ export function editCampaignValues(
     creatives: creativeList(ads).map((a) => a.id!),
     newCreative: initialCreative,
     isCreating: false,
-    price: campaign.adSets[0].ads?.[0].prices[0].amount ?? 6,
-    billingType: (campaign.adSets[0].billingType ?? "cpm") as Billing,
+    price: price.toNumber(),
+    billingType: billingType,
     validateStart: false,
     budget: campaign.budget,
     currency: campaign.currency,
@@ -200,13 +200,13 @@ function creativeList(ads?: AdFragment[] | null): Creative[] {
           state: c.state,
         };
       }),
-    "id"
+    "id",
   );
 }
 
 export function transformEditForm(
   form: CampaignForm,
-  id: string
+  id: string,
 ): UpdateCampaignInput {
   return {
     budget: form.budget,

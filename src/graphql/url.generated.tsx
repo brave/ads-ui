@@ -59,7 +59,7 @@ export function useValidateTargetUrlQuery(
   baseOptions: Apollo.QueryHookOptions<
     ValidateTargetUrlQuery,
     ValidateTargetUrlQueryVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<
@@ -71,7 +71,7 @@ export function useValidateTargetUrlLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     ValidateTargetUrlQuery,
     ValidateTargetUrlQueryVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<
@@ -90,7 +90,7 @@ export type ValidateTargetUrlQueryResult = Apollo.QueryResult<
   ValidateTargetUrlQueryVariables
 >;
 export function refetchValidateTargetUrlQuery(
-  variables: ValidateTargetUrlQueryVariables
+  variables: ValidateTargetUrlQueryVariables,
 ) {
   return { query: ValidateTargetUrlDocument, variables: variables };
 }

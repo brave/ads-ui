@@ -5,7 +5,7 @@ import { processStats } from "user/analytics/analyticsOverview/lib/overview.libr
 
 export function adEngagements(
   engagements: EngagementFragment[],
-  type: "creativeinstance" | "creativeset"
+  type: "creativeinstance" | "creativeset",
 ) {
   const grouped = _.groupBy(engagements, `${type}id`);
   const metrics = new Map<string, StatsMetric>();
