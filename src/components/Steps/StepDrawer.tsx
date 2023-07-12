@@ -37,7 +37,7 @@ export function StepDrawer({
   const history = useHistory();
   const activeStep = useRef<number>(0);
   activeStep.current = steps.findIndex((s) =>
-    history.location.pathname.includes(s.path)
+    history.location.pathname.includes(s.path),
   );
 
   return (

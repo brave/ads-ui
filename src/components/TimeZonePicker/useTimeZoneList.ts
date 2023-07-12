@@ -117,6 +117,6 @@ export function useTimeZoneList(): TimeZoneInfo[] {
         })
         .orderBy("offsetMs")
         .valueOf(),
-    [usersTimeZone]
+    [usersTimeZone],
   );
 }

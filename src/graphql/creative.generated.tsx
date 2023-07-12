@@ -122,7 +122,7 @@ export function useAdvertiserCreativesQuery(
   baseOptions: Apollo.QueryHookOptions<
     AdvertiserCreativesQuery,
     AdvertiserCreativesQueryVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<
@@ -134,7 +134,7 @@ export function useAdvertiserCreativesLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     AdvertiserCreativesQuery,
     AdvertiserCreativesQueryVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<
@@ -153,7 +153,7 @@ export type AdvertiserCreativesQueryResult = Apollo.QueryResult<
   AdvertiserCreativesQueryVariables
 >;
 export function refetchAdvertiserCreativesQuery(
-  variables: AdvertiserCreativesQueryVariables
+  variables: AdvertiserCreativesQueryVariables,
 ) {
   return { query: AdvertiserCreativesDocument, variables: variables };
 }
@@ -197,7 +197,7 @@ export function useCreateNotificationCreativeMutation(
   baseOptions?: Apollo.MutationHookOptions<
     CreateNotificationCreativeMutation,
     CreateNotificationCreativeMutationVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<
@@ -250,7 +250,7 @@ export function useUpdateNotificationCreativeMutation(
   baseOptions?: Apollo.MutationHookOptions<
     UpdateNotificationCreativeMutation,
     UpdateNotificationCreativeMutationVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<

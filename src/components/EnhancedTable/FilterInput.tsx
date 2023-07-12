@@ -17,7 +17,7 @@ export const FilterInput: React.FC<Props> = (props) => {
   // HT: https://dmitripavlutin.com/react-throttle-debounce/
   const debouncedChangeHandler = useMemo(
     () => _.debounce(props.setFilter, 300),
-    [props.setFilter]
+    [props.setFilter],
   );
 
   const onChangeHandler = (value: string) => {

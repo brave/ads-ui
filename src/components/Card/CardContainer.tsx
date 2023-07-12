@@ -5,7 +5,7 @@ export function CardContainer(
   props: {
     header?: string;
     additionalAction?: React.ReactNode;
-  } & PropsWithChildren
+  } & PropsWithChildren,
 ) {
   return (
     <Box mb={1} mt={2}>

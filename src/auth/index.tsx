@@ -16,7 +16,7 @@ export const IAuthProvider: React.FC<IAuthProviderProps> = ({
   const [loading, setLoading] = useState(false);
 
   const getActiveAdvertiser = (
-    advertisers: IAdvertiser[]
+    advertisers: IAdvertiser[],
   ): IAdvertiser | undefined => {
     const advertiserId = window.localStorage.getItem("activeAdvertiser");
     if (advertisers.length === 0) {

@@ -36,7 +36,7 @@ export function AdDetailTable<T extends { id: string }>({
             loading,
             "spend",
             engagements.get(r.id),
-            campaign?.currency
+            campaign?.currency,
           ),
         align: "right",
       },
@@ -67,7 +67,7 @@ export function AdDetailTable<T extends { id: string }>({
         extendedRenderer: (r) =>
           renderStatsCell(loading, "ctr", engagements.get(r.id)),
         align: "right",
-      }
+      },
     );
   }
 
