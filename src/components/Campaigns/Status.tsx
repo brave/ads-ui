@@ -14,7 +14,7 @@ export const Status: React.FC<{
   let label = _.startCase(state);
 
   if (start) {
-    if (isBeforeStartDate(start)) {
+    if (isBeforeStartDate(start) && state === "active") {
       label = "Scheduled";
       color = "#e2e2fc";
     }
