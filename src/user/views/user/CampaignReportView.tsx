@@ -50,7 +50,7 @@ export function CampaignReportView() {
   const filteredEngagements = (data?.campaign?.engagements ?? []).filter(
     (engagement) =>
       moment(engagement.createdat) >= moment.utc(startDate).startOf("day") &&
-      moment(engagement.createdat) <= moment.utc(endDate).endOf("day")
+      moment(engagement.createdat) <= moment.utc(endDate).endOf("day"),
   );
 
   const isLoading = loading || !data || !data.campaign || !startDate;

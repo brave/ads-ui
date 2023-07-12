@@ -29,7 +29,7 @@ export const renderEngagementCell = (
   loading: boolean,
   fragment: CampaignSummaryFragment,
   type: keyof EngagementOverview,
-  map?: Map<string, EngagementOverview>
+  map?: Map<string, EngagementOverview>,
 ) => {
   if (loading) {
     return <Skeleton />;
@@ -56,7 +56,7 @@ export const renderStatsCell = (
   loading: boolean,
   type: keyof StatsMetric,
   val?: StatsMetric,
-  currency?: string
+  currency?: string,
 ) => {
   if (loading) {
     return <Skeleton />;

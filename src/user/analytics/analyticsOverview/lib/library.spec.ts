@@ -8,7 +8,9 @@ import { Metrics } from "../types";
 
 const price = 0.1;
 const pricetype = "view";
-const date = moment(new Date(2023, 1, 29, 8, 45)).utc(true).toDate();
+const date = moment(new Date(2023, 1, 29, 8, 45))
+  .utc(true)
+  .toDate();
 
 const commonFields = {
   creativeinstanceid: "",
@@ -204,17 +206,17 @@ it("should calculate landings, ctr, and cpa correctly", () => {
   const landed = calculateMetric(
     true,
     processed.landed.macos,
-    processed.click.macos
+    processed.click.macos,
   );
   const ctr = calculateMetric(
     true,
     processed.click.macos,
-    processed.view.macos
+    processed.view.macos,
   );
   const cpa = calculateMetric(
     false,
     processed.spend.macos,
-    processed.conversion.macos
+    processed.conversion.macos,
   );
 
   expect(landed).toBe(300);
@@ -226,7 +228,7 @@ it("should calculate landings, ctr, and cpa correctly", () => {
 it("should calculate metrics per creative id", () => {
   const creatives = creativeEngagements(
     engagements,
-    CampaignFormat.PushNotification
+    CampaignFormat.PushNotification,
   );
 
   expect(creatives).toMatchInlineSnapshot(`

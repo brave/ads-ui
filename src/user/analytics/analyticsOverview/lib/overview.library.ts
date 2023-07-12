@@ -78,7 +78,7 @@ export const baseOverviewChart: Options = {
 
 export const prepareChart = (
   metrics: Metrics,
-  processedData: MetricDataSet
+  processedData: MetricDataSet,
 ) => {
   const metricsEntries = Object.entries(metrics);
   return {
@@ -208,7 +208,7 @@ export const reduceMetric = (a: BaseMetric, b: BaseMetric) => {
 };
 
 export const processStats = (
-  engagements: EngagementFragment[]
+  engagements: EngagementFragment[],
 ): StatsMetric => {
   if (engagements.length === 0) {
     return {
@@ -245,7 +245,7 @@ export const processStats = (
 export function calculateMetric(
   isPercent: boolean,
   numerator: number,
-  denominator: number
+  denominator: number,
 ) {
   let metric: number;
   if (isPercent) {
@@ -260,7 +260,7 @@ export function calculateMetric(
 export const processData = (
   engagements: EngagementFragment[],
   metrics: Metrics,
-  grouping: string
+  grouping: string,
 ) => {
   // Group data by user setting
   const groupedData = _.groupBy(engagements, function (engagement) {

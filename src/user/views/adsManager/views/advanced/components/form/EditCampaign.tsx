@@ -37,7 +37,7 @@ export function EditCampaign() {
     onCompleted(data) {
       if (initialData?.campaign?.hasPaymentIntent) {
         history.push(
-          `/user/main/complete/edit?referenceId=${data.updateCampaign.id}`
+          `/user/main/complete/edit?referenceId=${data.updateCampaign.id}`,
         );
       } else {
         createPaymentSession(data.updateCampaign.id);

@@ -27,7 +27,7 @@ export function CampaignDetails({ engagements, engagementLoading }: Props) {
   });
 
   const [tabValue, setTabValue] = useState(
-    Number(window.localStorage.getItem("tabValue") ?? 0)
+    Number(window.localStorage.getItem("tabValue") ?? 0),
   );
 
   const tabs = [

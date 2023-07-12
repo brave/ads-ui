@@ -6,7 +6,7 @@ export const downloadCSV = async (
   campaignName: string,
   userId: string,
   includeCountry: boolean,
-  setDownloadingCSV: Dispatch<boolean>
+  setDownloadingCSV: Dispatch<boolean>,
 ) => {
   setDownloadingCSV(true);
 
@@ -21,7 +21,7 @@ export const downloadCSV = async (
           "-x-user": userId,
           "Content-Type": "text/csv",
         },
-      }
+      },
     );
 
     const file = new Blob([response.data], {

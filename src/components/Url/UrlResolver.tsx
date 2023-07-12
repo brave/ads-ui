@@ -25,11 +25,11 @@ interface ValidationDetail {
 }
 
 function extractViolations(
-  result: UrlValidationResult | undefined
+  result: UrlValidationResult | undefined,
 ): ValidationDetail[] {
   return _.uniqBy(
     (result?.response?.redirects ?? []).flatMap((r) => r.violations),
-    "summary"
+    "summary",
   );
 }
 

@@ -9,7 +9,7 @@ import { CardContainer } from "components/Card/CardContainer";
 
 export function CampaignView() {
   const [fromDateFilter, setFromDateFilter] = useState<Date | null>(
-    moment().subtract(6, "month").startOf("day").toDate()
+    moment().subtract(6, "month").startOf("day").toDate(),
   );
 
   const { loading, data, error } = useAdvertiserCampaignsQuery({

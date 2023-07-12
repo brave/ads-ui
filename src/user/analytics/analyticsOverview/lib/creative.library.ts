@@ -6,7 +6,7 @@ import { processStats } from "./overview.library";
 
 export function creativeEngagements(
   engagements: EngagementFragment[],
-  format: CampaignFormat
+  format: CampaignFormat,
 ) {
   const isNtp = format === CampaignFormat.NtpSi;
 

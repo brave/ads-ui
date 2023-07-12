@@ -105,7 +105,7 @@ interface FormikRadioControlProps {
 }
 
 export const FormikRadioControl: React.FC<FormikRadioControlProps> = (
-  props
+  props,
 ) => {
   return (
     <FormControl
@@ -166,7 +166,7 @@ export const FormikSubmitButton: React.FC<FormikSubmitButtonProps> = ({
     const unblock = history.block(
       !allowNavigation && formik.dirty
         ? "You’ve got unsaved changes. Are you sure you want to navigate away from this page?"
-        : true
+        : true,
     );
 
     return function cleanup() {

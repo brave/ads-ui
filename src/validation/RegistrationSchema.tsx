@@ -23,14 +23,14 @@ export const RegistrationSchema = object().shape({
       .matches(HttpsRegex, `URL must start with https://`)
       .matches(
         SimpleUrlRegexp,
-        `Please enter a valid URL, for example https://brave.com`
+        `Please enter a valid URL, for example https://brave.com`,
       ),
     phone: string()
       .label("Organization phone number")
       .required()
       .matches(
         PhoneRegex,
-        "Please enter a valid phone number, including country code."
+        "Please enter a valid phone number, including country code.",
       ),
   }),
   address: object().shape({
