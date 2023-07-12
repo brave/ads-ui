@@ -83,24 +83,24 @@ export function useActiveGeocodesQuery(
   baseOptions?: Apollo.QueryHookOptions<
     ActiveGeocodesQuery,
     ActiveGeocodesQueryVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<ActiveGeocodesQuery, ActiveGeocodesQueryVariables>(
     ActiveGeocodesDocument,
-    options
+    options,
   );
 }
 export function useActiveGeocodesLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     ActiveGeocodesQuery,
     ActiveGeocodesQueryVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<ActiveGeocodesQuery, ActiveGeocodesQueryVariables>(
     ActiveGeocodesDocument,
-    options
+    options,
   );
 }
 export type ActiveGeocodesQueryHookResult = ReturnType<
@@ -114,7 +114,7 @@ export type ActiveGeocodesQueryResult = Apollo.QueryResult<
   ActiveGeocodesQueryVariables
 >;
 export function refetchActiveGeocodesQuery(
-  variables?: ActiveGeocodesQueryVariables
+  variables?: ActiveGeocodesQueryVariables,
 ) {
   return { query: ActiveGeocodesDocument, variables: variables };
 }
@@ -145,24 +145,24 @@ export const SegmentsDocument = gql`
  * });
  */
 export function useSegmentsQuery(
-  baseOptions?: Apollo.QueryHookOptions<SegmentsQuery, SegmentsQueryVariables>
+  baseOptions?: Apollo.QueryHookOptions<SegmentsQuery, SegmentsQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<SegmentsQuery, SegmentsQueryVariables>(
     SegmentsDocument,
-    options
+    options,
   );
 }
 export function useSegmentsLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     SegmentsQuery,
     SegmentsQueryVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<SegmentsQuery, SegmentsQueryVariables>(
     SegmentsDocument,
-    options
+    options,
   );
 }
 export type SegmentsQueryHookResult = ReturnType<typeof useSegmentsQuery>;

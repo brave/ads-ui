@@ -44,7 +44,7 @@ const TYPE_CODE_LOOKUP: Record<string, string> = {
 
 export function transformNewForm(
   form: CampaignForm,
-  userId?: string
+  userId?: string,
 ): CreateCampaignInput {
   return {
     currency: form.currency,
@@ -92,7 +92,7 @@ function transformConversion(conv: Conversion[]) {
 
 function transformCreative(
   creative: Creative,
-  campaign: CampaignForm
+  campaign: CampaignForm,
 ): CreateAdInput {
   return {
     webhooks: [],
@@ -109,7 +109,7 @@ function transformCreative(
 export function creativeInput(
   advertiserId: string,
   creative: Creative,
-  userId?: string
+  userId?: string,
 ): CreateNotificationCreativeInput | UpdateNotificationCreativeInput {
   const baseNotification = {
     advertiserId,
@@ -140,7 +140,7 @@ export function creativeInput(
 
 export function editCampaignValues(
   campaign: CampaignFragment,
-  advertiserId: string
+  advertiserId: string,
 ): CampaignForm {
   const ads: AdFragment[] = _.flatMap(campaign.adSets, "ads");
 
@@ -200,13 +200,13 @@ function creativeList(ads?: AdFragment[] | null): Creative[] {
           state: c.state,
         };
       }),
-    "id"
+    "id",
   );
 }
 
 export function transformEditForm(
   form: CampaignForm,
-  id: string
+  id: string,
 ): UpdateCampaignInput {
   return {
     budget: form.budget,

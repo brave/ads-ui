@@ -66,7 +66,7 @@ export function mapDevice(entries: [string, number][]) {
   };
 
   const byDesktop = entries.filter(
-    (c) => c[0] === "windows" || c[0] === "linux" || c[0] === "macos"
+    (c) => c[0] === "windows" || c[0] === "linux" || c[0] === "macos",
   );
   const byMobile = entries.filter((c) => c[0] === "ios" || c[0] === "android");
 

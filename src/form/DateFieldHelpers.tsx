@@ -6,10 +6,10 @@ export const defaultStartDate = () =>
     addDays(
       zonedTimeToUtc(
         startOfDay(utcToZonedTime(twoDaysOut(), "America/New_York")),
-        "America/New_York"
+        "America/New_York",
       ),
-      1
-    )
+      1,
+    ),
   );
 
 export const defaultEndDate = () =>
@@ -17,10 +17,10 @@ export const defaultEndDate = () =>
     addDays(
       zonedTimeToUtc(
         endOfDay(utcToZonedTime(twoDaysOut(), "America/New_York")),
-        "America/New_York"
+        "America/New_York",
       ),
-      1
-    )
+      1,
+    ),
   );
 
 export const twoDaysOut = () => {

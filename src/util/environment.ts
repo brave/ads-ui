@@ -5,7 +5,7 @@ export function buildAdServerEndpoint(suffix: string): string {
 export function buildAdServerV2Endpoint(suffix: string): string {
   return `${import.meta.env.REACT_APP_SERVER_ADDRESS.replace(
     "v1",
-    "v2"
+    "v2",
   )}${suffix}`;
 }
 

@@ -83,7 +83,7 @@ export function EngagementsOverview({
   const setActiveMetric = (
     metric: keyof Metrics,
     value: keyof StatsMetric,
-    active: boolean
+    active: boolean,
   ) => {
     const metricsCopy = _.cloneDeep(metrics);
     const selectedMetric = metricsCopy[metric];

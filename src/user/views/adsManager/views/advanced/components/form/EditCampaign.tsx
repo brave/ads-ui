@@ -42,7 +42,7 @@ export function EditCampaign() {
         campaign?.paymentType !== PaymentType.Stripe
       ) {
         history.push(
-          `/user/main/complete/edit?referenceId=${data.updateCampaign.id}`
+          `/user/main/complete/edit?referenceId=${data.updateCampaign.id}`,
         );
       } else {
         createPaymentSession(data.updateCampaign.id);

@@ -91,10 +91,10 @@ const Settings = () => {
   const openNewKeypairModal = () => {
     const keypair = tweetnacl.box.keyPair();
     const publicKey = btoa(
-      String.fromCharCode.apply(null, keypair.publicKey as unknown as number[])
+      String.fromCharCode.apply(null, keypair.publicKey as unknown as number[]),
     );
     const privateKey = btoa(
-      String.fromCharCode.apply(null, keypair.secretKey as unknown as number[])
+      String.fromCharCode.apply(null, keypair.secretKey as unknown as number[]),
     );
     setNewPublicKey(publicKey);
     setPrivateKey(privateKey);

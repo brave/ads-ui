@@ -16,7 +16,7 @@ export const CampaignAgeFilter: React.FC<Props> = ({
 }) => {
   const onOldCampaignToggle = (showOld: boolean) => {
     onChange(
-      showOld ? null : moment().subtract(6, "month").startOf("day").toDate()
+      showOld ? null : moment().subtract(6, "month").startOf("day").toDate(),
     );
   };
 

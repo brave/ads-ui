@@ -18,7 +18,7 @@ export const CampaignSchema = object().shape({
     .required()
     .min(
       MIN_PER_CAMPAIGN,
-      `Lifetime budget must be $${MIN_PER_CAMPAIGN} or more`
+      `Lifetime budget must be $${MIN_PER_CAMPAIGN} or more`,
     ),
   isCreating: boolean().default(false),
   newCreative: object().when("isCreating", {
@@ -45,7 +45,7 @@ export const CampaignSchema = object().shape({
           .matches(HttpsRegex, `URL must start with https://`)
           .matches(
             SimpleUrlRegexp,
-            `Please enter a valid Ad URL, for example https://brave.com`
+            `Please enter a valid Ad URL, for example https://brave.com`,
           ),
       }),
   }),
@@ -63,7 +63,7 @@ export const CampaignSchema = object().shape({
         schema
           .min(
             startOfDay(twoDaysOut()),
-            "Start Date must be minimum of 2 days from today"
+            "Start Date must be minimum of 2 days from today",
           )
           .required(),
     }),
@@ -77,7 +77,7 @@ export const CampaignSchema = object().shape({
       object().shape({
         code: string().required(),
         name: string().required(),
-      })
+      }),
     )
     .min(1, "At least one country must be targeted")
     .default([]),
@@ -108,7 +108,7 @@ export const CampaignSchema = object().shape({
             object().shape({
               code: string().required(),
               name: string().required(),
-            })
+            }),
           )
           .min(1, "At least one audience must be targeted")
           .default([]),
@@ -118,7 +118,7 @@ export const CampaignSchema = object().shape({
             object().shape({
               code: string().required(),
               name: string().required(),
-            })
+            }),
           )
           .min(1, "At least one platform must be targeted")
           .default([]),
@@ -132,23 +132,23 @@ export const CampaignSchema = object().shape({
                 .required("Conversion URL required.")
                 .matches(
                   TrailingAsteriskRegex,
-                  "Conversion URL must end in trailing asterisk (*)"
+                  "Conversion URL must end in trailing asterisk (*)",
                 ),
               observationWindow: number()
                 .oneOf(
                   [1, 7, 30],
-                  "Observation Window must be 1, 7, or 30 days."
+                  "Observation Window must be 1, 7, or 30 days.",
                 )
                 .required("Observation Window required."),
               type: string()
                 .oneOf(
                   ["postclick", "postview"],
-                  "Conversion type must be Post Click or Post View"
+                  "Conversion type must be Post Click or Post View",
                 )
                 .required("Conversion Type required."),
-            })
+            }),
           ),
         creatives: array().min(1, "Ad Sets must have at least one Ad"),
-      })
+      }),
     ),
 });

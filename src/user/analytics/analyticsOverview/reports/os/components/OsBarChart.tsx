@@ -8,7 +8,7 @@ export function OsBarChart(props: CalculatedOSMetric) {
   const [type, setType] = useState<keyof CalculatedOSMetric>("ctr");
 
   const mapToSeries = (
-    metric: keyof CalculatedOSMetric
+    metric: keyof CalculatedOSMetric,
   ): SeriesOptionsType[] => {
     let series: SeriesOptionsType = {
       name: "OS",

@@ -78,7 +78,7 @@ export interface ColumnAccessor<T>
 }
 
 function mkColumnAccessor<T>(
-  descriptor: ColumnDescriptor<T>
+  descriptor: ColumnDescriptor<T>,
 ): ColumnAccessor<T> {
   const {
     title,
@@ -140,13 +140,13 @@ const LoadingSkeleton: React.FC<{ cols: number; rows: number }> = ({
 
 export function EnhancedTable<T>(props: EnhancedTableProps<T>) {
   const [order, setOrder] = useState<SortDirection>(
-    props.initialSortDirection ?? "asc"
+    props.initialSortDirection ?? "asc",
   );
   const [orderBy, setOrderBy] = useState<number>(props.initialSortColumn ?? 0);
   const [filter, setFilter] = useState<string>("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(
-    props.initialRowsPerPage ?? 25
+    props.initialRowsPerPage ?? 25,
   );
 
   const { rows } = props;
@@ -168,7 +168,7 @@ export function EnhancedTable<T>(props: EnhancedTableProps<T>) {
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -196,7 +196,7 @@ export function EnhancedTable<T>(props: EnhancedTableProps<T>) {
       ? filteredRows
       : filteredRows.slice(
           page * rowsPerPage,
-          page * rowsPerPage + rowsPerPage
+          page * rowsPerPage + rowsPerPage,
         );
 
   return (

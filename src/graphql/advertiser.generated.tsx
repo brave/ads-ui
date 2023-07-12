@@ -215,24 +215,24 @@ export function useAdvertiserQuery(
   baseOptions: Apollo.QueryHookOptions<
     AdvertiserQuery,
     AdvertiserQueryVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<AdvertiserQuery, AdvertiserQueryVariables>(
     AdvertiserDocument,
-    options
+    options,
   );
 }
 export function useAdvertiserLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     AdvertiserQuery,
     AdvertiserQueryVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<AdvertiserQuery, AdvertiserQueryVariables>(
     AdvertiserDocument,
-    options
+    options,
   );
 }
 export type AdvertiserQueryHookResult = ReturnType<typeof useAdvertiserQuery>;
@@ -280,7 +280,7 @@ export function useUpdateAdvertiserMutation(
   baseOptions?: Apollo.MutationHookOptions<
     UpdateAdvertiserMutation,
     UpdateAdvertiserMutationVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<
@@ -327,7 +327,7 @@ export function useAdvertiserCampaignsQuery(
   baseOptions: Apollo.QueryHookOptions<
     AdvertiserCampaignsQuery,
     AdvertiserCampaignsQueryVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<
@@ -339,7 +339,7 @@ export function useAdvertiserCampaignsLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     AdvertiserCampaignsQuery,
     AdvertiserCampaignsQueryVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<
@@ -358,7 +358,7 @@ export type AdvertiserCampaignsQueryResult = Apollo.QueryResult<
   AdvertiserCampaignsQueryVariables
 >;
 export function refetchAdvertiserCampaignsQuery(
-  variables: AdvertiserCampaignsQueryVariables
+  variables: AdvertiserCampaignsQueryVariables,
 ) {
   return { query: AdvertiserCampaignsDocument, variables: variables };
 }

@@ -43,7 +43,7 @@ export const getCredentials = async (user: {
 
   if (!res.ok) {
     throw new Error(
-      "Unexpected error validating your credentials. Please try again later."
+      "Unexpected error validating your credentials. Please try again later.",
     );
   }
 
@@ -77,7 +77,7 @@ export async function submitRegistration(form: RegistrationForm) {
 
   if (!res.ok) {
     throw new Error(
-      "Unable to register your organization at this time. Please try again later."
+      "Unable to register your organization at this time. Please try again later.",
     );
   }
 }
@@ -118,7 +118,7 @@ export const getLink = async (user: { email: string }): Promise<void> => {
       method: "GET",
       mode: "cors",
       credentials: "include",
-    }
+    },
   );
 };
 
@@ -132,7 +132,7 @@ export const authorize = async (req: {
       method: "GET",
       mode: "cors",
       credentials: "include",
-    }
+    },
   );
 
   if (!res.ok) {

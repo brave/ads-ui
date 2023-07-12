@@ -2,7 +2,7 @@ import { buildAdServerEndpoint } from "util/environment";
 
 export async function createPaymentSession(
   advertiserId: string,
-  campaignId: string
+  campaignId: string,
 ): Promise<string> {
   const res = await fetch(buildAdServerEndpoint("/ads/checkout-session"), {
     method: "POST",
@@ -28,7 +28,7 @@ export async function createPaymentSession(
 
 export async function fetchPaymentSession(
   campaignId: string,
-  sessionId: string | null
+  sessionId: string | null,
 ): Promise<void> {
   let baseUrl = `/ads/checkout-session?referenceId=${campaignId}`;
   if (sessionId) {

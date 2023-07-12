@@ -84,7 +84,7 @@ export function NotificationAd({ onCreate }: Props) {
             const input = creativeInput(
               advertiser.id,
               meta.value,
-              userId
+              userId,
             ) as CreateNotificationCreativeInput;
             create({ variables: { input } });
           }}
