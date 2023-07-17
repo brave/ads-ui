@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
 import { useHistory, useParams } from "react-router-dom";
-import { Box, Card, Container, Stack, Typography } from "@mui/material";
-import present from "../../../../../../../../present.png";
+import { Card, Container, Stack, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { useValidatePaymentSession } from "checkout/hooks/useValidatePaymentSession";
 
@@ -25,21 +24,17 @@ export function CompletionForm() {
   });
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" sx={{ mt: 5 }}>
       <Card
         sx={{
-          p: 2,
+          p: 10,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
         }}
       >
-        <Box>
-          <img src={present} width="600px" style={{ marginRight: 50 }} />
-        </Box>
-
         <Typography variant="h4" sx={{ textAlign: "center", mb: 3 }}>
-          Congratulations!
+          Congratulations! 🎉
         </Typography>
 
         {params.mode === "edit" && (
