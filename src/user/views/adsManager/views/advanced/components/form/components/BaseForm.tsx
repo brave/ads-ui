@@ -2,7 +2,6 @@ import { Form } from "formik";
 import { Review } from "../../review/Review";
 import React from "react";
 import { CampaignSettings } from "user/views/adsManager/views/advanced/components/campaign/CampaignSettings";
-import { BudgetField } from "user/views/adsManager/views/advanced/components/campaign/fields/BudgetField";
 import { StepDrawer } from "components/Steps/StepDrawer";
 import { PaymentButton } from "user/views/adsManager/views/advanced/components/form/components/PaymentButton";
 import { NewAd } from "user/ads/NewAd";

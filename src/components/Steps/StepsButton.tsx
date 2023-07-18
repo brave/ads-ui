@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Stack,
-  Step,
-  StepLabel,
-  Stepper,
-  Typography,
-} from "@mui/material";
+import { Box, Step, StepLabel, Stepper } from "@mui/material";
 import React, { useState } from "react";
 import { NextAndBack } from "components/Steps/NextAndBack";
 

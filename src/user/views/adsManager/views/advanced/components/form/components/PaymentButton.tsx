@@ -2,7 +2,6 @@ import { FormikSubmitButton } from "form/FormikHelpers";
 import React from "react";
 import { useFormikContext } from "formik";
 import { CampaignForm } from "user/views/adsManager/types";
-import { PaymentType } from "graphql/types";
 
 export function PaymentButton(props: { isEdit: boolean }) {
   const { values } = useFormikContext<CampaignForm>();

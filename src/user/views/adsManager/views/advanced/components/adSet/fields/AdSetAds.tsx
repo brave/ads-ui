@@ -1,6 +1,6 @@
 import { CardContainer } from "components/Card/CardContainer";
 import { Autocomplete, Checkbox, TextField } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
 import { useRecentlyCreatedAdvertiserCreatives } from "user/hooks/useAdvertiserCreatives";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";

@@ -1,9 +1,8 @@
 import { AuthContainer } from "auth/views/components/AuthContainer";
 import { useAuthorize } from "auth/hooks/queries/useAuthorize";
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 import { CircularProgress, Link, Stack, Typography } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 
