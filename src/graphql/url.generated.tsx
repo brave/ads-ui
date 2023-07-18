@@ -1,8 +1,7 @@
 import * as Types from "./types";
 
-import * as Apollo from "@apollo/client";
 import { gql } from "@apollo/client";
-
+import * as Apollo from "@apollo/client";
 const defaultOptions = {} as const;
 export type ValidateTargetUrlQueryVariables = Types.Exact<{
   url: Types.Scalars["String"];

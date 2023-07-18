@@ -1,5 +1,6 @@
-import { gql } from "@apollo/client";
+import * as Types from "./types";
 
+import { gql } from "@apollo/client";
 export type UserFragment = {
   __typename?: "User";
   email: string;
