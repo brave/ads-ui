@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Typography from "@mui/material/Typography";
 import {
-  Box,
   Card,
   Checkbox,
   Container,

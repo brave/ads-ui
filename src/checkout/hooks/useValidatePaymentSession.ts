@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { buildAdServerEndpoint } from "util/environment";
 import { fetchPaymentSession } from "checkout/lib";
 
 interface Props {

@@ -1,4 +1,4 @@
-import { ApolloError, ServerError, ServerParseError } from "@apollo/client";
+import { ApolloError } from "@apollo/client";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
   Accordion,

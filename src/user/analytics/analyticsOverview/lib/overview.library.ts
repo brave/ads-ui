@@ -7,10 +7,7 @@ import {
   StatsMetric,
   Tooltip,
 } from "user/analytics/analyticsOverview/types";
-import {
-  CampaignWithEngagementsFragment,
-  EngagementFragment,
-} from "graphql/analytics-overview.generated";
+import { EngagementFragment } from "graphql/analytics-overview.generated";
 
 type MetricDataSet = {
   metric1DataSet: number[][];

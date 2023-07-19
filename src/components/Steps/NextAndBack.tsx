@@ -1,4 +1,4 @@
-import { Button, Stack, stepClasses } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import React from "react";
 
 interface Props {

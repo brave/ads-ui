@@ -1,5 +1,5 @@
 import { CampaignFragment } from "graphql/campaign.generated";
-import { it, describe, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import { editCampaignValues, transformCreative } from ".";
 import {
   CampaignFormat,

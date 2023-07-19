@@ -12,12 +12,10 @@ import {
 } from "graphql/campaign.generated";
 import { AdvertiserCampaignsDocument } from "graphql/advertiser.generated";
 import {
-  AdSetFragment,
   useUpdateAdMutation,
   useUpdateAdSetMutation,
 } from "graphql/ad-set.generated";
 import { OnOff } from "../Switch/OnOff";
-import { CampaignSource } from "graphql/types";
 import { AdDetails } from "user/ads/AdList";
 import { displayFromCampaignState } from "util/displayState";
 import { AdSetDetails } from "user/adSet/AdSetList";

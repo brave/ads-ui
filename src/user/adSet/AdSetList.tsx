@@ -3,7 +3,6 @@ import { ColumnDescriptor, StandardRenderers } from "components/EnhancedTable";
 import { Chip } from "@mui/material";
 import { Status } from "components/Campaigns/Status";
 import _ from "lodash";
-import { isAfterEndDate } from "util/isAfterEndDate";
 import { adSetOnOffState } from "components/EnhancedTable/renderers";
 import { CampaignAdsFragment } from "graphql/campaign.generated";
 import { CampaignSource } from "graphql/types";

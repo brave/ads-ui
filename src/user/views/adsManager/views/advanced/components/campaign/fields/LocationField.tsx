@@ -1,4 +1,4 @@
-import { Box, Divider, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { LocationPicker } from "components/Location/LocationPicker";
 import React from "react";
 import { CardContainer } from "components/Card/CardContainer";

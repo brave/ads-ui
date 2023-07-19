@@ -2,7 +2,7 @@ import { useAdvertiserCreativesQuery } from "graphql/creative.generated";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useFormikContext } from "formik";
 import { CampaignForm, Creative } from "user/views/adsManager/types";
-import _, { flatMap } from "lodash";
+import _ from "lodash";
 
 export function useAdvertiserCreatives(): Creative[] {
   const { advertiser } = useAdvertiser();

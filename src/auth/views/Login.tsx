@@ -1,7 +1,7 @@
 import { Alert, Link, TextField, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import React, { useState } from "react";
-import { useHistory, Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 import { useSignIn } from "auth/hooks/mutations/useSignIn";
 import { AuthContainer } from "auth/views/components/AuthContainer";
 

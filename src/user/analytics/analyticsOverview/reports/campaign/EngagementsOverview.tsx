@@ -17,7 +17,6 @@ import EngagementHeader from "../../components/EngagementHeader";
 import LiveFeed from "../../components/LiveFeed";
 import { CampaignFormat } from "graphql/types";
 import { ErrorDetail } from "components/Error/ErrorDetail";
-import { DashboardButton } from "components/Button/DashboardButton";
 import { ApolloError } from "@apollo/client";
 import _ from "lodash";
 
