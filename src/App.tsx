@@ -18,7 +18,7 @@ import { MagicLink } from "auth/views/MagicLink";
 import { Register } from "auth/registration/Register";
 
 const Protected = () => {
-  return <Redirect to="/auth/signin" />;
+  return <Redirect to="/auth/link" />;
 };
 
 export function App() {

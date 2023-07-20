@@ -18,8 +18,8 @@ export function Login() {
 
   return (
     <AuthContainer>
-      <Typography sx={{ fontFamily: "Poppins", color: "#434251" }} variant="h4">
-        Sign into your Brave Ads account
+      <Typography sx={{ fontFamily: "Poppins", color: "#434251" }} variant="h1">
+        Log into your Brave Ads account
       </Typography>
       <TextField
         sx={{ mt: 5, mb: 3 }}
@@ -52,7 +52,7 @@ export function Login() {
           signIn(email, password);
         }}
       >
-        Sign In
+        Log in
       </LoadingButton>
 
       <Link

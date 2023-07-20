@@ -1,4 +1,4 @@
-import { Stack, Typography } from "@mui/material";
+import { Divider, Stack, Typography } from "@mui/material";
 import { FormikTextField } from "form/FormikHelpers";
 import React from "react";
 import { CountryPicker } from "components/Country/CountryPicker";
@@ -6,54 +6,55 @@ import { CountryPicker } from "components/Country/CountryPicker";
 export function AddressField() {
   return (
     <React.Fragment>
-      <Typography variant="body1" gutterBottom>
-        We are excited to have the opportunity to work with you! The last bit we
-        need is some address info for your organization. This will allow us to
-        set up the necessary financial arrangements.
+      <Typography variant="subtitle1" gutterBottom width="100%">
+        Second (and last!) we'll need info on your business. Once you are
+        finished here, your account setup is complete.
       </Typography>
 
+      <Divider sx={{ marginTop: 5, marginBottom: 5 }} />
+
       <FormikTextField
-        required
         name="address.street1"
         label="Street address"
         autoComplete="address-line1"
-        margin="dense"
+        margin="none"
+        useTopLabel
       />
 
       <FormikTextField
         name="address.street2"
         label="Street address line 2"
         autoComplete="address-line2"
-        margin="dense"
+        margin="none"
+        useTopLabel
       />
 
-      <Stack direction="row" spacing={1} mt={1} mb={2}>
-        <FormikTextField
-          required
-          name="address.city"
-          label="City / Town / Village / Locality"
-          margin="none"
-          autoComplete="address-level2"
-        />
+      <FormikTextField
+        name="address.city"
+        label="City / Town / Village / Locality"
+        autoComplete="address-level2"
+        margin="none"
+        useTopLabel
+      />
 
-        <FormikTextField
-          required
-          name="address.state"
-          label="State / Province / Canton / Post Town"
-          margin="none"
-          autoComplete="address-level1"
-        />
-      </Stack>
+      <FormikTextField
+        name="address.state"
+        label="State / Province / Canton / Post Town"
+        autoComplete="address-level1"
+        margin="none"
+        useTopLabel
+      />
 
-      <Stack direction="row" spacing={1} mt={2} mb={2}>
+      <Stack direction="row" spacing={1}>
         <CountryPicker name="address.country" />
 
         <FormikTextField
-          required
           name="address.zipcode"
           label="Zip / Postal Code"
+          placeholder="Zip / Postal Code"
           margin="none"
           autoComplete="postal-code"
+          useTopLabel
         />
       </Stack>
     </React.Fragment>

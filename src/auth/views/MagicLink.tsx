@@ -46,8 +46,13 @@ export function MagicLink() {
 
   return (
     <AuthContainer>
+      <Typography sx={{ textAlign: "center", mb: 3 }} variant="h1">
+        Enter your email address to get a secure login link. Use this link to
+        access your Brave Ads account.
+      </Typography>
+
       <TextField
-        sx={{ mb: 2 }}
+        sx={{ mb: 1 }}
         fullWidth
         value={email}
         onChange={(e) => setEmail(e.target.value)}
@@ -56,10 +61,6 @@ export function MagicLink() {
         error={!!error}
         helperText={error}
       />
-      <Typography sx={{ textAlign: "center", mb: 1 }}>
-        Enter your email address to get a secure login link. Use this link to
-        access your Brave Ads account.
-      </Typography>
 
       <LoadingButton
         color="primary"

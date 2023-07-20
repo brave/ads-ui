@@ -17,37 +17,31 @@ export function NextAndBack({
   final,
 }: Props) {
   return (
-    <Stack
-      direction="row"
-      spacing={1}
-      mt={2}
-      justifyContent="space-between"
-      alignItems="center"
-    >
-      <Button
-        sx={{ visibility: activeStep !== 0 ? "visible" : "hidden" }}
-        size="large"
-        variant="text"
-        onClick={(e) => {
-          e.preventDefault();
-          onBack();
-        }}
-      >
-        Back
-      </Button>
-      <Button
-        sx={{
-          visibility: activeStep < steps ? "visible" : "hidden",
-        }}
-        size="large"
-        variant="contained"
-        onClick={(e) => {
-          e.preventDefault();
-          onNext();
-        }}
-      >
-        Next
-      </Button>
+    <Stack direction="row" mt={3} spacing={2} justifyContent="right">
+      {activeStep !== 0 && (
+        <Button
+          size="large"
+          variant="text"
+          onClick={(e) => {
+            e.preventDefault();
+            onBack();
+          }}
+        >
+          Back
+        </Button>
+      )}
+      {activeStep < steps && (
+        <Button
+          size="large"
+          variant="contained"
+          onClick={(e) => {
+            e.preventDefault();
+            onNext();
+          }}
+        >
+          Next
+        </Button>
+      )}
       {activeStep === steps && <>{final}</>}
     </Stack>
   );
