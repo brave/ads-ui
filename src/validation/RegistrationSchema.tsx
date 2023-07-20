@@ -12,12 +12,11 @@ export const RegistrationSchema = object().shape({
     .label("Email address")
     .required()
     .matches(EmailRegex, "Please enter a valid email address"),
-  firstName: string().label("First name").required(),
-  lastName: string().label("Last name").required(),
+  fullName: string().label("Full name").required(),
   advertiser: object().shape({
-    name: string().label("Organization name").required(),
+    name: string().label("Business name").required(),
     url: string()
-      .label("Organization URL")
+      .label("Business URL")
       .required()
       .matches(NoSpacesRegex, `URL must not contain any whitespace`)
       .matches(HttpsRegex, `URL must start with https://`)
@@ -26,11 +25,11 @@ export const RegistrationSchema = object().shape({
         `Please enter a valid URL, for example https://brave.com`,
       ),
     phone: string()
-      .label("Organization phone number")
+      .label("Business phone number")
       .required()
       .matches(
         PhoneRegex,
-        "Please enter a valid phone number, including country code.",
+        "Please enter a valid phone number, that has no spaces, and includes country code.",
       ),
   }),
   address: object().shape({

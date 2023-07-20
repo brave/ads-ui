@@ -1,11 +1,11 @@
-import { Divider, Stack, Typography } from "@mui/material";
+import { Box, Divider, Stack, Typography } from "@mui/material";
 import { FormikTextField } from "form/FormikHelpers";
 import React from "react";
 import { CountryPicker } from "components/Country/CountryPicker";
 
 export function AddressField() {
   return (
-    <React.Fragment>
+    <Box flexGrow={1}>
       <Typography variant="subtitle1" gutterBottom width="100%">
         Second (and last!) we'll need info on your business. Once you are
         finished here, your account setup is complete.
@@ -57,6 +57,6 @@ export function AddressField() {
           useTopLabel
         />
       </Stack>
-    </React.Fragment>
+    </Box>
   );
 }

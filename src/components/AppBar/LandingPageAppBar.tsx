@@ -1,7 +1,5 @@
 import * as React from "react";
 
-import { useHistory, useRouteMatch } from "react-router-dom";
-
 import TopBarProgress from "react-topbar-progress-indicator";
 
 import {
@@ -10,11 +8,11 @@ import {
   Divider,
   Link,
   LinkProps,
-  LinkTypeMap,
   Stack,
   Toolbar,
 } from "@mui/material";
 import ads from "../../../branding.svg";
+import { Link as RouterLink, useRouteMatch } from "react-router-dom";
 
 TopBarProgress.config({
   barColors: {
@@ -65,21 +63,25 @@ export function LandingPageAppBar() {
     >
       <Toolbar>
         <Stack direction="row" alignItems="center" spacing={2}>
-          <img src={ads} alt="Ads" height="31px" width="180px" />
+          <RouterLink to="/">
+            <img src={ads} alt="Ads" height="31px" width="180px" />
+          </RouterLink>
           <Divider orientation="vertical" flexItem />
           <Stack direction="row" spacing={3}>
             {links.map((l) => l.component)}
           </Stack>
         </Stack>
         <div style={{ flexGrow: 1 }} />
-        <Button
-          variant="outlined"
-          size="large"
-          sx={{ textTransform: "none" }}
-          href="/auth/link"
-        >
-          Log in
-        </Button>
+        {!match.url.includes("auth") && (
+          <Button
+            variant="outlined"
+            size="large"
+            sx={{ textTransform: "none" }}
+            href="/auth/link"
+          >
+            Log in
+          </Button>
+        )}
       </Toolbar>
     </AppBar>
   );

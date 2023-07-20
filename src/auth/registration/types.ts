@@ -1,7 +1,6 @@
 export type RegistrationForm = {
   email: string;
-  firstName: string;
-  lastName: string;
+  fullName: string;
   advertiser: {
     name: string;
     url: string;
@@ -19,8 +18,7 @@ export type RegistrationForm = {
 
 export const initialValues: RegistrationForm = {
   email: "",
-  firstName: "",
-  lastName: "",
+  fullName: "",
   advertiser: {
     name: "",
     url: "",

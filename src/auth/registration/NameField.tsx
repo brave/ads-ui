@@ -1,10 +1,10 @@
-import { Divider, Stack, Typography } from "@mui/material";
+import { Box, Divider, Stack, Typography } from "@mui/material";
 import { FormikTextField } from "form/FormikHelpers";
 import React from "react";
 
 export function NameField() {
   return (
-    <React.Fragment>
+    <Box flexGrow={1}>
       <Typography variant="subtitle1" gutterBottom>
         Thank you for choosing Brave's Ads Platform! Let's get you setup with
         your account. First, we'll need your info.
@@ -59,6 +59,6 @@ export function NameField() {
         placeholder="Where we can reach you"
         useTopLabel
       />
-    </React.Fragment>
+    </Box>
   );
 }
