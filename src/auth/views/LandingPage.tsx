@@ -3,6 +3,7 @@ import { LandingPageAppBar } from "components/AppBar/LandingPageAppBar";
 import React from "react";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import goals from "../../../images.svg";
+import { useIsAuthenticated } from "auth/hooks/queries/useIsAuthenticated";
 
 const GradientText = {
   backgroundImage:
@@ -12,6 +13,8 @@ const GradientText = {
 };
 
 export function LandingPage() {
+  const isAuthenticated = useIsAuthenticated();
+
   return (
     <Background>
       <LandingPageAppBar />
@@ -43,9 +46,9 @@ export function LandingPage() {
                 padding: "18px 24px 18px 24px",
               }}
               size="large"
-              href="/register"
+              href={isAuthenticated ? "/user/main" : "/register"}
             >
-              Get Started
+              {isAuthenticated ? "Dashboard" : "Get Started"}
             </Button>
           </Box>
         </Stack>

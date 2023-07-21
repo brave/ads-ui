@@ -2,8 +2,6 @@ import * as React from "react";
 
 import { useHistory, useRouteMatch } from "react-router-dom";
 
-import TopBarProgress from "react-topbar-progress-indicator";
-
 import {
   AppBar,
   Button,
@@ -18,15 +16,6 @@ import { DraftMenu } from "components/Navigation/DraftMenu";
 import moment from "moment";
 import ads from "../../../branding.svg";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-
-TopBarProgress.config({
-  barColors: {
-    "0": "#FB7959",
-  },
-  shadowBlur: 0,
-  shadowColor: undefined,
-  barThickness: 2,
-});
 
 export function Navbar() {
   const { advertiser } = useAdvertiser();

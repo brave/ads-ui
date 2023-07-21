@@ -31,7 +31,6 @@
     "react-dom": "18.2.0",
     "react-router-dom": "5.3.4",
     "react-table": "7.8.0",
-    "react-topbar-progress-indicator": "4.1.1",
     "tweetnacl": "1.0.3",
     "yup": "1.2.0"
   },

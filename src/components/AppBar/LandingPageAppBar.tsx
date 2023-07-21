@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import TopBarProgress from "react-topbar-progress-indicator";
-
 import {
   AppBar,
+  Box,
   Button,
+  CssBaseline,
   Divider,
   Link,
   LinkProps,
@@ -13,22 +13,18 @@ import {
 } from "@mui/material";
 import ads from "../../../branding.svg";
 import { Link as RouterLink, useRouteMatch } from "react-router-dom";
-
-TopBarProgress.config({
-  barColors: {
-    "0": "#FB7959",
-  },
-  shadowBlur: 0,
-  shadowColor: undefined,
-  barThickness: 2,
-});
+import { useIsAuthenticated } from "auth/hooks/queries/useIsAuthenticated";
+import { useSignOut } from "auth/hooks/mutations/useSignOut";
 
 export function LandingPageAppBar() {
   const match = useRouteMatch();
+  const isAuthenticated = useIsAuthenticated();
 
   const links = [
     {
-      component: <HelpLink label="Get Started" props={{ href: "/register" }} />,
+      component: isAuthenticated ? null : (
+        <HelpLink label="Get Started" props={{ href: "/register" }} />
+      ),
     },
     {
       component: (
@@ -52,38 +48,32 @@ export function LandingPageAppBar() {
   ];
 
   return (
-    <AppBar
-      position="fixed"
-      sx={{
-        bgcolor: "rgba(252, 252, 253, 0.65)",
-        boxShadow: "none",
-        height: "74px",
-        justifyContent: "center",
-      }}
-    >
-      <Toolbar>
-        <Stack direction="row" alignItems="center" spacing={2}>
-          <RouterLink to="/" style={{ marginTop: 5 }}>
-            <img src={ads} alt="Ads" height="31px" width="180px" />
-          </RouterLink>
-          <Divider orientation="vertical" flexItem />
-          <Stack direction="row" spacing={5}>
+    <Box sx={{ display: "flex" }}>
+      <CssBaseline />
+      <AppBar
+        position="fixed"
+        sx={{
+          bgcolor: "rgba(252, 252, 253, 0.65)",
+          boxShadow: "none",
+          height: "74px",
+          justifyContent: "center",
+        }}
+      >
+        <Toolbar>
+          <Stack direction="row" alignItems="center" spacing={3}>
+            <RouterLink to="/" style={{ marginTop: 5 }}>
+              <img src={ads} alt="Ads" height="31px" width="180px" />
+            </RouterLink>
+            <Divider orientation="vertical" flexItem sx={{ marginRight: 3 }} />
             {links.map((l) => l.component)}
           </Stack>
-        </Stack>
-        <div style={{ flexGrow: 1 }} />
-        {!match.url.includes("auth") && (
-          <Button
-            variant="outlined"
-            size="large"
-            sx={{ textTransform: "none" }}
-            href="/auth/link"
-          >
-            Log in
-          </Button>
-        )}
-      </Toolbar>
-    </AppBar>
+          <div style={{ flexGrow: 1 }} />
+          {!match.url.includes("auth") && (
+            <AuthedButton isAuthenticated={isAuthenticated} />
+          )}
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 }
 
@@ -97,5 +87,21 @@ function HelpLink({ label, props }: HelpProps) {
     <Link variant="subtitle1" underline="none" color="text.primary" {...props}>
       {label}
     </Link>
+  );
+}
+
+function AuthedButton(props: { isAuthenticated?: boolean }) {
+  const { signOut } = useSignOut();
+
+  return (
+    <Button
+      variant="outlined"
+      size="large"
+      sx={{ textTransform: "none" }}
+      href={!props.isAuthenticated ? "/auth/link" : undefined}
+      onClick={props.isAuthenticated ? () => signOut() : undefined}
+    >
+      {props.isAuthenticated ? "Sign out" : "Log in"}
+    </Button>
   );
 }
