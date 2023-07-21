@@ -50,6 +50,13 @@ export default function LiveFeed({ overview, processed }: LiveFeedProps) {
     },
   ];
 
+  if (processed.conversions > 0) {
+    feedValues.push({
+      label: "Conversions",
+      value: `${processed.conversions}`,
+    });
+  }
+
   return (
     <Box
       flexDirection="row"
