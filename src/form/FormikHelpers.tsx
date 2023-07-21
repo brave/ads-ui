@@ -70,7 +70,7 @@ export const FormikSwitch: React.FC<FormikSwitchProps> = (props) => {
     <>
       <FormControlLabel control={<Switch {...field} />} label={props.label} />
       <ErrorMessage name={field.name}>
-        {(msg) => <FormHelperText error>{msg}</FormHelperText>}
+        {(msg: string) => <FormHelperText error>{msg}</FormHelperText>}
       </ErrorMessage>
     </>
   );
@@ -89,7 +89,7 @@ export const FormikRadioGroup: React.FC<
     <>
       <RadioGroup {...props} {...field} />
       <ErrorMessage name={field.name}>
-        {(msg) => <FormHelperText error>{msg}</FormHelperText>}
+        {(msg: string) => <FormHelperText error>{msg}</FormHelperText>}
       </ErrorMessage>
     </>
   );

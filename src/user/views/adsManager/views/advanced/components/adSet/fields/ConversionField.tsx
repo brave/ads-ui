@@ -1,7 +1,7 @@
 import { Link, Stack, Typography } from "@mui/material";
 import { ConversionFields } from "components/Conversion/ConversionFields";
 import React from "react";
-import { FieldArray, useField } from "formik";
+import { FieldArray, FieldArrayRenderProps, useField } from "formik";
 import { Conversion, initialConversion } from "../../../../../types";
 import { CardContainer } from "components/Card/CardContainer";
 
@@ -16,7 +16,7 @@ export function ConversionField({ index }: Props) {
   return (
     <CardContainer header="Conversion">
       <FieldArray name={`adSets.${index}.conversions`}>
-        {({ remove, push }) => (
+        {(helper: FieldArrayRenderProps) => (
           <>
             <Stack direction="row" spacing={1}>
               <Typography variant="body2" sx={{ mb: 2 }}>
@@ -26,7 +26,7 @@ export function ConversionField({ index }: Props) {
                 <Link
                   underline="none"
                   variant="body2"
-                  onClick={() => push(initialConversion)}
+                  onClick={() => helper.push(initialConversion)}
                   sx={{ cursor: "pointer" }}
                 >
                   Add Conversion Tracking +
@@ -36,7 +36,7 @@ export function ConversionField({ index }: Props) {
                 <Link
                   underline="none"
                   variant="body2"
-                  onClick={() => remove(0)}
+                  onClick={() => helper.remove(0)}
                   sx={{ cursor: "pointer" }}
                 >
                   Remove Conversion Tracking -
