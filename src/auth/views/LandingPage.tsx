@@ -21,17 +21,17 @@ export function LandingPage() {
         spacing={10}
         justifyContent="center"
       >
-        <Stack sx={{ maxWidth: "380px" }} spacing={6}>
+        <Stack sx={{ maxWidth: "430px" }} spacing={6}>
           <Typography variant="h3">
             <Typography variant="h3" sx={GradientText}>
-              Reaching
+              Privacy-forward
             </Typography>{" "}
-            your customer made easy
+            advertising made simple
           </Typography>
 
           <Typography variant="h6">
-            Grow your business with premium, privacy-first advertising on the
-            Brave browser.
+            Reach and convert new customers through premium advertising on the
+            Brave browser and search engine.
           </Typography>
 
           <Box>

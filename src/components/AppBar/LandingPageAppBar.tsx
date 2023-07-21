@@ -63,11 +63,11 @@ export function LandingPageAppBar() {
     >
       <Toolbar>
         <Stack direction="row" alignItems="center" spacing={2}>
-          <RouterLink to="/">
+          <RouterLink to="/" style={{ marginTop: 5 }}>
             <img src={ads} alt="Ads" height="31px" width="180px" />
           </RouterLink>
           <Divider orientation="vertical" flexItem />
-          <Stack direction="row" spacing={3}>
+          <Stack direction="row" spacing={5}>
             {links.map((l) => l.component)}
           </Stack>
         </Stack>
