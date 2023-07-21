@@ -12,7 +12,7 @@ export function Login() {
 
   const { signIn, loading, error } = useSignIn({
     onSuccess() {
-      history.replace("/");
+      history.replace("/user/main");
     },
   });
 
