@@ -1,4 +1,4 @@
-import { FieldArray, useFormikContext } from "formik";
+import { FieldArray, FieldArrayRenderProps, useFormikContext } from "formik";
 import {
   Box,
   Button,
@@ -23,7 +23,7 @@ export function NewAdSet(props: { isEdit: boolean }) {
   return (
     <>
       <FieldArray name="adSets">
-        {({ remove, push }) => (
+        {(helper: FieldArrayRenderProps) => (
           <Stack spacing={0.5}>
             {values.adSets.map((adSet, idx) => (
               <Stack direction="row" justifyContent="space-between">
@@ -54,7 +54,7 @@ export function NewAdSet(props: { isEdit: boolean }) {
                         const newIdx = idx - 1;
                         selected.current = newIdx;
                         history.replace(`?current=${newIdx}`);
-                        remove(idx);
+                        helper.remove(idx);
                       }}
                     >
                       <RemoveCircleOutlineIcon fontSize="small" color="error" />
@@ -69,7 +69,7 @@ export function NewAdSet(props: { isEdit: boolean }) {
                 pb={0}
                 pt={0}
                 component={Button}
-                onClick={() => push(initialAdSet)}
+                onClick={() => helper.push(initialAdSet)}
                 border="1px solid #ededed"
               >
                 <Typography variant="overline" color="primary">
