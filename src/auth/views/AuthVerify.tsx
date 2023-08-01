@@ -16,7 +16,7 @@ export function AuthVerify() {
       id: params.get("id") ?? "",
     },
     onCompleted() {
-      history.push("/");
+      history.push("/user/main");
     },
   });
 
