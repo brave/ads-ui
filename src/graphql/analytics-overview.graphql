@@ -33,6 +33,11 @@ fragment CampaignWithEngagements on Campaign {
   currency
   pacingIndex
   format
+  adSets {
+    conversions {
+      type
+    }
+  }
   engagements {
     ...Engagement
   }

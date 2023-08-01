@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Metrics, StatsMetric } from "user/analytics/analyticsOverview/types";
 import _ from "lodash";
 
@@ -15,17 +15,23 @@ export function usePersistMetricFilter(
     metric4: { key: "landings", active: false },
   };
 
-  const [metrics, setMetrics] = useState<Metrics>(baseFilter);
+  const [metrics, setMetrics] = useState<Metrics>();
 
   useEffect(() => {
     const rawFilter = window.localStorage.getItem("metricFilter");
     if (rawFilter) {
       setMetrics(JSON.parse(rawFilter));
+    } else {
+      setMetrics(baseFilter);
     }
-  }, []);
+  }, [opts.hasConversions]);
 
   const setMetric = useCallback(
     (metric: keyof Metrics, value: keyof StatsMetric, active: boolean) => {
+      if (!metrics) {
+        return;
+      }
+
       const metricsCopy = _.cloneDeep(metrics);
       const selectedMetric = metricsCopy[metric];
 
@@ -40,5 +46,5 @@ export function usePersistMetricFilter(
     [metrics],
   );
 
-  return { metrics, setMetric };
+  return { metrics: metrics!, setMetric };
 }

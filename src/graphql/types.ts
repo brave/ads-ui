@@ -31,6 +31,11 @@ export type AdvertiserCampaignFilter = {
   includeCreativeSets?: InputMaybe<Scalars["Boolean"]>;
 };
 
+export enum AdvertiserSource {
+  Managed = "MANAGED",
+  SelfServe = "SELF_SERVE",
+}
+
 export type ApproveCampaignInput = {
   campaignId: Scalars["String"];
 };

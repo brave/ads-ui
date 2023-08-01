@@ -37,7 +37,9 @@ export function EngagementsOverview({
   const [grouping, setGrouping] = useState("daily");
   const { metrics, setMetric } = usePersistMetricFilter({
     campaignId: campaign?.id,
-    hasConversions: engagements?.some((e) => e.type === "conversion"),
+    hasConversions: campaign?.adSets.some(
+      (a) => a.conversions && a.conversions.length,
+    ),
   });
 
   if (error) {
