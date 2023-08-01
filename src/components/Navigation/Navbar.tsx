@@ -2,8 +2,6 @@ import * as React from "react";
 
 import { useHistory, useRouteMatch } from "react-router-dom";
 
-import TopBarProgress from "react-topbar-progress-indicator";
-
 import {
   AppBar,
   Button,
@@ -16,17 +14,8 @@ import {
 import { UserMenu } from "components/Navigation/UserMenu";
 import { DraftMenu } from "components/Navigation/DraftMenu";
 import moment from "moment";
-import ads from "../../../brave-ads-black.svg";
+import ads from "../../../branding.svg";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-
-TopBarProgress.config({
-  barColors: {
-    "0": "#FB7959",
-  },
-  shadowBlur: 0,
-  shadowColor: undefined,
-  barThickness: 2,
-});
 
 export function Navbar() {
   const { advertiser } = useAdvertiser();
@@ -41,7 +30,13 @@ export function Navbar() {
   return (
     <AppBar
       position="fixed"
-      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, bgcolor: "#ffffff" }}
+      sx={{
+        zIndex: (theme) => theme.zIndex.drawer + 1,
+        bgcolor: "#ffffff",
+        height: "72px",
+        justifyContent: "center",
+        boxShadow: "none",
+      }}
     >
       <Toolbar>
         <Stack direction="row" alignItems="center" spacing={2}>

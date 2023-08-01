@@ -14,10 +14,10 @@ export const theme = createTheme({
   },
   palette: {
     primary: {
-      main: "#F8532BCC",
+      main: "#423eee",
     },
     secondary: {
-      main: "#4C54D2",
+      main: "#fe5907",
     },
     background: {
       default: "#F1F3F5",
@@ -26,6 +26,23 @@ export const theme = createTheme({
     text: {
       primary: "#343546",
       secondary: "#A0A1B2",
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: "1000px",
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: "12px",
+          boxShadow: "rgba(99, 105, 110, 0.18) 0px 1px 12px 0px",
+        },
+      },
     },
   },
 });

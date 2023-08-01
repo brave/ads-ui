@@ -41,7 +41,7 @@ export function AuthVerify() {
             variant="h5"
             component={RouterLink}
             sx={{ textAlign: "center" }}
-            to="/"
+            to="/user/main"
             replace
           >
             Not automatically redirected? Click this link to go to the

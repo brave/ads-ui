@@ -16,9 +16,10 @@ import { AuthVerify } from "auth/views/AuthVerify";
 import { Login } from "auth/views/Login";
 import { MagicLink } from "auth/views/MagicLink";
 import { Register } from "auth/registration/Register";
+import { LandingPage } from "auth/views/LandingPage";
 
 const Protected = () => {
-  return <Redirect to="/auth/signin" />;
+  return <Redirect to="/auth/link" />;
 };
 
 export function App() {
@@ -46,7 +47,11 @@ export function App() {
             <Route path="/auth/link" component={MagicLink} />
             <Route path="/auth/verify" component={AuthVerify} />
             <Route path="/register" component={Register} />
-            <Route path="*" component={isAuthenticated ? User : Protected} />
+            <Route
+              path="/user/main"
+              component={isAuthenticated ? User : Protected}
+            />
+            <Route path="/" exact={true} component={LandingPage} />
             <Redirect to="/user/main" />
           </Switch>
         </DraftContext.Provider>

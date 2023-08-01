@@ -1,32 +1,25 @@
 import { Box, Card, CardContent, Container } from "@mui/material";
 import React from "react";
-import BraveLogo from "../../../../brave-logotype-full-color.png";
+import { Background } from "components/Background/Background";
+import { LandingPageAppBar } from "components/AppBar/LandingPageAppBar";
 
 interface Props {
   children?: React.ReactNode;
+  belowCard?: React.ReactNode;
+  aboveCard?: React.ReactNode;
 }
 
-export function AuthContainer({ children }: Props) {
+export function AuthContainer({ children, belowCard, aboveCard }: Props) {
   return (
-    <Container
-      maxWidth={false}
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background:
-          "radial-gradient(ellipse 100% 100% at 0% 0%,rgb(57, 45, 209, 0.8) 0%,rgb(255, 67, 67, 0.8) 100%)",
-        height: "100%",
-      }}
-    >
-      <Box display="flex" width="725px">
+    <Background>
+      <LandingPageAppBar />
+      <Box display="flex" width="725px" flexDirection="column">
+        {aboveCard}
         <Card
           sx={{
             width: "100%",
-            height: "100%",
-            padding: "28px",
-            borderRadius: "6px",
-            boxShadow: "rgba(99, 105, 110, 0.18) 0px 1px 12px 0px",
+            padding: "48px",
+            gap: "32px",
           }}
         >
           <CardContent
@@ -36,21 +29,11 @@ export function AuthContainer({ children }: Props) {
               alignItems: "center",
             }}
           >
-            <Box
-              component="div"
-              width="150px"
-              height="60px"
-              mb={3}
-              sx={{
-                background: `url(${BraveLogo}) no-repeat center`,
-                backgroundSize: "100%",
-              }}
-            />
-
             {children}
           </CardContent>
         </Card>
+        {belowCard}
       </Box>
-    </Container>
+    </Background>
   );
 }

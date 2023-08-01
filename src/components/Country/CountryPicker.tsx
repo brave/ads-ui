@@ -1,4 +1,4 @@
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, Box, FormLabel, TextField } from "@mui/material";
 import { useField } from "formik";
 import React from "react";
 import { useCountries } from "components/Country/useCountries";
@@ -23,14 +23,16 @@ export const CountryPicker: React.FC<Props> = ({ name }) => {
       options={data}
       getOptionLabel={(option) => option.name}
       renderInput={(params) => (
-        <TextField
-          {...params}
-          required
-          label="Country"
-          helperText={meta.touched && errorMessage}
-          error={meta.touched && !!errorMessage}
-          autoComplete="country"
-        />
+        <Box>
+          <FormLabel sx={{ color: "text.primary" }}>Country</FormLabel>
+          <TextField
+            {...params}
+            helperText={meta.touched && errorMessage}
+            error={meta.touched && !!errorMessage}
+            placeholder="Country of residence"
+            autoComplete="country"
+          />
+        </Box>
       )}
       isOptionEqualToValue={(option, value) => option.code === value.code}
       value={value}

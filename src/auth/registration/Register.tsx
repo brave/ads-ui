@@ -1,18 +1,21 @@
 import { AuthContainer } from "auth/views/components/AuthContainer";
 import { Form, Formik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import { RegistrationSchema } from "validation/RegistrationSchema";
 import { initialValues, RegistrationForm } from "auth/registration/types";
-import { Stack } from "@mui/material";
 import { NameField } from "auth/registration/NameField";
-import { AdvertiserField } from "auth/registration/AdvertiserField";
 import { AddressField } from "auth/registration/AddressField";
 import { FormikSubmitButton } from "form/FormikHelpers";
 import { useRegister } from "auth/hooks/mutations/useRegister";
 import { AdvertiserRegistered } from "auth/registration/AdvertiserRegistered";
-import { StepsButton } from "components/Steps/StepsButton";
+import { NextAndBack } from "components/Steps/NextAndBack";
+import { Box, Toolbar, Typography } from "@mui/material";
+import { Background } from "components/Background/Background";
+import { LandingPageAppBar } from "components/AppBar/LandingPageAppBar";
+import { PaddedCardContainer } from "components/Card/PaddedCardContainer";
 
 export function Register() {
+  const [activeStep, setActiveStep] = useState(0);
   const { register, hasRegistered, error } = useRegister();
 
   if (hasRegistered || error) {
@@ -23,38 +26,50 @@ export function Register() {
     );
   }
 
+  const steps = [
+    { label: "Your information", component: <NameField /> },
+    { label: "Your business's information", component: <AddressField /> },
+  ];
+
   return (
-    <AuthContainer>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={async (v: RegistrationForm, { setSubmitting }) => {
-          setSubmitting(true);
-          register(v);
-          setSubmitting(false);
-        }}
-        validationSchema={RegistrationSchema}
-      >
-        <Form>
-          <Stack direction="row" spacing={1}>
-            <StepsButton
-              steps={[
-                { label: "Your information", component: <NameField /> },
-                {
-                  label: "Organization details",
-                  component: <AdvertiserField />,
-                },
-                { label: "Organization address", component: <AddressField /> },
-              ]}
-              finalComponent={
-                <FormikSubmitButton
-                  isCreate={true}
-                  label="Submit for approval"
-                />
-              }
-            />
-          </Stack>
-        </Form>
-      </Formik>
-    </AuthContainer>
+    <Background>
+      <Box height="80vh">
+        <LandingPageAppBar />
+        <Toolbar sx={{ mb: 5 }} />
+        <Box display="flex" width="725px" flexDirection="column" mb={3}>
+          <Typography textAlign="center" variant="h4" sx={{ mb: 3 }}>
+            {steps[activeStep].label}
+          </Typography>
+          <Formik
+            initialValues={initialValues}
+            onSubmit={async (v: RegistrationForm, { setSubmitting }) => {
+              setSubmitting(true);
+              register(v);
+              setSubmitting(false);
+            }}
+            validationSchema={RegistrationSchema}
+          >
+            <Form>
+              <PaddedCardContainer>
+                {steps[activeStep].component}
+              </PaddedCardContainer>
+
+              <NextAndBack
+                activeStep={activeStep}
+                steps={steps.length - 1}
+                onNext={() => setActiveStep(activeStep + 1)}
+                onBack={() => setActiveStep(activeStep - 1)}
+                final={
+                  <FormikSubmitButton
+                    isCreate={true}
+                    label="Submit for approval"
+                  />
+                }
+              />
+            </Form>
+          </Formik>
+        </Box>
+      </Box>
+    </Background>
   );
 }
