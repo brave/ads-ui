@@ -19,6 +19,7 @@ import { CampaignFormat } from "graphql/types";
 import { ErrorDetail } from "components/Error/ErrorDetail";
 import { ApolloError } from "@apollo/client";
 import _ from "lodash";
+import { usePersistMetricFilter } from "user/analytics/analyticsOverview/hooks/usePersistMetricFilter";
 
 interface Props {
   loading: boolean;
@@ -33,6 +34,12 @@ export function EngagementsOverview({
   error,
   loading,
 }: Props) {
+  const [grouping, setGrouping] = useState("daily");
+  const { metrics, setMetric } = usePersistMetricFilter({
+    campaignId: campaign?.id,
+    hasConversions: engagements?.some((e) => e.type === "conversion"),
+  });
+
   if (error) {
     return (
       <ErrorDetail
@@ -70,30 +77,6 @@ export function EngagementsOverview({
     );
   }
 
-  const [grouping, setGrouping] = useState("daily");
-
-  const [metrics, setMetrics] = useState<Metrics>({
-    metric1: { key: "views", active: true },
-    metric2: { key: "clicks", active: false },
-    metric3: { key: "dismissals", active: false },
-    metric4: { key: "landings", active: false },
-  });
-
-  const setActiveMetric = (
-    metric: keyof Metrics,
-    value: keyof StatsMetric,
-    active: boolean,
-  ) => {
-    const metricsCopy = _.cloneDeep(metrics);
-    const selectedMetric = metricsCopy[metric];
-
-    if (selectedMetric) {
-      selectedMetric.key = value;
-      selectedMetric.active = active;
-    }
-    setMetrics({ ...metricsCopy });
-  };
-
   const processedData = processData(engagements, metrics, grouping);
   const processedStats = processStats(engagements);
   const options = prepareChart(metrics, processedData);
@@ -103,7 +86,7 @@ export function EngagementsOverview({
       <MetricFilter
         processedStats={processedStats}
         metrics={metrics}
-        onSetMetric={setActiveMetric}
+        onSetMetric={setMetric}
       />
       <Box flexGrow={1} bgcolor="#fff" sx={{ borderRadius: "12px" }}>
         <EngagementHeader
