@@ -31,7 +31,7 @@ export function LandingPageAppBar() {
         <HelpLink
           label="Learn"
           props={{
-            href: "https://brave.com/brave-ads/resources/",
+            href: "https://brave.com/brave-ads",
             target: "_blank",
           }}
         />
