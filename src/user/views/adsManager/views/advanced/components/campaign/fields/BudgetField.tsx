@@ -1,4 +1,4 @@
-import { Box, Divider, InputAdornment, Stack, Typography } from "@mui/material";
+import { InputAdornment, Stack, Typography } from "@mui/material";
 import { FormikRadioControl, FormikTextField } from "form/FormikHelpers";
 import React, { useEffect, useState } from "react";
 import { useFormikContext } from "formik";
@@ -6,7 +6,6 @@ import { CampaignForm } from "../../../../../types";
 import { differenceInHours } from "date-fns";
 import { MIN_PER_CAMPAIGN, MIN_PER_DAY } from "validation/CampaignSchema";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import { PaymentType } from "graphql/types";
 import _ from "lodash";
 import { CardContainer } from "components/Card/CardContainer";
 
@@ -62,7 +61,11 @@ export function BudgetField({ isEdit }: Props) {
               : undefined
           }
           error={!!errors.budget || !!errors.dailyBudget}
-          disabled={isEdit && !advertiser.selfServiceSetPrice}
+          disabled={
+            isEdit &&
+            !advertiser.selfServiceSetPrice &&
+            values.state !== "draft"
+          }
         />
 
         {!advertiser.selfServiceSetPrice ? (
@@ -85,7 +88,7 @@ export function BudgetField({ isEdit }: Props) {
                   <InputAdornment position="start">$</InputAdornment>
                 ),
               }}
-              disabled={isEdit}
+              disabled={isEdit && values.state !== "draft"}
             />
 
             <FormikRadioControl
@@ -94,31 +97,10 @@ export function BudgetField({ isEdit }: Props) {
                 { value: "cpm", label: "CPM (Impressions)" },
                 { value: "cpc", label: "CPC (Clicks)" },
               ]}
-              disabled={isEdit}
+              disabled={isEdit && values.state !== "draft"}
             />
           </Stack>
         )}
-
-        <Stack spacing={1}>
-          <Typography variant="subtitle1" sx={{ fontWeight: 500, mt: 1 }}>
-            Payment Method
-          </Typography>
-          <Typography variant="body2">
-            Prepayment of the campaign budget is required before your campaign
-            can begin.{" "}
-            {values.paymentType !== PaymentType.Stripe
-              ? "We will contact you to arrange payment after you submit your campaign for approval."
-              : ""}
-          </Typography>
-          <FormikRadioControl
-            disabled={isEdit}
-            name="paymentType"
-            options={[
-              { label: "USD", value: advertiser.selfServicePaymentType },
-              { label: "BAT", value: PaymentType.ManualBat },
-            ]}
-          />
-        </Stack>
       </Stack>
     </CardContainer>
   );

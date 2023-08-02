@@ -69,7 +69,7 @@ export async function submitRegistration(form: RegistrationForm) {
         ...form.address,
       },
       user: {
-        fullName: `${form.firstName} ${form.lastName}`,
+        fullName: form.fullName,
         email: form.email,
       },
     }),

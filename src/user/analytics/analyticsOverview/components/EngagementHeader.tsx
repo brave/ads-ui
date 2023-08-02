@@ -1,6 +1,5 @@
 import React from "react";
-import { Box, Button, Stack, Tab, Tabs, Typography } from "@mui/material";
-import { EngagementChartType } from "../types";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import { Status } from "components/Campaigns/Status";
 import { CampaignSummaryFragment } from "graphql/campaign.generated";
 

@@ -39,6 +39,10 @@ export type CampaignWithEngagementsFragment = {
   endAt: any;
   pacingIndex?: number | null;
   format: Types.CampaignFormat;
+  adSets: Array<{
+    __typename?: "AdSet";
+    conversions?: Array<{ __typename?: "Conversion"; type: string }> | null;
+  }>;
   engagements?: Array<{
     __typename?: "Engagement";
     creativeinstanceid: string;
@@ -82,6 +86,10 @@ export type AnalyticOverviewQuery = {
     endAt: any;
     pacingIndex?: number | null;
     format: Types.CampaignFormat;
+    adSets: Array<{
+      __typename?: "AdSet";
+      conversions?: Array<{ __typename?: "Conversion"; type: string }> | null;
+    }>;
     engagements?: Array<{
       __typename?: "Engagement";
       creativeinstanceid: string;
@@ -161,6 +169,11 @@ export const CampaignWithEngagementsFragmentDoc = gql`
     currency
     pacingIndex
     format
+    adSets {
+      conversions {
+        type
+      }
+    }
     engagements {
       ...Engagement
     }

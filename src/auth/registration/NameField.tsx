@@ -1,41 +1,64 @@
-import { Stack, Typography } from "@mui/material";
+import { Box, Divider, Stack, Typography } from "@mui/material";
 import { FormikTextField } from "form/FormikHelpers";
 import React from "react";
 
 export function NameField() {
   return (
-    <React.Fragment>
-      <Typography variant="body1" gutterBottom>
-        Thank you for choosing Brave's Ads Platform! To complete your
-        registration, we need some information in order to provide you with a
-        great advertising experience. First, we'll start with the basics.
+    <Box flexGrow={1}>
+      <Typography variant="subtitle1" gutterBottom>
+        Thank you for choosing Brave's Ads Platform! Let's get you setup with
+        your account. First, we'll need your info.
       </Typography>
 
-      <Stack direction="row" spacing={1} mb={1} mt={2}>
-        <FormikTextField
-          required
-          name="firstName"
-          label="First Name"
-          margin="none"
-          autoComplete="given-name"
-        />
-
-        <FormikTextField
-          required
-          name="lastName"
-          label="Last Name"
-          margin="none"
-          autoComplete="family-name"
-        />
-      </Stack>
+      <Divider sx={{ marginTop: 5, marginBottom: 5 }} />
 
       <FormikTextField
-        required
+        name="fullName"
+        label="First and last name"
+        autoComplete="given-name"
+        margin="none"
+        placeholder="Your first and last name"
+        useTopLabel
+      />
+
+      <FormikTextField
         name="email"
         label="Email Address"
         type="email"
         autoComplete="email"
+        margin="none"
+        placeholder="Your email address"
+        useTopLabel
       />
-    </React.Fragment>
+
+      <FormikTextField
+        name="advertiser.name"
+        label="Business Name"
+        margin="none"
+        placeholder="The name of your business"
+        useTopLabel
+      />
+
+      <FormikTextField
+        required
+        name="advertiser.url"
+        label="Business URL"
+        autoComplete="url"
+        margin="none"
+        placeholder="Where we can find you on the internet"
+        useTopLabel
+      />
+
+      <FormikTextField
+        required
+        name="advertiser.phone"
+        label="Business phone"
+        autoComplete="tel"
+        type="tel"
+        margin="none"
+        placeholder="Where we can reach you"
+        useTopLabel
+      />
+    </Box>
   );
 }

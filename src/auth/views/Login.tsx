@@ -1,7 +1,7 @@
 import { Alert, Link, TextField, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import React, { useState } from "react";
-import { useHistory, Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 import { useSignIn } from "auth/hooks/mutations/useSignIn";
 import { AuthContainer } from "auth/views/components/AuthContainer";
 
@@ -12,14 +12,14 @@ export function Login() {
 
   const { signIn, loading, error } = useSignIn({
     onSuccess() {
-      history.replace("/");
+      history.replace("/user/main");
     },
   });
 
   return (
     <AuthContainer>
-      <Typography sx={{ fontFamily: "Poppins", color: "#434251" }} variant="h4">
-        Sign into your Brave Ads account
+      <Typography sx={{ fontFamily: "Poppins", color: "#434251" }} variant="h1">
+        Log into your Brave Ads account
       </Typography>
       <TextField
         sx={{ mt: 5, mb: 3 }}
@@ -52,7 +52,7 @@ export function Login() {
           signIn(email, password);
         }}
       >
-        Sign In
+        Log in
       </LoadingButton>
 
       <Link

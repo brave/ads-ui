@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Chip, Stack, Typography } from "@mui/material";
+import { Box, Chip, Typography } from "@mui/material";
 import { OverviewDetail, StatsMetric } from "../types";
 
 interface OverviewProps extends OverviewDetail {
@@ -49,6 +49,19 @@ export default function LiveFeed({ overview, processed }: LiveFeedProps) {
       value: `${budget.toLocaleString()} ${currency}`,
     },
   ];
+
+  if (processed.conversions > 0) {
+    feedValues.push(
+      {
+        label: "Conversions",
+        value: `${processed.conversions}`,
+      },
+      {
+        label: "CPA",
+        value: `$${processed.cpa.toLocaleString()}`,
+      },
+    );
+  }
 
   return (
     <Box

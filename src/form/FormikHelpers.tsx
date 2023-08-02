@@ -4,6 +4,7 @@ import React, {
   useEffect,
 } from "react";
 import {
+  Box,
   Button,
   FormControl,
   FormControlLabel,
@@ -30,6 +31,7 @@ type FormikTextFieldProps = TextFieldProps & {
   small?: boolean;
   type?: HTMLInputTypeAttribute;
   disabled?: boolean;
+  useTopLabel?: boolean;
 };
 
 export const FormikTextField: React.FC<FormikTextFieldProps> = (props) => {
@@ -44,19 +46,36 @@ export const FormikTextField: React.FC<FormikTextFieldProps> = (props) => {
     helperText = `${len}/${props.maxLengthInstantFeedback} characters`;
   }
 
+  const extraOmit = props.useTopLabel ? ["label"] : [];
   return (
-    <TextField
-      variant="outlined"
-      fullWidth={!props.small}
-      margin="normal"
-      error={showError}
-      helperText={showError ? meta.error : helperText}
-      color="secondary"
-      autoComplete="off"
-      disabled={props.disabled}
-      {..._.omit(props, ["small", "maxLengthInstantFeedback", "helperText"])}
-      {...field}
-    />
+    <Box>
+      {props.useTopLabel && (
+        <FormLabel sx={{ color: "text.primary" }}> {props.label} </FormLabel>
+      )}
+      <TextField
+        variant="outlined"
+        fullWidth={!props.small}
+        margin="normal"
+        error={showError}
+        helperText={showError ? meta.error : helperText}
+        color="secondary"
+        autoComplete="off"
+        placeholder={
+          props.useTopLabel && !props.placeholder
+            ? props.label
+            : props.placeholder
+        }
+        sx={props.useTopLabel ? { marginBottom: 2 } : {}}
+        disabled={props.disabled}
+        {..._.omit(props, [
+          "small",
+          "maxLengthInstantFeedback",
+          "helperText",
+          ...extraOmit,
+        ])}
+        {...field}
+      />
+    </Box>
   );
 };
 
@@ -71,7 +90,7 @@ export const FormikSwitch: React.FC<FormikSwitchProps> = (props) => {
     <>
       <FormControlLabel control={<Switch {...field} />} label={props.label} />
       <ErrorMessage name={field.name}>
-        {(msg) => <FormHelperText error>{msg}</FormHelperText>}
+        {(msg: string) => <FormHelperText error>{msg}</FormHelperText>}
       </ErrorMessage>
     </>
   );
@@ -90,7 +109,7 @@ export const FormikRadioGroup: React.FC<
     <>
       <RadioGroup {...props} {...field} />
       <ErrorMessage name={field.name}>
-        {(msg) => <FormHelperText error>{msg}</FormHelperText>}
+        {(msg: string) => <FormHelperText error>{msg}</FormHelperText>}
       </ErrorMessage>
     </>
   );
@@ -199,16 +218,15 @@ export const FormikSubmitButton: React.FC<FormikSubmitButtonProps> = ({
   return (
     <Tooltip title={saveButtonTooltip}>
       <div>
-        <LoadingButton
+        <Button
           color="primary"
           variant="contained"
           type="submit"
           size="large"
           disabled={!saveEnabled || formik.isSubmitting}
-          loading={formik.isSubmitting}
         >
           {formik.isSubmitting ? inProgressLabel : label}
-        </LoadingButton>
+        </Button>
       </div>
     </Tooltip>
   );

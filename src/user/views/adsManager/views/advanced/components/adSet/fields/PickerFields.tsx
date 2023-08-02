@@ -1,4 +1,4 @@
-import { Divider, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { SegmentPicker } from "components/Segment/SegmentPicker";
 import { PlatformPicker } from "components/Platform/PlatformPicker";
 import React from "react";

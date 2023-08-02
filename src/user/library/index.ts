@@ -160,6 +160,7 @@ export function editCampaignValues(
       };
     }),
     advertiserId,
+    hasPaymentIntent: campaign.hasPaymentIntent ?? false,
     creatives: creativeList(ads).map((a) => a.id!),
     newCreative: initialCreative,
     isCreating: false,
@@ -219,6 +220,7 @@ export function transformEditForm(
     startAt: form.startAt,
     state: form.state,
     type: form.type,
+    paymentType: form.paymentType,
     adSets: form.adSets.map((adSet) => ({
       id: adSet.id,
       segments: adSet.segments.map((v) => ({ code: v.code, name: v.name })),

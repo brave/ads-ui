@@ -31,6 +31,11 @@ export type AdvertiserCampaignFilter = {
   includeCreativeSets?: InputMaybe<Scalars["Boolean"]>;
 };
 
+export enum AdvertiserSource {
+  Managed = "MANAGED",
+  SelfServe = "SELF_SERVE",
+}
+
 export type ApproveCampaignInput = {
   campaignId: Scalars["String"];
 };
@@ -107,9 +112,8 @@ export type CreateAdInput = {
   creativeSetId?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["String"]>;
   /** The price in the owning campaign's currency for each single confirmation of the priceType specified. Note therefore that the caller is responsible for dividing cost-per-mille by 1000. */
-  price?: InputMaybe<Scalars["Numeric"]>;
-  priceType?: InputMaybe<ConfirmationType>;
-  prices?: InputMaybe<Array<CreatePriceInput>>;
+  price: Scalars["Numeric"];
+  priceType: ConfirmationType;
   state?: InputMaybe<Scalars["String"]>;
   webhooks?: InputMaybe<Array<CreateWebhookInput>>;
 };
@@ -337,6 +341,7 @@ export type NotificationPayloadInput = {
 export enum PaymentType {
   ManualBat = "MANUAL_BAT",
   Netsuite = "NETSUITE",
+  Radom = "RADOM",
   Stripe = "STRIPE",
 }
 
@@ -375,7 +380,6 @@ export type UpdateAdInput = {
   creativeId?: InputMaybe<Scalars["String"]>;
   creativeSetId?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["String"]>;
-  prices?: InputMaybe<Array<CreatePriceInput>>;
   state?: InputMaybe<Scalars["String"]>;
   webhooks?: InputMaybe<Array<CreateWebhookInput>>;
 };
@@ -528,11 +532,6 @@ export type UpdateUserInput = {
 export type WallpaperInput = {
   focalPoint: FocalPointInput;
   imageUrl: Scalars["String"];
-};
-
-export type CreatePriceInput = {
-  amount: Scalars["Float"];
-  type: Scalars["String"];
 };
 
 export type CreateWebhookInput = {
