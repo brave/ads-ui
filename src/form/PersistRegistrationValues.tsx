@@ -6,16 +6,12 @@ import _ from "lodash";
 export const PersistRegistrationValues = () => {
   const { values, setValues, dirty } = useFormikContext<RegistrationForm>();
 
-  const setForm = () => {
+  // read the values from localStorage on load
+  useEffect(() => {
     const form = localStorage.getItem("registerInProgress");
     if (form) {
       setValues(JSON.parse(form));
     }
-  };
-
-  // read the values from localStorage on load
-  useEffect(() => {
-    setForm();
   }, []);
 
   // save the values to localStorage on update
