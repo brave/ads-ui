@@ -47,9 +47,8 @@ export function NotificationAd({ onCreate }: Props) {
     <CardContainer header="New Ad">
       <FormikTextField name="newCreative.name" label="Ad Name" />
 
-      <Stack direction="row" alignItems="center">
+      <Stack direction="row" alignItems="center" spacing={1}>
         <FormikTextField
-          sx={{ mr: 0.5 }}
           name="newCreative.title"
           label="Ad Title"
           helperText="Max 30 Characters"
@@ -57,7 +56,6 @@ export function NotificationAd({ onCreate }: Props) {
         />
 
         <FormikTextField
-          sx={{ ml: 0.5 }}
           name="newCreative.body"
           label="Ad Body"
           helperText="Max 60 Characters"
