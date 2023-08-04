@@ -48,7 +48,7 @@ export const FormikTextField: React.FC<FormikTextFieldProps> = (props) => {
 
   const extraOmit = props.useTopLabel ? ["label"] : [];
   return (
-    <Box>
+    <Box flexGrow={1}>
       {props.useTopLabel && (
         <FormLabel sx={{ color: "text.primary" }}> {props.label} </FormLabel>
       )}
@@ -67,6 +67,9 @@ export const FormikTextField: React.FC<FormikTextFieldProps> = (props) => {
         }
         sx={props.useTopLabel ? { marginBottom: 2 } : {}}
         disabled={props.disabled}
+        inputProps={{
+          maxLength: props.maxLengthInstantFeedback,
+        }}
         {..._.omit(props, [
           "small",
           "maxLengthInstantFeedback",
