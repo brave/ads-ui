@@ -13,6 +13,7 @@ import { Box, Toolbar, Typography } from "@mui/material";
 import { Background } from "components/Background/Background";
 import { LandingPageAppBar } from "components/AppBar/LandingPageAppBar";
 import { PaddedCardContainer } from "components/Card/PaddedCardContainer";
+import { PersistRegistrationValues } from "form/PersistRegistrationValues";
 
 export function Register() {
   const [activeStep, setActiveStep] = useState(0);
@@ -66,6 +67,8 @@ export function Register() {
                   />
                 }
               />
+
+              <PersistRegistrationValues />
             </Form>
           </Formik>
         </Box>
