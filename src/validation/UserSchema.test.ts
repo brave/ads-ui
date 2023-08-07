@@ -3,6 +3,7 @@ import { produce } from "immer";
 
 const validUser = {
   email: "test@brave.com",
+  fullName: "Test User",
 };
 
 it("should pass on a valid object", () => {
