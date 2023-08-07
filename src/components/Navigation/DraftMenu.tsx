@@ -18,7 +18,7 @@ export function DraftMenu() {
 
   return (
     <>
-      <Tooltip title="Drafts">
+      <Tooltip title="Local Campaign Drafts">
         <span>
           <IconButton disabled={drafts.length === 0} onClick={handleClick}>
             <Badge color="primary" badgeContent={drafts.length}>

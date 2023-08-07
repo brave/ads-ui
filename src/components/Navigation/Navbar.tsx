@@ -16,8 +16,10 @@ import { DraftMenu } from "components/Navigation/DraftMenu";
 import moment from "moment";
 import ads from "../../../branding.svg";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { useSignOut } from "auth/hooks/mutations/useSignOut";
 
 export function Navbar() {
+  const { signOut } = useSignOut();
   const { advertiser } = useAdvertiser();
   const history = useHistory();
   const { url } = useRouteMatch();
@@ -42,23 +44,7 @@ export function Navbar() {
         <Stack direction="row" alignItems="center" spacing={2}>
           <img src={ads} alt="Ads" height="31px" width="180px" />
           <Divider orientation="vertical" flexItem />
-          {advertiser.selfServiceCreate && (
-            <>
-              <DraftMenu />
-              <div>
-                <Typography color="black" variant="body2">
-                  Need Help?
-                  <Link
-                    sx={{ ml: 1 }}
-                    href="mailto:selfserve@brave.com"
-                    underline="none"
-                  >
-                    selfserve@brave.com
-                  </Link>
-                </Typography>
-              </div>
-            </>
-          )}
+          {advertiser.selfServiceCreate && <DraftMenu />}
         </Stack>
         <div style={{ flexGrow: 1 }} />
         {advertiser.selfServiceCreate && (
@@ -66,13 +52,20 @@ export function Navbar() {
             onClick={() => history.push(newUrl)}
             size="medium"
             variant="contained"
-            sx={{ mr: 5 }}
+            sx={{ mr: 3 }}
             disabled={isNewCampaignPage || isCompletePage || !advertiser.agreed}
           >
             New Campaign
           </Button>
         )}
-        <UserMenu />
+        <Button
+          variant="outlined"
+          size="medium"
+          sx={{ textTransform: "none" }}
+          onClick={() => signOut()}
+        >
+          Sign out
+        </Button>
       </Toolbar>
     </AppBar>
   );

@@ -17,6 +17,8 @@ import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { Navbar } from "components/Navigation/Navbar";
 import { CampaignView } from "user/views/user/CampaignView";
 import { CampaignReportView } from "user/views/user/CampaignReportView";
+import MiniSideBar from "components/Drawer/MiniSideBar";
+import { Profile } from "user/views/user/Profile";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -68,6 +70,8 @@ export function User() {
               />
 
               <Route path="/user/main/settings" component={Settings} />
+
+              <Route path="/user/main/profile" component={Profile} />
 
               <ProtectedRoute
                 path="/user/main/campaign"
