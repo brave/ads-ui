@@ -58,12 +58,7 @@ export function Navbar() {
             New Campaign
           </Button>
         )}
-        <Button
-          variant="outlined"
-          size="medium"
-          sx={{ textTransform: "none" }}
-          onClick={() => signOut()}
-        >
+        <Button variant="outlined" size="medium" onClick={() => signOut()}>
           Sign out
         </Button>
       </Toolbar>

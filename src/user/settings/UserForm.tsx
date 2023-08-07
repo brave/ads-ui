@@ -14,7 +14,7 @@ export function UserForm() {
   const [initialVals, setInitialVals] = useState(user);
 
   if (!user.userId) {
-    const details = "Unable to get user information";
+    const details = "Unable to get profile information";
     return <ErrorDetail error={details} additionalDetails={details} />;
   }
 
@@ -25,7 +25,7 @@ export function UserForm() {
   });
 
   return (
-    <CardContainer header="User Details">
+    <CardContainer header="Profile Details">
       <Formik
         enableReinitialize
         initialValues={initialVals}

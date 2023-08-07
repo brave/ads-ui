@@ -2,7 +2,14 @@ import * as React from "react";
 import { useContext, useState } from "react";
 
 import { useHistory } from "react-router-dom";
-import { Badge, IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
+import {
+  Badge,
+  Button,
+  IconButton,
+  Menu,
+  MenuItem,
+  Tooltip,
+} from "@mui/material";
 import DraftsIcon from "@mui/icons-material/Drafts";
 import { DraftContext } from "state/context";
 
@@ -18,15 +25,16 @@ export function DraftMenu() {
 
   return (
     <>
-      <Tooltip title="Local Campaign Drafts">
-        <span>
-          <IconButton disabled={drafts.length === 0} onClick={handleClick}>
-            <Badge color="primary" badgeContent={drafts.length}>
-              <DraftsIcon fontSize="medium" />
-            </Badge>
-          </IconButton>
-        </span>
-      </Tooltip>
+      <Button
+        disabled={drafts.length === 0}
+        onClick={handleClick}
+        sx={{ pr: 3 }}
+        endIcon={
+          <Badge color="primary" badgeContent={drafts.length} sx={{ ml: 1 }} />
+        }
+      >
+        Campaign Drafts
+      </Button>
       <Menu open={open} anchorEl={anchorEl} onClose={() => setAnchorEl(null)}>
         <MenuItem
           disabled

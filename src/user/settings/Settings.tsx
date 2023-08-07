@@ -16,7 +16,7 @@ import { setActiveAdvertiser } from "auth/util";
 import { CardContainer } from "components/Card/CardContainer";
 import { DraftContext } from "state/context";
 import { NewKeyPairModal } from "user/settings/NewKeyPairModal";
-import { DashboardButton } from "components/Button/DashboardButton";
+import MiniSideBar from "components/Drawer/MiniSideBar";
 
 const Settings = () => {
   const { advertiser: activeAdvertiser, advertisers } = useAdvertiser();
@@ -26,6 +26,7 @@ const Settings = () => {
   const setActiveAdvertiserWithId = (e: SelectChangeEvent) => {
     const id = e.target.value;
     const adv = _.find(advertisers, { id });
+    console.log(adv);
 
     if (adv) {
       setAdvertiser(adv);
@@ -35,36 +36,37 @@ const Settings = () => {
   };
 
   return (
-    <Container>
-      <DashboardButton />
-      <Stack spacing={2} mt={1}>
-        <NewKeyPairModal advertiser={advertiser} />
+    <MiniSideBar>
+      <Container>
+        <Stack spacing={2} mt={1}>
+          <NewKeyPairModal advertiser={advertiser} />
 
-        <CardContainer header="Organization">
-          <Typography>
-            You may have access to multiple organisations. Switch between them
-            here.
-          </Typography>
+          <CardContainer header="Organization">
+            <Typography>
+              You may have access to multiple organisations. Switch between them
+              here.
+            </Typography>
 
-          <Box sx={{ mt: 2 }}>
-            <FormControl fullWidth>
-              <InputLabel>Select Organization</InputLabel>
-              <Select
-                value={advertiser.id}
-                label="Select Organization"
-                onChange={(e) => setActiveAdvertiserWithId(e)}
-              >
-                {advertisers.map((a) => (
-                  <MenuItem key={a.id} value={a.id}>
-                    {a.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Box>
-        </CardContainer>
-      </Stack>
-    </Container>
+            <Box sx={{ mt: 2 }}>
+              <FormControl fullWidth>
+                <InputLabel>Select Organization</InputLabel>
+                <Select
+                  value={advertiser.id}
+                  label="Select Organization"
+                  onChange={(e) => setActiveAdvertiserWithId(e)}
+                >
+                  {advertisers.map((a) => (
+                    <MenuItem key={a.id} value={a.id}>
+                      {a.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Box>
+          </CardContainer>
+        </Stack>
+      </Container>
+    </MiniSideBar>
   );
 };
 

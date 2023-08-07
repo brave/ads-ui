@@ -3,13 +3,14 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
-import { Button, Drawer, Typography } from "@mui/material";
+import { Button, Drawer, Typography, SvgIcon } from "@mui/material";
 import { PropsWithChildren } from "react";
 import CampaignOutlinedIcon from "@mui/icons-material/CampaignOutlined";
 import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlined";
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 import HeadsetMicOutlinedIcon from "@mui/icons-material/HeadsetMicOutlined";
 import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
+import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined";
 
 type RouteOption = {
   label: string;
@@ -24,18 +25,45 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
     {
       label: "Campaigns",
       href: "/user/main/campaign",
-      icon: <CampaignOutlinedIcon fontSize="large" />,
+      icon: (
+        <CampaignOutlinedIcon
+          fontSize="large"
+          sx={{ color: "rgba(161, 171, 186, 1)" }}
+        />
+      ),
+    },
+    // Possible future enhancements, not visible to user but help keep spacing
+    {
+      label: "Creatives",
+      href: "/user/main/creatives",
+      icon: (
+        <LightbulbOutlinedIcon
+          fontSize="large"
+          sx={{ color: "rgba(161, 171, 186, 1)" }}
+        />
+      ),
+      disabled: true,
     },
     {
       label: "Assets",
       href: "/user/main/assets",
-      icon: <InsertPhotoOutlinedIcon fontSize="large" />,
+      icon: (
+        <InsertPhotoOutlinedIcon
+          fontSize="large"
+          sx={{ color: "rgba(161, 171, 186, 1)" }}
+        />
+      ),
       disabled: true,
     },
     {
       label: "Audiences",
       href: "/user/main/audiences",
-      icon: <CampaignOutlinedIcon fontSize="large" />,
+      icon: (
+        <CampaignOutlinedIcon
+          fontSize="large"
+          sx={{ color: "rgba(161, 171, 186, 1)" }}
+        />
+      ),
       disabled: true,
     },
   ];
@@ -44,17 +72,32 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
     {
       label: "Account",
       href: "/user/main/settings",
-      icon: <AccountBalanceOutlinedIcon fontSize="large" />,
+      icon: (
+        <AccountBalanceOutlinedIcon
+          fontSize="large"
+          sx={{ color: "rgba(161, 171, 186, 1)" }}
+        />
+      ),
     },
     {
       label: "Profile",
       href: "/user/main/profile",
-      icon: <AccountBoxOutlinedIcon fontSize="large" />,
+      icon: (
+        <AccountBoxOutlinedIcon
+          fontSize="large"
+          sx={{ color: "rgba(161, 171, 186, 1)" }}
+        />
+      ),
     },
     {
       label: "Support",
       href: "mailto:selfserve@brave.com",
-      icon: <HeadsetMicOutlinedIcon fontSize="large" />,
+      icon: (
+        <HeadsetMicOutlinedIcon
+          fontSize="large"
+          sx={{ color: "rgba(161, 171, 186, 1)" }}
+        />
+      ),
     },
   ];
 
@@ -101,7 +144,6 @@ const ItemBox = (props: RouteOption) => {
       href={props.href}
       disabled={props.disabled}
       sx={{
-        textTransform: "none",
         padding: "15px 6px 15px 6px",
         borderRadius: "0px",
         gap: "8px",
@@ -114,7 +156,7 @@ const ItemBox = (props: RouteOption) => {
         alignItems="center"
       >
         {props.icon}
-        <Typography>{props.label}</Typography>
+        <Typography color="rgba(63, 72, 85, 1)">{props.label}</Typography>
       </Box>
     </Box>
   );

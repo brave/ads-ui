@@ -97,7 +97,6 @@ function AuthedButton(props: { isAuthenticated?: boolean }) {
     <Button
       variant="outlined"
       size="large"
-      sx={{ textTransform: "none" }}
       href={!props.isAuthenticated ? "/auth/link" : undefined}
       onClick={props.isAuthenticated ? () => signOut() : undefined}
     >

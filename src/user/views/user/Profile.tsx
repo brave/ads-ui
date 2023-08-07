@@ -1,13 +1,17 @@
 import { Container } from "@mui/material";
 import { UserForm } from "user/settings/UserForm";
-import { DashboardButton } from "components/Button/DashboardButton";
+import { UserApiKey } from "user/settings/UserApiKey";
+import MiniSideBar from "components/Drawer/MiniSideBar";
 
 export function Profile() {
   return (
-    <Container>
-      <div style={{ marginTop: "10px" }} />
-      <DashboardButton />
-      <UserForm />
-    </Container>
+    <MiniSideBar>
+      <Container>
+        <div style={{ marginTop: "10px" }} />
+        <UserForm />
+        <div style={{ marginBottom: "40px" }} />
+        <UserApiKey />
+      </Container>
+    </MiniSideBar>
   );
 }

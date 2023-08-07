@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { useUpdateAdvertiserMutation } from "graphql/advertiser.generated";
 import * as tweetnacl from "tweetnacl";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { IAdvertiser } from "auth/context/auth.interface";
 import { CardContainer } from "components/Card/CardContainer";
 
@@ -34,7 +34,8 @@ interface Props {
 
 export function NewKeyPairModal({ advertiser }: Props) {
   const [saving, setSaving] = useState(false);
-  const [publicKey, setPublicKey] = useState(advertiser.publicKey);
+  const publicKey = useRef<string | null>();
+  publicKey.current = advertiser.publicKey;
   const [newPublicKey, setNewPublicKey] = useState("");
   const [newPrivateKey, setNewPrivateKey] = useState("");
   const [privateKey, setPrivateKey] = useState("");
@@ -46,11 +47,11 @@ export function NewKeyPairModal({ advertiser }: Props) {
     variables: {
       updateAdvertiserInput: {
         id: advertiser.id,
-        publicKey: publicKey,
+        publicKey: publicKey.current,
       },
     },
     onCompleted() {
-      setPublicKey(newPublicKey);
+      publicKey.current = newPublicKey;
       setPrivateKey("");
       setNewPrivateKey("");
       closeNewKeypairModal();
@@ -105,11 +106,11 @@ export function NewKeyPairModal({ advertiser }: Props) {
           used to decrypt and view conversion data.
         </Typography>
 
-        {publicKey !== "" && (
+        {publicKey.current !== "" && (
           <Box marginTop={1}>
             <Typography>Your organization's public key:</Typography>
             <Box component="pre" marginY={0}>
-              {publicKey}
+              {publicKey.current}
             </Box>
           </Box>
         )}
