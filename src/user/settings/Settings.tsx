@@ -26,7 +26,6 @@ const Settings = () => {
   const setActiveAdvertiserWithId = (e: SelectChangeEvent) => {
     const id = e.target.value;
     const adv = _.find(advertisers, { id });
-    console.log(adv);
 
     if (adv) {
       setAdvertiser(adv);
