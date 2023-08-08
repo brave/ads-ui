@@ -1,25 +1,39 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
-import { Button, Drawer, Typography, SvgIcon } from "@mui/material";
-import { PropsWithChildren } from "react";
+import {
+  Button,
+  Drawer,
+  Link,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+  Typography,
+} from "@mui/material";
+import { PropsWithChildren, useState } from "react";
+import { Link as RouterLink, useRouteMatch } from "react-router-dom";
 import CampaignOutlinedIcon from "@mui/icons-material/CampaignOutlined";
 import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlined";
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 import HeadsetMicOutlinedIcon from "@mui/icons-material/HeadsetMicOutlined";
 import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
 import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined";
+import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
 
 type RouteOption = {
   label: string;
   href: string;
   icon: React.ReactNode;
   disabled?: boolean;
+  onClick?: (event: React.MouseEvent<any>) => void;
 };
 
-const drawerWidth = 120;
+const drawerWidth = 140;
 export default function MiniSideBar({ children }: PropsWithChildren) {
   const dashboardRoutes: RouteOption[] = [
     {
@@ -28,7 +42,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
       icon: (
         <CampaignOutlinedIcon
           fontSize="large"
-          sx={{ color: "rgba(161, 171, 186, 1)" }}
+          sx={{ color: "text.secondary" }}
         />
       ),
     },
@@ -39,7 +53,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
       icon: (
         <LightbulbOutlinedIcon
           fontSize="large"
-          sx={{ color: "rgba(161, 171, 186, 1)" }}
+          sx={{ color: "text.secondary" }}
         />
       ),
       disabled: true,
@@ -50,7 +64,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
       icon: (
         <InsertPhotoOutlinedIcon
           fontSize="large"
-          sx={{ color: "rgba(161, 171, 186, 1)" }}
+          sx={{ color: "text.secondary" }}
         />
       ),
       disabled: true,
@@ -59,9 +73,9 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
       label: "Audiences",
       href: "/user/main/audiences",
       icon: (
-        <CampaignOutlinedIcon
+        <PeopleOutlineOutlinedIcon
           fontSize="large"
-          sx={{ color: "rgba(161, 171, 186, 1)" }}
+          sx={{ color: "text.secondary" }}
         />
       ),
       disabled: true,
@@ -75,7 +89,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
       icon: (
         <AccountBalanceOutlinedIcon
           fontSize="large"
-          sx={{ color: "rgba(161, 171, 186, 1)" }}
+          sx={{ color: "text.secondary" }}
         />
       ),
     },
@@ -85,17 +99,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
       icon: (
         <AccountBoxOutlinedIcon
           fontSize="large"
-          sx={{ color: "rgba(161, 171, 186, 1)" }}
-        />
-      ),
-    },
-    {
-      label: "Support",
-      href: "mailto:selfserve@brave.com",
-      icon: (
-        <HeadsetMicOutlinedIcon
-          fontSize="large"
-          sx={{ color: "rgba(161, 171, 186, 1)" }}
+          sx={{ color: "text.secondary" }}
         />
       ),
     },
@@ -103,7 +107,6 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <CssBaseline />
       <Drawer
         variant="permanent"
         open
@@ -112,11 +115,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
         }}
       >
         <Toolbar />
-        <Box
-          sx={{
-            padding: "6px 0px 6px 0px",
-          }}
-        >
+        <List>
           {dashboardRoutes.map((dr) => (
             <ItemBox
               href={dr.href}
@@ -129,7 +128,8 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
           {settingsRoutes.map((sr) => (
             <ItemBox href={sr.href} icon={sr.icon} label={sr.label} />
           ))}
-        </Box>
+          <SupportMenu />
+        </List>
       </Drawer>
       {children}
     </Box>
@@ -137,27 +137,73 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
 }
 
 const ItemBox = (props: RouteOption) => {
+  const match = useRouteMatch();
   return (
-    <Box
-      display="flex"
-      component={Button}
-      href={props.href}
-      disabled={props.disabled}
+    <ListItemButton
+      component={RouterLink}
+      to={props.href}
       sx={{
-        padding: "15px 6px 15px 6px",
+        display: "flex",
+        flexDirection: "column",
         borderRadius: "0px",
-        gap: "8px",
+        gap: "3px",
+        visibility: props.disabled ? "hidden" : "visible",
+        paddingLeft: "5px",
+        paddingRight: "5px",
       }}
+      selected={match.url.includes(props.href)}
+      onClick={props.onClick}
     >
-      <Box
-        sx={{ visibility: props.disabled ? "hidden" : "visible" }}
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-      >
-        {props.icon}
-        <Typography color="rgba(63, 72, 85, 1)">{props.label}</Typography>
-      </Box>
-    </Box>
+      <ListItemIcon sx={{ minWidth: "unset" }}>{props.icon}</ListItemIcon>
+      <ListItemText disableTypography>
+        <Typography textAlign="center">{props.label}</Typography>
+      </ListItemText>
+    </ListItemButton>
   );
 };
+
+export function SupportMenu() {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  return (
+    <>
+      <ItemBox
+        label="Support"
+        href="#"
+        icon={
+          <HeadsetMicOutlinedIcon
+            fontSize="large"
+            sx={{ color: "text.secondary" }}
+          />
+        }
+        onClick={handleClick}
+      />
+      <Menu open={open} anchorEl={anchorEl} onClose={() => setAnchorEl(null)}>
+        <MenuItem
+          onClick={() => {
+            window.open("https://brave.com/brave-ads", "_blank");
+            setAnchorEl(null);
+          }}
+        >
+          Advertiser Resources
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            window.open("mailto:selfserve@brave.com", "_self");
+            setAnchorEl(null);
+          }}
+        >
+          Email support:{" "}
+          <Link sx={{ ml: 1 }} underline="none">
+            selfserve@brave.com
+          </Link>
+        </MenuItem>
+      </Menu>
+    </>
+  );
+}
