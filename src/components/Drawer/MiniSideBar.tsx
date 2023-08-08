@@ -186,7 +186,7 @@ export function SupportMenu() {
       <Menu open={open} anchorEl={anchorEl} onClose={() => setAnchorEl(null)}>
         <MenuItem
           onClick={() => {
-            window.open("https://brave.com/brave-ads", "_blank");
+            window.open("https://brave.com/brave-ads", "_blank", "noopener");
             setAnchorEl(null);
           }}
         >
@@ -194,7 +194,7 @@ export function SupportMenu() {
         </MenuItem>
         <MenuItem
           onClick={() => {
-            window.open("mailto:selfserve@brave.com", "_self");
+            window.open("mailto:selfserve@brave.com", "_self", "noopener");
             setAnchorEl(null);
           }}
         >
