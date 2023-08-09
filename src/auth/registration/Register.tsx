@@ -33,42 +33,40 @@ export function Register() {
 
   return (
     <Background>
-      <Box>
-        <LandingPageAppBar />
-        <Toolbar sx={{ mb: 1.5 }} />
-        <Box display="flex" width="725px" flexDirection="column" mb={3}>
-          <Typography textAlign="center" variant="h4" sx={{ mb: 3 }}>
-            {steps[activeStep].label}
-          </Typography>
-          <Formik
-            initialValues={initialValues}
-            onSubmit={async (v: RegistrationForm, { setSubmitting }) => {
-              setSubmitting(true);
-              register(v);
-              setSubmitting(false);
-            }}
-            validationSchema={RegistrationSchema}
-          >
-            <Form>
-              <PaddedCardContainer>
-                {steps[activeStep].component}
-              </PaddedCardContainer>
+      <LandingPageAppBar />
+      <Toolbar sx={{ mb: 1.5 }} />
+      <Box display="flex" width="725px" flexDirection="column" mb={3}>
+        <Typography textAlign="center" variant="h4" sx={{ mb: 3 }}>
+          {steps[activeStep].label}
+        </Typography>
+        <Formik
+          initialValues={initialValues}
+          onSubmit={async (v: RegistrationForm, { setSubmitting }) => {
+            setSubmitting(true);
+            register(v);
+            setSubmitting(false);
+          }}
+          validationSchema={RegistrationSchema}
+        >
+          <Form>
+            <PaddedCardContainer>
+              {steps[activeStep].component}
+            </PaddedCardContainer>
 
-              <NextAndBack
-                activeStep={activeStep}
-                steps={steps.length - 1}
-                onNext={() => setActiveStep(activeStep + 1)}
-                onBack={() => setActiveStep(activeStep - 1)}
-                final={
-                  <FormikSubmitButton
-                    isCreate={true}
-                    label="Submit for approval"
-                  />
-                }
-              />
-            </Form>
-          </Formik>
-        </Box>
+            <NextAndBack
+              activeStep={activeStep}
+              steps={steps.length - 1}
+              onNext={() => setActiveStep(activeStep + 1)}
+              onBack={() => setActiveStep(activeStep - 1)}
+              final={
+                <FormikSubmitButton
+                  isCreate={true}
+                  label="Submit for approval"
+                />
+              }
+            />
+          </Form>
+        </Formik>
       </Box>
     </Background>
   );
