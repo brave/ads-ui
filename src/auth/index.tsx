@@ -42,6 +42,7 @@ export const IAuthProvider: React.FC<IAuthProviderProps> = ({
         email: u.email,
         role: u.role,
         userId: u.id,
+        fullName: u.fullName,
         advertisers: u.advertisers,
         isAuthenticated: u.advertisers.length > 0 && !!active,
       }));

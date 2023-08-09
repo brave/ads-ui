@@ -361,6 +361,10 @@ export type RejectCampaignInput = {
   option: CampaignRejection;
 };
 
+export enum RequestedDimensions {
+  Ad = "AD",
+}
+
 export type SearchHomepagePayloadInput = {
   body: Scalars["String"];
   ctaText?: Scalars["String"];

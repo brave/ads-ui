@@ -12,18 +12,14 @@ export function ActionButtons() {
 
   return (
     <Stack mt={3} spacing={2} mr={1}>
-      <Button
-        size="small"
-        sx={{ textTransform: "none" }}
-        onClick={() => history.push("/user/main")}
-      >
+      <Button size="small" onClick={() => history.push("/user/main")}>
         Return to dashboard
       </Button>
       {values.draftId !== undefined && (
         <Button
           size="small"
           color="error"
-          sx={{ textTransform: "none", mr: 1 }}
+          sx={{ mr: 1 }}
           onClick={() => {
             localStorage.removeItem(values.draftId!);
             setDrafts();

@@ -4,6 +4,7 @@ import React from "react";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import goals from "../../../images.svg";
 import { useIsAuthenticated } from "auth/hooks/queries/useIsAuthenticated";
+import { Link as RouterLink } from "react-router-dom";
 
 const GradientText = {
   backgroundImage:
@@ -40,13 +41,14 @@ export function LandingPage() {
           <Box>
             <Button
               variant="contained"
+              component={RouterLink}
               sx={{
                 width: "Hug (165px)",
                 height: "Fixed (60px)",
                 padding: "18px 24px 18px 24px",
               }}
               size="large"
-              href={isAuthenticated ? "/user/main" : "/register"}
+              to={isAuthenticated ? "/user/main" : "/register"}
             >
               {isAuthenticated ? "Dashboard" : "Get Started"}
             </Button>

@@ -10,6 +10,7 @@ import {
   LinkProps,
   Stack,
   Toolbar,
+  Typography,
 } from "@mui/material";
 import ads from "../../../branding.svg";
 import { Link as RouterLink, useRouteMatch } from "react-router-dom";
@@ -23,7 +24,11 @@ export function LandingPageAppBar() {
   const links = [
     {
       component: isAuthenticated ? null : (
-        <HelpLink label="Get Started" props={{ href: "/register" }} />
+        <RouterLink to={"/register"} style={{ textDecoration: "none" }}>
+          <Typography variant="subtitle1" color="text.primary">
+            Get started
+          </Typography>
+        </RouterLink>
       ),
     },
     {
@@ -97,8 +102,8 @@ function AuthedButton(props: { isAuthenticated?: boolean }) {
     <Button
       variant="outlined"
       size="large"
-      sx={{ textTransform: "none" }}
-      href={!props.isAuthenticated ? "/auth/link" : undefined}
+      component={RouterLink}
+      to={!props.isAuthenticated ? "/auth/link" : "/"}
       onClick={props.isAuthenticated ? () => signOut() : undefined}
     >
       {props.isAuthenticated ? "Sign out" : "Log in"}
