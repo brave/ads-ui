@@ -4,3 +4,15 @@ fragment User on User {
   id
   role
 }
+
+query LoadUser($id: String!) {
+  user(id: $id) {
+    ...User
+  }
+}
+
+mutation UpdateUser($input: UpdateUserInput!) {
+  updateUser(updateUserInput: $input) {
+    ...User
+  }
+}

@@ -66,7 +66,7 @@ export function MagicLink() {
         color="primary"
         size="large"
         variant="contained"
-        sx={{ mt: 2, textTransform: "none", mb: 1 }}
+        sx={{ mt: 2, mb: 1 }}
         disabled={loading}
         loading={loading}
         onClick={() => {

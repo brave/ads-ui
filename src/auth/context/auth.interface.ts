@@ -17,6 +17,7 @@ export interface IAuthState {
   isInitialized: boolean;
   isAuthenticated: boolean;
   setSessionUser: (u?: ResponseUser) => void;
+  fullName?: string;
   email?: string;
   role?: string;
   userId?: string;

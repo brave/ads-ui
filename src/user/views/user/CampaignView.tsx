@@ -6,6 +6,7 @@ import { CampaignList } from "user/campaignList/CampaignList";
 import { ErrorDetail } from "components/Error/ErrorDetail";
 import moment from "moment/moment";
 import { CardContainer } from "components/Card/CardContainer";
+import MiniSideBar from "components/Drawer/MiniSideBar";
 
 export function CampaignView() {
   const [fromDateFilter, setFromDateFilter] = useState<Date | null>(
@@ -31,9 +32,13 @@ export function CampaignView() {
   }
 
   return (
-    <Box display="flex" flexDirection="column" sx={{ mb: 2, ml: 2, mr: 2 }}>
+    <MiniSideBar>
       <CardContainer
         header="Campaigns"
+        sx={{
+          flexGrow: 1,
+          mr: 2,
+        }}
         additionalAction={
           <CampaignAgeFilter
             fromDate={fromDateFilter}
@@ -53,6 +58,6 @@ export function CampaignView() {
           </Box>
         )}
       </CardContainer>
-    </Box>
+    </MiniSideBar>
   );
 }

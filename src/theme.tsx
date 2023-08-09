@@ -33,6 +33,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: "1000px",
+          textTransform: "none",
         },
       },
     },
@@ -41,6 +42,13 @@ export const theme = createTheme({
         root: {
           borderRadius: "12px",
           boxShadow: "rgba(99, 105, 110, 0.18) 0px 1px 12px 0px",
+        },
+      },
+    },
+    MuiContainer: {
+      styleOverrides: {
+        root: {
+          marginLeft: 0,
         },
       },
     },
