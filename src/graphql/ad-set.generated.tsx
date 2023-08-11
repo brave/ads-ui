@@ -1,9 +1,8 @@
 import * as Types from "./types";
 
-import * as Apollo from "@apollo/client";
 import { gql } from "@apollo/client";
 import { CreativeFragmentDoc } from "./creative.generated";
-
+import * as Apollo from "@apollo/client";
 const defaultOptions = {} as const;
 export type AdSetFragment = {
   __typename?: "AdSet";
@@ -15,6 +14,10 @@ export type AdSetFragment = {
   perDay: number;
   state: string;
   execution: string;
+  keywords?: Array<string> | null;
+  keywordSimilarity?: number | null;
+  negativeKeywords?: Array<string> | null;
+  bannedKeywords?: Array<string> | null;
   segments?: Array<{
     __typename?: "Segment";
     code: string;
@@ -91,6 +94,10 @@ export type CreateAdSetMutation = {
     perDay: number;
     state: string;
     execution: string;
+    keywords?: Array<string> | null;
+    keywordSimilarity?: number | null;
+    negativeKeywords?: Array<string> | null;
+    bannedKeywords?: Array<string> | null;
     segments?: Array<{
       __typename?: "Segment";
       code: string;
@@ -145,6 +152,10 @@ export type UpdateAdSetMutation = {
     perDay: number;
     state: string;
     execution: string;
+    keywords?: Array<string> | null;
+    keywordSimilarity?: number | null;
+    negativeKeywords?: Array<string> | null;
+    bannedKeywords?: Array<string> | null;
     segments?: Array<{
       __typename?: "Segment";
       code: string;
@@ -214,6 +225,10 @@ export const AdSetFragmentDoc = gql`
     perDay
     state
     execution
+    keywords
+    keywordSimilarity
+    negativeKeywords
+    bannedKeywords
     segments {
       code
       name
