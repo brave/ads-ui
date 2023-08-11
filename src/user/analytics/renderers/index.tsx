@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Skeleton, Typography } from "@mui/material";
 import { renderMonetaryAmount } from "components/EnhancedTable/renderers";
 import { CampaignSummaryFragment } from "graphql/campaign.generated";

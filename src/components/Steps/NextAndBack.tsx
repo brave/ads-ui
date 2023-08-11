@@ -1,12 +1,12 @@
 import { Button, Stack } from "@mui/material";
-import React from "react";
+import { ReactNode } from "react";
 
 interface Props {
   activeStep: number;
   steps: number;
   onNext: () => void;
   onBack: () => void;
-  final: React.ReactNode;
+  final: ReactNode;
 }
 
 export function NextAndBack({

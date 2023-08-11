@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useRef } from "react";
+import { PropsWithChildren, ReactNode, useRef } from "react";
 import {
   Box,
   CssBaseline,
@@ -21,9 +21,9 @@ interface Props {
     label: string;
     path: string;
     queryParams?: string;
-    content?: React.ReactNode;
+    content?: ReactNode;
   }[];
-  finalComponent: React.ReactNode;
+  finalComponent: ReactNode;
 }
 
 export function StepDrawer({

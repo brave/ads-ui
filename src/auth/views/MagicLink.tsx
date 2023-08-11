@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { Link, Stack, TextField, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
@@ -28,7 +28,7 @@ export function MagicLink() {
         </Typography>
         <Stack direction="row" spacing={0.75}>
           <Typography variant="subtitle1">
-            Don't see the email? Check your spam folder or
+            Don&rsquo;t see the email? Check your spam folder or
           </Typography>
           <Link
             sx={{ cursor: "pointer" }}

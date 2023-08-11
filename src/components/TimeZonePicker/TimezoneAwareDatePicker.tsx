@@ -22,7 +22,7 @@ const formatDateForInput = (d: Date, tz: string): string =>
 const parseDateFromInput = (s: string, tz: string): Date =>
   zonedTimeToUtc(parseISO(s), tz);
 
-export const TimezoneAwareDatePicker: React.FC<Props> = ({
+export const TimezoneAwareDatePicker = ({
   tz,
   value,
   onChange,
@@ -30,7 +30,7 @@ export const TimezoneAwareDatePicker: React.FC<Props> = ({
   error,
   label,
   disabled,
-}) => {
+}: Props) => {
   const [formValue, setFormValue] = useState(formatDateForInput(value, tz));
   useEffect(() => {
     setFormValue(formatDateForInput(value, tz));

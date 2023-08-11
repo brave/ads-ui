@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAnalyticOverviewQuery } from "graphql/analytics-overview.generated";
 import { Box } from "@mui/material";
 import moment from "moment";

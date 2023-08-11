@@ -1,4 +1,3 @@
-import React from "react";
 import { ColumnDescriptor, StandardRenderers } from "components/EnhancedTable";
 import { Chip } from "@mui/material";
 import { Status } from "components/Campaigns/Status";
@@ -22,7 +21,7 @@ interface ChipListProps {
   max?: number;
 }
 
-const ChipList: React.FC<ChipListProps> = ({ items, max }) => {
+const ChipList = ({ items, max }: ChipListProps) => {
   if (!items) return null;
 
   const MAX_ITEMS = max ?? 10;

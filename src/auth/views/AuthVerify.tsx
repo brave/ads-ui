@@ -1,6 +1,5 @@
 import { AuthContainer } from "auth/views/components/AuthContainer";
 import { useAuthorize } from "auth/hooks/queries/useAuthorize";
-import React from "react";
 import { Link as RouterLink, useHistory } from "react-router-dom";
 import { CircularProgress, Link, Stack, Typography } from "@mui/material";
 import VerifiedIcon from "@mui/icons-material/Verified";

@@ -4,13 +4,12 @@ import { Autocomplete, Checkbox, TextField } from "@mui/material";
 import { useField } from "formik";
 import _ from "lodash";
 import { useActiveGeocodesQuery } from "graphql/common.generated";
-import React from "react";
 import { GeocodeInput } from "graphql/types";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-export const LocationPicker: React.FC = () => {
+export const LocationPicker = () => {
   const { data } = useActiveGeocodesQuery();
   const sorted = _.sortBy(data?.activeGeocodes?.data ?? [], "name");
   const [formProps, meta, helper] = useField<GeocodeInput[]>("geoTargets");

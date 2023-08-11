@@ -9,14 +9,13 @@ import {
   Box,
   Typography,
 } from "@mui/material";
-import React from "react";
 
 interface Props {
   error?: any;
   additionalDetails?: string;
 }
 
-export const ErrorDetail: React.FC<Props> = ({ error, additionalDetails }) => {
+export const ErrorDetail = ({ error, additionalDetails }: Props) => {
   if (!error) {
     return null;
   }

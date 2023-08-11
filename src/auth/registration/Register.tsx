@@ -1,6 +1,6 @@
 import { AuthContainer } from "auth/views/components/AuthContainer";
 import { Form, Formik } from "formik";
-import React, { useState } from "react";
+import { useState } from "react";
 import { RegistrationSchema } from "validation/RegistrationSchema";
 import { initialValues, RegistrationForm } from "auth/registration/types";
 import { NameField } from "auth/registration/NameField";
@@ -29,7 +29,7 @@ export function Register() {
 
   const steps = [
     { label: "Your information", component: <NameField /> },
-    { label: "Your business's information", component: <AddressField /> },
+    { label: "Your business&rsquo;s information", component: <AddressField /> },
   ];
 
   return (

@@ -1,6 +1,6 @@
 import { InputAdornment, Stack, Typography } from "@mui/material";
 import { FormikRadioControl, FormikTextField } from "form/FormikHelpers";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormikContext } from "formik";
 import { CampaignForm } from "../../../../../types";
 import { differenceInHours } from "date-fns";

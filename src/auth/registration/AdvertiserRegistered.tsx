@@ -1,7 +1,4 @@
-import React from "react";
 import { Link, Stack, Typography } from "@mui/material";
-import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
-import VerifiedIcon from "@mui/icons-material/Verified";
 
 interface Props {
   error?: string;
@@ -9,8 +6,8 @@ interface Props {
 
 export function AdvertiserRegistered({ error }: Props) {
   return (
-    <React.Fragment>
-      {!!error ? (
+    <>
+      {error ? (
         <Stack direction="column" alignItems="center" sx={{ mt: 5 }}>
           <Typography variant="h5" sx={{ textAlign: "left", mb: 5 }}>
             We encountered a problem creating your account.
@@ -52,6 +49,6 @@ export function AdvertiserRegistered({ error }: Props) {
           </Typography>
         </Stack>
       )}
-    </React.Fragment>
+    </>
   );
 }

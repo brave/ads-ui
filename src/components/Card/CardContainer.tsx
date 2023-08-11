@@ -1,11 +1,11 @@
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren, ReactNode } from "react";
 import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
 import { SxProps } from "@mui/system";
 
 export function CardContainer(
   props: {
     header?: string;
-    additionalAction?: React.ReactNode;
+    additionalAction?: ReactNode;
     sx?: SxProps;
   } & PropsWithChildren,
 ) {

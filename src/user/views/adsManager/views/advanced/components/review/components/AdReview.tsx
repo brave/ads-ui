@@ -2,7 +2,6 @@ import { Stack, Typography } from "@mui/material";
 import { useRecentlyCreatedAdvertiserCreatives } from "user/hooks/useAdvertiserCreatives";
 import { BoxContainer } from "components/Box/BoxContainer";
 import { NotificationPreview } from "user/ads/NotificationPreview";
-import React from "react";
 import { ReviewContainer } from "user/views/adsManager/views/advanced/components/review/components/ReviewContainer";
 
 export function AdReview() {
@@ -20,7 +19,7 @@ export function AdReview() {
         flexWrap="wrap"
       >
         {creatives.map((c) => (
-          <BoxContainer header={c.name}>
+          <BoxContainer header={c.name} key={`${c.title}_${c.body}`}>
             <NotificationPreview title={c.title} body={c.body} />
           </BoxContainer>
         ))}

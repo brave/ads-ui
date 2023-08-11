@@ -2,7 +2,6 @@ import { Box, Tab, Tabs } from "@mui/material";
 import HighchartsReact from "highcharts-react-official";
 import * as Highcharts from "highcharts";
 import { Options, SeriesOptionsType } from "highcharts";
-import React from "react";
 import { Option } from "../types";
 
 interface Props {

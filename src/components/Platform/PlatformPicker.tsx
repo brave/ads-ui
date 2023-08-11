@@ -1,7 +1,6 @@
 import { Autocomplete, TextField } from "@mui/material";
 import { useField } from "formik";
 import _ from "lodash";
-import React from "react";
 
 interface PlatformLookup {
   code: string;
@@ -12,7 +11,7 @@ interface Props {
   idx: number;
 }
 
-export const PlatformPicker: React.FC<Props> = ({ idx }: Props) => {
+export const PlatformPicker = ({ idx }: Props) => {
   const [formProps, meta, helper] = useField<PlatformLookup[]>({
     name: `adSets.${idx}.oses`,
   });

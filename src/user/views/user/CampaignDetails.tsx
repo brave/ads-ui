@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import DatasetIcon from "@mui/icons-material/Dataset";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import { useLoadCampaignAdsQuery } from "graphql/campaign.generated";

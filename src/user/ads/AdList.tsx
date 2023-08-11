@@ -5,7 +5,6 @@ import { AdFragment } from "graphql/ad-set.generated";
 import { CampaignSource } from "graphql/types";
 import { CampaignAdsFragment } from "graphql/campaign.generated";
 import { StatsMetric } from "user/analytics/analyticsOverview/types";
-import React from "react";
 import { AdDetailTable } from "user/views/user/AdDetailTable";
 
 interface Props {

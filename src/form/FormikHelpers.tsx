@@ -1,6 +1,7 @@
-import React, {
+import {
   HTMLInputTypeAttribute,
   PropsWithChildren,
+  ReactNode,
   useEffect,
 } from "react";
 import {
@@ -21,20 +22,19 @@ import {
 import { ErrorMessage, useField, useFormikContext } from "formik";
 import { useHistory } from "react-router-dom";
 import _ from "lodash";
-import { LoadingButton } from "@mui/lab";
 
 type FormikTextFieldProps = TextFieldProps & {
   name: string;
   label: string;
   maxLengthInstantFeedback?: number;
-  helperText?: React.ReactNode;
+  helperText?: ReactNode;
   small?: boolean;
   type?: HTMLInputTypeAttribute;
   disabled?: boolean;
   useTopLabel?: boolean;
 };
 
-export const FormikTextField: React.FC<FormikTextFieldProps> = (props) => {
+export const FormikTextField = (props: FormikTextFieldProps) => {
   const [field, meta] = useField(props.name);
   const hasError = Boolean(meta.error);
   const showError = hasError && meta.touched;
@@ -87,7 +87,7 @@ interface FormikSwitchProps {
   label: string;
 }
 
-export const FormikSwitch: React.FC<FormikSwitchProps> = (props) => {
+export const FormikSwitch = (props: FormikSwitchProps) => {
   const [field] = useField({ type: "checkbox", name: props.name });
   return (
     <>
@@ -104,9 +104,9 @@ interface FormikRadioGroupProps {
   row?: boolean;
 }
 
-export const FormikRadioGroup: React.FC<
-  PropsWithChildren<FormikRadioGroupProps>
-> = (props) => {
+export const FormikRadioGroup = (
+  props: PropsWithChildren<FormikRadioGroupProps>,
+) => {
   const [field] = useField(props);
   return (
     <>
@@ -122,13 +122,11 @@ interface FormikRadioControlProps {
   name: string;
   options: Array<{ label: string; value: string | number }>;
   label?: string;
-  helperText?: React.ReactNode;
+  helperText?: ReactNode;
   disabled?: boolean;
 }
 
-export const FormikRadioControl: React.FC<FormikRadioControlProps> = (
-  props,
-) => {
+export const FormikRadioControl = (props: FormikRadioControlProps) => {
   return (
     <FormControl
       component="fieldset"
@@ -158,7 +156,7 @@ export const FormikRadioControl: React.FC<FormikRadioControlProps> = (
 
 interface FormikSubmitButtonProps {
   label?: string;
-  inProgressLabel?: String;
+  inProgressLabel?: string;
   isCreate: boolean;
   allowNavigation?: boolean;
 }
@@ -169,12 +167,12 @@ function extractErrors(errorObject: any): string[] {
     .flatMap((o) => (_.isString(o) ? [o] : extractErrors(o)));
 }
 
-export const FormikSubmitButton: React.FC<FormikSubmitButtonProps> = ({
+export const FormikSubmitButton = ({
   label = "Save",
   inProgressLabel = "Saving...",
   isCreate,
   allowNavigation,
-}) => {
+}: FormikSubmitButtonProps) => {
   const formik = useFormikContext();
   const history = useHistory();
 

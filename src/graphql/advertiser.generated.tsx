@@ -1,8 +1,9 @@
 import * as Types from "./types";
 
+import * as Apollo from "@apollo/client";
 import { gql } from "@apollo/client";
 import { CampaignSummaryFragmentDoc } from "./campaign.generated";
-import * as Apollo from "@apollo/client";
+
 const defaultOptions = {} as const;
 export type AdvertiserSummaryFragment = {
   __typename?: "Advertiser";

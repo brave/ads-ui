@@ -8,7 +8,7 @@ interface Props {
   setFilter: (newValue: string) => void;
 }
 
-export const FilterInput: React.FC<Props> = (props) => {
+export const FilterInput = (props: Props) => {
   // to retain responsiveness of the form, whilst still not constantly re-filtering the list,
   // we keep our own state here that updates immediately, and debounce the updates to
   // the caller
