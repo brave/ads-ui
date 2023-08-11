@@ -1,17 +1,7 @@
-import * as React from "react";
-
 import { useHistory, useRouteMatch } from "react-router-dom";
 
-import {
-  AppBar,
-  Button,
-  Divider,
-  Link,
-  Stack,
-  Toolbar,
-  Typography,
-} from "@mui/material";
-import { UserMenu } from "components/Navigation/UserMenu";
+import { AppBar, Button, Divider, Stack, Toolbar } from "@mui/material";
+
 import { DraftMenu } from "components/Navigation/DraftMenu";
 import moment from "moment";
 import ads from "../../../branding.svg";

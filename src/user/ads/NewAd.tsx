@@ -1,7 +1,7 @@
 import { useRecentlyCreatedAdvertiserCreatives } from "user/hooks/useAdvertiserCreatives";
 import { CardContainer } from "components/Card/CardContainer";
 import { Box, Button, Stack } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 import { BoxContainer } from "components/Box/BoxContainer";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
@@ -15,7 +15,7 @@ export function NewAd() {
   const creatives = useRecentlyCreatedAdvertiserCreatives();
 
   return (
-    <React.Fragment>
+    <>
       <CardContainer header="Ads">
         <Stack
           direction="row"
@@ -57,6 +57,6 @@ export function NewAd() {
           }}
         />
       )}
-    </React.Fragment>
+    </>
   );
 }

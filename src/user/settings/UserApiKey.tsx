@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { CardContainer } from "components/Card/CardContainer";
 import {
   Box,
@@ -58,7 +58,7 @@ export function UserApiKey() {
               Generating a new API key will result in the deactivation of your
               previous key, rendering it unusable for future requests. Make sure
               to update your code with the new key to avoid disruptions in your
-              application's functionality.
+              application&lsquo;s functionality.
             </DialogContentText>
           )}
           {data && (

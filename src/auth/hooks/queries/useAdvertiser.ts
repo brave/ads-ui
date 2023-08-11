@@ -21,7 +21,7 @@ export function useAdvertiser(): {
   const active = window.localStorage.getItem("activeAdvertiser") ?? "";
   const activeAdvertiser = advertisers.find((a) => a.id === active);
   return {
-    advertiser: !!activeAdvertiser ? activeAdvertiser : defaultAdvertiser,
+    advertiser: activeAdvertiser ? activeAdvertiser : defaultAdvertiser,
     advertisers,
   };
 }

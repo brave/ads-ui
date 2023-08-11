@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import * as S from "./RadioButton.style";
 
 class RadioButton extends Component<any, any> {

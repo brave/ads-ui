@@ -1,5 +1,4 @@
 import MetricSelect from "user/analytics/analyticsOverview/components/MetricSelect";
-import React from "react";
 import { Box, Stack, Switch, Tooltip, Typography } from "@mui/material";
 import { decideValueAttribute } from "user/analytics/analyticsOverview/lib/overview.library";
 import { Metrics, StatsMetric } from "user/analytics/analyticsOverview/types";

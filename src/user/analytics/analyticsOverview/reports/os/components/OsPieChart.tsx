@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { mapDevice } from "user/analytics/analyticsOverview/lib/os.library";
-import { OS, OSMetric } from "user/analytics/analyticsOverview/types";
+import { OSMetric } from "user/analytics/analyticsOverview/types";
 import { BasePieChart } from "../../../components/BasePieChart";
 import { SeriesOptionsType } from "highcharts";
 

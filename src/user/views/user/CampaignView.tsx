@@ -1,5 +1,5 @@
 import { Box, Skeleton } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
 import { CampaignAgeFilter } from "components/Campaigns/CampaignAgeFilter";
 import { CampaignList } from "user/campaignList/CampaignList";

@@ -21,7 +21,7 @@ export function creativeEngagements(
   const metrics: CreativeMetric[] = [];
 
   let imageCount = 1;
-  for (let key in byCreative) {
+  for (const key in byCreative) {
     const group = byCreative[key];
     const payload = JSON.parse(group[0].creativepayload);
     const reducedCreative = processStats(group);

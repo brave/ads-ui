@@ -2,7 +2,6 @@ import { useField } from "formik";
 import { Creative } from "user/views/adsManager/types";
 import { Box, Paper, Stack, Typography } from "@mui/material";
 import logo from "../../../brave_logo_icon.png";
-import React from "react";
 
 export function NotificationPreview(props: { title?: string; body?: string }) {
   const [, meta] = useField<Creative>("newCreative");

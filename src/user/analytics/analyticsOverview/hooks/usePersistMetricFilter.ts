@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Metrics, StatsMetric } from "user/analytics/analyticsOverview/types";
 import _ from "lodash";
 

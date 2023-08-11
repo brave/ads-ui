@@ -1,13 +1,12 @@
-import { Box, Divider, Stack, Typography } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import { FormikTextField } from "form/FormikHelpers";
-import React from "react";
 
 export function NameField() {
   return (
     <Box flexGrow={1}>
       <Typography variant="subtitle1" gutterBottom>
-        Thank you for choosing Brave's Ads Platform! Let's get you setup with
-        your account. First, we'll need your info.
+        Thank you for choosing Brave&lsquo;s Ads Platform! Let&lsquo;s get you
+        setup with your account. First, we&lsquo;ll need your info.
       </Typography>
 
       <Divider sx={{ marginTop: 5, marginBottom: 5 }} />

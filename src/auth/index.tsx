@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   IAdvertiser,
   IAuthProviderProps,
@@ -9,9 +9,7 @@ import { getUser, ResponseUser } from "./lib";
 import _ from "lodash";
 import { setActiveAdvertiser } from "./util";
 
-export const IAuthProvider: React.FC<IAuthProviderProps> = ({
-  children,
-}: IAuthProviderProps) => {
+export const IAuthProvider = ({ children }: IAuthProviderProps) => {
   const [state, setState] = useState<IAuthState>(initialState);
   const [loading, setLoading] = useState(false);
 

@@ -4,7 +4,7 @@ import { Autocomplete, Box, Checkbox, TextField } from "@mui/material";
 import { useField } from "formik";
 import _ from "lodash";
 import { SegmentFragment, useSegmentsQuery } from "graphql/common.generated";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { FormikSwitch } from "form/FormikHelpers";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
@@ -14,7 +14,7 @@ interface Props {
   idx: number;
 }
 
-export const SegmentPicker: React.FC<Props> = ({ idx }: Props) => {
+export const SegmentPicker = ({ idx }: Props) => {
   const { data } = useSegmentsQuery();
   const activeSegments = _.sortBy(data?.segments?.data ?? [], (s) =>
     s.name.toLowerCase(),

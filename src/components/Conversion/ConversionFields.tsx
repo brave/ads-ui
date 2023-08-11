@@ -1,12 +1,11 @@
 import { Box } from "@mui/material";
 import { FormikRadioControl, FormikTextField } from "form/FormikHelpers";
-import React from "react";
 
 interface Props {
   name: string;
 }
 
-export const ConversionFields: React.FC<Props> = ({ name }: Props) => {
+export const ConversionFields = ({ name }: Props) => {
   return (
     <>
       <FormikRadioControl
@@ -17,11 +16,11 @@ export const ConversionFields: React.FC<Props> = ({ name }: Props) => {
           { value: "postclick", label: "Post-Click" },
         ]}
         helperText={
-          <React.Fragment>
+          <>
             Post-View: Viewed Ad and converted by visiting site on their own.{" "}
             <br />
             Post-Click: Viewed Ad and converted by clicking its link
-          </React.Fragment>
+          </>
         }
       />
 

@@ -1,5 +1,4 @@
 import { Conversion } from "user/views/adsManager/types";
-import React from "react";
 import { FormikErrors } from "formik";
 import { ReviewField } from "user/views/adsManager/views/advanced/components/review/components/ReviewField";
 import _ from "lodash";
@@ -36,7 +35,7 @@ export function ConversionDisplay({ conversions, convErrors }: Props) {
   return (
     <>
       {conversions.map((c, idx) => (
-        <React.Fragment key={idx}>
+        <div key={idx}>
           <ReviewField
             caption="Conversion Type"
             value={c.type}
@@ -52,7 +51,7 @@ export function ConversionDisplay({ conversions, convErrors }: Props) {
             value={c.urlPattern}
             error={extractConversionError(idx, "urlPattern")}
           />
-        </React.Fragment>
+        </div>
       ))}
     </>
   );

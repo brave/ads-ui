@@ -1,5 +1,4 @@
 import { FormikSubmitButton } from "form/FormikHelpers";
-import React from "react";
 import { useFormikContext } from "formik";
 import { CampaignForm } from "user/views/adsManager/types";
 

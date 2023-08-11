@@ -40,13 +40,13 @@
     "test": "vitest",
     "codegen": "graphql-codegen",
     "format": "prettier --write .",
-    "format:check": "prettier --check .",
+    "check:format": "prettier --check .",
     "tsc": "tsc",
     "prepare": "husky install",
     "check:audit": "check-audit",
     "audit:resolve": "resolve-audit",
-    "check:lint": "eslint src --ext .ts",
-    "lint:fix": "eslint --fix src --ext .ts"
+    "check:lint": "eslint src",
+    "lint:fix": "eslint --fix src"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "2.16.5",
@@ -64,6 +64,8 @@
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
     "@types/react-router-dom": "5.3.3",
+    "@typescript-eslint/eslint-plugin": "6.3.0",
+    "@typescript-eslint/parser": "6.3.0",
     "@vitejs/plugin-basic-ssl": "1.0.1",
     "@vitejs/plugin-react": "4.0.3",
     "husky": "8.0.3",
@@ -72,7 +74,10 @@
     "vite": "4.4.4",
     "vite-plugin-checker": "0.6.1",
     "vite-tsconfig-paths": "4.2.0",
-    "vitest": "0.33.0"
+    "vitest": "0.33.0",
+    "eslint": "8.46.0",
+    "eslint-config-prettier": "9.0.0",
+    "eslint-plugin-react": "7.33.1"
   },
   "overrides": {
     "semver": "7.5.4",
@@ -86,7 +91,8 @@
   ],
   "lint-staged": {
     "*.{ts,tsx}": [
-      "prettier --write"
+      "prettier --write",
+      "eslint"
     ]
   }
 }

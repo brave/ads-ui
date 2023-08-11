@@ -6,7 +6,7 @@ import {
   InputAdornment,
   TextField,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import _ from "lodash";
 import { useField } from "formik";
 import { UrlValidationResult, useUrlValidation } from "./use-url-validation";
@@ -33,13 +33,13 @@ function extractViolations(
   );
 }
 
-export const UrlResolver: React.FC<Props> = ({
+export const UrlResolver = ({
   name,
   validator,
   label = "Website URL",
   disabled = false,
   helperText,
-}) => {
+}: Props) => {
   const [nameField, nameMeta] = useField(name);
   const [, , isValidHelper] = useField(validator);
   const hasError = Boolean(nameMeta.error);

@@ -21,4 +21,5 @@ jobs:
       - run: npm ci
       - run: npm run tsc
       - run: npm run check:audit
+      - run: npm run check:lint
       - run: npm test

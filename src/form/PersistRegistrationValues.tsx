@@ -1,5 +1,5 @@
 import { useFormikContext } from "formik";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { RegistrationForm } from "auth/registration/types";
 import _ from "lodash";
 

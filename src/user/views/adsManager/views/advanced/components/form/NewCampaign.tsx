@@ -1,6 +1,6 @@
 import { Container, LinearProgress } from "@mui/material";
 import { Formik } from "formik";
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { CampaignForm, initialCampaign } from "../../../../types";
 import { CampaignSchema } from "validation/CampaignSchema";
 import { transformNewForm } from "user/library";

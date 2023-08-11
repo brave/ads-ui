@@ -15,7 +15,7 @@ import {
   TableRow,
 } from "@mui/material";
 import _ from "lodash";
-import { ReactNode, useState } from "react";
+import { ChangeEvent, ReactNode, useState } from "react";
 import { EnhancedTableHeader } from "./EnhancedTableHeader";
 import { EnhancedTableRow } from "./EnhancedTableRow";
 import { FilterInput } from "./FilterInput";
@@ -72,7 +72,7 @@ interface EnhancedTableProps<T> {
 export interface ColumnAccessor<T>
   extends Pick<ColumnDescriptor<T>, "title" | "sx" | "align"> {
   sortable: boolean;
-  render: (r: T) => React.ReactNode;
+  render: (r: T) => ReactNode;
   getSortValue: (r: T) => string | number | undefined;
   matchesFilter: (r: T, filter: string) => boolean;
 }
@@ -119,10 +119,7 @@ function mkColumnAccessor<T>(
   };
 }
 
-const LoadingSkeleton: React.FC<{ cols: number; rows: number }> = ({
-  cols,
-  rows,
-}) => {
+const LoadingSkeleton = ({ cols, rows }: { cols: number; rows: number }) => {
   return (
     <>
       {_.times(rows, (idx) => (
@@ -163,13 +160,11 @@ export function EnhancedTable<T>(props: EnhancedTableProps<T>) {
     }
   };
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
+  const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };

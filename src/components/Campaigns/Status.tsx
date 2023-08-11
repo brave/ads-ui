@@ -1,14 +1,15 @@
 import { Chip, Tooltip } from "@mui/material";
-import React from "react";
 import { calcColorForState } from "./stateColors";
 import _ from "lodash";
 import { isAfterEndDate, isBeforeStartDate } from "util/isAfterEndDate";
 
-export const Status: React.FC<{
+interface Props {
   state: string;
   start?: string;
   end?: string;
-}> = ({ state, start, end }) => {
+}
+
+export const Status = ({ state, start, end }: Props) => {
   let color = calcColorForState(state);
 
   let label = _.startCase(state);
