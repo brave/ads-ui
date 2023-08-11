@@ -29,7 +29,7 @@ export function Register() {
 
   const steps = [
     { label: "Your information", component: <NameField /> },
-    { label: "Your business&lsquo;s information", component: <AddressField /> },
+    { label: "Your business&rsquo;s information", component: <AddressField /> },
   ];
 
   return (

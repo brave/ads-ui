@@ -58,7 +58,7 @@ export function UserApiKey() {
               Generating a new API key will result in the deactivation of your
               previous key, rendering it unusable for future requests. Make sure
               to update your code with the new key to avoid disruptions in your
-              application&lsquo;s functionality.
+              application&rsquo;s functionality.
             </DialogContentText>
           )}
           {data && (

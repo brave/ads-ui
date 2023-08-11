@@ -41,7 +41,7 @@ export function CompletionForm() {
           <>
             <Typography sx={{ textAlign: "center" }} variant="h6">
               Your campaign has been updated! <br />
-              If you added new Ads, we&lsquo;ll be in contact as soon as they
+              If you added new Ads, we&rsquo;ll be in contact as soon as they
               are approved and activated. <br />
               Thank you for using Brave Ads!
             </Typography>
@@ -64,7 +64,7 @@ export function CompletionForm() {
             <Typography sx={{ textAlign: "center" }} variant="h6">
               Your campaign has been created and is now being reviewed by our
               ads team. <br />
-              We&lsquo;ll be in contact as soon as your campaign is approved and
+              We&rsquo;ll be in contact as soon as your campaign is approved and
               activated.
             </Typography>
 

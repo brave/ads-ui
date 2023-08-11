@@ -101,14 +101,14 @@ export function NewKeyPairModal({ advertiser }: Props) {
 
         <Typography>
           Generate a keypair for your organization. Brave Ads will use your
-          organization&lsquo;s public key to sign and encrypt conversion data.
+          organization&rsquo;s public key to sign and encrypt conversion data.
           Only your organization will have access to the private key, which can
           be used to decrypt and view conversion data.
         </Typography>
 
         {publicKey.current !== "" && (
           <Box marginTop={1}>
-            <Typography>Your organization&lsquo;s public key:</Typography>
+            <Typography>Your organization&rsquo;s public key:</Typography>
             <Box component="pre" marginY={0}>
               {publicKey.current}
             </Box>
@@ -139,7 +139,7 @@ export function NewKeyPairModal({ advertiser }: Props) {
 
               <Typography>
                 You are attempting to create a new keypair, this will replace
-                any of your organization&lsquo;s existing keypairs. Please note,
+                any of your organization&rsquo;s existing keypairs. Please note,
                 previous keypairs cannot be retrieved or used once replaced.
               </Typography>
 
@@ -170,7 +170,7 @@ export function NewKeyPairModal({ advertiser }: Props) {
               </Typography>
 
               <Typography gutterBottom>
-                Your organization&lsquo;s new private key will be:
+                Your organization&rsquo;s new private key will be:
               </Typography>
 
               <TextField
@@ -217,7 +217,7 @@ export function NewKeyPairModal({ advertiser }: Props) {
               </Typography>
 
               <Typography gutterBottom>
-                Please confirm your organization&lsquo;s new private key:
+                Please confirm your organization&rsquo;s new private key:
               </Typography>
 
               <TextField
@@ -227,7 +227,7 @@ export function NewKeyPairModal({ advertiser }: Props) {
               />
 
               <Typography gutterBottom marginTop={2}>
-                Once confirmed, your organization&lsquo;s keypair will be
+                Once confirmed, your organization&rsquo;s keypair will be
                 replaced with the new keypair.
               </Typography>
 
