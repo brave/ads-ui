@@ -14,7 +14,7 @@ import { NextAndBack } from "components/Steps/NextAndBack";
 import { useHistory } from "react-router-dom";
 import { ActionButtons } from "components/Steps/ActionButtons";
 
-const drawerWidth = 250;
+const drawerWidth = 222;
 
 interface Props {
   steps: {
