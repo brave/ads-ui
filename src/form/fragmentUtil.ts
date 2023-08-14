@@ -37,6 +37,7 @@ export function createCampaignFromFragment(
     source: data.source.toLowerCase(),
     state: "draft",
     type: data.type,
+    paymentType: data.paymentType,
   };
 }
 
