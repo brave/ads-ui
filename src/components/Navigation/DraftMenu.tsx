@@ -1,16 +1,7 @@
-import * as React from "react";
-import { useContext, useState } from "react";
+import { useContext, useState, MouseEvent } from "react";
 
 import { useHistory } from "react-router-dom";
-import {
-  Badge,
-  Button,
-  IconButton,
-  Menu,
-  MenuItem,
-  Tooltip,
-} from "@mui/material";
-import DraftsIcon from "@mui/icons-material/Drafts";
+import { Badge, Button, Menu, MenuItem } from "@mui/material";
 import { DraftContext } from "state/context";
 
 export function DraftMenu() {
@@ -19,7 +10,7 @@ export function DraftMenu() {
   const history = useHistory();
   const { drafts } = useContext(DraftContext);
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
 

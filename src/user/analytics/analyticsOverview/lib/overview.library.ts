@@ -270,10 +270,10 @@ export const processData = (
   const { metric1, metric2, metric3, metric4 } = metrics;
 
   // Create data sets for chart
-  let metric1DataSet: number[][] = [];
-  let metric2DataSet: number[][] = [];
-  let metric3DataSet: number[][] = [];
-  let metric4DataSet: number[][] = [];
+  const metric1DataSet: number[][] = [];
+  const metric2DataSet: number[][] = [];
+  const metric3DataSet: number[][] = [];
+  const metric4DataSet: number[][] = [];
 
   for (const key in groupedData) {
     const date = moment(key).valueOf();

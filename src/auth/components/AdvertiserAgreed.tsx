@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import Typography from "@mui/material/Typography";
 import {
   Card,
@@ -26,7 +26,7 @@ export function AdvertiserAgreed() {
     terms: false,
   });
 
-  const handleAgreed = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAgreed = (event: ChangeEvent<HTMLInputElement>) => {
     setAgreed({
       ...agreed,
       [event.target.name]: event.target.checked,

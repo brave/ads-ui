@@ -1,6 +1,5 @@
 import { Link, Stack, Typography } from "@mui/material";
 import { ConversionFields } from "components/Conversion/ConversionFields";
-import React from "react";
 import { FieldArray, FieldArrayRenderProps, useField } from "formik";
 import { Conversion, initialConversion } from "../../../../../types";
 import { CardContainer } from "components/Card/CardContainer";

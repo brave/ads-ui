@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { isPast, parseISO } from "date-fns";
 import { Switch, Tooltip, Typography } from "@mui/material";
 import { CampaignSource } from "graphql/types";

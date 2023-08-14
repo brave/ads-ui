@@ -1,7 +1,6 @@
 import { Stack, Typography } from "@mui/material";
 import { FormikRadioControl } from "form/FormikHelpers";
 import { PaymentType } from "graphql/types";
-import React from "react";
 import { useFormikContext } from "formik";
 import { CampaignForm } from "user/views/adsManager/types";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";

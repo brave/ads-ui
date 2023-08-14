@@ -1,4 +1,3 @@
-import React from "react";
 import { ColumnDescriptor, EnhancedTable } from "components/EnhancedTable";
 import { CampaignAdsFragment } from "graphql/campaign.generated";
 import { CampaignFormat } from "graphql/types";

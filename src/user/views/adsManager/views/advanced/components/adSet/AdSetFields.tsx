@@ -1,4 +1,3 @@
-import React from "react";
 import { PickerFields } from "./fields/PickerFields";
 import { ConversionField } from "./fields/ConversionField";
 import { CardContainer } from "components/Card/CardContainer";

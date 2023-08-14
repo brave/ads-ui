@@ -1,5 +1,4 @@
 import { FormikTextField } from "form/FormikHelpers";
-import React from "react";
 import { CardContainer } from "components/Card/CardContainer";
 import { CampaignDateRange } from "components/Campaigns/CampaignDateRange";
 import { LocationField } from "user/views/adsManager/views/advanced/components/campaign/fields/LocationField";

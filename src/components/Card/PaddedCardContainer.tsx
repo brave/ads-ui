@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@mui/material";
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 
 export function PaddedCardContainer({ children }: PropsWithChildren) {
   return (

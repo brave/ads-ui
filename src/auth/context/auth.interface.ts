@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactNode } from "react";
 import { ResponseUser } from "../lib";
 import { PaymentType } from "graphql/types";
 
@@ -25,5 +25,5 @@ export interface IAuthState {
 }
 
 export interface IAuthProviderProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
 }

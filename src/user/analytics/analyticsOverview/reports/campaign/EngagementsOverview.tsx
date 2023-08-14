@@ -1,12 +1,11 @@
 import { Alert, Box, Divider, Skeleton } from "@mui/material";
 import HighchartsReact from "highcharts-react-official";
 import * as Highcharts from "highcharts";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   CampaignWithEngagementsFragment,
   EngagementFragment,
 } from "graphql/analytics-overview.generated";
-import { Metrics, StatsMetric } from "../../types";
 import {
   prepareChart,
   processData,
@@ -18,7 +17,6 @@ import LiveFeed from "../../components/LiveFeed";
 import { CampaignFormat } from "graphql/types";
 import { ErrorDetail } from "components/Error/ErrorDetail";
 import { ApolloError } from "@apollo/client";
-import _ from "lodash";
 import { usePersistMetricFilter } from "user/analytics/analyticsOverview/hooks/usePersistMetricFilter";
 
 interface Props {

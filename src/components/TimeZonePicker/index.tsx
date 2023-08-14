@@ -6,7 +6,7 @@ import {
   SelectChangeEvent,
   SxProps,
 } from "@mui/material";
-import React, { Dispatch } from "react";
+import { Dispatch } from "react";
 import { useTimeZoneList } from "./useTimeZoneList";
 
 interface Props {
@@ -15,11 +15,7 @@ interface Props {
   sx?: SxProps;
 }
 
-export const TimeZonePicker: React.FC<Props> = ({
-  timeZone,
-  setTimeZone,
-  sx,
-}) => {
+export const TimeZonePicker = ({ timeZone, setTimeZone, sx }: Props) => {
   const timeZoneList = useTimeZoneList();
 
   const onChangeZone = (e: SelectChangeEvent<string>) => {

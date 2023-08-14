@@ -1,4 +1,3 @@
-import React from "react";
 import { AdSetForm, Creative, OS, Segment } from "../../../../../types";
 import { FormikErrors } from "formik";
 import { ConversionDisplay } from "components/Conversion/ConversionDisplay";

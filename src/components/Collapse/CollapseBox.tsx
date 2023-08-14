@@ -6,15 +6,13 @@ import {
   Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import React, { PropsWithChildren, useState } from "react";
+import { PropsWithChildren } from "react";
 
 interface Props {
   header: string;
 }
 
 export function CollapseBox({ header, children }: Props & PropsWithChildren) {
-  const [open, setOpen] = useState(false);
-
   return (
     <Box mt={2}>
       <Accordion>

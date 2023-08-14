@@ -1,6 +1,5 @@
 import { Container, LinearProgress } from "@mui/material";
 import { Formik } from "formik";
-import React from "react";
 import { CampaignForm } from "../../../../types";
 import { CampaignSchema } from "validation/CampaignSchema";
 import { editCampaignValues, transformEditForm } from "user/library";

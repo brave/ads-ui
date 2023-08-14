@@ -1,13 +1,10 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Divider from "@mui/material/Divider";
 import {
-  Button,
   Drawer,
   Link,
   List,
-  ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
@@ -15,7 +12,7 @@ import {
   MenuItem,
   Typography,
 } from "@mui/material";
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren, ReactNode, MouseEvent, useState } from "react";
 import { Link as RouterLink, useRouteMatch } from "react-router-dom";
 import CampaignOutlinedIcon from "@mui/icons-material/CampaignOutlined";
 import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlined";
@@ -28,9 +25,9 @@ import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined
 type RouteOption = {
   label: string;
   href: string;
-  icon: React.ReactNode;
+  icon: ReactNode;
   disabled?: boolean;
-  onClick?: (event: React.MouseEvent<any>) => void;
+  onClick?: (event: MouseEvent<any>) => void;
 };
 
 const drawerWidth = 120;
@@ -118,6 +115,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
         <List>
           {dashboardRoutes.map((dr) => (
             <ItemBox
+              key={dr.href}
               href={dr.href}
               icon={dr.icon}
               label={dr.label}
@@ -126,7 +124,12 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
           ))}
           <Divider sx={{ mt: 3, mb: 3 }} />
           {settingsRoutes.map((sr) => (
-            <ItemBox href={sr.href} icon={sr.icon} label={sr.label} />
+            <ItemBox
+              href={sr.href}
+              icon={sr.icon}
+              label={sr.label}
+              key={sr.href}
+            />
           ))}
           <SupportMenu />
         </List>
@@ -166,7 +169,7 @@ export function SupportMenu() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
 

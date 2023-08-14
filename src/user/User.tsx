@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { ComponentType, useMemo } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import {
@@ -17,7 +17,6 @@ import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { Navbar } from "components/Navigation/Navbar";
 import { CampaignView } from "user/views/user/CampaignView";
 import { CampaignReportView } from "user/views/user/CampaignReportView";
-import MiniSideBar from "components/Drawer/MiniSideBar";
 import { Profile } from "user/views/user/Profile";
 
 const buildApolloClient = () => {
@@ -90,8 +89,8 @@ export function User() {
 }
 
 interface ProtectedProps {
-  authedComponent?: React.ComponentType;
-  unauthedComponent?: React.ComponentType;
+  authedComponent?: ComponentType;
+  unauthedComponent?: ComponentType;
   path?: string;
 }
 

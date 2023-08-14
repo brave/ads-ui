@@ -1,7 +1,7 @@
 import { FormControlLabel, Switch, Typography } from "@mui/material";
 import _ from "lodash";
 import moment from "moment";
-import React, { Dispatch } from "react";
+import { Dispatch } from "react";
 
 interface Props {
   fromDate: Date | null;
@@ -9,11 +9,7 @@ interface Props {
   disabled?: boolean;
 }
 
-export const CampaignAgeFilter: React.FC<Props> = ({
-  fromDate,
-  onChange,
-  disabled,
-}) => {
+export const CampaignAgeFilter = ({ fromDate, onChange, disabled }: Props) => {
   const onOldCampaignToggle = (showOld: boolean) => {
     onChange(
       showOld ? null : moment().subtract(6, "month").startOf("day").toDate(),

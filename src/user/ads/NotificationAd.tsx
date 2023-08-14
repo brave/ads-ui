@@ -6,7 +6,6 @@ import { LoadingButton } from "@mui/lab";
 import SaveIcon from "@mui/icons-material/Save";
 import { creativeInput } from "user/library";
 import { CreateNotificationCreativeInput } from "graphql/types";
-import React from "react";
 import { useField } from "formik";
 import { Creative, initialCreative } from "user/views/adsManager/types";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";

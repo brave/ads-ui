@@ -2,7 +2,7 @@ import { Box, Tooltip } from "@mui/material";
 import _ from "lodash";
 import { format, formatDistanceToNow, parseISO } from "date-fns";
 import { CellValue } from "./EnhancedTable";
-import React, { ReactChild, ReactNode } from "react";
+import { ReactChild, ReactNode } from "react";
 import { formatInTimeZone } from "date-fns-tz";
 import enUS from "date-fns/locale/en-US";
 import {
@@ -20,7 +20,7 @@ import { AdDetails } from "user/ads/AdList";
 import { displayFromCampaignState } from "util/displayState";
 import { AdSetDetails } from "user/adSet/AdSetList";
 
-export type CellValueRenderer = (value: CellValue) => React.ReactNode;
+export type CellValueRenderer = (value: CellValue) => ReactNode;
 const ADS_DEFAULT_TIMEZONE = "America/New_York";
 const TOOLTIP_FORMAT = "E d LLL yyyy HH:mm:ss zzz";
 

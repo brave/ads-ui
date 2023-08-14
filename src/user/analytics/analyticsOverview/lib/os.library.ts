@@ -3,7 +3,7 @@ import { EngagementFragment } from "graphql/analytics-overview.generated";
 import { OS, OSMetric } from "../types";
 
 export function processOs(engagements: EngagementFragment[]) {
-  let stats: OSMetric = {
+  const stats: OSMetric = {
     view: { android: 0, ios: 0, linux: 0, macos: 0, windows: 0 },
     conversion: { android: 0, ios: 0, linux: 0, macos: 0, windows: 0 },
     landed: { android: 0, ios: 0, linux: 0, macos: 0, windows: 0 },

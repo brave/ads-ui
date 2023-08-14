@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 import { useHistory, useRouteMatch } from "react-router-dom";
 import { CardContainer } from "components/Card/CardContainer";
 import { Button } from "@mui/material";

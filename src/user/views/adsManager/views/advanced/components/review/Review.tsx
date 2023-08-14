@@ -1,7 +1,7 @@
 import { useFormikContext } from "formik";
 import { CampaignForm } from "../../../../types";
 import { Box } from "@mui/material";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { CampaignReview } from "./components/CampaignReview";
 import { AdSetReview } from "./components/AdSetReview";
 import { AdReview } from "user/views/adsManager/views/advanced/components/review/components/AdReview";

@@ -1,13 +1,12 @@
 import { Autocomplete, Box, FormLabel, TextField } from "@mui/material";
 import { useField } from "formik";
-import React from "react";
 import { useCountries } from "components/Country/useCountries";
 
 interface Props {
   name: string;
 }
 
-export const CountryPicker: React.FC<Props> = ({ name }) => {
+export const CountryPicker = ({ name }: Props) => {
   const { data } = useCountries();
 
   const [formProps, meta, helper] = useField<string>(name);

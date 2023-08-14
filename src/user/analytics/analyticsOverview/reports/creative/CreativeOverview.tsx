@@ -1,7 +1,7 @@
 import * as Highcharts from "highcharts";
 import { Options } from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Box, Stack, Tab, Tabs, Typography } from "@mui/material";
 import { decideValueAttribute } from "../../lib/overview.library";
 import { CampaignFormat } from "graphql/types";

@@ -1,12 +1,12 @@
-import { Box, Card, CardContent, Container } from "@mui/material";
-import React from "react";
+import { Box, Card, CardContent } from "@mui/material";
 import { Background } from "components/Background/Background";
 import { LandingPageAppBar } from "components/AppBar/LandingPageAppBar";
+import { ReactNode } from "react";
 
 interface Props {
-  children?: React.ReactNode;
-  belowCard?: React.ReactNode;
-  aboveCard?: React.ReactNode;
+  children?: ReactNode;
+  belowCard?: ReactNode;
+  aboveCard?: ReactNode;
 }
 
 export function AuthContainer({ children, belowCard, aboveCard }: Props) {

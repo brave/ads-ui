@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { SeriesOptionsType } from "highcharts";
 import { CalculatedOSMetric, OS } from "user/analytics/analyticsOverview/types";
 import { BaseBarChart } from "../../../components/BaseBarChart";
@@ -10,7 +10,7 @@ export function OsBarChart(props: CalculatedOSMetric) {
   const mapToSeries = (
     metric: keyof CalculatedOSMetric,
   ): SeriesOptionsType[] => {
-    let series: SeriesOptionsType = {
+    const series: SeriesOptionsType = {
       name: "OS",
       type: "column",
       data: oses.map((os) => {

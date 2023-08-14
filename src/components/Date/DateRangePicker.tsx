@@ -10,12 +10,12 @@ interface Props {
   onToChange: Dispatch<Date>;
 }
 
-export const DateRangePicker: React.FC<Props> = ({
+export const DateRangePicker = ({
   from,
   to,
   onFromChange,
   onToChange,
-}) => {
+}: Props) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <Stack direction="row" spacing={1} margin={1}>

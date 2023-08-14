@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { Link as RouterLink, useHistory } from "react-router-dom";
 import { CampaignForm, initialAdSet } from "user/views/adsManager/types";
-import React, { useRef } from "react";
+import { useRef } from "react";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 
 export function NewAdSet(props: { isEdit: boolean }) {
@@ -26,7 +26,11 @@ export function NewAdSet(props: { isEdit: boolean }) {
         {(helper: FieldArrayRenderProps) => (
           <Stack spacing={0.5}>
             {values.adSets.map((adSet, idx) => (
-              <Stack direction="row" justifyContent="space-between">
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                key={`current-${idx}`}
+              >
                 <Link
                   component={RouterLink}
                   underline="none"
