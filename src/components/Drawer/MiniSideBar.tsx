@@ -189,6 +189,18 @@ export function SupportMenu() {
       <Menu open={open} anchorEl={anchorEl} onClose={() => setAnchorEl(null)}>
         <MenuItem
           onClick={() => {
+            window.open(
+              "https://support.brave.com/hc/en-us/articles/14354133537421-How-do-I-use-Brave-Ads-Self-Serve-Beta-",
+              "_blank",
+              "noopener",
+            );
+            setAnchorEl(null);
+          }}
+        >
+          Brave Ads Tutorial
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
             window.open("https://brave.com/brave-ads", "_blank", "noopener");
             setAnchorEl(null);
           }}
