@@ -4,7 +4,7 @@ import { SxProps } from "@mui/system";
 
 export function CardContainer(
   props: {
-    header?: string;
+    header?: ReactNode;
     additionalAction?: ReactNode;
     sx?: SxProps;
   } & PropsWithChildren,

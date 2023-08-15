@@ -23,6 +23,11 @@ fragment Campaign on Campaign {
   stripePaymentId
   paymentType
   hasPaymentIntent
+  dayPartings {
+    dow
+    startMinute
+    endMinute
+  }
   geoTargets {
     code
     name
