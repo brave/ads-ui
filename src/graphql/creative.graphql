@@ -12,6 +12,47 @@ fragment Creative on Creative {
     title
     targetUrl
   }
+  payloadNewTabPage {
+    logo {
+      imageUrl
+      alt
+      companyName
+      destinationUrl
+    }
+    wallpapers {
+      imageUrl
+      focalPoint {
+        x
+        y
+      }
+    }
+  }
+  payloadInlineContent {
+    title
+    ctaText
+    imageUrl
+    targetUrl
+    dimensions
+    description
+  }
+  payloadNotification {
+    body
+    title
+    targetUrl
+  }
+  payloadSearch {
+    body
+    title
+    targetUrl
+  }
+  payloadSearchHomepage {
+    body
+    imageUrl
+    imageDarkModeUrl
+    targetUrl
+    title
+    ctaText
+  }
 }
 
 query advertiserCreatives($advertiserId: String!) {
@@ -36,6 +77,12 @@ mutation createNotificationCreative($input: CreateNotificationCreativeInput!) {
 
 mutation updateNotificationCreative($input: UpdateNotificationCreativeInput!) {
   updateNotificationCreative(updateNotificationCreativeInput: $input) {
+    id
+  }
+}
+
+mutation createCreative($input: CreativeInput!) {
+  createCreative(creative: $input) {
     id
   }
 }

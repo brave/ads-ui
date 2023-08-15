@@ -15,6 +15,45 @@ export type CreativeFragment = {
     title: string;
     targetUrl: string;
   } | null;
+  payloadNewTabPage?: {
+    __typename?: "NewTabPagePayload";
+    logo?: {
+      __typename?: "Logo";
+      imageUrl: string;
+      alt: string;
+      companyName: string;
+      destinationUrl: string;
+    } | null;
+    wallpapers?: Array<{
+      __typename?: "Wallpaper";
+      imageUrl: string;
+      focalPoint: { __typename?: "FocalPoint"; x: number; y: number };
+    }> | null;
+  } | null;
+  payloadInlineContent?: {
+    __typename?: "InlineContentPayload";
+    title: string;
+    ctaText: string;
+    imageUrl: string;
+    targetUrl: string;
+    dimensions: string;
+    description: string;
+  } | null;
+  payloadSearch?: {
+    __typename?: "SearchPayload";
+    body: string;
+    title: string;
+    targetUrl: string;
+  } | null;
+  payloadSearchHomepage?: {
+    __typename?: "SearchHomepagePayload";
+    body: string;
+    imageUrl: string;
+    imageDarkModeUrl?: string | null;
+    targetUrl: string;
+    title: string;
+    ctaText: string;
+  } | null;
 };
 
 export type AdvertiserCreativesQueryVariables = Types.Exact<{
@@ -35,6 +74,45 @@ export type AdvertiserCreativesQuery = {
         body: string;
         title: string;
         targetUrl: string;
+      } | null;
+      payloadNewTabPage?: {
+        __typename?: "NewTabPagePayload";
+        logo?: {
+          __typename?: "Logo";
+          imageUrl: string;
+          alt: string;
+          companyName: string;
+          destinationUrl: string;
+        } | null;
+        wallpapers?: Array<{
+          __typename?: "Wallpaper";
+          imageUrl: string;
+          focalPoint: { __typename?: "FocalPoint"; x: number; y: number };
+        }> | null;
+      } | null;
+      payloadInlineContent?: {
+        __typename?: "InlineContentPayload";
+        title: string;
+        ctaText: string;
+        imageUrl: string;
+        targetUrl: string;
+        dimensions: string;
+        description: string;
+      } | null;
+      payloadSearch?: {
+        __typename?: "SearchPayload";
+        body: string;
+        title: string;
+        targetUrl: string;
+      } | null;
+      payloadSearchHomepage?: {
+        __typename?: "SearchHomepagePayload";
+        body: string;
+        imageUrl: string;
+        imageDarkModeUrl?: string | null;
+        targetUrl: string;
+        title: string;
+        ctaText: string;
       } | null;
     }>;
   } | null;
@@ -63,6 +141,15 @@ export type UpdateNotificationCreativeMutation = {
   updateNotificationCreative: { id: string };
 };
 
+export type CreateCreativeMutationVariables = Types.Exact<{
+  input: Types.CreativeInput;
+}>;
+
+export type CreateCreativeMutation = {
+  __typename?: "Mutation";
+  createCreative: { __typename?: "Creative"; id: string };
+};
+
 export const CreativeFragmentDoc = gql`
   fragment Creative on Creative {
     id
@@ -77,6 +164,47 @@ export const CreativeFragmentDoc = gql`
       body
       title
       targetUrl
+    }
+    payloadNewTabPage {
+      logo {
+        imageUrl
+        alt
+        companyName
+        destinationUrl
+      }
+      wallpapers {
+        imageUrl
+        focalPoint {
+          x
+          y
+        }
+      }
+    }
+    payloadInlineContent {
+      title
+      ctaText
+      imageUrl
+      targetUrl
+      dimensions
+      description
+    }
+    payloadNotification {
+      body
+      title
+      targetUrl
+    }
+    payloadSearch {
+      body
+      title
+      targetUrl
+    }
+    payloadSearchHomepage {
+      body
+      imageUrl
+      imageDarkModeUrl
+      targetUrl
+      title
+      ctaText
     }
   }
 `;
@@ -258,3 +386,53 @@ export type UpdateNotificationCreativeMutationOptions =
     UpdateNotificationCreativeMutation,
     UpdateNotificationCreativeMutationVariables
   >;
+export const CreateCreativeDocument = gql`
+  mutation createCreative($input: CreativeInput!) {
+    createCreative(creative: $input) {
+      id
+    }
+  }
+`;
+export type CreateCreativeMutationFn = Apollo.MutationFunction<
+  CreateCreativeMutation,
+  CreateCreativeMutationVariables
+>;
+
+/**
+ * __useCreateCreativeMutation__
+ *
+ * To run a mutation, you first call `useCreateCreativeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateCreativeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createCreativeMutation, { data, loading, error }] = useCreateCreativeMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateCreativeMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateCreativeMutation,
+    CreateCreativeMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    CreateCreativeMutation,
+    CreateCreativeMutationVariables
+  >(CreateCreativeDocument, options);
+}
+export type CreateCreativeMutationHookResult = ReturnType<
+  typeof useCreateCreativeMutation
+>;
+export type CreateCreativeMutationResult =
+  Apollo.MutationResult<CreateCreativeMutation>;
+export type CreateCreativeMutationOptions = Apollo.BaseMutationOptions<
+  CreateCreativeMutation,
+  CreateCreativeMutationVariables
+>;

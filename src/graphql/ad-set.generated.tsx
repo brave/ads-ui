@@ -42,6 +42,45 @@ export type AdSetFragment = {
         title: string;
         targetUrl: string;
       } | null;
+      payloadNewTabPage?: {
+        __typename?: "NewTabPagePayload";
+        logo?: {
+          __typename?: "Logo";
+          imageUrl: string;
+          alt: string;
+          companyName: string;
+          destinationUrl: string;
+        } | null;
+        wallpapers?: Array<{
+          __typename?: "Wallpaper";
+          imageUrl: string;
+          focalPoint: { __typename?: "FocalPoint"; x: number; y: number };
+        }> | null;
+      } | null;
+      payloadInlineContent?: {
+        __typename?: "InlineContentPayload";
+        title: string;
+        ctaText: string;
+        imageUrl: string;
+        targetUrl: string;
+        dimensions: string;
+        description: string;
+      } | null;
+      payloadSearch?: {
+        __typename?: "SearchPayload";
+        body: string;
+        title: string;
+        targetUrl: string;
+      } | null;
+      payloadSearchHomepage?: {
+        __typename?: "SearchHomepagePayload";
+        body: string;
+        imageUrl: string;
+        imageDarkModeUrl?: string | null;
+        targetUrl: string;
+        title: string;
+        ctaText: string;
+      } | null;
     };
   }> | null;
 };
@@ -62,6 +101,45 @@ export type AdFragment = {
       body: string;
       title: string;
       targetUrl: string;
+    } | null;
+    payloadNewTabPage?: {
+      __typename?: "NewTabPagePayload";
+      logo?: {
+        __typename?: "Logo";
+        imageUrl: string;
+        alt: string;
+        companyName: string;
+        destinationUrl: string;
+      } | null;
+      wallpapers?: Array<{
+        __typename?: "Wallpaper";
+        imageUrl: string;
+        focalPoint: { __typename?: "FocalPoint"; x: number; y: number };
+      }> | null;
+    } | null;
+    payloadInlineContent?: {
+      __typename?: "InlineContentPayload";
+      title: string;
+      ctaText: string;
+      imageUrl: string;
+      targetUrl: string;
+      dimensions: string;
+      description: string;
+    } | null;
+    payloadSearch?: {
+      __typename?: "SearchPayload";
+      body: string;
+      title: string;
+      targetUrl: string;
+    } | null;
+    payloadSearchHomepage?: {
+      __typename?: "SearchHomepagePayload";
+      body: string;
+      imageUrl: string;
+      imageDarkModeUrl?: string | null;
+      targetUrl: string;
+      title: string;
+      ctaText: string;
     } | null;
   };
 };
@@ -108,6 +186,45 @@ export type CreateAdSetMutation = {
           body: string;
           title: string;
           targetUrl: string;
+        } | null;
+        payloadNewTabPage?: {
+          __typename?: "NewTabPagePayload";
+          logo?: {
+            __typename?: "Logo";
+            imageUrl: string;
+            alt: string;
+            companyName: string;
+            destinationUrl: string;
+          } | null;
+          wallpapers?: Array<{
+            __typename?: "Wallpaper";
+            imageUrl: string;
+            focalPoint: { __typename?: "FocalPoint"; x: number; y: number };
+          }> | null;
+        } | null;
+        payloadInlineContent?: {
+          __typename?: "InlineContentPayload";
+          title: string;
+          ctaText: string;
+          imageUrl: string;
+          targetUrl: string;
+          dimensions: string;
+          description: string;
+        } | null;
+        payloadSearch?: {
+          __typename?: "SearchPayload";
+          body: string;
+          title: string;
+          targetUrl: string;
+        } | null;
+        payloadSearchHomepage?: {
+          __typename?: "SearchHomepagePayload";
+          body: string;
+          imageUrl: string;
+          imageDarkModeUrl?: string | null;
+          targetUrl: string;
+          title: string;
+          ctaText: string;
         } | null;
       };
     }> | null;
@@ -156,6 +273,45 @@ export type UpdateAdSetMutation = {
           body: string;
           title: string;
           targetUrl: string;
+        } | null;
+        payloadNewTabPage?: {
+          __typename?: "NewTabPagePayload";
+          logo?: {
+            __typename?: "Logo";
+            imageUrl: string;
+            alt: string;
+            companyName: string;
+            destinationUrl: string;
+          } | null;
+          wallpapers?: Array<{
+            __typename?: "Wallpaper";
+            imageUrl: string;
+            focalPoint: { __typename?: "FocalPoint"; x: number; y: number };
+          }> | null;
+        } | null;
+        payloadInlineContent?: {
+          __typename?: "InlineContentPayload";
+          title: string;
+          ctaText: string;
+          imageUrl: string;
+          targetUrl: string;
+          dimensions: string;
+          description: string;
+        } | null;
+        payloadSearch?: {
+          __typename?: "SearchPayload";
+          body: string;
+          title: string;
+          targetUrl: string;
+        } | null;
+        payloadSearchHomepage?: {
+          __typename?: "SearchHomepagePayload";
+          body: string;
+          imageUrl: string;
+          imageDarkModeUrl?: string | null;
+          targetUrl: string;
+          title: string;
+          ctaText: string;
         } | null;
       };
     }> | null;

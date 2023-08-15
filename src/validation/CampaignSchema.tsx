@@ -2,11 +2,12 @@ import { array, boolean, date, number, object, ref, string } from "yup";
 import { startOfDay } from "date-fns";
 import { twoDaysOut } from "form/DateFieldHelpers";
 import _ from "lodash";
-
-export const SimpleUrlRegexp = /https:\/\/.+\.[a-zA-Z]{2,}\/?.*/g;
-const NoSpacesRegex = /^\S*$/;
-const TrailingAsteriskRegex = /.*\*$/;
-const HttpsRegex = /^https:\/\//;
+import {
+  HttpsRegex,
+  NoSpacesRegex,
+  SimpleUrlRegexp,
+  TrailingAsteriskRegex,
+} from "validation/regex";
 
 export const MIN_PER_DAY = 33;
 export const MIN_PER_CAMPAIGN = 100;
