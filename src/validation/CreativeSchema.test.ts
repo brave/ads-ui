@@ -4,7 +4,7 @@ import { produce } from "immer";
 const validPushCreative = {
   name: "some creative",
   type: { code: "notification_all_v1", name: "" },
-  state: "active",
+  state: "under_review",
   payloadNotification: {
     body: "abc",
     title: "xyz",
@@ -35,7 +35,7 @@ it.each(["notAUrl", "gopher://blah.com", "httpx://balh.com"])(
       draft.payloadNotification.targetUrl = value;
     });
     expect(() => CreativeSchema.validateSync(c)).toThrowError(
-      "URL must start with https:// or be an approved brave:// url",
+      "URL must start with https://",
     );
   },
 );
