@@ -14,6 +14,7 @@ import ads from "../../../branding.svg";
 import { Link as RouterLink, useRouteMatch } from "react-router-dom";
 import { useIsAuthenticated } from "auth/hooks/queries/useIsAuthenticated";
 import { useSignOut } from "auth/hooks/mutations/useSignOut";
+import { SupportMenu } from "components/Drawer/MiniSideBar";
 
 export function LandingPageAppBar() {
   const match = useRouteMatch();
@@ -41,12 +42,7 @@ export function LandingPageAppBar() {
       ),
     },
     {
-      component: (
-        <HelpLink
-          label="Support"
-          props={{ href: "mailto:selfserve@brave.com" }}
-        />
-      ),
+      component: <SupportMenu usePlainLink />,
     },
   ];
 
