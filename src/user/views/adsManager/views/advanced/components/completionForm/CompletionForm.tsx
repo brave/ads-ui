@@ -24,7 +24,7 @@ export function CompletionForm() {
   });
 
   return (
-    <Container maxWidth="xl" sx={{ mt: 5 }}>
+    <Container maxWidth="xl" sx={{ mt: 5, ml: "auto" }}>
       <Card
         sx={{
           p: 10,
