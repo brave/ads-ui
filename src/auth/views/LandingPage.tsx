@@ -1,6 +1,6 @@
 import { Background } from "components/Background/Background";
 import { LandingPageAppBar } from "components/AppBar/LandingPageAppBar";
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Link, Stack, Typography } from "@mui/material";
 import goals from "../../../images.svg";
 import { useIsAuthenticated } from "auth/hooks/queries/useIsAuthenticated";
 import { Link as RouterLink } from "react-router-dom";
@@ -37,20 +37,36 @@ export function LandingPage() {
             Brave browser and search engine.
           </Typography>
 
-          <Box>
+          <Box display="flex" flexDirection="column">
             <Button
               variant="contained"
               component={RouterLink}
               sx={{
-                width: "Hug (165px)",
-                height: "Fixed (60px)",
+                maxWidth: "165px",
+                height: "60px",
                 padding: "18px 24px 18px 24px",
+                mb: 1,
               }}
               size="large"
               to={isAuthenticated ? "/user/main" : "/register"}
             >
               {isAuthenticated ? "Dashboard" : "Get Started"}
             </Button>
+            {!isAuthenticated && (
+              <Typography variant="subtitle1">
+                Already have an account?
+                <Link
+                  variant="subtitle1"
+                  underline="none"
+                  color="secondary"
+                  component={RouterLink}
+                  to="/auth/link"
+                  sx={{ ml: 1 }}
+                >
+                  Log in
+                </Link>
+              </Typography>
+            )}
           </Box>
         </Stack>
         <img src={goals} />
