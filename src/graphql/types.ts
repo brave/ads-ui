@@ -108,7 +108,8 @@ export enum ConfirmationType {
 }
 
 export type CreateAdInput = {
-  creativeId: Scalars["String"];
+  creative?: InputMaybe<CreativeInput>;
+  creativeId?: InputMaybe<Scalars["String"]>;
   creativeSetId?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["String"]>;
   /** The price in the owning campaign's currency for each single confirmation of the priceType specified. Note therefore that the caller is responsible for dividing cost-per-mille by 1000. */
@@ -146,6 +147,13 @@ export type CreateAddressInput = {
   street1: Scalars["String"];
   street2?: InputMaybe<Scalars["String"]>;
   zipcode: Scalars["String"];
+};
+
+export type CreateAdvertiserImageInput = {
+  advertiserId: Scalars["String"];
+  format: CampaignFormat;
+  imageUrl: Scalars["String"];
+  name: Scalars["String"];
 };
 
 export type CreateAdvertiserInput = {

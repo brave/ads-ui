@@ -165,28 +165,59 @@ const ItemBox = (props: RouteOption) => {
   );
 };
 
-export function SupportMenu() {
+interface SupportProps {
+  usePlainLink?: boolean;
+}
+
+export function SupportMenu({ usePlainLink }: SupportProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
-  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (
+    event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
+  ) => {
     setAnchorEl(event.currentTarget);
   };
 
   return (
     <>
-      <ItemBox
-        label="Support"
-        href="#"
-        icon={
-          <HeadsetMicOutlinedIcon
-            fontSize="large"
-            sx={{ color: "text.secondary" }}
-          />
-        }
-        onClick={handleClick}
-      />
+      {!usePlainLink && (
+        <ItemBox
+          label="Support"
+          href="#"
+          icon={
+            <HeadsetMicOutlinedIcon
+              fontSize="large"
+              sx={{ color: "text.secondary" }}
+            />
+          }
+          onClick={handleClick}
+        />
+      )}
+      {usePlainLink && (
+        <Link
+          variant="subtitle1"
+          underline="none"
+          color="text.primary"
+          sx={{ cursor: "pointer" }}
+          onClick={handleClick}
+        >
+          Support
+        </Link>
+      )}
       <Menu open={open} anchorEl={anchorEl} onClose={() => setAnchorEl(null)}>
+        <MenuItem
+          onClick={() => {
+            window.open(
+              "https://support.brave.com/hc/en-us/articles/14354133537421-How-do-I-use-Brave-Ads-Self-Serve-Beta-",
+              "_blank",
+              "noopener",
+            );
+            setAnchorEl(null);
+          }}
+        >
+          Brave Ads Tutorial
+        </MenuItem>
         <MenuItem
           onClick={() => {
             window.open("https://brave.com/brave-ads", "_blank", "noopener");

@@ -1,9 +1,8 @@
 import * as Types from "./types";
 
-import * as Apollo from "@apollo/client";
 import { gql } from "@apollo/client";
 import { AdSetFragmentDoc } from "./ad-set.generated";
-
+import * as Apollo from "@apollo/client";
 const defaultOptions = {} as const;
 export type CampaignFragment = {
   __typename?: "Campaign";
@@ -30,6 +29,12 @@ export type CampaignFragment = {
   dayProportion?: number | null;
   stripePaymentId?: string | null;
   hasPaymentIntent?: boolean | null;
+  dayPartings?: Array<{
+    __typename?: "DayParting";
+    dow: string;
+    startMinute: number;
+    endMinute: number;
+  }> | null;
   geoTargets?: Array<{
     __typename?: "Geocode";
     code: string;
@@ -45,6 +50,10 @@ export type CampaignFragment = {
     perDay: number;
     state: string;
     execution: string;
+    keywords?: Array<string> | null;
+    keywordSimilarity?: number | null;
+    negativeKeywords?: Array<string> | null;
+    bannedKeywords?: Array<string> | null;
     segments?: Array<{
       __typename?: "Segment";
       code: string;
@@ -130,6 +139,10 @@ export type CampaignAdsFragment = {
     perDay: number;
     state: string;
     execution: string;
+    keywords?: Array<string> | null;
+    keywordSimilarity?: number | null;
+    negativeKeywords?: Array<string> | null;
+    bannedKeywords?: Array<string> | null;
     segments?: Array<{
       __typename?: "Segment";
       code: string;
@@ -199,6 +212,12 @@ export type LoadCampaignQuery = {
     dayProportion?: number | null;
     stripePaymentId?: string | null;
     hasPaymentIntent?: boolean | null;
+    dayPartings?: Array<{
+      __typename?: "DayParting";
+      dow: string;
+      startMinute: number;
+      endMinute: number;
+    }> | null;
     geoTargets?: Array<{
       __typename?: "Geocode";
       code: string;
@@ -214,6 +233,10 @@ export type LoadCampaignQuery = {
       perDay: number;
       state: string;
       execution: string;
+      keywords?: Array<string> | null;
+      keywordSimilarity?: number | null;
+      negativeKeywords?: Array<string> | null;
+      bannedKeywords?: Array<string> | null;
       segments?: Array<{
         __typename?: "Segment";
         code: string;
@@ -281,6 +304,10 @@ export type LoadCampaignAdsQuery = {
       perDay: number;
       state: string;
       execution: string;
+      keywords?: Array<string> | null;
+      keywordSimilarity?: number | null;
+      negativeKeywords?: Array<string> | null;
+      bannedKeywords?: Array<string> | null;
       segments?: Array<{
         __typename?: "Segment";
         code: string;
@@ -373,6 +400,11 @@ export const CampaignFragmentDoc = gql`
     stripePaymentId
     paymentType
     hasPaymentIntent
+    dayPartings {
+      dow
+      startMinute
+      endMinute
+    }
     geoTargets {
       code
       name

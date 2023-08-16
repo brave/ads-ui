@@ -7,6 +7,10 @@ fragment AdSet on AdSet {
   perDay
   state
   execution
+  keywords
+  keywordSimilarity
+  negativeKeywords
+  bannedKeywords
   segments {
     code
     name
