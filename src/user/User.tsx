@@ -118,7 +118,7 @@ const ProtectedRoute = ({
 
   if (
     validateAdvertiserProperty &&
-    advertiser[validateAdvertiserProperty.key] != validateAdvertiserProperty.val
+    advertiser[validateAdvertiserProperty.key] !== validateAdvertiserProperty.val
   ) {
     return <Redirect to="/user/main" />;
   }
