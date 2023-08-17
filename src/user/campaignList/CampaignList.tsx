@@ -177,7 +177,6 @@ interface CheckBoxProps {
   onCampaignSelect: (c: string, insert: boolean) => void;
 }
 const CampaignCheckBox = (props: CheckBoxProps) => {
-  console.log(props.selectedCampaigns);
   const campaignSelected = props.selectedCampaigns.some(
     (c) => c === props.campaign.id,
   );
