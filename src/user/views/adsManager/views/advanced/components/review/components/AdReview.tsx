@@ -1,8 +1,8 @@
 import { Stack, Typography } from "@mui/material";
 import { useRecentlyCreatedAdvertiserCreatives } from "user/hooks/useAdvertiserCreatives";
 import { BoxContainer } from "components/Box/BoxContainer";
-import { NotificationPreview } from "user/ads/NotificationPreview";
 import { ReviewContainer } from "user/views/adsManager/views/advanced/components/review/components/ReviewContainer";
+import { NotificationPreview } from "components/Creatives/NotificationPreview";
 
 export function AdReview() {
   const creatives = useRecentlyCreatedAdvertiserCreatives();

@@ -5,19 +5,37 @@ import { CardContainer } from "components/Card/CardContainer";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { ErrorDetail } from "components/Error/ErrorDetail";
 import MiniSideBar from "components/Drawer/MiniSideBar";
+import { Skeleton } from "@mui/material";
 
 export function CreativeList() {
   const { advertiser } = useAdvertiser();
-  const { data, error } = useAdvertiserCreativesQuery({
+  const { data, error, loading } = useAdvertiserCreativesQuery({
     variables: {
       advertiserId: advertiser.id,
     },
+    pollInterval: 60_000,
   });
 
   if (error)
     return (
       <ErrorDetail error={error} additionalDetails="Unable to get creatives" />
     );
+
+  if (loading) {
+    return (
+      <MiniSideBar>
+        <CardContainer
+          header="Creatives"
+          sx={{
+            flexGrow: 1,
+            mr: 2,
+          }}
+        >
+          <Skeleton variant="rounded" height={500} />
+        </CardContainer>
+      </MiniSideBar>
+    );
+  }
 
   return (
     <MiniSideBar>

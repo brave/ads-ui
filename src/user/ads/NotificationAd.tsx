@@ -10,11 +10,11 @@ import { useField } from "formik";
 import { Creative, initialCreative } from "user/views/adsManager/types";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useUser } from "auth/hooks/queries/useUser";
-import { NotificationPreview } from "user/ads/NotificationPreview";
 import {
   refetchAdvertiserCreativesQuery,
   useCreateNotificationCreativeMutation,
 } from "graphql/creative.generated";
+import { NotificationPreview } from "components/Creatives/NotificationPreview";
 
 interface Props {
   onCreate: () => void;

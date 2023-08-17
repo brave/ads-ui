@@ -1,6 +1,6 @@
-import { Box, Snackbar } from "@mui/material";
+import { Box, Container, Snackbar } from "@mui/material";
 import { Form, Formik } from "formik";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { CreativeInput } from "graphql/types";
 import { CreativeFields } from "./CreativeFields";
 import {
@@ -12,27 +12,26 @@ import { CardContainer } from "components/Card/CardContainer";
 import { ErrorDetail } from "components/Error/ErrorDetail";
 import { FormikSubmitButton } from "form/FormikHelpers";
 import { CreativeSchema } from "validation/CreativeSchema";
-
-interface Params {
-  advertiserId: string;
-}
+import MiniSideBar from "components/Drawer/MiniSideBar";
+import { PersistCreativeValues } from "form/PersistCreativeValues";
+import { CreativeTypePreview } from "components/Creatives/CreativeTypePreview";
+import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 
 function wait(ms: number) {
   return new Promise((resolve) => window.setTimeout(resolve, ms));
 }
 
-export const NewCreative: React.FC = () => {
-  const params = useParams<Params>();
+export function NewCreative() {
+  const { advertiser } = useAdvertiser();
   const history = useHistory();
   const location = useLocation<CreativeInput>();
 
   const defaultValue: CreativeInput & { targetUrlValid: boolean } = {
-    advertiserId: params.advertiserId,
-    state: "active",
+    advertiserId: "",
+    state: "under_review",
     name: "",
     type: {
-      code: "",
-      name: "",
+      code: "notification_all_v1",
     },
     targetUrlValid: false,
     payloadNotification: {
@@ -40,8 +39,6 @@ export const NewCreative: React.FC = () => {
       targetUrl: "",
       title: "",
     },
-    startAt: null,
-    endAt: null,
   };
 
   const initialValue = location.state ?? defaultValue;
@@ -50,7 +47,7 @@ export const NewCreative: React.FC = () => {
     refetchQueries: [
       {
         query: AdvertiserCreativesDocument,
-        variables: { advertiserId: params.advertiserId },
+        variables: { advertiserId: advertiser.id },
       },
     ],
   });
@@ -59,11 +56,9 @@ export const NewCreative: React.FC = () => {
 
   const doSubmit = async (values: CreativeInput) => {
     const input: CreativeInput = {
-      advertiserId: values.advertiserId,
+      advertiserId: advertiser.id,
       name: values.name,
       payloadNotification: values.payloadNotification,
-      startAt: values.startAt,
-      endAt: values.endAt,
       state: values.state,
       type: values.type,
     };
@@ -80,30 +75,40 @@ export const NewCreative: React.FC = () => {
   };
 
   return (
-    <Box>
-      <CardContainer header="New creative">
+    <MiniSideBar>
+      <Container maxWidth="xl">
         <Formik
           initialValues={initialValue}
           onSubmit={doSubmit}
           validationSchema={CreativeSchema}
         >
-          <Form>
-            <CreativeFields allowTypeChange={true} />
+          <Box display="flex" flexDirection="row" gap={1} flexWrap="wrap">
+            <CardContainer header="New creative" sx={{ flexGrow: 1 }}>
+              <Form>
+                <CreativeFields allowTypeChange={true} />
 
-            <ErrorDetail
-              error={error}
-              additionalDetails="Unable to create creative"
-            />
+                <ErrorDetail
+                  error={error}
+                  additionalDetails="Unable to create creative"
+                />
 
-            <Box
-              mt={1}
-              display="flex"
-              justifyContent="flex-end"
-              alignItems="baseline"
-            >
-              <FormikSubmitButton isCreate={true} allowNavigation={!!id} />
-            </Box>
-          </Form>
+                <Box
+                  mt={1}
+                  display="flex"
+                  justifyContent="flex-end"
+                  alignItems="baseline"
+                >
+                  <FormikSubmitButton isCreate={true} allowNavigation={true} />
+                </Box>
+
+                <PersistCreativeValues />
+              </Form>
+            </CardContainer>
+
+            <CardContainer header="Preview">
+              <CreativeTypePreview />
+            </CardContainer>
+          </Box>
         </Formik>
 
         <Snackbar
@@ -111,7 +116,7 @@ export const NewCreative: React.FC = () => {
           open={!!id}
           autoHideDuration={5000}
         />
-      </CardContainer>
-    </Box>
+      </Container>
+    </MiniSideBar>
   );
-};
+}

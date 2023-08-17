@@ -5,9 +5,9 @@ import { useState } from "react";
 import { BoxContainer } from "components/Box/BoxContainer";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import { NotificationPreview } from "user/ads/NotificationPreview";
 import { NotificationAd } from "user/ads/NotificationAd";
 import { useField } from "formik";
+import { NotificationPreview } from "components/Creatives/NotificationPreview";
 
 export function NewAd() {
   const [, meta, helper] = useField<boolean>("isCreating");

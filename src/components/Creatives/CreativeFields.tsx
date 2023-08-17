@@ -2,13 +2,13 @@ import {
   FormControl,
   Box,
   FormLabel,
-  FormControlLabel,
-  Radio,
+  ListItemButton,
+  List,
 } from "@mui/material";
 import { useFormikContext } from "formik";
 import { CreativeInput } from "graphql/types";
 import { NotificationFields } from "./NotificationFields";
-import { FormikRadioGroup, FormikTextField } from "form/FormikHelpers";
+import { FormikTextField } from "form/FormikHelpers";
 
 interface Props {
   allowTypeChange: boolean;
@@ -16,7 +16,13 @@ interface Props {
 
 export function CreativeFields({ allowTypeChange }: Props) {
   const formik = useFormikContext<CreativeInput>();
-  const creativeType = formik.values.type?.code;
+
+  const supportedTypes = [
+    {
+      value: "notification_all_v1",
+      label: "Push Notification",
+    },
+  ];
 
   return (
     <>
@@ -31,17 +37,27 @@ export function CreativeFields({ allowTypeChange }: Props) {
           <FormLabel component="legend" color="secondary">
             Creative Type
           </FormLabel>
-          <FormikRadioGroup row name="type.code">
-            <FormControlLabel
-              value="notification_all_v1"
-              control={<Radio />}
-              label="Push Notification"
-            />
-          </FormikRadioGroup>
+          <List>
+            {supportedTypes.map((s) => (
+              <ListItemButton
+                selected={formik.values.type.code === s.value}
+                disabled={formik.values.type.code === s.value}
+                key={s.value}
+                sx={{
+                  borderRadius: "16px",
+                  justifyContent: "center",
+                  border: "1px solid #e2e2e2",
+                }}
+                onClick={() => formik.setFieldValue("type.code", s.value)}
+              >
+                {s.label}
+              </ListItemButton>
+            ))}
+          </List>
         </FormControl>
       </Box>
 
-      <CreativeTypeSpecificFields creativeType={creativeType} />
+      <CreativeTypeSpecificFields creativeType={formik.values.type.code} />
     </>
   );
 }
