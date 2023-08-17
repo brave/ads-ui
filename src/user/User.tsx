@@ -51,19 +51,13 @@ export function User() {
               <ProtectedRoute
                 path="/user/main/adsmanager/advanced/new/:draftId"
                 authedComponent={NewCampaign}
-                validateAdvertiserProperty={{
-                  key: "selfServiceCreate",
-                  val: true,
-                }}
+                validateAdvertiserProperty={(a) => a.selfServiceCreate}
               />
 
               <ProtectedRoute
                 path="/user/main/adsmanager/advanced/:campaignId"
                 authedComponent={EditCampaign}
-                validateAdvertiserProperty={{
-                  key: "selfServiceEdit",
-                  val: true,
-                }}
+                validateAdvertiserProperty={(a) => a.selfServiceEdit}
               />
 
               <ProtectedRoute
@@ -101,14 +95,14 @@ interface ProtectedProps {
   authedComponent?: ComponentType;
   unauthedComponent?: ComponentType;
   path?: string;
-  validateAdvertiserProperty?: { key: keyof IAdvertiser; val: any };
+  validateAdvertiserProperty?: (a: IAdvertiser) => boolean;
 }
 
 const ProtectedRoute = ({
   authedComponent,
   unauthedComponent,
   path,
-  validateAdvertiserProperty,
+  validateAdvertiserProperty = () => true,
 }: ProtectedProps) => {
   const { advertiser } = useAdvertiser();
 
@@ -116,10 +110,7 @@ const ProtectedRoute = ({
     return <Redirect to="/user/main" />;
   }
 
-  if (
-    validateAdvertiserProperty &&
-    advertiser[validateAdvertiserProperty.key] != validateAdvertiserProperty.val
-  ) {
+  if (!validateAdvertiserProperty(advertiser)) {
     return <Redirect to="/user/main" />;
   }
 
