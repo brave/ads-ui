@@ -22,10 +22,6 @@ export function CampaignReview({ values, errors }: Props) {
     return new Date(date).toLocaleDateString("en-US", options);
   };
 
-  const billing = (v: string) => {
-    return uiLabelsForBillingType(v).longLabel;
-  };
-
   return (
     <ReviewContainer name="Campaign" path="settings">
       <ReviewField caption="Name" value={values.name} error={errors.name} />
@@ -47,7 +43,7 @@ export function CampaignReview({ values, errors }: Props) {
       />
       <ReviewField
         caption="Pricing Type"
-        value={billing(values.billingType)}
+        value={uiLabelsForBillingType(values.billingType).longLabel}
         error={errors.billingType}
       />
       <ReviewField
