@@ -14,7 +14,7 @@ import moment from "moment";
 import { useFormikContext } from "formik";
 import { CampaignForm } from "user/views/adsManager/types";
 import _ from "lodash";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface CreativeAutocompleteProps {
   label: string;
@@ -26,9 +26,11 @@ interface CreativeAutocompleteProps {
 export function CreativeAutocomplete(params: CreativeAutocompleteProps) {
   const { setFieldValue } = useFormikContext<CampaignForm>();
   const label = params.label;
-  const [alreadyAdded, setAlreadyAdded] = useState<string[]>(
-    params.alreadyAssociatedCreativeIds,
-  );
+  const [alreadyAdded, setAlreadyAdded] = useState<string[]>([]);
+
+  useEffect(() => {
+    setAlreadyAdded(params.alreadyAssociatedCreativeIds);
+  }, [params.alreadyAssociatedCreativeIds]);
 
   return (
     <Box display="flex" flexDirection="column">

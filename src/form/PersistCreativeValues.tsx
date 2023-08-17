@@ -4,8 +4,7 @@ import _ from "lodash";
 import { CreativeInput } from "graphql/types";
 
 export const PersistCreativeValues = () => {
-  const { values, setValues, dirty, initialStatus } =
-    useFormikContext<CreativeInput>();
+  const { values, setValues, dirty } = useFormikContext<CreativeInput>();
 
   // read the values from localStorage on load
   useEffect(() => {
@@ -21,11 +20,6 @@ export const PersistCreativeValues = () => {
       localStorage.setItem("creativeInProgress", JSON.stringify(values));
     }
   }, [values, dirty]);
-
-  // save the values to localStorage on update
-  useEffect(() => {
-    console.log(initialStatus);
-  }, [initialStatus]);
 
   return null;
 };
