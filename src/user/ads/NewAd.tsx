@@ -1,17 +1,21 @@
 import { useRecentlyCreatedAdvertiserCreatives } from "user/hooks/useAdvertiserCreatives";
 import { CardContainer } from "components/Card/CardContainer";
-import { Box, Button, Stack } from "@mui/material";
+import { Box, Button, IconButton, Link, Stack } from "@mui/material";
 import { useState } from "react";
 import { BoxContainer } from "components/Box/BoxContainer";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { NotificationAd } from "user/ads/NotificationAd";
-import { useField } from "formik";
+import { useField, useFormikContext } from "formik";
 import { NotificationPreview } from "components/Creatives/NotificationPreview";
+import { AdsNewAd } from "user/ads/AdsNewAd";
+import { CampaignForm, Creative } from "user/views/adsManager/types";
+import _ from "lodash";
 
 export function NewAd() {
   const [, meta, helper] = useField<boolean>("isCreating");
   const [showForm, setShowForm] = useState(false);
+  const [useExisting, setUseExisting] = useState(false);
   const creatives = useRecentlyCreatedAdvertiserCreatives();
 
   return (
@@ -24,7 +28,7 @@ export function NewAd() {
           flexWrap="wrap"
         >
           {(creatives ?? []).map((c, idx) => (
-            <BoxContainer header={c.name} key={idx}>
+            <BoxContainer header={<RemoveHeader creative={c} />} key={idx}>
               <NotificationPreview title={c.title} body={c.body} />
             </BoxContainer>
           ))}
@@ -38,6 +42,7 @@ export function NewAd() {
               onClick={() => {
                 helper.setValue(!meta.value);
                 setShowForm(!showForm);
+                setUseExisting(false);
               }}
             >
               {showForm ? (
@@ -48,7 +53,22 @@ export function NewAd() {
             </Box>
           </BoxContainer>
         </Stack>
+        {!useExisting && (
+          <Link
+            onClick={() => {
+              setUseExisting(true);
+              setShowForm(false);
+            }}
+            underline="none"
+            sx={{ cursor: "pointer" }}
+          >
+            Choose a previously made Creative
+          </Link>
+        )}
       </CardContainer>
+      {useExisting && (
+        <AdsNewAd onAddCreative={() => setUseExisting(!useExisting)} />
+      )}
       {showForm && (
         <NotificationAd
           onCreate={() => {
@@ -60,3 +80,24 @@ export function NewAd() {
     </>
   );
 }
+
+const RemoveHeader = (props: { creative: Creative }) => {
+  const { values, setFieldValue } = useFormikContext<CampaignForm>();
+
+  const onRemoveCreative = async (c: Creative, v: string[] | undefined) => {
+    const removed = _.filter(v ?? [], (n) => n !== c.id);
+    void setFieldValue("creatives", removed);
+  };
+
+  return (
+    <Box display="flex" justifyContent="space-between" alignItems="center">
+      {props.creative.name}
+      <IconButton
+        onClick={() => onRemoveCreative(props.creative, values.creatives)}
+        sx={{ p: 0 }}
+      >
+        <RemoveCircleOutlineIcon color="error" fontSize="small" />
+      </IconButton>
+    </Box>
+  );
+};

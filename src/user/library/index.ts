@@ -258,3 +258,26 @@ export function uiTextForCreativeTypeCode(creativeTypeCode: {
 }): string {
   return uiTextForCreativeType(creativeTypeCode.code);
 }
+
+export function isCreativeTypeApplicableToCampaignFormat(
+  creativeTypeCode: {
+    code: string;
+  },
+  format: CampaignFormat,
+): boolean {
+  const { code } = creativeTypeCode;
+  switch (code) {
+    case "notification_all_v1":
+      return format === CampaignFormat.PushNotification;
+    case "new_tab_page_all_v1":
+      return format === CampaignFormat.NtpSi;
+    case "inline_content_all_v1":
+      return format === CampaignFormat.NewsDisplayAd;
+    case "search_all_v1":
+      return format === CampaignFormat.Search;
+    case "search_homepage_all_v1":
+      return format === CampaignFormat.SearchHomepage;
+    default:
+      return false;
+  }
+}

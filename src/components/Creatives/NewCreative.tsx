@@ -7,21 +7,21 @@ import {
   AdvertiserCreativesDocument,
   useCreateCreativeMutation,
 } from "graphql/creative.generated";
-import { useState } from "react";
 import { CardContainer } from "components/Card/CardContainer";
 import { ErrorDetail } from "components/Error/ErrorDetail";
 import { FormikSubmitButton } from "form/FormikHelpers";
 import { CreativeSchema } from "validation/CreativeSchema";
 import MiniSideBar from "components/Drawer/MiniSideBar";
-import { PersistCreativeValues } from "form/PersistCreativeValues";
+import {
+  clearCreativeValues,
+  PersistCreativeValues,
+} from "form/PersistCreativeValues";
 import { CreativeTypePreview } from "components/Creatives/CreativeTypePreview";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-
-function wait(ms: number) {
-  return new Promise((resolve) => window.setTimeout(resolve, ms));
-}
+import { useState } from "react";
 
 export function NewCreative() {
+  const [id, setId] = useState<string>();
   const { advertiser } = useAdvertiser();
   const history = useHistory();
   const location = useLocation<CreativeInput>();
@@ -50,9 +50,12 @@ export function NewCreative() {
         variables: { advertiserId: advertiser.id },
       },
     ],
+    onCompleted(data) {
+      setId(data.createCreative.id);
+      history.replace("/user/main/creatives");
+      clearCreativeValues();
+    },
   });
-
-  const [id, setId] = useState("");
 
   const doSubmit = async (values: CreativeInput) => {
     const input: CreativeInput = {
@@ -63,15 +66,9 @@ export function NewCreative() {
       type: values.type,
     };
 
-    const response = await createCreativeMutation({
+    void createCreativeMutation({
       variables: { input },
     });
-    const id = response.data?.createCreative.id;
-    if (id) {
-      setId(id);
-      await wait(2000);
-      history.replace(id);
-    }
   };
 
   return (
@@ -112,7 +109,7 @@ export function NewCreative() {
         </Formik>
 
         <Snackbar
-          message={`Creative ${id} successfully created`}
+          message={`Creative successfully created`}
           open={!!id}
           autoHideDuration={5000}
         />

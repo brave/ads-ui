@@ -9,6 +9,7 @@ export function useAdvertiserCreatives(): Creative[] {
   const { data } = useAdvertiserCreativesQuery({
     variables: { advertiserId: advertiser.id },
   });
+
   return (data?.advertiser?.creatives ?? []).map((c) => ({
     id: c.id,
     name: c.name,
