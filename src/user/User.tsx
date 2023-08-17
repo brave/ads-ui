@@ -18,6 +18,7 @@ import { Navbar } from "components/Navigation/Navbar";
 import { CampaignView } from "user/views/user/CampaignView";
 import { CampaignReportView } from "user/views/user/CampaignReportView";
 import { Profile } from "user/views/user/Profile";
+import { IAdvertiser } from "auth/context/auth.interface";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -50,11 +51,13 @@ export function User() {
               <ProtectedRoute
                 path="/user/main/adsmanager/advanced/new/:draftId"
                 authedComponent={NewCampaign}
+                validateAdvertiserProperty={(a) => a.selfServiceCreate}
               />
 
               <ProtectedRoute
                 path="/user/main/adsmanager/advanced/:campaignId"
                 authedComponent={EditCampaign}
+                validateAdvertiserProperty={(a) => a.selfServiceEdit}
               />
 
               <ProtectedRoute
@@ -92,16 +95,22 @@ interface ProtectedProps {
   authedComponent?: ComponentType;
   unauthedComponent?: ComponentType;
   path?: string;
+  validateAdvertiserProperty?: (a: IAdvertiser) => boolean;
 }
 
 const ProtectedRoute = ({
   authedComponent,
   unauthedComponent,
   path,
+  validateAdvertiserProperty = () => true,
 }: ProtectedProps) => {
   const { advertiser } = useAdvertiser();
 
   if (!advertiser.agreed && unauthedComponent === undefined) {
+    return <Redirect to="/user/main" />;
+  }
+
+  if (!validateAdvertiserProperty(advertiser)) {
     return <Redirect to="/user/main" />;
   }
 
