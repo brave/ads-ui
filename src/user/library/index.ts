@@ -88,6 +88,9 @@ export function transformCreative(
   if (campaign.billingType === "cpm") {
     price = BigNumber(campaign.price).dividedBy(1000);
     priceType = ConfirmationType.View;
+  } else if (campaign.billingType === "cpv") {
+    price = BigNumber(campaign.price);
+    priceType = ConfirmationType.Landed;
   } else {
     price = BigNumber(campaign.price);
     priceType = ConfirmationType.Click;
