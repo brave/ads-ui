@@ -19,6 +19,7 @@ import { AdvertiserCampaignsDocument } from "graphql/advertiser.generated";
 import { createCampaignFromFragment } from "form/fragmentUtil";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import { useUser } from "auth/hooks/queries/useUser";
 
 interface Props {
   campaignFragment?: CampaignFragment | null;
@@ -27,6 +28,7 @@ interface Props {
 
 export function CloneCampaign({ campaignFragment, useChip }: Props) {
   const { advertiser } = useAdvertiser();
+  const { userId } = useUser();
   const history = useHistory();
   const [open, setOpen] = useState(false);
 
@@ -94,7 +96,7 @@ export function CloneCampaign({ campaignFragment, useChip }: Props) {
               if (campaignFragment) {
                 copyCampaign({
                   variables: {
-                    input: createCampaignFromFragment(campaignFragment),
+                    input: createCampaignFromFragment(campaignFragment, userId),
                   },
                 });
               } else {
