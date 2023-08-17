@@ -8,6 +8,7 @@ import { MIN_PER_CAMPAIGN, MIN_PER_DAY } from "validation/CampaignSchema";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import _ from "lodash";
 import { CardContainer } from "components/Card/CardContainer";
+import { uiLabelsForBillingType } from "util/billingType";
 
 interface Props {
   isEdit: boolean;
@@ -94,8 +95,14 @@ export function BudgetField({ isEdit }: Props) {
             <FormikRadioControl
               name="billingType"
               options={[
-                { value: "cpm", label: "CPM (Impressions)" },
-                { value: "cpc", label: "CPC (Clicks)" },
+                {
+                  value: "cpm",
+                  label: uiLabelsForBillingType("cpm").longLabel,
+                },
+                {
+                  value: "cpc",
+                  label: uiLabelsForBillingType("cpc").longLabel,
+                },
               ]}
               disabled={isEdit && values.state !== "draft"}
             />
