@@ -5,6 +5,7 @@ import { AdSetFragment } from "graphql/ad-set.generated";
 
 export function createCampaignFromFragment(
   data: CampaignFragment,
+  userId: string,
 ): CreateCampaignInput {
   const adSets: CreateAdSetInput[] = data.adSets.map((adSet) =>
     createAdSetFromFragment(adSet),
@@ -12,6 +13,7 @@ export function createCampaignFromFragment(
 
   const two = moment().utc().add(3, "days");
   return {
+    userId,
     adSets: adSets && adSets.length > 0 ? adSets : undefined,
     advertiserId: data.advertiser.id,
     budget: data.budget,
