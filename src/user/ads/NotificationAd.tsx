@@ -1,46 +1,32 @@
 import { CardContainer } from "components/Card/CardContainer";
 import { FormikTextField } from "form/FormikHelpers";
-import { Stack } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import { UrlResolver } from "components/Url/UrlResolver";
-import { LoadingButton } from "@mui/lab";
 import SaveIcon from "@mui/icons-material/Save";
-import { creativeInput } from "user/library";
-import { CreateNotificationCreativeInput } from "graphql/types";
 import { useField } from "formik";
 import { Creative, initialCreative } from "user/views/adsManager/types";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import { useUser } from "auth/hooks/queries/useUser";
-import {
-  refetchAdvertiserCreativesQuery,
-  useCreateNotificationCreativeMutation,
-} from "graphql/creative.generated";
 import { NotificationPreview } from "components/Creatives/NotificationPreview";
+import _ from "lodash";
+import { useEffect } from "react";
 
 interface Props {
   onCreate: () => void;
 }
 
 export function NotificationAd({ onCreate }: Props) {
-  const [, meta, newCreativeHelper] = useField<Creative>("newCreative");
-  const [, creativesMeta, creativesHelper] = useField<string[]>("creatives");
+  const [, newMeta, newHelper] = useField<Creative>("newCreative");
+  const [, creativesMeta, creativesHelper] = useField<Creative[]>("creatives");
   const { advertiser } = useAdvertiser();
-  const { userId } = useUser();
-  const [create, { loading }] = useCreateNotificationCreativeMutation({
-    async onCompleted(data) {
-      newCreativeHelper.setValue(initialCreative);
-      newCreativeHelper.setTouched(false);
-      creativesHelper.setValue([
-        ...(creativesMeta.value ?? []),
-        data.createNotificationCreative.id,
-      ]);
-      onCreate();
-    },
-    refetchQueries: [
-      {
-        ...refetchAdvertiserCreativesQuery({ advertiserId: advertiser.id }),
-      },
-    ],
-  });
+
+  useEffect(() => {
+    newHelper.setValue({
+      ...newMeta.value,
+      advertiserId: advertiser.id,
+      state: "draft",
+      type: { code: "notification_all_v1" },
+    });
+  }, []);
 
   return (
     <CardContainer header="New Ad">
@@ -48,14 +34,14 @@ export function NotificationAd({ onCreate }: Props) {
 
       <Stack direction="row" alignItems="center" spacing={1}>
         <FormikTextField
-          name="newCreative.title"
+          name="newCreative.payloadNotification.title"
           label="Ad Title"
           helperText="Max 30 Characters"
           maxLengthInstantFeedback={30}
         />
 
         <FormikTextField
-          name="newCreative.body"
+          name="newCreative.payloadNotification.body"
           label="Ad Body"
           helperText="Max 60 Characters"
           maxLengthInstantFeedback={60}
@@ -65,35 +51,31 @@ export function NotificationAd({ onCreate }: Props) {
       <NotificationPreview />
 
       <UrlResolver
-        name="newCreative.targetUrl"
-        validator="newCreative.targetUrlValidationResult"
+        name="newCreative.payloadNotification.targetUrl"
+        validator="newCreative.targetUrlValid"
         label="Ad Target URL"
         helperText="Example - https://brave.com/brave-rewards/"
       />
 
       <Stack direction="row" justifyContent="space-between" mt={1}>
         <div />
-        <LoadingButton
+        <Button
           variant="contained"
           startIcon={<SaveIcon />}
           onClick={(e) => {
             e.preventDefault();
-            const input = creativeInput(
-              advertiser.id,
-              meta.value,
-              userId,
-            ) as CreateNotificationCreativeInput;
-            create({ variables: { input } });
+            creativesHelper.setValue([...creativesMeta.value, newMeta.value]);
+            newHelper.setValue(initialCreative);
+            newHelper.setTouched(false, false);
+            onCreate();
           }}
           disabled={
-            !!meta.error ||
-            meta.value?.targetUrlValidationResult !== undefined ||
-            loading
+            !_.isEmpty(newMeta.error) ||
+            newMeta.value?.targetUrlValid !== undefined
           }
-          loading={loading}
         >
           Add
-        </LoadingButton>
+        </Button>
       </Stack>
     </CardContainer>
   );

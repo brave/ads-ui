@@ -9,7 +9,11 @@ import { NewAdSet } from "user/views/adsManager/views/advanced/components/adSet/
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import { BudgetSettings } from "user/views/adsManager/views/advanced/components/campaign/BudgetSettings";
 
-export function BaseForm() {
+interface Props {
+  hasPaymentIntent?: boolean | null;
+}
+
+export function BaseForm({ hasPaymentIntent }: Props) {
   const { url } = useRouteMatch();
 
   const steps = [
@@ -44,7 +48,14 @@ export function BaseForm() {
 
   return (
     <Form>
-      <StepDrawer steps={steps} finalComponent={<PaymentButton />}>
+      <StepDrawer
+        steps={steps}
+        finalComponent={
+          <PaymentButton
+            hasPaymentIntent={hasPaymentIntent ?? false}
+          />
+        }
+      >
         <Switch>
           {steps.map((s) => (
             <Route path={s.path} key={s.path}>

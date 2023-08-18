@@ -1,12 +1,12 @@
 import {
   CampaignFormat,
+  CampaignPacingStrategies,
   ConfirmationType,
   CreateAdInput,
   CreateCampaignInput,
-  CreateNotificationCreativeInput,
+  CreativeInput,
   GeocodeInput,
   UpdateCampaignInput,
-  UpdateNotificationCreativeInput,
 } from "graphql/types";
 import { CampaignFragment } from "graphql/campaign.generated";
 import { AdFragment } from "graphql/ad-set.generated";
@@ -35,15 +35,14 @@ export function transformNewForm(
   userId?: string,
 ): CreateCampaignInput {
   return {
-    currency: form.currency,
-    dailyCap: form.dailyCap,
+    currency: "USD",
+    dailyCap: 1,
     dailyBudget: form.dailyBudget,
     endAt: form.endAt,
-    pacingStrategy: form.pacingStrategy,
+    pacingStrategy: CampaignPacingStrategies.ModelV1,
     geoTargets: form.geoTargets.map((g) => ({ code: g.code, name: g.name })),
     name: form.name,
     advertiserId: form.advertiserId,
-    externalId: "",
     format: form.format,
     userId: userId,
     source: "self_serve",
@@ -54,7 +53,6 @@ export function transformNewForm(
     adSets: form.adSets.map((adSet) => ({
       name: adSet.name,
       billingType: form.billingType,
-      execution: "per_click",
       perDay: 1,
       segments: adSet.segments.map((s) => ({ code: s.code, name: s.name })),
       oses: adSet.oses,
@@ -79,7 +77,7 @@ function transformConversion(conv: Conversion[]) {
 }
 
 export function transformCreative(
-  creative: Creative,
+  creative: CreativeInput & { id?: string },
   campaign: Pick<CampaignForm, "price" | "billingType">,
 ): CreateAdInput {
   let price: BigNumber;
@@ -96,44 +94,18 @@ export function transformCreative(
     priceType = ConfirmationType.Click;
   }
 
-  return {
-    webhooks: [],
-    creativeId: creative.id!,
+  const createInput: CreateAdInput = {
     price: price.toString(),
     priceType: priceType,
   };
-}
-
-export function creativeInput(
-  advertiserId: string,
-  creative: Creative,
-  userId?: string,
-): CreateNotificationCreativeInput | UpdateNotificationCreativeInput {
-  const baseNotification = {
-    advertiserId,
-    userId,
-    name: creative.name,
-    payload: {
-      title: creative.title,
-      body: creative.body,
-      targetUrl: creative.targetUrl,
-    },
-    state: creative.state,
-  };
 
   if (creative.id) {
-    return {
-      ...baseNotification,
-      creativeId: creative.id,
-    };
+    createInput.creativeId = creative.id;
+  } else {
+    createInput.creative = creative;
   }
 
-  return {
-    ...baseNotification,
-    type: {
-      code: "notification_all_v1",
-    },
-  };
+  return createInput;
 }
 
 export function editCampaignValues(
@@ -160,26 +132,21 @@ export function editCampaignValues(
         segments: adSet.segments ?? ([] as Segment[]),
         isNotTargeting: seg.length === 1 && seg[0].code === "Svp7l-zGN",
         name: adSet.name || adSet.id.split("-")[0],
-        creatives: creativeList(adSet.ads),
+        creatives: creativeList(advertiserId, adSet.ads),
       };
     }),
     advertiserId,
-    hasPaymentIntent: campaign.hasPaymentIntent ?? false,
-    creatives: creativeList(ads).map((a) => a.id!),
+    creatives: creativeList(advertiserId, ads),
     newCreative: initialCreative,
-    isCreating: false,
     price: price.toNumber(),
     billingType: billingType,
     validateStart: false,
     budget: campaign.budget,
-    currency: campaign.currency,
     dailyBudget: campaign.dailyBudget,
-    dailyCap: campaign.dailyCap,
     endAt: campaign.endAt,
     format: campaign.format,
     geoTargets: campaign.geoTargets ?? ([] as GeocodeInput[]),
     name: campaign.name,
-    pacingStrategy: campaign.pacingStrategy,
     startAt: campaign.startAt,
     state: campaign.state,
     type: "paid",
@@ -187,20 +154,22 @@ export function editCampaignValues(
   };
 }
 
-function creativeList(ads?: AdFragment[] | null): Creative[] {
+function creativeList(
+  advertiserId: string,
+  ads?: AdFragment[] | null,
+): Creative[] {
   return _.uniqBy(
     (ads ?? [])
       .filter((ad) => ad.creative != null && ad.state !== "deleted")
       .map((ad) => {
         const c = ad.creative;
         return {
+          ...c,
+          advertiserId,
           creativeInstanceId: ad.id,
           id: c.id,
           name: c.name,
-          targetUrl: c.payloadNotification!.targetUrl,
-          title: c.payloadNotification!.title,
-          body: c.payloadNotification!.body,
-          targetUrlValidationResult: "",
+          targetUrlValid: "",
           state: c.state,
         };
       }),
@@ -214,9 +183,7 @@ export function transformEditForm(
 ): UpdateCampaignInput {
   return {
     budget: form.budget,
-    currency: form.currency,
     dailyBudget: form.dailyBudget,
-    dailyCap: form.dailyCap,
     endAt: form.endAt,
     id,
     name: form.name,

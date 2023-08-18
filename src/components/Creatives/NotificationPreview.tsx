@@ -1,10 +1,10 @@
-import { useField } from "formik";
 import { Box, Paper, Stack, Typography } from "@mui/material";
 import logo from "../../../brave_logo_icon.png";
-import { Creative } from "user/views/adsManager/types";
+import { useField } from "formik";
+import { CreativeInput } from "graphql/types";
 
 export function NotificationPreview(props: { title?: string; body?: string }) {
-  const [, meta] = useField<Creative>("newCreative");
+  const [, meta, ,] = useField<CreativeInput>("newCreative");
 
   return (
     <Box display="flex" justifyContent="center">
@@ -27,10 +27,14 @@ export function NotificationPreview(props: { title?: string; body?: string }) {
           />
           <Stack direction="column" justifyContent="center">
             <Typography sx={{ fontWeight: 600 }} variant="body2">
-              {props.title || meta.value?.title || "Title Preview"}
+              {props.title ||
+                meta.value?.payloadNotification?.title ||
+                "Title Preview"}
             </Typography>
             <Typography variant="body2">
-              {props.body || meta.value?.body || "Body Preview"}
+              {props.body ||
+                meta.value?.payloadNotification?.body ||
+                "Body Preview"}
             </Typography>
           </Stack>
         </Box>

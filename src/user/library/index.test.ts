@@ -160,10 +160,15 @@ describe("pricing logic (read)", () => {
 
 describe("pricing logic (write)", () => {
   const creative: Creative = {
+    payloadNotification: {
+      title: "some title",
+      body: "body",
+      targetUrl: "some url",
+    },
+    advertiserId: "some id",
+    state: "draft",
+    type: { code: "notification_all_v1" },
     name: "some name",
-    title: "some title",
-    body: "body",
-    targetUrl: "https://some.example.org",
   };
 
   it("should convert from CPM to per-impression values when populating a CPM creative", () => {

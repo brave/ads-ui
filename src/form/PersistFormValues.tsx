@@ -18,7 +18,7 @@ export const PersistFormValues = () => {
 
   // read the values from localStorage on load
   useEffect(() => {
-    setForm(values.draftId);
+    setForm(values.draftId ?? values.id);
   }, []);
 
   // save the values to localStorage on update
@@ -26,7 +26,14 @@ export const PersistFormValues = () => {
     if (values.draftId && dirty) {
       localStorage.setItem(values.draftId, JSON.stringify(values));
     }
-    setDrafts();
+
+    if (values.id && dirty) {
+      localStorage.setItem(values.id, JSON.stringify(values));
+    }
+
+    if (!values.id) {
+      setDrafts();
+    }
   }, [values, dirty]);
 
   return null;

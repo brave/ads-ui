@@ -52,8 +52,8 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
           sx={{ color: "text.secondary" }}
         />
       ),
+      disabled: true,
     },
-    // Possible future enhancements, not visible to user but help keep spacing
     {
       label: "Assets",
       href: "/user/main/assets",

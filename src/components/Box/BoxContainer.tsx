@@ -11,7 +11,7 @@ export function BoxContainer(
           {props.header}
         </Typography>
       )}
-      <Box mb={2} display="flex">
+      <Box mb={2} display="flex" flexDirection="column">
         {props.children}
       </Box>
     </Box>

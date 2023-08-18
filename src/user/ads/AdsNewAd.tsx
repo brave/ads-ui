@@ -1,4 +1,10 @@
-import { Typography, Divider } from "@mui/material";
+import {
+  Divider,
+  InputAdornment,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useFormikContext } from "formik";
 import { CampaignFormat } from "graphql/types";
 import _ from "lodash";
@@ -9,8 +15,10 @@ import {
 import { isCreativeTypeApplicableToCampaignFormat } from "user/library";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { CampaignForm } from "user/views/adsManager/types";
-import { CreativeAutocomplete } from "components/Creatives/CreativeAutocomplete";
 import { CardContainer } from "components/Card/CardContainer";
+import SearchIcon from "@mui/icons-material/Search";
+import { useRef, useState } from "react";
+import { NotificationSelect } from "components/Creatives/NotificationSelect";
 
 function filterCreativesBasedOnCampaignFormat(
   creatives: CreativeFragment[],
@@ -23,43 +31,91 @@ function filterCreativesBasedOnCampaignFormat(
   );
 }
 
-export function AdsNewAd(props: { onAddCreative: () => void }) {
+export function AdsExistingAd() {
   const { values } = useFormikContext<CampaignForm>();
   const { advertiser } = useAdvertiser();
-  const { data } = useAdvertiserCreativesQuery({
+  const original = useRef<CreativeFragment[]>([]);
+  const [options, setOptions] = useState<CreativeFragment[]>([]);
+  const { loading } = useAdvertiserCreativesQuery({
     variables: { advertiserId: advertiser.id },
+    onCompleted(data) {
+      const creativeOptionList = _.orderBy(
+        filterCreativesBasedOnCampaignFormat(
+          data.advertiser?.creatives ?? [],
+          values.format,
+        ),
+        ["type.code", "createdAt"],
+        ["asc", "desc"],
+      ) as CreativeFragment[];
+
+      original.current = creativeOptionList;
+      setOptions(creativeOptionList);
+    },
   });
 
-  const allCreativesForAdvertiser = data?.advertiser?.creatives ?? [];
-  const associatedCreatives = values.creatives ?? [];
-  const creativeOptionList = _.orderBy(
-    filterCreativesBasedOnCampaignFormat(
-      allCreativesForAdvertiser,
-      values.format,
-    ),
-    ["type.code", "createdAt"],
-    ["asc", "desc"],
-  ) as CreativeFragment[];
-
   return (
-    <CardContainer header="Existing creative">
-      <Typography variant="h1">Add an existing creative</Typography>
-
-      <Divider sx={{ mt: 2, mb: 2 }} />
-
-      <Typography variant="subtitle2">
-        Creatives are modular building blocks that can be paired with ad sets to
-        build ads.
+    <CardContainer header="Existing Ads">
+      <Typography variant="h1" sx={{ mb: 2 }}>
+        Add an existing Ad
       </Typography>
 
-      <CreativeAutocomplete
-        label="Creative"
-        options={creativeOptionList}
-        alreadyAssociatedCreativeIds={associatedCreatives}
-        onSetValue={() => {
-          props.onAddCreative();
-        }}
+      <Stack direction="row" justifyContent="baseline">
+        <Typography variant="subtitle1" fontWeight={500} sx={{ flexGrow: 1 }}>
+          Ads are modular building blocks that can be paired with ad sets to
+          build unique combinations. <br /> Select by using the box next to the
+          name.
+        </Typography>
+
+        <TextField
+          placeholder="Filter ads by name..."
+          size="small"
+          variant="standard"
+          sx={{ width: "400px", alignSelf: "end" }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+          onChange={(e) => {
+            const value = e.target.value.toLowerCase();
+            if (!value || value.trim() !== "") {
+              setOptions(
+                original.current.filter((co) =>
+                  co.name.toLowerCase().includes(value),
+                ),
+              );
+            } else {
+              setOptions(original.current);
+            }
+          }}
+        />
+      </Stack>
+      <Divider sx={{ mt: 2, mb: 2 }} />
+
+      <CreativeSpecificSelect
+        options={options}
+        format={values.format}
+        loading={loading}
       />
     </CardContainer>
   );
 }
+
+const CreativeSpecificSelect = (props: {
+  format: CampaignFormat;
+  options: CreativeFragment[];
+  loading: boolean;
+}) => {
+  if (props.format === CampaignFormat.PushNotification)
+    return (
+      <NotificationSelect
+        options={props.options}
+        fieldName="creatives"
+        loading={props.loading}
+      />
+    );
+
+  return null;
+};

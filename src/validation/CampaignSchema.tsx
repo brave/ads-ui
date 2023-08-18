@@ -1,13 +1,8 @@
 import { array, boolean, date, number, object, ref, string } from "yup";
 import { startOfDay } from "date-fns";
 import { twoDaysOut } from "form/DateFieldHelpers";
-import _ from "lodash";
-import {
-  HttpsRegex,
-  NoSpacesRegex,
-  SimpleUrlRegexp,
-  TrailingAsteriskRegex,
-} from "validation/regex";
+import { TrailingAsteriskRegex } from "validation/regex";
+import { CreativeSchema } from "validation/CreativeSchema";
 
 export const MIN_PER_DAY = 33;
 export const MIN_PER_CAMPAIGN = 100;
@@ -21,35 +16,7 @@ export const CampaignSchema = object().shape({
       MIN_PER_CAMPAIGN,
       `Lifetime budget must be $${MIN_PER_CAMPAIGN} or more`,
     ),
-  isCreating: boolean().default(false),
-  newCreative: object().when("isCreating", {
-    is: true,
-    then: (schema) =>
-      schema.shape({
-        name: string().label("Creative Name").required("Ad Name is required"),
-        title: string()
-          .label("Title")
-          .max(30, "Maximum 30 Characters")
-          .required("Ad Title is required"),
-        body: string()
-          .label("Body")
-          .max(60, "Maximum 60 Characters")
-          .required("Ad Body is required"),
-        targetUrlValidationResult: string().test({
-          test: (value) => _.isEmpty(value),
-          message: ({ value }) => value,
-        }),
-        targetUrl: string()
-          .label("Target Url")
-          .required("Ad URL is required")
-          .matches(NoSpacesRegex, `Ad URL must not contain any whitespace`)
-          .matches(HttpsRegex, `URL must start with https://`)
-          .matches(
-            SimpleUrlRegexp,
-            `Please enter a valid Ad URL, for example https://brave.com`,
-          ),
-      }),
-  }),
+  newCreative: CreativeSchema,
   validateStart: boolean(),
   dailyBudget: number()
     .label("Daily Budget")

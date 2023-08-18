@@ -54,9 +54,7 @@ export function BudgetField() {
           type="number"
           InputProps={{
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
-            endAdornment: (
-              <InputAdornment position="end">{values.currency}</InputAdornment>
-            ),
+            endAdornment: <InputAdornment position="end">USD</InputAdornment>,
           }}
           helperText={
             errors.budget || errors.dailyBudget
