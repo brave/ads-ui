@@ -73,22 +73,18 @@ export type CampaignFragment = {
           targetUrl: string;
         } | null;
         payloadNewTabPage?: {
-          __typename?: "NewTabPagePayload";
           logo?: {
-            __typename?: "Logo";
             imageUrl: string;
             alt: string;
             companyName: string;
             destinationUrl: string;
           } | null;
           wallpapers?: Array<{
-            __typename?: "Wallpaper";
             imageUrl: string;
-            focalPoint: { __typename?: "FocalPoint"; x: number; y: number };
+            focalPoint: { x: number; y: number };
           }> | null;
         } | null;
         payloadInlineContent?: {
-          __typename?: "InlineContentPayload";
           title: string;
           ctaText: string;
           imageUrl: string;
@@ -97,13 +93,11 @@ export type CampaignFragment = {
           description: string;
         } | null;
         payloadSearch?: {
-          __typename?: "SearchPayload";
           body: string;
           title: string;
           targetUrl: string;
         } | null;
         payloadSearchHomepage?: {
-          __typename?: "SearchHomepagePayload";
           body: string;
           imageUrl: string;
           imageDarkModeUrl?: string | null;
@@ -190,22 +184,18 @@ export type CampaignAdsFragment = {
           targetUrl: string;
         } | null;
         payloadNewTabPage?: {
-          __typename?: "NewTabPagePayload";
           logo?: {
-            __typename?: "Logo";
             imageUrl: string;
             alt: string;
             companyName: string;
             destinationUrl: string;
           } | null;
           wallpapers?: Array<{
-            __typename?: "Wallpaper";
             imageUrl: string;
-            focalPoint: { __typename?: "FocalPoint"; x: number; y: number };
+            focalPoint: { x: number; y: number };
           }> | null;
         } | null;
         payloadInlineContent?: {
-          __typename?: "InlineContentPayload";
           title: string;
           ctaText: string;
           imageUrl: string;
@@ -214,13 +204,11 @@ export type CampaignAdsFragment = {
           description: string;
         } | null;
         payloadSearch?: {
-          __typename?: "SearchPayload";
           body: string;
           title: string;
           targetUrl: string;
         } | null;
         payloadSearchHomepage?: {
-          __typename?: "SearchHomepagePayload";
           body: string;
           imageUrl: string;
           imageDarkModeUrl?: string | null;
@@ -307,22 +295,18 @@ export type LoadCampaignQuery = {
             targetUrl: string;
           } | null;
           payloadNewTabPage?: {
-            __typename?: "NewTabPagePayload";
             logo?: {
-              __typename?: "Logo";
               imageUrl: string;
               alt: string;
               companyName: string;
               destinationUrl: string;
             } | null;
             wallpapers?: Array<{
-              __typename?: "Wallpaper";
               imageUrl: string;
-              focalPoint: { __typename?: "FocalPoint"; x: number; y: number };
+              focalPoint: { x: number; y: number };
             }> | null;
           } | null;
           payloadInlineContent?: {
-            __typename?: "InlineContentPayload";
             title: string;
             ctaText: string;
             imageUrl: string;
@@ -331,13 +315,11 @@ export type LoadCampaignQuery = {
             description: string;
           } | null;
           payloadSearch?: {
-            __typename?: "SearchPayload";
             body: string;
             title: string;
             targetUrl: string;
           } | null;
           payloadSearchHomepage?: {
-            __typename?: "SearchHomepagePayload";
             body: string;
             imageUrl: string;
             imageDarkModeUrl?: string | null;
@@ -406,22 +388,18 @@ export type LoadCampaignAdsQuery = {
             targetUrl: string;
           } | null;
           payloadNewTabPage?: {
-            __typename?: "NewTabPagePayload";
             logo?: {
-              __typename?: "Logo";
               imageUrl: string;
               alt: string;
               companyName: string;
               destinationUrl: string;
             } | null;
             wallpapers?: Array<{
-              __typename?: "Wallpaper";
               imageUrl: string;
-              focalPoint: { __typename?: "FocalPoint"; x: number; y: number };
+              focalPoint: { x: number; y: number };
             }> | null;
           } | null;
           payloadInlineContent?: {
-            __typename?: "InlineContentPayload";
             title: string;
             ctaText: string;
             imageUrl: string;
@@ -430,13 +408,11 @@ export type LoadCampaignAdsQuery = {
             description: string;
           } | null;
           payloadSearch?: {
-            __typename?: "SearchPayload";
             body: string;
             title: string;
             targetUrl: string;
           } | null;
           payloadSearchHomepage?: {
-            __typename?: "SearchHomepagePayload";
             body: string;
             imageUrl: string;
             imageDarkModeUrl?: string | null;

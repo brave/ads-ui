@@ -3,7 +3,11 @@ import logo from "../../../brave_logo_icon.png";
 import { useField } from "formik";
 import { CreativeInput } from "graphql/types";
 
-export function NotificationPreview(props: { title?: string; body?: string }) {
+export function NotificationPreview(props: {
+  title?: string;
+  body?: string;
+  selected?: boolean;
+}) {
   const [, meta, ,] = useField<CreativeInput>("newCreative");
 
   return (
@@ -18,6 +22,7 @@ export function NotificationPreview(props: { title?: string; body?: string }) {
           display: "flex",
           justifyContent: "left",
           flexDirection: "row",
+          opacity: props.selected === false ? 0.5 : 1,
         }}
       >
         <Box display="flex" flexDirection="row" justifyContent="center">

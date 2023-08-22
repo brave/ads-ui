@@ -7,9 +7,10 @@ interface Props {
   state: string;
   start?: string;
   end?: string;
+  opaque?: boolean;
 }
 
-export const Status = ({ state, start, end }: Props) => {
+export const Status = ({ state, start, end, opaque }: Props) => {
   let color = calcColorForState(state);
 
   let label = _.startCase(state);
@@ -36,6 +37,7 @@ export const Status = ({ state, start, end }: Props) => {
         sx={{
           backgroundColor: color,
           fontSize: "0.7rem",
+          opacity: opaque === false ? "0.3" : 1,
         }}
       />
     </Tooltip>

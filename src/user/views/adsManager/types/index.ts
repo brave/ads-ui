@@ -9,6 +9,7 @@ export type CampaignForm = {
   id?: string;
   draftId?: string;
   advertiserId: string;
+  isCreating: boolean;
   startAt: string;
   endAt: string;
   budget: number;
@@ -64,6 +65,8 @@ export type Creative = CreativeInput & {
   targetUrlValid?: string;
   state?: string;
   creativeInstanceId?: string;
+  createdAt?: string;
+  modifiedAt?: string;
 };
 
 export const initialConversion: Conversion = {
@@ -95,6 +98,7 @@ export const initialAdSet: AdSetForm = {
 
 export const initialCampaign = (advertiser: IAdvertiser): CampaignForm => {
   return {
+    isCreating: false,
     advertiserId: advertiser.id,
     startAt: defaultStartDate(),
     endAt: defaultEndDate(),

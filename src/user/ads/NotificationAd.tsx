@@ -1,32 +1,15 @@
 import { CardContainer } from "components/Card/CardContainer";
 import { FormikTextField } from "form/FormikHelpers";
-import { Button, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import { UrlResolver } from "components/Url/UrlResolver";
-import SaveIcon from "@mui/icons-material/Save";
 import { useField } from "formik";
-import { Creative, initialCreative } from "user/views/adsManager/types";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { Creative } from "user/views/adsManager/types";
 import { NotificationPreview } from "components/Creatives/NotificationPreview";
-import _ from "lodash";
-import { useEffect } from "react";
+import { CreateCreativeButton } from "components/Creatives/CreateCreativeButton";
+import { EditCreativeButton } from "components/Creatives/EditCreativeButton";
 
-interface Props {
-  onCreate: () => void;
-}
-
-export function NotificationAd({ onCreate }: Props) {
-  const [, newMeta, newHelper] = useField<Creative>("newCreative");
-  const [, creativesMeta, creativesHelper] = useField<Creative[]>("creatives");
-  const { advertiser } = useAdvertiser();
-
-  useEffect(() => {
-    newHelper.setValue({
-      ...newMeta.value,
-      advertiserId: advertiser.id,
-      state: "draft",
-      type: { code: "notification_all_v1" },
-    });
-  }, []);
+export function NotificationAd() {
+  const [, newMeta] = useField<Creative>("newCreative");
 
   return (
     <CardContainer header="New Ad">
@@ -59,23 +42,7 @@ export function NotificationAd({ onCreate }: Props) {
 
       <Stack direction="row" justifyContent="space-between" mt={1}>
         <div />
-        <Button
-          variant="contained"
-          startIcon={<SaveIcon />}
-          onClick={(e) => {
-            e.preventDefault();
-            creativesHelper.setValue([...creativesMeta.value, newMeta.value]);
-            newHelper.setValue(initialCreative);
-            newHelper.setTouched(false, false);
-            onCreate();
-          }}
-          disabled={
-            !_.isEmpty(newMeta.error) ||
-            newMeta.value?.targetUrlValid !== undefined
-          }
-        >
-          Add
-        </Button>
+        {newMeta.value.id ? <EditCreativeButton /> : <CreateCreativeButton />}
       </Stack>
     </CardContainer>
   );

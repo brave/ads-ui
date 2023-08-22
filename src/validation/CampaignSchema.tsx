@@ -16,7 +16,10 @@ export const CampaignSchema = object().shape({
       MIN_PER_CAMPAIGN,
       `Lifetime budget must be $${MIN_PER_CAMPAIGN} or more`,
     ),
-  newCreative: CreativeSchema,
+  newCreative: object().when("isCreating", {
+    is: true,
+    then: () => CreativeSchema,
+  }),
   validateStart: boolean(),
   dailyBudget: number()
     .label("Daily Budget")

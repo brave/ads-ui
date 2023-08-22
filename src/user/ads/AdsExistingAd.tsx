@@ -1,4 +1,5 @@
 import {
+  Alert,
   Divider,
   InputAdornment,
   Stack,
@@ -14,11 +15,12 @@ import {
 } from "graphql/creative.generated";
 import { isCreativeTypeApplicableToCampaignFormat } from "user/library";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import { CampaignForm } from "user/views/adsManager/types";
+import { CampaignForm, Creative } from "user/views/adsManager/types";
 import { CardContainer } from "components/Card/CardContainer";
 import SearchIcon from "@mui/icons-material/Search";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { NotificationSelect } from "components/Creatives/NotificationSelect";
+import { FormContext } from "state/context";
 
 function filterCreativesBasedOnCampaignFormat(
   creatives: CreativeFragment[],
@@ -32,6 +34,7 @@ function filterCreativesBasedOnCampaignFormat(
 }
 
 export function AdsExistingAd() {
+  const { setIsShowingAds } = useContext(FormContext);
   const { values } = useFormikContext<CampaignForm>();
   const { advertiser } = useAdvertiser();
   const original = useRef<CreativeFragment[]>([]);
@@ -48,10 +51,19 @@ export function AdsExistingAd() {
         ["asc", "desc"],
       ) as CreativeFragment[];
 
-      original.current = creativeOptionList;
-      setOptions(creativeOptionList);
+      const filtered = creativeOptionList.filter((c) => c.state === "active");
+      original.current = filtered;
+      setOptions(filtered);
     },
   });
+
+  if (!loading && options.length === 0) {
+    return (
+      <Alert severity="info" onClose={() => setIsShowingAds(false)}>
+        No previous Ads available
+      </Alert>
+    );
+  }
 
   return (
     <CardContainer header="Existing Ads">
@@ -108,12 +120,24 @@ const CreativeSpecificSelect = (props: {
   options: CreativeFragment[];
   loading: boolean;
 }) => {
+  const { advertiser } = useAdvertiser();
+  const { values } = useFormikContext<CampaignForm>();
+  const filteredOptions = props.options
+    .filter((o) => {
+      const associatedOptions = values.creatives ?? [];
+      return associatedOptions.find((ao) => ao.id === o.id) === undefined;
+    })
+    .map((fo) => ({ ...fo, advertiserId: advertiser.id }) as Creative);
+
   if (props.format === CampaignFormat.PushNotification)
     return (
       <NotificationSelect
-        options={props.options}
+        options={filteredOptions}
         fieldName="creatives"
         loading={props.loading}
+        multiselect
+        useSelectedAdStyle={false}
+        showState={false}
       />
     );
 

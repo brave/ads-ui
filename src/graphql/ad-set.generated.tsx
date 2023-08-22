@@ -43,22 +43,18 @@ export type AdSetFragment = {
         targetUrl: string;
       } | null;
       payloadNewTabPage?: {
-        __typename?: "NewTabPagePayload";
         logo?: {
-          __typename?: "Logo";
           imageUrl: string;
           alt: string;
           companyName: string;
           destinationUrl: string;
         } | null;
         wallpapers?: Array<{
-          __typename?: "Wallpaper";
           imageUrl: string;
-          focalPoint: { __typename?: "FocalPoint"; x: number; y: number };
+          focalPoint: { x: number; y: number };
         }> | null;
       } | null;
       payloadInlineContent?: {
-        __typename?: "InlineContentPayload";
         title: string;
         ctaText: string;
         imageUrl: string;
@@ -66,14 +62,8 @@ export type AdSetFragment = {
         dimensions: string;
         description: string;
       } | null;
-      payloadSearch?: {
-        __typename?: "SearchPayload";
-        body: string;
-        title: string;
-        targetUrl: string;
-      } | null;
+      payloadSearch?: { body: string; title: string; targetUrl: string } | null;
       payloadSearchHomepage?: {
-        __typename?: "SearchHomepagePayload";
         body: string;
         imageUrl: string;
         imageDarkModeUrl?: string | null;
@@ -103,22 +93,18 @@ export type AdFragment = {
       targetUrl: string;
     } | null;
     payloadNewTabPage?: {
-      __typename?: "NewTabPagePayload";
       logo?: {
-        __typename?: "Logo";
         imageUrl: string;
         alt: string;
         companyName: string;
         destinationUrl: string;
       } | null;
       wallpapers?: Array<{
-        __typename?: "Wallpaper";
         imageUrl: string;
-        focalPoint: { __typename?: "FocalPoint"; x: number; y: number };
+        focalPoint: { x: number; y: number };
       }> | null;
     } | null;
     payloadInlineContent?: {
-      __typename?: "InlineContentPayload";
       title: string;
       ctaText: string;
       imageUrl: string;
@@ -126,14 +112,8 @@ export type AdFragment = {
       dimensions: string;
       description: string;
     } | null;
-    payloadSearch?: {
-      __typename?: "SearchPayload";
-      body: string;
-      title: string;
-      targetUrl: string;
-    } | null;
+    payloadSearch?: { body: string; title: string; targetUrl: string } | null;
     payloadSearchHomepage?: {
-      __typename?: "SearchHomepagePayload";
       body: string;
       imageUrl: string;
       imageDarkModeUrl?: string | null;
@@ -188,22 +168,18 @@ export type CreateAdSetMutation = {
           targetUrl: string;
         } | null;
         payloadNewTabPage?: {
-          __typename?: "NewTabPagePayload";
           logo?: {
-            __typename?: "Logo";
             imageUrl: string;
             alt: string;
             companyName: string;
             destinationUrl: string;
           } | null;
           wallpapers?: Array<{
-            __typename?: "Wallpaper";
             imageUrl: string;
-            focalPoint: { __typename?: "FocalPoint"; x: number; y: number };
+            focalPoint: { x: number; y: number };
           }> | null;
         } | null;
         payloadInlineContent?: {
-          __typename?: "InlineContentPayload";
           title: string;
           ctaText: string;
           imageUrl: string;
@@ -212,13 +188,11 @@ export type CreateAdSetMutation = {
           description: string;
         } | null;
         payloadSearch?: {
-          __typename?: "SearchPayload";
           body: string;
           title: string;
           targetUrl: string;
         } | null;
         payloadSearchHomepage?: {
-          __typename?: "SearchHomepagePayload";
           body: string;
           imageUrl: string;
           imageDarkModeUrl?: string | null;
@@ -275,22 +249,18 @@ export type UpdateAdSetMutation = {
           targetUrl: string;
         } | null;
         payloadNewTabPage?: {
-          __typename?: "NewTabPagePayload";
           logo?: {
-            __typename?: "Logo";
             imageUrl: string;
             alt: string;
             companyName: string;
             destinationUrl: string;
           } | null;
           wallpapers?: Array<{
-            __typename?: "Wallpaper";
             imageUrl: string;
-            focalPoint: { __typename?: "FocalPoint"; x: number; y: number };
+            focalPoint: { x: number; y: number };
           }> | null;
         } | null;
         payloadInlineContent?: {
-          __typename?: "InlineContentPayload";
           title: string;
           ctaText: string;
           imageUrl: string;
@@ -299,13 +269,11 @@ export type UpdateAdSetMutation = {
           description: string;
         } | null;
         payloadSearch?: {
-          __typename?: "SearchPayload";
           body: string;
           title: string;
           targetUrl: string;
         } | null;
         payloadSearchHomepage?: {
-          __typename?: "SearchHomepagePayload";
           body: string;
           imageUrl: string;
           imageDarkModeUrl?: string | null;

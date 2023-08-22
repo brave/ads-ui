@@ -64,25 +64,8 @@ query advertiserCreatives($advertiserId: String!) {
   }
 }
 
-mutation createNotificationCreative($input: CreateNotificationCreativeInput!) {
-  createNotificationCreative(createNotificationCreativeInput: $input) {
-    id
-    payloadNotification {
-      body
-      title
-      targetUrl
-    }
-  }
-}
-
-mutation updateNotificationCreative($input: UpdateNotificationCreativeInput!) {
-  updateNotificationCreative(updateNotificationCreativeInput: $input) {
-    id
-  }
-}
-
 mutation createCreative($input: CreativeInput!) {
   createCreative(creative: $input) {
-    id
+    ...Creative
   }
 }

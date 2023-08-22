@@ -46,6 +46,8 @@ export function EditCampaign() {
       } else {
         void createPaymentSession(data.updateCampaign.id);
       }
+
+      localStorage.removeItem(data.updateCampaign.id);
     },
     onError() {
       alert("Unable to Update Campaign.");

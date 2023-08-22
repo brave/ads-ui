@@ -3,10 +3,13 @@ import { FormikErrors } from "formik";
 import { ConversionDisplay } from "components/Conversion/ConversionDisplay";
 import { ReviewField } from "./ReviewField";
 import { ReviewContainer } from "user/views/adsManager/views/advanced/components/review/components/ReviewContainer";
+import { CampaignFormat } from "graphql/types";
+import { CreativeSpecificPreview } from "components/Creatives/CreativeSpecificPreview";
 
 interface Props {
   idx: number;
   adSet: AdSetForm;
+  format: CampaignFormat;
   errors?: string | FormikErrors<AdSetForm>;
 }
 
@@ -47,11 +50,18 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
         conversions={adSet.conversions}
         convErrors={adSetError?.conversions}
       />
-      <ReviewField
-        caption="Ads"
-        value={mapToString(adSet.creatives)}
-        error={hasErrors ? (adSetError?.creatives as string) : ""}
-      />
+      {hasErrors ? (
+        <ReviewField
+          caption="Ads"
+          value={mapToString(adSet.creatives)}
+          error={hasErrors ? (adSetError?.creatives as string) : ""}
+        />
+      ) : (
+        <CreativeSpecificPreview
+          name={`adSets.${idx}.creatives`}
+          useSimpleHeader
+        />
+      )}
     </ReviewContainer>
   );
 }

@@ -4,7 +4,6 @@ import {
   ConfirmationType,
   CreateAdInput,
   CreateCampaignInput,
-  CreativeInput,
   GeocodeInput,
   UpdateCampaignInput,
 } from "graphql/types";
@@ -77,7 +76,7 @@ function transformConversion(conv: Conversion[]) {
 }
 
 export function transformCreative(
-  creative: CreativeInput & { id?: string },
+  creative: Creative,
   campaign: Pick<CampaignForm, "price" | "billingType">,
 ): CreateAdInput {
   let price: BigNumber;
@@ -102,7 +101,7 @@ export function transformCreative(
   if (creative.id) {
     createInput.creativeId = creative.id;
   } else {
-    createInput.creative = creative;
+    createInput.creative = _.omit(creative, ["createdAt", "modifiedAt"]);
   }
 
   return createInput;
@@ -135,6 +134,7 @@ export function editCampaignValues(
         creatives: creativeList(advertiserId, adSet.ads),
       };
     }),
+    isCreating: false,
     advertiserId,
     creatives: creativeList(advertiserId, ads),
     newCreative: initialCreative,
@@ -160,7 +160,7 @@ function creativeList(
 ): Creative[] {
   return _.uniqBy(
     (ads ?? [])
-      .filter((ad) => ad.creative != null && ad.state !== "deleted")
+      .filter((ad) => ad.creative !== null && ad.state !== "deleted")
       .map((ad) => {
         const c = ad.creative;
         return {
