@@ -82,7 +82,6 @@ export function EditCampaign() {
         onSubmit={async (v: CampaignForm, { setSubmitting }) => {
           setSubmitting(true);
           const input = transformEditForm(v, params.campaignId);
-          console.log(input);
           await mutation({ variables: { input } });
           setSubmitting(false);
         }}

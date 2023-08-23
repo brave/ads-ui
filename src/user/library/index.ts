@@ -106,6 +106,7 @@ export function transformCreative(
     "modifiedAt",
     "id",
     "creativeInstanceId",
+    "targetUrlValid",
   ]);
 
   return createInput;
