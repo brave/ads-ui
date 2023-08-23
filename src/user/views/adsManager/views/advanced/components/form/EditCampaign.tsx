@@ -39,6 +39,7 @@ export function EditCampaign() {
   const hasPaymentIntent = initialData?.campaign?.hasPaymentIntent;
   const [mutation] = useUpdateCampaignMutation({
     onCompleted(data) {
+      localStorage.removeItem(data.updateCampaign.id);
       if (hasPaymentIntent) {
         history.push(
           `/user/main/complete/edit?referenceId=${data.updateCampaign.id}`,
@@ -46,8 +47,6 @@ export function EditCampaign() {
       } else {
         void createPaymentSession(data.updateCampaign.id);
       }
-
-      localStorage.removeItem(data.updateCampaign.id);
     },
     onError() {
       alert("Unable to Update Campaign.");
@@ -83,6 +82,7 @@ export function EditCampaign() {
         onSubmit={async (v: CampaignForm, { setSubmitting }) => {
           setSubmitting(true);
           const input = transformEditForm(v, params.campaignId);
+          console.log(input);
           await mutation({ variables: { input } });
           setSubmitting(false);
         }}

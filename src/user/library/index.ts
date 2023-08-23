@@ -4,18 +4,17 @@ import {
   ConfirmationType,
   CreateAdInput,
   CreateCampaignInput,
-  GeocodeInput,
   UpdateCampaignInput,
 } from "graphql/types";
 import { CampaignFragment } from "graphql/campaign.generated";
 import { AdFragment } from "graphql/ad-set.generated";
 import {
+  AdSetForm,
   Billing,
   CampaignForm,
   Conversion,
   Creative,
   initialCreative,
-  OS,
   Segment,
 } from "user/views/adsManager/types";
 import _ from "lodash";
@@ -100,9 +99,14 @@ export function transformCreative(
 
   if (creative.id) {
     createInput.creativeId = creative.id;
-  } else {
-    createInput.creative = _.omit(creative, ["createdAt", "modifiedAt"]);
   }
+
+  createInput.creative = _.omit(creative, [
+    "createdAt",
+    "modifiedAt",
+    "id",
+    "creativeInstanceId",
+  ]);
 
   return createInput;
 }
@@ -124,15 +128,22 @@ export function editCampaignValues(
       const seg = adSet.segments ?? ([] as Segment[]);
 
       return {
-        ...adSet,
         id: adSet.id,
-        conversions: adSet.conversions ?? [],
-        oses: adSet.oses ?? ([] as OS[]),
-        segments: adSet.segments ?? ([] as Segment[]),
+        conversions: (adSet.conversions ?? []).map((c) => ({
+          id: c.id,
+          type: c.type,
+          observationWindow: c.observationWindow,
+          urlPattern: c.urlPattern,
+        })),
+        oses: (adSet.oses ?? []).map((o) => ({ name: o.name, code: o.code })),
+        segments: (adSet.segments ?? []).map((o) => ({
+          name: o.name,
+          code: o.code,
+        })),
         isNotTargeting: seg.length === 1 && seg[0].code === "Svp7l-zGN",
         name: adSet.name || adSet.id.split("-")[0],
         creatives: creativeList(advertiserId, adSet.ads),
-      };
+      } as AdSetForm;
     }),
     isCreating: false,
     advertiserId,
@@ -145,7 +156,10 @@ export function editCampaignValues(
     dailyBudget: campaign.dailyBudget,
     endAt: campaign.endAt,
     format: campaign.format,
-    geoTargets: campaign.geoTargets ?? ([] as GeocodeInput[]),
+    geoTargets: (campaign.geoTargets ?? []).map((g) => ({
+      code: g.code,
+      name: g.name,
+    })),
     name: campaign.name,
     startAt: campaign.startAt,
     state: campaign.state,
@@ -164,13 +178,20 @@ function creativeList(
       .map((ad) => {
         const c = ad.creative;
         return {
-          ...c,
           advertiserId,
           creativeInstanceId: ad.id,
           id: c.id,
           name: c.name,
           targetUrlValid: "",
           state: c.state,
+          type: { code: c.type.code },
+          payloadNotification: c.payloadNotification
+            ? {
+                title: c.payloadNotification.title,
+                body: c.payloadNotification.body,
+                targetUrl: c.payloadNotification.targetUrl,
+              }
+            : undefined,
         };
       }),
     "id",
