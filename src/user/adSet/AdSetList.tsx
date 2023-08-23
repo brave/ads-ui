@@ -9,6 +9,7 @@ import { StatsMetric } from "user/analytics/analyticsOverview/types";
 import { AdSetFragment } from "graphql/ad-set.generated";
 import { AdDetailTable } from "user/views/user/AdDetailTable";
 import { displayFromCampaignState } from "util/displayState";
+import { uiLabelsForBillingType } from "util/billingType";
 
 interface Props {
   loading: boolean;
@@ -98,8 +99,7 @@ export function AdSetList({ campaign, loading, engagements }: Props) {
     },
     {
       title: "Type",
-      value: (c) =>
-        c.billingType === "cpm" ? "Impressions (CPM)" : "Clicks (CPC)",
+      value: (c) => uiLabelsForBillingType(c.billingType).longLabel,
     },
     {
       title: "Platforms",

@@ -7,7 +7,7 @@ import { defaultEndDate, defaultStartDate } from "form/DateFieldHelpers";
 import { MIN_PER_CAMPAIGN } from "validation/CampaignSchema";
 import { IAdvertiser } from "auth/context/auth.interface";
 
-export type Billing = "cpm" | "cpc";
+export type Billing = "cpm" | "cpc" | "cpv";
 
 export type CampaignForm = {
   draftId?: string;

@@ -2,6 +2,7 @@ import { CampaignForm } from "../../../../../types";
 import { FormikErrors } from "formik";
 import { ReviewField } from "./ReviewField";
 import { ReviewContainer } from "user/views/adsManager/views/advanced/components/review/components/ReviewContainer";
+import { uiLabelsForBillingType } from "util/billingType";
 
 interface Props {
   values: CampaignForm;
@@ -19,10 +20,6 @@ export function CampaignReview({ values, errors }: Props) {
       minute: "numeric",
     };
     return new Date(date).toLocaleDateString("en-US", options);
-  };
-
-  const billing = (v: string) => {
-    return v === "cpm" ? "Impressions (CPM)" : "Clicks (CPC)";
   };
 
   return (
@@ -46,7 +43,7 @@ export function CampaignReview({ values, errors }: Props) {
       />
       <ReviewField
         caption="Pricing Type"
-        value={billing(values.billingType)}
+        value={uiLabelsForBillingType(values.billingType).longLabel}
         error={errors.billingType}
       />
       <ReviewField

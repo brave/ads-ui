@@ -185,4 +185,14 @@ describe("pricing logic (write)", () => {
     expect(inputObject.price).toEqual("9");
     expect(inputObject.priceType).toEqual(ConfirmationType.Click);
   });
+
+  it("should not convert CPV to per-impression values when populating a CPV creative", () => {
+    const inputObject = transformCreative(creative, {
+      billingType: "cpv",
+      price: 9,
+    });
+
+    expect(inputObject.price).toEqual("9");
+    expect(inputObject.priceType).toEqual(ConfirmationType.Landed);
+  });
 });
