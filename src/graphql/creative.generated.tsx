@@ -4,15 +4,13 @@ import { gql } from "@apollo/client";
 import * as Apollo from "@apollo/client";
 const defaultOptions = {} as const;
 export type CreativeFragment = {
-  __typename?: "Creative";
   id: string;
   createdAt: any;
   modifiedAt: any;
   name: string;
   state: string;
-  type: { __typename?: "CreativeType"; code: string };
+  type: { code: string };
   payloadNotification?: {
-    __typename?: "NotificationPayload";
     body: string;
     title: string;
     targetUrl: string;
@@ -24,20 +22,16 @@ export type AdvertiserCreativesQueryVariables = Types.Exact<{
 }>;
 
 export type AdvertiserCreativesQuery = {
-  __typename?: "Query";
   advertiser?: {
-    __typename?: "Advertiser";
     id: string;
     creatives: Array<{
-      __typename?: "Creative";
       id: string;
       createdAt: any;
       modifiedAt: any;
       name: string;
       state: string;
-      type: { __typename?: "CreativeType"; code: string };
+      type: { code: string };
       payloadNotification?: {
-        __typename?: "NotificationPayload";
         body: string;
         title: string;
         targetUrl: string;
@@ -51,12 +45,9 @@ export type CreateNotificationCreativeMutationVariables = Types.Exact<{
 }>;
 
 export type CreateNotificationCreativeMutation = {
-  __typename?: "Mutation";
   createNotificationCreative: {
-    __typename?: "Creative";
     id: string;
     payloadNotification?: {
-      __typename?: "NotificationPayload";
       body: string;
       title: string;
       targetUrl: string;
@@ -69,8 +60,7 @@ export type UpdateNotificationCreativeMutationVariables = Types.Exact<{
 }>;
 
 export type UpdateNotificationCreativeMutation = {
-  __typename?: "Mutation";
-  updateNotificationCreative: { __typename?: "Creative"; id: string };
+  updateNotificationCreative: { id: string };
 };
 
 export const CreativeFragmentDoc = gql`

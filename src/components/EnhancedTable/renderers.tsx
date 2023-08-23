@@ -11,12 +11,8 @@ import {
   useUpdateCampaignMutation,
 } from "graphql/campaign.generated";
 import { AdvertiserCampaignsDocument } from "graphql/advertiser.generated";
-import {
-  useUpdateAdMutation,
-  useUpdateAdSetMutation,
-} from "graphql/ad-set.generated";
+import { useUpdateAdSetMutation } from "graphql/ad-set.generated";
 import { OnOff } from "../Switch/OnOff";
-import { AdDetails } from "user/ads/AdList";
 import { displayFromCampaignState } from "util/displayState";
 import { AdSetDetails } from "user/adSet/AdSetList";
 
@@ -160,39 +156,6 @@ export function adSetOnOffState(c: AdSetDetails): ReactNode {
       end={c.campaignEnd}
       source={c.campaignSource}
       type="Ad Set"
-    />
-  );
-}
-
-export function adOnOffState(c: AdDetails): ReactNode {
-  const [updateAd, { loading }] = useUpdateAdMutation({
-    refetchQueries: [
-      {
-        query: AdvertiserCampaignsDocument,
-        variables: { id: c.campaignId },
-      },
-    ],
-  });
-
-  return (
-    <OnOff
-      onChange={(s) => {
-        {
-          updateAd({
-            variables: {
-              updateAdInput: {
-                id: c.id,
-                state: s,
-              },
-            },
-          });
-        }
-      }}
-      loading={loading}
-      state={c.state}
-      end={c.campaignEnd}
-      source={c.campaignSource}
-      type="Ad"
     />
   );
 }

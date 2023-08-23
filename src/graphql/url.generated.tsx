@@ -8,18 +8,11 @@ export type ValidateTargetUrlQueryVariables = Types.Exact<{
 }>;
 
 export type ValidateTargetUrlQuery = {
-  __typename?: "Query";
   validateTargetUrl: {
-    __typename?: "TargetUrlValidation";
     isValid: boolean;
     redirects: Array<{
-      __typename?: "Redirect";
       url: string;
-      violations: Array<{
-        __typename?: "ValidationDetail";
-        summary: string;
-        detail: string;
-      }>;
+      violations: Array<{ summary: string; detail: string }>;
     }>;
   };
 };

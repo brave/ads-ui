@@ -4,7 +4,6 @@ import { gql } from "@apollo/client";
 import * as Apollo from "@apollo/client";
 const defaultOptions = {} as const;
 export type UserFragment = {
-  __typename?: "User";
   email: string;
   fullName: string;
   id: string;
@@ -16,14 +15,7 @@ export type LoadUserQueryVariables = Types.Exact<{
 }>;
 
 export type LoadUserQuery = {
-  __typename?: "Query";
-  user: {
-    __typename?: "User";
-    email: string;
-    fullName: string;
-    id: string;
-    role: string;
-  };
+  user: { email: string; fullName: string; id: string; role: string };
 };
 
 export type UpdateUserMutationVariables = Types.Exact<{
@@ -31,14 +23,7 @@ export type UpdateUserMutationVariables = Types.Exact<{
 }>;
 
 export type UpdateUserMutation = {
-  __typename?: "Mutation";
-  updateUser: {
-    __typename?: "User";
-    email: string;
-    fullName: string;
-    id: string;
-    role: string;
-  };
+  updateUser: { email: string; fullName: string; id: string; role: string };
 };
 
 export const UserFragmentDoc = gql`
