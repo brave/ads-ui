@@ -9,11 +9,12 @@ export type CampaignForm = {
   id?: string;
   draftId?: string;
   advertiserId: string;
-  isCreating: boolean;
   startAt: string;
   endAt: string;
   budget: number;
   validateStart: boolean;
+  isCreating: boolean;
+  currency: string;
   dailyBudget: number;
   geoTargets: GeoTarget[];
   adSets: AdSetForm[];
@@ -108,6 +109,7 @@ export const initialCampaign = (advertiser: IAdvertiser): CampaignForm => {
     geoTargets: [],
     newCreative: initialCreative,
     billingType: "cpm",
+    currency: "USD",
     price: 6,
     adSets: [
       {

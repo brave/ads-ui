@@ -43,6 +43,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
         />
       ),
     },
+    // Possible future enhancements, not visible to user but help keep spacing
     {
       label: "Creatives",
       href: "/user/main/creatives",

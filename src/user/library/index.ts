@@ -34,7 +34,7 @@ export function transformNewForm(
   userId?: string,
 ): CreateCampaignInput {
   return {
-    currency: "USD",
+    currency: form.currency,
     dailyCap: 1,
     dailyBudget: form.dailyBudget,
     endAt: form.endAt,
@@ -150,6 +150,7 @@ export function editCampaignValues(
     advertiserId,
     creatives: creativeList(advertiserId, ads),
     newCreative: initialCreative,
+    currency: campaign.currency,
     price: price.toNumber(),
     billingType: billingType,
     validateStart: false,

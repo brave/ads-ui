@@ -38,7 +38,7 @@ export function CampaignReview({ values, errors }: Props) {
       />
       <ReviewField
         caption="Lifetime Budget"
-        value={`$${values.budget} USD`}
+        value={`$${values.budget} ${values.currency}`}
         error={errors.budget}
       />
       <ReviewField

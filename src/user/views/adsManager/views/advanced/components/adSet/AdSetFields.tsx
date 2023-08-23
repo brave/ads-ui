@@ -19,7 +19,6 @@ export function AdSetFields() {
           name={`adSets.${current}.name`}
           label="Ad Set Name"
           margin="none"
-          variant="standard"
         />
       </CardContainer>
 
