@@ -4,7 +4,6 @@ import { gql } from "@apollo/client";
 import * as Apollo from "@apollo/client";
 const defaultOptions = {} as const;
 export type EngagementFragment = {
-  __typename?: "Engagement";
   creativeinstanceid: string;
   createdat: any;
   type: string;
@@ -26,7 +25,6 @@ export type EngagementFragment = {
 };
 
 export type CampaignWithEngagementsFragment = {
-  __typename?: "Campaign";
   id: string;
   name: string;
   state: string;
@@ -39,12 +37,8 @@ export type CampaignWithEngagementsFragment = {
   endAt: any;
   pacingIndex?: number | null;
   format: Types.CampaignFormat;
-  adSets: Array<{
-    __typename?: "AdSet";
-    conversions?: Array<{ __typename?: "Conversion"; type: string }> | null;
-  }>;
+  adSets: Array<{ conversions?: Array<{ type: string }> | null }>;
   engagements?: Array<{
-    __typename?: "Engagement";
     creativeinstanceid: string;
     createdat: any;
     type: string;
@@ -71,9 +65,7 @@ export type AnalyticOverviewQueryVariables = Types.Exact<{
 }>;
 
 export type AnalyticOverviewQuery = {
-  __typename?: "Query";
   campaign?: {
-    __typename?: "Campaign";
     id: string;
     name: string;
     state: string;
@@ -86,12 +78,8 @@ export type AnalyticOverviewQuery = {
     endAt: any;
     pacingIndex?: number | null;
     format: Types.CampaignFormat;
-    adSets: Array<{
-      __typename?: "AdSet";
-      conversions?: Array<{ __typename?: "Conversion"; type: string }> | null;
-    }>;
+    adSets: Array<{ conversions?: Array<{ type: string }> | null }>;
     engagements?: Array<{
-      __typename?: "Engagement";
       creativeinstanceid: string;
       createdat: any;
       type: string;
@@ -120,9 +108,7 @@ export type EngagementOverviewQueryVariables = Types.Exact<{
 }>;
 
 export type EngagementOverviewQuery = {
-  __typename?: "Query";
   engagementsOverview?: Array<{
-    __typename?: "EngagementOverview";
     date: any;
     click: number;
     view: number;

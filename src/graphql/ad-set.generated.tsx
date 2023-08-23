@@ -5,7 +5,6 @@ import { CreativeFragmentDoc } from "./creative.generated";
 import * as Apollo from "@apollo/client";
 const defaultOptions = {} as const;
 export type AdSetFragment = {
-  __typename?: "AdSet";
   id: string;
   createdAt: any;
   billingType?: string | null;
@@ -13,40 +12,32 @@ export type AdSetFragment = {
   totalMax: number;
   perDay: number;
   state: string;
-  execution: string;
+  execution?: string | null;
   keywords?: Array<string> | null;
   keywordSimilarity?: number | null;
   negativeKeywords?: Array<string> | null;
   bannedKeywords?: Array<string> | null;
-  segments?: Array<{
-    __typename?: "Segment";
-    code: string;
-    name: string;
-  }> | null;
-  oses?: Array<{ __typename?: "OS"; code: string; name: string }> | null;
+  segments?: Array<{ code: string; name: string }> | null;
+  oses?: Array<{ code: string; name: string }> | null;
   conversions?: Array<{
-    __typename?: "Conversion";
     id: string;
     type: string;
     urlPattern: string;
     observationWindow: number;
   }> | null;
   ads?: Array<{
-    __typename?: "Ad";
     id: string;
     state: string;
     price: string;
     priceType: Types.ConfirmationType;
     creative: {
-      __typename?: "Creative";
       id: string;
       createdAt: any;
       modifiedAt: any;
       name: string;
       state: string;
-      type: { __typename?: "CreativeType"; code: string };
+      type: { code: string };
       payloadNotification?: {
-        __typename?: "NotificationPayload";
         body: string;
         title: string;
         targetUrl: string;
@@ -56,21 +47,18 @@ export type AdSetFragment = {
 };
 
 export type AdFragment = {
-  __typename?: "Ad";
   id: string;
   state: string;
   price: string;
   priceType: Types.ConfirmationType;
   creative: {
-    __typename?: "Creative";
     id: string;
     createdAt: any;
     modifiedAt: any;
     name: string;
     state: string;
-    type: { __typename?: "CreativeType"; code: string };
+    type: { code: string };
     payloadNotification?: {
-      __typename?: "NotificationPayload";
       body: string;
       title: string;
       targetUrl: string;
@@ -83,9 +71,7 @@ export type CreateAdSetMutationVariables = Types.Exact<{
 }>;
 
 export type CreateAdSetMutation = {
-  __typename?: "Mutation";
   createAdSet: {
-    __typename?: "AdSet";
     id: string;
     createdAt: any;
     billingType?: string | null;
@@ -93,40 +79,32 @@ export type CreateAdSetMutation = {
     totalMax: number;
     perDay: number;
     state: string;
-    execution: string;
+    execution?: string | null;
     keywords?: Array<string> | null;
     keywordSimilarity?: number | null;
     negativeKeywords?: Array<string> | null;
     bannedKeywords?: Array<string> | null;
-    segments?: Array<{
-      __typename?: "Segment";
-      code: string;
-      name: string;
-    }> | null;
-    oses?: Array<{ __typename?: "OS"; code: string; name: string }> | null;
+    segments?: Array<{ code: string; name: string }> | null;
+    oses?: Array<{ code: string; name: string }> | null;
     conversions?: Array<{
-      __typename?: "Conversion";
       id: string;
       type: string;
       urlPattern: string;
       observationWindow: number;
     }> | null;
     ads?: Array<{
-      __typename?: "Ad";
       id: string;
       state: string;
       price: string;
       priceType: Types.ConfirmationType;
       creative: {
-        __typename?: "Creative";
         id: string;
         createdAt: any;
         modifiedAt: any;
         name: string;
         state: string;
-        type: { __typename?: "CreativeType"; code: string };
+        type: { code: string };
         payloadNotification?: {
-          __typename?: "NotificationPayload";
           body: string;
           title: string;
           targetUrl: string;
@@ -141,9 +119,7 @@ export type UpdateAdSetMutationVariables = Types.Exact<{
 }>;
 
 export type UpdateAdSetMutation = {
-  __typename?: "Mutation";
   updateAdSet: {
-    __typename?: "AdSet";
     id: string;
     createdAt: any;
     billingType?: string | null;
@@ -151,40 +127,32 @@ export type UpdateAdSetMutation = {
     totalMax: number;
     perDay: number;
     state: string;
-    execution: string;
+    execution?: string | null;
     keywords?: Array<string> | null;
     keywordSimilarity?: number | null;
     negativeKeywords?: Array<string> | null;
     bannedKeywords?: Array<string> | null;
-    segments?: Array<{
-      __typename?: "Segment";
-      code: string;
-      name: string;
-    }> | null;
-    oses?: Array<{ __typename?: "OS"; code: string; name: string }> | null;
+    segments?: Array<{ code: string; name: string }> | null;
+    oses?: Array<{ code: string; name: string }> | null;
     conversions?: Array<{
-      __typename?: "Conversion";
       id: string;
       type: string;
       urlPattern: string;
       observationWindow: number;
     }> | null;
     ads?: Array<{
-      __typename?: "Ad";
       id: string;
       state: string;
       price: string;
       priceType: Types.ConfirmationType;
       creative: {
-        __typename?: "Creative";
         id: string;
         createdAt: any;
         modifiedAt: any;
         name: string;
         state: string;
-        type: { __typename?: "CreativeType"; code: string };
+        type: { code: string };
         payloadNotification?: {
-          __typename?: "NotificationPayload";
           body: string;
           title: string;
           targetUrl: string;
@@ -192,15 +160,6 @@ export type UpdateAdSetMutation = {
       };
     }> | null;
   };
-};
-
-export type UpdateAdMutationVariables = Types.Exact<{
-  updateAdInput: Types.UpdateAdInput;
-}>;
-
-export type UpdateAdMutation = {
-  __typename?: "Mutation";
-  updateCreativeInstanceState: { __typename?: "Ad"; id: string };
 };
 
 export const AdFragmentDoc = gql`
@@ -350,51 +309,4 @@ export type UpdateAdSetMutationResult =
 export type UpdateAdSetMutationOptions = Apollo.BaseMutationOptions<
   UpdateAdSetMutation,
   UpdateAdSetMutationVariables
->;
-export const UpdateAdDocument = gql`
-  mutation updateAd($updateAdInput: UpdateAdInput!) {
-    updateCreativeInstanceState(updateAdInput: $updateAdInput) {
-      id
-    }
-  }
-`;
-export type UpdateAdMutationFn = Apollo.MutationFunction<
-  UpdateAdMutation,
-  UpdateAdMutationVariables
->;
-
-/**
- * __useUpdateAdMutation__
- *
- * To run a mutation, you first call `useUpdateAdMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateAdMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateAdMutation, { data, loading, error }] = useUpdateAdMutation({
- *   variables: {
- *      updateAdInput: // value for 'updateAdInput'
- *   },
- * });
- */
-export function useUpdateAdMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    UpdateAdMutation,
-    UpdateAdMutationVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<UpdateAdMutation, UpdateAdMutationVariables>(
-    UpdateAdDocument,
-    options,
-  );
-}
-export type UpdateAdMutationHookResult = ReturnType<typeof useUpdateAdMutation>;
-export type UpdateAdMutationResult = Apollo.MutationResult<UpdateAdMutation>;
-export type UpdateAdMutationOptions = Apollo.BaseMutationOptions<
-  UpdateAdMutation,
-  UpdateAdMutationVariables
 >;
