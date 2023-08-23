@@ -43,6 +43,8 @@ export function CampaignView() {
       filter: { from: fromDate },
     },
     pollInterval: 60_000,
+    initialFetchPolicy: "cache-and-network",
+    nextFetchPolicy: "cache-first",
   });
 
   if (error) {
