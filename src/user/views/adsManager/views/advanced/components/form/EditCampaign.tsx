@@ -12,12 +12,16 @@ import { BaseForm } from "./components/BaseForm";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useCreatePaymentSession } from "checkout/hooks/useCreatePaymentSession";
 import { ErrorDetail } from "components/Error/ErrorDetail";
+import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
+import { useContext } from "react";
+import { FilterContext } from "state/context";
 
 interface Params {
   campaignId: string;
 }
 
 export function EditCampaign() {
+  const { fromDate } = useContext(FilterContext);
   const { advertiser } = useAdvertiser();
   const history = useHistory();
   const params = useParams<Params>();
@@ -45,6 +49,14 @@ export function EditCampaign() {
     onError() {
       alert("Unable to Update Campaign.");
     },
+    refetchQueries: [
+      {
+        ...refetchAdvertiserCampaignsQuery({
+          id: advertiser.id,
+          filter: { from: fromDate },
+        }),
+      },
+    ],
   });
 
   if (error) {

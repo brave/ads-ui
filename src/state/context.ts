@@ -26,3 +26,8 @@ export const getAllDrafts = () => {
 
   return campaigns;
 };
+
+export const FilterContext = createContext({
+  fromDate: null as Date | null,
+  setFromDate: (_d: Date | null) => {},
+});

@@ -1,17 +1,17 @@
 import { FormControlLabel, Switch, Typography } from "@mui/material";
 import _ from "lodash";
 import moment from "moment";
-import { Dispatch } from "react";
+import { useContext } from "react";
+import { FilterContext } from "state/context";
 
 interface Props {
-  fromDate: Date | null;
-  onChange: Dispatch<Date | null>;
   disabled?: boolean;
 }
 
-export const CampaignAgeFilter = ({ fromDate, onChange, disabled }: Props) => {
+export const CampaignAgeFilter = ({ disabled }: Props) => {
+  const { fromDate, setFromDate } = useContext(FilterContext);
   const onOldCampaignToggle = (showOld: boolean) => {
-    onChange(
+    setFromDate(
       showOld ? null : moment().subtract(6, "month").startOf("day").toDate(),
     );
   };

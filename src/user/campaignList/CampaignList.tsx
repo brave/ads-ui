@@ -25,14 +25,12 @@ import { CampaignSummaryFragment } from "graphql/campaign.generated";
 
 interface Props {
   advertiser?: AdvertiserCampaignsFragment | null;
-  fromDate: Date | null;
   selectedCampaigns: string[];
   onCampaignSelect: (c: string, insert: boolean) => void;
 }
 
 export function CampaignList({
   advertiser,
-  fromDate,
   selectedCampaigns,
   onCampaignSelect,
 }: Props) {
@@ -60,7 +58,6 @@ export function CampaignList({
       extendedRenderer: (r) =>
         campaignOnOffState({
           ...r,
-          fromDate,
           advertiserId: advertiser?.id ?? "",
         }),
       sx: { width: "1px" },

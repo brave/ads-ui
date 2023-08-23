@@ -2,7 +2,7 @@ import { Box, Tooltip } from "@mui/material";
 import _ from "lodash";
 import { format, formatDistanceToNow, parseISO } from "date-fns";
 import { CellValue } from "./EnhancedTable";
-import { ReactChild, ReactNode } from "react";
+import { ReactChild, ReactNode, useContext } from "react";
 import { formatInTimeZone } from "date-fns-tz";
 import enUS from "date-fns/locale/en-US";
 import {
@@ -10,11 +10,12 @@ import {
   LoadCampaignAdsDocument,
   useUpdateCampaignMutation,
 } from "graphql/campaign.generated";
-import { AdvertiserCampaignsDocument } from "graphql/advertiser.generated";
 import { useUpdateAdSetMutation } from "graphql/ad-set.generated";
 import { OnOff } from "../Switch/OnOff";
 import { displayFromCampaignState } from "util/displayState";
 import { AdSetDetails } from "user/adSet/AdSetList";
+import { FilterContext } from "state/context";
+import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
 
 export type CellValueRenderer = (value: CellValue) => ReactNode;
 const ADS_DEFAULT_TIMEZONE = "America/New_York";
@@ -90,16 +91,16 @@ export function renderMonetaryAmount(
 }
 
 export function campaignOnOffState(
-  c: CampaignSummaryFragment & { fromDate: Date | null; advertiserId: string },
+  c: CampaignSummaryFragment & { advertiserId: string },
 ): ReactNode {
+  const { fromDate } = useContext(FilterContext);
   const [updateCampaign, { loading }] = useUpdateCampaignMutation({
     refetchQueries: [
       {
-        query: AdvertiserCampaignsDocument,
-        variables: {
+        ...refetchAdvertiserCampaignsQuery({
           id: c.advertiserId,
-          filter: { from: c.fromDate },
-        },
+          filter: { from: fromDate },
+        }),
       },
     ],
   });
