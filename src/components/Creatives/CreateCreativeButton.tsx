@@ -8,6 +8,7 @@ import {
 import { useField } from "formik";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { LoadingButton } from "@mui/lab";
+import { transformCreativeFragment } from "user/library";
 
 export function CreateCreativeButton() {
   const [, , isCreating] = useField<boolean>("isCreating");
@@ -21,7 +22,7 @@ export function CreateCreativeButton() {
       newHelper.setTouched(false);
       creativesHelper.setValue([
         ...(creativesMeta.value ?? []),
-        data.createCreative as Creative,
+        transformCreativeFragment(data.createCreative, advertiser.id),
       ]);
       isCreating.setValue(false);
     },
@@ -38,7 +39,11 @@ export function CreateCreativeButton() {
       startIcon={<SaveIcon />}
       onClick={(e) => {
         e.preventDefault();
-        create({ variables: { input: { ...newMeta.value } } });
+        create({
+          variables: {
+            input: { ...newMeta.value, advertiserId: advertiser.id },
+          },
+        });
       }}
       disabled={
         newMeta.value?.targetUrlValid !== undefined ||

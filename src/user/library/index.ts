@@ -19,6 +19,7 @@ import {
 } from "user/views/adsManager/types";
 import _ from "lodash";
 import BigNumber from "bignumber.js";
+import { CreativeFragment } from "graphql/creative.generated";
 
 const TYPE_CODE_LOOKUP: Record<string, string> = {
   notification_all_v1: "Push Notification",
@@ -101,13 +102,12 @@ export function transformCreative(
     createInput.creativeId = creative.id;
   }
 
-  createInput.creative = _.omit(creative, [
-    "createdAt",
-    "modifiedAt",
-    "id",
-    "creativeInstanceId",
-    "targetUrlValid",
-  ]);
+  if (createInput.creative) {
+    createInput.creative = transformCreativeFragment(
+      createInput.creative,
+      createInput.creative.advertiserId,
+    );
+  }
 
   return createInput;
 }
@@ -179,24 +179,33 @@ function creativeList(
       .map((ad) => {
         const c = ad.creative;
         return {
-          advertiserId,
+          ...transformCreativeFragment(c, advertiserId),
           creativeInstanceId: ad.id,
-          id: c.id,
-          name: c.name,
-          targetUrlValid: "",
-          state: c.state,
-          type: { code: c.type.code },
-          payloadNotification: c.payloadNotification
-            ? {
-                title: c.payloadNotification.title,
-                body: c.payloadNotification.body,
-                targetUrl: c.payloadNotification.targetUrl,
-              }
-            : undefined,
         };
       }),
     "id",
   );
+}
+
+export function transformCreativeFragment(
+  c: CreativeFragment | Creative,
+  advertiserId: string,
+) {
+  return {
+    advertiserId,
+    id: c.id,
+    name: c.name,
+    targetUrlValid: "",
+    state: c.state,
+    type: { code: c.type.code },
+    payloadNotification: c.payloadNotification
+      ? {
+          title: c.payloadNotification.title,
+          body: c.payloadNotification.body,
+          targetUrl: c.payloadNotification.targetUrl,
+        }
+      : undefined,
+  };
 }
 
 export function transformEditForm(

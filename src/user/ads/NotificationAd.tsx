@@ -7,9 +7,15 @@ import { Creative } from "user/views/adsManager/types";
 import { NotificationPreview } from "components/Creatives/NotificationPreview";
 import { CreateCreativeButton } from "components/Creatives/CreateCreativeButton";
 import { EditCreativeButton } from "components/Creatives/EditCreativeButton";
+import { useEffect } from "react";
 
 export function NotificationAd() {
-  const [, newMeta] = useField<Creative>("newCreative");
+  const [, creative] = useField<Creative>("newCreative");
+  const [, , code] = useField<string>("newCreative.type.code");
+
+  useEffect(() => {
+    code.setValue("notification_all_v1");
+  }, []);
 
   return (
     <CardContainer header="New Ad">
@@ -42,7 +48,7 @@ export function NotificationAd() {
 
       <Stack direction="row" justifyContent="space-between" mt={1}>
         <div />
-        {newMeta.value.id ? <EditCreativeButton /> : <CreateCreativeButton />}
+        {creative.value.id ? <EditCreativeButton /> : <CreateCreativeButton />}
       </Stack>
     </CardContainer>
   );
