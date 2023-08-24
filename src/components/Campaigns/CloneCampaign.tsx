@@ -14,12 +14,13 @@ import {
   useCreateCampaignMutation,
 } from "graphql/campaign.generated";
 import { useHistory } from "react-router-dom";
-import { useState } from "react";
-import { AdvertiserCampaignsDocument } from "graphql/advertiser.generated";
+import { useContext, useState } from "react";
+import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
 import { createCampaignFromFragment } from "form/fragmentUtil";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { useUser } from "auth/hooks/queries/useUser";
+import { FilterContext } from "state/context";
 
 interface Props {
   campaignFragment?: CampaignFragment | null;
@@ -28,6 +29,7 @@ interface Props {
 
 export function CloneCampaign({ campaignFragment, useChip }: Props) {
   const { advertiser } = useAdvertiser();
+  const { fromDate } = useContext(FilterContext);
   const { userId } = useUser();
   const history = useHistory();
   const [open, setOpen] = useState(false);
@@ -35,8 +37,10 @@ export function CloneCampaign({ campaignFragment, useChip }: Props) {
   const [copyCampaign, { loading }] = useCreateCampaignMutation({
     refetchQueries: [
       {
-        query: AdvertiserCampaignsDocument,
-        variables: { id: advertiser.id },
+        ...refetchAdvertiserCampaignsQuery({
+          id: advertiser.id,
+          filter: { from: fromDate },
+        }),
       },
     ],
     onCompleted(data) {
