@@ -148,6 +148,7 @@ export function editCampaignValues(
   const price = billingType === "cpm" ? rawPrice.multipliedBy(1000) : rawPrice;
 
   return {
+    id: campaign.id,
     adSets: campaign.adSets.map((adSet) => {
       const seg = adSet.segments ?? ([] as Segment[]);
 

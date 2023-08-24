@@ -10,6 +10,7 @@ import { IAdvertiser } from "auth/context/auth.interface";
 export type Billing = "cpm" | "cpc" | "cpv";
 
 export type CampaignForm = {
+  id?: string;
   draftId?: string;
   advertiserId: string;
   startAt: string;

@@ -85,7 +85,7 @@ export function EditCampaign() {
         }}
         validationSchema={CampaignSchema}
       >
-        <BaseForm isEdit={true} />
+        <BaseForm />
       </Formik>
     </Container>
   );

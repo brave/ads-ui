@@ -78,7 +78,7 @@ export function NewCampaign() {
         validationSchema={CampaignSchema}
       >
         <>
-          <BaseForm isEdit={false} />
+          <BaseForm />
           <PersistFormValues />
         </>
       </Formik>

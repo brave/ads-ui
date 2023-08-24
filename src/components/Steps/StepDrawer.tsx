@@ -61,7 +61,7 @@ export function StepDrawer({
               <Step key={step.label} completed={activeStep.current > index}>
                 <StepButton
                   onClick={() => {
-                    history.push(`${step.path}${step.queryParams ?? ""}`);
+                    history.replace(`${step.path}${step.queryParams ?? ""}`);
                     activeStep.current = index;
                   }}
                 >

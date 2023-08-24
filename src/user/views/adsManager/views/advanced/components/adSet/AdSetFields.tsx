@@ -2,15 +2,12 @@ import { PickerFields } from "./fields/PickerFields";
 import { ConversionField } from "./fields/ConversionField";
 import { CardContainer } from "components/Card/CardContainer";
 import { useHistory } from "react-router-dom";
-import { FormikTextField } from "form/FormikHelpers";
+import { FormikTextField, useIsEdit } from "form/FormikHelpers";
 import { AdSetAds } from "user/views/adsManager/views/advanced/components/adSet/fields/AdSetAds";
 
-interface Props {
-  isEdit: boolean;
-}
-
-export function AdSetFields({ isEdit }: Props) {
+export function AdSetFields() {
   const history = useHistory();
+  const { isEditAndDraft } = useIsEdit();
   const params = new URLSearchParams(history.location.search);
   const current = Number(params.get("current") ?? 0);
   const fakeCurrent = current + 1;
@@ -27,7 +24,7 @@ export function AdSetFields({ isEdit }: Props) {
 
       <PickerFields index={current} />
 
-      {!isEdit && <ConversionField index={current} />}
+      {isEditAndDraft && <ConversionField index={current} />}
 
       <AdSetAds index={current} />
     </>

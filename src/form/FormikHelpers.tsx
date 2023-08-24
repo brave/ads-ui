@@ -1,9 +1,4 @@
-import {
-  HTMLInputTypeAttribute,
-  PropsWithChildren,
-  ReactNode,
-  useEffect,
-} from "react";
+import { HTMLInputTypeAttribute, PropsWithChildren, ReactNode } from "react";
 import {
   Box,
   Button,
@@ -20,8 +15,8 @@ import {
   TooltipProps,
 } from "@mui/material";
 import { ErrorMessage, useField, useFormikContext } from "formik";
-import { useHistory } from "react-router-dom";
 import _ from "lodash";
+import { CampaignForm } from "user/views/adsManager/types";
 
 type FormikTextFieldProps = TextFieldProps & {
   name: string;
@@ -158,7 +153,6 @@ interface FormikSubmitButtonProps {
   label?: string;
   inProgressLabel?: string;
   isCreate: boolean;
-  allowNavigation?: boolean;
 }
 
 function extractErrors(errorObject: any): string[] {
@@ -171,28 +165,10 @@ export const FormikSubmitButton = ({
   label = "Save",
   inProgressLabel = "Saving...",
   isCreate,
-  allowNavigation,
 }: FormikSubmitButtonProps) => {
   const formik = useFormikContext();
-  const history = useHistory();
-
   let saveButtonTooltip: TooltipProps["title"] = "";
   let saveEnabled = true;
-
-  // On create, the save button is initially enabled so the user can click it
-  // to see the full set of validation errors.
-  // On edit, it should only be enabled once they've made changes.
-  useEffect(() => {
-    const unblock = history.block(
-      !allowNavigation && formik.dirty
-        ? "You’ve got unsaved changes. Are you sure you want to navigate away from this page?"
-        : true,
-    );
-
-    return function cleanup() {
-      unblock();
-    };
-  }, [formik.dirty, allowNavigation]);
 
   if (formik.isSubmitting) {
     saveEnabled = false;
@@ -232,3 +208,10 @@ export const FormikSubmitButton = ({
     </Tooltip>
   );
 };
+
+export function useIsEdit() {
+  const { values } = useFormikContext<CampaignForm>();
+  const isEdit = values.id !== undefined && values.id.trim() !== "";
+  const isEditAndDraft = isEdit && values.state === "draft";
+  return { isEdit, isEditAndDraft };
+}

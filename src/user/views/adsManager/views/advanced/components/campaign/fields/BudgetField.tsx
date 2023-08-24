@@ -1,7 +1,11 @@
 import { InputAdornment, Stack, Typography } from "@mui/material";
-import { FormikRadioControl, FormikTextField } from "form/FormikHelpers";
+import {
+  FormikRadioControl,
+  FormikTextField,
+  useIsEdit,
+} from "form/FormikHelpers";
 import { useEffect, useState } from "react";
-import { useFormikContext } from "formik";
+import { useField, useFormikContext } from "formik";
 import { CampaignForm } from "../../../../../types";
 import { differenceInHours } from "date-fns";
 import { MIN_PER_CAMPAIGN, MIN_PER_DAY } from "validation/CampaignSchema";
@@ -10,20 +14,18 @@ import _ from "lodash";
 import { CardContainer } from "components/Card/CardContainer";
 import { uiLabelsForBillingType } from "util/billingType";
 
-interface Props {
-  isEdit: boolean;
-}
-
-export function BudgetField({ isEdit }: Props) {
+export function BudgetField() {
+  const [, , dailyBudget] = useField<number>("dailyBudget");
+  const { isEditAndDraft } = useIsEdit();
   const { advertiser } = useAdvertiser();
-  const { values, setFieldValue, errors } = useFormikContext<CampaignForm>();
+  const { values, errors } = useFormikContext<CampaignForm>();
   const [minBudget, setMinBudget] = useState(MIN_PER_CAMPAIGN);
   const campaignRuntime = Math.floor(
     differenceInHours(new Date(values.endAt), new Date(values.startAt)) / 24,
   );
 
   useEffect(() => {
-    const dailyBudget =
+    const calculatedBudget =
       campaignRuntime > 0
         ? Math.floor(Number(values.budget) / campaignRuntime)
         : values.budget;
@@ -36,7 +38,7 @@ export function BudgetField({ isEdit }: Props) {
       setMinBudget(minLifetime);
     }
 
-    setFieldValue("dailyBudget", dailyBudget);
+    dailyBudget.setValue(calculatedBudget);
   }, [campaignRuntime, values.budget, minBudget]);
 
   return (
@@ -62,11 +64,7 @@ export function BudgetField({ isEdit }: Props) {
               : undefined
           }
           error={!!errors.budget || !!errors.dailyBudget}
-          disabled={
-            isEdit &&
-            !advertiser.selfServiceSetPrice &&
-            values.state !== "draft"
-          }
+          disabled={!isEditAndDraft && !advertiser.selfServiceSetPrice}
         />
 
         {!advertiser.selfServiceSetPrice ? (
@@ -89,7 +87,7 @@ export function BudgetField({ isEdit }: Props) {
                   <InputAdornment position="start">$</InputAdornment>
                 ),
               }}
-              disabled={isEdit && values.state !== "draft"}
+              disabled={!isEditAndDraft}
             />
 
             <FormikRadioControl
@@ -104,7 +102,7 @@ export function BudgetField({ isEdit }: Props) {
                   label: uiLabelsForBillingType("cpc").longLabel,
                 },
               ]}
-              disabled={isEdit && values.state !== "draft"}
+              disabled={!isEditAndDraft}
             />
           </Stack>
         )}
