@@ -35,6 +35,7 @@ export function transformNewForm(
 ): CreateCampaignInput {
   return {
     currency: form.currency,
+    externalId: "",
     dailyCap: 1,
     dailyBudget: form.dailyBudget,
     endAt: form.endAt,
