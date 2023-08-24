@@ -8,7 +8,7 @@ import {
 import { useField } from "formik";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { LoadingButton } from "@mui/lab";
-import { transformCreativeFragment } from "user/library";
+import { validCreativeFields } from "user/library";
 
 export function CreateCreativeButton() {
   const [, , isCreating] = useField<boolean>("isCreating");
@@ -22,7 +22,7 @@ export function CreateCreativeButton() {
       newHelper.setTouched(false);
       creativesHelper.setValue([
         ...(creativesMeta.value ?? []),
-        transformCreativeFragment(data.createCreative, advertiser.id),
+        validCreativeFields(data.createCreative, advertiser.id),
       ]);
       isCreating.setValue(false);
     },

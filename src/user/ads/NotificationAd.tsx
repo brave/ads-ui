@@ -3,14 +3,11 @@ import { FormikTextField } from "form/FormikHelpers";
 import { Stack } from "@mui/material";
 import { UrlResolver } from "components/Url/UrlResolver";
 import { useField } from "formik";
-import { Creative } from "user/views/adsManager/types";
 import { NotificationPreview } from "components/Creatives/NotificationPreview";
 import { CreateCreativeButton } from "components/Creatives/CreateCreativeButton";
-import { EditCreativeButton } from "components/Creatives/EditCreativeButton";
 import { useEffect } from "react";
 
 export function NotificationAd() {
-  const [, creative] = useField<Creative>("newCreative");
   const [, , code] = useField<string>("newCreative.type.code");
 
   useEffect(() => {
@@ -48,7 +45,7 @@ export function NotificationAd() {
 
       <Stack direction="row" justifyContent="space-between" mt={1}>
         <div />
-        {creative.value.id ? <EditCreativeButton /> : <CreateCreativeButton />}
+        <CreateCreativeButton />
       </Stack>
     </CardContainer>
   );

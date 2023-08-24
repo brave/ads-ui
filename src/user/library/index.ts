@@ -103,7 +103,7 @@ export function transformCreative(
   }
 
   if (createInput.creative) {
-    createInput.creative = transformCreativeFragment(
+    createInput.creative = validCreativeFields(
       createInput.creative,
       createInput.creative.advertiserId,
     );
@@ -180,7 +180,7 @@ function creativeList(
       .map((ad) => {
         const c = ad.creative;
         return {
-          ...transformCreativeFragment(c, advertiserId),
+          ...validCreativeFields(c, advertiserId),
           creativeInstanceId: ad.id,
         };
       }),
@@ -188,10 +188,10 @@ function creativeList(
   );
 }
 
-export function transformCreativeFragment(
+export function validCreativeFields(
   c: CreativeFragment | Creative,
   advertiserId: string,
-) {
+): Creative {
   return {
     advertiserId,
     id: c.id,

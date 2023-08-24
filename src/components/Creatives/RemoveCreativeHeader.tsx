@@ -3,10 +3,8 @@ import { CampaignForm, Creative } from "user/views/adsManager/types";
 import { useEffect, useState } from "react";
 import _ from "lodash";
 import { Box, IconButton, Tooltip } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { Status } from "components/Campaigns/Status";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 
 export const RemoveCreativeHeader = (props: { creative: Creative }) => {
   const { values } = useFormikContext<CampaignForm>();
@@ -19,12 +17,9 @@ export const RemoveCreativeHeader = (props: { creative: Creative }) => {
     );
   }, [values.adSets, values.creatives]);
 
-  const canEdit =
-    props.creative.state === "draft" || props.creative.state === "suspended";
   return (
     <Box display="flex" justifyContent="left" alignItems="center" gap="5px">
       <RemoveButton disabled={disabled} creative={props.creative} />
-      {canEdit && <EditButton creative={props.creative} />}
       {props.creative.name}
       <div style={{ flexGrow: 1 }} />
       <Status state={props.creative.state} />
@@ -59,29 +54,6 @@ const RemoveButton = (props: { disabled: boolean; creative: Creative }) => {
           />
         </IconButton>
       </span>
-    </Tooltip>
-  );
-};
-
-const EditButton = (props: { creative: Creative }) => {
-  const { advertiser } = useAdvertiser();
-  const [, , creating] = useField<boolean>("isCreating");
-  const [, , helper] = useField<Creative>("newCreative");
-
-  const onEditCreative = (c: Creative) => {
-    helper.setValue({
-      ...c,
-      advertiserId: advertiser.id,
-      state: "draft",
-    });
-    creating.setValue(true);
-  };
-
-  return (
-    <Tooltip title="Edit Ad content">
-      <IconButton onClick={() => onEditCreative(props.creative)} sx={{ p: 0 }}>
-        <EditIcon color="secondary" fontSize="small" />
-      </IconButton>
     </Tooltip>
   );
 };
