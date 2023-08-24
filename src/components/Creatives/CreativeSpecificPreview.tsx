@@ -20,10 +20,6 @@ export function CreativeSpecificPreview({
   const [, format] = useField<CampaignFormat>("format");
   const [, meta] = useField<Creative[]>(name);
 
-  if (meta.value.length === 0) {
-    return null;
-  }
-
   let component;
   if (format.value === CampaignFormat.PushNotification) {
     component = meta.value.map((c, idx) => (
