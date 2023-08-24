@@ -19,11 +19,8 @@ import { CampaignView } from "user/views/user/CampaignView";
 import { CampaignReportView } from "user/views/user/CampaignReportView";
 import { Profile } from "user/views/user/Profile";
 import { IAdvertiser } from "auth/context/auth.interface";
-<<<<<<< HEAD
 import moment from "moment";
 import { FilterContext } from "state/context";
-=======
->>>>>>> d58f15d (chore: move away from notification specific code)
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
