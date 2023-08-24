@@ -17,7 +17,7 @@ const config: CodegenConfig = {
         baseTypesPath: "graphql/types.ts",
       },
       plugins: ["typescript-operations", "typescript-react-apollo"],
-      config: { withHooks: true, withRefetchFn: true },
+      config: { withHooks: true, withRefetchFn: true, skipTypename: true },
     },
     "src/graphql/types.ts": {
       plugins: ["typescript"],

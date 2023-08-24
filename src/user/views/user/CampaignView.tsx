@@ -1,10 +1,9 @@
 import { Box, Chip, Skeleton, Stack, Tooltip, Typography } from "@mui/material";
-import { useCallback, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { useAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
 import { CampaignAgeFilter } from "components/Campaigns/CampaignAgeFilter";
 import { CampaignList } from "user/campaignList/CampaignList";
 import { ErrorDetail } from "components/Error/ErrorDetail";
-import moment from "moment/moment";
 import { CardContainer } from "components/Card/CardContainer";
 import MiniSideBar from "components/Drawer/MiniSideBar";
 import { useLoadCampaignQuery } from "graphql/campaign.generated";
@@ -13,12 +12,11 @@ import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { Link as RouterLink } from "react-router-dom";
 import { CloneCampaign } from "components/Campaigns/CloneCampaign";
 import EditIcon from "@mui/icons-material/Edit";
+import { FilterContext } from "state/context";
 
 export function CampaignView() {
   const { advertiser } = useAdvertiser();
-  const [fromDateFilter, setFromDateFilter] = useState<Date | null>(
-    moment().subtract(6, "month").startOf("day").toDate(),
-  );
+  const { fromDate } = useContext(FilterContext);
   const [selectedCampaigns, setSelectedCampaigns] = useState<string[]>([]);
   const advertiserCanAction =
     advertiser.selfServiceCreate && advertiser.selfServiceEdit;
@@ -42,9 +40,11 @@ export function CampaignView() {
   const { loading, data, error } = useAdvertiserCampaignsQuery({
     variables: {
       id: advertiser.id,
-      filter: { from: fromDateFilter },
+      filter: { from: fromDate },
     },
     pollInterval: 60_000,
+    initialFetchPolicy: "cache-and-network",
+    nextFetchPolicy: "cache-first",
   });
 
   if (error) {
@@ -70,18 +70,11 @@ export function CampaignView() {
           flexGrow: 1,
           mr: 2,
         }}
-        additionalAction={
-          <CampaignAgeFilter
-            fromDate={fromDateFilter}
-            onChange={setFromDateFilter}
-            disabled={loading}
-          />
-        }
+        additionalAction={<CampaignAgeFilter disabled={loading} />}
       >
         {!loading ? (
           <CampaignList
             advertiser={data?.advertiserCampaigns}
-            fromDate={fromDateFilter}
             onCampaignSelect={handleCampaignSelect}
             selectedCampaigns={selectedCampaigns}
           />
@@ -110,7 +103,7 @@ function CampaignHeader(props: { selectedCampaigns: string[] }) {
       data.campaign.source === CampaignSource.SelfServe &&
       data.campaign.format === CampaignFormat.PushNotification &&
       data.campaign.state !== "completed";
-    tooltip = isValidCampaign ? null : "Cannot clone or edit this campaign";
+    tooltip = isValidCampaign ? null : "Cannot edit this campaign";
   }
 
   return (
@@ -122,7 +115,9 @@ function CampaignHeader(props: { selectedCampaigns: string[] }) {
           <Chip
             color="primary"
             label="Edit"
-            disabled={!oneCampaignSelected || !data?.campaign}
+            disabled={
+              !oneCampaignSelected || !data?.campaign || !isValidCampaign
+            }
             component={RouterLink}
             to={`/user/main/adsmanager/advanced/${firstCampaign}/settings`}
             icon={<EditIcon fontSize="small" />}

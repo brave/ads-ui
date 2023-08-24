@@ -51,9 +51,3 @@ mutation updateAdSet($updateAdSetInput: UpdateAdSetInput!) {
     ...AdSet
   }
 }
-
-mutation updateAd($updateAdInput: UpdateAdInput!) {
-  updateCreativeInstanceState(updateAdInput: $updateAdInput) {
-    id
-  }
-}

@@ -8,11 +8,12 @@ import { useCreateCampaignMutation } from "graphql/campaign.generated";
 import { useHistory, useParams } from "react-router-dom";
 import { BaseForm } from "./components/BaseForm";
 import { PersistFormValues } from "form/PersistFormValues";
-import { DraftContext } from "state/context";
+import { DraftContext, FilterContext } from "state/context";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useCreatePaymentSession } from "checkout/hooks/useCreatePaymentSession";
 import { PaymentType } from "graphql/types";
 import { useUser } from "auth/hooks/queries/useUser";
+import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
 
 interface Params {
   draftId: string;
@@ -20,6 +21,7 @@ interface Params {
 
 export function NewCampaign() {
   const history = useHistory();
+  const { fromDate } = useContext(FilterContext);
   const params = useParams<Params>();
   const { advertiser } = useAdvertiser();
   const { userId } = useUser();
@@ -49,6 +51,14 @@ export function NewCampaign() {
     onError() {
       alert("Unable to create Campaign.");
     },
+    refetchQueries: [
+      {
+        ...refetchAdvertiserCampaignsQuery({
+          id: advertiser.id,
+          filter: { from: fromDate },
+        }),
+      },
+    ],
   });
 
   if (loading) {

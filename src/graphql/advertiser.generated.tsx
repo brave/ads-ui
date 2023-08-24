@@ -5,7 +5,6 @@ import { CampaignSummaryFragmentDoc } from "./campaign.generated";
 import * as Apollo from "@apollo/client";
 const defaultOptions = {} as const;
 export type AdvertiserSummaryFragment = {
-  __typename?: "Advertiser";
   id: string;
   name: string;
   state: string;
@@ -17,7 +16,6 @@ export type AdvertiserSummaryFragment = {
 };
 
 export type AdvertiserFragment = {
-  __typename?: "Advertiser";
   referrer?: string | null;
   phone?: string | null;
   selfServiceEdit: boolean;
@@ -32,7 +30,6 @@ export type AdvertiserFragment = {
   modifiedAt: any;
   publicKey?: string | null;
   mailingAddress: {
-    __typename?: "Address";
     street1: string;
     street2?: string | null;
     city: string;
@@ -47,12 +44,7 @@ export type AdvertiserQueryVariables = Types.Exact<{
 }>;
 
 export type AdvertiserQuery = {
-  __typename?: "Query";
-  advertiser?: {
-    __typename?: "Advertiser";
-    id: string;
-    publicKey?: string | null;
-  } | null;
+  advertiser?: { id: string; publicKey?: string | null } | null;
 };
 
 export type UpdateAdvertiserMutationVariables = Types.Exact<{
@@ -60,23 +52,16 @@ export type UpdateAdvertiserMutationVariables = Types.Exact<{
 }>;
 
 export type UpdateAdvertiserMutation = {
-  __typename?: "Mutation";
-  updateAdvertiser: {
-    __typename?: "Advertiser";
-    id: string;
-    publicKey?: string | null;
-  };
+  updateAdvertiser: { id: string; publicKey?: string | null };
 };
 
 export type AdvertiserCampaignsFragment = {
-  __typename?: "Advertiser";
   id: string;
   name: string;
   selfServiceEdit: boolean;
   selfServiceCreate: boolean;
   selfServiceSetPrice: boolean;
   campaigns: Array<{
-    __typename?: "Campaign";
     id: string;
     name: string;
     state: string;
@@ -107,16 +92,13 @@ export type AdvertiserCampaignsQueryVariables = Types.Exact<{
 }>;
 
 export type AdvertiserCampaignsQuery = {
-  __typename?: "Query";
   advertiserCampaigns?: {
-    __typename?: "Advertiser";
     id: string;
     name: string;
     selfServiceEdit: boolean;
     selfServiceCreate: boolean;
     selfServiceSetPrice: boolean;
     campaigns: Array<{
-      __typename?: "Campaign";
       id: string;
       name: string;
       state: string;

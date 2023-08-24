@@ -126,7 +126,7 @@ export type CreateAdSetInput = {
   campaignId?: InputMaybe<Scalars["String"]>;
   channels?: InputMaybe<Array<CreateChannelInput>>;
   conversions?: InputMaybe<Array<CreateConversionInput>>;
-  execution: Scalars["String"];
+  execution?: InputMaybe<Scalars["String"]>;
   keywordSimilarity?: InputMaybe<Scalars["Float"]>;
   keywords?: InputMaybe<Array<Scalars["String"]>>;
   name?: InputMaybe<Scalars["String"]>;
@@ -401,7 +401,7 @@ export type UpdateAdSetInput = {
   bannedKeywords?: InputMaybe<Array<Scalars["String"]>>;
   billingType?: InputMaybe<Scalars["String"]>;
   campaignId?: InputMaybe<Scalars["String"]>;
-  channels?: InputMaybe<Array<UpdateChannelsInput>>;
+  channels?: InputMaybe<Array<CreateChannelInput>>;
   conversions?: InputMaybe<Array<UpdateConversionsInput>>;
   execution?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["String"]>;
@@ -409,6 +409,7 @@ export type UpdateAdSetInput = {
   keywords?: InputMaybe<Array<Scalars["String"]>>;
   name?: InputMaybe<Scalars["String"]>;
   negativeKeywords?: InputMaybe<Array<Scalars["String"]>>;
+  optimized?: InputMaybe<Scalars["Boolean"]>;
   oses?: InputMaybe<Array<UpdateOSesInput>>;
   perDay?: InputMaybe<Scalars["Float"]>;
   segments?: InputMaybe<Array<UpdateSegmentInput>>;
@@ -472,17 +473,13 @@ export type UpdateCampaignInput = {
   type?: InputMaybe<Scalars["String"]>;
 };
 
-export type UpdateChannelsInput = {
-  channelId: Scalars["String"];
-};
-
 export type UpdateConversionsInput = {
   extractExternalId?: InputMaybe<Scalars["Boolean"]>;
   id?: InputMaybe<Scalars["String"]>;
-  observationWindow: Scalars["Float"];
+  observationWindow?: InputMaybe<Scalars["Float"]>;
   trailingAsteriskNotRequired?: InputMaybe<Scalars["Boolean"]>;
-  type: Scalars["String"];
-  urlPattern: Scalars["String"];
+  type?: InputMaybe<Scalars["String"]>;
+  urlPattern?: InputMaybe<Scalars["String"]>;
 };
 
 export type UpdateInPageCreativeInput = {
@@ -529,7 +526,6 @@ export type UpdateOSesInput = {
 export type UpdateSegmentInput = {
   code?: InputMaybe<Scalars["String"]>;
   name?: InputMaybe<Scalars["String"]>;
-  state?: InputMaybe<Scalars["String"]>;
 };
 
 export type UpdateUserInput = {

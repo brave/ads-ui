@@ -5,7 +5,6 @@ import { AdSetFragmentDoc } from "./ad-set.generated";
 import * as Apollo from "@apollo/client";
 const defaultOptions = {} as const;
 export type CampaignFragment = {
-  __typename?: "Campaign";
   id: string;
   name: string;
   state: string;
@@ -30,18 +29,12 @@ export type CampaignFragment = {
   stripePaymentId?: string | null;
   hasPaymentIntent?: boolean | null;
   dayPartings?: Array<{
-    __typename?: "DayParting";
     dow: string;
     startMinute: number;
     endMinute: number;
   }> | null;
-  geoTargets?: Array<{
-    __typename?: "Geocode";
-    code: string;
-    name: string;
-  }> | null;
+  geoTargets?: Array<{ code: string; name: string }> | null;
   adSets: Array<{
-    __typename?: "AdSet";
     id: string;
     createdAt: any;
     billingType?: string | null;
@@ -49,40 +42,32 @@ export type CampaignFragment = {
     totalMax: number;
     perDay: number;
     state: string;
-    execution: string;
+    execution?: string | null;
     keywords?: Array<string> | null;
     keywordSimilarity?: number | null;
     negativeKeywords?: Array<string> | null;
     bannedKeywords?: Array<string> | null;
-    segments?: Array<{
-      __typename?: "Segment";
-      code: string;
-      name: string;
-    }> | null;
-    oses?: Array<{ __typename?: "OS"; code: string; name: string }> | null;
+    segments?: Array<{ code: string; name: string }> | null;
+    oses?: Array<{ code: string; name: string }> | null;
     conversions?: Array<{
-      __typename?: "Conversion";
       id: string;
       type: string;
       urlPattern: string;
       observationWindow: number;
     }> | null;
     ads?: Array<{
-      __typename?: "Ad";
       id: string;
       state: string;
       price: string;
       priceType: Types.ConfirmationType;
       creative: {
-        __typename?: "Creative";
         id: string;
         createdAt: any;
         modifiedAt: any;
         name: string;
         state: string;
-        type: { __typename?: "CreativeType"; code: string };
+        type: { code: string };
         payloadNotification?: {
-          __typename?: "NotificationPayload";
           body: string;
           title: string;
           targetUrl: string;
@@ -90,11 +75,10 @@ export type CampaignFragment = {
       };
     }> | null;
   }>;
-  advertiser: { __typename?: "Advertiser"; id: string };
+  advertiser: { id: string };
 };
 
 export type CampaignSummaryFragment = {
-  __typename?: "Campaign";
   id: string;
   name: string;
   state: string;
@@ -119,7 +103,6 @@ export type CampaignSummaryFragment = {
 };
 
 export type CampaignAdsFragment = {
-  __typename?: "Campaign";
   id: string;
   name: string;
   state: string;
@@ -128,9 +111,8 @@ export type CampaignAdsFragment = {
   source: Types.CampaignSource;
   currency: string;
   format: Types.CampaignFormat;
-  advertiser: { __typename?: "Advertiser"; id: string };
+  advertiser: { id: string };
   adSets: Array<{
-    __typename?: "AdSet";
     id: string;
     createdAt: any;
     billingType?: string | null;
@@ -138,40 +120,32 @@ export type CampaignAdsFragment = {
     totalMax: number;
     perDay: number;
     state: string;
-    execution: string;
+    execution?: string | null;
     keywords?: Array<string> | null;
     keywordSimilarity?: number | null;
     negativeKeywords?: Array<string> | null;
     bannedKeywords?: Array<string> | null;
-    segments?: Array<{
-      __typename?: "Segment";
-      code: string;
-      name: string;
-    }> | null;
-    oses?: Array<{ __typename?: "OS"; code: string; name: string }> | null;
+    segments?: Array<{ code: string; name: string }> | null;
+    oses?: Array<{ code: string; name: string }> | null;
     conversions?: Array<{
-      __typename?: "Conversion";
       id: string;
       type: string;
       urlPattern: string;
       observationWindow: number;
     }> | null;
     ads?: Array<{
-      __typename?: "Ad";
       id: string;
       state: string;
       price: string;
       priceType: Types.ConfirmationType;
       creative: {
-        __typename?: "Creative";
         id: string;
         createdAt: any;
         modifiedAt: any;
         name: string;
         state: string;
-        type: { __typename?: "CreativeType"; code: string };
+        type: { code: string };
         payloadNotification?: {
-          __typename?: "NotificationPayload";
           body: string;
           title: string;
           targetUrl: string;
@@ -186,9 +160,7 @@ export type LoadCampaignQueryVariables = Types.Exact<{
 }>;
 
 export type LoadCampaignQuery = {
-  __typename?: "Query";
   campaign?: {
-    __typename?: "Campaign";
     id: string;
     name: string;
     state: string;
@@ -213,18 +185,12 @@ export type LoadCampaignQuery = {
     stripePaymentId?: string | null;
     hasPaymentIntent?: boolean | null;
     dayPartings?: Array<{
-      __typename?: "DayParting";
       dow: string;
       startMinute: number;
       endMinute: number;
     }> | null;
-    geoTargets?: Array<{
-      __typename?: "Geocode";
-      code: string;
-      name: string;
-    }> | null;
+    geoTargets?: Array<{ code: string; name: string }> | null;
     adSets: Array<{
-      __typename?: "AdSet";
       id: string;
       createdAt: any;
       billingType?: string | null;
@@ -232,40 +198,32 @@ export type LoadCampaignQuery = {
       totalMax: number;
       perDay: number;
       state: string;
-      execution: string;
+      execution?: string | null;
       keywords?: Array<string> | null;
       keywordSimilarity?: number | null;
       negativeKeywords?: Array<string> | null;
       bannedKeywords?: Array<string> | null;
-      segments?: Array<{
-        __typename?: "Segment";
-        code: string;
-        name: string;
-      }> | null;
-      oses?: Array<{ __typename?: "OS"; code: string; name: string }> | null;
+      segments?: Array<{ code: string; name: string }> | null;
+      oses?: Array<{ code: string; name: string }> | null;
       conversions?: Array<{
-        __typename?: "Conversion";
         id: string;
         type: string;
         urlPattern: string;
         observationWindow: number;
       }> | null;
       ads?: Array<{
-        __typename?: "Ad";
         id: string;
         state: string;
         price: string;
         priceType: Types.ConfirmationType;
         creative: {
-          __typename?: "Creative";
           id: string;
           createdAt: any;
           modifiedAt: any;
           name: string;
           state: string;
-          type: { __typename?: "CreativeType"; code: string };
+          type: { code: string };
           payloadNotification?: {
-            __typename?: "NotificationPayload";
             body: string;
             title: string;
             targetUrl: string;
@@ -273,7 +231,7 @@ export type LoadCampaignQuery = {
         };
       }> | null;
     }>;
-    advertiser: { __typename?: "Advertiser"; id: string };
+    advertiser: { id: string };
   } | null;
 };
 
@@ -282,9 +240,7 @@ export type LoadCampaignAdsQueryVariables = Types.Exact<{
 }>;
 
 export type LoadCampaignAdsQuery = {
-  __typename?: "Query";
   campaign?: {
-    __typename?: "Campaign";
     id: string;
     name: string;
     state: string;
@@ -293,9 +249,8 @@ export type LoadCampaignAdsQuery = {
     source: Types.CampaignSource;
     currency: string;
     format: Types.CampaignFormat;
-    advertiser: { __typename?: "Advertiser"; id: string };
+    advertiser: { id: string };
     adSets: Array<{
-      __typename?: "AdSet";
       id: string;
       createdAt: any;
       billingType?: string | null;
@@ -303,40 +258,32 @@ export type LoadCampaignAdsQuery = {
       totalMax: number;
       perDay: number;
       state: string;
-      execution: string;
+      execution?: string | null;
       keywords?: Array<string> | null;
       keywordSimilarity?: number | null;
       negativeKeywords?: Array<string> | null;
       bannedKeywords?: Array<string> | null;
-      segments?: Array<{
-        __typename?: "Segment";
-        code: string;
-        name: string;
-      }> | null;
-      oses?: Array<{ __typename?: "OS"; code: string; name: string }> | null;
+      segments?: Array<{ code: string; name: string }> | null;
+      oses?: Array<{ code: string; name: string }> | null;
       conversions?: Array<{
-        __typename?: "Conversion";
         id: string;
         type: string;
         urlPattern: string;
         observationWindow: number;
       }> | null;
       ads?: Array<{
-        __typename?: "Ad";
         id: string;
         state: string;
         price: string;
         priceType: Types.ConfirmationType;
         creative: {
-          __typename?: "Creative";
           id: string;
           createdAt: any;
           modifiedAt: any;
           name: string;
           state: string;
-          type: { __typename?: "CreativeType"; code: string };
+          type: { code: string };
           payloadNotification?: {
-            __typename?: "NotificationPayload";
             body: string;
             title: string;
             targetUrl: string;
@@ -352,12 +299,7 @@ export type CreateCampaignMutationVariables = Types.Exact<{
 }>;
 
 export type CreateCampaignMutation = {
-  __typename?: "Mutation";
-  createCampaign: {
-    __typename?: "Campaign";
-    id: string;
-    paymentType: Types.PaymentType;
-  };
+  createCampaign: { id: string; paymentType: Types.PaymentType };
 };
 
 export type UpdateCampaignMutationVariables = Types.Exact<{
@@ -365,9 +307,7 @@ export type UpdateCampaignMutationVariables = Types.Exact<{
 }>;
 
 export type UpdateCampaignMutation = {
-  __typename?: "Mutation";
   updateCampaign: {
-    __typename?: "Campaign";
     id: string;
     paymentType: Types.PaymentType;
     stripePaymentId?: string | null;

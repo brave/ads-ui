@@ -1,4 +1,4 @@
-import { ComponentType, useMemo } from "react";
+import { ComponentType, useMemo, useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import {
@@ -19,6 +19,8 @@ import { CampaignView } from "user/views/user/CampaignView";
 import { CampaignReportView } from "user/views/user/CampaignReportView";
 import { Profile } from "user/views/user/Profile";
 import { IAdvertiser } from "auth/context/auth.interface";
+import moment from "moment";
+import { FilterContext } from "state/context";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -34,59 +36,70 @@ const buildApolloClient = () => {
 
 export function User() {
   const client = useMemo(() => buildApolloClient(), []);
+  const [fromDate, setFromDate] = useState<Date | null>(
+    moment().subtract(6, "month").startOf("day").toDate(),
+  );
+
   return (
     <ApolloProvider client={client}>
-      <Box height="100%">
-        <Box display="flex">
-          <Navbar />
-          <Box
-            width="100%"
-            height="100%"
-            padding={1}
-            marginTop="64px"
-            bgcolor="background.default"
-          >
-            <Switch>
-              {/* /adsmanager */}
-              <ProtectedRoute
-                path="/user/main/adsmanager/advanced/new/:draftId"
-                authedComponent={NewCampaign}
-                validateAdvertiserProperty={(a) => a.selfServiceCreate}
-              />
+      <FilterContext.Provider
+        value={{
+          fromDate,
+          setFromDate,
+        }}
+      >
+        <Box height="100%">
+          <Box display="flex">
+            <Navbar />
+            <Box
+              width="100%"
+              height="100%"
+              padding={1}
+              marginTop="64px"
+              bgcolor="background.default"
+            >
+              <Switch>
+                {/* /adsmanager */}
+                <ProtectedRoute
+                  path="/user/main/adsmanager/advanced/new/:draftId"
+                  authedComponent={NewCampaign}
+                  validateAdvertiserProperty={(a) => a.selfServiceCreate}
+                />
 
-              <ProtectedRoute
-                path="/user/main/adsmanager/advanced/:campaignId"
-                authedComponent={EditCampaign}
-                validateAdvertiserProperty={(a) => a.selfServiceEdit}
-              />
+                <ProtectedRoute
+                  path="/user/main/adsmanager/advanced/:campaignId"
+                  authedComponent={EditCampaign}
+                  validateAdvertiserProperty={(a) => a.selfServiceEdit}
+                />
 
-              <ProtectedRoute
-                path="/user/main/complete/:mode"
-                authedComponent={CompletionForm}
-              />
+                <ProtectedRoute
+                  path="/user/main/complete/:mode"
+                  authedComponent={CompletionForm}
+                />
 
-              {/* /campaigns/:campaignId/analytics - */}
-              <ProtectedRoute
-                path="/user/main/campaign/:campaignId"
-                authedComponent={CampaignReportView}
-              />
+                {/* /campaigns/:campaignId/analytics - */}
+                <ProtectedRoute
+                  path="/user/main/campaign/:campaignId"
+                  authedComponent={CampaignReportView}
+                />
 
-              <Route path="/user/main/settings" component={Settings} />
+                <Route path="/user/main/settings" component={Settings} />
 
-              <Route path="/user/main/profile" component={Profile} />
+                <Route path="/user/main/profile" component={Profile} />
 
-              <ProtectedRoute
-                path="/user/main/campaign"
-                authedComponent={CampaignView}
-                unauthedComponent={AdvertiserAgreed}
-              />
+                <ProtectedRoute
+                  path="/user/main/campaign"
+                  authedComponent={CampaignView}
+                  unauthedComponent={AdvertiserAgreed}
+                />
 
-              {/* default */}
-              <Redirect to="/user/main/campaign" />
-            </Switch>
+                {/* default */}
+                <Redirect to="/user/main/campaign" />
+              </Switch>
+            </Box>
           </Box>
         </Box>
-      </Box>
+      </FilterContext.Provider>
     </ApolloProvider>
   );
 }
