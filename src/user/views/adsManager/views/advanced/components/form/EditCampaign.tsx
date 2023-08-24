@@ -39,7 +39,6 @@ export function EditCampaign() {
   const hasPaymentIntent = initialData?.campaign?.hasPaymentIntent;
   const [mutation] = useUpdateCampaignMutation({
     onCompleted(data) {
-      localStorage.removeItem(data.updateCampaign.id);
       if (hasPaymentIntent) {
         history.push(
           `/user/main/complete/edit?referenceId=${data.updateCampaign.id}`,
