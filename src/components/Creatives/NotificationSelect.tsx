@@ -1,4 +1,4 @@
-import { Box, Button, LinearProgress, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import { BoxContainer } from "components/Box/BoxContainer";
 import { NotificationPreview } from "components/Creatives/NotificationPreview";
 import moment from "moment";
@@ -13,7 +13,6 @@ export function NotificationSelect(props: {
   options: Creative[];
   fieldName: string;
   useSelectedAdStyle?: boolean;
-  loading?: boolean;
   multiselect?: boolean;
   showState?: boolean;
 }) {
@@ -50,10 +49,6 @@ export function NotificationSelect(props: {
       c.find((c) => c.id === co.id) !== undefined
     );
   };
-
-  if (props.loading) {
-    return <LinearProgress />;
-  }
 
   return (
     <Box display="flex" flexDirection="column">

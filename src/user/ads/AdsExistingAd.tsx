@@ -2,6 +2,7 @@ import {
   Alert,
   Divider,
   InputAdornment,
+  LinearProgress,
   Stack,
   TextField,
   Typography,
@@ -15,7 +16,7 @@ import {
 } from "graphql/creative.generated";
 import { isCreativeTypeApplicableToCampaignFormat } from "user/library";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import { CampaignForm, Creative } from "user/views/adsManager/types";
+import { CampaignForm } from "user/views/adsManager/types";
 import { CardContainer } from "components/Card/CardContainer";
 import SearchIcon from "@mui/icons-material/Search";
 import { useContext, useRef, useState } from "react";
@@ -38,7 +39,7 @@ export function AdsExistingAd() {
   const { values } = useFormikContext<CampaignForm>();
   const { advertiser } = useAdvertiser();
   const original = useRef<CreativeFragment[]>([]);
-  const [options, setOptions] = useState<CreativeFragment[]>([]);
+  const [options, setOptions] = useState<CreativeFragment[]>();
   const { loading } = useAdvertiserCreativesQuery({
     variables: { advertiserId: advertiser.id },
     onCompleted(data) {
@@ -52,12 +53,20 @@ export function AdsExistingAd() {
       ) as CreativeFragment[];
 
       const filtered = creativeOptionList.filter((c) => c.state === "active");
-      original.current = filtered;
-      setOptions(filtered);
+      const exludeExisting = filtered.filter((e) => {
+        const associatedOptions = values.creatives ?? [];
+        return associatedOptions.find((ao) => ao.id === e.id) === undefined;
+      });
+      original.current = exludeExisting;
+      setOptions(exludeExisting);
     },
   });
 
-  if (!loading && options.length === 0) {
+  if (loading) {
+    return <LinearProgress />;
+  }
+
+  if (options && options.length === 0) {
     return (
       <Alert severity="info" onClose={() => setIsShowingAds(false)}>
         No previous Ads available
@@ -74,8 +83,10 @@ export function AdsExistingAd() {
       <Stack direction="row" justifyContent="baseline">
         <Typography variant="subtitle1" fontWeight={500} sx={{ flexGrow: 1 }}>
           Ads are modular building blocks that can be paired with ad sets to
-          build unique combinations. <br /> Select by using the box next to the
-          name.
+          build unique combinations. Your previously approved ads will show
+          here.
+          <br /> Select by using the box next to the name. Use the
+          &quot;Complete selection&quot; button to finish.
         </Typography>
 
         <TextField
@@ -106,11 +117,7 @@ export function AdsExistingAd() {
       </Stack>
       <Divider sx={{ mt: 2, mb: 2 }} />
 
-      <CreativeSpecificSelect
-        options={options}
-        format={values.format}
-        loading={loading}
-      />
+      <CreativeSpecificSelect options={options ?? []} format={values.format} />
     </CardContainer>
   );
 }
@@ -118,23 +125,17 @@ export function AdsExistingAd() {
 const CreativeSpecificSelect = (props: {
   format: CampaignFormat;
   options: CreativeFragment[];
-  loading: boolean;
 }) => {
   const { advertiser } = useAdvertiser();
-  const { values } = useFormikContext<CampaignForm>();
-  const filteredOptions = props.options
-    .filter((o) => {
-      const associatedOptions = values.creatives ?? [];
-      return associatedOptions.find((ao) => ao.id === o.id) === undefined;
-    })
-    .map((fo) => ({ ...fo, advertiserId: advertiser.id }) as Creative);
 
   if (props.format === CampaignFormat.PushNotification)
     return (
       <NotificationSelect
-        options={filteredOptions}
+        options={props.options.map((o) => ({
+          ...o,
+          advertiserId: advertiser.id,
+        }))}
         fieldName="creatives"
-        loading={props.loading}
         multiselect
         useSelectedAdStyle={false}
         showState={false}
