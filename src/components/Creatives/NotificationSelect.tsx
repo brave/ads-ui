@@ -3,53 +3,48 @@ import { BoxContainer } from "components/Box/BoxContainer";
 import { NotificationPreview } from "components/Creatives/NotificationPreview";
 import moment from "moment";
 import { SelectCreativeHeader } from "components/Creatives/SelectCreativeHeader";
-import { Creative } from "user/views/adsManager/types";
+import { CampaignForm, Creative } from "user/views/adsManager/types";
 import _ from "lodash";
-import { useField } from "formik";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { FormContext } from "state/context";
+import { useFormikContext } from "formik";
 
 export function NotificationSelect(props: {
   options: Creative[];
-  fieldName: string;
   useSelectedAdStyle?: boolean;
-  multiselect?: boolean;
   showState?: boolean;
+  index?: number;
 }) {
+  const index = props.index;
+  const { values, setFieldValue } = useFormikContext<CampaignForm>();
   const { setIsShowingAds } = useContext(FormContext);
-  const [, meta, helper] = useField<Creative[]>(props.fieldName);
   const [curr, setCurr] = useState<Creative[]>([]);
 
-  useEffect(() => {
-    setCurr(meta.value);
-  }, [meta.value]);
-
-  const onSelectCreative = (
-    c: Creative,
-    v: Creative[] | undefined,
-    selected: boolean,
-  ) => {
+  const onSelectCreative = (c: Creative, selected: boolean) => {
     let value;
     if (selected) {
-      value = [...(v ?? []), c];
+      value = [...curr, c];
     } else {
-      value = _.filter(v ?? [], (n) => n.id !== c.id);
+      value = _.filter(curr, (n) => n.id !== c.id);
     }
 
-    console.log(value);
-    if (!props.multiselect) {
-      helper.setValue(value);
+    if (index !== undefined) {
+      const foundIndex = values.adSets[index].creatives.findIndex(
+        (co) => c.id === co.id,
+      );
+      if (foundIndex >= 0) {
+        void setFieldValue(
+          `adSets.${index}.creatives.${foundIndex}.included`,
+          selected,
+        );
+      }
     }
 
-    setCurr(_.uniqBy([...curr, ...value], "id"));
+    setCurr(_.uniqBy(value, "id"));
   };
 
-  const isSelected = (co: Creative, c: Creative[]) => {
-    return (
-      props.useSelectedAdStyle === false ||
-      c.find((c) => c.id === co.id) !== undefined
-    );
-  };
+  const isSelected = (co: Creative) =>
+    props.useSelectedAdStyle === false || co.included;
 
   return (
     <Box display="flex" flexDirection="column">
@@ -66,8 +61,7 @@ export function NotificationSelect(props: {
             header={
               <SelectCreativeHeader
                 creative={co}
-                fieldName={props.fieldName}
-                onSelectCreative={(c, s) => onSelectCreative(c, meta.value, s)}
+                onSelectCreative={onSelectCreative}
                 showState={props.showState}
               />
             }
@@ -76,14 +70,12 @@ export function NotificationSelect(props: {
             <NotificationPreview
               title={co.payloadNotification?.title}
               body={co.payloadNotification?.body}
-              selected={isSelected(co, curr)}
+              selected={isSelected(co)}
             />
             <Typography
               variant="caption"
               marginLeft={1}
-              color={
-                isSelected(co, curr) ? "text.primary" : "rgba(0, 0, 0, 0.3)"
-              }
+              color={isSelected(co) ? "text.primary" : "rgba(0, 0, 0, 0.3)"}
               textAlign="right"
             >
               created {moment(co.createdAt).fromNow()}
@@ -91,16 +83,19 @@ export function NotificationSelect(props: {
           </BoxContainer>
         ))}
       </Stack>
-      {props.multiselect && (
+      {props.index === undefined && (
         <Button
           variant="outlined"
           sx={{ maxWidth: "200px", alignSelf: "end", marginTop: 2 }}
           onClick={(e) => {
             e.preventDefault();
 
-            if (curr.length > 0) {
-              helper.setValue(curr);
-            }
+            values.adSets.forEach((adSet, idx) => {
+              void setFieldValue(
+                `adSets.${idx}.creatives`,
+                _.uniqBy([...adSet.creatives, ...curr], "id"),
+              );
+            });
 
             setIsShowingAds(false);
           }}

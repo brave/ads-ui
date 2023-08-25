@@ -60,9 +60,7 @@ export function BaseForm({ hasPaymentIntent }: Props) {
         <StepDrawer
           steps={steps}
           finalComponent={
-            <PaymentButton
-              hasPaymentIntent={hasPaymentIntent ?? false}
-            />
+            <PaymentButton hasPaymentIntent={hasPaymentIntent ?? false} />
           }
         >
           <Switch>

@@ -22,6 +22,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useContext, useRef, useState } from "react";
 import { NotificationSelect } from "components/Creatives/NotificationSelect";
 import { FormContext } from "state/context";
+import { useAdvertiserCreatives } from "user/hooks/useAdvertiserCreatives";
 
 function filterCreativesBasedOnCampaignFormat(
   creatives: CreativeFragment[],
@@ -36,6 +37,7 @@ function filterCreativesBasedOnCampaignFormat(
 
 export function AdsExistingAd() {
   const { setIsShowingAds } = useContext(FormContext);
+  const { creatives } = useAdvertiserCreatives();
   const { values } = useFormikContext<CampaignForm>();
   const { advertiser } = useAdvertiser();
   const original = useRef<CreativeFragment[]>([]);
@@ -54,7 +56,7 @@ export function AdsExistingAd() {
 
       const filtered = creativeOptionList.filter((c) => c.state === "active");
       const exludeExisting = filtered.filter((e) => {
-        const associatedOptions = values.creatives ?? [];
+        const associatedOptions = creatives ?? [];
         return associatedOptions.find((ao) => ao.id === e.id) === undefined;
       });
       original.current = exludeExisting;
@@ -134,9 +136,8 @@ const CreativeSpecificSelect = (props: {
         options={props.options.map((o) => ({
           ...o,
           advertiserId: advertiser.id,
+          included: false,
         }))}
-        fieldName="creatives"
-        multiselect
         useSelectedAdStyle={false}
         showState={false}
       />

@@ -1,29 +1,35 @@
 import SaveIcon from "@mui/icons-material/Save";
-import { Creative, initialCreative } from "user/views/adsManager/types";
+import {
+  CampaignForm,
+  Creative,
+  initialCreative,
+} from "user/views/adsManager/types";
 import _ from "lodash";
 import {
   refetchAdvertiserCreativesQuery,
   useCreateCreativeMutation,
 } from "graphql/creative.generated";
-import { useField } from "formik";
+import { useField, useFormikContext } from "formik";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { LoadingButton } from "@mui/lab";
 import { validCreativeFields } from "user/library";
 
 export function CreateCreativeButton() {
+  const { values, setFieldValue } = useFormikContext<CampaignForm>();
   const [, , isCreating] = useField<boolean>("isCreating");
   const [, newMeta, newHelper] = useField<Creative>("newCreative");
-  const [, creativesMeta, creativesHelper] = useField<Creative[]>("creatives");
   const { advertiser } = useAdvertiser();
 
   const [create, { loading }] = useCreateCreativeMutation({
     async onCompleted(data) {
       newHelper.setValue(initialCreative);
       newHelper.setTouched(false);
-      creativesHelper.setValue([
-        ...(creativesMeta.value ?? []),
-        validCreativeFields(data.createCreative, advertiser.id),
-      ]);
+      values.adSets.forEach((adSet, idx) => {
+        void setFieldValue(`adSets.${idx}.creatives`, [
+          ...adSet.creatives,
+          validCreativeFields(data.createCreative, advertiser.id),
+        ]);
+      });
       isCreating.setValue(false);
     },
     refetchQueries: [

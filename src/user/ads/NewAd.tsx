@@ -10,8 +10,10 @@ import { Creative, initialCreative } from "user/views/adsManager/types";
 import { FormContext } from "state/context";
 import { AdsExistingAd } from "user/ads/AdsExistingAd";
 import { CreativeSpecificPreview } from "components/Creatives/CreativeSpecificPreview";
+import { useAdvertiserCreatives } from "user/hooks/useAdvertiserCreatives";
 
 export function NewAd() {
+  const { creatives } = useAdvertiserCreatives();
   const [, , newCreative] = useField<Creative | undefined>("newCreative");
   const [, meta, helper] = useField<boolean>("isCreating");
   const { isShowingAds, setIsShowingAds } = useContext(FormContext);
@@ -26,7 +28,7 @@ export function NewAd() {
   return (
     <>
       <CardContainer header="New Ads">
-        <CreativeSpecificPreview name="creatives">
+        <CreativeSpecificPreview options={creatives}>
           <BoxContainer header={meta.value ? "Discard Ad" : "Create New Ad"}>
             <Box
               component={Button}

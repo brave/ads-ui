@@ -1,34 +1,27 @@
-import { useField } from "formik";
-import { Creative } from "user/views/adsManager/types";
 import { CampaignFormat } from "graphql/types";
 import { BoxContainer } from "components/Box/BoxContainer";
-import { RemoveCreativeHeader } from "components/Creatives/RemoveCreativeHeader";
 import { NotificationPreview } from "components/Creatives/NotificationPreview";
 import { Stack, Typography } from "@mui/material";
 import { PropsWithChildren } from "react";
+import { useField } from "formik";
+import { Creative } from "user/views/adsManager/types";
 
 interface Props extends PropsWithChildren {
-  name: string;
+  options: Creative[];
   useSimpleHeader?: boolean;
 }
 
 export function CreativeSpecificPreview({
-  children,
-  name,
+  options,
   useSimpleHeader,
+  children,
 }: Props) {
   const [, format] = useField<CampaignFormat>("format");
-  const [, meta] = useField<Creative[]>(name);
 
   let component;
   if (format.value === CampaignFormat.PushNotification) {
-    component = meta.value.map((c, idx) => (
-      <BoxContainer
-        header={
-          useSimpleHeader ? c.name : <RemoveCreativeHeader creative={c} />
-        }
-        key={idx}
-      >
+    component = options.map((c, idx) => (
+      <BoxContainer header={c.name} key={idx}>
         <NotificationPreview
           title={c.payloadNotification?.title}
           body={c.payloadNotification?.body}

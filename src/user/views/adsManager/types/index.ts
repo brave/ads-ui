@@ -20,7 +20,6 @@ export type CampaignForm = {
   adSets: AdSetForm[];
   format: CampaignFormat;
   newCreative?: Creative;
-  creatives?: Creative[];
   name: string;
   state: string;
   type: "paid";
@@ -68,6 +67,7 @@ export type Creative = CreativeInput & {
   creativeInstanceId?: string;
   createdAt?: string;
   modifiedAt?: string;
+  included: boolean;
 };
 
 export const initialConversion: Conversion = {
@@ -86,6 +86,7 @@ export const initialCreative: Creative = {
   },
   type: { code: "" },
   state: "draft",
+  included: false,
 };
 
 export const initialAdSet: AdSetForm = {
@@ -121,6 +122,5 @@ export const initialCampaign = (advertiser: IAdvertiser): CampaignForm => {
     state: "draft",
     type: "paid",
     paymentType: advertiser.selfServicePaymentType,
-    creatives: [],
   };
 };

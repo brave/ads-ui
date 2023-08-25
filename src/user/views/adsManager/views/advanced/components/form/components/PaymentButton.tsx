@@ -1,8 +1,6 @@
 import { FormikSubmitButton, useIsEdit } from "form/FormikHelpers";
 
-export function PaymentButton(props: {
-  hasPaymentIntent: boolean;
-}) {
+export function PaymentButton(props: { hasPaymentIntent: boolean }) {
   const { isEdit } = useIsEdit();
   const paymentText = "Make payment & submit for approval";
 

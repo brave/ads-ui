@@ -14,6 +14,7 @@ interface Props {
 }
 
 export function AdSetReview({ adSet, idx, errors }: Props) {
+  const included = adSet.creatives.filter((c) => c.included);
   const hasErrors = !!errors;
   if (typeof errors === "string") {
     return <>{errors}</>;
@@ -53,14 +54,11 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
       {hasErrors ? (
         <ReviewField
           caption="Ads"
-          value={mapToString(adSet.creatives)}
+          value={mapToString(included)}
           error={hasErrors ? (adSetError?.creatives as string) : ""}
         />
       ) : (
-        <CreativeSpecificPreview
-          name={`adSets.${idx}.creatives`}
-          useSimpleHeader
-        />
+        <CreativeSpecificPreview options={included} useSimpleHeader />
       )}
     </ReviewContainer>
   );

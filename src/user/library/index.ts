@@ -58,7 +58,9 @@ export function transformNewForm(
       oses: adSet.oses,
       totalMax: 10,
       conversions: transformConversion(adSet.conversions),
-      ads: adSet.creatives.map((ad) => transformCreative(ad, form)),
+      ads: adSet.creatives
+        .filter((c) => c.included)
+        .map((ad) => transformCreative(ad, form)),
     })),
     paymentType: form.paymentType,
   };
@@ -99,16 +101,7 @@ export function transformCreative(
     priceType: priceType,
   };
 
-  if (creative.id) {
-    createInput.creativeId = creative.id;
-  }
-
-  if (createInput.creative) {
-    createInput.creative = validCreativeFields(
-      createInput.creative,
-      createInput.creative.advertiserId,
-    );
-  }
+  createInput.creativeId = creative.id;
 
   return createInput;
 }
@@ -149,7 +142,6 @@ export function editCampaignValues(
     }),
     isCreating: false,
     advertiserId,
-    creatives: creativeList(advertiserId, ads, false),
     newCreative: initialCreative,
     currency: campaign.currency,
     price: price.toNumber(),
@@ -182,7 +174,7 @@ function creativeList(
       .map((ad) => {
         const c = ad.creative;
         return {
-          ...validCreativeFields(c, advertiserId),
+          ...validCreativeFields(c, advertiserId, true),
           creativeInstanceId: includeId !== false ? ad.id : undefined,
         };
       }),
@@ -193,10 +185,12 @@ function creativeList(
 export function validCreativeFields(
   c: CreativeFragment | Creative,
   advertiserId: string,
+  included?: boolean,
 ): Creative {
   return {
     advertiserId,
     id: c.id,
+    included: included ?? false,
     name: c.name,
     targetUrlValid: "",
     state: c.state,
@@ -229,11 +223,13 @@ export function transformEditForm(
       id: adSet.id,
       segments: adSet.segments.map((v) => ({ code: v.code, name: v.name })),
       oses: adSet.oses.map((v) => ({ code: v.code, name: v.name })),
-      ads: adSet.creatives.map((ad) => ({
-        ...transformCreative(ad, form),
-        id: ad.creativeInstanceId,
-        creativeSetId: adSet.id,
-      })),
+      ads: adSet.creatives
+        .filter((c) => c.included)
+        .map((ad) => ({
+          ...transformCreative(ad, form),
+          id: ad.creativeInstanceId,
+          creativeSetId: adSet.id,
+        })),
     })),
   };
 }

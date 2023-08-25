@@ -119,7 +119,11 @@ export const CampaignSchema = object().shape({
                 .required("Conversion Type required."),
             }),
           ),
-        creatives: array().min(1, "Ad Sets must have at least one Ad"),
+        creatives: array().test(
+          "min-length",
+          "Ad Sets must have at least one Ad",
+          (value) => (value ?? []).filter((c) => c.included).length > 0,
+        ),
       }),
     ),
 });

@@ -169,6 +169,7 @@ describe("pricing logic (write)", () => {
     state: "draft",
     type: { code: "notification_all_v1" },
     name: "some name",
+    included: true,
   };
 
   it("should convert from CPM to per-impression values when populating a CPM creative", () => {
