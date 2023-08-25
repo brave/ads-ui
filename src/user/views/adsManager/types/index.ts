@@ -34,8 +34,6 @@ export type CampaignForm = {
   billingType: Billing;
   pacingStrategy: CampaignPacingStrategies;
   hasPaymentIntent: boolean;
-  stripePaymentId?: string | null;
-  radomPaymentId?: string | null;
   paymentType: PaymentType;
 };
 

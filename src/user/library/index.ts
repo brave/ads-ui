@@ -183,7 +183,6 @@ export function editCampaignValues(
     startAt: campaign.startAt,
     state: campaign.state,
     type: "paid",
-    stripePaymentId: campaign.stripePaymentId,
     paymentType: campaign.paymentType,
   };
 }
