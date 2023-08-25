@@ -148,6 +148,7 @@ export function editCampaignValues(
   const price = billingType === "cpm" ? rawPrice.multipliedBy(1000) : rawPrice;
 
   return {
+    id: campaign.id,
     adSets: campaign.adSets.map((adSet) => {
       const seg = adSet.segments ?? ([] as Segment[]);
 
@@ -182,7 +183,6 @@ export function editCampaignValues(
     startAt: campaign.startAt,
     state: campaign.state,
     type: "paid",
-    stripePaymentId: campaign.stripePaymentId,
     paymentType: campaign.paymentType,
   };
 }

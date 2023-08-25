@@ -1,17 +1,11 @@
 import { Stack, Typography } from "@mui/material";
-import { FormikRadioControl } from "form/FormikHelpers";
+import { FormikRadioControl, useIsEdit } from "form/FormikHelpers";
 import { PaymentType } from "graphql/types";
-import { useFormikContext } from "formik";
-import { CampaignForm } from "user/views/adsManager/types";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { CardContainer } from "components/Card/CardContainer";
 
-interface Props {
-  isEdit: boolean;
-}
-
-export function PaymentMethodField({ isEdit }: Props) {
-  const { values } = useFormikContext<CampaignForm>();
+export function PaymentMethodField() {
+  const { isDraft } = useIsEdit();
   const { advertiser } = useAdvertiser();
 
   if (advertiser.selfServiceSetPrice) {
@@ -26,7 +20,7 @@ export function PaymentMethodField({ isEdit }: Props) {
           begin.
         </Typography>
         <FormikRadioControl
-          disabled={isEdit && values.state !== "draft"}
+          disabled={!isDraft}
           name="paymentType"
           options={[
             { label: "USD", value: advertiser.selfServicePaymentType },
