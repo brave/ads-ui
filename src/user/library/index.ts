@@ -149,7 +149,7 @@ export function editCampaignValues(
     }),
     isCreating: false,
     advertiserId,
-    creatives: creativeList(advertiserId, ads),
+    creatives: creativeList(advertiserId, ads, false),
     newCreative: initialCreative,
     currency: campaign.currency,
     price: price.toNumber(),
@@ -174,6 +174,7 @@ export function editCampaignValues(
 function creativeList(
   advertiserId: string,
   ads?: AdFragment[] | null,
+  includeId?: boolean,
 ): Creative[] {
   return _.uniqBy(
     (ads ?? [])
@@ -182,7 +183,7 @@ function creativeList(
         const c = ad.creative;
         return {
           ...validCreativeFields(c, advertiserId),
-          creativeInstanceId: ad.id,
+          creativeInstanceId: includeId !== false ? ad.id : undefined,
         };
       }),
     "id",

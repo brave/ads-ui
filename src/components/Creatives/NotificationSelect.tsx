@@ -36,6 +36,7 @@ export function NotificationSelect(props: {
       value = _.filter(v ?? [], (n) => n.id !== c.id);
     }
 
+    console.log(value);
     if (!props.multiselect) {
       helper.setValue(value);
     }
