@@ -47,7 +47,10 @@ export function CreateCreativeButton() {
         e.preventDefault();
         create({
           variables: {
-            input: { ...newMeta.value, advertiserId: advertiser.id },
+            input: {
+              ..._.omit(newMeta.value, "included"),
+              advertiserId: advertiser.id,
+            },
           },
         });
       }}

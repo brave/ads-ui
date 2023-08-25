@@ -51,15 +51,11 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
         conversions={adSet.conversions}
         convErrors={adSetError?.conversions}
       />
-      {hasErrors ? (
-        <ReviewField
-          caption="Ads"
-          value={mapToString(included)}
-          error={hasErrors ? (adSetError?.creatives as string) : ""}
-        />
-      ) : (
-        <CreativeSpecificPreview options={included} useSimpleHeader />
-      )}
+      <CreativeSpecificPreview
+        options={included}
+        useSimpleHeader
+        error={hasErrors ? (adSetError?.creatives as string) : ""}
+      />
     </ReviewContainer>
   );
 }

@@ -5,15 +5,18 @@ import { Stack, Typography } from "@mui/material";
 import { PropsWithChildren } from "react";
 import { useField } from "formik";
 import { Creative } from "user/views/adsManager/types";
+import { DisplayError } from "user/views/adsManager/views/advanced/components/review/components/ReviewField";
 
 interface Props extends PropsWithChildren {
   options: Creative[];
   useSimpleHeader?: boolean;
+  error?: string;
 }
 
 export function CreativeSpecificPreview({
   options,
   useSimpleHeader,
+  error,
   children,
 }: Props) {
   const [, format] = useField<CampaignFormat>("format");
@@ -28,6 +31,17 @@ export function CreativeSpecificPreview({
         />
       </BoxContainer>
     ));
+  }
+
+  if (error) {
+    return (
+      <>
+        <Typography variant="overline" component="span" paddingRight={1}>
+          Ads
+        </Typography>
+        <DisplayError error={error} />
+      </>
+    );
   }
 
   return (

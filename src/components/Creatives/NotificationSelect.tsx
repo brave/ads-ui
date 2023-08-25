@@ -14,6 +14,7 @@ export function NotificationSelect(props: {
   useSelectedAdStyle?: boolean;
   showState?: boolean;
   index?: number;
+  hideCreated?: boolean;
 }) {
   const index = props.index;
   const { values, setFieldValue } = useFormikContext<CampaignForm>();
@@ -32,7 +33,7 @@ export function NotificationSelect(props: {
       const foundIndex = values.adSets[index].creatives.findIndex(
         (co) => c.id === co.id,
       );
-      if (foundIndex >= 0) {
+      if (foundIndex !== undefined) {
         void setFieldValue(
           `adSets.${index}.creatives.${foundIndex}.included`,
           selected,
@@ -72,14 +73,16 @@ export function NotificationSelect(props: {
               body={co.payloadNotification?.body}
               selected={isSelected(co)}
             />
-            <Typography
-              variant="caption"
-              marginLeft={1}
-              color={isSelected(co) ? "text.primary" : "rgba(0, 0, 0, 0.3)"}
-              textAlign="right"
-            >
-              created {moment(co.createdAt).fromNow()}
-            </Typography>
+            {!(props.hideCreated ?? false) && (
+              <Typography
+                variant="caption"
+                marginLeft={1}
+                color={isSelected(co) ? "text.primary" : "rgba(0, 0, 0, 0.3)"}
+                textAlign="right"
+              >
+                created {moment(co.createdAt).fromNow()}
+              </Typography>
+            )}
           </BoxContainer>
         ))}
       </Stack>

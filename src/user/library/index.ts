@@ -137,7 +137,7 @@ export function editCampaignValues(
         })),
         isNotTargeting: seg.length === 1 && seg[0].code === "Svp7l-zGN",
         name: adSet.name || adSet.id.split("-")[0],
-        creatives: creativeList(advertiserId, adSet.ads),
+        creatives: creativeList(advertiserId, adSet.ads, ads),
       } as AdSetForm;
     }),
     isCreating: false,
@@ -165,19 +165,24 @@ export function editCampaignValues(
 
 function creativeList(
   advertiserId: string,
-  ads?: AdFragment[] | null,
+  adSetAds?: AdFragment[] | null,
+  allAds?: AdFragment[] | null,
   includeId?: boolean,
 ): Creative[] {
-  return _.uniqBy(
-    (ads ?? [])
+  const filterAds = (a?: AdFragment[] | null, included?: boolean) => {
+    return (a ?? [])
       .filter((ad) => ad.creative !== null && ad.state !== "deleted")
       .map((ad) => {
         const c = ad.creative;
         return {
-          ...validCreativeFields(c, advertiserId, true),
+          ...validCreativeFields(c, advertiserId, included),
           creativeInstanceId: includeId !== false ? ad.id : undefined,
         };
-      }),
+      });
+  };
+
+  return _.uniqBy(
+    [...filterAds(adSetAds, true), ...filterAds(allAds, false)],
     "id",
   );
 }
