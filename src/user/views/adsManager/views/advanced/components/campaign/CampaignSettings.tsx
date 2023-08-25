@@ -5,7 +5,7 @@ import { LocationField } from "user/views/adsManager/views/advanced/components/c
 import { Typography } from "@mui/material";
 
 export function CampaignSettings() {
-  const { isEditAndDraft } = useIsEdit();
+  const { isDraft } = useIsEdit();
 
   return (
     <>
@@ -19,7 +19,7 @@ export function CampaignSettings() {
         <CampaignDateRange />
       </CardContainer>
 
-      {isEditAndDraft && <LocationField />}
+      {isDraft && <LocationField />}
     </>
   );
 }

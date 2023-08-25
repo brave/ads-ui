@@ -5,7 +5,7 @@ import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { CardContainer } from "components/Card/CardContainer";
 
 export function PaymentMethodField() {
-  const { isEditAndDraft } = useIsEdit();
+  const { isDraft } = useIsEdit();
   const { advertiser } = useAdvertiser();
 
   if (advertiser.selfServiceSetPrice) {
@@ -20,7 +20,7 @@ export function PaymentMethodField() {
           begin.
         </Typography>
         <FormikRadioControl
-          disabled={!isEditAndDraft}
+          disabled={!isDraft}
           name="paymentType"
           options={[
             { label: "USD", value: advertiser.selfServicePaymentType },

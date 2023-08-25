@@ -212,6 +212,8 @@ export const FormikSubmitButton = ({
 export function useIsEdit() {
   const { values } = useFormikContext<CampaignForm>();
   const isEdit = values.id !== undefined && values.id.trim() !== "";
-  const isEditAndDraft = isEdit && values.state === "draft";
-  return { isEdit, isEditAndDraft };
+  const isDraft =
+    (values.draftId !== undefined && values.draftId.trim() !== "") ||
+    values.state === "draft";
+  return { isEdit, isDraft };
 }

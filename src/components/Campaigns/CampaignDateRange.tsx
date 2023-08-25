@@ -9,7 +9,7 @@ import { TimezoneAwareDatePicker } from "../TimeZonePicker/TimezoneAwareDatePick
 import { useIsEdit } from "form/FormikHelpers";
 
 export const CampaignDateRange = () => {
-  const { isEditAndDraft } = useIsEdit();
+  const { isDraft } = useIsEdit();
   const [tz, setTz] = useState<string>(getDefaultTimezone());
   const [, startMeta, startHelper] = useField("startAt");
   const [, endMeta, endHelper] = useField("endAt");
@@ -27,7 +27,7 @@ export const CampaignDateRange = () => {
             startHelper.setValue(formatISO(dt));
             startHelper.setTouched(true);
           }}
-          disabled={!isEditAndDraft}
+          disabled={!isDraft}
         />
 
         <ArrowForwardIcon />

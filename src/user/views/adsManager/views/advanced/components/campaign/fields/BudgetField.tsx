@@ -16,7 +16,7 @@ import { uiLabelsForBillingType } from "util/billingType";
 
 export function BudgetField() {
   const [, , dailyBudget] = useField<number>("dailyBudget");
-  const { isEditAndDraft } = useIsEdit();
+  const { isDraft } = useIsEdit();
   const { advertiser } = useAdvertiser();
   const { values, errors } = useFormikContext<CampaignForm>();
   const [minBudget, setMinBudget] = useState(MIN_PER_CAMPAIGN);
@@ -64,7 +64,7 @@ export function BudgetField() {
               : undefined
           }
           error={!!errors.budget || !!errors.dailyBudget}
-          disabled={!isEditAndDraft && !advertiser.selfServiceSetPrice}
+          disabled={!isDraft && !advertiser.selfServiceSetPrice}
         />
 
         {!advertiser.selfServiceSetPrice ? (
@@ -87,7 +87,7 @@ export function BudgetField() {
                   <InputAdornment position="start">$</InputAdornment>
                 ),
               }}
-              disabled={!isEditAndDraft}
+              disabled={!isDraft}
             />
 
             <FormikRadioControl
@@ -102,7 +102,7 @@ export function BudgetField() {
                   label: uiLabelsForBillingType("cpc").longLabel,
                 },
               ]}
-              disabled={!isEditAndDraft}
+              disabled={!isDraft}
             />
           </Stack>
         )}

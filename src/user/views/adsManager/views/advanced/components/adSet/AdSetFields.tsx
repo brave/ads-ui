@@ -7,7 +7,7 @@ import { AdSetAds } from "user/views/adsManager/views/advanced/components/adSet/
 
 export function AdSetFields() {
   const history = useHistory();
-  const { isEditAndDraft } = useIsEdit();
+  const { isDraft } = useIsEdit();
   const params = new URLSearchParams(history.location.search);
   const current = Number(params.get("current") ?? 0);
   const fakeCurrent = current + 1;
@@ -24,7 +24,7 @@ export function AdSetFields() {
 
       <PickerFields index={current} />
 
-      {isEditAndDraft && <ConversionField index={current} />}
+      {isDraft && <ConversionField index={current} />}
 
       <AdSetAds index={current} />
     </>
