@@ -31,7 +31,7 @@ export function Register() {
 
   const steps = [
     { label: "Your information", component: <NameField /> },
-    { label: `Your business's information`, component: <AddressField /> },
+    { label: "Your business's information", component: <AddressField /> },
   ];
 
   return (

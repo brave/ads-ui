@@ -5,8 +5,14 @@ import goals from "../../../images.svg";
 import { useIsAuthenticated } from "auth/hooks/queries/useIsAuthenticated";
 import { Link as RouterLink } from "react-router-dom";
 import { useIsMobile } from "hooks/useIsMobile";
-import { GradientText } from "auth/registration/types";
 import { MobileAdsBenefits } from "auth/views/MobileAdsBenefits";
+
+const GradientText = {
+  backgroundImage:
+    "linear-gradient(96.46deg, #FF2869 -4.13%, #930BFE 82.88%), linear-gradient(0deg, #111317, #111317);",
+  backgroundClip: "text",
+  color: "transparent",
+};
 
 export function LandingPage() {
   const isAuthenticated = useIsAuthenticated();

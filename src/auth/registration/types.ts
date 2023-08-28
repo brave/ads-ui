@@ -31,10 +31,3 @@ export const initialValues: RegistrationForm = {
     zipcode: "",
   },
 };
-
-export const GradientText = {
-  backgroundImage:
-    "linear-gradient(96.46deg, #FF2869 -4.13%, #930BFE 82.88%), linear-gradient(0deg, #111317, #111317);",
-  backgroundClip: "text",
-  color: "transparent",
-};
