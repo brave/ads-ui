@@ -36,11 +36,12 @@ export function OnOff({ state, loading, end, onChange, type, source }: Props) {
               setChecked(e.target.checked);
               onChange(theState);
             }}
+            sx={{ p: 0 }}
             checked={checked}
             disabled={loading}
           />
         ) : (
-          <Typography sx={{ textAlign: "center" }}>-</Typography>
+          <Typography sx={{ textAlign: "center", p: 0 }}>-</Typography>
         )}
       </span>
     </Tooltip>
