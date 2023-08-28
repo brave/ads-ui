@@ -34,7 +34,7 @@ export function CampaignList({
   selectedCampaigns,
   onCampaignSelect,
 }: Props) {
-  let initialSort = 10;
+  let initialSort = 9;
   const [engagementData, setEngagementData] =
     useState<Map<string, EngagementOverview>>();
 
