@@ -4,16 +4,13 @@ import { Box, Button, Link, Stack, Typography } from "@mui/material";
 import goals from "../../../images.svg";
 import { useIsAuthenticated } from "auth/hooks/queries/useIsAuthenticated";
 import { Link as RouterLink } from "react-router-dom";
-
-const GradientText = {
-  backgroundImage:
-    "linear-gradient(96.46deg, #FF2869 -4.13%, #930BFE 82.88%), linear-gradient(0deg, #111317, #111317);",
-  backgroundClip: "text",
-  color: "transparent",
-};
+import { useIsMobile } from "hooks/useIsMobile";
+import { GradientText } from "auth/registration/types";
+import { MobileAdsBenefits } from "auth/views/MobileAdsBenefits";
 
 export function LandingPage() {
   const isAuthenticated = useIsAuthenticated();
+  const isMobile = useIsMobile();
 
   return (
     <Background>
@@ -24,30 +21,35 @@ export function LandingPage() {
         spacing={10}
         justifyContent="center"
       >
-        <Stack sx={{ maxWidth: "430px" }} spacing={6}>
-          <Typography variant="h3">
-            <Typography variant="h3" sx={GradientText}>
+        <Stack sx={{ maxWidth: "430px" }} spacing={isMobile ? 3 : 6}>
+          <Typography variant={isMobile ? "h5" : "h3"}>
+            <Typography variant={isMobile ? "h5" : "h3"} sx={GradientText}>
               Privacy-forward
             </Typography>{" "}
             advertising made simple
           </Typography>
 
-          <Typography variant="h6">
+          <Typography
+            variant={isMobile ? "subtitle1" : "h6"}
+            fontWeight={isMobile ? 500 : undefined}
+          >
             Reach and convert new customers through premium advertising on the
             Brave browser and search engine.
           </Typography>
 
-          <Box display="flex" flexDirection="column">
+          {isMobile && <MobileAdsBenefits />}
+
+          <Box display="flex" flexDirection="column" justifyContent="center">
             <Button
               variant="contained"
               component={RouterLink}
               sx={{
                 maxWidth: "165px",
-                height: "60px",
-                padding: "18px 24px 18px 24px",
+                maxHeight: "60px",
+                padding: !isMobile ? "18px 24px 18px 24px" : 2,
                 mb: 1,
               }}
-              size="large"
+              size={isMobile ? "medium" : "large"}
               to={isAuthenticated ? "/user/main" : "/register"}
             >
               {isAuthenticated ? "Dashboard" : "Get Started"}
@@ -69,7 +71,7 @@ export function LandingPage() {
             )}
           </Box>
         </Stack>
-        <img src={goals} />
+        {!isMobile && <img src={goals} />}
       </Stack>
     </Background>
   );

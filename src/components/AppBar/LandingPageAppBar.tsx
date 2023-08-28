@@ -2,7 +2,6 @@ import {
   AppBar,
   Box,
   Button,
-  CssBaseline,
   Divider,
   Link,
   LinkProps,
@@ -15,16 +14,21 @@ import { Link as RouterLink, useRouteMatch } from "react-router-dom";
 import { useIsAuthenticated } from "auth/hooks/queries/useIsAuthenticated";
 import { useSignOut } from "auth/hooks/mutations/useSignOut";
 import { SupportMenu } from "components/Drawer/MiniSideBar";
+import { useIsMobile } from "hooks/useIsMobile";
 
 export function LandingPageAppBar() {
   const match = useRouteMatch();
   const isAuthenticated = useIsAuthenticated();
+  const isMobile = useIsMobile();
 
   const links = [
     {
       component: isAuthenticated ? null : (
         <RouterLink to={"/register"} style={{ textDecoration: "none" }}>
-          <Typography variant="subtitle1" color="text.primary">
+          <Typography
+            variant={isMobile ? "body2" : "subtitle1"}
+            color="text.primary"
+          >
             Get started
           </Typography>
         </RouterLink>
@@ -48,7 +52,6 @@ export function LandingPageAppBar() {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <CssBaseline />
       <AppBar
         position="fixed"
         sx={{
@@ -58,16 +61,27 @@ export function LandingPageAppBar() {
           justifyContent: "center",
         }}
       >
-        <Toolbar>
-          <Stack direction="row" alignItems="center" spacing={3}>
+        <Toolbar sx={{ justifyContent: "space-between", flexGrow: 1 }}>
+          <Stack
+            direction="row"
+            alignItems="center"
+            spacing={isMobile ? 2 : 3}
+            justifyContent="space-between"
+          >
             <RouterLink to="/" style={{ marginTop: 5 }}>
-              <img src={ads} alt="Ads" height="31px" width="180px" />
+              <img
+                src={ads}
+                alt="Ads"
+                height={isMobile ? undefined : "31px"}
+                width={isMobile ? undefined : "180px"}
+              />
             </RouterLink>
-            <Divider orientation="vertical" flexItem sx={{ marginRight: 3 }} />
+
+            <Divider orientation="vertical" flexItem />
             {links.map((l) => l.component)}
           </Stack>
           <div style={{ flexGrow: 1 }} />
-          {!match.url.includes("auth") && (
+          {!isMobile && !match.url.includes("auth") && (
             <AuthedButton isAuthenticated={isAuthenticated} />
           )}
         </Toolbar>
@@ -82,8 +96,14 @@ interface HelpProps {
 }
 
 function HelpLink({ label, props }: HelpProps) {
+  const isMobile = useIsMobile();
   return (
-    <Link variant="subtitle1" underline="none" color="text.primary" {...props}>
+    <Link
+      variant={isMobile ? "body2" : "subtitle1"}
+      underline="none"
+      color="text.primary"
+      {...props}
+    >
       {label}
     </Link>
   );
