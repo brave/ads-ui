@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Link, Stack, TextField, Typography } from "@mui/material";
+import { Link, TextField, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { useGetLink } from "auth/hooks/mutations/useGetLink";
 import { LoadingButton } from "@mui/lab";
@@ -26,20 +26,18 @@ export function MagicLink() {
           Click on the secure login link in the email to access your Brave Ads
           account.
         </Typography>
-        <Stack direction="row" spacing={0.75}>
-          <Typography variant="subtitle1">
-            Don&rsquo;t see the email? Check your spam folder or
-          </Typography>
+        <Typography variant="subtitle1">
+          Don&rsquo;t see the email? Check your spam folder or{" "}
           <Link
             sx={{ cursor: "pointer" }}
-            variant="subtitle1"
+            variant="inherit"
             onClick={() => {
               setRequested(false);
             }}
           >
             try again.
           </Link>
-        </Stack>
+        </Typography>
       </AuthContainer>
     );
   }
