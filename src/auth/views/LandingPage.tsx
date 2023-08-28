@@ -21,7 +21,7 @@ export function LandingPage() {
   return (
     <Background>
       <LandingPageAppBar />
-      {isMobile && <Toolbar sx={{ mb: 1 }} />}
+      <Toolbar sx={{ mb: 1 }} />
       <Stack
         direction="row"
         alignItems="center"
