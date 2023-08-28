@@ -1,6 +1,6 @@
 import { Background } from "components/Background/Background";
 import { LandingPageAppBar } from "components/AppBar/LandingPageAppBar";
-import { Box, Button, Link, Stack, Typography } from "@mui/material";
+import { Box, Button, Link, Stack, Toolbar, Typography } from "@mui/material";
 import goals from "../../../images.svg";
 import { useIsAuthenticated } from "auth/hooks/queries/useIsAuthenticated";
 import { Link as RouterLink } from "react-router-dom";
@@ -15,6 +15,7 @@ export function LandingPage() {
   return (
     <Background>
       <LandingPageAppBar />
+      {isMobile && <Toolbar sx={{ mb: 1 }} />}
       <Stack
         direction="row"
         alignItems="center"
@@ -22,8 +23,8 @@ export function LandingPage() {
         justifyContent="center"
       >
         <Stack sx={{ maxWidth: "430px" }} spacing={isMobile ? 3 : 6}>
-          <Typography variant={isMobile ? "h5" : "h3"}>
-            <Typography variant={isMobile ? "h5" : "h3"} sx={GradientText}>
+          <Typography variant={isMobile ? "h4" : "h3"} textAlign="left">
+            <Typography variant="inherit" sx={GradientText}>
               Privacy-forward
             </Typography>{" "}
             advertising made simple
@@ -37,15 +38,13 @@ export function LandingPage() {
             Brave browser and search engine.
           </Typography>
 
-          {isMobile && <MobileAdsBenefits />}
-
-          <Box display="flex" flexDirection="column" justifyContent="center">
+          <Box display="flex" flexDirection="column">
             <Button
               variant="contained"
               component={RouterLink}
               sx={{
-                maxWidth: "165px",
-                maxHeight: "60px",
+                maxWidth: isMobile ? undefined : "165px",
+                maxHeight: isMobile ? "40px" : "60px",
                 padding: !isMobile ? "18px 24px 18px 24px" : 2,
                 mb: 1,
               }}
@@ -54,7 +53,7 @@ export function LandingPage() {
             >
               {isAuthenticated ? "Dashboard" : "Get Started"}
             </Button>
-            {!isAuthenticated && (
+            {!isMobile && !isAuthenticated && (
               <Typography variant="subtitle1">
                 Already have an account?
                 <Link
@@ -70,6 +69,8 @@ export function LandingPage() {
               </Typography>
             )}
           </Box>
+
+          {isMobile && <MobileAdsBenefits />}
         </Stack>
         {!isMobile && <img src={goals} />}
       </Stack>

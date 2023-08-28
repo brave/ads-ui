@@ -1,77 +1,66 @@
-import {
-  Avatar,
-  Box,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  Typography,
-} from "@mui/material";
+import { Card, CardMedia, List, ListItem, Typography } from "@mui/material";
 
-import one from "../../../One.svg";
-import two from "../../../Two.svg";
-import three from "../../../Three.svg";
+import allSizes from "../../../all_sizes_frame.svg";
+import powerfulFormats from "../../../powerful_format_frame.svg";
+import privacyFocused from "../../../privacy_focused_frame.svg";
 
 export function MobileAdsBenefits() {
   return (
-    <Box>
-      <Typography variant="h6">Why Brave Ads?</Typography>
-      <List>
-        <ListItem
-          alignItems="center"
-          disableGutters
-          sx={{ flexDirection: "row" }}
-        >
-          <ListItemAvatar>
-            <Avatar alt="One" src={one} />
-          </ListItemAvatar>
-          <ItemText
-            primary="For all business sizes"
-            secondary="Start a Brave Ads campaign with as little as $100."
-          />
-        </ListItem>
-        <ListItem
-          alignItems="center"
-          disableGutters
-          sx={{ flexDirection: "row" }}
-        >
-          <ListItemAvatar>
-            <Avatar alt="Two" src={two} />
-          </ListItemAvatar>
-          <ItemText
-            primary="Powerful Ad Formats"
-            secondary="Browser-based delivery offers a new way to reach audiences on the Web."
-          />
-        </ListItem>
-        <ListItem
-          alignItems="center"
-          disableGutters
-          sx={{ flexDirection: "row" }}
-        >
-          <ListItemAvatar>
-            <Avatar alt="Three" src={three} />
-          </ListItemAvatar>
-          <ItemText
-            primary="Unparalleled privacy"
-            secondary="All targeting and reporting is strictly designed to be anonymous and privacy-preserving."
-          />
-        </ListItem>
-      </List>
-    </Box>
+    <List disablePadding>
+      <ListItem alignItems="center" disableGutters>
+        <ItemCard
+          primary="For all business sizes"
+          secondary="Start a Brave Ads campaign with as little as $100."
+          image={allSizes}
+        />
+      </ListItem>
+      <ListItem alignItems="center" disableGutters>
+        <ItemCard
+          primary="Powerful Ad Formats"
+          secondary="Browser-based delivery offers a new way to reach audiences on the Web."
+          image={powerfulFormats}
+        />
+      </ListItem>
+      <ListItem alignItems="center" disableGutters>
+        <ItemCard
+          primary="Unparalleled privacy"
+          secondary="All targeting and reporting is strictly designed to be anonymous and privacy-preserving."
+          image={privacyFocused}
+        />
+      </ListItem>
+    </List>
   );
 }
 
-const ItemText = (props: { primary: string; secondary: string }) => {
+const ItemCard = (props: {
+  primary: string;
+  secondary: string;
+  image: string;
+}) => {
   return (
-    <ListItemText
-      primary={props.primary}
-      secondary={props.secondary}
-      primaryTypographyProps={{
-        fontWeight: 600,
-      }}
-      secondaryTypographyProps={{
-        color: "text.primary",
-      }}
-    />
+    <Card sx={{ padding: "4px", borderRadius: "12px" }}>
+      <CardMedia
+        component="img"
+        height="150px"
+        sx={{ borderRadius: "12px" }}
+        image={props.image}
+      />
+      <Typography
+        fontWeight={500}
+        textAlign="left"
+        fontSize="22px"
+        letterSpacing="0em"
+      >
+        {props.primary}
+      </Typography>
+      <Typography
+        fontWeight={300}
+        textAlign="left"
+        fontSize="14px"
+        letterSpacing="0.02em"
+      >
+        {props.secondary}
+      </Typography>
+    </Card>
   );
 };

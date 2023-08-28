@@ -23,16 +23,17 @@ export function LandingPageAppBar() {
 
   const links = [
     {
-      component: isAuthenticated ? null : (
-        <RouterLink to={"/register"} style={{ textDecoration: "none" }}>
-          <Typography
-            variant={isMobile ? "body2" : "subtitle1"}
-            color="text.primary"
-          >
-            Get started
-          </Typography>
-        </RouterLink>
-      ),
+      component:
+        isMobile || isAuthenticated ? null : (
+          <RouterLink to={"/register"} style={{ textDecoration: "none" }}>
+            <Typography
+              variant={isMobile ? "body2" : "subtitle1"}
+              color="text.primary"
+            >
+              Get started
+            </Typography>
+          </RouterLink>
+        ),
     },
     {
       component: (
@@ -57,7 +58,7 @@ export function LandingPageAppBar() {
         sx={{
           bgcolor: "rgba(252, 252, 253, 0.65)",
           boxShadow: "none",
-          height: "74px",
+          height: isMobile ? undefined : "74px",
           justifyContent: "center",
         }}
       >
@@ -79,6 +80,17 @@ export function LandingPageAppBar() {
 
             <Divider orientation="vertical" flexItem />
             {links.map((l) => l.component)}
+            {isMobile && !match.url.includes("auth") && (
+              <Link
+                component={RouterLink}
+                to="/auth/link"
+                underline="none"
+                color="secondary"
+                variant="body2"
+              >
+                Log in
+              </Link>
+            )}
           </Stack>
           <div style={{ flexGrow: 1 }} />
           {!isMobile && !match.url.includes("auth") && (
