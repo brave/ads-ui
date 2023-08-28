@@ -8,6 +8,10 @@ import {
   Typography,
 } from "@mui/material";
 
+import one from "../../../One.svg";
+import two from "../../../Two.svg";
+import three from "../../../Three.svg";
+
 export function MobileAdsBenefits() {
   return (
     <Box>
@@ -19,7 +23,7 @@ export function MobileAdsBenefits() {
           sx={{ flexDirection: "row" }}
         >
           <ListItemAvatar>
-            <Avatar alt="One" src="/One.svg" />
+            <Avatar alt="One" src={one} />
           </ListItemAvatar>
           <ItemText
             primary="For all business sizes"
@@ -32,7 +36,7 @@ export function MobileAdsBenefits() {
           sx={{ flexDirection: "row" }}
         >
           <ListItemAvatar>
-            <Avatar alt="Two" src="/Two.svg" />
+            <Avatar alt="Two" src={two} />
           </ListItemAvatar>
           <ItemText
             primary="Powerful Ad Formats"
@@ -45,7 +49,7 @@ export function MobileAdsBenefits() {
           sx={{ flexDirection: "row" }}
         >
           <ListItemAvatar>
-            <Avatar alt="Three" src="/Three.svg" />
+            <Avatar alt="Three" src={three} />
           </ListItemAvatar>
           <ItemText
             primary="Unparalleled privacy"
