@@ -64,7 +64,6 @@ export type Creative = CreativeInput & {
   id?: string;
   targetUrlValid?: string;
   state?: string;
-  creativeInstanceId?: string;
   createdAt?: string;
   modifiedAt?: string;
   included: boolean;

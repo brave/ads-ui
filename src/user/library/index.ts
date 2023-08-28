@@ -167,7 +167,6 @@ function creativeList(
   advertiserId: string,
   adSetAds?: AdFragment[] | null,
   allAds?: AdFragment[] | null,
-  includeId?: boolean,
 ): Creative[] {
   const filterAds = (a?: AdFragment[] | null, included?: boolean) => {
     return (a ?? [])
@@ -176,7 +175,6 @@ function creativeList(
         const c = ad.creative;
         return {
           ...validCreativeFields(c, advertiserId, included),
-          creativeInstanceId: includeId !== false ? ad.id : undefined,
         };
       });
   };
@@ -232,7 +230,6 @@ export function transformEditForm(
         .filter((c) => c.included)
         .map((ad) => ({
           ...transformCreative(ad, form),
-          id: ad.creativeInstanceId,
           creativeSetId: adSet.id,
         })),
     })),
