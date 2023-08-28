@@ -34,7 +34,7 @@ export function CampaignList({
   selectedCampaigns,
   onCampaignSelect,
 }: Props) {
-  let initialSort = 11;
+  let initialSort = 10;
   const [engagementData, setEngagementData] =
     useState<Map<string, EngagementOverview>>();
 
@@ -132,12 +132,6 @@ export function CampaignList({
     {
       title: "End",
       value: (c) => c.endAt,
-      renderer: StandardRenderers.date,
-      align: "right",
-    },
-    {
-      title: "Created",
-      value: (c) => c.createdAt,
       renderer: StandardRenderers.date,
       align: "right",
     },

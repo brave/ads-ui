@@ -36,7 +36,6 @@ export function OnOff({ state, loading, end, onChange, type, source }: Props) {
               setChecked(e.target.checked);
               onChange(theState);
             }}
-            sx={{ p: 0 }}
             checked={checked}
             disabled={loading}
           />

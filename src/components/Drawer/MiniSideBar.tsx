@@ -30,7 +30,7 @@ type RouteOption = {
   onClick?: (event: MouseEvent<any>) => void;
 };
 
-const drawerWidth = 110;
+const drawerWidth = 100;
 export default function MiniSideBar({ children }: PropsWithChildren) {
   const dashboardRoutes: RouteOption[] = [
     {
