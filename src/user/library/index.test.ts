@@ -1,6 +1,11 @@
 import { CampaignFragment } from "graphql/campaign.generated";
 import { describe, expect, it } from "vitest";
-import { editCampaignValues, transformCreative } from ".";
+import {
+  editCampaignValues,
+  transformCreative,
+  transformEditForm,
+  transformNewForm,
+} from ".";
 import {
   CampaignFormat,
   CampaignPacingStrategies,
@@ -9,7 +14,10 @@ import {
   PaymentType,
 } from "graphql/types";
 import { produce } from "immer";
-import { Creative } from "user/views/adsManager/types";
+import { AdSetForm, CampaignForm, Creative } from "user/views/adsManager/types";
+import _ from "lodash";
+import { AdFragment, AdSetFragment } from "graphql/ad-set.generated";
+import { CreativeFragment } from "graphql/creative.generated";
 
 const BASE_CPM_CAMPAIGN_FRAGMENT: Readonly<CampaignFragment> = {
   id: "3495317a-bb47-4daf-8d3e-14cdc0e87457",
@@ -200,5 +208,436 @@ describe("pricing logic (write)", () => {
 
     expect(inputObject.price).toEqual("9");
     expect(inputObject.priceType).toEqual(ConfirmationType.Landed);
+  });
+});
+
+describe("new form tests", () => {
+  const dateString = new Date().toLocaleString();
+
+  const creative: Creative = {
+    id: "11111",
+    advertiserId: "123456",
+    included: true,
+    name: "Test",
+    state: "draft",
+    type: { code: "test" },
+  };
+
+  const creative2: Creative = {
+    id: "33333",
+    advertiserId: "123456",
+    included: false,
+    name: "Dont include",
+    state: "draft",
+    type: { code: "test" },
+  };
+
+  const adSetForm: AdSetForm = {
+    conversions: [],
+    creatives: [creative, creative2],
+    isNotTargeting: false,
+    name: "",
+    oses: [{ name: "macos", code: "1234" }],
+    segments: [{ name: "test", code: "5678" }],
+  };
+
+  const form: CampaignForm = {
+    adSets: [adSetForm],
+    advertiserId: "12345",
+    billingType: "cpm",
+    budget: 1000,
+    currency: "USD",
+    dailyBudget: 10,
+    endAt: dateString,
+    format: CampaignFormat.PushNotification,
+    geoTargets: [{ code: "US", name: "United States" }],
+    isCreating: false,
+    name: "Test",
+    paymentType: PaymentType.Radom,
+    price: 6,
+    startAt: dateString,
+    state: "draft",
+    type: "paid",
+    validateStart: false,
+  };
+
+  it("should transform campaign form", () => {
+    const res = _.omit(transformNewForm(form, "me"), ["startAt", "endAt"]);
+    expect(res).toMatchInlineSnapshot(`
+      {
+        "adSets": [
+          {
+            "ads": [
+              {
+                "creativeId": "11111",
+                "price": "0.006",
+                "priceType": "VIEW",
+              },
+            ],
+            "billingType": "cpm",
+            "conversions": [],
+            "name": "",
+            "oses": [
+              {
+                "code": "1234",
+                "name": "macos",
+              },
+            ],
+            "perDay": 1,
+            "segments": [
+              {
+                "code": "5678",
+                "name": "test",
+              },
+            ],
+            "totalMax": 10,
+          },
+        ],
+        "advertiserId": "12345",
+        "budget": 1000,
+        "currency": "USD",
+        "dailyBudget": 10,
+        "dailyCap": 1,
+        "externalId": "",
+        "format": "PUSH_NOTIFICATION",
+        "geoTargets": [
+          {
+            "code": "US",
+            "name": "United States",
+          },
+        ],
+        "name": "Test",
+        "pacingStrategy": "MODEL_V1",
+        "paymentType": "RADOM",
+        "source": "self_serve",
+        "state": "draft",
+        "type": "paid",
+        "userId": "me",
+      }
+    `);
+  });
+
+  it("should transform a creative", () => {
+    creative.payloadNotification = {
+      title: "valid",
+      targetUrl: "valid",
+      body: "valid",
+    };
+
+    creative.payloadSearch = {
+      title: "invalid",
+      targetUrl: "invalid",
+      body: "invalid",
+    };
+
+    const res = transformCreative(creative, form);
+    expect(res).toMatchInlineSnapshot(`
+      {
+        "creativeId": "11111",
+        "price": "0.006",
+        "priceType": "VIEW",
+      }
+    `);
+  });
+});
+
+describe("edit form tests", () => {
+  const creative: CreativeFragment = {
+    createdAt: undefined,
+    id: "1234",
+    modifiedAt: undefined,
+    name: "a creative",
+    state: "active",
+    payloadNotification: {
+      targetUrl: "valid",
+      title: "valid",
+      body: "valid",
+    },
+    type: { code: "notification_v1_all" },
+  };
+
+  const ad: AdFragment = {
+    id: "1",
+    creative: creative,
+    state: "active",
+    price: "6",
+    priceType: ConfirmationType.View,
+  };
+
+  const ad2: AdFragment = {
+    id: "2",
+    creative: creative,
+    state: "deleted",
+    price: "6",
+    priceType: ConfirmationType.View,
+  };
+
+  const ad3: AdFragment = {
+    id: "3",
+    creative: {
+      ...creative,
+      id: "1235",
+      name: "a different creative",
+    },
+    state: "active",
+    price: "6",
+    priceType: ConfirmationType.View,
+  };
+
+  const adSet: AdSetFragment = {
+    ads: [ad, ad2],
+    billingType: "cpm",
+    conversions: [],
+    createdAt: undefined,
+    id: "11111",
+    perDay: 1,
+    oses: [{ name: "macos", code: "1234" }],
+    segments: [{ name: "test", code: "5678" }],
+    state: "active",
+    totalMax: 100,
+  };
+
+  const adSet2: AdSetFragment = {
+    ads: [ad, ad3],
+    billingType: "cpm",
+    conversions: [],
+    createdAt: undefined,
+    id: "22222",
+    perDay: 1,
+    oses: [{ name: "linux", code: "1234" }],
+    segments: [{ name: "help", code: "5678" }],
+    state: "active",
+    totalMax: 100,
+  };
+
+  const campaignFragment: CampaignFragment = {
+    adSets: [adSet, adSet2],
+    advertiser: { id: "12345" },
+    budget: 100,
+    createdAt: undefined,
+    currency: "USD",
+    dailyBudget: 0,
+    dailyCap: 0,
+    endAt: undefined,
+    externalId: "",
+    format: CampaignFormat.PushNotification,
+    id: "000001",
+    name: "My first campaign",
+    pacingOverride: false,
+    pacingStrategy: CampaignPacingStrategies.ModelV1,
+    passThroughRate: 0,
+    paymentType: PaymentType.Radom,
+    priority: 1,
+    source: CampaignSource.SelfServe,
+    spent: 0,
+    startAt: undefined,
+    state: "active",
+    type: "paid",
+  };
+
+  const editForm = editCampaignValues(
+    campaignFragment,
+    campaignFragment.advertiser.id,
+  );
+  it("should result in a valid campaign form", () => {
+    const omitted = _.omit(editForm, ["newCreative"]);
+    expect(omitted).toMatchInlineSnapshot(`
+      {
+        "adSets": [
+          {
+            "conversions": [],
+            "creatives": [
+              {
+                "advertiserId": "12345",
+                "id": "1234",
+                "included": true,
+                "name": "a creative",
+                "payloadNotification": {
+                  "body": "valid",
+                  "targetUrl": "valid",
+                  "title": "valid",
+                },
+                "state": "active",
+                "targetUrlValid": "",
+                "type": {
+                  "code": "notification_v1_all",
+                },
+              },
+              {
+                "advertiserId": "12345",
+                "id": "1235",
+                "included": false,
+                "name": "a different creative",
+                "payloadNotification": {
+                  "body": "valid",
+                  "targetUrl": "valid",
+                  "title": "valid",
+                },
+                "state": "active",
+                "targetUrlValid": "",
+                "type": {
+                  "code": "notification_v1_all",
+                },
+              },
+            ],
+            "id": "11111",
+            "isNotTargeting": false,
+            "name": "11111",
+            "oses": [
+              {
+                "code": "1234",
+                "name": "macos",
+              },
+            ],
+            "segments": [
+              {
+                "code": "5678",
+                "name": "test",
+              },
+            ],
+          },
+          {
+            "conversions": [],
+            "creatives": [
+              {
+                "advertiserId": "12345",
+                "id": "1234",
+                "included": true,
+                "name": "a creative",
+                "payloadNotification": {
+                  "body": "valid",
+                  "targetUrl": "valid",
+                  "title": "valid",
+                },
+                "state": "active",
+                "targetUrlValid": "",
+                "type": {
+                  "code": "notification_v1_all",
+                },
+              },
+              {
+                "advertiserId": "12345",
+                "id": "1235",
+                "included": true,
+                "name": "a different creative",
+                "payloadNotification": {
+                  "body": "valid",
+                  "targetUrl": "valid",
+                  "title": "valid",
+                },
+                "state": "active",
+                "targetUrlValid": "",
+                "type": {
+                  "code": "notification_v1_all",
+                },
+              },
+            ],
+            "id": "22222",
+            "isNotTargeting": false,
+            "name": "22222",
+            "oses": [
+              {
+                "code": "1234",
+                "name": "linux",
+              },
+            ],
+            "segments": [
+              {
+                "code": "5678",
+                "name": "help",
+              },
+            ],
+          },
+        ],
+        "advertiserId": "12345",
+        "billingType": "cpm",
+        "budget": 100,
+        "currency": "USD",
+        "dailyBudget": 0,
+        "endAt": undefined,
+        "format": "PUSH_NOTIFICATION",
+        "geoTargets": [],
+        "id": "000001",
+        "isCreating": false,
+        "name": "My first campaign",
+        "paymentType": "RADOM",
+        "price": 6000,
+        "startAt": undefined,
+        "state": "active",
+        "type": "paid",
+        "validateStart": false,
+      }
+    `);
+  });
+
+  it("should resolve to update input", () => {
+    const update = transformEditForm(editForm, editForm.id ?? "");
+    expect(update).toMatchInlineSnapshot(`
+      {
+        "adSets": [
+          {
+            "ads": [
+              {
+                "creativeId": "1234",
+                "creativeSetId": "11111",
+                "price": "6",
+                "priceType": "VIEW",
+              },
+            ],
+            "id": "11111",
+            "oses": [
+              {
+                "code": "1234",
+                "name": "macos",
+              },
+            ],
+            "segments": [
+              {
+                "code": "5678",
+                "name": "test",
+              },
+            ],
+          },
+          {
+            "ads": [
+              {
+                "creativeId": "1234",
+                "creativeSetId": "22222",
+                "price": "6",
+                "priceType": "VIEW",
+              },
+              {
+                "creativeId": "1235",
+                "creativeSetId": "22222",
+                "price": "6",
+                "priceType": "VIEW",
+              },
+            ],
+            "id": "22222",
+            "oses": [
+              {
+                "code": "1234",
+                "name": "linux",
+              },
+            ],
+            "segments": [
+              {
+                "code": "5678",
+                "name": "help",
+              },
+            ],
+          },
+        ],
+        "budget": 100,
+        "dailyBudget": 0,
+        "endAt": undefined,
+        "id": "000001",
+        "name": "My first campaign",
+        "paymentType": "RADOM",
+        "startAt": undefined,
+        "state": "active",
+        "type": "paid",
+      }
+    `);
   });
 });

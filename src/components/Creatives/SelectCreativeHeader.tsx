@@ -1,4 +1,4 @@
-import { Box, IconButton } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import { Creative } from "user/views/adsManager/types";
@@ -16,7 +16,13 @@ export const SelectCreativeHeader = (props: {
   }, [props.creative]);
 
   return (
-    <Box display="flex" justifyContent="left" alignItems="center" gap="5px">
+    <Box
+      display="flex"
+      justifyContent="left"
+      alignItems="center"
+      gap="5px"
+      mb={0.4}
+    >
       <IconButton
         onClick={() => {
           const s = !selected;
@@ -31,7 +37,7 @@ export const SelectCreativeHeader = (props: {
           <CheckBoxOutlineBlankIcon fontSize="small" />
         )}
       </IconButton>
-      {props.creative.name}
+      <Typography variant="subtitle2">{props.creative.name}</Typography>
       <div style={{ flexGrow: 1 }} />
       {props.showState !== false && (
         <Status state={props.creative.state} opaque={selected} />

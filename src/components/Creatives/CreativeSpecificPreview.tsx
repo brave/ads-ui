@@ -24,7 +24,7 @@ export function CreativeSpecificPreview({
   let component;
   if (format.value === CampaignFormat.PushNotification) {
     component = options.map((c, idx) => (
-      <BoxContainer header={c.name} key={idx}>
+      <BoxContainer header={c.name} key={idx} useTypography>
         <NotificationPreview
           title={c.payloadNotification?.title}
           body={c.payloadNotification?.body}

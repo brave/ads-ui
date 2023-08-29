@@ -1,9 +1,8 @@
 import {
   Alert,
-  Divider,
+  Box,
   InputAdornment,
   LinearProgress,
-  Stack,
   TextField,
   Typography,
 } from "@mui/material";
@@ -82,20 +81,19 @@ export function AdsExistingAd() {
         Add an existing Ad
       </Typography>
 
-      <Stack direction="row" justifyContent="baseline">
-        <Typography variant="subtitle1" fontWeight={500} sx={{ flexGrow: 1 }}>
-          Ads are modular building blocks that can be paired with ad sets to
-          build unique combinations. Your previously approved ads will show
-          here.
-          <br /> Select by using the box next to the name. Use the
-          &quot;Complete selection&quot; button to finish.
-        </Typography>
+      <Typography variant="subtitle1" fontWeight={500}>
+        Ads are modular building blocks that can be paired with ad sets to build
+        unique combinations. Your previously approved ads will show here. Select
+        by using the box next to the name. Use the &quot;Complete
+        selection&quot; button to finish.
+      </Typography>
 
+      <Box display="flex" justifyContent="start" mt={2} mb={3}>
         <TextField
           placeholder="Filter ads by name..."
           size="small"
           variant="standard"
-          sx={{ width: "400px", alignSelf: "end" }}
+          fullWidth
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -116,8 +114,7 @@ export function AdsExistingAd() {
             }
           }}
         />
-      </Stack>
-      <Divider sx={{ mt: 2, mb: 2 }} />
+      </Box>
 
       <CreativeSpecificSelect options={options ?? []} format={values.format} />
     </CardContainer>

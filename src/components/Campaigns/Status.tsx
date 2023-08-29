@@ -12,7 +12,6 @@ interface Props {
 
 export const Status = ({ state, start, end, opaque }: Props) => {
   let color = calcColorForState(state);
-
   let label = _.startCase(state);
 
   if (start) {
