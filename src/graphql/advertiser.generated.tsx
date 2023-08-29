@@ -153,13 +153,7 @@ export type UploadAdvertiserImageMutationVariables = Types.Exact<{
 }>;
 
 export type UploadAdvertiserImageMutation = {
-  createAdvertiserImage: {
-    name: string;
-    imageUrl: string;
-    format: Types.CampaignFormat;
-    id: string;
-    createdAt: any;
-  };
+  createAdvertiserImage: { name: string };
 };
 
 export const AdvertiserSummaryFragmentDoc = gql`
@@ -460,10 +454,9 @@ export function refetchAdvertiserImagesQuery(
 export const UploadAdvertiserImageDocument = gql`
   mutation uploadAdvertiserImage($input: CreateAdvertiserImageInput!) {
     createAdvertiserImage(createImageInput: $input) {
-      ...AdvertiserImage
+      name
     }
   }
-  ${AdvertiserImageFragmentDoc}
 `;
 export type UploadAdvertiserImageMutationFn = Apollo.MutationFunction<
   UploadAdvertiserImageMutation,

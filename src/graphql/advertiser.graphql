@@ -75,6 +75,6 @@ query advertiserImages($id: String!) {
 
 mutation uploadAdvertiserImage($input: CreateAdvertiserImageInput!) {
   createAdvertiserImage(createImageInput: $input) {
-    ...AdvertiserImage
+    name
   }
 }
