@@ -1,6 +1,6 @@
-import { createTheme } from "@mui/material";
+import { createTheme, responsiveFontSizes } from "@mui/material";
 
-export const theme = createTheme({
+const appTheme = createTheme({
   typography: {
     fontFamily: "Poppins",
     h1: {
@@ -54,3 +54,5 @@ export const theme = createTheme({
     },
   },
 });
+
+export const theme = responsiveFontSizes(appTheme);

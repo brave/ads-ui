@@ -1,5 +1,6 @@
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { FormikTextField } from "form/FormikHelpers";
+import { MarginedDivider } from "auth/registration/MarginedDivider";
 
 export function NameField() {
   return (
@@ -9,7 +10,7 @@ export function NameField() {
         setup with your account. First, we&rsquo;ll need your info.
       </Typography>
 
-      <Divider sx={{ marginTop: 5, marginBottom: 5 }} />
+      <MarginedDivider />
 
       <FormikTextField
         name="fullName"

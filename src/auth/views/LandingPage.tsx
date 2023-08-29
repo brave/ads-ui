@@ -1,9 +1,11 @@
 import { Background } from "components/Background/Background";
 import { LandingPageAppBar } from "components/AppBar/LandingPageAppBar";
-import { Box, Button, Link, Stack, Typography } from "@mui/material";
+import { Box, Button, Link, Stack, Toolbar, Typography } from "@mui/material";
 import goals from "../../../images.svg";
 import { useIsAuthenticated } from "auth/hooks/queries/useIsAuthenticated";
 import { Link as RouterLink } from "react-router-dom";
+import { useIsMobile } from "hooks/useIsMobile";
+import { MobileAdsBenefits } from "auth/views/MobileAdsBenefits";
 
 const GradientText = {
   backgroundImage:
@@ -14,19 +16,21 @@ const GradientText = {
 
 export function LandingPage() {
   const isAuthenticated = useIsAuthenticated();
+  const isMobile = useIsMobile();
 
   return (
     <Background>
       <LandingPageAppBar />
+      <Toolbar sx={{ mb: 1 }} />
       <Stack
         direction="row"
         alignItems="center"
         spacing={10}
         justifyContent="center"
       >
-        <Stack sx={{ maxWidth: "430px" }} spacing={6}>
-          <Typography variant="h3">
-            <Typography variant="h3" sx={GradientText}>
+        <Stack sx={{ maxWidth: "430px" }} spacing={{ xs: 3, md: 6 }}>
+          <Typography variant="h3" textAlign="left">
+            <Typography variant="inherit" sx={GradientText}>
               Privacy-forward
             </Typography>{" "}
             advertising made simple
@@ -42,17 +46,16 @@ export function LandingPage() {
               variant="contained"
               component={RouterLink}
               sx={{
-                maxWidth: "165px",
-                height: "60px",
-                padding: "18px 24px 18px 24px",
+                maxWidth: { md: "165px" },
+                maxHeight: { xs: "40px", md: "60px" },
+                padding: { xs: 2, md: "18px 24px 18px 24px" },
                 mb: 1,
               }}
-              size="large"
               to={isAuthenticated ? "/user/main" : "/register"}
             >
               {isAuthenticated ? "Dashboard" : "Get Started"}
             </Button>
-            {!isAuthenticated && (
+            {!isMobile && !isAuthenticated && (
               <Typography variant="subtitle1">
                 Already have an account?
                 <Link
@@ -68,8 +71,10 @@ export function LandingPage() {
               </Typography>
             )}
           </Box>
+
+          {isMobile && <MobileAdsBenefits />}
         </Stack>
-        <img src={goals} />
+        {!isMobile && <img src={goals} />}
       </Stack>
     </Background>
   );

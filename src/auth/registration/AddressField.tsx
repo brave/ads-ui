@@ -1,6 +1,7 @@
-import { Box, Divider, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { FormikTextField } from "form/FormikHelpers";
 import { CountryPicker } from "components/Country/CountryPicker";
+import { MarginedDivider } from "auth/registration/MarginedDivider";
 
 export function AddressField() {
   return (
@@ -10,7 +11,7 @@ export function AddressField() {
         finished here, your account setup is complete.
       </Typography>
 
-      <Divider sx={{ marginTop: 5, marginBottom: 5 }} />
+      <MarginedDivider />
 
       <FormikTextField
         name="address.street1"
@@ -44,7 +45,7 @@ export function AddressField() {
         useTopLabel
       />
 
-      <Stack direction="row" spacing={1}>
+      <Stack direction={{ xs: "column", md: "row" }} spacing={{ xs: 2, md: 1 }}>
         <CountryPicker name="address.country" />
 
         <FormikTextField
