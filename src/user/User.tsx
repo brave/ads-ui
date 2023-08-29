@@ -93,6 +93,11 @@ export function User() {
                   unauthedComponent={AdvertiserAgreed}
                 />
 
+                <ProtectedRoute
+                  path="/user/main/assets"
+                  authedComponent={CampaignView}
+                />
+
                 {/* default */}
                 <Redirect to="/user/main/campaign" />
               </Switch>

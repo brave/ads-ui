@@ -10,13 +10,14 @@ import { useField } from "formik";
 import { CampaignFormat } from "graphql/types";
 import _ from "lodash";
 import HelpIcon from "@mui/icons-material/Help";
+import { useIsEdit } from "form/FormikHelpers";
 
 export function FormatField() {
   return (
     <CardContainer header="Format">
       <Stack direction="row" spacing={0.5} alignItems="center">
         <Typography variant="body2">
-          Choose what tye of campaign you would like to run
+          Choose a format for the campaign you would like to run
         </Typography>
         <IconButton
           size="small"
@@ -40,10 +41,12 @@ export function FormatField() {
 }
 
 const FormatItemButton = (props: { format: CampaignFormat }) => {
+  const { isEdit } = useIsEdit();
   const [, meta, helper] = useField<CampaignFormat>("format");
 
   return (
     <ListItemButton
+      disabled={isEdit}
       selected={meta.value === props.format}
       onClick={() => helper.setValue(props.format)}
       sx={{

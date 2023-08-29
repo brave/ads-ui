@@ -20,7 +20,7 @@ export function CampaignSettings() {
         <CampaignDateRange />
       </CardContainer>
 
-      {isDraft && <FormatField />}
+      <FormatField />
 
       {isDraft && <LocationField />}
     </>

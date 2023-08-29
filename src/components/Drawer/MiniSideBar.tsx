@@ -43,23 +43,21 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
         />
       ),
     },
-    // Possible future enhancements, not visible to user but help keep spacing
-    {
-      label: "Creatives",
-      href: "/user/main/creatives",
-      icon: (
-        <LightbulbOutlinedIcon
-          fontSize="large"
-          sx={{ color: "text.secondary" }}
-        />
-      ),
-      disabled: true,
-    },
     {
       label: "Assets",
       href: "/user/main/assets",
       icon: (
         <InsertPhotoOutlinedIcon
+          fontSize="large"
+          sx={{ color: "text.secondary" }}
+        />
+      ),
+    },
+    {
+      label: "Creatives",
+      href: "/user/main/creatives",
+      icon: (
+        <LightbulbOutlinedIcon
           fontSize="large"
           sx={{ color: "text.secondary" }}
         />
