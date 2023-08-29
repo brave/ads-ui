@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { useHistory, useParams } from "react-router-dom";
+import { useParams, Link as RouterLink } from "react-router-dom";
 import { Card, Container, Stack, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { useValidatePaymentSession } from "checkout/hooks/useValidatePaymentSession";
@@ -10,7 +10,6 @@ interface Params {
 }
 
 export function CompletionForm() {
-  const history = useHistory();
   const params = useParams<Params>();
   const [clickedSurvey, setClickedSurvey] = useState(false);
   const searchParams = new URLSearchParams(window.location.search);
@@ -52,7 +51,8 @@ export function CompletionForm() {
               sx={{ mt: 2, flexGrow: 0 }}
               disabled={loading}
               loading={loading}
-              onClick={() => history.push("/user/main/campaigns")}
+              component={RouterLink}
+              to="/user/main/campaigns"
             >
               Continue
             </LoadingButton>
@@ -104,8 +104,6 @@ function ValidateCampaignButton(props: {
   loading: boolean;
   onClick: () => void;
 }) {
-  const history = useHistory();
-
   return (
     <Stack
       direction="row"
@@ -128,9 +126,8 @@ function ValidateCampaignButton(props: {
 
       <LoadingButton
         variant={props.clicked ? "contained" : "outlined"}
-        onClick={async () => {
-          history.push("/user/main");
-        }}
+        component={RouterLink}
+        to="/user/main/campaign"
         loading={props.loading}
         disabled={props.loading}
       >

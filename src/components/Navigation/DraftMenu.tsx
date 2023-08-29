@@ -1,13 +1,12 @@
 import { useContext, useState, MouseEvent } from "react";
 
-import { useHistory } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import { Badge, Button, Menu, MenuItem } from "@mui/material";
 import { DraftContext } from "state/context";
 
 export function DraftMenu() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const history = useHistory();
   const { drafts } = useContext(DraftContext);
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -46,10 +45,9 @@ export function DraftMenu() {
         {drafts.map((d, idx) => (
           <MenuItem
             key={`draft-${d.draftId}-${idx}`}
+            component={RouterLink}
+            to={`/user/main/adsmanager/advanced/new/${d.draftId}/settings`}
             onClick={() => {
-              history.push(
-                `/user/main/adsmanager/advanced/new/${d.draftId}/settings`,
-              );
               setAnchorEl(null);
             }}
             sx={{ pt: 1, pb: 1, minWidth: "250px" }}

@@ -6,7 +6,7 @@ export function PaddedCardContainer({ children }: PropsWithChildren) {
     <Card
       sx={{
         width: "100%",
-        padding: "38px",
+        padding: { xs: "2px", md: "38px" },
         gap: "22px",
       }}
     >

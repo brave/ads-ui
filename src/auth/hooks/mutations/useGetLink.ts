@@ -11,6 +11,12 @@ export function useGetLink({ onError, onSuccess }: Options = {}) {
   const [error, setError] = useState<string>();
 
   const requestLink = useCallback(async (email: string) => {
+    if (email.trim() === "") {
+      setError("Please enter an email.");
+      return;
+    }
+
+    setError(undefined);
     setLoading(true);
     await getLink({ email })
       .then(() => {

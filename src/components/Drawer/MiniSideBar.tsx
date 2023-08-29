@@ -30,7 +30,7 @@ type RouteOption = {
   onClick?: (event: MouseEvent<any>) => void;
 };
 
-const drawerWidth = 120;
+const drawerWidth = 100;
 export default function MiniSideBar({ children }: PropsWithChildren) {
   const dashboardRoutes: RouteOption[] = [
     {
@@ -151,8 +151,8 @@ const ItemBox = (props: RouteOption) => {
         borderRadius: "0px",
         gap: "3px",
         visibility: props.disabled ? "hidden" : "visible",
-        paddingLeft: "5px",
-        paddingRight: "5px",
+        paddingLeft: "3px",
+        paddingRight: "3px",
       }}
       selected={match.url.includes(props.href)}
       onClick={props.onClick}

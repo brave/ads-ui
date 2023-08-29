@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import { useHistory, useRouteMatch } from "react-router-dom";
+import { useRouteMatch, Link as RouterLink } from "react-router-dom";
 import { CardContainer } from "components/Card/CardContainer";
 import { Button } from "@mui/material";
 
@@ -13,7 +13,6 @@ export function ReviewContainer({
   path,
   children,
 }: Props & PropsWithChildren) {
-  const history = useHistory();
   const { url } = useRouteMatch();
   const baseRoute = url.replace("/review", "");
 
@@ -25,7 +24,9 @@ export function ReviewContainer({
           variant="outlined"
           sx={{ borderRadius: "10px" }}
           size="small"
-          onClick={() => history.replace(`${baseRoute}/${path}`)}
+          component={RouterLink}
+          to={`${baseRoute}/${path}`}
+          replace
         >
           Edit
         </Button>

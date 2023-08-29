@@ -1,4 +1,4 @@
-import { useHistory, useRouteMatch } from "react-router-dom";
+import { useRouteMatch, Link as RouterLink } from "react-router-dom";
 
 import { AppBar, Button, Divider, Stack, Toolbar } from "@mui/material";
 
@@ -11,7 +11,6 @@ import { useSignOut } from "auth/hooks/mutations/useSignOut";
 export function Navbar() {
   const { signOut } = useSignOut();
   const { advertiser } = useAdvertiser();
-  const history = useHistory();
   const { url } = useRouteMatch();
   const isNewCampaignPage = url.includes("/user/main/adsmanager/advanced");
   const isCompletePage = url.includes("/user/main/complete/new");
@@ -39,7 +38,8 @@ export function Navbar() {
         <div style={{ flexGrow: 1 }} />
         {advertiser.selfServiceCreate && (
           <Button
-            onClick={() => history.push(newUrl)}
+            component={RouterLink}
+            to={newUrl}
             size="medium"
             variant="contained"
             sx={{ mr: 3 }}

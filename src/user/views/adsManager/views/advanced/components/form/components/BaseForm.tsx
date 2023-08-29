@@ -9,23 +9,19 @@ import { NewAdSet } from "user/views/adsManager/views/advanced/components/adSet/
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import { BudgetSettings } from "user/views/adsManager/views/advanced/components/campaign/BudgetSettings";
 
-interface Props {
-  isEdit: boolean;
-}
-
-export function BaseForm({ isEdit }: Props) {
+export function BaseForm() {
   const { url } = useRouteMatch();
 
   const steps = [
     {
       label: "Campaign Settings",
       path: `${url}/settings`,
-      component: <CampaignSettings isEdit={isEdit} />,
+      component: <CampaignSettings />,
     },
     {
       label: "Budget",
       path: `${url}/budget`,
-      component: <BudgetSettings isEdit={isEdit} />,
+      component: <BudgetSettings />,
     },
     {
       label: "Ads",
@@ -36,8 +32,8 @@ export function BaseForm({ isEdit }: Props) {
       label: "Ad Sets",
       path: `${url}/adSets`,
       queryParams: "?current=0",
-      content: <NewAdSet isEdit={isEdit} />,
-      component: <AdSetFields isEdit={isEdit} />,
+      content: <NewAdSet />,
+      component: <AdSetFields />,
     },
     {
       label: "Review",
@@ -48,10 +44,7 @@ export function BaseForm({ isEdit }: Props) {
 
   return (
     <Form>
-      <StepDrawer
-        steps={steps}
-        finalComponent={<PaymentButton isEdit={isEdit} />}
-      >
+      <StepDrawer steps={steps} finalComponent={<PaymentButton />}>
         <Switch>
           {steps.map((s) => (
             <Route path={s.path} key={s.path}>

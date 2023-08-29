@@ -19,7 +19,7 @@ export function ActionButtons() {
           component={RouterLink}
           size="small"
           color="error"
-          to="/user/main"
+          to="/user/main/campaign"
           onClick={() => {
             localStorage.removeItem(values.draftId!);
             setDrafts();
@@ -31,7 +31,7 @@ export function ActionButtons() {
       <Button
         size="small"
         component={RouterLink}
-        to="/user/main"
+        to="/user/main/campaign"
         startIcon={<ArrowBackIcon />}
       >
         Return to dashboard

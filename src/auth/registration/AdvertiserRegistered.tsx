@@ -41,7 +41,11 @@ export function AdvertiserRegistered({ error }: Props) {
           </Typography>
           <Typography variant="h5" sx={{ textAlign: "left" }}>
             In the meantime, check out our{" "}
-            <Link href="https://brave.com/brave-ads" target="_blank">
+            <Link
+              href="https://brave.com/brave-ads"
+              variant="h5"
+              target="_blank"
+            >
               advertiser resources
             </Link>
             . If you have any questions, please reach out to{" "}

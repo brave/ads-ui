@@ -12,8 +12,10 @@ import { Link as RouterLink, useHistory } from "react-router-dom";
 import { CampaignForm, initialAdSet } from "user/views/adsManager/types";
 import { useRef } from "react";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import { useIsEdit } from "form/FormikHelpers";
 
-export function NewAdSet(props: { isEdit: boolean }) {
+export function NewAdSet() {
+  const { isEdit } = useIsEdit();
   const history = useHistory();
   const { values } = useFormikContext<CampaignForm>();
   const params = new URLSearchParams(history.location.search);
@@ -34,7 +36,9 @@ export function NewAdSet(props: { isEdit: boolean }) {
                 <Link
                   component={RouterLink}
                   underline="none"
-                  onClick={() => (selected.current = idx)}
+                  onClick={() => {
+                    selected.current = idx;
+                  }}
                   to={`?current=${idx}`}
                   width="100%"
                   variant="overline"
@@ -51,7 +55,7 @@ export function NewAdSet(props: { isEdit: boolean }) {
                     {adSet.name || `Ad Set ${idx + 1}`}
                   </span>
                 </Link>
-                {idx > 0 && !props.isEdit && (
+                {idx > 0 && !adSet.id && (
                   <Tooltip title="Remove">
                     <IconButton
                       onClick={() => {
@@ -67,7 +71,7 @@ export function NewAdSet(props: { isEdit: boolean }) {
                 )}
               </Stack>
             ))}
-            {values.adSets.length <= 4 && !props.isEdit && (
+            {values.adSets.length <= 4 && !isEdit && (
               <Box
                 width="100%"
                 pb={0}
