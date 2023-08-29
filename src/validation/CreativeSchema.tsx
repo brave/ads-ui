@@ -12,7 +12,6 @@ const validTargetUrl = (label: string) =>
   Yup.string()
     .label(label)
     .required("URL is required")
-    .url()
     .matches(NoSpacesRegex, `URL must not contain any whitespace`)
     .matches(HttpsRegex, `URL must start with https://`)
     .matches(
