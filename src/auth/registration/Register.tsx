@@ -14,12 +14,10 @@ import { Background } from "components/Background/Background";
 import { LandingPageAppBar } from "components/AppBar/LandingPageAppBar";
 import { PaddedCardContainer } from "components/Card/PaddedCardContainer";
 import { PersistRegistrationValues } from "form/PersistRegistrationValues";
-import { useIsMobile } from "hooks/useIsMobile";
 
 export function Register() {
   const [activeStep, setActiveStep] = useState(0);
   const { register, hasRegistered, error } = useRegister();
-  const isMobile = useIsMobile();
 
   if (hasRegistered || error) {
     return (
@@ -37,7 +35,7 @@ export function Register() {
   return (
     <Background>
       <LandingPageAppBar />
-      <Toolbar sx={{ mb: isMobile ? undefined : 1.5, mt: 1 }} />
+      <Toolbar sx={{ mb: { xs: undefined, md: 1.5 }, mt: 1 }} />
       <Box display="flex" maxWidth="725px" flexDirection="column" mb={3}>
         <Typography textAlign="center" variant="h4" sx={{ mb: 3 }}>
           {steps[activeStep].label}

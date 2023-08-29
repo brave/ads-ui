@@ -66,7 +66,7 @@ export function LandingPageAppBar() {
           <Stack
             direction="row"
             alignItems="center"
-            spacing={isMobile ? 2 : 3}
+            spacing={{ xs: 2, md: 3 }}
             justifyContent="space-between"
           >
             <RouterLink to="/" style={{ marginTop: 5 }}>

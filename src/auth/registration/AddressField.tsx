@@ -2,11 +2,8 @@ import { Box, Stack, Typography } from "@mui/material";
 import { FormikTextField } from "form/FormikHelpers";
 import { CountryPicker } from "components/Country/CountryPicker";
 import { MarginedDivider } from "auth/registration/MarginedDivider";
-import { useIsMobile } from "hooks/useIsMobile";
 
 export function AddressField() {
-  const isMobile = useIsMobile();
-
   return (
     <Box flexGrow={1}>
       <Typography variant="subtitle1" gutterBottom width="100%">
@@ -48,7 +45,7 @@ export function AddressField() {
         useTopLabel
       />
 
-      <Stack direction={isMobile ? "column" : "row"} spacing={isMobile ? 2 : 1}>
+      <Stack direction={{ xs: "column", md: "row" }} spacing={{ xs: 2, md: 1 }}>
         <CountryPicker name="address.country" />
 
         <FormikTextField

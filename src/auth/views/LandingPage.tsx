@@ -28,7 +28,7 @@ export function LandingPage() {
         spacing={10}
         justifyContent="center"
       >
-        <Stack sx={{ maxWidth: "430px" }} spacing={isMobile ? 3 : 6}>
+        <Stack sx={{ maxWidth: "430px" }} spacing={{ xs: 3, md: 6 }}>
           <Typography variant={isMobile ? "h4" : "h3"} textAlign="left">
             <Typography variant="inherit" sx={GradientText}>
               Privacy-forward
@@ -38,7 +38,7 @@ export function LandingPage() {
 
           <Typography
             variant={isMobile ? "subtitle1" : "h6"}
-            fontWeight={isMobile ? 500 : undefined}
+            fontWeight={{ xs: 500, md: undefined }}
           >
             Reach and convert new customers through premium advertising on the
             Brave browser and search engine.
@@ -49,9 +49,9 @@ export function LandingPage() {
               variant="contained"
               component={RouterLink}
               sx={{
-                maxWidth: isMobile ? undefined : "165px",
-                maxHeight: isMobile ? "40px" : "60px",
-                padding: !isMobile ? "18px 24px 18px 24px" : 2,
+                maxWidth: { xs: undefined, md: "165px" },
+                maxHeight: { xs: "40px", md: "60px" },
+                padding: { xs: 2, md: "18px 24px 18px 24px" },
                 mb: 1,
               }}
               size={isMobile ? "medium" : "large"}
