@@ -36,7 +36,7 @@ export function LandingPage() {
             advertising made simple
           </Typography>
 
-          <Typography variant="h6" fontWeight={{ xs: 500, md: undefined }}>
+          <Typography variant="h6">
             Reach and convert new customers through premium advertising on the
             Brave browser and search engine.
           </Typography>
@@ -46,7 +46,7 @@ export function LandingPage() {
               variant="contained"
               component={RouterLink}
               sx={{
-                maxWidth: { xs: undefined, md: "165px" },
+                maxWidth: { md: "165px" },
                 maxHeight: { xs: "40px", md: "60px" },
                 padding: { xs: 2, md: "18px 24px 18px 24px" },
                 mb: 1,

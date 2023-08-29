@@ -55,7 +55,7 @@ export function LandingPageAppBar() {
         sx={{
           bgcolor: "rgba(252, 252, 253, 0.65)",
           boxShadow: "none",
-          height: { xs: undefined, md: "74px" },
+          height: { md: "74px" },
           justifyContent: "center",
         }}
       >

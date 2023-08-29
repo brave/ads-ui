@@ -35,7 +35,7 @@ export function Register() {
   return (
     <Background>
       <LandingPageAppBar />
-      <Toolbar sx={{ mb: { xs: undefined, md: 1.5 }, mt: 1 }} />
+      <Toolbar sx={{ mb: { md: 1.5 }, mt: 1 }} />
       <Box display="flex" maxWidth="725px" flexDirection="column" mb={3}>
         <Typography textAlign="center" variant="h4" sx={{ mb: 3 }}>
           {steps[activeStep].label}
