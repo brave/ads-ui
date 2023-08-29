@@ -1,22 +1,18 @@
 import { Link, Stack, Typography } from "@mui/material";
-import { useIsMobile } from "hooks/useIsMobile";
 
 interface Props {
   error?: string;
 }
 
 export function AdvertiserRegistered({ error }: Props) {
-  const isMobile = useIsMobile();
-  const variant = isMobile ? "h6" : "h5";
-
   return (
     <>
       {error ? (
         <Stack direction="column" alignItems="center" sx={{ mt: 5 }}>
-          <Typography variant={variant} sx={{ textAlign: "left", mb: 5 }}>
+          <Typography variant="h5" sx={{ textAlign: "left", mb: 5 }}>
             We encountered a problem creating your account.
           </Typography>
-          <Typography variant={variant} sx={{ textAlign: "left", mb: 5 }}>
+          <Typography variant="h5" sx={{ textAlign: "left", mb: 5 }}>
             Please reach out to
             <Link sx={{ ml: 1 }} href="mailto:selfserve@brave.com">
               selfserve@brave.com
@@ -25,7 +21,7 @@ export function AdvertiserRegistered({ error }: Props) {
           </Typography>
 
           <Link
-            variant={variant}
+            variant="h5"
             sx={{ textAlign: "center" }}
             underline="none"
             href=""
@@ -35,19 +31,19 @@ export function AdvertiserRegistered({ error }: Props) {
         </Stack>
       ) : (
         <Stack direction="column" alignItems="center">
-          <Typography variant={variant} sx={{ mb: 3 }}>
+          <Typography variant="h5" sx={{ mb: 3 }}>
             Thanks for your interest in Brave Ads! Our team will now carefully
             review the provided information.
           </Typography>
-          <Typography variant={variant} sx={{ mb: 3 }}>
+          <Typography variant="h5" sx={{ mb: 3 }}>
             Once the review process is complete, we will send you an email to
             notify you of the approval status and any further steps required.
           </Typography>
-          <Typography variant={variant} sx={{ textAlign: "left" }}>
+          <Typography variant="h5" sx={{ textAlign: "left" }}>
             In the meantime, check out our{" "}
             <Link
               href="https://brave.com/brave-ads"
-              variant={variant}
+              variant="h5"
               target="_blank"
             >
               advertiser resources

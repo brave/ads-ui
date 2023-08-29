@@ -29,17 +29,14 @@ export function LandingPage() {
         justifyContent="center"
       >
         <Stack sx={{ maxWidth: "430px" }} spacing={{ xs: 3, md: 6 }}>
-          <Typography variant={isMobile ? "h4" : "h3"} textAlign="left">
+          <Typography variant="h3" textAlign="left">
             <Typography variant="inherit" sx={GradientText}>
               Privacy-forward
             </Typography>{" "}
             advertising made simple
           </Typography>
 
-          <Typography
-            variant={isMobile ? "subtitle1" : "h6"}
-            fontWeight={{ xs: 500, md: undefined }}
-          >
+          <Typography variant="h6" fontWeight={{ xs: 500, md: undefined }}>
             Reach and convert new customers through premium advertising on the
             Brave browser and search engine.
           </Typography>
@@ -54,7 +51,6 @@ export function LandingPage() {
                 padding: { xs: 2, md: "18px 24px 18px 24px" },
                 mb: 1,
               }}
-              size={isMobile ? "medium" : "large"}
               to={isAuthenticated ? "/user/main" : "/register"}
             >
               {isAuthenticated ? "Dashboard" : "Get Started"}

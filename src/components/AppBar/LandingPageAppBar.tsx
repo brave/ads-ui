@@ -26,10 +26,7 @@ export function LandingPageAppBar() {
       component:
         isMobile || isAuthenticated ? null : (
           <RouterLink to={"/register"} style={{ textDecoration: "none" }}>
-            <Typography
-              variant={isMobile ? "body2" : "subtitle1"}
-              color="text.primary"
-            >
+            <Typography variant="subtitle1" color="text.primary">
               Get started
             </Typography>
           </RouterLink>
@@ -58,7 +55,7 @@ export function LandingPageAppBar() {
         sx={{
           bgcolor: "rgba(252, 252, 253, 0.65)",
           boxShadow: "none",
-          height: isMobile ? undefined : "74px",
+          height: { xs: undefined, md: "74px" },
           justifyContent: "center",
         }}
       >
@@ -86,7 +83,7 @@ export function LandingPageAppBar() {
                 to="/auth/link"
                 underline="none"
                 color="secondary"
-                variant="body2"
+                variant="subtitle1"
               >
                 Log in
               </Link>
@@ -108,14 +105,8 @@ interface HelpProps {
 }
 
 function HelpLink({ label, props }: HelpProps) {
-  const isMobile = useIsMobile();
   return (
-    <Link
-      variant={isMobile ? "body2" : "subtitle1"}
-      underline="none"
-      color="text.primary"
-      {...props}
-    >
+    <Link variant="subtitle1" underline="none" color="text.primary" {...props}>
       {label}
     </Link>
   );

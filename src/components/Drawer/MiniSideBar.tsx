@@ -21,7 +21,6 @@ import HeadsetMicOutlinedIcon from "@mui/icons-material/HeadsetMicOutlined";
 import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
 import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined";
 import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
-import { useIsMobile } from "hooks/useIsMobile";
 
 type RouteOption = {
   label: string;
@@ -173,7 +172,6 @@ interface SupportProps {
 export function SupportMenu({ usePlainLink }: SupportProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const isMobile = useIsMobile();
 
   const handleClick = (
     event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
@@ -198,7 +196,7 @@ export function SupportMenu({ usePlainLink }: SupportProps) {
       )}
       {usePlainLink && (
         <Link
-          variant={isMobile ? "body2" : "subtitle1"}
+          variant="subtitle1"
           underline="none"
           color="text.primary"
           sx={{ cursor: "pointer" }}
