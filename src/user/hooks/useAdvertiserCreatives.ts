@@ -8,6 +8,7 @@ export function useAdvertiserCreatives() {
     (c: Creative) => ({
       type: c.type,
       payloadNotification: c.payloadNotification,
+      payloadInlineContent: c.payloadInlineContent,
       id: c.id,
       advertiserId: c.advertiserId,
       name: c.name,
