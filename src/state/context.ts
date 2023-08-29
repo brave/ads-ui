@@ -31,3 +31,8 @@ export const FilterContext = createContext({
   fromDate: null as Date | null,
   setFromDate: (_d: Date | null) => {},
 });
+
+export const FormContext = createContext({
+  isShowingAds: false as boolean,
+  setIsShowingAds: (_b: boolean) => {},
+});

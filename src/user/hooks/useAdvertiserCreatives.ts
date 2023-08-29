@@ -1,34 +1,20 @@
-import { useAdvertiserCreativesQuery } from "graphql/creative.generated";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useFormikContext } from "formik";
 import { CampaignForm, Creative } from "user/views/adsManager/types";
 import _ from "lodash";
 
-export function useAdvertiserCreatives(): Creative[] {
-  const { advertiser } = useAdvertiser();
-  const { data } = useAdvertiserCreativesQuery({
-    variables: { advertiserId: advertiser.id },
-  });
-  return (data?.advertiser?.creatives ?? []).map((c) => ({
-    id: c.id,
-    name: c.name,
-    title: c.payloadNotification?.title ?? "New Ad",
-    body: c.payloadNotification?.body ?? "Body Preview",
-    targetUrl: c.payloadNotification?.targetUrl ?? "",
-    state: c.state,
-  }));
-}
-
-export function useRecentlyCreatedAdvertiserCreatives() {
+export function useAdvertiserCreatives() {
   const { values } = useFormikContext<CampaignForm>();
-  const creatives = useAdvertiserCreatives();
-  const inCampaign = creatives.filter((c) => {
-    if (c.id) {
-      return (values.creatives ?? []).includes(c.id);
-    }
+  const inAdSet: Creative[] = _.flatMap(values.adSets, "creatives").map(
+    (c: Creative) => ({
+      type: c.type,
+      payloadNotification: c.payloadNotification,
+      id: c.id,
+      advertiserId: c.advertiserId,
+      name: c.name,
+      state: c.state,
+      included: false,
+    }),
+  );
 
-    return false;
-  });
-
-  return _.uniqBy(inCampaign, "id");
+  return { creatives: _.uniqBy(inAdSet, "id") };
 }

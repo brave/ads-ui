@@ -13,14 +13,21 @@ import { CampaignForm, initialAdSet } from "user/views/adsManager/types";
 import { useRef } from "react";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { useIsEdit } from "form/FormikHelpers";
+import { useAdvertiserCreatives } from "user/hooks/useAdvertiserCreatives";
 
 export function NewAdSet() {
+  const { creatives } = useAdvertiserCreatives();
   const { isEdit } = useIsEdit();
   const history = useHistory();
   const { values } = useFormikContext<CampaignForm>();
   const params = new URLSearchParams(history.location.search);
   const selected = useRef(0);
   selected.current = Number(params.get("current") ?? 0);
+
+  const initial = {
+    ...initialAdSet,
+    creatives,
+  };
 
   return (
     <>
@@ -77,7 +84,7 @@ export function NewAdSet() {
                 pb={0}
                 pt={0}
                 component={Button}
-                onClick={() => helper.push(initialAdSet)}
+                onClick={() => helper.push(initial)}
                 border="1px solid #ededed"
               >
                 <Typography variant="overline" color="primary">

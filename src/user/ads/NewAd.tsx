@@ -1,34 +1,38 @@
-import { useRecentlyCreatedAdvertiserCreatives } from "user/hooks/useAdvertiserCreatives";
 import { CardContainer } from "components/Card/CardContainer";
-import { Box, Button, Stack } from "@mui/material";
-import { useState } from "react";
+import { Box, Button, Link } from "@mui/material";
+import { useContext, useEffect } from "react";
 import { BoxContainer } from "components/Box/BoxContainer";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import { NotificationPreview } from "user/ads/NotificationPreview";
-import { NotificationAd } from "user/ads/NotificationAd";
+import { CreativeSpecificFields } from "components/Creatives/CreativeSpecificFields";
 import { useField } from "formik";
+import { Creative, initialCreative } from "user/views/adsManager/types";
+import { FormContext } from "state/context";
+import { AdsExistingAd } from "user/ads/AdsExistingAd";
+import { CreativeSpecificPreview } from "components/Creatives/CreativeSpecificPreview";
+import { useAdvertiserCreatives } from "user/hooks/useAdvertiserCreatives";
 
 export function NewAd() {
+  const { creatives } = useAdvertiserCreatives();
+  const [, , newCreative] = useField<Creative | undefined>("newCreative");
   const [, meta, helper] = useField<boolean>("isCreating");
-  const [showForm, setShowForm] = useState(false);
-  const creatives = useRecentlyCreatedAdvertiserCreatives();
+  const { isShowingAds, setIsShowingAds } = useContext(FormContext);
+
+  useEffect(() => {
+    if (!meta.value) {
+      newCreative.setValue(initialCreative);
+      newCreative.setTouched(false);
+    }
+  }, [meta.value]);
 
   return (
     <>
-      <CardContainer header="Ads">
-        <Stack
-          direction="row"
-          justifyContent="left"
-          alignItems="center"
-          flexWrap="wrap"
-        >
-          {(creatives ?? []).map((c, idx) => (
-            <BoxContainer header={c.name} key={idx}>
-              <NotificationPreview title={c.title} body={c.body} />
-            </BoxContainer>
-          ))}
-          <BoxContainer header={showForm ? "Discard Ad" : "Create New Ad"}>
+      <CardContainer header="New Ads">
+        <CreativeSpecificPreview options={creatives}>
+          <BoxContainer
+            header={meta.value ? "Discard Ad" : "Create New Ad"}
+            useTypography
+          >
             <Box
               component={Button}
               height="80px"
@@ -37,26 +41,33 @@ export function NewAd() {
               border="1px solid #e2e2e2"
               onClick={() => {
                 helper.setValue(!meta.value);
-                setShowForm(!showForm);
+                setIsShowingAds(false);
               }}
             >
-              {showForm ? (
+              {meta.value ? (
                 <RemoveCircleOutlineIcon fontSize="large" />
               ) : (
                 <AddCircleOutlineIcon fontSize="large" />
               )}
             </Box>
           </BoxContainer>
-        </Stack>
+        </CreativeSpecificPreview>
+        {!isShowingAds && (
+          <Link
+            underline="none"
+            variant="subtitle1"
+            sx={{ cursor: "pointer" }}
+            onClick={() => {
+              setIsShowingAds(true);
+              helper.setValue(false);
+            }}
+          >
+            Use previously created Ads
+          </Link>
+        )}
       </CardContainer>
-      {showForm && (
-        <NotificationAd
-          onCreate={() => {
-            helper.setValue(false);
-            setShowForm(false);
-          }}
-        />
-      )}
+      {isShowingAds && <AdsExistingAd />}
+      {meta.value && <CreativeSpecificFields />}
     </>
   );
 }

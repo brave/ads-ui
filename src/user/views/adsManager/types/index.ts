@@ -1,8 +1,4 @@
-import {
-  CampaignFormat,
-  CampaignPacingStrategies,
-  PaymentType,
-} from "graphql/types";
+import { CampaignFormat, CreativeInput, PaymentType } from "graphql/types";
 import { defaultEndDate, defaultStartDate } from "form/DateFieldHelpers";
 import { MIN_PER_CAMPAIGN } from "validation/CampaignSchema";
 import { IAdvertiser } from "auth/context/auth.interface";
@@ -20,20 +16,16 @@ export type CampaignForm = {
   isCreating: boolean;
   currency: string;
   dailyBudget: number;
-  dailyCap: number;
   geoTargets: GeoTarget[];
   adSets: AdSetForm[];
   format: CampaignFormat;
   newCreative?: Creative;
-  creatives?: string[];
   name: string;
   state: string;
   type: "paid";
   // this is per click for CPC campaigns, but per thousand views for CPM campaigns
   price: number;
   billingType: Billing;
-  pacingStrategy: CampaignPacingStrategies;
-  hasPaymentIntent: boolean;
   paymentType: PaymentType;
 };
 
@@ -68,15 +60,13 @@ export type Segment = {
   name: string;
 };
 
-export type Creative = {
+export type Creative = CreativeInput & {
   id?: string;
-  name: string;
-  title: string;
-  body: string;
-  targetUrl: string;
-  targetUrlValidationResult?: string;
+  targetUrlValid?: string;
   state?: string;
-  creativeInstanceId?: string;
+  createdAt?: string;
+  modifiedAt?: string;
+  included: boolean;
 };
 
 export const initialConversion: Conversion = {
@@ -87,10 +77,15 @@ export const initialConversion: Conversion = {
 
 export const initialCreative: Creative = {
   name: "",
-  title: "",
-  body: "",
-  targetUrl: "",
+  advertiserId: "",
+  payloadNotification: {
+    title: "",
+    targetUrl: "",
+    body: "",
+  },
+  type: { code: "" },
   state: "draft",
+  included: false,
 };
 
 export const initialAdSet: AdSetForm = {
@@ -104,18 +99,17 @@ export const initialAdSet: AdSetForm = {
 
 export const initialCampaign = (advertiser: IAdvertiser): CampaignForm => {
   return {
+    isCreating: false,
     advertiserId: advertiser.id,
     startAt: defaultStartDate(),
     endAt: defaultEndDate(),
     validateStart: true,
-    isCreating: false,
     budget: MIN_PER_CAMPAIGN,
-    hasPaymentIntent: false,
-    currency: "USD",
     dailyBudget: MIN_PER_CAMPAIGN,
-    dailyCap: 1,
     geoTargets: [],
+    newCreative: initialCreative,
     billingType: "cpm",
+    currency: "USD",
     price: 6,
     adSets: [
       {
@@ -126,9 +120,6 @@ export const initialCampaign = (advertiser: IAdvertiser): CampaignForm => {
     name: "",
     state: "draft",
     type: "paid",
-    pacingStrategy: CampaignPacingStrategies.ModelV1,
     paymentType: advertiser.selfServicePaymentType,
-    newCreative: initialCreative,
-    creatives: [],
   };
 };

@@ -15,6 +15,35 @@ export type CreativeFragment = {
     title: string;
     targetUrl: string;
   } | null;
+  payloadNewTabPage?: {
+    logo?: {
+      imageUrl: string;
+      alt: string;
+      companyName: string;
+      destinationUrl: string;
+    } | null;
+    wallpapers?: Array<{
+      imageUrl: string;
+      focalPoint: { x: number; y: number };
+    }> | null;
+  } | null;
+  payloadInlineContent?: {
+    title: string;
+    ctaText: string;
+    imageUrl: string;
+    targetUrl: string;
+    dimensions: string;
+    description: string;
+  } | null;
+  payloadSearch?: { body: string; title: string; targetUrl: string } | null;
+  payloadSearchHomepage?: {
+    body: string;
+    imageUrl: string;
+    imageDarkModeUrl?: string | null;
+    targetUrl: string;
+    title: string;
+    ctaText: string;
+  } | null;
 };
 
 export type AdvertiserCreativesQueryVariables = Types.Exact<{
@@ -36,31 +65,86 @@ export type AdvertiserCreativesQuery = {
         title: string;
         targetUrl: string;
       } | null;
+      payloadNewTabPage?: {
+        logo?: {
+          imageUrl: string;
+          alt: string;
+          companyName: string;
+          destinationUrl: string;
+        } | null;
+        wallpapers?: Array<{
+          imageUrl: string;
+          focalPoint: { x: number; y: number };
+        }> | null;
+      } | null;
+      payloadInlineContent?: {
+        title: string;
+        ctaText: string;
+        imageUrl: string;
+        targetUrl: string;
+        dimensions: string;
+        description: string;
+      } | null;
+      payloadSearch?: { body: string; title: string; targetUrl: string } | null;
+      payloadSearchHomepage?: {
+        body: string;
+        imageUrl: string;
+        imageDarkModeUrl?: string | null;
+        targetUrl: string;
+        title: string;
+        ctaText: string;
+      } | null;
     }>;
   } | null;
 };
 
-export type CreateNotificationCreativeMutationVariables = Types.Exact<{
-  input: Types.CreateNotificationCreativeInput;
+export type CreateCreativeMutationVariables = Types.Exact<{
+  input: Types.CreativeInput;
 }>;
 
-export type CreateNotificationCreativeMutation = {
-  createNotificationCreative: {
+export type CreateCreativeMutation = {
+  createCreative: {
     id: string;
+    createdAt: any;
+    modifiedAt: any;
+    name: string;
+    state: string;
+    type: { code: string };
     payloadNotification?: {
       body: string;
       title: string;
       targetUrl: string;
     } | null;
+    payloadNewTabPage?: {
+      logo?: {
+        imageUrl: string;
+        alt: string;
+        companyName: string;
+        destinationUrl: string;
+      } | null;
+      wallpapers?: Array<{
+        imageUrl: string;
+        focalPoint: { x: number; y: number };
+      }> | null;
+    } | null;
+    payloadInlineContent?: {
+      title: string;
+      ctaText: string;
+      imageUrl: string;
+      targetUrl: string;
+      dimensions: string;
+      description: string;
+    } | null;
+    payloadSearch?: { body: string; title: string; targetUrl: string } | null;
+    payloadSearchHomepage?: {
+      body: string;
+      imageUrl: string;
+      imageDarkModeUrl?: string | null;
+      targetUrl: string;
+      title: string;
+      ctaText: string;
+    } | null;
   };
-};
-
-export type UpdateNotificationCreativeMutationVariables = Types.Exact<{
-  input: Types.UpdateNotificationCreativeInput;
-}>;
-
-export type UpdateNotificationCreativeMutation = {
-  updateNotificationCreative: { id: string };
 };
 
 export const CreativeFragmentDoc = gql`
@@ -77,6 +161,47 @@ export const CreativeFragmentDoc = gql`
       body
       title
       targetUrl
+    }
+    payloadNewTabPage {
+      logo {
+        imageUrl
+        alt
+        companyName
+        destinationUrl
+      }
+      wallpapers {
+        imageUrl
+        focalPoint {
+          x
+          y
+        }
+      }
+    }
+    payloadInlineContent {
+      title
+      ctaText
+      imageUrl
+      targetUrl
+      dimensions
+      description
+    }
+    payloadNotification {
+      body
+      title
+      targetUrl
+    }
+    payloadSearch {
+      body
+      title
+      targetUrl
+    }
+    payloadSearchHomepage {
+      body
+      imageUrl
+      imageDarkModeUrl
+      targetUrl
+      title
+      ctaText
     }
   }
 `;
@@ -147,114 +272,54 @@ export function refetchAdvertiserCreativesQuery(
 ) {
   return { query: AdvertiserCreativesDocument, variables: variables };
 }
-export const CreateNotificationCreativeDocument = gql`
-  mutation createNotificationCreative(
-    $input: CreateNotificationCreativeInput!
-  ) {
-    createNotificationCreative(createNotificationCreativeInput: $input) {
-      id
-      payloadNotification {
-        body
-        title
-        targetUrl
-      }
+export const CreateCreativeDocument = gql`
+  mutation createCreative($input: CreativeInput!) {
+    createCreative(creative: $input) {
+      ...Creative
     }
   }
+  ${CreativeFragmentDoc}
 `;
-export type CreateNotificationCreativeMutationFn = Apollo.MutationFunction<
-  CreateNotificationCreativeMutation,
-  CreateNotificationCreativeMutationVariables
+export type CreateCreativeMutationFn = Apollo.MutationFunction<
+  CreateCreativeMutation,
+  CreateCreativeMutationVariables
 >;
 
 /**
- * __useCreateNotificationCreativeMutation__
+ * __useCreateCreativeMutation__
  *
- * To run a mutation, you first call `useCreateNotificationCreativeMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateNotificationCreativeMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useCreateCreativeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateCreativeMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [createNotificationCreativeMutation, { data, loading, error }] = useCreateNotificationCreativeMutation({
+ * const [createCreativeMutation, { data, loading, error }] = useCreateCreativeMutation({
  *   variables: {
  *      input: // value for 'input'
  *   },
  * });
  */
-export function useCreateNotificationCreativeMutation(
+export function useCreateCreativeMutation(
   baseOptions?: Apollo.MutationHookOptions<
-    CreateNotificationCreativeMutation,
-    CreateNotificationCreativeMutationVariables
+    CreateCreativeMutation,
+    CreateCreativeMutationVariables
   >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<
-    CreateNotificationCreativeMutation,
-    CreateNotificationCreativeMutationVariables
-  >(CreateNotificationCreativeDocument, options);
+    CreateCreativeMutation,
+    CreateCreativeMutationVariables
+  >(CreateCreativeDocument, options);
 }
-export type CreateNotificationCreativeMutationHookResult = ReturnType<
-  typeof useCreateNotificationCreativeMutation
+export type CreateCreativeMutationHookResult = ReturnType<
+  typeof useCreateCreativeMutation
 >;
-export type CreateNotificationCreativeMutationResult =
-  Apollo.MutationResult<CreateNotificationCreativeMutation>;
-export type CreateNotificationCreativeMutationOptions =
-  Apollo.BaseMutationOptions<
-    CreateNotificationCreativeMutation,
-    CreateNotificationCreativeMutationVariables
-  >;
-export const UpdateNotificationCreativeDocument = gql`
-  mutation updateNotificationCreative(
-    $input: UpdateNotificationCreativeInput!
-  ) {
-    updateNotificationCreative(updateNotificationCreativeInput: $input) {
-      id
-    }
-  }
-`;
-export type UpdateNotificationCreativeMutationFn = Apollo.MutationFunction<
-  UpdateNotificationCreativeMutation,
-  UpdateNotificationCreativeMutationVariables
+export type CreateCreativeMutationResult =
+  Apollo.MutationResult<CreateCreativeMutation>;
+export type CreateCreativeMutationOptions = Apollo.BaseMutationOptions<
+  CreateCreativeMutation,
+  CreateCreativeMutationVariables
 >;
-
-/**
- * __useUpdateNotificationCreativeMutation__
- *
- * To run a mutation, you first call `useUpdateNotificationCreativeMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateNotificationCreativeMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateNotificationCreativeMutation, { data, loading, error }] = useUpdateNotificationCreativeMutation({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useUpdateNotificationCreativeMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    UpdateNotificationCreativeMutation,
-    UpdateNotificationCreativeMutationVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<
-    UpdateNotificationCreativeMutation,
-    UpdateNotificationCreativeMutationVariables
-  >(UpdateNotificationCreativeDocument, options);
-}
-export type UpdateNotificationCreativeMutationHookResult = ReturnType<
-  typeof useUpdateNotificationCreativeMutation
->;
-export type UpdateNotificationCreativeMutationResult =
-  Apollo.MutationResult<UpdateNotificationCreativeMutation>;
-export type UpdateNotificationCreativeMutationOptions =
-  Apollo.BaseMutationOptions<
-    UpdateNotificationCreativeMutation,
-    UpdateNotificationCreativeMutationVariables
-  >;

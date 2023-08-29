@@ -1,26 +1,25 @@
 import {
   CampaignFormat,
+  CampaignPacingStrategies,
   ConfirmationType,
   CreateAdInput,
   CreateCampaignInput,
-  CreateNotificationCreativeInput,
-  GeocodeInput,
   UpdateCampaignInput,
-  UpdateNotificationCreativeInput,
 } from "graphql/types";
 import { CampaignFragment } from "graphql/campaign.generated";
 import { AdFragment } from "graphql/ad-set.generated";
 import {
+  AdSetForm,
   Billing,
   CampaignForm,
   Conversion,
   Creative,
   initialCreative,
-  OS,
   Segment,
 } from "user/views/adsManager/types";
 import _ from "lodash";
 import BigNumber from "bignumber.js";
+import { CreativeFragment } from "graphql/creative.generated";
 
 const TYPE_CODE_LOOKUP: Record<string, string> = {
   notification_all_v1: "Push Notification",
@@ -36,14 +35,14 @@ export function transformNewForm(
 ): CreateCampaignInput {
   return {
     currency: form.currency,
-    dailyCap: form.dailyCap,
+    externalId: "",
+    dailyCap: 1,
     dailyBudget: form.dailyBudget,
     endAt: form.endAt,
-    pacingStrategy: form.pacingStrategy,
+    pacingStrategy: CampaignPacingStrategies.ModelV1,
     geoTargets: form.geoTargets.map((g) => ({ code: g.code, name: g.name })),
     name: form.name,
     advertiserId: form.advertiserId,
-    externalId: "",
     format: form.format,
     userId: userId,
     source: "self_serve",
@@ -54,13 +53,14 @@ export function transformNewForm(
     adSets: form.adSets.map((adSet) => ({
       name: adSet.name,
       billingType: form.billingType,
-      execution: "per_click",
       perDay: 1,
       segments: adSet.segments.map((s) => ({ code: s.code, name: s.name })),
       oses: adSet.oses,
       totalMax: 10,
       conversions: transformConversion(adSet.conversions),
-      ads: adSet.creatives.map((ad) => transformCreative(ad, form)),
+      ads: adSet.creatives
+        .filter((c) => c.included)
+        .map((ad) => transformCreative(ad, form)),
     })),
     paymentType: form.paymentType,
   };
@@ -96,44 +96,14 @@ export function transformCreative(
     priceType = ConfirmationType.Click;
   }
 
-  return {
-    webhooks: [],
-    creativeId: creative.id!,
+  const createInput: CreateAdInput = {
     price: price.toString(),
     priceType: priceType,
   };
-}
 
-export function creativeInput(
-  advertiserId: string,
-  creative: Creative,
-  userId?: string,
-): CreateNotificationCreativeInput | UpdateNotificationCreativeInput {
-  const baseNotification = {
-    advertiserId,
-    userId,
-    name: creative.name,
-    payload: {
-      title: creative.title,
-      body: creative.body,
-      targetUrl: creative.targetUrl,
-    },
-    state: creative.state,
-  };
+  createInput.creativeId = creative.id;
 
-  if (creative.id) {
-    return {
-      ...baseNotification,
-      creativeId: creative.id,
-    };
-  }
-
-  return {
-    ...baseNotification,
-    type: {
-      code: "notification_all_v1",
-    },
-  };
+  return createInput;
 }
 
 export function editCampaignValues(
@@ -153,33 +123,39 @@ export function editCampaignValues(
       const seg = adSet.segments ?? ([] as Segment[]);
 
       return {
-        ...adSet,
         id: adSet.id,
-        conversions: adSet.conversions ?? [],
-        oses: adSet.oses ?? ([] as OS[]),
-        segments: adSet.segments ?? ([] as Segment[]),
+        conversions: (adSet.conversions ?? []).map((c) => ({
+          id: c.id,
+          type: c.type,
+          observationWindow: c.observationWindow,
+          urlPattern: c.urlPattern,
+        })),
+        oses: (adSet.oses ?? []).map((o) => ({ name: o.name, code: o.code })),
+        segments: (adSet.segments ?? []).map((o) => ({
+          name: o.name,
+          code: o.code,
+        })),
         isNotTargeting: seg.length === 1 && seg[0].code === "Svp7l-zGN",
         name: adSet.name || adSet.id.split("-")[0],
-        creatives: creativeList(adSet.ads),
-      };
+        creatives: creativeList(advertiserId, adSet.ads, ads),
+      } as AdSetForm;
     }),
-    advertiserId,
-    hasPaymentIntent: campaign.hasPaymentIntent ?? false,
-    creatives: creativeList(ads).map((a) => a.id!),
-    newCreative: initialCreative,
     isCreating: false,
+    advertiserId,
+    newCreative: initialCreative,
+    currency: campaign.currency,
     price: price.toNumber(),
     billingType: billingType,
     validateStart: false,
     budget: campaign.budget,
-    currency: campaign.currency,
     dailyBudget: campaign.dailyBudget,
-    dailyCap: campaign.dailyCap,
     endAt: campaign.endAt,
     format: campaign.format,
-    geoTargets: campaign.geoTargets ?? ([] as GeocodeInput[]),
+    geoTargets: (campaign.geoTargets ?? []).map((g) => ({
+      code: g.code,
+      name: g.name,
+    })),
     name: campaign.name,
-    pacingStrategy: campaign.pacingStrategy,
     startAt: campaign.startAt,
     state: campaign.state,
     type: "paid",
@@ -187,25 +163,49 @@ export function editCampaignValues(
   };
 }
 
-function creativeList(ads?: AdFragment[] | null): Creative[] {
-  return _.uniqBy(
-    (ads ?? [])
-      .filter((ad) => ad.creative != null && ad.state !== "deleted")
+function creativeList(
+  advertiserId: string,
+  adSetAds?: AdFragment[] | null,
+  allAds?: AdFragment[] | null,
+): Creative[] {
+  const filterAds = (a?: AdFragment[] | null, included?: boolean) => {
+    return (a ?? [])
+      .filter((ad) => ad.creative !== null && ad.state !== "deleted")
       .map((ad) => {
         const c = ad.creative;
         return {
-          creativeInstanceId: ad.id,
-          id: c.id,
-          name: c.name,
-          targetUrl: c.payloadNotification!.targetUrl,
-          title: c.payloadNotification!.title,
-          body: c.payloadNotification!.body,
-          targetUrlValidationResult: "",
-          state: c.state,
+          ...validCreativeFields(c, advertiserId, included),
         };
-      }),
+      });
+  };
+
+  return _.uniqBy(
+    [...filterAds(adSetAds, true), ...filterAds(allAds, false)],
     "id",
   );
+}
+
+export function validCreativeFields(
+  c: CreativeFragment | Creative,
+  advertiserId: string,
+  included?: boolean,
+): Creative {
+  return {
+    advertiserId,
+    id: c.id,
+    included: included ?? false,
+    name: c.name,
+    targetUrlValid: "",
+    state: c.state,
+    type: { code: c.type.code },
+    payloadNotification: c.payloadNotification
+      ? {
+          title: c.payloadNotification.title,
+          body: c.payloadNotification.body,
+          targetUrl: c.payloadNotification.targetUrl,
+        }
+      : undefined,
+  };
 }
 
 export function transformEditForm(
@@ -214,9 +214,7 @@ export function transformEditForm(
 ): UpdateCampaignInput {
   return {
     budget: form.budget,
-    currency: form.currency,
     dailyBudget: form.dailyBudget,
-    dailyCap: form.dailyCap,
     endAt: form.endAt,
     id,
     name: form.name,
@@ -228,11 +226,12 @@ export function transformEditForm(
       id: adSet.id,
       segments: adSet.segments.map((v) => ({ code: v.code, name: v.name })),
       oses: adSet.oses.map((v) => ({ code: v.code, name: v.name })),
-      ads: adSet.creatives.map((ad) => ({
-        ...transformCreative(ad, form),
-        id: ad.creativeInstanceId,
-        creativeSetId: adSet.id,
-      })),
+      ads: adSet.creatives
+        .filter((c) => c.included)
+        .map((ad) => ({
+          ...transformCreative(ad, form),
+          creativeSetId: adSet.id,
+        })),
     })),
   };
 }
@@ -257,4 +256,27 @@ export function uiTextForCreativeTypeCode(creativeTypeCode: {
   code: string;
 }): string {
   return uiTextForCreativeType(creativeTypeCode.code);
+}
+
+export function isCreativeTypeApplicableToCampaignFormat(
+  creativeTypeCode: {
+    code: string;
+  },
+  format: CampaignFormat,
+): boolean {
+  const { code } = creativeTypeCode;
+  switch (code) {
+    case "notification_all_v1":
+      return format === CampaignFormat.PushNotification;
+    case "new_tab_page_all_v1":
+      return format === CampaignFormat.NtpSi;
+    case "inline_content_all_v1":
+      return format === CampaignFormat.NewsDisplayAd;
+    case "search_all_v1":
+      return format === CampaignFormat.Search;
+    case "search_homepage_all_v1":
+      return format === CampaignFormat.SearchHomepage;
+    default:
+      return false;
+  }
 }
