@@ -34,6 +34,7 @@ export function CampaignList({
   selectedCampaigns,
   onCampaignSelect,
 }: Props) {
+  let initialSort = 9;
   const [engagementData, setEngagementData] =
     useState<Map<string, EngagementOverview>>();
 
@@ -60,7 +61,7 @@ export function CampaignList({
           ...r,
           advertiserId: advertiser?.id ?? "",
         }),
-      sx: { width: "1px" },
+      sx: { width: "1px", p: 0 },
       sortable: false,
     },
     {
@@ -86,7 +87,7 @@ export function CampaignList({
       extendedRenderer: (r) => (
         <Status state={r.state} start={r.startAt} end={r.endAt} />
       ),
-      sx: { width: "10px" },
+      sx: { width: "1px", p: 0 },
     },
     {
       title: "Budget",
@@ -134,15 +135,10 @@ export function CampaignList({
       renderer: StandardRenderers.date,
       align: "right",
     },
-    {
-      title: "Created",
-      value: (c) => c.createdAt,
-      renderer: StandardRenderers.date,
-      align: "right",
-    },
   ];
 
   if (advertiser?.selfServiceCreate && advertiser.selfServiceEdit) {
+    initialSort += 1;
     columns.unshift({
       title: "",
       value: (c) => c.id,
@@ -155,13 +151,14 @@ export function CampaignList({
         />
       ),
       align: "center",
+      sx: { width: "1px" },
     });
   }
 
   return (
     <EnhancedTable
       rows={advertiser?.campaigns ?? []}
-      initialSortColumn={9}
+      initialSortColumn={initialSort}
       initialSortDirection="desc"
       columns={columns}
     />
@@ -182,6 +179,7 @@ const CampaignCheckBox = (props: CheckBoxProps) => {
     <Checkbox
       disabled={props.selectedCampaigns.length === 1 && !campaignSelected}
       size="small"
+      sx={{ p: 0 }}
       checked={campaignSelected}
       onChange={(e) =>
         props.onCampaignSelect(props.campaign.id, e.target.checked)

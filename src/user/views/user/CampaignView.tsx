@@ -68,7 +68,7 @@ export function CampaignView() {
         }
         sx={{
           flexGrow: 1,
-          mr: 2,
+          overflowX: "auto",
         }}
         additionalAction={<CampaignAgeFilter disabled={loading} />}
       >
