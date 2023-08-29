@@ -3,6 +3,7 @@ import { CardContainer } from "components/Card/CardContainer";
 import { CampaignDateRange } from "components/Campaigns/CampaignDateRange";
 import { LocationField } from "user/views/adsManager/views/advanced/components/campaign/fields/LocationField";
 import { Typography } from "@mui/material";
+import { FormatField } from "user/views/adsManager/views/advanced/components/campaign/fields/FormatField";
 
 export function CampaignSettings() {
   const { isDraft } = useIsEdit();
@@ -18,6 +19,8 @@ export function CampaignSettings() {
 
         <CampaignDateRange />
       </CardContainer>
+
+      {isDraft && <FormatField />}
 
       {isDraft && <LocationField />}
     </>

@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { Stack } from "@mui/material";
 import { CreateCreativeButton } from "components/Creatives/CreateCreativeButton";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { CardContainer } from "components/Card/CardContainer";
 export function InlineContentAd() {
   const { advertiser } = useAdvertiser();
   const [, , code] = useField<string>("newCreative.type.code");
@@ -18,7 +19,7 @@ export function InlineContentAd() {
   }, []);
 
   return (
-    <>
+    <CardContainer header="Create News Ad">
       <FormikTextField
         name="newCreative.payloadInlineContent.title"
         label="Title"
@@ -39,6 +40,6 @@ export function InlineContentAd() {
         <div />
         <CreateCreativeButton />
       </Stack>
-    </>
+    </CardContainer>
   );
 }
