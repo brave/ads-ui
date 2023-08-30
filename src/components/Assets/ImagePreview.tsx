@@ -1,4 +1,4 @@
-import { Box, LinearProgress, Link } from "@mui/material";
+import { Box, Link, Skeleton } from "@mui/material";
 import { useGetImagePreviewUrl } from "components/Assets/hooks/useGetImagePreviewUrl";
 import { ErrorDetail } from "components/Error/ErrorDetail";
 
@@ -12,7 +12,7 @@ export const ImagePreview = ({ url, height = 300, width = 360 }: Props) => {
   const { data, loading, error } = useGetImagePreviewUrl({ url });
 
   if (!data || loading) {
-    return <LinearProgress />;
+    return <Skeleton variant="rectangular" height={height} />;
   }
 
   if (error) {

@@ -1,17 +1,21 @@
 import { useAdvertiserImagesQuery } from "graphql/advertiser.generated";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
 import { useState } from "react";
 import { useField } from "formik";
 
+type ImageOption = { label: string; image?: string };
+
+const filter = createFilterOptions<ImageOption>();
+
 export function ImageAutocomplete() {
-  const [, meta, imageUrl] = useField(
+  const [, meta, imageUrl] = useField<string | undefined>(
     `newCreative.payloadInlineContent.imageUrl`,
   );
   const hasError = Boolean(meta.error);
   const showError = hasError && meta.touched;
   const { advertiser } = useAdvertiser();
-  const [options, setOptions] = useState<{ label: string; image: string }[]>();
+  const [options, setOptions] = useState<ImageOption[]>();
   const { loading } = useAdvertiserImagesQuery({
     variables: { id: advertiser.id },
     onCompleted(data) {
@@ -39,8 +43,17 @@ export function ImageAutocomplete() {
           margin="normal"
         />
       )}
+      value={{
+        label: options?.find((o) => o.image === meta.value)?.label ?? "",
+        image: meta.value,
+      }}
+      getOptionLabel={(o) => o.label}
+      filterOptions={(options, params) => {
+        const filtered = filter(options, params);
+        return [...filtered, { image: undefined, label: `Upload new image` }];
+      }}
       onChange={(e, nv) => {
-        imageUrl.setValue(nv!.image);
+        imageUrl.setValue(nv ? nv.image : undefined);
       }}
     />
   );
