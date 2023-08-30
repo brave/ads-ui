@@ -52,6 +52,15 @@ const appTheme = createTheme({
         },
       },
     },
+    MuiAlert: {
+      styleOverrides: {
+        root: {
+          borderRadius: "16px",
+          mt: 1,
+          mb: 1,
+        },
+      },
+    },
   },
 });
 

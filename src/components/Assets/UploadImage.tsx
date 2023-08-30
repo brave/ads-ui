@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useUploadFile } from "user/hooks/useUploadFile";
 import {
   Alert,
   Box,
   Button,
+  Chip,
   Dialog,
   DialogActions,
   DialogContent,
@@ -15,6 +15,7 @@ import {
   Stepper,
 } from "@mui/material";
 import { CampaignFormat } from "graphql/types";
+import { useUploadFile } from "components/Assets/hooks/useUploadFile";
 
 export interface UploadConfig {
   targetHost: () => string;
@@ -25,7 +26,7 @@ export interface UploadConfig {
 export function UploadImage() {
   const [open, setOpen] = useState(false);
   const [file, setFile] = useState<File>();
-  const [{ upload }, { step, error, loading, state }] = useUploadFile();
+  const [{ upload, reset }, { step, error, loading, state }] = useUploadFile();
 
   return (
     <Box>
@@ -39,7 +40,7 @@ export function UploadImage() {
             Images will be automatically scaled to this size.
           </DialogContentText>
 
-          <Stepper activeStep={step}>
+          <Stepper activeStep={step} sx={{ mt: 3 }}>
             <Step>
               <StepLabel>Choose</StepLabel>
             </Step>
@@ -51,8 +52,8 @@ export function UploadImage() {
             </Step>
           </Stepper>
 
-          <Box my={2} height={80} width={400}>
-            {step === 0 && (
+          <Box mt={3}>
+            {step === 0 && file === undefined && (
               <Button
                 variant="contained"
                 component="label"
@@ -67,31 +68,39 @@ export function UploadImage() {
                 />
               </Button>
             )}
+            {step === 0 && !!file && (
+              <Chip onDelete={() => setFile(undefined)} label={file.name} />
+            )}
 
             {!error && state && (
               <Alert severity={step !== 2 ? "info" : "success"}>{state}</Alert>
             )}
             {error !== undefined && <Alert severity="error">{error}</Alert>}
-            {loading && <LinearProgress />}
+            {loading && <LinearProgress sx={{ mt: 1 }} />}
           </Box>
         </DialogContent>
         <DialogActions>
           <Button
-            disabled={file === undefined}
             onClick={() => {
-              upload!(file!, CampaignFormat.NewsDisplayAd);
-            }}
-          >
-            Upload
-          </Button>
-          <Button
-            onClick={() => {
-              setFile(undefined);
               setOpen(false);
+              setFile(undefined);
+              reset!();
             }}
+            variant="outlined"
           >
-            Cancel
+            {step === 2 ? "Close" : "Cancel"}
           </Button>
+          {step !== 2 && (
+            <Button
+              disabled={file === undefined}
+              onClick={() => {
+                upload!(file!, CampaignFormat.NewsDisplayAd);
+              }}
+              variant="contained"
+            >
+              Upload
+            </Button>
+          )}
         </DialogActions>
       </Dialog>
     </Box>

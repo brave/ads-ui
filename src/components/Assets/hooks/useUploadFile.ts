@@ -1,10 +1,13 @@
 import { buildAdServerEndpoint, getEnvConfig } from "util/environment";
 import { useCallback, useState } from "react";
 import _ from "lodash";
-import { useUploadAdvertiserImageMutation } from "graphql/advertiser.generated";
+import {
+  refetchAdvertiserImagesQuery,
+  useUploadAdvertiserImageMutation,
+} from "graphql/advertiser.generated";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { CampaignFormat } from "graphql/types";
-import { UploadConfig } from "user/views/advertiser/UploadImage";
+import { UploadConfig } from "components/Assets/UploadImage";
 
 interface PutUploadResponse {
   // the pre-signed url to which the file should be uploaded to
@@ -20,19 +23,22 @@ export const useUploadFile = () => {
   const [state, setState] = useState<string>();
   const [loading, setLoading] = useState(false);
   const [mutate] = useUploadAdvertiserImageMutation({
+    refetchQueries: [
+      { ...refetchAdvertiserImagesQuery({ id: advertiser.id }) },
+    ],
     onError(e) {
       setError(e.message);
       setLoading(false);
+      setStep(0);
     },
     onCompleted(data) {
       setStep(2);
-      setState(`File upload complete for ${data.createAdvertiserImage.name}!`);
+      setState(`File upload complete for "${data.createAdvertiserImage.name}"`);
       setLoading(false);
     },
   });
 
   const uploadFile = useCallback(async (file: File, format: CampaignFormat) => {
-    setError(undefined);
     setLoading(true);
     setState("Preparing file for upload...");
 
@@ -42,6 +48,8 @@ export const useUploadFile = () => {
       upload = await prepareForUpload(extension);
     } catch (e: any) {
       setError(e.message);
+      setStep(0);
+      setLoading(false);
       return;
     }
 
@@ -51,6 +59,8 @@ export const useUploadFile = () => {
       setStep(1);
     } catch (e: any) {
       setError(e.message);
+      setStep(0);
+      setLoading(false);
       return;
     }
 
@@ -68,7 +78,17 @@ export const useUploadFile = () => {
     });
   }, []);
 
-  return [{ upload: uploadFile }, { state, step, loading, error }];
+  const resetForm = useCallback(() => {
+    setState(undefined);
+    setStep(0);
+    setError(undefined);
+    setLoading(false);
+  }, []);
+
+  return [
+    { upload: uploadFile, reset: resetForm },
+    { state, step, loading, error },
+  ];
 };
 
 async function prepareForUpload(extension: string): Promise<PutUploadResponse> {

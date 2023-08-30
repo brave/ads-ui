@@ -6,6 +6,7 @@ import { Stack } from "@mui/material";
 import { CreateCreativeButton } from "components/Creatives/CreateCreativeButton";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { CardContainer } from "components/Card/CardContainer";
+import { ImageAutocomplete } from "components/Assets/ImageAutocomplete";
 export function InlineContentAd() {
   const { advertiser } = useAdvertiser();
   const [, , code] = useField<string>("newCreative.type.code");
@@ -35,6 +36,8 @@ export function InlineContentAd() {
         label="Call to Action text"
         maxLengthInstantFeedback={15}
       />
+
+      <ImageAutocomplete />
 
       <Stack direction="row" justifyContent="space-between" mt={1}>
         <div />

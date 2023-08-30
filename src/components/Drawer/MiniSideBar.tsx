@@ -21,6 +21,7 @@ import HeadsetMicOutlinedIcon from "@mui/icons-material/HeadsetMicOutlined";
 import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
 import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined";
 import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
+import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 
 type RouteOption = {
   label: string;
@@ -32,6 +33,7 @@ type RouteOption = {
 
 const drawerWidth = 100;
 export default function MiniSideBar({ children }: PropsWithChildren) {
+  const { advertiser } = useAdvertiser();
   const dashboardRoutes: RouteOption[] = [
     {
       label: "Campaigns",
@@ -52,6 +54,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
           sx={{ color: "text.secondary" }}
         />
       ),
+      disabled: !advertiser.selfServiceCreate,
     },
     {
       label: "Creatives",
