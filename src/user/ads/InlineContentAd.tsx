@@ -23,7 +23,7 @@ export function InlineContentAd() {
   return (
     <Box display="flex" flexDirection="column" gap={2}>
       <CardContainer header="Create News Ad" sx={{ flexGrow: 1 }}>
-        <FormikTextField name="newCreative.name" label="Ad Name" />
+        <FormikTextField name="newCreative.name" label="Name" />
 
         <FormikTextField
           name="newCreative.payloadInlineContent.title"

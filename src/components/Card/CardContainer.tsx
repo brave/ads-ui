@@ -7,6 +7,7 @@ export function CardContainer(
     header?: ReactNode;
     additionalAction?: ReactNode;
     sx?: SxProps;
+    childSx?: SxProps;
   } & PropsWithChildren,
 ) {
   return (
@@ -23,7 +24,9 @@ export function CardContainer(
         </Stack>
       )}
       <Card>
-        <CardContent sx={{ p: 3 }}>{props.children}</CardContent>
+        <CardContent sx={{ p: 3, ...props.childSx }}>
+          {props.children}
+        </CardContent>
       </Card>
     </Box>
   );

@@ -16,8 +16,13 @@ interface PutUploadResponse {
   destinationPath: string;
 }
 
-export const useUploadFile = () => {
+interface Props {
+  onComplete?: (data: string) => void;
+}
+
+export const useUploadFile = ({ onComplete }: Props = {}) => {
   const { advertiser } = useAdvertiser();
+  const [url, setUrl] = useState<string>();
   const [error, setError] = useState<string>();
   const [step, setStep] = useState<number>(0);
   const [state, setState] = useState<string>();
@@ -35,6 +40,7 @@ export const useUploadFile = () => {
       setStep(2);
       setState(`File upload complete for "${data.createAdvertiserImage.name}"`);
       setLoading(false);
+      if (onComplete && url) onComplete(url);
     },
   });
 
@@ -64,15 +70,17 @@ export const useUploadFile = () => {
       return;
     }
 
+    const imageUrl = `https://${configForFormat(format).targetHost()}${
+      upload.destinationPath
+    }`;
+    setUrl(imageUrl);
     await mutate({
       variables: {
         input: {
           format: format,
           advertiserId: advertiser.id,
           name: file.name,
-          imageUrl: `https://${configForFormat(format).targetHost}${
-            upload.destinationPath
-          }`,
+          imageUrl,
         },
       },
     });

@@ -6,13 +6,19 @@ interface Props {
   url: string;
   height?: number;
   width?: number;
+  selected?: boolean;
 }
 
-export const ImagePreview = ({ url, height = 300, width = 360 }: Props) => {
+export const ImagePreview = ({
+  url,
+  height = 300,
+  width = 360,
+  selected,
+}: Props) => {
   const { data, loading, error } = useGetImagePreviewUrl({ url });
 
   if (!data || loading) {
-    return <Skeleton variant="rectangular" height={height} />;
+    return <Skeleton variant="rectangular" height={height} width={width} />;
   }
 
   if (error) {
@@ -28,7 +34,16 @@ export const ImagePreview = ({ url, height = 300, width = 360 }: Props) => {
       }}
     >
       {url?.endsWith(".pad") ? (
-        <img height={height} width={width} src={data} alt="preview" />
+        <img
+          height={height}
+          width={width}
+          src={data}
+          alt="preview"
+          style={{
+            opacity: selected === false ? 0.3 : 1,
+            filter: selected === false ? "grayscale(20%)" : "none",
+          }}
+        />
       ) : (
         <Link underline="none" href={url} target="_blank" rel="noreferrer">
           <img

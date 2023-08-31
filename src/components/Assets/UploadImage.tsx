@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Alert,
   Box,
@@ -16,6 +16,8 @@ import {
 } from "@mui/material";
 import { CampaignFormat } from "graphql/types";
 import { useUploadFile } from "components/Assets/hooks/useUploadFile";
+import { CardContainer } from "components/Card/CardContainer";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 export interface UploadConfig {
   targetHost: () => string;
@@ -23,14 +25,44 @@ export interface UploadConfig {
   endpoint: string;
 }
 
-export function UploadImage() {
+interface Props {
+  useInlineCreation?: boolean;
+  onComplete?: (url: string) => void;
+  onClose?: () => void;
+}
+
+export function UploadImage({ useInlineCreation, onClose, onComplete }: Props) {
   const [open, setOpen] = useState(false);
   const [file, setFile] = useState<File>();
-  const [{ upload, reset }, { step, error, loading, state }] = useUploadFile();
+  const [{ upload, reset }, { step, error, loading, state }] = useUploadFile({
+    onComplete(data) {
+      if (useInlineCreation && onComplete) {
+        onComplete(data);
+      }
+    },
+  });
+
+  useEffect(() => {
+    if (useInlineCreation) {
+      setOpen(true);
+    }
+  }, [useInlineCreation]);
 
   return (
-    <Box>
-      <Button onClick={() => setOpen(true)}>Upload Image</Button>
+    <>
+      {useInlineCreation === undefined && (
+        <CardContainer header="Upload Image">
+          <Box
+            component={Button}
+            borderRadius="12px"
+            onClick={() => setOpen(true)}
+            width={200}
+            height={423}
+          >
+            <AddCircleOutlineIcon fontSize="large" />
+          </Box>
+        </CardContainer>
+      )}
       <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle>Upload Image</DialogTitle>
         <DialogContent>
@@ -69,7 +101,11 @@ export function UploadImage() {
               </Button>
             )}
             {step === 0 && !!file && (
-              <Chip onDelete={() => setFile(undefined)} label={file.name} />
+              <Chip
+                onDelete={() => setFile(undefined)}
+                label={file.name}
+                sx={{ marginBottom: 1 }}
+              />
             )}
 
             {!error && state && (
@@ -85,6 +121,7 @@ export function UploadImage() {
               setOpen(false);
               setFile(undefined);
               reset!();
+              if (onClose) onClose();
             }}
             variant="outlined"
           >
@@ -92,7 +129,7 @@ export function UploadImage() {
           </Button>
           {step !== 2 && (
             <Button
-              disabled={file === undefined}
+              disabled={file === undefined || step !== 0}
               onClick={() => {
                 upload!(file!, CampaignFormat.NewsDisplayAd);
               }}
@@ -103,6 +140,6 @@ export function UploadImage() {
           )}
         </DialogActions>
       </Dialog>
-    </Box>
+    </>
   );
 }

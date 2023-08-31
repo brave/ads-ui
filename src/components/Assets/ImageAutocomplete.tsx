@@ -3,12 +3,14 @@ import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
 import { useState } from "react";
 import { useField } from "formik";
+import { UploadImage } from "components/Assets/UploadImage";
 
 type ImageOption = { label: string; image?: string };
 
 const filter = createFilterOptions<ImageOption>();
 
 export function ImageAutocomplete() {
+  const [createImage, setCreateImage] = useState(false);
   const [, meta, imageUrl] = useField<string | undefined>(
     `newCreative.payloadInlineContent.imageUrl`,
   );
@@ -30,31 +32,40 @@ export function ImageAutocomplete() {
   });
 
   return (
-    <Autocomplete
-      disablePortal
-      loading={!options || loading}
-      options={options ?? []}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          label="Image"
-          helperText={showError ? meta.error : undefined}
-          error={showError}
-          margin="normal"
-        />
-      )}
-      value={{
-        label: options?.find((o) => o.image === meta.value)?.label ?? "",
-        image: meta.value,
-      }}
-      getOptionLabel={(o) => o.label}
-      filterOptions={(options, params) => {
-        const filtered = filter(options, params);
-        return [...filtered, { image: undefined, label: `Upload new image` }];
-      }}
-      onChange={(e, nv) => {
-        imageUrl.setValue(nv ? nv.image : undefined);
-      }}
-    />
+    <>
+      <Autocomplete
+        disablePortal
+        loading={!options || loading}
+        options={options ?? []}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Image"
+            helperText={showError ? meta.error : undefined}
+            error={showError}
+            margin="normal"
+          />
+        )}
+        value={{
+          label: options?.find((o) => o.image === meta.value)?.label ?? "",
+          image: meta.value,
+        }}
+        getOptionLabel={(o) => o.label}
+        filterOptions={(options, params) => {
+          const filtered = filter(options, params);
+          return [...filtered, { image: undefined, label: `Upload new image` }];
+        }}
+        onChange={(e, nv) => {
+          imageUrl.setValue(nv ? nv.image : undefined);
+          setCreateImage(nv != null && nv.image === undefined);
+        }}
+      />
+
+      <UploadImage
+        useInlineCreation={createImage}
+        onClose={() => setCreateImage(false)}
+        onComplete={(url) => imageUrl.setValue(url)}
+      />
+    </>
   );
 }

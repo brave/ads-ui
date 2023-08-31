@@ -8,8 +8,10 @@ import _ from "lodash";
 import { useContext, useState } from "react";
 import { FormContext } from "state/context";
 import { useFormikContext } from "formik";
+import { CampaignFormat } from "graphql/types";
+import { ImagePreview } from "components/Assets/ImagePreview";
 
-export function NotificationSelect(props: {
+export function CreativeSelect(props: {
   options: Creative[];
   useSelectedAdStyle?: boolean;
   showState?: boolean;
@@ -68,9 +70,9 @@ export function NotificationSelect(props: {
             }
             key={idx}
           >
-            <NotificationPreview
-              title={co.payloadNotification?.title}
-              body={co.payloadNotification?.body}
+            <CreativeType
+              creative={co}
+              format={values.format}
               selected={isSelected(co)}
             />
             {!(props.hideCreated ?? false) && (
@@ -109,3 +111,31 @@ export function NotificationSelect(props: {
     </Box>
   );
 }
+
+const CreativeType = (props: {
+  creative: Creative;
+  format: CampaignFormat;
+  selected: boolean;
+}) => {
+  const co = props.creative;
+  if (props.format === CampaignFormat.PushNotification) {
+    return (
+      <NotificationPreview
+        title={co.payloadNotification?.title}
+        body={co.payloadNotification?.body}
+        selected={props.selected}
+      />
+    );
+  } else if (props.format === CampaignFormat.NewsDisplayAd) {
+    return (
+      <ImagePreview
+        url={co.payloadInlineContent?.imageUrl ?? ""}
+        width={300}
+        height={200}
+        selected={props.selected}
+      />
+    );
+  }
+
+  return null;
+};

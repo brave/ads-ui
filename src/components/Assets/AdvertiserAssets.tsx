@@ -3,17 +3,14 @@ import {
   useAdvertiserImagesQuery,
 } from "graphql/advertiser.generated";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import {
-  ColumnDescriptor,
-  EnhancedTable,
-  StandardRenderers,
-} from "components/EnhancedTable";
 import { ErrorDetail } from "components/Error/ErrorDetail";
 import { CardContainer } from "components/Card/CardContainer";
-import { Box, Skeleton } from "@mui/material";
+import { Grid, LinearProgress, Typography } from "@mui/material";
 import MiniSideBar from "components/Drawer/MiniSideBar";
 import { UploadImage } from "components/Assets/UploadImage";
 import { ImagePreview } from "components/Assets/ImagePreview";
+import { CampaignFormat } from "graphql/types";
+import moment from "moment/moment";
 
 export function AdvertiserAssets() {
   const { advertiser } = useAdvertiser();
@@ -21,45 +18,57 @@ export function AdvertiserAssets() {
     variables: { id: advertiser.id },
   });
 
-  const options: ColumnDescriptor<AdvertiserImageFragment>[] = [
-    {
-      title: "Created",
-      value: (c) => c.createdAt,
-      renderer: StandardRenderers.date,
-    },
-    {
-      title: "Name",
-      value: (c) => c.name,
-    },
-    {
-      title: "Image",
-      value: (c) => c.imageUrl,
-      extendedRenderer: (r) => <ImagePreview url={r.imageUrl} />,
-    },
-  ];
+  if (loading) {
+    return (
+      <MiniSideBar>
+        <LinearProgress sx={{ mt: 1, flexGrow: 1 }} />
+      </MiniSideBar>
+    );
+  }
 
+  const images = (data?.advertiser?.images ?? []).sort(
+    (a, b) => a.createdAt.getTime() - b.createdAt.getTime(),
+  );
   return (
     <MiniSideBar>
-      <CardContainer header="Assets" sx={{ minWidth: "50%" }}>
-        {loading && (
-          <Box m={3}>
-            <Skeleton variant="rounded" height={500} />
-          </Box>
-        )}
-        {error && (
-          <ErrorDetail
-            error={error}
-            additionalDetails="Unable to retrieve images"
-          />
-        )}
-        {!loading && !error && (
-          <EnhancedTable
-            rows={data?.advertiser?.images ?? []}
-            columns={options}
-          />
-        )}
-      </CardContainer>
-      <UploadImage />
+      {error && (
+        <ErrorDetail
+          error={error}
+          additionalDetails="Unable to retrieve images"
+        />
+      )}
+      {!loading && !error && (
+        <Grid container spacing={2}>
+          {images.map((i, idx) => (
+            <Grid item xs="auto" key={idx}>
+              <GalleryItem image={i} />
+            </Grid>
+          ))}
+          <Grid item xs="auto">
+            <UploadImage />
+          </Grid>
+        </Grid>
+      )}
     </MiniSideBar>
   );
 }
+
+const GalleryItem = (props: { image: AdvertiserImageFragment }) => {
+  const { name, imageUrl, createdAt, format } = props.image;
+  const height = format === CampaignFormat.NewsDisplayAd ? 400 : undefined;
+  const width = format === CampaignFormat.NewsDisplayAd ? 500 : undefined;
+
+  return (
+    <CardContainer header={name}>
+      <ImagePreview url={imageUrl} height={height} width={width} />
+      <Typography
+        variant="caption"
+        color="text.primary"
+        textAlign="right"
+        fontWeight={500}
+      >
+        created {moment(createdAt).fromNow()}
+      </Typography>
+    </CardContainer>
+  );
+};
