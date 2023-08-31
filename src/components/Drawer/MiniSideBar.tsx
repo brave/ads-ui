@@ -46,7 +46,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
       ),
     },
     {
-      label: "Assets",
+      label: "Images",
       href: "/user/main/assets",
       icon: (
         <InsertPhotoOutlinedIcon

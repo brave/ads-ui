@@ -1,7 +1,7 @@
 import { useAdvertiserImagesQuery } from "graphql/advertiser.generated";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useField } from "formik";
 import { UploadImage } from "components/Assets/UploadImage";
 
@@ -18,18 +18,19 @@ export function ImageAutocomplete() {
   const showError = hasError && meta.touched;
   const { advertiser } = useAdvertiser();
   const [options, setOptions] = useState<ImageOption[]>();
-  const { loading } = useAdvertiserImagesQuery({
+  const { data, loading } = useAdvertiserImagesQuery({
     variables: { id: advertiser.id },
-    onCompleted(data) {
-      const images = data.advertiser?.images ?? [];
-      const options = images.map((i) => ({
-        label: i.name,
-        image: i.imageUrl,
-      }));
-
-      setOptions(options);
-    },
   });
+
+  useEffect(() => {
+    const images = data?.advertiser?.images ?? [];
+    const options = images.map((i) => ({
+      label: i.name,
+      image: i.imageUrl,
+    }));
+
+    setOptions(options);
+  }, [data?.advertiser?.images]);
 
   return (
     <>

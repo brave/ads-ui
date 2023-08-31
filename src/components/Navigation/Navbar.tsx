@@ -1,21 +1,28 @@
-import { useRouteMatch, Link as RouterLink } from "react-router-dom";
 import { AppBar, Button, Divider, Stack, Toolbar } from "@mui/material";
 
 import { DraftMenu } from "components/Navigation/DraftMenu";
-import moment from "moment";
 import ads from "../../../branding.svg";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useSignOut } from "auth/hooks/mutations/useSignOut";
+import { NewCampaignButton } from "components/Navigation/NewCampaignButton";
+import { UploadImage } from "components/Assets/UploadImage";
+import { useHistory } from "react-router-dom";
 
 export function Navbar() {
   const { signOut } = useSignOut();
   const { advertiser } = useAdvertiser();
-  const { url } = useRouteMatch();
-  const isNewCampaignPage = url.includes("/user/main/adsmanager/advanced");
-  const isCompletePage = url.includes("/user/main/complete/new");
-  const newUrl = `/user/main/adsmanager/advanced/new/${moment()
-    .utc()
-    .valueOf()}/settings`;
+  const history = useHistory();
+
+  const buttons = [
+    {
+      route: "user/main/campaign",
+      component: <NewCampaignButton />,
+    },
+    {
+      route: "user/main/assets",
+      component: <UploadImage />,
+    },
+  ];
 
   return (
     <AppBar
@@ -35,18 +42,10 @@ export function Navbar() {
           {advertiser.selfServiceCreate && <DraftMenu />}
         </Stack>
         <div style={{ flexGrow: 1 }} />
-        {advertiser.selfServiceCreate && (
-          <Button
-            component={RouterLink}
-            to={newUrl}
-            size="medium"
-            variant="contained"
-            sx={{ mr: 3 }}
-            disabled={isNewCampaignPage || isCompletePage || !advertiser.agreed}
-          >
-            New Campaign
-          </Button>
-        )}
+        {
+          buttons.find((b) => history.location.pathname.includes(b.route))
+            ?.component
+        }
         <Button variant="outlined" size="medium" onClick={() => signOut()}>
           Sign out
         </Button>

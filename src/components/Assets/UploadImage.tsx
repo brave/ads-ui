@@ -16,8 +16,7 @@ import {
 } from "@mui/material";
 import { CampaignFormat } from "graphql/types";
 import { useUploadFile } from "components/Assets/hooks/useUploadFile";
-import { CardContainer } from "components/Card/CardContainer";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import { NewImageButton } from "components/Navigation/NewImageButton";
 
 export interface UploadConfig {
   targetHost: () => string;
@@ -51,17 +50,7 @@ export function UploadImage({ useInlineCreation, onClose, onComplete }: Props) {
   return (
     <>
       {useInlineCreation === undefined && (
-        <CardContainer header="Upload Image">
-          <Box
-            component={Button}
-            borderRadius="12px"
-            onClick={() => setOpen(true)}
-            width={200}
-            height={423}
-          >
-            <AddCircleOutlineIcon fontSize="large" />
-          </Box>
-        </CardContainer>
+        <NewImageButton onClick={() => setOpen(true)} />
       )}
       <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle>Upload Image</DialogTitle>

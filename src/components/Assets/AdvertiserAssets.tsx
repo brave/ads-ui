@@ -7,7 +7,6 @@ import { ErrorDetail } from "components/Error/ErrorDetail";
 import { CardContainer } from "components/Card/CardContainer";
 import { Grid, LinearProgress, Typography } from "@mui/material";
 import MiniSideBar from "components/Drawer/MiniSideBar";
-import { UploadImage } from "components/Assets/UploadImage";
 import { ImagePreview } from "components/Assets/ImagePreview";
 import { CampaignFormat } from "graphql/types";
 import moment from "moment/moment";
@@ -26,9 +25,6 @@ export function AdvertiserAssets() {
     );
   }
 
-  const images = (data?.advertiser?.images ?? []).sort(
-    (a, b) => a.createdAt.getTime() - b.createdAt.getTime(),
-  );
   return (
     <MiniSideBar>
       {error && (
@@ -39,14 +35,11 @@ export function AdvertiserAssets() {
       )}
       {!loading && !error && (
         <Grid container spacing={2}>
-          {images.map((i, idx) => (
+          {(data?.advertiser?.images ?? []).map((i, idx) => (
             <Grid item xs="auto" key={idx}>
               <GalleryItem image={i} />
             </Grid>
           ))}
-          <Grid item xs="auto">
-            <UploadImage />
-          </Grid>
         </Grid>
       )}
     </MiniSideBar>

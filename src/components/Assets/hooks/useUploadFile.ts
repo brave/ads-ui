@@ -51,7 +51,7 @@ export const useUploadFile = ({ onComplete }: Props = {}) => {
     let upload: PutUploadResponse;
     try {
       const extension = _.last(file.name.split(".")) ?? "";
-      upload = await prepareForUpload(extension);
+      upload = await prepareForUpload(extension, advertiser.id);
     } catch (e: any) {
       setError(e.message);
       setStep(0);
@@ -99,9 +99,16 @@ export const useUploadFile = ({ onComplete }: Props = {}) => {
   ];
 };
 
-async function prepareForUpload(extension: string): Promise<PutUploadResponse> {
+async function prepareForUpload(
+  extension: string,
+  advertiserId: string,
+): Promise<PutUploadResponse> {
   const resp = await fetch(
-    buildAdServerEndpoint(`/internal/image-upload/${extension}`),
+    buildAdServerEndpoint(
+      `/internal/image-upload/${extension}?advertiser_id=${encodeURIComponent(
+        advertiserId,
+      )}`,
+    ),
     {
       method: "GET",
       mode: "cors",
@@ -131,12 +138,11 @@ async function putFile(file: File, uploadTarget: PutUploadResponse) {
     });
 
     if (!resp.ok) {
-      await resp.text();
       throw new Error(`Failed to upload image`);
     }
   } catch (e: any) {
     if (e.message === "Failed to fetch") {
-      throw new Error(`Failed to upload image`);
+      throw new Error(`Failed to Fetch`);
     }
     throw e;
   }
