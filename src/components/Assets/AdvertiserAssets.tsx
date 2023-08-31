@@ -35,11 +35,15 @@ export function AdvertiserAssets() {
       )}
       {!loading && !error && (
         <Grid container spacing={2}>
-          {(data?.advertiser?.images ?? []).map((i, idx) => (
-            <Grid item xs="auto" key={idx}>
-              <GalleryItem image={i} />
-            </Grid>
-          ))}
+          {[...(data?.advertiser?.images ?? [])]
+            .sort(
+              (a, b) => moment(b.createdAt).date() - moment(a.createdAt).date(),
+            )
+            .map((i, idx) => (
+              <Grid item xs="auto" key={idx}>
+                <GalleryItem image={i} />
+              </Grid>
+            ))}
         </Grid>
       )}
     </MiniSideBar>
