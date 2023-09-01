@@ -68,16 +68,16 @@
     "@typescript-eslint/parser": "6.4.1",
     "@vitejs/plugin-basic-ssl": "1.0.1",
     "@vitejs/plugin-react": "4.0.4",
+    "eslint": "8.48.0",
+    "eslint-config-prettier": "9.0.0",
+    "eslint-plugin-react": "7.33.2",
     "husky": "8.0.3",
     "prettier": "3.0.2",
     "typescript": "5.2.2",
     "vite": "4.4.9",
     "vite-plugin-checker": "0.6.2",
     "vite-tsconfig-paths": "4.2.0",
-    "vitest": "0.34.3",
-    "eslint": "8.48.0",
-    "eslint-config-prettier": "9.0.0",
-    "eslint-plugin-react": "7.33.2"
+    "vitest": "0.34.3"
   },
   "overrides": {
     "semver": "7.5.4",
