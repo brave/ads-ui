@@ -1,7 +1,7 @@
 import { Stack, TextField } from "@mui/material";
 import { Dispatch } from "react";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 
 interface Props {
   from: Date;
@@ -17,7 +17,7 @@ export const DateRangePicker = ({
   onToChange,
 }: Props) => {
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
+    <LocalizationProvider dateAdapter={AdapterMoment}>
       <Stack direction="row" spacing={1} margin={1}>
         <DatePicker
           label="From"
