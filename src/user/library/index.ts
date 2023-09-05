@@ -175,6 +175,7 @@ function creativeList(
         const c = ad.creative;
         return {
           ...validCreativeFields(c, advertiserId, included),
+          createdAt: c.createdAt,
         };
       });
   };

@@ -12,6 +12,7 @@ export function useAdvertiserCreatives() {
       advertiserId: c.advertiserId,
       name: c.name,
       state: c.state,
+      createdAt: c.createdAt,
       included: false,
     }),
   );
