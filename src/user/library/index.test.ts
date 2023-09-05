@@ -449,6 +449,7 @@ describe("edit form tests", () => {
             "creatives": [
               {
                 "advertiserId": "12345",
+                "createdAt": undefined,
                 "id": "1234",
                 "included": true,
                 "name": "a creative",
@@ -465,6 +466,7 @@ describe("edit form tests", () => {
               },
               {
                 "advertiserId": "12345",
+                "createdAt": undefined,
                 "id": "1235",
                 "included": false,
                 "name": "a different creative",
@@ -501,6 +503,7 @@ describe("edit form tests", () => {
             "creatives": [
               {
                 "advertiserId": "12345",
+                "createdAt": undefined,
                 "id": "1234",
                 "included": true,
                 "name": "a creative",
@@ -517,6 +520,7 @@ describe("edit form tests", () => {
               },
               {
                 "advertiserId": "12345",
+                "createdAt": undefined,
                 "id": "1235",
                 "included": true,
                 "name": "a different creative",
