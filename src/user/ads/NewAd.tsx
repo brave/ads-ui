@@ -5,14 +5,20 @@ import { BoxContainer } from "components/Box/BoxContainer";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { CreativeSpecificFields } from "components/Creatives/CreativeSpecificFields";
-import { useField } from "formik";
-import { Creative, initialCreative } from "user/views/adsManager/types";
+import { useField, useFormikContext } from "formik";
+import {
+  CampaignForm,
+  Creative,
+  initialCreative,
+} from "user/views/adsManager/types";
 import { FormContext } from "state/context";
 import { AdsExistingAd } from "user/ads/AdsExistingAd";
 import { CreativeSpecificPreview } from "components/Creatives/CreativeSpecificPreview";
 import { useAdvertiserCreatives } from "user/hooks/useAdvertiserCreatives";
+import { CampaignFormat } from "graphql/types";
 
 export function NewAd() {
+  const { values } = useFormikContext<CampaignForm>();
   const { creatives } = useAdvertiserCreatives();
   const [, , newCreative] = useField<Creative | undefined>("newCreative");
   const [, meta, helper] = useField<boolean>("isCreating");
@@ -35,8 +41,16 @@ export function NewAd() {
           >
             <Box
               component={Button}
-              height="80px"
-              width="350px"
+              height={
+                values.format !== CampaignFormat.NewsDisplayAd
+                  ? "80px"
+                  : "200px"
+              }
+              width={
+                values.format !== CampaignFormat.NewsDisplayAd
+                  ? "350px"
+                  : "300px"
+              }
               borderRadius="13px"
               border="1px solid #e2e2e2"
               onClick={() => {

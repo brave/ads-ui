@@ -2,8 +2,7 @@ import { CardContainer } from "components/Card/CardContainer";
 import { Typography } from "@mui/material";
 import { CampaignForm } from "user/views/adsManager/types";
 import { useFormikContext } from "formik";
-import { CampaignFormat } from "graphql/types";
-import { NotificationSelect } from "components/Creatives/NotificationSelect";
+import { CreativeSelect } from "components/Creatives/CreativeSelect";
 
 interface Props {
   index: number;
@@ -18,12 +17,7 @@ export function AdSetAds({ index }: Props) {
         Select the Ads you would like to include in this ad set.
       </Typography>
 
-      {values.format === CampaignFormat.PushNotification && (
-        <NotificationSelect
-          index={index}
-          options={values.adSets[index].creatives}
-        />
-      )}
+      <CreativeSelect index={index} options={values.adSets[index].creatives} />
     </CardContainer>
   );
 }

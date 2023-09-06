@@ -124,6 +124,38 @@ export type AdvertiserCampaignsQuery = {
   } | null;
 };
 
+export type AdvertiserImageFragment = {
+  name: string;
+  imageUrl: string;
+  format: Types.CampaignFormat;
+  id: string;
+  createdAt: any;
+};
+
+export type AdvertiserImagesQueryVariables = Types.Exact<{
+  id: Types.Scalars["String"];
+}>;
+
+export type AdvertiserImagesQuery = {
+  advertiser?: {
+    images: Array<{
+      name: string;
+      imageUrl: string;
+      format: Types.CampaignFormat;
+      id: string;
+      createdAt: any;
+    }>;
+  } | null;
+};
+
+export type UploadAdvertiserImageMutationVariables = Types.Exact<{
+  input: Types.CreateAdvertiserImageInput;
+}>;
+
+export type UploadAdvertiserImageMutation = {
+  createAdvertiserImage: { name: string };
+};
+
 export const AdvertiserSummaryFragmentDoc = gql`
   fragment AdvertiserSummary on Advertiser {
     id
@@ -167,6 +199,15 @@ export const AdvertiserCampaignsFragmentDoc = gql`
     }
   }
   ${CampaignSummaryFragmentDoc}
+`;
+export const AdvertiserImageFragmentDoc = gql`
+  fragment AdvertiserImage on AdvertiserImage {
+    name
+    imageUrl
+    format
+    id
+    createdAt
+  }
 `;
 export const AdvertiserDocument = gql`
   query advertiser($id: String!) {
@@ -344,3 +385,119 @@ export function refetchAdvertiserCampaignsQuery(
 ) {
   return { query: AdvertiserCampaignsDocument, variables: variables };
 }
+export const AdvertiserImagesDocument = gql`
+  query advertiserImages($id: String!) {
+    advertiser(id: $id) {
+      images {
+        ...AdvertiserImage
+      }
+    }
+  }
+  ${AdvertiserImageFragmentDoc}
+`;
+
+/**
+ * __useAdvertiserImagesQuery__
+ *
+ * To run a query within a React component, call `useAdvertiserImagesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdvertiserImagesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdvertiserImagesQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useAdvertiserImagesQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    AdvertiserImagesQuery,
+    AdvertiserImagesQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<AdvertiserImagesQuery, AdvertiserImagesQueryVariables>(
+    AdvertiserImagesDocument,
+    options,
+  );
+}
+export function useAdvertiserImagesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    AdvertiserImagesQuery,
+    AdvertiserImagesQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    AdvertiserImagesQuery,
+    AdvertiserImagesQueryVariables
+  >(AdvertiserImagesDocument, options);
+}
+export type AdvertiserImagesQueryHookResult = ReturnType<
+  typeof useAdvertiserImagesQuery
+>;
+export type AdvertiserImagesLazyQueryHookResult = ReturnType<
+  typeof useAdvertiserImagesLazyQuery
+>;
+export type AdvertiserImagesQueryResult = Apollo.QueryResult<
+  AdvertiserImagesQuery,
+  AdvertiserImagesQueryVariables
+>;
+export function refetchAdvertiserImagesQuery(
+  variables: AdvertiserImagesQueryVariables,
+) {
+  return { query: AdvertiserImagesDocument, variables: variables };
+}
+export const UploadAdvertiserImageDocument = gql`
+  mutation uploadAdvertiserImage($input: CreateAdvertiserImageInput!) {
+    createAdvertiserImage(createImageInput: $input) {
+      name
+    }
+  }
+`;
+export type UploadAdvertiserImageMutationFn = Apollo.MutationFunction<
+  UploadAdvertiserImageMutation,
+  UploadAdvertiserImageMutationVariables
+>;
+
+/**
+ * __useUploadAdvertiserImageMutation__
+ *
+ * To run a mutation, you first call `useUploadAdvertiserImageMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUploadAdvertiserImageMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [uploadAdvertiserImageMutation, { data, loading, error }] = useUploadAdvertiserImageMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUploadAdvertiserImageMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UploadAdvertiserImageMutation,
+    UploadAdvertiserImageMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UploadAdvertiserImageMutation,
+    UploadAdvertiserImageMutationVariables
+  >(UploadAdvertiserImageDocument, options);
+}
+export type UploadAdvertiserImageMutationHookResult = ReturnType<
+  typeof useUploadAdvertiserImageMutation
+>;
+export type UploadAdvertiserImageMutationResult =
+  Apollo.MutationResult<UploadAdvertiserImageMutation>;
+export type UploadAdvertiserImageMutationOptions = Apollo.BaseMutationOptions<
+  UploadAdvertiserImageMutation,
+  UploadAdvertiserImageMutationVariables
+>;

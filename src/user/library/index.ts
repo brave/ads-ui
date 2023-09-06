@@ -206,6 +206,16 @@ export function validCreativeFields(
           targetUrl: c.payloadNotification.targetUrl,
         }
       : undefined,
+    payloadInlineContent: c.payloadInlineContent
+      ? {
+          ctaText: c.payloadInlineContent.ctaText,
+          description: c.payloadInlineContent.description,
+          dimensions: "900x750",
+          imageUrl: c.payloadInlineContent.imageUrl,
+          targetUrl: c.payloadInlineContent.targetUrl,
+          title: c.payloadInlineContent.title,
+        }
+      : undefined,
   };
 }
 

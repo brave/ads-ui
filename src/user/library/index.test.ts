@@ -453,6 +453,7 @@ describe("edit form tests", () => {
                 "id": "1234",
                 "included": true,
                 "name": "a creative",
+                "payloadInlineContent": undefined,
                 "payloadNotification": {
                   "body": "valid",
                   "targetUrl": "valid",
@@ -470,6 +471,7 @@ describe("edit form tests", () => {
                 "id": "1235",
                 "included": false,
                 "name": "a different creative",
+                "payloadInlineContent": undefined,
                 "payloadNotification": {
                   "body": "valid",
                   "targetUrl": "valid",
@@ -507,6 +509,7 @@ describe("edit form tests", () => {
                 "id": "1234",
                 "included": true,
                 "name": "a creative",
+                "payloadInlineContent": undefined,
                 "payloadNotification": {
                   "body": "valid",
                   "targetUrl": "valid",
@@ -524,6 +527,7 @@ describe("edit form tests", () => {
                 "id": "1235",
                 "included": true,
                 "name": "a different creative",
+                "payloadInlineContent": undefined,
                 "payloadNotification": {
                   "body": "valid",
                   "targetUrl": "valid",

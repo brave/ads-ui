@@ -89,6 +89,10 @@ export function CampaignView() {
 }
 
 function CampaignHeader(props: { selectedCampaigns: string[] }) {
+  const editableCampaigns = [
+    CampaignFormat.PushNotification,
+    CampaignFormat.NewsDisplayAd,
+  ];
   const oneCampaignSelected = props.selectedCampaigns.length === 1;
   const firstCampaign = oneCampaignSelected ? props.selectedCampaigns[0] : null;
   const { data, loading } = useLoadCampaignQuery({
@@ -101,7 +105,7 @@ function CampaignHeader(props: { selectedCampaigns: string[] }) {
   if (!loading && data?.campaign) {
     isValidCampaign =
       data.campaign.source === CampaignSource.SelfServe &&
-      data.campaign.format === CampaignFormat.PushNotification &&
+      editableCampaigns.includes(data.campaign.format) &&
       data.campaign.state !== "completed";
     tooltip = isValidCampaign ? null : "Cannot edit this campaign";
   }

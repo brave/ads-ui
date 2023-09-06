@@ -19,7 +19,7 @@ import { CampaignForm } from "user/views/adsManager/types";
 import { CardContainer } from "components/Card/CardContainer";
 import SearchIcon from "@mui/icons-material/Search";
 import { useContext, useRef, useState } from "react";
-import { NotificationSelect } from "components/Creatives/NotificationSelect";
+import { CreativeSelect } from "components/Creatives/CreativeSelect";
 import { FormContext } from "state/context";
 import { useAdvertiserCreatives } from "user/hooks/useAdvertiserCreatives";
 
@@ -129,7 +129,7 @@ const CreativeSpecificSelect = (props: {
 
   if (props.format === CampaignFormat.PushNotification)
     return (
-      <NotificationSelect
+      <CreativeSelect
         options={props.options.map((o) => ({
           ...o,
           advertiserId: advertiser.id,
