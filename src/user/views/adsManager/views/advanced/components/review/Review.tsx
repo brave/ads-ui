@@ -4,7 +4,6 @@ import { Box } from "@mui/material";
 import { useEffect } from "react";
 import { CampaignReview } from "./components/CampaignReview";
 import { AdSetReview } from "./components/AdSetReview";
-import { AdReview } from "user/views/adsManager/views/advanced/components/review/components/AdReview";
 
 export function Review() {
   const { values, errors, setTouched } = useFormikContext<CampaignForm>();
@@ -20,13 +19,12 @@ export function Review() {
     <Box display="flex" flexDirection="column" flexGrow={1}>
       <CampaignReview values={values} errors={errors} />
 
-      <AdReview />
-
       {values.adSets.map((adSet, adSetIdx) => (
         <AdSetReview
           key={`adSetReview-${adSetIdx}`}
           idx={adSetIdx}
           adSet={adSet}
+          format={values.format}
           errors={errors.adSets?.[adSetIdx]}
         />
       ))}

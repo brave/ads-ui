@@ -36,14 +36,15 @@ export function EditCampaign() {
     fetchPolicy: "cache-and-network",
   });
 
+  const hasPaymentIntent = initialData?.campaign?.hasPaymentIntent;
   const [mutation] = useUpdateCampaignMutation({
     onCompleted(data) {
-      if (initialData?.campaign?.hasPaymentIntent) {
+      if (hasPaymentIntent) {
         history.push(
           `/user/main/complete/edit?referenceId=${data.updateCampaign.id}`,
         );
       } else {
-        createPaymentSession(data.updateCampaign.id);
+        void createPaymentSession(data.updateCampaign.id);
       }
     },
     onError() {
@@ -85,7 +86,7 @@ export function EditCampaign() {
         }}
         validationSchema={CampaignSchema}
       >
-        <BaseForm />
+        <BaseForm hasPaymentIntent={hasPaymentIntent} />
       </Formik>
     </Container>
   );

@@ -42,6 +42,35 @@ export type AdSetFragment = {
         title: string;
         targetUrl: string;
       } | null;
+      payloadNewTabPage?: {
+        logo?: {
+          imageUrl: string;
+          alt: string;
+          companyName: string;
+          destinationUrl: string;
+        } | null;
+        wallpapers?: Array<{
+          imageUrl: string;
+          focalPoint: { x: number; y: number };
+        }> | null;
+      } | null;
+      payloadInlineContent?: {
+        title: string;
+        ctaText: string;
+        imageUrl: string;
+        targetUrl: string;
+        dimensions: string;
+        description: string;
+      } | null;
+      payloadSearch?: { body: string; title: string; targetUrl: string } | null;
+      payloadSearchHomepage?: {
+        body: string;
+        imageUrl: string;
+        imageDarkModeUrl?: string | null;
+        targetUrl: string;
+        title: string;
+        ctaText: string;
+      } | null;
     };
   }> | null;
 };
@@ -62,6 +91,35 @@ export type AdFragment = {
       body: string;
       title: string;
       targetUrl: string;
+    } | null;
+    payloadNewTabPage?: {
+      logo?: {
+        imageUrl: string;
+        alt: string;
+        companyName: string;
+        destinationUrl: string;
+      } | null;
+      wallpapers?: Array<{
+        imageUrl: string;
+        focalPoint: { x: number; y: number };
+      }> | null;
+    } | null;
+    payloadInlineContent?: {
+      title: string;
+      ctaText: string;
+      imageUrl: string;
+      targetUrl: string;
+      dimensions: string;
+      description: string;
+    } | null;
+    payloadSearch?: { body: string; title: string; targetUrl: string } | null;
+    payloadSearchHomepage?: {
+      body: string;
+      imageUrl: string;
+      imageDarkModeUrl?: string | null;
+      targetUrl: string;
+      title: string;
+      ctaText: string;
     } | null;
   };
 };
@@ -108,6 +166,39 @@ export type CreateAdSetMutation = {
           body: string;
           title: string;
           targetUrl: string;
+        } | null;
+        payloadNewTabPage?: {
+          logo?: {
+            imageUrl: string;
+            alt: string;
+            companyName: string;
+            destinationUrl: string;
+          } | null;
+          wallpapers?: Array<{
+            imageUrl: string;
+            focalPoint: { x: number; y: number };
+          }> | null;
+        } | null;
+        payloadInlineContent?: {
+          title: string;
+          ctaText: string;
+          imageUrl: string;
+          targetUrl: string;
+          dimensions: string;
+          description: string;
+        } | null;
+        payloadSearch?: {
+          body: string;
+          title: string;
+          targetUrl: string;
+        } | null;
+        payloadSearchHomepage?: {
+          body: string;
+          imageUrl: string;
+          imageDarkModeUrl?: string | null;
+          targetUrl: string;
+          title: string;
+          ctaText: string;
         } | null;
       };
     }> | null;
@@ -156,6 +247,39 @@ export type UpdateAdSetMutation = {
           body: string;
           title: string;
           targetUrl: string;
+        } | null;
+        payloadNewTabPage?: {
+          logo?: {
+            imageUrl: string;
+            alt: string;
+            companyName: string;
+            destinationUrl: string;
+          } | null;
+          wallpapers?: Array<{
+            imageUrl: string;
+            focalPoint: { x: number; y: number };
+          }> | null;
+        } | null;
+        payloadInlineContent?: {
+          title: string;
+          ctaText: string;
+          imageUrl: string;
+          targetUrl: string;
+          dimensions: string;
+          description: string;
+        } | null;
+        payloadSearch?: {
+          body: string;
+          title: string;
+          targetUrl: string;
+        } | null;
+        payloadSearchHomepage?: {
+          body: string;
+          imageUrl: string;
+          imageDarkModeUrl?: string | null;
+          targetUrl: string;
+          title: string;
+          ctaText: string;
         } | null;
       };
     }> | null;
