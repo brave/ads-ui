@@ -7,7 +7,7 @@ export function NameField() {
     <Box flexGrow={1}>
       <Typography variant="subtitle1" gutterBottom>
         Thank you for choosing Brave&rsquo;s Ads Platform! Let&rsquo;s get you
-        setup with your account. First, we&rsquo;ll need your info.
+        set up with your account. First, we&rsquo;ll need your info.
       </Typography>
 
       <MarginedDivider />
