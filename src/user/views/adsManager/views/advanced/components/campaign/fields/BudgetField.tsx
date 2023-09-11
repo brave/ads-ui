@@ -76,7 +76,7 @@ export function BudgetField() {
             .
           </Typography>
         ) : (
-          <Stack direction="row" spacing={2} alignItems="center">
+          <Stack direction="column" spacing={2} alignItems="flex-start">
             <FormikTextField
               fullWidth={false}
               name="price"
