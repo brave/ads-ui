@@ -13,9 +13,18 @@ import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import _ from "lodash";
 import { CardContainer } from "components/Card/CardContainer";
 import { uiLabelsForBillingType } from "util/billingType";
+import { uiTextForCampaignFormat } from "user/library";
+import { CampaignFormat } from "graphql/types";
+
+type DefaultPrice = { cpm: number; cpc: number };
+const campaignDefaultPrices = new Map<CampaignFormat, DefaultPrice>([
+  [CampaignFormat.PushNotification, { cpm: 6, cpc: 0.1 }],
+  [CampaignFormat.NewsDisplayAd, { cpm: 10, cpc: 0.15 }],
+]);
 
 export function BudgetField() {
   const [, , dailyBudget] = useField<number>("dailyBudget");
+  const [, , price] = useField<number>("price");
   const { isDraft } = useIsEdit();
   const { advertiser } = useAdvertiser();
   const { values, errors } = useFormikContext<CampaignForm>();
@@ -69,7 +78,8 @@ export function BudgetField() {
 
         {!advertiser.selfServiceSetPrice ? (
           <Typography variant="body2">
-            Campaigns are priced at a flat rate of{" "}
+            {uiTextForCampaignFormat(values.format)} campaigns are priced at a
+            flat rate of{" "}
             <strong>
               ${values.price} {_.upperCase(values.billingType)}
             </strong>
@@ -92,6 +102,13 @@ export function BudgetField() {
 
             <FormikRadioControl
               name="billingType"
+              onChange={(e) => {
+                const defaultPrice = campaignDefaultPrices.get(values.format);
+                if (defaultPrice)
+                  price.setValue(
+                    defaultPrice[e.target.value as keyof DefaultPrice],
+                  );
+              }}
               options={[
                 {
                   value: "cpm",
@@ -102,7 +119,9 @@ export function BudgetField() {
                   label: uiLabelsForBillingType("cpc").longLabel,
                 },
               ]}
-              disabled={!isDraft}
+              disabled={
+                !isDraft || values.format === CampaignFormat.NewsDisplayAd
+              }
             />
           </Stack>
         )}
