@@ -187,6 +187,7 @@ export type CreateCampaignInput = {
   name: Scalars["String"];
   pacingStrategy?: InputMaybe<CampaignPacingStrategies>;
   paymentType?: InputMaybe<PaymentType>;
+  priority?: InputMaybe<Scalars["Float"]>;
   source: Scalars["String"];
   startAt: Scalars["DateTime"];
   state: Scalars["String"];

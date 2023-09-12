@@ -15,7 +15,7 @@ export function NotificationAd() {
   }, []);
 
   return (
-    <CardContainer header="New Ad">
+    <CardContainer header="Create Notification Ad">
       <FormikTextField name="newCreative.name" label="Ad Name" />
 
       <Stack direction="row" alignItems="center" spacing={1}>

@@ -1,18 +1,29 @@
 import { object, string } from "yup";
-import { HttpsRegex, NoSpacesRegex, SimpleUrlRegexp } from "validation/regex";
+import {
+  HttpsRegex,
+  NoSpacesRegex,
+  PrivateCdnRegex,
+  SimpleUrlRegexp,
+} from "validation/regex";
 import _ from "lodash";
+import * as Yup from "yup";
+
+const validTargetUrl = (label: string) =>
+  Yup.string()
+    .label(label)
+    .required("URL is required")
+    .matches(NoSpacesRegex, `URL must not contain any whitespace`)
+    .matches(HttpsRegex, `URL must start with https://`)
+    .matches(
+      SimpleUrlRegexp,
+      `Please enter a valid URL, for example https://brave.com`,
+    );
 
 export const CreativeSchema = object().shape({
   name: string().label("Creative Name").required(),
   type: object().shape({
     code: string()
-      .oneOf([
-        "notification_all_v1",
-        "new_tab_page_all_v1",
-        "inline_content_all_v1",
-        "search_all_v1",
-        "search_homepage_all_v1",
-      ])
+      .oneOf(["notification_all_v1", "inline_content_all_v1"])
       .label("Creative Type")
       .required("Creative Type is required"),
     name: string(),
@@ -33,16 +44,26 @@ export const CreativeSchema = object().shape({
       then: (schema) =>
         schema.required().shape({
           body: string().label("Body").required().max(60),
-          targetUrl: string()
-            .label("Target Url")
-            .required("URL is required")
-            .matches(NoSpacesRegex, `URL must not contain any whitespace`)
-            .matches(HttpsRegex, `URL must start with https://`)
-            .matches(
-              SimpleUrlRegexp,
-              `Please enter a valid Ad URL, for example https://brave.com`,
-            ),
+          targetUrl: validTargetUrl("Target URL"),
           title: string().label("Title").required().max(30),
+        }),
+    }),
+  payloadInlineContent: object()
+    .nullable()
+    .when("type.code", {
+      is: "inline_content_all_v1",
+      then: (schema) =>
+        schema.required().shape({
+          ctaText: string().label("Call to Action text").max(15).required(),
+          description: string().label("Description").required(),
+          dimensions: string().label("Image Dimensions").required(),
+          imageUrl: string()
+            .label("Image URL")
+            .url()
+            .required()
+            .matches(PrivateCdnRegex, "URL must be hosted on our private CDN"),
+          targetUrl: validTargetUrl("Target URL"),
+          title: string().label("Title").max(90).required(),
         }),
     }),
 });

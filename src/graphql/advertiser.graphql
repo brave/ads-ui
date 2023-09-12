@@ -56,3 +56,25 @@ query advertiserCampaigns($id: String!, $filter: AdvertiserCampaignFilter) {
     ...AdvertiserCampaigns
   }
 }
+
+fragment AdvertiserImage on AdvertiserImage {
+  name
+  imageUrl
+  format
+  id
+  createdAt
+}
+
+query advertiserImages($id: String!) {
+  advertiser(id: $id) {
+    images {
+      ...AdvertiserImage
+    }
+  }
+}
+
+mutation uploadAdvertiserImage($input: CreateAdvertiserImageInput!) {
+  createAdvertiserImage(createImageInput: $input) {
+    name
+  }
+}

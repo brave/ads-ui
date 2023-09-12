@@ -6,6 +6,7 @@ import { PropsWithChildren } from "react";
 import { useField } from "formik";
 import { Creative } from "user/views/adsManager/types";
 import { DisplayError } from "user/views/adsManager/views/advanced/components/review/components/ReviewField";
+import { ImagePreview } from "components/Assets/ImagePreview";
 
 interface Props extends PropsWithChildren {
   options: Creative[];
@@ -28,6 +29,16 @@ export function CreativeSpecificPreview({
         <NotificationPreview
           title={c.payloadNotification?.title}
           body={c.payloadNotification?.body}
+        />
+      </BoxContainer>
+    ));
+  } else if (format.value === CampaignFormat.NewsDisplayAd) {
+    component = options.map((c, idx) => (
+      <BoxContainer header={c.name} useTypography key={idx}>
+        <ImagePreview
+          url={c.payloadInlineContent?.imageUrl ?? ""}
+          width={300}
+          height={200}
         />
       </BoxContainer>
     ));
