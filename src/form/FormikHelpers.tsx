@@ -1,4 +1,9 @@
-import { HTMLInputTypeAttribute, PropsWithChildren, ReactNode } from "react";
+import {
+  ChangeEventHandler,
+  HTMLInputTypeAttribute,
+  PropsWithChildren,
+  ReactNode,
+} from "react";
 import {
   Box,
   Button,
@@ -97,15 +102,24 @@ export const FormikSwitch = (props: FormikSwitchProps) => {
 interface FormikRadioGroupProps {
   name: string;
   row?: boolean;
+  onChange?: ChangeEventHandler<any>;
 }
 
 export const FormikRadioGroup = (
   props: PropsWithChildren<FormikRadioGroupProps>,
 ) => {
-  const [field] = useField(props);
+  const [field, meta, helper] = useField(props);
   return (
     <>
-      <RadioGroup {...props} {...field} />
+      <RadioGroup
+        {...props}
+        {...field}
+        value={meta.value}
+        onChange={(e, nv) => {
+          helper.setValue(nv);
+          if (props.onChange) props.onChange(e);
+        }}
+      />
       <ErrorMessage name={field.name}>
         {(msg: string) => <FormHelperText error>{msg}</FormHelperText>}
       </ErrorMessage>
@@ -119,6 +133,7 @@ interface FormikRadioControlProps {
   label?: string;
   helperText?: ReactNode;
   disabled?: boolean;
+  onChange?: ChangeEventHandler<any>;
 }
 
 export const FormikRadioControl = (props: FormikRadioControlProps) => {
@@ -131,7 +146,7 @@ export const FormikRadioControl = (props: FormikRadioControlProps) => {
       <FormLabel component="legend" color="secondary">
         {props.label}
       </FormLabel>
-      <FormikRadioGroup row name={props.name}>
+      <FormikRadioGroup row name={props.name} onChange={props.onChange}>
         {props.options.map((opt) => (
           <FormControlLabel
             key={opt.value}
