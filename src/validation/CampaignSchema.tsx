@@ -3,12 +3,17 @@ import { startOfDay } from "date-fns";
 import { twoDaysOut } from "form/DateFieldHelpers";
 import { TrailingAsteriskRegex } from "validation/regex";
 import { CreativeSchema } from "validation/CreativeSchema";
+import { CampaignFormat } from "graphql/types";
 
 export const MIN_PER_DAY = 33;
 export const MIN_PER_CAMPAIGN = 100;
 
 export const CampaignSchema = object().shape({
   name: string().label("Campaign Name").required(),
+  format: string()
+    .label("Campaign Format")
+    .oneOf([CampaignFormat.NewsDisplayAd, CampaignFormat.PushNotification])
+    .required(),
   budget: number()
     .label("Lifetime Budget")
     .required()
@@ -59,9 +64,15 @@ export const CampaignSchema = object().shape({
       then: (schema) =>
         schema.moreThan(0.09, "CPC price must be .10 or higher"),
     })
-    .when("billingType", {
-      is: (b: string) => b === "cpm",
+    .when(["billingType", "format"], {
+      is: (b: string, f: CampaignFormat) =>
+        b === "cpm" && f === CampaignFormat.PushNotification,
       then: (schema) => schema.moreThan(5, "CPM price must be 6 or higher"),
+    })
+    .when(["billingType", "format"], {
+      is: (b: string, f: CampaignFormat) =>
+        b === "cpm" && f === CampaignFormat.NewsDisplayAd,
+      then: (schema) => schema.moreThan(9, "CPM price must be 10 or higher"),
     })
     .required("Price is a required field"),
   billingType: string()
