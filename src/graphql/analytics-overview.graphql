@@ -36,6 +36,7 @@ fragment CampaignWithEngagements on Campaign {
   adSets {
     conversions {
       type
+      extractExternalId
     }
   }
   engagements {

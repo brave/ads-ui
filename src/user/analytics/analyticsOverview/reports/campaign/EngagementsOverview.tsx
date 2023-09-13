@@ -82,7 +82,7 @@ export function EngagementsOverview({
   const options = prepareChart(metrics, processedData);
 
   return (
-    <Box display="flex" flexDirection="row">
+    <Box display="flex" flexDirection="row" gap="5px">
       <MetricFilter
         processedStats={processedStats}
         metrics={metrics}

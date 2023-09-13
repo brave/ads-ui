@@ -67,6 +67,7 @@ export function CampaignReportView() {
           id: params.campaignId,
           name: campaign?.name ?? "",
           format: campaign?.format,
+          adSets: campaign?.adSets,
         }}
         onSetDate={setDateRange}
       />
