@@ -100,15 +100,16 @@ async function transformConversionEnvelope(
                 ui8a(privateKey),
               );
               return res
-                ? // eslint-disable-next-line no-control-regex
-                  td.decode(res).replace(/\u0000/g, "")
+                ? td.decode(res.filter((v) => v !== 0x00))
                 : "Data not valid for this private key";
             }
 
             return value;
           },
           complete(results) {
-            const newCSV = Papa.unparse(results.data);
+            const newCSV = Papa.unparse(results.data, {
+              skipEmptyLines: "greedy",
+            });
             const blob = te.encode(newCSV).buffer;
             resolve(new Blob([blob]));
           },
