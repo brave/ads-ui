@@ -75,7 +75,7 @@ async function transformConversionEnvelope(
 ): Promise<Blob> {
   const te = new TextEncoder();
   const td = new TextDecoder();
-  const b64 = (i: string) => te.encode(atob(i));
+  const ui8a = (s: string) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
 
   return await new Promise((resolve, reject) => {
     const fileReader = new FileReader();
@@ -89,30 +89,35 @@ async function transformConversionEnvelope(
       try {
         Papa.parse(text, {
           header: true,
+          escapeChar: "\\",
           transform(value: string, field: string) {
             if (field === "Conversion Envelope" && privateKey) {
               const { ciphertext, nonce, epk }: Envelope = JSON.parse(value);
               const res = tweetnacl.box.open(
-                b64(ciphertext),
-                b64(nonce),
-                b64(epk),
-                b64(privateKey),
+                ui8a(ciphertext),
+                ui8a(nonce),
+                ui8a(epk),
+                ui8a(privateKey),
               );
               return res
-                ? td.decode(res)
+                ? // eslint-disable-next-line no-control-regex
+                  td.decode(res).replace(/\u0000/g, "")
                 : "Data not valid for this private key";
             }
 
             return value;
           },
-          complete(results, file) {
-            console.log("Parsing complete:", results, file);
-            resolve(blob);
-            // Papa.unparse()
+          complete(results) {
+            const newCSV = Papa.unparse(results.data);
+            const blob = te.encode(newCSV).buffer;
+            resolve(new Blob([blob]));
+          },
+          error(error: Error) {
+            reject(error);
           },
         });
       } catch (e) {
-        console.log(e);
+        console.error(e);
         reject(new Error("Unable to decrypt conversion data"));
       }
     };
