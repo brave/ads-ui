@@ -73,6 +73,10 @@ async function transformConversionEnvelope(
   blob: Blob,
   privateKey?: string,
 ): Promise<Blob> {
+  if (!privateKey) {
+    return Promise.resolve(blob);
+  }
+
   const te = new TextEncoder();
   const td = new TextDecoder();
   const ui8a = (s: string) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
