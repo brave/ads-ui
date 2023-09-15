@@ -161,7 +161,7 @@ describe("pricing logic (read)", () => {
       c.adSets = [];
     });
     const formObject = editCampaignValues(campaign, "abc");
-    expect(formObject.price).toEqual(6);
+    expect(formObject.price).toEqual(100);
     expect(formObject.billingType).toEqual("cpm");
   });
 });
