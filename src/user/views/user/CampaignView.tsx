@@ -100,35 +100,49 @@ function CampaignHeader(props: { selectedCampaigns: string[] }) {
     skip: !oneCampaignSelected || !firstCampaign,
   });
 
-  let tooltip: string | null = "Please select one campaign to clone or edit";
   let isValidCampaign = false;
   if (!loading && data?.campaign) {
     isValidCampaign =
       data.campaign.source === CampaignSource.SelfServe &&
       editableCampaigns.includes(data.campaign.format) &&
       data.campaign.state !== "completed";
-    tooltip = isValidCampaign ? null : "Cannot edit this campaign";
   }
 
   return (
     <Stack direction="row" alignItems="center" spacing={2}>
       <Typography variant="h2">Campaigns</Typography>
-      <Tooltip title={tooltip}>
-        <Stack direction="row" alignItems="center" spacing={2}>
-          <CloneCampaign campaignFragment={data?.campaign} useChip />
-          <Chip
-            color="primary"
-            label="Edit"
-            disabled={
-              !oneCampaignSelected || !data?.campaign || !isValidCampaign
-            }
-            component={RouterLink}
-            to={`/user/main/adsmanager/advanced/${firstCampaign}/settings`}
-            icon={<EditIcon fontSize="small" />}
-            clickable
-          />
-        </Stack>
-      </Tooltip>
+      <Stack direction="row" alignItems="center" spacing={2}>
+        <Tooltip
+          title={isValidCampaign ? "Clone Campaign" : "Cannot clone campaign"}
+        >
+          <span>
+            <CloneCampaign
+              campaignFragment={data?.campaign}
+              useChip
+              disabled={
+                !oneCampaignSelected || !data?.campaign || !isValidCampaign
+              }
+            />
+          </span>
+        </Tooltip>
+        <Tooltip
+          title={isValidCampaign ? "Edit campaign" : "Cannot Edit Campaign"}
+        >
+          <span>
+            <Chip
+              color="primary"
+              label="Edit"
+              disabled={
+                !oneCampaignSelected || !data?.campaign || !isValidCampaign
+              }
+              component={RouterLink}
+              to={`/user/main/adsmanager/advanced/${firstCampaign}/settings`}
+              icon={<EditIcon fontSize="small" />}
+              clickable
+            />
+          </span>
+        </Tooltip>
+      </Stack>
     </Stack>
   );
 }
