@@ -25,9 +25,10 @@ import { FilterContext } from "state/context";
 interface Props {
   campaignFragment?: CampaignFragment | null;
   useChip?: boolean;
+  disabled?: boolean;
 }
 
-export function CloneCampaign({ campaignFragment, useChip }: Props) {
+export function CloneCampaign({ campaignFragment, useChip, disabled }: Props) {
   const { advertiser } = useAdvertiser();
   const { fromDate } = useContext(FilterContext);
   const { userId } = useUser();
@@ -62,7 +63,7 @@ export function CloneCampaign({ campaignFragment, useChip }: Props) {
           onClick={() => {
             setOpen(true);
           }}
-          disabled={loading || !campaignFragment}
+          disabled={loading || !campaignFragment || disabled}
           icon={<ContentCopyIcon fontSize="small" />}
         />
       ) : (
@@ -74,7 +75,7 @@ export function CloneCampaign({ campaignFragment, useChip }: Props) {
             e.preventDefault();
             setOpen(true);
           }}
-          disabled={loading || !campaignFragment}
+          disabled={loading || !campaignFragment || disabled}
           startIcon={<ContentCopyIcon />}
         >
           Clone Campaign
@@ -84,7 +85,7 @@ export function CloneCampaign({ campaignFragment, useChip }: Props) {
         <DialogTitle>{`Copy campaign: "${campaignFragment?.name}"?`}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Copying a campaign will take all properties including ad sets and
+            Cloning a campaign will take all properties including ad sets and
             ads, and create a new draft campaign with them.
           </DialogContentText>
           {loading && <LinearProgress />}
