@@ -95,7 +95,7 @@ async function transformConversionEnvelope(
           header: true,
           escapeChar: "\\",
           transform(value: string, field: string) {
-            if (field === "Conversion Envelope" && privateKey) {
+            if (field.includes("Conversion")) {
               const { ciphertext, nonce, epk }: Envelope = JSON.parse(value);
               const res = tweetnacl.box.open(
                 ui8a(ciphertext),
