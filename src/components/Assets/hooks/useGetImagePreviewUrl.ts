@@ -27,6 +27,7 @@ export function useGetImagePreviewUrl(props: { url: string }) {
         }
 
         if (result.status !== 403) {
+          clearInterval(intrvl);
           reject(new Error("Unable to fetch image"));
         }
       }, 5000);
