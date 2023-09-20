@@ -12,13 +12,25 @@ export function useGetImagePreviewUrl(props: { url: string }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
 
-  const fetchImageResource = useMemo(async () => {
+  const fetchImageResource: Promise<ArrayBuffer> = useMemo(async () => {
     const result = await fetchResource(props.url);
-    if (!result.ok) {
-      throw new Error("Unable to fetch image");
+    if (result.ok) {
+      return await result.arrayBuffer();
     }
 
-    return await result.arrayBuffer();
+    return await new Promise((resolve, reject) => {
+      const intrvl = setInterval(async () => {
+        const result = await fetchResource(props.url);
+        if (result.status === 200) {
+          clearInterval(intrvl);
+          resolve(await result.arrayBuffer());
+        }
+
+        if (result.status !== 403) {
+          reject(new Error("Unable to fetch image"));
+        }
+      }, 5000);
+    });
   }, [props.url]);
 
   useEffect(() => {
