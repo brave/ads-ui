@@ -1,11 +1,6 @@
 import { CampaignFragment } from "graphql/campaign.generated";
 import { describe, expect, it } from "vitest";
-import {
-  editCampaignValues,
-  transformCreative,
-  transformEditForm,
-  transformNewForm,
-} from ".";
+import { editCampaignValues, transformEditForm, transformNewForm } from ".";
 import {
   CampaignFormat,
   CampaignPacingStrategies,
@@ -137,7 +132,7 @@ describe("pricing logic (read)", () => {
       });
     });
     const campaignForm = editCampaignValues(campaign, "abc");
-    expect(campaignForm.price).toEqual(7);
+    expect(campaignForm.price).toEqual("7");
     expect(campaignForm.billingType).toEqual("cpm");
   });
 
@@ -152,7 +147,7 @@ describe("pricing logic (read)", () => {
       });
     });
     const campaignForm = editCampaignValues(campaign, "abc");
-    expect(campaignForm.price).toEqual(1);
+    expect(campaignForm.price).toEqual("1");
     expect(campaignForm.billingType).toEqual("cpc");
   });
 
@@ -161,53 +156,8 @@ describe("pricing logic (read)", () => {
       c.adSets = [];
     });
     const formObject = editCampaignValues(campaign, "abc");
-    expect(formObject.price).toEqual(100);
+    expect(formObject.price).toEqual("100");
     expect(formObject.billingType).toEqual("cpm");
-  });
-});
-
-describe("pricing logic (write)", () => {
-  const creative: Creative = {
-    payloadNotification: {
-      title: "some title",
-      body: "body",
-      targetUrl: "some url",
-    },
-    advertiserId: "some id",
-    state: "draft",
-    type: { code: "notification_all_v1" },
-    name: "some name",
-    included: true,
-  };
-
-  it("should convert from CPM to per-impression values when populating a CPM creative", () => {
-    const inputObject = transformCreative(creative, {
-      billingType: "cpm",
-      price: 9,
-    });
-
-    expect(inputObject.price).toEqual("0.009");
-    expect(inputObject.priceType).toEqual(ConfirmationType.View);
-  });
-
-  it("should not convert CPC to per-impression values when populating a CPC creative", () => {
-    const inputObject = transformCreative(creative, {
-      billingType: "cpc",
-      price: 9,
-    });
-
-    expect(inputObject.price).toEqual("9");
-    expect(inputObject.priceType).toEqual(ConfirmationType.Click);
-  });
-
-  it("should not convert CPV to per-impression values when populating a CPV creative", () => {
-    const inputObject = transformCreative(creative, {
-      billingType: "cpv",
-      price: 9,
-    });
-
-    expect(inputObject.price).toEqual("9");
-    expect(inputObject.priceType).toEqual(ConfirmationType.Landed);
   });
 });
 
@@ -254,7 +204,7 @@ describe("new form tests", () => {
     isCreating: false,
     name: "Test",
     paymentType: PaymentType.Radom,
-    price: 6,
+    price: "6",
     startAt: dateString,
     state: "draft",
     type: "paid",
@@ -270,8 +220,6 @@ describe("new form tests", () => {
             "ads": [
               {
                 "creativeId": "11111",
-                "price": "0.006",
-                "priceType": "VIEW",
               },
             ],
             "billingType": "cpm",
@@ -284,6 +232,7 @@ describe("new form tests", () => {
               },
             ],
             "perDay": 4,
+            "price": "0.006",
             "segments": [
               {
                 "code": "5678",
@@ -313,29 +262,6 @@ describe("new form tests", () => {
         "state": "draft",
         "type": "paid",
         "userId": "me",
-      }
-    `);
-  });
-
-  it("should transform a creative", () => {
-    creative.payloadNotification = {
-      title: "valid",
-      targetUrl: "valid",
-      body: "valid",
-    };
-
-    creative.payloadSearch = {
-      title: "invalid",
-      targetUrl: "invalid",
-      body: "invalid",
-    };
-
-    const res = transformCreative(creative, form);
-    expect(res).toMatchInlineSnapshot(`
-      {
-        "creativeId": "11111",
-        "price": "0.006",
-        "priceType": "VIEW",
       }
     `);
   });
@@ -569,7 +495,7 @@ describe("edit form tests", () => {
         "isCreating": false,
         "name": "My first campaign",
         "paymentType": "RADOM",
-        "price": 6000,
+        "price": "6000",
         "startAt": undefined,
         "state": "active",
         "type": "paid",
@@ -588,8 +514,6 @@ describe("edit form tests", () => {
               {
                 "creativeId": "1234",
                 "creativeSetId": "11111",
-                "price": "6",
-                "priceType": "VIEW",
               },
             ],
             "id": "11111",
@@ -611,14 +535,10 @@ describe("edit form tests", () => {
               {
                 "creativeId": "1234",
                 "creativeSetId": "22222",
-                "price": "6",
-                "priceType": "VIEW",
               },
               {
                 "creativeId": "1235",
                 "creativeSetId": "22222",
-                "price": "6",
-                "priceType": "VIEW",
               },
             ],
             "id": "22222",

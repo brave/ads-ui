@@ -1,8 +1,6 @@
 import {
   CampaignFormat,
   CampaignPacingStrategies,
-  ConfirmationType,
-  CreateAdInput,
   CreateCampaignInput,
   UpdateCampaignInput,
 } from "graphql/types";
@@ -33,6 +31,7 @@ export function transformNewForm(
   form: CampaignForm,
   userId?: string,
 ): CreateCampaignInput {
+  const price = BigNumber(form.price);
   return {
     currency: form.currency,
     externalId: "",
@@ -52,6 +51,10 @@ export function transformNewForm(
     budget: form.budget,
     adSets: form.adSets.map((adSet) => ({
       name: adSet.name,
+      price:
+        form.billingType === "cpm"
+          ? price.dividedBy(1000).toString()
+          : price.toString(),
       billingType: form.billingType,
       perDay: form.format === CampaignFormat.PushNotification ? 4 : 6,
       segments: adSet.segments.map((s) => ({ code: s.code, name: s.name })),
@@ -60,7 +63,7 @@ export function transformNewForm(
       conversions: transformConversion(adSet.conversions),
       ads: adSet.creatives
         .filter((c) => c.included)
-        .map((ad) => transformCreative(ad, form)),
+        .map((ad) => ({ creativeId: ad.id })),
     })),
     paymentType: form.paymentType,
   };
@@ -76,34 +79,6 @@ function transformConversion(conv: Conversion[]) {
     urlPattern: c.urlPattern,
     type: c.type,
   }));
-}
-
-export function transformCreative(
-  creative: Creative,
-  campaign: Pick<CampaignForm, "price" | "billingType">,
-): CreateAdInput {
-  let price: BigNumber;
-  let priceType: ConfirmationType;
-
-  if (campaign.billingType === "cpm") {
-    price = BigNumber(campaign.price).dividedBy(1000);
-    priceType = ConfirmationType.View;
-  } else if (campaign.billingType === "cpv") {
-    price = BigNumber(campaign.price);
-    priceType = ConfirmationType.Landed;
-  } else {
-    price = BigNumber(campaign.price);
-    priceType = ConfirmationType.Click;
-  }
-
-  const createInput: CreateAdInput = {
-    price: price.toString(),
-    priceType: priceType,
-  };
-
-  createInput.creativeId = creative.id;
-
-  return createInput;
 }
 
 export function editCampaignValues(
@@ -147,7 +122,7 @@ export function editCampaignValues(
     advertiserId,
     newCreative: initialCreative,
     currency: campaign.currency,
-    price: price.toNumber(),
+    price: price.toString(),
     billingType: billingType,
     validateStart: false,
     budget: campaign.budget,
@@ -243,7 +218,7 @@ export function transformEditForm(
       ads: adSet.creatives
         .filter((c) => c.included)
         .map((ad) => ({
-          ...transformCreative(ad, form),
+          creativeId: ad.id,
           creativeSetId: adSet.id,
         })),
     })),
