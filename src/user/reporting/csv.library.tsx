@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { buildAdServerEndpoint } from "util/environment";
 import Papa from "papaparse";
 import tweetnacl from "tweetnacl";
+import { uInt8Array } from "util/uInt8Array";
 interface DownloadProps {
   onComplete?: () => void;
   onError?: () => void;
@@ -12,7 +13,7 @@ export function useDownloadCSV(props: DownloadProps = {}) {
   const [error, setError] = useState<string>();
 
   const download = useCallback(
-    (campaignId: string, isVac: boolean, privateKey?: string) => {
+    (campaignId: string, isVac: boolean, privateKey?: Uint8Array) => {
       setLoading(true);
       setError(undefined);
 
@@ -71,15 +72,13 @@ export function useDownloadCSV(props: DownloadProps = {}) {
 type Envelope = { ciphertext: string; epk: string; nonce: string };
 async function transformConversionEnvelope(
   blob: Blob,
-  privateKey?: string,
+  privateKey?: Uint8Array,
 ): Promise<Blob> {
   if (!privateKey) {
     return Promise.resolve(blob);
   }
 
-  const te = new TextEncoder();
   const td = new TextDecoder();
-  const ui8a = (s: string) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
 
   return await new Promise((resolve, reject) => {
     const fileReader = new FileReader();
@@ -98,10 +97,10 @@ async function transformConversionEnvelope(
             if (field.includes("Conversion")) {
               const { ciphertext, nonce, epk }: Envelope = JSON.parse(value);
               const res = tweetnacl.box.open(
-                ui8a(ciphertext),
-                ui8a(nonce),
-                ui8a(epk),
-                ui8a(privateKey),
+                uInt8Array(ciphertext),
+                uInt8Array(nonce),
+                uInt8Array(epk),
+                privateKey,
               );
               return res
                 ? td.decode(res.filter((v) => v !== 0x00))
@@ -114,8 +113,7 @@ async function transformConversionEnvelope(
             const newCSV = Papa.unparse(results.data, {
               skipEmptyLines: "greedy",
             });
-            const blob = te.encode(newCSV).buffer;
-            resolve(new Blob([blob]));
+            resolve(new Blob([newCSV]));
           },
           error(error: Error) {
             reject(error);

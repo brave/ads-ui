@@ -18,6 +18,7 @@ import {
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import DownloadIcon from "@mui/icons-material/Download";
+import { uInt8Array } from "util/uInt8Array";
 
 interface ReportMenuProps {
   hasVerifiedConversions: boolean;
@@ -27,19 +28,20 @@ export const ReportMenu = ({
   campaignId,
   hasVerifiedConversions,
 }: ReportMenuProps) => {
-  const [privateKey, setPrivateKey] = useState<string>();
   const [dialogue, setDialogue] = useState(false);
   const [isError, setIsError] = useState(false);
+  const set = (s: string) =>
+    document.getElementById("private-key")?.setAttribute("value", s);
+  const get = () =>
+    document.getElementById("private-key")?.getAttribute("value");
   const { download, loading, error } = useDownloadCSV({
     onComplete() {
       setAnchorEl(null);
       setDialogue(false);
-      setPrivateKey(undefined);
     },
     onError() {
       setIsError(true);
       setDialogue(false);
-      setPrivateKey(undefined);
     },
   });
 
@@ -98,7 +100,13 @@ export const ReportMenu = ({
         </Alert>
       </Snackbar>
 
-      <Dialog open={dialogue} onClose={() => setDialogue(false)}>
+      <Dialog
+        open={dialogue}
+        onClose={() => {
+          setDialogue(false);
+          // setPrivateKey(undefined);
+        }}
+      >
         <DialogTitle>Decrypt Conversion Data?</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -110,13 +118,15 @@ export const ReportMenu = ({
             be sent to or stored on any Brave servers.
           </DialogContentText>
           <TextField
+            autoComplete="off"
+            onChange={(e) => set(e.target.value)}
             autoFocus
-            onChange={(e) => setPrivateKey(e.target.value)}
             margin="normal"
             label="Private key"
             fullWidth
             variant="standard"
           />
+          <input type="hidden" id="private-key" />
           {loading && <LinearProgress />}
         </DialogContent>
         <DialogActions>
@@ -129,7 +139,11 @@ export const ReportMenu = ({
           </Button>
           <Button
             variant="contained"
-            onClick={() => download(campaignId, true, privateKey)}
+            onClick={() => {
+              const val = get();
+              const pk = val ? uInt8Array(val) : undefined;
+              download(campaignId, true, pk);
+            }}
             disabled={loading}
           >
             Export
