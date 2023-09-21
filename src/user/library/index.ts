@@ -53,10 +53,10 @@ export function transformNewForm(
     adSets: form.adSets.map((adSet) => ({
       name: adSet.name,
       billingType: form.billingType,
-      perDay: 1,
+      perDay: form.format === CampaignFormat.PushNotification ? 4 : 6,
       segments: adSet.segments.map((s) => ({ code: s.code, name: s.name })),
       oses: adSet.oses,
-      totalMax: 10,
+      totalMax: form.format === CampaignFormat.PushNotification ? 28 : 60,
       conversions: transformConversion(adSet.conversions),
       ads: adSet.creatives
         .filter((c) => c.included)
