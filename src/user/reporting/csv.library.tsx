@@ -61,6 +61,7 @@ export function useDownloadCSV(props: DownloadProps = {}) {
         })
         .finally(() => {
           setLoading(false);
+          privateKey?.fill(0);
         });
     },
     [],
