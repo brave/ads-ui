@@ -140,9 +140,7 @@ export const ReportMenu = ({
           <Button
             variant="contained"
             onClick={() => {
-              const val = get();
-              const pk = val ? uInt8Array(val) : undefined;
-              download(campaignId, true, pk);
+              download(campaignId, true, uInt8Array(get()));
             }}
             disabled={loading}
           >
