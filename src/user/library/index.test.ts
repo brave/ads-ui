@@ -283,14 +283,14 @@ describe("new form tests", () => {
                 "name": "macos",
               },
             ],
-            "perDay": 1,
+            "perDay": 4,
             "segments": [
               {
                 "code": "5678",
                 "name": "test",
               },
             ],
-            "totalMax": 10,
+            "totalMax": 28,
           },
         ],
         "advertiserId": "12345",
