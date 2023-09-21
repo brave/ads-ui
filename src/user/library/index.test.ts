@@ -125,7 +125,7 @@ describe("pricing logic (read)", () => {
 
   it("should convert per-impression values to CPM when populating CampaignForm", () => {
     const campaign = produce(BASE_CPM_CAMPAIGN_FRAGMENT, (c) => {
-      (c.adSets ?? []).forEach((adset) => {
+      c.adSets.forEach((adset) => {
         adset.billingType = "cpm";
         adset.price = "0.007";
       });
