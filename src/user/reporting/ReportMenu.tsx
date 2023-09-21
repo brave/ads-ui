@@ -18,7 +18,6 @@ import {
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import DownloadIcon from "@mui/icons-material/Download";
-import { uInt8Array } from "util/uInt8Array";
 
 interface ReportMenuProps {
   hasVerifiedConversions: boolean;
@@ -32,8 +31,6 @@ export const ReportMenu = ({
   const [isError, setIsError] = useState(false);
   const set = (s: string) =>
     document.getElementById("private-key")?.setAttribute("value", s);
-  const get = () =>
-    document.getElementById("private-key")?.getAttribute("value");
   const { download, loading, error } = useDownloadCSV({
     onComplete() {
       setAnchorEl(null);
@@ -134,7 +131,7 @@ export const ReportMenu = ({
           <Button
             variant="contained"
             onClick={() => {
-              download(campaignId, true, uInt8Array(get()));
+              download(campaignId, true);
             }}
             disabled={loading}
           >
