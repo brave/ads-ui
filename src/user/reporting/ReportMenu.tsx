@@ -100,13 +100,7 @@ export const ReportMenu = ({
         </Alert>
       </Snackbar>
 
-      <Dialog
-        open={dialogue}
-        onClose={() => {
-          setDialogue(false);
-          // setPrivateKey(undefined);
-        }}
-      >
+      <Dialog open={dialogue} onClose={() => setDialogue(false)}>
         <DialogTitle>Decrypt Conversion Data?</DialogTitle>
         <DialogContent>
           <DialogContentText>
