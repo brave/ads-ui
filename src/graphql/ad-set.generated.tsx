@@ -6,6 +6,7 @@ import * as Apollo from "@apollo/client";
 const defaultOptions = {} as const;
 export type AdSetFragment = {
   id: string;
+  price?: string | null;
   createdAt: any;
   billingType?: string | null;
   name?: string | null;
@@ -131,6 +132,7 @@ export type CreateAdSetMutationVariables = Types.Exact<{
 export type CreateAdSetMutation = {
   createAdSet: {
     id: string;
+    price?: string | null;
     createdAt: any;
     billingType?: string | null;
     name?: string | null;
@@ -212,6 +214,7 @@ export type UpdateAdSetMutationVariables = Types.Exact<{
 export type UpdateAdSetMutation = {
   updateAdSet: {
     id: string;
+    price?: string | null;
     createdAt: any;
     billingType?: string | null;
     name?: string | null;
@@ -301,6 +304,7 @@ export const AdFragmentDoc = gql`
 export const AdSetFragmentDoc = gql`
   fragment AdSet on AdSet {
     id
+    price
     createdAt
     billingType
     name

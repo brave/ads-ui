@@ -85,14 +85,11 @@ export function editCampaignValues(
   campaign: CampaignFragment,
   advertiserId: string,
 ): CampaignForm {
-  const ads: AdFragment[] = _.filter(
-    _.flatMap(campaign.adSets, "ads"),
-    (a) => a.state !== "deleted",
-  );
+  const ads: AdFragment[] = _.flatMap(campaign.adSets, "ads");
 
   const billingType = (_.head(campaign.adSets)?.billingType ??
     "cpm") as Billing;
-  const rawPrice = BigNumber(_.head(ads)?.price ?? "0.1");
+  const rawPrice = BigNumber(_.head(campaign.adSets)?.price ?? "0.1");
   const price = billingType === "cpm" ? rawPrice.multipliedBy(1000) : rawPrice;
 
   return {

@@ -36,6 +36,7 @@ export type CampaignFragment = {
   geoTargets?: Array<{ code: string; name: string }> | null;
   adSets: Array<{
     id: string;
+    price?: string | null;
     createdAt: any;
     billingType?: string | null;
     name?: string | null;
@@ -147,6 +148,7 @@ export type CampaignAdsFragment = {
   advertiser: { id: string };
   adSets: Array<{
     id: string;
+    price?: string | null;
     createdAt: any;
     billingType?: string | null;
     name?: string | null;
@@ -258,6 +260,7 @@ export type LoadCampaignQuery = {
     geoTargets?: Array<{ code: string; name: string }> | null;
     adSets: Array<{
       id: string;
+      price?: string | null;
       createdAt: any;
       billingType?: string | null;
       name?: string | null;
@@ -351,6 +354,7 @@ export type LoadCampaignAdsQuery = {
     advertiser: { id: string };
     adSets: Array<{
       id: string;
+      price?: string | null;
       createdAt: any;
       billingType?: string | null;
       name?: string | null;
