@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useUpdateAdvertiserMutation } from "graphql/advertiser.generated";
-import * as tweetnacl from "tweetnacl";
+import tweetnacl from "tweetnacl";
 import { useRef, useState } from "react";
 import { IAdvertiser } from "auth/context/auth.interface";
 import { CardContainer } from "components/Card/CardContainer";
