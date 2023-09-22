@@ -65,10 +65,24 @@ fragment AdvertiserImage on AdvertiserImage {
   createdAt
 }
 
+fragment AdvertiserPrice on AdvertiserPrice {
+  price
+  billingType
+  format
+}
+
 query advertiserImages($id: String!) {
   advertiser(id: $id) {
     images {
       ...AdvertiserImage
+    }
+  }
+}
+
+query advertiserPrices($id: String!) {
+  advertiser(id: $id) {
+    prices {
+      ...AdvertiserPrice
     }
   }
 }

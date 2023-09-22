@@ -1,7 +1,7 @@
 import { CampaignFormat, CreativeInput, PaymentType } from "graphql/types";
 import { defaultEndDate, defaultStartDate } from "form/DateFieldHelpers";
 import { MIN_PER_CAMPAIGN } from "validation/CampaignSchema";
-import { IAdvertiser } from "auth/context/auth.interface";
+import { AdvertiserWithPrices } from "user/hooks/useAdvertiserWithPrices";
 
 export type Billing = "cpm" | "cpc" | "cpv";
 
@@ -106,7 +106,14 @@ export const initialAdSet: AdSetForm = {
   creatives: [],
 };
 
-export const initialCampaign = (advertiser: IAdvertiser): CampaignForm => {
+export const initialCampaign = (
+  advertiser: AdvertiserWithPrices,
+): CampaignForm => {
+  const format = CampaignFormat.PushNotification;
+  const billingType = "cpm";
+  const price = advertiser.prices.find(
+    (p) => p.billingType === billingType.toUpperCase() && p.format === format,
+  );
   return {
     isCreating: false,
     advertiserId: advertiser.id,
@@ -117,15 +124,19 @@ export const initialCampaign = (advertiser: IAdvertiser): CampaignForm => {
     dailyBudget: MIN_PER_CAMPAIGN,
     geoTargets: [],
     newCreative: initialCreative,
-    billingType: "cpm",
+    billingType,
     currency: "USD",
+<<<<<<< HEAD
     price: "6",
+=======
+    price: price?.price ?? "6",
+>>>>>>> 9018ac3 (feat: allow for price-per-advertiser)
     adSets: [
       {
         ...initialAdSet,
       },
     ],
-    format: CampaignFormat.PushNotification,
+    format,
     name: "",
     state: "draft",
     type: "paid",

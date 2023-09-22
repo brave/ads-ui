@@ -31,6 +31,12 @@ export type AdvertiserCampaignFilter = {
   includeCreativeSets?: InputMaybe<Scalars["Boolean"]>;
 };
 
+export type AdvertiserPriceInput = {
+  billingType: BillingType;
+  format: CampaignFormat;
+  price: Scalars["Numeric"];
+};
+
 export enum AdvertiserSource {
   Managed = "MANAGED",
   SelfServe = "SELF_SERVE",
@@ -39,6 +45,12 @@ export enum AdvertiserSource {
 export type ApproveCampaignInput = {
   campaignId: Scalars["String"];
 };
+
+export enum BillingType {
+  Cpc = "CPC",
+  Cpm = "CPM",
+  Cpv = "CPV",
+}
 
 export type CampaignFilter = {
   /** only include campaigns for this format */
@@ -114,8 +126,6 @@ export type CreateAdInput = {
   creativeId?: InputMaybe<Scalars["String"]>;
   creativeSetId?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["String"]>;
-  price?: InputMaybe<Scalars["Numeric"]>;
-  priceType?: InputMaybe<ConfirmationType>;
   webhooks?: InputMaybe<Array<CreateWebhookInput>>;
 };
 
@@ -134,7 +144,7 @@ export type CreateAdSetInput = {
   oses?: InputMaybe<Array<CreateOsInput>>;
   perDay: Scalars["Float"];
   /** The price in the owning campaign's currency for each single confirmation of the priceType specified. Note therefore that the caller is responsible for dividing cost-per-mille by 1000. */
-  price?: InputMaybe<Scalars["Numeric"]>;
+  price: Scalars["Numeric"];
   segments: Array<CreateSegmentInput>;
   splitTestGroup?: InputMaybe<Scalars["String"]>;
   state?: InputMaybe<Scalars["String"]>;
@@ -165,6 +175,7 @@ export type CreateAdvertiserInput = {
   mailingAddress: CreateAddressInput;
   name: Scalars["String"];
   phone?: InputMaybe<Scalars["String"]>;
+  prices?: InputMaybe<Array<AdvertiserPriceInput>>;
   referrer?: InputMaybe<Scalars["String"]>;
   selfServiceCreate?: InputMaybe<Scalars["Boolean"]>;
   selfServiceEdit?: InputMaybe<Scalars["Boolean"]>;
@@ -443,6 +454,7 @@ export type UpdateAdvertiserInput = {
   mailingAddress?: InputMaybe<UpdateAddressInput>;
   name?: InputMaybe<Scalars["String"]>;
   phone?: InputMaybe<Scalars["String"]>;
+  prices?: InputMaybe<Array<AdvertiserPriceInput>>;
   publicKey?: InputMaybe<Scalars["String"]>;
   referrer?: InputMaybe<Scalars["String"]>;
   selfServiceCreate?: InputMaybe<Scalars["Boolean"]>;
