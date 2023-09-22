@@ -1,7 +1,20 @@
 import { parseISO } from "date-fns";
 import { produce } from "immer";
-import { CampaignFormat, CampaignPacingStrategies } from "../graphql/types";
+import {
+  BillingType,
+  CampaignFormat,
+  CampaignPacingStrategies,
+} from "graphql/types";
 import { CampaignSchema } from "./CampaignSchema";
+import { AdvertiserPriceFragment } from "graphql/advertiser.generated";
+
+const prices: AdvertiserPriceFragment[] = [
+  {
+    format: CampaignFormat.PushNotification,
+    price: "6",
+    billingType: BillingType.Cpm,
+  },
+];
 
 const validCampaign = {
   name: "some campaign",
@@ -22,7 +35,7 @@ const validCampaign = {
 };
 
 it("should pass on a valid object", () => {
-  CampaignSchema.validateSync(validCampaign);
+  CampaignSchema(prices).validateSync(validCampaign);
 });
 
 it("should fail if the campaign start date is in past", () => {
@@ -31,7 +44,7 @@ it("should fail if the campaign start date is in past", () => {
   });
 
   expect(() =>
-    CampaignSchema.validateSync(c),
+    CampaignSchema(prices).validateSync(c),
   ).toThrowErrorMatchingInlineSnapshot(
     `"Start Date must be minimum of 2 days from today"`,
   );

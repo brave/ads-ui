@@ -15,6 +15,7 @@ import { TrailingAsteriskRegex } from "validation/regex";
 import { CreativeSchema } from "validation/CreativeSchema";
 import { BillingType, CampaignFormat } from "graphql/types";
 import { AdvertiserPriceFragment } from "graphql/advertiser.generated";
+import BigNumber from "bignumber.js";
 
 export const MIN_PER_DAY = 33;
 export const MIN_PER_CAMPAIGN = 100;
@@ -81,7 +82,7 @@ export const CampaignSchema = (prices: AdvertiserPriceFragment[]) =>
             prices,
             CampaignFormat.PushNotification,
             BillingType.Cpc,
-            0.1,
+            "0.1",
             schema,
           ),
       })
@@ -93,7 +94,7 @@ export const CampaignSchema = (prices: AdvertiserPriceFragment[]) =>
             prices,
             CampaignFormat.PushNotification,
             BillingType.Cpm,
-            5,
+            "5",
             schema,
           ),
       })
@@ -105,7 +106,7 @@ export const CampaignSchema = (prices: AdvertiserPriceFragment[]) =>
             prices,
             CampaignFormat.NewsDisplayAd,
             BillingType.Cpm,
-            9,
+            "9",
             schema,
           ),
       })
@@ -178,12 +179,15 @@ export function findPrice(
   prices: AdvertiserPriceFragment[],
   format: CampaignFormat,
   billingType: BillingType,
-  defaultPrice: number,
+  defaultPrice: string,
   schema: NumberSchema<number | undefined, AnyObject, undefined, "">,
 ) {
   const found = prices.find(
     (p) => p.format === format && p.billingType === billingType,
   );
-  const price = Number(found?.price) ?? defaultPrice;
-  return schema.min(price, `${billingType} price must be ${price} or higher`);
+  const price = BigNumber(found?.price ?? defaultPrice);
+  return schema.min(
+    price.toNumber(),
+    `${billingType} price must be ${price} or higher`,
+  );
 }
