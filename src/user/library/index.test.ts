@@ -2,9 +2,9 @@ import { CampaignFragment } from "graphql/campaign.generated";
 import { describe, expect, it } from "vitest";
 import {
   editCampaignValues,
-  transformCreative,
   transformEditForm,
   transformNewForm,
+  transformPrice,
 } from ".";
 import {
   CampaignFormat,
@@ -18,6 +18,7 @@ import { AdSetForm, CampaignForm, Creative } from "user/views/adsManager/types";
 import _ from "lodash";
 import { AdFragment, AdSetFragment } from "graphql/ad-set.generated";
 import { CreativeFragment } from "graphql/creative.generated";
+import { DeepPartial } from "@apollo/client/utilities";
 
 const BASE_CPM_CAMPAIGN_FRAGMENT: Readonly<CampaignFragment> = {
   id: "3495317a-bb47-4daf-8d3e-14cdc0e87457",
@@ -50,6 +51,7 @@ const BASE_CPM_CAMPAIGN_FRAGMENT: Readonly<CampaignFragment> = {
     {
       id: "39644642-b56a-430a-90f8-8917651bb62f",
       createdAt: "2023-07-11T16:13:31.286Z",
+      price: "0.006",
       billingType: "cpm",
       name: "Demo ad set",
       totalMax: 10,
@@ -130,14 +132,11 @@ describe("pricing logic (read)", () => {
     const campaign = produce(BASE_CPM_CAMPAIGN_FRAGMENT, (c) => {
       c.adSets.forEach((adset) => {
         adset.billingType = "cpm";
-        adset.ads?.forEach((ad) => {
-          ad.price = "0.007";
-          ad.priceType = ConfirmationType.View;
-        });
+        adset.price = "0.007";
       });
     });
     const campaignForm = editCampaignValues(campaign, "abc");
-    expect(campaignForm.price).toEqual(7);
+    expect(campaignForm.price).toEqual("7");
     expect(campaignForm.billingType).toEqual("cpm");
   });
 
@@ -145,14 +144,11 @@ describe("pricing logic (read)", () => {
     const campaign = produce(BASE_CPM_CAMPAIGN_FRAGMENT, (c) => {
       c.adSets.forEach((adset) => {
         adset.billingType = "cpc";
-        adset.ads?.forEach((ad) => {
-          ad.price = "1";
-          ad.priceType = ConfirmationType.View;
-        });
+        adset.price = "1";
       });
     });
     const campaignForm = editCampaignValues(campaign, "abc");
-    expect(campaignForm.price).toEqual(1);
+    expect(campaignForm.price).toEqual("1");
     expect(campaignForm.billingType).toEqual("cpc");
   });
 
@@ -161,53 +157,37 @@ describe("pricing logic (read)", () => {
       c.adSets = [];
     });
     const formObject = editCampaignValues(campaign, "abc");
-    expect(formObject.price).toEqual(100);
+    expect(formObject.price).toEqual("100");
     expect(formObject.billingType).toEqual("cpm");
   });
 });
 
 describe("pricing logic (write)", () => {
-  const creative: Creative = {
-    payloadNotification: {
-      title: "some title",
-      body: "body",
-      targetUrl: "some url",
-    },
-    advertiserId: "some id",
-    state: "draft",
-    type: { code: "notification_all_v1" },
-    name: "some name",
-    included: true,
-  };
-
   it("should convert from CPM to per-impression values when populating a CPM creative", () => {
-    const inputObject = transformCreative(creative, {
+    const result = transformPrice({
       billingType: "cpm",
-      price: 9,
+      price: "9",
     });
 
-    expect(inputObject.price).toEqual("0.009");
-    expect(inputObject.priceType).toEqual(ConfirmationType.View);
+    expect(result).toEqual("0.009");
   });
 
   it("should not convert CPC to per-impression values when populating a CPC creative", () => {
-    const inputObject = transformCreative(creative, {
+    const result = transformPrice({
       billingType: "cpc",
-      price: 9,
+      price: "9",
     });
 
-    expect(inputObject.price).toEqual("9");
-    expect(inputObject.priceType).toEqual(ConfirmationType.Click);
+    expect(result).toEqual("9");
   });
 
   it("should not convert CPV to per-impression values when populating a CPV creative", () => {
-    const inputObject = transformCreative(creative, {
+    const result = transformPrice({
       billingType: "cpv",
-      price: 9,
+      price: "9",
     });
 
-    expect(inputObject.price).toEqual("9");
-    expect(inputObject.priceType).toEqual(ConfirmationType.Landed);
+    expect(result).toEqual("9");
   });
 });
 
@@ -254,7 +234,7 @@ describe("new form tests", () => {
     isCreating: false,
     name: "Test",
     paymentType: PaymentType.Radom,
-    price: 6,
+    price: "6",
     startAt: dateString,
     state: "draft",
     type: "paid",
@@ -270,8 +250,6 @@ describe("new form tests", () => {
             "ads": [
               {
                 "creativeId": "11111",
-                "price": "0.006",
-                "priceType": "VIEW",
               },
             ],
             "billingType": "cpm",
@@ -284,6 +262,7 @@ describe("new form tests", () => {
               },
             ],
             "perDay": 4,
+            "price": "0.006",
             "segments": [
               {
                 "code": "5678",
@@ -316,29 +295,6 @@ describe("new form tests", () => {
       }
     `);
   });
-
-  it("should transform a creative", () => {
-    creative.payloadNotification = {
-      title: "valid",
-      targetUrl: "valid",
-      body: "valid",
-    };
-
-    creative.payloadSearch = {
-      title: "invalid",
-      targetUrl: "invalid",
-      body: "invalid",
-    };
-
-    const res = transformCreative(creative, form);
-    expect(res).toMatchInlineSnapshot(`
-      {
-        "creativeId": "11111",
-        "price": "0.006",
-        "priceType": "VIEW",
-      }
-    `);
-  });
 });
 
 describe("edit form tests", () => {
@@ -356,36 +312,23 @@ describe("edit form tests", () => {
     type: { code: "notification_v1_all" },
   };
 
-  const ad: AdFragment = {
+  const ad: Partial<AdFragment> = {
     id: "1",
     creative: creative,
-    state: "active",
-    price: "6",
-    priceType: ConfirmationType.View,
   };
 
-  const ad2: AdFragment = {
-    id: "2",
-    creative: creative,
-    state: "deleted",
-    price: "6",
-    priceType: ConfirmationType.View,
-  };
-
-  const ad3: AdFragment = {
+  const ad2: Partial<AdFragment> = {
     id: "3",
     creative: {
       ...creative,
       id: "1235",
       name: "a different creative",
     },
-    state: "active",
-    price: "6",
-    priceType: ConfirmationType.View,
   };
 
-  const adSet: AdSetFragment = {
+  const adSet: DeepPartial<AdSetFragment> = {
     ads: [ad, ad2],
+    price: "6",
     billingType: "cpm",
     conversions: [],
     createdAt: undefined,
@@ -397,8 +340,9 @@ describe("edit form tests", () => {
     totalMax: 100,
   };
 
-  const adSet2: AdSetFragment = {
-    ads: [ad, ad3],
+  const adSet2: DeepPartial<AdSetFragment> = {
+    ads: [ad],
+    price: "6",
     billingType: "cpm",
     conversions: [],
     createdAt: undefined,
@@ -410,7 +354,7 @@ describe("edit form tests", () => {
     totalMax: 100,
   };
 
-  const campaignFragment: CampaignFragment = {
+  const campaignFragment: DeepPartial<CampaignFragment> = {
     adSets: [adSet, adSet2],
     advertiser: { id: "12345" },
     budget: 100,
@@ -436,8 +380,8 @@ describe("edit form tests", () => {
   };
 
   const editForm = editCampaignValues(
-    campaignFragment,
-    campaignFragment.advertiser.id,
+    campaignFragment as CampaignFragment,
+    campaignFragment?.advertiser?.id ?? "",
   );
   it("should result in a valid campaign form", () => {
     const omitted = _.omit(editForm, ["newCreative"]);
@@ -469,7 +413,7 @@ describe("edit form tests", () => {
                 "advertiserId": "12345",
                 "createdAt": undefined,
                 "id": "1235",
-                "included": false,
+                "included": true,
                 "name": "a different creative",
                 "payloadInlineContent": undefined,
                 "payloadNotification": {
@@ -525,7 +469,7 @@ describe("edit form tests", () => {
                 "advertiserId": "12345",
                 "createdAt": undefined,
                 "id": "1235",
-                "included": true,
+                "included": false,
                 "name": "a different creative",
                 "payloadInlineContent": undefined,
                 "payloadNotification": {
@@ -569,7 +513,7 @@ describe("edit form tests", () => {
         "isCreating": false,
         "name": "My first campaign",
         "paymentType": "RADOM",
-        "price": 6000,
+        "price": "6000",
         "startAt": undefined,
         "state": "active",
         "type": "paid",
@@ -588,10 +532,13 @@ describe("edit form tests", () => {
               {
                 "creativeId": "1234",
                 "creativeSetId": "11111",
-                "price": "6",
-                "priceType": "VIEW",
+              },
+              {
+                "creativeId": "1235",
+                "creativeSetId": "11111",
               },
             ],
+            "billingType": "cpm",
             "id": "11111",
             "oses": [
               {
@@ -599,6 +546,7 @@ describe("edit form tests", () => {
                 "name": "macos",
               },
             ],
+            "price": "6",
             "segments": [
               {
                 "code": "5678",
@@ -611,16 +559,9 @@ describe("edit form tests", () => {
               {
                 "creativeId": "1234",
                 "creativeSetId": "22222",
-                "price": "6",
-                "priceType": "VIEW",
-              },
-              {
-                "creativeId": "1235",
-                "creativeSetId": "22222",
-                "price": "6",
-                "priceType": "VIEW",
               },
             ],
+            "billingType": "cpm",
             "id": "22222",
             "oses": [
               {
@@ -628,6 +569,7 @@ describe("edit form tests", () => {
                 "name": "linux",
               },
             ],
+            "price": "6",
             "segments": [
               {
                 "code": "5678",
