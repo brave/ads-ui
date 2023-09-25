@@ -37,7 +37,9 @@ export type CampaignWithEngagementsFragment = {
   endAt: any;
   pacingIndex?: number | null;
   format: Types.CampaignFormat;
-  adSets: Array<{ conversions?: Array<{ type: string }> | null }>;
+  adSets: Array<{
+    conversions?: Array<{ type: string; extractExternalId: boolean }> | null;
+  }>;
   engagements?: Array<{
     creativeinstanceid: string;
     createdat: any;
@@ -78,7 +80,9 @@ export type AnalyticOverviewQuery = {
     endAt: any;
     pacingIndex?: number | null;
     format: Types.CampaignFormat;
-    adSets: Array<{ conversions?: Array<{ type: string }> | null }>;
+    adSets: Array<{
+      conversions?: Array<{ type: string; extractExternalId: boolean }> | null;
+    }>;
     engagements?: Array<{
       creativeinstanceid: string;
       createdat: any;
@@ -158,6 +162,7 @@ export const CampaignWithEngagementsFragmentDoc = gql`
     adSets {
       conversions {
         type
+        extractExternalId
       }
     }
     engagements {
