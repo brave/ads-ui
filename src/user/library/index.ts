@@ -31,7 +31,6 @@ export function transformNewForm(
   form: CampaignForm,
   userId?: string,
 ): CreateCampaignInput {
-  const price = BigNumber(form.price);
   return {
     currency: form.currency,
     externalId: "",
@@ -51,10 +50,7 @@ export function transformNewForm(
     budget: form.budget,
     adSets: form.adSets.map((adSet) => ({
       name: adSet.name,
-      price:
-        form.billingType === "cpm"
-          ? price.dividedBy(1000).toString()
-          : price.toString(),
+      price: transformPrice(form),
       billingType: form.billingType,
       perDay: form.format === CampaignFormat.PushNotification ? 4 : 6,
       segments: adSet.segments.map((s) => ({ code: s.code, name: s.name })),
@@ -68,6 +64,15 @@ export function transformNewForm(
     paymentType: form.paymentType,
   };
 }
+
+export const transformPrice = (
+  f: Pick<CampaignForm, "price" | "billingType">,
+) => {
+  const price = BigNumber(f.price);
+  return f.billingType === "cpm"
+    ? price.dividedBy(1000).toString()
+    : price.toString();
+};
 
 function transformConversion(conv: Conversion[]) {
   if (conv.length <= 0) {
@@ -210,6 +215,8 @@ export function transformEditForm(
     paymentType: form.paymentType,
     adSets: form.adSets.map((adSet) => ({
       id: adSet.id,
+      billingType: form.billingType,
+      price: transformPrice(form),
       segments: adSet.segments.map((v) => ({ code: v.code, name: v.name })),
       oses: adSet.oses.map((v) => ({ code: v.code, name: v.name })),
       ads: adSet.creatives

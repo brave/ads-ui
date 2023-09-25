@@ -1,6 +1,11 @@
 import { CampaignFragment } from "graphql/campaign.generated";
 import { describe, expect, it } from "vitest";
-import { editCampaignValues, transformEditForm, transformNewForm } from ".";
+import {
+  editCampaignValues,
+  transformEditForm,
+  transformNewForm,
+  transformPrice,
+} from ".";
 import {
   CampaignFormat,
   CampaignPacingStrategies,
@@ -154,6 +159,35 @@ describe("pricing logic (read)", () => {
     const formObject = editCampaignValues(campaign, "abc");
     expect(formObject.price).toEqual("100");
     expect(formObject.billingType).toEqual("cpm");
+  });
+});
+
+describe("pricing logic (write)", () => {
+  it("should convert from CPM to per-impression values when populating a CPM creative", () => {
+    const result = transformPrice({
+      billingType: "cpm",
+      price: "9",
+    });
+
+    expect(result).toEqual("0.009");
+  });
+
+  it("should not convert CPC to per-impression values when populating a CPC creative", () => {
+    const result = transformPrice({
+      billingType: "cpc",
+      price: "9",
+    });
+
+    expect(result).toEqual("9");
+  });
+
+  it("should not convert CPV to per-impression values when populating a CPV creative", () => {
+    const result = transformPrice({
+      billingType: "cpv",
+      price: "9",
+    });
+
+    expect(result).toEqual("9");
   });
 });
 
@@ -504,6 +538,7 @@ describe("edit form tests", () => {
                 "creativeSetId": "11111",
               },
             ],
+            "billingType": "cpm",
             "id": "11111",
             "oses": [
               {
@@ -511,6 +546,7 @@ describe("edit form tests", () => {
                 "name": "macos",
               },
             ],
+            "price": "6",
             "segments": [
               {
                 "code": "5678",
@@ -525,6 +561,7 @@ describe("edit form tests", () => {
                 "creativeSetId": "22222",
               },
             ],
+            "billingType": "cpm",
             "id": "22222",
             "oses": [
               {
@@ -532,6 +569,7 @@ describe("edit form tests", () => {
                 "name": "linux",
               },
             ],
+            "price": "6",
             "segments": [
               {
                 "code": "5678",
