@@ -27,7 +27,13 @@ export function NewsPreview() {
         )}
       </Box>
       <Box padding="25px 35px" bgcolor="rgba(53, 53, 53, 0.47)">
-        <Box display="flex" flexDirection="row" mb={1} gap={2}>
+        <Box
+          display="flex"
+          flexDirection="row"
+          mb={1}
+          gap={2}
+          justifyContent="space-between"
+        >
           <Typography color="#ffff" fontSize="22px" fontWeight={500}>
             {value?.title ||
               "This is a news display Ad, it wll look like part of the news feed."}
@@ -36,7 +42,7 @@ export function NewsPreview() {
             width="300px"
             display="flex"
             alignItems="center"
-            justifyContent="center"
+            justifyContent="flex-end"
           >
             <Box
               color="#ffff"
