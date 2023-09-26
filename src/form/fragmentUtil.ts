@@ -48,13 +48,12 @@ export function createAdSetFromFragment(
   campaignId?: string,
 ): CreateAdSetInput {
   const ads = (data.ads ?? []).filter((ad) => ad.state !== "deleted");
-
   return {
     campaignId,
     ads: ads.map((ad) => ({
       creativeId: ad.creative.id,
     })),
-    price: ads[0].price,
+    price: ads[0].price ?? "6",
     bannedKeywords: data.bannedKeywords,
     billingType: data.billingType ?? "cpm",
     conversions: (data.conversions ?? []).map((c) => ({

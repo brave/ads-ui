@@ -19,8 +19,9 @@ import BigNumber from "bignumber.js";
 
 export const MIN_PER_DAY = 33;
 export const MIN_PER_CAMPAIGN = 100;
+export type PriceFragment = Omit<AdvertiserPriceFragment, "isDefault">;
 
-export const CampaignSchema = (prices: AdvertiserPriceFragment[]) =>
+export const CampaignSchema = (prices: PriceFragment[]) =>
   object().shape({
     name: string().label("Campaign Name").required(),
     format: string()
@@ -176,7 +177,7 @@ export const CampaignSchema = (prices: AdvertiserPriceFragment[]) =>
   });
 
 export function findPrice(
-  prices: AdvertiserPriceFragment[],
+  prices: PriceFragment[],
   format: CampaignFormat,
   billingType: BillingType,
   defaultPrice: string,

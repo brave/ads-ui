@@ -8,7 +8,7 @@ import {
 import { CampaignSchema } from "./CampaignSchema";
 import { AdvertiserPriceFragment } from "graphql/advertiser.generated";
 
-const prices: AdvertiserPriceFragment[] = [
+const prices: Omit<AdvertiserPriceFragment, "isDefault">[] = [
   {
     format: CampaignFormat.PushNotification,
     price: "6",
