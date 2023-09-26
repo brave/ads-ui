@@ -112,10 +112,8 @@ export type CreateAdInput = {
   creativeId?: InputMaybe<Scalars["String"]>;
   creativeSetId?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["String"]>;
-  /** The price in the owning campaign's currency for each single confirmation of the priceType specified. Note therefore that the caller is responsible for dividing cost-per-mille by 1000. */
-  price: Scalars["Numeric"];
-  priceType: ConfirmationType;
-  state?: InputMaybe<Scalars["String"]>;
+  price?: InputMaybe<Scalars["Numeric"]>;
+  priceType?: InputMaybe<ConfirmationType>;
   webhooks?: InputMaybe<Array<CreateWebhookInput>>;
 };
 
@@ -133,6 +131,8 @@ export type CreateAdSetInput = {
   negativeKeywords?: InputMaybe<Array<Scalars["String"]>>;
   oses?: InputMaybe<Array<CreateOsInput>>;
   perDay: Scalars["Float"];
+  /** The price in the owning campaign's currency for each single confirmation of the priceType specified. Note therefore that the caller is responsible for dividing cost-per-mille by 1000. */
+  price?: InputMaybe<Scalars["Numeric"]>;
   segments: Array<CreateSegmentInput>;
   splitTestGroup?: InputMaybe<Scalars["String"]>;
   state?: InputMaybe<Scalars["String"]>;
@@ -413,6 +413,8 @@ export type UpdateAdSetInput = {
   optimized?: InputMaybe<Scalars["Boolean"]>;
   oses?: InputMaybe<Array<UpdateOSesInput>>;
   perDay?: InputMaybe<Scalars["Float"]>;
+  /** The price in the owning campaign's currency for each single confirmation of the priceType specified. Note therefore that the caller is responsible for dividing cost-per-mille by 1000. */
+  price?: InputMaybe<Scalars["Numeric"]>;
   segments?: InputMaybe<Array<UpdateSegmentInput>>;
   splitTestGroup?: InputMaybe<Scalars["String"]>;
   state?: InputMaybe<Scalars["String"]>;

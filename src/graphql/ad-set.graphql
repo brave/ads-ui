@@ -1,5 +1,6 @@
 fragment AdSet on AdSet {
   id
+  price
   createdAt
   billingType
   name

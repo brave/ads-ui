@@ -45,6 +45,13 @@ export function InlineContentAd() {
           label="Target URL"
         />
 
+        {advertiser.selfServiceSetPrice && (
+          <FormikTextField
+            name="newCreative.payloadInlineContent.description"
+            label="Advertiser Name"
+          />
+        )}
+
         <Stack direction="row" justifyContent="space-between" mt={1}>
           <div />
           <CreateCreativeButton />
