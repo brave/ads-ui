@@ -96,7 +96,7 @@ export function EditCampaign() {
         }}
         validationSchema={CampaignSchema(data.prices)}
       >
-        <BaseForm hasPaymentIntent={hasPaymentIntent} />
+        <BaseForm hasPaymentIntent={hasPaymentIntent} prices={data.prices} />
       </Formik>
     </Container>
   );

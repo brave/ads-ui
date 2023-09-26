@@ -4,8 +4,9 @@ import { CampaignDateRange } from "components/Campaigns/CampaignDateRange";
 import { LocationField } from "user/views/adsManager/views/advanced/components/campaign/fields/LocationField";
 import { Typography } from "@mui/material";
 import { FormatField } from "user/views/adsManager/views/advanced/components/campaign/fields/FormatField";
+import { AdvertiserPriceFragment } from "graphql/advertiser.generated";
 
-export function CampaignSettings() {
+export function CampaignSettings(props: { prices: AdvertiserPriceFragment[] }) {
   const { isDraft } = useIsEdit();
 
   return (
@@ -20,7 +21,7 @@ export function CampaignSettings() {
         <CampaignDateRange />
       </CardContainer>
 
-      <FormatField />
+      <FormatField prices={props.prices} />
 
       {isDraft && <LocationField />}
     </>

@@ -74,6 +74,7 @@ export function NewCampaign() {
   return (
     <Container maxWidth="xl">
       <Formik
+        enableReinitialize
         initialValues={initial}
         onSubmit={async (v: CampaignForm, { setSubmitting }) => {
           setSubmitting(true);
@@ -84,7 +85,7 @@ export function NewCampaign() {
         validationSchema={CampaignSchema(data.prices)}
       >
         <>
-          <BaseForm />
+          <BaseForm prices={data.prices} />
           <PersistFormValues />
         </>
       </Formik>
