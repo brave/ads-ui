@@ -69,6 +69,7 @@ fragment AdvertiserPrice on AdvertiserPrice {
   price
   billingType
   format
+  isDefault
 }
 
 query advertiserImages($id: String!) {
