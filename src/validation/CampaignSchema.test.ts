@@ -7,12 +7,18 @@ import {
 } from "graphql/types";
 import { CampaignSchema } from "./CampaignSchema";
 import { AdvertiserPriceFragment } from "graphql/advertiser.generated";
+import { describe } from "vitest";
 
 const prices: Omit<AdvertiserPriceFragment, "isDefault">[] = [
   {
     format: CampaignFormat.PushNotification,
     price: "6",
     billingType: BillingType.Cpm,
+  },
+  {
+    format: CampaignFormat.PushNotification,
+    price: ".15",
+    billingType: BillingType.Cpc,
   },
 ];
 
@@ -50,12 +56,36 @@ it("should fail if the campaign start date is in past", () => {
   );
 });
 
-it("should fail if the campaign price is less than allowed price", () => {
-  const c = produce(validCampaign, (draft) => {
-    draft.price = "5";
+describe("pricing tests", () => {
+  it("should fail if the campaign price is less than allowed price", () => {
+    const c = produce(validCampaign, (draft) => {
+      draft.price = "5";
+    });
+
+    expect(() =>
+      CampaignSchema(prices).validateSync(c),
+    ).toThrowErrorMatchingInlineSnapshot('"CPM price must be 6 or higher"');
   });
 
-  expect(() =>
-    CampaignSchema(prices).validateSync(c),
-  ).toThrowErrorMatchingInlineSnapshot('"CPM price must be 6 or higher"');
+  it("should validate against default if none found", () => {
+    const c = produce(validCampaign, (draft) => {
+      (draft.format = CampaignFormat.NewsDisplayAd), (draft.price = "9");
+    });
+
+    expect(() =>
+      CampaignSchema(prices).validateSync(c),
+    ).toThrowErrorMatchingInlineSnapshot('"CPM price must be 10 or higher"');
+  });
+
+  it("should validate against default if none found", () => {
+    const c = produce(validCampaign, (draft) => {
+      (draft.format = CampaignFormat.NewsDisplayAd),
+        (draft.billingType = "cpc");
+      draft.price = ".1";
+    });
+
+    expect(() =>
+      CampaignSchema(prices).validateSync(c),
+    ).toThrowErrorMatchingInlineSnapshot('"CPC price must be 0.15 or higher"');
+  });
 });
