@@ -94,7 +94,7 @@ export function editCampaignValues(
 
   const billingType = (_.head(campaign.adSets)?.billingType ??
     "cpm") as Billing;
-  const rawPrice = BigNumber(_.head(campaign.adSets)?.price ?? "0.1");
+  const rawPrice = BigNumber(_.head(campaign.adSets)?.price ?? ".006");
   const price = billingType === "cpm" ? rawPrice.multipliedBy(1000) : rawPrice;
 
   return {

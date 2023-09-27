@@ -53,7 +53,6 @@ export function createAdSetFromFragment(
     campaignId,
     ads: ads.map((ad) => ({
       creativeId: ad.creative.id,
-      creativeSetId: data.id,
     })),
     price: ads[0].price,
     bannedKeywords: data.bannedKeywords,
