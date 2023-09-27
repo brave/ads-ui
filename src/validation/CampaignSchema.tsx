@@ -4,10 +4,10 @@ import {
   boolean,
   date,
   number,
-  NumberSchema,
   object,
   ref,
   string,
+  StringSchema,
 } from "yup";
 import { startOfDay } from "date-fns";
 import { twoDaysOut } from "form/DateFieldHelpers";
@@ -73,7 +73,7 @@ export const CampaignSchema = (prices: AdvertiserPriceFragment[]) =>
       )
       .min(1, "At least one country must be targeted")
       .default([]),
-    price: number()
+    price: string()
       .label("Price")
       .when("billingType", {
         is: (b: string) => b === "cpc",
@@ -94,7 +94,7 @@ export const CampaignSchema = (prices: AdvertiserPriceFragment[]) =>
             prices,
             CampaignFormat.PushNotification,
             BillingType.Cpm,
-            "5",
+            "6",
             schema,
           ),
       })
@@ -106,7 +106,7 @@ export const CampaignSchema = (prices: AdvertiserPriceFragment[]) =>
             prices,
             CampaignFormat.NewsDisplayAd,
             BillingType.Cpm,
-            "9",
+            "10",
             schema,
           ),
       })
@@ -180,14 +180,15 @@ export function findPrice(
   format: CampaignFormat,
   billingType: BillingType,
   defaultPrice: string,
-  schema: NumberSchema<number | undefined, AnyObject, undefined, "">,
+  schema: StringSchema<string | undefined, AnyObject, undefined, "">,
 ) {
   const found = prices.find(
     (p) => p.format === format && p.billingType === billingType,
   );
   const price = BigNumber(found?.price ?? defaultPrice);
-  return schema.min(
-    price.toNumber(),
+  return schema.test(
+    "is-lte-price",
     `${billingType} price must be ${price} or higher`,
+    (value) => (value ? price.isLessThanOrEqualTo(value) : true),
   );
 }
