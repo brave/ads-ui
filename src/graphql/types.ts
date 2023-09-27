@@ -82,13 +82,15 @@ export enum CampaignSource {
 
 export type ChangeFilter = {
   /** exclude all changes whose time range is completely before this time */
-  created?: InputMaybe<Scalars["DateTime"]>;
+  createdAfter?: InputMaybe<Scalars["DateTime"]>;
   /** include changes made by system user */
   includeSystemUser?: InputMaybe<Scalars["Boolean"]>;
   /** limit the amount of results returned */
   limit?: InputMaybe<Scalars["Float"]>;
   /** only include changes for this reference id */
   referenceId?: InputMaybe<Scalars["String"]>;
+  /** only include changes for this set of reference ids */
+  referenceIds?: InputMaybe<Array<Scalars["String"]>>;
 };
 
 export enum ConfirmationType {
