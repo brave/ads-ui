@@ -394,6 +394,7 @@ describe("edit form tests", () => {
               {
                 "advertiserId": "12345",
                 "createdAt": undefined,
+                "creativeInstanceId": "1",
                 "id": "1234",
                 "included": true,
                 "name": "a creative",
@@ -412,6 +413,7 @@ describe("edit form tests", () => {
               {
                 "advertiserId": "12345",
                 "createdAt": undefined,
+                "creativeInstanceId": "3",
                 "id": "1235",
                 "included": true,
                 "name": "a different creative",
@@ -450,6 +452,7 @@ describe("edit form tests", () => {
               {
                 "advertiserId": "12345",
                 "createdAt": undefined,
+                "creativeInstanceId": "1",
                 "id": "1234",
                 "included": true,
                 "name": "a creative",
@@ -468,6 +471,7 @@ describe("edit form tests", () => {
               {
                 "advertiserId": "12345",
                 "createdAt": undefined,
+                "creativeInstanceId": undefined,
                 "id": "1235",
                 "included": false,
                 "name": "a different creative",
@@ -532,14 +536,17 @@ describe("edit form tests", () => {
               {
                 "creativeId": "1234",
                 "creativeSetId": "11111",
+                "id": "1",
               },
               {
                 "creativeId": "1235",
                 "creativeSetId": "11111",
+                "id": "3",
               },
             ],
             "billingType": "cpm",
             "id": "11111",
+            "name": "11111",
             "oses": [
               {
                 "code": "1234",
@@ -559,10 +566,12 @@ describe("edit form tests", () => {
               {
                 "creativeId": "1234",
                 "creativeSetId": "22222",
+                "id": "1",
               },
             ],
             "billingType": "cpm",
             "id": "22222",
+            "name": "22222",
             "oses": [
               {
                 "code": "1234",
