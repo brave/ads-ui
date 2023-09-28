@@ -5,7 +5,7 @@ import {
   UpdateCampaignInput,
 } from "graphql/types";
 import { CampaignFragment } from "graphql/campaign.generated";
-import { AdFragment } from "graphql/ad-set.generated";
+import { AdFragment, AdSetFragment } from "graphql/ad-set.generated";
 import {
   AdSetForm,
   Billing,
@@ -18,6 +18,7 @@ import {
 import _ from "lodash";
 import BigNumber from "bignumber.js";
 import { CreativeFragment } from "graphql/creative.generated";
+import moment from "moment";
 
 const TYPE_CODE_LOOKUP: Record<string, string> = {
   notification_all_v1: "Push Notification",
@@ -90,6 +91,8 @@ export function editCampaignValues(
   campaign: CampaignFragment,
   advertiserId: string,
 ): CampaignForm {
+  const sort = (a: AdSetFragment, b: AdSetFragment) =>
+    moment(a.createdAt).valueOf() - moment(b.createdAt).valueOf();
   const ads: AdFragment[] = _.flatMap(campaign.adSets, "ads");
 
   const billingType = (_.head(campaign.adSets)?.billingType ??
@@ -99,7 +102,7 @@ export function editCampaignValues(
 
   return {
     id: campaign.id,
-    adSets: campaign.adSets.map((adSet) => {
+    adSets: [...campaign.adSets].sort(sort).map((adSet) => {
       const seg = adSet.segments ?? ([] as Segment[]);
 
       return {
@@ -156,6 +159,7 @@ function creativeList(
         return {
           ...validCreativeFields(c, advertiserId, included),
           createdAt: c.createdAt,
+          creativeInstanceId: included ? ad.id : undefined,
         };
       });
   };
@@ -217,11 +221,13 @@ export function transformEditForm(
       id: adSet.id,
       billingType: form.billingType,
       price: transformPrice(form),
+      name: adSet.name,
       segments: adSet.segments.map((v) => ({ code: v.code, name: v.name })),
       oses: adSet.oses.map((v) => ({ code: v.code, name: v.name })),
       ads: adSet.creatives
         .filter((c) => c.included)
         .map((ad) => ({
+          id: ad.creativeInstanceId,
           creativeId: ad.id,
           creativeSetId: adSet.id,
         })),
