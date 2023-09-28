@@ -385,7 +385,13 @@ describe("edit form tests", () => {
   );
   it("should result in a valid campaign form", () => {
     const omitted = _.omit(editForm, ["newCreative"]);
-    expect(omitted).toMatchInlineSnapshot(`
+    const sorted = {
+      ...omitted,
+      adSets: omitted.adSets?.sort(
+        (a, b) => a.id?.localeCompare(b.id ?? "") ?? 1,
+      ),
+    };
+    expect(sorted).toMatchInlineSnapshot(`
       {
         "adSets": [
           {
@@ -528,7 +534,13 @@ describe("edit form tests", () => {
 
   it("should resolve to update input", () => {
     const update = transformEditForm(editForm, editForm.id ?? "");
-    expect(update).toMatchInlineSnapshot(`
+    const sorted = {
+      ...update,
+      adSets: update.adSets?.sort(
+        (a, b) => a.id?.localeCompare(b.id ?? "") ?? 1,
+      ),
+    };
+    expect(sorted).toMatchInlineSnapshot(`
       {
         "adSets": [
           {

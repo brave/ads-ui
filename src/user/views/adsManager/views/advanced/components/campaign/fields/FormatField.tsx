@@ -12,8 +12,13 @@ import _ from "lodash";
 import HelpIcon from "@mui/icons-material/Help";
 import { useIsEdit } from "form/FormikHelpers";
 import { Billing } from "user/views/adsManager/types";
+import { AdvertiserPriceFragment } from "graphql/advertiser.generated";
 
-export function FormatField() {
+interface PriceProps {
+  prices: AdvertiserPriceFragment[];
+}
+
+export function FormatField({ prices }: PriceProps) {
   return (
     <CardContainer header="Format">
       <Stack direction="row" spacing={0.5} alignItems="center">
@@ -34,18 +39,24 @@ export function FormatField() {
         </IconButton>
       </Stack>
       <List sx={{ display: "flex", flexDirection: "row", gap: "20px" }}>
-        <FormatItemButton format={CampaignFormat.PushNotification} />
-        <FormatItemButton format={CampaignFormat.NewsDisplayAd} />
+        <FormatItemButton
+          format={CampaignFormat.PushNotification}
+          prices={prices}
+        />
+        <FormatItemButton
+          format={CampaignFormat.NewsDisplayAd}
+          prices={prices}
+        />
       </List>
     </CardContainer>
   );
 }
 
-const FormatItemButton = (props: { format: CampaignFormat }) => {
+const FormatItemButton = (props: { format: CampaignFormat } & PriceProps) => {
   const { isEdit } = useIsEdit();
   const [, meta, format] = useField<CampaignFormat>("format");
-  const [, , price] = useField<number>("price");
-  const [, , billing] = useField<Billing>("billingType");
+  const [, , price] = useField<string>("price");
+  const [, bMeta, billing] = useField<Billing>("billingType");
 
   return (
     <ListItemButton
@@ -53,11 +64,18 @@ const FormatItemButton = (props: { format: CampaignFormat }) => {
       selected={meta.value === props.format}
       onClick={() => {
         format.setValue(props.format);
+        const found = props.prices.find((p) => {
+          return (
+            p.format === props.format &&
+            p.billingType === bMeta.value.toUpperCase()
+          );
+        });
+        console.log(found);
         if (props.format === CampaignFormat.NewsDisplayAd) {
-          price.setValue(10);
+          price.setValue(found?.price ?? "10");
           billing.setValue("cpm");
         } else {
-          price.setValue(6);
+          price.setValue(found?.price ?? "6");
         }
       }}
       sx={{
