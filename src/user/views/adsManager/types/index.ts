@@ -61,6 +61,7 @@ export type Segment = {
 };
 
 export type Creative = CreativeInput & {
+  creativeInstanceId?: string;
   id?: string;
   targetUrlValid?: string;
   state?: string;
