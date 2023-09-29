@@ -107,6 +107,7 @@ export function editCampaignValues(
 
       return {
         id: adSet.id,
+        state: adSet.state,
         conversions: (adSet.conversions ?? []).map((c) => ({
           id: c.id,
           type: c.type,

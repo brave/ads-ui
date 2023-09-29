@@ -10,9 +10,18 @@ interface Props {
   end: string;
   type: string;
   source: CampaignSource;
+  isInline?: boolean;
 }
 
-export function OnOff({ state, loading, end, onChange, type, source }: Props) {
+export function OnOff({
+  state,
+  loading,
+  end,
+  onChange,
+  type,
+  source,
+  isInline,
+}: Props) {
   const [checked, setChecked] = useState(state === "active");
   const isAfterEnd = isPast(parseISO(end));
   const enabled =
@@ -20,12 +29,16 @@ export function OnOff({ state, loading, end, onChange, type, source }: Props) {
     (state === "active" || state === "paused") &&
     !isAfterEnd;
 
+  const DisabledDisplay = () =>
+    isInline ? null : (
+      <Typography sx={{ textAlign: "center", p: 0 }}>-</Typography>
+    );
+  const tooltip = checked ? "Pause" : "Activate";
+
   return (
     <Tooltip
       title={
-        enabled
-          ? `Activate or pause ${type}`
-          : `${type} status cannot be updated`
+        enabled ? `${tooltip} ${type}` : `${type} status cannot be updated`
       }
     >
       <span>
@@ -40,7 +53,7 @@ export function OnOff({ state, loading, end, onChange, type, source }: Props) {
             disabled={loading}
           />
         ) : (
-          <Typography sx={{ textAlign: "center", p: 0 }}>-</Typography>
+          <DisabledDisplay />
         )}
       </span>
     </Tooltip>

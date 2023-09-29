@@ -41,6 +41,7 @@ export type OS = {
 
 export type AdSetForm = {
   id?: string;
+  state?: string;
   name: string;
   segments: Segment[];
   oses: OS[];

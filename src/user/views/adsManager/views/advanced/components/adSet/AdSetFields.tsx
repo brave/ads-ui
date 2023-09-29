@@ -4,6 +4,14 @@ import { CardContainer } from "components/Card/CardContainer";
 import { useHistory } from "react-router-dom";
 import { FormikTextField, useIsEdit } from "form/FormikHelpers";
 import { AdSetAds } from "user/views/adsManager/views/advanced/components/adSet/fields/AdSetAds";
+import { adSetOnOffState } from "components/EnhancedTable/renderers";
+import { Stack } from "@mui/material";
+import { useFormikContext } from "formik";
+import { CampaignForm } from "user/views/adsManager/types";
+import { CampaignSource } from "graphql/types";
+import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { Status } from "components/Campaigns/Status";
+import { displayFromCampaignState } from "util/displayState";
 
 export function AdSetFields() {
   const history = useHistory();
@@ -14,7 +22,10 @@ export function AdSetFields() {
 
   return (
     <>
-      <CardContainer header={`Ad Set ${fakeCurrent}`}>
+      <CardContainer
+        header={`Ad Set ${fakeCurrent}`}
+        additionalAction={<SwitchHeader current={current} />}
+      >
         <FormikTextField
           name={`adSets.${current}.name`}
           label="Ad Set Name"
@@ -30,3 +41,31 @@ export function AdSetFields() {
     </>
   );
 }
+
+const SwitchHeader = (props: { current: number }) => {
+  const { isEdit } = useIsEdit();
+  const { advertiser } = useAdvertiser();
+  const { values } = useFormikContext<CampaignForm>();
+  const { current } = props;
+
+  if (!isEdit || !values.id) {
+    return null;
+  }
+
+  const c = {
+    campaignState: values.state,
+    campaignStart: values.startAt,
+    campaignEnd: values.endAt,
+    campaignId: values.id,
+    campaignSource: CampaignSource.SelfServe,
+    state: values.adSets[current].state,
+    advertiserId: advertiser.id,
+  };
+
+  return (
+    <Stack direction="row" spacing={1} alignItems="center">
+      <Status state={displayFromCampaignState(c)} />
+      {adSetOnOffState(c, true)}
+    </Stack>
+  );
+};
