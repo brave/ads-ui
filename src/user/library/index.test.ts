@@ -451,6 +451,7 @@ describe("edit form tests", () => {
                 "name": "test",
               },
             ],
+            "state": "active",
           },
           {
             "conversions": [],
@@ -509,6 +510,7 @@ describe("edit form tests", () => {
                 "name": "help",
               },
             ],
+            "state": "active",
           },
         ],
         "advertiserId": "12345",
