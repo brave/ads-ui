@@ -7,7 +7,8 @@ import { formatInTimeZone } from "date-fns-tz";
 import enUS from "date-fns/locale/en-US";
 import {
   CampaignSummaryFragment,
-  LoadCampaignAdsDocument,
+  refetchLoadCampaignAdsQuery,
+  refetchLoadCampaignQuery,
   useUpdateCampaignMutation,
 } from "graphql/campaign.generated";
 import { useUpdateAdSetMutation } from "graphql/ad-set.generated";
@@ -128,10 +129,8 @@ export function adSetOnOffState(
 ): ReactNode {
   const [updateAdSet, { loading }] = useUpdateAdSetMutation({
     refetchQueries: [
-      {
-        query: LoadCampaignAdsDocument,
-        variables: { id: c.campaignId },
-      },
+      refetchLoadCampaignAdsQuery({ id: c.campaignId }),
+      refetchLoadCampaignQuery({ id: c.campaignId }),
     ],
   });
 
