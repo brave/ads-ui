@@ -5,6 +5,7 @@ export type RegistrationForm = {
     name: string;
     url: string;
     phone?: string;
+    description?: string;
   };
   address: {
     street1: string;
@@ -22,6 +23,7 @@ export const initialValues: RegistrationForm = {
   advertiser: {
     name: "",
     url: "",
+    description: "",
   },
   address: {
     street1: "",
