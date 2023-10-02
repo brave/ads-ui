@@ -56,9 +56,7 @@ export function NewAdSet() {
                   }
                   replace
                 >
-                  <span style={{ marginLeft: "10px" }}>
-                    {adSet.name || `Ad Set ${idx + 1}`}
-                  </span>
+                  {adSet.name || `Ad Set ${idx + 1}`}
                 </Link>
                 {idx > 0 && !adSet.id && (
                   <Tooltip title="Remove">
