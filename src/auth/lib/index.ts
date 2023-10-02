@@ -64,6 +64,7 @@ export async function submitRegistration(form: RegistrationForm) {
         name: form.advertiser.name,
         phone: form.advertiser.phone,
         url: form.advertiser.url,
+        description: form.advertiser.description,
       },
       address: {
         ...form.address,
