@@ -7,15 +7,17 @@ import { formatInTimeZone } from "date-fns-tz";
 import enUS from "date-fns/locale/en-US";
 import {
   CampaignSummaryFragment,
-  LoadCampaignAdsDocument,
+  refetchLoadCampaignAdsQuery,
+  refetchLoadCampaignQuery,
   useUpdateCampaignMutation,
 } from "graphql/campaign.generated";
 import { useUpdateAdSetMutation } from "graphql/ad-set.generated";
 import { OnOff } from "../Switch/OnOff";
 import { displayFromCampaignState } from "util/displayState";
-import { AdSetDetails } from "user/adSet/AdSetList";
+import { CampaignExtras } from "user/adSet/AdSetList";
 import { FilterContext } from "state/context";
 import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
+import { UpdateAdSetInput } from "graphql/types";
 
 export type CellValueRenderer = (value: CellValue) => ReactNode;
 const ADS_DEFAULT_TIMEZONE = "America/New_York";
@@ -121,18 +123,18 @@ export function campaignOnOffState(
   );
 }
 
-export function adSetOnOffState(c: AdSetDetails): ReactNode {
+export function adSetOnOffState(
+  c: Omit<UpdateAdSetInput, "ads"> & CampaignExtras,
+  isInline?: boolean,
+): ReactNode {
   const [updateAdSet, { loading }] = useUpdateAdSetMutation({
     refetchQueries: [
-      {
-        query: LoadCampaignAdsDocument,
-        variables: { id: c.campaignId },
-      },
+      refetchLoadCampaignAdsQuery({ id: c.campaignId }),
+      refetchLoadCampaignQuery({ id: c.campaignId }),
     ],
   });
 
   const state = displayFromCampaignState(c);
-
   return (
     <OnOff
       onChange={(s) => {
@@ -143,10 +145,6 @@ export function adSetOnOffState(c: AdSetDetails): ReactNode {
                 state: s,
                 id: c.id,
                 campaignId: c.campaignId,
-                segments: c.segments?.map((s) => ({
-                  code: s.code,
-                  name: s.name,
-                })),
               },
             },
           });
@@ -157,6 +155,7 @@ export function adSetOnOffState(c: AdSetDetails): ReactNode {
       end={c.campaignEnd}
       source={c.campaignSource}
       type="Ad Set"
+      isInline={isInline}
     />
   );
 }

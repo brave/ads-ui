@@ -4,13 +4,17 @@ export const displayFromCampaignState = (c: {
   campaignState: string;
   campaignEnd: string;
   campaignStart: string;
-  state: string;
+  state?: string | null;
 }) => {
-  if (isBeforeStartDate(c.campaignStart)) {
+  console.log(c.state);
+
+  if (c.campaignState === "draft") {
+    return "draft";
+  } else if (isBeforeStartDate(c.campaignStart)) {
     return "scheduled";
   } else if (isAfterEndDate(c.campaignEnd)) {
     return "completed";
-  } else {
-    return c.state;
   }
+
+  return c.state ?? "draft";
 };

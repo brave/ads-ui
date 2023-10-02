@@ -49,7 +49,9 @@ const ChipList = ({ items, max }: ChipListProps) => {
   );
 };
 
-export type AdSetDetails = AdSetFragment & {
+export type AdSetDetails = AdSetFragment & CampaignExtras;
+
+export type CampaignExtras = {
   campaignStart: string;
   campaignEnd: string;
   campaignId: string;
