@@ -133,7 +133,7 @@ export type AdvertiserImageFragment = {
 };
 
 export type AdvertiserPriceFragment = {
-  price: string;
+  billingModelPrice: string;
   billingType: Types.BillingType;
   format: Types.CampaignFormat;
 };
@@ -161,7 +161,7 @@ export type AdvertiserPricesQueryVariables = Types.Exact<{
 export type AdvertiserPricesQuery = {
   advertiser?: {
     prices: Array<{
-      price: string;
+      billingModelPrice: string;
       billingType: Types.BillingType;
       format: Types.CampaignFormat;
     }>;
@@ -231,7 +231,7 @@ export const AdvertiserImageFragmentDoc = gql`
 `;
 export const AdvertiserPriceFragmentDoc = gql`
   fragment AdvertiserPrice on AdvertiserPrice {
-    price
+    billingModelPrice
     billingType
     format
   }

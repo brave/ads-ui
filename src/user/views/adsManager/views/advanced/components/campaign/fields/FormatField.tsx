@@ -72,10 +72,10 @@ const FormatItemButton = (props: { format: CampaignFormat } & PriceProps) => {
         });
         console.log(found);
         if (props.format === CampaignFormat.NewsDisplayAd) {
-          price.setValue(found?.price ?? "10");
+          price.setValue(found?.billingModelPrice ?? "10");
           billing.setValue("cpm");
         } else {
-          price.setValue(found?.price ?? "6");
+          price.setValue(found?.billingModelPrice ?? "6");
         }
       }}
       sx={{
