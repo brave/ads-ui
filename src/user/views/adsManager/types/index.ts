@@ -126,7 +126,7 @@ export const initialCampaign = (
     newCreative: initialCreative,
     billingType,
     currency: "USD",
-    price: price?.price ?? "6",
+    price: price?.billingModelPrice ?? "6",
     adSets: [
       {
         ...initialAdSet,

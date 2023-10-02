@@ -185,7 +185,7 @@ export function findPrice(
   const found = prices.find(
     (p) => p.format === format && p.billingType === billingType,
   );
-  const price = BigNumber(found?.price ?? defaultPrice);
+  const price = BigNumber(found?.billingModelPrice ?? defaultPrice);
   return schema.test(
     "is-lte-price",
     `${billingType} price must be ${price} or higher`,

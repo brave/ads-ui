@@ -12,12 +12,12 @@ import { describe } from "vitest";
 const prices: Omit<AdvertiserPriceFragment, "isDefault">[] = [
   {
     format: CampaignFormat.PushNotification,
-    price: "6",
+    billingModelPrice: "6",
     billingType: BillingType.Cpm,
   },
   {
     format: CampaignFormat.PushNotification,
-    price: ".15",
+    billingModelPrice: ".15",
     billingType: BillingType.Cpc,
   },
 ];

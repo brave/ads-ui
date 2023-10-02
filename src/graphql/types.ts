@@ -32,9 +32,9 @@ export type AdvertiserCampaignFilter = {
 };
 
 export type AdvertiserPriceInput = {
+  billingModelPrice: Scalars["Numeric"];
   billingType: BillingType;
   format: CampaignFormat;
-  price: Scalars["Numeric"];
 };
 
 export enum AdvertiserSource {
@@ -172,10 +172,10 @@ export type CreateAdvertiserInput = {
   additionalBillingEmails?: InputMaybe<Array<Scalars["String"]>>;
   billingAddress: CreateAddressInput;
   billingEmail?: InputMaybe<Scalars["String"]>;
+  billingModelPrices?: InputMaybe<Array<AdvertiserPriceInput>>;
   mailingAddress: CreateAddressInput;
   name: Scalars["String"];
   phone?: InputMaybe<Scalars["String"]>;
-  prices?: InputMaybe<Array<AdvertiserPriceInput>>;
   referrer?: InputMaybe<Scalars["String"]>;
   selfServiceCreate?: InputMaybe<Scalars["Boolean"]>;
   selfServiceEdit?: InputMaybe<Scalars["Boolean"]>;
@@ -450,11 +450,11 @@ export type UpdateAdvertiserInput = {
   agreed?: InputMaybe<Scalars["Boolean"]>;
   billingAddress?: InputMaybe<UpdateAddressInput>;
   billingEmail?: InputMaybe<Scalars["String"]>;
+  billingModelPrices?: InputMaybe<Array<AdvertiserPriceInput>>;
   id: Scalars["String"];
   mailingAddress?: InputMaybe<UpdateAddressInput>;
   name?: InputMaybe<Scalars["String"]>;
   phone?: InputMaybe<Scalars["String"]>;
-  prices?: InputMaybe<Array<AdvertiserPriceInput>>;
   publicKey?: InputMaybe<Scalars["String"]>;
   referrer?: InputMaybe<Scalars["String"]>;
   selfServiceCreate?: InputMaybe<Scalars["Boolean"]>;
@@ -497,30 +497,6 @@ export type UpdateConversionsInput = {
   trailingAsteriskNotRequired?: InputMaybe<Scalars["Boolean"]>;
   type?: InputMaybe<Scalars["String"]>;
   urlPattern?: InputMaybe<Scalars["String"]>;
-};
-
-export type UpdateInPageCreativeInput = {
-  advertiserId: Scalars["String"];
-  creativeId: Scalars["String"];
-  endAt?: InputMaybe<Scalars["DateTime"]>;
-  name: Scalars["String"];
-  payload: InPagePayloadInput;
-  startAt?: InputMaybe<Scalars["DateTime"]>;
-  state: Scalars["String"];
-  type: CreateTypeInput;
-  userId: Scalars["String"];
-};
-
-export type UpdateNewTabPageCreativeInput = {
-  advertiserId: Scalars["String"];
-  creativeId: Scalars["String"];
-  endAt?: InputMaybe<Scalars["DateTime"]>;
-  name: Scalars["String"];
-  payload: NewTabPagePayloadInput;
-  startAt?: InputMaybe<Scalars["DateTime"]>;
-  state: Scalars["String"];
-  type: CreateTypeInput;
-  userId: Scalars["String"];
 };
 
 export type UpdateNotificationCreativeInput = {
