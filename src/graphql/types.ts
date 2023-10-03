@@ -31,6 +31,12 @@ export type AdvertiserCampaignFilter = {
   includeCreativeSets?: InputMaybe<Scalars["Boolean"]>;
 };
 
+export type AdvertiserPriceInput = {
+  billingModelPrice: Scalars["Numeric"];
+  billingType: BillingType;
+  format: CampaignFormat;
+};
+
 export enum AdvertiserSource {
   Managed = "MANAGED",
   SelfServe = "SELF_SERVE",
@@ -39,6 +45,12 @@ export enum AdvertiserSource {
 export type ApproveCampaignInput = {
   campaignId: Scalars["String"];
 };
+
+export enum BillingType {
+  Cpc = "CPC",
+  Cpm = "CPM",
+  Cpv = "CPV",
+}
 
 export type CampaignFilter = {
   /** only include campaigns for this format */
@@ -114,8 +126,6 @@ export type CreateAdInput = {
   creativeId?: InputMaybe<Scalars["String"]>;
   creativeSetId?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["String"]>;
-  price?: InputMaybe<Scalars["Numeric"]>;
-  priceType?: InputMaybe<ConfirmationType>;
   webhooks?: InputMaybe<Array<CreateWebhookInput>>;
 };
 
@@ -134,7 +144,7 @@ export type CreateAdSetInput = {
   oses?: InputMaybe<Array<CreateOsInput>>;
   perDay: Scalars["Float"];
   /** The price in the owning campaign's currency for each single confirmation of the priceType specified. Note therefore that the caller is responsible for dividing cost-per-mille by 1000. */
-  price?: InputMaybe<Scalars["Numeric"]>;
+  price: Scalars["Numeric"];
   segments: Array<CreateSegmentInput>;
   splitTestGroup?: InputMaybe<Scalars["String"]>;
   state?: InputMaybe<Scalars["String"]>;
@@ -162,6 +172,7 @@ export type CreateAdvertiserInput = {
   additionalBillingEmails?: InputMaybe<Array<Scalars["String"]>>;
   billingAddress: CreateAddressInput;
   billingEmail?: InputMaybe<Scalars["String"]>;
+  billingModelPrices?: InputMaybe<Array<AdvertiserPriceInput>>;
   mailingAddress: CreateAddressInput;
   name: Scalars["String"];
   phone?: InputMaybe<Scalars["String"]>;
@@ -439,6 +450,7 @@ export type UpdateAdvertiserInput = {
   agreed?: InputMaybe<Scalars["Boolean"]>;
   billingAddress?: InputMaybe<UpdateAddressInput>;
   billingEmail?: InputMaybe<Scalars["String"]>;
+  billingModelPrices?: InputMaybe<Array<AdvertiserPriceInput>>;
   id: Scalars["String"];
   mailingAddress?: InputMaybe<UpdateAddressInput>;
   name?: InputMaybe<Scalars["String"]>;
@@ -485,30 +497,6 @@ export type UpdateConversionsInput = {
   trailingAsteriskNotRequired?: InputMaybe<Scalars["Boolean"]>;
   type?: InputMaybe<Scalars["String"]>;
   urlPattern?: InputMaybe<Scalars["String"]>;
-};
-
-export type UpdateInPageCreativeInput = {
-  advertiserId: Scalars["String"];
-  creativeId: Scalars["String"];
-  endAt?: InputMaybe<Scalars["DateTime"]>;
-  name: Scalars["String"];
-  payload: InPagePayloadInput;
-  startAt?: InputMaybe<Scalars["DateTime"]>;
-  state: Scalars["String"];
-  type: CreateTypeInput;
-  userId: Scalars["String"];
-};
-
-export type UpdateNewTabPageCreativeInput = {
-  advertiserId: Scalars["String"];
-  creativeId: Scalars["String"];
-  endAt?: InputMaybe<Scalars["DateTime"]>;
-  name: Scalars["String"];
-  payload: NewTabPagePayloadInput;
-  startAt?: InputMaybe<Scalars["DateTime"]>;
-  state: Scalars["String"];
-  type: CreateTypeInput;
-  userId: Scalars["String"];
 };
 
 export type UpdateNotificationCreativeInput = {

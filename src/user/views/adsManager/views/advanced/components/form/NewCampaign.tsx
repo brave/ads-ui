@@ -9,11 +9,12 @@ import { useHistory, useParams } from "react-router-dom";
 import { BaseForm } from "./components/BaseForm";
 import { PersistFormValues } from "form/PersistFormValues";
 import { DraftContext, FilterContext } from "state/context";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useCreatePaymentSession } from "checkout/hooks/useCreatePaymentSession";
 import { PaymentType } from "graphql/types";
 import { useUser } from "auth/hooks/queries/useUser";
 import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
+import { useAdvertiserWithPrices } from "user/hooks/useAdvertiserWithPrices";
+import { ErrorDetail } from "components/Error/ErrorDetail";
 
 interface Params {
   draftId: string;
@@ -23,14 +24,15 @@ export function NewCampaign() {
   const history = useHistory();
   const { fromDate } = useContext(FilterContext);
   const params = useParams<Params>();
-  const { advertiser } = useAdvertiser();
   const { userId } = useUser();
-  const { createPaymentSession, loading } = useCreatePaymentSession();
+  const { createPaymentSession, loading: sessionLoading } =
+    useCreatePaymentSession();
+  const { data, loading, error } = useAdvertiserWithPrices();
 
   const { setDrafts } = useContext(DraftContext);
 
   const initial: CampaignForm = {
-    ...initialCampaign(advertiser),
+    ...initialCampaign(data),
     draftId: params.draftId,
   };
 
@@ -54,20 +56,25 @@ export function NewCampaign() {
     refetchQueries: [
       {
         ...refetchAdvertiserCampaignsQuery({
-          id: advertiser.id,
+          id: data.id,
           filter: { from: fromDate },
         }),
       },
     ],
   });
 
-  if (loading) {
+  if (loading || sessionLoading) {
     return <LinearProgress />;
+  }
+
+  if (error) {
+    return <ErrorDetail error={error} additionalDetails={error} />;
   }
 
   return (
     <Container maxWidth="xl">
       <Formik
+        enableReinitialize
         initialValues={initial}
         onSubmit={async (v: CampaignForm, { setSubmitting }) => {
           setSubmitting(true);
@@ -75,10 +82,10 @@ export function NewCampaign() {
           await mutation({ variables: { input } });
           setSubmitting(false);
         }}
-        validationSchema={CampaignSchema}
+        validationSchema={CampaignSchema(data.prices)}
       >
         <>
-          <BaseForm />
+          <BaseForm prices={data.prices} />
           <PersistFormValues />
         </>
       </Formik>

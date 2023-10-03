@@ -9,12 +9,12 @@ import {
 } from "graphql/campaign.generated";
 import { useHistory, useParams } from "react-router-dom";
 import { BaseForm } from "./components/BaseForm";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useCreatePaymentSession } from "checkout/hooks/useCreatePaymentSession";
 import { ErrorDetail } from "components/Error/ErrorDetail";
 import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
 import { useContext } from "react";
 import { FilterContext } from "state/context";
+import { useAdvertiserWithPrices } from "user/hooks/useAdvertiserWithPrices";
 
 interface Params {
   campaignId: string;
@@ -22,10 +22,14 @@ interface Params {
 
 export function EditCampaign() {
   const { fromDate } = useContext(FilterContext);
-  const { advertiser } = useAdvertiser();
   const history = useHistory();
   const params = useParams<Params>();
   const { createPaymentSession, loading } = useCreatePaymentSession();
+  const {
+    data,
+    loading: priceLoading,
+    error: priceError,
+  } = useAdvertiserWithPrices();
 
   const {
     data: initialData,
@@ -53,27 +57,33 @@ export function EditCampaign() {
     refetchQueries: [
       {
         ...refetchAdvertiserCampaignsQuery({
-          id: advertiser.id,
+          id: data.id,
           filter: { from: fromDate },
         }),
       },
     ],
   });
 
-  if (error) {
+  if (error || priceError) {
     return (
       <ErrorDetail
-        error={error}
+        error={error ?? priceError}
         additionalDetails="Campaign does not exist, or cannot be edited. Please try again later."
       />
     );
   }
 
-  if (!initialData || !initialData.campaign || qLoading || loading) {
+  if (
+    !initialData ||
+    !initialData.campaign ||
+    qLoading ||
+    loading ||
+    priceLoading
+  ) {
     return <LinearProgress />;
   }
 
-  const initialValues = editCampaignValues(initialData.campaign, advertiser.id);
+  const initialValues = editCampaignValues(initialData.campaign, data.id);
   return (
     <Container maxWidth="xl">
       <Formik
@@ -84,9 +94,9 @@ export function EditCampaign() {
           await mutation({ variables: { input } });
           setSubmitting(false);
         }}
-        validationSchema={CampaignSchema}
+        validationSchema={CampaignSchema(data.prices)}
       >
-        <BaseForm hasPaymentIntent={hasPaymentIntent} />
+        <BaseForm hasPaymentIntent={hasPaymentIntent} prices={data.prices} />
       </Formik>
     </Container>
   );

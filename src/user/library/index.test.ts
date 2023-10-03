@@ -385,7 +385,13 @@ describe("edit form tests", () => {
   );
   it("should result in a valid campaign form", () => {
     const omitted = _.omit(editForm, ["newCreative"]);
-    expect(omitted).toMatchInlineSnapshot(`
+    const sorted = {
+      ...omitted,
+      adSets: omitted.adSets?.sort(
+        (a, b) => a.id?.localeCompare(b.id ?? "") ?? 1,
+      ),
+    };
+    expect(sorted).toMatchInlineSnapshot(`
       {
         "adSets": [
           {
@@ -445,6 +451,7 @@ describe("edit form tests", () => {
                 "name": "test",
               },
             ],
+            "state": "active",
           },
           {
             "conversions": [],
@@ -503,6 +510,7 @@ describe("edit form tests", () => {
                 "name": "help",
               },
             ],
+            "state": "active",
           },
         ],
         "advertiserId": "12345",
@@ -528,7 +536,13 @@ describe("edit form tests", () => {
 
   it("should resolve to update input", () => {
     const update = transformEditForm(editForm, editForm.id ?? "");
-    expect(update).toMatchInlineSnapshot(`
+    const sorted = {
+      ...update,
+      adSets: update.adSets?.sort(
+        (a, b) => a.id?.localeCompare(b.id ?? "") ?? 1,
+      ),
+    };
+    expect(sorted).toMatchInlineSnapshot(`
       {
         "adSets": [
           {
@@ -553,6 +567,7 @@ describe("edit form tests", () => {
                 "name": "macos",
               },
             ],
+            "perDay": 4,
             "price": "6",
             "segments": [
               {
@@ -560,6 +575,7 @@ describe("edit form tests", () => {
                 "name": "test",
               },
             ],
+            "totalMax": 28,
           },
           {
             "ads": [
@@ -578,6 +594,7 @@ describe("edit form tests", () => {
                 "name": "linux",
               },
             ],
+            "perDay": 4,
             "price": "6",
             "segments": [
               {
@@ -585,6 +602,7 @@ describe("edit form tests", () => {
                 "name": "help",
               },
             ],
+            "totalMax": 28,
           },
         ],
         "budget": 100,

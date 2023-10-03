@@ -10,12 +10,14 @@ import { Route, Switch, useRouteMatch } from "react-router-dom";
 import { BudgetSettings } from "user/views/adsManager/views/advanced/components/campaign/BudgetSettings";
 import { FormContext } from "state/context";
 import { useState } from "react";
+import { AdvertiserPriceFragment } from "graphql/advertiser.generated";
 
 interface Props {
   hasPaymentIntent?: boolean | null;
+  prices: AdvertiserPriceFragment[];
 }
 
-export function BaseForm({ hasPaymentIntent }: Props) {
+export function BaseForm({ hasPaymentIntent, prices }: Props) {
   const { url } = useRouteMatch();
   const [isShowingAds, setIsShowingAds] = useState(false);
 
@@ -23,7 +25,7 @@ export function BaseForm({ hasPaymentIntent }: Props) {
     {
       label: "Campaign Settings",
       path: `${url}/settings`,
-      component: <CampaignSettings />,
+      component: <CampaignSettings prices={prices} />,
     },
     {
       label: "Budget",

@@ -31,6 +31,7 @@ export const RegistrationSchema = object().shape({
         PhoneRegex,
         "Please enter a valid phone number, that has no spaces, and includes country code.",
       ),
+    description: string().label("Business description").required(),
   }),
   address: object().shape({
     street1: string().label("Street address").required(),

@@ -12,12 +12,10 @@ import { Link as RouterLink, useHistory } from "react-router-dom";
 import { CampaignForm, initialAdSet } from "user/views/adsManager/types";
 import { useRef } from "react";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import { useIsEdit } from "form/FormikHelpers";
 import { useAdvertiserCreatives } from "user/hooks/useAdvertiserCreatives";
 
 export function NewAdSet() {
   const { creatives } = useAdvertiserCreatives();
-  const { isEdit } = useIsEdit();
   const history = useHistory();
   const { values } = useFormikContext<CampaignForm>();
   const params = new URLSearchParams(history.location.search);
@@ -58,9 +56,7 @@ export function NewAdSet() {
                   }
                   replace
                 >
-                  <span style={{ marginLeft: "10px" }}>
-                    {adSet.name || `Ad Set ${idx + 1}`}
-                  </span>
+                  {adSet.name || `Ad Set ${idx + 1}`}
                 </Link>
                 {idx > 0 && !adSet.id && (
                   <Tooltip title="Remove">
@@ -78,7 +74,7 @@ export function NewAdSet() {
                 )}
               </Stack>
             ))}
-            {values.adSets.length <= 4 && !isEdit && (
+            {values.adSets.length <= 4 && (
               <Box
                 width="100%"
                 pb={0}

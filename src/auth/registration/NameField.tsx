@@ -6,8 +6,8 @@ export function NameField() {
   return (
     <Box flexGrow={1}>
       <Typography variant="subtitle1" gutterBottom>
-        Thank you for choosing Brave&rsquo;s Ads Platform! Let&rsquo;s get you
-        set up with your account. First, we&rsquo;ll need your info.
+        Thank you for choosing Brave&apos;s Ads Platform! To get your account
+        set up, please start by providing your contact information below.
       </Typography>
 
       <MarginedDivider />
@@ -33,7 +33,7 @@ export function NameField() {
 
       <FormikTextField
         name="advertiser.name"
-        label="Business Name"
+        label="Company name"
         margin="none"
         placeholder="The name of your business"
         useTopLabel
@@ -42,7 +42,7 @@ export function NameField() {
       <FormikTextField
         required
         name="advertiser.url"
-        label="Business URL"
+        label="Company URL"
         autoComplete="url"
         margin="none"
         placeholder="Where we can find you on the internet"
@@ -52,11 +52,23 @@ export function NameField() {
       <FormikTextField
         required
         name="advertiser.phone"
-        label="Business phone"
+        label="Company phone"
         autoComplete="tel"
         type="tel"
         margin="none"
         placeholder="Where we can reach you"
+        useTopLabel
+      />
+
+      <FormikTextField
+        required
+        multiline
+        minRows={3}
+        maxRows={10}
+        name="advertiser.description"
+        label="Company overview"
+        margin="none"
+        placeholder="Describe your product or service"
         useTopLabel
       />
     </Box>

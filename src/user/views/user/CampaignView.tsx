@@ -100,41 +100,34 @@ function CampaignHeader(props: { selectedCampaigns: string[] }) {
     skip: !oneCampaignSelected || !firstCampaign,
   });
 
-  let isValidCampaign = false;
+  let canClone = false;
+  let canEdit = false;
   if (!loading && data?.campaign) {
-    isValidCampaign =
+    canClone =
       data.campaign.source === CampaignSource.SelfServe &&
-      editableCampaigns.includes(data.campaign.format) &&
-      data.campaign.state !== "completed";
+      editableCampaigns.includes(data.campaign.format);
+    canEdit = canClone && data.campaign.state !== "completed";
   }
 
   return (
     <Stack direction="row" alignItems="center" spacing={2}>
       <Typography variant="h2">Campaigns</Typography>
       <Stack direction="row" alignItems="center" spacing={2}>
-        <Tooltip
-          title={isValidCampaign ? "Clone Campaign" : "Cannot clone campaign"}
-        >
+        <Tooltip title={canClone ? "Clone Campaign" : "Cannot clone campaign"}>
           <span>
             <CloneCampaign
               campaignFragment={data?.campaign}
               useChip
-              disabled={
-                !oneCampaignSelected || !data?.campaign || !isValidCampaign
-              }
+              disabled={!oneCampaignSelected || !data?.campaign || !canClone}
             />
           </span>
         </Tooltip>
-        <Tooltip
-          title={isValidCampaign ? "Edit campaign" : "Cannot Edit Campaign"}
-        >
+        <Tooltip title={canEdit ? "Edit campaign" : "Cannot Edit Campaign"}>
           <span>
             <Chip
               color="primary"
               label="Edit"
-              disabled={
-                !oneCampaignSelected || !data?.campaign || !isValidCampaign
-              }
+              disabled={!oneCampaignSelected || !data?.campaign || !canEdit}
               component={RouterLink}
               to={`/user/main/adsmanager/advanced/${firstCampaign}/settings`}
               icon={<EditIcon fontSize="small" />}

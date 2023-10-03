@@ -49,16 +49,10 @@ export function transformNewForm(
     state: form.state,
     type: form.type,
     budget: form.budget,
-    adSets: form.adSets.map((adSet) => ({
-      name: adSet.name,
-      price: transformPrice(form),
-      billingType: form.billingType,
-      perDay: form.format === CampaignFormat.PushNotification ? 4 : 6,
-      segments: adSet.segments.map((s) => ({ code: s.code, name: s.name })),
-      oses: adSet.oses,
-      totalMax: form.format === CampaignFormat.PushNotification ? 28 : 60,
-      conversions: transformConversion(adSet.conversions),
-      ads: adSet.creatives
+    adSets: form.adSets.map((a) => ({
+      ...transformAdSet(a, form),
+      conversions: transformConversion(a.conversions),
+      ads: a.creatives
         .filter((c) => c.included)
         .map((ad) => ({ creativeId: ad.id })),
     })),
@@ -107,6 +101,7 @@ export function editCampaignValues(
 
       return {
         id: adSet.id,
+        state: adSet.state,
         conversions: (adSet.conversions ?? []).map((c) => ({
           id: c.id,
           type: c.type,
@@ -219,11 +214,7 @@ export function transformEditForm(
     paymentType: form.paymentType,
     adSets: form.adSets.map((adSet) => ({
       id: adSet.id,
-      billingType: form.billingType,
-      price: transformPrice(form),
-      name: adSet.name,
-      segments: adSet.segments.map((v) => ({ code: v.code, name: v.name })),
-      oses: adSet.oses.map((v) => ({ code: v.code, name: v.name })),
+      ...transformAdSet(adSet, form),
       ads: adSet.creatives
         .filter((c) => c.included)
         .map((ad) => ({
@@ -232,6 +223,21 @@ export function transformEditForm(
           creativeSetId: adSet.id,
         })),
     })),
+  };
+}
+
+function transformAdSet(
+  adSet: AdSetForm,
+  campaign: Pick<CampaignForm, "format" | "billingType" | "price">,
+) {
+  return {
+    name: adSet.name,
+    price: transformPrice(campaign),
+    billingType: campaign.billingType,
+    perDay: campaign.format === CampaignFormat.PushNotification ? 4 : 6,
+    segments: adSet.segments.map((s) => ({ code: s.code, name: s.name })),
+    oses: adSet.oses.map((s) => ({ code: s.code, name: s.name })),
+    totalMax: campaign.format === CampaignFormat.PushNotification ? 28 : 60,
   };
 }
 

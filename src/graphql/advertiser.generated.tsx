@@ -132,6 +132,12 @@ export type AdvertiserImageFragment = {
   createdAt: any;
 };
 
+export type AdvertiserPriceFragment = {
+  billingModelPrice: string;
+  billingType: Types.BillingType;
+  format: Types.CampaignFormat;
+};
+
 export type AdvertiserImagesQueryVariables = Types.Exact<{
   id: Types.Scalars["String"];
 }>;
@@ -144,6 +150,20 @@ export type AdvertiserImagesQuery = {
       format: Types.CampaignFormat;
       id: string;
       createdAt: any;
+    }>;
+  } | null;
+};
+
+export type AdvertiserPricesQueryVariables = Types.Exact<{
+  id: Types.Scalars["String"];
+}>;
+
+export type AdvertiserPricesQuery = {
+  advertiser?: {
+    prices: Array<{
+      billingModelPrice: string;
+      billingType: Types.BillingType;
+      format: Types.CampaignFormat;
     }>;
   } | null;
 };
@@ -207,6 +227,13 @@ export const AdvertiserImageFragmentDoc = gql`
     format
     id
     createdAt
+  }
+`;
+export const AdvertiserPriceFragmentDoc = gql`
+  fragment AdvertiserPrice on AdvertiserPrice {
+    billingModelPrice
+    billingType
+    format
   }
 `;
 export const AdvertiserDocument = gql`
@@ -450,6 +477,72 @@ export function refetchAdvertiserImagesQuery(
   variables: AdvertiserImagesQueryVariables,
 ) {
   return { query: AdvertiserImagesDocument, variables: variables };
+}
+export const AdvertiserPricesDocument = gql`
+  query advertiserPrices($id: String!) {
+    advertiser(id: $id) {
+      prices {
+        ...AdvertiserPrice
+      }
+    }
+  }
+  ${AdvertiserPriceFragmentDoc}
+`;
+
+/**
+ * __useAdvertiserPricesQuery__
+ *
+ * To run a query within a React component, call `useAdvertiserPricesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdvertiserPricesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdvertiserPricesQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useAdvertiserPricesQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    AdvertiserPricesQuery,
+    AdvertiserPricesQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<AdvertiserPricesQuery, AdvertiserPricesQueryVariables>(
+    AdvertiserPricesDocument,
+    options,
+  );
+}
+export function useAdvertiserPricesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    AdvertiserPricesQuery,
+    AdvertiserPricesQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    AdvertiserPricesQuery,
+    AdvertiserPricesQueryVariables
+  >(AdvertiserPricesDocument, options);
+}
+export type AdvertiserPricesQueryHookResult = ReturnType<
+  typeof useAdvertiserPricesQuery
+>;
+export type AdvertiserPricesLazyQueryHookResult = ReturnType<
+  typeof useAdvertiserPricesLazyQuery
+>;
+export type AdvertiserPricesQueryResult = Apollo.QueryResult<
+  AdvertiserPricesQuery,
+  AdvertiserPricesQueryVariables
+>;
+export function refetchAdvertiserPricesQuery(
+  variables: AdvertiserPricesQueryVariables,
+) {
+  return { query: AdvertiserPricesDocument, variables: variables };
 }
 export const UploadAdvertiserImageDocument = gql`
   mutation uploadAdvertiserImage($input: CreateAdvertiserImageInput!) {
