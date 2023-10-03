@@ -70,7 +70,6 @@ const FormatItemButton = (props: { format: CampaignFormat } & PriceProps) => {
             p.billingType === bMeta.value.toUpperCase()
           );
         });
-        console.log(found);
         if (props.format === CampaignFormat.NewsDisplayAd) {
           price.setValue(found?.billingModelPrice ?? "10");
           billing.setValue("cpm");

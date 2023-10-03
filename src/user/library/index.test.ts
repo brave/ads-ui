@@ -567,6 +567,7 @@ describe("edit form tests", () => {
                 "name": "macos",
               },
             ],
+            "perDay": 4,
             "price": "6",
             "segments": [
               {
@@ -574,6 +575,7 @@ describe("edit form tests", () => {
                 "name": "test",
               },
             ],
+            "totalMax": 28,
           },
           {
             "ads": [
@@ -592,6 +594,7 @@ describe("edit form tests", () => {
                 "name": "linux",
               },
             ],
+            "perDay": 4,
             "price": "6",
             "segments": [
               {
@@ -599,6 +602,7 @@ describe("edit form tests", () => {
                 "name": "help",
               },
             ],
+            "totalMax": 28,
           },
         ],
         "budget": 100,

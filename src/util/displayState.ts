@@ -6,8 +6,6 @@ export const displayFromCampaignState = (c: {
   campaignStart: string;
   state?: string | null;
 }) => {
-  console.log(c.state);
-
   if (c.campaignState === "draft") {
     return "draft";
   } else if (isBeforeStartDate(c.campaignStart)) {
