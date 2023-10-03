@@ -94,7 +94,6 @@ async function transformConversionEnvelope(blob: Blob): Promise<Blob> {
           header: true,
           transform(value: string, field: string) {
             if (field.includes("Conversion")) {
-              console.log(value);
               const { ciphertext, nonce, epk }: Envelope = JSON.parse(value);
               const res = tweetnacl.box.open(
                 ui8a(ciphertext),
