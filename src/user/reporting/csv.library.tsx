@@ -92,7 +92,6 @@ async function transformConversionEnvelope(blob: Blob): Promise<Blob> {
       try {
         Papa.parse(text, {
           header: true,
-          escapeChar: "\\",
           transform(value: string, field: string) {
             if (field.includes("Conversion")) {
               const { ciphertext, nonce, epk }: Envelope = JSON.parse(value);
