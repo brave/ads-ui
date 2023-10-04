@@ -1,6 +1,6 @@
 import { Box, Paper, Stack, Typography } from "@mui/material";
 import logo from "../../../brave_logo_icon.png";
-import { useField } from "formik";
+import { useField, useFormikContext } from "formik";
 import { CreativeInput } from "graphql/types";
 
 export function NotificationPreview(props: {
@@ -8,8 +8,10 @@ export function NotificationPreview(props: {
   body?: string;
   selected?: boolean;
 }) {
+  const { values } = useFormikContext<CreativeInput>();
   const [, meta, ,] = useField<CreativeInput>("newCreative");
 
+  const value = values.payloadNotification ?? meta.value.payloadNotification;
   return (
     <Box display="flex" justifyContent="center">
       <Paper
@@ -32,14 +34,10 @@ export function NotificationPreview(props: {
           />
           <Stack direction="column" justifyContent="center">
             <Typography sx={{ fontWeight: 600 }} variant="body2">
-              {props.title ||
-                meta.value?.payloadNotification?.title ||
-                "Title Preview"}
+              {props.title || value?.title || "Title Preview"}
             </Typography>
             <Typography variant="body2">
-              {props.body ||
-                meta.value?.payloadNotification?.body ||
-                "Body Preview"}
+              {props.body || value?.body || "Body Preview"}
             </Typography>
           </Stack>
         </Box>

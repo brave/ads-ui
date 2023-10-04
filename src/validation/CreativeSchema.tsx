@@ -11,7 +11,7 @@ import * as Yup from "yup";
 const validTargetUrl = (label: string) =>
   Yup.string()
     .label(label)
-    .required("URL is required")
+    .required("Target URL is a required field")
     .matches(NoSpacesRegex, `URL must not contain any whitespace`)
     .matches(HttpsRegex, `URL must start with https://`)
     .matches(

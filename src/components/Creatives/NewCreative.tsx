@@ -9,11 +9,13 @@ import {
 import { useState } from "react";
 import { CardContainer } from "components/Card/CardContainer";
 import { ErrorDetail } from "components/Error/ErrorDetail";
-import { FormikSubmitButton } from "form/FormikHelpers";
 import { CreativeSchema } from "validation/CreativeSchema";
 import MiniSideBar from "components/Drawer/MiniSideBar";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import { CreativeFields } from "components/Creatives/CreativeFields";
+import { CreativeType } from "components/Creatives/CreativeType";
+import { NotificationAd } from "user/ads/NotificationAd";
+import { InlineContentAd } from "user/ads/InlineContentAd";
+import { SubmitPanel } from "components/Button/SubmitPanel";
 
 function wait(ms: number) {
   return new Promise((resolve) => window.setTimeout(resolve, ms));
@@ -37,6 +39,14 @@ export function NewCreative() {
       targetUrl: "",
       title: "",
     },
+    payloadInlineContent: {
+      title: "",
+      targetUrl: "",
+      ctaText: "",
+      description: "",
+      imageUrl: "",
+      dimensions: "900x750",
+    },
   };
 
   const initialValue = location.state ?? defaultValue;
@@ -53,10 +63,12 @@ export function NewCreative() {
   const [id, setId] = useState("");
 
   const doSubmit = async (values: CreativeInput) => {
+    console.log(values);
     const input: CreativeInput = {
       advertiserId: advertiser.id,
       name: values.name,
       payloadNotification: values.payloadNotification,
+      payloadInlineContent: values.payloadInlineContent,
       state: values.state,
       type: values.type,
     };
@@ -80,33 +92,33 @@ export function NewCreative() {
           onSubmit={doSubmit}
           validationSchema={CreativeSchema}
         >
-          <Box display="flex" flexDirection="row" gap={1} flexWrap="wrap">
-            <CardContainer header="New creative" sx={{ flexGrow: 1 }}>
-              <Form>
-                <CreativeFields allowTypeChange={true} />
+          {({ values }) => (
+            <Form>
+              <Box
+                display="flex"
+                flexDirection="column"
+                gap={1}
+                flexWrap="wrap"
+              >
+                <CardContainer header="New creative" sx={{ flexGrow: 1 }}>
+                  <Form>
+                    <CreativeType />
 
-                <ErrorDetail
-                  error={error}
-                  additionalDetails="Unable to create creative"
-                />
+                    <ErrorDetail
+                      error={error}
+                      additionalDetails="Unable to create creative"
+                    />
 
-                <Box
-                  mt={1}
-                  display="flex"
-                  justifyContent="flex-end"
-                  alignItems="baseline"
-                >
-                  <FormikSubmitButton isCreate={true} />
-                </Box>
+                    {/*<PersistCreativeValues />*/}
+                  </Form>
+                </CardContainer>
 
-                {/*<PersistCreativeValues />*/}
-              </Form>
-            </CardContainer>
+                <CreativeTypeSpecificFields creativeType={values.type.code} />
 
-            {/*<CardContainer header="Preview">*/}
-            {/*  <CreativeSpecificPreview />*/}
-            {/*</CardContainer>*/}
-          </Box>
+                <SubmitPanel isCreate={true} />
+              </Box>
+            </Form>
+          )}
         </Formik>
 
         <Snackbar
@@ -118,3 +130,16 @@ export function NewCreative() {
     </MiniSideBar>
   );
 }
+
+const CreativeTypeSpecificFields = ({
+  creativeType,
+}: {
+  creativeType?: string;
+}) => {
+  if (creativeType === "notification_all_v1")
+    return <NotificationAd useCustomButton />;
+  if (creativeType === "inline_content_all_v1")
+    return <InlineContentAd useCustomButton />;
+
+  return null;
+};

@@ -170,10 +170,12 @@ interface FormikSubmitButtonProps {
   isCreate: boolean;
 }
 
-function extractErrors(errorObject: any): string[] {
-  return Object.values(errorObject)
-    .filter((v) => !!v)
-    .flatMap((o) => (_.isString(o) ? [o] : extractErrors(o)));
+export function extractErrors(errorObject: any): string[] {
+  if (_.isNil(errorObject)) return [];
+
+  return Object.values(errorObject).flatMap((o) =>
+    _.isString(o) ? [o] : extractErrors(o),
+  );
 }
 
 export const FormikSubmitButton = ({

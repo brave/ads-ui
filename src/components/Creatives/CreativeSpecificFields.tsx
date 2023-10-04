@@ -6,11 +6,12 @@ import { InlineContentAd } from "user/ads/InlineContentAd";
 
 export const CreativeSpecificFields = () => {
   const { values } = useFormikContext<CampaignForm>();
+  const name = "newCreative";
 
   if (values.format === CampaignFormat.PushNotification)
-    return <NotificationAd />;
+    return <NotificationAd name={name} />;
   else if (values.format === CampaignFormat.NewsDisplayAd)
-    return <InlineContentAd />;
+    return <InlineContentAd name={name} />;
 
   return null;
 };

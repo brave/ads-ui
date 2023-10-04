@@ -23,6 +23,7 @@ import moment from "moment";
 import { FilterContext } from "state/context";
 import { AdvertiserAssets } from "components/Assets/AdvertiserAssets";
 import { CreativeList } from "components/Creatives/CreativeList";
+import { NewCreative } from "components/Creatives/NewCreative";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -72,6 +73,12 @@ export function User() {
                   path="/user/main/adsmanager/advanced/:campaignId"
                   authedComponent={EditCampaign}
                   validateAdvertiserProperty={(a) => a.selfServiceEdit}
+                />
+
+                <ProtectedRoute
+                  path="/user/main/creative/new"
+                  authedComponent={NewCreative}
+                  validateAdvertiserProperty={(a) => a.selfServiceCreate}
                 />
 
                 <ProtectedRoute
