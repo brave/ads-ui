@@ -104,7 +104,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
   ];
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box display="flex">
       <Drawer
         variant="permanent"
         open
@@ -113,27 +113,36 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
         }}
       >
         <Toolbar />
-        <List>
-          {dashboardRoutes.map((dr) => (
-            <ItemBox
-              key={dr.href}
-              href={dr.href}
-              icon={dr.icon}
-              label={dr.label}
-              disabled={dr.disabled}
-            />
-          ))}
-          <Divider sx={{ mt: 3, mb: 3 }} />
-          {settingsRoutes.map((sr) => (
-            <ItemBox
-              href={sr.href}
-              icon={sr.icon}
-              label={sr.label}
-              key={sr.href}
-            />
-          ))}
-          <SupportMenu />
-        </List>
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          flexDirection="column"
+          flexGrow={1}
+        >
+          <List>
+            {dashboardRoutes.map((dr) => (
+              <ItemBox
+                key={dr.href}
+                href={dr.href}
+                icon={dr.icon}
+                label={dr.label}
+                disabled={dr.disabled}
+              />
+            ))}
+          </List>
+          <List>
+            <Divider sx={{ mt: 3, mb: 3 }} />
+            {settingsRoutes.map((sr) => (
+              <ItemBox
+                href={sr.href}
+                icon={sr.icon}
+                label={sr.label}
+                key={sr.href}
+              />
+            ))}
+            <SupportMenu />
+          </List>
+        </Box>
       </Drawer>
       {children}
     </Box>
