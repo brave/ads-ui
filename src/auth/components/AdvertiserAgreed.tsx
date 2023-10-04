@@ -15,14 +15,18 @@ import { useAuthContext } from "auth/context/auth.hook";
 import { getUser } from "auth/lib";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useHistory } from "react-router-dom";
+import { PaymentType } from "graphql/types";
 
 export function AdvertiserAgreed() {
   const { advertiser } = useAdvertiser();
+  const requiresPaymentAgree =
+    advertiser.selfServiceCreate &&
+    advertiser.selfServicePaymentType !== PaymentType.Netsuite;
   const history = useHistory();
   const { setSessionUser } = useAuthContext();
   const [agreed, setAgreed] = useState({
     tracking: false,
-    payment: false,
+    payment: !requiresPaymentAgree,
     terms: false,
   });
 
@@ -88,24 +92,27 @@ export function AdvertiserAgreed() {
           />
         </Stack>
 
-        <Stack mb={2} spacing={0.5}>
-          <Typography sx={{ fontWeight: 600 }}>Payment</Typography>
-          <Typography>
-            To launch a campaign with Brave, you are required to prepay the full
-            amount you intend to spend. Any remaining funds from your budget
-            will be credited back to your original payment method upon request.
-          </Typography>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={payment}
-                onChange={handleAgreed}
-                name="payment"
-              />
-            }
-            label="I understand that pre-payment is required to launch my campaigns"
-          />
-        </Stack>
+        {requiresPaymentAgree && (
+          <Stack mb={2} spacing={0.5}>
+            <Typography sx={{ fontWeight: 600 }}>Payment</Typography>
+            <Typography>
+              To launch a campaign with Brave, you are required to prepay the
+              full amount you intend to spend. Any remaining funds from your
+              budget will be credited back to your original payment method upon
+              request.
+            </Typography>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={payment}
+                  onChange={handleAgreed}
+                  name="payment"
+                />
+              }
+              label="I understand that pre-payment is required to launch my campaigns"
+            />
+          </Stack>
+        )}
 
         <Stack mb={2} spacing={0.5}>
           <Typography sx={{ fontWeight: 600 }}>Terms & Conditions</Typography>
