@@ -65,7 +65,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
           sx={{ color: "text.secondary" }}
         />
       ),
-      disabled: true,
+      disabled: !advertiser.selfServiceCreate,
     },
     {
       label: "Audiences",

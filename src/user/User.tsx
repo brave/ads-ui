@@ -22,6 +22,7 @@ import { IAdvertiser } from "auth/context/auth.interface";
 import moment from "moment";
 import { FilterContext } from "state/context";
 import { AdvertiserAssets } from "components/Assets/AdvertiserAssets";
+import { CreativeList } from "components/Creatives/CreativeList";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -97,6 +98,11 @@ export function User() {
                 <ProtectedRoute
                   path="/user/main/assets"
                   authedComponent={AdvertiserAssets}
+                />
+
+                <ProtectedRoute
+                  path="/user/main/creatives"
+                  authedComponent={CreativeList}
                 />
 
                 {/* default */}
