@@ -45,7 +45,7 @@ export const renderEngagementCell = (
   }
 
   if (!map || !val) {
-    return <Box>N/A</Box>;
+    return <Box>-</Box>;
   }
 
   return <Box>{val[type].toLocaleString()}</Box>;
@@ -61,11 +61,7 @@ export const renderStatsCell = (
     return <Skeleton />;
   }
 
-  if (!val) {
-    return <Box>N/A</Box>;
-  }
-
-  if (val[type] <= 0) {
+  if (!val || val[type] <= 0) {
     return <Box>-</Box>;
   }
 
