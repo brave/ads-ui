@@ -31,7 +31,7 @@ type RouteOption = {
   onClick?: (event: MouseEvent<any>) => void;
 };
 
-const drawerWidth = 100;
+const drawerWidth = 85;
 export default function MiniSideBar({ children }: PropsWithChildren) {
   const { advertiser } = useAdvertiser();
   const dashboardRoutes: RouteOption[] = [
@@ -169,7 +169,9 @@ const ItemBox = (props: RouteOption) => {
     >
       <ListItemIcon sx={{ minWidth: "unset" }}>{props.icon}</ListItemIcon>
       <ListItemText disableTypography>
-        <Typography textAlign="center">{props.label}</Typography>
+        <Typography textAlign="center" variant="caption" fontWeight={500}>
+          {props.label}
+        </Typography>
       </ListItemText>
     </ListItemButton>
   );
