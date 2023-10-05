@@ -58,6 +58,7 @@ export function ImageAutocomplete(props: { name: string }) {
           imageUrl.setValue(nv ? nv.image : undefined);
           setCreateImage(nv != null && nv.image === undefined);
         }}
+        isOptionEqualToValue={(option, value) => option.image === value.image}
       />
 
       <UploadImage

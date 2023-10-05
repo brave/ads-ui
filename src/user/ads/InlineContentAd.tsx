@@ -26,7 +26,7 @@ export function InlineContentAd(props: {
 
   return (
     <Box display="flex" flexDirection="column" gap={2}>
-      <CardContainer header="Create News Ad" sx={{ flexGrow: 1 }}>
+      <CardContainer header="News display creative" sx={{ flexGrow: 1 }}>
         <FormikTextField name={withName("name")} label="Name" />
 
         <FormikTextField

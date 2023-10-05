@@ -1,13 +1,23 @@
 import { Box, Link, Paper, Slide } from "@mui/material";
 import { PropsWithChildren, ReactNode, useState } from "react";
 import { useFormikContext } from "formik";
-import { extractErrors, FormikSubmitButton } from "form/FormikHelpers";
+import {
+  extractErrors,
+  FormikDialogButton,
+  FormikSubmitButton,
+} from "form/FormikButton";
 
-function StatusMessage({ errors }: { errors: string[] }): ReactNode {
+function StatusMessage({
+  errors,
+  isDirty,
+}: {
+  errors: string[];
+  isDirty: boolean;
+}): ReactNode {
   const [showErrors, setShowErrors] = useState(false);
 
   if (errors.length === 0) {
-    return null;
+    return isDirty ? "You have unsaved changes" : null;
   }
 
   if (errors.length === 1) {
@@ -32,11 +42,13 @@ function StatusMessage({ errors }: { errors: string[] }): ReactNode {
 
 interface Props {
   isCreate: boolean;
+  useDialogue?: boolean;
+  dialogTitle?: string;
+  dialogMessage?: string;
 }
 
 export function SubmitPanel(props: PropsWithChildren<Props>) {
   const { dirty, errors, submitCount } = useFormikContext();
-  console.log(submitCount);
   // when creating a new item, we don't want to bombard with a whole load
   // of validation errors. So wait until it's been submitted at least once
   // before dumping the set of things that need to be completed.
@@ -57,10 +69,17 @@ export function SubmitPanel(props: PropsWithChildren<Props>) {
       >
         <Box display="flex" justifyContent="flex-end" alignItems="end" gap={2}>
           <Box flex={1} alignSelf="center">
-            <StatusMessage errors={errorStrings} />
+            <StatusMessage errors={errorStrings} isDirty={dirty} />
           </Box>
 
-          <FormikSubmitButton {...props} />
+          {props.useDialogue && props.dialogTitle && props.dialogMessage && (
+            <FormikDialogButton
+              {...props}
+              dialogMessage={props.dialogMessage}
+              dialogTitle={props.dialogTitle}
+            />
+          )}
+          {!props.useDialogue && <FormikSubmitButton {...props} />}
         </Box>
       </Paper>
     </Slide>

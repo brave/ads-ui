@@ -6,7 +6,6 @@ import {
 } from "react";
 import {
   Box,
-  Button,
   FormControl,
   FormControlLabel,
   FormHelperText,
@@ -16,8 +15,6 @@ import {
   Switch,
   TextField,
   TextFieldProps,
-  Tooltip,
-  TooltipProps,
 } from "@mui/material";
 import { ErrorMessage, useField, useFormikContext } from "formik";
 import _ from "lodash";
@@ -161,68 +158,6 @@ export const FormikRadioControl = (props: FormikRadioControlProps) => {
         <FormHelperText sx={{ mt: 0 }}>{props.helperText}</FormHelperText>
       )}
     </FormControl>
-  );
-};
-
-interface FormikSubmitButtonProps {
-  label?: string;
-  inProgressLabel?: string;
-  isCreate: boolean;
-}
-
-export function extractErrors(errorObject: any): string[] {
-  if (_.isNil(errorObject)) return [];
-
-  return Object.values(errorObject).flatMap((o) =>
-    _.isString(o) ? [o] : extractErrors(o),
-  );
-}
-
-export const FormikSubmitButton = ({
-  label = "Save",
-  inProgressLabel = "Saving...",
-  isCreate,
-}: FormikSubmitButtonProps) => {
-  const formik = useFormikContext();
-  let saveButtonTooltip: TooltipProps["title"] = "";
-  let saveEnabled = true;
-
-  if (formik.isSubmitting) {
-    saveEnabled = false;
-  } else if (!isCreate && !formik.dirty) {
-    saveEnabled = false;
-    saveButtonTooltip = "Disabled because you haven’t made any changes";
-  } else if (isCreate && formik.submitCount < 1) {
-    // on create, initially enable the button so users can reveal all the required fields
-    saveEnabled = true;
-  } else if (!formik.isValid) {
-    saveEnabled = false;
-    saveButtonTooltip = (
-      <>
-        Disabled due to validation errors
-        <ul>
-          {extractErrors(formik.errors).map((v, idx) => (
-            <li key={idx}>{`${v}`}</li>
-          ))}
-        </ul>
-      </>
-    );
-  }
-
-  return (
-    <Tooltip title={saveButtonTooltip}>
-      <div>
-        <Button
-          color="primary"
-          variant="contained"
-          type="submit"
-          size="large"
-          disabled={!saveEnabled || formik.isSubmitting}
-        >
-          {formik.isSubmitting ? inProgressLabel : label}
-        </Button>
-      </div>
-    </Tooltip>
   );
 };
 

@@ -7,11 +7,12 @@ import { CardContainer } from "components/Card/CardContainer";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { ErrorDetail } from "components/Error/ErrorDetail";
 import MiniSideBar from "components/Drawer/MiniSideBar";
-import { Box, Chip, Grid, Skeleton } from "@mui/material";
+import { Box, Button, Chip, Grid, Skeleton } from "@mui/material";
 import moment from "moment";
 import { ReviewField } from "user/views/adsManager/views/advanced/components/review/components/ReviewField";
 import { ImagePreview } from "components/Assets/ImagePreview";
 import { Status } from "components/Campaigns/Status";
+import { Link as RouterLink } from "react-router-dom";
 
 const ALLOWED_TYPES = ["notification_all_v1", "inline_content_all_v1"];
 
@@ -72,13 +73,27 @@ export function CreativeList() {
 }
 
 const CreativeItem = (props: { creative: CreativeFragment }) => {
-  const { name, payloadNotification, payloadInlineContent, state, type } =
+  const { id, name, payloadNotification, payloadInlineContent, state, type } =
     props.creative;
   const BoxHeader = () => (
     <Box display="flex" gap="10px">
-      {name}
-      <TypeChip code={type.code} />
-      <Status state={state} />
+      <Box>
+        {name}
+        <TypeChip code={type.code} />
+        <Status state={state} />
+      </Box>
+      <Box>
+        <Button
+          variant="outlined"
+          sx={{ borderRadius: "10px" }}
+          size="small"
+          component={RouterLink}
+          to={`/user/main/creative/${id}`}
+          replace
+        >
+          Edit
+        </Button>
+      </Box>
     </Box>
   );
 

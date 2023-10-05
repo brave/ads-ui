@@ -3,11 +3,12 @@ import { useState } from "react";
 import { useUser } from "auth/hooks/queries/useUser";
 import { CardContainer } from "components/Card/CardContainer";
 import { Form, Formik, FormikValues } from "formik";
-import { FormikSubmitButton, FormikTextField } from "form/FormikHelpers";
+import { FormikTextField } from "form/FormikHelpers";
 import { useUpdateUserMutation } from "graphql/user.generated";
 import { ErrorDetail } from "components/Error/ErrorDetail";
 import { UserSchema } from "validation/UserSchema";
 import _ from "lodash";
+import { FormikSubmitButton } from "form/FormikButton";
 
 export function UserForm() {
   const user = useUser();
