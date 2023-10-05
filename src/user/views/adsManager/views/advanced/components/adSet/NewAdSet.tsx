@@ -74,7 +74,7 @@ export function NewAdSet() {
                 )}
               </Stack>
             ))}
-            {values.adSets.length <= 4 && (
+            {values.adSets.length <= 19 && (
               <Box
                 width="100%"
                 pb={0}
