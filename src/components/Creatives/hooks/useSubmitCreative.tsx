@@ -37,14 +37,17 @@ export function useSubmitCreative(props: { id: string }) {
         { id: props.id, ...values },
         advertiser.id,
       );
-      const input = _.omit(valid, ["id", "targetUrlValid", "included"]);
+      const input = {
+        ..._.omit(valid, ["id", "targetUrlValid", "included"]),
+        state: "under_review",
+      };
       if (isNew) {
         createCreative({
-          variables: { input },
+          variables: { input: input },
         });
       } else {
         updateCreative({
-          variables: { input, id: props.id },
+          variables: { input: input, id: props.id },
         });
       }
     },

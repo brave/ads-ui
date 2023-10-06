@@ -29,7 +29,14 @@ export const CreativeSchema = object().shape({
     name: string(),
   }),
   state: string()
-    .oneOf(["draft", "under_review"])
+    .oneOf([
+      "draft",
+      "active",
+      "suspended",
+      "under_review",
+      "deleted",
+      "paused",
+    ])
     .label("State")
     .required()
     .default("draft"),
