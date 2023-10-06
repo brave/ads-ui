@@ -39,7 +39,7 @@ export function CreativeForm() {
     skip: id === "new",
   });
 
-  if (loading) {
+  if (loading || !data) {
     return <LinearProgress />;
   }
 
@@ -73,9 +73,7 @@ export function CreativeForm() {
                   header={`${isNew ? "New" : "Edit"} creative`}
                   sx={{ flexGrow: 1 }}
                 >
-                  <Form>
-                    <CreativeType allowTypeChange={id === "new"} />
-                  </Form>
+                  <CreativeType allowTypeChange={id === "new"} />
                 </CardContainer>
 
                 <ErrorDetail

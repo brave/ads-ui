@@ -10,14 +10,14 @@ export function useGetCreativeDetails(props: { id: string }) {
     skip: isNew,
   });
 
-  const defaultValue: CreativeInput & { targetUrlValid: boolean } = {
-    advertiserId: "",
+  const defaultValue: CreativeInput & { targetUrlValid?: string } = {
+    advertiserId: advertiser.id,
     state: "under_review",
     name: "",
     type: {
       code: "notification_all_v1",
     },
-    targetUrlValid: false,
+    targetUrlValid: "Target URL not validated",
     payloadNotification: {
       body: "",
       targetUrl: "",
@@ -43,9 +43,9 @@ export function useGetCreativeDetails(props: { id: string }) {
         ? {
             ...data.creative,
             advertiserId: advertiser.id,
-            targetUrlValid: true,
+            targetUrlValid: undefined,
           }
-        : defaultValue,
+        : undefined,
     loading,
     error,
   };

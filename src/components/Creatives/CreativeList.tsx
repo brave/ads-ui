@@ -7,15 +7,19 @@ import { CardContainer } from "components/Card/CardContainer";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { ErrorDetail } from "components/Error/ErrorDetail";
 import MiniSideBar from "components/Drawer/MiniSideBar";
-import { Box, Button, Chip, Grid, Skeleton } from "@mui/material";
-import moment from "moment";
-import { ReviewField } from "user/views/adsManager/views/advanced/components/review/components/ReviewField";
-import { ImagePreview } from "components/Assets/ImagePreview";
+import { Box, Link, List, Typography } from "@mui/material";
 import { Status } from "components/Campaigns/Status";
 import { Link as RouterLink } from "react-router-dom";
+import {
+  DataGrid,
+  GridColDef,
+  GridToolbarColumnsButton,
+  GridToolbarContainer,
+  GridToolbarFilterButton,
+  GridToolbarQuickFilter,
+} from "@mui/x-data-grid";
 
 const ALLOWED_TYPES = ["notification_all_v1", "inline_content_all_v1"];
-
 export function CreativeList() {
   const { advertiser } = useAdvertiser();
   const { data, error, loading } = useAdvertiserCreativesQuery({
@@ -25,27 +29,63 @@ export function CreativeList() {
     pollInterval: 60_000,
   });
 
-  if (error)
-    return (
-      <ErrorDetail error={error} additionalDetails="Unable to get creatives" />
-    );
-
-  if (loading) {
-    return (
-      <MiniSideBar>
-        <CardContainer
-          header="Creatives"
-          sx={{
-            flexGrow: 1,
-            mr: 2,
-          }}
+  const columns: GridColDef<CreativeFragment>[] = [
+    {
+      field: "name",
+      type: "string",
+      headerName: "Name",
+      renderCell: ({ row }) => (
+        <Link
+          underline="none"
+          variant="body1"
+          component={RouterLink}
+          to={`/user/main/creative/${row.id}`}
+          replace
         >
-          <Skeleton variant="rounded" height={500} />
-        </CardContainer>
-      </MiniSideBar>
+          {row.name}
+        </Link>
+      ),
+      flex: 1,
+      minWidth: 100,
+      maxWidth: 400,
+    },
+    {
+      field: "type",
+      headerName: "Type",
+      valueGetter: ({ row }) => uiTextForCreativeTypeCode(row.type),
+      align: "left",
+      width: 200,
+    },
+    {
+      field: "content",
+      headerName: "Content",
+      renderCell: ({ row }) => <CreativePayloadList creative={row} />,
+      flex: 1,
+      sortable: false,
+    },
+    {
+      field: "state",
+      headerName: "State",
+      type: "singleSelect",
+      renderCell: ({ row }) => <Status state={row.state} />,
+      width: 200,
+    },
+  ];
+
+  function CustomToolbar() {
+    return (
+      <GridToolbarContainer>
+        <GridToolbarColumnsButton />
+        <GridToolbarFilterButton />
+        <Box flex={1} />
+        <GridToolbarQuickFilter />
+      </GridToolbarContainer>
     );
   }
 
+  const creatives = [...(data?.advertiser?.creatives ?? [])].filter((c) =>
+    ALLOWED_TYPES.includes(c.type.code),
+  );
   return (
     <MiniSideBar>
       {error && (
@@ -54,94 +94,98 @@ export function CreativeList() {
           additionalDetails="Unable to retrieve images"
         />
       )}
-      {!loading && !error && (
-        <Grid container spacing={2}>
-          {[...(data?.advertiser?.creatives ?? [])]
-            .sort(
-              (a, b) => moment(b.createdAt).date() - moment(a.createdAt).date(),
-            )
-            .filter((c) => ALLOWED_TYPES.includes(c.type.code))
-            .map((i, idx) => (
-              <Grid item xs="auto" key={idx}>
-                <CreativeItem creative={i} />
-              </Grid>
-            ))}
-        </Grid>
-      )}
+      <CardContainer
+        header="Creatives"
+        sx={{
+          flexGrow: 1,
+          mr: 2,
+          width: "100%",
+        }}
+      >
+        <DataGrid
+          loading={loading}
+          rows={creatives}
+          columns={columns}
+          density="standard"
+          autoHeight
+          disableRowSelectionOnClick
+          hideFooterSelectedRowCount
+          rowHeight={60}
+          slots={{ toolbar: CustomToolbar }}
+          slotProps={{
+            toolbar: { showQuickFilter: true },
+          }}
+          sx={{ borderStyle: "none" }}
+          initialState={{
+            sorting: {
+              sortModel: [{ field: "createdAt", sort: "desc" }],
+            },
+            pagination: {
+              paginationModel: {
+                pageSize: 10,
+              },
+            },
+          }}
+        />
+      </CardContainer>
     </MiniSideBar>
   );
 }
 
-const CreativeItem = (props: { creative: CreativeFragment }) => {
-  const { id, name, payloadNotification, payloadInlineContent, state, type } =
-    props.creative;
-  const BoxHeader = () => (
-    <Box display="flex" gap="10px">
-      <Box>
-        {name}
-        <TypeChip code={type.code} />
-        <Status state={state} />
-      </Box>
-      <Box>
-        <Button
-          variant="outlined"
-          sx={{ borderRadius: "10px" }}
-          size="small"
-          component={RouterLink}
-          to={`/user/main/creative/${id}`}
-          replace
-        >
-          Edit
-        </Button>
-      </Box>
-    </Box>
-  );
-
-  return (
-    <CardContainer header={<BoxHeader />}>
-      <ReviewField
-        caption={"Title"}
-        value={payloadNotification?.title ?? payloadInlineContent?.title}
-      />
-      <ReviewField caption={"Body"} value={payloadNotification?.body} />
-      <ReviewField
-        caption={"Call To Action"}
-        value={payloadInlineContent?.ctaText}
-      />
-      <ReviewField
-        caption={"Description"}
-        value={payloadInlineContent?.description}
-      />
-      <ReviewField
-        caption={"Target URL"}
-        value={
-          payloadNotification?.targetUrl ?? payloadInlineContent?.targetUrl
-        }
-      />
-      {payloadInlineContent?.imageUrl && (
-        <ImagePreview
-          url={payloadInlineContent?.imageUrl ?? ""}
-          width={250}
-          height={150}
+function CreativePayloadList(props: { creative: CreativeFragment }) {
+  const c = props.creative;
+  let listItems;
+  switch (c.type.code) {
+    case "notification_all_v1":
+      listItems = (
+        <ListItems
+          items={[
+            { primary: "Title", secondary: c.payloadNotification?.title },
+            { primary: "Body", secondary: c.payloadNotification?.body },
+          ]}
         />
-      )}
-    </CardContainer>
-  );
-};
+      );
+      break;
+    case "inline_content_all_v1":
+      listItems = (
+        <ListItems
+          items={[
+            { primary: "Title", secondary: c.payloadInlineContent?.title },
+            {
+              primary: "Call To Action",
+              secondary: c.payloadInlineContent?.ctaText,
+            },
+          ]}
+        />
+      );
+      break;
+    default:
+      listItems = null;
+  }
 
-const TypeChip = (props: { code?: string }) => {
-  const { code } = props;
-  if (!code) {
+  if (!listItems) {
     return null;
   }
 
-  return (
-    <Chip
-      label={uiTextForCreativeTypeCode({ code })}
-      size="small"
-      sx={{
-        fontSize: "0.7rem",
-      }}
-    />
-  );
+  return <List>{listItems}</List>;
+}
+
+const ListItems = (props: {
+  items: { primary: string; secondary?: string }[];
+}) => {
+  return props.items.map((i, idx) => (
+    <Box key={idx}>
+      <Typography
+        variant="caption"
+        component="span"
+        paddingRight={1}
+        fontWeight={600}
+      >
+        {i.primary}
+      </Typography>
+      <Typography variant="body1" component="span">
+        {i.secondary}
+      </Typography>
+    </Box>
+  ));
 };

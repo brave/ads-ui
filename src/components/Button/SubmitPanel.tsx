@@ -48,7 +48,9 @@ interface Props {
 }
 
 export function SubmitPanel(props: PropsWithChildren<Props>) {
-  const { dirty, errors, submitCount } = useFormikContext();
+  const { dirty, errors, submitCount, touched } = useFormikContext();
+  console.log(dirty);
+  console.log(JSON.stringify(touched));
   // when creating a new item, we don't want to bombard with a whole load
   // of validation errors. So wait until it's been submitted at least once
   // before dumping the set of things that need to be completed.
@@ -56,7 +58,7 @@ export function SubmitPanel(props: PropsWithChildren<Props>) {
     props.isCreate && submitCount < 1 ? [] : extractErrors(errors);
 
   return (
-    <Slide in={dirty} direction="up">
+    <Slide in={true} direction="up">
       <Paper
         elevation={8}
         sx={{
