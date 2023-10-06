@@ -42,21 +42,20 @@ function StatusMessage({
 
 interface Props {
   isCreate: boolean;
-  useDialogue?: boolean;
+  useDialog?: boolean;
   dialogTitle?: string;
   dialogMessage?: string;
 }
 
 export function SubmitPanel(props: PropsWithChildren<Props>) {
-  const { dirty, errors, submitCount, touched } = useFormikContext();
-  console.log(dirty);
-  console.log(JSON.stringify(touched));
+  const { dirty, errors, submitCount } = useFormikContext();
   // when creating a new item, we don't want to bombard with a whole load
   // of validation errors. So wait until it's been submitted at least once
   // before dumping the set of things that need to be completed.
   const errorStrings =
     props.isCreate && submitCount < 1 ? [] : extractErrors(errors);
 
+  console.log(props);
   return (
     <Slide in={true} direction="up">
       <Paper
@@ -74,14 +73,14 @@ export function SubmitPanel(props: PropsWithChildren<Props>) {
             <StatusMessage errors={errorStrings} isDirty={dirty} />
           </Box>
 
-          {props.useDialogue && props.dialogTitle && props.dialogMessage && (
+          {props.useDialog && props.dialogTitle && props.dialogMessage && (
             <FormikDialogButton
               {...props}
               dialogMessage={props.dialogMessage}
               dialogTitle={props.dialogTitle}
             />
           )}
-          {!props.useDialogue && <FormikSubmitButton {...props} />}
+          {!props.useDialog && <FormikSubmitButton {...props} />}
         </Box>
       </Paper>
     </Slide>

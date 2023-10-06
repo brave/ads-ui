@@ -9,7 +9,7 @@ import {
   TooltipProps,
 } from "@mui/material";
 import _ from "lodash";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 interface FormikSubmitButtonProps {
   label?: string;
@@ -25,8 +25,9 @@ export function extractErrors(errorObject: any): string[] {
   );
 }
 
-const useSaveEnabled = (props: { isCreate: boolean }) => {
+const useSave = (props: { isCreate: boolean }) => {
   const formik = useFormikContext();
+  const [loading, setLoading] = useState(false);
   let saveButtonTooltip: TooltipProps["title"] = "";
   let saveEnabled = true;
 
@@ -52,7 +53,17 @@ const useSaveEnabled = (props: { isCreate: boolean }) => {
     );
   }
 
-  return { saveButtonTooltip, saveEnabled, isSubmitting: formik.isSubmitting };
+  const submitForm = useCallback(() => {
+    setLoading(true);
+    formik.submitForm().finally(() => setLoading(false));
+  }, [formik]);
+
+  return {
+    saveButtonTooltip,
+    saveEnabled,
+    isSubmitting: formik.isSubmitting || loading,
+    submitForm: submitForm,
+  };
 };
 
 export const FormikSubmitButton = ({
@@ -60,7 +71,7 @@ export const FormikSubmitButton = ({
   inProgressLabel = "Saving...",
   isCreate,
 }: FormikSubmitButtonProps) => {
-  const { saveButtonTooltip, saveEnabled, isSubmitting } = useSaveEnabled({
+  const { saveButtonTooltip, saveEnabled, isSubmitting, submitForm } = useSave({
     isCreate,
   });
 
@@ -70,7 +81,9 @@ export const FormikSubmitButton = ({
         <Button
           color="primary"
           variant="contained"
-          type="submit"
+          onClick={() => {
+            submitForm();
+          }}
           size="large"
           disabled={!saveEnabled || isSubmitting}
         >
@@ -89,7 +102,7 @@ interface DialogProps {
 export const FormikDialogButton = (
   props: FormikSubmitButtonProps & DialogProps,
 ) => {
-  const { saveButtonTooltip, saveEnabled, isSubmitting } = useSaveEnabled({
+  const { saveButtonTooltip, saveEnabled, isSubmitting } = useSave({
     isCreate: props.isCreate,
   });
   const [open, setOpen] = useState(false);
@@ -106,9 +119,9 @@ export const FormikDialogButton = (
               e.preventDefault();
               setOpen(true);
             }}
-            disabled={!saveEnabled || isSubmitting}
+            disabled={!saveEnabled || isSubmitting || open}
           >
-            {isSubmitting ? props.inProgressLabel : props.label}
+            {isSubmitting ? "Saving..." : "Save"}
           </Button>
         </div>
       </Tooltip>
@@ -116,7 +129,12 @@ export const FormikDialogButton = (
         <DialogTitle>{props.dialogTitle}</DialogTitle>
         <DialogContent>{props.dialogMessage}</DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpen(false)} variant="outlined">
+          <Button
+            onClick={() => setOpen(false)}
+            variant="outlined"
+            size="large"
+            sx={{ mr: 1 }}
+          >
             Close
           </Button>
           <FormikSubmitButton {...props} />

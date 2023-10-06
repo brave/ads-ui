@@ -18,6 +18,7 @@ import {
   GridToolbarFilterButton,
   GridToolbarQuickFilter,
 } from "@mui/x-data-grid";
+import { CreativeStatusSwitch } from "components/Creatives/CreativeStatusSwitch";
 
 const ALLOWED_TYPES = ["notification_all_v1", "inline_content_all_v1"];
 export function CreativeList() {
@@ -30,6 +31,14 @@ export function CreativeList() {
   });
 
   const columns: GridColDef<CreativeFragment>[] = [
+    {
+      field: "switch",
+      type: "actions",
+      headerName: "On / Off",
+      renderCell: ({ row }) => <CreativeStatusSwitch creative={row} />,
+      filterable: false,
+      sortable: false,
+    },
     {
       field: "name",
       type: "string",
@@ -66,7 +75,6 @@ export function CreativeList() {
     {
       field: "state",
       headerName: "State",
-      type: "singleSelect",
       renderCell: ({ row }) => <Status state={row.state} />,
       width: 200,
     },
