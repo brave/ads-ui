@@ -80,6 +80,7 @@ export const initialConversion: Conversion = {
 export const initialCreative: Creative = {
   name: "",
   advertiserId: "",
+  targetUrlValid: "Target URL validation incomplete",
   payloadNotification: {
     title: "",
     targetUrl: "",
