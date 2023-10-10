@@ -21,12 +21,13 @@ import {
 import { useState } from "react";
 import _ from "lodash";
 import { validCreativeFields } from "user/library";
+import { isReviewableState } from "util/displayState";
 
 interface Props {
   creative: CreativeFragment;
 }
 
-type RelatedCampaign = { id: string; name: string; state: string };
+export type RelatedCampaign = { id: string; name: string; state: string };
 export function CreativeStatusSwitch({ creative }: Props) {
   const { advertiser } = useAdvertiser();
   const input = _.omit(validCreativeFields(creative, advertiser.id), [
@@ -70,7 +71,7 @@ export function CreativeStatusSwitch({ creative }: Props) {
           campaigns({
             onCompleted(data) {
               const campaigns = data.creativeCampaigns.filter(
-                (c) => c.state !== "draft" && c.state !== "completed",
+                (c) => !isReviewableState(c.state),
               );
               if (campaigns.length > 1) {
                 setRelatedCampaigns(_.uniqBy(campaigns, "id"));

@@ -17,6 +17,7 @@ import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { CreativeInput } from "graphql/types";
 import { CampaignFragment } from "graphql/campaign.generated";
 import _ from "lodash";
+import { isReviewableState } from "util/displayState";
 
 interface Params {
   id: string;
@@ -132,7 +133,8 @@ const dialogProps = (
   }
 
   const useDialogue =
-    creative.state !== "draft" && campaigns.some((c) => c.state !== "draft");
+    !isReviewableState(creative.state) &&
+    campaigns.some((c) => !isReviewableState(c.state));
   return {
     useDialog: useDialogue,
     dialogTitle: `Are you sure you want to modify "${creative.name}"?`,
