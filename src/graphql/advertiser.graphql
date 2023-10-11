@@ -13,8 +13,7 @@ fragment Advertiser on Advertiser {
   ...AdvertiserSummary
   referrer
   phone
-  selfServiceEdit
-  selfServiceCreate
+  selfServiceManageCampaign
   selfServiceSetPrice
   mailingAddress {
     street1

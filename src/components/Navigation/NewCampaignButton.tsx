@@ -12,7 +12,7 @@ export function NewCampaignButton() {
     .utc()
     .valueOf()}/settings`;
 
-  if (!advertiser.selfServiceCreate) {
+  if (!advertiser.selfServiceManageCampaign) {
     return null;
   }
 

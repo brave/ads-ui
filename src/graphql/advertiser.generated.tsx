@@ -18,8 +18,7 @@ export type AdvertiserSummaryFragment = {
 export type AdvertiserFragment = {
   referrer?: string | null;
   phone?: string | null;
-  selfServiceEdit: boolean;
-  selfServiceCreate: boolean;
+  selfServiceManageCampaign: boolean;
   selfServiceSetPrice: boolean;
   id: string;
   name: string;
@@ -193,8 +192,7 @@ export const AdvertiserFragmentDoc = gql`
     ...AdvertiserSummary
     referrer
     phone
-    selfServiceEdit
-    selfServiceCreate
+    selfServiceManageCampaign
     selfServiceSetPrice
     mailingAddress {
       street1

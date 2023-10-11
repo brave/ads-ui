@@ -44,7 +44,7 @@ export function Navbar() {
         <Stack direction="row" alignItems="center" spacing={2}>
           <img src={ads} alt="Ads" height="31px" width="180px" />
           <Divider orientation="vertical" flexItem />
-          {advertiser.selfServiceCreate && <DraftMenu />}
+          {advertiser.selfServiceManageCampaign && <DraftMenu />}
         </Stack>
         <div style={{ flexGrow: 1 }} />
         {

@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 export function NewImageButton(props: { onClick: () => void }) {
   const { advertiser } = useAdvertiser();
 
-  if (!advertiser.selfServiceCreate) {
+  if (!advertiser.selfServiceManageCampaign) {
     return null;
   }
 

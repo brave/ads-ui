@@ -18,8 +18,6 @@ export function CampaignView() {
   const { advertiser } = useAdvertiser();
   const { fromDate } = useContext(FilterContext);
   const [selectedCampaigns, setSelectedCampaigns] = useState<string[]>([]);
-  const advertiserCanAction =
-    advertiser.selfServiceCreate && advertiser.selfServiceEdit;
 
   const handleCampaignSelect = useCallback(
     (c: string, include: boolean) => {
@@ -60,7 +58,7 @@ export function CampaignView() {
     <MiniSideBar>
       <CardContainer
         header={
-          advertiserCanAction ? (
+          advertiser.selfServiceManageCampaign ? (
             <CampaignHeader selectedCampaigns={selectedCampaigns} />
           ) : (
             "Campaigns"
