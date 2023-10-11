@@ -1,0 +1,189 @@
+on:
+  # run manually from the actions panels
+  workflow_dispatch:
+
+  # since we can't currently create a PR and have the jobs run
+  # successfully, run when one is manually created.
+  pull_request:
+    types: [opened]
+    branches: [prod]
+
+  # update the PR text when new commits are merged to the master branch
+  push:
+    branches:
+      - master
+
+  # and re-run early in the morning, mainly so the title gets updated with today's date
+  schedule:
+    - cron: "42 1 * * *"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  main:
+    name: Maintain Prod PR
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410 # v6
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            function renderCommit(commitMsg) {
+              const prRegex = /\(#(\d+)\)$/m;
+              const allRefsRegex = /#(\d+)\s/g;
+
+              const prRef = commitMsg.match(prRegex);
+
+              if (!prRef) {
+                return `- ${"???" + commitMsg}`;
+              }
+
+              const prNumber = prRef[1];
+
+              const otherReferences = [...commitMsg.matchAll(allRefsRegex)]
+                .map((m) => m[1])
+                .filter((r) => r !== prNumber);
+
+              const messages = [
+                `- #${prNumber}`,
+                ...otherReferences.map((r) => `  - re #${r}`),
+              ];
+
+              return messages.join("\n");
+            }
+
+            function buildSection(title, commitMsgs) {
+              if (commitMsgs.length === 0) return "";
+
+              return `\n## ${title}\n\n${commitMsgs.map(renderCommit).join("\n")}`;
+            }
+
+            function buildBody(messages) {
+              const groups = [
+                {
+                  type: "feat",
+                  title: "Features",
+                },
+                {
+                  type: "fix",
+                  title: "Fixes",
+                },
+                {
+                  type: "chore",
+                  title: "Chores",
+                },
+                {
+                  type: "refactor",
+                  title: "Refactors",
+                },
+              ];
+
+              const knownSections = groups.map((group) =>
+                buildSection(
+                  group.title,
+                  messages.filter((m) => m.startsWith(group.type))
+                )
+              );
+
+              const allKnownSections = groups.map((g) => g.type);
+              const unknownSections = buildSection(
+                "Other",
+                messages.filter((m) => !allKnownSections.some((s) => m.startsWith(s)))
+              );
+
+              return [...knownSections, unknownSections].join("\n");
+            }
+
+            async function findReleasePR() {
+              const { data: prs } = await github.rest.pulls.list({
+                owner,
+                repo,
+                base: "prod",
+                state: "open",
+              });
+
+              if (prs.length === 0) {
+                console.log("no release PR found");
+                return undefined;
+              }
+
+              if (prs.length !== 1) {
+                throw new Error(`${prs.length} production PRs found...`);
+              }
+
+              const pr = prs[0];
+
+              console.log(
+                `Found PR#${pr.number} ${pr.title} ${
+                  pr.draft ? "(draft)" : "(not draft)"
+                } - ${pr.html_url}`
+              );
+              return pr;
+            }
+
+            const pr = await findReleasePR();
+
+            if (!pr) {
+              console.log("checking commits...");
+              const commits = await github.rest.repos.compareCommitsWithBasehead({
+                owner,
+                repo,
+                basehead: "prod...master",
+              });
+
+              if (commits.data.commits.length === 0) {
+                console.log("no changes to release!");
+                return;
+              }
+
+              const commitMessages = commits.data.commits.map((c) => c.commit.message);
+
+              const result = buildBody(commitMessages);
+
+              console.log("need to create a draft release PR!", result);
+
+              // but don't actually do it yet: if you create one using the github
+              // token, it doesn't run the security jobs. Create an empty one by hand,
+              // for now.
+              /*
+              const newPr = await github.rest.pulls.create({
+                owner,
+                repo,
+                title: "Production Release (next)",
+                head: "master",
+                base: "prod",
+                draft: true,
+                body: result,
+              });
+
+              console.log("created: " + newPr.data.html_url);
+              */
+            } else {
+              const { data: commits } = await github.rest.pulls.listCommits({
+                owner,
+                repo,
+                pull_number: pr.number,
+              });
+
+              const commitMessages = commits.map((c) => c.commit.message);
+              const body = buildBody(commitMessages);
+              const title = `Production Release ${new Date().toISOString().slice(0, 10)}`;
+
+              if (body === pr.body && title === pr.title) {
+                console.log("up to date!");
+              } else {
+                console.log(`Updating PR!`, { title, body });
+
+                await github.rest.pulls.update({
+                  owner,
+                  repo,
+                  pull_number: pr.number,
+                  body,
+                  title,
+                });
+              }
+            }
