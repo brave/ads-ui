@@ -59,7 +59,9 @@ export function CreativeForm() {
         <Formik
           enableReinitialize
           initialValues={data}
-          onSubmit={submit}
+          onSubmit={(values, { setSubmitting }) => {
+            void submit(values, setSubmitting);
+          }}
           validationSchema={CreativeSchema}
         >
           {({ values }) => (

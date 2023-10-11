@@ -55,7 +55,6 @@ export function SubmitPanel(props: PropsWithChildren<Props>) {
   const errorStrings =
     props.isCreate && submitCount < 1 ? [] : extractErrors(errors);
 
-  console.log(props);
   return (
     <Slide in={true} direction="up">
       <Paper
@@ -66,6 +65,7 @@ export function SubmitPanel(props: PropsWithChildren<Props>) {
           position: "sticky",
           bottom: 0,
           zIndex: 9999,
+          borderRadius: "16px",
         }}
       >
         <Box display="flex" justifyContent="flex-end" alignItems="end" gap={2}>

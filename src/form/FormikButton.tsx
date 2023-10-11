@@ -9,7 +9,7 @@ import {
   TooltipProps,
 } from "@mui/material";
 import _ from "lodash";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 
 interface FormikSubmitButtonProps {
   label?: string;
@@ -27,7 +27,6 @@ export function extractErrors(errorObject: any): string[] {
 
 const useSave = (props: { isCreate: boolean }) => {
   const formik = useFormikContext();
-  const [loading, setLoading] = useState(false);
   let saveButtonTooltip: TooltipProps["title"] = "";
   let saveEnabled = true;
 
@@ -53,16 +52,11 @@ const useSave = (props: { isCreate: boolean }) => {
     );
   }
 
-  const submitForm = useCallback(() => {
-    setLoading(true);
-    formik.submitForm().finally(() => setLoading(false));
-  }, [formik]);
-
   return {
     saveButtonTooltip,
     saveEnabled,
-    isSubmitting: formik.isSubmitting || loading,
-    submitForm: submitForm,
+    isSubmitting: formik.isSubmitting,
+    submitForm: formik.submitForm,
   };
 };
 

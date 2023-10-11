@@ -68,6 +68,7 @@ export function CreativeList() {
     {
       field: "content",
       headerName: "Content",
+      valueGetter: ({ row }) => creativeValuesGetter(row),
       renderCell: ({ row }) => <CreativePayloadList creative={row} />,
       flex: 1,
       sortable: false,
@@ -120,9 +121,6 @@ export function CreativeList() {
           hideFooterSelectedRowCount
           rowHeight={60}
           slots={{ toolbar: CustomToolbar }}
-          slotProps={{
-            toolbar: { showQuickFilter: true },
-          }}
           sx={{ borderStyle: "none" }}
           initialState={{
             sorting: {
@@ -196,4 +194,10 @@ const ListItems = (props: {
       </Typography>
     </Box>
   ));
+};
+
+const creativeValuesGetter = (c: CreativeFragment) => {
+  const title = c.payloadNotification?.title ?? c.payloadInlineContent?.title;
+  const body = c.payloadNotification?.title ?? c.payloadInlineContent?.ctaText;
+  return `${title} ${body}`;
 };

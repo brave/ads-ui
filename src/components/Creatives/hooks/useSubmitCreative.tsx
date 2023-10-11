@@ -32,7 +32,8 @@ export function useSubmitCreative(props: { id: string }) {
     });
 
   const submit = useCallback(
-    async (values: CreativeInput) => {
+    async (values: CreativeInput, submitting: (s: boolean) => void) => {
+      submitting(true);
       const valid = validCreativeFields(
         { id: props.id, ...values },
         advertiser.id,
@@ -42,14 +43,19 @@ export function useSubmitCreative(props: { id: string }) {
         ..._.omit(valid, ["id", "targetUrlValid", "included"]),
         state: "under_review",
       };
-      if (isNew) {
-        createCreative({
-          variables: { input: input },
-        });
-      } else {
-        updateCreative({
-          variables: { input: input, id: props.id },
-        });
+
+      try {
+        if (isNew) {
+          await createCreative({
+            variables: { input: input },
+          });
+        } else {
+          await updateCreative({
+            variables: { input: input, id: props.id },
+          });
+        }
+      } finally {
+        submitting(false);
       }
     },
     [createCreative, updateCreative, props.id],
