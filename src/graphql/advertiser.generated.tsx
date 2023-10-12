@@ -57,8 +57,7 @@ export type UpdateAdvertiserMutation = {
 export type AdvertiserCampaignsFragment = {
   id: string;
   name: string;
-  selfServiceEdit: boolean;
-  selfServiceCreate: boolean;
+  selfServiceManageCampaign: boolean;
   selfServiceSetPrice: boolean;
   campaigns: Array<{
     id: string;
@@ -94,8 +93,7 @@ export type AdvertiserCampaignsQuery = {
   advertiserCampaigns?: {
     id: string;
     name: string;
-    selfServiceEdit: boolean;
-    selfServiceCreate: boolean;
+    selfServiceManageCampaign: boolean;
     selfServiceSetPrice: boolean;
     campaigns: Array<{
       id: string;
@@ -209,8 +207,7 @@ export const AdvertiserCampaignsFragmentDoc = gql`
   fragment AdvertiserCampaigns on Advertiser {
     id
     name
-    selfServiceEdit
-    selfServiceCreate
+    selfServiceManageCampaign
     selfServiceSetPrice
     campaigns {
       ...CampaignSummary

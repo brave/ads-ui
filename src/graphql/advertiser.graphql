@@ -42,8 +42,7 @@ mutation updateAdvertiser($updateAdvertiserInput: UpdateAdvertiserInput!) {
 fragment AdvertiserCampaigns on Advertiser {
   id
   name
-  selfServiceEdit
-  selfServiceCreate
+  selfServiceManageCampaign
   selfServiceSetPrice
   campaigns {
     ...CampaignSummary
