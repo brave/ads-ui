@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { isPast, parseISO } from "date-fns";
 import { Switch, Tooltip, Typography } from "@mui/material";
 import { CampaignSource } from "graphql/types";
+import { useGetEntityState } from "hooks/useGetEntityState";
 
 interface Props {
   onChange: (s: string) => void;
@@ -22,7 +22,7 @@ export function OnOff({
   source,
   isInline,
 }: Props) {
-  const [checked, setChecked] = useState(state === "active");
+  const [entityState, setEntityState] = useGetEntityState(state);
   const isAfterEnd = isPast(parseISO(end));
   const enabled =
     source === CampaignSource.SelfServe &&
@@ -33,7 +33,7 @@ export function OnOff({
     isInline ? null : (
       <Typography sx={{ textAlign: "center", p: 0 }}>-</Typography>
     );
-  const tooltip = checked ? "Pause" : "Activate";
+  const tooltip = entityState === "paused" ? "Pause" : "Activate";
 
   return (
     <Tooltip
@@ -46,10 +46,10 @@ export function OnOff({
           <Switch
             onChange={(e) => {
               const theState = e.target.checked ? "active" : "paused";
-              setChecked(e.target.checked);
+              setEntityState(theState);
               onChange(theState);
             }}
-            checked={checked}
+            checked={entityState === "active"}
             disabled={loading}
           />
         ) : (

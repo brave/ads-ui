@@ -22,6 +22,7 @@ import { useState } from "react";
 import _ from "lodash";
 import { validCreativeFields } from "user/library";
 import { isReviewableState } from "util/displayState";
+import { useGetEntityState } from "hooks/useGetEntityState";
 
 interface Props {
   creative: CreativeFragment;
@@ -38,7 +39,7 @@ export function CreativeStatusSwitch({ creative }: Props) {
   const [relatedCampaigns, setRelatedCampaigns] = useState<RelatedCampaign[]>(
     [],
   );
-  const [creativeState, setCreativeState] = useState(input.state);
+  const [creativeState, setCreativeState] = useGetEntityState(input.state);
   const [update, { loading: updateLoading }] = useUpdateCreativeMutation({
     refetchQueries: [
       refetchAdvertiserCreativesQuery({ advertiserId: advertiser.id }),
