@@ -1,9 +1,5 @@
 import { useState } from "react";
-import {
-  ColumnDescriptor,
-  EnhancedTable,
-  StandardRenderers,
-} from "components/EnhancedTable";
+import { EnhancedTable, StandardRenderers } from "components/EnhancedTable";
 import { Checkbox, Link } from "@mui/material";
 import {
   campaignOnOffState,
@@ -22,6 +18,7 @@ import {
 import _ from "lodash";
 import { uiTextForCampaignFormat } from "user/library";
 import { CampaignSummaryFragment } from "graphql/campaign.generated";
+import { GridColDef } from "@mui/x-data-grid";
 
 interface Props {
   advertiser?: AdvertiserCampaignsFragment | null;
@@ -52,36 +49,39 @@ export function CampaignList({
     },
   });
 
-  const columns: ColumnDescriptor<CampaignSummaryFragment>[] = [
+  const columns: GridColDef<CampaignSummaryFragment>[] = [
     {
-      title: "Campaign",
-      value: (c) => c.name,
-      extendedRenderer: (r) => (
+      field: "name",
+      headerName: "Campaign",
+      renderCell: ({ row }) => (
         <Link
           component={RouterLink}
-          to={`/user/main/campaign/${r.id}`}
+          to={`/user/main/campaign/${row.id}`}
           underline="none"
         >
-          {r.name}
+          {row.name}
         </Link>
       ),
     },
     {
-      title: "Format",
-      value: (c) => uiTextForCampaignFormat(c.format),
+      field: "format",
+      headerName: "Format",
+      valueGetter: ({ row }) => uiTextForCampaignFormat(row.format),
     },
     {
-      title: "Status",
-      value: (c) => (isAfterEndDate(c.endAt) ? "completed" : c.state),
-      extendedRenderer: (r) => (
-        <Status state={r.state} start={r.startAt} end={r.endAt} />
+      field: "state",
+      headerName: "Status",
+      valueGetter: ({ row }) =>
+        isAfterEndDate(row.endAt) ? "completed" : row.state,
+      renderCell: ({ row }) => (
+        <Status state={row.state} start={row.startAt} end={row.endAt} />
       ),
-      sx: { width: "1px", p: 0 },
+      width: 1,
     },
     {
-      title: "Budget",
-      value: (c) => c.budget,
-      extendedRenderer: (r) => renderMonetaryAmount(r.budget, r.currency),
+      field: "budget",
+      headerName: "Budget",
+      renderCell: ({ row }) => renderMonetaryAmount(row.budget, row.currency),
       align: "right",
     },
     {
@@ -132,7 +132,6 @@ export function CampaignList({
       {
         title: "",
         value: (c) => c.id,
-        sortable: false,
         extendedRenderer: (r) => (
           <CampaignCheckBox
             campaign={r}
@@ -142,6 +141,8 @@ export function CampaignList({
         ),
         align: "center",
         sx: { width: "1px" },
+        sortable: false,
+        filterable: false,
       },
       {
         title: "On/Off",
