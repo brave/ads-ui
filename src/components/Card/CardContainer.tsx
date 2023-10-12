@@ -8,6 +8,7 @@ export function CardContainer(
     additionalAction?: ReactNode;
     sx?: SxProps;
     childSx?: SxProps;
+    useTypography?: boolean;
   } & PropsWithChildren,
 ) {
   return (
@@ -19,7 +20,10 @@ export function CardContainer(
           alignItems="center"
           mb={1}
         >
-          {props.header && <Typography variant="h2">{props.header}</Typography>}
+          {props.header && props.useTypography && (
+            <Typography variant="h2">{props.header}</Typography>
+          )}
+          {!props.useTypography && <>{props.header}</>}
           {props.additionalAction && <Box>{props.additionalAction}</Box>}
         </Stack>
       )}

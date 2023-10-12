@@ -7,28 +7,32 @@ import { NotificationPreview } from "components/Creatives/NotificationPreview";
 import { CreateCreativeButton } from "components/Creatives/CreateCreativeButton";
 import { useEffect } from "react";
 
-export function NotificationAd() {
-  const [, , code] = useField<string>("newCreative.type.code");
+export function NotificationAd(props: {
+  name?: string;
+  useCustomButton?: boolean;
+}) {
+  const withName = (s: string) => (props.name ? `${props.name}.${s}` : s);
+  const [, , code] = useField<string>(withName("type.code"));
 
   useEffect(() => {
     code.setValue("notification_all_v1");
   }, []);
 
   return (
-    <CardContainer header="Create Notification Ad">
-      <FormikTextField name="newCreative.name" label="Ad Name" />
+    <CardContainer header="Notification creative">
+      <FormikTextField name={withName("name")} label="Name" />
 
       <Stack direction="row" alignItems="center" spacing={1}>
         <FormikTextField
-          name="newCreative.payloadNotification.title"
-          label="Ad Title"
+          name={withName("payloadNotification.title")}
+          label="Title"
           helperText="Max 30 Characters"
           maxLengthInstantFeedback={30}
         />
 
         <FormikTextField
-          name="newCreative.payloadNotification.body"
-          label="Ad Body"
+          name={withName("payloadNotification.body")}
+          label="Body"
           helperText="Max 60 Characters"
           maxLengthInstantFeedback={60}
         />
@@ -37,16 +41,18 @@ export function NotificationAd() {
       <NotificationPreview />
 
       <UrlResolver
-        name="newCreative.payloadNotification.targetUrl"
-        validator="newCreative.targetUrlValid"
-        label="Ad Target URL"
+        name={withName("payloadNotification.targetUrl")}
+        validator={withName("targetUrlValid")}
+        label="Target URL"
         helperText="Example - https://brave.com/brave-rewards/"
       />
 
-      <Stack direction="row" justifyContent="space-between" mt={1}>
-        <div />
-        <CreateCreativeButton />
-      </Stack>
+      {props.useCustomButton !== true && (
+        <Stack direction="row" justifyContent="space-between" mt={1}>
+          <div />
+          <CreateCreativeButton />
+        </Stack>
+      )}
     </CardContainer>
   );
 }

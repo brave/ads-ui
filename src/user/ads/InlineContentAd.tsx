@@ -9,11 +9,15 @@ import { CardContainer } from "components/Card/CardContainer";
 import { ImageAutocomplete } from "components/Assets/ImageAutocomplete";
 import { NewsPreview } from "components/Creatives/NewsPreview";
 
-export function InlineContentAd() {
+export function InlineContentAd(props: {
+  name?: string;
+  useCustomButton?: boolean;
+}) {
+  const withName = (s: string) => (props.name ? `${props.name}.${s}` : s);
   const { advertiser } = useAdvertiser();
-  const [, , code] = useField<string>("newCreative.type.code");
+  const [, , code] = useField<string>(withName("type.code"));
   const [, , description] = useField<string>(
-    "newCreative.payloadInlineContent.description",
+    withName("payloadInlineContent.description"),
   );
   useEffect(() => {
     code.setValue("inline_content_all_v1");
@@ -22,40 +26,42 @@ export function InlineContentAd() {
 
   return (
     <Box display="flex" flexDirection="column" gap={2}>
-      <CardContainer header="Create News Ad" sx={{ flexGrow: 1 }}>
-        <FormikTextField name="newCreative.name" label="Name" />
+      <CardContainer header="News display creative" sx={{ flexGrow: 1 }}>
+        <FormikTextField name={withName("name")} label="Name" />
 
         <FormikTextField
-          name="newCreative.payloadInlineContent.title"
+          name={withName("payloadInlineContent.title")}
           label="Title"
           maxLengthInstantFeedback={90}
         />
 
         <FormikTextField
-          name="newCreative.payloadInlineContent.ctaText"
+          name={withName("payloadInlineContent.ctaText")}
           label="Call to Action text"
           maxLengthInstantFeedback={15}
         />
 
-        <ImageAutocomplete />
+        <ImageAutocomplete name={withName("payloadInlineContent.imageUrl")} />
 
         <UrlResolver
-          validator="newCreative.targetUrlValid"
-          name="newCreative.payloadInlineContent.targetUrl"
+          validator={withName("targetUrlValid")}
+          name={withName("payloadInlineContent.targetUrl")}
           label="Target URL"
         />
 
         {advertiser.selfServiceSetPrice && (
           <FormikTextField
-            name="newCreative.payloadInlineContent.description"
+            name={withName("payloadInlineContent.description")}
             label="Advertiser Name"
           />
         )}
 
-        <Stack direction="row" justifyContent="space-between" mt={1}>
-          <div />
-          <CreateCreativeButton />
-        </Stack>
+        {props.useCustomButton !== true && (
+          <Stack direction="row" justifyContent="space-between" mt={1}>
+            <div />
+            <CreateCreativeButton />
+          </Stack>
+        )}
       </CardContainer>
       <NewsPreview />
     </Box>

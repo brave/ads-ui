@@ -147,6 +147,114 @@ export type CreateCreativeMutation = {
   };
 };
 
+export type UpdateCreativeMutationVariables = Types.Exact<{
+  id: Types.Scalars["String"];
+  input: Types.CreativeInput;
+}>;
+
+export type UpdateCreativeMutation = {
+  updateCreative: {
+    id: string;
+    createdAt: any;
+    modifiedAt: any;
+    name: string;
+    state: string;
+    type: { code: string };
+    payloadNotification?: {
+      body: string;
+      title: string;
+      targetUrl: string;
+    } | null;
+    payloadNewTabPage?: {
+      logo?: {
+        imageUrl: string;
+        alt: string;
+        companyName: string;
+        destinationUrl: string;
+      } | null;
+      wallpapers?: Array<{
+        imageUrl: string;
+        focalPoint: { x: number; y: number };
+      }> | null;
+    } | null;
+    payloadInlineContent?: {
+      title: string;
+      ctaText: string;
+      imageUrl: string;
+      targetUrl: string;
+      dimensions: string;
+      description: string;
+    } | null;
+    payloadSearch?: { body: string; title: string; targetUrl: string } | null;
+    payloadSearchHomepage?: {
+      body: string;
+      imageUrl: string;
+      imageDarkModeUrl?: string | null;
+      targetUrl: string;
+      title: string;
+      ctaText: string;
+    } | null;
+  };
+};
+
+export type LoadCreativeQueryVariables = Types.Exact<{
+  id: Types.Scalars["String"];
+}>;
+
+export type LoadCreativeQuery = {
+  creative?: {
+    id: string;
+    createdAt: any;
+    modifiedAt: any;
+    name: string;
+    state: string;
+    type: { code: string };
+    payloadNotification?: {
+      body: string;
+      title: string;
+      targetUrl: string;
+    } | null;
+    payloadNewTabPage?: {
+      logo?: {
+        imageUrl: string;
+        alt: string;
+        companyName: string;
+        destinationUrl: string;
+      } | null;
+      wallpapers?: Array<{
+        imageUrl: string;
+        focalPoint: { x: number; y: number };
+      }> | null;
+    } | null;
+    payloadInlineContent?: {
+      title: string;
+      ctaText: string;
+      imageUrl: string;
+      targetUrl: string;
+      dimensions: string;
+      description: string;
+    } | null;
+    payloadSearch?: { body: string; title: string; targetUrl: string } | null;
+    payloadSearchHomepage?: {
+      body: string;
+      imageUrl: string;
+      imageDarkModeUrl?: string | null;
+      targetUrl: string;
+      title: string;
+      ctaText: string;
+    } | null;
+  } | null;
+};
+
+export type CampaignsForCreativeQueryVariables = Types.Exact<{
+  creativeId: Types.Scalars["String"];
+  advertiserId: Types.Scalars["String"];
+}>;
+
+export type CampaignsForCreativeQuery = {
+  creativeCampaigns: Array<{ id: string; name: string; state: string }>;
+};
+
 export const CreativeFragmentDoc = gql`
   fragment Creative on Creative {
     id
@@ -323,3 +431,185 @@ export type CreateCreativeMutationOptions = Apollo.BaseMutationOptions<
   CreateCreativeMutation,
   CreateCreativeMutationVariables
 >;
+export const UpdateCreativeDocument = gql`
+  mutation updateCreative($id: String!, $input: CreativeInput!) {
+    updateCreative(id: $id, creative: $input) {
+      ...Creative
+    }
+  }
+  ${CreativeFragmentDoc}
+`;
+export type UpdateCreativeMutationFn = Apollo.MutationFunction<
+  UpdateCreativeMutation,
+  UpdateCreativeMutationVariables
+>;
+
+/**
+ * __useUpdateCreativeMutation__
+ *
+ * To run a mutation, you first call `useUpdateCreativeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateCreativeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateCreativeMutation, { data, loading, error }] = useUpdateCreativeMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateCreativeMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateCreativeMutation,
+    UpdateCreativeMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UpdateCreativeMutation,
+    UpdateCreativeMutationVariables
+  >(UpdateCreativeDocument, options);
+}
+export type UpdateCreativeMutationHookResult = ReturnType<
+  typeof useUpdateCreativeMutation
+>;
+export type UpdateCreativeMutationResult =
+  Apollo.MutationResult<UpdateCreativeMutation>;
+export type UpdateCreativeMutationOptions = Apollo.BaseMutationOptions<
+  UpdateCreativeMutation,
+  UpdateCreativeMutationVariables
+>;
+export const LoadCreativeDocument = gql`
+  query loadCreative($id: String!) {
+    creative(id: $id) {
+      ...Creative
+    }
+  }
+  ${CreativeFragmentDoc}
+`;
+
+/**
+ * __useLoadCreativeQuery__
+ *
+ * To run a query within a React component, call `useLoadCreativeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLoadCreativeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLoadCreativeQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useLoadCreativeQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    LoadCreativeQuery,
+    LoadCreativeQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<LoadCreativeQuery, LoadCreativeQueryVariables>(
+    LoadCreativeDocument,
+    options,
+  );
+}
+export function useLoadCreativeLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    LoadCreativeQuery,
+    LoadCreativeQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<LoadCreativeQuery, LoadCreativeQueryVariables>(
+    LoadCreativeDocument,
+    options,
+  );
+}
+export type LoadCreativeQueryHookResult = ReturnType<
+  typeof useLoadCreativeQuery
+>;
+export type LoadCreativeLazyQueryHookResult = ReturnType<
+  typeof useLoadCreativeLazyQuery
+>;
+export type LoadCreativeQueryResult = Apollo.QueryResult<
+  LoadCreativeQuery,
+  LoadCreativeQueryVariables
+>;
+export function refetchLoadCreativeQuery(
+  variables: LoadCreativeQueryVariables,
+) {
+  return { query: LoadCreativeDocument, variables: variables };
+}
+export const CampaignsForCreativeDocument = gql`
+  query campaignsForCreative($creativeId: String!, $advertiserId: String!) {
+    creativeCampaigns(creativeId: $creativeId, advertiserId: $advertiserId) {
+      id
+      name
+      state
+    }
+  }
+`;
+
+/**
+ * __useCampaignsForCreativeQuery__
+ *
+ * To run a query within a React component, call `useCampaignsForCreativeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCampaignsForCreativeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCampaignsForCreativeQuery({
+ *   variables: {
+ *      creativeId: // value for 'creativeId'
+ *      advertiserId: // value for 'advertiserId'
+ *   },
+ * });
+ */
+export function useCampaignsForCreativeQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    CampaignsForCreativeQuery,
+    CampaignsForCreativeQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    CampaignsForCreativeQuery,
+    CampaignsForCreativeQueryVariables
+  >(CampaignsForCreativeDocument, options);
+}
+export function useCampaignsForCreativeLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    CampaignsForCreativeQuery,
+    CampaignsForCreativeQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    CampaignsForCreativeQuery,
+    CampaignsForCreativeQueryVariables
+  >(CampaignsForCreativeDocument, options);
+}
+export type CampaignsForCreativeQueryHookResult = ReturnType<
+  typeof useCampaignsForCreativeQuery
+>;
+export type CampaignsForCreativeLazyQueryHookResult = ReturnType<
+  typeof useCampaignsForCreativeLazyQuery
+>;
+export type CampaignsForCreativeQueryResult = Apollo.QueryResult<
+  CampaignsForCreativeQuery,
+  CampaignsForCreativeQueryVariables
+>;
+export function refetchCampaignsForCreativeQuery(
+  variables: CampaignsForCreativeQueryVariables,
+) {
+  return { query: CampaignsForCreativeDocument, variables: variables };
+}

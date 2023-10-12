@@ -22,6 +22,8 @@ import { IAdvertiser } from "auth/context/auth.interface";
 import moment from "moment";
 import { FilterContext } from "state/context";
 import { AdvertiserAssets } from "components/Assets/AdvertiserAssets";
+import { CreativeList } from "components/Creatives/CreativeList";
+import { CreativeForm } from "components/Creatives/CreativeForm";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -74,6 +76,12 @@ export function User() {
                 />
 
                 <ProtectedRoute
+                  path="/user/main/creative/:id"
+                  authedComponent={CreativeForm}
+                  validateAdvertiserProperty={(a) => a.selfServiceCreate}
+                />
+
+                <ProtectedRoute
                   path="/user/main/complete/:mode"
                   authedComponent={CompletionForm}
                 />
@@ -97,6 +105,11 @@ export function User() {
                 <ProtectedRoute
                   path="/user/main/assets"
                   authedComponent={AdvertiserAssets}
+                />
+
+                <ProtectedRoute
+                  path="/user/main/creatives"
+                  authedComponent={CreativeList}
                 />
 
                 {/* default */}

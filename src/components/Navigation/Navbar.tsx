@@ -7,6 +7,7 @@ import { useSignOut } from "auth/hooks/mutations/useSignOut";
 import { NewCampaignButton } from "components/Navigation/NewCampaignButton";
 import { UploadImage } from "components/Assets/UploadImage";
 import { useHistory } from "react-router-dom";
+import { NewCreativeButton } from "components/Navigation/NewCreativeButton";
 
 export function Navbar() {
   const { signOut } = useSignOut();
@@ -21,6 +22,10 @@ export function Navbar() {
     {
       route: "user/main/assets",
       component: <UploadImage />,
+    },
+    {
+      route: "user/main/creatives",
+      component: <NewCreativeButton />,
     },
   ];
 

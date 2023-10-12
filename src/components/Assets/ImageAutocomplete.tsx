@@ -9,11 +9,9 @@ type ImageOption = { label: string; image?: string };
 
 const filter = createFilterOptions<ImageOption>();
 
-export function ImageAutocomplete() {
+export function ImageAutocomplete(props: { name: string }) {
   const [createImage, setCreateImage] = useState(false);
-  const [, meta, imageUrl] = useField<string | undefined>(
-    `newCreative.payloadInlineContent.imageUrl`,
-  );
+  const [, meta, imageUrl] = useField<string | undefined>(props.name);
   const hasError = Boolean(meta.error);
   const showError = hasError && meta.touched;
   const { advertiser } = useAdvertiser();
@@ -60,6 +58,7 @@ export function ImageAutocomplete() {
           imageUrl.setValue(nv ? nv.image : undefined);
           setCreateImage(nv != null && nv.image === undefined);
         }}
+        isOptionEqualToValue={(option, value) => option.image === value.image}
       />
 
       <UploadImage

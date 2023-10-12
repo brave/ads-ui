@@ -1,5 +1,6 @@
-import { FormikSubmitButton, useIsEdit } from "form/FormikHelpers";
+import { useIsEdit } from "form/FormikHelpers";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { FormikSubmitButton } from "form/FormikButton";
 
 export function PaymentButton(props: { hasPaymentIntent: boolean }) {
   const { advertiser } = useAdvertiser();
