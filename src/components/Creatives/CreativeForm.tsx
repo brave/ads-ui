@@ -129,7 +129,7 @@ const dialogProps = (
   const campaignLength = campaigns.length;
 
   let message =
-    "Modifying a creative will immediately put it into review. This means it will no longer be shown to users until it is approved";
+    "Modifying a creative will immediately put it into review. This means it will no longer be shown to users until it is approved.";
   if (campaignLength > 1) {
     message = `${message}. This creative is also shared across ${campaignLength} campaigns. Any modifications made will be effective for all campaigns using this creative.`;
   }
