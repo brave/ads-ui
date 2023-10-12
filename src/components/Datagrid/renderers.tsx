@@ -1,8 +1,7 @@
 import { Box, Tooltip } from "@mui/material";
 import _ from "lodash";
 import { format, formatDistanceToNow, parseISO } from "date-fns";
-import { CellValue } from "./EnhancedTable";
-import { ReactChild, ReactNode, useContext } from "react";
+import { ReactElement, ReactNode, useContext } from "react";
 import { formatInTimeZone } from "date-fns-tz";
 import enUS from "date-fns/locale/en-US";
 import {
@@ -12,18 +11,18 @@ import {
   useUpdateCampaignMutation,
 } from "graphql/campaign.generated";
 import { useUpdateAdSetMutation } from "graphql/ad-set.generated";
-import { OnOff } from "../Switch/OnOff";
+import { OnOff } from "components/Switch/OnOff";
 import { displayFromCampaignState } from "util/displayState";
 import { CampaignExtras } from "user/adSet/AdSetList";
 import { FilterContext } from "state/context";
 import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
 import { UpdateAdSetInput } from "graphql/types";
 
-export type CellValueRenderer = (value: CellValue) => ReactNode;
+export type CellValueRenderer = (value: any) => ReactNode;
 const ADS_DEFAULT_TIMEZONE = "America/New_York";
 const TOOLTIP_FORMAT = "E d LLL yyyy HH:mm:ss zzz";
 
-function formatDateForTooltip(dt: Date): ReactChild {
+function formatDateForTooltip(dt: Date): ReactElement {
   return (
     <>
       <Box>

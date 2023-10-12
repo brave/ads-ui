@@ -1,18 +1,15 @@
-import { ColumnDescriptor, EnhancedTable } from "components/EnhancedTable";
 import { CampaignAdsFragment } from "graphql/campaign.generated";
 import { CampaignFormat } from "graphql/types";
 import { StatsMetric } from "user/analytics/analyticsOverview/types";
 import { renderStatsCell } from "user/analytics/renderers";
+import { DataGrid, GridColDef, GridValidRowModel } from "@mui/x-data-grid";
 
-interface Props<T> {
+interface Props<T extends GridValidRowModel> {
   rows: T[];
-  columns: ColumnDescriptor<T>[];
+  columns: GridColDef<T>[];
   engagements: Map<string, StatsMetric>;
   loading: boolean;
   campaign?: Omit<CampaignAdsFragment, "adSets"> | null;
-  propOverride?: {
-    initialSortColumn?: number;
-  };
 }
 
 export function AdDetailTable<T extends { id: string }>({
@@ -21,63 +18,89 @@ export function AdDetailTable<T extends { id: string }>({
   campaign,
   engagements,
   loading,
-  propOverride,
 }: Props<T>) {
   const displayColumns = [...columns];
 
   if (campaign?.format !== CampaignFormat.NtpSi) {
     displayColumns.push(
       {
-        title: "Spend",
-        value: (c) => engagements.get(c.id)?.spend ?? "N/A",
-        extendedRenderer: (r) =>
+        field: "spend",
+        headerName: "Spend",
+        valueGetter: ({ row }) => engagements.get(row.id)?.spend ?? "N/A",
+        renderCell: ({ row }) =>
           renderStatsCell(
             loading,
             "spend",
-            engagements.get(r.id),
+            engagements.get(row.id),
             campaign?.currency,
           ),
         align: "right",
+        headerAlign: "right",
+        width: 250,
       },
       {
-        title: "Impressions",
-        value: (c) => engagements.get(c.id)?.views ?? "N/A",
-        extendedRenderer: (r) =>
-          renderStatsCell(loading, "views", engagements.get(r.id)),
+        field: "view",
+        headerName: "Impressions",
+        valueGetter: ({ row }) => engagements.get(row.id)?.views ?? "N/A",
+        renderCell: ({ row }) =>
+          renderStatsCell(loading, "views", engagements.get(row.id)),
         align: "right",
+        headerAlign: "right",
+        width: 250,
       },
       {
-        title: "Clicks",
-        value: (c) => engagements.get(c.id)?.clicks,
-        extendedRenderer: (r) =>
-          renderStatsCell(loading, "clicks", engagements.get(r.id)),
+        field: "click",
+        headerName: "Clicks",
+        valueGetter: ({ row }) => engagements.get(row.id)?.clicks,
+        renderCell: ({ row }) =>
+          renderStatsCell(loading, "clicks", engagements.get(row.id)),
         align: "right",
+        headerAlign: "right",
+        width: 250,
       },
       {
-        title: "10s Visits",
-        value: (c) => engagements.get(c.id)?.landings,
-        extendedRenderer: (r) =>
-          renderStatsCell(loading, "landings", engagements.get(r.id)),
+        field: "landed",
+        headerName: "10s Visits",
+        valueGetter: ({ row }) => engagements.get(row.id)?.landings,
+        renderCell: ({ row }) =>
+          renderStatsCell(loading, "landings", engagements.get(row.id)),
         align: "right",
+        headerAlign: "right",
+        width: 250,
       },
       {
-        title: "CTR",
-        value: (c) => engagements.get(c.id)?.ctr,
-        extendedRenderer: (r) =>
-          renderStatsCell(loading, "ctr", engagements.get(r.id)),
+        field: "CTR",
+        headerName: "CTR",
+        valueGetter: ({ row }) => engagements.get(row.id)?.ctr,
+        renderCell: ({ row }) =>
+          renderStatsCell(loading, "ctr", engagements.get(row.id)),
         align: "right",
+        headerAlign: "right",
+        width: 250,
       },
     );
   }
 
   return (
-    <EnhancedTable
+    <DataGrid
+      loading={loading}
       rows={rows}
-      filterable={false}
-      initialSortColumn={propOverride?.initialSortColumn ?? 1}
-      initialSortDirection="desc"
-      initialRowsPerPage={5}
       columns={displayColumns}
+      density="compact"
+      autoHeight
+      disableRowSelectionOnClick
+      hideFooterSelectedRowCount
+      sx={{ borderStyle: "none" }}
+      initialState={{
+        sorting: {
+          sortModel: [{ field: "startAt", sort: "desc" }],
+        },
+        pagination: {
+          paginationModel: {
+            pageSize: 10,
+          },
+        },
+      }}
     />
   );
 }

@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { EnhancedTable, StandardRenderers } from "components/EnhancedTable";
 import { Checkbox, Link } from "@mui/material";
 import {
   campaignOnOffState,
   renderMonetaryAmount,
-} from "components/EnhancedTable/renderers";
+  StandardRenderers,
+} from "components/Datagrid/renderers";
 import { Link as RouterLink } from "react-router-dom";
 import { Status } from "components/Campaigns/Status";
 import { isAfterEndDate } from "util/isAfterEndDate";
@@ -18,7 +18,8 @@ import {
 import _ from "lodash";
 import { uiTextForCampaignFormat } from "user/library";
 import { CampaignSummaryFragment } from "graphql/campaign.generated";
-import { GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { CustomToolbar } from "components/Datagrid/CustomToolbar";
 
 interface Props {
   advertiser?: AdvertiserCampaignsFragment | null;
@@ -31,7 +32,6 @@ export function CampaignList({
   selectedCampaigns,
   onCampaignSelect,
 }: Props) {
-  let initialSort = 9;
   const [engagementData, setEngagementData] =
     useState<Map<string, EngagementOverview>>();
 
@@ -62,11 +62,15 @@ export function CampaignList({
           {row.name}
         </Link>
       ),
+      flex: 1,
     },
     {
       field: "format",
       headerName: "Format",
       valueGetter: ({ row }) => uiTextForCampaignFormat(row.format),
+      align: "left",
+      headerAlign: "left",
+      width: 150,
     },
     {
       field: "state",
@@ -76,94 +80,133 @@ export function CampaignList({
       renderCell: ({ row }) => (
         <Status state={row.state} start={row.startAt} end={row.endAt} />
       ),
-      width: 1,
+      width: 150,
     },
     {
       field: "budget",
       headerName: "Budget",
       renderCell: ({ row }) => renderMonetaryAmount(row.budget, row.currency),
       align: "right",
+      headerAlign: "right",
+      width: 150,
     },
     {
-      title: "Spend",
-      value: (c) => c.spent,
-      extendedRenderer: (r) =>
-        renderEngagementCell(loading, r, "spend", engagementData),
+      field: "spend",
+      headerName: "Spend",
+      valueGetter: ({ row }) => row.spent,
+      renderCell: ({ row }) =>
+        renderEngagementCell(loading, row, "spend", engagementData),
       align: "right",
+      headerAlign: "right",
+      width: 150,
     },
     {
-      title: "Impressions",
-      value: (c) => engagementData?.get(c.id)?.["view"] ?? "N/A",
-      extendedRenderer: (r) =>
-        renderEngagementCell(loading, r, "view", engagementData),
+      field: "view",
+      headerName: "Impressions",
+      valueGetter: ({ row }) => engagementData?.get(row.id)?.["view"] ?? "N/A",
+      renderCell: ({ row }) =>
+        renderEngagementCell(loading, row, "view", engagementData),
       align: "right",
+      headerAlign: "right",
+      width: 250,
     },
     {
-      title: "Clicks",
-      value: (c) => engagementData?.get(c.id)?.["click"] ?? "N/A",
-      extendedRenderer: (r) =>
-        renderEngagementCell(loading, r, "click", engagementData),
+      field: "click",
+      headerName: "Clicks",
+      valueGetter: ({ row }) => engagementData?.get(row.id)?.["click"] ?? "N/A",
+      renderCell: ({ row }) =>
+        renderEngagementCell(loading, row, "click", engagementData),
       align: "right",
+      headerAlign: "right",
+      width: 250,
     },
     {
-      title: "10s Visits",
-      value: (c) => engagementData?.get(c.id)?.["landed"] ?? "N/A",
-      extendedRenderer: (r) =>
-        renderEngagementCell(loading, r, "landed", engagementData),
+      field: "landed",
+      headerName: "10s Visits",
+      valueGetter: ({ row }) =>
+        engagementData?.get(row.id)?.["landed"] ?? "N/A",
+      renderCell: ({ row }) =>
+        renderEngagementCell(loading, row, "landed", engagementData),
       align: "right",
+      headerAlign: "right",
+      width: 250,
     },
     {
-      title: "Start",
-      value: (c) => c.startAt,
-      renderer: StandardRenderers.date,
+      field: "startAt",
+      headerName: "Start",
+      valueGetter: ({ row }) => row.startAt,
+      renderCell: ({ row }) => StandardRenderers.date(row.startAt),
       align: "right",
+      headerAlign: "right",
+      width: 120,
     },
     {
-      title: "End",
-      value: (c) => c.endAt,
-      renderer: StandardRenderers.date,
+      field: "endAt",
+      headerName: "End",
+      valueGetter: ({ row }) => row.endAt,
+      renderCell: ({ row }) => StandardRenderers.date(row.endAt),
       align: "right",
+      headerAlign: "right",
+      width: 120,
     },
   ];
 
   if (advertiser?.selfServiceManageCampaign) {
-    initialSort += 2;
     columns.unshift(
       {
-        title: "",
-        value: (c) => c.id,
-        extendedRenderer: (r) => (
+        field: "Checkbox",
+        type: "actions",
+        valueGetter: ({ row }) => row.id,
+        renderCell: ({ row }) => (
           <CampaignCheckBox
-            campaign={r}
+            campaign={row}
             selectedCampaigns={selectedCampaigns}
             onCampaignSelect={onCampaignSelect}
           />
         ),
         align: "center",
-        sx: { width: "1px" },
+        width: 1,
         sortable: false,
         filterable: false,
       },
       {
-        title: "On/Off",
-        value: (c) => c.state,
-        extendedRenderer: (r) =>
+        field: "switch",
+        headerName: "On/Off",
+        type: "actions",
+        valueGetter: ({ row }) => row.state,
+        renderCell: ({ row }) =>
           campaignOnOffState({
-            ...r,
+            ...row,
             advertiserId: advertiser?.id ?? "",
           }),
-        sx: { width: "1px", p: 0 },
+        width: 100,
         sortable: false,
+        filterable: false,
       },
     );
   }
 
   return (
-    <EnhancedTable
+    <DataGrid
+      loading={loading}
       rows={advertiser?.campaigns ?? []}
-      initialSortColumn={initialSort}
-      initialSortDirection="desc"
       columns={columns}
+      density="compact"
+      autoHeight
+      disableRowSelectionOnClick
+      hideFooterSelectedRowCount
+      slots={{ toolbar: CustomToolbar }}
+      sx={{ borderStyle: "none" }}
+      initialState={{
+        sorting: {
+          sortModel: [{ field: "startAt", sort: "desc" }],
+        },
+        pagination: {
+          paginationModel: {
+            pageSize: 10,
+          },
+        },
+      }}
     />
   );
 }

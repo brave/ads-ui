@@ -1,4 +1,3 @@
-import { ColumnDescriptor, StandardRenderers } from "components/EnhancedTable";
 import _ from "lodash";
 import { isAfterEndDate } from "util/isAfterEndDate";
 import { AdFragment } from "graphql/ad-set.generated";
@@ -6,6 +5,9 @@ import { CampaignSource } from "graphql/types";
 import { CampaignAdsFragment } from "graphql/campaign.generated";
 import { StatsMetric } from "user/analytics/analyticsOverview/types";
 import { AdDetailTable } from "user/views/user/AdDetailTable";
+import { GridColDef } from "@mui/x-data-grid";
+import { CreativeFragment } from "graphql/creative.generated";
+import { StandardRenderers } from "components/Datagrid/renderers";
 
 interface Props {
   campaign?: CampaignAdsFragment | null;
@@ -44,27 +46,36 @@ export function AdList({ campaign, loading, engagements }: Props) {
 
   const ads: AdDetails[] = _.flatMap(adSets, "ads");
 
-  const columns: ColumnDescriptor<AdDetails>[] = [
+  const columns: GridColDef<AdDetails>[] = [
     {
-      title: "Created",
-      value: (c) => c.creative.createdAt,
-      renderer: StandardRenderers.date,
+      field: "createdAt",
+      headerName: "Created",
+      valueGetter: ({ row }) => row.creative.createdAt,
+      renderCell: ({ row }) => StandardRenderers.date(row.creative.createdAt),
     },
     {
-      title: "Ad Name",
-      value: (c) => c.creative.name,
+      field: "name",
+      headerName: "Ad Name",
+      valueGetter: ({ row }) => row.creative.name,
+      flex: 1,
     },
     {
-      title: "Ad Set Name",
-      value: (c) => c.adSetName,
+      field: "adSetName",
+      headerName: "Ad Set Name",
+      valueGetter: ({ row }) => row.adSetName,
+      flex: 1,
     },
     {
-      title: "Title",
-      value: (c) => c.creative.payloadNotification?.title,
+      field: "title",
+      headerName: "Title",
+      valueGetter: ({ row }) => title(row.creative),
+      flex: 1,
     },
     {
-      title: "Body",
-      value: (c) => c.creative.payloadNotification?.body,
+      field: "body",
+      headerName: "Body",
+      valueGetter: ({ row }) => body(row.creative),
+      flex: 1,
     },
   ];
 
@@ -74,9 +85,18 @@ export function AdList({ campaign, loading, engagements }: Props) {
       columns={columns}
       engagements={engagements}
       loading={loading}
-      propOverride={{
-        initialSortColumn: 0,
-      }}
     />
   );
 }
+
+const title = (c: CreativeFragment) =>
+  c.payloadNotification?.title ??
+  c.payloadInlineContent?.title ??
+  c.payloadSearch?.title ??
+  c.payloadSearchHomepage?.title;
+
+const body = (c: CreativeFragment) =>
+  c.payloadNotification?.body ??
+  c.payloadInlineContent?.ctaText ??
+  c.payloadSearch?.body ??
+  c.payloadSearchHomepage?.body;

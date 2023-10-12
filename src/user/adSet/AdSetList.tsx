@@ -1,8 +1,10 @@
-import { ColumnDescriptor, StandardRenderers } from "components/EnhancedTable";
 import { Chip } from "@mui/material";
 import { Status } from "components/Campaigns/Status";
 import _ from "lodash";
-import { adSetOnOffState } from "components/EnhancedTable/renderers";
+import {
+  adSetOnOffState,
+  StandardRenderers,
+} from "components/Datagrid/renderers";
 import { CampaignAdsFragment } from "graphql/campaign.generated";
 import { CampaignSource } from "graphql/types";
 import { StatsMetric } from "user/analytics/analyticsOverview/types";
@@ -10,6 +12,7 @@ import { AdSetFragment } from "graphql/ad-set.generated";
 import { AdDetailTable } from "user/views/user/AdDetailTable";
 import { displayFromCampaignState } from "util/displayState";
 import { uiLabelsForBillingType } from "util/billingType";
+import { GridColDef } from "@mui/x-data-grid";
 
 interface Props {
   loading: boolean;
@@ -71,52 +74,70 @@ export function AdSetList({ campaign, loading, engagements }: Props) {
     advertiserId: campaign?.advertiser.id ?? "",
   }));
 
-  const columns: ColumnDescriptor<AdSetDetails>[] = [
+  const columns: GridColDef<AdSetDetails>[] = [
     {
-      title: "On/Off",
-      value: (c) => c.state,
-      extendedRenderer: (r) => adSetOnOffState(r),
-      sx: { width: "10px" },
+      field: "switch",
+      type: "actions",
+      headerName: "On/Off",
+      valueGetter: ({ row }) => row.state,
+      renderCell: ({ row }) => adSetOnOffState(row),
       sortable: false,
+      filterable: false,
+      width: 100,
     },
     {
-      title: "Created",
-      value: (c) => c.createdAt,
-      renderer: StandardRenderers.date,
+      field: "createdAt",
+      headerName: "Created",
+      valueGetter: ({ row }) => row.createdAt,
+      renderCell: ({ row }) => StandardRenderers.date(row.createdAt),
+      width: 120,
     },
     {
-      title: "Name",
-      value: (c) => c.name || c.id.substring(0, 8),
+      field: "name",
+      headerName: "Name",
+      valueGetter: ({ row }) => row.name || row.id.substring(0, 8),
+      flex: 1,
     },
     {
-      title: "Status",
-      value: (c) => displayFromCampaignState(c),
-      extendedRenderer: (r) => (
+      field: "state",
+      headerName: "Status",
+      valueGetter: ({ row }) => displayFromCampaignState(row),
+      renderCell: ({ row }) => (
         <Status
-          state={displayFromCampaignState(r)}
-          end={r.campaignEnd}
-          start={r.campaignStart}
+          state={displayFromCampaignState(row)}
+          end={row.campaignEnd}
+          start={row.campaignStart}
         />
       ),
+      width: 100,
     },
     {
-      title: "Type",
-      value: (c) => uiLabelsForBillingType(c.billingType).longLabel,
+      field: "billingType",
+      headerName: "Type",
+      valueGetter: ({ row }) =>
+        uiLabelsForBillingType(row.billingType).longLabel,
+      width: 150,
     },
     {
-      title: "Platforms",
-      value: (c) => c.oses?.map((o: { name: string }) => o.name).join(", "),
-      extendedRenderer: (r) => <ChipList items={r.oses} />,
+      field: "oses",
+      headerName: "Platforms",
+      valueGetter: ({ row }) =>
+        row.oses?.map((o: { name: string }) => o.name).join(", "),
+      renderCell: ({ row }) => <ChipList items={row.oses} />,
+      flex: 1,
     },
     {
-      title: "Audiences",
-      value: (c) => c.segments?.map((o: { name: string }) => o.name).join(", "),
-      extendedRenderer: (r) => (
+      field: "segments",
+      headerName: "Audiences",
+      valueGetter: ({ row }) =>
+        row.segments?.map((o: { name: string }) => o.name).join(", "),
+      renderCell: ({ row }) => (
         <ChipList
-          items={r.segments}
-          max={(r.segments ?? []).join("").length > 100 ? 2 : 5}
+          items={row.segments}
+          max={(row.segments ?? []).join("").length > 100 ? 2 : 5}
         />
       ),
+      flex: 1,
     },
   ];
 
