@@ -36,7 +36,8 @@ export function AdDetailTable<T extends { id: string }>({
           ),
         align: "right",
         headerAlign: "right",
-        width: 250,
+        minWidth: 100,
+        maxWidth: 250,
       },
       {
         field: "view",
@@ -46,7 +47,8 @@ export function AdDetailTable<T extends { id: string }>({
           renderStatsCell(loading, "views", engagements.get(row.id)),
         align: "right",
         headerAlign: "right",
-        width: 250,
+        minWidth: 100,
+        maxWidth: 250,
       },
       {
         field: "click",
@@ -56,7 +58,8 @@ export function AdDetailTable<T extends { id: string }>({
           renderStatsCell(loading, "clicks", engagements.get(row.id)),
         align: "right",
         headerAlign: "right",
-        width: 250,
+        minWidth: 100,
+        maxWidth: 250,
       },
       {
         field: "landed",
@@ -66,7 +69,8 @@ export function AdDetailTable<T extends { id: string }>({
           renderStatsCell(loading, "landings", engagements.get(row.id)),
         align: "right",
         headerAlign: "right",
-        width: 250,
+        minWidth: 100,
+        maxWidth: 250,
       },
       {
         field: "ctr",
@@ -76,7 +80,8 @@ export function AdDetailTable<T extends { id: string }>({
           renderStatsCell(loading, "ctr", engagements.get(row.id)),
         align: "right",
         headerAlign: "right",
-        width: 250,
+        minWidth: 100,
+        maxWidth: 250,
       },
     );
   }

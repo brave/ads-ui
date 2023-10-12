@@ -80,7 +80,8 @@ export function CampaignList({
       renderCell: ({ row }) => (
         <Status state={row.state} start={row.startAt} end={row.endAt} />
       ),
-      width: 150,
+      minWidth: 120,
+      maxWidth: 150,
     },
     {
       field: "budget",
@@ -88,7 +89,8 @@ export function CampaignList({
       renderCell: ({ row }) => renderMonetaryAmount(row.budget, row.currency),
       align: "right",
       headerAlign: "right",
-      width: 150,
+      minWidth: 100,
+      maxWidth: 150,
     },
     {
       field: "spend",
@@ -98,7 +100,8 @@ export function CampaignList({
         renderEngagementCell(loading, row, "spend", engagementData),
       align: "right",
       headerAlign: "right",
-      width: 150,
+      minWidth: 100,
+      maxWidth: 150,
     },
     {
       field: "view",
@@ -108,7 +111,8 @@ export function CampaignList({
         renderEngagementCell(loading, row, "view", engagementData),
       align: "right",
       headerAlign: "right",
-      width: 250,
+      minWidth: 100,
+      maxWidth: 250,
     },
     {
       field: "click",
@@ -118,7 +122,8 @@ export function CampaignList({
         renderEngagementCell(loading, row, "click", engagementData),
       align: "right",
       headerAlign: "right",
-      width: 250,
+      minWidth: 100,
+      maxWidth: 250,
     },
     {
       field: "landed",
@@ -129,7 +134,8 @@ export function CampaignList({
         renderEngagementCell(loading, row, "landed", engagementData),
       align: "right",
       headerAlign: "right",
-      width: 250,
+      minWidth: 100,
+      maxWidth: 250,
     },
     {
       field: "startAt",
