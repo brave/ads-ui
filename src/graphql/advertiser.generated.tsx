@@ -18,8 +18,7 @@ export type AdvertiserSummaryFragment = {
 export type AdvertiserFragment = {
   referrer?: string | null;
   phone?: string | null;
-  selfServiceEdit: boolean;
-  selfServiceCreate: boolean;
+  selfServiceManageCampaign: boolean;
   selfServiceSetPrice: boolean;
   id: string;
   name: string;
@@ -58,8 +57,7 @@ export type UpdateAdvertiserMutation = {
 export type AdvertiserCampaignsFragment = {
   id: string;
   name: string;
-  selfServiceEdit: boolean;
-  selfServiceCreate: boolean;
+  selfServiceManageCampaign: boolean;
   selfServiceSetPrice: boolean;
   campaigns: Array<{
     id: string;
@@ -95,8 +93,7 @@ export type AdvertiserCampaignsQuery = {
   advertiserCampaigns?: {
     id: string;
     name: string;
-    selfServiceEdit: boolean;
-    selfServiceCreate: boolean;
+    selfServiceManageCampaign: boolean;
     selfServiceSetPrice: boolean;
     campaigns: Array<{
       id: string;
@@ -193,8 +190,7 @@ export const AdvertiserFragmentDoc = gql`
     ...AdvertiserSummary
     referrer
     phone
-    selfServiceEdit
-    selfServiceCreate
+    selfServiceManageCampaign
     selfServiceSetPrice
     mailingAddress {
       street1
@@ -211,8 +207,7 @@ export const AdvertiserCampaignsFragmentDoc = gql`
   fragment AdvertiserCampaigns on Advertiser {
     id
     name
-    selfServiceEdit
-    selfServiceCreate
+    selfServiceManageCampaign
     selfServiceSetPrice
     campaigns {
       ...CampaignSummary

@@ -13,8 +13,7 @@ fragment Advertiser on Advertiser {
   ...AdvertiserSummary
   referrer
   phone
-  selfServiceEdit
-  selfServiceCreate
+  selfServiceManageCampaign
   selfServiceSetPrice
   mailingAddress {
     street1
@@ -43,8 +42,7 @@ mutation updateAdvertiser($updateAdvertiserInput: UpdateAdvertiserInput!) {
 fragment AdvertiserCampaigns on Advertiser {
   id
   name
-  selfServiceEdit
-  selfServiceCreate
+  selfServiceManageCampaign
   selfServiceSetPrice
   campaigns {
     ...CampaignSummary

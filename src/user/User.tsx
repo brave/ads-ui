@@ -66,19 +66,25 @@ export function User() {
                 <ProtectedRoute
                   path="/user/main/adsmanager/advanced/new/:draftId"
                   authedComponent={NewCampaign}
-                  validateAdvertiserProperty={(a) => a.selfServiceCreate}
+                  validateAdvertiserProperty={(a) =>
+                    a.selfServiceManageCampaign
+                  }
                 />
 
                 <ProtectedRoute
                   path="/user/main/adsmanager/advanced/:campaignId"
                   authedComponent={EditCampaign}
-                  validateAdvertiserProperty={(a) => a.selfServiceEdit}
+                  validateAdvertiserProperty={(a) =>
+                    a.selfServiceManageCampaign
+                  }
                 />
 
                 <ProtectedRoute
                   path="/user/main/creative/:id"
                   authedComponent={CreativeForm}
-                  validateAdvertiserProperty={(a) => a.selfServiceCreate}
+                  validateAdvertiserProperty={(a) =>
+                    a.selfServiceManageCampaign
+                  }
                 />
 
                 <ProtectedRoute

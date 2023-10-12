@@ -8,7 +8,7 @@ export function NewCreativeButton() {
   const { advertiser } = useAdvertiser();
   const isNewCreativePage = url.includes(newUrl);
 
-  if (!advertiser.selfServiceCreate) {
+  if (!advertiser.selfServiceManageCampaign) {
     return null;
   }
 

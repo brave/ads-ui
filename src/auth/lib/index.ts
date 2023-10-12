@@ -7,8 +7,7 @@ import { RegistrationForm } from "auth/registration/types";
 export type Advertiser = Pick<
   AdvertiserFragment,
   | "selfServiceSetPrice"
-  | "selfServiceCreate"
-  | "selfServiceEdit"
+  | "selfServiceManageCampaign"
   | "id"
   | "name"
   | "publicKey"

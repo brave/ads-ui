@@ -11,8 +11,7 @@ export function useAdvertiser(): {
   const defaultAdvertiser: IAdvertiser = {
     id: "",
     name: "",
-    selfServiceCreate: false,
-    selfServiceEdit: false,
+    selfServiceManageCampaign: false,
     selfServiceSetPrice: false,
     publicKey: null,
     selfServicePaymentType: PaymentType.Stripe,

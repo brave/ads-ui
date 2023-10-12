@@ -54,17 +54,6 @@ export function CampaignList({
 
   const columns: ColumnDescriptor<CampaignSummaryFragment>[] = [
     {
-      title: "On/Off",
-      value: (c) => c.state,
-      extendedRenderer: (r) =>
-        campaignOnOffState({
-          ...r,
-          advertiserId: advertiser?.id ?? "",
-        }),
-      sx: { width: "1px", p: 0 },
-      sortable: false,
-    },
-    {
       title: "Campaign",
       value: (c) => c.name,
       extendedRenderer: (r) => (
@@ -137,22 +126,35 @@ export function CampaignList({
     },
   ];
 
-  if (advertiser?.selfServiceCreate && advertiser.selfServiceEdit) {
-    initialSort += 1;
-    columns.unshift({
-      title: "",
-      value: (c) => c.id,
-      sortable: false,
-      extendedRenderer: (r) => (
-        <CampaignCheckBox
-          campaign={r}
-          selectedCampaigns={selectedCampaigns}
-          onCampaignSelect={onCampaignSelect}
-        />
-      ),
-      align: "center",
-      sx: { width: "1px" },
-    });
+  if (advertiser?.selfServiceManageCampaign) {
+    initialSort += 2;
+    columns.unshift(
+      {
+        title: "On/Off",
+        value: (c) => c.state,
+        extendedRenderer: (r) =>
+          campaignOnOffState({
+            ...r,
+            advertiserId: advertiser?.id ?? "",
+          }),
+        sx: { width: "1px", p: 0 },
+        sortable: false,
+      },
+      {
+        title: "",
+        value: (c) => c.id,
+        sortable: false,
+        extendedRenderer: (r) => (
+          <CampaignCheckBox
+            campaign={r}
+            selectedCampaigns={selectedCampaigns}
+            onCampaignSelect={onCampaignSelect}
+          />
+        ),
+        align: "center",
+        sx: { width: "1px" },
+      },
+    );
   }
 
   return (

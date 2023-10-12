@@ -179,6 +179,7 @@ export type CreateAdvertiserInput = {
   referrer?: InputMaybe<Scalars["String"]>;
   selfServiceCreate?: InputMaybe<Scalars["Boolean"]>;
   selfServiceEdit?: InputMaybe<Scalars["Boolean"]>;
+  selfServiceManageCampaign?: InputMaybe<Scalars["Boolean"]>;
   state?: InputMaybe<Scalars["String"]>;
   url?: InputMaybe<Scalars["String"]>;
   userId?: InputMaybe<Scalars["String"]>;
@@ -459,6 +460,7 @@ export type UpdateAdvertiserInput = {
   referrer?: InputMaybe<Scalars["String"]>;
   selfServiceCreate?: InputMaybe<Scalars["Boolean"]>;
   selfServiceEdit?: InputMaybe<Scalars["Boolean"]>;
+  selfServiceManageCampaign?: InputMaybe<Scalars["Boolean"]>;
   state?: InputMaybe<Scalars["String"]>;
   url?: InputMaybe<Scalars["String"]>;
   userId?: InputMaybe<Scalars["String"]>;
