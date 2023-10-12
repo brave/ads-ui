@@ -82,7 +82,9 @@ export function User() {
                 <ProtectedRoute
                   path="/user/main/creative/:id"
                   authedComponent={CreativeForm}
-                  validateAdvertiserProperty={(a) => a.selfServiceCreate}
+                  validateAdvertiserProperty={(a) =>
+                    a.selfServiceManageCampaign
+                  }
                 />
 
                 <ProtectedRoute
