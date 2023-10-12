@@ -130,17 +130,6 @@ export function CampaignList({
     initialSort += 2;
     columns.unshift(
       {
-        title: "On/Off",
-        value: (c) => c.state,
-        extendedRenderer: (r) =>
-          campaignOnOffState({
-            ...r,
-            advertiserId: advertiser?.id ?? "",
-          }),
-        sx: { width: "1px", p: 0 },
-        sortable: false,
-      },
-      {
         title: "",
         value: (c) => c.id,
         sortable: false,
@@ -153,6 +142,17 @@ export function CampaignList({
         ),
         align: "center",
         sx: { width: "1px" },
+      },
+      {
+        title: "On/Off",
+        value: (c) => c.state,
+        extendedRenderer: (r) =>
+          campaignOnOffState({
+            ...r,
+            advertiserId: advertiser?.id ?? "",
+          }),
+        sx: { width: "1px", p: 0 },
+        sortable: false,
       },
     );
   }
