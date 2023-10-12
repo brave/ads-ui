@@ -69,7 +69,7 @@ export function AdDetailTable<T extends { id: string }>({
         width: 250,
       },
       {
-        field: "CTR",
+        field: "ctr",
         headerName: "CTR",
         valueGetter: ({ row }) => engagements.get(row.id)?.ctr,
         renderCell: ({ row }) =>
