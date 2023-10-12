@@ -134,11 +134,11 @@ const dialogProps = (
     message = `${message}. This creative is also shared across ${campaignLength} campaigns. Any modifications made will be effective for all campaigns using this creative.`;
   }
 
-  const useDialogue =
+  const hasDialog =
     !isReviewableState(creative.state) &&
     campaigns.some((c) => !isReviewableState(c.state));
   return {
-    useDialog: useDialogue,
+    hasDialog,
     dialogTitle: `Are you sure you want to modify "${creative.name}"?`,
     dialogMessage: message,
   };

@@ -42,7 +42,7 @@ function StatusMessage({
 
 interface Props {
   isCreate: boolean;
-  useDialog?: boolean;
+  hasDialog?: boolean;
   dialogTitle?: string;
   dialogMessage?: string;
 }
@@ -73,14 +73,14 @@ export function SubmitPanel(props: PropsWithChildren<Props>) {
             <StatusMessage errors={errorStrings} isDirty={dirty} />
           </Box>
 
-          {props.useDialog && props.dialogTitle && props.dialogMessage && (
+          {props.hasDialog && props.dialogTitle && props.dialogMessage && (
             <FormikDialogButton
               {...props}
               dialogMessage={props.dialogMessage}
               dialogTitle={props.dialogTitle}
             />
           )}
-          {!props.useDialog && <FormikSubmitButton {...props} />}
+          {!props.hasDialog && <FormikSubmitButton {...props} />}
         </Box>
       </Paper>
     </Slide>
