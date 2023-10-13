@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Checkbox, Link } from "@mui/material";
+import { Link } from "@mui/material";
 import {
   campaignOnOffState,
   renderMonetaryAmount,
@@ -20,18 +20,15 @@ import { uiTextForCampaignFormat } from "user/library";
 import { CampaignSummaryFragment } from "graphql/campaign.generated";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { CustomToolbar } from "components/Datagrid/CustomToolbar";
+import { CloneCampaign } from "components/Campaigns/CloneCampaign";
+import { EditButton } from "user/campaignList/EditButton";
 
 interface Props {
   advertiser?: AdvertiserCampaignsFragment | null;
-  selectedCampaigns: string[];
-  onCampaignSelect: (c: string, insert: boolean) => void;
 }
 
-export function CampaignList({
-  advertiser,
-  selectedCampaigns,
-  onCampaignSelect,
-}: Props) {
+export function CampaignList({ advertiser }: Props) {
+  const [selectedCampaign, setSelectedCampaign] = useState<string | number>();
   const [engagementData, setEngagementData] =
     useState<Map<string, EngagementOverview>>();
 
@@ -158,51 +155,59 @@ export function CampaignList({
   ];
 
   if (advertiser?.selfServiceManageCampaign) {
-    columns.unshift(
-      {
-        field: "Checkbox",
-        type: "actions",
-        valueGetter: ({ row }) => row.id,
-        renderCell: ({ row }) => (
-          <CampaignCheckBox
-            campaign={row}
-            selectedCampaigns={selectedCampaigns}
-            onCampaignSelect={onCampaignSelect}
-          />
-        ),
-        align: "center",
-        width: 1,
-        sortable: false,
-        filterable: false,
-      },
-      {
-        field: "switch",
-        headerName: "On/Off",
-        type: "actions",
-        valueGetter: ({ row }) => row.state,
-        renderCell: ({ row }) =>
-          campaignOnOffState({
-            ...row,
-            advertiserId: advertiser?.id ?? "",
-          }),
-        width: 100,
-        sortable: false,
-        filterable: false,
-      },
-    );
+    columns.unshift({
+      field: "switch",
+      headerName: "On/Off",
+      type: "actions",
+      valueGetter: ({ row }) => row.state,
+      renderCell: ({ row }) =>
+        campaignOnOffState({
+          ...row,
+          advertiserId: advertiser?.id ?? "",
+        }),
+      width: 100,
+      sortable: false,
+      filterable: false,
+    });
   }
+
+  const campaigns = advertiser?.campaigns ?? [];
+  const Toolbar = () => {
+    const campaign = campaigns.find((c) => c.id === selectedCampaign);
+    const isDisabled = selectedCampaign === undefined;
+    return (
+      <CustomToolbar>
+        {advertiser?.selfServiceManageCampaign && (
+          <CloneCampaign disabled={isDisabled} campaign={campaign} />
+        )}
+        {advertiser?.selfServiceManageCampaign && (
+          <EditButton disabled={isDisabled} campaign={campaign} />
+        )}
+      </CustomToolbar>
+    );
+  };
 
   return (
     <DataGrid
       loading={loading}
-      rows={advertiser?.campaigns ?? []}
+      rows={campaigns}
       columns={columns}
       density="compact"
       autoHeight
       disableRowSelectionOnClick
-      hideFooterSelectedRowCount
-      slots={{ toolbar: CustomToolbar }}
+      checkboxSelection={advertiser?.selfServiceManageCampaign}
+      slots={{ toolbar: Toolbar }}
       sx={{ borderStyle: "none" }}
+      onRowSelectionModelChange={(rowSelectionModel) => {
+        if (rowSelectionModel.length === 1) {
+          setSelectedCampaign(rowSelectionModel[0]);
+        } else {
+          setSelectedCampaign(undefined);
+        }
+      }}
+      isRowSelectable={(params) =>
+        selectedCampaign === undefined || params.id === selectedCampaign
+      }
       initialState={{
         sorting: {
           sortModel: [{ field: "startAt", sort: "desc" }],
@@ -216,26 +221,3 @@ export function CampaignList({
     />
   );
 }
-
-interface CheckBoxProps {
-  campaign: CampaignSummaryFragment;
-  selectedCampaigns: string[];
-  onCampaignSelect: (c: string, insert: boolean) => void;
-}
-const CampaignCheckBox = (props: CheckBoxProps) => {
-  const campaignSelected = props.selectedCampaigns.some(
-    (c) => c === props.campaign.id,
-  );
-
-  return (
-    <Checkbox
-      disabled={props.selectedCampaigns.length === 1 && !campaignSelected}
-      size="small"
-      sx={{ p: 0 }}
-      checked={campaignSelected}
-      onChange={(e) =>
-        props.onCampaignSelect(props.campaign.id, e.target.checked)
-      }
-    />
-  );
-};
