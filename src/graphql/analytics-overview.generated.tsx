@@ -38,9 +38,9 @@ export type CampaignWithEngagementsFragment = {
   pacingIndex?: number | null;
   format: Types.CampaignFormat;
   adSets: Array<{
-    conversions?: Array<{ type: string; extractExternalId: boolean }> | null;
+    conversions: Array<{ type: string; extractExternalId: boolean }>;
   }>;
-  engagements?: Array<{
+  engagements: Array<{
     creativeinstanceid: string;
     createdat: any;
     type: string;
@@ -59,7 +59,7 @@ export type CampaignWithEngagementsFragment = {
     linux: number;
     macos: number;
     windows: number;
-  }> | null;
+  }>;
 };
 
 export type AnalyticOverviewQueryVariables = Types.Exact<{
@@ -81,9 +81,9 @@ export type AnalyticOverviewQuery = {
     pacingIndex?: number | null;
     format: Types.CampaignFormat;
     adSets: Array<{
-      conversions?: Array<{ type: string; extractExternalId: boolean }> | null;
+      conversions: Array<{ type: string; extractExternalId: boolean }>;
     }>;
-    engagements?: Array<{
+    engagements: Array<{
       creativeinstanceid: string;
       createdat: any;
       type: string;
@@ -102,7 +102,7 @@ export type AnalyticOverviewQuery = {
       linux: number;
       macos: number;
       windows: number;
-    }> | null;
+    }>;
   } | null;
 };
 

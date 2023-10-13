@@ -7,11 +7,6 @@ fragment AdSet on AdSet {
   totalMax
   perDay
   state
-  execution
-  keywords
-  keywordSimilarity
-  negativeKeywords
-  bannedKeywords
   segments {
     code
     name

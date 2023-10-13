@@ -41,6 +41,8 @@ const BASE_CPM_CAMPAIGN_FRAGMENT: Readonly<CampaignFragment> = {
   type: "paid",
   format: CampaignFormat.PushNotification,
   paymentType: PaymentType.Stripe,
+  dayPartings: [],
+  hasPaymentIntent: false,
   geoTargets: [
     {
       code: "US",
@@ -57,7 +59,6 @@ const BASE_CPM_CAMPAIGN_FRAGMENT: Readonly<CampaignFragment> = {
       totalMax: 10,
       perDay: 1,
       state: "active",
-      execution: "per_click",
       segments: [
         {
           code: "elchqV0qNh",
