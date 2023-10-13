@@ -4,7 +4,7 @@ import { CardContainer } from "components/Card/CardContainer";
 import { useHistory } from "react-router-dom";
 import { FormikTextField, useIsEdit } from "form/FormikHelpers";
 import { AdSetAds } from "user/views/adsManager/views/advanced/components/adSet/fields/AdSetAds";
-import { adSetOnOffState } from "components/EnhancedTable/renderers";
+import { adSetOnOffState } from "components/Datagrid/renderers";
 import { Stack } from "@mui/material";
 import { useFormikContext } from "formik";
 import { CampaignForm } from "user/views/adsManager/types";

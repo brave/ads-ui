@@ -10,15 +10,9 @@ import MiniSideBar from "components/Drawer/MiniSideBar";
 import { Box, Link, List, Typography } from "@mui/material";
 import { Status } from "components/Campaigns/Status";
 import { Link as RouterLink } from "react-router-dom";
-import {
-  DataGrid,
-  GridColDef,
-  GridToolbarColumnsButton,
-  GridToolbarContainer,
-  GridToolbarFilterButton,
-  GridToolbarQuickFilter,
-} from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { CreativeStatusSwitch } from "components/Creatives/CreativeStatusSwitch";
+import { CustomToolbar } from "components/Datagrid/CustomToolbar";
 
 const ALLOWED_TYPES = ["notification_all_v1", "inline_content_all_v1"];
 export function CreativeList() {
@@ -81,17 +75,6 @@ export function CreativeList() {
     },
   ];
 
-  function CustomToolbar() {
-    return (
-      <GridToolbarContainer>
-        <GridToolbarColumnsButton />
-        <GridToolbarFilterButton />
-        <Box flex={1} />
-        <GridToolbarQuickFilter />
-      </GridToolbarContainer>
-    );
-  }
-
   const creatives = [...(data?.advertiser?.creatives ?? [])].filter((c) =>
     ALLOWED_TYPES.includes(c.type.code),
   );
@@ -107,32 +90,34 @@ export function CreativeList() {
         header="Creatives"
         sx={{
           flexGrow: 1,
-          mr: 2,
-          width: "100%",
+          overflowX: "auto",
+          mr: 1,
         }}
       >
-        <DataGrid
-          loading={loading}
-          rows={creatives}
-          columns={columns}
-          density="standard"
-          autoHeight
-          disableRowSelectionOnClick
-          hideFooterSelectedRowCount
-          rowHeight={60}
-          slots={{ toolbar: CustomToolbar }}
-          sx={{ borderStyle: "none" }}
-          initialState={{
-            sorting: {
-              sortModel: [{ field: "createdAt", sort: "desc" }],
-            },
-            pagination: {
-              paginationModel: {
-                pageSize: 10,
+        <Box>
+          <DataGrid
+            loading={loading}
+            rows={creatives}
+            columns={columns}
+            density="standard"
+            autoHeight
+            disableRowSelectionOnClick
+            hideFooterSelectedRowCount
+            rowHeight={60}
+            slots={{ toolbar: CustomToolbar }}
+            sx={{ borderStyle: "none" }}
+            initialState={{
+              sorting: {
+                sortModel: [{ field: "createdAt", sort: "desc" }],
               },
-            },
-          }}
-        />
+              pagination: {
+                paginationModel: {
+                  pageSize: 10,
+                },
+              },
+            }}
+          />
+        </Box>
       </CardContainer>
     </MiniSideBar>
   );

@@ -1,14 +1,10 @@
 import { useState } from "react";
-import {
-  ColumnDescriptor,
-  EnhancedTable,
-  StandardRenderers,
-} from "components/EnhancedTable";
-import { Checkbox, Link } from "@mui/material";
+import { Link } from "@mui/material";
 import {
   campaignOnOffState,
   renderMonetaryAmount,
-} from "components/EnhancedTable/renderers";
+  StandardRenderers,
+} from "components/Datagrid/renderers";
 import { Link as RouterLink } from "react-router-dom";
 import { Status } from "components/Campaigns/Status";
 import { isAfterEndDate } from "util/isAfterEndDate";
@@ -22,19 +18,17 @@ import {
 import _ from "lodash";
 import { uiTextForCampaignFormat } from "user/library";
 import { CampaignSummaryFragment } from "graphql/campaign.generated";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { CustomToolbar } from "components/Datagrid/CustomToolbar";
+import { CloneCampaign } from "components/Campaigns/CloneCampaign";
+import { EditButton } from "user/campaignList/EditButton";
 
 interface Props {
   advertiser?: AdvertiserCampaignsFragment | null;
-  selectedCampaigns: string[];
-  onCampaignSelect: (c: string, insert: boolean) => void;
 }
 
-export function CampaignList({
-  advertiser,
-  selectedCampaigns,
-  onCampaignSelect,
-}: Props) {
-  let initialSort = 9;
+export function CampaignList({ advertiser }: Props) {
+  const [selectedCampaign, setSelectedCampaign] = useState<string | number>();
   const [engagementData, setEngagementData] =
     useState<Map<string, EngagementOverview>>();
 
@@ -52,140 +46,178 @@ export function CampaignList({
     },
   });
 
-  const columns: ColumnDescriptor<CampaignSummaryFragment>[] = [
+  const columns: GridColDef<CampaignSummaryFragment>[] = [
     {
-      title: "Campaign",
-      value: (c) => c.name,
-      extendedRenderer: (r) => (
+      field: "name",
+      headerName: "Campaign",
+      renderCell: ({ row }) => (
         <Link
           component={RouterLink}
-          to={`/user/main/campaign/${r.id}`}
+          to={`/user/main/campaign/${row.id}`}
           underline="none"
         >
-          {r.name}
+          {row.name}
         </Link>
       ),
+      flex: 1,
     },
     {
-      title: "Format",
-      value: (c) => uiTextForCampaignFormat(c.format),
+      field: "format",
+      headerName: "Format",
+      valueGetter: ({ row }) => uiTextForCampaignFormat(row.format),
+      align: "left",
+      headerAlign: "left",
+      width: 150,
     },
     {
-      title: "Status",
-      value: (c) => (isAfterEndDate(c.endAt) ? "completed" : c.state),
-      extendedRenderer: (r) => (
-        <Status state={r.state} start={r.startAt} end={r.endAt} />
+      field: "state",
+      headerName: "Status",
+      valueGetter: ({ row }) =>
+        isAfterEndDate(row.endAt) ? "completed" : row.state,
+      renderCell: ({ row }) => (
+        <Status state={row.state} start={row.startAt} end={row.endAt} />
       ),
-      sx: { width: "1px", p: 0 },
+      minWidth: 120,
+      maxWidth: 150,
     },
     {
-      title: "Budget",
-      value: (c) => c.budget,
-      extendedRenderer: (r) => renderMonetaryAmount(r.budget, r.currency),
+      field: "budget",
+      headerName: "Budget",
+      renderCell: ({ row }) => renderMonetaryAmount(row.budget, row.currency),
       align: "right",
+      headerAlign: "right",
+      minWidth: 100,
+      maxWidth: 150,
     },
     {
-      title: "Spend",
-      value: (c) => c.spent,
-      extendedRenderer: (r) =>
-        renderEngagementCell(loading, r, "spend", engagementData),
+      field: "spend",
+      headerName: "Spend",
+      valueGetter: ({ row }) => row.spent,
+      renderCell: ({ row }) =>
+        renderEngagementCell(loading, row, "spend", engagementData),
       align: "right",
+      headerAlign: "right",
+      minWidth: 100,
+      maxWidth: 150,
     },
     {
-      title: "Impressions",
-      value: (c) => engagementData?.get(c.id)?.["view"] ?? "N/A",
-      extendedRenderer: (r) =>
-        renderEngagementCell(loading, r, "view", engagementData),
+      field: "view",
+      headerName: "Impressions",
+      valueGetter: ({ row }) => engagementData?.get(row.id)?.["view"] ?? "N/A",
+      renderCell: ({ row }) =>
+        renderEngagementCell(loading, row, "view", engagementData),
       align: "right",
+      headerAlign: "right",
+      minWidth: 100,
+      maxWidth: 250,
     },
     {
-      title: "Clicks",
-      value: (c) => engagementData?.get(c.id)?.["click"] ?? "N/A",
-      extendedRenderer: (r) =>
-        renderEngagementCell(loading, r, "click", engagementData),
+      field: "click",
+      headerName: "Clicks",
+      valueGetter: ({ row }) => engagementData?.get(row.id)?.["click"] ?? "N/A",
+      renderCell: ({ row }) =>
+        renderEngagementCell(loading, row, "click", engagementData),
       align: "right",
+      headerAlign: "right",
+      minWidth: 100,
+      maxWidth: 250,
     },
     {
-      title: "10s Visits",
-      value: (c) => engagementData?.get(c.id)?.["landed"] ?? "N/A",
-      extendedRenderer: (r) =>
-        renderEngagementCell(loading, r, "landed", engagementData),
+      field: "landed",
+      headerName: "10s Visits",
+      valueGetter: ({ row }) =>
+        engagementData?.get(row.id)?.["landed"] ?? "N/A",
+      renderCell: ({ row }) =>
+        renderEngagementCell(loading, row, "landed", engagementData),
       align: "right",
+      headerAlign: "right",
+      minWidth: 100,
+      maxWidth: 250,
     },
     {
-      title: "Start",
-      value: (c) => c.startAt,
-      renderer: StandardRenderers.date,
+      field: "startAt",
+      headerName: "Start",
+      valueGetter: ({ row }) => row.startAt,
+      renderCell: ({ row }) => StandardRenderers.date(row.startAt),
       align: "right",
+      headerAlign: "right",
+      width: 120,
     },
     {
-      title: "End",
-      value: (c) => c.endAt,
-      renderer: StandardRenderers.date,
+      field: "endAt",
+      headerName: "End",
+      valueGetter: ({ row }) => row.endAt,
+      renderCell: ({ row }) => StandardRenderers.date(row.endAt),
       align: "right",
+      headerAlign: "right",
+      width: 120,
     },
   ];
 
   if (advertiser?.selfServiceManageCampaign) {
-    initialSort += 2;
-    columns.unshift(
-      {
-        title: "",
-        value: (c) => c.id,
-        sortable: false,
-        extendedRenderer: (r) => (
-          <CampaignCheckBox
-            campaign={r}
-            selectedCampaigns={selectedCampaigns}
-            onCampaignSelect={onCampaignSelect}
-          />
-        ),
-        align: "center",
-        sx: { width: "1px" },
-      },
-      {
-        title: "On/Off",
-        value: (c) => c.state,
-        extendedRenderer: (r) =>
-          campaignOnOffState({
-            ...r,
-            advertiserId: advertiser?.id ?? "",
-          }),
-        sx: { width: "1px", p: 0 },
-        sortable: false,
-      },
-    );
+    columns.unshift({
+      field: "switch",
+      headerName: "On/Off",
+      type: "actions",
+      valueGetter: ({ row }) => row.state,
+      renderCell: ({ row }) =>
+        campaignOnOffState({
+          ...row,
+          advertiserId: advertiser?.id ?? "",
+        }),
+      width: 100,
+      sortable: false,
+      filterable: false,
+    });
   }
 
+  const campaigns = advertiser?.campaigns ?? [];
+  const Toolbar = () => {
+    const campaign = campaigns.find((c) => c.id === selectedCampaign);
+    const isDisabled = selectedCampaign === undefined;
+    return (
+      <CustomToolbar>
+        {advertiser?.selfServiceManageCampaign && (
+          <CloneCampaign disabled={isDisabled} campaign={campaign} />
+        )}
+        {advertiser?.selfServiceManageCampaign && (
+          <EditButton disabled={isDisabled} campaign={campaign} />
+        )}
+      </CustomToolbar>
+    );
+  };
+
   return (
-    <EnhancedTable
-      rows={advertiser?.campaigns ?? []}
-      initialSortColumn={initialSort}
-      initialSortDirection="desc"
+    <DataGrid
+      loading={loading}
+      rows={campaigns}
       columns={columns}
-    />
-  );
-}
-
-interface CheckBoxProps {
-  campaign: CampaignSummaryFragment;
-  selectedCampaigns: string[];
-  onCampaignSelect: (c: string, insert: boolean) => void;
-}
-const CampaignCheckBox = (props: CheckBoxProps) => {
-  const campaignSelected = props.selectedCampaigns.some(
-    (c) => c === props.campaign.id,
-  );
-
-  return (
-    <Checkbox
-      disabled={props.selectedCampaigns.length === 1 && !campaignSelected}
-      size="small"
-      sx={{ p: 0 }}
-      checked={campaignSelected}
-      onChange={(e) =>
-        props.onCampaignSelect(props.campaign.id, e.target.checked)
+      density="compact"
+      autoHeight
+      disableRowSelectionOnClick
+      checkboxSelection={advertiser?.selfServiceManageCampaign}
+      slots={{ toolbar: Toolbar }}
+      sx={{ borderStyle: "none" }}
+      onRowSelectionModelChange={(rowSelectionModel) => {
+        if (rowSelectionModel.length === 1) {
+          setSelectedCampaign(rowSelectionModel[0]);
+        } else {
+          setSelectedCampaign(undefined);
+        }
+      }}
+      isRowSelectable={(params) =>
+        selectedCampaign === undefined || params.id === selectedCampaign
       }
+      initialState={{
+        sorting: {
+          sortModel: [{ field: "startAt", sort: "desc" }],
+        },
+        pagination: {
+          paginationModel: {
+            pageSize: 10,
+          },
+        },
+      }}
     />
   );
-};
+}
