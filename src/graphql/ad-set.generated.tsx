@@ -9,24 +9,19 @@ export type AdSetFragment = {
   price?: string | null;
   createdAt: any;
   billingType?: string | null;
-  name?: string | null;
+  name: string;
   totalMax: number;
   perDay: number;
   state: string;
-  execution?: string | null;
-  keywords?: Array<string> | null;
-  keywordSimilarity?: number | null;
-  negativeKeywords?: Array<string> | null;
-  bannedKeywords?: Array<string> | null;
-  segments?: Array<{ code: string; name: string }> | null;
-  oses?: Array<{ code: string; name: string }> | null;
-  conversions?: Array<{
+  segments: Array<{ code: string; name: string }>;
+  oses: Array<{ code: string; name: string }>;
+  conversions: Array<{
     id: string;
     type: string;
     urlPattern: string;
     observationWindow: number;
-  }> | null;
-  ads?: Array<{
+  }>;
+  ads: Array<{
     id: string;
     state: string;
     price: string;
@@ -73,7 +68,7 @@ export type AdSetFragment = {
         ctaText: string;
       } | null;
     };
-  }> | null;
+  }>;
 };
 
 export type AdFragment = {
@@ -135,24 +130,19 @@ export type CreateAdSetMutation = {
     price?: string | null;
     createdAt: any;
     billingType?: string | null;
-    name?: string | null;
+    name: string;
     totalMax: number;
     perDay: number;
     state: string;
-    execution?: string | null;
-    keywords?: Array<string> | null;
-    keywordSimilarity?: number | null;
-    negativeKeywords?: Array<string> | null;
-    bannedKeywords?: Array<string> | null;
-    segments?: Array<{ code: string; name: string }> | null;
-    oses?: Array<{ code: string; name: string }> | null;
-    conversions?: Array<{
+    segments: Array<{ code: string; name: string }>;
+    oses: Array<{ code: string; name: string }>;
+    conversions: Array<{
       id: string;
       type: string;
       urlPattern: string;
       observationWindow: number;
-    }> | null;
-    ads?: Array<{
+    }>;
+    ads: Array<{
       id: string;
       state: string;
       price: string;
@@ -203,7 +193,7 @@ export type CreateAdSetMutation = {
           ctaText: string;
         } | null;
       };
-    }> | null;
+    }>;
   };
 };
 
@@ -217,24 +207,19 @@ export type UpdateAdSetMutation = {
     price?: string | null;
     createdAt: any;
     billingType?: string | null;
-    name?: string | null;
+    name: string;
     totalMax: number;
     perDay: number;
     state: string;
-    execution?: string | null;
-    keywords?: Array<string> | null;
-    keywordSimilarity?: number | null;
-    negativeKeywords?: Array<string> | null;
-    bannedKeywords?: Array<string> | null;
-    segments?: Array<{ code: string; name: string }> | null;
-    oses?: Array<{ code: string; name: string }> | null;
-    conversions?: Array<{
+    segments: Array<{ code: string; name: string }>;
+    oses: Array<{ code: string; name: string }>;
+    conversions: Array<{
       id: string;
       type: string;
       urlPattern: string;
       observationWindow: number;
-    }> | null;
-    ads?: Array<{
+    }>;
+    ads: Array<{
       id: string;
       state: string;
       price: string;
@@ -285,7 +270,7 @@ export type UpdateAdSetMutation = {
           ctaText: string;
         } | null;
       };
-    }> | null;
+    }>;
   };
 };
 
@@ -311,11 +296,6 @@ export const AdSetFragmentDoc = gql`
     totalMax
     perDay
     state
-    execution
-    keywords
-    keywordSimilarity
-    negativeKeywords
-    bannedKeywords
     segments {
       code
       name

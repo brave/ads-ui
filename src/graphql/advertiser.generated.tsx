@@ -68,7 +68,7 @@ export type AdvertiserCampaignsFragment = {
     passThroughRate: number;
     pacingOverride: boolean;
     pacingStrategy: Types.CampaignPacingStrategies;
-    externalId: string;
+    externalId?: string | null;
     currency: string;
     budget: number;
     paymentType: Types.PaymentType;
@@ -104,7 +104,7 @@ export type AdvertiserCampaignsQuery = {
       passThroughRate: number;
       pacingOverride: boolean;
       pacingStrategy: Types.CampaignPacingStrategies;
-      externalId: string;
+      externalId?: string | null;
       currency: string;
       budget: number;
       paymentType: Types.PaymentType;
