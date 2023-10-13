@@ -50,9 +50,6 @@ export function CreativeStatusSwitch({ creative }: Props) {
     onCompleted() {
       setRelatedCampaigns([]);
     },
-    onError() {
-      setCreativeState(input.state);
-    },
   });
   const [campaigns, { loading }] = useCampaignsForCreativeLazyQuery({
     variables: { creativeId: creative.id, advertiserId: advertiser.id },
@@ -86,13 +83,13 @@ export function CreativeStatusSwitch({ creative }: Props) {
             },
           });
         }}
-        checked={creativeState === "active"}
+        checked={creative.state === "active"}
         disabled={loading || updateLoading}
       />
       <Dialog open={relatedCampaigns.length > 0}>
         <DialogTitle>
           Are you sure you want to{" "}
-          {creativeState === "active" ? "activate" : "pause"}{" "}
+          {creative.state === "active" ? "activate" : "pause"}{" "}
           {`"${input.name}"`}
         </DialogTitle>
         <DialogContent>
@@ -115,7 +112,6 @@ export function CreativeStatusSwitch({ creative }: Props) {
             variant="outlined"
             onClick={() => {
               setRelatedCampaigns([]);
-              setCreativeState(creative.state);
             }}
             disabled={updateLoading}
           >
