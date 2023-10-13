@@ -22,7 +22,6 @@ import { useState } from "react";
 import _ from "lodash";
 import { validCreativeFields } from "user/library";
 import { isReviewableState } from "util/displayState";
-import { useGetEntityState } from "hooks/useGetEntityState";
 
 interface Props {
   creative: CreativeFragment;
@@ -39,7 +38,7 @@ export function CreativeStatusSwitch({ creative }: Props) {
   const [relatedCampaigns, setRelatedCampaigns] = useState<RelatedCampaign[]>(
     [],
   );
-  const [creativeState, setCreativeState] = useGetEntityState(input.state);
+  const [creativeState, setCreativeState] = useState(input.state);
   const [update, { loading: updateLoading }] = useUpdateCreativeMutation({
     refetchQueries: [
       refetchAdvertiserCreativesQuery({ advertiserId: advertiser.id }),
@@ -50,9 +49,6 @@ export function CreativeStatusSwitch({ creative }: Props) {
     ],
     onCompleted() {
       setRelatedCampaigns([]);
-    },
-    onError() {
-      setCreativeState(input.state);
     },
   });
   const [campaigns, { loading }] = useCampaignsForCreativeLazyQuery({
@@ -87,13 +83,13 @@ export function CreativeStatusSwitch({ creative }: Props) {
             },
           });
         }}
-        checked={creativeState === "active"}
+        checked={creative.state === "active"}
         disabled={loading || updateLoading}
       />
       <Dialog open={relatedCampaigns.length > 0}>
         <DialogTitle>
           Are you sure you want to{" "}
-          {creativeState === "active" ? "activate" : "pause"}{" "}
+          {creative.state === "active" ? "activate" : "pause"}{" "}
           {`"${input.name}"`}
         </DialogTitle>
         <DialogContent>
@@ -116,7 +112,6 @@ export function CreativeStatusSwitch({ creative }: Props) {
             variant="outlined"
             onClick={() => {
               setRelatedCampaigns([]);
-              setCreativeState(creative.state);
             }}
             disabled={updateLoading}
           >
