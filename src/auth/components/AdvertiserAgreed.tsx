@@ -20,7 +20,7 @@ import { PaymentType } from "graphql/types";
 export function AdvertiserAgreed() {
   const { advertiser } = useAdvertiser();
   const requiresPaymentAgree =
-    advertiser.selfServiceCreate &&
+    advertiser.selfServiceManageCampaign &&
     advertiser.selfServicePaymentType !== PaymentType.Netsuite;
   const history = useHistory();
   const { setSessionUser } = useAuthContext();

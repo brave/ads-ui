@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { isPast, parseISO } from "date-fns";
 import { Switch, Tooltip, Typography } from "@mui/material";
 import { CampaignSource } from "graphql/types";
@@ -22,7 +21,6 @@ export function OnOff({
   source,
   isInline,
 }: Props) {
-  const [checked, setChecked] = useState(state === "active");
   const isAfterEnd = isPast(parseISO(end));
   const enabled =
     source === CampaignSource.SelfServe &&
@@ -33,7 +31,7 @@ export function OnOff({
     isInline ? null : (
       <Typography sx={{ textAlign: "center", p: 0 }}>-</Typography>
     );
-  const tooltip = checked ? "Pause" : "Activate";
+  const tooltip = state === "paused" ? "Pause" : "Activate";
 
   return (
     <Tooltip
@@ -46,10 +44,9 @@ export function OnOff({
           <Switch
             onChange={(e) => {
               const theState = e.target.checked ? "active" : "paused";
-              setChecked(e.target.checked);
               onChange(theState);
             }}
-            checked={checked}
+            checked={state === "active"}
             disabled={loading}
           />
         ) : (

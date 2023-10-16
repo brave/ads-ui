@@ -1,6 +1,6 @@
 import _ from "lodash";
 import moment from "moment";
-import { Options } from "highcharts";
+import Highcharts, { Options } from "highcharts";
 import {
   BaseMetric,
   Metrics,
@@ -76,7 +76,7 @@ export const baseOverviewChart: Options = {
 export const prepareChart = (
   metrics: Metrics,
   processedData: MetricDataSet,
-) => {
+): Highcharts.Options => {
   const metricsEntries = Object.entries(metrics);
   return {
     ...baseOverviewChart,

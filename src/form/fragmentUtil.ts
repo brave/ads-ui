@@ -54,18 +54,13 @@ export function createAdSetFromFragment(
       creativeId: ad.creative.id,
     })),
     price: ads[0].price ?? "6",
-    bannedKeywords: data.bannedKeywords,
     billingType: data.billingType ?? "cpm",
     conversions: (data.conversions ?? []).map((c) => ({
       observationWindow: c.observationWindow,
       type: c.type,
       urlPattern: c.urlPattern,
     })),
-    execution: data.execution,
-    keywordSimilarity: data.keywordSimilarity,
-    keywords: data.keywords,
     name: `${data.name ? data.name : data.id.split("-")[0]} - Copy`,
-    negativeKeywords: data.negativeKeywords,
     oses: (data.oses ?? []).map((o) => ({ name: o.name, code: o.code })),
     perDay: data.perDay,
     segments: (data.segments ?? []).map((o) => ({

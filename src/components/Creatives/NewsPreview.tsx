@@ -1,14 +1,15 @@
 import { Box, Card, Typography } from "@mui/material";
 import { ImagePreview } from "components/Assets/ImagePreview";
-import { useField } from "formik";
-import { Creative } from "user/views/adsManager/types";
+import { useField, useFormikContext } from "formik";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { CreativeInput } from "graphql/types";
 
 export function NewsPreview() {
   const { advertiser } = useAdvertiser();
-  const [, creative] = useField<Creative>("newCreative");
+  const { values } = useFormikContext<CreativeInput>();
+  const [, meta, ,] = useField<CreativeInput>("newCreative");
 
-  const value = creative.value.payloadInlineContent;
+  const value = values.payloadInlineContent ?? meta.value.payloadInlineContent;
   return (
     <Card
       sx={{

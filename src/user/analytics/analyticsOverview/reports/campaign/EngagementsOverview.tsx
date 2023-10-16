@@ -1,6 +1,4 @@
 import { Alert, Box, Divider, Skeleton } from "@mui/material";
-import HighchartsReact from "highcharts-react-official";
-import * as Highcharts from "highcharts";
 import { useState } from "react";
 import {
   CampaignWithEngagementsFragment,
@@ -18,6 +16,7 @@ import { CampaignFormat } from "graphql/types";
 import { ErrorDetail } from "components/Error/ErrorDetail";
 import { ApolloError } from "@apollo/client";
 import { usePersistMetricFilter } from "user/analytics/analyticsOverview/hooks/usePersistMetricFilter";
+import { HighchartsWrapper } from "user/analytics/analyticsOverview/components/HighchartsWrapper";
 
 interface Props {
   loading: boolean;
@@ -100,9 +99,7 @@ export function EngagementsOverview({
           paddingTop="14px"
           paddingBottom="14px"
         >
-          <Box>
-            <HighchartsReact highcharts={Highcharts} options={options} />
-          </Box>
+          <HighchartsWrapper options={options} />
         </Box>
 
         <Divider />

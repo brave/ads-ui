@@ -165,11 +165,19 @@ function creativeList(
   );
 }
 
-export function validCreativeFields(
-  c: CreativeFragment | Creative,
+type GenericCreative = Omit<
+  CreativeFragment,
+  | "createdAt"
+  | "modifiedAt"
+  | "payloadSearchHomepage"
+  | "payloadSearch"
+  | "payloadNewTabPage"
+>;
+export function validCreativeFields<T extends GenericCreative>(
+  c: T,
   advertiserId: string,
   included?: boolean,
-): Creative {
+) {
   return {
     advertiserId,
     id: c.id,

@@ -13,7 +13,7 @@ export type CampaignFragment = {
   passThroughRate: number;
   pacingOverride: boolean;
   pacingStrategy: Types.CampaignPacingStrategies;
-  externalId: string;
+  externalId?: string | null;
   currency: string;
   budget: number;
   dailyBudget: number;
@@ -27,36 +27,27 @@ export type CampaignFragment = {
   paymentType: Types.PaymentType;
   dayProportion?: number | null;
   stripePaymentId?: string | null;
-  hasPaymentIntent?: boolean | null;
-  dayPartings?: Array<{
-    dow: string;
-    startMinute: number;
-    endMinute: number;
-  }> | null;
-  geoTargets?: Array<{ code: string; name: string }> | null;
+  hasPaymentIntent: boolean;
+  dayPartings: Array<{ dow: string; startMinute: number; endMinute: number }>;
+  geoTargets: Array<{ code: string; name: string }>;
   adSets: Array<{
     id: string;
     price?: string | null;
     createdAt: any;
     billingType?: string | null;
-    name?: string | null;
+    name: string;
     totalMax: number;
     perDay: number;
     state: string;
-    execution?: string | null;
-    keywords?: Array<string> | null;
-    keywordSimilarity?: number | null;
-    negativeKeywords?: Array<string> | null;
-    bannedKeywords?: Array<string> | null;
-    segments?: Array<{ code: string; name: string }> | null;
-    oses?: Array<{ code: string; name: string }> | null;
-    conversions?: Array<{
+    segments: Array<{ code: string; name: string }>;
+    oses: Array<{ code: string; name: string }>;
+    conversions: Array<{
       id: string;
       type: string;
       urlPattern: string;
       observationWindow: number;
-    }> | null;
-    ads?: Array<{
+    }>;
+    ads: Array<{
       id: string;
       state: string;
       price: string;
@@ -107,7 +98,7 @@ export type CampaignFragment = {
           ctaText: string;
         } | null;
       };
-    }> | null;
+    }>;
   }>;
   advertiser: { id: string };
 };
@@ -121,7 +112,7 @@ export type CampaignSummaryFragment = {
   passThroughRate: number;
   pacingOverride: boolean;
   pacingStrategy: Types.CampaignPacingStrategies;
-  externalId: string;
+  externalId?: string | null;
   currency: string;
   budget: number;
   paymentType: Types.PaymentType;
@@ -151,24 +142,19 @@ export type CampaignAdsFragment = {
     price?: string | null;
     createdAt: any;
     billingType?: string | null;
-    name?: string | null;
+    name: string;
     totalMax: number;
     perDay: number;
     state: string;
-    execution?: string | null;
-    keywords?: Array<string> | null;
-    keywordSimilarity?: number | null;
-    negativeKeywords?: Array<string> | null;
-    bannedKeywords?: Array<string> | null;
-    segments?: Array<{ code: string; name: string }> | null;
-    oses?: Array<{ code: string; name: string }> | null;
-    conversions?: Array<{
+    segments: Array<{ code: string; name: string }>;
+    oses: Array<{ code: string; name: string }>;
+    conversions: Array<{
       id: string;
       type: string;
       urlPattern: string;
       observationWindow: number;
-    }> | null;
-    ads?: Array<{
+    }>;
+    ads: Array<{
       id: string;
       state: string;
       price: string;
@@ -219,7 +205,7 @@ export type CampaignAdsFragment = {
           ctaText: string;
         } | null;
       };
-    }> | null;
+    }>;
   }>;
 };
 
@@ -237,7 +223,7 @@ export type LoadCampaignQuery = {
     passThroughRate: number;
     pacingOverride: boolean;
     pacingStrategy: Types.CampaignPacingStrategies;
-    externalId: string;
+    externalId?: string | null;
     currency: string;
     budget: number;
     dailyBudget: number;
@@ -251,36 +237,27 @@ export type LoadCampaignQuery = {
     paymentType: Types.PaymentType;
     dayProportion?: number | null;
     stripePaymentId?: string | null;
-    hasPaymentIntent?: boolean | null;
-    dayPartings?: Array<{
-      dow: string;
-      startMinute: number;
-      endMinute: number;
-    }> | null;
-    geoTargets?: Array<{ code: string; name: string }> | null;
+    hasPaymentIntent: boolean;
+    dayPartings: Array<{ dow: string; startMinute: number; endMinute: number }>;
+    geoTargets: Array<{ code: string; name: string }>;
     adSets: Array<{
       id: string;
       price?: string | null;
       createdAt: any;
       billingType?: string | null;
-      name?: string | null;
+      name: string;
       totalMax: number;
       perDay: number;
       state: string;
-      execution?: string | null;
-      keywords?: Array<string> | null;
-      keywordSimilarity?: number | null;
-      negativeKeywords?: Array<string> | null;
-      bannedKeywords?: Array<string> | null;
-      segments?: Array<{ code: string; name: string }> | null;
-      oses?: Array<{ code: string; name: string }> | null;
-      conversions?: Array<{
+      segments: Array<{ code: string; name: string }>;
+      oses: Array<{ code: string; name: string }>;
+      conversions: Array<{
         id: string;
         type: string;
         urlPattern: string;
         observationWindow: number;
-      }> | null;
-      ads?: Array<{
+      }>;
+      ads: Array<{
         id: string;
         state: string;
         price: string;
@@ -331,7 +308,7 @@ export type LoadCampaignQuery = {
             ctaText: string;
           } | null;
         };
-      }> | null;
+      }>;
     }>;
     advertiser: { id: string };
   } | null;
@@ -357,24 +334,19 @@ export type LoadCampaignAdsQuery = {
       price?: string | null;
       createdAt: any;
       billingType?: string | null;
-      name?: string | null;
+      name: string;
       totalMax: number;
       perDay: number;
       state: string;
-      execution?: string | null;
-      keywords?: Array<string> | null;
-      keywordSimilarity?: number | null;
-      negativeKeywords?: Array<string> | null;
-      bannedKeywords?: Array<string> | null;
-      segments?: Array<{ code: string; name: string }> | null;
-      oses?: Array<{ code: string; name: string }> | null;
-      conversions?: Array<{
+      segments: Array<{ code: string; name: string }>;
+      oses: Array<{ code: string; name: string }>;
+      conversions: Array<{
         id: string;
         type: string;
         urlPattern: string;
         observationWindow: number;
-      }> | null;
-      ads?: Array<{
+      }>;
+      ads: Array<{
         id: string;
         state: string;
         price: string;
@@ -425,7 +397,7 @@ export type LoadCampaignAdsQuery = {
             ctaText: string;
           } | null;
         };
-      }> | null;
+      }>;
     }>;
   } | null;
 };

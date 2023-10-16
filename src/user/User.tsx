@@ -22,6 +22,8 @@ import { IAdvertiser } from "auth/context/auth.interface";
 import moment from "moment";
 import { FilterContext } from "state/context";
 import { AdvertiserAssets } from "components/Assets/AdvertiserAssets";
+import { CreativeList } from "components/Creatives/CreativeList";
+import { CreativeForm } from "components/Creatives/CreativeForm";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -49,60 +51,76 @@ export function User() {
           setFromDate,
         }}
       >
-        <Box height="100%">
-          <Box display="flex">
-            <Navbar />
-            <Box
-              width="100%"
-              height="100%"
-              padding={1}
-              marginTop="64px"
-              bgcolor="background.default"
-            >
-              <Switch>
-                {/* /adsmanager */}
-                <ProtectedRoute
-                  path="/user/main/adsmanager/advanced/new/:draftId"
-                  authedComponent={NewCampaign}
-                  validateAdvertiserProperty={(a) => a.selfServiceCreate}
-                />
+        <Box display="flex" height="100vh" width="100vw" flexDirection="row">
+          <Navbar />
+          <Box
+            flex={1}
+            component="main"
+            marginTop="64px"
+            height="calc(100% - 64px)"
+            overflow="auto"
+            padding={1}
+            // this is flexing vertically, so that screens that wish to be
+            // exactly in viewport without scrollbars can set flex=1 on the
+            // child they wish to fill the screen with
+            display="flex"
+            flexDirection="column"
+            bgcolor="background.default"
+          >
+            <Switch>
+              {/* /adsmanager */}
+              <ProtectedRoute
+                path="/user/main/adsmanager/advanced/new/:draftId"
+                authedComponent={NewCampaign}
+                validateAdvertiserProperty={(a) => a.selfServiceManageCampaign}
+              />
 
-                <ProtectedRoute
-                  path="/user/main/adsmanager/advanced/:campaignId"
-                  authedComponent={EditCampaign}
-                  validateAdvertiserProperty={(a) => a.selfServiceEdit}
-                />
+              <ProtectedRoute
+                path="/user/main/adsmanager/advanced/:campaignId"
+                authedComponent={EditCampaign}
+                validateAdvertiserProperty={(a) => a.selfServiceManageCampaign}
+              />
 
-                <ProtectedRoute
-                  path="/user/main/complete/:mode"
-                  authedComponent={CompletionForm}
-                />
+              <ProtectedRoute
+                path="/user/main/creative/:id"
+                authedComponent={CreativeForm}
+                validateAdvertiserProperty={(a) => a.selfServiceManageCampaign}
+              />
 
-                {/* /campaigns/:campaignId/analytics - */}
-                <ProtectedRoute
-                  path="/user/main/campaign/:campaignId"
-                  authedComponent={CampaignReportView}
-                />
+              <ProtectedRoute
+                path="/user/main/complete/:mode"
+                authedComponent={CompletionForm}
+              />
 
-                <Route path="/user/main/settings" component={Settings} />
+              {/* /campaigns/:campaignId/analytics - */}
+              <ProtectedRoute
+                path="/user/main/campaign/:campaignId"
+                authedComponent={CampaignReportView}
+              />
 
-                <Route path="/user/main/profile" component={Profile} />
+              <Route path="/user/main/settings" component={Settings} />
 
-                <ProtectedRoute
-                  path="/user/main/campaign"
-                  authedComponent={CampaignView}
-                  unauthedComponent={AdvertiserAgreed}
-                />
+              <Route path="/user/main/profile" component={Profile} />
 
-                <ProtectedRoute
-                  path="/user/main/assets"
-                  authedComponent={AdvertiserAssets}
-                />
+              <ProtectedRoute
+                path="/user/main/campaign"
+                authedComponent={CampaignView}
+                unauthedComponent={AdvertiserAgreed}
+              />
 
-                {/* default */}
-                <Redirect to="/user/main/campaign" />
-              </Switch>
-            </Box>
+              <ProtectedRoute
+                path="/user/main/assets"
+                authedComponent={AdvertiserAssets}
+              />
+
+              <ProtectedRoute
+                path="/user/main/creatives"
+                authedComponent={CreativeList}
+              />
+
+              {/* default */}
+              <Redirect to="/user/main/campaign" />
+            </Switch>
           </Box>
         </Box>
       </FilterContext.Provider>

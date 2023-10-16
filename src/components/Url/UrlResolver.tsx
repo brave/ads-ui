@@ -50,19 +50,14 @@ export const UrlResolver = ({
   useEffect(() => {
     const { isValid } = urlValidation;
 
-    if (_.isUndefined(isValid)) {
-      isValidHelper.setValue("Target URL Validation did not complete");
-    } else if (isValid) {
+    if (isValid === false) {
+      isValidHelper.setValue("Target URL is not valid");
+    } else if (isValid === true) {
       isValidHelper.setValue(undefined);
-    } else {
-      const violations = extractViolations(urlValidation);
-      const errorMessage = violations.map((err) => err.summary).join("#");
-      isValidHelper.setValue(errorMessage);
     }
-  }, [urlValidation.isValid, urlValidation.response]);
+  }, [urlValidation.isValid]);
 
   const urlViolations = extractViolations(urlValidation);
-
   return (
     <>
       <TextField

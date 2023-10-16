@@ -14,11 +14,15 @@ export function DisplayError({ error }: { error: string | undefined }) {
 
 interface Props {
   caption: string;
-  value: string;
+  value?: string;
   error?: string | undefined;
 }
 
 export function ReviewField({ caption, value, error }: Props) {
+  if (!value) {
+    return null;
+  }
+
   return (
     <Box mb={2}>
       <Typography variant="overline" component="span" paddingRight={1}>

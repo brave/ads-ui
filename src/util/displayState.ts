@@ -16,3 +16,6 @@ export const displayFromCampaignState = (c: {
 
   return c.state ?? "draft";
 };
+
+export const isReviewableState = (c?: string) =>
+  c === "draft" || c === "under_review" || c === "completed";

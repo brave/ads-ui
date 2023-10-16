@@ -5,7 +5,7 @@ import { RegistrationSchema } from "validation/RegistrationSchema";
 import { initialValues, RegistrationForm } from "auth/registration/types";
 import { NameField } from "auth/registration/NameField";
 import { AddressField } from "auth/registration/AddressField";
-import { FormikSubmitButton } from "form/FormikHelpers";
+import { FormikSubmitButton } from "form/FormikButton";
 import { useRegister } from "auth/hooks/mutations/useRegister";
 import { AdvertiserRegistered } from "auth/registration/AdvertiserRegistered";
 import { NextAndBack } from "components/Steps/NextAndBack";

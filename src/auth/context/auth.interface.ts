@@ -5,8 +5,7 @@ import { PaymentType } from "graphql/types";
 export type IAdvertiser = {
   id: string;
   name: string;
-  selfServiceCreate: boolean;
-  selfServiceEdit: boolean;
+  selfServiceManageCampaign: boolean;
   selfServiceSetPrice: boolean;
   selfServicePaymentType: PaymentType;
   publicKey?: string | null;

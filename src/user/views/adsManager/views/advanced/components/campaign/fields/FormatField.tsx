@@ -1,18 +1,12 @@
-import {
-  IconButton,
-  List,
-  ListItemButton,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { List, ListItemButton, Stack, Typography } from "@mui/material";
 import { CardContainer } from "components/Card/CardContainer";
 import { useField } from "formik";
 import { CampaignFormat } from "graphql/types";
 import _ from "lodash";
-import HelpIcon from "@mui/icons-material/Help";
 import { useIsEdit } from "form/FormikHelpers";
 import { Billing } from "user/views/adsManager/types";
 import { AdvertiserPriceFragment } from "graphql/advertiser.generated";
+import { FormatHelp } from "components/Button/FormatHelp";
 
 interface PriceProps {
   prices: AdvertiserPriceFragment[];
@@ -25,18 +19,7 @@ export function FormatField({ prices }: PriceProps) {
         <Typography variant="body2">
           Choose a format for the campaign you would like to run
         </Typography>
-        <IconButton
-          size="small"
-          onClick={() =>
-            window.open(
-              "https://brave.com/brave-ads/ad-formats/",
-              "__blank",
-              "noopener",
-            )
-          }
-        >
-          <HelpIcon fontSize="small" />
-        </IconButton>
+        <FormatHelp />
       </Stack>
       <List sx={{ display: "flex", flexDirection: "row", gap: "20px" }}>
         <FormatItemButton
