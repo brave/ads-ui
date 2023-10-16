@@ -210,7 +210,7 @@ export type CampaignAdsFragment = {
 };
 
 export type LoadCampaignQueryVariables = Types.Exact<{
-  id: Types.Scalars["String"];
+  id: Types.Scalars["String"]["input"];
 }>;
 
 export type LoadCampaignQuery = {
@@ -315,7 +315,7 @@ export type LoadCampaignQuery = {
 };
 
 export type LoadCampaignAdsQueryVariables = Types.Exact<{
-  id: Types.Scalars["String"];
+  id: Types.Scalars["String"]["input"];
 }>;
 
 export type LoadCampaignAdsQuery = {

@@ -47,7 +47,7 @@ export type CreativeFragment = {
 };
 
 export type AdvertiserCreativesQueryVariables = Types.Exact<{
-  advertiserId: Types.Scalars["String"];
+  advertiserId: Types.Scalars["String"]["input"];
 }>;
 
 export type AdvertiserCreativesQuery = {
@@ -148,7 +148,7 @@ export type CreateCreativeMutation = {
 };
 
 export type UpdateCreativeMutationVariables = Types.Exact<{
-  id: Types.Scalars["String"];
+  id: Types.Scalars["String"]["input"];
   input: Types.CreativeInput;
 }>;
 
@@ -198,7 +198,7 @@ export type UpdateCreativeMutation = {
 };
 
 export type LoadCreativeQueryVariables = Types.Exact<{
-  id: Types.Scalars["String"];
+  id: Types.Scalars["String"]["input"];
 }>;
 
 export type LoadCreativeQuery = {
@@ -247,8 +247,8 @@ export type LoadCreativeQuery = {
 };
 
 export type CampaignsForCreativeQueryVariables = Types.Exact<{
-  creativeId: Types.Scalars["String"];
-  advertiserId: Types.Scalars["String"];
+  creativeId: Types.Scalars["String"]["input"];
+  advertiserId: Types.Scalars["String"]["input"];
 }>;
 
 export type CampaignsForCreativeQuery = {
