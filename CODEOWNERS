@@ -1,0 +1,17 @@
+# see https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+# the last match is the one that takes preference, so more general rules need to come first
+#
+# Note: this file primarily exists to ensure that PR's are tagged to review to a sensible audience, we
+# deliberately allow review by any approved committer, not just the code owner.
+
+# by default request review from all of ads-dev
+* @brave/ads-dev
+
+# to reduce renovate spam: just send these to the core team
+/.github/workflows @tackley @IanKrieger
+
+.node-version @tackley @IanKrieger
+
+package*.json @tackley @IanKrieger
+
+
