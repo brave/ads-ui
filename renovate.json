@@ -3,21 +3,12 @@
     "local>brave/renovate-config",
     "config:js-app",
     ":semanticCommits",
-    "npm:unpublishSafe"
+    ":semanticCommitTypeAll(chore)",
+    "npm:unpublishSafe",
+    "helpers:pinGitHubActionDigests",
+    "group:allNonMajor",
+    "schedule:weekends"
   ],
   "labels": ["dependencies"],
-  "postUpdateOptions": ["npmDedupe"],
-  "packageRules": [
-    {
-      "matchDatasources": ["npm"],
-      "minimumReleaseAge": "4 days"
-    },
-    {
-      "groupName": "all non-major dependencies",
-      "groupSlug": "all-minor-patch",
-      "matchPackagePatterns": ["*"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "matchDatasources": ["npm"]
-    }
-  ]
+  "postUpdateOptions": ["npmDedupe"]
 }
