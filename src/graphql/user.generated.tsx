@@ -11,7 +11,7 @@ export type UserFragment = {
 };
 
 export type LoadUserQueryVariables = Types.Exact<{
-  id: Types.Scalars["String"];
+  id: Types.Scalars["String"]["input"];
 }>;
 
 export type LoadUserQuery = {

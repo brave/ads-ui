@@ -39,7 +39,7 @@ export type AdvertiserFragment = {
 };
 
 export type AdvertiserQueryVariables = Types.Exact<{
-  id: Types.Scalars["String"];
+  id: Types.Scalars["String"]["input"];
 }>;
 
 export type AdvertiserQuery = {
@@ -85,7 +85,7 @@ export type AdvertiserCampaignsFragment = {
 };
 
 export type AdvertiserCampaignsQueryVariables = Types.Exact<{
-  id: Types.Scalars["String"];
+  id: Types.Scalars["String"]["input"];
   filter?: Types.InputMaybe<Types.AdvertiserCampaignFilter>;
 }>;
 
@@ -136,7 +136,7 @@ export type AdvertiserPriceFragment = {
 };
 
 export type AdvertiserImagesQueryVariables = Types.Exact<{
-  id: Types.Scalars["String"];
+  id: Types.Scalars["String"]["input"];
 }>;
 
 export type AdvertiserImagesQuery = {
@@ -152,7 +152,7 @@ export type AdvertiserImagesQuery = {
 };
 
 export type AdvertiserPricesQueryVariables = Types.Exact<{
-  id: Types.Scalars["String"];
+  id: Types.Scalars["String"]["input"];
 }>;
 
 export type AdvertiserPricesQuery = {

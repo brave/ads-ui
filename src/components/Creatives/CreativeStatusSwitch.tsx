@@ -89,7 +89,7 @@ export function CreativeStatusSwitch({ creative }: Props) {
       <Dialog open={relatedCampaigns.length > 0}>
         <DialogTitle>
           Are you sure you want to{" "}
-          {creative.state === "active" ? "activate" : "pause"}{" "}
+          {creative.state === "active" ? "pause" : "activate"}{" "}
           {`"${input.name}"`}
         </DialogTitle>
         <DialogContent>

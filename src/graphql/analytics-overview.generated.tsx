@@ -63,7 +63,7 @@ export type CampaignWithEngagementsFragment = {
 };
 
 export type AnalyticOverviewQueryVariables = Types.Exact<{
-  id: Types.Scalars["String"];
+  id: Types.Scalars["String"]["input"];
 }>;
 
 export type AnalyticOverviewQuery = {
@@ -107,7 +107,7 @@ export type AnalyticOverviewQuery = {
 };
 
 export type EngagementOverviewQueryVariables = Types.Exact<{
-  advertiserId: Types.Scalars["String"];
+  advertiserId: Types.Scalars["String"]["input"];
   filter?: Types.InputMaybe<Types.CampaignFilter>;
 }>;
 
