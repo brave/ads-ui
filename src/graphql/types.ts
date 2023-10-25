@@ -44,6 +44,7 @@ export type AdvertiserPriceInput = {
   billingModelPrice: Scalars["Numeric"]["input"];
   billingType: BillingType;
   format: CampaignFormat;
+  isPrimary?: Scalars["Boolean"]["input"];
 };
 
 export enum AdvertiserSource {
@@ -58,6 +59,7 @@ export type ApproveCampaignInput = {
 export enum BillingType {
   Cpc = "CPC",
   Cpm = "CPM",
+  Cpqv = "CPQV",
   Cpv = "CPV",
 }
 

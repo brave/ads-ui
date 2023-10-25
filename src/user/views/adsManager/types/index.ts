@@ -3,7 +3,7 @@ import { defaultEndDate, defaultStartDate } from "form/DateFieldHelpers";
 import { MIN_PER_CAMPAIGN } from "validation/CampaignSchema";
 import { AdvertiserWithPrices } from "user/hooks/useAdvertiserWithPrices";
 
-export type Billing = "cpm" | "cpc" | "cpv";
+export type Billing = "cpm" | "cpc" | "cpqv";
 
 export type CampaignForm = {
   id?: string;
@@ -112,9 +112,8 @@ export const initialCampaign = (
   advertiser: AdvertiserWithPrices,
 ): CampaignForm => {
   const format = CampaignFormat.PushNotification;
-  const billingType = "cpm";
   const price = advertiser.prices.find(
-    (p) => p.billingType === billingType.toUpperCase() && p.format === format,
+    (p) => p.format === format && p.isPrimary,
   );
   return {
     isCreating: false,
@@ -126,7 +125,7 @@ export const initialCampaign = (
     dailyBudget: MIN_PER_CAMPAIGN,
     geoTargets: [],
     newCreative: initialCreative,
-    billingType,
+    billingType: (price?.billingType.toLowerCase() ?? "cpm") as Billing,
     currency: "USD",
     price: price?.billingModelPrice ?? "6",
     adSets: [

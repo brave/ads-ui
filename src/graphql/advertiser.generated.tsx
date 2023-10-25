@@ -133,6 +133,7 @@ export type AdvertiserPriceFragment = {
   billingModelPrice: string;
   billingType: Types.BillingType;
   format: Types.CampaignFormat;
+  isPrimary: boolean;
 };
 
 export type AdvertiserImagesQueryVariables = Types.Exact<{
@@ -161,6 +162,7 @@ export type AdvertiserPricesQuery = {
       billingModelPrice: string;
       billingType: Types.BillingType;
       format: Types.CampaignFormat;
+      isPrimary: boolean;
     }>;
   } | null;
 };
@@ -229,6 +231,7 @@ export const AdvertiserPriceFragmentDoc = gql`
     billingModelPrice
     billingType
     format
+    isPrimary
   }
 `;
 export const AdvertiserDocument = gql`

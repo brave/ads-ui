@@ -7,7 +7,7 @@ interface BillingTypeLabels {
 const BILLING_TYPES = [
   { value: "cpm", shortLabel: "CPM", longLabel: "CPM (Views)" },
   { value: "cpc", shortLabel: "CPC", longLabel: "CPC (Clicks)" },
-  { value: "cpv", shortLabel: "CPV", longLabel: "CPV (Visits)" },
+  { value: "cpqv", shortLabel: "CPQV", longLabel: "CPQV (Qualified Visits)" },
 ];
 export function uiLabelsForBillingType(
   billingType: string | undefined | null,
