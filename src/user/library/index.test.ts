@@ -277,7 +277,7 @@ describe("new form tests", () => {
         "budget": 1000,
         "currency": "USD",
         "dailyBudget": 10,
-        "dailyCap": 1,
+        "dailyCap": 4,
         "externalId": "",
         "format": "PUSH_NOTIFICATION",
         "geoTargets": [
