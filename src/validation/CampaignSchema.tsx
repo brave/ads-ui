@@ -183,7 +183,7 @@ export function findPrice(
   schema: StringSchema<string | undefined, AnyObject, undefined, "">,
 ) {
   const found = prices.find(
-    (p) => p.format === format && p.billingType === billingType,
+    (p) => p.format === format && p.billingType === billingType && p.isPrimary,
   );
   const price = BigNumber(found?.billingModelPrice ?? defaultPrice);
   return schema.test(
