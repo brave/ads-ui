@@ -35,7 +35,7 @@ export function transformNewForm(
   return {
     currency: form.currency,
     externalId: "",
-    dailyCap: 1,
+    dailyCap: form.format === CampaignFormat.PushNotification ? 1 : 4,
     dailyBudget: form.dailyBudget,
     endAt: form.endAt,
     pacingStrategy: CampaignPacingStrategies.ModelV1,
