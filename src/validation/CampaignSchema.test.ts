@@ -14,13 +14,13 @@ const prices: Omit<AdvertiserPriceFragment, "isDefault">[] = [
     format: CampaignFormat.PushNotification,
     billingModelPrice: "6",
     billingType: BillingType.Cpm,
-    isPrimary: true,
+    isPrimaryFormat: true,
   },
   {
     format: CampaignFormat.PushNotification,
     billingModelPrice: ".15",
     billingType: BillingType.Cpc,
-    isPrimary: true,
+    isPrimaryFormat: true,
   },
 ];
 

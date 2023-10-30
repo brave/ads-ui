@@ -46,7 +46,7 @@ const FormatItemButton = (props: { format: CampaignFormat } & PriceProps) => {
       onClick={() => {
         format.setValue(props.format);
         const found = props.prices.find(
-          (p) => p.format === props.format && p.isPrimary,
+          (p) => p.format === props.format && p.isPrimaryFormat,
         );
         if (props.format === CampaignFormat.NewsDisplayAd) {
           price.setValue(found?.billingModelPrice ?? "10");

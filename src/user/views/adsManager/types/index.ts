@@ -113,7 +113,7 @@ export const initialCampaign = (
 ): CampaignForm => {
   const format = CampaignFormat.PushNotification;
   const price = advertiser.prices.find(
-    (p) => p.format === format && p.isPrimary,
+    (p) => p.format === format && p.isPrimaryFormat,
   );
   return {
     isCreating: false,
