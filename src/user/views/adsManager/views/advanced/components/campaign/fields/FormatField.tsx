@@ -6,6 +6,7 @@ import _ from "lodash";
 import { useIsEdit } from "form/FormikHelpers";
 import { AdvertiserPriceFragment } from "graphql/advertiser.generated";
 import { FormatHelp } from "components/Button/FormatHelp";
+import { Billing } from "user/views/adsManager/types";
 
 interface PriceProps {
   prices: AdvertiserPriceFragment[];
@@ -38,6 +39,7 @@ const FormatItemButton = (props: { format: CampaignFormat } & PriceProps) => {
   const { isEdit } = useIsEdit();
   const [, meta, format] = useField<CampaignFormat>("format");
   const [, , price] = useField<string>("price");
+  const [, billingType] = useField<Billing>("billingType");
 
   return (
     <ListItemButton
@@ -46,7 +48,9 @@ const FormatItemButton = (props: { format: CampaignFormat } & PriceProps) => {
       onClick={() => {
         format.setValue(props.format);
         const found = props.prices.find(
-          (p) => p.format === props.format && p.isPrimaryFormat,
+          (p) =>
+            p.format === props.format &&
+            p.billingType === billingType.value.toUpperCase(),
         );
         if (props.format === CampaignFormat.NewsDisplayAd) {
           price.setValue(found?.billingModelPrice ?? "10");

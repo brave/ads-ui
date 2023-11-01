@@ -44,7 +44,6 @@ export type AdvertiserPriceInput = {
   billingModelPrice: Scalars["Numeric"]["input"];
   billingType: BillingType;
   format: CampaignFormat;
-  isPrimaryFormat?: Scalars["Boolean"]["input"];
 };
 
 export enum AdvertiserSource {

@@ -30,7 +30,7 @@ export function BaseForm({ hasPaymentIntent, prices }: Props) {
     {
       label: "Budget",
       path: `${url}/budget`,
-      component: <BudgetSettings />,
+      component: <BudgetSettings prices={prices} />,
     },
     {
       label: "Ads",

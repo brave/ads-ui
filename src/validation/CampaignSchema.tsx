@@ -80,7 +80,7 @@ export const CampaignSchema = (prices: AdvertiserPriceFragment[]) =>
         then: (schema) =>
           findPrice(
             prices,
-            CampaignFormat.PushNotification,
+            [CampaignFormat.PushNotification],
             BillingType.Cpc,
             "0.1",
             schema,
@@ -92,7 +92,7 @@ export const CampaignSchema = (prices: AdvertiserPriceFragment[]) =>
         then: (schema) =>
           findPrice(
             prices,
-            CampaignFormat.PushNotification,
+            [CampaignFormat.PushNotification],
             BillingType.Cpm,
             "6",
             schema,
@@ -104,16 +104,30 @@ export const CampaignSchema = (prices: AdvertiserPriceFragment[]) =>
         then: (schema) =>
           findPrice(
             prices,
-            CampaignFormat.NewsDisplayAd,
+            [CampaignFormat.NewsDisplayAd],
             BillingType.Cpm,
             "10",
+            schema,
+          ),
+      })
+      .when(["billingType", "format"], {
+        is: (b: string, f: CampaignFormat) =>
+          b === "cpqv" &&
+          (f === CampaignFormat.NewsDisplayAd ||
+            CampaignFormat.PushNotification),
+        then: (schema) =>
+          findPrice(
+            prices,
+            [CampaignFormat.NewsDisplayAd, CampaignFormat.PushNotification],
+            BillingType.Cpqv,
+            "1.5",
             schema,
           ),
       })
       .required("Price is a required field"),
     billingType: string()
       .label("Pricing Type")
-      .oneOf(["cpm", "cpc"])
+      .oneOf(["cpm", "cpc", "cpqv"])
       .required("Pricing type is a required field"),
     adSets: array()
       .min(1)
@@ -177,14 +191,13 @@ export const CampaignSchema = (prices: AdvertiserPriceFragment[]) =>
 
 export function findPrice(
   prices: AdvertiserPriceFragment[],
-  format: CampaignFormat,
+  formats: CampaignFormat[],
   billingType: BillingType,
   defaultPrice: string,
   schema: StringSchema<string | undefined, AnyObject, undefined, "">,
 ) {
   const found = prices.find(
-    (p) =>
-      p.format === format && p.billingType === billingType && p.isPrimaryFormat,
+    (p) => formats.includes(p.format) && p.billingType === billingType,
   );
   const price = BigNumber(found?.billingModelPrice ?? defaultPrice);
   return schema.test(

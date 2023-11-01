@@ -112,8 +112,9 @@ export const initialCampaign = (
   advertiser: AdvertiserWithPrices,
 ): CampaignForm => {
   const format = CampaignFormat.PushNotification;
+  const billingType = "cpm";
   const price = advertiser.prices.find(
-    (p) => p.format === format && p.isPrimaryFormat,
+    (p) => p.format === format && p.billingType === billingType.toUpperCase(),
   );
   return {
     isCreating: false,
@@ -125,7 +126,7 @@ export const initialCampaign = (
     dailyBudget: MIN_PER_CAMPAIGN,
     geoTargets: [],
     newCreative: initialCreative,
-    billingType: (price?.billingType.toLowerCase() ?? "cpm") as Billing,
+    billingType: billingType,
     currency: "USD",
     price: price?.billingModelPrice ?? "6",
     adSets: [
