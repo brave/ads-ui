@@ -13,7 +13,7 @@ interface Props {
   errors?: string | FormikErrors<AdSetForm>;
 }
 
-export function AdSetReview({ adSet, idx, errors }: Props) {
+export function AdSetReview({ adSet, idx, errors, format }: Props) {
   const included = adSet.creatives.filter((c) => c.included);
   const hasErrors = !!errors;
   if (typeof errors === "string") {
@@ -37,11 +37,13 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
         value={adSet.name || `Ad Set ${idx + 1}`}
         error={hasErrors ? adSetError?.name : ""}
       />
-      <ReviewField
-        caption="Audiences"
-        value={segmentValue(mapToString(adSet.segments))}
-        error={hasErrors ? (adSetError?.segments as string) : ""}
-      />
+      {format !== CampaignFormat.NewsDisplayAd && (
+        <ReviewField
+          caption="Audiences"
+          value={segmentValue(mapToString(adSet.segments))}
+          error={hasErrors ? (adSetError?.segments as string) : ""}
+        />
+      )}
       <ReviewField
         caption="Platforms"
         value={mapToString(adSet.oses)}
