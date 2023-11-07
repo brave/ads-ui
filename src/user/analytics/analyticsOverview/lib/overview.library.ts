@@ -144,19 +144,19 @@ export const decideLabel = (metric: string) => {
     case "ctr":
       return "CTR";
     case "convRate":
-      return "Conversion Rate";
+      return "Conversion rate";
     case "landingRate":
-      return "Click to 10s Visit Rate";
+      return "Click to site visit rate";
     case "views":
       return "Impressions";
     case "cpa":
       return "CPA";
     case "visitRate":
-      return "10s visit rate";
+      return "Site visit rate";
     case "dismissRate":
-      return "Dismissal Rate";
+      return "Dismissal rate";
     case "landings":
-      return " 10s Visits";
+      return "Site visits";
     default:
       return _.capitalize(metric);
   }

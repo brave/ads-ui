@@ -26,7 +26,7 @@ export default function LiveFeed({ overview, processed }: LiveFeedProps) {
       value: `${processed.ctr.toFixed(2)}%`,
     },
     {
-      label: "10s visit rate",
+      label: "Site visit rate",
       value: `${processed.visitRate.toFixed(2)}%`,
     },
     {
@@ -34,7 +34,7 @@ export default function LiveFeed({ overview, processed }: LiveFeedProps) {
       value: `${processed.dismissRate.toFixed(2)}%`,
     },
     {
-      label: "Click to 10s visit rate",
+      label: "Click to site visit rate",
       value: `${processed.landingRate.toFixed(2)}%`,
     },
     { label: "Upvotes", value: `${processed.upvotes}` },

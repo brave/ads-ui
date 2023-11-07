@@ -63,7 +63,7 @@ export function AdDetailTable<T extends { id: string }>({
       },
       {
         field: "landed",
-        headerName: "10s Visits",
+        headerName: "Site Visits",
         valueGetter: ({ row }) => engagements.get(row.id)?.landings,
         renderCell: ({ row }) =>
           renderStatsCell(loading, "landings", engagements.get(row.id)),

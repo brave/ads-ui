@@ -14,6 +14,7 @@ import {
   EngagementOverview,
   engagementValue,
   renderEngagementCell,
+  renderStatsCell,
 } from "user/analytics/renderers";
 import _ from "lodash";
 import { uiTextForCampaignFormat } from "user/library";
@@ -22,6 +23,8 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { CustomToolbar } from "components/Datagrid/CustomToolbar";
 import { CloneCampaign } from "components/Campaigns/CloneCampaign";
 import { EditButton } from "user/campaignList/EditButton";
+import { calculateMetric } from "user/analytics/analyticsOverview/lib/overview.library";
+import { StatsMetric } from "user/analytics/analyticsOverview/types";
 
 interface Props {
   advertiser?: AdvertiserCampaignsFragment | null;
@@ -45,6 +48,22 @@ export function CampaignList({ advertiser }: Props) {
       setEngagementData(m);
     },
   });
+
+  const getStatFromEngagement = (
+    row: CampaignSummaryFragment,
+    k1: keyof EngagementOverview,
+    k2: keyof EngagementOverview,
+    m?: Map<string, EngagementOverview>,
+  ) => {
+    const val1 = m?.get(row.id)?.[k1];
+    const val2 = m?.get(row.id)?.[k2];
+
+    if (typeof val1 !== "number" || typeof val2 !== "number") {
+      return null;
+    }
+
+    return calculateMetric(true, val1 ?? 0, val2 ?? 0);
+  };
 
   const columns: GridColDef<CampaignSummaryFragment>[] = [
     {
@@ -124,11 +143,31 @@ export function CampaignList({ advertiser }: Props) {
     },
     {
       field: "landed",
-      headerName: "10s Visits",
+      headerName: "Site visits",
       valueGetter: ({ row }) =>
         engagementData?.get(row.id)?.["landed"] ?? "N/A",
       renderCell: ({ row }) =>
         renderEngagementCell(loading, row, "landed", engagementData),
+      align: "right",
+      headerAlign: "right",
+      minWidth: 100,
+      maxWidth: 250,
+    },
+    {
+      field: "ctr",
+      headerName: "CTR",
+      valueGetter: ({ row }) =>
+        getStatFromEngagement(row, "click", "view", engagementData),
+      renderCell: ({ row }) =>
+        renderStatsCell(
+          loading,
+          "ctr",
+          {
+            ctr:
+              getStatFromEngagement(row, "click", "view", engagementData) ?? 0,
+          } as StatsMetric,
+          row.currency,
+        ),
       align: "right",
       headerAlign: "right",
       minWidth: 100,
