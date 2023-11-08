@@ -186,8 +186,6 @@ export type CreateAdvertiserInput = {
   name: Scalars["String"]["input"];
   phone?: InputMaybe<Scalars["String"]["input"]>;
   referrer?: InputMaybe<Scalars["String"]["input"]>;
-  selfServiceCreate?: InputMaybe<Scalars["Boolean"]["input"]>;
-  selfServiceEdit?: InputMaybe<Scalars["Boolean"]["input"]>;
   selfServiceManageCampaign?: InputMaybe<Scalars["Boolean"]["input"]>;
   state?: InputMaybe<Scalars["String"]["input"]>;
   url?: InputMaybe<Scalars["String"]["input"]>;
@@ -200,7 +198,7 @@ export type CreateCampaignInput = {
   brandedKeyword?: InputMaybe<Scalars["String"]["input"]>;
   budget: Scalars["Float"]["input"];
   currency: Scalars["String"]["input"];
-  dailyBudget: Scalars["Float"]["input"];
+  dailyBudget?: InputMaybe<Scalars["Float"]["input"]>;
   dailyCap: Scalars["Float"]["input"];
   dayPartings?: InputMaybe<Array<DayPartingInput>>;
   dayProportion?: InputMaybe<Scalars["Float"]["input"]>;
@@ -334,7 +332,7 @@ export type FocalPointInput = {
 
 export type GeocodeInput = {
   code: Scalars["String"]["input"];
-  name: Scalars["String"]["input"];
+  name?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type InPagePayloadInput = {
@@ -468,8 +466,6 @@ export type UpdateAdvertiserInput = {
   phone?: InputMaybe<Scalars["String"]["input"]>;
   publicKey?: InputMaybe<Scalars["String"]["input"]>;
   referrer?: InputMaybe<Scalars["String"]["input"]>;
-  selfServiceCreate?: InputMaybe<Scalars["Boolean"]["input"]>;
-  selfServiceEdit?: InputMaybe<Scalars["Boolean"]["input"]>;
   selfServiceManageCampaign?: InputMaybe<Scalars["Boolean"]["input"]>;
   state?: InputMaybe<Scalars["String"]["input"]>;
   url?: InputMaybe<Scalars["String"]["input"]>;

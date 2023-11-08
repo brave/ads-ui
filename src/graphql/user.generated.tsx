@@ -80,9 +80,24 @@ export function useLoadUserLazyQuery(
     options,
   );
 }
+export function useLoadUserSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<
+    LoadUserQuery,
+    LoadUserQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<LoadUserQuery, LoadUserQueryVariables>(
+    LoadUserDocument,
+    options,
+  );
+}
 export type LoadUserQueryHookResult = ReturnType<typeof useLoadUserQuery>;
 export type LoadUserLazyQueryHookResult = ReturnType<
   typeof useLoadUserLazyQuery
+>;
+export type LoadUserSuspenseQueryHookResult = ReturnType<
+  typeof useLoadUserSuspenseQuery
 >;
 export type LoadUserQueryResult = Apollo.QueryResult<
   LoadUserQuery,
