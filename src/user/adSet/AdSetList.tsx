@@ -123,7 +123,20 @@ export function AdSetList({ campaign, loading, engagements }: Props) {
       headerName: "Platforms",
       valueGetter: ({ row }) =>
         row.oses?.map((o: { name: string }) => o.name).join(", "),
-      renderCell: ({ row }) => <ChipList items={row.oses} />,
+      renderCell: ({ row }) => {
+        if (row.oses?.length === 5) {
+          return (
+            <Chip
+              label="all"
+              size="small"
+              variant="outlined"
+              sx={{ mr: 1, marginY: "4px" }}
+            />
+          );
+        }
+
+        return <ChipList items={row.oses} />;
+      },
       flex: 1,
     },
     {
