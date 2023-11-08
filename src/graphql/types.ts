@@ -58,8 +58,7 @@ export type ApproveCampaignInput = {
 export enum BillingType {
   Cpc = "CPC",
   Cpm = "CPM",
-  Cpqv = "CPQV",
-  Cpv = "CPV",
+  Cpsv = "CPSV",
 }
 
 export type CampaignFilter = {

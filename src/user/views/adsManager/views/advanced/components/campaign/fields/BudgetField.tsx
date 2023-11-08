@@ -106,9 +106,9 @@ export function BudgetField(props: { prices: AdvertiserPriceFragment[] }) {
                 disabled: isBillingTypeDisabled("cpc") && !isDraft,
               },
               {
-                value: "cpqv",
-                label: uiLabelsForBillingType("cpqv").longLabel,
-                disabled: isBillingTypeDisabled("cpqv") && !isDraft,
+                value: "cpsv",
+                label: uiLabelsForBillingType("cpsv").longLabel,
+                disabled: isBillingTypeDisabled("cpsv") && !isDraft,
               },
             ]}
           />

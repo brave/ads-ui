@@ -119,15 +119,15 @@ export const CampaignSchema = (prices: AdvertiserPriceFragment[]) =>
           findPrice(
             prices,
             [CampaignFormat.NewsDisplayAd, CampaignFormat.PushNotification],
-            BillingType.Cpqv,
-            "1.5",
+            BillingType.Cpsv,
+            "3",
             schema,
           ),
       })
       .required("Price is a required field"),
     billingType: string()
       .label("Pricing Type")
-      .oneOf(["cpm", "cpc", "cpqv"])
+      .oneOf(["cpm", "cpc", "cpsv"])
       .required("Pricing type is a required field"),
     adSets: array()
       .min(1)
