@@ -44,7 +44,7 @@ export function BasePieChart({ series, onSetType, extraOptions, type }: Props) {
     { value: "view", label: "Impressions" },
     { value: "conversion", label: "Conversions" },
     { value: "click", label: "Clicks" },
-    { value: "landed", label: "10s visits" },
+    { value: "landed", label: "Site visits" },
     ...(extraOptions ?? []),
   ];
 

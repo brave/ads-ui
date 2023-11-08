@@ -24,7 +24,6 @@
     "highcharts": "11.2.0",
     "highcharts-react-official": "3.2.1",
     "immer": "10.0.3",
-    "jwt-decode": "3.1.2",
     "lodash": "4.17.21",
     "moment": "2.29.4",
     "npm-audit-resolver": "3.0.0-RC.0",
