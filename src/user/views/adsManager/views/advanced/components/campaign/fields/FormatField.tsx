@@ -39,7 +39,7 @@ const FormatItemButton = (props: { format: CampaignFormat } & PriceProps) => {
   const { isEdit } = useIsEdit();
   const [, meta, format] = useField<CampaignFormat>("format");
   const [, , price] = useField<string>("price");
-  const [, billingType] = useField<Billing>("billingType");
+  const [, billingType, helper] = useField<Billing>("billingType");
 
   return (
     <ListItemButton
@@ -54,6 +54,7 @@ const FormatItemButton = (props: { format: CampaignFormat } & PriceProps) => {
         );
         if (props.format === CampaignFormat.NewsDisplayAd) {
           price.setValue(found?.billingModelPrice ?? "10");
+          if (billingType.value === "cpc") helper.setValue("cpm");
         } else {
           price.setValue(found?.billingModelPrice ?? "6");
         }

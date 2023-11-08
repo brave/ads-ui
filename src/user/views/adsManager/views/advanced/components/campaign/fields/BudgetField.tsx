@@ -98,17 +98,17 @@ export function BudgetField(props: { prices: AdvertiserPriceFragment[] }) {
               {
                 value: "cpm",
                 label: uiLabelsForBillingType("cpm").longLabel,
-                disabled: isBillingTypeDisabled("cpm") && !isDraft,
+                disabled: isBillingTypeDisabled("cpm") && isDraft,
               },
               {
                 value: "cpc",
                 label: uiLabelsForBillingType("cpc").longLabel,
-                disabled: isBillingTypeDisabled("cpc") && !isDraft,
+                disabled: isBillingTypeDisabled("cpc") && isDraft,
               },
               {
                 value: "cpsv",
                 label: uiLabelsForBillingType("cpsv").longLabel,
-                disabled: isBillingTypeDisabled("cpsv") && !isDraft,
+                disabled: isBillingTypeDisabled("cpsv") && isDraft,
               },
             ]}
           />
