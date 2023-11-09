@@ -83,11 +83,26 @@ export function useActiveGeocodesLazyQuery(
     options,
   );
 }
+export function useActiveGeocodesSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<
+    ActiveGeocodesQuery,
+    ActiveGeocodesQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<
+    ActiveGeocodesQuery,
+    ActiveGeocodesQueryVariables
+  >(ActiveGeocodesDocument, options);
+}
 export type ActiveGeocodesQueryHookResult = ReturnType<
   typeof useActiveGeocodesQuery
 >;
 export type ActiveGeocodesLazyQueryHookResult = ReturnType<
   typeof useActiveGeocodesLazyQuery
+>;
+export type ActiveGeocodesSuspenseQueryHookResult = ReturnType<
+  typeof useActiveGeocodesSuspenseQuery
 >;
 export type ActiveGeocodesQueryResult = Apollo.QueryResult<
   ActiveGeocodesQuery,
@@ -145,9 +160,24 @@ export function useSegmentsLazyQuery(
     options,
   );
 }
+export function useSegmentsSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<
+    SegmentsQuery,
+    SegmentsQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<SegmentsQuery, SegmentsQueryVariables>(
+    SegmentsDocument,
+    options,
+  );
+}
 export type SegmentsQueryHookResult = ReturnType<typeof useSegmentsQuery>;
 export type SegmentsLazyQueryHookResult = ReturnType<
   typeof useSegmentsLazyQuery
+>;
+export type SegmentsSuspenseQueryHookResult = ReturnType<
+  typeof useSegmentsSuspenseQuery
 >;
 export type SegmentsQueryResult = Apollo.QueryResult<
   SegmentsQuery,

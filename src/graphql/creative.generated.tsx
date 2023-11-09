@@ -365,11 +365,26 @@ export function useAdvertiserCreativesLazyQuery(
     AdvertiserCreativesQueryVariables
   >(AdvertiserCreativesDocument, options);
 }
+export function useAdvertiserCreativesSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<
+    AdvertiserCreativesQuery,
+    AdvertiserCreativesQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<
+    AdvertiserCreativesQuery,
+    AdvertiserCreativesQueryVariables
+  >(AdvertiserCreativesDocument, options);
+}
 export type AdvertiserCreativesQueryHookResult = ReturnType<
   typeof useAdvertiserCreativesQuery
 >;
 export type AdvertiserCreativesLazyQueryHookResult = ReturnType<
   typeof useAdvertiserCreativesLazyQuery
+>;
+export type AdvertiserCreativesSuspenseQueryHookResult = ReturnType<
+  typeof useAdvertiserCreativesSuspenseQuery
 >;
 export type AdvertiserCreativesQueryResult = Apollo.QueryResult<
   AdvertiserCreativesQuery,
@@ -532,11 +547,26 @@ export function useLoadCreativeLazyQuery(
     options,
   );
 }
+export function useLoadCreativeSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<
+    LoadCreativeQuery,
+    LoadCreativeQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<LoadCreativeQuery, LoadCreativeQueryVariables>(
+    LoadCreativeDocument,
+    options,
+  );
+}
 export type LoadCreativeQueryHookResult = ReturnType<
   typeof useLoadCreativeQuery
 >;
 export type LoadCreativeLazyQueryHookResult = ReturnType<
   typeof useLoadCreativeLazyQuery
+>;
+export type LoadCreativeSuspenseQueryHookResult = ReturnType<
+  typeof useLoadCreativeSuspenseQuery
 >;
 export type LoadCreativeQueryResult = Apollo.QueryResult<
   LoadCreativeQuery,
@@ -598,11 +628,26 @@ export function useCampaignsForCreativeLazyQuery(
     CampaignsForCreativeQueryVariables
   >(CampaignsForCreativeDocument, options);
 }
+export function useCampaignsForCreativeSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<
+    CampaignsForCreativeQuery,
+    CampaignsForCreativeQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<
+    CampaignsForCreativeQuery,
+    CampaignsForCreativeQueryVariables
+  >(CampaignsForCreativeDocument, options);
+}
 export type CampaignsForCreativeQueryHookResult = ReturnType<
   typeof useCampaignsForCreativeQuery
 >;
 export type CampaignsForCreativeLazyQueryHookResult = ReturnType<
   typeof useCampaignsForCreativeLazyQuery
+>;
+export type CampaignsForCreativeSuspenseQueryHookResult = ReturnType<
+  typeof useCampaignsForCreativeSuspenseQuery
 >;
 export type CampaignsForCreativeQueryResult = Apollo.QueryResult<
   CampaignsForCreativeQuery,

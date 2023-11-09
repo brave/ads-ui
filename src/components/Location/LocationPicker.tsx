@@ -11,7 +11,7 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 export const LocationPicker = () => {
   const { data } = useActiveGeocodesQuery();
-  const sorted = _.sortBy(data?.activeGeocodes?.data ?? [], "name");
+  const sorted = _.sortBy(data?.activeGeocodes?.data ?? [], "code");
   const [formProps, meta, helper] = useField<GeocodeInput[]>("geoTargets");
   const errorMessage = meta.error;
 
@@ -25,7 +25,7 @@ export const LocationPicker = () => {
       options={sorted}
       disableCloseOnSelect
       autoHighlight
-      getOptionLabel={(option) => option.name}
+      getOptionLabel={(option) => option.name ?? option.code}
       renderOption={(props, option, { selected }) => (
         <li {...props}>
           <Checkbox

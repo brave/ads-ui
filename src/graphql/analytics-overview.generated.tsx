@@ -220,11 +220,26 @@ export function useAnalyticOverviewLazyQuery(
     AnalyticOverviewQueryVariables
   >(AnalyticOverviewDocument, options);
 }
+export function useAnalyticOverviewSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<
+    AnalyticOverviewQuery,
+    AnalyticOverviewQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<
+    AnalyticOverviewQuery,
+    AnalyticOverviewQueryVariables
+  >(AnalyticOverviewDocument, options);
+}
 export type AnalyticOverviewQueryHookResult = ReturnType<
   typeof useAnalyticOverviewQuery
 >;
 export type AnalyticOverviewLazyQueryHookResult = ReturnType<
   typeof useAnalyticOverviewLazyQuery
+>;
+export type AnalyticOverviewSuspenseQueryHookResult = ReturnType<
+  typeof useAnalyticOverviewSuspenseQuery
 >;
 export type AnalyticOverviewQueryResult = Apollo.QueryResult<
   AnalyticOverviewQuery,
@@ -289,11 +304,26 @@ export function useEngagementOverviewLazyQuery(
     EngagementOverviewQueryVariables
   >(EngagementOverviewDocument, options);
 }
+export function useEngagementOverviewSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<
+    EngagementOverviewQuery,
+    EngagementOverviewQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<
+    EngagementOverviewQuery,
+    EngagementOverviewQueryVariables
+  >(EngagementOverviewDocument, options);
+}
 export type EngagementOverviewQueryHookResult = ReturnType<
   typeof useEngagementOverviewQuery
 >;
 export type EngagementOverviewLazyQueryHookResult = ReturnType<
   typeof useEngagementOverviewLazyQuery
+>;
+export type EngagementOverviewSuspenseQueryHookResult = ReturnType<
+  typeof useEngagementOverviewSuspenseQuery
 >;
 export type EngagementOverviewQueryResult = Apollo.QueryResult<
   EngagementOverviewQuery,
