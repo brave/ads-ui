@@ -17,7 +17,7 @@ export function useSubmitCreative(props: { id: string }) {
   const refetchQueries = [
     refetchAdvertiserCreativesQuery({ advertiserId: advertiser.id }),
   ];
-  const onCompleted = () => history.replace("/user/main/creatives");
+  const onCompleted = () => history.replace("/user/main/ads");
 
   const [createCreative, { error: createError, loading: createLoading }] =
     useCreateCreativeMutation({

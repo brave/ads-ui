@@ -57,8 +57,8 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
       disabled: !advertiser.selfServiceManageCampaign,
     },
     {
-      label: "Creatives",
-      href: "/user/main/creatives",
+      label: "Ads",
+      href: "/user/main/ads",
       icon: (
         <LightbulbOutlinedIcon
           fontSize="large"

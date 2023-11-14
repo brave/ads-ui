@@ -24,7 +24,7 @@ export function Navbar() {
       component: <UploadImage />,
     },
     {
-      route: "user/main/creatives",
+      route: "user/main/ads",
       component: <NewCreativeButton />,
     },
   ];
