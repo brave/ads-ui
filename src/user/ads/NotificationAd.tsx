@@ -19,7 +19,7 @@ export function NotificationAd(props: {
   }, []);
 
   return (
-    <CardContainer header="Notification creative">
+    <CardContainer header="Notification Ad">
       <FormikTextField name={withName("name")} label="Name" />
 
       <Stack direction="row" alignItems="center" spacing={1}>

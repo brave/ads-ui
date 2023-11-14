@@ -114,7 +114,7 @@ export function User() {
               />
 
               <ProtectedRoute
-                path="/user/main/creatives"
+                path="/user/main/ads"
                 authedComponent={CreativeList}
               />
 
