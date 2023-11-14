@@ -118,6 +118,8 @@ export function User() {
                 authedComponent={CreativeList}
               />
 
+              <Redirect from="/user/main/creatives" to="/user/main/ads" exact />
+
               {/* default */}
               <Redirect to="/user/main/campaign" />
             </Switch>
