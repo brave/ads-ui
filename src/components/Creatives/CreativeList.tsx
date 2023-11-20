@@ -87,7 +87,7 @@ export function CreativeList() {
         />
       )}
       <CardContainer
-        header="Creatives"
+        header="Ads"
         sx={{
           flexGrow: 1,
           overflowX: "auto",

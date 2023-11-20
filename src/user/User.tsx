@@ -114,9 +114,11 @@ export function User() {
               />
 
               <ProtectedRoute
-                path="/user/main/creatives"
+                path="/user/main/ads"
                 authedComponent={CreativeList}
               />
+
+              <Redirect from="/user/main/creatives" to="/user/main/ads" exact />
 
               {/* default */}
               <Redirect to="/user/main/campaign" />

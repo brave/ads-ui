@@ -72,11 +72,26 @@ export function useValidateTargetUrlLazyQuery(
     ValidateTargetUrlQueryVariables
   >(ValidateTargetUrlDocument, options);
 }
+export function useValidateTargetUrlSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<
+    ValidateTargetUrlQuery,
+    ValidateTargetUrlQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<
+    ValidateTargetUrlQuery,
+    ValidateTargetUrlQueryVariables
+  >(ValidateTargetUrlDocument, options);
+}
 export type ValidateTargetUrlQueryHookResult = ReturnType<
   typeof useValidateTargetUrlQuery
 >;
 export type ValidateTargetUrlLazyQueryHookResult = ReturnType<
   typeof useValidateTargetUrlLazyQuery
+>;
+export type ValidateTargetUrlSuspenseQueryHookResult = ReturnType<
+  typeof useValidateTargetUrlSuspenseQuery
 >;
 export type ValidateTargetUrlQueryResult = Apollo.QueryResult<
   ValidateTargetUrlQuery,

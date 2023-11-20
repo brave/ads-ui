@@ -560,11 +560,26 @@ export function useLoadCampaignLazyQuery(
     options,
   );
 }
+export function useLoadCampaignSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<
+    LoadCampaignQuery,
+    LoadCampaignQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<LoadCampaignQuery, LoadCampaignQueryVariables>(
+    LoadCampaignDocument,
+    options,
+  );
+}
 export type LoadCampaignQueryHookResult = ReturnType<
   typeof useLoadCampaignQuery
 >;
 export type LoadCampaignLazyQueryHookResult = ReturnType<
   typeof useLoadCampaignLazyQuery
+>;
+export type LoadCampaignSuspenseQueryHookResult = ReturnType<
+  typeof useLoadCampaignSuspenseQuery
 >;
 export type LoadCampaignQueryResult = Apollo.QueryResult<
   LoadCampaignQuery,
@@ -624,11 +639,26 @@ export function useLoadCampaignAdsLazyQuery(
     LoadCampaignAdsQueryVariables
   >(LoadCampaignAdsDocument, options);
 }
+export function useLoadCampaignAdsSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<
+    LoadCampaignAdsQuery,
+    LoadCampaignAdsQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<
+    LoadCampaignAdsQuery,
+    LoadCampaignAdsQueryVariables
+  >(LoadCampaignAdsDocument, options);
+}
 export type LoadCampaignAdsQueryHookResult = ReturnType<
   typeof useLoadCampaignAdsQuery
 >;
 export type LoadCampaignAdsLazyQueryHookResult = ReturnType<
   typeof useLoadCampaignAdsLazyQuery
+>;
+export type LoadCampaignAdsSuspenseQueryHookResult = ReturnType<
+  typeof useLoadCampaignAdsSuspenseQuery
 >;
 export type LoadCampaignAdsQueryResult = Apollo.QueryResult<
   LoadCampaignAdsQuery,
