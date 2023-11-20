@@ -201,7 +201,7 @@ describe("new form tests", () => {
     included: true,
     name: "Test",
     state: "draft",
-    type: { code: "test" },
+    type: { code: "notification_all_v1" },
   };
 
   const creative2: Creative = {
