@@ -53,7 +53,11 @@ export function transformNewForm(
       ...transformAdSet(a, form),
       conversions: transformConversion(a.conversions),
       ads: a.creatives
-        .filter((c) => c.included)
+        .filter(
+          (c) =>
+            c.included &&
+            isCreativeTypeApplicableToCampaignFormat(c.type, form.format),
+        )
         .map((ad) => ({ creativeId: ad.id })),
     })),
     paymentType: form.paymentType,
