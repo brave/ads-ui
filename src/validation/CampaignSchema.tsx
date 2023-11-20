@@ -13,14 +13,15 @@ import { startOfDay } from "date-fns";
 import { twoDaysOut } from "form/DateFieldHelpers";
 import { TrailingAsteriskRegex } from "validation/regex";
 import { CreativeSchema } from "validation/CreativeSchema";
-import { BillingType, CampaignFormat } from "graphql/types";
-import { AdvertiserPriceFragment } from "graphql/advertiser.generated";
+import { CampaignFormat } from "graphql/types";
 import BigNumber from "bignumber.js";
+import { AdvertiserPrice } from "user/hooks/useAdvertiserWithPrices";
+import { Billing } from "user/views/adsManager/types";
 
 export const MIN_PER_DAY = 33;
 export const MIN_PER_CAMPAIGN = 100;
 
-export const CampaignSchema = (prices: AdvertiserPriceFragment[]) =>
+export const CampaignSchema = (prices: AdvertiserPrice[]) =>
   object().shape({
     name: string().label("Campaign Name").required(),
     format: string()
@@ -81,7 +82,7 @@ export const CampaignSchema = (prices: AdvertiserPriceFragment[]) =>
           findPrice(
             prices,
             CampaignFormat.PushNotification,
-            BillingType.Cpc,
+            "cpc",
             "0.1",
             schema,
           ),
@@ -93,7 +94,7 @@ export const CampaignSchema = (prices: AdvertiserPriceFragment[]) =>
           findPrice(
             prices,
             CampaignFormat.PushNotification,
-            BillingType.Cpm,
+            "cpm",
             "6",
             schema,
           ),
@@ -102,13 +103,7 @@ export const CampaignSchema = (prices: AdvertiserPriceFragment[]) =>
         is: (b: string, f: CampaignFormat) =>
           b === "cpm" && f === CampaignFormat.NewsDisplayAd,
         then: (schema) =>
-          findPrice(
-            prices,
-            CampaignFormat.NewsDisplayAd,
-            BillingType.Cpm,
-            "10",
-            schema,
-          ),
+          findPrice(prices, CampaignFormat.NewsDisplayAd, "cpm", "10", schema),
       })
       .required("Price is a required field"),
     billingType: string()
@@ -176,9 +171,9 @@ export const CampaignSchema = (prices: AdvertiserPriceFragment[]) =>
   });
 
 export function findPrice(
-  prices: AdvertiserPriceFragment[],
+  prices: AdvertiserPrice[],
   format: CampaignFormat,
-  billingType: BillingType,
+  billingType: Billing,
   defaultPrice: string,
   schema: StringSchema<string | undefined, AnyObject, undefined, "">,
 ) {

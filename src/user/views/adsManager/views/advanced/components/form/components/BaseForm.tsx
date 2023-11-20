@@ -10,11 +10,11 @@ import { Route, Switch, useRouteMatch } from "react-router-dom";
 import { BudgetSettings } from "user/views/adsManager/views/advanced/components/campaign/BudgetSettings";
 import { FormContext } from "state/context";
 import { useState } from "react";
-import { AdvertiserPriceFragment } from "graphql/advertiser.generated";
+import { AdvertiserPrice } from "user/hooks/useAdvertiserWithPrices";
 
 interface Props {
   hasPaymentIntent?: boolean | null;
-  prices: AdvertiserPriceFragment[];
+  prices: AdvertiserPrice[];
 }
 
 export function BaseForm({ hasPaymentIntent, prices }: Props) {

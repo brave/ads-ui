@@ -1,24 +1,20 @@
 import { parseISO } from "date-fns";
 import { produce } from "immer";
-import {
-  BillingType,
-  CampaignFormat,
-  CampaignPacingStrategies,
-} from "graphql/types";
+import { CampaignFormat, CampaignPacingStrategies } from "graphql/types";
 import { CampaignSchema } from "./CampaignSchema";
-import { AdvertiserPriceFragment } from "graphql/advertiser.generated";
 import { describe } from "vitest";
+import { AdvertiserPrice } from "user/hooks/useAdvertiserWithPrices";
 
-const prices: Omit<AdvertiserPriceFragment, "isDefault">[] = [
+const prices: AdvertiserPrice[] = [
   {
     format: CampaignFormat.PushNotification,
     billingModelPrice: "6",
-    billingType: BillingType.Cpm,
+    billingType: "cpm",
   },
   {
     format: CampaignFormat.PushNotification,
     billingModelPrice: ".15",
-    billingType: BillingType.Cpc,
+    billingType: "cpc",
   },
 ];
 

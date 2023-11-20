@@ -15,7 +15,9 @@ export function uiLabelsForBillingType(
   if (!billingType) {
     return { value: "N/A", shortLabel: "N/A", longLabel: "Unknown" };
   }
-  const entry = BILLING_TYPES.find((bt) => bt.value === billingType);
+  const entry = BILLING_TYPES.find(
+    (bt) => bt.value === billingType || bt.shortLabel === billingType,
+  );
   return (
     entry ?? {
       value: billingType,

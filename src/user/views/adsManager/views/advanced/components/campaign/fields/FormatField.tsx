@@ -5,11 +5,11 @@ import { CampaignFormat } from "graphql/types";
 import _ from "lodash";
 import { useIsEdit } from "form/FormikHelpers";
 import { Billing } from "user/views/adsManager/types";
-import { AdvertiserPriceFragment } from "graphql/advertiser.generated";
 import { FormatHelp } from "components/Button/FormatHelp";
+import { AdvertiserPrice } from "user/hooks/useAdvertiserWithPrices";
 
 interface PriceProps {
-  prices: AdvertiserPriceFragment[];
+  prices: AdvertiserPrice[];
 }
 
 export function FormatField({ prices }: PriceProps) {
