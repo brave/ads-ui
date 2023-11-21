@@ -27,9 +27,9 @@ export function BillingModelSelect(props: { prices: AdvertiserPrice[] }) {
               key={`billing_model_${p.format}_${p.billingType}`}
               disabled={isEdit}
               selected={bMeta.value === p.billingType}
-              onClick={() => {
-                price.setValue(p.billingModelPrice);
-                billing.setValue(p.billingType);
+              onClick={async () => {
+                await price.setValue(p.billingModelPrice, true);
+                await billing.setValue(p.billingType, true);
               }}
               sx={{
                 p: 2,

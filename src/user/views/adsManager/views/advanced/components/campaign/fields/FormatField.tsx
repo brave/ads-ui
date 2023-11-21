@@ -46,10 +46,10 @@ const FormatItemButton = (props: { format: CampaignFormat } & PriceProps) => {
     <ListItemButton
       disabled={isEdit}
       selected={meta.value === props.format}
-      onClick={() => {
-        format.setValue(props.format);
-        price.setValue(formatPrices[0].billingModelPrice);
-        billing.setValue(formatPrices[0].billingType);
+      onClick={async () => {
+        await format.setValue(props.format);
+        await price.setValue(formatPrices[0].billingModelPrice);
+        await billing.setValue(formatPrices[0].billingType);
       }}
       sx={{
         p: 2,
