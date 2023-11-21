@@ -182,9 +182,9 @@ describe("pricing logic (write)", () => {
     expect(result).toEqual("9");
   });
 
-  it("should not convert CPV to per-impression values when populating a CPV creative", () => {
+  it("should not convert CPSV to per-impression values when populating a CPSV creative", () => {
     const result = transformPrice({
-      billingType: "cpv",
+      billingType: "cpsv",
       price: "9",
     });
 

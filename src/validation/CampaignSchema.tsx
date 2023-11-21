@@ -17,6 +17,7 @@ import { CampaignFormat } from "graphql/types";
 import BigNumber from "bignumber.js";
 import { AdvertiserPrice } from "user/hooks/useAdvertiserWithPrices";
 import { Billing } from "user/views/adsManager/types";
+import { uiLabelsForCampaignFormat } from "util/campaign";
 
 export const MIN_PER_DAY = 33;
 export const MIN_PER_CAMPAIGN = 100;
@@ -76,39 +77,18 @@ export const CampaignSchema = (prices: AdvertiserPrice[]) =>
       .default([]),
     price: string()
       .label("Price")
-      .when("billingType", {
-        is: (b: string) => b === "cpc",
-        then: (schema) =>
-          findPrice(
-            prices,
-            CampaignFormat.PushNotification,
-            "cpc",
-            "0.1",
-            schema,
-          ),
-      })
-      .when(["billingType", "format"], {
-        is: (b: string, f: CampaignFormat) =>
-          b === "cpm" && f === CampaignFormat.PushNotification,
-        then: (schema) =>
-          findPrice(
-            prices,
-            CampaignFormat.PushNotification,
-            "cpm",
-            "6",
-            schema,
-          ),
-      })
-      .when(["billingType", "format"], {
-        is: (b: string, f: CampaignFormat) =>
-          b === "cpm" && f === CampaignFormat.NewsDisplayAd,
-        then: (schema) =>
-          findPrice(prices, CampaignFormat.NewsDisplayAd, "cpm", "10", schema),
+      .when(["billingType", "format"], ([billingType, format], schema) => {
+        return validatePriceByBillingTypeAndFormat(
+          prices,
+          format,
+          billingType,
+          schema,
+        );
       })
       .required("Price is a required field"),
     billingType: string()
       .label("Pricing Type")
-      .oneOf(["cpm", "cpc"])
+      .oneOf(["cpm", "cpc", "cpsv"])
       .required("Pricing type is a required field"),
     adSets: array()
       .min(1)
@@ -170,17 +150,27 @@ export const CampaignSchema = (prices: AdvertiserPrice[]) =>
       ),
   });
 
-export function findPrice(
+export function validatePriceByBillingTypeAndFormat(
   prices: AdvertiserPrice[],
   format: CampaignFormat,
   billingType: Billing,
-  defaultPrice: string,
   schema: StringSchema<string | undefined, AnyObject, undefined, "">,
 ) {
   const found = prices.find(
     (p) => p.format === format && p.billingType === billingType,
   );
-  const price = BigNumber(found?.billingModelPrice ?? defaultPrice);
+
+  if (!found) {
+    return schema.test(
+      "is-defined",
+      `No ${billingType} pricing available for ${uiLabelsForCampaignFormat(
+        format,
+      )}, contact selfserve@brave.com for help`,
+      () => false,
+    );
+  }
+
+  const price = BigNumber(found.billingModelPrice);
   return schema.test(
     "is-lte-price",
     `${billingType} price must be ${price} or higher`,

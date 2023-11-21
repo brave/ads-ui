@@ -37,6 +37,7 @@ export function useAdvertiserWithPrices(params: Params = {}) {
         return;
       }
 
+      // TODO: no documentation externally on what CPSV means, want that before I remove this
       const mapped: AdvertiserPrice[] = prices
         .filter((p) => p.billingType !== BillingType.Cpsv)
         .map((p) => ({

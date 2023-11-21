@@ -3,7 +3,7 @@ import { defaultEndDate, defaultStartDate } from "form/DateFieldHelpers";
 import { MIN_PER_CAMPAIGN } from "validation/CampaignSchema";
 import { AdvertiserWithPrices } from "user/hooks/useAdvertiserWithPrices";
 
-export type Billing = "cpm" | "cpc" | "cpv";
+export type Billing = "cpm" | "cpc" | "cpsv";
 
 export type CampaignForm = {
   id?: string;
