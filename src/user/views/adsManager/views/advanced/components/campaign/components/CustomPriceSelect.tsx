@@ -13,8 +13,21 @@ export function CustomPriceSelect() {
   const [, format] = useField<CampaignFormat>("format");
 
   return (
-    <Stack direction="column" spacing={2} alignItems="flex-start">
+    <Stack direction="row" spacing={2} alignItems="center">
+      <FormikTextField
+        fullWidth={false}
+        name="price"
+        label="Price"
+        type="number"
+        growInput={false}
+        InputProps={{
+          startAdornment: <InputAdornment position="start">$</InputAdornment>,
+        }}
+        disabled={!isDraft}
+        margin="dense"
+      />
       <FormikRadioControl
+        label="Billing Type"
         name="billingType"
         options={[
           {
@@ -27,16 +40,6 @@ export function CustomPriceSelect() {
           },
         ]}
         disabled={!isDraft || format.value === CampaignFormat.NewsDisplayAd}
-      />
-      <FormikTextField
-        fullWidth={false}
-        name="price"
-        label="Price"
-        type="number"
-        InputProps={{
-          startAdornment: <InputAdornment position="start">$</InputAdornment>,
-        }}
-        disabled={!isDraft}
       />
     </Stack>
   );
