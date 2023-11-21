@@ -126,7 +126,7 @@ export const FormikRadioGroup = (
 
 interface FormikRadioControlProps {
   name: string;
-  options: Array<{ label: string; value: string | number | object }>;
+  options: Array<{ label: string; value: string | number }>;
   label?: string;
   helperText?: ReactNode;
   disabled?: boolean;

@@ -60,7 +60,7 @@ describe("pricing tests", () => {
 
     expect(() =>
       CampaignSchema(prices).validateSync(c),
-    ).toThrowErrorMatchingInlineSnapshot('"CPM price must be 6 or higher"');
+    ).toThrowErrorMatchingInlineSnapshot('"cpm price must be 6 or higher"');
   });
 
   it("should validate against default if none found", () => {
@@ -70,7 +70,7 @@ describe("pricing tests", () => {
 
     expect(() =>
       CampaignSchema(prices).validateSync(c),
-    ).toThrowErrorMatchingInlineSnapshot('"CPM price must be 10 or higher"');
+    ).toThrowErrorMatchingInlineSnapshot('"cpm price must be 10 or higher"');
   });
 
   it("should validate against default if none found", () => {
@@ -82,6 +82,6 @@ describe("pricing tests", () => {
 
     expect(() =>
       CampaignSchema(prices).validateSync(c),
-    ).toThrowErrorMatchingInlineSnapshot('"CPC price must be 0.15 or higher"');
+    ).toThrowErrorMatchingInlineSnapshot('"cpc price must be 0.15 or higher"');
   });
 });

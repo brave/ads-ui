@@ -39,7 +39,8 @@ const FormatItemButton = (props: { format: CampaignFormat } & PriceProps) => {
   const { isEdit } = useIsEdit();
   const [, meta, format] = useField<CampaignFormat>("format");
   const [, , price] = useField<string>("price");
-  const [, bMeta, billing] = useField<Billing>("billingType");
+  const [, , billing] = useField<Billing>("billingType");
+  const formatPrices = props.prices.filter((p) => p.format === props.format);
 
   return (
     <ListItemButton
@@ -47,18 +48,8 @@ const FormatItemButton = (props: { format: CampaignFormat } & PriceProps) => {
       selected={meta.value === props.format}
       onClick={() => {
         format.setValue(props.format);
-        const found = props.prices.find((p) => {
-          return (
-            p.format === props.format &&
-            p.billingType === bMeta.value.toUpperCase()
-          );
-        });
-        if (props.format === CampaignFormat.NewsDisplayAd) {
-          price.setValue(found?.billingModelPrice ?? "10");
-          billing.setValue("cpm");
-        } else {
-          price.setValue(found?.billingModelPrice ?? "6");
-        }
+        price.setValue(formatPrices[0].billingModelPrice);
+        billing.setValue(formatPrices[0].billingType);
       }}
       sx={{
         p: 2,

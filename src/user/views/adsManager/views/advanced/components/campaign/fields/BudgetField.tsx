@@ -1,25 +1,19 @@
 import { InputAdornment, Stack, Typography } from "@mui/material";
-import {
-  FormikRadioControl,
-  FormikTextField,
-  useIsEdit,
-} from "form/FormikHelpers";
+import { FormikTextField, useIsEdit } from "form/FormikHelpers";
 import { useEffect, useState } from "react";
 import { useField, useFormikContext } from "formik";
 import { CampaignForm } from "../../../../../types";
 import { differenceInHours } from "date-fns";
 import { MIN_PER_CAMPAIGN, MIN_PER_DAY } from "validation/CampaignSchema";
-import _ from "lodash";
 import { CardContainer } from "components/Card/CardContainer";
-import { uiLabelsForBillingType } from "util/billingType";
-import { uiTextForCampaignFormat } from "user/library";
-import { CampaignFormat } from "graphql/types";
 import { useAdvertiserWithPrices } from "user/hooks/useAdvertiserWithPrices";
+import { BillingModelSelect } from "../components/BillingModelSelect";
+import { CustomPriceSelect } from "../components/CustomPriceSelect";
 
 export function BudgetField() {
   const [, , dailyBudget] = useField<number>("dailyBudget");
   const { isDraft } = useIsEdit();
-  const { data, loading } = useAdvertiserWithPrices();
+  const { data } = useAdvertiserWithPrices();
   const { values, errors } = useFormikContext<CampaignForm>();
   const [minBudget, setMinBudget] = useState(MIN_PER_CAMPAIGN);
   const campaignRuntime = Math.floor(
@@ -69,46 +63,11 @@ export function BudgetField() {
           disabled={!isDraft && !data.selfServiceSetPrice}
         />
 
-        <Stack direction="column" spacing={2} alignItems="flex-start">
-          <FormikRadioControl
-            label="Billing Type"
-            name="billingModel"
-            options={data.prices
-              .filter((p) => p.format === values.format)
-              .map((p) => ({
-                label: uiLabelsForBillingType(p.billingType).longLabel,
-                value: { price: p.billingModelPrice, type: p.billingType },
-              }))}
-            disabled={
-              loading ||
-              !isDraft ||
-              values.format === CampaignFormat.NewsDisplayAd
-            }
-          />
-          {!data.selfServiceSetPrice ? (
-            <Typography variant="body2">
-              {uiTextForCampaignFormat(values.format)} campaigns are priced at a
-              flat rate of{" "}
-              <strong>
-                ${values.price} {_.upperCase(values.type)}
-              </strong>
-              .
-            </Typography>
-          ) : (
-            <FormikTextField
-              fullWidth={false}
-              name="price"
-              label="Price"
-              type="number"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">$</InputAdornment>
-                ),
-              }}
-              disabled={!isDraft}
-            />
-          )}
-        </Stack>
+        {!data.selfServiceSetPrice && (
+          <BillingModelSelect prices={data.prices} />
+        )}
+
+        {data.selfServiceSetPrice && <CustomPriceSelect />}
       </Stack>
     </CardContainer>
   );

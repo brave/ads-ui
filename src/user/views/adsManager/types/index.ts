@@ -29,11 +29,6 @@ export type CampaignForm = {
   paymentType: PaymentType;
 };
 
-export type BillingModel = {
-  type: Billing;
-  price: string;
-};
-
 export type GeoTarget = {
   code: string;
   name: string;
