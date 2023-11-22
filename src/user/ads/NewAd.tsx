@@ -35,10 +35,7 @@ export function NewAd() {
     <>
       <CardContainer header="New Ads">
         <CreativeSpecificPreview options={creatives}>
-          <BoxContainer
-            header={meta.value ? "Discard Ad" : "Create New Ad"}
-            useTypography
-          >
+          <BoxContainer header={meta.value ? "Discard Ad" : "Create New Ad"}>
             <Box
               component={Button}
               height={

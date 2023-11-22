@@ -18,7 +18,6 @@ import CampaignOutlinedIcon from "@mui/icons-material/CampaignOutlined";
 import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlined";
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 import HeadsetMicOutlinedIcon from "@mui/icons-material/HeadsetMicOutlined";
-import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
 import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined";
 import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
@@ -44,17 +43,6 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
           sx={{ color: "text.secondary" }}
         />
       ),
-    },
-    {
-      label: "Images",
-      href: "/user/main/assets",
-      icon: (
-        <InsertPhotoOutlinedIcon
-          fontSize="large"
-          sx={{ color: "text.secondary" }}
-        />
-      ),
-      disabled: !advertiser.selfServiceManageCampaign,
     },
     {
       label: "Ads",

@@ -20,10 +20,10 @@ export function CardContainer(
           alignItems="center"
           mb={1}
         >
-          {props.header && props.useTypography && (
+          {props.header && props.useTypography !== false && (
             <Typography variant="h2">{props.header}</Typography>
           )}
-          {!props.useTypography && <>{props.header}</>}
+          {props.useTypography === false && <>{props.header}</>}
           {props.additionalAction && <Box>{props.additionalAction}</Box>}
         </Stack>
       )}
