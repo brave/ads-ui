@@ -1,25 +1,19 @@
 import { InputAdornment, Stack, Typography } from "@mui/material";
-import {
-  FormikRadioControl,
-  FormikTextField,
-  useIsEdit,
-} from "form/FormikHelpers";
+import { FormikTextField, useIsEdit } from "form/FormikHelpers";
 import { useEffect, useState } from "react";
 import { useField, useFormikContext } from "formik";
 import { CampaignForm } from "../../../../../types";
 import { differenceInHours } from "date-fns";
 import { MIN_PER_CAMPAIGN, MIN_PER_DAY } from "validation/CampaignSchema";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import _ from "lodash";
 import { CardContainer } from "components/Card/CardContainer";
-import { uiLabelsForBillingType } from "util/billingType";
-import { uiTextForCampaignFormat } from "user/library";
-import { CampaignFormat } from "graphql/types";
+import { useAdvertiserWithPrices } from "user/hooks/useAdvertiserWithPrices";
+import { BillingModelSelect } from "../components/BillingModelSelect";
+import { CustomPriceSelect } from "../components/CustomPriceSelect";
 
 export function BudgetField() {
   const [, , dailyBudget] = useField<number>("dailyBudget");
   const { isDraft } = useIsEdit();
-  const { advertiser } = useAdvertiser();
+  const { data } = useAdvertiserWithPrices();
   const { values, errors } = useFormikContext<CampaignForm>();
   const [minBudget, setMinBudget] = useState(MIN_PER_CAMPAIGN);
   const campaignRuntime = Math.floor(
@@ -66,51 +60,14 @@ export function BudgetField() {
               : undefined
           }
           error={!!errors.budget || !!errors.dailyBudget}
-          disabled={!isDraft && !advertiser.selfServiceSetPrice}
+          disabled={!isDraft && !data.selfServiceSetPrice}
         />
 
-        {!advertiser.selfServiceSetPrice ? (
-          <Typography variant="body2">
-            {uiTextForCampaignFormat(values.format)} campaigns are priced at a
-            flat rate of{" "}
-            <strong>
-              ${values.price} {_.upperCase(values.billingType)}
-            </strong>
-            .
-          </Typography>
-        ) : (
-          <Stack direction="column" spacing={2} alignItems="flex-start">
-            <FormikTextField
-              fullWidth={false}
-              name="price"
-              label="Price"
-              type="number"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">$</InputAdornment>
-                ),
-              }}
-              disabled={!isDraft}
-            />
-
-            <FormikRadioControl
-              name="billingType"
-              options={[
-                {
-                  value: "cpm",
-                  label: uiLabelsForBillingType("cpm").longLabel,
-                },
-                {
-                  value: "cpc",
-                  label: uiLabelsForBillingType("cpc").longLabel,
-                },
-              ]}
-              disabled={
-                !isDraft || values.format === CampaignFormat.NewsDisplayAd
-              }
-            />
-          </Stack>
+        {!data.selfServiceSetPrice && (
+          <BillingModelSelect prices={data.prices} />
         )}
+
+        {data.selfServiceSetPrice && <CustomPriceSelect />}
       </Stack>
     </CardContainer>
   );

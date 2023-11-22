@@ -5,11 +5,11 @@ import { CampaignFormat } from "graphql/types";
 import _ from "lodash";
 import { useIsEdit } from "form/FormikHelpers";
 import { Billing } from "user/views/adsManager/types";
-import { AdvertiserPriceFragment } from "graphql/advertiser.generated";
 import { FormatHelp } from "components/Button/FormatHelp";
+import { AdvertiserPrice } from "user/hooks/useAdvertiserWithPrices";
 
 interface PriceProps {
-  prices: AdvertiserPriceFragment[];
+  prices: AdvertiserPrice[];
 }
 
 export function FormatField({ prices }: PriceProps) {
@@ -39,26 +39,17 @@ const FormatItemButton = (props: { format: CampaignFormat } & PriceProps) => {
   const { isEdit } = useIsEdit();
   const [, meta, format] = useField<CampaignFormat>("format");
   const [, , price] = useField<string>("price");
-  const [, bMeta, billing] = useField<Billing>("billingType");
+  const [, , billing] = useField<Billing>("billingType");
+  const formatPrices = props.prices.filter((p) => p.format === props.format);
 
   return (
     <ListItemButton
       disabled={isEdit}
       selected={meta.value === props.format}
-      onClick={() => {
-        format.setValue(props.format);
-        const found = props.prices.find((p) => {
-          return (
-            p.format === props.format &&
-            p.billingType === bMeta.value.toUpperCase()
-          );
-        });
-        if (props.format === CampaignFormat.NewsDisplayAd) {
-          price.setValue(found?.billingModelPrice ?? "10");
-          billing.setValue("cpm");
-        } else {
-          price.setValue(found?.billingModelPrice ?? "6");
-        }
+      onClick={async () => {
+        await format.setValue(props.format);
+        await price.setValue(formatPrices[0].billingModelPrice);
+        await billing.setValue(formatPrices[0].billingType);
       }}
       sx={{
         p: 2,

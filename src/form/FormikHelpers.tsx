@@ -29,6 +29,7 @@ type FormikTextFieldProps = TextFieldProps & {
   type?: HTMLInputTypeAttribute;
   disabled?: boolean;
   useTopLabel?: boolean;
+  growInput?: boolean;
 };
 
 export const FormikTextField = (props: FormikTextFieldProps) => {
@@ -45,7 +46,7 @@ export const FormikTextField = (props: FormikTextFieldProps) => {
 
   const extraOmit = props.useTopLabel ? ["label"] : [];
   return (
-    <Box flexGrow={1}>
+    <Box flexGrow={props.growInput !== false ? 1 : 0}>
       {props.useTopLabel && (
         <FormLabel sx={{ color: "text.primary" }}> {props.label} </FormLabel>
       )}
@@ -144,9 +145,9 @@ export const FormikRadioControl = (props: FormikRadioControlProps) => {
         {props.label}
       </FormLabel>
       <FormikRadioGroup row name={props.name} onChange={props.onChange}>
-        {props.options.map((opt) => (
+        {props.options.map((opt, idx) => (
           <FormControlLabel
-            key={opt.value}
+            key={`${props.name}_radio_${idx}`}
             value={opt.value}
             label={opt.label}
             control={<Radio />}
