@@ -20,17 +20,22 @@ export function LandingPageAppBar() {
   const match = useRouteMatch();
   const isAuthenticated = useIsAuthenticated();
   const isMobile = useIsMobile();
+  const isContact = match.url.includes("contact");
+
+  const GetStarted = () => (
+    <RouterLink to={"/register"} style={{ textDecoration: "none" }}>
+      <Typography
+        variant="subtitle1"
+        color={isContact ? "primary" : "text.primary"}
+      >
+        {isContact ? "Register for Self-service" : "Get started"}
+      </Typography>
+    </RouterLink>
+  );
 
   const links = [
     {
-      component:
-        isMobile || isAuthenticated ? null : (
-          <RouterLink to={"/register"} style={{ textDecoration: "none" }}>
-            <Typography variant="subtitle1" color="text.primary">
-              Get started
-            </Typography>
-          </RouterLink>
-        ),
+      component: isMobile || isAuthenticated ? null : <GetStarted />,
     },
     {
       component: (

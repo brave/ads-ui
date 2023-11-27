@@ -6,6 +6,7 @@ interface Props {
   steps: number;
   onNext: () => void;
   onBack: () => void;
+  disabled?: boolean;
   final: ReactNode;
 }
 
@@ -15,6 +16,7 @@ export function NextAndBack({
   onNext,
   onBack,
   final,
+  disabled,
 }: Props) {
   return (
     <Stack direction="row" mt={3} spacing={2} justifyContent="right">
@@ -34,6 +36,7 @@ export function NextAndBack({
         <Button
           size="large"
           variant="contained"
+          disabled={disabled}
           onClick={(e) => {
             e.preventDefault();
             onNext();

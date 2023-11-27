@@ -14,8 +14,11 @@ import { Background } from "components/Background/Background";
 import { LandingPageAppBar } from "components/AppBar/LandingPageAppBar";
 import { PaddedCardContainer } from "components/Card/PaddedCardContainer";
 import { PersistRegistrationValues } from "form/PersistRegistrationValues";
+import { AccountChoice } from "auth/registration/AccountChoice";
+import { useHistory } from "react-router-dom";
 
 export function Register() {
+  const history = useHistory();
   const [activeStep, setActiveStep] = useState(0);
   const { register, hasRegistered, error } = useRegister();
 
@@ -28,6 +31,10 @@ export function Register() {
   }
 
   const steps = [
+    {
+      label: "Choose what kind of account to open",
+      component: <AccountChoice />,
+    },
     { label: "Your information", component: <NameField /> },
     { label: "Company information", component: <AddressField /> },
   ];
@@ -49,26 +56,39 @@ export function Register() {
           }}
           validationSchema={RegistrationSchema}
         >
-          <Form>
-            <PaddedCardContainer>
-              {steps[activeStep].component}
-            </PaddedCardContainer>
+          {({ values }) => (
+            <Form>
+              {activeStep === 0 ? (
+                steps[activeStep].component
+              ) : (
+                <PaddedCardContainer>
+                  {steps[activeStep].component}
+                </PaddedCardContainer>
+              )}
 
-            <NextAndBack
-              activeStep={activeStep}
-              steps={steps.length - 1}
-              onNext={() => setActiveStep(activeStep + 1)}
-              onBack={() => setActiveStep(activeStep - 1)}
-              final={
-                <FormikSubmitButton
-                  isCreate={true}
-                  label="Submit for approval"
-                />
-              }
-            />
+              <NextAndBack
+                activeStep={activeStep}
+                steps={steps.length - 1}
+                onNext={() => {
+                  if (values.setup === "managed") {
+                    history.replace("/contact");
+                  } else {
+                    setActiveStep(activeStep + 1);
+                  }
+                }}
+                onBack={() => setActiveStep(activeStep - 1)}
+                disabled={!values.setup}
+                final={
+                  <FormikSubmitButton
+                    isCreate={true}
+                    label="Submit for approval"
+                  />
+                }
+              />
 
-            <PersistRegistrationValues />
-          </Form>
+              <PersistRegistrationValues />
+            </Form>
+          )}
         </Formik>
       </Box>
     </Background>
