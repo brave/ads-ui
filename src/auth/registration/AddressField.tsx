@@ -65,7 +65,13 @@ export function AddressField() {
 
 function MarketingOptIn() {
   const PolicyLink = (props: { title: string; to: string }) => (
-    <Link href={props.to} underline="none" variant="inherit">
+    <Link
+      href={props.to}
+      underline="none"
+      variant="inherit"
+      rel="noreferrer"
+      target="_blank"
+    >
       {props.title}
     </Link>
   );
