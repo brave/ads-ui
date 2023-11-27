@@ -64,9 +64,6 @@ export function AddressField() {
 }
 
 function MarketingOptIn() {
-  // https://brave.com/advertiser-privacy/
-  // https://basicattentiontoken.org/advertiser-terms-of-service/
-  // Please see our Advertiser Privacy Policy and Terms of Service applicable to Brave Ads
   const PolicyLink = (props: { title: string; href: string }) => (
     <Link href={props.href} underline="none" variant="inherit">
       {props.title}
