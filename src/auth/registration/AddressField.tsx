@@ -64,8 +64,8 @@ export function AddressField() {
 }
 
 function MarketingOptIn() {
-  const PolicyLink = (props: { title: string; href: string }) => (
-    <Link href={props.href} underline="none" variant="inherit">
+  const PolicyLink = (props: { title: string; to: string }) => (
+    <Link href={props.to} underline="none" variant="inherit">
       {props.title}
     </Link>
   );
@@ -80,12 +80,12 @@ function MarketingOptIn() {
         Please see our{" "}
         <PolicyLink
           title="Advertiser Privacy Policy"
-          href="https://brave.com/advertiser-privacy/"
+          to="https://brave.com/advertiser-privacy/"
         />{" "}
         and{" "}
         <PolicyLink
           title="Terms of Service"
-          href="https://basicattentiontoken.org/advertiser-terms-of-service/"
+          to="https://basicattentiontoken.org/advertiser-terms-of-service/"
         />{" "}
         applicable to Brave Ads
       </Typography>
