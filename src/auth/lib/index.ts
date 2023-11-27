@@ -141,3 +141,20 @@ export const authorize = async (req: {
 
   return await res.json();
 };
+
+export const sendMarketingEmail = async (req: {
+  email: string;
+  name: string;
+}) => {
+  const response = await fetch(
+    "https://brave-software.ghost.io/members/api/send-magic-link/",
+    {
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(req),
+    },
+  );
+
+  return await response.json();
+};

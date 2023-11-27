@@ -6,6 +6,7 @@ import {
 } from "react";
 import {
   Box,
+  Checkbox,
   FormControl,
   FormControlLabel,
   FormHelperText,
@@ -161,6 +162,31 @@ export const FormikRadioControl = (props: FormikRadioControlProps) => {
     </FormControl>
   );
 };
+
+interface FormikCheckboxProps {
+  name: string;
+  label: string;
+  disabled?: boolean;
+  helperText?: string;
+}
+
+export function FormikCheckbox(props: FormikCheckboxProps) {
+  const [field] = useField({ type: "checkbox", name: props.name });
+  return (
+    <>
+      <FormControlLabel
+        control={<Checkbox {...field} />}
+        label={props.label}
+        componentsProps={{ typography: { variant: "body2" } }}
+        disabled={props.disabled}
+      />
+      {props.helperText && <FormHelperText>{props.helperText}</FormHelperText>}
+      <ErrorMessage name={field.name}>
+        {(msg: any) => <FormHelperText error>{msg}</FormHelperText>}
+      </ErrorMessage>
+    </>
+  );
+}
 
 export function useIsEdit() {
   const { values } = useFormikContext<CampaignForm>();

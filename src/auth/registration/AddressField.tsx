@@ -1,5 +1,5 @@
-import { Box, Stack, Typography } from "@mui/material";
-import { FormikTextField } from "form/FormikHelpers";
+import { Box, Link, Stack, Typography } from "@mui/material";
+import { FormikCheckbox, FormikTextField } from "form/FormikHelpers";
 import { CountryPicker } from "components/Country/CountryPicker";
 import { MarginedDivider } from "auth/registration/MarginedDivider";
 
@@ -57,6 +57,41 @@ export function AddressField() {
           useTopLabel
         />
       </Stack>
+
+      <MarketingOptIn />
     </Box>
+  );
+}
+
+function MarketingOptIn() {
+  // https://brave.com/advertiser-privacy/
+  // https://basicattentiontoken.org/advertiser-terms-of-service/
+  // Please see our Advertiser Privacy Policy and Terms of Service applicable to Brave Ads
+  const PolicyLink = (props: { title: string; href: string }) => (
+    <Link href={props.href} underline="none" variant="inherit">
+      {props.title}
+    </Link>
+  );
+
+  return (
+    <Stack mt={1}>
+      <FormikCheckbox
+        name="marketingOptIn"
+        label="I would like to receive marketing emails about new features and promotions from Brave Ads"
+      />
+      <Typography variant="body2">
+        Please see our{" "}
+        <PolicyLink
+          title="Advertiser Privacy Policy"
+          href="https://brave.com/advertiser-privacy/"
+        />{" "}
+        and{" "}
+        <PolicyLink
+          title="Terms of Service"
+          href="https://basicattentiontoken.org/advertiser-terms-of-service/"
+        />{" "}
+        applicable to Brave Ads
+      </Typography>
+    </Stack>
   );
 }
