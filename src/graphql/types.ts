@@ -27,6 +27,8 @@ export type Scalars = {
   Float: { input: number; output: number };
   /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
   DateTime: { input: any; output: any };
+  /** The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
+  JSONObject: { input: any; output: any };
   /** The `Numeric` datatype represents a fixed-precision number, which does not suffer from the rounding errors of a javascript floating point number. It's always returned as a string, but for input types either a string or number can be used, though strings are preferred to avoid risk of inaccuracy. */
   Numeric: { input: string; output: string };
 };
@@ -58,7 +60,7 @@ export type ApproveCampaignInput = {
 export enum BillingType {
   Cpc = "CPC",
   Cpm = "CPM",
-  Cpv = "CPV",
+  Cpsv = "CPSV",
 }
 
 export type CampaignFilter = {
@@ -143,13 +145,12 @@ export type CreateAdSetInput = {
   bannedKeywords?: InputMaybe<Array<Scalars["String"]["input"]>>;
   billingType: Scalars["String"]["input"];
   campaignId?: InputMaybe<Scalars["String"]["input"]>;
-  channels?: InputMaybe<Array<CreateChannelInput>>;
   conversions?: InputMaybe<Array<CreateConversionInput>>;
-  execution?: InputMaybe<Scalars["String"]["input"]>;
   keywordSimilarity?: InputMaybe<Scalars["Float"]["input"]>;
   keywords?: InputMaybe<Array<Scalars["String"]["input"]>>;
   name?: InputMaybe<Scalars["String"]["input"]>;
   negativeKeywords?: InputMaybe<Array<Scalars["String"]["input"]>>;
+  negativeTriggerUrls?: InputMaybe<Array<Scalars["String"]["input"]>>;
   oses?: InputMaybe<Array<CreateOsInput>>;
   perDay: Scalars["Float"]["input"];
   /** The price in the owning campaign's currency for each single confirmation of the priceType specified. Note therefore that the caller is responsible for dividing cost-per-mille by 1000. */
@@ -159,6 +160,7 @@ export type CreateAdSetInput = {
   state?: InputMaybe<Scalars["String"]["input"]>;
   targetingTerms?: InputMaybe<Array<Scalars["String"]["input"]>>;
   totalMax: Scalars["Float"]["input"];
+  triggerUrls?: InputMaybe<Array<Scalars["String"]["input"]>>;
 };
 
 export type CreateAddressInput = {
@@ -215,10 +217,6 @@ export type CreateCampaignInput = {
   state: Scalars["String"]["input"];
   type: Scalars["String"]["input"];
   userId?: InputMaybe<Scalars["String"]["input"]>;
-};
-
-export type CreateChannelInput = {
-  channelId: Scalars["String"]["input"];
 };
 
 export type CreateCommentInput = {
@@ -407,6 +405,10 @@ export type SearchHomepagePayloadInput = {
 
 export type SearchPayloadInput = {
   body: Scalars["String"]["input"];
+  /** ad-hoc parameters passed to search */
+  meta?: InputMaybe<Scalars["JSONObject"]["input"]>;
+  /** optionally, how this creative should be rendered with the SERP */
+  style?: InputMaybe<Scalars["String"]["input"]>;
   targetUrl: Scalars["String"]["input"];
   title: Scalars["String"]["input"];
 };
@@ -424,14 +426,13 @@ export type UpdateAdSetInput = {
   bannedKeywords?: InputMaybe<Array<Scalars["String"]["input"]>>;
   billingType?: InputMaybe<Scalars["String"]["input"]>;
   campaignId?: InputMaybe<Scalars["String"]["input"]>;
-  channels?: InputMaybe<Array<CreateChannelInput>>;
   conversions?: InputMaybe<Array<UpdateConversionsInput>>;
-  execution?: InputMaybe<Scalars["String"]["input"]>;
   id?: InputMaybe<Scalars["String"]["input"]>;
   keywordSimilarity?: InputMaybe<Scalars["Float"]["input"]>;
   keywords?: InputMaybe<Array<Scalars["String"]["input"]>>;
   name?: InputMaybe<Scalars["String"]["input"]>;
   negativeKeywords?: InputMaybe<Array<Scalars["String"]["input"]>>;
+  negativeTriggerUrls?: InputMaybe<Array<Scalars["String"]["input"]>>;
   optimized?: InputMaybe<Scalars["Boolean"]["input"]>;
   oses?: InputMaybe<Array<UpdateOSesInput>>;
   perDay?: InputMaybe<Scalars["Float"]["input"]>;
@@ -442,6 +443,7 @@ export type UpdateAdSetInput = {
   state?: InputMaybe<Scalars["String"]["input"]>;
   targetingTerms?: InputMaybe<Array<Scalars["String"]["input"]>>;
   totalMax?: InputMaybe<Scalars["Float"]["input"]>;
+  triggerUrls?: InputMaybe<Array<Scalars["String"]["input"]>>;
 };
 
 export type UpdateAddressInput = {

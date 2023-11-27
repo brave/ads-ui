@@ -5,7 +5,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import basicSsl from "@vitejs/plugin-basic-ssl";
 
 // https://vitejs.dev/config/
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
 
   return {
@@ -20,7 +20,7 @@ export default defineConfig(({ command, mode }) => {
     // create-react-app, which this project originally used
     envPrefix: "REACT_APP_",
     server: {
-      port: 3000,
+      port: 3001,
       proxy: {
         "/v1": {
           target: `${env.BACKEND_URL}`,
@@ -35,7 +35,6 @@ export default defineConfig(({ command, mode }) => {
           changeOrigin: true,
         },
       },
-      https: true,
     },
     build: {
       outDir: "build",

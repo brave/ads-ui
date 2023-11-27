@@ -1,24 +1,35 @@
 import { parseISO } from "date-fns";
 import { produce } from "immer";
-import {
-  BillingType,
-  CampaignFormat,
-  CampaignPacingStrategies,
-} from "graphql/types";
+import { CampaignFormat, CampaignPacingStrategies } from "graphql/types";
 import { CampaignSchema } from "./CampaignSchema";
-import { AdvertiserPriceFragment } from "graphql/advertiser.generated";
 import { describe } from "vitest";
+import { AdvertiserPrice } from "user/hooks/useAdvertiserWithPrices";
 
-const prices: Omit<AdvertiserPriceFragment, "isDefault">[] = [
+const prices: AdvertiserPrice[] = [
   {
     format: CampaignFormat.PushNotification,
     billingModelPrice: "6",
-    billingType: BillingType.Cpm,
+    billingType: "cpm",
   },
   {
     format: CampaignFormat.PushNotification,
-    billingModelPrice: ".15",
-    billingType: BillingType.Cpc,
+    billingModelPrice: "0.15",
+    billingType: "cpc",
+  },
+  {
+    format: CampaignFormat.PushNotification,
+    billingModelPrice: "3",
+    billingType: "cpsv",
+  },
+  {
+    format: CampaignFormat.NewsDisplayAd,
+    billingModelPrice: "10",
+    billingType: "cpm",
+  },
+  {
+    format: CampaignFormat.NewsDisplayAd,
+    billingModelPrice: "3",
+    billingType: "cpsv",
   },
 ];
 
@@ -45,47 +56,74 @@ it("should pass on a valid object", () => {
 });
 
 it("should fail if the campaign start date is in past", () => {
-  const c = produce(validCampaign, (draft) => {
+  const nextState = produce(validCampaign, (draft) => {
     draft.startAt = parseISO("2020-07-18");
   });
 
   expect(() =>
-    CampaignSchema(prices).validateSync(c),
+    CampaignSchema(prices).validateSync(nextState),
   ).toThrowErrorMatchingInlineSnapshot(
     '"Start Date must be minimum of 2 days from today"',
   );
 });
 
 describe("pricing tests", () => {
-  it("should fail if the campaign price is less than allowed price", () => {
-    const c = produce(validCampaign, (draft) => {
-      draft.price = "5";
+  it.each([
+    { price: "6", format: CampaignFormat.PushNotification, billing: "cpm" },
+    { price: ".15", format: CampaignFormat.PushNotification, billing: "cpc" },
+    { price: "3", format: CampaignFormat.PushNotification, billing: "cpsv" },
+    { price: "10", format: CampaignFormat.NewsDisplayAd, billing: "cpm" },
+    { price: "3", format: CampaignFormat.NewsDisplayAd, billing: "cpsv" },
+  ])(
+    "success cases: $format with price $price and config $billing should pass",
+    async ({ price, format, billing }) => {
+      const nextState = produce(validCampaign, (draft) => {
+        draft.price = price;
+        draft.format = format;
+        draft.billingType = billing;
+      });
+
+      expect(() =>
+        CampaignSchema(prices).validateSync(nextState),
+      ).not.toThrowError();
+    },
+  );
+
+  it.each([
+    { price: "5", format: CampaignFormat.PushNotification, billing: "cpm" },
+    { price: ".10", format: CampaignFormat.PushNotification, billing: "cpc" },
+    { price: "2", format: CampaignFormat.PushNotification, billing: "cpsv" },
+    { price: "9", format: CampaignFormat.NewsDisplayAd, billing: "cpm" },
+    { price: "2", format: CampaignFormat.NewsDisplayAd, billing: "cpsv" },
+  ])(
+    "failure cases: $format with price $price and config $billing should fail",
+    async ({ price, format, billing }) => {
+      const nextState = produce(validCampaign, (draft) => {
+        draft.price = price;
+        draft.format = format;
+        draft.billingType = billing;
+      });
+
+      const priceFound = prices.find(
+        (p) => p.billingType === billing && p.format === format,
+      );
+      expect(() => CampaignSchema(prices).validateSync(nextState)).toThrowError(
+        `${billing} price must be ${priceFound?.billingModelPrice} or higher`,
+      );
+    },
+  );
+
+  it("should fail prices if none found in array", () => {
+    const nextState = produce(validCampaign, (draft) => {
+      draft.price = ".15";
+      draft.format = CampaignFormat.NewsDisplayAd;
+      draft.billingType = "cpc";
     });
 
     expect(() =>
-      CampaignSchema(prices).validateSync(c),
-    ).toThrowErrorMatchingInlineSnapshot('"CPM price must be 6 or higher"');
-  });
-
-  it("should validate against default if none found", () => {
-    const c = produce(validCampaign, (draft) => {
-      (draft.format = CampaignFormat.NewsDisplayAd), (draft.price = "9");
-    });
-
-    expect(() =>
-      CampaignSchema(prices).validateSync(c),
-    ).toThrowErrorMatchingInlineSnapshot('"CPM price must be 10 or higher"');
-  });
-
-  it("should validate against default if none found", () => {
-    const c = produce(validCampaign, (draft) => {
-      (draft.format = CampaignFormat.NewsDisplayAd),
-        (draft.billingType = "cpc");
-      draft.price = ".1";
-    });
-
-    expect(() =>
-      CampaignSchema(prices).validateSync(c),
-    ).toThrowErrorMatchingInlineSnapshot('"CPC price must be 0.15 or higher"');
+      CampaignSchema(prices).validateSync(nextState),
+    ).toThrowErrorMatchingInlineSnapshot(
+      '"No cpc pricing available for News Display, contact selfserve@brave.com for help"',
+    );
   });
 });

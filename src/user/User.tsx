@@ -1,4 +1,4 @@
-import { ComponentType, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import {
@@ -13,17 +13,16 @@ import { NewCampaign } from "./views/adsManager/views/advanced/components/form/N
 import { EditCampaign } from "./views/adsManager/views/advanced/components/form/EditCampaign";
 import { CompletionForm } from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
 import { AdvertiserAgreed } from "auth/components/AdvertiserAgreed";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { Navbar } from "components/Navigation/Navbar";
 import { CampaignView } from "user/views/user/CampaignView";
 import { CampaignReportView } from "user/views/user/CampaignReportView";
 import { Profile } from "user/views/user/Profile";
-import { IAdvertiser } from "auth/context/auth.interface";
 import moment from "moment";
 import { FilterContext } from "state/context";
 import { AdvertiserAssets } from "components/Assets/AdvertiserAssets";
 import { CreativeList } from "components/Creatives/CreativeList";
 import { CreativeForm } from "components/Creatives/CreativeForm";
+import { ProtectedRoute } from "components/Route/ProtectedRoute";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -99,7 +98,6 @@ export function User() {
               />
 
               <Route path="/user/main/settings" component={Settings} />
-
               <Route path="/user/main/profile" component={Profile} />
 
               <ProtectedRoute
@@ -109,7 +107,7 @@ export function User() {
               />
 
               <ProtectedRoute
-                path="/user/main/assets"
+                path="/user/main/ads/assets"
                 authedComponent={AdvertiserAssets}
               />
 
@@ -119,6 +117,11 @@ export function User() {
               />
 
               <Redirect from="/user/main/creatives" to="/user/main/ads" exact />
+              <Redirect
+                from="/user/main/assets"
+                to="/user/main/ads/assets"
+                exact
+              />
 
               {/* default */}
               <Redirect to="/user/main/campaign" />
@@ -129,34 +132,3 @@ export function User() {
     </ApolloProvider>
   );
 }
-
-interface ProtectedProps {
-  authedComponent?: ComponentType;
-  unauthedComponent?: ComponentType;
-  path?: string;
-  validateAdvertiserProperty?: (a: IAdvertiser) => boolean;
-}
-
-const ProtectedRoute = ({
-  authedComponent,
-  unauthedComponent,
-  path,
-  validateAdvertiserProperty = () => true,
-}: ProtectedProps) => {
-  const { advertiser } = useAdvertiser();
-
-  if (!advertiser.agreed && unauthedComponent === undefined) {
-    return <Redirect to="/user/main" />;
-  }
-
-  if (!validateAdvertiserProperty(advertiser)) {
-    return <Redirect to="/user/main" />;
-  }
-
-  return (
-    <Route
-      path={path}
-      component={advertiser.agreed ? authedComponent : unauthedComponent}
-    />
-  );
-};

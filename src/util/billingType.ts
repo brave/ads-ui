@@ -5,9 +5,9 @@ interface BillingTypeLabels {
 }
 
 const BILLING_TYPES = [
-  { value: "cpm", shortLabel: "CPM", longLabel: "CPM (Views)" },
+  { value: "cpm", shortLabel: "CPM", longLabel: "CPM (Impressions)" },
   { value: "cpc", shortLabel: "CPC", longLabel: "CPC (Clicks)" },
-  { value: "cpv", shortLabel: "CPV", longLabel: "CPV (Visits)" },
+  { value: "cpsv", shortLabel: "CPSV", longLabel: "CPSV (Site Visits)" },
 ];
 export function uiLabelsForBillingType(
   billingType: string | undefined | null,
@@ -15,7 +15,9 @@ export function uiLabelsForBillingType(
   if (!billingType) {
     return { value: "N/A", shortLabel: "N/A", longLabel: "Unknown" };
   }
-  const entry = BILLING_TYPES.find((bt) => bt.value === billingType);
+  const entry = BILLING_TYPES.find(
+    (bt) => bt.value === billingType || bt.shortLabel === billingType,
+  );
   return (
     entry ?? {
       value: billingType,
