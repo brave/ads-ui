@@ -10,42 +10,48 @@ import MiniSideBar from "components/Drawer/MiniSideBar";
 import { ImagePreview } from "components/Assets/ImagePreview";
 import { CampaignFormat } from "graphql/types";
 import moment from "moment/moment";
+import { RouteSelectionButton } from "components/Route/RouteSelectionButton";
+import Box from "@mui/material/Box";
 
 export function AdvertiserAssets() {
   const { advertiser } = useAdvertiser();
   const { data, loading, error } = useAdvertiserImagesQuery({
     variables: { id: advertiser.id },
+    initialFetchPolicy: "cache-and-network",
+    nextFetchPolicy: "cache-only",
   });
-
-  if (loading) {
-    return (
-      <MiniSideBar>
-        <LinearProgress sx={{ mt: 1, flexGrow: 1 }} />
-      </MiniSideBar>
-    );
-  }
 
   return (
     <MiniSideBar>
-      {error && (
-        <ErrorDetail
-          error={error}
-          additionalDetails="Unable to retrieve images"
+      <Box display="flex" flexDirection="column" flexGrow={1}>
+        <RouteSelectionButton
+          routes={[
+            { label: "Ads", value: "ads" },
+            { label: "Images", value: "ads/assets" },
+          ]}
         />
-      )}
-      {!loading && !error && (
-        <Grid container spacing={2}>
-          {[...(data?.advertiser?.images ?? [])]
-            .sort(
-              (a, b) => moment(b.createdAt).date() - moment(a.createdAt).date(),
-            )
-            .map((i, idx) => (
-              <Grid item xs="auto" key={idx}>
-                <GalleryItem image={i} />
-              </Grid>
-            ))}
-        </Grid>
-      )}
+        {loading && <LinearProgress sx={{ mt: 1, flexGrow: 1 }} />}
+        {error && (
+          <ErrorDetail
+            error={error}
+            additionalDetails="Unable to retrieve images"
+          />
+        )}
+        {!loading && !error && (
+          <Grid container spacing={2}>
+            {[...(data?.advertiser?.images ?? [])]
+              .sort(
+                (a, b) =>
+                  moment(b.createdAt).date() - moment(a.createdAt).date(),
+              )
+              .map((i, idx) => (
+                <Grid item xs="auto" key={idx}>
+                  <GalleryItem image={i} />
+                </Grid>
+              ))}
+          </Grid>
+        )}
+      </Box>
     </MiniSideBar>
   );
 }

@@ -13,6 +13,7 @@ import { Link as RouterLink } from "react-router-dom";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { CreativeStatusSwitch } from "components/Creatives/CreativeStatusSwitch";
 import { CustomToolbar } from "components/Datagrid/CustomToolbar";
+import { RouteSelectionButton } from "components/Route/RouteSelectionButton";
 
 const ALLOWED_TYPES = ["notification_all_v1", "inline_content_all_v1"];
 export function CreativeList() {
@@ -87,11 +88,20 @@ export function CreativeList() {
         />
       )}
       <CardContainer
-        header="Ads"
+        header={
+          <RouteSelectionButton
+            routes={[
+              { label: "Ads", value: "ads" },
+              { label: "Images", value: "assets" },
+            ]}
+          />
+        }
+        useTypography={false}
         sx={{
           flexGrow: 1,
           overflowX: "auto",
           mr: 1,
+          mt: 0,
         }}
       >
         <Box>

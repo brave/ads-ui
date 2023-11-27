@@ -36,7 +36,6 @@ export function CampaignView() {
     <MiniSideBar>
       <CardContainer
         header="Campaigns"
-        useTypography
         sx={{
           flexGrow: 1,
           overflowX: "auto",

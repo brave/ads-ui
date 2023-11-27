@@ -20,7 +20,7 @@ export function Navbar() {
       component: <NewCampaignButton />,
     },
     {
-      route: "user/main/assets",
+      route: "user/main/ads/assets",
       component: <UploadImage />,
     },
     {
