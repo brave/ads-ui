@@ -17,6 +17,12 @@ import { PersistRegistrationValues } from "form/PersistRegistrationValues";
 import { AccountChoice } from "auth/registration/AccountChoice";
 import { useHistory } from "react-router-dom";
 
+type RegistrationStep = {
+  label: string;
+  subheader?: string;
+  component: any;
+};
+
 export function Register() {
   const history = useHistory();
   const [activeStep, setActiveStep] = useState(0);
@@ -30,9 +36,10 @@ export function Register() {
     );
   }
 
-  const steps = [
+  const steps: RegistrationStep[] = [
     {
       label: "Choose what kind of account to open",
+      subheader: "You can change this later",
       component: <AccountChoice />,
     },
     { label: "Your information", component: <NameField /> },
@@ -44,9 +51,23 @@ export function Register() {
       <LandingPageAppBar />
       <Toolbar sx={{ mb: { md: 1.5 }, mt: 1 }} />
       <Box display="flex" maxWidth="800px" flexDirection="column" mb={3}>
-        <Typography textAlign="center" variant="h4" sx={{ mb: 3 }}>
+        <Typography
+          textAlign="center"
+          variant="h4"
+          sx={{ mb: steps[activeStep].subheader ? 1 : 3 }}
+        >
           {steps[activeStep].label}
         </Typography>
+        {steps[activeStep].subheader && (
+          <Typography
+            textAlign="center"
+            variant="h6"
+            color="text.secondary"
+            sx={{ mb: 3 }}
+          >
+            {steps[activeStep].subheader}
+          </Typography>
+        )}
         <Formik
           initialValues={initialValues}
           onSubmit={async (v: RegistrationForm, { setSubmitting }) => {

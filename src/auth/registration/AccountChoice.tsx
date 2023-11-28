@@ -59,9 +59,10 @@ export function AccountChoice() {
       title: "Self-service",
       icon: <Pointer sx={{ height: "2em", width: "2em" }} />,
       description:
-        "Create and manage Notification and Newsfeed campaigns yourself.",
+        "Create and manage campaigns with self-directed setup in Brave Ads Manager.",
       points: [
-        "For small businesses and ad agencies",
+        "Access Notification and Newsfeed campaigns",
+        "For small & medium brands",
         "Start with as little as $500",
       ],
       value: "self",
@@ -70,10 +71,10 @@ export function AccountChoice() {
       title: "Managed service",
       icon: <Team sx={{ height: "2em", width: "2em" }} />,
       description:
-        "Be matched with a dedicated sales and accounts team to help manage your buys.",
+        "Work with our team to set up and execute campaigns on your behalf.",
       points: [
-        "For medium to large businesses and agencies",
-        "Access more placements not yet available in self-service",
+        "Access New Tab Takeovers and Search keyword ads",
+        "For enterprise brands & agencies",
         "Minimum $10,000 spend",
       ],
       value: "managed",
@@ -105,13 +106,13 @@ function AccountItemButton({
       sx={{
         backgroundColor: "background.default",
         height: 300,
-        width: 350,
+        width: 375,
         borderRadius: "16px",
       }}
       onClick={() => helper.setValue(value)}
       selected={meta.value === value}
     >
-      <Stack direction="column" spacing={2} alignSelf="baseline">
+      <Stack direction="column" spacing={2} alignSelf="baseline" p={2}>
         <Box display="flex" justifyContent="right" alignItems="center">
           {icon}
         </Box>
@@ -123,7 +124,7 @@ function AccountItemButton({
           {points.map((p, idx) => (
             <li
               key={`account_item_main_points_${idx}`}
-              style={{ fontSize: ".85rem" }}
+              style={{ fontSize: ".75rem" }}
             >
               {p}
             </li>
