@@ -2,6 +2,7 @@ import { Box, Link, Stack, Typography } from "@mui/material";
 import { FormikCheckbox, FormikTextField } from "form/FormikHelpers";
 import { CountryPicker } from "components/Country/CountryPicker";
 import { MarginedDivider } from "auth/registration/MarginedDivider";
+import { Link as RouterLink } from "react-router-dom";
 
 export function AddressField() {
   return (
@@ -66,11 +67,12 @@ export function AddressField() {
 function MarketingOptIn() {
   const PolicyLink = (props: { title: string; to: string }) => (
     <Link
-      href={props.to}
+      to={props.to}
       underline="none"
       variant="inherit"
       rel="noreferrer"
       target="_blank"
+      component={RouterLink}
     >
       {props.title}
     </Link>
