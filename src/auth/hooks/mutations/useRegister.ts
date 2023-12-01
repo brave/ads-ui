@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { RegistrationForm } from "auth/registration/types";
-import { submitRegistration } from "auth/lib";
+import { sendMarketingEmail, submitRegistration } from "auth/lib";
 import { clearRegistrationValues } from "form/PersistRegistrationValues";
 
 export function useRegister() {
@@ -12,6 +12,10 @@ export function useRegister() {
     setLoading(true);
     submitRegistration(form)
       .then(() => {
+        if (form.marketingOptIn) {
+          void sendMarketingEmail({ email: form.email, name: form.fullName });
+        }
+
         setHasRegistered(true);
         clearRegistrationValues();
       })

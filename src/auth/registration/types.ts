@@ -1,6 +1,7 @@
 export type RegistrationForm = {
   email: string;
   fullName: string;
+  marketingOptIn?: boolean;
   advertiser: {
     name: string;
     url: string;
@@ -20,6 +21,7 @@ export type RegistrationForm = {
 export const initialValues: RegistrationForm = {
   email: "",
   fullName: "",
+  marketingOptIn: false,
   advertiser: {
     name: "",
     url: "",
