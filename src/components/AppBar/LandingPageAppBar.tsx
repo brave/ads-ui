@@ -23,7 +23,10 @@ export function LandingPageAppBar() {
   const isContact = match.url.includes("contact");
 
   const GetStarted = () => (
-    <RouterLink to={"/register"} style={{ textDecoration: "none" }}>
+    <RouterLink
+      to={`/register${isContact ? "?pos=personal" : ""}`}
+      style={{ textDecoration: "none" }}
+    >
       <Typography
         variant="subtitle1"
         color={isContact ? "primary" : "text.primary"}

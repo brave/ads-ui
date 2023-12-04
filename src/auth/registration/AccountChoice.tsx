@@ -5,6 +5,7 @@ import {
   ListItemButton,
   Stack,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { AccountSetup } from "auth/registration/types";
 import { useField } from "formik";
@@ -99,6 +100,7 @@ function AccountItemButton({
   points,
   value,
 }: ChoiceOptions) {
+  const theme = useTheme();
   const [, meta, helper] = useField<AccountSetup | undefined>("setup");
 
   return (
@@ -108,6 +110,10 @@ function AccountItemButton({
         height: 300,
         width: 375,
         borderRadius: "16px",
+        border:
+          meta.value === value
+            ? `4px solid ${theme.palette.primary.main}`
+            : "none",
       }}
       onClick={() => helper.setValue(value)}
       selected={meta.value === value}
