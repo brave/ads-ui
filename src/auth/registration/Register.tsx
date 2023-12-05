@@ -45,7 +45,6 @@ export function Register() {
 
   const activeStep = useRef<number>(0);
   activeStep.current = steps.findIndex((s) => {
-    console.log(params.get("pos"));
     return s.pos === (params.get("pos") ?? "choice");
   });
 
@@ -60,7 +59,6 @@ export function Register() {
   }
 
   const currentStep = activeStep.current;
-  console.log(currentStep);
   return (
     <Background>
       <LandingPageAppBar />
@@ -106,7 +104,7 @@ export function Register() {
                 activeStep={currentStep}
                 steps={steps.length - 1}
                 onNext={() => {
-                  if (values.setup === "managed") {
+                  if (currentStep === 0 && values.setup === "managed") {
                     history.replace("/contact");
                   } else {
                     const step = (activeStep.current = currentStep + 1);
