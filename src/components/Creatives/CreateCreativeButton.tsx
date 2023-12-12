@@ -27,7 +27,7 @@ export function CreateCreativeButton() {
       values.adSets.forEach((adSet, idx) => {
         void setFieldValue(`adSets.${idx}.creatives`, [
           ...adSet.creatives,
-          validCreativeFields(data.createCreative, advertiser.id),
+          validCreativeFields(data.createCreative, advertiser.id, true),
         ]);
       });
       isCreating.setValue(false);

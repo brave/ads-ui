@@ -54,12 +54,12 @@ export function AdsExistingAd() {
       ) as CreativeFragment[];
 
       const filtered = creativeOptionList.filter((c) => c.state === "active");
-      const exludeExisting = filtered.filter((e) => {
+      const excludeExisting = filtered.filter((e) => {
         const associatedOptions = creatives ?? [];
         return associatedOptions.find((ao) => ao.id === e.id) === undefined;
       });
-      original.current = exludeExisting;
-      setOptions(exludeExisting);
+      original.current = excludeExisting;
+      setOptions(excludeExisting);
     },
   });
 
@@ -116,29 +116,20 @@ export function AdsExistingAd() {
         />
       </Box>
 
-      <CreativeSpecificSelect options={options ?? []} format={values.format} />
+      {[CampaignFormat.PushNotification, CampaignFormat.NewsDisplayAd].includes(
+        values.format,
+      ) && (
+        <CreativeSelect
+          options={(options ?? []).map((o) => ({
+            ...o,
+            advertiserId: advertiser.id,
+            included: false,
+          }))}
+          useSelectedAdStyle={false}
+          showState={false}
+          useButtonSelection
+        />
+      )}
     </CardContainer>
   );
 }
-
-const CreativeSpecificSelect = (props: {
-  format: CampaignFormat;
-  options: CreativeFragment[];
-}) => {
-  const { advertiser } = useAdvertiser();
-
-  if (props.format === CampaignFormat.PushNotification)
-    return (
-      <CreativeSelect
-        options={props.options.map((o) => ({
-          ...o,
-          advertiserId: advertiser.id,
-          included: false,
-        }))}
-        useSelectedAdStyle={false}
-        showState={false}
-      />
-    );
-
-  return null;
-};
