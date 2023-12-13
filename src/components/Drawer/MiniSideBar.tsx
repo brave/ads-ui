@@ -208,23 +208,11 @@ export function SupportMenu({ usePlainLink }: SupportProps) {
       <Menu open={open} anchorEl={anchorEl} onClose={() => setAnchorEl(null)}>
         <MenuItem
           onClick={() => {
-            window.open(
-              "https://support.brave.com/hc/en-us/articles/14354133537421-How-do-I-use-Brave-Ads-Self-Serve-Beta-",
-              "_blank",
-              "noopener",
-            );
+            window.open("https://ads-help.brave.com/", "_blank", "noopener");
             setAnchorEl(null);
           }}
         >
-          Brave Ads Tutorial
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            window.open("https://brave.com/brave-ads", "_blank", "noopener");
-            setAnchorEl(null);
-          }}
-        >
-          Advertiser Resources
+          Help Center
         </MenuItem>
         <MenuItem
           onClick={() => {
@@ -232,7 +220,7 @@ export function SupportMenu({ usePlainLink }: SupportProps) {
             setAnchorEl(null);
           }}
         >
-          Email support:{" "}
+          Contact:{" "}
           <Link sx={{ ml: 1 }} underline="none">
             selfserve@brave.com
           </Link>
