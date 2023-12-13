@@ -36,7 +36,7 @@ export function InlineContentAd(props: InlineAdProps) {
       alignItems="center"
     >
       {props.useContainer !== false ? (
-        <CardContainer sx={{ flexGrow: 1 }}>
+        <CardContainer sx={{ flexGrow: 1, maxWidth: "950px" }}>
           <InlineAdForm {...props} />
         </CardContainer>
       ) : (
