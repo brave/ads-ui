@@ -16,31 +16,44 @@ export function NewsPreview() {
         bgcolor: "rgba(53, 53, 53, 0.47)",
         display: "flex",
         flexDirection: "column",
-        maxHeight: "900px",
-        maxWidth: "750px",
+        maxHeight: "525px",
+        maxWidth: "600px",
       }}
     >
       <Box display="flex" justifyContent="center">
         {value?.imageUrl ? (
-          <ImagePreview url={value.imageUrl} height={500} width={600} />
+          <ImagePreview url={value.imageUrl} height={400} width={500} />
         ) : (
-          <Box height={500} width={600} />
+          <Box height={400} width={500} />
         )}
       </Box>
-      <Box padding="25px 35px" bgcolor="rgba(53, 53, 53, 0.47)">
+      <Box
+        padding="20px 25px"
+        bgcolor="rgba(53, 53, 53, 0.47)"
+        flexGrow={1}
+        display="flex"
+        flexDirection="column"
+        justifyContent="space-between"
+      >
         <Box
           display="flex"
           flexDirection="row"
           mb={1}
           gap={2}
           justifyContent="space-between"
+          alignItems="center"
         >
-          <Typography color="#ffff" fontSize="22px" fontWeight={500}>
+          <Typography
+            color="#ffff"
+            fontSize="16px"
+            fontWeight={500}
+            maxWidth={400}
+          >
             {value?.title ||
               "This is a news display Ad, it wll look like part of the news feed."}
           </Typography>
           <Box
-            width="300px"
+            width="200px"
             display="flex"
             alignItems="center"
             justifyContent="flex-end"
@@ -48,10 +61,14 @@ export function NewsPreview() {
             <Box
               color="#ffff"
               border="1px solid #ffff"
-              padding="10px 15px"
+              padding="8px 10px"
+              minWidth="100px"
+              textAlign="center"
               borderRadius="100px"
             >
-              {value?.ctaText || "Click Here!"}
+              <Typography fontSize="14px">
+                {value?.ctaText || "Click Here!"}
+              </Typography>
             </Box>
           </Box>
         </Box>

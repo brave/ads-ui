@@ -2,19 +2,23 @@ import { FormikTextField } from "form/FormikHelpers";
 import { UrlResolver } from "components/Url/UrlResolver";
 import { useField } from "formik";
 import { useEffect } from "react";
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { CreateCreativeButton } from "components/Creatives/CreateCreativeButton";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { CardContainer } from "components/Card/CardContainer";
 import { ImageAutocomplete } from "components/Assets/ImageAutocomplete";
 import { NewsPreview } from "components/Creatives/NewsPreview";
 
-export function InlineContentAd(props: {
+interface InlineAdProps {
   name?: string;
   useCustomButton?: boolean;
-}) {
-  const withName = (s: string) => (props.name ? `${props.name}.${s}` : s);
+  useContainer?: boolean;
+  alignPreview?: "column" | "row";
+}
+
+export function InlineContentAd(props: InlineAdProps) {
   const { advertiser } = useAdvertiser();
+  const withName = (s: string) => (props.name ? `${props.name}.${s}` : s);
   const [, , code] = useField<string>(withName("type.code"));
   const [, , description] = useField<string>(
     withName("payloadInlineContent.description"),
@@ -25,45 +29,69 @@ export function InlineContentAd(props: {
   }, []);
 
   return (
-    <Box display="flex" flexDirection="column" gap={2}>
-      <CardContainer header="News Display Ad" sx={{ flexGrow: 1 }}>
-        <FormikTextField name={withName("name")} label="Name" />
-
-        <FormikTextField
-          name={withName("payloadInlineContent.title")}
-          label="Title"
-          maxLengthInstantFeedback={90}
-        />
-
-        <FormikTextField
-          name={withName("payloadInlineContent.ctaText")}
-          label="Call to Action text"
-          maxLengthInstantFeedback={15}
-        />
-
-        <ImageAutocomplete name={withName("payloadInlineContent.imageUrl")} />
-
-        <UrlResolver
-          validator={withName("targetUrlValid")}
-          name={withName("payloadInlineContent.targetUrl")}
-          label="Target URL"
-        />
-
-        {advertiser.selfServiceSetPrice && (
-          <FormikTextField
-            name={withName("payloadInlineContent.description")}
-            label="Advertiser Name"
-          />
-        )}
-
-        {props.useCustomButton !== true && (
-          <Stack direction="row" justifyContent="space-between" mt={1}>
-            <div />
-            <CreateCreativeButton />
-          </Stack>
-        )}
-      </CardContainer>
+    <Box
+      display="flex"
+      flexDirection={props.alignPreview ?? "column"}
+      gap={2}
+      alignItems="center"
+    >
+      {props.useContainer !== false ? (
+        <CardContainer sx={{ flexGrow: 1 }}>
+          <InlineAdForm {...props} />
+        </CardContainer>
+      ) : (
+        <Box minWidth={750}>
+          <InlineAdForm {...props} />
+        </Box>
+      )}
       <NewsPreview />
     </Box>
   );
 }
+
+const InlineAdForm = (props: InlineAdProps) => {
+  const { advertiser } = useAdvertiser();
+  const withName = (s: string) => (props.name ? `${props.name}.${s}` : s);
+
+  return (
+    <>
+      <Typography variant="h2">News Display Ad</Typography>
+
+      <FormikTextField name={withName("name")} label="Name" />
+
+      <FormikTextField
+        name={withName("payloadInlineContent.title")}
+        label="Title"
+        maxLengthInstantFeedback={90}
+      />
+
+      <FormikTextField
+        name={withName("payloadInlineContent.ctaText")}
+        label="Call to Action text"
+        maxLengthInstantFeedback={15}
+      />
+
+      <ImageAutocomplete name={withName("payloadInlineContent.imageUrl")} />
+
+      <UrlResolver
+        validator={withName("targetUrlValid")}
+        name={withName("payloadInlineContent.targetUrl")}
+        label="Target URL"
+      />
+
+      {advertiser.selfServiceSetPrice && (
+        <FormikTextField
+          name={withName("payloadInlineContent.description")}
+          label="Advertiser Name"
+        />
+      )}
+
+      {props.useCustomButton !== true && (
+        <Stack direction="row" justifyContent="space-between" mt={1}>
+          <div />
+          <CreateCreativeButton />
+        </Stack>
+      )}
+    </>
+  );
+};

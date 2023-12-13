@@ -1,4 +1,4 @@
-import { createTheme, responsiveFontSizes } from "@mui/material";
+import { createTheme, responsiveFontSizes, SxProps } from "@mui/material";
 
 const appTheme = createTheme({
   typography: {
@@ -65,3 +65,18 @@ const appTheme = createTheme({
 });
 
 export const theme = responsiveFontSizes(appTheme);
+
+export const modalStyles: SxProps = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  right: "auto",
+  bottom: "auto",
+  transform: "translate(-50%, -50%)",
+  width: "auto",
+  bgcolor: "background.paper",
+  border: "2px solid #e2e2e2",
+  boxShadow: 24,
+  borderRadius: "16px",
+  p: 4,
+};

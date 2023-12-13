@@ -1,15 +1,16 @@
 import { CardContainer } from "components/Card/CardContainer";
-import { Stack, Typography } from "@mui/material";
+import { Box, Modal, Stack, Typography } from "@mui/material";
 import { CampaignForm } from "user/views/adsManager/types";
 import { useField, useFormikContext } from "formik";
 import { CreativeSelect } from "components/Creatives/CreativeSelect";
 import { isCreativeTypeApplicableToCampaignFormat } from "user/library";
 import { NewAd } from "user/ads/NewAd";
-import { useContext } from "react";
-import { FormContext } from "state/context";
 import { AdsExistingAd } from "user/ads/AdsExistingAd";
-import { CreativeSpecificFields } from "components/Creatives/CreativeSpecificFields";
 import { ShowAdsButton } from "user/ads/ShowAdsButton";
+import { CampaignFormat } from "graphql/types";
+import { NotificationAd } from "user/ads/NotificationAd";
+import { InlineContentAd } from "user/ads/InlineContentAd";
+import { modalStyles } from "theme";
 
 interface Props {
   index: number;
@@ -17,8 +18,6 @@ interface Props {
 
 export function AdSetAds({ index }: Props) {
   const { values } = useFormikContext<CampaignForm>();
-  const { isShowingAds } = useContext(FormContext);
-  const [, meta] = useField<boolean>("isCreating");
 
   const adsByFormat = values.adSets[index].creatives.filter((c) =>
     isCreativeTypeApplicableToCampaignFormat(c.type, values.format),
@@ -40,8 +39,30 @@ export function AdSetAds({ index }: Props) {
         <ShowAdsButton />
       </CardContainer>
 
-      {isShowingAds && <AdsExistingAd />}
-      {meta.value && <CreativeSpecificFields />}
+      <AdsExistingAd />
+      <CampaignFormatSpecificModal format={values.format} />
     </>
+  );
+}
+
+function CampaignFormatSpecificModal(props: { format: CampaignFormat }) {
+  const [, meta, helper] = useField<boolean>("isCreating");
+  const name = "newCreative";
+
+  let adComponent;
+  if (props.format === CampaignFormat.PushNotification)
+    adComponent = <NotificationAd name={name} useContainer={false} />;
+  else if (props.format === CampaignFormat.NewsDisplayAd)
+    adComponent = (
+      <InlineContentAd name={name} useContainer={false} alignPreview="row" />
+    );
+
+  return (
+    <Modal
+      open={!!adComponent && meta.value}
+      onClose={() => helper.setValue(false)}
+    >
+      <Box sx={modalStyles}>{adComponent}</Box>
+    </Modal>
   );
 }

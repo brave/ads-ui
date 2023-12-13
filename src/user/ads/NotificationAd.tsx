@@ -1,16 +1,19 @@
 import { CardContainer } from "components/Card/CardContainer";
 import { FormikTextField } from "form/FormikHelpers";
-import { Stack } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { UrlResolver } from "components/Url/UrlResolver";
 import { useField } from "formik";
 import { NotificationPreview } from "components/Creatives/NotificationPreview";
 import { CreateCreativeButton } from "components/Creatives/CreateCreativeButton";
 import { useEffect } from "react";
 
-export function NotificationAd(props: {
+interface NotificationAdProps {
   name?: string;
   useCustomButton?: boolean;
-}) {
+  useContainer?: boolean;
+}
+
+export function NotificationAd(props: NotificationAdProps) {
   const withName = (s: string) => (props.name ? `${props.name}.${s}` : s);
   const [, , code] = useField<string>(withName("type.code"));
 
@@ -18,25 +21,45 @@ export function NotificationAd(props: {
     code.setValue("notification_all_v1");
   }, []);
 
+  if (props.useContainer === false) {
+    return (
+      <Box minWidth={700}>
+        <NotificationAdForm {...props} />
+      </Box>
+    );
+  }
+
   return (
-    <CardContainer header="Notification Ad">
+    <CardContainer>
+      <NotificationAdForm {...props} />
+    </CardContainer>
+  );
+}
+
+const NotificationAdForm = (props: NotificationAdProps) => {
+  const withName = (s: string) => (props.name ? `${props.name}.${s}` : s);
+
+  return (
+    <>
+      <Typography variant="h2" fontWeight={500}>
+        Notification Ad
+      </Typography>
+
       <FormikTextField name={withName("name")} label="Name" />
 
-      <Stack direction="row" alignItems="center" spacing={1}>
-        <FormikTextField
-          name={withName("payloadNotification.title")}
-          label="Title"
-          helperText="Max 30 Characters"
-          maxLengthInstantFeedback={30}
-        />
+      <FormikTextField
+        name={withName("payloadNotification.title")}
+        label="Title"
+        helperText="Max 30 Characters"
+        maxLengthInstantFeedback={30}
+      />
 
-        <FormikTextField
-          name={withName("payloadNotification.body")}
-          label="Body"
-          helperText="Max 60 Characters"
-          maxLengthInstantFeedback={60}
-        />
-      </Stack>
+      <FormikTextField
+        name={withName("payloadNotification.body")}
+        label="Body"
+        helperText="Max 60 Characters"
+        maxLengthInstantFeedback={60}
+      />
 
       <NotificationPreview />
 
@@ -53,6 +76,6 @@ export function NotificationAd(props: {
           <CreateCreativeButton />
         </Stack>
       )}
-    </CardContainer>
+    </>
   );
-}
+};
