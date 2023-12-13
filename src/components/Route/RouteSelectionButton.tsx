@@ -7,7 +7,6 @@ interface Params {
 
 export function RouteSelectionButton({ routes }: Params) {
   const history = useHistory();
-  console.log(history.location.pathname);
 
   return (
     <BottomNavigation

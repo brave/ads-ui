@@ -17,6 +17,7 @@ import { Login } from "auth/views/Login";
 import { MagicLink } from "auth/views/MagicLink";
 import { Register } from "auth/registration/Register";
 import { LandingPage } from "auth/views/LandingPage";
+import { BraveAdsContactFrame } from "auth/registration/BraveAdsContactFrame";
 
 const Protected = () => {
   return <Redirect to="/auth/link" />;
@@ -47,6 +48,7 @@ export function App() {
             <Route path="/auth/link" component={MagicLink} />
             <Route path="/auth/verify" component={AuthVerify} />
             <Route path="/register" component={Register} />
+            <Route path="/contact" component={BraveAdsContactFrame} />
             <Route
               path="/user/main"
               component={isAuthenticated ? User : Protected}
