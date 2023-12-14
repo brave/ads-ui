@@ -1,5 +1,5 @@
 import { CardContainer } from "components/Card/CardContainer";
-import { Box, Modal, Stack, Typography } from "@mui/material";
+import { Box, Modal, Typography } from "@mui/material";
 import { CampaignForm } from "user/views/adsManager/types";
 import { useField, useFormikContext } from "formik";
 import { CreativeSelect } from "components/Creatives/CreativeSelect";
@@ -30,11 +30,9 @@ export function AdSetAds({ index }: Props) {
           Ads are included.
         </Typography>
 
-        <Stack direction="row">
-          <CreativeSelect index={index} options={adsByFormat}>
-            <NewAd />
-          </CreativeSelect>
-        </Stack>
+        <CreativeSelect index={index} options={adsByFormat}>
+          <NewAd />
+        </CreativeSelect>
 
         <ShowAdsButton />
       </CardContainer>
