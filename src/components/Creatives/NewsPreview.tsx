@@ -16,8 +16,8 @@ export function NewsPreview() {
         bgcolor: "rgba(53, 53, 53, 0.47)",
         display: "flex",
         flexDirection: "column",
-        maxHeight: "525px",
-        maxWidth: "600px",
+        height: "525px",
+        width: "600px",
       }}
     >
       <Box display="flex" justifyContent="center">
