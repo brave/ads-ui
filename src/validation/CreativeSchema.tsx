@@ -20,12 +20,12 @@ const validTargetUrl = (label: string) =>
     );
 
 export const CreativeSchema = object().shape({
-  name: string().label("Creative Name").required(),
+  name: string().label("Ad Name").required(),
   type: object().shape({
     code: string()
       .oneOf(["notification_all_v1", "inline_content_all_v1"])
-      .label("Creative Type")
-      .required("Creative Type is required"),
+      .label("Ad Type")
+      .required("Ad Type is required"),
     name: string(),
   }),
   state: string()

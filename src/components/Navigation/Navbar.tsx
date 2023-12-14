@@ -16,15 +16,15 @@ export function Navbar() {
 
   const buttons = [
     {
-      route: "user/main/campaign",
+      route: "/user/main/campaign",
       component: <NewCampaignButton />,
     },
     {
-      route: "user/main/ads/assets",
+      route: "/user/main/ads/assets",
       component: <UploadImage />,
     },
     {
-      route: "user/main/ads",
+      route: "/user/main/ads",
       component: <NewCreativeButton />,
     },
   ];
@@ -47,10 +47,7 @@ export function Navbar() {
           {advertiser.selfServiceManageCampaign && <DraftMenu />}
         </Stack>
         <div style={{ flexGrow: 1 }} />
-        {
-          buttons.find((b) => history.location.pathname.includes(b.route))
-            ?.component
-        }
+        {buttons.find((b) => history.location.pathname === b.route)?.component}
         <Button variant="outlined" size="medium" onClick={() => signOut()}>
           Sign out
         </Button>

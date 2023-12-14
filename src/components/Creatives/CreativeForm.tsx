@@ -46,10 +46,7 @@ export function CreativeForm() {
 
   if (getError) {
     return (
-      <ErrorDetail
-        error={getError}
-        additionalDetails="Unable to load creative"
-      />
+      <ErrorDetail error={getError} additionalDetails="Unable to load Ad" />
     );
   }
 
@@ -73,7 +70,7 @@ export function CreativeForm() {
                 flexWrap="wrap"
               >
                 <CardContainer
-                  header={`${isNew ? "New" : "Edit"} creative`}
+                  header={`${isNew ? "New" : "Edit"} Ad`}
                   sx={{ flexGrow: 1 }}
                 >
                   <CreativeType allowTypeChange={id === "new"} />
@@ -81,7 +78,7 @@ export function CreativeForm() {
 
                 <ErrorDetail
                   error={submitError}
-                  additionalDetails="Unable to save creative"
+                  additionalDetails="Unable to save ad"
                 />
 
                 <CreativeCampaigns
@@ -113,7 +110,7 @@ const CreativeTypeSpecificFields = ({
   if (creativeType === "notification_all_v1")
     return <NotificationAd useCustomButton />;
   if (creativeType === "inline_content_all_v1")
-    return <InlineContentAd useCustomButton />;
+    return <InlineContentAd useCustomButton alignPreview="row" />;
 
   return null;
 };
@@ -129,9 +126,9 @@ const dialogProps = (
   const campaignLength = campaigns.length;
 
   let message =
-    "Modifying a creative will immediately put it into review. This means it will no longer be shown to users until it is approved.";
+    "Modifying an ad will immediately put it into review. This means it will no longer be shown to users until it is approved.";
   if (campaignLength > 1) {
-    message = `${message}. This creative is also shared across ${campaignLength} campaigns. Any modifications made will be effective for all campaigns using this creative.`;
+    message = `${message}. This ad is also shared across ${campaignLength} campaigns. Any modifications made will be effective for all campaigns using this creative.`;
   }
 
   const hasDialog =
