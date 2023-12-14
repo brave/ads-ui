@@ -15,7 +15,6 @@ interface FormikSubmitButtonProps {
   label?: string;
   inProgressLabel?: string;
   isCreate: boolean;
-  disabled?: boolean;
 }
 
 export function extractErrors(errorObject: any): string[] {
@@ -114,7 +113,7 @@ export const FormikDialogButton = (
               e.preventDefault();
               setOpen(true);
             }}
-            disabled={!saveEnabled || isSubmitting || open || props.disabled}
+            disabled={!saveEnabled || isSubmitting || open}
           >
             {isSubmitting ? "Saving..." : "Save"}
           </Button>
