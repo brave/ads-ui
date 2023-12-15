@@ -5,19 +5,22 @@ import moment from "moment";
 import { SelectCreativeHeader } from "components/Creatives/SelectCreativeHeader";
 import { CampaignForm, Creative } from "user/views/adsManager/types";
 import _ from "lodash";
-import { useContext, useState } from "react";
+import { PropsWithChildren, useContext, useState } from "react";
 import { FormContext } from "state/context";
 import { useFormikContext } from "formik";
 import { CampaignFormat } from "graphql/types";
 import { ImagePreview } from "components/Assets/ImagePreview";
 
-export function CreativeSelect(props: {
-  options: Creative[];
-  useSelectedAdStyle?: boolean;
-  showState?: boolean;
-  index?: number;
-  hideCreated?: boolean;
-}) {
+export function CreativeSelect(
+  props: {
+    options: Creative[];
+    useSelectedAdStyle?: boolean;
+    showState?: boolean;
+    index?: number;
+    hideCreated?: boolean;
+    useButtonSelection?: boolean;
+  } & PropsWithChildren,
+) {
   const index = props.index;
   const { values, setFieldValue } = useFormikContext<CampaignForm>();
   const { setIsShowingAds } = useContext(FormContext);
@@ -35,7 +38,7 @@ export function CreativeSelect(props: {
       const foundIndex = values.adSets[index].creatives.findIndex(
         (co) => c.id === co.id,
       );
-      if (foundIndex !== undefined) {
+      if (foundIndex >= 0) {
         void setFieldValue(
           `adSets.${index}.creatives.${foundIndex}.included`,
           selected,
@@ -87,18 +90,20 @@ export function CreativeSelect(props: {
             )}
           </BoxContainer>
         ))}
+        {props.children}
       </Stack>
-      {props.index === undefined && (
+      {props.useButtonSelection && (
         <Button
           variant="outlined"
           sx={{ maxWidth: "200px", alignSelf: "end", marginTop: 2 }}
           onClick={(e) => {
             e.preventDefault();
 
+            const mapped = curr.map((c) => ({ ...c, included: true }));
             values.adSets.forEach((adSet, idx) => {
               void setFieldValue(
                 `adSets.${idx}.creatives`,
-                _.uniqBy([...adSet.creatives, ...curr], "id"),
+                _.uniqBy([...adSet.creatives, ...mapped], "id"),
               );
             });
 

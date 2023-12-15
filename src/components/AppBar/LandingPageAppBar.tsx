@@ -43,7 +43,7 @@ export function LandingPageAppBar() {
     {
       component: (
         <HelpLink
-          label="Learn"
+          label="About"
           props={{
             href: "https://brave.com/brave-ads",
             target: "_blank",

@@ -20,7 +20,7 @@ export function CreativeType(props: { allowTypeChange?: boolean }) {
   return (
     <Box maxWidth={500} display="flex" flexDirection="column" mt={1}>
       <Stack direction="row" alignItems="center" spacing={1}>
-        <Typography>Creative Format</Typography>
+        <Typography>Ad Format</Typography>
         <FormatHelp />
       </Stack>
       <List sx={{ display: "flex", flexDirection: "row", gap: 2 }}>

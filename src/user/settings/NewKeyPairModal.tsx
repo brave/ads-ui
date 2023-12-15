@@ -3,7 +3,6 @@ import {
   Button,
   Modal,
   Stack,
-  SxProps,
   TextField,
   Typography,
 } from "@mui/material";
@@ -12,21 +11,7 @@ import tweetnacl from "tweetnacl";
 import { useRef, useState } from "react";
 import { IAdvertiser } from "auth/context/auth.interface";
 import { CardContainer } from "components/Card/CardContainer";
-
-const modalStyles: SxProps = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  right: "auto",
-  bottom: "auto",
-  transform: "translate(-50%, -50%)",
-  width: 650,
-  bgcolor: "background.paper",
-  border: "2px solid #e2e2e2",
-  boxShadow: 24,
-  borderRadius: "4px",
-  p: 4,
-};
+import { modalStyles } from "theme";
 
 interface Props {
   advertiser: IAdvertiser;

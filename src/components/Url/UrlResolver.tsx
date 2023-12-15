@@ -44,16 +44,16 @@ export const UrlResolver = ({
   const [, , isValidHelper] = useField(validator);
   const hasError = Boolean(nameMeta.error);
   const showError = hasError && nameMeta.touched;
+  const isDirty = !_.isEqual(nameMeta.value, nameMeta.initialValue);
 
   const urlValidation = useUrlValidation(nameField.value);
 
   useEffect(() => {
     const { isValid } = urlValidation;
 
-    if (isValid === false) {
-      isValidHelper.setValue("Target URL is not valid");
-    } else if (isValid === true) {
-      isValidHelper.setValue(undefined);
+    if (isDirty) {
+      const val = isValid !== true ? "Target URL is not valid" : undefined;
+      isValidHelper.setValue(val, urlValidation.isValid === true);
     }
   }, [urlValidation.isValid]);
 

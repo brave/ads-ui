@@ -21,7 +21,7 @@ export function NewCreativeButton() {
       sx={{ mr: 3 }}
       disabled={isNewCreativePage || !advertiser.agreed}
     >
-      New Creative
+      New Ad
     </Button>
   );
 }

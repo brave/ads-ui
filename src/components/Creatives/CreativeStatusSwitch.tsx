@@ -94,8 +94,7 @@ export function CreativeStatusSwitch({ creative }: Props) {
         </DialogTitle>
         <DialogContent>
           <Typography>
-            Modifying the state of this creative will effect more than one
-            campaign:
+            Modifying the state of this ad will effect more than one campaign:
           </Typography>
           <List sx={{ listStyleType: "disc", pl: 2 }}>
             {relatedCampaigns.map((r) => (
