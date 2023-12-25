@@ -17,7 +17,7 @@
     "axios": "1.6.2",
     "base64url": "3.0.1",
     "bignumber.js": "9.1.2",
-    "date-fns": "2.30.0",
+    "date-fns": "3.0.6",
     "date-fns-tz": "2.0.0",
     "formik": "2.4.5",
     "graphql": "16.8.1",
