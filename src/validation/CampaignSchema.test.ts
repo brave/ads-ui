@@ -63,7 +63,7 @@ it("should fail if the campaign start date is in past", () => {
   expect(() =>
     CampaignSchema(prices).validateSync(nextState),
   ).toThrowErrorMatchingInlineSnapshot(
-    '"Start Date must be minimum of 2 days from today"',
+    `[ValidationError: Start Date must be minimum of 2 days from today]`,
   );
 });
 
@@ -123,7 +123,7 @@ describe("pricing tests", () => {
     expect(() =>
       CampaignSchema(prices).validateSync(nextState),
     ).toThrowErrorMatchingInlineSnapshot(
-      '"No cpc pricing available for News Display, contact selfserve@brave.com for help"',
+      `[ValidationError: No cpc pricing available for News Display, contact selfserve@brave.com for help]`,
     );
   });
 });

@@ -52,40 +52,38 @@ interface ChoiceOptions {
   description: string;
   points: string[];
   value: AccountSetup;
+  minSpend: string;
 }
 
 export function AccountChoice() {
   const buttons: ChoiceOptions[] = [
     {
       title: "Self-service",
-      icon: <Pointer sx={{ height: "2em", width: "2em" }} />,
+      icon: <Pointer sx={{ height: "1.5em", width: "1.5em" }} />,
       description:
-        "Create and manage campaigns with self-directed setup in Brave Ads Manager.",
-      points: [
-        "Access Notification and Newsfeed campaigns",
-        "For small & medium brands",
-        "Start with as little as $500",
-      ],
+        "For small to mid-sized businesses to create and manage their Brave Ads campaigns independently.",
+      points: ["Notification ads", "Newsfeed ads"],
       value: "self",
+      minSpend: "500",
     },
     {
       title: "Managed service",
-      icon: <Team sx={{ height: "2em", width: "2em" }} />,
+      icon: <Team sx={{ height: "1.5em", width: "1.5em" }} />,
       description:
-        "Work with our team to set up and execute campaigns on your behalf.",
+        "For enterprise and agency businesses looking for bespoke ad solutions via dedicated Brave Ads representatives.",
       points: [
-        "Access New Tab Takeovers and Search keyword ads",
-        "For enterprise brands & agencies",
-        "Minimum $10,000 spend",
+        "Search keyword ads",
+        "New tab takeover",
+        "Notification ads",
+        "Newsfeed ads",
       ],
       value: "managed",
+      minSpend: "10,000",
     },
   ];
 
   return (
-    <List
-      sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: 3 }}
-    >
+    <List sx={{ display: "flex", flexDirection: "row", gap: 3 }}>
       {buttons.map((b) => (
         <AccountItemButton key={`account_item_button_${b.value}`} {...b} />
       ))}
@@ -99,6 +97,7 @@ function AccountItemButton({
   description,
   points,
   value,
+  minSpend,
 }: ChoiceOptions) {
   const theme = useTheme();
   const [, meta, helper] = useField<AccountSetup | undefined>("setup");
@@ -108,34 +107,64 @@ function AccountItemButton({
       sx={{
         backgroundColor: "background.default",
         height: 300,
-        width: 375,
+        width: 400,
         borderRadius: "16px",
         border:
           meta.value === value
             ? `4px solid ${theme.palette.primary.main}`
             : "none",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-evenly",
+        gap: "10px",
+        alignItems: "flex-start",
       }}
       onClick={() => helper.setValue(value)}
       selected={meta.value === value}
     >
-      <Stack direction="column" spacing={2} alignSelf="baseline" p={2}>
-        <Box display="flex" justifyContent="right" alignItems="center">
-          {icon}
-        </Box>
+      <Box display="flex" flexDirection="column" gap="5px" mt={2}>
         <Typography fontWeight={700} fontSize="20px">
           {title}
         </Typography>
-        <Typography variant="body2">{description}</Typography>
-        <ul>
-          {points.map((p, idx) => (
-            <li
-              key={`account_item_main_points_${idx}`}
-              style={{ fontSize: ".75rem" }}
-            >
-              {p}
-            </li>
-          ))}
-        </ul>
+        <Typography variant="caption">{description}</Typography>
+      </Box>
+      <Box display="flex" flexDirection="column">
+        <Typography variant="caption" fontWeight={600}>
+          Available Ad placements
+        </Typography>
+        {points.map((p, idx) => (
+          <Box
+            key={`placements_${idx}`}
+            margin={0}
+            fontFamily="Poppins"
+            fontWeight={400}
+            fontSize="0.75rem"
+            lineHeight="1.66"
+          >
+            {p}
+          </Box>
+        ))}
+      </Box>
+      <div style={{ flexGrow: 1 }} />
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        width="100%"
+      >
+        <Stack direction="column">
+          <Typography variant="caption" fontWeight={600}>
+            Minimum Spend
+          </Typography>
+          <Typography variant="caption" color="text.secondary">
+            {"$"}
+            {minSpend}
+            {"/month"}
+          </Typography>
+        </Stack>
+        <Box display="flex" justifyContent="right" alignItems="center">
+          {icon}
+        </Box>
       </Stack>
     </ListItemButton>
   );
