@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "3.8.9",
-    "@date-io/moment": "2.17.0",
+    "@date-io/moment": "3.0.0",
     "@emotion/react": "11.11.3",
     "@emotion/styled": "11.11.0",
     "@fontsource/mulish": "5.0.16",
