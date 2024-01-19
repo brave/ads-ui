@@ -6,13 +6,7 @@ import { useIsAuthenticated } from "auth/hooks/queries/useIsAuthenticated";
 import { Link as RouterLink } from "react-router-dom";
 import { useIsMobile } from "hooks/useIsMobile";
 import { MobileAdsBenefits } from "auth/views/MobileAdsBenefits";
-
-const GradientText = {
-  backgroundImage:
-    "linear-gradient(96.46deg, #FF2869 -4.13%, #930BFE 82.88%), linear-gradient(0deg, #111317, #111317);",
-  backgroundClip: "text",
-  color: "transparent",
-};
+import { GradientText } from "components/Typography/GradientText";
 
 export function LandingPage() {
   const isAuthenticated = useIsAuthenticated();
@@ -30,10 +24,7 @@ export function LandingPage() {
       >
         <Stack sx={{ maxWidth: "430px" }} spacing={{ xs: 3, md: 6 }}>
           <Typography variant="h3" textAlign="left">
-            <Typography variant="inherit" sx={GradientText}>
-              Privacy-forward
-            </Typography>{" "}
-            advertising made simple
+            <GradientText text="Privacy-forward" /> advertising made simple
           </Typography>
 
           <Typography variant="h6">
@@ -74,7 +65,11 @@ export function LandingPage() {
 
           {isMobile && <MobileAdsBenefits />}
         </Stack>
-        {!isMobile && <img src={goals} />}
+        {!isMobile && (
+          <Box height="100%" width={600}>
+            <img src={goals} />
+          </Box>
+        )}
       </Stack>
     </Background>
   );

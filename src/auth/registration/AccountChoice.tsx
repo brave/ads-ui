@@ -83,7 +83,9 @@ export function AccountChoice() {
   ];
 
   return (
-    <List sx={{ display: "flex", flexDirection: "row", gap: 3 }}>
+    <List
+      sx={{ display: "flex", flexDirection: "row", gap: 3, flexWrap: "wrap" }}
+    >
       {buttons.map((b) => (
         <AccountItemButton key={`account_item_button_${b.value}`} {...b} />
       ))}
@@ -107,7 +109,7 @@ function AccountItemButton({
       sx={{
         backgroundColor: "background.default",
         height: 300,
-        width: 400,
+        width: { md: "300px", lg: "350px" },
         borderRadius: "16px",
         border:
           meta.value === value

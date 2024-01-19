@@ -216,6 +216,14 @@ export function SupportMenu({ usePlainLink }: SupportProps) {
         </MenuItem>
         <MenuItem
           onClick={() => {
+            window.open("https://brave.com/brave-ads", "_blank", "noopener");
+            setAnchorEl(null);
+          }}
+        >
+          About Brave Ads
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
             window.open("mailto:selfserve@brave.com", "_self", "noopener");
             setAnchorEl(null);
           }}

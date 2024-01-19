@@ -38,7 +38,7 @@ const ItemCard = (props: {
   image: string;
 }) => {
   return (
-    <Card sx={{ padding: "4px", borderRadius: "12px" }}>
+    <Card sx={{ padding: "4px", borderRadius: "12px", width: "100%" }}>
       <CardMedia
         component="img"
         height="150px"

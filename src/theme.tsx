@@ -3,10 +3,6 @@ import { createTheme, responsiveFontSizes, SxProps } from "@mui/material";
 const appTheme = createTheme({
   typography: {
     fontFamily: "Poppins",
-    h1: {
-      fontSize: "18px",
-      fontWeight: 400,
-    },
     h2: {
       fontSize: "14px",
       fontWeight: 600,
