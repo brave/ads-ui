@@ -3,8 +3,6 @@ import {
   Box,
   Button,
   Divider,
-  Link,
-  LinkProps,
   Stack,
   Toolbar,
   Typography,
@@ -21,6 +19,7 @@ export function LandingPageAppBar() {
   const isAuthenticated = useIsAuthenticated();
   const isMobile = useIsMobile();
   const isContact = match.url.includes("contact");
+  const isSearch = match.url.includes("search");
 
   const GetStarted = () => (
     <RouterLink
@@ -41,15 +40,13 @@ export function LandingPageAppBar() {
       component: isMobile || isAuthenticated ? null : <GetStarted />,
     },
     {
-      component: (
-        <HelpLink
-          label="About"
-          props={{
-            href: "https://brave.com/brave-ads",
-            target: "_blank",
-          }}
-        />
-      ),
+      component: !isSearch ? (
+        <RouterLink to={`/search`} style={{ textDecoration: "none" }}>
+          <Typography variant="subtitle1" color="text.primary">
+            Brave Search
+          </Typography>
+        </RouterLink>
+      ) : undefined,
     },
     {
       component: <SupportMenu usePlainLink />,
@@ -85,17 +82,6 @@ export function LandingPageAppBar() {
 
             <Divider orientation="vertical" flexItem />
             {links.map((l) => l.component)}
-            {isMobile && !match.url.includes("auth") && (
-              <Link
-                component={RouterLink}
-                to="/auth/link"
-                underline="none"
-                color="secondary"
-                variant="subtitle1"
-              >
-                Log in
-              </Link>
-            )}
           </Stack>
           <div style={{ flexGrow: 1 }} />
           {!isMobile && !match.url.includes("auth") && (
@@ -104,19 +90,6 @@ export function LandingPageAppBar() {
         </Toolbar>
       </AppBar>
     </Box>
-  );
-}
-
-interface HelpProps {
-  label: string;
-  props: LinkProps;
-}
-
-function HelpLink({ label, props }: HelpProps) {
-  return (
-    <Link variant="subtitle1" underline="none" color="text.primary" {...props}>
-      {label}
-    </Link>
   );
 }
 

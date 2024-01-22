@@ -79,7 +79,7 @@ export function AdsExistingAd() {
   return (
     <Modal open={isShowingAds} onClose={() => setIsShowingAds(false)}>
       <Box sx={modalStyles}>
-        <Typography variant="h1" sx={{ mb: 2 }}>
+        <Typography variant="h5" sx={{ mb: 2 }}>
           Add an existing Ad
         </Typography>
 
