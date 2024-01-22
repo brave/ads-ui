@@ -25,7 +25,7 @@ export function SearchLandingPage() {
           <Stack
             direction="column"
             spacing={3}
-            maxWidth={800}
+            maxWidth={700}
             justifyContent="center"
           >
             <Typography variant="h3">
