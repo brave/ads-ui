@@ -16,7 +16,7 @@
     "lib": ["ESNext", "dom"],
     "isolatedModules": true,
     "types": ["vitest/globals"],
-    "baseUrl": "src"
+    "baseUrl": "src",
   },
-  "include": ["src"]
+  "include": ["src"],
 }
