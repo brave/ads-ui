@@ -1,10 +1,10 @@
 import { Box, Button, Link, Stack, Toolbar, Typography } from "@mui/material";
 import { LandingPageAppBar } from "components/AppBar/LandingPageAppBar";
 import { Background } from "components/Background/Background";
-import searchPreview from "../../search-preview.svg";
-import tswift from "../../tswift.svg";
-import microwave from "../../microwave.svg";
-import curtains from "../../curtains.svg";
+import searchPreview from "../../search-preview.png";
+import tswift from "../../tswift.png";
+import microwave from "../../microwave.png";
+import curtains from "../../curtains.png";
 import { useIsMobile } from "hooks/useIsMobile";
 import { useEffect, useState } from "react";
 
@@ -16,7 +16,7 @@ export function SearchLandingPage() {
       <LandingPageAppBar />
       <Toolbar sx={{ mb: 2 }} />
       <Box display="flex" flexDirection="column" justifyContent="center">
-        <Stack direction={{ md: "column", lg: "row" }} spacing={5}>
+        <Stack direction={{ md: "column", lg: "row" }} spacing={1}>
           <Stack
             direction="column"
             spacing={3}
@@ -33,7 +33,7 @@ export function SearchLandingPage() {
             </Typography>
             <BookAMeetingButton />
             {isMobile && (
-              <Box display="flex">
+              <Box display="flex" alignSelf="center">
                 <img src={searchPreview} width="100%" height={400} />
               </Box>
             )}
@@ -119,14 +119,14 @@ function SearchImageCarousel() {
   }, []);
 
   return (
-    <Box display="flex" width="600px" overflow="hidden" pl={5}>
+    <Box display="flex" width="550px">
       <img
         src={images[(currentIndex + 2) % images.length]}
         style={{
           transform: "translateX(10%) translateY(-10%)",
           transition: "opacity 3s ease",
-          height: "500px",
-          width: "500px",
+          height: "450px",
+          width: "550px",
           opacity: 0.4,
         }}
       />
@@ -134,9 +134,8 @@ function SearchImageCarousel() {
         src={images[(currentIndex + 1) % images.length]}
         style={{
           transform: "translateX(-95%)",
-          transition: "opacity 3s ease",
-          height: "500px",
-          width: "500px",
+          height: "450px",
+          width: "550px",
           opacity: 0.6,
         }}
       />
@@ -145,8 +144,8 @@ function SearchImageCarousel() {
         style={{
           transform: "translateX(-200%) translateY(10%)",
           transition: "opacity 3s ease",
-          height: "500px",
-          width: "500px",
+          height: "450px",
+          width: "550px",
           opacity: 1,
         }}
       />
