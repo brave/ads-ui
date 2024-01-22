@@ -16,16 +16,11 @@ export function SearchLandingPage() {
       <LandingPageAppBar />
       <Toolbar sx={{ mb: 2 }} />
       <Box display="flex" flexDirection="column" justifyContent="center">
-        <Stack
-          direction={{ md: "column", lg: "row" }}
-          justifyContent="center"
-          spacing={3}
-          alignItems="center"
-        >
+        <Stack direction={{ md: "column", lg: "row" }} spacing={5}>
           <Stack
             direction="column"
             spacing={3}
-            maxWidth={700}
+            maxWidth={750}
             justifyContent="center"
           >
             <Typography variant="h3">
@@ -39,7 +34,7 @@ export function SearchLandingPage() {
             <BookAMeetingButton />
             {isMobile && (
               <Box display="flex">
-                <img src={searchPreview} width="100%" />
+                <img src={searchPreview} width="100%" height={400} />
               </Box>
             )}
             <Stack
@@ -124,11 +119,11 @@ function SearchImageCarousel() {
   }, []);
 
   return (
-    <Box display="flex" width="600px" overflow="hidden">
+    <Box display="flex" width="600px" overflow="hidden" pl={5}>
       <img
         src={images[(currentIndex + 2) % images.length]}
         style={{
-          transform: "translateX(20%) translateY(-10%)",
+          transform: "translateX(10%) translateY(-10%)",
           transition: "opacity 3s ease",
           height: "500px",
           width: "500px",
@@ -138,7 +133,7 @@ function SearchImageCarousel() {
       <img
         src={images[(currentIndex + 1) % images.length]}
         style={{
-          transform: "translateX(-90%)",
+          transform: "translateX(-95%)",
           transition: "opacity 3s ease",
           height: "500px",
           width: "500px",
