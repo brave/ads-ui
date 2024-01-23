@@ -17,7 +17,6 @@ import {
   renderStatsCell,
 } from "user/analytics/renderers";
 import _ from "lodash";
-import { uiTextForCampaignFormat } from "user/library";
 import { CampaignSummaryFragment } from "graphql/campaign.generated";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { CustomToolbar } from "components/Datagrid/CustomToolbar";
@@ -25,6 +24,7 @@ import { CloneCampaign } from "components/Campaigns/CloneCampaign";
 import { EditButton } from "user/campaignList/EditButton";
 import { calculateMetric } from "user/analytics/analyticsOverview/lib/overview.library";
 import { StatsMetric } from "user/analytics/analyticsOverview/types";
+import { uiLabelsForCampaignFormat } from "util/campaign";
 
 interface Props {
   advertiser?: AdvertiserCampaignsFragment | null;
@@ -83,7 +83,7 @@ export function CampaignList({ advertiser }: Props) {
     {
       field: "format",
       headerName: "Format",
-      valueGetter: ({ row }) => uiTextForCampaignFormat(row.format),
+      valueGetter: ({ row }) => uiLabelsForCampaignFormat(row.format),
       align: "left",
       headerAlign: "left",
       width: 150,

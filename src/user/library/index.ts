@@ -21,11 +21,11 @@ import { CreativeFragment } from "graphql/creative.generated";
 import moment from "moment";
 
 const TYPE_CODE_LOOKUP: Record<string, string> = {
-  notification_all_v1: "Push Notification",
+  notification_all_v1: "Notification ads",
   new_tab_page_all_v1: "New Tab Takeover",
-  inline_content_all_v1: "News Display Ad",
-  search_all_v1: "Search SERP",
-  search_homepage_all_v1: "Search Homepage",
+  inline_content_all_v1: "Newsfeed ads",
+  search_all_v1: "Search keyword ads",
+  search_homepage_all_v1: "Search Homepage ads",
 };
 
 export function transformNewForm(
@@ -259,18 +259,6 @@ function dailyLimit(format: CampaignFormat) {
 
 export function uiTextForCreativeType(creativeType: string): string {
   return TYPE_CODE_LOOKUP[creativeType] ?? creativeType;
-}
-
-export const CAMPAIGN_FORMATS = [
-  { value: CampaignFormat.PushNotification, label: "Push Notification" },
-  { value: CampaignFormat.NtpSi, label: "New Tab Takeover" },
-  { value: CampaignFormat.NewsDisplayAd, label: "News Display" },
-  { value: CampaignFormat.Search, label: "Search SERP" },
-  { value: CampaignFormat.SearchHomepage, label: "Search Homepage" },
-];
-
-export function uiTextForCampaignFormat(format: CampaignFormat): string {
-  return CAMPAIGN_FORMATS.find((f) => f.value === format)?.label ?? format;
 }
 
 export function uiTextForCreativeTypeCode(creativeTypeCode: {
