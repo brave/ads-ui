@@ -36,6 +36,28 @@ fragment Ad on Ad {
   }
 }
 
+fragment AdSetWithDeletedAds on AdSet {
+  id
+  createdAt
+  name
+  state
+  billingType
+  oses {
+    code
+    name
+  }
+  segments {
+    code
+    name
+  }
+  conversions {
+    id
+  }
+  ads(includeDeleted: true) {
+    ...Ad
+  }
+}
+
 mutation createAdSet($createAdSetInput: CreateAdSetInput!) {
   createAdSet(createAdSetInput: $createAdSetInput) {
     ...AdSet

@@ -98,7 +98,7 @@ export function AdDetailTable<T extends { id: string }>({
       sx={{ borderStyle: "none" }}
       initialState={{
         sorting: {
-          sortModel: [{ field: "startAt", sort: "desc" }],
+          sortModel: [{ field: "createdAt", sort: "desc" }],
         },
         pagination: {
           paginationModel: {

@@ -9,14 +9,14 @@ export type EngagementOverview = {
   click: number;
   date: Date;
   landed: number;
-  spend: number;
+  spend?: number | null;
   view: number;
 };
 
 export function engagementValue(e: EngagementOverview[]): EngagementOverview {
   return e.reduce((a, b) => ({
     view: a.view + b.view,
-    spend: a.spend + b.spend,
+    spend: (a.spend ?? 0) + (b.spend ?? 0),
     click: a.click + b.click,
     landed: a.landed + b.landed,
     campaignId: a.campaignId,
