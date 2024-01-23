@@ -82,7 +82,7 @@ export function CampaignList({ advertiser }: Props) {
     },
     {
       field: "format",
-      headerName: "Format",
+      headerName: "Ad Format",
       valueGetter: ({ row }) => uiLabelsForCampaignFormat(row.format),
       align: "left",
       headerAlign: "left",
