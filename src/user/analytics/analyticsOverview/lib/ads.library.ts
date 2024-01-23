@@ -12,6 +12,10 @@ export function adEngagements(
   for (const key in grouped) {
     const group = grouped[key];
     const stats = processStats(group);
+    if (!stats) {
+      continue;
+    }
+
     metrics.set(key, stats);
   }
   return metrics;

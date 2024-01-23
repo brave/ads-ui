@@ -69,16 +69,16 @@ export function EngagementsOverview({
   }
 
   if (!engagements || engagements.length === 0) {
-    return (
-      <Alert severity="info" sx={{ mt: 2, mb: 3 }}>
-        Reporting not available yet for <strong>{campaign.name}</strong>.
-      </Alert>
-    );
+    return <ReportingNotReady campaignName={campaign.name} />;
   }
 
   const processedData = processData(engagements, metrics, grouping);
   const processedStats = processStats(engagements);
   const options = prepareChart(metrics, processedData);
+
+  if (!processedStats) {
+    return <ReportingNotReady campaignName={campaign.name} />;
+  }
 
   return (
     <Box display="flex" flexDirection="row" gap="5px">
@@ -115,5 +115,13 @@ export function EngagementsOverview({
         />
       </Box>
     </Box>
+  );
+}
+
+function ReportingNotReady(props: { campaignName: string }) {
+  return (
+    <Alert severity="info" sx={{ mt: 2, mb: 3 }}>
+      Reporting not available yet for <strong>{props.campaignName}</strong>.
+    </Alert>
   );
 }

@@ -2,6 +2,7 @@ import MetricSelect from "user/analytics/analyticsOverview/components/MetricSele
 import { Box, Stack, Switch, Tooltip, Typography } from "@mui/material";
 import { decideValueAttribute } from "user/analytics/analyticsOverview/lib/overview.library";
 import { Metrics, StatsMetric } from "user/analytics/analyticsOverview/types";
+import { toLocaleString } from "util/bignumber";
 
 type FilterMetric = {
   key: keyof StatsMetric;
@@ -56,7 +57,7 @@ const FilterBox = ({
         width="100%"
       >
         <Typography>
-          {attrs.prefix ?? ""} {displayVal} {attrs.suffix ?? ""}
+          {attrs.prefix ?? ""} {toLocaleString(displayVal)} {attrs.suffix ?? ""}
         </Typography>
         <Tooltip title={filter.active ? "Hide" : "Show"}>
           <Switch

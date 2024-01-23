@@ -25,6 +25,10 @@ export function creativeEngagements(
     const group = byCreative[key];
     const payload = JSON.parse(group[0].creativepayload);
     const reducedCreative = processStats(group);
+    if (!reducedCreative) {
+      continue;
+    }
+
     metrics.push({
       ...reducedCreative,
       creativePayload: {
