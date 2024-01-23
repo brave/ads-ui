@@ -240,7 +240,7 @@ export function calculateMetric(
     metric = metric.multipliedBy(100);
   }
 
-  return !metric.isFinite() ? BigNumber(0) : metric;
+  return !metric.isFinite() ? BigNumber(0) : metric.dp(2);
 }
 
 export const processData = (
