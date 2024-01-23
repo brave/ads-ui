@@ -21,11 +21,11 @@ import { CreativeFragment } from "graphql/creative.generated";
 import moment from "moment";
 
 const TYPE_CODE_LOOKUP: Record<string, string> = {
-  notification_all_v1: "Notification ads",
-  new_tab_page_all_v1: "New Tab Takeover",
-  inline_content_all_v1: "Newsfeed ads",
-  search_all_v1: "Search keyword ads",
-  search_homepage_all_v1: "Search Homepage ads",
+  notification_all_v1: "Notification",
+  new_tab_page_all_v1: "New tab takeover",
+  inline_content_all_v1: "Newsfeed",
+  search_all_v1: "Search keyword",
+  search_homepage_all_v1: "Search homepage",
 };
 
 export function transformNewForm(
