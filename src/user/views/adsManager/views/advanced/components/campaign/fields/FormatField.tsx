@@ -2,7 +2,6 @@ import { List, ListItemButton, Stack, Typography } from "@mui/material";
 import { CardContainer } from "components/Card/CardContainer";
 import { useField } from "formik";
 import { CampaignFormat } from "graphql/types";
-import _ from "lodash";
 import { useIsEdit } from "form/FormikHelpers";
 import { Billing } from "user/views/adsManager/types";
 import { FormatHelp } from "components/Button/FormatHelp";
@@ -25,17 +24,21 @@ export function FormatField({ prices }: PriceProps) {
         <FormatItemButton
           format={CampaignFormat.PushNotification}
           prices={prices}
+          name="Notification ads"
         />
         <FormatItemButton
           format={CampaignFormat.NewsDisplayAd}
           prices={prices}
+          name="Newsfeed ads"
         />
       </List>
     </CardContainer>
   );
 }
 
-const FormatItemButton = (props: { format: CampaignFormat } & PriceProps) => {
+const FormatItemButton = (
+  props: { format: CampaignFormat; name: string } & PriceProps,
+) => {
   const { isEdit } = useIsEdit();
   const [, meta, format] = useField<CampaignFormat>("format");
   const [, , price] = useField<string>("price");
@@ -57,7 +60,7 @@ const FormatItemButton = (props: { format: CampaignFormat } & PriceProps) => {
         border: "1px solid #7c91ff",
       }}
     >
-      {_.startCase(_.lowerCase(props.format))}
+      {props.name}
     </ListItemButton>
   );
 };
