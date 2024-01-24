@@ -124,6 +124,7 @@ export function CampaignList({ advertiser }: Props) {
     {
       field: "view",
       headerName: "Impressions",
+      type: "number",
       valueGetter: ({ row }) =>
         engagementData?.get(row.id)?.["view"]?.toString(),
       renderCell: ({ row }) =>
@@ -136,6 +137,7 @@ export function CampaignList({ advertiser }: Props) {
     {
       field: "click",
       headerName: "Clicks",
+      type: "number",
       valueGetter: ({ row }) =>
         engagementData?.get(row.id)?.["click"]?.toString(),
       renderCell: ({ row }) =>
@@ -148,6 +150,7 @@ export function CampaignList({ advertiser }: Props) {
     {
       field: "landed",
       headerName: "Site visits",
+      type: "number",
       valueGetter: ({ row }) =>
         engagementData?.get(row.id)?.["landed"]?.toString(),
       renderCell: ({ row }) =>
@@ -160,6 +163,7 @@ export function CampaignList({ advertiser }: Props) {
     {
       field: "ctr",
       headerName: "CTR",
+      type: "number",
       valueGetter: ({ row }) =>
         getStatFromEngagement(row, "click", "view", engagementData)?.toString(),
       renderCell: ({ row }) =>

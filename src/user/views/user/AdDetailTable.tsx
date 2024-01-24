@@ -51,6 +51,7 @@ export function AdDetailTable<T extends { id: string }>({
       },
       {
         field: "click",
+        type: "number",
         headerName: "Clicks",
         valueGetter: ({ row }) => engagements.get(row.id)?.clicks?.toString(),
         renderCell: ({ row }) =>
@@ -61,6 +62,7 @@ export function AdDetailTable<T extends { id: string }>({
       },
       {
         field: "landed",
+        type: "number",
         headerName: "Site Visits",
         valueGetter: ({ row }) => engagements.get(row.id)?.landings?.toString(),
         renderCell: ({ row }) =>
@@ -71,6 +73,7 @@ export function AdDetailTable<T extends { id: string }>({
       },
       {
         field: "ctr",
+        type: "number",
         headerName: "CTR",
         valueGetter: ({ row }) => engagements.get(row.id)?.ctr?.toString(),
         renderCell: ({ row }) =>
