@@ -25,6 +25,7 @@ import { EditButton } from "user/campaignList/EditButton";
 import { calculateMetric } from "user/analytics/analyticsOverview/lib/overview.library";
 import { StatsMetric } from "user/analytics/analyticsOverview/types";
 import { uiLabelsForCampaignFormat } from "util/campaign";
+import { stringFilterOperators } from "components/Datagrid/stringFilterOperators";
 
 interface Props {
   advertiser?: AdvertiserCampaignsFragment | null;
@@ -87,6 +88,7 @@ export function CampaignList({ advertiser }: Props) {
       align: "left",
       headerAlign: "left",
       width: 150,
+      filterOperators: stringFilterOperators(),
     },
     {
       field: "state",
@@ -254,6 +256,13 @@ export function CampaignList({ advertiser }: Props) {
         pagination: {
           paginationModel: {
             pageSize: 10,
+          },
+        },
+        filter: {
+          filterModel: {
+            items: [
+              { field: "format", operator: "not", value: "New tab takeover" },
+            ],
           },
         },
       }}
