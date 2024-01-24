@@ -313,7 +313,7 @@ it("should calculate metrics per creative id", () => {
           "body": "be cool",
           "title": "name one",
         },
-        "ctr": "3.23",
+        "ctr": "3.226",
         "dismissRate": "0",
         "dismissals": "0",
         "downvotes": "0",
@@ -323,7 +323,7 @@ it("should calculate metrics per creative id", () => {
         "upvotes": "0",
         "views": "62",
         "viewthroughConversion": "2",
-        "visitRate": "3.23",
+        "visitRate": "3.226",
       },
       {
         "clicks": "2",
@@ -360,7 +360,7 @@ it("should calculate overall stats", () => {
       "convRate": "75",
       "conversions": "3",
       "cpa": "0",
-      "ctr": "5.56",
+      "ctr": "5.556",
       "dismissRate": "0",
       "dismissals": "0",
       "downvotes": "0",
@@ -370,7 +370,7 @@ it("should calculate overall stats", () => {
       "upvotes": "0",
       "views": "72",
       "viewthroughConversion": "2",
-      "visitRate": "6.94",
+      "visitRate": "6.944",
     }
   `);
 });

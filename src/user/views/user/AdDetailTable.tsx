@@ -26,7 +26,7 @@ export function AdDetailTable<T extends { id: string }>({
       {
         field: "spend",
         headerName: "Spend",
-        valueGetter: ({ row }) => engagements.get(row.id)?.spend ?? "N/A",
+        valueGetter: ({ row }) => engagements.get(row.id)?.spend?.toNumber(),
         renderCell: ({ row }) =>
           renderStatsCell(
             loading,
@@ -36,52 +36,48 @@ export function AdDetailTable<T extends { id: string }>({
           ),
         align: "right",
         headerAlign: "right",
-        minWidth: 100,
-        maxWidth: 250,
+        width: 100,
       },
       {
         field: "view",
+        type: "number",
         headerName: "Impressions",
-        valueGetter: ({ row }) => engagements.get(row.id)?.views ?? "N/A",
+        valueGetter: ({ row }) => engagements.get(row.id)?.views?.toString(),
         renderCell: ({ row }) =>
           renderStatsCell(loading, "views", engagements.get(row.id)),
         align: "right",
         headerAlign: "right",
-        minWidth: 100,
-        maxWidth: 250,
+        width: 155,
       },
       {
         field: "click",
         headerName: "Clicks",
-        valueGetter: ({ row }) => engagements.get(row.id)?.clicks,
+        valueGetter: ({ row }) => engagements.get(row.id)?.clicks?.toString(),
         renderCell: ({ row }) =>
           renderStatsCell(loading, "clicks", engagements.get(row.id)),
         align: "right",
         headerAlign: "right",
-        minWidth: 100,
-        maxWidth: 250,
+        width: 125,
       },
       {
         field: "landed",
         headerName: "Site Visits",
-        valueGetter: ({ row }) => engagements.get(row.id)?.landings,
+        valueGetter: ({ row }) => engagements.get(row.id)?.landings?.toString(),
         renderCell: ({ row }) =>
           renderStatsCell(loading, "landings", engagements.get(row.id)),
         align: "right",
         headerAlign: "right",
-        minWidth: 100,
-        maxWidth: 250,
+        width: 125,
       },
       {
         field: "ctr",
         headerName: "CTR",
-        valueGetter: ({ row }) => engagements.get(row.id)?.ctr,
+        valueGetter: ({ row }) => engagements.get(row.id)?.ctr?.toString(),
         renderCell: ({ row }) =>
           renderStatsCell(loading, "ctr", engagements.get(row.id)),
         align: "right",
         headerAlign: "right",
-        minWidth: 100,
-        maxWidth: 250,
+        width: 100,
       },
     );
   }
@@ -98,11 +94,16 @@ export function AdDetailTable<T extends { id: string }>({
       sx={{ borderStyle: "none" }}
       initialState={{
         sorting: {
-          sortModel: [{ field: "createdAt", sort: "desc" }],
+          sortModel: [{ field: "name", sort: "desc" }],
         },
         pagination: {
           paginationModel: {
             pageSize: 10,
+          },
+        },
+        filter: {
+          filterModel: {
+            items: [{ field: "view", operator: ">", value: 0 }],
           },
         },
       }}

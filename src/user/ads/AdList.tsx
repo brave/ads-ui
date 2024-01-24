@@ -7,7 +7,6 @@ import { StatsMetric } from "user/analytics/analyticsOverview/types";
 import { AdDetailTable } from "user/views/user/AdDetailTable";
 import { GridColDef } from "@mui/x-data-grid";
 import { CreativeFragment } from "graphql/creative.generated";
-import { StandardRenderers } from "components/Datagrid/renderers";
 import { Box } from "@mui/material";
 
 interface Props {
@@ -49,15 +48,12 @@ export function AdList({ campaign, loading, engagements }: Props) {
 
   const columns: GridColDef<AdDetails>[] = [
     {
-      field: "createdAt",
-      headerName: "Created",
-      valueGetter: ({ row }) => row.creative.createdAt,
-      renderCell: ({ row }) => StandardRenderers.date(row.creative.createdAt),
-    },
-    {
       field: "name",
       headerName: "Ad Name",
-      valueGetter: ({ row }) => row.creative.name,
+      valueGetter: ({ row }) =>
+        row.adState !== "deleted"
+          ? row.creative.name
+          : `(DELETED) ${row.creative.name}`,
       renderCell: ({ row }) => (
         <Box>
           {row.adState === "deleted" && <strong>(DELETED) </strong>}
