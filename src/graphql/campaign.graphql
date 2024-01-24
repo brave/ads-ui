@@ -78,7 +78,7 @@ fragment CampaignAds on Campaign {
     id
   }
   adSets {
-    ...AdSet
+    ...AdSetWithDeletedAds
   }
 }
 

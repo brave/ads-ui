@@ -1,7 +1,10 @@
 import * as Types from "./types";
 
 import { gql } from "@apollo/client";
-import { AdSetFragmentDoc } from "./ad-set.generated";
+import {
+  AdSetFragmentDoc,
+  AdSetWithDeletedAdsFragmentDoc,
+} from "./ad-set.generated";
 import * as Apollo from "@apollo/client";
 const defaultOptions = {} as const;
 export type CampaignFragment = {
@@ -139,21 +142,13 @@ export type CampaignAdsFragment = {
   advertiser: { id: string };
   adSets: Array<{
     id: string;
-    price?: string | null;
     createdAt: any;
-    billingType?: string | null;
     name: string;
-    totalMax: number;
-    perDay: number;
     state: string;
-    segments: Array<{ code: string; name: string }>;
+    billingType?: string | null;
     oses: Array<{ code: string; name: string }>;
-    conversions: Array<{
-      id: string;
-      type: string;
-      urlPattern: string;
-      observationWindow: number;
-    }>;
+    segments: Array<{ code: string; name: string }>;
+    conversions: Array<{ id: string }>;
     ads: Array<{
       id: string;
       state: string;
@@ -331,21 +326,13 @@ export type LoadCampaignAdsQuery = {
     advertiser: { id: string };
     adSets: Array<{
       id: string;
-      price?: string | null;
       createdAt: any;
-      billingType?: string | null;
       name: string;
-      totalMax: number;
-      perDay: number;
       state: string;
-      segments: Array<{ code: string; name: string }>;
+      billingType?: string | null;
       oses: Array<{ code: string; name: string }>;
-      conversions: Array<{
-        id: string;
-        type: string;
-        urlPattern: string;
-        observationWindow: number;
-      }>;
+      segments: Array<{ code: string; name: string }>;
+      conversions: Array<{ id: string }>;
       ads: Array<{
         id: string;
         state: string;
@@ -506,10 +493,10 @@ export const CampaignAdsFragmentDoc = gql`
       id
     }
     adSets {
-      ...AdSet
+      ...AdSetWithDeletedAds
     }
   }
-  ${AdSetFragmentDoc}
+  ${AdSetWithDeletedAdsFragmentDoc}
 `;
 export const LoadCampaignDocument = gql`
   query LoadCampaign($id: String!) {

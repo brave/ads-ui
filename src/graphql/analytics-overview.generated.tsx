@@ -117,7 +117,7 @@ export type EngagementOverviewQuery = {
     click: number;
     view: number;
     landed: number;
-    spend: number;
+    spend?: number | null;
     campaignId: string;
   }> | null;
 };

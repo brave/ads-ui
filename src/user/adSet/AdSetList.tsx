@@ -8,7 +8,7 @@ import {
 import { CampaignAdsFragment } from "graphql/campaign.generated";
 import { CampaignSource } from "graphql/types";
 import { StatsMetric } from "user/analytics/analyticsOverview/types";
-import { AdSetFragment } from "graphql/ad-set.generated";
+import { AdSetWithDeletedAdsFragment } from "graphql/ad-set.generated";
 import { AdDetailTable } from "user/views/user/AdDetailTable";
 import { displayFromCampaignState } from "util/displayState";
 import { uiLabelsForBillingType } from "util/billingType";
@@ -52,7 +52,7 @@ const ChipList = ({ items, max }: ChipListProps) => {
   );
 };
 
-export type AdSetDetails = AdSetFragment & CampaignExtras;
+export type AdSetDetails = AdSetWithDeletedAdsFragment & CampaignExtras;
 
 export type CampaignExtras = {
   campaignStart: string;
