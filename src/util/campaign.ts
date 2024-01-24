@@ -1,11 +1,11 @@
 import { CampaignFormat } from "graphql/types";
 
 export const CAMPAIGN_FORMATS = [
-  { value: CampaignFormat.PushNotification, label: "Push Notification" },
-  { value: CampaignFormat.NtpSi, label: "New Tab Takeover" },
-  { value: CampaignFormat.NewsDisplayAd, label: "News Display" },
-  { value: CampaignFormat.Search, label: "Search" },
-  { value: CampaignFormat.SearchHomepage, label: "Search Homepage" },
+  { value: CampaignFormat.PushNotification, label: "Notification" },
+  { value: CampaignFormat.NtpSi, label: "New tab takeover" },
+  { value: CampaignFormat.NewsDisplayAd, label: "Newsfeed" },
+  { value: CampaignFormat.Search, label: "Search keyword" },
+  { value: CampaignFormat.SearchHomepage, label: "Search homepage" },
 ];
 
 export function uiLabelsForCampaignFormat(format: CampaignFormat): string {

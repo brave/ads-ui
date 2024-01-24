@@ -41,6 +41,8 @@ export default defineConfig(({ mode }) => {
       assetsDir: "static",
       chunkSizeWarningLimit: 3000,
       sourcemap: true,
+      // vite automagically decides whether to inline assets depending on their size. We are explicitly disabling this.
+      assetsInlineLimit: 0,
     },
     test: {
       // see https://vitest.dev/config/#globals

@@ -120,6 +120,65 @@ export type AdFragment = {
   };
 };
 
+export type AdSetWithDeletedAdsFragment = {
+  id: string;
+  createdAt: any;
+  name: string;
+  state: string;
+  billingType?: string | null;
+  oses: Array<{ code: string; name: string }>;
+  segments: Array<{ code: string; name: string }>;
+  conversions: Array<{ id: string }>;
+  ads: Array<{
+    id: string;
+    state: string;
+    price: string;
+    priceType: Types.ConfirmationType;
+    creative: {
+      id: string;
+      createdAt: any;
+      modifiedAt: any;
+      name: string;
+      state: string;
+      type: { code: string };
+      payloadNotification?: {
+        body: string;
+        title: string;
+        targetUrl: string;
+      } | null;
+      payloadNewTabPage?: {
+        logo?: {
+          imageUrl: string;
+          alt: string;
+          companyName: string;
+          destinationUrl: string;
+        } | null;
+        wallpapers?: Array<{
+          imageUrl: string;
+          focalPoint: { x: number; y: number };
+        }> | null;
+      } | null;
+      payloadInlineContent?: {
+        title: string;
+        ctaText: string;
+        imageUrl: string;
+        targetUrl: string;
+        dimensions: string;
+        description: string;
+      } | null;
+      payloadSearch?: { body: string; title: string; targetUrl: string } | null;
+      payloadSearchHomepage?: {
+        body: string;
+        imageUrl: string;
+        imageDarkModeUrl?: string | null;
+        targetUrl: string;
+        title: string;
+        ctaText: string;
+      } | null;
+    };
+  }>;
+};
+
 export type CreateAdSetMutationVariables = Types.Exact<{
   createAdSetInput: Types.CreateAdSetInput;
 }>;
@@ -311,6 +370,30 @@ export const AdSetFragmentDoc = gql`
       observationWindow
     }
     ads {
+      ...Ad
+    }
+  }
+  ${AdFragmentDoc}
+`;
+export const AdSetWithDeletedAdsFragmentDoc = gql`
+  fragment AdSetWithDeletedAds on AdSet {
+    id
+    createdAt
+    name
+    state
+    billingType
+    oses {
+      code
+      name
+    }
+    segments {
+      code
+      name
+    }
+    conversions {
+      id
+    }
+    ads(includeDeleted: true) {
       ...Ad
     }
   }

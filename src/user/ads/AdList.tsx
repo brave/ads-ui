@@ -8,6 +8,7 @@ import { AdDetailTable } from "user/views/user/AdDetailTable";
 import { GridColDef } from "@mui/x-data-grid";
 import { CreativeFragment } from "graphql/creative.generated";
 import { StandardRenderers } from "components/Datagrid/renderers";
+import { Box } from "@mui/material";
 
 interface Props {
   campaign?: CampaignAdsFragment | null;
@@ -17,6 +18,7 @@ interface Props {
 
 export type AdDetails = AdFragment & {
   adSetName: string;
+  adState: string;
   campaignName: string;
   campaignEnd: string;
   campaignSource: CampaignSource;
@@ -26,22 +28,21 @@ export type AdDetails = AdFragment & {
 
 export function AdList({ campaign, loading, engagements }: Props) {
   const adSets = campaign?.adSets?.map((c) => ({
-    ads: (c.ads ?? [])
-      .filter((ad) => ad.state !== "deleted")
-      .map((ad) => {
-        const detail: AdDetails = {
-          ...ad,
-          state: isAfterEndDate(campaign?.endAt) ? "completed" : c.state,
-          adSetName: c.name || c.id.substring(0, 8),
-          campaignId: campaign?.id,
-          campaignName: campaign?.name,
-          campaignEnd: campaign?.endAt,
-          campaignSource: campaign?.source,
-          advertiserId: campaign?.advertiser.id,
-        };
+    ads: (c.ads ?? []).map((ad) => {
+      const detail: AdDetails = {
+        ...ad,
+        adState: ad.state,
+        state: isAfterEndDate(campaign?.endAt) ? "completed" : c.state,
+        adSetName: c.name || c.id.substring(0, 8),
+        campaignId: campaign?.id,
+        campaignName: campaign?.name,
+        campaignEnd: campaign?.endAt,
+        campaignSource: campaign?.source,
+        advertiserId: campaign?.advertiser.id,
+      };
 
-        return detail;
-      }),
+      return detail;
+    }),
   }));
 
   const ads: AdDetails[] = _.flatMap(adSets, "ads");
@@ -57,6 +58,12 @@ export function AdList({ campaign, loading, engagements }: Props) {
       field: "name",
       headerName: "Ad Name",
       valueGetter: ({ row }) => row.creative.name,
+      renderCell: ({ row }) => (
+        <Box>
+          {row.adState === "deleted" && <strong>(DELETED) </strong>}
+          {row.creative.name}
+        </Box>
+      ),
       flex: 1,
     },
     {

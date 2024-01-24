@@ -55,7 +55,7 @@ export function CreativeList() {
     },
     {
       field: "type",
-      headerName: "Type",
+      headerName: "Ad Format",
       valueGetter: ({ row }) => uiTextForCreativeTypeCode(row.type),
       align: "left",
       width: 200,

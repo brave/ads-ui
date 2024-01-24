@@ -44,7 +44,7 @@ export function MagicLink() {
 
   return (
     <AuthContainer>
-      <Typography sx={{ textAlign: "center", mb: 3 }} variant="h1">
+      <Typography sx={{ textAlign: "center", mb: 3 }} variant="subtitle1">
         Enter your email address to get a secure login link. Use this link to
         access your Brave Ads account.
       </Typography>

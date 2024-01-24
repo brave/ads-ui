@@ -144,13 +144,18 @@ export type CreateAdSetInput = {
   ads?: InputMaybe<Array<CreateAdInput>>;
   bannedKeywords?: InputMaybe<Array<Scalars["String"]["input"]>>;
   billingType: Scalars["String"]["input"];
+  brandedDesktopPrice?: InputMaybe<Scalars["Numeric"]["input"]>;
+  brandedMobilePrice?: InputMaybe<Scalars["Numeric"]["input"]>;
   campaignId?: InputMaybe<Scalars["String"]["input"]>;
   conversions?: InputMaybe<Array<CreateConversionInput>>;
+  externalId?: InputMaybe<Scalars["String"]["input"]>;
   keywordSimilarity?: InputMaybe<Scalars["Float"]["input"]>;
   keywords?: InputMaybe<Array<Scalars["String"]["input"]>>;
   name?: InputMaybe<Scalars["String"]["input"]>;
   negativeKeywords?: InputMaybe<Array<Scalars["String"]["input"]>>;
   negativeTriggerUrls?: InputMaybe<Array<Scalars["String"]["input"]>>;
+  nonBrandedDesktopPrice?: InputMaybe<Scalars["Numeric"]["input"]>;
+  nonBrandedMobilePrice?: InputMaybe<Scalars["Numeric"]["input"]>;
   oses?: InputMaybe<Array<CreateOsInput>>;
   perDay: Scalars["Float"]["input"];
   /** The price in the owning campaign's currency for each single confirmation of the priceType specified. Note therefore that the caller is responsible for dividing cost-per-mille by 1000. */
@@ -425,14 +430,19 @@ export type UpdateAdSetInput = {
   ads?: InputMaybe<Array<CreateAdInput>>;
   bannedKeywords?: InputMaybe<Array<Scalars["String"]["input"]>>;
   billingType?: InputMaybe<Scalars["String"]["input"]>;
+  brandedDesktopPrice?: InputMaybe<Scalars["Numeric"]["input"]>;
+  brandedMobilePrice?: InputMaybe<Scalars["Numeric"]["input"]>;
   campaignId?: InputMaybe<Scalars["String"]["input"]>;
   conversions?: InputMaybe<Array<UpdateConversionsInput>>;
+  externalId?: InputMaybe<Scalars["String"]["input"]>;
   id?: InputMaybe<Scalars["String"]["input"]>;
   keywordSimilarity?: InputMaybe<Scalars["Float"]["input"]>;
   keywords?: InputMaybe<Array<Scalars["String"]["input"]>>;
   name?: InputMaybe<Scalars["String"]["input"]>;
   negativeKeywords?: InputMaybe<Array<Scalars["String"]["input"]>>;
   negativeTriggerUrls?: InputMaybe<Array<Scalars["String"]["input"]>>;
+  nonBrandedDesktopPrice?: InputMaybe<Scalars["Numeric"]["input"]>;
+  nonBrandedMobilePrice?: InputMaybe<Scalars["Numeric"]["input"]>;
   optimized?: InputMaybe<Scalars["Boolean"]["input"]>;
   oses?: InputMaybe<Array<UpdateOSesInput>>;
   perDay?: InputMaybe<Scalars["Float"]["input"]>;

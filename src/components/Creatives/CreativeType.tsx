@@ -9,11 +9,11 @@ export function CreativeType(props: { allowTypeChange?: boolean }) {
   const supportedTypes = [
     {
       value: "notification_all_v1",
-      label: "Push Notification",
+      label: "Notification ads",
     },
     {
       value: "inline_content_all_v1",
-      label: "News Display",
+      label: "Newsfeed ads",
     },
   ];
 

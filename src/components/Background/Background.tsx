@@ -1,11 +1,14 @@
 import { PropsWithChildren } from "react";
-import gradient from "../../../background.svg";
+import gradient from "../../../darker-gradient.svg";
 import { Container } from "@mui/material";
+import { useIsMobile } from "hooks/useIsMobile";
 
 export function Background({ children }: PropsWithChildren) {
+  const isMobile = useIsMobile();
+
   return (
     <Container
-      maxWidth={false}
+      maxWidth={isMobile ? "md" : false}
       sx={{
         alignItems: "center",
         justifyContent: "center",
