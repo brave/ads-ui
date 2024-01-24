@@ -101,11 +101,6 @@ export function AdDetailTable<T extends { id: string }>({
             pageSize: 10,
           },
         },
-        filter: {
-          filterModel: {
-            items: [{ field: "view", operator: ">", value: 0 }],
-          },
-        },
       }}
     />
   );
