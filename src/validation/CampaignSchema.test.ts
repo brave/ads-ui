@@ -123,7 +123,7 @@ describe("pricing tests", () => {
     expect(() =>
       CampaignSchema(prices).validateSync(nextState),
     ).toThrowErrorMatchingInlineSnapshot(
-      `[ValidationError: No cpc pricing available for News Display, contact selfserve@brave.com for help]`,
+      `[ValidationError: No cpc pricing available for Newsfeed, contact selfserve@brave.com for help]`,
     );
   });
 });
