@@ -9,7 +9,7 @@ import {
   string,
   StringSchema,
 } from "yup";
-import { startOfDay } from "date-fns";
+import { differenceInHours, startOfDay } from "date-fns";
 import { twoDaysOut } from "form/DateFieldHelpers";
 import { TrailingAsteriskRegex } from "validation/regex";
 import { CreativeSchema } from "validation/CreativeSchema";
@@ -35,20 +35,28 @@ export const CampaignSchema = (prices: AdvertiserPrice[]) =>
       .min(
         MIN_PER_CAMPAIGN,
         `Lifetime budget must be $${MIN_PER_CAMPAIGN} or more`,
-      ),
+      )
+      .when(["startAt", "endAt"], ([startAt, endAt], schema) => {
+        const campaignRuntime = Math.floor(
+          differenceInHours(new Date(endAt), new Date(startAt)) / 24,
+        );
+        const hasRuntime = campaignRuntime > 0;
+
+        return schema.test(
+          "is-valid-budget",
+          ({ value }) =>
+            `Lifetime budget must be higher for date range provided. Minimum $${hasRuntime && BigNumber(value).gte(MIN_PER_CAMPAIGN) ? MIN_PER_DAY * campaignRuntime : MIN_PER_CAMPAIGN}.`,
+          (value) =>
+            hasRuntime
+              ? BigNumber(value).div(campaignRuntime).gte(MIN_PER_DAY)
+              : true,
+        );
+      }),
     newCreative: object().when("isCreating", {
       is: true,
       then: () => CreativeSchema,
     }),
     validateStart: boolean(),
-    dailyBudget: number()
-      .label("Daily Budget")
-      .required()
-      .positive()
-      .min(
-        MIN_PER_DAY,
-        "Lifetime budget must be higher for date range provided",
-      ),
     startAt: date()
       .label("Start Date")
       .when("validateStart", {

@@ -72,7 +72,6 @@ export type AdvertiserCampaignsFragment = {
     currency: string;
     budget: number;
     paymentType: Types.PaymentType;
-    dailyBudget: number;
     spent: number;
     createdAt: any;
     startAt: any;
@@ -108,7 +107,6 @@ export type AdvertiserCampaignsQuery = {
       currency: string;
       budget: number;
       paymentType: Types.PaymentType;
-      dailyBudget: number;
       spent: number;
       createdAt: any;
       startAt: any;
