@@ -9,9 +9,18 @@ fragment Engagement on Engagement {
   creativeid
   creativestate
   creativepayload
-  count
+  view
+  click
+  viewthroughConversion
+  clickthroughConversion
+  conversion
+  dismiss
+  downvote
+  landed
+  spend
+  upvote
+  downvote
   price
-  cost
   android
   ios
   linux

@@ -124,7 +124,9 @@ export function CampaignList({ advertiser }: Props) {
     {
       field: "view",
       headerName: "Impressions",
-      valueGetter: ({ row }) => engagementData?.get(row.id)?.["view"] ?? "N/A",
+      type: "number",
+      valueGetter: ({ row }) =>
+        engagementData?.get(row.id)?.["view"]?.toString(),
       renderCell: ({ row }) =>
         renderEngagementCell(loading, row, "view", engagementData),
       align: "right",
@@ -135,7 +137,9 @@ export function CampaignList({ advertiser }: Props) {
     {
       field: "click",
       headerName: "Clicks",
-      valueGetter: ({ row }) => engagementData?.get(row.id)?.["click"] ?? "N/A",
+      type: "number",
+      valueGetter: ({ row }) =>
+        engagementData?.get(row.id)?.["click"]?.toString(),
       renderCell: ({ row }) =>
         renderEngagementCell(loading, row, "click", engagementData),
       align: "right",
@@ -146,8 +150,9 @@ export function CampaignList({ advertiser }: Props) {
     {
       field: "landed",
       headerName: "Site visits",
+      type: "number",
       valueGetter: ({ row }) =>
-        engagementData?.get(row.id)?.["landed"] ?? "N/A",
+        engagementData?.get(row.id)?.["landed"]?.toString(),
       renderCell: ({ row }) =>
         renderEngagementCell(loading, row, "landed", engagementData),
       align: "right",
@@ -158,8 +163,9 @@ export function CampaignList({ advertiser }: Props) {
     {
       field: "ctr",
       headerName: "CTR",
+      type: "number",
       valueGetter: ({ row }) =>
-        getStatFromEngagement(row, "click", "view", engagementData),
+        getStatFromEngagement(row, "click", "view", engagementData)?.toString(),
       renderCell: ({ row }) =>
         renderStatsCell(
           loading,

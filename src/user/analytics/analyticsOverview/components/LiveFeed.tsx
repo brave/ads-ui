@@ -1,5 +1,6 @@
 import { Box, Chip, Typography } from "@mui/material";
 import { OverviewDetail, StatsMetric } from "../types";
+import { toLocaleString } from "util/bignumber";
 
 interface OverviewProps extends OverviewDetail {
   currency: string;
@@ -18,46 +19,54 @@ interface Feed {
 
 export default function LiveFeed({ overview, processed }: LiveFeedProps) {
   const { budget, currency } = overview;
-  const realSpend = processed.spend > budget ? budget : processed.spend;
+  const realSpend = processed.spend.gte(budget) ? budget : processed.spend;
 
   const feedValues: Feed[] = [
     {
       label: "Click-through rate",
-      value: `${processed.ctr.toFixed(2)}%`,
+      value: `${toLocaleString(processed.ctr)}%`,
     },
     {
       label: "Site visit rate",
-      value: `${processed.visitRate.toFixed(2)}%`,
+      value: `${toLocaleString(processed.visitRate)}%`,
     },
     {
       label: "Dismissal rate",
-      value: `${processed.dismissRate.toFixed(2)}%`,
+      value: `${toLocaleString(processed.dismissRate)}%`,
     },
     {
       label: "Click to site visit rate",
-      value: `${processed.landingRate.toFixed(2)}%`,
+      value: `${toLocaleString(processed.landingRate)}%`,
     },
-    { label: "Upvotes", value: `${processed.upvotes}` },
-    { label: "Downvotes", value: `${processed.downvotes}` },
+    { label: "Upvotes", value: toLocaleString(processed.upvotes) },
+    { label: "Downvotes", value: toLocaleString(processed.downvotes) },
     {
       label: "Spend",
-      value: `${realSpend.toLocaleString()} ${currency}`,
+      value: `$${toLocaleString(realSpend)} ${currency}`,
     },
     {
       label: "Budget",
-      value: `${budget.toLocaleString()} ${currency}`,
+      value: `$${toLocaleString(budget)} ${currency}`,
     },
   ];
 
-  if (processed.conversions > 0) {
+  if (processed.conversions.gt(0)) {
     feedValues.push(
       {
         label: "Conversions",
-        value: `${processed.conversions}`,
+        value: toLocaleString(processed.conversions),
+      },
+      {
+        label: "View-through Conversions",
+        value: toLocaleString(processed.viewthroughConversion),
+      },
+      {
+        label: "Click-through Conversions",
+        value: toLocaleString(processed.clickthroughConversion),
       },
       {
         label: "CPA",
-        value: `$${processed.cpa.toLocaleString()}`,
+        value: `$${toLocaleString(processed.cpa)} ${currency}`,
       },
     );
   }

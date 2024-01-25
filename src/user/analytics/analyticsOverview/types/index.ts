@@ -1,3 +1,5 @@
+import BigNumber from "bignumber.js";
+
 export type Metrics = {
   metric1?: { key: keyof StatsMetric; active: boolean };
   metric2?: { key: keyof StatsMetric; active: boolean };
@@ -14,23 +16,25 @@ export type OS = {
 };
 
 export type BaseMetric = {
-  views: number;
-  clicks: number;
-  conversions: number;
-  landings: number;
-  spend: number;
-  upvotes: number;
-  downvotes: number;
-  dismissals: number;
+  views: BigNumber;
+  clicks: BigNumber;
+  conversions: BigNumber;
+  landings: BigNumber;
+  spend: BigNumber;
+  upvotes: BigNumber;
+  downvotes: BigNumber;
+  dismissals: BigNumber;
+  clickthroughConversion: BigNumber;
+  viewthroughConversion: BigNumber;
 };
 
 export type StatsMetric = BaseMetric & {
-  ctr: number;
-  convRate: number;
-  landingRate: number;
-  dismissRate: number;
-  cpa: number;
-  visitRate: number;
+  ctr: BigNumber;
+  convRate: BigNumber;
+  landingRate: BigNumber;
+  dismissRate: BigNumber;
+  cpa: BigNumber;
+  visitRate: BigNumber;
 };
 
 export type Tooltip = {
@@ -43,8 +47,6 @@ export type Tooltip = {
 export type CreativeMetric = StatsMetric & {
   creativePayload: { title: string; body: string };
 };
-
-export type EngagementChartType = "campaign" | "creative" | "creativeset";
 
 export interface Option {
   value: string;

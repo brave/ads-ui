@@ -17,6 +17,8 @@ import { CampaignExtras } from "user/adSet/AdSetList";
 import { FilterContext } from "state/context";
 import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
 import { UpdateAdSetInput } from "graphql/types";
+import { toLocaleString } from "util/bignumber";
+import BigNumber from "bignumber.js";
 
 export type CellValueRenderer = (value: any) => ReactNode;
 const ADS_DEFAULT_TIMEZONE = "America/New_York";
@@ -78,16 +80,14 @@ export const StandardRenderers: Record<string, CellValueRenderer> = {
 };
 
 export function renderMonetaryAmount(
-  value: number,
+  value: BigNumber | number,
   currency: string,
-): ReactNode {
+) {
+  const val = BigNumber(value);
   if (currency === "USD") {
-    return `$${value.toLocaleString("en", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    })}`;
+    return `$${toLocaleString(val)}`;
   } else {
-    return <span>{value.toLocaleString("en")}&nbsp;BAT</span>;
+    return `${toLocaleString(val)} ${currency}`;
   }
 }
 
