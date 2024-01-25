@@ -45,7 +45,7 @@ export const CampaignSchema = (prices: AdvertiserPrice[]) =>
         return schema.test(
           "is-valid-budget",
           ({ value }) =>
-            `Lifetime budget must be higher for date range provided. Minimum $${hasRuntime && BigNumber(value).gte(MIN_PER_CAMPAIGN) ? MIN_PER_DAY * campaignRuntime : MIN_PER_CAMPAIGN}.`,
+            `Lifetime budget must be higher for date range provided. Minimum $${BigNumber(value).gte(MIN_PER_CAMPAIGN) ? MIN_PER_DAY * campaignRuntime : MIN_PER_CAMPAIGN}.`,
           (value) =>
             hasRuntime
               ? BigNumber(value).div(campaignRuntime).gte(MIN_PER_DAY)
