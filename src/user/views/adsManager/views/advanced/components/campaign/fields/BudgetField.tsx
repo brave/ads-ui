@@ -1,20 +1,17 @@
-import { InputAdornment, Stack, Typography } from "@mui/material";
-import { FormikTextField, useIsEdit } from "form/FormikHelpers";
-import { useEffect, useState } from "react";
-import { useField, useFormikContext } from "formik";
-import { CampaignForm } from "../../../../../types";
-import { differenceInHours } from "date-fns";
-import { MIN_PER_CAMPAIGN, MIN_PER_DAY } from "validation/CampaignSchema";
-import { CardContainer } from "components/Card/CardContainer";
-import { useAdvertiserWithPrices } from "user/hooks/useAdvertiserWithPrices";
-import { BillingModelSelect } from "../components/BillingModelSelect";
-import { CustomPriceSelect } from "../components/CustomPriceSelect";
+import {InputAdornment} from "@mui/material";
+import {FormikTextField, useIsEdit} from "form/FormikHelpers";
+import {useEffect, useState} from "react";
+import {useField, useFormikContext} from "formik";
+import {CampaignForm} from "../../../../../types";
+import {differenceInHours} from "date-fns";
+import {MIN_PER_CAMPAIGN, MIN_PER_DAY} from "validation/CampaignSchema";
+import {useAdvertiserWithPrices} from "user/hooks/useAdvertiserWithPrices";
 
 export function BudgetField() {
   const [, , dailyBudget] = useField<number>("dailyBudget");
-  const { isDraft } = useIsEdit();
-  const { data } = useAdvertiserWithPrices();
-  const { values, errors } = useFormikContext<CampaignForm>();
+  const {isDraft} = useIsEdit();
+  const {data} = useAdvertiserWithPrices();
+  const {values, errors} = useFormikContext<CampaignForm>();
   const [minBudget, setMinBudget] = useState(MIN_PER_CAMPAIGN);
   const campaignRuntime = Math.floor(
     differenceInHours(new Date(values.endAt), new Date(values.startAt)) / 24,
@@ -38,37 +35,24 @@ export function BudgetField() {
   }, [campaignRuntime, values.budget, minBudget]);
 
   return (
-    <CardContainer header="Budget">
-      <Typography variant="body2" gutterBottom>
-        Set a limit on how much your campaign will spend.
-      </Typography>
-      <Stack direction="column" spacing={2}>
-        <FormikTextField
-          name="budget"
-          label="Lifetime Budget"
-          margin="normal"
-          type="number"
-          InputProps={{
-            startAdornment: <InputAdornment position="start">$</InputAdornment>,
-            endAdornment: (
-              <InputAdornment position="end">{values.currency}</InputAdornment>
-            ),
-          }}
-          helperText={
-            errors.budget || errors.dailyBudget
-              ? `${errors.dailyBudget}. Minimum $${minBudget}.`
-              : undefined
-          }
-          error={!!errors.budget || !!errors.dailyBudget}
-          disabled={!isDraft && !data.selfServiceSetPrice}
-        />
-
-        {!data.selfServiceSetPrice && (
-          <BillingModelSelect prices={data.prices} />
-        )}
-
-        {data.selfServiceSetPrice && <CustomPriceSelect />}
-      </Stack>
-    </CardContainer>
+    <FormikTextField
+      name="budget"
+      label="Lifetime Budget"
+      margin="normal"
+      type="number"
+      InputProps={{
+        startAdornment: <InputAdornment position="start">$</InputAdornment>,
+        endAdornment: (
+          <InputAdornment position="end">{values.currency}</InputAdornment>
+        ),
+      }}
+      helperText={
+        errors.budget || errors.dailyBudget
+          ? `${errors.dailyBudget}. Minimum $${minBudget}.`
+          : undefined
+      }
+      error={!!errors.budget || !!errors.dailyBudget}
+      disabled={!isDraft && !data.selfServiceSetPrice}
+    />
   );
 }

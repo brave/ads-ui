@@ -41,7 +41,7 @@ export const SegmentPicker = ({ idx }: Props) => {
       <Box marginTop={3} marginLeft={1}>
         <FormikSwitch
           name={`adSets.${idx}.isNotTargeting`}
-          label="Let Brave pick categories for me."
+          label="Automatic interest targeting"
         />
       </Box>
       {!targetMeta.value && (
@@ -71,10 +71,11 @@ export const SegmentPicker = ({ idx }: Props) => {
               {...params}
               label="Audiences"
               helperText={
-                meta.error ??
-                "Select the audience segments to target. Brave will decide if left untargeted."
+                meta.touched && !!meta.error
+                  ? meta.error
+                  : "Select the audience segments to target. Brave will decide if left untargeted."
               }
-              error={!!meta.error}
+              error={meta.touched && !!meta.error}
             />
           )}
           isOptionEqualToValue={(option, value) => option.code === value.code}

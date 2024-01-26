@@ -1,8 +1,9 @@
-import { Link, Stack, Typography } from "@mui/material";
+import { Button, Link, Stack, Typography } from "@mui/material";
 import { ConversionFields } from "components/Conversion/ConversionFields";
 import { FieldArray, FieldArrayRenderProps, useField } from "formik";
 import { Conversion, initialConversion } from "../../../../../types";
 import { CardContainer } from "components/Card/CardContainer";
+import { Add } from "@mui/icons-material";
 
 interface Props {
   index: number;
@@ -11,27 +12,31 @@ interface Props {
 export function ConversionField({ index }: Props) {
   const [, meta] = useField<Conversion[]>(`adSets.${index}.conversions`);
   const conversions = meta.value ?? [];
+  const hasConversions = conversions.length > 0;
 
   return (
     <CardContainer header="Conversion">
       <FieldArray name={`adSets.${index}.conversions`}>
         {(helper: FieldArrayRenderProps) => (
           <>
-            <Stack direction="row" spacing={1}>
+            <Stack direction={hasConversions ? "row" : "column"} spacing={1}>
               <Typography variant="body2" sx={{ mb: 2 }}>
                 Define post-engagement analytics.
               </Typography>
-              {conversions.length === 0 && (
-                <Link
-                  underline="none"
-                  variant="body2"
+              {!hasConversions && (
+                <Button
+                  variant="contained"
                   onClick={() => helper.push(initialConversion)}
-                  sx={{ cursor: "pointer" }}
+                  sx={{
+                    maxWidth: 300,
+                    borderRadius: "16px",
+                  }}
+                  endIcon={<Add />}
                 >
-                  Add Conversion Tracking +
-                </Link>
+                  Add Conversion tracking
+                </Button>
               )}
-              {conversions.length === 1 && (
+              {hasConversions && (
                 <Link
                   underline="none"
                   variant="body2"

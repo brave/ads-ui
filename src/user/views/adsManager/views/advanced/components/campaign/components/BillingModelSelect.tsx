@@ -17,7 +17,8 @@ export function BillingModelSelect(props: { prices: AdvertiserPrice[] }) {
   return (
     <Stack maxWidth={500}>
       <Typography variant="body2">
-        {uiLabelsForCampaignFormat(format.value)} billing configuration
+        {uiLabelsForCampaignFormat(format.value)} pricing configuration
+        option(s)
       </Typography>
       <List sx={{ display: "flex", flexDirection: "row", gap: "20px" }}>
         {props.prices
