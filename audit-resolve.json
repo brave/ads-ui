@@ -1,9 +1,9 @@
 {
   "decisions": {
-    "1096292|vite-plugin-checker>lodash.pick": {
+    "1096303|vite-plugin-checker>lodash.pick": {
       "decision": "ignore",
-      "madeAt": 1706203247319,
-      "expiresAt": 1708795235684
+      "madeAt": 1706290095658,
+      "expiresAt": 1708882081719
     }
   },
   "rules": {},
