@@ -6,7 +6,6 @@ import { PaymentButton } from "user/views/adsManager/views/advanced/components/f
 import { AdSetFields } from "user/views/adsManager/views/advanced/components/adSet/AdSetFields";
 import { NewAdSet } from "user/views/adsManager/views/advanced/components/adSet/NewAdSet";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
-import { BudgetSettings } from "user/views/adsManager/views/advanced/components/campaign/BudgetSettings";
 import { FormContext } from "state/context";
 import { useState } from "react";
 import { AdvertiserPrice } from "user/hooks/useAdvertiserWithPrices";
@@ -25,11 +24,6 @@ export function BaseForm({ hasPaymentIntent, prices }: Props) {
       label: "Campaign Settings",
       path: `${url}/settings`,
       component: <CampaignSettings prices={prices} />,
-    },
-    {
-      label: "Budget",
-      path: `${url}/budget`,
-      component: <BudgetSettings />,
     },
     {
       label: "Ad Sets",

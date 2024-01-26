@@ -4,6 +4,7 @@ import { Box } from "@mui/material";
 import { useEffect } from "react";
 import { CampaignReview } from "./components/CampaignReview";
 import { AdSetReview } from "./components/AdSetReview";
+import { PaymentMethodField } from "user/views/adsManager/views/advanced/components/campaign/fields/PaymentMethodField";
 
 export function Review() {
   const { values, errors, setTouched } = useFormikContext<CampaignForm>();
@@ -28,6 +29,8 @@ export function Review() {
           errors={errors.adSets?.[adSetIdx]}
         />
       ))}
+
+      <PaymentMethodField />
     </Box>
   );
 }
