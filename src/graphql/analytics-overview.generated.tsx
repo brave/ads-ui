@@ -14,9 +14,17 @@ export type EngagementFragment = {
   creativeid: string;
   creativestate: string;
   creativepayload: string;
-  count: number;
+  view: string;
+  click: string;
+  viewthroughConversion: string;
+  clickthroughConversion: string;
+  conversion: string;
+  dismiss: string;
+  downvote: string;
+  landed: string;
+  spend: string;
+  upvote: string;
   price: number;
-  cost: number;
   android: number;
   ios: number;
   linux: number;
@@ -51,9 +59,17 @@ export type CampaignWithEngagementsFragment = {
     creativeid: string;
     creativestate: string;
     creativepayload: string;
-    count: number;
+    view: string;
+    click: string;
+    viewthroughConversion: string;
+    clickthroughConversion: string;
+    conversion: string;
+    dismiss: string;
+    downvote: string;
+    landed: string;
+    spend: string;
+    upvote: string;
     price: number;
-    cost: number;
     android: number;
     ios: number;
     linux: number;
@@ -94,9 +110,17 @@ export type AnalyticOverviewQuery = {
       creativeid: string;
       creativestate: string;
       creativepayload: string;
-      count: number;
+      view: string;
+      click: string;
+      viewthroughConversion: string;
+      clickthroughConversion: string;
+      conversion: string;
+      dismiss: string;
+      downvote: string;
+      landed: string;
+      spend: string;
+      upvote: string;
       price: number;
-      cost: number;
       android: number;
       ios: number;
       linux: number;
@@ -134,9 +158,18 @@ export const EngagementFragmentDoc = gql`
     creativeid
     creativestate
     creativepayload
-    count
+    view
+    click
+    viewthroughConversion
+    clickthroughConversion
+    conversion
+    dismiss
+    downvote
+    landed
+    spend
+    upvote
+    downvote
     price
-    cost
     android
     ios
     linux

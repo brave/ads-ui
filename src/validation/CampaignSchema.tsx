@@ -20,7 +20,7 @@ import { Billing } from "user/views/adsManager/types";
 import { uiLabelsForCampaignFormat } from "util/campaign";
 
 export const MIN_PER_DAY = 33;
-export const MIN_PER_CAMPAIGN = 100;
+export const MIN_PER_CAMPAIGN = 500;
 
 export const CampaignSchema = (prices: AdvertiserPrice[]) =>
   object().shape({

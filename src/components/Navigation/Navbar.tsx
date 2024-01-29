@@ -1,7 +1,7 @@
 import { AppBar, Button, Divider, Stack, Toolbar } from "@mui/material";
 
 import { DraftMenu } from "components/Navigation/DraftMenu";
-import ads from "../../../branding.svg";
+import ads from "../../../logo.svg";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useSignOut } from "auth/hooks/mutations/useSignOut";
 import { NewCampaignButton } from "components/Navigation/NewCampaignButton";

@@ -8,6 +8,7 @@ import {
   Tooltip,
 } from "user/analytics/analyticsOverview/types";
 import { EngagementFragment } from "graphql/analytics-overview.generated";
+import BigNumber from "bignumber.js";
 
 type MetricDataSet = {
   metric1DataSet: number[][];
@@ -176,54 +177,44 @@ const mapGroupingName = (grouping: string) => {
 };
 
 export const mapMetric = (engagement: EngagementFragment): BaseMetric => {
-  const byType = (type: string, e: EngagementFragment) =>
-    e.type === type ? e.count : 0;
-
   return {
-    views: byType("view", engagement),
-    conversions: byType("conversion", engagement),
-    landings: byType("landed", engagement),
-    clicks: byType("click", engagement),
-    spend: engagement.cost,
-    upvotes: byType("upvote", engagement),
-    downvotes: byType("downvote", engagement),
-    dismissals: byType("dismiss", engagement),
+    views: BigNumber(engagement.view),
+    conversions: BigNumber(engagement.conversion),
+    landings: BigNumber(engagement.landed),
+    clicks: BigNumber(engagement.click),
+    spend: BigNumber(engagement.spend),
+    upvotes: BigNumber(engagement.upvote),
+    downvotes: BigNumber(engagement.downvote),
+    dismissals: BigNumber(engagement.dismiss),
+    clickthroughConversion: BigNumber(engagement.clickthroughConversion),
+    viewthroughConversion: BigNumber(engagement.viewthroughConversion),
   };
 };
 
 export const reduceMetric = (a: BaseMetric, b: BaseMetric) => {
   return {
-    views: a.views + b.views,
-    conversions: a.conversions + b.conversions,
-    landings: a.landings + b.landings,
-    clicks: a.clicks + b.clicks,
-    spend: a.spend + b.spend,
-    upvotes: a.upvotes + b.upvotes,
-    downvotes: a.downvotes + b.downvotes,
-    dismissals: a.dismissals + b.dismissals,
+    views: a.views.plus(b.views),
+    conversions: a.conversions.plus(b.conversions),
+    landings: a.landings.plus(b.landings),
+    clicks: a.clicks.plus(b.clicks),
+    spend: a.spend.plus(b.spend),
+    upvotes: a.upvotes.plus(b.upvotes),
+    downvotes: a.downvotes.plus(b.downvotes),
+    dismissals: a.dismissals.plus(b.dismissals),
+    clickthroughConversion: a.clickthroughConversion.plus(
+      b.clickthroughConversion,
+    ),
+    viewthroughConversion: a.viewthroughConversion.plus(
+      b.viewthroughConversion,
+    ),
   };
 };
 
 export const processStats = (
   engagements: EngagementFragment[],
-): StatsMetric => {
+): StatsMetric | null => {
   if (engagements.length === 0) {
-    return {
-      clicks: 0,
-      convRate: 0,
-      conversions: 0,
-      cpa: 0,
-      ctr: 0,
-      dismissRate: 0,
-      dismissals: 0,
-      downvotes: 0,
-      landingRate: 0,
-      landings: 0,
-      spend: 0,
-      upvotes: 0,
-      views: 0,
-      visitRate: 0,
-    };
+    return null;
   }
 
   const reduced = engagements.map(mapMetric).reduce(reduceMetric);
@@ -241,17 +232,15 @@ export const processStats = (
 
 export function calculateMetric(
   isPercent: boolean,
-  numerator: number,
-  denominator: number,
+  numerator: BigNumber | number,
+  denominator: BigNumber | number,
 ) {
-  let metric: number;
+  let metric = BigNumber(numerator).dividedBy(denominator);
   if (isPercent) {
-    metric = (numerator / denominator) * 100;
-  } else {
-    metric = numerator / denominator;
+    metric = metric.multipliedBy(100);
   }
 
-  return metric === Infinity ? 0 : metric;
+  return !metric.isFinite() ? BigNumber(0) : metric.dp(3);
 }
 
 export const processData = (
@@ -279,21 +268,24 @@ export const processData = (
     const date = moment(key).valueOf();
     const data = groupedData[key];
     const processed = processStats(data);
+    if (!processed) {
+      continue;
+    }
 
     if (metric1) {
-      metric1DataSet.push([date, processed[metric1.key]]);
+      metric1DataSet.push([date, processed[metric1.key].toNumber()]);
     }
 
     if (metric2) {
-      metric2DataSet.push([date, processed[metric2.key]]);
+      metric2DataSet.push([date, processed[metric2.key].toNumber()]);
     }
 
     if (metric3) {
-      metric3DataSet.push([date, processed[metric3.key]]);
+      metric3DataSet.push([date, processed[metric3.key].toNumber()]);
     }
 
     if (metric4) {
-      metric4DataSet.push([date, processed[metric4.key]]);
+      metric4DataSet.push([date, processed[metric4.key].toNumber()]);
     }
   }
 

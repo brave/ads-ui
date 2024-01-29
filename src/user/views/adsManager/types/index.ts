@@ -101,8 +101,8 @@ export const initialCreative: Creative = {
 
 export const initialAdSet: AdSetForm = {
   name: "",
-  isNotTargeting: true,
-  segments: [{ code: "Svp7l-zGN", name: "untargeted" }],
+  isNotTargeting: false,
+  segments: [],
   conversions: [],
   oses: [],
   creatives: [],

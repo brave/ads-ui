@@ -3,6 +3,7 @@ import { renderMonetaryAmount } from "components/Datagrid/renderers";
 import { CampaignSummaryFragment } from "graphql/campaign.generated";
 import { CampaignFormat } from "graphql/types";
 import { StatsMetric } from "user/analytics/analyticsOverview/types";
+import { toLocaleString } from "util/bignumber";
 
 export type EngagementOverview = {
   campaignId: string;
@@ -61,7 +62,11 @@ export const renderStatsCell = (
     return <Skeleton />;
   }
 
-  if (!val || val[type] <= 0) {
+  if (!val || !val[type]) {
+    return <Box>-</Box>;
+  }
+
+  if (val[type].lte(0) || val[type].isNaN()) {
     return <Box>-</Box>;
   }
 
@@ -71,11 +76,11 @@ export const renderStatsCell = (
     case "dismissRate":
     case "landingRate":
     case "visitRate":
-      return <Box>{val[type].toLocaleString()}%</Box>;
+      return <Box>{toLocaleString(val[type])}%</Box>;
     case "spend":
     case "cpa":
       return renderMonetaryAmount(val.spend, currency ?? "USD");
     default:
-      return <Box>{val[type].toLocaleString()}</Box>;
+      return <Box>{toLocaleString(val[type])}</Box>;
   }
 };

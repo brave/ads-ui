@@ -52,11 +52,11 @@ export const mapOsStats = (stats: OSMetric) => {
 
 const calculateForOS = (n: OS, d: OS, isPercent: boolean = true) => {
   return {
-    android: calculateMetric(isPercent, n.android, d.android),
-    ios: calculateMetric(isPercent, n.ios, d.ios),
-    windows: calculateMetric(isPercent, n.windows, d.windows),
-    linux: calculateMetric(isPercent, n.linux, d.linux),
-    macos: calculateMetric(isPercent, n.macos, d.macos),
+    android: calculateMetric(isPercent, n.android, d.android).toNumber(),
+    ios: calculateMetric(isPercent, n.ios, d.ios).toNumber(),
+    windows: calculateMetric(isPercent, n.windows, d.windows).toNumber(),
+    linux: calculateMetric(isPercent, n.linux, d.linux).toNumber(),
+    macos: calculateMetric(isPercent, n.macos, d.macos).toNumber(),
   };
 };
 

@@ -23,9 +23,9 @@ export const CampaignDateRange = () => {
           value={parseISO(startMeta.value)}
           error={!!startMeta.error}
           helperText={startMeta.error}
-          onChange={(dt) => {
-            startHelper.setValue(formatISO(dt));
-            startHelper.setTouched(true);
+          onChange={async (dt) => {
+            await startHelper.setValue(formatISO(dt));
+            await startHelper.setTouched(true);
           }}
           disabled={!isDraft}
         />
@@ -38,9 +38,9 @@ export const CampaignDateRange = () => {
           value={parseISO(endMeta.value)}
           error={!!endMeta.error}
           helperText={endMeta.error}
-          onChange={(dt) => {
-            endHelper.setValue(formatISO(dt));
-            endHelper.setTouched(true);
+          onChange={async (dt) => {
+            await endHelper.setValue(formatISO(dt));
+            await endHelper.setTouched(true);
           }}
         />
 

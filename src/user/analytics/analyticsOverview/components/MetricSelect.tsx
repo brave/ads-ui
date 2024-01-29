@@ -48,6 +48,18 @@ export default function MetricSelect({
         "Counted when a user reaches a designated conversion landing page",
     },
     {
+      value: "viewthroughConversion",
+      label: "View-through Conversions",
+      tooltip:
+        "Counted when a user reaches a designated conversion landing page following an ad impression.",
+    },
+    {
+      value: "clickthroughConversion",
+      label: "Click-through Conversions",
+      tooltip:
+        "Counted when a user reaches a designated conversion landing page following an impression and click of the ad.",
+    },
+    {
       value: "dismissals",
       label: "Dismissals",
       tooltip:

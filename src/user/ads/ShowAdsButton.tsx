@@ -13,12 +13,12 @@ export function ShowAdsButton() {
         underline="none"
         variant="subtitle1"
         sx={{ cursor: "pointer" }}
-        onClick={() => {
+        onClick={async () => {
           setIsShowingAds(true);
-          helper.setValue(false);
+          await helper.setValue(false);
         }}
       >
-        Use previously created Ads
+        Use existing Ads
       </Link>
     );
   }

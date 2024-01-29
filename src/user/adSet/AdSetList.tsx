@@ -1,10 +1,7 @@
 import { Chip } from "@mui/material";
 import { Status } from "components/Campaigns/Status";
 import _ from "lodash";
-import {
-  adSetOnOffState,
-  StandardRenderers,
-} from "components/Datagrid/renderers";
+import { adSetOnOffState } from "components/Datagrid/renderers";
 import { CampaignAdsFragment } from "graphql/campaign.generated";
 import { CampaignSource } from "graphql/types";
 import { StatsMetric } from "user/analytics/analyticsOverview/types";
@@ -84,13 +81,6 @@ export function AdSetList({ campaign, loading, engagements }: Props) {
       sortable: false,
       filterable: false,
       width: 100,
-    },
-    {
-      field: "createdAt",
-      headerName: "Created",
-      valueGetter: ({ row }) => row.createdAt,
-      renderCell: ({ row }) => StandardRenderers.date(row.createdAt),
-      width: 120,
     },
     {
       field: "name",

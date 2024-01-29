@@ -25,6 +25,7 @@ import { EditButton } from "user/campaignList/EditButton";
 import { calculateMetric } from "user/analytics/analyticsOverview/lib/overview.library";
 import { StatsMetric } from "user/analytics/analyticsOverview/types";
 import { uiLabelsForCampaignFormat } from "util/campaign";
+import { stringFilterOperators } from "components/Datagrid/stringFilterOperators";
 
 interface Props {
   advertiser?: AdvertiserCampaignsFragment | null;
@@ -87,6 +88,7 @@ export function CampaignList({ advertiser }: Props) {
       align: "left",
       headerAlign: "left",
       width: 150,
+      filterOperators: stringFilterOperators(),
     },
     {
       field: "state",
@@ -122,7 +124,9 @@ export function CampaignList({ advertiser }: Props) {
     {
       field: "view",
       headerName: "Impressions",
-      valueGetter: ({ row }) => engagementData?.get(row.id)?.["view"] ?? "N/A",
+      type: "number",
+      valueGetter: ({ row }) =>
+        engagementData?.get(row.id)?.["view"]?.toString(),
       renderCell: ({ row }) =>
         renderEngagementCell(loading, row, "view", engagementData),
       align: "right",
@@ -133,7 +137,9 @@ export function CampaignList({ advertiser }: Props) {
     {
       field: "click",
       headerName: "Clicks",
-      valueGetter: ({ row }) => engagementData?.get(row.id)?.["click"] ?? "N/A",
+      type: "number",
+      valueGetter: ({ row }) =>
+        engagementData?.get(row.id)?.["click"]?.toString(),
       renderCell: ({ row }) =>
         renderEngagementCell(loading, row, "click", engagementData),
       align: "right",
@@ -144,8 +150,9 @@ export function CampaignList({ advertiser }: Props) {
     {
       field: "landed",
       headerName: "Site visits",
+      type: "number",
       valueGetter: ({ row }) =>
-        engagementData?.get(row.id)?.["landed"] ?? "N/A",
+        engagementData?.get(row.id)?.["landed"]?.toString(),
       renderCell: ({ row }) =>
         renderEngagementCell(loading, row, "landed", engagementData),
       align: "right",
@@ -156,8 +163,9 @@ export function CampaignList({ advertiser }: Props) {
     {
       field: "ctr",
       headerName: "CTR",
+      type: "number",
       valueGetter: ({ row }) =>
-        getStatFromEngagement(row, "click", "view", engagementData),
+        getStatFromEngagement(row, "click", "view", engagementData)?.toString(),
       renderCell: ({ row }) =>
         renderStatsCell(
           loading,
@@ -254,6 +262,13 @@ export function CampaignList({ advertiser }: Props) {
         pagination: {
           paginationModel: {
             pageSize: 10,
+          },
+        },
+        filter: {
+          filterModel: {
+            items: [
+              { field: "format", operator: "not", value: "New tab takeover" },
+            ],
           },
         },
       }}

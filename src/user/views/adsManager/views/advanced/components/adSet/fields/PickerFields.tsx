@@ -13,22 +13,15 @@ export function PickerFields({ index }: Props) {
   const [, format] = useField<CampaignFormat>("format");
 
   return (
-    <>
+    <CardContainer header="Targeting">
+      <Typography variant="body2" sx={{ mb: 2 }}>
+        Select the interest segments and platforms you would like to target.
+      </Typography>
       {format.value !== CampaignFormat.NewsDisplayAd && (
-        <CardContainer header="Categories">
-          <Typography variant="body2" sx={{ mb: 2 }}>
-            Select the audience you would like to advertise to by interests.
-          </Typography>
-          <SegmentPicker idx={index} />
-        </CardContainer>
+        <SegmentPicker idx={index} />
       )}
 
-      <CardContainer header="Platforms">
-        <Typography variant="body2" sx={{ mb: 2 }}>
-          Select the devices and platforms you would like to advertise to.
-        </Typography>
-        <PlatformPicker idx={index} />
-      </CardContainer>
-    </>
+      <PlatformPicker idx={index} />
+    </CardContainer>
   );
 }
