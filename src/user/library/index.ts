@@ -36,7 +36,6 @@ export function transformNewForm(
     currency: form.currency,
     externalId: "",
     dailyCap: dailyLimit(form.format),
-    dailyBudget: form.dailyBudget,
     endAt: form.endAt,
     pacingStrategy: CampaignPacingStrategies.ModelV1,
     geoTargets: form.geoTargets.map((g) => ({ code: g.code, name: g.name })),
@@ -130,7 +129,6 @@ export function editCampaignValues(
     billingType: billingType,
     validateStart: false,
     budget: campaign.budget,
-    dailyBudget: campaign.dailyBudget,
     endAt: campaign.endAt,
     format: campaign.format,
     geoTargets: (campaign.geoTargets ?? []).map((g) => ({
@@ -216,7 +214,6 @@ export function transformEditForm(
 ): UpdateCampaignInput {
   return {
     budget: form.budget,
-    dailyBudget: form.dailyBudget,
     endAt: form.endAt,
     id,
     name: form.name,

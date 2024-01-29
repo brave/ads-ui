@@ -37,7 +37,6 @@ const validCampaign = {
   name: "some campaign",
   budget: 1000,
   currency: "GBP",
-  dailyBudget: 100,
   billingType: "cpm",
   price: "6",
   dailyCap: 1,

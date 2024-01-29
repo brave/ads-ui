@@ -19,7 +19,6 @@ export type CampaignFragment = {
   externalId?: string | null;
   currency: string;
   budget: number;
-  dailyBudget: number;
   spent: number;
   createdAt: any;
   startAt: any;
@@ -119,7 +118,6 @@ export type CampaignSummaryFragment = {
   currency: string;
   budget: number;
   paymentType: Types.PaymentType;
-  dailyBudget: number;
   spent: number;
   createdAt: any;
   startAt: any;
@@ -221,7 +219,6 @@ export type LoadCampaignQuery = {
     externalId?: string | null;
     currency: string;
     budget: number;
-    dailyBudget: number;
     spent: number;
     createdAt: any;
     startAt: any;
@@ -422,7 +419,6 @@ export const CampaignFragmentDoc = gql`
     externalId
     currency
     budget
-    dailyBudget
     spent
     createdAt
     startAt
@@ -467,7 +463,6 @@ export const CampaignSummaryFragmentDoc = gql`
     currency
     budget
     paymentType
-    dailyBudget
     spent
     createdAt
     startAt
