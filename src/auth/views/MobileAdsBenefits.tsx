@@ -3,28 +3,31 @@ import { Card, CardMedia, List, ListItem, Typography } from "@mui/material";
 import allSizes from "../../../all_sizes_frame.svg";
 import powerfulFormats from "../../../powerful_format_frame.svg";
 import privacyFocused from "../../../privacy_focused_frame.svg";
+import { msg } from "@lingui/macro";
+import { MessageDescriptor } from "@lingui/core";
+import { Trans } from "@lingui/react";
 
 export function MobileAdsBenefits() {
   return (
     <List disablePadding>
       <ListItem alignItems="center" disableGutters>
         <ItemCard
-          primary="For all business sizes"
-          secondary="Start a Brave Ads campaign with as little as $500."
+          primary={msg`For all business sizes`}
+          secondary={msg`Start a Brave Ads campaign with as little as $500.`}
           image={allSizes}
         />
       </ListItem>
       <ListItem alignItems="center" disableGutters>
         <ItemCard
-          primary="Powerful ad Formats"
-          secondary="Browser-based delivery offers a new way to reach audiences on the Web."
+          primary={msg`Powerful ad formats`}
+          secondary={msg`Browser-based delivery offers a new way to reach audiences on the Web.`}
           image={powerfulFormats}
         />
       </ListItem>
       <ListItem alignItems="center" disableGutters>
         <ItemCard
-          primary="Unparalleled privacy"
-          secondary="All targeting and reporting is strictly designed to be anonymous and privacy-preserving."
+          primary={msg`Unparalleled privacy`}
+          secondary={msg`All targeting and reporting is strictly designed to be anonymous and privacy-preserving.`}
           image={privacyFocused}
         />
       </ListItem>
@@ -33,8 +36,8 @@ export function MobileAdsBenefits() {
 }
 
 const ItemCard = (props: {
-  primary: string;
-  secondary: string;
+  primary: MessageDescriptor;
+  secondary: MessageDescriptor;
   image: string;
 }) => {
   return (
@@ -51,7 +54,7 @@ const ItemCard = (props: {
         fontSize="22px"
         letterSpacing="0em"
       >
-        {props.primary}
+        <Trans id={props.primary.id} />
       </Typography>
       <Typography
         fontWeight={300}
@@ -59,7 +62,7 @@ const ItemCard = (props: {
         fontSize="14px"
         letterSpacing="0.02em"
       >
-        {props.secondary}
+        <Trans id={props.secondary.id} />
       </Typography>
     </Card>
   );

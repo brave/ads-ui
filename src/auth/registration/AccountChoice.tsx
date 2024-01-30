@@ -7,6 +7,9 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import { msg, Trans } from "@lingui/macro";
+import { useLingui, Trans as TranslateList } from "@lingui/react";
+import { MessageDescriptor } from "@lingui/core";
 import { AccountSetup } from "auth/registration/types";
 import { useField } from "formik";
 
@@ -50,32 +53,36 @@ interface ChoiceOptions {
   title: string;
   icon: any;
   description: string;
-  points: string[];
+  points: MessageDescriptor[];
   value: AccountSetup;
   minSpend: string;
 }
 
 export function AccountChoice() {
+  const { _ } = useLingui();
+
   const buttons: ChoiceOptions[] = [
     {
-      title: "Self-service",
+      title: _(msg`Self-service`),
       icon: <Pointer sx={{ height: "1.5em", width: "1.5em" }} />,
-      description:
-        "For small to mid-sized businesses to create and manage their Brave Ads campaigns independently.",
-      points: ["Notification ads", "Newsfeed ads"],
+      description: _(
+        msg`For small to mid-sized businesses to create and manage their Brave Ads campaigns independently.`,
+      ),
+      points: [msg`Notification ads`, msg`Newsfeed ads`],
       value: "self",
       minSpend: "500",
     },
     {
-      title: "Managed service",
+      title: _(msg`Managed service`),
       icon: <Team sx={{ height: "1.5em", width: "1.5em" }} />,
-      description:
-        "For enterprise and agency businesses looking for bespoke ad solutions via dedicated Brave Ads representatives.",
+      description: _(
+        msg`For enterprise and agency businesses looking for bespoke ad solutions via dedicated Brave Ads representatives.`,
+      ),
       points: [
-        "Search keyword ads",
-        "New tab takeover",
-        "Notification ads",
-        "Newsfeed ads",
+        msg`Search keyword ads`,
+        msg`New tab takeover`,
+        msg`Notification ads`,
+        msg`Newsfeed ads`,
       ],
       value: "managed",
       minSpend: "10,000",
@@ -132,7 +139,7 @@ function AccountItemButton({
       </Box>
       <Box display="flex" flexDirection="column">
         <Typography variant="caption" fontWeight={600}>
-          Available Ad placements
+          <Trans>Available Ad placements</Trans>
         </Typography>
         {points.map((p, idx) => (
           <Box
@@ -143,7 +150,7 @@ function AccountItemButton({
             fontSize="0.75rem"
             lineHeight="1.66"
           >
-            {p}
+            <TranslateList id={p.id} />
           </Box>
         ))}
       </Box>
@@ -156,7 +163,7 @@ function AccountItemButton({
       >
         <Stack direction="column">
           <Typography variant="caption" fontWeight={600}>
-            Minimum Spend
+            <Trans>Minimum Spend</Trans>
           </Typography>
           <Typography variant="caption" color="text.secondary">
             {"$"}

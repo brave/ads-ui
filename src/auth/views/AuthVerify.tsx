@@ -5,6 +5,7 @@ import { CircularProgress, Link, Stack, Typography } from "@mui/material";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import { useTrackWithMatomo } from "hooks/useTrackWithMatomo";
+import { Trans } from "@lingui/macro";
 
 export function AuthVerify() {
   const { trackMatomoEvent } = useTrackWithMatomo({
@@ -32,7 +33,7 @@ export function AuthVerify() {
       {loading && (
         <Stack direction="column" alignItems="center" sx={{ mt: 7 }}>
           <Typography variant="h4" sx={{ mb: 7 }}>
-            Logging in
+            <Trans>Logging in</Trans>
           </Typography>
 
           <CircularProgress size={100} />
@@ -41,7 +42,7 @@ export function AuthVerify() {
       {!loading && !error && (
         <Stack direction="column" alignItems="center" sx={{ mt: 5 }}>
           <Typography variant="h4" sx={{ mb: 5 }}>
-            Successfully logged in!
+            <Trans>Successfully logged in!</Trans>
           </Typography>
           <VerifiedIcon sx={{ fontSize: "100px", mb: 5 }} color="success" />
           <Link
@@ -51,19 +52,23 @@ export function AuthVerify() {
             to="/user/main"
             replace
           >
-            Not automatically redirected? Click this link to go to the
-            dashboard.
+            <Trans>
+              Not automatically redirected? Click this link to go to the
+              dashboard.
+            </Trans>
           </Link>
         </Stack>
       )}
       {!loading && error && (
         <Stack direction="column" alignItems="center" sx={{ mt: 5 }}>
           <Typography variant="h4" sx={{ textAlign: "center", mb: 5 }}>
-            Unable to login, link has expired or has already been used.
+            <Trans>
+              Unable to login, link has expired or has already been used.
+            </Trans>
           </Typography>
           <CancelOutlinedIcon sx={{ fontSize: "100px", mb: 5 }} color="error" />
           <Link variant="h5" component={RouterLink} to="/auth/link" replace>
-            Request another link.
+            <Trans>Request another link.</Trans>
           </Link>
         </Stack>
       )}

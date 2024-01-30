@@ -1,0 +1,196 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2024-01-30 17:16-0500\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: es\n"
+
+#: src/auth/views/MagicLink.tsx:26
+msgid "A login email is on the way"
+msgstr ""
+
+#: src/auth/views/LandingPage.tsx:30
+msgid "advertising made simple"
+msgstr ""
+
+#: src/auth/views/MobileAdsBenefits.tsx:33
+msgid "All targeting and reporting is strictly designed to be anonymous and privacy-preserving."
+msgstr ""
+
+#: src/auth/views/LandingPage.tsx:56
+msgid "Already have an account?"
+msgstr ""
+
+#: src/auth/components/AdvertiserAgreed.tsx:80
+msgid "Brave’s products are made to uphold user privacy. By default, the Brave browser blocks third-party tracking (scripts, tags, pixels, etc.) including those used by Google Analytics. This means that most standard website reporting won’t be compatible with Brave Ads. To ensure advertisers have visibility into performance of campaigns, we’ve detailed other effective privacy-first options for measurement in our reporting guide"
+msgstr ""
+
+#: src/auth/views/MobileAdsBenefits.tsx:24
+msgid "Browser-based delivery offers a new way to reach audiences on the Web."
+msgstr ""
+
+#: src/auth/components/AdvertiserAgreed.tsx:140
+msgid "By continuing, you acknowledge and agree to our Privacy Policy and platform Terms and Conditions."
+msgstr ""
+
+#: src/auth/views/MagicLink.tsx:31
+msgid "Click on the secure login link in the email to access your Brave Ads account."
+msgstr ""
+
+#: src/auth/components/AdvertiserAgreed.tsx:177
+msgid "Continue"
+msgstr ""
+
+#: src/auth/views/MagicLink.tsx:37
+msgid "Don’t see the email? Check your spam folder or try again."
+msgstr ""
+
+#: src/auth/views/Login.tsx:35
+#: src/auth/views/MagicLink.tsx:68
+msgid "Email"
+msgstr ""
+
+#: src/auth/views/MagicLink.tsx:58
+msgid "Enter your email address to get a secure login link. Use this link to access your Brave Ads account."
+msgstr ""
+
+#: src/auth/views/MobileAdsBenefits.tsx:15
+msgid "For all business sizes"
+msgstr ""
+
+#: src/auth/registration/AccountChoice.tsx:78
+msgid "For enterprise and agency businesses looking for bespoke ad solutions via dedicated Brave Ads representatives."
+msgstr ""
+
+#: src/auth/registration/AccountChoice.tsx:69
+msgid "For small to mid-sized businesses to create and manage their Brave Ads campaigns independently."
+msgstr ""
+
+#: src/auth/views/MagicLink.tsx:84
+msgid "Get login link"
+msgstr ""
+
+#: src/auth/components/AdvertiserAgreed.tsx:158
+msgid "I agree"
+msgstr ""
+
+#: src/auth/components/AdvertiserAgreed.tsx:102
+msgid "I understand that Brave Ads will not be compatible with Google Analytics and similar solutions that rely on third-party trackers"
+msgstr ""
+
+#: src/auth/components/AdvertiserAgreed.tsx:129
+msgid "I understand that pre-payment is required to launch my campaigns"
+msgstr ""
+
+#: src/auth/views/LandingPage.tsx:67
+#: src/auth/views/Login.tsx:59
+msgid "Log in"
+msgstr ""
+
+#: src/auth/views/Login.tsx:28
+msgid "Log into your Brave Ads account"
+msgstr ""
+
+#: src/auth/views/AuthVerify.tsx:28
+msgid "Logging in"
+msgstr ""
+
+#: src/auth/registration/AccountChoice.tsx:75
+msgid "Managed service"
+msgstr ""
+
+#: src/auth/registration/AccountChoice.tsx:81
+msgid "New tab takeover"
+msgstr ""
+
+#: src/auth/registration/AccountChoice.tsx:70
+#: src/auth/registration/AccountChoice.tsx:83
+msgid "Newsfeed ads"
+msgstr ""
+
+#: src/auth/views/AuthVerify.tsx:51
+msgid "Not automatically redirected? Click this link to go to the dashboard."
+msgstr ""
+
+#: src/auth/registration/AccountChoice.tsx:70
+#: src/auth/registration/AccountChoice.tsx:82
+msgid "Notification ads"
+msgstr ""
+
+#: src/auth/views/MagicLink.tsx:96
+msgid "or sign in using a password"
+msgstr ""
+
+#: src/auth/views/Login.tsx:69
+msgid "or sign in using a secure link"
+msgstr ""
+
+#: src/auth/views/Login.tsx:43
+msgid "Password"
+msgstr ""
+
+#: src/auth/components/AdvertiserAgreed.tsx:110
+msgid "Payment"
+msgstr ""
+
+#: src/auth/views/MobileAdsBenefits.tsx:22
+msgid "Powerful Ad Formats"
+msgstr ""
+
+#: src/auth/components/AdvertiserAgreed.tsx:66
+msgid "Prior to using the dashboard, please take a moment to review the following acknowledgements:"
+msgstr ""
+
+#: src/auth/views/LandingPage.tsx:30
+msgid "Privacy-forward"
+msgstr ""
+
+#: src/auth/views/LandingPage.tsx:34
+msgid "Reach and convert new customers through premium advertising on the Brave browser and search engine."
+msgstr ""
+
+#: src/auth/components/AdvertiserAgreed.tsx:77
+msgid "Reporting"
+msgstr ""
+
+#: src/auth/views/AuthVerify.tsx:67
+msgid "Request another link."
+msgstr ""
+
+#: src/auth/registration/AccountChoice.tsx:80
+msgid "Search keyword ads"
+msgstr ""
+
+#: src/auth/registration/AccountChoice.tsx:66
+msgid "Self-service"
+msgstr ""
+
+#: src/auth/views/MobileAdsBenefits.tsx:16
+msgid "Start a Brave Ads campaign with as little as $500."
+msgstr ""
+
+#: src/auth/views/AuthVerify.tsx:39
+msgid "Successfully logged in!"
+msgstr ""
+
+#: src/auth/components/AdvertiserAgreed.tsx:137
+msgid "Terms & Conditions"
+msgstr ""
+
+#: src/auth/components/AdvertiserAgreed.tsx:113
+msgid "To launch a campaign with Brave, you are required to prepay the full amount you intend to spend. Any remaining funds from your budget will be credited back to your original payment method upon request."
+msgstr ""
+
+#: src/auth/views/AuthVerify.tsx:61
+msgid "Unable to login, link has expired or has already been used."
+msgstr ""
+
+#: src/auth/views/MobileAdsBenefits.tsx:31
+msgid "Unparalleled privacy"
+msgstr ""
+
+#: src/auth/components/AdvertiserAgreed.tsx:61
+msgid "Welcome to Brave Ads, <0>{0}</0>"
+msgstr ""
