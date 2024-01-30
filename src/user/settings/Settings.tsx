@@ -17,6 +17,8 @@ import { CardContainer } from "components/Card/CardContainer";
 import { DraftContext } from "state/context";
 import { NewKeyPairModal } from "user/settings/NewKeyPairModal";
 import MiniSideBar from "components/Drawer/MiniSideBar";
+import { AddressField } from "auth/registration/AddressField";
+import { Form, Formik } from "formik";
 
 const Settings = () => {
   const { advertiser: activeAdvertiser, advertisers } = useAdvertiser();
@@ -62,6 +64,13 @@ const Settings = () => {
                 </Select>
               </FormControl>
             </Box>
+          </CardContainer>
+          <CardContainer header="Organization Details">
+            <Formik initialValues={{}} onSubmit={() => console.log()}>
+              <Form>
+                <AddressField />
+              </Form>
+            </Formik>
           </CardContainer>
         </Stack>
       </Container>

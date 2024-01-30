@@ -9,14 +9,14 @@ const EmailRegex =
 
 export const RegistrationSchema = object().shape({
   email: string()
-    .label("Email address")
+    .label("Email")
     .required()
     .matches(EmailRegex, "Please enter a valid email address"),
   fullName: string().label("Full name").required(),
   advertiser: object().shape({
-    name: string().label("Business name").required(),
+    name: string().label("Company name"),
     url: string()
-      .label("Business URL")
+      .label("Company website")
       .required()
       .matches(NoSpacesRegex, `URL must not contain any whitespace`)
       .matches(HttpsRegex, `URL must start with https://`)
@@ -25,20 +25,21 @@ export const RegistrationSchema = object().shape({
         `Please enter a valid URL, for example https://brave.com`,
       ),
     phone: string()
-      .label("Business phone number")
-      .required()
+      .label("Company phone number")
       .matches(
         PhoneRegex,
         "Please enter a valid phone number, that has no spaces, and includes country code.",
       ),
-    description: string().label("Business description").required(),
+    description: string().required(
+      "Please let us know why you are interested in Brave Ads",
+    ),
   }),
-  address: object().shape({
-    street1: string().label("Street address").required(),
+  address: object({
+    street1: string().label("Street address"),
     street2: string().label("Street address line 2"),
-    city: string().label("City / Town / Village / Locality").required(),
-    state: string().label("State / Province / Canton / Post Town").required(),
-    country: string().label("Country").required(),
-    zipcode: string().label("Zip / Postal Code").required(),
-  }),
+    city: string().label("City / Town / Village / Locality"),
+    state: string().label("State / Province / Canton / Post Town"),
+    country: string().label("Country"),
+    zipcode: string().label("Zip / Postal Code"),
+  }).nullable(),
 });

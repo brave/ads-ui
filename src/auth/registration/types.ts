@@ -10,6 +10,7 @@ export type RegistrationForm = {
     url: string;
     phone?: string;
     description?: string;
+    marketingChannel?: string;
   };
   address: {
     street1: string;

@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { RegistrationSchema } from "validation/RegistrationSchema";
 import { initialValues, RegistrationForm } from "auth/registration/types";
 import { NameField } from "auth/registration/NameField";
-import { AddressField } from "auth/registration/AddressField";
 import { FormikSubmitButton } from "form/FormikButton";
 import { useRegister } from "auth/hooks/mutations/useRegister";
 import { AdvertiserRegistered } from "auth/registration/AdvertiserRegistered";
@@ -35,12 +34,7 @@ export function Register() {
       component: <AccountChoice />,
       pos: "choice",
     },
-    { label: "Your information", component: <NameField />, pos: "personal" },
-    {
-      label: "Company information",
-      component: <AddressField />,
-      pos: "company",
-    },
+    { label: "Create an account", component: <NameField />, pos: "personal" },
   ];
 
   const activeStep = useRef<number>(0);
