@@ -1,6 +1,8 @@
 import { Autocomplete, Box, TextField } from "@mui/material";
 import { useField } from "formik";
 import { useCountries } from "components/Country/useCountries";
+import { useLingui } from "@lingui/react";
+import { msg } from "@lingui/macro";
 
 interface Props {
   name: string;
@@ -8,6 +10,7 @@ interface Props {
 
 export const CountryPicker = ({ name }: Props) => {
   const { data } = useCountries();
+  const { _ } = useLingui();
 
   const [formProps, meta, helper] = useField<string>(name);
   const errorMessage = meta.error;
@@ -25,8 +28,7 @@ export const CountryPicker = ({ name }: Props) => {
         <Box>
           <TextField
             {...params}
-            required
-            label="Country"
+            label={_(msg`Country`)}
             helperText={meta.touched && errorMessage}
             error={meta.touched && !!errorMessage}
             autoComplete="country"

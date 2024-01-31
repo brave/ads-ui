@@ -8,7 +8,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { msg, Trans } from "@lingui/macro";
-import { useLingui, Trans as TranslateList } from "@lingui/react";
+import { Trans as TranslateWithId } from "@lingui/react";
 import { MessageDescriptor } from "@lingui/core";
 import { AccountSetup } from "auth/registration/types";
 import { useField } from "formik";
@@ -50,34 +50,28 @@ const Team = createSvgIcon(
 );
 
 interface ChoiceOptions {
-  title: string;
+  title: MessageDescriptor;
   icon: any;
-  description: string;
+  description: MessageDescriptor;
   points: MessageDescriptor[];
   value: AccountSetup;
   minSpend: string;
 }
 
 export function AccountChoice() {
-  const { _ } = useLingui();
-
   const buttons: ChoiceOptions[] = [
     {
-      title: _(msg`Self-service`),
+      title: msg`Self-service`,
       icon: <Pointer sx={{ height: "1.5em", width: "1.5em" }} />,
-      description: _(
-        msg`For small to mid-sized businesses to create and manage their Brave Ads campaigns independently.`,
-      ),
+      description: msg`For small to mid-sized businesses to create and manage their Brave Ads campaigns independently.`,
       points: [msg`Notification ads`, msg`Newsfeed ads`],
       value: "self",
       minSpend: "500",
     },
     {
-      title: _(msg`Managed service`),
+      title: msg`Managed service`,
       icon: <Team sx={{ height: "1.5em", width: "1.5em" }} />,
-      description: _(
-        msg`For enterprise and agency businesses looking for bespoke ad solutions via dedicated Brave Ads representatives.`,
-      ),
+      description: msg`For enterprise and agency businesses looking for bespoke ad solutions via dedicated Brave Ads representatives.`,
       points: [
         msg`Search keyword ads`,
         msg`New tab takeover`,
@@ -133,9 +127,11 @@ function AccountItemButton({
     >
       <Box display="flex" flexDirection="column" gap="5px" mt={2}>
         <Typography fontWeight={700} fontSize="20px">
-          {title}
+          <TranslateWithId id={title.id} />
         </Typography>
-        <Typography variant="caption">{description}</Typography>
+        <Typography variant="caption">
+          <TranslateWithId id={description.id} />
+        </Typography>
       </Box>
       <Box display="flex" flexDirection="column">
         <Typography variant="caption" fontWeight={600}>
@@ -150,7 +146,7 @@ function AccountItemButton({
             fontSize="0.75rem"
             lineHeight="1.66"
           >
-            <TranslateList id={p.id} />
+            <TranslateWithId id={p.id} />
           </Box>
         ))}
       </Box>

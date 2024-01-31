@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
 import { useRouteMatch } from "react-router-dom";
+import { Trans } from "@lingui/macro";
 
 export function AlwaysOnFormButton() {
   const match = useRouteMatch();
@@ -30,7 +31,7 @@ export function AlwaysOnFormButton() {
         )
       }
     >
-      Feedback
+      <Trans>Feedback</Trans>
     </Button>
   );
 }

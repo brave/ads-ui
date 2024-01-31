@@ -13,10 +13,13 @@ import moment from "moment/moment";
 import { RouteSelectionButton } from "components/Route/RouteSelectionButton";
 import Box from "@mui/material/Box";
 import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
+import { msg, Trans } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 
 export function AdvertiserAssets() {
   useTrackMatomoPageView({ documentTitle: "Advertiser Assets" });
   const { advertiser } = useAdvertiser();
+  const { _ } = useLingui();
   const { data, loading, error } = useAdvertiserImagesQuery({
     variables: { id: advertiser.id },
     initialFetchPolicy: "cache-and-network",
@@ -28,15 +31,15 @@ export function AdvertiserAssets() {
       <Box display="flex" flexDirection="column" flexGrow={1}>
         <RouteSelectionButton
           routes={[
-            { label: "Ads", value: "ads" },
-            { label: "Images", value: "ads/assets" },
+            { label: _(msg`Ads`), value: "ads" },
+            { label: _(msg`Images`), value: "ads/assets" },
           ]}
         />
         {loading && <LinearProgress sx={{ mt: 1, flexGrow: 1 }} />}
         {error && (
           <ErrorDetail
             error={error}
-            additionalDetails="Unable to retrieve images"
+            additionalDetails={msg`Unable to retrieve images`}
           />
         )}
         {!loading && !error && (
@@ -72,7 +75,7 @@ const GalleryItem = (props: { image: AdvertiserImageFragment }) => {
         textAlign="right"
         fontWeight={500}
       >
-        created {moment(createdAt).fromNow()}
+        <Trans>created</Trans> {moment(createdAt).fromNow()}
       </Typography>
     </CardContainer>
   );

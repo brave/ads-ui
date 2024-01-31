@@ -23,6 +23,8 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { useUser } from "auth/hooks/queries/useUser";
 import { FilterContext } from "state/context";
 import { CampaignFormat, CampaignSource } from "graphql/types";
+import { msg, Trans } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 
 interface Props {
   campaign?: CampaignSummaryFragment;
@@ -35,6 +37,8 @@ export function CloneCampaign({ campaign, disabled }: Props) {
   const { userId } = useUser();
   const history = useHistory();
   const [open, setOpen] = useState(false);
+  const { _ } = useLingui();
+  const unableToClone = _(msg`Unable to clone campaign`);
 
   const [getCampaign, { loading: getLoading }] = useLoadCampaignLazyQuery();
   const [copyCampaign, { loading }] = useCreateCampaignMutation({
@@ -52,7 +56,7 @@ export function CloneCampaign({ campaign, disabled }: Props) {
       );
     },
     onError() {
-      alert(`Unable to clone campaign`);
+      alert(unableToClone);
     },
   });
 
@@ -68,7 +72,7 @@ export function CloneCampaign({ campaign, disabled }: Props) {
               },
             });
           } else {
-            alert("Unable to clone campaign");
+            alert(unableToClone);
           }
         },
       });
@@ -85,7 +89,9 @@ export function CloneCampaign({ campaign, disabled }: Props) {
     <Box>
       <Tooltip
         title={
-          !campaign ? "Select one campaign to clone" : `Clone ${campaign.name}`
+          !campaign
+            ? _(msg`Select one campaign to clone`)
+            : _(msg`Clone ${campaign.name}`)
         }
       >
         <span>
@@ -100,22 +106,26 @@ export function CloneCampaign({ campaign, disabled }: Props) {
             disabled={!canClone || loading || getLoading || disabled}
             startIcon={<ContentCopyIcon />}
           >
-            Clone
+            <Trans>Clone</Trans>
           </Button>
         </span>
       </Tooltip>
       <Dialog open={open} onClose={() => setOpen(false)}>
-        <DialogTitle>{`Copy campaign: "${campaign?.name}"?`}</DialogTitle>
+        <DialogTitle>
+          {_(msg`Clone campaign: "${campaign?.name}"?`)}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Cloning a campaign will take all properties including ad sets and
-            ads, and create a new draft campaign with them.
+            <Trans>
+              Cloning a campaign will take all properties including ad sets and
+              ads, and create a new draft campaign with them.
+            </Trans>
           </DialogContentText>
           {(loading || getLoading) && <LinearProgress />}
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpen(false)} disabled={loading}>
-            Cancel
+            <Trans>Cancel</Trans>
           </Button>
           <Button
             disabled={loading || getLoading}
@@ -124,7 +134,7 @@ export function CloneCampaign({ campaign, disabled }: Props) {
               doClone();
             }}
           >
-            Clone
+            <Trans>Clone</Trans>
           </Button>
         </DialogActions>
       </Dialog>

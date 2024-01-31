@@ -19,6 +19,7 @@ import { CampaignFragment } from "graphql/campaign.generated";
 import _ from "lodash";
 import { isReviewableState } from "util/displayState";
 import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
+import { msg, Trans } from "@lingui/macro";
 
 interface Params {
   id: string;
@@ -50,7 +51,10 @@ export function CreativeForm() {
 
   if (getError) {
     return (
-      <ErrorDetail error={getError} additionalDetails="Unable to load ad" />
+      <ErrorDetail
+        error={getError}
+        additionalDetails={msg`Unable to load ad`}
+      />
     );
   }
 
@@ -74,7 +78,9 @@ export function CreativeForm() {
                 flexWrap="wrap"
               >
                 <CardContainer
-                  header={`${isNew ? "New" : "Edit"} ad`}
+                  header={
+                    isNew ? <Trans>Create ad</Trans> : <Trans>Edit ad</Trans>
+                  }
                   sx={{ flexGrow: 1 }}
                 >
                   <CreativeType allowTypeChange={id === "new"} />
@@ -82,7 +88,7 @@ export function CreativeForm() {
 
                 <ErrorDetail
                   error={submitError}
-                  additionalDetails="Unable to save ad"
+                  additionalDetails={msg`Unable to save ad`}
                 />
 
                 <CreativeCampaigns

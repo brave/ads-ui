@@ -4,6 +4,8 @@ import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useField } from "formik";
 import { UploadImage } from "components/Assets/UploadImage";
+import { useLingui } from "@lingui/react";
+import { msg } from "@lingui/macro";
 
 type ImageOption = { label: string; image?: string };
 
@@ -19,6 +21,7 @@ export function ImageAutocomplete(props: { name: string }) {
   const { data, loading } = useAdvertiserImagesQuery({
     variables: { id: advertiser.id },
   });
+  const { _ } = useLingui();
 
   useEffect(() => {
     const images = data?.advertiser?.images ?? [];
@@ -39,7 +42,7 @@ export function ImageAutocomplete(props: { name: string }) {
         renderInput={(params) => (
           <TextField
             {...params}
-            label="Image"
+            label={_(msg`Image`)}
             helperText={showError ? meta.error : undefined}
             error={showError}
             margin="normal"
@@ -52,10 +55,13 @@ export function ImageAutocomplete(props: { name: string }) {
         getOptionLabel={(o) => o.label}
         filterOptions={(options, params) => {
           const filtered = filter(options, params);
-          return [...filtered, { image: undefined, label: `Upload new image` }];
+          return [
+            ...filtered,
+            { image: undefined, label: _(msg`Upload new image`) },
+          ];
         }}
-        onChange={(e, nv) => {
-          imageUrl.setValue(nv ? nv.image : undefined);
+        onChange={async (e, nv) => {
+          await imageUrl.setValue(nv ? nv.image : undefined);
           setCreateImage(nv != null && nv.image === undefined);
         }}
         isOptionEqualToValue={(option, value) => option.image === value.image}

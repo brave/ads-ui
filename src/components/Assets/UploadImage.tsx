@@ -17,6 +17,7 @@ import {
 import { CampaignFormat } from "graphql/types";
 import { useUploadFile } from "components/Assets/hooks/useUploadFile";
 import { NewImageButton } from "components/Navigation/NewImageButton";
+import { Trans } from "@lingui/macro";
 
 export interface UploadConfig {
   targetHost: () => string;
@@ -53,23 +54,33 @@ export function UploadImage({ useInlineCreation, onClose, onComplete }: Props) {
         <NewImageButton onClick={() => setOpen(true)} />
       )}
       <Dialog open={open} onClose={() => setOpen(false)}>
-        <DialogTitle>Upload Image</DialogTitle>
+        <DialogTitle>
+          <Trans>Upload Image</Trans>
+        </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Uploaded images can be shared across different ad sets within a
-            Campaign. For best quality, upload images at 900x750px resolution.
-            Images will be automatically scaled to this size.
+            <Trans>
+              Uploaded images can be shared across different ad sets within a
+              Campaign. For best quality, upload images at 900x750px resolution.
+              Images will be automatically scaled to this size.
+            </Trans>
           </DialogContentText>
 
           <Stepper activeStep={step} sx={{ mt: 3 }}>
             <Step>
-              <StepLabel>Choose</StepLabel>
+              <StepLabel>
+                <Trans>Choose</Trans>
+              </StepLabel>
             </Step>
             <Step>
-              <StepLabel>Upload</StepLabel>
+              <StepLabel>
+                <Trans>Upload</Trans>
+              </StepLabel>
             </Step>
             <Step>
-              <StepLabel>Complete</StepLabel>
+              <StepLabel>
+                <Trans>Complete</Trans>
+              </StepLabel>
             </Step>
           </Stepper>
 
@@ -114,7 +125,7 @@ export function UploadImage({ useInlineCreation, onClose, onComplete }: Props) {
             }}
             variant="outlined"
           >
-            {step === 2 ? "Close" : "Cancel"}
+            {step === 2 ? <Trans>Close</Trans> : <Trans>Cancel</Trans>}
           </Button>
           {step !== 2 && (
             <Button
@@ -124,7 +135,7 @@ export function UploadImage({ useInlineCreation, onClose, onComplete }: Props) {
               }}
               variant="contained"
             >
-              Upload
+              <Trans>Upload</Trans>
             </Button>
           )}
         </DialogActions>

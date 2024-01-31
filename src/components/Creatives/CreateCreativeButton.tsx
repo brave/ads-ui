@@ -13,6 +13,7 @@ import { useField, useFormikContext } from "formik";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { LoadingButton } from "@mui/lab";
 import { validCreativeFields } from "user/library";
+import { Trans } from "@lingui/macro";
 
 export function CreateCreativeButton() {
   const { values, setFieldValue } = useFormikContext<CampaignForm>();
@@ -61,7 +62,7 @@ export function CreateCreativeButton() {
       }
       loading={loading}
     >
-      Save ad
+      <Trans>Save ad</Trans>
     </LoadingButton>
   );
 }

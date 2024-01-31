@@ -13,6 +13,7 @@ import { useIsAuthenticated } from "auth/hooks/queries/useIsAuthenticated";
 import { useSignOut } from "auth/hooks/mutations/useSignOut";
 import { SupportMenu } from "components/Drawer/MiniSideBar";
 import { useIsMobile } from "hooks/useIsMobile";
+import { Trans } from "@lingui/macro";
 
 export function LandingPageAppBar() {
   const match = useRouteMatch();
@@ -31,7 +32,11 @@ export function LandingPageAppBar() {
         variant={isMobile ? "body2" : "subtitle1"}
         color={isContact ? "primary" : "text.primary"}
       >
-        {isContact ? "Register for Self-service" : "Get started"}
+        {isContact ? (
+          <Trans>Register for Self-service</Trans>
+        ) : (
+          <Trans>Get started</Trans>
+        )}
       </Typography>
     </RouterLink>
   );
@@ -48,7 +53,7 @@ export function LandingPageAppBar() {
             variant={isMobile ? "body2" : "subtitle1"}
             color="text.primary"
           >
-            Brave Search
+            <Trans>Brave Search</Trans>
           </Typography>
         </RouterLink>
       ) : undefined,

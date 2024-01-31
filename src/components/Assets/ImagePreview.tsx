@@ -1,6 +1,8 @@
 import { Box, Link, Skeleton } from "@mui/material";
 import { useGetImagePreviewUrl } from "components/Assets/hooks/useGetImagePreviewUrl";
 import { ErrorDetail } from "components/Error/ErrorDetail";
+import { useLingui } from "@lingui/react";
+import { msg } from "@lingui/macro";
 
 interface Props {
   url: string;
@@ -16,6 +18,7 @@ export const ImagePreview = ({
   selected,
 }: Props) => {
   const { data, loading, error } = useGetImagePreviewUrl({ url });
+  const { _ } = useLingui();
 
   if (!data || loading) {
     return <Skeleton variant="rectangular" height={height} width={width} />;
@@ -50,7 +53,7 @@ export const ImagePreview = ({
             height={height}
             width={width}
             src={data}
-            alt="Image failed to load"
+            alt={_(msg`Image failed to load`)}
           />
         </Link>
       )}
