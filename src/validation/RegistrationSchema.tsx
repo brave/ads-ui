@@ -29,6 +29,11 @@ export const RegistrationSchema = object().shape({
     marketingChannel: string().required(
       "Please let us know how you heard about Brave Ads",
     ),
+    other: string().when("marketingChannel", {
+      is: "other",
+      then: (schema) =>
+        schema.required("Please specify how you heard about Brave Ads"),
+    }),
   }),
   address: object().shape({
     street1: string().label("Street address").required(),
