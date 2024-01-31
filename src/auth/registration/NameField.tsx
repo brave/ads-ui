@@ -47,7 +47,11 @@ export function NameField() {
         ]}
       />
       {meta.value === "other" && (
-        <FormikTextField margin="dense" name="other" label="Other source" />
+        <FormikTextField
+          margin="dense"
+          name="advertiser.other"
+          label="Other source"
+        />
       )}
 
       <FormikTextField
