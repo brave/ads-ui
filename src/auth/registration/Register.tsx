@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { RegistrationSchema } from "validation/RegistrationSchema";
 import { initialValues, RegistrationForm } from "auth/registration/types";
 import { NameField } from "auth/registration/NameField";
-import { AddressField } from "auth/registration/AddressField";
 import { FormikSubmitButton } from "form/FormikButton";
 import { useRegister } from "auth/hooks/mutations/useRegister";
 import { AdvertiserRegistered } from "auth/registration/AdvertiserRegistered";
@@ -16,6 +15,7 @@ import { PaddedCardContainer } from "components/Card/PaddedCardContainer";
 import { PersistRegistrationValues } from "form/PersistRegistrationValues";
 import { AccountChoice } from "auth/registration/AccountChoice";
 import { useHistory } from "react-router-dom";
+import { AddressField } from "auth/registration/AddressField";
 
 type RegistrationStep = {
   label: string;
@@ -35,9 +35,9 @@ export function Register() {
       component: <AccountChoice />,
       pos: "choice",
     },
-    { label: "Your information", component: <NameField />, pos: "personal" },
+    { label: "Create an account", component: <NameField />, pos: "personal" },
     {
-      label: "Company information",
+      label: "Create a business profile",
       component: <AddressField />,
       pos: "company",
     },
