@@ -31,6 +31,7 @@ export const initialValues: RegistrationForm = {
     url: "",
     description: "",
     marketingChannel: "",
+    other: "",
   },
   address: {
     street1: "",
