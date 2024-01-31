@@ -16,7 +16,7 @@ export const CountryPicker = ({ name }: Props) => {
 
   return (
     <Autocomplete
-      fullWidth
+      sx={{ width: { md: "75%" } }}
       autoSelect
       loading={data.length === 0}
       options={data}

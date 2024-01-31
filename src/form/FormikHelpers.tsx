@@ -63,7 +63,6 @@ export const FormikTextField = (props: FormikTextFieldProps) => {
         error={showError}
         helperText={showError ? meta.error : helperText}
         color="secondary"
-        autoComplete="off"
         placeholder={
           props.useTopLabel && !props.placeholder
             ? props.label
