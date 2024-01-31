@@ -9,6 +9,7 @@ import { CampaignDetails } from "user/views/user/CampaignDetails";
 import { CollapseBox } from "components/Collapse/CollapseBox";
 import { OsOverview } from "user/analytics/analyticsOverview/reports/os/OsOverview";
 import { CampaignFormat } from "graphql/types";
+import { AlwaysOnFormButton } from "components/Button/AlwaysOnFormButton";
 
 interface Params {
   campaignId: string;
@@ -91,6 +92,8 @@ export function CampaignReportView() {
           <OsOverview engagements={filteredEngagements} />
         </CollapseBox>
       )}
+
+      <AlwaysOnFormButton />
     </Box>
   );
 }

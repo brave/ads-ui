@@ -11,11 +11,16 @@ import {
   FormControlLabel,
   FormHelperText,
   FormLabel,
+  InputLabel,
+  MenuItem,
   Radio,
   RadioGroup,
+  Select,
   Switch,
+  SxProps,
   TextField,
   TextFieldProps,
+  Theme,
 } from "@mui/material";
 import { ErrorMessage, useField, useFormikContext } from "formik";
 import _ from "lodash";
@@ -58,7 +63,6 @@ export const FormikTextField = (props: FormikTextFieldProps) => {
         error={showError}
         helperText={showError ? meta.error : helperText}
         color="secondary"
-        autoComplete="off"
         placeholder={
           props.useTopLabel && !props.placeholder
             ? props.label
@@ -196,3 +200,48 @@ export function useIsEdit() {
     values.state === "draft";
   return { isEdit, isDraft };
 }
+
+interface FormikSelectProps {
+  name: string;
+  label: string;
+  options: Array<{ label: string; value: string }>;
+  disabled?: boolean;
+  sx?: SxProps<Theme> | undefined;
+  margin?: "normal" | "dense" | "none" | undefined;
+  fullWidth?: boolean;
+  color?:
+    | "error"
+    | "primary"
+    | "secondary"
+    | "info"
+    | "success"
+    | "warning"
+    | undefined;
+  variant?: "outlined" | "standard" | "filled" | undefined;
+}
+
+export const FormikSelect = (props: FormikSelectProps) => {
+  const [field, meta] = useField(props);
+  return (
+    <FormControl
+      fullWidth={props.fullWidth !== undefined ? props.fullWidth : true}
+      {...props}
+    >
+      <InputLabel id={`select-label-${props.name}`}>{props.label}</InputLabel>
+      <Select
+        error={meta.touched && Boolean(meta.error)}
+        label={props.label}
+        {...field}
+      >
+        {props.options.map((opt) => (
+          <MenuItem key={opt.value} value={opt.value}>
+            {opt.label}
+          </MenuItem>
+        ))}
+      </Select>
+      <ErrorMessage name={field.name}>
+        {(msg: any) => <FormHelperText error>{msg}</FormHelperText>}
+      </ErrorMessage>
+    </FormControl>
+  );
+};

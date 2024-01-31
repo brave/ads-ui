@@ -1,76 +1,65 @@
-import { Box, Typography } from "@mui/material";
-import { FormikTextField } from "form/FormikHelpers";
-import { MarginedDivider } from "auth/registration/MarginedDivider";
+import { Box } from "@mui/material";
+import { FormikSelect, FormikTextField } from "form/FormikHelpers";
+import { MarketingOptIn } from "auth/registration/MarketingOptIn";
+import { useField } from "formik";
 
 export function NameField() {
+  const [, meta] = useField("advertiser.marketingChannel");
+
   return (
     <Box flexGrow={1}>
-      <Typography variant="subtitle1" gutterBottom>
-        Thank you for choosing Brave&apos;s Ads Platform! To get your account
-        set up, please start by providing your contact information below.
-      </Typography>
-
-      <MarginedDivider />
-
       <FormikTextField
         name="fullName"
-        label="First and last name"
+        label="Full name"
+        margin="dense"
         autoComplete="given-name"
-        margin="none"
-        placeholder="Your first and last name"
-        useTopLabel
       />
 
       <FormikTextField
         name="email"
-        label="Email Address"
+        label="Email"
         type="email"
+        margin="dense"
         autoComplete="email"
-        margin="none"
-        placeholder="Your email address"
-        useTopLabel
       />
 
-      <FormikTextField
-        name="advertiser.name"
-        label="Company name"
-        margin="none"
-        placeholder="The name of your business"
-        useTopLabel
+      <FormikSelect
+        label="Where did you hear about Brave Ads"
+        name="advertiser.marketingChannel"
+        margin="dense"
+        options={[
+          {
+            label: "While looking up alternatives to Google Ads",
+            value: "google-ad-alternative",
+          },
+          { label: "At a marketing/media conference", value: "conference" },
+          {
+            label: "From an influential person I follow online",
+            value: "influencer",
+          },
+          { label: "On a podcast I listen to", value: "podcast" },
+          { label: "In a newsletter I subscribe to", value: "newsletter" },
+          { label: "From a friend/colleague", value: "friend-referral" },
+          { label: "In a blog post/news article", value: "blog-post" },
+          { label: "In a post by Brave on LinkedIn", value: "brave-linkedin" },
+          { label: "In a video on YouTube", value: "youtube" },
+          { label: "Other (please specify)", value: "other" },
+        ]}
       />
+      {meta.value === "other" && (
+        <FormikTextField margin="dense" name="other" label="Other source" />
+      )}
 
       <FormikTextField
-        required
-        name="advertiser.url"
-        label="Company URL"
-        autoComplete="url"
-        margin="none"
-        placeholder="Where we can find you on the internet"
-        useTopLabel
-      />
-
-      <FormikTextField
-        required
-        name="advertiser.phone"
-        label="Company phone"
-        autoComplete="tel"
-        type="tel"
-        margin="none"
-        placeholder="Where we can reach you"
-        useTopLabel
-      />
-
-      <FormikTextField
-        required
         multiline
         minRows={3}
         maxRows={10}
+        margin="dense"
         name="advertiser.description"
-        label="Company overview"
-        margin="none"
-        placeholder="Describe your product or service"
-        useTopLabel
+        label="Tell us why your interested in Brave Ads"
       />
+
+      <MarketingOptIn />
     </Box>
   );
 }

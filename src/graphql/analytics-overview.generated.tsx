@@ -36,7 +36,6 @@ export type CampaignWithEngagementsFragment = {
   id: string;
   name: string;
   state: string;
-  dailyBudget: number;
   budget: number;
   spent: number;
   currency: string;
@@ -87,7 +86,6 @@ export type AnalyticOverviewQuery = {
     id: string;
     name: string;
     state: string;
-    dailyBudget: number;
     budget: number;
     spent: number;
     currency: string;
@@ -182,7 +180,6 @@ export const CampaignWithEngagementsFragmentDoc = gql`
     id
     name
     state
-    dailyBudget
     budget
     spent
     currency

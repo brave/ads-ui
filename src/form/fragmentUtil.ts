@@ -18,7 +18,6 @@ export function createCampaignFromFragment(
     advertiserId: data.advertiser.id,
     budget: data.budget,
     currency: data.currency,
-    dailyBudget: data.dailyBudget,
     dailyCap: data.dailyCap,
     dayPartings: (data.dayPartings ?? []).map((d) => ({
       dow: d.dow,

@@ -61,9 +61,12 @@ export async function submitRegistration(form: RegistrationForm) {
       advertiser: {
         billingEmail: form.email,
         name: form.advertiser.name,
-        phone: form.advertiser.phone,
         url: form.advertiser.url,
         description: form.advertiser.description,
+        marketingChannel:
+          form.advertiser.marketingChannel === "other"
+            ? `other: ${form.advertiser.other}`
+            : form.advertiser.marketingChannel,
       },
       address: {
         ...form.address,

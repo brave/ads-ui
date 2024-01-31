@@ -32,7 +32,6 @@ fragment CampaignWithEngagements on Campaign {
   id
   name
   state
-  dailyBudget
   budget
   spent
   currency

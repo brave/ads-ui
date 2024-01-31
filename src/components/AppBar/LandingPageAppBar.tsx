@@ -27,7 +27,7 @@ export function LandingPageAppBar() {
       style={{ textDecoration: "none" }}
     >
       <Typography
-        variant="subtitle1"
+        variant={isMobile ? "body2" : "subtitle1"}
         color={isContact ? "primary" : "text.primary"}
       >
         {isContact ? "Register for Self-service" : "Get started"}
@@ -37,12 +37,16 @@ export function LandingPageAppBar() {
 
   const links = [
     {
-      component: isMobile || isAuthenticated ? null : <GetStarted />,
+      component:
+        (isMobile && !isSearch) || isAuthenticated ? null : <GetStarted />,
     },
     {
       component: !isSearch ? (
         <RouterLink to={`/search`} style={{ textDecoration: "none" }}>
-          <Typography variant="subtitle1" color="text.primary">
+          <Typography
+            variant={isMobile ? "body2" : "subtitle1"}
+            color="text.primary"
+          >
             Brave Search
           </Typography>
         </RouterLink>
@@ -72,12 +76,7 @@ export function LandingPageAppBar() {
             justifyContent="space-between"
           >
             <RouterLink to="/" style={{ marginTop: 5 }}>
-              <img
-                src={ads}
-                alt="Ads"
-                height={isMobile ? undefined : "31px"}
-                width={isMobile ? undefined : "180px"}
-              />
+              <img src={ads} alt="Ads" height="31px" width="180px" />
             </RouterLink>
 
             <Divider orientation="vertical" flexItem />
