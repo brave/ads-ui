@@ -26,6 +26,11 @@ export const SegmentPicker = ({ idx }: Props) => {
     `adSets.${idx}.segments`,
   );
 
+  const nameWithoutDash = (name: string) => {
+    const audienceWithChild = name.split("-");
+    return audienceWithChild[audienceWithChild.length - 1];
+  };
+
   useEffect(() => {
     if (targetMeta.value) {
       helper.setValue([{ code: "Svp7l-zGN", name: "untargeted" }]);
@@ -63,7 +68,7 @@ export const SegmentPicker = ({ idx }: Props) => {
                 style={{ marginRight: 8 }}
                 checked={selected}
               />
-              {option.name}
+              {nameWithoutDash(option.name)}
             </li>
           )}
           renderInput={(params) => (
