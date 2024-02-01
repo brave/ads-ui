@@ -155,7 +155,11 @@ export const sendMarketingEmail = async (req: {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(req),
+      body: JSON.stringify({
+        email: req.email,
+        name: req.name,
+        newsletters: [{ name: "Brave Ads" }],
+      }),
     },
   );
 
