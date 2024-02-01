@@ -4,7 +4,7 @@ export async function createPaymentSession(
   advertiserId: string,
   campaignId: string,
 ): Promise<string> {
-  const res = await fetch(buildAdServerEndpoint("/ads/checkout-session"), {
+  const res = await fetch(buildAdServerEndpoint("/payments/checkout-session"), {
     method: "POST",
     mode: "cors",
     credentials: "include",
@@ -30,7 +30,7 @@ export async function fetchPaymentSession(
   campaignId: string,
   sessionId: string | null,
 ): Promise<void> {
-  let baseUrl = `/ads/checkout-session?referenceId=${campaignId}`;
+  let baseUrl = `/payments/checkout-session?referenceId=${campaignId}`;
   if (sessionId) {
     baseUrl = `${baseUrl}&sessionId=${sessionId}`;
   }
