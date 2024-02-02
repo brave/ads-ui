@@ -15,14 +15,6 @@ fragment Advertiser on Advertiser {
   phone
   selfServiceManageCampaign
   selfServiceSetPrice
-  mailingAddress {
-    street1
-    street2
-    city
-    country
-    state
-    zipcode
-  }
 }
 
 query advertiser($id: String!) {
