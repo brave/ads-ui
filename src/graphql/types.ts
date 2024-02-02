@@ -186,10 +186,10 @@ export type CreateAdvertiserImageInput = {
 
 export type CreateAdvertiserInput = {
   additionalBillingEmails?: InputMaybe<Array<Scalars["String"]["input"]>>;
-  billingAddress: CreateAddressInput;
+  billingAddress?: InputMaybe<CreateAddressInput>;
   billingEmail?: InputMaybe<Scalars["String"]["input"]>;
   billingModelPrices?: InputMaybe<Array<AdvertiserPriceInput>>;
-  mailingAddress: CreateAddressInput;
+  mailingAddress?: InputMaybe<CreateAddressInput>;
   name: Scalars["String"]["input"];
   phone?: InputMaybe<Scalars["String"]["input"]>;
   referrer?: InputMaybe<Scalars["String"]["input"]>;

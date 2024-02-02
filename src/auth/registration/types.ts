@@ -12,14 +12,6 @@ export type RegistrationForm = {
     marketingChannel?: string;
     other?: string;
   };
-  address: {
-    street1: string;
-    street2?: string;
-    city: string;
-    state: string;
-    country: string;
-    zipcode: string;
-  };
 };
 
 export const initialValues: RegistrationForm = {
@@ -32,12 +24,5 @@ export const initialValues: RegistrationForm = {
     description: "",
     marketingChannel: "",
     other: "",
-  },
-  address: {
-    street1: "",
-    city: "",
-    state: "",
-    country: "",
-    zipcode: "",
   },
 };
