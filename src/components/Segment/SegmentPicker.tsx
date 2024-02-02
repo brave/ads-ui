@@ -6,6 +6,7 @@ import _ from "lodash";
 import { SegmentFragment, useSegmentsQuery } from "graphql/common.generated";
 import { useEffect } from "react";
 import { FormikSwitch } from "form/FormikHelpers";
+import { segmentNameWithNoDash } from "util/segment";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -16,9 +17,10 @@ interface Props {
 
 export const SegmentPicker = ({ idx }: Props) => {
   const { data } = useSegmentsQuery();
-  const activeSegments = _.sortBy(data?.segments?.data ?? [], (s) =>
-    s.name.toLowerCase(),
-  );
+  const activeSegments = [...(data?.segments?.data ?? [])].sort((a, b) => {
+    if (a.name === "Untargeted" || b.name === "Untargeted") return 1;
+    return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+  });
 
   const [, targetMeta] = useField<boolean>(`adSets.${idx}.isNotTargeting`);
 
@@ -26,14 +28,9 @@ export const SegmentPicker = ({ idx }: Props) => {
     `adSets.${idx}.segments`,
   );
 
-  const nameWithoutDash = (name: string) => {
-    const audienceWithChild = name.split("-");
-    return audienceWithChild[audienceWithChild.length - 1];
-  };
-
   useEffect(() => {
     if (targetMeta.value) {
-      helper.setValue([{ code: "Svp7l-zGN", name: "untargeted" }]);
+      helper.setValue([{ code: "Svp7l-zGN", name: "Untargeted" }]);
     } else {
       const onlyUntargeted =
         meta.value.length === 1 && meta.value[0].code === "Svp7l-zGN";
@@ -58,8 +55,12 @@ export const SegmentPicker = ({ idx }: Props) => {
           options={activeSegments}
           disableCloseOnSelect
           autoHighlight
-          groupBy={(option) => option.name.split("-")[0]}
-          getOptionLabel={(option) => option.name}
+          groupBy={(option) => {
+            const name = option.name.split("-")[0];
+            if (name === "Untargeted") return "General";
+            return name;
+          }}
+          getOptionLabel={(option) => segmentNameWithNoDash(option.name)}
           renderOption={(props, option, { selected }) => (
             <li {...props}>
               <Checkbox
@@ -68,7 +69,7 @@ export const SegmentPicker = ({ idx }: Props) => {
                 style={{ marginRight: 8 }}
                 checked={selected}
               />
-              {nameWithoutDash(option.name)}
+              {segmentNameWithNoDash(option.name)}
             </li>
           )}
           renderInput={(params) => (
