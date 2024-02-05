@@ -1,6 +1,5 @@
 import {
   CampaignFormat,
-  CampaignPacingStrategies,
   CreateCampaignInput,
   UpdateCampaignInput,
 } from "graphql/types";
@@ -37,7 +36,6 @@ export function transformNewForm(
     externalId: "",
     dailyCap: dailyLimit(form.format),
     endAt: form.endAt,
-    pacingStrategy: CampaignPacingStrategies.ModelV1,
     geoTargets: form.geoTargets.map((g) => ({ code: g.code, name: g.name })),
     name: form.name,
     advertiserId: form.advertiserId,
@@ -46,7 +44,6 @@ export function transformNewForm(
     source: "self_serve",
     startAt: form.startAt,
     state: form.state,
-    type: form.type,
     budget: form.budget,
     adSets: form.adSets.map((a) => ({
       ...transformAdSet(a, form),
