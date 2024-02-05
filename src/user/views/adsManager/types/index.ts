@@ -21,7 +21,6 @@ export type CampaignForm = {
   newCreative?: Creative;
   name: string;
   state: string;
-  type: "paid";
   // this is per click for CPC campaigns, but per thousand views for CPM campaigns
   price: string;
   billingType: Billing;
@@ -130,7 +129,6 @@ export const initialCampaign = (
     format: advertiser.prices[0].format,
     name: "",
     state: "draft",
-    type: "paid",
     paymentType: advertiser.selfServicePaymentType,
   };
 };

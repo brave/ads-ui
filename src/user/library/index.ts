@@ -135,7 +135,6 @@ export function editCampaignValues(
     name: campaign.name,
     startAt: campaign.startAt,
     state: campaign.state,
-    type: "paid",
     paymentType: campaign.paymentType,
   };
 }
@@ -216,7 +215,6 @@ export function transformEditForm(
     name: form.name,
     startAt: form.startAt,
     state: form.state,
-    type: form.type,
     paymentType: form.paymentType,
     adSets: form.adSets.map((adSet) => ({
       id: adSet.id,
