@@ -2,6 +2,8 @@ import { Box, ListItemButton, List, Typography, Stack } from "@mui/material";
 import { useFormikContext } from "formik";
 import { CreativeInput } from "graphql/types";
 import { FormatHelp } from "components/Button/FormatHelp";
+import { msg } from "@lingui/macro";
+import { Trans } from "@lingui/react";
 
 export function CreativeType(props: { allowTypeChange?: boolean }) {
   const formik = useFormikContext<CreativeInput>();
@@ -9,11 +11,11 @@ export function CreativeType(props: { allowTypeChange?: boolean }) {
   const supportedTypes = [
     {
       value: "notification_all_v1",
-      label: "Notification ads",
+      label: msg`Notification ads`,
     },
     {
       value: "inline_content_all_v1",
-      label: "Newsfeed ads",
+      label: msg`Newsfeed ads`,
     },
   ];
 
@@ -39,7 +41,7 @@ export function CreativeType(props: { allowTypeChange?: boolean }) {
             }}
             onClick={() => formik.setFieldValue("type.code", s.value)}
           >
-            {s.label}
+            <Trans id={s.label.id} />
           </ListItemButton>
         ))}
       </List>

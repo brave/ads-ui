@@ -2,6 +2,7 @@ import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { Button } from "@mui/material";
 import moment from "moment/moment";
 import { Link as RouterLink, useRouteMatch } from "react-router-dom";
+import { Trans } from "@lingui/macro";
 
 export function NewCampaignButton() {
   const { url } = useRouteMatch();
@@ -25,7 +26,7 @@ export function NewCampaignButton() {
       sx={{ mr: 3 }}
       disabled={isNewCampaignPage || isCompletePage || !advertiser.agreed}
     >
-      New Campaign
+      <Trans>New Campaign</Trans>
     </Button>
   );
 }

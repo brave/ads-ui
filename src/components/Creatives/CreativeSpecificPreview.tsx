@@ -7,6 +7,7 @@ import { useField } from "formik";
 import { Creative } from "user/views/adsManager/types";
 import { DisplayError } from "user/views/adsManager/views/advanced/components/review/components/ReviewField";
 import { ImagePreview } from "components/Assets/ImagePreview";
+import { Trans } from "@lingui/macro";
 
 interface Props extends PropsWithChildren {
   options: Creative[];
@@ -48,7 +49,7 @@ export function CreativeSpecificPreview({
     return (
       <>
         <Typography variant="overline" component="span" paddingRight={1}>
-          Ads
+          <Trans>Ads</Trans>
         </Typography>
         <DisplayError error={error} />
       </>
@@ -59,7 +60,7 @@ export function CreativeSpecificPreview({
     <>
       {useSimpleHeader && (
         <Typography variant="overline" component="span" paddingRight={1}>
-          Ads
+          <Trans>Ads</Trans>
         </Typography>
       )}
       <Stack

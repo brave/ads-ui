@@ -3,6 +3,7 @@ import { useContext, useState, MouseEvent } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { Badge, Button, Menu, MenuItem } from "@mui/material";
 import { DraftContext } from "state/context";
+import { Trans } from "@lingui/macro";
 
 export function DraftMenu() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -23,7 +24,7 @@ export function DraftMenu() {
           <Badge color="primary" badgeContent={drafts.length} sx={{ ml: 1 }} />
         }
       >
-        Campaign Drafts
+        <Trans>Campaign Drafts</Trans>
       </Button>
       <Menu open={open} anchorEl={anchorEl} onClose={() => setAnchorEl(null)}>
         <MenuItem
@@ -40,7 +41,7 @@ export function DraftMenu() {
             minWidth: "250px",
           }}
         >
-          Drafts
+          <Trans>Drafts</Trans>
         </MenuItem>
         {drafts.map((d, idx) => (
           <MenuItem
@@ -52,7 +53,7 @@ export function DraftMenu() {
             }}
             sx={{ pt: 1, pb: 1, minWidth: "250px" }}
           >
-            {d.name || `Draft ${idx}`}
+            {d.name || <Trans>Draft ${idx}</Trans>}
           </MenuItem>
         ))}
       </Menu>

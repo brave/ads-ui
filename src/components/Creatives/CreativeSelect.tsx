@@ -10,6 +10,7 @@ import { FormContext } from "state/context";
 import { useFormikContext } from "formik";
 import { CampaignFormat } from "graphql/types";
 import { ImagePreview } from "components/Assets/ImagePreview";
+import { Trans } from "@lingui/macro";
 
 export function CreativeSelect(
   props: {
@@ -110,7 +111,7 @@ export function CreativeSelect(
             setIsShowingAds(false);
           }}
         >
-          Complete selection
+          <Trans>Complete selection</Trans>
         </Button>
       )}
     </Box>

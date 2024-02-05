@@ -22,6 +22,7 @@ import { useState } from "react";
 import _ from "lodash";
 import { validCreativeFields } from "user/library";
 import { isReviewableState } from "util/displayState";
+import { Trans } from "@lingui/macro";
 
 interface Props {
   creative: CreativeFragment;
@@ -88,13 +89,18 @@ export function CreativeStatusSwitch({ creative }: Props) {
       />
       <Dialog open={relatedCampaigns.length > 0}>
         <DialogTitle>
-          Are you sure you want to{" "}
-          {creative.state === "active" ? "pause" : "activate"}{" "}
-          {`"${input.name}"`}
+          {creative.state === "active" ? (
+            <Trans>Are you sure you want to pause</Trans>
+          ) : (
+            <Trans>Are you sure you want to activate</Trans>
+          )}
+          {` "${input.name}"`}
         </DialogTitle>
         <DialogContent>
           <Typography>
-            Modifying the state of this ad will effect more than one campaign:
+            <Trans>
+              Modifying the state of this ad will effect more than one campaign:
+            </Trans>
           </Typography>
           <List sx={{ listStyleType: "disc", pl: 2 }}>
             {relatedCampaigns.map((r) => (
@@ -114,7 +120,7 @@ export function CreativeStatusSwitch({ creative }: Props) {
             }}
             disabled={updateLoading}
           >
-            Cancel
+            <Trans>Cancel</Trans>
           </Button>
           <Button
             variant="contained"
@@ -128,7 +134,7 @@ export function CreativeStatusSwitch({ creative }: Props) {
             }}
             disabled={updateLoading}
           >
-            Continue
+            <Trans>Continue</Trans>
           </Button>
         </DialogActions>
       </Dialog>

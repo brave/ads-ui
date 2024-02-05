@@ -24,9 +24,12 @@ import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { AlwaysOnFormButton } from "components/Button/AlwaysOnFormButton";
 import { useIsMobile } from "hooks/useIsMobile";
 import { useTrackMatomoEvent } from "hooks/useTrackWithMatomo";
+import { msg, Trans } from "@lingui/macro";
+import { Trans as TransWithId } from "@lingui/react";
+import { MessageDescriptor } from "@lingui/core";
 
 type RouteOption = {
-  label: string;
+  label: MessageDescriptor;
   href: string;
   icon: ReactNode;
   disabled?: boolean;
@@ -38,7 +41,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
   const { advertiser } = useAdvertiser();
   const dashboardRoutes: RouteOption[] = [
     {
-      label: "Campaigns",
+      label: msg`Campaigns`,
       href: "/user/main/campaign",
       icon: (
         <CampaignOutlinedIcon
@@ -48,7 +51,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
       ),
     },
     {
-      label: "Ads",
+      label: msg`Ads`,
       href: "/user/main/ads",
       icon: (
         <LightbulbOutlinedIcon
@@ -59,7 +62,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
       disabled: !advertiser.selfServiceManageCampaign,
     },
     {
-      label: "Audiences",
+      label: msg`Audiences`,
       href: "/user/main/audiences",
       icon: (
         <PeopleOutlineOutlinedIcon
@@ -73,7 +76,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
 
   const settingsRoutes: RouteOption[] = [
     {
-      label: "Account",
+      label: msg`Account`,
       href: "/user/main/settings",
       icon: (
         <AccountBalanceOutlinedIcon
@@ -83,7 +86,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
       ),
     },
     {
-      label: "Profile",
+      label: msg`Profile`,
       href: "/user/main/profile",
       icon: (
         <AccountBoxOutlinedIcon
@@ -162,7 +165,7 @@ const ItemBox = (props: RouteOption) => {
       <ListItemIcon sx={{ minWidth: "unset" }}>{props.icon}</ListItemIcon>
       <ListItemText disableTypography>
         <Typography textAlign="center" variant="caption" fontWeight={500}>
-          {props.label}
+          <TransWithId id={props.label.id} />
         </Typography>
       </ListItemText>
     </ListItemButton>
@@ -190,7 +193,7 @@ export function SupportMenu({ usePlainLink }: SupportProps) {
     <>
       {!usePlainLink && (
         <ItemBox
-          label="Support"
+          label={msg`Support`}
           href="#"
           icon={
             <HeadsetMicOutlinedIcon
@@ -209,7 +212,7 @@ export function SupportMenu({ usePlainLink }: SupportProps) {
           sx={{ cursor: "pointer" }}
           onClick={handleClick}
         >
-          Support
+          <Trans>Support</Trans>
         </Link>
       )}
       <Menu open={open} anchorEl={anchorEl} onClose={() => setAnchorEl(null)}>
@@ -219,7 +222,7 @@ export function SupportMenu({ usePlainLink }: SupportProps) {
             setAnchorEl(null);
           }}
         >
-          Help Center
+          <Trans>Help Center</Trans>
         </MenuItem>
         <MenuItem
           onClick={() => {
@@ -227,7 +230,7 @@ export function SupportMenu({ usePlainLink }: SupportProps) {
             setAnchorEl(null);
           }}
         >
-          About Brave Ads
+          <Trans>About Brave Ads</Trans>
         </MenuItem>
         <MenuItem
           onClick={() => {
@@ -235,7 +238,7 @@ export function SupportMenu({ usePlainLink }: SupportProps) {
             setAnchorEl(null);
           }}
         >
-          Contact:{" "}
+          <Trans>Contact</Trans>:{" "}
           <Link sx={{ ml: 1 }} underline="none">
             selfserve@brave.com
           </Link>
