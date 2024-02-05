@@ -97,8 +97,8 @@ export function CreativeList() {
         header={
           <RouteSelectionButton
             routes={[
-              { label: _(msg`Ads`), value: "ads" },
-              { label: _(msg`"Images`), value: "assets" },
+              { label: msg`Ads`, value: "ads" },
+              { label: msg`"Images`, value: "assets" },
             ]}
           />
         }

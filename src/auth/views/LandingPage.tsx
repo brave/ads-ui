@@ -29,7 +29,7 @@ export function LandingPage() {
       >
         <Stack sx={{ maxWidth: "550px" }} spacing={3}>
           <Typography variant="h3" textAlign="left">
-            <GradientText text={_(msg`Privacy-forward`)} />{" "}
+            <GradientText text={msg`Privacy-forward`} />{" "}
             {_(msg`advertising made simple`)}
           </Typography>
 
@@ -58,7 +58,11 @@ export function LandingPage() {
               }}
               to={isAuthenticated ? "/user/main" : "/register"}
             >
-              {isAuthenticated ? "Dashboard" : "Get Started"}
+              {isAuthenticated ? (
+                <Trans>Dashboard</Trans>
+              ) : (
+                <Trans>Get Started</Trans>
+              )}
             </Button>
             {!isMobile && !isAuthenticated && (
               <Typography variant="subtitle1">

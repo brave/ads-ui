@@ -4,6 +4,7 @@ import { mapDevice } from "user/analytics/analyticsOverview/lib/os.library";
 import { OSMetric } from "user/analytics/analyticsOverview/types";
 import { BasePieChart } from "../../../components/BasePieChart";
 import { SeriesOptionsType } from "highcharts";
+import { msg } from "@lingui/macro";
 
 type OSReport = keyof OSMetric | "device";
 
@@ -33,8 +34,8 @@ export function OsPieChart(props: OSMetric) {
   ];
 
   const extra = [
-    { value: "device", label: "Impressions (Device)" },
-    { value: "spend", label: "Spend" },
+    { value: "device", label: msg`Impressions (Device)` },
+    { value: "spend", label: msg`Spend` },
   ];
   return (
     <BasePieChart

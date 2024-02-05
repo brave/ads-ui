@@ -10,15 +10,18 @@ import { UserSchema } from "validation/UserSchema";
 import _ from "lodash";
 import { FormikSubmitButton } from "form/FormikButton";
 import { useTrackMatomoEvent } from "hooks/useTrackWithMatomo";
+import { msg, Trans } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 
 export function UserForm() {
   const user = useUser();
   const { trackMatomoEvent } = useTrackMatomoEvent();
+  const { _: lingui } = useLingui();
   const [initialVals, setInitialVals] = useState(user);
 
   if (!user.userId) {
-    const details = "Unable to get profile information";
-    return <ErrorDetail error={details} additionalDetails={details} />;
+    const details = msg`Unable to get profile information`;
+    return <ErrorDetail error={details.id} additionalDetails={details} />;
   }
 
   const [updateUser] = useUpdateUserMutation({
@@ -29,7 +32,7 @@ export function UserForm() {
   });
 
   return (
-    <CardContainer header="Profile Details">
+    <CardContainer header={<Trans>Profile Details</Trans>}>
       <Formik
         enableReinitialize
         initialValues={initialVals}
@@ -45,13 +48,13 @@ export function UserForm() {
           <Stack direction="row" spacing={2}>
             <FormikTextField
               name="email"
-              label="Email"
+              label={lingui(msg`Email`)}
               type="email"
               margin="none"
             />
             <FormikTextField
               name="password"
-              label="Password"
+              label={lingui(msg`Password`)}
               type="password"
               margin="none"
             />
@@ -59,7 +62,7 @@ export function UserForm() {
           <Stack direction="row" spacing={2} mt={2} mb={1}>
             <FormikTextField
               name="fullName"
-              label="Full Name"
+              label={lingui(msg`Full Name`)}
               type="text"
               margin="none"
             />

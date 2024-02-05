@@ -3,6 +3,7 @@ import { CampaignFormat, CampaignSource } from "graphql/types";
 import { Button, Tooltip } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
+import { Trans } from "@lingui/macro";
 
 export const EditButton = (props: {
   campaign?: CampaignSummaryFragment;
@@ -20,7 +21,11 @@ export const EditButton = (props: {
   return (
     <Tooltip
       title={
-        !campaign ? "Select one campaign to edit" : `Edit ${campaign.name}`
+        !campaign ? (
+          <Trans>Select one campaign to edit</Trans>
+        ) : (
+          <Trans>Edit ${campaign.name}</Trans>
+        )
       }
     >
       <span>
@@ -33,7 +38,7 @@ export const EditButton = (props: {
           disabled={!canEdit || disabled}
           startIcon={<EditIcon />}
         >
-          Edit
+          <Trans>Edit</Trans>
         </Button>
       </span>
     </Tooltip>

@@ -2,6 +2,8 @@ import { Box, Tab, Tabs } from "@mui/material";
 import { Options, SeriesOptionsType } from "highcharts";
 import { Option } from "../types";
 import { HighchartsWrapper } from "user/analytics/analyticsOverview/components/HighchartsWrapper";
+import { msg } from "@lingui/macro";
+import { Trans } from "@lingui/react";
 
 interface Props {
   series: SeriesOptionsType[];
@@ -41,10 +43,10 @@ export function BasePieChart({ series, onSetType, extraOptions, type }: Props) {
   };
 
   const tabs: Option[] = [
-    { value: "view", label: "Impressions" },
-    { value: "conversion", label: "Conversions" },
-    { value: "click", label: "Clicks" },
-    { value: "landed", label: "Site visits" },
+    { value: "view", label: msg`Impressions` },
+    { value: "conversion", label: msg`Conversions` },
+    { value: "click", label: msg`Clicks` },
+    { value: "landed", label: msg`Site visits` },
     ...(extraOptions ?? []),
   ];
 
@@ -66,7 +68,11 @@ export function BasePieChart({ series, onSetType, extraOptions, type }: Props) {
           scrollButtons="auto"
         >
           {tabs.map((t) => (
-            <Tab key={t.label} value={t.value} label={t.label} />
+            <Tab
+              key={t.label.id}
+              value={t.value}
+              label={<Trans id={t.label.id} />}
+            />
           ))}
         </Tabs>
       </Box>

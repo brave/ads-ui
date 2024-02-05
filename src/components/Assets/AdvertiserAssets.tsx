@@ -14,12 +14,10 @@ import { RouteSelectionButton } from "components/Route/RouteSelectionButton";
 import Box from "@mui/material/Box";
 import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
 import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
 export function AdvertiserAssets() {
   useTrackMatomoPageView({ documentTitle: "Advertiser Assets" });
   const { advertiser } = useAdvertiser();
-  const { _ } = useLingui();
   const { data, loading, error } = useAdvertiserImagesQuery({
     variables: { id: advertiser.id },
     initialFetchPolicy: "cache-and-network",
@@ -31,8 +29,8 @@ export function AdvertiserAssets() {
       <Box display="flex" flexDirection="column" flexGrow={1}>
         <RouteSelectionButton
           routes={[
-            { label: _(msg`Ads`), value: "ads" },
-            { label: _(msg`Images`), value: "ads/assets" },
+            { label: msg`Ads`, value: "ads" },
+            { label: msg`Images`, value: "ads/assets" },
           ]}
         />
         {loading && <LinearProgress sx={{ mt: 1, flexGrow: 1 }} />}

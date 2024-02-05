@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { FormContext } from "state/context";
 import { Link } from "@mui/material";
 import { useField } from "formik";
+import { Trans } from "@lingui/macro";
 
 export function ShowAdsButton() {
   const { isShowingAds, setIsShowingAds } = useContext(FormContext);
@@ -18,7 +19,7 @@ export function ShowAdsButton() {
           await helper.setValue(false);
         }}
       >
-        Use existing ads
+        <Trans>Use existing ads</Trans>
       </Link>
     );
   }

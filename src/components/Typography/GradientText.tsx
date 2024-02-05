@@ -1,6 +1,8 @@
 import { Typography } from "@mui/material";
+import { MessageDescriptor } from "@lingui/core";
+import { Trans } from "@lingui/react";
 
-export function GradientText(props: { text: string }) {
+export function GradientText(props: { text: MessageDescriptor }) {
   return (
     <Typography
       variant="inherit"
@@ -11,7 +13,7 @@ export function GradientText(props: { text: string }) {
         color: "transparent",
       }}
     >
-      {props.text}
+      <Trans id={props.text.id} />
     </Typography>
   );
 }

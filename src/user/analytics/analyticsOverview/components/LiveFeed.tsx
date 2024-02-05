@@ -1,6 +1,9 @@
 import { Box, Chip, Typography } from "@mui/material";
 import { OverviewDetail, StatsMetric } from "../types";
 import { toLocaleString } from "util/bignumber";
+import { msg } from "@lingui/macro";
+import { MessageDescriptor } from "@lingui/core";
+import { Trans } from "@lingui/react";
 
 interface OverviewProps extends OverviewDetail {
   currency: string;
@@ -13,7 +16,7 @@ interface LiveFeedProps {
 }
 
 interface Feed {
-  label: string;
+  label: MessageDescriptor;
   value: string;
 }
 
@@ -23,29 +26,29 @@ export default function LiveFeed({ overview, processed }: LiveFeedProps) {
 
   const feedValues: Feed[] = [
     {
-      label: "Click-through rate",
+      label: msg`Click-through rate`,
       value: `${toLocaleString(processed.ctr)}%`,
     },
     {
-      label: "Site visit rate",
+      label: msg`Site visit rate`,
       value: `${toLocaleString(processed.visitRate)}%`,
     },
     {
-      label: "Dismissal rate",
+      label: msg`Dismissal rate`,
       value: `${toLocaleString(processed.dismissRate)}%`,
     },
     {
-      label: "Click to site visit rate",
+      label: msg`Click to site visit rate`,
       value: `${toLocaleString(processed.landingRate)}%`,
     },
-    { label: "Upvotes", value: toLocaleString(processed.upvotes) },
-    { label: "Downvotes", value: toLocaleString(processed.downvotes) },
+    { label: msg`Upvotes`, value: toLocaleString(processed.upvotes) },
+    { label: msg`Downvotes`, value: toLocaleString(processed.downvotes) },
     {
-      label: "Spend",
+      label: msg`Spend`,
       value: `$${toLocaleString(realSpend)} ${currency}`,
     },
     {
-      label: "Budget",
+      label: msg`Budget`,
       value: `$${toLocaleString(budget)} ${currency}`,
     },
   ];
@@ -53,19 +56,19 @@ export default function LiveFeed({ overview, processed }: LiveFeedProps) {
   if (processed.conversions.gt(0)) {
     feedValues.push(
       {
-        label: "Conversions",
+        label: msg`Conversions`,
         value: toLocaleString(processed.conversions),
       },
       {
-        label: "View-through Conversions",
+        label: msg`View-through Conversions`,
         value: toLocaleString(processed.viewthroughConversion),
       },
       {
-        label: "Click-through Conversions",
+        label: msg`Click-through Conversions`,
         value: toLocaleString(processed.clickthroughConversion),
       },
       {
-        label: "CPA",
+        label: msg`CPA`,
         value: `$${toLocaleString(processed.cpa)} ${currency}`,
       },
     );
@@ -81,9 +84,15 @@ export default function LiveFeed({ overview, processed }: LiveFeedProps) {
       gap="5px"
       p={2}
     >
-      <Typography sx={{ fontWeight: 600 }}>Key Statistics</Typography>
+      <Typography sx={{ fontWeight: 600 }}>
+        <Trans id="Key Statistics" />
+      </Typography>
       {feedValues.map((f, idx) => (
-        <Chip label={`${f.label}: ${f.value}`} variant="outlined" key={idx} />
+        <Chip
+          label={`${(<Trans id={f.label.id} />)}: ${f.value}`}
+          variant="outlined"
+          key={idx}
+        />
       ))}
     </Box>
   );

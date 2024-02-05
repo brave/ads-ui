@@ -23,6 +23,8 @@ import { CreativeSelect } from "components/Creatives/CreativeSelect";
 import { FormContext } from "state/context";
 import { useAdvertiserCreatives } from "user/hooks/useAdvertiserCreatives";
 import { modalStyles } from "theme";
+import { msg, Trans } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 
 function filterCreativesBasedOnCampaignFormat(
   creatives: CreativeFragment[],
@@ -36,6 +38,7 @@ function filterCreativesBasedOnCampaignFormat(
 }
 
 export function AdsExistingAd() {
+  const { _: lingui } = useLingui();
   const { isShowingAds, setIsShowingAds } = useContext(FormContext);
   const { creatives } = useAdvertiserCreatives();
   const { values } = useFormikContext<CampaignForm>();
@@ -71,7 +74,7 @@ export function AdsExistingAd() {
   if (options && options.length === 0) {
     return (
       <Alert severity="info" onClose={() => setIsShowingAds(false)}>
-        No previous ads available
+        <Trans>No previous ads available</Trans>
       </Alert>
     );
   }
@@ -80,19 +83,21 @@ export function AdsExistingAd() {
     <Modal open={isShowingAds} onClose={() => setIsShowingAds(false)}>
       <Box sx={modalStyles}>
         <Typography variant="h5" sx={{ mb: 2 }}>
-          Add an existing ad
+          <Trans>Add an existing ad</Trans>
         </Typography>
 
         <Typography variant="subtitle1" fontWeight={500}>
-          Ads are modular building blocks that can be paired with ad sets to
-          build unique combinations. Your previously approved ads will show
-          here. Select by using the box next to the name. Use the &quot;Complete
-          selection&quot; button to finish.
+          <Trans>
+            Ads are modular building blocks that can be paired with ad sets to
+            build unique combinations. Your previously approved ads will show
+            here. Select by using the box next to the name. Use the
+            &quot;Complete selection&quot; button to finish.
+          </Trans>
         </Typography>
 
         <Box display="flex" justifyContent="start" mt={2} mb={3}>
           <TextField
-            placeholder="Filter ads by name..."
+            placeholder={lingui(msg`Filter ads by name...`)}
             size="small"
             variant="standard"
             fullWidth

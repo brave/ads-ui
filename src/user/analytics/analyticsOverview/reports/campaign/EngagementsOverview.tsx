@@ -17,6 +17,7 @@ import { ErrorDetail } from "components/Error/ErrorDetail";
 import { ApolloError } from "@apollo/client";
 import { usePersistMetricFilter } from "user/analytics/analyticsOverview/hooks/usePersistMetricFilter";
 import { HighchartsWrapper } from "user/analytics/analyticsOverview/components/HighchartsWrapper";
+import { msg, Trans } from "@lingui/macro";
 
 interface Props {
   loading: boolean;
@@ -43,7 +44,7 @@ export function EngagementsOverview({
     return (
       <ErrorDetail
         error={error}
-        additionalDetails="Unable to retrieve reporting data for this Campaign."
+        additionalDetails={msg`Unable to retrieve reporting data for this Campaign.`}
       />
     );
   }
@@ -63,7 +64,10 @@ export function EngagementsOverview({
   if (campaign?.format === CampaignFormat.NtpSi) {
     return (
       <Alert severity="info" sx={{ mt: 2, mb: 2 }}>
-        Please ask your Account Manager for reports on campaigns of this format.
+        <Trans>
+          Please ask your Account Manager for reports on campaigns of this
+          format.
+        </Trans>
       </Alert>
     );
   }
@@ -121,7 +125,9 @@ export function EngagementsOverview({
 function ReportingNotReady(props: { campaignName: string }) {
   return (
     <Alert severity="info" sx={{ mt: 2, mb: 3 }}>
-      Reporting not available yet for <strong>{props.campaignName}</strong>.
+      <Trans>
+        Reporting not available yet for <strong>{props.campaignName}</strong>.
+      </Trans>
     </Alert>
   );
 }

@@ -11,12 +11,12 @@ interface Props {
 }
 
 export function ConversionDisplay({ conversions, convErrors }: Props) {
-  const lingui = useLingui();
+  const { _: lingui } = useLingui();
   if (conversions.length === 0) {
     return (
       <ReviewField
         caption={msg`Conversion`}
-        value={lingui._(msg`No conversion URL setup`)}
+        value={lingui(msg`No conversion URL setup`)}
       />
     );
   }

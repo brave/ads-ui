@@ -18,6 +18,7 @@ import {
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import DownloadIcon from "@mui/icons-material/Download";
+import { Trans } from "@lingui/macro";
 
 interface ReportMenuProps {
   hasVerifiedConversions: boolean;
@@ -58,7 +59,7 @@ export const ReportMenu = ({
         }
         disabled={loading}
       >
-        Download Report
+        <Trans>Download Report</Trans>
       </Button>
 
       <Menu anchorEl={anchorEl} open={menu} onClose={() => setAnchorEl(null)}>
@@ -69,14 +70,14 @@ export const ReportMenu = ({
           <ListItemIcon>
             <DownloadIcon />
           </ListItemIcon>
-          Performance Report
+          <Trans>Performance Report</Trans>
         </MenuItem>
         {hasVerifiedConversions && (
           <MenuItem onClick={() => setDialogue(true)} disabled={loading}>
             <ListItemIcon>
               <DownloadIcon />
             </ListItemIcon>
-            Verified Conversions Report
+            <Trans>Verified Conversions Report</Trans>
           </MenuItem>
         )}
       </Menu>
@@ -97,15 +98,19 @@ export const ReportMenu = ({
       </Snackbar>
 
       <Dialog open={dialogue} onClose={() => setDialogue(false)}>
-        <DialogTitle>Decrypt Conversion Data?</DialogTitle>
+        <DialogTitle>
+          <Trans>Decrypt Conversion Data?</Trans>
+        </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To protect user&rsquo;s privacy, verified ad conversion data is
-            encrypted so that the identities of converted users remain anonymous
-            to Brave. You can decrypt the conversion data in the CSV file by
-            providing your private key here. If no key is provided, you will
-            receive the encrypted conversion data. Your private key will never
-            be sent to or stored on any Brave servers.
+            <Trans>
+              To protect user&rsquo;s privacy, verified ad conversion data is
+              encrypted so that the identities of converted users remain anonymous
+              to Brave. You can decrypt the conversion data in the CSV file by
+              providing your private key here. If no key is provided, you will
+              receive the encrypted conversion data. Your private key will never
+              be sent to or stored on any Brave servers.
+            </Trans>
           </DialogContentText>
           <TextField
             autoComplete="off"
@@ -125,7 +130,7 @@ export const ReportMenu = ({
             onClick={() => setDialogue(false)}
             disabled={loading}
           >
-            Cancel
+            <Trans>Cancel</Trans>
           </Button>
           <Button
             variant="contained"
@@ -134,7 +139,7 @@ export const ReportMenu = ({
             }}
             disabled={loading}
           >
-            Export
+            <Trans>Export</Trans>
           </Button>
         </DialogActions>
       </Dialog>

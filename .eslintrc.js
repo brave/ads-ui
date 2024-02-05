@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint"],
+  plugins: ["@typescript-eslint", "lingui"],
   parserOptions: {
     tsconfigRootDir: __dirname,
     project: ["./tsconfig.json"],
@@ -26,5 +26,11 @@ module.exports = {
     "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
     "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/no-require-imports": "error",
+    // "lingui/no-unlocalized-strings": "error",
+    // "lingui/t-call-in-function": "error",
+    // "lingui/no-single-variables-to-translate": "error",
+    // "lingui/no-expression-in-message": "error",
+    // "lingui/no-single-tag-to-translate": "error",
+    // "lingui/no-trans-inside-trans": "error",
   },
 };

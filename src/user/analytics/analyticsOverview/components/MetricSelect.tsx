@@ -1,7 +1,10 @@
 import { useState } from "react";
 
 import { Autocomplete, Box, TextField, Tooltip } from "@mui/material";
-import { Metrics, Option, StatsMetric } from "../types";
+import { Metrics, StatsMetric } from "../types";
+import { MessageDescriptor } from "@lingui/core";
+import { msg } from "@lingui/macro";
+import { Trans } from "@lingui/react";
 
 interface PopoutProps {
   onSetMetric: (key: keyof Metrics, value: keyof StatsMetric) => void;
@@ -9,7 +12,11 @@ interface PopoutProps {
   metric: keyof Metrics;
 }
 
-type OptionWithTooltip = Option & { tooltip?: string };
+type OptionWithTooltip = {
+  value: string;
+  label: MessageDescriptor;
+  tooltip?: MessageDescriptor;
+};
 
 export default function MetricSelect({
   initialValue,
@@ -19,78 +26,66 @@ export default function MetricSelect({
   const options: OptionWithTooltip[] = [
     {
       value: "views",
-      label: "Impressions",
-      tooltip:
-        "Counted when an ad is displayed on screen for a minimum of one second",
+      label: msg`Impressions`,
+      tooltip: msg`Counted when an ad is displayed on screen for a minimum of one second`,
     },
     {
       value: "clicks",
-      label: "Clicks",
-      tooltip:
-        "Counted when a user clicks on the ad. Does not include clicks to dismiss",
+      label: msg`Clicks`,
+      tooltip: msg`Counted when a user clicks on the ad. Does not include clicks to dismiss`,
     },
     {
       value: "ctr",
-      label: "CTR",
-      tooltip:
-        "The rate at which users clicked in correlation to their impressions",
+      label: msg`CTR`,
+      tooltip: msg`The rate at which users clicked in correlation to their impressions`,
     },
     {
       value: "landings",
-      label: "Site visits",
-      tooltip:
-        "Counted if the user clicks an ad and spends at least 10 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count.",
+      label: msg`Site visits`,
+      tooltip: msg`Counted if the user clicks an ad and spends at least 10 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count.`,
     },
     {
       value: "conversions",
-      label: "Conversions",
-      tooltip:
-        "Counted when a user reaches a designated conversion landing page",
+      label: msg`Conversions`,
+      tooltip: msg`Counted when a user reaches a designated conversion landing page`,
     },
     {
       value: "viewthroughConversion",
-      label: "View-through Conversions",
-      tooltip:
-        "Counted when a user reaches a designated conversion landing page following an ad impression.",
+      label: msg`View-through Conversions`,
+      tooltip: msg`Counted when a user reaches a designated conversion landing page following an ad impression.`,
     },
     {
       value: "clickthroughConversion",
-      label: "Click-through Conversions",
-      tooltip:
-        "Counted when a user reaches a designated conversion landing page following an impression and click of the ad.",
+      label: msg`Click-through Conversions`,
+      tooltip: msg`Counted when a user reaches a designated conversion landing page following an impression and click of the ad.`,
     },
     {
       value: "dismissals",
-      label: "Dismissals",
-      tooltip:
-        "Counted when a user clicks the “close” or “x” button to make an ad go away",
+      label: msg`Dismissals`,
+      tooltip: msg`Counted when a user clicks the “close” or “x” button to make an ad go away`,
     },
     {
       value: "convRate",
-      label: "Conversion Rate",
-      tooltip:
-        "The rate at which users converted in correlation to their clicks",
+      label: msg`Conversion Rate`,
+      tooltip: msg`The rate at which users converted in correlation to their clicks`,
     },
     {
       value: "landingRate",
-      label: "Click to site visit rate",
-      tooltip:
-        "The rate at which users visited the site in correlation to their clicks",
+      label: msg`Click to site visit rate`,
+      tooltip: msg`The rate at which users visited the site in correlation to their clicks`,
     },
     {
       value: "visitRate",
-      label: "Site visit rate",
-      tooltip:
-        "The rate at which users visited the site in correlation to their impressions",
+      label: msg`Site visit rate`,
+      tooltip: msg`The rate at which users visited the site in correlation to their impressions`,
     },
     {
       value: "dismissRate",
-      label: "Dismissal rate",
-      tooltip:
-        "The rate at which users dismissed the ad in correlation to their impressions",
+      label: msg`Dismissal rate`,
+      tooltip: msg`The rate at which users dismissed the ad in correlation to their impressions`,
     },
-    { value: "spend", label: "Spend" },
-    { value: "cpa", label: "CPA" },
+    { value: "spend", label: msg`Spend` },
+    { value: "cpa", label: msg`CPA` },
   ];
 
   const [open, setOpen] = useState(false);
@@ -128,9 +123,12 @@ export default function MetricSelect({
       isOptionEqualToValue={(v, o) => v.value === o.value}
       onChange={(e, v) => onSelectChange(v)}
       renderOption={(props, option) => (
-        <Tooltip title={option.tooltip} placement="right">
+        <Tooltip
+          title={option.tooltip ? <Trans id={option.tooltip.id} /> : undefined}
+          placement="right"
+        >
           <Box {...props} component="li">
-            {option.label}
+            <Trans id={option.label.id} />
           </Box>
         </Tooltip>
       )}

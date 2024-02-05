@@ -7,6 +7,8 @@ import { SegmentFragment, useSegmentsQuery } from "graphql/common.generated";
 import { useEffect } from "react";
 import { FormikSwitch } from "form/FormikHelpers";
 import { segmentNameWithNoDash } from "util/segment";
+import { useLingui } from "@lingui/react";
+import { msg } from "@lingui/macro";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -21,6 +23,7 @@ export const SegmentPicker = ({ idx }: Props) => {
     if (a.name === "Untargeted" || b.name === "Untargeted") return 1;
     return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
   });
+  const { _: lingui } = useLingui();
 
   const [, targetMeta] = useField<boolean>(`adSets.${idx}.isNotTargeting`);
 
@@ -43,7 +46,7 @@ export const SegmentPicker = ({ idx }: Props) => {
       <Box marginTop={3} marginLeft={1}>
         <FormikSwitch
           name={`adSets.${idx}.isNotTargeting`}
-          label="Automatic interest targeting"
+          label={lingui(msg`Automatic interest targeting`)}
         />
       </Box>
       {!targetMeta.value && (
@@ -75,11 +78,11 @@ export const SegmentPicker = ({ idx }: Props) => {
           renderInput={(params) => (
             <TextField
               {...params}
-              label="Audiences"
+              label={lingui(msg`Audiences`)}
               helperText={
                 meta.touched && !!meta.error
                   ? meta.error
-                  : "Select the audience segments to target"
+                  : lingui(msg`Select the audience segments to target`)
               }
               error={meta.touched && !!meta.error}
             />

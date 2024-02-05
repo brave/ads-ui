@@ -1,6 +1,7 @@
 import { isPast, parseISO } from "date-fns";
 import { Switch, Tooltip, Typography } from "@mui/material";
 import { CampaignSource } from "graphql/types";
+import { Trans } from "@lingui/macro";
 
 interface Props {
   onChange: (s: string) => void;
@@ -31,12 +32,17 @@ export function OnOff({
     isInline ? null : (
       <Typography sx={{ textAlign: "center", p: 0 }}>-</Typography>
     );
-  const tooltip = state === "paused" ? "Pause" : "Activate";
+  const tooltip =
+    state === "paused" ? <Trans>Pause</Trans> : <Trans>Activate</Trans>;
 
   return (
     <Tooltip
       title={
-        enabled ? `${tooltip} ${type}` : `${type} status cannot be updated`
+        enabled ? (
+          `${tooltip} ${type}`
+        ) : (
+          <Trans>{type} status cannot be updated</Trans>
+        )
       }
     >
       <span>

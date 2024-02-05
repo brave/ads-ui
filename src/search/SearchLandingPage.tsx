@@ -11,6 +11,9 @@ import {
   useTrackMatomoPageView,
   useTrackMatomoEvent,
 } from "hooks/useTrackWithMatomo";
+import { msg, Trans } from "@lingui/macro";
+import { Trans as TransWithId } from "@lingui/react";
+import { MessageDescriptor } from "@lingui/core";
 
 export function SearchLandingPage() {
   useTrackMatomoPageView({ documentTitle: "Search Landing Page" });
@@ -29,12 +32,16 @@ export function SearchLandingPage() {
             justifyContent="center"
           >
             <Typography variant="h3">
-              Tap into over <strong>9 billion</strong> annual Web searches
+              <Trans>
+                Tap into over <strong>9 billion</strong> annual Web searches
+              </Trans>
             </Typography>
             <Typography variant="subtitle1" fontSize="18px">
-              Book a 30-minute meeting with a Brave Search specialist to discuss
-              a free test campaign and see how Brave Ads can perform for your
-              business.
+              <Trans>
+                Book a 30-minute meeting with a Brave Search specialist to
+                discuss a free test campaign and see how Brave Ads can perform
+                for your business.
+              </Trans>
             </Typography>
             <BookAMeetingButton />
             {isMobile && (
@@ -49,16 +56,16 @@ export function SearchLandingPage() {
               justifyContent="space-between"
             >
               <SearchTalkingPoint
-                title="Incremental"
-                description="Reach audiences who don’t use other search engines and block ads on most sites."
+                title={msg`Incremental`}
+                description={msg`Reach audiences who don’t use other search engines and block ads on most sites.`}
               />
               <SearchTalkingPoint
-                title="As effective as Google"
-                description="Brave Search Ads convert as well as, or better than Google Search ad clicks."
+                title={msg`As effective as Google`}
+                description={msg`Brave Search Ads convert as well as, or better than Google Search ad clicks.`}
               />
               <SearchTalkingPoint
-                title="Risk Free"
-                description="Get a free one-month test to see how Search Ads perform for your brand."
+                title={msg`Risk Free`}
+                description={msg`Get a free one-month test to see how Search Ads perform for your brand.`}
               />
             </Stack>
           </Stack>
@@ -88,27 +95,36 @@ function BookAMeetingButton() {
         }}
         sx={{ maxWidth: "200px", padding: 1.5 }}
       >
-        Book a meeting
+        <Trans>Book a meeting</Trans>
       </Button>
       <Typography>
-        Or email{" "}
-        <Link
-          color="primary"
-          variant="inherit"
-          href="mailto:searchads@brave.com"
-        >
-          searchads@brave.com
-        </Link>
+        <Trans>
+          Or email{" "}
+          <Link
+            color="primary"
+            variant="inherit"
+            href="mailto:searchads@brave.com"
+          >
+            searchads@brave.com
+          </Link>
+        </Trans>
       </Typography>
     </Stack>
   );
 }
 
-function SearchTalkingPoint(props: { title: string; description: string }) {
+function SearchTalkingPoint(props: {
+  title: MessageDescriptor;
+  description: MessageDescriptor;
+}) {
   return (
     <Stack spacing={1} maxWidth={500}>
-      <Typography variant="h6">{props.title}</Typography>
-      <Typography variant="body1">{props.description}</Typography>
+      <Typography variant="h6">
+        <TransWithId id={props.title.id} />
+      </Typography>
+      <Typography variant="body1">
+        <TransWithId id={props.description.id} />
+      </Typography>
     </Stack>
   );
 }

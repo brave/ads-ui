@@ -1,5 +1,6 @@
 import { Button, Stack } from "@mui/material";
 import { ReactNode } from "react";
+import { Trans } from "@lingui/macro";
 
 interface Props {
   activeStep: number;
@@ -29,7 +30,7 @@ export function NextAndBack({
             onBack();
           }}
         >
-          Back
+          <Trans>Back</Trans>
         </Button>
       )}
       {activeStep < steps && (
@@ -42,7 +43,7 @@ export function NextAndBack({
             onNext();
           }}
         >
-          Next
+          <Trans>Next</Trans>
         </Button>
       )}
       {activeStep === steps && <>{final}</>}

@@ -26,12 +26,15 @@ import { calculateMetric } from "user/analytics/analyticsOverview/lib/overview.l
 import { StatsMetric } from "user/analytics/analyticsOverview/types";
 import { uiLabelsForCampaignFormat } from "util/campaign";
 import { stringFilterOperators } from "components/Datagrid/stringFilterOperators";
+import { useLingui } from "@lingui/react";
+import { msg } from "@lingui/macro";
 
 interface Props {
   advertiser?: AdvertiserCampaignsFragment | null;
 }
 
 export function CampaignList({ advertiser }: Props) {
+  const { _: lingui } = useLingui();
   const [selectedCampaign, setSelectedCampaign] = useState<string | number>();
   const [engagementData, setEngagementData] =
     useState<Map<string, EngagementOverview>>();
@@ -69,7 +72,7 @@ export function CampaignList({ advertiser }: Props) {
   const columns: GridColDef<CampaignSummaryFragment>[] = [
     {
       field: "name",
-      headerName: "Campaign",
+      headerName: lingui(msg`Campaign`),
       renderCell: ({ row }) => (
         <Link
           component={RouterLink}
@@ -83,7 +86,7 @@ export function CampaignList({ advertiser }: Props) {
     },
     {
       field: "format",
-      headerName: "Ad Format",
+      headerName: lingui(msg`Ad Format`),
       valueGetter: ({ row }) => uiLabelsForCampaignFormat(row.format),
       align: "left",
       headerAlign: "left",
@@ -92,7 +95,7 @@ export function CampaignList({ advertiser }: Props) {
     },
     {
       field: "state",
-      headerName: "Status",
+      headerName: lingui(msg`Status`),
       valueGetter: ({ row }) =>
         isAfterEndDate(row.endAt) ? "completed" : row.state,
       renderCell: ({ row }) => (
@@ -103,7 +106,7 @@ export function CampaignList({ advertiser }: Props) {
     },
     {
       field: "budget",
-      headerName: "Budget",
+      headerName: lingui(msg`Budget`),
       renderCell: ({ row }) => renderMonetaryAmount(row.budget, row.currency),
       align: "right",
       headerAlign: "right",
@@ -112,7 +115,7 @@ export function CampaignList({ advertiser }: Props) {
     },
     {
       field: "spend",
-      headerName: "Spend",
+      headerName: lingui(msg`Spend`),
       valueGetter: ({ row }) => row.spent,
       renderCell: ({ row }) =>
         renderEngagementCell(loading, row, "spend", engagementData),
@@ -123,7 +126,7 @@ export function CampaignList({ advertiser }: Props) {
     },
     {
       field: "view",
-      headerName: "Impressions",
+      headerName: lingui(msg`Impressions`),
       type: "number",
       valueGetter: ({ row }) =>
         engagementData?.get(row.id)?.["view"]?.toString(),
@@ -136,7 +139,7 @@ export function CampaignList({ advertiser }: Props) {
     },
     {
       field: "click",
-      headerName: "Clicks",
+      headerName: lingui(msg`Clicks`),
       type: "number",
       valueGetter: ({ row }) =>
         engagementData?.get(row.id)?.["click"]?.toString(),
@@ -149,7 +152,7 @@ export function CampaignList({ advertiser }: Props) {
     },
     {
       field: "landed",
-      headerName: "Site visits",
+      headerName: lingui(msg`Site visits`),
       type: "number",
       valueGetter: ({ row }) =>
         engagementData?.get(row.id)?.["landed"]?.toString(),
@@ -183,7 +186,7 @@ export function CampaignList({ advertiser }: Props) {
     },
     {
       field: "startAt",
-      headerName: "Start",
+      headerName: lingui(msg`Start`),
       valueGetter: ({ row }) => row.startAt,
       renderCell: ({ row }) => StandardRenderers.date(row.startAt),
       align: "right",
@@ -192,7 +195,7 @@ export function CampaignList({ advertiser }: Props) {
     },
     {
       field: "endAt",
-      headerName: "End",
+      headerName: lingui(msg`End`),
       valueGetter: ({ row }) => row.endAt,
       renderCell: ({ row }) => StandardRenderers.date(row.endAt),
       align: "right",
@@ -204,7 +207,7 @@ export function CampaignList({ advertiser }: Props) {
   if (advertiser?.selfServiceManageCampaign) {
     columns.unshift({
       field: "switch",
-      headerName: "On/Off",
+      headerName: lingui(msg`On/Off`),
       type: "actions",
       valueGetter: ({ row }) => row.state,
       renderCell: ({ row }) =>

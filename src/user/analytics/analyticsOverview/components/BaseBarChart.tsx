@@ -2,6 +2,8 @@ import { Box, Tab, Tabs } from "@mui/material";
 import { Options, SeriesOptionsType } from "highcharts";
 import { Option } from "../types";
 import { HighchartsWrapper } from "user/analytics/analyticsOverview/components/HighchartsWrapper";
+import { msg } from "@lingui/macro";
+import { Trans } from "@lingui/react";
 
 interface Props {
   categories: string[];
@@ -52,9 +54,9 @@ export function BaseBarChart({
   };
 
   const tabs: Option[] = [
-    { value: "landingRate", label: "Click to site visit Rate" },
-    { value: "ctr", label: "CTR" },
-    { value: "visitRate", label: "Site visit rate" },
+    { value: "landingRate", label: msg`Click to site visit Rate` },
+    { value: "ctr", label: msg`CTR` },
+    { value: "visitRate", label: msg`Site visit rate` },
     ...(extraOptions ?? []),
   ];
 
@@ -76,7 +78,11 @@ export function BaseBarChart({
           scrollButtons="auto"
         >
           {tabs.map((t) => (
-            <Tab key={t.label} value={t.value} label={t.label} />
+            <Tab
+              key={t.label.id}
+              value={t.value}
+              label={<Trans id={t.label.id} />}
+            />
           ))}
         </Tabs>
       </Box>
