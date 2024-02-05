@@ -203,6 +203,7 @@ export type CreateCampaignInput = {
   adSets?: InputMaybe<Array<CreateAdSetInput>>;
   advertiserId: Scalars["String"]["input"];
   brandedKeyword?: InputMaybe<Scalars["String"]["input"]>;
+  brandedKeywords?: InputMaybe<Array<Scalars["String"]["input"]>>;
   budget: Scalars["Float"]["input"];
   currency: Scalars["String"]["input"];
   dailyBudget?: InputMaybe<Scalars["Float"]["input"]>;
@@ -489,6 +490,7 @@ export type UpdateCampaignInput = {
   adSets?: InputMaybe<Array<UpdateAdSetInput>>;
   advertiserId?: InputMaybe<Scalars["String"]["input"]>;
   brandedKeyword?: InputMaybe<Scalars["String"]["input"]>;
+  brandedKeywords?: InputMaybe<Array<Scalars["String"]["input"]>>;
   budget?: InputMaybe<Scalars["Float"]["input"]>;
   currency?: InputMaybe<Scalars["String"]["input"]>;
   dailyBudget?: InputMaybe<Scalars["Float"]["input"]>;

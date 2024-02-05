@@ -11,7 +11,12 @@ import {
 } from "yup";
 import { differenceInHours, startOfDay } from "date-fns";
 import { twoDaysOut } from "form/DateFieldHelpers";
-import { TrailingAsteriskRegex } from "validation/regex";
+import {
+  HttpsRegex,
+  NoSpacesRegex,
+  SimpleUrlRegexp,
+  TrailingAsteriskRegex,
+} from "validation/regex";
 import { CreativeSchema } from "validation/CreativeSchema";
 import { CampaignFormat } from "graphql/types";
 import BigNumber from "bignumber.js";
@@ -130,6 +135,18 @@ export const CampaignSchema = (prices: AdvertiserPrice[]) =>
               object().shape({
                 urlPattern: string()
                   .required("Conversion URL required.")
+                  .matches(
+                    NoSpacesRegex,
+                    `Conversion URL must not contain any whitespace`,
+                  )
+                  .matches(
+                    HttpsRegex,
+                    `Conversion URL must start with https://`,
+                  )
+                  .matches(
+                    SimpleUrlRegexp,
+                    `Please enter a valid URL, for example https://brave.com/product/*`,
+                  )
                   .matches(
                     TrailingAsteriskRegex,
                     "Conversion URL must end in trailing asterisk (*)",

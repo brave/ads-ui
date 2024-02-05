@@ -28,14 +28,6 @@ export type AdvertiserFragment = {
   createdAt: any;
   modifiedAt: any;
   publicKey?: string | null;
-  mailingAddress: {
-    street1: string;
-    street2?: string | null;
-    city: string;
-    country: string;
-    state: string;
-    zipcode: string;
-  };
 };
 
 export type AdvertiserQueryVariables = Types.Exact<{
@@ -190,14 +182,6 @@ export const AdvertiserFragmentDoc = gql`
     phone
     selfServiceManageCampaign
     selfServiceSetPrice
-    mailingAddress {
-      street1
-      street2
-      city
-      country
-      state
-      zipcode
-    }
   }
   ${AdvertiserSummaryFragmentDoc}
 `;

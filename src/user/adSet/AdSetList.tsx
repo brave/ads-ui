@@ -10,6 +10,7 @@ import { AdDetailTable } from "user/views/user/AdDetailTable";
 import { displayFromCampaignState } from "util/displayState";
 import { uiLabelsForBillingType } from "util/billingType";
 import { GridColDef } from "@mui/x-data-grid";
+import { segmentNameWithNoDash } from "util/segment";
 
 interface Props {
   loading: boolean;
@@ -136,7 +137,9 @@ export function AdSetList({ campaign, loading, engagements }: Props) {
         row.segments?.map((o: { name: string }) => o.name).join(", "),
       renderCell: ({ row }) => (
         <ChipList
-          items={row.segments}
+          items={row.segments.map((o) => ({
+            name: segmentNameWithNoDash(o.name),
+          }))}
           max={(row.segments ?? []).join("").length > 100 ? 2 : 5}
         />
       ),
