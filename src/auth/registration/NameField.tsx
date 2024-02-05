@@ -60,7 +60,7 @@ export function NameField() {
         maxRows={10}
         margin="dense"
         name="advertiser.description"
-        label="Tell us why your interested in Brave Ads"
+        label="Tell us why you're interested in Brave Ads"
       />
 
       <MarketingOptIn />
