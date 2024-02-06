@@ -15,8 +15,6 @@ import { PaddedCardContainer } from "components/Card/PaddedCardContainer";
 import { PersistRegistrationValues } from "form/PersistRegistrationValues";
 import { AccountChoice } from "auth/registration/AccountChoice";
 import { useHistory } from "react-router-dom";
-import { AddressField } from "auth/registration/AddressField";
-
 type RegistrationStep = {
   label: string;
   subheader?: string;
@@ -36,11 +34,6 @@ export function Register() {
       pos: "choice",
     },
     { label: "Create an account", component: <NameField />, pos: "personal" },
-    {
-      label: "Create a business profile",
-      component: <AddressField />,
-      pos: "company",
-    },
   ];
 
   const activeStep = useRef<number>(0);

@@ -23,6 +23,19 @@ export function NameField() {
         autoComplete="email"
       />
 
+      <FormikTextField
+        name="advertiser.name"
+        label="Business name"
+        margin="dense"
+      />
+
+      <FormikTextField
+        name="advertiser.url"
+        label="Business website"
+        autoComplete="url"
+        margin="dense"
+      />
+
       <FormikSelect
         label="Where did you hear about Brave Ads"
         name="advertiser.marketingChannel"
