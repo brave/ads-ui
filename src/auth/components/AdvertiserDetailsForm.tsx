@@ -55,7 +55,7 @@ export function AdvertiserDetailsForm() {
               updateAdvertiserInput: {
                 id: advertiser.id,
                 agreed: v.terms && v.tracking && v.payment,
-                billingAddress: v.address,
+                billingAddress: v.address.id ? undefined : v.address,
               },
             },
           });
