@@ -11,6 +11,7 @@ import { CampaignFormat } from "graphql/types";
 import { NotificationAd } from "user/ads/NotificationAd";
 import { InlineContentAd } from "user/ads/InlineContentAd";
 import { modalStyles } from "theme";
+import { LearnMoreButton } from "components/Button/LearnMoreButton";
 
 interface Props {
   index: number;
@@ -27,7 +28,8 @@ export function AdSetAds({ index }: Props) {
       <CardContainer header="Ads">
         <Typography variant="body2" sx={{ mb: 3 }}>
           Select the Ads you would like to include in this ad set. Only checked
-          Ads are included.
+          Ads are included.{" "}
+          <LearnMoreButton helpSection="getting-started/create-an-ad" />
         </Typography>
 
         <CreativeSelect index={index} options={adsByFormat}>

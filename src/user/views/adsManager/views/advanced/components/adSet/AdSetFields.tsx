@@ -5,13 +5,14 @@ import { useHistory } from "react-router-dom";
 import { FormikTextField, useIsEdit } from "form/FormikHelpers";
 import { AdSetAds } from "user/views/adsManager/views/advanced/components/adSet/fields/AdSetAds";
 import { adSetOnOffState } from "components/Datagrid/renderers";
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { useFormikContext } from "formik";
 import { CampaignForm } from "user/views/adsManager/types";
 import { CampaignSource } from "graphql/types";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { Status } from "components/Campaigns/Status";
 import { displayFromCampaignState } from "util/displayState";
+import { LearnMoreButton } from "components/Button/LearnMoreButton";
 
 export function AdSetFields() {
   const history = useHistory();
@@ -26,6 +27,10 @@ export function AdSetFields() {
         header={`Ad Set ${fakeCurrent}`}
         additionalAction={<SwitchHeader current={current} />}
       >
+        <Typography variant="body2" gutterBottom>
+          Define the Ad Sets for your campaign.{" "}
+          <LearnMoreButton helpSection="getting-started/create-an-ad-set" />
+        </Typography>
         <FormikTextField
           name={`adSets.${current}.name`}
           label="Ad Set Name"

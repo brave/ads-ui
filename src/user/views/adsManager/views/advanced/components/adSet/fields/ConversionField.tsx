@@ -4,6 +4,7 @@ import { FieldArray, FieldArrayRenderProps, useField } from "formik";
 import { Conversion, initialConversion } from "../../../../../types";
 import { CardContainer } from "components/Card/CardContainer";
 import { Add } from "@mui/icons-material";
+import { LearnMoreButton } from "components/Button/LearnMoreButton";
 
 interface Props {
   index: number;
@@ -21,7 +22,8 @@ export function ConversionField({ index }: Props) {
           <>
             <Stack direction={hasConversions ? "row" : "column"} spacing={1}>
               <Typography variant="body2" sx={{ mb: 2 }}>
-                Define post-engagement analytics.
+                Define post-engagement analytics.{" "}
+                <LearnMoreButton helpSection="campaign-performance/reporting#conversion-reporting-in-brave-ads-manager" />
               </Typography>
               {!hasConversions && (
                 <Button

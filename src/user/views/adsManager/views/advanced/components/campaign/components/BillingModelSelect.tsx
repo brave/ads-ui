@@ -7,6 +7,7 @@ import { AdvertiserPrice } from "user/hooks/useAdvertiserWithPrices";
 import { Billing } from "user/views/adsManager/types";
 import { uiLabelsForCampaignFormat } from "util/campaign";
 import { uiLabelsForBillingType } from "util/billingType";
+import { LearnMoreButton } from "components/Button/LearnMoreButton";
 
 export function BillingModelSelect(props: { prices: AdvertiserPrice[] }) {
   const { isEdit } = useIsEdit();
@@ -18,7 +19,7 @@ export function BillingModelSelect(props: { prices: AdvertiserPrice[] }) {
     <Stack maxWidth={500}>
       <Typography variant="body2">
         {uiLabelsForCampaignFormat(format.value)} pricing configuration
-        option(s)
+        option(s). <LearnMoreButton helpSection="account-management/billing" />
       </Typography>
       <List sx={{ display: "flex", flexDirection: "row", gap: "20px" }}>
         {props.prices
