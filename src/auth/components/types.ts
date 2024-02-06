@@ -22,13 +22,11 @@ export const initialAdvertiserForm = (
   tracking: false,
   payment: paymentAgree,
   terms: false,
-  address: maybeAddress?.billingAddress
-    ? { ...maybeAddress.billingAddress }
-    : {
-        street1: "",
-        city: "",
-        state: "",
-        country: "",
-        zipcode: "",
-      },
+  address: {
+    street1: maybeAddress?.billingAddress?.street1 ?? "",
+    city: maybeAddress?.billingAddress?.city ?? "",
+    state: maybeAddress?.billingAddress?.state ?? "",
+    country: maybeAddress?.billingAddress?.country ?? "",
+    zipcode: maybeAddress?.billingAddress?.zipcode ?? "",
+  },
 });
