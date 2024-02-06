@@ -11,21 +11,28 @@ import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { LearnMoreButton } from "components/Button/LearnMoreButton";
 import { LocationPicker } from "components/Location/LocationPicker";
 import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
+import { msg, Trans } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 
 export function CampaignSettings(props: { prices: AdvertiserPrice[] }) {
   const { isDraft } = useIsEdit();
+  const { _ } = useLingui();
   const { advertiser } = useAdvertiser();
   useTrackMatomoPageView({ documentTitle: "Campaign Settings" });
 
   return (
     <>
-      <CardContainer header="Campaign Settings">
+      <CardContainer header={<Trans>Campaign Settings</Trans>}>
         <Typography variant="body2" gutterBottom>
-          Define how you want your campaign to run.{" "}
-          <LearnMoreButton helpSection="getting-started/create-a-campaign" />
+          <Trans>Define how you want your campaign to run.</Trans>
+        <LearnMoreButton helpSection="getting-started/create-a-campaign" />
         </Typography>
 
-        <FormikTextField name="name" label="Campaign Name" sx={{ mb: 1 }} />
+        <FormikTextField
+          name="name"
+          label={_(msg`Campaign Name`)}
+          sx={{ mb: 1 }}
+        />
 
         <BudgetField />
 

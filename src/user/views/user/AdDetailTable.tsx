@@ -3,6 +3,8 @@ import { CampaignFormat } from "graphql/types";
 import { StatsMetric } from "user/analytics/analyticsOverview/types";
 import { renderStatsCell } from "user/analytics/renderers";
 import { DataGrid, GridColDef, GridValidRowModel } from "@mui/x-data-grid";
+import { useLingui } from "@lingui/react";
+import { msg } from "@lingui/macro";
 
 interface Props<T extends GridValidRowModel> {
   rows: T[];
@@ -20,12 +22,13 @@ export function AdDetailTable<T extends { id: string }>({
   loading,
 }: Props<T>) {
   const displayColumns = [...columns];
+  const { _ } = useLingui();
 
   if (campaign?.format !== CampaignFormat.NtpSi) {
     displayColumns.push(
       {
         field: "spend",
-        headerName: "Spend",
+        headerName: _(msg`Spend`),
         valueGetter: ({ row }) => engagements.get(row.id)?.spend?.toNumber(),
         renderCell: ({ row }) =>
           renderStatsCell(
@@ -41,7 +44,7 @@ export function AdDetailTable<T extends { id: string }>({
       {
         field: "view",
         type: "number",
-        headerName: "Impressions",
+        headerName: _(msg`Impressions`),
         valueGetter: ({ row }) => engagements.get(row.id)?.views?.toString(),
         renderCell: ({ row }) =>
           renderStatsCell(loading, "views", engagements.get(row.id)),
@@ -52,7 +55,7 @@ export function AdDetailTable<T extends { id: string }>({
       {
         field: "click",
         type: "number",
-        headerName: "Clicks",
+        headerName: _(msg`Clicks`),
         valueGetter: ({ row }) => engagements.get(row.id)?.clicks?.toString(),
         renderCell: ({ row }) =>
           renderStatsCell(loading, "clicks", engagements.get(row.id)),
@@ -63,7 +66,7 @@ export function AdDetailTable<T extends { id: string }>({
       {
         field: "landed",
         type: "number",
-        headerName: "Site Visits",
+        headerName: _(msg`Site Visits`),
         valueGetter: ({ row }) => engagements.get(row.id)?.landings?.toString(),
         renderCell: ({ row }) =>
           renderStatsCell(loading, "landings", engagements.get(row.id)),

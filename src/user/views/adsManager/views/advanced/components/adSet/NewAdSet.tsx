@@ -92,7 +92,7 @@ export function NewAdSet() {
                 border="1px solid #ededed"
               >
                 <Typography variant="overline" color="primary">
-                  New
+                  <Trans>New</Trans>
                 </Typography>
               </Box>
             )}

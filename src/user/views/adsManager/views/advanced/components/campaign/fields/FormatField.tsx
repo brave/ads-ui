@@ -16,6 +16,9 @@ import { AdvertiserPrice } from "user/hooks/useAdvertiserWithPrices";
 import ErrorIcon from "@mui/icons-material/Error";
 import { CustomTooltip } from "components/Tooltip/CustomTooltip";
 import { LearnMoreButton } from "components/Button/LearnMoreButton";
+import { msg, Trans } from "@lingui/macro";
+import { Trans as TransWithId } from "@lingui/react";
+import { MessageDescriptor } from "@lingui/core";
 
 interface PriceProps {
   prices: AdvertiserPrice[];
@@ -27,25 +30,25 @@ export function FormatField({ prices }: PriceProps) {
     meta.value === CampaignFormat.PushNotification ? "notification" : "news";
 
   return (
-    <CardContainer header="Format">
+    <CardContainer header={<Trans>Format</Trans>}>
       <Stack direction="row" spacing={0.5} alignItems="center">
         <Typography variant="body2">
-          Choose a format for the campaign you would like to run.{" "}
-          <LearnMoreButton
-            helpSection={`ad-placements/brave-browser/${path}`}
-          />
+          <Trans>Choose a format for the campaign you would like to run</Trans>
+        <LearnMoreButton
+          helpSection={`ad-placements/brave-browser/${path}`}
+        />
         </Typography>
       </Stack>
       <List sx={{ display: "flex", flexDirection: "row", gap: "20px" }}>
         <FormatItemButton
           format={CampaignFormat.PushNotification}
           prices={prices}
-          name="Notification ads"
+          name={msg`Notification ads`}
         />
         <FormatItemButton
           format={CampaignFormat.NewsDisplayAd}
           prices={prices}
-          name="Newsfeed ads"
+          name={msg`Newsfeed ads`}
         />
         <ProspectButton
           name="New tab takeovers"
@@ -61,7 +64,7 @@ export function FormatField({ prices }: PriceProps) {
 }
 
 const FormatItemButton = (
-  props: { format: CampaignFormat; name: string } & PriceProps,
+  props: { format: CampaignFormat; name: MessageDescriptor } & PriceProps,
 ) => {
   const { isEdit } = useIsEdit();
   const [, meta, format] = useField<CampaignFormat>("format");
@@ -85,7 +88,7 @@ const FormatItemButton = (
         border: "1px solid #7c91ff",
       }}
     >
-      {props.name}
+      <TransWithId id={props.name.id} />
     </ListItemButton>
   );
 };

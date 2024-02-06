@@ -23,23 +23,22 @@ import BigNumber from "bignumber.js";
 import { AdvertiserPrice } from "user/hooks/useAdvertiserWithPrices";
 import { Billing } from "user/views/adsManager/types";
 import { uiLabelsForCampaignFormat } from "util/campaign";
+import { t } from "@lingui/macro";
 
 export const MIN_PER_DAY = 33;
 export const MIN_PER_CAMPAIGN = 500;
 
 export const CampaignSchema = (prices: AdvertiserPrice[]) =>
   object().shape({
-    name: string().label("Campaign Name").required(),
+    name: string().required(t`Campaign Name is required`),
     format: string()
-      .label("Campaign Format")
       .oneOf([CampaignFormat.NewsDisplayAd, CampaignFormat.PushNotification])
-      .required(),
+      .required(t`Campaign Format is required`),
     budget: number()
-      .label("Lifetime Budget")
-      .required()
+      .required(t`Lifetime budget is required`)
       .min(
         MIN_PER_CAMPAIGN,
-        `Lifetime budget must be $${MIN_PER_CAMPAIGN} or more`,
+        t`Lifetime budget must be $${MIN_PER_CAMPAIGN} or more`,
       )
       .when(["startAt", "endAt"], ([startAt, endAt], schema) => {
         const campaignRuntime = Math.floor(
@@ -47,9 +46,10 @@ export const CampaignSchema = (prices: AdvertiserPrice[]) =>
         );
         const hasRuntime = campaignRuntime > 0;
 
+        const min = BigNumber(MIN_PER_DAY).times(campaignRuntime);
         return schema.test(
           "is-valid-budget",
-          `Lifetime budget must be higher for date range provided. Minimum $${MIN_PER_DAY * campaignRuntime}.`,
+          t`Lifetime budget must be higher for date range provided. Minimum $${min}.`,
           (value) =>
             hasRuntime
               ? BigNumber(value).div(campaignRuntime).gte(MIN_PER_DAY)
@@ -61,34 +61,29 @@ export const CampaignSchema = (prices: AdvertiserPrice[]) =>
       then: () => CreativeSchema,
     }),
     validateStart: boolean(),
-    startAt: date()
-      .label("Start Date")
-      .when("validateStart", {
-        is: true,
-        then: (schema) =>
-          schema
-            .min(
-              startOfDay(twoDaysOut()),
-              "Start Date must be minimum of 2 days from today",
-            )
-            .required(),
-      }),
+    startAt: date().when("validateStart", {
+      is: true,
+      then: (schema) =>
+        schema
+          .min(
+            startOfDay(twoDaysOut()),
+            t`Start Date must be minimum of 2 days from today`,
+          )
+          .required(t`Start Date is required`),
+    }),
     endAt: date()
-      .label("End Date")
-      .required()
-      .min(ref("startAt"), "End date must be after Start date"),
+      .required(t`End Date is required`)
+      .min(ref("startAt"), t`End date must be after Start date`),
     geoTargets: array()
-      .label("Locations")
       .of(
         object().shape({
           code: string().required(),
           name: string().required(),
         }),
       )
-      .min(1, "At least one country must be targeted")
+      .min(1, t`At least one country must be targeted`)
       .default([]),
     price: string()
-      .label("Price")
       .when(["billingType", "format"], ([billingType, format], schema) => {
         return validatePriceByBillingTypeAndFormat(
           prices,
@@ -97,77 +92,73 @@ export const CampaignSchema = (prices: AdvertiserPrice[]) =>
           schema,
         );
       })
-      .required("Price is a required field"),
+      .required(t`Price is a required field`),
     billingType: string()
-      .label("Pricing Type")
-      .oneOf(["cpm", "cpc", "cpsv"])
-      .required("Pricing type is a required field"),
+      .oneOf(["cpm", "cpc", "cpsv"], t`Pricing type must be CPM, CPC, or CPSV`)
+      .required(t`Pricing type is a required field`),
     adSets: array()
       .min(1)
       .of(
         object().shape({
-          name: string().label("Ad set Name").optional(),
+          name: string().optional(),
           segments: array()
-            .label("Audiences")
             .of(
               object().shape({
                 code: string().required(),
                 name: string().required(),
               }),
             )
-            .min(1, "At least one audience must be targeted")
+            .min(1, t`At least one audience must be targeted`)
             .default([]),
           oses: array()
-            .label("Platforms")
             .of(
               object().shape({
                 code: string().required(),
                 name: string().required(),
               }),
             )
-            .min(1, "At least one platform must be targeted")
+            .min(1, t`At least one platform must be targeted`)
             .default([]),
           conversions: array()
-            .label("Conversions")
             .min(0)
             .max(1)
             .of(
               object().shape({
                 urlPattern: string()
-                  .required("Conversion URL required.")
+                  .required(t`Conversion URL required.`)
                   .matches(
                     NoSpacesRegex,
-                    `Conversion URL must not contain any whitespace`,
+                    t`Conversion URL must not contain any whitespace`,
                   )
                   .matches(
                     HttpsRegex,
-                    `Conversion URL must start with https://`,
+                    t`Conversion URL must start with https://`,
                   )
                   .matches(
                     SimpleUrlRegexp,
-                    `Please enter a valid URL, for example https://brave.com/product/*`,
+                    t`Please enter a valid URL, for example https://brave.com/product/*`,
                   )
                   .matches(
                     TrailingAsteriskRegex,
-                    "Conversion URL must end in trailing asterisk (*)",
+                    t`Conversion URL must end in trailing asterisk (*)`,
                   ),
                 observationWindow: number()
                   .oneOf(
                     [1, 7, 30],
-                    "Observation Window must be 1, 7, or 30 days.",
+                    t`Observation Window must be 1, 7, or 30 days.`,
                   )
-                  .required("Observation Window required."),
+                  .required(t`Observation Window required.`),
                 type: string()
                   .oneOf(
                     ["postclick", "postview"],
-                    "Conversion type must be Post Click or Post View",
+                    t`Conversion type must be Post Click or Post View`,
                   )
-                  .required("Conversion Type required."),
+                  .required(t`Conversion Type required.`),
               }),
             ),
           creatives: array().test(
             "min-length",
-            "Ad sets must have at least one ad",
+            t`Ad sets must have at least one ad`,
             (value) => (value ?? []).filter((c) => c.included).length > 0,
           ),
         }),
@@ -184,12 +175,11 @@ export function validatePriceByBillingTypeAndFormat(
     (p) => p.format === format && p.billingType === billingType,
   );
 
+  const label = uiLabelsForCampaignFormat(format);
   if (!found) {
     return schema.test(
       "is-defined",
-      `No ${billingType} pricing available for ${uiLabelsForCampaignFormat(
-        format,
-      )}, contact selfserve@brave.com for help`,
+      t`No ${billingType} pricing available for ${label}, contact selfserve@brave.com for help`,
       () => false,
     );
   }
@@ -197,7 +187,7 @@ export function validatePriceByBillingTypeAndFormat(
   const price = BigNumber(found.billingModelPrice);
   return schema.test(
     "is-lte-price",
-    `${billingType} price must be ${price} or higher`,
+    t`${billingType} price must be ${price} or higher`,
     (value) => (value ? price.isLessThanOrEqualTo(value) : true),
   );
 }

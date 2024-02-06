@@ -19,4 +19,5 @@
     "baseUrl": "src",
   },
   "include": ["src"],
+  "exclude": ["*.test.ts"]
 }
