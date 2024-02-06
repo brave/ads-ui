@@ -11,6 +11,7 @@ fragment AdvertiserSummary on Advertiser {
 
 fragment AdvertiserBillingAddress on Advertiser {
   billingAddress {
+    id
     street1
     street2
     city

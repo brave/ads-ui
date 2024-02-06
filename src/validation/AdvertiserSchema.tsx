@@ -11,6 +11,7 @@ export const AdvertiserSchema = object().shape({
     .default(false)
     .isTrue("Terms & Conditions acknowledgement is required"),
   address: object().shape({
+    id: string().nullable(),
     street1: string().label("Street address").required(),
     street2: string().label("Street address line 2").nullable(),
     city: string().label("City").required(),
