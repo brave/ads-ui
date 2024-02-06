@@ -42,7 +42,7 @@ export function UserForm() {
             variables: { input: { id: user.userId, ..._.omit(v, ["userId"]) } },
           }).finally(() => setSubmitting(false));
         }}
-        validationSchema={UserSchema}
+        validationSchema={UserSchema()}
       >
         <Form>
           <Stack direction="row" spacing={2}>

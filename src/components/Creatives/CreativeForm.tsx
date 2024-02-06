@@ -67,7 +67,7 @@ export function CreativeForm() {
           onSubmit={(values, { setSubmitting }) => {
             void submit(values, setSubmitting);
           }}
-          validationSchema={CreativeSchema}
+          validationSchema={CreativeSchema()}
         >
           {({ values }) => (
             <Form>
@@ -135,10 +135,9 @@ const dialogProps = (
   const campaigns = creativeCampaigns ?? [];
   const campaignLength = campaigns.length;
 
-  let message =
-    "Modifying an ad will immediately put it into review. This means it will no longer be shown to users until it is approved.";
+  let message = msg`Modifying an ad will immediately put it into review. This means it will no longer be shown to users until it is approved.`;
   if (campaignLength > 1) {
-    message = `${message}. This ad is also shared across ${campaignLength} campaigns. Any modifications made will be effective for all campaigns using this creative.`;
+    message = msg`${message}. This ad is also shared across ${campaignLength} campaigns. Any modifications made will be effective for all campaigns using this creative.`;
   }
 
   const hasDialog =
@@ -146,7 +145,7 @@ const dialogProps = (
     campaigns.some((c) => !isReviewableState(c.state));
   return {
     hasDialog,
-    dialogTitle: `Are you sure you want to modify "${creative.name}"?`,
+    dialogTitle: msg`Are you sure you want to modify "${creative.name}"?`,
     dialogMessage: message,
   };
 };

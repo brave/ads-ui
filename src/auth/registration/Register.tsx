@@ -94,7 +94,7 @@ export function Register() {
             register(v);
             setSubmitting(false);
           }}
-          validationSchema={RegistrationSchema}
+          validationSchema={RegistrationSchema()}
         >
           {({ values }) => (
             <Form>

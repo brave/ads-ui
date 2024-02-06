@@ -58,7 +58,7 @@ export const CampaignSchema = (prices: AdvertiserPrice[]) =>
       }),
     newCreative: object().when("isCreating", {
       is: true,
-      then: () => CreativeSchema,
+      then: () => CreativeSchema(),
     }),
     validateStart: boolean(),
     startAt: date().when("validateStart", {
