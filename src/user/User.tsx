@@ -12,7 +12,6 @@ import { Box } from "@mui/material";
 import { NewCampaign } from "./views/adsManager/views/advanced/components/form/NewCampaign";
 import { EditCampaign } from "./views/adsManager/views/advanced/components/form/EditCampaign";
 import { CompletionForm } from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
-import { AdvertiserAgreed } from "auth/components/AdvertiserAgreed";
 import { Navbar } from "components/Navigation/Navbar";
 import { CampaignView } from "user/views/user/CampaignView";
 import { CampaignReportView } from "user/views/user/CampaignReportView";
@@ -23,6 +22,7 @@ import { AdvertiserAssets } from "components/Assets/AdvertiserAssets";
 import { CreativeList } from "components/Creatives/CreativeList";
 import { CreativeForm } from "components/Creatives/CreativeForm";
 import { ProtectedRoute } from "components/Route/ProtectedRoute";
+import { AdvertiserDetailsForm } from "auth/components/AdvertiserDetailsForm";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -103,7 +103,7 @@ export function User() {
               <ProtectedRoute
                 path="/user/main/campaign"
                 authedComponent={CampaignView}
-                unauthedComponent={AdvertiserAgreed}
+                unauthedComponent={AdvertiserDetailsForm}
               />
 
               <ProtectedRoute

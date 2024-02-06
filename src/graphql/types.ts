@@ -186,10 +186,10 @@ export type CreateAdvertiserImageInput = {
 
 export type CreateAdvertiserInput = {
   additionalBillingEmails?: InputMaybe<Array<Scalars["String"]["input"]>>;
-  billingAddress: CreateAddressInput;
+  billingAddress?: InputMaybe<CreateAddressInput>;
   billingEmail?: InputMaybe<Scalars["String"]["input"]>;
   billingModelPrices?: InputMaybe<Array<AdvertiserPriceInput>>;
-  mailingAddress: CreateAddressInput;
+  mailingAddress?: InputMaybe<CreateAddressInput>;
   name: Scalars["String"]["input"];
   phone?: InputMaybe<Scalars["String"]["input"]>;
   referrer?: InputMaybe<Scalars["String"]["input"]>;
@@ -205,7 +205,7 @@ export type CreateCampaignInput = {
   brandedKeyword?: InputMaybe<Scalars["String"]["input"]>;
   brandedKeywords?: InputMaybe<Array<Scalars["String"]["input"]>>;
   budget: Scalars["Float"]["input"];
-  currency: Scalars["String"]["input"];
+  currency?: Scalars["String"]["input"];
   dailyBudget?: InputMaybe<Scalars["Float"]["input"]>;
   dailyCap: Scalars["Float"]["input"];
   dayPartings?: InputMaybe<Array<DayPartingInput>>;
@@ -221,7 +221,7 @@ export type CreateCampaignInput = {
   source: Scalars["String"]["input"];
   startAt: Scalars["DateTime"]["input"];
   state: Scalars["String"]["input"];
-  type: Scalars["String"]["input"];
+  type?: Scalars["String"]["input"];
   userId?: InputMaybe<Scalars["String"]["input"]>;
 };
 

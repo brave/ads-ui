@@ -35,12 +35,4 @@ export const RegistrationSchema = object().shape({
         schema.required("Please specify how you heard about Brave Ads"),
     }),
   }),
-  address: object().shape({
-    street1: string().label("Street address").required(),
-    street2: string().label("Street address line 2"),
-    city: string().label("City").required(),
-    state: string().label("State / Province").required(),
-    country: string().label("Country").required(),
-    zipcode: string().label("Zip / Postal Code").required(),
-  }),
 });

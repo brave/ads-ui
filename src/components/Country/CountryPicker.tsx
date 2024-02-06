@@ -16,7 +16,7 @@ export const CountryPicker = ({ name }: Props) => {
 
   return (
     <Autocomplete
-      sx={{ width: { md: "75%" } }}
+      sx={{ width: "49.7%" }}
       autoSelect
       loading={data.length === 0}
       options={data}
@@ -25,6 +25,7 @@ export const CountryPicker = ({ name }: Props) => {
         <Box>
           <TextField
             {...params}
+            required
             label="Country"
             helperText={meta.touched && errorMessage}
             error={meta.touched && !!errorMessage}

@@ -9,6 +9,17 @@ fragment AdvertiserSummary on Advertiser {
   publicKey
 }
 
+fragment AdvertiserBillingAddress on Advertiser {
+  billingAddress {
+    street1
+    street2
+    city
+    country
+    state
+    zipcode
+  }
+}
+
 fragment Advertiser on Advertiser {
   ...AdvertiserSummary
   referrer
@@ -74,6 +85,13 @@ query advertiserPrices($id: String!) {
     prices {
       ...AdvertiserPrice
     }
+  }
+}
+
+query advertiserBillingAddress($id: String!) {
+  advertiser(id: $id) {
+    id
+    ...AdvertiserBillingAddress
   }
 }
 
