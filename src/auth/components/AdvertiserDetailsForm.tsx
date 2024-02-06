@@ -15,6 +15,7 @@ import { PaymentType } from "graphql/types";
 import { AdvertiserAgreed } from "auth/components/AdvertiserAgreed";
 import { FormikSubmitButton } from "form/FormikButton";
 import { AdvertiserSchema } from "validation/AdvertiserSchema";
+import { useState } from "react";
 
 export function AdvertiserDetailsForm() {
   const history = useHistory();
@@ -23,6 +24,9 @@ export function AdvertiserDetailsForm() {
   const requiresPaymentAgree =
     advertiser.selfServiceManageCampaign &&
     advertiser.selfServicePaymentType !== PaymentType.Netsuite;
+  const [initial, setInitial] = useState<AdvertiserForm>(
+    initialAdvertiserForm(!requiresPaymentAgree),
+  );
 
   const [mutation] = useUpdateAdvertiserMutation({
     async onCompleted() {
@@ -34,17 +38,16 @@ export function AdvertiserDetailsForm() {
 
   const { data, loading } = useAdvertiserBillingAddressQuery({
     variables: { id: advertiser.id },
+    onCompleted: (data) => {
+      setInitial(initialAdvertiserForm(!requiresPaymentAgree, data.advertiser));
+    },
   });
-
-  const initial = initialAdvertiserForm(
-    !requiresPaymentAgree,
-    data?.advertiser,
-  );
 
   return (
     <Container maxWidth="lg" sx={{ mt: 5 }}>
       <Formik
         initialValues={initial}
+        enableReinitialize
         onSubmit={async (v: AdvertiserForm, { setSubmitting }) => {
           setSubmitting(true);
           await mutation({
@@ -52,7 +55,7 @@ export function AdvertiserDetailsForm() {
               updateAdvertiserInput: {
                 id: advertiser.id,
                 agreed: v.terms && v.tracking && v.payment,
-                billingAddress: v.address,
+                billingAddress: v.address.id ? undefined : v.address,
               },
             },
           });

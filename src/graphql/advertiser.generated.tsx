@@ -17,6 +17,7 @@ export type AdvertiserSummaryFragment = {
 
 export type AdvertiserBillingAddressFragment = {
   billingAddress?: {
+    id: string;
     street1: string;
     street2?: string | null;
     city: string;
@@ -174,6 +175,7 @@ export type AdvertiserBillingAddressQuery = {
   advertiser?: {
     id: string;
     billingAddress?: {
+      id: string;
       street1: string;
       street2?: string | null;
       city: string;
@@ -195,6 +197,7 @@ export type UploadAdvertiserImageMutation = {
 export const AdvertiserBillingAddressFragmentDoc = gql`
   fragment AdvertiserBillingAddress on Advertiser {
     billingAddress {
+      id
       street1
       street2
       city
