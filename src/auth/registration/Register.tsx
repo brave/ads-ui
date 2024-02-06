@@ -42,7 +42,7 @@ export function Register() {
       label: msg`Create an account`,
       component: <NameField />,
       pos: "personal",
-    }
+    },
   ];
 
   const activeStep = useRef<number>(0);

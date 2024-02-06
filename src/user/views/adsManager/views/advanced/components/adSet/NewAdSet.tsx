@@ -14,6 +14,7 @@ import { useRef } from "react";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { useAdvertiserCreatives } from "user/hooks/useAdvertiserCreatives";
 import { useTrackMatomoEvent } from "hooks/useTrackWithMatomo";
+import { Trans } from "@lingui/macro";
 
 export function NewAdSet() {
   const { creatives } = useAdvertiserCreatives();
@@ -53,15 +54,16 @@ export function NewAdSet() {
                   textAlign="left"
                   bgcolor={
                     selected.current === idx
-                      ? "rgba(248, 83, 43, 0.04)"
+                      ? // eslint-disable-next-line lingui/no-unlocalized-strings
+                        "rgba(248, 83, 43, 0.04)"
                       : "none"
                   }
                   replace
                 >
-                  {adSet.name || `Ad set ${idx + 1}`}
+                  {adSet.name || <Trans>Ad set {idx + 1}</Trans>}
                 </Link>
                 {idx > 0 && !adSet.id && (
-                  <Tooltip title="Remove">
+                  <Tooltip title={<Trans>Remove</Trans>}>
                     <IconButton
                       onClick={() => {
                         const newIdx = idx - 1;

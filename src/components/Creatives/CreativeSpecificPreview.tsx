@@ -26,7 +26,7 @@ export function CreativeSpecificPreview({
   let component;
   if (format.value === CampaignFormat.PushNotification) {
     component = options.map((c, idx) => (
-      <BoxContainer header={c.name} key={idx} useTypography>
+      <BoxContainer header={c.name} key={idx}>
         <NotificationPreview
           title={c.payloadNotification?.title}
           body={c.payloadNotification?.body}
@@ -35,7 +35,7 @@ export function CreativeSpecificPreview({
     ));
   } else if (format.value === CampaignFormat.NewsDisplayAd) {
     component = options.map((c, idx) => (
-      <BoxContainer header={c.name} useTypography key={idx}>
+      <BoxContainer header={c.name} key={idx}>
         <ImagePreview
           url={c.payloadInlineContent?.imageUrl ?? ""}
           width={300}

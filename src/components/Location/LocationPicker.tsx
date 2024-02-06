@@ -44,7 +44,13 @@ export const LocationPicker = () => {
         <TextField
           {...params}
           label={lingui(msg`Country Targeting`)}
-          helperText={meta.touched && !!errorMessage ? errorMessage : lingui(msg`Select the geographic regions where your ads will be shown.`)}
+          helperText={
+            meta.touched && !!errorMessage
+              ? errorMessage
+              : lingui(
+                  msg`Select the geographic regions where your ads will be shown.`,
+                )
+          }
           error={!!errorMessage && meta.touched}
         />
       )}

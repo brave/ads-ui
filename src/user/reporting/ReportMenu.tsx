@@ -105,11 +105,11 @@ export const ReportMenu = ({
           <DialogContentText>
             <Trans>
               To protect user&rsquo;s privacy, verified ad conversion data is
-              encrypted so that the identities of converted users remain anonymous
-              to Brave. You can decrypt the conversion data in the CSV file by
-              providing your private key here. If no key is provided, you will
-              receive the encrypted conversion data. Your private key will never
-              be sent to or stored on any Brave servers.
+              encrypted so that the identities of converted users remain
+              anonymous to Brave. You can decrypt the conversion data in the CSV
+              file by providing your private key here. If no key is provided,
+              you will receive the encrypted conversion data. Your private key
+              will never be sent to or stored on any Brave servers.
             </Trans>
           </DialogContentText>
           <TextField

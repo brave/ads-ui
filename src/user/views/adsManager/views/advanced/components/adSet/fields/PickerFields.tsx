@@ -7,6 +7,8 @@ import { CampaignFormat } from "graphql/types";
 import { useEffect } from "react";
 import { SegmentFragment } from "graphql/common.generated";
 import { LearnMoreButton } from "components/Button/LearnMoreButton";
+import { Trans } from "@lingui/macro";
+
 interface Props {
   index: number;
 }
@@ -22,9 +24,11 @@ export function PickerFields({ index }: Props) {
   }, [format.value]);
 
   return (
-    <CardContainer header="Targeting">
+    <CardContainer header={<Trans>Targeting</Trans>}>
       <Typography variant="body2" sx={{ mb: 2 }}>
-        Select the interest segments and platforms you would like to target.{" "}
+        <Trans>
+          Select the interest segments and platforms you would like to target.
+        </Trans>
         <LearnMoreButton helpSection="campaign-performance/targeting" />
       </Typography>
       {format.value !== CampaignFormat.NewsDisplayAd && (
