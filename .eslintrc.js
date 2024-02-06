@@ -26,7 +26,7 @@ module.exports = {
     "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
     "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/no-require-imports": "error",
-    "lingui/no-unlocalized-strings": ["error", { "ignoreAttribute": ["style", "sx"] }],
+    "lingui/no-unlocalized-strings": ["error", { "ignoreAttribute": ["style", "sx", "fontFamily"], "ignoreFunction": ["createSvgIcon"] }],
     "lingui/t-call-in-function": "error",
     "lingui/no-single-variables-to-translate": "warn",
     "lingui/no-expression-in-message": "error",

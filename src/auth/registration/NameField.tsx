@@ -28,13 +28,13 @@ export function NameField() {
 
       <FormikTextField
         name="advertiser.name"
-        label="Business name"
+        label={_(msg`Business name`)}
         margin="dense"
       />
 
       <FormikTextField
         name="advertiser.url"
-        label="Business website"
+        label={_(msg`Business website`)}
         autoComplete="url"
         margin="dense"
       />

@@ -164,7 +164,7 @@ function AccountItemButton({
           <Typography variant="caption" color="text.secondary">
             {"$"}
             {minSpend}
-            {"/month"}
+            {"/"} <Trans>month</Trans>
           </Typography>
         </Stack>
         <Box display="flex" justifyContent="right" alignItems="center">
