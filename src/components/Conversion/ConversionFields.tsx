@@ -17,9 +17,9 @@ export const ConversionFields = ({ name }: Props) => {
         ]}
         helperText={
           <>
-            Post-View: Viewed Ad and converted by visiting site on their own.{" "}
+            Post-View: Viewed ad and converted by visiting site on their own.{" "}
             <br />
-            Post-Click: Viewed Ad and converted by clicking its link
+            Post-Click: Viewed ad and converted by clicking its link
           </>
         }
       />

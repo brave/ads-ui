@@ -153,7 +153,7 @@ export function adSetOnOffState(
       state={state}
       end={c.campaignEnd}
       source={c.campaignSource}
-      type="Ad Set"
+      type="Ad set"
       isInline={isInline}
     />
   );

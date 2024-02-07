@@ -26,7 +26,7 @@ export function NewAd() {
   }, [meta.value]);
 
   return (
-    <BoxContainer header={meta.value ? "Discard Ad" : "Create New Ad"}>
+    <BoxContainer header={meta.value ? "Discard ad" : "Create new ad"}>
       <Box
         component={Button}
         height={

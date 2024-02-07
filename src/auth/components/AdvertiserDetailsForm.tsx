@@ -16,6 +16,7 @@ import { AdvertiserAgreed } from "auth/components/AdvertiserAgreed";
 import { FormikSubmitButton } from "form/FormikButton";
 import { AdvertiserSchema } from "validation/AdvertiserSchema";
 import { useState } from "react";
+import _ from "lodash";
 
 export function AdvertiserDetailsForm() {
   const history = useHistory();
@@ -55,7 +56,9 @@ export function AdvertiserDetailsForm() {
               updateAdvertiserInput: {
                 id: advertiser.id,
                 agreed: v.terms && v.tracking && v.payment,
-                billingAddress: v.address.id ? undefined : v.address,
+                billingAddress: v.address.id
+                  ? undefined
+                  : _.omit(v.address, ["id"]),
               },
             },
           });

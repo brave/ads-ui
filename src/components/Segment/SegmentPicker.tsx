@@ -79,7 +79,7 @@ export const SegmentPicker = ({ idx }: Props) => {
               helperText={
                 meta.touched && !!meta.error
                   ? meta.error
-                  : "Select the audience segments to target. Brave will decide if left untargeted."
+                  : "Select the audience segments to target"
               }
               error={meta.touched && !!meta.error}
             />
