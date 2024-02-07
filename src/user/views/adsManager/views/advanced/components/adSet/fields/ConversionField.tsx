@@ -22,7 +22,10 @@ export function ConversionField({ index }: Props) {
           <>
             <Stack direction={hasConversions ? "row" : "column"} spacing={1}>
               <Typography variant="body2" sx={{ mb: 2 }}>
-                Define post-engagement analytics.{" "}
+                Enter a URL that represents your conversion goal, like a
+                checkout or subscription confirmation page. <br />
+                Brave will count unique visits to that page from users who saw
+                or clicked your ad.{" "}
                 <LearnMoreButton helpSection="campaign-performance/reporting#conversion-reporting-in-brave-ads-manager" />
               </Typography>
               {!hasConversions && (

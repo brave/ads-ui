@@ -53,7 +53,7 @@ export function FormatField({ prices }: PriceProps) {
         />
         <ProspectButton
           name="Search keyword ads"
-          salesLink="https://calendar.google.com/calendar/u/0/appointments/AcZssZ2sEAG3kPSlTKpGd48pYAa2zTd-QpI2L2ewxao="
+          salesLink="https://ads.brave.com/search"
         />
       </List>
     </CardContainer>
@@ -107,8 +107,8 @@ const ProspectButton = (props: { name: string; salesLink: string }) => {
         title={
           <Stack p={1} spacing={1}>
             <Typography variant="caption">
-              {props.name} are not yet available for self-managed campaigns.
-              Please contact sales to inquire.
+              {props.name} are not available for self-managed campaigns. Please
+              contact sales to inquire.
             </Typography>
             <Link
               underline="hover"

@@ -61,7 +61,7 @@ export function CreateCreativeButton() {
       }
       loading={loading}
     >
-      Save Ad
+      Save ad
     </LoadingButton>
   );
 }

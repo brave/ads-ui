@@ -1,6 +1,6 @@
 import { useFormikContext } from "formik";
 import { CampaignForm } from "../../../../types";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { CampaignReview } from "./components/CampaignReview";
 import { AdSetReview } from "./components/AdSetReview";
@@ -31,6 +31,11 @@ export function Review() {
       ))}
 
       <PaymentMethodField />
+
+      <Typography variant="caption">
+        <strong>*</strong>New campaigns typically take up to 48 hours to review
+        during a regular U.S. business week.
+      </Typography>
     </Box>
   );
 }

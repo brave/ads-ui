@@ -30,11 +30,6 @@ export function CampaignSettings(props: { prices: AdvertiserPrice[] }) {
         <CampaignDateRange />
 
         {isDraft && <LocationPicker />}
-
-        <Typography variant="caption">
-          <strong>*</strong>Campaigns are processed during U.S. business hours.
-          Processing can take more than 2 days.
-        </Typography>
       </CardContainer>
 
       <FormatField prices={props.prices} />

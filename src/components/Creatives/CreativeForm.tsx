@@ -46,7 +46,7 @@ export function CreativeForm() {
 
   if (getError) {
     return (
-      <ErrorDetail error={getError} additionalDetails="Unable to load Ad" />
+      <ErrorDetail error={getError} additionalDetails="Unable to load ad" />
     );
   }
 
@@ -70,7 +70,7 @@ export function CreativeForm() {
                 flexWrap="wrap"
               >
                 <CardContainer
-                  header={`${isNew ? "New" : "Edit"} Ad`}
+                  header={`${isNew ? "New" : "Edit"} ad`}
                   sx={{ flexGrow: 1 }}
                 >
                   <CreativeType allowTypeChange={id === "new"} />

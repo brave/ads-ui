@@ -24,16 +24,16 @@ export function AdSetFields() {
   return (
     <>
       <CardContainer
-        header={`Ad Set ${fakeCurrent}`}
+        header={`Ad set ${fakeCurrent}`}
         additionalAction={<SwitchHeader current={current} />}
       >
         <Typography variant="body2" gutterBottom>
-          Define the Ad Sets for your campaign.{" "}
+          Name your ad set to distinguish it from others.{" "}
           <LearnMoreButton helpSection="getting-started/create-an-ad-set" />
         </Typography>
         <FormikTextField
           name={`adSets.${current}.name`}
-          label="Ad Set Name"
+          label="Ad set name"
           margin="none"
         />
       </CardContainer>

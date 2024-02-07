@@ -64,7 +64,7 @@ export function AdList({ campaign, loading, engagements }: Props) {
     },
     {
       field: "adSetName",
-      headerName: "Ad Set Name",
+      headerName: "Ad set name",
       valueGetter: ({ row }) => row.adSetName,
       flex: 1,
     },

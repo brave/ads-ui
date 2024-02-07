@@ -56,7 +56,7 @@ export function NewAdSet() {
                   }
                   replace
                 >
-                  {adSet.name || `Ad Set ${idx + 1}`}
+                  {adSet.name || `Ad set ${idx + 1}`}
                 </Link>
                 {idx > 0 && !adSet.id && (
                   <Tooltip title="Remove">

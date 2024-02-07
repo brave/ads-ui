@@ -50,7 +50,7 @@ export function NewsPreview() {
             maxWidth={400}
           >
             {value?.title ||
-              "This is a news display Ad, it wll look like part of the news feed."}
+              "This is a news display ad, it wll look like part of the news feed."}
           </Typography>
           <Box
             width="200px"

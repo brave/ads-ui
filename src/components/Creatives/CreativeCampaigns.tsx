@@ -29,7 +29,7 @@ export default function CreativeCampaigns({ data, error, loading }: Props) {
     return (
       <ErrorDetail
         error={error}
-        additionalDetails="Unable to get campaign information for Ad"
+        additionalDetails="Unable to get campaign information for ad"
       />
     );
   }

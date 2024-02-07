@@ -56,7 +56,7 @@ export function UploadImage({ useInlineCreation, onClose, onComplete }: Props) {
         <DialogTitle>Upload Image</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Uploaded images can be shared across different Ad Sets within a
+            Uploaded images can be shared across different ad sets within a
             Campaign. For best quality, upload images at 900x750px resolution.
             Images will be automatically scaled to this size.
           </DialogContentText>

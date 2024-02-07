@@ -32,10 +32,10 @@ export function AdSetReview({ adSet, idx, errors, format }: Props) {
   };
 
   return (
-    <ReviewContainer name={`Ad Set ${idx + 1}`} path={`adSets?current=${idx}`}>
+    <ReviewContainer name={`Ad set ${idx + 1}`} path={`adSets?current=${idx}`}>
       <ReviewField
         caption="Name"
-        value={adSet.name || `Ad Set ${idx + 1}`}
+        value={adSet.name || `Ad set ${idx + 1}`}
         error={hasErrors ? adSetError?.name : ""}
       />
       {format !== CampaignFormat.NewsDisplayAd && (

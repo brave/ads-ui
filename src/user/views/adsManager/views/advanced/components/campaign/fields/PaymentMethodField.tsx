@@ -14,11 +14,10 @@ export function PaymentMethodField() {
   }
 
   return (
-    <CardContainer header="Payment Method">
+    <CardContainer header="Payment">
       <Stack spacing={1}>
         <Typography variant="body2">
-          Prepayment of the campaign budget is required before your campaign can
-          begin.{" "}
+          Payment is required before launching your campaign.{" "}
           <LearnMoreButton helpSection="getting-started/launch-your-campaign" />
         </Typography>
         <FormikRadioControl
