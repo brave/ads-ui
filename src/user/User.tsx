@@ -23,6 +23,7 @@ import { CreativeList } from "components/Creatives/CreativeList";
 import { CreativeForm } from "components/Creatives/CreativeForm";
 import { ProtectedRoute } from "components/Route/ProtectedRoute";
 import { AdvertiserDetailsForm } from "auth/components/AdvertiserDetailsForm";
+import { ErrorBoundary } from "ErrorBoundary";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -66,66 +67,78 @@ export function User() {
             flexDirection="column"
             bgcolor="background.default"
           >
-            <Switch>
-              {/* /adsmanager */}
-              <ProtectedRoute
-                path="/user/main/adsmanager/advanced/new/:draftId"
-                authedComponent={NewCampaign}
-                validateAdvertiserProperty={(a) => a.selfServiceManageCampaign}
-              />
+            <ErrorBoundary>
+              <Switch>
+                {/* /adsmanager */}
+                <ProtectedRoute
+                  path="/user/main/adsmanager/advanced/new/:draftId"
+                  authedComponent={NewCampaign}
+                  validateAdvertiserProperty={(a) =>
+                    a.selfServiceManageCampaign
+                  }
+                />
 
-              <ProtectedRoute
-                path="/user/main/adsmanager/advanced/:campaignId"
-                authedComponent={EditCampaign}
-                validateAdvertiserProperty={(a) => a.selfServiceManageCampaign}
-              />
+                <ProtectedRoute
+                  path="/user/main/adsmanager/advanced/:campaignId"
+                  authedComponent={EditCampaign}
+                  validateAdvertiserProperty={(a) =>
+                    a.selfServiceManageCampaign
+                  }
+                />
 
-              <ProtectedRoute
-                path="/user/main/creative/:id"
-                authedComponent={CreativeForm}
-                validateAdvertiserProperty={(a) => a.selfServiceManageCampaign}
-              />
+                <ProtectedRoute
+                  path="/user/main/creative/:id"
+                  authedComponent={CreativeForm}
+                  validateAdvertiserProperty={(a) =>
+                    a.selfServiceManageCampaign
+                  }
+                />
 
-              <ProtectedRoute
-                path="/user/main/complete/:mode"
-                authedComponent={CompletionForm}
-              />
+                <ProtectedRoute
+                  path="/user/main/complete/:mode"
+                  authedComponent={CompletionForm}
+                />
 
-              {/* /campaigns/:campaignId/analytics - */}
-              <ProtectedRoute
-                path="/user/main/campaign/:campaignId"
-                authedComponent={CampaignReportView}
-              />
+                {/* /campaigns/:campaignId/analytics - */}
+                <ProtectedRoute
+                  path="/user/main/campaign/:campaignId"
+                  authedComponent={CampaignReportView}
+                />
 
-              <Route path="/user/main/settings" component={Settings} />
-              <Route path="/user/main/profile" component={Profile} />
+                <Route path="/user/main/settings" component={Settings} />
+                <Route path="/user/main/profile" component={Profile} />
 
-              <ProtectedRoute
-                path="/user/main/campaign"
-                authedComponent={CampaignView}
-                unauthedComponent={AdvertiserDetailsForm}
-              />
+                <ProtectedRoute
+                  path="/user/main/campaign"
+                  authedComponent={CampaignView}
+                  unauthedComponent={AdvertiserDetailsForm}
+                />
 
-              <ProtectedRoute
-                path="/user/main/ads/assets"
-                authedComponent={AdvertiserAssets}
-              />
+                <ProtectedRoute
+                  path="/user/main/ads/assets"
+                  authedComponent={AdvertiserAssets}
+                />
 
-              <ProtectedRoute
-                path="/user/main/ads"
-                authedComponent={CreativeList}
-              />
+                <ProtectedRoute
+                  path="/user/main/ads"
+                  authedComponent={CreativeList}
+                />
 
-              <Redirect from="/user/main/creatives" to="/user/main/ads" exact />
-              <Redirect
-                from="/user/main/assets"
-                to="/user/main/ads/assets"
-                exact
-              />
+                <Redirect
+                  from="/user/main/creatives"
+                  to="/user/main/ads"
+                  exact
+                />
+                <Redirect
+                  from="/user/main/assets"
+                  to="/user/main/ads/assets"
+                  exact
+                />
 
-              {/* default */}
-              <Redirect to="/user/main/campaign" />
-            </Switch>
+                {/* default */}
+                <Redirect to="/user/main/campaign" />
+              </Switch>
+            </ErrorBoundary>
           </Box>
         </Box>
       </FilterContext.Provider>
