@@ -16,7 +16,7 @@ export function MobileAdsBenefits() {
       </ListItem>
       <ListItem alignItems="center" disableGutters>
         <ItemCard
-          primary="Powerful Ad Formats"
+          primary="Powerful ad Formats"
           secondary="Browser-based delivery offers a new way to reach audiences on the Web."
           image={powerfulFormats}
         />

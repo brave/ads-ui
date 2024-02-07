@@ -71,7 +71,7 @@ export function AdsExistingAd() {
   if (options && options.length === 0) {
     return (
       <Alert severity="info" onClose={() => setIsShowingAds(false)}>
-        No previous Ads available
+        No previous ads available
       </Alert>
     );
   }
@@ -80,7 +80,7 @@ export function AdsExistingAd() {
     <Modal open={isShowingAds} onClose={() => setIsShowingAds(false)}>
       <Box sx={modalStyles}>
         <Typography variant="h5" sx={{ mb: 2 }}>
-          Add an existing Ad
+          Add an existing ad
         </Typography>
 
         <Typography variant="subtitle1" fontWeight={500}>

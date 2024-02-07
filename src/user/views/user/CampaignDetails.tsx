@@ -31,7 +31,7 @@ export function CampaignDetails({ engagements, engagementLoading }: Props) {
   );
 
   const tabs = [
-    { label: "Ad Sets", icon: <DatasetIcon /> },
+    { label: "Ad sets", icon: <DatasetIcon /> },
     { label: "Ads", icon: <LibraryBooksIcon /> },
   ];
 
@@ -39,7 +39,7 @@ export function CampaignDetails({ engagements, engagementLoading }: Props) {
     return (
       <ErrorDetail
         error={error}
-        additionalDetails="Unable to retrieve AdSets or Ads for Campaign."
+        additionalDetails="Unable to retrieve ad sets or ads for Campaign."
       />
     );
   }

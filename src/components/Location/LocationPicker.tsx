@@ -40,8 +40,12 @@ export const LocationPicker = () => {
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Location"
-          helperText={meta.touched && !!errorMessage ? errorMessage : ""}
+          label="Country Targeting"
+          helperText={
+            meta.touched && !!errorMessage
+              ? errorMessage
+              : "Select the geographic regions where your ads will be shown."
+          }
           error={!!errorMessage && meta.touched}
         />
       )}

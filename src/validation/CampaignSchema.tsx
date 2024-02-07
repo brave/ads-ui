@@ -106,7 +106,7 @@ export const CampaignSchema = (prices: AdvertiserPrice[]) =>
       .min(1)
       .of(
         object().shape({
-          name: string().label("Ad Set Name").optional(),
+          name: string().label("Ad set Name").optional(),
           segments: array()
             .label("Audiences")
             .of(
@@ -167,7 +167,7 @@ export const CampaignSchema = (prices: AdvertiserPrice[]) =>
             ),
           creatives: array().test(
             "min-length",
-            "Ad Sets must have at least one Ad",
+            "Ad sets must have at least one ad",
             (value) => (value ?? []).filter((c) => c.included).length > 0,
           ),
         }),

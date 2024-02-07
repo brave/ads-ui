@@ -40,7 +40,7 @@ export function CompletionForm() {
           <>
             <Typography sx={{ textAlign: "center" }} variant="h6">
               Your campaign has been updated! <br />
-              If you added new Ads, we&rsquo;ll be in contact as soon as they
+              If you added new ads, we&rsquo;ll be in contact as soon as they
               are approved and activated. <br />
               Thank you for using Brave Ads!
             </Typography>
