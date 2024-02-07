@@ -4,13 +4,22 @@ import { PlatformPicker } from "components/Platform/PlatformPicker";
 import { CardContainer } from "components/Card/CardContainer";
 import { useField } from "formik";
 import { CampaignFormat } from "graphql/types";
+import { useEffect } from "react";
+import { SegmentFragment } from "graphql/common.generated";
 
 interface Props {
   index: number;
 }
 
 export function PickerFields({ index }: Props) {
+  const [, , helper] = useField<SegmentFragment[]>(`adSets.${index}.segments`);
   const [, format] = useField<CampaignFormat>("format");
+
+  useEffect(() => {
+    if (format.value === CampaignFormat.NewsDisplayAd) {
+      helper.setValue([{ code: "Svp7l-zGN", name: "Untargeted" }]);
+    }
+  }, [format.value]);
 
   return (
     <CardContainer header="Targeting">
