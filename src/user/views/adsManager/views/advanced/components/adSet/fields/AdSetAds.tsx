@@ -28,7 +28,7 @@ export function AdSetAds({ index }: Props) {
       <CardContainer header="Ads">
         <Typography variant="body2" sx={{ mb: 3 }}>
           Select the ads you would like to include in this ad set. Only checked
-          Ads are included.{" "}
+          ads are included.{" "}
           <LearnMoreButton helpSection="getting-started/create-an-ad" />
         </Typography>
 
