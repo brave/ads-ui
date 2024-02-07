@@ -1,5 +1,7 @@
 import { useCallback, useState } from "react";
 import { getLink } from "auth/lib";
+import { useLingui } from "@lingui/react";
+import { msg } from "@lingui/macro";
 
 interface Options {
   onError?: (msg: string) => void;
@@ -9,10 +11,11 @@ interface Options {
 export function useGetLink({ onError, onSuccess }: Options = {}) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
+  const { _ } = useLingui();
 
   const requestLink = useCallback(async (email: string) => {
     if (email.trim() === "") {
-      setError("Please enter an email.");
+      setError(_(msg`Please enter an email.`));
       return;
     }
 
