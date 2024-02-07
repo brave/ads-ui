@@ -16,11 +16,13 @@ import { AdvertiserAgreed } from "auth/components/AdvertiserAgreed";
 import { FormikSubmitButton } from "form/FormikButton";
 import { AdvertiserSchema } from "validation/AdvertiserSchema";
 import { useState } from "react";
-import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
+import { useTrackWithMatomo } from "hooks/useTrackWithMatomo";
 import _ from "lodash";
 
 export function AdvertiserDetailsForm() {
-  useTrackMatomoPageView({ documentTitle: "Advertiser Agreement Form" });
+  const { trackMatomoEvent } = useTrackWithMatomo({
+    documentTitle: "Advertiser Agreement Form",
+  });
   const history = useHistory();
   const { advertiser } = useAdvertiser();
   const { setSessionUser } = useAuthContext();
@@ -36,6 +38,10 @@ export function AdvertiserDetailsForm() {
       const user = await getUser();
       setSessionUser(user);
       history.push("/user/main");
+      trackMatomoEvent("advertiser", "update-success");
+    },
+    onError() {
+      trackMatomoEvent("advertiser", "update-failed");
     },
   });
 
