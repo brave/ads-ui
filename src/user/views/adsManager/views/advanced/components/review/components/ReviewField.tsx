@@ -19,10 +19,6 @@ interface Props {
 }
 
 export function ReviewField({ caption, value, error }: Props) {
-  if (!value) {
-    return null;
-  }
-
   return (
     <Box mb={2}>
       <Typography variant="overline" component="span" paddingRight={1}>

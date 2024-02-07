@@ -3,6 +3,7 @@ import { FormikErrors } from "formik";
 import { ReviewField } from "./ReviewField";
 import { ReviewContainer } from "user/views/adsManager/views/advanced/components/review/components/ReviewContainer";
 import { uiLabelsForBillingType } from "util/billingType";
+import { uiLabelsForCampaignFormat } from "util/campaign";
 
 interface Props {
   values: CampaignForm;
@@ -25,6 +26,12 @@ export function CampaignReview({ values, errors }: Props) {
   return (
     <ReviewContainer name="Campaign" path="settings">
       <ReviewField caption="Name" value={values.name} error={errors.name} />
+
+      <ReviewField
+        caption="Format"
+        value={uiLabelsForCampaignFormat(values.format)}
+        error={errors.format}
+      />
 
       <ReviewField
         caption="Start Time"
