@@ -8,8 +8,10 @@ import { CardContainer } from "components/Card/CardContainer";
 import MiniSideBar from "components/Drawer/MiniSideBar";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { FilterContext } from "state/context";
+import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
 
 export function CampaignView() {
+  useTrackMatomoPageView({ documentTitle: "Advertiser Campaigns" });
   const { advertiser } = useAdvertiser();
   const { fromDate } = useContext(FilterContext);
 

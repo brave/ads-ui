@@ -20,6 +20,7 @@ import { LandingPage } from "auth/views/LandingPage";
 import { BraveAdsContactFrame } from "auth/registration/BraveAdsContactFrame";
 import { SearchLandingPage } from "search/SearchLandingPage";
 import { VERSION } from "util/version";
+import { useMatomo } from "@jonkoops/matomo-tracker-react";
 
 const Protected = () => {
   return <Redirect to="/auth/link" />;
@@ -27,8 +28,11 @@ const Protected = () => {
 
 export function App() {
   console.log(`current build: ${VERSION.fullHash}`);
+  const { enableLinkTracking } = useMatomo();
   const [drafts, setDrafts] = useState<CampaignForm[]>(getAllDrafts());
   const isAuthenticated = useIsAuthenticated();
+
+  enableLinkTracking();
 
   if (isAuthenticated == null) {
     return null;

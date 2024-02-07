@@ -15,12 +15,16 @@ import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
 import { useContext } from "react";
 import { FilterContext } from "state/context";
 import { useAdvertiserWithPrices } from "user/hooks/useAdvertiserWithPrices";
+import { useTrackWithMatomo } from "hooks/useTrackWithMatomo";
 
 interface Params {
   campaignId: string;
 }
 
 export function EditCampaign() {
+  const { trackMatomoEvent } = useTrackWithMatomo({
+    documentTitle: "Edit Campaign",
+  });
   const { fromDate } = useContext(FilterContext);
   const history = useHistory();
   const params = useParams<Params>();
@@ -43,6 +47,7 @@ export function EditCampaign() {
   const hasPaymentIntent = initialData?.campaign?.hasPaymentIntent;
   const [mutation] = useUpdateCampaignMutation({
     onCompleted(data) {
+      trackMatomoEvent("campaign", "update-success");
       if (hasPaymentIntent) {
         history.push(
           `/user/main/complete/edit?referenceId=${data.updateCampaign.id}`,
@@ -52,6 +57,7 @@ export function EditCampaign() {
       }
     },
     onError() {
+      trackMatomoEvent("campaign", "update-failed");
       alert("Unable to Update Campaign.");
     },
     refetchQueries: [

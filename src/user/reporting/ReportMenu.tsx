@@ -71,7 +71,6 @@ export const ReportMenu = ({
           </ListItemIcon>
           Performance Report
         </MenuItem>
-        ,
         {hasVerifiedConversions && (
           <MenuItem onClick={() => setDialogue(true)} disabled={loading}>
             <ListItemIcon>

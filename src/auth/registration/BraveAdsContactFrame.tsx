@@ -1,8 +1,11 @@
 import { Box, Stack, Toolbar, Typography } from "@mui/material";
 import { LandingPageAppBar } from "components/AppBar/LandingPageAppBar";
 import { Background } from "components/Background/Background";
+import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
 
 export function BraveAdsContactFrame() {
+  useTrackMatomoPageView({ documentTitle: "Managed Services Form" });
+
   return (
     <Background>
       <LandingPageAppBar />

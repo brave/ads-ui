@@ -5,14 +5,22 @@ import { Link as RouterLink } from "react-router-dom";
 import { useGetLink } from "auth/hooks/mutations/useGetLink";
 import { LoadingButton } from "@mui/lab";
 import { AuthContainer } from "auth/views/components/AuthContainer";
+import { useTrackWithMatomo } from "hooks/useTrackWithMatomo";
 
 export function MagicLink() {
+  const { trackMatomoEvent } = useTrackWithMatomo({
+    documentTitle: "Magic Link Login",
+  });
   const [email, setEmail] = useState("");
   const [requested, setRequested] = useState(false);
 
   const { requestLink, loading, error } = useGetLink({
     onSuccess() {
+      trackMatomoEvent("magic-link", "requested");
       setRequested(true);
+    },
+    onError() {
+      trackMatomoEvent("magic-link", "request-failed");
     },
   });
 

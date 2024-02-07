@@ -4,15 +4,23 @@ import { useState } from "react";
 import { Link as RouterLink, useHistory } from "react-router-dom";
 import { useSignIn } from "auth/hooks/mutations/useSignIn";
 import { AuthContainer } from "auth/views/components/AuthContainer";
+import { useTrackWithMatomo } from "hooks/useTrackWithMatomo";
 
 export function Login() {
+  const { trackMatomoEvent } = useTrackWithMatomo({
+    documentTitle: "Password Login",
+  });
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
 
   const { signIn, loading, error } = useSignIn({
     onSuccess() {
+      trackMatomoEvent("password-login", "success");
       history.replace("/user/main");
+    },
+    onError() {
+      trackMatomoEvent("password-login", "failed");
     },
   });
 

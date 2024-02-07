@@ -23,6 +23,7 @@ import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { AlwaysOnFormButton } from "components/Button/AlwaysOnFormButton";
 import { useIsMobile } from "hooks/useIsMobile";
+import { useTrackMatomoEvent } from "hooks/useTrackWithMatomo";
 
 type RouteOption = {
   label: string;
@@ -173,6 +174,7 @@ interface SupportProps {
 }
 
 export function SupportMenu({ usePlainLink }: SupportProps) {
+  const { trackMatomoEvent } = useTrackMatomoEvent();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const isMobile = useIsMobile();
@@ -180,6 +182,7 @@ export function SupportMenu({ usePlainLink }: SupportProps) {
   const handleClick = (
     event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
   ) => {
+    trackMatomoEvent("support-menu", "click");
     setAnchorEl(event.currentTarget);
   };
 

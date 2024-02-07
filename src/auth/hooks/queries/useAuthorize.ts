@@ -8,9 +8,10 @@ interface Options {
     id: string;
   };
   onCompleted?: () => void;
+  onError?: () => void;
 }
 
-export function useAuthorize({ variables, onCompleted }: Options) {
+export function useAuthorize({ variables, onCompleted, onError }: Options) {
   const { setSessionUser } = useAuthContext();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>();
@@ -30,6 +31,9 @@ export function useAuthorize({ variables, onCompleted }: Options) {
       .catch((e) => {
         console.error(e.message);
         setError(e.message);
+        if (onError) {
+          onError();
+        }
       })
       .finally(() => {
         setLoading(false);
