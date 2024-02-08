@@ -4,6 +4,7 @@ import { useParams, Link as RouterLink } from "react-router-dom";
 import { Card, Container, Stack, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { useValidatePaymentSession } from "checkout/hooks/useValidatePaymentSession";
+import { useTrackWithMatomo } from "hooks/useTrackWithMatomo";
 
 interface Params {
   mode: "edit" | "new";
@@ -13,6 +14,9 @@ export function CompletionForm() {
   const params = useParams<Params>();
   const [clickedSurvey, setClickedSurvey] = useState(false);
   const searchParams = new URLSearchParams(window.location.search);
+  const { trackMatomoEvent } = useTrackWithMatomo({
+    documentTitle: `Campaign ${params.mode === "edit" ? "Update" : "Creation"} Complete`,
+  });
 
   const session = searchParams.get("sessionId");
   const campaign = searchParams.get("referenceId");
@@ -89,7 +93,10 @@ export function CompletionForm() {
               <ValidateCampaignButton
                 loading={loading}
                 clicked={clickedSurvey}
-                onClick={() => setClickedSurvey(true)}
+                onClick={() => {
+                  trackMatomoEvent("survey", "click");
+                  setClickedSurvey(true);
+                }}
               />
             </Stack>
           </>

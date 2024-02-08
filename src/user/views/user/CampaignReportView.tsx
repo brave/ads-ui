@@ -10,12 +10,14 @@ import { CollapseBox } from "components/Collapse/CollapseBox";
 import { OsOverview } from "user/analytics/analyticsOverview/reports/os/OsOverview";
 import { CampaignFormat } from "graphql/types";
 import { AlwaysOnFormButton } from "components/Button/AlwaysOnFormButton";
+import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
 
 interface Params {
   campaignId: string;
 }
 
 export function CampaignReportView() {
+  useTrackMatomoPageView({ documentTitle: "Campaign Reporting" });
   const params = useParams<Params>();
   const today = new Date();
   const [startDate, setStartDate] = useState<Date | undefined>();

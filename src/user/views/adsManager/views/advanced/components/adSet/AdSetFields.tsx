@@ -13,6 +13,7 @@ import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { Status } from "components/Campaigns/Status";
 import { displayFromCampaignState } from "util/displayState";
 import { LearnMoreButton } from "components/Button/LearnMoreButton";
+import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
 
 export function AdSetFields() {
   const history = useHistory();
@@ -20,6 +21,7 @@ export function AdSetFields() {
   const params = new URLSearchParams(history.location.search);
   const current = Number(params.get("current") ?? 0);
   const fakeCurrent = current + 1;
+  useTrackMatomoPageView({ documentTitle: `Ad set ${current} settings` });
 
   return (
     <>

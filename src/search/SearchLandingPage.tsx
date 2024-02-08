@@ -7,8 +7,13 @@ import microwave from "../../microwave.png";
 import curtains from "../../curtains.png";
 import { useIsMobile } from "hooks/useIsMobile";
 import { useEffect, useState } from "react";
+import {
+  useTrackMatomoPageView,
+  useTrackMatomoEvent,
+} from "hooks/useTrackWithMatomo";
 
 export function SearchLandingPage() {
+  useTrackMatomoPageView({ documentTitle: "Search Landing Page" });
   const isMobile = useIsMobile();
 
   return (
@@ -65,19 +70,22 @@ export function SearchLandingPage() {
 }
 
 function BookAMeetingButton() {
+  const { trackMatomoEvent } = useTrackMatomoEvent();
+
   return (
     <Stack direction="column" spacing={1}>
       <Button
         variant="contained"
         color="primary"
         size="medium"
-        onClick={() =>
+        onClick={() => {
+          trackMatomoEvent("search", "book-a-meeting");
           window.open(
             "https://calendar.google.com/calendar/u/0/appointments/AcZssZ2sEAG3kPSlTKpGd48pYAa2zTd-QpI2L2ewxao=",
             "_blank",
             "noopener",
-          )
-        }
+          );
+        }}
         sx={{ maxWidth: "200px", padding: 1.5 }}
       >
         Book a meeting

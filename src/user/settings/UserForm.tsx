@@ -9,9 +9,11 @@ import { ErrorDetail } from "components/Error/ErrorDetail";
 import { UserSchema } from "validation/UserSchema";
 import _ from "lodash";
 import { FormikSubmitButton } from "form/FormikButton";
+import { useTrackMatomoEvent } from "hooks/useTrackWithMatomo";
 
 export function UserForm() {
   const user = useUser();
+  const { trackMatomoEvent } = useTrackMatomoEvent();
   const [initialVals, setInitialVals] = useState(user);
 
   if (!user.userId) {
@@ -21,6 +23,7 @@ export function UserForm() {
 
   const [updateUser] = useUpdateUserMutation({
     onCompleted(user) {
+      trackMatomoEvent("user", "update");
       setInitialVals(user.updateUser);
     },
   });

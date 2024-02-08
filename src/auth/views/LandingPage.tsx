@@ -7,8 +7,10 @@ import { Link as RouterLink } from "react-router-dom";
 import { useIsMobile } from "hooks/useIsMobile";
 import { MobileAdsBenefits } from "auth/views/MobileAdsBenefits";
 import { GradientText } from "components/Typography/GradientText";
+import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
 
 export function LandingPage() {
+  useTrackMatomoPageView({ documentTitle: "Landing Page" });
   const isAuthenticated = useIsAuthenticated();
   const isMobile = useIsMobile();
 
