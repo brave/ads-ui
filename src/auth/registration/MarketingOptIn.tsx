@@ -3,11 +3,12 @@ import { Link as RouterLink } from "react-router-dom";
 import { FormikCheckbox } from "form/FormikHelpers";
 import { useLingui } from "@lingui/react";
 import { msg, Trans } from "@lingui/macro";
+import { PropsWithChildren } from "react";
 
 export function MarketingOptIn() {
   const { _ } = useLingui();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const PolicyLink = (props: { title: string; to: string }) => (
+  const PolicyLink = (props: { to: string } & PropsWithChildren) => (
     <Link
       to={props.to}
       underline="none"
@@ -16,7 +17,7 @@ export function MarketingOptIn() {
       target="_blank"
       component={RouterLink}
     >
-      {props.title}
+      {props.children}
     </Link>
   );
 
@@ -30,21 +31,16 @@ export function MarketingOptIn() {
       />
       <Typography variant="body2">
         <Trans>
-          Please see our Advertiser Privacy Policy and Terms of Service
+          Please see our{" "}
+          <PolicyLink to="https://brave.com/advertiser-privacy/">
+            Advertiser Privacy Policy
+          </PolicyLink>{" "}
+          and{" "}
+          <PolicyLink to="https://basicattentiontoken.org/advertiser-terms-of-service/">
+            Terms of Service
+          </PolicyLink>{" "}
           applicable to Brave Ads
         </Trans>
-        {/*  */}
-        {/*  Please see our{" "}*/}
-        {/*  <PolicyLink*/}
-        {/*    title="Advertiser Privacy Policy"*/}
-        {/*    to="https://brave.com/advertiser-privacy/"*/}
-        {/*  />{" "}*/}
-        {/*  and{" "}*/}
-        {/*  <PolicyLink*/}
-        {/*    title="Terms of Service"*/}
-        {/*    to="https://basicattentiontoken.org/advertiser-terms-of-service/"*/}
-        {/*  />{" "}*/}
-        {/*  applicable to Brave Ads*/}
       </Typography>
     </Stack>
   );

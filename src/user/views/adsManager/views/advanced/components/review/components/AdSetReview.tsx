@@ -6,7 +6,7 @@ import { ReviewContainer } from "user/views/adsManager/views/advanced/components
 import { CampaignFormat } from "graphql/types";
 import { CreativeSpecificPreview } from "components/Creatives/CreativeSpecificPreview";
 import { segmentNameWithNoDash } from "util/segment";
-import { msg, Trans } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 
 interface Props {
@@ -34,14 +34,12 @@ export function AdSetReview({ adSet, idx, errors, format }: Props) {
     return v === "untargeted" ? _(msg`Let Brave pick categories for me.`) : v;
   };
 
+  const adSetPos = `${_(msg`Ad Set`)} ${idx + 1}`;
   return (
-    <ReviewContainer
-      name={<Trans>Ad set ${idx + 1}</Trans>}
-      path={`adSets?current=${idx}`}
-    >
+    <ReviewContainer name={adSetPos} path={`adSets?current=${idx}`}>
       <ReviewField
         caption={msg`Name`}
-        value={adSet.name || _(msg`Ad Set ${idx + 1}`)}
+        value={adSet.name || adSetPos}
         error={hasErrors ? adSetError?.name : ""}
       />
       {format !== CampaignFormat.NewsDisplayAd && (

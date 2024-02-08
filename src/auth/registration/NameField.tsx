@@ -61,7 +61,7 @@ export function NameField() {
             label: _(msg`In a newsletter I subscribe to`),
             value: "newsletter",
           },
-          { label: _(msg`"From a friend/colleague`), value: "friend-referral" },
+          { label: _(msg`From a friend/colleague`), value: "friend-referral" },
           { label: _(msg`In a blog post/news article`), value: "blog-post" },
           {
             label: _(msg`In a post by Brave on LinkedIn`),

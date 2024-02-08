@@ -41,18 +41,17 @@ export function MagicLink() {
         </Typography>
         <Typography variant="subtitle1">
           <Trans>
-            Don&rsquo;t see the email? Check your spam folder or try again.
+            Don&rsquo;t see the email? Check your spam folder or{" "}
+            <Link
+              sx={{ cursor: "pointer" }}
+              variant="inherit"
+              onClick={() => {
+                setRequested(false);
+              }}
+            >
+              try again.
+            </Link>
           </Trans>
-          {/*Don&rsquo;t see the email? Check your spam folder or{" "}*/}
-          {/*<Link*/}
-          {/*  sx={{ cursor: "pointer" }}*/}
-          {/*  variant="inherit"*/}
-          {/*  onClick={() => {*/}
-          {/*    setRequested(false);*/}
-          {/*  }}*/}
-          {/*>*/}
-          {/*  try again.*/}
-          {/*</Link>*/}
         </Typography>
       </AuthContainer>
     );

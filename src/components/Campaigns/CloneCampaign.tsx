@@ -85,13 +85,14 @@ export function CloneCampaign({ campaign, disabled }: Props) {
     [CampaignFormat.PushNotification, CampaignFormat.NewsDisplayAd].includes(
       campaign.format,
     );
+  const campaignName = campaign?.name;
   return (
     <Box>
       <Tooltip
         title={
           !campaign
             ? _(msg`Select one campaign to clone`)
-            : _(msg`Clone ${campaign.name}`)
+            : _(msg`Clone ${campaignName}`)
         }
       >
         <span>
@@ -111,9 +112,7 @@ export function CloneCampaign({ campaign, disabled }: Props) {
         </span>
       </Tooltip>
       <Dialog open={open} onClose={() => setOpen(false)}>
-        <DialogTitle>
-          {_(msg`Clone campaign: "${campaign?.name}"?`)}
-        </DialogTitle>
+        <DialogTitle>{_(msg`Clone campaign: "${campaignName}"?`)}</DialogTitle>
         <DialogContent>
           <DialogContentText>
             <Trans>

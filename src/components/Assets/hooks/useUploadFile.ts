@@ -41,12 +41,9 @@ export const useUploadFile = ({ onComplete }: Props = {}) => {
       setStep(0);
     },
     onCompleted(data) {
+      const fileName = data.createAdvertiserImage.name;
       setStep(2);
-      setState(
-        lingui(
-          msg`File upload complete for "${data.createAdvertiserImage.name}"`,
-        ),
-      );
+      setState(lingui(msg`File upload complete for "${fileName}"`));
       setLoading(false);
       if (onComplete && url) onComplete(url);
     },

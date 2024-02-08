@@ -17,6 +17,7 @@ export const EditButton = (props: {
       campaign.format,
     ) &&
     campaign.state !== "completed";
+  const campaignName = campaign?.name;
 
   return (
     <Tooltip
@@ -24,7 +25,7 @@ export const EditButton = (props: {
         !campaign ? (
           <Trans>Select one campaign to edit</Trans>
         ) : (
-          <Trans>Edit ${campaign.name}</Trans>
+          <Trans>Edit ${campaignName}</Trans>
         )
       }
     >

@@ -17,12 +17,13 @@ export function AdvertiserRegistered({ error }: Props) {
             <Trans>We encountered a problem creating your account.</Trans>
           </Typography>
           <Typography variant="h5" sx={{ textAlign: "left", mb: 5 }}>
-            <Trans>Please reach out to selfserve@brave.com or try again.</Trans>
-            {/*Please reach out to*/}
-            {/*<Link sx={{ ml: 1 }} href="mailto:selfserve@brave.com">*/}
-            {/*  selfserve@brave.com*/}
-            {/*</Link>{" "}*/}
-            {/*or try again.*/}
+            <Trans>
+              Please reach out to{" "}
+              <Link sx={{ ml: 1 }} href="mailto:selfserve@brave.com">
+                selfserve@brave.com
+              </Link>{" "}
+              or try again.
+            </Trans>
           </Typography>
 
           <Link
@@ -50,19 +51,18 @@ export function AdvertiserRegistered({ error }: Props) {
           </Typography>
           <Typography variant="h5" sx={{ textAlign: "left" }}>
             <Trans>
-              In the meantime, check out our advertiser resources. If you have
-              any questions, please reach out to selfserve@brave.com.
+              In the meantime, check out our{" "}
+              <Link
+                href="https://brave.com/brave-ads"
+                variant="h5"
+                target="_blank"
+              >
+                advertiser resources
+              </Link>
+              . If you have any questions, please reach out to{" "}
+              <Link href="mailto:selfserve@brave.com">selfserve@brave.com</Link>
+              .
             </Trans>
-            {/*In the meantime, check out our{" "}*/}
-            {/*<Link*/}
-            {/*  href="https://brave.com/brave-ads"*/}
-            {/*  variant="h5"*/}
-            {/*  target="_blank"*/}
-            {/*>*/}
-            {/*  advertiser resources*/}
-            {/*</Link>*/}
-            {/*. If you have any questions, please reach out to{" "}*/}
-            {/*<Link href="mailto:selfserve@brave.com">selfserve@brave.com</Link>.*/}
           </Typography>
         </Stack>
       )}

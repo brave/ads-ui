@@ -29,7 +29,7 @@ export function AdSetFields() {
   return (
     <>
       <CardContainer
-        header={<Trans>Ad set {fakeCurrent}</Trans>}
+        header={`${_(msg`Ad Set`)} ${fakeCurrent}`}
         additionalAction={<SwitchHeader current={current} />}
       >
         <Typography variant="body2" gutterBottom>

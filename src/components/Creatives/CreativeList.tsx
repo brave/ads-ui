@@ -98,7 +98,7 @@ export function CreativeList() {
           <RouteSelectionButton
             routes={[
               { label: msg`Ads`, value: "ads" },
-              { label: msg`"Images`, value: "assets" },
+              { label: msg`Images`, value: "assets" },
             ]}
           />
         }

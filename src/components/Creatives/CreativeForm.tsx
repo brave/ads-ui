@@ -140,12 +140,13 @@ const dialogProps = (
     message = msg`Modifying an ad will immediately put it into review. This means it will no longer be shown to users until it is approved. This ad is also shared across ${campaignLength} campaigns. Any modifications made will be effective for all campaigns using this creative.`;
   }
 
+  const creativeName = creative.name;
   const hasDialog =
     !isReviewableState(creative.state) &&
     campaigns.some((c) => !isReviewableState(c.state));
   return {
     hasDialog,
-    dialogTitle: msg`Are you sure you want to modify "${creative.name}"?`,
+    dialogTitle: msg`Are you sure you want to modify "${creativeName}"?`,
     dialogMessage: message,
   };
 };

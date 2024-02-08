@@ -1,0 +1,1964 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2024-02-08 15:57-0500\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: por\n"
+
+#: src/validation/CampaignSchema.tsx:190
+msgid "{billingType} price must be {price} or higher"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/campaign/components/BillingModelSelect.tsx:23
+msgid "{campaignFormat} pricing configuration option(s)"
+msgstr ""
+
+#: src/form/FormikHelpers.tsx:53
+msgid "{length}/{maxLength} characters"
+msgstr ""
+
+#: src/components/Switch/OnOff.tsx:44
+msgid "{type} status cannot be updated"
+msgstr ""
+
+#: src/components/Location/LocationPicker.tsx:25
+msgid "+{count} more"
+msgstr ""
+
+#: src/components/Conversion/ConversionFields.tsx:50
+msgid "1 Day"
+msgstr ""
+
+#: src/components/Conversion/ConversionFields.tsx:52
+msgid "30 Days"
+msgstr ""
+
+#: src/components/Conversion/ConversionFields.tsx:51
+msgid "7 Days"
+msgstr ""
+
+#: src/auth/views/MagicLink.tsx:34
+msgid "A login email is on the way"
+msgstr ""
+
+#: src/auth/components/AdvertiserDetailsForm.tsx:125
+msgid "Access dashboard"
+msgstr ""
+
+#: src/components/Drawer/MiniSideBar.tsx:79
+msgid "Account"
+msgstr ""
+
+#: src/user/settings/NewKeyPairModal.tsx:85
+msgid "Account Settings"
+msgstr ""
+
+#: src/components/Switch/OnOff.tsx:36
+msgid "Activate"
+msgstr ""
+
+#: src/validation/CreativeSchema.tsx:45
+msgid "Ad body is required"
+msgstr ""
+
+#: src/validation/CreativeSchema.tsx:46
+msgid "Ad body must be less than 60 characters"
+msgstr ""
+
+#: src/validation/CreativeSchema.tsx:62
+msgid "Ad description is required"
+msgstr ""
+
+#: src/components/Creatives/CreativeList.tsx:64
+#: src/user/campaignList/CampaignList.tsx:89
+msgid "Ad Format"
+msgstr ""
+
+#: src/validation/CreativeSchema.tsx:63
+msgid "Ad image dimensions are required"
+msgstr ""
+
+#: src/user/ads/AdList.tsx:55
+msgid "Ad Name"
+msgstr ""
+
+#: src/validation/CreativeSchema.tsx:24
+msgid "Ad Name is required"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/adSet/AdSetFields.tsx:32
+#: src/user/views/adsManager/views/advanced/components/adSet/NewAdSet.tsx:64
+#: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:37
+msgid "Ad Set"
+msgstr ""
+
+#: src/user/ads/AdList.tsx:74
+#: src/user/views/adsManager/views/advanced/components/adSet/AdSetFields.tsx:41
+msgid "Ad set name"
+msgstr ""
+
+#: src/user/views/user/CampaignDetails.tsx:37
+msgid "Ad sets"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/form/components/BaseForm.tsx:30
+msgid "Ad Sets"
+msgstr ""
+
+#: src/validation/CampaignSchema.tsx:161
+msgid "Ad sets must have at least one ad"
+msgstr ""
+
+#: src/validation/CreativeSchema.tsx:49
+#: src/validation/CreativeSchema.tsx:74
+msgid "Ad title is required"
+msgstr ""
+
+#: src/validation/CreativeSchema.tsx:50
+msgid "Ad title must be less than 30 characters"
+msgstr ""
+
+#: src/validation/CreativeSchema.tsx:73
+msgid "Ad title must be less than 90 characters"
+msgstr ""
+
+#: src/validation/CreativeSchema.tsx:31
+msgid "Ad type is required"
+msgstr ""
+
+#: src/validation/CreativeSchema.tsx:29
+msgid "Ad type must be notification or news"
+msgstr ""
+
+#: src/user/ads/AdsExistingAd.tsx:86
+msgid "Add an existing ad"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:44
+msgid "Add Conversion tracking"
+msgstr ""
+
+#: src/user/views/user/CampaignReportView.tsx:96
+msgid "Additional Report: OS Performance"
+msgstr ""
+
+#: src/components/AppBar/LandingPageAppBar.tsx:86
+#: src/components/Assets/AdvertiserAssets.tsx:32
+#: src/components/Creatives/CreativeList.tsx:100
+#: src/components/Creatives/CreativeSpecificPreview.tsx:52
+#: src/components/Creatives/CreativeSpecificPreview.tsx:63
+#: src/components/Drawer/MiniSideBar.tsx:54
+#: src/user/views/adsManager/views/advanced/components/adSet/fields/AdSetAds.tsx:29
+#: src/user/views/user/CampaignDetails.tsx:38
+msgid "Ads"
+msgstr ""
+
+#: src/user/ads/AdsExistingAd.tsx:90
+msgid "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously approved ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
+msgstr ""
+
+#: src/user/ads/InlineContentAd.tsx:90
+msgid "Advertiser Name"
+msgstr ""
+
+#: src/auth/views/LandingPage.tsx:33
+msgid "advertising made simple"
+msgstr ""
+
+#: src/auth/views/MobileAdsBenefits.tsx:30
+msgid "All targeting and reporting is strictly designed to be anonymous and privacy-preserving."
+msgstr ""
+
+#: src/auth/views/LandingPage.tsx:63
+msgid "Already have an account?"
+msgstr ""
+
+#: src/user/settings/UserApiKey.tsx:31
+msgid "API keys are used to get data from the reporting endpoints. They are unique to you."
+msgstr ""
+
+#: src/components/Creatives/CreativeStatusSwitch.tsx:95
+msgid "Are you sure you want to activate"
+msgstr ""
+
+#: src/components/Creatives/CreativeForm.tsx:149
+msgid "Are you sure you want to modify \"{creativeName}\"?"
+msgstr ""
+
+#: src/components/Creatives/CreativeStatusSwitch.tsx:93
+msgid "Are you sure you want to pause"
+msgstr ""
+
+#: src/search/SearchLandingPage.tsx:63
+msgid "As effective as Google"
+msgstr ""
+
+#: src/auth/registration/NameField.tsx:52
+msgid "At a marketing/media conference"
+msgstr ""
+
+#: src/validation/CampaignSchema.tsx:111
+msgid "At least one audience must be targeted"
+msgstr ""
+
+#: src/validation/CampaignSchema.tsx:84
+msgid "At least one country must be targeted"
+msgstr ""
+
+#: src/validation/CampaignSchema.tsx:120
+msgid "At least one platform must be targeted"
+msgstr ""
+
+#: src/components/Drawer/MiniSideBar.tsx:65
+#: src/components/Segment/SegmentPicker.tsx:83
+#: src/user/adSet/AdSetList.tsx:140
+#: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:47
+msgid "Audiences"
+msgstr ""
+
+#: src/components/Segment/SegmentPicker.tsx:50
+msgid "Automatic interest targeting"
+msgstr ""
+
+#: src/components/Steps/NextAndBack.tsx:33
+msgid "Back"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/campaign/components/CustomPriceSelect.tsx:33
+msgid "Billing Type"
+msgstr ""
+
+#: src/components/Creatives/CreativeList.tsx:151
+#: src/user/ads/AdList.tsx:86
+#: src/user/ads/NotificationAd.tsx:62
+msgid "Body"
+msgstr ""
+
+#: src/components/Creatives/NotificationPreview.tsx:41
+msgid "Body Preview"
+msgstr ""
+
+#: src/user/settings/NewKeyPairModal.tsx:184
+msgid "Brave cannot recover this key, which has been generated in your browser. You will need to confirm this private key on the next step before changes are saved."
+msgstr ""
+
+#: src/components/AppBar/LandingPageAppBar.tsx:57
+msgid "Brave Search"
+msgstr ""
+
+#: src/search/SearchLandingPage.tsx:64
+msgid "Brave Search Ads convert as well as, or better than Google Search ad clicks."
+msgstr ""
+
+#: src/auth/components/AdvertiserAgreed.tsx:17
+msgid "Brave’s products are made to uphold user privacy. By default, the Brave browser blocks third-party tracking (scripts, tags, pixels, etc.) including those used by Google Analytics. This means that most standard website reporting won’t be compatible with Brave Ads. To ensure advertisers have visibility into performance of campaigns, we’ve detailed other effective privacy-first options for measurement in our <0>reporting guide</0>"
+msgstr ""
+
+#: src/auth/views/MobileAdsBenefits.tsx:23
+msgid "Browser-based delivery offers a new way to reach audiences on the Web."
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:52
+#: src/user/campaignList/CampaignList.tsx:109
+msgid "Budget"
+msgstr ""
+
+#: src/auth/registration/NameField.tsx:31
+msgid "Business name"
+msgstr ""
+
+#: src/validation/RegistrationSchema.tsx:17
+msgid "Business name is required"
+msgstr ""
+
+#: src/auth/registration/NameField.tsx:37
+msgid "Business website"
+msgstr ""
+
+#: src/validation/RegistrationSchema.tsx:19
+msgid "Business Website is required"
+msgstr ""
+
+#: src/auth/components/AdvertiserAgreed.tsx:65
+msgid "By continuing, you acknowledge and agree to our <0>Privacy Policy</0> and platform <1>Terms and Conditions</1>"
+msgstr ""
+
+#: src/components/Creatives/CreativeList.tsx:162
+msgid "Call To Action"
+msgstr ""
+
+#: src/validation/CreativeSchema.tsx:61
+msgid "Call to action is required"
+msgstr ""
+
+#: src/validation/CreativeSchema.tsx:60
+msgid "Call to action must be less than 15 characters"
+msgstr ""
+
+#: src/user/ads/InlineContentAd.tsx:75
+msgid "Call to Action text"
+msgstr ""
+
+#: src/user/campaignList/CampaignList.tsx:75
+#: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:28
+msgid "Campaign"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/form/NewCampaign.tsx:87
+msgid "Campaign creation is currently unavailable"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/form/EditCampaign.tsx:80
+msgid "Campaign does not exist, or cannot be edited. Please try again later."
+msgstr ""
+
+#: src/components/Navigation/DraftMenu.tsx:27
+msgid "Campaign Drafts"
+msgstr ""
+
+#: src/validation/CampaignSchema.tsx:36
+msgid "Campaign Format is required"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/campaign/CampaignSettings.tsx:33
+msgid "Campaign Name"
+msgstr ""
+
+#: src/validation/CampaignSchema.tsx:33
+msgid "Campaign Name is required"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/campaign/CampaignSettings.tsx:25
+#: src/user/views/adsManager/views/advanced/components/form/components/BaseForm.tsx:25
+msgid "Campaign Settings"
+msgstr ""
+
+#: src/components/Creatives/CreativeCampaigns.tsx:40
+#: src/components/Drawer/MiniSideBar.tsx:44
+#: src/user/views/user/CampaignView.tsx:41
+msgid "Campaigns"
+msgstr ""
+
+#: src/components/Assets/UploadImage.tsx:128
+#: src/components/Campaigns/CloneCampaign.tsx:127
+#: src/components/Creatives/CreativeStatusSwitch.tsx:123
+#: src/user/reporting/ReportMenu.tsx:133
+#: src/user/settings/NewKeyPairModal.tsx:148
+#: src/user/settings/NewKeyPairModal.tsx:197
+#: src/user/settings/NewKeyPairModal.tsx:242
+#: src/user/settings/UserApiKey.tsx:112
+msgid "Cancel"
+msgstr ""
+
+#: src/user/hooks/useGenerateApiKey.tsx:44
+msgid "cannot create api key"
+msgstr ""
+
+#: src/checkout/lib/index.ts:19
+msgid "cannot create session"
+msgstr ""
+
+#: src/components/Assets/UploadImage.tsx:72
+msgid "Choose"
+msgstr ""
+
+#: src/components/Assets/UploadImage.tsx:94
+msgid "Choose File"
+msgstr ""
+
+#: src/auth/registration/Register.tsx:36
+msgid "Choose what kind of account to open"
+msgstr ""
+
+#: src/auth/components/AdvertiserAddress.tsx:33
+msgid "City"
+msgstr ""
+
+#: src/validation/AdvertiserSchema.tsx:19
+msgid "City is required"
+msgstr ""
+
+#: src/components/Creatives/NewsPreview.tsx:75
+msgid "Click Here!"
+msgstr ""
+
+#: src/auth/views/MagicLink.tsx:37
+msgid "Click on the secure login link in the email to access your Brave Ads account."
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:42
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:75
+#: src/user/analytics/analyticsOverview/lib/overview.library.ts:152
+msgid "Click to site visit rate"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/BaseBarChart.tsx:57
+msgid "Click to site visit Rate"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/lib/overview.library.ts:176
+msgid "Click-through conversions"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:68
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:60
+msgid "Click-through Conversions"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:30
+msgid "Click-through rate"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:48
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:35
+#: src/user/analytics/analyticsOverview/lib/overview.library.ts:164
+#: src/user/campaignList/CampaignList.tsx:142
+#: src/user/views/user/AdDetailTable.tsx:58
+msgid "Clicks"
+msgstr ""
+
+#: src/components/Campaigns/CloneCampaign.tsx:110
+#: src/components/Campaigns/CloneCampaign.tsx:136
+msgid "Clone"
+msgstr ""
+
+#: src/components/Campaigns/CloneCampaign.tsx:95
+msgid "Clone {campaignName}"
+msgstr ""
+
+#: src/components/Campaigns/CloneCampaign.tsx:115
+msgid "Clone campaign: \"{campaignName}\"?"
+msgstr ""
+
+#: src/components/Campaigns/CloneCampaign.tsx:118
+msgid "Cloning a campaign will take all properties including ad sets and ads, and create a new draft campaign with them."
+msgstr ""
+
+#: src/components/Assets/UploadImage.tsx:128
+#: src/user/settings/UserApiKey.tsx:112
+msgid "Close"
+msgstr ""
+
+#: src/components/Assets/UploadImage.tsx:82
+msgid "Complete"
+msgstr ""
+
+#: src/components/Creatives/CreativeSelect.tsx:114
+msgid "Complete selection"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:41
+msgid "Congratulations! 🎉"
+msgstr ""
+
+#: src/components/Creatives/CreativeList.tsx:71
+msgid "Content"
+msgstr ""
+
+#: src/components/Creatives/CreativeStatusSwitch.tsx:137
+#: src/user/settings/NewKeyPairModal.tsx:156
+#: src/user/settings/NewKeyPairModal.tsx:205
+#: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:64
+#: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:149
+msgid "Continue"
+msgstr ""
+
+#: src/components/Conversion/ConversionDisplay.tsx:18
+#: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:20
+msgid "Conversion"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/lib/overview.library.ts:150
+msgid "Conversion rate"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:70
+msgid "Conversion Rate"
+msgstr ""
+
+#: src/components/Conversion/ConversionDisplay.tsx:46
+msgid "Conversion Type"
+msgstr ""
+
+#: src/validation/CampaignSchema.tsx:154
+msgid "Conversion type must be Post Click or Post View"
+msgstr ""
+
+#: src/validation/CampaignSchema.tsx:156
+msgid "Conversion Type required."
+msgstr ""
+
+#: src/validation/CampaignSchema.tsx:143
+msgid "Conversion URL must end in trailing asterisk (*)"
+msgstr ""
+
+#: src/validation/CampaignSchema.tsx:131
+msgid "Conversion URL must not contain any whitespace"
+msgstr ""
+
+#: src/validation/CampaignSchema.tsx:135
+msgid "Conversion URL must start with https://"
+msgstr ""
+
+#: src/components/Conversion/ConversionDisplay.tsx:56
+msgid "Conversion URL Pattern"
+msgstr ""
+
+#: src/validation/CampaignSchema.tsx:128
+msgid "Conversion URL required."
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:47
+#: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:60
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:50
+#: src/user/analytics/analyticsOverview/lib/overview.library.ts:166
+msgid "Conversions"
+msgstr ""
+
+#: src/user/settings/NewKeyPairModal.tsx:181
+msgid "Copy this and keep this safe!"
+msgstr ""
+
+#: src/auth/lib/index.ts:109
+msgid "Could not logout at this time. Please try again later."
+msgstr ""
+
+#: src/components/Conversion/ConversionFields.tsx:54
+msgid "Count conversions within X days of an impression"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:46
+msgid "Counted if the user clicks an ad and spends at least 10 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count."
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:36
+msgid "Counted when a user clicks on the ad. Does not include clicks to dismiss"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:66
+msgid "Counted when a user clicks the “close” or “x” button to make an ad go away"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:51
+msgid "Counted when a user reaches a designated conversion landing page"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:56
+msgid "Counted when a user reaches a designated conversion landing page following an ad impression."
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:61
+msgid "Counted when a user reaches a designated conversion landing page following an impression and click of the ad."
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:31
+msgid "Counted when an ad is displayed on screen for a minimum of one second"
+msgstr ""
+
+#: src/components/Country/CountryPicker.tsx:31
+msgid "Country"
+msgstr ""
+
+#: src/validation/AdvertiserSchema.tsx:21
+msgid "Country is required"
+msgstr ""
+
+#: src/components/Location/LocationPicker.tsx:46
+msgid "Country Targeting"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:72
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:89
+#: src/user/analytics/analyticsOverview/lib/overview.library.ts:156
+#: src/user/analytics/analyticsOverview/reports/os/components/OsBarChart.tsx:53
+msgid "CPA"
+msgstr ""
+
+#: src/util/billingType.ts:18
+msgid "CPC (Clicks)"
+msgstr ""
+
+#: src/util/billingType.ts:17
+msgid "CPM (Impressions)"
+msgstr ""
+
+#: src/util/billingType.ts:19
+msgid "CPSV (Site Visits)"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/form/components/PaymentButton.tsx:18
+msgid "Create & Submit For Approval"
+msgstr ""
+
+#: src/components/Creatives/CreativeForm.tsx:82
+msgid "Create ad"
+msgstr ""
+
+#: src/auth/registration/Register.tsx:42
+msgid "Create an account"
+msgstr ""
+
+#: src/user/ads/NewAd.tsx:32
+msgid "Create new ad"
+msgstr ""
+
+#: src/user/settings/NewKeyPairModal.tsx:129
+#: src/user/settings/NewKeyPairModal.tsx:164
+#: src/user/settings/NewKeyPairModal.tsx:213
+msgid "Create new keypair?"
+msgstr ""
+
+#: src/components/Assets/AdvertiserAssets.tsx:76
+#: src/components/Creatives/CreativeSelect.tsx:89
+msgid "created"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/BaseBarChart.tsx:58
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:40
+msgid "CTR"
+msgstr ""
+
+#: src/auth/views/LandingPage.tsx:56
+#: src/components/Button/DashboardButton.tsx:14
+msgid "Dashboard"
+msgstr ""
+
+#: src/user/reporting/csv.library.tsx:114
+msgid "Data not valid for this private key"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/EngagementHeader.tsx:51
+msgid "Day"
+msgstr ""
+
+#: src/user/reporting/ReportMenu.tsx:102
+msgid "Decrypt Conversion Data?"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/campaign/CampaignSettings.tsx:27
+msgid "Define how you want your campaign to run."
+msgstr ""
+
+#: src/user/ads/AdList.tsx:64
+msgid "DELETED"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/reports/os/components/OsPieChart.tsx:21
+msgid "Device"
+msgstr ""
+
+#: src/user/ads/NewAd.tsx:32
+msgid "Discard ad"
+msgstr ""
+
+#: src/components/Steps/ActionButtons.tsx:29
+msgid "Discard campaign"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:38
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:85
+#: src/user/analytics/analyticsOverview/lib/overview.library.ts:160
+msgid "Dismissal rate"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:65
+#: src/user/analytics/analyticsOverview/lib/overview.library.ts:174
+msgid "Dismissals"
+msgstr ""
+
+#: src/user/settings/UserApiKey.tsx:40
+msgid "Documentation can be found <0>here</0> on how to use the API."
+msgstr ""
+
+#: src/auth/views/MagicLink.tsx:43
+msgid "Don’t see the email? Check your spam folder or <0>try again.</0>"
+msgstr ""
+
+#: src/user/reporting/ReportMenu.tsx:62
+msgid "Download Report"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:46
+#: src/user/analytics/analyticsOverview/lib/overview.library.ts:172
+msgid "Downvotes"
+msgstr ""
+
+#: src/components/Navigation/DraftMenu.tsx:56
+msgid "Draft ${idx}"
+msgstr ""
+
+#: src/components/Navigation/DraftMenu.tsx:44
+msgid "Drafts"
+msgstr ""
+
+#: src/user/campaignList/EditButton.tsx:42
+#: src/user/views/adsManager/views/advanced/components/review/components/ReviewContainer.tsx:32
+msgid "Edit"
+msgstr ""
+
+#: src/user/campaignList/EditButton.tsx:28
+msgid "Edit ${campaignName}"
+msgstr ""
+
+#: src/components/Creatives/CreativeForm.tsx:82
+msgid "Edit ad"
+msgstr ""
+
+#: src/auth/registration/NameField.tsx:23
+#: src/auth/views/Login.tsx:43
+#: src/auth/views/MagicLink.tsx:74
+#: src/user/settings/UserForm.tsx:51
+msgid "Email"
+msgstr ""
+
+#: src/validation/RegistrationSchema.tsx:13
+#: src/validation/UserSchema.tsx:6
+msgid "Email address is required"
+msgstr ""
+
+#: src/user/campaignList/CampaignList.tsx:198
+msgid "End"
+msgstr ""
+
+#: src/components/Campaigns/CampaignDateRange.tsx:39
+msgid "End Date"
+msgstr ""
+
+#: src/validation/CampaignSchema.tsx:75
+msgid "End Date is required"
+msgstr ""
+
+#: src/validation/CampaignSchema.tsx:76
+msgid "End date must be after Start date"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:47
+msgid "End Time"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:26
+msgid "Enter a URL that represents your conversion goal, like a checkout or subscription confirmation page. <0/>Brave will count unique visits to that page from users who saw or clicked your ad."
+msgstr ""
+
+#: src/auth/views/MagicLink.tsx:63
+msgid "Enter your email address to get a secure login link. Use this link to access your Brave Ads account."
+msgstr ""
+
+#: src/user/ads/NotificationAd.tsx:73
+msgid "Example - https://brave.com/brave-rewards/"
+msgstr ""
+
+#: src/user/reporting/ReportMenu.tsx:142
+msgid "Export"
+msgstr ""
+
+#: src/components/Assets/hooks/useUploadFile.ts:153
+msgid "Failed to Fetch"
+msgstr ""
+
+#: src/components/Assets/hooks/useUploadFile.ts:149
+msgid "Failed to upload image"
+msgstr ""
+
+#: src/components/Button/AlwaysOnFormButton.tsx:34
+msgid "Feedback"
+msgstr ""
+
+#: src/components/Assets/hooks/useUploadFile.ts:46
+msgid "File upload complete for \"{fileName}\""
+msgstr ""
+
+#: src/user/ads/AdsExistingAd.tsx:100
+msgid "Filter ads by name..."
+msgstr ""
+
+#: src/auth/views/MobileAdsBenefits.tsx:15
+msgid "For all business sizes"
+msgstr ""
+
+#: src/auth/registration/AccountChoice.tsx:74
+msgid "For enterprise and agency businesses looking for bespoke ad solutions via dedicated Brave Ads representatives."
+msgstr ""
+
+#: src/auth/registration/AccountChoice.tsx:66
+msgid "For small to mid-sized businesses to create and manage their Brave Ads campaigns independently."
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:36
+msgid "Format"
+msgstr ""
+
+#: src/components/Date/DateRangePicker.tsx:27
+msgid "From"
+msgstr ""
+
+#: src/auth/registration/NameField.tsx:64
+msgid "From a friend/colleague"
+msgstr ""
+
+#: src/auth/registration/NameField.tsx:56
+msgid "From an influential person I follow online"
+msgstr ""
+
+#: src/auth/registration/NameField.tsx:16
+msgid "Full name"
+msgstr ""
+
+#: src/user/settings/UserForm.tsx:65
+msgid "Full Name"
+msgstr ""
+
+#: src/validation/RegistrationSchema.tsx:15
+#: src/validation/UserSchema.tsx:7
+msgid "Full name is required"
+msgstr ""
+
+#: src/user/settings/UserApiKey.tsx:120
+msgid "Generate"
+msgstr ""
+
+#: src/user/settings/NewKeyPairModal.tsx:91
+msgid "Generate a keypair for your organization. Brave Ads will use your organization’s public key to sign and encrypt conversion data. Only your organization will have access to the private key, which can be used to decrypt and view conversion data."
+msgstr ""
+
+#: src/user/settings/UserApiKey.tsx:63
+msgid "Generate a new API key?"
+msgstr ""
+
+#: src/user/settings/UserApiKey.tsx:55
+msgid "Generate API Key"
+msgstr ""
+
+#: src/user/settings/UserApiKey.tsx:69
+msgid "Generating a new API key will result in the deactivation of your previous key, rendering it unusable for future requests. Make sure to update your code with the new key to avoid disruptions in your application’s functionality."
+msgstr ""
+
+#: src/search/SearchLandingPage.tsx:68
+msgid "Get a free one-month test to see how Search Ads perform for your brand."
+msgstr ""
+
+#: src/auth/registration/BraveAdsContactFrame.tsx:23
+msgid "Get in touch with our team"
+msgstr ""
+
+#: src/auth/views/MagicLink.tsx:90
+msgid "Get login link"
+msgstr ""
+
+#: src/components/AppBar/LandingPageAppBar.tsx:39
+msgid "Get started"
+msgstr ""
+
+#: src/auth/views/LandingPage.tsx:58
+msgid "Get Started"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/MetricFilter.tsx:64
+msgid "Hide"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/EngagementHeader.tsx:50
+msgid "Hour"
+msgstr ""
+
+#: src/auth/components/AdvertiserAgreed.tsx:77
+msgid "I agree"
+msgstr ""
+
+#: src/auth/components/AdvertiserAgreed.tsx:34
+msgid "I understand that Brave Ads will not be compatible with Google Analytics and similar solutions that rely on third-party trackers"
+msgstr ""
+
+#: src/auth/components/AdvertiserAgreed.tsx:54
+msgid "I understand that pre-payment is required to launch my campaigns"
+msgstr ""
+
+#: src/auth/registration/MarketingOptIn.tsx:29
+msgid "I would like to receive marketing emails about new features and promotions from Brave Ads"
+msgstr ""
+
+#: src/components/Assets/ImageAutocomplete.tsx:45
+msgid "Image"
+msgstr ""
+
+#: src/components/Assets/ImagePreview.tsx:56
+msgid "Image failed to load"
+msgstr ""
+
+#: src/validation/CreativeSchema.tsx:69
+msgid "Image URL must be hosted on our private CDN"
+msgstr ""
+
+#: src/validation/CreativeSchema.tsx:65
+msgid "Image URL must be valid"
+msgstr ""
+
+#: src/components/Assets/AdvertiserAssets.tsx:33
+#: src/components/Creatives/CreativeList.tsx:101
+msgid "Images"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:46
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:30
+#: src/user/analytics/analyticsOverview/lib/overview.library.ts:154
+#: src/user/campaignList/CampaignList.tsx:129
+#: src/user/views/user/AdDetailTable.tsx:47
+msgid "Impressions"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/reports/os/components/OsPieChart.tsx:39
+msgid "Impressions (Device)"
+msgstr ""
+
+#: src/auth/registration/NameField.tsx:65
+msgid "In a blog post/news article"
+msgstr ""
+
+#: src/auth/registration/NameField.tsx:61
+msgid "In a newsletter I subscribe to"
+msgstr ""
+
+#: src/auth/registration/NameField.tsx:67
+msgid "In a post by Brave on LinkedIn"
+msgstr ""
+
+#: src/auth/registration/NameField.tsx:70
+msgid "In a video on YouTube"
+msgstr ""
+
+#: src/auth/registration/AdvertiserRegistered.tsx:53
+msgid "In the meantime, check out our <0>advertiser resources</0>. If you have any questions, please reach out to <1>selfserve@brave.com</1>."
+msgstr ""
+
+#: src/components/Datagrid/renderers.tsx:42
+msgid "In your local time this is"
+msgstr ""
+
+#: src/components/Campaigns/CampaignAgeFilter.tsx:34
+msgid "Include campaigns that ended over 6 months ago"
+msgstr ""
+
+#: src/search/SearchLandingPage.tsx:59
+msgid "Incremental"
+msgstr ""
+
+#: src/components/Assets/hooks/useUploadFile.ts:169
+msgid "Invalid format"
+msgstr ""
+
+#: src/checkout/lib/index.ts:46
+msgid "invalid session"
+msgstr ""
+
+#: src/auth/lib/index.ts:95
+msgid "Invalid Session"
+msgstr ""
+
+#: src/auth/lib/index.ts:141
+msgid "Invalid Token"
+msgstr ""
+
+#: src/components/Datagrid/stringFilterOperators.tsx:11
+msgid "is not"
+msgstr ""
+
+#: src/user/settings/UserApiKey.tsx:100
+msgid "Key copied"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:89
+msgid "Key Statistics"
+msgstr ""
+
+#: src/user/settings/NewKeyPairModal.tsx:87
+msgid "Keypairs"
+msgstr ""
+
+#: src/components/Button/LearnMoreButton.tsx:19
+msgid "Learn More"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:34
+msgid "Let Brave pick categories for me."
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/campaign/fields/BudgetField.tsx:18
+#: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:52
+msgid "Lifetime Budget"
+msgstr ""
+
+#: src/validation/CampaignSchema.tsx:38
+msgid "Lifetime budget is required"
+msgstr ""
+
+#: src/validation/CampaignSchema.tsx:41
+msgid "Lifetime budget must be ${MIN_PER_CAMPAIGN} or more"
+msgstr ""
+
+#: src/validation/CampaignSchema.tsx:52
+msgid "Lifetime budget must be higher for date range provided. Minimum ${min}."
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/campaign/fields/LocationField.tsx:8
+msgid "Location"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:67
+msgid "Locations"
+msgstr ""
+
+#: src/auth/views/LandingPage.tsx:72
+#: src/auth/views/Login.tsx:67
+#: src/components/AppBar/LandingPageAppBar.tsx:113
+msgid "Log in"
+msgstr ""
+
+#: src/auth/views/Login.tsx:36
+msgid "Log into your Brave Ads account"
+msgstr ""
+
+#: src/auth/views/AuthVerify.tsx:36
+msgid "Logging in"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/form/components/PaymentButton.tsx:9
+msgid "Make payment & submit for approval"
+msgstr ""
+
+#: src/auth/registration/AccountChoice.tsx:72
+msgid "Managed service"
+msgstr ""
+
+#: src/user/ads/NotificationAd.tsx:56
+msgid "Max 30 Characters"
+msgstr ""
+
+#: src/user/ads/NotificationAd.tsx:63
+msgid "Max 60 Characters"
+msgstr ""
+
+#: src/components/Creatives/CreativeForm.tsx:138
+msgid "Modifying an ad will immediately put it into review. This means it will no longer be shown to users until it is approved."
+msgstr ""
+
+#: src/components/Creatives/CreativeForm.tsx:140
+msgid "Modifying an ad will immediately put it into review. This means it will no longer be shown to users until it is approved. This ad is also shared across {campaignLength} campaigns. Any modifications made will be effective for all campaigns using this creative."
+msgstr ""
+
+#: src/components/Creatives/CreativeStatusSwitch.tsx:101
+msgid "Modifying the state of this ad will effect more than one campaign:"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/EngagementHeader.tsx:53
+msgid "Month"
+msgstr ""
+
+#: src/user/adSet/AdSetList.tsx:50
+msgid "more"
+msgstr ""
+
+#: src/components/Creatives/CreativeCampaigns.tsx:45
+#: src/components/Creatives/CreativeList.tsx:46
+#: src/user/ads/InlineContentAd.tsx:65
+#: src/user/ads/NotificationAd.tsx:51
+#: src/user/adSet/AdSetList.tsx:93
+#: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:41
+#: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:30
+msgid "Name"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/adSet/AdSetFields.tsx:36
+msgid "Name your ad set to distinguish it from others."
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/adSet/NewAdSet.tsx:96
+msgid "New"
+msgstr ""
+
+#: src/components/Navigation/NewCreativeButton.tsx:25
+msgid "New ad"
+msgstr ""
+
+#: src/user/settings/UserApiKey.tsx:61
+msgid "New API Key"
+msgstr ""
+
+#: src/components/Navigation/NewCampaignButton.tsx:29
+msgid "New Campaign"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/review/Review.tsx:40
+msgid "New campaigns typically take up to 48 hours to review during a regular U.S. business week."
+msgstr ""
+
+#: src/user/settings/NewKeyPairModal.tsx:119
+msgid "New Keypair"
+msgstr ""
+
+#: src/auth/registration/AccountChoice.tsx:77
+#: src/user/library/index.ts:248
+#: src/util/campaign.ts:7
+msgid "New tab takeover"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:55
+msgid "New tab takeovers"
+msgstr ""
+
+#: src/user/library/index.ts:249
+#: src/util/campaign.ts:8
+msgid "Newsfeed"
+msgstr ""
+
+#: src/user/ads/InlineContentAd.tsx:62
+msgid "Newsfeed Ad"
+msgstr ""
+
+#: src/auth/registration/AccountChoice.tsx:67
+#: src/auth/registration/AccountChoice.tsx:79
+#: src/components/Creatives/CreativeType.tsx:18
+#: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:52
+msgid "Newsfeed ads"
+msgstr ""
+
+#: src/components/Steps/NextAndBack.tsx:46
+msgid "Next"
+msgstr ""
+
+#: src/components/Datagrid/renderers.tsx:80
+msgid "No"
+msgstr ""
+
+#: src/validation/CampaignSchema.tsx:182
+msgid "No {billingType} pricing available for {label}, contact selfserve@brave.com for help"
+msgstr ""
+
+#: src/components/Conversion/ConversionDisplay.tsx:19
+msgid "No conversion URL setup"
+msgstr ""
+
+#: src/user/reporting/csv.library.tsx:96
+msgid "No file Result"
+msgstr ""
+
+#: src/user/ads/AdsExistingAd.tsx:77
+msgid "No previous ads available"
+msgstr ""
+
+#: src/checkout/lib/index.ts:26
+msgid "no session created"
+msgstr ""
+
+#: src/auth/views/AuthVerify.tsx:55
+msgid "Not automatically redirected? Click this link to go to the dashboard."
+msgstr ""
+
+#: src/user/library/index.ts:247
+msgid "Notification"
+msgstr ""
+
+#: src/user/ads/NotificationAd.tsx:48
+msgid "Notification ad"
+msgstr ""
+
+#: src/auth/registration/AccountChoice.tsx:67
+#: src/auth/registration/AccountChoice.tsx:78
+#: src/components/Creatives/CreativeType.tsx:14
+#: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:47
+msgid "Notification ads"
+msgstr ""
+
+#: src/util/campaign.ts:6
+msgid "Notification\""
+msgstr ""
+
+#: src/components/Conversion/ConversionDisplay.tsx:51
+#: src/components/Conversion/ConversionFields.tsx:48
+msgid "Observation Window"
+msgstr ""
+
+#: src/validation/CampaignSchema.tsx:148
+msgid "Observation Window must be 1, 7, or 30 days."
+msgstr ""
+
+#: src/validation/CampaignSchema.tsx:150
+msgid "Observation Window required."
+msgstr ""
+
+#: src/components/Creatives/CreativeList.tsx:38
+msgid "On / Off"
+msgstr ""
+
+#: src/auth/registration/NameField.tsx:59
+msgid "On a podcast I listen to"
+msgstr ""
+
+#: src/user/adSet/AdSetList.tsx:84
+#: src/user/campaignList/CampaignList.tsx:210
+msgid "On/Off"
+msgstr ""
+
+#: src/user/settings/NewKeyPairModal.tsx:229
+msgid "Once confirmed, your organization’s keypair will be replaced with the new keypair."
+msgstr ""
+
+#: src/auth/registration/AdvertiserRegistered.tsx:47
+msgid "Once the review process is complete, we will send you an email to notify you of the approval status and any further steps required."
+msgstr ""
+
+#: src/auth/views/MagicLink.tsx:100
+msgid "or sign in using a password"
+msgstr ""
+
+#: src/auth/views/Login.tsx:77
+msgid "or sign in using a secure link"
+msgstr ""
+
+#: src/user/settings/Settings.tsx:49
+msgid "Organization"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/reports/os/components/OsPieChart.tsx:21
+msgid "OS"
+msgstr ""
+
+#: src/auth/registration/NameField.tsx:71
+msgid "Other (please specify)"
+msgstr ""
+
+#: src/auth/registration/NameField.tsx:78
+msgid "Other source"
+msgstr ""
+
+#: src/auth/views/Login.tsx:51
+#: src/user/settings/UserForm.tsx:57
+msgid "Password"
+msgstr ""
+
+#: src/components/Switch/OnOff.tsx:36
+msgid "Pause"
+msgstr ""
+
+#: src/auth/components/AdvertiserAgreed.tsx:41
+#: src/user/views/adsManager/views/advanced/components/campaign/fields/PaymentMethodField.tsx:18
+msgid "Payment"
+msgstr ""
+
+#: src/validation/AdvertiserSchema.tsx:11
+msgid "Payment acknowledgement is required"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/campaign/fields/PaymentMethodField.tsx:21
+msgid "Payment is required before launching your campaign."
+msgstr ""
+
+#: src/user/reporting/ReportMenu.tsx:73
+msgid "Performance Report"
+msgstr ""
+
+#: src/components/Platform/PlatformPicker.tsx:41
+#: src/user/adSet/AdSetList.tsx:119
+#: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:53
+msgid "Platforms"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/reports/campaign/EngagementsOverview.tsx:67
+msgid "Please ask your Account Manager for reports on campaigns of this format."
+msgstr ""
+
+#: src/user/settings/NewKeyPairModal.tsx:217
+msgid "Please confirm your organization’s new private key:"
+msgstr ""
+
+#: src/auth/lib/index.ts:24
+msgid "Please enter a username and password"
+msgstr ""
+
+#: src/validation/RegistrationSchema.tsx:14
+msgid "Please enter a valid email address"
+msgstr ""
+
+#: src/validation/CreativeSchema.tsx:19
+#: src/validation/RegistrationSchema.tsx:24
+msgid "Please enter a valid URL, for example https://brave.com"
+msgstr ""
+
+#: src/validation/CampaignSchema.tsx:139
+msgid "Please enter a valid URL, for example https://brave.com/product/*"
+msgstr ""
+
+#: src/auth/hooks/mutations/useGetLink.ts:18
+msgid "Please enter an email."
+msgstr ""
+
+#: src/validation/RegistrationSchema.tsx:30
+msgid "Please let us know how you heard about Brave Ads"
+msgstr ""
+
+#: src/validation/RegistrationSchema.tsx:27
+msgid "Please let us know why you're interested in Brave Ads"
+msgstr ""
+
+#: src/auth/registration/AdvertiserRegistered.tsx:20
+msgid "Please reach out to <0>selfserve@brave.com</0> or try again."
+msgstr ""
+
+#: src/auth/registration/MarketingOptIn.tsx:33
+msgid "Please see our <0>Advertiser Privacy Policy</0> and <1>Terms of Service</1> applicable to Brave Ads"
+msgstr ""
+
+#: src/validation/RegistrationSchema.tsx:35
+msgid "Please specify how you heard about Brave Ads"
+msgstr ""
+
+#: src/components/Conversion/ConversionFields.tsx:20
+msgid "Post-Click"
+msgstr ""
+
+#: src/components/Conversion/ConversionFields.tsx:28
+msgid "Post-Click: Viewed ad and converted by clicking its link"
+msgstr ""
+
+#: src/components/Conversion/ConversionFields.tsx:19
+msgid "Post-View"
+msgstr ""
+
+#: src/components/Conversion/ConversionFields.tsx:24
+msgid "Post-View: Viewed ad and converted by visiting site on their own."
+msgstr ""
+
+#: src/auth/views/MobileAdsBenefits.tsx:22
+msgid "Powerful ad formats"
+msgstr ""
+
+#: src/components/Assets/hooks/useUploadFile.ts:54
+msgid "Preparing file for upload..."
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/campaign/components/CustomPriceSelect.tsx:23
+#: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:62
+msgid "Price"
+msgstr ""
+
+#: src/validation/CampaignSchema.tsx:95
+msgid "Price is a required field"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/campaign/CampaignSettings.tsx:46
+msgid "Pricing"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:57
+msgid "Pricing Type"
+msgstr ""
+
+#: src/validation/CampaignSchema.tsx:98
+msgid "Pricing type is a required field"
+msgstr ""
+
+#: src/validation/CampaignSchema.tsx:97
+msgid "Pricing type must be CPM, CPC, or CPSV"
+msgstr ""
+
+#: src/auth/components/AdvertiserDetailsForm.tsx:101
+msgid "Prior to using the dashboard, please take a moment to complete your profile and review the following acknowledgements:"
+msgstr ""
+
+#: src/auth/views/LandingPage.tsx:32
+msgid "Privacy-forward"
+msgstr ""
+
+#: src/user/reporting/ReportMenu.tsx:120
+msgid "Private Key"
+msgstr ""
+
+#: src/components/Drawer/MiniSideBar.tsx:89
+msgid "Profile"
+msgstr ""
+
+#: src/user/settings/UserApiKey.tsx:29
+msgid "Profile API Key"
+msgstr ""
+
+#: src/user/settings/UserForm.tsx:35
+msgid "Profile Details"
+msgstr ""
+
+#: src/auth/views/LandingPage.tsx:37
+msgid "Reach and convert new customers through premium advertising on the Brave browser and search engine."
+msgstr ""
+
+#: src/search/SearchLandingPage.tsx:60
+msgid "Reach audiences who don’t use other search engines and block ads on most sites."
+msgstr ""
+
+#: src/components/AppBar/LandingPageAppBar.tsx:37
+msgid "Register for Self-service"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/adSet/NewAdSet.tsx:67
+msgid "Remove"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:54
+msgid "Remove Conversion Tracking"
+msgstr ""
+
+#: src/auth/components/AdvertiserAgreed.tsx:14
+msgid "Reporting"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/reports/campaign/EngagementsOverview.tsx:129
+msgid "Reporting not available yet for <0>{campaignName}</0>."
+msgstr ""
+
+#: src/auth/views/AuthVerify.tsx:71
+msgid "Request another link."
+msgstr ""
+
+#: src/components/Steps/ActionButtons.tsx:38
+msgid "Return to dashboard"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/form/components/BaseForm.tsx:37
+msgid "Review"
+msgstr ""
+
+#: src/search/SearchLandingPage.tsx:67
+msgid "Risk Free"
+msgstr ""
+
+#: src/form/FormikButton.tsx:69
+#: src/user/settings/NewKeyPairModal.tsx:251
+msgid "Save"
+msgstr ""
+
+#: src/components/Creatives/CreateCreativeButton.tsx:65
+msgid "Save ad"
+msgstr ""
+
+#: src/form/FormikButton.tsx:70
+#: src/user/settings/NewKeyPairModal.tsx:251
+msgid "Saving..."
+msgstr ""
+
+#: src/user/library/index.ts:251
+#: src/util/campaign.ts:10
+msgid "Search homepage"
+msgstr ""
+
+#: src/user/library/index.ts:250
+#: src/util/campaign.ts:9
+msgid "Search keyword"
+msgstr ""
+
+#: src/auth/registration/AccountChoice.tsx:76
+#: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:59
+msgid "Search keyword ads"
+msgstr ""
+
+#: src/components/Campaigns/CloneCampaign.tsx:94
+msgid "Select one campaign to clone"
+msgstr ""
+
+#: src/user/campaignList/EditButton.tsx:26
+msgid "Select one campaign to edit"
+msgstr ""
+
+#: src/user/settings/Settings.tsx:60
+#: src/user/settings/Settings.tsx:64
+msgid "Select Organization"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/adSet/fields/AdSetAds.tsx:31
+msgid "Select the ads you would like to include in this ad set. Only checked ads are included."
+msgstr ""
+
+#: src/components/Segment/SegmentPicker.tsx:87
+msgid "Select the audience segments to target"
+msgstr ""
+
+#: src/components/Location/LocationPicker.tsx:51
+#: src/user/views/adsManager/views/advanced/components/campaign/fields/LocationField.tsx:10
+msgid "Select the geographic regions where your ads will be shown."
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/adSet/fields/PickerFields.tsx:30
+msgid "Select the interest segments and platforms you would like to target."
+msgstr ""
+
+#: src/components/Platform/PlatformPicker.tsx:45
+msgid "Select the platforms to target"
+msgstr ""
+
+#: src/auth/registration/AccountChoice.tsx:64
+msgid "Self-service"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/MetricFilter.tsx:64
+msgid "Show"
+msgstr ""
+
+#: src/components/AppBar/LandingPageAppBar.tsx:113
+#: src/components/Navigation/Navbar.tsx:53
+msgid "Sign out"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/BaseBarChart.tsx:59
+#: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:34
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:80
+#: src/user/analytics/analyticsOverview/lib/overview.library.ts:158
+msgid "Site visit rate"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:49
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:45
+#: src/user/analytics/analyticsOverview/lib/overview.library.ts:162
+#: src/user/campaignList/CampaignList.tsx:155
+msgid "Site visits"
+msgstr ""
+
+#: src/user/views/user/AdDetailTable.tsx:69
+msgid "Site Visits"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:151
+msgid "Skip survey and continue"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:48
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:88
+#: src/user/analytics/analyticsOverview/lib/overview.library.ts:168
+#: src/user/analytics/analyticsOverview/reports/os/components/OsPieChart.tsx:40
+#: src/user/campaignList/CampaignList.tsx:118
+#: src/user/views/user/AdDetailTable.tsx:31
+msgid "Spend"
+msgstr ""
+
+#: src/user/campaignList/CampaignList.tsx:189
+msgid "Start"
+msgstr ""
+
+#: src/auth/views/MobileAdsBenefits.tsx:16
+msgid "Start a Brave Ads campaign with as little as $500."
+msgstr ""
+
+#: src/components/Campaigns/CampaignDateRange.tsx:24
+msgid "Start Date"
+msgstr ""
+
+#: src/validation/CampaignSchema.tsx:72
+msgid "Start Date is required"
+msgstr ""
+
+#: src/validation/CampaignSchema.tsx:70
+msgid "Start Date must be minimum of 2 days from today"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:42
+msgid "Start Time"
+msgstr ""
+
+#: src/components/Creatives/CreativeList.tsx:79
+msgid "State"
+msgstr ""
+
+#: src/auth/components/AdvertiserAddress.tsx:41
+msgid "State / Province"
+msgstr ""
+
+#: src/validation/AdvertiserSchema.tsx:20
+msgid "State / Province is required"
+msgstr ""
+
+#: src/components/Creatives/CreativeCampaigns.tsx:48
+#: src/user/adSet/AdSetList.tsx:99
+#: src/user/campaignList/CampaignList.tsx:98
+msgid "Status"
+msgstr ""
+
+#: src/auth/components/AdvertiserAddress.tsx:16
+msgid "Street address"
+msgstr ""
+
+#: src/validation/AdvertiserSchema.tsx:17
+msgid "Street address is required"
+msgstr ""
+
+#: src/auth/components/AdvertiserAddress.tsx:23
+msgid "Street address line 2"
+msgstr ""
+
+#: src/auth/registration/Register.tsx:130
+msgid "Submit for approval"
+msgstr ""
+
+#: src/auth/views/AuthVerify.tsx:45
+msgid "Successfully logged in!"
+msgstr ""
+
+#: src/components/Drawer/MiniSideBar.tsx:196
+msgid "Support"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:137
+msgid "Take our survey!"
+msgstr ""
+
+#: src/user/ads/InlineContentAd.tsx:84
+#: src/user/ads/NotificationAd.tsx:72
+msgid "Target URL"
+msgstr ""
+
+#: src/validation/CreativeSchema.tsx:14
+msgid "Target URL is a required field"
+msgstr ""
+
+#: src/components/Url/UrlResolver.tsx:59
+msgid "Target URL is not valid"
+msgstr ""
+
+#: src/components/Creatives/hooks/useGetCreativeDetails.tsx:23
+msgid "Target URL not validated"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/adSet/fields/PickerFields.tsx:28
+msgid "Targeting"
+msgstr ""
+
+#: src/auth/registration/NameField.tsx:88
+msgid "Tell us why you're interested in Brave Ads"
+msgstr ""
+
+#: src/auth/components/AdvertiserAgreed.tsx:62
+msgid "Terms & Conditions"
+msgstr ""
+
+#: src/validation/AdvertiserSchema.tsx:14
+msgid "Terms & Conditions acknowledgement is required"
+msgstr ""
+
+#: src/auth/registration/AdvertiserRegistered.tsx:41
+msgid "Thanks for your interest in Brave Ads! Our team will now carefully review the provided information."
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:41
+msgid "The rate at which users clicked in correlation to their impressions"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:71
+msgid "The rate at which users converted in correlation to their clicks"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:86
+msgid "The rate at which users dismissed the ad in correlation to their impressions"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:76
+msgid "The rate at which users visited the site in correlation to their clicks"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:81
+msgid "The rate at which users visited the site in correlation to their impressions"
+msgstr ""
+
+#: src/auth/lib/index.ts:41
+msgid "The username or password did not match our records."
+msgstr ""
+
+#: src/validation/AdvertiserSchema.tsx:8
+msgid "Third party tracking acknowledgement is required"
+msgstr ""
+
+#: src/components/Creatives/NewsPreview.tsx:54
+msgid "This is a news display ad, it wll look like part of the news feed."
+msgstr ""
+
+#: src/user/settings/UserApiKey.tsx:80
+msgid "This key is unique to you, make sure to safely store it and avoid sharing it with others to prevent unauthorized access."
+msgstr ""
+
+#: src/components/TimeZonePicker/index.tsx:29
+#: src/components/TimeZonePicker/index.tsx:36
+msgid "Time Zone"
+msgstr ""
+
+#: src/components/Creatives/CreativeList.tsx:150
+#: src/components/Creatives/CreativeList.tsx:160
+#: src/user/ads/AdList.tsx:80
+#: src/user/ads/InlineContentAd.tsx:69
+#: src/user/ads/NotificationAd.tsx:55
+msgid "Title"
+msgstr ""
+
+#: src/components/Creatives/NotificationPreview.tsx:38
+msgid "Title Preview"
+msgstr ""
+
+#: src/components/Date/DateRangePicker.tsx:39
+msgid "To"
+msgstr ""
+
+#: src/auth/components/AdvertiserAgreed.tsx:44
+msgid "To launch a campaign with Brave, you are required to prepay the full amount you intend to spend. Any remaining funds from your budget will be credited back to your original payment method upon request."
+msgstr ""
+
+#: src/user/reporting/ReportMenu.tsx:106
+msgid "To protect user’s privacy, verified ad conversion data is encrypted so that the identities of converted users remain anonymous to Brave. You can decrypt the conversion data in the CSV file by providing your private key here. If no key is provided, you will receive the encrypted conversion data. Your private key will never be sent to or stored on any Brave servers."
+msgstr ""
+
+#: src/auth/registration/AdvertiserRegistered.tsx:35
+msgid "Try again"
+msgstr ""
+
+#: src/components/Conversion/ConversionFields.tsx:17
+#: src/user/adSet/AdSetList.tsx:112
+msgid "Type"
+msgstr ""
+
+#: src/components/Campaigns/CloneCampaign.tsx:41
+msgid "Unable to clone campaign"
+msgstr ""
+
+#: src/user/hooks/useAdvertiserWithPrices.tsx:39
+msgid "Unable to create a new campaign"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/form/NewCampaign.tsx:67
+msgid "Unable to Create Campaign."
+msgstr ""
+
+#: src/checkout/hooks/useCreatePaymentSession.ts:21
+msgid "Unable to create payment session. Please try again."
+msgstr ""
+
+#: src/user/reporting/csv.library.tsx:132
+msgid "Unable to decrypt conversion data"
+msgstr ""
+
+#: src/user/reporting/csv.library.tsx:37
+msgid "Unable to download CSV"
+msgstr ""
+
+#: src/components/Assets/hooks/useGetImagePreviewUrl.ts:34
+msgid "Unable to fetch image"
+msgstr ""
+
+#: src/components/Creatives/CreativeCampaigns.tsx:33
+msgid "Unable to get campaign information for ad"
+msgstr ""
+
+#: src/user/settings/UserForm.tsx:23
+msgid "Unable to get profile information"
+msgstr ""
+
+#: src/components/Creatives/CreativeForm.tsx:56
+msgid "Unable to load ad"
+msgstr ""
+
+#: src/auth/views/AuthVerify.tsx:65
+msgid "Unable to login, link has expired or has already been used."
+msgstr ""
+
+#: src/auth/lib/index.ts:82
+msgid "Unable to register your organization at this time. Please try again later."
+msgstr ""
+
+#: src/user/views/user/CampaignDetails.tsx:45
+msgid "Unable to retrieve ad sets or ads for Campaign."
+msgstr ""
+
+#: src/user/views/user/CampaignView.tsx:33
+msgid "Unable to retrieve Campaign data."
+msgstr ""
+
+#: src/components/Assets/AdvertiserAssets.tsx:40
+#: src/components/Creatives/CreativeList.tsx:93
+msgid "Unable to retrieve images"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/reports/campaign/EngagementsOverview.tsx:47
+msgid "Unable to retrieve reporting data for this Campaign."
+msgstr ""
+
+#: src/components/Creatives/CreativeForm.tsx:91
+msgid "Unable to save ad"
+msgstr ""
+
+#: src/user/settings/NewKeyPairModal.tsx:49
+msgid "Unable to update Advertiser."
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/form/EditCampaign.tsx:64
+msgid "Unable to Update Campaign."
+msgstr ""
+
+#: src/components/Assets/hooks/useUploadFile.ts:127
+msgid "Unable to upload image"
+msgstr ""
+
+#: src/auth/lib/index.ts:46
+msgid "Unexpected error validating your credentials. Please try again later."
+msgstr ""
+
+#: src/util/billingType.ts:13
+msgid "Unknown"
+msgstr ""
+
+#: src/auth/views/MobileAdsBenefits.tsx:29
+msgid "Unparalleled privacy"
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/form/components/PaymentButton.tsx:17
+msgid "Update & Submit For Approval"
+msgstr ""
+
+#: src/components/Assets/UploadImage.tsx:77
+#: src/components/Assets/UploadImage.tsx:138
+msgid "Upload"
+msgstr ""
+
+#: src/components/Assets/UploadImage.tsx:58
+#: src/components/Navigation/NewImageButton.tsx:20
+msgid "Upload Image"
+msgstr ""
+
+#: src/components/Assets/ImageAutocomplete.tsx:60
+msgid "Upload new image"
+msgstr ""
+
+#: src/components/Assets/UploadImage.tsx:62
+msgid "Uploaded images can be shared across different ad sets within a Campaign. For best quality, upload images at 900x750px resolution. Images will be automatically scaled to this size."
+msgstr ""
+
+#: src/components/Assets/hooks/useUploadFile.ts:68
+msgid "Uploading file..."
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:45
+#: src/user/analytics/analyticsOverview/lib/overview.library.ts:170
+msgid "Upvotes"
+msgstr ""
+
+#: src/components/Url/UrlResolver.tsx:98
+msgid "URL is valid."
+msgstr ""
+
+#: src/validation/CreativeSchema.tsx:15
+msgid "URL must not contain any whitespace"
+msgstr ""
+
+#: src/validation/CreativeSchema.tsx:16
+msgid "URL must start with https://"
+msgstr ""
+
+#: src/components/Conversion/ConversionFields.tsx:38
+msgid "URL Pattern"
+msgstr ""
+
+#: src/components/Conversion/ConversionFields.tsx:40
+msgid "URL should have a trailing asterisk - Example: https://brave.com/products/*"
+msgstr ""
+
+#: src/user/ads/ShowAdsButton.tsx:22
+msgid "Use existing ads"
+msgstr ""
+
+#: src/components/Url/UrlResolver.tsx:92
+msgid "Validating URL..."
+msgstr ""
+
+#: src/user/reporting/ReportMenu.tsx:80
+msgid "Verified Conversions Report"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/lib/overview.library.ts:178
+msgid "View-through conversions"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:64
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:55
+msgid "View-through Conversions"
+msgstr ""
+
+#: src/auth/registration/AdvertiserRegistered.tsx:17
+msgid "We encountered a problem creating your account."
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:82
+msgid "We value your feedback and would love to hear your thoughts on your recent experience. <0/>Your input will help us improve the Brave Ads platform to better meet your needs. <1/>It only takes a few minutes and your participation will be greatly appreciated! <2/>Thank you for using Brave Ads! <3/>"
+msgstr ""
+
+#: src/validation/RegistrationSchema.tsx:20
+msgid "Website must not contain any whitespace"
+msgstr ""
+
+#: src/validation/RegistrationSchema.tsx:21
+msgid "Website must start with https://"
+msgstr ""
+
+#: src/user/analytics/analyticsOverview/components/EngagementHeader.tsx:52
+msgid "Week"
+msgstr ""
+
+#: src/auth/components/AdvertiserDetailsForm.tsx:97
+msgid "Welcome to Brave Ads"
+msgstr ""
+
+#: src/auth/registration/NameField.tsx:43
+msgid "Where did you hear about Brave Ads"
+msgstr ""
+
+#: src/auth/registration/NameField.tsx:48
+msgid "While looking up alternatives to Google Ads"
+msgstr ""
+
+#: src/components/Datagrid/renderers.tsx:80
+msgid "Yes"
+msgstr ""
+
+#: src/user/settings/NewKeyPairModal.tsx:133
+msgid "You are attempting to create a new keypair, this will replace any of your organization’s existing keypairs. Please note, previous keypairs cannot be retrieved or used once replaced."
+msgstr ""
+
+#: src/auth/registration/Register.tsx:37
+msgid "You can change this later"
+msgstr ""
+
+#: src/components/Button/SubmitPanel.tsx:34
+msgid "You have {0} errors that must be fixed before submitting."
+msgstr ""
+
+#: src/components/Button/SubmitPanel.tsx:24
+msgid "You have unsaved changes"
+msgstr ""
+
+#: src/user/settings/Settings.tsx:51
+msgid "You may have access to multiple organisations. Switch between them here."
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:72
+msgid "Your campaign has been created and is now being reviewed by our ads team. <0/>We’ll be in contact as soon as your campaign is approved and activated."
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:47
+msgid "Your campaign has been updated! <0/>If you added new ads, we’ll be in contact as soon as they are approved and activated. <1/>Thank you for using Brave Ads!"
+msgstr ""
+
+#: src/user/settings/NewKeyPairModal.tsx:168
+msgid "Your organization’s new public key will be:"
+msgstr ""
+
+#: src/user/settings/NewKeyPairModal.tsx:102
+msgid "Your organization’s public key:"
+msgstr ""
+
+#: src/auth/components/AdvertiserAddress.tsx:53
+msgid "Zip / Postal Code"
+msgstr ""
+
+#: src/validation/AdvertiserSchema.tsx:22
+msgid "Zip / Postal Code is required"
+msgstr ""

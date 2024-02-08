@@ -123,10 +123,11 @@ export function EngagementsOverview({
 }
 
 function ReportingNotReady(props: { campaignName: string }) {
+  const campaignName = props.campaignName;
   return (
     <Alert severity="info" sx={{ mt: 2, mb: 3 }}>
       <Trans>
-        Reporting not available yet for <strong>{props.campaignName}</strong>.
+        Reporting not available yet for <strong>{campaignName}</strong>.
       </Trans>
     </Alert>
   );
