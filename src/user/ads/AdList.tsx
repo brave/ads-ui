@@ -71,7 +71,7 @@ export function AdList({ campaign, loading, engagements }: Props) {
     },
     {
       field: "adSetName",
-      headerName: lingui(msg`Ad set Name`),
+      headerName: lingui(msg`Ad set name`),
       valueGetter: ({ row }) => row.adSetName,
       flex: 1,
     },

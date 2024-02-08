@@ -3,7 +3,7 @@ import { useAuthContext } from "auth/context/auth.hook";
 import { getCredentials } from "auth/lib";
 
 interface Options {
-  onError?: (msg: string) => void;
+  onError?: (message: string) => void;
   onSuccess?: () => void;
 }
 

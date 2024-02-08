@@ -4,7 +4,7 @@ import { clearCredentials } from "auth/lib";
 
 interface Options {
   onSuccess?: () => void;
-  onError?: (msg: string) => void;
+  onError?: (mmessagesg: string) => void;
 }
 
 export function useSignOut({ onSuccess, onError }: Options = {}) {

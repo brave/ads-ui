@@ -4,7 +4,7 @@ import { useLingui } from "@lingui/react";
 import { msg } from "@lingui/macro";
 
 interface Options {
-  onError?: (msg: string) => void;
+  onError?: (message: string) => void;
   onSuccess?: () => void;
 }
 

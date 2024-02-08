@@ -102,7 +102,7 @@ export const FormikSwitch = (props: FormikSwitchProps) => {
     <>
       <FormControlLabel control={<Switch {...field} />} label={props.label} />
       <ErrorMessage name={field.name}>
-        {(msg: string) => <FormHelperText error>{msg}</FormHelperText>}
+        {(message: string) => <FormHelperText error>{message}</FormHelperText>}
       </ErrorMessage>
     </>
   );
@@ -130,7 +130,7 @@ export const FormikRadioGroup = (
         }}
       />
       <ErrorMessage name={field.name}>
-        {(msg: string) => <FormHelperText error>{msg}</FormHelperText>}
+        {(message: string) => <FormHelperText error>{message}</FormHelperText>}
       </ErrorMessage>
     </>
   );
