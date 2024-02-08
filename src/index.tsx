@@ -13,10 +13,12 @@ import { createInstance, MatomoProvider } from "@jonkoops/matomo-tracker-react";
 
 const container = document.getElementById("root");
 const root = createRoot(container!);
+const env = getEnvironment();
 
 const instance = createInstance({
   urlBase: "https://analytics.brave.com/",
-  siteId: getEnvironment() === Environment.PRODUCTION ? 11 : 12,
+  siteId: env === Environment.PRODUCTION ? 11 : 12,
+  disabled: env === Environment.LOCAL,
   heartBeat: {
     active: false,
   },
