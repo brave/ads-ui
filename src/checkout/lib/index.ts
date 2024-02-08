@@ -1,4 +1,5 @@
 import { buildAdServerEndpoint } from "util/environment";
+import { t } from "@lingui/macro";
 
 export async function createPaymentSession(
   advertiserId: string,
@@ -15,14 +16,14 @@ export async function createPaymentSession(
   });
 
   if (res.status !== 200) {
-    throw new Error("cannot create session");
+    throw new Error(t`cannot create session`);
   }
 
   const { url } = await res.json();
   if (url) {
     return url;
   } else {
-    throw Error("no session created");
+    throw Error(t`no session created`);
   }
 }
 
@@ -42,6 +43,6 @@ export async function fetchPaymentSession(
   });
 
   if (res.status !== 200) {
-    throw new Error("invalid session");
+    throw new Error(t`invalid session`);
   }
 }

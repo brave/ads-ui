@@ -25,7 +25,7 @@ export function CampaignSettings(props: { prices: AdvertiserPrice[] }) {
       <CardContainer header={<Trans>Campaign Settings</Trans>}>
         <Typography variant="body2" gutterBottom>
           <Trans>Define how you want your campaign to run.</Trans>
-        <LearnMoreButton helpSection="getting-started/create-a-campaign" />
+          <LearnMoreButton helpSection="getting-started/create-a-campaign" />
         </Typography>
 
         <FormikTextField
@@ -43,7 +43,7 @@ export function CampaignSettings(props: { prices: AdvertiserPrice[] }) {
 
       <FormatField prices={props.prices} />
 
-      <CardContainer header="Pricing">
+      <CardContainer header={<Trans>Pricing</Trans>}>
         {!advertiser.selfServiceSetPrice && (
           <BillingModelSelect prices={props.prices} />
         )}

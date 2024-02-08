@@ -6,7 +6,7 @@ import _ from "lodash";
 import { useActiveGeocodesQuery } from "graphql/common.generated";
 import { GeocodeInput } from "graphql/types";
 import { useLingui } from "@lingui/react";
-import { msg } from "@lingui/macro";
+import { msg, Trans } from "@lingui/macro";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -22,7 +22,7 @@ export const LocationPicker = () => {
     <Autocomplete
       sx={{ mt: 2 }}
       limitTags={20}
-      getLimitTagsText={(cnt) => `+${cnt} more`}
+      getLimitTagsText={(count) => <Trans>+{count} more</Trans>}
       multiple
       loading={sorted.length === 0}
       options={sorted}

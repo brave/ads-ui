@@ -14,7 +14,7 @@ import { NextAndBack } from "components/Steps/NextAndBack";
 import { useHistory } from "react-router-dom";
 import { ActionButtons } from "components/Steps/ActionButtons";
 import { MessageDescriptor } from "@lingui/core";
-import { Trans } from "@lingui/react";
+import { Trans as TransWithId } from "@lingui/react";
 
 const drawerWidth = 222;
 
@@ -67,7 +67,7 @@ export function StepDrawer({
                     activeStep.current = index;
                   }}
                 >
-                  <Trans id={step.label.id} />
+                  <TransWithId id={step.label.id} />
                 </StepButton>
                 {step.content && <StepContent>{step.content}</StepContent>}
               </Step>

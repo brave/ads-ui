@@ -12,7 +12,7 @@ import { uiLabelsForBillingType } from "util/billingType";
 import { GridColDef } from "@mui/x-data-grid";
 import { segmentNameWithNoDash } from "util/segment";
 import { useLingui } from "@lingui/react";
-import { msg } from "@lingui/macro";
+import { msg, Trans } from "@lingui/macro";
 
 interface Props {
   loading: boolean;
@@ -46,7 +46,9 @@ const ChipList = ({ items, max }: ChipListProps) => {
       ))}
 
       {sorted.length > MAX_ITEMS && (
-        <span>+ {sorted.length - MAX_ITEMS} more</span>
+        <span>
+          + {sorted.length - MAX_ITEMS} <Trans>more</Trans>
+        </span>
       )}
     </>
   );

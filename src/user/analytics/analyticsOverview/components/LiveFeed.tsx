@@ -1,9 +1,9 @@
 import { Box, Chip, Typography } from "@mui/material";
 import { OverviewDetail, StatsMetric } from "../types";
 import { toLocaleString } from "util/bignumber";
-import { msg } from "@lingui/macro";
+import { msg, Trans } from "@lingui/macro";
 import { MessageDescriptor } from "@lingui/core";
-import { Trans } from "@lingui/react";
+import { useLingui } from "@lingui/react";
 
 interface OverviewProps extends OverviewDetail {
   currency: string;
@@ -21,6 +21,7 @@ interface Feed {
 }
 
 export default function LiveFeed({ overview, processed }: LiveFeedProps) {
+  const { _ } = useLingui();
   const { budget, currency } = overview;
   const realSpend = processed.spend.gte(budget) ? budget : processed.spend;
 
@@ -85,11 +86,11 @@ export default function LiveFeed({ overview, processed }: LiveFeedProps) {
       p={2}
     >
       <Typography sx={{ fontWeight: 600 }}>
-        <Trans id="Key Statistics" />
+        <Trans>Key Statistics</Trans>
       </Typography>
       {feedValues.map((f, idx) => (
         <Chip
-          label={`${(<Trans id={f.label.id} />)}: ${f.value}`}
+          label={`${_(f.label)}: ${f.value}`}
           variant="outlined"
           key={idx}
         />

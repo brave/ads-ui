@@ -45,10 +45,10 @@ const NotificationAdForm = (props: NotificationAdProps) => {
   return (
     <>
       <Typography variant="h2" fontWeight={500}>
-        <Trans>Notification AD</Trans>
+        <Trans>Notification ad</Trans>
       </Typography>
 
-      <FormikTextField name={withName("name")} label="Name" />
+      <FormikTextField name={withName("name")} label={_(msg`Name`)} />
 
       <FormikTextField
         name={withName("payloadNotification.title")}

@@ -9,7 +9,7 @@ import { CardContainer } from "components/Card/CardContainer";
 import { ImageAutocomplete } from "components/Assets/ImageAutocomplete";
 import { NewsPreview } from "components/Creatives/NewsPreview";
 import { useLingui } from "@lingui/react";
-import { msg } from "@lingui/macro";
+import { msg, Trans } from "@lingui/macro";
 
 interface InlineAdProps {
   name?: string;
@@ -58,9 +58,11 @@ const InlineAdForm = (props: InlineAdProps) => {
 
   return (
     <>
-      <Typography variant="h2">News Display Ad</Typography>
+      <Typography variant="h2">
+        <Trans>Newsfeed Ad</Trans>
+      </Typography>
 
-      <FormikTextField name={withName("name")} label="Name" />
+      <FormikTextField name={withName("name")} label={_(msg`Name`)} />
 
       <FormikTextField
         name={withName("payloadInlineContent.title")}

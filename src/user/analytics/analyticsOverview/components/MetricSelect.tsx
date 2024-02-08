@@ -4,7 +4,7 @@ import { Autocomplete, Box, TextField, Tooltip } from "@mui/material";
 import { Metrics, StatsMetric } from "../types";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/macro";
-import { Trans } from "@lingui/react";
+import { Trans as TransWithId, useLingui } from "@lingui/react";
 
 interface PopoutProps {
   onSetMetric: (key: keyof Metrics, value: keyof StatsMetric) => void;
@@ -23,6 +23,7 @@ export default function MetricSelect({
   onSetMetric,
   metric,
 }: PopoutProps) {
+  const { _ } = useLingui();
   const options: OptionWithTooltip[] = [
     {
       value: "views",
@@ -124,11 +125,11 @@ export default function MetricSelect({
       onChange={(e, v) => onSelectChange(v)}
       renderOption={(props, option) => (
         <Tooltip
-          title={option.tooltip ? <Trans id={option.tooltip.id} /> : undefined}
+          title={option.tooltip ? `${_(option.tooltip)}` : undefined}
           placement="right"
         >
           <Box {...props} component="li">
-            <Trans id={option.label.id} />
+            <TransWithId id={option.label.id} />
           </Box>
         </Tooltip>
       )}

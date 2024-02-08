@@ -33,7 +33,7 @@ export function AdSetFields() {
         additionalAction={<SwitchHeader current={current} />}
       >
         <Typography variant="body2" gutterBottom>
-          Name your ad set to distinguish it from others.{" "}
+          <Trans>Name your ad set to distinguish it from others.</Trans>{" "}
           <LearnMoreButton helpSection="getting-started/create-an-ad-set" />
         </Typography>
         <FormikTextField

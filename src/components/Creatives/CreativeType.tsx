@@ -2,8 +2,8 @@ import { Box, ListItemButton, List, Typography, Stack } from "@mui/material";
 import { useFormikContext } from "formik";
 import { CreativeInput } from "graphql/types";
 import { FormatHelp } from "components/Button/FormatHelp";
-import { msg } from "@lingui/macro";
-import { Trans } from "@lingui/react";
+import { msg, Trans } from "@lingui/macro";
+import { Trans as TransWithId } from "@lingui/react";
 
 export function CreativeType(props: { allowTypeChange?: boolean }) {
   const formik = useFormikContext<CreativeInput>();
@@ -22,7 +22,9 @@ export function CreativeType(props: { allowTypeChange?: boolean }) {
   return (
     <Box maxWidth={500} display="flex" flexDirection="column" mt={1}>
       <Stack direction="row" alignItems="center" spacing={1}>
-        <Typography>Ad Format</Typography>
+        <Typography>
+          <Trans>Ad Format</Trans>
+        </Typography>
         <FormatHelp />
       </Stack>
       <List sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
@@ -41,7 +43,7 @@ export function CreativeType(props: { allowTypeChange?: boolean }) {
             }}
             onClick={() => formik.setFieldValue("type.code", s.value)}
           >
-            <Trans id={s.label.id} />
+            <TransWithId id={s.label.id} />
           </ListItemButton>
         ))}
       </List>

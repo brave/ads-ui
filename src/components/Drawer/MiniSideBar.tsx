@@ -239,6 +239,7 @@ export function SupportMenu({ usePlainLink }: SupportProps) {
           }}
         >
           <Trans>Contact</Trans>:{" "}
+          {/* eslint-disable-next-line lingui/no-unlocalized-strings */}
           <Link sx={{ ml: 1 }} underline="none">
             selfserve@brave.com
           </Link>

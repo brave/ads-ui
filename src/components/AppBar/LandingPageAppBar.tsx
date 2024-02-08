@@ -13,10 +13,12 @@ import { useIsAuthenticated } from "auth/hooks/queries/useIsAuthenticated";
 import { useSignOut } from "auth/hooks/mutations/useSignOut";
 import { SupportMenu } from "components/Drawer/MiniSideBar";
 import { useIsMobile } from "hooks/useIsMobile";
-import { Trans } from "@lingui/macro";
+import { msg, Trans } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 
 export function LandingPageAppBar() {
   const match = useRouteMatch();
+  const { _ } = useLingui();
   const isAuthenticated = useIsAuthenticated();
   const isMobile = useIsMobile();
   const isContact = match.url.includes("contact");
@@ -94,7 +96,7 @@ export function LandingPageAppBar() {
             justifyContent="space-between"
           >
             <RouterLink to="/" style={{ marginTop: 5 }}>
-              <img src={ads} alt="Ads" height="31px" width="180px" />
+              <img src={ads} alt={_(msg`Ads`)} height="31px" width="180px" />
             </RouterLink>
 
             <Divider orientation="vertical" flexItem />
@@ -121,7 +123,7 @@ function AuthedButton(props: { isAuthenticated?: boolean }) {
       to={!props.isAuthenticated ? "/auth/link" : "/"}
       onClick={props.isAuthenticated ? () => signOut() : undefined}
     >
-      {props.isAuthenticated ? "Sign out" : "Log in"}
+      {props.isAuthenticated ? <Trans>Sign out</Trans> : <Trans>Log in</Trans>}
     </Button>
   );
 }

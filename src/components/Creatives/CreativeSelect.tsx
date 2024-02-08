@@ -86,7 +86,7 @@ export function CreativeSelect(
                 color={isSelected(co) ? "text.primary" : "rgba(0, 0, 0, 0.3)"}
                 textAlign="right"
               >
-                created {moment(co.createdAt).fromNow()}
+                <Trans>created</Trans> {moment(co.createdAt).fromNow()}
               </Typography>
             )}
           </BoxContainer>

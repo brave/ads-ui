@@ -3,7 +3,7 @@ import { Status } from "components/Campaigns/Status";
 import { CampaignSummaryFragment } from "graphql/campaign.generated";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/macro";
-import { Trans } from "@lingui/react";
+import { Trans as TransWithId } from "@lingui/react";
 
 interface HeaderProps {
   onSetGroup: (s: string) => void;
@@ -36,7 +36,7 @@ const Grouping = ({ onSetGroup, label, group, grouping }: GroupProps) => {
       }}
       onClick={() => onSetGroup(group)}
     >
-      <Trans id={label.id} />
+      <TransWithId id={label.id} />
     </Button>
   );
 };

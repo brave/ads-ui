@@ -77,7 +77,7 @@ export const StandardRenderers: Record<string, CellValueRenderer> = {
 
     return null;
   },
-  yesno: (v) => <Box>{v ? "Yes" : "No"}</Box>,
+  yesno: (v) => <Box>{v ? <Trans>Yes</Trans> : <Trans>No</Trans>}</Box>,
 };
 
 export function renderMonetaryAmount(

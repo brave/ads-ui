@@ -54,8 +54,7 @@ export function NewAdSet() {
                   textAlign="left"
                   bgcolor={
                     selected.current === idx
-                      ? // eslint-disable-next-line lingui/no-unlocalized-strings
-                        "rgba(248, 83, 43, 0.04)"
+                      ? "rgba(248, 83, 43, 0.04)"
                       : "none"
                   }
                   replace

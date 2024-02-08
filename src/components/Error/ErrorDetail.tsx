@@ -34,7 +34,9 @@ export const ErrorDetail = ({ error, additionalDetails }: Props) => {
     return (
       <Box mt={2}>
         <Alert severity="warning">
-          <AlertTitle>401 Forbidden</AlertTitle>
+          <AlertTitle>
+            <Trans>401 Forbidden</Trans>
+          </AlertTitle>
           <Trans>
             A forbidden error was returned. You may need to log out and back in
             again.
@@ -66,8 +68,8 @@ ${stringError === "{}" ? "" : stringError}
         </p>
         <p>
           <Trans>
-            Please refresh the page to try again, or email <SelfServeMailTo /> for
-            assistance.
+            Please refresh the page to try again, or email <SelfServeMailTo />{" "}
+            for assistance.
           </Trans>
         </p>
       </Alert>
@@ -75,7 +77,9 @@ ${stringError === "{}" ? "" : stringError}
       {additionalDetails && (
         <Accordion>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>Additional Details</Typography>
+            <Typography>
+              <Trans>Additional Details</Trans>
+            </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <pre style={{ overflow: "scroll" }}>
@@ -89,5 +93,6 @@ ${stringError === "{}" ? "" : stringError}
 };
 
 const SelfServeMailTo = () => (
+  // eslint-disable-next-line lingui/no-unlocalized-strings
   <a href="mailto:selfserve@brave.com">selfserve@brave.com</a>
 );

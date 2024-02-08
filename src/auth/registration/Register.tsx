@@ -18,7 +18,7 @@ import { useHistory } from "react-router-dom";
 import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
 import { msg } from "@lingui/macro";
 import { MessageDescriptor } from "@lingui/core";
-import { Trans } from "@lingui/react";
+import { Trans as TransWithId } from "@lingui/react";
 
 type RegistrationStep = {
   label: MessageDescriptor;
@@ -75,7 +75,7 @@ export function Register() {
           variant="h4"
           sx={{ mb: steps[currentStep].subheader ? 1 : 3 }}
         >
-          <Trans id={steps[currentStep].label.id} />
+          <TransWithId id={steps[currentStep].label.id} />
         </Typography>
         {steps[currentStep].subheader && (
           <Typography
@@ -84,7 +84,7 @@ export function Register() {
             color="text.secondary"
             sx={{ mb: 3 }}
           >
-            <Trans id={steps[currentStep].subheader!.id} />
+            <TransWithId id={steps[currentStep].subheader!.id} />
           </Typography>
         )}
         <Formik

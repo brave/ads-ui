@@ -16,7 +16,7 @@ import { useLingui } from "@lingui/react";
 interface Props {
   name: string;
   validator: string;
-  label?: string;
+  label: string;
   disabled?: boolean;
   helperText?: string;
 }
@@ -38,7 +38,7 @@ function extractViolations(
 export const UrlResolver = ({
   name,
   validator,
-  label = "Website URL",
+  label,
   disabled = false,
   helperText,
 }: Props) => {

@@ -91,7 +91,7 @@ export function UploadImage({ useInlineCreation, onClose, onComplete }: Props) {
                 component="label"
                 sx={{ marginBottom: 1 }}
               >
-                Choose File
+                <Trans>Choose File</Trans>
                 <input
                   type="file"
                   hidden

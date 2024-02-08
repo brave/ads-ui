@@ -117,7 +117,7 @@ export const ReportMenu = ({
             onChange={(e) => set(e.target.value)}
             autoFocus
             margin="normal"
-            label="Private key"
+            label={<Trans>Private Key</Trans>}
             fullWidth
             variant="standard"
           />

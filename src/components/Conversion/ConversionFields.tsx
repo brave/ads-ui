@@ -14,20 +14,20 @@ export const ConversionFields = ({ name }: Props) => {
     <>
       <FormikRadioControl
         name={`${name}.type`}
-        label="Type"
+        label={_(msg`Type`)}
         options={[
-          { value: "postview", label: "Post-View" },
-          { value: "postclick", label: "Post-Click" },
+          { value: "postview", label: _(msg`Post-View`) },
+          { value: "postclick", label: _(msg`Post-Click`) },
         ]}
         helperText={
           <>
-            Post-View:{" "}
             <Trans>
-              Viewed ad and converted by visiting site on their own.
+              Post-View: Viewed ad and converted by visiting site on their own.
             </Trans>
             <br />
-            Post-Click:{" "}
-            <Trans>Viewed ad and converted by clicking its link</Trans>
+            <Trans>
+              Post-Click: Viewed ad and converted by clicking its link
+            </Trans>
           </>
         }
       />

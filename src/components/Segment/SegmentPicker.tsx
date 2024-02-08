@@ -33,6 +33,7 @@ export const SegmentPicker = ({ idx }: Props) => {
 
   useEffect(() => {
     if (targetMeta.value) {
+      // eslint-disable-next-line lingui/no-unlocalized-strings
       helper.setValue([{ code: "Svp7l-zGN", name: "Untargeted" }]);
     } else {
       const onlyUntargeted =
@@ -60,6 +61,7 @@ export const SegmentPicker = ({ idx }: Props) => {
           autoHighlight
           groupBy={(option) => {
             const name = option.name.split("-")[0];
+            // eslint-disable-next-line lingui/no-unlocalized-strings
             if (name === "Untargeted") return "General";
             return name;
           }}

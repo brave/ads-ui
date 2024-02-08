@@ -19,6 +19,7 @@ export function PickerFields({ index }: Props) {
 
   useEffect(() => {
     if (format.value === CampaignFormat.NewsDisplayAd) {
+      // eslint-disable-next-line lingui/no-unlocalized-strings
       helper.setValue([{ code: "Svp7l-zGN", name: "Untargeted" }]);
     }
   }, [format.value]);
