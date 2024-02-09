@@ -59,6 +59,7 @@ module.exports = {
           "boxShadow",
           "transform",
           "format",
+          "name",
         ],
       },
     ],

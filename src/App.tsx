@@ -24,7 +24,7 @@ import { useMatomo } from "@jonkoops/matomo-tracker-react";
 import { BasicAttentionTokenLandingPage } from "basic-attention-token/BasicAttentionTokenLandingPage";
 import { I18nProvider } from "@lingui/react";
 import { i18n } from "@lingui/core";
-import { defaultLocale, dynamicActivate } from "./i18n";
+import { dynamicActivate } from "./i18n";
 
 const Protected = () => {
   return <Redirect to="/auth/link" />;
@@ -39,7 +39,8 @@ export function App() {
   enableLinkTracking();
 
   useEffect(() => {
-    dynamicActivate(defaultLocale);
+    const browserLanguage = navigator.language;
+    dynamicActivate(browserLanguage);
   }, []);
 
   if (isAuthenticated == null) {

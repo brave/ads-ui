@@ -1,18 +1,18 @@
 import { i18n } from "@lingui/core";
 
-export const locales = {
-  en: "English",
-  es: "Español",
-};
-
-export const defaultLocale = "en";
+const locales = [
+  { code: "en", name: "English" },
+  { code: "es", name: "Español" },
+  { code: "por", name: "Português" },
+];
 
 /**
  * We do a dynamic import of just the catalog that we need
  * @param locale any locale string
  */
 export async function dynamicActivate(locale: string) {
-  const { messages } = await import(`./locales/${locale}/messages.po`);
+  const foundLocale = locales.find((l) => locale.includes(l.code)) ?? "en";
+  const { messages } = await import(`./locales/${foundLocale}/messages.po`);
   i18n.load(locale, messages);
   i18n.activate(locale);
 }
