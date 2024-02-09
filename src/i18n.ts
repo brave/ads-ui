@@ -11,9 +11,10 @@ const locales = [
  * @param locale any locale string
  */
 export async function dynamicActivate(locale: string) {
+  console.log(locale);
   const browserLocale = locales.find((l) => locale.includes(l.code));
   const foundLocale = browserLocale ? browserLocale.code : "en";
   const { messages } = await import(`./locales/${foundLocale}.po`);
-  i18n.load(locale, messages);
-  i18n.activate(locale);
+  i18n.load(foundLocale, messages);
+  i18n.activate(foundLocale);
 }

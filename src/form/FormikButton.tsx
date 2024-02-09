@@ -12,7 +12,7 @@ import _ from "lodash";
 import { useState } from "react";
 import { MessageDescriptor } from "@lingui/core";
 import { msg, Trans } from "@lingui/macro";
-import { Trans as TransWithId } from "@lingui/react";
+import { useLingui } from "@lingui/react";
 
 interface FormikSubmitButtonProps {
   label?: MessageDescriptor;
@@ -70,6 +70,7 @@ export const FormikSubmitButton = ({
   inProgressLabel = msg`Saving...`,
   isCreate,
 }: FormikSubmitButtonProps) => {
+  const { _ } = useLingui();
   const { saveButtonTooltip, saveEnabled, isSubmitting, submitForm } = useSave({
     isCreate,
   });
@@ -86,11 +87,7 @@ export const FormikSubmitButton = ({
           size="large"
           disabled={!saveEnabled || isSubmitting}
         >
-          {isSubmitting ? (
-            <TransWithId id={inProgressLabel.id} />
-          ) : (
-            <TransWithId id={label.id} />
-          )}
+          {isSubmitting ? `${_(inProgressLabel)}` : `${_(label)}`}
         </Button>
       </div>
     </Tooltip>
@@ -105,6 +102,7 @@ interface DialogProps {
 export const FormikDialogButton = (
   props: FormikSubmitButtonProps & DialogProps,
 ) => {
+  const { _ } = useLingui();
   const { saveButtonTooltip, saveEnabled, isSubmitting } = useSave({
     isCreate: props.isCreate,
   });
@@ -129,12 +127,8 @@ export const FormikDialogButton = (
         </div>
       </Tooltip>
       <Dialog open={open}>
-        <DialogTitle>
-          <TransWithId id={props.dialogTitle.id} />
-        </DialogTitle>
-        <DialogContent>
-          <TransWithId id={props.dialogMessage.id} />
-        </DialogContent>
+        <DialogTitle>{_(props.dialogTitle)}</DialogTitle>
+        <DialogContent>{_(props.dialogMessage)}</DialogContent>
         <DialogActions>
           <Button
             onClick={() => setOpen(false)}

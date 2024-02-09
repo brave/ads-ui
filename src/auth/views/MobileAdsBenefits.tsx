@@ -5,7 +5,7 @@ import powerfulFormats from "../../../powerful_format_frame.svg";
 import privacyFocused from "../../../privacy_focused_frame.svg";
 import { msg } from "@lingui/macro";
 import { MessageDescriptor } from "@lingui/core";
-import { Trans as TransWithId } from "@lingui/react";
+import { Trans } from "@lingui/react";
 
 export function MobileAdsBenefits() {
   return (
@@ -54,7 +54,7 @@ const ItemCard = (props: {
         fontSize="22px"
         letterSpacing="0em"
       >
-        <TransWithId id={props.primary.id} />
+        <Trans id={props.primary.id} />
       </Typography>
       <Typography
         fontWeight={300}
@@ -62,7 +62,7 @@ const ItemCard = (props: {
         fontSize="14px"
         letterSpacing="0.02em"
       >
-        <TransWithId id={props.secondary.id} />
+        <Trans id={props.secondary.id} />
       </Typography>
     </Card>
   );

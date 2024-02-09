@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import { MessageDescriptor } from "@lingui/core";
-import { Trans as TransWithId } from "@lingui/react";
+import { Trans } from "@lingui/react";
 
 export function GradientText(props: { text: MessageDescriptor }) {
   return (
@@ -13,7 +13,7 @@ export function GradientText(props: { text: MessageDescriptor }) {
         color: "transparent",
       }}
     >
-      <TransWithId id={props.text.id} />
+      <Trans id={props.text.id} />
     </Typography>
   );
 }

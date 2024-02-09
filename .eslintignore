@@ -4,3 +4,4 @@ vite.config.mts
 **/*.test.ts
 **/*.spec.ts
 src/components/TimeZonePicker/useTimeZoneList.ts
+lingui.config.ts

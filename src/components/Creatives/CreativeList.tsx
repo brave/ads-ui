@@ -16,7 +16,7 @@ import { CustomToolbar } from "components/Datagrid/CustomToolbar";
 import { RouteSelectionButton } from "components/Route/RouteSelectionButton";
 import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
 import { msg } from "@lingui/macro";
-import { Trans as TransWithId, useLingui } from "@lingui/react";
+import { Trans, useLingui } from "@lingui/react";
 import { MessageDescriptor } from "@lingui/core";
 const ALLOWED_TYPES = ["notification_all_v1", "inline_content_all_v1"];
 
@@ -188,7 +188,7 @@ const ListItems = (props: {
         paddingRight={1}
         fontWeight={600}
       >
-        <TransWithId id={i.primary.id} />
+        <Trans id={i.primary.id} />
       </Typography>
       <Typography variant="body1" component="span">
         {i.secondary}

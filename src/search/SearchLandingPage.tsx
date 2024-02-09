@@ -11,9 +11,8 @@ import {
   useTrackMatomoPageView,
   useTrackMatomoEvent,
 } from "hooks/useTrackWithMatomo";
-import { msg, Trans } from "@lingui/macro";
-import { Trans as TransWithId } from "@lingui/react";
-import { MessageDescriptor } from "@lingui/core";
+import { Trans } from "@lingui/macro";
+import { SearchTalkingPoints } from "search/SearchTalkingPoints";
 
 export function SearchLandingPage() {
   useTrackMatomoPageView({ documentTitle: "Search Landing Page" });
@@ -49,25 +48,7 @@ export function SearchLandingPage() {
                 <img src={searchPreview} width="100%" height={400} />
               </Box>
             )}
-            <Stack
-              direction={{ md: "column", lg: "row" }}
-              gap={"20px"}
-              mt={5}
-              justifyContent="space-between"
-            >
-              <SearchTalkingPoint
-                title={msg`Incremental`}
-                description={msg`Reach audiences who don’t use other search engines and block ads on most sites.`}
-              />
-              <SearchTalkingPoint
-                title={msg`As effective as Google`}
-                description={msg`Brave Search Ads convert as well as, or better than Google Search ad clicks.`}
-              />
-              <SearchTalkingPoint
-                title={msg`Risk Free`}
-                description={msg`Get a free one-month test to see how Search Ads perform for your brand.`}
-              />
-            </Stack>
+            <SearchTalkingPoints />
           </Stack>
           {!isMobile && <SearchImageCarousel />}
         </Stack>
@@ -108,22 +89,6 @@ function BookAMeetingButton() {
             searchads@brave.com
           </Link>
         </Trans>
-      </Typography>
-    </Stack>
-  );
-}
-
-function SearchTalkingPoint(props: {
-  title: MessageDescriptor;
-  description: MessageDescriptor;
-}) {
-  return (
-    <Stack spacing={1} maxWidth={500}>
-      <Typography variant="h6">
-        <TransWithId id={props.title.id} />
-      </Typography>
-      <Typography variant="body1">
-        <TransWithId id={props.description.id} />
       </Typography>
     </Stack>
   );

@@ -16,8 +16,8 @@ import { AdvertiserPrice } from "user/hooks/useAdvertiserWithPrices";
 import ErrorIcon from "@mui/icons-material/Error";
 import { CustomTooltip } from "components/Tooltip/CustomTooltip";
 import { LearnMoreButton } from "components/Button/LearnMoreButton";
-import { msg, Trans } from "@lingui/macro";
-import { Trans as TransWithId, useLingui } from "@lingui/react";
+import { msg } from "@lingui/macro";
+import { Trans, useLingui } from "@lingui/react";
 import { MessageDescriptor } from "@lingui/core";
 
 interface PriceProps {
@@ -31,10 +31,10 @@ export function FormatField({ prices }: PriceProps) {
     meta.value === CampaignFormat.PushNotification ? "notification" : "news";
 
   return (
-    <CardContainer header={<Trans>Format</Trans>}>
+    <CardContainer header={_(msg`Format`)}>
       <Stack direction="row" spacing={0.5} alignItems="center">
         <Typography variant="body2">
-          <Trans>Choose a format for the campaign you would like to run</Trans>
+          {_(msg`Choose a format for the campaign you would like to run`)}
           <LearnMoreButton
             helpSection={`ad-placements/brave-browser/${path}`}
           />
@@ -89,13 +89,14 @@ const FormatItemButton = (
         border: "1px solid #7c91ff",
       }}
     >
-      <TransWithId id={props.name.id} />
+      <Trans id={props.name.id} />
     </ListItemButton>
   );
 };
 
 const ProspectButton = (props: { name: string; salesLink: string }) => {
   const adFormatName = props.name;
+  const { _ } = useLingui();
   return (
     <ListItem
       sx={{
@@ -112,10 +113,8 @@ const ProspectButton = (props: { name: string; salesLink: string }) => {
         title={
           <Stack p={1} spacing={1}>
             <Typography variant="caption">
-              <Trans>
-                {adFormatName} are not available for self-managed campaigns.
-                Please contact sales to inquire.
-              </Trans>
+              {_(msg`${adFormatName} are not available for self-managed campaigns.
+                Please contact sales to inquire.`)}
             </Typography>
             <Link
               underline="hover"
@@ -124,7 +123,7 @@ const ProspectButton = (props: { name: string; salesLink: string }) => {
               }
               sx={{ alignSelf: "flex-end", cursor: "pointer" }}
             >
-              <Trans>Contact Sales →</Trans>
+              {_(msg`Contact Sales`)} →
             </Link>
           </Stack>
         }

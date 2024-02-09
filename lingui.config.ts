@@ -1,4 +1,6 @@
-module.exports = {
+import type { LinguiConfig } from "@lingui/conf";
+
+const config: LinguiConfig = {
   locales: ["en", "es", "por"],
   catalogs: [
     {
@@ -6,5 +8,6 @@ module.exports = {
       include: ["src"],
     },
   ],
-  format: "po",
 };
+
+export default config;

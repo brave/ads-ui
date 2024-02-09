@@ -24,7 +24,7 @@ import { useMatomo } from "@jonkoops/matomo-tracker-react";
 import { BasicAttentionTokenLandingPage } from "basic-attention-token/BasicAttentionTokenLandingPage";
 import { I18nProvider } from "@lingui/react";
 import { i18n } from "@lingui/core";
-import { dynamicActivate } from "./i18n";
+import { dynamicActivate } from "i18n";
 
 const Protected = () => {
   return <Redirect to="/auth/link" />;
@@ -34,16 +34,19 @@ export function App() {
   console.log(`current build: ${VERSION.fullHash}`);
   const { enableLinkTracking } = useMatomo();
   const [drafts, setDrafts] = useState<CampaignForm[]>(getAllDrafts());
+  const [language, setLanguage] = useState<boolean>();
   const isAuthenticated = useIsAuthenticated();
 
   enableLinkTracking();
 
   useEffect(() => {
     const browserLanguage = navigator.language;
-    dynamicActivate(browserLanguage);
+    dynamicActivate(browserLanguage).then(() => {
+      setLanguage(true);
+    });
   }, []);
 
-  if (isAuthenticated == null) {
+  if (!language || isAuthenticated == null) {
     return null;
   }
 

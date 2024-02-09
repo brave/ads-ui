@@ -1,40 +1,18 @@
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Divider from "@mui/material/Divider";
-import {
-  Drawer,
-  Link,
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Menu,
-  MenuItem,
-  Typography,
-} from "@mui/material";
-import { PropsWithChildren, ReactNode, MouseEvent, useState } from "react";
-import { Link as RouterLink, useRouteMatch } from "react-router-dom";
+import { Drawer, List } from "@mui/material";
+import { PropsWithChildren } from "react";
 import CampaignOutlinedIcon from "@mui/icons-material/CampaignOutlined";
 import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlined";
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
-import HeadsetMicOutlinedIcon from "@mui/icons-material/HeadsetMicOutlined";
 import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined";
 import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { AlwaysOnFormButton } from "components/Button/AlwaysOnFormButton";
-import { useIsMobile } from "hooks/useIsMobile";
-import { useTrackMatomoEvent } from "hooks/useTrackWithMatomo";
-import { msg, Trans } from "@lingui/macro";
-import { Trans as TransWithId } from "@lingui/react";
-import { MessageDescriptor } from "@lingui/core";
-
-type RouteOption = {
-  label: MessageDescriptor;
-  href: string;
-  icon: ReactNode;
-  disabled?: boolean;
-  onClick?: (event: MouseEvent<any>) => void;
-};
+import { msg } from "@lingui/macro";
+import { SupportMenu } from "components/Drawer/SupportMenu";
+import { ItemBox, RouteOption } from "components/Drawer/components/ItemBox";
 
 const drawerWidth = 85;
 export default function MiniSideBar({ children }: PropsWithChildren) {
@@ -141,110 +119,5 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
       {children}
       <AlwaysOnFormButton />
     </Box>
-  );
-}
-
-const ItemBox = (props: RouteOption) => {
-  const match = useRouteMatch();
-  return (
-    <ListItemButton
-      component={RouterLink}
-      to={props.href}
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        borderRadius: "0px",
-        gap: "3px",
-        visibility: props.disabled ? "hidden" : "visible",
-        paddingLeft: "3px",
-        paddingRight: "3px",
-      }}
-      selected={match.url.includes(props.href)}
-      onClick={props.onClick}
-    >
-      <ListItemIcon sx={{ minWidth: "unset" }}>{props.icon}</ListItemIcon>
-      <ListItemText disableTypography>
-        <Typography textAlign="center" variant="caption" fontWeight={500}>
-          <TransWithId id={props.label.id} />
-        </Typography>
-      </ListItemText>
-    </ListItemButton>
-  );
-};
-
-interface SupportProps {
-  usePlainLink?: boolean;
-}
-
-export function SupportMenu({ usePlainLink }: SupportProps) {
-  const { trackMatomoEvent } = useTrackMatomoEvent();
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const isMobile = useIsMobile();
-
-  const handleClick = (
-    event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
-  ) => {
-    trackMatomoEvent("support-menu", "click");
-    setAnchorEl(event.currentTarget);
-  };
-
-  return (
-    <>
-      {!usePlainLink && (
-        <ItemBox
-          label={msg`Support`}
-          href="#"
-          icon={
-            <HeadsetMicOutlinedIcon
-              fontSize="large"
-              sx={{ color: "text.secondary" }}
-            />
-          }
-          onClick={handleClick}
-        />
-      )}
-      {usePlainLink && (
-        <Link
-          variant={isMobile ? "body2" : "subtitle1"}
-          underline="none"
-          color="text.primary"
-          sx={{ cursor: "pointer" }}
-          onClick={handleClick}
-        >
-          <Trans>Support</Trans>
-        </Link>
-      )}
-      <Menu open={open} anchorEl={anchorEl} onClose={() => setAnchorEl(null)}>
-        <MenuItem
-          onClick={() => {
-            window.open("https://ads-help.brave.com/", "_blank", "noopener");
-            setAnchorEl(null);
-          }}
-        >
-          <Trans>Help Center</Trans>
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            window.open("https://brave.com/brave-ads", "_blank", "noopener");
-            setAnchorEl(null);
-          }}
-        >
-          <Trans>About Brave Ads</Trans>
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            window.open("mailto:selfserve@brave.com", "_self", "noopener");
-            setAnchorEl(null);
-          }}
-        >
-          <Trans>Contact</Trans>:{" "}
-          {/* eslint-disable-next-line lingui/no-unlocalized-strings */}
-          <Link sx={{ ml: 1 }} underline="none">
-            selfserve@brave.com
-          </Link>
-        </MenuItem>
-      </Menu>
-    </>
   );
 }

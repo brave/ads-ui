@@ -3,7 +3,7 @@ import { Options, SeriesOptionsType } from "highcharts";
 import { Option } from "../types";
 import { HighchartsWrapper } from "user/analytics/analyticsOverview/components/HighchartsWrapper";
 import { msg } from "@lingui/macro";
-import { Trans as TransWithId } from "@lingui/react";
+import { Trans } from "@lingui/react";
 
 interface Props {
   categories: string[];
@@ -81,7 +81,7 @@ export function BaseBarChart({
             <Tab
               key={t.label.id}
               value={t.value}
-              label={<TransWithId id={t.label.id} />}
+              label={<Trans id={t.label.id} />}
             />
           ))}
         </Tabs>
