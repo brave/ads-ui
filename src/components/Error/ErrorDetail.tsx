@@ -9,6 +9,7 @@ import {
   Box,
   Typography,
 } from "@mui/material";
+import { VERSION } from "util/version";
 
 interface Props {
   error?: any;
@@ -37,12 +38,26 @@ export const ErrorDetail = ({ error, additionalDetails }: Props) => {
     );
   }
 
+  const stringError = JSON.stringify(error, undefined, 2);
+
+  const errorDetails = `
+URL: ${document.location}
+VERSION: ${VERSION.shortHash}
+ERROR: ${error.stack ? error.stack : error}
+${stringError === "{}" ? "" : stringError}
+  `;
+
+  console.error(errorDetails);
+
   return (
     <Box mt={2}>
       <Alert severity="error">
         <AlertTitle>Something went wrong.</AlertTitle>
         <p>An error has occurred while processing your request.</p>
-        <p>Please try again, or contact our operations team for assistance.</p>
+        <p>
+          Please refresh the page to try again, or email <SelfServeMailTo /> for
+          assistance.
+        </p>
       </Alert>
 
       {additionalDetails && (
@@ -58,3 +73,7 @@ export const ErrorDetail = ({ error, additionalDetails }: Props) => {
     </Box>
   );
 };
+
+const SelfServeMailTo = () => (
+  <a href="mailto:selfserve@brave.com">selfserve@brave.com</a>
+);

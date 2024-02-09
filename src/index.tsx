@@ -8,16 +8,31 @@ import "./index.css";
 import "@fontsource/poppins/latin.css";
 import "@fontsource/mulish/latin.css";
 import { IAuthProvider } from "auth";
+import { Environment, getEnvironment } from "util/environment";
+import { createInstance, MatomoProvider } from "@jonkoops/matomo-tracker-react";
 
 const container = document.getElementById("root");
 const root = createRoot(container!);
+const env = getEnvironment();
+
+const instance = createInstance({
+  urlBase: "https://analytics.brave.com/",
+  siteId: env === Environment.PRODUCTION ? 11 : 12,
+  disabled: env === Environment.LOCAL,
+  heartBeat: {
+    active: false,
+  },
+  linkTracking: false,
+});
 
 root.render(
   <React.StrictMode>
-    <IAuthProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </IAuthProvider>
+    <MatomoProvider value={instance}>
+      <IAuthProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </IAuthProvider>
+    </MatomoProvider>
   </React.StrictMode>,
 );

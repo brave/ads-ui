@@ -4,8 +4,12 @@ import { Link as RouterLink, useHistory } from "react-router-dom";
 import { CircularProgress, Link, Stack, Typography } from "@mui/material";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import { useTrackWithMatomo } from "hooks/useTrackWithMatomo";
 
 export function AuthVerify() {
+  const { trackMatomoEvent } = useTrackWithMatomo({
+    documentTitle: "Magic Link Verification",
+  });
   const history = useHistory();
   const params = new URLSearchParams(history.location.search);
 
@@ -16,6 +20,10 @@ export function AuthVerify() {
     },
     onCompleted() {
       history.push("/user/main");
+      trackMatomoEvent("magic-link", "verified");
+    },
+    onError() {
+      trackMatomoEvent("magic-link", "failed-verification");
     },
   });
 

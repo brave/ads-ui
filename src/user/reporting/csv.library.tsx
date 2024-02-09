@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { buildAdServerEndpoint } from "util/environment";
 import Papa from "papaparse";
 import tweetnacl from "tweetnacl";
+import { useTrackMatomoEvent } from "hooks/useTrackWithMatomo";
 
 interface DownloadProps {
   onComplete?: () => void;
@@ -11,10 +12,15 @@ interface DownloadProps {
 export function useDownloadCSV(props: DownloadProps = {}) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
+  const { trackMatomoEvent } = useTrackMatomoEvent();
 
   const download = useCallback((campaignId: string, isVac: boolean) => {
     setLoading(true);
     setError(undefined);
+    trackMatomoEvent(
+      "report-download",
+      `${isVac ? "vac" : "performance"}-report`,
+    );
 
     const baseUrl = `/report/campaign/csv/${campaignId}`;
     fetch(buildAdServerEndpoint(isVac ? `${baseUrl}/vac` : baseUrl), {
@@ -59,6 +65,7 @@ export function useDownloadCSV(props: DownloadProps = {}) {
       })
       .catch((e) => {
         setError(e.message);
+        trackMatomoEvent("report-download", `download-failed`);
       })
       .finally(() => {
         setLoading(false);

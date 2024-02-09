@@ -12,8 +12,10 @@ import { CampaignFormat } from "graphql/types";
 import moment from "moment/moment";
 import { RouteSelectionButton } from "components/Route/RouteSelectionButton";
 import Box from "@mui/material/Box";
+import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
 
 export function AdvertiserAssets() {
+  useTrackMatomoPageView({ documentTitle: "Advertiser Assets" });
   const { advertiser } = useAdvertiser();
   const { data, loading, error } = useAdvertiserImagesQuery({
     variables: { id: advertiser.id },

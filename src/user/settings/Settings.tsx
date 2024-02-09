@@ -17,8 +17,12 @@ import { CardContainer } from "components/Card/CardContainer";
 import { DraftContext } from "state/context";
 import { NewKeyPairModal } from "user/settings/NewKeyPairModal";
 import MiniSideBar from "components/Drawer/MiniSideBar";
+import { useTrackWithMatomo } from "hooks/useTrackWithMatomo";
 
 const Settings = () => {
+  const { trackMatomoEvent } = useTrackWithMatomo({
+    documentTitle: "Advertiser Settings",
+  });
   const { advertiser: activeAdvertiser, advertisers } = useAdvertiser();
   const [advertiser, setAdvertiser] = useState(activeAdvertiser);
   const { setDrafts } = useContext(DraftContext);
@@ -28,6 +32,7 @@ const Settings = () => {
     const adv = _.find(advertisers, { id });
 
     if (adv) {
+      trackMatomoEvent("advertiser", "switched-advertiser");
       setAdvertiser(adv);
       setActiveAdvertiser(adv?.id);
       setDrafts();

@@ -14,9 +14,11 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { CreativeStatusSwitch } from "components/Creatives/CreativeStatusSwitch";
 import { CustomToolbar } from "components/Datagrid/CustomToolbar";
 import { RouteSelectionButton } from "components/Route/RouteSelectionButton";
+import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
 
 const ALLOWED_TYPES = ["notification_all_v1", "inline_content_all_v1"];
 export function CreativeList() {
+  useTrackMatomoPageView({ documentTitle: "Advertiser Creatives" });
   const { advertiser } = useAdvertiser();
   const { data, error, loading } = useAdvertiserCreativesQuery({
     variables: {

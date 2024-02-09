@@ -10,10 +10,12 @@ import { CustomPriceSelect } from "user/views/adsManager/views/advanced/componen
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { LearnMoreButton } from "components/Button/LearnMoreButton";
 import { LocationPicker } from "components/Location/LocationPicker";
+import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
 
 export function CampaignSettings(props: { prices: AdvertiserPrice[] }) {
   const { isDraft } = useIsEdit();
   const { advertiser } = useAdvertiser();
+  useTrackMatomoPageView({ documentTitle: "Campaign Settings" });
 
   return (
     <>
