@@ -82,7 +82,7 @@
     "babel-plugin-macros": "3.1.0",
     "eslint": "8.56.0",
     "eslint-config-prettier": "9.1.0",
-    "eslint-plugin-lingui": "0.2.2",
+    "eslint-plugin-lingui": "0.3.0",
     "eslint-plugin-react": "7.33.2",
     "husky": "9.0.10",
     "prettier": "3.2.4",

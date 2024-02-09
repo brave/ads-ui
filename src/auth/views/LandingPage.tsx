@@ -61,7 +61,7 @@ export function LandingPage() {
               {isAuthenticated ? (
                 <Trans>Dashboard</Trans>
               ) : (
-                <Trans>Get Started</Trans>
+                <Trans>Get started</Trans>
               )}
             </Button>
             {!isMobile && !isAuthenticated && (

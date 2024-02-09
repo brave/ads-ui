@@ -93,7 +93,7 @@ async function transformConversionEnvelope(blob: Blob): Promise<Blob> {
     fileReader.onload = () => {
       const text = fileReader.result as string | null;
       if (text === null) {
-        reject(new Error(t`No file Result`));
+        reject(new Error(t`No file result`));
         return;
       }
 

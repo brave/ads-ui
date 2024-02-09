@@ -63,7 +63,7 @@ module.exports = {
       },
     ],
     "lingui/t-call-in-function": "error",
-    "lingui/no-single-variables-to-translate": "warn",
+    "lingui/no-single-variables-to-translate": "error",
     "lingui/no-expression-in-message": "error",
     "lingui/no-single-tag-to-translate": "error",
     "lingui/no-trans-inside-trans": "error",

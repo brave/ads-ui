@@ -52,12 +52,12 @@ export default function MetricSelect({
     },
     {
       value: "viewthroughConversion",
-      label: msg`View-through Conversions`,
+      label: msg`View-through conversions`,
       tooltip: msg`Counted when a user reaches a designated conversion landing page following an ad impression.`,
     },
     {
       value: "clickthroughConversion",
-      label: msg`Click-through Conversions`,
+      label: msg`Click-through conversions`,
       tooltip: msg`Counted when a user reaches a designated conversion landing page following an impression and click of the ad.`,
     },
     {
@@ -67,7 +67,7 @@ export default function MetricSelect({
     },
     {
       value: "convRate",
-      label: msg`Conversion Rate`,
+      label: msg`Conversion rate`,
       tooltip: msg`The rate at which users converted in correlation to their clicks`,
     },
     {

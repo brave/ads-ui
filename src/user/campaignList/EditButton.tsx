@@ -25,7 +25,7 @@ export const EditButton = (props: {
         !campaign ? (
           <Trans>Select one campaign to edit</Trans>
         ) : (
-          <Trans>Edit ${campaignName}</Trans>
+          <Trans>Edit {campaignName}</Trans>
         )
       }
     >

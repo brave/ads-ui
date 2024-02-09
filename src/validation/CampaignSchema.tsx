@@ -72,8 +72,8 @@ export const CampaignSchema = (prices: AdvertiserPrice[]) =>
           .required(t`Start Date is required`),
     }),
     endAt: date()
-      .required(t`End Date is required`)
-      .min(ref("startAt"), t`End date must be after Start date`),
+      .required(t`End date is required`)
+      .min(ref("startAt"), t`End date must be after start date`),
     geoTargets: array()
       .of(
         object().shape({
@@ -145,15 +145,15 @@ export const CampaignSchema = (prices: AdvertiserPrice[]) =>
                 observationWindow: number()
                   .oneOf(
                     [1, 7, 30],
-                    t`Observation Window must be 1, 7, or 30 days.`,
+                    t`Observation window must be 1, 7, or 30 days.`,
                   )
-                  .required(t`Observation Window required.`),
+                  .required(t`Observation window required.`),
                 type: string()
                   .oneOf(
                     ["postclick", "postview"],
                     t`Conversion type must be Post Click or Post View`,
                   )
-                  .required(t`Conversion Type required.`),
+                  .required(t`Conversion type required.`),
               }),
             ),
           creatives: array().test(

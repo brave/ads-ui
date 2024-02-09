@@ -61,11 +61,11 @@ export default function LiveFeed({ overview, processed }: LiveFeedProps) {
         value: toLocaleString(processed.conversions),
       },
       {
-        label: msg`View-through Conversions`,
+        label: msg`View-through conversions`,
         value: toLocaleString(processed.viewthroughConversion),
       },
       {
-        label: msg`Click-through Conversions`,
+        label: msg`Click-through conversions`,
         value: toLocaleString(processed.clickthroughConversion),
       },
       {

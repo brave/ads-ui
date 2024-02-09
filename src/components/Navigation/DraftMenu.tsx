@@ -3,9 +3,11 @@ import { useContext, useState, MouseEvent } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { Badge, Button, Menu, MenuItem } from "@mui/material";
 import { DraftContext } from "state/context";
-import { Trans } from "@lingui/macro";
+import { msg, Trans } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 
 export function DraftMenu() {
+  const { _ } = useLingui();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const { drafts } = useContext(DraftContext);
@@ -53,7 +55,7 @@ export function DraftMenu() {
             }}
             sx={{ pt: 1, pb: 1, minWidth: "250px" }}
           >
-            {d.name || <Trans>Draft ${idx}</Trans>}
+            {d.name || `${_(msg`Draft`)} ${idx}`}
           </MenuItem>
         ))}
       </Menu>

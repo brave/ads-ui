@@ -54,7 +54,7 @@ export function BaseBarChart({
   };
 
   const tabs: Option[] = [
-    { value: "landingRate", label: msg`Click to site visit Rate` },
+    { value: "landingRate", label: msg`Click to site visit rate` },
     { value: "ctr", label: msg`CTR` },
     { value: "visitRate", label: msg`Site visit rate` },
     ...(extraOptions ?? []),
