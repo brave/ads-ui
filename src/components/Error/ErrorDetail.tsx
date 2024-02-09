@@ -12,7 +12,7 @@ import {
 import { VERSION } from "util/version";
 import { MessageDescriptor } from "@lingui/core";
 import { Trans } from "@lingui/macro";
-import { Trans as TransWithId } from "@lingui/react";
+import { useLingui } from "@lingui/react";
 
 interface Props {
   error?: any;
@@ -20,6 +20,7 @@ interface Props {
 }
 
 export const ErrorDetail = ({ error, additionalDetails }: Props) => {
+  const { _ } = useLingui();
   if (!error) {
     return null;
   }
@@ -82,9 +83,7 @@ ${stringError === "{}" ? "" : stringError}
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <pre style={{ overflow: "scroll" }}>
-              <TransWithId id={additionalDetails.id} />
-            </pre>
+            <pre style={{ overflow: "scroll" }}>{_(additionalDetails)}</pre>
           </AccordionDetails>
         </Accordion>
       )}

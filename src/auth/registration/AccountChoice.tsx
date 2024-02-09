@@ -7,8 +7,8 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { msg, Trans } from "@lingui/macro";
-import { Trans as TranslateWithId } from "@lingui/react";
+import { msg } from "@lingui/macro";
+import { useLingui, Trans } from "@lingui/react";
 import { MessageDescriptor } from "@lingui/core";
 import { AccountSetup } from "auth/registration/types";
 import { useField } from "formik";
@@ -102,6 +102,7 @@ function AccountItemButton({
   value,
   minSpend,
 }: ChoiceOptions) {
+  const { _ } = useLingui();
   const theme = useTheme();
   const [, meta, helper] = useField<AccountSetup | undefined>("setup");
 
@@ -127,15 +128,15 @@ function AccountItemButton({
     >
       <Box display="flex" flexDirection="column" gap="5px" mt={2}>
         <Typography fontWeight={700} fontSize="20px">
-          <TranslateWithId id={title.id} />
+          <Trans id={title.id} />
         </Typography>
         <Typography variant="caption">
-          <TranslateWithId id={description.id} />
+          <Trans id={description.id} />
         </Typography>
       </Box>
       <Box display="flex" flexDirection="column">
         <Typography variant="caption" fontWeight={600}>
-          <Trans>Available Ad placements</Trans>
+          {_(msg`Available Ad placements`)}
         </Typography>
         {points.map((p, idx) => (
           <Box
@@ -146,7 +147,7 @@ function AccountItemButton({
             fontSize="0.75rem"
             lineHeight="1.66"
           >
-            <TranslateWithId id={p.id} />
+            <Trans id={p.id} />
           </Box>
         ))}
       </Box>
@@ -159,12 +160,10 @@ function AccountItemButton({
       >
         <Stack direction="column">
           <Typography variant="caption" fontWeight={600}>
-            <Trans>Minimum Spend</Trans>
+            {_(msg`Minimum Spend`)}
           </Typography>
           <Typography variant="caption" color="text.secondary">
-            {"$"}
-            {minSpend}
-            {"/"} <Trans>month</Trans>
+            {`$${minSpend}/${_(msg`month`)}`}
           </Typography>
         </Stack>
         <Box display="flex" justifyContent="right" alignItems="center">

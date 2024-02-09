@@ -6,6 +6,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: pt\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
 
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:117
 msgid "{adFormatName} are not available for self-managed campaigns. Please contact sales to inquire."
@@ -39,8 +45,16 @@ msgstr ""
 msgid "30 Days"
 msgstr ""
 
+#: src/components/Error/ErrorDetail.tsx:39
+msgid "401 Forbidden"
+msgstr ""
+
 #: src/components/Conversion/ConversionFields.tsx:51
 msgid "7 Days"
+msgstr ""
+
+#: src/components/Error/ErrorDetail.tsx:41
+msgid "A forbidden error was returned. You may need to log out and back in again."
 msgstr ""
 
 #: src/auth/views/MagicLink.tsx:34
@@ -152,6 +166,10 @@ msgstr ""
 msgid "Add Conversion tracking"
 msgstr ""
 
+#: src/components/Error/ErrorDetail.tsx:82
+msgid "Additional Details"
+msgstr ""
+
 #: src/user/views/user/CampaignReportView.tsx:96
 msgid "Additional Report: OS Performance"
 msgstr ""
@@ -185,6 +203,10 @@ msgstr ""
 
 #: src/auth/views/LandingPage.tsx:63
 msgid "Already have an account?"
+msgstr ""
+
+#: src/components/Error/ErrorDetail.tsx:68
+msgid "An error has occurred while processing your request."
 msgstr ""
 
 #: src/user/settings/UserApiKey.tsx:31
@@ -232,6 +254,10 @@ msgstr ""
 
 #: src/components/Segment/SegmentPicker.tsx:50
 msgid "Automatic interest targeting"
+msgstr ""
+
+#: src/auth/registration/AccountChoice.tsx:139
+msgid "Available Ad placements"
 msgstr ""
 
 #: src/components/Steps/NextAndBack.tsx:33
@@ -1073,6 +1099,10 @@ msgstr ""
 msgid "Max 60 Characters"
 msgstr ""
 
+#: src/auth/registration/AccountChoice.tsx:163
+msgid "Minimum Spend"
+msgstr ""
+
 #: src/components/Creatives/CreativeForm.tsx:138
 msgid "Modifying an ad will immediately put it into review. This means it will no longer be shown to users until it is approved."
 msgstr ""
@@ -1083,6 +1113,10 @@ msgstr ""
 
 #: src/components/Creatives/CreativeStatusSwitch.tsx:101
 msgid "Modifying the state of this ad will effect more than one campaign:"
+msgstr ""
+
+#: src/auth/registration/AccountChoice.tsx:166
+msgid "month"
 msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/EngagementHeader.tsx:53
@@ -1340,6 +1374,10 @@ msgstr ""
 msgid "Please reach out to <0>selfserve@brave.com</0> or try again."
 msgstr ""
 
+#: src/components/Error/ErrorDetail.tsx:71
+msgid "Please refresh the page to try again, or email <0/> for assistance."
+msgstr ""
+
 #: src/auth/registration/MarketingOptIn.tsx:33
 msgid "Please see our <0>Advertiser Privacy Policy</0> and <1>Terms of Service</1> applicable to Brave Ads"
 msgstr ""
@@ -1563,6 +1601,10 @@ msgstr ""
 
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:151
 msgid "Skip survey and continue"
+msgstr ""
+
+#: src/components/Error/ErrorDetail.tsx:65
+msgid "Something went wrong."
 msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:48
