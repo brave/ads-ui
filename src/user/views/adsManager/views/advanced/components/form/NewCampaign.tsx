@@ -51,7 +51,7 @@ export function NewCampaign() {
       ) {
         history.push(`/user/main/complete/new?referenceId=${campaign.id}`);
       } else {
-        createPaymentSession(data.createCampaign.id);
+        void createPaymentSession(data.createCampaign.id);
       }
     },
     onError() {

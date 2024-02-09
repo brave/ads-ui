@@ -10,7 +10,7 @@ export const PersistRegistrationValues = () => {
   useEffect(() => {
     const form = localStorage.getItem("registerInProgress");
     if (form) {
-      setValues(JSON.parse(form));
+      void setValues(JSON.parse(form));
     }
   }, []);
 

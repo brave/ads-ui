@@ -11,7 +11,7 @@ export const PersistFormValues = () => {
     if (id) {
       const form = localStorage.getItem(id);
       if (form) {
-        setValues(JSON.parse(form));
+        void setValues(JSON.parse(form));
       }
     }
   };

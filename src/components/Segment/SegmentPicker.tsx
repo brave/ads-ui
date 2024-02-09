@@ -28,11 +28,11 @@ export const SegmentPicker = ({ idx }: Props) => {
 
   useEffect(() => {
     if (targetMeta.value) {
-      helper.setValue([{ code: "Svp7l-zGN", name: "untargeted" }]);
+      void helper.setValue([{ code: "Svp7l-zGN", name: "untargeted" }]);
     } else {
       const onlyUntargeted =
         meta.value.length === 1 && meta.value[0].code === "Svp7l-zGN";
-      helper.setValue(onlyUntargeted ? [] : meta.value);
+      void helper.setValue(onlyUntargeted ? [] : meta.value);
     }
   }, [targetMeta.value]);
 
@@ -81,7 +81,7 @@ export const SegmentPicker = ({ idx }: Props) => {
           isOptionEqualToValue={(option, value) => option.code === value.code}
           value={meta.value}
           onChange={(_ev, value) => {
-            helper.setValue(_.sortBy(value, "name"));
+            void helper.setValue(_.sortBy(value, "name"));
           }}
           onBlur={() => helper.setTouched(true)}
         />

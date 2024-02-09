@@ -109,7 +109,7 @@ export function campaignOnOffState(
   return (
     <OnOff
       onChange={(s) => {
-        updateCampaign({
+        void updateCampaign({
           variables: { input: { id: c.id, state: s } },
         });
       }}
@@ -138,7 +138,7 @@ export function adSetOnOffState(
     <OnOff
       onChange={(s) => {
         {
-          updateAdSet({
+          void updateAdSet({
             variables: {
               updateAdSetInput: {
                 state: s,

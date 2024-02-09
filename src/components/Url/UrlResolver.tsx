@@ -53,7 +53,7 @@ export const UrlResolver = ({
 
     if (isDirty) {
       const val = isValid !== true ? "Target URL is not valid" : undefined;
-      isValidHelper.setValue(val, urlValidation.isValid === true);
+      void isValidHelper.setValue(val, urlValidation.isValid === true);
     }
   }, [urlValidation.isValid]);
 

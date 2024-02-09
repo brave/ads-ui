@@ -24,8 +24,8 @@ export function InlineContentAd(props: InlineAdProps) {
     withName("payloadInlineContent.description"),
   );
   useEffect(() => {
-    code.setValue("inline_content_all_v1");
-    description.setValue(advertiser.name);
+    void code.setValue("inline_content_all_v1");
+    void description.setValue(advertiser.name);
   }, []);
 
   return (

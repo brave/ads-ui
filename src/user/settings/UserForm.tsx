@@ -32,7 +32,7 @@ export function UserForm() {
         initialValues={initialVals}
         onSubmit={(v, { setSubmitting }: FormikValues) => {
           setSubmitting(true);
-          updateUser({
+          void updateUser({
             variables: { input: { id: user.userId, ..._.omit(v, ["userId"]) } },
           }).finally(() => setSubmitting(false));
         }}

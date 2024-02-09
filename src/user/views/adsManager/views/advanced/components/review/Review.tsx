@@ -13,7 +13,7 @@ export function Review() {
     const toTouch = Object.keys(values)
       .map((v) => ({ [`${v}`]: true }))
       .reduce((a, b) => ({ ...a, ...b }));
-    setTouched(toTouch, false);
+    void setTouched(toTouch, false);
   }, [values]);
 
   return (

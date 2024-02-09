@@ -68,7 +68,7 @@ export function MagicLink() {
         disabled={loading}
         loading={loading}
         onClick={() => {
-          requestLink(email);
+          void requestLink(email);
         }}
       >
         Get login link

@@ -22,15 +22,15 @@ export function CreateCreativeButton() {
 
   const [create, { loading }] = useCreateCreativeMutation({
     async onCompleted(data) {
-      newHelper.setValue(initialCreative);
-      newHelper.setTouched(false);
+      void newHelper.setValue(initialCreative);
+      void newHelper.setTouched(false);
       values.adSets.forEach((adSet, idx) => {
         void setFieldValue(`adSets.${idx}.creatives`, [
           ...adSet.creatives,
           validCreativeFields(data.createCreative, advertiser.id, true),
         ]);
       });
-      isCreating.setValue(false);
+      void isCreating.setValue(false);
     },
     refetchQueries: [
       {
@@ -45,7 +45,7 @@ export function CreateCreativeButton() {
       startIcon={<SaveIcon />}
       onClick={(e) => {
         e.preventDefault();
-        create({
+        void create({
           variables: {
             input: {
               ..._.omit(newMeta.value, "included"),

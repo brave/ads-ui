@@ -120,7 +120,7 @@ export function UploadImage({ useInlineCreation, onClose, onComplete }: Props) {
             <Button
               disabled={file === undefined || step !== 0}
               onClick={() => {
-                upload!(file!, CampaignFormat.NewsDisplayAd);
+                void upload!(file!, CampaignFormat.NewsDisplayAd);
               }}
               variant="contained"
             >
