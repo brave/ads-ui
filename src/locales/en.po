@@ -13,6 +13,10 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:116
+msgid "{adFormatName} are not available for self-managed campaigns. Please contact sales to inquire."
+msgstr "{adFormatName} are not available for self-managed campaigns. Please contact sales to inquire."
+
 #: src/validation/CampaignSchema.tsx:190
 msgid "{billingType} price must be {price} or higher"
 msgstr "{billingType} price must be {price} or higher"
@@ -49,11 +53,15 @@ msgstr "7 Days"
 msgid "A login email is on the way"
 msgstr "A login email is on the way"
 
+#: src/components/Drawer/SupportMenu.tsx:67
+msgid "About Brave Ads"
+msgstr "About Brave Ads"
+
 #: src/auth/components/AdvertiserDetailsForm.tsx:125
 msgid "Access dashboard"
 msgstr "Access dashboard"
 
-#: src/components/Drawer/MiniSideBar.tsx:79
+#: src/components/Drawer/MiniSideBar.tsx:57
 msgid "Account"
 msgstr "Account"
 
@@ -76,6 +84,10 @@ msgstr "Ad body must be less than 60 characters"
 #: src/validation/CreativeSchema.tsx:62
 msgid "Ad description is required"
 msgstr "Ad description is required"
+
+#: src/components/Creatives/CreativeType.tsx:26
+msgid "Ad format"
+msgstr "Ad format"
 
 #: src/components/Creatives/CreativeList.tsx:64
 #: src/user/campaignList/CampaignList.tsx:89
@@ -155,7 +167,7 @@ msgstr "Additional Report: OS Performance"
 #: src/components/Creatives/CreativeList.tsx:100
 #: src/components/Creatives/CreativeSpecificPreview.tsx:52
 #: src/components/Creatives/CreativeSpecificPreview.tsx:63
-#: src/components/Drawer/MiniSideBar.tsx:54
+#: src/components/Drawer/MiniSideBar.tsx:32
 #: src/user/views/adsManager/views/advanced/components/adSet/fields/AdSetAds.tsx:29
 #: src/user/views/user/CampaignDetails.tsx:38
 msgid "Ads"
@@ -197,7 +209,7 @@ msgstr "Are you sure you want to modify \"{creativeName}\"?"
 msgid "Are you sure you want to pause"
 msgstr "Are you sure you want to pause"
 
-#: src/search/SearchLandingPage.tsx:63
+#: src/search/SearchTalkingPoints.tsx:12
 msgid "As effective as Google"
 msgstr "As effective as Google"
 
@@ -217,7 +229,7 @@ msgstr "At least one country must be targeted"
 msgid "At least one platform must be targeted"
 msgstr "At least one platform must be targeted"
 
-#: src/components/Drawer/MiniSideBar.tsx:65
+#: src/components/Drawer/MiniSideBar.tsx:43
 #: src/components/Segment/SegmentPicker.tsx:83
 #: src/user/adSet/AdSetList.tsx:140
 #: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:47
@@ -246,6 +258,14 @@ msgstr "Body"
 msgid "Body Preview"
 msgstr "Body Preview"
 
+#: src/search/SearchLandingPage.tsx:39
+msgid "Book a 30-minute meeting with a Brave Search specialist to discuss a free test campaign and see how Brave Ads can perform for your business."
+msgstr "Book a 30-minute meeting with a Brave Search specialist to discuss a free test campaign and see how Brave Ads can perform for your business."
+
+#: src/search/SearchLandingPage.tsx:79
+msgid "Book a meeting"
+msgstr "Book a meeting"
+
 #: src/user/settings/NewKeyPairModal.tsx:184
 msgid "Brave cannot recover this key, which has been generated in your browser. You will need to confirm this private key on the next step before changes are saved."
 msgstr "Brave cannot recover this key, which has been generated in your browser. You will need to confirm this private key on the next step before changes are saved."
@@ -254,7 +274,7 @@ msgstr "Brave cannot recover this key, which has been generated in your browser.
 msgid "Brave Search"
 msgstr "Brave Search"
 
-#: src/search/SearchLandingPage.tsx:64
+#: src/search/SearchTalkingPoints.tsx:13
 msgid "Brave Search Ads convert as well as, or better than Google Search ad clicks."
 msgstr "Brave Search Ads convert as well as, or better than Google Search ad clicks."
 
@@ -342,7 +362,7 @@ msgid "Campaign Settings"
 msgstr "Campaign Settings"
 
 #: src/components/Creatives/CreativeCampaigns.tsx:40
-#: src/components/Drawer/MiniSideBar.tsx:44
+#: src/components/Drawer/MiniSideBar.tsx:22
 #: src/user/views/user/CampaignView.tsx:41
 msgid "Campaigns"
 msgstr "Campaigns"
@@ -369,6 +389,10 @@ msgstr "cannot create session"
 #: src/components/Assets/UploadImage.tsx:72
 msgid "Choose"
 msgstr "Choose"
+
+#: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:37
+msgid "Choose a format for the campaign you would like to run"
+msgstr "Choose a format for the campaign you would like to run"
 
 #: src/components/Assets/UploadImage.tsx:94
 msgid "Choose File"
@@ -437,6 +461,7 @@ msgid "Cloning a campaign will take all properties including ad sets and ads, an
 msgstr "Cloning a campaign will take all properties including ad sets and ads, and create a new draft campaign with them."
 
 #: src/components/Assets/UploadImage.tsx:128
+#: src/form/FormikButton.tsx:139
 #: src/user/settings/UserApiKey.tsx:112
 msgid "Close"
 msgstr "Close"
@@ -452,6 +477,14 @@ msgstr "Complete selection"
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:41
 msgid "Congratulations! 🎉"
 msgstr "Congratulations! 🎉"
+
+#: src/components/Drawer/SupportMenu.tsx:75
+msgid "Contact"
+msgstr "Contact"
+
+#: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:125
+msgid "Contact Sales"
+msgstr "Contact Sales"
 
 #: src/components/Creatives/CreativeList.tsx:71
 msgid "Content"
@@ -646,6 +679,14 @@ msgstr "DELETED"
 msgid "Device"
 msgstr "Device"
 
+#: src/form/FormikButton.tsx:41
+msgid "Disabled because you haven’t made any changes"
+msgstr "Disabled because you haven’t made any changes"
+
+#: src/form/FormikButton.tsx:50
+msgid "Disabled due to validation errors"
+msgstr "Disabled due to validation errors"
+
 #: src/user/ads/NewAd.tsx:32
 msgid "Discard ad"
 msgstr "Discard ad"
@@ -783,6 +824,7 @@ msgstr "For enterprise and agency businesses looking for bespoke ad solutions vi
 msgid "For small to mid-sized businesses to create and manage their Brave Ads campaigns independently."
 msgstr "For small to mid-sized businesses to create and manage their Brave Ads campaigns independently."
 
+#: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:34
 #: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:36
 msgid "Format"
 msgstr "Format"
@@ -832,7 +874,7 @@ msgstr "Generate API Key"
 msgid "Generating a new API key will result in the deactivation of your previous key, rendering it unusable for future requests. Make sure to update your code with the new key to avoid disruptions in your application’s functionality."
 msgstr "Generating a new API key will result in the deactivation of your previous key, rendering it unusable for future requests. Make sure to update your code with the new key to avoid disruptions in your application’s functionality."
 
-#: src/search/SearchLandingPage.tsx:68
+#: src/search/SearchTalkingPoints.tsx:17
 msgid "Get a free one-month test to see how Search Ads perform for your brand."
 msgstr "Get a free one-month test to see how Search Ads perform for your brand."
 
@@ -848,6 +890,10 @@ msgstr "Get login link"
 #: src/components/AppBar/LandingPageAppBar.tsx:39
 msgid "Get started"
 msgstr "Get started"
+
+#: src/components/Drawer/SupportMenu.tsx:59
+msgid "Help Center"
+msgstr "Help Center"
 
 #: src/user/analytics/analyticsOverview/components/MetricFilter.tsx:64
 msgid "Hide"
@@ -934,7 +980,7 @@ msgstr "In your local time this is"
 msgid "Include campaigns that ended over 6 months ago"
 msgstr "Include campaigns that ended over 6 months ago"
 
-#: src/search/SearchLandingPage.tsx:59
+#: src/search/SearchTalkingPoints.tsx:8
 msgid "Incremental"
 msgstr "Incremental"
 
@@ -1199,6 +1245,10 @@ msgstr "Once confirmed, your organization’s keypair will be replaced with the 
 msgid "Once the review process is complete, we will send you an email to notify you of the approval status and any further steps required."
 msgstr "Once the review process is complete, we will send you an email to notify you of the approval status and any further steps required."
 
+#: src/search/SearchLandingPage.tsx:82
+msgid "Or email <0>searchads@brave.com</0>"
+msgstr "Or email <0>searchads@brave.com</0>"
+
 #: src/auth/views/MagicLink.tsx:100
 msgid "or sign in using a password"
 msgstr "or sign in using a password"
@@ -1365,7 +1415,7 @@ msgstr "Privacy-forward"
 msgid "Private Key"
 msgstr "Private Key"
 
-#: src/components/Drawer/MiniSideBar.tsx:89
+#: src/components/Drawer/MiniSideBar.tsx:67
 msgid "Profile"
 msgstr "Profile"
 
@@ -1381,7 +1431,7 @@ msgstr "Profile Details"
 msgid "Reach and convert new customers through premium advertising on the Brave browser and search engine."
 msgstr "Reach and convert new customers through premium advertising on the Brave browser and search engine."
 
-#: src/search/SearchLandingPage.tsx:60
+#: src/search/SearchTalkingPoints.tsx:9
 msgid "Reach audiences who don’t use other search engines and block ads on most sites."
 msgstr "Reach audiences who don’t use other search engines and block ads on most sites."
 
@@ -1417,11 +1467,12 @@ msgstr "Return to dashboard"
 msgid "Review"
 msgstr "Review"
 
-#: src/search/SearchLandingPage.tsx:67
+#: src/search/SearchTalkingPoints.tsx:16
 msgid "Risk Free"
 msgstr "Risk Free"
 
 #: src/form/FormikButton.tsx:69
+#: src/form/FormikButton.tsx:125
 #: src/user/settings/NewKeyPairModal.tsx:251
 msgid "Save"
 msgstr "Save"
@@ -1431,6 +1482,7 @@ msgid "Save ad"
 msgstr "Save ad"
 
 #: src/form/FormikButton.tsx:70
+#: src/form/FormikButton.tsx:125
 #: src/user/settings/NewKeyPairModal.tsx:251
 msgid "Saving..."
 msgstr "Saving..."
@@ -1590,13 +1642,18 @@ msgstr "Submit for approval"
 msgid "Successfully logged in!"
 msgstr "Successfully logged in!"
 
-#: src/components/Drawer/MiniSideBar.tsx:196
+#: src/components/Drawer/SupportMenu.tsx:30
+#: src/components/Drawer/SupportMenu.tsx:49
 msgid "Support"
 msgstr "Support"
 
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:137
 msgid "Take our survey!"
 msgstr "Take our survey!"
+
+#: src/search/SearchLandingPage.tsx:34
+msgid "Tap into over <0>9 billion</0> annual Web searches"
+msgstr "Tap into over <0>9 billion</0> annual Web searches"
 
 #: src/user/ads/InlineContentAd.tsx:84
 #: src/user/ads/NotificationAd.tsx:72

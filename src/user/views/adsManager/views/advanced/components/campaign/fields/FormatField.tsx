@@ -113,8 +113,9 @@ const ProspectButton = (props: { name: string; salesLink: string }) => {
         title={
           <Stack p={1} spacing={1}>
             <Typography variant="caption">
-              {_(msg`${adFormatName} are not available for self-managed campaigns.
-                Please contact sales to inquire.`)}
+              {_(
+                msg`${adFormatName} are not available for self-managed campaigns. Please contact sales to inquire.`,
+              )}
             </Typography>
             <Link
               underline="hover"
