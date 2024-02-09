@@ -68,9 +68,7 @@ export async function submitRegistration(form: RegistrationForm) {
             ? `other: ${form.advertiser.other}`
             : form.advertiser.marketingChannel,
       },
-      address: {
-        ...form.address,
-      },
+      address: null,
       user: {
         fullName: form.fullName,
         email: form.email,

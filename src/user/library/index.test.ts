@@ -236,7 +236,6 @@ describe("new form tests", () => {
     price: "6",
     startAt: dateString,
     state: "draft",
-    type: "paid",
     validateStart: false,
   };
 
@@ -284,11 +283,9 @@ describe("new form tests", () => {
           },
         ],
         "name": "Test",
-        "pacingStrategy": "MODEL_V1",
         "paymentType": "RADOM",
         "source": "self_serve",
         "state": "draft",
-        "type": "paid",
         "userId": "me",
       }
     `);
@@ -524,7 +521,6 @@ describe("edit form tests", () => {
         "price": "6000",
         "startAt": undefined,
         "state": "active",
-        "type": "paid",
         "validateStart": false,
       }
     `);
@@ -608,7 +604,6 @@ describe("edit form tests", () => {
         "paymentType": "RADOM",
         "startAt": undefined,
         "state": "active",
-        "type": "paid",
       }
     `);
   });

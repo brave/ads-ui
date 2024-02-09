@@ -15,8 +15,7 @@ import { PaddedCardContainer } from "components/Card/PaddedCardContainer";
 import { PersistRegistrationValues } from "form/PersistRegistrationValues";
 import { AccountChoice } from "auth/registration/AccountChoice";
 import { useHistory } from "react-router-dom";
-import { AddressField } from "auth/registration/AddressField";
-
+import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
 type RegistrationStep = {
   label: string;
   subheader?: string;
@@ -36,16 +35,15 @@ export function Register() {
       pos: "choice",
     },
     { label: "Create an account", component: <NameField />, pos: "personal" },
-    {
-      label: "Create a business profile",
-      component: <AddressField />,
-      pos: "company",
-    },
   ];
 
   const activeStep = useRef<number>(0);
   activeStep.current = steps.findIndex((s) => {
     return s.pos === (params.get("pos") ?? "choice");
+  });
+
+  useTrackMatomoPageView({
+    documentTitle: `Registration: ${activeStep.current === 0 ? "Account Choice" : "Create Account"}`,
   });
 
   const { register, hasRegistered, error } = useRegister();

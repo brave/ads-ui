@@ -18,6 +18,7 @@ import { CreativeInput } from "graphql/types";
 import { CampaignFragment } from "graphql/campaign.generated";
 import _ from "lodash";
 import { isReviewableState } from "util/displayState";
+import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
 
 interface Params {
   id: string;
@@ -27,6 +28,9 @@ export function CreativeForm() {
   const { advertiser } = useAdvertiser();
   const { id } = useParams<Params>();
   const isNew = id === "new";
+  useTrackMatomoPageView({
+    documentTitle: `${isNew ? "New" : "Existing"} Creative Form`,
+  });
   const { data, loading, error: getError } = useGetCreativeDetails({ id });
 
   const { submit, error: submitError } = useSubmitCreative({ id });
@@ -46,7 +50,7 @@ export function CreativeForm() {
 
   if (getError) {
     return (
-      <ErrorDetail error={getError} additionalDetails="Unable to load Ad" />
+      <ErrorDetail error={getError} additionalDetails="Unable to load ad" />
     );
   }
 
@@ -70,7 +74,7 @@ export function CreativeForm() {
                 flexWrap="wrap"
               >
                 <CardContainer
-                  header={`${isNew ? "New" : "Edit"} Ad`}
+                  header={`${isNew ? "New" : "Edit"} ad`}
                   sx={{ flexGrow: 1 }}
                 >
                   <CreativeType allowTypeChange={id === "new"} />

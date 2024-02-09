@@ -1,10 +1,13 @@
 import { Link, Stack, Typography } from "@mui/material";
+import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
 
 interface Props {
   error?: string;
 }
 
 export function AdvertiserRegistered({ error }: Props) {
+  useTrackMatomoPageView({ documentTitle: "Advertiser Registered" });
+
   return (
     <>
       {error ? (

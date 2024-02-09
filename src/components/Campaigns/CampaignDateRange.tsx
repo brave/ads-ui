@@ -1,17 +1,15 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 import { formatISO, parseISO } from "date-fns";
-import { useField, useFormikContext } from "formik";
+import { useField } from "formik";
 import { useState } from "react";
 import { getDefaultTimezone, TimeZonePicker } from "../TimeZonePicker";
 import { TimezoneAwareDatePicker } from "../TimeZonePicker/TimezoneAwareDatePicker";
 import { useIsEdit } from "form/FormikHelpers";
-import { CampaignForm } from "user/views/adsManager/types";
 
 export const CampaignDateRange = () => {
   const { isDraft } = useIsEdit();
-  const { errors } = useFormikContext<CampaignForm>();
   const [tz, setTz] = useState<string>(getDefaultTimezone());
   const [, startMeta, startHelper] = useField("startAt");
   const [, endMeta, endHelper] = useField("endAt");
@@ -51,19 +49,6 @@ export const CampaignDateRange = () => {
           setTimeZone={setTz}
           sx={{ flexGrow: 1 }}
         />
-      </Stack>
-      <Stack spacing={1} mt={2}>
-        {errors.budget && (
-          <Typography variant="caption" color="error">
-            The budget is too low for the selected date range. Check the budget
-            tab for more details.
-          </Typography>
-        )}
-
-        <Typography variant="caption">
-          <strong>*</strong>Campaigns are processed during U.S. business hours.
-          Processing can take more than 2 days.
-        </Typography>
       </Stack>
     </Box>
   );

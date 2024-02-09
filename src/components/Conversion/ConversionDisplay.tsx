@@ -10,9 +10,7 @@ interface Props {
 
 export function ConversionDisplay({ conversions, convErrors }: Props) {
   if (conversions.length === 0) {
-    return (
-      <ReviewField caption="Conversion" value="No conversion metrics set" />
-    );
+    return <ReviewField caption="Conversion" value="No conversion URL setup" />;
   }
 
   function extractConversionError(

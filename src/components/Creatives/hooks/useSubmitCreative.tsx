@@ -9,26 +9,36 @@ import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { useHistory } from "react-router-dom";
 import { validCreativeFields } from "user/library";
 import _ from "lodash";
+import { useTrackMatomoEvent } from "hooks/useTrackWithMatomo";
 
 export function useSubmitCreative(props: { id: string }) {
+  const { trackMatomoEvent } = useTrackMatomoEvent();
   const history = useHistory();
   const isNew = props.id === "new";
   const { advertiser } = useAdvertiser();
   const refetchQueries = [
     refetchAdvertiserCreativesQuery({ advertiserId: advertiser.id }),
   ];
-  const onCompleted = () => history.replace("/user/main/ads");
+  const onCompleted = () => {
+    trackMatomoEvent("creative", isNew ? "creation-success" : "update-success");
+    history.replace("/user/main/ads");
+  };
+  const onError = () => {
+    trackMatomoEvent("creative", isNew ? "creation-failed" : "update-failed");
+  };
 
   const [createCreative, { error: createError, loading: createLoading }] =
     useCreateCreativeMutation({
       refetchQueries,
       onCompleted,
+      onError,
     });
 
   const [updateCreative, { error: updateError, loading: updateLoading }] =
     useUpdateCreativeMutation({
       refetchQueries,
       onCompleted,
+      onError,
     });
 
   const submit = useCallback(

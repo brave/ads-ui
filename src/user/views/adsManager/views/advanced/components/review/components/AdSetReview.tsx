@@ -5,6 +5,7 @@ import { ReviewField } from "./ReviewField";
 import { ReviewContainer } from "user/views/adsManager/views/advanced/components/review/components/ReviewContainer";
 import { CampaignFormat } from "graphql/types";
 import { CreativeSpecificPreview } from "components/Creatives/CreativeSpecificPreview";
+import { segmentNameWithNoDash } from "util/segment";
 
 interface Props {
   idx: number;
@@ -23,7 +24,7 @@ export function AdSetReview({ adSet, idx, errors, format }: Props) {
   const adSetError = errors;
 
   const mapToString = (arr: Segment[] | OS[] | Creative[]) => {
-    return arr.map((o) => o.name).join(", ");
+    return arr.map((o) => segmentNameWithNoDash(o.name)).join(", ");
   };
 
   const segmentValue = (v: string) => {
@@ -31,10 +32,10 @@ export function AdSetReview({ adSet, idx, errors, format }: Props) {
   };
 
   return (
-    <ReviewContainer name={`Ad Set ${idx + 1}`} path={`adSets?current=${idx}`}>
+    <ReviewContainer name={`Ad set ${idx + 1}`} path={`adSets?current=${idx}`}>
       <ReviewField
         caption="Name"
-        value={adSet.name || `Ad Set ${idx + 1}`}
+        value={adSet.name || `Ad set ${idx + 1}`}
         error={hasErrors ? adSetError?.name : ""}
       />
       {format !== CampaignFormat.NewsDisplayAd && (

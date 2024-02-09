@@ -1,7 +1,6 @@
 import { FormikTextField, useIsEdit } from "form/FormikHelpers";
 import { CardContainer } from "components/Card/CardContainer";
 import { CampaignDateRange } from "components/Campaigns/CampaignDateRange";
-import { LocationField } from "user/views/adsManager/views/advanced/components/campaign/fields/LocationField";
 import { Typography } from "@mui/material";
 import { FormatField } from "user/views/adsManager/views/advanced/components/campaign/fields/FormatField";
 import { AdvertiserPrice } from "user/hooks/useAdvertiserWithPrices";
@@ -9,16 +8,21 @@ import { BudgetField } from "user/views/adsManager/views/advanced/components/cam
 import { BillingModelSelect } from "user/views/adsManager/views/advanced/components/campaign/components/BillingModelSelect";
 import { CustomPriceSelect } from "user/views/adsManager/views/advanced/components/campaign/components/CustomPriceSelect";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { LearnMoreButton } from "components/Button/LearnMoreButton";
+import { LocationPicker } from "components/Location/LocationPicker";
+import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
 
 export function CampaignSettings(props: { prices: AdvertiserPrice[] }) {
   const { isDraft } = useIsEdit();
   const { advertiser } = useAdvertiser();
+  useTrackMatomoPageView({ documentTitle: "Campaign Settings" });
 
   return (
     <>
       <CardContainer header="Campaign Settings">
         <Typography variant="body2" gutterBottom>
-          Define how you want your campaign to run.
+          Define how you want your campaign to run.{" "}
+          <LearnMoreButton helpSection="getting-started/create-a-campaign" />
         </Typography>
 
         <FormikTextField name="name" label="Campaign Name" sx={{ mb: 1 }} />
@@ -26,6 +30,8 @@ export function CampaignSettings(props: { prices: AdvertiserPrice[] }) {
         <BudgetField />
 
         <CampaignDateRange />
+
+        {isDraft && <LocationPicker />}
       </CardContainer>
 
       <FormatField prices={props.prices} />
@@ -37,8 +43,6 @@ export function CampaignSettings(props: { prices: AdvertiserPrice[] }) {
 
         {advertiser.selfServiceSetPrice && <CustomPriceSelect />}
       </CardContainer>
-
-      {isDraft && <LocationField />}
     </>
   );
 }

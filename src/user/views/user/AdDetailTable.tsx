@@ -94,6 +94,7 @@ export function AdDetailTable<T extends { id: string }>({
       autoHeight
       disableRowSelectionOnClick
       hideFooterSelectedRowCount
+      getRowId={(row) => row.id}
       sx={{ borderStyle: "none" }}
       initialState={{
         sorting: {

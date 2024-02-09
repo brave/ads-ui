@@ -1,14 +1,16 @@
 import { Background } from "components/Background/Background";
 import { LandingPageAppBar } from "components/AppBar/LandingPageAppBar";
 import { Box, Button, Link, Stack, Toolbar, Typography } from "@mui/material";
-import goals from "../../../images.svg";
+import benefits from "../../../ad-benefits.svg";
 import { useIsAuthenticated } from "auth/hooks/queries/useIsAuthenticated";
 import { Link as RouterLink } from "react-router-dom";
 import { useIsMobile } from "hooks/useIsMobile";
 import { MobileAdsBenefits } from "auth/views/MobileAdsBenefits";
 import { GradientText } from "components/Typography/GradientText";
+import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
 
 export function LandingPage() {
+  useTrackMatomoPageView({ documentTitle: "Landing Page" });
   const isAuthenticated = useIsAuthenticated();
   const isMobile = useIsMobile();
 
@@ -67,7 +69,7 @@ export function LandingPage() {
         </Stack>
         {!isMobile && (
           <Box height="100%" width={600}>
-            <img src={goals} />
+            <img src={benefits} />
           </Box>
         )}
       </Stack>

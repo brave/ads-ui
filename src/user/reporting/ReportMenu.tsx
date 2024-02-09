@@ -71,7 +71,6 @@ export const ReportMenu = ({
           </ListItemIcon>
           Performance Report
         </MenuItem>
-        ,
         {hasVerifiedConversions && (
           <MenuItem onClick={() => setDialogue(true)} disabled={loading}>
             <ListItemIcon>
@@ -101,7 +100,7 @@ export const ReportMenu = ({
         <DialogTitle>Decrypt Conversion Data?</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To protect user&rsquo;s privacy, verified Ad conversion data is
+            To protect user&rsquo;s privacy, verified ad conversion data is
             encrypted so that the identities of converted users remain anonymous
             to Brave. You can decrypt the conversion data in the CSV file by
             providing your private key here. If no key is provided, you will

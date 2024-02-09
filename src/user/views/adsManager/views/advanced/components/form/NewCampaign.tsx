@@ -16,12 +16,16 @@ import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
 import { useAdvertiserWithPrices } from "user/hooks/useAdvertiserWithPrices";
 import { ErrorDetail } from "components/Error/ErrorDetail";
 import _ from "lodash";
+import { useTrackWithMatomo } from "hooks/useTrackWithMatomo";
 
 interface Params {
   draftId: string;
 }
 
 export function NewCampaign() {
+  const { trackMatomoEvent } = useTrackWithMatomo({
+    documentTitle: "New Campaign",
+  });
   const history = useHistory();
   const { fromDate } = useContext(FilterContext);
   const params = useParams<Params>();
@@ -42,6 +46,7 @@ export function NewCampaign() {
 
   const [mutation] = useCreateCampaignMutation({
     onCompleted(data) {
+      trackMatomoEvent("campaign", "creation-success");
       const campaign = data.createCampaign;
       localStorage.removeItem(params.draftId);
       setDrafts();
@@ -55,6 +60,7 @@ export function NewCampaign() {
       }
     },
     onError() {
+      trackMatomoEvent("campaign", "creation-failed");
       alert("Unable to create Campaign.");
     },
     refetchQueries: [

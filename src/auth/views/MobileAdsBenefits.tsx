@@ -10,13 +10,13 @@ export function MobileAdsBenefits() {
       <ListItem alignItems="center" disableGutters>
         <ItemCard
           primary="For all business sizes"
-          secondary="Start a Brave Ads campaign with as little as $100."
+          secondary="Start a Brave Ads campaign with as little as $500."
           image={allSizes}
         />
       </ListItem>
       <ListItem alignItems="center" disableGutters>
         <ItemCard
-          primary="Powerful Ad Formats"
+          primary="Powerful ad Formats"
           secondary="Browser-based delivery offers a new way to reach audiences on the Web."
           image={powerfulFormats}
         />

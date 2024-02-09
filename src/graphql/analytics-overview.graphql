@@ -42,7 +42,9 @@ fragment CampaignWithEngagements on Campaign {
   pacingIndex
   format
   adSets {
+    id
     conversions {
+      id
       type
       extractExternalId
     }

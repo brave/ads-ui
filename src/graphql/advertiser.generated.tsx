@@ -15,6 +15,18 @@ export type AdvertiserSummaryFragment = {
   publicKey?: string | null;
 };
 
+export type AdvertiserBillingAddressFragment = {
+  billingAddress?: {
+    id: string;
+    street1: string;
+    street2?: string | null;
+    city: string;
+    country: string;
+    state: string;
+    zipcode: string;
+  } | null;
+};
+
 export type AdvertiserFragment = {
   referrer?: string | null;
   phone?: string | null;
@@ -28,14 +40,6 @@ export type AdvertiserFragment = {
   createdAt: any;
   modifiedAt: any;
   publicKey?: string | null;
-  mailingAddress: {
-    street1: string;
-    street2?: string | null;
-    city: string;
-    country: string;
-    state: string;
-    zipcode: string;
-  };
 };
 
 export type AdvertiserQueryVariables = Types.Exact<{
@@ -163,6 +167,25 @@ export type AdvertiserPricesQuery = {
   } | null;
 };
 
+export type AdvertiserBillingAddressQueryVariables = Types.Exact<{
+  id: Types.Scalars["String"]["input"];
+}>;
+
+export type AdvertiserBillingAddressQuery = {
+  advertiser?: {
+    id: string;
+    billingAddress?: {
+      id: string;
+      street1: string;
+      street2?: string | null;
+      city: string;
+      country: string;
+      state: string;
+      zipcode: string;
+    } | null;
+  } | null;
+};
+
 export type UploadAdvertiserImageMutationVariables = Types.Exact<{
   input: Types.CreateAdvertiserImageInput;
 }>;
@@ -171,6 +194,19 @@ export type UploadAdvertiserImageMutation = {
   createAdvertiserImage: { name: string };
 };
 
+export const AdvertiserBillingAddressFragmentDoc = gql`
+  fragment AdvertiserBillingAddress on Advertiser {
+    billingAddress {
+      id
+      street1
+      street2
+      city
+      country
+      state
+      zipcode
+    }
+  }
+`;
 export const AdvertiserSummaryFragmentDoc = gql`
   fragment AdvertiserSummary on Advertiser {
     id
@@ -190,14 +226,6 @@ export const AdvertiserFragmentDoc = gql`
     phone
     selfServiceManageCampaign
     selfServiceSetPrice
-    mailingAddress {
-      street1
-      street2
-      city
-      country
-      state
-      zipcode
-    }
   }
   ${AdvertiserSummaryFragmentDoc}
 `;
@@ -596,6 +624,86 @@ export function refetchAdvertiserPricesQuery(
   variables: AdvertiserPricesQueryVariables,
 ) {
   return { query: AdvertiserPricesDocument, variables: variables };
+}
+export const AdvertiserBillingAddressDocument = gql`
+  query advertiserBillingAddress($id: String!) {
+    advertiser(id: $id) {
+      id
+      ...AdvertiserBillingAddress
+    }
+  }
+  ${AdvertiserBillingAddressFragmentDoc}
+`;
+
+/**
+ * __useAdvertiserBillingAddressQuery__
+ *
+ * To run a query within a React component, call `useAdvertiserBillingAddressQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdvertiserBillingAddressQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdvertiserBillingAddressQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useAdvertiserBillingAddressQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    AdvertiserBillingAddressQuery,
+    AdvertiserBillingAddressQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    AdvertiserBillingAddressQuery,
+    AdvertiserBillingAddressQueryVariables
+  >(AdvertiserBillingAddressDocument, options);
+}
+export function useAdvertiserBillingAddressLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    AdvertiserBillingAddressQuery,
+    AdvertiserBillingAddressQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    AdvertiserBillingAddressQuery,
+    AdvertiserBillingAddressQueryVariables
+  >(AdvertiserBillingAddressDocument, options);
+}
+export function useAdvertiserBillingAddressSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<
+    AdvertiserBillingAddressQuery,
+    AdvertiserBillingAddressQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<
+    AdvertiserBillingAddressQuery,
+    AdvertiserBillingAddressQueryVariables
+  >(AdvertiserBillingAddressDocument, options);
+}
+export type AdvertiserBillingAddressQueryHookResult = ReturnType<
+  typeof useAdvertiserBillingAddressQuery
+>;
+export type AdvertiserBillingAddressLazyQueryHookResult = ReturnType<
+  typeof useAdvertiserBillingAddressLazyQuery
+>;
+export type AdvertiserBillingAddressSuspenseQueryHookResult = ReturnType<
+  typeof useAdvertiserBillingAddressSuspenseQuery
+>;
+export type AdvertiserBillingAddressQueryResult = Apollo.QueryResult<
+  AdvertiserBillingAddressQuery,
+  AdvertiserBillingAddressQueryVariables
+>;
+export function refetchAdvertiserBillingAddressQuery(
+  variables: AdvertiserBillingAddressQueryVariables,
+) {
+  return { query: AdvertiserBillingAddressDocument, variables: variables };
 }
 export const UploadAdvertiserImageDocument = gql`
   mutation uploadAdvertiserImage($input: CreateAdvertiserImageInput!) {

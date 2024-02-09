@@ -13,9 +13,11 @@ import { CampaignForm, initialAdSet } from "user/views/adsManager/types";
 import { useRef } from "react";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { useAdvertiserCreatives } from "user/hooks/useAdvertiserCreatives";
+import { useTrackMatomoEvent } from "hooks/useTrackWithMatomo";
 
 export function NewAdSet() {
   const { creatives } = useAdvertiserCreatives();
+  const { trackMatomoEvent } = useTrackMatomoEvent();
   const history = useHistory();
   const { values } = useFormikContext<CampaignForm>();
   const params = new URLSearchParams(history.location.search);
@@ -56,7 +58,7 @@ export function NewAdSet() {
                   }
                   replace
                 >
-                  {adSet.name || `Ad Set ${idx + 1}`}
+                  {adSet.name || `Ad set ${idx + 1}`}
                 </Link>
                 {idx > 0 && !adSet.id && (
                   <Tooltip title="Remove">
@@ -66,6 +68,7 @@ export function NewAdSet() {
                         selected.current = newIdx;
                         history.replace(`?current=${newIdx}`);
                         helper.remove(idx);
+                        trackMatomoEvent("adSet", "remove-new-ad-set");
                       }}
                     >
                       <RemoveCircleOutlineIcon fontSize="small" color="error" />
@@ -80,7 +83,10 @@ export function NewAdSet() {
                 pb={0}
                 pt={0}
                 component={Button}
-                onClick={() => helper.push(initial)}
+                onClick={() => {
+                  trackMatomoEvent("adSet", "add-new-ad-set");
+                  helper.push(initial);
+                }}
                 border="1px solid #ededed"
               >
                 <Typography variant="overline" color="primary">

@@ -18,7 +18,7 @@ export function ShowAdsButton() {
           await helper.setValue(false);
         }}
       >
-        Use existing Ads
+        Use existing ads
       </Link>
     );
   }

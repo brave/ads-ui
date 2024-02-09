@@ -23,6 +23,19 @@ export function NameField() {
         autoComplete="email"
       />
 
+      <FormikTextField
+        name="advertiser.name"
+        label="Business name"
+        margin="dense"
+      />
+
+      <FormikTextField
+        name="advertiser.url"
+        label="Business website"
+        autoComplete="url"
+        margin="dense"
+      />
+
       <FormikSelect
         label="Where did you hear about Brave Ads"
         name="advertiser.marketingChannel"
@@ -60,7 +73,7 @@ export function NameField() {
         maxRows={10}
         margin="dense"
         name="advertiser.description"
-        label="Tell us why your interested in Brave Ads"
+        label="Tell us why you're interested in Brave Ads"
       />
 
       <MarketingOptIn />
