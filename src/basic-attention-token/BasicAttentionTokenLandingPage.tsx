@@ -45,8 +45,9 @@ export function BasicAttentionTokenLandingPage() {
             </Typography>
 
             {isMobile && (
-              <Box display="flex" alignSelf="center">
-                <img src={mobileAd} width="100%" height={400} />
+              <Box display="flex" alignSelf="center" flexDirection="column">
+                <img src={mobileAd} width="100%" height={350} />
+                <img src={bat} />
               </Box>
             )}
 
@@ -104,7 +105,6 @@ function AdImageContainer() {
       <img
         src={bat}
         width={400}
-        height={200}
         style={{
           transform: "translateX(40%) translateY(-90%)",
         }}
