@@ -20,6 +20,7 @@ export function LandingPageAppBar() {
   const isMobile = useIsMobile();
   const isContact = match.url.includes("contact");
   const isSearch = match.url.includes("search");
+  const isBAT = match.url.includes("bat");
 
   const GetStarted = () => (
     <RouterLink
@@ -48,6 +49,18 @@ export function LandingPageAppBar() {
             color="text.primary"
           >
             Brave Search
+          </Typography>
+        </RouterLink>
+      ) : undefined,
+    },
+    {
+      component: !isBAT ? (
+        <RouterLink to={`/bat`} style={{ textDecoration: "none" }}>
+          <Typography
+            variant={isMobile ? "body2" : "subtitle1"}
+            color="text.primary"
+          >
+            Basic Attention Token
           </Typography>
         </RouterLink>
       ) : undefined,
