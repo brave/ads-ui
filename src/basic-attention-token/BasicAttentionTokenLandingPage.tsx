@@ -9,6 +9,7 @@ import { Box, Button, Link, Stack, Toolbar, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import notification from "../../newsfeed.png";
 import mobileAd from "../../news-mobile.png";
+import bat from "../../basic-attention-token.svg";
 
 export function BasicAttentionTokenLandingPage() {
   useTrackMatomoPageView({ documentTitle: "BAT Landing Page" });
@@ -51,11 +52,7 @@ export function BasicAttentionTokenLandingPage() {
 
             <LaunchCampaignButton />
           </Stack>
-          {!isMobile && (
-            <Box display="flex" alignSelf="center">
-              <img src={notification} width="100%" height={600} />
-            </Box>
-          )}
+          {!isMobile && <AdImageContainer />}
         </Stack>
       </Box>
     </Background>
@@ -91,5 +88,27 @@ function LaunchCampaignButton() {
         Learn more about BAT
       </Link>
     </Stack>
+  );
+}
+
+function AdImageContainer() {
+  return (
+    <Box
+      display="flex"
+      alignSelf="center"
+      flexDirection="column"
+      height={600}
+      overflow="hidden"
+    >
+      <img src={notification} width="100%" height={600} />
+      <img
+        src={bat}
+        width={400}
+        height={200}
+        style={{
+          transform: "translateX(40%) translateY(-90%)",
+        }}
+      />
+    </Box>
   );
 }
