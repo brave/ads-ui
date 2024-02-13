@@ -15,8 +15,8 @@ export const AdvertiserSchema = object().shape({
     street1: string().label("Street address").required(),
     street2: string().label("Street address line 2").nullable(),
     city: string().label("City").required(),
-    state: string().label("State / Province").required(),
+    state: string().label("State / Province").nullable(),
     country: string().label("Country").required(),
-    zipcode: string().label("Zip / Postal Code").required(),
+    zipcode: string().label("Zip / Postal Code").nullable(),
   }),
 });
