@@ -102,13 +102,7 @@ export function AdvertiserDetailsForm() {
                   </Typography>
                 </Stack>
 
-                {!data?.advertiser?.billingAddress && (
-                  <>
-                    <Divider sx={{ mt: 1, mb: 1 }} />
-
-                    <AdvertiserAddress />
-                  </>
-                )}
+                <AdvertiserAddress address={data?.advertiser?.billingAddress} />
 
                 <Divider sx={{ mt: 1, mb: 1 }} />
 
