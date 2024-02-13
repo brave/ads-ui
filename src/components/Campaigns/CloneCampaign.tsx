@@ -58,11 +58,11 @@ export function CloneCampaign({ campaign, disabled }: Props) {
 
   const doClone = async () => {
     if (campaign) {
-      getCampaign({
+      void getCampaign({
         variables: { id: campaign.id },
         onCompleted(data) {
           if (data.campaign) {
-            copyCampaign({
+            void copyCampaign({
               variables: {
                 input: createCampaignFromFragment(data.campaign, userId),
               },
@@ -121,7 +121,7 @@ export function CloneCampaign({ campaign, disabled }: Props) {
             disabled={loading || getLoading}
             onClick={(e) => {
               e.preventDefault();
-              doClone();
+              void doClone();
             }}
           >
             Clone

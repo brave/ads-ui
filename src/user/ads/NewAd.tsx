@@ -20,8 +20,8 @@ export function NewAd() {
 
   useEffect(() => {
     if (!meta.value) {
-      newCreative.setValue(initialCreative);
-      newCreative.setTouched(false);
+      void newCreative.setValue(initialCreative);
+      void newCreative.setTouched(false);
     }
   }, [meta.value]);
 
@@ -38,7 +38,7 @@ export function NewAd() {
         borderRadius="13px"
         border="1px solid #e2e2e2"
         onClick={() => {
-          helper.setValue(!meta.value);
+          void helper.setValue(!meta.value);
           setIsShowingAds(false);
         }}
       >

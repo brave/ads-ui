@@ -50,7 +50,7 @@ export function useGetImagePreviewUrl(props: { url: string }) {
         return;
       }
 
-      getUnpaddedAsDataUrl(blob)
+      void getUnpaddedAsDataUrl(blob)
         .then((res) => {
           setData(res);
         })
@@ -59,7 +59,7 @@ export function useGetImagePreviewUrl(props: { url: string }) {
         });
     }
 
-    fetchImage(props.url);
+    void fetchImage(props.url);
   }, [props.url]);
 
   return { data, loading, error };

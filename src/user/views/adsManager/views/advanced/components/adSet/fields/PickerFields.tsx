@@ -17,7 +17,7 @@ export function PickerFields({ index }: Props) {
 
   useEffect(() => {
     if (format.value === CampaignFormat.NewsDisplayAd) {
-      helper.setValue([{ code: "Svp7l-zGN", name: "Untargeted" }]);
+      void helper.setValue([{ code: "Svp7l-zGN", name: "Untargeted" }]);
     }
   }, [format.value]);
 

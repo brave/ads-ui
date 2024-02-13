@@ -65,7 +65,7 @@ export function CreativeStatusSwitch({ creative }: Props) {
         onChange={(e) => {
           const theState = e.target.checked ? "active" : "paused";
           setCreativeState(theState);
-          campaigns({
+          void campaigns({
             onCompleted(data) {
               const campaigns = data.creativeCampaigns.filter(
                 (c) => !isReviewableState(c.state),
@@ -73,7 +73,7 @@ export function CreativeStatusSwitch({ creative }: Props) {
               if (campaigns.length > 1) {
                 setRelatedCampaigns(_.uniqBy(campaigns, "id"));
               } else {
-                update({
+                void update({
                   variables: {
                     id: creative.id,
                     input: { ...input, state: theState },
@@ -119,7 +119,7 @@ export function CreativeStatusSwitch({ creative }: Props) {
           <Button
             variant="contained"
             onClick={() => {
-              update({
+              void update({
                 variables: {
                   id: creative.id,
                   input: { ...input, state: creativeState },

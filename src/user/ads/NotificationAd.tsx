@@ -18,7 +18,7 @@ export function NotificationAd(props: NotificationAdProps) {
   const [, , code] = useField<string>(withName("type.code"));
 
   useEffect(() => {
-    code.setValue("notification_all_v1");
+    void code.setValue("notification_all_v1");
   }, []);
 
   if (props.useContainer === false) {

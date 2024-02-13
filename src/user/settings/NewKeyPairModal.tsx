@@ -49,7 +49,7 @@ export function NewKeyPairModal({ advertiser }: Props) {
 
   const saveKeypair = () => {
     setSaving(true);
-    updateAdvertiser({
+    void updateAdvertiser({
       variables: {
         updateAdvertiserInput: {
           id: advertiser.id,

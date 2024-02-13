@@ -47,7 +47,7 @@ export const PlatformPicker = ({ idx }: Props) => {
       isOptionEqualToValue={(option, value) => option.code === value.code}
       value={formProps.value}
       onChange={(_ev, value) => {
-        helper.setValue(_.sortBy(value, "name"));
+        void helper.setValue(_.sortBy(value, "name"));
       }}
       onBlur={() => helper.setTouched(true)}
     />

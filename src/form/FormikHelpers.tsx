@@ -119,7 +119,7 @@ export const FormikRadioGroup = (
         {...field}
         value={meta.value}
         onChange={(e, nv) => {
-          helper.setValue(nv);
+          void helper.setValue(nv);
           if (props.onChange) props.onChange(e);
         }}
       />

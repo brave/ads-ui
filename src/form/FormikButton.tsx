@@ -76,7 +76,7 @@ export const FormikSubmitButton = ({
           color="primary"
           variant="contained"
           onClick={() => {
-            submitForm();
+            void submitForm();
           }}
           size="large"
           disabled={!saveEnabled || isSubmitting}

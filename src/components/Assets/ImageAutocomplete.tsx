@@ -55,7 +55,7 @@ export function ImageAutocomplete(props: { name: string }) {
           return [...filtered, { image: undefined, label: `Upload new image` }];
         }}
         onChange={(e, nv) => {
-          imageUrl.setValue(nv ? nv.image : undefined);
+          void imageUrl.setValue(nv ? nv.image : undefined);
           setCreateImage(nv != null && nv.image === undefined);
         }}
         isOptionEqualToValue={(option, value) => option.image === value.image}
