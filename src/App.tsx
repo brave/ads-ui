@@ -21,6 +21,7 @@ import { BraveAdsContactFrame } from "auth/registration/BraveAdsContactFrame";
 import { SearchLandingPage } from "search/SearchLandingPage";
 import { VERSION } from "util/version";
 import { useMatomo } from "@jonkoops/matomo-tracker-react";
+import { BasicAttentionTokenLandingPage } from "basic-attention-token/BasicAttentionTokenLandingPage";
 
 const Protected = () => {
   return <Redirect to="/auth/link" />;
@@ -57,6 +58,7 @@ export function App() {
             <Route path="/register" component={Register} />
             <Route path="/contact" component={BraveAdsContactFrame} />
             <Route path="/search" component={SearchLandingPage} />
+            <Route path="/bat" component={BasicAttentionTokenLandingPage} />
             <Route
               path="/user/main"
               component={isAuthenticated ? User : Protected}

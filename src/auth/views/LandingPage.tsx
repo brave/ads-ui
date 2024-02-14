@@ -24,7 +24,7 @@ export function LandingPage() {
         spacing={10}
         justifyContent="center"
       >
-        <Stack sx={{ maxWidth: "430px" }} spacing={{ xs: 3, md: 6 }}>
+        <Stack sx={{ maxWidth: "550px" }} spacing={3}>
           <Typography variant="h3" textAlign="left">
             <GradientText text="Privacy-forward" /> advertising made simple
           </Typography>
@@ -33,6 +33,12 @@ export function LandingPage() {
             Reach and convert new customers through premium advertising on the
             Brave browser and search engine.
           </Typography>
+
+          {!isAuthenticated && (
+            <Typography variant="subtitle1" color="primary" fontWeight={500}>
+              Get 50% your first campaign when you pay in Basic Attention Token
+            </Typography>
+          )}
 
           <Box display="flex" flexDirection="column">
             <Button
