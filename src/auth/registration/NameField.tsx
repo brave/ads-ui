@@ -2,22 +2,25 @@ import { Box } from "@mui/material";
 import { FormikSelect, FormikTextField } from "form/FormikHelpers";
 import { MarketingOptIn } from "auth/registration/MarketingOptIn";
 import { useField } from "formik";
+import { msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 
 export function NameField() {
   const [, meta] = useField("advertiser.marketingChannel");
+  const { _ } = useLingui();
 
   return (
     <Box flexGrow={1}>
       <FormikTextField
         name="fullName"
-        label="Full name"
+        label={_(msg`Full name`)}
         margin="dense"
         autoComplete="given-name"
       />
 
       <FormikTextField
         name="email"
-        label="Email"
+        label={_(msg`Email`)}
         type="email"
         margin="dense"
         autoComplete="email"
@@ -25,45 +28,54 @@ export function NameField() {
 
       <FormikTextField
         name="advertiser.name"
-        label="Business name"
+        label={_(msg`Business name`)}
         margin="dense"
       />
 
       <FormikTextField
         name="advertiser.url"
-        label="Business website"
+        label={_(msg`Business website`)}
         autoComplete="url"
         margin="dense"
       />
 
       <FormikSelect
-        label="Where did you hear about Brave Ads"
+        label={_(msg`Where did you hear about Brave Ads`)}
         name="advertiser.marketingChannel"
         margin="dense"
         options={[
           {
-            label: "While looking up alternatives to Google Ads",
+            label: _(msg`While looking up alternatives to Google Ads`),
             value: "google-ad-alternative",
           },
-          { label: "At a marketing/media conference", value: "conference" },
           {
-            label: "From an influential person I follow online",
+            label: _(msg`At a marketing/media conference`),
+            value: "conference",
+          },
+          {
+            label: _(msg`From an influential person I follow online`),
             value: "influencer",
           },
-          { label: "On a podcast I listen to", value: "podcast" },
-          { label: "In a newsletter I subscribe to", value: "newsletter" },
-          { label: "From a friend/colleague", value: "friend-referral" },
-          { label: "In a blog post/news article", value: "blog-post" },
-          { label: "In a post by Brave on LinkedIn", value: "brave-linkedin" },
-          { label: "In a video on YouTube", value: "youtube" },
-          { label: "Other (please specify)", value: "other" },
+          { label: _(msg`On a podcast I listen to`), value: "podcast" },
+          {
+            label: _(msg`In a newsletter I subscribe to`),
+            value: "newsletter",
+          },
+          { label: _(msg`From a friend/colleague`), value: "friend-referral" },
+          { label: _(msg`In a blog post/news article`), value: "blog-post" },
+          {
+            label: _(msg`In a post by Brave on LinkedIn`),
+            value: "brave-linkedin",
+          },
+          { label: _(msg`In a video on YouTube`), value: "youtube" },
+          { label: _(msg`Other (please specify)`), value: "other" },
         ]}
       />
       {meta.value === "other" && (
         <FormikTextField
           margin="dense"
           name="advertiser.other"
-          label="Other source"
+          label={_(msg`Other source`)}
         />
       )}
 
@@ -73,7 +85,7 @@ export function NameField() {
         maxRows={10}
         margin="dense"
         name="advertiser.description"
-        label="Tell us why you're interested in Brave Ads"
+        label={_(msg`Tell us why you're interested in Brave Ads`)}
       />
 
       <MarketingOptIn />

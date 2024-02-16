@@ -78,6 +78,7 @@ export const initialConversion: Conversion = {
 export const initialCreative: Creative = {
   name: "",
   advertiserId: "",
+  // eslint-disable-next-line lingui/no-unlocalized-strings
   targetUrlValid: "Target URL validation incomplete",
   payloadNotification: {
     title: "",

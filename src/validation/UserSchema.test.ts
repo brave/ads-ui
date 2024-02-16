@@ -7,7 +7,7 @@ const validUser = {
 };
 
 it("should pass on a valid object", () => {
-  UserSchema.validateSync(validUser);
+  UserSchema().validateSync(validUser);
 });
 
 it("should fail if the campaign format is invalid", () => {
@@ -15,5 +15,5 @@ it("should fail if the campaign format is invalid", () => {
     draft.email = "";
   });
 
-  expect(() => UserSchema.validateSync(c)).toThrowError();
+  expect(() => UserSchema().validateSync(c)).toThrowError();
 });

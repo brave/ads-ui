@@ -8,11 +8,14 @@ import { useIsMobile } from "hooks/useIsMobile";
 import { MobileAdsBenefits } from "auth/views/MobileAdsBenefits";
 import { GradientText } from "components/Typography/GradientText";
 import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
+import { msg, Trans } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 
 export function LandingPage() {
   useTrackMatomoPageView({ documentTitle: "Landing Page" });
   const isAuthenticated = useIsAuthenticated();
   const isMobile = useIsMobile();
+  const { _ } = useLingui();
 
   return (
     <Background>
@@ -26,17 +29,23 @@ export function LandingPage() {
       >
         <Stack sx={{ maxWidth: "550px" }} spacing={3}>
           <Typography variant="h3" textAlign="left">
-            <GradientText text="Privacy-forward" /> advertising made simple
+            <GradientText text={msg`Privacy-forward`} />{" "}
+            {_(msg`advertising made simple`)}
           </Typography>
 
           <Typography variant="h6">
-            Reach and convert new customers through premium advertising on the
-            Brave browser and search engine.
+            <Trans>
+              Reach and convert new customers through premium advertising on the
+              Brave browser and search engine.
+            </Trans>
           </Typography>
 
           {!isAuthenticated && (
             <Typography variant="subtitle1" color="primary" fontWeight={500}>
-              Get 50% your first campaign when you pay in Basic Attention Token
+              <Trans>
+                Get 50% your first campaign when you pay in Basic Attention
+                Token
+              </Trans>
             </Typography>
           )}
 
@@ -52,11 +61,15 @@ export function LandingPage() {
               }}
               to={isAuthenticated ? "/user/main" : "/register"}
             >
-              {isAuthenticated ? "Dashboard" : "Get Started"}
+              {isAuthenticated ? (
+                <Trans>Dashboard</Trans>
+              ) : (
+                <Trans>Get started</Trans>
+              )}
             </Button>
             {!isMobile && !isAuthenticated && (
               <Typography variant="subtitle1">
-                Already have an account?
+                <Trans>Already have an account?</Trans>
                 <Link
                   variant="subtitle1"
                   underline="none"
@@ -65,7 +78,7 @@ export function LandingPage() {
                   to="/auth/link"
                   sx={{ ml: 1 }}
                 >
-                  Log in
+                  <Trans>Log in</Trans>
                 </Link>
               </Typography>
             )}

@@ -6,11 +6,14 @@
 // FROM: https://github.com/brave/brave-core/blob/976e81322aab22de9bb3670f2cec23da76a1600f/components/brave_extension/extension/brave_extension/background/today/privateCDN.ts
 
 import { useEffect, useMemo, useState } from "react";
+import { useLingui } from "@lingui/react";
+import { msg } from "@lingui/macro";
 
 export function useGetImagePreviewUrl(props: { url: string }) {
   const [data, setData] = useState<string>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
+  const { _ } = useLingui();
 
   const fetchImageResource: Promise<ArrayBuffer> = useMemo(async () => {
     const result = await fetchResource(props.url);
@@ -28,7 +31,7 @@ export function useGetImagePreviewUrl(props: { url: string }) {
 
         if (result.status !== 403) {
           clearInterval(intrvl);
-          reject(new Error("Unable to fetch image"));
+          reject(new Error(_(msg`Unable to fetch image`)));
         }
       }, 2000);
     });

@@ -3,11 +3,12 @@ import {
   GridFilterInputValue,
   GridFilterItem,
 } from "@mui/x-data-grid";
+import { t } from "@lingui/macro";
 
 export function stringFilterOperators() {
   return [
     {
-      label: "is not",
+      label: t`is not`,
       value: "not",
       getApplyFilterFn: (field: GridFilterItem) => (params: any) =>
         params.value !== field.value,

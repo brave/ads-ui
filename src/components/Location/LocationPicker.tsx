@@ -5,6 +5,8 @@ import { useField } from "formik";
 import _ from "lodash";
 import { useActiveGeocodesQuery } from "graphql/common.generated";
 import { GeocodeInput } from "graphql/types";
+import { useLingui } from "@lingui/react";
+import { msg, Trans } from "@lingui/macro";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -14,12 +16,13 @@ export const LocationPicker = () => {
   const sorted = _.sortBy(data?.activeGeocodes?.data ?? [], "code");
   const [formProps, meta, helper] = useField<GeocodeInput[]>("geoTargets");
   const errorMessage = meta.error;
+  const { _: lingui } = useLingui();
 
   return (
     <Autocomplete
       sx={{ mt: 2 }}
       limitTags={20}
-      getLimitTagsText={(cnt) => `+${cnt} more`}
+      getLimitTagsText={(count) => <Trans>+{count} more</Trans>}
       multiple
       loading={sorted.length === 0}
       options={sorted}
@@ -40,11 +43,13 @@ export const LocationPicker = () => {
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Country Targeting"
+          label={lingui(msg`Country Targeting`)}
           helperText={
             meta.touched && !!errorMessage
               ? errorMessage
-              : "Select the geographic regions where your ads will be shown."
+              : lingui(
+                  msg`Select the geographic regions where your ads will be shown.`,
+                )
           }
           error={!!errorMessage && meta.touched}
         />

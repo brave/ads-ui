@@ -9,6 +9,7 @@ import MiniSideBar from "components/Drawer/MiniSideBar";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { FilterContext } from "state/context";
 import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
+import { Trans, msg } from "@lingui/macro";
 
 export function CampaignView() {
   useTrackMatomoPageView({ documentTitle: "Advertiser Campaigns" });
@@ -29,7 +30,7 @@ export function CampaignView() {
     return (
       <ErrorDetail
         error={error}
-        additionalDetails="Unable to retrieve Campaign data."
+        additionalDetails={msg`Unable to retrieve Campaign data.`}
       />
     );
   }
@@ -37,7 +38,7 @@ export function CampaignView() {
   return (
     <MiniSideBar>
       <CardContainer
-        header="Campaigns"
+        header={<Trans>Campaigns</Trans>}
         sx={{
           flexGrow: 1,
           overflowX: "auto",

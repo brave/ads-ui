@@ -19,6 +19,7 @@ import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
 import { UpdateAdSetInput } from "graphql/types";
 import { toLocaleString } from "util/bignumber";
 import BigNumber from "bignumber.js";
+import { Trans } from "@lingui/macro";
 
 export type CellValueRenderer = (value: any) => ReactNode;
 const ADS_DEFAULT_TIMEZONE = "America/New_York";
@@ -38,7 +39,7 @@ function formatDateForTooltip(dt: Date): ReactElement {
         })}
       </Box>
       <Box mt={1}>
-        In your local time this is
+        <Trans>In your local time this is</Trans>
         <br />
         {format(dt, TOOLTIP_FORMAT, { locale: enUS })}
       </Box>
@@ -76,7 +77,7 @@ export const StandardRenderers: Record<string, CellValueRenderer> = {
 
     return null;
   },
-  yesno: (v) => <Box>{v ? "Yes" : "No"}</Box>,
+  yesno: (v) => <Box>{v ? <Trans>Yes</Trans> : <Trans>No</Trans>}</Box>,
 };
 
 export function renderMonetaryAmount(

@@ -7,18 +7,21 @@ import { useState } from "react";
 import { getDefaultTimezone, TimeZonePicker } from "../TimeZonePicker";
 import { TimezoneAwareDatePicker } from "../TimeZonePicker/TimezoneAwareDatePicker";
 import { useIsEdit } from "form/FormikHelpers";
+import { useLingui } from "@lingui/react";
+import { msg } from "@lingui/macro";
 
 export const CampaignDateRange = () => {
   const { isDraft } = useIsEdit();
   const [tz, setTz] = useState<string>(getDefaultTimezone());
   const [, startMeta, startHelper] = useField("startAt");
   const [, endMeta, endHelper] = useField("endAt");
+  const { _ } = useLingui();
 
   return (
     <Box>
       <Stack direction="row" spacing={2} alignItems="center" mt={1} mb={1}>
         <TimezoneAwareDatePicker
-          label="Start Date"
+          label={_(msg`Start Date`)}
           tz={tz}
           value={parseISO(startMeta.value)}
           error={!!startMeta.error}
@@ -33,7 +36,7 @@ export const CampaignDateRange = () => {
         <ArrowForwardIcon />
 
         <TimezoneAwareDatePicker
-          label="End Date"
+          label={_(msg`End Date`)}
           tz={tz}
           value={parseISO(endMeta.value)}
           error={!!endMeta.error}

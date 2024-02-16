@@ -1,4 +1,5 @@
 import BigNumber from "bignumber.js";
+import { MessageDescriptor } from "@lingui/core";
 
 export type Metrics = {
   metric1?: { key: keyof StatsMetric; active: boolean };
@@ -50,7 +51,7 @@ export type CreativeMetric = StatsMetric & {
 
 export interface Option {
   value: string;
-  label: string;
+  label: MessageDescriptor;
 }
 
 export interface OverviewDetail {

@@ -12,6 +12,8 @@ import { useRef, useState } from "react";
 import { IAdvertiser } from "auth/context/auth.interface";
 import { CardContainer } from "components/Card/CardContainer";
 import { modalStyles } from "theme";
+import { msg, Trans } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 
 interface Props {
   advertiser: IAdvertiser;
@@ -19,6 +21,7 @@ interface Props {
 
 export function NewKeyPairModal({ advertiser }: Props) {
   const [saving, setSaving] = useState(false);
+  const { _ } = useLingui();
   const publicKey = useRef<string | null>();
   publicKey.current = advertiser.publicKey;
   const [newPublicKey, setNewPublicKey] = useState("");
@@ -43,7 +46,7 @@ export function NewKeyPairModal({ advertiser }: Props) {
       window.location.reload();
     },
     onError() {
-      alert("Unable to update Advertiser.");
+      alert(_(msg`Unable to update Advertiser.`));
     },
   });
 
@@ -79,21 +82,25 @@ export function NewKeyPairModal({ advertiser }: Props) {
 
   return (
     <>
-      <CardContainer header="Account Settings">
+      <CardContainer header={_(msg`Account Settings`)}>
         <Typography variant="h6" gutterBottom>
-          Keypairs
+          <Trans>Keypairs</Trans>
         </Typography>
 
         <Typography>
-          Generate a keypair for your organization. Brave Ads will use your
-          organization&rsquo;s public key to sign and encrypt conversion data.
-          Only your organization will have access to the private key, which can
-          be used to decrypt and view conversion data.
+          <Trans>
+            Generate a keypair for your organization. Brave Ads will use your
+            organization&rsquo;s public key to sign and encrypt conversion data.
+            Only your organization will have access to the private key, which
+            can be used to decrypt and view conversion data.
+          </Trans>
         </Typography>
 
         {publicKey.current !== "" && (
           <Box marginTop={1}>
-            <Typography>Your organization&rsquo;s public key:</Typography>
+            <Typography>
+              <Trans>Your organization&rsquo;s public key:</Trans>
+            </Typography>
             <Box component="pre" marginY={0}>
               {publicKey.current}
             </Box>
@@ -109,7 +116,7 @@ export function NewKeyPairModal({ advertiser }: Props) {
               alignSelf: "center",
             }}
           >
-            New Keypair
+            <Trans>New Keypair</Trans>
           </Button>
         </Box>
       </CardContainer>
@@ -119,13 +126,16 @@ export function NewKeyPairModal({ advertiser }: Props) {
           {newKeypairModalState === "disclaimer" && (
             <Box maxWidth={600}>
               <Typography variant="h6" color="primary" gutterBottom>
-                Create new keypair?
+                <Trans>Create new keypair?</Trans>
               </Typography>
 
               <Typography>
-                You are attempting to create a new keypair, this will replace
-                any of your organization&rsquo;s existing keypairs. Please note,
-                previous keypairs cannot be retrieved or used once replaced.
+                <Trans>
+                  You are attempting to create a new keypair, this will replace
+                  any of your organization&rsquo;s existing keypairs. Please
+                  note, previous keypairs cannot be retrieved or used once
+                  replaced.
+                </Trans>
               </Typography>
 
               <Stack
@@ -135,7 +145,7 @@ export function NewKeyPairModal({ advertiser }: Props) {
                 marginTop={4}
               >
                 <Button variant="outlined" onClick={closeNewKeypairModal}>
-                  Cancel
+                  <Trans>Cancel</Trans>
                 </Button>
 
                 <Button
@@ -143,7 +153,7 @@ export function NewKeyPairModal({ advertiser }: Props) {
                   color="primary"
                   onClick={() => setNewKeypairModalState("privateKey")}
                 >
-                  Continue
+                  <Trans>Continue</Trans>
                 </Button>
               </Stack>
             </Box>
@@ -151,11 +161,11 @@ export function NewKeyPairModal({ advertiser }: Props) {
           {newKeypairModalState === "privateKey" && (
             <Box maxWidth={600}>
               <Typography variant="h6" color="primary" gutterBottom>
-                Create new keypair?
+                <Trans>Create new keypair?</Trans>
               </Typography>
 
               <Typography gutterBottom>
-                Your organization&rsquo;s new private key will be:
+                <Trans>Your organization&rsquo;s new public key will be:</Trans>
               </Typography>
 
               <TextField
@@ -168,12 +178,14 @@ export function NewKeyPairModal({ advertiser }: Props) {
               />
 
               <Typography mt={2} gutterBottom>
-                Copy this and keep this safe!
+                <Trans>Copy this and keep this safe!</Trans>
               </Typography>
               <Typography>
-                Brave cannot recover this key, which has been generated in your
-                browser. You will need to confirm this private key on the next
-                step before changes are saved.
+                <Trans>
+                  Brave cannot recover this key, which has been generated in
+                  your browser. You will need to confirm this private key on the
+                  next step before changes are saved.
+                </Trans>
               </Typography>
               <Stack
                 direction="row"
@@ -182,7 +194,7 @@ export function NewKeyPairModal({ advertiser }: Props) {
                 marginTop={4}
               >
                 <Button variant="outlined" onClick={closeNewKeypairModal}>
-                  Cancel
+                  <Trans>Cancel</Trans>
                 </Button>
 
                 <Button
@@ -190,7 +202,7 @@ export function NewKeyPairModal({ advertiser }: Props) {
                   color="primary"
                   onClick={() => setNewKeypairModalState("confirmation")}
                 >
-                  Continue
+                  <Trans>Continue</Trans>
                 </Button>
               </Stack>
             </Box>
@@ -198,11 +210,13 @@ export function NewKeyPairModal({ advertiser }: Props) {
           {newKeypairModalState === "confirmation" && (
             <Box maxWidth={600}>
               <Typography variant="h6" color="primary" gutterBottom>
-                Create new keypair?
+                <Trans>Create new keypair?</Trans>
               </Typography>
 
               <Typography gutterBottom>
-                Please confirm your organization&rsquo;s new private key:
+                <Trans>
+                  Please confirm your organization&rsquo;s new private key:
+                </Trans>
               </Typography>
 
               <TextField
@@ -212,8 +226,10 @@ export function NewKeyPairModal({ advertiser }: Props) {
               />
 
               <Typography gutterBottom marginTop={2}>
-                Once confirmed, your organization&rsquo;s keypair will be
-                replaced with the new keypair.
+                <Trans>
+                  Once confirmed, your organization&rsquo;s keypair will be
+                  replaced with the new keypair.
+                </Trans>
               </Typography>
 
               <Stack
@@ -223,7 +239,7 @@ export function NewKeyPairModal({ advertiser }: Props) {
                 marginTop={4}
               >
                 <Button variant="outlined" onClick={closeNewKeypairModal}>
-                  Cancel
+                  <Trans>Cancel</Trans>
                 </Button>
 
                 <Button
@@ -232,7 +248,7 @@ export function NewKeyPairModal({ advertiser }: Props) {
                   onClick={() => saveKeypair()}
                   disabled={saving || privateKey !== newPrivateKey}
                 >
-                  {saving ? "Saving..." : "Save"}
+                  {saving ? <Trans>Saving...</Trans> : <Trans>Save</Trans>}
                 </Button>
               </Stack>
             </Box>

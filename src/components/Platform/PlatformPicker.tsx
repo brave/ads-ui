@@ -1,6 +1,8 @@
 import { Autocomplete, TextField } from "@mui/material";
 import { useField } from "formik";
 import _ from "lodash";
+import { useLingui } from "@lingui/react";
+import { msg } from "@lingui/macro";
 
 interface PlatformLookup {
   code: string;
@@ -12,6 +14,7 @@ interface Props {
 }
 
 export const PlatformPicker = ({ idx }: Props) => {
+  const { _: lingui } = useLingui();
   const [formProps, meta, helper] = useField<PlatformLookup[]>({
     name: `adSets.${idx}.oses`,
   });
@@ -35,11 +38,11 @@ export const PlatformPicker = ({ idx }: Props) => {
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Platforms"
+          label={lingui(msg`Platforms`)}
           helperText={
             meta.touched && !!errorMessage
               ? errorMessage
-              : "Select the platforms to target"
+              : lingui(msg`Select the platforms to target`)
           }
           error={meta.touched && !!errorMessage}
         />

@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 import { Link as RouterLink } from "react-router-dom";
+import { Trans } from "@lingui/macro";
 
 export function DashboardButton() {
   return (
@@ -10,7 +11,7 @@ export function DashboardButton() {
       component={RouterLink}
       to="/user/main"
     >
-      Dashboard
+      <Trans>Dashboard</Trans>
     </Button>
   );
 }

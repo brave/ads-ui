@@ -1,5 +1,6 @@
 import { Link } from "@mui/material";
 import { useTrackMatomoEvent } from "hooks/useTrackWithMatomo";
+import { Trans } from "@lingui/macro";
 
 export function LearnMoreButton(props: { helpSection: string }) {
   const url = `https://ads-help.brave.com/${props.helpSection}`;
@@ -15,8 +16,7 @@ export function LearnMoreButton(props: { helpSection: string }) {
         window.open(url, "__blank", "noopener");
       }}
     >
-      {" "}
-      Learn More
+      <Trans>Learn More</Trans>
     </Link>
   );
 }

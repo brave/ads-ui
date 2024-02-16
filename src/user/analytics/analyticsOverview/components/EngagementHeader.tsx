@@ -1,6 +1,9 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { Status } from "components/Campaigns/Status";
 import { CampaignSummaryFragment } from "graphql/campaign.generated";
+import { MessageDescriptor } from "@lingui/core";
+import { msg } from "@lingui/macro";
+import { Trans } from "@lingui/react";
 
 interface HeaderProps {
   onSetGroup: (s: string) => void;
@@ -13,7 +16,7 @@ interface HeaderProps {
 
 interface GroupProps {
   onSetGroup: (s: string) => void;
-  label: string;
+  label: MessageDescriptor;
   group: string;
   grouping: string;
 }
@@ -33,7 +36,7 @@ const Grouping = ({ onSetGroup, label, group, grouping }: GroupProps) => {
       }}
       onClick={() => onSetGroup(group)}
     >
-      {label}
+      <Trans id={label.id} />
     </Button>
   );
 };
@@ -44,10 +47,10 @@ export default function EngagementHeader({
   campaign,
 }: HeaderProps) {
   const groups: Group[] = [
-    { label: "Hour", group: "hourly" },
-    { label: "Day", group: "daily" },
-    { label: "Week", group: "weekly" },
-    { label: "Month", group: "monthly" },
+    { label: msg`Hour`, group: "hourly" },
+    { label: msg`Day`, group: "daily" },
+    { label: msg`Week`, group: "weekly" },
+    { label: msg`Month`, group: "monthly" },
   ];
 
   return (

@@ -12,6 +12,7 @@ import { NotificationAd } from "user/ads/NotificationAd";
 import { InlineContentAd } from "user/ads/InlineContentAd";
 import { modalStyles } from "theme";
 import { LearnMoreButton } from "components/Button/LearnMoreButton";
+import { Trans } from "@lingui/macro";
 
 interface Props {
   index: number;
@@ -25,10 +26,12 @@ export function AdSetAds({ index }: Props) {
   );
   return (
     <>
-      <CardContainer header="Ads">
+      <CardContainer header={<Trans>Ads</Trans>}>
         <Typography variant="body2" sx={{ mb: 3 }}>
-          Select the ads you would like to include in this ad set. Only checked
-          ads are included.{" "}
+          <Trans>
+            Select the ads you would like to include in this ad set. Only
+            checked ads are included.{" "}
+          </Trans>
           <LearnMoreButton helpSection="getting-started/create-an-ad" />
         </Typography>
 

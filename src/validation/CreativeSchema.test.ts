@@ -13,7 +13,7 @@ const validPushCreative = {
 };
 
 it("should pass on a valid object", () => {
-  CreativeSchema.validateSync(validPushCreative);
+  CreativeSchema().validateSync(validPushCreative);
 });
 
 it.each([
@@ -25,7 +25,7 @@ it.each([
     draft.payloadNotification.targetUrl = value;
   });
 
-  expect(() => CreativeSchema.validateSync(c));
+  expect(() => CreativeSchema().validateSync(c));
 });
 
 it.each(["notAUrl", "gopher://blah.com", "httpx://balh.com"])(
@@ -34,7 +34,7 @@ it.each(["notAUrl", "gopher://blah.com", "httpx://balh.com"])(
     const c = produce(validPushCreative, (draft) => {
       draft.payloadNotification.targetUrl = value;
     });
-    expect(() => CreativeSchema.validateSync(c)).toThrowError(
+    expect(() => CreativeSchema().validateSync(c)).toThrowError(
       "URL must start with https://",
     );
   },
@@ -46,7 +46,7 @@ it.each(["https://with a space"])(
     const c = produce(validPushCreative, (draft) => {
       draft.payloadNotification.targetUrl = value;
     });
-    expect(() => CreativeSchema.validateSync(c)).toThrowError(
+    expect(() => CreativeSchema().validateSync(c)).toThrowError(
       "URL must not contain any whitespace",
     );
   },
@@ -58,7 +58,7 @@ it.each(["http://example.com"])(
     const c = produce(validPushCreative, (draft) => {
       draft.payloadNotification.targetUrl = value;
     });
-    expect(() => CreativeSchema.validateSync(c)).toThrowError(
+    expect(() => CreativeSchema().validateSync(c)).toThrowError(
       "URL must start with https://",
     );
   },

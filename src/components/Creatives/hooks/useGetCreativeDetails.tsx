@@ -1,6 +1,8 @@
 import { useLoadCreativeQuery } from "graphql/creative.generated";
 import { CreativeInput } from "graphql/types";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { useLingui } from "@lingui/react";
+import { msg } from "@lingui/macro";
 
 export function useGetCreativeDetails(props: { id: string }) {
   const { advertiser } = useAdvertiser();
@@ -9,6 +11,7 @@ export function useGetCreativeDetails(props: { id: string }) {
     variables: { id: props.id },
     skip: isNew,
   });
+  const { _ } = useLingui();
 
   const defaultValue: CreativeInput & { targetUrlValid?: string } = {
     advertiserId: advertiser.id,
@@ -17,7 +20,7 @@ export function useGetCreativeDetails(props: { id: string }) {
     type: {
       code: "notification_all_v1",
     },
-    targetUrlValid: "Target URL not validated",
+    targetUrlValid: _(msg`Target URL not validated`),
     payloadNotification: {
       body: "",
       targetUrl: "",

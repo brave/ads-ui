@@ -2,6 +2,7 @@ import { Box, Paper, Stack, Typography } from "@mui/material";
 import logo from "../../../brave_logo_icon.png";
 import { useField, useFormikContext } from "formik";
 import { CreativeInput } from "graphql/types";
+import { Trans } from "@lingui/macro";
 
 export function NotificationPreview(props: {
   title?: string;
@@ -34,10 +35,10 @@ export function NotificationPreview(props: {
           />
           <Stack direction="column" justifyContent="center">
             <Typography sx={{ fontWeight: 600 }} variant="body2">
-              {props.title || value?.title || "Title Preview"}
+              {props.title || value?.title || <Trans>Title Preview</Trans>}
             </Typography>
             <Typography variant="body2">
-              {props.body || value?.body || "Body Preview"}
+              {props.body || value?.body || <Trans>Body Preview</Trans>}
             </Typography>
           </Stack>
         </Box>
