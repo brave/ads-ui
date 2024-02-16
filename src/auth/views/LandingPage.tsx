@@ -42,7 +42,10 @@ export function LandingPage() {
 
           {!isAuthenticated && (
             <Typography variant="subtitle1" color="primary" fontWeight={500}>
-              Get 50% your first campaign when you pay in Basic Attention Token
+              <Trans>
+                Get 50% your first campaign when you pay in Basic Attention
+                Token
+              </Trans>
             </Typography>
           )}
 

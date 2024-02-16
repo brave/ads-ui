@@ -67,7 +67,7 @@ export function LandingPageAppBar() {
             variant={isMobile ? "body2" : "subtitle1"}
             color="text.primary"
           >
-            Basic Attention Token
+            <Trans>Basic Attention Token</Trans>
           </Typography>
         </RouterLink>
       ) : undefined,
@@ -100,7 +100,9 @@ export function LandingPageAppBar() {
             </RouterLink>
 
             <Divider orientation="vertical" flexItem />
-            {links.map((l) => l.component)}
+            {links.map((l, i) => (
+              <div key={`menu_component_${i}`}>{l.component}</div>
+            ))}
           </Stack>
           <div style={{ flexGrow: 1 }} />
           {!isMobile && !match.url.includes("auth") && (

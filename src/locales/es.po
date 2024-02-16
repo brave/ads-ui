@@ -65,7 +65,7 @@ msgstr ""
 msgid "About Brave Ads"
 msgstr ""
 
-#: src/auth/components/AdvertiserDetailsForm.tsx:125
+#: src/auth/components/AdvertiserDetailsForm.tsx:119
 msgid "Access dashboard"
 msgstr ""
 
@@ -174,7 +174,7 @@ msgstr ""
 msgid "Additional Report: OS Performance"
 msgstr ""
 
-#: src/components/AppBar/LandingPageAppBar.tsx:86
+#: src/components/AppBar/LandingPageAppBar.tsx:101
 #: src/components/Assets/AdvertiserAssets.tsx:32
 #: src/components/Creatives/CreativeList.tsx:100
 #: src/components/Creatives/CreativeSpecificPreview.tsx:52
@@ -201,7 +201,7 @@ msgstr ""
 msgid "All targeting and reporting is strictly designed to be anonymous and privacy-preserving."
 msgstr ""
 
-#: src/auth/views/LandingPage.tsx:63
+#: src/auth/views/LandingPage.tsx:71
 msgid "Already have an account?"
 msgstr ""
 
@@ -264,6 +264,10 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
+#: src/components/AppBar/LandingPageAppBar.tsx:70
+msgid "Basic Attention Token"
+msgstr ""
+
 #: src/user/views/adsManager/views/advanced/components/campaign/components/CustomPriceSelect.tsx:33
 msgid "Billing Type"
 msgstr ""
@@ -290,7 +294,11 @@ msgstr ""
 msgid "Brave cannot recover this key, which has been generated in your browser. You will need to confirm this private key on the next step before changes are saved."
 msgstr ""
 
-#: src/components/AppBar/LandingPageAppBar.tsx:57
+#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:41
+msgid "Brave is place where early adopters thrive. We’re celebrating our crypto roots by offering new and returning customers half off their first campaign when they check-out with BAT."
+msgstr ""
+
+#: src/components/AppBar/LandingPageAppBar.tsx:58
 msgid "Brave Search"
 msgstr ""
 
@@ -422,11 +430,11 @@ msgstr ""
 msgid "Choose what kind of account to open"
 msgstr ""
 
-#: src/auth/components/AdvertiserAddress.tsx:33
+#: src/auth/components/AdvertiserAddress.tsx:46
 msgid "City"
 msgstr ""
 
-#: src/validation/AdvertiserSchema.tsx:19
+#: src/validation/AdvertiserSchema.tsx:20
 msgid "City is required"
 msgstr ""
 
@@ -611,7 +619,7 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
-#: src/validation/AdvertiserSchema.tsx:21
+#: src/validation/AdvertiserSchema.tsx:22
 msgid "Country is required"
 msgstr ""
 
@@ -670,7 +678,7 @@ msgstr ""
 msgid "CTR"
 msgstr ""
 
-#: src/auth/views/LandingPage.tsx:56
+#: src/auth/views/LandingPage.tsx:64
 #: src/components/Button/DashboardButton.tsx:14
 msgid "Dashboard"
 msgstr ""
@@ -894,6 +902,10 @@ msgstr ""
 msgid "Generating a new API key will result in the deactivation of your previous key, rendering it unusable for future requests. Make sure to update your code with the new key to avoid disruptions in your application’s functionality."
 msgstr ""
 
+#: src/auth/views/LandingPage.tsx:45
+msgid "Get 50% your first campaign when you pay in Basic Attention Token"
+msgstr ""
+
 #: src/search/SearchTalkingPoints.tsx:17
 msgid "Get a free one-month test to see how Search Ads perform for your brand."
 msgstr ""
@@ -906,8 +918,8 @@ msgstr ""
 msgid "Get login link"
 msgstr ""
 
-#: src/auth/views/LandingPage.tsx:58
-#: src/components/AppBar/LandingPageAppBar.tsx:39
+#: src/auth/views/LandingPage.tsx:66
+#: src/components/AppBar/LandingPageAppBar.tsx:40
 msgid "Get started"
 msgstr ""
 
@@ -1036,8 +1048,16 @@ msgstr ""
 msgid "Keypairs"
 msgstr ""
 
+#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:86
+msgid "Launch a Campaign"
+msgstr ""
+
 #: src/components/Button/LearnMoreButton.tsx:19
 msgid "Learn More"
+msgstr ""
+
+#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:98
+msgid "Learn more about BAT"
 msgstr ""
 
 #: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:34
@@ -1061,6 +1081,10 @@ msgstr ""
 msgid "Lifetime budget must be higher for date range provided. Minimum ${min}."
 msgstr ""
 
+#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:48
+msgid "Limited time only. Available to new advertisers, and those who ran campaigns before September 30, 2023."
+msgstr ""
+
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/LocationField.tsx:8
 msgid "Location"
 msgstr ""
@@ -1069,9 +1093,9 @@ msgstr ""
 msgid "Locations"
 msgstr ""
 
-#: src/auth/views/LandingPage.tsx:72
+#: src/auth/views/LandingPage.tsx:80
 #: src/auth/views/Login.tsx:67
-#: src/components/AppBar/LandingPageAppBar.tsx:113
+#: src/components/AppBar/LandingPageAppBar.tsx:128
 msgid "Log in"
 msgstr ""
 
@@ -1310,12 +1334,16 @@ msgstr ""
 msgid "Pause"
 msgstr ""
 
+#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:36
+msgid "Pay with BAT to get <0>50% off</0> your first campaign"
+msgstr ""
+
 #: src/auth/components/AdvertiserAgreed.tsx:41
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/PaymentMethodField.tsx:18
 msgid "Payment"
 msgstr ""
 
-#: src/validation/AdvertiserSchema.tsx:11
+#: src/validation/AdvertiserSchema.tsx:12
 msgid "Payment acknowledgement is required"
 msgstr ""
 
@@ -1467,7 +1495,7 @@ msgstr ""
 msgid "Reach audiences who don’t use other search engines and block ads on most sites."
 msgstr ""
 
-#: src/components/AppBar/LandingPageAppBar.tsx:37
+#: src/components/AppBar/LandingPageAppBar.tsx:38
 msgid "Register for Self-service"
 msgstr ""
 
@@ -1576,7 +1604,7 @@ msgstr ""
 msgid "Show"
 msgstr ""
 
-#: src/components/AppBar/LandingPageAppBar.tsx:113
+#: src/components/AppBar/LandingPageAppBar.tsx:128
 #: src/components/Navigation/Navbar.tsx:53
 msgid "Sign out"
 msgstr ""
@@ -1644,13 +1672,13 @@ msgstr ""
 msgid "State"
 msgstr ""
 
-#: src/auth/components/AdvertiserAddress.tsx:41
+#: src/auth/components/AdvertiserAddress.tsx:54
 msgid "State / Province"
 msgstr ""
 
 #: src/validation/AdvertiserSchema.tsx:20
-msgid "State / Province is required"
-msgstr ""
+#~ msgid "State / Province is required"
+#~ msgstr ""
 
 #: src/components/Creatives/CreativeCampaigns.tsx:48
 #: src/user/adSet/AdSetList.tsx:99
@@ -1658,15 +1686,15 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: src/auth/components/AdvertiserAddress.tsx:16
+#: src/auth/components/AdvertiserAddress.tsx:27
 msgid "Street address"
 msgstr ""
 
-#: src/validation/AdvertiserSchema.tsx:17
+#: src/validation/AdvertiserSchema.tsx:18
 msgid "Street address is required"
 msgstr ""
 
-#: src/auth/components/AdvertiserAddress.tsx:23
+#: src/auth/components/AdvertiserAddress.tsx:34
 msgid "Street address line 2"
 msgstr ""
 
@@ -1720,7 +1748,7 @@ msgstr ""
 msgid "Terms & Conditions"
 msgstr ""
 
-#: src/validation/AdvertiserSchema.tsx:14
+#: src/validation/AdvertiserSchema.tsx:15
 msgid "Terms & Conditions acknowledgement is required"
 msgstr ""
 
@@ -1752,7 +1780,7 @@ msgstr ""
 msgid "The username or password did not match our records."
 msgstr ""
 
-#: src/validation/AdvertiserSchema.tsx:8
+#: src/validation/AdvertiserSchema.tsx:9
 msgid "Third party tracking acknowledgement is required"
 msgstr ""
 
@@ -2036,10 +2064,10 @@ msgstr ""
 msgid "Your organization’s public key:"
 msgstr ""
 
-#: src/auth/components/AdvertiserAddress.tsx:53
+#: src/auth/components/AdvertiserAddress.tsx:71
 msgid "Zip / Postal Code"
 msgstr ""
 
 #: src/validation/AdvertiserSchema.tsx:22
-msgid "Zip / Postal Code is required"
-msgstr ""
+#~ msgid "Zip / Postal Code is required"
+#~ msgstr ""

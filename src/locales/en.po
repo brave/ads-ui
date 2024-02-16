@@ -65,7 +65,7 @@ msgstr "A login email is on the way"
 msgid "About Brave Ads"
 msgstr "About Brave Ads"
 
-#: src/auth/components/AdvertiserDetailsForm.tsx:125
+#: src/auth/components/AdvertiserDetailsForm.tsx:119
 msgid "Access dashboard"
 msgstr "Access dashboard"
 
@@ -174,7 +174,7 @@ msgstr "Additional Details"
 msgid "Additional Report: OS Performance"
 msgstr "Additional Report: OS Performance"
 
-#: src/components/AppBar/LandingPageAppBar.tsx:86
+#: src/components/AppBar/LandingPageAppBar.tsx:101
 #: src/components/Assets/AdvertiserAssets.tsx:32
 #: src/components/Creatives/CreativeList.tsx:100
 #: src/components/Creatives/CreativeSpecificPreview.tsx:52
@@ -201,7 +201,7 @@ msgstr "advertising made simple"
 msgid "All targeting and reporting is strictly designed to be anonymous and privacy-preserving."
 msgstr "All targeting and reporting is strictly designed to be anonymous and privacy-preserving."
 
-#: src/auth/views/LandingPage.tsx:63
+#: src/auth/views/LandingPage.tsx:71
 msgid "Already have an account?"
 msgstr "Already have an account?"
 
@@ -264,6 +264,10 @@ msgstr "Available Ad placements"
 msgid "Back"
 msgstr "Back"
 
+#: src/components/AppBar/LandingPageAppBar.tsx:70
+msgid "Basic Attention Token"
+msgstr "Basic Attention Token"
+
 #: src/user/views/adsManager/views/advanced/components/campaign/components/CustomPriceSelect.tsx:33
 msgid "Billing Type"
 msgstr "Billing Type"
@@ -290,7 +294,11 @@ msgstr "Book a meeting"
 msgid "Brave cannot recover this key, which has been generated in your browser. You will need to confirm this private key on the next step before changes are saved."
 msgstr "Brave cannot recover this key, which has been generated in your browser. You will need to confirm this private key on the next step before changes are saved."
 
-#: src/components/AppBar/LandingPageAppBar.tsx:57
+#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:41
+msgid "Brave is place where early adopters thrive. We’re celebrating our crypto roots by offering new and returning customers half off their first campaign when they check-out with BAT."
+msgstr "Brave is place where early adopters thrive. We’re celebrating our crypto roots by offering new and returning customers half off their first campaign when they check-out with BAT."
+
+#: src/components/AppBar/LandingPageAppBar.tsx:58
 msgid "Brave Search"
 msgstr "Brave Search"
 
@@ -422,11 +430,11 @@ msgstr "Choose File"
 msgid "Choose what kind of account to open"
 msgstr "Choose what kind of account to open"
 
-#: src/auth/components/AdvertiserAddress.tsx:33
+#: src/auth/components/AdvertiserAddress.tsx:46
 msgid "City"
 msgstr "City"
 
-#: src/validation/AdvertiserSchema.tsx:19
+#: src/validation/AdvertiserSchema.tsx:20
 msgid "City is required"
 msgstr "City is required"
 
@@ -611,7 +619,7 @@ msgstr "Counted when an ad is displayed on screen for a minimum of one second"
 msgid "Country"
 msgstr "Country"
 
-#: src/validation/AdvertiserSchema.tsx:21
+#: src/validation/AdvertiserSchema.tsx:22
 msgid "Country is required"
 msgstr "Country is required"
 
@@ -670,7 +678,7 @@ msgstr "created"
 msgid "CTR"
 msgstr "CTR"
 
-#: src/auth/views/LandingPage.tsx:56
+#: src/auth/views/LandingPage.tsx:64
 #: src/components/Button/DashboardButton.tsx:14
 msgid "Dashboard"
 msgstr "Dashboard"
@@ -894,6 +902,10 @@ msgstr "Generate API Key"
 msgid "Generating a new API key will result in the deactivation of your previous key, rendering it unusable for future requests. Make sure to update your code with the new key to avoid disruptions in your application’s functionality."
 msgstr "Generating a new API key will result in the deactivation of your previous key, rendering it unusable for future requests. Make sure to update your code with the new key to avoid disruptions in your application’s functionality."
 
+#: src/auth/views/LandingPage.tsx:45
+msgid "Get 50% your first campaign when you pay in Basic Attention Token"
+msgstr "Get 50% your first campaign when you pay in Basic Attention Token"
+
 #: src/search/SearchTalkingPoints.tsx:17
 msgid "Get a free one-month test to see how Search Ads perform for your brand."
 msgstr "Get a free one-month test to see how Search Ads perform for your brand."
@@ -906,8 +918,8 @@ msgstr "Get in touch with our team"
 msgid "Get login link"
 msgstr "Get login link"
 
-#: src/auth/views/LandingPage.tsx:58
-#: src/components/AppBar/LandingPageAppBar.tsx:39
+#: src/auth/views/LandingPage.tsx:66
+#: src/components/AppBar/LandingPageAppBar.tsx:40
 msgid "Get started"
 msgstr "Get started"
 
@@ -1036,9 +1048,17 @@ msgstr "Key Statistics"
 msgid "Keypairs"
 msgstr "Keypairs"
 
+#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:86
+msgid "Launch a Campaign"
+msgstr "Launch a Campaign"
+
 #: src/components/Button/LearnMoreButton.tsx:19
 msgid "Learn More"
 msgstr "Learn More"
+
+#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:98
+msgid "Learn more about BAT"
+msgstr "Learn more about BAT"
 
 #: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:34
 msgid "Let Brave pick categories for me."
@@ -1061,6 +1081,10 @@ msgstr "Lifetime budget must be ${MIN_PER_CAMPAIGN} or more"
 msgid "Lifetime budget must be higher for date range provided. Minimum ${min}."
 msgstr "Lifetime budget must be higher for date range provided. Minimum ${min}."
 
+#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:48
+msgid "Limited time only. Available to new advertisers, and those who ran campaigns before September 30, 2023."
+msgstr "Limited time only. Available to new advertisers, and those who ran campaigns before September 30, 2023."
+
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/LocationField.tsx:8
 msgid "Location"
 msgstr "Location"
@@ -1069,9 +1093,9 @@ msgstr "Location"
 msgid "Locations"
 msgstr "Locations"
 
-#: src/auth/views/LandingPage.tsx:72
+#: src/auth/views/LandingPage.tsx:80
 #: src/auth/views/Login.tsx:67
-#: src/components/AppBar/LandingPageAppBar.tsx:113
+#: src/components/AppBar/LandingPageAppBar.tsx:128
 msgid "Log in"
 msgstr "Log in"
 
@@ -1310,12 +1334,16 @@ msgstr "Password"
 msgid "Pause"
 msgstr "Pause"
 
+#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:36
+msgid "Pay with BAT to get <0>50% off</0> your first campaign"
+msgstr ""
+
 #: src/auth/components/AdvertiserAgreed.tsx:41
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/PaymentMethodField.tsx:18
 msgid "Payment"
 msgstr "Payment"
 
-#: src/validation/AdvertiserSchema.tsx:11
+#: src/validation/AdvertiserSchema.tsx:12
 msgid "Payment acknowledgement is required"
 msgstr "Payment acknowledgement is required"
 
@@ -1467,7 +1495,7 @@ msgstr "Reach and convert new customers through premium advertising on the Brave
 msgid "Reach audiences who don’t use other search engines and block ads on most sites."
 msgstr "Reach audiences who don’t use other search engines and block ads on most sites."
 
-#: src/components/AppBar/LandingPageAppBar.tsx:37
+#: src/components/AppBar/LandingPageAppBar.tsx:38
 msgid "Register for Self-service"
 msgstr "Register for Self-service"
 
@@ -1576,7 +1604,7 @@ msgstr "Self-service"
 msgid "Show"
 msgstr "Show"
 
-#: src/components/AppBar/LandingPageAppBar.tsx:113
+#: src/components/AppBar/LandingPageAppBar.tsx:128
 #: src/components/Navigation/Navbar.tsx:53
 msgid "Sign out"
 msgstr "Sign out"
@@ -1644,13 +1672,13 @@ msgstr "Start Time"
 msgid "State"
 msgstr "State"
 
-#: src/auth/components/AdvertiserAddress.tsx:41
+#: src/auth/components/AdvertiserAddress.tsx:54
 msgid "State / Province"
 msgstr "State / Province"
 
 #: src/validation/AdvertiserSchema.tsx:20
-msgid "State / Province is required"
-msgstr "State / Province is required"
+#~ msgid "State / Province is required"
+#~ msgstr "State / Province is required"
 
 #: src/components/Creatives/CreativeCampaigns.tsx:48
 #: src/user/adSet/AdSetList.tsx:99
@@ -1658,15 +1686,15 @@ msgstr "State / Province is required"
 msgid "Status"
 msgstr "Status"
 
-#: src/auth/components/AdvertiserAddress.tsx:16
+#: src/auth/components/AdvertiserAddress.tsx:27
 msgid "Street address"
 msgstr "Street address"
 
-#: src/validation/AdvertiserSchema.tsx:17
+#: src/validation/AdvertiserSchema.tsx:18
 msgid "Street address is required"
 msgstr "Street address is required"
 
-#: src/auth/components/AdvertiserAddress.tsx:23
+#: src/auth/components/AdvertiserAddress.tsx:34
 msgid "Street address line 2"
 msgstr "Street address line 2"
 
@@ -1720,7 +1748,7 @@ msgstr "Tell us why you're interested in Brave Ads"
 msgid "Terms & Conditions"
 msgstr "Terms & Conditions"
 
-#: src/validation/AdvertiserSchema.tsx:14
+#: src/validation/AdvertiserSchema.tsx:15
 msgid "Terms & Conditions acknowledgement is required"
 msgstr "Terms & Conditions acknowledgement is required"
 
@@ -1752,7 +1780,7 @@ msgstr "The rate at which users visited the site in correlation to their impress
 msgid "The username or password did not match our records."
 msgstr "The username or password did not match our records."
 
-#: src/validation/AdvertiserSchema.tsx:8
+#: src/validation/AdvertiserSchema.tsx:9
 msgid "Third party tracking acknowledgement is required"
 msgstr "Third party tracking acknowledgement is required"
 
@@ -2036,10 +2064,6 @@ msgstr "Your organization’s new public key will be:"
 msgid "Your organization’s public key:"
 msgstr "Your organization’s public key:"
 
-#: src/auth/components/AdvertiserAddress.tsx:53
+#: src/auth/components/AdvertiserAddress.tsx:71
 msgid "Zip / Postal Code"
 msgstr "Zip / Postal Code"
-
-#: src/validation/AdvertiserSchema.tsx:22
-msgid "Zip / Postal Code is required"
-msgstr "Zip / Postal Code is required"

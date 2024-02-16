@@ -10,6 +10,7 @@ import { Link as RouterLink } from "react-router-dom";
 import notification from "../../newsfeed.png";
 import mobileAd from "../../news-mobile.png";
 import bat from "../../basic-attention-token.svg";
+import { Trans } from "@lingui/macro";
 
 export function BasicAttentionTokenLandingPage() {
   useTrackMatomoPageView({ documentTitle: "BAT Landing Page" });
@@ -32,16 +33,22 @@ export function BasicAttentionTokenLandingPage() {
             justifyContent="center"
           >
             <Typography variant="h3">
-              Pay with BAT to get <strong>50% off</strong> your first campaign
+              <Trans>
+                Pay with BAT to get <strong>50% off</strong> your first campaign
+              </Trans>
             </Typography>
             <Typography variant="subtitle1" fontSize="18px">
-              Brave is place where early adopters thrive. We’re celebrating our
-              crypto roots by offering new and returning customers half off
-              their first campaign when they check-out with BAT.
+              <Trans>
+                Brave is place where early adopters thrive. We’re celebrating
+                our crypto roots by offering new and returning customers half
+                off their first campaign when they check-out with BAT.
+              </Trans>
             </Typography>
             <Typography variant="body2">
-              Limited time only. Available to new advertisers, and those who ran
-              campaigns before September 30, 2023.
+              <Trans>
+                Limited time only. Available to new advertisers, and those who
+                ran campaigns before September 30, 2023.
+              </Trans>
             </Typography>
 
             {isMobile && (
@@ -76,7 +83,7 @@ function LaunchCampaignButton() {
         }
         sx={{ padding: 2 }}
       >
-        Launch a Campaign
+        <Trans>Launch a Campaign</Trans>
       </Button>
       <Link
         color="primary"
@@ -86,7 +93,7 @@ function LaunchCampaignButton() {
           window.open("https://basicattentiontoken.org/", "_blank", "noopener");
         }}
       >
-        Learn more about BAT
+        <Trans>Learn more about BAT</Trans>
       </Link>
     </Stack>
   );
