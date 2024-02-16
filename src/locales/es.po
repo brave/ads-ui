@@ -174,7 +174,7 @@ msgstr ""
 msgid "Additional Report: OS Performance"
 msgstr ""
 
-#: src/components/AppBar/LandingPageAppBar.tsx:101
+#: src/components/AppBar/LandingPageAppBar.tsx:99
 #: src/components/Assets/AdvertiserAssets.tsx:32
 #: src/components/Creatives/CreativeList.tsx:100
 #: src/components/Creatives/CreativeSpecificPreview.tsx:52
@@ -201,7 +201,7 @@ msgstr ""
 msgid "All targeting and reporting is strictly designed to be anonymous and privacy-preserving."
 msgstr ""
 
-#: src/auth/views/LandingPage.tsx:71
+#: src/auth/views/LandingPage.tsx:72
 msgid "Already have an account?"
 msgstr ""
 
@@ -678,7 +678,7 @@ msgstr ""
 msgid "CTR"
 msgstr ""
 
-#: src/auth/views/LandingPage.tsx:64
+#: src/auth/views/LandingPage.tsx:65
 #: src/components/Button/DashboardButton.tsx:14
 msgid "Dashboard"
 msgstr ""
@@ -918,7 +918,7 @@ msgstr ""
 msgid "Get login link"
 msgstr ""
 
-#: src/auth/views/LandingPage.tsx:66
+#: src/auth/views/LandingPage.tsx:67
 #: src/components/AppBar/LandingPageAppBar.tsx:40
 msgid "Get started"
 msgstr ""
@@ -1056,7 +1056,7 @@ msgstr ""
 msgid "Learn More"
 msgstr ""
 
-#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:98
+#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:96
 msgid "Learn more about BAT"
 msgstr ""
 
@@ -1093,7 +1093,7 @@ msgstr ""
 msgid "Locations"
 msgstr ""
 
-#: src/auth/views/LandingPage.tsx:80
+#: src/auth/views/LandingPage.tsx:81
 #: src/auth/views/Login.tsx:67
 #: src/components/AppBar/LandingPageAppBar.tsx:128
 msgid "Log in"

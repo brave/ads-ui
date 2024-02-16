@@ -174,7 +174,7 @@ msgstr "Additional Details"
 msgid "Additional Report: OS Performance"
 msgstr "Additional Report: OS Performance"
 
-#: src/components/AppBar/LandingPageAppBar.tsx:101
+#: src/components/AppBar/LandingPageAppBar.tsx:99
 #: src/components/Assets/AdvertiserAssets.tsx:32
 #: src/components/Creatives/CreativeList.tsx:100
 #: src/components/Creatives/CreativeSpecificPreview.tsx:52
@@ -201,7 +201,7 @@ msgstr "advertising made simple"
 msgid "All targeting and reporting is strictly designed to be anonymous and privacy-preserving."
 msgstr "All targeting and reporting is strictly designed to be anonymous and privacy-preserving."
 
-#: src/auth/views/LandingPage.tsx:71
+#: src/auth/views/LandingPage.tsx:72
 msgid "Already have an account?"
 msgstr "Already have an account?"
 
@@ -678,7 +678,7 @@ msgstr "created"
 msgid "CTR"
 msgstr "CTR"
 
-#: src/auth/views/LandingPage.tsx:64
+#: src/auth/views/LandingPage.tsx:65
 #: src/components/Button/DashboardButton.tsx:14
 msgid "Dashboard"
 msgstr "Dashboard"
@@ -918,7 +918,7 @@ msgstr "Get in touch with our team"
 msgid "Get login link"
 msgstr "Get login link"
 
-#: src/auth/views/LandingPage.tsx:66
+#: src/auth/views/LandingPage.tsx:67
 #: src/components/AppBar/LandingPageAppBar.tsx:40
 msgid "Get started"
 msgstr "Get started"
@@ -1056,7 +1056,7 @@ msgstr "Launch a Campaign"
 msgid "Learn More"
 msgstr "Learn More"
 
-#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:98
+#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:96
 msgid "Learn more about BAT"
 msgstr "Learn more about BAT"
 
@@ -1093,7 +1093,7 @@ msgstr "Location"
 msgid "Locations"
 msgstr "Locations"
 
-#: src/auth/views/LandingPage.tsx:80
+#: src/auth/views/LandingPage.tsx:81
 #: src/auth/views/Login.tsx:67
 #: src/components/AppBar/LandingPageAppBar.tsx:128
 msgid "Log in"
@@ -1336,7 +1336,7 @@ msgstr "Pause"
 
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:36
 msgid "Pay with BAT to get <0>50% off</0> your first campaign"
-msgstr ""
+msgstr "Pay with BAT to get <0>50% off</0> your first campaign"
 
 #: src/auth/components/AdvertiserAgreed.tsx:41
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/PaymentMethodField.tsx:18
