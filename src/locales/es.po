@@ -22,7 +22,11 @@ msgid "{billingType} price must be {price} or higher"
 msgstr ""
 
 #: src/user/views/adsManager/views/advanced/components/campaign/components/BillingModelSelect.tsx:23
-msgid "{campaignFormat} pricing configuration option(s)"
+#~ msgid "{campaignFormat} pricing configuration option(s)"
+#~ msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/campaign/components/BillingModelSelect.tsx:23
+msgid "{campaignFormat} pricing configuration option(s):"
 msgstr ""
 
 #: src/form/FormikHelpers.tsx:53
@@ -419,7 +423,11 @@ msgid "Choose"
 msgstr ""
 
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:37
-msgid "Choose a format for the campaign you would like to run"
+#~ msgid "Choose a format for the campaign you would like to run"
+#~ msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:37
+msgid "Choose a format for the campaign you would like to run."
 msgstr ""
 
 #: src/components/Assets/UploadImage.tsx:94

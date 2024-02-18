@@ -18,7 +18,7 @@ export function PaymentMethodField() {
     <CardContainer header={<Trans>Payment</Trans>}>
       <Stack spacing={1}>
         <Typography variant="body2">
-          <Trans>Payment is required before launching your campaign.</Trans>
+          <Trans>Payment is required before launching your campaign.</Trans>{" "}
           <LearnMoreButton helpSection="getting-started/launch-your-campaign" />
         </Typography>
         <FormikRadioControl

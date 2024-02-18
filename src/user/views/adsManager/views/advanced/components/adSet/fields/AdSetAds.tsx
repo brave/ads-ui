@@ -30,8 +30,8 @@ export function AdSetAds({ index }: Props) {
         <Typography variant="body2" sx={{ mb: 3 }}>
           <Trans>
             Select the ads you would like to include in this ad set. Only
-            checked ads are included.{" "}
-          </Trans>
+            checked ads are included.
+          </Trans>{" "}
           <LearnMoreButton helpSection="getting-started/create-an-ad" />
         </Typography>
 

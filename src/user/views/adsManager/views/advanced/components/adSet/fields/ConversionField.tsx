@@ -28,7 +28,7 @@ export function ConversionField({ index }: Props) {
                   checkout or subscription confirmation page. <br />
                   Brave will count unique visits to that page from users who saw
                   or clicked your ad.
-                </Trans>
+                </Trans>{" "}
                 <LearnMoreButton helpSection="campaign-performance/reporting#conversion-reporting-in-brave-ads-manager" />
               </Typography>
               {!hasConversions && (

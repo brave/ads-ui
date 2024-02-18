@@ -29,7 +29,7 @@ export function PickerFields({ index }: Props) {
       <Typography variant="body2" sx={{ mb: 2 }}>
         <Trans>
           Select the interest segments and platforms you would like to target.
-        </Trans>
+        </Trans>{" "}
         <LearnMoreButton helpSection="campaign-performance/targeting" />
       </Typography>
       {format.value !== CampaignFormat.NewsDisplayAd && (
