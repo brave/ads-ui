@@ -24,7 +24,7 @@ export function CampaignSettings(props: { prices: AdvertiserPrice[] }) {
     <>
       <CardContainer header={<Trans>Campaign Settings</Trans>}>
         <Typography variant="body2" gutterBottom>
-          <Trans>Define how you want your campaign to run.</Trans>
+          <Trans>Define how you want your campaign to run.</Trans>{" "}
           <LearnMoreButton helpSection="getting-started/create-a-campaign" />
         </Typography>
 

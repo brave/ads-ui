@@ -20,7 +20,7 @@ export function BillingModelSelect(props: { prices: AdvertiserPrice[] }) {
   return (
     <Stack maxWidth={500}>
       <Typography variant="body2">
-        <Trans>{campaignFormat} pricing configuration option(s)</Trans>
+        <Trans>{campaignFormat} pricing configuration option(s):</Trans>{" "}
         <LearnMoreButton helpSection="account-management/billing" />
       </Typography>
       <List sx={{ display: "flex", flexDirection: "row", gap: "20px" }}>

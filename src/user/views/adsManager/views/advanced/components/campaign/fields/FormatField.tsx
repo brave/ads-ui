@@ -34,7 +34,7 @@ export function FormatField({ prices }: PriceProps) {
     <CardContainer header={_(msg`Format`)}>
       <Stack direction="row" spacing={0.5} alignItems="center">
         <Typography variant="body2">
-          {_(msg`Choose a format for the campaign you would like to run`)}
+          {_(msg`Choose a format for the campaign you would like to run.`)}{" "}
           <LearnMoreButton
             helpSection={`ad-placements/brave-browser/${path}`}
           />
