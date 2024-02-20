@@ -32,7 +32,7 @@ export function MarketingOptIn() {
             Advertiser Privacy Policy
           </PolicyLink>{" "}
           and{" "}
-          <PolicyLink to="https://basicattentiontoken.org/advertiser-xterms-of-service/">
+          <PolicyLink to="https://basicattentiontoken.org/advertiser-terms-of-service/">
             Terms of Service
           </PolicyLink>{" "}
           applicable to Brave Ads
