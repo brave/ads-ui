@@ -9,6 +9,7 @@ export function MarketingOptIn() {
   const PolicyLink = (props: { to: string } & PropsWithChildren) => (
     <Link
       underline="none"
+      sx={{ cursor: "pointer" }}
       onClick={() => {
         window.open(`${props.to}`, "__blank", "noopener");
       }}
