@@ -1,7 +1,6 @@
 import { boolean, object, string } from "yup";
 import { t } from "@lingui/macro";
 
-
 export const AdvertiserSchema = () =>
   object().shape({
     tracking: boolean()
@@ -20,6 +19,6 @@ export const AdvertiserSchema = () =>
       city: string().required(t`City is required`),
       state: string().nullable(),
       country: string().required(t`Country is required`),
-      zipcode: string().nullable()
+      zipcode: string().nullable(),
     }),
   });
