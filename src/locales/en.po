@@ -1006,7 +1006,7 @@ msgstr "In a video on YouTube"
 
 #: src/auth/registration/AdvertiserRegistered.tsx:53
 msgid "In the meantime, check out our <0>advertiser resources</0>. If you have any questions, please reach out to <1>selfserve@brave.com</1>."
-msgstr "In the meantime, check out our <0>advertiser resources</0>. If you have any questions, please reach out to <1>"
+msgstr "In the meantime, check out our <0>advertiser resources</0>. If you have any questions, please reach out to <1>selfserve@brave.com</1>."
 
 #: src/components/Datagrid/renderers.tsx:42
 msgid "In your local time this is"
