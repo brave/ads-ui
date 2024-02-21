@@ -1,5 +1,6 @@
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { Button } from "@mui/material";
+import { Trans } from "@lingui/macro";
 
 export function NewImageButton(props: { onClick: () => void }) {
   const { advertiser } = useAdvertiser();
@@ -16,7 +17,7 @@ export function NewImageButton(props: { onClick: () => void }) {
       disabled={!advertiser.agreed}
       onClick={props.onClick}
     >
-      Upload Image
+      <Trans>Upload Image</Trans>
     </Button>
   );
 }

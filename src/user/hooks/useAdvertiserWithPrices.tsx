@@ -8,6 +8,8 @@ import { IAdvertiser } from "auth/context/auth.interface";
 import _ from "lodash";
 import { BillingType } from "graphql/types";
 import { Billing } from "user/views/adsManager/types";
+import { useLingui } from "@lingui/react";
+import { msg } from "@lingui/macro";
 
 export type AdvertiserPrice = Omit<AdvertiserPriceFragment, "billingType"> & {
   billingType: Billing;
@@ -22,6 +24,7 @@ interface Params {
 
 export function useAdvertiserWithPrices(params: Params = {}) {
   const { advertiser } = useAdvertiser();
+  const { _: lingui } = useLingui();
   const [data, setData] = useState<AdvertiserWithPrices>({
     ...advertiser,
     prices: [],
@@ -33,7 +36,7 @@ export function useAdvertiserWithPrices(params: Params = {}) {
     onCompleted(data) {
       const prices = data.advertiser?.prices ?? [];
       if (_.isEmpty(prices)) {
-        setError("Unable to create a new campaign");
+        setError(lingui(msg`Unable to create a new campaign`));
         return;
       }
 

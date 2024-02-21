@@ -18,6 +18,7 @@ import { DraftContext } from "state/context";
 import { NewKeyPairModal } from "user/settings/NewKeyPairModal";
 import MiniSideBar from "components/Drawer/MiniSideBar";
 import { useTrackWithMatomo } from "hooks/useTrackWithMatomo";
+import { Trans } from "@lingui/macro";
 
 const Settings = () => {
   const { trackMatomoEvent } = useTrackWithMatomo({
@@ -45,18 +46,22 @@ const Settings = () => {
         <Stack spacing={2} mt={1}>
           <NewKeyPairModal advertiser={advertiser} />
 
-          <CardContainer header="Organization">
+          <CardContainer header={<Trans>Organization</Trans>}>
             <Typography>
-              You may have access to multiple organisations. Switch between them
-              here.
+              <Trans>
+                You may have access to multiple organisations. Switch between
+                them here.
+              </Trans>
             </Typography>
 
             <Box sx={{ mt: 2 }}>
               <FormControl fullWidth>
-                <InputLabel>Select Organization</InputLabel>
+                <InputLabel>
+                  <Trans>Select Organization</Trans>
+                </InputLabel>
                 <Select
                   value={advertiser.id}
-                  label="Select Organization"
+                  label={<Trans>Select Organization</Trans>}
                   onChange={(e) => setActiveAdvertiserWithId(e)}
                 >
                   {advertisers.map((a) => (

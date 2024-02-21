@@ -2,6 +2,8 @@ import { Conversion } from "user/views/adsManager/types";
 import { FormikErrors } from "formik";
 import { ReviewField } from "user/views/adsManager/views/advanced/components/review/components/ReviewField";
 import _ from "lodash";
+import { msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 
 interface Props {
   conversions: Conversion[];
@@ -9,8 +11,14 @@ interface Props {
 }
 
 export function ConversionDisplay({ conversions, convErrors }: Props) {
+  const { _: lingui } = useLingui();
   if (conversions.length === 0) {
-    return <ReviewField caption="Conversion" value="No conversion URL setup" />;
+    return (
+      <ReviewField
+        caption={msg`Conversion`}
+        value={lingui(msg`No conversion URL setup`)}
+      />
+    );
   }
 
   function extractConversionError(
@@ -35,17 +43,17 @@ export function ConversionDisplay({ conversions, convErrors }: Props) {
       {conversions.map((c, idx) => (
         <div key={idx}>
           <ReviewField
-            caption="Conversion Type"
+            caption={msg`Conversion Type`}
             value={c.type}
             error={extractConversionError(idx, "type")}
           />
           <ReviewField
-            caption="Observation Window"
+            caption={msg`Observation Window`}
             value={`${c.observationWindow} days`}
             error={extractConversionError(idx, "observationWindow")}
           />
           <ReviewField
-            caption="Conversion URL Pattern"
+            caption={msg`Conversion URL Pattern`}
             value={c.urlPattern}
             error={extractConversionError(idx, "urlPattern")}
           />

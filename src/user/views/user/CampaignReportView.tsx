@@ -11,6 +11,8 @@ import { OsOverview } from "user/analytics/analyticsOverview/reports/os/OsOvervi
 import { CampaignFormat } from "graphql/types";
 import { AlwaysOnFormButton } from "components/Button/AlwaysOnFormButton";
 import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
+import { useLingui } from "@lingui/react";
+import { msg } from "@lingui/macro";
 
 interface Params {
   campaignId: string;
@@ -19,6 +21,7 @@ interface Params {
 export function CampaignReportView() {
   useTrackMatomoPageView({ documentTitle: "Campaign Reporting" });
   const params = useParams<Params>();
+  const { _ } = useLingui();
   const today = new Date();
   const [startDate, setStartDate] = useState<Date | undefined>();
   const [endDate, setEndDate] = useState<Date>(today);
@@ -90,7 +93,7 @@ export function CampaignReportView() {
       />
 
       {showReport && filteredEngagements.length > 0 && (
-        <CollapseBox header="Additional Report: OS Performance">
+        <CollapseBox header={_(msg`Additional Report: OS Performance`)}>
           <OsOverview engagements={filteredEngagements} />
         </CollapseBox>
       )}

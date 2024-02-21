@@ -6,6 +6,8 @@ import { useField } from "formik";
 import { NotificationPreview } from "components/Creatives/NotificationPreview";
 import { CreateCreativeButton } from "components/Creatives/CreateCreativeButton";
 import { useEffect } from "react";
+import { msg, Trans } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 
 interface NotificationAdProps {
   name?: string;
@@ -38,26 +40,27 @@ export function NotificationAd(props: NotificationAdProps) {
 
 const NotificationAdForm = (props: NotificationAdProps) => {
   const withName = (s: string) => (props.name ? `${props.name}.${s}` : s);
+  const { _ } = useLingui();
 
   return (
     <>
       <Typography variant="h2" fontWeight={500}>
-        Notification Ad
+        <Trans>Notification ad</Trans>
       </Typography>
 
-      <FormikTextField name={withName("name")} label="Name" />
+      <FormikTextField name={withName("name")} label={_(msg`Name`)} />
 
       <FormikTextField
         name={withName("payloadNotification.title")}
-        label="Title"
-        helperText="Max 30 Characters"
+        label={_(msg`Title`)}
+        helperText={_(msg`Max 30 Characters`)}
         maxLengthInstantFeedback={30}
       />
 
       <FormikTextField
         name={withName("payloadNotification.body")}
-        label="Body"
-        helperText="Max 60 Characters"
+        label={_(msg`Body`)}
+        helperText={_(msg`Max 60 Characters`)}
         maxLengthInstantFeedback={60}
       />
 
@@ -66,8 +69,8 @@ const NotificationAdForm = (props: NotificationAdProps) => {
       <UrlResolver
         name={withName("payloadNotification.targetUrl")}
         validator={withName("targetUrlValid")}
-        label="Target URL"
-        helperText="Example - https://brave.com/brave-rewards/"
+        label={_(msg`Target URL`)}
+        helperText={_(msg`Example - https://brave.com/brave-rewards/`)}
       />
 
       {props.useCustomButton !== true && (

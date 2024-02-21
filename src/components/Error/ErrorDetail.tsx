@@ -10,13 +10,17 @@ import {
   Typography,
 } from "@mui/material";
 import { VERSION } from "util/version";
+import { MessageDescriptor } from "@lingui/core";
+import { Trans } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 
 interface Props {
   error?: any;
-  additionalDetails?: string;
+  additionalDetails?: MessageDescriptor;
 }
 
 export const ErrorDetail = ({ error, additionalDetails }: Props) => {
+  const { _ } = useLingui();
   if (!error) {
     return null;
   }
@@ -31,8 +35,13 @@ export const ErrorDetail = ({ error, additionalDetails }: Props) => {
     return (
       <Box mt={2}>
         <Alert severity="warning">
-          <AlertTitle>401 Forbidden</AlertTitle>A forbidden error was returned.
-          You may need to log out and back in again.
+          <AlertTitle>
+            <Trans>401 Forbidden</Trans>
+          </AlertTitle>
+          <Trans>
+            A forbidden error was returned. You may need to log out and back in
+            again.
+          </Trans>
         </Alert>
       </Box>
     );
@@ -52,21 +61,29 @@ ${stringError === "{}" ? "" : stringError}
   return (
     <Box mt={2}>
       <Alert severity="error">
-        <AlertTitle>Something went wrong.</AlertTitle>
-        <p>An error has occurred while processing your request.</p>
+        <AlertTitle>
+          <Trans>Something went wrong.</Trans>
+        </AlertTitle>
         <p>
-          Please refresh the page to try again, or email <SelfServeMailTo /> for
-          assistance.
+          <Trans>An error has occurred while processing your request.</Trans>
+        </p>
+        <p>
+          <Trans>
+            Please refresh the page to try again, or email <SelfServeMailTo />{" "}
+            for assistance.
+          </Trans>
         </p>
       </Alert>
 
       {additionalDetails && (
         <Accordion>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>Additional Details</Typography>
+            <Typography>
+              <Trans>Additional Details</Trans>
+            </Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <pre style={{ overflow: "scroll" }}>{additionalDetails}</pre>
+            <pre style={{ overflow: "scroll" }}>{_(additionalDetails)}</pre>
           </AccordionDetails>
         </Accordion>
       )}
@@ -75,5 +92,6 @@ ${stringError === "{}" ? "" : stringError}
 };
 
 const SelfServeMailTo = () => (
+  // eslint-disable-next-line lingui/no-unlocalized-strings
   <a href="mailto:selfserve@brave.com">selfserve@brave.com</a>
 );

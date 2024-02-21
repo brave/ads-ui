@@ -13,12 +13,14 @@ import {
 import { NextAndBack } from "components/Steps/NextAndBack";
 import { useHistory } from "react-router-dom";
 import { ActionButtons } from "components/Steps/ActionButtons";
+import { MessageDescriptor } from "@lingui/core";
+import { Trans } from "@lingui/react";
 
 const drawerWidth = 222;
 
 interface Props {
   steps: {
-    label: string;
+    label: MessageDescriptor;
     path: string;
     queryParams?: string;
     content?: ReactNode;
@@ -58,14 +60,14 @@ export function StepDrawer({
             orientation="vertical"
           >
             {steps.map((step, index) => (
-              <Step key={step.label} completed={activeStep.current > index}>
+              <Step key={step.label.id} completed={activeStep.current > index}>
                 <StepButton
                   onClick={() => {
                     history.replace(`${step.path}${step.queryParams ?? ""}`);
                     activeStep.current = index;
                   }}
                 >
-                  {step.label}
+                  <Trans id={step.label.id} />
                 </StepButton>
                 {step.content && <StepContent>{step.content}</StepContent>}
               </Step>

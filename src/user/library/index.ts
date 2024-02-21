@@ -18,14 +18,7 @@ import _ from "lodash";
 import BigNumber from "bignumber.js";
 import { CreativeFragment } from "graphql/creative.generated";
 import moment from "moment";
-
-const TYPE_CODE_LOOKUP: Record<string, string> = {
-  notification_all_v1: "Notification",
-  new_tab_page_all_v1: "New tab takeover",
-  inline_content_all_v1: "Newsfeed",
-  search_all_v1: "Search keyword",
-  search_homepage_all_v1: "Search homepage",
-};
+import { t } from "@lingui/macro";
 
 export function transformNewForm(
   form: CampaignForm,
@@ -250,7 +243,15 @@ function dailyLimit(format: CampaignFormat) {
 }
 
 export function uiTextForCreativeType(creativeType: string): string {
-  return TYPE_CODE_LOOKUP[creativeType] ?? creativeType;
+  const codeLookup: Record<string, string> = {
+    notification_all_v1: t`Notification`,
+    new_tab_page_all_v1: t`New tab takeover`,
+    inline_content_all_v1: t`Newsfeed`,
+    search_all_v1: t`Search keyword`,
+    search_homepage_all_v1: t`Search homepage`,
+  };
+
+  return codeLookup[creativeType] ?? creativeType;
 }
 
 export function uiTextForCreativeTypeCode(creativeTypeCode: {

@@ -3,6 +3,7 @@ import { ImagePreview } from "components/Assets/ImagePreview";
 import { useField, useFormikContext } from "formik";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { CreativeInput } from "graphql/types";
+import { Trans } from "@lingui/macro";
 
 export function NewsPreview() {
   const { advertiser } = useAdvertiser();
@@ -49,8 +50,12 @@ export function NewsPreview() {
             fontWeight={500}
             maxWidth={400}
           >
-            {value?.title ||
-              "This is a news display ad, it wll look like part of the news feed."}
+            {value?.title || (
+              <Trans>
+                This is a news display ad, it wll look like part of the news
+                feed.
+              </Trans>
+            )}
           </Typography>
           <Box
             width="200px"
@@ -67,7 +72,7 @@ export function NewsPreview() {
               borderRadius="100px"
             >
               <Typography fontSize="14px">
-                {value?.ctaText || "Click Here!"}
+                {value?.ctaText || <Trans>Click Here!</Trans>}
               </Typography>
             </Box>
           </Box>

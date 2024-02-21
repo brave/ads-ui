@@ -1,44 +1,25 @@
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Divider from "@mui/material/Divider";
-import {
-  Drawer,
-  Link,
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Menu,
-  MenuItem,
-  Typography,
-} from "@mui/material";
-import { PropsWithChildren, ReactNode, MouseEvent, useState } from "react";
-import { Link as RouterLink, useRouteMatch } from "react-router-dom";
+import { Drawer, List } from "@mui/material";
+import { PropsWithChildren } from "react";
 import CampaignOutlinedIcon from "@mui/icons-material/CampaignOutlined";
 import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlined";
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
-import HeadsetMicOutlinedIcon from "@mui/icons-material/HeadsetMicOutlined";
 import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined";
 import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { AlwaysOnFormButton } from "components/Button/AlwaysOnFormButton";
-import { useIsMobile } from "hooks/useIsMobile";
-import { useTrackMatomoEvent } from "hooks/useTrackWithMatomo";
-
-type RouteOption = {
-  label: string;
-  href: string;
-  icon: ReactNode;
-  disabled?: boolean;
-  onClick?: (event: MouseEvent<any>) => void;
-};
+import { msg } from "@lingui/macro";
+import { SupportMenu } from "components/Drawer/SupportMenu";
+import { ItemBox, RouteOption } from "components/Drawer/components/ItemBox";
 
 const drawerWidth = 85;
 export default function MiniSideBar({ children }: PropsWithChildren) {
   const { advertiser } = useAdvertiser();
   const dashboardRoutes: RouteOption[] = [
     {
-      label: "Campaigns",
+      label: msg`Campaigns`,
       href: "/user/main/campaign",
       icon: (
         <CampaignOutlinedIcon
@@ -48,7 +29,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
       ),
     },
     {
-      label: "Ads",
+      label: msg`Ads`,
       href: "/user/main/ads",
       icon: (
         <LightbulbOutlinedIcon
@@ -59,7 +40,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
       disabled: !advertiser.selfServiceManageCampaign,
     },
     {
-      label: "Audiences",
+      label: msg`Audiences`,
       href: "/user/main/audiences",
       icon: (
         <PeopleOutlineOutlinedIcon
@@ -73,7 +54,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
 
   const settingsRoutes: RouteOption[] = [
     {
-      label: "Account",
+      label: msg`Account`,
       href: "/user/main/settings",
       icon: (
         <AccountBalanceOutlinedIcon
@@ -83,7 +64,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
       ),
     },
     {
-      label: "Profile",
+      label: msg`Profile`,
       href: "/user/main/profile",
       icon: (
         <AccountBoxOutlinedIcon
@@ -138,109 +119,5 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
       {children}
       <AlwaysOnFormButton />
     </Box>
-  );
-}
-
-const ItemBox = (props: RouteOption) => {
-  const match = useRouteMatch();
-  return (
-    <ListItemButton
-      component={RouterLink}
-      to={props.href}
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        borderRadius: "0px",
-        gap: "3px",
-        visibility: props.disabled ? "hidden" : "visible",
-        paddingLeft: "3px",
-        paddingRight: "3px",
-      }}
-      selected={match.url.includes(props.href)}
-      onClick={props.onClick}
-    >
-      <ListItemIcon sx={{ minWidth: "unset" }}>{props.icon}</ListItemIcon>
-      <ListItemText disableTypography>
-        <Typography textAlign="center" variant="caption" fontWeight={500}>
-          {props.label}
-        </Typography>
-      </ListItemText>
-    </ListItemButton>
-  );
-};
-
-interface SupportProps {
-  usePlainLink?: boolean;
-}
-
-export function SupportMenu({ usePlainLink }: SupportProps) {
-  const { trackMatomoEvent } = useTrackMatomoEvent();
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const isMobile = useIsMobile();
-
-  const handleClick = (
-    event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
-  ) => {
-    trackMatomoEvent("support-menu", "click");
-    setAnchorEl(event.currentTarget);
-  };
-
-  return (
-    <>
-      {!usePlainLink && (
-        <ItemBox
-          label="Support"
-          href="#"
-          icon={
-            <HeadsetMicOutlinedIcon
-              fontSize="large"
-              sx={{ color: "text.secondary" }}
-            />
-          }
-          onClick={handleClick}
-        />
-      )}
-      {usePlainLink && (
-        <Link
-          variant={isMobile ? "body2" : "subtitle1"}
-          underline="none"
-          color="text.primary"
-          sx={{ cursor: "pointer" }}
-          onClick={handleClick}
-        >
-          Support
-        </Link>
-      )}
-      <Menu open={open} anchorEl={anchorEl} onClose={() => setAnchorEl(null)}>
-        <MenuItem
-          onClick={() => {
-            window.open("https://ads-help.brave.com/", "_blank", "noopener");
-            setAnchorEl(null);
-          }}
-        >
-          Help Center
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            window.open("https://brave.com/brave-ads", "_blank", "noopener");
-            setAnchorEl(null);
-          }}
-        >
-          About Brave Ads
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            window.open("mailto:selfserve@brave.com", "_self", "noopener");
-            setAnchorEl(null);
-          }}
-        >
-          Contact:{" "}
-          <Link sx={{ ml: 1 }} underline="none">
-            selfserve@brave.com
-          </Link>
-        </MenuItem>
-      </Menu>
-    </>
   );
 }

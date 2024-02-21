@@ -9,6 +9,8 @@ import { AdSetList } from "user/adSet/AdSetList";
 import { AdList } from "user/ads/AdList";
 import { EngagementFragment } from "graphql/analytics-overview.generated";
 import { adEngagements } from "user/analytics/analyticsOverview/lib/ads.library";
+import { msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 
 interface Params {
   campaignId: string;
@@ -21,6 +23,7 @@ interface Props {
 
 export function CampaignDetails({ engagements, engagementLoading }: Props) {
   const params = useParams<Params>();
+  const { _ } = useLingui();
   const { data, loading, error } = useLoadCampaignAdsQuery({
     variables: { id: params.campaignId },
     fetchPolicy: "cache-and-network",
@@ -31,15 +34,15 @@ export function CampaignDetails({ engagements, engagementLoading }: Props) {
   );
 
   const tabs = [
-    { label: "Ad sets", icon: <DatasetIcon /> },
-    { label: "Ads", icon: <LibraryBooksIcon /> },
+    { label: _(msg`Ad sets`), icon: <DatasetIcon /> },
+    { label: _(msg`Ads`), icon: <LibraryBooksIcon /> },
   ];
 
   if (error) {
     return (
       <ErrorDetail
         error={error}
-        additionalDetails="Unable to retrieve ad sets or ads for Campaign."
+        additionalDetails={msg`Unable to retrieve ad sets or ads for Campaign.`}
       />
     );
   }

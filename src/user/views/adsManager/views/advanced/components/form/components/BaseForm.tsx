@@ -9,6 +9,7 @@ import { Route, Switch, useRouteMatch } from "react-router-dom";
 import { FormContext } from "state/context";
 import { useState } from "react";
 import { AdvertiserPrice } from "user/hooks/useAdvertiserWithPrices";
+import { msg } from "@lingui/macro";
 
 interface Props {
   hasPaymentIntent?: boolean | null;
@@ -21,19 +22,19 @@ export function BaseForm({ hasPaymentIntent, prices }: Props) {
 
   const steps = [
     {
-      label: "Campaign Settings",
+      label: msg`Campaign Settings`,
       path: `${url}/settings`,
       component: <CampaignSettings prices={prices} />,
     },
     {
-      label: "Ad Sets",
+      label: msg`Ad Sets`,
       path: `${url}/adSets`,
       queryParams: "?current=0",
       content: <NewAdSet />,
       component: <AdSetFields />,
     },
     {
-      label: "Review",
+      label: msg`Review`,
       path: `${url}/review`,
       component: <Review />,
     },

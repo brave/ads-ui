@@ -7,6 +7,9 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import { msg } from "@lingui/macro";
+import { useLingui, Trans } from "@lingui/react";
+import { MessageDescriptor } from "@lingui/core";
 import { AccountSetup } from "auth/registration/types";
 import { useField } from "formik";
 
@@ -47,10 +50,10 @@ const Team = createSvgIcon(
 );
 
 interface ChoiceOptions {
-  title: string;
+  title: MessageDescriptor;
   icon: any;
-  description: string;
-  points: string[];
+  description: MessageDescriptor;
+  points: MessageDescriptor[];
   value: AccountSetup;
   minSpend: string;
 }
@@ -58,24 +61,22 @@ interface ChoiceOptions {
 export function AccountChoice() {
   const buttons: ChoiceOptions[] = [
     {
-      title: "Self-service",
+      title: msg`Self-service`,
       icon: <Pointer sx={{ height: "1.5em", width: "1.5em" }} />,
-      description:
-        "For small to mid-sized businesses to create and manage their Brave Ads campaigns independently.",
-      points: ["Notification ads", "Newsfeed ads"],
+      description: msg`For small to mid-sized businesses to create and manage their Brave Ads campaigns independently.`,
+      points: [msg`Notification ads`, msg`Newsfeed ads`],
       value: "self",
       minSpend: "500",
     },
     {
-      title: "Managed service",
+      title: msg`Managed service`,
       icon: <Team sx={{ height: "1.5em", width: "1.5em" }} />,
-      description:
-        "For enterprise and agency businesses looking for bespoke ad solutions via dedicated Brave Ads representatives.",
+      description: msg`For enterprise and agency businesses looking for bespoke ad solutions via dedicated Brave Ads representatives.`,
       points: [
-        "Search keyword ads",
-        "New tab takeover",
-        "Notification ads",
-        "Newsfeed ads",
+        msg`Search keyword ads`,
+        msg`New tab takeover`,
+        msg`Notification ads`,
+        msg`Newsfeed ads`,
       ],
       value: "managed",
       minSpend: "10,000",
@@ -101,6 +102,7 @@ function AccountItemButton({
   value,
   minSpend,
 }: ChoiceOptions) {
+  const { _ } = useLingui();
   const theme = useTheme();
   const [, meta, helper] = useField<AccountSetup | undefined>("setup");
 
@@ -126,13 +128,15 @@ function AccountItemButton({
     >
       <Box display="flex" flexDirection="column" gap="5px" mt={2}>
         <Typography fontWeight={700} fontSize="20px">
-          {title}
+          <Trans id={title.id} />
         </Typography>
-        <Typography variant="caption">{description}</Typography>
+        <Typography variant="caption">
+          <Trans id={description.id} />
+        </Typography>
       </Box>
       <Box display="flex" flexDirection="column">
         <Typography variant="caption" fontWeight={600}>
-          Available Ad placements
+          {_(msg`Available Ad placements`)}
         </Typography>
         {points.map((p, idx) => (
           <Box
@@ -143,7 +147,7 @@ function AccountItemButton({
             fontSize="0.75rem"
             lineHeight="1.66"
           >
-            {p}
+            <Trans id={p.id} />
           </Box>
         ))}
       </Box>
@@ -156,12 +160,10 @@ function AccountItemButton({
       >
         <Stack direction="column">
           <Typography variant="caption" fontWeight={600}>
-            Minimum Spend
+            {_(msg`Minimum Spend`)}
           </Typography>
           <Typography variant="caption" color="text.secondary">
-            {"$"}
-            {minSpend}
-            {"/month"}
+            {`$${minSpend}/${_(msg`month`)}`}
           </Typography>
         </Stack>
         <Box display="flex" justifyContent="right" alignItems="center">

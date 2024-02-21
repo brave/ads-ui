@@ -3,6 +3,7 @@ import { buildAdServerEndpoint } from "util/environment";
 import Papa from "papaparse";
 import tweetnacl from "tweetnacl";
 import { useTrackMatomoEvent } from "hooks/useTrackWithMatomo";
+import { t } from "@lingui/macro";
 
 interface DownloadProps {
   onComplete?: () => void;
@@ -33,7 +34,7 @@ export function useDownloadCSV(props: DownloadProps = {}) {
     })
       .then((res) => {
         if (res.status !== 200) {
-          const err = "Unable to download CSV";
+          const err = t`Unable to download CSV`;
           setError(err);
           throw new Error(err);
         }
@@ -92,7 +93,7 @@ async function transformConversionEnvelope(blob: Blob): Promise<Blob> {
     fileReader.onload = () => {
       const text = fileReader.result as string | null;
       if (text === null) {
-        reject(new Error("No file Result"));
+        reject(new Error(t`No file result`));
         return;
       }
 
@@ -110,7 +111,7 @@ async function transformConversionEnvelope(blob: Blob): Promise<Blob> {
               );
               return res
                 ? td.decode(res.filter((v) => v !== 0x00))
-                : "Data not valid for this private key";
+                : t`Data not valid for this private key`;
             }
 
             return value;
@@ -128,7 +129,7 @@ async function transformConversionEnvelope(blob: Blob): Promise<Blob> {
         });
       } catch (e) {
         console.error(e);
-        reject(new Error("Unable to decrypt conversion data"));
+        reject(new Error(t`Unable to decrypt conversion data`));
       }
     };
 

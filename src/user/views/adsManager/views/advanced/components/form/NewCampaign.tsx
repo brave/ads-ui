@@ -17,6 +17,8 @@ import { useAdvertiserWithPrices } from "user/hooks/useAdvertiserWithPrices";
 import { ErrorDetail } from "components/Error/ErrorDetail";
 import _ from "lodash";
 import { useTrackWithMatomo } from "hooks/useTrackWithMatomo";
+import { msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 
 interface Params {
   draftId: string;
@@ -27,6 +29,7 @@ export function NewCampaign() {
     documentTitle: "New Campaign",
   });
   const history = useHistory();
+  const { _: lingui } = useLingui();
   const { fromDate } = useContext(FilterContext);
   const params = useParams<Params>();
   const { userId } = useUser();
@@ -61,7 +64,7 @@ export function NewCampaign() {
     },
     onError() {
       trackMatomoEvent("campaign", "creation-failed");
-      alert("Unable to create Campaign.");
+      alert(lingui(msg`Unable to Create Campaign.`));
     },
     refetchQueries: [
       {
@@ -78,7 +81,12 @@ export function NewCampaign() {
   }
 
   if (error) {
-    return <ErrorDetail error={error} additionalDetails={error} />;
+    return (
+      <ErrorDetail
+        error={error}
+        additionalDetails={msg`Campaign creation is currently unavailable`}
+      />
+    );
   }
 
   return (

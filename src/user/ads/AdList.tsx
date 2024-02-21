@@ -8,6 +8,8 @@ import { AdDetailTable } from "user/views/user/AdDetailTable";
 import { GridColDef } from "@mui/x-data-grid";
 import { CreativeFragment } from "graphql/creative.generated";
 import { Box } from "@mui/material";
+import { useLingui } from "@lingui/react";
+import { msg, Trans } from "@lingui/macro";
 
 interface Props {
   campaign?: CampaignAdsFragment | null;
@@ -26,6 +28,7 @@ export type AdDetails = AdFragment & {
 };
 
 export function AdList({ campaign, loading, engagements }: Props) {
+  const { _: lingui } = useLingui();
   const adSets = campaign?.adSets?.map((c) => ({
     ads: (c.ads ?? []).map((ad) => {
       const detail: AdDetails = {
@@ -49,14 +52,18 @@ export function AdList({ campaign, loading, engagements }: Props) {
   const columns: GridColDef<AdDetails>[] = [
     {
       field: "name",
-      headerName: "Ad Name",
+      headerName: lingui(msg`Ad Name`),
       valueGetter: ({ row }) =>
         row.adState !== "deleted"
           ? row.creative.name
           : `(DELETED) ${row.creative.name}`,
       renderCell: ({ row }) => (
         <Box>
-          {row.adState === "deleted" && <strong>(DELETED) </strong>}
+          {row.adState === "deleted" && (
+            <strong>
+              (<Trans>DELETED</Trans>)
+            </strong>
+          )}
           {row.creative.name}
         </Box>
       ),
@@ -64,19 +71,19 @@ export function AdList({ campaign, loading, engagements }: Props) {
     },
     {
       field: "adSetName",
-      headerName: "Ad set name",
+      headerName: lingui(msg`Ad set name`),
       valueGetter: ({ row }) => row.adSetName,
       flex: 1,
     },
     {
       field: "title",
-      headerName: "Title",
+      headerName: lingui(msg`Title`),
       valueGetter: ({ row }) => title(row.creative),
       flex: 1,
     },
     {
       field: "body",
-      headerName: "Body",
+      headerName: lingui(msg`Body`),
       valueGetter: ({ row }) => body(row.creative),
       flex: 1,
     },

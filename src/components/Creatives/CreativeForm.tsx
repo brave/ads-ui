@@ -19,6 +19,7 @@ import { CampaignFragment } from "graphql/campaign.generated";
 import _ from "lodash";
 import { isReviewableState } from "util/displayState";
 import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
+import { msg, Trans } from "@lingui/macro";
 
 interface Params {
   id: string;
@@ -50,7 +51,10 @@ export function CreativeForm() {
 
   if (getError) {
     return (
-      <ErrorDetail error={getError} additionalDetails="Unable to load ad" />
+      <ErrorDetail
+        error={getError}
+        additionalDetails={msg`Unable to load ad`}
+      />
     );
   }
 
@@ -63,7 +67,7 @@ export function CreativeForm() {
           onSubmit={(values, { setSubmitting }) => {
             void submit(values, setSubmitting);
           }}
-          validationSchema={CreativeSchema}
+          validationSchema={CreativeSchema()}
         >
           {({ values }) => (
             <Form>
@@ -74,7 +78,9 @@ export function CreativeForm() {
                 flexWrap="wrap"
               >
                 <CardContainer
-                  header={`${isNew ? "New" : "Edit"} ad`}
+                  header={
+                    isNew ? <Trans>Create ad</Trans> : <Trans>Edit ad</Trans>
+                  }
                   sx={{ flexGrow: 1 }}
                 >
                   <CreativeType allowTypeChange={id === "new"} />
@@ -82,7 +88,7 @@ export function CreativeForm() {
 
                 <ErrorDetail
                   error={submitError}
-                  additionalDetails="Unable to save ad"
+                  additionalDetails={msg`Unable to save ad`}
                 />
 
                 <CreativeCampaigns
@@ -129,18 +135,18 @@ const dialogProps = (
   const campaigns = creativeCampaigns ?? [];
   const campaignLength = campaigns.length;
 
-  let message =
-    "Modifying an ad will immediately put it into review. This means it will no longer be shown to users until it is approved.";
+  let message = msg`Modifying an ad will immediately put it into review. This means it will no longer be shown to users until it is approved.`;
   if (campaignLength > 1) {
-    message = `${message}. This ad is also shared across ${campaignLength} campaigns. Any modifications made will be effective for all campaigns using this creative.`;
+    message = msg`Modifying an ad will immediately put it into review. This means it will no longer be shown to users until it is approved. This ad is also shared across ${campaignLength} campaigns. Any modifications made will be effective for all campaigns using this creative.`;
   }
 
+  const creativeName = creative.name;
   const hasDialog =
     !isReviewableState(creative.state) &&
     campaigns.some((c) => !isReviewableState(c.state));
   return {
     hasDialog,
-    dialogTitle: `Are you sure you want to modify "${creative.name}"?`,
+    dialogTitle: msg`Are you sure you want to modify "${creativeName}"?`,
     dialogMessage: message,
   };
 };

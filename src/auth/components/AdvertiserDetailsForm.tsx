@@ -18,6 +18,7 @@ import { AdvertiserSchema } from "validation/AdvertiserSchema";
 import { useState } from "react";
 import { useTrackWithMatomo } from "hooks/useTrackWithMatomo";
 import _ from "lodash";
+import { msg, Trans } from "@lingui/macro";
 
 export function AdvertiserDetailsForm() {
   const { trackMatomoEvent } = useTrackWithMatomo({
@@ -72,7 +73,7 @@ export function AdvertiserDetailsForm() {
           });
           setSubmitting(false);
         }}
-        validationSchema={AdvertiserSchema}
+        validationSchema={AdvertiserSchema()}
       >
         <Form>
           <Box display="flex" flexDirection="column">
@@ -93,12 +94,15 @@ export function AdvertiserDetailsForm() {
               >
                 <Stack spacing={0.5}>
                   <Typography variant="h4">
-                    Welcome to Brave Ads, <strong>{advertiser.name}</strong>
+                    <Trans>Welcome to Brave Ads</Trans>,{" "}
+                    <strong>{advertiser.name}</strong>
                   </Typography>
                   <Typography variant="subtitle1">
-                    Prior to using the dashboard, please take a moment to
-                    complete your profile and review the following
-                    acknowledgements:
+                    <Trans>
+                      Prior to using the dashboard, please take a moment to
+                      complete your profile and review the following
+                      acknowledgements:
+                    </Trans>
                   </Typography>
                 </Stack>
 
@@ -110,7 +114,10 @@ export function AdvertiserDetailsForm() {
               </Card>
             )}
             <Box alignSelf="flex-end">
-              <FormikSubmitButton isCreate={false} label="Access dashboard" />
+              <FormikSubmitButton
+                isCreate={false}
+                label={msg`Access dashboard`}
+              />
             </Box>
           </Box>
         </Form>

@@ -3,6 +3,7 @@ import _ from "lodash";
 import moment from "moment";
 import { useContext } from "react";
 import { FilterContext } from "state/context";
+import { Trans } from "@lingui/macro";
 
 interface Props {
   disabled?: boolean;
@@ -30,7 +31,7 @@ export const CampaignAgeFilter = ({ disabled }: Props) => {
       }
       label={
         <Typography variant="body1">
-          Include campaigns that ended over 6 months ago
+          <Trans>Include campaigns that ended over 6 months ago</Trans>
         </Typography>
       }
     />

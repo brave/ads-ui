@@ -5,6 +5,7 @@ import { Conversion, initialConversion } from "../../../../../types";
 import { CardContainer } from "components/Card/CardContainer";
 import { Add } from "@mui/icons-material";
 import { LearnMoreButton } from "components/Button/LearnMoreButton";
+import { Trans } from "@lingui/macro";
 
 interface Props {
   index: number;
@@ -16,16 +17,18 @@ export function ConversionField({ index }: Props) {
   const hasConversions = conversions.length > 0;
 
   return (
-    <CardContainer header="Conversion">
+    <CardContainer header={<Trans>Conversion</Trans>}>
       <FieldArray name={`adSets.${index}.conversions`}>
         {(helper: FieldArrayRenderProps) => (
           <>
             <Stack direction={hasConversions ? "row" : "column"} spacing={1}>
               <Typography variant="body2" sx={{ mb: 2 }}>
-                Enter a URL that represents your conversion goal, like a
-                checkout or subscription confirmation page. <br />
-                Brave will count unique visits to that page from users who saw
-                or clicked your ad.{" "}
+                <Trans>
+                  Enter a URL that represents your conversion goal, like a
+                  checkout or subscription confirmation page. <br />
+                  Brave will count unique visits to that page from users who saw
+                  or clicked your ad.
+                </Trans>{" "}
                 <LearnMoreButton helpSection="campaign-performance/reporting#conversion-reporting-in-brave-ads-manager" />
               </Typography>
               {!hasConversions && (
@@ -38,7 +41,7 @@ export function ConversionField({ index }: Props) {
                   }}
                   endIcon={<Add />}
                 >
-                  Add Conversion tracking
+                  <Trans>Add Conversion tracking</Trans>
                 </Button>
               )}
               {hasConversions && (
@@ -48,7 +51,7 @@ export function ConversionField({ index }: Props) {
                   onClick={() => helper.remove(0)}
                   sx={{ cursor: "pointer" }}
                 >
-                  Remove Conversion Tracking -
+                  <Trans>Remove Conversion Tracking</Trans>
                 </Link>
               )}
             </Stack>

@@ -1,18 +1,21 @@
 import { Link, Stack, Typography } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
 import { FormikCheckbox } from "form/FormikHelpers";
+import { useLingui } from "@lingui/react";
+import { msg, Trans } from "@lingui/macro";
+import { PropsWithChildren } from "react";
 
 export function MarketingOptIn() {
-  const PolicyLink = (props: { title: string; to: string }) => (
+  const { _ } = useLingui();
+  const PolicyLink = (props: { to: string } & PropsWithChildren) => (
     <Link
-      to={props.to}
       underline="none"
-      variant="inherit"
-      rel="noreferrer"
+      component="a"
+      href={props.to}
+      sx={{ cursor: "pointer" }}
       target="_blank"
-      component={RouterLink}
+      rel="noopener"
     >
-      {props.title}
+      {props.children}
     </Link>
   );
 
@@ -20,20 +23,22 @@ export function MarketingOptIn() {
     <Stack mt={1}>
       <FormikCheckbox
         name="marketingOptIn"
-        label="I would like to receive marketing emails about new features and promotions from Brave Ads"
+        label={_(
+          msg`I would like to receive marketing emails about new features and promotions from Brave Ads`,
+        )}
       />
       <Typography variant="body2">
-        Please see our{" "}
-        <PolicyLink
-          title="Advertiser Privacy Policy"
-          to="https://brave.com/advertiser-privacy/"
-        />{" "}
-        and{" "}
-        <PolicyLink
-          title="Terms of Service"
-          to="https://basicattentiontoken.org/advertiser-terms-of-service/"
-        />{" "}
-        applicable to Brave Ads
+        <Trans>
+          Please see our{" "}
+          <PolicyLink to="https://brave.com/advertiser-privacy/">
+            Advertiser Privacy Policy
+          </PolicyLink>{" "}
+          and{" "}
+          <PolicyLink to="https://basicattentiontoken.org/advertiser-terms-of-service/">
+            Terms of Service
+          </PolicyLink>{" "}
+          applicable to Brave Ads
+        </Trans>
       </Typography>
     </Stack>
   );

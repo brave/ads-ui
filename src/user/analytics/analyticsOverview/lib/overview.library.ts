@@ -9,6 +9,7 @@ import {
 } from "user/analytics/analyticsOverview/types";
 import { EngagementFragment } from "graphql/analytics-overview.generated";
 import BigNumber from "bignumber.js";
+import { t } from "@lingui/macro";
 
 type MetricDataSet = {
   metric1DataSet: number[][];
@@ -85,6 +86,7 @@ export const prepareChart = (
       .filter((m) => m[1].active)
       .map((e, idx) => {
         const attrs = decideValueAttribute(e[1].key);
+        // eslint-disable-next-line lingui/no-unlocalized-strings
         const dataKey = `${e[0]}DataSet` as keyof MetricDataSet;
         return {
           animation: false,
@@ -145,19 +147,35 @@ export const decideLabel = (metric: string) => {
     case "ctr":
       return "CTR";
     case "convRate":
-      return "Conversion rate";
+      return t`Conversion rate`;
     case "landingRate":
-      return "Click to site visit rate";
+      return t`Click to site visit rate`;
     case "views":
-      return "Impressions";
+      return t`Impressions`;
     case "cpa":
-      return "CPA";
+      return t`CPA`;
     case "visitRate":
-      return "Site visit rate";
+      return t`Site visit rate`;
     case "dismissRate":
-      return "Dismissal rate";
+      return t`Dismissal rate`;
     case "landings":
-      return "Site visits";
+      return t`Site visits`;
+    case "clicks":
+      return t`Clicks`;
+    case "conversions":
+      return t`Conversions`;
+    case "spend":
+      return t`Spend`;
+    case "upvotes":
+      return t`Upvotes`;
+    case "downvotes":
+      return t`Downvotes`;
+    case "dismissals":
+      return t`Dismissals`;
+    case "clickthroughConversion":
+      return t`Click-through conversions`;
+    case "viewthroughConversion":
+      return t`View-through conversions`;
     default:
       return _.capitalize(metric);
   }

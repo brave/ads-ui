@@ -6,6 +6,7 @@ import { CampaignReview } from "./components/CampaignReview";
 import { AdSetReview } from "./components/AdSetReview";
 import { PaymentMethodField } from "user/views/adsManager/views/advanced/components/campaign/fields/PaymentMethodField";
 import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
+import { Trans } from "@lingui/macro";
 
 export function Review() {
   const { values, errors, setTouched } = useFormikContext<CampaignForm>();
@@ -35,8 +36,11 @@ export function Review() {
       <PaymentMethodField />
 
       <Typography variant="caption">
-        <strong>*</strong>New campaigns typically take up to 48 hours to review
-        during a regular U.S. business week.
+        <strong>*</strong>
+        <Trans>
+          New campaigns typically take up to 48 hours to review during a regular
+          U.S. business week.
+        </Trans>
       </Typography>
     </Box>
   );

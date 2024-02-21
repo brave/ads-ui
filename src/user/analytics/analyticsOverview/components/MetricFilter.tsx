@@ -3,6 +3,7 @@ import { Box, Stack, Switch, Tooltip, Typography } from "@mui/material";
 import { decideValueAttribute } from "user/analytics/analyticsOverview/lib/overview.library";
 import { Metrics, StatsMetric } from "user/analytics/analyticsOverview/types";
 import { toLocaleString } from "util/bignumber";
+import { Trans } from "@lingui/macro";
 
 type FilterMetric = {
   key: keyof StatsMetric;
@@ -59,7 +60,9 @@ const FilterBox = ({
         <Typography>
           {attrs.prefix ?? ""} {toLocaleString(displayVal)} {attrs.suffix ?? ""}
         </Typography>
-        <Tooltip title={filter.active ? "Hide" : "Show"}>
+        <Tooltip
+          title={filter.active ? <Trans>Hide</Trans> : <Trans>Show</Trans>}
+        >
           <Switch
             checked={filter.active}
             onChange={() => {

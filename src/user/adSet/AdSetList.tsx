@@ -11,6 +11,8 @@ import { displayFromCampaignState } from "util/displayState";
 import { uiLabelsForBillingType } from "util/billingType";
 import { GridColDef } from "@mui/x-data-grid";
 import { segmentNameWithNoDash } from "util/segment";
+import { useLingui } from "@lingui/react";
+import { msg, Trans } from "@lingui/macro";
 
 interface Props {
   loading: boolean;
@@ -44,7 +46,9 @@ const ChipList = ({ items, max }: ChipListProps) => {
       ))}
 
       {sorted.length > MAX_ITEMS && (
-        <span>+ {sorted.length - MAX_ITEMS} more</span>
+        <span>
+          + {sorted.length - MAX_ITEMS} <Trans>more</Trans>
+        </span>
       )}
     </>
   );
@@ -62,6 +66,7 @@ export type CampaignExtras = {
 };
 
 export function AdSetList({ campaign, loading, engagements }: Props) {
+  const { _ } = useLingui();
   const adSets: AdSetDetails[] = (campaign?.adSets ?? []).map((c) => ({
     ...c,
     campaignStart: campaign?.startAt ?? "",
@@ -76,7 +81,7 @@ export function AdSetList({ campaign, loading, engagements }: Props) {
     {
       field: "switch",
       type: "actions",
-      headerName: "On/Off",
+      headerName: _(msg`On/Off`),
       valueGetter: ({ row }) => row.state,
       renderCell: ({ row }) => adSetOnOffState(row),
       sortable: false,
@@ -85,13 +90,13 @@ export function AdSetList({ campaign, loading, engagements }: Props) {
     },
     {
       field: "name",
-      headerName: "Name",
+      headerName: _(msg`Name`),
       valueGetter: ({ row }) => row.name || row.id.substring(0, 8),
       flex: 1,
     },
     {
       field: "state",
-      headerName: "Status",
+      headerName: _(msg`Status`),
       valueGetter: ({ row }) => displayFromCampaignState(row),
       renderCell: ({ row }) => (
         <Status
@@ -104,14 +109,14 @@ export function AdSetList({ campaign, loading, engagements }: Props) {
     },
     {
       field: "billingType",
-      headerName: "Type",
+      headerName: _(msg`Type`),
       valueGetter: ({ row }) =>
         uiLabelsForBillingType(row.billingType).longLabel,
       width: 150,
     },
     {
       field: "oses",
-      headerName: "Platforms",
+      headerName: _(msg`Platforms`),
       valueGetter: ({ row }) =>
         row.oses?.map((o: { name: string }) => o.name).join(", "),
       renderCell: ({ row }) => {
@@ -132,7 +137,7 @@ export function AdSetList({ campaign, loading, engagements }: Props) {
     },
     {
       field: "segments",
-      headerName: "Audiences",
+      headerName: _(msg`Audiences`),
       valueGetter: ({ row }) =>
         row.segments?.map((o: { name: string }) => o.name).join(", "),
       renderCell: ({ row }) => (

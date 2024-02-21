@@ -8,18 +8,20 @@ import { Billing } from "user/views/adsManager/types";
 import { uiLabelsForCampaignFormat } from "util/campaign";
 import { uiLabelsForBillingType } from "util/billingType";
 import { LearnMoreButton } from "components/Button/LearnMoreButton";
+import { Trans } from "@lingui/macro";
 
 export function BillingModelSelect(props: { prices: AdvertiserPrice[] }) {
   const { isEdit } = useIsEdit();
   const [, , price] = useField<string>("price");
   const [, format] = useField<CampaignFormat>("format");
   const [, bMeta, billing] = useField<Billing>("billingType");
+  const campaignFormat = uiLabelsForCampaignFormat(format.value);
 
   return (
     <Stack maxWidth={500}>
       <Typography variant="body2">
-        {uiLabelsForCampaignFormat(format.value)} pricing configuration
-        option(s). <LearnMoreButton helpSection="account-management/billing" />
+        <Trans>{campaignFormat} pricing configuration option(s):</Trans>{" "}
+        <LearnMoreButton helpSection="account-management/billing" />
       </Typography>
       <List sx={{ display: "flex", flexDirection: "row", gap: "20px" }}>
         {props.prices

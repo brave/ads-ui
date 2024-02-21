@@ -11,11 +11,14 @@ import ads from "../../../logo.svg";
 import { Link as RouterLink, useRouteMatch } from "react-router-dom";
 import { useIsAuthenticated } from "auth/hooks/queries/useIsAuthenticated";
 import { useSignOut } from "auth/hooks/mutations/useSignOut";
-import { SupportMenu } from "components/Drawer/MiniSideBar";
 import { useIsMobile } from "hooks/useIsMobile";
+import { msg, Trans } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
+import { SupportMenu } from "components/Drawer/SupportMenu";
 
 export function LandingPageAppBar() {
   const match = useRouteMatch();
+  const { _ } = useLingui();
   const isAuthenticated = useIsAuthenticated();
   const isMobile = useIsMobile();
   const isContact = match.url.includes("contact");
@@ -31,7 +34,11 @@ export function LandingPageAppBar() {
         variant={isMobile ? "body2" : "subtitle1"}
         color={isContact ? "primary" : "text.primary"}
       >
-        {isContact ? "Register for Self-service" : "Get started"}
+        {isContact ? (
+          <Trans>Register for Self-service</Trans>
+        ) : (
+          <Trans>Get started</Trans>
+        )}
       </Typography>
     </RouterLink>
   );
@@ -42,25 +49,13 @@ export function LandingPageAppBar() {
         (isMobile && !isSearch) || isAuthenticated ? null : <GetStarted />,
     },
     {
-      component: !isSearch ? (
-        <RouterLink to={`/search`} style={{ textDecoration: "none" }}>
-          <Typography
-            variant={isMobile ? "body2" : "subtitle1"}
-            color="text.primary"
-          >
-            Brave Search
-          </Typography>
-        </RouterLink>
-      ) : undefined,
-    },
-    {
       component: !isBAT ? (
         <RouterLink to={`/bat`} style={{ textDecoration: "none" }}>
           <Typography
             variant={isMobile ? "body2" : "subtitle1"}
             color="text.primary"
           >
-            Basic Attention Token
+            <Trans>Basic Attention Token</Trans>
           </Typography>
         </RouterLink>
       ) : undefined,
@@ -89,11 +84,13 @@ export function LandingPageAppBar() {
             justifyContent="space-between"
           >
             <RouterLink to="/" style={{ marginTop: 5 }}>
-              <img src={ads} alt="Ads" height="31px" width="180px" />
+              <img src={ads} alt={_(msg`Ads`)} height="31px" width="180px" />
             </RouterLink>
 
             <Divider orientation="vertical" flexItem />
-            {links.map((l) => l.component)}
+            {links.map((l, i) => (
+              <div key={`menu_component_${i}`}>{l.component}</div>
+            ))}
           </Stack>
           <div style={{ flexGrow: 1 }} />
           {!isMobile && !match.url.includes("auth") && (
@@ -116,7 +113,7 @@ function AuthedButton(props: { isAuthenticated?: boolean }) {
       to={!props.isAuthenticated ? "/auth/link" : "/"}
       onClick={props.isAuthenticated ? () => signOut() : undefined}
     >
-      {props.isAuthenticated ? "Sign out" : "Log in"}
+      {props.isAuthenticated ? <Trans>Sign out</Trans> : <Trans>Log in</Trans>}
     </Button>
   );
 }

@@ -8,6 +8,8 @@ import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { CardContainer } from "components/Card/CardContainer";
 import { ImageAutocomplete } from "components/Assets/ImageAutocomplete";
 import { NewsPreview } from "components/Creatives/NewsPreview";
+import { useLingui } from "@lingui/react";
+import { msg, Trans } from "@lingui/macro";
 
 interface InlineAdProps {
   name?: string;
@@ -50,24 +52,27 @@ export function InlineContentAd(props: InlineAdProps) {
 }
 
 const InlineAdForm = (props: InlineAdProps) => {
+  const { _ } = useLingui();
   const { advertiser } = useAdvertiser();
   const withName = (s: string) => (props.name ? `${props.name}.${s}` : s);
 
   return (
     <>
-      <Typography variant="h2">News Display Ad</Typography>
+      <Typography variant="h2">
+        <Trans>Newsfeed Ad</Trans>
+      </Typography>
 
-      <FormikTextField name={withName("name")} label="Name" />
+      <FormikTextField name={withName("name")} label={_(msg`Name`)} />
 
       <FormikTextField
         name={withName("payloadInlineContent.title")}
-        label="Title"
+        label={_(msg`Title`)}
         maxLengthInstantFeedback={90}
       />
 
       <FormikTextField
         name={withName("payloadInlineContent.ctaText")}
-        label="Call to Action text"
+        label={_(msg`Call to Action text`)}
         maxLengthInstantFeedback={15}
       />
 
@@ -76,13 +81,13 @@ const InlineAdForm = (props: InlineAdProps) => {
       <UrlResolver
         validator={withName("targetUrlValid")}
         name={withName("payloadInlineContent.targetUrl")}
-        label="Target URL"
+        label={_(msg`Target URL`)}
       />
 
       {advertiser.selfServiceSetPrice && (
         <FormikTextField
           name={withName("payloadInlineContent.description")}
-          label="Advertiser Name"
+          label={_(msg`Advertiser Name`)}
         />
       )}
 

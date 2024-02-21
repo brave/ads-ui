@@ -11,6 +11,7 @@ import {
 } from "user/views/adsManager/types";
 import { FormContext } from "state/context";
 import { CampaignFormat } from "graphql/types";
+import { Trans } from "@lingui/macro";
 
 export function NewAd() {
   const { values } = useFormikContext<CampaignForm>();
@@ -26,7 +27,11 @@ export function NewAd() {
   }, [meta.value]);
 
   return (
-    <BoxContainer header={meta.value ? "Discard ad" : "Create new ad"}>
+    <BoxContainer
+      header={
+        meta.value ? <Trans>Discard ad</Trans> : <Trans>Create new ad</Trans>
+      }
+    >
       <Box
         component={Button}
         height={

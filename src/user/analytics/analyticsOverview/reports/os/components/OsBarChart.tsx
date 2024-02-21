@@ -2,6 +2,7 @@ import { useState } from "react";
 import { SeriesOptionsType } from "highcharts";
 import { CalculatedOSMetric, OS } from "user/analytics/analyticsOverview/types";
 import { BaseBarChart } from "../../../components/BaseBarChart";
+import { msg } from "@lingui/macro";
 
 export function OsBarChart(props: CalculatedOSMetric) {
   const oses: (keyof OS)[] = ["android", "ios", "linux", "macos", "windows"];
@@ -49,7 +50,7 @@ export function OsBarChart(props: CalculatedOSMetric) {
     setValidSeries(mapToSeries(metric));
   };
 
-  const extra = [{ value: "cpa", label: "CPA" }];
+  const extra = [{ value: "cpa", label: msg`CPA` }];
   return (
     <BaseBarChart
       categories={oses.map((d) => d)}

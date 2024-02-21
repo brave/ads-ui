@@ -1,8 +1,10 @@
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import { Link as RouterLink, useHistory } from "react-router-dom";
+import { Trans } from "@lingui/react";
+import { MessageDescriptor } from "@lingui/core";
 
 interface Params {
-  routes: { label: string; value: string }[];
+  routes: { label: MessageDescriptor; value: string }[];
 }
 
 export function RouteSelectionButton({ routes }: Params) {
@@ -21,7 +23,7 @@ export function RouteSelectionButton({ routes }: Params) {
       {routes.map((r) => (
         <BottomNavigationAction
           key={`navigation_tab_${r.value}`}
-          label={r.label}
+          label={<Trans id={r.label.id} />}
           sx={{
             textAlign: "left",
             p: 0,

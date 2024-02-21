@@ -16,21 +16,25 @@ import { AdvertiserPrice } from "user/hooks/useAdvertiserWithPrices";
 import ErrorIcon from "@mui/icons-material/Error";
 import { CustomTooltip } from "components/Tooltip/CustomTooltip";
 import { LearnMoreButton } from "components/Button/LearnMoreButton";
+import { msg } from "@lingui/macro";
+import { Trans, useLingui } from "@lingui/react";
+import { MessageDescriptor } from "@lingui/core";
 
 interface PriceProps {
   prices: AdvertiserPrice[];
 }
 
 export function FormatField({ prices }: PriceProps) {
+  const { _ } = useLingui();
   const [, meta] = useField<CampaignFormat>("format");
   const path =
     meta.value === CampaignFormat.PushNotification ? "notification" : "news";
 
   return (
-    <CardContainer header="Format">
+    <CardContainer header={_(msg`Format`)}>
       <Stack direction="row" spacing={0.5} alignItems="center">
         <Typography variant="body2">
-          Choose a format for the campaign you would like to run.{" "}
+          {_(msg`Choose a format for the campaign you would like to run.`)}{" "}
           <LearnMoreButton
             helpSection={`ad-placements/brave-browser/${path}`}
           />
@@ -40,19 +44,19 @@ export function FormatField({ prices }: PriceProps) {
         <FormatItemButton
           format={CampaignFormat.PushNotification}
           prices={prices}
-          name="Notification ads"
+          name={msg`Notification ads`}
         />
         <FormatItemButton
           format={CampaignFormat.NewsDisplayAd}
           prices={prices}
-          name="Newsfeed ads"
+          name={msg`Newsfeed ads`}
         />
         <ProspectButton
-          name="New tab takeovers"
+          name={_(msg`New tab takeovers`)}
           salesLink="https://contact.ads.brave.com/"
         />
         <ProspectButton
-          name="Search keyword ads"
+          name={_(msg`Search keyword ads`)}
           salesLink="https://ads.brave.com/search"
         />
       </List>
@@ -61,7 +65,7 @@ export function FormatField({ prices }: PriceProps) {
 }
 
 const FormatItemButton = (
-  props: { format: CampaignFormat; name: string } & PriceProps,
+  props: { format: CampaignFormat; name: MessageDescriptor } & PriceProps,
 ) => {
   const { isEdit } = useIsEdit();
   const [, meta, format] = useField<CampaignFormat>("format");
@@ -85,12 +89,14 @@ const FormatItemButton = (
         border: "1px solid #7c91ff",
       }}
     >
-      {props.name}
+      <Trans id={props.name.id} />
     </ListItemButton>
   );
 };
 
 const ProspectButton = (props: { name: string; salesLink: string }) => {
+  const adFormatName = props.name;
+  const { _ } = useLingui();
   return (
     <ListItem
       sx={{
@@ -100,15 +106,16 @@ const ProspectButton = (props: { name: string; salesLink: string }) => {
         backgroundColor: "#EBEBEB",
       }}
     >
-      <Typography color="text.secondary">{props.name}</Typography>
+      <Typography color="text.secondary">{adFormatName}</Typography>
       <CustomTooltip
         arrow
         placement="top"
         title={
           <Stack p={1} spacing={1}>
             <Typography variant="caption">
-              {props.name} are not available for self-managed campaigns. Please
-              contact sales to inquire.
+              {_(
+                msg`${adFormatName} are not available for self-managed campaigns. Please contact sales to inquire.`,
+              )}
             </Typography>
             <Link
               underline="hover"
@@ -117,7 +124,7 @@ const ProspectButton = (props: { name: string; salesLink: string }) => {
               }
               sx={{ alignSelf: "flex-end", cursor: "pointer" }}
             >
-              Contact Sales →
+              {_(msg`Contact Sales`)} →
             </Link>
           </Stack>
         }

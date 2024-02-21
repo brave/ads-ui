@@ -7,6 +7,7 @@ import { useField } from "formik";
 import { Creative } from "user/views/adsManager/types";
 import { DisplayError } from "user/views/adsManager/views/advanced/components/review/components/ReviewField";
 import { ImagePreview } from "components/Assets/ImagePreview";
+import { Trans } from "@lingui/macro";
 
 interface Props extends PropsWithChildren {
   options: Creative[];
@@ -25,7 +26,7 @@ export function CreativeSpecificPreview({
   let component;
   if (format.value === CampaignFormat.PushNotification) {
     component = options.map((c, idx) => (
-      <BoxContainer header={c.name} key={idx} useTypography>
+      <BoxContainer header={c.name} key={idx}>
         <NotificationPreview
           title={c.payloadNotification?.title}
           body={c.payloadNotification?.body}
@@ -34,7 +35,7 @@ export function CreativeSpecificPreview({
     ));
   } else if (format.value === CampaignFormat.NewsDisplayAd) {
     component = options.map((c, idx) => (
-      <BoxContainer header={c.name} useTypography key={idx}>
+      <BoxContainer header={c.name} key={idx}>
         <ImagePreview
           url={c.payloadInlineContent?.imageUrl ?? ""}
           width={300}
@@ -48,7 +49,7 @@ export function CreativeSpecificPreview({
     return (
       <>
         <Typography variant="overline" component="span" paddingRight={1}>
-          Ads
+          <Trans>Ads</Trans>
         </Typography>
         <DisplayError error={error} />
       </>
@@ -59,7 +60,7 @@ export function CreativeSpecificPreview({
     <>
       {useSimpleHeader && (
         <Typography variant="overline" component="span" paddingRight={1}>
-          Ads
+          <Trans>Ads</Trans>
         </Typography>
       )}
       <Stack

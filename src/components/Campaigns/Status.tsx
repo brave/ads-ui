@@ -16,6 +16,7 @@ export const Status = ({ state, start, end, opaque }: Props) => {
 
   if (start) {
     if (isBeforeStartDate(start) && state === "active") {
+      // eslint-disable-next-line lingui/no-unlocalized-strings
       label = "Scheduled";
       color = "#e2e2fc";
     }
@@ -23,6 +24,7 @@ export const Status = ({ state, start, end, opaque }: Props) => {
 
   if (end) {
     if (isAfterEndDate(end) && state === "active") {
+      // eslint-disable-next-line lingui/no-unlocalized-strings
       label = "Completed";
       color = calcColorForState("completed");
     }

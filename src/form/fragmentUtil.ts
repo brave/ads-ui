@@ -33,6 +33,7 @@ export function createCampaignFromFragment(
       code: g.code,
       name: g.name,
     })),
+    // eslint-disable-next-line lingui/no-unlocalized-strings
     name: `${data.name} - Copy`,
     pacingStrategy: data.pacingStrategy,
     source: data.source.toLowerCase(),
@@ -59,6 +60,7 @@ export function createAdSetFromFragment(
       type: c.type,
       urlPattern: c.urlPattern,
     })),
+    // eslint-disable-next-line lingui/no-unlocalized-strings
     name: `${data.name ? data.name : data.id.split("-")[0]} - Copy`,
     oses: (data.oses ?? []).map((o) => ({ name: o.name, code: o.code })),
     perDay: data.perDay,

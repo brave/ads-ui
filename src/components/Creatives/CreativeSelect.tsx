@@ -10,6 +10,7 @@ import { FormContext } from "state/context";
 import { useFormikContext } from "formik";
 import { CampaignFormat } from "graphql/types";
 import { ImagePreview } from "components/Assets/ImagePreview";
+import { Trans } from "@lingui/macro";
 
 export function CreativeSelect(
   props: {
@@ -85,7 +86,7 @@ export function CreativeSelect(
                 color={isSelected(co) ? "text.primary" : "rgba(0, 0, 0, 0.3)"}
                 textAlign="right"
               >
-                created {moment(co.createdAt).fromNow()}
+                <Trans>created</Trans> {moment(co.createdAt).fromNow()}
               </Typography>
             )}
           </BoxContainer>
@@ -110,7 +111,7 @@ export function CreativeSelect(
             setIsShowingAds(false);
           }}
         >
-          Complete selection
+          <Trans>Complete selection</Trans>
         </Button>
       )}
     </Box>

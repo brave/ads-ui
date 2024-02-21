@@ -8,6 +8,7 @@ import { NewCampaignButton } from "components/Navigation/NewCampaignButton";
 import { UploadImage } from "components/Assets/UploadImage";
 import { useHistory } from "react-router-dom";
 import { NewCreativeButton } from "components/Navigation/NewCreativeButton";
+import { Trans } from "@lingui/macro";
 
 export function Navbar() {
   const { signOut } = useSignOut();
@@ -49,7 +50,7 @@ export function Navbar() {
         <div style={{ flexGrow: 1 }} />
         {buttons.find((b) => history.location.pathname === b.route)?.component}
         <Button variant="outlined" size="medium" onClick={() => signOut()}>
-          Sign out
+          <Trans>Sign out</Trans>
         </Button>
       </Toolbar>
     </AppBar>

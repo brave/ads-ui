@@ -6,6 +6,7 @@ import { CampaignForm } from "user/views/adsManager/types";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { Link as RouterLink } from "react-router-dom";
+import { Trans } from "@lingui/macro";
 
 export function ActionButtons() {
   const { values } = useFormikContext<CampaignForm>();
@@ -25,7 +26,7 @@ export function ActionButtons() {
             setDrafts();
           }}
         >
-          Discard campaign
+          <Trans>Discard campaign</Trans>
         </Button>
       )}
       <Button
@@ -34,7 +35,7 @@ export function ActionButtons() {
         to="/user/main/campaign"
         startIcon={<ArrowBackIcon />}
       >
-        Return to dashboard
+        <Trans>Return to dashboard</Trans>
       </Button>
     </Stack>
   );
