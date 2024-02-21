@@ -49,18 +49,6 @@ export function LandingPageAppBar() {
         (isMobile && !isSearch) || isAuthenticated ? null : <GetStarted />,
     },
     {
-      component: !isSearch ? (
-        <RouterLink to={`/search`} style={{ textDecoration: "none" }}>
-          <Typography
-            variant={isMobile ? "body2" : "subtitle1"}
-            color="text.primary"
-          >
-            <Trans>Brave Search</Trans>
-          </Typography>
-        </RouterLink>
-      ) : undefined,
-    },
-    {
       component: !isBAT ? (
         <RouterLink to={`/bat`} style={{ textDecoration: "none" }}>
           <Typography

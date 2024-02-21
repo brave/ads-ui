@@ -178,7 +178,7 @@ msgstr ""
 msgid "Additional Report: OS Performance"
 msgstr ""
 
-#: src/components/AppBar/LandingPageAppBar.tsx:99
+#: src/components/AppBar/LandingPageAppBar.tsx:87
 #: src/components/Assets/AdvertiserAssets.tsx:32
 #: src/components/Creatives/CreativeList.tsx:100
 #: src/components/Creatives/CreativeSpecificPreview.tsx:52
@@ -268,7 +268,7 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
-#: src/components/AppBar/LandingPageAppBar.tsx:70
+#: src/components/AppBar/LandingPageAppBar.tsx:58
 msgid "Basic Attention Token"
 msgstr ""
 
@@ -303,8 +303,8 @@ msgid "Brave is place where early adopters thrive. We’re celebrating our crypt
 msgstr ""
 
 #: src/components/AppBar/LandingPageAppBar.tsx:58
-msgid "Brave Search"
-msgstr ""
+#~ msgid "Brave Search"
+#~ msgstr ""
 
 #: src/search/SearchTalkingPoints.tsx:13
 msgid "Brave Search Ads convert as well as, or better than Google Search ad clicks."
@@ -442,7 +442,7 @@ msgstr ""
 msgid "City"
 msgstr ""
 
-#: src/validation/AdvertiserSchema.tsx:20
+#: src/validation/AdvertiserSchema.tsx:19
 msgid "City is required"
 msgstr ""
 
@@ -627,7 +627,7 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
-#: src/validation/AdvertiserSchema.tsx:22
+#: src/validation/AdvertiserSchema.tsx:21
 msgid "Country is required"
 msgstr ""
 
@@ -955,7 +955,7 @@ msgstr ""
 msgid "I understand that pre-payment is required to launch my campaigns"
 msgstr ""
 
-#: src/auth/registration/MarketingOptIn.tsx:29
+#: src/auth/registration/MarketingOptIn.tsx:27
 msgid "I would like to receive marketing emails about new features and promotions from Brave Ads"
 msgstr ""
 
@@ -1103,7 +1103,7 @@ msgstr ""
 
 #: src/auth/views/LandingPage.tsx:81
 #: src/auth/views/Login.tsx:67
-#: src/components/AppBar/LandingPageAppBar.tsx:128
+#: src/components/AppBar/LandingPageAppBar.tsx:116
 msgid "Log in"
 msgstr ""
 
@@ -1351,7 +1351,7 @@ msgstr ""
 msgid "Payment"
 msgstr ""
 
-#: src/validation/AdvertiserSchema.tsx:12
+#: src/validation/AdvertiserSchema.tsx:11
 msgid "Payment acknowledgement is required"
 msgstr ""
 
@@ -1414,7 +1414,7 @@ msgstr ""
 msgid "Please refresh the page to try again, or email <0/> for assistance."
 msgstr ""
 
-#: src/auth/registration/MarketingOptIn.tsx:33
+#: src/auth/registration/MarketingOptIn.tsx:31
 msgid "Please see our <0>Advertiser Privacy Policy</0> and <1>Terms of Service</1> applicable to Brave Ads"
 msgstr ""
 
@@ -1612,7 +1612,7 @@ msgstr ""
 msgid "Show"
 msgstr ""
 
-#: src/components/AppBar/LandingPageAppBar.tsx:128
+#: src/components/AppBar/LandingPageAppBar.tsx:116
 #: src/components/Navigation/Navbar.tsx:53
 msgid "Sign out"
 msgstr ""
@@ -1698,7 +1698,7 @@ msgstr ""
 msgid "Street address"
 msgstr ""
 
-#: src/validation/AdvertiserSchema.tsx:18
+#: src/validation/AdvertiserSchema.tsx:17
 msgid "Street address is required"
 msgstr ""
 
@@ -1756,7 +1756,7 @@ msgstr ""
 msgid "Terms & Conditions"
 msgstr ""
 
-#: src/validation/AdvertiserSchema.tsx:15
+#: src/validation/AdvertiserSchema.tsx:14
 msgid "Terms & Conditions acknowledgement is required"
 msgstr ""
 
@@ -1788,7 +1788,7 @@ msgstr ""
 msgid "The username or password did not match our records."
 msgstr ""
 
-#: src/validation/AdvertiserSchema.tsx:9
+#: src/validation/AdvertiserSchema.tsx:8
 msgid "Third party tracking acknowledgement is required"
 msgstr ""
 
