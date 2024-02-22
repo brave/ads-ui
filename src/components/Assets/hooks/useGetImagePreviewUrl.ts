@@ -5,23 +5,22 @@
 
 // FROM: https://github.com/brave/brave-core/blob/976e81322aab22de9bb3670f2cec23da76a1600f/components/brave_extension/extension/brave_extension/background/today/privateCDN.ts
 
-import { useEffect, useMemo, useState } from "react";
-import { useLingui } from "@lingui/react";
-import { msg } from "@lingui/macro";
+import { useEffect, useRef, useState } from "react";
+import { t } from "@lingui/macro";
 
 export function useGetImagePreviewUrl(props: { url: string }) {
   const [data, setData] = useState<string>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
-  const { _ } = useLingui();
+  const tries = useRef(0);
 
-  const fetchImageResource: Promise<ArrayBuffer> = useMemo(async () => {
+  const fetchImageResource = async (): Promise<ArrayBuffer | null> => {
     const result = await fetchResource(props.url);
     if (result.ok) {
       return await result.arrayBuffer();
     }
 
-    return await new Promise((resolve, reject) => {
+    return await new Promise((resolve) => {
       const intrvl = setInterval(async () => {
         const result = await fetchResource(props.url);
         if (result.status === 200) {
@@ -29,13 +28,14 @@ export function useGetImagePreviewUrl(props: { url: string }) {
           resolve(await result.arrayBuffer());
         }
 
-        if (result.status !== 403) {
+        tries.current = tries.current + 1;
+        if (result.status !== 403 || tries.current > 10) {
           clearInterval(intrvl);
-          reject(new Error(_(msg`Unable to fetch image`)));
+          resolve(null);
         }
       }, 2000);
     });
-  }, [props.url]);
+  };
 
   useEffect(() => {
     async function fetchImage(url: string) {
@@ -45,11 +45,10 @@ export function useGetImagePreviewUrl(props: { url: string }) {
       }
       setLoading(true);
 
-      let blob;
-      try {
-        blob = await fetchImageResource;
-      } catch (e: any) {
-        setError(e.message);
+      const blob = await fetchImageResource();
+      if (!blob) {
+        setError(t`Failed to load image`);
+        setLoading(false);
         return;
       }
 

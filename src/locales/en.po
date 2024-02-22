@@ -824,11 +824,15 @@ msgstr "Example - https://brave.com/brave-rewards/"
 msgid "Export"
 msgstr "Export"
 
-#: src/components/Assets/hooks/useUploadFile.ts:153
+#: src/components/Assets/hooks/useUploadFile.ts:149
 msgid "Failed to Fetch"
 msgstr "Failed to Fetch"
 
-#: src/components/Assets/hooks/useUploadFile.ts:149
+#: src/components/Assets/hooks/useGetImagePreviewUrl.ts:50
+msgid "Failed to load image"
+msgstr "Failed to load image"
+
+#: src/components/Assets/hooks/useUploadFile.ts:145
 msgid "Failed to upload image"
 msgstr "Failed to upload image"
 
@@ -836,7 +840,7 @@ msgstr "Failed to upload image"
 msgid "Feedback"
 msgstr "Feedback"
 
-#: src/components/Assets/hooks/useUploadFile.ts:46
+#: src/components/Assets/hooks/useUploadFile.ts:44
 msgid "File upload complete for \"{fileName}\""
 msgstr "File upload complete for \"{fileName}\""
 
@@ -1020,7 +1024,7 @@ msgstr "Include campaigns that ended over 6 months ago"
 msgid "Incremental"
 msgstr "Incremental"
 
-#: src/components/Assets/hooks/useUploadFile.ts:169
+#: src/components/Assets/hooks/useUploadFile.ts:164
 msgid "Invalid format"
 msgstr "Invalid format"
 
@@ -1390,7 +1394,7 @@ msgstr "Please enter a valid URL, for example https://brave.com"
 msgid "Please enter a valid URL, for example https://brave.com/product/*"
 msgstr "Please enter a valid URL, for example https://brave.com/product/*"
 
-#: src/auth/hooks/mutations/useGetLink.ts:18
+#: src/auth/hooks/mutations/useGetLink.ts:16
 msgid "Please enter an email."
 msgstr "Please enter an email."
 
@@ -1438,7 +1442,7 @@ msgstr "Post-View: Viewed ad and converted by visiting site on their own."
 msgid "Powerful ad formats"
 msgstr "Powerful ad formats"
 
-#: src/components/Assets/hooks/useUploadFile.ts:54
+#: src/components/Assets/hooks/useUploadFile.ts:52
 msgid "Preparing file for upload..."
 msgstr "Preparing file for upload..."
 
@@ -1838,7 +1842,7 @@ msgstr "Type"
 msgid "Unable to clone campaign"
 msgstr "Unable to clone campaign"
 
-#: src/user/hooks/useAdvertiserWithPrices.tsx:39
+#: src/user/hooks/useAdvertiserWithPrices.tsx:37
 msgid "Unable to create a new campaign"
 msgstr "Unable to create a new campaign"
 
@@ -1846,7 +1850,7 @@ msgstr "Unable to create a new campaign"
 msgid "Unable to Create Campaign."
 msgstr "Unable to Create Campaign."
 
-#: src/checkout/hooks/useCreatePaymentSession.ts:21
+#: src/checkout/hooks/useCreatePaymentSession.ts:19
 msgid "Unable to create payment session. Please try again."
 msgstr "Unable to create payment session. Please try again."
 
@@ -1859,8 +1863,8 @@ msgid "Unable to download CSV"
 msgstr "Unable to download CSV"
 
 #: src/components/Assets/hooks/useGetImagePreviewUrl.ts:34
-msgid "Unable to fetch image"
-msgstr "Unable to fetch image"
+#~ msgid "Unable to fetch image"
+#~ msgstr "Unable to fetch image"
 
 #: src/components/Creatives/CreativeCampaigns.tsx:33
 msgid "Unable to get campaign information for ad"
@@ -1911,7 +1915,7 @@ msgstr "Unable to update Advertiser."
 msgid "Unable to Update Campaign."
 msgstr "Unable to Update Campaign."
 
-#: src/components/Assets/hooks/useUploadFile.ts:127
+#: src/components/Assets/hooks/useUploadFile.ts:124
 msgid "Unable to upload image"
 msgstr "Unable to upload image"
 
@@ -1949,7 +1953,7 @@ msgstr "Upload new image"
 msgid "Uploaded images can be shared across different ad sets within a Campaign. For best quality, upload images at 900x750px resolution. Images will be automatically scaled to this size."
 msgstr "Uploaded images can be shared across different ad sets within a Campaign. For best quality, upload images at 900x750px resolution. Images will be automatically scaled to this size."
 
-#: src/components/Assets/hooks/useUploadFile.ts:68
+#: src/components/Assets/hooks/useUploadFile.ts:66
 msgid "Uploading file..."
 msgstr "Uploading file..."
 
