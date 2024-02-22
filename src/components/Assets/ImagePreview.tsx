@@ -24,6 +24,7 @@ export const ImagePreview = ({
     return <Skeleton variant="rectangular" height={height} width={width} />;
   }
 
+  console.log(error);
   if (error) {
     return <ErrorDetail error={error} />;
   }
