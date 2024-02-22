@@ -8,8 +8,7 @@ import {
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { CampaignFormat } from "graphql/types";
 import { UploadConfig } from "components/Assets/UploadImage";
-import { useLingui } from "@lingui/react";
-import { msg } from "@lingui/macro";
+import { t } from "@lingui/macro";
 
 interface PutUploadResponse {
   // the pre-signed url to which the file should be uploaded to
@@ -29,7 +28,6 @@ export const useUploadFile = ({ onComplete }: Props = {}) => {
   const [step, setStep] = useState<number>(0);
   const [state, setState] = useState<string>();
   const [loading, setLoading] = useState(false);
-  const { _: lingui } = useLingui();
 
   const [mutate] = useUploadAdvertiserImageMutation({
     refetchQueries: [
@@ -43,7 +41,7 @@ export const useUploadFile = ({ onComplete }: Props = {}) => {
     onCompleted(data) {
       const fileName = data.createAdvertiserImage.name;
       setStep(2);
-      setState(lingui(msg`File upload complete for "${fileName}"`));
+      setState(t`File upload complete for "${fileName}"`);
       setLoading(false);
       if (onComplete && url) onComplete(url);
     },
@@ -51,7 +49,7 @@ export const useUploadFile = ({ onComplete }: Props = {}) => {
 
   const uploadFile = useCallback(async (file: File, format: CampaignFormat) => {
     setLoading(true);
-    setState(lingui(msg`Preparing file for upload...`));
+    setState(t`Preparing file for upload...`);
 
     let upload: PutUploadResponse;
     try {
@@ -65,7 +63,7 @@ export const useUploadFile = ({ onComplete }: Props = {}) => {
     }
 
     try {
-      setState(lingui(msg`Uploading file...`));
+      setState(t`Uploading file...`);
       await putFile(file, upload);
       setStep(1);
     } catch (e: any) {
@@ -108,7 +106,6 @@ async function prepareForUpload(
   extension: string,
   advertiserId: string,
 ): Promise<PutUploadResponse> {
-  const { _: lingui } = useLingui();
   const resp = await fetch(
     buildAdServerEndpoint(
       `/internal/image-upload/${extension}?advertiser_id=${encodeURIComponent(
@@ -124,7 +121,7 @@ async function prepareForUpload(
       },
     },
   );
-  const unableToUpload = lingui(msg`Unable to upload image`);
+  const unableToUpload = t`Unable to upload image`;
   if (!resp.ok) {
     throw new Error(unableToUpload);
   }
@@ -137,7 +134,6 @@ async function prepareForUpload(
 }
 
 async function putFile(file: File, uploadTarget: PutUploadResponse) {
-  const { _: lingui } = useLingui();
   try {
     const resp = await fetch(uploadTarget.uploadUrl, {
       method: "PUT",
@@ -146,18 +142,17 @@ async function putFile(file: File, uploadTarget: PutUploadResponse) {
     });
 
     if (!resp.ok) {
-      throw new Error(lingui(msg`Failed to upload image`));
+      throw new Error(t`Failed to upload image`);
     }
   } catch (e: any) {
     if (e.message === "Failed to fetch") {
-      throw new Error(lingui(msg`Failed to Fetch`));
+      throw new Error(t`Failed to Fetch`);
     }
     throw e;
   }
 }
 
 const configForFormat = (format: CampaignFormat): UploadConfig => {
-  const { _: lingui } = useLingui();
   if (format === CampaignFormat.NewsDisplayAd) {
     return {
       targetHost: () => getEnvConfig().pcdnHost,
@@ -166,5 +161,5 @@ const configForFormat = (format: CampaignFormat): UploadConfig => {
     };
   }
 
-  throw new Error(lingui(msg`Invalid format`));
+  throw new Error(t`Invalid format`);
 };
