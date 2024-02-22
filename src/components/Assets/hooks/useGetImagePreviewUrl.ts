@@ -5,7 +5,7 @@
 
 // FROM: https://github.com/brave/brave-core/blob/976e81322aab22de9bb3670f2cec23da76a1600f/components/brave_extension/extension/brave_extension/background/today/privateCDN.ts
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { t } from "@lingui/macro";
 
 export function useGetImagePreviewUrl(props: { url: string }) {
@@ -14,7 +14,7 @@ export function useGetImagePreviewUrl(props: { url: string }) {
   const [error, setError] = useState<string>();
   const tries = useRef(0);
 
-  const fetchImageResource = async (): Promise<ArrayBuffer | null> => {
+  const fetchImageResource: Promise<ArrayBuffer | null> = useMemo(async () => {
     const result = await fetchResource(props.url);
     if (result.ok) {
       return await result.arrayBuffer();
@@ -29,13 +29,13 @@ export function useGetImagePreviewUrl(props: { url: string }) {
         }
 
         tries.current = tries.current + 1;
-        if (result.status !== 403 || tries.current > 10) {
+        if (result.status !== 403 || tries.current > 20) {
           clearInterval(intrvl);
           resolve(null);
         }
       }, 2000);
     });
-  };
+  }, [props.url]);
 
   useEffect(() => {
     async function fetchImage(url: string) {
@@ -45,7 +45,7 @@ export function useGetImagePreviewUrl(props: { url: string }) {
       }
       setLoading(true);
 
-      const blob = await fetchImageResource();
+      const blob = await fetchImageResource;
       if (!blob) {
         setError(t`Failed to load image`);
         setLoading(false);
