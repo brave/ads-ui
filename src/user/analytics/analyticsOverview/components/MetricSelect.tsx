@@ -123,6 +123,7 @@ export default function MetricSelect({
       value={value}
       isOptionEqualToValue={(v, o) => v.value === o.value}
       onChange={(e, v) => onSelectChange(v)}
+      getOptionLabel={(option) => _(option.label)}
       renderOption={(props, option) => (
         <Tooltip
           title={option.tooltip ? `${_(option.tooltip)}` : undefined}
