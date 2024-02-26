@@ -1,4 +1,4 @@
-import { Box, Divider, Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import { FormikTextField } from "form/FormikHelpers";
 import { CountryPicker } from "components/Country/CountryPicker";
 import { PropsWithChildren } from "react";
@@ -17,52 +17,32 @@ export function AdvertiserAddress({ address }: Props) {
   }
 
   return (
-    <Box flexGrow={1}>
-      <Divider sx={{ mt: 1, mb: 1 }} />
+    <Box alignSelf="center" width="50%">
       {!address?.street1 && (
-        <StackedFields>
-          <FormikTextField
-            required
-            name="address.street1"
-            label={_(msg`Street address`)}
-            autoComplete="address-line1"
-            margin="dense"
-          />
-
-          <FormikTextField
-            name="address.street2"
-            label={_(msg`Street address line 2`)}
-            autoComplete="address-line2"
-            margin="dense"
-          />
-        </StackedFields>
+        <FormikTextField
+          required
+          name="address.street1"
+          label={_(msg`Street address`)}
+          autoComplete="address-line1"
+          margin="dense"
+          size="small"
+          fullWidth
+        />
       )}
 
       {!address?.city && (
-        <StackedFields>
-          <FormikTextField
-            required
-            name="address.city"
-            label={_(msg`City`)}
-            autoComplete="address-level2"
-            margin="dense"
-          />
-
-          <FormikTextField
-            required
-            name="address.state"
-            label={_(msg`State / Province`)}
-            autoComplete="address-level1"
-            margin="dense"
-          />
-        </StackedFields>
+        <FormikTextField
+          required
+          name="address.city"
+          label={_(msg`City`)}
+          autoComplete="address-level2"
+          margin="dense"
+          size="small"
+        />
       )}
 
       {!address?.country && (
-        <Stack
-          direction={{ xs: "column", md: "row" }}
-          spacing={{ xs: 0, md: 1 }}
-        >
+        <StackedFields>
           <CountryPicker name="address.country" />
 
           <FormikTextField
@@ -71,18 +51,14 @@ export function AdvertiserAddress({ address }: Props) {
             label={_(msg`Zip / Postal Code`)}
             autoComplete="postal-code"
             margin="dense"
-            fullWidth
+            size="small"
           />
-        </Stack>
+        </StackedFields>
       )}
     </Box>
   );
 }
 
 function StackedFields(props: PropsWithChildren) {
-  return (
-    <Stack direction={{ xs: "column", md: "row" }} spacing={{ xs: 0, md: 1 }}>
-      {props.children}
-    </Stack>
-  );
+  return <Stack direction="column">{props.children}</Stack>;
 }

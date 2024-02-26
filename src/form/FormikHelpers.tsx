@@ -175,9 +175,10 @@ export const FormikRadioControl = (props: FormikRadioControlProps) => {
 
 interface FormikCheckboxProps {
   name: string;
-  label: string;
+  label: ReactNode;
   disabled?: boolean;
   helperText?: string;
+  showErrorMessage?: boolean;
 }
 
 export function FormikCheckbox(props: FormikCheckboxProps) {
@@ -191,9 +192,11 @@ export function FormikCheckbox(props: FormikCheckboxProps) {
         disabled={props.disabled}
       />
       {props.helperText && <FormHelperText>{props.helperText}</FormHelperText>}
-      <ErrorMessage name={field.name}>
-        {(msg: any) => <FormHelperText error>{msg}</FormHelperText>}
-      </ErrorMessage>
+      {props.showErrorMessage !== false && (
+        <ErrorMessage name={field.name}>
+          {(msg: any) => <FormHelperText error>{msg}</FormHelperText>}
+        </ErrorMessage>
+      )}
     </>
   );
 }

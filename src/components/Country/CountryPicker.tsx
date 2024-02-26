@@ -19,7 +19,6 @@ export const CountryPicker = ({ name }: Props) => {
 
   return (
     <Autocomplete
-      sx={{ width: "49.7%" }}
       autoSelect
       loading={data.length === 0}
       options={data}
@@ -33,6 +32,7 @@ export const CountryPicker = ({ name }: Props) => {
             error={meta.touched && !!errorMessage}
             autoComplete="country"
             margin="dense"
+            size="small"
           />
         </Box>
       )}

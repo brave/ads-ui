@@ -1,4 +1,4 @@
-import { Box, Card, Container, Divider, Skeleton, Stack } from "@mui/material";
+import { Box, Card, Container, Skeleton } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
 import { Form, Formik } from "formik";
@@ -64,7 +64,7 @@ export function AdvertiserDetailsForm() {
             variables: {
               updateAdvertiserInput: {
                 id: advertiser.id,
-                agreed: v.terms && v.tracking && v.payment,
+                agreed: v.terms && v.tracking && v.payment && v.language,
                 billingAddress: v.address.id
                   ? undefined
                   : _.omit(v.address, ["id"]),
@@ -76,7 +76,7 @@ export function AdvertiserDetailsForm() {
         validationSchema={AdvertiserSchema()}
       >
         <Form>
-          <Box display="flex" flexDirection="column">
+          <Box>
             {loading && (
               <Skeleton
                 variant="rounded"
@@ -90,35 +90,27 @@ export function AdvertiserDetailsForm() {
                 sx={{
                   p: 3,
                   mb: 2,
+                  display: "flex",
+                  flexDirection: "column",
                 }}
               >
-                <Stack spacing={0.5}>
-                  <Typography variant="h4">
-                    <Trans>Welcome to Brave Ads</Trans>,{" "}
-                    <strong>{advertiser.name}</strong>
-                  </Typography>
-                  <Typography variant="subtitle1">
-                    <Trans>
-                      Prior to using the dashboard, please take a moment to
-                      complete your profile and review the following
-                      acknowledgements:
-                    </Trans>
-                  </Typography>
-                </Stack>
+                <Typography variant="h4" alignSelf="center" sx={{ mb: 3 }}>
+                  <Trans>Complete your business profile to continue</Trans>
+                </Typography>
 
                 <AdvertiserAddress address={data?.advertiser?.billingAddress} />
 
-                <Divider sx={{ mt: 1, mb: 1 }} />
-
                 <AdvertiserAgreed requiresPaymentAgree={requiresPaymentAgree} />
+
+                <Box alignSelf="center">
+                  <FormikSubmitButton
+                    isCreate={false}
+                    label={msg`Enter Ads Manager`}
+                    sx={{ borderRadius: "10px", mt: 3 }}
+                  />
+                </Box>
               </Card>
             )}
-            <Box alignSelf="flex-end">
-              <FormikSubmitButton
-                isCreate={false}
-                label={msg`Access dashboard`}
-              />
-            </Box>
           </Box>
         </Form>
       </Formik>
