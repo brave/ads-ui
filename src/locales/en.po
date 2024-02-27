@@ -493,7 +493,7 @@ msgid "Cloning a campaign will take all properties including ad sets and ads, an
 msgstr "Cloning a campaign will take all properties including ad sets and ads, and create a new draft campaign with them."
 
 #: src/components/Assets/UploadImage.tsx:128
-#: src/form/FormikButton.tsx:142
+#: src/form/FormikButton.tsx:143
 #: src/user/settings/UserApiKey.tsx:112
 msgid "Close"
 msgstr "Close"
@@ -715,11 +715,11 @@ msgstr "DELETED"
 msgid "Device"
 msgstr "Device"
 
-#: src/form/FormikButton.tsx:42
+#: src/form/FormikButton.tsx:43
 msgid "Disabled because you haven’t made any changes"
 msgstr "Disabled because you haven’t made any changes"
 
-#: src/form/FormikButton.tsx:51
+#: src/form/FormikButton.tsx:52
 msgid "Disabled due to validation errors"
 msgstr "Disabled due to validation errors"
 
@@ -955,7 +955,7 @@ msgstr "Hide"
 msgid "Hour"
 msgstr "Hour"
 
-#: src/auth/components/AdvertiserAgreed.tsx:50
+#: src/auth/components/AdvertiserAgreed.tsx:56
 msgid "I have reviewed and agree to the <0>Advertiser Privacy Policy</0> and platform <1>Terms of Service</1> applicable to Brave Ads."
 msgstr "I have reviewed and agree to the <0>Advertiser Privacy Policy</0> and platform <1>Terms of Service</1> applicable to Brave Ads."
 
@@ -967,11 +967,11 @@ msgstr "I have reviewed and agree to the <0>Advertiser Privacy Policy</0> and pl
 msgid "I understand that first-party analytics are necessary for independent reporting."
 msgstr "I understand that first-party analytics are necessary for independent reporting."
 
-#: src/auth/components/AdvertiserAgreed.tsx:39
+#: src/auth/components/AdvertiserAgreed.tsx:45
 msgid "I understand that I can only run ad campaigns in English, Spanish, and Portuguese."
 msgstr "I understand that I can only run ad campaigns in English, Spanish, and Portuguese."
 
-#: src/auth/components/AdvertiserAgreed.tsx:27
+#: src/auth/components/AdvertiserAgreed.tsx:30
 msgid "I understand that payment is required before ad campaigns can be launched."
 msgstr "I understand that payment is required before ad campaigns can be launched."
 
@@ -1088,7 +1088,7 @@ msgstr "Language acknowledgement is required"
 msgid "Launch a Campaign"
 msgstr "Launch a Campaign"
 
-#: src/components/Button/LearnMoreButton.tsx:20
+#: src/components/Button/LearnMoreButton.tsx:23
 msgid "Learn More"
 msgstr "Learn More"
 
@@ -1566,8 +1566,8 @@ msgstr "Review"
 msgid "Risk Free"
 msgstr "Risk Free"
 
-#: src/form/FormikButton.tsx:70
-#: src/form/FormikButton.tsx:128
+#: src/form/FormikButton.tsx:71
+#: src/form/FormikButton.tsx:129
 #: src/user/settings/NewKeyPairModal.tsx:251
 msgid "Save"
 msgstr "Save"
@@ -1576,8 +1576,8 @@ msgstr "Save"
 msgid "Save ad"
 msgstr "Save ad"
 
-#: src/form/FormikButton.tsx:71
-#: src/form/FormikButton.tsx:128
+#: src/form/FormikButton.tsx:72
+#: src/form/FormikButton.tsx:129
 #: src/user/settings/NewKeyPairModal.tsx:251
 msgid "Saving..."
 msgstr "Saving..."
