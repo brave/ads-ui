@@ -4,6 +4,7 @@ export type AdvertiserForm = {
   tracking: boolean;
   payment: boolean;
   terms: boolean;
+  language: boolean;
   address: {
     id?: string | null;
     street1: string;
@@ -24,6 +25,7 @@ export const initialAdvertiserForm = (
     tracking: false,
     payment: paymentAgree,
     terms: false,
+    language: false,
     address: {
       id: maybeAddress?.billingAddress?.id ?? null,
       street1: maybeAddress?.billingAddress?.street1 ?? "",

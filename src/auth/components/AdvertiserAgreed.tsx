@@ -1,81 +1,78 @@
-import Typography from "@mui/material/Typography";
-import { Link, Stack } from "@mui/material";
+import { Box, Link, Stack } from "@mui/material";
 import { FormikCheckbox } from "form/FormikHelpers";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { LearnMoreButton } from "components/Button/LearnMoreButton";
 
 export function AdvertiserAgreed(props: { requiresPaymentAgree: boolean }) {
   const { _ } = useLingui();
 
   return (
-    <>
-      <Stack mb={2} spacing={0.5}>
-        <Typography sx={{ fontWeight: 600 }}>
-          <Trans>Reporting</Trans>
-        </Typography>
-        <Typography>
-          <Trans>
-            Brave’s products are made to uphold user privacy. By default, the
-            Brave browser blocks third-party tracking (scripts, tags, pixels,
-            etc.) including those used by Google Analytics. This means that most
-            standard website reporting won’t be compatible with Brave Ads. To
-            ensure advertisers have visibility into performance of campaigns,
-            we’ve detailed other effective privacy-first options for measurement
-            in our{" "}
-            <Link href="https://brave.com/brave-ads/reporting/" target="_blank">
-              reporting guide
-            </Link>
-          </Trans>
-          .
-        </Typography>
+    <Box alignSelf="center" mt={5}>
+      <Stack spacing={0.5} direction="row" alignItems="center">
         <FormikCheckbox
           name="tracking"
           label={_(
-            msg`I understand that Brave Ads will not be compatible with Google Analytics and similar solutions that rely on third-party trackers`,
+            msg`I understand that first-party analytics are necessary for independent reporting.`,
           )}
+          showErrorMessage={false}
+        />
+        <LearnMoreButton
+          variant="body2"
+          helpSection="/campaign-performance/reporting/"
         />
       </Stack>
       {props.requiresPaymentAgree && (
-        <Stack mb={2} spacing={0.5}>
-          <Typography sx={{ fontWeight: 600 }}>
-            <Trans>Payment</Trans>
-          </Typography>
-          <Typography>
-            <Trans>
-              To launch a campaign with Brave, you are required to prepay the
-              full amount you intend to spend. Any remaining funds from your
-              budget will be credited back to your original payment method upon
-              request.
-            </Trans>
-          </Typography>
+        <Stack spacing={0.5} direction="row" alignItems="center">
           <FormikCheckbox
             name="payment"
             label={_(
-              msg`I understand that pre-payment is required to launch my campaigns`,
+              msg`I understand that payment is required before ad campaigns can be launched.`,
             )}
+            showErrorMessage={false}
+          />
+          <LearnMoreButton
+            variant="body2"
+            helpSection="/account-management/billing"
           />
         </Stack>
       )}
 
-      <Stack mb={2} spacing={0.5}>
-        <Typography sx={{ fontWeight: 600 }}>
-          <Trans>Terms & Conditions</Trans>
-        </Typography>
-        <Typography>
-          <Trans>
-            By continuing, you acknowledge and agree to our{" "}
-            <Link href="https://brave.com/privacy/advertiser" target="_blank">
-              Privacy Policy
-            </Link>{" "}
-            and platform{" "}
-            <Link href="https://brave.com/brave-ads/terms/" target="_blank">
-              Terms and Conditions
-            </Link>
-          </Trans>
-          .
-        </Typography>
-        <FormikCheckbox name="terms" label={_(msg`I agree`)} />
+      <Stack spacing={0.5}>
+        <FormikCheckbox
+          name="language"
+          label={_(
+            msg`I understand that I can only run ad campaigns in English, Spanish, and Portuguese.`,
+          )}
+          showErrorMessage={false}
+        />
       </Stack>
-    </>
+
+      <Stack spacing={0.5}>
+        <FormikCheckbox
+          name="terms"
+          showErrorMessage={false}
+          label={
+            <Trans>
+              I have reviewed and agree to the{" "}
+              <Link
+                href="https://brave.com/advertiser-privacy/"
+                target="_blank"
+              >
+                Advertiser Privacy Policy
+              </Link>{" "}
+              and platform{" "}
+              <Link
+                href="https://basicattentiontoken.org/advertiser-terms-of-service/"
+                target="_blank"
+              >
+                Terms of Service
+              </Link>{" "}
+              applicable to Brave Ads.
+            </Trans>
+          }
+        />
+      </Stack>
+    </Box>
   );
 }

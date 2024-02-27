@@ -5,6 +5,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  SxProps,
   Tooltip,
   TooltipProps,
 } from "@mui/material";
@@ -18,6 +19,7 @@ interface FormikSubmitButtonProps {
   label?: MessageDescriptor;
   inProgressLabel?: MessageDescriptor;
   isCreate: boolean;
+  sx?: SxProps;
 }
 
 export function extractErrors(errorObject: any): string[] {
@@ -69,6 +71,7 @@ export const FormikSubmitButton = ({
   label = msg`Save`,
   inProgressLabel = msg`Saving...`,
   isCreate,
+  sx,
 }: FormikSubmitButtonProps) => {
   const { _ } = useLingui();
   const { saveButtonTooltip, saveEnabled, isSubmitting, submitForm } = useSave({
@@ -86,6 +89,7 @@ export const FormikSubmitButton = ({
           }}
           size="large"
           disabled={!saveEnabled || isSubmitting}
+          sx={sx}
         >
           {isSubmitting ? `${_(inProgressLabel)}` : `${_(label)}`}
         </Button>
