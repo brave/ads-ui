@@ -9,6 +9,7 @@ import {
   Checkbox,
   FormControl,
   FormControlLabel,
+  FormControlOwnProps,
   FormHelperText,
   FormLabel,
   InputLabel,
@@ -227,6 +228,7 @@ interface FormikSelectProps {
     | "warning"
     | undefined;
   variant?: "outlined" | "standard" | "filled" | undefined;
+  size?: FormControlOwnProps["size"];
 }
 
 export const FormikSelect = (props: FormikSelectProps) => {

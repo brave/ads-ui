@@ -10,12 +10,13 @@ export function NameField() {
   const { _ } = useLingui();
 
   return (
-    <Box flexGrow={1}>
+    <Box maxWidth={500}>
       <FormikTextField
         name="fullName"
         label={_(msg`Full name`)}
         margin="dense"
         autoComplete="given-name"
+        size="small"
       />
 
       <FormikTextField
@@ -24,12 +25,14 @@ export function NameField() {
         type="email"
         margin="dense"
         autoComplete="email"
+        size="small"
       />
 
       <FormikTextField
         name="advertiser.name"
         label={_(msg`Business name`)}
         margin="dense"
+        size="small"
       />
 
       <FormikTextField
@@ -37,12 +40,14 @@ export function NameField() {
         label={_(msg`Business website`)}
         autoComplete="url"
         margin="dense"
+        size="small"
       />
 
       <FormikSelect
         label={_(msg`Where did you hear about Brave Ads`)}
         name="advertiser.marketingChannel"
         margin="dense"
+        size="small"
         options={[
           {
             label: _(msg`While looking up alternatives to Google Ads`),
@@ -76,6 +81,7 @@ export function NameField() {
           margin="dense"
           name="advertiser.other"
           label={_(msg`Other source`)}
+          size="small"
         />
       )}
 
@@ -86,6 +92,7 @@ export function NameField() {
         margin="dense"
         name="advertiser.description"
         label={_(msg`Tell us why you're interested in Brave Ads`)}
+        size="small"
       />
 
       <MarketingOptIn />
