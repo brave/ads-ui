@@ -50,8 +50,12 @@ export const getCredentials = async (user: {
   return await res.json();
 };
 
-export async function submitRegistration(form: RegistrationForm) {
-  const res = await fetch(buildAdServerV2Endpoint("/auth/register"), {
+export async function submitRegistration(
+  form: RegistrationForm,
+  type: "search" | "browser",
+) {
+  const path = type === "search" ? "/register/search" : "/register";
+  const res = await fetch(buildAdServerV2Endpoint(path), {
     method: "POST",
     mode: "cors",
     credentials: "include",
@@ -69,11 +73,12 @@ export async function submitRegistration(form: RegistrationForm) {
             ? `other: ${form.advertiser.other}`
             : form.advertiser.marketingChannel,
       },
-      address: null,
       user: {
         fullName: form.fullName,
         email: form.email,
       },
+      country: form.country,
+      mediaSpend: form.mediaSpend,
     }),
   });
 

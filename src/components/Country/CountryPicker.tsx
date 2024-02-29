@@ -6,9 +6,11 @@ import { msg } from "@lingui/macro";
 
 interface Props {
   name: string;
+  label?: string;
+  filter?: string[];
 }
 
-export const CountryPicker = ({ name }: Props) => {
+export const CountryPicker = ({ name, filter, label }: Props) => {
   const { data } = useCountries();
   const { _ } = useLingui();
 
@@ -21,13 +23,13 @@ export const CountryPicker = ({ name }: Props) => {
     <Autocomplete
       autoSelect
       loading={data.length === 0}
-      options={data}
+      options={filter ? data.filter((c) => filter.includes(c.code)) : data}
       getOptionLabel={(option) => option.name}
       renderInput={(params) => (
         <Box>
           <TextField
             {...params}
-            label={_(msg`Country`)}
+            label={label ?? _(msg`Country`)}
             helperText={meta.touched && errorMessage}
             error={meta.touched && !!errorMessage}
             autoComplete="country"

@@ -3,31 +3,35 @@ import { RegistrationForm } from "auth/registration/types";
 import { sendMarketingEmail, submitRegistration } from "auth/lib";
 import { clearRegistrationValues } from "form/PersistRegistrationValues";
 import { useTrackMatomoEvent } from "hooks/useTrackWithMatomo";
+import { t } from "@lingui/macro";
+import { useHistory } from "react-router-dom";
 
 export function useRegister() {
-  const [hasRegistered, setHasRegistered] = useState(false);
-  const [error, setError] = useState<string>();
+  const history = useHistory();
   const [loading, setLoading] = useState(false);
   const { trackMatomoEvent } = useTrackMatomoEvent();
 
-  const register = useCallback((form: RegistrationForm) => {
-    setLoading(true);
-    submitRegistration(form)
-      .then(() => {
-        if (form.marketingOptIn) {
-          void sendMarketingEmail({ email: form.email, name: form.fullName });
-        }
+  const register = useCallback(
+    (form: RegistrationForm, type: "search" | "browser") => {
+      setLoading(true);
+      submitRegistration(form, type)
+        .then(() => {
+          if (form.marketingOptIn) {
+            void sendMarketingEmail({ email: form.email, name: form.fullName });
+          }
 
-        setHasRegistered(true);
-        trackMatomoEvent("registration", "submit-success");
-        clearRegistrationValues();
-      })
-      .catch((e) => {
-        setError(e.message);
-        trackMatomoEvent("registration", "submit-error");
-      })
-      .finally(() => setLoading(false));
-  }, []);
+          trackMatomoEvent("registration", "submit-success");
+          clearRegistrationValues();
+          history.replace("/register/complete");
+        })
+        .catch(() => {
+          alert(t`Unable to submit registration`);
+          trackMatomoEvent("registration", "submit-error");
+        })
+        .finally(() => setLoading(false));
+    },
+    [],
+  );
 
-  return { register, loading, error, hasRegistered };
+  return { register, loading };
 }

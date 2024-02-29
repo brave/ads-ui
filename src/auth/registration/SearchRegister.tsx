@@ -1,5 +1,5 @@
 import { Form, Formik } from "formik";
-import { BrowserRegistrationSchema } from "validation/BrowserRegistrationSchema";
+import { SearchRegistrationSchema } from "validation/BrowserRegistrationSchema";
 import { initialValues, RegistrationForm } from "auth/registration/types";
 import { FormikSubmitButton } from "form/FormikButton";
 import { useRegister } from "auth/hooks/mutations/useRegister";
@@ -10,11 +10,11 @@ import { PersistRegistrationValues } from "form/PersistRegistrationValues";
 import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
 import { msg } from "@lingui/macro";
 import { RegistrationContainer } from "auth/registration/RegistrationContainer";
-import { BrowserForm } from "auth/registration/BrowserForm";
+import { SearchForm } from "auth/registration/SearchForm";
 
-export function BrowserRegister() {
+export function SearchRegister() {
   useTrackMatomoPageView({
-    documentTitle: `Browser Ads Registration`,
+    documentTitle: `Search Ads Registration`,
   });
 
   const { register } = useRegister();
@@ -28,13 +28,13 @@ export function BrowserRegister() {
           initialValues={initialValues}
           onSubmit={async (v: RegistrationForm, { setSubmitting }) => {
             setSubmitting(true);
-            register(v, "browser");
+            register(v, "search");
             setSubmitting(false);
           }}
-          validationSchema={BrowserRegistrationSchema()}
+          validationSchema={SearchRegistrationSchema()}
         >
           <Form>
-            <BrowserForm />
+            <SearchForm />
 
             <Box display="flex" justifyContent="center" m={3}>
               <FormikSubmitButton

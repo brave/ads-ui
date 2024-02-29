@@ -2,11 +2,12 @@ import { AdvertiserRegistered } from "auth/registration/AdvertiserRegistered";
 import { Route, Switch } from "react-router-dom";
 import { AccountChoice } from "auth/registration/AccountChoice";
 import { BrowserRegister } from "auth/registration/BrowserRegister";
+import { SearchRegister } from "auth/registration/SearchRegister";
 
 export function Register() {
   return (
     <Switch>
-      {/*<Route path="/register/search" component={AccountChoice} />*/}
+      <Route path="/register/search" component={SearchRegister} />
       <Route path="/register/browser" component={BrowserRegister} />
       <Route path="/register/complete" component={AdvertiserRegistered} />
       <Route exact={true} component={AccountChoice} />
