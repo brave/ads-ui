@@ -89,6 +89,13 @@ export enum CampaignPacingStrategies {
   Original = "ORIGINAL",
 }
 
+export type CampaignPerformanceFilter = {
+  /** include metrics starting from this time (inclusive) */
+  from?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** include metrics before this time (inclusive) */
+  to?: InputMaybe<Scalars["DateTime"]["input"]>;
+};
+
 export enum CampaignRejection {
   InappropriateContent = "INAPPROPRIATE_CONTENT",
   InvalidLandingPage = "INVALID_LANDING_PAGE",
@@ -101,6 +108,18 @@ export enum CampaignSource {
   Managed = "MANAGED",
   Network = "NETWORK",
   SelfServe = "SELF_SERVE",
+}
+
+export enum CampaignType {
+  Barter = "BARTER",
+  Cause = "CAUSE",
+  Fixed = "FIXED",
+  Free = "FREE",
+  House = "HOUSE",
+  MakeGood = "MAKE_GOOD",
+  Paid = "PAID",
+  Preemptive = "PREEMPTIVE",
+  Trial = "TRIAL",
 }
 
 export type ChangeFilter = {
@@ -189,7 +208,8 @@ export type CreateAdvertiserInput = {
   billingAddress?: InputMaybe<CreateAddressInput>;
   billingEmail?: InputMaybe<Scalars["String"]["input"]>;
   billingModelPrices?: InputMaybe<Array<AdvertiserPriceInput>>;
-  mailingAddress?: InputMaybe<CreateAddressInput>;
+  description?: InputMaybe<Scalars["String"]["input"]>;
+  marketingChannel?: InputMaybe<Scalars["String"]["input"]>;
   name: Scalars["String"]["input"];
   phone?: InputMaybe<Scalars["String"]["input"]>;
   referrer?: InputMaybe<Scalars["String"]["input"]>;
@@ -200,8 +220,10 @@ export type CreateAdvertiserInput = {
 };
 
 export type CreateCampaignInput = {
+  accountManagerId?: InputMaybe<Scalars["String"]["input"]>;
   adSets?: InputMaybe<Array<CreateAdSetInput>>;
   advertiserId: Scalars["String"]["input"];
+  bannedKeywords?: InputMaybe<Array<Scalars["String"]["input"]>>;
   brandedKeyword?: InputMaybe<Scalars["String"]["input"]>;
   brandedKeywords?: InputMaybe<Array<Scalars["String"]["input"]>>;
   budget: Scalars["Float"]["input"];
@@ -221,7 +243,7 @@ export type CreateCampaignInput = {
   source: Scalars["String"]["input"];
   startAt: Scalars["DateTime"]["input"];
   state: Scalars["String"]["input"];
-  type?: Scalars["String"]["input"];
+  type?: CampaignType;
   userId?: InputMaybe<Scalars["String"]["input"]>;
 };
 
@@ -380,6 +402,17 @@ export enum PaymentType {
   Stripe = "STRIPE",
 }
 
+export type PerformanceFilter = {
+  /** include metrics for all these advertisers' campaigns */
+  advertiserIds?: InputMaybe<Array<Scalars["String"]["input"]>>;
+  /** include metrics for all these campaigns */
+  campaignIds?: InputMaybe<Array<Scalars["String"]["input"]>>;
+  /** include metrics starting from this time (inclusive) */
+  from?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** include metrics before this time (inclusive) */
+  to?: InputMaybe<Scalars["DateTime"]["input"]>;
+};
+
 export type PromotedContentPayloadInput = {
   category: Scalars["String"]["input"];
   contentType: Scalars["String"]["input"];
@@ -398,6 +431,10 @@ export type RejectCampaignInput = {
 
 export enum RequestedDimensions {
   Ad = "AD",
+  AdSet = "AD_SET",
+  Campaign = "CAMPAIGN",
+  Day = "DAY",
+  Os = "OS",
 }
 
 export type SearchHomepagePayloadInput = {
@@ -460,6 +497,8 @@ export type UpdateAdSetInput = {
 export type UpdateAddressInput = {
   city?: InputMaybe<Scalars["String"]["input"]>;
   country?: InputMaybe<Scalars["String"]["input"]>;
+  /** Temporarily nullable so the frontend does not break */
+  id?: InputMaybe<Scalars["String"]["input"]>;
   state?: InputMaybe<Scalars["String"]["input"]>;
   street1?: InputMaybe<Scalars["String"]["input"]>;
   street2?: InputMaybe<Scalars["String"]["input"]>;
@@ -473,8 +512,9 @@ export type UpdateAdvertiserInput = {
   billingAddress?: InputMaybe<UpdateAddressInput>;
   billingEmail?: InputMaybe<Scalars["String"]["input"]>;
   billingModelPrices?: InputMaybe<Array<AdvertiserPriceInput>>;
+  description?: InputMaybe<Scalars["String"]["input"]>;
   id: Scalars["String"]["input"];
-  mailingAddress?: InputMaybe<UpdateAddressInput>;
+  marketingChannel?: InputMaybe<Scalars["String"]["input"]>;
   name?: InputMaybe<Scalars["String"]["input"]>;
   phone?: InputMaybe<Scalars["String"]["input"]>;
   publicKey?: InputMaybe<Scalars["String"]["input"]>;
@@ -487,8 +527,10 @@ export type UpdateAdvertiserInput = {
 };
 
 export type UpdateCampaignInput = {
+  accountManagerId?: InputMaybe<Scalars["String"]["input"]>;
   adSets?: InputMaybe<Array<UpdateAdSetInput>>;
   advertiserId?: InputMaybe<Scalars["String"]["input"]>;
+  bannedKeywords?: InputMaybe<Array<Scalars["String"]["input"]>>;
   brandedKeyword?: InputMaybe<Scalars["String"]["input"]>;
   brandedKeywords?: InputMaybe<Array<Scalars["String"]["input"]>>;
   budget?: InputMaybe<Scalars["Float"]["input"]>;
@@ -510,7 +552,7 @@ export type UpdateCampaignInput = {
   startAt?: InputMaybe<Scalars["DateTime"]["input"]>;
   state?: InputMaybe<Scalars["String"]["input"]>;
   stripePaymentId?: InputMaybe<Scalars["String"]["input"]>;
-  type?: InputMaybe<Scalars["String"]["input"]>;
+  type?: InputMaybe<CampaignType>;
 };
 
 export type UpdateConversionsInput = {

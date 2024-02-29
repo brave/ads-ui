@@ -19,6 +19,7 @@ import { LandingPageAppBar } from "components/AppBar/LandingPageAppBar";
 import { Background } from "components/Background/Background";
 import logo from "../../../brave-icon-release-color.svg";
 import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
+import { useIsMobile } from "hooks/useIsMobile";
 
 interface ChoiceOptions {
   title: MessageDescriptor;
@@ -26,6 +27,7 @@ interface ChoiceOptions {
 }
 
 export function AccountChoice() {
+  const isMobile = useIsMobile();
   useTrackMatomoPageView({
     documentTitle: `Ads Account Choice`,
   });
@@ -48,7 +50,7 @@ export function AccountChoice() {
       <Toolbar sx={{ mb: { md: 1.5 }, mt: 1 }} />
       <Box display="flex" maxWidth="800px" flexDirection="column" mb={3}>
         <PaddedCardContainer>
-          <div style={{ width: 500 }} />
+          {!isMobile && <div style={{ width: 500 }} />}
           <img
             src={logo}
             height={65}

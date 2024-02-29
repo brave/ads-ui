@@ -27,7 +27,7 @@ export function PrivacyPolicy() {
         <PolicyLink to="https://basicattentiontoken.org/advertiser-terms-of-service/">
           Terms of Service
         </PolicyLink>{" "}
-        applicable to Brave Ads
+        applicable to Brave Ads.
       </Trans>
     </Typography>
   );

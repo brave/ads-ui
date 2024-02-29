@@ -9,11 +9,8 @@ import { Background } from "components/Background/Background";
 import { LandingPageAppBar } from "components/AppBar/LandingPageAppBar";
 import { PersistRegistrationValues } from "form/PersistRegistrationValues";
 import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
-import { msg, Trans } from "@lingui/macro";
-import { PaddedCardContainer } from "components/Card/PaddedCardContainer";
-import logo from "../../../brave-icon-release-color.svg";
-import Typography from "@mui/material/Typography";
-import { PrivacyPolicy } from "basic-attention-token/PrivacyPolicy";
+import { msg } from "@lingui/macro";
+import { RegistrationContainer } from "auth/registration/RegistrationContainer";
 
 export function BrowserRegister() {
   useTrackMatomoPageView({
@@ -26,34 +23,34 @@ export function BrowserRegister() {
     <Background>
       <LandingPageAppBar />
       <Toolbar sx={{ mb: { md: 1.5 }, mt: 1 }} />
-      <Box display="flex" maxWidth="800px" flexDirection="column" mb={3}>
-        <PaddedCardContainer>
-          <img src={logo} height={50} />
-          <div style={{ width: 600 }} />
-          <Typography variant="h5" mt={3} mb={2}>
-            <Trans>Start your company profile</Trans>
-          </Typography>
-          <Formik
-            initialValues={initialValues}
-            onSubmit={async (v: RegistrationForm, { setSubmitting }) => {
-              setSubmitting(true);
-              register(v);
-              setSubmitting(false);
-            }}
-            validationSchema={RegistrationSchema()}
-          >
-            <Form>
-              <NameField />
+      <RegistrationContainer>
+        <Formik
+          initialValues={initialValues}
+          onSubmit={async (v: RegistrationForm, { setSubmitting }) => {
+            setSubmitting(true);
+            register(v);
+            setSubmitting(false);
+          }}
+          validationSchema={RegistrationSchema()}
+        >
+          <Form>
+            <NameField />
 
-              <FormikSubmitButton isCreate={true} label={msg`Submit`} />
+            <Box display="flex" justifyContent="center" m={3}>
+              <FormikSubmitButton
+                isCreate={true}
+                label={msg`Submit`}
+                sx={{
+                  padding: "12px 30px 12px 30px",
+                  borderRadius: "12px",
+                }}
+              />
+            </Box>
 
-              <PersistRegistrationValues />
-            </Form>
-          </Formik>
-
-          <PrivacyPolicy />
-        </PaddedCardContainer>
-      </Box>
+            <PersistRegistrationValues />
+          </Form>
+        </Formik>
+      </RegistrationContainer>
     </Background>
   );
 }

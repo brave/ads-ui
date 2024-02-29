@@ -27,6 +27,7 @@ import { ErrorMessage, useField, useFormikContext } from "formik";
 import _ from "lodash";
 import { CampaignForm } from "user/views/adsManager/types";
 import { Trans } from "@lingui/macro";
+import { TypographyOwnProps } from "@mui/material/Typography";
 
 type FormikTextFieldProps = TextFieldProps & {
   name: string;
@@ -180,6 +181,8 @@ interface FormikCheckboxProps {
   disabled?: boolean;
   helperText?: string;
   showErrorMessage?: boolean;
+  sx?: SxProps<Theme>;
+  labelVariant?: TypographyOwnProps["variant"];
 }
 
 export function FormikCheckbox(props: FormikCheckboxProps) {
@@ -189,8 +192,11 @@ export function FormikCheckbox(props: FormikCheckboxProps) {
       <FormControlLabel
         control={<Checkbox {...field} />}
         label={props.label}
-        componentsProps={{ typography: { variant: "body2" } }}
+        componentsProps={{
+          typography: { variant: props.labelVariant ?? "body2" },
+        }}
         disabled={props.disabled}
+        sx={props.sx}
       />
       {props.helperText && <FormHelperText>{props.helperText}</FormHelperText>}
       {props.showErrorMessage !== false && (

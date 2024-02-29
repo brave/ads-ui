@@ -9,7 +9,7 @@ export function Register() {
       {/*<Route path="/register/search" component={AccountChoice} />*/}
       <Route path="/register/browser" component={BrowserRegister} />
       <Route path="/register/complete" component={AdvertiserRegistered} />
-      <Route path="" exact={true} component={AccountChoice} />
+      <Route exact={true} component={AccountChoice} />
     </Switch>
   );
 }
