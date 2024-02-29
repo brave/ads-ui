@@ -331,7 +331,7 @@ msgstr ""
 msgid "Business name"
 msgstr ""
 
-#: src/validation/BrowserRegistrationSchema.tsx:14
+#: src/validation/RegistrationSchema.tsx:14
 msgid "Business name is required"
 msgstr ""
 
@@ -339,7 +339,7 @@ msgstr ""
 msgid "Business website"
 msgstr ""
 
-#: src/validation/BrowserRegistrationSchema.tsx:16
+#: src/validation/RegistrationSchema.tsx:16
 msgid "Business Website is required"
 msgstr ""
 
@@ -599,7 +599,7 @@ msgstr ""
 msgid "Copy this and keep this safe!"
 msgstr ""
 
-#: src/auth/lib/index.ts:114
+#: src/auth/lib/index.ts:111
 msgid "Could not logout at this time. Please try again later."
 msgstr ""
 
@@ -758,11 +758,15 @@ msgstr ""
 msgid "Documentation can be found <0>here</0> on how to use the API."
 msgstr ""
 
-#: src/validation/BrowserRegistrationSchema.tsx:33
+#: src/validation/RegistrationSchema.tsx:33
 msgid "Domain is required"
 msgstr ""
 
-#: src/validation/BrowserRegistrationSchema.tsx:34
+#: src/validation/RegistrationSchema.tsx:41
+msgid "Domain must match the email domain"
+msgstr ""
+
+#: src/validation/RegistrationSchema.tsx:34
 msgid "Domain must not contain any whitespace"
 msgstr ""
 
@@ -811,8 +815,7 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: src/validation/BrowserRegistrationSchema.tsx:60
-#: src/validation/UserSchema.tsx:6
+#: src/validation/UserSchema.tsx:10
 msgid "Email address is required"
 msgstr ""
 
@@ -922,8 +925,7 @@ msgstr ""
 msgid "Full Name"
 msgstr ""
 
-#: src/validation/BrowserRegistrationSchema.tsx:58
-#: src/validation/UserSchema.tsx:7
+#: src/validation/UserSchema.tsx:12
 msgid "Full name is required"
 msgstr ""
 
@@ -1085,11 +1087,11 @@ msgstr ""
 msgid "invalid session"
 msgstr ""
 
-#: src/auth/lib/index.ts:100
+#: src/auth/lib/index.ts:97
 msgid "Invalid Session"
 msgstr ""
 
-#: src/auth/lib/index.ts:146
+#: src/auth/lib/index.ts:143
 msgid "Invalid Token"
 msgstr ""
 
@@ -1442,16 +1444,16 @@ msgstr ""
 msgid "Please enter a username and password"
 msgstr ""
 
-#: src/validation/BrowserRegistrationSchema.tsx:37
+#: src/validation/RegistrationSchema.tsx:37
 msgid "Please enter a valid domain, for example: brave.com"
 msgstr ""
 
-#: src/validation/BrowserRegistrationSchema.tsx:61
+#: src/validation/UserSchema.tsx:11
 msgid "Please enter a valid email address"
 msgstr ""
 
-#: src/validation/BrowserRegistrationSchema.tsx:21
 #: src/validation/CreativeSchema.tsx:19
+#: src/validation/RegistrationSchema.tsx:21
 msgid "Please enter a valid URL, for example https://brave.com"
 msgstr ""
 
@@ -1463,11 +1465,11 @@ msgstr ""
 msgid "Please enter an email."
 msgstr ""
 
-#: src/validation/BrowserRegistrationSchema.tsx:67
+#: src/validation/RegistrationSchema.tsx:61
 msgid "Please let us know how you heard about Brave Ads"
 msgstr ""
 
-#: src/validation/BrowserRegistrationSchema.tsx:24
+#: src/validation/RegistrationSchema.tsx:24
 msgid "Please let us know why you're interested in Brave Ads"
 msgstr ""
 
@@ -1487,7 +1489,7 @@ msgstr ""
 msgid "Please see our <0>Advertiser Privacy Policy</0> and <1>Terms of Service</1> applicable to Brave Ads."
 msgstr ""
 
-#: src/validation/BrowserRegistrationSchema.tsx:72
+#: src/validation/RegistrationSchema.tsx:66
 msgid "Please specify how you heard about Brave Ads"
 msgstr ""
 
@@ -1544,8 +1546,8 @@ msgstr ""
 msgid "Primary region of business"
 msgstr ""
 
-#: src/validation/BrowserRegistrationSchema.tsx:49
-#: src/validation/BrowserRegistrationSchema.tsx:52
+#: src/validation/RegistrationSchema.tsx:51
+#: src/validation/RegistrationSchema.tsx:54
 msgid "Primary region of business is required"
 msgstr ""
 
@@ -1638,8 +1640,8 @@ msgid "Search ads"
 msgstr ""
 
 #: src/validation/BrowserRegistrationSchema.tsx:42
-msgid "Search domain must match email domain"
-msgstr ""
+#~ msgid "Search domain must match email domain"
+#~ msgstr ""
 
 #: src/user/library/index.ts:251
 #: src/util/campaign.ts:10
@@ -1796,7 +1798,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/auth/registration/BrowserRegister.tsx:37
-#: src/auth/registration/SearchRegister.tsx:37
+#: src/auth/registration/SearchRegister.tsx:36
 msgid "Submit"
 msgstr ""
 
@@ -1980,7 +1982,7 @@ msgstr ""
 msgid "Unable to login, link has expired or has already been used."
 msgstr ""
 
-#: src/auth/lib/index.ts:87
+#: src/auth/lib/index.ts:84
 msgid "Unable to register your organization at this time. Please try again later."
 msgstr ""
 
@@ -2114,11 +2116,11 @@ msgstr ""
 msgid "We value your feedback and would love to hear your thoughts on your recent experience. <0/>Your input will help us improve the Brave Ads platform to better meet your needs. <1/>It only takes a few minutes and your participation will be greatly appreciated! <2/>Thank you for using Brave Ads! <3/>"
 msgstr ""
 
-#: src/validation/BrowserRegistrationSchema.tsx:17
+#: src/validation/RegistrationSchema.tsx:17
 msgid "Website must not contain any whitespace"
 msgstr ""
 
-#: src/validation/BrowserRegistrationSchema.tsx:18
+#: src/validation/RegistrationSchema.tsx:18
 msgid "Website must start with https://"
 msgstr ""
 

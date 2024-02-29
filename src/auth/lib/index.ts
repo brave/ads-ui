@@ -64,7 +64,7 @@ export async function submitRegistration(
     },
     body: JSON.stringify({
       advertiser: {
-        billingEmail: form.email,
+        billingEmail: form.user.email,
         name: form.advertiser.name,
         url: form.advertiser.url,
         description: form.advertiser.description,
@@ -73,10 +73,7 @@ export async function submitRegistration(
             ? `other: ${form.advertiser.other}`
             : form.advertiser.marketingChannel,
       },
-      user: {
-        fullName: form.fullName,
-        email: form.email,
-      },
+      user: form.user,
       country: form.country,
       mediaSpend: form.mediaSpend,
     }),
@@ -151,7 +148,7 @@ export const authorize = async (req: {
 
 export const sendMarketingEmail = async (req: {
   email: string;
-  name: string;
+  fullName: string;
 }) => {
   const response = await fetch(
     "https://brave-software.ghost.io/members/api/send-magic-link/",
@@ -161,7 +158,7 @@ export const sendMarketingEmail = async (req: {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         email: req.email,
-        name: req.name,
+        name: req.fullName,
         // eslint-disable-next-line lingui/no-unlocalized-strings
         newsletters: [{ name: "Brave Ads" }],
       }),

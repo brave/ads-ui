@@ -1,5 +1,4 @@
 import { Form, Formik } from "formik";
-import { BrowserRegistrationSchema } from "validation/BrowserRegistrationSchema";
 import { initialValues, RegistrationForm } from "auth/registration/types";
 import { FormikSubmitButton } from "form/FormikButton";
 import { useRegister } from "auth/hooks/mutations/useRegister";
@@ -9,6 +8,7 @@ import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
 import { msg } from "@lingui/macro";
 import { RegistrationContainer } from "auth/registration/RegistrationContainer";
 import { BrowserForm } from "auth/registration/BrowserForm";
+import { RegistrationSchema } from "validation/RegistrationSchema";
 
 export function BrowserRegister() {
   useTrackMatomoPageView({
@@ -26,7 +26,7 @@ export function BrowserRegister() {
           register(v, "browser");
           setSubmitting(false);
         }}
-        validationSchema={BrowserRegistrationSchema()}
+        validationSchema={RegistrationSchema("browser")}
       >
         <Form>
           <BrowserForm />

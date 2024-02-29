@@ -17,7 +17,7 @@ export function useRegister() {
       submitRegistration(form, type)
         .then(() => {
           if (form.marketingOptIn) {
-            void sendMarketingEmail({ email: form.email, name: form.fullName });
+            void sendMarketingEmail({ ...form.user });
           }
 
           trackMatomoEvent("registration", "submit-success");

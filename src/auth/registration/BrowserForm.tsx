@@ -13,7 +13,7 @@ export function BrowserForm() {
   return (
     <Box width={{ xs: 350, sm: 500 }}>
       <FormikTextField
-        name="fullName"
+        name="user.fullName"
         label={_(msg`Full name`)}
         margin="dense"
         autoComplete="given-name"
@@ -21,7 +21,7 @@ export function BrowserForm() {
       />
 
       <FormikTextField
-        name="email"
+        name="user.email"
         label={_(msg`Email`)}
         type="email"
         margin="dense"

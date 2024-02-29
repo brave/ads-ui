@@ -1,15 +1,15 @@
 import { object, string } from "yup";
 import { t } from "@lingui/macro";
+import { UserSchema } from "validation/UserSchema";
 
 const SimpleUrlRegexp = /https:\/\/.+\.[a-zA-Z]{2,}\/?.*/g;
 const NoSpacesRegex = /^\S*$/;
 const HttpsRegex = /^https:\/\//;
-const EmailRegex =
-  /^(?!.*@(email\.com|example\.com|test\.com))[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-const DomainRegex = /^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\.)+[A-Za-z]{2,}$/;
+const DomainRegex = /^(?!-)[A-Za-z0-9-]+([-.][a-z0-9]+)*\.[A-Za-z]{2,6}$/;
 
-export const BrowserRegistrationSchema = () =>
-  UserDetailsSchema().shape({
+const BrowserRegistrationSchema = () =>
+  object().shape({
+    user: UserSchema(),
     advertiser: AdvertiserDetailsSchema().shape({
       name: string().required(t`Business name is required`),
       url: string()
@@ -26,24 +26,26 @@ export const BrowserRegistrationSchema = () =>
     }),
   });
 
-export const SearchRegistrationSchema = () =>
-  UserDetailsSchema().shape({
-    advertiser: AdvertiserDetailsSchema().shape({
-      url: string()
-        .required(t`Domain is required`)
-        .matches(NoSpacesRegex, t`Domain must not contain any whitespace`)
-        .matches(
-          DomainRegex,
-          t`Please enter a valid domain, for example: brave.com`,
-        )
-        .when(["email"], ([email], schema) => {
-          return schema.test(
-            "email-matches-domain",
-            t`Search domain must match email domain`,
-            (value) => email.split("@")[1].includes(value),
-          );
-        }),
-    }),
+const SearchRegistrationSchema = () =>
+  object().shape({
+    user: UserSchema(),
+    domain: string()
+      .required(t`Domain is required`)
+      .matches(NoSpacesRegex, t`Domain must not contain any whitespace`)
+      .matches(
+        DomainRegex,
+        t`Please enter a valid domain, for example: brave.com`,
+      )
+      .test(
+        "is-matching-domain",
+        t`Domain must match the email domain`,
+        (value, context) => {
+          const email = context.parent.user.email;
+          if (!email) return false;
+          const splitEmail = email.split("@");
+          return value === splitEmail[splitEmail.length - 1];
+        },
+      ),
     mediaSpend: string().optional().nullable(),
     country: string()
       .required(t`Primary region of business is required`)
@@ -51,14 +53,6 @@ export const SearchRegistrationSchema = () =>
         ["US", "UK", "DE", "FR", "CA", "IN"],
         t`Primary region of business is required`,
       ),
-  });
-
-const UserDetailsSchema = () =>
-  object().shape({
-    fullName: string().required(t`Full name is required`),
-    email: string()
-      .required(t`Email address is required`)
-      .matches(EmailRegex, t`Please enter a valid email address`),
   });
 
 const AdvertiserDetailsSchema = () =>
@@ -72,3 +66,11 @@ const AdvertiserDetailsSchema = () =>
         schema.required(t`Please specify how you heard about Brave Ads`),
     }),
   });
+
+export function RegistrationSchema(format: "search" | "browser") {
+  if (format === "search") {
+    return SearchRegistrationSchema();
+  } else {
+    return BrowserRegistrationSchema();
+  }
+}

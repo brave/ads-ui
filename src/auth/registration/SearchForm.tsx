@@ -12,7 +12,7 @@ export function SearchForm() {
   return (
     <Box width={{ xs: 350, sm: 500 }}>
       <FormikTextField
-        name="fullName"
+        name="user.fullName"
         label={_(msg`Full name`)}
         margin="dense"
         autoComplete="given-name"
@@ -20,7 +20,7 @@ export function SearchForm() {
       />
 
       <FormikTextField
-        name="email"
+        name="user.email"
         label={_(msg`Work email`)}
         type="email"
         margin="dense"
@@ -29,7 +29,7 @@ export function SearchForm() {
       />
 
       <FormikTextField
-        name="advertiser.url"
+        name="domain"
         label={_(msg`Domain to advertise`)}
         autoComplete="url"
         margin="dense"

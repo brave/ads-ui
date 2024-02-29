@@ -1,13 +1,12 @@
 import { Form, Formik } from "formik";
-import { SearchRegistrationSchema } from "validation/BrowserRegistrationSchema";
 import { initialValues, RegistrationForm } from "auth/registration/types";
 import { FormikSubmitButton } from "form/FormikButton";
 import { useRegister } from "auth/hooks/mutations/useRegister";
 import { Box } from "@mui/material";
-import { PersistRegistrationValues } from "form/PersistRegistrationValues";
 import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
 import { msg } from "@lingui/macro";
 import { RegistrationContainer } from "auth/registration/RegistrationContainer";
+import { RegistrationSchema } from "validation/RegistrationSchema";
 import { SearchForm } from "auth/registration/SearchForm";
 
 export function SearchRegister() {
@@ -26,7 +25,7 @@ export function SearchRegister() {
           register(v, "search");
           setSubmitting(false);
         }}
-        validationSchema={SearchRegistrationSchema()}
+        validationSchema={RegistrationSchema("search")}
       >
         <Form>
           <SearchForm />
@@ -41,8 +40,6 @@ export function SearchRegister() {
               }}
             />
           </Box>
-
-          <PersistRegistrationValues />
         </Form>
       </Formik>
     </RegistrationContainer>

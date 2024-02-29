@@ -1,6 +1,8 @@
 export type RegistrationForm = {
-  email: string;
-  fullName: string;
+  user: {
+    email: string;
+    fullName: string;
+  };
   marketingOptIn?: boolean;
   advertiser: {
     name: string;
@@ -11,11 +13,14 @@ export type RegistrationForm = {
   };
   country?: string;
   mediaSpend?: string;
+  domain?: string;
 };
 
 export const initialValues: RegistrationForm = {
-  email: "",
-  fullName: "",
+  user: {
+    email: "",
+    fullName: "",
+  },
   marketingOptIn: false,
   advertiser: {
     name: "",
@@ -24,6 +29,7 @@ export const initialValues: RegistrationForm = {
     marketingChannel: "",
     other: "",
   },
-  country: undefined,
+  country: "",
   mediaSpend: "",
+  domain: "",
 };
