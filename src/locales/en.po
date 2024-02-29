@@ -760,7 +760,7 @@ msgstr "Domain is required"
 
 #: src/validation/RegistrationSchema.tsx:41
 msgid "Domain must match the email domain"
-msgstr ""
+msgstr "Domain must match the email domain"
 
 #: src/validation/RegistrationSchema.tsx:34
 msgid "Domain must not contain any whitespace"
