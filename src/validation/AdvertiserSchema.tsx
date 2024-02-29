@@ -5,7 +5,10 @@ export const AdvertiserSchema = () =>
   object().shape({
     tracking: boolean()
       .default(false)
-      .isTrue(t`Third party tracking acknowledgement is required`),
+      .isTrue(t`First party tracking acknowledgement is required`),
+    language: boolean()
+      .default(false)
+      .isTrue(t`Language acknowledgement is required`),
     payment: boolean()
       .default(false)
       .isTrue(t`Payment acknowledgement is required`),

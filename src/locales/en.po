@@ -66,8 +66,8 @@ msgid "About Brave Ads"
 msgstr "About Brave Ads"
 
 #: src/auth/components/AdvertiserDetailsForm.tsx:119
-msgid "Access dashboard"
-msgstr "Access dashboard"
+#~ msgid "Access dashboard"
+#~ msgstr "Access dashboard"
 
 #: src/components/Drawer/MiniSideBar.tsx:57
 msgid "Account"
@@ -307,8 +307,8 @@ msgid "Brave Search Ads convert as well as, or better than Google Search ad clic
 msgstr "Brave Search Ads convert as well as, or better than Google Search ad clicks."
 
 #: src/auth/components/AdvertiserAgreed.tsx:17
-msgid "Brave’s products are made to uphold user privacy. By default, the Brave browser blocks third-party tracking (scripts, tags, pixels, etc.) including those used by Google Analytics. This means that most standard website reporting won’t be compatible with Brave Ads. To ensure advertisers have visibility into performance of campaigns, we’ve detailed other effective privacy-first options for measurement in our <0>reporting guide</0>"
-msgstr "Brave’s products are made to uphold user privacy. By default, the Brave browser blocks third-party tracking (scripts, tags, pixels, etc.) including those used by Google Analytics. This means that most standard website reporting won’t be compatible with Brave Ads. To ensure advertisers have visibility into performance of campaigns, we’ve detailed other effective privacy-first options for measurement in our <0>reporting guide</0>"
+#~ msgid "Brave’s products are made to uphold user privacy. By default, the Brave browser blocks third-party tracking (scripts, tags, pixels, etc.) including those used by Google Analytics. This means that most standard website reporting won’t be compatible with Brave Ads. To ensure advertisers have visibility into performance of campaigns, we’ve detailed other effective privacy-first options for measurement in our <0>reporting guide</0>"
+#~ msgstr "Brave’s products are made to uphold user privacy. By default, the Brave browser blocks third-party tracking (scripts, tags, pixels, etc.) including those used by Google Analytics. This means that most standard website reporting won’t be compatible with Brave Ads. To ensure advertisers have visibility into performance of campaigns, we’ve detailed other effective privacy-first options for measurement in our <0>reporting guide</0>"
 
 #: src/auth/views/MobileAdsBenefits.tsx:23
 msgid "Browser-based delivery offers a new way to reach audiences on the Web."
@@ -336,8 +336,8 @@ msgid "Business Website is required"
 msgstr "Business Website is required"
 
 #: src/auth/components/AdvertiserAgreed.tsx:65
-msgid "By continuing, you acknowledge and agree to our <0>Privacy Policy</0> and platform <1>Terms and Conditions</1>"
-msgstr "By continuing, you acknowledge and agree to our <0>Privacy Policy</0> and platform <1>Terms and Conditions</1>"
+#~ msgid "By continuing, you acknowledge and agree to our <0>Privacy Policy</0> and platform <1>Terms and Conditions</1>"
+#~ msgstr "By continuing, you acknowledge and agree to our <0>Privacy Policy</0> and platform <1>Terms and Conditions</1>"
 
 #: src/components/Creatives/CreativeList.tsx:162
 msgid "Call To Action"
@@ -434,11 +434,11 @@ msgstr "Choose File"
 msgid "Choose what kind of account to open"
 msgstr "Choose what kind of account to open"
 
-#: src/auth/components/AdvertiserAddress.tsx:46
+#: src/auth/components/AdvertiserAddress.tsx:37
 msgid "City"
 msgstr "City"
 
-#: src/validation/AdvertiserSchema.tsx:19
+#: src/validation/AdvertiserSchema.tsx:22
 msgid "City is required"
 msgstr "City is required"
 
@@ -493,7 +493,7 @@ msgid "Cloning a campaign will take all properties including ad sets and ads, an
 msgstr "Cloning a campaign will take all properties including ad sets and ads, and create a new draft campaign with them."
 
 #: src/components/Assets/UploadImage.tsx:128
-#: src/form/FormikButton.tsx:139
+#: src/form/FormikButton.tsx:143
 #: src/user/settings/UserApiKey.tsx:112
 msgid "Close"
 msgstr "Close"
@@ -505,6 +505,10 @@ msgstr "Complete"
 #: src/components/Creatives/CreativeSelect.tsx:114
 msgid "Complete selection"
 msgstr "Complete selection"
+
+#: src/auth/components/AdvertiserDetailsForm.tsx:98
+msgid "Complete your business profile to continue"
+msgstr "Complete your business profile to continue"
 
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:41
 msgid "Congratulations! 🎉"
@@ -619,11 +623,11 @@ msgstr "Counted when a user reaches a designated conversion landing page followi
 msgid "Counted when an ad is displayed on screen for a minimum of one second"
 msgstr "Counted when an ad is displayed on screen for a minimum of one second"
 
-#: src/components/Country/CountryPicker.tsx:31
+#: src/components/Country/CountryPicker.tsx:30
 msgid "Country"
 msgstr "Country"
 
-#: src/validation/AdvertiserSchema.tsx:21
+#: src/validation/AdvertiserSchema.tsx:24
 msgid "Country is required"
 msgstr "Country is required"
 
@@ -711,11 +715,11 @@ msgstr "DELETED"
 msgid "Device"
 msgstr "Device"
 
-#: src/form/FormikButton.tsx:41
+#: src/form/FormikButton.tsx:43
 msgid "Disabled because you haven’t made any changes"
 msgstr "Disabled because you haven’t made any changes"
 
-#: src/form/FormikButton.tsx:50
+#: src/form/FormikButton.tsx:52
 msgid "Disabled due to validation errors"
 msgstr "Disabled due to validation errors"
 
@@ -812,6 +816,10 @@ msgstr "End Time"
 msgid "Enter a URL that represents your conversion goal, like a checkout or subscription confirmation page. <0/>Brave will count unique visits to that page from users who saw or clicked your ad."
 msgstr "Enter a URL that represents your conversion goal, like a checkout or subscription confirmation page. <0/>Brave will count unique visits to that page from users who saw or clicked your ad."
 
+#: src/auth/components/AdvertiserDetailsForm.tsx:108
+msgid "Enter Ads Manager"
+msgstr "Enter Ads Manager"
+
 #: src/auth/views/MagicLink.tsx:63
 msgid "Enter your email address to get a secure login link. Use this link to access your Brave Ads account."
 msgstr "Enter your email address to get a secure login link. Use this link to access your Brave Ads account."
@@ -847,6 +855,10 @@ msgstr "File upload complete for \"{fileName}\""
 #: src/user/ads/AdsExistingAd.tsx:100
 msgid "Filter ads by name..."
 msgstr "Filter ads by name..."
+
+#: src/validation/AdvertiserSchema.tsx:8
+msgid "First party tracking acknowledgement is required"
+msgstr "First party tracking acknowledgement is required"
 
 #: src/auth/views/MobileAdsBenefits.tsx:15
 msgid "For all business sizes"
@@ -943,17 +955,29 @@ msgstr "Hide"
 msgid "Hour"
 msgstr "Hour"
 
-#: src/auth/components/AdvertiserAgreed.tsx:77
-msgid "I agree"
-msgstr "I agree"
+#: src/auth/components/AdvertiserAgreed.tsx:56
+msgid "I have reviewed and agree to the <0>Advertiser Privacy Policy</0> and platform <1>Terms of Service</1> applicable to Brave Ads."
+msgstr "I have reviewed and agree to the <0>Advertiser Privacy Policy</0> and platform <1>Terms of Service</1> applicable to Brave Ads."
 
 #: src/auth/components/AdvertiserAgreed.tsx:34
-msgid "I understand that Brave Ads will not be compatible with Google Analytics and similar solutions that rely on third-party trackers"
-msgstr "I understand that Brave Ads will not be compatible with Google Analytics and similar solutions that rely on third-party trackers"
+#~ msgid "I understand that Brave Ads will not be compatible with Google Analytics and similar solutions that rely on third-party trackers"
+#~ msgstr "I understand that Brave Ads will not be compatible with Google Analytics and similar solutions that rely on third-party trackers"
+
+#: src/auth/components/AdvertiserAgreed.tsx:16
+msgid "I understand that first-party analytics are necessary for independent reporting."
+msgstr "I understand that first-party analytics are necessary for independent reporting."
+
+#: src/auth/components/AdvertiserAgreed.tsx:45
+msgid "I understand that I can only run ad campaigns in English, Spanish, and Portuguese."
+msgstr "I understand that I can only run ad campaigns in English, Spanish, and Portuguese."
+
+#: src/auth/components/AdvertiserAgreed.tsx:30
+msgid "I understand that payment is required before ad campaigns can be launched."
+msgstr "I understand that payment is required before ad campaigns can be launched."
 
 #: src/auth/components/AdvertiserAgreed.tsx:54
-msgid "I understand that pre-payment is required to launch my campaigns"
-msgstr "I understand that pre-payment is required to launch my campaigns"
+#~ msgid "I understand that pre-payment is required to launch my campaigns"
+#~ msgstr "I understand that pre-payment is required to launch my campaigns"
 
 #: src/auth/registration/MarketingOptIn.tsx:27
 msgid "I would like to receive marketing emails about new features and promotions from Brave Ads"
@@ -1056,11 +1080,15 @@ msgstr "Key Statistics"
 msgid "Keypairs"
 msgstr "Keypairs"
 
+#: src/validation/AdvertiserSchema.tsx:11
+msgid "Language acknowledgement is required"
+msgstr "Language acknowledgement is required"
+
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:86
 msgid "Launch a Campaign"
 msgstr "Launch a Campaign"
 
-#: src/components/Button/LearnMoreButton.tsx:19
+#: src/components/Button/LearnMoreButton.tsx:23
 msgid "Learn More"
 msgstr "Learn More"
 
@@ -1346,12 +1374,11 @@ msgstr "Pause"
 msgid "Pay with BAT to get <0>50% off</0> your first campaign"
 msgstr "Pay with BAT to get <0>50% off</0> your first campaign"
 
-#: src/auth/components/AdvertiserAgreed.tsx:41
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/PaymentMethodField.tsx:18
 msgid "Payment"
 msgstr "Payment"
 
-#: src/validation/AdvertiserSchema.tsx:11
+#: src/validation/AdvertiserSchema.tsx:14
 msgid "Payment acknowledgement is required"
 msgstr "Payment acknowledgement is required"
 
@@ -1472,8 +1499,8 @@ msgid "Pricing type must be CPM, CPC, or CPSV"
 msgstr "Pricing type must be CPM, CPC, or CPSV"
 
 #: src/auth/components/AdvertiserDetailsForm.tsx:101
-msgid "Prior to using the dashboard, please take a moment to complete your profile and review the following acknowledgements:"
-msgstr "Prior to using the dashboard, please take a moment to complete your profile and review the following acknowledgements:"
+#~ msgid "Prior to using the dashboard, please take a moment to complete your profile and review the following acknowledgements:"
+#~ msgstr "Prior to using the dashboard, please take a moment to complete your profile and review the following acknowledgements:"
 
 #: src/auth/views/LandingPage.tsx:32
 msgid "Privacy-forward"
@@ -1516,8 +1543,8 @@ msgid "Remove Conversion Tracking"
 msgstr "Remove Conversion Tracking"
 
 #: src/auth/components/AdvertiserAgreed.tsx:14
-msgid "Reporting"
-msgstr "Reporting"
+#~ msgid "Reporting"
+#~ msgstr "Reporting"
 
 #: src/user/analytics/analyticsOverview/reports/campaign/EngagementsOverview.tsx:129
 msgid "Reporting not available yet for <0>{campaignName}</0>."
@@ -1539,8 +1566,8 @@ msgstr "Review"
 msgid "Risk Free"
 msgstr "Risk Free"
 
-#: src/form/FormikButton.tsx:69
-#: src/form/FormikButton.tsx:125
+#: src/form/FormikButton.tsx:71
+#: src/form/FormikButton.tsx:129
 #: src/user/settings/NewKeyPairModal.tsx:251
 msgid "Save"
 msgstr "Save"
@@ -1549,8 +1576,8 @@ msgstr "Save"
 msgid "Save ad"
 msgstr "Save ad"
 
-#: src/form/FormikButton.tsx:70
-#: src/form/FormikButton.tsx:125
+#: src/form/FormikButton.tsx:72
+#: src/form/FormikButton.tsx:129
 #: src/user/settings/NewKeyPairModal.tsx:251
 msgid "Saving..."
 msgstr "Saving..."
@@ -1681,8 +1708,8 @@ msgid "State"
 msgstr "State"
 
 #: src/auth/components/AdvertiserAddress.tsx:54
-msgid "State / Province"
-msgstr "State / Province"
+#~ msgid "State / Province"
+#~ msgstr "State / Province"
 
 #: src/validation/AdvertiserSchema.tsx:20
 #~ msgid "State / Province is required"
@@ -1694,17 +1721,17 @@ msgstr "State / Province"
 msgid "Status"
 msgstr "Status"
 
-#: src/auth/components/AdvertiserAddress.tsx:27
+#: src/auth/components/AdvertiserAddress.tsx:25
 msgid "Street address"
 msgstr "Street address"
 
-#: src/validation/AdvertiserSchema.tsx:17
+#: src/validation/AdvertiserSchema.tsx:20
 msgid "Street address is required"
 msgstr "Street address is required"
 
 #: src/auth/components/AdvertiserAddress.tsx:34
-msgid "Street address line 2"
-msgstr "Street address line 2"
+#~ msgid "Street address line 2"
+#~ msgstr "Street address line 2"
 
 #: src/auth/registration/Register.tsx:130
 msgid "Submit for approval"
@@ -1753,10 +1780,10 @@ msgid "Tell us why you're interested in Brave Ads"
 msgstr "Tell us why you're interested in Brave Ads"
 
 #: src/auth/components/AdvertiserAgreed.tsx:62
-msgid "Terms & Conditions"
-msgstr "Terms & Conditions"
+#~ msgid "Terms & Conditions"
+#~ msgstr "Terms & Conditions"
 
-#: src/validation/AdvertiserSchema.tsx:14
+#: src/validation/AdvertiserSchema.tsx:17
 msgid "Terms & Conditions acknowledgement is required"
 msgstr "Terms & Conditions acknowledgement is required"
 
@@ -1789,8 +1816,8 @@ msgid "The username or password did not match our records."
 msgstr "The username or password did not match our records."
 
 #: src/validation/AdvertiserSchema.tsx:8
-msgid "Third party tracking acknowledgement is required"
-msgstr "Third party tracking acknowledgement is required"
+#~ msgid "Third party tracking acknowledgement is required"
+#~ msgstr "Third party tracking acknowledgement is required"
 
 #: src/components/Creatives/NewsPreview.tsx:54
 msgid "This is a news display ad, it wll look like part of the news feed."
@@ -1822,8 +1849,8 @@ msgid "To"
 msgstr "To"
 
 #: src/auth/components/AdvertiserAgreed.tsx:44
-msgid "To launch a campaign with Brave, you are required to prepay the full amount you intend to spend. Any remaining funds from your budget will be credited back to your original payment method upon request."
-msgstr "To launch a campaign with Brave, you are required to prepay the full amount you intend to spend. Any remaining funds from your budget will be credited back to your original payment method upon request."
+#~ msgid "To launch a campaign with Brave, you are required to prepay the full amount you intend to spend. Any remaining funds from your budget will be credited back to your original payment method upon request."
+#~ msgstr "To launch a campaign with Brave, you are required to prepay the full amount you intend to spend. Any remaining funds from your budget will be credited back to your original payment method upon request."
 
 #: src/user/reporting/ReportMenu.tsx:106
 msgid "To protect user’s privacy, verified ad conversion data is encrypted so that the identities of converted users remain anonymous to Brave. You can decrypt the conversion data in the CSV file by providing your private key here. If no key is provided, you will receive the encrypted conversion data. Your private key will never be sent to or stored on any Brave servers."
@@ -2021,8 +2048,8 @@ msgid "Week"
 msgstr "Week"
 
 #: src/auth/components/AdvertiserDetailsForm.tsx:97
-msgid "Welcome to Brave Ads"
-msgstr "Welcome to Brave Ads"
+#~ msgid "Welcome to Brave Ads"
+#~ msgstr "Welcome to Brave Ads"
 
 #: src/auth/registration/NameField.tsx:43
 msgid "Where did you hear about Brave Ads"
@@ -2072,6 +2099,6 @@ msgstr "Your organization’s new public key will be:"
 msgid "Your organization’s public key:"
 msgstr "Your organization’s public key:"
 
-#: src/auth/components/AdvertiserAddress.tsx:71
+#: src/auth/components/AdvertiserAddress.tsx:51
 msgid "Zip / Postal Code"
 msgstr "Zip / Postal Code"

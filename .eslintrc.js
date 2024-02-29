@@ -60,6 +60,7 @@ module.exports = {
           "transform",
           "format",
           "name",
+          "padding",
         ],
       },
     ],
