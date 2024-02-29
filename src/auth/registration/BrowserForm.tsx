@@ -1,17 +1,17 @@
-import { Box } from "@mui/material";
 import { FormikTextField } from "form/FormikHelpers";
 import { MarketingOptIn } from "auth/registration/MarketingOptIn";
 import { useField } from "formik";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { MarketingChannel } from "auth/registration/MarketingChannel";
+import { Box } from "@mui/material";
 
 export function BrowserForm() {
   const [, meta] = useField("advertiser.marketingChannel");
   const { _ } = useLingui();
 
   return (
-    <Box maxWidth={500} display="flex" flexDirection="column">
+    <Box width={{ xs: 350, sm: 500 }}>
       <FormikTextField
         name="fullName"
         label={_(msg`Full name`)}

@@ -10,7 +10,7 @@ export function SearchForm() {
   const { _ } = useLingui();
 
   return (
-    <Box maxWidth={500} display="flex" flexDirection="column">
+    <Box width={{ xs: 350, sm: 500 }}>
       <FormikTextField
         name="fullName"
         label={_(msg`Full name`)}

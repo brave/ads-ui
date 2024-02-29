@@ -1,11 +1,9 @@
 import {
-  Box,
   Button,
   Link,
   List,
   ListItemButton,
   ListItemText,
-  Toolbar,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -13,13 +11,11 @@ import { Link as RouterLink } from "react-router-dom";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { MessageDescriptor } from "@lingui/core";
-import { PaddedCardContainer } from "components/Card/PaddedCardContainer";
 import { useState } from "react";
-import { LandingPageAppBar } from "components/AppBar/LandingPageAppBar";
-import { Background } from "components/Background/Background";
 import logo from "../../../brave-icon-release-color.svg";
 import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
 import { useIsMobile } from "hooks/useIsMobile";
+import { AuthContainer } from "auth/views/components/AuthContainer";
 
 interface ChoiceOptions {
   title: MessageDescriptor;
@@ -45,65 +41,50 @@ export function AccountChoice() {
   ];
 
   return (
-    <Background>
-      <LandingPageAppBar />
-      <Toolbar sx={{ mb: { md: 1.5 }, mt: 1 }} />
-      <Box display="flex" maxWidth="800px" flexDirection="column" mb={3}>
-        <PaddedCardContainer>
-          {!isMobile && <div style={{ width: 500 }} />}
-          <img
-            src={logo}
-            height={65}
-            width={100}
-            style={{ marginBottom: 15 }}
+    <AuthContainer>
+      {!isMobile && <div style={{ width: 500 }} />}
+      <img src={logo} height={65} width={100} style={{ marginBottom: 15 }} />
+      <Typography variant="h5">
+        <Trans>Choose campaign type</Trans>
+      </Typography>
+      <Link
+        underline="none"
+        variant="caption"
+        href="https://ads-help.brave.com/ad-placements/brave-browser/notification"
+      >
+        <Trans>Learn more about various campaign types</Trans>
+      </Link>
+      <List>
+        {buttons.map((b) => (
+          <AccountItemButton
+            key={`account_item_button_${b.value}`}
+            {...b}
+            current={accountType}
+            onClick={setAccountType}
           />
-          <Typography variant="h5">
-            <Trans>Choose campaign type</Trans>
-          </Typography>
-          <Link
-            underline="none"
-            variant="caption"
-            href="https://ads-help.brave.com/ad-placements/brave-browser/notification"
-          >
-            <Trans>Learn more about various campaign types</Trans>
-          </Link>
-          <List>
-            {buttons.map((b) => (
-              <AccountItemButton
-                key={`account_item_button_${b.value}`}
-                {...b}
-                current={accountType}
-                onClick={setAccountType}
-              />
-            ))}
-          </List>
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            disabled={!accountType}
-            sx={{ borderRadius: "12px", mt: 5, padding: "15px 50px 15px 50px" }}
-            component={RouterLink}
-            to={
-              accountType === "search"
-                ? "/register/search"
-                : "/register/browser"
-            }
-          >
-            <Trans>Next</Trans>
-          </Button>
-          <Typography variant="caption" mt={2}>
-            <Trans>
-              or{" "}
-              <Link component={RouterLink} to="/contact" underline="none">
-                contact us
-              </Link>{" "}
-              for premium ad placements
-            </Trans>
-          </Typography>
-        </PaddedCardContainer>
-      </Box>
-    </Background>
+        ))}
+      </List>
+      <Button
+        variant="contained"
+        color="primary"
+        size="large"
+        disabled={!accountType}
+        sx={{ borderRadius: "12px", mt: 5, padding: "15px 50px 15px 50px" }}
+        component={RouterLink}
+        to={accountType === "search" ? "/register/search" : "/register/browser"}
+      >
+        <Trans>Next</Trans>
+      </Button>
+      <Typography variant="caption" mt={2}>
+        <Trans>
+          or{" "}
+          <Link component={RouterLink} to="/contact" underline="none">
+            contact us
+          </Link>{" "}
+          for premium ad placements
+        </Trans>
+      </Typography>
+    </AuthContainer>
   );
 }
 

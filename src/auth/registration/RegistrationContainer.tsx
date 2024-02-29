@@ -5,13 +5,15 @@ import Typography from "@mui/material/Typography";
 import { Trans } from "@lingui/macro";
 import { PrivacyPolicy } from "basic-attention-token/PrivacyPolicy";
 import { useIsMobile } from "hooks/useIsMobile";
-import { Box } from "@mui/material";
+import { LandingPageAppBar } from "components/AppBar/LandingPageAppBar";
+import { Background } from "components/Background/Background";
 
 export function RegistrationContainer(props: PropsWithChildren) {
   const isMobile = useIsMobile();
 
   return (
-    <Box display="flex" maxWidth="800px" flexDirection="column" mb={3}>
+    <Background>
+      <LandingPageAppBar />
       <PaddedCardContainer>
         <img src={logo} height={50} />
         {!isMobile && <div style={{ width: 600 }} />}
@@ -23,6 +25,6 @@ export function RegistrationContainer(props: PropsWithChildren) {
 
         <PrivacyPolicy />
       </PaddedCardContainer>
-    </Box>
+    </Background>
   );
 }
