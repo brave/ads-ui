@@ -34,7 +34,7 @@ You may need to proceed through a certificate warning in order to develop locall
 
 ## Localization
 
-After changing text, o adding new translated text you need to run:
+After changing text, or adding new translated text you need to run:
 
 ```
 ❯ npm run extract
