@@ -5,8 +5,8 @@ export type RegistrationForm = {
   };
   marketingOptIn?: boolean;
   advertiser: {
-    name: string;
-    url: string;
+    name?: string;
+    url?: string;
     description?: string;
     marketingChannel?: string;
     other?: string;

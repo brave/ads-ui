@@ -29,6 +29,7 @@ const BrowserRegistrationSchema = () =>
 const SearchRegistrationSchema = () =>
   object().shape({
     user: UserSchema(),
+    advertiser: AdvertiserDetailsSchema(),
     domain: string()
       .required(t`Domain is required`)
       .matches(NoSpacesRegex, t`Domain must not contain any whitespace`)

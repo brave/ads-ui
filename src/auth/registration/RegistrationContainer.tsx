@@ -7,6 +7,7 @@ import { PrivacyPolicy } from "basic-attention-token/PrivacyPolicy";
 import { useIsMobile } from "hooks/useIsMobile";
 import { LandingPageAppBar } from "components/AppBar/LandingPageAppBar";
 import { Background } from "components/Background/Background";
+import { Toolbar } from "@mui/material";
 
 export function RegistrationContainer(props: PropsWithChildren) {
   const isMobile = useIsMobile();
@@ -14,6 +15,7 @@ export function RegistrationContainer(props: PropsWithChildren) {
   return (
     <Background>
       <LandingPageAppBar />
+      <Toolbar />
       <PaddedCardContainer>
         <img src={logo} height={50} />
         {!isMobile && <div style={{ width: 600 }} />}

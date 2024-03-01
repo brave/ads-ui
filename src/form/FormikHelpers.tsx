@@ -5,7 +5,6 @@ import {
   ReactNode,
 } from "react";
 import {
-  Box,
   Checkbox,
   FormControl,
   FormControlLabel,
@@ -37,8 +36,8 @@ type FormikTextFieldProps = TextFieldProps & {
   small?: boolean;
   type?: HTMLInputTypeAttribute;
   disabled?: boolean;
-  useTopLabel?: boolean;
   growInput?: boolean;
+  inlineError?: boolean;
 };
 
 export const FormikTextField = (props: FormikTextFieldProps) => {
@@ -58,38 +57,28 @@ export const FormikTextField = (props: FormikTextFieldProps) => {
     );
   }
 
-  const extraOmit = props.useTopLabel ? ["label"] : [];
   return (
-    <Box flexGrow={props.growInput !== false ? 1 : 0}>
-      {props.useTopLabel && (
-        <FormLabel sx={{ color: "text.primary" }}> {props.label} </FormLabel>
-      )}
-      <TextField
-        variant="outlined"
-        fullWidth={!props.small}
-        margin="normal"
-        error={showError}
-        helperText={showError ? meta.error : helperText}
-        color="secondary"
-        placeholder={
-          props.useTopLabel && !props.placeholder
-            ? props.label
-            : props.placeholder
-        }
-        sx={props.useTopLabel ? { marginBottom: 2 } : {}}
-        disabled={props.disabled}
-        inputProps={{
-          maxLength: props.maxLengthInstantFeedback,
-        }}
-        {..._.omit(props, [
-          "small",
-          "maxLengthInstantFeedback",
-          "helperText",
-          ...extraOmit,
-        ])}
-        {...field}
-      />
-    </Box>
+    <TextField
+      variant="outlined"
+      fullWidth={!props.small}
+      margin="normal"
+      error={showError}
+      helperText={showError && !props.inlineError ? meta.error : helperText}
+      color="secondary"
+      placeholder={props.placeholder ?? props.label}
+      label={showError && props.inlineError ? meta.error : props.label}
+      disabled={props.disabled}
+      inputProps={{
+        maxLength: props.maxLengthInstantFeedback,
+      }}
+      {..._.omit(props, [
+        "small",
+        "maxLengthInstantFeedback",
+        "helperText",
+        "label",
+      ])}
+      {...field}
+    />
   );
 };
 

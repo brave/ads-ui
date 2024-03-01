@@ -17,6 +17,7 @@ export function SearchForm() {
         margin="dense"
         autoComplete="given-name"
         size="small"
+        inlineError
       />
 
       <FormikTextField
@@ -26,6 +27,7 @@ export function SearchForm() {
         margin="dense"
         autoComplete="email"
         size="small"
+        inlineError
       />
 
       <FormikTextField
@@ -34,6 +36,7 @@ export function SearchForm() {
         autoComplete="url"
         margin="dense"
         size="small"
+        inlineError
       />
 
       <CountryPicker

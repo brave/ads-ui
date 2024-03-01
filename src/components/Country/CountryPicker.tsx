@@ -19,6 +19,7 @@ export const CountryPicker = ({ name, filter, label }: Props) => {
 
   const value = data.find((c) => c.code === formProps.value) ?? null;
 
+  const isError = meta.touched && !!errorMessage;
   return (
     <Autocomplete
       autoSelect
@@ -29,9 +30,8 @@ export const CountryPicker = ({ name, filter, label }: Props) => {
         <Box>
           <TextField
             {...params}
-            label={label ?? _(msg`Country`)}
-            helperText={meta.touched && errorMessage}
-            error={meta.touched && !!errorMessage}
+            label={isError ? errorMessage : label ?? _(msg`Country`)}
+            error={isError}
             autoComplete="country"
             margin="dense"
             size="small"

@@ -29,7 +29,7 @@ msgstr ""
 msgid "{campaignFormat} pricing configuration option(s):"
 msgstr ""
 
-#: src/form/FormikHelpers.tsx:55
+#: src/form/FormikHelpers.tsx:54
 msgid "{length}/{maxLength} characters"
 msgstr ""
 
@@ -335,7 +335,7 @@ msgstr ""
 msgid "Business name is required"
 msgstr ""
 
-#: src/auth/registration/BrowserForm.tsx:41
+#: src/auth/registration/BrowserForm.tsx:42
 msgid "Business website"
 msgstr ""
 
@@ -635,7 +635,7 @@ msgstr ""
 msgid "Counted when an ad is displayed on screen for a minimum of one second"
 msgstr ""
 
-#: src/components/Country/CountryPicker.tsx:32
+#: src/components/Country/CountryPicker.tsx:33
 msgid "Country"
 msgstr ""
 
@@ -758,19 +758,19 @@ msgstr ""
 msgid "Documentation can be found <0>here</0> on how to use the API."
 msgstr ""
 
-#: src/validation/RegistrationSchema.tsx:33
+#: src/validation/RegistrationSchema.tsx:34
 msgid "Domain is required"
 msgstr ""
 
-#: src/validation/RegistrationSchema.tsx:41
+#: src/validation/RegistrationSchema.tsx:42
 msgid "Domain must match the email domain"
 msgstr ""
 
-#: src/validation/RegistrationSchema.tsx:34
+#: src/validation/RegistrationSchema.tsx:35
 msgid "Domain must not contain any whitespace"
 msgstr ""
 
-#: src/auth/registration/SearchForm.tsx:33
+#: src/auth/registration/SearchForm.tsx:35
 msgid "Domain to advertise"
 msgstr ""
 
@@ -808,14 +808,14 @@ msgstr ""
 msgid "Edit ad"
 msgstr ""
 
-#: src/auth/registration/BrowserForm.tsx:25
+#: src/auth/registration/BrowserForm.tsx:24
 #: src/auth/views/Login.tsx:43
 #: src/auth/views/MagicLink.tsx:74
 #: src/user/settings/UserForm.tsx:51
 msgid "Email"
 msgstr ""
 
-#: src/validation/UserSchema.tsx:10
+#: src/validation/UserSchema.tsx:7
 msgid "Email address is required"
 msgstr ""
 
@@ -916,7 +916,7 @@ msgstr ""
 msgid "From an influential person I follow online"
 msgstr ""
 
-#: src/auth/registration/BrowserForm.tsx:17
+#: src/auth/registration/BrowserForm.tsx:15
 #: src/auth/registration/SearchForm.tsx:16
 msgid "Full name"
 msgstr ""
@@ -925,7 +925,7 @@ msgstr ""
 msgid "Full Name"
 msgstr ""
 
-#: src/validation/UserSchema.tsx:12
+#: src/validation/UserSchema.tsx:9
 msgid "Full name is required"
 msgstr ""
 
@@ -1392,7 +1392,6 @@ msgstr ""
 msgid "Other (please specify)"
 msgstr ""
 
-#: src/auth/registration/BrowserForm.tsx:53
 #: src/auth/registration/MarketingChannel.tsx:49
 msgid "Other source"
 msgstr ""
@@ -1444,11 +1443,11 @@ msgstr ""
 msgid "Please enter a username and password"
 msgstr ""
 
-#: src/validation/RegistrationSchema.tsx:37
+#: src/validation/RegistrationSchema.tsx:38
 msgid "Please enter a valid domain, for example: brave.com"
 msgstr ""
 
-#: src/validation/UserSchema.tsx:11
+#: src/validation/UserSchema.tsx:8
 msgid "Please enter a valid email address"
 msgstr ""
 
@@ -1465,7 +1464,7 @@ msgstr ""
 msgid "Please enter an email."
 msgstr ""
 
-#: src/validation/RegistrationSchema.tsx:61
+#: src/validation/RegistrationSchema.tsx:62
 msgid "Please let us know how you heard about Brave Ads"
 msgstr ""
 
@@ -1489,7 +1488,7 @@ msgstr ""
 msgid "Please see our <0>Advertiser Privacy Policy</0> and <1>Terms of Service</1> applicable to Brave Ads."
 msgstr ""
 
-#: src/validation/RegistrationSchema.tsx:66
+#: src/validation/RegistrationSchema.tsx:67
 msgid "Please specify how you heard about Brave Ads"
 msgstr ""
 
@@ -1542,12 +1541,12 @@ msgstr ""
 msgid "Pricing type must be CPM, CPC, or CPSV"
 msgstr ""
 
-#: src/auth/registration/SearchForm.tsx:41
+#: src/auth/registration/SearchForm.tsx:44
 msgid "Primary region of business"
 msgstr ""
 
-#: src/validation/RegistrationSchema.tsx:51
-#: src/validation/RegistrationSchema.tsx:54
+#: src/validation/RegistrationSchema.tsx:52
+#: src/validation/RegistrationSchema.tsx:55
 msgid "Primary region of business is required"
 msgstr ""
 
@@ -1763,7 +1762,7 @@ msgstr ""
 msgid "Start Time"
 msgstr ""
 
-#: src/auth/registration/RegistrationContainer.tsx:21
+#: src/auth/registration/RegistrationContainer.tsx:23
 msgid "Start your company profile"
 msgstr ""
 
@@ -1848,7 +1847,7 @@ msgstr ""
 msgid "Targeting"
 msgstr ""
 
-#: src/auth/registration/BrowserForm.tsx:64
+#: src/auth/registration/BrowserForm.tsx:57
 msgid "Tell us why you're interested in Brave Ads"
 msgstr ""
 
@@ -2140,7 +2139,7 @@ msgstr ""
 msgid "While looking up alternatives to Google Ads"
 msgstr ""
 
-#: src/auth/registration/SearchForm.tsx:24
+#: src/auth/registration/SearchForm.tsx:25
 msgid "Work email"
 msgstr ""
 
