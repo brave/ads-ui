@@ -229,7 +229,7 @@ msgstr "Are you sure you want to pause"
 #~ msgid "As effective as Google"
 #~ msgstr "As effective as Google"
 
-#: src/auth/registration/MarketingChannel.tsx:23
+#: src/auth/registration/MarketingChannel.tsx:24
 msgid "At a marketing/media conference"
 msgstr "At a marketing/media conference"
 
@@ -904,11 +904,11 @@ msgstr "Format"
 msgid "From"
 msgstr "From"
 
-#: src/auth/registration/MarketingChannel.tsx:35
+#: src/auth/registration/MarketingChannel.tsx:36
 msgid "From a friend/colleague"
 msgstr "From a friend/colleague"
 
-#: src/auth/registration/MarketingChannel.tsx:27
+#: src/auth/registration/MarketingChannel.tsx:28
 msgid "From an influential person I follow online"
 msgstr "From an influential person I follow online"
 
@@ -1039,19 +1039,19 @@ msgstr "Impressions"
 msgid "Impressions (Device)"
 msgstr "Impressions (Device)"
 
-#: src/auth/registration/MarketingChannel.tsx:36
+#: src/auth/registration/MarketingChannel.tsx:37
 msgid "In a blog post/news article"
 msgstr "In a blog post/news article"
 
-#: src/auth/registration/MarketingChannel.tsx:32
+#: src/auth/registration/MarketingChannel.tsx:33
 msgid "In a newsletter I subscribe to"
 msgstr "In a newsletter I subscribe to"
 
-#: src/auth/registration/MarketingChannel.tsx:38
+#: src/auth/registration/MarketingChannel.tsx:39
 msgid "In a post by Brave on LinkedIn"
 msgstr "In a post by Brave on LinkedIn"
 
-#: src/auth/registration/MarketingChannel.tsx:41
+#: src/auth/registration/MarketingChannel.tsx:42
 msgid "In a video on YouTube"
 msgstr "In a video on YouTube"
 
@@ -1339,7 +1339,7 @@ msgstr "Observation window required."
 msgid "On / Off"
 msgstr "On / Off"
 
-#: src/auth/registration/MarketingChannel.tsx:30
+#: src/auth/registration/MarketingChannel.tsx:31
 msgid "On a podcast I listen to"
 msgstr "On a podcast I listen to"
 
@@ -1380,11 +1380,11 @@ msgstr "Organization"
 msgid "OS"
 msgstr "OS"
 
-#: src/auth/registration/MarketingChannel.tsx:42
+#: src/auth/registration/MarketingChannel.tsx:43
 msgid "Other (please specify)"
 msgstr "Other (please specify)"
 
-#: src/auth/registration/MarketingChannel.tsx:49
+#: src/auth/registration/MarketingChannel.tsx:50
 msgid "Other source"
 msgstr "Other source"
 
@@ -2127,7 +2127,7 @@ msgstr "Week"
 msgid "Where did you hear about Brave Ads"
 msgstr "Where did you hear about Brave Ads"
 
-#: src/auth/registration/MarketingChannel.tsx:19
+#: src/auth/registration/MarketingChannel.tsx:20
 msgid "While looking up alternatives to Google Ads"
 msgstr "While looking up alternatives to Google Ads"
 

@@ -224,30 +224,31 @@ interface FormikSelectProps {
     | undefined;
   variant?: "outlined" | "standard" | "filled" | undefined;
   size?: FormControlOwnProps["size"];
+  inlineError?: boolean;
 }
 
 export const FormikSelect = (props: FormikSelectProps) => {
   const [field, meta] = useField(props);
+  const isError = meta.touched && Boolean(meta.error);
+  const labelOrError = props.inlineError && isError ? meta.error : props.label;
   return (
     <FormControl
       fullWidth={props.fullWidth !== undefined ? props.fullWidth : true}
       {...props}
     >
-      <InputLabel id={`select-label-${props.name}`}>{props.label}</InputLabel>
-      <Select
-        error={meta.touched && Boolean(meta.error)}
-        label={props.label}
-        {...field}
-      >
+      <InputLabel id={`select-label-${props.name}`}>{labelOrError}</InputLabel>
+      <Select error={isError} label={labelOrError} {...field}>
         {props.options.map((opt) => (
           <MenuItem key={opt.value} value={opt.value}>
             {opt.label}
           </MenuItem>
         ))}
       </Select>
-      <ErrorMessage name={field.name}>
-        {(msg: any) => <FormHelperText error>{msg}</FormHelperText>}
-      </ErrorMessage>
+      {!props.inlineError && (
+        <ErrorMessage name={field.name}>
+          {(msg: any) => <FormHelperText error>{msg}</FormHelperText>}
+        </ErrorMessage>
+      )}
     </FormControl>
   );
 };

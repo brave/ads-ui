@@ -14,6 +14,7 @@ export function MarketingChannel(props: { name: string }) {
         name={props.name}
         margin="dense"
         size="small"
+        inlineError
         options={[
           {
             label: _(msg`While looking up alternatives to Google Ads`),
