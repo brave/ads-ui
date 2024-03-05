@@ -50,7 +50,7 @@ export function AccountChoice() {
       <Link
         underline="none"
         variant="caption"
-        href="https://ads-help.brave.com/ad-placements/brave-browser/notification"
+        href="https://ads-help.brave.com/category/brave-browser"
       >
         <Trans>Learn more about various campaign types</Trans>
       </Link>

@@ -5,7 +5,7 @@ import { AuthContainer } from "auth/views/components/AuthContainer";
 import logo from "../../../brave-icon-release-color.svg";
 
 export function AdvertiserRegistered() {
-  useTrackMatomoPageView({ documentTitle: "Advertiser Registered" });
+  useTrackMatomoPageView({ documentTitle: "Advertiser Registration Complete" });
 
   return (
     <AuthContainer>

@@ -69,6 +69,7 @@ export function App() {
               <Route path="/register" component={Register} />
               <Route path="/contact" component={BraveAdsContactFrame} />
               <Route path="/bat" component={BasicAttentionTokenLandingPage} />
+              <Redirect path="/search" exact to="/contact" />
               <Route
                 path="/user/main"
                 component={isAuthenticated ? User : Protected}

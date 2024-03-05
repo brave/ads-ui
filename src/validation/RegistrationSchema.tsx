@@ -51,7 +51,7 @@ const SearchRegistrationSchema = () =>
     country: string()
       .required(t`Primary region of business is required`)
       .oneOf(
-        ["US", "UK", "DE", "FR", "CA", "IN"],
+        ["US", "GB", "DE", "FR", "CA", "IN"],
         t`Primary region of business is required`,
       ),
   });

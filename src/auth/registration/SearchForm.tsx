@@ -42,7 +42,7 @@ export function SearchForm() {
       <CountryPicker
         name="country"
         label={_(msg`Primary region of business`)}
-        filter={["US", "UK", "DE", "FR", "CA", "IN"]}
+        filter={["US", "GB", "DE", "FR", "CA", "IN"]}
       />
 
       <MarketingChannel name="advertiser.marketingChannel" />
