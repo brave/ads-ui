@@ -53,8 +53,10 @@ export const getCredentials = async (user: {
 export async function submitRegistration(
   form: RegistrationForm,
   type: "search" | "browser",
+  legacy: boolean = false,
 ) {
-  const path = type === "search" ? "/register/search" : "/register";
+  let path = type === "search" ? "/register/search" : "/register";
+  path = legacy ? "/auth/register" : path;
   const res = await fetch(buildAdServerV2Endpoint(path), {
     method: "POST",
     mode: "cors",

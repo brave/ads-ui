@@ -599,7 +599,7 @@ msgstr ""
 msgid "Copy this and keep this safe!"
 msgstr ""
 
-#: src/auth/lib/index.ts:111
+#: src/auth/lib/index.ts:113
 msgid "Could not logout at this time. Please try again later."
 msgstr ""
 
@@ -1087,11 +1087,11 @@ msgstr ""
 msgid "invalid session"
 msgstr ""
 
-#: src/auth/lib/index.ts:97
+#: src/auth/lib/index.ts:99
 msgid "Invalid Session"
 msgstr ""
 
-#: src/auth/lib/index.ts:143
+#: src/auth/lib/index.ts:145
 msgid "Invalid Token"
 msgstr ""
 
@@ -1796,7 +1796,7 @@ msgstr ""
 #~ msgid "Street address line 2"
 #~ msgstr ""
 
-#: src/auth/registration/BrowserRegister.tsx:37
+#: src/auth/registration/BrowserRegister.tsx:40
 #: src/auth/registration/SearchRegister.tsx:36
 msgid "Submit"
 msgstr ""
@@ -1981,7 +1981,7 @@ msgstr ""
 msgid "Unable to login, link has expired or has already been used."
 msgstr ""
 
-#: src/auth/lib/index.ts:84
+#: src/auth/lib/index.ts:86
 msgid "Unable to register your organization at this time. Please try again later."
 msgstr ""
 
