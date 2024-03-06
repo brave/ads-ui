@@ -24,7 +24,7 @@ export type CampaignFragment = {
   startAt: any;
   endAt: any;
   source: Types.CampaignSource;
-  type: string;
+  type: Types.CampaignType;
   format: Types.CampaignFormat;
   paymentType: Types.PaymentType;
   dayProportion?: number | null;
@@ -123,7 +123,7 @@ export type CampaignSummaryFragment = {
   startAt: any;
   endAt: any;
   source: Types.CampaignSource;
-  type: string;
+  type: Types.CampaignType;
   format: Types.CampaignFormat;
   dayProportion?: number | null;
 };
@@ -224,7 +224,7 @@ export type LoadCampaignQuery = {
     startAt: any;
     endAt: any;
     source: Types.CampaignSource;
-    type: string;
+    type: Types.CampaignType;
     format: Types.CampaignFormat;
     paymentType: Types.PaymentType;
     dayProportion?: number | null;
@@ -522,7 +522,11 @@ export function useLoadCampaignQuery(
   baseOptions: Apollo.QueryHookOptions<
     LoadCampaignQuery,
     LoadCampaignQueryVariables
-  >,
+  > &
+    (
+      | { variables: LoadCampaignQueryVariables; skip?: boolean }
+      | { skip: boolean }
+    ),
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<LoadCampaignQuery, LoadCampaignQueryVariables>(
@@ -601,7 +605,11 @@ export function useLoadCampaignAdsQuery(
   baseOptions: Apollo.QueryHookOptions<
     LoadCampaignAdsQuery,
     LoadCampaignAdsQueryVariables
-  >,
+  > &
+    (
+      | { variables: LoadCampaignAdsQueryVariables; skip?: boolean }
+      | { skip: boolean }
+    ),
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<LoadCampaignAdsQuery, LoadCampaignAdsQueryVariables>(

@@ -1,48 +1,20 @@
-import { Box } from "@mui/material";
 import { FormikSelect, FormikTextField } from "form/FormikHelpers";
-import { MarketingOptIn } from "auth/registration/MarketingOptIn";
-import { useField } from "formik";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { useField } from "formik";
 
-export function NameField() {
+export function MarketingChannel(props: { name: string }) {
   const [, meta] = useField("advertiser.marketingChannel");
   const { _ } = useLingui();
 
   return (
-    <Box flexGrow={1}>
-      <FormikTextField
-        name="fullName"
-        label={_(msg`Full name`)}
-        margin="dense"
-        autoComplete="given-name"
-      />
-
-      <FormikTextField
-        name="email"
-        label={_(msg`Email`)}
-        type="email"
-        margin="dense"
-        autoComplete="email"
-      />
-
-      <FormikTextField
-        name="advertiser.name"
-        label={_(msg`Business name`)}
-        margin="dense"
-      />
-
-      <FormikTextField
-        name="advertiser.url"
-        label={_(msg`Business website`)}
-        autoComplete="url"
-        margin="dense"
-      />
-
+    <>
       <FormikSelect
         label={_(msg`Where did you hear about Brave Ads`)}
-        name="advertiser.marketingChannel"
+        name={props.name}
         margin="dense"
+        size="small"
+        inlineError
         options={[
           {
             label: _(msg`While looking up alternatives to Google Ads`),
@@ -76,19 +48,9 @@ export function NameField() {
           margin="dense"
           name="advertiser.other"
           label={_(msg`Other source`)}
+          size="small"
         />
       )}
-
-      <FormikTextField
-        multiline
-        minRows={3}
-        maxRows={10}
-        margin="dense"
-        name="advertiser.description"
-        label={_(msg`Tell us why you're interested in Brave Ads`)}
-      />
-
-      <MarketingOptIn />
-    </Box>
+    </>
   );
 }

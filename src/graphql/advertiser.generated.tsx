@@ -81,7 +81,7 @@ export type AdvertiserCampaignsFragment = {
     startAt: any;
     endAt: any;
     source: Types.CampaignSource;
-    type: string;
+    type: Types.CampaignType;
     format: Types.CampaignFormat;
     dayProportion?: number | null;
   }>;
@@ -116,7 +116,7 @@ export type AdvertiserCampaignsQuery = {
       startAt: any;
       endAt: any;
       source: Types.CampaignSource;
-      type: string;
+      type: Types.CampaignType;
       format: Types.CampaignFormat;
       dayProportion?: number | null;
     }>;
@@ -286,7 +286,11 @@ export function useAdvertiserQuery(
   baseOptions: Apollo.QueryHookOptions<
     AdvertiserQuery,
     AdvertiserQueryVariables
-  >,
+  > &
+    (
+      | { variables: AdvertiserQueryVariables; skip?: boolean }
+      | { skip: boolean }
+    ),
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<AdvertiserQuery, AdvertiserQueryVariables>(
@@ -413,7 +417,11 @@ export function useAdvertiserCampaignsQuery(
   baseOptions: Apollo.QueryHookOptions<
     AdvertiserCampaignsQuery,
     AdvertiserCampaignsQueryVariables
-  >,
+  > &
+    (
+      | { variables: AdvertiserCampaignsQueryVariables; skip?: boolean }
+      | { skip: boolean }
+    ),
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<
@@ -494,7 +502,11 @@ export function useAdvertiserImagesQuery(
   baseOptions: Apollo.QueryHookOptions<
     AdvertiserImagesQuery,
     AdvertiserImagesQueryVariables
-  >,
+  > &
+    (
+      | { variables: AdvertiserImagesQueryVariables; skip?: boolean }
+      | { skip: boolean }
+    ),
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<AdvertiserImagesQuery, AdvertiserImagesQueryVariables>(
@@ -575,7 +587,11 @@ export function useAdvertiserPricesQuery(
   baseOptions: Apollo.QueryHookOptions<
     AdvertiserPricesQuery,
     AdvertiserPricesQueryVariables
-  >,
+  > &
+    (
+      | { variables: AdvertiserPricesQueryVariables; skip?: boolean }
+      | { skip: boolean }
+    ),
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<AdvertiserPricesQuery, AdvertiserPricesQueryVariables>(
@@ -655,7 +671,11 @@ export function useAdvertiserBillingAddressQuery(
   baseOptions: Apollo.QueryHookOptions<
     AdvertiserBillingAddressQuery,
     AdvertiserBillingAddressQueryVariables
-  >,
+  > &
+    (
+      | { variables: AdvertiserBillingAddressQueryVariables; skip?: boolean }
+      | { skip: boolean }
+    ),
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<

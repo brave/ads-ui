@@ -52,7 +52,11 @@ export function useValidateTargetUrlQuery(
   baseOptions: Apollo.QueryHookOptions<
     ValidateTargetUrlQuery,
     ValidateTargetUrlQueryVariables
-  >,
+  > &
+    (
+      | { variables: ValidateTargetUrlQueryVariables; skip?: boolean }
+      | { skip: boolean }
+    ),
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<
