@@ -10,6 +10,7 @@ import {
   CampaignFormat,
   CampaignPacingStrategies,
   CampaignSource,
+  CampaignType,
   ConfirmationType,
   PaymentType,
 } from "graphql/types";
@@ -37,7 +38,7 @@ const BASE_CPM_CAMPAIGN_FRAGMENT: Readonly<CampaignFragment> = {
   startAt: "2023-07-14T04:00:00.000Z",
   endAt: "2023-08-01T03:59:00.000Z",
   source: CampaignSource.SelfServe,
-  type: "paid",
+  type: CampaignType.Paid,
   format: CampaignFormat.PushNotification,
   paymentType: PaymentType.Stripe,
   dayPartings: [],
@@ -370,7 +371,7 @@ describe("edit form tests", () => {
     spent: 0,
     startAt: undefined,
     state: "active",
-    type: "paid",
+    type: CampaignType.Paid,
   };
 
   const editForm = editCampaignValues(

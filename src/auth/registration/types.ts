@@ -1,22 +1,26 @@
-export type AccountSetup = "managed" | "self";
-
 export type RegistrationForm = {
-  email: string;
-  fullName: string;
+  user: {
+    email: string;
+    fullName: string;
+  };
   marketingOptIn?: boolean;
-  setup?: AccountSetup;
   advertiser: {
-    name: string;
-    url: string;
+    name?: string;
+    url?: string;
     description?: string;
     marketingChannel?: string;
     other?: string;
   };
+  country?: string;
+  mediaSpend?: string;
+  domain?: string;
 };
 
 export const initialValues: RegistrationForm = {
-  email: "",
-  fullName: "",
+  user: {
+    email: "",
+    fullName: "",
+  },
   marketingOptIn: false,
   advertiser: {
     name: "",
@@ -25,4 +29,7 @@ export const initialValues: RegistrationForm = {
     marketingChannel: "",
     other: "",
   },
+  country: "",
+  mediaSpend: "",
+  domain: "",
 };

@@ -60,7 +60,8 @@ export const LoadUserDocument = gql`
  * });
  */
 export function useLoadUserQuery(
-  baseOptions: Apollo.QueryHookOptions<LoadUserQuery, LoadUserQueryVariables>,
+  baseOptions: Apollo.QueryHookOptions<LoadUserQuery, LoadUserQueryVariables> &
+    ({ variables: LoadUserQueryVariables; skip?: boolean } | { skip: boolean }),
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<LoadUserQuery, LoadUserQueryVariables>(

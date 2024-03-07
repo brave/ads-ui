@@ -33,12 +33,15 @@ You may need to proceed through a certificate warning in order to develop locall
 ```
 
 ## Localization
-After changing text, o adding new translated text you need to run:
+
+After changing text, or adding new translated text you need to run:
+
 ```
 ❯ npm run extract
 ```
 
 THe output should look something like:
+
 ```
 > ads-ui@0.1.0 extract
 > lingui extract
@@ -61,5 +64,3 @@ Once translations are complete, they should be added to the `msgstr` portion of 
 
 To add more locales, edit the `locales` array in `lingui.config.js` and run `npm run extract` again.
 Make sure you also update `i18n.ts` with the new locale.
-
-

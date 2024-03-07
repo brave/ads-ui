@@ -242,7 +242,11 @@ export function useAnalyticOverviewQuery(
   baseOptions: Apollo.QueryHookOptions<
     AnalyticOverviewQuery,
     AnalyticOverviewQueryVariables
-  >,
+  > &
+    (
+      | { variables: AnalyticOverviewQueryVariables; skip?: boolean }
+      | { skip: boolean }
+    ),
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<AnalyticOverviewQuery, AnalyticOverviewQueryVariables>(
@@ -326,7 +330,11 @@ export function useEngagementOverviewQuery(
   baseOptions: Apollo.QueryHookOptions<
     EngagementOverviewQuery,
     EngagementOverviewQueryVariables
-  >,
+  > &
+    (
+      | { variables: EngagementOverviewQueryVariables; skip?: boolean }
+      | { skip: boolean }
+    ),
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<

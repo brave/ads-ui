@@ -345,7 +345,11 @@ export function useAdvertiserCreativesQuery(
   baseOptions: Apollo.QueryHookOptions<
     AdvertiserCreativesQuery,
     AdvertiserCreativesQueryVariables
-  >,
+  > &
+    (
+      | { variables: AdvertiserCreativesQueryVariables; skip?: boolean }
+      | { skip: boolean }
+    ),
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<
@@ -527,7 +531,11 @@ export function useLoadCreativeQuery(
   baseOptions: Apollo.QueryHookOptions<
     LoadCreativeQuery,
     LoadCreativeQueryVariables
-  >,
+  > &
+    (
+      | { variables: LoadCreativeQueryVariables; skip?: boolean }
+      | { skip: boolean }
+    ),
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<LoadCreativeQuery, LoadCreativeQueryVariables>(
@@ -608,7 +616,11 @@ export function useCampaignsForCreativeQuery(
   baseOptions: Apollo.QueryHookOptions<
     CampaignsForCreativeQuery,
     CampaignsForCreativeQueryVariables
-  >,
+  > &
+    (
+      | { variables: CampaignsForCreativeQueryVariables; skip?: boolean }
+      | { skip: boolean }
+    ),
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<

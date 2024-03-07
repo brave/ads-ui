@@ -22,7 +22,6 @@ export function LandingPageAppBar() {
   const isAuthenticated = useIsAuthenticated();
   const isMobile = useIsMobile();
   const isContact = match.url.includes("contact");
-  const isSearch = match.url.includes("search");
   const isBAT = match.url.includes("bat");
 
   const GetStarted = () => (
@@ -45,8 +44,7 @@ export function LandingPageAppBar() {
 
   const links = [
     {
-      component:
-        (isMobile && !isSearch) || isAuthenticated ? null : <GetStarted />,
+      component: isMobile || isAuthenticated ? null : <GetStarted />,
     },
     {
       component: !isBAT ? (

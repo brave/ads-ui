@@ -29,7 +29,7 @@ msgstr ""
 msgid "{campaignFormat} pricing configuration option(s):"
 msgstr ""
 
-#: src/form/FormikHelpers.tsx:53
+#: src/form/FormikHelpers.tsx:54
 msgid "{length}/{maxLength} characters"
 msgstr ""
 
@@ -83,6 +83,10 @@ msgstr ""
 
 #: src/components/Switch/OnOff.tsx:36
 msgid "Activate"
+msgstr ""
+
+#: src/components/Creatives/NewsPreview.tsx:90
+msgid "Ad"
 msgstr ""
 
 #: src/validation/CreativeSchema.tsx:45
@@ -178,7 +182,7 @@ msgstr ""
 msgid "Additional Report: OS Performance"
 msgstr ""
 
-#: src/components/AppBar/LandingPageAppBar.tsx:87
+#: src/components/AppBar/LandingPageAppBar.tsx:85
 #: src/components/Assets/AdvertiserAssets.tsx:32
 #: src/components/Creatives/CreativeList.tsx:100
 #: src/components/Creatives/CreativeSpecificPreview.tsx:52
@@ -230,10 +234,10 @@ msgid "Are you sure you want to pause"
 msgstr ""
 
 #: src/search/SearchTalkingPoints.tsx:12
-msgid "As effective as Google"
-msgstr ""
+#~ msgid "As effective as Google"
+#~ msgstr ""
 
-#: src/auth/registration/NameField.tsx:52
+#: src/auth/registration/MarketingChannel.tsx:24
 msgid "At a marketing/media conference"
 msgstr ""
 
@@ -261,14 +265,14 @@ msgid "Automatic interest targeting"
 msgstr ""
 
 #: src/auth/registration/AccountChoice.tsx:139
-msgid "Available Ad placements"
-msgstr ""
+#~ msgid "Available Ad placements"
+#~ msgstr ""
 
 #: src/components/Steps/NextAndBack.tsx:33
 msgid "Back"
 msgstr ""
 
-#: src/components/AppBar/LandingPageAppBar.tsx:58
+#: src/components/AppBar/LandingPageAppBar.tsx:56
 msgid "Basic Attention Token"
 msgstr ""
 
@@ -287,12 +291,12 @@ msgid "Body Preview"
 msgstr ""
 
 #: src/search/SearchLandingPage.tsx:39
-msgid "Book a 30-minute meeting with a Brave Search specialist to discuss a free test campaign and see how Brave Ads can perform for your business."
-msgstr ""
+#~ msgid "Book a 30-minute meeting with a Brave Search specialist to discuss a free test campaign and see how Brave Ads can perform for your business."
+#~ msgstr ""
 
 #: src/search/SearchLandingPage.tsx:79
-msgid "Book a meeting"
-msgstr ""
+#~ msgid "Book a meeting"
+#~ msgstr ""
 
 #: src/user/settings/NewKeyPairModal.tsx:184
 msgid "Brave cannot recover this key, which has been generated in your browser. You will need to confirm this private key on the next step before changes are saved."
@@ -307,12 +311,16 @@ msgstr ""
 #~ msgstr ""
 
 #: src/search/SearchTalkingPoints.tsx:13
-msgid "Brave Search Ads convert as well as, or better than Google Search ad clicks."
-msgstr ""
+#~ msgid "Brave Search Ads convert as well as, or better than Google Search ad clicks."
+#~ msgstr ""
 
 #: src/auth/components/AdvertiserAgreed.tsx:17
 #~ msgid "Brave’s products are made to uphold user privacy. By default, the Brave browser blocks third-party tracking (scripts, tags, pixels, etc.) including those used by Google Analytics. This means that most standard website reporting won’t be compatible with Brave Ads. To ensure advertisers have visibility into performance of campaigns, we’ve detailed other effective privacy-first options for measurement in our <0>reporting guide</0>"
 #~ msgstr ""
+
+#: src/auth/registration/AccountChoice.tsx:34
+msgid "Browser ads"
+msgstr ""
 
 #: src/auth/views/MobileAdsBenefits.tsx:23
 msgid "Browser-based delivery offers a new way to reach audiences on the Web."
@@ -323,19 +331,19 @@ msgstr ""
 msgid "Budget"
 msgstr ""
 
-#: src/auth/registration/NameField.tsx:31
+#: src/auth/registration/BrowserForm.tsx:34
 msgid "Business name"
 msgstr ""
 
-#: src/validation/RegistrationSchema.tsx:17
+#: src/validation/RegistrationSchema.tsx:14
 msgid "Business name is required"
 msgstr ""
 
-#: src/auth/registration/NameField.tsx:37
+#: src/auth/registration/BrowserForm.tsx:42
 msgid "Business website"
 msgstr ""
 
-#: src/validation/RegistrationSchema.tsx:19
+#: src/validation/RegistrationSchema.tsx:16
 msgid "Business Website is required"
 msgstr ""
 
@@ -430,13 +438,17 @@ msgstr ""
 msgid "Choose a format for the campaign you would like to run."
 msgstr ""
 
+#: src/auth/registration/AccountChoice.tsx:48
+msgid "Choose campaign type"
+msgstr ""
+
 #: src/components/Assets/UploadImage.tsx:94
 msgid "Choose File"
 msgstr ""
 
 #: src/auth/registration/Register.tsx:36
-msgid "Choose what kind of account to open"
-msgstr ""
+#~ msgid "Choose what kind of account to open"
+#~ msgstr ""
 
 #: src/auth/components/AdvertiserAddress.tsx:37
 msgid "City"
@@ -446,7 +458,7 @@ msgstr ""
 msgid "City is required"
 msgstr ""
 
-#: src/components/Creatives/NewsPreview.tsx:75
+#: src/components/Creatives/NewsPreview.tsx:69
 msgid "Click Here!"
 msgstr ""
 
@@ -591,7 +603,7 @@ msgstr ""
 msgid "Copy this and keep this safe!"
 msgstr ""
 
-#: src/auth/lib/index.ts:109
+#: src/auth/lib/index.ts:113
 msgid "Could not logout at this time. Please try again later."
 msgstr ""
 
@@ -627,7 +639,7 @@ msgstr ""
 msgid "Counted when an ad is displayed on screen for a minimum of one second"
 msgstr ""
 
-#: src/components/Country/CountryPicker.tsx:30
+#: src/components/Country/CountryPicker.tsx:33
 msgid "Country"
 msgstr ""
 
@@ -667,8 +679,8 @@ msgid "Create ad"
 msgstr ""
 
 #: src/auth/registration/Register.tsx:42
-msgid "Create an account"
-msgstr ""
+#~ msgid "Create an account"
+#~ msgstr ""
 
 #: src/user/ads/NewAd.tsx:32
 msgid "Create new ad"
@@ -750,6 +762,22 @@ msgstr ""
 msgid "Documentation can be found <0>here</0> on how to use the API."
 msgstr ""
 
+#: src/validation/RegistrationSchema.tsx:34
+msgid "Domain is required"
+msgstr ""
+
+#: src/validation/RegistrationSchema.tsx:42
+msgid "Domain must match the email domain"
+msgstr ""
+
+#: src/validation/RegistrationSchema.tsx:35
+msgid "Domain must not contain any whitespace"
+msgstr ""
+
+#: src/auth/registration/SearchForm.tsx:35
+msgid "Domain to advertise"
+msgstr ""
+
 #: src/auth/views/MagicLink.tsx:43
 msgid "Don’t see the email? Check your spam folder or <0>try again.</0>"
 msgstr ""
@@ -784,15 +812,14 @@ msgstr ""
 msgid "Edit ad"
 msgstr ""
 
-#: src/auth/registration/NameField.tsx:23
+#: src/auth/registration/BrowserForm.tsx:24
 #: src/auth/views/Login.tsx:43
 #: src/auth/views/MagicLink.tsx:74
 #: src/user/settings/UserForm.tsx:51
 msgid "Email"
 msgstr ""
 
-#: src/validation/RegistrationSchema.tsx:13
-#: src/validation/UserSchema.tsx:6
+#: src/validation/UserSchema.tsx:7
 msgid "Email address is required"
 msgstr ""
 
@@ -828,7 +855,7 @@ msgstr ""
 msgid "Enter your email address to get a secure login link. Use this link to access your Brave Ads account."
 msgstr ""
 
-#: src/user/ads/NotificationAd.tsx:73
+#: src/user/ads/NotificationAd.tsx:79
 msgid "Example - https://brave.com/brave-rewards/"
 msgstr ""
 
@@ -869,12 +896,12 @@ msgid "For all business sizes"
 msgstr ""
 
 #: src/auth/registration/AccountChoice.tsx:74
-msgid "For enterprise and agency businesses looking for bespoke ad solutions via dedicated Brave Ads representatives."
-msgstr ""
+#~ msgid "For enterprise and agency businesses looking for bespoke ad solutions via dedicated Brave Ads representatives."
+#~ msgstr ""
 
 #: src/auth/registration/AccountChoice.tsx:66
-msgid "For small to mid-sized businesses to create and manage their Brave Ads campaigns independently."
-msgstr ""
+#~ msgid "For small to mid-sized businesses to create and manage their Brave Ads campaigns independently."
+#~ msgstr ""
 
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:34
 #: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:36
@@ -885,15 +912,16 @@ msgstr ""
 msgid "From"
 msgstr ""
 
-#: src/auth/registration/NameField.tsx:64
+#: src/auth/registration/MarketingChannel.tsx:36
 msgid "From a friend/colleague"
 msgstr ""
 
-#: src/auth/registration/NameField.tsx:56
+#: src/auth/registration/MarketingChannel.tsx:28
 msgid "From an influential person I follow online"
 msgstr ""
 
-#: src/auth/registration/NameField.tsx:16
+#: src/auth/registration/BrowserForm.tsx:15
+#: src/auth/registration/SearchForm.tsx:16
 msgid "Full name"
 msgstr ""
 
@@ -901,8 +929,7 @@ msgstr ""
 msgid "Full Name"
 msgstr ""
 
-#: src/validation/RegistrationSchema.tsx:15
-#: src/validation/UserSchema.tsx:7
+#: src/validation/UserSchema.tsx:9
 msgid "Full name is required"
 msgstr ""
 
@@ -931,8 +958,8 @@ msgid "Get 50% your first campaign when you pay in Basic Attention Token"
 msgstr ""
 
 #: src/search/SearchTalkingPoints.tsx:17
-msgid "Get a free one-month test to see how Search Ads perform for your brand."
-msgstr ""
+#~ msgid "Get a free one-month test to see how Search Ads perform for your brand."
+#~ msgstr ""
 
 #: src/auth/registration/BraveAdsContactFrame.tsx:23
 msgid "Get in touch with our team"
@@ -943,7 +970,7 @@ msgid "Get login link"
 msgstr ""
 
 #: src/auth/views/LandingPage.tsx:67
-#: src/components/AppBar/LandingPageAppBar.tsx:40
+#: src/components/AppBar/LandingPageAppBar.tsx:39
 msgid "Get started"
 msgstr ""
 
@@ -987,7 +1014,7 @@ msgstr ""
 #~ msgid "I understand that pre-payment is required to launch my campaigns"
 #~ msgstr ""
 
-#: src/auth/registration/MarketingOptIn.tsx:27
+#: src/auth/registration/MarketingOptIn.tsx:14
 msgid "I would like to receive marketing emails about new features and promotions from Brave Ads"
 msgstr ""
 
@@ -995,7 +1022,7 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
-#: src/components/Assets/ImagePreview.tsx:56
+#: src/components/Assets/ImagePreview.tsx:58
 msgid "Image failed to load"
 msgstr ""
 
@@ -1024,25 +1051,25 @@ msgstr ""
 msgid "Impressions (Device)"
 msgstr ""
 
-#: src/auth/registration/NameField.tsx:65
+#: src/auth/registration/MarketingChannel.tsx:37
 msgid "In a blog post/news article"
 msgstr ""
 
-#: src/auth/registration/NameField.tsx:61
+#: src/auth/registration/MarketingChannel.tsx:33
 msgid "In a newsletter I subscribe to"
 msgstr ""
 
-#: src/auth/registration/NameField.tsx:67
+#: src/auth/registration/MarketingChannel.tsx:39
 msgid "In a post by Brave on LinkedIn"
 msgstr ""
 
-#: src/auth/registration/NameField.tsx:70
+#: src/auth/registration/MarketingChannel.tsx:42
 msgid "In a video on YouTube"
 msgstr ""
 
-#: src/auth/registration/AdvertiserRegistered.tsx:53
-msgid "In the meantime, check out our <0>advertiser resources</0>. If you have any questions, please reach out to <1>selfserve@brave.com</1>."
-msgstr ""
+#: src/auth/registration/AdvertiserRegistered.tsx:25
+#~ msgid "In the meantime, check out our <0>advertiser resources</0>. If you have any questions, please reach out to <1>selfserve@brave.com</1>."
+#~ msgstr ""
 
 #: src/components/Datagrid/renderers.tsx:42
 msgid "In your local time this is"
@@ -1053,8 +1080,8 @@ msgid "Include campaigns that ended over 6 months ago"
 msgstr ""
 
 #: src/search/SearchTalkingPoints.tsx:8
-msgid "Incremental"
-msgstr ""
+#~ msgid "Incremental"
+#~ msgstr ""
 
 #: src/components/Assets/hooks/useUploadFile.ts:164
 msgid "Invalid format"
@@ -1064,11 +1091,11 @@ msgstr ""
 msgid "invalid session"
 msgstr ""
 
-#: src/auth/lib/index.ts:95
+#: src/auth/lib/index.ts:99
 msgid "Invalid Session"
 msgstr ""
 
-#: src/auth/lib/index.ts:141
+#: src/auth/lib/index.ts:145
 msgid "Invalid Token"
 msgstr ""
 
@@ -1102,6 +1129,10 @@ msgstr ""
 
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:96
 msgid "Learn more about BAT"
+msgstr ""
+
+#: src/auth/registration/AccountChoice.tsx:55
+msgid "Learn more about various campaign types"
 msgstr ""
 
 #: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:34
@@ -1139,7 +1170,7 @@ msgstr ""
 
 #: src/auth/views/LandingPage.tsx:81
 #: src/auth/views/Login.tsx:67
-#: src/components/AppBar/LandingPageAppBar.tsx:116
+#: src/components/AppBar/LandingPageAppBar.tsx:114
 msgid "Log in"
 msgstr ""
 
@@ -1155,9 +1186,13 @@ msgstr ""
 msgid "Make payment & submit for approval"
 msgstr ""
 
-#: src/auth/registration/AccountChoice.tsx:72
-msgid "Managed service"
+#: src/user/ads/NotificationAd.tsx:68
+msgid "Make sure to include your brand name in the title OR body of the ad. Otherwise, it will be rejected."
 msgstr ""
+
+#: src/auth/registration/AccountChoice.tsx:72
+#~ msgid "Managed service"
+#~ msgstr ""
 
 #: src/user/ads/NotificationAd.tsx:56
 msgid "Max 30 Characters"
@@ -1168,8 +1203,8 @@ msgid "Max 60 Characters"
 msgstr ""
 
 #: src/auth/registration/AccountChoice.tsx:163
-msgid "Minimum Spend"
-msgstr ""
+#~ msgid "Minimum Spend"
+#~ msgstr ""
 
 #: src/components/Creatives/CreativeForm.tsx:138
 msgid "Modifying an ad will immediately put it into review. This means it will no longer be shown to users until it is approved."
@@ -1184,8 +1219,8 @@ msgid "Modifying the state of this ad will effect more than one campaign:"
 msgstr ""
 
 #: src/auth/registration/AccountChoice.tsx:166
-msgid "month"
-msgstr ""
+#~ msgid "month"
+#~ msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/EngagementHeader.tsx:53
 msgid "Month"
@@ -1233,7 +1268,6 @@ msgstr ""
 msgid "New Keypair"
 msgstr ""
 
-#: src/auth/registration/AccountChoice.tsx:77
 #: src/user/library/index.ts:248
 #: src/util/campaign.ts:7
 msgid "New tab takeover"
@@ -1252,13 +1286,12 @@ msgstr ""
 msgid "Newsfeed Ad"
 msgstr ""
 
-#: src/auth/registration/AccountChoice.tsx:67
-#: src/auth/registration/AccountChoice.tsx:79
 #: src/components/Creatives/CreativeType.tsx:18
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:52
 msgid "Newsfeed ads"
 msgstr ""
 
+#: src/auth/registration/AccountChoice.tsx:76
 #: src/components/Steps/NextAndBack.tsx:46
 msgid "Next"
 msgstr ""
@@ -1300,8 +1333,6 @@ msgstr ""
 msgid "Notification ad"
 msgstr ""
 
-#: src/auth/registration/AccountChoice.tsx:67
-#: src/auth/registration/AccountChoice.tsx:78
 #: src/components/Creatives/CreativeType.tsx:14
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:47
 msgid "Notification ads"
@@ -1324,7 +1355,7 @@ msgstr ""
 msgid "On / Off"
 msgstr ""
 
-#: src/auth/registration/NameField.tsx:59
+#: src/auth/registration/MarketingChannel.tsx:31
 msgid "On a podcast I listen to"
 msgstr ""
 
@@ -1337,13 +1368,17 @@ msgstr ""
 msgid "Once confirmed, your organization’s keypair will be replaced with the new keypair."
 msgstr ""
 
-#: src/auth/registration/AdvertiserRegistered.tsx:47
-msgid "Once the review process is complete, we will send you an email to notify you of the approval status and any further steps required."
+#: src/auth/registration/AdvertiserRegistered.tsx:19
+#~ msgid "Once the review process is complete, we will send you an email to notify you of the approval status and any further steps required."
+#~ msgstr ""
+
+#: src/auth/registration/AccountChoice.tsx:79
+msgid "or <0>contact us</0> for premium ad placements"
 msgstr ""
 
 #: src/search/SearchLandingPage.tsx:82
-msgid "Or email <0>searchads@brave.com</0>"
-msgstr ""
+#~ msgid "Or email <0>searchads@brave.com</0>"
+#~ msgstr ""
 
 #: src/auth/views/MagicLink.tsx:100
 msgid "or sign in using a password"
@@ -1361,11 +1396,11 @@ msgstr ""
 msgid "OS"
 msgstr ""
 
-#: src/auth/registration/NameField.tsx:71
+#: src/auth/registration/MarketingChannel.tsx:43
 msgid "Other (please specify)"
 msgstr ""
 
-#: src/auth/registration/NameField.tsx:78
+#: src/auth/registration/MarketingChannel.tsx:50
 msgid "Other source"
 msgstr ""
 
@@ -1416,12 +1451,16 @@ msgstr ""
 msgid "Please enter a username and password"
 msgstr ""
 
-#: src/validation/RegistrationSchema.tsx:14
+#: src/validation/RegistrationSchema.tsx:38
+msgid "Please enter a valid domain, for example: brave.com"
+msgstr ""
+
+#: src/validation/UserSchema.tsx:8
 msgid "Please enter a valid email address"
 msgstr ""
 
 #: src/validation/CreativeSchema.tsx:19
-#: src/validation/RegistrationSchema.tsx:24
+#: src/validation/RegistrationSchema.tsx:21
 msgid "Please enter a valid URL, for example https://brave.com"
 msgstr ""
 
@@ -1433,27 +1472,31 @@ msgstr ""
 msgid "Please enter an email."
 msgstr ""
 
-#: src/validation/RegistrationSchema.tsx:30
+#: src/validation/RegistrationSchema.tsx:62
 msgid "Please let us know how you heard about Brave Ads"
 msgstr ""
 
-#: src/validation/RegistrationSchema.tsx:27
+#: src/validation/RegistrationSchema.tsx:24
 msgid "Please let us know why you're interested in Brave Ads"
 msgstr ""
 
 #: src/auth/registration/AdvertiserRegistered.tsx:20
-msgid "Please reach out to <0>selfserve@brave.com</0> or try again."
-msgstr ""
+#~ msgid "Please reach out to <0>selfserve@brave.com</0> or try again."
+#~ msgstr ""
 
 #: src/components/Error/ErrorDetail.tsx:71
 msgid "Please refresh the page to try again, or email <0/> for assistance."
 msgstr ""
 
-#: src/auth/registration/MarketingOptIn.tsx:31
-msgid "Please see our <0>Advertiser Privacy Policy</0> and <1>Terms of Service</1> applicable to Brave Ads"
+#: src/basic-attention-token/PrivacyPolicy.tsx:21
+#~ msgid "Please see our <0>Advertiser Privacy Policy</0> and <1>Terms of Service</1> applicable to Brave Ads"
+#~ msgstr ""
+
+#: src/basic-attention-token/PrivacyPolicy.tsx:21
+msgid "Please see our <0>Advertiser Privacy Policy</0> and <1>Terms of Service</1> applicable to Brave Ads."
 msgstr ""
 
-#: src/validation/RegistrationSchema.tsx:35
+#: src/validation/RegistrationSchema.tsx:67
 msgid "Please specify how you heard about Brave Ads"
 msgstr ""
 
@@ -1506,6 +1549,15 @@ msgstr ""
 msgid "Pricing type must be CPM, CPC, or CPSV"
 msgstr ""
 
+#: src/auth/registration/SearchForm.tsx:44
+msgid "Primary region of business"
+msgstr ""
+
+#: src/validation/RegistrationSchema.tsx:52
+#: src/validation/RegistrationSchema.tsx:55
+msgid "Primary region of business is required"
+msgstr ""
+
 #: src/auth/components/AdvertiserDetailsForm.tsx:101
 #~ msgid "Prior to using the dashboard, please take a moment to complete your profile and review the following acknowledgements:"
 #~ msgstr ""
@@ -1535,10 +1587,10 @@ msgid "Reach and convert new customers through premium advertising on the Brave 
 msgstr ""
 
 #: src/search/SearchTalkingPoints.tsx:9
-msgid "Reach audiences who don’t use other search engines and block ads on most sites."
-msgstr ""
+#~ msgid "Reach audiences who don’t use other search engines and block ads on most sites."
+#~ msgstr ""
 
-#: src/components/AppBar/LandingPageAppBar.tsx:38
+#: src/components/AppBar/LandingPageAppBar.tsx:37
 msgid "Register for Self-service"
 msgstr ""
 
@@ -1571,8 +1623,8 @@ msgid "Review"
 msgstr ""
 
 #: src/search/SearchTalkingPoints.tsx:16
-msgid "Risk Free"
-msgstr ""
+#~ msgid "Risk Free"
+#~ msgstr ""
 
 #: src/form/FormikButton.tsx:71
 #: src/form/FormikButton.tsx:129
@@ -1590,6 +1642,14 @@ msgstr ""
 msgid "Saving..."
 msgstr ""
 
+#: src/auth/registration/AccountChoice.tsx:38
+msgid "Search ads"
+msgstr ""
+
+#: src/validation/BrowserRegistrationSchema.tsx:42
+#~ msgid "Search domain must match email domain"
+#~ msgstr ""
+
 #: src/user/library/index.ts:251
 #: src/util/campaign.ts:10
 msgid "Search homepage"
@@ -1600,7 +1660,6 @@ msgstr ""
 msgid "Search keyword"
 msgstr ""
 
-#: src/auth/registration/AccountChoice.tsx:76
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:59
 msgid "Search keyword ads"
 msgstr ""
@@ -1640,14 +1699,14 @@ msgid "Select the platforms to target"
 msgstr ""
 
 #: src/auth/registration/AccountChoice.tsx:64
-msgid "Self-service"
-msgstr ""
+#~ msgid "Self-service"
+#~ msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/MetricFilter.tsx:64
 msgid "Show"
 msgstr ""
 
-#: src/components/AppBar/LandingPageAppBar.tsx:116
+#: src/components/AppBar/LandingPageAppBar.tsx:114
 #: src/components/Navigation/Navbar.tsx:53
 msgid "Sign out"
 msgstr ""
@@ -1711,6 +1770,10 @@ msgstr ""
 msgid "Start Time"
 msgstr ""
 
+#: src/auth/registration/RegistrationContainer.tsx:23
+msgid "Start your company profile"
+msgstr ""
+
 #: src/components/Creatives/CreativeList.tsx:79
 msgid "State"
 msgstr ""
@@ -1741,8 +1804,17 @@ msgstr ""
 #~ msgid "Street address line 2"
 #~ msgstr ""
 
-#: src/auth/registration/Register.tsx:130
-msgid "Submit for approval"
+#: src/auth/registration/BrowserRegister.tsx:40
+#: src/auth/registration/SearchRegister.tsx:36
+msgid "Submit"
+msgstr ""
+
+#: src/auth/registration/Register.tsx:109
+#~ msgid "Submit for approval"
+#~ msgstr ""
+
+#: src/auth/registration/AdvertiserRegistered.tsx:15
+msgid "Success! Check your email."
 msgstr ""
 
 #: src/auth/views/AuthVerify.tsx:45
@@ -1759,11 +1831,11 @@ msgid "Take our survey!"
 msgstr ""
 
 #: src/search/SearchLandingPage.tsx:34
-msgid "Tap into over <0>9 billion</0> annual Web searches"
-msgstr ""
+#~ msgid "Tap into over <0>9 billion</0> annual Web searches"
+#~ msgstr ""
 
 #: src/user/ads/InlineContentAd.tsx:84
-#: src/user/ads/NotificationAd.tsx:72
+#: src/user/ads/NotificationAd.tsx:78
 msgid "Target URL"
 msgstr ""
 
@@ -1783,7 +1855,7 @@ msgstr ""
 msgid "Targeting"
 msgstr ""
 
-#: src/auth/registration/NameField.tsx:88
+#: src/auth/registration/BrowserForm.tsx:57
 msgid "Tell us why you're interested in Brave Ads"
 msgstr ""
 
@@ -1795,9 +1867,9 @@ msgstr ""
 msgid "Terms & Conditions acknowledgement is required"
 msgstr ""
 
-#: src/auth/registration/AdvertiserRegistered.tsx:41
-msgid "Thanks for your interest in Brave Ads! Our team will now carefully review the provided information."
-msgstr ""
+#: src/auth/registration/AdvertiserRegistered.tsx:13
+#~ msgid "Thanks for your interest in Brave Ads! Our team will now carefully review the provided information."
+#~ msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:41
 msgid "The rate at which users clicked in correlation to their impressions"
@@ -1827,7 +1899,7 @@ msgstr ""
 #~ msgid "Third party tracking acknowledgement is required"
 #~ msgstr ""
 
-#: src/components/Creatives/NewsPreview.tsx:54
+#: src/components/Creatives/NewsPreview.tsx:52
 msgid "This is a news display ad, it wll look like part of the news feed."
 msgstr ""
 
@@ -1865,8 +1937,8 @@ msgid "To protect user’s privacy, verified ad conversion data is encrypted so 
 msgstr ""
 
 #: src/auth/registration/AdvertiserRegistered.tsx:35
-msgid "Try again"
-msgstr ""
+#~ msgid "Try again"
+#~ msgstr ""
 
 #: src/components/Conversion/ConversionFields.tsx:17
 #: src/user/adSet/AdSetList.tsx:112
@@ -1917,7 +1989,7 @@ msgstr ""
 msgid "Unable to login, link has expired or has already been used."
 msgstr ""
 
-#: src/auth/lib/index.ts:82
+#: src/auth/lib/index.ts:86
 msgid "Unable to register your organization at this time. Please try again later."
 msgstr ""
 
@@ -1940,6 +2012,10 @@ msgstr ""
 
 #: src/components/Creatives/CreativeForm.tsx:91
 msgid "Unable to save ad"
+msgstr ""
+
+#: src/auth/hooks/mutations/useRegister.ts:28
+msgid "Unable to submit registration"
 msgstr ""
 
 #: src/user/settings/NewKeyPairModal.tsx:49
@@ -2035,19 +2111,23 @@ msgstr ""
 msgid "View-through conversions"
 msgstr ""
 
-#: src/auth/registration/AdvertiserRegistered.tsx:17
-msgid "We encountered a problem creating your account."
+#: src/auth/registration/AdvertiserRegistered.tsx:30
+msgid "Visit Help Center"
 msgstr ""
+
+#: src/auth/registration/AdvertiserRegistered.tsx:17
+#~ msgid "We encountered a problem creating your account."
+#~ msgstr ""
 
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:82
 msgid "We value your feedback and would love to hear your thoughts on your recent experience. <0/>Your input will help us improve the Brave Ads platform to better meet your needs. <1/>It only takes a few minutes and your participation will be greatly appreciated! <2/>Thank you for using Brave Ads! <3/>"
 msgstr ""
 
-#: src/validation/RegistrationSchema.tsx:20
+#: src/validation/RegistrationSchema.tsx:17
 msgid "Website must not contain any whitespace"
 msgstr ""
 
-#: src/validation/RegistrationSchema.tsx:21
+#: src/validation/RegistrationSchema.tsx:18
 msgid "Website must start with https://"
 msgstr ""
 
@@ -2059,12 +2139,16 @@ msgstr ""
 #~ msgid "Welcome to Brave Ads"
 #~ msgstr ""
 
-#: src/auth/registration/NameField.tsx:43
+#: src/auth/registration/MarketingChannel.tsx:13
 msgid "Where did you hear about Brave Ads"
 msgstr ""
 
-#: src/auth/registration/NameField.tsx:48
+#: src/auth/registration/MarketingChannel.tsx:20
 msgid "While looking up alternatives to Google Ads"
+msgstr ""
+
+#: src/auth/registration/SearchForm.tsx:25
+msgid "Work email"
 msgstr ""
 
 #: src/components/Datagrid/renderers.tsx:80
@@ -2076,8 +2160,8 @@ msgid "You are attempting to create a new keypair, this will replace any of your
 msgstr ""
 
 #: src/auth/registration/Register.tsx:37
-msgid "You can change this later"
-msgstr ""
+#~ msgid "You can change this later"
+#~ msgstr ""
 
 #: src/components/Button/SubmitPanel.tsx:34
 msgid "You have {0} errors that must be fixed before submitting."
@@ -2089,6 +2173,10 @@ msgstr ""
 
 #: src/user/settings/Settings.tsx:51
 msgid "You may have access to multiple organisations. Switch between them here."
+msgstr ""
+
+#: src/auth/registration/AdvertiserRegistered.tsx:18
+msgid "You will soon receive an email with the next steps of registration. While you wait, we recommend you check out our help center to get helpful information for getting started with Brave Ads."
 msgstr ""
 
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:72

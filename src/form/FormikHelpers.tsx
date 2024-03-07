@@ -5,10 +5,10 @@ import {
   ReactNode,
 } from "react";
 import {
-  Box,
   Checkbox,
   FormControl,
   FormControlLabel,
+  FormControlOwnProps,
   FormHelperText,
   FormLabel,
   InputLabel,
@@ -26,6 +26,7 @@ import { ErrorMessage, useField, useFormikContext } from "formik";
 import _ from "lodash";
 import { CampaignForm } from "user/views/adsManager/types";
 import { Trans } from "@lingui/macro";
+import { TypographyOwnProps } from "@mui/material/Typography";
 
 type FormikTextFieldProps = TextFieldProps & {
   name: string;
@@ -35,8 +36,8 @@ type FormikTextFieldProps = TextFieldProps & {
   small?: boolean;
   type?: HTMLInputTypeAttribute;
   disabled?: boolean;
-  useTopLabel?: boolean;
   growInput?: boolean;
+  inlineError?: boolean;
 };
 
 export const FormikTextField = (props: FormikTextFieldProps) => {
@@ -56,38 +57,28 @@ export const FormikTextField = (props: FormikTextFieldProps) => {
     );
   }
 
-  const extraOmit = props.useTopLabel ? ["label"] : [];
   return (
-    <Box flexGrow={props.growInput !== false ? 1 : 0}>
-      {props.useTopLabel && (
-        <FormLabel sx={{ color: "text.primary" }}> {props.label} </FormLabel>
-      )}
-      <TextField
-        variant="outlined"
-        fullWidth={!props.small}
-        margin="normal"
-        error={showError}
-        helperText={showError ? meta.error : helperText}
-        color="secondary"
-        placeholder={
-          props.useTopLabel && !props.placeholder
-            ? props.label
-            : props.placeholder
-        }
-        sx={props.useTopLabel ? { marginBottom: 2 } : {}}
-        disabled={props.disabled}
-        inputProps={{
-          maxLength: props.maxLengthInstantFeedback,
-        }}
-        {..._.omit(props, [
-          "small",
-          "maxLengthInstantFeedback",
-          "helperText",
-          ...extraOmit,
-        ])}
-        {...field}
-      />
-    </Box>
+    <TextField
+      variant="outlined"
+      fullWidth={!props.small}
+      margin="normal"
+      error={showError}
+      helperText={showError && !props.inlineError ? meta.error : helperText}
+      color="secondary"
+      placeholder={props.placeholder ?? props.label}
+      label={showError && props.inlineError ? meta.error : props.label}
+      disabled={props.disabled}
+      inputProps={{
+        maxLength: props.maxLengthInstantFeedback,
+      }}
+      {..._.omit(props, [
+        "small",
+        "maxLengthInstantFeedback",
+        "helperText",
+        "label",
+      ])}
+      {...field}
+    />
   );
 };
 
@@ -179,6 +170,8 @@ interface FormikCheckboxProps {
   disabled?: boolean;
   helperText?: string;
   showErrorMessage?: boolean;
+  sx?: SxProps<Theme>;
+  labelVariant?: TypographyOwnProps["variant"];
 }
 
 export function FormikCheckbox(props: FormikCheckboxProps) {
@@ -188,8 +181,11 @@ export function FormikCheckbox(props: FormikCheckboxProps) {
       <FormControlLabel
         control={<Checkbox {...field} />}
         label={props.label}
-        componentsProps={{ typography: { variant: "body2" } }}
+        componentsProps={{
+          typography: { variant: props.labelVariant ?? "body2" },
+        }}
         disabled={props.disabled}
+        sx={props.sx}
       />
       {props.helperText && <FormHelperText>{props.helperText}</FormHelperText>}
       {props.showErrorMessage !== false && (
@@ -227,30 +223,32 @@ interface FormikSelectProps {
     | "warning"
     | undefined;
   variant?: "outlined" | "standard" | "filled" | undefined;
+  size?: FormControlOwnProps["size"];
+  inlineError?: boolean;
 }
 
 export const FormikSelect = (props: FormikSelectProps) => {
   const [field, meta] = useField(props);
+  const isError = meta.touched && Boolean(meta.error);
+  const labelOrError = props.inlineError && isError ? meta.error : props.label;
   return (
     <FormControl
       fullWidth={props.fullWidth !== undefined ? props.fullWidth : true}
       {...props}
     >
-      <InputLabel id={`select-label-${props.name}`}>{props.label}</InputLabel>
-      <Select
-        error={meta.touched && Boolean(meta.error)}
-        label={props.label}
-        {...field}
-      >
+      <InputLabel id={`select-label-${props.name}`}>{labelOrError}</InputLabel>
+      <Select error={isError} label={labelOrError} {...field}>
         {props.options.map((opt) => (
           <MenuItem key={opt.value} value={opt.value}>
             {opt.label}
           </MenuItem>
         ))}
       </Select>
-      <ErrorMessage name={field.name}>
-        {(msg: any) => <FormHelperText error>{msg}</FormHelperText>}
-      </ErrorMessage>
+      {!props.inlineError && (
+        <ErrorMessage name={field.name}>
+          {(msg: any) => <FormHelperText error>{msg}</FormHelperText>}
+        </ErrorMessage>
+      )}
     </FormControl>
   );
 };
