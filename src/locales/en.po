@@ -81,6 +81,10 @@ msgstr "Account Settings"
 msgid "Activate"
 msgstr "Activate"
 
+#: src/components/Creatives/NewsPreview.tsx:90
+msgid "Ad"
+msgstr "Ad"
+
 #: src/validation/CreativeSchema.tsx:45
 msgid "Ad body is required"
 msgstr "Ad body is required"
@@ -450,7 +454,7 @@ msgstr "City"
 msgid "City is required"
 msgstr "City is required"
 
-#: src/components/Creatives/NewsPreview.tsx:75
+#: src/components/Creatives/NewsPreview.tsx:69
 msgid "Click Here!"
 msgstr "Click Here!"
 
@@ -847,7 +851,7 @@ msgstr "Enter Ads Manager"
 msgid "Enter your email address to get a secure login link. Use this link to access your Brave Ads account."
 msgstr "Enter your email address to get a secure login link. Use this link to access your Brave Ads account."
 
-#: src/user/ads/NotificationAd.tsx:73
+#: src/user/ads/NotificationAd.tsx:79
 msgid "Example - https://brave.com/brave-rewards/"
 msgstr "Example - https://brave.com/brave-rewards/"
 
@@ -1010,7 +1014,7 @@ msgstr "I would like to receive marketing emails about new features and promotio
 msgid "Image"
 msgstr "Image"
 
-#: src/components/Assets/ImagePreview.tsx:56
+#: src/components/Assets/ImagePreview.tsx:58
 msgid "Image failed to load"
 msgstr "Image failed to load"
 
@@ -1173,6 +1177,10 @@ msgstr "Logging in"
 #: src/user/views/adsManager/views/advanced/components/form/components/PaymentButton.tsx:9
 msgid "Make payment & submit for approval"
 msgstr "Make payment & submit for approval"
+
+#: src/user/ads/NotificationAd.tsx:68
+msgid "Make sure to include your brand name in the title OR body of the ad. Otherwise, it will be rejected."
+msgstr "Make sure to include your brand name in the title OR body of the ad. Otherwise, it will be rejected."
 
 #: src/auth/registration/AccountChoice.tsx:72
 #~ msgid "Managed service"
@@ -1819,7 +1827,7 @@ msgstr "Take our survey!"
 #~ msgstr "Tap into over <0>9 billion</0> annual Web searches"
 
 #: src/user/ads/InlineContentAd.tsx:84
-#: src/user/ads/NotificationAd.tsx:72
+#: src/user/ads/NotificationAd.tsx:78
 msgid "Target URL"
 msgstr "Target URL"
 
@@ -1883,7 +1891,7 @@ msgstr "The username or password did not match our records."
 #~ msgid "Third party tracking acknowledgement is required"
 #~ msgstr "Third party tracking acknowledgement is required"
 
-#: src/components/Creatives/NewsPreview.tsx:54
+#: src/components/Creatives/NewsPreview.tsx:52
 msgid "This is a news display ad, it wll look like part of the news feed."
 msgstr "This is a news display ad, it wll look like part of the news feed."
 

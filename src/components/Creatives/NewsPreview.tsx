@@ -14,73 +14,96 @@ export function NewsPreview() {
   return (
     <Card
       sx={{
-        bgcolor: "rgba(53, 53, 53, 0.47)",
-        display: "flex",
-        flexDirection: "column",
-        height: "525px",
-        width: "600px",
+        textDecoration: "none",
+        bgcolor: "rgba(33, 39, 42, 1)",
+        borderRadius: "16px",
       }}
     >
-      <Box display="flex" justifyContent="center">
-        {value?.imageUrl ? (
-          <ImagePreview url={value.imageUrl} height={400} width={500} />
-        ) : (
-          <Box height={400} width={500} />
-        )}
-      </Box>
       <Box
-        padding="20px 25px"
-        bgcolor="rgba(53, 53, 53, 0.47)"
-        flexGrow={1}
-        display="flex"
-        flexDirection="column"
-        justifyContent="space-between"
+        sx={{
+          padding: "16px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "8px",
+          bgcolor: "rgba(255, 255, 255, 0.05)",
+        }}
       >
-        <Box
-          display="flex"
-          flexDirection="row"
-          mb={1}
-          gap={2}
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <Typography
-            color="#ffff"
-            fontSize="16px"
-            fontWeight={500}
-            maxWidth={400}
-          >
-            {value?.title || (
-              <Trans>
-                This is a news display ad, it wll look like part of the news
-                feed.
-              </Trans>
-            )}
-          </Typography>
-          <Box
-            width="200px"
-            display="flex"
-            alignItems="center"
-            justifyContent="flex-end"
-          >
-            <Box
-              color="#ffff"
-              border="1px solid #ffff"
-              padding="8px 10px"
-              minWidth="100px"
-              textAlign="center"
-              borderRadius="100px"
-            >
-              <Typography fontSize="14px">
-                {value?.ctaText || <Trans>Click Here!</Trans>}
-              </Typography>
-            </Box>
-          </Box>
+        <Box display="flex" justifyContent="center" borderRadius="12px">
+          {value?.imageUrl ? (
+            <ImagePreview url={value.imageUrl} height={400} width={500} />
+          ) : (
+            <Box height={400} width={500} />
+          )}
         </Box>
-        <Typography color="#ffff" fontSize="14px" fontWeight={500}>
-          {value?.description ?? advertiser.name}
+        <Box height="18px" gap="8px">
+          <OutlinedAd />{" "}
+          <AdDescription description={value?.description ?? advertiser.name} />
+        </Box>
+        <Typography
+          display="flex"
+          alignItems="center"
+          margin={0}
+          textAlign="start"
+          fontWeight={600}
+          fontSize="14px"
+          lineHeight="22px"
+          color="rgba(255, 255, 255, 1)"
+        >
+          {value?.title || (
+            <Trans>
+              This is a news display ad, it wll look like part of the news feed.
+            </Trans>
+          )}
         </Typography>
+        <Box
+          width="100px"
+          height="35px"
+          padding="5px, 9px, 5px, 9px"
+          borderRadius="8px"
+          bgcolor="rgba(104, 123, 133, 0.3)"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <span style={{ fontSize: "11px", color: "#fff", fontWeight: 600 }}>
+            {value?.ctaText || <Trans>Click Here!</Trans>}
+          </span>
+        </Box>
       </Box>
     </Card>
   );
 }
+
+const OutlinedAd = () => {
+  return (
+    <span
+      style={{
+        lineHeight: "16px",
+        padding: "0px 2px",
+        border: "1px solid rgba(255, 255, 255, 0.3)",
+        borderRadius: "3px",
+        textDecoration: "none",
+        fontSize: "11px",
+        color: "rgba(255, 255, 255, 1)",
+      }}
+    >
+      <Trans>Ad</Trans>
+    </span>
+  );
+};
+
+const AdDescription = (props: { description: string }) => {
+  return (
+    <span
+      style={{
+        margin: "0",
+        fontWeight: "400",
+        fontSize: "11px",
+        lineHeight: "18px",
+        color: "rgba(255, 255, 255, 0.5)",
+      }}
+    >
+      • {props.description}
+    </span>
+  );
+};

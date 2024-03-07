@@ -34,6 +34,7 @@ export const ImagePreview = ({
         height,
         width,
         bgcolor: "#AEB1C2",
+        borderRadius: "6px",
       }}
     >
       {url?.endsWith(".pad") ? (
@@ -45,6 +46,7 @@ export const ImagePreview = ({
           style={{
             opacity: selected === false ? 0.3 : 1,
             filter: selected === false ? "grayscale(20%)" : "none",
+            borderRadius: "6px",
           }}
         />
       ) : (

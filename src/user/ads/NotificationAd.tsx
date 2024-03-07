@@ -64,6 +64,18 @@ const NotificationAdForm = (props: NotificationAdProps) => {
         maxLengthInstantFeedback={60}
       />
 
+      <Typography
+        variant="caption"
+        textAlign="center"
+        display="block"
+        fontWeight={500}
+      >
+        <Trans>
+          Make sure to include your brand name in the title OR body of the ad.
+          Otherwise, it will be rejected.
+        </Trans>
+      </Typography>
+
       <NotificationPreview />
 
       <UrlResolver
