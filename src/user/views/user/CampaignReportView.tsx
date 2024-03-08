@@ -26,7 +26,9 @@ export function CampaignReportView() {
   const queryParams = new URLSearchParams(history.location.search);
   const format = queryParams.get("format") as CampaignFormat | null;
   const isValidFormat =
-    format !== CampaignFormat.NtpSi && format !== CampaignFormat.Search;
+    !!format &&
+    format !== CampaignFormat.NtpSi &&
+    format !== CampaignFormat.Search;
   const { _ } = useLingui();
   const today = new Date();
   const [startDate, setStartDate] = useState<Date | undefined>();
