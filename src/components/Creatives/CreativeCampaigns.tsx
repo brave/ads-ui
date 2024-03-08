@@ -55,7 +55,7 @@ export default function CreativeCampaigns({ data, error, loading }: Props) {
               <TableCell>
                 <Link
                   component={RouterLink}
-                  to={`/user/main/campaign/${c.id}`}
+                  to={`/user/main/campaign/${c.id}?format=${c.format}`}
                   underline="none"
                   color="secondary"
                 >

@@ -12,7 +12,6 @@ import {
 import MetricFilter from "../../components/MetricFilter";
 import EngagementHeader from "../../components/EngagementHeader";
 import LiveFeed from "../../components/LiveFeed";
-import { CampaignFormat } from "graphql/types";
 import { ErrorDetail } from "components/Error/ErrorDetail";
 import { ApolloError } from "@apollo/client";
 import { usePersistMetricFilter } from "user/analytics/analyticsOverview/hooks/usePersistMetricFilter";
@@ -59,17 +58,6 @@ export function EngagementsOverview({
 
   if (!campaign) {
     return null;
-  }
-
-  if (campaign?.format === CampaignFormat.NtpSi) {
-    return (
-      <Alert severity="info" sx={{ mt: 2, mb: 2 }}>
-        <Trans>
-          Please ask your Account Manager for reports on campaigns of this
-          format.
-        </Trans>
-      </Alert>
-    );
   }
 
   if (!engagements || engagements.length === 0) {
