@@ -252,7 +252,12 @@ export type CampaignsForCreativeQueryVariables = Types.Exact<{
 }>;
 
 export type CampaignsForCreativeQuery = {
-  creativeCampaigns: Array<{ id: string; name: string; state: string }>;
+  creativeCampaigns: Array<{
+    id: string;
+    name: string;
+    state: string;
+    format: Types.CampaignFormat;
+  }>;
 };
 
 export const CreativeFragmentDoc = gql`
@@ -591,6 +596,7 @@ export const CampaignsForCreativeDocument = gql`
       id
       name
       state
+      format
     }
   }
 `;

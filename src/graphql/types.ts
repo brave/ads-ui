@@ -204,12 +204,11 @@ export type CreateAdvertiserImageInput = {
 };
 
 export type CreateAdvertiserInput = {
+  accountManagerId?: InputMaybe<Scalars["String"]["input"]>;
   additionalBillingEmails?: InputMaybe<Array<Scalars["String"]["input"]>>;
   billingAddress?: InputMaybe<CreateAddressInput>;
   billingEmail?: InputMaybe<Scalars["String"]["input"]>;
   billingModelPrices?: InputMaybe<Array<AdvertiserPriceInput>>;
-  description?: InputMaybe<Scalars["String"]["input"]>;
-  marketingChannel?: InputMaybe<Scalars["String"]["input"]>;
   name: Scalars["String"]["input"];
   phone?: InputMaybe<Scalars["String"]["input"]>;
   referrer?: InputMaybe<Scalars["String"]["input"]>;
@@ -506,15 +505,14 @@ export type UpdateAddressInput = {
 };
 
 export type UpdateAdvertiserInput = {
+  accountManagerId?: InputMaybe<Scalars["String"]["input"]>;
   additionalBillingEmails?: InputMaybe<Array<Scalars["String"]["input"]>>;
   /** Agreed to Terms And Conditions - Advertiser Facing Dashboard */
   agreed?: InputMaybe<Scalars["Boolean"]["input"]>;
   billingAddress?: InputMaybe<UpdateAddressInput>;
   billingEmail?: InputMaybe<Scalars["String"]["input"]>;
   billingModelPrices?: InputMaybe<Array<AdvertiserPriceInput>>;
-  description?: InputMaybe<Scalars["String"]["input"]>;
   id: Scalars["String"]["input"];
-  marketingChannel?: InputMaybe<Scalars["String"]["input"]>;
   name?: InputMaybe<Scalars["String"]["input"]>;
   phone?: InputMaybe<Scalars["String"]["input"]>;
   publicKey?: InputMaybe<Scalars["String"]["input"]>;
