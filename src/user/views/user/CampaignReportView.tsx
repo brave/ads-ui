@@ -1,7 +1,7 @@
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useAnalyticOverviewQuery } from "graphql/analytics-overview.generated";
-import { Box } from "@mui/material";
+import { Alert, Box } from "@mui/material";
 import moment from "moment";
 import ReportUtils from "user/analytics/analyticsOverview/components/ReportUtils";
 import { EngagementsOverview } from "user/analytics/analyticsOverview/reports/campaign/EngagementsOverview";
@@ -12,7 +12,8 @@ import { CampaignFormat } from "graphql/types";
 import { AlwaysOnFormButton } from "components/Button/AlwaysOnFormButton";
 import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
 import { useLingui } from "@lingui/react";
-import { msg } from "@lingui/macro";
+import { msg, Trans } from "@lingui/macro";
+import { ContainedDashboardButton } from "components/Button/ContainedDashboardButton";
 
 interface Params {
   campaignId: string;
@@ -20,7 +21,14 @@ interface Params {
 
 export function CampaignReportView() {
   useTrackMatomoPageView({ documentTitle: "Campaign Reporting" });
+  const history = useHistory();
   const params = useParams<Params>();
+  const queryParams = new URLSearchParams(history.location.search);
+  const format = queryParams.get("format") as CampaignFormat | null;
+  const isValidFormat =
+    !!format &&
+    format !== CampaignFormat.NtpSi &&
+    format !== CampaignFormat.Search;
   const { _ } = useLingui();
   const today = new Date();
   const [startDate, setStartDate] = useState<Date | undefined>();
@@ -49,6 +57,7 @@ export function CampaignReportView() {
         }
       }
     },
+    skip: !isValidFormat,
     pollInterval: 600_000,
     fetchPolicy: "cache-and-network",
   });
@@ -63,6 +72,23 @@ export function CampaignReportView() {
   const campaign = data?.campaign;
   const showReport =
     campaign && campaign.format !== CampaignFormat.NtpSi && !loading && !error;
+
+  if (!isValidFormat) {
+    return (
+      <Box>
+        <Alert
+          severity="info"
+          sx={{ mt: 2, mb: 2, maxWidth: "800px", alignItems: "center" }}
+          action={<ContainedDashboardButton />}
+        >
+          <Trans>
+            Please ask your Account Manager for reports on campaigns of this
+            format.
+          </Trans>
+        </Alert>
+      </Box>
+    );
+  }
 
   return (
     <Box padding={2}>

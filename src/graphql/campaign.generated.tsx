@@ -34,7 +34,7 @@ export type CampaignFragment = {
   geoTargets: Array<{ code: string; name: string }>;
   adSets: Array<{
     id: string;
-    price?: string | null;
+    price: string;
     createdAt: any;
     billingType?: string | null;
     name: string;
@@ -234,7 +234,7 @@ export type LoadCampaignQuery = {
     geoTargets: Array<{ code: string; name: string }>;
     adSets: Array<{
       id: string;
-      price?: string | null;
+      price: string;
       createdAt: any;
       billingType?: string | null;
       name: string;

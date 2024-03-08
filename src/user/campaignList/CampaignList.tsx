@@ -76,7 +76,7 @@ export function CampaignList({ advertiser }: Props) {
       renderCell: ({ row }) => (
         <Link
           component={RouterLink}
-          to={`/user/main/campaign/${row.id}`}
+          to={`/user/main/campaign/${row.id}?format=${row.format}`}
           underline="none"
         >
           {row.name}
