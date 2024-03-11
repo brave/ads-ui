@@ -6,7 +6,7 @@ import { useTrackMatomoEvent } from "hooks/useTrackWithMatomo";
 import { t } from "@lingui/macro";
 import { useHistory } from "react-router-dom";
 
-export function useRegister(props: { legacy?: boolean } = {}) {
+export function useRegister() {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const { trackMatomoEvent } = useTrackMatomoEvent();
@@ -14,7 +14,7 @@ export function useRegister(props: { legacy?: boolean } = {}) {
   const register = useCallback(
     (form: RegistrationForm, type: "search" | "browser") => {
       setLoading(true);
-      submitRegistration(form, type, props.legacy)
+      submitRegistration(form, type)
         .then(() => {
           if (form.marketingOptIn) {
             void sendMarketingEmail({ ...form.user });
@@ -30,7 +30,7 @@ export function useRegister(props: { legacy?: boolean } = {}) {
         })
         .finally(() => setLoading(false));
     },
-    [props.legacy],
+    [],
   );
 
   return { register, loading };

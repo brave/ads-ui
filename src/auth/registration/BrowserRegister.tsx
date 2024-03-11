@@ -15,10 +15,7 @@ export function BrowserRegister() {
     documentTitle: `Browser Ads Registration`,
   });
 
-  // TODO: Transition to new registration backend
-  const { register } = useRegister({
-    legacy: true,
-  });
+  const { register } = useRegister();
 
   return (
     <RegistrationContainer>

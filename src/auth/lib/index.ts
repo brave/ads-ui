@@ -1,7 +1,10 @@
 import { UserFragment } from "graphql/user.generated";
 import { AdvertiserFragment } from "graphql/advertiser.generated";
 import { PaymentType } from "graphql/types";
-import { buildAdServerV2Endpoint } from "util/environment";
+import {
+  buildAdServerEndpoint,
+  buildAdServerV2Endpoint,
+} from "util/environment";
 import { RegistrationForm } from "auth/registration/types";
 import { t } from "@lingui/macro";
 
@@ -53,11 +56,9 @@ export const getCredentials = async (user: {
 export async function submitRegistration(
   form: RegistrationForm,
   type: "search" | "browser",
-  legacy: boolean = false,
 ) {
-  let path = type === "search" ? "/register/search" : "/register";
-  path = legacy ? "/auth/register" : path;
-  const res = await fetch(buildAdServerV2Endpoint(path), {
+  const path = type === "search" ? "/register/search" : "/register";
+  const res = await fetch(buildAdServerEndpoint(path), {
     method: "POST",
     mode: "cors",
     credentials: "include",
