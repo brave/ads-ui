@@ -22,6 +22,11 @@ export function SearchRegister() {
         initialValues={initialValues}
         onSubmit={async (v: RegistrationForm, { setSubmitting }) => {
           setSubmitting(true);
+
+          // quick fixes to capture last minute changes to form structure
+          v.mediaSpend = undefined;
+          v.advertiser.url = v.domain;
+
           register(v, "search");
           setSubmitting(false);
         }}
