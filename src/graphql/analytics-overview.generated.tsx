@@ -138,20 +138,33 @@ export type AnalyticOverviewQuery = {
   } | null;
 };
 
-export type EngagementOverviewQueryVariables = Types.Exact<{
-  advertiserId: Types.Scalars["String"]["input"];
-  filter?: Types.InputMaybe<Types.CampaignFilter>;
+export type CampaignMetricValuesFragment = {
+  click: string;
+  impression: string;
+  siteVisit: string;
+  spendUsd: string;
+  rates: { clickThrough: string };
+};
+
+export type CampaignMetricsQueryVariables = Types.Exact<{
+  campaignIds:
+    | Array<Types.Scalars["String"]["input"]>
+    | Types.Scalars["String"]["input"];
 }>;
 
-export type EngagementOverviewQuery = {
-  engagementsOverview?: Array<{
-    date: any;
-    click: number;
-    view: number;
-    landed: number;
-    spend?: number | null;
-    campaignId: string;
-  }> | null;
+export type CampaignMetricsQuery = {
+  performance: {
+    values: Array<{
+      dimensions: { campaign?: { id: string } | null };
+      metrics: {
+        click: string;
+        impression: string;
+        siteVisit: string;
+        spendUsd: string;
+        rates: { clickThrough: string };
+      };
+    }>;
+  };
 };
 
 export const EngagementFragmentDoc = gql`
@@ -212,6 +225,17 @@ export const CampaignWithEngagementsFragmentDoc = gql`
     }
   }
   ${EngagementFragmentDoc}
+`;
+export const CampaignMetricValuesFragmentDoc = gql`
+  fragment CampaignMetricValues on Metrics {
+    click
+    impression
+    siteVisit
+    spendUsd
+    rates {
+      clickThrough
+    }
+  }
 `;
 export const AnalyticOverviewDocument = gql`
   query analyticOverview($id: String!) {
@@ -296,91 +320,95 @@ export function refetchAnalyticOverviewQuery(
 ) {
   return { query: AnalyticOverviewDocument, variables: variables };
 }
-export const EngagementOverviewDocument = gql`
-  query engagementOverview($advertiserId: String!, $filter: CampaignFilter) {
-    engagementsOverview(advertiserId: $advertiserId, filter: $filter) {
-      date
-      click
-      view
-      landed
-      spend
-      campaignId
+export const CampaignMetricsDocument = gql`
+  query campaignMetrics($campaignIds: [String!]!) {
+    performance(filter: { campaignIds: $campaignIds }) {
+      values {
+        dimensions {
+          campaign {
+            id
+          }
+        }
+        metrics {
+          ...CampaignMetricValues
+        }
+      }
     }
   }
+  ${CampaignMetricValuesFragmentDoc}
 `;
 
 /**
- * __useEngagementOverviewQuery__
+ * __useCampaignMetricsQuery__
  *
- * To run a query within a React component, call `useEngagementOverviewQuery` and pass it any options that fit your needs.
- * When your component renders, `useEngagementOverviewQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useCampaignMetricsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCampaignMetricsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useEngagementOverviewQuery({
+ * const { data, loading, error } = useCampaignMetricsQuery({
  *   variables: {
- *      advertiserId: // value for 'advertiserId'
- *      filter: // value for 'filter'
+ *      campaignIds: // value for 'campaignIds'
  *   },
  * });
  */
-export function useEngagementOverviewQuery(
+export function useCampaignMetricsQuery(
   baseOptions: Apollo.QueryHookOptions<
-    EngagementOverviewQuery,
-    EngagementOverviewQueryVariables
+    CampaignMetricsQuery,
+    CampaignMetricsQueryVariables
   > &
     (
-      | { variables: EngagementOverviewQueryVariables; skip?: boolean }
+      | { variables: CampaignMetricsQueryVariables; skip?: boolean }
       | { skip: boolean }
     ),
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<
-    EngagementOverviewQuery,
-    EngagementOverviewQueryVariables
-  >(EngagementOverviewDocument, options);
+  return Apollo.useQuery<CampaignMetricsQuery, CampaignMetricsQueryVariables>(
+    CampaignMetricsDocument,
+    options,
+  );
 }
-export function useEngagementOverviewLazyQuery(
+export function useCampaignMetricsLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
-    EngagementOverviewQuery,
-    EngagementOverviewQueryVariables
+    CampaignMetricsQuery,
+    CampaignMetricsQueryVariables
   >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<
-    EngagementOverviewQuery,
-    EngagementOverviewQueryVariables
-  >(EngagementOverviewDocument, options);
+    CampaignMetricsQuery,
+    CampaignMetricsQueryVariables
+  >(CampaignMetricsDocument, options);
 }
-export function useEngagementOverviewSuspenseQuery(
+export function useCampaignMetricsSuspenseQuery(
   baseOptions?: Apollo.SuspenseQueryHookOptions<
-    EngagementOverviewQuery,
-    EngagementOverviewQueryVariables
+    CampaignMetricsQuery,
+    CampaignMetricsQueryVariables
   >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useSuspenseQuery<
-    EngagementOverviewQuery,
-    EngagementOverviewQueryVariables
-  >(EngagementOverviewDocument, options);
+    CampaignMetricsQuery,
+    CampaignMetricsQueryVariables
+  >(CampaignMetricsDocument, options);
 }
-export type EngagementOverviewQueryHookResult = ReturnType<
-  typeof useEngagementOverviewQuery
+export type CampaignMetricsQueryHookResult = ReturnType<
+  typeof useCampaignMetricsQuery
 >;
-export type EngagementOverviewLazyQueryHookResult = ReturnType<
-  typeof useEngagementOverviewLazyQuery
+export type CampaignMetricsLazyQueryHookResult = ReturnType<
+  typeof useCampaignMetricsLazyQuery
 >;
-export type EngagementOverviewSuspenseQueryHookResult = ReturnType<
-  typeof useEngagementOverviewSuspenseQuery
+export type CampaignMetricsSuspenseQueryHookResult = ReturnType<
+  typeof useCampaignMetricsSuspenseQuery
 >;
-export type EngagementOverviewQueryResult = Apollo.QueryResult<
-  EngagementOverviewQuery,
-  EngagementOverviewQueryVariables
+export type CampaignMetricsQueryResult = Apollo.QueryResult<
+  CampaignMetricsQuery,
+  CampaignMetricsQueryVariables
 >;
-export function refetchEngagementOverviewQuery(
-  variables: EngagementOverviewQueryVariables,
+export function refetchCampaignMetricsQuery(
+  variables: CampaignMetricsQueryVariables,
 ) {
-  return { query: EngagementOverviewDocument, variables: variables };
+  return { query: CampaignMetricsDocument, variables: variables };
 }
