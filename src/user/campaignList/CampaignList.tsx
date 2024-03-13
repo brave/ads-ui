@@ -218,45 +218,43 @@ export function CampaignList({ advertiser }: Props) {
   };
 
   return (
-    <>
-      <DataGrid
-        rows={campaigns}
-        columns={columns}
-        density="compact"
-        autoHeight
-        disableRowSelectionOnClick
-        checkboxSelection={advertiser?.selfServiceManageCampaign}
-        slots={{ toolbar: Toolbar }}
-        sx={{ borderStyle: "none" }}
-        onRowSelectionModelChange={(rowSelectionModel) => {
-          if (rowSelectionModel.length === 1) {
-            setSelectedCampaign(rowSelectionModel[0]);
-          } else {
-            setSelectedCampaign(undefined);
-          }
-        }}
-        isRowSelectable={(params) =>
-          selectedCampaign === undefined || params.id === selectedCampaign
+    <DataGrid
+      rows={campaigns}
+      columns={columns}
+      density="compact"
+      autoHeight
+      disableRowSelectionOnClick
+      checkboxSelection={advertiser?.selfServiceManageCampaign}
+      slots={{ toolbar: Toolbar }}
+      sx={{ borderStyle: "none" }}
+      onRowSelectionModelChange={(rowSelectionModel) => {
+        if (rowSelectionModel.length === 1) {
+          setSelectedCampaign(rowSelectionModel[0]);
+        } else {
+          setSelectedCampaign(undefined);
         }
-        initialState={{
-          sorting: {
-            sortModel: [{ field: "startAt", sort: "desc" }],
+      }}
+      isRowSelectable={(params) =>
+        selectedCampaign === undefined || params.id === selectedCampaign
+      }
+      initialState={{
+        sorting: {
+          sortModel: [{ field: "startAt", sort: "desc" }],
+        },
+        pagination: {
+          paginationModel: {
+            pageSize: 10,
           },
-          pagination: {
-            paginationModel: {
-              pageSize: 10,
-            },
+        },
+        filter: {
+          filterModel: {
+            items: [
+              // eslint-disable-next-line lingui/no-unlocalized-strings
+              { field: "format", operator: "not", value: "New tab takeover" },
+            ],
           },
-          filter: {
-            filterModel: {
-              items: [
-                // eslint-disable-next-line lingui/no-unlocalized-strings
-                { field: "format", operator: "not", value: "New tab takeover" },
-              ],
-            },
-          },
-        }}
-      />
-    </>
+        },
+      }}
+    />
   );
 }
