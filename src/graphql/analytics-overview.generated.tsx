@@ -138,7 +138,7 @@ export type AnalyticOverviewQuery = {
   } | null;
 };
 
-export type CampaignMetricValuesFragment = {
+export type CampaignMetricSummaryValuesFragment = {
   click: string;
   impression: string;
   siteVisit: string;
@@ -162,6 +162,133 @@ export type CampaignMetricsQuery = {
         siteVisit: string;
         spendUsd: string;
         rates: { clickThrough: string };
+      };
+    }>;
+  };
+};
+
+export type CampaignMetricDetailValuesFragment = {
+  click: string;
+  impression: string;
+  siteVisit: string;
+  conversion: string;
+  dismiss: string;
+  spendUsd: string;
+  rates: {
+    clickThrough: string;
+    clickToConversion: string;
+    costPerAcquisition: string;
+  };
+};
+
+export type DailyValuesFragment = {
+  dimensions: { day?: any | null };
+  metrics: {
+    click: string;
+    impression: string;
+    siteVisit: string;
+    conversion: string;
+    dismiss: string;
+    spendUsd: string;
+    rates: {
+      clickThrough: string;
+      clickToConversion: string;
+      costPerAcquisition: string;
+    };
+  };
+};
+
+export type FetchDailyMetricsForCampaignQueryVariables = Types.Exact<{
+  filter: Types.PerformanceFilter;
+}>;
+
+export type FetchDailyMetricsForCampaignQuery = {
+  performance: {
+    values: Array<{
+      dimensions: { day?: any | null };
+      metrics: {
+        click: string;
+        impression: string;
+        siteVisit: string;
+        conversion: string;
+        dismiss: string;
+        spendUsd: string;
+        rates: {
+          clickThrough: string;
+          clickToConversion: string;
+          costPerAcquisition: string;
+        };
+      };
+    }>;
+    total: {
+      metrics: {
+        click: string;
+        impression: string;
+        siteVisit: string;
+        conversion: string;
+        dismiss: string;
+        spendUsd: string;
+        rates: {
+          clickThrough: string;
+          clickToConversion: string;
+          costPerAcquisition: string;
+        };
+      };
+    };
+  };
+};
+
+export type AdSetValuesFragment = {
+  dimensions: {
+    adSet?: {
+      id: string;
+      name: string;
+      state: string;
+      billingType?: string | null;
+    } | null;
+  };
+  metrics: {
+    click: string;
+    impression: string;
+    siteVisit: string;
+    conversion: string;
+    dismiss: string;
+    spendUsd: string;
+    rates: {
+      clickThrough: string;
+      clickToConversion: string;
+      costPerAcquisition: string;
+    };
+  };
+};
+
+export type FetchAdSetMetricsForCampaignQueryVariables = Types.Exact<{
+  filter: Types.PerformanceFilter;
+}>;
+
+export type FetchAdSetMetricsForCampaignQuery = {
+  performance: {
+    values: Array<{
+      dimensions: {
+        adSet?: {
+          id: string;
+          name: string;
+          state: string;
+          billingType?: string | null;
+        } | null;
+      };
+      metrics: {
+        click: string;
+        impression: string;
+        siteVisit: string;
+        conversion: string;
+        dismiss: string;
+        spendUsd: string;
+        rates: {
+          clickThrough: string;
+          clickToConversion: string;
+          costPerAcquisition: string;
+        };
       };
     }>;
   };
@@ -226,8 +353,8 @@ export const CampaignWithEngagementsFragmentDoc = gql`
   }
   ${EngagementFragmentDoc}
 `;
-export const CampaignMetricValuesFragmentDoc = gql`
-  fragment CampaignMetricValues on Metrics {
+export const CampaignMetricSummaryValuesFragmentDoc = gql`
+  fragment CampaignMetricSummaryValues on Metrics {
     click
     impression
     siteVisit
@@ -236,6 +363,48 @@ export const CampaignMetricValuesFragmentDoc = gql`
       clickThrough
     }
   }
+`;
+export const CampaignMetricDetailValuesFragmentDoc = gql`
+  fragment CampaignMetricDetailValues on Metrics {
+    click
+    impression
+    siteVisit
+    conversion
+    dismiss
+    spendUsd
+    rates {
+      clickThrough
+      clickToConversion
+      costPerAcquisition
+    }
+  }
+`;
+export const DailyValuesFragmentDoc = gql`
+  fragment DailyValues on Performance {
+    dimensions {
+      day
+    }
+    metrics {
+      ...CampaignMetricDetailValues
+    }
+  }
+  ${CampaignMetricDetailValuesFragmentDoc}
+`;
+export const AdSetValuesFragmentDoc = gql`
+  fragment AdSetValues on Performance {
+    dimensions {
+      adSet {
+        id
+        name
+        state
+        billingType
+      }
+    }
+    metrics {
+      ...CampaignMetricDetailValues
+    }
+  }
+  ${CampaignMetricDetailValuesFragmentDoc}
 `;
 export const AnalyticOverviewDocument = gql`
   query analyticOverview($id: String!) {
@@ -330,12 +499,12 @@ export const CampaignMetricsDocument = gql`
           }
         }
         metrics {
-          ...CampaignMetricValues
+          ...CampaignMetricSummaryValues
         }
       }
     }
   }
-  ${CampaignMetricValuesFragmentDoc}
+  ${CampaignMetricSummaryValuesFragmentDoc}
 `;
 
 /**
@@ -411,4 +580,186 @@ export function refetchCampaignMetricsQuery(
   variables: CampaignMetricsQueryVariables,
 ) {
   return { query: CampaignMetricsDocument, variables: variables };
+}
+export const FetchDailyMetricsForCampaignDocument = gql`
+  query fetchDailyMetricsForCampaign($filter: PerformanceFilter!) {
+    performance(filter: $filter) {
+      values {
+        ...DailyValues
+      }
+      total {
+        metrics {
+          ...CampaignMetricDetailValues
+        }
+      }
+    }
+  }
+  ${DailyValuesFragmentDoc}
+  ${CampaignMetricDetailValuesFragmentDoc}
+`;
+
+/**
+ * __useFetchDailyMetricsForCampaignQuery__
+ *
+ * To run a query within a React component, call `useFetchDailyMetricsForCampaignQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFetchDailyMetricsForCampaignQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFetchDailyMetricsForCampaignQuery({
+ *   variables: {
+ *      filter: // value for 'filter'
+ *   },
+ * });
+ */
+export function useFetchDailyMetricsForCampaignQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    FetchDailyMetricsForCampaignQuery,
+    FetchDailyMetricsForCampaignQueryVariables
+  > &
+    (
+      | {
+          variables: FetchDailyMetricsForCampaignQueryVariables;
+          skip?: boolean;
+        }
+      | { skip: boolean }
+    ),
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    FetchDailyMetricsForCampaignQuery,
+    FetchDailyMetricsForCampaignQueryVariables
+  >(FetchDailyMetricsForCampaignDocument, options);
+}
+export function useFetchDailyMetricsForCampaignLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    FetchDailyMetricsForCampaignQuery,
+    FetchDailyMetricsForCampaignQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    FetchDailyMetricsForCampaignQuery,
+    FetchDailyMetricsForCampaignQueryVariables
+  >(FetchDailyMetricsForCampaignDocument, options);
+}
+export function useFetchDailyMetricsForCampaignSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<
+    FetchDailyMetricsForCampaignQuery,
+    FetchDailyMetricsForCampaignQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<
+    FetchDailyMetricsForCampaignQuery,
+    FetchDailyMetricsForCampaignQueryVariables
+  >(FetchDailyMetricsForCampaignDocument, options);
+}
+export type FetchDailyMetricsForCampaignQueryHookResult = ReturnType<
+  typeof useFetchDailyMetricsForCampaignQuery
+>;
+export type FetchDailyMetricsForCampaignLazyQueryHookResult = ReturnType<
+  typeof useFetchDailyMetricsForCampaignLazyQuery
+>;
+export type FetchDailyMetricsForCampaignSuspenseQueryHookResult = ReturnType<
+  typeof useFetchDailyMetricsForCampaignSuspenseQuery
+>;
+export type FetchDailyMetricsForCampaignQueryResult = Apollo.QueryResult<
+  FetchDailyMetricsForCampaignQuery,
+  FetchDailyMetricsForCampaignQueryVariables
+>;
+export function refetchFetchDailyMetricsForCampaignQuery(
+  variables: FetchDailyMetricsForCampaignQueryVariables,
+) {
+  return { query: FetchDailyMetricsForCampaignDocument, variables: variables };
+}
+export const FetchAdSetMetricsForCampaignDocument = gql`
+  query fetchAdSetMetricsForCampaign($filter: PerformanceFilter!) {
+    performance(filter: $filter) {
+      values {
+        ...AdSetValues
+      }
+    }
+  }
+  ${AdSetValuesFragmentDoc}
+`;
+
+/**
+ * __useFetchAdSetMetricsForCampaignQuery__
+ *
+ * To run a query within a React component, call `useFetchAdSetMetricsForCampaignQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFetchAdSetMetricsForCampaignQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFetchAdSetMetricsForCampaignQuery({
+ *   variables: {
+ *      filter: // value for 'filter'
+ *   },
+ * });
+ */
+export function useFetchAdSetMetricsForCampaignQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    FetchAdSetMetricsForCampaignQuery,
+    FetchAdSetMetricsForCampaignQueryVariables
+  > &
+    (
+      | {
+          variables: FetchAdSetMetricsForCampaignQueryVariables;
+          skip?: boolean;
+        }
+      | { skip: boolean }
+    ),
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    FetchAdSetMetricsForCampaignQuery,
+    FetchAdSetMetricsForCampaignQueryVariables
+  >(FetchAdSetMetricsForCampaignDocument, options);
+}
+export function useFetchAdSetMetricsForCampaignLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    FetchAdSetMetricsForCampaignQuery,
+    FetchAdSetMetricsForCampaignQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    FetchAdSetMetricsForCampaignQuery,
+    FetchAdSetMetricsForCampaignQueryVariables
+  >(FetchAdSetMetricsForCampaignDocument, options);
+}
+export function useFetchAdSetMetricsForCampaignSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<
+    FetchAdSetMetricsForCampaignQuery,
+    FetchAdSetMetricsForCampaignQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<
+    FetchAdSetMetricsForCampaignQuery,
+    FetchAdSetMetricsForCampaignQueryVariables
+  >(FetchAdSetMetricsForCampaignDocument, options);
+}
+export type FetchAdSetMetricsForCampaignQueryHookResult = ReturnType<
+  typeof useFetchAdSetMetricsForCampaignQuery
+>;
+export type FetchAdSetMetricsForCampaignLazyQueryHookResult = ReturnType<
+  typeof useFetchAdSetMetricsForCampaignLazyQuery
+>;
+export type FetchAdSetMetricsForCampaignSuspenseQueryHookResult = ReturnType<
+  typeof useFetchAdSetMetricsForCampaignSuspenseQuery
+>;
+export type FetchAdSetMetricsForCampaignQueryResult = Apollo.QueryResult<
+  FetchAdSetMetricsForCampaignQuery,
+  FetchAdSetMetricsForCampaignQueryVariables
+>;
+export function refetchFetchAdSetMetricsForCampaignQuery(
+  variables: FetchAdSetMetricsForCampaignQueryVariables,
+) {
+  return { query: FetchAdSetMetricsForCampaignDocument, variables: variables };
 }

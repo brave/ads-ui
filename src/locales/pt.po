@@ -106,7 +106,7 @@ msgid "Ad format"
 msgstr ""
 
 #: src/components/Creatives/CreativeList.tsx:64
-#: src/user/campaignList/CampaignList.tsx:89
+#: src/user/campaignList/CampaignList.tsx:75
 msgid "Ad Format"
 msgstr ""
 
@@ -178,7 +178,7 @@ msgstr ""
 msgid "Additional Details"
 msgstr ""
 
-#: src/user/views/user/CampaignReportView.tsx:96
+#: src/user/views/user/reports/OriginalCampaignReportView.tsx:90
 msgid "Additional Report: OS Performance"
 msgstr ""
 
@@ -195,6 +195,10 @@ msgstr ""
 
 #: src/user/ads/AdsExistingAd.tsx:90
 msgid "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously approved ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
+msgstr ""
+
+#: src/user/views/user/reports/SearchCampaignReportView.tsx:128
+msgid "AdSets"
 msgstr ""
 
 #: src/user/ads/InlineContentAd.tsx:90
@@ -327,7 +331,7 @@ msgid "Browser-based delivery offers a new way to reach audiences on the Web."
 msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:52
-#: src/user/campaignList/CampaignList.tsx:109
+#: src/user/campaignList/CampaignList.tsx:95
 msgid "Budget"
 msgstr ""
 
@@ -367,7 +371,7 @@ msgstr ""
 msgid "Call to Action text"
 msgstr ""
 
-#: src/user/campaignList/CampaignList.tsx:75
+#: src/user/campaignList/CampaignList.tsx:61
 #: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:28
 msgid "Campaign"
 msgstr ""
@@ -466,6 +470,10 @@ msgstr ""
 msgid "Click on the secure login link in the email to access your Brave Ads account."
 msgstr ""
 
+#: src/user/analytics/search/metrics.ts:52
+msgid "Click Through Rate"
+msgstr ""
+
 #: src/user/analytics/analyticsOverview/components/BaseBarChart.tsx:57
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:42
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:75
@@ -486,7 +494,8 @@ msgstr ""
 #: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:48
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:35
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:164
-#: src/user/campaignList/CampaignList.tsx:142
+#: src/user/analytics/search/metrics.ts:44
+#: src/user/campaignList/CampaignList.tsx:129
 #: src/user/views/user/AdDetailTable.tsx:58
 msgid "Clicks"
 msgstr ""
@@ -603,7 +612,11 @@ msgstr ""
 msgid "Copy this and keep this safe!"
 msgstr ""
 
-#: src/auth/lib/index.ts:113
+#: src/user/analytics/search/metrics.ts:84
+#~ msgid "Cost per Acquisition"
+#~ msgstr ""
+
+#: src/auth/lib/index.ts:114
 msgid "Could not logout at this time. Please try again later."
 msgstr ""
 
@@ -615,7 +628,13 @@ msgstr ""
 msgid "Counted if the user clicks an ad and spends at least 10 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count."
 msgstr ""
 
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:46
+#: src/user/analytics/search/metrics.ts:62
+#~ msgid "Counted if the user clicks an ad and spends at least 5 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count."
+#~ msgstr ""
+
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:36
+#: src/user/analytics/search/metrics.ts:45
 msgid "Counted when a user clicks on the ad. Does not include clicks to dismiss"
 msgstr ""
 
@@ -636,6 +655,7 @@ msgid "Counted when a user reaches a designated conversion landing page followin
 msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:31
+#: src/user/analytics/search/metrics.ts:37
 msgid "Counted when an ad is displayed on screen for a minimum of one second"
 msgstr ""
 
@@ -699,10 +719,12 @@ msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/BaseBarChart.tsx:58
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:40
+#: src/user/analytics/search/metrics.ts:53
 msgid "CTR"
 msgstr ""
 
 #: src/auth/views/LandingPage.tsx:65
+#: src/components/Button/ContainedDashboardButton.tsx:8
 #: src/components/Button/DashboardButton.tsx:14
 msgid "Dashboard"
 msgstr ""
@@ -823,7 +845,7 @@ msgstr ""
 msgid "Email address is required"
 msgstr ""
 
-#: src/user/campaignList/CampaignList.tsx:198
+#: src/user/campaignList/CampaignList.tsx:181
 msgid "End"
 msgstr ""
 
@@ -855,7 +877,7 @@ msgstr ""
 msgid "Enter your email address to get a secure login link. Use this link to access your Brave Ads account."
 msgstr ""
 
-#: src/user/ads/NotificationAd.tsx:79
+#: src/user/ads/NotificationAd.tsx:85
 msgid "Example - https://brave.com/brave-rewards/"
 msgstr ""
 
@@ -1042,7 +1064,8 @@ msgstr ""
 #: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:46
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:30
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:154
-#: src/user/campaignList/CampaignList.tsx:129
+#: src/user/analytics/search/metrics.ts:36
+#: src/user/campaignList/CampaignList.tsx:116
 #: src/user/views/user/AdDetailTable.tsx:47
 msgid "Impressions"
 msgstr ""
@@ -1091,11 +1114,11 @@ msgstr ""
 msgid "invalid session"
 msgstr ""
 
-#: src/auth/lib/index.ts:99
+#: src/auth/lib/index.ts:100
 msgid "Invalid Session"
 msgstr ""
 
-#: src/auth/lib/index.ts:145
+#: src/auth/lib/index.ts:146
 msgid "Invalid Token"
 msgstr ""
 
@@ -1186,7 +1209,7 @@ msgstr ""
 msgid "Make payment & submit for approval"
 msgstr ""
 
-#: src/user/ads/NotificationAd.tsx:68
+#: src/user/ads/NotificationAd.tsx:73
 msgid "Make sure to include your brand name in the title OR body of the ad. Otherwise, it will be rejected."
 msgstr ""
 
@@ -1235,6 +1258,7 @@ msgstr ""
 #: src/user/ads/InlineContentAd.tsx:65
 #: src/user/ads/NotificationAd.tsx:51
 #: src/user/adSet/AdSetList.tsx:93
+#: src/user/analytics/search/AdSetBreakdown.tsx:62
 #: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:41
 #: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:30
 msgid "Name"
@@ -1360,7 +1384,7 @@ msgid "On a podcast I listen to"
 msgstr ""
 
 #: src/user/adSet/AdSetList.tsx:84
-#: src/user/campaignList/CampaignList.tsx:210
+#: src/user/campaignList/CampaignList.tsx:193
 msgid "On/Off"
 msgstr ""
 
@@ -1439,7 +1463,7 @@ msgstr ""
 msgid "Platforms"
 msgstr ""
 
-#: src/user/analytics/analyticsOverview/reports/campaign/EngagementsOverview.tsx:67
+#: src/user/views/user/reports/ConsultAccountManager.tsx:14
 msgid "Please ask your Account Manager for reports on campaigns of this format."
 msgstr ""
 
@@ -1447,7 +1471,7 @@ msgstr ""
 msgid "Please confirm your organization’s new private key:"
 msgstr ""
 
-#: src/auth/lib/index.ts:24
+#: src/auth/lib/index.ts:27
 msgid "Please enter a username and password"
 msgstr ""
 
@@ -1606,7 +1630,7 @@ msgstr ""
 #~ msgid "Reporting"
 #~ msgstr ""
 
-#: src/user/analytics/analyticsOverview/reports/campaign/EngagementsOverview.tsx:129
+#: src/user/analytics/analyticsOverview/reports/campaign/EngagementsOverview.tsx:117
 msgid "Reporting not available yet for <0>{campaignName}</0>."
 msgstr ""
 
@@ -1721,7 +1745,7 @@ msgstr ""
 #: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:49
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:45
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:162
-#: src/user/campaignList/CampaignList.tsx:155
+#: src/user/campaignList/CampaignList.tsx:142
 msgid "Site visits"
 msgstr ""
 
@@ -1741,12 +1765,13 @@ msgstr ""
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:88
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:168
 #: src/user/analytics/analyticsOverview/reports/os/components/OsPieChart.tsx:40
-#: src/user/campaignList/CampaignList.tsx:118
+#: src/user/analytics/search/metrics.ts:61
+#: src/user/campaignList/CampaignList.tsx:104
 #: src/user/views/user/AdDetailTable.tsx:31
 msgid "Spend"
 msgstr ""
 
-#: src/user/campaignList/CampaignList.tsx:189
+#: src/user/campaignList/CampaignList.tsx:172
 msgid "Start"
 msgstr ""
 
@@ -1788,7 +1813,8 @@ msgstr ""
 
 #: src/components/Creatives/CreativeCampaigns.tsx:48
 #: src/user/adSet/AdSetList.tsx:99
-#: src/user/campaignList/CampaignList.tsx:98
+#: src/user/analytics/search/AdSetBreakdown.tsx:71
+#: src/user/campaignList/CampaignList.tsx:84
 msgid "Status"
 msgstr ""
 
@@ -1804,8 +1830,8 @@ msgstr ""
 #~ msgid "Street address line 2"
 #~ msgstr ""
 
-#: src/auth/registration/BrowserRegister.tsx:40
-#: src/auth/registration/SearchRegister.tsx:36
+#: src/auth/registration/BrowserRegister.tsx:37
+#: src/auth/registration/SearchRegister.tsx:41
 msgid "Submit"
 msgstr ""
 
@@ -1835,7 +1861,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/user/ads/InlineContentAd.tsx:84
-#: src/user/ads/NotificationAd.tsx:78
+#: src/user/ads/NotificationAd.tsx:84
 msgid "Target URL"
 msgstr ""
 
@@ -1872,6 +1898,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:41
+#: src/user/analytics/search/metrics.ts:54
 msgid "The rate at which users clicked in correlation to their impressions"
 msgstr ""
 
@@ -1891,7 +1918,7 @@ msgstr ""
 msgid "The rate at which users visited the site in correlation to their impressions"
 msgstr ""
 
-#: src/auth/lib/index.ts:41
+#: src/auth/lib/index.ts:44
 msgid "The username or password did not match our records."
 msgstr ""
 
@@ -1899,7 +1926,7 @@ msgstr ""
 #~ msgid "Third party tracking acknowledgement is required"
 #~ msgstr ""
 
-#: src/components/Creatives/NewsPreview.tsx:52
+#: src/components/Creatives/NewsPreview.tsx:53
 msgid "This is a news display ad, it wll look like part of the news feed."
 msgstr ""
 
@@ -1942,6 +1969,7 @@ msgstr ""
 
 #: src/components/Conversion/ConversionFields.tsx:17
 #: src/user/adSet/AdSetList.tsx:112
+#: src/user/analytics/search/AdSetBreakdown.tsx:90
 msgid "Type"
 msgstr ""
 
@@ -1989,7 +2017,7 @@ msgstr ""
 msgid "Unable to login, link has expired or has already been used."
 msgstr ""
 
-#: src/auth/lib/index.ts:86
+#: src/auth/lib/index.ts:87
 msgid "Unable to register your organization at this time. Please try again later."
 msgstr ""
 
@@ -2006,7 +2034,8 @@ msgstr ""
 msgid "Unable to retrieve images"
 msgstr ""
 
-#: src/user/analytics/analyticsOverview/reports/campaign/EngagementsOverview.tsx:47
+#: src/user/analytics/analyticsOverview/reports/campaign/EngagementsOverview.tsx:46
+#: src/user/views/user/reports/SearchCampaignReportView.tsx:53
 msgid "Unable to retrieve reporting data for this Campaign."
 msgstr ""
 
@@ -2030,7 +2059,7 @@ msgstr ""
 msgid "Unable to upload image"
 msgstr ""
 
-#: src/auth/lib/index.ts:46
+#: src/auth/lib/index.ts:49
 msgid "Unexpected error validating your credentials. Please try again later."
 msgstr ""
 

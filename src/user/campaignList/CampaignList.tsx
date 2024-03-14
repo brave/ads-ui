@@ -10,7 +10,7 @@ import { Status } from "components/Campaigns/Status";
 import { isAfterEndDate } from "util/isAfterEndDate";
 import { AdvertiserCampaignsFragment } from "graphql/advertiser.generated";
 import {
-  CampaignMetricValuesFragment,
+  CampaignMetricSummaryValuesFragment,
   useCampaignMetricsQuery,
 } from "graphql/analytics-overview.generated";
 import { CampaignSummaryFragment } from "graphql/campaign.generated";
@@ -44,14 +44,14 @@ export function CampaignList({ advertiser }: Props) {
 
   const metricValuesByCampaign = useMemo(() => {
     const values = data?.performance?.values ?? [];
-    return new Map<string, CampaignMetricValuesFragment>(
+    return new Map<string, CampaignMetricSummaryValuesFragment>(
       values.map((m) => [m.dimensions.campaign?.id ?? "", m.metrics]),
     );
   }, [data]);
 
   function findMetricValuesForCampaign(
     campaignId: string,
-  ): CampaignMetricValuesFragment | undefined {
+  ): CampaignMetricSummaryValuesFragment | undefined {
     return metricValuesByCampaign.get(campaignId);
   }
 
@@ -62,7 +62,7 @@ export function CampaignList({ advertiser }: Props) {
       renderCell: ({ row }) => (
         <Link
           component={RouterLink}
-          to={`/user/main/campaign/${row.id}?format=${row.format}`}
+          to={`/user/main/campaign/${row.id}`}
           underline="none"
         >
           {row.name}
