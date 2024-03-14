@@ -43,7 +43,7 @@ export default function MetricSelect({
     {
       value: "landings",
       label: msg`Site visits`,
-      tooltip: msg`Counted if the user clicks an ad and spends at least 5 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count.`,
+      tooltip: msg`Counted if the user clicks an ad and spends at least 10 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count.`,
     },
     {
       value: "conversions",

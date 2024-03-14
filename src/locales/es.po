@@ -197,7 +197,7 @@ msgstr ""
 msgid "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously approved ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
 msgstr ""
 
-#: src/user/views/user/reports/SearchCampaignReportView.tsx:76
+#: src/user/views/user/reports/SearchCampaignReportView.tsx:128
 msgid "AdSets"
 msgstr ""
 
@@ -605,7 +605,6 @@ msgstr ""
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:60
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:50
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:166
-#: src/user/analytics/search/metrics.ts:69
 msgid "Conversions"
 msgstr ""
 
@@ -614,8 +613,8 @@ msgid "Copy this and keep this safe!"
 msgstr ""
 
 #: src/user/analytics/search/metrics.ts:84
-msgid "Cost per Acquisition"
-msgstr ""
+#~ msgid "Cost per Acquisition"
+#~ msgstr ""
 
 #: src/auth/lib/index.ts:114
 msgid "Could not logout at this time. Please try again later."
@@ -626,14 +625,13 @@ msgid "Count conversions within X days of an impression"
 msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:46
-#: src/user/analytics/search/metrics.ts:62
-#~ msgid "Counted if the user clicks an ad and spends at least 10 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count."
-#~ msgstr ""
+msgid "Counted if the user clicks an ad and spends at least 10 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count."
+msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:46
 #: src/user/analytics/search/metrics.ts:62
-msgid "Counted if the user clicks an ad and spends at least 5 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count."
-msgstr ""
+#~ msgid "Counted if the user clicks an ad and spends at least 5 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count."
+#~ msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:36
 #: src/user/analytics/search/metrics.ts:45
@@ -645,7 +643,6 @@ msgid "Counted when a user clicks the “close” or “x” button to make an a
 msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:51
-#: src/user/analytics/search/metrics.ts:70
 msgid "Counted when a user reaches a designated conversion landing page"
 msgstr ""
 
@@ -678,7 +675,6 @@ msgstr ""
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:89
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:156
 #: src/user/analytics/analyticsOverview/reports/os/components/OsBarChart.tsx:53
-#: src/user/analytics/search/metrics.ts:85
 msgid "CPA"
 msgstr ""
 
@@ -849,7 +845,7 @@ msgstr ""
 msgid "Email address is required"
 msgstr ""
 
-#: src/user/campaignList/CampaignList.tsx:178
+#: src/user/campaignList/CampaignList.tsx:181
 msgid "End"
 msgstr ""
 
@@ -1262,7 +1258,7 @@ msgstr ""
 #: src/user/ads/InlineContentAd.tsx:65
 #: src/user/ads/NotificationAd.tsx:51
 #: src/user/adSet/AdSetList.tsx:93
-#: src/user/analytics/search/AdSetBreakdown.tsx:60
+#: src/user/analytics/search/AdSetBreakdown.tsx:62
 #: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:41
 #: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:30
 msgid "Name"
@@ -1388,7 +1384,7 @@ msgid "On a podcast I listen to"
 msgstr ""
 
 #: src/user/adSet/AdSetList.tsx:84
-#: src/user/campaignList/CampaignList.tsx:190
+#: src/user/campaignList/CampaignList.tsx:193
 msgid "On/Off"
 msgstr ""
 
@@ -1749,7 +1745,6 @@ msgstr ""
 #: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:49
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:45
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:162
-#: src/user/analytics/search/metrics.ts:61
 #: src/user/campaignList/CampaignList.tsx:142
 msgid "Site visits"
 msgstr ""
@@ -1770,13 +1765,13 @@ msgstr ""
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:88
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:168
 #: src/user/analytics/analyticsOverview/reports/os/components/OsPieChart.tsx:40
-#: src/user/analytics/search/metrics.ts:77
+#: src/user/analytics/search/metrics.ts:61
 #: src/user/campaignList/CampaignList.tsx:104
 #: src/user/views/user/AdDetailTable.tsx:31
 msgid "Spend"
 msgstr ""
 
-#: src/user/campaignList/CampaignList.tsx:169
+#: src/user/campaignList/CampaignList.tsx:172
 msgid "Start"
 msgstr ""
 
@@ -1818,7 +1813,7 @@ msgstr ""
 
 #: src/components/Creatives/CreativeCampaigns.tsx:48
 #: src/user/adSet/AdSetList.tsx:99
-#: src/user/analytics/search/AdSetBreakdown.tsx:69
+#: src/user/analytics/search/AdSetBreakdown.tsx:71
 #: src/user/campaignList/CampaignList.tsx:84
 msgid "Status"
 msgstr ""
@@ -1974,7 +1969,7 @@ msgstr ""
 
 #: src/components/Conversion/ConversionFields.tsx:17
 #: src/user/adSet/AdSetList.tsx:112
-#: src/user/analytics/search/AdSetBreakdown.tsx:88
+#: src/user/analytics/search/AdSetBreakdown.tsx:90
 msgid "Type"
 msgstr ""
 
@@ -2040,7 +2035,7 @@ msgid "Unable to retrieve images"
 msgstr ""
 
 #: src/user/analytics/analyticsOverview/reports/campaign/EngagementsOverview.tsx:46
-#: src/user/views/user/reports/SearchCampaignReportView.tsx:36
+#: src/user/views/user/reports/SearchCampaignReportView.tsx:53
 msgid "Unable to retrieve reporting data for this Campaign."
 msgstr ""
 

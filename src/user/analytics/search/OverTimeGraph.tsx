@@ -45,11 +45,8 @@ export function OverTimeGraph({ dataSource }: Props) {
             second: "%H:%M:%S",
             minute: "%H:%M",
             hour: "%H:%M",
-            // eslint-disable-next-line lingui/no-unlocalized-strings
             day: "%e %b",
-            // eslint-disable-next-line lingui/no-unlocalized-strings
             week: "%e %b",
-            // eslint-disable-next-line lingui/no-unlocalized-strings
             month: "%b %Y",
             year: "%Y",
           },
