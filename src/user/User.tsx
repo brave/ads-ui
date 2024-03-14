@@ -14,7 +14,6 @@ import { EditCampaign } from "./views/adsManager/views/advanced/components/form/
 import { CompletionForm } from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
 import { Navbar } from "components/Navigation/Navbar";
 import { CampaignView } from "user/views/user/CampaignView";
-import { CampaignReportView } from "user/views/user/CampaignReportView";
 import { Profile } from "user/views/user/Profile";
 import moment from "moment";
 import { FilterContext } from "state/context";
@@ -24,6 +23,7 @@ import { CreativeForm } from "components/Creatives/CreativeForm";
 import { ProtectedRoute } from "components/Route/ProtectedRoute";
 import { AdvertiserDetailsForm } from "auth/components/AdvertiserDetailsForm";
 import { ErrorBoundary } from "ErrorBoundary";
+import { CampaignReportViewSelector } from "./views/user/CampaignReportViewSelector";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -34,6 +34,7 @@ const buildApolloClient = () => {
   return new ApolloClient({
     link: httpLink,
     cache: new InMemoryCache(),
+    connectToDevTools: true,
   });
 };
 
@@ -102,7 +103,7 @@ export function User() {
                 {/* /campaigns/:campaignId/analytics - */}
                 <ProtectedRoute
                   path="/user/main/campaign/:campaignId"
-                  authedComponent={CampaignReportView}
+                  authedComponent={CampaignReportViewSelector}
                 />
 
                 <Route path="/user/main/settings" component={Settings} />

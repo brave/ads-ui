@@ -386,6 +386,35 @@ export type LoadCampaignAdsQuery = {
   } | null;
 };
 
+export type LoadCampaignSummaryQueryVariables = Types.Exact<{
+  id: Types.Scalars["String"]["input"];
+}>;
+
+export type LoadCampaignSummaryQuery = {
+  campaign?: {
+    id: string;
+    name: string;
+    state: string;
+    dailyCap: number;
+    priority: number;
+    passThroughRate: number;
+    pacingOverride: boolean;
+    pacingStrategy: Types.CampaignPacingStrategies;
+    externalId?: string | null;
+    currency: string;
+    budget: number;
+    paymentType: Types.PaymentType;
+    spent: number;
+    createdAt: any;
+    startAt: any;
+    endAt: any;
+    source: Types.CampaignSource;
+    type: Types.CampaignType;
+    format: Types.CampaignFormat;
+    dayProportion?: number | null;
+  } | null;
+};
+
 export type CreateCampaignMutationVariables = Types.Exact<{
   input: Types.CreateCampaignInput;
 }>;
@@ -658,6 +687,89 @@ export function refetchLoadCampaignAdsQuery(
   variables: LoadCampaignAdsQueryVariables,
 ) {
   return { query: LoadCampaignAdsDocument, variables: variables };
+}
+export const LoadCampaignSummaryDocument = gql`
+  query LoadCampaignSummary($id: String!) {
+    campaign(id: $id) {
+      ...CampaignSummary
+    }
+  }
+  ${CampaignSummaryFragmentDoc}
+`;
+
+/**
+ * __useLoadCampaignSummaryQuery__
+ *
+ * To run a query within a React component, call `useLoadCampaignSummaryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLoadCampaignSummaryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLoadCampaignSummaryQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useLoadCampaignSummaryQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    LoadCampaignSummaryQuery,
+    LoadCampaignSummaryQueryVariables
+  > &
+    (
+      | { variables: LoadCampaignSummaryQueryVariables; skip?: boolean }
+      | { skip: boolean }
+    ),
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    LoadCampaignSummaryQuery,
+    LoadCampaignSummaryQueryVariables
+  >(LoadCampaignSummaryDocument, options);
+}
+export function useLoadCampaignSummaryLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    LoadCampaignSummaryQuery,
+    LoadCampaignSummaryQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    LoadCampaignSummaryQuery,
+    LoadCampaignSummaryQueryVariables
+  >(LoadCampaignSummaryDocument, options);
+}
+export function useLoadCampaignSummarySuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<
+    LoadCampaignSummaryQuery,
+    LoadCampaignSummaryQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<
+    LoadCampaignSummaryQuery,
+    LoadCampaignSummaryQueryVariables
+  >(LoadCampaignSummaryDocument, options);
+}
+export type LoadCampaignSummaryQueryHookResult = ReturnType<
+  typeof useLoadCampaignSummaryQuery
+>;
+export type LoadCampaignSummaryLazyQueryHookResult = ReturnType<
+  typeof useLoadCampaignSummaryLazyQuery
+>;
+export type LoadCampaignSummarySuspenseQueryHookResult = ReturnType<
+  typeof useLoadCampaignSummarySuspenseQuery
+>;
+export type LoadCampaignSummaryQueryResult = Apollo.QueryResult<
+  LoadCampaignSummaryQuery,
+  LoadCampaignSummaryQueryVariables
+>;
+export function refetchLoadCampaignSummaryQuery(
+  variables: LoadCampaignSummaryQueryVariables,
+) {
+  return { query: LoadCampaignSummaryDocument, variables: variables };
 }
 export const CreateCampaignDocument = gql`
   mutation CreateCampaign($input: CreateCampaignInput!) {
