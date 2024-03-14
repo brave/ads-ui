@@ -141,7 +141,10 @@ export function CampaignList({ advertiser }: Props) {
       field: "landed",
       headerName: lingui(msg`Site visits`),
       type: "number",
-      valueGetter: ({ row }) => findMetricValuesForCampaign(row.id)?.siteVisit,
+      valueGetter: ({ row }) =>
+        row.format === CampaignFormat.Search
+          ? undefined
+          : findMetricValuesForCampaign(row.id)?.siteVisit,
       renderCell: ({ value }) => (
         <MetricValue metricType="number" loading={loading} value={value} />
       ),
