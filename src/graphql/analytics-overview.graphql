@@ -108,8 +108,8 @@ fragment DailyValues on Performance {
   }
 }
 
-query fetchDailyMetricsForCampaign($campaignId: String!) {
-  performance(filter: { campaignIds: [$campaignId] }) {
+query fetchDailyMetricsForCampaign($filter: PerformanceFilter!) {
+  performance(filter: $filter) {
     values {
       ...DailyValues
     }
@@ -135,8 +135,8 @@ fragment AdSetValues on Performance {
   }
 }
 
-query fetchAdSetMetricsForCampaign($campaignId: String!) {
-  performance(filter: { campaignIds: [$campaignId] }) {
+query fetchAdSetMetricsForCampaign($filter: PerformanceFilter!) {
+  performance(filter: $filter) {
     values {
       ...AdSetValues
     }

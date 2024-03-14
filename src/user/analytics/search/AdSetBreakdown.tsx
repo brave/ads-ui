@@ -13,6 +13,7 @@ import { MetricDefinition, getMetricListForCampaign } from "./metrics";
 import { RenderMetric } from "./RenderMetric";
 import { i18n } from "@lingui/core";
 import lodash from "lodash";
+import { PerformanceFilter } from "graphql/types";
 
 function getColumnDefinitionForMetric(metric: MetricDefinition): GridColDef {
   return {
@@ -30,14 +31,15 @@ function getColumnDefinitionForMetric(metric: MetricDefinition): GridColDef {
 
 interface Props {
   campaignSummary: CampaignSummaryFragment;
+  filter: PerformanceFilter;
 }
 
-export function AdSetBreakdown({ campaignSummary }: Props) {
+export function AdSetBreakdown({ campaignSummary, filter }: Props) {
   const { _ } = useLingui();
 
   const { data, loading } = useFetchAdSetMetricsForCampaignQuery({
     variables: {
-      campaignId: campaignSummary.id,
+      filter,
     },
   });
 

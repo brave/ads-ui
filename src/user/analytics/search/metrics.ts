@@ -59,7 +59,7 @@ export const METRICS: MetricDefinition[] = [
   {
     id: "site-visit",
     caption: msg`Site visits`,
-    tooltip: msg`Counted if the user clicks an ad and spends at least 10 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count.`,
+    tooltip: msg`Counted if the user clicks an ad and spends at least 5 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count.`,
     getValue: (metrics) => BigNumber(metrics.siteVisit),
     type: "number",
     color: colors[3],
@@ -71,14 +71,6 @@ export const METRICS: MetricDefinition[] = [
     getValue: (metrics) => BigNumber(metrics.conversion),
     type: "number",
     color: colors[4],
-  },
-  {
-    id: "conversion-rate",
-    caption: msg`Conversion rate`,
-    tooltip: msg`The rate at which users converted in correlation to their clicks`,
-    getValue: (metrics) => BigNumber(metrics.rates.clickToConversion),
-    type: "rate",
-    color: colors[7],
   },
   {
     id: "spend",

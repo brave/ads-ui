@@ -1,7 +1,6 @@
 import { DailyValuesFragment } from "graphql/analytics-overview.generated";
 import { useMetricSelection } from "./hooks";
 import { makeLineChartSeries } from "./series";
-import { Skeleton } from "@mui/material";
 import { HighchartsWrapper } from "user/analytics/analyticsOverview/components/HighchartsWrapper";
 
 interface Props {
@@ -11,25 +10,13 @@ interface Props {
 export function OverTimeGraph({ dataSource }: Props) {
   const { selectedMetrics } = useMetricSelection();
 
-  if (!dataSource) {
-    return (
-      <Skeleton
-        variant="rectangular"
-        animation="pulse"
-        height="100%"
-        sx={{ maxHeight: "625px" }}
-      />
-    );
-  }
-
   const series = selectedMetrics.map((metric) =>
-    makeLineChartSeries(metric, dataSource),
+    makeLineChartSeries(metric, dataSource ?? []),
   );
 
   return (
     <HighchartsWrapper
-      height="100%"
-      maxHeight="625px"
+      height="500px"
       p={2}
       options={{
         time: {

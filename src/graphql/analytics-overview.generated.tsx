@@ -199,7 +199,7 @@ export type DailyValuesFragment = {
 };
 
 export type FetchDailyMetricsForCampaignQueryVariables = Types.Exact<{
-  campaignId: Types.Scalars["String"]["input"];
+  filter: Types.PerformanceFilter;
 }>;
 
 export type FetchDailyMetricsForCampaignQuery = {
@@ -263,7 +263,7 @@ export type AdSetValuesFragment = {
 };
 
 export type FetchAdSetMetricsForCampaignQueryVariables = Types.Exact<{
-  campaignId: Types.Scalars["String"]["input"];
+  filter: Types.PerformanceFilter;
 }>;
 
 export type FetchAdSetMetricsForCampaignQuery = {
@@ -582,8 +582,8 @@ export function refetchCampaignMetricsQuery(
   return { query: CampaignMetricsDocument, variables: variables };
 }
 export const FetchDailyMetricsForCampaignDocument = gql`
-  query fetchDailyMetricsForCampaign($campaignId: String!) {
-    performance(filter: { campaignIds: [$campaignId] }) {
+  query fetchDailyMetricsForCampaign($filter: PerformanceFilter!) {
+    performance(filter: $filter) {
       values {
         ...DailyValues
       }
@@ -610,7 +610,7 @@ export const FetchDailyMetricsForCampaignDocument = gql`
  * @example
  * const { data, loading, error } = useFetchDailyMetricsForCampaignQuery({
  *   variables: {
- *      campaignId: // value for 'campaignId'
+ *      filter: // value for 'filter'
  *   },
  * });
  */
@@ -676,8 +676,8 @@ export function refetchFetchDailyMetricsForCampaignQuery(
   return { query: FetchDailyMetricsForCampaignDocument, variables: variables };
 }
 export const FetchAdSetMetricsForCampaignDocument = gql`
-  query fetchAdSetMetricsForCampaign($campaignId: String!) {
-    performance(filter: { campaignIds: [$campaignId] }) {
+  query fetchAdSetMetricsForCampaign($filter: PerformanceFilter!) {
+    performance(filter: $filter) {
       values {
         ...AdSetValues
       }
@@ -698,7 +698,7 @@ export const FetchAdSetMetricsForCampaignDocument = gql`
  * @example
  * const { data, loading, error } = useFetchAdSetMetricsForCampaignQuery({
  *   variables: {
- *      campaignId: // value for 'campaignId'
+ *      filter: // value for 'filter'
  *   },
  * });
  */

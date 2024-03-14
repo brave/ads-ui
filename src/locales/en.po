@@ -193,6 +193,10 @@ msgstr "Ads"
 msgid "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously approved ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
 msgstr "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously approved ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
 
+#: src/user/views/user/reports/SearchCampaignReportView.tsx:76
+msgid "AdSets"
+msgstr ""
+
 #: src/user/ads/InlineContentAd.tsx:90
 msgid "Advertiser Name"
 msgstr "Advertiser Name"
@@ -558,7 +562,6 @@ msgstr "Conversion"
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:70
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:150
-#: src/user/analytics/search/metrics.ts:77
 msgid "Conversion rate"
 msgstr "Conversion rate"
 
@@ -606,7 +609,7 @@ msgstr "Conversions"
 msgid "Copy this and keep this safe!"
 msgstr "Copy this and keep this safe!"
 
-#: src/user/analytics/search/metrics.ts:92
+#: src/user/analytics/search/metrics.ts:84
 msgid "Cost per Acquisition"
 msgstr ""
 
@@ -620,8 +623,13 @@ msgstr "Count conversions within X days of an impression"
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:46
 #: src/user/analytics/search/metrics.ts:62
-msgid "Counted if the user clicks an ad and spends at least 10 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count."
-msgstr "Counted if the user clicks an ad and spends at least 10 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count."
+#~ msgid "Counted if the user clicks an ad and spends at least 10 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count."
+#~ msgstr "Counted if the user clicks an ad and spends at least 10 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count."
+
+#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:46
+#: src/user/analytics/search/metrics.ts:62
+msgid "Counted if the user clicks an ad and spends at least 5 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count."
+msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:36
 #: src/user/analytics/search/metrics.ts:45
@@ -666,7 +674,7 @@ msgstr "Country Targeting"
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:89
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:156
 #: src/user/analytics/analyticsOverview/reports/os/components/OsBarChart.tsx:53
-#: src/user/analytics/search/metrics.ts:93
+#: src/user/analytics/search/metrics.ts:85
 msgid "CPA"
 msgstr "CPA"
 
@@ -1246,6 +1254,7 @@ msgstr "more"
 #: src/user/ads/InlineContentAd.tsx:65
 #: src/user/ads/NotificationAd.tsx:51
 #: src/user/adSet/AdSetList.tsx:93
+#: src/user/analytics/search/AdSetBreakdown.tsx:60
 #: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:41
 #: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:30
 msgid "Name"
@@ -1618,7 +1627,6 @@ msgstr "Remove Conversion Tracking"
 #~ msgstr "Reporting"
 
 #: src/user/analytics/analyticsOverview/reports/campaign/EngagementsOverview.tsx:117
-#: src/user/analytics/search/SearchEngagmentsOverview.tsx:110
 msgid "Reporting not available yet for <0>{campaignName}</0>."
 msgstr "Reporting not available yet for <0>{campaignName}</0>."
 
@@ -1754,7 +1762,7 @@ msgstr "Something went wrong."
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:88
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:168
 #: src/user/analytics/analyticsOverview/reports/os/components/OsPieChart.tsx:40
-#: src/user/analytics/search/metrics.ts:85
+#: src/user/analytics/search/metrics.ts:77
 #: src/user/campaignList/CampaignList.tsx:104
 #: src/user/views/user/AdDetailTable.tsx:31
 msgid "Spend"
@@ -1802,6 +1810,7 @@ msgstr "State"
 
 #: src/components/Creatives/CreativeCampaigns.tsx:48
 #: src/user/adSet/AdSetList.tsx:99
+#: src/user/analytics/search/AdSetBreakdown.tsx:69
 #: src/user/campaignList/CampaignList.tsx:84
 msgid "Status"
 msgstr "Status"
@@ -1891,7 +1900,6 @@ msgid "The rate at which users clicked in correlation to their impressions"
 msgstr "The rate at which users clicked in correlation to their impressions"
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:71
-#: src/user/analytics/search/metrics.ts:78
 msgid "The rate at which users converted in correlation to their clicks"
 msgstr "The rate at which users converted in correlation to their clicks"
 
@@ -1958,6 +1966,7 @@ msgstr "To protect user’s privacy, verified ad conversion data is encrypted so
 
 #: src/components/Conversion/ConversionFields.tsx:17
 #: src/user/adSet/AdSetList.tsx:112
+#: src/user/analytics/search/AdSetBreakdown.tsx:88
 msgid "Type"
 msgstr "Type"
 
@@ -2023,8 +2032,7 @@ msgid "Unable to retrieve images"
 msgstr "Unable to retrieve images"
 
 #: src/user/analytics/analyticsOverview/reports/campaign/EngagementsOverview.tsx:46
-#: src/user/analytics/search/SearchEngagmentsOverview.tsx:39
-#: src/user/views/user/reports/SearchCampaignReportView.tsx:33
+#: src/user/views/user/reports/SearchCampaignReportView.tsx:36
 msgid "Unable to retrieve reporting data for this Campaign."
 msgstr "Unable to retrieve reporting data for this Campaign."
 

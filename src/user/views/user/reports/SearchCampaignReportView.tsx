@@ -1,15 +1,20 @@
 import { Trans, msg } from "@lingui/macro";
-import { Box } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { DashboardButton } from "components/Button/DashboardButton";
+import { Status } from "components/Campaigns/Status";
 import { CardContainer } from "components/Card/CardContainer";
+import { DateRangePicker } from "components/Date/DateRangePicker";
 import { ErrorDetail } from "components/Error/ErrorDetail";
+import { endOfToday, parseISO } from "date-fns";
 import { useFetchDailyMetricsForCampaignQuery } from "graphql/analytics-overview.generated";
 import { CampaignSummaryFragment } from "graphql/campaign.generated";
+import { PerformanceFilter } from "graphql/types";
 import { useState } from "react";
 import { AdSetBreakdown } from "user/analytics/search/AdSetBreakdown";
 import { MetricsList } from "user/analytics/search/MetricsList";
 import { OverTimeGraph } from "user/analytics/search/OverTimeGraph";
 import { useMetricSelection } from "user/analytics/search/hooks";
+import { ReportMenu } from "user/reporting/ReportMenu";
 
 interface Props {
   campaignSummary: CampaignSummaryFragment;
@@ -18,9 +23,21 @@ interface Props {
 export function SearchCampaignReportView({ campaignSummary }: Props) {
   const { forceDefaultMetricSelection } = useMetricSelection();
   const [isFirstLoad, setIsFirstLoad] = useState(true);
+
+  const [startDate, setStartDate] = useState<Date>(
+    parseISO(campaignSummary.startAt),
+  );
+  const [endDate, setEndDate] = useState<Date>(endOfToday());
+
+  const filter: PerformanceFilter = {
+    campaignIds: [campaignSummary.id],
+    from: startDate.toISOString(),
+    to: endDate.toISOString(),
+  };
+
   const { data, error } = useFetchDailyMetricsForCampaignQuery({
     variables: {
-      campaignId: campaignSummary.id,
+      filter,
     },
   });
 
@@ -40,7 +57,34 @@ export function SearchCampaignReportView({ campaignSummary }: Props) {
 
   return (
     <>
-      <DashboardButton />
+      <Box
+        width="100%"
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        mb={2}
+      >
+        <DashboardButton />
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="flex-end"
+          marginLeft="auto"
+          gap="5px"
+        >
+          <DateRangePicker
+            from={startDate}
+            to={endDate}
+            onFromChange={setStartDate}
+            onToChange={setEndDate}
+          />
+
+          <ReportMenu
+            hasVerifiedConversions={false}
+            campaignId={campaignSummary.id}
+          />
+        </Box>
+      </Box>
 
       <Box
         // these control the layout of this elements contained within this box
@@ -61,7 +105,15 @@ export function SearchCampaignReportView({ campaignSummary }: Props) {
         `,
         }}
       >
-        <Box height="500px" gridArea="graph">
+        <Box gridArea="graph" bgcolor="white">
+          <Stack direction="row" spacing={2} p={2} alignItems="center">
+            <Typography variant="h2">{campaignSummary.name}</Typography>
+            <Status
+              state={campaignSummary.state}
+              start={campaignSummary.startAt}
+              end={campaignSummary.endAt}
+            />
+          </Stack>
           <OverTimeGraph dataSource={data?.performance?.values} />
         </Box>
 
@@ -74,7 +126,7 @@ export function SearchCampaignReportView({ campaignSummary }: Props) {
       </Box>
 
       <CardContainer header={<Trans>AdSets</Trans>}>
-        <AdSetBreakdown campaignSummary={campaignSummary} />
+        <AdSetBreakdown campaignSummary={campaignSummary} filter={filter} />
       </CardContainer>
     </>
   );
