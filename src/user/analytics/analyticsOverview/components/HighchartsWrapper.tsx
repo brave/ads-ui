@@ -2,6 +2,17 @@ import { Box, BoxProps } from "@mui/material";
 import Highcharts from "highcharts";
 import { HighchartsReact } from "highcharts-react-official";
 
+Highcharts.setOptions({
+  lang: {
+    thousandsSep: ",",
+  },
+  chart: {
+    style: {
+      fontFamily: "Mulish, Helvetica, Arial, sans-serif",
+    },
+  },
+});
+
 type Props = BoxProps & {
   options: Highcharts.Options;
 };

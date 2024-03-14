@@ -60,13 +60,85 @@ query analyticOverview($id: String!) {
   }
 }
 
-query engagementOverview($advertiserId: String!, $filter: CampaignFilter) {
-  engagementsOverview(advertiserId: $advertiserId, filter: $filter) {
-    date
-    click
-    view
-    landed
-    spend
-    campaignId
+fragment CampaignMetricSummaryValues on Metrics {
+  click
+  impression
+  siteVisit
+  spendUsd
+  rates {
+    clickThrough
+  }
+}
+
+query campaignMetrics($campaignIds: [String!]!) {
+  performance(filter: { campaignIds: $campaignIds }) {
+    values {
+      dimensions {
+        campaign {
+          id
+        }
+      }
+      metrics {
+        ...CampaignMetricSummaryValues
+      }
+    }
+  }
+}
+
+fragment CampaignMetricDetailValues on Metrics {
+  click
+  impression
+  siteVisit
+  conversion
+  dismiss
+  spendUsd
+  rates {
+    clickThrough
+    clickToConversion
+    costPerAcquisition
+  }
+}
+
+fragment DailyValues on Performance {
+  dimensions {
+    day
+  }
+  metrics {
+    ...CampaignMetricDetailValues
+  }
+}
+
+query fetchDailyMetricsForCampaign($filter: PerformanceFilter!) {
+  performance(filter: $filter) {
+    values {
+      ...DailyValues
+    }
+    total {
+      metrics {
+        ...CampaignMetricDetailValues
+      }
+    }
+  }
+}
+
+fragment AdSetValues on Performance {
+  dimensions {
+    adSet {
+      id
+      name
+      state
+      billingType
+    }
+  }
+  metrics {
+    ...CampaignMetricDetailValues
+  }
+}
+
+query fetchAdSetMetricsForCampaign($filter: PerformanceFilter!) {
+  performance(filter: $filter) {
+    values {
+      ...AdSetValues
+    }
   }
 }

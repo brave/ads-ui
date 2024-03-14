@@ -209,6 +209,8 @@ export type CreateAdvertiserInput = {
   billingAddress?: InputMaybe<CreateAddressInput>;
   billingEmail?: InputMaybe<Scalars["String"]["input"]>;
   billingModelPrices?: InputMaybe<Array<AdvertiserPriceInput>>;
+  description?: InputMaybe<Scalars["String"]["input"]>;
+  marketingChannel?: InputMaybe<Scalars["String"]["input"]>;
   name: Scalars["String"]["input"];
   phone?: InputMaybe<Scalars["String"]["input"]>;
   referrer?: InputMaybe<Scalars["String"]["input"]>;
@@ -428,14 +430,6 @@ export type RejectCampaignInput = {
   option: CampaignRejection;
 };
 
-export enum RequestedDimensions {
-  Ad = "AD",
-  AdSet = "AD_SET",
-  Campaign = "CAMPAIGN",
-  Day = "DAY",
-  Os = "OS",
-}
-
 export type SearchHomepagePayloadInput = {
   body: Scalars["String"]["input"];
   ctaText?: Scalars["String"]["input"];
@@ -512,7 +506,9 @@ export type UpdateAdvertiserInput = {
   billingAddress?: InputMaybe<UpdateAddressInput>;
   billingEmail?: InputMaybe<Scalars["String"]["input"]>;
   billingModelPrices?: InputMaybe<Array<AdvertiserPriceInput>>;
+  description?: InputMaybe<Scalars["String"]["input"]>;
   id: Scalars["String"]["input"];
+  marketingChannel?: InputMaybe<Scalars["String"]["input"]>;
   name?: InputMaybe<Scalars["String"]["input"]>;
   phone?: InputMaybe<Scalars["String"]["input"]>;
   publicKey?: InputMaybe<Scalars["String"]["input"]>;
