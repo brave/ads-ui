@@ -11,5 +11,11 @@
     "schedule:weekends"
   ],
   "labels": ["dependencies"],
-  "postUpdateOptions": ["npmDedupe"]
+  "postUpdateOptions": ["npmDedupe"],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["major"],
+      "enabled": true
+    }
+  ]
 }
