@@ -49,7 +49,6 @@ export function SearchCampaignReportView({ campaignSummary }: Props) {
         display="grid"
         gap={1}
         gridTemplateColumns={{ xs: "1fr", md: "300px 1fr", lg: "350px 1fr" }}
-        //gridTemplateRows={{ xs: "auto", md: "500px" }}
         gridTemplateAreas={{
           xs: `
         "graph"
