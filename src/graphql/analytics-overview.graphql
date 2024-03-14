@@ -120,3 +120,25 @@ query fetchDailyMetricsForCampaign($campaignId: String!) {
     }
   }
 }
+
+fragment AdSetValues on Performance {
+  dimensions {
+    adSet {
+      id
+      name
+      state
+      billingType
+    }
+  }
+  metrics {
+    ...CampaignMetricDetailValues
+  }
+}
+
+query fetchAdSetMetricsForCampaign($campaignId: String!) {
+  performance(filter: { campaignIds: [$campaignId] }) {
+    values {
+      ...AdSetValues
+    }
+  }
+}

@@ -33,7 +33,32 @@ const buildApolloClient = () => {
 
   return new ApolloClient({
     link: httpLink,
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+      typePolicies: {
+        // these are not normal objects identifed by an id, so don't try to cache them as such
+        // see https://www.apollographql.com/docs/react/caching/cache-configuration#disabling-normalization
+        PerformanceResults: {
+          keyFields: false,
+        },
+        Performance: {
+          keyFields: false,
+        },
+        Dimensions: {
+          keyFields: false,
+        },
+        Metrics: {
+          keyFields: false,
+        },
+        MetricRates: {
+          keyFields: false,
+        },
+
+        // and these have special keys
+        OS: {
+          keyFields: ["name"],
+        },
+      },
+    }),
     connectToDevTools: true,
   });
 };

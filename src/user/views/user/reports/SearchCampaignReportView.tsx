@@ -1,10 +1,12 @@
-import { msg } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { Box } from "@mui/material";
 import { DashboardButton } from "components/Button/DashboardButton";
+import { CardContainer } from "components/Card/CardContainer";
 import { ErrorDetail } from "components/Error/ErrorDetail";
 import { useFetchDailyMetricsForCampaignQuery } from "graphql/analytics-overview.generated";
 import { CampaignSummaryFragment } from "graphql/campaign.generated";
 import { useState } from "react";
+import { AdSetBreakdown } from "user/analytics/search/AdSetBreakdown";
 import { MetricsList } from "user/analytics/search/MetricsList";
 import { OverTimeGraph } from "user/analytics/search/OverTimeGraph";
 import { useMetricSelection } from "user/analytics/search/hooks";
@@ -41,7 +43,7 @@ export function SearchCampaignReportView({ campaignSummary }: Props) {
       <DashboardButton />
 
       <Box
-        // and these control the layout of this elements contained within this box
+        // these control the layout of this elements contained within this box
         //  see https://css-tricks.com/snippets/css/complete-guide-grid/
         // on small screens the grid will have a single column, so the metrics are listed below
         // the graph. On larger screens the metrics are in a column to the right of the graph
@@ -59,7 +61,7 @@ export function SearchCampaignReportView({ campaignSummary }: Props) {
         `,
         }}
       >
-        <Box height="500px" gridArea="graph" bgcolor="pink">
+        <Box height="500px" gridArea="graph">
           <OverTimeGraph dataSource={data?.performance?.values} />
         </Box>
 
@@ -70,6 +72,10 @@ export function SearchCampaignReportView({ campaignSummary }: Props) {
           />
         </Box>
       </Box>
+
+      <CardContainer header={<Trans>AdSets</Trans>}>
+        <AdSetBreakdown campaignSummary={campaignSummary} />
+      </CardContainer>
     </>
   );
 }
