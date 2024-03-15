@@ -122,6 +122,7 @@ export function CreativeList() {
             rowHeight={60}
             slots={{ toolbar: CustomToolbar }}
             sx={{ borderStyle: "none" }}
+            pageSizeOptions={[10, 25, 50]}
             initialState={{
               sorting: {
                 sortModel: [{ field: "createdAt", sort: "desc" }],
