@@ -35,7 +35,7 @@ export function OriginalCampaignReportView({ campaignSummary }: Props) {
     },
     onCompleted(d) {
       if (d.campaign) {
-        setStartDate(dayjs().utc(d.campaign.startAt));
+        setStartDate(dayjs.utc(d.campaign.startAt));
 
         const end = dayjs.utc(d.campaign.endAt);
         if (end.isBefore(today)) {
