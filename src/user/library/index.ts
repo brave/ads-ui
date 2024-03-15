@@ -17,8 +17,8 @@ import {
 import _ from "lodash";
 import BigNumber from "bignumber.js";
 import { CreativeFragment } from "graphql/creative.generated";
-import moment from "moment";
 import { t } from "@lingui/macro";
+import dayjs from "dayjs";
 
 export function transformNewForm(
   form: CampaignForm,
@@ -79,7 +79,7 @@ export function editCampaignValues(
   advertiserId: string,
 ): CampaignForm {
   const sort = (a: AdSetFragment, b: AdSetFragment) =>
-    moment(a.createdAt).valueOf() - moment(b.createdAt).valueOf();
+    dayjs(a.createdAt).valueOf() - dayjs(b.createdAt).valueOf();
   const ads: AdFragment[] = _.flatMap(campaign.adSets, "ads");
 
   const billingType = (_.head(campaign.adSets)?.billingType ??

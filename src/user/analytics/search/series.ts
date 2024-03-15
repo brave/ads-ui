@@ -1,22 +1,22 @@
 import { MetricDefinition } from "./metrics";
 import { SeriesSplineOptions, SeriesTooltipOptionsObject } from "highcharts";
-import moment from "moment";
 import BigNumber from "bignumber.js";
 import { DailyValuesFragment } from "graphql/analytics-overview.generated";
 import { i18n } from "@lingui/core";
+import dayjs from "dayjs";
 
 function populateZeroValues(data: [number, number][]): [number, number][] {
   if (data.length === 0) {
-    return [[moment().utc().startOf("day").valueOf(), 0]];
+    return [[dayjs().utc().startOf("day").valueOf(), 0]];
   }
 
-  const start = moment.utc(data[0][0]);
-  const end = moment.utc(data[data.length - 1][0]);
+  const start = dayjs.utc(data[0][0]);
+  const end = dayjs.utc(data[data.length - 1][0]);
   const result: [number, number][] = [];
   let current = start;
   let dataIndex = 0;
   while (!current.isAfter(end)) {
-    if (data[dataIndex] && current.isSame(moment.utc(data[dataIndex][0]))) {
+    if (data[dataIndex] && current.isSame(dayjs.utc(data[dataIndex][0]))) {
       result.push(data[dataIndex]);
       dataIndex++;
     } else {
@@ -61,7 +61,7 @@ export function makeLineChartSeries(
     yAxis: metric.type,
     data: populateZeroValues(
       data.map((point) => [
-        moment.utc(point.dimensions.day).valueOf(),
+        dayjs.utc(point.dimensions.day).valueOf(),
         metric.getValue(point.metrics).multipliedBy(scalingFactor).toNumber(),
       ]),
     ),

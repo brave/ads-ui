@@ -1,9 +1,9 @@
 import { FormControlLabel, Switch, Typography } from "@mui/material";
 import _ from "lodash";
-import moment from "moment";
 import { useContext } from "react";
 import { FilterContext } from "state/context";
 import { Trans } from "@lingui/macro";
+import dayjs from "dayjs";
 
 interface Props {
   disabled?: boolean;
@@ -13,7 +13,7 @@ export const CampaignAgeFilter = ({ disabled }: Props) => {
   const { fromDate, setFromDate } = useContext(FilterContext);
   const onOldCampaignToggle = (showOld: boolean) => {
     setFromDate(
-      showOld ? null : moment().subtract(6, "month").startOf("day").toDate(),
+      showOld ? null : dayjs().subtract(6, "month").startOf("day").toDate(),
     );
   };
 
