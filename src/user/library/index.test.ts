@@ -295,9 +295,9 @@ describe("new form tests", () => {
 
 describe("edit form tests", () => {
   const creative: CreativeFragment = {
-    createdAt: undefined,
+    createdAt: "2023-01-01",
     id: "1234",
-    modifiedAt: undefined,
+    modifiedAt: "2024-01-01",
     name: "a creative",
     state: "active",
     payloadNotification: {

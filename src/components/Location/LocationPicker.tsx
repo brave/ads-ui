@@ -13,7 +13,7 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 export const LocationPicker = () => {
   const { data } = useActiveGeocodesQuery();
-  const sorted = _.sortBy(data?.activeGeocodes?.data ?? [], "code");
+  const sorted = _.sortBy(data?.geocodes ?? [], "code");
   const [formProps, meta, helper] = useField<GeocodeInput[]>("geoTargets");
   const errorMessage = meta.error;
   const { _: lingui } = useLingui();

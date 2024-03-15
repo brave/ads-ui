@@ -1,12 +1,12 @@
-import * as Types from "./types";
+import type * as Types from "./types";
 
 import { gql } from "@apollo/client";
 import * as Apollo from "@apollo/client";
 const defaultOptions = {} as const;
 export type CreativeFragment = {
   id: string;
-  createdAt: any;
-  modifiedAt: any;
+  createdAt: string;
+  modifiedAt: string;
   name: string;
   state: string;
   type: { code: string };
@@ -55,8 +55,8 @@ export type AdvertiserCreativesQuery = {
     id: string;
     creatives: Array<{
       id: string;
-      createdAt: any;
-      modifiedAt: any;
+      createdAt: string;
+      modifiedAt: string;
       name: string;
       state: string;
       type: { code: string };
@@ -105,8 +105,8 @@ export type CreateCreativeMutationVariables = Types.Exact<{
 export type CreateCreativeMutation = {
   createCreative: {
     id: string;
-    createdAt: any;
-    modifiedAt: any;
+    createdAt: string;
+    modifiedAt: string;
     name: string;
     state: string;
     type: { code: string };
@@ -155,8 +155,8 @@ export type UpdateCreativeMutationVariables = Types.Exact<{
 export type UpdateCreativeMutation = {
   updateCreative: {
     id: string;
-    createdAt: any;
-    modifiedAt: any;
+    createdAt: string;
+    modifiedAt: string;
     name: string;
     state: string;
     type: { code: string };
@@ -204,8 +204,8 @@ export type LoadCreativeQueryVariables = Types.Exact<{
 export type LoadCreativeQuery = {
   creative?: {
     id: string;
-    createdAt: any;
-    modifiedAt: any;
+    createdAt: string;
+    modifiedAt: string;
     name: string;
     state: string;
     type: { code: string };

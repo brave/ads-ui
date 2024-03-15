@@ -1,11 +1,11 @@
-import * as Types from "./types";
+import type * as Types from "./types";
 
 import { gql } from "@apollo/client";
 import * as Apollo from "@apollo/client";
 const defaultOptions = {} as const;
 export type EngagementFragment = {
   creativeinstanceid: string;
-  createdat: any;
+  createdat: string;
   type: string;
   pricetype: string;
   creativesetname?: string | null;
@@ -39,9 +39,9 @@ export type CampaignWithEngagementsFragment = {
   budget: number;
   spent: number;
   currency: string;
-  createdAt: any;
-  startAt: any;
-  endAt: any;
+  createdAt: string;
+  startAt: string;
+  endAt: string;
   pacingIndex?: number | null;
   format: Types.CampaignFormat;
   adSets: Array<{
@@ -54,7 +54,7 @@ export type CampaignWithEngagementsFragment = {
   }>;
   engagements: Array<{
     creativeinstanceid: string;
-    createdat: any;
+    createdat: string;
     type: string;
     pricetype: string;
     creativesetname?: string | null;
@@ -94,9 +94,9 @@ export type AnalyticOverviewQuery = {
     budget: number;
     spent: number;
     currency: string;
-    createdAt: any;
-    startAt: any;
-    endAt: any;
+    createdAt: string;
+    startAt: string;
+    endAt: string;
     pacingIndex?: number | null;
     format: Types.CampaignFormat;
     adSets: Array<{
@@ -109,7 +109,7 @@ export type AnalyticOverviewQuery = {
     }>;
     engagements: Array<{
       creativeinstanceid: string;
-      createdat: any;
+      createdat: string;
       type: string;
       pricetype: string;
       creativesetname?: string | null;
@@ -182,7 +182,7 @@ export type CampaignMetricDetailValuesFragment = {
 };
 
 export type DailyValuesFragment = {
-  dimensions: { day?: any | null };
+  dimensions: { day?: string | null };
   metrics: {
     click: string;
     impression: string;
@@ -205,7 +205,7 @@ export type FetchDailyMetricsForCampaignQueryVariables = Types.Exact<{
 export type FetchDailyMetricsForCampaignQuery = {
   performance: {
     values: Array<{
-      dimensions: { day?: any | null };
+      dimensions: { day?: string | null };
       metrics: {
         click: string;
         impression: string;

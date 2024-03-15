@@ -1,4 +1,4 @@
-fragment Geocode on ActiveGeocodesEntry {
+fragment Geocode on Geocode {
   code
   name
 }
@@ -9,10 +9,8 @@ fragment Segment on SegmentsEntry {
 }
 
 query ActiveGeocodes {
-  activeGeocodes {
-    data {
-      ...Geocode
-    }
+  geocodes {
+    ...Geocode
   }
 }
 

@@ -46,7 +46,7 @@ export function CloneCampaign({ campaign, disabled }: Props) {
       {
         ...refetchAdvertiserCampaignsQuery({
           id: advertiser.id,
-          filter: { from: fromDate },
+          filter: { from: fromDate?.toISOString() },
         }),
       },
     ],

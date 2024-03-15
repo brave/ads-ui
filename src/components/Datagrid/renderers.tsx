@@ -89,7 +89,7 @@ export function campaignOnOffState(
       {
         ...refetchAdvertiserCampaignsQuery({
           id: c.advertiserId,
-          filter: { from: fromDate },
+          filter: { from: fromDate?.toISOString() },
         }),
       },
     ],

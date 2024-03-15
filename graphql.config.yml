@@ -1,0 +1,2 @@
+schema: "../ads-serve/src/graphql/schema.graphql"
+documents: "src/**/*.{ts,tsx,graphql}"
