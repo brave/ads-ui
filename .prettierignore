@@ -1,5 +1,6 @@
 node_modules
 build
+src/locales/*.js
 
 # npm and prettier fight over a EOF on these files, let npm win:
 package.json
