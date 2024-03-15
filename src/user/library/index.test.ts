@@ -394,7 +394,7 @@ describe("edit form tests", () => {
             "creatives": [
               {
                 "advertiserId": "12345",
-                "createdAt": undefined,
+                "createdAt": "2023-01-01",
                 "creativeInstanceId": "1",
                 "id": "1234",
                 "included": true,
@@ -413,7 +413,7 @@ describe("edit form tests", () => {
               },
               {
                 "advertiserId": "12345",
-                "createdAt": undefined,
+                "createdAt": "2023-01-01",
                 "creativeInstanceId": "3",
                 "id": "1235",
                 "included": true,
@@ -453,7 +453,7 @@ describe("edit form tests", () => {
             "creatives": [
               {
                 "advertiserId": "12345",
-                "createdAt": undefined,
+                "createdAt": "2023-01-01",
                 "creativeInstanceId": "1",
                 "id": "1234",
                 "included": true,
@@ -472,7 +472,7 @@ describe("edit form tests", () => {
               },
               {
                 "advertiserId": "12345",
-                "createdAt": undefined,
+                "createdAt": "2023-01-01",
                 "creativeInstanceId": undefined,
                 "id": "1235",
                 "included": false,
