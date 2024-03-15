@@ -1,5 +1,5 @@
-import { isFuture, isPast, parseISO } from "date-fns";
+import dayjs from "dayjs";
 
-export const isAfterEndDate = (end: string) => isPast(parseISO(end));
+export const isAfterEndDate = (end: string) => dayjs(end).isAfter();
 
-export const isBeforeStartDate = (start: string) => isFuture(parseISO(start));
+export const isBeforeStartDate = (start: string) => dayjs(start).isBefore();

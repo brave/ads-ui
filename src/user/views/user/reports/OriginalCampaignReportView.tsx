@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useAnalyticOverviewQuery } from "graphql/analytics-overview.generated";
 import { Box } from "@mui/material";
-import moment from "moment";
 import ReportUtils from "user/analytics/analyticsOverview/components/ReportUtils";
 import { EngagementsOverview } from "user/analytics/analyticsOverview/reports/campaign/EngagementsOverview";
 import { CampaignDetails } from "user/views/user/CampaignDetails";
@@ -10,6 +9,7 @@ import { OsOverview } from "user/analytics/analyticsOverview/reports/os/OsOvervi
 import { useLingui } from "@lingui/react";
 import { msg } from "@lingui/macro";
 import { CampaignSummaryFragment } from "graphql/campaign.generated";
+import dayjs, { Dayjs } from "dayjs";
 
 interface Props {
   campaignSummary: CampaignSummaryFragment;
@@ -18,10 +18,10 @@ interface Props {
 export function OriginalCampaignReportView({ campaignSummary }: Props) {
   const { _ } = useLingui();
   const today = new Date();
-  const [startDate, setStartDate] = useState<Date | undefined>();
-  const [endDate, setEndDate] = useState<Date>(today);
+  const [startDate, setStartDate] = useState<Dayjs | undefined>();
+  const [endDate, setEndDate] = useState<Dayjs>(dayjs());
 
-  const setDateRange = (d: Date, type: "start" | "end") => {
+  const setDateRange = (d: Dayjs, type: "start" | "end") => {
     if (type === "start") {
       setStartDate(d);
     } else if (type === "end") {
@@ -35,12 +35,11 @@ export function OriginalCampaignReportView({ campaignSummary }: Props) {
     },
     onCompleted(d) {
       if (d.campaign) {
-        setStartDate(d.campaign.startAt);
+        setStartDate(dayjs().utc(d.campaign.startAt));
 
-        const end = new Date(d.campaign.endAt);
-        if (end.getTime() < today.getTime()) {
-          end.setDate(end.getDate() + 2);
-          setEndDate(end);
+        const end = dayjs.utc(d.campaign.endAt);
+        if (end.isBefore(today)) {
+          setEndDate(end.add(2, "day"));
         }
       }
     },
@@ -50,8 +49,8 @@ export function OriginalCampaignReportView({ campaignSummary }: Props) {
 
   const filteredEngagements = (data?.campaign?.engagements ?? []).filter(
     (engagement) =>
-      moment(engagement.createdat) >= moment.utc(startDate).startOf("day") &&
-      moment(engagement.createdat) <= moment.utc(endDate).endOf("day"),
+      dayjs(engagement.createdat) >= dayjs.utc(startDate).startOf("day") &&
+      dayjs(engagement.createdat) <= dayjs.utc(endDate).endOf("day"),
   );
 
   const isLoading = loading || !data || !data.campaign || !startDate;

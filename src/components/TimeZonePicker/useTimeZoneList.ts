@@ -1,5 +1,6 @@
 import { useMemo } from "react";
-import { getTimezoneOffset } from "date-fns-tz";
+import dayjs from "dayjs";
+
 import _ from "lodash";
 
 interface TimeZoneInfo {
@@ -102,8 +103,7 @@ export function useTimeZoneList(): TimeZoneInfo[] {
       _(allTimezones)
         .entries()
         .map(([k, v]) => {
-          const offsetMs = getTimezoneOffset(k);
-          const offsetMins = offsetMs / 1000 / 60;
+          const offsetMins = dayjs().tz(k).utcOffset();
           const hr =
             `${(offsetMins / 60) ^ 0}:` +
             (offsetMins % 60 === 0 ? "00" : Math.abs(offsetMins % 60));
@@ -111,7 +111,7 @@ export function useTimeZoneList(): TimeZoneInfo[] {
           return {
             caption,
             ianaName: k,
-            offsetMs,
+            offsetMs: offsetMins * 60 * 1000,
             isBrowserTz: k === usersTimeZone,
           };
         })

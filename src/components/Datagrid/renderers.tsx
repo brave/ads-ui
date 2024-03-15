@@ -1,9 +1,6 @@
 import { Box, Tooltip } from "@mui/material";
 import _ from "lodash";
-import { format, formatDistanceToNow, parseISO } from "date-fns";
 import { ReactElement, ReactNode, useContext } from "react";
-import { formatInTimeZone } from "date-fns-tz";
-import enUS from "date-fns/locale/en-US";
 import {
   CampaignSummaryFragment,
   refetchLoadCampaignAdsQuery,
@@ -20,28 +17,21 @@ import { UpdateAdSetInput } from "graphql/types";
 import { toLocaleString } from "util/bignumber";
 import BigNumber from "bignumber.js";
 import { Trans } from "@lingui/macro";
+import dayjs from "dayjs";
 
 export type CellValueRenderer = (value: any) => ReactNode;
 const ADS_DEFAULT_TIMEZONE = "America/New_York";
-const TOOLTIP_FORMAT = "E d LLL yyyy HH:mm:ss zzz";
+const TOOLTIP_FORMAT = "ddd D MMM YYYY HH:mm:ss z";
 
-function formatDateForTooltip(dt: Date): ReactElement {
+function formatDateForTooltip(d: dayjs.Dayjs): ReactElement {
   return (
     <>
-      <Box>
-        {formatInTimeZone(dt, ADS_DEFAULT_TIMEZONE, TOOLTIP_FORMAT, {
-          locale: enUS,
-        })}
-      </Box>
-      <Box>
-        {formatInTimeZone(dt, "Etc/UTC", TOOLTIP_FORMAT, {
-          locale: enUS,
-        })}
-      </Box>
+      <Box>{d.tz(ADS_DEFAULT_TIMEZONE).format(TOOLTIP_FORMAT)}</Box>
+      <Box>{d.utc().format(TOOLTIP_FORMAT)}</Box>
       <Box mt={1}>
         <Trans>In your local time this is</Trans>
         <br />
-        {format(dt, TOOLTIP_FORMAT, { locale: enUS })}
+        {d.format(TOOLTIP_FORMAT)}
       </Box>
     </>
   );
@@ -51,12 +41,10 @@ export const StandardRenderers: Record<string, CellValueRenderer> = {
   string: (v) => <Box>{v}</Box>,
   relativeDate: (v) => {
     if (_.isString(v)) {
-      const d = parseISO(v);
+      const d = dayjs(v);
       return (
         <Tooltip title={formatDateForTooltip(d)}>
-          <Box whiteSpace="nowrap">
-            {formatDistanceToNow(d, { addSuffix: true })}
-          </Box>
+          <Box whiteSpace="nowrap">{d.fromNow()}</Box>
         </Tooltip>
       );
     }
@@ -65,11 +53,11 @@ export const StandardRenderers: Record<string, CellValueRenderer> = {
   },
   date: (v) => {
     if (_.isString(v)) {
-      const d = parseISO(v);
+      const d = dayjs(v);
       return (
         <Tooltip title={formatDateForTooltip(d)}>
           <Box whiteSpace="nowrap">
-            {formatInTimeZone(d, ADS_DEFAULT_TIMEZONE, "PP")}
+            {d.tz(ADS_DEFAULT_TIMEZONE).format("ll")}
           </Box>
         </Tooltip>
       );

@@ -4,10 +4,11 @@ import { DashboardButton } from "components/Button/DashboardButton";
 import { CampaignFormat } from "graphql/types";
 import _ from "lodash";
 import { ReportMenu } from "user/reporting/ReportMenu";
+import { Dayjs } from "dayjs";
 
 interface DownloaderProps {
-  startDate: Date | undefined;
-  endDate: Date;
+  startDate: Dayjs | undefined;
+  endDate: Dayjs;
   campaign: {
     id: string;
     name: string;
@@ -18,7 +19,7 @@ interface DownloaderProps {
         }[]
       | null;
   };
-  onSetDate: (val: Date, type: "start" | "end") => void;
+  onSetDate: (val: Dayjs, type: "start" | "end") => void;
 }
 
 export default function ReportUtils({
