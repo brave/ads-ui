@@ -1,4 +1,4 @@
-import * as Types from "./types";
+import type * as Types from "./types";
 
 import { gql } from "@apollo/client";
 import { CampaignSummaryFragmentDoc } from "./campaign.generated";
@@ -10,8 +10,8 @@ export type AdvertiserSummaryFragment = {
   state: string;
   billingEmail?: string | null;
   additionalBillingEmails?: Array<string> | null;
-  createdAt: any;
-  modifiedAt: any;
+  createdAt: string;
+  modifiedAt: string;
   publicKey?: string | null;
 };
 
@@ -37,8 +37,8 @@ export type AdvertiserFragment = {
   state: string;
   billingEmail?: string | null;
   additionalBillingEmails?: Array<string> | null;
-  createdAt: any;
-  modifiedAt: any;
+  createdAt: string;
+  modifiedAt: string;
   publicKey?: string | null;
 };
 
@@ -77,9 +77,9 @@ export type AdvertiserCampaignsFragment = {
     budget: number;
     paymentType: Types.PaymentType;
     spent: number;
-    createdAt: any;
-    startAt: any;
-    endAt: any;
+    createdAt: string;
+    startAt: string;
+    endAt: string;
     source: Types.CampaignSource;
     type: Types.CampaignType;
     format: Types.CampaignFormat;
@@ -112,9 +112,9 @@ export type AdvertiserCampaignsQuery = {
       budget: number;
       paymentType: Types.PaymentType;
       spent: number;
-      createdAt: any;
-      startAt: any;
-      endAt: any;
+      createdAt: string;
+      startAt: string;
+      endAt: string;
       source: Types.CampaignSource;
       type: Types.CampaignType;
       format: Types.CampaignFormat;
@@ -128,7 +128,7 @@ export type AdvertiserImageFragment = {
   imageUrl: string;
   format: Types.CampaignFormat;
   id: string;
-  createdAt: any;
+  createdAt: string;
 };
 
 export type AdvertiserPriceFragment = {
@@ -148,7 +148,7 @@ export type AdvertiserImagesQuery = {
       imageUrl: string;
       format: Types.CampaignFormat;
       id: string;
-      createdAt: any;
+      createdAt: string;
     }>;
   } | null;
 };

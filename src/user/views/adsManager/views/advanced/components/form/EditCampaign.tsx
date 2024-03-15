@@ -67,7 +67,7 @@ export function EditCampaign() {
       {
         ...refetchAdvertiserCampaignsQuery({
           id: data.id,
-          filter: { from: fromDate },
+          filter: { from: fromDate?.toISOString() },
         }),
       },
     ],

@@ -5,8 +5,15 @@ const config: CodegenConfig = {
   documents: "./src/**/*.graphql",
   hooks: { afterAllFileWrite: ["prettier --write"] },
   config: {
+    strictScalars: true,
+    useTypeImports: true,
     scalars: {
-      Numeric: "string",
+      DateTime: "string",
+      Numeric: {
+        input: "string | number",
+        output: "string",
+      },
+      JSONObject: "object",
     },
   },
   generates: {
@@ -22,14 +29,6 @@ const config: CodegenConfig = {
     "src/graphql/types.ts": {
       plugins: ["typescript"],
       config: { onlyOperationTypes: true },
-    },
-    "src/gql/ads-ui-types.json": {
-      // Nicety for fragment autocompletion, don't need to check in
-      plugins: ["introspection"],
-      config: {
-        minify: true,
-        descriptions: false,
-      },
     },
   },
 };
