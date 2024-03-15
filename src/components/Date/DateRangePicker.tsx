@@ -1,15 +1,16 @@
 import { Stack, TextField } from "@mui/material";
 import { Dispatch } from "react";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useLingui } from "@lingui/react";
 import { msg } from "@lingui/macro";
+import { Dayjs } from "dayjs";
 
 interface Props {
-  from: Date;
-  to: Date;
-  onFromChange: Dispatch<Date>;
-  onToChange: Dispatch<Date>;
+  from: Dayjs | null;
+  to: Dayjs | null;
+  onFromChange: Dispatch<Dayjs>;
+  onToChange: Dispatch<Dayjs>;
 }
 
 export const DateRangePicker = ({
@@ -21,7 +22,7 @@ export const DateRangePicker = ({
   const { _ } = useLingui();
 
   return (
-    <LocalizationProvider dateAdapter={AdapterMoment}>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Stack direction="row" spacing={1} margin={1}>
         <DatePicker
           label={_(msg`From`)}

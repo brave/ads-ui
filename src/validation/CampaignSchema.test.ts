@@ -1,9 +1,9 @@
-import { parseISO } from "date-fns";
 import { produce } from "immer";
 import { CampaignFormat, CampaignPacingStrategies } from "graphql/types";
 import { CampaignSchema } from "./CampaignSchema";
 import { describe } from "vitest";
 import { AdvertiserPrice } from "user/hooks/useAdvertiserWithPrices";
+import dayjs from "dayjs";
 
 const prices: AdvertiserPrice[] = [
   {
@@ -40,8 +40,8 @@ const validCampaign = {
   billingType: "cpm",
   price: "6",
   dailyCap: 1,
-  startAt: parseISO("2030-07-18"),
-  endAt: parseISO("2030-07-20"),
+  startAt: dayjs("2030-07-18").toDate(),
+  endAt: dayjs("2030-07-20").toDate(),
   format: CampaignFormat.PushNotification,
   geoTargets: [{ code: "a", name: "USA" }],
   state: "any",
@@ -56,7 +56,7 @@ it("should pass on a valid object", () => {
 
 it("should fail if the campaign start date is in past", () => {
   const nextState = produce(validCampaign, (draft) => {
-    draft.startAt = parseISO("2020-07-18");
+    draft.startAt = dayjs("2020-07-18").toDate();
   });
 
   expect(() =>

@@ -1,5 +1,4 @@
 import _ from "lodash";
-import moment from "moment";
 import Highcharts, { Options } from "highcharts";
 import {
   BaseMetric,
@@ -10,6 +9,7 @@ import {
 import { EngagementFragment } from "graphql/analytics-overview.generated";
 import BigNumber from "bignumber.js";
 import { t } from "@lingui/macro";
+import dayjs from "dayjs";
 
 type MetricDataSet = {
   metric1DataSet: number[][];
@@ -268,7 +268,7 @@ export const processData = (
 ) => {
   // Group data by user setting
   const groupedData = _.groupBy(engagements, function (engagement) {
-    return moment
+    return dayjs
       .utc(engagement.createdat)
       .startOf(mapGroupingName(grouping))
       .toISOString();
@@ -283,7 +283,7 @@ export const processData = (
   const metric4DataSet: number[][] = [];
 
   for (const key in groupedData) {
-    const date = moment(key).valueOf();
+    const date = dayjs(key).valueOf();
     const data = groupedData[key];
     const processed = processStats(data);
     if (!processed) {

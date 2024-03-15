@@ -9,7 +9,6 @@ import {
   string,
   StringSchema,
 } from "yup";
-import { differenceInHours, startOfDay } from "date-fns";
 import { twoDaysOut } from "form/DateFieldHelpers";
 import {
   HttpsRegex,
@@ -24,6 +23,7 @@ import { AdvertiserPrice } from "user/hooks/useAdvertiserWithPrices";
 import { Billing } from "user/views/adsManager/types";
 import { uiLabelsForCampaignFormat } from "util/campaign";
 import { t } from "@lingui/macro";
+import dayjs from "dayjs";
 
 export const MIN_PER_DAY = 33;
 export const MIN_PER_CAMPAIGN = 500;
@@ -41,9 +41,7 @@ export const CampaignSchema = (prices: AdvertiserPrice[]) =>
         t`Lifetime budget must be $${MIN_PER_CAMPAIGN} or more`,
       )
       .when(["startAt", "endAt"], ([startAt, endAt], schema) => {
-        const campaignRuntime = Math.floor(
-          differenceInHours(new Date(endAt), new Date(startAt)) / 24,
-        );
+        const campaignRuntime = dayjs(endAt).diff(dayjs(startAt), "day");
         const hasRuntime = campaignRuntime > 0;
 
         const min = BigNumber(MIN_PER_DAY).times(campaignRuntime);
@@ -66,7 +64,7 @@ export const CampaignSchema = (prices: AdvertiserPrice[]) =>
       then: (schema) =>
         schema
           .min(
-            startOfDay(twoDaysOut()),
+            twoDaysOut().startOf("day"),
             t`Start Date must be minimum of 2 days from today`,
           )
           .required(t`Start Date is required`),

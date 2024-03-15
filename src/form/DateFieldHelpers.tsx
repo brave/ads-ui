@@ -1,30 +1,11 @@
-import { utcToZonedTime, zonedTimeToUtc } from "date-fns-tz";
-import { addDays, endOfDay, formatISO, startOfDay } from "date-fns";
+import dayjs, { Dayjs } from "dayjs";
 
-export const defaultStartDate = () =>
-  formatISO(
-    addDays(
-      zonedTimeToUtc(
-        startOfDay(utcToZonedTime(twoDaysOut(), "America/New_York")),
-        "America/New_York",
-      ),
-      1,
-    ),
-  );
+const ADS_DEFAULT_TIMEZONE = "America/New_York";
 
-export const defaultEndDate = () =>
-  formatISO(
-    addDays(
-      zonedTimeToUtc(
-        endOfDay(utcToZonedTime(twoDaysOut(), "America/New_York")),
-        "America/New_York",
-      ),
-      1,
-    ),
-  );
+export const defaultStartDate = (): string =>
+  dayjs().tz(ADS_DEFAULT_TIMEZONE).startOf("day").add(3, "days").toISOString();
 
-export const twoDaysOut = () => {
-  const now = new Date();
-  now.setDate(now.getDate() + 2);
-  return now;
-};
+export const defaultEndDate = (): string =>
+  dayjs().tz(ADS_DEFAULT_TIMEZONE).endOf("day").add(3, "days").toISOString();
+
+export const twoDaysOut = (): Dayjs => dayjs().add(2, "day");

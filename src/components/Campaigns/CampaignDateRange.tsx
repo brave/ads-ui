@@ -1,7 +1,6 @@
 import { Box, Stack } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
-import { formatISO, parseISO } from "date-fns";
 import { useField } from "formik";
 import { useState } from "react";
 import { getDefaultTimezone, TimeZonePicker } from "../TimeZonePicker";
@@ -9,6 +8,7 @@ import { TimezoneAwareDatePicker } from "../TimeZonePicker/TimezoneAwareDatePick
 import { useIsEdit } from "form/FormikHelpers";
 import { useLingui } from "@lingui/react";
 import { msg } from "@lingui/macro";
+import dayjs from "dayjs";
 
 export const CampaignDateRange = () => {
   const { isDraft } = useIsEdit();
@@ -23,11 +23,11 @@ export const CampaignDateRange = () => {
         <TimezoneAwareDatePicker
           label={_(msg`Start Date`)}
           tz={tz}
-          value={parseISO(startMeta.value)}
+          value={dayjs(startMeta.value).toDate()}
           error={!!startMeta.error}
           helperText={startMeta.error}
           onChange={async (dt) => {
-            await startHelper.setValue(formatISO(dt));
+            await startHelper.setValue(dt.toISOString());
             await startHelper.setTouched(true);
           }}
           disabled={!isDraft}
@@ -38,11 +38,11 @@ export const CampaignDateRange = () => {
         <TimezoneAwareDatePicker
           label={_(msg`End Date`)}
           tz={tz}
-          value={parseISO(endMeta.value)}
+          value={dayjs(endMeta.value).toDate()}
           error={!!endMeta.error}
           helperText={endMeta.error}
           onChange={async (dt) => {
-            await endHelper.setValue(formatISO(dt));
+            await endHelper.setValue(dt.toISOString());
             await endHelper.setTouched(true);
           }}
         />

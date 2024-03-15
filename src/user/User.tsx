@@ -15,7 +15,6 @@ import { CompletionForm } from "./views/adsManager/views/advanced/components/com
 import { Navbar } from "components/Navigation/Navbar";
 import { CampaignView } from "user/views/user/CampaignView";
 import { Profile } from "user/views/user/Profile";
-import moment from "moment";
 import { FilterContext } from "state/context";
 import { AdvertiserAssets } from "components/Assets/AdvertiserAssets";
 import { CreativeList } from "components/Creatives/CreativeList";
@@ -24,6 +23,7 @@ import { ProtectedRoute } from "components/Route/ProtectedRoute";
 import { AdvertiserDetailsForm } from "auth/components/AdvertiserDetailsForm";
 import { ErrorBoundary } from "ErrorBoundary";
 import { CampaignReportViewSelector } from "./views/user/CampaignReportViewSelector";
+import dayjs from "dayjs";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -66,7 +66,7 @@ const buildApolloClient = () => {
 export function User() {
   const client = useMemo(() => buildApolloClient(), []);
   const [fromDate, setFromDate] = useState<Date | null>(
-    moment().subtract(6, "month").startOf("day").toDate(),
+    dayjs().subtract(6, "month").startOf("day").toDate(),
   );
 
   return (

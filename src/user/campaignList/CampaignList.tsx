@@ -240,6 +240,7 @@ export function CampaignList({ advertiser }: Props) {
       isRowSelectable={(params) =>
         selectedCampaign === undefined || params.id === selectedCampaign
       }
+      pageSizeOptions={[10, 25, 50]}
       initialState={{
         sorting: {
           sortModel: [{ field: "startAt", sort: "desc" }],

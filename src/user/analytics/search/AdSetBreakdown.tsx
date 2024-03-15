@@ -107,6 +107,7 @@ export function AdSetBreakdown({ campaignSummary, filter }: Props) {
       hideFooterSelectedRowCount
       getRowId={(row) => row.dimensions.adSet?.id ?? ""}
       sx={{ borderStyle: "none" }}
+      pageSizeOptions={[10, 20, 50]}
       initialState={{
         sorting: {
           sortModel: [{ field: "spend", sort: "desc" }],
