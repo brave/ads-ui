@@ -21,7 +21,7 @@ export function AlwaysOnFormButton() {
         borderRadius: "10px 10px 0 0",
         position: "absolute",
         bottom: 0,
-        left: "90%",
+        left: "85%",
       }}
       onClick={() =>
         window.open(
