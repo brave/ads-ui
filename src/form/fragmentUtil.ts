@@ -1,7 +1,7 @@
 import { CreateAdSetInput, CreateCampaignInput } from "graphql/types";
-import moment from "moment";
 import { CampaignFragment } from "graphql/campaign.generated";
 import { AdSetFragment } from "graphql/ad-set.generated";
+import dayjs from "dayjs";
 
 export function createCampaignFromFragment(
   data: CampaignFragment,
@@ -11,7 +11,7 @@ export function createCampaignFromFragment(
     createAdSetFromFragment(adSet),
   );
 
-  const two = moment().utc().add(3, "days");
+  const two = dayjs().utc().add(3, "days");
   return {
     userId,
     adSets: adSets && adSets.length > 0 ? adSets : undefined,

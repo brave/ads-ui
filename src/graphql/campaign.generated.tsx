@@ -1,4 +1,4 @@
-import * as Types from "./types";
+import type * as Types from "./types";
 
 import { gql } from "@apollo/client";
 import {
@@ -20,9 +20,9 @@ export type CampaignFragment = {
   currency: string;
   budget: number;
   spent: number;
-  createdAt: any;
-  startAt: any;
-  endAt: any;
+  createdAt: string;
+  startAt: string;
+  endAt: string;
   source: Types.CampaignSource;
   type: Types.CampaignType;
   format: Types.CampaignFormat;
@@ -35,7 +35,7 @@ export type CampaignFragment = {
   adSets: Array<{
     id: string;
     price: string;
-    createdAt: any;
+    createdAt: string;
     billingType?: string | null;
     name: string;
     totalMax: number;
@@ -56,8 +56,8 @@ export type CampaignFragment = {
       priceType: Types.ConfirmationType;
       creative: {
         id: string;
-        createdAt: any;
-        modifiedAt: any;
+        createdAt: string;
+        modifiedAt: string;
         name: string;
         state: string;
         type: { code: string };
@@ -119,9 +119,9 @@ export type CampaignSummaryFragment = {
   budget: number;
   paymentType: Types.PaymentType;
   spent: number;
-  createdAt: any;
-  startAt: any;
-  endAt: any;
+  createdAt: string;
+  startAt: string;
+  endAt: string;
   source: Types.CampaignSource;
   type: Types.CampaignType;
   format: Types.CampaignFormat;
@@ -132,15 +132,15 @@ export type CampaignAdsFragment = {
   id: string;
   name: string;
   state: string;
-  startAt: any;
-  endAt: any;
+  startAt: string;
+  endAt: string;
   source: Types.CampaignSource;
   currency: string;
   format: Types.CampaignFormat;
   advertiser: { id: string };
   adSets: Array<{
     id: string;
-    createdAt: any;
+    createdAt: string;
     name: string;
     state: string;
     billingType?: string | null;
@@ -154,8 +154,8 @@ export type CampaignAdsFragment = {
       priceType: Types.ConfirmationType;
       creative: {
         id: string;
-        createdAt: any;
-        modifiedAt: any;
+        createdAt: string;
+        modifiedAt: string;
         name: string;
         state: string;
         type: { code: string };
@@ -220,9 +220,9 @@ export type LoadCampaignQuery = {
     currency: string;
     budget: number;
     spent: number;
-    createdAt: any;
-    startAt: any;
-    endAt: any;
+    createdAt: string;
+    startAt: string;
+    endAt: string;
     source: Types.CampaignSource;
     type: Types.CampaignType;
     format: Types.CampaignFormat;
@@ -235,7 +235,7 @@ export type LoadCampaignQuery = {
     adSets: Array<{
       id: string;
       price: string;
-      createdAt: any;
+      createdAt: string;
       billingType?: string | null;
       name: string;
       totalMax: number;
@@ -256,8 +256,8 @@ export type LoadCampaignQuery = {
         priceType: Types.ConfirmationType;
         creative: {
           id: string;
-          createdAt: any;
-          modifiedAt: any;
+          createdAt: string;
+          modifiedAt: string;
           name: string;
           state: string;
           type: { code: string };
@@ -315,15 +315,15 @@ export type LoadCampaignAdsQuery = {
     id: string;
     name: string;
     state: string;
-    startAt: any;
-    endAt: any;
+    startAt: string;
+    endAt: string;
     source: Types.CampaignSource;
     currency: string;
     format: Types.CampaignFormat;
     advertiser: { id: string };
     adSets: Array<{
       id: string;
-      createdAt: any;
+      createdAt: string;
       name: string;
       state: string;
       billingType?: string | null;
@@ -337,8 +337,8 @@ export type LoadCampaignAdsQuery = {
         priceType: Types.ConfirmationType;
         creative: {
           id: string;
-          createdAt: any;
-          modifiedAt: any;
+          createdAt: string;
+          modifiedAt: string;
           name: string;
           state: string;
           type: { code: string };
@@ -405,9 +405,9 @@ export type LoadCampaignSummaryQuery = {
     budget: number;
     paymentType: Types.PaymentType;
     spent: number;
-    createdAt: any;
-    startAt: any;
-    endAt: any;
+    createdAt: string;
+    startAt: string;
+    endAt: string;
     source: Types.CampaignSource;
     type: Types.CampaignType;
     format: Types.CampaignFormat;

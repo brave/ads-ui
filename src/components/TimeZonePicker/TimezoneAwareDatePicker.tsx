@@ -1,6 +1,5 @@
 import { Dispatch, useEffect, useState } from "react";
-import { utcToZonedTime, zonedTimeToUtc } from "date-fns-tz";
-import { format, parseISO } from "date-fns";
+import dayjs from "dayjs";
 import { TextField } from "@mui/material";
 
 interface Props {
@@ -17,10 +16,11 @@ interface Props {
 }
 
 const formatDateForInput = (d: Date, tz: string): string =>
-  format(utcToZonedTime(d, tz), "yyyy-MM-dd'T'HH:mm");
+  // eslint-disable-next-line lingui/no-unlocalized-strings
+  dayjs(d).tz(tz).format("YYYY-MM-DDTHH:mm");
 
 const parseDateFromInput = (s: string, tz: string): Date =>
-  zonedTimeToUtc(parseISO(s), tz);
+  dayjs(s).tz(tz, true).toDate();
 
 export const TimezoneAwareDatePicker = ({
   tz,

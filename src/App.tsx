@@ -18,7 +18,6 @@ import { MagicLink } from "auth/views/MagicLink";
 import { Register } from "auth/registration/Register";
 import { LandingPage } from "auth/views/LandingPage";
 import { BraveAdsContactFrame } from "auth/registration/BraveAdsContactFrame";
-import { VERSION } from "util/version";
 import { useMatomo } from "@jonkoops/matomo-tracker-react";
 import { BasicAttentionTokenLandingPage } from "basic-attention-token/BasicAttentionTokenLandingPage";
 import { I18nProvider } from "@lingui/react";
@@ -30,7 +29,6 @@ const Protected = () => {
 };
 
 export function App() {
-  console.log(`current build: ${VERSION.fullHash}`);
   const { enableLinkTracking } = useMatomo();
   const [drafts, setDrafts] = useState<CampaignForm[]>(getAllDrafts());
   const [language, setLanguage] = useState<boolean>();

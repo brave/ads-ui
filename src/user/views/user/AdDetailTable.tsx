@@ -99,6 +99,7 @@ export function AdDetailTable<T extends { id: string }>({
       hideFooterSelectedRowCount
       getRowId={(row) => row.id}
       sx={{ borderStyle: "none" }}
+      pageSizeOptions={[10, 25, 50]}
       initialState={{
         sorting: {
           sortModel: [{ field: "name", sort: "desc" }],

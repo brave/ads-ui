@@ -1,14 +1,14 @@
-import moment from "moment";
+import dayjs, { Dayjs } from "dayjs";
 
-function parseBuildTime(): moment.Moment {
+function parseBuildTime(): Dayjs {
   try {
     if (import.meta.env.REACT_APP_BUILD_TIME) {
-      return moment(import.meta.env.REACT_APP_BUILD_TIME);
+      return dayjs(import.meta.env.REACT_APP_BUILD_TIME);
     }
   } catch {
     // ignore
   }
-  return moment();
+  return dayjs();
 }
 
 export const VERSION = {

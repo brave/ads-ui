@@ -59,6 +59,9 @@ export default defineConfig(({ mode }) => {
       deps: {
         interopDefault: true,
       },
+      // needed so the extensions we've added to dayjs get loaded
+      // in each of the tests, too.
+      setupFiles: ["src/init_dayjs.ts"],
     },
   };
 });

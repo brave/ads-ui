@@ -1,7 +1,6 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { BoxContainer } from "components/Box/BoxContainer";
 import { NotificationPreview } from "components/Creatives/NotificationPreview";
-import moment from "moment";
 import { SelectCreativeHeader } from "components/Creatives/SelectCreativeHeader";
 import { CampaignForm, Creative } from "user/views/adsManager/types";
 import _ from "lodash";
@@ -11,6 +10,7 @@ import { useFormikContext } from "formik";
 import { CampaignFormat } from "graphql/types";
 import { ImagePreview } from "components/Assets/ImagePreview";
 import { Trans } from "@lingui/macro";
+import dayjs from "dayjs";
 
 export function CreativeSelect(
   props: {
@@ -86,7 +86,7 @@ export function CreativeSelect(
                 color={isSelected(co) ? "text.primary" : "rgba(0, 0, 0, 0.3)"}
                 textAlign="right"
               >
-                <Trans>created</Trans> {moment(co.createdAt).fromNow()}
+                <Trans>created</Trans> {dayjs(co.createdAt).fromNow()}
               </Typography>
             )}
           </BoxContainer>

@@ -19,7 +19,7 @@ export function CampaignView() {
   const { loading, data, error } = useAdvertiserCampaignsQuery({
     variables: {
       id: advertiser.id,
-      filter: { from: fromDate },
+      filter: { from: fromDate?.toISOString() },
     },
     pollInterval: 60_000,
     initialFetchPolicy: "cache-and-network",

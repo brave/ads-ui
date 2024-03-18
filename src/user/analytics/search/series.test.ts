@@ -2,8 +2,8 @@ import { getMetricDefinition } from "./metrics";
 import { makeLineChartSeries } from "./series";
 import assert from "node:assert";
 import { DeepPartial } from "@apollo/client/utilities";
-import moment from "moment";
 import { DailyValuesFragment } from "graphql/analytics-overview.generated";
+import dayjs from "dayjs";
 
 it("should populate zero values for missing days in the date range", () => {
   // why? we show a line graph. If there are missing days, the graph will draw the line
@@ -34,9 +34,9 @@ it("should populate zero values for missing days in the date range", () => {
 
   // this should fill in an entry for 2021-01-02Z with a value of 0
   expect(data).toMatchObject([
-    [moment("2021-01-01T00:00:00Z").valueOf(), 1],
-    [moment("2021-01-02T00:00:00Z").valueOf(), 0],
-    [moment("2021-01-03T00:00:00Z").valueOf(), 2],
+    [dayjs("2021-01-01Z").valueOf(), 1],
+    [dayjs("2021-01-02Z").valueOf(), 0],
+    [dayjs("2021-01-03Z").valueOf(), 2],
   ]);
 });
 
@@ -48,5 +48,5 @@ it("should handle empty data", () => {
   assert.ok(impressionsMetricDefinition);
 
   const { data } = makeLineChartSeries(impressionsMetricDefinition, []);
-  expect(data).toMatchObject([[moment().utc().startOf("day").valueOf(), 0]]);
+  expect(data).toMatchObject([[dayjs().utc().startOf("day").valueOf(), 0]]);
 });

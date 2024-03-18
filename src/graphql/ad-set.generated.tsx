@@ -1,4 +1,4 @@
-import * as Types from "./types";
+import type * as Types from "./types";
 
 import { gql } from "@apollo/client";
 import { CreativeFragmentDoc } from "./creative.generated";
@@ -7,7 +7,7 @@ const defaultOptions = {} as const;
 export type AdSetFragment = {
   id: string;
   price: string;
-  createdAt: any;
+  createdAt: string;
   billingType?: string | null;
   name: string;
   totalMax: number;
@@ -28,8 +28,8 @@ export type AdSetFragment = {
     priceType: Types.ConfirmationType;
     creative: {
       id: string;
-      createdAt: any;
-      modifiedAt: any;
+      createdAt: string;
+      modifiedAt: string;
       name: string;
       state: string;
       type: { code: string };
@@ -78,8 +78,8 @@ export type AdFragment = {
   priceType: Types.ConfirmationType;
   creative: {
     id: string;
-    createdAt: any;
-    modifiedAt: any;
+    createdAt: string;
+    modifiedAt: string;
     name: string;
     state: string;
     type: { code: string };
@@ -122,7 +122,7 @@ export type AdFragment = {
 
 export type AdSetWithDeletedAdsFragment = {
   id: string;
-  createdAt: any;
+  createdAt: string;
   name: string;
   state: string;
   billingType?: string | null;
@@ -136,8 +136,8 @@ export type AdSetWithDeletedAdsFragment = {
     priceType: Types.ConfirmationType;
     creative: {
       id: string;
-      createdAt: any;
-      modifiedAt: any;
+      createdAt: string;
+      modifiedAt: string;
       name: string;
       state: string;
       type: { code: string };
@@ -187,7 +187,7 @@ export type CreateAdSetMutation = {
   createAdSet: {
     id: string;
     price: string;
-    createdAt: any;
+    createdAt: string;
     billingType?: string | null;
     name: string;
     totalMax: number;
@@ -208,8 +208,8 @@ export type CreateAdSetMutation = {
       priceType: Types.ConfirmationType;
       creative: {
         id: string;
-        createdAt: any;
-        modifiedAt: any;
+        createdAt: string;
+        modifiedAt: string;
         name: string;
         state: string;
         type: { code: string };
@@ -264,7 +264,7 @@ export type UpdateAdSetMutation = {
   updateAdSet: {
     id: string;
     price: string;
-    createdAt: any;
+    createdAt: string;
     billingType?: string | null;
     name: string;
     totalMax: number;
@@ -285,8 +285,8 @@ export type UpdateAdSetMutation = {
       priceType: Types.ConfirmationType;
       creative: {
         id: string;
-        createdAt: any;
-        modifiedAt: any;
+        createdAt: string;
+        modifiedAt: string;
         name: string;
         state: string;
         type: { code: string };

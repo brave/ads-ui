@@ -9,11 +9,11 @@ import { Grid, LinearProgress, Typography } from "@mui/material";
 import MiniSideBar from "components/Drawer/MiniSideBar";
 import { ImagePreview } from "components/Assets/ImagePreview";
 import { CampaignFormat } from "graphql/types";
-import moment from "moment/moment";
 import { RouteSelectionButton } from "components/Route/RouteSelectionButton";
 import Box from "@mui/material/Box";
 import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
 import { msg, Trans } from "@lingui/macro";
+import dayjs from "dayjs";
 
 export function AdvertiserAssets() {
   useTrackMatomoPageView({ documentTitle: "Advertiser Assets" });
@@ -44,8 +44,7 @@ export function AdvertiserAssets() {
           <Grid container spacing={2}>
             {[...(data?.advertiser?.images ?? [])]
               .sort(
-                (a, b) =>
-                  moment(b.createdAt).date() - moment(a.createdAt).date(),
+                (a, b) => dayjs(b.createdAt).date() - dayjs(a.createdAt).date(),
               )
               .map((i, idx) => (
                 <Grid item xs="auto" key={idx}>
@@ -73,7 +72,7 @@ const GalleryItem = (props: { image: AdvertiserImageFragment }) => {
         textAlign="right"
         fontWeight={500}
       >
-        <Trans>created</Trans> {moment(createdAt).fromNow()}
+        <Trans>created</Trans> {dayjs(createdAt).fromNow()}
       </Typography>
     </CardContainer>
   );

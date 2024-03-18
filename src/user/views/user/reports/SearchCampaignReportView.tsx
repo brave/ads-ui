@@ -5,7 +5,6 @@ import { Status } from "components/Campaigns/Status";
 import { CardContainer } from "components/Card/CardContainer";
 import { DateRangePicker } from "components/Date/DateRangePicker";
 import { ErrorDetail } from "components/Error/ErrorDetail";
-import { endOfToday, parseISO } from "date-fns";
 import { useFetchDailyMetricsForCampaignQuery } from "graphql/analytics-overview.generated";
 import { CampaignSummaryFragment } from "graphql/campaign.generated";
 import { PerformanceFilter } from "graphql/types";
@@ -15,6 +14,7 @@ import { MetricsList } from "user/analytics/search/MetricsList";
 import { OverTimeGraph } from "user/analytics/search/OverTimeGraph";
 import { useMetricSelection } from "user/analytics/search/hooks";
 import { ReportMenu } from "user/reporting/ReportMenu";
+import dayjs from "dayjs";
 
 interface Props {
   campaignSummary: CampaignSummaryFragment;
@@ -24,10 +24,8 @@ export function SearchCampaignReportView({ campaignSummary }: Props) {
   const { forceDefaultMetricSelection } = useMetricSelection();
   const [isFirstLoad, setIsFirstLoad] = useState(true);
 
-  const [startDate, setStartDate] = useState<Date>(
-    parseISO(campaignSummary.startAt),
-  );
-  const [endDate, setEndDate] = useState<Date>(endOfToday());
+  const [startDate, setStartDate] = useState(dayjs(campaignSummary.startAt));
+  const [endDate, setEndDate] = useState(dayjs().utc().endOf("day"));
 
   const filter: PerformanceFilter = {
     campaignIds: [campaignSummary.id],

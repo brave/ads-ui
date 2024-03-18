@@ -1,7 +1,7 @@
-import { isPast, parseISO } from "date-fns";
 import { Switch, Tooltip, Typography } from "@mui/material";
 import { CampaignSource } from "graphql/types";
 import { Trans } from "@lingui/macro";
+import dayjs from "dayjs";
 
 interface Props {
   onChange: (s: string) => void;
@@ -22,7 +22,7 @@ export function OnOff({
   source,
   isInline,
 }: Props) {
-  const isAfterEnd = isPast(parseISO(end));
+  const isAfterEnd = dayjs(end).isBefore();
   const enabled =
     source === CampaignSource.SelfServe &&
     (state === "active" || state === "paused") &&

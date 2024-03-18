@@ -1,4 +1,4 @@
-import * as Types from "./types";
+import type * as Types from "./types";
 
 import { gql } from "@apollo/client";
 import * as Apollo from "@apollo/client";
@@ -12,7 +12,7 @@ export type ActiveGeocodesQueryVariables = Types.Exact<{
 }>;
 
 export type ActiveGeocodesQuery = {
-  activeGeocodes: { data: Array<{ code: string; name: string }> };
+  geocodes: Array<{ code: string; name: string }>;
 };
 
 export type SegmentsQueryVariables = Types.Exact<{ [key: string]: never }>;
@@ -22,7 +22,7 @@ export type SegmentsQuery = {
 };
 
 export const GeocodeFragmentDoc = gql`
-  fragment Geocode on ActiveGeocodesEntry {
+  fragment Geocode on Geocode {
     code
     name
   }
@@ -35,10 +35,8 @@ export const SegmentFragmentDoc = gql`
 `;
 export const ActiveGeocodesDocument = gql`
   query ActiveGeocodes {
-    activeGeocodes {
-      data {
-        ...Geocode
-      }
+    geocodes {
+      ...Geocode
     }
   }
   ${GeocodeFragmentDoc}
