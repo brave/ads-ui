@@ -588,8 +588,8 @@ msgid "Count conversions within X days of an impression"
 msgstr "Contar las conversiones en un plazo de X días a partir de una impresión."
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:46
-msgid "Counted if the user clicks an ad and spends at least 5 seconds on the advertiser's website, with the website open in an active browser tab. The 5 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count."
-msgstr "Se cuenta si el usuario hace clic en un anuncio y pasa al menos 5 segundos en el sitio web del anunciante, con el sitio web abierto en una pestaña activa del navegador. Los 5 segundos deben pasar en el sitio después de llegar haciendo clic en el enlace del anuncio, y la pestaña debe permanecer abierta y activa todo el tiempo para que la visita cuente."
+msgid "Counted if the user clicks an ad and spends at least 10 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count."
+msgstr "Se cuenta si el usuario hace clic en un anuncio y pasa al menos 10 segundos en el sitio web del anunciante, con el sitio web abierto en una pestaña activa del navegador. Los 10 segundos deben pasar en el sitio después de llegar haciendo clic en el enlace del anuncio, y la pestaña debe permanecer abierta y activa todo el tiempo para que la visita cuente."
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:36
 #: src/user/analytics/search/metrics.ts:45
