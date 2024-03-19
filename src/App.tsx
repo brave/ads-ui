@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { Redirect, Route, Switch } from "react-router-dom";
 
@@ -20,9 +20,6 @@ import { LandingPage } from "auth/views/LandingPage";
 import { BraveAdsContactFrame } from "auth/registration/BraveAdsContactFrame";
 import { useMatomo } from "@jonkoops/matomo-tracker-react";
 import { BasicAttentionTokenLandingPage } from "basic-attention-token/BasicAttentionTokenLandingPage";
-import { I18nProvider } from "@lingui/react";
-import { i18n } from "@lingui/core";
-import { dynamicActivate } from "i18n";
 
 const Protected = () => {
   return <Redirect to="/auth/link" />;
@@ -31,52 +28,43 @@ const Protected = () => {
 export function App() {
   const { enableLinkTracking } = useMatomo();
   const [drafts, setDrafts] = useState<CampaignForm[]>(getAllDrafts());
-  const [language, setLanguage] = useState<boolean>();
   const isAuthenticated = useIsAuthenticated();
 
   enableLinkTracking();
 
-  useEffect(() => {
-    dynamicActivate().then(() => {
-      setLanguage(true);
-    });
-  }, []);
-
-  if (!language || isAuthenticated == null) {
-    return null;
+  if (isAuthenticated == null) {
+    return <LandingPage />;
   }
 
   return (
-    <I18nProvider i18n={i18n}>
-      <StyledEngineProvider injectFirst>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <DraftContext.Provider
-            value={{
-              drafts,
-              setDrafts: () => {
-                setDrafts(getAllDrafts());
-              },
-            }}
-          >
-            <Switch>
-              <Route path="/auth/signin" component={Login} />
-              <Route path="/auth/link" component={MagicLink} />
-              <Route path="/auth/verify" component={AuthVerify} />
-              <Route path="/register" component={Register} />
-              <Route path="/contact" component={BraveAdsContactFrame} />
-              <Route path="/bat" component={BasicAttentionTokenLandingPage} />
-              <Redirect path="/search" exact to="/contact" />
-              <Route
-                path="/user/main"
-                component={isAuthenticated ? User : Protected}
-              />
-              <Route path="/" exact={true} component={LandingPage} />
-              <Redirect to="/user/main" />
-            </Switch>
-          </DraftContext.Provider>
-        </ThemeProvider>
-      </StyledEngineProvider>
-    </I18nProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <DraftContext.Provider
+          value={{
+            drafts,
+            setDrafts: () => {
+              setDrafts(getAllDrafts());
+            },
+          }}
+        >
+          <Switch>
+            <Route path="/auth/signin" component={Login} />
+            <Route path="/auth/link" component={MagicLink} />
+            <Route path="/auth/verify" component={AuthVerify} />
+            <Route path="/register" component={Register} />
+            <Route path="/contact" component={BraveAdsContactFrame} />
+            <Route path="/bat" component={BasicAttentionTokenLandingPage} />
+            <Redirect path="/search" exact to="/contact" />
+            <Route
+              path="/user/main"
+              component={isAuthenticated ? User : Protected}
+            />
+            <Route path="/" exact={true} component={LandingPage} />
+            <Redirect to="/user/main" />
+          </Switch>
+        </DraftContext.Provider>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 }
