@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { isAfterEndDate } from "util/isAfterEndDate";
+import { isNowAfterDate } from "util/isAfterEndDate";
 import { AdFragment } from "graphql/ad-set.generated";
 import { CampaignSource } from "graphql/types";
 import { CampaignAdsFragment } from "graphql/campaign.generated";
@@ -34,7 +34,7 @@ export function AdList({ campaign, loading, engagements }: Props) {
       const detail: AdDetails = {
         ...ad,
         adState: ad.state,
-        state: isAfterEndDate(campaign?.endAt) ? "completed" : c.state,
+        state: isNowAfterDate(campaign?.endAt) ? "completed" : c.state,
         adSetName: c.name || c.id.substring(0, 8),
         campaignId: campaign?.id,
         campaignName: campaign?.name,

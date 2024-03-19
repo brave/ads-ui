@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
 
-export const isAfterEndDate = (end: string) => dayjs(end).isAfter();
+export const isNowAfterDate = (end: string) => dayjs().isAfter(end);
 
-export const isBeforeStartDate = (start: string) => dayjs(start).isBefore();
+export const isNowBeforeDate = (start: string) => dayjs().isBefore(start);
