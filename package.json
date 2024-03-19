@@ -9,6 +9,7 @@
     "@fontsource/mulish": "5.0.17",
     "@fontsource/poppins": "5.0.12",
     "@jonkoops/matomo-tracker-react": "0.7.0",
+    "@lingui/detect-locale": "4.7.1",
     "@lingui/macro": "4.7.1",
     "@lingui/react": "4.7.1",
     "@mui/icons-material": "5.15.12",
@@ -46,8 +47,7 @@
     "prepare": "husky",
     "audit:resolve": "resolve-audit",
     "lint:fix": "eslint --fix src",
-    "extract": "lingui extract",
-    "compile": "lingui compile"
+    "extract": "lingui extract"
   },
   "devDependencies": {
     "@babel/core": "7.24.0",
