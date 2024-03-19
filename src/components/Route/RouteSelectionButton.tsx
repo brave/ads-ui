@@ -29,6 +29,7 @@ export function RouteSelectionButton({ routes }: Params) {
             p: 0,
             minWidth: "60px",
             maxWidth: "60px",
+            m: 1,
           }}
           value={`/user/main/${r.value}`}
           component={RouterLink}

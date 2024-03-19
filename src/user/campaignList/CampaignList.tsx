@@ -7,7 +7,7 @@ import {
 } from "components/Datagrid/renderers";
 import { Link as RouterLink } from "react-router-dom";
 import { Status } from "components/Campaigns/Status";
-import { isAfterEndDate } from "util/isAfterEndDate";
+import { isDateInThePast } from "util/isAfterEndDate";
 import { AdvertiserCampaignsFragment } from "graphql/advertiser.generated";
 import {
   CampaignMetricSummaryValuesFragment,
@@ -83,7 +83,7 @@ export function CampaignList({ advertiser }: Props) {
       field: "state",
       headerName: lingui(msg`Status`),
       valueGetter: ({ row }) =>
-        isAfterEndDate(row.endAt) ? "completed" : row.state,
+        isDateInThePast(row.endAt) ? "completed" : row.state,
       renderCell: ({ row }) => (
         <Status state={row.state} start={row.startAt} end={row.endAt} />
       ),

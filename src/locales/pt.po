@@ -17,7 +17,7 @@ msgstr ""
 msgid "{adFormatName} are not available for self-managed campaigns. Please contact sales to inquire."
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:190
+#: src/validation/CampaignSchema.tsx:188
 msgid "{billingType} price must be {price} or higher"
 msgstr ""
 
@@ -138,10 +138,11 @@ msgid "Ad sets"
 msgstr ""
 
 #: src/user/views/adsManager/views/advanced/components/form/components/BaseForm.tsx:30
+#: src/user/views/user/reports/SearchCampaignReportView.tsx:126
 msgid "Ad Sets"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:161
+#: src/validation/CampaignSchema.tsx:159
 msgid "Ad sets must have at least one ad"
 msgstr ""
 
@@ -178,7 +179,7 @@ msgstr ""
 msgid "Additional Details"
 msgstr ""
 
-#: src/user/views/user/reports/OriginalCampaignReportView.tsx:90
+#: src/user/views/user/reports/OriginalCampaignReportView.tsx:89
 msgid "Additional Report: OS Performance"
 msgstr ""
 
@@ -198,8 +199,8 @@ msgid "Ads are modular building blocks that can be paired with ad sets to build 
 msgstr ""
 
 #: src/user/views/user/reports/SearchCampaignReportView.tsx:128
-msgid "AdSets"
-msgstr ""
+#~ msgid "AdSets"
+#~ msgstr ""
 
 #: src/user/ads/InlineContentAd.tsx:90
 msgid "Advertiser Name"
@@ -245,15 +246,15 @@ msgstr ""
 msgid "At a marketing/media conference"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:111
+#: src/validation/CampaignSchema.tsx:109
 msgid "At least one audience must be targeted"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:84
+#: src/validation/CampaignSchema.tsx:82
 msgid "At least one country must be targeted"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:120
+#: src/validation/CampaignSchema.tsx:118
 msgid "At least one platform must be targeted"
 msgstr ""
 
@@ -284,7 +285,7 @@ msgstr ""
 msgid "Billing Type"
 msgstr ""
 
-#: src/components/Creatives/CreativeList.tsx:151
+#: src/components/Creatives/CreativeList.tsx:152
 #: src/user/ads/AdList.tsx:86
 #: src/user/ads/NotificationAd.tsx:62
 msgid "Body"
@@ -355,7 +356,7 @@ msgstr ""
 #~ msgid "By continuing, you acknowledge and agree to our <0>Privacy Policy</0> and platform <1>Terms and Conditions</1>"
 #~ msgstr ""
 
-#: src/components/Creatives/CreativeList.tsx:162
+#: src/components/Creatives/CreativeList.tsx:163
 msgid "Call To Action"
 msgstr ""
 
@@ -573,23 +574,23 @@ msgstr ""
 msgid "Conversion Type"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:154
+#: src/validation/CampaignSchema.tsx:152
 msgid "Conversion type must be Post Click or Post View"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:156
+#: src/validation/CampaignSchema.tsx:154
 msgid "Conversion type required."
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:143
+#: src/validation/CampaignSchema.tsx:141
 msgid "Conversion URL must end in trailing asterisk (*)"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:131
+#: src/validation/CampaignSchema.tsx:129
 msgid "Conversion URL must not contain any whitespace"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:135
+#: src/validation/CampaignSchema.tsx:133
 msgid "Conversion URL must start with https://"
 msgstr ""
 
@@ -597,7 +598,7 @@ msgstr ""
 msgid "Conversion URL Pattern"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:128
+#: src/validation/CampaignSchema.tsx:126
 msgid "Conversion URL required."
 msgstr ""
 
@@ -627,11 +628,6 @@ msgstr ""
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:46
 msgid "Counted if the user clicks an ad and spends at least 10 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count."
 msgstr ""
-
-#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:46
-#: src/user/analytics/search/metrics.ts:62
-#~ msgid "Counted if the user clicks an ad and spends at least 5 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count."
-#~ msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:36
 #: src/user/analytics/search/metrics.ts:45
@@ -712,7 +708,7 @@ msgstr ""
 msgid "Create new keypair?"
 msgstr ""
 
-#: src/components/Assets/AdvertiserAssets.tsx:76
+#: src/components/Assets/AdvertiserAssets.tsx:75
 #: src/components/Creatives/CreativeSelect.tsx:89
 msgid "created"
 msgstr ""
@@ -853,11 +849,11 @@ msgstr ""
 msgid "End Date"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:75
+#: src/validation/CampaignSchema.tsx:73
 msgid "End date is required"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:76
+#: src/validation/CampaignSchema.tsx:74
 msgid "End date must be after start date"
 msgstr ""
 
@@ -930,7 +926,7 @@ msgstr ""
 msgid "Format"
 msgstr ""
 
-#: src/components/Date/DateRangePicker.tsx:27
+#: src/components/Date/DateRangePicker.tsx:28
 msgid "From"
 msgstr ""
 
@@ -1094,7 +1090,7 @@ msgstr ""
 #~ msgid "In the meantime, check out our <0>advertiser resources</0>. If you have any questions, please reach out to <1>selfserve@brave.com</1>."
 #~ msgstr ""
 
-#: src/components/Datagrid/renderers.tsx:42
+#: src/components/Datagrid/renderers.tsx:32
 msgid "In your local time this is"
 msgstr ""
 
@@ -1175,7 +1171,7 @@ msgstr ""
 msgid "Lifetime budget must be ${MIN_PER_CAMPAIGN} or more"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:52
+#: src/validation/CampaignSchema.tsx:50
 msgid "Lifetime budget must be higher for date range provided. Minimum ${min}."
 msgstr ""
 
@@ -1320,11 +1316,11 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: src/components/Datagrid/renderers.tsx:80
+#: src/components/Datagrid/renderers.tsx:68
 msgid "No"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:182
+#: src/validation/CampaignSchema.tsx:180
 msgid "No {billingType} pricing available for {label}, contact selfserve@brave.com for help"
 msgstr ""
 
@@ -1367,11 +1363,11 @@ msgstr ""
 msgid "Observation Window"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:148
+#: src/validation/CampaignSchema.tsx:146
 msgid "Observation window must be 1, 7, or 30 days."
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:150
+#: src/validation/CampaignSchema.tsx:148
 msgid "Observation window required."
 msgstr ""
 
@@ -1488,7 +1484,7 @@ msgstr ""
 msgid "Please enter a valid URL, for example https://brave.com"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:139
+#: src/validation/CampaignSchema.tsx:137
 msgid "Please enter a valid URL, for example https://brave.com/product/*"
 msgstr ""
 
@@ -1553,7 +1549,7 @@ msgstr ""
 msgid "Price"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:95
+#: src/validation/CampaignSchema.tsx:93
 msgid "Price is a required field"
 msgstr ""
 
@@ -1565,11 +1561,11 @@ msgstr ""
 msgid "Pricing Type"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:98
+#: src/validation/CampaignSchema.tsx:96
 msgid "Pricing type is a required field"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:97
+#: src/validation/CampaignSchema.tsx:95
 msgid "Pricing type must be CPM, CPC, or CPSV"
 msgstr ""
 
@@ -1783,11 +1779,11 @@ msgstr ""
 msgid "Start Date"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:72
+#: src/validation/CampaignSchema.tsx:70
 msgid "Start Date is required"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:70
+#: src/validation/CampaignSchema.tsx:68
 msgid "Start Date must be minimum of 2 days from today"
 msgstr ""
 
@@ -1939,8 +1935,8 @@ msgstr ""
 msgid "Time Zone"
 msgstr ""
 
-#: src/components/Creatives/CreativeList.tsx:150
-#: src/components/Creatives/CreativeList.tsx:160
+#: src/components/Creatives/CreativeList.tsx:151
+#: src/components/Creatives/CreativeList.tsx:161
 #: src/user/ads/AdList.tsx:80
 #: src/user/ads/InlineContentAd.tsx:69
 #: src/user/ads/NotificationAd.tsx:55
@@ -1951,7 +1947,7 @@ msgstr ""
 msgid "Title Preview"
 msgstr ""
 
-#: src/components/Date/DateRangePicker.tsx:39
+#: src/components/Date/DateRangePicker.tsx:40
 msgid "To"
 msgstr ""
 
@@ -2035,7 +2031,7 @@ msgid "Unable to retrieve images"
 msgstr ""
 
 #: src/user/analytics/analyticsOverview/reports/campaign/EngagementsOverview.tsx:46
-#: src/user/views/user/reports/SearchCampaignReportView.tsx:53
+#: src/user/views/user/reports/SearchCampaignReportView.tsx:51
 msgid "Unable to retrieve reporting data for this Campaign."
 msgstr ""
 
@@ -2180,7 +2176,7 @@ msgstr ""
 msgid "Work email"
 msgstr ""
 
-#: src/components/Datagrid/renderers.tsx:80
+#: src/components/Datagrid/renderers.tsx:68
 msgid "Yes"
 msgstr ""
 

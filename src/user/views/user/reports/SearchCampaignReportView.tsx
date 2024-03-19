@@ -123,7 +123,7 @@ export function SearchCampaignReportView({ campaignSummary }: Props) {
         </Box>
       </Box>
 
-      <CardContainer header={<Trans>AdSets</Trans>}>
+      <CardContainer header={<Trans>Ad Sets</Trans>}>
         <AdSetBreakdown campaignSummary={campaignSummary} filter={filter} />
       </CardContainer>
     </>
