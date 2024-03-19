@@ -1,4 +1,4 @@
-import { isAfterEndDate, isBeforeStartDate } from "util/isAfterEndDate";
+import { isDateInThePast, isDateInTheFuture } from "util/isAfterEndDate";
 
 export const displayFromCampaignState = (c: {
   campaignState: string;
@@ -8,9 +8,9 @@ export const displayFromCampaignState = (c: {
 }) => {
   if (c.campaignState === "draft") {
     return "draft";
-  } else if (isBeforeStartDate(c.campaignStart)) {
+  } else if (isDateInTheFuture(c.campaignStart)) {
     return "scheduled";
-  } else if (isAfterEndDate(c.campaignEnd)) {
+  } else if (isDateInThePast(c.campaignEnd)) {
     return "completed";
   }
 

@@ -1,7 +1,7 @@
 import { Chip, Tooltip } from "@mui/material";
 import { calcColorForState } from "./stateColors";
 import _ from "lodash";
-import { isAfterEndDate, isBeforeStartDate } from "util/isAfterEndDate";
+import { isDateInThePast, isDateInTheFuture } from "util/isAfterEndDate";
 
 interface Props {
   state: string;
@@ -15,7 +15,7 @@ export const Status = ({ state, start, end, opaque }: Props) => {
   let label = _.startCase(state);
 
   if (start) {
-    if (isBeforeStartDate(start) && state === "active") {
+    if (isDateInTheFuture(start) && state === "active") {
       // eslint-disable-next-line lingui/no-unlocalized-strings
       label = "Scheduled";
       color = "#e2e2fc";
@@ -23,7 +23,7 @@ export const Status = ({ state, start, end, opaque }: Props) => {
   }
 
   if (end) {
-    if (isAfterEndDate(end) && state === "active") {
+    if (isDateInThePast(end) && state === "active") {
       // eslint-disable-next-line lingui/no-unlocalized-strings
       label = "Completed";
       color = calcColorForState("completed");
