@@ -37,8 +37,7 @@ export function App() {
   enableLinkTracking();
 
   useEffect(() => {
-    const browserLanguage = navigator.language;
-    dynamicActivate(browserLanguage).then(() => {
+    dynamicActivate().then(() => {
       setLanguage(true);
     });
   }, []);
