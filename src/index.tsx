@@ -52,7 +52,7 @@ i18n.load({
 const LocalizedApp = () => {
   useEffect(() => {
     const locale = findLocale();
-    i18n.activate(locale);
+    i18n.activate(locale.locale);
   }, []);
 
   return (

@@ -1,14 +1,16 @@
 import { detect, fromUrl } from "@lingui/detect-locale";
+import { esES, enUS, ptBR } from "@mui/x-data-grid";
 
 const locales = [
-  { code: "en", name: "English" },
-  { code: "es", name: "Español" },
-  { code: "pt", name: "Português" },
-  { code: "test", name: "Pseudolocale" },
+  { code: "en", name: "English", gridTheme: enUS },
+  { code: "es", name: "Español", gridTheme: esES },
+  { code: "pt", name: "Português", gridTheme: ptBR },
+  { code: "test", name: "Pseudolocale", gridTheme: enUS },
 ];
 
 export function findLocale() {
   let locale = "en";
+  let gridTheme = enUS;
 
   const detectedLocale = detect(fromUrl("lang") /*fromNavigator(), */);
 
@@ -18,8 +20,9 @@ export function findLocale() {
     );
     if (matchedLocale) {
       locale = matchedLocale.code;
+      gridTheme = matchedLocale.gridTheme;
     }
   }
 
-  return locale;
+  return { locale, gridTheme };
 }

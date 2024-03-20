@@ -253,8 +253,11 @@ export function CampaignList({ advertiser }: Props) {
         filter: {
           filterModel: {
             items: [
-              // eslint-disable-next-line lingui/no-unlocalized-strings
-              { field: "format", operator: "not", value: "New tab takeover" },
+              {
+                field: "format",
+                operator: "not",
+                value: lingui(msg`New tab takeover`),
+              },
             ],
           },
         },
