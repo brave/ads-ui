@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import { theme } from "theme";
 import { CampaignForm } from "user/views/adsManager/types";
-import { useIsAuthenticated } from "auth/hooks/queries/useIsAuthenticated";
 import { AuthVerify } from "auth/views/AuthVerify";
 import { Login } from "auth/views/Login";
 import { MagicLink } from "auth/views/MagicLink";
@@ -21,20 +20,11 @@ import { BraveAdsContactFrame } from "auth/registration/BraveAdsContactFrame";
 import { useMatomo } from "@jonkoops/matomo-tracker-react";
 import { BasicAttentionTokenLandingPage } from "basic-attention-token/BasicAttentionTokenLandingPage";
 
-const Protected = () => {
-  return <Redirect to="/auth/link" />;
-};
-
 export function App() {
   const { enableLinkTracking } = useMatomo();
   const [drafts, setDrafts] = useState<CampaignForm[]>(getAllDrafts());
-  const isAuthenticated = useIsAuthenticated();
 
   enableLinkTracking();
-
-  if (isAuthenticated == null) {
-    return <LandingPage />;
-  }
 
   return (
     <StyledEngineProvider injectFirst>
@@ -56,10 +46,7 @@ export function App() {
             <Route path="/contact" component={BraveAdsContactFrame} />
             <Route path="/bat" component={BasicAttentionTokenLandingPage} />
             <Redirect path="/search" exact to="/contact" />
-            <Route
-              path="/user/main"
-              component={isAuthenticated ? User : Protected}
-            />
+            <Route path="/user/main" component={User} />
             <Route path="/" exact={true} component={LandingPage} />
             <Redirect to="/user/main" />
           </Switch>
