@@ -36,5 +36,6 @@ jobs:
           AWS_REGION: us-west-2
           CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_STAGING_DISTRIBUTION_ID }}
         run: |
-          aws s3 sync build/ s3://ads-ui-staging/ --delete
+          aws s3 sync ./static/ "s3://ads-ui-production/static/" --cache-control "max-age=31536000, public"
+          aws s3 sync . "s3://ads-ui-production/" --exclude "static/*" --cache-control "max-age=60, public"
           aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
