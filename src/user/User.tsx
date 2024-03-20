@@ -71,8 +71,12 @@ export function User() {
   );
 
   const isAuthenticated = useIsAuthenticated();
-  if (isAuthenticated == null) {
-    return <Redirect to="/auth/link" exact={true} />;
+  if (!isAuthenticated) {
+    return (
+      <Switch>
+        <Redirect to="/auth/link" exact={true} />
+      </Switch>
+    );
   }
 
   return (
