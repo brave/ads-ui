@@ -1,15 +1,16 @@
-import { i18n } from "@lingui/core";
 import { detect, fromUrl } from "@lingui/detect-locale";
+import { esES, enUS, ptBR } from "@mui/x-data-grid";
 
 const locales = [
-  { code: "en", name: "English" },
-  { code: "es", name: "Español" },
-  { code: "pt", name: "Português" },
-  { code: "test", name: "Pseudolocale" },
+  { code: "en", name: "English", gridTheme: enUS },
+  { code: "es", name: "Español", gridTheme: esES },
+  { code: "pt", name: "Português", gridTheme: ptBR },
+  { code: "test", name: "Pseudolocale", gridTheme: enUS },
 ];
 
-export async function dynamicActivate() {
+export function findLocale() {
   let locale = "en";
+  let gridTheme = enUS;
 
   const detectedLocale = detect(fromUrl("lang") /*fromNavigator(), */);
 
@@ -19,10 +20,9 @@ export async function dynamicActivate() {
     );
     if (matchedLocale) {
       locale = matchedLocale.code;
+      gridTheme = matchedLocale.gridTheme;
     }
   }
 
-  console.log(`detected locale "${detectedLocale}" using locale "${locale}"`);
-  const { messages } = await import(`./locales/${locale}.po`);
-  i18n.loadAndActivate({ locale: locale, messages });
+  return { locale, gridTheme };
 }

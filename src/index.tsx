@@ -14,6 +14,10 @@ import { IAuthProvider } from "auth";
 import { Environment, getEnvironment } from "util/environment";
 import { createInstance, MatomoProvider } from "@jonkoops/matomo-tracker-react";
 import { VERSION } from "util/version";
+import { i18n } from "@lingui/core";
+import { I18nProvider } from "@lingui/react";
+import { useEffect } from "react";
+import { findLocale } from "i18n";
 
 console.log(
   `https://github.com/brave/ads-ui rev ${VERSION.shortHash} built ${VERSION.buildTime}`,
@@ -33,12 +37,37 @@ const matomoInstance = createInstance({
   linkTracking: false,
 });
 
+const languages = import.meta.glob("./locales/*.po", {
+  eager: true,
+  import: "messages",
+});
+
+i18n.load({
+  en: languages["./locales/en.po"] as any,
+  es: languages["./locales/es.po"] as any,
+  pt: languages["./locales/pt.po"] as any,
+  test: languages["./locales/test.po"] as any,
+});
+
+const LocalizedApp = () => {
+  useEffect(() => {
+    const locale = findLocale();
+    i18n.activate(locale.locale);
+  }, []);
+
+  return (
+    <I18nProvider i18n={i18n}>
+      <App />
+    </I18nProvider>
+  );
+};
+
 root.render(
   <React.StrictMode>
     <MatomoProvider value={matomoInstance}>
       <IAuthProvider>
         <BrowserRouter>
-          <App />
+          <LocalizedApp />
         </BrowserRouter>
       </IAuthProvider>
     </MatomoProvider>

@@ -24,6 +24,7 @@ import { AdvertiserDetailsForm } from "auth/components/AdvertiserDetailsForm";
 import { ErrorBoundary } from "ErrorBoundary";
 import { CampaignReportViewSelector } from "./views/user/CampaignReportViewSelector";
 import dayjs from "dayjs";
+import { useIsAuthenticated } from "auth/hooks/queries/useIsAuthenticated";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -68,6 +69,15 @@ export function User() {
   const [fromDate, setFromDate] = useState<Date | null>(
     dayjs().subtract(6, "month").startOf("day").toDate(),
   );
+
+  const isAuthenticated = useIsAuthenticated();
+  if (!isAuthenticated) {
+    return (
+      <Switch>
+        <Redirect to="/auth/link" exact={true} />
+      </Switch>
+    );
+  }
 
   return (
     <ApolloProvider client={client}>
