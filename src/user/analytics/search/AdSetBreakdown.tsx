@@ -60,7 +60,7 @@ export function AdSetBreakdown({ campaignSummary, filter }: Props) {
     {
       field: "name",
       headerName: _(msg`Name`),
-      valueGetter: ({ row }) =>
+      valueGetter: (_value, row) =>
         row.dimensions.adSet?.name ||
         row.dimensions.adSet?.id?.substring(0, 8) ||
         "?",
@@ -69,7 +69,7 @@ export function AdSetBreakdown({ campaignSummary, filter }: Props) {
     {
       field: "state",
       headerName: _(msg`Status`),
-      valueGetter: ({ row }) =>
+      valueGetter: (_value, row) =>
         displayFromCampaignState({
           campaignState: campaignSummary.state,
           campaignStart: campaignSummary.startAt,
@@ -88,7 +88,7 @@ export function AdSetBreakdown({ campaignSummary, filter }: Props) {
     {
       field: "billingType",
       headerName: _(msg`Type`),
-      valueGetter: ({ row }) =>
+      valueGetter: (_value, row) =>
         uiLabelsForBillingType(row.dimensions.adSet?.billingType).longLabel,
       width: 150,
     },

@@ -73,7 +73,7 @@ export function CampaignList({ advertiser }: Props) {
     {
       field: "format",
       headerName: lingui(msg`Ad Format`),
-      valueGetter: ({ row }) => uiLabelsForCampaignFormat(row.format),
+      valueGetter: (_value, row) => uiLabelsForCampaignFormat(row.format),
       align: "left",
       headerAlign: "left",
       width: 150,
@@ -82,7 +82,7 @@ export function CampaignList({ advertiser }: Props) {
     {
       field: "state",
       headerName: lingui(msg`Status`),
-      valueGetter: ({ row }) =>
+      valueGetter: (_value, row) =>
         isDateInThePast(row.endAt) ? "completed" : row.state,
       renderCell: ({ row }) => (
         <Status state={row.state} start={row.startAt} end={row.endAt} />
@@ -102,7 +102,8 @@ export function CampaignList({ advertiser }: Props) {
     {
       field: "spend",
       headerName: lingui(msg`Spend`),
-      valueGetter: ({ row }) => findMetricValuesForCampaign(row.id)?.spendUsd,
+      valueGetter: (_value, row) =>
+        findMetricValuesForCampaign(row.id)?.spendUsd,
       renderCell: ({ value }) => (
         <MetricValue loading={loading} metricType="usd" value={value} />
       ),
@@ -115,7 +116,8 @@ export function CampaignList({ advertiser }: Props) {
       field: "view",
       headerName: lingui(msg`Impressions`),
       type: "number",
-      valueGetter: ({ row }) => findMetricValuesForCampaign(row.id)?.impression,
+      valueGetter: (_value, row) =>
+        findMetricValuesForCampaign(row.id)?.impression,
       renderCell: ({ value }) => (
         <MetricValue metricType="number" loading={loading} value={value} />
       ),
@@ -128,7 +130,7 @@ export function CampaignList({ advertiser }: Props) {
       field: "click",
       headerName: lingui(msg`Clicks`),
       type: "number",
-      valueGetter: ({ row }) => findMetricValuesForCampaign(row.id)?.click,
+      valueGetter: (_value, row) => findMetricValuesForCampaign(row.id)?.click,
       renderCell: ({ value }) => (
         <MetricValue metricType="number" loading={loading} value={value} />
       ),
@@ -141,7 +143,7 @@ export function CampaignList({ advertiser }: Props) {
       field: "landed",
       headerName: lingui(msg`Site visits`),
       type: "number",
-      valueGetter: ({ row }) =>
+      valueGetter: (_value, row) =>
         row.format === CampaignFormat.Search
           ? undefined
           : findMetricValuesForCampaign(row.id)?.siteVisit,
@@ -157,7 +159,7 @@ export function CampaignList({ advertiser }: Props) {
       field: "ctr",
       headerName: "CTR",
       type: "number",
-      valueGetter: ({ row }) =>
+      valueGetter: (_value, row) =>
         findMetricValuesForCampaign(row.id)?.rates.clickThrough,
       renderCell: ({ value }) => (
         <MetricValue metricType="rate" loading={loading} value={value} />
@@ -170,7 +172,7 @@ export function CampaignList({ advertiser }: Props) {
     {
       field: "startAt",
       headerName: lingui(msg`Start`),
-      valueGetter: ({ row }) => row.startAt,
+      valueGetter: (_value, row) => row.startAt,
       renderCell: ({ row }) => StandardRenderers.date(row.startAt),
       align: "right",
       headerAlign: "right",
@@ -179,7 +181,7 @@ export function CampaignList({ advertiser }: Props) {
     {
       field: "endAt",
       headerName: lingui(msg`End`),
-      valueGetter: ({ row }) => row.endAt,
+      valueGetter: (_value, row) => row.endAt,
       renderCell: ({ row }) => StandardRenderers.date(row.endAt),
       align: "right",
       headerAlign: "right",
@@ -192,7 +194,7 @@ export function CampaignList({ advertiser }: Props) {
       field: "switch",
       headerName: lingui(msg`On/Off`),
       type: "actions",
-      valueGetter: ({ row }) => row.state,
+      valueGetter: (_value, row) => row.state,
       renderCell: ({ row }) =>
         campaignOnOffState({
           ...row,
