@@ -62,14 +62,14 @@ export function CreativeList() {
     {
       field: "type",
       headerName: _(msg`Ad Format`),
-      valueGetter: ({ row }) => uiTextForCreativeTypeCode(row.type),
+      valueGetter: (_value, row) => uiTextForCreativeTypeCode(row.type),
       align: "left",
       width: 200,
     },
     {
       field: "content",
       headerName: _(msg`Content`),
-      valueGetter: ({ row }) => creativeValuesGetter(row),
+      valueGetter: (_value, row) => creativeValuesGetter(row),
       renderCell: ({ row }) => <CreativePayloadList creative={row} />,
       flex: 1,
       sortable: false,

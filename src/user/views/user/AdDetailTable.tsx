@@ -29,7 +29,8 @@ export function AdDetailTable<T extends { id: string }>({
       {
         field: "spend",
         headerName: _(msg`Spend`),
-        valueGetter: ({ row }) => engagements.get(row.id)?.spend?.toNumber(),
+        valueGetter: (_value, row) =>
+          engagements.get(row.id)?.spend?.toNumber(),
         renderCell: ({ row }) =>
           renderStatsCell(
             loading,
@@ -45,7 +46,8 @@ export function AdDetailTable<T extends { id: string }>({
         field: "view",
         type: "number",
         headerName: _(msg`Impressions`),
-        valueGetter: ({ row }) => engagements.get(row.id)?.views?.toString(),
+        valueGetter: (_value, row) =>
+          engagements.get(row.id)?.views?.toString(),
         renderCell: ({ row }) =>
           renderStatsCell(loading, "views", engagements.get(row.id)),
         align: "right",
@@ -56,7 +58,8 @@ export function AdDetailTable<T extends { id: string }>({
         field: "click",
         type: "number",
         headerName: _(msg`Clicks`),
-        valueGetter: ({ row }) => engagements.get(row.id)?.clicks?.toString(),
+        valueGetter: (_value, row) =>
+          engagements.get(row.id)?.clicks?.toString(),
         renderCell: ({ row }) =>
           renderStatsCell(loading, "clicks", engagements.get(row.id)),
         align: "right",
@@ -67,7 +70,8 @@ export function AdDetailTable<T extends { id: string }>({
         field: "landed",
         type: "number",
         headerName: _(msg`Site Visits`),
-        valueGetter: ({ row }) => engagements.get(row.id)?.landings?.toString(),
+        valueGetter: (_value, row) =>
+          engagements.get(row.id)?.landings?.toString(),
         renderCell: ({ row }) =>
           renderStatsCell(loading, "landings", engagements.get(row.id)),
         align: "right",
@@ -78,7 +82,7 @@ export function AdDetailTable<T extends { id: string }>({
         field: "ctr",
         type: "number",
         headerName: "CTR",
-        valueGetter: ({ row }) => engagements.get(row.id)?.ctr?.toString(),
+        valueGetter: (_value, row) => engagements.get(row.id)?.ctr?.toString(),
         renderCell: ({ row }) =>
           renderStatsCell(loading, "ctr", engagements.get(row.id)),
         align: "right",

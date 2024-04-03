@@ -53,7 +53,7 @@ export function AdList({ campaign, loading, engagements }: Props) {
     {
       field: "name",
       headerName: lingui(msg`Ad Name`),
-      valueGetter: ({ row }) =>
+      valueGetter: (_value, row) =>
         row.adState !== "deleted"
           ? row.creative.name
           : `(DELETED) ${row.creative.name}`,
@@ -72,19 +72,19 @@ export function AdList({ campaign, loading, engagements }: Props) {
     {
       field: "adSetName",
       headerName: lingui(msg`Ad set name`),
-      valueGetter: ({ row }) => row.adSetName,
+      valueGetter: (_value, row) => row.adSetName,
       flex: 1,
     },
     {
       field: "title",
       headerName: lingui(msg`Title`),
-      valueGetter: ({ row }) => title(row.creative),
+      valueGetter: (_value, row) => title(row.creative),
       flex: 1,
     },
     {
       field: "body",
       headerName: lingui(msg`Body`),
-      valueGetter: ({ row }) => body(row.creative),
+      valueGetter: (_value, row) => body(row.creative),
       flex: 1,
     },
   ];
