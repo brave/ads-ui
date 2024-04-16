@@ -19,14 +19,13 @@ it("should pass on a valid object", () => {
   RegistrationSchema("search").validateSync(validRegistration);
 });
 
-it("should fail if the domains do not match", () => {
+it("should not fail if the domains do not match", () => {
+  // as we perform this validation server-side
   const c = produce(validRegistration, (draft) => {
-    draft.domain = "google.com";
+    draft.domain = "basicattentiontoken.com";
   });
 
-  expect(() => RegistrationSchema("search").validateSync(c)).toThrowError(
-    "Domain must match the email domain",
-  );
+  RegistrationSchema("search").validateSync(c);
 });
 
 it("should fail if not an email", () => {
