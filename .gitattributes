@@ -1,2 +1,3 @@
 *.generated.tsx linguist-generated
 src/graphql/types.ts linguist-generated
+*.po linguist-generated
