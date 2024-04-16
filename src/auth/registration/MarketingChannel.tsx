@@ -40,6 +40,14 @@ export function MarketingChannel(props: { name: string }) {
             value: "brave-linkedin",
           },
           { label: _(msg`In a video on YouTube`), value: "youtube" },
+          {
+            label: _(msg`From a Brave sales representative`),
+            value: "brave-sales-rep",
+          },
+          {
+            label: _(msg`An ad from my Brave browser`),
+            value: "brave-browser-ad",
+          },
           { label: _(msg`Other (please specify)`), value: "other" },
         ]}
       />

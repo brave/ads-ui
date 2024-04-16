@@ -1,5 +1,5 @@
 import { detect, fromUrl } from "@lingui/detect-locale";
-import { esES, enUS, ptBR } from "@mui/x-data-grid";
+import { enUS, esES, ptBR } from "@mui/x-data-grid/locales";
 
 const locales = [
   { code: "en", name: "English", gridTheme: enUS },

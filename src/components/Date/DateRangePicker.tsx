@@ -1,4 +1,4 @@
-import { Stack, TextField } from "@mui/material";
+import { Stack } from "@mui/material";
 import { Dispatch } from "react";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -32,9 +32,12 @@ export const DateRangePicker = ({
               onFromChange(newValue);
             }
           }}
-          renderInput={(params) => (
-            <TextField size="small" sx={{ width: 175 }} {...params} />
-          )}
+          slotProps={{
+            textField: {
+              size: "small",
+              sx: { width: "175px" },
+            },
+          }}
         />
         <DatePicker
           label={_(msg`To`)}
@@ -44,9 +47,12 @@ export const DateRangePicker = ({
               onToChange(newValue);
             }
           }}
-          renderInput={(params) => (
-            <TextField size="small" sx={{ width: 175 }} {...params} />
-          )}
+          slotProps={{
+            textField: {
+              size: "small",
+              sx: { width: "175px" },
+            },
+          }}
         />
       </Stack>
     </LocalizationProvider>

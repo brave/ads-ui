@@ -218,6 +218,10 @@ msgstr ""
 msgid "Already have an account?"
 msgstr ""
 
+#: src/auth/registration/MarketingChannel.tsx:44
+msgid "An ad from my Brave browser"
+msgstr ""
+
 #: src/components/Error/ErrorDetail.tsx:68
 msgid "An error has occurred while processing your request."
 msgstr ""
@@ -496,8 +500,8 @@ msgstr ""
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:35
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:164
 #: src/user/analytics/search/metrics.ts:44
-#: src/user/campaignList/CampaignList.tsx:129
-#: src/user/views/user/AdDetailTable.tsx:58
+#: src/user/campaignList/CampaignList.tsx:131
+#: src/user/views/user/AdDetailTable.tsx:60
 msgid "Clicks"
 msgstr ""
 
@@ -841,7 +845,7 @@ msgstr ""
 msgid "Email address is required"
 msgstr ""
 
-#: src/user/campaignList/CampaignList.tsx:181
+#: src/user/campaignList/CampaignList.tsx:183
 msgid "End"
 msgstr ""
 
@@ -928,6 +932,10 @@ msgstr ""
 
 #: src/components/Date/DateRangePicker.tsx:28
 msgid "From"
+msgstr ""
+
+#: src/auth/registration/MarketingChannel.tsx:43
+msgid "From a Brave sales representative"
 msgstr ""
 
 #: src/auth/registration/MarketingChannel.tsx:36
@@ -1061,8 +1069,8 @@ msgstr ""
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:30
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:154
 #: src/user/analytics/search/metrics.ts:36
-#: src/user/campaignList/CampaignList.tsx:116
-#: src/user/views/user/AdDetailTable.tsx:47
+#: src/user/campaignList/CampaignList.tsx:117
+#: src/user/views/user/AdDetailTable.tsx:48
 msgid "Impressions"
 msgstr ""
 
@@ -1288,6 +1296,7 @@ msgstr ""
 msgid "New Keypair"
 msgstr ""
 
+#: src/user/campaignList/CampaignList.tsx:261
 #: src/user/library/index.ts:248
 #: src/util/campaign.ts:7
 msgid "New tab takeover"
@@ -1380,7 +1389,7 @@ msgid "On a podcast I listen to"
 msgstr ""
 
 #: src/user/adSet/AdSetList.tsx:84
-#: src/user/campaignList/CampaignList.tsx:193
+#: src/user/campaignList/CampaignList.tsx:195
 msgid "On/Off"
 msgstr ""
 
@@ -1416,11 +1425,11 @@ msgstr ""
 msgid "OS"
 msgstr ""
 
-#: src/auth/registration/MarketingChannel.tsx:43
+#: src/auth/registration/MarketingChannel.tsx:45
 msgid "Other (please specify)"
 msgstr ""
 
-#: src/auth/registration/MarketingChannel.tsx:50
+#: src/auth/registration/MarketingChannel.tsx:52
 msgid "Other source"
 msgstr ""
 
@@ -1741,11 +1750,11 @@ msgstr ""
 #: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:49
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:45
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:162
-#: src/user/campaignList/CampaignList.tsx:142
+#: src/user/campaignList/CampaignList.tsx:144
 msgid "Site visits"
 msgstr ""
 
-#: src/user/views/user/AdDetailTable.tsx:69
+#: src/user/views/user/AdDetailTable.tsx:72
 msgid "Site Visits"
 msgstr ""
 
@@ -1767,7 +1776,7 @@ msgstr ""
 msgid "Spend"
 msgstr ""
 
-#: src/user/campaignList/CampaignList.tsx:172
+#: src/user/campaignList/CampaignList.tsx:174
 msgid "Start"
 msgstr ""
 
@@ -1947,7 +1956,7 @@ msgstr ""
 msgid "Title Preview"
 msgstr ""
 
-#: src/components/Date/DateRangePicker.tsx:40
+#: src/components/Date/DateRangePicker.tsx:43
 msgid "To"
 msgstr ""
 

@@ -82,7 +82,7 @@ export function AdSetList({ campaign, loading, engagements }: Props) {
       field: "switch",
       type: "actions",
       headerName: _(msg`On/Off`),
-      valueGetter: ({ row }) => row.state,
+      valueGetter: (_value, row) => row.state,
       renderCell: ({ row }) => adSetOnOffState(row),
       sortable: false,
       filterable: false,
@@ -91,13 +91,13 @@ export function AdSetList({ campaign, loading, engagements }: Props) {
     {
       field: "name",
       headerName: _(msg`Name`),
-      valueGetter: ({ row }) => row.name || row.id.substring(0, 8),
+      valueGetter: (_value, row) => row.name || row.id.substring(0, 8),
       flex: 1,
     },
     {
       field: "state",
       headerName: _(msg`Status`),
-      valueGetter: ({ row }) => displayFromCampaignState(row),
+      valueGetter: (_value, row) => displayFromCampaignState(row),
       renderCell: ({ row }) => (
         <Status
           state={displayFromCampaignState(row)}
@@ -110,14 +110,14 @@ export function AdSetList({ campaign, loading, engagements }: Props) {
     {
       field: "billingType",
       headerName: _(msg`Type`),
-      valueGetter: ({ row }) =>
+      valueGetter: (_value, row) =>
         uiLabelsForBillingType(row.billingType).longLabel,
       width: 150,
     },
     {
       field: "oses",
       headerName: _(msg`Platforms`),
-      valueGetter: ({ row }) =>
+      valueGetter: (_value, row) =>
         row.oses?.map((o: { name: string }) => o.name).join(", "),
       renderCell: ({ row }) => {
         if (row.oses?.length === 5) {
@@ -138,7 +138,7 @@ export function AdSetList({ campaign, loading, engagements }: Props) {
     {
       field: "segments",
       headerName: _(msg`Audiences`),
-      valueGetter: ({ row }) =>
+      valueGetter: (_value, row) =>
         row.segments?.map((o: { name: string }) => o.name).join(", "),
       renderCell: ({ row }) => (
         <ChipList
