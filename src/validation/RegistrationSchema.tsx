@@ -36,16 +36,6 @@ const SearchRegistrationSchema = () =>
       .matches(
         DomainRegex,
         t`Please enter a valid domain, for example: brave.com`,
-      )
-      .test(
-        "is-matching-domain",
-        t`Domain must match the email domain`,
-        (value, context) => {
-          const email = context.parent.user.email;
-          if (!email) return false;
-          const splitEmail = email.split("@");
-          return value === splitEmail[splitEmail.length - 1];
-        },
       ),
     mediaSpend: string().optional().nullable(),
     country: string()
