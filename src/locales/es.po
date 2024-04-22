@@ -206,7 +206,7 @@ msgstr "Todos los objetivos e informes están estrictamente diseñados para ser 
 msgid "Already have an account?"
 msgstr "¿Ya tiene una cuenta?"
 
-#: src/auth/registration/MarketingChannel.tsx:44
+#: src/auth/registration/MarketingChannel.tsx:48
 msgid "An ad from my Brave browser"
 msgstr "Un anuncio de mi navegador Brave"
 
@@ -750,8 +750,8 @@ msgid "Domain is required"
 msgstr "Se requiere dominio"
 
 #: src/validation/RegistrationSchema.tsx:42
-msgid "Domain must match the email domain"
-msgstr "El dominio debe coincidir con el dominio del correo electrónico"
+#~ msgid "Domain must match the email domain"
+#~ msgstr "El dominio debe coincidir con el dominio del correo electrónico"
 
 #: src/validation/RegistrationSchema.tsx:35
 msgid "Domain must not contain any whitespace"
@@ -893,7 +893,7 @@ msgstr "Formato"
 msgid "From"
 msgstr "De"
 
-#: src/auth/registration/MarketingChannel.tsx:43
+#: src/auth/registration/MarketingChannel.tsx:44
 msgid "From a Brave sales representative"
 msgstr "De un representante de ventas de Brave"
 
@@ -1364,11 +1364,11 @@ msgstr "Organización"
 msgid "OS"
 msgstr "Sistema Operativo"
 
-#: src/auth/registration/MarketingChannel.tsx:45
+#: src/auth/registration/MarketingChannel.tsx:51
 msgid "Other (please specify)"
 msgstr "Otro (por favor, especifique)"
 
-#: src/auth/registration/MarketingChannel.tsx:52
+#: src/auth/registration/MarketingChannel.tsx:58
 msgid "Other source"
 msgstr "Otra fuente"
 
@@ -1440,7 +1440,7 @@ msgstr "Por favor, introduzca una URL válida, por ejemplo, https://brave.com/pr
 msgid "Please enter an email."
 msgstr "Por favor, introduzca un correo electrónico."
 
-#: src/validation/RegistrationSchema.tsx:62
+#: src/validation/RegistrationSchema.tsx:52
 msgid "Please let us know how you heard about Brave Ads"
 msgstr "Por favor, indíquenos cómo se enteró de Brave Ads"
 
@@ -1462,7 +1462,7 @@ msgstr "Por favor, actualice la página para volver a intentarlo o envíe un cor
 msgid "Please see our <0>Advertiser Privacy Policy</0> and <1>Terms of Service</1> applicable to Brave Ads."
 msgstr "Consulte nuestra <0>Política de privacidad del anunciante</0> y <1>Términos de servicio</1> aplicables a Brave Ads."
 
-#: src/validation/RegistrationSchema.tsx:67
+#: src/validation/RegistrationSchema.tsx:57
 msgid "Please specify how you heard about Brave Ads"
 msgstr "Por favor, especifique cómo se enteró de Brave Ads"
 
@@ -1519,8 +1519,8 @@ msgstr "El tipo de precio debe ser CPM, CPC o CPSV"
 msgid "Primary region of business"
 msgstr "Región principal de la empresa"
 
-#: src/validation/RegistrationSchema.tsx:52
-#: src/validation/RegistrationSchema.tsx:55
+#: src/validation/RegistrationSchema.tsx:42
+#: src/validation/RegistrationSchema.tsx:45
 msgid "Primary region of business is required"
 msgstr "Se requiere la región principal de la empresa"
 

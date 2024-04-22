@@ -1,187 +1,179 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-02-09 12:01-0500\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: @lingui/cli\n"
-"Language: pt\n"
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
+"X-Generator: Poedit 3.4.2\n"
+"POT-Creation-Date: \n"
 
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:117
 msgid "{adFormatName} are not available for self-managed campaigns. Please contact sales to inquire."
-msgstr ""
+msgstr "{adFormatName} não estão disponíveis para campanhas autogerenciadas. Por favor, entre em contato com o time de vendas para obter mais informações."
 
 #: src/validation/CampaignSchema.tsx:188
 msgid "{billingType} price must be {price} or higher"
-msgstr ""
-
-#: src/user/views/adsManager/views/advanced/components/campaign/components/BillingModelSelect.tsx:23
-#~ msgid "{campaignFormat} pricing configuration option(s)"
-#~ msgstr ""
+msgstr "O preço de {billingType} deve ser {price} ou superior"
 
 #: src/user/views/adsManager/views/advanced/components/campaign/components/BillingModelSelect.tsx:23
 msgid "{campaignFormat} pricing configuration option(s):"
-msgstr ""
+msgstr "Opção(ões) de configuração de preços para {campaignFormat}:"
 
 #: src/form/FormikHelpers.tsx:54
 msgid "{length}/{maxLength} characters"
-msgstr ""
+msgstr "{length}/{maxLength} caracteres"
 
 #: src/components/Switch/OnOff.tsx:44
 msgid "{type} status cannot be updated"
-msgstr ""
+msgstr "Não é possível atualizar o status de {type}"
 
 #: src/components/Location/LocationPicker.tsx:25
 msgid "+{count} more"
-msgstr ""
+msgstr "+{count} mais"
 
 #: src/components/Conversion/ConversionFields.tsx:50
 msgid "1 Day"
-msgstr ""
+msgstr "1 Dia"
 
 #: src/components/Conversion/ConversionFields.tsx:52
 msgid "30 Days"
-msgstr ""
+msgstr "30 Dias"
 
 #: src/components/Error/ErrorDetail.tsx:39
 msgid "401 Forbidden"
-msgstr ""
+msgstr "401 Proibido"
 
 #: src/components/Conversion/ConversionFields.tsx:51
 msgid "7 Days"
-msgstr ""
+msgstr "7 Dias"
 
 #: src/components/Error/ErrorDetail.tsx:41
 msgid "A forbidden error was returned. You may need to log out and back in again."
-msgstr ""
+msgstr "Um erro de proibição foi retornado. Você pode precisar sair e entrar novamente."
 
 #: src/auth/views/MagicLink.tsx:34
 msgid "A login email is on the way"
-msgstr ""
+msgstr "Um e-mail de login está sendo enviado"
 
 #: src/components/Drawer/SupportMenu.tsx:67
 msgid "About Brave Ads"
-msgstr ""
-
-#: src/auth/components/AdvertiserDetailsForm.tsx:119
-#~ msgid "Access dashboard"
-#~ msgstr ""
+msgstr "Sobre o Brave Ads"
 
 #: src/components/Drawer/MiniSideBar.tsx:57
 msgid "Account"
-msgstr ""
+msgstr "Conta"
 
 #: src/user/settings/NewKeyPairModal.tsx:85
 msgid "Account Settings"
-msgstr ""
+msgstr "Configurações da Conta"
 
 #: src/components/Switch/OnOff.tsx:36
 msgid "Activate"
-msgstr ""
+msgstr "Ativar"
 
 #: src/components/Creatives/NewsPreview.tsx:90
 msgid "Ad"
-msgstr ""
+msgstr "Anúncio"
 
 #: src/validation/CreativeSchema.tsx:45
 msgid "Ad body is required"
-msgstr ""
+msgstr "O corpo do anúncio é obrigatório"
 
 #: src/validation/CreativeSchema.tsx:46
 msgid "Ad body must be less than 60 characters"
-msgstr ""
+msgstr "O corpo do anúncio deve ter menos de 60 caracteres"
 
 #: src/validation/CreativeSchema.tsx:62
 msgid "Ad description is required"
-msgstr ""
+msgstr "A descrição do anúncio é obrigatória"
 
 #: src/components/Creatives/CreativeType.tsx:26
 msgid "Ad format"
-msgstr ""
+msgstr "Formato do anúncio"
 
 #: src/components/Creatives/CreativeList.tsx:64
 #: src/user/campaignList/CampaignList.tsx:75
 msgid "Ad Format"
-msgstr ""
+msgstr "Formato do Anúncio"
 
 #: src/validation/CreativeSchema.tsx:63
 msgid "Ad image dimensions are required"
-msgstr ""
+msgstr "As dimensões da imagem do anúncio são obrigatórias"
 
 #: src/user/ads/AdList.tsx:55
 msgid "Ad Name"
-msgstr ""
+msgstr "Nome do anúncio"
 
 #: src/validation/CreativeSchema.tsx:24
 msgid "Ad Name is required"
-msgstr ""
+msgstr "O nome do anúncio é obrigatório"
 
 #: src/user/views/adsManager/views/advanced/components/adSet/AdSetFields.tsx:32
 #: src/user/views/adsManager/views/advanced/components/adSet/NewAdSet.tsx:64
 #: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:37
 msgid "Ad Set"
-msgstr ""
+msgstr "Conjunto de Anúncios"
 
 #: src/user/ads/AdList.tsx:74
 #: src/user/views/adsManager/views/advanced/components/adSet/AdSetFields.tsx:41
 msgid "Ad set name"
-msgstr ""
+msgstr "Nome do conjunto de anúncios"
 
 #: src/user/views/user/CampaignDetails.tsx:37
 msgid "Ad sets"
-msgstr ""
+msgstr "Conjuntos de anúncios"
 
 #: src/user/views/adsManager/views/advanced/components/form/components/BaseForm.tsx:30
 #: src/user/views/user/reports/SearchCampaignReportView.tsx:126
 msgid "Ad Sets"
-msgstr ""
+msgstr "Conjuntos de Anúncios"
 
 #: src/validation/CampaignSchema.tsx:159
 msgid "Ad sets must have at least one ad"
-msgstr ""
+msgstr "Conjuntos de anúncios devem ter pelo menos um anúncio"
 
 #: src/validation/CreativeSchema.tsx:49
 #: src/validation/CreativeSchema.tsx:74
 msgid "Ad title is required"
-msgstr ""
+msgstr "O título do anúncio é obrigatório"
 
 #: src/validation/CreativeSchema.tsx:50
 msgid "Ad title must be less than 30 characters"
-msgstr ""
+msgstr "O título do anúncio deve ter menos de 30 caracteres"
 
 #: src/validation/CreativeSchema.tsx:73
 msgid "Ad title must be less than 90 characters"
-msgstr ""
+msgstr "O título do anúncio deve ter menos de 90 caracteres"
 
 #: src/validation/CreativeSchema.tsx:31
 msgid "Ad type is required"
-msgstr ""
+msgstr "O tipo de anúncio é obrigatório"
 
 #: src/validation/CreativeSchema.tsx:29
 msgid "Ad type must be notification or news"
-msgstr ""
+msgstr "O tipo de anúncio deve ser notificação ou notícia"
 
 #: src/user/ads/AdsExistingAd.tsx:86
 msgid "Add an existing ad"
-msgstr ""
+msgstr "Adicionar um anúncio existente"
 
 #: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:44
 msgid "Add Conversion tracking"
-msgstr ""
+msgstr "Adicionar rastreamento de conversão"
 
 #: src/components/Error/ErrorDetail.tsx:82
 msgid "Additional Details"
-msgstr ""
+msgstr "Detalhes Adicionais"
 
 #: src/user/views/user/reports/OriginalCampaignReportView.tsx:89
 msgid "Additional Report: OS Performance"
-msgstr ""
+msgstr "Relatório Adicional: Desempenho do Sistema Operacional"
 
 #: src/components/AppBar/LandingPageAppBar.tsx:85
 #: src/components/Assets/AdvertiserAssets.tsx:32
@@ -192,229 +184,193 @@ msgstr ""
 #: src/user/views/adsManager/views/advanced/components/adSet/fields/AdSetAds.tsx:29
 #: src/user/views/user/CampaignDetails.tsx:38
 msgid "Ads"
-msgstr ""
+msgstr "Anúncios"
 
 #: src/user/ads/AdsExistingAd.tsx:90
 msgid "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously approved ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
-msgstr ""
-
-#: src/user/views/user/reports/SearchCampaignReportView.tsx:128
-#~ msgid "AdSets"
-#~ msgstr ""
+msgstr "Anúncios são blocos de construção modulares que podem ser combinados com conjuntos de anúncios para criar combinações únicas. Seus anúncios previamente aprovados serão exibidos aqui. Selecione usando a caixa ao lado do nome. Use o botão \"Seleção Completa\" para concluir."
 
 #: src/user/ads/InlineContentAd.tsx:90
 msgid "Advertiser Name"
-msgstr ""
+msgstr "Nome do Anunciante"
 
 #: src/auth/views/LandingPage.tsx:33
 msgid "advertising made simple"
-msgstr ""
+msgstr "publicidade descomplicada"
 
 #: src/auth/views/MobileAdsBenefits.tsx:30
 msgid "All targeting and reporting is strictly designed to be anonymous and privacy-preserving."
-msgstr ""
+msgstr "Todos os direcionamentos e relatórios são estritamente projetados para serem anônimos e preservarem a privacidade."
 
 #: src/auth/views/LandingPage.tsx:72
 msgid "Already have an account?"
-msgstr ""
+msgstr "Já tem uma conta?"
 
-#: src/auth/registration/MarketingChannel.tsx:44
+#: src/auth/registration/MarketingChannel.tsx:48
 msgid "An ad from my Brave browser"
-msgstr ""
+msgstr "Um anúncio do meu navegador Brave"
 
 #: src/components/Error/ErrorDetail.tsx:68
 msgid "An error has occurred while processing your request."
-msgstr ""
+msgstr "Ocorreu um erro ao processar sua solicitação."
 
 #: src/user/settings/UserApiKey.tsx:31
 msgid "API keys are used to get data from the reporting endpoints. They are unique to you."
-msgstr ""
+msgstr "As chaves de API são utilizadas para acessar dados nos endpoints de relatório. Elas são exclusivas para você."
 
 #: src/components/Creatives/CreativeStatusSwitch.tsx:95
 msgid "Are you sure you want to activate"
-msgstr ""
+msgstr "Tem certeza de que deseja ativar?"
 
 #: src/components/Creatives/CreativeForm.tsx:149
 msgid "Are you sure you want to modify \"{creativeName}\"?"
-msgstr ""
+msgstr "Tem certeza de que deseja modificar \"{creativeName}\"?"
 
 #: src/components/Creatives/CreativeStatusSwitch.tsx:93
 msgid "Are you sure you want to pause"
-msgstr ""
-
-#: src/search/SearchTalkingPoints.tsx:12
-#~ msgid "As effective as Google"
-#~ msgstr ""
+msgstr "Tem certeza de que deseja pausar?"
 
 #: src/auth/registration/MarketingChannel.tsx:24
 msgid "At a marketing/media conference"
-msgstr ""
+msgstr "Em uma conferência de marketing/mídia"
 
 #: src/validation/CampaignSchema.tsx:109
 msgid "At least one audience must be targeted"
-msgstr ""
+msgstr "Pelo menos um público-alvo deve ser direcionado"
 
 #: src/validation/CampaignSchema.tsx:82
 msgid "At least one country must be targeted"
-msgstr ""
+msgstr "Pelo menos um país deve ser direcionado"
 
 #: src/validation/CampaignSchema.tsx:118
 msgid "At least one platform must be targeted"
-msgstr ""
+msgstr "Pelo menos uma plataforma deve ser direcionada"
 
 #: src/components/Drawer/MiniSideBar.tsx:43
 #: src/components/Segment/SegmentPicker.tsx:83
 #: src/user/adSet/AdSetList.tsx:140
 #: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:47
 msgid "Audiences"
-msgstr ""
+msgstr "Públicos-alvo"
 
 #: src/components/Segment/SegmentPicker.tsx:50
 msgid "Automatic interest targeting"
-msgstr ""
-
-#: src/auth/registration/AccountChoice.tsx:139
-#~ msgid "Available Ad placements"
-#~ msgstr ""
+msgstr "Direcionamento automático por interesse"
 
 #: src/components/Steps/NextAndBack.tsx:33
 msgid "Back"
-msgstr ""
+msgstr "Voltar"
 
 #: src/components/AppBar/LandingPageAppBar.tsx:56
 msgid "Basic Attention Token"
-msgstr ""
+msgstr "Basic Attention Token"
 
 #: src/user/views/adsManager/views/advanced/components/campaign/components/CustomPriceSelect.tsx:33
 msgid "Billing Type"
-msgstr ""
+msgstr "Tipo de Cobrança"
 
 #: src/components/Creatives/CreativeList.tsx:152
 #: src/user/ads/AdList.tsx:86
 #: src/user/ads/NotificationAd.tsx:62
 msgid "Body"
-msgstr ""
+msgstr "Corpo"
 
 #: src/components/Creatives/NotificationPreview.tsx:41
 msgid "Body Preview"
-msgstr ""
-
-#: src/search/SearchLandingPage.tsx:39
-#~ msgid "Book a 30-minute meeting with a Brave Search specialist to discuss a free test campaign and see how Brave Ads can perform for your business."
-#~ msgstr ""
-
-#: src/search/SearchLandingPage.tsx:79
-#~ msgid "Book a meeting"
-#~ msgstr ""
+msgstr "Pré-visualização do Corpo"
 
 #: src/user/settings/NewKeyPairModal.tsx:184
 msgid "Brave cannot recover this key, which has been generated in your browser. You will need to confirm this private key on the next step before changes are saved."
-msgstr ""
+msgstr "O Brave não pode recuperar esta chave que foi gerada em seu navegador. Você precisará confirmar esta chave privada na próxima etapa antes que as alterações sejam salvas."
 
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:41
 msgid "Brave is place where early adopters thrive. We’re celebrating our crypto roots by offering new and returning customers half off their first campaign when they check-out with BAT."
-msgstr ""
-
-#: src/components/AppBar/LandingPageAppBar.tsx:58
-#~ msgid "Brave Search"
-#~ msgstr ""
-
-#: src/search/SearchTalkingPoints.tsx:13
-#~ msgid "Brave Search Ads convert as well as, or better than Google Search ad clicks."
-#~ msgstr ""
-
-#: src/auth/components/AdvertiserAgreed.tsx:17
-#~ msgid "Brave’s products are made to uphold user privacy. By default, the Brave browser blocks third-party tracking (scripts, tags, pixels, etc.) including those used by Google Analytics. This means that most standard website reporting won’t be compatible with Brave Ads. To ensure advertisers have visibility into performance of campaigns, we’ve detailed other effective privacy-first options for measurement in our <0>reporting guide</0>"
-#~ msgstr ""
+msgstr "Brave é o lugar onde os primeiros adeptos prosperam. Estamos celebrando nossas origens cripto oferecendo aos clientes novos e antigos 50% de desconto em sua primeira campanha ao pagar com BAT."
 
 #: src/auth/registration/AccountChoice.tsx:34
 msgid "Browser ads"
-msgstr ""
+msgstr "Anúncios no navegador"
 
 #: src/auth/views/MobileAdsBenefits.tsx:23
 msgid "Browser-based delivery offers a new way to reach audiences on the Web."
-msgstr ""
+msgstr "A entrega baseada no navegador oferece uma nova abordagem para alcançar o público online."
 
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:52
 #: src/user/campaignList/CampaignList.tsx:95
 msgid "Budget"
-msgstr ""
+msgstr "Orçamento"
 
 #: src/auth/registration/BrowserForm.tsx:34
 msgid "Business name"
-msgstr ""
+msgstr "Nome da Empresa"
 
 #: src/validation/RegistrationSchema.tsx:14
 msgid "Business name is required"
-msgstr ""
+msgstr "O nome da empresa é obrigatório"
 
 #: src/auth/registration/BrowserForm.tsx:42
 msgid "Business website"
-msgstr ""
+msgstr "Site da Empresa"
 
 #: src/validation/RegistrationSchema.tsx:16
 msgid "Business Website is required"
-msgstr ""
-
-#: src/auth/components/AdvertiserAgreed.tsx:65
-#~ msgid "By continuing, you acknowledge and agree to our <0>Privacy Policy</0> and platform <1>Terms and Conditions</1>"
-#~ msgstr ""
+msgstr "O site da empresa é obrigatório"
 
 #: src/components/Creatives/CreativeList.tsx:163
 msgid "Call To Action"
-msgstr ""
+msgstr "Chamada para Ação"
 
 #: src/validation/CreativeSchema.tsx:61
 msgid "Call to action is required"
-msgstr ""
+msgstr "A chamada para ação é obrigatória"
 
 #: src/validation/CreativeSchema.tsx:60
 msgid "Call to action must be less than 15 characters"
-msgstr ""
+msgstr "A chamada para ação deve ter menos de 15 caracteres"
 
 #: src/user/ads/InlineContentAd.tsx:75
 msgid "Call to Action text"
-msgstr ""
+msgstr "Texto da Chamada para Ação"
 
 #: src/user/campaignList/CampaignList.tsx:61
 #: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:28
 msgid "Campaign"
-msgstr ""
+msgstr "Campanha"
 
 #: src/user/views/adsManager/views/advanced/components/form/NewCampaign.tsx:87
 msgid "Campaign creation is currently unavailable"
-msgstr ""
+msgstr "A criação da campanha não está disponível no momento"
 
 #: src/user/views/adsManager/views/advanced/components/form/EditCampaign.tsx:80
 msgid "Campaign does not exist, or cannot be edited. Please try again later."
-msgstr ""
+msgstr "A campanha não existe ou não pode ser editada. Por favor, tente novamente mais tarde."
 
 #: src/components/Navigation/DraftMenu.tsx:29
 msgid "Campaign Drafts"
-msgstr ""
+msgstr "Rascunhos de Campanha"
 
 #: src/validation/CampaignSchema.tsx:36
 msgid "Campaign Format is required"
-msgstr ""
+msgstr "O Formato da Campanha é obrigatório"
 
 #: src/user/views/adsManager/views/advanced/components/campaign/CampaignSettings.tsx:33
 msgid "Campaign Name"
-msgstr ""
+msgstr "Nome da Campanha"
 
 #: src/validation/CampaignSchema.tsx:33
 msgid "Campaign Name is required"
-msgstr ""
+msgstr "O nome da campanha é obrigatório"
 
 #: src/user/views/adsManager/views/advanced/components/campaign/CampaignSettings.tsx:25
 #: src/user/views/adsManager/views/advanced/components/form/components/BaseForm.tsx:25
 msgid "Campaign Settings"
-msgstr ""
+msgstr "Configurações da Campanha"
 
 #: src/components/Creatives/CreativeCampaigns.tsx:40
 #: src/components/Drawer/MiniSideBar.tsx:22
 #: src/user/views/user/CampaignView.tsx:41
 msgid "Campaigns"
-msgstr ""
+msgstr "Campanhas"
 
 #: src/components/Assets/UploadImage.tsx:128
 #: src/components/Campaigns/CloneCampaign.tsx:127
@@ -425,76 +381,68 @@ msgstr ""
 #: src/user/settings/NewKeyPairModal.tsx:242
 #: src/user/settings/UserApiKey.tsx:112
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: src/user/hooks/useGenerateApiKey.tsx:44
 msgid "cannot create api key"
-msgstr ""
+msgstr "não é possível criar a chave de API"
 
 #: src/checkout/lib/index.ts:19
 msgid "cannot create session"
-msgstr ""
+msgstr "não é possível criar sessão"
 
 #: src/components/Assets/UploadImage.tsx:72
 msgid "Choose"
-msgstr ""
-
-#: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:37
-#~ msgid "Choose a format for the campaign you would like to run"
-#~ msgstr ""
+msgstr "Escolher"
 
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:37
 msgid "Choose a format for the campaign you would like to run."
-msgstr ""
+msgstr "Escolha um formato para a campanha que você gostaria de executar."
 
 #: src/auth/registration/AccountChoice.tsx:48
 msgid "Choose campaign type"
-msgstr ""
+msgstr "Escolha o tipo de campanha"
 
 #: src/components/Assets/UploadImage.tsx:94
 msgid "Choose File"
-msgstr ""
-
-#: src/auth/registration/Register.tsx:36
-#~ msgid "Choose what kind of account to open"
-#~ msgstr ""
+msgstr "Escolha o Arquivo"
 
 #: src/auth/components/AdvertiserAddress.tsx:37
 msgid "City"
-msgstr ""
+msgstr "Cidade"
 
 #: src/validation/AdvertiserSchema.tsx:22
 msgid "City is required"
-msgstr ""
+msgstr "A cidade é obrigatória"
 
 #: src/components/Creatives/NewsPreview.tsx:69
 msgid "Click Here!"
-msgstr ""
+msgstr "Clique Aqui!"
 
 #: src/auth/views/MagicLink.tsx:37
 msgid "Click on the secure login link in the email to access your Brave Ads account."
-msgstr ""
+msgstr "Clique no link seguro de login no seu e-mail para acessar sua conta do Brave Ads."
 
 #: src/user/analytics/search/metrics.ts:52
 msgid "Click Through Rate"
-msgstr ""
+msgstr "Taxa de Cliques"
 
 #: src/user/analytics/analyticsOverview/components/BaseBarChart.tsx:57
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:42
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:75
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:152
 msgid "Click to site visit rate"
-msgstr ""
+msgstr "Taxa de Visitas ao Site por Clique"
 
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:68
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:60
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:176
 msgid "Click-through conversions"
-msgstr ""
+msgstr "Conversões por Clique"
 
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:30
 msgid "Click-through rate"
-msgstr ""
+msgstr "Taxa de Cliques"
 
 #: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:48
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:35
@@ -503,58 +451,58 @@ msgstr ""
 #: src/user/campaignList/CampaignList.tsx:131
 #: src/user/views/user/AdDetailTable.tsx:60
 msgid "Clicks"
-msgstr ""
+msgstr "Cliques"
 
 #: src/components/Campaigns/CloneCampaign.tsx:110
 #: src/components/Campaigns/CloneCampaign.tsx:136
 msgid "Clone"
-msgstr ""
+msgstr "Clonar"
 
 #: src/components/Campaigns/CloneCampaign.tsx:95
 msgid "Clone {campaignName}"
-msgstr ""
+msgstr "Clonar {campaignName}"
 
 #: src/components/Campaigns/CloneCampaign.tsx:115
 msgid "Clone campaign: \"{campaignName}\"?"
-msgstr ""
+msgstr "Clonar campanha: \"{campaignName}\"?"
 
 #: src/components/Campaigns/CloneCampaign.tsx:118
 msgid "Cloning a campaign will take all properties including ad sets and ads, and create a new draft campaign with them."
-msgstr ""
+msgstr "Clonar uma campanha vai copiar todas as configurações, incluindo conjuntos de anúncios e anúncios, e criar um novo rascunho de campanha com elas."
 
 #: src/components/Assets/UploadImage.tsx:128
 #: src/form/FormikButton.tsx:143
 #: src/user/settings/UserApiKey.tsx:112
 msgid "Close"
-msgstr ""
+msgstr "Fechar"
 
 #: src/components/Assets/UploadImage.tsx:82
 msgid "Complete"
-msgstr ""
+msgstr "Concluir"
 
 #: src/components/Creatives/CreativeSelect.tsx:114
 msgid "Complete selection"
-msgstr ""
+msgstr "Seleção concluída"
 
 #: src/auth/components/AdvertiserDetailsForm.tsx:98
 msgid "Complete your business profile to continue"
-msgstr ""
+msgstr "Complete o perfil da sua empresa para continuar"
 
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:41
 msgid "Congratulations! 🎉"
-msgstr ""
+msgstr "Parabéns! 🎉"
 
 #: src/components/Drawer/SupportMenu.tsx:75
 msgid "Contact"
-msgstr ""
+msgstr "Contato"
 
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:127
 msgid "Contact Sales"
-msgstr ""
+msgstr "Contate o Time de Vendas"
 
 #: src/components/Creatives/CreativeList.tsx:71
 msgid "Content"
-msgstr ""
+msgstr "Conteúdo"
 
 #: src/components/Creatives/CreativeStatusSwitch.tsx:137
 #: src/user/settings/NewKeyPairModal.tsx:156
@@ -562,508 +510,475 @@ msgstr ""
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:64
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:149
 msgid "Continue"
-msgstr ""
+msgstr "Continuar"
 
 #: src/components/Conversion/ConversionDisplay.tsx:18
 #: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:20
 msgid "Conversion"
-msgstr ""
+msgstr "Conversão"
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:70
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:150
 msgid "Conversion rate"
-msgstr ""
+msgstr "Taxa de conversão"
 
 #: src/components/Conversion/ConversionDisplay.tsx:46
 msgid "Conversion Type"
-msgstr ""
+msgstr "Tipo de Conversão"
 
 #: src/validation/CampaignSchema.tsx:152
 msgid "Conversion type must be Post Click or Post View"
-msgstr ""
+msgstr "O tipo de conversão deve ser Pós-Clique ou Pós-Visualização"
 
 #: src/validation/CampaignSchema.tsx:154
 msgid "Conversion type required."
-msgstr ""
+msgstr "Tipo de conversão obrigatório."
 
 #: src/validation/CampaignSchema.tsx:141
 msgid "Conversion URL must end in trailing asterisk (*)"
-msgstr ""
+msgstr "A URL de conversão deve terminar com um asterisco (*)"
 
 #: src/validation/CampaignSchema.tsx:129
 msgid "Conversion URL must not contain any whitespace"
-msgstr ""
+msgstr "A URL de conversão não deve conter espaços em branco"
 
 #: src/validation/CampaignSchema.tsx:133
 msgid "Conversion URL must start with https://"
-msgstr ""
+msgstr "A URL de conversão deve começar com https://"
 
 #: src/components/Conversion/ConversionDisplay.tsx:56
 msgid "Conversion URL Pattern"
-msgstr ""
+msgstr "Padrão de URL de Conversão"
 
 #: src/validation/CampaignSchema.tsx:126
 msgid "Conversion URL required."
-msgstr ""
+msgstr "A URL de conversão é obrigatória."
 
 #: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:47
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:60
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:50
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:166
 msgid "Conversions"
-msgstr ""
+msgstr "Conversões"
 
 #: src/user/settings/NewKeyPairModal.tsx:181
 msgid "Copy this and keep this safe!"
-msgstr ""
-
-#: src/user/analytics/search/metrics.ts:84
-#~ msgid "Cost per Acquisition"
-#~ msgstr ""
+msgstr "Copie isso e guarde em um local seguro!"
 
 #: src/auth/lib/index.ts:114
 msgid "Could not logout at this time. Please try again later."
-msgstr ""
+msgstr "Não foi possível fazer logout no momento. Por favor, tente novamente mais tarde."
 
 #: src/components/Conversion/ConversionFields.tsx:54
 msgid "Count conversions within X days of an impression"
-msgstr ""
+msgstr "Contar conversões dentro de X dias de uma visualização"
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:46
 msgid "Counted if the user clicks an ad and spends at least 10 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count."
-msgstr ""
+msgstr "Contado se o usuário clicar em um anúncio e passar pelo menos 10 segundos no site do anunciante, com o site aberto em uma aba ativa do navegador. Os 10 segundos devem ser gastos no site após o redirecionamento ao clicar no link do anúncio, e a aba deve permanecer aberta e ativa durante todo o tempo para que a visita conte."
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:36
 #: src/user/analytics/search/metrics.ts:45
 msgid "Counted when a user clicks on the ad. Does not include clicks to dismiss"
-msgstr ""
+msgstr "Contado quando um usuário clica no anúncio. Não inclui cliques para fechar."
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:66
 msgid "Counted when a user clicks the “close” or “x” button to make an ad go away"
-msgstr ""
+msgstr "Contado quando um usuário clica no botão \"fechar\" ou \"x\" para fazer um anúncio desaparecer"
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:51
 msgid "Counted when a user reaches a designated conversion landing page"
-msgstr ""
+msgstr "Contado quando um usuário chega a uma página de destino de conversão designada."
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:56
 msgid "Counted when a user reaches a designated conversion landing page following an ad impression."
-msgstr ""
+msgstr "Contado quando um usuário chega a uma página de destino de conversão designada após uma visualização de anúncio."
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:61
 msgid "Counted when a user reaches a designated conversion landing page following an impression and click of the ad."
-msgstr ""
+msgstr "Contado quando um usuário chega a uma página de destino de conversão designada após uma visualização e clique no anúncio."
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:31
 #: src/user/analytics/search/metrics.ts:37
 msgid "Counted when an ad is displayed on screen for a minimum of one second"
-msgstr ""
+msgstr "Contado quando um anúncio é exibido na tela por no mínimo um segundo."
 
 #: src/components/Country/CountryPicker.tsx:33
 msgid "Country"
-msgstr ""
+msgstr "País"
 
 #: src/validation/AdvertiserSchema.tsx:24
 msgid "Country is required"
-msgstr ""
+msgstr "O país é obrigatório"
 
 #: src/components/Location/LocationPicker.tsx:46
 msgid "Country Targeting"
-msgstr ""
+msgstr "Direcionamento por País"
 
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:72
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:89
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:156
 #: src/user/analytics/analyticsOverview/reports/os/components/OsBarChart.tsx:53
 msgid "CPA"
-msgstr ""
+msgstr "CPA (Aquisições)"
 
 #: src/util/billingType.ts:18
 msgid "CPC (Clicks)"
-msgstr ""
+msgstr "CPC (Cliques)"
 
 #: src/util/billingType.ts:17
 msgid "CPM (Impressions)"
-msgstr ""
+msgstr "CPM (Visualizações)"
 
 #: src/util/billingType.ts:19
 msgid "CPSV (Site Visits)"
-msgstr ""
+msgstr "CPSV (Visitas ao Site)"
 
 #: src/user/views/adsManager/views/advanced/components/form/components/PaymentButton.tsx:18
 msgid "Create & Submit For Approval"
-msgstr ""
+msgstr "Criar e Enviar Para Aprovação"
 
 #: src/components/Creatives/CreativeForm.tsx:82
 msgid "Create ad"
-msgstr ""
-
-#: src/auth/registration/Register.tsx:42
-#~ msgid "Create an account"
-#~ msgstr ""
+msgstr "Criar Anúncio"
 
 #: src/user/ads/NewAd.tsx:32
 msgid "Create new ad"
-msgstr ""
+msgstr "Criar Novo Anúncio"
 
 #: src/user/settings/NewKeyPairModal.tsx:129
 #: src/user/settings/NewKeyPairModal.tsx:164
 #: src/user/settings/NewKeyPairModal.tsx:213
 msgid "Create new keypair?"
-msgstr ""
+msgstr "Criar Novo Par de Chaves?"
 
 #: src/components/Assets/AdvertiserAssets.tsx:75
 #: src/components/Creatives/CreativeSelect.tsx:89
 msgid "created"
-msgstr ""
+msgstr "criado"
 
 #: src/user/analytics/analyticsOverview/components/BaseBarChart.tsx:58
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:40
 #: src/user/analytics/search/metrics.ts:53
 msgid "CTR"
-msgstr ""
+msgstr "CTR (Taxa de Cliques)"
 
 #: src/auth/views/LandingPage.tsx:65
 #: src/components/Button/ContainedDashboardButton.tsx:8
 #: src/components/Button/DashboardButton.tsx:14
 msgid "Dashboard"
-msgstr ""
+msgstr "Dashboard"
 
 #: src/user/reporting/csv.library.tsx:114
 msgid "Data not valid for this private key"
-msgstr ""
+msgstr "Dados inválidos para esta chave privada"
 
 #: src/user/analytics/analyticsOverview/components/EngagementHeader.tsx:51
 msgid "Day"
-msgstr ""
+msgstr "Dia"
 
 #: src/user/reporting/ReportMenu.tsx:102
 msgid "Decrypt Conversion Data?"
-msgstr ""
+msgstr "Descriptografar Dados de Conversão?"
 
 #: src/user/views/adsManager/views/advanced/components/campaign/CampaignSettings.tsx:27
 msgid "Define how you want your campaign to run."
-msgstr ""
+msgstr "Defina como deseja que sua campanha seja executada."
 
 #: src/user/ads/AdList.tsx:64
 msgid "DELETED"
-msgstr ""
+msgstr "EXCLUÍDO"
 
 #: src/user/analytics/analyticsOverview/reports/os/components/OsPieChart.tsx:21
 msgid "Device"
-msgstr ""
+msgstr "Dispositivo"
 
 #: src/form/FormikButton.tsx:43
 msgid "Disabled because you haven’t made any changes"
-msgstr ""
+msgstr "Desativado por falta de alterações"
 
 #: src/form/FormikButton.tsx:52
 msgid "Disabled due to validation errors"
-msgstr ""
+msgstr "Desativado devido a erros de validação"
 
 #: src/user/ads/NewAd.tsx:32
 msgid "Discard ad"
-msgstr ""
+msgstr "Descartar Anúncio"
 
 #: src/components/Steps/ActionButtons.tsx:29
 msgid "Discard campaign"
-msgstr ""
+msgstr "Descartar Campanha"
 
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:38
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:85
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:160
 msgid "Dismissal rate"
-msgstr ""
+msgstr "Taxa de Dispensas"
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:65
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:174
 msgid "Dismissals"
-msgstr ""
+msgstr "Dispensas"
 
 #: src/user/settings/UserApiKey.tsx:40
 msgid "Documentation can be found <0>here</0> on how to use the API."
-msgstr ""
+msgstr "A documentação sobre como utilizar a API pode ser encontrada <0>aqui</0>."
 
 #: src/validation/RegistrationSchema.tsx:34
 msgid "Domain is required"
-msgstr ""
+msgstr "O domínio é obrigatório"
 
-#: src/validation/RegistrationSchema.tsx:42
-msgid "Domain must match the email domain"
-msgstr ""
+#~ msgid "Domain must match the email domain"
+#~ msgstr "O domínio deve corresponder ao domínio do e-mail"
 
 #: src/validation/RegistrationSchema.tsx:35
 msgid "Domain must not contain any whitespace"
-msgstr ""
+msgstr "O domínio não deve conter espaços em branco"
 
 #: src/auth/registration/SearchForm.tsx:35
 msgid "Domain to advertise"
-msgstr ""
+msgstr "Domínio para anunciar"
 
 #: src/auth/views/MagicLink.tsx:43
 msgid "Don’t see the email? Check your spam folder or <0>try again.</0>"
-msgstr ""
+msgstr "Não recebeu o e-mail? Verifique sua pasta de spam ou <0>tente novamente.</0>"
 
 #: src/user/reporting/ReportMenu.tsx:62
 msgid "Download Report"
-msgstr ""
+msgstr "Baixar Relatório"
 
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:46
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:172
 msgid "Downvotes"
-msgstr ""
+msgstr "Votos Negativos"
 
 #: src/components/Navigation/DraftMenu.tsx:58
 msgid "Draft"
-msgstr ""
+msgstr "Rascunho"
 
 #: src/components/Navigation/DraftMenu.tsx:46
 msgid "Drafts"
-msgstr ""
+msgstr "Rascunhos"
 
 #: src/user/campaignList/EditButton.tsx:42
 #: src/user/views/adsManager/views/advanced/components/review/components/ReviewContainer.tsx:32
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
 #: src/user/campaignList/EditButton.tsx:28
 msgid "Edit {campaignName}"
-msgstr ""
+msgstr "Editar {campaignName}"
 
 #: src/components/Creatives/CreativeForm.tsx:82
 msgid "Edit ad"
-msgstr ""
+msgstr "Editar anúncio"
 
 #: src/auth/registration/BrowserForm.tsx:24
 #: src/auth/views/Login.tsx:43
 #: src/auth/views/MagicLink.tsx:74
 #: src/user/settings/UserForm.tsx:51
 msgid "Email"
-msgstr ""
+msgstr "E-mail"
 
 #: src/validation/UserSchema.tsx:7
 msgid "Email address is required"
-msgstr ""
+msgstr "Endereço de e-mail é obrigatório"
 
 #: src/user/campaignList/CampaignList.tsx:183
 msgid "End"
-msgstr ""
+msgstr "Fim"
 
 #: src/components/Campaigns/CampaignDateRange.tsx:39
 msgid "End Date"
-msgstr ""
+msgstr "Data Final"
 
 #: src/validation/CampaignSchema.tsx:73
 msgid "End date is required"
-msgstr ""
+msgstr "A data final é obrigatória"
 
 #: src/validation/CampaignSchema.tsx:74
 msgid "End date must be after start date"
-msgstr ""
+msgstr "A data final deve ser após a data de início"
 
 #: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:47
 msgid "End Time"
-msgstr ""
+msgstr "Horário de término"
 
 #: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:26
 msgid "Enter a URL that represents your conversion goal, like a checkout or subscription confirmation page. <0/>Brave will count unique visits to that page from users who saw or clicked your ad."
-msgstr ""
+msgstr "Digite uma URL que represente o seu objetivo de conversão, como uma página de finalização de compra/checkout ou confirmação de inscrição. <0/>O Brave irá contabilizar as visitas únicas a essa página feitas por usuários que visualizaram ou clicaram no seu anúncio."
 
 #: src/auth/components/AdvertiserDetailsForm.tsx:108
 msgid "Enter Ads Manager"
-msgstr ""
+msgstr "Acessar o Gerenciador de Anúncios"
 
 #: src/auth/views/MagicLink.tsx:63
 msgid "Enter your email address to get a secure login link. Use this link to access your Brave Ads account."
-msgstr ""
+msgstr "Insira seu e-mail para obter um link seguro de login. Use este link para acessar sua conta do Brave Ads."
 
 #: src/user/ads/NotificationAd.tsx:85
 msgid "Example - https://brave.com/brave-rewards/"
-msgstr ""
+msgstr "Exemplo - https://brave.com/brave-rewards/"
 
 #: src/user/reporting/ReportMenu.tsx:142
 msgid "Export"
-msgstr ""
+msgstr "Exportar"
 
 #: src/components/Assets/hooks/useUploadFile.ts:149
 msgid "Failed to Fetch"
-msgstr ""
+msgstr "Falha ao buscar"
 
 #: src/components/Assets/hooks/useGetImagePreviewUrl.ts:50
 msgid "Failed to load image"
-msgstr ""
+msgstr "Falha ao carregar imagem"
 
 #: src/components/Assets/hooks/useUploadFile.ts:145
 msgid "Failed to upload image"
-msgstr ""
+msgstr "Falha ao enviar imagem"
 
 #: src/components/Button/AlwaysOnFormButton.tsx:34
 msgid "Feedback"
-msgstr ""
+msgstr "Feedback"
 
 #: src/components/Assets/hooks/useUploadFile.ts:44
 msgid "File upload complete for \"{fileName}\""
-msgstr ""
+msgstr "Upload de arquivo completo para \"{fileName}\""
 
 #: src/user/ads/AdsExistingAd.tsx:100
 msgid "Filter ads by name..."
-msgstr ""
+msgstr "Filtrar anúncios por nome..."
 
 #: src/validation/AdvertiserSchema.tsx:8
 msgid "First party tracking acknowledgement is required"
-msgstr ""
+msgstr "É necessário concordar com o rastreamento interno do site"
 
 #: src/auth/views/MobileAdsBenefits.tsx:15
 msgid "For all business sizes"
-msgstr ""
-
-#: src/auth/registration/AccountChoice.tsx:74
-#~ msgid "For enterprise and agency businesses looking for bespoke ad solutions via dedicated Brave Ads representatives."
-#~ msgstr ""
-
-#: src/auth/registration/AccountChoice.tsx:66
-#~ msgid "For small to mid-sized businesses to create and manage their Brave Ads campaigns independently."
-#~ msgstr ""
+msgstr "Para todos os tamanhos de negócios"
 
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:34
 #: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:36
 msgid "Format"
-msgstr ""
+msgstr "Formato"
 
 #: src/components/Date/DateRangePicker.tsx:28
 msgid "From"
-msgstr ""
+msgstr "De"
 
-#: src/auth/registration/MarketingChannel.tsx:43
+#: src/auth/registration/MarketingChannel.tsx:44
 msgid "From a Brave sales representative"
-msgstr ""
+msgstr "De um representante de vendas do Brave"
 
 #: src/auth/registration/MarketingChannel.tsx:36
 msgid "From a friend/colleague"
-msgstr ""
+msgstr "De um amigo/colega"
 
 #: src/auth/registration/MarketingChannel.tsx:28
 msgid "From an influential person I follow online"
-msgstr ""
+msgstr "De uma pessoa influente que sigo online"
 
 #: src/auth/registration/BrowserForm.tsx:15
 #: src/auth/registration/SearchForm.tsx:16
 msgid "Full name"
-msgstr ""
+msgstr "Nome completo"
 
 #: src/user/settings/UserForm.tsx:65
 msgid "Full Name"
-msgstr ""
+msgstr "Nome Completo"
 
 #: src/validation/UserSchema.tsx:9
 msgid "Full name is required"
-msgstr ""
+msgstr "O nome completo é obrigatório"
 
 #: src/user/settings/UserApiKey.tsx:120
 msgid "Generate"
-msgstr ""
+msgstr "Gerar"
 
 #: src/user/settings/NewKeyPairModal.tsx:91
 msgid "Generate a keypair for your organization. Brave Ads will use your organization’s public key to sign and encrypt conversion data. Only your organization will have access to the private key, which can be used to decrypt and view conversion data."
-msgstr ""
+msgstr "Gerar um par de chaves para sua organização. O Brave Ads usará a chave pública da sua organização para assinar e criptografar os dados de conversão. Apenas sua organização terá acesso à chave privada, que pode ser usada para descriptografar e visualizar os dados de conversão."
 
 #: src/user/settings/UserApiKey.tsx:63
 msgid "Generate a new API key?"
-msgstr ""
+msgstr "Gerar uma nova chave de API?"
 
 #: src/user/settings/UserApiKey.tsx:55
 msgid "Generate API Key"
-msgstr ""
+msgstr "Gerar Chave de API"
 
 #: src/user/settings/UserApiKey.tsx:69
 msgid "Generating a new API key will result in the deactivation of your previous key, rendering it unusable for future requests. Make sure to update your code with the new key to avoid disruptions in your application’s functionality."
-msgstr ""
+msgstr "Gerar uma nova chave de API resultará na desativação da sua chave anterior, tornando-a inutilizável para futuras solicitações. Certifique-se de atualizar seu código com a nova chave para evitar interrupções na funcionalidade de sua aplicação."
 
 #: src/auth/views/LandingPage.tsx:45
 msgid "Get 50% your first campaign when you pay in Basic Attention Token"
-msgstr ""
-
-#: src/search/SearchTalkingPoints.tsx:17
-#~ msgid "Get a free one-month test to see how Search Ads perform for your brand."
-#~ msgstr ""
+msgstr "Obtenha 50% de desconto em sua primeira campanha quando pagar com o Basic Attention Token"
 
 #: src/auth/registration/BraveAdsContactFrame.tsx:23
 msgid "Get in touch with our team"
-msgstr ""
+msgstr "Entre em contato como o nosso time"
 
 #: src/auth/views/MagicLink.tsx:90
 msgid "Get login link"
-msgstr ""
+msgstr "Obter o link de login"
 
 #: src/auth/views/LandingPage.tsx:67
 #: src/components/AppBar/LandingPageAppBar.tsx:39
 msgid "Get started"
-msgstr ""
+msgstr "Começar"
 
 #: src/components/Drawer/SupportMenu.tsx:59
 msgid "Help Center"
-msgstr ""
+msgstr "Central de Ajuda"
 
 #: src/user/analytics/analyticsOverview/components/MetricFilter.tsx:64
 msgid "Hide"
-msgstr ""
+msgstr "Ocultar"
 
 #: src/user/analytics/analyticsOverview/components/EngagementHeader.tsx:50
 msgid "Hour"
-msgstr ""
-
-#: src/auth/components/AdvertiserAgreed.tsx:77
-#~ msgid "I agree"
-#~ msgstr ""
+msgstr "Hora"
 
 #: src/auth/components/AdvertiserAgreed.tsx:56
 msgid "I have reviewed and agree to the <0>Advertiser Privacy Policy</0> and platform <1>Terms of Service</1> applicable to Brave Ads."
-msgstr ""
-
-#: src/auth/components/AdvertiserAgreed.tsx:34
-#~ msgid "I understand that Brave Ads will not be compatible with Google Analytics and similar solutions that rely on third-party trackers"
-#~ msgstr ""
+msgstr "Eu li e concordo com a <0>Política de Privacidade do Anunciante</0> e os <1>Termos de Serviço</1> da plataforma que se aplicam ao Brave Ads."
 
 #: src/auth/components/AdvertiserAgreed.tsx:16
 msgid "I understand that first-party analytics are necessary for independent reporting."
-msgstr ""
+msgstr "Entendo que é necessário usar análises internas para relatórios independentes."
 
 #: src/auth/components/AdvertiserAgreed.tsx:45
 msgid "I understand that I can only run ad campaigns in English, Spanish, and Portuguese."
-msgstr ""
+msgstr "Entendo que só posso executar campanhas publicitárias em inglês, espanhol e português."
 
 #: src/auth/components/AdvertiserAgreed.tsx:30
 msgid "I understand that payment is required before ad campaigns can be launched."
-msgstr ""
-
-#: src/auth/components/AdvertiserAgreed.tsx:54
-#~ msgid "I understand that pre-payment is required to launch my campaigns"
-#~ msgstr ""
+msgstr "Entendo que o pagamento é necessário antes que as campanhas possam ser lançadas."
 
 #: src/auth/registration/MarketingOptIn.tsx:14
 msgid "I would like to receive marketing emails about new features and promotions from Brave Ads"
-msgstr ""
+msgstr "Gostaria de receber e-mails sobre novos recursos e promoções do Brave Ads"
 
 #: src/components/Assets/ImageAutocomplete.tsx:45
 msgid "Image"
-msgstr ""
+msgstr "Imagem"
 
 #: src/components/Assets/ImagePreview.tsx:58
 msgid "Image failed to load"
-msgstr ""
+msgstr "Falha ao carregar imagem"
 
 #: src/validation/CreativeSchema.tsx:69
 msgid "Image URL must be hosted on our private CDN"
-msgstr ""
+msgstr "A URL da imagem deve estar hospedada em nosso CDN privado"
 
 #: src/validation/CreativeSchema.tsx:65
 msgid "Image URL must be valid"
-msgstr ""
+msgstr "A URL da imagem deve ser válida"
 
 #: src/components/Assets/AdvertiserAssets.tsx:33
 #: src/components/Creatives/CreativeList.tsx:101
 msgid "Images"
-msgstr ""
+msgstr "Imagens"
 
 #: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:46
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:30
@@ -1072,190 +987,170 @@ msgstr ""
 #: src/user/campaignList/CampaignList.tsx:117
 #: src/user/views/user/AdDetailTable.tsx:48
 msgid "Impressions"
-msgstr ""
+msgstr "Visualizações"
 
 #: src/user/analytics/analyticsOverview/reports/os/components/OsPieChart.tsx:39
 msgid "Impressions (Device)"
-msgstr ""
+msgstr "Visualizações (Dispositivo)"
 
 #: src/auth/registration/MarketingChannel.tsx:37
 msgid "In a blog post/news article"
-msgstr ""
+msgstr "Em uma postagem de blog/artigo de notícias"
 
 #: src/auth/registration/MarketingChannel.tsx:33
 msgid "In a newsletter I subscribe to"
-msgstr ""
+msgstr "Em uma newsletter que sou inscrito"
 
 #: src/auth/registration/MarketingChannel.tsx:39
 msgid "In a post by Brave on LinkedIn"
-msgstr ""
+msgstr "Em uma postagem do Brave no LinkedIn"
 
 #: src/auth/registration/MarketingChannel.tsx:42
 msgid "In a video on YouTube"
-msgstr ""
-
-#: src/auth/registration/AdvertiserRegistered.tsx:25
-#~ msgid "In the meantime, check out our <0>advertiser resources</0>. If you have any questions, please reach out to <1>selfserve@brave.com</1>."
-#~ msgstr ""
+msgstr "Em um vídeo no YouTube"
 
 #: src/components/Datagrid/renderers.tsx:32
 msgid "In your local time this is"
-msgstr ""
+msgstr "No seu horário local, isso é"
 
 #: src/components/Campaigns/CampaignAgeFilter.tsx:34
 msgid "Include campaigns that ended over 6 months ago"
-msgstr ""
-
-#: src/search/SearchTalkingPoints.tsx:8
-#~ msgid "Incremental"
-#~ msgstr ""
+msgstr "Incluir campanhas que terminaram há mais de 6 meses"
 
 #: src/components/Assets/hooks/useUploadFile.ts:164
 msgid "Invalid format"
-msgstr ""
+msgstr "Formato inválido"
 
 #: src/checkout/lib/index.ts:46
 msgid "invalid session"
-msgstr ""
+msgstr "sessão inválida"
 
 #: src/auth/lib/index.ts:100
 msgid "Invalid Session"
-msgstr ""
+msgstr "Sessão Inválida"
 
 #: src/auth/lib/index.ts:146
 msgid "Invalid Token"
-msgstr ""
+msgstr "Token Inválido"
 
 #: src/components/Datagrid/stringFilterOperators.tsx:11
 msgid "is not"
-msgstr ""
+msgstr "não é"
 
 #: src/user/settings/UserApiKey.tsx:100
 msgid "Key copied"
-msgstr ""
+msgstr "Chave copiada"
 
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:89
 msgid "Key Statistics"
-msgstr ""
+msgstr "Estatísticas da chave"
 
 #: src/user/settings/NewKeyPairModal.tsx:87
 msgid "Keypairs"
-msgstr ""
+msgstr "Pares de chaves"
 
 #: src/validation/AdvertiserSchema.tsx:11
 msgid "Language acknowledgement is required"
-msgstr ""
+msgstr "É necessário confirmar o idioma"
 
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:86
 msgid "Launch a Campaign"
-msgstr ""
+msgstr "Lançar uma Campanha"
 
 #: src/components/Button/LearnMoreButton.tsx:23
 msgid "Learn More"
-msgstr ""
+msgstr "Saiba Mais"
 
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:96
 msgid "Learn more about BAT"
-msgstr ""
+msgstr "Saiba mais sobre o BAT"
 
 #: src/auth/registration/AccountChoice.tsx:55
 msgid "Learn more about various campaign types"
-msgstr ""
+msgstr "Saiba mais sobre diferentes tipos de campanha"
 
 #: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:34
 msgid "Let Brave pick categories for me."
-msgstr ""
+msgstr "Deixe o Brave escolher categorias para mim."
 
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/BudgetField.tsx:18
 #: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:52
 msgid "Lifetime Budget"
-msgstr ""
+msgstr "Orçamento Vitalício"
 
 #: src/validation/CampaignSchema.tsx:38
 msgid "Lifetime budget is required"
-msgstr ""
+msgstr "O orçamento vitalício é obrigatório"
 
 #: src/validation/CampaignSchema.tsx:41
 msgid "Lifetime budget must be ${MIN_PER_CAMPAIGN} or more"
-msgstr ""
+msgstr "O orçamento vitalício deve ser de ${MIN_PER_CAMPAIGN} ou mais"
 
 #: src/validation/CampaignSchema.tsx:50
 msgid "Lifetime budget must be higher for date range provided. Minimum ${min}."
-msgstr ""
+msgstr "O orçamento vitalício deve ser maior para o intervalo de datas fornecido. Mínimo ${min}."
 
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:48
 msgid "Limited time only. Available to new advertisers, and those who ran campaigns before September 30, 2023."
-msgstr ""
+msgstr "Por tempo limitado. Disponível para novos anunciantes e aqueles que executaram campanhas antes de 30 de setembro de 2023."
 
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/LocationField.tsx:8
 msgid "Location"
-msgstr ""
+msgstr "Localização"
 
 #: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:67
 msgid "Locations"
-msgstr ""
+msgstr "Localizações"
 
 #: src/auth/views/LandingPage.tsx:81
 #: src/auth/views/Login.tsx:67
 #: src/components/AppBar/LandingPageAppBar.tsx:114
 msgid "Log in"
-msgstr ""
+msgstr "Entrar"
 
 #: src/auth/views/Login.tsx:36
 msgid "Log into your Brave Ads account"
-msgstr ""
+msgstr "Faça login em sua conta do Brave Ads"
 
 #: src/auth/views/AuthVerify.tsx:36
 msgid "Logging in"
-msgstr ""
+msgstr "Fazendo login"
 
 #: src/user/views/adsManager/views/advanced/components/form/components/PaymentButton.tsx:9
 msgid "Make payment & submit for approval"
-msgstr ""
+msgstr "Efetue o pagamento e envie para aprovação"
 
 #: src/user/ads/NotificationAd.tsx:73
 msgid "Make sure to include your brand name in the title OR body of the ad. Otherwise, it will be rejected."
-msgstr ""
-
-#: src/auth/registration/AccountChoice.tsx:72
-#~ msgid "Managed service"
-#~ msgstr ""
+msgstr "Certifique-se de incluir o nome da sua marca no título OU no corpo do anúncio. Caso contrário, ele será rejeitado."
 
 #: src/user/ads/NotificationAd.tsx:56
 msgid "Max 30 Characters"
-msgstr ""
+msgstr "Máx. 30 caracteres"
 
 #: src/user/ads/NotificationAd.tsx:63
 msgid "Max 60 Characters"
-msgstr ""
-
-#: src/auth/registration/AccountChoice.tsx:163
-#~ msgid "Minimum Spend"
-#~ msgstr ""
+msgstr "Máx. 60 caracteres"
 
 #: src/components/Creatives/CreativeForm.tsx:138
 msgid "Modifying an ad will immediately put it into review. This means it will no longer be shown to users until it is approved."
-msgstr ""
+msgstr "Modificar um anúncio o colocará imediatamente em revisão. Isso significa que não será mais exibido aos usuários até que seja aprovado."
 
 #: src/components/Creatives/CreativeForm.tsx:140
 msgid "Modifying an ad will immediately put it into review. This means it will no longer be shown to users until it is approved. This ad is also shared across {campaignLength} campaigns. Any modifications made will be effective for all campaigns using this creative."
-msgstr ""
+msgstr "Modificar um anúncio o colocará imediatamente em revisão. Isso significa que não será mais exibido aos usuários até que seja aprovado. Este anúncio também é compartilhado em {campaignLength} campanhas. Quaisquer modificações feitas serão eficazes para todas as campanhas que utilizam este criativo."
 
 #: src/components/Creatives/CreativeStatusSwitch.tsx:101
 msgid "Modifying the state of this ad will effect more than one campaign:"
-msgstr ""
-
-#: src/auth/registration/AccountChoice.tsx:166
-#~ msgid "month"
-#~ msgstr ""
+msgstr "Modificar o estado deste anúncio afetará mais de uma campanha:"
 
 #: src/user/analytics/analyticsOverview/components/EngagementHeader.tsx:53
 msgid "Month"
-msgstr ""
+msgstr "Mês"
 
 #: src/user/adSet/AdSetList.tsx:50
 msgid "more"
-msgstr ""
+msgstr "mais"
 
 #: src/components/Creatives/CreativeCampaigns.tsx:45
 #: src/components/Creatives/CreativeList.tsx:46
@@ -1266,505 +1161,465 @@ msgstr ""
 #: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:41
 #: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:30
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #: src/user/views/adsManager/views/advanced/components/adSet/AdSetFields.tsx:36
 msgid "Name your ad set to distinguish it from others."
-msgstr ""
+msgstr "Nomeie seu conjunto de anúncios para diferenciá-lo dos demais."
 
 #: src/user/views/adsManager/views/advanced/components/adSet/NewAdSet.tsx:96
 msgid "New"
-msgstr ""
+msgstr "Novo"
 
 #: src/components/Navigation/NewCreativeButton.tsx:25
 msgid "New ad"
-msgstr ""
+msgstr "Novo anúncio"
 
 #: src/user/settings/UserApiKey.tsx:61
 msgid "New API Key"
-msgstr ""
+msgstr "Nova Chave de API"
 
 #: src/components/Navigation/NewCampaignButton.tsx:29
 msgid "New Campaign"
-msgstr ""
+msgstr "Nova Campanha"
 
 #: src/user/views/adsManager/views/advanced/components/review/Review.tsx:40
 msgid "New campaigns typically take up to 48 hours to review during a regular U.S. business week."
-msgstr ""
+msgstr "Novas campanhas geralmente demoram até 48 horas para serem revisadas durante uma semana de trabalho regular, equivalente a dois dias úteis, nos Estados Unidos."
 
 #: src/user/settings/NewKeyPairModal.tsx:119
 msgid "New Keypair"
-msgstr ""
+msgstr "Novo Par de Chaves"
 
 #: src/user/campaignList/CampaignList.tsx:261
 #: src/user/library/index.ts:248
 #: src/util/campaign.ts:7
 msgid "New tab takeover"
-msgstr ""
+msgstr "Novo destaque de aba"
 
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:55
 msgid "New tab takeovers"
-msgstr ""
+msgstr "Novos destaques de aba"
 
 #: src/user/library/index.ts:249
 #: src/util/campaign.ts:8
 msgid "Newsfeed"
-msgstr ""
+msgstr "Feed de notícias"
 
 #: src/user/ads/InlineContentAd.tsx:62
 msgid "Newsfeed Ad"
-msgstr ""
+msgstr "Anúncio no feed de notícias"
 
 #: src/components/Creatives/CreativeType.tsx:18
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:52
 msgid "Newsfeed ads"
-msgstr ""
+msgstr "Anúncios no feed de notícias"
 
 #: src/auth/registration/AccountChoice.tsx:76
 #: src/components/Steps/NextAndBack.tsx:46
 msgid "Next"
-msgstr ""
+msgstr "Próximo"
 
 #: src/components/Datagrid/renderers.tsx:68
 msgid "No"
-msgstr ""
+msgstr "Não"
 
 #: src/validation/CampaignSchema.tsx:180
 msgid "No {billingType} pricing available for {label}, contact selfserve@brave.com for help"
-msgstr ""
+msgstr "Não há preços de {billingType} disponíveis para {label}, entre em contato com selfserve@brave.com para obter ajuda"
 
 #: src/components/Conversion/ConversionDisplay.tsx:19
 msgid "No conversion URL setup"
-msgstr ""
+msgstr "Nenhuma configuração de URL de conversão"
 
 #: src/user/reporting/csv.library.tsx:96
 msgid "No file result"
-msgstr ""
+msgstr "Sem resultado de arquivo"
 
 #: src/user/ads/AdsExistingAd.tsx:77
 msgid "No previous ads available"
-msgstr ""
+msgstr "Nenhum anúncio anterior disponível"
 
 #: src/checkout/lib/index.ts:26
 msgid "no session created"
-msgstr ""
+msgstr "nenhuma sessão criada"
 
 #: src/auth/views/AuthVerify.tsx:55
 msgid "Not automatically redirected? Click this link to go to the dashboard."
-msgstr ""
+msgstr "Não foi redirecionado automaticamente? Clique neste link para acessar o dashboard."
 
 #: src/user/library/index.ts:247
 #: src/util/campaign.ts:6
 msgid "Notification"
-msgstr ""
+msgstr "Notificação"
 
 #: src/user/ads/NotificationAd.tsx:48
 msgid "Notification ad"
-msgstr ""
+msgstr "Anúncio de notificação"
 
 #: src/components/Creatives/CreativeType.tsx:14
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:47
 msgid "Notification ads"
-msgstr ""
+msgstr "Anúncios de notificação"
 
 #: src/components/Conversion/ConversionDisplay.tsx:51
 #: src/components/Conversion/ConversionFields.tsx:48
 msgid "Observation Window"
-msgstr ""
+msgstr "Janela de Observação"
 
 #: src/validation/CampaignSchema.tsx:146
 msgid "Observation window must be 1, 7, or 30 days."
-msgstr ""
+msgstr "A janela de observação deve ser de 1, 7 ou 30 dias."
 
 #: src/validation/CampaignSchema.tsx:148
 msgid "Observation window required."
-msgstr ""
+msgstr "A janela de observação é necessária."
 
 #: src/components/Creatives/CreativeList.tsx:38
 msgid "On / Off"
-msgstr ""
+msgstr "Ligado / Desligado"
 
 #: src/auth/registration/MarketingChannel.tsx:31
 msgid "On a podcast I listen to"
-msgstr ""
+msgstr "Em um podcast que eu ouço"
 
 #: src/user/adSet/AdSetList.tsx:84
 #: src/user/campaignList/CampaignList.tsx:195
 msgid "On/Off"
-msgstr ""
+msgstr "Ligado/Desligado"
 
 #: src/user/settings/NewKeyPairModal.tsx:229
 msgid "Once confirmed, your organization’s keypair will be replaced with the new keypair."
-msgstr ""
-
-#: src/auth/registration/AdvertiserRegistered.tsx:19
-#~ msgid "Once the review process is complete, we will send you an email to notify you of the approval status and any further steps required."
-#~ msgstr ""
+msgstr "Após a confirmação, o par de chaves da sua organização será substituído por um novo."
 
 #: src/auth/registration/AccountChoice.tsx:79
 msgid "or <0>contact us</0> for premium ad placements"
-msgstr ""
-
-#: src/search/SearchLandingPage.tsx:82
-#~ msgid "Or email <0>searchads@brave.com</0>"
-#~ msgstr ""
+msgstr "ou <0>entre em contato conosco</0> para posicionar anúncios premium"
 
 #: src/auth/views/MagicLink.tsx:100
 msgid "or sign in using a password"
-msgstr ""
+msgstr "ou faça login usando uma senha"
 
 #: src/auth/views/Login.tsx:77
 msgid "or sign in using a secure link"
-msgstr ""
+msgstr "ou faça login usando um link seguro"
 
 #: src/user/settings/Settings.tsx:49
 msgid "Organization"
-msgstr ""
+msgstr "Organização"
 
 #: src/user/analytics/analyticsOverview/reports/os/components/OsPieChart.tsx:21
 msgid "OS"
-msgstr ""
+msgstr "SO (Sistema Operacional)"
 
-#: src/auth/registration/MarketingChannel.tsx:45
+#: src/auth/registration/MarketingChannel.tsx:51
 msgid "Other (please specify)"
-msgstr ""
+msgstr "Outro (por favor, especifique)"
 
-#: src/auth/registration/MarketingChannel.tsx:52
+#: src/auth/registration/MarketingChannel.tsx:58
 msgid "Other source"
-msgstr ""
+msgstr "Outra fonte"
 
 #: src/auth/views/Login.tsx:51
 #: src/user/settings/UserForm.tsx:57
 msgid "Password"
-msgstr ""
+msgstr "Senha"
 
 #: src/components/Switch/OnOff.tsx:36
 msgid "Pause"
-msgstr ""
+msgstr "Pausar"
 
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:36
 msgid "Pay with BAT to get <0>50% off</0> your first campaign"
-msgstr ""
+msgstr "Pague com BAT e ganhe <0>50% de desconto</0> na sua primeira campanha"
 
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/PaymentMethodField.tsx:18
 msgid "Payment"
-msgstr ""
+msgstr "Pagamento"
 
 #: src/validation/AdvertiserSchema.tsx:14
 msgid "Payment acknowledgement is required"
-msgstr ""
+msgstr "É necessário confirmar o pagamento"
 
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/PaymentMethodField.tsx:21
 msgid "Payment is required before launching your campaign."
-msgstr ""
+msgstr "Antes de lançar sua campanha, é necessário efetuar o pagamento."
 
 #: src/user/reporting/ReportMenu.tsx:73
 msgid "Performance Report"
-msgstr ""
+msgstr "Relatório de Desempenho"
 
 #: src/components/Platform/PlatformPicker.tsx:41
 #: src/user/adSet/AdSetList.tsx:119
 #: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:53
 msgid "Platforms"
-msgstr ""
+msgstr "Plataformas"
 
 #: src/user/views/user/reports/ConsultAccountManager.tsx:14
 msgid "Please ask your Account Manager for reports on campaigns of this format."
-msgstr ""
+msgstr "Por favor, consulte o seu Gerente de Conta para obter relatórios sobre campanhas deste tipo."
 
 #: src/user/settings/NewKeyPairModal.tsx:217
 msgid "Please confirm your organization’s new private key:"
-msgstr ""
+msgstr "Por favor, confirme a nova chave privada da sua organização:"
 
 #: src/auth/lib/index.ts:27
 msgid "Please enter a username and password"
-msgstr ""
+msgstr "Por favor, insira um nome de usuário e senha"
 
 #: src/validation/RegistrationSchema.tsx:38
 msgid "Please enter a valid domain, for example: brave.com"
-msgstr ""
+msgstr "Por favor, insira um domínio válido, por exemplo: brave.com"
 
 #: src/validation/UserSchema.tsx:8
 msgid "Please enter a valid email address"
-msgstr ""
+msgstr "Por favor, insira um endereço de e-mail válido"
 
 #: src/validation/CreativeSchema.tsx:19
 #: src/validation/RegistrationSchema.tsx:21
 msgid "Please enter a valid URL, for example https://brave.com"
-msgstr ""
+msgstr "Por favor, insira uma URL válida, por exemplo https://brave.com"
 
 #: src/validation/CampaignSchema.tsx:137
 msgid "Please enter a valid URL, for example https://brave.com/product/*"
-msgstr ""
+msgstr "Por favor, insira uma URL válida, por exemplo https://brave.com/product/*"
 
 #: src/auth/hooks/mutations/useGetLink.ts:16
 msgid "Please enter an email."
-msgstr ""
+msgstr "Por favor, insira um e-mail."
 
-#: src/validation/RegistrationSchema.tsx:62
+#: src/validation/RegistrationSchema.tsx:52
 msgid "Please let us know how you heard about Brave Ads"
-msgstr ""
+msgstr "Por favor, nos diga como você descobriu o Brave Ads"
 
 #: src/validation/RegistrationSchema.tsx:24
 msgid "Please let us know why you're interested in Brave Ads"
-msgstr ""
-
-#: src/auth/registration/AdvertiserRegistered.tsx:20
-#~ msgid "Please reach out to <0>selfserve@brave.com</0> or try again."
-#~ msgstr ""
+msgstr "Por favor, nos diga por que você está interessado no Brave Ads"
 
 #: src/components/Error/ErrorDetail.tsx:71
 msgid "Please refresh the page to try again, or email <0/> for assistance."
-msgstr ""
-
-#: src/basic-attention-token/PrivacyPolicy.tsx:21
-#~ msgid "Please see our <0>Advertiser Privacy Policy</0> and <1>Terms of Service</1> applicable to Brave Ads"
-#~ msgstr ""
+msgstr "Por favor, atualize a página e tente novamente, ou envie um e-mail para <0/> para obter ajuda."
 
 #: src/basic-attention-token/PrivacyPolicy.tsx:21
 msgid "Please see our <0>Advertiser Privacy Policy</0> and <1>Terms of Service</1> applicable to Brave Ads."
-msgstr ""
+msgstr "Por favor, consulte nossa <0>Política de Privacidade do Anunciante</0> e <1>Termos de Serviço</1> que se aplicam ao Brave Ads."
 
-#: src/validation/RegistrationSchema.tsx:67
+#: src/validation/RegistrationSchema.tsx:57
 msgid "Please specify how you heard about Brave Ads"
-msgstr ""
+msgstr "Por favor, nos diga como você ficou sabendo sobre o Brave Ads"
 
 #: src/components/Conversion/ConversionFields.tsx:20
 msgid "Post-Click"
-msgstr ""
+msgstr "Pós-Clique"
 
 #: src/components/Conversion/ConversionFields.tsx:28
 msgid "Post-Click: Viewed ad and converted by clicking its link"
-msgstr ""
+msgstr "Pós-Clique: Visualizou o anúncio e converteu ao clicar no link"
 
 #: src/components/Conversion/ConversionFields.tsx:19
 msgid "Post-View"
-msgstr ""
+msgstr "Pós-Visualização"
 
 #: src/components/Conversion/ConversionFields.tsx:24
 msgid "Post-View: Viewed ad and converted by visiting site on their own."
-msgstr ""
+msgstr "Pós-Visualização: Visualizou o anúncio e converteu ao visitar o site por conta própria."
 
 #: src/auth/views/MobileAdsBenefits.tsx:22
 msgid "Powerful ad formats"
-msgstr ""
+msgstr "Formatos de anúncio poderosos"
 
 #: src/components/Assets/hooks/useUploadFile.ts:52
 msgid "Preparing file for upload..."
-msgstr ""
+msgstr "Preparando arquivo para upload..."
 
 #: src/user/views/adsManager/views/advanced/components/campaign/components/CustomPriceSelect.tsx:23
 #: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:62
 msgid "Price"
-msgstr ""
+msgstr "Preço"
 
 #: src/validation/CampaignSchema.tsx:93
 msgid "Price is a required field"
-msgstr ""
+msgstr "Preço é um campo obrigatório"
 
 #: src/user/views/adsManager/views/advanced/components/campaign/CampaignSettings.tsx:46
 msgid "Pricing"
-msgstr ""
+msgstr "Preços"
 
 #: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:57
 msgid "Pricing Type"
-msgstr ""
+msgstr "Tipo de Preço"
 
 #: src/validation/CampaignSchema.tsx:96
 msgid "Pricing type is a required field"
-msgstr ""
+msgstr "Tipo de preço é um campo obrigatório"
 
 #: src/validation/CampaignSchema.tsx:95
 msgid "Pricing type must be CPM, CPC, or CPSV"
-msgstr ""
+msgstr "O tipo de preço deve ser CPM, CPC ou CPSV"
 
 #: src/auth/registration/SearchForm.tsx:44
 msgid "Primary region of business"
-msgstr ""
+msgstr "Principal região de negócios"
 
-#: src/validation/RegistrationSchema.tsx:52
-#: src/validation/RegistrationSchema.tsx:55
+#: src/validation/RegistrationSchema.tsx:42
+#: src/validation/RegistrationSchema.tsx:45
 msgid "Primary region of business is required"
-msgstr ""
-
-#: src/auth/components/AdvertiserDetailsForm.tsx:101
-#~ msgid "Prior to using the dashboard, please take a moment to complete your profile and review the following acknowledgements:"
-#~ msgstr ""
+msgstr "A principal região de negócios é obrigatória"
 
 #: src/auth/views/LandingPage.tsx:32
 msgid "Privacy-forward"
-msgstr ""
+msgstr "Privacidade avançada"
 
 #: src/user/reporting/ReportMenu.tsx:120
 msgid "Private Key"
-msgstr ""
+msgstr "Chave Privada"
 
 #: src/components/Drawer/MiniSideBar.tsx:67
 msgid "Profile"
-msgstr ""
+msgstr "Perfil"
 
 #: src/user/settings/UserApiKey.tsx:29
 msgid "Profile API Key"
-msgstr ""
+msgstr "Chave de API do Perfil"
 
 #: src/user/settings/UserForm.tsx:35
 msgid "Profile Details"
-msgstr ""
+msgstr "Detalhes do Perfil"
 
 #: src/auth/views/LandingPage.tsx:37
 msgid "Reach and convert new customers through premium advertising on the Brave browser and search engine."
-msgstr ""
-
-#: src/search/SearchTalkingPoints.tsx:9
-#~ msgid "Reach audiences who don’t use other search engines and block ads on most sites."
-#~ msgstr ""
+msgstr "Alcance e converta novos clientes por meio de publicidade premium no navegador e mecanismo de busca do Brave."
 
 #: src/components/AppBar/LandingPageAppBar.tsx:37
 msgid "Register for Self-service"
-msgstr ""
+msgstr "Cadastre-se para Autoatendimento"
 
 #: src/user/views/adsManager/views/advanced/components/adSet/NewAdSet.tsx:67
 msgid "Remove"
-msgstr ""
+msgstr "Remover"
 
 #: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:54
 msgid "Remove Conversion Tracking"
-msgstr ""
-
-#: src/auth/components/AdvertiserAgreed.tsx:14
-#~ msgid "Reporting"
-#~ msgstr ""
+msgstr "Remover Rastreamento de Conversão"
 
 #: src/user/analytics/analyticsOverview/reports/campaign/EngagementsOverview.tsx:117
 msgid "Reporting not available yet for <0>{campaignName}</0>."
-msgstr ""
+msgstr "Os relatórios para <0>{campaignName}</0> ainda não estão disponíveis."
 
 #: src/auth/views/AuthVerify.tsx:71
 msgid "Request another link."
-msgstr ""
+msgstr "Solicitar outro link."
 
 #: src/components/Steps/ActionButtons.tsx:38
 msgid "Return to dashboard"
-msgstr ""
+msgstr "Voltar ao dashboard"
 
 #: src/user/views/adsManager/views/advanced/components/form/components/BaseForm.tsx:37
 msgid "Review"
-msgstr ""
-
-#: src/search/SearchTalkingPoints.tsx:16
-#~ msgid "Risk Free"
-#~ msgstr ""
+msgstr "Revisão"
 
 #: src/form/FormikButton.tsx:71
 #: src/form/FormikButton.tsx:129
 #: src/user/settings/NewKeyPairModal.tsx:251
 msgid "Save"
-msgstr ""
+msgstr "Salvar"
 
 #: src/components/Creatives/CreateCreativeButton.tsx:65
 msgid "Save ad"
-msgstr ""
+msgstr "Salvar anúncio"
 
 #: src/form/FormikButton.tsx:72
 #: src/form/FormikButton.tsx:129
 #: src/user/settings/NewKeyPairModal.tsx:251
 msgid "Saving..."
-msgstr ""
+msgstr "Salvando..."
 
 #: src/auth/registration/AccountChoice.tsx:38
 msgid "Search ads"
-msgstr ""
-
-#: src/validation/BrowserRegistrationSchema.tsx:42
-#~ msgid "Search domain must match email domain"
-#~ msgstr ""
+msgstr "Anúncios de pesquisa"
 
 #: src/user/library/index.ts:251
 #: src/util/campaign.ts:10
 msgid "Search homepage"
-msgstr ""
+msgstr "Página inicial de pesquisa"
 
 #: src/user/library/index.ts:250
 #: src/util/campaign.ts:9
 msgid "Search keyword"
-msgstr ""
+msgstr "Palavra-chave de busca"
 
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:59
 msgid "Search keyword ads"
-msgstr ""
+msgstr "Anúncios de palavra-chave de busca"
 
 #: src/components/Campaigns/CloneCampaign.tsx:94
 msgid "Select one campaign to clone"
-msgstr ""
+msgstr "Selecione uma campanha para clonar"
 
 #: src/user/campaignList/EditButton.tsx:26
 msgid "Select one campaign to edit"
-msgstr ""
+msgstr "Selecione uma campanha para editar"
 
 #: src/user/settings/Settings.tsx:60
 #: src/user/settings/Settings.tsx:64
 msgid "Select Organization"
-msgstr ""
+msgstr "Selecione a Organização"
 
 #: src/user/views/adsManager/views/advanced/components/adSet/fields/AdSetAds.tsx:31
 msgid "Select the ads you would like to include in this ad set. Only checked ads are included."
-msgstr ""
+msgstr "Selecione os anúncios que deseja incluir neste conjunto de anúncios. Apenas os anúncios marcados com \"check\" serão incluídos."
 
 #: src/components/Segment/SegmentPicker.tsx:87
 msgid "Select the audience segments to target"
-msgstr ""
+msgstr "Selecione os segmentos de público-alvo"
 
 #: src/components/Location/LocationPicker.tsx:51
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/LocationField.tsx:10
 msgid "Select the geographic regions where your ads will be shown."
-msgstr ""
+msgstr "Selecione as regiões geográficas onde seus anúncios serão exibidos."
 
 #: src/user/views/adsManager/views/advanced/components/adSet/fields/PickerFields.tsx:30
 msgid "Select the interest segments and platforms you would like to target."
-msgstr ""
+msgstr "Selecione os segmentos de interesse e plataformas que você deseja direcionar."
 
 #: src/components/Platform/PlatformPicker.tsx:45
 msgid "Select the platforms to target"
-msgstr ""
-
-#: src/auth/registration/AccountChoice.tsx:64
-#~ msgid "Self-service"
-#~ msgstr ""
+msgstr "Selecione as plataformas para direcionar"
 
 #: src/user/analytics/analyticsOverview/components/MetricFilter.tsx:64
 msgid "Show"
-msgstr ""
+msgstr "Mostrar"
 
 #: src/components/AppBar/LandingPageAppBar.tsx:114
 #: src/components/Navigation/Navbar.tsx:53
 msgid "Sign out"
-msgstr ""
+msgstr "Sair"
 
 #: src/user/analytics/analyticsOverview/components/BaseBarChart.tsx:59
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:34
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:80
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:158
 msgid "Site visit rate"
-msgstr ""
+msgstr "Taxa de visita ao site"
 
 #: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:49
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:45
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:162
 #: src/user/campaignList/CampaignList.tsx:144
 msgid "Site visits"
-msgstr ""
+msgstr "Visitas ao site"
 
 #: src/user/views/user/AdDetailTable.tsx:72
 msgid "Site Visits"
-msgstr ""
+msgstr "Visitas ao Site"
 
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:151
 msgid "Skip survey and continue"
-msgstr ""
+msgstr "Pular pesquisa e continuar"
 
 #: src/components/Error/ErrorDetail.tsx:65
 msgid "Something went wrong."
-msgstr ""
+msgstr "Algo deu errado."
 
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:48
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:88
@@ -1774,175 +1629,143 @@ msgstr ""
 #: src/user/campaignList/CampaignList.tsx:104
 #: src/user/views/user/AdDetailTable.tsx:31
 msgid "Spend"
-msgstr ""
+msgstr "Gasto"
 
 #: src/user/campaignList/CampaignList.tsx:174
 msgid "Start"
-msgstr ""
+msgstr "Iniciar"
 
 #: src/auth/views/MobileAdsBenefits.tsx:16
 msgid "Start a Brave Ads campaign with as little as $500."
-msgstr ""
+msgstr "Inicie uma campanha de Brave Ads com apenas $500 por mês."
 
 #: src/components/Campaigns/CampaignDateRange.tsx:24
 msgid "Start Date"
-msgstr ""
+msgstr "Data de Início"
 
 #: src/validation/CampaignSchema.tsx:70
 msgid "Start Date is required"
-msgstr ""
+msgstr "A data de Início é obrigatória"
 
 #: src/validation/CampaignSchema.tsx:68
 msgid "Start Date must be minimum of 2 days from today"
-msgstr ""
+msgstr "A data de Início deve ser no mínimo 2 dias a partir de hoje"
 
 #: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:42
 msgid "Start Time"
-msgstr ""
+msgstr "Hora de Início"
 
 #: src/auth/registration/RegistrationContainer.tsx:23
 msgid "Start your company profile"
-msgstr ""
+msgstr "Crie o perfil da sua empresa"
 
 #: src/components/Creatives/CreativeList.tsx:79
 msgid "State"
-msgstr ""
-
-#: src/auth/components/AdvertiserAddress.tsx:54
-#~ msgid "State / Province"
-#~ msgstr ""
-
-#: src/validation/AdvertiserSchema.tsx:20
-#~ msgid "State / Province is required"
-#~ msgstr ""
+msgstr "Estado"
 
 #: src/components/Creatives/CreativeCampaigns.tsx:48
 #: src/user/adSet/AdSetList.tsx:99
 #: src/user/analytics/search/AdSetBreakdown.tsx:71
 #: src/user/campaignList/CampaignList.tsx:84
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: src/auth/components/AdvertiserAddress.tsx:25
 msgid "Street address"
-msgstr ""
+msgstr "Endereço"
 
 #: src/validation/AdvertiserSchema.tsx:20
 msgid "Street address is required"
-msgstr ""
-
-#: src/auth/components/AdvertiserAddress.tsx:34
-#~ msgid "Street address line 2"
-#~ msgstr ""
+msgstr "O endereço é obrigatório"
 
 #: src/auth/registration/BrowserRegister.tsx:37
 #: src/auth/registration/SearchRegister.tsx:41
 msgid "Submit"
-msgstr ""
-
-#: src/auth/registration/Register.tsx:109
-#~ msgid "Submit for approval"
-#~ msgstr ""
+msgstr "Enviar"
 
 #: src/auth/registration/AdvertiserRegistered.tsx:15
 msgid "Success! Check your email."
-msgstr ""
+msgstr "Sucesso! Verifique seu e-mail."
 
 #: src/auth/views/AuthVerify.tsx:45
 msgid "Successfully logged in!"
-msgstr ""
+msgstr "Login realizado com sucesso!"
 
 #: src/components/Drawer/SupportMenu.tsx:30
 #: src/components/Drawer/SupportMenu.tsx:49
 msgid "Support"
-msgstr ""
+msgstr "Suporte"
 
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:137
 msgid "Take our survey!"
-msgstr ""
-
-#: src/search/SearchLandingPage.tsx:34
-#~ msgid "Tap into over <0>9 billion</0> annual Web searches"
-#~ msgstr ""
+msgstr "Responda nossa pesquisa!"
 
 #: src/user/ads/InlineContentAd.tsx:84
 #: src/user/ads/NotificationAd.tsx:84
 msgid "Target URL"
-msgstr ""
+msgstr "URL de Destino"
 
 #: src/validation/CreativeSchema.tsx:14
 msgid "Target URL is a required field"
-msgstr ""
+msgstr "URL de Destino é um campo obrigatório"
 
 #: src/components/Url/UrlResolver.tsx:59
 msgid "Target URL is not valid"
-msgstr ""
+msgstr "A URL de Destino não é válida"
 
 #: src/components/Creatives/hooks/useGetCreativeDetails.tsx:23
 msgid "Target URL not validated"
-msgstr ""
+msgstr "URL de Destino não validada"
 
 #: src/user/views/adsManager/views/advanced/components/adSet/fields/PickerFields.tsx:28
 msgid "Targeting"
-msgstr ""
+msgstr "Direcionamento"
 
 #: src/auth/registration/BrowserForm.tsx:57
 msgid "Tell us why you're interested in Brave Ads"
-msgstr ""
-
-#: src/auth/components/AdvertiserAgreed.tsx:62
-#~ msgid "Terms & Conditions"
-#~ msgstr ""
+msgstr "Nos conte por que você está interessado no Brave Ads"
 
 #: src/validation/AdvertiserSchema.tsx:17
 msgid "Terms & Conditions acknowledgement is required"
-msgstr ""
-
-#: src/auth/registration/AdvertiserRegistered.tsx:13
-#~ msgid "Thanks for your interest in Brave Ads! Our team will now carefully review the provided information."
-#~ msgstr ""
+msgstr "É necessário concordar com os Termos e Condições"
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:41
 #: src/user/analytics/search/metrics.ts:54
 msgid "The rate at which users clicked in correlation to their impressions"
-msgstr ""
+msgstr "A taxa de cliques dos usuários em relação às suas visualizações"
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:71
 msgid "The rate at which users converted in correlation to their clicks"
-msgstr ""
+msgstr "A taxa de conversão dos usuários em relação aos seus cliques"
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:86
 msgid "The rate at which users dismissed the ad in correlation to their impressions"
-msgstr ""
+msgstr "A taxa de rejeição do anúncio pelos usuários em relação às suas visualizações"
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:76
 msgid "The rate at which users visited the site in correlation to their clicks"
-msgstr ""
+msgstr "A taxa de visitas ao site pelos usuários em relação aos seus cliques"
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:81
 msgid "The rate at which users visited the site in correlation to their impressions"
-msgstr ""
+msgstr "A taxa de visitas ao site pelos usuários em relação às suas visualizações"
 
 #: src/auth/lib/index.ts:44
 msgid "The username or password did not match our records."
-msgstr ""
-
-#: src/validation/AdvertiserSchema.tsx:8
-#~ msgid "Third party tracking acknowledgement is required"
-#~ msgstr ""
+msgstr "O nome de usuário ou senha não correspondem aos nossos registros."
 
 #: src/components/Creatives/NewsPreview.tsx:53
 msgid "This is a news display ad, it wll look like part of the news feed."
-msgstr ""
+msgstr "Este é um anúncio de exibição de notícias, ele será integrado ao feed de notícias."
 
 #: src/user/settings/UserApiKey.tsx:80
 msgid "This key is unique to you, make sure to safely store it and avoid sharing it with others to prevent unauthorized access."
-msgstr ""
+msgstr "Esta chave é exclusiva para você. Guarde-a com segurança e evite compartilhá-la com outras pessoas para evitar acessos não autorizados."
 
 #: src/components/TimeZonePicker/index.tsx:29
 #: src/components/TimeZonePicker/index.tsx:36
 msgid "Time Zone"
-msgstr ""
+msgstr "Fuso horário"
 
 #: src/components/Creatives/CreativeList.tsx:151
 #: src/components/Creatives/CreativeList.tsx:161
@@ -1950,285 +1773,261 @@ msgstr ""
 #: src/user/ads/InlineContentAd.tsx:69
 #: src/user/ads/NotificationAd.tsx:55
 msgid "Title"
-msgstr ""
+msgstr "Título"
 
 #: src/components/Creatives/NotificationPreview.tsx:38
 msgid "Title Preview"
-msgstr ""
+msgstr "Visualização do Título"
 
 #: src/components/Date/DateRangePicker.tsx:43
 msgid "To"
-msgstr ""
-
-#: src/auth/components/AdvertiserAgreed.tsx:44
-#~ msgid "To launch a campaign with Brave, you are required to prepay the full amount you intend to spend. Any remaining funds from your budget will be credited back to your original payment method upon request."
-#~ msgstr ""
+msgstr "Para"
 
 #: src/user/reporting/ReportMenu.tsx:106
 msgid "To protect user’s privacy, verified ad conversion data is encrypted so that the identities of converted users remain anonymous to Brave. You can decrypt the conversion data in the CSV file by providing your private key here. If no key is provided, you will receive the encrypted conversion data. Your private key will never be sent to or stored on any Brave servers."
-msgstr ""
-
-#: src/auth/registration/AdvertiserRegistered.tsx:35
-#~ msgid "Try again"
-#~ msgstr ""
+msgstr "Para proteger a privacidade do usuário, os dados de conversão do anúncio verificado são criptografados, garantindo que as identidades dos usuários convertidos permaneçam anônimas para o Brave. Você pode descriptografar os dados de conversão no arquivo CSV fornecendo sua chave privada aqui. Se nenhuma chave for fornecida, você receberá os dados de conversão criptografados. Sua chave privada nunca será enviada ou armazenada em nenhum servidor do Brave."
 
 #: src/components/Conversion/ConversionFields.tsx:17
 #: src/user/adSet/AdSetList.tsx:112
 #: src/user/analytics/search/AdSetBreakdown.tsx:90
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #: src/components/Campaigns/CloneCampaign.tsx:41
 msgid "Unable to clone campaign"
-msgstr ""
+msgstr "Não foi possível clonar a campanha"
 
 #: src/user/hooks/useAdvertiserWithPrices.tsx:37
 msgid "Unable to create a new campaign"
-msgstr ""
+msgstr "Não foi possível criar uma nova campanha"
 
 #: src/user/views/adsManager/views/advanced/components/form/NewCampaign.tsx:67
 msgid "Unable to Create Campaign."
-msgstr ""
+msgstr "Não foi possível criar a campanha."
 
 #: src/checkout/hooks/useCreatePaymentSession.ts:19
 msgid "Unable to create payment session. Please try again."
-msgstr ""
+msgstr "Não foi possível criar uma sessão de pagamento. Por favor, tente novamente."
 
 #: src/user/reporting/csv.library.tsx:132
 msgid "Unable to decrypt conversion data"
-msgstr ""
+msgstr "Não foi possível descriptografar os dados de conversão"
 
 #: src/user/reporting/csv.library.tsx:37
 msgid "Unable to download CSV"
-msgstr ""
-
-#: src/components/Assets/hooks/useGetImagePreviewUrl.ts:34
-#~ msgid "Unable to fetch image"
-#~ msgstr ""
+msgstr "Não foi possível baixar o CSV"
 
 #: src/components/Creatives/CreativeCampaigns.tsx:33
 msgid "Unable to get campaign information for ad"
-msgstr ""
+msgstr "Não foi possível obter informações da campanha para o anúncio"
 
 #: src/user/settings/UserForm.tsx:23
 msgid "Unable to get profile information"
-msgstr ""
+msgstr "Não foi possível obter informações do perfil"
 
 #: src/components/Creatives/CreativeForm.tsx:56
 msgid "Unable to load ad"
-msgstr ""
+msgstr "Não foi possível carregar o anúncio"
 
 #: src/auth/views/AuthVerify.tsx:65
 msgid "Unable to login, link has expired or has already been used."
-msgstr ""
+msgstr "Não foi possível fazer login, o link expirou ou já foi utilizado."
 
 #: src/auth/lib/index.ts:87
 msgid "Unable to register your organization at this time. Please try again later."
-msgstr ""
+msgstr "No momento, não foi possível cadastrar sua organização. Por favor, tente novamente mais tarde."
 
 #: src/user/views/user/CampaignDetails.tsx:45
 msgid "Unable to retrieve ad sets or ads for Campaign."
-msgstr ""
+msgstr "Não foi possível recuperar conjuntos de anúncios ou anúncios para a Campanha."
 
 #: src/user/views/user/CampaignView.tsx:33
 msgid "Unable to retrieve Campaign data."
-msgstr ""
+msgstr "Não foi possível recuperar os dados da Campanha."
 
 #: src/components/Assets/AdvertiserAssets.tsx:40
 #: src/components/Creatives/CreativeList.tsx:93
 msgid "Unable to retrieve images"
-msgstr ""
+msgstr "Não foi possível recuperar as imagens"
 
 #: src/user/analytics/analyticsOverview/reports/campaign/EngagementsOverview.tsx:46
 #: src/user/views/user/reports/SearchCampaignReportView.tsx:51
 msgid "Unable to retrieve reporting data for this Campaign."
-msgstr ""
+msgstr "Não foi possível recuperar os dados de relatório para esta Campanha."
 
 #: src/components/Creatives/CreativeForm.tsx:91
 msgid "Unable to save ad"
-msgstr ""
+msgstr "Não foi possível salvar o anúncio"
 
 #: src/auth/hooks/mutations/useRegister.ts:28
 msgid "Unable to submit registration"
-msgstr ""
+msgstr "Não foi possível enviar o cadastro"
 
 #: src/user/settings/NewKeyPairModal.tsx:49
 msgid "Unable to update Advertiser."
-msgstr ""
+msgstr "Não foi possível atualizar o Anunciante."
 
 #: src/user/views/adsManager/views/advanced/components/form/EditCampaign.tsx:64
 msgid "Unable to Update Campaign."
-msgstr ""
+msgstr "Não foi possível atualizar a Campanha."
 
 #: src/components/Assets/hooks/useUploadFile.ts:124
 msgid "Unable to upload image"
-msgstr ""
+msgstr "Não foi possível carregar a imagem"
 
 #: src/auth/lib/index.ts:49
 msgid "Unexpected error validating your credentials. Please try again later."
-msgstr ""
+msgstr "Erro inesperado ao validar suas credenciais. Por favor, tente novamente mais tarde."
 
 #: src/util/billingType.ts:13
 msgid "Unknown"
-msgstr ""
+msgstr "Desconhecido"
 
 #: src/auth/views/MobileAdsBenefits.tsx:29
 msgid "Unparalleled privacy"
-msgstr ""
+msgstr "Privacidade incomparável"
 
 #: src/user/views/adsManager/views/advanced/components/form/components/PaymentButton.tsx:17
 msgid "Update & Submit For Approval"
-msgstr ""
+msgstr "Atualizar e Enviar Para Aprovação"
 
 #: src/components/Assets/UploadImage.tsx:77
 #: src/components/Assets/UploadImage.tsx:138
 msgid "Upload"
-msgstr ""
+msgstr "Upload"
 
 #: src/components/Assets/UploadImage.tsx:58
 #: src/components/Navigation/NewImageButton.tsx:20
 msgid "Upload Image"
-msgstr ""
+msgstr "Enviar Imagem"
 
 #: src/components/Assets/ImageAutocomplete.tsx:60
 msgid "Upload new image"
-msgstr ""
+msgstr "Enviar nova imagem"
 
 #: src/components/Assets/UploadImage.tsx:62
 msgid "Uploaded images can be shared across different ad sets within a Campaign. For best quality, upload images at 900x750px resolution. Images will be automatically scaled to this size."
-msgstr ""
+msgstr "As imagens enviadas podem ser compartilhadas entre diferentes conjuntos de anúncios dentro de uma Campanha. Para obter a melhor qualidade, envie imagens com resolução de 900x750px. As imagens serão automaticamente dimensionadas para esse tamanho."
 
 #: src/components/Assets/hooks/useUploadFile.ts:66
 msgid "Uploading file..."
-msgstr ""
+msgstr "Enviando arquivo..."
 
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:45
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:170
 msgid "Upvotes"
-msgstr ""
+msgstr "Curtidas"
 
 #: src/components/Url/UrlResolver.tsx:98
 msgid "URL is valid."
-msgstr ""
+msgstr "A URL é válida."
 
 #: src/validation/CreativeSchema.tsx:15
 msgid "URL must not contain any whitespace"
-msgstr ""
+msgstr "A URL não deve conter espaços em branco"
 
 #: src/validation/CreativeSchema.tsx:16
 msgid "URL must start with https://"
-msgstr ""
+msgstr "A URL deve começar com https://"
 
 #: src/components/Conversion/ConversionFields.tsx:38
 msgid "URL Pattern"
-msgstr ""
+msgstr "Padrão de URL"
 
 #: src/components/Conversion/ConversionFields.tsx:40
 msgid "URL should have a trailing asterisk - Example: https://brave.com/products/*"
-msgstr ""
+msgstr "A URL deve ter um asterisco no final - Exemplo: https://brave.com/produtos/*"
 
 #: src/user/ads/ShowAdsButton.tsx:22
 msgid "Use existing ads"
-msgstr ""
+msgstr "Usar anúncios existentes"
 
 #: src/components/Url/UrlResolver.tsx:92
 msgid "Validating URL..."
-msgstr ""
+msgstr "Validando URL..."
 
 #: src/user/reporting/ReportMenu.tsx:80
 msgid "Verified Conversions Report"
-msgstr ""
+msgstr "Relatório de Conversões Verificadas"
 
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:64
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:55
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:178
 msgid "View-through conversions"
-msgstr ""
+msgstr "Conversões por visualização"
 
 #: src/auth/registration/AdvertiserRegistered.tsx:30
 msgid "Visit Help Center"
-msgstr ""
-
-#: src/auth/registration/AdvertiserRegistered.tsx:17
-#~ msgid "We encountered a problem creating your account."
-#~ msgstr ""
+msgstr "Visitar a Central de Ajuda"
 
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:82
 msgid "We value your feedback and would love to hear your thoughts on your recent experience. <0/>Your input will help us improve the Brave Ads platform to better meet your needs. <1/>It only takes a few minutes and your participation will be greatly appreciated! <2/>Thank you for using Brave Ads! <3/>"
-msgstr ""
+msgstr "Valorizamos seu feedback e adoraríamos ouvir suas opiniões sobre sua experiência recente. <0/>Sua contribuição nos ajudará a melhorar a plataforma Brave Ads para atender melhor às suas necessidades. <1/>Leva apenas alguns minutos e sua participação será muito importante! <2/>Obrigado por usar o Brave Ads! <3/>"
 
 #: src/validation/RegistrationSchema.tsx:17
 msgid "Website must not contain any whitespace"
-msgstr ""
+msgstr "O site não deve conter espaços em branco"
 
 #: src/validation/RegistrationSchema.tsx:18
 msgid "Website must start with https://"
-msgstr ""
+msgstr "O site deve começar com https://"
 
 #: src/user/analytics/analyticsOverview/components/EngagementHeader.tsx:52
 msgid "Week"
-msgstr ""
-
-#: src/auth/components/AdvertiserDetailsForm.tsx:97
-#~ msgid "Welcome to Brave Ads"
-#~ msgstr ""
+msgstr "Semana"
 
 #: src/auth/registration/MarketingChannel.tsx:13
 msgid "Where did you hear about Brave Ads"
-msgstr ""
+msgstr "Onde você ouviu falar sobre o Brave Ads"
 
 #: src/auth/registration/MarketingChannel.tsx:20
 msgid "While looking up alternatives to Google Ads"
-msgstr ""
+msgstr "Enquanto procurava alternativas para o Google Ads"
 
 #: src/auth/registration/SearchForm.tsx:25
 msgid "Work email"
-msgstr ""
+msgstr "E-mail corporativo"
 
 #: src/components/Datagrid/renderers.tsx:68
 msgid "Yes"
-msgstr ""
+msgstr "Sim"
 
 #: src/user/settings/NewKeyPairModal.tsx:133
 msgid "You are attempting to create a new keypair, this will replace any of your organization’s existing keypairs. Please note, previous keypairs cannot be retrieved or used once replaced."
-msgstr ""
-
-#: src/auth/registration/Register.tsx:37
-#~ msgid "You can change this later"
-#~ msgstr ""
+msgstr "Você está tentando criar um novo par de chaves, isso substituirá qualquer um dos pares de chaves existentes da sua organização. Por favor, note que pares de chaves anteriores não podem ser recuperados ou usados uma vez que forem substituídos."
 
 #: src/components/Button/SubmitPanel.tsx:34
 msgid "You have {0} errors that must be fixed before submitting."
-msgstr ""
+msgstr "Você tem {0} erros que devem ser corrigidos antes de enviar."
 
 #: src/components/Button/SubmitPanel.tsx:24
 msgid "You have unsaved changes"
-msgstr ""
+msgstr "Você tem alterações não salvas"
 
 #: src/user/settings/Settings.tsx:51
 msgid "You may have access to multiple organisations. Switch between them here."
-msgstr ""
+msgstr "Você pode ter acesso a várias organizações. Alternar entre elas aqui."
 
 #: src/auth/registration/AdvertiserRegistered.tsx:18
 msgid "You will soon receive an email with the next steps of registration. While you wait, we recommend you check out our help center to get helpful information for getting started with Brave Ads."
-msgstr ""
+msgstr "Em breve, você receberá um e-mail com os próximos passos do cadastro. Enquanto isso, sugerimos que você dê uma olhada em nossa Central de Ajuda para obter informações úteis sobre como começar a usar o Brave Ads."
 
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:72
 msgid "Your campaign has been created and is now being reviewed by our ads team. <0/>We’ll be in contact as soon as your campaign is approved and activated."
-msgstr ""
+msgstr "Sua campanha foi criada e está sendo revisada por nossa equipe de anúncios. <0/>Entraremos em contato assim que sua campanha for aprovada e ativada."
 
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:47
 msgid "Your campaign has been updated! <0/>If you added new ads, we’ll be in contact as soon as they are approved and activated. <1/>Thank you for using Brave Ads!"
-msgstr ""
+msgstr "Sua campanha foi atualizada! <0/>Se você adicionou novos anúncios, entraremos em contato assim que eles forem aprovados e ativados. <1/>Obrigado por usar o Brave Ads!"
 
 #: src/user/settings/NewKeyPairModal.tsx:168
 msgid "Your organization’s new public key will be:"
-msgstr ""
+msgstr "A nova chave pública da sua organização será:"
 
 #: src/user/settings/NewKeyPairModal.tsx:102
 msgid "Your organization’s public key:"
-msgstr ""
+msgstr "Chave pública da sua organização:"
 
 #: src/auth/components/AdvertiserAddress.tsx:51
 msgid "Zip / Postal Code"
-msgstr ""
+msgstr "CEP"
