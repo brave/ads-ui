@@ -1,5 +1,5 @@
 import { Box, Paper, Stack, Typography } from "@mui/material";
-import logo from "../../../brave_logo_icon.png";
+import logo from "assets/images/brave_logo_icon.png";
 import { useField, useFormikContext } from "formik";
 import { CreativeInput } from "graphql/types";
 import { Trans } from "@lingui/macro";

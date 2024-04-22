@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 import { PaddedCardContainer } from "components/Card/PaddedCardContainer";
-import logo from "../../../brave-icon-release-color.svg";
+import logo from "assets/images/brave-icon-release-color.svg";
 import Typography from "@mui/material/Typography";
 import { Trans } from "@lingui/macro";
 import { PrivacyPolicy } from "basic-attention-token/PrivacyPolicy";
