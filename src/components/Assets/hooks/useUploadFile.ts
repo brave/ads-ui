@@ -1,13 +1,13 @@
-import { buildAdServerEndpoint, getEnvConfig } from "util/environment";
+import { buildAdServerEndpoint, getEnvConfig } from "@/util/environment";
 import { useCallback, useState } from "react";
 import _ from "lodash";
 import {
   refetchAdvertiserImagesQuery,
   useUploadAdvertiserImageMutation,
-} from "graphql/advertiser.generated";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import { CampaignFormat } from "graphql/types";
-import { UploadConfig } from "components/Assets/UploadImage";
+} from "@/graphql/advertiser.generated";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
+import { CampaignFormat } from "@/graphql/types";
+import { UploadConfig } from "@/components/Assets/UploadImage";
 import { t } from "@lingui/macro";
 
 interface PutUploadResponse {

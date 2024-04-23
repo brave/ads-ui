@@ -1,4 +1,4 @@
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { Button } from "@mui/material";
 import { Trans } from "@lingui/macro";
 

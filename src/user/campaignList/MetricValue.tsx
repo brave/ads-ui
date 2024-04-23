@@ -1,6 +1,6 @@
 import { Box, Skeleton } from "@mui/material";
 import _ from "lodash";
-import { format } from "user/library/format";
+import { format } from "@/user/library/format";
 
 interface Props {
   loading?: boolean;

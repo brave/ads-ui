@@ -1,9 +1,9 @@
 import { Box, Skeleton, Typography } from "@mui/material";
-import { renderMonetaryAmount } from "components/Datagrid/renderers";
-import { CampaignSummaryFragment } from "graphql/campaign.generated";
-import { CampaignFormat } from "graphql/types";
-import { StatsMetric } from "user/analytics/analyticsOverview/types";
-import { toLocaleString } from "util/bignumber";
+import { renderMonetaryAmount } from "@/components/Datagrid/renderers";
+import { CampaignSummaryFragment } from "@/graphql/campaign.generated";
+import { CampaignFormat } from "@/graphql/types";
+import { StatsMetric } from "@/user/analytics/analyticsOverview/types";
+import { toLocaleString } from "@/util/bignumber";
 
 export type EngagementOverview = {
   campaignId: string;

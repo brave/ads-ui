@@ -13,16 +13,16 @@ import {
   CampaignSummaryFragment,
   useCreateCampaignMutation,
   useLoadCampaignLazyQuery,
-} from "graphql/campaign.generated";
+} from "@/graphql/campaign.generated";
 import { useHistory } from "react-router-dom";
 import { useContext, useState } from "react";
-import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
-import { createCampaignFromFragment } from "form/fragmentUtil";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { refetchAdvertiserCampaignsQuery } from "@/graphql/advertiser.generated";
+import { createCampaignFromFragment } from "@/form/fragmentUtil";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import { useUser } from "auth/hooks/queries/useUser";
-import { FilterContext } from "state/context";
-import { CampaignFormat, CampaignSource } from "graphql/types";
+import { useUser } from "@/auth/hooks/queries/useUser";
+import { FilterContext } from "@/state/context";
+import { CampaignFormat, CampaignSource } from "@/graphql/types";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 

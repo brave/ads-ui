@@ -1,16 +1,16 @@
-import { FormikTextField, useIsEdit } from "form/FormikHelpers";
-import { CardContainer } from "components/Card/CardContainer";
-import { CampaignDateRange } from "components/Campaigns/CampaignDateRange";
+import { FormikTextField, useIsEdit } from "@/form/FormikHelpers";
+import { CardContainer } from "@/components/Card/CardContainer";
+import { CampaignDateRange } from "@/components/Campaigns/CampaignDateRange";
 import { Typography } from "@mui/material";
-import { FormatField } from "user/views/adsManager/views/advanced/components/campaign/fields/FormatField";
-import { AdvertiserPrice } from "user/hooks/useAdvertiserWithPrices";
-import { BudgetField } from "user/views/adsManager/views/advanced/components/campaign/fields/BudgetField";
-import { BillingModelSelect } from "user/views/adsManager/views/advanced/components/campaign/components/BillingModelSelect";
-import { CustomPriceSelect } from "user/views/adsManager/views/advanced/components/campaign/components/CustomPriceSelect";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import { LearnMoreButton } from "components/Button/LearnMoreButton";
-import { LocationPicker } from "components/Location/LocationPicker";
-import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
+import { FormatField } from "@/user/views/adsManager/views/advanced/components/campaign/fields/FormatField";
+import { AdvertiserPrice } from "@/user/hooks/useAdvertiserWithPrices";
+import { BudgetField } from "@/user/views/adsManager/views/advanced/components/campaign/fields/BudgetField";
+import { BillingModelSelect } from "@/user/views/adsManager/views/advanced/components/campaign/components/BillingModelSelect";
+import { CustomPriceSelect } from "@/user/views/adsManager/views/advanced/components/campaign/components/CustomPriceSelect";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
+import { LearnMoreButton } from "@/components/Button/LearnMoreButton";
+import { LocationPicker } from "@/components/Location/LocationPicker";
+import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 

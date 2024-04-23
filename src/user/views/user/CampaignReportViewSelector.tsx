@@ -1,9 +1,9 @@
 import { Box, LinearProgress } from "@mui/material";
-import { AlwaysOnFormButton } from "components/Button/AlwaysOnFormButton";
-import { useLoadCampaignSummaryQuery } from "graphql/campaign.generated";
-import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
+import { AlwaysOnFormButton } from "@/components/Button/AlwaysOnFormButton";
+import { useLoadCampaignSummaryQuery } from "@/graphql/campaign.generated";
+import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { useParams } from "react-router-dom";
-import { CampaignFormat } from "graphql/types";
+import { CampaignFormat } from "@/graphql/types";
 import { ConsultAccountManager } from "./reports/ConsultAccountManager";
 import { OriginalCampaignReportView } from "./reports/OriginalCampaignReportView";
 import { SearchCampaignReportView } from "./reports/SearchCampaignReportView";

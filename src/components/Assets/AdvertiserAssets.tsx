@@ -1,17 +1,17 @@
 import {
   AdvertiserImageFragment,
   useAdvertiserImagesQuery,
-} from "graphql/advertiser.generated";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import { ErrorDetail } from "components/Error/ErrorDetail";
-import { CardContainer } from "components/Card/CardContainer";
+} from "@/graphql/advertiser.generated";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
+import { ErrorDetail } from "@/components/Error/ErrorDetail";
+import { CardContainer } from "@/components/Card/CardContainer";
 import { Grid, LinearProgress, Typography } from "@mui/material";
-import MiniSideBar from "components/Drawer/MiniSideBar";
-import { ImagePreview } from "components/Assets/ImagePreview";
-import { CampaignFormat } from "graphql/types";
-import { RouteSelectionButton } from "components/Route/RouteSelectionButton";
+import MiniSideBar from "@/components/Drawer/MiniSideBar";
+import { ImagePreview } from "@/components/Assets/ImagePreview";
+import { CampaignFormat } from "@/graphql/types";
+import { RouteSelectionButton } from "@/components/Route/RouteSelectionButton";
 import Box from "@mui/material/Box";
-import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
+import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { msg, Trans } from "@lingui/macro";
 import dayjs from "dayjs";
 

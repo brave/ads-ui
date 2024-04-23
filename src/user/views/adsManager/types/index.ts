@@ -1,7 +1,7 @@
-import { CampaignFormat, CreativeInput, PaymentType } from "graphql/types";
-import { defaultEndDate, defaultStartDate } from "form/DateFieldHelpers";
-import { MIN_PER_CAMPAIGN } from "validation/CampaignSchema";
-import { AdvertiserWithPrices } from "user/hooks/useAdvertiserWithPrices";
+import { CampaignFormat, CreativeInput, PaymentType } from "@/graphql/types";
+import { defaultEndDate, defaultStartDate } from "@/form/DateFieldHelpers";
+import { MIN_PER_CAMPAIGN } from "@/validation/CampaignSchema";
+import { AdvertiserWithPrices } from "@/user/hooks/useAdvertiserWithPrices";
 
 export type Billing = "cpm" | "cpc" | "cpsv";
 

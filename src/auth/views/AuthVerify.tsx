@@ -1,10 +1,10 @@
-import { AuthContainer } from "auth/views/components/AuthContainer";
-import { useAuthorize } from "auth/hooks/queries/useAuthorize";
+import { AuthContainer } from "@/auth/views/components/AuthContainer";
+import { useAuthorize } from "@/auth/hooks/queries/useAuthorize";
 import { Link as RouterLink, useHistory } from "react-router-dom";
 import { CircularProgress, Link, Stack, Typography } from "@mui/material";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
-import { useTrackWithMatomo } from "hooks/useTrackWithMatomo";
+import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
 import { Trans } from "@lingui/macro";
 
 export function AuthVerify() {

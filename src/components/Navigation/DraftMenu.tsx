@@ -2,7 +2,7 @@ import { useContext, useState, MouseEvent } from "react";
 
 import { Link as RouterLink } from "react-router-dom";
 import { Badge, Button, Menu, MenuItem } from "@mui/material";
-import { DraftContext } from "state/context";
+import { DraftContext } from "@/state/context";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 

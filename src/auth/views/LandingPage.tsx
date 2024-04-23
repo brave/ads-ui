@@ -1,13 +1,13 @@
-import { Background } from "components/Background/Background";
-import { LandingPageAppBar } from "components/AppBar/LandingPageAppBar";
+import { Background } from "@/components/Background/Background";
+import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
 import { Box, Button, Link, Stack, Toolbar, Typography } from "@mui/material";
-import benefits from "assets/images/ad-benefits.svg";
-import { useIsAuthenticated } from "auth/hooks/queries/useIsAuthenticated";
+import benefits from "@/assets/images/ad-benefits.svg";
+import { useIsAuthenticated } from "@/auth/hooks/queries/useIsAuthenticated";
 import { Link as RouterLink } from "react-router-dom";
-import { useIsMobile } from "hooks/useIsMobile";
-import { MobileAdsBenefits } from "auth/views/MobileAdsBenefits";
-import { GradientText } from "components/Typography/GradientText";
-import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
+import { useIsMobile } from "@/hooks/useIsMobile";
+import { MobileAdsBenefits } from "@/auth/views/MobileAdsBenefits";
+import { GradientText } from "@/components/Typography/GradientText";
+import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 

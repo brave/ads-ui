@@ -12,10 +12,10 @@ import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { MessageDescriptor } from "@lingui/core";
 import { useState } from "react";
-import logo from "assets/images/brave-icon-release-color.svg";
-import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
-import { useIsMobile } from "hooks/useIsMobile";
-import { AuthContainer } from "auth/views/components/AuthContainer";
+import logo from "@/assets/images/brave-icon-release-color.svg";
+import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
+import { useIsMobile } from "@/hooks/useIsMobile";
+import { AuthContainer } from "@/auth/views/components/AuthContainer";
 
 interface ChoiceOptions {
   title: MessageDescriptor;

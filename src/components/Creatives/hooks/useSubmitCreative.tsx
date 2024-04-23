@@ -2,14 +2,14 @@ import {
   refetchAdvertiserCreativesQuery,
   useCreateCreativeMutation,
   useUpdateCreativeMutation,
-} from "graphql/creative.generated";
+} from "@/graphql/creative.generated";
 import { useCallback } from "react";
-import { CreativeInput } from "graphql/types";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { CreativeInput } from "@/graphql/types";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { useHistory } from "react-router-dom";
-import { validCreativeFields } from "user/library";
+import { validCreativeFields } from "@/user/library";
 import _ from "lodash";
-import { useTrackMatomoEvent } from "hooks/useTrackWithMatomo";
+import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
 
 export function useSubmitCreative(props: { id: string }) {
   const { trackMatomoEvent } = useTrackMatomoEvent();

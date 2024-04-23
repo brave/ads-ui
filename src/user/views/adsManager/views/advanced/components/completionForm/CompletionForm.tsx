@@ -3,8 +3,8 @@ import { useState } from "react";
 import { useParams, Link as RouterLink } from "react-router-dom";
 import { Card, Container, Stack, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import { useValidatePaymentSession } from "checkout/hooks/useValidatePaymentSession";
-import { useTrackWithMatomo } from "hooks/useTrackWithMatomo";
+import { useValidatePaymentSession } from "@/checkout/hooks/useValidatePaymentSession";
+import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
 import { Trans } from "@lingui/macro";
 
 interface Params {

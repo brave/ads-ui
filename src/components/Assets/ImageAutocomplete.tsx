@@ -1,9 +1,9 @@
-import { useAdvertiserImagesQuery } from "graphql/advertiser.generated";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { useAdvertiserImagesQuery } from "@/graphql/advertiser.generated";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useField } from "formik";
-import { UploadImage } from "components/Assets/UploadImage";
+import { UploadImage } from "@/components/Assets/UploadImage";
 import { useLingui } from "@lingui/react";
 import { msg } from "@lingui/macro";
 

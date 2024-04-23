@@ -1,4 +1,4 @@
-import { CampaignsForCreativeQuery } from "graphql/creative.generated";
+import { CampaignsForCreativeQuery } from "@/graphql/creative.generated";
 import { Link as RouterLink } from "react-router-dom";
 import {
   Link,
@@ -8,10 +8,10 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { ErrorDetail } from "components/Error/ErrorDetail";
-import { CardContainer } from "components/Card/CardContainer";
+import { ErrorDetail } from "@/components/Error/ErrorDetail";
+import { CardContainer } from "@/components/Card/CardContainer";
 import _ from "lodash";
-import { Status } from "components/Campaigns/Status";
+import { Status } from "@/components/Campaigns/Status";
 import { ApolloError } from "@apollo/client";
 import { msg, Trans } from "@lingui/macro";
 

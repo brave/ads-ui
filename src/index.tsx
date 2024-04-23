@@ -2,7 +2,7 @@ import * as React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
-import { App } from "App";
+import { App } from "./App";
 
 import "./index.css";
 import "@fontsource/poppins/latin.css";
@@ -10,14 +10,14 @@ import "@fontsource/mulish/latin.css";
 
 import "./init_dayjs";
 
-import { IAuthProvider } from "auth";
-import { Environment, getEnvironment } from "util/environment";
+import { IAuthProvider } from "@/auth";
+import { Environment, getEnvironment } from "@/util/environment";
 import { createInstance, MatomoProvider } from "@jonkoops/matomo-tracker-react";
-import { VERSION } from "util/version";
+import { VERSION } from "@/util/version";
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { useEffect } from "react";
-import { findLocale } from "i18n";
+import { findLocale } from "./i18n";
 
 console.log(
   `https://github.com/brave/ads-ui rev ${VERSION.shortHash} built ${VERSION.buildTime}`,

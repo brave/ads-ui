@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchPaymentSession } from "checkout/lib";
+import { fetchPaymentSession } from "@/checkout/lib";
 
 interface Props {
   sessionId: string | null;

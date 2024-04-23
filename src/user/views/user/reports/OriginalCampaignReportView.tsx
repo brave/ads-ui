@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { useAnalyticOverviewQuery } from "graphql/analytics-overview.generated";
+import { useAnalyticOverviewQuery } from "@/graphql/analytics-overview.generated";
 import { Box } from "@mui/material";
-import ReportUtils from "user/analytics/analyticsOverview/components/ReportUtils";
-import { EngagementsOverview } from "user/analytics/analyticsOverview/reports/campaign/EngagementsOverview";
-import { CampaignDetails } from "user/views/user/CampaignDetails";
-import { CollapseBox } from "components/Collapse/CollapseBox";
-import { OsOverview } from "user/analytics/analyticsOverview/reports/os/OsOverview";
+import ReportUtils from "@/user/analytics/analyticsOverview/components/ReportUtils";
+import { EngagementsOverview } from "@/user/analytics/analyticsOverview/reports/campaign/EngagementsOverview";
+import { CampaignDetails } from "@/user/views/user/CampaignDetails";
+import { CollapseBox } from "@/components/Collapse/CollapseBox";
+import { OsOverview } from "@/user/analytics/analyticsOverview/reports/os/OsOverview";
 import { useLingui } from "@lingui/react";
 import { msg } from "@lingui/macro";
-import { CampaignSummaryFragment } from "graphql/campaign.generated";
+import { CampaignSummaryFragment } from "@/graphql/campaign.generated";
 import dayjs, { Dayjs } from "dayjs";
 
 interface Props {

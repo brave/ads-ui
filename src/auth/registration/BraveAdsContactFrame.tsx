@@ -1,7 +1,7 @@
 import { Box, Stack, Toolbar, Typography } from "@mui/material";
-import { LandingPageAppBar } from "components/AppBar/LandingPageAppBar";
-import { Background } from "components/Background/Background";
-import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
+import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
+import { Background } from "@/components/Background/Background";
+import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { Trans } from "@lingui/macro";
 
 export function BraveAdsContactFrame() {

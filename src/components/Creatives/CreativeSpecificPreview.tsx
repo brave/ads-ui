@@ -1,12 +1,12 @@
-import { CampaignFormat } from "graphql/types";
-import { BoxContainer } from "components/Box/BoxContainer";
-import { NotificationPreview } from "components/Creatives/NotificationPreview";
+import { CampaignFormat } from "@/graphql/types";
+import { BoxContainer } from "@/components/Box/BoxContainer";
+import { NotificationPreview } from "@/components/Creatives/NotificationPreview";
 import { Stack, Typography } from "@mui/material";
 import { PropsWithChildren } from "react";
 import { useField } from "formik";
-import { Creative } from "user/views/adsManager/types";
-import { DisplayError } from "user/views/adsManager/views/advanced/components/review/components/ReviewField";
-import { ImagePreview } from "components/Assets/ImagePreview";
+import { Creative } from "@/user/views/adsManager/types";
+import { DisplayError } from "@/user/views/adsManager/views/advanced/components/review/components/ReviewField";
+import { ImagePreview } from "@/components/Assets/ImagePreview";
 import { Trans } from "@lingui/macro";
 
 interface Props extends PropsWithChildren {

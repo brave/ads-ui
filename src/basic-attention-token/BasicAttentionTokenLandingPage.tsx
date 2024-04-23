@@ -1,15 +1,15 @@
 import {
   useTrackMatomoEvent,
   useTrackMatomoPageView,
-} from "hooks/useTrackWithMatomo";
-import { useIsMobile } from "hooks/useIsMobile";
-import { Background } from "components/Background/Background";
-import { LandingPageAppBar } from "components/AppBar/LandingPageAppBar";
+} from "@/hooks/useTrackWithMatomo";
+import { useIsMobile } from "@/hooks/useIsMobile";
+import { Background } from "@/components/Background/Background";
+import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
 import { Box, Button, Link, Stack, Toolbar, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
-import notification from "assets/images/newsfeed.png";
-import mobileAd from "assets/images/news-mobile.png";
-import bat from "assets/images/basic-attention-token.svg";
+import notification from "@/assets/images/newsfeed.png";
+import mobileAd from "@/assets/images/news-mobile.png";
+import bat from "@/assets/images/basic-attention-token.svg";
 import { Trans } from "@lingui/macro";
 
 export function BasicAttentionTokenLandingPage() {

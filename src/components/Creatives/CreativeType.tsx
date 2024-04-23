@@ -1,7 +1,7 @@
 import { Box, ListItemButton, List, Typography, Stack } from "@mui/material";
 import { useFormikContext } from "formik";
-import { CreativeInput } from "graphql/types";
-import { FormatHelp } from "components/Button/FormatHelp";
+import { CreativeInput } from "@/graphql/types";
+import { FormatHelp } from "@/components/Button/FormatHelp";
 import { msg } from "@lingui/macro";
 import { Trans } from "@lingui/react";
 

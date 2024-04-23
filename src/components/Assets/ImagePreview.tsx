@@ -1,6 +1,6 @@
 import { Box, Link, Skeleton } from "@mui/material";
-import { useGetImagePreviewUrl } from "components/Assets/hooks/useGetImagePreviewUrl";
-import { ErrorDetail } from "components/Error/ErrorDetail";
+import { useGetImagePreviewUrl } from "@/components/Assets/hooks/useGetImagePreviewUrl";
+import { ErrorDetail } from "@/components/Error/ErrorDetail";
 import { useLingui } from "@lingui/react";
 import { msg } from "@lingui/macro";
 

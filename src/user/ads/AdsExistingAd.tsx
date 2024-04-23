@@ -8,21 +8,21 @@ import {
   Modal,
 } from "@mui/material";
 import { useFormikContext } from "formik";
-import { CampaignFormat } from "graphql/types";
+import { CampaignFormat } from "@/graphql/types";
 import _ from "lodash";
 import {
   CreativeFragment,
   useAdvertiserCreativesQuery,
-} from "graphql/creative.generated";
-import { isCreativeTypeApplicableToCampaignFormat } from "user/library";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import { CampaignForm } from "user/views/adsManager/types";
+} from "@/graphql/creative.generated";
+import { isCreativeTypeApplicableToCampaignFormat } from "@/user/library";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
+import { CampaignForm } from "@/user/views/adsManager/types";
 import SearchIcon from "@mui/icons-material/Search";
 import { useContext, useRef, useState } from "react";
-import { CreativeSelect } from "components/Creatives/CreativeSelect";
-import { FormContext } from "state/context";
-import { useAdvertiserCreatives } from "user/hooks/useAdvertiserCreatives";
-import { modalStyles } from "theme";
+import { CreativeSelect } from "@/components/Creatives/CreativeSelect";
+import { FormContext } from "@/state/context";
+import { useAdvertiserCreatives } from "@/user/hooks/useAdvertiserCreatives";
+import { modalStyles } from "@/theme";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 

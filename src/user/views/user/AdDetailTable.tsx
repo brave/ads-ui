@@ -1,7 +1,7 @@
-import { CampaignAdsFragment } from "graphql/campaign.generated";
-import { CampaignFormat } from "graphql/types";
-import { StatsMetric } from "user/analytics/analyticsOverview/types";
-import { renderStatsCell } from "user/analytics/renderers";
+import { CampaignAdsFragment } from "@/graphql/campaign.generated";
+import { CampaignFormat } from "@/graphql/types";
+import { StatsMetric } from "@/user/analytics/analyticsOverview/types";
+import { renderStatsCell } from "@/user/analytics/renderers";
 import { DataGrid, GridColDef, GridValidRowModel } from "@mui/x-data-grid";
 import { useLingui } from "@lingui/react";
 import { msg } from "@lingui/macro";

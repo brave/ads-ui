@@ -4,8 +4,8 @@ import {
   refetchCampaignsForCreativeQuery,
   useCampaignsForCreativeLazyQuery,
   useUpdateCreativeMutation,
-} from "graphql/creative.generated";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+} from "@/graphql/creative.generated";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import {
   Box,
   Button,
@@ -20,8 +20,8 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import _ from "lodash";
-import { validCreativeFields } from "user/library";
-import { isReviewableState } from "util/displayState";
+import { validCreativeFields } from "@/user/library";
+import { isReviewableState } from "@/util/displayState";
 import { Trans } from "@lingui/macro";
 
 interface Props {

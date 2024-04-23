@@ -11,13 +11,13 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import { setActiveAdvertiser } from "auth/util";
-import { CardContainer } from "components/Card/CardContainer";
-import { DraftContext } from "state/context";
-import { NewKeyPairModal } from "user/settings/NewKeyPairModal";
-import MiniSideBar from "components/Drawer/MiniSideBar";
-import { useTrackWithMatomo } from "hooks/useTrackWithMatomo";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
+import { setActiveAdvertiser } from "@/auth/util";
+import { CardContainer } from "@/components/Card/CardContainer";
+import { DraftContext } from "@/state/context";
+import { NewKeyPairModal } from "@/user/settings/NewKeyPairModal";
+import MiniSideBar from "@/components/Drawer/MiniSideBar";
+import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
 import { Trans } from "@lingui/macro";
 
 const Settings = () => {

@@ -1,7 +1,7 @@
 import { useFormikContext } from "formik";
-import { CampaignForm, Creative } from "user/views/adsManager/types";
+import { CampaignForm, Creative } from "@/user/views/adsManager/types";
 import _ from "lodash";
-import { isCreativeTypeApplicableToCampaignFormat } from "user/library";
+import { isCreativeTypeApplicableToCampaignFormat } from "@/user/library";
 
 export function useAdvertiserCreatives() {
   const { values } = useFormikContext<CampaignForm>();

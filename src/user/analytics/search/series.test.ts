@@ -2,7 +2,7 @@ import { getMetricDefinition } from "./metrics";
 import { makeLineChartSeries } from "./series";
 import assert from "node:assert";
 import { DeepPartial } from "@apollo/client/utilities";
-import { DailyValuesFragment } from "graphql/analytics-overview.generated";
+import { DailyValuesFragment } from "@/graphql/analytics-overview.generated";
 import dayjs from "dayjs";
 
 it("should populate zero values for missing days in the date range", () => {

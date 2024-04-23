@@ -2,23 +2,23 @@ import { useState } from "react";
 
 import { Redirect, Route, Switch } from "react-router-dom";
 
-import { DraftContext, getAllDrafts } from "state/context";
-import { User } from "user/User";
+import { DraftContext, getAllDrafts } from "@/state/context";
+import { User } from "@/user/User";
 import {
   CssBaseline,
   StyledEngineProvider,
   ThemeProvider,
 } from "@mui/material";
-import { theme } from "theme";
-import { CampaignForm } from "user/views/adsManager/types";
-import { AuthVerify } from "auth/views/AuthVerify";
-import { Login } from "auth/views/Login";
-import { MagicLink } from "auth/views/MagicLink";
-import { Register } from "auth/registration/Register";
-import { LandingPage } from "auth/views/LandingPage";
-import { BraveAdsContactFrame } from "auth/registration/BraveAdsContactFrame";
+import { theme } from "./theme";
+import { CampaignForm } from "@/user/views/adsManager/types";
+import { AuthVerify } from "@/auth/views/AuthVerify";
+import { Login } from "@/auth/views/Login";
+import { MagicLink } from "@/auth/views/MagicLink";
+import { Register } from "@/auth/registration/Register";
+import { LandingPage } from "@/auth/views/LandingPage";
+import { BraveAdsContactFrame } from "@/auth/registration/BraveAdsContactFrame";
 import { useMatomo } from "@jonkoops/matomo-tracker-react";
-import { BasicAttentionTokenLandingPage } from "basic-attention-token/BasicAttentionTokenLandingPage";
+import { BasicAttentionTokenLandingPage } from "@/basic-attention-token/BasicAttentionTokenLandingPage";
 
 export function App() {
   const { enableLinkTracking } = useMatomo();

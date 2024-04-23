@@ -1,4 +1,4 @@
-import { FormikCheckbox } from "form/FormikHelpers";
+import { FormikCheckbox } from "@/form/FormikHelpers";
 import { useLingui } from "@lingui/react";
 import { msg } from "@lingui/macro";
 import { Box } from "@mui/material";

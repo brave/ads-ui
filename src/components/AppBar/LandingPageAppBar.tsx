@@ -7,14 +7,14 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import ads from "assets/images/logo.svg";
+import ads from "@/assets/images/logo.svg";
 import { Link as RouterLink, useRouteMatch } from "react-router-dom";
-import { useIsAuthenticated } from "auth/hooks/queries/useIsAuthenticated";
-import { useSignOut } from "auth/hooks/mutations/useSignOut";
-import { useIsMobile } from "hooks/useIsMobile";
+import { useIsAuthenticated } from "@/auth/hooks/queries/useIsAuthenticated";
+import { useSignOut } from "@/auth/hooks/mutations/useSignOut";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { SupportMenu } from "components/Drawer/SupportMenu";
+import { SupportMenu } from "@/components/Drawer/SupportMenu";
 
 export function LandingPageAppBar() {
   const match = useRouteMatch();

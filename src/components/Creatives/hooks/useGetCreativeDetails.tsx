@@ -1,6 +1,6 @@
-import { useLoadCreativeQuery } from "graphql/creative.generated";
-import { CreativeInput } from "graphql/types";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { useLoadCreativeQuery } from "@/graphql/creative.generated";
+import { CreativeInput } from "@/graphql/types";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { useLingui } from "@lingui/react";
 import { msg } from "@lingui/macro";
 

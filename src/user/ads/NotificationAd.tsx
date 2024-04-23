@@ -1,10 +1,10 @@
-import { CardContainer } from "components/Card/CardContainer";
-import { FormikTextField } from "form/FormikHelpers";
+import { CardContainer } from "@/components/Card/CardContainer";
+import { FormikTextField } from "@/form/FormikHelpers";
 import { Box, Stack, Typography } from "@mui/material";
-import { UrlResolver } from "components/Url/UrlResolver";
+import { UrlResolver } from "@/components/Url/UrlResolver";
 import { useField } from "formik";
-import { NotificationPreview } from "components/Creatives/NotificationPreview";
-import { CreateCreativeButton } from "components/Creatives/CreateCreativeButton";
+import { NotificationPreview } from "@/components/Creatives/NotificationPreview";
+import { CreateCreativeButton } from "@/components/Creatives/CreateCreativeButton";
 import { useEffect } from "react";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";

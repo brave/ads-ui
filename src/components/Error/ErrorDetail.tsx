@@ -9,7 +9,7 @@ import {
   Box,
   Typography,
 } from "@mui/material";
-import { VERSION } from "util/version";
+import { VERSION } from "@/util/version";
 import { MessageDescriptor } from "@lingui/core";
 import { Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";

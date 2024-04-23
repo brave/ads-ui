@@ -1,13 +1,13 @@
 import { List, ListItemButton, Stack, Typography } from "@mui/material";
-import { renderMonetaryAmount } from "components/Datagrid/renderers";
-import { useIsEdit } from "form/FormikHelpers";
+import { renderMonetaryAmount } from "@/components/Datagrid/renderers";
+import { useIsEdit } from "@/form/FormikHelpers";
 import { useField } from "formik";
-import { CampaignFormat } from "graphql/types";
-import { AdvertiserPrice } from "user/hooks/useAdvertiserWithPrices";
-import { Billing } from "user/views/adsManager/types";
-import { uiLabelsForCampaignFormat } from "util/campaign";
-import { uiLabelsForBillingType } from "util/billingType";
-import { LearnMoreButton } from "components/Button/LearnMoreButton";
+import { CampaignFormat } from "@/graphql/types";
+import { AdvertiserPrice } from "@/user/hooks/useAdvertiserWithPrices";
+import { Billing } from "@/user/views/adsManager/types";
+import { uiLabelsForCampaignFormat } from "@/util/campaign";
+import { uiLabelsForBillingType } from "@/util/billingType";
+import { LearnMoreButton } from "@/components/Button/LearnMoreButton";
 import { Trans } from "@lingui/macro";
 
 export function BillingModelSelect(props: { prices: AdvertiserPrice[] }) {

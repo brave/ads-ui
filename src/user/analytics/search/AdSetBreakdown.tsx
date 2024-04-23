@@ -1,19 +1,19 @@
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { Status } from "components/Campaigns/Status";
+import { Status } from "@/components/Campaigns/Status";
 import {
   AdSetValuesFragment,
   useFetchAdSetMetricsForCampaignQuery,
-} from "graphql/analytics-overview.generated";
-import { CampaignSummaryFragment } from "graphql/campaign.generated";
-import { uiLabelsForBillingType } from "util/billingType";
-import { displayFromCampaignState } from "util/displayState";
+} from "@/graphql/analytics-overview.generated";
+import { CampaignSummaryFragment } from "@/graphql/campaign.generated";
+import { uiLabelsForBillingType } from "@/util/billingType";
+import { displayFromCampaignState } from "@/util/displayState";
 import { MetricDefinition, getMetricListForCampaign } from "./metrics";
 import { RenderMetric } from "./RenderMetric";
 import { i18n } from "@lingui/core";
 import lodash from "lodash";
-import { PerformanceFilter } from "graphql/types";
+import { PerformanceFilter } from "@/graphql/types";
 
 function getColumnDefinitionForMetric(metric: MetricDefinition): GridColDef {
   return {

@@ -5,7 +5,7 @@ import {
   extractErrors,
   FormikDialogButton,
   FormikSubmitButton,
-} from "form/FormikButton";
+} from "@/form/FormikButton";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { MessageDescriptor } from "@lingui/core";

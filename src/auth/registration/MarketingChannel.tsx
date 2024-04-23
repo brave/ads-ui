@@ -1,4 +1,4 @@
-import { FormikSelect, FormikTextField } from "form/FormikHelpers";
+import { FormikSelect, FormikTextField } from "@/form/FormikHelpers";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useField } from "formik";

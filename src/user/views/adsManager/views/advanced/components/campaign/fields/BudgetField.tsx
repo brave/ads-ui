@@ -1,8 +1,8 @@
 import { InputAdornment } from "@mui/material";
-import { FormikTextField, useIsEdit } from "form/FormikHelpers";
+import { FormikTextField, useIsEdit } from "@/form/FormikHelpers";
 import { useFormikContext } from "formik";
 import { CampaignForm } from "../../../../../types";
-import { useAdvertiserWithPrices } from "user/hooks/useAdvertiserWithPrices";
+import { useAdvertiserWithPrices } from "@/user/hooks/useAdvertiserWithPrices";
 import { useLingui } from "@lingui/react";
 import { msg } from "@lingui/macro";
 

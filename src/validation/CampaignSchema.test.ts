@@ -1,8 +1,8 @@
 import { produce } from "immer";
-import { CampaignFormat, CampaignPacingStrategies } from "graphql/types";
+import { CampaignFormat, CampaignPacingStrategies } from "@/graphql/types";
 import { CampaignSchema } from "./CampaignSchema";
 import { describe } from "vitest";
-import { AdvertiserPrice } from "user/hooks/useAdvertiserWithPrices";
+import { AdvertiserPrice } from "@/user/hooks/useAdvertiserWithPrices";
 import dayjs from "dayjs";
 
 const prices: AdvertiserPrice[] = [

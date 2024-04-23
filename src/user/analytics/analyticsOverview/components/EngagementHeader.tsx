@@ -1,6 +1,6 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
-import { Status } from "components/Campaigns/Status";
-import { CampaignSummaryFragment } from "graphql/campaign.generated";
+import { Status } from "@/components/Campaigns/Status";
+import { CampaignSummaryFragment } from "@/graphql/campaign.generated";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/macro";
 import { Trans } from "@lingui/react";

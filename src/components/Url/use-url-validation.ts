@@ -1,7 +1,7 @@
 import {
   useValidateTargetUrlLazyQuery,
   ValidateTargetUrlQuery,
-} from "graphql/url.generated";
+} from "@/graphql/url.generated";
 import _ from "lodash";
 import { useEffect, useMemo, useState } from "react";
 
