@@ -1,7 +1,7 @@
 import { Background } from "components/Background/Background";
 import { LandingPageAppBar } from "components/AppBar/LandingPageAppBar";
 import { Box, Button, Link, Stack, Toolbar, Typography } from "@mui/material";
-import benefits from "../../../ad-benefits.svg";
+import benefits from "assets/images/ad-benefits.svg";
 import { useIsAuthenticated } from "auth/hooks/queries/useIsAuthenticated";
 import { Link as RouterLink } from "react-router-dom";
 import { useIsMobile } from "hooks/useIsMobile";
