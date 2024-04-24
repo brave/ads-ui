@@ -1,4 +1,4 @@
-import { CampaignFormat } from "graphql/types";
+import { CampaignFormat } from "@/graphql/types";
 import { t } from "@lingui/macro";
 
 export function uiLabelsForCampaignFormat(format: CampaignFormat): string {

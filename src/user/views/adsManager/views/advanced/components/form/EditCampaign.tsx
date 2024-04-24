@@ -1,21 +1,21 @@
 import { Container, LinearProgress } from "@mui/material";
 import { Formik } from "formik";
 import { CampaignForm } from "../../../../types";
-import { CampaignSchema } from "validation/CampaignSchema";
-import { editCampaignValues, transformEditForm } from "user/library";
+import { CampaignSchema } from "@/validation/CampaignSchema";
+import { editCampaignValues, transformEditForm } from "@/user/library";
 import {
   useLoadCampaignQuery,
   useUpdateCampaignMutation,
-} from "graphql/campaign.generated";
+} from "@/graphql/campaign.generated";
 import { useHistory, useParams } from "react-router-dom";
 import { BaseForm } from "./components/BaseForm";
-import { useCreatePaymentSession } from "checkout/hooks/useCreatePaymentSession";
-import { ErrorDetail } from "components/Error/ErrorDetail";
-import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
+import { useCreatePaymentSession } from "@/checkout/hooks/useCreatePaymentSession";
+import { ErrorDetail } from "@/components/Error/ErrorDetail";
+import { refetchAdvertiserCampaignsQuery } from "@/graphql/advertiser.generated";
 import { useContext } from "react";
-import { FilterContext } from "state/context";
-import { useAdvertiserWithPrices } from "user/hooks/useAdvertiserWithPrices";
-import { useTrackWithMatomo } from "hooks/useTrackWithMatomo";
+import { FilterContext } from "@/state/context";
+import { useAdvertiserWithPrices } from "@/user/hooks/useAdvertiserWithPrices";
+import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 

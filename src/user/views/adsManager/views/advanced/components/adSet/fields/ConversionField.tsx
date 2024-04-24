@@ -1,10 +1,10 @@
 import { Button, Link, Stack, Typography } from "@mui/material";
-import { ConversionFields } from "components/Conversion/ConversionFields";
+import { ConversionFields } from "@/components/Conversion/ConversionFields";
 import { FieldArray, FieldArrayRenderProps, useField } from "formik";
 import { Conversion, initialConversion } from "../../../../../types";
-import { CardContainer } from "components/Card/CardContainer";
+import { CardContainer } from "@/components/Card/CardContainer";
 import { Add } from "@mui/icons-material";
-import { LearnMoreButton } from "components/Button/LearnMoreButton";
+import { LearnMoreButton } from "@/components/Button/LearnMoreButton";
 import { Trans } from "@lingui/macro";
 
 interface Props {

@@ -1,6 +1,6 @@
 import { Box, Button } from "@mui/material";
 import { useContext, useEffect } from "react";
-import { BoxContainer } from "components/Box/BoxContainer";
+import { BoxContainer } from "@/components/Box/BoxContainer";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { useField, useFormikContext } from "formik";
@@ -8,9 +8,9 @@ import {
   CampaignForm,
   Creative,
   initialCreative,
-} from "user/views/adsManager/types";
-import { FormContext } from "state/context";
-import { CampaignFormat } from "graphql/types";
+} from "@/user/views/adsManager/types";
+import { FormContext } from "@/state/context";
+import { CampaignFormat } from "@/graphql/types";
 import { Trans } from "@lingui/macro";
 
 export function NewAd() {

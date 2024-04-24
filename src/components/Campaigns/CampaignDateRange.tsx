@@ -5,7 +5,7 @@ import { useField } from "formik";
 import { useState } from "react";
 import { getDefaultTimezone, TimeZonePicker } from "../TimeZonePicker";
 import { TimezoneAwareDatePicker } from "../TimeZonePicker/TimezoneAwareDatePicker";
-import { useIsEdit } from "form/FormikHelpers";
+import { useIsEdit } from "@/form/FormikHelpers";
 import { useLingui } from "@lingui/react";
 import { msg } from "@lingui/macro";
 import dayjs from "dayjs";

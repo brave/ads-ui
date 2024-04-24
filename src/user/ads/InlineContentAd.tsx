@@ -1,13 +1,13 @@
-import { FormikTextField } from "form/FormikHelpers";
-import { UrlResolver } from "components/Url/UrlResolver";
+import { FormikTextField } from "@/form/FormikHelpers";
+import { UrlResolver } from "@/components/Url/UrlResolver";
 import { useField } from "formik";
 import { useEffect } from "react";
 import { Box, Stack, Typography } from "@mui/material";
-import { CreateCreativeButton } from "components/Creatives/CreateCreativeButton";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import { CardContainer } from "components/Card/CardContainer";
-import { ImageAutocomplete } from "components/Assets/ImageAutocomplete";
-import { NewsPreview } from "components/Creatives/NewsPreview";
+import { CreateCreativeButton } from "@/components/Creatives/CreateCreativeButton";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
+import { CardContainer } from "@/components/Card/CardContainer";
+import { ImageAutocomplete } from "@/components/Assets/ImageAutocomplete";
+import { NewsPreview } from "@/components/Creatives/NewsPreview";
 import { useLingui } from "@lingui/react";
 import { msg, Trans } from "@lingui/macro";
 

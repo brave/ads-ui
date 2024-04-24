@@ -1,7 +1,7 @@
 import { MetricDefinition } from "./metrics";
 import { SeriesSplineOptions, SeriesTooltipOptionsObject } from "highcharts";
 import BigNumber from "bignumber.js";
-import { DailyValuesFragment } from "graphql/analytics-overview.generated";
+import { DailyValuesFragment } from "@/graphql/analytics-overview.generated";
 import { i18n } from "@lingui/core";
 import dayjs from "dayjs";
 

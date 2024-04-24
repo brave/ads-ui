@@ -4,7 +4,7 @@ import {
   NoSpacesRegex,
   PrivateCdnRegex,
   SimpleUrlRegexp,
-} from "validation/regex";
+} from "@/validation/regex";
 import _ from "lodash";
 import * as Yup from "yup";
 import { t } from "@lingui/macro";

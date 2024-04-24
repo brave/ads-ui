@@ -2,9 +2,9 @@ import { Alert, Link, TextField, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
 import { Link as RouterLink, useHistory } from "react-router-dom";
-import { useSignIn } from "auth/hooks/mutations/useSignIn";
-import { AuthContainer } from "auth/views/components/AuthContainer";
-import { useTrackWithMatomo } from "hooks/useTrackWithMatomo";
+import { useSignIn } from "@/auth/hooks/mutations/useSignIn";
+import { AuthContainer } from "@/auth/views/components/AuthContainer";
+import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
 import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 

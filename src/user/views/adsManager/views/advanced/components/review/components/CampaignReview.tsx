@@ -1,9 +1,9 @@
 import { CampaignForm } from "../../../../../types";
 import { FormikErrors } from "formik";
 import { ReviewField } from "./ReviewField";
-import { ReviewContainer } from "user/views/adsManager/views/advanced/components/review/components/ReviewContainer";
-import { uiLabelsForBillingType } from "util/billingType";
-import { uiLabelsForCampaignFormat } from "util/campaign";
+import { ReviewContainer } from "@/user/views/adsManager/views/advanced/components/review/components/ReviewContainer";
+import { uiLabelsForBillingType } from "@/util/billingType";
+import { uiLabelsForCampaignFormat } from "@/util/campaign";
 import { msg, Trans } from "@lingui/macro";
 
 interface Props {

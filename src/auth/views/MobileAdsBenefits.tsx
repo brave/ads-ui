@@ -1,8 +1,8 @@
 import { Card, CardMedia, List, ListItem, Typography } from "@mui/material";
 
-import allSizes from "assets/images/all_sizes_frame.svg";
-import powerfulFormats from "assets/images/powerful_format_frame.svg";
-import privacyFocused from "assets/images/privacy_focused_frame.svg";
+import allSizes from "@/assets/images/all_sizes_frame.svg";
+import powerfulFormats from "@/assets/images/powerful_format_frame.svg";
+import privacyFocused from "@/assets/images/privacy_focused_frame.svg";
 import { msg } from "@lingui/macro";
 import { MessageDescriptor } from "@lingui/core";
 import { Trans } from "@lingui/react";

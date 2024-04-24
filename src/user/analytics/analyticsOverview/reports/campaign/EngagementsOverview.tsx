@@ -3,7 +3,7 @@ import { useState } from "react";
 import {
   CampaignWithEngagementsFragment,
   EngagementFragment,
-} from "graphql/analytics-overview.generated";
+} from "@/graphql/analytics-overview.generated";
 import {
   prepareChart,
   processData,
@@ -12,10 +12,10 @@ import {
 import MetricFilter from "../../components/MetricFilter";
 import EngagementHeader from "../../components/EngagementHeader";
 import LiveFeed from "../../components/LiveFeed";
-import { ErrorDetail } from "components/Error/ErrorDetail";
+import { ErrorDetail } from "@/components/Error/ErrorDetail";
 import { ApolloError } from "@apollo/client";
-import { usePersistMetricFilter } from "user/analytics/analyticsOverview/hooks/usePersistMetricFilter";
-import { HighchartsWrapper } from "user/analytics/analyticsOverview/components/HighchartsWrapper";
+import { usePersistMetricFilter } from "@/user/analytics/analyticsOverview/hooks/usePersistMetricFilter";
+import { HighchartsWrapper } from "@/user/analytics/analyticsOverview/components/HighchartsWrapper";
 import { msg, Trans } from "@lingui/macro";
 
 interface Props {

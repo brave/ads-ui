@@ -1,4 +1,4 @@
-import { buildAdServerEndpoint } from "util/environment";
+import { buildAdServerEndpoint } from "@/util/environment";
 import { t } from "@lingui/macro";
 
 export async function createPaymentSession(

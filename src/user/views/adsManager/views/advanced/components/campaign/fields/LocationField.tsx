@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
-import { LocationPicker } from "components/Location/LocationPicker";
-import { CardContainer } from "components/Card/CardContainer";
+import { LocationPicker } from "@/components/Location/LocationPicker";
+import { CardContainer } from "@/components/Card/CardContainer";
 import { Trans } from "@lingui/macro";
 
 export function LocationField() {

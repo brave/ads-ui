@@ -1,6 +1,6 @@
-import { CreateAdSetInput, CreateCampaignInput } from "graphql/types";
-import { CampaignFragment } from "graphql/campaign.generated";
-import { AdSetFragment } from "graphql/ad-set.generated";
+import { CreateAdSetInput, CreateCampaignInput } from "@/graphql/types";
+import { CampaignFragment } from "@/graphql/campaign.generated";
+import { AdSetFragment } from "@/graphql/ad-set.generated";
 import dayjs from "dayjs";
 
 export function createCampaignFromFragment(

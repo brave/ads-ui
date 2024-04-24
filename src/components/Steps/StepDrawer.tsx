@@ -10,9 +10,9 @@ import {
   Stepper,
   Toolbar,
 } from "@mui/material";
-import { NextAndBack } from "components/Steps/NextAndBack";
+import { NextAndBack } from "@/components/Steps/NextAndBack";
 import { useHistory } from "react-router-dom";
-import { ActionButtons } from "components/Steps/ActionButtons";
+import { ActionButtons } from "@/components/Steps/ActionButtons";
 import { MessageDescriptor } from "@lingui/core";
 import { Trans } from "@lingui/react";
 

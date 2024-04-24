@@ -14,9 +14,9 @@ import {
   StepLabel,
   Stepper,
 } from "@mui/material";
-import { CampaignFormat } from "graphql/types";
-import { useUploadFile } from "components/Assets/hooks/useUploadFile";
-import { NewImageButton } from "components/Navigation/NewImageButton";
+import { CampaignFormat } from "@/graphql/types";
+import { useUploadFile } from "@/components/Assets/hooks/useUploadFile";
+import { NewImageButton } from "@/components/Navigation/NewImageButton";
 import { Trans } from "@lingui/macro";
 
 export interface UploadConfig {

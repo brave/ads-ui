@@ -1,8 +1,8 @@
 import { useCallback, useState } from "react";
-import { buildAdServerEndpoint } from "util/environment";
+import { buildAdServerEndpoint } from "@/util/environment";
 import Papa from "papaparse";
 import tweetnacl from "tweetnacl";
-import { useTrackMatomoEvent } from "hooks/useTrackWithMatomo";
+import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
 import { t } from "@lingui/macro";
 
 interface DownloadProps {

@@ -7,15 +7,15 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { CardContainer } from "components/Card/CardContainer";
+import { CardContainer } from "@/components/Card/CardContainer";
 import { useField } from "formik";
-import { CampaignFormat } from "graphql/types";
-import { useIsEdit } from "form/FormikHelpers";
-import { Billing } from "user/views/adsManager/types";
-import { AdvertiserPrice } from "user/hooks/useAdvertiserWithPrices";
+import { CampaignFormat } from "@/graphql/types";
+import { useIsEdit } from "@/form/FormikHelpers";
+import { Billing } from "@/user/views/adsManager/types";
+import { AdvertiserPrice } from "@/user/hooks/useAdvertiserWithPrices";
 import ErrorIcon from "@mui/icons-material/Error";
-import { CustomTooltip } from "components/Tooltip/CustomTooltip";
-import { LearnMoreButton } from "components/Button/LearnMoreButton";
+import { CustomTooltip } from "@/components/Tooltip/CustomTooltip";
+import { LearnMoreButton } from "@/components/Button/LearnMoreButton";
 import { msg } from "@lingui/macro";
 import { Trans, useLingui } from "@lingui/react";
 import { MessageDescriptor } from "@lingui/core";

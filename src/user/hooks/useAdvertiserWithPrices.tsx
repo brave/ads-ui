@@ -1,13 +1,13 @@
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import {
   AdvertiserPriceFragment,
   useAdvertiserPricesQuery,
-} from "graphql/advertiser.generated";
+} from "@/graphql/advertiser.generated";
 import { useState } from "react";
-import { IAdvertiser } from "auth/context/auth.interface";
+import { IAdvertiser } from "@/auth/context/auth.interface";
 import _ from "lodash";
-import { BillingType } from "graphql/types";
-import { Billing } from "user/views/adsManager/types";
+import { BillingType } from "@/graphql/types";
+import { Billing } from "@/user/views/adsManager/types";
 import { t } from "@lingui/macro";
 
 export type AdvertiserPrice = Omit<AdvertiserPriceFragment, "billingType"> & {

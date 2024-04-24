@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { getLink } from "auth/lib";
+import { getLink } from "@/auth/lib";
 import { t } from "@lingui/macro";
 
 interface Options {

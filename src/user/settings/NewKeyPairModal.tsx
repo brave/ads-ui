@@ -6,12 +6,12 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useUpdateAdvertiserMutation } from "graphql/advertiser.generated";
+import { useUpdateAdvertiserMutation } from "@/graphql/advertiser.generated";
 import tweetnacl from "tweetnacl";
 import { useRef, useState } from "react";
-import { IAdvertiser } from "auth/context/auth.interface";
-import { CardContainer } from "components/Card/CardContainer";
-import { modalStyles } from "theme";
+import { IAdvertiser } from "@/auth/context/auth.interface";
+import { CardContainer } from "@/components/Card/CardContainer";
+import { modalStyles } from "@/theme";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 

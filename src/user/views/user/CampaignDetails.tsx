@@ -1,14 +1,14 @@
 import { useState } from "react";
 import DatasetIcon from "@mui/icons-material/Dataset";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
-import { useLoadCampaignAdsQuery } from "graphql/campaign.generated";
+import { useLoadCampaignAdsQuery } from "@/graphql/campaign.generated";
 import { useParams } from "react-router-dom";
-import { ErrorDetail } from "components/Error/ErrorDetail";
+import { ErrorDetail } from "@/components/Error/ErrorDetail";
 import { Box, Skeleton, Tab, Tabs } from "@mui/material";
-import { AdSetList } from "user/adSet/AdSetList";
-import { AdList } from "user/ads/AdList";
-import { EngagementFragment } from "graphql/analytics-overview.generated";
-import { adEngagements } from "user/analytics/analyticsOverview/lib/ads.library";
+import { AdSetList } from "@/user/adSet/AdSetList";
+import { AdList } from "@/user/ads/AdList";
+import { EngagementFragment } from "@/graphql/analytics-overview.generated";
+import { adEngagements } from "@/user/analytics/analyticsOverview/lib/ads.library";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 

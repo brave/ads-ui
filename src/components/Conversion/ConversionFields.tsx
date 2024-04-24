@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { FormikRadioControl, FormikTextField } from "form/FormikHelpers";
+import { FormikRadioControl, FormikTextField } from "@/form/FormikHelpers";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 

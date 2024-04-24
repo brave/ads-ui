@@ -6,15 +6,15 @@ import {
   refetchLoadCampaignAdsQuery,
   refetchLoadCampaignQuery,
   useUpdateCampaignMutation,
-} from "graphql/campaign.generated";
-import { useUpdateAdSetMutation } from "graphql/ad-set.generated";
-import { OnOff } from "components/Switch/OnOff";
-import { displayFromCampaignState } from "util/displayState";
-import { CampaignExtras } from "user/adSet/AdSetList";
-import { FilterContext } from "state/context";
-import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
-import { UpdateAdSetInput } from "graphql/types";
-import { toLocaleString } from "util/bignumber";
+} from "@/graphql/campaign.generated";
+import { useUpdateAdSetMutation } from "@/graphql/ad-set.generated";
+import { OnOff } from "@/components/Switch/OnOff";
+import { displayFromCampaignState } from "@/util/displayState";
+import { CampaignExtras } from "@/user/adSet/AdSetList";
+import { FilterContext } from "@/state/context";
+import { refetchAdvertiserCampaignsQuery } from "@/graphql/advertiser.generated";
+import { UpdateAdSetInput } from "@/graphql/types";
+import { toLocaleString } from "@/util/bignumber";
 import BigNumber from "bignumber.js";
 import { Trans } from "@lingui/macro";
 import dayjs from "dayjs";

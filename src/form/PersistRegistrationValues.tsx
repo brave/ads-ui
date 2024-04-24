@@ -1,6 +1,6 @@
 import { useFormikContext } from "formik";
 import { useEffect } from "react";
-import { RegistrationForm } from "auth/registration/types";
+import { RegistrationForm } from "@/auth/registration/types";
 import _ from "lodash";
 
 export const PersistRegistrationValues = () => {

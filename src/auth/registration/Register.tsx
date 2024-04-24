@@ -1,6 +1,6 @@
-import { AdvertiserRegistered } from "auth/registration/AdvertiserRegistered";
+import { AdvertiserRegistered } from "@/auth/registration/AdvertiserRegistered";
 import { Route, Switch } from "react-router-dom";
-import { BrowserRegister } from "auth/registration/BrowserRegister";
+import { BrowserRegister } from "@/auth/registration/BrowserRegister";
 import { SearchRegister } from "./SearchRegister";
 import { AccountChoice } from "./AccountChoice";
 

@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { ResponseUser } from "../lib";
-import { PaymentType } from "graphql/types";
+import { PaymentType } from "@/graphql/types";
 
 export type IAdvertiser = {
   id: string;

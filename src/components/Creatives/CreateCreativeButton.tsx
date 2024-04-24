@@ -3,16 +3,16 @@ import {
   CampaignForm,
   Creative,
   initialCreative,
-} from "user/views/adsManager/types";
+} from "@/user/views/adsManager/types";
 import _ from "lodash";
 import {
   refetchAdvertiserCreativesQuery,
   useCreateCreativeMutation,
-} from "graphql/creative.generated";
+} from "@/graphql/creative.generated";
 import { useField, useFormikContext } from "formik";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { LoadingButton } from "@mui/lab";
-import { validCreativeFields } from "user/library";
+import { validCreativeFields } from "@/user/library";
 import { Trans } from "@lingui/macro";
 
 export function CreateCreativeButton() {

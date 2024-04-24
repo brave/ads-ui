@@ -2,7 +2,7 @@ import BigNumber from "bignumber.js";
 import { MetricType } from "./metrics";
 import _ from "lodash";
 import { Skeleton, Typography } from "@mui/material";
-import { format } from "user/library/format";
+import { format } from "@/user/library/format";
 
 interface Props {
   type: MetricType;

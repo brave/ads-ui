@@ -1,6 +1,6 @@
-import { createPaymentSession } from "checkout/lib";
+import { createPaymentSession } from "@/checkout/lib";
 import { useCallback, useState } from "react";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { useHistory } from "react-router-dom";
 import { t } from "@lingui/macro";
 

@@ -5,8 +5,8 @@ import {
   Metrics,
   StatsMetric,
   Tooltip,
-} from "user/analytics/analyticsOverview/types";
-import { EngagementFragment } from "graphql/analytics-overview.generated";
+} from "@/user/analytics/analyticsOverview/types";
+import { EngagementFragment } from "@/graphql/analytics-overview.generated";
 import BigNumber from "bignumber.js";
 import { t } from "@lingui/macro";
 import dayjs from "dayjs";

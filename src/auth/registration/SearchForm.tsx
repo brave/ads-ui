@@ -1,10 +1,10 @@
 import { Box } from "@mui/material";
-import { FormikTextField } from "form/FormikHelpers";
-import { MarketingOptIn } from "auth/registration/MarketingOptIn";
+import { FormikTextField } from "@/form/FormikHelpers";
+import { MarketingOptIn } from "@/auth/registration/MarketingOptIn";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { MarketingChannel } from "auth/registration/MarketingChannel";
-import { CountryPicker } from "components/Country/CountryPicker";
+import { MarketingChannel } from "@/auth/registration/MarketingChannel";
+import { CountryPicker } from "@/components/Country/CountryPicker";
 
 export function SearchForm() {
   const { _ } = useLingui();
