@@ -72,6 +72,7 @@ export function CreativeList() {
       valueGetter: (_value, row) => creativeValuesGetter(row),
       renderCell: ({ row }) => <CreativePayloadList creative={row} />,
       flex: 1,
+      display: "flex",
       sortable: false,
     },
     {
