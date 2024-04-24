@@ -1,8 +1,10 @@
 import { msg } from "@lingui/macro";
 import BigNumber from "bignumber.js";
-import { CampaignMetricDetailValuesFragment } from "@/graphql/analytics-overview.generated";
-import { CampaignSummaryFragment } from "@/graphql/campaign.generated";
 import { MessageDescriptor } from "@lingui/core";
+import {
+  CampaignMetricDetailValuesFragment,
+  CampaignSummaryFragment,
+} from "@/graphql-client/graphql";
 
 export type MetricType = "number" | "rate" | "usd";
 

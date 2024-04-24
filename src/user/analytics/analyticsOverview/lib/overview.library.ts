@@ -6,10 +6,10 @@ import {
   StatsMetric,
   Tooltip,
 } from "@/user/analytics/analyticsOverview/types";
-import { EngagementFragment } from "@/graphql/analytics-overview.generated";
 import BigNumber from "bignumber.js";
 import { t } from "@lingui/macro";
 import dayjs from "dayjs";
+import { EngagementFragment } from "@/graphql-client/graphql";
 
 type MetricDataSet = {
   metric1DataSet: number[][];

@@ -1,4 +1,4 @@
-import { CampaignFormat } from "@/graphql/types";
+import { CampaignFormat } from "@/graphql-client/graphql";
 import { BoxContainer } from "@/components/Box/BoxContainer";
 import { NotificationPreview } from "@/components/Creatives/NotificationPreview";
 import { Stack, Typography } from "@mui/material";

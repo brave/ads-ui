@@ -1,4 +1,3 @@
-import { CampaignsForCreativeQuery } from "@/graphql/creative.generated";
 import { Link as RouterLink } from "react-router-dom";
 import {
   Link,
@@ -14,6 +13,7 @@ import _ from "lodash";
 import { Status } from "@/components/Campaigns/Status";
 import { ApolloError } from "@apollo/client";
 import { msg, Trans } from "@lingui/macro";
+import { CampaignsForCreativeQuery } from "@/graphql-client/graphql";
 
 interface Props {
   data?: CampaignsForCreativeQuery;

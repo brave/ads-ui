@@ -2,8 +2,8 @@ import { Box, Switch, Tooltip, Typography, switchClasses } from "@mui/material";
 import { MetricDefinition } from "./metrics";
 import { RenderMetric } from "./RenderMetric";
 import { useMetricSelection } from "./hooks";
-import { CampaignMetricDetailValuesFragment } from "@/graphql/analytics-overview.generated";
 import { Trans } from "@lingui/react";
+import { CampaignMetricDetailValuesFragment } from "@/graphql-client/graphql";
 
 interface Props {
   metricDefinition: MetricDefinition;

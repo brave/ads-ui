@@ -1,12 +1,14 @@
 import _ from "lodash";
 import { isDateInThePast } from "@/util/isAfterEndDate";
-import { AdFragment } from "@/graphql/ad-set.generated";
-import { CampaignSource } from "@/graphql/types";
-import { CampaignAdsFragment } from "@/graphql/campaign.generated";
+import {
+  AdFragment,
+  CampaignAdsFragment,
+  CampaignSource,
+  CreativeFragment,
+} from "@/graphql-client/graphql";
 import { StatsMetric } from "@/user/analytics/analyticsOverview/types";
 import { AdDetailTable } from "@/user/views/user/AdDetailTable";
 import { GridColDef } from "@mui/x-data-grid";
-import { CreativeFragment } from "@/graphql/creative.generated";
 import { Box } from "@mui/material";
 import { useLingui } from "@lingui/react";
 import { msg, Trans } from "@lingui/macro";

@@ -10,7 +10,7 @@ import {
   initialCreative,
 } from "@/user/views/adsManager/types";
 import { FormContext } from "@/state/context";
-import { CampaignFormat } from "@/graphql/types";
+import { CampaignFormat } from "@/graphql-client/graphql";
 import { Trans } from "@lingui/macro";
 
 export function NewAd() {

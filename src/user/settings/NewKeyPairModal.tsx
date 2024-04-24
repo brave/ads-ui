@@ -6,7 +6,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useUpdateAdvertiserMutation } from "@/graphql/advertiser.generated";
 import tweetnacl from "tweetnacl";
 import { useRef, useState } from "react";
 import { IAdvertiser } from "@/auth/context/auth.interface";
@@ -14,6 +13,8 @@ import { CardContainer } from "@/components/Card/CardContainer";
 import { modalStyles } from "@/theme";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { useMutation } from "@apollo/client";
+import { UpdateAdvertiserDocument } from "@/graphql-client/graphql";
 
 interface Props {
   advertiser: IAdvertiser;
@@ -31,7 +32,7 @@ export function NewKeyPairModal({ advertiser }: Props) {
   const [newKeypairModalState, setNewKeypairModalState] =
     useState("disclaimer");
 
-  const [updateAdvertiser] = useUpdateAdvertiserMutation({
+  const [updateAdvertiser] = useMutation(UpdateAdvertiserDocument, {
     variables: {
       updateAdvertiserInput: {
         id: advertiser.id,

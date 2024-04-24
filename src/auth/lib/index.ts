@@ -1,6 +1,8 @@
-import { UserFragment } from "@/graphql/user.generated";
-import { AdvertiserFragment } from "@/graphql/advertiser.generated";
-import { PaymentType } from "@/graphql/types";
+import {
+  AdvertiserFragment,
+  PaymentType,
+  UserFragment,
+} from "@/graphql-client/graphql";
 import {
   buildAdServerEndpoint,
   buildAdServerV2Endpoint,

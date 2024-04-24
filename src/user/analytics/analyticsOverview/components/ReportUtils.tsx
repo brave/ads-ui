@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { DateRangePicker } from "@/components/Date/DateRangePicker";
 import { DashboardButton } from "@/components/Button/DashboardButton";
-import { CampaignFormat } from "@/graphql/types";
+import { CampaignFormat } from "@/graphql-client/graphql";
 import _ from "lodash";
 import { ReportMenu } from "@/user/reporting/ReportMenu";
 import { Dayjs } from "dayjs";

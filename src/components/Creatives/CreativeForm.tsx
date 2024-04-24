@@ -12,14 +12,17 @@ import { SubmitPanel } from "@/components/Button/SubmitPanel";
 import { useGetCreativeDetails } from "@/components/Creatives/hooks/useGetCreativeDetails";
 import { useSubmitCreative } from "@/components/Creatives/hooks/useSubmitCreative";
 import CreativeCampaigns from "@/components/Creatives/CreativeCampaigns";
-import { useCampaignsForCreativeQuery } from "@/graphql/creative.generated";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
-import { CreativeInput } from "@/graphql/types";
-import { CampaignFragment } from "@/graphql/campaign.generated";
+import {
+  CampaignFragment,
+  CampaignsForCreativeDocument,
+  CreativeInput,
+} from "@/graphql-client/graphql";
 import _ from "lodash";
 import { isReviewableState } from "@/util/displayState";
 import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { msg, Trans } from "@lingui/macro";
+import { useQuery } from "@apollo/client";
 
 interface Params {
   id: string;
@@ -40,7 +43,7 @@ export function CreativeForm() {
     data: campaigns,
     loading: cLoading,
     error: cError,
-  } = useCampaignsForCreativeQuery({
+  } = useQuery(CampaignsForCreativeDocument, {
     variables: { creativeId: id, advertiserId: advertiser.id },
     skip: id === "new",
   });

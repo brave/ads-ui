@@ -7,7 +7,7 @@ import _ from "lodash";
 import { PropsWithChildren, useContext, useState } from "react";
 import { FormContext } from "@/state/context";
 import { useFormikContext } from "formik";
-import { CampaignFormat } from "@/graphql/types";
+import { CampaignFormat } from "@/graphql-client/graphql";
 import { ImagePreview } from "@/components/Assets/ImagePreview";
 import { Trans } from "@lingui/macro";
 import dayjs from "dayjs";

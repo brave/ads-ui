@@ -2,10 +2,8 @@ import { Chip } from "@mui/material";
 import { Status } from "@/components/Campaigns/Status";
 import _ from "lodash";
 import { adSetOnOffState } from "@/components/Datagrid/renderers";
-import { CampaignAdsFragment } from "@/graphql/campaign.generated";
-import { CampaignSource } from "@/graphql/types";
+import { CampaignAdsFragment, CampaignSource } from "@/graphql-client/graphql";
 import { StatsMetric } from "@/user/analytics/analyticsOverview/types";
-import { AdSetWithDeletedAdsFragment } from "@/graphql/ad-set.generated";
 import { AdDetailTable } from "@/user/views/user/AdDetailTable";
 import { displayFromCampaignState } from "@/util/displayState";
 import { uiLabelsForBillingType } from "@/util/billingType";
@@ -13,6 +11,7 @@ import { GridColDef } from "@mui/x-data-grid";
 import { segmentNameWithNoDash } from "@/util/segment";
 import { useLingui } from "@lingui/react";
 import { msg, Trans } from "@lingui/macro";
+import { AdSetWithDeletedAdsFragment } from "@/graphql-client/graphql";
 
 interface Props {
   loading: boolean;

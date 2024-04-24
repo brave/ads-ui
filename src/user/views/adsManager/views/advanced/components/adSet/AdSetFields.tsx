@@ -8,7 +8,7 @@ import { adSetOnOffState } from "@/components/Datagrid/renderers";
 import { Stack, Typography } from "@mui/material";
 import { useFormikContext } from "formik";
 import { CampaignForm } from "@/user/views/adsManager/types";
-import { CampaignSource } from "@/graphql/types";
+import { CampaignSource } from "@/graphql-client/graphql";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { Status } from "@/components/Campaigns/Status";
 import { displayFromCampaignState } from "@/util/displayState";

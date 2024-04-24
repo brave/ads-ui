@@ -7,7 +7,7 @@ import { isCreativeTypeApplicableToCampaignFormat } from "@/user/library";
 import { NewAd } from "@/user/ads/NewAd";
 import { AdsExistingAd } from "@/user/ads/AdsExistingAd";
 import { ShowAdsButton } from "@/user/ads/ShowAdsButton";
-import { CampaignFormat } from "@/graphql/types";
+import { CampaignFormat } from "@/graphql-client/graphql";
 import { NotificationAd } from "@/user/ads/NotificationAd";
 import { InlineContentAd } from "@/user/ads/InlineContentAd";
 import { modalStyles } from "@/theme";

@@ -1,10 +1,6 @@
 import { Alert, Box, Divider, Skeleton } from "@mui/material";
 import { useState } from "react";
 import {
-  CampaignWithEngagementsFragment,
-  EngagementFragment,
-} from "@/graphql/analytics-overview.generated";
-import {
   prepareChart,
   processData,
   processStats,
@@ -17,6 +13,10 @@ import { ApolloError } from "@apollo/client";
 import { usePersistMetricFilter } from "@/user/analytics/analyticsOverview/hooks/usePersistMetricFilter";
 import { HighchartsWrapper } from "@/user/analytics/analyticsOverview/components/HighchartsWrapper";
 import { msg, Trans } from "@lingui/macro";
+import {
+  CampaignWithEngagementsFragment,
+  EngagementFragment,
+} from "@/graphql-client/graphql";
 
 interface Props {
   loading: boolean;

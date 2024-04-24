@@ -2,7 +2,7 @@ import { Box, Card, Typography } from "@mui/material";
 import { ImagePreview } from "@/components/Assets/ImagePreview";
 import { useField, useFormikContext } from "formik";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
-import { CreativeInput } from "@/graphql/types";
+import { CreativeInput } from "@/graphql-client/graphql";
 import { Trans } from "@lingui/macro";
 
 export function NewsPreview() {

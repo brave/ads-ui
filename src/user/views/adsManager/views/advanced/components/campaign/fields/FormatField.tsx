@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { CardContainer } from "@/components/Card/CardContainer";
 import { useField } from "formik";
-import { CampaignFormat } from "@/graphql/types";
+import { CampaignFormat } from "@/graphql-client/graphql";
 import { useIsEdit } from "@/form/FormikHelpers";
 import { Billing } from "@/user/views/adsManager/types";
 import { AdvertiserPrice } from "@/user/hooks/useAdvertiserWithPrices";

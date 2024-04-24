@@ -1,7 +1,3 @@
-import {
-  CreativeFragment,
-  useAdvertiserCreativesQuery,
-} from "@/graphql/creative.generated";
 import { uiTextForCreativeTypeCode } from "@/user/library";
 import { CardContainer } from "@/components/Card/CardContainer";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
@@ -18,13 +14,18 @@ import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { msg } from "@lingui/macro";
 import { Trans, useLingui } from "@lingui/react";
 import { MessageDescriptor } from "@lingui/core";
+import { useQuery } from "@apollo/client";
+import {
+  AdvertiserCreativesDocument,
+  CreativeFragment,
+} from "@/graphql-client/graphql";
 const ALLOWED_TYPES = ["notification_all_v1", "inline_content_all_v1"];
 
 export function CreativeList() {
   useTrackMatomoPageView({ documentTitle: "Advertiser Creatives" });
   const { advertiser } = useAdvertiser();
   const { _ } = useLingui();
-  const { data, error, loading } = useAdvertiserCreativesQuery({
+  const { data, error, loading } = useQuery(AdvertiserCreativesDocument, {
     variables: {
       advertiserId: advertiser.id,
     },

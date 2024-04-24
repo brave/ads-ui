@@ -1,4 +1,3 @@
-import { CampaignFragment } from "@/graphql/campaign.generated";
 import { describe, expect, it } from "vitest";
 import {
   editCampaignValues,
@@ -8,12 +7,14 @@ import {
 } from ".";
 import {
   CampaignFormat,
+  CampaignFragment,
   CampaignPacingStrategies,
   CampaignSource,
   CampaignType,
   ConfirmationType,
+  CreativeFragment,
   PaymentType,
-} from "@/graphql/types";
+} from "@/graphql-client/graphql";
 import { produce } from "immer";
 import {
   AdSetForm,
@@ -21,8 +22,7 @@ import {
   Creative,
 } from "@/user/views/adsManager/types";
 import _ from "lodash";
-import { AdFragment, AdSetFragment } from "@/graphql/ad-set.generated";
-import { CreativeFragment } from "@/graphql/creative.generated";
+import { AdFragment, AdSetFragment } from "@/graphql-client/graphql";
 import { DeepPartial } from "@apollo/client/utilities";
 
 const BASE_CPM_CAMPAIGN_FRAGMENT: Readonly<CampaignFragment> = {

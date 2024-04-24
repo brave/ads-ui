@@ -1,15 +1,16 @@
-import {
-  refetchAdvertiserCreativesQuery,
-  useCreateCreativeMutation,
-  useUpdateCreativeMutation,
-} from "@/graphql/creative.generated";
 import { useCallback } from "react";
-import { CreativeInput } from "@/graphql/types";
+import {
+  AdvertiserCreativesDocument,
+  CreateCreativeDocument,
+  CreativeInput,
+  UpdateCreativeDocument,
+} from "@/graphql-client/graphql";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { useHistory } from "react-router-dom";
 import { validCreativeFields } from "@/user/library";
 import _ from "lodash";
 import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
+import { useMutation } from "@apollo/client";
 
 export function useSubmitCreative(props: { id: string }) {
   const { trackMatomoEvent } = useTrackMatomoEvent();
@@ -17,7 +18,10 @@ export function useSubmitCreative(props: { id: string }) {
   const isNew = props.id === "new";
   const { advertiser } = useAdvertiser();
   const refetchQueries = [
-    refetchAdvertiserCreativesQuery({ advertiserId: advertiser.id }),
+    {
+      query: AdvertiserCreativesDocument,
+      variables: { advertiserId: advertiser.id },
+    },
   ];
   const onCompleted = () => {
     trackMatomoEvent("creative", isNew ? "creation-success" : "update-success");
@@ -28,14 +32,14 @@ export function useSubmitCreative(props: { id: string }) {
   };
 
   const [createCreative, { error: createError, loading: createLoading }] =
-    useCreateCreativeMutation({
+    useMutation(CreateCreativeDocument, {
       refetchQueries,
       onCompleted,
       onError,
     });
 
   const [updateCreative, { error: updateError, loading: updateLoading }] =
-    useUpdateCreativeMutation({
+    useMutation(UpdateCreativeDocument, {
       refetchQueries,
       onCompleted,
       onError,

@@ -1,24 +1,25 @@
-import {
-  AdvertiserImageFragment,
-  useAdvertiserImagesQuery,
-} from "@/graphql/advertiser.generated";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { ErrorDetail } from "@/components/Error/ErrorDetail";
 import { CardContainer } from "@/components/Card/CardContainer";
 import { Grid, LinearProgress, Typography } from "@mui/material";
 import MiniSideBar from "@/components/Drawer/MiniSideBar";
 import { ImagePreview } from "@/components/Assets/ImagePreview";
-import { CampaignFormat } from "@/graphql/types";
+import {
+  AdvertiserImageFragment,
+  AdvertiserImagesDocument,
+  CampaignFormat,
+} from "@/graphql-client/graphql";
 import { RouteSelectionButton } from "@/components/Route/RouteSelectionButton";
 import Box from "@mui/material/Box";
 import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { msg, Trans } from "@lingui/macro";
 import dayjs from "dayjs";
+import { useQuery } from "@apollo/client";
 
 export function AdvertiserAssets() {
   useTrackMatomoPageView({ documentTitle: "Advertiser Assets" });
   const { advertiser } = useAdvertiser();
-  const { data, loading, error } = useAdvertiserImagesQuery({
+  const { data, loading, error } = useQuery(AdvertiserImagesDocument, {
     variables: { id: advertiser.id },
     initialFetchPolicy: "cache-and-network",
     nextFetchPolicy: "cache-only",
