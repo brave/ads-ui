@@ -23,6 +23,7 @@ function getColumnDefinitionForMetric(metric: MetricDefinition): GridColDef {
     type: "number",
     align: "right",
     headerAlign: "right",
+    display: "flex",
     width: 100,
     renderCell: ({ value }) => (
       <RenderMetric type={metric.type} value={value} />
