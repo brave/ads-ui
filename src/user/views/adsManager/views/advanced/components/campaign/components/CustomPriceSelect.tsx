@@ -4,7 +4,7 @@ import {
   useIsEdit,
 } from "@/form/FormikHelpers";
 import { useField } from "formik";
-import { CampaignFormat } from "@/graphql/types";
+import { CampaignFormat } from "@/graphql-client/graphql";
 import { InputAdornment, Stack } from "@mui/material";
 import { uiLabelsForBillingType } from "@/util/billingType";
 import { useLingui } from "@lingui/react";

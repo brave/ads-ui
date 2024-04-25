@@ -1,7 +1,9 @@
 import { Box, Skeleton, Typography } from "@mui/material";
 import { renderMonetaryAmount } from "@/components/Datagrid/renderers";
-import { CampaignSummaryFragment } from "@/graphql/campaign.generated";
-import { CampaignFormat } from "@/graphql/types";
+import {
+  CampaignFormat,
+  CampaignSummaryFragment,
+} from "@/graphql-client/graphql";
 import { StatsMetric } from "@/user/analytics/analyticsOverview/types";
 import { toLocaleString } from "@/util/bignumber";
 

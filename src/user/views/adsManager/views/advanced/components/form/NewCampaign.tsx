@@ -4,21 +4,24 @@ import { useContext, useState } from "react";
 import { CampaignForm, initialCampaign } from "../../../../types";
 import { CampaignSchema } from "@/validation/CampaignSchema";
 import { transformNewForm } from "@/user/library";
-import { useCreateCampaignMutation } from "@/graphql/campaign.generated";
 import { useHistory, useParams } from "react-router-dom";
 import { BaseForm } from "./components/BaseForm";
 import { PersistFormValues } from "@/form/PersistFormValues";
 import { DraftContext, FilterContext } from "@/state/context";
 import { useCreatePaymentSession } from "@/checkout/hooks/useCreatePaymentSession";
-import { PaymentType } from "@/graphql/types";
+import {
+  AdvertiserCampaignsDocument,
+  CreateCampaignDocument,
+  PaymentType,
+} from "@/graphql-client/graphql";
 import { useUser } from "@/auth/hooks/queries/useUser";
-import { refetchAdvertiserCampaignsQuery } from "@/graphql/advertiser.generated";
 import { useAdvertiserWithPrices } from "@/user/hooks/useAdvertiserWithPrices";
 import { ErrorDetail } from "@/components/Error/ErrorDetail";
 import _ from "lodash";
 import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { useMutation } from "@apollo/client";
 
 interface Params {
   draftId: string;
@@ -47,7 +50,7 @@ export function NewCampaign() {
     },
   });
 
-  const [mutation] = useCreateCampaignMutation({
+  const [mutation] = useMutation(CreateCampaignDocument, {
     onCompleted(data) {
       trackMatomoEvent("campaign", "creation-success");
       const campaign = data.createCampaign;
@@ -68,10 +71,11 @@ export function NewCampaign() {
     },
     refetchQueries: [
       {
-        ...refetchAdvertiserCampaignsQuery({
+        query: AdvertiserCampaignsDocument,
+        variables: {
           id: data.id,
           filter: { from: fromDate?.toISOString() },
-        }),
+        },
       },
     ],
   });

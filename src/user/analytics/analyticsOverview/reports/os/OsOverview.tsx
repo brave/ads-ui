@@ -1,8 +1,8 @@
 import { Box, Stack } from "@mui/material";
-import { EngagementFragment } from "@/graphql/analytics-overview.generated";
 import { mapOsStats, processOs } from "../../lib/os.library";
 import { OsPieChart } from "./components/OsPieChart";
 import { OsBarChart } from "./components/OsBarChart";
+import { EngagementFragment } from "@/graphql-client/graphql";
 
 interface Props {
   engagements: EngagementFragment[];

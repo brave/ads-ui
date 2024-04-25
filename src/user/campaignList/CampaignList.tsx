@@ -8,12 +8,6 @@ import {
 import { Link as RouterLink } from "react-router-dom";
 import { Status } from "@/components/Campaigns/Status";
 import { isDateInThePast } from "@/util/isAfterEndDate";
-import { AdvertiserCampaignsFragment } from "@/graphql/advertiser.generated";
-import {
-  CampaignMetricSummaryValuesFragment,
-  useCampaignMetricsQuery,
-} from "@/graphql/analytics-overview.generated";
-import { CampaignSummaryFragment } from "@/graphql/campaign.generated";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { CustomToolbar } from "@/components/Datagrid/CustomToolbar";
 import { CloneCampaign } from "@/components/Campaigns/CloneCampaign";
@@ -23,7 +17,14 @@ import { stringFilterOperators } from "@/components/Datagrid/stringFilterOperato
 import { useLingui } from "@lingui/react";
 import { msg } from "@lingui/macro";
 import { MetricValue } from "./MetricValue";
-import { CampaignFormat } from "@/graphql/types";
+import {
+  AdvertiserCampaignsFragment,
+  CampaignFormat,
+  CampaignMetricSummaryValuesFragment,
+  CampaignMetricsDocument,
+  CampaignSummaryFragment,
+} from "@/graphql-client/graphql";
+import { useQuery } from "@apollo/client";
 
 interface Props {
   advertiser?: AdvertiserCampaignsFragment | null;
@@ -33,7 +34,7 @@ export function CampaignList({ advertiser }: Props) {
   const { _: lingui } = useLingui();
   const [selectedCampaign, setSelectedCampaign] = useState<string | number>();
 
-  const { data, loading } = useCampaignMetricsQuery({
+  const { data, loading } = useQuery(CampaignMetricsDocument, {
     variables: {
       campaignIds: (advertiser?.campaigns ?? [])
         .filter((c) => c.format !== CampaignFormat.NtpSi)

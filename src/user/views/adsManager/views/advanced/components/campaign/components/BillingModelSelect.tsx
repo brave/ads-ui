@@ -2,7 +2,7 @@ import { List, ListItemButton, Stack, Typography } from "@mui/material";
 import { renderMonetaryAmount } from "@/components/Datagrid/renderers";
 import { useIsEdit } from "@/form/FormikHelpers";
 import { useField } from "formik";
-import { CampaignFormat } from "@/graphql/types";
+import { CampaignFormat } from "@/graphql-client/graphql";
 import { AdvertiserPrice } from "@/user/hooks/useAdvertiserWithPrices";
 import { Billing } from "@/user/views/adsManager/types";
 import { uiLabelsForCampaignFormat } from "@/util/campaign";

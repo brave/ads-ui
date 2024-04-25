@@ -1,4 +1,4 @@
-import { DailyValuesFragment } from "@/graphql/analytics-overview.generated";
+import { DailyValuesFragment } from "@/graphql-client/graphql";
 import { useMetricSelection } from "./hooks";
 import { makeLineChartSeries } from "./series";
 import { HighchartsWrapper } from "@/user/analytics/analyticsOverview/components/HighchartsWrapper";

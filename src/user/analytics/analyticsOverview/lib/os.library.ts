@@ -1,6 +1,6 @@
 import { calculateMetric } from "./overview.library";
-import { EngagementFragment } from "@/graphql/analytics-overview.generated";
 import { OS, OSMetric } from "../types";
+import { EngagementFragment } from "@/graphql-client/graphql";
 
 export function processOs(engagements: EngagementFragment[]) {
   const stats: OSMetric = {

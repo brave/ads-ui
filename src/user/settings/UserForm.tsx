@@ -4,7 +4,6 @@ import { useUser } from "@/auth/hooks/queries/useUser";
 import { CardContainer } from "@/components/Card/CardContainer";
 import { Form, Formik, FormikValues } from "formik";
 import { FormikTextField } from "@/form/FormikHelpers";
-import { useUpdateUserMutation } from "@/graphql/user.generated";
 import { ErrorDetail } from "@/components/Error/ErrorDetail";
 import { UserSchema } from "@/validation/UserSchema";
 import _ from "lodash";
@@ -12,6 +11,8 @@ import { FormikSubmitButton } from "@/form/FormikButton";
 import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { UpdateUserDocument } from "@/graphql-client/graphql";
+import { useMutation } from "@apollo/client";
 
 export function UserForm() {
   const user = useUser();
@@ -24,7 +25,7 @@ export function UserForm() {
     return <ErrorDetail error={details.id} additionalDetails={details} />;
   }
 
-  const [updateUser] = useUpdateUserMutation({
+  const [updateUser] = useMutation(UpdateUserDocument, {
     onCompleted(user) {
       trackMatomoEvent("user", "update");
       setInitialVals(user.updateUser);

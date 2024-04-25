@@ -1,6 +1,6 @@
 import { Stack, Typography } from "@mui/material";
 import { FormikRadioControl, useIsEdit } from "@/form/FormikHelpers";
-import { PaymentType } from "@/graphql/types";
+import { PaymentType } from "@/graphql-client/graphql";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { CardContainer } from "@/components/Card/CardContainer";
 import { LearnMoreButton } from "@/components/Button/LearnMoreButton";

@@ -3,9 +3,8 @@ import { SegmentPicker } from "@/components/Segment/SegmentPicker";
 import { PlatformPicker } from "@/components/Platform/PlatformPicker";
 import { CardContainer } from "@/components/Card/CardContainer";
 import { useField } from "formik";
-import { CampaignFormat } from "@/graphql/types";
+import { CampaignFormat, SegmentFragment } from "@/graphql-client/graphql";
 import { useEffect } from "react";
-import { SegmentFragment } from "@/graphql/common.generated";
 import { LearnMoreButton } from "@/components/Button/LearnMoreButton";
 import { Trans } from "@lingui/macro";
 

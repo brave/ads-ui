@@ -17,7 +17,7 @@ import {
   TrailingAsteriskRegex,
 } from "@/validation/regex";
 import { CreativeSchema } from "@/validation/CreativeSchema";
-import { CampaignFormat } from "@/graphql/types";
+import { CampaignFormat } from "@/graphql-client/graphql";
 import BigNumber from "bignumber.js";
 import { AdvertiserPrice } from "@/user/hooks/useAdvertiserWithPrices";
 import { Billing } from "@/user/views/adsManager/types";

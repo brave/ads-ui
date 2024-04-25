@@ -1,10 +1,11 @@
 import {
   CampaignFormat,
+  CampaignFragment,
   CreateCampaignInput,
+  CreativeFragment,
   UpdateCampaignInput,
-} from "@/graphql/types";
-import { CampaignFragment } from "@/graphql/campaign.generated";
-import { AdFragment, AdSetFragment } from "@/graphql/ad-set.generated";
+} from "@/graphql-client/graphql";
+import { AdFragment, AdSetFragment } from "@/graphql-client/graphql";
 import {
   AdSetForm,
   Billing,
@@ -16,7 +17,6 @@ import {
 } from "@/user/views/adsManager/types";
 import _ from "lodash";
 import BigNumber from "bignumber.js";
-import { CreativeFragment } from "@/graphql/creative.generated";
 import { t } from "@lingui/macro";
 import dayjs from "dayjs";
 

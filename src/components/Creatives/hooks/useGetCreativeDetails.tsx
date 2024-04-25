@@ -1,13 +1,13 @@
-import { useLoadCreativeQuery } from "@/graphql/creative.generated";
-import { CreativeInput } from "@/graphql/types";
+import { CreativeInput, LoadCreativeDocument } from "@/graphql-client/graphql";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { useLingui } from "@lingui/react";
 import { msg } from "@lingui/macro";
+import { useQuery } from "@apollo/client";
 
 export function useGetCreativeDetails(props: { id: string }) {
   const { advertiser } = useAdvertiser();
   const isNew = props.id === "new";
-  const { data, loading, error } = useLoadCreativeQuery({
+  const { data, loading, error } = useQuery(LoadCreativeDocument, {
     variables: { id: props.id },
     skip: isNew,
   });

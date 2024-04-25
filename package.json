@@ -52,10 +52,6 @@
   "devDependencies": {
     "@babel/core": "7.24.4",
     "@graphql-codegen/cli": "5.0.2",
-    "@graphql-codegen/near-operation-file-preset": "3.0.0",
-    "@graphql-codegen/typescript": "4.0.6",
-    "@graphql-codegen/typescript-operations": "4.2.0",
-    "@graphql-codegen/typescript-react-apollo": "4.3.0",
     "@lingui/cli": "4.10.0",
     "@lingui/vite-plugin": "4.10.0",
     "@types/lodash": "4.17.0",

@@ -1,14 +1,15 @@
 import { buildAdServerEndpoint, getEnvConfig } from "@/util/environment";
 import { useCallback, useState } from "react";
 import _ from "lodash";
-import {
-  refetchAdvertiserImagesQuery,
-  useUploadAdvertiserImageMutation,
-} from "@/graphql/advertiser.generated";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
-import { CampaignFormat } from "@/graphql/types";
+import {
+  AdvertiserImagesDocument,
+  CampaignFormat,
+  UploadAdvertiserImageDocument,
+} from "@/graphql-client/graphql";
 import { UploadConfig } from "@/components/Assets/UploadImage";
 import { t } from "@lingui/macro";
+import { useMutation } from "@apollo/client";
 
 interface PutUploadResponse {
   // the pre-signed url to which the file should be uploaded to
@@ -29,9 +30,9 @@ export const useUploadFile = ({ onComplete }: Props = {}) => {
   const [state, setState] = useState<string>();
   const [loading, setLoading] = useState(false);
 
-  const [mutate] = useUploadAdvertiserImageMutation({
+  const [mutate] = useMutation(UploadAdvertiserImageDocument, {
     refetchQueries: [
-      { ...refetchAdvertiserImagesQuery({ id: advertiser.id }) },
+      { query: AdvertiserImagesDocument, variables: { id: advertiser.id } },
     ],
     onError(e) {
       setError(e.message);

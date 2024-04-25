@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useAnalyticOverviewQuery } from "@/graphql/analytics-overview.generated";
 import { Box } from "@mui/material";
 import ReportUtils from "@/user/analytics/analyticsOverview/components/ReportUtils";
 import { EngagementsOverview } from "@/user/analytics/analyticsOverview/reports/campaign/EngagementsOverview";
@@ -8,8 +7,12 @@ import { CollapseBox } from "@/components/Collapse/CollapseBox";
 import { OsOverview } from "@/user/analytics/analyticsOverview/reports/os/OsOverview";
 import { useLingui } from "@lingui/react";
 import { msg } from "@lingui/macro";
-import { CampaignSummaryFragment } from "@/graphql/campaign.generated";
+import {
+  AnalyticOverviewDocument,
+  CampaignSummaryFragment,
+} from "@/graphql-client/graphql";
 import dayjs, { Dayjs } from "dayjs";
+import { useQuery } from "@apollo/client";
 
 interface Props {
   campaignSummary: CampaignSummaryFragment;
@@ -29,7 +32,7 @@ export function OriginalCampaignReportView({ campaignSummary }: Props) {
     }
   };
 
-  const { loading, data, error } = useAnalyticOverviewQuery({
+  const { loading, data, error } = useQuery(AnalyticOverviewDocument, {
     variables: {
       id: campaignSummary.id,
     },

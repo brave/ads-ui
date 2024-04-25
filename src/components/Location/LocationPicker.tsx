@@ -3,16 +3,16 @@ import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { Autocomplete, Checkbox, TextField } from "@mui/material";
 import { useField } from "formik";
 import _ from "lodash";
-import { useActiveGeocodesQuery } from "@/graphql/common.generated";
-import { GeocodeInput } from "@/graphql/types";
+import { ActiveGeocodesDocument, GeocodeInput } from "@/graphql-client/graphql";
 import { useLingui } from "@lingui/react";
 import { msg, Trans } from "@lingui/macro";
+import { useQuery } from "@apollo/client";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 export const LocationPicker = () => {
-  const { data } = useActiveGeocodesQuery();
+  const { data } = useQuery(ActiveGeocodesDocument);
   const sorted = _.sortBy(data?.geocodes ?? [], "code");
   const [formProps, meta, helper] = useField<GeocodeInput[]>("geoTargets");
   const errorMessage = meta.error;

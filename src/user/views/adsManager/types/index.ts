@@ -1,4 +1,8 @@
-import { CampaignFormat, CreativeInput, PaymentType } from "@/graphql/types";
+import {
+  CampaignFormat,
+  CreativeInput,
+  PaymentType,
+} from "@/graphql-client/graphql";
 import { defaultEndDate, defaultStartDate } from "@/form/DateFieldHelpers";
 import { MIN_PER_CAMPAIGN } from "@/validation/CampaignSchema";
 import { AdvertiserWithPrices } from "@/user/hooks/useAdvertiserWithPrices";

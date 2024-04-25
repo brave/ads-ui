@@ -1,7 +1,8 @@
 import {
-  useValidateTargetUrlLazyQuery,
+  ValidateTargetUrlDocument,
   ValidateTargetUrlQuery,
-} from "@/graphql/url.generated";
+} from "@/graphql-client/graphql";
+import { useLazyQuery } from "@apollo/client";
 import _ from "lodash";
 import { useEffect, useMemo, useState } from "react";
 
@@ -29,7 +30,7 @@ export function useUrlValidation(url: string): UrlValidationResult {
   const [response, setResponse] = useState<ValidateResult>();
   const [error, setError] = useState<unknown>();
 
-  const [validateUrl] = useValidateTargetUrlLazyQuery({
+  const [validateUrl] = useLazyQuery(ValidateTargetUrlDocument, {
     fetchPolicy: "no-cache",
   });
 
