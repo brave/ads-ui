@@ -113,7 +113,7 @@ function AdImageContainer() {
         src={bat}
         width={400}
         style={{
-          transform: "translateX(40%) translateY(-90%)",
+          transform: "translateY(-90%)",
         }}
       />
     </Box>
