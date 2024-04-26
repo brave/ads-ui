@@ -1,7 +1,6 @@
 import { produce } from "immer";
 import { RegistrationForm } from "@/auth/registration/types";
 import { RegistrationSchema } from "@/validation/RegistrationSchema";
-import { expect } from "vitest";
 
 const validRegistration: RegistrationForm = {
   advertiser: {
