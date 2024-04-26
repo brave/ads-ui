@@ -42,6 +42,7 @@ module.exports = {
           "gridTemplateColumns",
           "gridTemplateRows",
           "gridTemplateAreas",
+          "rel",
         ],
         ignoreFunction: [
           "createSvgIcon",
@@ -51,6 +52,7 @@ module.exports = {
           "formatInTimeZone",
           "zonedTimeToUtc",
           "utcToZonedTime",
+          "graphql",
         ],
         ignoreProperty: [
           "documentTitle",

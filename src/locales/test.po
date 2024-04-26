@@ -69,7 +69,7 @@ msgstr ""
 msgid "Account"
 msgstr ""
 
-#: src/user/settings/NewKeyPairModal.tsx:85
+#: src/user/settings/NewKeyPairModal.tsx:86
 msgid "Account Settings"
 msgstr ""
 
@@ -97,8 +97,8 @@ msgstr ""
 msgid "Ad format"
 msgstr ""
 
-#: src/components/Creatives/CreativeList.tsx:64
-#: src/user/campaignList/CampaignList.tsx:75
+#: src/components/Creatives/CreativeList.tsx:65
+#: src/user/campaignList/CampaignList.tsx:76
 msgid "Ad Format"
 msgstr ""
 
@@ -106,7 +106,7 @@ msgstr ""
 msgid "Ad image dimensions are required"
 msgstr ""
 
-#: src/user/ads/AdList.tsx:55
+#: src/user/ads/AdList.tsx:57
 msgid "Ad Name"
 msgstr ""
 
@@ -120,17 +120,17 @@ msgstr ""
 msgid "Ad Set"
 msgstr ""
 
-#: src/user/ads/AdList.tsx:74
+#: src/user/ads/AdList.tsx:76
 #: src/user/views/adsManager/views/advanced/components/adSet/AdSetFields.tsx:41
 msgid "Ad set name"
 msgstr ""
 
-#: src/user/views/user/CampaignDetails.tsx:37
+#: src/user/views/user/CampaignDetails.tsx:40
 msgid "Ad sets"
 msgstr ""
 
 #: src/user/views/adsManager/views/advanced/components/form/components/BaseForm.tsx:30
-#: src/user/views/user/reports/SearchCampaignReportView.tsx:126
+#: src/user/views/user/reports/SearchCampaignReportView.tsx:129
 msgid "Ad Sets"
 msgstr ""
 
@@ -159,7 +159,7 @@ msgstr ""
 msgid "Ad type must be notification or news"
 msgstr ""
 
-#: src/user/ads/AdsExistingAd.tsx:86
+#: src/user/ads/AdsExistingAd.tsx:87
 msgid "Add an existing ad"
 msgstr ""
 
@@ -171,22 +171,22 @@ msgstr ""
 msgid "Additional Details"
 msgstr ""
 
-#: src/user/views/user/reports/OriginalCampaignReportView.tsx:89
+#: src/user/views/user/reports/OriginalCampaignReportView.tsx:92
 msgid "Additional Report: OS Performance"
 msgstr ""
 
 #: src/components/AppBar/LandingPageAppBar.tsx:85
-#: src/components/Assets/AdvertiserAssets.tsx:32
-#: src/components/Creatives/CreativeList.tsx:100
+#: src/components/Assets/AdvertiserAssets.tsx:33
+#: src/components/Creatives/CreativeList.tsx:102
 #: src/components/Creatives/CreativeSpecificPreview.tsx:52
 #: src/components/Creatives/CreativeSpecificPreview.tsx:63
 #: src/components/Drawer/MiniSideBar.tsx:32
 #: src/user/views/adsManager/views/advanced/components/adSet/fields/AdSetAds.tsx:29
-#: src/user/views/user/CampaignDetails.tsx:38
+#: src/user/views/user/CampaignDetails.tsx:41
 msgid "Ads"
 msgstr ""
 
-#: src/user/ads/AdsExistingAd.tsx:90
+#: src/user/ads/AdsExistingAd.tsx:91
 msgid "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously approved ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
 msgstr ""
 
@@ -218,15 +218,15 @@ msgstr ""
 msgid "API keys are used to get data from the reporting endpoints. They are unique to you."
 msgstr ""
 
-#: src/components/Creatives/CreativeStatusSwitch.tsx:95
+#: src/components/Creatives/CreativeStatusSwitch.tsx:104
 msgid "Are you sure you want to activate"
 msgstr ""
 
-#: src/components/Creatives/CreativeForm.tsx:149
+#: src/components/Creatives/CreativeForm.tsx:152
 msgid "Are you sure you want to modify \"{creativeName}\"?"
 msgstr ""
 
-#: src/components/Creatives/CreativeStatusSwitch.tsx:93
+#: src/components/Creatives/CreativeStatusSwitch.tsx:102
 msgid "Are you sure you want to pause"
 msgstr ""
 
@@ -247,13 +247,13 @@ msgid "At least one platform must be targeted"
 msgstr ""
 
 #: src/components/Drawer/MiniSideBar.tsx:43
-#: src/components/Segment/SegmentPicker.tsx:83
-#: src/user/adSet/AdSetList.tsx:140
+#: src/components/Segment/SegmentPicker.tsx:84
+#: src/user/adSet/AdSetList.tsx:139
 #: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:47
 msgid "Audiences"
 msgstr ""
 
-#: src/components/Segment/SegmentPicker.tsx:50
+#: src/components/Segment/SegmentPicker.tsx:51
 msgid "Automatic interest targeting"
 msgstr ""
 
@@ -269,8 +269,8 @@ msgstr ""
 msgid "Billing Type"
 msgstr ""
 
-#: src/components/Creatives/CreativeList.tsx:152
-#: src/user/ads/AdList.tsx:86
+#: src/components/Creatives/CreativeList.tsx:154
+#: src/user/ads/AdList.tsx:88
 #: src/user/ads/NotificationAd.tsx:62
 msgid "Body"
 msgstr ""
@@ -279,7 +279,7 @@ msgstr ""
 msgid "Body Preview"
 msgstr ""
 
-#: src/user/settings/NewKeyPairModal.tsx:184
+#: src/user/settings/NewKeyPairModal.tsx:185
 msgid "Brave cannot recover this key, which has been generated in your browser. You will need to confirm this private key on the next step before changes are saved."
 msgstr ""
 
@@ -296,7 +296,7 @@ msgid "Browser-based delivery offers a new way to reach audiences on the Web."
 msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:52
-#: src/user/campaignList/CampaignList.tsx:95
+#: src/user/campaignList/CampaignList.tsx:96
 msgid "Budget"
 msgstr ""
 
@@ -316,7 +316,7 @@ msgstr ""
 msgid "Business Website is required"
 msgstr ""
 
-#: src/components/Creatives/CreativeList.tsx:163
+#: src/components/Creatives/CreativeList.tsx:165
 msgid "Call To Action"
 msgstr ""
 
@@ -332,16 +332,16 @@ msgstr ""
 msgid "Call to Action text"
 msgstr ""
 
-#: src/user/campaignList/CampaignList.tsx:61
+#: src/user/campaignList/CampaignList.tsx:62
 #: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:28
 msgid "Campaign"
 msgstr ""
 
-#: src/user/views/adsManager/views/advanced/components/form/NewCampaign.tsx:87
+#: src/user/views/adsManager/views/advanced/components/form/NewCampaign.tsx:91
 msgid "Campaign creation is currently unavailable"
 msgstr ""
 
-#: src/user/views/adsManager/views/advanced/components/form/EditCampaign.tsx:80
+#: src/user/views/adsManager/views/advanced/components/form/EditCampaign.tsx:82
 msgid "Campaign does not exist, or cannot be edited. Please try again later."
 msgstr ""
 
@@ -368,17 +368,17 @@ msgstr ""
 
 #: src/components/Creatives/CreativeCampaigns.tsx:40
 #: src/components/Drawer/MiniSideBar.tsx:22
-#: src/user/views/user/CampaignView.tsx:41
+#: src/user/views/user/CampaignView.tsx:42
 msgid "Campaigns"
 msgstr ""
 
 #: src/components/Assets/UploadImage.tsx:128
-#: src/components/Campaigns/CloneCampaign.tsx:127
-#: src/components/Creatives/CreativeStatusSwitch.tsx:123
+#: src/components/Campaigns/CloneCampaign.tsx:131
+#: src/components/Creatives/CreativeStatusSwitch.tsx:132
 #: src/user/reporting/ReportMenu.tsx:133
-#: src/user/settings/NewKeyPairModal.tsx:148
-#: src/user/settings/NewKeyPairModal.tsx:197
-#: src/user/settings/NewKeyPairModal.tsx:242
+#: src/user/settings/NewKeyPairModal.tsx:149
+#: src/user/settings/NewKeyPairModal.tsx:198
+#: src/user/settings/NewKeyPairModal.tsx:243
 #: src/user/settings/UserApiKey.tsx:112
 msgid "Cancel"
 msgstr ""
@@ -423,7 +423,7 @@ msgstr ""
 msgid "Click on the secure login link in the email to access your Brave Ads account."
 msgstr ""
 
-#: src/user/analytics/search/metrics.ts:52
+#: src/user/analytics/search/metrics.ts:54
 msgid "Click Through Rate"
 msgstr ""
 
@@ -447,26 +447,26 @@ msgstr ""
 #: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:48
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:35
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:164
-#: src/user/analytics/search/metrics.ts:44
-#: src/user/campaignList/CampaignList.tsx:131
-#: src/user/views/user/AdDetailTable.tsx:60
+#: src/user/analytics/search/metrics.ts:46
+#: src/user/campaignList/CampaignList.tsx:132
+#: src/user/views/user/AdDetailTable.tsx:59
 msgid "Clicks"
 msgstr ""
 
-#: src/components/Campaigns/CloneCampaign.tsx:110
-#: src/components/Campaigns/CloneCampaign.tsx:136
+#: src/components/Campaigns/CloneCampaign.tsx:114
+#: src/components/Campaigns/CloneCampaign.tsx:140
 msgid "Clone"
 msgstr ""
 
-#: src/components/Campaigns/CloneCampaign.tsx:95
+#: src/components/Campaigns/CloneCampaign.tsx:99
 msgid "Clone {campaignName}"
 msgstr ""
 
-#: src/components/Campaigns/CloneCampaign.tsx:115
+#: src/components/Campaigns/CloneCampaign.tsx:119
 msgid "Clone campaign: \"{campaignName}\"?"
 msgstr ""
 
-#: src/components/Campaigns/CloneCampaign.tsx:118
+#: src/components/Campaigns/CloneCampaign.tsx:122
 msgid "Cloning a campaign will take all properties including ad sets and ads, and create a new draft campaign with them."
 msgstr ""
 
@@ -484,7 +484,7 @@ msgstr ""
 msgid "Complete selection"
 msgstr ""
 
-#: src/auth/components/AdvertiserDetailsForm.tsx:98
+#: src/auth/components/AdvertiserDetailsForm.tsx:99
 msgid "Complete your business profile to continue"
 msgstr ""
 
@@ -500,13 +500,13 @@ msgstr ""
 msgid "Contact Sales"
 msgstr ""
 
-#: src/components/Creatives/CreativeList.tsx:71
+#: src/components/Creatives/CreativeList.tsx:72
 msgid "Content"
 msgstr ""
 
-#: src/components/Creatives/CreativeStatusSwitch.tsx:137
-#: src/user/settings/NewKeyPairModal.tsx:156
-#: src/user/settings/NewKeyPairModal.tsx:205
+#: src/components/Creatives/CreativeStatusSwitch.tsx:146
+#: src/user/settings/NewKeyPairModal.tsx:157
+#: src/user/settings/NewKeyPairModal.tsx:206
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:64
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:149
 msgid "Continue"
@@ -561,11 +561,11 @@ msgstr ""
 msgid "Conversions"
 msgstr ""
 
-#: src/user/settings/NewKeyPairModal.tsx:181
+#: src/user/settings/NewKeyPairModal.tsx:182
 msgid "Copy this and keep this safe!"
 msgstr ""
 
-#: src/auth/lib/index.ts:114
+#: src/auth/lib/index.ts:116
 msgid "Could not logout at this time. Please try again later."
 msgstr ""
 
@@ -578,7 +578,7 @@ msgid "Counted if the user clicks an ad and spends at least 10 seconds on the ad
 msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:36
-#: src/user/analytics/search/metrics.ts:45
+#: src/user/analytics/search/metrics.ts:47
 msgid "Counted when a user clicks on the ad. Does not include clicks to dismiss"
 msgstr ""
 
@@ -599,7 +599,7 @@ msgid "Counted when a user reaches a designated conversion landing page followin
 msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:31
-#: src/user/analytics/search/metrics.ts:37
+#: src/user/analytics/search/metrics.ts:39
 msgid "Counted when an ad is displayed on screen for a minimum of one second"
 msgstr ""
 
@@ -618,7 +618,7 @@ msgstr ""
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:72
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:89
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:156
-#: src/user/analytics/analyticsOverview/reports/os/components/OsBarChart.tsx:53
+#: src/user/analytics/analyticsOverview/reports/os/components/OsBarChart.tsx:56
 msgid "CPA"
 msgstr ""
 
@@ -638,7 +638,7 @@ msgstr ""
 msgid "Create & Submit For Approval"
 msgstr ""
 
-#: src/components/Creatives/CreativeForm.tsx:82
+#: src/components/Creatives/CreativeForm.tsx:85
 msgid "Create ad"
 msgstr ""
 
@@ -646,20 +646,20 @@ msgstr ""
 msgid "Create new ad"
 msgstr ""
 
-#: src/user/settings/NewKeyPairModal.tsx:129
-#: src/user/settings/NewKeyPairModal.tsx:164
-#: src/user/settings/NewKeyPairModal.tsx:213
+#: src/user/settings/NewKeyPairModal.tsx:130
+#: src/user/settings/NewKeyPairModal.tsx:165
+#: src/user/settings/NewKeyPairModal.tsx:214
 msgid "Create new keypair?"
 msgstr ""
 
-#: src/components/Assets/AdvertiserAssets.tsx:75
+#: src/components/Assets/AdvertiserAssets.tsx:76
 #: src/components/Creatives/CreativeSelect.tsx:89
 msgid "created"
 msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/BaseBarChart.tsx:58
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:40
-#: src/user/analytics/search/metrics.ts:53
+#: src/user/analytics/search/metrics.ts:55
 msgid "CTR"
 msgstr ""
 
@@ -685,7 +685,7 @@ msgstr ""
 msgid "Define how you want your campaign to run."
 msgstr ""
 
-#: src/user/ads/AdList.tsx:64
+#: src/user/ads/AdList.tsx:66
 msgid "DELETED"
 msgstr ""
 
@@ -761,23 +761,23 @@ msgstr ""
 msgid "Drafts"
 msgstr ""
 
-#: src/user/campaignList/EditButton.tsx:42
+#: src/user/campaignList/EditButton.tsx:45
 #: src/user/views/adsManager/views/advanced/components/review/components/ReviewContainer.tsx:32
 msgid "Edit"
 msgstr ""
 
-#: src/user/campaignList/EditButton.tsx:28
+#: src/user/campaignList/EditButton.tsx:31
 msgid "Edit {campaignName}"
 msgstr ""
 
-#: src/components/Creatives/CreativeForm.tsx:82
+#: src/components/Creatives/CreativeForm.tsx:85
 msgid "Edit ad"
 msgstr ""
 
 #: src/auth/registration/BrowserForm.tsx:24
 #: src/auth/views/Login.tsx:43
 #: src/auth/views/MagicLink.tsx:74
-#: src/user/settings/UserForm.tsx:51
+#: src/user/settings/UserForm.tsx:52
 msgid "Email"
 msgstr ""
 
@@ -785,7 +785,7 @@ msgstr ""
 msgid "Email address is required"
 msgstr ""
 
-#: src/user/campaignList/CampaignList.tsx:183
+#: src/user/campaignList/CampaignList.tsx:184
 msgid "End"
 msgstr ""
 
@@ -809,7 +809,7 @@ msgstr ""
 msgid "Enter a URL that represents your conversion goal, like a checkout or subscription confirmation page. <0/>Brave will count unique visits to that page from users who saw or clicked your ad."
 msgstr ""
 
-#: src/auth/components/AdvertiserDetailsForm.tsx:108
+#: src/auth/components/AdvertiserDetailsForm.tsx:109
 msgid "Enter Ads Manager"
 msgstr ""
 
@@ -825,7 +825,7 @@ msgstr ""
 msgid "Export"
 msgstr ""
 
-#: src/components/Assets/hooks/useUploadFile.ts:149
+#: src/components/Assets/hooks/useUploadFile.ts:150
 msgid "Failed to Fetch"
 msgstr ""
 
@@ -833,7 +833,7 @@ msgstr ""
 msgid "Failed to load image"
 msgstr ""
 
-#: src/components/Assets/hooks/useUploadFile.ts:145
+#: src/components/Assets/hooks/useUploadFile.ts:146
 msgid "Failed to upload image"
 msgstr ""
 
@@ -841,11 +841,11 @@ msgstr ""
 msgid "Feedback"
 msgstr ""
 
-#: src/components/Assets/hooks/useUploadFile.ts:44
+#: src/components/Assets/hooks/useUploadFile.ts:45
 msgid "File upload complete for \"{fileName}\""
 msgstr ""
 
-#: src/user/ads/AdsExistingAd.tsx:100
+#: src/user/ads/AdsExistingAd.tsx:101
 msgid "Filter ads by name..."
 msgstr ""
 
@@ -883,7 +883,7 @@ msgstr ""
 msgid "Full name"
 msgstr ""
 
-#: src/user/settings/UserForm.tsx:65
+#: src/user/settings/UserForm.tsx:66
 msgid "Full Name"
 msgstr ""
 
@@ -895,7 +895,7 @@ msgstr ""
 msgid "Generate"
 msgstr ""
 
-#: src/user/settings/NewKeyPairModal.tsx:91
+#: src/user/settings/NewKeyPairModal.tsx:92
 msgid "Generate a keypair for your organization. Brave Ads will use your organization’s public key to sign and encrypt conversion data. Only your organization will have access to the private key, which can be used to decrypt and view conversion data."
 msgstr ""
 
@@ -960,7 +960,7 @@ msgstr ""
 msgid "I would like to receive marketing emails about new features and promotions from Brave Ads"
 msgstr ""
 
-#: src/components/Assets/ImageAutocomplete.tsx:45
+#: src/components/Assets/ImageAutocomplete.tsx:46
 msgid "Image"
 msgstr ""
 
@@ -976,17 +976,17 @@ msgstr ""
 msgid "Image URL must be valid"
 msgstr ""
 
-#: src/components/Assets/AdvertiserAssets.tsx:33
-#: src/components/Creatives/CreativeList.tsx:101
+#: src/components/Assets/AdvertiserAssets.tsx:34
+#: src/components/Creatives/CreativeList.tsx:103
 msgid "Images"
 msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:46
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:30
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:154
-#: src/user/analytics/search/metrics.ts:36
-#: src/user/campaignList/CampaignList.tsx:117
-#: src/user/views/user/AdDetailTable.tsx:48
+#: src/user/analytics/search/metrics.ts:38
+#: src/user/campaignList/CampaignList.tsx:118
+#: src/user/views/user/AdDetailTable.tsx:47
 msgid "Impressions"
 msgstr ""
 
@@ -1010,7 +1010,7 @@ msgstr ""
 msgid "In a video on YouTube"
 msgstr ""
 
-#: src/components/Datagrid/renderers.tsx:32
+#: src/components/Datagrid/renderers.tsx:34
 msgid "In your local time this is"
 msgstr ""
 
@@ -1018,7 +1018,7 @@ msgstr ""
 msgid "Include campaigns that ended over 6 months ago"
 msgstr ""
 
-#: src/components/Assets/hooks/useUploadFile.ts:164
+#: src/components/Assets/hooks/useUploadFile.ts:165
 msgid "Invalid format"
 msgstr ""
 
@@ -1026,11 +1026,11 @@ msgstr ""
 msgid "invalid session"
 msgstr ""
 
-#: src/auth/lib/index.ts:100
+#: src/auth/lib/index.ts:102
 msgid "Invalid Session"
 msgstr ""
 
-#: src/auth/lib/index.ts:146
+#: src/auth/lib/index.ts:148
 msgid "Invalid Token"
 msgstr ""
 
@@ -1046,7 +1046,7 @@ msgstr ""
 msgid "Key Statistics"
 msgstr ""
 
-#: src/user/settings/NewKeyPairModal.tsx:87
+#: src/user/settings/NewKeyPairModal.tsx:88
 msgid "Keypairs"
 msgstr ""
 
@@ -1133,15 +1133,15 @@ msgstr ""
 msgid "Max 60 Characters"
 msgstr ""
 
-#: src/components/Creatives/CreativeForm.tsx:138
+#: src/components/Creatives/CreativeForm.tsx:141
 msgid "Modifying an ad will immediately put it into review. This means it will no longer be shown to users until it is approved."
 msgstr ""
 
-#: src/components/Creatives/CreativeForm.tsx:140
+#: src/components/Creatives/CreativeForm.tsx:143
 msgid "Modifying an ad will immediately put it into review. This means it will no longer be shown to users until it is approved. This ad is also shared across {campaignLength} campaigns. Any modifications made will be effective for all campaigns using this creative."
 msgstr ""
 
-#: src/components/Creatives/CreativeStatusSwitch.tsx:101
+#: src/components/Creatives/CreativeStatusSwitch.tsx:110
 msgid "Modifying the state of this ad will effect more than one campaign:"
 msgstr ""
 
@@ -1149,16 +1149,16 @@ msgstr ""
 msgid "Month"
 msgstr ""
 
-#: src/user/adSet/AdSetList.tsx:50
+#: src/user/adSet/AdSetList.tsx:49
 msgid "more"
 msgstr ""
 
 #: src/components/Creatives/CreativeCampaigns.tsx:45
-#: src/components/Creatives/CreativeList.tsx:46
+#: src/components/Creatives/CreativeList.tsx:47
 #: src/user/ads/InlineContentAd.tsx:65
 #: src/user/ads/NotificationAd.tsx:51
-#: src/user/adSet/AdSetList.tsx:93
-#: src/user/analytics/search/AdSetBreakdown.tsx:62
+#: src/user/adSet/AdSetList.tsx:92
+#: src/user/analytics/search/AdSetBreakdown.tsx:64
 #: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:41
 #: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:30
 msgid "Name"
@@ -1188,11 +1188,11 @@ msgstr ""
 msgid "New campaigns typically take up to 48 hours to review during a regular U.S. business week."
 msgstr ""
 
-#: src/user/settings/NewKeyPairModal.tsx:119
+#: src/user/settings/NewKeyPairModal.tsx:120
 msgid "New Keypair"
 msgstr ""
 
-#: src/user/campaignList/CampaignList.tsx:261
+#: src/user/campaignList/CampaignList.tsx:262
 #: src/user/library/index.ts:248
 #: src/util/campaign.ts:7
 msgid "New tab takeover"
@@ -1221,7 +1221,7 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: src/components/Datagrid/renderers.tsx:68
+#: src/components/Datagrid/renderers.tsx:70
 msgid "No"
 msgstr ""
 
@@ -1237,7 +1237,7 @@ msgstr ""
 msgid "No file result"
 msgstr ""
 
-#: src/user/ads/AdsExistingAd.tsx:77
+#: src/user/ads/AdsExistingAd.tsx:78
 msgid "No previous ads available"
 msgstr ""
 
@@ -1276,7 +1276,7 @@ msgstr ""
 msgid "Observation window required."
 msgstr ""
 
-#: src/components/Creatives/CreativeList.tsx:38
+#: src/components/Creatives/CreativeList.tsx:39
 msgid "On / Off"
 msgstr ""
 
@@ -1284,12 +1284,12 @@ msgstr ""
 msgid "On a podcast I listen to"
 msgstr ""
 
-#: src/user/adSet/AdSetList.tsx:84
-#: src/user/campaignList/CampaignList.tsx:195
+#: src/user/adSet/AdSetList.tsx:83
+#: src/user/campaignList/CampaignList.tsx:196
 msgid "On/Off"
 msgstr ""
 
-#: src/user/settings/NewKeyPairModal.tsx:229
+#: src/user/settings/NewKeyPairModal.tsx:230
 msgid "Once confirmed, your organization’s keypair will be replaced with the new keypair."
 msgstr ""
 
@@ -1322,7 +1322,7 @@ msgid "Other source"
 msgstr ""
 
 #: src/auth/views/Login.tsx:51
-#: src/user/settings/UserForm.tsx:57
+#: src/user/settings/UserForm.tsx:58
 msgid "Password"
 msgstr ""
 
@@ -1351,7 +1351,7 @@ msgid "Performance Report"
 msgstr ""
 
 #: src/components/Platform/PlatformPicker.tsx:41
-#: src/user/adSet/AdSetList.tsx:119
+#: src/user/adSet/AdSetList.tsx:118
 #: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:53
 msgid "Platforms"
 msgstr ""
@@ -1360,11 +1360,11 @@ msgstr ""
 msgid "Please ask your Account Manager for reports on campaigns of this format."
 msgstr ""
 
-#: src/user/settings/NewKeyPairModal.tsx:217
+#: src/user/settings/NewKeyPairModal.tsx:218
 msgid "Please confirm your organization’s new private key:"
 msgstr ""
 
-#: src/auth/lib/index.ts:27
+#: src/auth/lib/index.ts:29
 msgid "Please enter a username and password"
 msgstr ""
 
@@ -1429,7 +1429,7 @@ msgstr ""
 msgid "Powerful ad formats"
 msgstr ""
 
-#: src/components/Assets/hooks/useUploadFile.ts:52
+#: src/components/Assets/hooks/useUploadFile.ts:53
 msgid "Preparing file for upload..."
 msgstr ""
 
@@ -1483,7 +1483,7 @@ msgstr ""
 msgid "Profile API Key"
 msgstr ""
 
-#: src/user/settings/UserForm.tsx:35
+#: src/user/settings/UserForm.tsx:36
 msgid "Profile Details"
 msgstr ""
 
@@ -1521,17 +1521,17 @@ msgstr ""
 
 #: src/form/FormikButton.tsx:71
 #: src/form/FormikButton.tsx:129
-#: src/user/settings/NewKeyPairModal.tsx:251
+#: src/user/settings/NewKeyPairModal.tsx:252
 msgid "Save"
 msgstr ""
 
-#: src/components/Creatives/CreateCreativeButton.tsx:65
+#: src/components/Creatives/CreateCreativeButton.tsx:67
 msgid "Save ad"
 msgstr ""
 
 #: src/form/FormikButton.tsx:72
 #: src/form/FormikButton.tsx:129
-#: src/user/settings/NewKeyPairModal.tsx:251
+#: src/user/settings/NewKeyPairModal.tsx:252
 msgid "Saving..."
 msgstr ""
 
@@ -1553,11 +1553,11 @@ msgstr ""
 msgid "Search keyword ads"
 msgstr ""
 
-#: src/components/Campaigns/CloneCampaign.tsx:94
+#: src/components/Campaigns/CloneCampaign.tsx:98
 msgid "Select one campaign to clone"
 msgstr ""
 
-#: src/user/campaignList/EditButton.tsx:26
+#: src/user/campaignList/EditButton.tsx:29
 msgid "Select one campaign to edit"
 msgstr ""
 
@@ -1570,7 +1570,7 @@ msgstr ""
 msgid "Select the ads you would like to include in this ad set. Only checked ads are included."
 msgstr ""
 
-#: src/components/Segment/SegmentPicker.tsx:87
+#: src/components/Segment/SegmentPicker.tsx:88
 msgid "Select the audience segments to target"
 msgstr ""
 
@@ -1579,7 +1579,7 @@ msgstr ""
 msgid "Select the geographic regions where your ads will be shown."
 msgstr ""
 
-#: src/user/views/adsManager/views/advanced/components/adSet/fields/PickerFields.tsx:30
+#: src/user/views/adsManager/views/advanced/components/adSet/fields/PickerFields.tsx:29
 msgid "Select the interest segments and platforms you would like to target."
 msgstr ""
 
@@ -1606,11 +1606,11 @@ msgstr ""
 #: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:49
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:45
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:162
-#: src/user/campaignList/CampaignList.tsx:144
+#: src/user/campaignList/CampaignList.tsx:145
 msgid "Site visits"
 msgstr ""
 
-#: src/user/views/user/AdDetailTable.tsx:72
+#: src/user/views/user/AdDetailTable.tsx:71
 msgid "Site Visits"
 msgstr ""
 
@@ -1626,13 +1626,17 @@ msgstr ""
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:88
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:168
 #: src/user/analytics/analyticsOverview/reports/os/components/OsPieChart.tsx:40
-#: src/user/analytics/search/metrics.ts:61
-#: src/user/campaignList/CampaignList.tsx:104
-#: src/user/views/user/AdDetailTable.tsx:31
+#: src/user/analytics/search/metrics.ts:63
+#: src/user/campaignList/CampaignList.tsx:105
+#: src/user/views/user/AdDetailTable.tsx:30
 msgid "Spend"
 msgstr ""
 
-#: src/user/campaignList/CampaignList.tsx:174
+#: src/components/Creatives/SearchPreview.tsx:212
+msgid "Sponsored"
+msgstr ""
+
+#: src/user/campaignList/CampaignList.tsx:175
 msgid "Start"
 msgstr ""
 
@@ -1660,14 +1664,14 @@ msgstr ""
 msgid "Start your company profile"
 msgstr ""
 
-#: src/components/Creatives/CreativeList.tsx:79
+#: src/components/Creatives/CreativeList.tsx:81
 msgid "State"
 msgstr ""
 
 #: src/components/Creatives/CreativeCampaigns.tsx:48
-#: src/user/adSet/AdSetList.tsx:99
-#: src/user/analytics/search/AdSetBreakdown.tsx:71
-#: src/user/campaignList/CampaignList.tsx:84
+#: src/user/adSet/AdSetList.tsx:98
+#: src/user/analytics/search/AdSetBreakdown.tsx:73
+#: src/user/campaignList/CampaignList.tsx:85
 msgid "Status"
 msgstr ""
 
@@ -1718,7 +1722,7 @@ msgstr ""
 msgid "Target URL not validated"
 msgstr ""
 
-#: src/user/views/adsManager/views/advanced/components/adSet/fields/PickerFields.tsx:28
+#: src/user/views/adsManager/views/advanced/components/adSet/fields/PickerFields.tsx:27
 msgid "Targeting"
 msgstr ""
 
@@ -1731,7 +1735,7 @@ msgid "Terms & Conditions acknowledgement is required"
 msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:41
-#: src/user/analytics/search/metrics.ts:54
+#: src/user/analytics/search/metrics.ts:56
 msgid "The rate at which users clicked in correlation to their impressions"
 msgstr ""
 
@@ -1751,7 +1755,7 @@ msgstr ""
 msgid "The rate at which users visited the site in correlation to their impressions"
 msgstr ""
 
-#: src/auth/lib/index.ts:44
+#: src/auth/lib/index.ts:46
 msgid "The username or password did not match our records."
 msgstr ""
 
@@ -1768,9 +1772,9 @@ msgstr ""
 msgid "Time Zone"
 msgstr ""
 
-#: src/components/Creatives/CreativeList.tsx:151
-#: src/components/Creatives/CreativeList.tsx:161
-#: src/user/ads/AdList.tsx:80
+#: src/components/Creatives/CreativeList.tsx:153
+#: src/components/Creatives/CreativeList.tsx:163
+#: src/user/ads/AdList.tsx:82
 #: src/user/ads/InlineContentAd.tsx:69
 #: src/user/ads/NotificationAd.tsx:55
 msgid "Title"
@@ -1789,20 +1793,20 @@ msgid "To protect user’s privacy, verified ad conversion data is encrypted so 
 msgstr ""
 
 #: src/components/Conversion/ConversionFields.tsx:17
-#: src/user/adSet/AdSetList.tsx:112
-#: src/user/analytics/search/AdSetBreakdown.tsx:90
+#: src/user/adSet/AdSetList.tsx:111
+#: src/user/analytics/search/AdSetBreakdown.tsx:92
 msgid "Type"
 msgstr ""
 
-#: src/components/Campaigns/CloneCampaign.tsx:41
+#: src/components/Campaigns/CloneCampaign.tsx:43
 msgid "Unable to clone campaign"
 msgstr ""
 
-#: src/user/hooks/useAdvertiserWithPrices.tsx:37
+#: src/user/hooks/useAdvertiserWithPrices.tsx:38
 msgid "Unable to create a new campaign"
 msgstr ""
 
-#: src/user/views/adsManager/views/advanced/components/form/NewCampaign.tsx:67
+#: src/user/views/adsManager/views/advanced/components/form/NewCampaign.tsx:70
 msgid "Unable to Create Campaign."
 msgstr ""
 
@@ -1822,11 +1826,11 @@ msgstr ""
 msgid "Unable to get campaign information for ad"
 msgstr ""
 
-#: src/user/settings/UserForm.tsx:23
+#: src/user/settings/UserForm.tsx:24
 msgid "Unable to get profile information"
 msgstr ""
 
-#: src/components/Creatives/CreativeForm.tsx:56
+#: src/components/Creatives/CreativeForm.tsx:59
 msgid "Unable to load ad"
 msgstr ""
 
@@ -1834,29 +1838,29 @@ msgstr ""
 msgid "Unable to login, link has expired or has already been used."
 msgstr ""
 
-#: src/auth/lib/index.ts:87
+#: src/auth/lib/index.ts:89
 msgid "Unable to register your organization at this time. Please try again later."
 msgstr ""
 
-#: src/user/views/user/CampaignDetails.tsx:45
+#: src/user/views/user/CampaignDetails.tsx:48
 msgid "Unable to retrieve ad sets or ads for Campaign."
 msgstr ""
 
-#: src/user/views/user/CampaignView.tsx:33
+#: src/user/views/user/CampaignView.tsx:34
 msgid "Unable to retrieve Campaign data."
 msgstr ""
 
-#: src/components/Assets/AdvertiserAssets.tsx:40
-#: src/components/Creatives/CreativeList.tsx:93
+#: src/components/Assets/AdvertiserAssets.tsx:41
+#: src/components/Creatives/CreativeList.tsx:95
 msgid "Unable to retrieve images"
 msgstr ""
 
 #: src/user/analytics/analyticsOverview/reports/campaign/EngagementsOverview.tsx:46
-#: src/user/views/user/reports/SearchCampaignReportView.tsx:51
+#: src/user/views/user/reports/SearchCampaignReportView.tsx:54
 msgid "Unable to retrieve reporting data for this Campaign."
 msgstr ""
 
-#: src/components/Creatives/CreativeForm.tsx:91
+#: src/components/Creatives/CreativeForm.tsx:94
 msgid "Unable to save ad"
 msgstr ""
 
@@ -1864,19 +1868,19 @@ msgstr ""
 msgid "Unable to submit registration"
 msgstr ""
 
-#: src/user/settings/NewKeyPairModal.tsx:49
+#: src/user/settings/NewKeyPairModal.tsx:50
 msgid "Unable to update Advertiser."
 msgstr ""
 
-#: src/user/views/adsManager/views/advanced/components/form/EditCampaign.tsx:64
+#: src/user/views/adsManager/views/advanced/components/form/EditCampaign.tsx:65
 msgid "Unable to Update Campaign."
 msgstr ""
 
-#: src/components/Assets/hooks/useUploadFile.ts:124
+#: src/components/Assets/hooks/useUploadFile.ts:125
 msgid "Unable to upload image"
 msgstr ""
 
-#: src/auth/lib/index.ts:49
+#: src/auth/lib/index.ts:51
 msgid "Unexpected error validating your credentials. Please try again later."
 msgstr ""
 
@@ -1902,7 +1906,7 @@ msgstr ""
 msgid "Upload Image"
 msgstr ""
 
-#: src/components/Assets/ImageAutocomplete.tsx:60
+#: src/components/Assets/ImageAutocomplete.tsx:61
 msgid "Upload new image"
 msgstr ""
 
@@ -1910,7 +1914,7 @@ msgstr ""
 msgid "Uploaded images can be shared across different ad sets within a Campaign. For best quality, upload images at 900x750px resolution. Images will be automatically scaled to this size."
 msgstr ""
 
-#: src/components/Assets/hooks/useUploadFile.ts:66
+#: src/components/Assets/hooks/useUploadFile.ts:67
 msgid "Uploading file..."
 msgstr ""
 
@@ -1989,11 +1993,11 @@ msgstr ""
 msgid "Work email"
 msgstr ""
 
-#: src/components/Datagrid/renderers.tsx:68
+#: src/components/Datagrid/renderers.tsx:70
 msgid "Yes"
 msgstr ""
 
-#: src/user/settings/NewKeyPairModal.tsx:133
+#: src/user/settings/NewKeyPairModal.tsx:134
 msgid "You are attempting to create a new keypair, this will replace any of your organization’s existing keypairs. Please note, previous keypairs cannot be retrieved or used once replaced."
 msgstr ""
 
@@ -2021,11 +2025,11 @@ msgstr ""
 msgid "Your campaign has been updated! <0/>If you added new ads, we’ll be in contact as soon as they are approved and activated. <1/>Thank you for using Brave Ads!"
 msgstr ""
 
-#: src/user/settings/NewKeyPairModal.tsx:168
+#: src/user/settings/NewKeyPairModal.tsx:169
 msgid "Your organization’s new public key will be:"
 msgstr ""
 
-#: src/user/settings/NewKeyPairModal.tsx:102
+#: src/user/settings/NewKeyPairModal.tsx:103
 msgid "Your organization’s public key:"
 msgstr ""
 
