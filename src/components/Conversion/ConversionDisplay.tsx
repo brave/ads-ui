@@ -1,6 +1,6 @@
-import { Conversion } from "user/views/adsManager/types";
+import { Conversion } from "@/user/views/adsManager/types";
 import { FormikErrors } from "formik";
-import { ReviewField } from "user/views/adsManager/views/advanced/components/review/components/ReviewField";
+import { ReviewField } from "@/user/views/adsManager/views/advanced/components/review/components/ReviewField";
 import _ from "lodash";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";

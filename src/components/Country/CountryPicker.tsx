@@ -1,6 +1,6 @@
 import { Autocomplete, Box, TextField } from "@mui/material";
 import { useField } from "formik";
-import { useCountries } from "components/Country/useCountries";
+import { useCountries } from "@/components/Country/useCountries";
 import { useLingui } from "@lingui/react";
 import { msg } from "@lingui/macro";
 

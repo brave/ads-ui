@@ -1,10 +1,10 @@
 import { Box, Stack } from "@mui/material";
-import { FormikTextField } from "form/FormikHelpers";
-import { CountryPicker } from "components/Country/CountryPicker";
+import { FormikTextField } from "@/form/FormikHelpers";
+import { CountryPicker } from "@/components/Country/CountryPicker";
 import { PropsWithChildren } from "react";
-import { AdvertiserBillingAddressFragment } from "graphql/advertiser.generated";
 import { useLingui } from "@lingui/react";
 import { msg } from "@lingui/macro";
+import { AdvertiserBillingAddressFragment } from "@/graphql-client/graphql";
 
 interface Props {
   address: AdvertiserBillingAddressFragment["billingAddress"];

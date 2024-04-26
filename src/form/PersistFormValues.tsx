@@ -1,7 +1,7 @@
 import { useFormikContext } from "formik";
 import { useContext, useEffect } from "react";
-import { CampaignForm } from "user/views/adsManager/types";
-import { DraftContext } from "state/context";
+import { CampaignForm } from "@/user/views/adsManager/types";
+import { DraftContext } from "@/state/context";
 
 export const PersistFormValues = () => {
   const { values, setValues, dirty } = useFormikContext<CampaignForm>();

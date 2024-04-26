@@ -1,8 +1,8 @@
 import { Link, Stack, Typography } from "@mui/material";
-import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
+import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { Trans } from "@lingui/macro";
-import { AuthContainer } from "auth/views/components/AuthContainer";
-import logo from "../../../brave-icon-release-color.svg";
+import { AuthContainer } from "@/auth/views/components/AuthContainer";
+import logo from "@/assets/images/brave-icon-release-color.svg";
 
 export function AdvertiserRegistered() {
   useTrackMatomoPageView({ documentTitle: "Advertiser Registration Complete" });

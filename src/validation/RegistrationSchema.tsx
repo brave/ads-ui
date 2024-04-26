@@ -1,6 +1,6 @@
 import { object, string } from "yup";
 import { t } from "@lingui/macro";
-import { UserSchema } from "validation/UserSchema";
+import { UserSchema } from "@/validation/UserSchema";
 
 const SimpleUrlRegexp = /https:\/\/.+\.[a-zA-Z]{2,}\/?.*/g;
 const NoSpacesRegex = /^\S*$/;

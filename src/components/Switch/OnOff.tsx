@@ -1,5 +1,5 @@
 import { Switch, Tooltip, Typography } from "@mui/material";
-import { CampaignSource } from "graphql/types";
+import { CampaignSource } from "@/graphql-client/graphql";
 import { Trans } from "@lingui/macro";
 import dayjs from "dayjs";
 

@@ -1,11 +1,11 @@
 import { AdSetForm, Creative, OS, Segment } from "../../../../../types";
 import { FormikErrors } from "formik";
-import { ConversionDisplay } from "components/Conversion/ConversionDisplay";
+import { ConversionDisplay } from "@/components/Conversion/ConversionDisplay";
 import { ReviewField } from "./ReviewField";
-import { ReviewContainer } from "user/views/adsManager/views/advanced/components/review/components/ReviewContainer";
-import { CampaignFormat } from "graphql/types";
-import { CreativeSpecificPreview } from "components/Creatives/CreativeSpecificPreview";
-import { segmentNameWithNoDash } from "util/segment";
+import { ReviewContainer } from "@/user/views/adsManager/views/advanced/components/review/components/ReviewContainer";
+import { CampaignFormat } from "@/graphql-client/graphql";
+import { CreativeSpecificPreview } from "@/components/Creatives/CreativeSpecificPreview";
+import { segmentNameWithNoDash } from "@/util/segment";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 

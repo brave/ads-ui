@@ -1,8 +1,8 @@
 import { Box, Link, Stack } from "@mui/material";
-import { FormikCheckbox } from "form/FormikHelpers";
+import { FormikCheckbox } from "@/form/FormikHelpers";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { LearnMoreButton } from "components/Button/LearnMoreButton";
+import { LearnMoreButton } from "@/components/Button/LearnMoreButton";
 
 export function AdvertiserAgreed(props: { requiresPaymentAgree: boolean }) {
   const { _ } = useLingui();

@@ -1,13 +1,13 @@
 import { AppBar, Button, Divider, Stack, Toolbar } from "@mui/material";
 
-import { DraftMenu } from "components/Navigation/DraftMenu";
-import ads from "../../../logo.svg";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import { useSignOut } from "auth/hooks/mutations/useSignOut";
-import { NewCampaignButton } from "components/Navigation/NewCampaignButton";
-import { UploadImage } from "components/Assets/UploadImage";
+import { DraftMenu } from "@/components/Navigation/DraftMenu";
+import ads from "@/assets/images/logo.svg";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
+import { useSignOut } from "@/auth/hooks/mutations/useSignOut";
+import { NewCampaignButton } from "@/components/Navigation/NewCampaignButton";
+import { UploadImage } from "@/components/Assets/UploadImage";
 import { useHistory } from "react-router-dom";
-import { NewCreativeButton } from "components/Navigation/NewCreativeButton";
+import { NewCreativeButton } from "@/components/Navigation/NewCreativeButton";
 import { Trans } from "@lingui/macro";
 
 export function Navbar() {

@@ -3,17 +3,18 @@ import {
   CampaignForm,
   Creative,
   initialCreative,
-} from "user/views/adsManager/types";
+} from "@/user/views/adsManager/types";
 import _ from "lodash";
-import {
-  refetchAdvertiserCreativesQuery,
-  useCreateCreativeMutation,
-} from "graphql/creative.generated";
 import { useField, useFormikContext } from "formik";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { LoadingButton } from "@mui/lab";
-import { validCreativeFields } from "user/library";
+import { validCreativeFields } from "@/user/library";
 import { Trans } from "@lingui/macro";
+import { useMutation } from "@apollo/client";
+import {
+  AdvertiserCreativesDocument,
+  CreateCreativeDocument,
+} from "@/graphql-client/graphql";
 
 export function CreateCreativeButton() {
   const { values, setFieldValue } = useFormikContext<CampaignForm>();
@@ -21,7 +22,7 @@ export function CreateCreativeButton() {
   const [, newMeta, newHelper] = useField<Creative>("newCreative");
   const { advertiser } = useAdvertiser();
 
-  const [create, { loading }] = useCreateCreativeMutation({
+  const [create, { loading }] = useMutation(CreateCreativeDocument, {
     async onCompleted(data) {
       newHelper.setValue(initialCreative);
       newHelper.setTouched(false);
@@ -35,7 +36,8 @@ export function CreateCreativeButton() {
     },
     refetchQueries: [
       {
-        ...refetchAdvertiserCreativesQuery({ advertiserId: advertiser.id }),
+        query: AdvertiserCreativesDocument,
+        variables: { advertiserId: advertiser.id },
       },
     ],
   });

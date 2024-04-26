@@ -1,8 +1,8 @@
-import MetricSelect from "user/analytics/analyticsOverview/components/MetricSelect";
+import MetricSelect from "@/user/analytics/analyticsOverview/components/MetricSelect";
 import { Box, Stack, Switch, Tooltip, Typography } from "@mui/material";
-import { decideValueAttribute } from "user/analytics/analyticsOverview/lib/overview.library";
-import { Metrics, StatsMetric } from "user/analytics/analyticsOverview/types";
-import { toLocaleString } from "util/bignumber";
+import { decideValueAttribute } from "@/user/analytics/analyticsOverview/lib/overview.library";
+import { Metrics, StatsMetric } from "@/user/analytics/analyticsOverview/types";
+import { toLocaleString } from "@/util/bignumber";
 import { Trans } from "@lingui/macro";
 
 type FilterMetric = {

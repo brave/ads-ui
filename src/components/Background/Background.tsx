@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
-import gradient from "../../../darker-gradient.svg";
+import gradient from "@/assets/images/darker-gradient.svg";
 import { Container } from "@mui/material";
-import { useIsMobile } from "hooks/useIsMobile";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export function Background({ children }: PropsWithChildren) {
   const isMobile = useIsMobile();

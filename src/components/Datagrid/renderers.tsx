@@ -1,23 +1,25 @@
 import { Box, Tooltip } from "@mui/material";
 import _ from "lodash";
 import { ReactElement, ReactNode, useContext } from "react";
+
+import { OnOff } from "@/components/Switch/OnOff";
+import { displayFromCampaignState } from "@/util/displayState";
+import { CampaignExtras } from "@/user/adSet/AdSetList";
+import { FilterContext } from "@/state/context";
 import {
+  AdvertiserCampaignsDocument,
   CampaignSummaryFragment,
-  refetchLoadCampaignAdsQuery,
-  refetchLoadCampaignQuery,
-  useUpdateCampaignMutation,
-} from "graphql/campaign.generated";
-import { useUpdateAdSetMutation } from "graphql/ad-set.generated";
-import { OnOff } from "components/Switch/OnOff";
-import { displayFromCampaignState } from "util/displayState";
-import { CampaignExtras } from "user/adSet/AdSetList";
-import { FilterContext } from "state/context";
-import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
-import { UpdateAdSetInput } from "graphql/types";
-import { toLocaleString } from "util/bignumber";
+  LoadCampaignAdsDocument,
+  LoadCampaignDocument,
+  UpdateAdSetInput,
+  UpdateCampaignDocument,
+} from "@/graphql-client/graphql";
+import { toLocaleString } from "@/util/bignumber";
 import BigNumber from "bignumber.js";
 import { Trans } from "@lingui/macro";
 import dayjs from "dayjs";
+import { useMutation } from "@apollo/client";
+import { UpdateAdSetDocument } from "@/graphql-client/graphql";
 
 export type CellValueRenderer = (value: any) => ReactNode;
 const ADS_DEFAULT_TIMEZONE = "America/New_York";
@@ -84,13 +86,14 @@ export function campaignOnOffState(
   c: CampaignSummaryFragment & { advertiserId: string },
 ): ReactNode {
   const { fromDate } = useContext(FilterContext);
-  const [updateCampaign, { loading }] = useUpdateCampaignMutation({
+  const [updateCampaign, { loading }] = useMutation(UpdateCampaignDocument, {
     refetchQueries: [
       {
-        ...refetchAdvertiserCampaignsQuery({
+        query: AdvertiserCampaignsDocument,
+        variables: {
           id: c.advertiserId,
           filter: { from: fromDate?.toISOString() },
-        }),
+        },
       },
     ],
   });
@@ -115,10 +118,16 @@ export function adSetOnOffState(
   c: Omit<UpdateAdSetInput, "ads"> & CampaignExtras,
   isInline?: boolean,
 ): ReactNode {
-  const [updateAdSet, { loading }] = useUpdateAdSetMutation({
+  const [updateAdSet, { loading }] = useMutation(UpdateAdSetDocument, {
     refetchQueries: [
-      refetchLoadCampaignAdsQuery({ id: c.campaignId }),
-      refetchLoadCampaignQuery({ id: c.campaignId }),
+      {
+        query: LoadCampaignAdsDocument,
+        variables: { id: c.campaignId },
+      },
+      {
+        query: LoadCampaignDocument,
+        variables: { id: c.campaignId },
+      },
     ],
   });
 

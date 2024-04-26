@@ -24,7 +24,7 @@ import {
 } from "@mui/material";
 import { ErrorMessage, useField, useFormikContext } from "formik";
 import _ from "lodash";
-import { CampaignForm } from "user/views/adsManager/types";
+import { CampaignForm } from "@/user/views/adsManager/types";
 import { Trans } from "@lingui/macro";
 import { TypographyOwnProps } from "@mui/material/Typography";
 

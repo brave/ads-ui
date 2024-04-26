@@ -1,20 +1,23 @@
 import { Trans, msg } from "@lingui/macro";
 import { Box, Stack, Typography } from "@mui/material";
-import { DashboardButton } from "components/Button/DashboardButton";
-import { Status } from "components/Campaigns/Status";
-import { CardContainer } from "components/Card/CardContainer";
-import { DateRangePicker } from "components/Date/DateRangePicker";
-import { ErrorDetail } from "components/Error/ErrorDetail";
-import { useFetchDailyMetricsForCampaignQuery } from "graphql/analytics-overview.generated";
-import { CampaignSummaryFragment } from "graphql/campaign.generated";
-import { PerformanceFilter } from "graphql/types";
+import { DashboardButton } from "@/components/Button/DashboardButton";
+import { Status } from "@/components/Campaigns/Status";
+import { CardContainer } from "@/components/Card/CardContainer";
+import { DateRangePicker } from "@/components/Date/DateRangePicker";
+import { ErrorDetail } from "@/components/Error/ErrorDetail";
+import {
+  PerformanceFilter,
+  CampaignSummaryFragment,
+  FetchDailyMetricsForCampaignDocument,
+} from "@/graphql-client/graphql";
 import { useState } from "react";
-import { AdSetBreakdown } from "user/analytics/search/AdSetBreakdown";
-import { MetricsList } from "user/analytics/search/MetricsList";
-import { OverTimeGraph } from "user/analytics/search/OverTimeGraph";
-import { useMetricSelection } from "user/analytics/search/hooks";
-import { ReportMenu } from "user/reporting/ReportMenu";
+import { AdSetBreakdown } from "@/user/analytics/search/AdSetBreakdown";
+import { MetricsList } from "@/user/analytics/search/MetricsList";
+import { OverTimeGraph } from "@/user/analytics/search/OverTimeGraph";
+import { useMetricSelection } from "@/user/analytics/search/hooks";
+import { ReportMenu } from "@/user/reporting/ReportMenu";
 import dayjs from "dayjs";
+import { useQuery } from "@apollo/client";
 
 interface Props {
   campaignSummary: CampaignSummaryFragment;
@@ -33,7 +36,7 @@ export function SearchCampaignReportView({ campaignSummary }: Props) {
     to: endDate.toISOString(),
   };
 
-  const { data, error } = useFetchDailyMetricsForCampaignQuery({
+  const { data, error } = useQuery(FetchDailyMetricsForCampaignDocument, {
     variables: {
       filter,
     },

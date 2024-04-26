@@ -1,4 +1,4 @@
-import { buildAdServerV2Endpoint } from "util/environment";
+import { buildAdServerV2Endpoint } from "@/util/environment";
 import { useEffect, useState } from "react";
 
 export function useCountries() {

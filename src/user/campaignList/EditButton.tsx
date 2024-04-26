@@ -1,5 +1,8 @@
-import { CampaignSummaryFragment } from "graphql/campaign.generated";
-import { CampaignFormat, CampaignSource } from "graphql/types";
+import {
+  CampaignFormat,
+  CampaignSource,
+  CampaignSummaryFragment,
+} from "@/graphql-client/graphql";
 import { Button, Tooltip } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";

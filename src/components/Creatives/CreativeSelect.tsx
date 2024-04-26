@@ -1,14 +1,14 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
-import { BoxContainer } from "components/Box/BoxContainer";
-import { NotificationPreview } from "components/Creatives/NotificationPreview";
-import { SelectCreativeHeader } from "components/Creatives/SelectCreativeHeader";
-import { CampaignForm, Creative } from "user/views/adsManager/types";
+import { BoxContainer } from "@/components/Box/BoxContainer";
+import { NotificationPreview } from "@/components/Creatives/NotificationPreview";
+import { SelectCreativeHeader } from "@/components/Creatives/SelectCreativeHeader";
+import { CampaignForm, Creative } from "@/user/views/adsManager/types";
 import _ from "lodash";
 import { PropsWithChildren, useContext, useState } from "react";
-import { FormContext } from "state/context";
+import { FormContext } from "@/state/context";
 import { useFormikContext } from "formik";
-import { CampaignFormat } from "graphql/types";
-import { ImagePreview } from "components/Assets/ImagePreview";
+import { CampaignFormat } from "@/graphql-client/graphql";
+import { ImagePreview } from "@/components/Assets/ImagePreview";
 import { Trans } from "@lingui/macro";
 import dayjs from "dayjs";
 

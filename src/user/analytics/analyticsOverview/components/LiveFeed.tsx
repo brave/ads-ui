@@ -1,6 +1,6 @@
 import { Box, Chip, Typography } from "@mui/material";
 import { OverviewDetail, StatsMetric } from "../types";
-import { toLocaleString } from "util/bignumber";
+import { toLocaleString } from "@/util/bignumber";
 import { msg, Trans } from "@lingui/macro";
 import { MessageDescriptor } from "@lingui/core";
 import { useLingui } from "@lingui/react";

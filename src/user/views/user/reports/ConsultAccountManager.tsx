@@ -1,6 +1,6 @@
 import { Alert } from "@mui/material";
 import { Trans } from "@lingui/macro";
-import { DashboardButton } from "components/Button/DashboardButton";
+import { DashboardButton } from "@/components/Button/DashboardButton";
 
 export function ConsultAccountManager() {
   return (

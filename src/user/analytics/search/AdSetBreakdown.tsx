@@ -1,19 +1,20 @@
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { Status } from "components/Campaigns/Status";
-import {
-  AdSetValuesFragment,
-  useFetchAdSetMetricsForCampaignQuery,
-} from "graphql/analytics-overview.generated";
-import { CampaignSummaryFragment } from "graphql/campaign.generated";
-import { uiLabelsForBillingType } from "util/billingType";
-import { displayFromCampaignState } from "util/displayState";
+import { Status } from "@/components/Campaigns/Status";
+import { uiLabelsForBillingType } from "@/util/billingType";
+import { displayFromCampaignState } from "@/util/displayState";
 import { MetricDefinition, getMetricListForCampaign } from "./metrics";
 import { RenderMetric } from "./RenderMetric";
 import { i18n } from "@lingui/core";
 import lodash from "lodash";
-import { PerformanceFilter } from "graphql/types";
+import {
+  AdSetValuesFragment,
+  CampaignSummaryFragment,
+  FetchAdSetMetricsForCampaignDocument,
+  PerformanceFilter,
+} from "@/graphql-client/graphql";
+import { useQuery } from "@apollo/client";
 
 function getColumnDefinitionForMetric(metric: MetricDefinition): GridColDef {
   return {
@@ -22,6 +23,7 @@ function getColumnDefinitionForMetric(metric: MetricDefinition): GridColDef {
     type: "number",
     align: "right",
     headerAlign: "right",
+    display: "flex",
     width: 100,
     renderCell: ({ value }) => (
       <RenderMetric type={metric.type} value={value} />
@@ -37,7 +39,7 @@ interface Props {
 export function AdSetBreakdown({ campaignSummary, filter }: Props) {
   const { _ } = useLingui();
 
-  const { data, loading } = useFetchAdSetMetricsForCampaignQuery({
+  const { data, loading } = useQuery(FetchAdSetMetricsForCampaignDocument, {
     variables: {
       filter,
     },

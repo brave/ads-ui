@@ -1,6 +1,6 @@
-import { useAuthContext } from "auth/context/auth.hook";
-import { IAdvertiser } from "auth/context/auth.interface";
-import { PaymentType } from "graphql/types";
+import { useAuthContext } from "@/auth/context/auth.hook";
+import { IAdvertiser } from "@/auth/context/auth.interface";
+import { PaymentType } from "@/graphql-client/graphql";
 
 export function useAdvertiser(): {
   advertiser: IAdvertiser;

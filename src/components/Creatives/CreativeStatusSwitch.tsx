@@ -1,11 +1,4 @@
-import {
-  CreativeFragment,
-  refetchAdvertiserCreativesQuery,
-  refetchCampaignsForCreativeQuery,
-  useCampaignsForCreativeLazyQuery,
-  useUpdateCreativeMutation,
-} from "graphql/creative.generated";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import {
   Box,
   Button,
@@ -20,9 +13,16 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import _ from "lodash";
-import { validCreativeFields } from "user/library";
-import { isReviewableState } from "util/displayState";
+import { validCreativeFields } from "@/user/library";
+import { isReviewableState } from "@/util/displayState";
 import { Trans } from "@lingui/macro";
+import {
+  AdvertiserCreativesDocument,
+  CampaignsForCreativeDocument,
+  CreativeFragment,
+  UpdateCreativeDocument,
+} from "@/graphql-client/graphql";
+import { useLazyQuery, useMutation } from "@apollo/client";
 
 interface Props {
   creative: CreativeFragment;
@@ -40,19 +40,28 @@ export function CreativeStatusSwitch({ creative }: Props) {
     [],
   );
   const [creativeState, setCreativeState] = useState(input.state);
-  const [update, { loading: updateLoading }] = useUpdateCreativeMutation({
-    refetchQueries: [
-      refetchAdvertiserCreativesQuery({ advertiserId: advertiser.id }),
-      refetchCampaignsForCreativeQuery({
-        creativeId: creative.id,
-        advertiserId: advertiser.id,
-      }),
-    ],
-    onCompleted() {
-      setRelatedCampaigns([]);
+  const [update, { loading: updateLoading }] = useMutation(
+    UpdateCreativeDocument,
+    {
+      refetchQueries: [
+        {
+          query: AdvertiserCreativesDocument,
+          variables: { advertiserId: advertiser.id },
+        },
+        {
+          query: CampaignsForCreativeDocument,
+          variables: {
+            creativeId: creative.id,
+            advertiserId: advertiser.id,
+          },
+        },
+      ],
+      onCompleted() {
+        setRelatedCampaigns([]);
+      },
     },
-  });
-  const [campaigns, { loading }] = useCampaignsForCreativeLazyQuery({
+  );
+  const [campaigns, { loading }] = useLazyQuery(CampaignsForCreativeDocument, {
     variables: { creativeId: creative.id, advertiserId: advertiser.id },
   });
 

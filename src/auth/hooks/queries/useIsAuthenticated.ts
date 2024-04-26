@@ -1,4 +1,4 @@
-import { useAuthContext } from "auth/context/auth.hook";
+import { useAuthContext } from "@/auth/context/auth.hook";
 
 export function useIsAuthenticated(): boolean | undefined {
   const { isInitialized, isAuthenticated } = useAuthContext();

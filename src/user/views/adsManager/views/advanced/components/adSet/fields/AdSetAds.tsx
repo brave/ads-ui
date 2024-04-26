@@ -1,17 +1,17 @@
-import { CardContainer } from "components/Card/CardContainer";
+import { CardContainer } from "@/components/Card/CardContainer";
 import { Box, Modal, Typography } from "@mui/material";
-import { CampaignForm } from "user/views/adsManager/types";
+import { CampaignForm } from "@/user/views/adsManager/types";
 import { useField, useFormikContext } from "formik";
-import { CreativeSelect } from "components/Creatives/CreativeSelect";
-import { isCreativeTypeApplicableToCampaignFormat } from "user/library";
-import { NewAd } from "user/ads/NewAd";
-import { AdsExistingAd } from "user/ads/AdsExistingAd";
-import { ShowAdsButton } from "user/ads/ShowAdsButton";
-import { CampaignFormat } from "graphql/types";
-import { NotificationAd } from "user/ads/NotificationAd";
-import { InlineContentAd } from "user/ads/InlineContentAd";
-import { modalStyles } from "theme";
-import { LearnMoreButton } from "components/Button/LearnMoreButton";
+import { CreativeSelect } from "@/components/Creatives/CreativeSelect";
+import { isCreativeTypeApplicableToCampaignFormat } from "@/user/library";
+import { NewAd } from "@/user/ads/NewAd";
+import { AdsExistingAd } from "@/user/ads/AdsExistingAd";
+import { ShowAdsButton } from "@/user/ads/ShowAdsButton";
+import { CampaignFormat } from "@/graphql-client/graphql";
+import { NotificationAd } from "@/user/ads/NotificationAd";
+import { InlineContentAd } from "@/user/ads/InlineContentAd";
+import { modalStyles } from "@/theme";
+import { LearnMoreButton } from "@/components/Button/LearnMoreButton";
 import { Trans } from "@lingui/macro";
 
 interface Props {

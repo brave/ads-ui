@@ -1,6 +1,6 @@
 import { ComponentType } from "react";
-import { IAdvertiser } from "auth/context/auth.interface";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { IAdvertiser } from "@/auth/context/auth.interface";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { Redirect, Route } from "react-router-dom";
 
 interface ProtectedProps {

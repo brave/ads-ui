@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CardContainer } from "components/Card/CardContainer";
+import { CardContainer } from "@/components/Card/CardContainer";
 import {
   Box,
   Button,
@@ -13,8 +13,8 @@ import {
   Typography,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import { useGenerateApiKey } from "user/hooks/useGenerateApiKey";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
+import { useGenerateApiKey } from "@/user/hooks/useGenerateApiKey";
 import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";

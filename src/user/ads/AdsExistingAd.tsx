@@ -8,23 +8,24 @@ import {
   Modal,
 } from "@mui/material";
 import { useFormikContext } from "formik";
-import { CampaignFormat } from "graphql/types";
-import _ from "lodash";
 import {
+  AdvertiserCreativesDocument,
+  CampaignFormat,
   CreativeFragment,
-  useAdvertiserCreativesQuery,
-} from "graphql/creative.generated";
-import { isCreativeTypeApplicableToCampaignFormat } from "user/library";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import { CampaignForm } from "user/views/adsManager/types";
+} from "@/graphql-client/graphql";
+import _ from "lodash";
+import { isCreativeTypeApplicableToCampaignFormat } from "@/user/library";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
+import { CampaignForm } from "@/user/views/adsManager/types";
 import SearchIcon from "@mui/icons-material/Search";
 import { useContext, useRef, useState } from "react";
-import { CreativeSelect } from "components/Creatives/CreativeSelect";
-import { FormContext } from "state/context";
-import { useAdvertiserCreatives } from "user/hooks/useAdvertiserCreatives";
-import { modalStyles } from "theme";
+import { CreativeSelect } from "@/components/Creatives/CreativeSelect";
+import { FormContext } from "@/state/context";
+import { useAdvertiserCreatives } from "@/user/hooks/useAdvertiserCreatives";
+import { modalStyles } from "@/theme";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { useQuery } from "@apollo/client";
 
 function filterCreativesBasedOnCampaignFormat(
   creatives: CreativeFragment[],
@@ -45,7 +46,7 @@ export function AdsExistingAd() {
   const { advertiser } = useAdvertiser();
   const original = useRef<CreativeFragment[]>([]);
   const [options, setOptions] = useState<CreativeFragment[]>();
-  const { loading } = useAdvertiserCreativesQuery({
+  const { loading } = useQuery(AdvertiserCreativesDocument, {
     variables: { advertiserId: advertiser.id },
     onCompleted(data) {
       const creativeOptionList = _.orderBy(

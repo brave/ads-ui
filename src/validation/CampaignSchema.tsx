@@ -9,19 +9,19 @@ import {
   string,
   StringSchema,
 } from "yup";
-import { twoDaysOut } from "form/DateFieldHelpers";
+import { twoDaysOut } from "@/form/DateFieldHelpers";
 import {
   HttpsRegex,
   NoSpacesRegex,
   SimpleUrlRegexp,
   TrailingAsteriskRegex,
-} from "validation/regex";
-import { CreativeSchema } from "validation/CreativeSchema";
-import { CampaignFormat } from "graphql/types";
+} from "@/validation/regex";
+import { CreativeSchema } from "@/validation/CreativeSchema";
+import { CampaignFormat } from "@/graphql-client/graphql";
 import BigNumber from "bignumber.js";
-import { AdvertiserPrice } from "user/hooks/useAdvertiserWithPrices";
-import { Billing } from "user/views/adsManager/types";
-import { uiLabelsForCampaignFormat } from "util/campaign";
+import { AdvertiserPrice } from "@/user/hooks/useAdvertiserWithPrices";
+import { Billing } from "@/user/views/adsManager/types";
+import { uiLabelsForCampaignFormat } from "@/util/campaign";
 import { t } from "@lingui/macro";
 import dayjs from "dayjs";
 

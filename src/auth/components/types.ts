@@ -1,4 +1,4 @@
-import { AdvertiserBillingAddressFragment } from "graphql/advertiser.generated";
+import { AdvertiserBillingAddressFragment } from "@/graphql-client/graphql";
 
 export type AdvertiserForm = {
   tracking: boolean;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useAuthContext } from "auth/context/auth.hook";
-import { authorize, ResponseUser } from "auth/lib";
+import { useAuthContext } from "@/auth/context/auth.hook";
+import { authorize, ResponseUser } from "@/auth/lib";
 
 interface Options {
   variables: {

@@ -1,22 +1,23 @@
 import { Box, Skeleton } from "@mui/material";
 import { useContext } from "react";
-import { useAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
-import { CampaignAgeFilter } from "components/Campaigns/CampaignAgeFilter";
-import { CampaignList } from "user/campaignList/CampaignList";
-import { ErrorDetail } from "components/Error/ErrorDetail";
-import { CardContainer } from "components/Card/CardContainer";
-import MiniSideBar from "components/Drawer/MiniSideBar";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import { FilterContext } from "state/context";
-import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
+import { CampaignAgeFilter } from "@/components/Campaigns/CampaignAgeFilter";
+import { CampaignList } from "@/user/campaignList/CampaignList";
+import { ErrorDetail } from "@/components/Error/ErrorDetail";
+import { CardContainer } from "@/components/Card/CardContainer";
+import MiniSideBar from "@/components/Drawer/MiniSideBar";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
+import { FilterContext } from "@/state/context";
+import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { Trans, msg } from "@lingui/macro";
+import { AdvertiserCampaignsDocument } from "@/graphql-client/graphql";
+import { useQuery } from "@apollo/client";
 
 export function CampaignView() {
   useTrackMatomoPageView({ documentTitle: "Advertiser Campaigns" });
   const { advertiser } = useAdvertiser();
   const { fromDate } = useContext(FilterContext);
 
-  const { loading, data, error } = useAdvertiserCampaignsQuery({
+  const { loading, data, error } = useQuery(AdvertiserCampaignsDocument, {
     variables: {
       id: advertiser.id,
       filter: { from: fromDate?.toISOString() },

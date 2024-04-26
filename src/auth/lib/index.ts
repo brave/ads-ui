@@ -1,11 +1,13 @@
-import { UserFragment } from "graphql/user.generated";
-import { AdvertiserFragment } from "graphql/advertiser.generated";
-import { PaymentType } from "graphql/types";
+import {
+  AdvertiserFragment,
+  PaymentType,
+  UserFragment,
+} from "@/graphql-client/graphql";
 import {
   buildAdServerEndpoint,
   buildAdServerV2Endpoint,
-} from "util/environment";
-import { RegistrationForm } from "auth/registration/types";
+} from "@/util/environment";
+import { RegistrationForm } from "@/auth/registration/types";
 import { t } from "@lingui/macro";
 
 export type Advertiser = Pick<

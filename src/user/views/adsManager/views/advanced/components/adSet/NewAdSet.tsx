@@ -9,11 +9,11 @@ import {
   Typography,
 } from "@mui/material";
 import { Link as RouterLink, useHistory } from "react-router-dom";
-import { CampaignForm, initialAdSet } from "user/views/adsManager/types";
+import { CampaignForm, initialAdSet } from "@/user/views/adsManager/types";
 import { useRef } from "react";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import { useAdvertiserCreatives } from "user/hooks/useAdvertiserCreatives";
-import { useTrackMatomoEvent } from "hooks/useTrackWithMatomo";
+import { useAdvertiserCreatives } from "@/user/hooks/useAdvertiserCreatives";
+import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 

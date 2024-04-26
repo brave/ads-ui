@@ -1,7 +1,7 @@
 import { Chip, Tooltip } from "@mui/material";
 import { calcColorForState } from "./stateColors";
 import _ from "lodash";
-import { isDateInThePast, isDateInTheFuture } from "util/isAfterEndDate";
+import { isDateInThePast, isDateInTheFuture } from "@/util/isAfterEndDate";
 
 interface Props {
   state: string;

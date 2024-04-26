@@ -1,6 +1,6 @@
-import { buildAdServerV2Endpoint } from "util/environment";
+import { buildAdServerV2Endpoint } from "@/util/environment";
 import { useCallback, useState } from "react";
-import { useTrackMatomoEvent } from "hooks/useTrackWithMatomo";
+import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
 import { t } from "@lingui/macro";
 
 export function useGenerateApiKey() {

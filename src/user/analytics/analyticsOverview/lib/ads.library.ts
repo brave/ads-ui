@@ -1,7 +1,7 @@
 import _ from "lodash";
-import { EngagementFragment } from "graphql/analytics-overview.generated";
-import { StatsMetric } from "user/analytics/analyticsOverview/types";
-import { processStats } from "user/analytics/analyticsOverview/lib/overview.library";
+import { StatsMetric } from "@/user/analytics/analyticsOverview/types";
+import { processStats } from "@/user/analytics/analyticsOverview/lib/overview.library";
+import { EngagementFragment } from "@/graphql-client/graphql";
 
 export function adEngagements(
   engagements: EngagementFragment[],

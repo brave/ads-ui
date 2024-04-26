@@ -1,24 +1,25 @@
 import { Box, Card, Container, Skeleton } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { Form, Formik } from "formik";
-import { AdvertiserAddress } from "auth/components/AdvertiserAddress";
-import { useAuthContext } from "auth/context/auth.hook";
-import {
-  useAdvertiserBillingAddressQuery,
-  useUpdateAdvertiserMutation,
-} from "graphql/advertiser.generated";
-import { getUser } from "auth/lib";
-import { AdvertiserForm, initialAdvertiserForm } from "auth/components/types";
+import { AdvertiserAddress } from "@/auth/components/AdvertiserAddress";
+import { useAuthContext } from "@/auth/context/auth.hook";
+import { getUser } from "@/auth/lib";
+import { AdvertiserForm, initialAdvertiserForm } from "@/auth/components/types";
 import { useHistory } from "react-router-dom";
-import { PaymentType } from "graphql/types";
-import { AdvertiserAgreed } from "auth/components/AdvertiserAgreed";
-import { FormikSubmitButton } from "form/FormikButton";
-import { AdvertiserSchema } from "validation/AdvertiserSchema";
+import {
+  AdvertiserBillingAddressDocument,
+  PaymentType,
+  UpdateAdvertiserDocument,
+} from "@/graphql-client/graphql";
+import { AdvertiserAgreed } from "@/auth/components/AdvertiserAgreed";
+import { FormikSubmitButton } from "@/form/FormikButton";
+import { AdvertiserSchema } from "@/validation/AdvertiserSchema";
 import { useState } from "react";
-import { useTrackWithMatomo } from "hooks/useTrackWithMatomo";
+import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
 import _ from "lodash";
 import { msg, Trans } from "@lingui/macro";
+import { useMutation, useQuery } from "@apollo/client";
 
 export function AdvertiserDetailsForm() {
   const { trackMatomoEvent } = useTrackWithMatomo({
@@ -34,7 +35,7 @@ export function AdvertiserDetailsForm() {
     initialAdvertiserForm(!requiresPaymentAgree),
   );
 
-  const [mutation] = useUpdateAdvertiserMutation({
+  const [mutation] = useMutation(UpdateAdvertiserDocument, {
     async onCompleted() {
       const user = await getUser();
       setSessionUser(user);
@@ -46,7 +47,7 @@ export function AdvertiserDetailsForm() {
     },
   });
 
-  const { data, loading } = useAdvertiserBillingAddressQuery({
+  const { data, loading } = useQuery(AdvertiserBillingAddressDocument, {
     variables: { id: advertiser.id },
     onCompleted: (data) => {
       setInitial(initialAdvertiserForm(!requiresPaymentAgree, data.advertiser));

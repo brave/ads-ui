@@ -1,5 +1,5 @@
 import { Link } from "@mui/material";
-import { useTrackMatomoEvent } from "hooks/useTrackWithMatomo";
+import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
 import { Trans } from "@lingui/macro";
 import { TypographyOwnProps } from "@mui/material/Typography";
 

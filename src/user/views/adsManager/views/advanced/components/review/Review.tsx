@@ -4,8 +4,8 @@ import { Box, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { CampaignReview } from "./components/CampaignReview";
 import { AdSetReview } from "./components/AdSetReview";
-import { PaymentMethodField } from "user/views/adsManager/views/advanced/components/campaign/fields/PaymentMethodField";
-import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
+import { PaymentMethodField } from "@/user/views/adsManager/views/advanced/components/campaign/fields/PaymentMethodField";
+import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { Trans } from "@lingui/macro";
 
 export function Review() {

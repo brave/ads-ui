@@ -1,7 +1,7 @@
 import { Box, Tab, Tabs } from "@mui/material";
 import { Options, SeriesOptionsType } from "highcharts";
 import { Option } from "../types";
-import { HighchartsWrapper } from "user/analytics/analyticsOverview/components/HighchartsWrapper";
+import { HighchartsWrapper } from "@/user/analytics/analyticsOverview/components/HighchartsWrapper";
 import { msg } from "@lingui/macro";
 import { Trans } from "@lingui/react";
 

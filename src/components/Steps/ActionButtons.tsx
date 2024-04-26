@@ -1,8 +1,8 @@
 import { Button, Stack } from "@mui/material";
 import { useContext } from "react";
-import { DraftContext } from "state/context";
+import { DraftContext } from "@/state/context";
 import { useFormikContext } from "formik";
-import { CampaignForm } from "user/views/adsManager/types";
+import { CampaignForm } from "@/user/views/adsManager/types";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { Link as RouterLink } from "react-router-dom";

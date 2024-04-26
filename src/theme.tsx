@@ -1,5 +1,5 @@
 import { createTheme, responsiveFontSizes, SxProps } from "@mui/material";
-import { findLocale } from "i18n";
+import { findLocale } from "./i18n";
 
 const appTheme = createTheme(
   {

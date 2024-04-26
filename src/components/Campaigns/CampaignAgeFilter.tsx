@@ -1,7 +1,7 @@
 import { FormControlLabel, Switch, Typography } from "@mui/material";
 import _ from "lodash";
 import { useContext } from "react";
-import { FilterContext } from "state/context";
+import { FilterContext } from "@/state/context";
 import { Trans } from "@lingui/macro";
 import dayjs from "dayjs";
 

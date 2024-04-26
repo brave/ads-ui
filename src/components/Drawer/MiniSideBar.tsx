@@ -8,11 +8,11 @@ import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlin
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined";
 import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import { AlwaysOnFormButton } from "components/Button/AlwaysOnFormButton";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
+import { AlwaysOnFormButton } from "@/components/Button/AlwaysOnFormButton";
 import { msg } from "@lingui/macro";
-import { SupportMenu } from "components/Drawer/SupportMenu";
-import { ItemBox, RouteOption } from "components/Drawer/components/ItemBox";
+import { SupportMenu } from "@/components/Drawer/SupportMenu";
+import { ItemBox, RouteOption } from "@/components/Drawer/components/ItemBox";
 
 const drawerWidth = 85;
 export default function MiniSideBar({ children }: PropsWithChildren) {

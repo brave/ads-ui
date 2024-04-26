@@ -1,12 +1,15 @@
 import { Box, LinearProgress } from "@mui/material";
-import { AlwaysOnFormButton } from "components/Button/AlwaysOnFormButton";
-import { useLoadCampaignSummaryQuery } from "graphql/campaign.generated";
-import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
+import { AlwaysOnFormButton } from "@/components/Button/AlwaysOnFormButton";
+import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { useParams } from "react-router-dom";
-import { CampaignFormat } from "graphql/types";
+import {
+  CampaignFormat,
+  LoadCampaignSummaryDocument,
+} from "@/graphql-client/graphql";
 import { ConsultAccountManager } from "./reports/ConsultAccountManager";
 import { OriginalCampaignReportView } from "./reports/OriginalCampaignReportView";
 import { SearchCampaignReportView } from "./reports/SearchCampaignReportView";
+import { useQuery } from "@apollo/client";
 
 interface Params {
   campaignId: string;
@@ -20,7 +23,7 @@ export function CampaignReportViewSelector() {
 
   const { campaignId } = useParams<Params>();
 
-  const { data } = useLoadCampaignSummaryQuery({
+  const { data } = useQuery(LoadCampaignSummaryDocument, {
     variables: {
       id: campaignId,
     },

@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { SeriesOptionsType } from "highcharts";
-import { CalculatedOSMetric, OS } from "user/analytics/analyticsOverview/types";
+import {
+  CalculatedOSMetric,
+  OS,
+} from "@/user/analytics/analyticsOverview/types";
 import { BaseBarChart } from "../../../components/BaseBarChart";
 import { msg } from "@lingui/macro";
 

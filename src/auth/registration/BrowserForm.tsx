@@ -1,8 +1,8 @@
-import { FormikTextField } from "form/FormikHelpers";
-import { MarketingOptIn } from "auth/registration/MarketingOptIn";
+import { FormikTextField } from "@/form/FormikHelpers";
+import { MarketingOptIn } from "@/auth/registration/MarketingOptIn";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { MarketingChannel } from "auth/registration/MarketingChannel";
+import { MarketingChannel } from "@/auth/registration/MarketingChannel";
 import { Box } from "@mui/material";
 
 export function BrowserForm() {

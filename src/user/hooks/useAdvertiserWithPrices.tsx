@@ -1,14 +1,15 @@
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
+import { useState } from "react";
+import { IAdvertiser } from "@/auth/context/auth.interface";
+import _ from "lodash";
 import {
   AdvertiserPriceFragment,
-  useAdvertiserPricesQuery,
-} from "graphql/advertiser.generated";
-import { useState } from "react";
-import { IAdvertiser } from "auth/context/auth.interface";
-import _ from "lodash";
-import { BillingType } from "graphql/types";
-import { Billing } from "user/views/adsManager/types";
+  AdvertiserPricesDocument,
+  BillingType,
+} from "@/graphql-client/graphql";
+import { Billing } from "@/user/views/adsManager/types";
 import { t } from "@lingui/macro";
+import { useQuery } from "@apollo/client";
 
 export type AdvertiserPrice = Omit<AdvertiserPriceFragment, "billingType"> & {
   billingType: Billing;
@@ -29,7 +30,7 @@ export function useAdvertiserWithPrices(params: Params = {}) {
   });
   const [error, setError] = useState<string>();
 
-  const { loading } = useAdvertiserPricesQuery({
+  const { loading } = useQuery(AdvertiserPricesDocument, {
     variables: { id: advertiser.id },
     onCompleted(data) {
       const prices = data.advertiser?.prices ?? [];

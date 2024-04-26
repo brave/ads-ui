@@ -3,12 +3,13 @@ import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { Autocomplete, Box, Checkbox, TextField } from "@mui/material";
 import { useField } from "formik";
 import _ from "lodash";
-import { SegmentFragment, useSegmentsQuery } from "graphql/common.generated";
 import { useEffect } from "react";
-import { FormikSwitch } from "form/FormikHelpers";
-import { segmentNameWithNoDash } from "util/segment";
+import { FormikSwitch } from "@/form/FormikHelpers";
+import { segmentNameWithNoDash } from "@/util/segment";
 import { useLingui } from "@lingui/react";
 import { msg } from "@lingui/macro";
+import { useQuery } from "@apollo/client";
+import { SegmentFragment, SegmentsDocument } from "@/graphql-client/graphql";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -18,7 +19,7 @@ interface Props {
 }
 
 export const SegmentPicker = ({ idx }: Props) => {
-  const { data } = useSegmentsQuery();
+  const { data } = useQuery(SegmentsDocument);
   const activeSegments = [...(data?.segments?.data ?? [])].sort((a, b) => {
     if (a.name === "Untargeted" || b.name === "Untargeted") return 1;
     return a.name.toLowerCase().localeCompare(b.name.toLowerCase());

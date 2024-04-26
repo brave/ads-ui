@@ -9,22 +9,24 @@ import {
   LinearProgress,
   Tooltip,
 } from "@mui/material";
-import {
-  CampaignSummaryFragment,
-  useCreateCampaignMutation,
-  useLoadCampaignLazyQuery,
-} from "graphql/campaign.generated";
 import { useHistory } from "react-router-dom";
 import { useContext, useState } from "react";
-import { refetchAdvertiserCampaignsQuery } from "graphql/advertiser.generated";
-import { createCampaignFromFragment } from "form/fragmentUtil";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
+import { createCampaignFromFragment } from "@/form/fragmentUtil";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import { useUser } from "auth/hooks/queries/useUser";
-import { FilterContext } from "state/context";
-import { CampaignFormat, CampaignSource } from "graphql/types";
+import { useUser } from "@/auth/hooks/queries/useUser";
+import { FilterContext } from "@/state/context";
+import {
+  AdvertiserCampaignsDocument,
+  CampaignFormat,
+  CampaignSource,
+  CampaignSummaryFragment,
+  CreateCampaignDocument,
+  LoadCampaignDocument,
+} from "@/graphql-client/graphql";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { useLazyQuery, useMutation } from "@apollo/client";
 
 interface Props {
   campaign?: CampaignSummaryFragment;
@@ -40,14 +42,16 @@ export function CloneCampaign({ campaign, disabled }: Props) {
   const { _ } = useLingui();
   const unableToClone = _(msg`Unable to clone campaign`);
 
-  const [getCampaign, { loading: getLoading }] = useLoadCampaignLazyQuery();
-  const [copyCampaign, { loading }] = useCreateCampaignMutation({
+  const [getCampaign, { loading: getLoading }] =
+    useLazyQuery(LoadCampaignDocument);
+  const [copyCampaign, { loading }] = useMutation(CreateCampaignDocument, {
     refetchQueries: [
       {
-        ...refetchAdvertiserCampaignsQuery({
+        query: AdvertiserCampaignsDocument,
+        variables: {
           id: advertiser.id,
           filter: { from: fromDate?.toISOString() },
-        }),
+        },
       },
     ],
     onCompleted(data) {

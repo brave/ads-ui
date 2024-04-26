@@ -1,30 +1,31 @@
-import {
-  CreativeFragment,
-  useAdvertiserCreativesQuery,
-} from "graphql/creative.generated";
-import { uiTextForCreativeTypeCode } from "user/library";
-import { CardContainer } from "components/Card/CardContainer";
-import { useAdvertiser } from "auth/hooks/queries/useAdvertiser";
-import { ErrorDetail } from "components/Error/ErrorDetail";
-import MiniSideBar from "components/Drawer/MiniSideBar";
+import { uiTextForCreativeTypeCode } from "@/user/library";
+import { CardContainer } from "@/components/Card/CardContainer";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
+import { ErrorDetail } from "@/components/Error/ErrorDetail";
+import MiniSideBar from "@/components/Drawer/MiniSideBar";
 import { Box, Link, List, Typography } from "@mui/material";
-import { Status } from "components/Campaigns/Status";
+import { Status } from "@/components/Campaigns/Status";
 import { Link as RouterLink } from "react-router-dom";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { CreativeStatusSwitch } from "components/Creatives/CreativeStatusSwitch";
-import { CustomToolbar } from "components/Datagrid/CustomToolbar";
-import { RouteSelectionButton } from "components/Route/RouteSelectionButton";
-import { useTrackMatomoPageView } from "hooks/useTrackWithMatomo";
+import { CreativeStatusSwitch } from "@/components/Creatives/CreativeStatusSwitch";
+import { CustomToolbar } from "@/components/Datagrid/CustomToolbar";
+import { RouteSelectionButton } from "@/components/Route/RouteSelectionButton";
+import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { msg } from "@lingui/macro";
 import { Trans, useLingui } from "@lingui/react";
 import { MessageDescriptor } from "@lingui/core";
+import { useQuery } from "@apollo/client";
+import {
+  AdvertiserCreativesDocument,
+  CreativeFragment,
+} from "@/graphql-client/graphql";
 const ALLOWED_TYPES = ["notification_all_v1", "inline_content_all_v1"];
 
 export function CreativeList() {
   useTrackMatomoPageView({ documentTitle: "Advertiser Creatives" });
   const { advertiser } = useAdvertiser();
   const { _ } = useLingui();
-  const { data, error, loading } = useAdvertiserCreativesQuery({
+  const { data, error, loading } = useQuery(AdvertiserCreativesDocument, {
     variables: {
       advertiserId: advertiser.id,
     },
@@ -72,6 +73,7 @@ export function CreativeList() {
       valueGetter: (_value, row) => creativeValuesGetter(row),
       renderCell: ({ row }) => <CreativePayloadList creative={row} />,
       flex: 1,
+      display: "flex",
       sortable: false,
     },
     {

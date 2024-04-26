@@ -3,8 +3,8 @@ import {
   IAdvertiser,
   IAuthProviderProps,
   IAuthState,
-} from "auth/context/auth.interface";
-import { IAuthContext, initialState } from "auth/context/auth.state";
+} from "@/auth/context/auth.interface";
+import { IAuthContext, initialState } from "@/auth/context/auth.state";
 import { getUser, ResponseUser } from "./lib";
 import _ from "lodash";
 import { setActiveAdvertiser } from "./util";
