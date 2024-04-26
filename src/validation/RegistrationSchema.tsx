@@ -5,7 +5,7 @@ import { UserSchema } from "@/validation/UserSchema";
 const SimpleUrlRegexp = /https:\/\/.+\.[a-zA-Z]{2,}\/?.*/g;
 const NoSpacesRegex = /^\S*$/;
 const HttpsRegex = /^https:\/\//;
-const DomainRegex = /^(?!-)[A-Za-z0-9-]+([-.][a-z0-9]+)*\.[A-Za-z]{2,24}$/;
+const DomainRegex = /^(?!-)[A-Za-z0-9-]+([-.][a-z0-9]+)*\.[A-Za-z]{2,}$/;
 
 const BrowserRegistrationSchema = () =>
   object().shape({
