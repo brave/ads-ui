@@ -1,7 +1,6 @@
 import { Background } from "@/components/Background/Background";
 import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
 import { Box, Button, Link, Stack, Toolbar, Typography } from "@mui/material";
-import benefits from "@/assets/images/ad-benefits.svg";
 import { useIsAuthenticated } from "@/auth/hooks/queries/useIsAuthenticated";
 import { Link as RouterLink } from "react-router-dom";
 import { useIsMobile } from "@/hooks/useIsMobile";
@@ -10,6 +9,7 @@ import { GradientText } from "@/components/Typography/GradientText";
 import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { findLocale } from "@/i18n";
 
 export function LandingPage() {
   useTrackMatomoPageView({ documentTitle: "Landing Page" });
@@ -88,7 +88,7 @@ export function LandingPage() {
         </Stack>
         {!isMobile && (
           <Box height="100%" width={600}>
-            <img src={benefits} />
+            <img src={findLocale().images.benefits} />
           </Box>
         )}
       </Stack>

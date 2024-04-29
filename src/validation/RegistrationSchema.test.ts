@@ -16,7 +16,18 @@ const validRegistration: RegistrationForm = {
 };
 
 it("should pass on a valid object", () => {
-  RegistrationSchema("search").validateSync(validRegistration);
+  expect(() =>
+    RegistrationSchema("search").validateSync(validRegistration),
+  ).not.toThrowError();
+});
+
+it("should pass on long top level domain", () => {
+  // as we perform this validation server-side
+  const c = produce(validRegistration, (draft) => {
+    draft.domain = "hello.thecompanyknownasbrave";
+  });
+
+  expect(() => RegistrationSchema("search").validateSync(c)).not.toThrowError();
 });
 
 it("should not fail if the domains do not match", () => {
