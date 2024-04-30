@@ -1,10 +1,10 @@
 import { SearchProspects_LandingPageListFragment } from "@/graphql-client/graphql";
-import { LinearProgress } from "@mui/material";
 import { LandingPageListEntry } from "./LandingPageListEntry";
 import { Basket } from "./basket";
 
 import { FixedSizeList } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
+import { FullScreenProgress } from "@/components/FullScreenProgress";
 
 interface Props {
   basket: Basket;
@@ -13,7 +13,7 @@ interface Props {
 
 export function LandingPageList({ landingPages, basket }: Props) {
   if (!landingPages) {
-    return <LinearProgress />;
+    return <FullScreenProgress />;
   }
 
   return (
@@ -24,6 +24,7 @@ export function LandingPageList({ landingPages, basket }: Props) {
           width={width}
           itemSize={200}
           itemCount={landingPages.length}
+          style={{ overflowX: "scroll" }}
         >
           {({ index, style }) => {
             const landingPage = landingPages[index];
@@ -54,23 +55,4 @@ export function LandingPageList({ landingPages, basket }: Props) {
       )}
     </AutoSizer>
   );
-
-  /*
-  return landingPages.map((landingPage) => (
-    <LandingPageListEntry
-      key={landingPage.url}
-      landingPage={landingPage}
-      hasMultipleCreatives={landingPage.creatives.length > 1}
-      selected={basket.isLandingPageSelected(landingPage.url)}
-      toggleSelection={() => basket.toggleLandingPageSelection(landingPage.url)}
-      creativeIndex={basket.creativeIndexForLandingPage(landingPage.url)}
-      nextCreative={() =>
-        basket.nextCreativeForLandingPage(
-          landingPage.url,
-          landingPage.creatives.length,
-        )
-      }
-    />
-  ));
-  */
 }

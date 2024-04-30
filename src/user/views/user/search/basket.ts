@@ -6,6 +6,13 @@ export interface Basket {
 
   creativeIndexForLandingPage(url: string): number;
   nextCreativeForLandingPage(url: string, numCreatives: number): void;
+
+  calcSelectedLandingPagesCount(possibleUrls: string[]): number;
+
+  debugOutput(): {
+    ignoredLandingPages: string[];
+    creativeIndices: { [url: string]: number };
+  };
 }
 
 export function useBasket(): Basket {
@@ -31,6 +38,12 @@ export function useBasket(): Basket {
         ...prev,
         [url]: ((prev[url] ?? 0) + 1) % numCreatives,
       }));
+    },
+    calcSelectedLandingPagesCount(possibleUrls) {
+      return possibleUrls.length - ignoredLandingPages.length;
+    },
+    debugOutput() {
+      return { ignoredLandingPages, creativeIndices };
     },
   };
 }

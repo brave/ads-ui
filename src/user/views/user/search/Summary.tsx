@@ -2,7 +2,6 @@ import { CardContainer } from "@/components/Card/CardContainer";
 import { CountryDomain } from "./types";
 import { Box, Typography } from "@mui/material";
 import { ReactNode } from "react";
-import { Basket } from "./basket";
 import PublicIcon from "@mui/icons-material/Public";
 import DomainIcon from "@mui/icons-material/Domain";
 import PanToolAltOutlinedIcon from "@mui/icons-material/PanToolAltOutlined";
@@ -16,7 +15,7 @@ function SummaryEntry({
   icon,
 }: {
   title: string;
-  value: string;
+  value: ReactNode;
   icon: ReactNode;
 }) {
   return (
@@ -37,10 +36,16 @@ function SummaryEntry({
 interface Props {
   domain: CountryDomain;
   countryName: string;
-  basket: Basket;
+  selectedCount: number | undefined;
+  totalCount: number | undefined;
 }
 
-export function Summary({ domain, countryName }: Props) {
+export function Summary({
+  domain,
+  countryName,
+  selectedCount,
+  totalCount,
+}: Props) {
   const { _ } = useLingui();
 
   return (
@@ -59,15 +64,28 @@ export function Summary({ domain, countryName }: Props) {
         icon={<DomainIcon />}
       />
       <SummaryEntry
+        title={_(msg`Selected ads`)}
+        value={
+          selectedCount && totalCount ? (
+            <span>
+              {selectedCount.toLocaleString()}/{totalCount.toLocaleString()}
+            </span>
+          ) : (
+            "..."
+          )
+        }
+        icon={<GridViewIcon />}
+      />
+      <SummaryEntry
         title={_(msg`Cost per click`)}
         value="$1.00"
         icon={<PanToolAltOutlinedIcon />}
       />
-      <SummaryEntry
-        title={_(msg`Unique ads`)}
-        value="TODO"
-        icon={<GridViewIcon />}
-      />
+      {/* <SummaryEntry
+        title={_(msg`Estimated Impressions`)}
+        value="999,999 per week"
+        icon={<PanToolAltOutlinedIcon />}
+      /> */}
     </CardContainer>
   );
 }

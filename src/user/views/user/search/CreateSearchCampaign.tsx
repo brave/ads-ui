@@ -1,4 +1,4 @@
-import { Box, Container, Divider, Typography } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { CountryDomain } from "./types";
 import { CardContainer } from "@/components/Card/CardContainer";
 import { graphql } from "@/graphql-client";
@@ -7,6 +7,9 @@ import { LandingPageList } from "./LandingPageList";
 import { useBasket } from "./basket";
 import { useCountries } from "@/components/Country/useCountries";
 import { Summary } from "./Summary";
+import { useMemo, useState } from "react";
+import { SetupProgress, Steps } from "./SetupProgress";
+import { DebugOutput } from "./DebugOutput";
 
 const CreateSearchCampaign_LandingPageList = graphql(`
   query CreateSearchCampaign_LandingPageList(
@@ -45,6 +48,7 @@ interface Props {
 
 export function CreateSearchCampaign({ domain }: Props) {
   const countries = useCountries();
+  const [step, setStep] = useState(Steps.ADS);
   const { data } = useQuery(CreateSearchCampaign_LandingPageList, {
     variables: {
       country: domain.country,
@@ -59,34 +63,55 @@ export function CreateSearchCampaign({ domain }: Props) {
     countries.data.find((c) => c.code === domain.country.toUpperCase())?.name ??
     domain.country.toUpperCase();
 
+  const landingPages = data?.searchProspects.landingPagesWithStats;
+
+  const selectedCount = useMemo(() => {
+    if (!landingPages) return undefined;
+
+    return basket.calcSelectedLandingPagesCount(
+      landingPages.map((lp) => lp.url),
+    );
+  }, [landingPages, basket]);
+
+  const onNextStep = () => {
+    setStep((prev) => prev + 1);
+  };
+
+  const onPrevStep = () => {
+    setStep((prev) => prev - 1);
+  };
+
   return (
     <Container maxWidth="xl">
       <Box display="flex" gap={2}>
         <CardContainer
           childSx={{
             width: "800px",
-            height: "calc(100vh - 120px)",
-            overflowX: "scroll",
+            height: "calc(100vh - 110px)",
           }}
         >
-          <Box>
-            <Typography variant="h6" gutterBottom>
-              {domain.domain}: {selectedCountryName}
-            </Typography>
-          </Box>
-          <Divider />
+          {step === Steps.ADS && (
+            <LandingPageList landingPages={landingPages} basket={basket} />
+          )}
 
-          <LandingPageList
-            landingPages={data?.searchProspects.landingPagesWithStats}
-            basket={basket}
-          />
+          {step === Steps.FINALIZE && (
+            <DebugOutput
+              basket={basket}
+              domain={domain}
+              landingPages={landingPages}
+            />
+          )}
         </CardContainer>
 
-        <Summary
-          domain={domain}
-          countryName={selectedCountryName}
-          basket={basket}
-        />
+        <Box display="flex" flexDirection="column" gap={3}>
+          <Summary
+            domain={domain}
+            countryName={selectedCountryName}
+            selectedCount={selectedCount}
+            totalCount={landingPages?.length}
+          />
+          <SetupProgress step={step} onNext={onNextStep} onPrev={onPrevStep} />
+        </Box>
       </Box>
     </Container>
   );
