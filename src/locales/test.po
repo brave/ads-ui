@@ -366,6 +366,10 @@ msgstr ""
 msgid "Campaign Settings"
 msgstr ""
 
+#: src/user/views/user/search/Summary.tsx:49
+msgid "Campaign Summary"
+msgstr ""
+
 #: src/components/Creatives/CreativeCampaigns.tsx:40
 #: src/components/Drawer/MiniSideBar.tsx:22
 #: src/user/views/user/CampaignView.tsx:42
@@ -565,6 +569,10 @@ msgstr ""
 msgid "Copy this and keep this safe!"
 msgstr ""
 
+#: src/user/views/user/search/Summary.tsx:62
+msgid "Cost per click"
+msgstr ""
+
 #: src/auth/lib/index.ts:116
 msgid "Could not logout at this time. Please try again later."
 msgstr ""
@@ -604,6 +612,7 @@ msgid "Counted when an ad is displayed on screen for a minimum of one second"
 msgstr ""
 
 #: src/components/Country/CountryPicker.tsx:33
+#: src/user/views/user/search/Summary.tsx:52
 msgid "Country"
 msgstr ""
 
@@ -722,6 +731,10 @@ msgstr ""
 
 #: src/user/settings/UserApiKey.tsx:40
 msgid "Documentation can be found <0>here</0> on how to use the API."
+msgstr ""
+
+#: src/user/views/user/search/Summary.tsx:57
+msgid "Domain"
 msgstr ""
 
 #: src/validation/RegistrationSchema.tsx:34
@@ -1632,7 +1645,7 @@ msgstr ""
 msgid "Spend"
 msgstr ""
 
-#: src/components/Creatives/SearchPreview.tsx:212
+#: src/components/Creatives/SearchPreview.tsx:226
 msgid "Sponsored"
 msgstr ""
 
@@ -1882,6 +1895,10 @@ msgstr ""
 
 #: src/auth/lib/index.ts:51
 msgid "Unexpected error validating your credentials. Please try again later."
+msgstr ""
+
+#: src/user/views/user/search/Summary.tsx:67
+msgid "Unique ads"
 msgstr ""
 
 #: src/util/billingType.ts:13

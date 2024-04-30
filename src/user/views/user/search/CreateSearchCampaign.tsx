@@ -4,6 +4,9 @@ import { CardContainer } from "@/components/Card/CardContainer";
 import { graphql } from "@/graphql-client";
 import { useQuery } from "@apollo/client";
 import { LandingPageList } from "./LandingPageList";
+import { useBasket } from "./basket";
+import { useCountries } from "@/components/Country/useCountries";
+import { Summary } from "./Summary";
 
 const CreateSearchCampaign_LandingPageList = graphql(`
   query CreateSearchCampaign_LandingPageList(
@@ -41,6 +44,7 @@ interface Props {
 }
 
 export function CreateSearchCampaign({ domain }: Props) {
+  const countries = useCountries();
   const { data } = useQuery(CreateSearchCampaign_LandingPageList, {
     variables: {
       country: domain.country,
@@ -49,20 +53,41 @@ export function CreateSearchCampaign({ domain }: Props) {
       limit: 1000,
     },
   });
+
+  const basket = useBasket();
+  const selectedCountryName =
+    countries.data.find((c) => c.code === domain.country.toUpperCase())?.name ??
+    domain.country.toUpperCase();
+
   return (
     <Container maxWidth="xl">
-      <CardContainer>
-        <Box>
-          <Typography variant="h6" gutterBottom>
-            {domain.domain}: {domain.country.toUpperCase()}
-          </Typography>
-        </Box>
-        <Divider />
+      <Box display="flex" gap={2}>
+        <CardContainer
+          childSx={{
+            width: "800px",
+            height: "calc(100vh - 120px)",
+            overflowX: "scroll",
+          }}
+        >
+          <Box>
+            <Typography variant="h6" gutterBottom>
+              {domain.domain}: {selectedCountryName}
+            </Typography>
+          </Box>
+          <Divider />
 
-        <LandingPageList
-          landingPages={data?.searchProspects.landingPagesWithStats}
+          <LandingPageList
+            landingPages={data?.searchProspects.landingPagesWithStats}
+            basket={basket}
+          />
+        </CardContainer>
+
+        <Summary
+          domain={domain}
+          countryName={selectedCountryName}
+          basket={basket}
         />
-      </CardContainer>
+      </Box>
     </Container>
   );
 }

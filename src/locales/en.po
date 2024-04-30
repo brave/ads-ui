@@ -402,6 +402,10 @@ msgstr "Campaign Name is required"
 msgid "Campaign Settings"
 msgstr "Campaign Settings"
 
+#: src/user/views/user/search/Summary.tsx:49
+msgid "Campaign Summary"
+msgstr "Campaign Summary"
+
 #: src/components/Creatives/CreativeCampaigns.tsx:40
 #: src/components/Drawer/MiniSideBar.tsx:22
 #: src/user/views/user/CampaignView.tsx:42
@@ -609,6 +613,10 @@ msgstr "Conversions"
 msgid "Copy this and keep this safe!"
 msgstr "Copy this and keep this safe!"
 
+#: src/user/views/user/search/Summary.tsx:62
+msgid "Cost per click"
+msgstr "Cost per click"
+
 #: src/auth/lib/index.ts:116
 msgid "Could not logout at this time. Please try again later."
 msgstr "Could not logout at this time. Please try again later."
@@ -648,6 +656,7 @@ msgid "Counted when an ad is displayed on screen for a minimum of one second"
 msgstr "Counted when an ad is displayed on screen for a minimum of one second"
 
 #: src/components/Country/CountryPicker.tsx:33
+#: src/user/views/user/search/Summary.tsx:52
 msgid "Country"
 msgstr "Country"
 
@@ -771,6 +780,10 @@ msgstr "Dismissals"
 #: src/user/settings/UserApiKey.tsx:40
 msgid "Documentation can be found <0>here</0> on how to use the API."
 msgstr "Documentation can be found <0>here</0> on how to use the API."
+
+#: src/user/views/user/search/Summary.tsx:57
+msgid "Domain"
+msgstr "Domain"
 
 #: src/validation/RegistrationSchema.tsx:34
 msgid "Domain is required"
@@ -1760,7 +1773,7 @@ msgstr "Something went wrong."
 msgid "Spend"
 msgstr "Spend"
 
-#: src/components/Creatives/SearchPreview.tsx:212
+#: src/components/Creatives/SearchPreview.tsx:226
 msgid "Sponsored"
 msgstr "Sponsored"
 
@@ -2055,6 +2068,10 @@ msgstr "Unable to upload image"
 #: src/auth/lib/index.ts:51
 msgid "Unexpected error validating your credentials. Please try again later."
 msgstr "Unexpected error validating your credentials. Please try again later."
+
+#: src/user/views/user/search/Summary.tsx:67
+msgid "Unique ads"
+msgstr "Unique ads"
 
 #: src/util/billingType.ts:13
 msgid "Unknown"

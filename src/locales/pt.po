@@ -366,6 +366,10 @@ msgstr "O nome da campanha é obrigatório"
 msgid "Campaign Settings"
 msgstr "Configurações da Campanha"
 
+#: src/user/views/user/search/Summary.tsx:49
+msgid "Campaign Summary"
+msgstr ""
+
 #: src/components/Creatives/CreativeCampaigns.tsx:40
 #: src/components/Drawer/MiniSideBar.tsx:22
 #: src/user/views/user/CampaignView.tsx:42
@@ -565,6 +569,10 @@ msgstr "Conversões"
 msgid "Copy this and keep this safe!"
 msgstr "Copie isso e guarde em um local seguro!"
 
+#: src/user/views/user/search/Summary.tsx:62
+msgid "Cost per click"
+msgstr ""
+
 #: src/auth/lib/index.ts:116
 msgid "Could not logout at this time. Please try again later."
 msgstr "Não foi possível fazer logout no momento. Por favor, tente novamente mais tarde."
@@ -604,6 +612,7 @@ msgid "Counted when an ad is displayed on screen for a minimum of one second"
 msgstr "Contado quando um anúncio é exibido na tela por no mínimo um segundo."
 
 #: src/components/Country/CountryPicker.tsx:33
+#: src/user/views/user/search/Summary.tsx:52
 msgid "Country"
 msgstr "País"
 
@@ -723,6 +732,10 @@ msgstr "Dispensas"
 #: src/user/settings/UserApiKey.tsx:40
 msgid "Documentation can be found <0>here</0> on how to use the API."
 msgstr "A documentação sobre como utilizar a API pode ser encontrada <0>aqui</0>."
+
+#: src/user/views/user/search/Summary.tsx:57
+msgid "Domain"
+msgstr ""
 
 #: src/validation/RegistrationSchema.tsx:34
 msgid "Domain is required"
@@ -1631,7 +1644,7 @@ msgstr "Algo deu errado."
 msgid "Spend"
 msgstr "Gasto"
 
-#: src/components/Creatives/SearchPreview.tsx:212
+#: src/components/Creatives/SearchPreview.tsx:226
 msgid "Sponsored"
 msgstr ""
 
@@ -1882,6 +1895,10 @@ msgstr "Não foi possível carregar a imagem"
 #: src/auth/lib/index.ts:51
 msgid "Unexpected error validating your credentials. Please try again later."
 msgstr "Erro inesperado ao validar suas credenciais. Por favor, tente novamente mais tarde."
+
+#: src/user/views/user/search/Summary.tsx:67
+msgid "Unique ads"
+msgstr ""
 
 #: src/util/billingType.ts:13
 msgid "Unknown"

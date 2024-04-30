@@ -9,6 +9,15 @@ interface Props {
   targetUrl: string;
 }
 
+function SearchUrlDisplay({ url }: { url: URL }) {
+  const pathSegments = url.pathname
+    .split("/")
+    .map((s) => s.trim())
+    .filter((s) => s.length > 0);
+
+  return [url.host, ...pathSegments].join(" > ");
+}
+
 // search uses a html base fontSize of 20px on desktop, and we use 16px.
 // so where search uses "rem", we need to convert those to px,
 // since we don't want to change our base fontSize which rem
@@ -56,7 +65,7 @@ export function SearchPreview({ title, body, targetUrl }: Props) {
         padding: "var(--spacing-2xl)",
         position: "relative",
 
-        maxWidth: "622px",
+        width: "622px",
       }}
     >
       <Box>
@@ -145,7 +154,7 @@ export function SearchPreview({ title, body, targetUrl }: Props) {
                     overflow: "visible",
                   }}
                 >
-                  {url.href}
+                  <SearchUrlDisplay url={url} />
                 </Box>
               </Box>
             </Box>

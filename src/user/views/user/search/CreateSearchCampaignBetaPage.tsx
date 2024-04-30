@@ -37,5 +37,10 @@ export function CreateSearchCampaignBetaPage() {
     );
   }
 
-  return <CreateSearchCampaign domain={{ country, domain }} />;
+  return (
+    <CreateSearchCampaign
+      key={`${country}:${domain}`}
+      domain={{ country, domain }}
+    />
+  );
 }
