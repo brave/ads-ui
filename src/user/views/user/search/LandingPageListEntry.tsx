@@ -7,7 +7,7 @@ import {
   ListItem,
   ListItemIcon,
 } from "@mui/material";
-import { DispatchWithoutAction } from "react";
+import React, { DispatchWithoutAction } from "react";
 import LoopIcon from "@mui/icons-material/Loop";
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -20,6 +20,8 @@ interface Props {
   nextCreative: DispatchWithoutAction;
 
   hasMultipleCreatives: boolean;
+
+  style: React.CSSProperties;
 }
 
 export function LandingPageListEntry({
@@ -29,9 +31,10 @@ export function LandingPageListEntry({
   creativeIndex,
   nextCreative,
   hasMultipleCreatives,
+  style,
 }: Props) {
   return (
-    <ListItem sx={{ height: 200 }}>
+    <ListItem sx={{ height: 200 }} component="div" style={style}>
       <ListItemIcon sx={{ minWidth: 40 }}>
         <Checkbox edge="start" checked={selected} onChange={toggleSelection} />
       </ListItemIcon>
