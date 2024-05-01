@@ -91,7 +91,11 @@ export function CreateSearchCampaign({ domain }: Props) {
           }}
         >
           {step === Steps.ADS && (
-            <LandingPageList landingPages={landingPages} basket={basket} />
+            <LandingPageList
+              landingPages={landingPages}
+              basket={basket}
+              domain={domain}
+            />
           )}
 
           {step === Steps.FINALIZE && (

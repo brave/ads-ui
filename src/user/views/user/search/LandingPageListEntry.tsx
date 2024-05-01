@@ -9,7 +9,8 @@ import {
 } from "@mui/material";
 import React, { DispatchWithoutAction } from "react";
 import LoopIcon from "@mui/icons-material/Loop";
-import SearchIcon from "@mui/icons-material/Search";
+import { LandingPageDetail } from "./LandingPageDetail";
+import { CountryDomain } from "./types";
 
 interface Props {
   landingPage: SearchProspects_LandingPageListFragment;
@@ -22,6 +23,8 @@ interface Props {
   hasMultipleCreatives: boolean;
 
   style: React.CSSProperties;
+
+  domain: CountryDomain;
 }
 
 export function LandingPageListEntry({
@@ -31,6 +34,7 @@ export function LandingPageListEntry({
   creativeIndex,
   nextCreative,
   hasMultipleCreatives,
+  domain,
   style,
 }: Props) {
   return (
@@ -53,16 +57,8 @@ export function LandingPageListEntry({
         >
           <LoopIcon />
         </IconButton>
-        <IconButton
-          edge="end"
-          aria-label="details"
-          onClick={() =>
-            // eslint-disable-next-line lingui/no-unlocalized-strings
-            alert(`TODO: show details box for ${landingPage.url}`)
-          }
-        >
-          <SearchIcon />
-        </IconButton>
+
+        <LandingPageDetail landingPageUrl={landingPage.url} domain={domain} />
       </Box>
     </ListItem>
   );

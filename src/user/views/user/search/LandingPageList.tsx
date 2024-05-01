@@ -5,13 +5,15 @@ import { Basket } from "./basket";
 import { FixedSizeList } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { FullScreenProgress } from "@/components/FullScreenProgress";
+import { CountryDomain } from "./types";
 
 interface Props {
+  domain: CountryDomain;
   basket: Basket;
   landingPages: SearchProspects_LandingPageListFragment[] | undefined;
 }
 
-export function LandingPageList({ landingPages, basket }: Props) {
+export function LandingPageList({ landingPages, basket, domain }: Props) {
   if (!landingPages) {
     return <FullScreenProgress />;
   }
@@ -33,6 +35,7 @@ export function LandingPageList({ landingPages, basket }: Props) {
               <LandingPageListEntry
                 key={index}
                 style={style}
+                domain={domain}
                 landingPage={landingPage}
                 hasMultipleCreatives={landingPage.creatives.length > 1}
                 selected={basket.isLandingPageSelected(landingPage.url)}
