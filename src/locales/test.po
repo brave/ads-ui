@@ -194,6 +194,10 @@ msgstr ""
 msgid "Advertiser Name"
 msgstr ""
 
+#: src/user/views/user/search/SetupProgress.tsx:35
+msgid "Advertiser profile"
+msgstr ""
+
 #: src/auth/views/LandingPage.tsx:33
 msgid "advertising made simple"
 msgstr ""
@@ -258,6 +262,7 @@ msgid "Automatic interest targeting"
 msgstr ""
 
 #: src/components/Steps/NextAndBack.tsx:33
+#: src/user/views/user/search/SetupProgress.tsx:54
 msgid "Back"
 msgstr ""
 
@@ -366,7 +371,7 @@ msgstr ""
 msgid "Campaign Settings"
 msgstr ""
 
-#: src/user/views/user/search/Summary.tsx:49
+#: src/user/views/user/search/SummaryPanel.tsx:54
 msgid "Campaign Summary"
 msgstr ""
 
@@ -569,7 +574,7 @@ msgstr ""
 msgid "Copy this and keep this safe!"
 msgstr ""
 
-#: src/user/views/user/search/Summary.tsx:62
+#: src/user/views/user/search/SummaryPanel.tsx:80
 msgid "Cost per click"
 msgstr ""
 
@@ -612,7 +617,7 @@ msgid "Counted when an ad is displayed on screen for a minimum of one second"
 msgstr ""
 
 #: src/components/Country/CountryPicker.tsx:33
-#: src/user/views/user/search/Summary.tsx:52
+#: src/user/views/user/search/SummaryPanel.tsx:57
 msgid "Country"
 msgstr ""
 
@@ -733,7 +738,7 @@ msgstr ""
 msgid "Documentation can be found <0>here</0> on how to use the API."
 msgstr ""
 
-#: src/user/views/user/search/Summary.tsx:57
+#: src/user/views/user/search/SummaryPanel.tsx:62
 msgid "Domain"
 msgstr ""
 
@@ -862,6 +867,10 @@ msgstr ""
 msgid "Filter ads by name..."
 msgstr ""
 
+#: src/user/views/user/search/SetupProgress.tsx:50
+msgid "Finalize & submit"
+msgstr ""
+
 #: src/validation/AdvertiserSchema.tsx:8
 msgid "First party tracking acknowledgement is required"
 msgstr ""
@@ -889,6 +898,10 @@ msgstr ""
 
 #: src/auth/registration/MarketingChannel.tsx:28
 msgid "From an influential person I follow online"
+msgstr ""
+
+#: src/user/views/user/search/LandingPageDetail.tsx:141
+msgid "Full Landing Page URL"
 msgstr ""
 
 #: src/auth/registration/BrowserForm.tsx:15
@@ -1262,6 +1275,11 @@ msgstr ""
 msgid "Not automatically redirected? Click this link to go to the dashboard."
 msgstr ""
 
+#: src/user/views/user/search/Finalize.tsx:33
+#: src/user/views/user/search/Finalize.tsx:36
+msgid "Notes"
+msgstr ""
+
 #: src/user/library/index.ts:247
 #: src/util/campaign.ts:6
 msgid "Notification"
@@ -1488,6 +1506,10 @@ msgstr ""
 msgid "Private Key"
 msgstr ""
 
+#: src/user/views/user/search/SetupProgress.tsx:44
+msgid "Proceed"
+msgstr ""
+
 #: src/components/Drawer/MiniSideBar.tsx:67
 msgid "Profile"
 msgstr ""
@@ -1498,6 +1520,18 @@ msgstr ""
 
 #: src/user/settings/UserForm.tsx:36
 msgid "Profile Details"
+msgstr ""
+
+#: src/user/views/user/search/Finalize.tsx:68
+msgid "Query parameter"
+msgstr ""
+
+#: src/user/views/user/search/Finalize.tsx:48
+#~ msgid "Query string paramaters"
+#~ msgstr ""
+
+#: src/user/views/user/search/Finalize.tsx:48
+msgid "Query string parameters"
 msgstr ""
 
 #: src/auth/views/LandingPage.tsx:37
@@ -1530,6 +1564,14 @@ msgstr ""
 
 #: src/user/views/adsManager/views/advanced/components/form/components/BaseForm.tsx:37
 msgid "Review"
+msgstr ""
+
+#: src/user/views/user/search/SetupProgress.tsx:40
+msgid "Review ads"
+msgstr ""
+
+#: src/user/views/user/search/LandingPageDetail.tsx:149
+msgid "Sample Queries"
 msgstr ""
 
 #: src/form/FormikButton.tsx:71
@@ -1598,6 +1640,14 @@ msgstr ""
 
 #: src/components/Platform/PlatformPicker.tsx:45
 msgid "Select the platforms to target"
+msgstr ""
+
+#: src/user/views/user/search/SummaryPanel.tsx:67
+msgid "Selected ads"
+msgstr ""
+
+#: src/user/views/user/search/SetupProgress.tsx:29
+msgid "Setup Progress"
 msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/MetricFilter.tsx:64
@@ -1698,6 +1748,7 @@ msgstr ""
 
 #: src/auth/registration/BrowserRegister.tsx:37
 #: src/auth/registration/SearchRegister.tsx:41
+#: src/user/views/user/search/SetupProgress.tsx:57
 msgid "Submit"
 msgstr ""
 
@@ -1745,6 +1796,10 @@ msgstr ""
 
 #: src/validation/AdvertiserSchema.tsx:17
 msgid "Terms & Conditions acknowledgement is required"
+msgstr ""
+
+#: src/user/views/user/search/Finalize.tsx:50
+msgid "The following query string parameters will be added to your landing page URLs. This will allow you to track the performance of your ads."
 msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:41
@@ -1898,8 +1953,8 @@ msgid "Unexpected error validating your credentials. Please try again later."
 msgstr ""
 
 #: src/user/views/user/search/Summary.tsx:67
-msgid "Unique ads"
-msgstr ""
+#~ msgid "Unique ads"
+#~ msgstr ""
 
 #: src/util/billingType.ts:13
 msgid "Unknown"
@@ -1966,6 +2021,10 @@ msgstr ""
 
 #: src/components/Url/UrlResolver.tsx:92
 msgid "Validating URL..."
+msgstr ""
+
+#: src/user/views/user/search/Finalize.tsx:73
+msgid "Value"
 msgstr ""
 
 #: src/user/reporting/ReportMenu.tsx:80
@@ -2048,6 +2107,10 @@ msgstr ""
 
 #: src/user/settings/NewKeyPairModal.tsx:103
 msgid "Your organization’s public key:"
+msgstr ""
+
+#: src/user/views/user/search/Finalize.tsx:41
+msgid "Your trial campaign will be reviewed by an Account Manager. Add any notes or questions for them here."
 msgstr ""
 
 #: src/auth/components/AdvertiserAddress.tsx:51

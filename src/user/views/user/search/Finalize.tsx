@@ -45,7 +45,7 @@ export function Finalize() {
           }
         />
       </Section>
-      <Section title={msg`Query string paramaters`}>
+      <Section title={msg`Query string parameters`}>
         <Typography variant="body2">
           <Trans>
             The following query string parameters will be added to your landing
