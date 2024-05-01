@@ -10,8 +10,9 @@ import { SummaryPanel } from "./SummaryPanel";
 import { useMemo, useState } from "react";
 import { SetupProgress, Steps } from "./SetupProgress";
 import { Finalize } from "./Finalize";
-import { SearchOptionsSchema } from "./form";
+import { SearchOptions, SearchOptionsSchema } from "./form";
 import { Form, Formik } from "formik";
+import { generateAndDownloadFile } from "./generate-file";
 
 const CreateSearchCampaign_LandingPageList = graphql(`
   query CreateSearchCampaign_LandingPageList(
@@ -87,11 +88,17 @@ export function CreateSearchCampaign({ domain }: Props) {
   return (
     <Container maxWidth="xl">
       <Formik
-        initialValues={SearchOptionsSchema.getDefault()}
+        initialValues={SearchOptionsSchema.getDefault() as any}
         validationSchema={SearchOptionsSchema}
-        onSubmit={(values) => {
-          // eslint-disable-next-line lingui/no-unlocalized-strings
-          alert("submit " + JSON.stringify(values, null, 2));
+        onSubmit={(values: SearchOptions) => {
+          if (landingPages) {
+            generateAndDownloadFile({
+              basket,
+              domain,
+              landingPages,
+              options: values,
+            });
+          }
         }}
       >
         <Form>
