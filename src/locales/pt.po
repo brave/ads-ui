@@ -194,6 +194,10 @@ msgstr "Anúncios são blocos de construção modulares que podem ser combinados
 msgid "Advertiser Name"
 msgstr "Nome do Anunciante"
 
+#: src/user/views/user/search/SetupProgress.tsx:35
+msgid "Advertiser profile"
+msgstr ""
+
 #: src/auth/views/LandingPage.tsx:33
 msgid "advertising made simple"
 msgstr "publicidade descomplicada"
@@ -258,6 +262,7 @@ msgid "Automatic interest targeting"
 msgstr "Direcionamento automático por interesse"
 
 #: src/components/Steps/NextAndBack.tsx:33
+#: src/user/views/user/search/SetupProgress.tsx:54
 msgid "Back"
 msgstr "Voltar"
 
@@ -366,7 +371,7 @@ msgstr "O nome da campanha é obrigatório"
 msgid "Campaign Settings"
 msgstr "Configurações da Campanha"
 
-#: src/user/views/user/search/Summary.tsx:49
+#: src/user/views/user/search/SummaryPanel.tsx:54
 msgid "Campaign Summary"
 msgstr ""
 
@@ -569,7 +574,7 @@ msgstr "Conversões"
 msgid "Copy this and keep this safe!"
 msgstr "Copie isso e guarde em um local seguro!"
 
-#: src/user/views/user/search/Summary.tsx:62
+#: src/user/views/user/search/SummaryPanel.tsx:80
 msgid "Cost per click"
 msgstr ""
 
@@ -612,7 +617,7 @@ msgid "Counted when an ad is displayed on screen for a minimum of one second"
 msgstr "Contado quando um anúncio é exibido na tela por no mínimo um segundo."
 
 #: src/components/Country/CountryPicker.tsx:33
-#: src/user/views/user/search/Summary.tsx:52
+#: src/user/views/user/search/SummaryPanel.tsx:57
 msgid "Country"
 msgstr "País"
 
@@ -733,7 +738,7 @@ msgstr "Dispensas"
 msgid "Documentation can be found <0>here</0> on how to use the API."
 msgstr "A documentação sobre como utilizar a API pode ser encontrada <0>aqui</0>."
 
-#: src/user/views/user/search/Summary.tsx:57
+#: src/user/views/user/search/SummaryPanel.tsx:62
 msgid "Domain"
 msgstr ""
 
@@ -861,6 +866,10 @@ msgstr "Upload de arquivo completo para \"{fileName}\""
 msgid "Filter ads by name..."
 msgstr "Filtrar anúncios por nome..."
 
+#: src/user/views/user/search/SetupProgress.tsx:50
+msgid "Finalize & submit"
+msgstr ""
+
 #: src/validation/AdvertiserSchema.tsx:8
 msgid "First party tracking acknowledgement is required"
 msgstr "É necessário concordar com o rastreamento interno do site"
@@ -889,6 +898,10 @@ msgstr "De um amigo/colega"
 #: src/auth/registration/MarketingChannel.tsx:28
 msgid "From an influential person I follow online"
 msgstr "De uma pessoa influente que sigo online"
+
+#: src/user/views/user/search/LandingPageDetail.tsx:141
+msgid "Full Landing Page URL"
+msgstr ""
 
 #: src/auth/registration/BrowserForm.tsx:15
 #: src/auth/registration/SearchForm.tsx:16
@@ -1261,6 +1274,11 @@ msgstr "nenhuma sessão criada"
 msgid "Not automatically redirected? Click this link to go to the dashboard."
 msgstr "Não foi redirecionado automaticamente? Clique neste link para acessar o dashboard."
 
+#: src/user/views/user/search/Finalize.tsx:33
+#: src/user/views/user/search/Finalize.tsx:36
+msgid "Notes"
+msgstr ""
+
 #: src/user/library/index.ts:247
 #: src/util/campaign.ts:6
 msgid "Notification"
@@ -1487,6 +1505,10 @@ msgstr "Privacidade avançada"
 msgid "Private Key"
 msgstr "Chave Privada"
 
+#: src/user/views/user/search/SetupProgress.tsx:44
+msgid "Proceed"
+msgstr ""
+
 #: src/components/Drawer/MiniSideBar.tsx:67
 msgid "Profile"
 msgstr "Perfil"
@@ -1498,6 +1520,18 @@ msgstr "Chave de API do Perfil"
 #: src/user/settings/UserForm.tsx:36
 msgid "Profile Details"
 msgstr "Detalhes do Perfil"
+
+#: src/user/views/user/search/Finalize.tsx:68
+msgid "Query parameter"
+msgstr ""
+
+#: src/user/views/user/search/Finalize.tsx:48
+#~ msgid "Query string paramaters"
+#~ msgstr ""
+
+#: src/user/views/user/search/Finalize.tsx:48
+msgid "Query string parameters"
+msgstr ""
 
 #: src/auth/views/LandingPage.tsx:37
 msgid "Reach and convert new customers through premium advertising on the Brave browser and search engine."
@@ -1530,6 +1564,14 @@ msgstr "Voltar ao dashboard"
 #: src/user/views/adsManager/views/advanced/components/form/components/BaseForm.tsx:37
 msgid "Review"
 msgstr "Revisão"
+
+#: src/user/views/user/search/SetupProgress.tsx:40
+msgid "Review ads"
+msgstr ""
+
+#: src/user/views/user/search/LandingPageDetail.tsx:149
+msgid "Sample Queries"
+msgstr ""
 
 #: src/form/FormikButton.tsx:71
 #: src/form/FormikButton.tsx:129
@@ -1598,6 +1640,14 @@ msgstr "Selecione os segmentos de interesse e plataformas que você deseja direc
 #: src/components/Platform/PlatformPicker.tsx:45
 msgid "Select the platforms to target"
 msgstr "Selecione as plataformas para direcionar"
+
+#: src/user/views/user/search/SummaryPanel.tsx:67
+msgid "Selected ads"
+msgstr ""
+
+#: src/user/views/user/search/SetupProgress.tsx:29
+msgid "Setup Progress"
+msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/MetricFilter.tsx:64
 msgid "Show"
@@ -1697,6 +1747,7 @@ msgstr "O endereço é obrigatório"
 
 #: src/auth/registration/BrowserRegister.tsx:37
 #: src/auth/registration/SearchRegister.tsx:41
+#: src/user/views/user/search/SetupProgress.tsx:57
 msgid "Submit"
 msgstr "Enviar"
 
@@ -1745,6 +1796,10 @@ msgstr "Nos conte por que você está interessado no Brave Ads"
 #: src/validation/AdvertiserSchema.tsx:17
 msgid "Terms & Conditions acknowledgement is required"
 msgstr "É necessário concordar com os Termos e Condições"
+
+#: src/user/views/user/search/Finalize.tsx:50
+msgid "The following query string parameters will be added to your landing page URLs. This will allow you to track the performance of your ads."
+msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:41
 #: src/user/analytics/search/metrics.ts:56
@@ -1897,8 +1952,8 @@ msgid "Unexpected error validating your credentials. Please try again later."
 msgstr "Erro inesperado ao validar suas credenciais. Por favor, tente novamente mais tarde."
 
 #: src/user/views/user/search/Summary.tsx:67
-msgid "Unique ads"
-msgstr ""
+#~ msgid "Unique ads"
+#~ msgstr ""
 
 #: src/util/billingType.ts:13
 msgid "Unknown"
@@ -1966,6 +2021,10 @@ msgstr "Usar anúncios existentes"
 #: src/components/Url/UrlResolver.tsx:92
 msgid "Validating URL..."
 msgstr "Validando URL..."
+
+#: src/user/views/user/search/Finalize.tsx:73
+msgid "Value"
+msgstr ""
 
 #: src/user/reporting/ReportMenu.tsx:80
 msgid "Verified Conversions Report"
@@ -2048,6 +2107,10 @@ msgstr "A nova chave pública da sua organização será:"
 #: src/user/settings/NewKeyPairModal.tsx:103
 msgid "Your organization’s public key:"
 msgstr "Chave pública da sua organização:"
+
+#: src/user/views/user/search/Finalize.tsx:41
+msgid "Your trial campaign will be reviewed by an Account Manager. Add any notes or questions for them here."
+msgstr ""
 
 #: src/auth/components/AdvertiserAddress.tsx:51
 msgid "Zip / Postal Code"
