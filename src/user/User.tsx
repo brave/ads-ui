@@ -25,6 +25,7 @@ import { ErrorBoundary } from "@/ErrorBoundary";
 import { CampaignReportViewSelector } from "./views/user/CampaignReportViewSelector";
 import dayjs from "dayjs";
 import { useIsAuthenticated } from "@/auth/hooks/queries/useIsAuthenticated";
+import { CreateSearchCampaignBetaPage } from "./views/user/search/CreateSearchCampaignBetaPage";
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -169,6 +170,11 @@ export function User() {
                   from="/user/main/assets"
                   to="/user/main/ads/assets"
                   exact
+                />
+
+                <ProtectedRoute
+                  path="/user/main/search/new"
+                  authedComponent={CreateSearchCampaignBetaPage}
                 />
 
                 {/* default */}
