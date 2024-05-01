@@ -6,10 +6,12 @@ import { useQuery } from "@apollo/client";
 import { LandingPageList } from "./LandingPageList";
 import { useBasket } from "./basket";
 import { useCountries } from "@/components/Country/useCountries";
-import { Summary } from "./Summary";
+import { SummaryPanel } from "./SummaryPanel";
 import { useMemo, useState } from "react";
 import { SetupProgress, Steps } from "./SetupProgress";
-import { DebugOutput } from "./DebugOutput";
+import { Finalize } from "./Finalize";
+import { SearchOptionsSchema } from "./form";
+import { Form, Formik } from "formik";
 
 const CreateSearchCampaign_LandingPageList = graphql(`
   query CreateSearchCampaign_LandingPageList(
@@ -48,7 +50,9 @@ interface Props {
 
 export function CreateSearchCampaign({ domain }: Props) {
   const countries = useCountries();
+  const basket = useBasket();
   const [step, setStep] = useState(Steps.ADS);
+
   const { data } = useQuery(CreateSearchCampaign_LandingPageList, {
     variables: {
       country: domain.country,
@@ -58,7 +62,6 @@ export function CreateSearchCampaign({ domain }: Props) {
     },
   });
 
-  const basket = useBasket();
   const selectedCountryName =
     countries.data.find((c) => c.code === domain.country.toUpperCase())?.name ??
     domain.country.toUpperCase();
@@ -83,40 +86,49 @@ export function CreateSearchCampaign({ domain }: Props) {
 
   return (
     <Container maxWidth="xl">
-      <Box display="flex" gap={2}>
-        <CardContainer
-          childSx={{
-            width: "800px",
-            height: "calc(100vh - 110px)",
-          }}
-        >
-          {step === Steps.ADS && (
-            <LandingPageList
-              landingPages={landingPages}
-              basket={basket}
-              domain={domain}
-            />
-          )}
+      <Formik
+        initialValues={SearchOptionsSchema.getDefault()}
+        validationSchema={SearchOptionsSchema}
+        onSubmit={(values) => {
+          // eslint-disable-next-line lingui/no-unlocalized-strings
+          alert("submit " + JSON.stringify(values, null, 2));
+        }}
+      >
+        <Form>
+          <Box display="flex" gap={2}>
+            <CardContainer
+              childSx={{
+                width: "800px",
+                height: "calc(100vh - 110px)",
+              }}
+            >
+              {step === Steps.ADS && (
+                <LandingPageList
+                  landingPages={landingPages}
+                  basket={basket}
+                  domain={domain}
+                />
+              )}
 
-          {step === Steps.FINALIZE && (
-            <DebugOutput
-              basket={basket}
-              domain={domain}
-              landingPages={landingPages}
-            />
-          )}
-        </CardContainer>
+              {step === Steps.FINALIZE && <Finalize />}
+            </CardContainer>
 
-        <Box display="flex" flexDirection="column" gap={3}>
-          <Summary
-            domain={domain}
-            countryName={selectedCountryName}
-            selectedCount={selectedCount}
-            totalCount={landingPages?.length}
-          />
-          <SetupProgress step={step} onNext={onNextStep} onPrev={onPrevStep} />
-        </Box>
-      </Box>
+            <Box display="flex" flexDirection="column" gap={3}>
+              <SummaryPanel
+                domain={domain}
+                countryName={selectedCountryName}
+                selectedCount={selectedCount}
+                totalCount={landingPages?.length}
+              />
+              <SetupProgress
+                step={step}
+                onNext={onNextStep}
+                onPrev={onPrevStep}
+              />
+            </Box>
+          </Box>
+        </Form>
+      </Formik>
     </Container>
   );
 }

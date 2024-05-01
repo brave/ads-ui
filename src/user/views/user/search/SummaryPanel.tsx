@@ -40,7 +40,7 @@ interface Props {
   totalCount: number | undefined;
 }
 
-export function Summary({
+export function SummaryPanel({
   domain,
   countryName,
   selectedCount,

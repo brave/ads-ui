@@ -53,6 +53,9 @@ export function SetupProgress({ step, onNext, onPrev }: Props) {
             <Button variant="outlined" onClick={onPrev} sx={{ mt: 1, mr: 1 }}>
               <Trans>Back</Trans>
             </Button>
+            <Button variant="contained" type="submit" sx={{ mt: 1, mr: 1 }}>
+              <Trans>Submit</Trans>
+            </Button>
           </StepContent>
         </Step>
       </Stepper>
