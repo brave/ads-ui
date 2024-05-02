@@ -37,6 +37,7 @@ const CreateSearchCampaign_LandingPageList = graphql(`
     url
     rank
     lastSeen
+    favicon
     creatives {
       title
       body
