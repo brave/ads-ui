@@ -46,6 +46,7 @@ export function LandingPageListEntry({
         title={landingPage.creatives[creativeIndex].title}
         body={landingPage.creatives[creativeIndex].body ?? ""}
         targetUrl={landingPage.url}
+        favicon={landingPage.favicon}
       />
 
       <Box display="flex" flexDirection="column" marginLeft={1}>

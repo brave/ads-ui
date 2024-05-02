@@ -7,6 +7,7 @@ interface Props {
   title: string;
   body: string;
   targetUrl: string;
+  favicon: string;
 }
 
 function SearchUrlDisplay({ url }: { url: URL }) {
@@ -26,7 +27,7 @@ function searchRemToPx(rem: number): string {
   return `${rem * 20}px`;
 }
 
-export function SearchPreview({ title, body, targetUrl }: Props) {
+export function SearchPreview({ title, body, targetUrl, favicon }: Props) {
   const url = new URL(targetUrl);
 
   return (
@@ -42,6 +43,7 @@ export function SearchPreview({ title, body, targetUrl }: Props) {
         "--color-serp-snippet-background": "#ffffff",
         "--color-primitive-gray-10": "#ebeef0",
         "--color-text-secondary": "#3f4e55",
+        "--border-radius-xs": "2px",
         "--border-radius-m": "8px",
         "--border-radius-xl": "16px",
         "--spacing-s": searchRemToPx(0.2),
@@ -121,7 +123,26 @@ export function SearchPreview({ title, body, targetUrl }: Props) {
                   alignItems: "center",
                   justifyContent: "center",
                 }}
-              />
+              >
+                <Box
+                  component="img"
+                  alt="🌐"
+                  className="favicon"
+                  src={favicon}
+                  loading="lazy"
+                  sx={{
+                    height: "18px",
+                    width: "18px",
+                    objectFit: "cover",
+                    borderRadius: "var(--border-radius-xs)",
+                    textAlign: "center",
+                    overflow: "hidden",
+                    position: "relative",
+                    display: "inline-block",
+                    flexShrink: "0",
+                  }}
+                ></Box>
+              </Box>
               <Box
                 className="site"
                 sx={{
