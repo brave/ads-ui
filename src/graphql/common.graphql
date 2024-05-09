@@ -3,7 +3,7 @@ fragment Geocode on Geocode {
   name
 }
 
-fragment Segment on SegmentsEntry {
+fragment Segment on Segment {
   code
   name
 }
@@ -17,7 +17,8 @@ query ActiveGeocodes {
 query Segments {
   segments {
     data {
-      ...Segment
+      code
+      name
     }
   }
 }
