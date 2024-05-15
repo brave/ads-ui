@@ -532,7 +532,11 @@ describe("edit form tests", () => {
   });
 
   it("should resolve to update input", () => {
-    const update = transformEditForm(editForm, editForm.id ?? "");
+    const update = transformEditForm(
+      editForm,
+      { budget: editForm.budget } as CampaignForm,
+      editForm.id ?? "",
+    );
     const sorted = {
       ...update,
       adSets: update.adSets?.sort(
@@ -602,7 +606,7 @@ describe("edit form tests", () => {
             "totalMax": 28,
           },
         ],
-        "budget": 100,
+        "budget": undefined,
         "endAt": undefined,
         "id": "000001",
         "name": "My first campaign",
