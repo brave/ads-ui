@@ -14,7 +14,6 @@ import {
   CreativeFragment,
 } from "@/graphql-client/graphql";
 import _ from "lodash";
-import { isCreativeTypeApplicableToCampaignFormat } from "@/user/library";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { CampaignForm } from "@/user/views/adsManager/types";
 import SearchIcon from "@mui/icons-material/Search";
@@ -26,17 +25,7 @@ import { modalStyles } from "@/theme";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQuery } from "@apollo/client";
-
-function filterCreativesBasedOnCampaignFormat(
-  creatives: CreativeFragment[],
-  campaignFormat: CampaignFormat | null,
-): CreativeFragment[] {
-  if (!campaignFormat) return creatives;
-
-  return creatives.filter((c) =>
-    isCreativeTypeApplicableToCampaignFormat(c.type, campaignFormat),
-  );
-}
+import { filterCreativesByCampaignFormat } from "@/user/ads/filterCreativesByCampaignFormat";
 
 export function AdsExistingAd() {
   const { _: lingui } = useLingui();
@@ -50,7 +39,7 @@ export function AdsExistingAd() {
     variables: { advertiserId: advertiser.id },
     onCompleted(data) {
       const creativeOptionList = _.orderBy(
-        filterCreativesBasedOnCampaignFormat(
+        filterCreativesByCampaignFormat(
           data.advertiser?.creatives ?? [],
           values.format,
         ),
