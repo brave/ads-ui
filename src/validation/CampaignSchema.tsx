@@ -106,7 +106,6 @@ export const CampaignSchema = (prices: AdvertiserPrice[]) =>
                 name: string().required(),
               }),
             )
-            .min(1, t`At least one audience must be targeted`)
             .default([]),
           oses: array()
             .of(
