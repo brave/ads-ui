@@ -3,7 +3,6 @@ import { Box, Modal, Typography } from "@mui/material";
 import { CampaignForm } from "@/user/views/adsManager/types";
 import { useField, useFormikContext } from "formik";
 import { CreativeSelect } from "@/components/Creatives/CreativeSelect";
-import { isCreativeTypeApplicableToCampaignFormat } from "@/user/library";
 import { NewAd } from "@/user/ads/NewAd";
 import { AdsExistingAd } from "@/user/ads/AdsExistingAd";
 import { ShowAdsButton } from "@/user/ads/ShowAdsButton";
@@ -13,6 +12,7 @@ import { InlineContentAd } from "@/user/ads/InlineContentAd";
 import { modalStyles } from "@/theme";
 import { LearnMoreButton } from "@/components/Button/LearnMoreButton";
 import { Trans } from "@lingui/macro";
+import { filterCreativesByCampaignFormat } from "@/user/ads/filterCreativesByCampaignFormat";
 
 interface Props {
   index: number;
@@ -21,8 +21,9 @@ interface Props {
 export function AdSetAds({ index }: Props) {
   const { values } = useFormikContext<CampaignForm>();
 
-  const adsByFormat = values.adSets[index].creatives.filter((c) =>
-    isCreativeTypeApplicableToCampaignFormat(c.type, values.format),
+  const adsByFormat = filterCreativesByCampaignFormat(
+    values.adSets[index].creatives,
+    values.format,
   );
   return (
     <>

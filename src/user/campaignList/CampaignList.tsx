@@ -69,6 +69,7 @@ export function CampaignList({ advertiser }: Props) {
           {row.name}
         </Link>
       ),
+      minWidth: 250,
       flex: 1,
     },
     {
