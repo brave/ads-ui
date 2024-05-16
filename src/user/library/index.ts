@@ -199,14 +199,21 @@ export function validCreativeFields<T extends GenericCreative>(
 
 export function transformEditForm(
   form: CampaignForm,
+  initialValues: CampaignForm,
   id: string,
 ): UpdateCampaignInput {
+  function onlyIfChanged<F extends keyof CampaignForm>(
+    field: F,
+  ): CampaignForm[F] | undefined {
+    return form[field] !== initialValues[field] ? form[field] : undefined;
+  }
+
   return {
-    budget: form.budget,
-    endAt: form.endAt,
+    budget: onlyIfChanged("budget"),
+    endAt: onlyIfChanged("endAt"),
     id,
     name: form.name,
-    startAt: form.startAt,
+    startAt: onlyIfChanged("startAt"),
     state: form.state,
     paymentType: form.paymentType,
     adSets: form.adSets.map((adSet) => ({
