@@ -25,7 +25,7 @@ import { uiLabelsForCampaignFormat } from "@/util/campaign";
 import { t } from "@lingui/macro";
 import dayjs from "dayjs";
 
-export const MIN_PER_DAY = 33;
+const MIN_PER_DAY = 33;
 export const MIN_PER_CAMPAIGN = 500;
 
 export const CampaignSchema = (prices: AdvertiserPrice[]) =>
@@ -162,7 +162,7 @@ export const CampaignSchema = (prices: AdvertiserPrice[]) =>
       ),
   });
 
-export function validatePriceByBillingTypeAndFormat(
+function validatePriceByBillingTypeAndFormat(
   prices: AdvertiserPrice[],
   format: CampaignFormat,
   billingType: Billing,

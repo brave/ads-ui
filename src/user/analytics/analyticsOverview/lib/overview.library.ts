@@ -18,7 +18,7 @@ type MetricDataSet = {
   metric4DataSet: number[][];
 };
 
-export const baseOverviewChart: Options = {
+const baseOverviewChart: Options = {
   chart: {
     type: "spline",
     height: "300",
@@ -142,7 +142,7 @@ export const decideValueAttribute = (metric: string) => {
   return attr;
 };
 
-export const decideLabel = (metric: string) => {
+const decideLabel = (metric: string) => {
   switch (metric) {
     case "ctr":
       return "CTR";
@@ -194,7 +194,7 @@ const mapGroupingName = (grouping: string) => {
   }
 };
 
-export const mapMetric = (engagement: EngagementFragment): BaseMetric => {
+const mapMetric = (engagement: EngagementFragment): BaseMetric => {
   return {
     views: BigNumber(engagement.view),
     conversions: BigNumber(engagement.conversion),
@@ -209,7 +209,7 @@ export const mapMetric = (engagement: EngagementFragment): BaseMetric => {
   };
 };
 
-export const reduceMetric = (a: BaseMetric, b: BaseMetric) => {
+const reduceMetric = (a: BaseMetric, b: BaseMetric) => {
   return {
     views: a.views.plus(b.views),
     conversions: a.conversions.plus(b.conversions),

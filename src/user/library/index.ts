@@ -249,7 +249,7 @@ function dailyLimit(format: CampaignFormat) {
   return format === CampaignFormat.NewsDisplayAd ? 6 : 4;
 }
 
-export function uiTextForCreativeType(creativeType: string): string {
+function uiTextForCreativeType(creativeType: string): string {
   const codeLookup: Record<string, string> = {
     notification_all_v1: t`Notification`,
     new_tab_page_all_v1: t`New tab takeover`,

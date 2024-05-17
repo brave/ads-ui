@@ -11,7 +11,6 @@ import {
 import { DispatchWithoutAction } from "react";
 
 export enum Steps {
-  PROFILE = 0,
   ADS = 1,
   FINALIZE = 2,
 }

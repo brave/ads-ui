@@ -21,7 +21,7 @@ import dayjs from "dayjs";
 import { useMutation } from "@apollo/client";
 import { UpdateAdSetDocument } from "@/graphql-client/graphql";
 
-export type CellValueRenderer = (value: any) => ReactNode;
+type CellValueRenderer = (value: any) => ReactNode;
 const ADS_DEFAULT_TIMEZONE = "America/New_York";
 const TOOLTIP_FORMAT = "ddd D MMM YYYY HH:mm:ss z";
 

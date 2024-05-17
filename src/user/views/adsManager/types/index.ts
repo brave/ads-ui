@@ -31,7 +31,7 @@ export type CampaignForm = {
   paymentType: PaymentType;
 };
 
-export type GeoTarget = {
+type GeoTarget = {
   code: string;
   name: string;
 };

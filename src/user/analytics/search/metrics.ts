@@ -32,7 +32,7 @@ export interface MetricDefinition {
   disableForCampaign?: (campaign: CampaignSummaryFragment) => boolean;
 }
 
-export const METRICS: MetricDefinition[] = [
+const METRICS: MetricDefinition[] = [
   {
     id: "impression",
     caption: msg`Impressions`,
