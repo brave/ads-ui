@@ -29,7 +29,7 @@ it("should populate zero values for missing days in the date range", () => {
   ];
   const { data } = makeLineChartSeries(
     impressionsMetricDefinition,
-    rawValues as any,
+    rawValues as DailyValuesFragment[],
   );
 
   // this should fill in an entry for 2021-01-02Z with a value of 0

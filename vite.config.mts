@@ -17,7 +17,13 @@ export default defineConfig(({ mode }) => {
         },
       }),
       tsconfigPaths(),
-      checker({ typescript: true }),
+      checker({
+        typescript: true,
+        eslint: {
+          lintCommand: "eslint src",
+          useFlatConfig: true,
+        },
+      }),
       basicSsl(), // used only to enable https on developer workstations,
       lingui(),
     ],
