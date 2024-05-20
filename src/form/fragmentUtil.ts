@@ -46,7 +46,7 @@ export function createCampaignFromFragment(
   };
 }
 
-export function createAdSetFromFragment(
+function createAdSetFromFragment(
   data: AdSetFragment,
   campaignId?: string,
 ): CreateAdSetInput {

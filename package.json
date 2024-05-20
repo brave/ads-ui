@@ -47,6 +47,7 @@
     "check:compile": "tsc",
     "check:format": "prettier --check .",
     "check:audit": "check-audit",
+    "check:knip": "knip",
     "check:lint": "eslint src",
     "check": "run-p -l check:*",
     "prepare": "husky",
@@ -55,8 +56,8 @@
     "extract": "lingui extract"
   },
   "devDependencies": {
-    "@babel/core": "7.24.5",
     "@graphql-codegen/cli": "5.0.2",
+    "@graphql-codegen/client-preset": "4.2.6",
     "@lingui/cli": "4.10.1",
     "@lingui/vite-plugin": "4.10.1",
     "@parcel/watcher": "2.4.1",
@@ -76,6 +77,8 @@
     "eslint-plugin-lingui": "0.3.0",
     "eslint-plugin-react": "7.34.1",
     "husky": "9.0.11",
+    "knip": "5.16.0",
+    "lint-staged": "15.2.2",
     "npm-audit-resolver": "3.0.0-RC.0",
     "npm-run-all2": "6.1.2",
     "prettier": "3.2.5",

@@ -105,9 +105,7 @@ interface FormikRadioGroupProps {
   onChange?: ChangeEventHandler<any>;
 }
 
-export const FormikRadioGroup = (
-  props: PropsWithChildren<FormikRadioGroupProps>,
-) => {
+const FormikRadioGroup = (props: PropsWithChildren<FormikRadioGroupProps>) => {
   const [field, meta, helper] = useField(props);
   return (
     <>

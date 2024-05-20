@@ -19,7 +19,7 @@ interface Props {
   engagements: Map<string, StatsMetric>;
 }
 
-export type AdDetails = AdFragment & {
+type AdDetails = AdFragment & {
   adSetName: string;
   adState: string;
   campaignName: string;

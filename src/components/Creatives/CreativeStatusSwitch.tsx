@@ -28,7 +28,7 @@ interface Props {
   creative: CreativeFragment;
 }
 
-export type RelatedCampaign = { id: string; name: string; state: string };
+type RelatedCampaign = { id: string; name: string; state: string };
 export function CreativeStatusSwitch({ creative }: Props) {
   const { advertiser } = useAdvertiser();
   const input = _.omit(validCreativeFields(creative, advertiser.id), [
