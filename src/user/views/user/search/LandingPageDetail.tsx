@@ -118,7 +118,7 @@ export function LandingPageDetail({ landingPageUrl, domain }: Props) {
   );
 }
 
-export function LandingPageDetailContent({
+function LandingPageDetailContent({
   domain,
   landingPageUrl,
 }: {

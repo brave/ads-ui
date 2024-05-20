@@ -10,7 +10,7 @@ import {
 import { RegistrationForm } from "@/auth/registration/types";
 import { t } from "@lingui/macro";
 
-export type Advertiser = Pick<
+type Advertiser = Pick<
   AdvertiserFragment,
   | "selfServiceSetPrice"
   | "selfServiceManageCampaign"

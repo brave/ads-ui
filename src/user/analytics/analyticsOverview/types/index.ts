@@ -45,10 +45,6 @@ export type Tooltip = {
   format?: string;
 };
 
-export type CreativeMetric = StatsMetric & {
-  creativePayload: { title: string; body: string };
-};
-
 export interface Option {
   value: string;
   label: MessageDescriptor;

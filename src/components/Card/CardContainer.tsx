@@ -1,6 +1,12 @@
 import { PropsWithChildren, ReactNode } from "react";
-import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
-import { SxProps } from "@mui/system";
+import {
+  Box,
+  Card,
+  CardContent,
+  Stack,
+  SxProps,
+  Typography,
+} from "@mui/material";
 
 export function CardContainer(
   props: {
