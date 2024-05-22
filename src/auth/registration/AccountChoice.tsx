@@ -81,7 +81,7 @@ export function AccountChoice() {
           <Link component={RouterLink} to="/contact" underline="none">
             contact us
           </Link>{" "}
-          for premium ad placements
+          for New Tab Takeover campaigns
         </Trans>
       </Typography>
     </AuthContainer>

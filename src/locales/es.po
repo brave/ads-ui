@@ -17,7 +17,7 @@ msgstr ""
 msgid "{adFormatName} are not available for self-managed campaigns. Please contact sales to inquire."
 msgstr "{adFormatName} no están disponibles para las campañas autogestionadas. Póngase en contacto con el departamento de ventas para consultar."
 
-#: src/validation/CampaignSchema.tsx:188
+#: src/validation/CampaignSchema.tsx:187
 msgid "{billingType} price must be {price} or higher"
 msgstr "{billingType} debe ser {price} o superior."
 
@@ -98,7 +98,7 @@ msgid "Ad format"
 msgstr "Formato del anuncio"
 
 #: src/components/Creatives/CreativeList.tsx:65
-#: src/user/campaignList/CampaignList.tsx:76
+#: src/user/campaignList/CampaignList.tsx:77
 msgid "Ad Format"
 msgstr "Formato del anuncio"
 
@@ -134,7 +134,7 @@ msgstr "Conjuntos de anuncios"
 msgid "Ad Sets"
 msgstr "Conjuntos de anuncios"
 
-#: src/validation/CampaignSchema.tsx:159
+#: src/validation/CampaignSchema.tsx:158
 msgid "Ad sets must have at least one ad"
 msgstr "Los conjuntos de anuncios deben tener al menos un anuncio"
 
@@ -159,7 +159,7 @@ msgstr "El tipo de anuncio es obligatorio"
 msgid "Ad type must be notification or news"
 msgstr "El tipo de anuncio debe ser notificación o noticias"
 
-#: src/user/ads/AdsExistingAd.tsx:87
+#: src/user/ads/AdsExistingAd.tsx:76
 msgid "Add an existing ad"
 msgstr "Añadir un anuncio existente"
 
@@ -178,15 +178,15 @@ msgstr "Informe adicional: Rendimiento del Sistema Operativo"
 #: src/components/AppBar/LandingPageAppBar.tsx:85
 #: src/components/Assets/AdvertiserAssets.tsx:33
 #: src/components/Creatives/CreativeList.tsx:102
-#: src/components/Creatives/CreativeSpecificPreview.tsx:52
-#: src/components/Creatives/CreativeSpecificPreview.tsx:63
+#: src/components/Creatives/CreativeSpecificPreview.tsx:54
+#: src/components/Creatives/CreativeSpecificPreview.tsx:65
 #: src/components/Drawer/MiniSideBar.tsx:32
-#: src/user/views/adsManager/views/advanced/components/adSet/fields/AdSetAds.tsx:29
+#: src/user/views/adsManager/views/advanced/components/adSet/fields/AdSetAds.tsx:30
 #: src/user/views/user/CampaignDetails.tsx:41
 msgid "Ads"
 msgstr "Anuncios"
 
-#: src/user/ads/AdsExistingAd.tsx:91
+#: src/user/ads/AdsExistingAd.tsx:80
 msgid "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously approved ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
 msgstr "Los anuncios son bloques de construcción modulares que se pueden combinar con conjuntos de anuncios para crear combinaciones únicas. Los anuncios aprobados anteriormente se mostrarán aquí. Seleccione la casilla situada junto al nombre. Utilice el botón “Completar selección” para finalizar."
 
@@ -194,7 +194,7 @@ msgstr "Los anuncios son bloques de construcción modulares que se pueden combin
 msgid "Advertiser Name"
 msgstr "Nombre del anunciante"
 
-#: src/user/views/user/search/SetupProgress.tsx:35
+#: src/user/views/user/search/SetupProgress.tsx:34
 msgid "Advertiser profile"
 msgstr ""
 
@@ -242,14 +242,14 @@ msgid "At a marketing/media conference"
 msgstr "En una conferencia de marketing/medios de comunicación"
 
 #: src/validation/CampaignSchema.tsx:109
-msgid "At least one audience must be targeted"
-msgstr "Debe dirigirse al menos a una audiencia meta"
+#~ msgid "At least one audience must be targeted"
+#~ msgstr "Debe dirigirse al menos a una audiencia meta"
 
 #: src/validation/CampaignSchema.tsx:82
 msgid "At least one country must be targeted"
 msgstr "Debe dirigirse al menos a un país meta"
 
-#: src/validation/CampaignSchema.tsx:118
+#: src/validation/CampaignSchema.tsx:117
 msgid "At least one platform must be targeted"
 msgstr "Debe dirigirse al menos a una plataforma meta"
 
@@ -268,7 +268,7 @@ msgstr "Segmentación automática de intereses"
 #~ msgstr "Ubicaciones de anuncios disponibles"
 
 #: src/components/Steps/NextAndBack.tsx:33
-#: src/user/views/user/search/SetupProgress.tsx:54
+#: src/user/views/user/search/SetupProgress.tsx:53
 msgid "Back"
 msgstr "Atrás"
 
@@ -316,7 +316,7 @@ msgid "Browser-based delivery offers a new way to reach audiences on the Web."
 msgstr "La entrega basada en navegador ofrece una nueva forma de llegar a las audiencias en la Web."
 
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:52
-#: src/user/campaignList/CampaignList.tsx:96
+#: src/user/campaignList/CampaignList.tsx:97
 msgid "Budget"
 msgstr "Presupuesto"
 
@@ -475,7 +475,7 @@ msgstr "Tasa de clics"
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:35
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:164
 #: src/user/analytics/search/metrics.ts:46
-#: src/user/campaignList/CampaignList.tsx:132
+#: src/user/campaignList/CampaignList.tsx:133
 #: src/user/views/user/AdDetailTable.tsx:59
 msgid "Clicks"
 msgstr "Clics"
@@ -553,23 +553,23 @@ msgstr "Tasa de conversión"
 msgid "Conversion Type"
 msgstr "Tipo de conversión"
 
-#: src/validation/CampaignSchema.tsx:152
+#: src/validation/CampaignSchema.tsx:151
 msgid "Conversion type must be Post Click or Post View"
 msgstr "El tipo de conversión debe ser Post Clic o Post Vista"
 
-#: src/validation/CampaignSchema.tsx:154
+#: src/validation/CampaignSchema.tsx:153
 msgid "Conversion type required."
 msgstr "Se requiere el tipo de conversión."
 
-#: src/validation/CampaignSchema.tsx:141
+#: src/validation/CampaignSchema.tsx:140
 msgid "Conversion URL must end in trailing asterisk (*)"
 msgstr "La URL de conversión debe terminar con un asterisco final (*)"
 
-#: src/validation/CampaignSchema.tsx:129
+#: src/validation/CampaignSchema.tsx:128
 msgid "Conversion URL must not contain any whitespace"
 msgstr "La URL de conversión no debe contener espacios en blanco"
 
-#: src/validation/CampaignSchema.tsx:133
+#: src/validation/CampaignSchema.tsx:132
 msgid "Conversion URL must start with https://"
 msgstr "La URL de conversión debe comenzar con https://"
 
@@ -577,7 +577,7 @@ msgstr "La URL de conversión debe comenzar con https://"
 msgid "Conversion URL Pattern"
 msgstr "Patrón de URL de conversión"
 
-#: src/validation/CampaignSchema.tsx:126
+#: src/validation/CampaignSchema.tsx:125
 msgid "Conversion URL required."
 msgstr "Se requiere una URL de conversión."
 
@@ -699,7 +699,6 @@ msgid "CTR"
 msgstr "CTR"
 
 #: src/auth/views/LandingPage.tsx:65
-#: src/components/Button/ContainedDashboardButton.tsx:8
 #: src/components/Button/DashboardButton.tsx:14
 msgid "Dashboard"
 msgstr "Panel de control"
@@ -824,7 +823,7 @@ msgstr "Correo electrónico"
 msgid "Email address is required"
 msgstr "Se requiere una dirección de correo electrónico"
 
-#: src/user/campaignList/CampaignList.tsx:184
+#: src/user/campaignList/CampaignList.tsx:185
 msgid "End"
 msgstr "Finalización"
 
@@ -884,11 +883,11 @@ msgstr "Retroalimentación"
 msgid "File upload complete for \"{fileName}\""
 msgstr "Carga de archivo completa para “{fileName}”"
 
-#: src/user/ads/AdsExistingAd.tsx:101
+#: src/user/ads/AdsExistingAd.tsx:90
 msgid "Filter ads by name..."
 msgstr "Filtrar anuncios por nombre…"
 
-#: src/user/views/user/search/SetupProgress.tsx:50
+#: src/user/views/user/search/SetupProgress.tsx:49
 msgid "Finalize & submit"
 msgstr ""
 
@@ -1041,7 +1040,7 @@ msgstr "Imágenes"
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:30
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:154
 #: src/user/analytics/search/metrics.ts:38
-#: src/user/campaignList/CampaignList.tsx:118
+#: src/user/campaignList/CampaignList.tsx:119
 #: src/user/views/user/AdDetailTable.tsx:47
 msgid "Impressions"
 msgstr "Impresiones"
@@ -1158,8 +1157,8 @@ msgid "Limited time only. Available to new advertisers, and those who ran campai
 msgstr "Solo por tiempo limitado. Disponible para nuevos anunciantes y aquellos que realizaron campañas antes del 30 de septiembre de 2023."
 
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/LocationField.tsx:8
-msgid "Location"
-msgstr "Ubicación"
+#~ msgid "Location"
+#~ msgstr "Ubicación"
 
 #: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:67
 msgid "Locations"
@@ -1263,8 +1262,8 @@ msgstr "Las nuevas campañas suelen tardar hasta 48 horas en revisarse durante u
 msgid "New Keypair"
 msgstr "Nuevo par de claves"
 
-#: src/user/campaignList/CampaignList.tsx:262
-#: src/user/library/index.ts:248
+#: src/user/campaignList/CampaignList.tsx:263
+#: src/user/library/index.ts:255
 #: src/util/campaign.ts:7
 msgid "New tab takeover"
 msgstr "Dominio de nueva pestaña"
@@ -1273,7 +1272,7 @@ msgstr "Dominio de nueva pestaña"
 msgid "New tab takeovers"
 msgstr "Dominio de nuevas pestañas"
 
-#: src/user/library/index.ts:249
+#: src/user/library/index.ts:256
 #: src/util/campaign.ts:8
 msgid "Newsfeed"
 msgstr "Fuente de noticias"
@@ -1296,7 +1295,7 @@ msgstr "Siguiente"
 msgid "No"
 msgstr "No"
 
-#: src/validation/CampaignSchema.tsx:180
+#: src/validation/CampaignSchema.tsx:179
 msgid "No {billingType} pricing available for {label}, contact selfserve@brave.com for help"
 msgstr "No hay precios de {billingType} disponibles para {label}, contacte a selfserve@brave.com para obtener ayuda"
 
@@ -1308,7 +1307,7 @@ msgstr "No hay configuración de URL de conversión"
 msgid "No file result"
 msgstr "No hay resultado del archivo"
 
-#: src/user/ads/AdsExistingAd.tsx:78
+#: src/user/ads/AdsExistingAd.tsx:67
 msgid "No previous ads available"
 msgstr "No hay anuncios anteriores disponibles"
 
@@ -1325,7 +1324,7 @@ msgstr "¿No se redirige automáticamente? Haga clic en este enlace para ir al p
 msgid "Notes"
 msgstr ""
 
-#: src/user/library/index.ts:247
+#: src/user/library/index.ts:254
 #: src/util/campaign.ts:6
 msgid "Notification"
 msgstr "Notificación"
@@ -1344,11 +1343,11 @@ msgstr "Anuncios de notificación"
 msgid "Observation Window"
 msgstr "Ventana de observación"
 
-#: src/validation/CampaignSchema.tsx:146
+#: src/validation/CampaignSchema.tsx:145
 msgid "Observation window must be 1, 7, or 30 days."
 msgstr "La ventana de observación debe ser de 1, 7 o 30 días."
 
-#: src/validation/CampaignSchema.tsx:148
+#: src/validation/CampaignSchema.tsx:147
 msgid "Observation window required."
 msgstr "Se requiere ventana de observación."
 
@@ -1361,7 +1360,7 @@ msgid "On a podcast I listen to"
 msgstr "En un podcast que escucho"
 
 #: src/user/adSet/AdSetList.tsx:83
-#: src/user/campaignList/CampaignList.tsx:196
+#: src/user/campaignList/CampaignList.tsx:197
 msgid "On/Off"
 msgstr "Encendido/Apagado"
 
@@ -1373,8 +1372,12 @@ msgstr "Una vez confirmado, el par de claves de su organización se reemplazará
 #~ msgstr "Una vez que se complete el proceso de revisión, le enviaremos un correo electrónico para notificarle el estado de aprobación y los pasos adicionales necesarios."
 
 #: src/auth/registration/AccountChoice.tsx:79
-msgid "or <0>contact us</0> for premium ad placements"
-msgstr "o <0>contáctenos</0> para ubicaciones de anuncios premium"
+msgid "or <0>contact us</0> for New Tab Takeover campaigns"
+msgstr ""
+
+#: src/auth/registration/AccountChoice.tsx:79
+#~ msgid "or <0>contact us</0> for premium ad placements"
+#~ msgstr "o <0>contáctenos</0> para ubicaciones de anuncios premium"
 
 #~ msgid "Or email <0>searchads@brave.com</0>"
 #~ msgstr "O envíe un correo electrónico a <0>searchads@brave.com</0>"
@@ -1463,7 +1466,7 @@ msgstr "Por favor, introduzca una dirección de correo electrónico válida"
 msgid "Please enter a valid URL, for example https://brave.com"
 msgstr "Por favor, introduzca una URL válida, por ejemplo, https://brave.com"
 
-#: src/validation/CampaignSchema.tsx:137
+#: src/validation/CampaignSchema.tsx:136
 msgid "Please enter a valid URL, for example https://brave.com/product/*"
 msgstr "Por favor, introduzca una URL válida, por ejemplo, https://brave.com/product/*"
 
@@ -1563,7 +1566,7 @@ msgstr "Orientado a la privacidad"
 msgid "Private Key"
 msgstr "Clave privada"
 
-#: src/user/views/user/search/SetupProgress.tsx:44
+#: src/user/views/user/search/SetupProgress.tsx:43
 msgid "Proceed"
 msgstr ""
 
@@ -1626,7 +1629,7 @@ msgstr "Volver al panel de control"
 msgid "Review"
 msgstr "Revisar"
 
-#: src/user/views/user/search/SetupProgress.tsx:40
+#: src/user/views/user/search/SetupProgress.tsx:39
 msgid "Review ads"
 msgstr ""
 
@@ -1657,12 +1660,12 @@ msgstr "Guardando…"
 msgid "Search ads"
 msgstr "Anuncios de búsqueda"
 
-#: src/user/library/index.ts:251
+#: src/user/library/index.ts:258
 #: src/util/campaign.ts:10
 msgid "Search homepage"
 msgstr "Buscar página de inicio"
 
-#: src/user/library/index.ts:250
+#: src/user/library/index.ts:257
 #: src/util/campaign.ts:9
 msgid "Search keyword"
 msgstr "Buscar palabra clave"
@@ -1684,7 +1687,7 @@ msgstr "Seleccione una campaña para editar"
 msgid "Select Organization"
 msgstr "Seleccione organización"
 
-#: src/user/views/adsManager/views/advanced/components/adSet/fields/AdSetAds.tsx:31
+#: src/user/views/adsManager/views/advanced/components/adSet/fields/AdSetAds.tsx:32
 msgid "Select the ads you would like to include in this ad set. Only checked ads are included."
 msgstr "Seleccione los anuncios que desea incluir en este conjunto de anuncios. Solo se incluyen los anuncios marcados."
 
@@ -1693,7 +1696,6 @@ msgid "Select the audience segments to target"
 msgstr "Seleccione los segmentos de audiencia a los que desea dirigirse"
 
 #: src/components/Location/LocationPicker.tsx:51
-#: src/user/views/adsManager/views/advanced/components/campaign/fields/LocationField.tsx:10
 msgid "Select the geographic regions where your ads will be shown."
 msgstr "Seleccione las regiones geográficas en las que se mostrarán sus anuncios."
 
@@ -1712,7 +1714,7 @@ msgstr ""
 #~ msgid "Self-service"
 #~ msgstr "Autoservicio"
 
-#: src/user/views/user/search/SetupProgress.tsx:29
+#: src/user/views/user/search/SetupProgress.tsx:28
 msgid "Setup Progress"
 msgstr ""
 
@@ -1735,7 +1737,7 @@ msgstr "Tasa de visitas al sitio"
 #: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:49
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:45
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:162
-#: src/user/campaignList/CampaignList.tsx:145
+#: src/user/campaignList/CampaignList.tsx:146
 msgid "Site visits"
 msgstr "Visitas al sitio"
 
@@ -1756,16 +1758,16 @@ msgstr "Algo salió mal. "
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:168
 #: src/user/analytics/analyticsOverview/reports/os/components/OsPieChart.tsx:40
 #: src/user/analytics/search/metrics.ts:63
-#: src/user/campaignList/CampaignList.tsx:105
+#: src/user/campaignList/CampaignList.tsx:106
 #: src/user/views/user/AdDetailTable.tsx:30
 msgid "Spend"
 msgstr "Gastar"
 
-#: src/components/Creatives/SearchPreview.tsx:226
+#: src/components/Creatives/SearchPreview.tsx:247
 msgid "Sponsored"
 msgstr ""
 
-#: src/user/campaignList/CampaignList.tsx:175
+#: src/user/campaignList/CampaignList.tsx:176
 msgid "Start"
 msgstr "Empezar"
 
@@ -1800,7 +1802,7 @@ msgstr "Estado"
 #: src/components/Creatives/CreativeCampaigns.tsx:48
 #: src/user/adSet/AdSetList.tsx:98
 #: src/user/analytics/search/AdSetBreakdown.tsx:73
-#: src/user/campaignList/CampaignList.tsx:85
+#: src/user/campaignList/CampaignList.tsx:86
 msgid "Status"
 msgstr "Estado"
 
@@ -1814,7 +1816,7 @@ msgstr "Se requiere la dirección de la calle"
 
 #: src/auth/registration/BrowserRegister.tsx:37
 #: src/auth/registration/SearchRegister.tsx:41
-#: src/user/views/user/search/SetupProgress.tsx:57
+#: src/user/views/user/search/SetupProgress.tsx:56
 msgid "Submit"
 msgstr "Enviar"
 
