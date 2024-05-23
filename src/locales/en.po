@@ -179,7 +179,7 @@ msgstr "Additional Details"
 msgid "Additional Report: OS Performance"
 msgstr "Additional Report: OS Performance"
 
-#: src/components/AppBar/LandingPageAppBar.tsx:85
+#: src/components/AppBar/LandingPageAppBar.tsx:90
 #: src/components/Assets/AdvertiserAssets.tsx:33
 #: src/components/Creatives/CreativeList.tsx:102
 #: src/components/Creatives/CreativeSpecificPreview.tsx:54
@@ -239,8 +239,8 @@ msgid "Are you sure you want to pause"
 msgstr "Are you sure you want to pause"
 
 #: src/search/SearchTalkingPoints.tsx:12
-#~ msgid "As effective as Google"
-#~ msgstr "As effective as Google"
+msgid "As effective as Google"
+msgstr "As effective as Google"
 
 #: src/auth/registration/MarketingChannel.tsx:24
 msgid "At a marketing/media conference"
@@ -278,7 +278,7 @@ msgstr "Automatic interest targeting"
 msgid "Back"
 msgstr "Back"
 
-#: src/components/AppBar/LandingPageAppBar.tsx:56
+#: src/components/AppBar/LandingPageAppBar.tsx:52
 msgid "Basic Attention Token"
 msgstr "Basic Attention Token"
 
@@ -312,21 +312,25 @@ msgstr "Brave cannot recover this key, which has been generated in your browser.
 msgid "Brave is place where early adopters thrive. We’re celebrating our crypto roots by offering new and returning customers half off their first campaign when they check-out with BAT."
 msgstr "Brave is place where early adopters thrive. We’re celebrating our crypto roots by offering new and returning customers half off their first campaign when they check-out with BAT."
 
-#: src/components/AppBar/LandingPageAppBar.tsx:58
+#: src/components/AppBar/LandingPageAppBar.tsx:64
 #~ msgid "Brave Search"
 #~ msgstr "Brave Search"
 
+#: src/components/AppBar/LandingPageAppBar.tsx:64
+msgid "Brave Search Ads"
+msgstr "Brave Search Ads"
+
 #: src/search/SearchTalkingPoints.tsx:13
-#~ msgid "Brave Search Ads convert as well as, or better than Google Search ad clicks."
-#~ msgstr "Brave Search Ads convert as well as, or better than Google Search ad clicks."
+msgid "Brave Search Ads convert as well as, or better than Google Search ad clicks."
+msgstr "Brave Search Ads convert as well as, or better than Google Search ad clicks."
 
 #: src/auth/components/AdvertiserAgreed.tsx:17
 #~ msgid "Brave’s products are made to uphold user privacy. By default, the Brave browser blocks third-party tracking (scripts, tags, pixels, etc.) including those used by Google Analytics. This means that most standard website reporting won’t be compatible with Brave Ads. To ensure advertisers have visibility into performance of campaigns, we’ve detailed other effective privacy-first options for measurement in our <0>reporting guide</0>"
 #~ msgstr "Brave’s products are made to uphold user privacy. By default, the Brave browser blocks third-party tracking (scripts, tags, pixels, etc.) including those used by Google Analytics. This means that most standard website reporting won’t be compatible with Brave Ads. To ensure advertisers have visibility into performance of campaigns, we’ve detailed other effective privacy-first options for measurement in our <0>reporting guide</0>"
 
 #: src/auth/registration/AccountChoice.tsx:34
-msgid "Browser ads"
-msgstr "Browser ads"
+#~ msgid "Browser ads"
+#~ msgstr "Browser ads"
 
 #: src/auth/views/MobileAdsBenefits.tsx:23
 msgid "Browser-based delivery offers a new way to reach audiences on the Web."
@@ -449,8 +453,8 @@ msgid "Choose a format for the campaign you would like to run."
 msgstr "Choose a format for the campaign you would like to run."
 
 #: src/auth/registration/AccountChoice.tsx:48
-msgid "Choose campaign type"
-msgstr "Choose campaign type"
+#~ msgid "Choose campaign type"
+#~ msgstr "Choose campaign type"
 
 #: src/components/Assets/UploadImage.tsx:94
 msgid "Choose File"
@@ -750,6 +754,10 @@ msgstr "Define how you want your campaign to run."
 msgid "DELETED"
 msgstr "DELETED"
 
+#: src/search/SearchLandingPage.tsx:37
+msgid "Determine your eligibility for Brave Search, the world’s fastest-growing alternative search engine by clicking below and filling out the form."
+msgstr "Determine your eligibility for Brave Search, the world’s fastest-growing alternative search engine by clicking below and filling out the form."
+
 #: src/user/analytics/analyticsOverview/reports/os/components/OsPieChart.tsx:21
 msgid "Device"
 msgstr "Device"
@@ -997,8 +1005,8 @@ msgid "Get 50% your first campaign when you pay in Basic Attention Token"
 msgstr "Get 50% your first campaign when you pay in Basic Attention Token"
 
 #: src/search/SearchTalkingPoints.tsx:17
-#~ msgid "Get a free one-month test to see how Search Ads perform for your brand."
-#~ msgstr "Get a free one-month test to see how Search Ads perform for your brand."
+msgid "Get a free one-month test to see how Search Ads perform for your brand."
+msgstr "Get a free one-month test to see how Search Ads perform for your brand."
 
 #: src/auth/registration/BraveAdsContactFrame.tsx:23
 msgid "Get in touch with our team"
@@ -1009,7 +1017,7 @@ msgid "Get login link"
 msgstr "Get login link"
 
 #: src/auth/views/LandingPage.tsx:67
-#: src/components/AppBar/LandingPageAppBar.tsx:39
+#: src/components/AppBar/LandingPageAppBar.tsx:36
 msgid "Get started"
 msgstr "Get started"
 
@@ -1116,8 +1124,8 @@ msgid "Include campaigns that ended over 6 months ago"
 msgstr "Include campaigns that ended over 6 months ago"
 
 #: src/search/SearchTalkingPoints.tsx:8
-#~ msgid "Incremental"
-#~ msgstr "Incremental"
+msgid "Incremental"
+msgstr "Incremental"
 
 #: src/components/Assets/hooks/useUploadFile.ts:165
 msgid "Invalid format"
@@ -1168,8 +1176,8 @@ msgid "Learn more about BAT"
 msgstr "Learn more about BAT"
 
 #: src/auth/registration/AccountChoice.tsx:55
-msgid "Learn more about various campaign types"
-msgstr "Learn more about various campaign types"
+#~ msgid "Learn more about various campaign types"
+#~ msgstr "Learn more about various campaign types"
 
 #: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:34
 msgid "Let Brave pick categories for me."
@@ -1206,7 +1214,8 @@ msgstr "Locations"
 
 #: src/auth/views/LandingPage.tsx:81
 #: src/auth/views/Login.tsx:67
-#: src/components/AppBar/LandingPageAppBar.tsx:114
+#: src/components/AppBar/LandingPageAppBar.tsx:127
+#: src/components/AppBar/LandingPageAppBar.tsx:174
 msgid "Log in"
 msgstr "Log in"
 
@@ -1329,7 +1338,6 @@ msgstr "Newsfeed Ad"
 msgid "Newsfeed ads"
 msgstr "Newsfeed ads"
 
-#: src/auth/registration/AccountChoice.tsx:76
 #: src/components/Steps/NextAndBack.tsx:46
 msgid "Next"
 msgstr "Next"
@@ -1416,16 +1424,16 @@ msgstr "Once confirmed, your organization’s keypair will be replaced with the 
 #~ msgstr "Once the review process is complete, we will send you an email to notify you of the approval status and any further steps required."
 
 #: src/auth/registration/AccountChoice.tsx:79
-msgid "or <0>contact us</0> for New Tab Takeover campaigns"
-msgstr "or <0>contact us</0> for New Tab Takeover campaigns"
+#~ msgid "or <0>contact us</0> for New Tab Takeover campaigns"
+#~ msgstr "or <0>contact us</0> for New Tab Takeover campaigns"
 
 #: src/auth/registration/AccountChoice.tsx:79
 #~ msgid "or <0>contact us</0> for premium ad placements"
 #~ msgstr "or <0>contact us</0> for premium ad placements"
 
-#: src/search/SearchLandingPage.tsx:82
-#~ msgid "Or email <0>searchads@brave.com</0>"
-#~ msgstr "Or email <0>searchads@brave.com</0>"
+#: src/search/SearchLandingPage.tsx:72
+msgid "Or email <0>searchads@brave.com</0>"
+msgstr "Or email <0>searchads@brave.com</0>"
 
 #: src/auth/views/MagicLink.tsx:100
 msgid "or sign in using a password"
@@ -1650,12 +1658,12 @@ msgid "Reach and convert new customers through premium advertising on the Brave 
 msgstr "Reach and convert new customers through premium advertising on the Brave browser and search engine."
 
 #: src/search/SearchTalkingPoints.tsx:9
-#~ msgid "Reach audiences who don’t use other search engines and block ads on most sites."
-#~ msgstr "Reach audiences who don’t use other search engines and block ads on most sites."
+msgid "Reach audiences who don’t use other search engines and block ads on most sites."
+msgstr "Reach audiences who don’t use other search engines and block ads on most sites."
 
 #: src/components/AppBar/LandingPageAppBar.tsx:37
-msgid "Register for Self-service"
-msgstr "Register for Self-service"
+#~ msgid "Register for Self-service"
+#~ msgstr "Register for Self-service"
 
 #: src/user/views/adsManager/views/advanced/components/adSet/NewAdSet.tsx:67
 msgid "Remove"
@@ -1690,8 +1698,8 @@ msgid "Review ads"
 msgstr "Review ads"
 
 #: src/search/SearchTalkingPoints.tsx:16
-#~ msgid "Risk Free"
-#~ msgstr "Risk Free"
+msgid "Risk Free"
+msgstr "Risk Free"
 
 #: src/user/views/user/search/LandingPageDetail.tsx:149
 msgid "Sample Queries"
@@ -1714,8 +1722,8 @@ msgid "Saving..."
 msgstr "Saving..."
 
 #: src/auth/registration/AccountChoice.tsx:38
-msgid "Search ads"
-msgstr "Search ads"
+#~ msgid "Search ads"
+#~ msgstr "Search ads"
 
 #: src/validation/BrowserRegistrationSchema.tsx:42
 #~ msgid "Search domain must match email domain"
@@ -1734,6 +1742,10 @@ msgstr "Search keyword"
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:59
 msgid "Search keyword ads"
 msgstr "Search keyword ads"
+
+#: src/search/SearchLandingPage.tsx:69
+msgid "See if you qualify"
+msgstr "See if you qualify"
 
 #: src/components/Campaigns/CloneCampaign.tsx:98
 msgid "Select one campaign to clone"
@@ -1784,7 +1796,7 @@ msgstr "Setup Progress"
 msgid "Show"
 msgstr "Show"
 
-#: src/components/AppBar/LandingPageAppBar.tsx:114
+#: src/components/AppBar/LandingPageAppBar.tsx:127
 #: src/components/Navigation/Navbar.tsx:53
 msgid "Sign out"
 msgstr "Sign out"
@@ -1915,9 +1927,9 @@ msgstr "Support"
 msgid "Take our survey!"
 msgstr "Take our survey!"
 
-#: src/search/SearchLandingPage.tsx:34
-#~ msgid "Tap into over <0>9 billion</0> annual Web searches"
-#~ msgstr "Tap into over <0>9 billion</0> annual Web searches"
+#: src/search/SearchLandingPage.tsx:32
+msgid "Tap into over <0>9 billion</0> annual Web searches"
+msgstr "Tap into over <0>9 billion</0> annual Web searches"
 
 #: src/user/ads/InlineContentAd.tsx:84
 #: src/user/ads/NotificationAd.tsx:84
