@@ -33,6 +33,9 @@ export function Inquiries() {
       </Button>
       <Button
         component={Button}
+        onClick={() =>
+          window.open("https://ads-help.brave.com/", "_blank", "noopener")
+        }
         sx={{
           border: "1px solid rgba(255, 255, 255, 0.4)",
           padding: "24px",
@@ -59,7 +62,7 @@ export function Inquiries() {
         endIcon={<KeyboardArrowRightIcon sx={{ color: "white" }} />}
       >
         <Typography color="white">
-          <Trans>General Inquiries</Trans>
+          <Trans>General Ad Inquiries</Trans>
         </Typography>
       </Button>
     </Stack>
