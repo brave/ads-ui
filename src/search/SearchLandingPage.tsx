@@ -1,5 +1,4 @@
 import { Box, Button, Link, Stack, Toolbar, Typography } from "@mui/material";
-import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
 import { Background } from "@/components/Background/Background";
 import searchPreview from "@/assets/images/search-preview.png";
 import tswift from "@/assets/images/tswift.png";
@@ -7,10 +6,11 @@ import microwave from "@/assets/images/microwave.png";
 import curtains from "@/assets/images/curtains.png";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { useEffect, useState } from "react";
-import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { Trans } from "@lingui/macro";
+import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { SearchTalkingPoints } from "@/search/SearchTalkingPoints";
 import { Link as RouterLink } from "react-router-dom";
+import {LandingPageAppBar} from "@/components/AppBar/LandingPageAppBar";
 
 export function SearchLandingPage() {
   useTrackMatomoPageView({ documentTitle: "Search Landing Page" });

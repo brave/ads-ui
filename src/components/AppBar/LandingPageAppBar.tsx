@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import ads from "@/assets/images/logo.svg";
+import adsWhite from "@/assets/images/logo-white.svg";
 import { Link as RouterLink, useRouteMatch } from "react-router-dom";
 import { useIsAuthenticated } from "@/auth/hooks/queries/useIsAuthenticated";
 import { useSignOut } from "@/auth/hooks/mutations/useSignOut";
@@ -26,14 +27,15 @@ export function LandingPageAppBar() {
   const { _ } = useLingui();
   const isAuthenticated = useIsAuthenticated();
   const isMobile = useIsMobile();
+  const isHome = match.url === "/";
 
   const GetStarted = () => (
-    <RouterLink to="/register" style={{ textDecoration: "none" }}>
+    <RouterLink to={"/register/browser"} style={{ textDecoration: "none" }}>
       <Typography
         variant={isMobile ? "body2" : "subtitle1"}
-        color="text.primary"
+        color={"secondary"}
       >
-        <Trans>Get started</Trans>
+        <Trans>Sign up</Trans>
       </Typography>
     </RouterLink>
   );
@@ -73,7 +75,7 @@ export function LandingPageAppBar() {
       <AppBar
         position="fixed"
         sx={{
-          bgcolor: "rgba(252, 252, 253, 0.65)",
+          bgcolor: "rgba(252, 252, 253, 0)",
           boxShadow: "none",
           height: { md: "74px" },
           justifyContent: "center",
@@ -87,7 +89,12 @@ export function LandingPageAppBar() {
             justifyContent="space-between"
           >
             <RouterLink to="/" style={{ marginTop: 5 }}>
-              <img src={ads} alt={_(msg`Ads`)} height="31px" width="160px" />
+              <img
+                src={isHome ? adsWhite : ads}
+                alt={_(msg`Ads`)}
+                height="31px"
+                width="180px"
+              />
             </RouterLink>
 
             <Divider orientation="vertical" flexItem />
@@ -101,7 +108,7 @@ export function LandingPageAppBar() {
             )}
           </Stack>
           <div style={{ flexGrow: 1 }} />
-          {!isMobile && !match.url.includes("auth") && (
+          {!match.url.includes("auth") && (
             <AuthedButton isAuthenticated={isAuthenticated} />
           )}
           {isMobile && (
@@ -118,7 +125,7 @@ function AuthedButton(props: { isAuthenticated?: boolean }) {
 
   return (
     <Button
-      variant="outlined"
+      variant="contained"
       size="large"
       component={RouterLink}
       to={!props.isAuthenticated ? "/auth/link" : "/"}

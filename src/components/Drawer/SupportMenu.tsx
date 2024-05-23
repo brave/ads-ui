@@ -42,7 +42,7 @@ export function SupportMenu({ usePlainLink }: SupportProps) {
         <Link
           variant={isMobile ? "body2" : "subtitle1"}
           underline="none"
-          color="text.primary"
+          color="secondary"
           sx={{ cursor: "pointer" }}
           onClick={handleClick}
         >
