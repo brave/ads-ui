@@ -19,6 +19,7 @@ import { LandingPage } from "@/auth/views/LandingPage";
 import { BraveAdsContactFrame } from "@/auth/registration/BraveAdsContactFrame";
 import { useMatomo } from "@jonkoops/matomo-tracker-react";
 import { BasicAttentionTokenLandingPage } from "@/basic-attention-token/BasicAttentionTokenLandingPage";
+import { SearchLandingPage } from "@/search/SearchLandingPage";
 
 export function App() {
   const { enableLinkTracking } = useMatomo();
@@ -45,7 +46,7 @@ export function App() {
             <Route path="/register" component={Register} />
             <Route path="/contact" component={BraveAdsContactFrame} />
             <Route path="/bat" component={BasicAttentionTokenLandingPage} />
-            <Redirect path="/search" exact to="/contact" />
+            <Route path="/search" component={SearchLandingPage} />
             <Route path="/user/main" component={User} />
             <Route path="/" exact={true} component={LandingPage} />
             <Redirect to="/user/main" />

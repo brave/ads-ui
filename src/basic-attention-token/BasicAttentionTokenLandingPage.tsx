@@ -77,7 +77,7 @@ function LaunchCampaignButton() {
         color="primary"
         size="medium"
         component={RouterLink}
-        to="/register?pos=personal"
+        to="/register"
         onClick={() =>
           trackMatomoEvent("basic-attention-token", "launch-campaign")
         }
