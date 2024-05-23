@@ -177,7 +177,7 @@ msgstr "Detalles adicionales"
 
 #: src/user/views/user/reports/OriginalCampaignReportView.tsx:92
 msgid "Additional Report: OS Performance"
-msgstr "Informe adicional: Rendimiento del Sistema Operativo<<<<<<< HEAD"
+msgstr "Informe adicional: Rendimiento del Sistema Operativo"
 
 #: src/components/AppBar/LandingPageAppBar.tsx:94
 #: src/components/Assets/AdvertiserAssets.tsx:33
@@ -279,11 +279,11 @@ msgstr "Segmentación automática de intereses"
 #: src/components/Steps/NextAndBack.tsx:33
 #: src/user/views/user/search/SetupProgress.tsx:53
 msgid "Back"
-msgstr "Atrás<<<<<<< HEAD"
+msgstr "Atrás"
 
 #: src/components/AppBar/LandingPageAppBar.tsx:54
 msgid "Basic Attention Token"
-msgstr "Basic Attention Token>>>>>>> e21fa43b (wip: change landing page layout)"
+msgstr "Basic Attention Token"
 
 #: src/user/views/adsManager/views/advanced/components/campaign/components/CustomPriceSelect.tsx:33
 msgid "Billing Type"
@@ -299,11 +299,9 @@ msgstr "Cuerpo"
 msgid "Body Preview"
 msgstr "Vista previa del cuerpo"
 
-#: src/search/SearchLandingPage.tsx:39
 #~ msgid "Book a 30-minute meeting with a Brave Search specialist to discuss a free test campaign and see how Brave Ads can perform for your business."
 #~ msgstr "Reserve una reunión de 30 minutos con un especialista de Brave Search para discutir sobre una campaña de prueba gratuita y ver cómo Brave Ads puede funcionar para su negocio."
 
-#: src/search/SearchLandingPage.tsx:78
 #~ msgid "Book a meeting"
 #~ msgstr "Reservar una reunión"
 
@@ -315,9 +313,9 @@ msgstr ""
 msgid "Brave cannot recover this key, which has been generated in your browser. You will need to confirm this private key on the next step before changes are saved."
 msgstr "Brave no puede recuperar esta clave, que se ha generado en su navegador. Deberá confirmar esta clave privada en el siguiente paso antes de guardar los cambios."
 
-#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:35
+#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:41
 #~ msgid "Brave is place where early adopters thrive. We’re celebrating our crypto roots by offering new and returning customers half off their first campaign when they check-out with BAT."
-#~ msgstr "Brave es el lugar donde prosperan los primeros usuarios. Estamos celebrando nuestras raíces criptográficas ofreciendo a los clientes nuevos y recurrentes la mitad de su primera campaña cuando realizan el pago con BAT.<<<<<<< HEAD"
+#~ msgstr "Brave es el lugar donde prosperan los primeros usuarios. Estamos celebrando nuestras raíces criptográficas ofreciendo a los clientes nuevos y recurrentes la mitad de su primera campaña cuando realizan el pago con BAT."
 
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:22
 msgid "Brave is place where early adopters thrive. We’re celebrating our crypto roots by offering new and returning customers half off their first campaign when they check-out with BAT<0>*</0>."
@@ -329,7 +327,7 @@ msgstr ""
 
 #: src/components/AppBar/LandingPageAppBar.tsx:66
 msgid "Brave Search Ads"
-msgstr "=======>>>>>>> e21fa43b (wip: change landing page layout)"
+msgstr ""
 
 #: src/search/SearchTalkingPoints.tsx:13
 msgid "Brave Search Ads convert as well as, or better than Google Search ad clicks."
@@ -724,7 +722,7 @@ msgstr "creado"
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:40
 #: src/user/analytics/search/metrics.ts:55
 msgid "CTR"
-msgstr "CTR<<<<<<< HEAD"
+msgstr "CTR"
 
 #: src/auth/views/GetStartedLandingPage.tsx:38
 #: src/components/Button/DashboardButton.tsx:14
@@ -1009,11 +1007,11 @@ msgstr "La generación de una nueva clave API dará como resultado la desactivac
 
 #: src/search/SearchTalkingPoints.tsx:17
 msgid "Get a free one-month test to see how Search Ads perform for your brand."
-msgstr "Obtenga una prueba gratuita de un mes para ver el rendimiento de Search Ads en su marca.<<<<<<< HEAD======="
+msgstr "Obtenga una prueba gratuita de un mes para ver el rendimiento de Search Ads en su marca."
 
 #: src/auth/views/components/WhyUseBraveAds.tsx:42
 msgid "Get discounts on your campaign when you pay with Basic Attention Token."
-msgstr ">>>>>>> e21fa43b (wip: change landing page layout)"
+msgstr ""
 
 #: src/auth/registration/BraveAdsContactFrame.tsx:23
 msgid "Get in touch with our team"
@@ -1023,13 +1021,14 @@ msgstr "Póngase en contacto con nuestro equipo"
 msgid "Get login link"
 msgstr "Obtener enlace de inicio de sesión"
 
-#: src/components/AppBar/LandingPageAppBar.tsx:39
+#: src/auth/views/LandingPage.tsx:67
+#: src/components/AppBar/LandingPageAppBar.tsx:36
 #~ msgid "Get started"
 #~ msgstr "Comenzar"
 
 #: src/auth/views/GetStartedLandingPage.tsx:20
 msgid "Get to your first million users with powerful ad placements on the world’s fastest-growing alternative browser & search engine."
-msgstr ">>>>>>> e21fa43b (wip: change landing page layout)"
+msgstr ""
 
 #: src/components/Drawer/SupportMenu.tsx:59
 msgid "Help Center"
@@ -1209,7 +1208,7 @@ msgstr "El presupuesto vitalicio debe ser de ${MIN_PER_CAMPAIGN} o más"
 msgid "Lifetime budget must be higher for date range provided. Minimum ${min}."
 msgstr "El presupuesto vitalicio debe ser mayor para el intervalo de fechas proporcionado. Mínimo ${min}."
 
-#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:42
+#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:48
 #~ msgid "Limited time only. Available to new advertisers, and those who ran campaigns before September 30, 2023."
 #~ msgstr "Solo por tiempo limitado. Disponible para nuevos anunciantes y aquellos que realizaron campañas antes del 30 de septiembre de 2023."
 
@@ -1430,7 +1429,7 @@ msgstr "Una vez confirmado, el par de claves de su organización se reemplazará
 
 #: src/auth/registration/AccountChoice.tsx:79
 #~ msgid "or <0>contact us</0> for New Tab Takeover campaigns"
-#~ msgstr "<<<<<<< HEAD"
+#~ msgstr ""
 
 #: src/auth/registration/AccountChoice.tsx:79
 #~ msgid "or <0>contact us</0> for premium ad placements"
@@ -1473,7 +1472,7 @@ msgstr "Contraseña"
 msgid "Pause"
 msgstr "Pausar"
 
-#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:30
+#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:36
 #~ msgid "Pay with BAT to get <0>50% off</0> your first campaign"
 #~ msgstr "Pague con BAT para obtener <0>50% de descuento</0> en su primera campaña"
 
@@ -1654,11 +1653,11 @@ msgstr ""
 
 #: src/auth/views/components/WhyUseBraveAds.tsx:30
 msgid "Reach 70+ million highly engaged, otherwise unreachable users."
-msgstr "<<<<<<< HEAD======="
+msgstr ""
 
 #: src/auth/views/LandingPage.tsx:37
 #~ msgid "Reach and convert new customers through premium advertising on the Brave browser and search engine."
-#~ msgstr "Alcance y convierta nuevos clientes mediante publicidad premium en el navegador Brave y el motor de búsqueda.>>>>>>> e21fa43b (wip: change landing page layout)"
+#~ msgstr "Alcance y convierta nuevos clientes mediante publicidad premium en el navegador Brave y el motor de búsqueda."
 
 #: src/search/SearchTalkingPoints.tsx:9
 msgid "Reach audiences who don’t use other search engines and block ads on most sites."
@@ -1788,7 +1787,7 @@ msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/MetricFilter.tsx:64
 msgid "Show"
-msgstr "Mostrar<<<<<<< HEAD"
+msgstr "Mostrar"
 
 #: src/components/AppBar/LandingPageAppBar.tsx:134
 #: src/components/Navigation/Navbar.tsx:53
@@ -1928,7 +1927,7 @@ msgstr "Soporte"
 
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:137
 msgid "Take our survey!"
-msgstr "¡Responda nuestra encuesta!<<<<<<< HEAD"
+msgstr "¡Responda nuestra encuesta!"
 
 #: src/search/SearchLandingPage.tsx:32
 msgid "Tap into over <0>9 billion</0> annual Web searches"
