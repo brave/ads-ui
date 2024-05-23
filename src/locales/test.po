@@ -297,7 +297,11 @@ msgid "Brave is place where early adopters thrive. We’re celebrating our crypt
 msgstr ""
 
 #: src/components/AppBar/LandingPageAppBar.tsx:64
-msgid "Brave Search"
+#~ msgid "Brave Search"
+#~ msgstr ""
+
+#: src/components/AppBar/LandingPageAppBar.tsx:64
+msgid "Brave Search Ads"
 msgstr ""
 
 #: src/search/SearchTalkingPoints.tsx:13
@@ -1155,7 +1159,7 @@ msgstr ""
 #: src/auth/views/LandingPage.tsx:81
 #: src/auth/views/Login.tsx:67
 #: src/components/AppBar/LandingPageAppBar.tsx:127
-#: src/components/AppBar/LandingPageAppBar.tsx:172
+#: src/components/AppBar/LandingPageAppBar.tsx:174
 msgid "Log in"
 msgstr ""
 
@@ -1355,7 +1359,7 @@ msgstr ""
 #~ msgid "or <0>contact us</0> for premium ad placements"
 #~ msgstr ""
 
-#: src/search/SearchLandingPage.tsx:70
+#: src/search/SearchLandingPage.tsx:72
 msgid "Or email <0>searchads@brave.com</0>"
 msgstr ""
 
@@ -1647,7 +1651,7 @@ msgstr ""
 msgid "Search keyword ads"
 msgstr ""
 
-#: src/search/SearchLandingPage.tsx:67
+#: src/search/SearchLandingPage.tsx:69
 msgid "See if you qualify"
 msgstr ""
 
