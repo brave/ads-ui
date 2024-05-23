@@ -17,7 +17,7 @@ export function SearchRegister() {
   const { register } = useRegister();
 
   return (
-    <RegistrationContainer>
+    <RegistrationContainer isSearch>
       <Formik
         initialValues={initialValues}
         onSubmit={async (v: RegistrationForm, { setSubmitting }) => {

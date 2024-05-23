@@ -3,6 +3,9 @@ import {
   Box,
   Button,
   Divider,
+  IconButton,
+  Menu,
+  MenuItem,
   Stack,
   Toolbar,
   Typography,
@@ -15,39 +18,32 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { SupportMenu } from "@/components/Drawer/SupportMenu";
+import MenuIcon from "@mui/icons-material/Menu";
+import { useState } from "react";
 
 export function LandingPageAppBar() {
   const match = useRouteMatch();
   const { _ } = useLingui();
   const isAuthenticated = useIsAuthenticated();
   const isMobile = useIsMobile();
-  const isContact = match.url.includes("contact");
-  const isBAT = match.url.includes("bat");
 
   const GetStarted = () => (
-    <RouterLink
-      to={`/register${isContact ? "?pos=personal" : ""}`}
-      style={{ textDecoration: "none" }}
-    >
+    <RouterLink to="/register" style={{ textDecoration: "none" }}>
       <Typography
         variant={isMobile ? "body2" : "subtitle1"}
-        color={isContact ? "primary" : "text.primary"}
+        color="text.primary"
       >
-        {isContact ? (
-          <Trans>Register for Self-service</Trans>
-        ) : (
-          <Trans>Get started</Trans>
-        )}
+        <Trans>Get started</Trans>
       </Typography>
     </RouterLink>
   );
 
   const links = [
     {
-      component: isMobile || isAuthenticated ? null : <GetStarted />,
+      component: isAuthenticated ? null : <GetStarted />,
     },
     {
-      component: !isBAT ? (
+      component: (
         <RouterLink to={`/bat`} style={{ textDecoration: "none" }}>
           <Typography
             variant={isMobile ? "body2" : "subtitle1"}
@@ -56,10 +52,19 @@ export function LandingPageAppBar() {
             <Trans>Basic Attention Token</Trans>
           </Typography>
         </RouterLink>
-      ) : undefined,
+      ),
     },
     {
-      component: <SupportMenu usePlainLink />,
+      component: (
+        <RouterLink to={`/search`} style={{ textDecoration: "none" }}>
+          <Typography
+            variant={isMobile ? "body2" : "subtitle1"}
+            color="text.primary"
+          >
+            <Trans>Brave Search Ads</Trans>
+          </Typography>
+        </RouterLink>
+      ),
     },
   ];
 
@@ -82,17 +87,25 @@ export function LandingPageAppBar() {
             justifyContent="space-between"
           >
             <RouterLink to="/" style={{ marginTop: 5 }}>
-              <img src={ads} alt={_(msg`Ads`)} height="31px" width="180px" />
+              <img src={ads} alt={_(msg`Ads`)} height="31px" width="160px" />
             </RouterLink>
 
             <Divider orientation="vertical" flexItem />
-            {links.map((l, i) => (
-              <div key={`menu_component_${i}`}>{l.component}</div>
-            ))}
+            {!isMobile && (
+              <>
+                {links.map((l, i) => (
+                  <div key={`menu_component_${i}`}>{l.component}</div>
+                ))}
+                <SupportMenu usePlainLink />
+              </>
+            )}
           </Stack>
           <div style={{ flexGrow: 1 }} />
           {!isMobile && !match.url.includes("auth") && (
             <AuthedButton isAuthenticated={isAuthenticated} />
+          )}
+          {isMobile && (
+            <MobileMenu links={links} isAuthenticated={isAuthenticated} />
           )}
         </Toolbar>
       </AppBar>
@@ -113,5 +126,61 @@ function AuthedButton(props: { isAuthenticated?: boolean }) {
     >
       {props.isAuthenticated ? <Trans>Sign out</Trans> : <Trans>Log in</Trans>}
     </Button>
+  );
+}
+
+function MobileMenu(props: { links: any[]; isAuthenticated?: boolean }) {
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+
+  return (
+    <Box
+      sx={{
+        flexGrow: 1,
+        display: "flex",
+        justifyContent: "flex-end",
+        width: "100%",
+        alignItems: "center",
+      }}
+    >
+      <div style={{ marginLeft: 15 }} />
+      <SupportMenu usePlainLink />
+      <div style={{ flexGrow: 1 }} />
+      <IconButton size="large" onClick={(e) => setAnchorElNav(e.currentTarget)}>
+        <MenuIcon />
+      </IconButton>
+      <Menu
+        id="menu-appbar"
+        anchorEl={anchorElNav}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+        open={Boolean(anchorElNav)}
+        onClose={() => setAnchorElNav(null)}
+        sx={{
+          display: { xs: "block", md: "none" },
+        }}
+      >
+        <MenuItem
+          component={RouterLink}
+          to={!props.isAuthenticated ? "/auth/link" : "/"}
+        >
+          <Typography variant={"body2"} color="text.primary">
+            <Trans>Log in</Trans>
+          </Typography>
+        </MenuItem>
+        <Divider />
+        {props.links.map((l, i) => (
+          <MenuItem key={`menu_item_${i}`} onClick={() => setAnchorElNav(null)}>
+            {l.component}
+          </MenuItem>
+        ))}
+      </Menu>
+    </Box>
   );
 }

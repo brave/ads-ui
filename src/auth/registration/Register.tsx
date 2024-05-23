@@ -1,8 +1,7 @@
 import { AdvertiserRegistered } from "@/auth/registration/AdvertiserRegistered";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import { BrowserRegister } from "@/auth/registration/BrowserRegister";
 import { SearchRegister } from "./SearchRegister";
-import { AccountChoice } from "./AccountChoice";
 
 export function Register() {
   return (
@@ -10,7 +9,7 @@ export function Register() {
       <Route path="/register/search" component={SearchRegister} />
       <Route path="/register/browser" component={BrowserRegister} />
       <Route path="/register/complete" component={AdvertiserRegistered} />
-      <Route exact={true} component={AccountChoice} />
+      <Redirect exact={true} from="" to="/register/browser" />
     </Switch>
   );
 }
