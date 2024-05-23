@@ -61,7 +61,7 @@ export function LandingPageAppBar() {
             variant={isMobile ? "body2" : "subtitle1"}
             color="text.primary"
           >
-            <Trans>Brave Search</Trans>
+            <Trans>Brave Search Ads</Trans>
           </Typography>
         </RouterLink>
       ),

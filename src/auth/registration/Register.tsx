@@ -9,7 +9,7 @@ export function Register() {
       <Route path="/register/search" component={SearchRegister} />
       <Route path="/register/browser" component={BrowserRegister} />
       <Route path="/register/complete" component={AdvertiserRegistered} />
-      <Redirect exact={true} from="" to="register/browser" />
+      <Redirect exact={true} from="" to="/register/browser" />
     </Switch>
   );
 }
