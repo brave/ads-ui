@@ -27,7 +27,7 @@ export function RegistrationContainer(
 
         {props.children}
 
-        <PrivacyPolicy />
+        <PrivacyPolicy isSearch={props.isSearch} />
       </PaddedCardContainer>
     </Background>
   );
