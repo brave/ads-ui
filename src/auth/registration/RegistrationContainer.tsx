@@ -9,7 +9,9 @@ import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
 import { Background } from "@/components/Background/Background";
 import { Toolbar } from "@mui/material";
 
-export function RegistrationContainer(props: PropsWithChildren) {
+export function RegistrationContainer(
+  props: PropsWithChildren & { isSearch?: boolean },
+) {
   const isMobile = useIsMobile();
 
   return (

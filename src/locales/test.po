@@ -17,7 +17,7 @@ msgstr ""
 msgid "{adFormatName} are not available for self-managed campaigns. Please contact sales to inquire."
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:188
+#: src/validation/CampaignSchema.tsx:187
 msgid "{billingType} price must be {price} or higher"
 msgstr ""
 
@@ -98,7 +98,7 @@ msgid "Ad format"
 msgstr ""
 
 #: src/components/Creatives/CreativeList.tsx:65
-#: src/user/campaignList/CampaignList.tsx:76
+#: src/user/campaignList/CampaignList.tsx:77
 msgid "Ad Format"
 msgstr ""
 
@@ -134,7 +134,7 @@ msgstr ""
 msgid "Ad Sets"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:159
+#: src/validation/CampaignSchema.tsx:158
 msgid "Ad sets must have at least one ad"
 msgstr ""
 
@@ -159,7 +159,7 @@ msgstr ""
 msgid "Ad type must be notification or news"
 msgstr ""
 
-#: src/user/ads/AdsExistingAd.tsx:87
+#: src/user/ads/AdsExistingAd.tsx:76
 msgid "Add an existing ad"
 msgstr ""
 
@@ -175,18 +175,18 @@ msgstr ""
 msgid "Additional Report: OS Performance"
 msgstr ""
 
-#: src/components/AppBar/LandingPageAppBar.tsx:85
+#: src/components/AppBar/LandingPageAppBar.tsx:90
 #: src/components/Assets/AdvertiserAssets.tsx:33
 #: src/components/Creatives/CreativeList.tsx:102
-#: src/components/Creatives/CreativeSpecificPreview.tsx:52
-#: src/components/Creatives/CreativeSpecificPreview.tsx:63
+#: src/components/Creatives/CreativeSpecificPreview.tsx:54
+#: src/components/Creatives/CreativeSpecificPreview.tsx:65
 #: src/components/Drawer/MiniSideBar.tsx:32
-#: src/user/views/adsManager/views/advanced/components/adSet/fields/AdSetAds.tsx:29
+#: src/user/views/adsManager/views/advanced/components/adSet/fields/AdSetAds.tsx:30
 #: src/user/views/user/CampaignDetails.tsx:41
 msgid "Ads"
 msgstr ""
 
-#: src/user/ads/AdsExistingAd.tsx:91
+#: src/user/ads/AdsExistingAd.tsx:80
 msgid "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously approved ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
 msgstr ""
 
@@ -194,7 +194,7 @@ msgstr ""
 msgid "Advertiser Name"
 msgstr ""
 
-#: src/user/views/user/search/SetupProgress.tsx:35
+#: src/user/views/user/search/SetupProgress.tsx:34
 msgid "Advertiser profile"
 msgstr ""
 
@@ -234,19 +234,23 @@ msgstr ""
 msgid "Are you sure you want to pause"
 msgstr ""
 
+#: src/search/SearchTalkingPoints.tsx:12
+msgid "As effective as Google"
+msgstr ""
+
 #: src/auth/registration/MarketingChannel.tsx:24
 msgid "At a marketing/media conference"
 msgstr ""
 
 #: src/validation/CampaignSchema.tsx:109
-msgid "At least one audience must be targeted"
-msgstr ""
+#~ msgid "At least one audience must be targeted"
+#~ msgstr ""
 
 #: src/validation/CampaignSchema.tsx:82
 msgid "At least one country must be targeted"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:118
+#: src/validation/CampaignSchema.tsx:117
 msgid "At least one platform must be targeted"
 msgstr ""
 
@@ -262,11 +266,11 @@ msgid "Automatic interest targeting"
 msgstr ""
 
 #: src/components/Steps/NextAndBack.tsx:33
-#: src/user/views/user/search/SetupProgress.tsx:54
+#: src/user/views/user/search/SetupProgress.tsx:53
 msgid "Back"
 msgstr ""
 
-#: src/components/AppBar/LandingPageAppBar.tsx:56
+#: src/components/AppBar/LandingPageAppBar.tsx:52
 msgid "Basic Attention Token"
 msgstr ""
 
@@ -292,16 +296,28 @@ msgstr ""
 msgid "Brave is place where early adopters thrive. We’re celebrating our crypto roots by offering new and returning customers half off their first campaign when they check-out with BAT."
 msgstr ""
 
-#: src/auth/registration/AccountChoice.tsx:34
-msgid "Browser ads"
+#: src/components/AppBar/LandingPageAppBar.tsx:64
+#~ msgid "Brave Search"
+#~ msgstr ""
+
+#: src/components/AppBar/LandingPageAppBar.tsx:64
+msgid "Brave Search Ads"
 msgstr ""
+
+#: src/search/SearchTalkingPoints.tsx:13
+msgid "Brave Search Ads convert as well as, or better than Google Search ad clicks."
+msgstr ""
+
+#: src/auth/registration/AccountChoice.tsx:34
+#~ msgid "Browser ads"
+#~ msgstr ""
 
 #: src/auth/views/MobileAdsBenefits.tsx:23
 msgid "Browser-based delivery offers a new way to reach audiences on the Web."
 msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:52
-#: src/user/campaignList/CampaignList.tsx:96
+#: src/user/campaignList/CampaignList.tsx:97
 msgid "Budget"
 msgstr ""
 
@@ -409,8 +425,8 @@ msgid "Choose a format for the campaign you would like to run."
 msgstr ""
 
 #: src/auth/registration/AccountChoice.tsx:48
-msgid "Choose campaign type"
-msgstr ""
+#~ msgid "Choose campaign type"
+#~ msgstr ""
 
 #: src/components/Assets/UploadImage.tsx:94
 msgid "Choose File"
@@ -457,7 +473,7 @@ msgstr ""
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:35
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:164
 #: src/user/analytics/search/metrics.ts:46
-#: src/user/campaignList/CampaignList.tsx:132
+#: src/user/campaignList/CampaignList.tsx:133
 #: src/user/views/user/AdDetailTable.tsx:59
 msgid "Clicks"
 msgstr ""
@@ -535,23 +551,23 @@ msgstr ""
 msgid "Conversion Type"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:152
+#: src/validation/CampaignSchema.tsx:151
 msgid "Conversion type must be Post Click or Post View"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:154
+#: src/validation/CampaignSchema.tsx:153
 msgid "Conversion type required."
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:141
+#: src/validation/CampaignSchema.tsx:140
 msgid "Conversion URL must end in trailing asterisk (*)"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:129
+#: src/validation/CampaignSchema.tsx:128
 msgid "Conversion URL must not contain any whitespace"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:133
+#: src/validation/CampaignSchema.tsx:132
 msgid "Conversion URL must start with https://"
 msgstr ""
 
@@ -559,7 +575,7 @@ msgstr ""
 msgid "Conversion URL Pattern"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:126
+#: src/validation/CampaignSchema.tsx:125
 msgid "Conversion URL required."
 msgstr ""
 
@@ -678,7 +694,6 @@ msgid "CTR"
 msgstr ""
 
 #: src/auth/views/LandingPage.tsx:65
-#: src/components/Button/ContainedDashboardButton.tsx:8
 #: src/components/Button/DashboardButton.tsx:14
 msgid "Dashboard"
 msgstr ""
@@ -701,6 +716,10 @@ msgstr ""
 
 #: src/user/ads/AdList.tsx:66
 msgid "DELETED"
+msgstr ""
+
+#: src/search/SearchLandingPage.tsx:37
+msgid "Determine your eligibility for Brave Search, the world’s fastest-growing alternative search engine by clicking below and filling out the form."
 msgstr ""
 
 #: src/user/analytics/analyticsOverview/reports/os/components/OsPieChart.tsx:21
@@ -803,7 +822,7 @@ msgstr ""
 msgid "Email address is required"
 msgstr ""
 
-#: src/user/campaignList/CampaignList.tsx:184
+#: src/user/campaignList/CampaignList.tsx:185
 msgid "End"
 msgstr ""
 
@@ -863,11 +882,11 @@ msgstr ""
 msgid "File upload complete for \"{fileName}\""
 msgstr ""
 
-#: src/user/ads/AdsExistingAd.tsx:101
+#: src/user/ads/AdsExistingAd.tsx:90
 msgid "Filter ads by name..."
 msgstr ""
 
-#: src/user/views/user/search/SetupProgress.tsx:50
+#: src/user/views/user/search/SetupProgress.tsx:49
 msgid "Finalize & submit"
 msgstr ""
 
@@ -941,6 +960,10 @@ msgstr ""
 msgid "Get 50% your first campaign when you pay in Basic Attention Token"
 msgstr ""
 
+#: src/search/SearchTalkingPoints.tsx:17
+msgid "Get a free one-month test to see how Search Ads perform for your brand."
+msgstr ""
+
 #: src/auth/registration/BraveAdsContactFrame.tsx:23
 msgid "Get in touch with our team"
 msgstr ""
@@ -950,7 +973,7 @@ msgid "Get login link"
 msgstr ""
 
 #: src/auth/views/LandingPage.tsx:67
-#: src/components/AppBar/LandingPageAppBar.tsx:39
+#: src/components/AppBar/LandingPageAppBar.tsx:36
 msgid "Get started"
 msgstr ""
 
@@ -1011,7 +1034,7 @@ msgstr ""
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:30
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:154
 #: src/user/analytics/search/metrics.ts:38
-#: src/user/campaignList/CampaignList.tsx:118
+#: src/user/campaignList/CampaignList.tsx:119
 #: src/user/views/user/AdDetailTable.tsx:47
 msgid "Impressions"
 msgstr ""
@@ -1042,6 +1065,10 @@ msgstr ""
 
 #: src/components/Campaigns/CampaignAgeFilter.tsx:34
 msgid "Include campaigns that ended over 6 months ago"
+msgstr ""
+
+#: src/search/SearchTalkingPoints.tsx:8
+msgid "Incremental"
 msgstr ""
 
 #: src/components/Assets/hooks/useUploadFile.ts:165
@@ -1093,8 +1120,8 @@ msgid "Learn more about BAT"
 msgstr ""
 
 #: src/auth/registration/AccountChoice.tsx:55
-msgid "Learn more about various campaign types"
-msgstr ""
+#~ msgid "Learn more about various campaign types"
+#~ msgstr ""
 
 #: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:34
 msgid "Let Brave pick categories for me."
@@ -1122,8 +1149,8 @@ msgid "Limited time only. Available to new advertisers, and those who ran campai
 msgstr ""
 
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/LocationField.tsx:8
-msgid "Location"
-msgstr ""
+#~ msgid "Location"
+#~ msgstr ""
 
 #: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:67
 msgid "Locations"
@@ -1131,7 +1158,8 @@ msgstr ""
 
 #: src/auth/views/LandingPage.tsx:81
 #: src/auth/views/Login.tsx:67
-#: src/components/AppBar/LandingPageAppBar.tsx:114
+#: src/components/AppBar/LandingPageAppBar.tsx:127
+#: src/components/AppBar/LandingPageAppBar.tsx:174
 msgid "Log in"
 msgstr ""
 
@@ -1218,8 +1246,8 @@ msgstr ""
 msgid "New Keypair"
 msgstr ""
 
-#: src/user/campaignList/CampaignList.tsx:262
-#: src/user/library/index.ts:248
+#: src/user/campaignList/CampaignList.tsx:263
+#: src/user/library/index.ts:255
 #: src/util/campaign.ts:7
 msgid "New tab takeover"
 msgstr ""
@@ -1228,7 +1256,7 @@ msgstr ""
 msgid "New tab takeovers"
 msgstr ""
 
-#: src/user/library/index.ts:249
+#: src/user/library/index.ts:256
 #: src/util/campaign.ts:8
 msgid "Newsfeed"
 msgstr ""
@@ -1242,7 +1270,6 @@ msgstr ""
 msgid "Newsfeed ads"
 msgstr ""
 
-#: src/auth/registration/AccountChoice.tsx:76
 #: src/components/Steps/NextAndBack.tsx:46
 msgid "Next"
 msgstr ""
@@ -1251,7 +1278,7 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:180
+#: src/validation/CampaignSchema.tsx:179
 msgid "No {billingType} pricing available for {label}, contact selfserve@brave.com for help"
 msgstr ""
 
@@ -1263,7 +1290,7 @@ msgstr ""
 msgid "No file result"
 msgstr ""
 
-#: src/user/ads/AdsExistingAd.tsx:78
+#: src/user/ads/AdsExistingAd.tsx:67
 msgid "No previous ads available"
 msgstr ""
 
@@ -1280,7 +1307,7 @@ msgstr ""
 msgid "Notes"
 msgstr ""
 
-#: src/user/library/index.ts:247
+#: src/user/library/index.ts:254
 #: src/util/campaign.ts:6
 msgid "Notification"
 msgstr ""
@@ -1299,11 +1326,11 @@ msgstr ""
 msgid "Observation Window"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:146
+#: src/validation/CampaignSchema.tsx:145
 msgid "Observation window must be 1, 7, or 30 days."
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:148
+#: src/validation/CampaignSchema.tsx:147
 msgid "Observation window required."
 msgstr ""
 
@@ -1316,7 +1343,7 @@ msgid "On a podcast I listen to"
 msgstr ""
 
 #: src/user/adSet/AdSetList.tsx:83
-#: src/user/campaignList/CampaignList.tsx:196
+#: src/user/campaignList/CampaignList.tsx:197
 msgid "On/Off"
 msgstr ""
 
@@ -1325,7 +1352,15 @@ msgid "Once confirmed, your organization’s keypair will be replaced with the n
 msgstr ""
 
 #: src/auth/registration/AccountChoice.tsx:79
-msgid "or <0>contact us</0> for premium ad placements"
+#~ msgid "or <0>contact us</0> for New Tab Takeover campaigns"
+#~ msgstr ""
+
+#: src/auth/registration/AccountChoice.tsx:79
+#~ msgid "or <0>contact us</0> for premium ad placements"
+#~ msgstr ""
+
+#: src/search/SearchLandingPage.tsx:72
+msgid "Or email <0>searchads@brave.com</0>"
 msgstr ""
 
 #: src/auth/views/MagicLink.tsx:100
@@ -1412,7 +1447,7 @@ msgstr ""
 msgid "Please enter a valid URL, for example https://brave.com"
 msgstr ""
 
-#: src/validation/CampaignSchema.tsx:137
+#: src/validation/CampaignSchema.tsx:136
 msgid "Please enter a valid URL, for example https://brave.com/product/*"
 msgstr ""
 
@@ -1506,7 +1541,7 @@ msgstr ""
 msgid "Private Key"
 msgstr ""
 
-#: src/user/views/user/search/SetupProgress.tsx:44
+#: src/user/views/user/search/SetupProgress.tsx:43
 msgid "Proceed"
 msgstr ""
 
@@ -1538,9 +1573,13 @@ msgstr ""
 msgid "Reach and convert new customers through premium advertising on the Brave browser and search engine."
 msgstr ""
 
-#: src/components/AppBar/LandingPageAppBar.tsx:37
-msgid "Register for Self-service"
+#: src/search/SearchTalkingPoints.tsx:9
+msgid "Reach audiences who don’t use other search engines and block ads on most sites."
 msgstr ""
+
+#: src/components/AppBar/LandingPageAppBar.tsx:37
+#~ msgid "Register for Self-service"
+#~ msgstr ""
 
 #: src/user/views/adsManager/views/advanced/components/adSet/NewAdSet.tsx:67
 msgid "Remove"
@@ -1566,8 +1605,12 @@ msgstr ""
 msgid "Review"
 msgstr ""
 
-#: src/user/views/user/search/SetupProgress.tsx:40
+#: src/user/views/user/search/SetupProgress.tsx:39
 msgid "Review ads"
+msgstr ""
+
+#: src/search/SearchTalkingPoints.tsx:16
+msgid "Risk Free"
 msgstr ""
 
 #: src/user/views/user/search/LandingPageDetail.tsx:149
@@ -1591,21 +1634,25 @@ msgid "Saving..."
 msgstr ""
 
 #: src/auth/registration/AccountChoice.tsx:38
-msgid "Search ads"
-msgstr ""
+#~ msgid "Search ads"
+#~ msgstr ""
 
-#: src/user/library/index.ts:251
+#: src/user/library/index.ts:258
 #: src/util/campaign.ts:10
 msgid "Search homepage"
 msgstr ""
 
-#: src/user/library/index.ts:250
+#: src/user/library/index.ts:257
 #: src/util/campaign.ts:9
 msgid "Search keyword"
 msgstr ""
 
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:59
 msgid "Search keyword ads"
+msgstr ""
+
+#: src/search/SearchLandingPage.tsx:69
+msgid "See if you qualify"
 msgstr ""
 
 #: src/components/Campaigns/CloneCampaign.tsx:98
@@ -1621,7 +1668,7 @@ msgstr ""
 msgid "Select Organization"
 msgstr ""
 
-#: src/user/views/adsManager/views/advanced/components/adSet/fields/AdSetAds.tsx:31
+#: src/user/views/adsManager/views/advanced/components/adSet/fields/AdSetAds.tsx:32
 msgid "Select the ads you would like to include in this ad set. Only checked ads are included."
 msgstr ""
 
@@ -1630,7 +1677,6 @@ msgid "Select the audience segments to target"
 msgstr ""
 
 #: src/components/Location/LocationPicker.tsx:51
-#: src/user/views/adsManager/views/advanced/components/campaign/fields/LocationField.tsx:10
 msgid "Select the geographic regions where your ads will be shown."
 msgstr ""
 
@@ -1646,7 +1692,7 @@ msgstr ""
 msgid "Selected ads"
 msgstr ""
 
-#: src/user/views/user/search/SetupProgress.tsx:29
+#: src/user/views/user/search/SetupProgress.tsx:28
 msgid "Setup Progress"
 msgstr ""
 
@@ -1654,7 +1700,7 @@ msgstr ""
 msgid "Show"
 msgstr ""
 
-#: src/components/AppBar/LandingPageAppBar.tsx:114
+#: src/components/AppBar/LandingPageAppBar.tsx:127
 #: src/components/Navigation/Navbar.tsx:53
 msgid "Sign out"
 msgstr ""
@@ -1669,7 +1715,7 @@ msgstr ""
 #: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:49
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:45
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:162
-#: src/user/campaignList/CampaignList.tsx:145
+#: src/user/campaignList/CampaignList.tsx:146
 msgid "Site visits"
 msgstr ""
 
@@ -1690,16 +1736,16 @@ msgstr ""
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:168
 #: src/user/analytics/analyticsOverview/reports/os/components/OsPieChart.tsx:40
 #: src/user/analytics/search/metrics.ts:63
-#: src/user/campaignList/CampaignList.tsx:105
+#: src/user/campaignList/CampaignList.tsx:106
 #: src/user/views/user/AdDetailTable.tsx:30
 msgid "Spend"
 msgstr ""
 
-#: src/components/Creatives/SearchPreview.tsx:226
+#: src/components/Creatives/SearchPreview.tsx:247
 msgid "Sponsored"
 msgstr ""
 
-#: src/user/campaignList/CampaignList.tsx:175
+#: src/user/campaignList/CampaignList.tsx:176
 msgid "Start"
 msgstr ""
 
@@ -1734,7 +1780,7 @@ msgstr ""
 #: src/components/Creatives/CreativeCampaigns.tsx:48
 #: src/user/adSet/AdSetList.tsx:98
 #: src/user/analytics/search/AdSetBreakdown.tsx:73
-#: src/user/campaignList/CampaignList.tsx:85
+#: src/user/campaignList/CampaignList.tsx:86
 msgid "Status"
 msgstr ""
 
@@ -1748,7 +1794,7 @@ msgstr ""
 
 #: src/auth/registration/BrowserRegister.tsx:37
 #: src/auth/registration/SearchRegister.tsx:41
-#: src/user/views/user/search/SetupProgress.tsx:57
+#: src/user/views/user/search/SetupProgress.tsx:56
 msgid "Submit"
 msgstr ""
 
@@ -1767,6 +1813,10 @@ msgstr ""
 
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:137
 msgid "Take our survey!"
+msgstr ""
+
+#: src/search/SearchLandingPage.tsx:32
+msgid "Tap into over <0>9 billion</0> annual Web searches"
 msgstr ""
 
 #: src/user/ads/InlineContentAd.tsx:84
