@@ -8,9 +8,10 @@ import { ItemBox } from "@/components/Drawer/components/ItemBox";
 
 interface SupportProps {
   usePlainLink?: boolean;
+  linkColor?: string;
 }
 
-export function SupportMenu({ usePlainLink }: SupportProps) {
+export function SupportMenu({ usePlainLink, linkColor }: SupportProps) {
   const { trackMatomoEvent } = useTrackMatomoEvent();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -42,7 +43,7 @@ export function SupportMenu({ usePlainLink }: SupportProps) {
         <Link
           variant={isMobile ? "body2" : "subtitle1"}
           underline="none"
-          color="secondary"
+          color={linkColor || "text.primary"}
           sx={{ cursor: "pointer" }}
           onClick={handleClick}
         >

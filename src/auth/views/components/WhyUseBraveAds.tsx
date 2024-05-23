@@ -3,6 +3,7 @@ import { Trans, useLingui } from "@lingui/react";
 import { PropsWithChildren } from "react";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/macro";
+import { Inquiries } from "@/auth/views/components/Inquiries";
 
 export function WhyUseBraveAds() {
   const { _ } = useLingui();
@@ -37,11 +38,7 @@ export function WhyUseBraveAds() {
         number={3}
       />
 
-      <NumberContainer
-        title={msg`Stay Innovative`}
-        body={msg`Get discounts on your campaign when you pay with Basic Attention Token.`}
-        number={4}
-      />
+      <Inquiries />
     </Stack>
   );
 }

@@ -18,7 +18,6 @@ import { Register } from "@/auth/registration/Register";
 import { LandingPage } from "@/auth/views/LandingPage";
 import { BraveAdsContactFrame } from "@/auth/registration/BraveAdsContactFrame";
 import { useMatomo } from "@jonkoops/matomo-tracker-react";
-import { BasicAttentionTokenLandingPage } from "@/basic-attention-token/BasicAttentionTokenLandingPage";
 import { SearchLandingPage } from "@/search/SearchLandingPage";
 
 export function App() {
@@ -45,7 +44,7 @@ export function App() {
             <Route path="/auth/verify" component={AuthVerify} />
             <Route path="/register" component={Register} />
             <Route path="/contact" component={BraveAdsContactFrame} />
-            <Route path="/bat" component={BasicAttentionTokenLandingPage} />
+            <Redirect path="/bat" exact={true} to="/" />
             <Route path="/search" component={SearchLandingPage} />
             <Route path="/user/main" component={User} />
             <Route path="/" exact={true} component={LandingPage} />

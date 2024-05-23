@@ -3,7 +3,7 @@ export function TopSwoop() {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 1430 140"
-      fill="#000"
+      fill="#FFF"
       style={{
         position: "relative",
         bottom: "-10px",

@@ -20,7 +20,7 @@ export function RegistrationContainer(
       <Toolbar />
       <PaddedCardContainer>
         <img src={logo} height={50} />
-        {!isMobile && <div style={{ width: 600 }} />}
+        {!isMobile && <div style={{ width: 400 }} />}
         <Typography variant="h5" mt={3} mb={2}>
           <Trans>Start your company profile</Trans>
         </Typography>

@@ -10,7 +10,7 @@ import { Trans } from "@lingui/macro";
 import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { SearchTalkingPoints } from "@/search/SearchTalkingPoints";
 import { Link as RouterLink } from "react-router-dom";
-import {LandingPageAppBar} from "@/components/AppBar/LandingPageAppBar";
+import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
 
 export function SearchLandingPage() {
   useTrackMatomoPageView({ documentTitle: "Search Landing Page" });
@@ -28,12 +28,12 @@ export function SearchLandingPage() {
             maxWidth={750}
             justifyContent="center"
           >
-            <Typography variant="h3">
+            <Typography variant="h3" color="white">
               <Trans>
                 Tap into over <strong>9 billion</strong> annual Web searches
               </Trans>
             </Typography>
-            <Typography variant="subtitle1" fontSize="18px">
+            <Typography variant="subtitle1" fontSize="18px" color="white">
               <Trans>
                 Determine your eligibility for Brave Search, the world’s
                 fastest-growing alternative search engine by clicking below and
@@ -68,11 +68,11 @@ function BookAMeetingButton() {
       >
         <Trans>See if you qualify</Trans>
       </Button>
-      <Typography>
+      <Typography color="white">
         <Trans>
           Or email{" "}
           <Link
-            color="primary"
+            color="secondary"
             variant="inherit"
             href="mailto:searchads@brave.com"
           >

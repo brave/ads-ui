@@ -11,7 +11,6 @@ import {
   Typography,
 } from "@mui/material";
 import ads from "@/assets/images/logo.svg";
-import adsWhite from "@/assets/images/logo-white.svg";
 import { Link as RouterLink, useRouteMatch } from "react-router-dom";
 import { useIsAuthenticated } from "@/auth/hooks/queries/useIsAuthenticated";
 import { useSignOut } from "@/auth/hooks/mutations/useSignOut";
@@ -27,14 +26,12 @@ export function LandingPageAppBar() {
   const { _ } = useLingui();
   const isAuthenticated = useIsAuthenticated();
   const isMobile = useIsMobile();
-  const isHome = match.url === "/";
+  const isContact = match.path === "/contact";
+  const textColor = isContact ? "text.primary" : "white";
 
   const GetStarted = () => (
     <RouterLink to={"/register/browser"} style={{ textDecoration: "none" }}>
-      <Typography
-        variant={isMobile ? "body2" : "subtitle1"}
-        color={"secondary"}
-      >
+      <Typography variant={isMobile ? "body2" : "subtitle1"} color={textColor}>
         <Trans>Sign up</Trans>
       </Typography>
     </RouterLink>
@@ -44,36 +41,12 @@ export function LandingPageAppBar() {
     {
       component: isAuthenticated ? null : <GetStarted />,
     },
-    {
-      component: (
-        <RouterLink to={`/bat`} style={{ textDecoration: "none" }}>
-          <Typography
-            variant={isMobile ? "body2" : "subtitle1"}
-            color="text.primary"
-          >
-            <Trans>Basic Attention Token</Trans>
-          </Typography>
-        </RouterLink>
-      ),
-    },
-    {
-      component: (
-        <RouterLink to={`/search`} style={{ textDecoration: "none" }}>
-          <Typography
-            variant={isMobile ? "body2" : "subtitle1"}
-            color="text.primary"
-          >
-            <Trans>Brave Search Ads</Trans>
-          </Typography>
-        </RouterLink>
-      ),
-    },
   ];
 
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar
-        position="fixed"
+        position="absolute"
         sx={{
           bgcolor: "rgba(252, 252, 253, 0)",
           boxShadow: "none",
@@ -89,30 +62,31 @@ export function LandingPageAppBar() {
             justifyContent="space-between"
           >
             <RouterLink to="/" style={{ marginTop: 5 }}>
-              <img
-                src={isHome ? adsWhite : ads}
-                alt={_(msg`Ads`)}
-                height="31px"
-                width="180px"
-              />
+              <img src={ads} alt={_(msg`Ads`)} height="31px" width="160px" />
             </RouterLink>
 
-            <Divider orientation="vertical" flexItem />
+            <Divider
+              orientation="vertical"
+              flexItem
+              sx={{ bgcolor: "white" }}
+            />
             {!isMobile && (
               <>
                 {links.map((l, i) => (
                   <div key={`menu_component_${i}`}>{l.component}</div>
                 ))}
-                <SupportMenu usePlainLink />
+                <SupportMenu usePlainLink linkColor={textColor} />
               </>
             )}
           </Stack>
           <div style={{ flexGrow: 1 }} />
-          {!match.url.includes("auth") && (
-            <AuthedButton isAuthenticated={isAuthenticated} />
-          )}
+          {!isMobile && <AuthedButton isAuthenticated={isAuthenticated} />}
           {isMobile && (
-            <MobileMenu links={links} isAuthenticated={isAuthenticated} />
+            <MobileMenu
+              links={links}
+              isAuthenticated={isAuthenticated}
+              linkColor={textColor}
+            />
           )}
         </Toolbar>
       </AppBar>
@@ -136,7 +110,11 @@ function AuthedButton(props: { isAuthenticated?: boolean }) {
   );
 }
 
-function MobileMenu(props: { links: any[]; isAuthenticated?: boolean }) {
+function MobileMenu(props: {
+  links: any[];
+  isAuthenticated?: boolean;
+  linkColor: string;
+}) {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
   return (
@@ -150,10 +128,10 @@ function MobileMenu(props: { links: any[]; isAuthenticated?: boolean }) {
       }}
     >
       <div style={{ marginLeft: 15 }} />
-      <SupportMenu usePlainLink />
+      <SupportMenu usePlainLink linkColor={props.linkColor} />
       <div style={{ flexGrow: 1 }} />
       <IconButton size="large" onClick={(e) => setAnchorElNav(e.currentTarget)}>
-        <MenuIcon />
+        <MenuIcon sx={{ color: "white" }} />
       </IconButton>
       <Menu
         id="menu-appbar"

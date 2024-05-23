@@ -41,7 +41,7 @@ export function GetStartedLandingPage() {
           <Typography variant="subtitle1">
             <Link
               variant="subtitle1"
-              color="secondary.light"
+              color="#fff"
               component={RouterLink}
               to="/auth/link"
               sx={{ ml: 1, fontSize: "18px" }}
