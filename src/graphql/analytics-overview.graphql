@@ -19,7 +19,6 @@ fragment Engagement on Engagement {
   landed
   spend
   upvote
-  downvote
   price
   android
   ios
@@ -34,7 +33,6 @@ fragment CampaignWithEngagements on Campaign {
   state
   budget
   spent
-  currency
   createdAt
   startAt
   endAt
@@ -54,7 +52,7 @@ fragment CampaignWithEngagements on Campaign {
   }
 }
 
-query analyticOverview($id: String!) {
+query AnalyticOverview($id: String!) {
   campaign(id: $id) {
     ...CampaignWithEngagements
   }
@@ -70,7 +68,7 @@ fragment CampaignMetricSummaryValues on Metrics {
   }
 }
 
-query campaignMetrics($campaignIds: [String!]!) {
+query CampaignMetrics($campaignIds: [String!]!) {
   performance(filter: { campaignIds: $campaignIds }) {
     values {
       dimensions {
@@ -108,7 +106,7 @@ fragment DailyValues on Performance {
   }
 }
 
-query fetchDailyMetricsForCampaign($filter: PerformanceFilter!) {
+query FetchDailyMetricsForCampaign($filter: PerformanceFilter!) {
   performance(filter: $filter) {
     values {
       ...DailyValues
@@ -135,7 +133,7 @@ fragment AdSetValues on Performance {
   }
 }
 
-query fetchAdSetMetricsForCampaign($filter: PerformanceFilter!) {
+query FetchAdSetMetricsForCampaign($filter: PerformanceFilter!) {
   performance(filter: $filter) {
     values {
       ...AdSetValues

@@ -1,5 +1,5 @@
 import { SearchPreview } from "@/components/Creatives/SearchPreview";
-import { SearchProspects_LandingPageListFragment } from "@/graphql-client/graphql";
+import { SearchProspectsLandingPageListFragment } from "@/graphql-client/graphql";
 import {
   Box,
   Checkbox,
@@ -13,7 +13,7 @@ import { LandingPageDetail } from "./LandingPageDetail";
 import { CountryDomain } from "./types";
 
 interface Props {
-  landingPage: SearchProspects_LandingPageListFragment;
+  landingPage: SearchProspectsLandingPageListFragment;
   selected: boolean;
   toggleSelection: DispatchWithoutAction;
 

@@ -29,8 +29,6 @@ fragment AdSet on AdSet {
 fragment Ad on Ad {
   id
   state
-  price
-  priceType
   creative {
     ...Creative
   }
@@ -58,13 +56,13 @@ fragment AdSetWithDeletedAds on AdSet {
   }
 }
 
-mutation createAdSet($createAdSetInput: CreateAdSetInput!) {
+mutation CreateAdSet($createAdSetInput: CreateAdSetInput!) {
   createAdSet(createAdSetInput: $createAdSetInput) {
     ...AdSet
   }
 }
 
-mutation updateAdSet($updateAdSetInput: UpdateAdSetInput!) {
+mutation UpdateAdSet($updateAdSetInput: UpdateAdSetInput!) {
   updateAdSet(updateAdSetInput: $updateAdSetInput) {
     ...AdSet
   }

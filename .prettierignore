@@ -4,6 +4,7 @@ src/locales/*.js
 
 # these files are code generated
 src/graphql-client/*.ts
+src/graphql/ads-serve.graphql.schema.json
 
 # npm and prettier fight over a EOF on these files, let npm win:
 package.json
