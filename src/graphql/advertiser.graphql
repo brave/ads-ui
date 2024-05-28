@@ -1,14 +1,3 @@
-fragment AdvertiserSummary on Advertiser {
-  id
-  name
-  state
-  billingEmail
-  additionalBillingEmails
-  createdAt
-  modifiedAt
-  publicKey
-}
-
 fragment AdvertiserBillingAddress on Advertiser {
   billingAddress {
     id
@@ -21,22 +10,14 @@ fragment AdvertiserBillingAddress on Advertiser {
   }
 }
 
-fragment Advertiser on Advertiser {
-  ...AdvertiserSummary
-  referrer
-  phone
-  selfServiceManageCampaign
-  selfServiceSetPrice
-}
-
-query advertiser($id: String!) {
+query Advertiser($id: String!) {
   advertiser(id: $id) {
     id
     publicKey
   }
 }
 
-mutation updateAdvertiser($updateAdvertiserInput: UpdateAdvertiserInput!) {
+mutation UpdateAdvertiser($updateAdvertiserInput: UpdateAdvertiserInput!) {
   updateAdvertiser(updateAdvertiserInput: $updateAdvertiserInput) {
     id
     publicKey
@@ -53,7 +34,7 @@ fragment AdvertiserCampaigns on Advertiser {
   }
 }
 
-query advertiserCampaigns($id: String!, $filter: AdvertiserCampaignFilter) {
+query AdvertiserCampaigns($id: String!, $filter: AdvertiserCampaignFilter) {
   advertiserCampaigns(id: $id, filter: $filter) {
     ...AdvertiserCampaigns
   }
@@ -73,31 +54,34 @@ fragment AdvertiserPrice on AdvertiserPrice {
   format
 }
 
-query advertiserImages($id: String!) {
+query AdvertiserImages($id: String!) {
   advertiser(id: $id) {
+    id
     images {
       ...AdvertiserImage
     }
   }
 }
 
-query advertiserPrices($id: String!) {
+query AdvertiserPrices($id: String!) {
   advertiser(id: $id) {
+    id
     prices {
       ...AdvertiserPrice
     }
   }
 }
 
-query advertiserBillingAddress($id: String!) {
+query AdvertiserBillingAddress($id: String!) {
   advertiser(id: $id) {
     id
     ...AdvertiserBillingAddress
   }
 }
 
-mutation uploadAdvertiserImage($input: CreateAdvertiserImageInput!) {
+mutation UploadAdvertiserImage($input: CreateAdvertiserImageInput!) {
   createAdvertiserImage(createImageInput: $input) {
+    id
     name
   }
 }

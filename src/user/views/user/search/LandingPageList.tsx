@@ -1,4 +1,4 @@
-import { SearchProspects_LandingPageListFragment } from "@/graphql-client/graphql";
+import { SearchProspectsLandingPageListFragment } from "@/graphql-client/graphql";
 import { LandingPageListEntry } from "./LandingPageListEntry";
 import { Basket } from "./basket";
 
@@ -10,7 +10,7 @@ import { CountryDomain } from "./types";
 interface Props {
   domain: CountryDomain;
   basket: Basket;
-  landingPages: SearchProspects_LandingPageListFragment[] | undefined;
+  landingPages: SearchProspectsLandingPageListFragment[] | undefined;
 }
 
 export function LandingPageList({ landingPages, basket, domain }: Props) {

@@ -20,7 +20,6 @@ fragment Campaign on Campaign {
   paymentType
   dayProportion
   stripePaymentId
-  paymentType
   hasPaymentIntent
   dayPartings {
     dow
@@ -52,14 +51,12 @@ fragment CampaignSummary on Campaign {
   currency
   budget
   paymentType
-  spent
   createdAt
   startAt
   endAt
   source
   type
   format
-  paymentType
   dayProportion
 }
 

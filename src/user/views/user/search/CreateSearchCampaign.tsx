@@ -14,8 +14,8 @@ import { SearchOptions, SearchOptionsSchema } from "./form";
 import { Form, Formik } from "formik";
 import { generateAndDownloadFile } from "./generate-file";
 
-const CreateSearchCampaign_LandingPageList = graphql(`
-  query CreateSearchCampaign_LandingPageList(
+const CreateSearchCampaignLandingPageList = graphql(`
+  query CreateSearchCampaignLandingPageList(
     $domain: String!
     $country: String!
     $offset: Float!
@@ -28,12 +28,12 @@ const CreateSearchCampaign_LandingPageList = graphql(`
         offset: $offset
         limit: $limit
       ) {
-        ...SearchProspects_LandingPageList
+        ...SearchProspectsLandingPageList
       }
     }
   }
 
-  fragment SearchProspects_LandingPageList on SearchLandingPageWithStats {
+  fragment SearchProspectsLandingPageList on SearchLandingPageWithStats {
     url
     rank
     lastSeen
@@ -55,7 +55,7 @@ export function CreateSearchCampaign({ domain }: Props) {
   const basket = useBasket();
   const [step, setStep] = useState(Steps.ADS);
 
-  const { data } = useQuery(CreateSearchCampaign_LandingPageList, {
+  const { data } = useQuery(CreateSearchCampaignLandingPageList, {
     variables: {
       country: domain.country,
       domain: domain.domain,

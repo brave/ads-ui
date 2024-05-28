@@ -35,11 +35,6 @@ fragment Creative on Creative {
     dimensions
     description
   }
-  payloadNotification {
-    body
-    title
-    targetUrl
-  }
   payloadSearch {
     body
     title
@@ -55,7 +50,7 @@ fragment Creative on Creative {
   }
 }
 
-query advertiserCreatives($advertiserId: String!) {
+query AdvertiserCreatives($advertiserId: String!) {
   advertiser(id: $advertiserId) {
     id
     creatives {
@@ -64,25 +59,25 @@ query advertiserCreatives($advertiserId: String!) {
   }
 }
 
-mutation createCreative($input: CreativeInput!) {
+mutation CreateCreative($input: CreativeInput!) {
   createCreative(creative: $input) {
     ...Creative
   }
 }
 
-mutation updateCreative($id: String!, $input: CreativeInput!) {
+mutation UpdateCreative($id: String!, $input: CreativeInput!) {
   updateCreative(id: $id, creative: $input) {
     ...Creative
   }
 }
 
-query loadCreative($id: String!) {
+query LoadCreative($id: String!) {
   creative(id: $id) {
     ...Creative
   }
 }
 
-query campaignsForCreative($creativeId: String!, $advertiserId: String!) {
+query CampaignsForCreative($creativeId: String!, $advertiserId: String!) {
   creativeCampaigns(creativeId: $creativeId, advertiserId: $advertiserId) {
     id
     name

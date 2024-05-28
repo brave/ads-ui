@@ -12,6 +12,9 @@ const config: CodegenConfig = {
         fragmentMasking: false,
       },
     },
+    "src/graphql/ads-serve.graphql.schema.json": {
+      plugins: ["introspection"],
+    },
   },
   config: {
     strictScalars: true,

@@ -56,7 +56,7 @@ function createAdSetFromFragment(
     ads: ads.map((ad) => ({
       creativeId: ad.creative.id,
     })),
-    price: ads[0].price ?? "6",
+    price: data.price ?? "6",
     billingType: data.billingType ?? "cpm",
     conversions: (data.conversions ?? []).map((c) => ({
       observationWindow: c.observationWindow,

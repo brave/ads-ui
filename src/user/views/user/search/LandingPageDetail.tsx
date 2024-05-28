@@ -1,4 +1,4 @@
-import { SearchProspects_LandingPageDetailFragment } from "@/graphql-client/graphql";
+import { SearchProspectsLandingPageDetailFragment } from "@/graphql-client/graphql";
 import SearchIcon from "@mui/icons-material/Search";
 import {
   Box,
@@ -17,19 +17,19 @@ import _ from "lodash";
 import { Trans } from "@lingui/macro";
 
 const SearchProspects_LandingPageDetail = graphql(`
-  query SearchProspects_LandingPageDetail(
+  query SearchProspectsLandingPageDetail(
     $domain: String!
     $country: String!
     $url: String!
   ) {
     searchProspects {
       landingPage(country: $country, domain: $domain, url: $url) {
-        ...SearchProspects_LandingPageDetail
+        ...SearchProspectsLandingPageDetail
       }
     }
   }
 
-  fragment SearchProspects_LandingPageDetail on SearchLandingPage {
+  fragment SearchProspectsLandingPageDetail on SearchLandingPage {
     url
     queries {
       query
@@ -40,7 +40,7 @@ const SearchProspects_LandingPageDetail = graphql(`
 function QueryList({
   queries,
 }: {
-  queries: SearchProspects_LandingPageDetailFragment["queries"];
+  queries: SearchProspectsLandingPageDetailFragment["queries"];
 }) {
   const [visibleQueryCount, setVisibleQueryCount] = useState(20);
 

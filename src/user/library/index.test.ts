@@ -11,7 +11,6 @@ import {
   CampaignPacingStrategies,
   CampaignSource,
   CampaignType,
-  ConfirmationType,
   CreativeFragment,
   PaymentType,
 } from "@/graphql-client/graphql";
@@ -96,8 +95,6 @@ const BASE_CPM_CAMPAIGN_FRAGMENT: Readonly<CampaignFragment> = {
         {
           id: "13e4d556-cec4-4b2a-85e6-73fdf625c0cb",
           state: "active",
-          price: "0.006",
-          priceType: ConfirmationType.View,
           creative: {
             id: "3ee776b6-dd70-4dc5-ba5d-6147c10f2d3d",
             createdAt: "2023-07-11T16:13:19.322Z",

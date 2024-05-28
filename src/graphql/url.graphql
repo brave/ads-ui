@@ -1,4 +1,4 @@
-query validateTargetUrl($url: String!) {
+query ValidateTargetUrl($url: String!) {
   validateTargetUrl(targetUrl: $url) {
     isValid
     redirects {
