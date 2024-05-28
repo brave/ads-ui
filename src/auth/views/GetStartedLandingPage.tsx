@@ -12,7 +12,7 @@ export function GetStartedLandingPage() {
     <Stack maxWidth="700px" spacing={3}>
       <Typography variant="h1" textAlign="left" color="white">
         <Trans>
-          Simple ads to reach digital trend-setters around the world.
+          Simple ads to reach digital trend-setters around the world
         </Trans>
       </Typography>
 
@@ -35,7 +35,11 @@ export function GetStartedLandingPage() {
           }}
           to={isAuthenticated ? "/user/main" : "/register/browser"}
         >
-          {isAuthenticated ? <Trans>Dashboard</Trans> : <Trans>Sign up</Trans>}
+          {isAuthenticated ? (
+            <Trans>Dashboard</Trans>
+          ) : (
+            <Trans>Get started</Trans>
+          )}
         </Button>
         {!isMobile && !isAuthenticated && (
           <Typography variant="subtitle1">

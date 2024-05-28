@@ -18,9 +18,7 @@ export function Background({ children }: PropsWithChildren) {
         animationTimeline: "auto",
         animationRangeStart: "normal",
         animationRangeEnd: "normal",
-        background:
-          "linear-gradient(-45deg, rgb(42, 31, 173) 0%, rgb(169, 27, 120) 100%) 0% 0% / 150% 150%",
-        animation: "5s ease 0s infinite normal none running Gradient",
+        background: "#000",
       }}
     >
       {children}

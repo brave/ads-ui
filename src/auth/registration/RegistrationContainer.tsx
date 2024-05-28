@@ -7,7 +7,7 @@ import { PrivacyPolicy } from "@/basic-attention-token/PrivacyPolicy";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
 import { Background } from "@/components/Background/Background";
-import { Toolbar } from "@mui/material";
+import { Box, Toolbar } from "@mui/material";
 
 export function RegistrationContainer(
   props: PropsWithChildren & { isSearch?: boolean },
@@ -18,17 +18,19 @@ export function RegistrationContainer(
     <Background>
       <LandingPageAppBar />
       <Toolbar />
-      <PaddedCardContainer>
-        <img src={logo} height={50} />
-        {!isMobile && <div style={{ width: 400 }} />}
-        <Typography variant="h5" mt={3} mb={2}>
-          <Trans>Start your company profile</Trans>
-        </Typography>
+      <Box p={1}>
+        <PaddedCardContainer>
+          <img src={logo} height={50} />
+          {!isMobile && <div style={{ width: 400 }} />}
+          <Typography variant="h5" mt={3} mb={2}>
+            <Trans>Start your company profile</Trans>
+          </Typography>
 
-        {props.children}
+          {props.children}
 
-        <PrivacyPolicy isSearch={props.isSearch} />
-      </PaddedCardContainer>
+          <PrivacyPolicy isSearch={props.isSearch} />
+        </PaddedCardContainer>
+      </Box>
     </Background>
   );
 }

@@ -3,7 +3,6 @@ import { Trans, useLingui } from "@lingui/react";
 import { PropsWithChildren } from "react";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/macro";
-import { Inquiries } from "@/auth/views/components/Inquiries";
 
 export function WhyUseBraveAds() {
   const { _ } = useLingui();
@@ -14,7 +13,6 @@ export function WhyUseBraveAds() {
         variant="h4"
         textAlign="center"
         fontWeight={600}
-        color="white"
         justifySelf="center"
       >
         {_(msg`Why use Brave Ads?`)}
@@ -37,8 +35,6 @@ export function WhyUseBraveAds() {
         body={msg`For businesses of all sizes. Create your campaign in minutes, starting with as little as $500 per month.`}
         number={3}
       />
-
-      <Inquiries />
     </Stack>
   );
 }
@@ -58,14 +54,12 @@ const NumberContainer = (
       spacing={2}
       alignSelf={props.number % 2 === 0 ? "flex-end" : "flex-start"}
     >
-      <Typography variant="h1" color="white">
-        {props.number}
-      </Typography>
+      <Typography variant="h1">{props.number}</Typography>
       <Stack spacing={1}>
-        <Typography variant="h4" color="white" fontWeight={500}>
+        <Typography variant="h4" fontWeight={500}>
           <Trans id={props.title.id} />
         </Typography>
-        <Typography variant="subtitle1" color="white">
+        <Typography variant="subtitle1">
           <Trans id={props.body.id} />
         </Typography>
       </Stack>

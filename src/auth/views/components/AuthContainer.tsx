@@ -17,8 +17,9 @@ export function AuthContainer({ children, belowCard, aboveCard }: Props) {
       <Box
         display="flex"
         maxWidth="725px"
-        minWidth={{ md: "700px" }}
+        minWidth={{ xs: "400px", sm: "700px" }}
         flexDirection="column"
+        p={1}
       >
         {aboveCard}
         <PaddedCardContainer>{children}</PaddedCardContainer>

@@ -10,7 +10,7 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import ads from "@/assets/images/logo.svg";
+import brave from "@/assets/images/brave_logo_icon.png";
 import { Link as RouterLink, useRouteMatch } from "react-router-dom";
 import { useIsAuthenticated } from "@/auth/hooks/queries/useIsAuthenticated";
 import { useSignOut } from "@/auth/hooks/mutations/useSignOut";
@@ -32,7 +32,7 @@ export function LandingPageAppBar() {
   const GetStarted = () => (
     <RouterLink to={"/register/browser"} style={{ textDecoration: "none" }}>
       <Typography variant={isMobile ? "body2" : "subtitle1"} color={textColor}>
-        <Trans>Sign up</Trans>
+        <Trans>Get started</Trans>
       </Typography>
     </RouterLink>
   );
@@ -61,9 +61,19 @@ export function LandingPageAppBar() {
             spacing={{ xs: 2, md: 3 }}
             justifyContent="space-between"
           >
-            <RouterLink to="/" style={{ marginTop: 5 }}>
-              <img src={ads} alt={_(msg`Ads`)} height="31px" width="160px" />
-            </RouterLink>
+            <Typography
+              fontSize="18px"
+              fontWeight="500"
+              display="flex"
+              to="/"
+              alignItems="center"
+              color={isContact ? "text.primary" : "white"}
+              sx={{ textDecoration: "none" }}
+              component={RouterLink}
+            >
+              <img src={brave} alt={_(msg`Ads`)} height="40px" width="40x" />
+              <Trans>Brave Ads</Trans>
+            </Typography>
 
             <Divider
               orientation="vertical"
@@ -159,12 +169,6 @@ function MobileMenu(props: {
             <Trans>Log in</Trans>
           </Typography>
         </MenuItem>
-        <Divider />
-        {props.links.map((l, i) => (
-          <MenuItem key={`menu_item_${i}`} onClick={() => setAnchorElNav(null)}>
-            {l.component}
-          </MenuItem>
-        ))}
       </Menu>
     </Box>
   );

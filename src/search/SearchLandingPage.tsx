@@ -20,7 +20,7 @@ export function SearchLandingPage() {
     <Background>
       <LandingPageAppBar />
       <Toolbar sx={{ mb: 2 }} />
-      <Box display="flex" flexDirection="column" justifyContent="center">
+      <Box display="flex" flexDirection="column" justifyContent="center" p={1}>
         <Stack direction={{ md: "column", lg: "row" }} spacing={1}>
           <Stack
             direction="column"

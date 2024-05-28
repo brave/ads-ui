@@ -6,9 +6,10 @@ import { GetStartedLandingPage } from "@/auth/views/GetStartedLandingPage";
 import { BottomSwoop } from "@/components/Assets/BottomSwoop";
 import { TopSwoop } from "@/components/Assets/TopSwoop";
 import { WhyUseBraveAds } from "@/auth/views/components/WhyUseBraveAds";
-import { BasicAttentionTokenLandingPage } from "@/basic-attention-token/BasicAttentionTokenLandingPage";
 import { WhatIsBrave } from "@/auth/views/components/WhatIsBrave";
 import { WhatIsBraveAds } from "@/auth/views/components/WhatIsBraveAds";
+import { Inquiries } from "@/auth/views/components/Inquiries";
+import { FooterCTA } from "@/auth/views/components/FooterCTA";
 
 export function LandingPage() {
   useTrackMatomoPageView({ documentTitle: "Landing Page" });
@@ -19,23 +20,24 @@ export function LandingPage() {
       <Toolbar />
       <Toolbar />
       <Box width="100%">
-        <Box display="flex" justifyContent="center">
+        <Box display="flex" justifyContent="center" p={1}>
           <GetStartedLandingPage />
         </Box>
         <TopSwoop />
-        <Box bgcolor="white" p={5}>
-          <WhatIsBrave />
-          <WhatIsBraveAds />
+        <Box display="flex" justifyContent="center" bgcolor="white" p={1}>
+          <WhyUseBraveAds />
         </Box>
       </Box>
       <Box height="100%" width="100%">
         <BottomSwoop />
-        <Box display="flex" justifyContent="center">
-          <WhyUseBraveAds />
+        <Box bgcolor="black" p={5}>
+          <WhatIsBrave />
+          <WhatIsBraveAds />
+          <Inquiries />
         </Box>
         <TopSwoop />
-        <Box bgcolor="white" pt={1} pb={4}>
-          <BasicAttentionTokenLandingPage />
+        <Box bgcolor="white" pb={3} p={1}>
+          <FooterCTA />
         </Box>
       </Box>
     </Background>
