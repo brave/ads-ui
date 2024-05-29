@@ -1,0 +1,29 @@
+fragment DisplayedMetrics on Metrics {
+  impression
+  click
+  siteVisit
+  conversion
+  viewThroughConversion
+  clickThroughConversion
+  dismiss
+  spendUsd
+  upvote
+  downvote
+  rates {
+    clickThrough
+    clickToConversion
+    clickToSiteVisit
+    impressionToSiteVisit
+    impressionToDismiss
+    costPerAcquisition
+  }
+}
+
+fragment DailyMetricValues on Performance {
+  dimensions {
+    day
+  }
+  metrics {
+    ...DisplayedMetrics
+  }
+}

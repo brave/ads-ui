@@ -58,6 +58,11 @@ fragment CampaignSummary on Campaign {
   type
   format
   dayProportion
+  brandedKeywords
+  advertiser {
+    id
+    name
+  }
 }
 
 fragment CampaignAds on Campaign {

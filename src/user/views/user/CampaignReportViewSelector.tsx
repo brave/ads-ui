@@ -1,7 +1,7 @@
 import { Box, LinearProgress } from "@mui/material";
 import { AlwaysOnFormButton } from "@/components/Button/AlwaysOnFormButton";
 import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
-import { useParams } from "react-router-dom";
+import { useParams, useRouteMatch } from "react-router-dom";
 import {
   CampaignFormat,
   LoadCampaignSummaryDocument,
@@ -10,6 +10,7 @@ import { ConsultAccountManager } from "./reports/ConsultAccountManager";
 import { OriginalCampaignReportView } from "./reports/OriginalCampaignReportView";
 import { SearchCampaignReportView } from "./reports/SearchCampaignReportView";
 import { useQuery } from "@apollo/client";
+import { AnalyticsOverview } from "@/routes/campaigns/analytics/AnalyticsOverview";
 
 interface Params {
   campaignId: string;
@@ -19,7 +20,9 @@ interface Params {
 // different campaign types. This view chooses the correct reporting
 // view to use.
 export function CampaignReportViewSelector() {
+  const match = useRouteMatch();
   useTrackMatomoPageView({ documentTitle: "Campaign Reporting" });
+  const isReport = match.url.includes("report");
 
   const { campaignId } = useParams<Params>();
 
@@ -45,6 +48,8 @@ export function CampaignReportViewSelector() {
         <ConsultAccountManager />
       ) : format === CampaignFormat.Search ? (
         <SearchCampaignReportView campaignSummary={data.campaign} />
+      ) : isReport ? (
+        <AnalyticsOverview campaignOverview={data.campaign} />
       ) : (
         <OriginalCampaignReportView campaignSummary={data.campaign} />
       )}
