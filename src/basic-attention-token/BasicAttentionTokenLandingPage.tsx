@@ -1,12 +1,21 @@
-import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
+import {
+  useTrackMatomoEvent,
+  useTrackMatomoPageView,
+} from "@/hooks/useTrackWithMatomo";
 import { Box, Button, Link, Stack, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { Trans } from "@lingui/macro";
-import basicattentiontoken from "@/assets/images/basic-attention-token-logo.png";
+import basicattentiontoken from "@/assets/images/bat-logo-white.svg";
 import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
 import { Background } from "@/components/Background/Background";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export function BasicAttentionTokenLandingPage() {
+  useTrackMatomoPageView({
+    documentTitle: "Basic Attention Token Landing Page",
+  });
+  const isMobile = useIsMobile();
+
   return (
     <Background>
       <LandingPageAppBar />
@@ -14,7 +23,8 @@ export function BasicAttentionTokenLandingPage() {
       <Box display="flex" justifyContent="center" mt={5}>
         <Stack maxWidth={1000} spacing={3}>
           <Box alignSelf="center">
-            <img src={basicattentiontoken} width="300px" />
+            {isMobile && <img src={basicattentiontoken} width="300px" />}
+            {!isMobile && <img src={basicattentiontoken} width="500px" />}
           </Box>
           <Typography
             variant="h4"
