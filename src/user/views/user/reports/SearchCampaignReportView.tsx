@@ -1,6 +1,5 @@
 import { Trans, msg } from "@lingui/macro";
 import { Box, Stack, Typography } from "@mui/material";
-import { DashboardButton } from "@/components/Button/DashboardButton";
 import { Status } from "@/components/Campaigns/Status";
 import { CardContainer } from "@/components/Card/CardContainer";
 import { DateRangePicker } from "@/components/Date/DateRangePicker";
@@ -65,7 +64,6 @@ export function SearchCampaignReportView({ campaignSummary }: Props) {
         justifyContent="space-between"
         mb={2}
       >
-        <DashboardButton />
         <Box
           display="flex"
           alignItems="center"

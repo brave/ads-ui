@@ -3,6 +3,8 @@ import {
   AdSetBreakdownQuery,
   AdSetBreakdownQueryVariables,
   CampaignSummaryFragment,
+  CreativeBreakdownQuery,
+  CreativeBreakdownQueryVariables,
   DisplayedMetricsFragment,
   Exact,
   OsBreakdownQuery,
@@ -11,9 +13,9 @@ import {
   SegmentBreakdownQuery,
   SegmentBreakdownQueryVariables,
 } from "@/graphql-client/graphql";
-import type { TypedDocumentNode } from "@graphql-typed-document-node/core";
 import { MessageDescriptor, i18n } from "@lingui/core";
 import { msg } from "@lingui/macro";
+import { TypedDocumentNode } from "@apollo/client";
 
 type GqlQueryParams = Exact<{
   filter: PerformanceFilter;
@@ -36,6 +38,27 @@ const AdSet_Breakdown_Load = graphql(`
           adSet {
             id
             name
+          }
+        }
+        metrics {
+          ...DisplayedMetrics
+        }
+      }
+    }
+  }
+`);
+
+const Creative_Breakdown_Load = graphql(`
+  query CreativeBreakdown($filter: PerformanceFilter!) {
+    performance(filter: $filter) {
+      values {
+        dimensions {
+          ad {
+            id
+            creative {
+              id
+              name
+            }
           }
         }
         metrics {
@@ -76,7 +99,7 @@ const Segment_Breakdown_Load = graphql(`
   }
 `);
 
-export interface BreakdownDefinition {
+interface BreakdownDefinition {
   id: string;
   label: MessageDescriptor;
 }
@@ -142,12 +165,26 @@ const SEGMENT_BREAKDOWN: BreakdownDefinitionWithQuery<
   renderCell: (row) => row.name,
 };
 
+const CREATIVE_BREAKDOWN: BreakdownDefinitionWithQuery<
+  CreativeBreakdownQuery,
+  CreativeBreakdownQueryVariables,
+  CreativeBreakdownQuery["performance"]["values"][0]["dimensions"]
+> = {
+  id: "creative",
+  label: msg`Creative Performance`,
+  query: Creative_Breakdown_Load,
+  extractId: (dims) => dims.ad.creative.id ?? "unknown",
+  extractName: (dims) => dims.ad.creative.name ?? "(unknown)",
+  renderCell: (row) => row.name,
+};
+
 export const BREAKDOWNS = [
   DAY_BREAKDOWN,
   HOUR_BREAKDOWN,
   ADSET_BREAKDOWN,
   OS_BREAKDOWN,
   SEGMENT_BREAKDOWN,
+  CREATIVE_BREAKDOWN,
 ];
 
 const breakdownLookup = new Map<string, BreakdownDefinition>(
@@ -160,7 +197,7 @@ export function getBreakdownDefinition(
   if (!id) return undefined;
   const breakdown = breakdownLookup.get(id);
   if (!breakdown) return undefined;
-  return { id: breakdown.id, label: i18n._(breakdown.label) };
+  return { ...breakdown, label: i18n._(breakdown.label) };
 }
 
 export function isBreakdownWithQuery(

@@ -1,7 +1,7 @@
 import { graphql } from "@/graphql-client";
 import { useQuery } from "@apollo/client";
 import { MetricsList } from "./MetricsList";
-import { Box } from "@mui/material";
+import { Box, Card, Typography } from "@mui/material";
 import { useMetricSelection } from "./hooks";
 import { useState } from "react";
 import { FilterBar } from "./filters/FilterBar";
@@ -11,6 +11,9 @@ import dayjs from "dayjs";
 import { CampaignOverviewProps } from "@/util/CampaignIdProps";
 import { ErrorDetail } from "@/components/Error/ErrorDetail";
 import { msg } from "@lingui/macro";
+import { Status } from "@/components/Campaigns/Status";
+import { ChangeReportingAlert } from "@/components/Collapse/ChangeReportingAlert";
+import { ReportMenu } from "@/user/reporting/ReportMenu";
 
 const Analytics_Load = graphql(`
   query CampaignAnalytics($filter: PerformanceFilter!) {
@@ -57,53 +60,77 @@ export function CampaignAnalytics({ campaignOverview }: CampaignOverviewProps) {
   }
 
   return (
-    <Box
-      // this refers to the layout of the vertical flexbox that contains this component:
-      //  it should grow to fill the available space vertically
-      flex="auto"
-      // and these control the layout of these elements contained within this box
-      //  see https://css-tricks.com/snippets/css/complete-guide-grid/
-      // on small screens the grid will have a single column, so the metrics are listed below
-      // the graph. On larger screens the metrics are in a column to the right of the graph
-      // (slightly more spaced out on even bigger screens).
-      display="grid"
-      gap={1}
-      gridTemplateColumns={{ xs: "1fr", md: "1fr 300px", lg: "1fr 350px" }}
-      gridTemplateRows={{ xs: "auto auto", md: "auto 1fr" }}
-      gridTemplateAreas={{
-        xs: `
-        "filter"
-        "graph"
-        "metrics"
-        `,
-        md: `
-          "filter filter"
-          "graph metrics"
-        `,
-      }}
-    >
-      <Box gridArea="filter">
-        <FilterBar
-          filters={filter}
-          onChange={setFilter}
-          minDate={dayjs(campaignOverview.startAt)}
-          maxDate={dayjs(campaignOverview.endAt)}
-        />
-      </Box>
+    <Box display="flex" width="100%" flexDirection="column">
+      <ChangeReportingAlert id={campaignOverview.id} />
+      <Box
+        component={Card}
+        p={5}
+        // this refers to the layout of the vertical flexbox that contains this component:
+        //  it should grow to fill the available space vertically
+        flex="auto"
+        // and these control the layout of these elements contained within this box
+        //  see https://css-tricks.com/snippets/css/complete-guide-grid/
+        // on small screens the grid will have a single column, so the metrics are listed below
+        // the graph. On larger screens the metrics are in a column to the right of the graph
+        // (slightly more spaced out on even bigger screens).
+        display="grid"
+        gap={1}
+        gridTemplateColumns={{ xs: "1fr", md: "1fr 300px", lg: "1fr 350px" }}
+        gridTemplateRows={{ xs: "auto auto", md: "auto 1fr" }}
+        gridTemplateAreas={{
+          xs: `
+      "name"
+      "filter"
+      "graph"
+      "metrics"
+      "report"
+      `,
+          md: `
+        "name report"
+        "filter filter"
+        "graph metrics"
+      `,
+        }}
+      >
+        <Box gridArea="name" display="flex" flexDirection="row" gap={1} mb={1}>
+          <Typography fontWeight={600}>{campaignOverview.name}</Typography>
+          <Status
+            state={campaignOverview.state}
+            start={campaignOverview.startAt}
+            end={campaignOverview.endAt}
+          />
+        </Box>
 
-      <Box height={{ xs: "500px", md: "auto" }} gridArea="graph">
-        <ResultsPane
-          filters={filter}
-          overTimeData={data?.performance?.values}
-          campaignOverview={campaignOverview}
-        />
-      </Box>
+        <Box gridArea="report" display="flex" justifyContent="end">
+          <ReportMenu
+            campaignId={campaignOverview.id}
+            hasVerifiedConversions={false}
+          />
+        </Box>
 
-      <Box gridArea="metrics" sx={{ overflowY: "scroll" }}>
-        <MetricsList
-          dataSource={data?.performance?.total?.metrics}
-          campaignOverview={campaignOverview}
-        />
+        <Box gridArea="filter" mb={2}>
+          <FilterBar
+            filters={filter}
+            onChange={setFilter}
+            minDate={dayjs(campaignOverview.startAt)}
+            maxDate={dayjs(campaignOverview.endAt)}
+          />
+        </Box>
+
+        <Box height={{ xs: "500px", md: "auto" }} gridArea="graph">
+          <ResultsPane
+            filters={filter}
+            overTimeData={data?.performance?.values}
+            campaignOverview={campaignOverview}
+          />
+        </Box>
+
+        <Box gridArea="metrics" sx={{ overflowY: "scroll" }}>
+          <MetricsList
+            dataSource={data?.performance?.total?.metrics}
+            campaignOverview={campaignOverview}
+          />
+        </Box>
       </Box>
     </Box>
   );

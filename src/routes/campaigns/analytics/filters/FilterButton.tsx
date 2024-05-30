@@ -54,10 +54,10 @@ export function FilterButton<M extends MenuItemProps>({
     <Box display="flex" flexDirection="row" alignItems="baseline">
       <Typography variant="button">{prefix}</Typography>
       <Button
-        variant="outlined"
+        variant="contained"
         endIcon={<ExpandMoreIcon />}
         onClick={handleButtonClick}
-        size="small"
+        size="medium"
       >
         {label}
       </Button>

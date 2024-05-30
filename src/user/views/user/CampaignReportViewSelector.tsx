@@ -11,6 +11,7 @@ import { OriginalCampaignReportView } from "./reports/OriginalCampaignReportView
 import { SearchCampaignReportView } from "./reports/SearchCampaignReportView";
 import { useQuery } from "@apollo/client";
 import { AnalyticsOverview } from "@/routes/campaigns/analytics/AnalyticsOverview";
+import MiniSideBar from "@/components/Drawer/MiniSideBar";
 
 interface Params {
   campaignId: string;
@@ -43,18 +44,20 @@ export function CampaignReportViewSelector() {
   const format = data.campaign.format;
 
   return (
-    <Box padding={2}>
-      {format === CampaignFormat.NtpSi ? (
-        <ConsultAccountManager />
-      ) : format === CampaignFormat.Search ? (
-        <SearchCampaignReportView campaignSummary={data.campaign} />
-      ) : isReport ? (
-        <AnalyticsOverview campaignOverview={data.campaign} />
-      ) : (
-        <OriginalCampaignReportView campaignSummary={data.campaign} />
-      )}
+    <MiniSideBar>
+      <Box padding={2} width="100%">
+        {format === CampaignFormat.NtpSi ? (
+          <ConsultAccountManager />
+        ) : format === CampaignFormat.Search ? (
+          <SearchCampaignReportView campaignSummary={data.campaign} />
+        ) : isReport ? (
+          <AnalyticsOverview campaignOverview={data.campaign} />
+        ) : (
+          <OriginalCampaignReportView campaignSummary={data.campaign} />
+        )}
 
-      <AlwaysOnFormButton />
-    </Box>
+        <AlwaysOnFormButton />
+      </Box>
+    </MiniSideBar>
   );
 }
