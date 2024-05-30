@@ -1,5 +1,4 @@
 import { Box, Button, Link, Stack, Toolbar, Typography } from "@mui/material";
-import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
 import { Background } from "@/components/Background/Background";
 import searchPreview from "@/assets/images/search-preview.png";
 import tswift from "@/assets/images/tswift.png";
@@ -7,10 +6,11 @@ import microwave from "@/assets/images/microwave.png";
 import curtains from "@/assets/images/curtains.png";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { useEffect, useState } from "react";
-import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { Trans } from "@lingui/macro";
+import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { SearchTalkingPoints } from "@/search/SearchTalkingPoints";
 import { Link as RouterLink } from "react-router-dom";
+import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
 
 export function SearchLandingPage() {
   useTrackMatomoPageView({ documentTitle: "Search Landing Page" });
@@ -20,7 +20,7 @@ export function SearchLandingPage() {
     <Background>
       <LandingPageAppBar />
       <Toolbar sx={{ mb: 2 }} />
-      <Box display="flex" flexDirection="column" justifyContent="center">
+      <Box display="flex" flexDirection="column" justifyContent="center" p={1}>
         <Stack direction={{ md: "column", lg: "row" }} spacing={1}>
           <Stack
             direction="column"
@@ -28,12 +28,12 @@ export function SearchLandingPage() {
             maxWidth={750}
             justifyContent="center"
           >
-            <Typography variant="h3">
+            <Typography variant="h3" color="white">
               <Trans>
                 Tap into over <strong>9 billion</strong> annual Web searches
               </Trans>
             </Typography>
-            <Typography variant="subtitle1" fontSize="18px">
+            <Typography variant="subtitle1" fontSize="18px" color="white">
               <Trans>
                 Determine your eligibility for Brave Search, the world’s
                 fastest-growing alternative search engine by clicking below and
@@ -68,11 +68,11 @@ function BookAMeetingButton() {
       >
         <Trans>See if you qualify</Trans>
       </Button>
-      <Typography>
+      <Typography color="white">
         <Trans>
           Or email{" "}
           <Link
-            color="primary"
+            color="secondary"
             variant="inherit"
             href="mailto:searchads@brave.com"
           >

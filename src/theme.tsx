@@ -5,9 +5,16 @@ const appTheme = createTheme(
   {
     typography: {
       fontFamily: "Poppins",
-      h2: {
-        fontSize: "14px",
+      h1: {
+        fontSize: "50px",
+        maxWidth: "800px",
         fontWeight: 600,
+        overflowWrap: "break-word",
+      },
+      h2: {
+        fontSize: "18px",
+        maxWidth: "624px",
+        overflowWrap: "break-word",
       },
     },
     palette: {

@@ -27,10 +27,10 @@ export function SearchTalkingPoints() {
     >
       {talkingPoints.map((point, index) => (
         <Stack spacing={1} maxWidth={500} key={index}>
-          <Typography variant="h6">
+          <Typography variant="h6" color="white">
             <Trans id={point.title.id} />
           </Typography>
-          <Typography variant="body1">
+          <Typography variant="body1" color="white">
             <Trans id={point.description.id} />
           </Typography>
         </Stack>

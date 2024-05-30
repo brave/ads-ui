@@ -2,65 +2,60 @@ import {
   useTrackMatomoEvent,
   useTrackMatomoPageView,
 } from "@/hooks/useTrackWithMatomo";
-import { useIsMobile } from "@/hooks/useIsMobile";
-import { Background } from "@/components/Background/Background";
-import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
-import { Box, Button, Link, Stack, Toolbar, Typography } from "@mui/material";
+import { Box, Button, Link, Stack, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
-import notification from "@/assets/images/newsfeed.png";
-import mobileAd from "@/assets/images/news-mobile.png";
-import bat from "@/assets/images/basic-attention-token.svg";
 import { Trans } from "@lingui/macro";
+import basicattentiontoken from "@/assets/images/bat-logo-white.svg";
+import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
+import { Background } from "@/components/Background/Background";
 
 export function BasicAttentionTokenLandingPage() {
-  useTrackMatomoPageView({ documentTitle: "BAT Landing Page" });
-  const isMobile = useIsMobile();
-
+  useTrackMatomoPageView({
+    documentTitle: "Basic Attention Token Landing Page",
+  });
   return (
     <Background>
       <LandingPageAppBar />
-      <Toolbar sx={{ mb: 2 }} />
-      <Box display="flex" flexDirection="column" justifyContent="center">
-        <Stack
-          direction={{ md: "column", lg: "row" }}
-          spacing={3}
-          justifyContent="center"
-        >
-          <Stack
-            direction="column"
-            spacing={3}
-            maxWidth={750}
-            justifyContent="center"
+
+      <Box display="flex" justifyContent="center" mt={5}>
+        <Stack maxWidth={1000} spacing={3}>
+          <Box alignSelf="center">
+            <Box
+              component="img"
+              src={basicattentiontoken}
+              width={{ xs: "300px", md: "500px" }}
+            />
+          </Box>
+          <Typography
+            variant="h4"
+            textAlign="center"
+            fontWeight={400}
+            color="white"
           >
-            <Typography variant="h3">
-              <Trans>
-                Pay with BAT to get <strong>50% off</strong> your first campaign
-              </Trans>
-            </Typography>
-            <Typography variant="subtitle1" fontSize="18px">
-              <Trans>
-                Brave is place where early adopters thrive. We’re celebrating
-                our crypto roots by offering new and returning customers half
-                off their first campaign when they check-out with BAT.
-              </Trans>
-            </Typography>
-            <Typography variant="body2">
-              <Trans>
-                Limited time only. Available to new advertisers, and those who
-                ran campaigns before September 30, 2023.
-              </Trans>
-            </Typography>
+            <Trans>
+              Pay with BAT to get <strong>50% off</strong> your first
+              self-managed campaign.
+            </Trans>
+          </Typography>
 
-            {isMobile && (
-              <Box display="flex" alignSelf="center" flexDirection="column">
-                <img src={mobileAd} width="100%" height={350} />
-                <img src={bat} />
-              </Box>
-            )}
+          <Typography variant="subtitle1" textAlign="center" color="white">
+            <Trans>
+              Brave is place where early adopters thrive. We’re celebrating our
+              crypto roots by offering new and returning customers half off
+              their first self-managed campaign when they check-out with BAT
+              <strong>*</strong>.
+            </Trans>
+          </Typography>
 
-            <LaunchCampaignButton />
-          </Stack>
-          {!isMobile && <AdImageContainer />}
+          <Typography variant="caption" textAlign="center" color="white">
+            <Trans>
+              *Limited time only. Available to new advertisers, and those who
+              ran campaigns before September 30, 2023. Eligible for Push
+              Notification and Newsfeed ads only.
+            </Trans>
+          </Typography>
+
+          <LaunchCampaignButton />
         </Stack>
       </Box>
     </Background>
@@ -71,22 +66,27 @@ function LaunchCampaignButton() {
   const { trackMatomoEvent } = useTrackMatomoEvent();
 
   return (
-    <Stack direction="row" spacing={5} alignItems="center">
+    <Stack direction="row" spacing={5} alignSelf="center" alignItems="center">
       <Button
         variant="contained"
         color="primary"
         size="medium"
         component={RouterLink}
-        to="/register"
+        to="/register/browser"
         onClick={() =>
           trackMatomoEvent("basic-attention-token", "launch-campaign")
         }
-        sx={{ padding: 2 }}
+        sx={{
+          width: "180px",
+          maxHeight: { xs: "40px", md: "60px" },
+          mb: 1,
+          fontSize: "18px",
+        }}
       >
-        <Trans>Launch a Campaign</Trans>
+        <Trans>Get started</Trans>
       </Button>
       <Link
-        color="primary"
+        color="secondary"
         sx={{ cursor: "pointer" }}
         onClick={() => {
           trackMatomoEvent("basic-attention-token", "learn-about-bat");
@@ -96,26 +96,5 @@ function LaunchCampaignButton() {
         <Trans>Learn more about BAT</Trans>
       </Link>
     </Stack>
-  );
-}
-
-function AdImageContainer() {
-  return (
-    <Box
-      display="flex"
-      alignSelf="center"
-      flexDirection="column"
-      height={600}
-      overflow="hidden"
-    >
-      <img src={notification} width="100%" height={600} />
-      <img
-        src={bat}
-        width={400}
-        style={{
-          transform: "translateY(-90%)",
-        }}
-      />
-    </Box>
   );
 }
