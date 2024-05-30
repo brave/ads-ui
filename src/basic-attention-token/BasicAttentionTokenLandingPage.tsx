@@ -8,14 +8,11 @@ import { Trans } from "@lingui/macro";
 import basicattentiontoken from "@/assets/images/bat-logo-white.svg";
 import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
 import { Background } from "@/components/Background/Background";
-import { useIsMobile } from "@/hooks/useIsMobile";
 
 export function BasicAttentionTokenLandingPage() {
   useTrackMatomoPageView({
     documentTitle: "Basic Attention Token Landing Page",
   });
-  const isMobile = useIsMobile();
-
   return (
     <Background>
       <LandingPageAppBar />
@@ -23,8 +20,11 @@ export function BasicAttentionTokenLandingPage() {
       <Box display="flex" justifyContent="center" mt={5}>
         <Stack maxWidth={1000} spacing={3}>
           <Box alignSelf="center">
-            {isMobile && <img src={basicattentiontoken} width="300px" />}
-            {!isMobile && <img src={basicattentiontoken} width="500px" />}
+            <Box
+              component="img"
+              src={basicattentiontoken}
+              width={{ xs: "300px", md: "500px" }}
+            />
           </Box>
           <Typography
             variant="h4"
