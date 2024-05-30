@@ -96,6 +96,7 @@ export function LandingPageAppBar() {
               links={links}
               isAuthenticated={isAuthenticated}
               linkColor={textColor}
+              isContact={isContact}
             />
           )}
         </Toolbar>
@@ -124,6 +125,7 @@ function MobileMenu(props: {
   links: any[];
   isAuthenticated?: boolean;
   linkColor: string;
+  isContact?: boolean;
 }) {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
@@ -141,7 +143,7 @@ function MobileMenu(props: {
       <SupportMenu usePlainLink linkColor={props.linkColor} />
       <div style={{ flexGrow: 1 }} />
       <IconButton size="large" onClick={(e) => setAnchorElNav(e.currentTarget)}>
-        <MenuIcon sx={{ color: "white" }} />
+        <MenuIcon sx={{ color: props.isContact ? "black" : "white" }} />
       </IconButton>
       <Menu
         id="menu-appbar"
