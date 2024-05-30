@@ -10,7 +10,8 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import brave from "@/assets/images/brave_logo_icon.png";
+import brave from "@/assets/images/full-brave-brand.svg";
+import braveDark from "@/assets/images/full-brave-brand-black.svg";
 import { Link as RouterLink, useRouteMatch } from "react-router-dom";
 import { useIsAuthenticated } from "@/auth/hooks/queries/useIsAuthenticated";
 import { useSignOut } from "@/auth/hooks/mutations/useSignOut";
@@ -20,6 +21,7 @@ import { useLingui } from "@lingui/react";
 import { SupportMenu } from "@/components/Drawer/SupportMenu";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
+import { PageLink } from "@/components/AppBar/PageLink";
 
 export function LandingPageAppBar() {
   const match = useRouteMatch();
@@ -29,17 +31,38 @@ export function LandingPageAppBar() {
   const isContact = match.path === "/contact";
   const textColor = isContact ? "text.primary" : "white";
 
-  const GetStarted = () => (
-    <RouterLink to={"/register/browser"} style={{ textDecoration: "none" }}>
-      <Typography variant={isMobile ? "body2" : "subtitle1"} color={textColor}>
-        <Trans>Get started</Trans>
-      </Typography>
-    </RouterLink>
-  );
-
   const links = [
     {
-      component: isAuthenticated ? null : <GetStarted />,
+      component: (
+        <PageLink
+          to="/register/browser"
+          msg={msg`Get started`}
+          textColor={textColor}
+        />
+      ),
+    },
+    {
+      component: (
+        <PageLink
+          to="/search"
+          msg={msg`Brave Search Ads`}
+          textColor={textColor}
+        />
+      ),
+    },
+    {
+      component: (
+        <PageLink
+          to="/bat"
+          msg={msg`Basic Attention Token`}
+          textColor={textColor}
+        />
+      ),
+    },
+    {
+      component: (
+        <PageLink to="/contact" msg={msg`Ad Inquiries`} textColor={textColor} />
+      ),
     },
   ];
 
@@ -61,19 +84,14 @@ export function LandingPageAppBar() {
             spacing={{ xs: 2, md: 3 }}
             justifyContent="space-between"
           >
-            <Typography
-              fontSize="18px"
-              fontWeight="500"
-              display="flex"
-              to="/"
-              alignItems="center"
-              color={isContact ? "text.primary" : "white"}
-              sx={{ textDecoration: "none" }}
-              component={RouterLink}
-            >
-              <img src={brave} alt={_(msg`Ads`)} height="40px" width="40x" />
-              <Trans>Brave Ads</Trans>
-            </Typography>
+            <Box component={RouterLink} to="/" width={100} display="flex">
+              <img
+                src={isContact ? braveDark : brave}
+                alt={_(msg`Ads`)}
+                height={30}
+                width={100}
+              />
+            </Box>
 
             <Divider
               orientation="vertical"
@@ -171,6 +189,10 @@ function MobileMenu(props: {
             <Trans>Log in</Trans>
           </Typography>
         </MenuItem>
+        <Divider />
+        {props.links.map((l, i) => (
+          <MenuItem key={`menu_component_${i}`}>{l.component}</MenuItem>
+        ))}
       </Menu>
     </Box>
   );
