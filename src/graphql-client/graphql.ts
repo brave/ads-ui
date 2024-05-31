@@ -221,7 +221,6 @@ export type Campaign = {
   format: CampaignFormat;
   geoTargets: Array<Geocode>;
   hasPaymentIntent: Scalars['Boolean']['output'];
-  hasVerifiedConversions: Scalars['Boolean']['output'];
   id: Scalars['String']['output'];
   modifiedAt: Scalars['DateTime']['output'];
   name: Scalars['String']['output'];
