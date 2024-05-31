@@ -18,7 +18,6 @@ export function LandingPage() {
     <Background>
       <LandingPageAppBar />
       <Toolbar />
-      <Toolbar />
       <Box width="100%">
         <Box display="flex" justifyContent="center" p={1}>
           <GetStartedLandingPage />
@@ -36,7 +35,7 @@ export function LandingPage() {
           <Inquiries />
         </Box>
         <TopSwoop />
-        <Box bgcolor="white" pb={3} p={1}>
+        <Box bgcolor="white" pb={5} pt={1}>
           <FooterCTA />
         </Box>
       </Box>

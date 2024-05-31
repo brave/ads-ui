@@ -23,14 +23,19 @@ export function FooterCTA() {
         </Typography>
 
         <Button
-          variant="contained"
+          // variant="contained"
           component={RouterLink}
           sx={{
             width: "180px",
-            maxHeight: { xs: "40px", md: "60px" },
-            mb: 1,
+            maxHeight: { xs: "40px", md: "80px" },
             fontSize: "18px",
             alignSelf: "center",
+            background:
+              "linear-gradient(101.5deg, #770EAA 21.56%, #B72070 74.97%, #E6461E 104.58%)",
+            boxShadow: "0 3px 10px -1px rgba(0, 0, 0, 6%)",
+            backgroundClip: "padding-box",
+            color: "white",
+            p: 1.5,
           }}
           to="/register/browser"
         >
