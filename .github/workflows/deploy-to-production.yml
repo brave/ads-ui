@@ -23,7 +23,7 @@ jobs:
           node-version-file: ".node-version"
           cache: pnpm
       - name: Install dependencies
-        run: pnpm ci
+        run: pnpm install
       - run: pnpm check
       - name: Build
         env:
