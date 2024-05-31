@@ -9,4 +9,4 @@ src/graphql/ads-serve.graphql.schema.json
 # npm and prettier fight over a EOF on these files, let npm win:
 package.json
 package-lock.json
-.npm-upgrade.json
+pnpm-lock.yaml

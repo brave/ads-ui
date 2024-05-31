@@ -12,23 +12,27 @@ jobs:
       url: https://ads.brave.com
 
     steps:
+      - name: Install pnpm
+        uses: pnpm/action-setup@a3252b78c470c02df07e9d59298aecedc3ccdd6d # v3
+        with:
+          version: 9
       - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
       - name: Use Node.js
         uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
         with:
           node-version-file: ".node-version"
-          cache: npm
+          cache: pnpm
       - name: Install dependencies
-        run: npm ci
-      - run: npm run check
+        run: pnpm ci
+      - run: pnpm check
       - name: Build
         env:
           REACT_APP_SERVER_ADDRESS: ${{ secrets.REACT_PRODUCTION_APP_SERVER_ADDRESS }}
           REACT_APP_GIT_SHA1: ${{ github.sha }}
         run: |
           export REACT_APP_BUILD_TIME=$(date -Iseconds)
-          npm run build
-      - run: npm test
+          pnpm build
+      - run: pnpm test
       - name: Deploy static files
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_PRODUCTION_ACCESS_KEY_ID }}
