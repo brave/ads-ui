@@ -1,10 +1,10 @@
 {
   "$schema": "https://unpkg.com/knip@2/schema.json",
-  "entry": ["src/index.tsx"],
+  "entry": ["src/index.tsx", "./lingui.config.ts"],
   "project": ["src/**/*.{ts,tsx}"],
   "ignore": [
     "src/graphql-client/*.ts",
     "src/graphql/apollo-client-helpers.ts",
     "node_modules/**/*",
-  ],
+  ]
 }

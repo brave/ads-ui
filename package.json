@@ -54,7 +54,6 @@
     "check:lint": "eslint src",
     "check": "run-p -l check:*",
     "prepare": "husky",
-    "audit:resolve": "resolve-audit",
     "lint:fix": "eslint --fix src",
     "extract": "lingui extract"
   },
