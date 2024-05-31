@@ -1,14 +1,16 @@
 import { Box } from "@mui/material";
-import { BreakdownSelector } from "./BreakdownSelector";
 import { TimeFilter } from "./TimeFilter";
 import { PerformanceFilter } from "@/graphql-client/graphql";
 import { Dispatch } from "react";
 import { Dayjs } from "dayjs";
 import { OsFilter } from "./OsFilter";
+import { ReportMenu } from "@/user/reporting/ReportMenu";
 
 export interface FilterProps {
   filters: PerformanceFilter;
   onChange: Dispatch<PerformanceFilter>;
+  campaignId: string;
+  hasVerifiedConversions: boolean;
   minDate?: Dayjs;
   maxDate?: Dayjs;
 }
@@ -23,9 +25,13 @@ export function FilterBar(props: FilterProps) {
       paddingX={1}
       gap={1}
     >
-      <BreakdownSelector />
+      {/*<BreakdownSelector />*/}
       <TimeFilter {...props} />
       <OsFilter {...props} />
+      <ReportMenu
+        {...props}
+        hasVerifiedConversions={props.hasVerifiedConversions}
+      />
     </Box>
   );
 }

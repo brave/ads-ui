@@ -13,7 +13,8 @@ import { ErrorDetail } from "@/components/Error/ErrorDetail";
 import { msg } from "@lingui/macro";
 import { Status } from "@/components/Campaigns/Status";
 import { ChangeReportingAlert } from "@/components/Collapse/ChangeReportingAlert";
-import { ReportMenu } from "@/user/reporting/ReportMenu";
+import _ from "lodash";
+import { VerticalBreakdown } from "@/routes/campaigns/analytics/filters/BreakdownSelector";
 
 const Analytics_Load = graphql(`
   query CampaignAnalytics($filter: PerformanceFilter!) {
@@ -31,6 +32,12 @@ const Analytics_Load = graphql(`
 `);
 
 export function CampaignAnalytics({ campaignOverview }: CampaignOverviewProps) {
+  const conversions = _.flatMap(campaignOverview.adSets ?? [], "conversions");
+  const hasVerifiedConversions = _.some(
+    conversions ?? [],
+    (c) => c.extractExternalId,
+  );
+
   const { forceDefaultMetricSelection: forceDefaultSelection } =
     useMetricSelection();
   const [isFirstLoad, setIsFirstLoad] = useState(true);
@@ -86,7 +93,7 @@ export function CampaignAnalytics({ campaignOverview }: CampaignOverviewProps) {
       "report"
       `,
           md: `
-        "name report"
+        "name name"
         "filter filter"
         "graph metrics"
       `,
@@ -101,23 +108,23 @@ export function CampaignAnalytics({ campaignOverview }: CampaignOverviewProps) {
           />
         </Box>
 
-        <Box gridArea="report" display="flex" justifyContent="end">
-          <ReportMenu
-            campaignId={campaignOverview.id}
-            hasVerifiedConversions={false}
-          />
-        </Box>
-
         <Box gridArea="filter" mb={2}>
           <FilterBar
             filters={filter}
             onChange={setFilter}
+            campaignId={campaignOverview.id}
+            hasVerifiedConversions={hasVerifiedConversions}
             minDate={dayjs(campaignOverview.startAt)}
             maxDate={dayjs(campaignOverview.endAt)}
           />
         </Box>
 
-        <Box height={{ xs: "500px", md: "auto" }} gridArea="graph">
+        <Box
+          height={{ xs: "500px", md: "auto" }}
+          gridArea="graph"
+          display="flex"
+        >
+          <VerticalBreakdown />
           <ResultsPane
             filters={filter}
             overTimeData={data?.performance?.values}

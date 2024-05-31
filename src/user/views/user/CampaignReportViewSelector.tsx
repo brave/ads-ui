@@ -2,16 +2,14 @@ import { Box, LinearProgress } from "@mui/material";
 import { AlwaysOnFormButton } from "@/components/Button/AlwaysOnFormButton";
 import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { useParams, useRouteMatch } from "react-router-dom";
-import {
-  CampaignFormat,
-  LoadCampaignSummaryDocument,
-} from "@/graphql-client/graphql";
+import { CampaignFormat } from "@/graphql-client/graphql";
 import { ConsultAccountManager } from "./reports/ConsultAccountManager";
 import { OriginalCampaignReportView } from "./reports/OriginalCampaignReportView";
 import { SearchCampaignReportView } from "./reports/SearchCampaignReportView";
 import { useQuery } from "@apollo/client";
 import { AnalyticsOverview } from "@/routes/campaigns/analytics/AnalyticsOverview";
 import MiniSideBar from "@/components/Drawer/MiniSideBar";
+import { graphql } from "@/graphql-client/index";
 
 interface Params {
   campaignId: string;
@@ -20,6 +18,25 @@ interface Params {
 // temporarily, we need to use different reporting views for
 // different campaign types. This view chooses the correct reporting
 // view to use.
+const Campaign_Load = graphql(`
+  query LoadCampaignSummary($id: String!) {
+    campaign(id: $id) {
+      ...CampaignOverview
+    }
+  }
+
+  fragment CampaignOverview on Campaign {
+    ...CampaignSummary
+    adSets {
+      id
+      conversions {
+        id
+        extractExternalId
+      }
+    }
+  }
+`);
+
 export function CampaignReportViewSelector() {
   const match = useRouteMatch();
   useTrackMatomoPageView({ documentTitle: "Campaign Reporting" });
@@ -27,7 +44,7 @@ export function CampaignReportViewSelector() {
 
   const { campaignId } = useParams<Params>();
 
-  const { data } = useQuery(LoadCampaignSummaryDocument, {
+  const { data } = useQuery(Campaign_Load, {
     variables: {
       id: campaignId,
     },

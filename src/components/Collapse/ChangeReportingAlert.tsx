@@ -46,10 +46,9 @@ export const ChangeReportingAlert = (props: { id: string }) => {
           <Trans>We've updated our reporting view</Trans>
         </AlertTitle>
         <Trans>
-          Toggle between various metrics using the switches provided. For deeper
-          insights, click the buttons to access various breakdowns. If you
-          prefer the previous view, simply click the "revert" button to switch
-          back.
+          Toggle metric displays using the switches on the right. View different
+          breakdowns using the tabs on the left. Use the top buttons to filter
+          data. Click "revert" for the previous reporting screen.
         </Trans>
       </Alert>
     </Collapse>

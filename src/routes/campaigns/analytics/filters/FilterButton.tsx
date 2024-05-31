@@ -1,5 +1,6 @@
 import { Box, Button, Menu, MenuItem, Typography } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import CheckIcon from "@mui/icons-material/Check";
 import { Dispatch, ReactNode, useState } from "react";
 
@@ -55,9 +56,12 @@ export function FilterButton<M extends MenuItemProps>({
       <Typography variant="button">{prefix}</Typography>
       <Button
         variant="contained"
-        endIcon={<ExpandMoreIcon />}
+        endIcon={open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
         onClick={handleButtonClick}
-        size="medium"
+        size="large"
+        sx={{
+          borderRadius: 1,
+        }}
       >
         {label}
       </Button>

@@ -10,8 +10,6 @@ import {
   OsBreakdownQuery,
   OsBreakdownQueryVariables,
   PerformanceFilter,
-  SegmentBreakdownQuery,
-  SegmentBreakdownQueryVariables,
 } from "@/graphql-client/graphql";
 import { MessageDescriptor, i18n } from "@lingui/core";
 import { msg } from "@lingui/macro";
@@ -84,21 +82,6 @@ const OS_Breakdown_Load = graphql(`
   }
 `);
 
-const Segment_Breakdown_Load = graphql(`
-  query SegmentBreakdown($filter: PerformanceFilter!) {
-    performance(filter: $filter) {
-      values {
-        dimensions {
-          segment
-        }
-        metrics {
-          ...DisplayedMetrics
-        }
-      }
-    }
-  }
-`);
-
 interface BreakdownDefinition {
   id: string;
   label: MessageDescriptor;
@@ -123,8 +106,8 @@ interface BreakdownDefinitionWithQuery<
   ) => React.ReactNode;
 }
 
-const DAY_BREAKDOWN = { id: "day", label: msg`Daily Graph` };
-const HOUR_BREAKDOWN = { id: "hour", label: msg`Hourly Graph` };
+const DAY_BREAKDOWN = { id: "day", label: msg`Daily` };
+const HOUR_BREAKDOWN = { id: "hour", label: msg`Hourly` };
 
 const ADSET_BREAKDOWN: BreakdownDefinitionWithQuery<
   AdSetBreakdownQuery,
@@ -132,7 +115,7 @@ const ADSET_BREAKDOWN: BreakdownDefinitionWithQuery<
   AdSetBreakdownQuery["performance"]["values"][0]["dimensions"]
 > = {
   id: "adset",
-  label: msg`AdSet Performance`,
+  label: msg`Ad Set`,
   query: AdSet_Breakdown_Load,
   extractId: (dims) => dims.adSet?.id ?? "",
   extractName: (dims) => dims.adSet?.name ?? "",
@@ -145,23 +128,10 @@ const OS_BREAKDOWN: BreakdownDefinitionWithQuery<
   OsBreakdownQuery["performance"]["values"][0]["dimensions"]
 > = {
   id: "os",
-  label: msg`OS Performance`,
+  label: msg`OS`,
   query: OS_Breakdown_Load,
   extractId: (dims) => dims.os,
   extractName: (dims) => dims.os,
-  renderCell: (row) => row.name,
-};
-
-const SEGMENT_BREAKDOWN: BreakdownDefinitionWithQuery<
-  SegmentBreakdownQuery,
-  SegmentBreakdownQueryVariables,
-  SegmentBreakdownQuery["performance"]["values"][0]["dimensions"]
-> = {
-  id: "segment",
-  label: msg`Segment Performance`,
-  query: Segment_Breakdown_Load,
-  extractId: (dims) => dims.segment ?? "unknown",
-  extractName: (dims) => dims.segment ?? "(unknown)",
   renderCell: (row) => row.name,
 };
 
@@ -171,7 +141,7 @@ const CREATIVE_BREAKDOWN: BreakdownDefinitionWithQuery<
   CreativeBreakdownQuery["performance"]["values"][0]["dimensions"]
 > = {
   id: "creative",
-  label: msg`Creative Performance`,
+  label: msg`Ad`,
   query: Creative_Breakdown_Load,
   extractId: (dims) => dims.ad.creative.id ?? "unknown",
   extractName: (dims) => dims.ad.creative.name ?? "(unknown)",
@@ -182,9 +152,8 @@ export const BREAKDOWNS = [
   DAY_BREAKDOWN,
   HOUR_BREAKDOWN,
   ADSET_BREAKDOWN,
-  OS_BREAKDOWN,
-  SEGMENT_BREAKDOWN,
   CREATIVE_BREAKDOWN,
+  OS_BREAKDOWN,
 ];
 
 const breakdownLookup = new Map<string, BreakdownDefinition>(

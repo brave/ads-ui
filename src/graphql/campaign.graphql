@@ -94,12 +94,6 @@ query LoadCampaignAds($id: String!) {
   }
 }
 
-query LoadCampaignSummary($id: String!) {
-  campaign(id: $id) {
-    ...CampaignSummary
-  }
-}
-
 mutation CreateCampaign($input: CreateCampaignInput!) {
   createCampaign(createCampaignInput: $input) {
     id

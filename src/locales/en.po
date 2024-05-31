@@ -90,6 +90,7 @@ msgid "Activate"
 msgstr "Activate"
 
 #: src/components/Creatives/NewsPreview.tsx:90
+#: src/routes/campaigns/analytics/breakdowns.tsx:144
 msgid "Ad"
 msgstr "Ad"
 
@@ -130,6 +131,11 @@ msgstr "Ad Name"
 msgid "Ad Name is required"
 msgstr "Ad Name is required"
 
+#: src/routes/campaigns/analytics/breakdowns.tsx:144
+#~ msgid "Ad Performance"
+#~ msgstr "Ad Performance"
+
+#: src/routes/campaigns/analytics/breakdowns.tsx:118
 #: src/user/views/adsManager/views/advanced/components/adSet/AdSetFields.tsx:32
 #: src/user/views/adsManager/views/advanced/components/adSet/NewAdSet.tsx:64
 #: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:37
@@ -140,6 +146,10 @@ msgstr "Ad Set"
 #: src/user/views/adsManager/views/advanced/components/adSet/AdSetFields.tsx:41
 msgid "Ad set name"
 msgstr "Ad set name"
+
+#: src/routes/campaigns/analytics/breakdowns.tsx:118
+#~ msgid "Ad Set Performance"
+#~ msgstr "Ad Set Performance"
 
 #: src/user/views/user/CampaignDetails.tsx:40
 msgid "Ad sets"
@@ -207,8 +217,8 @@ msgid "Ads are modular building blocks that can be paired with ad sets to build 
 msgstr "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously approved ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
 
 #: src/routes/campaigns/analytics/breakdowns.tsx:135
-msgid "AdSet Performance"
-msgstr "AdSet Performance"
+#~ msgid "AdSet Performance"
+#~ msgstr "AdSet Performance"
 
 #: src/user/ads/InlineContentAd.tsx:90
 msgid "Advertiser Name"
@@ -383,6 +393,10 @@ msgstr "Brave’s 70+ million cord cutters, and tech savvy early adopters want p
 #~ msgid "Brave’s products are made to uphold user privacy. By default, the Brave browser blocks third-party tracking (scripts, tags, pixels, etc.) including those used by Google Analytics. This means that most standard website reporting won’t be compatible with Brave Ads. To ensure advertisers have visibility into performance of campaigns, we’ve detailed other effective privacy-first options for measurement in our <0>reporting guide</0>"
 #~ msgstr "Brave’s products are made to uphold user privacy. By default, the Brave browser blocks third-party tracking (scripts, tags, pixels, etc.) including those used by Google Analytics. This means that most standard website reporting won’t be compatible with Brave Ads. To ensure advertisers have visibility into performance of campaigns, we’ve detailed other effective privacy-first options for measurement in our <0>reporting guide</0>"
 
+#: src/routes/campaigns/analytics/filters/BreakdownSelector.tsx:45
+msgid "Breakdowns"
+msgstr "Breakdowns"
+
 #: src/auth/registration/AccountChoice.tsx:34
 #~ msgid "Browser ads"
 #~ msgstr "Browser ads"
@@ -483,7 +497,7 @@ msgstr "Campaigns"
 #: src/components/Assets/UploadImage.tsx:128
 #: src/components/Campaigns/CloneCampaign.tsx:131
 #: src/components/Creatives/CreativeStatusSwitch.tsx:132
-#: src/user/reporting/ReportMenu.tsx:133
+#: src/user/reporting/ReportMenu.tsx:137
 #: src/user/settings/NewKeyPairModal.tsx:149
 #: src/user/settings/NewKeyPairModal.tsx:198
 #: src/user/settings/NewKeyPairModal.tsx:243
@@ -803,8 +817,8 @@ msgid "created"
 msgstr "created"
 
 #: src/routes/campaigns/analytics/breakdowns.tsx:174
-msgid "Creative Performance"
-msgstr "Creative Performance"
+#~ msgid "Creative Performance"
+#~ msgstr "Creative Performance"
 
 #: src/routes/campaigns/analytics/metrics.ts:63
 #: src/user/analytics/analyticsOverview/components/BaseBarChart.tsx:58
@@ -817,9 +831,17 @@ msgstr "CTR"
 msgid "Custom"
 msgstr "Custom"
 
+#: src/routes/campaigns/analytics/breakdowns.tsx:109
+msgid "Daily"
+msgstr "Daily"
+
 #: src/routes/campaigns/analytics/breakdowns.tsx:126
-msgid "Daily Graph"
-msgstr "Daily Graph"
+#~ msgid "Daily Graph"
+#~ msgstr "Daily Graph"
+
+#: src/routes/campaigns/analytics/breakdowns.tsx:109
+#~ msgid "Daily Performance"
+#~ msgstr "Daily Performance"
 
 #: src/auth/views/GetStartedLandingPage.tsx:47
 msgid "Dashboard"
@@ -833,7 +855,7 @@ msgstr "Data not valid for this private key"
 msgid "Day"
 msgstr "Day"
 
-#: src/user/reporting/ReportMenu.tsx:102
+#: src/user/reporting/ReportMenu.tsx:106
 msgid "Decrypt Conversion Data?"
 msgstr "Decrypt Conversion Data?"
 
@@ -913,7 +935,7 @@ msgstr "Domain to advertise"
 msgid "Don’t see the email? Check your spam folder or <0>try again.</0>"
 msgstr "Don’t see the email? Check your spam folder or <0>try again.</0>"
 
-#: src/user/reporting/ReportMenu.tsx:62
+#: src/user/reporting/ReportMenu.tsx:66
 msgid "Download Report"
 msgstr "Download Report"
 
@@ -995,7 +1017,7 @@ msgstr "Escape the low CTR of display banners"
 msgid "Example - https://brave.com/brave-rewards/"
 msgstr "Example - https://brave.com/brave-rewards/"
 
-#: src/user/reporting/ReportMenu.tsx:142
+#: src/user/reporting/ReportMenu.tsx:146
 msgid "Export"
 msgstr "Export"
 
@@ -1153,9 +1175,17 @@ msgstr "Hide"
 msgid "Hour"
 msgstr "Hour"
 
+#: src/routes/campaigns/analytics/breakdowns.tsx:110
+msgid "Hourly"
+msgstr "Hourly"
+
 #: src/routes/campaigns/analytics/breakdowns.tsx:127
-msgid "Hourly Graph"
-msgstr "Hourly Graph"
+#~ msgid "Hourly Graph"
+#~ msgstr "Hourly Graph"
+
+#: src/routes/campaigns/analytics/breakdowns.tsx:110
+#~ msgid "Hourly Performance"
+#~ msgstr "Hourly Performance"
 
 #: src/auth/components/AdvertiserAgreed.tsx:56
 msgid "I have reviewed and agree to the <0>Advertiser Privacy Policy</0> and platform <1>Terms of Service</1> applicable to Brave Ads."
@@ -1601,13 +1631,14 @@ msgstr "or sign in using a secure link"
 msgid "Organization"
 msgstr "Organization"
 
+#: src/routes/campaigns/analytics/breakdowns.tsx:131
 #: src/user/analytics/analyticsOverview/reports/os/components/OsPieChart.tsx:21
 msgid "OS"
 msgstr "OS"
 
-#: src/routes/campaigns/analytics/breakdowns.tsx:148
-msgid "OS Performance"
-msgstr "OS Performance"
+#: src/routes/campaigns/analytics/breakdowns.tsx:131
+#~ msgid "OS Performance"
+#~ msgstr "OS Performance"
 
 #: src/auth/registration/MarketingChannel.tsx:51
 msgid "Other (please specify)"
@@ -1646,7 +1677,7 @@ msgstr "Payment acknowledgement is required"
 msgid "Payment is required before launching your campaign."
 msgstr "Payment is required before launching your campaign."
 
-#: src/user/reporting/ReportMenu.tsx:73
+#: src/user/reporting/ReportMenu.tsx:77
 msgid "Performance Report"
 msgstr "Performance Report"
 
@@ -1783,7 +1814,7 @@ msgstr "Primary region of business is required"
 #~ msgid "Privacy-forward"
 #~ msgstr "Privacy-forward"
 
-#: src/user/reporting/ReportMenu.tsx:120
+#: src/user/reporting/ReportMenu.tsx:124
 msgid "Private Key"
 msgstr "Private Key"
 
@@ -1922,8 +1953,8 @@ msgid "See if you qualify"
 msgstr "See if you qualify"
 
 #: src/routes/campaigns/analytics/breakdowns.tsx:161
-msgid "Segment Performance"
-msgstr "Segment Performance"
+#~ msgid "Segment Performance"
+#~ msgstr "Segment Performance"
 
 #: src/components/Campaigns/CloneCampaign.tsx:98
 msgid "Select one campaign to clone"
@@ -2178,6 +2209,10 @@ msgstr "Terms & Conditions acknowledgement is required"
 #~ msgid "Thanks for your interest in Brave Ads! Our team will now carefully review the provided information."
 #~ msgstr "Thanks for your interest in Brave Ads! Our team will now carefully review the provided information."
 
+#: src/routes/campaigns/analytics/RenderMetricValue.tsx:23
+msgid "The current value for this metric may be an underestimate."
+msgstr "The current value for this metric may be an underestimate."
+
 #: src/user/views/user/search/Finalize.tsx:50
 msgid "The following query string parameters will be added to your landing page URLs. This will allow you to track the performance of your ads."
 msgstr "The following query string parameters will be added to your landing page URLs. This will allow you to track the performance of your ads."
@@ -2244,13 +2279,25 @@ msgstr "To"
 #~ msgid "To launch a campaign with Brave, you are required to prepay the full amount you intend to spend. Any remaining funds from your budget will be credited back to your original payment method upon request."
 #~ msgstr "To launch a campaign with Brave, you are required to prepay the full amount you intend to spend. Any remaining funds from your budget will be credited back to your original payment method upon request."
 
-#: src/user/reporting/ReportMenu.tsx:106
+#: src/user/reporting/ReportMenu.tsx:110
 msgid "To protect user’s privacy, verified ad conversion data is encrypted so that the identities of converted users remain anonymous to Brave. You can decrypt the conversion data in the CSV file by providing your private key here. If no key is provided, you will receive the encrypted conversion data. Your private key will never be sent to or stored on any Brave servers."
 msgstr "To protect user’s privacy, verified ad conversion data is encrypted so that the identities of converted users remain anonymous to Brave. You can decrypt the conversion data in the CSV file by providing your private key here. If no key is provided, you will receive the encrypted conversion data. Your private key will never be sent to or stored on any Brave servers."
 
 #: src/components/Collapse/ChangeReportingAlert.tsx:48
-msgid "Toggle between various metrics using the switches provided. For deeper insights, click the buttons to access various breakdowns. If you prefer the previous view, simply click the \"revert\" button to switch back."
-msgstr "Toggle between various metrics using the switches provided. For deeper insights, click the buttons to access various breakdowns. If you prefer the previous view, simply click the \"revert\" button to switch back."
+#~ msgid "Toggle between various metrics using the switches provided. For deeper insights, click the buttons to access various breakdowns. If you prefer the previous view, simply click the \"revert\" button to switch back."
+#~ msgstr "Toggle between various metrics using the switches provided. For deeper insights, click the buttons to access various breakdowns. If you prefer the previous view, simply click the \"revert\" button to switch back."
+
+#: src/components/Collapse/ChangeReportingAlert.tsx:48
+#~ msgid "Toggle metric displays using the switches on the right. Use the buttons across the top to filter and see different breakdowns. Or you can click the \"revert\" button to switch back to the old reporting screen."
+#~ msgstr "Toggle metric displays using the switches on the right. Use the buttons across the top to filter and see different breakdowns. Or you can click the \"revert\" button to switch back to the old reporting screen."
+
+#: src/components/Collapse/ChangeReportingAlert.tsx:48
+#~ msgid "Toggle metric displays using the switches on the right. Use the tabs on the left side see different breakdowns, and use the buttons across the top to filter. Or you can click the \"revert\" button to switch back to the old reporting screen."
+#~ msgstr "Toggle metric displays using the switches on the right. Use the tabs on the left side see different breakdowns, and use the buttons across the top to filter. Or you can click the \"revert\" button to switch back to the old reporting screen."
+
+#: src/components/Collapse/ChangeReportingAlert.tsx:48
+msgid "Toggle metric displays using the switches on the right. View different breakdowns using the tabs on the left. Use the top buttons to filter data. Click \"revert\" for the previous reporting screen."
+msgstr "Toggle metric displays using the switches on the right. View different breakdowns using the tabs on the left. Use the top buttons to filter data. Click \"revert\" for the previous reporting screen."
 
 #: src/auth/registration/AdvertiserRegistered.tsx:35
 #~ msgid "Try again"
@@ -2302,7 +2349,7 @@ msgstr "Unable to get profile information"
 msgid "Unable to load ad"
 msgstr "Unable to load ad"
 
-#: src/routes/campaigns/analytics/CampaignAnalytics.tsx:57
+#: src/routes/campaigns/analytics/CampaignAnalytics.tsx:64
 msgid "Unable to load reporting details for campaign: {0}"
 msgstr "Unable to load reporting details for campaign: {0}"
 
@@ -2432,7 +2479,7 @@ msgstr "Validating URL..."
 msgid "Value"
 msgstr "Value"
 
-#: src/user/reporting/ReportMenu.tsx:80
+#: src/user/reporting/ReportMenu.tsx:84
 msgid "Verified Conversions Report"
 msgstr "Verified Conversions Report"
 
