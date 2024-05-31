@@ -54,7 +54,17 @@ const NumberContainer = (
       spacing={2}
       alignSelf={props.number % 2 === 0 ? "flex-end" : "flex-start"}
     >
-      <Typography variant="h1">{props.number}</Typography>
+      <Typography
+        variant="h1"
+        sx={{
+          backgroundImage:
+            "linear-gradient(96.46deg, #FF2869 -4.13%, #930BFE 82.88%), linear-gradient(0deg, #111317, #111317);",
+          backgroundClip: "text",
+          color: "transparent",
+        }}
+      >
+        {props.number}
+      </Typography>
       <Stack spacing={1}>
         <Typography variant="h4" fontWeight={500}>
           <Trans id={props.title.id} />

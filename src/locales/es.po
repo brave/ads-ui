@@ -37,7 +37,7 @@ msgstr "El estado de {type} no se puede actualizar."
 #~ msgid "*Limited time only. Available to new advertisers, and those who ran campaigns before September 30, 2023."
 #~ msgstr ""
 
-#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:34
+#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:51
 msgid "*Limited time only. Available to new advertisers, and those who ran campaigns before September 30, 2023. Eligible for Push Notification and Newsfeed ads only."
 msgstr ""
 
@@ -114,6 +114,10 @@ msgstr "Formato del anuncio"
 msgid "Ad image dimensions are required"
 msgstr "Las dimensiones de la imagen del anuncio son obligatorias"
 
+#: src/components/AppBar/LandingPageAppBar.tsx:45
+#~ msgid "Ad Inquiries"
+#~ msgstr ""
+
 #: src/user/ads/AdList.tsx:57
 msgid "Ad Name"
 msgstr "Nombre del anuncio"
@@ -183,7 +187,7 @@ msgstr "Detalles adicionales"
 msgid "Additional Report: OS Performance"
 msgstr "Informe adicional: Rendimiento del Sistema Operativo"
 
-#: src/components/AppBar/LandingPageAppBar.tsx:74
+#: src/components/AppBar/LandingPageAppBar.tsx:90
 #: src/components/Assets/AdvertiserAssets.tsx:33
 #: src/components/Creatives/CreativeList.tsx:102
 #: src/components/Creatives/CreativeSpecificPreview.tsx:54
@@ -286,6 +290,7 @@ msgid "Back"
 msgstr "Atrás"
 
 #: src/auth/views/components/Inquiries.tsx:58
+#: src/components/AppBar/LandingPageAppBar.tsx:57
 msgid "Basic Attention Token"
 msgstr "Basic Attention Token"
 
@@ -310,8 +315,8 @@ msgstr "Vista previa del cuerpo"
 #~ msgstr "Reservar una reunión"
 
 #: src/components/AppBar/LandingPageAppBar.tsx:75
-msgid "Brave Ads"
-msgstr ""
+#~ msgid "Brave Ads"
+#~ msgstr ""
 
 #: src/auth/views/components/WhyUseBraveAds.tsx:23
 msgid "Brave Ads deliver at the browser or search level, in dedicated placements that give your brand more spotlight and better engagement."
@@ -321,7 +326,7 @@ msgstr ""
 msgid "Brave cannot recover this key, which has been generated in your browser. You will need to confirm this private key on the next step before changes are saved."
 msgstr "Brave no puede recuperar esta clave, que se ha generado en su navegador. Deberá confirmar esta clave privada en el siguiente paso antes de guardar los cambios."
 
-#: src/auth/views/components/WhatIsBrave.tsx:13
+#: src/auth/views/components/WhatIsBrave.tsx:18
 msgid "Brave is an independent company dedicated to building a user-first Web. Our private, feature-rich browser and search engine are used by 70+ million people worldwide, with hundreds of thousands more downloading every day."
 msgstr ""
 
@@ -333,7 +338,7 @@ msgstr ""
 #~ msgid "Brave is place where early adopters thrive. We’re celebrating our crypto roots by offering new and returning customers half off their first campaign when they check-out with BAT<0>*</0>."
 #~ msgstr ""
 
-#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:26
+#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:42
 msgid "Brave is place where early adopters thrive. We’re celebrating our crypto roots by offering new and returning customers half off their first self-managed campaign when they check-out with BAT<0>*</0>."
 msgstr ""
 
@@ -342,6 +347,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/auth/views/components/Inquiries.tsx:36
+#: src/components/AppBar/LandingPageAppBar.tsx:48
 msgid "Brave Search Ads"
 msgstr ""
 
@@ -349,7 +355,7 @@ msgstr ""
 msgid "Brave Search Ads convert as well as, or better than Google Search ad clicks."
 msgstr "Los anuncios de Brave Search generan conversiones tan bien o mejores que los clics en los anuncios de Google Search."
 
-#: src/auth/views/components/FooterCTA.tsx:16
+#: src/auth/views/components/FooterCTA.tsx:17
 msgid "Brave’s 70+ million cord cutters, and tech savvy early adopters want privacy and performance over tracking and lag. Hundreds of thousands more make the switch every day. Want them to see your brand? Start your first campaign in minutes, and with as little as $500."
 msgstr ""
 
@@ -569,6 +575,10 @@ msgstr "¡Felicidades! 🎉"
 msgid "Contact"
 msgstr "Póngase en contacto con selfserve@brave.com"
 
+#: src/components/AppBar/LandingPageAppBar.tsx:64
+msgid "Contact sales"
+msgstr ""
+
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:127
 msgid "Contact Sales"
 msgstr "Póngase en contacto con Ventas"
@@ -744,7 +754,7 @@ msgstr "creado"
 msgid "CTR"
 msgstr "CTR"
 
-#: src/auth/views/GetStartedLandingPage.tsx:38
+#: src/auth/views/GetStartedLandingPage.tsx:39
 #: src/components/Button/DashboardButton.tsx:14
 msgid "Dashboard"
 msgstr "Panel de control"
@@ -1045,10 +1055,10 @@ msgstr "Póngase en contacto con nuestro equipo"
 msgid "Get login link"
 msgstr "Obtener enlace de inicio de sesión"
 
-#: src/auth/views/components/FooterCTA.tsx:35
-#: src/auth/views/GetStartedLandingPage.tsx:38
-#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:68
-#: src/components/AppBar/LandingPageAppBar.tsx:35
+#: src/auth/views/components/FooterCTA.tsx:37
+#: src/auth/views/GetStartedLandingPage.tsx:41
+#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:86
+#: src/components/AppBar/LandingPageAppBar.tsx:39
 msgid "Get started"
 msgstr "Comenzar"
 
@@ -1178,7 +1188,7 @@ msgstr "Token no válido"
 msgid "is not"
 msgstr "no es"
 
-#: src/auth/views/components/WhatIsBraveAds.tsx:13
+#: src/auth/views/components/WhatIsBraveAds.tsx:18
 msgid "It is a modern <0>advertiser-first</0> ad platform made to help brands reach new users. Brave Ads are discrete, unobtrusive first-party ads built directly into the browser and search engine, with familiar formats like push notifications and news-feed ads. Brave’s innovative on-device targeting respects a user’s desire for privacy while still delivering personalized ads based on their interests, which drives high ROI for advertisers."
 msgstr ""
 
@@ -1206,7 +1216,7 @@ msgstr "Se requiere confirmación de idioma"
 msgid "Learn More"
 msgstr "Más información"
 
-#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:78
+#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:96
 msgid "Learn more about BAT"
 msgstr "Más información sobre BAT"
 
@@ -1247,10 +1257,10 @@ msgstr "El presupuesto vitalicio debe ser mayor para el intervalo de fechas prop
 msgid "Locations"
 msgstr "Ubicaciones"
 
-#: src/auth/views/GetStartedLandingPage.tsx:49
+#: src/auth/views/GetStartedLandingPage.tsx:53
 #: src/auth/views/Login.tsx:67
-#: src/components/AppBar/LandingPageAppBar.tsx:118
-#: src/components/AppBar/LandingPageAppBar.tsx:169
+#: src/components/AppBar/LandingPageAppBar.tsx:137
+#: src/components/AppBar/LandingPageAppBar.tsx:189
 msgid "Log in"
 msgstr "Iniciar sesión"
 
@@ -1503,7 +1513,7 @@ msgstr "Pausar"
 #~ msgid "Pay with BAT to get <0>50% off</0> your first campaign"
 #~ msgstr "Pague con BAT para obtener <0>50% de descuento</0> en su primera campaña"
 
-#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:20
+#: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:35
 msgid "Pay with BAT to get <0>50% off</0> your first self-managed campaign."
 msgstr ""
 
@@ -1824,7 +1834,7 @@ msgstr ""
 msgid "Show"
 msgstr "Mostrar"
 
-#: src/components/AppBar/LandingPageAppBar.tsx:118
+#: src/components/AppBar/LandingPageAppBar.tsx:137
 #: src/components/Navigation/Navbar.tsx:53
 msgid "Sign out"
 msgstr "Cerrar sesión"
@@ -1915,7 +1925,7 @@ msgstr ""
 msgid "Start Time"
 msgstr "Hora de inicio"
 
-#: src/auth/registration/RegistrationContainer.tsx:26
+#: src/auth/registration/RegistrationContainer.tsx:22
 msgid "Start your company profile"
 msgstr "Inicie el perfil de su empresa"
 
@@ -2269,11 +2279,11 @@ msgstr "El sitio web debe comenzar con https://"
 msgid "Week"
 msgstr "Semana"
 
-#: src/auth/views/components/WhatIsBraveAds.tsx:9
+#: src/auth/views/components/WhatIsBraveAds.tsx:14
 msgid "What is Brave Ads?"
 msgstr ""
 
-#: src/auth/views/components/WhatIsBrave.tsx:9
+#: src/auth/views/components/WhatIsBrave.tsx:14
 msgid "What’s Brave?"
 msgstr ""
 

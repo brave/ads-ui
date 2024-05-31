@@ -98,7 +98,7 @@ function SearchImageCarousel() {
   }, []);
 
   return (
-    <Box display="flex" width="550px">
+    <Box display="flex" width="550px" p={{ sm: 5 }}>
       <img
         src={images[(currentIndex + 2) % images.length]}
         style={{
