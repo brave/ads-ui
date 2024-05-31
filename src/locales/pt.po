@@ -115,8 +115,8 @@ msgid "Ad image dimensions are required"
 msgstr "As dimensões da imagem do anúncio são obrigatórias"
 
 #: src/components/AppBar/LandingPageAppBar.tsx:45
-msgid "Ad Inquiries"
-msgstr ""
+#~ msgid "Ad Inquiries"
+#~ msgstr ""
 
 #: src/user/ads/AdList.tsx:57
 msgid "Ad Name"
@@ -187,7 +187,7 @@ msgstr "Detalhes Adicionais"
 msgid "Additional Report: OS Performance"
 msgstr "Relatório Adicional: Desempenho do Sistema Operacional"
 
-#: src/components/AppBar/LandingPageAppBar.tsx:70
+#: src/components/AppBar/LandingPageAppBar.tsx:90
 #: src/components/Assets/AdvertiserAssets.tsx:33
 #: src/components/Creatives/CreativeList.tsx:102
 #: src/components/Creatives/CreativeSpecificPreview.tsx:54
@@ -287,7 +287,7 @@ msgid "Back"
 msgstr "Voltar"
 
 #: src/auth/views/components/Inquiries.tsx:58
-#: src/components/AppBar/LandingPageAppBar.tsx:42
+#: src/components/AppBar/LandingPageAppBar.tsx:57
 msgid "Basic Attention Token"
 msgstr "Basic Attention Token"
 
@@ -338,7 +338,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/auth/views/components/Inquiries.tsx:36
-#: src/components/AppBar/LandingPageAppBar.tsx:39
+#: src/components/AppBar/LandingPageAppBar.tsx:48
 msgid "Brave Search Ads"
 msgstr ""
 
@@ -562,6 +562,10 @@ msgstr "Parabéns! 🎉"
 #: src/components/Drawer/SupportMenu.tsx:76
 msgid "Contact"
 msgstr "Contato"
+
+#: src/components/AppBar/LandingPageAppBar.tsx:64
+msgid "Contact sales"
+msgstr ""
 
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:127
 msgid "Contact Sales"
@@ -1032,7 +1036,7 @@ msgstr "Obter o link de login"
 #: src/auth/views/components/FooterCTA.tsx:37
 #: src/auth/views/GetStartedLandingPage.tsx:41
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:86
-#: src/components/AppBar/LandingPageAppBar.tsx:36
+#: src/components/AppBar/LandingPageAppBar.tsx:39
 msgid "Get started"
 msgstr "Começar"
 
@@ -1230,8 +1234,8 @@ msgstr "Localizações"
 
 #: src/auth/views/GetStartedLandingPage.tsx:53
 #: src/auth/views/Login.tsx:67
-#: src/components/AppBar/LandingPageAppBar.tsx:117
-#: src/components/AppBar/LandingPageAppBar.tsx:169
+#: src/components/AppBar/LandingPageAppBar.tsx:137
+#: src/components/AppBar/LandingPageAppBar.tsx:189
 msgid "Log in"
 msgstr "Entrar"
 
@@ -1784,7 +1788,7 @@ msgstr ""
 msgid "Show"
 msgstr "Mostrar"
 
-#: src/components/AppBar/LandingPageAppBar.tsx:117
+#: src/components/AppBar/LandingPageAppBar.tsx:137
 #: src/components/Navigation/Navbar.tsx:53
 msgid "Sign out"
 msgstr "Sair"

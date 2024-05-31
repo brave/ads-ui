@@ -61,7 +61,11 @@ export function LandingPageAppBar() {
     },
     {
       component: (
-        <PageLink to="/contact" msg={msg`Ad Inquiries`} textColor={textColor} />
+        <PageLink
+          to="/contact"
+          msg={msg`Contact sales`}
+          textColor={textColor}
+        />
       ),
     },
   ];

@@ -119,8 +119,8 @@ msgid "Ad image dimensions are required"
 msgstr "Ad image dimensions are required"
 
 #: src/components/AppBar/LandingPageAppBar.tsx:45
-msgid "Ad Inquiries"
-msgstr "Ad Inquiries"
+#~ msgid "Ad Inquiries"
+#~ msgstr "Ad Inquiries"
 
 #: src/user/ads/AdList.tsx:57
 msgid "Ad Name"
@@ -191,7 +191,7 @@ msgstr "Additional Details"
 msgid "Additional Report: OS Performance"
 msgstr "Additional Report: OS Performance"
 
-#: src/components/AppBar/LandingPageAppBar.tsx:70
+#: src/components/AppBar/LandingPageAppBar.tsx:90
 #: src/components/Assets/AdvertiserAssets.tsx:33
 #: src/components/Creatives/CreativeList.tsx:102
 #: src/components/Creatives/CreativeSpecificPreview.tsx:54
@@ -295,7 +295,7 @@ msgid "Back"
 msgstr "Back"
 
 #: src/auth/views/components/Inquiries.tsx:58
-#: src/components/AppBar/LandingPageAppBar.tsx:42
+#: src/components/AppBar/LandingPageAppBar.tsx:57
 msgid "Basic Attention Token"
 msgstr "Basic Attention Token"
 
@@ -354,7 +354,7 @@ msgstr "Brave is place where early adopters thrive. We’re celebrating our cryp
 #~ msgstr "Brave Search"
 
 #: src/auth/views/components/Inquiries.tsx:36
-#: src/components/AppBar/LandingPageAppBar.tsx:39
+#: src/components/AppBar/LandingPageAppBar.tsx:48
 msgid "Brave Search Ads"
 msgstr "Brave Search Ads"
 
@@ -594,6 +594,10 @@ msgstr "Congratulations! 🎉"
 #: src/components/Drawer/SupportMenu.tsx:76
 msgid "Contact"
 msgstr "Contact"
+
+#: src/components/AppBar/LandingPageAppBar.tsx:64
+msgid "Contact sales"
+msgstr "Contact sales"
 
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:127
 msgid "Contact Sales"
@@ -1077,7 +1081,7 @@ msgstr "Get login link"
 #: src/auth/views/components/FooterCTA.tsx:37
 #: src/auth/views/GetStartedLandingPage.tsx:41
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:86
-#: src/components/AppBar/LandingPageAppBar.tsx:36
+#: src/components/AppBar/LandingPageAppBar.tsx:39
 msgid "Get started"
 msgstr "Get started"
 
@@ -1287,8 +1291,8 @@ msgstr "Locations"
 
 #: src/auth/views/GetStartedLandingPage.tsx:53
 #: src/auth/views/Login.tsx:67
-#: src/components/AppBar/LandingPageAppBar.tsx:117
-#: src/components/AppBar/LandingPageAppBar.tsx:169
+#: src/components/AppBar/LandingPageAppBar.tsx:137
+#: src/components/AppBar/LandingPageAppBar.tsx:189
 msgid "Log in"
 msgstr "Log in"
 
@@ -1881,7 +1885,7 @@ msgstr "Setup Progress"
 msgid "Show"
 msgstr "Show"
 
-#: src/components/AppBar/LandingPageAppBar.tsx:117
+#: src/components/AppBar/LandingPageAppBar.tsx:137
 #: src/components/Navigation/Navbar.tsx:53
 msgid "Sign out"
 msgstr "Sign out"
