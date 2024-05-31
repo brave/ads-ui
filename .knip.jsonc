@@ -6,5 +6,5 @@
     "src/graphql-client/*.ts",
     "src/graphql/apollo-client-helpers.ts",
     "node_modules/**/*",
-  ]
+  ],
 }
