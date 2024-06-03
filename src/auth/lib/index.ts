@@ -1,7 +1,7 @@
 import {
-  AdvertiserFragment,
   PaymentType,
   UserFragment,
+  Advertiser as GraphqlAdvertiser,
 } from "@/graphql-client/graphql";
 import {
   buildAdServerEndpoint,
@@ -11,7 +11,7 @@ import { RegistrationForm } from "@/auth/registration/types";
 import { t } from "@lingui/macro";
 
 type Advertiser = Pick<
-  AdvertiserFragment,
+  GraphqlAdvertiser,
   | "selfServiceSetPrice"
   | "selfServiceManageCampaign"
   | "id"

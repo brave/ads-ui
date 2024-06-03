@@ -18,8 +18,8 @@ import { Register } from "@/auth/registration/Register";
 import { LandingPage } from "@/auth/views/LandingPage";
 import { BraveAdsContactFrame } from "@/auth/registration/BraveAdsContactFrame";
 import { useMatomo } from "@jonkoops/matomo-tracker-react";
-import { BasicAttentionTokenLandingPage } from "@/basic-attention-token/BasicAttentionTokenLandingPage";
 import { SearchLandingPage } from "@/search/SearchLandingPage";
+import { BasicAttentionTokenLandingPage } from "@/basic-attention-token/BasicAttentionTokenLandingPage";
 
 export function App() {
   const { enableLinkTracking } = useMatomo();

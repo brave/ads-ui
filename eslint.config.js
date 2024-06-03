@@ -5,10 +5,18 @@ import jsxRuntime from "eslint-plugin-react/configs/jsx-runtime.js";
 import prettier from "eslint-config-prettier";
 import reactHooks from "eslint-plugin-react-hooks";
 import lingui from "eslint-plugin-lingui";
+import * as graphql from "@graphql-eslint/eslint-plugin";
 
 export default tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
+  {
+    plugins: {
+      prettier,
+      "react-hooks": reactHooks,
+      lingui,
+    },
+  },
   {
     files: ["**/*.{js,cjs,jsx,mjsx,ts,tsx,mtsx}"],
     ...reactRecommended,
@@ -18,10 +26,24 @@ export default tseslint.config(
         version: "detect",
       },
     },
+  },
+  {
+    name: "apply graphql processor to all typescript files",
+    files: ["**/*.{ts,tsx}"],
+    processor: graphql.processors.graphql,
+  },
+  {
+    name: "configure graphql linter",
+    files: ["**/*.graphql"],
     plugins: {
-      prettier,
-      "react-hooks": reactHooks,
-      lingui,
+      "@graphql-eslint": graphql,
+    },
+    languageOptions: {
+      parser: graphql,
+    },
+    rules: {
+      ...graphql.configs["operations-recommended"].rules,
+      "@graphql-eslint/no-deprecated": "warn",
     },
   },
   {
@@ -91,6 +113,7 @@ export default tseslint.config(
     ignores: [
       "**/*.test.ts",
       "src/components/TimeZonePicker/useTimeZoneList.ts",
+      "codegen.ts",
     ],
   },
   {

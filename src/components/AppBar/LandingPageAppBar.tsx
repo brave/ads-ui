@@ -10,7 +10,8 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import ads from "@/assets/images/logo.svg";
+import brave from "@/assets/images/full-brave-brand.svg";
+import braveDark from "@/assets/images/full-brave-brand-black.svg";
 import { Link as RouterLink, useRouteMatch } from "react-router-dom";
 import { useIsAuthenticated } from "@/auth/hooks/queries/useIsAuthenticated";
 import { useSignOut } from "@/auth/hooks/mutations/useSignOut";
@@ -20,50 +21,51 @@ import { useLingui } from "@lingui/react";
 import { SupportMenu } from "@/components/Drawer/SupportMenu";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
+import { PageLink } from "@/components/AppBar/PageLink";
 
 export function LandingPageAppBar() {
   const match = useRouteMatch();
   const { _ } = useLingui();
   const isAuthenticated = useIsAuthenticated();
   const isMobile = useIsMobile();
-
-  const GetStarted = () => (
-    <RouterLink to="/register" style={{ textDecoration: "none" }}>
-      <Typography
-        variant={isMobile ? "body2" : "subtitle1"}
-        color="text.primary"
-      >
-        <Trans>Get started</Trans>
-      </Typography>
-    </RouterLink>
-  );
+  const isContact = match.path === "/contact";
+  const textColor = isContact ? "text.primary" : "white";
 
   const links = [
     {
-      component: isAuthenticated ? null : <GetStarted />,
-    },
-    {
       component: (
-        <RouterLink to={`/bat`} style={{ textDecoration: "none" }}>
-          <Typography
-            variant={isMobile ? "body2" : "subtitle1"}
-            color="text.primary"
-          >
-            <Trans>Basic Attention Token</Trans>
-          </Typography>
-        </RouterLink>
+        <PageLink
+          to="/register/browser"
+          msg={msg`Get started`}
+          textColor={textColor}
+        />
       ),
     },
     {
       component: (
-        <RouterLink to={`/search`} style={{ textDecoration: "none" }}>
-          <Typography
-            variant={isMobile ? "body2" : "subtitle1"}
-            color="text.primary"
-          >
-            <Trans>Brave Search Ads</Trans>
-          </Typography>
-        </RouterLink>
+        <PageLink
+          to="/search"
+          msg={msg`Brave Search Ads`}
+          textColor={textColor}
+        />
+      ),
+    },
+    {
+      component: (
+        <PageLink
+          to="/bat"
+          msg={msg`Basic Attention Token`}
+          textColor={textColor}
+        />
+      ),
+    },
+    {
+      component: (
+        <PageLink
+          to="/contact"
+          msg={msg`Contact sales`}
+          textColor={textColor}
+        />
       ),
     },
   ];
@@ -71,9 +73,9 @@ export function LandingPageAppBar() {
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar
-        position="fixed"
+        position="absolute"
         sx={{
-          bgcolor: "rgba(252, 252, 253, 0.65)",
+          bgcolor: "rgba(252, 252, 253, 0)",
           boxShadow: "none",
           height: { md: "74px" },
           justifyContent: "center",
@@ -86,26 +88,38 @@ export function LandingPageAppBar() {
             spacing={{ xs: 2, md: 3 }}
             justifyContent="space-between"
           >
-            <RouterLink to="/" style={{ marginTop: 5 }}>
-              <img src={ads} alt={_(msg`Ads`)} height="31px" width="160px" />
-            </RouterLink>
+            <Box component={RouterLink} to="/" width={100} display="flex">
+              <img
+                src={isContact ? braveDark : brave}
+                alt={_(msg`Ads`)}
+                height={30}
+                width={100}
+              />
+            </Box>
 
-            <Divider orientation="vertical" flexItem />
+            <Divider
+              orientation="vertical"
+              flexItem
+              sx={{ bgcolor: "white" }}
+            />
             {!isMobile && (
               <>
                 {links.map((l, i) => (
                   <div key={`menu_component_${i}`}>{l.component}</div>
                 ))}
-                <SupportMenu usePlainLink />
+                <SupportMenu usePlainLink linkColor={textColor} />
               </>
             )}
           </Stack>
           <div style={{ flexGrow: 1 }} />
-          {!isMobile && !match.url.includes("auth") && (
-            <AuthedButton isAuthenticated={isAuthenticated} />
-          )}
+          {!isMobile && <AuthedButton isAuthenticated={isAuthenticated} />}
           {isMobile && (
-            <MobileMenu links={links} isAuthenticated={isAuthenticated} />
+            <MobileMenu
+              links={links}
+              isAuthenticated={isAuthenticated}
+              linkColor={textColor}
+              isContact={isContact}
+            />
           )}
         </Toolbar>
       </AppBar>
@@ -118,7 +132,7 @@ function AuthedButton(props: { isAuthenticated?: boolean }) {
 
   return (
     <Button
-      variant="outlined"
+      variant="contained"
       size="large"
       component={RouterLink}
       to={!props.isAuthenticated ? "/auth/link" : "/"}
@@ -129,7 +143,12 @@ function AuthedButton(props: { isAuthenticated?: boolean }) {
   );
 }
 
-function MobileMenu(props: { links: any[]; isAuthenticated?: boolean }) {
+function MobileMenu(props: {
+  links: any[];
+  isAuthenticated?: boolean;
+  linkColor: string;
+  isContact?: boolean;
+}) {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
   return (
@@ -143,10 +162,10 @@ function MobileMenu(props: { links: any[]; isAuthenticated?: boolean }) {
       }}
     >
       <div style={{ marginLeft: 15 }} />
-      <SupportMenu usePlainLink />
+      <SupportMenu usePlainLink linkColor={props.linkColor} />
       <div style={{ flexGrow: 1 }} />
       <IconButton size="large" onClick={(e) => setAnchorElNav(e.currentTarget)}>
-        <MenuIcon />
+        <MenuIcon sx={{ color: props.isContact ? "black" : "white" }} />
       </IconButton>
       <Menu
         id="menu-appbar"
@@ -176,9 +195,7 @@ function MobileMenu(props: { links: any[]; isAuthenticated?: boolean }) {
         </MenuItem>
         <Divider />
         {props.links.map((l, i) => (
-          <MenuItem key={`menu_item_${i}`} onClick={() => setAnchorElNav(null)}>
-            {l.component}
-          </MenuItem>
+          <MenuItem key={`menu_component_${i}`}>{l.component}</MenuItem>
         ))}
       </Menu>
     </Box>

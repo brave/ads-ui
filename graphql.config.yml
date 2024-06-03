@@ -1,2 +1,2 @@
-schema: "../ads-serve/src/graphql/schema.graphql"
+schema: "src/graphql/ads-serve.graphql.schema.json"
 documents: "src/**/*.{ts,tsx,graphql}"

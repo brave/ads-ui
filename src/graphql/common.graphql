@@ -17,8 +17,7 @@ query ActiveGeocodes {
 query Segments {
   segments {
     data {
-      code
-      name
+      ...Segment
     }
   }
 }

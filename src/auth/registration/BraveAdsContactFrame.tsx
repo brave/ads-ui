@@ -16,6 +16,7 @@ export function BraveAdsContactFrame() {
         position="absolute"
         height="100%"
         width="100%"
+        bgcolor="#f8f8f8"
       >
         <Toolbar />
         <Stack direction="row" justifyContent="center">
