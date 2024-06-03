@@ -5,16 +5,16 @@ import { Trans } from "@lingui/react";
 export function SearchTalkingPoints() {
   const talkingPoints = [
     {
-      title: msg`Incremental`,
-      description: msg`Reach audiences who don’t use other search engines and block ads on most sites.`,
+      title: msg`Tap into unreachable audiences`,
+      description: msg`Brave Search Ads can reach audiences who use ad blockers, and don’t use traditional search engines.`,
     },
     {
       title: msg`As effective as Google`,
-      description: msg`Brave Search Ads convert as well as, or better than Google Search ad clicks.`,
+      description: msg`Brave Search Ads convert as well as—or better than—Google Search ad clicks.`,
     },
     {
       title: msg`Risk Free`,
-      description: msg`Get a free one-month test to see how Search Ads perform for your brand.`,
+      description: msg`Try a free one-month test to see how Brave Search Ads perform for your brand.`,
     },
   ];
 
