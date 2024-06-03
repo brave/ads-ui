@@ -71,7 +71,7 @@ export function CampaignAnalytics({ campaignOverview }: CampaignOverviewProps) {
       <ChangeReportingAlert id={campaignOverview.id} />
       <Box
         component={Card}
-        p={5}
+        p={2}
         // this refers to the layout of the vertical flexbox that contains this component:
         //  it should grow to fill the available space vertically
         flex="auto"

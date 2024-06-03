@@ -5,11 +5,10 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { useState } from "react";
-import { msg } from "@lingui/macro";
 
 export function VerticalBreakdown() {
   const { _ } = useLingui();
-  const [value, setValue] = useState(1);
+  const [value, setValue] = useState(0);
   const { selected, setSelected, forceDefaultBreakdownSelection } =
     useBreakdownParams();
   const breakdowns = BREAKDOWNS.map((item) => ({
@@ -25,7 +24,7 @@ export function VerticalBreakdown() {
   return (
     <Box
       sx={{
-        width: "130px",
+        width: "85px",
         height: "100%",
         borderRight: 1,
         borderColor: "divider",
@@ -33,27 +32,18 @@ export function VerticalBreakdown() {
     >
       <Tabs
         orientation="vertical"
-        variant="scrollable"
         value={value}
         onChange={(e, nv) => {
           setValue(nv);
-          setSelected(breakdowns[nv - 1]);
+          setSelected(breakdowns[nv]);
         }}
         sx={{ alignItems: "left" }}
       >
-        <Tab
-          label={_(msg`Breakdowns`)}
-          disabled
-          sx={{
-            alignItems: "start",
-            "&.Mui-disabled": {
-              color: "black",
-              fontWeight: 600,
-            },
-          }}
-        />
         {breakdowns.map((b) => (
-          <Tab label={b.label} sx={{ alignItems: "start" }} />
+          <Tab
+            label={b.label}
+            sx={{ alignItems: "start", color: "text.primary" }}
+          />
         ))}
       </Tabs>
     </Box>
