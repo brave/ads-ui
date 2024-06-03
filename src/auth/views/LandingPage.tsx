@@ -17,8 +17,7 @@ export function LandingPage() {
   return (
     <Background>
       <LandingPageAppBar />
-      <Toolbar />
-      <Toolbar />
+      <Toolbar sx={{ mb: 8 }} />
       <Box width="100%">
         <Box display="flex" justifyContent="center" p={1}>
           <GetStartedLandingPage />
