@@ -58,7 +58,7 @@ export const ReportMenu = ({
           )
         }
         disabled={loading}
-        size="large"
+        size="medium"
         sx={{
           borderRadius: 1,
         }}

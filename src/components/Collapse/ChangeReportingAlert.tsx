@@ -26,6 +26,7 @@ export const ChangeReportingAlert = (props: { id: string }) => {
               component={RouterLink}
               to={`/user/main/campaign/${props.id}`}
               variant="outlined"
+              sx={{ borderRadius: 1 }}
             >
               <Trans>Revert</Trans>
             </Button>
@@ -47,8 +48,9 @@ export const ChangeReportingAlert = (props: { id: string }) => {
         </AlertTitle>
         <Trans>
           Toggle metric displays using the switches on the right. View different
-          breakdowns using the tabs on the left. Use the top buttons to filter
-          data. Click "revert" for the previous reporting screen.
+          breakdowns using the tabs on the left. Use the top buttons on the
+          right to filter data. Click "revert" for the previous reporting
+          screen.
         </Trans>
       </Alert>
     </Collapse>

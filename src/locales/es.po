@@ -383,8 +383,8 @@ msgid "Brave’s 70+ million cord cutters, and tech savvy early adopters want pr
 msgstr ""
 
 #: src/routes/campaigns/analytics/filters/BreakdownSelector.tsx:45
-msgid "Breakdowns"
-msgstr ""
+#~ msgid "Breakdowns"
+#~ msgstr ""
 
 #: src/auth/registration/AccountChoice.tsx:34
 #~ msgid "Browser ads"
@@ -1844,7 +1844,7 @@ msgstr "Solicitar otro enlace."
 msgid "Return to dashboard"
 msgstr "Volver al panel de control"
 
-#: src/components/Collapse/ChangeReportingAlert.tsx:30
+#: src/components/Collapse/ChangeReportingAlert.tsx:31
 msgid "Revert"
 msgstr ""
 
@@ -2218,9 +2218,13 @@ msgstr "Para proteger la privacidad del usuario, los datos de conversión de anu
 #~ msgid "Toggle metric displays using the switches on the right. Use the tabs on the left side see different breakdowns, and use the buttons across the top to filter. Or you can click the \"revert\" button to switch back to the old reporting screen."
 #~ msgstr ""
 
-#: src/components/Collapse/ChangeReportingAlert.tsx:48
-msgid "Toggle metric displays using the switches on the right. View different breakdowns using the tabs on the left. Use the top buttons to filter data. Click \"revert\" for the previous reporting screen."
+#: src/components/Collapse/ChangeReportingAlert.tsx:49
+msgid "Toggle metric displays using the switches on the right. View different breakdowns using the tabs on the left. Use the top buttons on the right to filter data. Click \"revert\" for the previous reporting screen."
 msgstr ""
+
+#: src/components/Collapse/ChangeReportingAlert.tsx:48
+#~ msgid "Toggle metric displays using the switches on the right. View different breakdowns using the tabs on the left. Use the top buttons to filter data. Click \"revert\" for the previous reporting screen."
+#~ msgstr ""
 
 #~ msgid "Try again"
 #~ msgstr "Inténtelo de nuevo"
@@ -2422,7 +2426,7 @@ msgstr "Visitar el centro de ayuda"
 msgid "We value your feedback and would love to hear your thoughts on your recent experience. <0/>Your input will help us improve the Brave Ads platform to better meet your needs. <1/>It only takes a few minutes and your participation will be greatly appreciated! <2/>Thank you for using Brave Ads! <3/>"
 msgstr "Valoramos sus comentarios y nos encantaría conocer su opinión sobre su experiencia reciente. <0/>Sus comentarios nos ayudarán a mejorar la plataforma de Brave Ads para satisfacer mejor sus necesidades. <1/>¡Solo toma unos minutos y su participación será muy apreciada! <2/>¡Gracias por usar Brave Ads! <3/>"
 
-#: src/components/Collapse/ChangeReportingAlert.tsx:46
+#: src/components/Collapse/ChangeReportingAlert.tsx:47
 msgid "We've updated our reporting view"
 msgstr ""
 

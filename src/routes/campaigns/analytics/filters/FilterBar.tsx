@@ -25,7 +25,6 @@ export function FilterBar(props: FilterProps) {
       paddingX={1}
       gap={1}
     >
-      {/*<BreakdownSelector />*/}
       <TimeFilter {...props} />
       <OsFilter {...props} />
       <ReportMenu

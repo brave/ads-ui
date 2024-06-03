@@ -394,8 +394,8 @@ msgstr "Brave’s 70+ million cord cutters, and tech savvy early adopters want p
 #~ msgstr "Brave’s products are made to uphold user privacy. By default, the Brave browser blocks third-party tracking (scripts, tags, pixels, etc.) including those used by Google Analytics. This means that most standard website reporting won’t be compatible with Brave Ads. To ensure advertisers have visibility into performance of campaigns, we’ve detailed other effective privacy-first options for measurement in our <0>reporting guide</0>"
 
 #: src/routes/campaigns/analytics/filters/BreakdownSelector.tsx:45
-msgid "Breakdowns"
-msgstr "Breakdowns"
+#~ msgid "Breakdowns"
+#~ msgstr "Breakdowns"
 
 #: src/auth/registration/AccountChoice.tsx:34
 #~ msgid "Browser ads"
@@ -1890,7 +1890,7 @@ msgstr "Request another link."
 msgid "Return to dashboard"
 msgstr "Return to dashboard"
 
-#: src/components/Collapse/ChangeReportingAlert.tsx:30
+#: src/components/Collapse/ChangeReportingAlert.tsx:31
 msgid "Revert"
 msgstr "Revert"
 
@@ -2295,9 +2295,13 @@ msgstr "To protect user’s privacy, verified ad conversion data is encrypted so
 #~ msgid "Toggle metric displays using the switches on the right. Use the tabs on the left side see different breakdowns, and use the buttons across the top to filter. Or you can click the \"revert\" button to switch back to the old reporting screen."
 #~ msgstr "Toggle metric displays using the switches on the right. Use the tabs on the left side see different breakdowns, and use the buttons across the top to filter. Or you can click the \"revert\" button to switch back to the old reporting screen."
 
+#: src/components/Collapse/ChangeReportingAlert.tsx:49
+msgid "Toggle metric displays using the switches on the right. View different breakdowns using the tabs on the left. Use the top buttons on the right to filter data. Click \"revert\" for the previous reporting screen."
+msgstr "Toggle metric displays using the switches on the right. View different breakdowns using the tabs on the left. Use the top buttons on the right to filter data. Click \"revert\" for the previous reporting screen."
+
 #: src/components/Collapse/ChangeReportingAlert.tsx:48
-msgid "Toggle metric displays using the switches on the right. View different breakdowns using the tabs on the left. Use the top buttons to filter data. Click \"revert\" for the previous reporting screen."
-msgstr "Toggle metric displays using the switches on the right. View different breakdowns using the tabs on the left. Use the top buttons to filter data. Click \"revert\" for the previous reporting screen."
+#~ msgid "Toggle metric displays using the switches on the right. View different breakdowns using the tabs on the left. Use the top buttons to filter data. Click \"revert\" for the previous reporting screen."
+#~ msgstr "Toggle metric displays using the switches on the right. View different breakdowns using the tabs on the left. Use the top buttons to filter data. Click \"revert\" for the previous reporting screen."
 
 #: src/auth/registration/AdvertiserRegistered.tsx:35
 #~ msgid "Try again"
@@ -2505,7 +2509,7 @@ msgstr "Visit Help Center"
 msgid "We value your feedback and would love to hear your thoughts on your recent experience. <0/>Your input will help us improve the Brave Ads platform to better meet your needs. <1/>It only takes a few minutes and your participation will be greatly appreciated! <2/>Thank you for using Brave Ads! <3/>"
 msgstr "We value your feedback and would love to hear your thoughts on your recent experience. <0/>Your input will help us improve the Brave Ads platform to better meet your needs. <1/>It only takes a few minutes and your participation will be greatly appreciated! <2/>Thank you for using Brave Ads! <3/>"
 
-#: src/components/Collapse/ChangeReportingAlert.tsx:46
+#: src/components/Collapse/ChangeReportingAlert.tsx:47
 msgid "We've updated our reporting view"
 msgstr "We've updated our reporting view"
 

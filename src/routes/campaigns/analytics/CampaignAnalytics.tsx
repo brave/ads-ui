@@ -1,7 +1,7 @@
 import { graphql } from "@/graphql-client";
 import { useQuery } from "@apollo/client";
 import { MetricsList } from "./MetricsList";
-import { Box, Card, Typography } from "@mui/material";
+import { Box, Card, Stack, Typography } from "@mui/material";
 import { useMetricSelection } from "./hooks";
 import { useState } from "react";
 import { FilterBar } from "./filters/FilterBar";
@@ -82,33 +82,40 @@ export function CampaignAnalytics({ campaignOverview }: CampaignOverviewProps) {
         // (slightly more spaced out on even bigger screens).
         display="grid"
         gap={1}
-        gridTemplateColumns={{ xs: "1fr", md: "1fr 300px", lg: "1fr 350px" }}
+        gridTemplateColumns={{ xs: "1fr", md: "1fr 305px" }}
         gridTemplateRows={{ xs: "auto auto", md: "auto 1fr" }}
         gridTemplateAreas={{
           xs: `
-      "name"
-      "filter"
+      "header"
       "graph"
       "metrics"
       "report"
       `,
           md: `
-        "name name"
-        "filter filter"
+        "header header"
         "graph metrics"
       `,
         }}
       >
-        <Box gridArea="name" display="flex" flexDirection="row" gap={1} mb={1}>
-          <Typography fontWeight={600}>{campaignOverview.name}</Typography>
-          <Status
-            state={campaignOverview.state}
-            start={campaignOverview.startAt}
-            end={campaignOverview.endAt}
-          />
-        </Box>
+        <Box
+          gridArea="header"
+          display="flex"
+          flexDirection="row"
+          gap={1}
+          mb={1}
+          alignItems="baseline"
+          justifyContent="space-between"
+          flexWrap="wrap"
+        >
+          <Stack direction="row" spacing={1}>
+            <Typography fontWeight={600}>{campaignOverview.name}</Typography>
+            <Status
+              state={campaignOverview.state}
+              start={campaignOverview.startAt}
+              end={campaignOverview.endAt}
+            />
+          </Stack>
 
-        <Box gridArea="filter" mb={2}>
           <FilterBar
             filters={filter}
             onChange={setFilter}

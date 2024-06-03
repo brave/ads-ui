@@ -58,7 +58,7 @@ export function FilterButton<M extends MenuItemProps>({
         variant="contained"
         endIcon={open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
         onClick={handleButtonClick}
-        size="large"
+        size="medium"
         sx={{
           borderRadius: 1,
         }}
