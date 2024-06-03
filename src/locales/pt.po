@@ -8,7 +8,7 @@ msgstr ""
 "Language: pt\n"
 "Project-Id-Version: 27b1a082298d0ee642e56f654bcd7273\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-05-31 17:05\n"
+"PO-Revision-Date: 2024-06-03 17:29\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -302,7 +302,7 @@ msgstr "Voltar"
 #: src/auth/views/components/Inquiries.tsx:58
 #: src/components/AppBar/LandingPageAppBar.tsx:57
 msgid "Basic Attention Token"
-msgstr ""
+msgstr "Basic Attention Token"
 
 #: src/user/views/adsManager/views/advanced/components/campaign/components/CustomPriceSelect.tsx:33
 msgid "Billing Type"
