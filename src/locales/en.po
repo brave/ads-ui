@@ -1314,8 +1314,8 @@ msgid "Include campaigns that ended over 6 months ago"
 msgstr "Include campaigns that ended over 6 months ago"
 
 #: src/search/SearchTalkingPoints.tsx:8
-#~ msgid "Incremental"
-#~ msgstr "Incremental"
+msgid "Incremental"
+msgstr "Incremental"
 
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:15
 #~ msgid "Interested? Pay with BAT to get <0>50% off</0> your first campaign."
@@ -2212,8 +2212,8 @@ msgstr "Tap into more than <0>9 billion</0> annual Web searches"
 #~ msgstr "Tap into over <0>9 billion</0> annual Web searches"
 
 #: src/search/SearchTalkingPoints.tsx:8
-msgid "Tap into unreachable audiences"
-msgstr "Tap into unreachable audiences"
+#~ msgid "Tap into unreachable audiences"
+#~ msgstr "Tap into unreachable audiences"
 
 #: src/user/ads/InlineContentAd.tsx:84
 #: src/user/ads/NotificationAd.tsx:84

@@ -5,7 +5,7 @@ import { Trans } from "@lingui/react";
 export function SearchTalkingPoints() {
   const talkingPoints = [
     {
-      title: msg`Tap into unreachable audiences`,
+      title: msg`Incremental`,
       description: msg`Brave Search Ads can reach audiences who use ad blockers, and don’t use traditional search engines.`,
     },
     {
