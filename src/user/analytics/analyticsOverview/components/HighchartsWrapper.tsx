@@ -19,7 +19,7 @@ type Props = BoxProps & {
 
 export const HighchartsWrapper = ({ options, ...rest }: Props) => {
   return (
-    <Box position="relative" height={300} {...rest}>
+    <Box position="relative" height={300} {...rest} flexGrow={1}>
       <HighchartsReact
         highcharts={Highcharts}
         options={options}

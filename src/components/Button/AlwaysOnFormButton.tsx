@@ -15,7 +15,7 @@ export function AlwaysOnFormButton() {
       variant="contained"
       color="primary"
       type="submit"
-      size="large"
+      size="small"
       sx={{
         width: "150px",
         borderRadius: "10px 10px 0 0",

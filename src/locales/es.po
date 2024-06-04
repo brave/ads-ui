@@ -86,6 +86,7 @@ msgid "Activate"
 msgstr "Activar"
 
 #: src/components/Creatives/NewsPreview.tsx:90
+#: src/routes/campaigns/analytics/breakdowns.tsx:144
 msgid "Ad"
 msgstr "Anuncio"
 
@@ -126,6 +127,11 @@ msgstr "Nombre del anuncio"
 msgid "Ad Name is required"
 msgstr "El nombre del anuncio es obligatorio"
 
+#: src/routes/campaigns/analytics/breakdowns.tsx:144
+#~ msgid "Ad Performance"
+#~ msgstr ""
+
+#: src/routes/campaigns/analytics/breakdowns.tsx:118
 #: src/user/views/adsManager/views/advanced/components/adSet/AdSetFields.tsx:32
 #: src/user/views/adsManager/views/advanced/components/adSet/NewAdSet.tsx:64
 #: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:37
@@ -137,12 +143,16 @@ msgstr "Conjunto de anuncios"
 msgid "Ad set name"
 msgstr "Nombre del conjunto de anuncios"
 
+#: src/routes/campaigns/analytics/breakdowns.tsx:118
+#~ msgid "Ad Set Performance"
+#~ msgstr ""
+
 #: src/user/views/user/CampaignDetails.tsx:40
 msgid "Ad sets"
 msgstr "Conjuntos de anuncios"
 
 #: src/user/views/adsManager/views/advanced/components/form/components/BaseForm.tsx:30
-#: src/user/views/user/reports/SearchCampaignReportView.tsx:129
+#: src/user/views/user/reports/SearchCampaignReportView.tsx:127
 msgid "Ad Sets"
 msgstr "Conjuntos de anuncios"
 
@@ -187,7 +197,7 @@ msgstr "Detalles adicionales"
 msgid "Additional Report: OS Performance"
 msgstr "Informe adicional: Rendimiento del Sistema Operativo"
 
-#: src/components/AppBar/LandingPageAppBar.tsx:90
+#: src/components/AppBar/LandingPageAppBar.tsx:94
 #: src/components/Assets/AdvertiserAssets.tsx:33
 #: src/components/Creatives/CreativeList.tsx:102
 #: src/components/Creatives/CreativeSpecificPreview.tsx:54
@@ -202,6 +212,10 @@ msgstr "Anuncios"
 msgid "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously approved ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
 msgstr "Los anuncios son bloques de construcción modulares que se pueden combinar con conjuntos de anuncios para crear combinaciones únicas. Los anuncios aprobados anteriormente se mostrarán aquí. Seleccione la casilla situada junto al nombre. Utilice el botón “Completar selección” para finalizar."
 
+#: src/routes/campaigns/analytics/breakdowns.tsx:135
+#~ msgid "AdSet Performance"
+#~ msgstr ""
+
 #: src/user/ads/InlineContentAd.tsx:90
 msgid "Advertiser Name"
 msgstr "Nombre del anunciante"
@@ -213,6 +227,11 @@ msgstr ""
 #: src/auth/views/LandingPage.tsx:33
 #~ msgid "advertising made simple"
 #~ msgstr "Publicidad simplificada"
+
+#: src/routes/campaigns/analytics/filters/OsFilter.tsx:15
+#: src/routes/campaigns/analytics/filters/OsFilter.tsx:28
+msgid "All OS"
+msgstr ""
 
 #: src/auth/views/MobileAdsBenefits.tsx:30
 #~ msgid "All targeting and reporting is strictly designed to be anonymous and privacy-preserving."
@@ -229,6 +248,10 @@ msgstr "Un anuncio de mi navegador Brave"
 #: src/components/Error/ErrorDetail.tsx:68
 msgid "An error has occurred while processing your request."
 msgstr "Se ha producido un error al procesar su solicitud."
+
+#: src/routes/campaigns/analytics/filters/OsFilter.tsx:16
+msgid "Android"
+msgstr ""
 
 #: src/user/settings/UserApiKey.tsx:31
 msgid "API keys are used to get data from the reporting endpoints. They are unique to you."
@@ -359,6 +382,10 @@ msgstr "Los anuncios de Brave Search generan conversiones tan bien o mejores que
 msgid "Brave’s 70+ million cord cutters, and tech savvy early adopters want privacy and performance over tracking and lag. Hundreds of thousands more make the switch every day. Want them to see your brand? Start your first campaign in minutes, and with as little as $500."
 msgstr ""
 
+#: src/routes/campaigns/analytics/filters/BreakdownSelector.tsx:45
+#~ msgid "Breakdowns"
+#~ msgstr ""
+
 #: src/auth/registration/AccountChoice.tsx:34
 #~ msgid "Browser ads"
 #~ msgstr "Anuncios del navegador"
@@ -425,6 +452,10 @@ msgstr "Borradores de campaña"
 msgid "Campaign Format is required"
 msgstr "Se requiere el formato de la campaña"
 
+#: src/routes/campaigns/analytics/AnalyticsOverview.tsx:24
+msgid "Campaign has not started yet"
+msgstr ""
+
 #: src/user/views/adsManager/views/advanced/components/campaign/CampaignSettings.tsx:33
 msgid "Campaign Name"
 msgstr "Nombre de la campaña"
@@ -451,7 +482,7 @@ msgstr "Campañas"
 #: src/components/Assets/UploadImage.tsx:128
 #: src/components/Campaigns/CloneCampaign.tsx:131
 #: src/components/Creatives/CreativeStatusSwitch.tsx:132
-#: src/user/reporting/ReportMenu.tsx:133
+#: src/user/reporting/ReportMenu.tsx:137
 #: src/user/settings/NewKeyPairModal.tsx:149
 #: src/user/settings/NewKeyPairModal.tsx:198
 #: src/user/settings/NewKeyPairModal.tsx:243
@@ -502,6 +533,7 @@ msgstr "¡Haga clic aquí!"
 msgid "Click on the secure login link in the email to access your Brave Ads account."
 msgstr "Haga clic en el enlace de inicio de sesión seguro del correo electrónico para acceder a su cuenta de Brave Ads."
 
+#: src/routes/campaigns/analytics/metrics.ts:62
 #: src/user/analytics/search/metrics.ts:54
 msgid "Click Through Rate"
 msgstr "Clic por calificaciones"
@@ -519,10 +551,15 @@ msgstr "Haga clic para ver la tasa de visitas al sitio"
 msgid "Click-through conversions"
 msgstr "Conversiones de clics"
 
+#: src/routes/campaigns/analytics/metrics.ts:94
+msgid "Click-through Conversions"
+msgstr ""
+
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:30
 msgid "Click-through rate"
 msgstr "Tasa de clics"
 
+#: src/routes/campaigns/analytics/metrics.ts:55
 #: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:48
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:35
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:164
@@ -575,7 +612,7 @@ msgstr "¡Felicidades! 🎉"
 msgid "Contact"
 msgstr "Póngase en contacto con selfserve@brave.com"
 
-#: src/components/AppBar/LandingPageAppBar.tsx:64
+#: src/components/AppBar/LandingPageAppBar.tsx:66
 msgid "Contact sales"
 msgstr ""
 
@@ -604,6 +641,10 @@ msgstr "Conversión"
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:150
 msgid "Conversion rate"
 msgstr "Tasa de conversión"
+
+#: src/routes/campaigns/analytics/metrics.ts:102
+msgid "Conversion Rate"
+msgstr ""
 
 #: src/components/Conversion/ConversionDisplay.tsx:46
 msgid "Conversion Type"
@@ -637,6 +678,7 @@ msgstr "Patrón de URL de conversión"
 msgid "Conversion URL required."
 msgstr "Se requiere una URL de conversión."
 
+#: src/routes/campaigns/analytics/metrics.ts:78
 #: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:47
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:60
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:50
@@ -647,6 +689,10 @@ msgstr "Conversiones"
 #: src/user/settings/NewKeyPairModal.tsx:182
 msgid "Copy this and keep this safe!"
 msgstr "¡Copie esto y guárdelo en un lugar seguro!"
+
+#: src/routes/campaigns/analytics/metrics.ts:125
+msgid "Cost per Acquisition"
+msgstr ""
 
 #: src/user/views/user/search/SummaryPanel.tsx:80
 msgid "Cost per click"
@@ -703,6 +749,7 @@ msgstr "Se requiere el país"
 msgid "Country Targeting"
 msgstr "Segmentación por país"
 
+#: src/routes/campaigns/analytics/metrics.ts:126
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:72
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:89
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:156
@@ -748,14 +795,34 @@ msgstr "¿Crear un nuevo par de claves?"
 msgid "created"
 msgstr "creado"
 
+#: src/routes/campaigns/analytics/breakdowns.tsx:174
+#~ msgid "Creative Performance"
+#~ msgstr ""
+
+#: src/routes/campaigns/analytics/metrics.ts:63
 #: src/user/analytics/analyticsOverview/components/BaseBarChart.tsx:58
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:40
 #: src/user/analytics/search/metrics.ts:55
 msgid "CTR"
 msgstr "CTR"
 
-#: src/auth/views/GetStartedLandingPage.tsx:39
-#: src/components/Button/DashboardButton.tsx:14
+#: src/routes/campaigns/analytics/filters/TimeFilter.tsx:34
+msgid "Custom"
+msgstr ""
+
+#: src/routes/campaigns/analytics/breakdowns.tsx:109
+msgid "Daily"
+msgstr ""
+
+#: src/routes/campaigns/analytics/breakdowns.tsx:126
+#~ msgid "Daily Graph"
+#~ msgstr ""
+
+#: src/routes/campaigns/analytics/breakdowns.tsx:109
+#~ msgid "Daily Performance"
+#~ msgstr ""
+
+#: src/auth/views/GetStartedLandingPage.tsx:47
 msgid "Dashboard"
 msgstr "Panel de control"
 
@@ -767,7 +834,7 @@ msgstr "Datos no válidos para esta clave privada"
 msgid "Day"
 msgstr "Día"
 
-#: src/user/reporting/ReportMenu.tsx:102
+#: src/user/reporting/ReportMenu.tsx:106
 msgid "Decrypt Conversion Data?"
 msgstr "¿Descifrar datos de conversión?"
 
@@ -809,6 +876,11 @@ msgstr "Descartar campaña"
 msgid "Dismissal rate"
 msgstr "Tasa de rechazo"
 
+#: src/routes/campaigns/analytics/metrics.ts:157
+msgid "Dismissal Rate"
+msgstr ""
+
+#: src/routes/campaigns/analytics/metrics.ts:149
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:65
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:174
 msgid "Dismissals"
@@ -842,10 +914,11 @@ msgstr "Dominio para publicitar"
 msgid "Don’t see the email? Check your spam folder or <0>try again.</0>"
 msgstr "¿No ve el correo electrónico? Revise su carpeta de correo no deseado o <0>inténtelo de nuevo.</0>"
 
-#: src/user/reporting/ReportMenu.tsx:62
+#: src/user/reporting/ReportMenu.tsx:66
 msgid "Download Report"
 msgstr "Descargar informe"
 
+#: src/routes/campaigns/analytics/metrics.ts:141
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:46
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:172
 msgid "Downvotes"
@@ -923,7 +996,7 @@ msgstr ""
 msgid "Example - https://brave.com/brave-rewards/"
 msgstr "Ejemplo - https://brave.com/brave-rewards/"
 
-#: src/user/reporting/ReportMenu.tsx:142
+#: src/user/reporting/ReportMenu.tsx:146
 msgid "Export"
 msgstr "Exportar"
 
@@ -1055,14 +1128,14 @@ msgstr "Póngase en contacto con nuestro equipo"
 msgid "Get login link"
 msgstr "Obtener enlace de inicio de sesión"
 
-#: src/auth/views/components/FooterCTA.tsx:37
-#: src/auth/views/GetStartedLandingPage.tsx:41
+#: src/auth/views/components/FooterCTA.tsx:42
+#: src/auth/views/GetStartedLandingPage.tsx:49
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:86
 #: src/components/AppBar/LandingPageAppBar.tsx:39
 msgid "Get started"
 msgstr "Comenzar"
 
-#: src/auth/views/GetStartedLandingPage.tsx:20
+#: src/auth/views/GetStartedLandingPage.tsx:25
 msgid "Get to your first million users with powerful ad placements on the world’s fastest-growing alternative browser & search engine."
 msgstr ""
 
@@ -1078,6 +1151,18 @@ msgstr "Ocultar"
 #: src/user/analytics/analyticsOverview/components/EngagementHeader.tsx:50
 msgid "Hour"
 msgstr "Hora"
+
+#: src/routes/campaigns/analytics/breakdowns.tsx:110
+msgid "Hourly"
+msgstr ""
+
+#: src/routes/campaigns/analytics/breakdowns.tsx:127
+#~ msgid "Hourly Graph"
+#~ msgstr ""
+
+#: src/routes/campaigns/analytics/breakdowns.tsx:110
+#~ msgid "Hourly Performance"
+#~ msgstr ""
 
 #: src/auth/components/AdvertiserAgreed.tsx:56
 msgid "I have reviewed and agree to the <0>Advertiser Privacy Policy</0> and platform <1>Terms of Service</1> applicable to Brave Ads."
@@ -1098,6 +1183,10 @@ msgstr "Entiendo que se requiere un pago antes de que se puedan lanzar campañas
 #: src/auth/registration/MarketingOptIn.tsx:14
 msgid "I would like to receive marketing emails about new features and promotions from Brave Ads"
 msgstr "Me gustaría recibir correos electrónicos de marketing sobre nuevas funciones y promociones de Brave Ads"
+
+#: src/routes/campaigns/analytics/TabularData.tsx:79
+msgid "Id"
+msgstr ""
 
 #: src/components/Assets/ImageAutocomplete.tsx:46
 msgid "Image"
@@ -1120,6 +1209,7 @@ msgstr "La URL de la imagen debe ser válida"
 msgid "Images"
 msgstr "Imágenes"
 
+#: src/routes/campaigns/analytics/metrics.ts:48
 #: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:46
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:30
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:154
@@ -1184,12 +1274,20 @@ msgstr "Sesión no válida"
 msgid "Invalid Token"
 msgstr "Token no válido"
 
+#: src/routes/campaigns/analytics/filters/OsFilter.tsx:17
+msgid "iOS"
+msgstr ""
+
 #: src/components/Datagrid/stringFilterOperators.tsx:11
 msgid "is not"
 msgstr "no es"
 
 #: src/auth/views/components/WhatIsBraveAds.tsx:18
 msgid "It is a modern <0>advertiser-first</0> ad platform made to help brands reach new users. Brave Ads are discrete, unobtrusive first-party ads built directly into the browser and search engine, with familiar formats like push notifications and news-feed ads. Brave’s innovative on-device targeting respects a user’s desire for privacy while still delivering personalized ads based on their interests, which drives high ROI for advertisers."
+msgstr ""
+
+#: src/routes/campaigns/analytics/AnalyticsOverview.tsx:26
+msgid "It is scheduled to start {campaignStartFromNow}."
 msgstr ""
 
 #: src/user/settings/UserApiKey.tsx:100
@@ -1249,6 +1347,10 @@ msgstr "El presupuesto vitalicio debe ser mayor para el intervalo de fechas prop
 #~ msgid "Limited time only. Available to new advertisers, and those who ran campaigns before September 30, 2023."
 #~ msgstr "Solo por tiempo limitado. Disponible para nuevos anunciantes y aquellos que realizaron campañas antes del 30 de septiembre de 2023."
 
+#: src/routes/campaigns/analytics/filters/OsFilter.tsx:18
+msgid "Linux"
+msgstr ""
+
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/LocationField.tsx:8
 #~ msgid "Location"
 #~ msgstr "Ubicación"
@@ -1257,10 +1359,10 @@ msgstr "El presupuesto vitalicio debe ser mayor para el intervalo de fechas prop
 msgid "Locations"
 msgstr "Ubicaciones"
 
-#: src/auth/views/GetStartedLandingPage.tsx:53
+#: src/auth/views/GetStartedLandingPage.tsx:61
 #: src/auth/views/Login.tsx:67
-#: src/components/AppBar/LandingPageAppBar.tsx:137
-#: src/components/AppBar/LandingPageAppBar.tsx:189
+#: src/components/AppBar/LandingPageAppBar.tsx:141
+#: src/components/AppBar/LandingPageAppBar.tsx:193
 msgid "Log in"
 msgstr "Iniciar sesión"
 
@@ -1271,6 +1373,10 @@ msgstr "Inicie sesión en su cuenta de Brave Ads"
 #: src/auth/views/AuthVerify.tsx:36
 msgid "Logging in"
 msgstr "Iniciando sesión"
+
+#: src/routes/campaigns/analytics/filters/OsFilter.tsx:19
+msgid "macOS"
+msgstr ""
 
 #: src/user/views/adsManager/views/advanced/components/form/components/PaymentButton.tsx:9
 msgid "Make payment & submit for approval"
@@ -1319,6 +1425,7 @@ msgstr "más"
 
 #: src/components/Creatives/CreativeCampaigns.tsx:45
 #: src/components/Creatives/CreativeList.tsx:47
+#: src/routes/campaigns/analytics/TabularData.tsx:84
 #: src/user/ads/InlineContentAd.tsx:65
 #: src/user/ads/NotificationAd.tsx:51
 #: src/user/adSet/AdSetList.tsx:92
@@ -1488,9 +1595,14 @@ msgstr "o inicie sesión usando un enlace seguro"
 msgid "Organization"
 msgstr "Organización"
 
+#: src/routes/campaigns/analytics/breakdowns.tsx:131
 #: src/user/analytics/analyticsOverview/reports/os/components/OsPieChart.tsx:21
 msgid "OS"
 msgstr "Sistema Operativo"
+
+#: src/routes/campaigns/analytics/breakdowns.tsx:131
+#~ msgid "OS Performance"
+#~ msgstr ""
 
 #: src/auth/registration/MarketingChannel.tsx:51
 msgid "Other (please specify)"
@@ -1529,7 +1641,7 @@ msgstr "Se requiere confirmación de pago"
 msgid "Payment is required before launching your campaign."
 msgstr "Se requiere el pago antes de lanzar su campaña."
 
-#: src/user/reporting/ReportMenu.tsx:73
+#: src/user/reporting/ReportMenu.tsx:77
 msgid "Performance Report"
 msgstr "Informe de rendimiento"
 
@@ -1539,7 +1651,7 @@ msgstr "Informe de rendimiento"
 msgid "Platforms"
 msgstr "Plataformas"
 
-#: src/user/views/user/reports/ConsultAccountManager.tsx:14
+#: src/user/views/user/reports/ConsultAccountManager.tsx:10
 msgid "Please ask your Account Manager for reports on campaigns of this format."
 msgstr "Por favor, consulte con su Gerente de Cuenta para obtener informes sobre campañas en este formato."
 
@@ -1660,7 +1772,7 @@ msgstr "Se requiere la región principal de la empresa"
 #~ msgid "Privacy-forward"
 #~ msgstr "Orientado a la privacidad"
 
-#: src/user/reporting/ReportMenu.tsx:120
+#: src/user/reporting/ReportMenu.tsx:124
 msgid "Private Key"
 msgstr "Clave privada"
 
@@ -1732,6 +1844,10 @@ msgstr "Solicitar otro enlace."
 msgid "Return to dashboard"
 msgstr "Volver al panel de control"
 
+#: src/components/Collapse/ChangeReportingAlert.tsx:31
+msgid "Revert"
+msgstr ""
+
 #: src/user/views/adsManager/views/advanced/components/form/components/BaseForm.tsx:37
 msgid "Review"
 msgstr "Revisar"
@@ -1786,6 +1902,10 @@ msgstr "Buscar anuncios de palabras clave"
 msgid "See if you qualify"
 msgstr ""
 
+#: src/routes/campaigns/analytics/breakdowns.tsx:161
+#~ msgid "Segment Performance"
+#~ msgstr ""
+
 #: src/components/Campaigns/CloneCampaign.tsx:98
 msgid "Select one campaign to clone"
 msgstr "Seleccione una campaña para clonar"
@@ -1834,7 +1954,7 @@ msgstr ""
 msgid "Show"
 msgstr "Mostrar"
 
-#: src/components/AppBar/LandingPageAppBar.tsx:137
+#: src/components/AppBar/LandingPageAppBar.tsx:141
 #: src/components/Navigation/Navbar.tsx:53
 msgid "Sign out"
 msgstr "Cerrar sesión"
@@ -1845,7 +1965,7 @@ msgstr "Cerrar sesión"
 #~ msgid "Sign up"
 #~ msgstr ""
 
-#: src/auth/views/GetStartedLandingPage.tsx:14
+#: src/auth/views/GetStartedLandingPage.tsx:19
 msgid "Simple ads to reach digital trend-setters around the world"
 msgstr ""
 
@@ -1860,6 +1980,10 @@ msgstr ""
 msgid "Site visit rate"
 msgstr "Tasa de visitas al sitio"
 
+#: src/routes/campaigns/analytics/metrics.ts:110
+msgid "Site Visit Rate"
+msgstr ""
+
 #: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:49
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:45
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:162
@@ -1867,6 +1991,7 @@ msgstr "Tasa de visitas al sitio"
 msgid "Site visits"
 msgstr "Visitas al sitio"
 
+#: src/routes/campaigns/analytics/metrics.ts:70
 #: src/user/views/user/AdDetailTable.tsx:71
 msgid "Site Visits"
 msgstr "Visitas al sitio"
@@ -1883,6 +2008,7 @@ msgstr "Saltar encuesta y continuar"
 msgid "Something went wrong."
 msgstr "Algo salió mal. "
 
+#: src/routes/campaigns/analytics/metrics.ts:118
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:48
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:88
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:168
@@ -2014,6 +2140,10 @@ msgstr "Se requiere la aceptación de los Términos y Condiciones"
 #~ msgid "Thanks for your interest in Brave Ads! Our team will now carefully review the provided information."
 #~ msgstr "¡Gracias por su interés en Brave Ads! Nuestro equipo ahora revisará cuidadosamente la información proporcionada."
 
+#: src/routes/campaigns/analytics/RenderMetricValue.tsx:23
+msgid "The current value for this metric may be an underestimate."
+msgstr ""
+
 #: src/user/views/user/search/Finalize.tsx:50
 msgid "The following query string parameters will be added to your landing page URLs. This will allow you to track the performance of your ads."
 msgstr ""
@@ -2072,9 +2202,29 @@ msgstr "Vista previa del título"
 msgid "To"
 msgstr "Para"
 
-#: src/user/reporting/ReportMenu.tsx:106
+#: src/user/reporting/ReportMenu.tsx:110
 msgid "To protect user’s privacy, verified ad conversion data is encrypted so that the identities of converted users remain anonymous to Brave. You can decrypt the conversion data in the CSV file by providing your private key here. If no key is provided, you will receive the encrypted conversion data. Your private key will never be sent to or stored on any Brave servers."
 msgstr "Para proteger la privacidad del usuario, los datos de conversión de anuncios verificados se cifran para que las identidades de los usuarios convertidos permanezcan anónimas para Brave. Puede descifrar los datos de conversión en el archivo CSV proporcionando su clave privada aquí. Si no se proporciona ninguna clave, recibirá los datos de conversión cifrados. Su clave privada nunca se enviará ni se almacenará en ningún servidor de Brave."
+
+#: src/components/Collapse/ChangeReportingAlert.tsx:48
+#~ msgid "Toggle between various metrics using the switches provided. For deeper insights, click the buttons to access various breakdowns. If you prefer the previous view, simply click the \"revert\" button to switch back."
+#~ msgstr ""
+
+#: src/components/Collapse/ChangeReportingAlert.tsx:48
+#~ msgid "Toggle metric displays using the switches on the right. Use the buttons across the top to filter and see different breakdowns. Or you can click the \"revert\" button to switch back to the old reporting screen."
+#~ msgstr ""
+
+#: src/components/Collapse/ChangeReportingAlert.tsx:48
+#~ msgid "Toggle metric displays using the switches on the right. Use the tabs on the left side see different breakdowns, and use the buttons across the top to filter. Or you can click the \"revert\" button to switch back to the old reporting screen."
+#~ msgstr ""
+
+#: src/components/Collapse/ChangeReportingAlert.tsx:49
+msgid "Toggle metric displays using the switches on the right. View different breakdowns using the tabs on the left. Use the top buttons on the right to filter data. Click \"revert\" for the previous reporting screen."
+msgstr ""
+
+#: src/components/Collapse/ChangeReportingAlert.tsx:48
+#~ msgid "Toggle metric displays using the switches on the right. View different breakdowns using the tabs on the left. Use the top buttons to filter data. Click \"revert\" for the previous reporting screen."
+#~ msgstr ""
 
 #~ msgid "Try again"
 #~ msgstr "Inténtelo de nuevo"
@@ -2121,6 +2271,10 @@ msgstr "No se puede obtener información del perfil"
 msgid "Unable to load ad"
 msgstr "No se puede cargar el anuncio"
 
+#: src/routes/campaigns/analytics/CampaignAnalytics.tsx:64
+msgid "Unable to load reporting details for campaign: {0}"
+msgstr ""
+
 #: src/auth/views/AuthVerify.tsx:65
 msgid "Unable to login, link has expired or has already been used."
 msgstr "No se puede iniciar sesión, el enlace ha caducado o ya se ha utilizado."
@@ -2143,7 +2297,7 @@ msgid "Unable to retrieve images"
 msgstr "No se pueden recuperar imágenes"
 
 #: src/user/analytics/analyticsOverview/reports/campaign/EngagementsOverview.tsx:46
-#: src/user/views/user/reports/SearchCampaignReportView.tsx:54
+#: src/user/views/user/reports/SearchCampaignReportView.tsx:53
 msgid "Unable to retrieve reporting data for this Campaign."
 msgstr "No se pueden recuperar los datos de los informes de esta campaña."
 
@@ -2209,6 +2363,7 @@ msgstr "Las imágenes subidas se pueden compartir entre diferentes conjuntos de 
 msgid "Uploading file..."
 msgstr "Cargando archivo…"
 
+#: src/routes/campaigns/analytics/metrics.ts:133
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:45
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:170
 msgid "Upvotes"
@@ -2246,7 +2401,7 @@ msgstr "Validando URL…"
 msgid "Value"
 msgstr ""
 
-#: src/user/reporting/ReportMenu.tsx:80
+#: src/user/reporting/ReportMenu.tsx:84
 msgid "Verified Conversions Report"
 msgstr "Informe de conversiones verificadas"
 
@@ -2255,6 +2410,10 @@ msgstr "Informe de conversiones verificadas"
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:178
 msgid "View-through conversions"
 msgstr "Conversiones por visualización"
+
+#: src/routes/campaigns/analytics/metrics.ts:86
+msgid "View-through Conversions"
+msgstr ""
 
 #: src/auth/registration/AdvertiserRegistered.tsx:30
 msgid "Visit Help Center"
@@ -2266,6 +2425,10 @@ msgstr "Visitar el centro de ayuda"
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:82
 msgid "We value your feedback and would love to hear your thoughts on your recent experience. <0/>Your input will help us improve the Brave Ads platform to better meet your needs. <1/>It only takes a few minutes and your participation will be greatly appreciated! <2/>Thank you for using Brave Ads! <3/>"
 msgstr "Valoramos sus comentarios y nos encantaría conocer su opinión sobre su experiencia reciente. <0/>Sus comentarios nos ayudarán a mejorar la plataforma de Brave Ads para satisfacer mejor sus necesidades. <1/>¡Solo toma unos minutos y su participación será muy apreciada! <2/>¡Gracias por usar Brave Ads! <3/>"
+
+#: src/components/Collapse/ChangeReportingAlert.tsx:47
+msgid "We've updated our reporting view"
+msgstr ""
 
 #: src/validation/RegistrationSchema.tsx:17
 msgid "Website must not contain any whitespace"
@@ -2297,6 +2460,10 @@ msgstr "Al buscar alternativas a Google Ads"
 
 #: src/auth/views/components/WhyUseBraveAds.tsx:18
 msgid "Why use Brave Ads?"
+msgstr ""
+
+#: src/routes/campaigns/analytics/filters/OsFilter.tsx:20
+msgid "Windows"
 msgstr ""
 
 #: src/auth/registration/SearchForm.tsx:25

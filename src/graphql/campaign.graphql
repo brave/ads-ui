@@ -58,6 +58,11 @@ fragment CampaignSummary on Campaign {
   type
   format
   dayProportion
+  brandedKeywords
+  advertiser {
+    id
+    name
+  }
 }
 
 fragment CampaignAds on Campaign {
@@ -86,12 +91,6 @@ query LoadCampaign($id: String!) {
 query LoadCampaignAds($id: String!) {
   campaign(id: $id) {
     ...CampaignAds
-  }
-}
-
-query LoadCampaignSummary($id: String!) {
-  campaign(id: $id) {
-    ...CampaignSummary
   }
 }
 
