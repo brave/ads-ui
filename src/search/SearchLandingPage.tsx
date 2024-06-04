@@ -21,7 +21,11 @@ export function SearchLandingPage() {
       <LandingPageAppBar />
       <Toolbar sx={{ mb: 2 }} />
       <Box display="flex" flexDirection="column" justifyContent="center" p={1}>
-        <Stack direction={{ md: "column", lg: "row" }} spacing={1}>
+        <Stack
+          direction={{ md: "column", lg: "row" }}
+          spacing={1}
+          alignItems="center"
+        >
           <Stack
             direction="column"
             spacing={3}
@@ -30,14 +34,39 @@ export function SearchLandingPage() {
           >
             <Typography variant="h3" color="white">
               <Trans>
-                Tap into over <strong>9 billion</strong> annual Web searches
+                Tap into more than <strong>9 billion</strong> annual Web
+                searches
               </Trans>
             </Typography>
             <Typography variant="subtitle1" fontSize="18px" color="white">
               <Trans>
-                Determine your eligibility for Brave Search, the world’s
-                fastest-growing alternative search engine by clicking below and
-                filling out the form.
+                Brave Search is the fastest growing independent search engine
+                since Bing, with more than 9 billion searches each year (and
+                growing). It’s the default search engine for Brave’s tens of
+                millions of worldwide users, and available in any other browser
+                at{" "}
+                <Link
+                  color="secondary"
+                  sx={{ cursor: "pointer" }}
+                  onClick={() => {
+                    window.open(
+                      "https://search.brave.com/",
+                      "_blank",
+                      "noopener",
+                    );
+                  }}
+                >
+                  search.brave.com
+                </Link>{" "}
+              </Trans>
+            </Typography>
+            <Typography variant="subtitle1" fontSize="18px" color="white">
+              <Trans>
+                Brave Search Ads are privacy-preserving, text-based ads that
+                appear at the top of a user’s search results page (SERP). Want
+                to redefine your SEM program, and diversify from Big Tech? Get
+                the first-mover advantage and start targeting your brand’s most
+                important keywords today.
               </Trans>
             </Typography>
             <BookAMeetingButton />
@@ -66,7 +95,7 @@ function BookAMeetingButton() {
         size="medium"
         sx={{ maxWidth: "200px", padding: 1.5 }}
       >
-        <Trans>See if you qualify</Trans>
+        <Trans>Check eligibility</Trans>
       </Button>
       <Typography color="white">
         <Trans>
