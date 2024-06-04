@@ -17,6 +17,13 @@ Our application bundle is created with [webpack](https://webpack.js.org/) and st
 
 This bundle is then served to users as a static asset by [AWS CloudFront CDN](https://aws.amazon.com/cloudfront/).
 
+## pnpm
+
+This project uses [pnpm](pnpm.io). To install, see the [installation instructions](https://pnpm.io/installation). Often this is just a matter of running `corepack enable` to enable node's built-in
+support for other package managers.
+
+Then run `pnpm install` to download dependencies.
+
 ## Local Development
 
 - Create a `.env.local` file, or update `.env` file provided
@@ -29,7 +36,7 @@ You may need to proceed through a certificate warning in order to develop locall
 ### Generating GraphQL Types:
 
 ```
-> npm run codegen
+> pnpm codegen
 ```
 
 ## Localization
@@ -37,7 +44,7 @@ You may need to proceed through a certificate warning in order to develop locall
 After changing text, or adding new translated text you need to run:
 
 ```
-❯ npm run extract
+❯ pnpm extract
 ```
 
 THe output should look something like:
@@ -56,11 +63,11 @@ Catalog statistics for src/locales/{locale}:
 │ pt       │     491     │   491   │
 └──────────┴─────────────┴─────────┘
 
-(use "npm run extract" to update catalogs with new messages)
+(use "pnpm extract" to update catalogs with new messages)
 ```
 
 This extracts all new messages, and gives a brief glimpse of what you have translated so far.
 Once translations are complete, they should be added to the `msgstr` portion of their respective language.
 
-To add more locales, edit the `locales` array in `lingui.config.js` and run `npm run extract` again.
+To add more locales, edit the `locales` array in `lingui.config.js` and run `pnpm extract` again.
 Make sure you also update `i18n.ts` with the new locale.

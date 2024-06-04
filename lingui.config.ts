@@ -1,4 +1,4 @@
-import type { LinguiConfig } from "@lingui/conf";
+import { LinguiConfig } from "@lingui/conf";
 
 const config: LinguiConfig = {
   locales: ["en", "es", "pt", "test"],
