@@ -254,17 +254,6 @@ export function CampaignList({ advertiser }: Props) {
             pageSize: 10,
           },
         },
-        filter: {
-          filterModel: {
-            items: [
-              {
-                field: "format",
-                operator: "not",
-                value: lingui(msg`New tab takeover`),
-              },
-            ],
-          },
-        },
       }}
     />
   );
