@@ -142,6 +142,11 @@ export function User() {
                   authedComponent={CampaignReportViewSelector}
                 />
 
+                <ProtectedRoute
+                  path="/user/main/report/:campaignId"
+                  authedComponent={CampaignReportViewSelector}
+                />
+
                 <Route path="/user/main/settings" component={Settings} />
                 <Route path="/user/main/profile" component={Profile} />
 

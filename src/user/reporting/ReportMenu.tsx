@@ -58,6 +58,10 @@ export const ReportMenu = ({
           )
         }
         disabled={loading}
+        size="medium"
+        sx={{
+          borderRadius: 1,
+        }}
       >
         <Trans>Download Report</Trans>
       </Button>
