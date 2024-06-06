@@ -8,7 +8,7 @@ msgstr ""
 "Language: pt\n"
 "Project-Id-Version: 27b1a082298d0ee642e56f654bcd7273\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-06-06 21:47\n"
+"PO-Revision-Date: 2024-06-06 22:43\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -80,7 +80,7 @@ msgstr "Um e-mail de login está sendo enviado"
 
 #: src/components/Drawer/SupportMenu.tsx:68
 msgid "About Brave Ads"
-msgstr "Sobre o Brave Ads"
+msgstr "Sobre os Anúncios Brave"
 
 #: src/auth/components/AdvertiserDetailsForm.tsx:119
 #~ msgid "Access dashboard"
@@ -244,7 +244,7 @@ msgstr "Perfil do anunciante"
 #: src/routes/campaigns/analytics/filters/OsFilter.tsx:15
 #: src/routes/campaigns/analytics/filters/OsFilter.tsx:28
 msgid "All OS"
-msgstr "Todos os sistemas operacionais"
+msgstr "Todos os SO"
 
 #: src/auth/views/MobileAdsBenefits.tsx:30
 #~ msgid "All targeting and reporting is strictly designed to be anonymous and privacy-preserving."
@@ -311,7 +311,7 @@ msgstr "Públicos-alvo"
 
 #: src/auth/views/components/WhyUseBraveAds.tsx:28
 msgid "Augment your marketing strategy"
-msgstr "Aumente a sua estratégia de marketing"
+msgstr "Aprimore a sua estratégia de marketing"
 
 #: src/components/Segment/SegmentPicker.tsx:51
 msgid "Automatic interest targeting"
@@ -371,7 +371,7 @@ msgstr "O Brave não pode recuperar esta chave que foi gerada em seu navegador. 
 
 #: src/auth/views/components/WhatIsBrave.tsx:18
 msgid "Brave is an independent company dedicated to building a user-first Web. Our private, feature-rich browser and search engine are used by 70+ million people worldwide, with hundreds of thousands more downloading every day."
-msgstr ""
+msgstr "O Brave é uma empresa independente dedicada a construir uma Web centrada no usuário. Nosso navegador privado e rico em recursos, junto ao nosso mecanismo de busca, são utilizados por mais de 70 milhões de pessoas em todo o mundo, com centenas de milhares de novos downloads todos os dias."
 
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:41
 #~ msgid "Brave is place where early adopters thrive. We’re celebrating our crypto roots by offering new and returning customers half off their first campaign when they check-out with BAT."
@@ -387,7 +387,8 @@ msgstr ""
 
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:41
 msgid "Brave is where early adopters thrive. We’re celebrating our crypto roots by offering new and returning Brave Ads customers half off their first self-managed campaign if they buy with BAT<0>*</0>"
-msgstr ""
+msgstr "Brave é o lugar onde os primeiros adeptos prosperam. Estamos celebrando nossas origens no mundo cripto oferecendo aos novos e antigos clientes dos Anúncios Brave 50% de desconto na primeira campanha autogerida se pagarem com BAT<0>*</0>\n\n\n\n\n\n"
+">"
 
 #: src/components/AppBar/LandingPageAppBar.tsx:64
 #~ msgid "Brave Search"
@@ -396,19 +397,19 @@ msgstr ""
 #: src/auth/views/components/Inquiries.tsx:36
 #: src/components/AppBar/LandingPageAppBar.tsx:48
 msgid "Brave Search Ads"
-msgstr ""
+msgstr "Anúncios da Pesquisa Brave"
 
 #: src/search/SearchLandingPage.tsx:64
 msgid "Brave Search Ads are privacy-preserving, text-based ads that appear at the top of a user’s search results page (SERP). Want to redefine your SEM program, and diversify from Big Tech? Get the first-mover advantage and start targeting your brand’s most important keywords today."
-msgstr ""
+msgstr "Os anúncios da Pesquisa Brave são anúncios que preservam a privacidade, baseados em texto e que aparecem no topo da página de resultados de busca (SERP) do usuário. Quer redefinir seu programa de SEM e se distanciar das Big Techs? Aproveite a vantagem do pioneirismo e comece a direcionar as palavras-chave mais importantes da sua marca hoje mesmo."
 
 #: src/search/SearchTalkingPoints.tsx:9
 msgid "Brave Search Ads can reach audiences who use ad blockers, and don’t use traditional search engines."
-msgstr ""
+msgstr "Os anúncios da Pesquisa Brave podem alcançar públicos que utilizam bloqueadores de anúncios e não usam mecanismos de busca tradicionais."
 
 #: src/search/SearchTalkingPoints.tsx:13
 msgid "Brave Search Ads convert as well as—or better than—Google Search ad clicks."
-msgstr ""
+msgstr "Os anúncios da Pesquisa Brave convertem tão bem quanto, ou até melhor, que os anúncios da Pesquisa Google."
 
 #: src/search/SearchTalkingPoints.tsx:13
 #~ msgid "Brave Search Ads convert as well as, or better than Google Search ad clicks."
@@ -588,7 +589,7 @@ msgstr "Clique Aqui!"
 
 #: src/auth/views/MagicLink.tsx:37
 msgid "Click on the secure login link in the email to access your Brave Ads account."
-msgstr "Clique no link seguro de login no seu e-mail para acessar sua conta do Brave Ads."
+msgstr "Clique no link seguro de login no seu e-mail para acessar sua conta dos Anúncios Brave."
 
 #: src/routes/campaigns/analytics/metrics.ts:62
 #: src/user/analytics/search/metrics.ts:54
@@ -1044,11 +1045,11 @@ msgstr "Acessar o Gerenciador de Anúncios"
 
 #: src/auth/views/MagicLink.tsx:63
 msgid "Enter your email address to get a secure login link. Use this link to access your Brave Ads account."
-msgstr "Insira seu e-mail para obter um link seguro de login. Use este link para acessar sua conta do Brave Ads."
+msgstr "Insira seu e-mail para obter um link seguro de login. Use este link para acessar sua conta dos Anúncios Brave."
 
 #: src/auth/views/components/WhyUseBraveAds.tsx:22
 msgid "Escape the low CTR of display banners"
-msgstr ""
+msgstr "Fuja do baixo CTR dos banners de exibição"
 
 #: src/user/ads/NotificationAd.tsx:85
 msgid "Example - https://brave.com/brave-rewards/"
@@ -1096,7 +1097,7 @@ msgstr "É necessário concordar com o rastreamento interno do site"
 
 #: src/auth/views/components/WhyUseBraveAds.tsx:35
 msgid "For businesses of all sizes. Create your campaign in minutes, starting with as little as $500 per month."
-msgstr ""
+msgstr "Para negócios de todos os tamanhos. Crie sua campanha em minutos, começando com apenas $500 por mês."
 
 #: src/auth/registration/AccountChoice.tsx:74
 #~ msgid "For enterprise and agency businesses looking for bespoke ad solutions via dedicated Brave Ads representatives."
@@ -1154,7 +1155,7 @@ msgstr "Gerar"
 
 #: src/user/settings/NewKeyPairModal.tsx:92
 msgid "Generate a keypair for your organization. Brave Ads will use your organization’s public key to sign and encrypt conversion data. Only your organization will have access to the private key, which can be used to decrypt and view conversion data."
-msgstr "Gerar um par de chaves para sua organização. O Brave Ads usará a chave pública da sua organização para assinar e criptografar os dados de conversão. Apenas sua organização terá acesso à chave privada, que pode ser usada para descriptografar e visualizar os dados de conversão."
+msgstr "Gerar um par de chaves para sua organização. Os Anúncios Brave usarão a chave pública da sua organização para assinar e criptografar os dados de conversão. Apenas a sua organização terá acesso à chave privada, que pode ser usada para descriptografar e visualizar os dados de conversão."
 
 #: src/user/settings/UserApiKey.tsx:63
 msgid "Generate a new API key?"
@@ -1225,7 +1226,7 @@ msgstr ""
 
 #: src/auth/components/AdvertiserAgreed.tsx:56
 msgid "I have reviewed and agree to the <0>Advertiser Privacy Policy</0> and platform <1>Terms of Service</1> applicable to Brave Ads."
-msgstr "Eu li e concordo com a <0>Política de Privacidade do Anunciante</0> e os <1>Termos de Serviço</1> da plataforma que se aplicam ao Brave Ads."
+msgstr "Eu li e concordo com a <0>Política de Privacidade do Anunciante</0> e os <1>Termos de Serviço</1> da plataforma que se aplicam aos Anúncios Brave."
 
 #: src/auth/components/AdvertiserAgreed.tsx:34
 #~ msgid "I understand that Brave Ads will not be compatible with Google Analytics and similar solutions that rely on third-party trackers"
@@ -1249,7 +1250,7 @@ msgstr "Entendo que o pagamento é necessário antes que as campanhas possam ser
 
 #: src/auth/registration/MarketingOptIn.tsx:14
 msgid "I would like to receive marketing emails about new features and promotions from Brave Ads"
-msgstr "Gostaria de receber e-mails sobre novos recursos e promoções do Brave Ads"
+msgstr "Gostaria de receber e-mails sobre novos recursos e promoções dos Anúncios Brave"
 
 #: src/routes/campaigns/analytics/TabularData.tsx:79
 msgid "Id"
@@ -1352,7 +1353,7 @@ msgstr "não é"
 
 #: src/auth/views/components/WhatIsBraveAds.tsx:18
 msgid "It is a modern <0>advertiser-first</0> ad platform made to help brands reach new users. Brave Ads are discrete, unobtrusive first-party ads built directly into the browser and search engine, with familiar formats like push notifications and news-feed ads. Brave’s innovative on-device targeting respects a user’s desire for privacy while still delivering personalized ads based on their interests, which drives high ROI for advertisers."
-msgstr ""
+msgstr "É uma plataforma de publicidade moderna, <0>focada nos anunciantes</0>, projetada para ajudar as marcas a alcançarem novos usuários. Os Anúncios Brave são discretos, não intrusivos e são anúncios próprios integrados diretamente no navegador e no mecanismo de busca, com formatos familiares como notificações push e anúncios no feed de notícias. O inovador direcionamento no dispositivo do Brave respeita o desejo do usuário por privacidade, ao mesmo tempo em que oferece anúncios personalizados com base em seus interesses, o que gera um alto retorno sobre o investimento para os anunciantes."
 
 #: src/routes/campaigns/analytics/AnalyticsOverview.tsx:26
 msgid "It is scheduled to start {campaignStartFromNow}."
@@ -1436,7 +1437,7 @@ msgstr "Entrar"
 
 #: src/auth/views/Login.tsx:36
 msgid "Log into your Brave Ads account"
-msgstr "Faça login em sua conta do Brave Ads"
+msgstr "Faça login na sua conta dos Anúncios Brave"
 
 #: src/auth/views/AuthVerify.tsx:36
 msgid "Logging in"
@@ -1653,7 +1654,7 @@ msgstr "Após a confirmação, o par de chaves da sua organização será substi
 
 #: src/search/SearchLandingPage.tsx:101
 msgid "Or email <0>searchads@brave.com</0>"
-msgstr ""
+msgstr "Ou envie um e-mail para <0>searchads@brave.com</0>"
 
 #: src/auth/views/MagicLink.tsx:100
 msgid "or sign in using a password"
@@ -1758,11 +1759,11 @@ msgstr "Por favor, insira um e-mail."
 
 #: src/validation/RegistrationSchema.tsx:52
 msgid "Please let us know how you heard about Brave Ads"
-msgstr "Por favor, nos diga como você descobriu o Brave Ads"
+msgstr "Por favor, nos diga como ouviu falar sobre os Anúncios Brave"
 
 #: src/validation/RegistrationSchema.tsx:24
 msgid "Please let us know why you're interested in Brave Ads"
-msgstr "Por favor, nos diga por que você está interessado no Brave Ads"
+msgstr "Por favor, nos diga por que está interessado nos Anúncios Brave"
 
 #: src/auth/registration/AdvertiserRegistered.tsx:20
 #~ msgid "Please reach out to <0>selfserve@brave.com</0> or try again."
@@ -1778,11 +1779,11 @@ msgstr "Por favor, atualize a página e tente novamente, ou envie um e-mail para
 
 #: src/basic-attention-token/PrivacyPolicy.tsx:21
 msgid "Please see our <0>Advertiser Privacy Policy</0> and <1>Terms of Service</1> applicable to Brave Ads."
-msgstr "Por favor, consulte nossa <0>Política de Privacidade do Anunciante</0> e <1>Termos de Serviço</1> que se aplicam ao Brave Ads."
+msgstr "Por favor, consulte a nossa <0>Política de Privacidade do Anunciante</0> e <1>Termos de Serviço</1> que se aplicam aos Anúncios Brave."
 
 #: src/validation/RegistrationSchema.tsx:57
 msgid "Please specify how you heard about Brave Ads"
-msgstr "Por favor, nos diga como você ficou sabendo sobre o Brave Ads"
+msgstr "Por favor, nos diga como ouviu falar sobre os Anúncios Brave"
 
 #: src/components/Conversion/ConversionFields.tsx:20
 msgid "Post-Click"
@@ -1880,11 +1881,11 @@ msgstr ""
 
 #: src/user/views/user/search/Finalize.tsx:48
 msgid "Query string parameters"
-msgstr ""
+msgstr "Parâmetros de string de consulta"
 
 #: src/auth/views/components/WhyUseBraveAds.tsx:29
 msgid "Reach 70+ million highly engaged, otherwise unreachable users."
-msgstr ""
+msgstr "Alcance mais de 70 milhões de usuários altamente engajados, que de outra forma seriam inalcançáveis."
 
 #: src/auth/views/LandingPage.tsx:37
 #~ msgid "Reach and convert new customers through premium advertising on the Brave browser and search engine."
@@ -2136,7 +2137,7 @@ msgstr "A data de Início deve ser no mínimo 2 dias a partir de hoje"
 
 #: src/auth/views/components/WhyUseBraveAds.tsx:34
 msgid "Start fast and experiment"
-msgstr ""
+msgstr "Comece rápido e experimente"
 
 #: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:42
 msgid "Start Time"
@@ -2243,7 +2244,7 @@ msgstr "Direcionamento"
 
 #: src/auth/registration/BrowserForm.tsx:57
 msgid "Tell us why you're interested in Brave Ads"
-msgstr "Nos conte por que você está interessado no Brave Ads"
+msgstr "Nos conte por que está interessado nos Anúncios Brave"
 
 #: src/auth/components/AdvertiserAgreed.tsx:62
 #~ msgid "Terms & Conditions"
@@ -2259,7 +2260,7 @@ msgstr "É necessário concordar com os Termos e Condições"
 
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:110
 msgid "The <0>Basic Attention Token (BAT)</0> is Brave’s native crypto token. Brave Browser users who opt into <1>Brave Rewards</1> can earn BAT just for opting into viewing ads from the Brave Ads network. Earners can hold BAT like any other crypto asset, trade it, cash it in, or even donate it to their favorite creators."
-msgstr ""
+msgstr "O <0>Basic Attention Token (BAT)</0> é a criptomoeda nativa do Brave. Usuários do navegador Brave que optam pelas <1>Recompensas Brave</1> podem ganhar BAT apenas por visualizar anúncios da rede dos Anúncios Brave. Os ganhadores podem manter o BAT como qualquer outro ativo cripto, trocá-lo, convertê-lo em dinheiro ou até mesmo doá-lo aos seus criadores favoritos."
 
 #: src/routes/campaigns/analytics/RenderMetricValue.tsx:23
 msgid "The current value for this metric may be an underestimate."
@@ -2357,7 +2358,7 @@ msgstr ""
 
 #: src/search/SearchTalkingPoints.tsx:17
 msgid "Try a free one-month test to see how Brave Search Ads perform for your brand."
-msgstr ""
+msgstr "Experimente gratuitamente por um mês e veja como os Anúncios da Pesquisa Brave podem beneficiar a sua marca."
 
 #: src/auth/registration/AdvertiserRegistered.tsx:35
 #~ msgid "Try again"
@@ -2563,7 +2564,7 @@ msgstr "Visitar a Central de Ajuda"
 
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:82
 msgid "We value your feedback and would love to hear your thoughts on your recent experience. <0/>Your input will help us improve the Brave Ads platform to better meet your needs. <1/>It only takes a few minutes and your participation will be greatly appreciated! <2/>Thank you for using Brave Ads! <3/>"
-msgstr "Valorizamos seu feedback e adoraríamos ouvir suas opiniões sobre sua experiência recente. <0/>Sua contribuição nos ajudará a melhorar a plataforma Brave Ads para atender melhor às suas necessidades. <1/>Leva apenas alguns minutos e sua participação será muito importante! <2/>Obrigado por usar o Brave Ads! <3/>"
+msgstr "Valorizamos seu feedback e adoraríamos ouvir suas opiniões sobre sua experiência recente. <0/>Sua contribuição nos ajudará a melhorar a plataforma dos Anúncios Brave para atender melhor às suas necessidades. <1/>Leva apenas alguns minutos e sua participação será muito importante! <2/>Obrigado por usar os Anúncios Brave! <3/>"
 
 #: src/components/Collapse/ChangeReportingAlert.tsx:47
 msgid "We've updated our reporting view"
@@ -2587,7 +2588,7 @@ msgstr "Semana"
 
 #: src/auth/views/components/WhatIsBraveAds.tsx:14
 msgid "What is Brave Ads?"
-msgstr ""
+msgstr "O que são os Anúncios Brave?"
 
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:106
 msgid "What’s BAT?"
@@ -2599,7 +2600,7 @@ msgstr ""
 
 #: src/auth/registration/MarketingChannel.tsx:13
 msgid "Where did you hear about Brave Ads"
-msgstr "Onde você ouviu falar sobre o Brave Ads"
+msgstr "Onde ouviu falar sobre os Anúncios Brave"
 
 #: src/auth/registration/MarketingChannel.tsx:20
 msgid "While looking up alternatives to Google Ads"
@@ -2607,7 +2608,7 @@ msgstr "Enquanto procurava alternativas para o Google Ads"
 
 #: src/auth/views/components/WhyUseBraveAds.tsx:18
 msgid "Why use Brave Ads?"
-msgstr ""
+msgstr "Por que usar os Anúncios Brave?"
 
 #: src/routes/campaigns/analytics/filters/OsFilter.tsx:20
 msgid "Windows"
@@ -2643,7 +2644,7 @@ msgstr "Você pode ter acesso a várias organizações. Alternar entre elas aqui
 
 #: src/auth/registration/AdvertiserRegistered.tsx:18
 msgid "You will soon receive an email with the next steps of registration. While you wait, we recommend you check out our help center to get helpful information for getting started with Brave Ads."
-msgstr "Em breve, você receberá um e-mail com os próximos passos do cadastro. Enquanto isso, sugerimos que você dê uma olhada em nossa Central de Ajuda para obter informações úteis sobre como começar a usar o Brave Ads."
+msgstr "Em breve, você receberá um e-mail com os próximos passos do cadastro. Enquanto isso, sugerimos que dê uma olhada em nossa Central de Ajuda para obter informações úteis sobre como começar a usar os Anúncios Brave."
 
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:72
 msgid "Your campaign has been created and is now being reviewed by our ads team. <0/>We’ll be in contact as soon as your campaign is approved and activated."
@@ -2651,7 +2652,7 @@ msgstr "Sua campanha foi criada e está sendo revisada por nossa equipe de anún
 
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:47
 msgid "Your campaign has been updated! <0/>If you added new ads, we’ll be in contact as soon as they are approved and activated. <1/>Thank you for using Brave Ads!"
-msgstr "Sua campanha foi atualizada! <0/>Se você adicionou novos anúncios, entraremos em contato assim que eles forem aprovados e ativados. <1/>Obrigado por usar o Brave Ads!"
+msgstr "Sua campanha foi atualizada! <0/>Se você adicionou novos anúncios, entraremos em contato assim que eles forem aprovados e ativados. <1/>Obrigado por usar os Anúncios Brave!"
 
 #: src/user/settings/NewKeyPairModal.tsx:169
 msgid "Your organization’s new public key will be:"
