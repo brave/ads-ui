@@ -20,7 +20,7 @@ interface Props {
 }
 
 export function OriginalCampaignReportView({ campaignSummary }: Props) {
-  useTrackMatomoPageView({ documentTitle: "Campaign Report View: V2" });
+  useTrackMatomoPageView({ documentTitle: "Campaign Report View" });
   const { _ } = useLingui();
   const today = new Date();
   const [startDate, setStartDate] = useState<Dayjs | undefined>();
