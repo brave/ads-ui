@@ -1,6 +1,5 @@
 import { Box, LinearProgress } from "@mui/material";
 import { AlwaysOnFormButton } from "@/components/Button/AlwaysOnFormButton";
-import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { useParams, useRouteMatch } from "react-router-dom";
 import { CampaignFormat } from "@/graphql-client/graphql";
 import { ConsultAccountManager } from "./reports/ConsultAccountManager";
@@ -39,7 +38,6 @@ const Campaign_Load = graphql(`
 
 export function CampaignReportViewSelector() {
   const match = useRouteMatch();
-  useTrackMatomoPageView({ documentTitle: "Campaign Reporting" });
   const isReport = match.url.includes("report");
 
   const { campaignId } = useParams<Params>();

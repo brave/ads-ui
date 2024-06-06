@@ -6,6 +6,7 @@ import { FullScreenProgress } from "@/components/FullScreenProgress";
 import { Trans } from "@lingui/macro";
 import { CampaignAnalytics } from "@/routes/campaigns/analytics/CampaignAnalytics";
 import { CampaignOverviewProps } from "@/util/CampaignIdProps";
+import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 
 Highcharts.setOptions({
   lang: {
@@ -14,6 +15,7 @@ Highcharts.setOptions({
 });
 
 export function AnalyticsOverview({ campaignOverview }: CampaignOverviewProps) {
+  useTrackMatomoPageView({ documentTitle: "Campaign Report View: V2" });
   const campaignStartDate = dayjs(campaignOverview.startAt);
   const campaignStartFromNow = campaignStartDate.fromNow();
 

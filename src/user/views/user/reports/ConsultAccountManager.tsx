@@ -1,7 +1,10 @@
 import { Alert } from "@mui/material";
 import { Trans } from "@lingui/macro";
+import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 
 export function ConsultAccountManager() {
+  useTrackMatomoPageView({ documentTitle: "Consult Account Manager" });
+
   return (
     <Alert
       severity="info"
