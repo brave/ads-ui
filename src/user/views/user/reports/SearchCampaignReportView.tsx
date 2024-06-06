@@ -17,12 +17,15 @@ import { useMetricSelection } from "@/user/analytics/search/hooks";
 import { ReportMenu } from "@/user/reporting/ReportMenu";
 import dayjs from "dayjs";
 import { useQuery } from "@apollo/client";
+import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 
 interface Props {
   campaignSummary: CampaignSummaryFragment;
 }
 
 export function SearchCampaignReportView({ campaignSummary }: Props) {
+  useTrackMatomoPageView({ documentTitle: "Search Campaign Report View" });
+
   const { forceDefaultMetricSelection } = useMetricSelection();
   const [isFirstLoad, setIsFirstLoad] = useState(true);
 

@@ -4,11 +4,9 @@ import { useLingui } from "@lingui/react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import { useState } from "react";
 
 export function VerticalBreakdown() {
   const { _ } = useLingui();
-  const [value, setValue] = useState(0);
   const { selected, setSelected, forceDefaultBreakdownSelection } =
     useBreakdownParams();
   const breakdowns = BREAKDOWNS.map((item) => ({
@@ -32,9 +30,8 @@ export function VerticalBreakdown() {
     >
       <Tabs
         orientation="vertical"
-        value={value}
+        value={breakdowns.findIndex((b) => b.id === selected.id)}
         onChange={(e, nv) => {
-          setValue(nv);
           setSelected(breakdowns[nv]);
         }}
         sx={{ alignItems: "left" }}

@@ -13,12 +13,14 @@ import {
 } from "@/graphql-client/graphql";
 import dayjs, { Dayjs } from "dayjs";
 import { useQuery } from "@apollo/client";
+import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 
 interface Props {
   campaignSummary: CampaignSummaryFragment;
 }
 
 export function OriginalCampaignReportView({ campaignSummary }: Props) {
+  useTrackMatomoPageView({ documentTitle: "Campaign Report View: V2" });
   const { _ } = useLingui();
   const today = new Date();
   const [startDate, setStartDate] = useState<Dayjs | undefined>();

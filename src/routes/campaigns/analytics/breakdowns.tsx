@@ -118,7 +118,8 @@ const ADSET_BREAKDOWN: BreakdownDefinitionWithQuery<
   label: msg`Ad Set`,
   query: AdSet_Breakdown_Load,
   extractId: (dims) => dims.adSet?.id ?? "",
-  extractName: (dims) => dims.adSet?.name ?? "",
+  extractName: (dims) =>
+    dims.adSet?.name || dims.adSet?.id.substring(0, 8) || "?",
   renderCell: (row) => row.name,
 };
 
