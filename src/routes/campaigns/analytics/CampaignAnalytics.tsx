@@ -6,7 +6,7 @@ import { useMetricSelection } from "./hooks";
 import { useState } from "react";
 import { FilterBar } from "./filters/FilterBar";
 import { ResultsPane } from "./ResultsPane";
-import { PerformanceFilter } from "@/graphql-client/graphql";
+import { CampaignFormat, PerformanceFilter } from "@/graphql-client/graphql";
 import dayjs from "dayjs";
 import { CampaignOverviewProps } from "@/util/CampaignIdProps";
 import { ErrorDetail } from "@/components/Error/ErrorDetail";
@@ -68,7 +68,9 @@ export function CampaignAnalytics({ campaignOverview }: CampaignOverviewProps) {
 
   return (
     <Box display="flex" width="100%" flexDirection="column">
-      <ChangeReportingAlert id={campaignOverview.id} />
+      {campaignOverview.format !== CampaignFormat.Search && (
+        <ChangeReportingAlert id={campaignOverview.id} />
+      )}
       <Box
         component={Card}
         p={2}
@@ -139,7 +141,7 @@ export function CampaignAnalytics({ campaignOverview }: CampaignOverviewProps) {
           />
         </Box>
 
-        <Box gridArea="metrics" sx={{ overflowY: "scroll" }}>
+        <Box gridArea="metrics" sx={{ overflowY: "scroll", minHeight: 600 }}>
           <MetricsList
             dataSource={data?.performance?.total?.metrics}
             campaignOverview={campaignOverview}

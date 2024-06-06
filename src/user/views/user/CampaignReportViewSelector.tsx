@@ -4,7 +4,6 @@ import { useParams, useRouteMatch } from "react-router-dom";
 import { CampaignFormat } from "@/graphql-client/graphql";
 import { ConsultAccountManager } from "./reports/ConsultAccountManager";
 import { OriginalCampaignReportView } from "./reports/OriginalCampaignReportView";
-import { SearchCampaignReportView } from "./reports/SearchCampaignReportView";
 import { useQuery } from "@apollo/client";
 import { AnalyticsOverview } from "@/routes/campaigns/analytics/AnalyticsOverview";
 import MiniSideBar from "@/components/Drawer/MiniSideBar";
@@ -57,15 +56,14 @@ export function CampaignReportViewSelector() {
   }
 
   const format = data.campaign.format;
+  const isSearch = format === CampaignFormat.Search;
 
   return (
     <MiniSideBar>
       <Box padding={2} width="100%">
         {format === CampaignFormat.NtpSi ? (
           <ConsultAccountManager />
-        ) : format === CampaignFormat.Search ? (
-          <SearchCampaignReportView campaignSummary={data.campaign} />
-        ) : isReport ? (
+        ) : isSearch || isReport ? (
           <AnalyticsOverview campaignOverview={data.campaign} />
         ) : (
           <OriginalCampaignReportView campaignSummary={data.campaign} />
