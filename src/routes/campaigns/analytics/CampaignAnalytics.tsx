@@ -141,7 +141,7 @@ export function CampaignAnalytics({ campaignOverview }: CampaignOverviewProps) {
           />
         </Box>
 
-        <Box gridArea="metrics" sx={{ overflowY: "scroll", minHeight: 600 }}>
+        <Box gridArea="metrics" sx={{ overflowY: "auto", minHeight: 600 }}>
           <MetricsList
             dataSource={data?.performance?.total?.metrics}
             campaignOverview={campaignOverview}
