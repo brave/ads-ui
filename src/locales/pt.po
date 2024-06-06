@@ -8,7 +8,7 @@ msgstr ""
 "Language: pt\n"
 "Project-Id-Version: 27b1a082298d0ee642e56f654bcd7273\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-06-04 13:40\n"
+"PO-Revision-Date: 2024-06-06 21:47\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -48,7 +48,7 @@ msgstr "Não é possível atualizar o status de {type}"
 
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:50
 msgid "*Limited time only. Available to new advertisers, and those who ran campaigns prior to September 30, 2023. Eligible for Push Notification and Newsfeed ads."
-msgstr ""
+msgstr "*Apenas por tempo limitado. Disponível para novos anunciantes e para aqueles que realizaram campanhas antes de 30 de setembro de 2023. Elegível para anúncios de notificação push e feed de notícias."
 
 #: src/components/Location/LocationPicker.tsx:25
 msgid "+{count} more"
@@ -235,7 +235,7 @@ msgstr "Nome do Anunciante"
 
 #: src/user/views/user/search/SetupProgress.tsx:34
 msgid "Advertiser profile"
-msgstr ""
+msgstr "Perfil do anunciante"
 
 #: src/auth/views/LandingPage.tsx:33
 #~ msgid "advertising made simple"
@@ -244,7 +244,7 @@ msgstr ""
 #: src/routes/campaigns/analytics/filters/OsFilter.tsx:15
 #: src/routes/campaigns/analytics/filters/OsFilter.tsx:28
 msgid "All OS"
-msgstr ""
+msgstr "Todos os sistemas operacionais"
 
 #: src/auth/views/MobileAdsBenefits.tsx:30
 #~ msgid "All targeting and reporting is strictly designed to be anonymous and privacy-preserving."
@@ -264,7 +264,7 @@ msgstr "Ocorreu um erro ao processar sua solicitação."
 
 #: src/routes/campaigns/analytics/filters/OsFilter.tsx:16
 msgid "Android"
-msgstr ""
+msgstr "Android"
 
 #: src/user/settings/UserApiKey.tsx:31
 msgid "API keys are used to get data from the reporting endpoints. They are unique to you."
@@ -284,7 +284,7 @@ msgstr "Tem certeza de que deseja pausar?"
 
 #: src/search/SearchTalkingPoints.tsx:12
 msgid "As effective as Google"
-msgstr ""
+msgstr "Tão eficaz quanto o Google"
 
 #: src/auth/registration/MarketingChannel.tsx:24
 msgid "At a marketing/media conference"
@@ -311,7 +311,7 @@ msgstr "Públicos-alvo"
 
 #: src/auth/views/components/WhyUseBraveAds.tsx:28
 msgid "Augment your marketing strategy"
-msgstr ""
+msgstr "Aumente a sua estratégia de marketing"
 
 #: src/components/Segment/SegmentPicker.tsx:51
 msgid "Automatic interest targeting"
@@ -333,7 +333,7 @@ msgstr "Basic Attention Token"
 
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:148
 msgid "BAT holders can now also cash in their tokens to advertise their companies or products on the Brave Ads network."
-msgstr ""
+msgstr "Os detentores de BAT agora também podem trocar os seus tokens para anunciar as suas empresas ou produtos na rede de Anúncios Brave."
 
 #: src/user/views/adsManager/views/advanced/components/campaign/components/CustomPriceSelect.tsx:33
 msgid "Billing Type"
@@ -363,7 +363,7 @@ msgstr "Pré-visualização do Corpo"
 
 #: src/auth/views/components/WhyUseBraveAds.tsx:23
 msgid "Brave Ads deliver at the browser or search level, in dedicated placements that give your brand more spotlight and better engagement."
-msgstr ""
+msgstr "Os Anúncios Brave são apresentados no navegador ou na pesquisa, em locais dedicados que dão à sua marca mais destaque e melhor engajamento."
 
 #: src/user/settings/NewKeyPairModal.tsx:185
 msgid "Brave cannot recover this key, which has been generated in your browser. You will need to confirm this private key on the next step before changes are saved."
