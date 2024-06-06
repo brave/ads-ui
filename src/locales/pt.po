@@ -8,7 +8,7 @@ msgstr ""
 "Language: pt\n"
 "Project-Id-Version: 27b1a082298d0ee642e56f654bcd7273\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-06-06 22:43\n"
+"PO-Revision-Date: 2024-06-06 23:45\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -417,11 +417,11 @@ msgstr "Os anúncios da Pesquisa Brave convertem tão bem quanto, ou até melhor
 
 #: src/search/SearchLandingPage.tsx:42
 msgid "Brave Search is the fastest growing independent search engine since Bing, with more than 9 billion searches each year (and growing). It’s the default search engine for Brave’s tens of millions of worldwide users, and available in any other browser at <0>search.brave.com</0>"
-msgstr ""
+msgstr "A Pesquisa Brave é o mecanismo de busca independente de crescimento mais rápido desde o Bing, com mais de 9 bilhões de buscas a cada ano (e crescendo). É o mecanismo de busca padrão para dezenas de milhões de usuários do Brave em todo o mundo e está disponível em qualquer outro navegador em <0>search.brave.com</0>"
 
 #: src/auth/views/components/FooterCTA.tsx:17
 msgid "Brave’s 70+ million cord cutters, and tech savvy early adopters want privacy and performance over tracking and lag. Hundreds of thousands more make the switch every day. Want them to see your brand? Start your first campaign in minutes, and with as little as $500."
-msgstr ""
+msgstr "Os mais de 70 milhões de usuários do Brave, que abandonaram a TV a cabo e são ligados em tecnologia, valorizam privacidade e desempenho em vez de serem rastreados e enfrentarem lentidão. Centenas de milhares de pessoas aderem à plataforma todos os dias. Quer que eles vejam sua marca? Comece sua primeira campanha em minutos, com um investimento inicial de apenas $500."
 
 #: src/auth/components/AdvertiserAgreed.tsx:17
 #~ msgid "Brave’s products are made to uphold user privacy. By default, the Brave browser blocks third-party tracking (scripts, tags, pixels, etc.) including those used by Google Analytics. This means that most standard website reporting won’t be compatible with Brave Ads. To ensure advertisers have visibility into performance of campaigns, we’ve detailed other effective privacy-first options for measurement in our <0>reporting guide</0>"
@@ -503,7 +503,7 @@ msgstr "O Formato da Campanha é obrigatório"
 
 #: src/routes/campaigns/analytics/AnalyticsOverview.tsx:24
 msgid "Campaign has not started yet"
-msgstr ""
+msgstr "A campanha ainda não começou"
 
 #: src/user/views/adsManager/views/advanced/components/campaign/CampaignSettings.tsx:33
 msgid "Campaign Name"
@@ -520,7 +520,7 @@ msgstr "Configurações da Campanha"
 
 #: src/user/views/user/search/SummaryPanel.tsx:54
 msgid "Campaign Summary"
-msgstr ""
+msgstr "Resumo da campanha"
 
 #: src/components/Creatives/CreativeCampaigns.tsx:40
 #: src/components/Drawer/MiniSideBar.tsx:22
@@ -549,7 +549,7 @@ msgstr "não é possível criar sessão"
 
 #: src/search/SearchLandingPage.tsx:98
 msgid "Check eligibility"
-msgstr ""
+msgstr "Verificar elegibilidade"
 
 #: src/components/Assets/UploadImage.tsx:72
 msgid "Choose"
@@ -611,7 +611,7 @@ msgstr "Conversões por Clique"
 
 #: src/routes/campaigns/analytics/metrics.ts:94
 msgid "Click-through Conversions"
-msgstr ""
+msgstr "Conversões por Cliques"
 
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:30
 msgid "Click-through rate"
@@ -672,7 +672,7 @@ msgstr "Contato"
 
 #: src/components/AppBar/LandingPageAppBar.tsx:66
 msgid "Contact sales"
-msgstr ""
+msgstr "Contate o time de vendas"
 
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:127
 msgid "Contact Sales"
@@ -702,7 +702,7 @@ msgstr "Taxa de conversão"
 
 #: src/routes/campaigns/analytics/metrics.ts:102
 msgid "Conversion Rate"
-msgstr ""
+msgstr "Taxa de Conversão"
 
 #: src/components/Conversion/ConversionDisplay.tsx:46
 msgid "Conversion Type"
@@ -750,11 +750,11 @@ msgstr "Copie isso e guarde em um local seguro!"
 
 #: src/routes/campaigns/analytics/metrics.ts:125
 msgid "Cost per Acquisition"
-msgstr ""
+msgstr "Custo por Aquisição"
 
 #: src/user/views/user/search/SummaryPanel.tsx:80
 msgid "Cost per click"
-msgstr ""
+msgstr "Custo por clique"
 
 #: src/auth/lib/index.ts:116
 msgid "Could not logout at this time. Please try again later."
@@ -867,11 +867,11 @@ msgstr "CTR (Taxa de Cliques)"
 
 #: src/routes/campaigns/analytics/filters/TimeFilter.tsx:34
 msgid "Custom"
-msgstr ""
+msgstr "Personalizado"
 
 #: src/routes/campaigns/analytics/breakdowns.tsx:109
 msgid "Daily"
-msgstr ""
+msgstr "Diário"
 
 #: src/routes/campaigns/analytics/breakdowns.tsx:126
 #~ msgid "Daily Graph"
@@ -883,7 +883,7 @@ msgstr ""
 
 #: src/auth/views/GetStartedLandingPage.tsx:47
 msgid "Dashboard"
-msgstr ""
+msgstr "Dashboard"
 
 #: src/user/reporting/csv.library.tsx:114
 msgid "Data not valid for this private key"
@@ -937,7 +937,7 @@ msgstr "Taxa de Dispensas"
 
 #: src/routes/campaigns/analytics/metrics.ts:157
 msgid "Dismissal Rate"
-msgstr ""
+msgstr "Taxa de Dispensas"
 
 #: src/routes/campaigns/analytics/metrics.ts:149
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:65
@@ -951,7 +951,7 @@ msgstr "A documentação sobre como utilizar a API pode ser encontrada <0>aqui</
 
 #: src/user/views/user/search/SummaryPanel.tsx:62
 msgid "Domain"
-msgstr ""
+msgstr "Domínio"
 
 #: src/validation/RegistrationSchema.tsx:34
 msgid "Domain is required"
@@ -1073,7 +1073,7 @@ msgstr "Falha ao enviar imagem"
 
 #: src/components/Button/AlwaysOnFormButton.tsx:34
 msgid "Feedback"
-msgstr ""
+msgstr "Feedback"
 
 #: src/components/Assets/hooks/useUploadFile.ts:45
 msgid "File upload complete for \"{fileName}\""
@@ -1085,7 +1085,7 @@ msgstr "Filtrar anúncios por nome..."
 
 #: src/user/views/user/search/SetupProgress.tsx:49
 msgid "Finalize & submit"
-msgstr ""
+msgstr "Finalizar e submeter"
 
 #: src/validation/AdvertiserSchema.tsx:8
 msgid "First party tracking acknowledgement is required"
@@ -1130,7 +1130,7 @@ msgstr "De uma pessoa influente que sigo online"
 
 #: src/user/views/user/search/LandingPageDetail.tsx:141
 msgid "Full Landing Page URL"
-msgstr ""
+msgstr "URL Completa da Página de Destino"
 
 #: src/auth/registration/BrowserForm.tsx:15
 #: src/auth/registration/SearchForm.tsx:16
@@ -1147,7 +1147,7 @@ msgstr "O nome completo é obrigatório"
 
 #: src/auth/views/components/Inquiries.tsx:47
 msgid "General Ad Inquiries"
-msgstr ""
+msgstr "Dúvidas Gerais sobre Anúncios"
 
 #: src/user/settings/UserApiKey.tsx:120
 msgid "Generate"
@@ -1197,7 +1197,7 @@ msgstr "Começar"
 
 #: src/auth/views/GetStartedLandingPage.tsx:25
 msgid "Get to your first million users with powerful ad placements on the world’s fastest-growing alternative browser & search engine."
-msgstr ""
+msgstr "Alcance seu primeiro milhão de usuários com anúncios potentes no navegador e mecanismo de busca alternativo que mais cresce no mundo."
 
 #: src/auth/views/components/Inquiries.tsx:71
 #: src/components/Drawer/SupportMenu.tsx:60
@@ -1214,7 +1214,7 @@ msgstr "Hora"
 
 #: src/routes/campaigns/analytics/breakdowns.tsx:110
 msgid "Hourly"
-msgstr ""
+msgstr "Por hora"
 
 #: src/routes/campaigns/analytics/breakdowns.tsx:127
 #~ msgid "Hourly Graph"
@@ -1254,7 +1254,7 @@ msgstr "Gostaria de receber e-mails sobre novos recursos e promoções dos Anún
 
 #: src/routes/campaigns/analytics/TabularData.tsx:79
 msgid "Id"
-msgstr ""
+msgstr "Id"
 
 #: src/components/Assets/ImageAutocomplete.tsx:46
 msgid "Image"
@@ -1321,7 +1321,7 @@ msgstr "Incluir campanhas que terminaram há mais de 6 meses"
 
 #: src/search/SearchTalkingPoints.tsx:8
 msgid "Incremental"
-msgstr ""
+msgstr "Incremental"
 
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:15
 #~ msgid "Interested? Pay with BAT to get <0>50% off</0> your first campaign."
@@ -1345,7 +1345,7 @@ msgstr "Token Inválido"
 
 #: src/routes/campaigns/analytics/filters/OsFilter.tsx:17
 msgid "iOS"
-msgstr ""
+msgstr "iOS"
 
 #: src/components/Datagrid/stringFilterOperators.tsx:11
 msgid "is not"
@@ -1357,7 +1357,7 @@ msgstr "É uma plataforma de publicidade moderna, <0>focada nos anunciantes</0>,
 
 #: src/routes/campaigns/analytics/AnalyticsOverview.tsx:26
 msgid "It is scheduled to start {campaignStartFromNow}."
-msgstr ""
+msgstr "O seu início está agendado para {campaignStartFromNow}."
 
 #: src/user/settings/UserApiKey.tsx:100
 msgid "Key copied"
@@ -1418,7 +1418,7 @@ msgstr "O orçamento vitalício deve ser maior para o intervalo de datas forneci
 
 #: src/routes/campaigns/analytics/filters/OsFilter.tsx:18
 msgid "Linux"
-msgstr ""
+msgstr "Linux"
 
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/LocationField.tsx:8
 #~ msgid "Location"
@@ -1445,7 +1445,7 @@ msgstr "Fazendo login"
 
 #: src/routes/campaigns/analytics/filters/OsFilter.tsx:19
 msgid "macOS"
-msgstr ""
+msgstr "macOS"
 
 #: src/user/views/adsManager/views/advanced/components/form/components/PaymentButton.tsx:9
 msgid "Make payment & submit for approval"
@@ -1594,7 +1594,7 @@ msgstr "Não foi redirecionado automaticamente? Clique neste link para acessar o
 #: src/user/views/user/search/Finalize.tsx:33
 #: src/user/views/user/search/Finalize.tsx:36
 msgid "Notes"
-msgstr ""
+msgstr "Notas"
 
 #: src/user/library/index.ts:254
 #: src/util/campaign.ts:6
@@ -1700,7 +1700,7 @@ msgstr "Pausar"
 
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:34
 msgid "Pay with BAT to get <0>50% off</0> your first self-managed campaign."
-msgstr ""
+msgstr "Pague com BAT para obter <0>50% de desconto</0> na sua primeira campanha autogerenciada."
 
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/PaymentMethodField.tsx:18
 msgid "Payment"
@@ -1857,7 +1857,7 @@ msgstr "Chave Privada"
 
 #: src/user/views/user/search/SetupProgress.tsx:43
 msgid "Proceed"
-msgstr ""
+msgstr "Avançar"
 
 #: src/components/Drawer/MiniSideBar.tsx:67
 msgid "Profile"
@@ -1873,7 +1873,7 @@ msgstr "Detalhes do Perfil"
 
 #: src/user/views/user/search/Finalize.tsx:68
 msgid "Query parameter"
-msgstr ""
+msgstr "Parâmetro de consulta"
 
 #: src/user/views/user/search/Finalize.tsx:48
 #~ msgid "Query string paramaters"
