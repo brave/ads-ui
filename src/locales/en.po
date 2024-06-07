@@ -94,7 +94,7 @@ msgid "Activate"
 msgstr "Activate"
 
 #: src/components/Creatives/NewsPreview.tsx:90
-#: src/routes/campaigns/analytics/breakdowns.tsx:144
+#: src/routes/campaigns/analytics/breakdowns.tsx:145
 msgid "Ad"
 msgstr "Ad"
 
@@ -160,7 +160,6 @@ msgid "Ad sets"
 msgstr "Ad sets"
 
 #: src/user/views/adsManager/views/advanced/components/form/components/BaseForm.tsx:30
-#: src/user/views/user/reports/SearchCampaignReportView.tsx:127
 msgid "Ad Sets"
 msgstr "Ad Sets"
 
@@ -201,7 +200,7 @@ msgstr "Add Conversion tracking"
 msgid "Additional Details"
 msgstr "Additional Details"
 
-#: src/user/views/user/reports/OriginalCampaignReportView.tsx:92
+#: src/user/views/user/reports/OriginalCampaignReportView.tsx:94
 msgid "Additional Report: OS Performance"
 msgstr "Additional Report: OS Performance"
 
@@ -244,6 +243,10 @@ msgstr "All OS"
 #: src/auth/views/MobileAdsBenefits.tsx:30
 #~ msgid "All targeting and reporting is strictly designed to be anonymous and privacy-preserving."
 #~ msgstr "All targeting and reporting is strictly designed to be anonymous and privacy-preserving."
+
+#: src/routes/campaigns/analytics/filters/time-filters.ts:17
+msgid "All time"
+msgstr "All time"
 
 #: src/auth/views/LandingPage.tsx:72
 #~ msgid "Already have an account?"
@@ -495,7 +498,7 @@ msgstr "Campaign Drafts"
 msgid "Campaign Format is required"
 msgstr "Campaign Format is required"
 
-#: src/routes/campaigns/analytics/AnalyticsOverview.tsx:24
+#: src/routes/campaigns/analytics/AnalyticsOverview.tsx:26
 msgid "Campaign has not started yet"
 msgstr "Campaign has not started yet"
 
@@ -586,7 +589,6 @@ msgid "Click on the secure login link in the email to access your Brave Ads acco
 msgstr "Click on the secure login link in the email to access your Brave Ads account."
 
 #: src/routes/campaigns/analytics/metrics.ts:62
-#: src/user/analytics/search/metrics.ts:54
 msgid "Click Through Rate"
 msgstr "Click Through Rate"
 
@@ -603,7 +605,7 @@ msgstr "Click to site visit rate"
 msgid "Click-through conversions"
 msgstr "Click-through conversions"
 
-#: src/routes/campaigns/analytics/metrics.ts:94
+#: src/routes/campaigns/analytics/metrics.ts:97
 msgid "Click-through Conversions"
 msgstr "Click-through Conversions"
 
@@ -615,7 +617,6 @@ msgstr "Click-through rate"
 #: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:48
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:35
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:164
-#: src/user/analytics/search/metrics.ts:46
 #: src/user/campaignList/CampaignList.tsx:133
 #: src/user/views/user/AdDetailTable.tsx:59
 msgid "Clicks"
@@ -694,7 +695,7 @@ msgstr "Conversion"
 msgid "Conversion rate"
 msgstr "Conversion rate"
 
-#: src/routes/campaigns/analytics/metrics.ts:102
+#: src/routes/campaigns/analytics/metrics.ts:106
 msgid "Conversion Rate"
 msgstr "Conversion Rate"
 
@@ -730,7 +731,7 @@ msgstr "Conversion URL Pattern"
 msgid "Conversion URL required."
 msgstr "Conversion URL required."
 
-#: src/routes/campaigns/analytics/metrics.ts:78
+#: src/routes/campaigns/analytics/metrics.ts:79
 #: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:47
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:60
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:50
@@ -742,7 +743,7 @@ msgstr "Conversions"
 msgid "Copy this and keep this safe!"
 msgstr "Copy this and keep this safe!"
 
-#: src/routes/campaigns/analytics/metrics.ts:125
+#: src/routes/campaigns/analytics/metrics.ts:131
 msgid "Cost per Acquisition"
 msgstr "Cost per Acquisition"
 
@@ -763,7 +764,6 @@ msgid "Counted if the user clicks an ad and spends at least 10 seconds on the ad
 msgstr "Counted if the user clicks an ad and spends at least 10 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count."
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:36
-#: src/user/analytics/search/metrics.ts:47
 msgid "Counted when a user clicks on the ad. Does not include clicks to dismiss"
 msgstr "Counted when a user clicks on the ad. Does not include clicks to dismiss"
 
@@ -784,7 +784,6 @@ msgid "Counted when a user reaches a designated conversion landing page followin
 msgstr "Counted when a user reaches a designated conversion landing page following an impression and click of the ad."
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:31
-#: src/user/analytics/search/metrics.ts:39
 msgid "Counted when an ad is displayed on screen for a minimum of one second"
 msgstr "Counted when an ad is displayed on screen for a minimum of one second"
 
@@ -801,7 +800,7 @@ msgstr "Country is required"
 msgid "Country Targeting"
 msgstr "Country Targeting"
 
-#: src/routes/campaigns/analytics/metrics.ts:126
+#: src/routes/campaigns/analytics/metrics.ts:132
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:72
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:89
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:156
@@ -855,7 +854,6 @@ msgstr "created"
 #: src/routes/campaigns/analytics/metrics.ts:63
 #: src/user/analytics/analyticsOverview/components/BaseBarChart.tsx:58
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:40
-#: src/user/analytics/search/metrics.ts:55
 msgid "CTR"
 msgstr "CTR"
 
@@ -929,11 +927,11 @@ msgstr "Discard campaign"
 msgid "Dismissal rate"
 msgstr "Dismissal rate"
 
-#: src/routes/campaigns/analytics/metrics.ts:157
+#: src/routes/campaigns/analytics/metrics.ts:164
 msgid "Dismissal Rate"
 msgstr "Dismissal Rate"
 
-#: src/routes/campaigns/analytics/metrics.ts:149
+#: src/routes/campaigns/analytics/metrics.ts:156
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:65
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:174
 msgid "Dismissals"
@@ -971,7 +969,7 @@ msgstr "Don’t see the email? Check your spam folder or <0>try again.</0>"
 msgid "Download Report"
 msgstr "Download Report"
 
-#: src/routes/campaigns/analytics/metrics.ts:141
+#: src/routes/campaigns/analytics/metrics.ts:148
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:46
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:172
 msgid "Downvotes"
@@ -1275,7 +1273,6 @@ msgstr "Images"
 #: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:46
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:30
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:154
-#: src/user/analytics/search/metrics.ts:38
 #: src/user/campaignList/CampaignList.tsx:119
 #: src/user/views/user/AdDetailTable.tsx:47
 msgid "Impressions"
@@ -1349,7 +1346,7 @@ msgstr "is not"
 msgid "It is a modern <0>advertiser-first</0> ad platform made to help brands reach new users. Brave Ads are discrete, unobtrusive first-party ads built directly into the browser and search engine, with familiar formats like push notifications and news-feed ads. Brave’s innovative on-device targeting respects a user’s desire for privacy while still delivering personalized ads based on their interests, which drives high ROI for advertisers."
 msgstr "It is a modern <0>advertiser-first</0> ad platform made to help brands reach new users. Brave Ads are discrete, unobtrusive first-party ads built directly into the browser and search engine, with familiar formats like push notifications and news-feed ads. Brave’s innovative on-device targeting respects a user’s desire for privacy while still delivering personalized ads based on their interests, which drives high ROI for advertisers."
 
-#: src/routes/campaigns/analytics/AnalyticsOverview.tsx:26
+#: src/routes/campaigns/analytics/AnalyticsOverview.tsx:28
 msgid "It is scheduled to start {campaignStartFromNow}."
 msgstr "It is scheduled to start {campaignStartFromNow}."
 
@@ -1368,6 +1365,26 @@ msgstr "Keypairs"
 #: src/validation/AdvertiserSchema.tsx:11
 msgid "Language acknowledgement is required"
 msgstr "Language acknowledgement is required"
+
+#: src/routes/campaigns/analytics/filters/time-filters.ts:54
+msgid "Last 14 days"
+msgstr "Last 14 days"
+
+#: src/routes/campaigns/analytics/filters/time-filters.ts:66
+msgid "Last 30 days"
+msgstr "Last 30 days"
+
+#: src/routes/campaigns/analytics/filters/time-filters.ts:42
+msgid "Last 7 days"
+msgstr "Last 7 days"
+
+#: src/routes/campaigns/analytics/filters/time-filters.ts:72
+msgid "Last month"
+msgstr "Last month"
+
+#: src/routes/campaigns/analytics/filters/time-filters.ts:48
+msgid "Last week (Sun - Sat)"
+msgstr "Last week (Sun - Sat)"
 
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:86
 #~ msgid "Launch a Campaign"
@@ -1495,7 +1512,6 @@ msgstr "more"
 #: src/user/ads/InlineContentAd.tsx:65
 #: src/user/ads/NotificationAd.tsx:51
 #: src/user/adSet/AdSetList.tsx:92
-#: src/user/analytics/search/AdSetBreakdown.tsx:64
 #: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:41
 #: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:30
 msgid "Name"
@@ -1529,7 +1545,6 @@ msgstr "New campaigns typically take up to 48 hours to review during a regular U
 msgid "New Keypair"
 msgstr "New Keypair"
 
-#: src/user/campaignList/CampaignList.tsx:263
 #: src/user/library/index.ts:255
 #: src/util/campaign.ts:7
 msgid "New tab takeover"
@@ -1662,7 +1677,7 @@ msgstr "or sign in using a secure link"
 msgid "Organization"
 msgstr "Organization"
 
-#: src/routes/campaigns/analytics/breakdowns.tsx:131
+#: src/routes/campaigns/analytics/breakdowns.tsx:132
 #: src/user/analytics/analyticsOverview/reports/os/components/OsPieChart.tsx:21
 msgid "OS"
 msgstr "OS"
@@ -1718,7 +1733,7 @@ msgstr "Performance Report"
 msgid "Platforms"
 msgstr "Platforms"
 
-#: src/user/views/user/reports/ConsultAccountManager.tsx:10
+#: src/user/views/user/reports/ConsultAccountManager.tsx:13
 msgid "Please ask your Account Manager for reports on campaigns of this format."
 msgstr "Please ask your Account Manager for reports on campaigns of this format."
 
@@ -2062,7 +2077,7 @@ msgstr "Simple ads to reach digital trend-setters around the world"
 msgid "Site visit rate"
 msgstr "Site visit rate"
 
-#: src/routes/campaigns/analytics/metrics.ts:110
+#: src/routes/campaigns/analytics/metrics.ts:115
 msgid "Site Visit Rate"
 msgstr "Site Visit Rate"
 
@@ -2090,12 +2105,11 @@ msgstr "Skip survey and continue"
 msgid "Something went wrong."
 msgstr "Something went wrong."
 
-#: src/routes/campaigns/analytics/metrics.ts:118
+#: src/routes/campaigns/analytics/metrics.ts:124
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:48
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:88
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:168
 #: src/user/analytics/analyticsOverview/reports/os/components/OsPieChart.tsx:40
-#: src/user/analytics/search/metrics.ts:63
 #: src/user/campaignList/CampaignList.tsx:106
 #: src/user/views/user/AdDetailTable.tsx:30
 msgid "Spend"
@@ -2155,7 +2169,6 @@ msgstr "State"
 
 #: src/components/Creatives/CreativeCampaigns.tsx:48
 #: src/user/adSet/AdSetList.tsx:98
-#: src/user/analytics/search/AdSetBreakdown.tsx:73
 #: src/user/campaignList/CampaignList.tsx:86
 msgid "Status"
 msgstr "Status"
@@ -2265,7 +2278,6 @@ msgid "The following query string parameters will be added to your landing page 
 msgstr "The following query string parameters will be added to your landing page URLs. This will allow you to track the performance of your ads."
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:41
-#: src/user/analytics/search/metrics.ts:56
 msgid "The rate at which users clicked in correlation to their impressions"
 msgstr "The rate at which users clicked in correlation to their impressions"
 
@@ -2301,6 +2313,14 @@ msgstr "This is a news display ad, it wll look like part of the news feed."
 msgid "This key is unique to you, make sure to safely store it and avoid sharing it with others to prevent unauthorized access."
 msgstr "This key is unique to you, make sure to safely store it and avoid sharing it with others to prevent unauthorized access."
 
+#: src/routes/campaigns/analytics/filters/time-filters.ts:60
+msgid "This month"
+msgstr "This month"
+
+#: src/routes/campaigns/analytics/filters/time-filters.ts:36
+msgid "This week (Sun - Today)"
+msgstr "This week (Sun - Today)"
+
 #: src/components/TimeZonePicker/index.tsx:29
 #: src/components/TimeZonePicker/index.tsx:36
 msgid "Time Zone"
@@ -2329,6 +2349,10 @@ msgstr "To"
 #: src/user/reporting/ReportMenu.tsx:110
 msgid "To protect user’s privacy, verified ad conversion data is encrypted so that the identities of converted users remain anonymous to Brave. You can decrypt the conversion data in the CSV file by providing your private key here. If no key is provided, you will receive the encrypted conversion data. Your private key will never be sent to or stored on any Brave servers."
 msgstr "To protect user’s privacy, verified ad conversion data is encrypted so that the identities of converted users remain anonymous to Brave. You can decrypt the conversion data in the CSV file by providing your private key here. If no key is provided, you will receive the encrypted conversion data. Your private key will never be sent to or stored on any Brave servers."
+
+#: src/routes/campaigns/analytics/filters/time-filters.ts:24
+msgid "Today"
+msgstr "Today"
 
 #: src/components/Collapse/ChangeReportingAlert.tsx:48
 #~ msgid "Toggle between various metrics using the switches provided. For deeper insights, click the buttons to access various breakdowns. If you prefer the previous view, simply click the \"revert\" button to switch back."
@@ -2360,7 +2384,6 @@ msgstr "Try a free one-month test to see how Brave Search Ads perform for your b
 
 #: src/components/Conversion/ConversionFields.tsx:17
 #: src/user/adSet/AdSetList.tsx:111
-#: src/user/analytics/search/AdSetBreakdown.tsx:92
 msgid "Type"
 msgstr "Type"
 
@@ -2430,7 +2453,6 @@ msgid "Unable to retrieve images"
 msgstr "Unable to retrieve images"
 
 #: src/user/analytics/analyticsOverview/reports/campaign/EngagementsOverview.tsx:46
-#: src/user/views/user/reports/SearchCampaignReportView.tsx:53
 msgid "Unable to retrieve reporting data for this Campaign."
 msgstr "Unable to retrieve reporting data for this Campaign."
 
@@ -2496,7 +2518,7 @@ msgstr "Uploaded images can be shared across different ad sets within a Campaign
 msgid "Uploading file..."
 msgstr "Uploading file..."
 
-#: src/routes/campaigns/analytics/metrics.ts:133
+#: src/routes/campaigns/analytics/metrics.ts:140
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:45
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:170
 msgid "Upvotes"
@@ -2544,7 +2566,7 @@ msgstr "Verified Conversions Report"
 msgid "View-through conversions"
 msgstr "View-through conversions"
 
-#: src/routes/campaigns/analytics/metrics.ts:86
+#: src/routes/campaigns/analytics/metrics.ts:88
 msgid "View-through Conversions"
 msgstr "View-through Conversions"
 
@@ -2615,6 +2637,10 @@ msgstr "Work email"
 #: src/components/Datagrid/renderers.tsx:70
 msgid "Yes"
 msgstr "Yes"
+
+#: src/routes/campaigns/analytics/filters/time-filters.ts:30
+msgid "Yesterday"
+msgstr "Yesterday"
 
 #: src/user/settings/NewKeyPairModal.tsx:134
 msgid "You are attempting to create a new keypair, this will replace any of your organization’s existing keypairs. Please note, previous keypairs cannot be retrieved or used once replaced."

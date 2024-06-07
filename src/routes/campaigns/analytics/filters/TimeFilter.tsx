@@ -7,7 +7,7 @@ import { useLingui } from "@lingui/react";
 
 export function TimeFilter(props: FilterProps) {
   const { _ } = useLingui();
-  const menuItems = buildTimeFilters(dayjs.utc(), props.minDate, props.maxDate);
+  const menuItems = buildTimeFilters();
 
   const matches = (
     a: dayjs.Dayjs | undefined,

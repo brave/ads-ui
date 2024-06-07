@@ -7,7 +7,6 @@ import { useState } from "react";
 import { FilterBar } from "./filters/FilterBar";
 import { ResultsPane } from "./ResultsPane";
 import { CampaignFormat, PerformanceFilter } from "@/graphql-client/graphql";
-import dayjs from "dayjs";
 import { CampaignOverviewProps } from "@/util/CampaignIdProps";
 import { ErrorDetail } from "@/components/Error/ErrorDetail";
 import { msg } from "@lingui/macro";
@@ -123,8 +122,6 @@ export function CampaignAnalytics({ campaignOverview }: CampaignOverviewProps) {
             onChange={setFilter}
             campaignId={campaignOverview.id}
             hasVerifiedConversions={hasVerifiedConversions}
-            minDate={dayjs(campaignOverview.startAt)}
-            maxDate={dayjs(campaignOverview.endAt)}
           />
         </Box>
 
