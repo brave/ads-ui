@@ -8,7 +8,7 @@ msgstr ""
 "Language: pt\n"
 "Project-Id-Version: 27b1a082298d0ee642e56f654bcd7273\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-06-06 23:45\n"
+"PO-Revision-Date: 2024-06-07 00:46\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -1077,7 +1077,7 @@ msgstr "Feedback"
 
 #: src/components/Assets/hooks/useUploadFile.ts:45
 msgid "File upload complete for \"{fileName}\""
-msgstr "Upload de arquivo completo para \"{fileName}\""
+msgstr "Envio de arquivo completo para \"{fileName}\""
 
 #: src/user/ads/AdsExistingAd.tsx:90
 msgid "Filter ads by name..."
@@ -1807,7 +1807,7 @@ msgstr "Pós-Visualização: Visualizou o anúncio e converteu ao visitar o site
 
 #: src/components/Assets/hooks/useUploadFile.ts:53
 msgid "Preparing file for upload..."
-msgstr "Preparando arquivo para upload..."
+msgstr "Preparando arquivo para enviar..."
 
 #: src/user/views/adsManager/views/advanced/components/campaign/components/CustomPriceSelect.tsx:23
 #: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:62
@@ -1897,7 +1897,7 @@ msgstr "Alcance mais de 70 milhões de usuários altamente engajados, que de out
 
 #: src/auth/views/components/FooterCTA.tsx:10
 msgid "Ready to reach your first million users? Start your first campaign today."
-msgstr ""
+msgstr "Pronto para alcançar seu primeiro milhão de usuários? Comece a sua primeira campanha hoje."
 
 #: src/components/AppBar/LandingPageAppBar.tsx:37
 #~ msgid "Register for Self-service"
@@ -1929,7 +1929,7 @@ msgstr "Voltar ao dashboard"
 
 #: src/components/Collapse/ChangeReportingAlert.tsx:31
 msgid "Revert"
-msgstr ""
+msgstr "Reverter"
 
 #: src/user/views/adsManager/views/advanced/components/form/components/BaseForm.tsx:37
 msgid "Review"
@@ -1937,15 +1937,15 @@ msgstr "Revisão"
 
 #: src/user/views/user/search/SetupProgress.tsx:39
 msgid "Review ads"
-msgstr ""
+msgstr "Revisar anúncios"
 
 #: src/search/SearchTalkingPoints.tsx:16
 msgid "Risk Free"
-msgstr ""
+msgstr "Sem riscos"
 
 #: src/user/views/user/search/LandingPageDetail.tsx:149
 msgid "Sample Queries"
-msgstr ""
+msgstr "Amostras de Consultas"
 
 #: src/form/FormikButton.tsx:71
 #: src/form/FormikButton.tsx:129
@@ -2028,7 +2028,7 @@ msgstr "Selecione as plataformas para direcionar"
 
 #: src/user/views/user/search/SummaryPanel.tsx:67
 msgid "Selected ads"
-msgstr ""
+msgstr "Anúncios selecionados"
 
 #: src/auth/registration/AccountChoice.tsx:64
 #~ msgid "Self-service"
@@ -2036,7 +2036,7 @@ msgstr ""
 
 #: src/user/views/user/search/SetupProgress.tsx:28
 msgid "Setup Progress"
-msgstr ""
+msgstr "Progresso da Configuração"
 
 #: src/user/analytics/analyticsOverview/components/MetricFilter.tsx:64
 msgid "Show"
@@ -2055,7 +2055,7 @@ msgstr "Sair"
 
 #: src/auth/views/GetStartedLandingPage.tsx:19
 msgid "Simple ads to reach digital trend-setters around the world"
-msgstr ""
+msgstr "Anúncios simples para alcançar os pioneiros digitais em todo o mundo"
 
 #: src/auth/views/GetStartedLandingPage.tsx:14
 #~ msgid "Simple ads to reach digital trend-setters around the world."
@@ -2066,11 +2066,11 @@ msgstr ""
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:80
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:158
 msgid "Site visit rate"
-msgstr "Taxa de visita ao site"
+msgstr "Taxa de visitas ao site"
 
 #: src/routes/campaigns/analytics/metrics.ts:110
 msgid "Site Visit Rate"
-msgstr ""
+msgstr "Taxa de Visitas ao Site"
 
 #: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:49
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:45
@@ -2109,7 +2109,7 @@ msgstr "Gasto"
 
 #: src/components/Creatives/SearchPreview.tsx:247
 msgid "Sponsored"
-msgstr ""
+msgstr "Patrocinado"
 
 #: src/user/campaignList/CampaignList.tsx:176
 msgid "Start"
@@ -2121,7 +2121,7 @@ msgstr "Iniciar"
 
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:88
 msgid "Start a campaign with BAT"
-msgstr ""
+msgstr "Iniciar uma campanha com BAT"
 
 #: src/components/Campaigns/CampaignDateRange.tsx:24
 msgid "Start Date"
@@ -2164,7 +2164,7 @@ msgstr "Estado"
 #: src/user/analytics/search/AdSetBreakdown.tsx:73
 #: src/user/campaignList/CampaignList.tsx:86
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: src/auth/views/components/WhyUseBraveAds.tsx:41
 #~ msgid "Stay Innovative"
@@ -2211,7 +2211,7 @@ msgstr "Responda nossa pesquisa!"
 
 #: src/search/SearchLandingPage.tsx:36
 msgid "Tap into more than <0>9 billion</0> annual Web searches"
-msgstr ""
+msgstr "Aproveite mais de <0>9 bilhões</0> de pesquisas anuais na Web"
 
 #: src/search/SearchLandingPage.tsx:32
 #~ msgid "Tap into over <0>9 billion</0> annual Web searches"
@@ -2264,11 +2264,11 @@ msgstr "O <0>Basic Attention Token (BAT)</0> é a criptomoeda nativa do Brave. U
 
 #: src/routes/campaigns/analytics/RenderMetricValue.tsx:23
 msgid "The current value for this metric may be an underestimate."
-msgstr ""
+msgstr "O valor atual para esta métrica pode ser uma subestimativa."
 
 #: src/user/views/user/search/Finalize.tsx:50
 msgid "The following query string parameters will be added to your landing page URLs. This will allow you to track the performance of your ads."
-msgstr ""
+msgstr "Os seguintes parâmetros de string de consulta serão adicionados às URLs da sua página de destino. Isso permitirá que acompanhe o desempenho dos seus anúncios."
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:41
 #: src/user/analytics/search/metrics.ts:56
@@ -2350,7 +2350,7 @@ msgstr "Para proteger a privacidade do usuário, os dados de conversão do anún
 
 #: src/components/Collapse/ChangeReportingAlert.tsx:49
 msgid "Toggle metric displays using the switches on the right. View different breakdowns using the tabs on the left. Use the top buttons on the right to filter data. Click \"revert\" for the previous reporting screen."
-msgstr ""
+msgstr "Alterne exibições de métricas usando os botões de alternância à direita. Veja diferentes detalhamentos usando as guias à esquerda. Use os botões superiores à direita para filtrar os dados. Clique em \"reverter\" para retornar à tela de relatórios anterior."
 
 #: src/components/Collapse/ChangeReportingAlert.tsx:48
 #~ msgid "Toggle metric displays using the switches on the right. View different breakdowns using the tabs on the left. Use the top buttons to filter data. Click \"revert\" for the previous reporting screen."
@@ -2412,7 +2412,7 @@ msgstr "Não foi possível carregar o anúncio"
 
 #: src/routes/campaigns/analytics/CampaignAnalytics.tsx:64
 msgid "Unable to load reporting details for campaign: {0}"
-msgstr ""
+msgstr "Não foi possível carregar os detalhes do relatório para a campanha: {0}"
 
 #: src/auth/views/AuthVerify.tsx:65
 msgid "Unable to login, link has expired or has already been used."
@@ -2458,7 +2458,7 @@ msgstr "Não foi possível atualizar a Campanha."
 
 #: src/components/Assets/hooks/useUploadFile.ts:125
 msgid "Unable to upload image"
-msgstr "Não foi possível carregar a imagem"
+msgstr "Não foi possível enviar a imagem"
 
 #: src/auth/lib/index.ts:51
 msgid "Unexpected error validating your credentials. Please try again later."
@@ -2483,7 +2483,7 @@ msgstr "Atualizar e Enviar Para Aprovação"
 #: src/components/Assets/UploadImage.tsx:77
 #: src/components/Assets/UploadImage.tsx:138
 msgid "Upload"
-msgstr ""
+msgstr "Enviar"
 
 #: src/components/Assets/UploadImage.tsx:58
 #: src/components/Navigation/NewImageButton.tsx:20
@@ -2538,7 +2538,7 @@ msgstr "Validando URL..."
 
 #: src/user/views/user/search/Finalize.tsx:73
 msgid "Value"
-msgstr ""
+msgstr "Valor"
 
 #: src/user/reporting/ReportMenu.tsx:84
 msgid "Verified Conversions Report"
@@ -2552,7 +2552,7 @@ msgstr "Conversões por visualização"
 
 #: src/routes/campaigns/analytics/metrics.ts:86
 msgid "View-through Conversions"
-msgstr ""
+msgstr "Conversões por Visualização"
 
 #: src/auth/registration/AdvertiserRegistered.tsx:30
 msgid "Visit Help Center"
@@ -2568,7 +2568,7 @@ msgstr "Valorizamos seu feedback e adoraríamos ouvir suas opiniões sobre sua e
 
 #: src/components/Collapse/ChangeReportingAlert.tsx:47
 msgid "We've updated our reporting view"
-msgstr ""
+msgstr "Atualizamos a nossa visualização de relatórios"
 
 #: src/validation/RegistrationSchema.tsx:17
 msgid "Website must not contain any whitespace"
@@ -2592,11 +2592,11 @@ msgstr "O que são os Anúncios Brave?"
 
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:106
 msgid "What’s BAT?"
-msgstr ""
+msgstr "O que é BAT?"
 
 #: src/auth/views/components/WhatIsBrave.tsx:14
 msgid "What’s Brave?"
-msgstr ""
+msgstr "O que é Brave?"
 
 #: src/auth/registration/MarketingChannel.tsx:13
 msgid "Where did you hear about Brave Ads"
@@ -2612,7 +2612,7 @@ msgstr "Por que usar os Anúncios Brave?"
 
 #: src/routes/campaigns/analytics/filters/OsFilter.tsx:20
 msgid "Windows"
-msgstr ""
+msgstr "Windows"
 
 #: src/auth/registration/SearchForm.tsx:25
 msgid "Work email"
@@ -2664,7 +2664,7 @@ msgstr "Chave pública da sua organização:"
 
 #: src/user/views/user/search/Finalize.tsx:41
 msgid "Your trial campaign will be reviewed by an Account Manager. Add any notes or questions for them here."
-msgstr ""
+msgstr "A sua campanha de teste será revisada por um Gerente de Conta. Adicione notas ou perguntas para eles aqui."
 
 #: src/auth/components/AdvertiserAddress.tsx:51
 msgid "Zip / Postal Code"
