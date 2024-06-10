@@ -8,7 +8,7 @@ msgstr ""
 "Language: pt\n"
 "Project-Id-Version: 27b1a082298d0ee642e56f654bcd7273\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-06-07 00:46\n"
+"PO-Revision-Date: 2024-06-10 13:47\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -367,7 +367,7 @@ msgstr "Os Anúncios Brave são apresentados no navegador ou na pesquisa, em loc
 
 #: src/user/settings/NewKeyPairModal.tsx:185
 msgid "Brave cannot recover this key, which has been generated in your browser. You will need to confirm this private key on the next step before changes are saved."
-msgstr "O Brave não pode recuperar esta chave que foi gerada em seu navegador. Você precisará confirmar esta chave privada na próxima etapa antes que as alterações sejam salvas."
+msgstr "O Brave não pode recuperar esta chave gerada no seu navegador. Será preciso confirmar esta chave privada na próxima etapa antes que as alterações sejam salvas."
 
 #: src/auth/views/components/WhatIsBrave.tsx:18
 msgid "Brave is an independent company dedicated to building a user-first Web. Our private, feature-rich browser and search engine are used by 70+ million people worldwide, with hundreds of thousands more downloading every day."
@@ -561,7 +561,7 @@ msgstr "Escolher"
 
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/FormatField.tsx:37
 msgid "Choose a format for the campaign you would like to run."
-msgstr "Escolha um formato para a campanha que você gostaria de executar."
+msgstr "Escolha um formato para a campanha que gostaria de executar."
 
 #: src/auth/registration/AccountChoice.tsx:48
 #~ msgid "Choose campaign type"
@@ -589,7 +589,7 @@ msgstr "Clique Aqui!"
 
 #: src/auth/views/MagicLink.tsx:37
 msgid "Click on the secure login link in the email to access your Brave Ads account."
-msgstr "Clique no link seguro de login no seu e-mail para acessar sua conta dos Anúncios Brave."
+msgstr "Clique no link seguro de login no seu e-mail para acessar a sua conta dos Anúncios Brave."
 
 #: src/routes/campaigns/analytics/metrics.ts:62
 #: src/user/analytics/search/metrics.ts:54
