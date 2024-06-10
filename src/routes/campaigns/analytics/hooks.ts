@@ -6,7 +6,7 @@ import {
   getBreakdownDefinition,
   LocalizedBreakdown,
 } from "./breakdowns";
-import { Dispatch, DispatchWithoutAction, useEffect } from "react";
+import { Dispatch, DispatchWithoutAction } from "react";
 import {
   buildTimeFilters,
   getTimeFilter,
@@ -16,7 +16,6 @@ import {
   getOsFilter,
   LocalizedOsFilterEntry,
 } from "@/routes/campaigns/analytics/filters/OsFilter";
-import { useStickyState } from "@/hooks/useStickyState";
 
 // it's nicest to use , to separate metrics, but that gets URL encoded.
 // but "space" gets encoded as "+", which is ok
@@ -158,17 +157,4 @@ function getGenericFilterParams<T extends { id: string }>(
       });
     },
   };
-}
-
-export function useReplaceReportParams() {
-  const { replace } = useHistory();
-  const [reportParams] = useStickyState<string>("report-params", "");
-
-  useEffect(() => {
-    if (reportParams) {
-      replace({
-        search: reportParams,
-      });
-    }
-  }, []);
 }

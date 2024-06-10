@@ -21,6 +21,7 @@ export function ResultsPane({
   const { selected } = useBreakdownParams();
 
   if (!selected) return null;
+  console.log(selected.id);
 
   if (selected.id === "day") {
     return <DailyGraph dataSource={overTimeData} />;
