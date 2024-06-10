@@ -6,7 +6,7 @@ import {
   getBreakdownDefinition,
   LocalizedBreakdown,
 } from "./breakdowns";
-import { Dispatch, DispatchWithoutAction } from "react";
+import { Dispatch, DispatchWithoutAction, useEffect } from "react";
 import {
   buildTimeFilters,
   getTimeFilter,
@@ -30,7 +30,6 @@ interface UseMetricSelectionResult {
 }
 
 export function useMetricSelection(): UseMetricSelectionResult {
-  // eslint-disable-next-line lingui/no-unlocalized-strings
   return getGenericMultiSelect(
     "metrics",
     getMetricDefinition,
@@ -161,24 +160,15 @@ function getGenericFilterParams<T extends { id: string }>(
   };
 }
 
-export function useStoreSearchParams(props: { urlParam: string }) {
-  const [sticky, setSticky] = useStickyState<string>("report-params", "");
-  const {
-    location: { search },
-    replace,
-  } = useHistory();
+export function useReplaceReportParams() {
+  const { replace } = useHistory();
+  const [reportParams] = useStickyState<string>("report-params", "");
 
-  const params = new URLSearchParams(sticky || search);
-  const param = params.get(props.urlParam);
-  const replaceStickyParam = () => {
-    const p = params.toString();
-    setSticky(p);
-    replace({ search: p });
-  };
-
-  return {
-    params,
-    param,
-    replace: replaceStickyParam,
-  };
+  useEffect(() => {
+    if (reportParams) {
+      replace({
+        search: reportParams,
+      });
+    }
+  }, []);
 }

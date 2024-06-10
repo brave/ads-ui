@@ -18,7 +18,6 @@ import { Status } from "@/components/Campaigns/Status";
 import { ChangeReportingAlert } from "@/components/Collapse/ChangeReportingAlert";
 import _ from "lodash";
 import { VerticalBreakdown } from "@/routes/campaigns/analytics/filters/BreakdownSelector";
-
 const Analytics_Load = graphql(`
   query CampaignAnalytics($filter: PerformanceFilter!) {
     performance(filter: $filter) {

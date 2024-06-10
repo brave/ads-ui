@@ -16,7 +16,7 @@ export interface LocalizedOsFilterEntry extends Omit<OsFilterEntry, "label"> {
   label: string;
 }
 
-export const OS_FILTER_ITEMS: OsFilterEntry[] = [
+const OS_FILTER_ITEMS: OsFilterEntry[] = [
   { id: "all", label: msg`All OS`, divider: true },
   { id: "android", label: msg`Android` },
   { id: "ios", label: msg`iOS` },

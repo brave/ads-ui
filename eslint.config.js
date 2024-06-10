@@ -84,7 +84,7 @@ export default tseslint.config(
             "zonedTimeToUtc",
             "utcToZonedTime",
             "graphql",
-            "getGenericMultiSelect"
+            "getGenericMultiSelect",
           ],
           ignoreProperty: [
             "documentTitle",

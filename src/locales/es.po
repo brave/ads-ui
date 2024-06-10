@@ -231,8 +231,7 @@ msgstr ""
 #~ msgid "advertising made simple"
 #~ msgstr "Publicidad simplificada"
 
-#: src/routes/campaigns/analytics/filters/OsFilter.tsx:15
-#: src/routes/campaigns/analytics/filters/OsFilter.tsx:28
+#: src/routes/campaigns/analytics/filters/OsFilter.tsx:20
 msgid "All OS"
 msgstr ""
 
@@ -240,7 +239,7 @@ msgstr ""
 #~ msgid "All targeting and reporting is strictly designed to be anonymous and privacy-preserving."
 #~ msgstr "Todos los objetivos e informes están estrictamente diseñados para ser anónimos y preservar la privacidad."
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:17
+#: src/routes/campaigns/analytics/filters/time-filters.ts:15
 msgid "All time"
 msgstr ""
 
@@ -256,7 +255,7 @@ msgstr "Un anuncio de mi navegador Brave"
 msgid "An error has occurred while processing your request."
 msgstr "Se ha producido un error al procesar su solicitud."
 
-#: src/routes/campaigns/analytics/filters/OsFilter.tsx:16
+#: src/routes/campaigns/analytics/filters/OsFilter.tsx:21
 msgid "Android"
 msgstr ""
 
@@ -836,7 +835,7 @@ msgstr "creado"
 msgid "CTR"
 msgstr "CTR"
 
-#: src/routes/campaigns/analytics/filters/TimeFilter.tsx:34
+#: src/routes/campaigns/analytics/filters/TimeFilter.tsx:21
 msgid "Custom"
 msgstr ""
 
@@ -1213,7 +1212,7 @@ msgstr "Entiendo que se requiere un pago antes de que se puedan lanzar campañas
 msgid "I would like to receive marketing emails about new features and promotions from Brave Ads"
 msgstr "Me gustaría recibir correos electrónicos de marketing sobre nuevas funciones y promociones de Brave Ads"
 
-#: src/routes/campaigns/analytics/TabularData.tsx:79
+#: src/routes/campaigns/analytics/TabularData.tsx:78
 msgid "Id"
 msgstr ""
 
@@ -1302,7 +1301,7 @@ msgstr "Sesión no válida"
 msgid "Invalid Token"
 msgstr "Token no válido"
 
-#: src/routes/campaigns/analytics/filters/OsFilter.tsx:17
+#: src/routes/campaigns/analytics/filters/OsFilter.tsx:22
 msgid "iOS"
 msgstr ""
 
@@ -1334,23 +1333,23 @@ msgstr "Pares de claves"
 msgid "Language acknowledgement is required"
 msgstr "Se requiere confirmación de idioma"
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:54
+#: src/routes/campaigns/analytics/filters/time-filters.ts:52
 msgid "Last 14 days"
 msgstr ""
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:66
+#: src/routes/campaigns/analytics/filters/time-filters.ts:64
 msgid "Last 30 days"
 msgstr ""
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:42
+#: src/routes/campaigns/analytics/filters/time-filters.ts:40
 msgid "Last 7 days"
 msgstr ""
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:72
+#: src/routes/campaigns/analytics/filters/time-filters.ts:70
 msgid "Last month"
 msgstr ""
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:48
+#: src/routes/campaigns/analytics/filters/time-filters.ts:46
 msgid "Last week (Sun - Sat)"
 msgstr ""
 
@@ -1395,7 +1394,7 @@ msgstr "El presupuesto vitalicio debe ser mayor para el intervalo de fechas prop
 #~ msgid "Limited time only. Available to new advertisers, and those who ran campaigns before September 30, 2023."
 #~ msgstr "Solo por tiempo limitado. Disponible para nuevos anunciantes y aquellos que realizaron campañas antes del 30 de septiembre de 2023."
 
-#: src/routes/campaigns/analytics/filters/OsFilter.tsx:18
+#: src/routes/campaigns/analytics/filters/OsFilter.tsx:23
 msgid "Linux"
 msgstr ""
 
@@ -1422,7 +1421,7 @@ msgstr "Inicie sesión en su cuenta de Brave Ads"
 msgid "Logging in"
 msgstr "Iniciando sesión"
 
-#: src/routes/campaigns/analytics/filters/OsFilter.tsx:19
+#: src/routes/campaigns/analytics/filters/OsFilter.tsx:24
 msgid "macOS"
 msgstr ""
 
@@ -1473,7 +1472,7 @@ msgstr "más"
 
 #: src/components/Creatives/CreativeCampaigns.tsx:45
 #: src/components/Creatives/CreativeList.tsx:47
-#: src/routes/campaigns/analytics/TabularData.tsx:84
+#: src/routes/campaigns/analytics/TabularData.tsx:83
 #: src/user/ads/InlineContentAd.tsx:65
 #: src/user/ads/NotificationAd.tsx:51
 #: src/user/adSet/AdSetList.tsx:92
@@ -2240,11 +2239,11 @@ msgstr "Este es un anuncio de noticias, se verá como parte de la fuente de noti
 msgid "This key is unique to you, make sure to safely store it and avoid sharing it with others to prevent unauthorized access."
 msgstr "Esta clave es única para usted, asegúrese de guardarla de forma segura y evite compartirla con otros para evitar el acceso no autorizado."
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:60
+#: src/routes/campaigns/analytics/filters/time-filters.ts:58
 msgid "This month"
 msgstr ""
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:36
+#: src/routes/campaigns/analytics/filters/time-filters.ts:34
 msgid "This week (Sun - Today)"
 msgstr ""
 
@@ -2273,7 +2272,7 @@ msgstr "Para"
 msgid "To protect user’s privacy, verified ad conversion data is encrypted so that the identities of converted users remain anonymous to Brave. You can decrypt the conversion data in the CSV file by providing your private key here. If no key is provided, you will receive the encrypted conversion data. Your private key will never be sent to or stored on any Brave servers."
 msgstr "Para proteger la privacidad del usuario, los datos de conversión de anuncios verificados se cifran para que las identidades de los usuarios convertidos permanezcan anónimas para Brave. Puede descifrar los datos de conversión en el archivo CSV proporcionando su clave privada aquí. Si no se proporciona ninguna clave, recibirá los datos de conversión cifrados. Su clave privada nunca se enviará ni se almacenará en ningún servidor de Brave."
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:24
+#: src/routes/campaigns/analytics/filters/time-filters.ts:22
 msgid "Today"
 msgstr ""
 
@@ -2345,7 +2344,7 @@ msgstr "No se puede obtener información del perfil"
 msgid "Unable to load ad"
 msgstr "No se puede cargar el anuncio"
 
-#: src/routes/campaigns/analytics/CampaignAnalytics.tsx:64
+#: src/routes/campaigns/analytics/CampaignAnalytics.tsx:77
 msgid "Unable to load reporting details for campaign: {0}"
 msgstr ""
 
@@ -2539,7 +2538,7 @@ msgstr "Al buscar alternativas a Google Ads"
 msgid "Why use Brave Ads?"
 msgstr ""
 
-#: src/routes/campaigns/analytics/filters/OsFilter.tsx:20
+#: src/routes/campaigns/analytics/filters/OsFilter.tsx:25
 msgid "Windows"
 msgstr ""
 
@@ -2551,7 +2550,7 @@ msgstr "Correo electrónico de trabajo"
 msgid "Yes"
 msgstr "Sí"
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:30
+#: src/routes/campaigns/analytics/filters/time-filters.ts:28
 msgid "Yesterday"
 msgstr ""
 

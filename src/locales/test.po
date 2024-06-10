@@ -231,8 +231,7 @@ msgstr ""
 #~ msgid "advertising made simple"
 #~ msgstr ""
 
-#: src/routes/campaigns/analytics/filters/OsFilter.tsx:15
-#: src/routes/campaigns/analytics/filters/OsFilter.tsx:28
+#: src/routes/campaigns/analytics/filters/OsFilter.tsx:20
 msgid "All OS"
 msgstr ""
 
@@ -240,7 +239,7 @@ msgstr ""
 #~ msgid "All targeting and reporting is strictly designed to be anonymous and privacy-preserving."
 #~ msgstr ""
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:17
+#: src/routes/campaigns/analytics/filters/time-filters.ts:15
 msgid "All time"
 msgstr ""
 
@@ -256,7 +255,7 @@ msgstr ""
 msgid "An error has occurred while processing your request."
 msgstr ""
 
-#: src/routes/campaigns/analytics/filters/OsFilter.tsx:16
+#: src/routes/campaigns/analytics/filters/OsFilter.tsx:21
 msgid "Android"
 msgstr ""
 
@@ -821,7 +820,7 @@ msgstr ""
 msgid "CTR"
 msgstr ""
 
-#: src/routes/campaigns/analytics/filters/TimeFilter.tsx:34
+#: src/routes/campaigns/analytics/filters/TimeFilter.tsx:21
 msgid "Custom"
 msgstr ""
 
@@ -1192,7 +1191,7 @@ msgstr ""
 msgid "I would like to receive marketing emails about new features and promotions from Brave Ads"
 msgstr ""
 
-#: src/routes/campaigns/analytics/TabularData.tsx:79
+#: src/routes/campaigns/analytics/TabularData.tsx:78
 msgid "Id"
 msgstr ""
 
@@ -1278,7 +1277,7 @@ msgstr ""
 msgid "Invalid Token"
 msgstr ""
 
-#: src/routes/campaigns/analytics/filters/OsFilter.tsx:17
+#: src/routes/campaigns/analytics/filters/OsFilter.tsx:22
 msgid "iOS"
 msgstr ""
 
@@ -1310,23 +1309,23 @@ msgstr ""
 msgid "Language acknowledgement is required"
 msgstr ""
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:54
+#: src/routes/campaigns/analytics/filters/time-filters.ts:52
 msgid "Last 14 days"
 msgstr ""
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:66
+#: src/routes/campaigns/analytics/filters/time-filters.ts:64
 msgid "Last 30 days"
 msgstr ""
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:42
+#: src/routes/campaigns/analytics/filters/time-filters.ts:40
 msgid "Last 7 days"
 msgstr ""
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:72
+#: src/routes/campaigns/analytics/filters/time-filters.ts:70
 msgid "Last month"
 msgstr ""
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:48
+#: src/routes/campaigns/analytics/filters/time-filters.ts:46
 msgid "Last week (Sun - Sat)"
 msgstr ""
 
@@ -1371,7 +1370,7 @@ msgstr ""
 #~ msgid "Limited time only. Available to new advertisers, and those who ran campaigns before September 30, 2023."
 #~ msgstr ""
 
-#: src/routes/campaigns/analytics/filters/OsFilter.tsx:18
+#: src/routes/campaigns/analytics/filters/OsFilter.tsx:23
 msgid "Linux"
 msgstr ""
 
@@ -1398,7 +1397,7 @@ msgstr ""
 msgid "Logging in"
 msgstr ""
 
-#: src/routes/campaigns/analytics/filters/OsFilter.tsx:19
+#: src/routes/campaigns/analytics/filters/OsFilter.tsx:24
 msgid "macOS"
 msgstr ""
 
@@ -1440,7 +1439,7 @@ msgstr ""
 
 #: src/components/Creatives/CreativeCampaigns.tsx:45
 #: src/components/Creatives/CreativeList.tsx:47
-#: src/routes/campaigns/analytics/TabularData.tsx:84
+#: src/routes/campaigns/analytics/TabularData.tsx:83
 #: src/user/ads/InlineContentAd.tsx:65
 #: src/user/ads/NotificationAd.tsx:51
 #: src/user/adSet/AdSetList.tsx:92
@@ -2189,11 +2188,11 @@ msgstr ""
 msgid "This key is unique to you, make sure to safely store it and avoid sharing it with others to prevent unauthorized access."
 msgstr ""
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:60
+#: src/routes/campaigns/analytics/filters/time-filters.ts:58
 msgid "This month"
 msgstr ""
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:36
+#: src/routes/campaigns/analytics/filters/time-filters.ts:34
 msgid "This week (Sun - Today)"
 msgstr ""
 
@@ -2222,7 +2221,7 @@ msgstr ""
 msgid "To protect user’s privacy, verified ad conversion data is encrypted so that the identities of converted users remain anonymous to Brave. You can decrypt the conversion data in the CSV file by providing your private key here. If no key is provided, you will receive the encrypted conversion data. Your private key will never be sent to or stored on any Brave servers."
 msgstr ""
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:24
+#: src/routes/campaigns/analytics/filters/time-filters.ts:22
 msgid "Today"
 msgstr ""
 
@@ -2291,7 +2290,7 @@ msgstr ""
 msgid "Unable to load ad"
 msgstr ""
 
-#: src/routes/campaigns/analytics/CampaignAnalytics.tsx:64
+#: src/routes/campaigns/analytics/CampaignAnalytics.tsx:77
 msgid "Unable to load reporting details for campaign: {0}"
 msgstr ""
 
@@ -2482,7 +2481,7 @@ msgstr ""
 msgid "Why use Brave Ads?"
 msgstr ""
 
-#: src/routes/campaigns/analytics/filters/OsFilter.tsx:20
+#: src/routes/campaigns/analytics/filters/OsFilter.tsx:25
 msgid "Windows"
 msgstr ""
 
@@ -2494,7 +2493,7 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:30
+#: src/routes/campaigns/analytics/filters/time-filters.ts:28
 msgid "Yesterday"
 msgstr ""
 
