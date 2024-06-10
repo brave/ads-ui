@@ -38,6 +38,7 @@ export function VerticalBreakdown() {
       >
         {breakdowns.map((b) => (
           <Tab
+            key={b.id}
             label={b.label}
             sx={{ alignItems: "start", color: "text.primary" }}
           />

@@ -2,7 +2,11 @@ import { graphql } from "@/graphql-client";
 import { useQuery } from "@apollo/client";
 import { MetricsList } from "./MetricsList";
 import { Box, Card, Stack, Typography } from "@mui/material";
-import { useMetricSelection } from "./hooks";
+import {
+  useMetricSelection,
+  useOsFilterParams,
+  useTimeFilterParams,
+} from "./hooks";
 import { useState } from "react";
 import { FilterBar } from "./filters/FilterBar";
 import { ResultsPane } from "./ResultsPane";
@@ -37,11 +41,19 @@ export function CampaignAnalytics({ campaignOverview }: CampaignOverviewProps) {
     (c) => c.extractExternalId,
   );
 
-  const { forceDefaultMetricSelection: forceDefaultSelection } =
-    useMetricSelection();
+  const { forceDefaultSelection } = useMetricSelection();
+  const { selected } = useTimeFilterParams();
+  const { selectedMetrics: os } = useOsFilterParams();
+
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [filter, setFilter] = useState<PerformanceFilter>({
     campaignIds: [campaignOverview.id],
+    from: selected?.from?.toISOString(),
+    to: selected?.to?.toISOString(),
+    os:
+      os.length === 0 || (os.length === 1 && os[0].id === "all")
+        ? undefined
+        : os.map((a) => a.id),
   });
 
   const { data, error } = useQuery(Analytics_Load, {

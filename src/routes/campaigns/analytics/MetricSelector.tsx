@@ -32,7 +32,7 @@ export function MetricSelector({
       <Switch
         size="small"
         checked={isSelected(metricDefinition)}
-        onChange={toggleMetric(metricDefinition)}
+        onChange={() => toggleMetric(metricDefinition)}
         color="default"
         sx={{
           [`& .${switchClasses.checked}`]: {

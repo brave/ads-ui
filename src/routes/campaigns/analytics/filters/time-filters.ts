@@ -1,15 +1,13 @@
 import dayjs, { Dayjs } from "dayjs";
 import { t } from "@lingui/macro";
 
-interface TimeFilterEntry {
+export interface TimeFilterEntry {
   label: string;
   id: string;
   from: Dayjs | undefined;
   to: Dayjs | undefined;
   divider?: boolean;
 }
-
-/* eslint-disable lingui/no-unlocalized-strings */
 
 export function buildTimeFilters(): TimeFilterEntry[] {
   return [
@@ -81,4 +79,10 @@ export function buildTimeFilters(): TimeFilterEntry[] {
     //   to: undefined,
     // }
   ];
+}
+
+export function getTimeFilter(
+  id: string | undefined | null,
+): TimeFilterEntry | undefined {
+  return buildTimeFilters().find((filter) => filter.id === id);
 }
