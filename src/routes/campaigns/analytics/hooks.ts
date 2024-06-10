@@ -16,6 +16,7 @@ import {
   getOsFilter,
   LocalizedOsFilterEntry,
 } from "@/routes/campaigns/analytics/filters/OsFilter";
+import dayjs from "dayjs";
 
 // it's nicest to use , to separate metrics, but that gets URL encoded.
 // but "space" gets encoded as "+", which is ok
@@ -116,10 +117,15 @@ interface UseTimeParamsResult {
   forceDefaultBreakdownSelection: DispatchWithoutAction;
 }
 
-export function useTimeFilterParams(): UseTimeParamsResult {
+export function useTimeFilterParams(
+  props: {
+    minDate?: dayjs.Dayjs;
+    maxDate?: dayjs.Dayjs;
+  } = {},
+): UseTimeParamsResult {
   return getGenericFilterParams(
     "time",
-    getTimeFilter,
+    (id) => getTimeFilter(id, props.minDate, props.maxDate),
     buildTimeFilters()[0].id,
   );
 }

@@ -1,15 +1,21 @@
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import { t } from "@lingui/macro";
 
 export interface TimeFilterEntry {
   label: string;
   id: string;
-  from: Dayjs | undefined;
-  to: Dayjs | undefined;
+  from: dayjs.Dayjs | undefined;
+  to: dayjs.Dayjs | undefined;
   divider?: boolean;
 }
 
-export function buildTimeFilters(): TimeFilterEntry[] {
+export function buildTimeFilters(
+  minDate?: dayjs.Dayjs,
+  maxDate?: dayjs.Dayjs,
+): TimeFilterEntry[] {
+  const now = dayjs().utc();
+  const actualMaxDate = dayjs.min(maxDate ?? now, now);
+
   return [
     {
       label: t`All time`,
@@ -72,17 +78,19 @@ export function buildTimeFilters(): TimeFilterEntry[] {
       from: dayjs().utc().subtract(1, "month").startOf("month"),
       to: dayjs().utc().subtract(1, "month").endOf("month"),
     },
-    // {
-    //   label: "Custom",
-    //   id: "custom",
-    //   from: undefined,
-    //   to: undefined,
-    // }
+    {
+      id: "custom",
+      label: t`Custom`,
+      from: minDate ?? dayjs().subtract(1, "month"),
+      to: actualMaxDate ?? now,
+    },
   ];
 }
 
 export function getTimeFilter(
   id: string | undefined | null,
+  minDate?: dayjs.Dayjs,
+  maxDate?: dayjs.Dayjs,
 ): TimeFilterEntry | undefined {
-  return buildTimeFilters().find((filter) => filter.id === id);
+  return buildTimeFilters(minDate, maxDate).find((filter) => filter.id === id);
 }
