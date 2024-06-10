@@ -8,7 +8,7 @@ msgstr ""
 "Language: pt\n"
 "Project-Id-Version: 27b1a082298d0ee642e56f654bcd7273\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-06-10 13:47\n"
+"PO-Revision-Date: 2024-06-10 14:58\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -387,7 +387,7 @@ msgstr "O Brave é uma empresa independente dedicada a construir uma Web centrad
 
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:41
 msgid "Brave is where early adopters thrive. We’re celebrating our crypto roots by offering new and returning Brave Ads customers half off their first self-managed campaign if they buy with BAT<0>*</0>"
-msgstr "Brave é o lugar onde os primeiros adeptos prosperam. Estamos celebrando nossas origens no mundo cripto oferecendo aos novos e antigos clientes dos Anúncios Brave 50% de desconto na primeira campanha autogerida se pagarem com BAT<0>*</0>\n\n\n\n\n\n"
+msgstr "Brave é o lugar onde os primeiros adeptos prosperam. Estamos celebrando nossas origens no mundo cripto oferecendo aos novos e antigos clientes dos Anúncios Brave 50% de desconto na primeira campanha autogerenciada se pagarem com BAT<0>*</0>\n\n\n\n\n\n"
 ">"
 
 #: src/components/AppBar/LandingPageAppBar.tsx:64
@@ -758,7 +758,7 @@ msgstr "Custo por clique"
 
 #: src/auth/lib/index.ts:116
 msgid "Could not logout at this time. Please try again later."
-msgstr "Não foi possível fazer logout no momento. Por favor, tente novamente mais tarde."
+msgstr "Não foi possível fazer terminar a sessão no momento. Por favor, tente novamente mais tarde."
 
 #: src/components/Conversion/ConversionFields.tsx:54
 msgid "Count conversions within X days of an impression"
@@ -1045,7 +1045,7 @@ msgstr "Acessar o Gerenciador de Anúncios"
 
 #: src/auth/views/MagicLink.tsx:63
 msgid "Enter your email address to get a secure login link. Use this link to access your Brave Ads account."
-msgstr "Insira seu e-mail para obter um link seguro de login. Use este link para acessar sua conta dos Anúncios Brave."
+msgstr "Insira o seu e-mail para obter um link seguro de login. Use este link para acessar a sua conta dos Anúncios Brave."
 
 #: src/auth/views/components/WhyUseBraveAds.tsx:22
 msgid "Escape the low CTR of display banners"
@@ -1155,7 +1155,7 @@ msgstr "Gerar"
 
 #: src/user/settings/NewKeyPairModal.tsx:92
 msgid "Generate a keypair for your organization. Brave Ads will use your organization’s public key to sign and encrypt conversion data. Only your organization will have access to the private key, which can be used to decrypt and view conversion data."
-msgstr "Gerar um par de chaves para sua organização. Os Anúncios Brave usarão a chave pública da sua organização para assinar e criptografar os dados de conversão. Apenas a sua organização terá acesso à chave privada, que pode ser usada para descriptografar e visualizar os dados de conversão."
+msgstr "Gerar um par de chaves para a sua organização. Os Anúncios Brave usarão a chave pública da sua organização para assinar e criptografar os dados de conversão. Apenas a sua organização terá acesso à chave privada, que pode ser usada para descriptografar e visualizar os dados de conversão."
 
 #: src/user/settings/UserApiKey.tsx:63
 msgid "Generate a new API key?"
@@ -1712,7 +1712,7 @@ msgstr "É necessário confirmar o pagamento"
 
 #: src/user/views/adsManager/views/advanced/components/campaign/fields/PaymentMethodField.tsx:21
 msgid "Payment is required before launching your campaign."
-msgstr "Antes de lançar sua campanha, é necessário efetuar o pagamento."
+msgstr "Antes de lançar a sua campanha, é necessário efetuar o pagamento."
 
 #: src/user/reporting/ReportMenu.tsx:77
 msgid "Performance Report"
@@ -1897,7 +1897,7 @@ msgstr "Alcance mais de 70 milhões de usuários altamente engajados, que de out
 
 #: src/auth/views/components/FooterCTA.tsx:10
 msgid "Ready to reach your first million users? Start your first campaign today."
-msgstr "Pronto para alcançar seu primeiro milhão de usuários? Comece a sua primeira campanha hoje."
+msgstr "Pronto para alcançar o seu primeiro milhão de usuários? Comece a sua primeira campanha hoje."
 
 #: src/components/AppBar/LandingPageAppBar.tsx:37
 #~ msgid "Register for Self-service"
@@ -2016,11 +2016,11 @@ msgstr "Selecione os segmentos de público-alvo"
 
 #: src/components/Location/LocationPicker.tsx:51
 msgid "Select the geographic regions where your ads will be shown."
-msgstr "Selecione as regiões geográficas onde seus anúncios serão exibidos."
+msgstr "Selecione as regiões geográficas onde os seus anúncios serão exibidos."
 
 #: src/user/views/adsManager/views/advanced/components/adSet/fields/PickerFields.tsx:29
 msgid "Select the interest segments and platforms you would like to target."
-msgstr "Selecione os segmentos de interesse e plataformas que você deseja direcionar."
+msgstr "Selecione os segmentos de interesse e plataformas que deseja direcionar."
 
 #: src/components/Platform/PlatformPicker.tsx:45
 msgid "Select the platforms to target"
@@ -2420,7 +2420,7 @@ msgstr "Não foi possível fazer login, o link expirou ou já foi utilizado."
 
 #: src/auth/lib/index.ts:89
 msgid "Unable to register your organization at this time. Please try again later."
-msgstr "No momento, não foi possível cadastrar sua organização. Por favor, tente novamente mais tarde."
+msgstr "No momento, não foi possível cadastrar a sua organização. Por favor, tente novamente mais tarde."
 
 #: src/user/views/user/CampaignDetails.tsx:48
 msgid "Unable to retrieve ad sets or ads for Campaign."
@@ -2526,7 +2526,7 @@ msgstr "Padrão de URL"
 
 #: src/components/Conversion/ConversionFields.tsx:40
 msgid "URL should have a trailing asterisk - Example: https://brave.com/products/*"
-msgstr "A URL deve ter um asterisco no final - Exemplo: https://brave.com/produtos/*"
+msgstr "A URL deve ter um asterisco no final — Exemplo: https://brave.com/produtos/*"
 
 #: src/user/ads/ShowAdsButton.tsx:22
 msgid "Use existing ads"
@@ -2624,7 +2624,7 @@ msgstr "Sim"
 
 #: src/user/settings/NewKeyPairModal.tsx:134
 msgid "You are attempting to create a new keypair, this will replace any of your organization’s existing keypairs. Please note, previous keypairs cannot be retrieved or used once replaced."
-msgstr "Você está tentando criar um novo par de chaves, isso substituirá qualquer um dos pares de chaves existentes da sua organização. Por favor, note que pares de chaves anteriores não podem ser recuperados ou usados uma vez que forem substituídos."
+msgstr "Está tentando criar um novo par de chaves, isso substituirá qualquer um dos pares de chaves existentes da sua organização. Por favor, note que pares de chaves anteriores não podem ser recuperados ou usados uma vez que forem substituídos."
 
 #: src/auth/registration/Register.tsx:37
 #~ msgid "You can change this later"
@@ -2644,11 +2644,11 @@ msgstr "Você pode ter acesso a várias organizações. Alternar entre elas aqui
 
 #: src/auth/registration/AdvertiserRegistered.tsx:18
 msgid "You will soon receive an email with the next steps of registration. While you wait, we recommend you check out our help center to get helpful information for getting started with Brave Ads."
-msgstr "Em breve, você receberá um e-mail com os próximos passos do cadastro. Enquanto isso, sugerimos que dê uma olhada em nossa Central de Ajuda para obter informações úteis sobre como começar a usar os Anúncios Brave."
+msgstr "Em breve, receberá um e-mail com os próximos passos do cadastro. Enquanto isso, sugerimos que dê uma olhada na nossa Central de Ajuda para obter informações úteis sobre como começar a usar os Anúncios Brave."
 
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:72
 msgid "Your campaign has been created and is now being reviewed by our ads team. <0/>We’ll be in contact as soon as your campaign is approved and activated."
-msgstr "Sua campanha foi criada e está sendo revisada por nossa equipe de anúncios. <0/>Entraremos em contato assim que sua campanha for aprovada e ativada."
+msgstr "Sua campanha foi criada e está sendo revisada por nossa equipe de anúncios. <0/>Entraremos em contato assim que a sua campanha for aprovada e ativada."
 
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:47
 msgid "Your campaign has been updated! <0/>If you added new ads, we’ll be in contact as soon as they are approved and activated. <1/>Thank you for using Brave Ads!"
