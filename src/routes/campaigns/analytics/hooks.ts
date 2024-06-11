@@ -6,7 +6,7 @@ import {
   getBreakdownDefinition,
   LocalizedBreakdown,
 } from "./breakdowns";
-import { Dispatch, DispatchWithoutAction } from "react";
+import { Dispatch, DispatchWithoutAction, useEffect, useState } from "react";
 import {
   buildTimeFilters,
   getTimeFilter,
@@ -17,6 +17,9 @@ import {
   LocalizedOsFilterEntry,
 } from "@/routes/campaigns/analytics/filters/OsFilter";
 import dayjs from "dayjs";
+import { useStickyState } from "@/hooks/useStickyState";
+import { PerformanceFilter } from "@/graphql-client/graphql";
+import { CampaignOverviewProps } from "@/util/CampaignIdProps";
 
 // it's nicest to use , to separate metrics, but that gets URL encoded.
 // but "space" gets encoded as "+", which is ok
@@ -59,6 +62,7 @@ function getGenericMultiSelect<T extends { id: string }>(
     replace,
   } = useHistory();
 
+  const [filter, setFilter] = useStickyState(urlParam, defaultSelection);
   const params = new URLSearchParams(search);
   const paramIds = params.get(urlParam)?.split(SEPARATOR) ?? [];
   const paramSet = new Set(_.compact(paramIds));
@@ -67,7 +71,7 @@ function getGenericMultiSelect<T extends { id: string }>(
   return {
     forceDefaultSelection: (reset: boolean = false) => {
       if (paramSet.size === 0 || reset) {
-        params.set(urlParam, defaultSelection);
+        params.set(urlParam, filter);
         replace({
           search: params.toString(),
         });
@@ -83,12 +87,13 @@ function getGenericMultiSelect<T extends { id: string }>(
         newMetrics.add(metric.id);
       }
 
-      params.set(urlParam, Array.from(newMetrics).join(SEPARATOR));
-
+      let newParams = Array.from(newMetrics).join(SEPARATOR);
       if (newMetrics.size === 0) {
-        params.set(urlParam, defaultSelection);
+        newParams = defaultSelection;
       }
 
+      params.set(urlParam, newParams);
+      setFilter(newParams);
       replace({
         search: params.toString(),
       });
@@ -140,6 +145,7 @@ function getGenericFilterParams<T extends { id: string }>(
     replace,
   } = useHistory();
 
+  const [filter, setFilter] = useStickyState(urlParam, defaultSelection);
   const params = new URLSearchParams(search);
   const param = params.get(urlParam);
   const selected = selectedFunc(param);
@@ -148,7 +154,7 @@ function getGenericFilterParams<T extends { id: string }>(
     forceDefaultBreakdownSelection: () => {
       if (!selected) {
         setTimeout(() => {
-          params.set(urlParam, defaultSelection);
+          params.set(urlParam, filter);
           replace({
             search: params.toString(),
           });
@@ -158,9 +164,38 @@ function getGenericFilterParams<T extends { id: string }>(
     selected,
     setSelected: (filter: T) => {
       params.set(urlParam, filter.id);
+      setFilter(filter.id);
       replace({
         search: params.toString(),
       });
     },
   };
+}
+
+export function useCampaignAnalyticFilter({
+  campaignOverview,
+}: CampaignOverviewProps) {
+  const { selected } = useTimeFilterParams({
+    minDate: dayjs(campaignOverview.startAt),
+    maxDate: dayjs(campaignOverview.endAt),
+  });
+  const { selectedMetrics: os } = useOsFilterParams();
+
+  const [filter, setFilter] = useState<PerformanceFilter>({
+    campaignIds: [campaignOverview.id],
+  });
+
+  useEffect(() => {
+    setFilter((prevFilter) => ({
+      ...prevFilter,
+      from: selected?.from?.toISOString(),
+      to: selected?.to?.toISOString(),
+      os:
+        os.length === 0 || (os.length === 1 && os[0].id === "all")
+          ? undefined
+          : os.map((a) => a.id),
+    }));
+  }, [JSON.stringify(selected), JSON.stringify(os)]);
+
+  return { filter, setFilter };
 }

@@ -2,11 +2,10 @@ import { graphql } from "@/graphql-client";
 import { useQuery } from "@apollo/client";
 import { MetricsList } from "./MetricsList";
 import { Box, Card, Stack, Typography } from "@mui/material";
-import { useOsFilterParams, useTimeFilterParams } from "./hooks";
-import { useState } from "react";
+import { useCampaignAnalyticFilter } from "./hooks";
 import { FilterBar } from "./filters/FilterBar";
 import { ResultsPane } from "./ResultsPane";
-import { CampaignFormat, PerformanceFilter } from "@/graphql-client/graphql";
+import { CampaignFormat } from "@/graphql-client/graphql";
 import { CampaignOverviewProps } from "@/util/CampaignIdProps";
 import { ErrorDetail } from "@/components/Error/ErrorDetail";
 import { msg } from "@lingui/macro";
@@ -38,21 +37,7 @@ export function CampaignAnalytics({ campaignOverview }: CampaignOverviewProps) {
     (c) => c.extractExternalId,
   );
 
-  const { selected } = useTimeFilterParams({
-    minDate: dayjs(campaignOverview.startAt),
-    maxDate: dayjs(campaignOverview.endAt),
-  });
-  const { selectedMetrics: os } = useOsFilterParams();
-
-  const [filter, setFilter] = useState<PerformanceFilter>({
-    campaignIds: [campaignOverview.id],
-    from: selected?.from?.toISOString(),
-    to: selected?.to?.toISOString(),
-    os:
-      os.length === 0 || (os.length === 1 && os[0].id === "all")
-        ? undefined
-        : os.map((a) => a.id),
-  });
+  const { filter, setFilter } = useCampaignAnalyticFilter({ campaignOverview });
 
   const { data, error } = useQuery(Analytics_Load, {
     pollInterval: 10 * 60 * 1000,
