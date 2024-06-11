@@ -70,7 +70,13 @@ function getGenericMultiSelect<T extends { id: string }>(
   return {
     forceDefaultSelection: (reset: boolean = false) => {
       if (paramSet.size === 0 || reset) {
-        params.set(urlParam, filter);
+        let filtered = filter;
+        if (reset) {
+          filtered = defaultSelection;
+          setFilter(filtered);
+        }
+
+        params.set(urlParam, filtered);
         replace({
           search: params.toString(),
         });
