@@ -19,7 +19,6 @@ import {
 import { useStickyState } from "@/hooks/useStickyState";
 import { PerformanceFilter } from "@/graphql-client/graphql";
 import { CampaignOverviewProps } from "@/util/CampaignIdProps";
-import dayjs from "dayjs";
 
 // it's nicest to use , to separate metrics, but that gets URL encoded.
 // but "space" gets encoded as "+", which is ok
@@ -184,10 +183,8 @@ export function useCampaignAnalyticFilter({
   };
   if (selected && selected.id === "custom") {
     const customFilter = JSON.parse(custom ?? "{}");
-    if (customFilter.from)
-      timeFilter.from = dayjs(customFilter.from).startOf("day").toISOString();
-    if (customFilter.to)
-      timeFilter.to = dayjs(customFilter.to).endOf("day").toISOString();
+    if (customFilter.from) timeFilter.from = customFilter.from;
+    if (customFilter.to) timeFilter.to = customFilter.to;
   }
 
   useEffect(() => {

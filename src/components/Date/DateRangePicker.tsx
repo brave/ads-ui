@@ -29,7 +29,7 @@ export const DateRangePicker = ({
           value={from}
           onChange={(newValue) => {
             if (newValue) {
-              onFromChange(newValue);
+              onFromChange(newValue.startOf("day"));
             }
           }}
           slotProps={{
@@ -44,7 +44,7 @@ export const DateRangePicker = ({
           value={to}
           onChange={(newValue) => {
             if (newValue) {
-              onToChange(newValue);
+              onToChange(newValue.endOf("day"));
             }
           }}
           slotProps={{
