@@ -19,6 +19,7 @@ import {
 import { useStickyState } from "@/hooks/useStickyState";
 import { PerformanceFilter } from "@/graphql-client/graphql";
 import { CampaignOverviewProps } from "@/util/CampaignIdProps";
+import dayjs from "dayjs";
 
 // it's nicest to use , to separate metrics, but that gets URL encoded.
 // but "space" gets encoded as "+", which is ok
@@ -171,22 +172,38 @@ export function useCampaignAnalyticFilter({
 }: CampaignOverviewProps) {
   const { selected } = useTimeFilterParams();
   const { selectedMetrics: os } = useOsFilterParams();
+  const [custom] = useStickyState<string | undefined>("custom-date", undefined);
 
   const [filter, setFilter] = useState<PerformanceFilter>({
     campaignIds: [campaignOverview.id],
   });
 
+  const timeFilter = {
+    from: selected?.from?.toISOString(),
+    to: selected?.to?.toISOString(),
+  };
+  if (selected && selected.id === "custom") {
+    const customFilter = JSON.parse(custom ?? "{}");
+    if (customFilter.from)
+      timeFilter.from = dayjs(customFilter.from).startOf("day").toISOString();
+    if (customFilter.to)
+      timeFilter.to = dayjs(customFilter.to).endOf("day").toISOString();
+  }
+
   useEffect(() => {
     setFilter((prevFilter) => ({
       ...prevFilter,
-      from: selected?.from?.toISOString(),
-      to: selected?.to?.toISOString(),
+      ...timeFilter,
       os:
         os.length === 0 || (os.length === 1 && os[0].id === "all")
           ? undefined
           : os.map((a) => a.id),
     }));
-  }, [JSON.stringify(selected), JSON.stringify(os)]);
+  }, [
+    JSON.stringify(selected),
+    JSON.stringify(os),
+    JSON.stringify(timeFilter),
+  ]);
 
   return { filter, setFilter };
 }

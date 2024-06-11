@@ -7,9 +7,14 @@ import { useTimeFilterParams } from "@/routes/campaigns/analytics/hooks";
 import dayjs from "dayjs";
 import { DateRangePicker } from "@/components/Date/DateRangePicker";
 import { Box } from "@mui/material";
+import { useStickyState } from "@/hooks/useStickyState";
 
 export function TimeFilter(props: FilterProps) {
   const { _ } = useLingui();
+  const [, setCustom] = useStickyState<string | undefined>(
+    "custom-date",
+    undefined,
+  );
   const menuItems = buildTimeFilters();
 
   const { selected, setSelected, forceDefaultBreakdownSelection } =
@@ -26,12 +31,16 @@ export function TimeFilter(props: FilterProps) {
         <DateRangePicker
           from={dayjs(props.filters.from) ?? null}
           to={dayjs(props.filters.to) ?? null}
-          onFromChange={(from) =>
-            props.onChange({ ...props.filters, from: from?.toISOString() })
-          }
-          onToChange={(to) =>
-            props.onChange({ ...props.filters, to: to?.toISOString() })
-          }
+          onFromChange={(from) => {
+            const filter = { to: props.filters.to, from: from?.toISOString() };
+            setCustom(JSON.stringify(filter));
+            props.onChange({ ...props.filters, ...filter });
+          }}
+          onToChange={(to) => {
+            const filter = { to: to?.toISOString(), from: props.filters.from };
+            setCustom(JSON.stringify(filter));
+            props.onChange({ ...props.filters, ...filter });
+          }}
         />
       )}
       <FilterButton
