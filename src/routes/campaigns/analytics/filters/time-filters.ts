@@ -9,13 +9,7 @@ export interface TimeFilterEntry {
   divider?: boolean;
 }
 
-export function buildTimeFilters(
-  minDate?: dayjs.Dayjs,
-  maxDate?: dayjs.Dayjs,
-): TimeFilterEntry[] {
-  const now = dayjs().utc();
-  const actualMaxDate = dayjs.min(maxDate ?? now, now);
-
+export function buildTimeFilters(): TimeFilterEntry[] {
   return [
     {
       label: t`All time`,
@@ -81,16 +75,14 @@ export function buildTimeFilters(
     {
       id: "custom",
       label: t`Custom`,
-      from: minDate ?? dayjs().subtract(1, "month"),
-      to: actualMaxDate ?? now,
+      from: dayjs().utc().subtract(3, "day").startOf("day"),
+      to: undefined,
     },
   ];
 }
 
 export function getTimeFilter(
   id: string | undefined | null,
-  minDate?: dayjs.Dayjs,
-  maxDate?: dayjs.Dayjs,
 ): TimeFilterEntry | undefined {
-  return buildTimeFilters(minDate, maxDate).find((filter) => filter.id === id);
+  return buildTimeFilters().find((filter) => filter.id === id);
 }

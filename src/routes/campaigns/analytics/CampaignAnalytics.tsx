@@ -13,7 +13,6 @@ import { Status } from "@/components/Campaigns/Status";
 import { ChangeReportingAlert } from "@/components/Collapse/ChangeReportingAlert";
 import _ from "lodash";
 import { VerticalBreakdown } from "@/routes/campaigns/analytics/filters/BreakdownSelector";
-import dayjs from "dayjs";
 
 const Analytics_Load = graphql(`
   query CampaignAnalytics($filter: PerformanceFilter!) {
@@ -112,8 +111,6 @@ export function CampaignAnalytics({ campaignOverview }: CampaignOverviewProps) {
             onChange={setFilter}
             campaignId={campaignOverview.id}
             hasVerifiedConversions={hasVerifiedConversions}
-            minDate={dayjs(campaignOverview.startAt)}
-            maxDate={dayjs(campaignOverview.endAt)}
           />
         </Box>
 

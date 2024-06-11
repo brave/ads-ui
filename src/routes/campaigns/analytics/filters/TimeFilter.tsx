@@ -6,10 +6,11 @@ import { useLingui } from "@lingui/react";
 import { useTimeFilterParams } from "@/routes/campaigns/analytics/hooks";
 import dayjs from "dayjs";
 import { DateRangePicker } from "@/components/Date/DateRangePicker";
+import { Box } from "@mui/material";
 
 export function TimeFilter(props: FilterProps) {
   const { _ } = useLingui();
-  const menuItems = buildTimeFilters(props.minDate, props.maxDate);
+  const menuItems = buildTimeFilters();
 
   const { selected, setSelected, forceDefaultBreakdownSelection } =
     useTimeFilterParams();
@@ -20,8 +21,8 @@ export function TimeFilter(props: FilterProps) {
   }
 
   return (
-    <>
-      {selected.id === "custom" && selected.from && selected.to && (
+    <Box display="flex" flexDirection="row" alignItems="center" gap="10px">
+      {selected.id === "custom" && (
         <DateRangePicker
           from={dayjs(props.filters.from) ?? null}
           to={dayjs(props.filters.to) ?? null}
@@ -46,6 +47,6 @@ export function TimeFilter(props: FilterProps) {
         }}
         menuItems={menuItems}
       />
-    </>
+    </Box>
   );
 }

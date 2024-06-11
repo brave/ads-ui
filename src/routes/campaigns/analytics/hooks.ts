@@ -16,7 +16,6 @@ import {
   getOsFilter,
   LocalizedOsFilterEntry,
 } from "@/routes/campaigns/analytics/filters/OsFilter";
-import dayjs from "dayjs";
 import { useStickyState } from "@/hooks/useStickyState";
 import { PerformanceFilter } from "@/graphql-client/graphql";
 import { CampaignOverviewProps } from "@/util/CampaignIdProps";
@@ -122,15 +121,10 @@ interface UseTimeParamsResult {
   forceDefaultBreakdownSelection: DispatchWithoutAction;
 }
 
-export function useTimeFilterParams(
-  props: {
-    minDate?: dayjs.Dayjs;
-    maxDate?: dayjs.Dayjs;
-  } = {},
-): UseTimeParamsResult {
+export function useTimeFilterParams(): UseTimeParamsResult {
   return getGenericFilterParams(
     "time",
-    (id) => getTimeFilter(id, props.minDate, props.maxDate),
+    getTimeFilter,
     buildTimeFilters()[0].id,
   );
 }
@@ -175,10 +169,7 @@ function getGenericFilterParams<T extends { id: string }>(
 export function useCampaignAnalyticFilter({
   campaignOverview,
 }: CampaignOverviewProps) {
-  const { selected } = useTimeFilterParams({
-    minDate: dayjs(campaignOverview.startAt),
-    maxDate: dayjs(campaignOverview.endAt),
-  });
+  const { selected } = useTimeFilterParams();
   const { selectedMetrics: os } = useOsFilterParams();
 
   const [filter, setFilter] = useState<PerformanceFilter>({
