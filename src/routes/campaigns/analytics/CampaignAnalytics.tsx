@@ -2,11 +2,7 @@ import { graphql } from "@/graphql-client";
 import { useQuery } from "@apollo/client";
 import { MetricsList } from "./MetricsList";
 import { Box, Card, Stack, Typography } from "@mui/material";
-import {
-  useMetricSelection,
-  useOsFilterParams,
-  useTimeFilterParams,
-} from "./hooks";
+import { useOsFilterParams, useTimeFilterParams } from "./hooks";
 import { useState } from "react";
 import { FilterBar } from "./filters/FilterBar";
 import { ResultsPane } from "./ResultsPane";
@@ -19,6 +15,7 @@ import { ChangeReportingAlert } from "@/components/Collapse/ChangeReportingAlert
 import _ from "lodash";
 import { VerticalBreakdown } from "@/routes/campaigns/analytics/filters/BreakdownSelector";
 import dayjs from "dayjs";
+
 const Analytics_Load = graphql(`
   query CampaignAnalytics($filter: PerformanceFilter!) {
     performance(filter: $filter) {
@@ -41,14 +38,12 @@ export function CampaignAnalytics({ campaignOverview }: CampaignOverviewProps) {
     (c) => c.extractExternalId,
   );
 
-  const { forceDefaultSelection } = useMetricSelection();
   const { selected } = useTimeFilterParams({
     minDate: dayjs(campaignOverview.startAt),
     maxDate: dayjs(campaignOverview.endAt),
   });
   const { selectedMetrics: os } = useOsFilterParams();
 
-  const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [filter, setFilter] = useState<PerformanceFilter>({
     campaignIds: [campaignOverview.id],
     from: selected?.from?.toISOString(),
@@ -65,11 +60,6 @@ export function CampaignAnalytics({ campaignOverview }: CampaignOverviewProps) {
       filter,
     },
   });
-
-  if (isFirstLoad) {
-    setIsFirstLoad(false);
-    forceDefaultSelection();
-  }
 
   if (error) {
     return (
