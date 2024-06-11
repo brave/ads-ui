@@ -23,7 +23,12 @@ export function ResultsPane({
   if (!selected) return null;
 
   if (selected.id === "day") {
-    return <DailyGraph dataSource={overTimeData} />;
+    return (
+      <DailyGraph
+        campaignOverview={campaignOverview}
+        dataSource={overTimeData}
+      />
+    );
   }
 
   if (selected.id === "hour") {

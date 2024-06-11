@@ -7,6 +7,7 @@ import { useMetricSelection } from "../hooks";
 import { makeLineChartSeries } from "./series";
 import { OverTimeGraph } from "./OverTimeGraph";
 import { CampaignOverviewProps } from "@/util/CampaignIdProps";
+import { isEnabledForCampaign } from "@/routes/campaigns/analytics/metrics";
 
 const HourlyGraph_Load = graphql(`
   query HourlyGraph($filter: PerformanceFilter!) {
@@ -64,9 +65,9 @@ export function HourlyGraph({ campaignOverview, filters }: Props) {
     metrics: d.metrics,
   }));
 
-  const series = selectedMetrics.map((metric) =>
-    makeLineChartSeries(metric, rawData, "hour"),
-  );
+  const series = selectedMetrics
+    .filter((m) => isEnabledForCampaign(m, campaignOverview))
+    .map((metric) => makeLineChartSeries(metric, rawData, "hour"));
 
   return <OverTimeGraph series={series} hourly />;
 }

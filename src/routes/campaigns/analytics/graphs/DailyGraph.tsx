@@ -3,12 +3,14 @@ import { useMetricSelection } from "../hooks";
 import { makeLineChartSeries } from "./series";
 import { GraphSkeleton } from "./GraphSkeleton";
 import { OverTimeGraph } from "./OverTimeGraph";
+import { CampaignOverviewProps } from "@/util/CampaignIdProps";
+import { isEnabledForCampaign } from "@/routes/campaigns/analytics/metrics";
 
-interface Props {
+interface Props extends CampaignOverviewProps {
   dataSource: DailyMetricValuesFragment[] | undefined;
 }
 
-export function DailyGraph({ dataSource }: Props) {
+export function DailyGraph({ campaignOverview, dataSource }: Props) {
   const { selectedMetrics } = useMetricSelection();
 
   if (!dataSource) {
@@ -20,9 +22,9 @@ export function DailyGraph({ dataSource }: Props) {
     metrics: d.metrics,
   }));
 
-  const series = selectedMetrics.map((metric) =>
-    makeLineChartSeries(metric, rawData, "day"),
-  );
+  const series = selectedMetrics
+    .filter((m) => isEnabledForCampaign(m, campaignOverview))
+    .map((metric) => makeLineChartSeries(metric, rawData, "day"));
 
   return <OverTimeGraph series={series} />;
 }
