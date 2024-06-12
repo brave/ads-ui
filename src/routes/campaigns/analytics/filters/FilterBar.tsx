@@ -21,6 +21,7 @@ export function FilterBar(props: FilterProps) {
       flexDirection="row"
       paddingX={1}
       gap={1}
+      height={50}
     >
       <TimeFilter {...props} />
       <OsFilter {...props} />

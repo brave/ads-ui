@@ -820,7 +820,8 @@ msgstr ""
 msgid "CTR"
 msgstr ""
 
-#: src/routes/campaigns/analytics/filters/TimeFilter.tsx:21
+#: src/routes/campaigns/analytics/filters/time-filters.ts:59
+#: src/routes/campaigns/analytics/filters/TimeFilter.tsx:47
 msgid "Custom"
 msgstr ""
 
@@ -1310,24 +1311,24 @@ msgid "Language acknowledgement is required"
 msgstr ""
 
 #: src/routes/campaigns/analytics/filters/time-filters.ts:52
-msgid "Last 14 days"
-msgstr ""
+#~ msgid "Last 14 days"
+#~ msgstr ""
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:64
+#: src/routes/campaigns/analytics/filters/time-filters.ts:46
 msgid "Last 30 days"
 msgstr ""
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:40
+#: src/routes/campaigns/analytics/filters/time-filters.ts:34
 msgid "Last 7 days"
 msgstr ""
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:70
+#: src/routes/campaigns/analytics/filters/time-filters.ts:52
 msgid "Last month"
 msgstr ""
 
 #: src/routes/campaigns/analytics/filters/time-filters.ts:46
-msgid "Last week (Sun - Sat)"
-msgstr ""
+#~ msgid "Last week (Sun - Sat)"
+#~ msgstr ""
 
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:86
 #~ msgid "Launch a Campaign"
@@ -2188,13 +2189,17 @@ msgstr ""
 msgid "This key is unique to you, make sure to safely store it and avoid sharing it with others to prevent unauthorized access."
 msgstr ""
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:58
+#: src/routes/campaigns/analytics/filters/time-filters.ts:40
 msgid "This month"
 msgstr ""
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:34
-msgid "This week (Sun - Today)"
+#: src/routes/campaigns/analytics/filters/time-filters.ts:28
+msgid "This week"
 msgstr ""
+
+#: src/routes/campaigns/analytics/filters/time-filters.ts:34
+#~ msgid "This week (Sun - Today)"
+#~ msgstr ""
 
 #: src/components/TimeZonePicker/index.tsx:29
 #: src/components/TimeZonePicker/index.tsx:36
@@ -2213,7 +2218,7 @@ msgstr ""
 msgid "Title Preview"
 msgstr ""
 
-#: src/components/Date/DateRangePicker.tsx:43
+#: src/components/Date/DateRangePicker.tsx:44
 msgid "To"
 msgstr ""
 
@@ -2290,7 +2295,7 @@ msgstr ""
 msgid "Unable to load ad"
 msgstr ""
 
-#: src/routes/campaigns/analytics/CampaignAnalytics.tsx:77
+#: src/routes/campaigns/analytics/CampaignAnalytics.tsx:52
 msgid "Unable to load reporting details for campaign: {0}"
 msgstr ""
 
@@ -2494,8 +2499,8 @@ msgid "Yes"
 msgstr ""
 
 #: src/routes/campaigns/analytics/filters/time-filters.ts:28
-msgid "Yesterday"
-msgstr ""
+#~ msgid "Yesterday"
+#~ msgstr ""
 
 #: src/user/settings/NewKeyPairModal.tsx:134
 msgid "You are attempting to create a new keypair, this will replace any of your organization’s existing keypairs. Please note, previous keypairs cannot be retrieved or used once replaced."

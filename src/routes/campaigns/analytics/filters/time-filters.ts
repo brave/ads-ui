@@ -25,33 +25,9 @@ export function buildTimeFilters(): TimeFilterEntry[] {
       to: undefined,
     },
     {
-      label: t`Yesterday`,
-      id: "yesterday",
-      from: dayjs().utc().subtract(1, "day").startOf("day"),
-      to: dayjs().utc().subtract(1, "day").endOf("day"),
-    },
-    {
-      label: t`This week (Sun - Today)`,
-      id: "this-week-sun-today",
-      from: dayjs().utc().startOf("week"),
-      to: undefined,
-    },
-    {
       label: t`Last 7 days`,
       id: "last-seven-days",
       from: dayjs().utc().subtract(7, "day").startOf("day"),
-      to: undefined,
-    },
-    {
-      label: t`Last week (Sun - Sat)`,
-      id: "last-week-sun-sat",
-      from: dayjs().utc().subtract(1, "week").startOf("week"),
-      to: dayjs().utc().subtract(1, "week").endOf("week"),
-    },
-    {
-      label: t`Last 14 days`,
-      id: "last-fourteen-days",
-      from: dayjs().utc().subtract(14, "day").startOf("day"),
       to: undefined,
     },
     {
@@ -75,7 +51,7 @@ export function buildTimeFilters(): TimeFilterEntry[] {
     {
       id: "custom",
       label: t`Custom`,
-      from: dayjs().utc().subtract(3, "day").startOf("day"),
+      from: dayjs().utc().startOf("week"),
       to: undefined,
     },
   ];
