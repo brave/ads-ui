@@ -184,3 +184,10 @@ export function getMetricListForCampaign(
     (m) => !m.disableForCampaign || !m.disableForCampaign(campaign),
   );
 }
+
+export function isEnabledForCampaign(
+  metric: MetricDefinition,
+  campaign: CampaignSummaryFragment,
+) {
+  return !metric.disableForCampaign || !metric.disableForCampaign(campaign);
+}

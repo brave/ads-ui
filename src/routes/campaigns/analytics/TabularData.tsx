@@ -33,7 +33,6 @@ interface Props extends CampaignOverviewProps {
 
 export function TabularData({ campaignOverview, breakdown, filters }: Props) {
   const { _: lingui } = useLingui();
-  console.log(breakdown);
   if (!isBreakdownWithQuery(breakdown)) throw new Error("opps");
 
   const { isSelected } = useMetricSelection();

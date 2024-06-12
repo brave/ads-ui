@@ -16,8 +16,14 @@ export function MetricSelector({
   dataSource,
   isLast,
 }: Props) {
-  const { isSelected, toggleMetric } = useMetricSelection();
+  const { isSelected, toggleMetric, selectedMetrics, forceDefaultSelection } =
+    useMetricSelection();
   const value = dataSource ? metricDefinition.getValue(dataSource) : undefined;
+
+  if (selectedMetrics.length === 0) {
+    forceDefaultSelection();
+    return null;
+  }
 
   return (
     <Box
@@ -32,7 +38,7 @@ export function MetricSelector({
       <Switch
         size="small"
         checked={isSelected(metricDefinition)}
-        onChange={toggleMetric(metricDefinition)}
+        onChange={() => toggleMetric(metricDefinition)}
         color="default"
         sx={{
           [`& .${switchClasses.checked}`]: {

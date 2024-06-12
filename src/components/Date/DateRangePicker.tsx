@@ -23,13 +23,14 @@ export const DateRangePicker = ({
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <Stack direction="row" spacing={1} margin={1}>
+      <Stack direction="row" spacing={1}>
         <DatePicker
           label={_(msg`From`)}
           value={from}
+          timezone="UTC"
           onChange={(newValue) => {
             if (newValue) {
-              onFromChange(newValue);
+              onFromChange(newValue.startOf("day"));
             }
           }}
           slotProps={{
@@ -42,9 +43,10 @@ export const DateRangePicker = ({
         <DatePicker
           label={_(msg`To`)}
           value={to}
+          timezone="UTC"
           onChange={(newValue) => {
             if (newValue) {
-              onToChange(newValue);
+              onToChange(newValue.endOf("day"));
             }
           }}
           slotProps={{

@@ -2,7 +2,6 @@ import { Box } from "@mui/material";
 import { TimeFilter } from "./TimeFilter";
 import { PerformanceFilter } from "@/graphql-client/graphql";
 import { Dispatch } from "react";
-import { Dayjs } from "dayjs";
 import { OsFilter } from "./OsFilter";
 import { ReportMenu } from "@/user/reporting/ReportMenu";
 
@@ -11,8 +10,6 @@ export interface FilterProps {
   onChange: Dispatch<PerformanceFilter>;
   campaignId: string;
   hasVerifiedConversions: boolean;
-  minDate?: Dayjs;
-  maxDate?: Dayjs;
 }
 
 export function FilterBar(props: FilterProps) {
@@ -24,6 +21,7 @@ export function FilterBar(props: FilterProps) {
       flexDirection="row"
       paddingX={1}
       gap={1}
+      height={50}
     >
       <TimeFilter {...props} />
       <OsFilter {...props} />

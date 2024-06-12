@@ -2,12 +2,10 @@ import { graphql } from "@/graphql-client";
 import { useQuery } from "@apollo/client";
 import { MetricsList } from "./MetricsList";
 import { Box, Card, Stack, Typography } from "@mui/material";
-import { useMetricSelection } from "./hooks";
-import { useState } from "react";
+import { useCampaignAnalyticFilter } from "./hooks";
 import { FilterBar } from "./filters/FilterBar";
 import { ResultsPane } from "./ResultsPane";
-import { CampaignFormat, PerformanceFilter } from "@/graphql-client/graphql";
-import dayjs from "dayjs";
+import { CampaignFormat } from "@/graphql-client/graphql";
 import { CampaignOverviewProps } from "@/util/CampaignIdProps";
 import { ErrorDetail } from "@/components/Error/ErrorDetail";
 import { msg } from "@lingui/macro";
@@ -38,12 +36,7 @@ export function CampaignAnalytics({ campaignOverview }: CampaignOverviewProps) {
     (c) => c.extractExternalId,
   );
 
-  const { forceDefaultMetricSelection: forceDefaultSelection } =
-    useMetricSelection();
-  const [isFirstLoad, setIsFirstLoad] = useState(true);
-  const [filter, setFilter] = useState<PerformanceFilter>({
-    campaignIds: [campaignOverview.id],
-  });
+  const { filter, setFilter } = useCampaignAnalyticFilter({ campaignOverview });
 
   const { data, error } = useQuery(Analytics_Load, {
     pollInterval: 10 * 60 * 1000,
@@ -51,11 +44,6 @@ export function CampaignAnalytics({ campaignOverview }: CampaignOverviewProps) {
       filter,
     },
   });
-
-  if (isFirstLoad) {
-    setIsFirstLoad(false);
-    forceDefaultSelection();
-  }
 
   if (error) {
     return (
@@ -123,8 +111,6 @@ export function CampaignAnalytics({ campaignOverview }: CampaignOverviewProps) {
             onChange={setFilter}
             campaignId={campaignOverview.id}
             hasVerifiedConversions={hasVerifiedConversions}
-            minDate={dayjs(campaignOverview.startAt)}
-            maxDate={dayjs(campaignOverview.endAt)}
           />
         </Box>
 
