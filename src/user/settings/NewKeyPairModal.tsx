@@ -14,7 +14,7 @@ import { modalStyles } from "@/theme";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useMutation } from "@apollo/client";
-import { UpdateAdvertiserDocument } from "@/graphql-client/graphql";
+import { Advertiser_Update } from "@/auth/components/AdvertiserDetailsForm";
 
 interface Props {
   advertiser: IAdvertiser;
@@ -32,9 +32,9 @@ export function NewKeyPairModal({ advertiser }: Props) {
   const [newKeypairModalState, setNewKeypairModalState] =
     useState("disclaimer");
 
-  const [updateAdvertiser] = useMutation(UpdateAdvertiserDocument, {
+  const [updateAdvertiser] = useMutation(Advertiser_Update, {
     variables: {
-      updateAdvertiserInput: {
+      input: {
         id: advertiser.id,
         publicKey: publicKey.current,
       },

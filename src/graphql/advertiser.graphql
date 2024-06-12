@@ -17,13 +17,6 @@ query Advertiser($id: String!) {
   }
 }
 
-mutation UpdateAdvertiser($updateAdvertiserInput: UpdateAdvertiserInput!) {
-  updateAdvertiser(updateAdvertiserInput: $updateAdvertiserInput) {
-    id
-    publicKey
-  }
-}
-
 fragment AdvertiserCampaigns on Advertiser {
   id
   name
