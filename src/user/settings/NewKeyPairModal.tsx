@@ -55,7 +55,7 @@ export function NewKeyPairModal({ advertiser }: Props) {
     setSaving(true);
     updateAdvertiser({
       variables: {
-        updateAdvertiserInput: {
+        input: {
           id: advertiser.id,
           publicKey: newPublicKey,
         },
