@@ -4,10 +4,10 @@ import { ReactElement, ReactNode, useContext } from "react";
 
 import { OnOff } from "@/components/Switch/OnOff";
 import { displayFromCampaignState } from "@/util/displayState";
-import { CampaignExtras } from "@/user/adSet/AdSetList";
 import { FilterContext } from "@/state/context";
 import {
   AdvertiserCampaignsDocument,
+  CampaignSource,
   CampaignSummaryFragment,
   LoadCampaignAdsDocument,
   LoadCampaignDocument,
@@ -115,7 +115,14 @@ export function campaignOnOffState(
 }
 
 export function adSetOnOffState(
-  c: Omit<UpdateAdSetInput, "ads"> & CampaignExtras,
+  c: Omit<UpdateAdSetInput, "ads"> & {
+    campaignStart: string;
+    campaignEnd: string;
+    campaignId: string;
+    campaignState: string;
+    campaignSource: CampaignSource;
+    advertiserId: string;
+  },
   isInline?: boolean,
 ): ReactNode {
   const [updateAdSet, { loading }] = useMutation(UpdateAdSetDocument, {

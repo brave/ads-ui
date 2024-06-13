@@ -138,13 +138,14 @@ export function User() {
 
                 {/* /campaigns/:campaignId/analytics - */}
                 <ProtectedRoute
-                  path="/user/main/campaign/:campaignId"
+                  path="/user/main/report/:campaignId"
                   authedComponent={CampaignReportViewSelector}
                 />
 
-                <ProtectedRoute
-                  path="/user/main/report/:campaignId"
-                  authedComponent={CampaignReportViewSelector}
+                <Redirect
+                  to={"/user/main/report/:campaignId"}
+                  from={"/user/main/campaign/:campaignId"}
+                  exact={true}
                 />
 
                 <Route path="/user/main/settings" component={Settings} />

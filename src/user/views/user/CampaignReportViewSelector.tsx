@@ -1,9 +1,8 @@
 import { Box, LinearProgress } from "@mui/material";
 import { AlwaysOnFormButton } from "@/components/Button/AlwaysOnFormButton";
-import { useParams, useRouteMatch } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { CampaignFormat } from "@/graphql-client/graphql";
 import { ConsultAccountManager } from "./reports/ConsultAccountManager";
-import { OriginalCampaignReportView } from "./reports/OriginalCampaignReportView";
 import { useQuery } from "@apollo/client";
 import { AnalyticsOverview } from "@/routes/campaigns/analytics/AnalyticsOverview";
 import MiniSideBar from "@/components/Drawer/MiniSideBar";
@@ -36,9 +35,6 @@ const Campaign_Load = graphql(`
 `);
 
 export function CampaignReportViewSelector() {
-  const match = useRouteMatch();
-  const isReport = match.url.includes("report");
-
   const { campaignId } = useParams<Params>();
 
   const { data } = useQuery(Campaign_Load, {
@@ -56,17 +52,13 @@ export function CampaignReportViewSelector() {
   }
 
   const format = data.campaign.format;
-  const isSearch = format === CampaignFormat.Search;
-
   return (
     <MiniSideBar>
       <Box padding={2} width="100%">
         {format === CampaignFormat.NtpSi ? (
           <ConsultAccountManager />
-        ) : isSearch || isReport ? (
-          <AnalyticsOverview campaignOverview={data.campaign} />
         ) : (
-          <OriginalCampaignReportView campaignSummary={data.campaign} />
+          <AnalyticsOverview campaignOverview={data.campaign} />
         )}
 
         <AlwaysOnFormButton />
