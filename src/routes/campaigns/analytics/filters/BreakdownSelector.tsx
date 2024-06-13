@@ -36,8 +36,10 @@ export function VerticalBreakdown() {
         }}
         sx={{ alignItems: "left" }}
       >
-        {breakdowns.map((b) => (
+        {breakdowns.map((b, i) => (
           <Tab
+            value={i}
+            key={b.id}
             label={b.label}
             sx={{ alignItems: "start", color: "text.primary" }}
           />

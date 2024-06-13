@@ -10,6 +10,10 @@ export function applySelection(
     return [id];
   }
 
+  if (filters.length === 0) {
+    return undefined;
+  }
+
   if (filters.includes(id)) {
     return filters.filter((f) => f !== id);
   }

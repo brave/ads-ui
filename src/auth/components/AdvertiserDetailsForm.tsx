@@ -10,7 +10,6 @@ import { useHistory } from "react-router-dom";
 import {
   AdvertiserBillingAddressDocument,
   PaymentType,
-  UpdateAdvertiserDocument,
 } from "@/graphql-client/graphql";
 import { AdvertiserAgreed } from "@/auth/components/AdvertiserAgreed";
 import { FormikSubmitButton } from "@/form/FormikButton";
@@ -20,6 +19,16 @@ import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
 import _ from "lodash";
 import { msg, Trans } from "@lingui/macro";
 import { useMutation, useQuery } from "@apollo/client";
+import { graphql } from "@/graphql-client/index";
+
+export const Advertiser_Update = graphql(`
+  mutation UpdateAdvertiser($input: UpdateSelfServeAdvertiserInput!) {
+    updateSelfServeAdvertiser(updateAdvertiserInput: $input) {
+      id
+      publicKey
+    }
+  }
+`);
 
 export function AdvertiserDetailsForm() {
   const { trackMatomoEvent } = useTrackWithMatomo({
@@ -35,7 +44,7 @@ export function AdvertiserDetailsForm() {
     initialAdvertiserForm(!requiresPaymentAgree),
   );
 
-  const [mutation] = useMutation(UpdateAdvertiserDocument, {
+  const [mutation] = useMutation(Advertiser_Update, {
     async onCompleted() {
       const user = await getUser();
       setSessionUser(user);
@@ -63,7 +72,7 @@ export function AdvertiserDetailsForm() {
           setSubmitting(true);
           await mutation({
             variables: {
-              updateAdvertiserInput: {
+              input: {
                 id: advertiser.id,
                 agreed: v.terms && v.tracking && v.payment && v.language,
                 billingAddress: v.address.id

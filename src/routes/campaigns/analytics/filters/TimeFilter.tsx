@@ -1,46 +1,61 @@
-import dayjs from "dayjs";
 import { FilterProps } from "./FilterBar";
 import { FilterButton } from "./FilterButton";
 import { buildTimeFilters } from "./time-filters";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { useTimeFilterParams } from "@/routes/campaigns/analytics/hooks";
+import dayjs from "dayjs";
+import { DateRangePicker } from "@/components/Date/DateRangePicker";
+import { Box } from "@mui/material";
+import { useStickyState } from "@/hooks/useStickyState";
 
 export function TimeFilter(props: FilterProps) {
   const { _ } = useLingui();
-  const menuItems = buildTimeFilters(dayjs.utc(), props.minDate, props.maxDate);
-
-  const matches = (
-    a: dayjs.Dayjs | undefined,
-    b: string | undefined | null,
-  ): boolean => {
-    if (!a && !b) {
-      return true;
-    }
-
-    if (!a || !b) {
-      return false;
-    }
-
-    return a.isSame(b);
-  };
-
-  const selected = menuItems.find(
-    (mi) =>
-      matches(mi.from, props.filters.from) && matches(mi.to, props.filters.to),
+  const [, setCustom] = useStickyState<string | undefined>(
+    "custom-date",
+    undefined,
   );
+  const menuItems = buildTimeFilters();
+
+  const { selected, setSelected, forceDefaultBreakdownSelection } =
+    useTimeFilterParams();
+
+  if (!selected) {
+    forceDefaultBreakdownSelection();
+    return null;
+  }
 
   return (
-    <FilterButton
-      label={selected?.label || _(msg`Custom`)}
-      value={selected}
-      onChange={(item) => {
-        props.onChange({
-          ...props.filters,
-          from: item.from?.toISOString(),
-          to: item.to?.toISOString(),
-        });
-      }}
-      menuItems={menuItems}
-    />
+    <Box display="flex" flexDirection="row" alignItems="center" gap="10px">
+      {selected.id === "custom" && (
+        <DateRangePicker
+          from={dayjs(props.filters.from) ?? null}
+          to={dayjs(props.filters.to) ?? null}
+          onFromChange={(from) => {
+            const filter = { to: props.filters.to, from: from?.toISOString() };
+            setCustom(JSON.stringify(filter));
+            props.onChange({ ...props.filters, ...filter });
+          }}
+          onToChange={(to) => {
+            const filter = { to: to?.toISOString(), from: props.filters.from };
+            setCustom(JSON.stringify(filter));
+            props.onChange({ ...props.filters, ...filter });
+          }}
+        />
+      )}
+      <FilterButton
+        label={selected?.label || _(msg`Custom`)}
+        value={selected}
+        onChange={(item) => {
+          setSelected(item);
+          props.onChange({
+            ...props.filters,
+            from: item.from?.toISOString(),
+            to: item.to?.toISOString(),
+          });
+        }}
+        menuItems={menuItems}
+      />
+    </Box>
   );
 }

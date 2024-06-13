@@ -72,6 +72,7 @@ const METRICS: MetricDefinition[] = [
     type: "number",
     color: colors[3],
     isLikelyUnderestimate: true,
+    disableForCampaign: isSearch,
   },
   {
     id: "conversion",
@@ -80,6 +81,7 @@ const METRICS: MetricDefinition[] = [
     type: "number",
     color: colors[4],
     isLikelyUnderestimate: true,
+    disableForCampaign: isSearch,
   },
   {
     id: "view-through-conversion",
@@ -88,6 +90,7 @@ const METRICS: MetricDefinition[] = [
     type: "number",
     color: colors[5],
     isLikelyUnderestimate: true,
+    disableForCampaign: isSearch,
   },
   {
     id: "click-through-conversion",
@@ -96,6 +99,7 @@ const METRICS: MetricDefinition[] = [
     type: "number",
     color: colors[6],
     isLikelyUnderestimate: true,
+    disableForCampaign: isSearch,
   },
   {
     id: "conversion-rate",
@@ -104,6 +108,7 @@ const METRICS: MetricDefinition[] = [
     type: "rate",
     color: colors[7],
     isLikelyUnderestimate: true,
+    disableForCampaign: isSearch,
   },
   {
     id: "click-to-site-visit-rate",
@@ -112,6 +117,7 @@ const METRICS: MetricDefinition[] = [
     type: "rate",
     color: colors[8],
     isLikelyUnderestimate: true,
+    disableForCampaign: isSearch,
   },
   {
     id: "spend",
@@ -127,6 +133,7 @@ const METRICS: MetricDefinition[] = [
     getValue: (metrics) => BigNumber(metrics.rates.costPerAcquisition),
     type: "usd",
     color: colors[0],
+    disableForCampaign: isSearch,
   },
   {
     id: "upvote",
@@ -176,4 +183,11 @@ export function getMetricListForCampaign(
   return METRICS.filter(
     (m) => !m.disableForCampaign || !m.disableForCampaign(campaign),
   );
+}
+
+export function isEnabledForCampaign(
+  metric: MetricDefinition,
+  campaign: CampaignSummaryFragment,
+) {
+  return !metric.disableForCampaign || !metric.disableForCampaign(campaign);
 }

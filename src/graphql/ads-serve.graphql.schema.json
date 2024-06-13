@@ -5813,15 +5813,11 @@
             "name": "emailVerified",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
             },
-            "defaultValue": null,
+            "defaultValue": "false",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -9186,6 +9182,39 @@
               "ofType": {
                 "kind": "OBJECT",
                 "name": "Creative",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updateSelfServeAdvertiser",
+            "description": null,
+            "args": [
+              {
+                "name": "updateAdvertiserInput",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "UpdateSelfServeAdvertiserInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Advertiser",
                 "ofType": null
               }
             },
@@ -14528,6 +14557,69 @@
       },
       {
         "kind": "INPUT_OBJECT",
+        "name": "UpdateSelfServeAdvertiserInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "agreed",
+            "description": "Agreed to Terms And Conditions - Advertiser Facing Dashboard",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "billingAddress",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UpdateAddressInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "publicKey",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
         "name": "UpdateUserInput",
         "description": null,
         "fields": null,
@@ -14552,7 +14644,7 @@
               "name": "Boolean",
               "ofType": null
             },
-            "defaultValue": null,
+            "defaultValue": "false",
             "isDeprecated": false,
             "deprecationReason": null
           },

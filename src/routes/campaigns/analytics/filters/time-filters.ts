@@ -1,47 +1,64 @@
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
+import { t } from "@lingui/macro";
 
-interface TimeFilterEntry {
+export interface TimeFilterEntry {
   label: string;
   id: string;
-  from: Dayjs | undefined;
-  to: Dayjs | undefined;
+  from: dayjs.Dayjs | undefined;
+  to: dayjs.Dayjs | undefined;
   divider?: boolean;
 }
 
-export function buildTimeFilters(
-  baseDate: Dayjs = dayjs.utc(),
-  minDate: Dayjs = baseDate.subtract(3, "month"),
-  maxDate: Dayjs = baseDate,
-): TimeFilterEntry[] {
-  const buildFilterForMonth = (dateInMonth: Dayjs) => ({
-    label: dateInMonth.format("MMMM YYYY"),
-    id: dateInMonth.format("YYYY-MM"),
-    from: dateInMonth.startOf("month"),
-    to: dateInMonth.endOf("month"),
-  });
-
-  // build the per-month entries from minDate to maxDate
-  let currentMonthFilter = minDate;
-
-  // never count beyond the "baseDate" (usually "now" in the UI context)
-  const actualMaxDate = dayjs.min(maxDate, baseDate);
-
-  const monthsFilters = [];
-  while (currentMonthFilter.startOf("month").isBefore(actualMaxDate)) {
-    monthsFilters.push(buildFilterForMonth(currentMonthFilter));
-    currentMonthFilter = currentMonthFilter.add(1, "month");
-  }
-
+export function buildTimeFilters(): TimeFilterEntry[] {
   return [
     {
-      // eslint-disable-next-line lingui/no-unlocalized-strings
-      label: "All time",
+      label: t`All time`,
       id: "all-time",
       divider: true,
       from: undefined,
       to: undefined,
     },
-    // TODO: dayjs has a separate localization process, should use it but address in a separate PR
-    ...monthsFilters.reverse(),
+    {
+      label: t`Today`,
+      id: "today",
+      from: dayjs().utc().startOf("day"),
+      to: undefined,
+    },
+    {
+      label: t`Last 7 days`,
+      id: "last-seven-days",
+      from: dayjs().utc().subtract(7, "day").startOf("day"),
+      to: undefined,
+    },
+    {
+      label: t`This month`,
+      id: "this-month",
+      from: dayjs().utc().startOf("month"),
+      to: undefined,
+    },
+    {
+      label: t`Last 30 days`,
+      id: "last-thirty-days",
+      from: dayjs().utc().subtract(30, "day").startOf("day"),
+      to: undefined,
+    },
+    {
+      label: t`Last month`,
+      id: "last-month",
+      from: dayjs().utc().subtract(1, "month").startOf("month"),
+      to: dayjs().utc().subtract(1, "month").endOf("month"),
+    },
+    {
+      id: "custom",
+      label: t`Custom`,
+      from: dayjs().utc().startOf("week"),
+      to: undefined,
+    },
   ];
+}
+
+export function getTimeFilter(
+  id: string | undefined | null,
+): TimeFilterEntry | undefined {
+  return buildTimeFilters().find((filter) => filter.id === id);
 }
