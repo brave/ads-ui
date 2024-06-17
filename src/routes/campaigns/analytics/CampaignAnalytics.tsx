@@ -5,12 +5,10 @@ import { Box, Card, Stack, Typography } from "@mui/material";
 import { useCampaignAnalyticFilter } from "./hooks";
 import { FilterBar } from "./filters/FilterBar";
 import { ResultsPane } from "./ResultsPane";
-import { CampaignFormat } from "@/graphql-client/graphql";
 import { CampaignOverviewProps } from "@/util/CampaignIdProps";
 import { ErrorDetail } from "@/components/Error/ErrorDetail";
 import { msg } from "@lingui/macro";
 import { Status } from "@/components/Campaigns/Status";
-import { ChangeReportingAlert } from "@/components/Collapse/ChangeReportingAlert";
 import _ from "lodash";
 import { VerticalBreakdown } from "@/routes/campaigns/analytics/filters/BreakdownSelector";
 
@@ -56,9 +54,6 @@ export function CampaignAnalytics({ campaignOverview }: CampaignOverviewProps) {
 
   return (
     <Box display="flex" width="100%" flexDirection="column">
-      {campaignOverview.format !== CampaignFormat.Search && (
-        <ChangeReportingAlert id={campaignOverview.id} />
-      )}
       <Box
         component={Card}
         p={2}
