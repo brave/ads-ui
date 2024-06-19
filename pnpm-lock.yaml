@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  ws@>=8.0.0 <8.17.1: '>=8.17.1'
+
 importers:
 
   .:
@@ -3136,7 +3139,7 @@ packages:
   isomorphic-ws@5.0.0:
     resolution: {integrity: sha512-muId7Zzn9ywDsyXgTIafTry2sV3nySZeUDe6YedVd1Hvuuep5AsIlqK+XefWpYTyJG5e503F2xIuT2lcU6rCSw==}
     peerDependencies:
-      ws: '*'
+      ws: '>=8.17.1'
 
   iterable-lookahead@1.0.0:
     resolution: {integrity: sha512-hJnEP2Xk4+44DDwJqUQGdXal5VbyeWLaPyDl2AQc242Zr7iqz4DgpQOrEzglWVMGHMDCkguLHEKxd1+rOsmgSQ==}
@@ -4493,20 +4496,8 @@ packages:
   wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
 
-  ws@8.13.0:
-    resolution: {integrity: sha512-x9vcZYTrFPC7aSIbj7sRCYo7L/Xb8Iy+pW0ng0wt2vCJv7M9HOMy0UoN3rr+IFC7hb7vXoqS+P9ktyLLLhO+LA==}
-    engines: {node: '>=10.0.0'}
-    peerDependencies:
-      bufferutil: ^4.0.1
-      utf-8-validate: '>=5.0.2'
-    peerDependenciesMeta:
-      bufferutil:
-        optional: true
-      utf-8-validate:
-        optional: true
-
-  ws@8.17.0:
-    resolution: {integrity: sha512-uJq6108EgZMAl20KagGkzCKfMEjxmKvZHG7Tlq0Z6nOky7YF7aq4mOx6xK8TJ/i1LeK4Qus7INktacctDgY8Ow==}
+  ws@8.17.1:
+    resolution: {integrity: sha512-6XQFvXTkbfUOZOKKILFG1PDK2NDQs4azKQl26T0YS5CxqWLgXajbPZ+h4gZekJyRqFU8pvnbAbbs/3TgRPy+GQ==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1
@@ -5537,9 +5528,9 @@ snapshots:
       '@types/ws': 8.5.10
       graphql: 16.8.2
       graphql-ws: 5.12.1(graphql@16.8.2)
-      isomorphic-ws: 5.0.0(ws@8.13.0)
+      isomorphic-ws: 5.0.0(ws@8.17.1)
       tslib: 2.6.2
-      ws: 8.13.0
+      ws: 8.17.1
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -5550,9 +5541,9 @@ snapshots:
       '@types/ws': 8.5.10
       graphql: 16.8.2
       graphql-ws: 5.16.0(graphql@16.8.2)
-      isomorphic-ws: 5.0.0(ws@8.17.0)
+      isomorphic-ws: 5.0.0(ws@8.17.1)
       tslib: 2.6.2
-      ws: 8.17.0
+      ws: 8.17.1
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -5589,9 +5580,9 @@ snapshots:
       '@graphql-tools/utils': 9.2.1(graphql@16.8.2)
       '@types/ws': 8.5.10
       graphql: 16.8.2
-      isomorphic-ws: 5.0.0(ws@8.13.0)
+      isomorphic-ws: 5.0.0(ws@8.17.1)
       tslib: 2.6.2
-      ws: 8.13.0
+      ws: 8.17.1
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -5601,9 +5592,9 @@ snapshots:
       '@graphql-tools/utils': 10.2.1(graphql@16.8.2)
       '@types/ws': 8.5.10
       graphql: 16.8.2
-      isomorphic-ws: 5.0.0(ws@8.17.0)
+      isomorphic-ws: 5.0.0(ws@8.17.1)
       tslib: 2.6.2
-      ws: 8.17.0
+      ws: 8.17.1
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -5824,10 +5815,10 @@ snapshots:
       '@types/ws': 8.5.10
       '@whatwg-node/fetch': 0.8.8
       graphql: 16.8.2
-      isomorphic-ws: 5.0.0(ws@8.17.0)
+      isomorphic-ws: 5.0.0(ws@8.17.1)
       tslib: 2.6.2
       value-or-promise: 1.0.12
-      ws: 8.17.0
+      ws: 8.17.1
     transitivePeerDependencies:
       - '@types/node'
       - bufferutil
@@ -5846,10 +5837,10 @@ snapshots:
       '@types/ws': 8.5.10
       '@whatwg-node/fetch': 0.9.17
       graphql: 16.8.2
-      isomorphic-ws: 5.0.0(ws@8.17.0)
+      isomorphic-ws: 5.0.0(ws@8.17.1)
       tslib: 2.6.2
       value-or-promise: 1.0.12
-      ws: 8.17.0
+      ws: 8.17.1
     transitivePeerDependencies:
       - '@types/node'
       - bufferutil
@@ -8134,13 +8125,9 @@ snapshots:
 
   isexe@2.0.0: {}
 
-  isomorphic-ws@5.0.0(ws@8.13.0):
+  isomorphic-ws@5.0.0(ws@8.17.1):
     dependencies:
-      ws: 8.13.0
-
-  isomorphic-ws@5.0.0(ws@8.17.0):
-    dependencies:
-      ws: 8.17.0
+      ws: 8.17.1
 
   iterable-lookahead@1.0.0: {}
 
@@ -9539,9 +9526,7 @@ snapshots:
 
   wrappy@1.0.2: {}
 
-  ws@8.13.0: {}
-
-  ws@8.17.0: {}
+  ws@8.17.1: {}
 
   y18n@4.0.3: {}
 
