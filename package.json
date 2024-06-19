@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@apollo/client": "3.8.10",
+    "@apollo/client": "3.10.5",
     "@emotion/react": "11.11.4",
     "@emotion/styled": "11.11.5",
     "@fontsource/inter": "5.0.18",
