@@ -215,7 +215,6 @@ describe("new form tests", () => {
   };
 
   const adSetForm: AdSetForm = {
-    conversions: [],
     creatives: [creative, creative2],
     isNotTargeting: false,
     name: "",

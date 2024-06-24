@@ -47,15 +47,8 @@ export type AdSetForm = {
   name: string;
   segments: Segment[];
   oses: OS[];
-  conversions: Conversion[];
   creatives: Creative[];
   isNotTargeting: boolean;
-};
-
-export type Conversion = {
-  type: string;
-  observationWindow: number;
-  urlPattern: string;
 };
 
 export type Segment = {
@@ -100,7 +93,6 @@ export const initialAdSet: AdSetForm = {
   name: "",
   isNotTargeting: false,
   segments: [],
-  conversions: [],
   oses: [],
   creatives: [],
 };
