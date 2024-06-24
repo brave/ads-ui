@@ -73,12 +73,6 @@ export type Creative = CreativeInput & {
   included: boolean;
 };
 
-export const initialConversion: Conversion = {
-  type: "",
-  urlPattern: "",
-  observationWindow: 0,
-};
-
 export const initialCreative: Creative = {
   name: "",
   advertiserId: "",
