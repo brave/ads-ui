@@ -253,7 +253,6 @@ describe("new form tests", () => {
               },
             ],
             "billingType": "cpm",
-            "conversions": [],
             "name": "",
             "oses": [
               {
