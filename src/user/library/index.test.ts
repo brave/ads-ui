@@ -215,6 +215,7 @@ describe("new form tests", () => {
   };
 
   const adSetForm: AdSetForm = {
+    conversions: [],
     creatives: [creative, creative2],
     isNotTargeting: false,
     name: "",
@@ -252,6 +253,7 @@ describe("new form tests", () => {
               },
             ],
             "billingType": "cpm",
+            "conversions": [],
             "name": "",
             "oses": [
               {

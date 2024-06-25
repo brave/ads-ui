@@ -58,6 +58,11 @@ function createAdSetFromFragment(
     })),
     price: data.price ?? "6",
     billingType: data.billingType ?? "cpm",
+    conversions: (data.conversions ?? []).map((c) => ({
+      observationWindow: c.observationWindow,
+      type: c.type,
+      urlPattern: c.urlPattern,
+    })),
     // eslint-disable-next-line lingui/no-unlocalized-strings
     name: `${data.name ? data.name : data.id.split("-")[0]} - Copy`,
     oses: (data.oses ?? []).map((o) => ({ name: o.name, code: o.code })),
