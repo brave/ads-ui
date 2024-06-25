@@ -47,8 +47,15 @@ export type AdSetForm = {
   name: string;
   segments: Segment[];
   oses: OS[];
+  conversions: Conversion[];
   creatives: Creative[];
   isNotTargeting: boolean;
+};
+
+export type Conversion = {
+  type: string;
+  observationWindow: number;
+  urlPattern: string;
 };
 
 export type Segment = {
@@ -64,6 +71,12 @@ export type Creative = CreativeInput & {
   createdAt?: string;
   modifiedAt?: string;
   included: boolean;
+};
+
+export const initialConversion: Conversion = {
+  type: "",
+  urlPattern: "",
+  observationWindow: 0,
 };
 
 export const initialCreative: Creative = {
@@ -93,6 +106,7 @@ export const initialAdSet: AdSetForm = {
   name: "",
   isNotTargeting: false,
   segments: [],
+  conversions: [],
   oses: [],
   creatives: [],
 };
