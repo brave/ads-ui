@@ -10,7 +10,6 @@ import {
   AdSetForm,
   Billing,
   CampaignForm,
-  Conversion,
   Creative,
   initialCreative,
   Segment,
@@ -40,7 +39,6 @@ export function transformNewForm(
     budget: form.budget,
     adSets: form.adSets.map((a) => ({
       ...transformAdSet(a, form),
-      conversions: transformConversion(a.conversions),
       ads: a.creatives
         .filter(
           (c) =>
@@ -61,18 +59,6 @@ export const transformPrice = (
     ? price.dividedBy(1000).toString()
     : price.toString();
 };
-
-function transformConversion(conv: Conversion[]) {
-  if (conv.length <= 0) {
-    return [];
-  }
-
-  return conv.map((c) => ({
-    observationWindow: c.observationWindow * 1.0,
-    urlPattern: c.urlPattern,
-    type: c.type,
-  }));
-}
 
 export function editCampaignValues(
   campaign: CampaignFragment,

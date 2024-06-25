@@ -1,5 +1,4 @@
 import { PickerFields } from "./fields/PickerFields";
-import { ConversionField } from "./fields/ConversionField";
 import { CardContainer } from "@/components/Card/CardContainer";
 import { useHistory } from "react-router-dom";
 import { FormikTextField, useIsEdit } from "@/form/FormikHelpers";
@@ -20,7 +19,6 @@ import { useLingui } from "@lingui/react";
 export function AdSetFields() {
   const { _ } = useLingui();
   const history = useHistory();
-  const { isDraft } = useIsEdit();
   const params = new URLSearchParams(history.location.search);
   const current = Number(params.get("current") ?? 0);
   const fakeCurrent = current + 1;
@@ -44,8 +42,6 @@ export function AdSetFields() {
       </CardContainer>
 
       <PickerFields index={current} />
-
-      {isDraft && <ConversionField index={current} />}
 
       <AdSetAds index={current} />
     </>

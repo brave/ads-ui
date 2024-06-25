@@ -1,6 +1,5 @@
 import { AdSetForm, Creative, OS, Segment } from "../../../../../types";
 import { FormikErrors } from "formik";
-import { ConversionDisplay } from "@/components/Conversion/ConversionDisplay";
 import { ReviewField } from "./ReviewField";
 import { ReviewContainer } from "@/user/views/adsManager/views/advanced/components/review/components/ReviewContainer";
 import { CampaignFormat } from "@/graphql-client/graphql";
@@ -53,10 +52,6 @@ export function AdSetReview({ adSet, idx, errors, format }: Props) {
         caption={msg`Platforms`}
         value={mapToString(adSet.oses)}
         error={hasErrors ? (adSetError?.oses as string) : ""}
-      />
-      <ConversionDisplay
-        conversions={adSet.conversions}
-        convErrors={adSetError?.conversions}
       />
       <CreativeSpecificPreview
         options={included}
