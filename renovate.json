@@ -7,7 +7,6 @@
     "npm:unpublishSafe",
     "helpers:pinGitHubActionDigests",
     "group:allNonMajor",
-    "group:allApollographql",
     "schedule:weekends"
   ],
   "labels": ["dependencies"],
