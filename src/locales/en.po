@@ -82,6 +82,9 @@ msgstr "About Brave Ads"
 #~ msgstr "Access dashboard"
 
 #: src/components/Drawer/MiniSideBar.tsx:57
+#: src/components/Navigation/AccountMenu.tsx:36
+#: src/components/Navigation/AccountMenu.tsx:97
+#: src/user/settings/Settings.tsx:49
 msgid "Account"
 msgstr "Account"
 
@@ -128,8 +131,8 @@ msgstr "Ad image dimensions are required"
 #~ msgstr "Ad Inquiries"
 
 #: src/user/ads/AdList.tsx:57
-msgid "Ad Name"
-msgstr "Ad Name"
+#~ msgid "Ad Name"
+#~ msgstr "Ad Name"
 
 #: src/validation/CreativeSchema.tsx:24
 msgid "Ad Name is required"
@@ -146,7 +149,6 @@ msgstr "Ad Name is required"
 msgid "Ad Set"
 msgstr "Ad Set"
 
-#: src/user/ads/AdList.tsx:76
 #: src/user/views/adsManager/views/advanced/components/adSet/AdSetFields.tsx:41
 msgid "Ad set name"
 msgstr "Ad set name"
@@ -156,8 +158,8 @@ msgstr "Ad set name"
 #~ msgstr "Ad Set Performance"
 
 #: src/user/views/user/CampaignDetails.tsx:40
-msgid "Ad sets"
-msgstr "Ad sets"
+#~ msgid "Ad sets"
+#~ msgstr "Ad sets"
 
 #: src/user/views/adsManager/views/advanced/components/form/components/BaseForm.tsx:30
 msgid "Ad Sets"
@@ -201,8 +203,8 @@ msgid "Additional Details"
 msgstr "Additional Details"
 
 #: src/user/views/user/reports/OriginalCampaignReportView.tsx:94
-msgid "Additional Report: OS Performance"
-msgstr "Additional Report: OS Performance"
+#~ msgid "Additional Report: OS Performance"
+#~ msgstr "Additional Report: OS Performance"
 
 #: src/components/AppBar/LandingPageAppBar.tsx:94
 #: src/components/Assets/AdvertiserAssets.tsx:33
@@ -211,7 +213,6 @@ msgstr "Additional Report: OS Performance"
 #: src/components/Creatives/CreativeSpecificPreview.tsx:65
 #: src/components/Drawer/MiniSideBar.tsx:32
 #: src/user/views/adsManager/views/advanced/components/adSet/fields/AdSetAds.tsx:30
-#: src/user/views/user/CampaignDetails.tsx:41
 msgid "Ads"
 msgstr "Ads"
 
@@ -301,7 +302,6 @@ msgstr "At least one platform must be targeted"
 
 #: src/components/Drawer/MiniSideBar.tsx:43
 #: src/components/Segment/SegmentPicker.tsx:84
-#: src/user/adSet/AdSetList.tsx:139
 #: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:47
 msgid "Audiences"
 msgstr "Audiences"
@@ -337,7 +337,6 @@ msgid "Billing Type"
 msgstr "Billing Type"
 
 #: src/components/Creatives/CreativeList.tsx:154
-#: src/user/ads/AdList.tsx:88
 #: src/user/ads/NotificationAd.tsx:62
 msgid "Body"
 msgstr "Body"
@@ -362,7 +361,7 @@ msgstr "Body Preview"
 msgid "Brave Ads deliver at the browser or search level, in dedicated placements that give your brand more spotlight and better engagement."
 msgstr "Brave Ads deliver at the browser or search level, in dedicated placements that give your brand more spotlight and better engagement."
 
-#: src/user/settings/NewKeyPairModal.tsx:185
+#: src/user/settings/NewKeyPairModal.tsx:184
 msgid "Brave cannot recover this key, which has been generated in your browser. You will need to confirm this private key on the next step before changes are saved."
 msgstr "Brave cannot recover this key, which has been generated in your browser. You will need to confirm this private key on the next step before changes are saved."
 
@@ -435,7 +434,6 @@ msgstr "Brave’s 70+ million cord cutters, and tech savvy early adopters want p
 #~ msgid "Browser-based delivery offers a new way to reach audiences on the Web."
 #~ msgstr "Browser-based delivery offers a new way to reach audiences on the Web."
 
-#: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:52
 #: src/user/campaignList/CampaignList.tsx:97
 msgid "Budget"
 msgstr "Budget"
@@ -528,9 +526,9 @@ msgstr "Campaigns"
 #: src/components/Campaigns/CloneCampaign.tsx:131
 #: src/components/Creatives/CreativeStatusSwitch.tsx:132
 #: src/user/reporting/ReportMenu.tsx:137
-#: src/user/settings/NewKeyPairModal.tsx:149
-#: src/user/settings/NewKeyPairModal.tsx:198
-#: src/user/settings/NewKeyPairModal.tsx:243
+#: src/user/settings/NewKeyPairModal.tsx:148
+#: src/user/settings/NewKeyPairModal.tsx:197
+#: src/user/settings/NewKeyPairModal.tsx:242
 #: src/user/settings/UserApiKey.tsx:112
 msgid "Cancel"
 msgstr "Cancel"
@@ -595,29 +593,25 @@ msgstr "Click Through Rate"
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:42
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:75
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:152
-msgid "Click to site visit rate"
-msgstr "Click to site visit rate"
+#~ msgid "Click to site visit rate"
+#~ msgstr "Click to site visit rate"
 
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:68
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:60
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:176
-msgid "Click-through conversions"
-msgstr "Click-through conversions"
+#~ msgid "Click-through conversions"
+#~ msgstr "Click-through conversions"
 
 #: src/routes/campaigns/analytics/metrics.ts:97
 msgid "Click-through Conversions"
 msgstr "Click-through Conversions"
 
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:30
-msgid "Click-through rate"
-msgstr "Click-through rate"
+#~ msgid "Click-through rate"
+#~ msgstr "Click-through rate"
 
 #: src/routes/campaigns/analytics/metrics.ts:55
-#: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:48
-#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:35
-#: src/user/analytics/analyticsOverview/lib/overview.library.ts:164
 #: src/user/campaignList/CampaignList.tsx:133
-#: src/user/views/user/AdDetailTable.tsx:59
 msgid "Clicks"
 msgstr "Clicks"
 
@@ -652,7 +646,7 @@ msgstr "Complete"
 msgid "Complete selection"
 msgstr "Complete selection"
 
-#: src/auth/components/AdvertiserDetailsForm.tsx:99
+#: src/auth/components/AdvertiserDetailsForm.tsx:108
 msgid "Complete your business profile to continue"
 msgstr "Complete your business profile to continue"
 
@@ -677,8 +671,8 @@ msgid "Content"
 msgstr "Content"
 
 #: src/components/Creatives/CreativeStatusSwitch.tsx:146
-#: src/user/settings/NewKeyPairModal.tsx:157
-#: src/user/settings/NewKeyPairModal.tsx:206
+#: src/user/settings/NewKeyPairModal.tsx:156
+#: src/user/settings/NewKeyPairModal.tsx:205
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:64
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:149
 msgid "Continue"
@@ -691,8 +685,8 @@ msgstr "Conversion"
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:70
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:150
-msgid "Conversion rate"
-msgstr "Conversion rate"
+#~ msgid "Conversion rate"
+#~ msgstr "Conversion rate"
 
 #: src/routes/campaigns/analytics/metrics.ts:106
 msgid "Conversion Rate"
@@ -731,14 +725,10 @@ msgid "Conversion URL required."
 msgstr "Conversion URL required."
 
 #: src/routes/campaigns/analytics/metrics.ts:79
-#: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:47
-#: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:60
-#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:50
-#: src/user/analytics/analyticsOverview/lib/overview.library.ts:166
 msgid "Conversions"
 msgstr "Conversions"
 
-#: src/user/settings/NewKeyPairModal.tsx:182
+#: src/user/settings/NewKeyPairModal.tsx:181
 msgid "Copy this and keep this safe!"
 msgstr "Copy this and keep this safe!"
 
@@ -759,32 +749,32 @@ msgid "Count conversions within X days of an impression"
 msgstr "Count conversions within X days of an impression"
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:46
-msgid "Counted if the user clicks an ad and spends at least 10 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count."
-msgstr "Counted if the user clicks an ad and spends at least 10 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count."
+#~ msgid "Counted if the user clicks an ad and spends at least 10 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count."
+#~ msgstr "Counted if the user clicks an ad and spends at least 10 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count."
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:36
-msgid "Counted when a user clicks on the ad. Does not include clicks to dismiss"
-msgstr "Counted when a user clicks on the ad. Does not include clicks to dismiss"
+#~ msgid "Counted when a user clicks on the ad. Does not include clicks to dismiss"
+#~ msgstr "Counted when a user clicks on the ad. Does not include clicks to dismiss"
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:66
-msgid "Counted when a user clicks the “close” or “x” button to make an ad go away"
-msgstr "Counted when a user clicks the “close” or “x” button to make an ad go away"
+#~ msgid "Counted when a user clicks the “close” or “x” button to make an ad go away"
+#~ msgstr "Counted when a user clicks the “close” or “x” button to make an ad go away"
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:51
-msgid "Counted when a user reaches a designated conversion landing page"
-msgstr "Counted when a user reaches a designated conversion landing page"
+#~ msgid "Counted when a user reaches a designated conversion landing page"
+#~ msgstr "Counted when a user reaches a designated conversion landing page"
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:56
-msgid "Counted when a user reaches a designated conversion landing page following an ad impression."
-msgstr "Counted when a user reaches a designated conversion landing page following an ad impression."
+#~ msgid "Counted when a user reaches a designated conversion landing page following an ad impression."
+#~ msgstr "Counted when a user reaches a designated conversion landing page following an ad impression."
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:61
-msgid "Counted when a user reaches a designated conversion landing page following an impression and click of the ad."
-msgstr "Counted when a user reaches a designated conversion landing page following an impression and click of the ad."
+#~ msgid "Counted when a user reaches a designated conversion landing page following an impression and click of the ad."
+#~ msgstr "Counted when a user reaches a designated conversion landing page following an impression and click of the ad."
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:31
-msgid "Counted when an ad is displayed on screen for a minimum of one second"
-msgstr "Counted when an ad is displayed on screen for a minimum of one second"
+#~ msgid "Counted when an ad is displayed on screen for a minimum of one second"
+#~ msgstr "Counted when an ad is displayed on screen for a minimum of one second"
 
 #: src/components/Country/CountryPicker.tsx:33
 #: src/user/views/user/search/SummaryPanel.tsx:57
@@ -800,10 +790,6 @@ msgid "Country Targeting"
 msgstr "Country Targeting"
 
 #: src/routes/campaigns/analytics/metrics.ts:132
-#: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:72
-#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:89
-#: src/user/analytics/analyticsOverview/lib/overview.library.ts:156
-#: src/user/analytics/analyticsOverview/reports/os/components/OsBarChart.tsx:56
 msgid "CPA"
 msgstr "CPA"
 
@@ -836,8 +822,8 @@ msgid "Create new ad"
 msgstr "Create new ad"
 
 #: src/user/settings/NewKeyPairModal.tsx:130
-#: src/user/settings/NewKeyPairModal.tsx:165
-#: src/user/settings/NewKeyPairModal.tsx:214
+#: src/user/settings/NewKeyPairModal.tsx:164
+#: src/user/settings/NewKeyPairModal.tsx:213
 msgid "Create new keypair?"
 msgstr "Create new keypair?"
 
@@ -851,12 +837,10 @@ msgstr "created"
 #~ msgstr "Creative Performance"
 
 #: src/routes/campaigns/analytics/metrics.ts:63
-#: src/user/analytics/analyticsOverview/components/BaseBarChart.tsx:58
-#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:40
 msgid "CTR"
 msgstr "CTR"
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:59
+#: src/routes/campaigns/analytics/filters/time-filters.ts:53
 #: src/routes/campaigns/analytics/filters/TimeFilter.tsx:47
 msgid "Custom"
 msgstr "Custom"
@@ -874,6 +858,7 @@ msgstr "Daily"
 #~ msgstr "Daily Performance"
 
 #: src/auth/views/GetStartedLandingPage.tsx:47
+#: src/components/AppBar/LandingPageAppBar.tsx:195
 msgid "Dashboard"
 msgstr "Dashboard"
 
@@ -882,8 +867,8 @@ msgid "Data not valid for this private key"
 msgstr "Data not valid for this private key"
 
 #: src/user/analytics/analyticsOverview/components/EngagementHeader.tsx:51
-msgid "Day"
-msgstr "Day"
+#~ msgid "Day"
+#~ msgstr "Day"
 
 #: src/user/reporting/ReportMenu.tsx:106
 msgid "Decrypt Conversion Data?"
@@ -894,16 +879,16 @@ msgid "Define how you want your campaign to run."
 msgstr "Define how you want your campaign to run."
 
 #: src/user/ads/AdList.tsx:66
-msgid "DELETED"
-msgstr "DELETED"
+#~ msgid "DELETED"
+#~ msgstr "DELETED"
 
 #: src/search/SearchLandingPage.tsx:37
 #~ msgid "Determine your eligibility for Brave Search, the world’s fastest-growing alternative search engine by clicking below and filling out the form."
 #~ msgstr "Determine your eligibility for Brave Search, the world’s fastest-growing alternative search engine by clicking below and filling out the form."
 
 #: src/user/analytics/analyticsOverview/reports/os/components/OsPieChart.tsx:21
-msgid "Device"
-msgstr "Device"
+#~ msgid "Device"
+#~ msgstr "Device"
 
 #: src/form/FormikButton.tsx:43
 msgid "Disabled because you haven’t made any changes"
@@ -924,16 +909,14 @@ msgstr "Discard campaign"
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:38
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:85
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:160
-msgid "Dismissal rate"
-msgstr "Dismissal rate"
+#~ msgid "Dismissal rate"
+#~ msgstr "Dismissal rate"
 
 #: src/routes/campaigns/analytics/metrics.ts:164
 msgid "Dismissal Rate"
 msgstr "Dismissal Rate"
 
 #: src/routes/campaigns/analytics/metrics.ts:156
-#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:65
-#: src/user/analytics/analyticsOverview/lib/overview.library.ts:174
 msgid "Dismissals"
 msgstr "Dismissals"
 
@@ -970,8 +953,6 @@ msgid "Download Report"
 msgstr "Download Report"
 
 #: src/routes/campaigns/analytics/metrics.ts:148
-#: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:46
-#: src/user/analytics/analyticsOverview/lib/overview.library.ts:172
 msgid "Downvotes"
 msgstr "Downvotes"
 
@@ -1031,7 +1012,7 @@ msgstr "End Time"
 msgid "Enter a URL that represents your conversion goal, like a checkout or subscription confirmation page. <0/>Brave will count unique visits to that page from users who saw or clicked your ad."
 msgstr "Enter a URL that represents your conversion goal, like a checkout or subscription confirmation page. <0/>Brave will count unique visits to that page from users who saw or clicked your ad."
 
-#: src/auth/components/AdvertiserDetailsForm.tsx:109
+#: src/auth/components/AdvertiserDetailsForm.tsx:118
 msgid "Enter Ads Manager"
 msgstr "Enter Ads Manager"
 
@@ -1146,8 +1127,12 @@ msgid "Generate"
 msgstr "Generate"
 
 #: src/user/settings/NewKeyPairModal.tsx:92
-msgid "Generate a keypair for your organization. Brave Ads will use your organization’s public key to sign and encrypt conversion data. Only your organization will have access to the private key, which can be used to decrypt and view conversion data."
-msgstr "Generate a keypair for your organization. Brave Ads will use your organization’s public key to sign and encrypt conversion data. Only your organization will have access to the private key, which can be used to decrypt and view conversion data."
+msgid "Generate a keypair for your account. Brave Ads will use your account’s public key to sign and encrypt conversion data. Only your organization will have access to the private key, which can be used to decrypt and view conversion data."
+msgstr "Generate a keypair for your account. Brave Ads will use your account’s public key to sign and encrypt conversion data. Only your organization will have access to the private key, which can be used to decrypt and view conversion data."
+
+#: src/user/settings/NewKeyPairModal.tsx:92
+#~ msgid "Generate a keypair for your organization. Brave Ads will use your organization’s public key to sign and encrypt conversion data. Only your organization will have access to the private key, which can be used to decrypt and view conversion data."
+#~ msgstr "Generate a keypair for your organization. Brave Ads will use your organization’s public key to sign and encrypt conversion data. Only your organization will have access to the private key, which can be used to decrypt and view conversion data."
 
 #: src/user/settings/UserApiKey.tsx:63
 msgid "Generate a new API key?"
@@ -1196,13 +1181,17 @@ msgstr "Get to your first million users with powerful ad placements on the world
 msgid "Help Center"
 msgstr "Help Center"
 
+#: src/components/Navigation/AccountMenu.tsx:82
+msgid "Hi"
+msgstr "Hi"
+
 #: src/user/analytics/analyticsOverview/components/MetricFilter.tsx:64
-msgid "Hide"
-msgstr "Hide"
+#~ msgid "Hide"
+#~ msgstr "Hide"
 
 #: src/user/analytics/analyticsOverview/components/EngagementHeader.tsx:50
-msgid "Hour"
-msgstr "Hour"
+#~ msgid "Hour"
+#~ msgstr "Hour"
 
 #: src/routes/campaigns/analytics/breakdowns.tsx:110
 msgid "Hourly"
@@ -1270,17 +1259,13 @@ msgid "Images"
 msgstr "Images"
 
 #: src/routes/campaigns/analytics/metrics.ts:48
-#: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:46
-#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:30
-#: src/user/analytics/analyticsOverview/lib/overview.library.ts:154
 #: src/user/campaignList/CampaignList.tsx:119
-#: src/user/views/user/AdDetailTable.tsx:47
 msgid "Impressions"
 msgstr "Impressions"
 
 #: src/user/analytics/analyticsOverview/reports/os/components/OsPieChart.tsx:39
-msgid "Impressions (Device)"
-msgstr "Impressions (Device)"
+#~ msgid "Impressions (Device)"
+#~ msgstr "Impressions (Device)"
 
 #: src/auth/registration/MarketingChannel.tsx:37
 msgid "In a blog post/news article"
@@ -1355,8 +1340,8 @@ msgid "Key copied"
 msgstr "Key copied"
 
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:89
-msgid "Key Statistics"
-msgstr "Key Statistics"
+#~ msgid "Key Statistics"
+#~ msgstr "Key Statistics"
 
 #: src/user/settings/NewKeyPairModal.tsx:88
 msgid "Keypairs"
@@ -1370,15 +1355,15 @@ msgstr "Language acknowledgement is required"
 #~ msgid "Last 14 days"
 #~ msgstr "Last 14 days"
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:46
+#: src/routes/campaigns/analytics/filters/time-filters.ts:40
 msgid "Last 30 days"
 msgstr "Last 30 days"
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:34
+#: src/routes/campaigns/analytics/filters/time-filters.ts:28
 msgid "Last 7 days"
 msgstr "Last 7 days"
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:52
+#: src/routes/campaigns/analytics/filters/time-filters.ts:46
 msgid "Last month"
 msgstr "Last month"
 
@@ -1441,8 +1426,8 @@ msgstr "Locations"
 
 #: src/auth/views/GetStartedLandingPage.tsx:61
 #: src/auth/views/Login.tsx:67
-#: src/components/AppBar/LandingPageAppBar.tsx:141
-#: src/components/AppBar/LandingPageAppBar.tsx:193
+#: src/components/AppBar/LandingPageAppBar.tsx:142
+#: src/components/AppBar/LandingPageAppBar.tsx:197
 msgid "Log in"
 msgstr "Log in"
 
@@ -1453,6 +1438,10 @@ msgstr "Log into your Brave Ads account"
 #: src/auth/views/AuthVerify.tsx:36
 msgid "Logging in"
 msgstr "Logging in"
+
+#: src/components/Navigation/AccountMenu.tsx:136
+msgid "Logout"
+msgstr "Logout"
 
 #: src/routes/campaigns/analytics/filters/OsFilter.tsx:24
 msgid "macOS"
@@ -1499,19 +1488,18 @@ msgstr "Modifying the state of this ad will effect more than one campaign:"
 #~ msgstr "month"
 
 #: src/user/analytics/analyticsOverview/components/EngagementHeader.tsx:53
-msgid "Month"
-msgstr "Month"
+#~ msgid "Month"
+#~ msgstr "Month"
 
 #: src/user/adSet/AdSetList.tsx:49
-msgid "more"
-msgstr "more"
+#~ msgid "more"
+#~ msgstr "more"
 
 #: src/components/Creatives/CreativeCampaigns.tsx:45
 #: src/components/Creatives/CreativeList.tsx:47
 #: src/routes/campaigns/analytics/TabularData.tsx:83
 #: src/user/ads/InlineContentAd.tsx:65
 #: src/user/ads/NotificationAd.tsx:51
-#: src/user/adSet/AdSetList.tsx:92
 #: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:41
 #: src/user/views/adsManager/views/advanced/components/review/components/CampaignReview.tsx:30
 msgid "Name"
@@ -1640,14 +1628,17 @@ msgstr "On / Off"
 msgid "On a podcast I listen to"
 msgstr "On a podcast I listen to"
 
-#: src/user/adSet/AdSetList.tsx:83
 #: src/user/campaignList/CampaignList.tsx:197
 msgid "On/Off"
 msgstr "On/Off"
 
+#: src/user/settings/NewKeyPairModal.tsx:229
+msgid "Once confirmed, your account’s keypair will be replaced with the new keypair."
+msgstr "Once confirmed, your account’s keypair will be replaced with the new keypair."
+
 #: src/user/settings/NewKeyPairModal.tsx:230
-msgid "Once confirmed, your organization’s keypair will be replaced with the new keypair."
-msgstr "Once confirmed, your organization’s keypair will be replaced with the new keypair."
+#~ msgid "Once confirmed, your organization’s keypair will be replaced with the new keypair."
+#~ msgstr "Once confirmed, your organization’s keypair will be replaced with the new keypair."
 
 #: src/auth/registration/AdvertiserRegistered.tsx:19
 #~ msgid "Once the review process is complete, we will send you an email to notify you of the approval status and any further steps required."
@@ -1674,11 +1665,10 @@ msgid "or sign in using a secure link"
 msgstr "or sign in using a secure link"
 
 #: src/user/settings/Settings.tsx:49
-msgid "Organization"
-msgstr "Organization"
+#~ msgid "Organization"
+#~ msgstr "Organization"
 
 #: src/routes/campaigns/analytics/breakdowns.tsx:132
-#: src/user/analytics/analyticsOverview/reports/os/components/OsPieChart.tsx:21
 msgid "OS"
 msgstr "OS"
 
@@ -1689,6 +1679,10 @@ msgstr "OS"
 #: src/auth/registration/MarketingChannel.tsx:51
 msgid "Other (please specify)"
 msgstr "Other (please specify)"
+
+#: src/components/Navigation/AccountMenu.tsx:106
+msgid "Other accounts"
+msgstr "Other accounts"
 
 #: src/auth/registration/MarketingChannel.tsx:58
 msgid "Other source"
@@ -1728,7 +1722,6 @@ msgid "Performance Report"
 msgstr "Performance Report"
 
 #: src/components/Platform/PlatformPicker.tsx:41
-#: src/user/adSet/AdSetList.tsx:118
 #: src/user/views/adsManager/views/advanced/components/review/components/AdSetReview.tsx:53
 msgid "Platforms"
 msgstr "Platforms"
@@ -1737,9 +1730,13 @@ msgstr "Platforms"
 msgid "Please ask your Account Manager for reports on campaigns of this format."
 msgstr "Please ask your Account Manager for reports on campaigns of this format."
 
+#: src/user/settings/NewKeyPairModal.tsx:217
+msgid "Please confirm your account’s new private key:"
+msgstr "Please confirm your account’s new private key:"
+
 #: src/user/settings/NewKeyPairModal.tsx:218
-msgid "Please confirm your organization’s new private key:"
-msgstr "Please confirm your organization’s new private key:"
+#~ msgid "Please confirm your organization’s new private key:"
+#~ msgstr "Please confirm your organization’s new private key:"
 
 #: src/auth/lib/index.ts:29
 msgid "Please enter a username and password"
@@ -1925,8 +1922,8 @@ msgstr "Remove Conversion Tracking"
 #~ msgstr "Reporting"
 
 #: src/user/analytics/analyticsOverview/reports/campaign/EngagementsOverview.tsx:117
-msgid "Reporting not available yet for <0>{campaignName}</0>."
-msgstr "Reporting not available yet for <0>{campaignName}</0>."
+#~ msgid "Reporting not available yet for <0>{campaignName}</0>."
+#~ msgstr "Reporting not available yet for <0>{campaignName}</0>."
 
 #: src/auth/views/AuthVerify.tsx:71
 msgid "Request another link."
@@ -1937,8 +1934,8 @@ msgid "Return to dashboard"
 msgstr "Return to dashboard"
 
 #: src/components/Collapse/ChangeReportingAlert.tsx:31
-msgid "Revert"
-msgstr "Revert"
+#~ msgid "Revert"
+#~ msgstr "Revert"
 
 #: src/user/views/adsManager/views/advanced/components/form/components/BaseForm.tsx:37
 msgid "Review"
@@ -1958,7 +1955,7 @@ msgstr "Sample Queries"
 
 #: src/form/FormikButton.tsx:71
 #: src/form/FormikButton.tsx:129
-#: src/user/settings/NewKeyPairModal.tsx:252
+#: src/user/settings/NewKeyPairModal.tsx:251
 msgid "Save"
 msgstr "Save"
 
@@ -1968,7 +1965,7 @@ msgstr "Save ad"
 
 #: src/form/FormikButton.tsx:72
 #: src/form/FormikButton.tsx:129
-#: src/user/settings/NewKeyPairModal.tsx:252
+#: src/user/settings/NewKeyPairModal.tsx:251
 msgid "Saving..."
 msgstr "Saving..."
 
@@ -2002,6 +1999,11 @@ msgstr "Search keyword ads"
 #~ msgid "Segment Performance"
 #~ msgstr "Segment Performance"
 
+#: src/user/settings/Settings.tsx:60
+#: src/user/settings/Settings.tsx:64
+msgid "Select Account"
+msgstr "Select Account"
+
 #: src/components/Campaigns/CloneCampaign.tsx:98
 msgid "Select one campaign to clone"
 msgstr "Select one campaign to clone"
@@ -2012,8 +2014,8 @@ msgstr "Select one campaign to edit"
 
 #: src/user/settings/Settings.tsx:60
 #: src/user/settings/Settings.tsx:64
-msgid "Select Organization"
-msgstr "Select Organization"
+#~ msgid "Select Organization"
+#~ msgstr "Select Organization"
 
 #: src/user/views/adsManager/views/advanced/components/adSet/fields/AdSetAds.tsx:32
 msgid "Select the ads you would like to include in this ad set. Only checked ads are included."
@@ -2048,13 +2050,13 @@ msgid "Setup Progress"
 msgstr "Setup Progress"
 
 #: src/user/analytics/analyticsOverview/components/MetricFilter.tsx:64
-msgid "Show"
-msgstr "Show"
+#~ msgid "Show"
+#~ msgstr "Show"
 
 #: src/components/AppBar/LandingPageAppBar.tsx:141
 #: src/components/Navigation/Navbar.tsx:53
-msgid "Sign out"
-msgstr "Sign out"
+#~ msgid "Sign out"
+#~ msgstr "Sign out"
 
 #: src/auth/views/GetStartedLandingPage.tsx:38
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:63
@@ -2074,22 +2076,18 @@ msgstr "Simple ads to reach digital trend-setters around the world"
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:34
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:80
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:158
-msgid "Site visit rate"
-msgstr "Site visit rate"
+#~ msgid "Site visit rate"
+#~ msgstr "Site visit rate"
 
 #: src/routes/campaigns/analytics/metrics.ts:115
 msgid "Site Visit Rate"
 msgstr "Site Visit Rate"
 
-#: src/user/analytics/analyticsOverview/components/BasePieChart.tsx:49
-#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:45
-#: src/user/analytics/analyticsOverview/lib/overview.library.ts:162
 #: src/user/campaignList/CampaignList.tsx:146
 msgid "Site visits"
 msgstr "Site visits"
 
 #: src/routes/campaigns/analytics/metrics.ts:70
-#: src/user/views/user/AdDetailTable.tsx:71
 msgid "Site Visits"
 msgstr "Site Visits"
 
@@ -2106,12 +2104,7 @@ msgid "Something went wrong."
 msgstr "Something went wrong."
 
 #: src/routes/campaigns/analytics/metrics.ts:124
-#: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:48
-#: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:88
-#: src/user/analytics/analyticsOverview/lib/overview.library.ts:168
-#: src/user/analytics/analyticsOverview/reports/os/components/OsPieChart.tsx:40
 #: src/user/campaignList/CampaignList.tsx:106
-#: src/user/views/user/AdDetailTable.tsx:30
 msgid "Spend"
 msgstr "Spend"
 
@@ -2168,7 +2161,6 @@ msgstr "State"
 #~ msgstr "State / Province is required"
 
 #: src/components/Creatives/CreativeCampaigns.tsx:48
-#: src/user/adSet/AdSetList.tsx:98
 #: src/user/campaignList/CampaignList.tsx:86
 msgid "Status"
 msgstr "Status"
@@ -2278,24 +2270,24 @@ msgid "The following query string parameters will be added to your landing page 
 msgstr "The following query string parameters will be added to your landing page URLs. This will allow you to track the performance of your ads."
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:41
-msgid "The rate at which users clicked in correlation to their impressions"
-msgstr "The rate at which users clicked in correlation to their impressions"
+#~ msgid "The rate at which users clicked in correlation to their impressions"
+#~ msgstr "The rate at which users clicked in correlation to their impressions"
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:71
-msgid "The rate at which users converted in correlation to their clicks"
-msgstr "The rate at which users converted in correlation to their clicks"
+#~ msgid "The rate at which users converted in correlation to their clicks"
+#~ msgstr "The rate at which users converted in correlation to their clicks"
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:86
-msgid "The rate at which users dismissed the ad in correlation to their impressions"
-msgstr "The rate at which users dismissed the ad in correlation to their impressions"
+#~ msgid "The rate at which users dismissed the ad in correlation to their impressions"
+#~ msgstr "The rate at which users dismissed the ad in correlation to their impressions"
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:76
-msgid "The rate at which users visited the site in correlation to their clicks"
-msgstr "The rate at which users visited the site in correlation to their clicks"
+#~ msgid "The rate at which users visited the site in correlation to their clicks"
+#~ msgstr "The rate at which users visited the site in correlation to their clicks"
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:81
-msgid "The rate at which users visited the site in correlation to their impressions"
-msgstr "The rate at which users visited the site in correlation to their impressions"
+#~ msgid "The rate at which users visited the site in correlation to their impressions"
+#~ msgstr "The rate at which users visited the site in correlation to their impressions"
 
 #: src/auth/lib/index.ts:46
 msgid "The username or password did not match our records."
@@ -2313,13 +2305,13 @@ msgstr "This is a news display ad, it wll look like part of the news feed."
 msgid "This key is unique to you, make sure to safely store it and avoid sharing it with others to prevent unauthorized access."
 msgstr "This key is unique to you, make sure to safely store it and avoid sharing it with others to prevent unauthorized access."
 
-#: src/routes/campaigns/analytics/filters/time-filters.ts:40
+#: src/routes/campaigns/analytics/filters/time-filters.ts:34
 msgid "This month"
 msgstr "This month"
 
 #: src/routes/campaigns/analytics/filters/time-filters.ts:28
-msgid "This week"
-msgstr "This week"
+#~ msgid "This week"
+#~ msgstr "This week"
 
 #: src/routes/campaigns/analytics/filters/time-filters.ts:34
 #~ msgid "This week (Sun - Today)"
@@ -2332,7 +2324,6 @@ msgstr "Time Zone"
 
 #: src/components/Creatives/CreativeList.tsx:153
 #: src/components/Creatives/CreativeList.tsx:163
-#: src/user/ads/AdList.tsx:82
 #: src/user/ads/InlineContentAd.tsx:69
 #: src/user/ads/NotificationAd.tsx:55
 msgid "Title"
@@ -2371,8 +2362,8 @@ msgstr "Today"
 #~ msgstr "Toggle metric displays using the switches on the right. Use the tabs on the left side see different breakdowns, and use the buttons across the top to filter. Or you can click the \"revert\" button to switch back to the old reporting screen."
 
 #: src/components/Collapse/ChangeReportingAlert.tsx:49
-msgid "Toggle metric displays using the switches on the right. View different breakdowns using the tabs on the left. Use the top buttons on the right to filter data. Click \"revert\" for the previous reporting screen."
-msgstr "Toggle metric displays using the switches on the right. View different breakdowns using the tabs on the left. Use the top buttons on the right to filter data. Click \"revert\" for the previous reporting screen."
+#~ msgid "Toggle metric displays using the switches on the right. View different breakdowns using the tabs on the left. Use the top buttons on the right to filter data. Click \"revert\" for the previous reporting screen."
+#~ msgstr "Toggle metric displays using the switches on the right. View different breakdowns using the tabs on the left. Use the top buttons on the right to filter data. Click \"revert\" for the previous reporting screen."
 
 #: src/components/Collapse/ChangeReportingAlert.tsx:48
 #~ msgid "Toggle metric displays using the switches on the right. View different breakdowns using the tabs on the left. Use the top buttons to filter data. Click \"revert\" for the previous reporting screen."
@@ -2387,7 +2378,6 @@ msgstr "Try a free one-month test to see how Brave Search Ads perform for your b
 #~ msgstr "Try again"
 
 #: src/components/Conversion/ConversionFields.tsx:17
-#: src/user/adSet/AdSetList.tsx:111
 msgid "Type"
 msgstr "Type"
 
@@ -2431,7 +2421,7 @@ msgstr "Unable to get profile information"
 msgid "Unable to load ad"
 msgstr "Unable to load ad"
 
-#: src/routes/campaigns/analytics/CampaignAnalytics.tsx:52
+#: src/routes/campaigns/analytics/CampaignAnalytics.tsx:50
 msgid "Unable to load reporting details for campaign: {0}"
 msgstr "Unable to load reporting details for campaign: {0}"
 
@@ -2444,8 +2434,8 @@ msgid "Unable to register your organization at this time. Please try again later
 msgstr "Unable to register your organization at this time. Please try again later."
 
 #: src/user/views/user/CampaignDetails.tsx:48
-msgid "Unable to retrieve ad sets or ads for Campaign."
-msgstr "Unable to retrieve ad sets or ads for Campaign."
+#~ msgid "Unable to retrieve ad sets or ads for Campaign."
+#~ msgstr "Unable to retrieve ad sets or ads for Campaign."
 
 #: src/user/views/user/CampaignView.tsx:34
 msgid "Unable to retrieve Campaign data."
@@ -2457,8 +2447,8 @@ msgid "Unable to retrieve images"
 msgstr "Unable to retrieve images"
 
 #: src/user/analytics/analyticsOverview/reports/campaign/EngagementsOverview.tsx:46
-msgid "Unable to retrieve reporting data for this Campaign."
-msgstr "Unable to retrieve reporting data for this Campaign."
+#~ msgid "Unable to retrieve reporting data for this Campaign."
+#~ msgstr "Unable to retrieve reporting data for this Campaign."
 
 #: src/components/Creatives/CreativeForm.tsx:94
 msgid "Unable to save ad"
@@ -2523,8 +2513,6 @@ msgid "Uploading file..."
 msgstr "Uploading file..."
 
 #: src/routes/campaigns/analytics/metrics.ts:140
-#: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:45
-#: src/user/analytics/analyticsOverview/lib/overview.library.ts:170
 msgid "Upvotes"
 msgstr "Upvotes"
 
@@ -2564,11 +2552,15 @@ msgstr "Value"
 msgid "Verified Conversions Report"
 msgstr "Verified Conversions Report"
 
+#: src/components/Navigation/AccountMenu.tsx:92
+msgid "View profile"
+msgstr "View profile"
+
 #: src/user/analytics/analyticsOverview/components/LiveFeed.tsx:64
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:55
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:178
-msgid "View-through conversions"
-msgstr "View-through conversions"
+#~ msgid "View-through conversions"
+#~ msgstr "View-through conversions"
 
 #: src/routes/campaigns/analytics/metrics.ts:88
 msgid "View-through Conversions"
@@ -2587,8 +2579,8 @@ msgid "We value your feedback and would love to hear your thoughts on your recen
 msgstr "We value your feedback and would love to hear your thoughts on your recent experience. <0/>Your input will help us improve the Brave Ads platform to better meet your needs. <1/>It only takes a few minutes and your participation will be greatly appreciated! <2/>Thank you for using Brave Ads! <3/>"
 
 #: src/components/Collapse/ChangeReportingAlert.tsx:47
-msgid "We've updated our reporting view"
-msgstr "We've updated our reporting view"
+#~ msgid "We've updated our reporting view"
+#~ msgstr "We've updated our reporting view"
 
 #: src/validation/RegistrationSchema.tsx:17
 msgid "Website must not contain any whitespace"
@@ -2599,8 +2591,8 @@ msgid "Website must start with https://"
 msgstr "Website must start with https://"
 
 #: src/user/analytics/analyticsOverview/components/EngagementHeader.tsx:52
-msgid "Week"
-msgstr "Week"
+#~ msgid "Week"
+#~ msgstr "Week"
 
 #: src/auth/components/AdvertiserDetailsForm.tsx:97
 #~ msgid "Welcome to Brave Ads"
@@ -2647,8 +2639,12 @@ msgstr "Yes"
 #~ msgstr "Yesterday"
 
 #: src/user/settings/NewKeyPairModal.tsx:134
-msgid "You are attempting to create a new keypair, this will replace any of your organization’s existing keypairs. Please note, previous keypairs cannot be retrieved or used once replaced."
-msgstr "You are attempting to create a new keypair, this will replace any of your organization’s existing keypairs. Please note, previous keypairs cannot be retrieved or used once replaced."
+msgid "You are attempting to create a new keypair, this will replace any of your account’s existing keypairs. Please note, previous keypairs cannot be retrieved or used once replaced."
+msgstr "You are attempting to create a new keypair, this will replace any of your account’s existing keypairs. Please note, previous keypairs cannot be retrieved or used once replaced."
+
+#: src/user/settings/NewKeyPairModal.tsx:134
+#~ msgid "You are attempting to create a new keypair, this will replace any of your organization’s existing keypairs. Please note, previous keypairs cannot be retrieved or used once replaced."
+#~ msgstr "You are attempting to create a new keypair, this will replace any of your organization’s existing keypairs. Please note, previous keypairs cannot be retrieved or used once replaced."
 
 #: src/auth/registration/Register.tsx:37
 #~ msgid "You can change this later"
@@ -2663,12 +2659,24 @@ msgid "You have unsaved changes"
 msgstr "You have unsaved changes"
 
 #: src/user/settings/Settings.tsx:51
-msgid "You may have access to multiple organisations. Switch between them here."
-msgstr "You may have access to multiple organisations. Switch between them here."
+msgid "You may have access to multiple accounts. Switch between them here."
+msgstr "You may have access to multiple accounts. Switch between them here."
+
+#: src/user/settings/Settings.tsx:51
+#~ msgid "You may have access to multiple organisations. Switch between them here."
+#~ msgstr "You may have access to multiple organisations. Switch between them here."
 
 #: src/auth/registration/AdvertiserRegistered.tsx:18
 msgid "You will soon receive an email with the next steps of registration. While you wait, we recommend you check out our help center to get helpful information for getting started with Brave Ads."
 msgstr "You will soon receive an email with the next steps of registration. While you wait, we recommend you check out our help center to get helpful information for getting started with Brave Ads."
+
+#: src/user/settings/NewKeyPairModal.tsx:168
+msgid "Your account’s new public key will be:"
+msgstr "Your account’s new public key will be:"
+
+#: src/user/settings/NewKeyPairModal.tsx:103
+msgid "Your account’s public key:"
+msgstr "Your account’s public key:"
 
 #: src/user/views/adsManager/views/advanced/components/completionForm/CompletionForm.tsx:72
 msgid "Your campaign has been created and is now being reviewed by our ads team. <0/>We’ll be in contact as soon as your campaign is approved and activated."
@@ -2679,12 +2687,12 @@ msgid "Your campaign has been updated! <0/>If you added new ads, we’ll be in c
 msgstr "Your campaign has been updated! <0/>If you added new ads, we’ll be in contact as soon as they are approved and activated. <1/>Thank you for using Brave Ads!"
 
 #: src/user/settings/NewKeyPairModal.tsx:169
-msgid "Your organization’s new public key will be:"
-msgstr "Your organization’s new public key will be:"
+#~ msgid "Your organization’s new public key will be:"
+#~ msgstr "Your organization’s new public key will be:"
 
 #: src/user/settings/NewKeyPairModal.tsx:103
-msgid "Your organization’s public key:"
-msgstr "Your organization’s public key:"
+#~ msgid "Your organization’s public key:"
+#~ msgstr "Your organization’s public key:"
 
 #: src/user/views/user/search/Finalize.tsx:41
 msgid "Your trial campaign will be reviewed by an Account Manager. Add any notes or questions for them here."
