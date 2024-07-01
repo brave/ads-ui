@@ -14,7 +14,6 @@ import brave from "@/assets/images/full-brave-brand.svg";
 import braveDark from "@/assets/images/full-brave-brand-black.svg";
 import { Link as RouterLink, useRouteMatch } from "react-router-dom";
 import { useIsAuthenticated } from "@/auth/hooks/queries/useIsAuthenticated";
-import { useSignOut } from "@/auth/hooks/mutations/useSignOut";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
@@ -22,6 +21,7 @@ import { SupportMenu } from "@/components/Drawer/SupportMenu";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 import { PageLink } from "@/components/AppBar/PageLink";
+import { AccountMenu } from "@/components/Navigation/AccountMenu";
 
 export function LandingPageAppBar() {
   const match = useRouteMatch();
@@ -128,17 +128,18 @@ export function LandingPageAppBar() {
 }
 
 function AuthedButton(props: { isAuthenticated?: boolean }) {
-  const { signOut } = useSignOut();
+  if (props.isAuthenticated) {
+    return <AccountMenu />;
+  }
 
   return (
     <Button
       variant="contained"
       size="large"
       component={RouterLink}
-      to={!props.isAuthenticated ? "/auth/link" : "/"}
-      onClick={props.isAuthenticated ? () => signOut() : undefined}
+      to="/auth/link"
     >
-      {props.isAuthenticated ? <Trans>Sign out</Trans> : <Trans>Log in</Trans>}
+      <Trans>Log in</Trans>
     </Button>
   );
 }
@@ -187,10 +188,14 @@ function MobileMenu(props: {
       >
         <MenuItem
           component={RouterLink}
-          to={!props.isAuthenticated ? "/auth/link" : "/"}
+          to={!props.isAuthenticated ? "/auth/link" : "/user/main"}
         >
           <Typography variant={"body2"} color="text.primary">
-            <Trans>Log in</Trans>
+            {props.isAuthenticated ? (
+              <Trans>Dashboard</Trans>
+            ) : (
+              <Trans>Log in</Trans>
+            )}
           </Typography>
         </MenuItem>
         <Divider />

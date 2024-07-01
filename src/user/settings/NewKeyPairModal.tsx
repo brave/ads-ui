@@ -90,17 +90,17 @@ export function NewKeyPairModal({ advertiser }: Props) {
 
         <Typography>
           <Trans>
-            Generate a keypair for your organization. Brave Ads will use your
-            organization&rsquo;s public key to sign and encrypt conversion data.
-            Only your organization will have access to the private key, which
-            can be used to decrypt and view conversion data.
+            Generate a keypair for your account. Brave Ads will use your
+            account&rsquo;s public key to sign and encrypt conversion data. Only
+            your organization will have access to the private key, which can be
+            used to decrypt and view conversion data.
           </Trans>
         </Typography>
 
         {publicKey.current !== "" && (
           <Box marginTop={1}>
             <Typography>
-              <Trans>Your organization&rsquo;s public key:</Trans>
+              <Trans>Your account&rsquo;s public key:</Trans>
             </Typography>
             <Box component="pre" marginY={0}>
               {publicKey.current}
@@ -133,9 +133,8 @@ export function NewKeyPairModal({ advertiser }: Props) {
               <Typography>
                 <Trans>
                   You are attempting to create a new keypair, this will replace
-                  any of your organization&rsquo;s existing keypairs. Please
-                  note, previous keypairs cannot be retrieved or used once
-                  replaced.
+                  any of your account&rsquo;s existing keypairs. Please note,
+                  previous keypairs cannot be retrieved or used once replaced.
                 </Trans>
               </Typography>
 
@@ -166,7 +165,7 @@ export function NewKeyPairModal({ advertiser }: Props) {
               </Typography>
 
               <Typography gutterBottom>
-                <Trans>Your organization&rsquo;s new public key will be:</Trans>
+                <Trans>Your account&rsquo;s new public key will be:</Trans>
               </Typography>
 
               <TextField
@@ -216,7 +215,7 @@ export function NewKeyPairModal({ advertiser }: Props) {
 
               <Typography gutterBottom>
                 <Trans>
-                  Please confirm your organization&rsquo;s new private key:
+                  Please confirm your account&rsquo;s new private key:
                 </Trans>
               </Typography>
 
@@ -228,8 +227,8 @@ export function NewKeyPairModal({ advertiser }: Props) {
 
               <Typography gutterBottom marginTop={2}>
                 <Trans>
-                  Once confirmed, your organization&rsquo;s keypair will be
-                  replaced with the new keypair.
+                  Once confirmed, your account&rsquo;s keypair will be replaced
+                  with the new keypair.
                 </Trans>
               </Typography>
 
