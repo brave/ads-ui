@@ -1,17 +1,15 @@
-import { AppBar, Button, Divider, Stack, Toolbar } from "@mui/material";
+import { AppBar, Divider, Stack, Toolbar } from "@mui/material";
 
 import { DraftMenu } from "@/components/Navigation/DraftMenu";
 import ads from "@/assets/images/logo.svg";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
-import { useSignOut } from "@/auth/hooks/mutations/useSignOut";
 import { NewCampaignButton } from "@/components/Navigation/NewCampaignButton";
 import { UploadImage } from "@/components/Assets/UploadImage";
 import { useHistory } from "react-router-dom";
 import { NewCreativeButton } from "@/components/Navigation/NewCreativeButton";
-import { Trans } from "@lingui/macro";
+import { AccountMenu } from "@/components/Navigation/AccountMenu";
 
 export function Navbar() {
-  const { signOut } = useSignOut();
   const { advertiser } = useAdvertiser();
   const history = useHistory();
 
@@ -49,9 +47,7 @@ export function Navbar() {
         </Stack>
         <div style={{ flexGrow: 1 }} />
         {buttons.find((b) => history.location.pathname === b.route)?.component}
-        <Button variant="outlined" size="medium" onClick={() => signOut()}>
-          <Trans>Sign out</Trans>
-        </Button>
+        <AccountMenu />
       </Toolbar>
     </AppBar>
   );
