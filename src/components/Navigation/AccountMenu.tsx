@@ -15,8 +15,8 @@ import { setActiveAdvertiser } from "@/auth/util/index";
 import Logout from "@mui/icons-material/Logout";
 import { useSignOut } from "@/auth/hooks/mutations/useSignOut";
 import { useAuthContext } from "@/auth/context/auth.hook";
+import { Trans } from "@lingui/macro";
 
-/* eslint-disable */
 const colors = ["red", "green", "orange", "blue"];
 const colorByIndex = (index: number) => colors[index % colors.length];
 
@@ -33,7 +33,7 @@ export function AccountMenu() {
   );
   return (
     <>
-      <Tooltip title={"Account"} placement="bottom-start">
+      <Tooltip title={<Trans>Account</Trans>} placement="bottom-start">
         <IconButton onClick={(e) => setAnchorEl(e.currentTarget)} size="small">
           <Avatar sx={{ width: 43, height: 43, bgcolor: "#fe5907" }}>
             {advertiser.name.substring(0, 1)}
@@ -79,7 +79,7 @@ export function AccountMenu() {
             fontWeight={400}
             mt={2}
           >
-            Hi, {user.fullName?.split(" ")[0]}!
+            <Trans>Hi</Trans>, {user.fullName?.split(" ")[0]}!
           </Typography>
           <Button
             variant="outlined"
@@ -89,10 +89,10 @@ export function AccountMenu() {
             component={RouterLink}
             to="/user/main/profile"
           >
-            View profile
+            <Trans>View profile</Trans>
           </Button>
           <Typography variant="body2" mt={2}>
-            Account:
+            <Trans>Account</Trans>:
           </Typography>
           <Typography variant="body1" fontWeight={410}>
             {advertiser?.name}
@@ -101,7 +101,7 @@ export function AccountMenu() {
         <Divider />
         {nonCurrentAdvertisers.length > 0 && (
           <Box mt={1} display="flex" justifyContent="space-between">
-            Other accounts
+            <Trans>Other accounts</Trans>
             <IconButton
               size="small"
               sx={{ ml: 1 }}
@@ -131,7 +131,7 @@ export function AccountMenu() {
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
-          Logout
+          <Trans>Logout</Trans>
         </MenuItem>
       </Menu>
     </>
