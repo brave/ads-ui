@@ -5,16 +5,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
-"Language: es\n"
+"Language: es_419\n"
 "Project-Id-Version: 27b1a082298d0ee642e56f654bcd7273\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2024-07-01 21:41\n"
 "Last-Translator: \n"
-"Language-Team: Spanish\n"
+"Language-Team: Spanish, Latin America\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-Project: 27b1a082298d0ee642e56f654bcd7273\n"
 "X-Crowdin-Project-ID: 10\n"
-"X-Crowdin-Language: es\n"
+"X-Crowdin-Language: es-419\n"
 "X-Crowdin-File: /master/src/locales/en.po\n"
 "X-Crowdin-File-ID: 16450\n"
 
@@ -24,7 +24,7 @@ msgstr "{adFormatName} no están disponibles para las campañas autogestionadas.
 
 #: src/validation/CampaignSchema.tsx:187
 msgid "{billingType} price must be {price} or higher"
-msgstr "{billingType} debe ser {price} o superior."
+msgstr "{billingType} debe ser {price} o superior"
 
 #: src/user/views/adsManager/views/advanced/components/campaign/components/BillingModelSelect.tsx:23
 msgid "{campaignFormat} pricing configuration option(s):"
@@ -335,7 +335,7 @@ msgstr "Basic Attention Token"
 
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:148
 msgid "BAT holders can now also cash in their tokens to advertise their companies or products on the Brave Ads network."
-msgstr "Los poseedores de BAT ahora también pueden canjear sus tokens para anunciar sus empresas o productos en la red de Brave Ads."
+msgstr "Los poseedores de BAT ahora también pueden canjear sus tokens para anunciar sus empresas o productos en la red de Anuncios de Brave."
 
 #: src/user/views/adsManager/views/advanced/components/campaign/components/CustomPriceSelect.tsx:33
 msgid "Billing Type"
@@ -421,7 +421,7 @@ msgstr "Brave Search es el motor de búsqueda independiente de más rápido crec
 
 #: src/auth/views/components/FooterCTA.tsx:17
 msgid "Brave’s 70+ million cord cutters, and tech savvy early adopters want privacy and performance over tracking and lag. Hundreds of thousands more make the switch every day. Want them to see your brand? Start your first campaign in minutes, and with as little as $500."
-msgstr "Los más de 70 millones de usuarios de Brave, expertos en tecnología y adoptantes tempranos, prefieren la privacidad y el rendimiento sobre el seguimiento y la lentitud. Cientos de miles más se cambian cada día. ¿Quiere que vean su marca? Inicie su primera campaña en minutos, con tan solo $500."
+msgstr "Los más de 70 millones de usuarios de Brave, expertos en tecnología y adoptantes tempranos, prefieren la privacidad y el rendimiento sobre el rastreo y la lentitud. Cientos de miles más se cambian cada día. ¿Quiere que vean su marca? Inicie su primera campaña en minutos, con tan solo $500."
 
 #: src/auth/components/AdvertiserAgreed.tsx:17
 #~ msgid "Brave’s products are made to uphold user privacy. By default, the Brave browser blocks third-party tracking (scripts, tags, pixels, etc.) including those used by Google Analytics. This means that most standard website reporting won’t be compatible with Brave Ads. To ensure advertisers have visibility into performance of campaigns, we’ve detailed other effective privacy-first options for measurement in our <0>reporting guide</0>"
@@ -2052,7 +2052,7 @@ msgstr "Anuncios seleccionados"
 
 #: src/user/views/user/search/SetupProgress.tsx:28
 msgid "Setup Progress"
-msgstr "Progreso de la configuración"
+msgstr "Progreso de configuración"
 
 #: src/user/analytics/analyticsOverview/components/MetricFilter.tsx:64
 #~ msgid "Show"
@@ -2071,7 +2071,7 @@ msgstr "Progreso de la configuración"
 
 #: src/auth/views/GetStartedLandingPage.tsx:19
 msgid "Simple ads to reach digital trend-setters around the world"
-msgstr "Anuncios simples para alcanzar a los líderes de tendencias digitales en todo el mundo"
+msgstr "Anuncios simples para llegar a los líderes de tendencias digitales en todo el mundo"
 
 #: src/auth/views/GetStartedLandingPage.tsx:14
 #~ msgid "Simple ads to reach digital trend-setters around the world."
@@ -2605,7 +2605,7 @@ msgstr "El sitio web debe comenzar con https://"
 
 #: src/auth/views/components/WhatIsBraveAds.tsx:14
 msgid "What is Brave Ads?"
-msgstr "¿Qué es Brave Ads?"
+msgstr "¿Qué es Anuncios de Brave?"
 
 #: src/basic-attention-token/BasicAttentionTokenLandingPage.tsx:106
 msgid "What’s BAT?"
@@ -2625,7 +2625,7 @@ msgstr "Al buscar alternativas a Google Ads"
 
 #: src/auth/views/components/WhyUseBraveAds.tsx:18
 msgid "Why use Brave Ads?"
-msgstr "¿Por qué utilizar Brave Ads?"
+msgstr "¿Por qué utilizar Anuncios de Brave?"
 
 #: src/routes/campaigns/analytics/filters/OsFilter.tsx:25
 msgid "Windows"
