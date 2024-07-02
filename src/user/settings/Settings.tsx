@@ -46,22 +46,22 @@ const Settings = () => {
         <Stack spacing={2} mt={1}>
           <NewKeyPairModal advertiser={advertiser} />
 
-          <CardContainer header={<Trans>Organization</Trans>}>
+          <CardContainer header={<Trans>Account</Trans>}>
             <Typography>
               <Trans>
-                You may have access to multiple organisations. Switch between
-                them here.
+                You may have access to multiple accounts. Switch between them
+                here.
               </Trans>
             </Typography>
 
             <Box sx={{ mt: 2 }}>
               <FormControl fullWidth>
                 <InputLabel>
-                  <Trans>Select Organization</Trans>
+                  <Trans>Select Account</Trans>
                 </InputLabel>
                 <Select
                   value={advertiser.id}
-                  label={<Trans>Select Organization</Trans>}
+                  label={<Trans>Select Account</Trans>}
                   onChange={(e) => setActiveAdvertiserWithId(e)}
                 >
                   {advertisers.map((a) => (
