@@ -4,6 +4,7 @@ fragment Creative on Creative {
   modifiedAt
   name
   state
+  # eslint-disable-next-line @graphql-eslint/no-deprecated
   type {
     code
   }

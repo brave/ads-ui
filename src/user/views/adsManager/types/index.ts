@@ -1,5 +1,7 @@
 import {
+  AdSetState,
   CampaignFormat,
+  CreateTypeInput,
   CreativeInput,
   PaymentType,
 } from "@/graphql-client/graphql";
@@ -43,7 +45,7 @@ export type OS = {
 
 export type AdSetForm = {
   id?: string;
-  state?: string;
+  state?: AdSetState;
   name: string;
   segments: Segment[];
   oses: OS[];
@@ -63,7 +65,11 @@ export type Segment = {
   name: string;
 };
 
-export type Creative = CreativeInput & {
+export type CreativeInputWithType = CreativeInput & {
+  type: CreateTypeInput;
+};
+
+export type Creative = CreativeInputWithType & {
   creativeInstanceId?: string;
   id?: string;
   targetUrlValid?: string;

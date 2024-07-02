@@ -2,7 +2,6 @@ import { useCallback } from "react";
 import {
   AdvertiserCreativesDocument,
   CreateCreativeDocument,
-  CreativeInput,
   UpdateCreativeDocument,
 } from "@/graphql-client/graphql";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
@@ -11,6 +10,7 @@ import { validCreativeFields } from "@/user/library";
 import _ from "lodash";
 import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
 import { useMutation } from "@apollo/client";
+import { CreativeInputWithType } from "@/user/views/adsManager/types";
 
 export function useSubmitCreative(props: { id: string }) {
   const { trackMatomoEvent } = useTrackMatomoEvent();
@@ -46,7 +46,7 @@ export function useSubmitCreative(props: { id: string }) {
     });
 
   const submit = useCallback(
-    async (values: CreativeInput, submitting: (s: boolean) => void) => {
+    async (values: CreativeInputWithType, submitting: (s: boolean) => void) => {
       submitting(true);
       const valid = validCreativeFields(
         { id: props.id, ...values },

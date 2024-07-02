@@ -1,12 +1,12 @@
 import { Box, ListItemButton, List, Typography, Stack } from "@mui/material";
 import { useFormikContext } from "formik";
-import { CreativeInput } from "@/graphql-client/graphql";
 import { FormatHelp } from "@/components/Button/FormatHelp";
 import { msg } from "@lingui/macro";
 import { Trans } from "@lingui/react";
+import { CreativeInputWithType } from "@/user/views/adsManager/types";
 
 export function CreativeType(props: { allowTypeChange?: boolean }) {
-  const formik = useFormikContext<CreativeInput>();
+  const formik = useFormikContext<CreativeInputWithType>();
 
   const supportedTypes = [
     {

@@ -12,6 +12,7 @@
         "kind": "OBJECT",
         "name": "ActiveGeocodesEntry",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "code",
@@ -55,6 +56,7 @@
         "kind": "OBJECT",
         "name": "ActiveGeocodesQueryDTO",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -90,6 +92,7 @@
         "kind": "OBJECT",
         "name": "Ad",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "creative",
@@ -221,6 +224,7 @@
         "kind": "OBJECT",
         "name": "AdSet",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "ads",
@@ -643,8 +647,8 @@
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
+                "kind": "ENUM",
+                "name": "AdSetState",
                 "ofType": null
               }
             },
@@ -706,6 +710,30 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "validationFailures",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "CampaignValidationFailure",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -717,6 +745,7 @@
         "kind": "INPUT_OBJECT",
         "name": "AdSetFilter",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -730,6 +759,26 @@
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "state",
+            "description": "only include adsets in any of these states",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "AdSetState",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "interfaces": null,
@@ -737,9 +786,58 @@
         "possibleTypes": null
       },
       {
+        "kind": "ENUM",
+        "name": "AdSetState",
+        "description": null,
+        "isOneOf": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "active",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "draft",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "invalid",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "paused",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "suspended",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "under_review",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "Address",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "city",
@@ -891,6 +989,7 @@
         "kind": "OBJECT",
         "name": "Advertiser",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "accountManager",
@@ -1307,6 +1406,7 @@
         "kind": "INPUT_OBJECT",
         "name": "AdvertiserCampaignFilter",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -1354,6 +1454,7 @@
         "kind": "INPUT_OBJECT",
         "name": "AdvertiserFilter",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -1377,6 +1478,7 @@
         "kind": "OBJECT",
         "name": "AdvertiserImage",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "createdAt",
@@ -1468,6 +1570,7 @@
         "kind": "OBJECT",
         "name": "AdvertiserPrice",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "billingModelPrice",
@@ -1543,6 +1646,7 @@
         "kind": "INPUT_OBJECT",
         "name": "AdvertiserPriceInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -1602,6 +1706,7 @@
         "kind": "ENUM",
         "name": "AdvertiserSource",
         "description": null,
+        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -1625,6 +1730,7 @@
         "kind": "INPUT_OBJECT",
         "name": "ApproveCampaignInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -1652,6 +1758,7 @@
         "kind": "ENUM",
         "name": "BillingType",
         "description": null,
+        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -1681,6 +1788,7 @@
         "kind": "SCALAR",
         "name": "Boolean",
         "description": "The `Boolean` scalar type represents `true` or `false`.",
+        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -1691,6 +1799,7 @@
         "kind": "OBJECT",
         "name": "Campaign",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "accountManager",
@@ -1707,7 +1816,20 @@
           {
             "name": "adSetCount",
             "description": null,
-            "args": [],
+            "args": [
+              {
+                "name": "filter",
+                "description": null,
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "AdSetFilter",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -1898,22 +2020,6 @@
             "deprecationReason": null
           },
           {
-            "name": "confirmationsSummary",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "ConfirmationsSummaryQueryDTO",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "createdAt",
             "description": null,
             "args": [],
@@ -2041,6 +2147,22 @@
               "kind": "SCALAR",
               "name": "Float",
               "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "effectiveState",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "CampaignState",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -2485,6 +2607,30 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "validationFailures",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "CampaignValidationFailure",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -2496,6 +2642,7 @@
         "kind": "OBJECT",
         "name": "CampaignComment",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "createdAt",
@@ -2587,6 +2734,7 @@
         "kind": "INPUT_OBJECT",
         "name": "CampaignFilter",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -2658,6 +2806,7 @@
         "kind": "ENUM",
         "name": "CampaignFormat",
         "description": null,
+        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -2699,6 +2848,7 @@
         "kind": "ENUM",
         "name": "CampaignPacingStrategies",
         "description": null,
+        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -2722,6 +2872,7 @@
         "kind": "INPUT_OBJECT",
         "name": "CampaignPerformanceFilter",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -2817,6 +2968,7 @@
         "kind": "ENUM",
         "name": "CampaignRejection",
         "description": null,
+        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -2852,6 +3004,7 @@
         "kind": "ENUM",
         "name": "CampaignSource",
         "description": null,
+        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -2885,8 +3038,75 @@
       },
       {
         "kind": "ENUM",
+        "name": "CampaignState",
+        "description": null,
+        "isOneOf": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "ACTIVE",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "COMPLETED",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DAYCOMPLETE",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DELETED",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DRAFT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "INVALID",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PAUSED",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "SUSPENDED",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "UNDER_REVIEW",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
         "name": "CampaignType",
         "description": null,
+        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -2962,8 +3182,37 @@
       },
       {
         "kind": "OBJECT",
+        "name": "CampaignValidationFailure",
+        "description": null,
+        "isOneOf": null,
+        "fields": [
+          {
+            "name": "description",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
         "name": "CampaignsPerCountryEntry",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "count",
@@ -3021,121 +3270,9 @@
       },
       {
         "kind": "OBJECT",
-        "name": "CampaignsPerCountryQueryDTO",
-        "description": null,
-        "fields": [
-          {
-            "name": "data",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "CampaignsPerCountryEntry",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "CampaignsPerCurrencyEntry",
-        "description": null,
-        "fields": [
-          {
-            "name": "count",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "currency",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "CampaignsPerCurrencyQueryDTO",
-        "description": null,
-        "fields": [
-          {
-            "name": "data",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "CampaignsPerCurrencyEntry",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
         "name": "Change",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "createdAt",
@@ -3299,6 +3436,7 @@
         "kind": "INPUT_OBJECT",
         "name": "ChangeFilter",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -3378,6 +3516,7 @@
         "kind": "ENUM",
         "name": "ConfirmationType",
         "description": null,
+        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -3483,182 +3622,9 @@
       },
       {
         "kind": "OBJECT",
-        "name": "ConfirmationsSummaryEntry",
-        "description": null,
-        "fields": [
-          {
-            "name": "android",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "date",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "DateTime",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "iOS",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "linux",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "macOS",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "other",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "type",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "windows",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "ConfirmationsSummaryQueryDTO",
-        "description": null,
-        "fields": [
-          {
-            "name": "data",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "ConfirmationsSummaryEntry",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
         "name": "Conversion",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "createdAt",
@@ -3798,6 +3764,7 @@
         "kind": "OBJECT",
         "name": "CountryEngagement",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "click",
@@ -3917,6 +3884,7 @@
         "kind": "INPUT_OBJECT",
         "name": "CreateAdInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -3996,6 +3964,7 @@
         "kind": "INPUT_OBJECT",
         "name": "CreateAdSetInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -4322,8 +4291,8 @@
             "name": "state",
             "description": null,
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
+              "kind": "ENUM",
+              "name": "AdSetState",
               "ofType": null
             },
             "defaultValue": null,
@@ -4395,6 +4364,7 @@
         "kind": "INPUT_OBJECT",
         "name": "CreateAddressInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -4498,6 +4468,7 @@
         "kind": "INPUT_OBJECT",
         "name": "CreateAdvertiserImageInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -4573,6 +4544,7 @@
         "kind": "INPUT_OBJECT",
         "name": "CreateAdvertiserInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -4772,6 +4744,7 @@
         "kind": "INPUT_OBJECT",
         "name": "CreateCampaignInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -5171,6 +5144,7 @@
         "kind": "INPUT_OBJECT",
         "name": "CreateCommentInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -5214,6 +5188,7 @@
         "kind": "INPUT_OBJECT",
         "name": "CreateConversionInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -5297,6 +5272,7 @@
         "kind": "INPUT_OBJECT",
         "name": "CreateInPageCreativeInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -5391,13 +5367,9 @@
             "name": "type",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "CreateTypeInput",
-                "ofType": null
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "CreateTypeInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -5424,6 +5396,7 @@
         "kind": "INPUT_OBJECT",
         "name": "CreateNewTabPageCreativeInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -5518,13 +5491,9 @@
             "name": "type",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "CreateTypeInput",
-                "ofType": null
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "CreateTypeInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -5539,6 +5508,7 @@
         "kind": "INPUT_OBJECT",
         "name": "CreateNotificationCreativeInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -5633,13 +5603,9 @@
             "name": "type",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "CreateTypeInput",
-                "ofType": null
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "CreateTypeInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -5666,6 +5632,7 @@
         "kind": "INPUT_OBJECT",
         "name": "CreateOSInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -5709,6 +5676,7 @@
         "kind": "INPUT_OBJECT",
         "name": "CreateSegmentInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -5752,6 +5720,7 @@
         "kind": "INPUT_OBJECT",
         "name": "CreateTypeInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -5791,6 +5760,7 @@
         "kind": "INPUT_OBJECT",
         "name": "CreateUserInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -5874,6 +5844,7 @@
         "kind": "OBJECT",
         "name": "Creative",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "advertiser",
@@ -6108,6 +6079,22 @@
                 "ofType": null
               }
             },
+            "isDeprecated": true,
+            "deprecationReason": "use the typeCode field instead"
+          },
+          {
+            "name": "typeCode",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "CreativeTypeCode",
+                "ofType": null
+              }
+            },
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -6121,6 +6108,7 @@
         "kind": "INPUT_OBJECT",
         "name": "CreativeFilter",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -6144,6 +6132,7 @@
         "kind": "INPUT_OBJECT",
         "name": "CreativeInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -6306,13 +6295,9 @@
             "name": "type",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "CreateTypeInput",
-                "ofType": null
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "CreateTypeInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -6327,6 +6312,7 @@
         "kind": "OBJECT",
         "name": "CreativeType",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "code",
@@ -6367,9 +6353,64 @@
         "possibleTypes": null
       },
       {
+        "kind": "ENUM",
+        "name": "CreativeTypeCode",
+        "description": null,
+        "isOneOf": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "in_page_all_v1",
+            "description": null,
+            "isDeprecated": true,
+            "deprecationReason": "Historic, no longer supported"
+          },
+          {
+            "name": "inline_content_all_v1",
+            "description": "Used for news display ads",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "new_tab_page_all_v1",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "notification_all_v1",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "promoted_content_all_v1",
+            "description": null,
+            "isDeprecated": true,
+            "deprecationReason": "Historic, no longer supported"
+          },
+          {
+            "name": "search_all_v1",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "search_homepage_all_v1",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
         "kind": "INPUT_OBJECT",
         "name": "CreativeTypeInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -6413,6 +6454,7 @@
         "kind": "SCALAR",
         "name": "DateTime",
         "description": "A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.",
+        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -6423,6 +6465,7 @@
         "kind": "OBJECT",
         "name": "DayParting",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "dow",
@@ -6482,6 +6525,7 @@
         "kind": "INPUT_OBJECT",
         "name": "DayPartingInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -6541,6 +6585,7 @@
         "kind": "INPUT_OBJECT",
         "name": "DeleteAdInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -6568,6 +6613,7 @@
         "kind": "OBJECT",
         "name": "Dimensions",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "ad",
@@ -6703,6 +6749,7 @@
         "kind": "OBJECT",
         "name": "Engagement",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "android",
@@ -7187,112 +7234,10 @@
         "possibleTypes": null
       },
       {
-        "kind": "OBJECT",
-        "name": "EngagementOverview",
-        "description": null,
-        "fields": [
-          {
-            "name": "campaignId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "click",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Float",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "date",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "DateTime",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "landed",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Float",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "spend",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "view",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Float",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "SCALAR",
         "name": "Float",
         "description": "The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).",
+        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -7303,6 +7248,7 @@
         "kind": "OBJECT",
         "name": "FocalPoint",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "x",
@@ -7346,6 +7292,7 @@
         "kind": "INPUT_OBJECT",
         "name": "FocalPointInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -7389,6 +7336,7 @@
         "kind": "OBJECT",
         "name": "Geocode",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "code",
@@ -7432,6 +7380,7 @@
         "kind": "INPUT_OBJECT",
         "name": "GeocodeInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -7471,6 +7420,7 @@
         "kind": "OBJECT",
         "name": "InPagePayload",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "creativeUrl",
@@ -7530,6 +7480,7 @@
         "kind": "INPUT_OBJECT",
         "name": "InPagePayloadInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -7589,6 +7540,7 @@
         "kind": "OBJECT",
         "name": "InlineContentPayload",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "ctaText",
@@ -7696,6 +7648,7 @@
         "kind": "INPUT_OBJECT",
         "name": "InlineContentPayloadInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -7803,6 +7756,7 @@
         "kind": "SCALAR",
         "name": "Int",
         "description": "The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.",
+        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -7813,6 +7767,7 @@
         "kind": "SCALAR",
         "name": "JSONObject",
         "description": "The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).",
+        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -7823,6 +7778,7 @@
         "kind": "OBJECT",
         "name": "Logo",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "alt",
@@ -7898,6 +7854,7 @@
         "kind": "INPUT_OBJECT",
         "name": "LogoInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -7973,6 +7930,7 @@
         "kind": "OBJECT",
         "name": "MetricRates",
         "description": "Rates calculated from metrics. Multiply by 100 to see as a percentage.",
+        "isOneOf": null,
         "fields": [
           {
             "name": "clickThrough",
@@ -8080,6 +8038,7 @@
         "kind": "OBJECT",
         "name": "Metrics",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "click",
@@ -8315,6 +8274,7 @@
         "kind": "OBJECT",
         "name": "Mutation",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "approveAdvertiser",
@@ -8774,6 +8734,35 @@
                 "name": "Ad",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "forceCampaignValidation",
+            "description": null,
+            "args": [
+              {
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Campaign",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -9264,6 +9253,7 @@
         "kind": "OBJECT",
         "name": "NewTabPagePayload",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "logo",
@@ -9307,6 +9297,7 @@
         "kind": "INPUT_OBJECT",
         "name": "NewTabPagePayloadInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -9350,6 +9341,7 @@
         "kind": "OBJECT",
         "name": "NotificationPayload",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "body",
@@ -9409,6 +9401,7 @@
         "kind": "INPUT_OBJECT",
         "name": "NotificationPayloadInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -9468,6 +9461,7 @@
         "kind": "SCALAR",
         "name": "Numeric",
         "description": "The `Numeric` datatype represents a fixed-precision number, which does not suffer from the rounding errors of a javascript floating point number. It's always returned as a string, but for input types either a string or number can be used, though strings are preferred to avoid risk of inaccuracy.",
+        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -9478,6 +9472,7 @@
         "kind": "OBJECT",
         "name": "OS",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "code",
@@ -9521,6 +9516,7 @@
         "kind": "OBJECT",
         "name": "Payload",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "body",
@@ -9624,6 +9620,7 @@
         "kind": "ENUM",
         "name": "PaymentType",
         "description": null,
+        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -9659,6 +9656,7 @@
         "kind": "OBJECT",
         "name": "Performance",
         "description": "For NTT campaigns, metric values are ranged with min and max values. In this case, metrics is equivalent to `min`, though the min-max range should usually be shown in preference. For other campaign formats, `metrics` `min` and `max` are all set to the same values. ",
+        "isOneOf": null,
         "fields": [
           {
             "name": "dimensions",
@@ -9734,6 +9732,7 @@
         "kind": "INPUT_OBJECT",
         "name": "PerformanceFilter",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -9869,6 +9868,7 @@
         "kind": "OBJECT",
         "name": "PerformanceResults",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "total",
@@ -9920,6 +9920,7 @@
         "kind": "OBJECT",
         "name": "PerformanceValues",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "max",
@@ -9979,6 +9980,7 @@
         "kind": "OBJECT",
         "name": "PromotedContentPayload",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "category",
@@ -10098,6 +10100,7 @@
         "kind": "INPUT_OBJECT",
         "name": "PromotedContentPayloadInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -10217,6 +10220,7 @@
         "kind": "OBJECT",
         "name": "Query",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "activeGeocodes",
@@ -10548,38 +10552,6 @@
             "deprecationReason": null
           },
           {
-            "name": "campaignsPerCountry",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "CampaignsPerCountryQueryDTO",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "campaignsPerCurrency",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "CampaignsPerCurrencyQueryDTO",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "changes",
             "description": null,
             "args": [
@@ -10783,71 +10755,6 @@
                 "kind": "SCALAR",
                 "name": "Int",
                 "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "engagementsOverview",
-            "description": null,
-            "args": [
-              {
-                "name": "advertiserId",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "campaignIds",
-                "description": null,
-                "type": {
-                  "kind": "LIST",
-                  "name": null,
-                  "ofType": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "String",
-                      "ofType": null
-                    }
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "filter",
-                "description": null,
-                "type": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "CampaignFilter",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "EngagementOverview",
-                  "ofType": null
-                }
               }
             },
             "isDeprecated": false,
@@ -11098,6 +11005,7 @@
         "kind": "OBJECT",
         "name": "Redirect",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "errors",
@@ -11197,6 +11105,7 @@
         "kind": "OBJECT",
         "name": "Registration",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "businessName",
@@ -11348,6 +11257,7 @@
         "kind": "INPUT_OBJECT",
         "name": "RegistrationFilter",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -11371,6 +11281,7 @@
         "kind": "ENUM",
         "name": "RegistrationState",
         "description": null,
+        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -11400,6 +11311,7 @@
         "kind": "OBJECT",
         "name": "Registrations",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "all",
@@ -11477,6 +11389,7 @@
         "kind": "INPUT_OBJECT",
         "name": "RejectCampaignInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -11532,6 +11445,7 @@
         "kind": "OBJECT",
         "name": "SearchDomain",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "country",
@@ -11575,6 +11489,7 @@
         "kind": "OBJECT",
         "name": "SearchDomainEligibility",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "entries",
@@ -11666,6 +11581,7 @@
         "kind": "OBJECT",
         "name": "SearchHomepagePayload",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "body",
@@ -11769,6 +11685,7 @@
         "kind": "INPUT_OBJECT",
         "name": "SearchHomepagePayloadInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -11872,6 +11789,7 @@
         "kind": "OBJECT",
         "name": "SearchLandingPage",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "country",
@@ -11995,6 +11913,7 @@
         "kind": "OBJECT",
         "name": "SearchLandingPageCreative",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "body",
@@ -12082,6 +12001,7 @@
         "kind": "OBJECT",
         "name": "SearchLandingPageQuery",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "count",
@@ -12157,6 +12077,7 @@
         "kind": "OBJECT",
         "name": "SearchLandingPageWithStats",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "count",
@@ -12328,6 +12249,7 @@
         "kind": "OBJECT",
         "name": "SearchPayload",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "body",
@@ -12411,6 +12333,7 @@
         "kind": "INPUT_OBJECT",
         "name": "SearchPayloadInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -12494,6 +12417,7 @@
         "kind": "OBJECT",
         "name": "SearchProspects",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "domains",
@@ -12870,6 +12794,7 @@
         "kind": "OBJECT",
         "name": "Segment",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "code",
@@ -12919,6 +12844,7 @@
         "kind": "INTERFACE",
         "name": "SegmentsEntry",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "code",
@@ -12968,6 +12894,7 @@
         "kind": "OBJECT",
         "name": "SegmentsQueryDTO",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -13003,6 +12930,7 @@
         "kind": "SCALAR",
         "name": "String",
         "description": "The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.",
+        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -13013,6 +12941,7 @@
         "kind": "OBJECT",
         "name": "TargetUrlValidation",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "errors",
@@ -13088,6 +13017,7 @@
         "kind": "INPUT_OBJECT",
         "name": "UpdateAdInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -13167,6 +13097,7 @@
         "kind": "INPUT_OBJECT",
         "name": "UpdateAdSetInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -13501,8 +13432,8 @@
             "name": "state",
             "description": null,
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
+              "kind": "ENUM",
+              "name": "AdSetState",
               "ofType": null
             },
             "defaultValue": null,
@@ -13570,6 +13501,7 @@
         "kind": "INPUT_OBJECT",
         "name": "UpdateAddressInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -13665,6 +13597,7 @@
         "kind": "INPUT_OBJECT",
         "name": "UpdateAdvertiserInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -13920,6 +13853,7 @@
         "kind": "INPUT_OBJECT",
         "name": "UpdateCampaignInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -14287,6 +14221,7 @@
         "kind": "INPUT_OBJECT",
         "name": "UpdateConversionsInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -14370,6 +14305,7 @@
         "kind": "INPUT_OBJECT",
         "name": "UpdateNotificationCreativeInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -14489,6 +14425,7 @@
         "kind": "INPUT_OBJECT",
         "name": "UpdateOSesInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -14524,6 +14461,7 @@
         "kind": "INPUT_OBJECT",
         "name": "UpdateSegmentInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -14559,6 +14497,7 @@
         "kind": "INPUT_OBJECT",
         "name": "UpdateSelfServeAdvertiserInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -14622,6 +14561,7 @@
         "kind": "INPUT_OBJECT",
         "name": "UpdateUserInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -14705,6 +14645,7 @@
         "kind": "OBJECT",
         "name": "User",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "advertisers",
@@ -14836,6 +14777,7 @@
         "kind": "OBJECT",
         "name": "ValidationDetail",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "detail",
@@ -14879,6 +14821,7 @@
         "kind": "OBJECT",
         "name": "Wallpaper",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "focalPoint",
@@ -14922,6 +14865,7 @@
         "kind": "INPUT_OBJECT",
         "name": "WallpaperInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -14965,6 +14909,7 @@
         "kind": "OBJECT",
         "name": "Webhook",
         "description": null,
+        "isOneOf": null,
         "fields": [
           {
             "name": "type",
@@ -15008,6 +14953,7 @@
         "kind": "OBJECT",
         "name": "__Directive",
         "description": "A Directive provides a way to describe alternate runtime execution and type validation behavior in a GraphQL document.\n\nIn some cases, you need to provide options to alter GraphQL's execution behavior in ways field arguments will not suffice, such as conditionally including or skipping a field. Directives provide this by describing additional information to the executor.",
+        "isOneOf": null,
         "fields": [
           {
             "name": "name",
@@ -15124,6 +15070,7 @@
         "kind": "ENUM",
         "name": "__DirectiveLocation",
         "description": "A Directive can be adjacent to many parts of the GraphQL language, a __DirectiveLocation describes one such possible adjacencies.",
+        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -15249,6 +15196,7 @@
         "kind": "OBJECT",
         "name": "__EnumValue",
         "description": "One possible value for a given Enum. Enum values are unique values, not a placeholder for a string or numeric value. However an Enum value is returned in a JSON response as a string.",
+        "isOneOf": null,
         "fields": [
           {
             "name": "name",
@@ -15316,6 +15264,7 @@
         "kind": "OBJECT",
         "name": "__Field",
         "description": "Object and Interface types are described by a list of Fields, each of which has a name, potentially a list of arguments, and a return type.",
+        "isOneOf": null,
         "fields": [
           {
             "name": "name",
@@ -15436,6 +15385,7 @@
         "kind": "OBJECT",
         "name": "__InputValue",
         "description": "Arguments provided to Fields or Directives and the input fields of an InputObject are represented as Input Values which describe their type and optionally a default value.",
+        "isOneOf": null,
         "fields": [
           {
             "name": "name",
@@ -15531,6 +15481,7 @@
         "kind": "OBJECT",
         "name": "__Schema",
         "description": "A GraphQL Schema defines the capabilities of a GraphQL server. It exposes all available types and directives on the server, as well as the entry points for query, mutation, and subscription operations.",
+        "isOneOf": null,
         "fields": [
           {
             "name": "description",
@@ -15642,6 +15593,7 @@
         "kind": "OBJECT",
         "name": "__Type",
         "description": "The fundamental unit of any GraphQL Schema is the type. There are many kinds of types in GraphQL as represented by the `__TypeKind` enum.\n\nDepending on the kind of a type, certain fields describe information about that type. Scalar types provide no information beyond a name, description and optional `specifiedByURL`, while Enum types provide their values. Object and Interface types provide the fields they describe. Abstract types, Union and Interface, provide the Object types possible at runtime. List and NonNull types compose other types.",
+        "isOneOf": null,
         "fields": [
           {
             "name": "kind",
@@ -15845,6 +15797,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "isOneOf",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -15856,6 +15820,7 @@
         "kind": "ENUM",
         "name": "__TypeKind",
         "description": "An enum describing what kind of type a given `__Type` is.",
+        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -15915,6 +15880,7 @@
         "kind": "INPUT_OBJECT",
         "name": "createWebhookInput",
         "description": null,
+        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -16008,6 +15974,15 @@
             "deprecationReason": null
           }
         ]
+      },
+      {
+        "name": "oneOf",
+        "description": "Indicates exactly one field must be supplied and this field must not be `null`.",
+        "isRepeatable": false,
+        "locations": [
+          "INPUT_OBJECT"
+        ],
+        "args": []
       },
       {
         "name": "skip",

@@ -6,6 +6,7 @@ import {
   transformPrice,
 } from ".";
 import {
+  AdSetState,
   CampaignFormat,
   CampaignFragment,
   CampaignPacingStrategies,
@@ -61,7 +62,7 @@ const BASE_CPM_CAMPAIGN_FRAGMENT: Readonly<CampaignFragment> = {
       name: "Demo ad set",
       totalMax: 10,
       perDay: 1,
-      state: "active",
+      state: AdSetState.Active,
       segments: [
         {
           code: "elchqV0qNh",
@@ -333,7 +334,7 @@ describe("edit form tests", () => {
     perDay: 1,
     oses: [{ name: "macos", code: "1234" }],
     segments: [{ name: "test", code: "5678" }],
-    state: "active",
+    state: AdSetState.Active,
     totalMax: 100,
   };
 
@@ -347,7 +348,7 @@ describe("edit form tests", () => {
     perDay: 1,
     oses: [{ name: "linux", code: "1234" }],
     segments: [{ name: "help", code: "5678" }],
-    state: "active",
+    state: AdSetState.Active,
     totalMax: 100,
   };
 
