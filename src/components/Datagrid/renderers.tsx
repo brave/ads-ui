@@ -6,6 +6,7 @@ import { OnOff } from "@/components/Switch/OnOff";
 import { displayFromCampaignState } from "@/util/displayState";
 import { FilterContext } from "@/state/context";
 import {
+  AdSetState,
   AdvertiserCampaignsDocument,
   CampaignSource,
   CampaignSummaryFragment,
@@ -146,7 +147,7 @@ export function adSetOnOffState(
           updateAdSet({
             variables: {
               updateAdSetInput: {
-                state: s,
+                state: s as AdSetState,
                 id: c.id,
                 campaignId: c.campaignId,
               },
