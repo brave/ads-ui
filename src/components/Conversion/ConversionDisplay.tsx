@@ -43,19 +43,14 @@ export function ConversionDisplay({ conversions, convErrors }: Props) {
       {conversions.map((c, idx) => (
         <div key={idx}>
           <ReviewField
-            caption={msg`Conversion Type`}
-            value={c.type}
-            error={extractConversionError(idx, "type")}
-          />
-          <ReviewField
-            caption={msg`Observation Window`}
-            value={`${c.observationWindow} days`}
-            error={extractConversionError(idx, "observationWindow")}
-          />
-          <ReviewField
             caption={msg`Conversion URL Pattern`}
             value={c.urlPattern}
             error={extractConversionError(idx, "urlPattern")}
+          />
+          <ReviewField
+            caption={msg`Conversion Observation Window`}
+            value={`${c.observationWindow} days`}
+            error={extractConversionError(idx, "observationWindow")}
           />
         </div>
       ))}

@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { FormikRadioControl, FormikTextField } from "@/form/FormikHelpers";
-import { msg, Trans } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 
 interface Props {
@@ -12,26 +12,6 @@ export const ConversionFields = ({ name }: Props) => {
 
   return (
     <>
-      <FormikRadioControl
-        name={`${name}.type`}
-        label={_(msg`Type`)}
-        options={[
-          { value: "postview", label: _(msg`Post-View`) },
-          { value: "postclick", label: _(msg`Post-Click`) },
-        ]}
-        helperText={
-          <>
-            <Trans>
-              Post-View: Viewed ad and converted by visiting site on their own.
-            </Trans>
-            <br />
-            <Trans>
-              Post-Click: Viewed ad and converted by clicking its link
-            </Trans>
-          </>
-        }
-      />
-
       <Box>
         <FormikTextField
           name={`${name}.urlPattern`}

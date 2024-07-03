@@ -49,11 +49,11 @@ msgstr "*Limited time only. Available to new advertisers, and those who ran camp
 msgid "+{count} more"
 msgstr "+{count} more"
 
-#: src/components/Conversion/ConversionFields.tsx:50
+#: src/components/Conversion/ConversionFields.tsx:30
 msgid "1 Day"
 msgstr "1 Day"
 
-#: src/components/Conversion/ConversionFields.tsx:52
+#: src/components/Conversion/ConversionFields.tsx:32
 msgid "30 Days"
 msgstr "30 Days"
 
@@ -61,7 +61,7 @@ msgstr "30 Days"
 msgid "401 Forbidden"
 msgstr "401 Forbidden"
 
-#: src/components/Conversion/ConversionFields.tsx:51
+#: src/components/Conversion/ConversionFields.tsx:31
 msgid "7 Days"
 msgstr "7 Days"
 
@@ -83,7 +83,7 @@ msgstr "About Brave Ads"
 
 #: src/components/Drawer/MiniSideBar.tsx:57
 #: src/components/Navigation/AccountMenu.tsx:36
-#: src/components/Navigation/AccountMenu.tsx:97
+#: src/components/Navigation/AccountMenu.tsx:95
 #: src/user/settings/Settings.tsx:49
 msgid "Account"
 msgstr "Account"
@@ -194,7 +194,7 @@ msgstr "Ad type must be notification or news"
 msgid "Add an existing ad"
 msgstr "Add an existing ad"
 
-#: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:44
+#: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:45
 msgid "Add Conversion tracking"
 msgstr "Add Conversion tracking"
 
@@ -518,7 +518,7 @@ msgstr "Campaign Summary"
 
 #: src/components/Creatives/CreativeCampaigns.tsx:40
 #: src/components/Drawer/MiniSideBar.tsx:22
-#: src/user/views/user/CampaignView.tsx:42
+#: src/user/views/user/CampaignView.tsx:45
 msgid "Campaigns"
 msgstr "Campaigns"
 
@@ -679,9 +679,13 @@ msgid "Continue"
 msgstr "Continue"
 
 #: src/components/Conversion/ConversionDisplay.tsx:18
-#: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:20
+#: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:21
 msgid "Conversion"
 msgstr "Conversion"
+
+#: src/components/Conversion/ConversionDisplay.tsx:51
+msgid "Conversion Observation Window"
+msgstr "Conversion Observation Window"
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:70
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:150
@@ -692,9 +696,17 @@ msgstr "Conversion"
 msgid "Conversion Rate"
 msgstr "Conversion Rate"
 
+#: src/user/views/user/ConversionAlert.tsx:12
+msgid "Conversion reporting change"
+msgstr "Conversion reporting change"
+
+#: src/user/views/user/ConversionAlert.tsx:14
+msgid "Conversion reporting for Brave Ads has changed to better uphold user privacy and security. Campaigns with conversion URLs that violate the newly clarified requirements for conversion URLs will now automatically be paused until their URLs have been updated. Please review the guidelines and take any necessary action to prevent campaign disruption. New guidelines can be found at: <0/>"
+msgstr "Conversion reporting for Brave Ads has changed to better uphold user privacy and security. Campaigns with conversion URLs that violate the newly clarified requirements for conversion URLs will now automatically be paused until their URLs have been updated. Please review the guidelines and take any necessary action to prevent campaign disruption. New guidelines can be found at: <0/>"
+
 #: src/components/Conversion/ConversionDisplay.tsx:46
-msgid "Conversion Type"
-msgstr "Conversion Type"
+#~ msgid "Conversion Type"
+#~ msgstr "Conversion Type"
 
 #: src/validation/CampaignSchema.tsx:151
 msgid "Conversion type must be Post Click or Post View"
@@ -716,7 +728,7 @@ msgstr "Conversion URL must not contain any whitespace"
 msgid "Conversion URL must start with https://"
 msgstr "Conversion URL must start with https://"
 
-#: src/components/Conversion/ConversionDisplay.tsx:56
+#: src/components/Conversion/ConversionDisplay.tsx:46
 msgid "Conversion URL Pattern"
 msgstr "Conversion URL Pattern"
 
@@ -744,7 +756,7 @@ msgstr "Cost per click"
 msgid "Could not logout at this time. Please try again later."
 msgstr "Could not logout at this time. Please try again later."
 
-#: src/components/Conversion/ConversionFields.tsx:54
+#: src/components/Conversion/ConversionFields.tsx:34
 msgid "Count conversions within X days of an impression"
 msgstr "Count conversions within X days of an impression"
 
@@ -1008,7 +1020,7 @@ msgstr "End date must be after start date"
 msgid "End Time"
 msgstr "End Time"
 
-#: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:26
+#: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:27
 msgid "Enter a URL that represents your conversion goal, like a checkout or subscription confirmation page. <0/>Brave will count unique visits to that page from users who saw or clicked your ad."
 msgstr "Enter a URL that represents your conversion goal, like a checkout or subscription confirmation page. <0/>Brave will count unique visits to that page from users who saw or clicked your ad."
 
@@ -1439,7 +1451,7 @@ msgstr "Log into your Brave Ads account"
 msgid "Logging in"
 msgstr "Logging in"
 
-#: src/components/Navigation/AccountMenu.tsx:136
+#: src/components/Navigation/AccountMenu.tsx:134
 msgid "Logout"
 msgstr "Logout"
 
@@ -1607,8 +1619,7 @@ msgstr "Notification ad"
 msgid "Notification ads"
 msgstr "Notification ads"
 
-#: src/components/Conversion/ConversionDisplay.tsx:51
-#: src/components/Conversion/ConversionFields.tsx:48
+#: src/components/Conversion/ConversionFields.tsx:28
 msgid "Observation Window"
 msgstr "Observation Window"
 
@@ -1680,7 +1691,7 @@ msgstr "OS"
 msgid "Other (please specify)"
 msgstr "Other (please specify)"
 
-#: src/components/Navigation/AccountMenu.tsx:106
+#: src/components/Navigation/AccountMenu.tsx:104
 msgid "Other accounts"
 msgstr "Other accounts"
 
@@ -1792,20 +1803,20 @@ msgid "Please specify how you heard about Brave Ads"
 msgstr "Please specify how you heard about Brave Ads"
 
 #: src/components/Conversion/ConversionFields.tsx:20
-msgid "Post-Click"
-msgstr "Post-Click"
+#~ msgid "Post-Click"
+#~ msgstr "Post-Click"
 
 #: src/components/Conversion/ConversionFields.tsx:28
-msgid "Post-Click: Viewed ad and converted by clicking its link"
-msgstr "Post-Click: Viewed ad and converted by clicking its link"
+#~ msgid "Post-Click: Viewed ad and converted by clicking its link"
+#~ msgstr "Post-Click: Viewed ad and converted by clicking its link"
 
 #: src/components/Conversion/ConversionFields.tsx:19
-msgid "Post-View"
-msgstr "Post-View"
+#~ msgid "Post-View"
+#~ msgstr "Post-View"
 
 #: src/components/Conversion/ConversionFields.tsx:24
-msgid "Post-View: Viewed ad and converted by visiting site on their own."
-msgstr "Post-View: Viewed ad and converted by visiting site on their own."
+#~ msgid "Post-View: Viewed ad and converted by visiting site on their own."
+#~ msgstr "Post-View: Viewed ad and converted by visiting site on their own."
 
 #: src/auth/views/MobileAdsBenefits.tsx:22
 #~ msgid "Powerful ad formats"
@@ -1913,9 +1924,13 @@ msgstr "Ready to reach your first million users? Start your first campaign today
 msgid "Remove"
 msgstr "Remove"
 
+#: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:68
+msgid "Remove Conversion tracking"
+msgstr "Remove Conversion tracking"
+
 #: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:54
-msgid "Remove Conversion Tracking"
-msgstr "Remove Conversion Tracking"
+#~ msgid "Remove Conversion Tracking"
+#~ msgstr "Remove Conversion Tracking"
 
 #: src/auth/components/AdvertiserAgreed.tsx:14
 #~ msgid "Reporting"
@@ -2378,8 +2393,8 @@ msgstr "Try a free one-month test to see how Brave Search Ads perform for your b
 #~ msgstr "Try again"
 
 #: src/components/Conversion/ConversionFields.tsx:17
-msgid "Type"
-msgstr "Type"
+#~ msgid "Type"
+#~ msgstr "Type"
 
 #: src/components/Campaigns/CloneCampaign.tsx:43
 msgid "Unable to clone campaign"
@@ -2437,7 +2452,7 @@ msgstr "Unable to register your organization at this time. Please try again late
 #~ msgid "Unable to retrieve ad sets or ads for Campaign."
 #~ msgstr "Unable to retrieve ad sets or ads for Campaign."
 
-#: src/user/views/user/CampaignView.tsx:34
+#: src/user/views/user/CampaignView.tsx:35
 msgid "Unable to retrieve Campaign data."
 msgstr "Unable to retrieve Campaign data."
 
@@ -2528,11 +2543,11 @@ msgstr "URL must not contain any whitespace"
 msgid "URL must start with https://"
 msgstr "URL must start with https://"
 
-#: src/components/Conversion/ConversionFields.tsx:38
+#: src/components/Conversion/ConversionFields.tsx:18
 msgid "URL Pattern"
 msgstr "URL Pattern"
 
-#: src/components/Conversion/ConversionFields.tsx:40
+#: src/components/Conversion/ConversionFields.tsx:20
 msgid "URL should have a trailing asterisk - Example: https://brave.com/products/*"
 msgstr "URL should have a trailing asterisk - Example: https://brave.com/products/*"
 

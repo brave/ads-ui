@@ -49,11 +49,11 @@ msgstr ""
 msgid "+{count} more"
 msgstr "+{count} más"
 
-#: src/components/Conversion/ConversionFields.tsx:50
+#: src/components/Conversion/ConversionFields.tsx:30
 msgid "1 Day"
 msgstr "1 día"
 
-#: src/components/Conversion/ConversionFields.tsx:52
+#: src/components/Conversion/ConversionFields.tsx:32
 msgid "30 Days"
 msgstr "30 días "
 
@@ -61,7 +61,7 @@ msgstr "30 días "
 msgid "401 Forbidden"
 msgstr "401 prohibido"
 
-#: src/components/Conversion/ConversionFields.tsx:51
+#: src/components/Conversion/ConversionFields.tsx:31
 msgid "7 Days"
 msgstr "7 días"
 
@@ -79,7 +79,7 @@ msgstr "Acerca de Brave Ads"
 
 #: src/components/Drawer/MiniSideBar.tsx:57
 #: src/components/Navigation/AccountMenu.tsx:36
-#: src/components/Navigation/AccountMenu.tsx:97
+#: src/components/Navigation/AccountMenu.tsx:95
 #: src/user/settings/Settings.tsx:49
 msgid "Account"
 msgstr "Cuenta"
@@ -190,7 +190,7 @@ msgstr "El tipo de anuncio debe ser notificación o noticias"
 msgid "Add an existing ad"
 msgstr "Añadir un anuncio existente"
 
-#: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:44
+#: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:45
 msgid "Add Conversion tracking"
 msgstr "Añadir seguimiento de conversiones"
 
@@ -503,7 +503,7 @@ msgstr ""
 
 #: src/components/Creatives/CreativeCampaigns.tsx:40
 #: src/components/Drawer/MiniSideBar.tsx:22
-#: src/user/views/user/CampaignView.tsx:42
+#: src/user/views/user/CampaignView.tsx:45
 msgid "Campaigns"
 msgstr "Campañas"
 
@@ -659,9 +659,13 @@ msgid "Continue"
 msgstr "Continuar"
 
 #: src/components/Conversion/ConversionDisplay.tsx:18
-#: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:20
+#: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:21
 msgid "Conversion"
 msgstr "Conversión"
+
+#: src/components/Conversion/ConversionDisplay.tsx:51
+msgid "Conversion Observation Window"
+msgstr ""
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:70
 #: src/user/analytics/analyticsOverview/lib/overview.library.ts:150
@@ -672,9 +676,17 @@ msgstr "Conversión"
 msgid "Conversion Rate"
 msgstr ""
 
+#: src/user/views/user/ConversionAlert.tsx:12
+msgid "Conversion reporting change"
+msgstr ""
+
+#: src/user/views/user/ConversionAlert.tsx:14
+msgid "Conversion reporting for Brave Ads has changed to better uphold user privacy and security. Campaigns with conversion URLs that violate the newly clarified requirements for conversion URLs will now automatically be paused until their URLs have been updated. Please review the guidelines and take any necessary action to prevent campaign disruption. New guidelines can be found at: <0/>"
+msgstr ""
+
 #: src/components/Conversion/ConversionDisplay.tsx:46
-msgid "Conversion Type"
-msgstr "Tipo de conversión"
+#~ msgid "Conversion Type"
+#~ msgstr "Tipo de conversión"
 
 #: src/validation/CampaignSchema.tsx:151
 msgid "Conversion type must be Post Click or Post View"
@@ -696,7 +708,7 @@ msgstr "La URL de conversión no debe contener espacios en blanco"
 msgid "Conversion URL must start with https://"
 msgstr "La URL de conversión debe comenzar con https://"
 
-#: src/components/Conversion/ConversionDisplay.tsx:56
+#: src/components/Conversion/ConversionDisplay.tsx:46
 msgid "Conversion URL Pattern"
 msgstr "Patrón de URL de conversión"
 
@@ -724,7 +736,7 @@ msgstr ""
 msgid "Could not logout at this time. Please try again later."
 msgstr "No se pudo cerrar la sesión en este momento. Por favor, inténtelo de nuevo más tarde."
 
-#: src/components/Conversion/ConversionFields.tsx:54
+#: src/components/Conversion/ConversionFields.tsx:34
 msgid "Count conversions within X days of an impression"
 msgstr "Contar las conversiones en un plazo de X días a partir de una impresión."
 
@@ -987,7 +999,7 @@ msgstr "La fecha de finalización debe ser posterior a la fecha de inicio"
 msgid "End Time"
 msgstr "Hora de finalización"
 
-#: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:26
+#: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:27
 msgid "Enter a URL that represents your conversion goal, like a checkout or subscription confirmation page. <0/>Brave will count unique visits to that page from users who saw or clicked your ad."
 msgstr "Introduzca una URL que represente su objetivo de conversión, como una página de pago o de confirmación de suscripción. <0/>Brave contará las visitas únicas a esa página de los usuarios que vieron o hicieron clic en su anuncio."
 
@@ -1407,7 +1419,7 @@ msgstr "Inicie sesión en su cuenta de Brave Ads"
 msgid "Logging in"
 msgstr "Iniciando sesión"
 
-#: src/components/Navigation/AccountMenu.tsx:136
+#: src/components/Navigation/AccountMenu.tsx:134
 msgid "Logout"
 msgstr ""
 
@@ -1572,8 +1584,7 @@ msgstr "Anuncio de notificación"
 msgid "Notification ads"
 msgstr "Anuncios de notificación"
 
-#: src/components/Conversion/ConversionDisplay.tsx:51
-#: src/components/Conversion/ConversionFields.tsx:48
+#: src/components/Conversion/ConversionFields.tsx:28
 msgid "Observation Window"
 msgstr "Ventana de observación"
 
@@ -1644,7 +1655,7 @@ msgstr "Sistema Operativo"
 msgid "Other (please specify)"
 msgstr "Otro (por favor, especifique)"
 
-#: src/components/Navigation/AccountMenu.tsx:106
+#: src/components/Navigation/AccountMenu.tsx:104
 msgid "Other accounts"
 msgstr ""
 
@@ -1754,20 +1765,20 @@ msgid "Please specify how you heard about Brave Ads"
 msgstr "Por favor, especifique cómo se enteró de Brave Ads"
 
 #: src/components/Conversion/ConversionFields.tsx:20
-msgid "Post-Click"
-msgstr "Post-clic"
+#~ msgid "Post-Click"
+#~ msgstr "Post-clic"
 
 #: src/components/Conversion/ConversionFields.tsx:28
-msgid "Post-Click: Viewed ad and converted by clicking its link"
-msgstr "Post-clic: Anuncio visto y convertido al hacer clic en su enlace"
+#~ msgid "Post-Click: Viewed ad and converted by clicking its link"
+#~ msgstr "Post-clic: Anuncio visto y convertido al hacer clic en su enlace"
 
 #: src/components/Conversion/ConversionFields.tsx:19
-msgid "Post-View"
-msgstr "Post-vista"
+#~ msgid "Post-View"
+#~ msgstr "Post-vista"
 
 #: src/components/Conversion/ConversionFields.tsx:24
-msgid "Post-View: Viewed ad and converted by visiting site on their own."
-msgstr "Post-vista: Anuncio visto y convertido al visitar el sitio por su cuenta."
+#~ msgid "Post-View: Viewed ad and converted by visiting site on their own."
+#~ msgstr "Post-vista: Anuncio visto y convertido al visitar el sitio por su cuenta."
 
 #: src/auth/views/MobileAdsBenefits.tsx:22
 #~ msgid "Powerful ad formats"
@@ -1871,9 +1882,13 @@ msgstr ""
 msgid "Remove"
 msgstr "Eliminar"
 
+#: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:68
+msgid "Remove Conversion tracking"
+msgstr ""
+
 #: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:54
-msgid "Remove Conversion Tracking"
-msgstr "Eliminar seguimiento de conversión"
+#~ msgid "Remove Conversion Tracking"
+#~ msgstr "Eliminar seguimiento de conversión"
 
 #: src/user/analytics/analyticsOverview/reports/campaign/EngagementsOverview.tsx:117
 #~ msgid "Reporting not available yet for <0>{campaignName}</0>."
@@ -2300,8 +2315,8 @@ msgstr ""
 #~ msgstr "Inténtelo de nuevo"
 
 #: src/components/Conversion/ConversionFields.tsx:17
-msgid "Type"
-msgstr "Tipo"
+#~ msgid "Type"
+#~ msgstr "Tipo"
 
 #: src/components/Campaigns/CloneCampaign.tsx:43
 msgid "Unable to clone campaign"
@@ -2355,7 +2370,7 @@ msgstr "No se puede registrar su organización en este momento. Por favor, inté
 #~ msgid "Unable to retrieve ad sets or ads for Campaign."
 #~ msgstr "No se pueden recuperar los conjuntos de anuncios ni los anuncios para la campaña."
 
-#: src/user/views/user/CampaignView.tsx:34
+#: src/user/views/user/CampaignView.tsx:35
 msgid "Unable to retrieve Campaign data."
 msgstr "No se pueden recuperar los datos de la campaña."
 
@@ -2446,11 +2461,11 @@ msgstr "La URL no debe contener espacios en blanco"
 msgid "URL must start with https://"
 msgstr "La URL debe comenzar con https://"
 
-#: src/components/Conversion/ConversionFields.tsx:38
+#: src/components/Conversion/ConversionFields.tsx:18
 msgid "URL Pattern"
 msgstr "Patrón de URL"
 
-#: src/components/Conversion/ConversionFields.tsx:40
+#: src/components/Conversion/ConversionFields.tsx:20
 msgid "URL should have a trailing asterisk - Example: https://brave.com/products/*"
 msgstr "La URL debe tener un asterisco al final - Ejemplo: https://brave.com/products/*"
 
