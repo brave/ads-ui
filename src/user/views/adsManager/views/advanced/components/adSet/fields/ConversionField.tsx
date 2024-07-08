@@ -25,10 +25,10 @@ export function ConversionField({ index }: Props) {
             <Stack direction={hasConversions ? "row" : "column"} spacing={1}>
               <Typography variant="body2" sx={{ mb: 2 }}>
                 <Trans>
-                  Enter a URL that represents your conversion goal, like a
-                  checkout or subscription confirmation page. <br />
-                  Brave will count unique visits to that page from users who saw
-                  or clicked your ad.
+                  Enter a URL that indicates a desired action you want to
+                  measure, like a subscription or purchase confirmation page.
+                  Brave will count unique visits to that page as conversions if
+                  a user has seen or clicked your ad.
                 </Trans>{" "}
                 <LearnMoreButton helpSection="campaign-performance/reporting#conversion-reporting-in-brave-ads-manager" />
               </Typography>

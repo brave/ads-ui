@@ -49,11 +49,11 @@ msgstr ""
 msgid "+{count} more"
 msgstr "+{count} mais"
 
-#: src/components/Conversion/ConversionFields.tsx:30
+#: src/components/Conversion/ConversionFields.tsx:31
 msgid "1 Day"
 msgstr "1 Dia"
 
-#: src/components/Conversion/ConversionFields.tsx:32
+#: src/components/Conversion/ConversionFields.tsx:33
 msgid "30 Days"
 msgstr "30 Dias"
 
@@ -61,7 +61,7 @@ msgstr "30 Dias"
 msgid "401 Forbidden"
 msgstr "401 Proibido"
 
-#: src/components/Conversion/ConversionFields.tsx:31
+#: src/components/Conversion/ConversionFields.tsx:32
 msgid "7 Days"
 msgstr "7 Dias"
 
@@ -215,6 +215,10 @@ msgstr "Anúncios"
 #: src/user/ads/AdsExistingAd.tsx:80
 msgid "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously approved ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
 msgstr "Anúncios são blocos de construção modulares que podem ser combinados com conjuntos de anúncios para criar combinações únicas. Seus anúncios previamente aprovados serão exibidos aqui. Selecione usando a caixa ao lado do nome. Use o botão \"Seleção Completa\" para concluir."
+
+#: src/user/views/user/ConversionAlert.tsx:36
+msgid "Ads Help Center"
+msgstr ""
 
 #: src/routes/campaigns/analytics/breakdowns.tsx:135
 #~ msgid "AdSet Performance"
@@ -669,8 +673,16 @@ msgid "Conversion reporting change"
 msgstr ""
 
 #: src/user/views/user/ConversionAlert.tsx:14
-msgid "Conversion reporting for Brave Ads has changed to better uphold user privacy and security. Campaigns with conversion URLs that violate the newly clarified requirements for conversion URLs will now automatically be paused until their URLs have been updated. Please review the guidelines and take any necessary action to prevent campaign disruption. New guidelines can be found at: <0/>"
+#~ msgid "Conversion reporting for Brave Ads has changed to better uphold user privacy and security. Campaigns with conversion URLs that violate the newly clarified requirements for conversion URLs will now automatically be paused until their URLs have been updated. Please review the guidelines and take any necessary action to prevent campaign disruption. New guidelines can be found at in the <0/>"
+#~ msgstr ""
+
+#: src/user/views/user/ConversionAlert.tsx:14
+msgid "Conversion reporting for Brave Ads has changed to better uphold user privacy and security. Campaigns with conversion URLs that violate the newly clarified requirements for conversion URLs will now automatically be paused until their URLs have been updated. Please review the guidelines and take any necessary action to prevent campaign disruption. New guidelines can be found at the <0/>"
 msgstr ""
+
+#: src/user/views/user/ConversionAlert.tsx:14
+#~ msgid "Conversion reporting for Brave Ads has changed to better uphold user privacy and security. Campaigns with conversion URLs that violate the newly clarified requirements for conversion URLs will now automatically be paused until their URLs have been updated. Please review the guidelines and take any necessary action to prevent campaign disruption. New guidelines can be found at: <0/>"
+#~ msgstr ""
 
 #: src/components/Conversion/ConversionDisplay.tsx:46
 #~ msgid "Conversion Type"
@@ -725,8 +737,8 @@ msgid "Could not logout at this time. Please try again later."
 msgstr "Não foi possível fazer logout no momento. Por favor, tente novamente mais tarde."
 
 #: src/components/Conversion/ConversionFields.tsx:34
-msgid "Count conversions within X days of an impression"
-msgstr "Contar conversões dentro de X dias de uma visualização"
+#~ msgid "Count conversions within X days of an impression"
+#~ msgstr "Contar conversões dentro de X dias de uma visualização"
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:46
 #~ msgid "Counted if the user clicks an ad and spends at least 10 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count."
@@ -853,6 +865,10 @@ msgstr "Descriptografar Dados de Conversão?"
 #: src/user/views/adsManager/views/advanced/components/campaign/CampaignSettings.tsx:27
 msgid "Define how you want your campaign to run."
 msgstr "Defina como deseja que sua campanha seja executada."
+
+#: src/components/Conversion/ConversionFields.tsx:37
+msgid "Define the number of days Brave will observe conversions and attribute them to the campaign."
+msgstr ""
 
 #: src/user/ads/AdList.tsx:66
 #~ msgid "DELETED"
@@ -984,8 +1000,12 @@ msgid "End Time"
 msgstr "Horário de término"
 
 #: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:27
-msgid "Enter a URL that represents your conversion goal, like a checkout or subscription confirmation page. <0/>Brave will count unique visits to that page from users who saw or clicked your ad."
-msgstr "Digite uma URL que represente o seu objetivo de conversão, como uma página de finalização de compra/checkout ou confirmação de inscrição. <0/>O Brave irá contabilizar as visitas únicas a essa página feitas por usuários que visualizaram ou clicaram no seu anúncio."
+msgid "Enter a URL that indicates a desired action you want to measure, like a subscription or purchase confirmation page. Brave will count unique visits to that page as conversions if a user has seen or clicked your ad."
+msgstr ""
+
+#: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:27
+#~ msgid "Enter a URL that represents your conversion goal, like a checkout or subscription confirmation page. <0/>Brave will count unique visits to that page from users who saw or clicked your ad."
+#~ msgstr "Digite uma URL que represente o seu objetivo de conversão, como uma página de finalização de compra/checkout ou confirmação de inscrição. <0/>O Brave irá contabilizar as visitas únicas a essa página feitas por usuários que visualizaram ou clicaram no seu anúncio."
 
 #: src/auth/components/AdvertiserDetailsForm.tsx:118
 msgid "Enter Ads Manager"
@@ -1550,7 +1570,7 @@ msgstr "Anúncio de notificação"
 msgid "Notification ads"
 msgstr "Anúncios de notificação"
 
-#: src/components/Conversion/ConversionFields.tsx:28
+#: src/components/Conversion/ConversionFields.tsx:29
 msgid "Observation Window"
 msgstr "Janela de Observação"
 
@@ -2406,11 +2426,11 @@ msgstr "A URL não deve conter espaços em branco"
 msgid "URL must start with https://"
 msgstr "A URL deve começar com https://"
 
-#: src/components/Conversion/ConversionFields.tsx:18
+#: src/components/Conversion/ConversionFields.tsx:19
 msgid "URL Pattern"
 msgstr "Padrão de URL"
 
-#: src/components/Conversion/ConversionFields.tsx:20
+#: src/components/Conversion/ConversionFields.tsx:21
 msgid "URL should have a trailing asterisk - Example: https://brave.com/products/*"
 msgstr "A URL deve ter um asterisco no final - Exemplo: https://brave.com/produtos/*"
 

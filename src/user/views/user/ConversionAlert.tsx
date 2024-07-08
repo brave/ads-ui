@@ -17,7 +17,8 @@ export function ConversionAlert() {
           newly clarified requirements for conversion URLs will now
           automatically be paused until their URLs have been updated. Please
           review the guidelines and take any necessary action to prevent
-          campaign disruption. New guidelines can be found at: <GuidelineLink />
+          campaign disruption. New guidelines can be found at the{" "}
+          <GuidelineLink />
         </Trans>
       </Alert>
     </Collapse>
@@ -25,12 +26,14 @@ export function ConversionAlert() {
 }
 
 function GuidelineLink() {
-  const link =
-    "https://ads-help.brave.com/campaign-performance/reporting/#conversion-reporting-in-brave-ads-manager";
-
   return (
-    <Link href={link} target="_blank" rel="noreferrer" variant="inherit">
-      {link}
+    <Link
+      href="https://ads-help.brave.com/campaign-performance/reporting/#conversion-reporting-in-brave-ads-manager"
+      target="_blank"
+      rel="noreferrer"
+      variant="inherit"
+    >
+      <Trans>Ads Help Center</Trans>
     </Link>
   );
 }
