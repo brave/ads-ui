@@ -80,9 +80,9 @@ export type Creative = CreativeInputWithType & {
 };
 
 export const initialConversion: Conversion = {
-  type: "",
+  type: "postclick",
   urlPattern: "",
-  observationWindow: 0,
+  observationWindow: 30,
 };
 
 export const initialCreative: Creative = {
