@@ -1,8 +1,9 @@
-import { CreativeInput, LoadCreativeDocument } from "@/graphql-client/graphql";
+import { LoadCreativeDocument } from "@/graphql-client/graphql";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { useLingui } from "@lingui/react";
 import { msg } from "@lingui/macro";
 import { useQuery } from "@apollo/client";
+import { CreativeInputWithType } from "@/user/views/adsManager/types";
 
 export function useGetCreativeDetails(props: { id: string }) {
   const { advertiser } = useAdvertiser();
@@ -13,7 +14,7 @@ export function useGetCreativeDetails(props: { id: string }) {
   });
   const { _ } = useLingui();
 
-  const defaultValue: CreativeInput & { targetUrlValid?: string } = {
+  const defaultValue: CreativeInputWithType & { targetUrlValid?: string } = {
     advertiserId: advertiser.id,
     state: "under_review",
     name: "",
