@@ -1,21 +1,12 @@
 import { SearchPreview } from "@/components/Creatives/SearchPreview";
-import { SearchProspectsLandingPageListFragment } from "@/graphql-client/graphql";
-import {
-  Box,
-  Checkbox,
-  IconButton,
-  ListItem,
-  ListItemIcon,
-} from "@mui/material";
+import { Box, IconButton, ListItem } from "@mui/material";
 import React, { DispatchWithoutAction } from "react";
 import LoopIcon from "@mui/icons-material/Loop";
 import { LandingPageDetail } from "./LandingPageDetail";
-import { CountryDomain } from "./types";
+import { LandingPageInfo } from "./data";
 
 interface Props {
-  landingPage: SearchProspectsLandingPageListFragment;
-  selected: boolean;
-  toggleSelection: DispatchWithoutAction;
+  landingPage: LandingPageInfo;
 
   creativeIndex: number;
   nextCreative: DispatchWithoutAction;
@@ -24,33 +15,18 @@ interface Props {
 
   style: React.CSSProperties;
 
-  domain: CountryDomain;
-
   allowSelection: boolean;
 }
 
 export function LandingPageListEntry({
   landingPage,
-  selected,
-  toggleSelection,
   creativeIndex,
   nextCreative,
   hasMultipleCreatives,
-  domain,
   style,
-  allowSelection,
 }: Props) {
   return (
     <ListItem sx={{ height: 200 }} component="div" style={style}>
-      {allowSelection && (
-        <ListItemIcon sx={{ minWidth: 40 }}>
-          <Checkbox
-            edge="start"
-            checked={selected}
-            onChange={toggleSelection}
-          />
-        </ListItemIcon>
-      )}
       <SearchPreview
         title={landingPage.creatives[creativeIndex].title}
         body={landingPage.creatives[creativeIndex].body ?? ""}
@@ -68,7 +44,7 @@ export function LandingPageListEntry({
           <LoopIcon />
         </IconButton>
 
-        <LandingPageDetail landingPageUrl={landingPage.url} domain={domain} />
+        <LandingPageDetail landingPage={landingPage} />
       </Box>
     </ListItem>
   );

@@ -36,6 +36,7 @@
     "react-router-dom": "5.3.4",
     "react-virtualized-auto-sizer": "1.0.24",
     "react-window": "1.8.10",
+    "swr": "2.2.5",
     "tweetnacl": "1.0.3",
     "yup": "1.4.0"
   },

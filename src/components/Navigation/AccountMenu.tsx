@@ -31,6 +31,13 @@ export function AccountMenu() {
   const nonCurrentAdvertisers = advertisers.filter(
     (a) => a.id !== advertiser.id,
   );
+
+  // the navbar can be used for non-logged in users, so just don't display
+  // a profile if the user is not logged in
+  if (!user.userId) {
+    return null;
+  }
+
   return (
     <>
       <Tooltip title={<Trans>Account</Trans>} placement="bottom-start">
