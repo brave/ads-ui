@@ -2,7 +2,7 @@ import { ErrorBoundary } from "@/ErrorBoundary";
 import { Navbar } from "@/components/Navigation/Navbar";
 import { Box } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { useSearchData } from "./data";
+import { useLandingPageData } from "./data";
 import { SearchPreviewResults } from "./SearchPreviewResults";
 import { FullScreenProgress } from "@/components/FullScreenProgress";
 import { NoPreviewAvailable } from "./NoPreviewAvailable";
@@ -11,7 +11,7 @@ import { NoPreviewAvailable } from "./NoPreviewAvailable";
 
 export function SearchPreviewPage() {
   const { slug } = useParams<{ slug: string }>();
-  const { loading, data } = useSearchData(slug);
+  const { loading, data } = useLandingPageData(slug);
   return (
     <Box display="flex" height="100vh" width="100vw" flexDirection="row">
       <Navbar />

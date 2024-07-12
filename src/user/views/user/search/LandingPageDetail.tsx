@@ -68,7 +68,7 @@ function QueryList({
   );
 }
 
-function SkeletonQueryList() {
+export function SkeletonQueryList() {
   return _.range(0, 20).map((i) => (
     <Skeleton key={i} variant="rounded" width={_.random(50, 200)} />
   ));

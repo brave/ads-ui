@@ -1,7 +1,16 @@
 /* eslint-disable lingui/no-unlocalized-strings */
 import { CountryDomain } from "@/user/views/user/search/types";
+import { buildAdServerEndpoint } from "@/util/environment";
+import useSWR from "swr";
 
-export interface LandingPageInfo {
+/* this is the data we get back from the server */
+interface ServerSearchData {
+  countryDomain: CountryDomain;
+  fullCountryName: string;
+  landingPages: ServerLandingPageInfo[];
+}
+
+interface ServerLandingPageInfo {
   url: string;
   favicon: string;
   lastSeen: string;
@@ -9,59 +18,64 @@ export interface LandingPageInfo {
     title: string;
     body?: string | null;
   }>;
-  queries: string[];
 }
 
-export interface SearchData {
-  countryDomain: CountryDomain;
-  fullCountryName: string;
+/* and it's very convenient to have the slug in the data structures we pass round internally */
+export interface SearchData extends ServerSearchData {
   landingPages: LandingPageInfo[];
 }
 
-interface UseSearchDataReturn {
-  data?: SearchData;
+export interface LandingPageInfo extends ServerLandingPageInfo {
+  slug: string;
+}
+
+interface UseSearchDataReturn<T> {
+  data?: T;
   loading: boolean;
 }
 
-export function useSearchData(slug: string): UseSearchDataReturn {
-  if (slug === "loading") {
-    return {
-      loading: true,
-    };
-  }
+const fetcher = (suffix: string) =>
+  fetch(`${buildAdServerEndpoint("")}/search/preview/${suffix}`).then((r) => {
+    if (!r.ok) {
+      throw new Error(`Error fetching search data: ${r.status}`);
+    }
 
-  if (slug === "dummy") {
-    return {
-      loading: false,
-      data: {
-        countryDomain: {
-          country: "us",
-          domain: "example.com",
-        },
-        fullCountryName: "United States",
-        landingPages: [
-          {
-            url: "https://example.com",
-            lastSeen: "2021-01-01",
-            favicon: "/favicon.png",
-            queries: ["a", "b", "c"],
-            creatives: [
-              {
-                title: "Title 1",
-                body: "Body 1",
-              },
-              {
-                title: "Title 2",
-                body: "Body 2",
-              },
-            ],
-          },
-        ],
-      },
-    };
+    return r.json();
+  });
+
+export function useLandingPageData(
+  slug: string,
+): UseSearchDataReturn<SearchData> {
+  const { data, isLoading } = useSWR<ServerSearchData>(slug, fetcher);
+
+  if (!data) {
+    return { loading: isLoading };
   }
 
   return {
-    loading: false,
+    loading: isLoading,
+    data: {
+      ...data,
+      landingPages: data?.landingPages.map((lp) => ({
+        ...lp,
+        slug,
+      })),
+    },
+  };
+}
+
+export function useKeywordData(
+  slug: string,
+  landingPageUrl: string,
+): UseSearchDataReturn<string[]> {
+  const qs = new URLSearchParams({ url: landingPageUrl });
+  const { data, isLoading } = useSWR<string[]>(
+    `${slug}/keywords?${qs}`,
+    fetcher,
+  );
+
+  return {
+    loading: isLoading,
+    data,
   };
 }

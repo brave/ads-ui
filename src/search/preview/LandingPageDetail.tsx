@@ -2,8 +2,9 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, Chip, IconButton, Popover, Typography } from "@mui/material";
 import { useState } from "react";
-import { LandingPageInfo } from "./data";
+import { LandingPageInfo, useKeywordData } from "./data";
 import dayjs from "dayjs";
+import { SkeletonQueryList } from "@/user/views/user/search/LandingPageDetail";
 
 function QueryList({ queries }: { queries: string[] }) {
   const [visibleQueryCount, setVisibleQueryCount] = useState(20);
@@ -77,6 +78,8 @@ function LandingPageDetailContent({
 }: {
   landingPage: LandingPageInfo;
 }) {
+  const { data: queries } = useKeywordData(landingPage.slug, landingPage.url);
+
   return (
     <Box sx={{ padding: 2, width: 600, height: 300 }}>
       <Typography variant="h2" gutterBottom>
@@ -96,7 +99,7 @@ function LandingPageDetailContent({
       </Typography>
 
       <Box display="flex" flexWrap="wrap" gap={1} marginBottom={2}>
-        <QueryList queries={landingPage.queries} />
+        {queries ? <QueryList queries={queries} /> : <SkeletonQueryList />}
       </Box>
     </Box>
   );
