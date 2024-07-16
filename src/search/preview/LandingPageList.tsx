@@ -1,29 +1,21 @@
-import { SearchProspectsLandingPageListFragment } from "@/graphql-client/graphql";
 import { LandingPageListEntry } from "./LandingPageListEntry";
-import { Basket } from "./basket";
 
 import { FixedSizeList } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
-import { FullScreenProgress } from "@/components/FullScreenProgress";
-import { CountryDomain } from "./types";
+import { Basket } from "@/user/views/user/search/basket";
+import { LandingPageInfo } from "./data";
 
 interface Props {
-  domain: CountryDomain;
   basket: Basket;
-  landingPages: SearchProspectsLandingPageListFragment[] | undefined;
+  landingPages: LandingPageInfo[];
   allowSelection?: boolean;
 }
 
 export function LandingPageList({
   landingPages,
   basket,
-  domain,
   allowSelection = true,
 }: Props) {
-  if (!landingPages) {
-    return <FullScreenProgress />;
-  }
-
   return (
     <AutoSizer>
       {({ height, width }) => (
@@ -41,14 +33,9 @@ export function LandingPageList({
               <LandingPageListEntry
                 key={index}
                 style={style}
-                domain={domain}
                 landingPage={landingPage}
                 allowSelection={allowSelection}
                 hasMultipleCreatives={landingPage.creatives.length > 1}
-                selected={basket.isLandingPageSelected(landingPage.url)}
-                toggleSelection={() =>
-                  basket.toggleLandingPageSelection(landingPage.url)
-                }
                 creativeIndex={basket.creativeIndexForLandingPage(
                   landingPage.url,
                 )}
