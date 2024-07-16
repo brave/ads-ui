@@ -17,8 +17,8 @@ export function SearchPreviewPage() {
       <Navbar />
       <Box
         component="main"
-        marginTop="64px"
-        height="calc(100% - 64px)"
+        marginTop="72px"
+        height="calc(100% - 72px)"
         flex={1}
         overflow="hidden"
         padding={1}

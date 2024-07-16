@@ -4,6 +4,7 @@ import { CardContainer } from "@/components/Card/CardContainer";
 import { useBasket } from "@/user/views/user/search/basket";
 import { SummaryPanel } from "./SummaryPanel";
 import { LandingPageList } from "./LandingPageList";
+import { CallToAction } from "./CallToAction";
 
 /* eslint-disable lingui/no-unlocalized-strings */
 
@@ -17,7 +18,7 @@ export function SearchPreviewResults({ data }: Props) {
   return (
     <Container
       maxWidth={false}
-      sx={{ marginLeft: "auto", marginRight: "auto", maxWidth: "1055px" }}
+      sx={{ marginLeft: "auto", marginRight: "auto", maxWidth: "1240px" }}
     >
       <Box display="flex" gap={2}>
         <CardContainer
@@ -26,6 +27,8 @@ export function SearchPreviewResults({ data }: Props) {
             height: "calc(100vh - 110px)",
           }}
         >
+          <CallToAction domain={data.countryDomain.domain} />
+
           <LandingPageList
             landingPages={data.landingPages}
             basket={basket}
@@ -33,7 +36,7 @@ export function SearchPreviewResults({ data }: Props) {
           />
         </CardContainer>
 
-        <Box display="flex" flexDirection="column" gap={3}>
+        <Box display="flex" flexDirection="column" gap={2}>
           <SummaryPanel
             domain={data.countryDomain}
             countryName={data.fullCountryName}
