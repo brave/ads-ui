@@ -151,6 +151,17 @@ export const authorize = async (req: {
   return await res.json();
 };
 
+export const federate = async (): Promise<string> => {
+  const res = await fetch(buildAdServerV2Endpoint(`/auth/federated/google`), {
+    method: "GET",
+    mode: "cors",
+    credentials: "include",
+    redirect: "manual",
+  });
+
+  return await res.text();
+};
+
 export const sendMarketingEmail = async (req: {
   email: string;
   fullName: string;

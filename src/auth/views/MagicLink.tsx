@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Link, TextField, Typography } from "@mui/material";
+import { Link, Stack, TextField, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { useGetLink } from "@/auth/hooks/mutations/useGetLink";
 import { LoadingButton } from "@mui/lab";
@@ -8,6 +8,7 @@ import { AuthContainer } from "@/auth/views/components/AuthContainer";
 import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { SignInWithGoogle } from "@/auth/components/SignInWithGoogle";
 
 export function MagicLink() {
   const { trackMatomoEvent } = useTrackWithMatomo({
@@ -62,7 +63,7 @@ export function MagicLink() {
       <Typography sx={{ textAlign: "center", mb: 3 }} variant="subtitle1">
         <Trans>
           Enter your email address to get a secure login link. Use this link to
-          access your Brave Ads account.
+          access your Brave Ads account. Click Sign in with Google for SSO.
         </Trans>
       </Typography>
 
@@ -76,19 +77,23 @@ export function MagicLink() {
         helperText={error}
       />
 
-      <LoadingButton
-        color="primary"
-        size="large"
-        variant="contained"
-        sx={{ mt: 2, mb: 1 }}
-        disabled={loading}
-        loading={loading}
-        onClick={() => {
-          requestLink(email);
-        }}
-      >
-        <Trans>Get login link</Trans>
-      </LoadingButton>
+      <Stack direction="row" spacing={2} m={2}>
+        <LoadingButton
+          color="primary"
+          size="large"
+          variant="contained"
+          sx={{ mt: 2, mb: 1 }}
+          disabled={loading}
+          loading={loading}
+          onClick={() => {
+            requestLink(email);
+          }}
+        >
+          <Trans>Get login link</Trans>
+        </LoadingButton>
+
+        <SignInWithGoogle />
+      </Stack>
 
       <Link
         underline="none"
