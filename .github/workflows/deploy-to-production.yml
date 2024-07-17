@@ -28,6 +28,7 @@ jobs:
       - name: Build
         env:
           REACT_APP_SERVER_ADDRESS: ${{ secrets.REACT_PRODUCTION_APP_SERVER_ADDRESS }}
+          REACT_APP_GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           REACT_APP_GIT_SHA1: ${{ github.sha }}
         run: |
           export REACT_APP_BUILD_TIME=$(date -Iseconds)

@@ -1,11 +1,9 @@
 import { useEffect } from "react";
-import { useLoadGsi } from "@/auth/hooks/queries/useLoadGsi";
 import { useGoogleSignIn } from "@/auth/hooks/mutations/useGoogleSignIn";
 import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
 import { useHistory } from "react-router-dom";
 
 export function SignInWithGoogle() {
-  const loaded = useLoadGsi();
   const { trackMatomoEvent } = useTrackMatomoEvent();
   const history = useHistory();
 
@@ -20,11 +18,9 @@ export function SignInWithGoogle() {
   });
 
   useEffect(() => {
-    if (!loaded) return;
-
     const google = (window as any).google;
     google.accounts.id.initialize({
-      client_id: "test",
+      client_id: import.meta.env.REACT_APP_GOOGLE_CLIENT_ID,
       callback: (response: { credential: string }) =>
         signIn(response.credential),
     });
@@ -38,7 +34,7 @@ export function SignInWithGoogle() {
         logo_alignment: "left",
       },
     );
-  }, [loaded]);
+  }, []);
 
   return <div id="google-button-div"></div>;
 }

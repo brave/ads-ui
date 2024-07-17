@@ -80,9 +80,9 @@ export function MagicLink() {
       <Stack direction="row" spacing={2} m={2}>
         <LoadingButton
           color="primary"
-          size="medium"
+          size="small"
           variant="contained"
-          sx={{ mt: 2, mb: 1, width: 150 }}
+          sx={{ width: 150 }}
           disabled={loading}
           loading={loading}
           onClick={() => {
