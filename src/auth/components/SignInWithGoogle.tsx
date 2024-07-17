@@ -11,11 +11,11 @@ export function SignInWithGoogle() {
 
   const { signIn } = useGoogleSignIn({
     onSuccess() {
-      trackMatomoEvent("password-login", "success");
+      trackMatomoEvent("google-login", "success");
       history.replace("/user/main");
     },
     onError() {
-      trackMatomoEvent("password-login", "failed");
+      trackMatomoEvent("google-login", "failed");
     },
   });
 
