@@ -69,6 +69,7 @@ const SwitchHeader = (props: { current: number }) => {
     campaignId: values.id,
     campaignSource: CampaignSource.SelfServe,
     state: values.adSets[current].state,
+    id: values.adSets[current].id,
     advertiserId: advertiser.id,
   };
 
