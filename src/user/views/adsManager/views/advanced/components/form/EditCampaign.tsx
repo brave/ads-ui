@@ -106,6 +106,7 @@ export function EditCampaign() {
           setSubmitting(false);
         }}
         validationSchema={CampaignSchema(data.prices)}
+        enableReinitialize
       >
         <BaseForm hasPaymentIntent={hasPaymentIntent} prices={data.prices} />
       </Formik>
