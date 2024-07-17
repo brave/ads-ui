@@ -30,7 +30,7 @@ export const CountryPicker = ({ name, filter, label }: Props) => {
         <Box>
           <TextField
             {...params}
-            label={isError ? errorMessage : label ?? _(msg`Country`)}
+            label={isError ? errorMessage : (label ?? _(msg`Country`))}
             error={isError}
             autoComplete="country"
             margin="dense"
