@@ -41,3 +41,13 @@ it("should format USD values correctly", () => {
   expect(formatUsd(BigNumber(123.456))).toBe("$123.46");
   expect(formatUsd(BigNumber(123.556))).toBe("$123.56");
 });
+
+it("should format USD values correctly (dollars only)", () => {
+  expect(formatUsd(0.123456, { dollarsOnly: true })).toBe("$0");
+  expect(formatUsd(123.456, { dollarsOnly: true })).toBe("$123");
+  expect(formatUsd(123456, { dollarsOnly: true })).toBe("$123,456");
+  expect(formatUsd(-123456, { dollarsOnly: true })).toBe("-$123,456");
+  expect(formatUsd(BigNumber(0.123456), { dollarsOnly: true })).toBe("$0");
+  expect(formatUsd(BigNumber(123.456), { dollarsOnly: true })).toBe("$123");
+  expect(formatUsd(BigNumber(123.556), { dollarsOnly: true })).toBe("$124");
+});
