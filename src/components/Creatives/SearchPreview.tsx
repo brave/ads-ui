@@ -166,13 +166,15 @@ export function SearchPreview({ title, body, targetUrl, favicon }: Props) {
                   sx={{
                     alignItems: "center",
                     color: "var(--color-serp-breadcrumbs)",
-                    display: "flex",
+                    display: "block",
                     fontSize: "var(--text-sm)",
                     fontStyle: "normal",
                     lineHeight: "22px",
                     marginTop: searchRemToPx(-0.15),
                     maxWidth: "90%",
-                    overflow: "visible",
+                    overflow: "hidden",
+                    whiteSpace: "nowrap",
+                    textOverflow: "ellipsis",
                   }}
                 >
                   <SearchUrlDisplay url={url} />

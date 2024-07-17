@@ -39,7 +39,9 @@ export function OnOff({
     <Tooltip
       title={
         enabled ? (
-          `${tooltip} ${type}`
+          <>
+            {tooltip} {type}
+          </>
         ) : (
           <Trans>{type} status cannot be updated</Trans>
         )
