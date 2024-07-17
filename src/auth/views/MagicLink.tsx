@@ -63,7 +63,7 @@ export function MagicLink() {
       <Typography sx={{ textAlign: "center", mb: 3 }} variant="subtitle1">
         <Trans>
           Enter your email address to get a secure login link. Use this link to
-          access your Brave Ads account. Click Sign in with Google for SSO.
+          access your Brave Ads account. You can also sign in with Google.
         </Trans>
       </Typography>
 
@@ -80,9 +80,9 @@ export function MagicLink() {
       <Stack direction="row" spacing={2} m={2}>
         <LoadingButton
           color="primary"
-          size="large"
+          size="medium"
           variant="contained"
-          sx={{ mt: 2, mb: 1 }}
+          sx={{ mt: 2, mb: 1, width: 150 }}
           disabled={loading}
           loading={loading}
           onClick={() => {

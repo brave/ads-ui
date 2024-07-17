@@ -151,15 +151,20 @@ export const authorize = async (req: {
   return await res.json();
 };
 
-export const federate = async (): Promise<string> => {
-  const res = await fetch(buildAdServerV2Endpoint(`/auth/federated/google`), {
-    method: "GET",
+export const verify = async (credential: string): Promise<ResponseUser> => {
+  const res = await fetch(buildAdServerV2Endpoint(`/auth/verify/google`), {
+    method: "POST",
     mode: "cors",
     credentials: "include",
-    redirect: "manual",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ credential }),
   });
 
-  return await res.text();
+  if (!res.ok) {
+    throw new Error(t`Invalid Token`);
+  }
+
+  return await res.json();
 };
 
 export const sendMarketingEmail = async (req: {
