@@ -2,11 +2,13 @@ import { useGoogleSignIn } from "@/auth/hooks/mutations/useGoogleSignIn";
 import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
 import { useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useGetNonce } from "@/auth/hooks/mutations/useGetNonce";
 
 export function SignInWithGoogle() {
   const { trackMatomoEvent } = useTrackMatomoEvent();
   const history = useHistory();
   const loaded = useLoadGsi();
+  const { nonce } = useGetNonce();
 
   const { signIn } = useGoogleSignIn({
     onSuccess() {
@@ -20,12 +22,14 @@ export function SignInWithGoogle() {
 
   useEffect(() => {
     if (!loaded) return;
-
+    if (!nonce) return;
     const google = (window as any).google;
+
     google.accounts.id.initialize({
       client_id: import.meta.env.REACT_APP_GOOGLE_CLIENT_ID,
-      callback: (response: { credential: string }) =>
-        signIn(response.credential),
+      callback: (response: { credential: string }) => {
+        signIn(response.credential);
+      },
     });
     google.accounts.id.renderButton(
       document.getElementById("google-button-div"),
@@ -35,9 +39,10 @@ export function SignInWithGoogle() {
         shape: "pill",
         text: "continue_with",
         logo_alignment: "left",
+        nonce,
       },
     );
-  }, [loaded]);
+  }, [loaded, nonce]);
 
   return <div id="google-button-div"></div>;
 }

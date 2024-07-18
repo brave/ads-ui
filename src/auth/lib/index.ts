@@ -167,6 +167,20 @@ export const verify = async (credential: string): Promise<ResponseUser> => {
   return await res.json();
 };
 
+export const nonce = async (): Promise<string> => {
+  const res = await fetch(buildAdServerV2Endpoint(`/auth/nonce`), {
+    method: "GET",
+    mode: "cors",
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    throw new Error(t`Invalid Token`);
+  }
+
+  return await res.text();
+};
+
 export const sendMarketingEmail = async (req: {
   email: string;
   fullName: string;
