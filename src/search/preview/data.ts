@@ -8,6 +8,17 @@ interface ServerSearchData {
   countryDomain: CountryDomain;
   fullCountryName: string;
   landingPages: ServerLandingPageInfo[];
+  estimates: {
+    qpw: {
+      min: number;
+      max: number;
+    };
+    cpw: {
+      min: number;
+      max: number;
+    };
+    trialBudget: number;
+  };
 }
 
 interface ServerLandingPageInfo {
@@ -35,7 +46,7 @@ interface UseSearchDataReturn<T> {
 }
 
 const fetcher = (suffix: string) =>
-  fetch(`${buildAdServerEndpoint("")}/search/preview/${suffix}`).then((r) => {
+  fetch(`${buildAdServerEndpoint("/search/preview/")}${suffix}`).then((r) => {
     if (!r.ok) {
       throw new Error(`Error fetching search data: ${r.status}`);
     }
