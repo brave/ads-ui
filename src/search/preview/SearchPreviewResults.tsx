@@ -1,4 +1,4 @@
-import { Box, Container } from "@mui/material";
+import { Box } from "@mui/material";
 import { SearchData } from "./data";
 import { CardContainer } from "@/components/Card/CardContainer";
 import { useBasket } from "@/user/views/user/search/basket";
@@ -16,10 +16,7 @@ export function SearchPreviewResults({ data }: Props) {
   // we don't actually use the basket
   const basket = useBasket();
   return (
-    <Container
-      maxWidth={false}
-      sx={{ marginLeft: "auto", marginRight: "auto", maxWidth: "1240px" }}
-    >
+    <Box sx={{ marginLeft: "auto", marginRight: "auto", maxWidth: "1005px" }}>
       <Box display="flex" gap={2}>
         <CardContainer
           childSx={{
@@ -37,12 +34,9 @@ export function SearchPreviewResults({ data }: Props) {
         </CardContainer>
 
         <Box display="flex" flexDirection="column" gap={2}>
-          <SummaryPanel
-            domain={data.countryDomain}
-            countryName={data.fullCountryName}
-          />
+          <SummaryPanel searchData={data} />
         </Box>
       </Box>
-    </Container>
+    </Box>
   );
 }
