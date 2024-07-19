@@ -8,7 +8,7 @@ msgstr ""
 "Language: es_419\n"
 "Project-Id-Version: 27b1a082298d0ee642e56f654bcd7273\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-07-19 13:58\n"
+"PO-Revision-Date: 2024-07-19 18:23\n"
 "Last-Translator: \n"
 "Language-Team: Spanish, Latin America\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -2250,7 +2250,7 @@ msgstr "¡Responda nuestra encuesta!"
 
 #: src/search/SearchLandingPage.tsx:36
 msgid "Tap into more than <0>9 billion</0> annual Web searches"
-msgstr "Aproveche más de <0>9 mil millones<0> de búsquedas web anuales"
+msgstr "Aproveche más de <0>9 mil millones</0> de búsquedas web anuales"
 
 #: src/search/SearchLandingPage.tsx:32
 #~ msgid "Tap into over <0>9 billion</0> annual Web searches"
