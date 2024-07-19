@@ -29,7 +29,7 @@ msgstr ""
 msgid "{length}/{maxLength} characters"
 msgstr ""
 
-#: src/components/Switch/OnOff.tsx:44
+#: src/components/Switch/OnOff.tsx:46
 msgid "{type} status cannot be updated"
 msgstr ""
 
@@ -78,8 +78,8 @@ msgid "About Brave Ads"
 msgstr ""
 
 #: src/components/Drawer/MiniSideBar.tsx:57
-#: src/components/Navigation/AccountMenu.tsx:36
-#: src/components/Navigation/AccountMenu.tsx:95
+#: src/components/Navigation/AccountMenu.tsx:43
+#: src/components/Navigation/AccountMenu.tsx:102
 #: src/user/settings/Settings.tsx:49
 msgid "Account"
 msgstr ""
@@ -1169,7 +1169,7 @@ msgstr ""
 msgid "Help Center"
 msgstr ""
 
-#: src/components/Navigation/AccountMenu.tsx:82
+#: src/components/Navigation/AccountMenu.tsx:89
 msgid "Hi"
 msgstr ""
 
@@ -1263,7 +1263,7 @@ msgstr ""
 msgid "In a video on YouTube"
 msgstr ""
 
-#: src/components/Datagrid/renderers.tsx:34
+#: src/components/Datagrid/renderers.tsx:35
 msgid "In your local time this is"
 msgstr ""
 
@@ -1415,7 +1415,7 @@ msgstr ""
 msgid "Logging in"
 msgstr ""
 
-#: src/components/Navigation/AccountMenu.tsx:134
+#: src/components/Navigation/AccountMenu.tsx:141
 msgid "Logout"
 msgstr ""
 
@@ -1524,7 +1524,7 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: src/components/Datagrid/renderers.tsx:70
+#: src/components/Datagrid/renderers.tsx:71
 msgid "No"
 msgstr ""
 
@@ -1639,7 +1639,7 @@ msgstr ""
 msgid "Other (please specify)"
 msgstr ""
 
-#: src/components/Navigation/AccountMenu.tsx:104
+#: src/components/Navigation/AccountMenu.tsx:111
 msgid "Other accounts"
 msgstr ""
 
@@ -2047,7 +2047,7 @@ msgstr ""
 msgid "Spend"
 msgstr ""
 
-#: src/components/Creatives/SearchPreview.tsx:247
+#: src/components/Creatives/SearchPreview.tsx:249
 msgid "Sponsored"
 msgstr ""
 
@@ -2156,7 +2156,7 @@ msgstr ""
 msgid "Target URL is not valid"
 msgstr ""
 
-#: src/components/Creatives/hooks/useGetCreativeDetails.tsx:23
+#: src/components/Creatives/hooks/useGetCreativeDetails.tsx:24
 msgid "Target URL not validated"
 msgstr ""
 
@@ -2451,7 +2451,7 @@ msgstr ""
 msgid "Verified Conversions Report"
 msgstr ""
 
-#: src/components/Navigation/AccountMenu.tsx:92
+#: src/components/Navigation/AccountMenu.tsx:99
 msgid "View profile"
 msgstr ""
 
@@ -2521,7 +2521,7 @@ msgstr ""
 msgid "Work email"
 msgstr ""
 
-#: src/components/Datagrid/renderers.tsx:70
+#: src/components/Datagrid/renderers.tsx:71
 msgid "Yes"
 msgstr ""
 
