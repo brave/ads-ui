@@ -15,9 +15,11 @@ export function useGetNonce() {
       setNonce();
     }
 
-    setTimeout(() => {
+    const to = setTimeout(() => {
       setNonce();
     }, 180_000);
+
+    return () => clearTimeout(to);
   }, []);
 
   return { nonce: value };
