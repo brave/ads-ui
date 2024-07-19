@@ -8,7 +8,7 @@ msgstr ""
 "Language: es_419\n"
 "Project-Id-Version: 27b1a082298d0ee642e56f654bcd7273\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-07-08 14:01\n"
+"PO-Revision-Date: 2024-07-19 13:58\n"
 "Last-Translator: \n"
 "Language-Team: Spanish, Latin America\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -710,12 +710,20 @@ msgid "Conversion reporting change"
 msgstr "Cambio en la informe de conversión"
 
 #: src/user/views/user/ConversionAlert.tsx:14
+#~ msgid "Conversion reporting for Brave Ads has changed to better uphold user privacy and security. Campaigns with conversion URLs that violate the newly clarified requirements for conversion URLs will now automatically be paused until their URLs have been updated. Please review the guidelines and take any necessary action to prevent campaign disruption. New guidelines can be found at in the <0/>"
+#~ msgstr "Conversion reporting for Brave Ads has changed to better uphold user privacy and security. Campaigns with conversion URLs that violate the newly clarified requirements for conversion URLs will now automatically be paused until their URLs have been updated. Please review the guidelines and take any necessary action to prevent campaign disruption. New guidelines can be found at in the <0/>"
+
+#: src/user/views/user/ConversionAlert.tsx:14
 msgid "Conversion reporting for Brave Ads has changed to better uphold user privacy and security. Campaigns with conversion URLs that violate the newly clarified requirements for conversion URLs will now automatically be paused until their URLs have been updated. Please review the guidelines and take any necessary action to prevent campaign disruption. New guidelines can be found at the <0/>"
 msgstr "La informe de conversión para los Anuncios de Brave ha cambiado para mejorar la privacidad y la seguridad de los usuarios. Las campañas con URL de conversión que violen los requisitos recientemente aclarados para las URL de conversión se pausarán automáticamente hasta que se actualicen sus URL. Revise las pautas y tome las medidas necesarias para evitar interrupciones en la campaña. Las nuevas pautas se pueden encontrar en el <0/>"
 
+#: src/user/views/user/ConversionAlert.tsx:14
+#~ msgid "Conversion reporting for Brave Ads has changed to better uphold user privacy and security. Campaigns with conversion URLs that violate the newly clarified requirements for conversion URLs will now automatically be paused until their URLs have been updated. Please review the guidelines and take any necessary action to prevent campaign disruption. New guidelines can be found at: <0/>"
+#~ msgstr "Conversion reporting for Brave Ads has changed to better uphold user privacy and security. Campaigns with conversion URLs that violate the newly clarified requirements for conversion URLs will now automatically be paused until their URLs have been updated. Please review the guidelines and take any necessary action to prevent campaign disruption. New guidelines can be found at: <0/>"
+
 #: src/components/Conversion/ConversionDisplay.tsx:46
 #~ msgid "Conversion Type"
-#~ msgstr "Tipo de conversión"
+#~ msgstr "Conversion Type"
 
 #: src/validation/CampaignSchema.tsx:151
 msgid "Conversion type must be Post Click or Post View"
@@ -765,9 +773,9 @@ msgstr "Costo por clic"
 msgid "Could not logout at this time. Please try again later."
 msgstr "No se pudo cerrar la sesión en este momento. Por favor, inténtelo de nuevo más tarde."
 
-#: src/components/Conversion/ConversionFields.tsx:54
+#: src/components/Conversion/ConversionFields.tsx:34
 #~ msgid "Count conversions within X days of an impression"
-#~ msgstr "Contar las conversiones en un plazo de X días a partir de una impresión."
+#~ msgstr "Count conversions within X days of an impression"
 
 #: src/user/analytics/analyticsOverview/components/MetricSelect.tsx:46
 #~ msgid "Counted if the user clicks an ad and spends at least 10 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count."
@@ -1037,9 +1045,9 @@ msgstr "Hora de finalización"
 msgid "Enter a URL that indicates a desired action you want to measure, like a subscription or purchase confirmation page. Brave will count unique visits to that page as conversions if a user has seen or clicked your ad."
 msgstr "Introduzca una URL que indique una acción deseada que desea medir, como una página de confirmación de suscripción o compra. Brave contará las visitas únicas a esa página como conversiones si un usuario ha visto o hecho clic en su anuncio."
 
-#: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:26
+#: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:27
 #~ msgid "Enter a URL that represents your conversion goal, like a checkout or subscription confirmation page. <0/>Brave will count unique visits to that page from users who saw or clicked your ad."
-#~ msgstr "Introduzca una URL que represente su objetivo de conversión, como una página de pago o de confirmación de suscripción. <0/>Brave contará las visitas únicas a esa página de los usuarios que vieron o hicieron clic en su anuncio."
+#~ msgstr "Enter a URL that represents your conversion goal, like a checkout or subscription confirmation page. <0/>Brave will count unique visits to that page from users who saw or clicked your ad."
 
 #: src/auth/components/AdvertiserDetailsForm.tsx:118
 msgid "Enter Ads Manager"
@@ -1821,19 +1829,19 @@ msgstr "Por favor, especifique cómo se enteró de Brave Ads"
 
 #: src/components/Conversion/ConversionFields.tsx:20
 #~ msgid "Post-Click"
-#~ msgstr "Post-clic"
+#~ msgstr "Post-Click"
 
 #: src/components/Conversion/ConversionFields.tsx:28
 #~ msgid "Post-Click: Viewed ad and converted by clicking its link"
-#~ msgstr "Post-clic: Anuncio visto y convertido al hacer clic en su enlace"
+#~ msgstr "Post-Click: Viewed ad and converted by clicking its link"
 
 #: src/components/Conversion/ConversionFields.tsx:19
 #~ msgid "Post-View"
-#~ msgstr "Post-vista"
+#~ msgstr "Post-View"
 
 #: src/components/Conversion/ConversionFields.tsx:24
 #~ msgid "Post-View: Viewed ad and converted by visiting site on their own."
-#~ msgstr "Post-vista: Anuncio visto y convertido al visitar el sitio por su cuenta."
+#~ msgstr "Post-View: Viewed ad and converted by visiting site on their own."
 
 #: src/auth/views/MobileAdsBenefits.tsx:22
 #~ msgid "Powerful ad formats"
@@ -1947,7 +1955,7 @@ msgstr "Eliminar seguimiento de conversión"
 
 #: src/user/views/adsManager/views/advanced/components/adSet/fields/ConversionField.tsx:54
 #~ msgid "Remove Conversion Tracking"
-#~ msgstr "Eliminar seguimiento de conversión"
+#~ msgstr "Remove Conversion Tracking"
 
 #: src/auth/components/AdvertiserAgreed.tsx:14
 #~ msgid "Reporting"
@@ -2411,7 +2419,7 @@ msgstr "Haga una prueba gratuita de un mes para ver el rendimiento de Brave Sear
 
 #: src/components/Conversion/ConversionFields.tsx:17
 #~ msgid "Type"
-#~ msgstr "Tipo"
+#~ msgstr "Type"
 
 #: src/components/Campaigns/CloneCampaign.tsx:43
 msgid "Unable to clone campaign"
@@ -2733,3 +2741,4 @@ msgstr "Su campaña de prueba será revisada por un Gerente de Cuenta. Agregue c
 #: src/auth/components/AdvertiserAddress.tsx:51
 msgid "Zip / Postal Code"
 msgstr "Código postal"
+
