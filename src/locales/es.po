@@ -2250,7 +2250,7 @@ msgstr "¡Responda nuestra encuesta!"
 
 #: src/search/SearchLandingPage.tsx:36
 msgid "Tap into more than <0>9 billion</0> annual Web searches"
-msgstr "Aproveche más de <0>9 mil millones<0> de búsquedas web anuales"
+msgstr "Aproveche más de <0>9 mil millones</0> de búsquedas web anuales"
 
 #: src/search/SearchLandingPage.tsx:32
 #~ msgid "Tap into over <0>9 billion</0> annual Web searches"
@@ -2741,4 +2741,3 @@ msgstr "Su campaña de prueba será revisada por un Gerente de Cuenta. Agregue c
 #: src/auth/components/AdvertiserAddress.tsx:51
 msgid "Zip / Postal Code"
 msgstr "Código postal"
-
