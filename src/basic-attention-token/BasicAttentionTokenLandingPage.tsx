@@ -79,7 +79,7 @@ function LaunchCampaignButton() {
           trackMatomoEvent("basic-attention-token", "launch-campaign")
         }
         sx={{
-          width: "250px",
+          width: "300px",
           maxHeight: { xs: "40px", md: "60px" },
           mb: 1,
           fontSize: "16px",

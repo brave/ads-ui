@@ -1,4 +1,4 @@
-import { detect, fromUrl } from "@lingui/detect-locale";
+import { detect, fromNavigator, fromUrl } from "@lingui/detect-locale";
 import { enUS, esES, ptBR } from "@mui/x-data-grid/locales";
 
 import benefits from "@/assets/images/ad-benefits.svg";
@@ -27,7 +27,7 @@ export function findLocale() {
   let gridTheme = enUS;
   let images = { benefits };
 
-  const detectedLocale = detect(fromUrl("lang") /*fromNavigator(), */);
+  const detectedLocale = detect(fromUrl("lang"), fromNavigator());
 
   if (detectedLocale) {
     const matchedLocale = locales.find((l) =>
