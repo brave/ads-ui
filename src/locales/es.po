@@ -1013,13 +1013,12 @@ msgstr "Editar anuncio"
 #: src/auth/registration/BrowserForm.tsx:24
 #: src/auth/views/Login.tsx:43
 #: src/auth/views/MagicLink.tsx:74
-#: src/user/settings/UserForm.tsx:52
 msgid "Email"
 msgstr "Correo electrónico"
 
 #: src/validation/UserSchema.tsx:7
-msgid "Email address is required"
-msgstr "Se requiere una dirección de correo electrónico"
+#~ msgid "Email address is required"
+#~ msgstr "Se requiere una dirección de correo electrónico"
 
 #: src/user/campaignList/CampaignList.tsx:185
 msgid "End"
@@ -1076,6 +1075,10 @@ msgstr "Error al recuperar"
 #: src/components/Assets/hooks/useGetImagePreviewUrl.ts:50
 msgid "Failed to load image"
 msgstr "Error al cargar la imagen "
+
+#: src/user/settings/UserForm.tsx:41
+msgid "Failed to update profile: {0}"
+msgstr ""
 
 #: src/components/Assets/hooks/useUploadFile.ts:146
 msgid "Failed to upload image"
@@ -1147,11 +1150,11 @@ msgstr "URL de la página de destino completa"
 msgid "Full name"
 msgstr "Nombre completo"
 
-#: src/user/settings/UserForm.tsx:66
+#: src/user/settings/UserForm.tsx:68
 msgid "Full Name"
 msgstr "Nombre completo"
 
-#: src/validation/UserSchema.tsx:9
+#: src/validation/UserSchema.tsx:6
 msgid "Full name is required"
 msgstr "Se requiere el nombre completo"
 
@@ -1725,7 +1728,7 @@ msgid "Other source"
 msgstr "Otra fuente"
 
 #: src/auth/views/Login.tsx:51
-#: src/user/settings/UserForm.tsx:58
+#: src/user/settings/UserForm.tsx:74
 msgid "Password"
 msgstr "Contraseña"
 
@@ -1783,8 +1786,8 @@ msgid "Please enter a valid domain, for example: brave.com"
 msgstr "Por favor, introduzca un dominio válido, por ejemplo: brave.com"
 
 #: src/validation/UserSchema.tsx:8
-msgid "Please enter a valid email address"
-msgstr "Por favor, introduzca una dirección de correo electrónico válida"
+#~ msgid "Please enter a valid email address"
+#~ msgstr "Por favor, introduzca una dirección de correo electrónico válida"
 
 #: src/validation/CreativeSchema.tsx:19
 #: src/validation/RegistrationSchema.tsx:21
@@ -1909,7 +1912,7 @@ msgstr "Perfil"
 msgid "Profile API Key"
 msgstr "Clave API del perfil"
 
-#: src/user/settings/UserForm.tsx:36
+#: src/user/settings/UserForm.tsx:46
 msgid "Profile Details"
 msgstr "Detalles del perfil"
 
@@ -2453,7 +2456,7 @@ msgstr "No se puede descargar CSV"
 msgid "Unable to get campaign information for ad"
 msgstr "No se puede obtener la información de la campaña para el anuncio"
 
-#: src/user/settings/UserForm.tsx:24
+#: src/user/settings/UserForm.tsx:31
 msgid "Unable to get profile information"
 msgstr "No se puede obtener información del perfil"
 
@@ -2741,4 +2744,3 @@ msgstr "Su campaña de prueba será revisada por un Gerente de Cuenta. Agregue c
 #: src/auth/components/AdvertiserAddress.tsx:51
 msgid "Zip / Postal Code"
 msgstr "Código postal"
-

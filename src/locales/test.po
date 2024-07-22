@@ -972,13 +972,12 @@ msgstr ""
 #: src/auth/registration/BrowserForm.tsx:24
 #: src/auth/views/Login.tsx:43
 #: src/auth/views/MagicLink.tsx:74
-#: src/user/settings/UserForm.tsx:52
 msgid "Email"
 msgstr ""
 
 #: src/validation/UserSchema.tsx:7
-msgid "Email address is required"
-msgstr ""
+#~ msgid "Email address is required"
+#~ msgstr ""
 
 #: src/user/campaignList/CampaignList.tsx:185
 msgid "End"
@@ -1034,6 +1033,10 @@ msgstr ""
 
 #: src/components/Assets/hooks/useGetImagePreviewUrl.ts:50
 msgid "Failed to load image"
+msgstr ""
+
+#: src/user/settings/UserForm.tsx:41
+msgid "Failed to update profile: {0}"
 msgstr ""
 
 #: src/components/Assets/hooks/useUploadFile.ts:146
@@ -1098,11 +1101,11 @@ msgstr ""
 msgid "Full name"
 msgstr ""
 
-#: src/user/settings/UserForm.tsx:66
+#: src/user/settings/UserForm.tsx:68
 msgid "Full Name"
 msgstr ""
 
-#: src/validation/UserSchema.tsx:9
+#: src/validation/UserSchema.tsx:6
 msgid "Full name is required"
 msgstr ""
 
@@ -1648,7 +1651,7 @@ msgid "Other source"
 msgstr ""
 
 #: src/auth/views/Login.tsx:51
-#: src/user/settings/UserForm.tsx:58
+#: src/user/settings/UserForm.tsx:74
 msgid "Password"
 msgstr ""
 
@@ -1706,8 +1709,8 @@ msgid "Please enter a valid domain, for example: brave.com"
 msgstr ""
 
 #: src/validation/UserSchema.tsx:8
-msgid "Please enter a valid email address"
-msgstr ""
+#~ msgid "Please enter a valid email address"
+#~ msgstr ""
 
 #: src/validation/CreativeSchema.tsx:19
 #: src/validation/RegistrationSchema.tsx:21
@@ -1820,7 +1823,7 @@ msgstr ""
 msgid "Profile API Key"
 msgstr ""
 
-#: src/user/settings/UserForm.tsx:36
+#: src/user/settings/UserForm.tsx:46
 msgid "Profile Details"
 msgstr ""
 
@@ -2312,7 +2315,7 @@ msgstr ""
 msgid "Unable to get campaign information for ad"
 msgstr ""
 
-#: src/user/settings/UserForm.tsx:24
+#: src/user/settings/UserForm.tsx:31
 msgid "Unable to get profile information"
 msgstr ""
 
