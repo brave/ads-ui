@@ -11,6 +11,7 @@ import {
   CampaignFragment,
   CampaignPacingStrategies,
   CampaignSource,
+  CampaignState,
   CampaignType,
   CreativeFragment,
   PaymentType,
@@ -28,7 +29,7 @@ import { DeepPartial } from "@apollo/client/utilities";
 const BASE_CPM_CAMPAIGN_FRAGMENT: Readonly<CampaignFragment> = {
   id: "3495317a-bb47-4daf-8d3e-14cdc0e87457",
   name: "demo",
-  state: "under_review",
+  state: CampaignState.UnderReview,
   dailyCap: 1,
   priority: 1,
   passThroughRate: 1,
@@ -238,7 +239,7 @@ describe("new form tests", () => {
     paymentType: PaymentType.Radom,
     price: "6",
     startAt: dateString,
-    state: "draft",
+    state: CampaignState.Draft,
     validateStart: false,
   };
 
@@ -372,7 +373,7 @@ describe("edit form tests", () => {
     source: CampaignSource.SelfServe,
     spent: 0,
     startAt: undefined,
-    state: "active",
+    state: CampaignState.Active,
     type: CampaignType.Paid,
   };
 
