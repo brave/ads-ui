@@ -243,7 +243,7 @@ describe("new form tests", () => {
   };
 
   it("should transform campaign form", () => {
-    const res = _.omit(transformNewForm(form, "me"), ["startAt", "endAt"]);
+    const res = _.omit(transformNewForm(form), ["startAt", "endAt"]);
     expect(res).toMatchInlineSnapshot(`
       {
         "adSets": [
@@ -289,7 +289,6 @@ describe("new form tests", () => {
         "paymentType": "RADOM",
         "source": "self_serve",
         "state": "draft",
-        "userId": "me",
       }
     `);
   });
