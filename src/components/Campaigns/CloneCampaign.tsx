@@ -14,7 +14,6 @@ import { useContext, useState } from "react";
 import { createCampaignFromFragment } from "@/form/fragmentUtil";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import { useUser } from "@/auth/hooks/queries/useUser";
 import { FilterContext } from "@/state/context";
 import {
   AdvertiserCampaignsDocument,
@@ -36,7 +35,6 @@ interface Props {
 export function CloneCampaign({ campaign, disabled }: Props) {
   const { advertiser } = useAdvertiser();
   const { fromDate } = useContext(FilterContext);
-  const { userId } = useUser();
   const history = useHistory();
   const [open, setOpen] = useState(false);
   const { _ } = useLingui();
@@ -72,7 +70,7 @@ export function CloneCampaign({ campaign, disabled }: Props) {
           if (data.campaign) {
             copyCampaign({
               variables: {
-                input: createCampaignFromFragment(data.campaign, userId),
+                input: createCampaignFromFragment(data.campaign),
               },
             });
           } else {
