@@ -1778,8 +1778,8 @@
           {
             "name": "CPSV",
             "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "Experiment, no longer supported"
           }
         ],
         "possibleTypes": null
@@ -2160,7 +2160,7 @@
               "name": null,
               "ofType": {
                 "kind": "ENUM",
-                "name": "CampaignState",
+                "name": "CampaignEffectiveState",
                 "ofType": null
               }
             },
@@ -2572,8 +2572,8 @@
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
+                "kind": "ENUM",
+                "name": "CampaignState",
                 "ofType": null
               }
             },
@@ -2731,6 +2731,72 @@
         "possibleTypes": null
       },
       {
+        "kind": "ENUM",
+        "name": "CampaignEffectiveState",
+        "description": "This is deprecated and will soon be replaced with CamapignState",
+        "isOneOf": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "ACTIVE",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "COMPLETED",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DAYCOMPLETE",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DELETED",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DRAFT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "INVALID",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PAUSED",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "SUSPENDED",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "UNDER_REVIEW",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
         "kind": "INPUT_OBJECT",
         "name": "CampaignFilter",
         "description": null,
@@ -2777,8 +2843,8 @@
             "name": "state",
             "description": "only include campaigns with this state",
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
+              "kind": "ENUM",
+              "name": "CampaignState",
               "ofType": null
             },
             "defaultValue": null,
@@ -3046,55 +3112,55 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "ACTIVE",
+            "name": "active",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "COMPLETED",
+            "name": "completed",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "DAYCOMPLETE",
+            "name": "daycomplete",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "DELETED",
+            "name": "deleted",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "DRAFT",
+            "name": "draft",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "INVALID",
+            "name": "invalid",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "PAUSED",
+            "name": "paused",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "SUSPENDED",
+            "name": "suspended",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "UNDER_REVIEW",
+            "name": "under_review",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -5098,8 +5164,8 @@
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
+                "kind": "ENUM",
+                "name": "CampaignState",
                 "ofType": null
               }
             },
@@ -8821,6 +8887,18 @@
             "description": null,
             "args": [
               {
+                "name": "code",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "RegistrationDenial",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
                 "name": "id",
                 "description": null,
                 "type": {
@@ -8840,13 +8918,9 @@
                 "name": "ignore",
                 "description": null,
                 "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
-                    "ofType": null
-                  }
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
                 },
                 "defaultValue": "false",
                 "isDeprecated": false,
@@ -11140,6 +11214,18 @@
             "deprecationReason": null
           },
           {
+            "name": "denialCode",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "RegistrationDenial",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "description",
             "description": null,
             "args": [],
@@ -11251,6 +11337,48 @@
         "inputFields": null,
         "interfaces": [],
         "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "RegistrationDenial",
+        "description": null,
+        "isOneOf": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "bad_landing_page",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "content_cannot_run",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "domain_mismatch",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "language_not_supported",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "missing_tos",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
         "possibleTypes": null
       },
       {
@@ -11574,6 +11702,174 @@
         ],
         "inputFields": null,
         "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "SearchEligibilityCheck",
+        "description": null,
+        "isOneOf": null,
+        "fields": [
+          {
+            "name": "country",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createdAt",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "domain",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "email",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "fullName",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "status",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "totalDomains",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Numeric",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "SearchEligibilityFilter",
+        "description": null,
+        "isOneOf": false,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "status",
+            "description": "only include eligibility checks in any of these statuses",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -12492,6 +12788,43 @@
                   "ofType": {
                     "kind": "OBJECT",
                     "name": "SearchDomain",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "eligibilityChecks",
+            "description": null,
+            "args": [
+              {
+                "name": "filter",
+                "description": null,
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "SearchEligibilityFilter",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "SearchEligibilityCheck",
                     "ofType": null
                   }
                 }
@@ -14180,8 +14513,8 @@
             "name": "state",
             "description": null,
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
+              "kind": "ENUM",
+              "name": "CampaignState",
               "ofType": null
             },
             "defaultValue": null,

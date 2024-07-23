@@ -9,6 +9,7 @@ import {
   AdSetState,
   AdvertiserCampaignsDocument,
   CampaignSource,
+  CampaignState,
   CampaignSummaryFragment,
   LoadCampaignAdsDocument,
   LoadCampaignDocument,
@@ -103,7 +104,7 @@ export function campaignOnOffState(
     <OnOff
       onChange={(s) => {
         updateCampaign({
-          variables: { input: { id: c.id, state: s } },
+          variables: { input: { id: c.id, state: s as CampaignState } },
         });
       }}
       loading={loading}

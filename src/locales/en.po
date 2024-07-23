@@ -29,7 +29,7 @@ msgstr "{campaignFormat} pricing configuration option(s):"
 msgid "{length}/{maxLength} characters"
 msgstr "{length}/{maxLength} characters"
 
-#: src/components/Switch/OnOff.tsx:44
+#: src/components/Switch/OnOff.tsx:46
 msgid "{type} status cannot be updated"
 msgstr "{type} status cannot be updated"
 
@@ -82,8 +82,8 @@ msgstr "About Brave Ads"
 #~ msgstr "Access dashboard"
 
 #: src/components/Drawer/MiniSideBar.tsx:57
-#: src/components/Navigation/AccountMenu.tsx:36
-#: src/components/Navigation/AccountMenu.tsx:95
+#: src/components/Navigation/AccountMenu.tsx:43
+#: src/components/Navigation/AccountMenu.tsx:102
 #: src/user/settings/Settings.tsx:49
 msgid "Account"
 msgstr "Account"
@@ -446,7 +446,7 @@ msgstr "Budget"
 msgid "Business name"
 msgstr "Business name"
 
-#: src/validation/RegistrationSchema.tsx:14
+#: src/validation/RegistrationSchema.tsx:21
 msgid "Business name is required"
 msgstr "Business name is required"
 
@@ -454,7 +454,7 @@ msgstr "Business name is required"
 msgid "Business website"
 msgstr "Business website"
 
-#: src/validation/RegistrationSchema.tsx:16
+#: src/validation/RegistrationSchema.tsx:23
 msgid "Business Website is required"
 msgstr "Business Website is required"
 
@@ -956,7 +956,7 @@ msgstr "Documentation can be found <0>here</0> on how to use the API."
 msgid "Domain"
 msgstr "Domain"
 
-#: src/validation/RegistrationSchema.tsx:34
+#: src/validation/RegistrationSchema.tsx:41
 msgid "Domain is required"
 msgstr "Domain is required"
 
@@ -964,7 +964,7 @@ msgstr "Domain is required"
 #~ msgid "Domain must match the email domain"
 #~ msgstr "Domain must match the email domain"
 
-#: src/validation/RegistrationSchema.tsx:35
+#: src/validation/RegistrationSchema.tsx:42
 msgid "Domain must not contain any whitespace"
 msgstr "Domain must not contain any whitespace"
 
@@ -1008,11 +1008,10 @@ msgstr "Edit ad"
 #: src/auth/registration/BrowserForm.tsx:24
 #: src/auth/views/Login.tsx:43
 #: src/auth/views/MagicLink.tsx:74
-#: src/user/settings/UserForm.tsx:52
 msgid "Email"
 msgstr "Email"
 
-#: src/validation/UserSchema.tsx:7
+#: src/validation/RegistrationSchema.tsx:12
 msgid "Email address is required"
 msgstr "Email address is required"
 
@@ -1071,6 +1070,10 @@ msgstr "Failed to Fetch"
 #: src/components/Assets/hooks/useGetImagePreviewUrl.ts:50
 msgid "Failed to load image"
 msgstr "Failed to load image"
+
+#: src/user/settings/UserForm.tsx:41
+msgid "Failed to update profile: {0}"
+msgstr "Failed to update profile: {0}"
 
 #: src/components/Assets/hooks/useUploadFile.ts:146
 msgid "Failed to upload image"
@@ -1142,11 +1145,12 @@ msgstr "Full Landing Page URL"
 msgid "Full name"
 msgstr "Full name"
 
-#: src/user/settings/UserForm.tsx:66
+#: src/user/settings/UserForm.tsx:68
 msgid "Full Name"
 msgstr "Full Name"
 
-#: src/validation/UserSchema.tsx:9
+#: src/validation/RegistrationSchema.tsx:14
+#: src/validation/UserSchema.tsx:6
 msgid "Full name is required"
 msgstr "Full name is required"
 
@@ -1213,7 +1217,7 @@ msgstr "Get to your first million users with powerful ad placements on the world
 msgid "Help Center"
 msgstr "Help Center"
 
-#: src/components/Navigation/AccountMenu.tsx:82
+#: src/components/Navigation/AccountMenu.tsx:89
 msgid "Hi"
 msgstr "Hi"
 
@@ -1319,7 +1323,7 @@ msgstr "In a video on YouTube"
 #~ msgid "In the meantime, check out our <0>advertiser resources</0>. If you have any questions, please reach out to <1>selfserve@brave.com</1>."
 #~ msgstr "In the meantime, check out our <0>advertiser resources</0>. If you have any questions, please reach out to <1>selfserve@brave.com</1>."
 
-#: src/components/Datagrid/renderers.tsx:34
+#: src/components/Datagrid/renderers.tsx:35
 msgid "In your local time this is"
 msgstr "In your local time this is"
 
@@ -1471,7 +1475,7 @@ msgstr "Log into your Brave Ads account"
 msgid "Logging in"
 msgstr "Logging in"
 
-#: src/components/Navigation/AccountMenu.tsx:134
+#: src/components/Navigation/AccountMenu.tsx:141
 msgid "Logout"
 msgstr "Logout"
 
@@ -1592,7 +1596,7 @@ msgstr "Newsfeed ads"
 msgid "Next"
 msgstr "Next"
 
-#: src/components/Datagrid/renderers.tsx:70
+#: src/components/Datagrid/renderers.tsx:71
 msgid "No"
 msgstr "No"
 
@@ -1711,7 +1715,7 @@ msgstr "OS"
 msgid "Other (please specify)"
 msgstr "Other (please specify)"
 
-#: src/components/Navigation/AccountMenu.tsx:104
+#: src/components/Navigation/AccountMenu.tsx:111
 msgid "Other accounts"
 msgstr "Other accounts"
 
@@ -1720,7 +1724,7 @@ msgid "Other source"
 msgstr "Other source"
 
 #: src/auth/views/Login.tsx:51
-#: src/user/settings/UserForm.tsx:58
+#: src/user/settings/UserForm.tsx:74
 msgid "Password"
 msgstr "Password"
 
@@ -1773,16 +1777,16 @@ msgstr "Please confirm your account’s new private key:"
 msgid "Please enter a username and password"
 msgstr "Please enter a username and password"
 
-#: src/validation/RegistrationSchema.tsx:38
+#: src/validation/RegistrationSchema.tsx:45
 msgid "Please enter a valid domain, for example: brave.com"
 msgstr "Please enter a valid domain, for example: brave.com"
 
-#: src/validation/UserSchema.tsx:8
+#: src/validation/RegistrationSchema.tsx:13
 msgid "Please enter a valid email address"
 msgstr "Please enter a valid email address"
 
 #: src/validation/CreativeSchema.tsx:19
-#: src/validation/RegistrationSchema.tsx:21
+#: src/validation/RegistrationSchema.tsx:28
 msgid "Please enter a valid URL, for example https://brave.com"
 msgstr "Please enter a valid URL, for example https://brave.com"
 
@@ -1794,11 +1798,11 @@ msgstr "Please enter a valid URL, for example https://brave.com/product/*"
 msgid "Please enter an email."
 msgstr "Please enter an email."
 
-#: src/validation/RegistrationSchema.tsx:52
+#: src/validation/RegistrationSchema.tsx:59
 msgid "Please let us know how you heard about Brave Ads"
 msgstr "Please let us know how you heard about Brave Ads"
 
-#: src/validation/RegistrationSchema.tsx:24
+#: src/validation/RegistrationSchema.tsx:31
 msgid "Please let us know why you're interested in Brave Ads"
 msgstr "Please let us know why you're interested in Brave Ads"
 
@@ -1818,7 +1822,7 @@ msgstr "Please refresh the page to try again, or email <0/> for assistance."
 msgid "Please see our <0>Advertiser Privacy Policy</0> and <1>Terms of Service</1> applicable to Brave Ads."
 msgstr "Please see our <0>Advertiser Privacy Policy</0> and <1>Terms of Service</1> applicable to Brave Ads."
 
-#: src/validation/RegistrationSchema.tsx:57
+#: src/validation/RegistrationSchema.tsx:64
 msgid "Please specify how you heard about Brave Ads"
 msgstr "Please specify how you heard about Brave Ads"
 
@@ -1875,8 +1879,8 @@ msgstr "Pricing type must be CPM, CPC, or CPSV"
 msgid "Primary region of business"
 msgstr "Primary region of business"
 
-#: src/validation/RegistrationSchema.tsx:42
-#: src/validation/RegistrationSchema.tsx:45
+#: src/validation/RegistrationSchema.tsx:49
+#: src/validation/RegistrationSchema.tsx:52
 msgid "Primary region of business is required"
 msgstr "Primary region of business is required"
 
@@ -1904,7 +1908,7 @@ msgstr "Profile"
 msgid "Profile API Key"
 msgstr "Profile API Key"
 
-#: src/user/settings/UserForm.tsx:36
+#: src/user/settings/UserForm.tsx:46
 msgid "Profile Details"
 msgstr "Profile Details"
 
@@ -2143,7 +2147,7 @@ msgstr "Something went wrong."
 msgid "Spend"
 msgstr "Spend"
 
-#: src/components/Creatives/SearchPreview.tsx:247
+#: src/components/Creatives/SearchPreview.tsx:249
 msgid "Sponsored"
 msgstr "Sponsored"
 
@@ -2268,7 +2272,7 @@ msgstr "Target URL is a required field"
 msgid "Target URL is not valid"
 msgstr "Target URL is not valid"
 
-#: src/components/Creatives/hooks/useGetCreativeDetails.tsx:23
+#: src/components/Creatives/hooks/useGetCreativeDetails.tsx:24
 msgid "Target URL not validated"
 msgstr "Target URL not validated"
 
@@ -2448,7 +2452,7 @@ msgstr "Unable to download CSV"
 msgid "Unable to get campaign information for ad"
 msgstr "Unable to get campaign information for ad"
 
-#: src/user/settings/UserForm.tsx:24
+#: src/user/settings/UserForm.tsx:31
 msgid "Unable to get profile information"
 msgstr "Unable to get profile information"
 
@@ -2587,7 +2591,7 @@ msgstr "Value"
 msgid "Verified Conversions Report"
 msgstr "Verified Conversions Report"
 
-#: src/components/Navigation/AccountMenu.tsx:92
+#: src/components/Navigation/AccountMenu.tsx:99
 msgid "View profile"
 msgstr "View profile"
 
@@ -2617,11 +2621,11 @@ msgstr "We value your feedback and would love to hear your thoughts on your rece
 #~ msgid "We've updated our reporting view"
 #~ msgstr "We've updated our reporting view"
 
-#: src/validation/RegistrationSchema.tsx:17
+#: src/validation/RegistrationSchema.tsx:24
 msgid "Website must not contain any whitespace"
 msgstr "Website must not contain any whitespace"
 
-#: src/validation/RegistrationSchema.tsx:18
+#: src/validation/RegistrationSchema.tsx:25
 msgid "Website must start with https://"
 msgstr "Website must start with https://"
 
@@ -2665,7 +2669,7 @@ msgstr "Windows"
 msgid "Work email"
 msgstr "Work email"
 
-#: src/components/Datagrid/renderers.tsx:70
+#: src/components/Datagrid/renderers.tsx:71
 msgid "Yes"
 msgstr "Yes"
 

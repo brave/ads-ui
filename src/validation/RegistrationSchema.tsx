@@ -1,11 +1,18 @@
 import { object, string } from "yup";
 import { t } from "@lingui/macro";
-import { UserSchema } from "@/validation/UserSchema";
 
 const SimpleUrlRegexp = /https:\/\/.+\.[a-zA-Z]{2,}\/?.*/g;
 const NoSpacesRegex = /^\S*$/;
 const HttpsRegex = /^https:\/\//;
 const DomainRegex = /^(?!-)[A-Za-z0-9-]+([-.][a-z0-9]+)*\.[A-Za-z]{2,}$/;
+
+const UserSchema = () =>
+  object().shape({
+    email: string()
+      .required(t`Email address is required`)
+      .email(t`Please enter a valid email address`),
+    fullName: string().required(t`Full name is required`),
+  });
 
 const BrowserRegistrationSchema = () =>
   object().shape({

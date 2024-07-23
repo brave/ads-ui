@@ -20,10 +20,7 @@ import BigNumber from "bignumber.js";
 import { t } from "@lingui/macro";
 import dayjs from "dayjs";
 
-export function transformNewForm(
-  form: CampaignForm,
-  userId?: string,
-): CreateCampaignInput {
+export function transformNewForm(form: CampaignForm): CreateCampaignInput {
   return {
     currency: form.currency,
     externalId: "",
@@ -33,7 +30,6 @@ export function transformNewForm(
     name: form.name,
     advertiserId: form.advertiserId,
     format: form.format,
-    userId: userId,
     source: "self_serve",
     startAt: form.startAt,
     state: form.state,

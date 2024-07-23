@@ -196,6 +196,7 @@ export type ApproveCampaignInput = {
 export enum BillingType {
   Cpc = 'CPC',
   Cpm = 'CPM',
+  /** @deprecated Experiment, no longer supported */
   Cpsv = 'CPSV'
 }
 
@@ -225,7 +226,7 @@ export type Campaign = {
   dayPartings: Array<DayParting>;
   /** For NTP SI campaigns, the proportion of day allocated from 0 (none) to 1 (dedicated) */
   dayProportion?: Maybe<Scalars['Float']['output']>;
-  effectiveState: CampaignState;
+  effectiveState: CampaignEffectiveState;
   endAt: Scalars['DateTime']['output'];
   engagements: Array<Engagement>;
   engagementsByCountry: Array<CountryEngagement>;
@@ -251,7 +252,7 @@ export type Campaign = {
   /** An approximation of the total spent on the campaign, billable only */
   spentBillable: Scalars['Float']['output'];
   startAt: Scalars['DateTime']['output'];
-  state: Scalars['String']['output'];
+  state: CampaignState;
   stripePaymentId?: Maybe<Scalars['String']['output']>;
   type: CampaignType;
   validationFailures: Array<CampaignValidationFailure>;
@@ -283,6 +284,19 @@ export type CampaignComment = {
   user: User;
 };
 
+/** This is deprecated and will soon be replaced with CamapignState */
+export enum CampaignEffectiveState {
+  Active = 'ACTIVE',
+  Completed = 'COMPLETED',
+  Daycomplete = 'DAYCOMPLETE',
+  Deleted = 'DELETED',
+  Draft = 'DRAFT',
+  Invalid = 'INVALID',
+  Paused = 'PAUSED',
+  Suspended = 'SUSPENDED',
+  UnderReview = 'UNDER_REVIEW'
+}
+
 export type CampaignFilter = {
   /** only include campaigns for this format */
   format?: InputMaybe<CampaignFormat>;
@@ -291,7 +305,7 @@ export type CampaignFilter = {
   /** only include campaigns with this source */
   source?: InputMaybe<CampaignSource>;
   /** only include campaigns with this state */
-  state?: InputMaybe<Scalars['String']['input']>;
+  state?: InputMaybe<CampaignState>;
   /** exclude all campaigns whose time range is completely after this time */
   to?: InputMaybe<Scalars['DateTime']['input']>;
 };
@@ -337,15 +351,15 @@ export enum CampaignSource {
 }
 
 export enum CampaignState {
-  Active = 'ACTIVE',
-  Completed = 'COMPLETED',
-  Daycomplete = 'DAYCOMPLETE',
-  Deleted = 'DELETED',
-  Draft = 'DRAFT',
-  Invalid = 'INVALID',
-  Paused = 'PAUSED',
-  Suspended = 'SUSPENDED',
-  UnderReview = 'UNDER_REVIEW'
+  Active = 'active',
+  Completed = 'completed',
+  Daycomplete = 'daycomplete',
+  Deleted = 'deleted',
+  Draft = 'draft',
+  Invalid = 'invalid',
+  Paused = 'paused',
+  Suspended = 'suspended',
+  UnderReview = 'under_review'
 }
 
 export enum CampaignType {
@@ -535,7 +549,7 @@ export type CreateCampaignInput = {
   priority?: InputMaybe<Scalars['Float']['input']>;
   source: Scalars['String']['input'];
   startAt: Scalars['DateTime']['input'];
-  state: Scalars['String']['input'];
+  state: CampaignState;
   type?: CampaignType;
   userId?: InputMaybe<Scalars['String']['input']>;
 };
@@ -973,8 +987,9 @@ export type MutationRejectAdvertiserArgs = {
 
 
 export type MutationRejectAdvertiserRegistrationArgs = {
+  code?: InputMaybe<RegistrationDenial>;
   id: Scalars['String']['input'];
-  ignore?: Scalars['Boolean']['input'];
+  ignore?: InputMaybe<Scalars['Boolean']['input']>;
   reason: Scalars['String']['input'];
 };
 
@@ -1271,6 +1286,7 @@ export type Registration = {
   __typename?: 'Registration';
   businessName: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
+  denialCode?: Maybe<RegistrationDenial>;
   description: Scalars['String']['output'];
   email: Scalars['String']['output'];
   fullName: Scalars['String']['output'];
@@ -1279,6 +1295,14 @@ export type Registration = {
   state: RegistrationState;
   url: Scalars['String']['output'];
 };
+
+export enum RegistrationDenial {
+  BadLandingPage = 'bad_landing_page',
+  ContentCannotRun = 'content_cannot_run',
+  DomainMismatch = 'domain_mismatch',
+  LanguageNotSupported = 'language_not_supported',
+  MissingTos = 'missing_tos'
+}
 
 export type RegistrationFilter = {
   state?: InputMaybe<Scalars['String']['input']>;
@@ -1325,6 +1349,23 @@ export type SearchDomainEligibility = {
   estimatedQpw: Scalars['String']['output'];
   status: Scalars['String']['output'];
   trialBudget: Scalars['String']['output'];
+};
+
+export type SearchEligibilityCheck = {
+  __typename?: 'SearchEligibilityCheck';
+  country: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  domain: Scalars['String']['output'];
+  email: Scalars['String']['output'];
+  fullName: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  status: Scalars['String']['output'];
+  totalDomains?: Maybe<Scalars['Numeric']['output']>;
+};
+
+export type SearchEligibilityFilter = {
+  /** only include eligibility checks in any of these statuses */
+  status?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
 export type SearchHomepagePayload = {
@@ -1410,6 +1451,7 @@ export type SearchPayloadInput = {
 export type SearchProspects = {
   __typename?: 'SearchProspects';
   domains: Array<SearchDomain>;
+  eligibilityChecks: Array<SearchEligibilityCheck>;
   eligibilityStats: SearchDomainEligibility;
   landingPage: SearchLandingPage;
   landingPages: Array<SearchLandingPage>;
@@ -1422,6 +1464,11 @@ export type SearchProspectsDomainsArgs = {
   limit?: InputMaybe<Scalars['Float']['input']>;
   offset?: InputMaybe<Scalars['Float']['input']>;
   partialDomain: Scalars['String']['input'];
+};
+
+
+export type SearchProspectsEligibilityChecksArgs = {
+  filter?: InputMaybe<SearchEligibilityFilter>;
 };
 
 
@@ -1573,7 +1620,7 @@ export type UpdateCampaignInput = {
   paymentType?: InputMaybe<PaymentType>;
   priority?: InputMaybe<Scalars['Float']['input']>;
   startAt?: InputMaybe<Scalars['DateTime']['input']>;
-  state?: InputMaybe<Scalars['String']['input']>;
+  state?: InputMaybe<CampaignState>;
   stripePaymentId?: InputMaybe<Scalars['String']['input']>;
   type?: InputMaybe<CampaignType>;
 };
@@ -1701,7 +1748,7 @@ export type AdvertiserQueryVariables = Exact<{
 
 export type AdvertiserQuery = { __typename?: 'Query', advertiser?: { __typename?: 'Advertiser', id: string, publicKey?: string | null } | null };
 
-export type AdvertiserCampaignsFragment = { __typename?: 'Advertiser', id: string, name: string, selfServiceManageCampaign: boolean, selfServiceSetPrice: boolean, campaigns: Array<{ __typename?: 'Campaign', id: string, name: string, state: string, dailyCap: number, priority: number, passThroughRate: number, pacingOverride: boolean, pacingStrategy: CampaignPacingStrategies, externalId?: string | null, currency: string, budget: number, paymentType: PaymentType, createdAt: string, startAt: string, endAt: string, source: CampaignSource, type: CampaignType, format: CampaignFormat, dayProportion?: number | null, brandedKeywords?: Array<string> | null, advertiser: { __typename?: 'Advertiser', id: string, name: string } }> };
+export type AdvertiserCampaignsFragment = { __typename?: 'Advertiser', id: string, name: string, selfServiceManageCampaign: boolean, selfServiceSetPrice: boolean, campaigns: Array<{ __typename?: 'Campaign', id: string, name: string, state: CampaignState, dailyCap: number, priority: number, passThroughRate: number, pacingOverride: boolean, pacingStrategy: CampaignPacingStrategies, externalId?: string | null, currency: string, budget: number, paymentType: PaymentType, createdAt: string, startAt: string, endAt: string, source: CampaignSource, type: CampaignType, format: CampaignFormat, dayProportion?: number | null, brandedKeywords?: Array<string> | null, advertiser: { __typename?: 'Advertiser', id: string, name: string } }> };
 
 export type AdvertiserCampaignsQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -1709,7 +1756,7 @@ export type AdvertiserCampaignsQueryVariables = Exact<{
 }>;
 
 
-export type AdvertiserCampaignsQuery = { __typename?: 'Query', advertiserCampaigns?: { __typename?: 'Advertiser', id: string, name: string, selfServiceManageCampaign: boolean, selfServiceSetPrice: boolean, campaigns: Array<{ __typename?: 'Campaign', id: string, name: string, state: string, dailyCap: number, priority: number, passThroughRate: number, pacingOverride: boolean, pacingStrategy: CampaignPacingStrategies, externalId?: string | null, currency: string, budget: number, paymentType: PaymentType, createdAt: string, startAt: string, endAt: string, source: CampaignSource, type: CampaignType, format: CampaignFormat, dayProportion?: number | null, brandedKeywords?: Array<string> | null, advertiser: { __typename?: 'Advertiser', id: string, name: string } }> } | null };
+export type AdvertiserCampaignsQuery = { __typename?: 'Query', advertiserCampaigns?: { __typename?: 'Advertiser', id: string, name: string, selfServiceManageCampaign: boolean, selfServiceSetPrice: boolean, campaigns: Array<{ __typename?: 'Campaign', id: string, name: string, state: CampaignState, dailyCap: number, priority: number, passThroughRate: number, pacingOverride: boolean, pacingStrategy: CampaignPacingStrategies, externalId?: string | null, currency: string, budget: number, paymentType: PaymentType, createdAt: string, startAt: string, endAt: string, source: CampaignSource, type: CampaignType, format: CampaignFormat, dayProportion?: number | null, brandedKeywords?: Array<string> | null, advertiser: { __typename?: 'Advertiser', id: string, name: string } }> } | null };
 
 export type AdvertiserImageFragment = { __typename?: 'AdvertiserImage', name: string, imageUrl: string, format: CampaignFormat, id: string, createdAt: string };
 
@@ -1745,14 +1792,14 @@ export type UploadAdvertiserImageMutation = { __typename?: 'Mutation', createAdv
 
 export type EngagementFragment = { __typename?: 'Engagement', creativeinstanceid: string, createdat: string, type: string, pricetype: string, creativesetname?: string | null, creativesetid: string, creativename: string, creativeid: string, creativestate: string, creativepayload: string, view: string, click: string, viewthroughConversion: string, clickthroughConversion: string, conversion: string, dismiss: string, downvote: string, landed: string, spend: string, upvote: string, price: number, android: number, ios: number, linux: number, macos: number, windows: number };
 
-export type CampaignWithEngagementsFragment = { __typename?: 'Campaign', id: string, name: string, state: string, budget: number, spent: number, createdAt: string, startAt: string, endAt: string, currency: string, pacingIndex?: number | null, format: CampaignFormat, adSets: Array<{ __typename?: 'AdSet', id: string, conversions: Array<{ __typename?: 'Conversion', id: string, type: string, extractExternalId: boolean }> }>, engagements: Array<{ __typename?: 'Engagement', creativeinstanceid: string, createdat: string, type: string, pricetype: string, creativesetname?: string | null, creativesetid: string, creativename: string, creativeid: string, creativestate: string, creativepayload: string, view: string, click: string, viewthroughConversion: string, clickthroughConversion: string, conversion: string, dismiss: string, downvote: string, landed: string, spend: string, upvote: string, price: number, android: number, ios: number, linux: number, macos: number, windows: number }> };
+export type CampaignWithEngagementsFragment = { __typename?: 'Campaign', id: string, name: string, state: CampaignState, budget: number, spent: number, createdAt: string, startAt: string, endAt: string, currency: string, pacingIndex?: number | null, format: CampaignFormat, adSets: Array<{ __typename?: 'AdSet', id: string, conversions: Array<{ __typename?: 'Conversion', id: string, type: string, extractExternalId: boolean }> }>, engagements: Array<{ __typename?: 'Engagement', creativeinstanceid: string, createdat: string, type: string, pricetype: string, creativesetname?: string | null, creativesetid: string, creativename: string, creativeid: string, creativestate: string, creativepayload: string, view: string, click: string, viewthroughConversion: string, clickthroughConversion: string, conversion: string, dismiss: string, downvote: string, landed: string, spend: string, upvote: string, price: number, android: number, ios: number, linux: number, macos: number, windows: number }> };
 
 export type AnalyticOverviewQueryVariables = Exact<{
   id: Scalars['String']['input'];
 }>;
 
 
-export type AnalyticOverviewQuery = { __typename?: 'Query', campaign?: { __typename?: 'Campaign', id: string, name: string, state: string, budget: number, spent: number, createdAt: string, startAt: string, endAt: string, currency: string, pacingIndex?: number | null, format: CampaignFormat, adSets: Array<{ __typename?: 'AdSet', id: string, conversions: Array<{ __typename?: 'Conversion', id: string, type: string, extractExternalId: boolean }> }>, engagements: Array<{ __typename?: 'Engagement', creativeinstanceid: string, createdat: string, type: string, pricetype: string, creativesetname?: string | null, creativesetid: string, creativename: string, creativeid: string, creativestate: string, creativepayload: string, view: string, click: string, viewthroughConversion: string, clickthroughConversion: string, conversion: string, dismiss: string, downvote: string, landed: string, spend: string, upvote: string, price: number, android: number, ios: number, linux: number, macos: number, windows: number }> } | null };
+export type AnalyticOverviewQuery = { __typename?: 'Query', campaign?: { __typename?: 'Campaign', id: string, name: string, state: CampaignState, budget: number, spent: number, createdAt: string, startAt: string, endAt: string, currency: string, pacingIndex?: number | null, format: CampaignFormat, adSets: Array<{ __typename?: 'AdSet', id: string, conversions: Array<{ __typename?: 'Conversion', id: string, type: string, extractExternalId: boolean }> }>, engagements: Array<{ __typename?: 'Engagement', creativeinstanceid: string, createdat: string, type: string, pricetype: string, creativesetname?: string | null, creativesetid: string, creativename: string, creativeid: string, creativestate: string, creativepayload: string, view: string, click: string, viewthroughConversion: string, clickthroughConversion: string, conversion: string, dismiss: string, downvote: string, landed: string, spend: string, upvote: string, price: number, android: number, ios: number, linux: number, macos: number, windows: number }> } | null };
 
 export type CampaignMetricSummaryValuesFragment = { __typename?: 'Metrics', click: string, impression: string, siteVisit: string, spendUsd: string, rates: { __typename?: 'MetricRates', clickThrough: string } };
 
@@ -1783,25 +1830,25 @@ export type FetchAdSetMetricsForCampaignQueryVariables = Exact<{
 
 export type FetchAdSetMetricsForCampaignQuery = { __typename?: 'Query', performance: { __typename?: 'PerformanceResults', values: Array<{ __typename?: 'Performance', dimensions: { __typename?: 'Dimensions', adSet: { __typename?: 'AdSet', id: string, name: string, state: AdSetState, billingType?: string | null } }, metrics: { __typename?: 'Metrics', click: string, impression: string, siteVisit: string, conversion: string, dismiss: string, spendUsd: string, rates: { __typename?: 'MetricRates', clickThrough: string, clickToConversion: string, costPerAcquisition: string } } }> } };
 
-export type CampaignFragment = { __typename?: 'Campaign', id: string, name: string, state: string, dailyCap: number, priority: number, passThroughRate: number, pacingOverride: boolean, pacingStrategy: CampaignPacingStrategies, externalId?: string | null, currency: string, budget: number, spent: number, createdAt: string, startAt: string, endAt: string, source: CampaignSource, type: CampaignType, format: CampaignFormat, paymentType: PaymentType, dayProportion?: number | null, stripePaymentId?: string | null, hasPaymentIntent: boolean, dayPartings: Array<{ __typename?: 'DayParting', dow: string, startMinute: number, endMinute: number }>, geoTargets: Array<{ __typename?: 'Geocode', code: string, name: string }>, adSets: Array<{ __typename?: 'AdSet', id: string, price: string, createdAt: string, billingType?: string | null, name: string, totalMax: number, perDay: number, state: AdSetState, segments: Array<{ __typename?: 'Segment', code: string, name: string }>, oses: Array<{ __typename?: 'OS', code: string, name: string }>, conversions: Array<{ __typename?: 'Conversion', id: string, type: string, urlPattern: string, observationWindow: number }>, ads: Array<{ __typename?: 'Ad', id: string, state: string, creative: { __typename?: 'Creative', id: string, createdAt: string, modifiedAt: string, name: string, state: string, type: { __typename?: 'CreativeType', code: string }, payloadNotification?: { __typename?: 'NotificationPayload', body: string, title: string, targetUrl: string } | null, payloadNewTabPage?: { __typename?: 'NewTabPagePayload', logo?: { __typename?: 'Logo', imageUrl: string, alt: string, companyName: string, destinationUrl: string } | null, wallpapers?: Array<{ __typename?: 'Wallpaper', imageUrl: string, focalPoint: { __typename?: 'FocalPoint', x: number, y: number } }> | null } | null, payloadInlineContent?: { __typename?: 'InlineContentPayload', title: string, ctaText: string, imageUrl: string, targetUrl: string, dimensions: string, description: string } | null, payloadSearch?: { __typename?: 'SearchPayload', body: string, title: string, targetUrl: string } | null, payloadSearchHomepage?: { __typename?: 'SearchHomepagePayload', body: string, imageUrl: string, imageDarkModeUrl?: string | null, targetUrl: string, title: string, ctaText: string } | null } }> }>, advertiser: { __typename?: 'Advertiser', id: string } };
+export type CampaignFragment = { __typename?: 'Campaign', id: string, name: string, state: CampaignState, dailyCap: number, priority: number, passThroughRate: number, pacingOverride: boolean, pacingStrategy: CampaignPacingStrategies, externalId?: string | null, currency: string, budget: number, spent: number, createdAt: string, startAt: string, endAt: string, source: CampaignSource, type: CampaignType, format: CampaignFormat, paymentType: PaymentType, dayProportion?: number | null, stripePaymentId?: string | null, hasPaymentIntent: boolean, dayPartings: Array<{ __typename?: 'DayParting', dow: string, startMinute: number, endMinute: number }>, geoTargets: Array<{ __typename?: 'Geocode', code: string, name: string }>, adSets: Array<{ __typename?: 'AdSet', id: string, price: string, createdAt: string, billingType?: string | null, name: string, totalMax: number, perDay: number, state: AdSetState, segments: Array<{ __typename?: 'Segment', code: string, name: string }>, oses: Array<{ __typename?: 'OS', code: string, name: string }>, conversions: Array<{ __typename?: 'Conversion', id: string, type: string, urlPattern: string, observationWindow: number }>, ads: Array<{ __typename?: 'Ad', id: string, state: string, creative: { __typename?: 'Creative', id: string, createdAt: string, modifiedAt: string, name: string, state: string, type: { __typename?: 'CreativeType', code: string }, payloadNotification?: { __typename?: 'NotificationPayload', body: string, title: string, targetUrl: string } | null, payloadNewTabPage?: { __typename?: 'NewTabPagePayload', logo?: { __typename?: 'Logo', imageUrl: string, alt: string, companyName: string, destinationUrl: string } | null, wallpapers?: Array<{ __typename?: 'Wallpaper', imageUrl: string, focalPoint: { __typename?: 'FocalPoint', x: number, y: number } }> | null } | null, payloadInlineContent?: { __typename?: 'InlineContentPayload', title: string, ctaText: string, imageUrl: string, targetUrl: string, dimensions: string, description: string } | null, payloadSearch?: { __typename?: 'SearchPayload', body: string, title: string, targetUrl: string } | null, payloadSearchHomepage?: { __typename?: 'SearchHomepagePayload', body: string, imageUrl: string, imageDarkModeUrl?: string | null, targetUrl: string, title: string, ctaText: string } | null } }> }>, advertiser: { __typename?: 'Advertiser', id: string } };
 
-export type CampaignSummaryFragment = { __typename?: 'Campaign', id: string, name: string, state: string, dailyCap: number, priority: number, passThroughRate: number, pacingOverride: boolean, pacingStrategy: CampaignPacingStrategies, externalId?: string | null, currency: string, budget: number, paymentType: PaymentType, createdAt: string, startAt: string, endAt: string, source: CampaignSource, type: CampaignType, format: CampaignFormat, dayProportion?: number | null, brandedKeywords?: Array<string> | null, advertiser: { __typename?: 'Advertiser', id: string, name: string } };
+export type CampaignSummaryFragment = { __typename?: 'Campaign', id: string, name: string, state: CampaignState, dailyCap: number, priority: number, passThroughRate: number, pacingOverride: boolean, pacingStrategy: CampaignPacingStrategies, externalId?: string | null, currency: string, budget: number, paymentType: PaymentType, createdAt: string, startAt: string, endAt: string, source: CampaignSource, type: CampaignType, format: CampaignFormat, dayProportion?: number | null, brandedKeywords?: Array<string> | null, advertiser: { __typename?: 'Advertiser', id: string, name: string } };
 
-export type CampaignAdsFragment = { __typename?: 'Campaign', id: string, name: string, state: string, startAt: string, endAt: string, source: CampaignSource, currency: string, format: CampaignFormat, advertiser: { __typename?: 'Advertiser', id: string }, adSets: Array<{ __typename?: 'AdSet', id: string, createdAt: string, name: string, state: AdSetState, billingType?: string | null, oses: Array<{ __typename?: 'OS', code: string, name: string }>, segments: Array<{ __typename?: 'Segment', code: string, name: string }>, conversions: Array<{ __typename?: 'Conversion', id: string }>, ads: Array<{ __typename?: 'Ad', id: string, state: string, creative: { __typename?: 'Creative', id: string, createdAt: string, modifiedAt: string, name: string, state: string, type: { __typename?: 'CreativeType', code: string }, payloadNotification?: { __typename?: 'NotificationPayload', body: string, title: string, targetUrl: string } | null, payloadNewTabPage?: { __typename?: 'NewTabPagePayload', logo?: { __typename?: 'Logo', imageUrl: string, alt: string, companyName: string, destinationUrl: string } | null, wallpapers?: Array<{ __typename?: 'Wallpaper', imageUrl: string, focalPoint: { __typename?: 'FocalPoint', x: number, y: number } }> | null } | null, payloadInlineContent?: { __typename?: 'InlineContentPayload', title: string, ctaText: string, imageUrl: string, targetUrl: string, dimensions: string, description: string } | null, payloadSearch?: { __typename?: 'SearchPayload', body: string, title: string, targetUrl: string } | null, payloadSearchHomepage?: { __typename?: 'SearchHomepagePayload', body: string, imageUrl: string, imageDarkModeUrl?: string | null, targetUrl: string, title: string, ctaText: string } | null } }> }> };
+export type CampaignAdsFragment = { __typename?: 'Campaign', id: string, name: string, state: CampaignState, startAt: string, endAt: string, source: CampaignSource, currency: string, format: CampaignFormat, advertiser: { __typename?: 'Advertiser', id: string }, adSets: Array<{ __typename?: 'AdSet', id: string, createdAt: string, name: string, state: AdSetState, billingType?: string | null, oses: Array<{ __typename?: 'OS', code: string, name: string }>, segments: Array<{ __typename?: 'Segment', code: string, name: string }>, conversions: Array<{ __typename?: 'Conversion', id: string }>, ads: Array<{ __typename?: 'Ad', id: string, state: string, creative: { __typename?: 'Creative', id: string, createdAt: string, modifiedAt: string, name: string, state: string, type: { __typename?: 'CreativeType', code: string }, payloadNotification?: { __typename?: 'NotificationPayload', body: string, title: string, targetUrl: string } | null, payloadNewTabPage?: { __typename?: 'NewTabPagePayload', logo?: { __typename?: 'Logo', imageUrl: string, alt: string, companyName: string, destinationUrl: string } | null, wallpapers?: Array<{ __typename?: 'Wallpaper', imageUrl: string, focalPoint: { __typename?: 'FocalPoint', x: number, y: number } }> | null } | null, payloadInlineContent?: { __typename?: 'InlineContentPayload', title: string, ctaText: string, imageUrl: string, targetUrl: string, dimensions: string, description: string } | null, payloadSearch?: { __typename?: 'SearchPayload', body: string, title: string, targetUrl: string } | null, payloadSearchHomepage?: { __typename?: 'SearchHomepagePayload', body: string, imageUrl: string, imageDarkModeUrl?: string | null, targetUrl: string, title: string, ctaText: string } | null } }> }> };
 
 export type LoadCampaignQueryVariables = Exact<{
   id: Scalars['String']['input'];
 }>;
 
 
-export type LoadCampaignQuery = { __typename?: 'Query', campaign?: { __typename?: 'Campaign', id: string, name: string, state: string, dailyCap: number, priority: number, passThroughRate: number, pacingOverride: boolean, pacingStrategy: CampaignPacingStrategies, externalId?: string | null, currency: string, budget: number, spent: number, createdAt: string, startAt: string, endAt: string, source: CampaignSource, type: CampaignType, format: CampaignFormat, paymentType: PaymentType, dayProportion?: number | null, stripePaymentId?: string | null, hasPaymentIntent: boolean, dayPartings: Array<{ __typename?: 'DayParting', dow: string, startMinute: number, endMinute: number }>, geoTargets: Array<{ __typename?: 'Geocode', code: string, name: string }>, adSets: Array<{ __typename?: 'AdSet', id: string, price: string, createdAt: string, billingType?: string | null, name: string, totalMax: number, perDay: number, state: AdSetState, segments: Array<{ __typename?: 'Segment', code: string, name: string }>, oses: Array<{ __typename?: 'OS', code: string, name: string }>, conversions: Array<{ __typename?: 'Conversion', id: string, type: string, urlPattern: string, observationWindow: number }>, ads: Array<{ __typename?: 'Ad', id: string, state: string, creative: { __typename?: 'Creative', id: string, createdAt: string, modifiedAt: string, name: string, state: string, type: { __typename?: 'CreativeType', code: string }, payloadNotification?: { __typename?: 'NotificationPayload', body: string, title: string, targetUrl: string } | null, payloadNewTabPage?: { __typename?: 'NewTabPagePayload', logo?: { __typename?: 'Logo', imageUrl: string, alt: string, companyName: string, destinationUrl: string } | null, wallpapers?: Array<{ __typename?: 'Wallpaper', imageUrl: string, focalPoint: { __typename?: 'FocalPoint', x: number, y: number } }> | null } | null, payloadInlineContent?: { __typename?: 'InlineContentPayload', title: string, ctaText: string, imageUrl: string, targetUrl: string, dimensions: string, description: string } | null, payloadSearch?: { __typename?: 'SearchPayload', body: string, title: string, targetUrl: string } | null, payloadSearchHomepage?: { __typename?: 'SearchHomepagePayload', body: string, imageUrl: string, imageDarkModeUrl?: string | null, targetUrl: string, title: string, ctaText: string } | null } }> }>, advertiser: { __typename?: 'Advertiser', id: string } } | null };
+export type LoadCampaignQuery = { __typename?: 'Query', campaign?: { __typename?: 'Campaign', id: string, name: string, state: CampaignState, dailyCap: number, priority: number, passThroughRate: number, pacingOverride: boolean, pacingStrategy: CampaignPacingStrategies, externalId?: string | null, currency: string, budget: number, spent: number, createdAt: string, startAt: string, endAt: string, source: CampaignSource, type: CampaignType, format: CampaignFormat, paymentType: PaymentType, dayProportion?: number | null, stripePaymentId?: string | null, hasPaymentIntent: boolean, dayPartings: Array<{ __typename?: 'DayParting', dow: string, startMinute: number, endMinute: number }>, geoTargets: Array<{ __typename?: 'Geocode', code: string, name: string }>, adSets: Array<{ __typename?: 'AdSet', id: string, price: string, createdAt: string, billingType?: string | null, name: string, totalMax: number, perDay: number, state: AdSetState, segments: Array<{ __typename?: 'Segment', code: string, name: string }>, oses: Array<{ __typename?: 'OS', code: string, name: string }>, conversions: Array<{ __typename?: 'Conversion', id: string, type: string, urlPattern: string, observationWindow: number }>, ads: Array<{ __typename?: 'Ad', id: string, state: string, creative: { __typename?: 'Creative', id: string, createdAt: string, modifiedAt: string, name: string, state: string, type: { __typename?: 'CreativeType', code: string }, payloadNotification?: { __typename?: 'NotificationPayload', body: string, title: string, targetUrl: string } | null, payloadNewTabPage?: { __typename?: 'NewTabPagePayload', logo?: { __typename?: 'Logo', imageUrl: string, alt: string, companyName: string, destinationUrl: string } | null, wallpapers?: Array<{ __typename?: 'Wallpaper', imageUrl: string, focalPoint: { __typename?: 'FocalPoint', x: number, y: number } }> | null } | null, payloadInlineContent?: { __typename?: 'InlineContentPayload', title: string, ctaText: string, imageUrl: string, targetUrl: string, dimensions: string, description: string } | null, payloadSearch?: { __typename?: 'SearchPayload', body: string, title: string, targetUrl: string } | null, payloadSearchHomepage?: { __typename?: 'SearchHomepagePayload', body: string, imageUrl: string, imageDarkModeUrl?: string | null, targetUrl: string, title: string, ctaText: string } | null } }> }>, advertiser: { __typename?: 'Advertiser', id: string } } | null };
 
 export type LoadCampaignAdsQueryVariables = Exact<{
   id: Scalars['String']['input'];
 }>;
 
 
-export type LoadCampaignAdsQuery = { __typename?: 'Query', campaign?: { __typename?: 'Campaign', id: string, name: string, state: string, startAt: string, endAt: string, source: CampaignSource, currency: string, format: CampaignFormat, advertiser: { __typename?: 'Advertiser', id: string }, adSets: Array<{ __typename?: 'AdSet', id: string, createdAt: string, name: string, state: AdSetState, billingType?: string | null, oses: Array<{ __typename?: 'OS', code: string, name: string }>, segments: Array<{ __typename?: 'Segment', code: string, name: string }>, conversions: Array<{ __typename?: 'Conversion', id: string }>, ads: Array<{ __typename?: 'Ad', id: string, state: string, creative: { __typename?: 'Creative', id: string, createdAt: string, modifiedAt: string, name: string, state: string, type: { __typename?: 'CreativeType', code: string }, payloadNotification?: { __typename?: 'NotificationPayload', body: string, title: string, targetUrl: string } | null, payloadNewTabPage?: { __typename?: 'NewTabPagePayload', logo?: { __typename?: 'Logo', imageUrl: string, alt: string, companyName: string, destinationUrl: string } | null, wallpapers?: Array<{ __typename?: 'Wallpaper', imageUrl: string, focalPoint: { __typename?: 'FocalPoint', x: number, y: number } }> | null } | null, payloadInlineContent?: { __typename?: 'InlineContentPayload', title: string, ctaText: string, imageUrl: string, targetUrl: string, dimensions: string, description: string } | null, payloadSearch?: { __typename?: 'SearchPayload', body: string, title: string, targetUrl: string } | null, payloadSearchHomepage?: { __typename?: 'SearchHomepagePayload', body: string, imageUrl: string, imageDarkModeUrl?: string | null, targetUrl: string, title: string, ctaText: string } | null } }> }> } | null };
+export type LoadCampaignAdsQuery = { __typename?: 'Query', campaign?: { __typename?: 'Campaign', id: string, name: string, state: CampaignState, startAt: string, endAt: string, source: CampaignSource, currency: string, format: CampaignFormat, advertiser: { __typename?: 'Advertiser', id: string }, adSets: Array<{ __typename?: 'AdSet', id: string, createdAt: string, name: string, state: AdSetState, billingType?: string | null, oses: Array<{ __typename?: 'OS', code: string, name: string }>, segments: Array<{ __typename?: 'Segment', code: string, name: string }>, conversions: Array<{ __typename?: 'Conversion', id: string }>, ads: Array<{ __typename?: 'Ad', id: string, state: string, creative: { __typename?: 'Creative', id: string, createdAt: string, modifiedAt: string, name: string, state: string, type: { __typename?: 'CreativeType', code: string }, payloadNotification?: { __typename?: 'NotificationPayload', body: string, title: string, targetUrl: string } | null, payloadNewTabPage?: { __typename?: 'NewTabPagePayload', logo?: { __typename?: 'Logo', imageUrl: string, alt: string, companyName: string, destinationUrl: string } | null, wallpapers?: Array<{ __typename?: 'Wallpaper', imageUrl: string, focalPoint: { __typename?: 'FocalPoint', x: number, y: number } }> | null } | null, payloadInlineContent?: { __typename?: 'InlineContentPayload', title: string, ctaText: string, imageUrl: string, targetUrl: string, dimensions: string, description: string } | null, payloadSearch?: { __typename?: 'SearchPayload', body: string, title: string, targetUrl: string } | null, payloadSearchHomepage?: { __typename?: 'SearchHomepagePayload', body: string, imageUrl: string, imageDarkModeUrl?: string | null, targetUrl: string, title: string, ctaText: string } | null } }> }> } | null };
 
 export type CreateCampaignMutationVariables = Exact<{
   input: CreateCampaignInput;
@@ -1868,7 +1915,7 @@ export type CampaignsForCreativeQueryVariables = Exact<{
 }>;
 
 
-export type CampaignsForCreativeQuery = { __typename?: 'Query', creativeCampaigns: Array<{ __typename?: 'Campaign', id: string, name: string, state: string, format: CampaignFormat }> };
+export type CampaignsForCreativeQuery = { __typename?: 'Query', creativeCampaigns: Array<{ __typename?: 'Campaign', id: string, name: string, state: CampaignState, format: CampaignFormat }> };
 
 export type DisplayedMetricsFragment = { __typename?: 'Metrics', impression: string, click: string, siteVisit: string, conversion: string, viewThroughConversion: string, clickThroughConversion: string, dismiss: string, spendUsd: string, upvote: string, downvote: string, rates: { __typename?: 'MetricRates', clickThrough: string, clickToConversion: string, clickToSiteVisit: string, impressionToSiteVisit: string, impressionToDismiss: string, costPerAcquisition: string } };
 
@@ -1939,9 +1986,9 @@ export type LoadCampaignSummaryQueryVariables = Exact<{
 }>;
 
 
-export type LoadCampaignSummaryQuery = { __typename?: 'Query', campaign?: { __typename?: 'Campaign', id: string, name: string, state: string, dailyCap: number, priority: number, passThroughRate: number, pacingOverride: boolean, pacingStrategy: CampaignPacingStrategies, externalId?: string | null, currency: string, budget: number, paymentType: PaymentType, createdAt: string, startAt: string, endAt: string, source: CampaignSource, type: CampaignType, format: CampaignFormat, dayProportion?: number | null, brandedKeywords?: Array<string> | null, adSets: Array<{ __typename?: 'AdSet', id: string, conversions: Array<{ __typename?: 'Conversion', id: string, extractExternalId: boolean }> }>, advertiser: { __typename?: 'Advertiser', id: string, name: string } } | null };
+export type LoadCampaignSummaryQuery = { __typename?: 'Query', campaign?: { __typename?: 'Campaign', id: string, name: string, state: CampaignState, dailyCap: number, priority: number, passThroughRate: number, pacingOverride: boolean, pacingStrategy: CampaignPacingStrategies, externalId?: string | null, currency: string, budget: number, paymentType: PaymentType, createdAt: string, startAt: string, endAt: string, source: CampaignSource, type: CampaignType, format: CampaignFormat, dayProportion?: number | null, brandedKeywords?: Array<string> | null, adSets: Array<{ __typename?: 'AdSet', id: string, conversions: Array<{ __typename?: 'Conversion', id: string, extractExternalId: boolean }> }>, advertiser: { __typename?: 'Advertiser', id: string, name: string } } | null };
 
-export type CampaignOverviewFragment = { __typename?: 'Campaign', id: string, name: string, state: string, dailyCap: number, priority: number, passThroughRate: number, pacingOverride: boolean, pacingStrategy: CampaignPacingStrategies, externalId?: string | null, currency: string, budget: number, paymentType: PaymentType, createdAt: string, startAt: string, endAt: string, source: CampaignSource, type: CampaignType, format: CampaignFormat, dayProportion?: number | null, brandedKeywords?: Array<string> | null, adSets: Array<{ __typename?: 'AdSet', id: string, conversions: Array<{ __typename?: 'Conversion', id: string, extractExternalId: boolean }> }>, advertiser: { __typename?: 'Advertiser', id: string, name: string } };
+export type CampaignOverviewFragment = { __typename?: 'Campaign', id: string, name: string, state: CampaignState, dailyCap: number, priority: number, passThroughRate: number, pacingOverride: boolean, pacingStrategy: CampaignPacingStrategies, externalId?: string | null, currency: string, budget: number, paymentType: PaymentType, createdAt: string, startAt: string, endAt: string, source: CampaignSource, type: CampaignType, format: CampaignFormat, dayProportion?: number | null, brandedKeywords?: Array<string> | null, adSets: Array<{ __typename?: 'AdSet', id: string, conversions: Array<{ __typename?: 'Conversion', id: string, extractExternalId: boolean }> }>, advertiser: { __typename?: 'Advertiser', id: string, name: string } };
 
 export type CreateSearchCampaignLandingPageListQueryVariables = Exact<{
   domain: Scalars['String']['input'];
