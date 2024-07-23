@@ -446,7 +446,7 @@ msgstr "Budget"
 msgid "Business name"
 msgstr "Business name"
 
-#: src/validation/RegistrationSchema.tsx:14
+#: src/validation/RegistrationSchema.tsx:21
 msgid "Business name is required"
 msgstr "Business name is required"
 
@@ -454,7 +454,7 @@ msgstr "Business name is required"
 msgid "Business website"
 msgstr "Business website"
 
-#: src/validation/RegistrationSchema.tsx:16
+#: src/validation/RegistrationSchema.tsx:23
 msgid "Business Website is required"
 msgstr "Business Website is required"
 
@@ -956,7 +956,7 @@ msgstr "Documentation can be found <0>here</0> on how to use the API."
 msgid "Domain"
 msgstr "Domain"
 
-#: src/validation/RegistrationSchema.tsx:34
+#: src/validation/RegistrationSchema.tsx:41
 msgid "Domain is required"
 msgstr "Domain is required"
 
@@ -964,7 +964,7 @@ msgstr "Domain is required"
 #~ msgid "Domain must match the email domain"
 #~ msgstr "Domain must match the email domain"
 
-#: src/validation/RegistrationSchema.tsx:35
+#: src/validation/RegistrationSchema.tsx:42
 msgid "Domain must not contain any whitespace"
 msgstr "Domain must not contain any whitespace"
 
@@ -1011,9 +1011,9 @@ msgstr "Edit ad"
 msgid "Email"
 msgstr "Email"
 
-#: src/validation/UserSchema.tsx:7
-#~ msgid "Email address is required"
-#~ msgstr "Email address is required"
+#: src/validation/RegistrationSchema.tsx:12
+msgid "Email address is required"
+msgstr "Email address is required"
 
 #: src/user/campaignList/CampaignList.tsx:185
 msgid "End"
@@ -1149,6 +1149,7 @@ msgstr "Full name"
 msgid "Full Name"
 msgstr "Full Name"
 
+#: src/validation/RegistrationSchema.tsx:14
 #: src/validation/UserSchema.tsx:6
 msgid "Full name is required"
 msgstr "Full name is required"
@@ -1776,16 +1777,16 @@ msgstr "Please confirm your account’s new private key:"
 msgid "Please enter a username and password"
 msgstr "Please enter a username and password"
 
-#: src/validation/RegistrationSchema.tsx:38
+#: src/validation/RegistrationSchema.tsx:45
 msgid "Please enter a valid domain, for example: brave.com"
 msgstr "Please enter a valid domain, for example: brave.com"
 
-#: src/validation/UserSchema.tsx:8
-#~ msgid "Please enter a valid email address"
-#~ msgstr "Please enter a valid email address"
+#: src/validation/RegistrationSchema.tsx:13
+msgid "Please enter a valid email address"
+msgstr "Please enter a valid email address"
 
 #: src/validation/CreativeSchema.tsx:19
-#: src/validation/RegistrationSchema.tsx:21
+#: src/validation/RegistrationSchema.tsx:28
 msgid "Please enter a valid URL, for example https://brave.com"
 msgstr "Please enter a valid URL, for example https://brave.com"
 
@@ -1797,11 +1798,11 @@ msgstr "Please enter a valid URL, for example https://brave.com/product/*"
 msgid "Please enter an email."
 msgstr "Please enter an email."
 
-#: src/validation/RegistrationSchema.tsx:52
+#: src/validation/RegistrationSchema.tsx:59
 msgid "Please let us know how you heard about Brave Ads"
 msgstr "Please let us know how you heard about Brave Ads"
 
-#: src/validation/RegistrationSchema.tsx:24
+#: src/validation/RegistrationSchema.tsx:31
 msgid "Please let us know why you're interested in Brave Ads"
 msgstr "Please let us know why you're interested in Brave Ads"
 
@@ -1821,7 +1822,7 @@ msgstr "Please refresh the page to try again, or email <0/> for assistance."
 msgid "Please see our <0>Advertiser Privacy Policy</0> and <1>Terms of Service</1> applicable to Brave Ads."
 msgstr "Please see our <0>Advertiser Privacy Policy</0> and <1>Terms of Service</1> applicable to Brave Ads."
 
-#: src/validation/RegistrationSchema.tsx:57
+#: src/validation/RegistrationSchema.tsx:64
 msgid "Please specify how you heard about Brave Ads"
 msgstr "Please specify how you heard about Brave Ads"
 
@@ -1878,8 +1879,8 @@ msgstr "Pricing type must be CPM, CPC, or CPSV"
 msgid "Primary region of business"
 msgstr "Primary region of business"
 
-#: src/validation/RegistrationSchema.tsx:42
-#: src/validation/RegistrationSchema.tsx:45
+#: src/validation/RegistrationSchema.tsx:49
+#: src/validation/RegistrationSchema.tsx:52
 msgid "Primary region of business is required"
 msgstr "Primary region of business is required"
 
@@ -2620,11 +2621,11 @@ msgstr "We value your feedback and would love to hear your thoughts on your rece
 #~ msgid "We've updated our reporting view"
 #~ msgstr "We've updated our reporting view"
 
-#: src/validation/RegistrationSchema.tsx:17
+#: src/validation/RegistrationSchema.tsx:24
 msgid "Website must not contain any whitespace"
 msgstr "Website must not contain any whitespace"
 
-#: src/validation/RegistrationSchema.tsx:18
+#: src/validation/RegistrationSchema.tsx:25
 msgid "Website must start with https://"
 msgstr "Website must start with https://"
 
