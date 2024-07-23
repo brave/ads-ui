@@ -9,7 +9,6 @@ import dayjs from "dayjs";
 
 export function createCampaignFromFragment(
   data: CampaignFragment,
-  userId?: string,
 ): CreateCampaignInput {
   const adSets: CreateAdSetInput[] = data.adSets.map((adSet) =>
     createAdSetFromFragment(adSet),
@@ -17,7 +16,6 @@ export function createCampaignFromFragment(
 
   const two = dayjs().utc().add(3, "days");
   return {
-    userId,
     adSets: adSets && adSets.length > 0 ? adSets : undefined,
     advertiserId: data.advertiser.id,
     budget: data.budget,
