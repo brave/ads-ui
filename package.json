@@ -15,6 +15,7 @@
     "@lingui/conf": "4.11.2",
     "@lingui/core": "4.11.2",
     "@lingui/detect-locale": "4.11.2",
+    "@lingui/format-po": "4.11.2",
     "@lingui/macro": "4.11.2",
     "@lingui/react": "4.11.2",
     "@mui/icons-material": "5.16.1",
