@@ -14,7 +14,7 @@ import {
   CreateCampaignDocument,
   PaymentType,
 } from "@/graphql-client/graphql";
-import { useUser } from "@/auth/hooks/queries/useUser";
+
 import { useAdvertiserWithPrices } from "@/user/hooks/useAdvertiserWithPrices";
 import { ErrorDetail } from "@/components/Error/ErrorDetail";
 import _ from "lodash";
@@ -35,7 +35,6 @@ export function NewCampaign() {
   const { _: lingui } = useLingui();
   const { fromDate } = useContext(FilterContext);
   const params = useParams<Params>();
-  const { userId } = useUser();
   const { setDrafts } = useContext(DraftContext);
   const [initial, setInitial] = useState<CampaignForm>({} as CampaignForm);
 
@@ -100,7 +99,7 @@ export function NewCampaign() {
         initialValues={initial}
         onSubmit={async (v: CampaignForm, { setSubmitting }) => {
           setSubmitting(true);
-          const input = transformNewForm(v, userId);
+          const input = transformNewForm(v);
           await mutation({ variables: { input } });
           setSubmitting(false);
         }}
