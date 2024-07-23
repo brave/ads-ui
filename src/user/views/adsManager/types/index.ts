@@ -1,6 +1,7 @@
 import {
   AdSetState,
   CampaignFormat,
+  CampaignState,
   CreateTypeInput,
   CreativeInput,
   PaymentType,
@@ -26,7 +27,7 @@ export type CampaignForm = {
   format: CampaignFormat;
   newCreative?: Creative;
   name: string;
-  state: string;
+  state: CampaignState;
   // this is per click for CPC campaigns, but per thousand views for CPM campaigns
   price: string;
   billingType: Billing;
@@ -139,7 +140,7 @@ export const initialCampaign = (
     ],
     format: advertiser.prices[0].format,
     name: "",
-    state: "draft",
+    state: CampaignState.Draft,
     paymentType: advertiser.selfServicePaymentType,
   };
 };

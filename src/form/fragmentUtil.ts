@@ -1,6 +1,7 @@
 import {
   AdSetFragment,
   CampaignFragment,
+  CampaignState,
   CreateAdSetInput,
   CreateCampaignInput,
 } from "@/graphql-client/graphql";
@@ -40,7 +41,7 @@ export function createCampaignFromFragment(
     name: `${data.name} - Copy`,
     pacingStrategy: data.pacingStrategy,
     source: data.source.toLowerCase(),
-    state: "draft",
+    state: CampaignState.Draft,
     type: data.type,
     paymentType: data.paymentType,
   };
