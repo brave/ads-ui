@@ -1,24 +1,31 @@
-import { Stack } from "@mui/material";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { useUser } from "@/auth/hooks/queries/useUser";
 import { CardContainer } from "@/components/Card/CardContainer";
 import { Form, Formik, FormikValues } from "formik";
 import { FormikTextField } from "@/form/FormikHelpers";
 import { ErrorDetail } from "@/components/Error/ErrorDetail";
 import { UserSchema } from "@/validation/UserSchema";
-import _ from "lodash";
 import { FormikSubmitButton } from "@/form/FormikButton";
 import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { UpdateUserDocument } from "@/graphql-client/graphql";
 import { useMutation } from "@apollo/client";
+import { Snackbar, Stack } from "@mui/material";
+
+interface UserFormValues {
+  fullName: string;
+  password?: string;
+}
 
 export function UserForm() {
   const user = useUser();
   const { trackMatomoEvent } = useTrackMatomoEvent();
   const { _: lingui } = useLingui();
-  const [initialVals, setInitialVals] = useState(user);
+  const [initialVals, setInitialVals] = useState<UserFormValues>({
+    fullName: user.fullName ?? "",
+  });
+  const [errorMessage, setErrorMessage] = useState<ReactNode | null>(null);
 
   if (!user.userId) {
     const details = msg`Unable to get profile information`;
@@ -30,6 +37,9 @@ export function UserForm() {
       trackMatomoEvent("user", "update");
       setInitialVals(user.updateUser);
     },
+    onError(err) {
+      setErrorMessage(<Trans>Failed to update profile: {err.message}</Trans>);
+    },
   });
 
   return (
@@ -40,17 +50,23 @@ export function UserForm() {
         onSubmit={(v, { setSubmitting }: FormikValues) => {
           setSubmitting(true);
           updateUser({
-            variables: { input: { id: user.userId, ..._.omit(v, ["userId"]) } },
+            variables: {
+              input: {
+                id: user.userId,
+                fullName: v.fullName,
+                password: v.password,
+              },
+            },
           }).finally(() => setSubmitting(false));
         }}
         validationSchema={UserSchema()}
       >
         <Form>
-          <Stack direction="row" spacing={2}>
+          <Stack gap={2}>
             <FormikTextField
-              name="email"
-              label={lingui(msg`Email`)}
-              type="email"
+              name="fullName"
+              label={lingui(msg`Full Name`)}
+              type="text"
               margin="none"
             />
             <FormikTextField
@@ -59,16 +75,15 @@ export function UserForm() {
               type="password"
               margin="none"
             />
-          </Stack>
-          <Stack direction="row" spacing={2} mt={2} mb={1}>
-            <FormikTextField
-              name="fullName"
-              label={lingui(msg`Full Name`)}
-              type="text"
-              margin="none"
+            <FormikSubmitButton isCreate={false} />
+
+            <Snackbar
+              open={!!errorMessage}
+              message={errorMessage}
+              onClose={() => setErrorMessage(null)}
+              autoHideDuration={10_000}
             />
           </Stack>
-          <FormikSubmitButton isCreate={false} />
         </Form>
       </Formik>
     </CardContainer>
