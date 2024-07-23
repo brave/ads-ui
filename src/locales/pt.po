@@ -8,7 +8,7 @@ msgstr ""
 "Language: pt\n"
 "Project-Id-Version: 27b1a082298d0ee642e56f654bcd7273\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-07-08 16:07\n"
+"PO-Revision-Date: 2024-07-23 18:55\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese, Brazilian\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -769,7 +769,7 @@ msgid "Failed to load image"
 msgstr "Falha ao carregar imagem"
 
 msgid "Failed to update profile: {0}"
-msgstr ""
+msgstr "Falha ao atualizar o perfil: {0}"
 
 msgid "Failed to upload image"
 msgstr "Falha ao enviar imagem"
@@ -1976,3 +1976,4 @@ msgstr "Sua campanha de teste será revisada por um Gerente de Conta. Adicione a
 
 msgid "Zip / Postal Code"
 msgstr "CEP"
+
