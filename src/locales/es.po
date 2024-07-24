@@ -8,7 +8,7 @@ msgstr ""
 "Language: es_419\n"
 "Project-Id-Version: 27b1a082298d0ee642e56f654bcd7273\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-07-23 21:51\n"
+"PO-Revision-Date: 2024-07-24 17:36\n"
 "Last-Translator: \n"
 "Language-Team: Spanish, Latin America\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -32,12 +32,6 @@ msgstr "{length}/{maxLength} caracteres"
 
 msgid "{type} status cannot be updated"
 msgstr "El estado de {type} no se puede actualizar."
-
-#~ msgid "*Limited time only. Available to new advertisers, and those who ran campaigns before September 30, 2023."
-#~ msgstr "*Limited time only. Available to new advertisers, and those who ran campaigns before September 30, 2023."
-
-#~ msgid "*Limited time only. Available to new advertisers, and those who ran campaigns before September 30, 2023. Eligible for Push Notification and Newsfeed ads only."
-#~ msgstr "*Limited time only. Available to new advertisers, and those who ran campaigns before September 30, 2023. Eligible for Push Notification and Newsfeed ads only."
 
 msgid "*Limited time only. Available to new advertisers, and those who ran campaigns prior to September 30, 2023. Eligible for Push Notification and Newsfeed ads."
 msgstr "*Solo por tiempo limitado. Disponible para nuevos anunciantes y para aquellos que hayan realizado campañas antes del 30 de septiembre de 2023. Elegible para anuncios de Notificación Push y fuente de noticias."
@@ -65,9 +59,6 @@ msgstr "Un correo electrónico de inicio de sesión está en camino"
 
 msgid "About Brave Ads"
 msgstr "Acerca de Brave Ads"
-
-#~ msgid "Access dashboard"
-#~ msgstr "Access dashboard"
 
 msgid "Account"
 msgstr "Cuenta"
@@ -99,29 +90,14 @@ msgstr "Formato del anuncio"
 msgid "Ad image dimensions are required"
 msgstr "Las dimensiones de la imagen del anuncio son obligatorias"
 
-#~ msgid "Ad Inquiries"
-#~ msgstr "Ad Inquiries"
-
-#~ msgid "Ad Name"
-#~ msgstr "Ad Name"
-
 msgid "Ad Name is required"
 msgstr "El nombre del anuncio es obligatorio"
-
-#~ msgid "Ad Performance"
-#~ msgstr "Ad Performance"
 
 msgid "Ad Set"
 msgstr "Conjunto de anuncios"
 
 msgid "Ad set name"
 msgstr "Nombre del conjunto de anuncios"
-
-#~ msgid "Ad Set Performance"
-#~ msgstr "Ad Set Performance"
-
-#~ msgid "Ad sets"
-#~ msgstr "Ad sets"
 
 msgid "Ad Sets"
 msgstr "Conjuntos de anuncios"
@@ -153,9 +129,6 @@ msgstr "Añadir seguimiento de conversiones"
 msgid "Additional Details"
 msgstr "Detalles adicionales"
 
-#~ msgid "Additional Report: OS Performance"
-#~ msgstr "Additional Report: OS Performance"
-
 msgid "Ads"
 msgstr "Anuncios"
 
@@ -165,29 +138,17 @@ msgstr "Los anuncios son bloques de construcción modulares que se pueden combin
 msgid "Ads Help Center"
 msgstr "Centro de ayuda de anuncios"
 
-#~ msgid "AdSet Performance"
-#~ msgstr "AdSet Performance"
-
 msgid "Advertiser Name"
 msgstr "Nombre del anunciante"
 
 msgid "Advertiser profile"
 msgstr "Perfil del anunciante"
 
-#~ msgid "advertising made simple"
-#~ msgstr "advertising made simple"
-
 msgid "All OS"
 msgstr "Todos los SO"
 
-#~ msgid "All targeting and reporting is strictly designed to be anonymous and privacy-preserving."
-#~ msgstr "All targeting and reporting is strictly designed to be anonymous and privacy-preserving."
-
 msgid "All time"
 msgstr "Todo el tiempo"
-
-#~ msgid "Already have an account?"
-#~ msgstr "Already have an account?"
 
 msgid "An ad from my Brave browser"
 msgstr "Un anuncio de mi navegador Brave"
@@ -216,9 +177,6 @@ msgstr "Tan eficaz como Google"
 msgid "At a marketing/media conference"
 msgstr "En una conferencia de marketing/medios de comunicación"
 
-#~ msgid "At least one audience must be targeted"
-#~ msgstr "At least one audience must be targeted"
-
 msgid "At least one country must be targeted"
 msgstr "Debe dirigirse al menos a un país meta"
 
@@ -233,9 +191,6 @@ msgstr "Aumente su estrategia de marketing"
 
 msgid "Automatic interest targeting"
 msgstr "Segmentación automática de intereses"
-
-#~ msgid "Available Ad placements"
-#~ msgstr "Available Ad placements"
 
 msgid "Back"
 msgstr "Atrás"
@@ -255,15 +210,6 @@ msgstr "Cuerpo"
 msgid "Body Preview"
 msgstr "Vista previa del cuerpo"
 
-#~ msgid "Book a 30-minute meeting with a Brave Search specialist to discuss a free test campaign and see how Brave Ads can perform for your business."
-#~ msgstr "Book a 30-minute meeting with a Brave Search specialist to discuss a free test campaign and see how Brave Ads can perform for your business."
-
-#~ msgid "Book a meeting"
-#~ msgstr "Book a meeting"
-
-#~ msgid "Brave Ads"
-#~ msgstr "Brave Ads"
-
 msgid "Brave Ads deliver at the browser or search level, in dedicated placements that give your brand more spotlight and better engagement."
 msgstr "Los anuncios de Brave se entregan a nivel de navegador o de búsqueda, en ubicaciones dedicadas que le dan a su marca más protagonismo y una mejor participación."
 
@@ -273,20 +219,8 @@ msgstr "Brave no puede recuperar esta clave, que se ha generado en su navegador.
 msgid "Brave is an independent company dedicated to building a user-first Web. Our private, feature-rich browser and search engine are used by 70+ million people worldwide, with hundreds of thousands more downloading every day."
 msgstr "Brave es una compañía independiente dedicada a construir una Web centrada en el usuario. Nuestro navegador y motor de búsqueda privado y rico en funciones es utilizado por más de 70 millones de personas en todo el mundo, con cientos de miles más descargando cada día."
 
-#~ msgid "Brave is place where early adopters thrive. We’re celebrating our crypto roots by offering new and returning customers half off their first campaign when they check-out with BAT."
-#~ msgstr "Brave is place where early adopters thrive. We’re celebrating our crypto roots by offering new and returning customers half off their first campaign when they check-out with BAT."
-
-#~ msgid "Brave is place where early adopters thrive. We’re celebrating our crypto roots by offering new and returning customers half off their first campaign when they check-out with BAT<0>*</0>."
-#~ msgstr "Brave is place where early adopters thrive. We’re celebrating our crypto roots by offering new and returning customers half off their first campaign when they check-out with BAT<0>*</0>."
-
-#~ msgid "Brave is place where early adopters thrive. We’re celebrating our crypto roots by offering new and returning customers half off their first self-managed campaign when they check-out with BAT<0>*</0>."
-#~ msgstr "Brave is place where early adopters thrive. We’re celebrating our crypto roots by offering new and returning customers half off their first self-managed campaign when they check-out with BAT<0>*</0>."
-
 msgid "Brave is where early adopters thrive. We’re celebrating our crypto roots by offering new and returning Brave Ads customers half off their first self-managed campaign if they buy with BAT<0>*</0>"
 msgstr "Brave es donde prosperan los adoptantes tempranos. Celebramos nuestras raíces criptográficas ofreciendo a los clientes nuevos y recurrentes de Brave Ads la mitad de su primera campaña autogestionada si compran con BAT<0>*</0>"
-
-#~ msgid "Brave Search"
-#~ msgstr "Brave Search"
 
 msgid "Brave Search Ads"
 msgstr "Anuncios de Brave Search"
@@ -300,26 +234,11 @@ msgstr "Los anuncios de Brave Search pueden llegar a audiencias que usan bloquea
 msgid "Brave Search Ads convert as well as—or better than—Google Search ad clicks."
 msgstr "Los anuncios de Brave Search generan conversiones tan bien o mejor que los clics en los anuncios de Google Search."
 
-#~ msgid "Brave Search Ads convert as well as, or better than Google Search ad clicks."
-#~ msgstr "Brave Search Ads convert as well as, or better than Google Search ad clicks."
-
 msgid "Brave Search is the fastest growing independent search engine since Bing, with more than 9 billion searches each year (and growing). It’s the default search engine for Brave’s tens of millions of worldwide users, and available in any other browser at <0>search.brave.com</0>"
 msgstr "Brave Search es el motor de búsqueda independiente de más rápido crecimiento desde Bing, con más de 9 mil millones de búsquedas cada año (y creciendo). Es el motor de búsqueda predeterminado para las decenas de millones de usuarios de Brave en todo el mundo, y está disponible en cualquier otro navegador en <0>search.brave.com</0>"
 
 msgid "Brave’s 70+ million cord cutters, and tech savvy early adopters want privacy and performance over tracking and lag. Hundreds of thousands more make the switch every day. Want them to see your brand? Start your first campaign in minutes, and with as little as $500."
 msgstr "Los más de 70 millones de usuarios de Brave, expertos en tecnología y adoptantes tempranos, prefieren la privacidad y el rendimiento sobre el rastreo y la lentitud. Cientos de miles más se cambian cada día. ¿Quiere que vean su marca? Inicie su primera campaña en minutos, con tan solo $500."
-
-#~ msgid "Brave’s products are made to uphold user privacy. By default, the Brave browser blocks third-party tracking (scripts, tags, pixels, etc.) including those used by Google Analytics. This means that most standard website reporting won’t be compatible with Brave Ads. To ensure advertisers have visibility into performance of campaigns, we’ve detailed other effective privacy-first options for measurement in our <0>reporting guide</0>"
-#~ msgstr "Brave’s products are made to uphold user privacy. By default, the Brave browser blocks third-party tracking (scripts, tags, pixels, etc.) including those used by Google Analytics. This means that most standard website reporting won’t be compatible with Brave Ads. To ensure advertisers have visibility into performance of campaigns, we’ve detailed other effective privacy-first options for measurement in our <0>reporting guide</0>"
-
-#~ msgid "Breakdowns"
-#~ msgstr "Breakdowns"
-
-#~ msgid "Browser ads"
-#~ msgstr "Browser ads"
-
-#~ msgid "Browser-based delivery offers a new way to reach audiences on the Web."
-#~ msgstr "Browser-based delivery offers a new way to reach audiences on the Web."
 
 msgid "Budget"
 msgstr "Presupuesto"
@@ -335,9 +254,6 @@ msgstr "Sitio web de la empresa"
 
 msgid "Business Website is required"
 msgstr "Se requiere el sitio web de la empresa."
-
-#~ msgid "By continuing, you acknowledge and agree to our <0>Privacy Policy</0> and platform <1>Terms and Conditions</1>"
-#~ msgstr "By continuing, you acknowledge and agree to our <0>Privacy Policy</0> and platform <1>Terms and Conditions</1>"
 
 msgid "Call To Action"
 msgstr "Llamada a la acción"
@@ -399,20 +315,11 @@ msgstr "Verifique la elegibilidad"
 msgid "Choose"
 msgstr "Elegir"
 
-#~ msgid "Choose a format for the campaign you would like to run"
-#~ msgstr "Choose a format for the campaign you would like to run"
-
 msgid "Choose a format for the campaign you would like to run."
 msgstr "Elija un formato para la campaña que desea ejecutar"
 
-#~ msgid "Choose campaign type"
-#~ msgstr "Choose campaign type"
-
 msgid "Choose File"
 msgstr "Elija archivo"
-
-#~ msgid "Choose what kind of account to open"
-#~ msgstr "Choose what kind of account to open"
 
 msgid "City"
 msgstr "Ciudad"
@@ -429,17 +336,8 @@ msgstr "Haga clic en el enlace de inicio de sesión seguro del correo electróni
 msgid "Click Through Rate"
 msgstr "Clic por calificaciones"
 
-#~ msgid "Click to site visit rate"
-#~ msgstr "Click to site visit rate"
-
-#~ msgid "Click-through conversions"
-#~ msgstr "Click-through conversions"
-
 msgid "Click-through Conversions"
 msgstr "Conversiones por clics"
-
-#~ msgid "Click-through rate"
-#~ msgstr "Click-through rate"
 
 msgid "Clicks"
 msgstr "Clics"
@@ -492,26 +390,14 @@ msgstr "Conversión"
 msgid "Conversion Observation Window"
 msgstr "Ventana de observación de conversión"
 
-#~ msgid "Conversion rate"
-#~ msgstr "Conversion rate"
-
 msgid "Conversion Rate"
 msgstr "Tasa de conversión"
 
 msgid "Conversion reporting change"
 msgstr "Cambio en la informe de conversión"
 
-#~ msgid "Conversion reporting for Brave Ads has changed to better uphold user privacy and security. Campaigns with conversion URLs that violate the newly clarified requirements for conversion URLs will now automatically be paused until their URLs have been updated. Please review the guidelines and take any necessary action to prevent campaign disruption. New guidelines can be found at in the <0/>"
-#~ msgstr "Conversion reporting for Brave Ads has changed to better uphold user privacy and security. Campaigns with conversion URLs that violate the newly clarified requirements for conversion URLs will now automatically be paused until their URLs have been updated. Please review the guidelines and take any necessary action to prevent campaign disruption. New guidelines can be found at in the <0/>"
-
 msgid "Conversion reporting for Brave Ads has changed to better uphold user privacy and security. Campaigns with conversion URLs that violate the newly clarified requirements for conversion URLs will now automatically be paused until their URLs have been updated. Please review the guidelines and take any necessary action to prevent campaign disruption. New guidelines can be found at the <0/>"
 msgstr "La informe de conversión para los Anuncios de Brave ha cambiado para mejorar la privacidad y la seguridad de los usuarios. Las campañas con URL de conversión que violen los requisitos recientemente aclarados para las URL de conversión se pausarán automáticamente hasta que se actualicen sus URL. Revise las pautas y tome las medidas necesarias para evitar interrupciones en la campaña. Las nuevas pautas se pueden encontrar en el <0/>"
-
-#~ msgid "Conversion reporting for Brave Ads has changed to better uphold user privacy and security. Campaigns with conversion URLs that violate the newly clarified requirements for conversion URLs will now automatically be paused until their URLs have been updated. Please review the guidelines and take any necessary action to prevent campaign disruption. New guidelines can be found at: <0/>"
-#~ msgstr "Conversion reporting for Brave Ads has changed to better uphold user privacy and security. Campaigns with conversion URLs that violate the newly clarified requirements for conversion URLs will now automatically be paused until their URLs have been updated. Please review the guidelines and take any necessary action to prevent campaign disruption. New guidelines can be found at: <0/>"
-
-#~ msgid "Conversion Type"
-#~ msgstr "Conversion Type"
 
 msgid "Conversion type must be Post Click or Post View"
 msgstr "El tipo de conversión debe ser Post Clic o Post Vista"
@@ -549,30 +435,6 @@ msgstr "Costo por clic"
 msgid "Could not logout at this time. Please try again later."
 msgstr "No se pudo cerrar la sesión en este momento. Por favor, inténtelo de nuevo más tarde."
 
-#~ msgid "Count conversions within X days of an impression"
-#~ msgstr "Count conversions within X days of an impression"
-
-#~ msgid "Counted if the user clicks an ad and spends at least 10 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count."
-#~ msgstr "Counted if the user clicks an ad and spends at least 10 seconds on the advertiser's website, with the website open in an active browser tab. The 10 seconds must be spent on the site after arriving by clicking the ad link, and the tab must remain open and active the entire time for the visit to count."
-
-#~ msgid "Counted when a user clicks on the ad. Does not include clicks to dismiss"
-#~ msgstr "Counted when a user clicks on the ad. Does not include clicks to dismiss"
-
-#~ msgid "Counted when a user clicks the “close” or “x” button to make an ad go away"
-#~ msgstr "Counted when a user clicks the “close” or “x” button to make an ad go away"
-
-#~ msgid "Counted when a user reaches a designated conversion landing page"
-#~ msgstr "Counted when a user reaches a designated conversion landing page"
-
-#~ msgid "Counted when a user reaches a designated conversion landing page following an ad impression."
-#~ msgstr "Counted when a user reaches a designated conversion landing page following an ad impression."
-
-#~ msgid "Counted when a user reaches a designated conversion landing page following an impression and click of the ad."
-#~ msgstr "Counted when a user reaches a designated conversion landing page following an impression and click of the ad."
-
-#~ msgid "Counted when an ad is displayed on screen for a minimum of one second"
-#~ msgstr "Counted when an ad is displayed on screen for a minimum of one second"
-
 msgid "Country"
 msgstr "País"
 
@@ -600,9 +462,6 @@ msgstr "Crear y enviar para aprobación"
 msgid "Create ad"
 msgstr "Crear anuncio"
 
-#~ msgid "Create an account"
-#~ msgstr "Create an account"
-
 msgid "Create new ad"
 msgstr "Crear nuevo anuncio"
 
@@ -611,9 +470,6 @@ msgstr "¿Crear un nuevo par de claves?"
 
 msgid "created"
 msgstr "creado"
-
-#~ msgid "Creative Performance"
-#~ msgstr "Creative Performance"
 
 msgid "CTR"
 msgstr "CTR"
@@ -624,20 +480,11 @@ msgstr "Personalizado"
 msgid "Daily"
 msgstr "Diario"
 
-#~ msgid "Daily Graph"
-#~ msgstr "Daily Graph"
-
-#~ msgid "Daily Performance"
-#~ msgstr "Daily Performance"
-
 msgid "Dashboard"
 msgstr "Panel de control"
 
 msgid "Data not valid for this private key"
 msgstr "Datos no válidos para esta clave privada"
-
-#~ msgid "Day"
-#~ msgstr "Day"
 
 msgid "Decrypt Conversion Data?"
 msgstr "¿Descifrar datos de conversión?"
@@ -647,15 +494,6 @@ msgstr "Defina cómo quiere que se publique su campaña."
 
 msgid "Define the number of days Brave will observe conversions and attribute them to the campaign."
 msgstr "Defina el número de días que Brave observará las conversiones y las atribuirá a la campaña."
-
-#~ msgid "DELETED"
-#~ msgstr "DELETED"
-
-#~ msgid "Determine your eligibility for Brave Search, the world’s fastest-growing alternative search engine by clicking below and filling out the form."
-#~ msgstr "Determine your eligibility for Brave Search, the world’s fastest-growing alternative search engine by clicking below and filling out the form."
-
-#~ msgid "Device"
-#~ msgstr "Device"
 
 msgid "Disabled because you haven’t made any changes"
 msgstr "Deshabilitado porque no ha realizado ningún cambio"
@@ -668,9 +506,6 @@ msgstr "Descartar anuncio"
 
 msgid "Discard campaign"
 msgstr "Descartar campaña"
-
-#~ msgid "Dismissal rate"
-#~ msgstr "Dismissal rate"
 
 msgid "Dismissal Rate"
 msgstr "Tasa de rechazo"
@@ -686,9 +521,6 @@ msgstr "Dominio"
 
 msgid "Domain is required"
 msgstr "Se requiere dominio"
-
-#~ msgid "Domain must match the email domain"
-#~ msgstr "Domain must match the email domain"
 
 msgid "Domain must not contain any whitespace"
 msgstr "El dominio no debe contener espacios en blanco"
@@ -744,9 +576,6 @@ msgstr "Hora de finalización"
 msgid "Enter a URL that indicates a desired action you want to measure, like a subscription or purchase confirmation page. Brave will count unique visits to that page as conversions if a user has seen or clicked your ad."
 msgstr "Introduzca una URL que indique una acción deseada que desea medir, como una página de confirmación de suscripción o compra. Brave contará las visitas únicas a esa página como conversiones si un usuario ha visto o hecho clic en su anuncio."
 
-#~ msgid "Enter a URL that represents your conversion goal, like a checkout or subscription confirmation page. <0/>Brave will count unique visits to that page from users who saw or clicked your ad."
-#~ msgstr "Enter a URL that represents your conversion goal, like a checkout or subscription confirmation page. <0/>Brave will count unique visits to that page from users who saw or clicked your ad."
-
 msgid "Enter Ads Manager"
 msgstr "Ingresar al Administrador de Anuncios"
 
@@ -789,17 +618,8 @@ msgstr "Finalizar y enviar"
 msgid "First party tracking acknowledgement is required"
 msgstr "Se requiere el reconocimiento de seguimiento de origen"
 
-#~ msgid "For all business sizes"
-#~ msgstr "For all business sizes"
-
 msgid "For businesses of all sizes. Create your campaign in minutes, starting with as little as $500 per month."
 msgstr "Para empresas de todos los tamaños. Cree su campaña en minutos, a partir de tan solo $500 al mes."
-
-#~ msgid "For enterprise and agency businesses looking for bespoke ad solutions via dedicated Brave Ads representatives."
-#~ msgstr "For enterprise and agency businesses looking for bespoke ad solutions via dedicated Brave Ads representatives."
-
-#~ msgid "For small to mid-sized businesses to create and manage their Brave Ads campaigns independently."
-#~ msgstr "For small to mid-sized businesses to create and manage their Brave Ads campaigns independently."
 
 msgid "Format"
 msgstr "Formato"
@@ -837,9 +657,6 @@ msgstr "Generar"
 msgid "Generate a keypair for your account. Brave Ads will use your account’s public key to sign and encrypt conversion data. Only your organization will have access to the private key, which can be used to decrypt and view conversion data."
 msgstr "Genere un par de claves para su cuenta. Brave Ads usará la clave pública de su cuenta para firmar y cifrar los datos de conversión. Solo su organización tendrá acceso a la clave privada, que se puede usar para descifrar y ver los datos de conversión."
 
-#~ msgid "Generate a keypair for your organization. Brave Ads will use your organization’s public key to sign and encrypt conversion data. Only your organization will have access to the private key, which can be used to decrypt and view conversion data."
-#~ msgstr "Generate a keypair for your organization. Brave Ads will use your organization’s public key to sign and encrypt conversion data. Only your organization will have access to the private key, which can be used to decrypt and view conversion data."
-
 msgid "Generate a new API key?"
 msgstr "¿Generar una nueva clave API?"
 
@@ -848,15 +665,6 @@ msgstr "Generar una clave API"
 
 msgid "Generating a new API key will result in the deactivation of your previous key, rendering it unusable for future requests. Make sure to update your code with the new key to avoid disruptions in your application’s functionality."
 msgstr "La generación de una nueva clave API dará como resultado la desactivación de su clave anterior, dejándola inutilizable para futuras solicitudes. Asegúrese de actualizar el código con la nueva clave para evitar interrupciones en la funcionalidad de la aplicación."
-
-#~ msgid "Get 50% your first campaign when you pay in Basic Attention Token"
-#~ msgstr "Get 50% your first campaign when you pay in Basic Attention Token"
-
-#~ msgid "Get a free one-month test to see how Search Ads perform for your brand."
-#~ msgstr "Get a free one-month test to see how Search Ads perform for your brand."
-
-#~ msgid "Get discounts on your campaign when you pay with Basic Attention Token."
-#~ msgstr "Get discounts on your campaign when you pay with Basic Attention Token."
 
 msgid "Get in touch with our team"
 msgstr "Póngase en contacto con nuestro equipo"
@@ -876,26 +684,11 @@ msgstr "Centro de ayuda"
 msgid "Hi"
 msgstr "Hola"
 
-#~ msgid "Hide"
-#~ msgstr "Hide"
-
-#~ msgid "Hour"
-#~ msgstr "Hour"
-
 msgid "Hourly"
 msgstr "Cada hora"
 
-#~ msgid "Hourly Graph"
-#~ msgstr "Hourly Graph"
-
-#~ msgid "Hourly Performance"
-#~ msgstr "Hourly Performance"
-
 msgid "I have reviewed and agree to the <0>Advertiser Privacy Policy</0> and platform <1>Terms of Service</1> applicable to Brave Ads."
 msgstr "He revisado y acepto la <0>Política de privacidad del anunciante<0> y los <1>Términos de servicio</1> de la plataforma aplicables a Brave Ads."
-
-#~ msgid "I understand that Brave Ads will not be compatible with Google Analytics and similar solutions that rely on third-party trackers"
-#~ msgstr "I understand that Brave Ads will not be compatible with Google Analytics and similar solutions that rely on third-party trackers"
 
 msgid "I understand that first-party analytics are necessary for independent reporting."
 msgstr "Entiendo que los análisis de origen son necesarios para la elaboración de informes independientes."
@@ -905,9 +698,6 @@ msgstr "Entiendo que solo puedo realizar campañas publicitarias en inglés, esp
 
 msgid "I understand that payment is required before ad campaigns can be launched."
 msgstr "Entiendo que se requiere un pago antes de que se puedan lanzar campañas publicitarias."
-
-#~ msgid "I understand that pre-payment is required to launch my campaigns"
-#~ msgstr "I understand that pre-payment is required to launch my campaigns"
 
 msgid "I would like to receive marketing emails about new features and promotions from Brave Ads"
 msgstr "Me gustaría recibir correos electrónicos de marketing sobre nuevas funciones y promociones de Brave Ads"
@@ -933,9 +723,6 @@ msgstr "Imágenes"
 msgid "Impressions"
 msgstr "Impresiones"
 
-#~ msgid "Impressions (Device)"
-#~ msgstr "Impressions (Device)"
-
 msgid "In a blog post/news article"
 msgstr "En una publicación de blog/artículo de noticias"
 
@@ -948,9 +735,6 @@ msgstr "En una publicación de Brave en LinkedIn"
 msgid "In a video on YouTube"
 msgstr "En un video en YouTube"
 
-#~ msgid "In the meantime, check out our <0>advertiser resources</0>. If you have any questions, please reach out to <1>selfserve@brave.com</1>."
-#~ msgstr "In the meantime, check out our <0>advertiser resources</0>. If you have any questions, please reach out to <1>selfserve@brave.com</1>."
-
 msgid "In your local time this is"
 msgstr "En su hora local, esto es"
 
@@ -959,9 +743,6 @@ msgstr "Incluir campañas que finalizaron hace más de 6 meses"
 
 msgid "Incremental"
 msgstr "Incremental"
-
-#~ msgid "Interested? Pay with BAT to get <0>50% off</0> your first campaign."
-#~ msgstr "Interested? Pay with BAT to get <0>50% off</0> your first campaign."
 
 msgid "Invalid format"
 msgstr "Formato no válido"
@@ -990,17 +771,11 @@ msgstr "Está programada para iniciarse {campaignStartFromNow}."
 msgid "Key copied"
 msgstr "Clave copiada"
 
-#~ msgid "Key Statistics"
-#~ msgstr "Key Statistics"
-
 msgid "Keypairs"
 msgstr "Pares de claves"
 
 msgid "Language acknowledgement is required"
 msgstr "Se requiere confirmación de idioma"
-
-#~ msgid "Last 14 days"
-#~ msgstr "Last 14 days"
 
 msgid "Last 30 days"
 msgstr "Últimos 30 días"
@@ -1011,20 +786,8 @@ msgstr "Últimos 7 días"
 msgid "Last month"
 msgstr "El mes pasado"
 
-#~ msgid "Last week (Sun - Sat)"
-#~ msgstr "Last week (Sun - Sat)"
-
-#~ msgid "Launch a Campaign"
-#~ msgstr "Launch a Campaign"
-
 msgid "Learn More"
 msgstr "Más información"
-
-#~ msgid "Learn more about BAT"
-#~ msgstr "Learn more about BAT"
-
-#~ msgid "Learn more about various campaign types"
-#~ msgstr "Learn more about various campaign types"
 
 msgid "Let Brave pick categories for me."
 msgstr "Dejar que Brave elija las categorías por mí."
@@ -1041,14 +804,8 @@ msgstr "El presupuesto vitalicio debe ser de ${MIN_PER_CAMPAIGN} o más"
 msgid "Lifetime budget must be higher for date range provided. Minimum ${min}."
 msgstr "El presupuesto vitalicio debe ser mayor para el intervalo de fechas proporcionado. Mínimo ${min}."
 
-#~ msgid "Limited time only. Available to new advertisers, and those who ran campaigns before September 30, 2023."
-#~ msgstr "Limited time only. Available to new advertisers, and those who ran campaigns before September 30, 2023."
-
 msgid "Linux"
 msgstr "Linux"
-
-#~ msgid "Location"
-#~ msgstr "Location"
 
 msgid "Locations"
 msgstr "Ubicaciones"
@@ -1074,17 +831,11 @@ msgstr "Realizar el pago y enviarlo para su aprobación"
 msgid "Make sure to include your brand name in the title OR body of the ad. Otherwise, it will be rejected."
 msgstr "Asegúrese de incluir el nombre de su marca en el título O en el cuerpo del anuncio. De lo contrario, será rechazado."
 
-#~ msgid "Managed service"
-#~ msgstr "Managed service"
-
 msgid "Max 30 Characters"
 msgstr "Máximo 30 caracteres"
 
 msgid "Max 60 Characters"
 msgstr "Máximo 60 caracteres"
-
-#~ msgid "Minimum Spend"
-#~ msgstr "Minimum Spend"
 
 msgid "Modifying an ad will immediately put it into review. This means it will no longer be shown to users until it is approved."
 msgstr "Modificar un anuncio lo pondrá de inmediato en revisión. Esto significa que ya no se mostrará a los usuarios hasta que sea aprobado."
@@ -1094,15 +845,6 @@ msgstr "Modificar un anuncio lo pondrá de inmediato en revisión. Esto signific
 
 msgid "Modifying the state of this ad will effect more than one campaign:"
 msgstr "Modificar el estado de este anuncio afectará a más de una campaña:"
-
-#~ msgid "month"
-#~ msgstr "month"
-
-#~ msgid "Month"
-#~ msgstr "Month"
-
-#~ msgid "more"
-#~ msgstr "more"
 
 msgid "Name"
 msgstr "Nombre"
@@ -1200,18 +942,6 @@ msgstr "Encendido/Apagado"
 msgid "Once confirmed, your account’s keypair will be replaced with the new keypair."
 msgstr "Una vez confirmado, el par de claves de su cuenta se reemplazará por el nuevo par de claves."
 
-#~ msgid "Once confirmed, your organization’s keypair will be replaced with the new keypair."
-#~ msgstr "Once confirmed, your organization’s keypair will be replaced with the new keypair."
-
-#~ msgid "Once the review process is complete, we will send you an email to notify you of the approval status and any further steps required."
-#~ msgstr "Once the review process is complete, we will send you an email to notify you of the approval status and any further steps required."
-
-#~ msgid "or <0>contact us</0> for New Tab Takeover campaigns"
-#~ msgstr "or <0>contact us</0> for New Tab Takeover campaigns"
-
-#~ msgid "or <0>contact us</0> for premium ad placements"
-#~ msgstr "or <0>contact us</0> for premium ad placements"
-
 msgid "Or email <0>searchads@brave.com</0>"
 msgstr "O envíe un correo electrónico a <0>searchads@brave.com</0>"
 
@@ -1221,14 +951,8 @@ msgstr "o inicie sesión usando una contraseña"
 msgid "or sign in using a secure link"
 msgstr "o inicie sesión usando un enlace seguro"
 
-#~ msgid "Organization"
-#~ msgstr "Organization"
-
 msgid "OS"
 msgstr "Sistema Operativo"
-
-#~ msgid "OS Performance"
-#~ msgstr "OS Performance"
 
 msgid "Other (please specify)"
 msgstr "Otro (por favor, especifique)"
@@ -1244,9 +968,6 @@ msgstr "Contraseña"
 
 msgid "Pause"
 msgstr "Pausar"
-
-#~ msgid "Pay with BAT to get <0>50% off</0> your first campaign"
-#~ msgstr "Pay with BAT to get <0>50% off</0> your first campaign"
 
 msgid "Pay with BAT to get <0>50% off</0> your first self-managed campaign."
 msgstr "Pague con BAT para obtener un <0>50% de descuento</0> en su primera campaña autogestionada."
@@ -1272,9 +993,6 @@ msgstr "Por favor, consulte con su Gerente de Cuenta para obtener informes sobre
 msgid "Please confirm your account’s new private key:"
 msgstr "Por favor, confirme la nueva clave privada de su cuenta:"
 
-#~ msgid "Please confirm your organization’s new private key:"
-#~ msgstr "Please confirm your organization’s new private key:"
-
 msgid "Please enter a username and password"
 msgstr "Por favor, introduzca un nombre de usuario y contraseña"
 
@@ -1299,35 +1017,14 @@ msgstr "Por favor, indíquenos cómo se enteró de Brave Ads"
 msgid "Please let us know why you're interested in Brave Ads"
 msgstr "Por favor, indíquenos por qué está interesado(a) en Brave Ads"
 
-#~ msgid "Please reach out to <0>selfserve@brave.com</0> or try again."
-#~ msgstr "Please reach out to <0>selfserve@brave.com</0> or try again."
-
 msgid "Please refresh the page to try again, or email <0/> for assistance."
 msgstr "Por favor, actualice la página para volver a intentarlo o envíe un correo electrónico a <0/> para obtener ayuda."
-
-#~ msgid "Please see our <0>Advertiser Privacy Policy</0> and <1>Terms of Service</1> applicable to Brave Ads"
-#~ msgstr "Please see our <0>Advertiser Privacy Policy</0> and <1>Terms of Service</1> applicable to Brave Ads"
 
 msgid "Please see our <0>Advertiser Privacy Policy</0> and <1>Terms of Service</1> applicable to Brave Ads."
 msgstr "Consulte nuestra <0>Política de privacidad del anunciante</0> y <1>Términos de servicio</1> aplicables a Brave Ads."
 
 msgid "Please specify how you heard about Brave Ads"
 msgstr "Por favor, especifique cómo se enteró de Brave Ads"
-
-#~ msgid "Post-Click"
-#~ msgstr "Post-Click"
-
-#~ msgid "Post-Click: Viewed ad and converted by clicking its link"
-#~ msgstr "Post-Click: Viewed ad and converted by clicking its link"
-
-#~ msgid "Post-View"
-#~ msgstr "Post-View"
-
-#~ msgid "Post-View: Viewed ad and converted by visiting site on their own."
-#~ msgstr "Post-View: Viewed ad and converted by visiting site on their own."
-
-#~ msgid "Powerful ad formats"
-#~ msgstr "Powerful ad formats"
 
 msgid "Preparing file for upload..."
 msgstr "Preparando el archivo para cargarlo…"
@@ -1356,12 +1053,6 @@ msgstr "Región principal de la empresa"
 msgid "Primary region of business is required"
 msgstr "Se requiere la región principal de la empresa"
 
-#~ msgid "Prior to using the dashboard, please take a moment to complete your profile and review the following acknowledgements:"
-#~ msgstr "Prior to using the dashboard, please take a moment to complete your profile and review the following acknowledgements:"
-
-#~ msgid "Privacy-forward"
-#~ msgstr "Privacy-forward"
-
 msgid "Private Key"
 msgstr "Clave privada"
 
@@ -1380,26 +1071,14 @@ msgstr "Detalles del perfil"
 msgid "Query parameter"
 msgstr "Parámetro de consulta"
 
-#~ msgid "Query string paramaters"
-#~ msgstr "Query string paramaters"
-
 msgid "Query string parameters"
 msgstr "Parámetros de cadena de consulta"
 
 msgid "Reach 70+ million highly engaged, otherwise unreachable users."
 msgstr "Llegue a más de 70 millones de usuarios altamente comprometidos, a los que de otro modo no llegaría. "
 
-#~ msgid "Reach and convert new customers through premium advertising on the Brave browser and search engine."
-#~ msgstr "Reach and convert new customers through premium advertising on the Brave browser and search engine."
-
-#~ msgid "Reach audiences who don’t use other search engines and block ads on most sites."
-#~ msgstr "Reach audiences who don’t use other search engines and block ads on most sites."
-
 msgid "Ready to reach your first million users? Start your first campaign today."
 msgstr "¿Listo(a) para llegar a su primer millón de usuarios? Comience su primera campaña hoy mismo."
-
-#~ msgid "Register for Self-service"
-#~ msgstr "Register for Self-service"
 
 msgid "Remove"
 msgstr "Eliminar"
@@ -1407,23 +1086,11 @@ msgstr "Eliminar"
 msgid "Remove Conversion tracking"
 msgstr "Eliminar seguimiento de conversión"
 
-#~ msgid "Remove Conversion Tracking"
-#~ msgstr "Remove Conversion Tracking"
-
-#~ msgid "Reporting"
-#~ msgstr "Reporting"
-
-#~ msgid "Reporting not available yet for <0>{campaignName}</0>."
-#~ msgstr "Reporting not available yet for <0>{campaignName}</0>."
-
 msgid "Request another link."
 msgstr "Solicitar otro enlace."
 
 msgid "Return to dashboard"
 msgstr "Volver al panel de control"
-
-#~ msgid "Revert"
-#~ msgstr "Revert"
 
 msgid "Review"
 msgstr "Revisar"
@@ -1446,12 +1113,6 @@ msgstr "Guardar anuncio"
 msgid "Saving..."
 msgstr "Guardando…"
 
-#~ msgid "Search ads"
-#~ msgstr "Search ads"
-
-#~ msgid "Search domain must match email domain"
-#~ msgstr "Search domain must match email domain"
-
 msgid "Search homepage"
 msgstr "Buscar página de inicio"
 
@@ -1461,12 +1122,6 @@ msgstr "Buscar palabra clave"
 msgid "Search keyword ads"
 msgstr "Buscar anuncios de palabras clave"
 
-#~ msgid "See if you qualify"
-#~ msgstr "See if you qualify"
-
-#~ msgid "Segment Performance"
-#~ msgstr "Segment Performance"
-
 msgid "Select Account"
 msgstr "Seleccionar cuenta"
 
@@ -1475,9 +1130,6 @@ msgstr "Seleccione una campaña para clonar"
 
 msgid "Select one campaign to edit"
 msgstr "Seleccione una campaña para editar"
-
-#~ msgid "Select Organization"
-#~ msgstr "Select Organization"
 
 msgid "Select the ads you would like to include in this ad set. Only checked ads are included."
 msgstr "Seleccione los anuncios que desea incluir en este conjunto de anuncios. Solo se incluyen los anuncios marcados."
@@ -1497,29 +1149,11 @@ msgstr "Seleccione las plataformas a las que se dirigirá"
 msgid "Selected ads"
 msgstr "Anuncios seleccionados"
 
-#~ msgid "Self-service"
-#~ msgstr "Self-service"
-
 msgid "Setup Progress"
 msgstr "Progreso de configuración"
 
-#~ msgid "Show"
-#~ msgstr "Show"
-
-#~ msgid "Sign out"
-#~ msgstr "Sign out"
-
-#~ msgid "Sign up"
-#~ msgstr "Sign up"
-
 msgid "Simple ads to reach digital trend-setters around the world"
 msgstr "Anuncios simples para llegar a los líderes de tendencias digitales en todo el mundo"
-
-#~ msgid "Simple ads to reach digital trend-setters around the world."
-#~ msgstr "Simple ads to reach digital trend-setters around the world."
-
-#~ msgid "Site visit rate"
-#~ msgstr "Site visit rate"
 
 msgid "Site Visit Rate"
 msgstr "Tasa de visitas al sitio"
@@ -1533,9 +1167,6 @@ msgstr "Visitas al sitio"
 msgid "Skip survey and continue"
 msgstr "Saltar encuesta y continuar"
 
-#~ msgid "SOMETHING ABOUT SEARCH GOES HERE"
-#~ msgstr "SOMETHING ABOUT SEARCH GOES HERE"
-
 msgid "Something went wrong."
 msgstr "Algo salió mal. "
 
@@ -1547,9 +1178,6 @@ msgstr "Patrocinado"
 
 msgid "Start"
 msgstr "Empezar"
-
-#~ msgid "Start a Brave Ads campaign with as little as $500."
-#~ msgstr "Start a Brave Ads campaign with as little as $500."
 
 msgid "Start a campaign with BAT"
 msgstr "Inicie una campaña con BAT"
@@ -1575,17 +1203,8 @@ msgstr "Inicie el perfil de su empresa"
 msgid "State"
 msgstr "Estado"
 
-#~ msgid "State / Province"
-#~ msgstr "State / Province"
-
-#~ msgid "State / Province is required"
-#~ msgstr "State / Province is required"
-
 msgid "Status"
 msgstr "Estado"
-
-#~ msgid "Stay Innovative"
-#~ msgstr "Stay Innovative"
 
 msgid "Street address"
 msgstr "Dirección de la calle"
@@ -1593,14 +1212,8 @@ msgstr "Dirección de la calle"
 msgid "Street address is required"
 msgstr "Se requiere la dirección de la calle"
 
-#~ msgid "Street address line 2"
-#~ msgstr "Street address line 2"
-
 msgid "Submit"
 msgstr "Enviar"
-
-#~ msgid "Submit for approval"
-#~ msgstr "Submit for approval"
 
 msgid "Success! Check your email."
 msgstr "¡Éxito! Revise su correo electrónico."
@@ -1616,12 +1229,6 @@ msgstr "¡Responda nuestra encuesta!"
 
 msgid "Tap into more than <0>9 billion</0> annual Web searches"
 msgstr "Aproveche más de <0>9 mil millones</0> de búsquedas web anuales"
-
-#~ msgid "Tap into over <0>9 billion</0> annual Web searches"
-#~ msgstr "Tap into over <0>9 billion</0> annual Web searches"
-
-#~ msgid "Tap into unreachable audiences"
-#~ msgstr "Tap into unreachable audiences"
 
 msgid "Target URL"
 msgstr "URL de destino"
@@ -1641,14 +1248,8 @@ msgstr "Segmentación"
 msgid "Tell us why you're interested in Brave Ads"
 msgstr "Cuéntenos por qué le interesa Brave Ads"
 
-#~ msgid "Terms & Conditions"
-#~ msgstr "Terms & Conditions"
-
 msgid "Terms & Conditions acknowledgement is required"
 msgstr "Se requiere la aceptación de los Términos y Condiciones"
-
-#~ msgid "Thanks for your interest in Brave Ads! Our team will now carefully review the provided information."
-#~ msgstr "Thanks for your interest in Brave Ads! Our team will now carefully review the provided information."
 
 msgid "The <0>Basic Attention Token (BAT)</0> is Brave’s native crypto token. Brave Browser users who opt into <1>Brave Rewards</1> can earn BAT just for opting into viewing ads from the Brave Ads network. Earners can hold BAT like any other crypto asset, trade it, cash it in, or even donate it to their favorite creators."
 msgstr "El <0>Basic Attention Token (BAT)</0> es el token criptográfico nativo de Brave. Los usuarios del navegador Brave que opten por <1>Brave Rewards</1> pueden ganar BAT sólo por ver anuncios de la red Brave Ads. Los ganadores pueden conservar el BAT como cualquier otro criptoactivo, comerciar con él, canjearlo o incluso donarlo a sus creadores favoritos."
@@ -1659,26 +1260,8 @@ msgstr "El valor actual de esta métrica puede ser una subestimación."
 msgid "The following query string parameters will be added to your landing page URLs. This will allow you to track the performance of your ads."
 msgstr "Los siguientes parámetros de cadena de consulta se agregarán a las URL de su página de destino. Esto le permitirá realizar un seguimiento del rendimiento de sus anuncios."
 
-#~ msgid "The rate at which users clicked in correlation to their impressions"
-#~ msgstr "The rate at which users clicked in correlation to their impressions"
-
-#~ msgid "The rate at which users converted in correlation to their clicks"
-#~ msgstr "The rate at which users converted in correlation to their clicks"
-
-#~ msgid "The rate at which users dismissed the ad in correlation to their impressions"
-#~ msgstr "The rate at which users dismissed the ad in correlation to their impressions"
-
-#~ msgid "The rate at which users visited the site in correlation to their clicks"
-#~ msgstr "The rate at which users visited the site in correlation to their clicks"
-
-#~ msgid "The rate at which users visited the site in correlation to their impressions"
-#~ msgstr "The rate at which users visited the site in correlation to their impressions"
-
 msgid "The username or password did not match our records."
 msgstr "El nombre de usuario o la contraseña no coincidieron con nuestros registros."
-
-#~ msgid "Third party tracking acknowledgement is required"
-#~ msgstr "Third party tracking acknowledgement is required"
 
 msgid "This is a news display ad, it wll look like part of the news feed."
 msgstr "Este es un anuncio de noticias, se verá como parte de la fuente de noticias."
@@ -1688,12 +1271,6 @@ msgstr "Esta clave es única para usted, asegúrese de guardarla de forma segura
 
 msgid "This month"
 msgstr "Este mes"
-
-#~ msgid "This week"
-#~ msgstr "This week"
-
-#~ msgid "This week (Sun - Today)"
-#~ msgstr "This week (Sun - Today)"
 
 msgid "Time Zone"
 msgstr "Zona horaria"
@@ -1707,38 +1284,14 @@ msgstr "Vista previa del título"
 msgid "To"
 msgstr "Para"
 
-#~ msgid "To launch a campaign with Brave, you are required to prepay the full amount you intend to spend. Any remaining funds from your budget will be credited back to your original payment method upon request."
-#~ msgstr "To launch a campaign with Brave, you are required to prepay the full amount you intend to spend. Any remaining funds from your budget will be credited back to your original payment method upon request."
-
 msgid "To protect user’s privacy, verified ad conversion data is encrypted so that the identities of converted users remain anonymous to Brave. You can decrypt the conversion data in the CSV file by providing your private key here. If no key is provided, you will receive the encrypted conversion data. Your private key will never be sent to or stored on any Brave servers."
 msgstr "Para proteger la privacidad del usuario, los datos de conversión de anuncios verificados se cifran para que las identidades de los usuarios convertidos permanezcan anónimas para Brave. Puede descifrar los datos de conversión en el archivo CSV proporcionando su clave privada aquí. Si no se proporciona ninguna clave, recibirá los datos de conversión cifrados. Su clave privada nunca se enviará ni se almacenará en ningún servidor de Brave."
 
 msgid "Today"
 msgstr "Hoy"
 
-#~ msgid "Toggle between various metrics using the switches provided. For deeper insights, click the buttons to access various breakdowns. If you prefer the previous view, simply click the \"revert\" button to switch back."
-#~ msgstr "Toggle between various metrics using the switches provided. For deeper insights, click the buttons to access various breakdowns. If you prefer the previous view, simply click the \"revert\" button to switch back."
-
-#~ msgid "Toggle metric displays using the switches on the right. Use the buttons across the top to filter and see different breakdowns. Or you can click the \"revert\" button to switch back to the old reporting screen."
-#~ msgstr "Toggle metric displays using the switches on the right. Use the buttons across the top to filter and see different breakdowns. Or you can click the \"revert\" button to switch back to the old reporting screen."
-
-#~ msgid "Toggle metric displays using the switches on the right. Use the tabs on the left side see different breakdowns, and use the buttons across the top to filter. Or you can click the \"revert\" button to switch back to the old reporting screen."
-#~ msgstr "Toggle metric displays using the switches on the right. Use the tabs on the left side see different breakdowns, and use the buttons across the top to filter. Or you can click the \"revert\" button to switch back to the old reporting screen."
-
-#~ msgid "Toggle metric displays using the switches on the right. View different breakdowns using the tabs on the left. Use the top buttons on the right to filter data. Click \"revert\" for the previous reporting screen."
-#~ msgstr "Toggle metric displays using the switches on the right. View different breakdowns using the tabs on the left. Use the top buttons on the right to filter data. Click \"revert\" for the previous reporting screen."
-
-#~ msgid "Toggle metric displays using the switches on the right. View different breakdowns using the tabs on the left. Use the top buttons to filter data. Click \"revert\" for the previous reporting screen."
-#~ msgstr "Toggle metric displays using the switches on the right. View different breakdowns using the tabs on the left. Use the top buttons to filter data. Click \"revert\" for the previous reporting screen."
-
 msgid "Try a free one-month test to see how Brave Search Ads perform for your brand."
 msgstr "Haga una prueba gratuita de un mes para ver el rendimiento de Brave Search Ads para su marca."
-
-#~ msgid "Try again"
-#~ msgstr "Try again"
-
-#~ msgid "Type"
-#~ msgstr "Type"
 
 msgid "Unable to clone campaign"
 msgstr "No se puede clonar la campaña"
@@ -1758,9 +1311,6 @@ msgstr "No se pueden descifrar los datos de conversión"
 msgid "Unable to download CSV"
 msgstr "No se puede descargar CSV"
 
-#~ msgid "Unable to fetch image"
-#~ msgstr "Unable to fetch image"
-
 msgid "Unable to get campaign information for ad"
 msgstr "No se puede obtener la información de la campaña para el anuncio"
 
@@ -1779,17 +1329,11 @@ msgstr "No se puede iniciar sesión, el enlace ha caducado o ya se ha utilizado.
 msgid "Unable to register your organization at this time. Please try again later."
 msgstr "No se puede registrar su organización en este momento. Por favor, inténtelo de nuevo más tarde."
 
-#~ msgid "Unable to retrieve ad sets or ads for Campaign."
-#~ msgstr "Unable to retrieve ad sets or ads for Campaign."
-
 msgid "Unable to retrieve Campaign data."
 msgstr "No se pueden recuperar los datos de la campaña."
 
 msgid "Unable to retrieve images"
 msgstr "No se pueden recuperar imágenes"
-
-#~ msgid "Unable to retrieve reporting data for this Campaign."
-#~ msgstr "Unable to retrieve reporting data for this Campaign."
 
 msgid "Unable to save ad"
 msgstr "No se puede guardar el anuncio"
@@ -1809,14 +1353,8 @@ msgstr "No se puede subir la imagen"
 msgid "Unexpected error validating your credentials. Please try again later."
 msgstr "Error inesperado al validar sus credenciales. Por favor, inténtelo de nuevo más tarde."
 
-#~ msgid "Unique ads"
-#~ msgstr "Unique ads"
-
 msgid "Unknown"
 msgstr "Desconocido"
-
-#~ msgid "Unparalleled privacy"
-#~ msgstr "Unparalleled privacy"
 
 msgid "Update & Submit For Approval"
 msgstr "Actualizar y enviar para aprobación"
@@ -1869,35 +1407,20 @@ msgstr "Informe de conversiones verificadas"
 msgid "View profile"
 msgstr "Ver perfil"
 
-#~ msgid "View-through conversions"
-#~ msgstr "View-through conversions"
-
 msgid "View-through Conversions"
 msgstr "Conversiones por visualización"
 
 msgid "Visit Help Center"
 msgstr "Visitar el centro de ayuda"
 
-#~ msgid "We encountered a problem creating your account."
-#~ msgstr "We encountered a problem creating your account."
-
 msgid "We value your feedback and would love to hear your thoughts on your recent experience. <0/>Your input will help us improve the Brave Ads platform to better meet your needs. <1/>It only takes a few minutes and your participation will be greatly appreciated! <2/>Thank you for using Brave Ads! <3/>"
 msgstr "Valoramos sus comentarios y nos encantaría conocer su opinión sobre su experiencia reciente. <0/>Sus comentarios nos ayudarán a mejorar la plataforma de Brave Ads para satisfacer mejor sus necesidades. <1/>¡Solo toma unos minutos y su participación será muy apreciada! <2/>¡Gracias por usar Brave Ads! <3/>"
-
-#~ msgid "We've updated our reporting view"
-#~ msgstr "We've updated our reporting view"
 
 msgid "Website must not contain any whitespace"
 msgstr "El sitio web no debe contener ningún espacio en blanco"
 
 msgid "Website must start with https://"
 msgstr "El sitio web debe comenzar con https://"
-
-#~ msgid "Week"
-#~ msgstr "Week"
-
-#~ msgid "Welcome to Brave Ads"
-#~ msgstr "Welcome to Brave Ads"
 
 msgid "What is Brave Ads?"
 msgstr "¿Qué es Anuncios de Brave?"
@@ -1926,17 +1449,8 @@ msgstr "Correo electrónico de trabajo"
 msgid "Yes"
 msgstr "Sí"
 
-#~ msgid "Yesterday"
-#~ msgstr "Yesterday"
-
 msgid "You are attempting to create a new keypair, this will replace any of your account’s existing keypairs. Please note, previous keypairs cannot be retrieved or used once replaced."
 msgstr "Está intentando crear un nuevo par de claves, que reemplazará cualquiera de los pares de claves existentes de su cuenta. Tenga en cuenta que los pares de claves anteriores no se pueden recuperar ni utilizar una vez reemplazados."
-
-#~ msgid "You are attempting to create a new keypair, this will replace any of your organization’s existing keypairs. Please note, previous keypairs cannot be retrieved or used once replaced."
-#~ msgstr "You are attempting to create a new keypair, this will replace any of your organization’s existing keypairs. Please note, previous keypairs cannot be retrieved or used once replaced."
-
-#~ msgid "You can change this later"
-#~ msgstr "You can change this later"
 
 msgid "You have {0} errors that must be fixed before submitting."
 msgstr "Tiene {0} errores que deben corregirse antes de enviar."
@@ -1946,9 +1460,6 @@ msgstr "Tiene cambios sin guardar"
 
 msgid "You may have access to multiple accounts. Switch between them here."
 msgstr "Es posible que tenga acceso a varias cuentas. Cambie entre ellas aquí."
-
-#~ msgid "You may have access to multiple organisations. Switch between them here."
-#~ msgstr "You may have access to multiple organisations. Switch between them here."
 
 msgid "You will soon receive an email with the next steps of registration. While you wait, we recommend you check out our help center to get helpful information for getting started with Brave Ads."
 msgstr "Pronto recibirá un correo electrónico con los próximos pasos del registro. Mientras espera, le recomendamos que consulte nuestro centro de ayuda para obtener información útil para comenzar con Brave Ads."
@@ -1964,12 +1475,6 @@ msgstr "Su campaña ha sido creada y ahora está siendo revisada por nuestro equ
 
 msgid "Your campaign has been updated! <0/>If you added new ads, we’ll be in contact as soon as they are approved and activated. <1/>Thank you for using Brave Ads!"
 msgstr "¡Su campaña ha sido actualizada! <0/>Si agregó nuevos anuncios, nos pondremos en contacto con usted tan pronto como se aprueben y activen. <1/>¡Gracias por usar Brave Ads!"
-
-#~ msgid "Your organization’s new public key will be:"
-#~ msgstr "Your organization’s new public key will be:"
-
-#~ msgid "Your organization’s public key:"
-#~ msgstr "Your organization’s public key:"
 
 msgid "Your trial campaign will be reviewed by an Account Manager. Add any notes or questions for them here."
 msgstr "Su campaña de prueba será revisada por un Gerente de Cuenta. Agregue cualquier nota o pregunta para ellos aquí."
