@@ -8,7 +8,7 @@ msgstr ""
 "Language: pt\n"
 "Project-Id-Version: 27b1a082298d0ee642e56f654bcd7273\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-07-23 18:55\n"
+"PO-Revision-Date: 2024-07-24 01:53\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese, Brazilian\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -64,7 +64,7 @@ msgid "A login email is on the way"
 msgstr "Um e-mail de login está sendo enviado"
 
 msgid "About Brave Ads"
-msgstr "Sobre o Brave Ads"
+msgstr "Sobre os Anúncios Brave"
 
 #~ msgid "Access dashboard"
 #~ msgstr "Access dashboard"
@@ -424,7 +424,7 @@ msgid "Click Here!"
 msgstr "Clique Aqui!"
 
 msgid "Click on the secure login link in the email to access your Brave Ads account."
-msgstr "Clique no link seguro de login no seu e-mail para acessar sua conta do Brave Ads."
+msgstr "Clique no link seguro de login no seu e-mail para acessar sua conta dos Anúncios Brave."
 
 msgid "Click Through Rate"
 msgstr "Taxa de Cliques"
@@ -751,7 +751,7 @@ msgid "Enter Ads Manager"
 msgstr "Acessar o Gerenciador de Anúncios"
 
 msgid "Enter your email address to get a secure login link. Use this link to access your Brave Ads account."
-msgstr "Insira seu e-mail para obter um link seguro de login. Use este link para acessar sua conta do Brave Ads."
+msgstr "Insira seu e-mail para obter um link seguro de login. Use este link para acessar sua conta dos Anúncios Brave."
 
 msgid "Escape the low CTR of display banners"
 msgstr "Fuja do baixo CTR dos banners de exibição"
@@ -892,7 +892,7 @@ msgstr "Por hora"
 #~ msgstr "Hourly Performance"
 
 msgid "I have reviewed and agree to the <0>Advertiser Privacy Policy</0> and platform <1>Terms of Service</1> applicable to Brave Ads."
-msgstr "Eu li e concordo com a <0>Política de Privacidade do Anunciante</0> e os <1>Termos de Serviço</1> da plataforma que se aplicam ao Brave Ads."
+msgstr "Eu li e concordo com a <0>Política de Privacidade do Anunciante</0> e os <1>Termos de Serviço</1> da plataforma que se aplicam aos Anúncios Brave."
 
 #~ msgid "I understand that Brave Ads will not be compatible with Google Analytics and similar solutions that rely on third-party trackers"
 #~ msgstr "I understand that Brave Ads will not be compatible with Google Analytics and similar solutions that rely on third-party trackers"
@@ -910,7 +910,7 @@ msgstr "Entendo que o pagamento é necessário antes que as campanhas possam ser
 #~ msgstr "I understand that pre-payment is required to launch my campaigns"
 
 msgid "I would like to receive marketing emails about new features and promotions from Brave Ads"
-msgstr "Gostaria de receber e-mails sobre novos recursos e promoções do Brave Ads"
+msgstr "Gostaria de receber e-mails sobre novos recursos e promoções dos Anúncios Brave"
 
 msgid "Id"
 msgstr "Id"
@@ -1057,7 +1057,7 @@ msgid "Log in"
 msgstr "Entrar"
 
 msgid "Log into your Brave Ads account"
-msgstr "Faça login em sua conta do Brave Ads"
+msgstr "Faça login em sua conta dos Anúncios Brave"
 
 msgid "Logging in"
 msgstr "Fazendo login"
@@ -1294,10 +1294,10 @@ msgid "Please enter an email."
 msgstr "Por favor, insira um e-mail."
 
 msgid "Please let us know how you heard about Brave Ads"
-msgstr "Por favor, nos diga como você descobriu o Brave Ads"
+msgstr "Por favor, nos diga como você descobriu os Anúncios Brave"
 
 msgid "Please let us know why you're interested in Brave Ads"
-msgstr "Por favor, nos diga por que você está interessado no Brave Ads"
+msgstr "Por favor, nos diga por que você está interessado nos Anúncios Brave"
 
 #~ msgid "Please reach out to <0>selfserve@brave.com</0> or try again."
 #~ msgstr "Please reach out to <0>selfserve@brave.com</0> or try again."
@@ -1309,10 +1309,10 @@ msgstr "Por favor, atualize a página e tente novamente, ou envie um e-mail para
 #~ msgstr "Please see our <0>Advertiser Privacy Policy</0> and <1>Terms of Service</1> applicable to Brave Ads"
 
 msgid "Please see our <0>Advertiser Privacy Policy</0> and <1>Terms of Service</1> applicable to Brave Ads."
-msgstr "Por favor, consulte nossa <0>Política de Privacidade do Anunciante</0> e <1>Termos de Serviço</1> que se aplicam ao Brave Ads."
+msgstr "Por favor, consulte nossa <0>Política de Privacidade do Anunciante</0> e <1>Termos de Serviço</1> que se aplicam aos Anúncios Brave."
 
 msgid "Please specify how you heard about Brave Ads"
-msgstr "Por favor, nos diga como você ficou sabendo sobre o Brave Ads"
+msgstr "Por favor, nos diga como você ficou sabendo sobre os Anúncios Brave"
 
 #~ msgid "Post-Click"
 #~ msgstr "Post-Click"
@@ -1639,7 +1639,7 @@ msgid "Targeting"
 msgstr "Direcionamento"
 
 msgid "Tell us why you're interested in Brave Ads"
-msgstr "Nos conte por que você está interessado no Brave Ads"
+msgstr "Nos conte por que você está interessado nos Anúncios Brave"
 
 #~ msgid "Terms & Conditions"
 #~ msgstr "Terms & Conditions"
@@ -1882,7 +1882,7 @@ msgstr "Visitar a Central de Ajuda"
 #~ msgstr "We encountered a problem creating your account."
 
 msgid "We value your feedback and would love to hear your thoughts on your recent experience. <0/>Your input will help us improve the Brave Ads platform to better meet your needs. <1/>It only takes a few minutes and your participation will be greatly appreciated! <2/>Thank you for using Brave Ads! <3/>"
-msgstr "Valorizamos seu feedback e adoraríamos ouvir suas opiniões sobre sua experiência recente. <0/>Sua contribuição nos ajudará a melhorar a plataforma Brave Ads para atender melhor às suas necessidades. <1/>Leva apenas alguns minutos e sua participação será muito importante! <2/>Obrigado por usar o Brave Ads! <3/>"
+msgstr "Valorizamos seu feedback e adoraríamos ouvir suas opiniões sobre sua experiência recente. <0/>Sua contribuição nos ajudará a melhorar a plataforma dos Anúncios Brave para atender melhor às suas necessidades. <1/>Leva apenas alguns minutos e sua participação será muito importante! <2/>Obrigado por usar os Anúncios Brave! <3/>"
 
 #~ msgid "We've updated our reporting view"
 #~ msgstr "We've updated our reporting view"
@@ -1909,7 +1909,7 @@ msgid "What’s Brave?"
 msgstr "O que é Brave?"
 
 msgid "Where did you hear about Brave Ads"
-msgstr "Onde você ouviu falar sobre o Brave Ads"
+msgstr "Onde você ouviu falar sobre os Anúncios Brave"
 
 msgid "While looking up alternatives to Google Ads"
 msgstr "Enquanto procurava alternativas para o Google Ads"
@@ -1951,7 +1951,7 @@ msgstr "Você pode ter acesso a várias contas. Alterne entre elas aqui."
 #~ msgstr "You may have access to multiple organisations. Switch between them here."
 
 msgid "You will soon receive an email with the next steps of registration. While you wait, we recommend you check out our help center to get helpful information for getting started with Brave Ads."
-msgstr "Em breve, você receberá um e-mail com os próximos passos do cadastro. Enquanto isso, sugerimos que você dê uma olhada em nossa Central de Ajuda para obter informações úteis sobre como começar a usar o Brave Ads."
+msgstr "Em breve, você receberá um e-mail com os próximos passos do cadastro. Enquanto isso, sugerimos que você dê uma olhada em nossa Central de Ajuda para obter informações úteis sobre como começar a usar os Anúncios Brave."
 
 msgid "Your account’s new public key will be:"
 msgstr "A nova chave pública da sua conta será:"
@@ -1963,7 +1963,7 @@ msgid "Your campaign has been created and is now being reviewed by our ads team.
 msgstr "Sua campanha foi criada e está sendo revisada por nossa equipe de anúncios. <0/>Entraremos em contato assim que sua campanha for aprovada e ativada."
 
 msgid "Your campaign has been updated! <0/>If you added new ads, we’ll be in contact as soon as they are approved and activated. <1/>Thank you for using Brave Ads!"
-msgstr "Sua campanha foi atualizada! <0/>Se você adicionou novos anúncios, entraremos em contato assim que eles forem aprovados e ativados. <1/>Obrigado por usar o Brave Ads!"
+msgstr "Sua campanha foi atualizada! <0/>Se você adicionou novos anúncios, entraremos em contato assim que eles forem aprovados e ativados. <1/>Obrigado por usar os Anúncios Brave!"
 
 #~ msgid "Your organization’s new public key will be:"
 #~ msgstr "Your organization’s new public key will be:"
