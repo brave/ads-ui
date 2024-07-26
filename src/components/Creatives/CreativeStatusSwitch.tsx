@@ -20,13 +20,21 @@ import {
   AdvertiserCreativesDocument,
   CampaignsForCreativeDocument,
   CreativeFragment,
-  UpdateCreativeDocument,
 } from "@/graphql-client/graphql";
 import { useLazyQuery, useMutation } from "@apollo/client";
+import { graphql } from "@/graphql-client/index";
 
 interface Props {
   creative: CreativeFragment;
 }
+
+const Creative_State_Update = graphql(`
+  mutation AdsManagerUpdateCreativeState($id: String!, $state: String!) {
+    adsManagerUpdateCreativeState(id: $id, state: $state) {
+      id
+    }
+  }
+`);
 
 type RelatedCampaign = { id: string; name: string; state: string };
 export function CreativeStatusSwitch({ creative }: Props) {
@@ -41,19 +49,12 @@ export function CreativeStatusSwitch({ creative }: Props) {
   );
   const [creativeState, setCreativeState] = useState(input.state);
   const [update, { loading: updateLoading }] = useMutation(
-    UpdateCreativeDocument,
+    Creative_State_Update,
     {
       refetchQueries: [
         {
           query: AdvertiserCreativesDocument,
           variables: { advertiserId: advertiser.id },
-        },
-        {
-          query: CampaignsForCreativeDocument,
-          variables: {
-            creativeId: creative.id,
-            advertiserId: advertiser.id,
-          },
         },
       ],
       onCompleted() {
@@ -86,7 +87,7 @@ export function CreativeStatusSwitch({ creative }: Props) {
                 update({
                   variables: {
                     id: creative.id,
-                    input: { ...input, state: theState },
+                    state: theState,
                   },
                 });
               }
@@ -137,7 +138,7 @@ export function CreativeStatusSwitch({ creative }: Props) {
               update({
                 variables: {
                   id: creative.id,
-                  input: { ...input, state: creativeState },
+                  state: creativeState,
                 },
               });
             }}
