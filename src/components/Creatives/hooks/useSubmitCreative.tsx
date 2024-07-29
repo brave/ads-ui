@@ -79,7 +79,10 @@ export function useSubmitCreative(props: { id: string }) {
               input: {
                 id: props.id,
                 payloadNotification: input.payloadNotification,
-                payloadInlineContent: input.payloadInlineContent,
+                payloadInlineContent: _.omit(
+                  input.payloadInlineContent,
+                  "dimensions",
+                ),
               },
             },
           });
