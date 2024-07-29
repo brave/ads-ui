@@ -66,12 +66,6 @@ mutation CreateCreative($input: CreativeInput!) {
   }
 }
 
-mutation UpdateCreative($id: String!, $input: CreativeInput!) {
-  updateCreative(id: $id, creative: $input) {
-    ...Creative
-  }
-}
-
 query LoadCreative($id: String!) {
   creative(id: $id) {
     ...Creative
