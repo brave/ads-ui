@@ -8,6 +8,7 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import PanToolAltOutlinedIcon from "@mui/icons-material/PanToolAltOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import PercentIcon from "@mui/icons-material/Percent";
+import ArticleIcon from "@mui/icons-material/Article";
 import { SearchData } from "./data";
 import { formatUsd, formatWholeNumber } from "@/user/library/format";
 
@@ -61,6 +62,12 @@ export function SummaryPanel({ searchData }: Props) {
         value={searchData.countryDomain.domain}
         icon={<DomainIcon sx={{ color: "text.secondary" }} />}
       />
+      <SummaryEntry
+        title="Landing Pages"
+        value={formatWholeNumber(searchData.estimates.landingPages)}
+        icon={<ArticleIcon sx={{ color: "text.secondary" }} />}
+      />
+
       <Typography variant="h2" marginTop={3} marginBottom={1}>
         Estimated weekly results
       </Typography>

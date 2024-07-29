@@ -18,6 +18,7 @@ interface ServerSearchData {
       max: number;
     };
     trialBudget: number;
+    landingPages: number;
   };
 }
 
