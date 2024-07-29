@@ -1,7 +1,7 @@
 /* eslint-disable lingui/no-unlocalized-strings */
 import { CountryDomain } from "@/user/views/user/search/types";
 import { buildAdServerEndpoint } from "@/util/environment";
-import useSWR from "swr";
+import useSWRImmutable from "swr/immutable";
 
 /* this is the data we get back from the server */
 interface ServerSearchData {
@@ -18,6 +18,7 @@ interface ServerSearchData {
       max: number;
     };
     trialBudget: number;
+    landingPages: number;
   };
 }
 
@@ -57,7 +58,7 @@ const fetcher = (suffix: string) =>
 export function useLandingPageData(
   slug: string,
 ): UseSearchDataReturn<SearchData> {
-  const { data, isLoading } = useSWR<ServerSearchData>(slug, fetcher);
+  const { data, isLoading } = useSWRImmutable<ServerSearchData>(slug, fetcher);
 
   if (!data) {
     return { loading: isLoading };
@@ -80,7 +81,7 @@ export function useKeywordData(
   landingPageUrl: string,
 ): UseSearchDataReturn<string[]> {
   const qs = new URLSearchParams({ url: landingPageUrl });
-  const { data, isLoading } = useSWR<string[]>(
+  const { data, isLoading } = useSWRImmutable<string[]>(
     `${slug}/keywords?${qs}`,
     fetcher,
   );
