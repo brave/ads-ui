@@ -7,13 +7,18 @@ import { ActiveGeocodesDocument, GeocodeInput } from "@/graphql-client/graphql";
 import { useLingui } from "@lingui/react";
 import { msg, Trans } from "@lingui/macro";
 import { useQuery } from "@apollo/client";
+import { useIsEdit } from "@/form/FormikHelpers";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 export const LocationPicker = () => {
-  const { data } = useQuery(ActiveGeocodesDocument);
-  const sorted = _.sortBy(data?.geocodes ?? [], "code");
+  const { isDraft } = useIsEdit();
+  const { data } = useQuery(ActiveGeocodesDocument, { skip: !isDraft });
+  const sorted = _.sortBy(
+    (data?.geocodes ?? []).filter((c) => c.code !== "OTHER"),
+    "code",
+  );
   const [formProps, meta, helper] = useField<GeocodeInput[]>("geoTargets");
   const errorMessage = meta.error;
   const { _: lingui } = useLingui();
@@ -21,6 +26,7 @@ export const LocationPicker = () => {
   return (
     <Autocomplete
       sx={{ mt: 2 }}
+      disabled={!isDraft}
       limitTags={20}
       getLimitTagsText={(count) => <Trans>+{count} more</Trans>}
       multiple

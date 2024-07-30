@@ -20,10 +20,11 @@ interface Props {
 
 export const SegmentPicker = ({ idx }: Props) => {
   const { data } = useQuery(SegmentsDocument);
-  const activeSegments = [...(data?.segments?.data ?? [])].sort((a, b) => {
-    if (a.name === "Untargeted" || b.name === "Untargeted") return 1;
-    return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
-  });
+  const activeSegments = [...(data?.segments?.data ?? [])]
+    .filter((s) => s.code !== "Svp7l-zGN")
+    .sort((a, b) => {
+      return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+    });
   const { _: lingui } = useLingui();
 
   const [, targetMeta] = useField<boolean>(`adSets.${idx}.isNotTargeting`);
@@ -34,12 +35,9 @@ export const SegmentPicker = ({ idx }: Props) => {
 
   useEffect(() => {
     if (targetMeta.value) {
-      // eslint-disable-next-line lingui/no-unlocalized-strings
-      helper.setValue([{ code: "Svp7l-zGN", name: "Untargeted" }]);
+      helper.setValue([]);
     } else {
-      const onlyUntargeted =
-        meta.value.length === 1 && meta.value[0].code === "Svp7l-zGN";
-      helper.setValue(onlyUntargeted ? [] : meta.value);
+      helper.setValue(meta.value);
     }
   }, [targetMeta.value]);
 
@@ -61,10 +59,7 @@ export const SegmentPicker = ({ idx }: Props) => {
           disableCloseOnSelect
           autoHighlight
           groupBy={(option) => {
-            const name = option.name.split("-")[0];
-            // eslint-disable-next-line lingui/no-unlocalized-strings
-            if (name === "Untargeted") return "General";
-            return name;
+            return option.name.split("-")[0];
           }}
           getOptionLabel={(option) => segmentNameWithNoDash(option.name)}
           renderOption={(props, option, { selected }) => (

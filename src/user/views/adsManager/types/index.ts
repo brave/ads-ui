@@ -50,7 +50,7 @@ export type AdSetForm = {
   name: string;
   segments: Segment[];
   oses: OS[];
-  conversions: Conversion[];
+  conversion?: Conversion;
   creatives: Creative[];
   isNotTargeting: boolean;
 };
@@ -71,7 +71,6 @@ export type CreativeInputWithType = CreativeInput & {
 };
 
 export type Creative = CreativeInputWithType & {
-  creativeInstanceId?: string;
   id?: string;
   targetUrlValid?: string;
   state?: string;
@@ -113,7 +112,6 @@ export const initialAdSet: AdSetForm = {
   name: "",
   isNotTargeting: false,
   segments: [],
-  conversions: [],
   oses: [],
   creatives: [],
 };

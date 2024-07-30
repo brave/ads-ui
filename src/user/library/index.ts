@@ -1,9 +1,11 @@
 import {
+  AdsManagerNewAdSetInput,
+  AdsManagerUpdateAdSetInput,
+  AdsManagerUpdateCampaignInput,
   CampaignFormat,
   CampaignFragment,
   CreateCampaignInput,
   CreativeFragment,
-  UpdateCampaignInput,
 } from "@/graphql-client/graphql";
 import { AdFragment, AdSetFragment } from "@/graphql-client/graphql";
 import {
@@ -36,7 +38,7 @@ export function transformNewForm(form: CampaignForm): CreateCampaignInput {
     budget: form.budget,
     adSets: form.adSets.map((a) => ({
       ...transformAdSet(a, form),
-      conversions: transformConversion(a.conversions),
+      conversions: transformConversion(a.conversion),
       ads: a.creatives
         .filter(
           (c) =>
@@ -58,16 +60,18 @@ export const transformPrice = (
     : price.toString();
 };
 
-function transformConversion(conv: Conversion[]) {
-  if (conv.length <= 0) {
+function transformConversion(conv?: Conversion) {
+  if (!conv) {
     return [];
   }
 
-  return conv.map((c) => ({
-    observationWindow: c.observationWindow * 1.0,
-    urlPattern: c.urlPattern,
-    type: c.type,
-  }));
+  return [
+    {
+      observationWindow: conv.observationWindow * 1.0,
+      urlPattern: conv.urlPattern,
+      type: conv.type,
+    },
+  ];
 }
 
 export function editCampaignValues(
@@ -91,21 +95,22 @@ export function editCampaignValues(
       return {
         id: adSet.id,
         state: adSet.state,
-        conversions: (adSet.conversions ?? []).map((c) => ({
+        conversion: (adSet.conversions ?? []).map((c) => ({
           id: c.id,
           type: c.type,
           observationWindow: c.observationWindow,
           urlPattern: c.urlPattern,
-        })),
+        }))[0],
         oses: (adSet.oses ?? []).map((o) => ({ name: o.name, code: o.code })),
         segments: (adSet.segments ?? []).map((o) => ({
           name: o.name,
           code: o.code,
         })),
-        isNotTargeting: seg.length === 1 && seg[0].code === "Svp7l-zGN",
+        isNotTargeting:
+          seg.length == 0 || (seg.length === 1 && seg[0].code === "Svp7l-zGN"),
         name: adSet.name || adSet.id.split("-")[0],
         creatives: creativeList(advertiserId, adSet.ads, ads),
-      } as AdSetForm;
+      };
     }),
     isCreating: false,
     advertiserId,
@@ -141,7 +146,6 @@ function creativeList(
         return {
           ...validCreativeFields(c, advertiserId, included),
           createdAt: c.createdAt,
-          creativeInstanceId: included ? ad.id : undefined,
         };
       });
   };
@@ -197,32 +201,77 @@ export function transformEditForm(
   form: CampaignForm,
   initialValues: CampaignForm,
   id: string,
-): UpdateCampaignInput {
-  function onlyIfChanged<F extends keyof CampaignForm>(
+): AdsManagerUpdateCampaignInput {
+  function adSetFieldChange<F extends keyof AdSetForm, U>(
+    field: F,
+    idx: number,
+    transform: (item: AdSetForm[F]) => U,
+  ): U | undefined {
+    const initialAdSet = initialValues.adSets;
+    if (!initialAdSet || initialAdSet.length === 0) return undefined;
+    if (!_.isEqual(form.adSets[idx][field], initialAdSet[idx][field])) {
+      const formValue = form.adSets[idx][field];
+      return formValue ? transform(form.adSets[idx][field]) : undefined;
+    }
+    return undefined;
+  }
+
+  const toAdd: AdsManagerNewAdSetInput[] = [];
+  const toModify: AdsManagerUpdateAdSetInput[] = [];
+  form.adSets.forEach((adSet, idx) => {
+    if (adSet.id) {
+      const modify = {
+        id: adSet.id,
+        name: adSetFieldChange("name", idx, (n) => n),
+        conversion: adSetFieldChange("conversion", idx, (c) =>
+          _.omit(transformConversion(c)[0], "type"),
+        ),
+        segmentCodes: adSetFieldChange("segments", idx, (s) =>
+          s.map((s) => s.code),
+        ),
+        osCodes: adSetFieldChange("oses", idx, (o) => o.map((o) => o.code)),
+        creativeIds: adSetFieldChange(
+          "creatives",
+          idx,
+          (c) =>
+            c.filter((c) => c.included && !!c.id).map((c) => c.id) as string[],
+        ),
+      };
+      if (_.isEmpty(_.omit(modify, "id"))) return;
+      toModify.push(modify);
+    } else {
+      toAdd.push({
+        name: adSet.name,
+        conversion: _.omit(adSet.conversion, "type"),
+        segmentCodes: adSet.segments.map((s) => s.code),
+        osCodes: adSet.oses.map((s) => s.code),
+        creativeIds: adSet.creatives
+          .filter((c) => c.included && !!c.id)
+          .map((c) => c.id) as string[],
+        price: form.price,
+        billingType: form.billingType,
+      });
+    }
+  });
+
+  function campaignFieldChange<F extends keyof CampaignForm>(
     field: F,
   ): CampaignForm[F] | undefined {
-    return form[field] !== initialValues[field] ? form[field] : undefined;
+    return !_.isEqual(form[field], initialValues[field])
+      ? form[field]
+      : undefined;
   }
 
   return {
-    budget: onlyIfChanged("budget"),
-    endAt: onlyIfChanged("endAt"),
     id,
-    name: form.name,
-    startAt: onlyIfChanged("startAt"),
-    state: form.state,
-    paymentType: form.paymentType,
-    adSets: form.adSets.map((adSet) => ({
-      id: adSet.id,
-      ...transformAdSet(adSet, form),
-      ads: adSet.creatives
-        .filter((c) => c.included)
-        .map((ad) => ({
-          id: ad.creativeInstanceId,
-          creativeId: ad.id,
-          creativeSetId: adSet.id,
-        })),
-    })),
+    budget: campaignFieldChange("budget"),
+    endAt: campaignFieldChange("endAt"),
+    name: campaignFieldChange("name"),
+    startAt: campaignFieldChange("startAt"),
+    adSets: {
+      add: toAdd,
+      modify: toModify,
+    },
   };
 }
 

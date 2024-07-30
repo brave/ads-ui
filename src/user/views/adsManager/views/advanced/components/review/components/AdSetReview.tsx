@@ -1,4 +1,10 @@
-import { AdSetForm, Creative, OS, Segment } from "../../../../../types";
+import {
+  AdSetForm,
+  Conversion,
+  Creative,
+  OS,
+  Segment,
+} from "@/user/views/adsManager/types";
 import { FormikErrors } from "formik";
 import { ConversionDisplay } from "@/components/Conversion/ConversionDisplay";
 import { ReviewField } from "./ReviewField";
@@ -34,6 +40,7 @@ export function AdSetReview({ adSet, idx, errors, format }: Props) {
     return v === "untargeted" ? _(msg`Let Brave pick categories for me.`) : v;
   };
 
+  console.log(adSetError);
   const adSetPos = `${_(msg`Ad Set`)} ${idx + 1}`;
   return (
     <ReviewContainer name={adSetPos} path={`adSets?current=${idx}`}>
@@ -55,8 +62,10 @@ export function AdSetReview({ adSet, idx, errors, format }: Props) {
         error={hasErrors ? (adSetError?.oses as string) : ""}
       />
       <ConversionDisplay
-        conversions={adSet.conversions}
-        convErrors={adSetError?.conversions}
+        conversion={adSet.conversion}
+        convErrors={
+          hasErrors ? (adSetError?.conversion as FormikErrors<Conversion>) : {}
+        }
       />
       <CreativeSpecificPreview
         options={included}
