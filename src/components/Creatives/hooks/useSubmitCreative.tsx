@@ -2,7 +2,6 @@ import { useCallback } from "react";
 import {
   AdvertiserCreativesDocument,
   CreateCreativeDocument,
-  UpdateCreativeDocument,
 } from "@/graphql-client/graphql";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { useHistory } from "react-router-dom";
@@ -11,6 +10,17 @@ import _ from "lodash";
 import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
 import { useMutation } from "@apollo/client";
 import { CreativeInputWithType } from "@/user/views/adsManager/types";
+import { graphql } from "@/graphql-client/index";
+
+const Update_Creative_Payload = graphql(`
+  mutation AdsManagerUpdateCreativePayload(
+    $input: AdsManagerUpdateCreativeInput!
+  ) {
+    adsManagerUpdateCreativePayload(adsManagerUpdateCreativeInput: $input) {
+      id
+    }
+  }
+`);
 
 export function useSubmitCreative(props: { id: string }) {
   const { trackMatomoEvent } = useTrackMatomoEvent();
@@ -39,7 +49,7 @@ export function useSubmitCreative(props: { id: string }) {
     });
 
   const [updateCreative, { error: updateError, loading: updateLoading }] =
-    useMutation(UpdateCreativeDocument, {
+    useMutation(Update_Creative_Payload, {
       refetchQueries,
       onCompleted,
       onError,
@@ -65,7 +75,16 @@ export function useSubmitCreative(props: { id: string }) {
           });
         } else {
           await updateCreative({
-            variables: { input: input, id: props.id },
+            variables: {
+              input: {
+                id: props.id,
+                payloadNotification: input.payloadNotification,
+                payloadInlineContent: _.omit(
+                  input.payloadInlineContent,
+                  "dimensions",
+                ),
+              },
+            },
           });
         }
       } finally {

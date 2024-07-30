@@ -165,7 +165,7 @@ export function NewKeyPairModal({ advertiser }: Props) {
               </Typography>
 
               <Typography gutterBottom>
-                <Trans>Your account&rsquo;s new public key will be:</Trans>
+                <Trans>Your account&rsquo;s new private key will be:</Trans>
               </Typography>
 
               <TextField
