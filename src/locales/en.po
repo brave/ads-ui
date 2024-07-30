@@ -1459,8 +1459,11 @@ msgstr "You may have access to multiple accounts. Switch between them here."
 msgid "You will soon receive an email with the next steps of registration. While you wait, we recommend you check out our help center to get helpful information for getting started with Brave Ads."
 msgstr "You will soon receive an email with the next steps of registration. While you wait, we recommend you check out our help center to get helpful information for getting started with Brave Ads."
 
-msgid "Your account’s new public key will be:"
-msgstr "Your account’s new public key will be:"
+msgid "Your account’s new private key will be:"
+msgstr "Your account’s new private key will be:"
+
+#~ msgid "Your account’s new public key will be:"
+#~ msgstr "Your account’s new public key will be:"
 
 msgid "Your account’s public key:"
 msgstr "Your account’s public key:"
