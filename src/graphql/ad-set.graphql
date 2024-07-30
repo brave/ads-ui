@@ -55,15 +55,3 @@ fragment AdSetWithDeletedAds on AdSet {
     ...Ad
   }
 }
-
-mutation CreateAdSet($createAdSetInput: CreateAdSetInput!) {
-  createAdSet(createAdSetInput: $createAdSetInput) {
-    ...AdSet
-  }
-}
-
-mutation UpdateAdSet($updateAdSetInput: UpdateAdSetInput!) {
-  updateAdSet(updateAdSetInput: $updateAdSetInput) {
-    ...AdSet
-  }
-}
