@@ -8,7 +8,7 @@ msgstr ""
 "Language: es_419\n"
 "Project-Id-Version: 27b1a082298d0ee642e56f654bcd7273\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-07-19 13:58\n"
+"PO-Revision-Date: 2024-07-30 12:33\n"
 "Last-Translator: \n"
 "Language-Team: Spanish, Latin America\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -598,7 +598,7 @@ msgid "Failed to load image"
 msgstr "Error al cargar la imagen "
 
 msgid "Failed to update profile: {0}"
-msgstr ""
+msgstr "Error al actualizar el perfil: {0}"
 
 msgid "Failed to upload image"
 msgstr "Error al subir la imagen"
@@ -1467,9 +1467,6 @@ msgstr "Pronto recibirá un correo electrónico con los próximos pasos del regi
 msgid "Your account’s new private key will be:"
 msgstr "La nueva clave privada de su cuenta será:"
 
-#~ msgid "Your account’s new public key will be:"
-#~ msgstr "La nueva clave pública de su cuenta será:"
-
 msgid "Your account’s public key:"
 msgstr "La clave pública de su cuenta:"
 
@@ -1484,3 +1481,4 @@ msgstr "Su campaña de prueba será revisada por un Gerente de Cuenta. Agregue c
 
 msgid "Zip / Postal Code"
 msgstr "Código postal"
+

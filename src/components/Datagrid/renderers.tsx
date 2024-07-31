@@ -21,7 +21,7 @@ import BigNumber from "bignumber.js";
 import { Trans } from "@lingui/macro";
 import dayjs from "dayjs";
 import { useMutation } from "@apollo/client";
-import { UpdateAdSetDocument } from "@/graphql-client/graphql";
+import { graphql } from "@/graphql-client/index";
 
 type CellValueRenderer = (value: any) => ReactNode;
 const ADS_DEFAULT_TIMEZONE = "America/New_York";
@@ -120,14 +120,20 @@ export function adSetOnOffState(
   c: Omit<UpdateAdSetInput, "ads"> & {
     campaignStart: string;
     campaignEnd: string;
-    campaignId: string;
     campaignState: string;
     campaignSource: CampaignSource;
-    advertiserId: string;
   },
   isInline?: boolean,
 ): ReactNode {
-  const [updateAdSet, { loading }] = useMutation(UpdateAdSetDocument, {
+  const UpdateAdSetState = graphql(`
+    mutation UpdateAdSetState($id: String!, $state: AdSetState!) {
+      adsManagerUpdateAdSetState(id: $id, state: $state) {
+        id
+      }
+    }
+  `);
+
+  const [updateAdSet, { loading }] = useMutation(UpdateAdSetState, {
     refetchQueries: [
       {
         query: LoadCampaignAdsDocument,
@@ -145,13 +151,11 @@ export function adSetOnOffState(
     <OnOff
       onChange={(s) => {
         {
+          if (!c.id) return;
           updateAdSet({
             variables: {
-              updateAdSetInput: {
-                state: s as AdSetState,
-                id: c.id,
-                campaignId: c.campaignId,
-              },
+              state: s as AdSetState,
+              id: c.id,
             },
           });
         }
