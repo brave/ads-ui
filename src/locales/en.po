@@ -127,8 +127,11 @@ msgstr "Additional Details"
 msgid "Ads"
 msgstr "Ads"
 
-msgid "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously approved ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
-msgstr "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously approved ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
+#~ msgid "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously approved ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
+#~ msgstr "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously approved ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
+
+msgid "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously created ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
+msgstr "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously created ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
 
 msgid "Ads Help Center"
 msgstr "Ads Help Center"

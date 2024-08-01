@@ -132,8 +132,11 @@ msgstr "Detalles adicionales"
 msgid "Ads"
 msgstr "Anuncios"
 
-msgid "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously approved ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
-msgstr "Los anuncios son bloques de construcción modulares que se pueden combinar con conjuntos de anuncios para crear combinaciones únicas. Los anuncios aprobados anteriormente se mostrarán aquí. Seleccione la casilla situada junto al nombre. Utilice el botón “Completar selección” para finalizar."
+#~ msgid "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously approved ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
+#~ msgstr "Los anuncios son bloques de construcción modulares que se pueden combinar con conjuntos de anuncios para crear combinaciones únicas. Los anuncios aprobados anteriormente se mostrarán aquí. Seleccione la casilla situada junto al nombre. Utilice el botón “Completar selección” para finalizar."
+
+msgid "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously created ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
+msgstr "Los anuncios son bloques de construcción modulares que se pueden combinar con conjuntos de anuncios para crear combinaciones únicas. Los anuncios creados anteriormente se mostrarán aquí. Seleccione la casilla situada junto al nombre. Utilice el botón “Completar selección” para finalizar."
 
 msgid "Ads Help Center"
 msgstr "Centro de ayuda de anuncios"
@@ -1481,4 +1484,3 @@ msgstr "Su campaña de prueba será revisada por un Gerente de Cuenta. Agregue c
 
 msgid "Zip / Postal Code"
 msgstr "Código postal"
-
