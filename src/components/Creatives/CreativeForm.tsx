@@ -120,10 +120,9 @@ const CreativeTypeSpecificFields = ({
 }: {
   creativeType?: string;
 }) => {
-  if (creativeType === "notification_all_v1")
-    return <NotificationAd useCustomButton />;
+  if (creativeType === "notification_all_v1") return <NotificationAd />;
   if (creativeType === "inline_content_all_v1")
-    return <InlineContentAd useCustomButton alignPreview="row" />;
+    return <InlineContentAd alignPreview="row" />;
 
   return null;
 };

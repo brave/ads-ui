@@ -16,7 +16,11 @@ import {
   CreateCreativeDocument,
 } from "@/graphql-client/graphql";
 
-export function CreateCreativeButton() {
+interface Props {
+  index: number;
+}
+
+export function CreateCreativeButton({ index }: Props) {
   const { values, setFieldValue } = useFormikContext<CampaignForm>();
   const [, , isCreating] = useField<boolean>("isCreating");
   const [, newMeta, newHelper] = useField<Creative>("newCreative");
@@ -29,7 +33,11 @@ export function CreateCreativeButton() {
       values.adSets.forEach((adSet, idx) => {
         void setFieldValue(`adSets.${idx}.creatives`, [
           ...adSet.creatives,
-          validCreativeFields(data.createCreative, advertiser.id, true),
+          validCreativeFields(
+            data.createCreative,
+            advertiser.id,
+            idx === index,
+          ),
         ]);
       });
       isCreating.setValue(false);

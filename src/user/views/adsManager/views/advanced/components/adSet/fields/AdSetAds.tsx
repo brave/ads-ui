@@ -43,22 +43,32 @@ export function AdSetAds({ index }: Props) {
         <ShowAdsButton />
       </CardContainer>
 
-      <AdsExistingAd />
-      <CampaignFormatSpecificModal format={values.format} />
+      <AdsExistingAd index={index} />
+      <CampaignFormatSpecificModal format={values.format} index={index} />
     </>
   );
 }
 
-function CampaignFormatSpecificModal(props: { format: CampaignFormat }) {
+function CampaignFormatSpecificModal(props: {
+  format: CampaignFormat;
+  index: number;
+}) {
   const [, meta, helper] = useField<boolean>("isCreating");
   const name = "newCreative";
 
   let adComponent;
   if (props.format === CampaignFormat.PushNotification)
-    adComponent = <NotificationAd name={name} useContainer={false} />;
+    adComponent = (
+      <NotificationAd name={name} useContainer={false} index={props.index} />
+    );
   else if (props.format === CampaignFormat.NewsDisplayAd)
     adComponent = (
-      <InlineContentAd name={name} useContainer={false} alignPreview="row" />
+      <InlineContentAd
+        name={name}
+        useContainer={false}
+        alignPreview="row"
+        index={props.index}
+      />
     );
 
   return (

@@ -13,9 +13,9 @@ import { msg, Trans } from "@lingui/macro";
 
 interface InlineAdProps {
   name?: string;
-  useCustomButton?: boolean;
   useContainer?: boolean;
   alignPreview?: "column" | "row";
+  index?: number;
 }
 
 export function InlineContentAd(props: InlineAdProps) {
@@ -91,10 +91,10 @@ const InlineAdForm = (props: InlineAdProps) => {
         />
       )}
 
-      {props.useCustomButton !== true && (
+      {props.index !== undefined && (
         <Stack direction="row" justifyContent="space-between" mt={1}>
           <div />
-          <CreateCreativeButton />
+          <CreateCreativeButton index={props.index} />
         </Stack>
       )}
     </>

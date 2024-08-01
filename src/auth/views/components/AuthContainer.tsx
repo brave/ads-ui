@@ -3,6 +3,7 @@ import { Background } from "@/components/Background/Background";
 import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
 import { ReactNode } from "react";
 import { PaddedCardContainer } from "@/components/Card/PaddedCardContainer";
+import { UserRedirect } from "@/auth/components/UserRedirect";
 
 interface Props {
   children?: ReactNode;
@@ -25,6 +26,7 @@ export function AuthContainer({ children, belowCard, aboveCard }: Props) {
         <PaddedCardContainer>{children}</PaddedCardContainer>
         {belowCard}
       </Box>
+      <UserRedirect />
     </Background>
   );
 }

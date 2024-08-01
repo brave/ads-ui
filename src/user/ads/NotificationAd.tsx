@@ -11,8 +11,8 @@ import { useLingui } from "@lingui/react";
 
 interface NotificationAdProps {
   name?: string;
-  useCustomButton?: boolean;
   useContainer?: boolean;
+  index?: number;
 }
 
 export function NotificationAd(props: NotificationAdProps) {
@@ -85,10 +85,10 @@ const NotificationAdForm = (props: NotificationAdProps) => {
         helperText={_(msg`Example - https://brave.com/brave-rewards/`)}
       />
 
-      {props.useCustomButton !== true && (
+      {props.index !== undefined && (
         <Stack direction="row" justifyContent="space-between" mt={1}>
           <div />
-          <CreateCreativeButton />
+          <CreateCreativeButton index={props.index} />
         </Stack>
       )}
     </>
