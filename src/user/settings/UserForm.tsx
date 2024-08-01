@@ -9,9 +9,17 @@ import { FormikSubmitButton } from "@/form/FormikButton";
 import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { UpdateUserDocument } from "@/graphql-client/graphql";
 import { useMutation } from "@apollo/client";
 import { Snackbar, Stack } from "@mui/material";
+import { graphql } from "@/graphql-client";
+
+const UpdateCurrentUser = graphql(`
+  mutation UpdateCurrentUser($input: UpdateCurrentUserInput!) {
+    updateCurrentUser(input: $input) {
+      ...User
+    }
+  }
+`);
 
 interface UserFormValues {
   fullName: string;
@@ -32,10 +40,10 @@ export function UserForm() {
     return <ErrorDetail error={details.id} additionalDetails={details} />;
   }
 
-  const [updateUser] = useMutation(UpdateUserDocument, {
+  const [updateUser] = useMutation(UpdateCurrentUser, {
     onCompleted(user) {
       trackMatomoEvent("user", "update");
-      setInitialVals(user.updateUser);
+      setInitialVals(user.updateCurrentUser);
     },
     onError(err) {
       setErrorMessage(<Trans>Failed to update profile: {err.message}</Trans>);
@@ -52,7 +60,6 @@ export function UserForm() {
           updateUser({
             variables: {
               input: {
-                id: user.userId,
                 fullName: v.fullName,
                 password: v.password,
               },
