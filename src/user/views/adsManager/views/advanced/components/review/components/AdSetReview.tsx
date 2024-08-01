@@ -40,7 +40,6 @@ export function AdSetReview({ adSet, idx, errors, format }: Props) {
     return v === "untargeted" ? _(msg`Let Brave pick categories for me.`) : v;
   };
 
-  console.log(adSetError);
   const adSetPos = `${_(msg`Ad Set`)} ${idx + 1}`;
   return (
     <ReviewContainer name={adSetPos} path={`adSets?current=${idx}`}>

@@ -206,12 +206,15 @@ export function transformEditForm(
     field: F,
     idx: number,
     transform: (item: AdSetForm[F]) => U,
-  ): U | undefined {
+  ): U | undefined | null {
     const initialAdSet = initialValues.adSets;
     if (!initialAdSet || initialAdSet.length === 0) return undefined;
     if (!_.isEqual(form.adSets[idx][field], initialAdSet[idx][field])) {
       const formValue = form.adSets[idx][field];
-      return formValue ? transform(form.adSets[idx][field]) : undefined;
+      if (formValue === null) return null;
+      if (formValue === undefined) return undefined;
+
+      return transform(form.adSets[idx][field]);
     }
     return undefined;
   }
@@ -220,7 +223,7 @@ export function transformEditForm(
   const toModify: AdsManagerUpdateAdSetInput[] = [];
   form.adSets.forEach((adSet, idx) => {
     if (adSet.id) {
-      const modify = {
+      toModify.push({
         id: adSet.id,
         name: adSetFieldChange("name", idx, (n) => n),
         conversion: adSetFieldChange("conversion", idx, (c) =>
@@ -236,13 +239,11 @@ export function transformEditForm(
           (c) =>
             c.filter((c) => c.included && !!c.id).map((c) => c.id) as string[],
         ),
-      };
-      if (_.isEmpty(_.omit(modify, "id"))) return;
-      toModify.push(modify);
+      });
     } else {
       toAdd.push({
         name: adSet.name,
-        conversion: _.omit(adSet.conversion, "type"),
+        conversion: adSet.conversion ? _.omit(adSet.conversion, "type") : null,
         segmentCodes: adSet.segments.map((s) => s.code),
         osCodes: adSet.oses.map((s) => s.code),
         creativeIds: adSet.creatives

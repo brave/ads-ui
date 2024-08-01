@@ -144,6 +144,7 @@ export const CampaignSchema = (prices: AdvertiserPrice[]) =>
                 )
                 .required(t`Conversion type required.`),
             })
+            .notRequired()
             .default(undefined),
           creatives: array().test(
             "min-length",

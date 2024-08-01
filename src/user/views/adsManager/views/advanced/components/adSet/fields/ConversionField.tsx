@@ -13,7 +13,7 @@ interface Props {
 }
 
 export function ConversionField({ index }: Props) {
-  const [, meta, form] = useField<Conversion | undefined>(
+  const [, meta, form] = useField<Conversion | null>(
     `adSets.${index}.conversion`,
   );
   const hasConversion = !!meta.value;
@@ -52,7 +52,7 @@ export function ConversionField({ index }: Props) {
       {hasConversion && (
         <Button
           variant="contained"
-          onClick={() => form.setValue(undefined)}
+          onClick={() => form.setValue(null)}
           sx={{
             maxWidth: 300,
             borderRadius: "10px",
