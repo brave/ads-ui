@@ -8,7 +8,7 @@ msgstr ""
 "Language: pt\n"
 "Project-Id-Version: 27b1a082298d0ee642e56f654bcd7273\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-07-30 12:33\n"
+"PO-Revision-Date: 2024-08-01 16:12\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese, Brazilian\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -132,8 +132,11 @@ msgstr "Detalhes Adicionais"
 msgid "Ads"
 msgstr "Anúncios"
 
-msgid "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously approved ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
-msgstr "Anúncios são blocos de construção modulares que podem ser combinados com conjuntos de anúncios para criar combinações únicas. Seus anúncios previamente aprovados serão exibidos aqui. Selecione usando a caixa ao lado do nome. Use o botão \"Seleção Completa\" para concluir."
+#~ msgid "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously approved ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
+#~ msgstr "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously approved ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
+
+msgid "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously created ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
+msgstr "Anúncios são blocos de construção modulares que podem ser combinados com conjuntos de anúncios para criar combinações únicas. Seus anúncios previamente criados serão exibidos aqui. Selecione usando a caixa ao lado do nome. Use o botão \"Seleção Completa\" para concluir."
 
 msgid "Ads Help Center"
 msgstr "Central de Ajuda de Anúncios"
@@ -1466,6 +1469,9 @@ msgstr "Em breve, você receberá um e-mail com os próximos passos do cadastro.
 
 msgid "Your account’s new private key will be:"
 msgstr "A nova chave privada da sua conta será:"
+
+#~ msgid "Your account’s new public key will be:"
+#~ msgstr "Your account’s new public key will be:"
 
 msgid "Your account’s public key:"
 msgstr "A chave pública da sua conta:"
