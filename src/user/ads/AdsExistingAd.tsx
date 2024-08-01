@@ -27,7 +27,11 @@ import { useLingui } from "@lingui/react";
 import { useQuery } from "@apollo/client";
 import { filterCreativesByCampaignFormat } from "@/user/ads/filterCreativesByCampaignFormat";
 
-export function AdsExistingAd() {
+interface Props {
+  index: number;
+}
+
+export function AdsExistingAd({ index }: Props) {
   const { _: lingui } = useLingui();
   const { isShowingAds, setIsShowingAds } = useContext(FormContext);
   const { creatives } = useAdvertiserCreatives();
@@ -47,7 +51,9 @@ export function AdsExistingAd() {
         ["asc", "desc"],
       ) as CreativeFragment[];
 
-      const filtered = creativeOptionList.filter((c) => c.state === "active");
+      const filtered = creativeOptionList.filter(
+        (c) => c.state === "active" || c.state === "draft",
+      );
       const excludeExisting = filtered.filter((e) => {
         const associatedOptions = creatives ?? [];
         return associatedOptions.find((ao) => ao.id === e.id) === undefined;
@@ -79,7 +85,7 @@ export function AdsExistingAd() {
         <Typography variant="subtitle1" fontWeight={500}>
           <Trans>
             Ads are modular building blocks that can be paired with ad sets to
-            build unique combinations. Your previously approved ads will show
+            build unique combinations. Your previously created ads will show
             here. Select by using the box next to the name. Use the
             &quot;Complete selection&quot; button to finish.
           </Trans>
@@ -123,8 +129,8 @@ export function AdsExistingAd() {
               advertiserId: advertiser.id,
               included: false,
             }))}
+            index={index}
             useSelectedAdStyle={false}
-            showState={false}
             useButtonSelection
           />
         )}

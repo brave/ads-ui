@@ -17,7 +17,7 @@ export function CreativeSelect(
     options: Creative[];
     useSelectedAdStyle?: boolean;
     showState?: boolean;
-    index?: number;
+    index: number;
     hideCreated?: boolean;
     useButtonSelection?: boolean;
   } & PropsWithChildren,
@@ -99,9 +99,11 @@ export function CreativeSelect(
           sx={{ maxWidth: "200px", alignSelf: "end", marginTop: 2 }}
           onClick={(e) => {
             e.preventDefault();
-
-            const mapped = curr.map((c) => ({ ...c, included: true }));
             values.adSets.forEach((adSet, idx) => {
+              const mapped = curr.map((c) => ({
+                ...c,
+                included: idx === index,
+              }));
               void setFieldValue(
                 `adSets.${idx}.creatives`,
                 _.uniqBy([...adSet.creatives, ...mapped], "id"),
