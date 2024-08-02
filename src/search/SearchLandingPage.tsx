@@ -14,11 +14,7 @@ export function SearchLandingPage() {
     <Background>
       <LandingPageAppBar />
       <Toolbar sx={{ mb: 5 }} />
-      <Box
-        display="flex"
-        flexDirection="column"
-        gap={{ xs: "75px", md: "150px" }}
-      >
+      <Box display="flex" flexDirection="column" gap="75px">
         <Box
           display="flex"
           flexDirection={{ xs: "column", md: "row" }}
@@ -97,7 +93,7 @@ export function SearchLandingPage() {
           display="flex"
           flexDirection="column"
           alignItems="center"
-          mb={{ xs: 5, md: 20 }}
+          mb={{ xs: 5, md: 10 }}
         >
           <Typography variant="h1" color="white">
             <Trans>Have specific questions?</Trans>
