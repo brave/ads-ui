@@ -217,7 +217,6 @@ describe("new form tests", () => {
   };
 
   const adSetForm: AdSetForm = {
-    conversions: [],
     creatives: [creative, creative2],
     isNotTargeting: false,
     name: "",
@@ -392,12 +391,11 @@ describe("edit form tests", () => {
       {
         "adSets": [
           {
-            "conversions": [],
+            "conversion": undefined,
             "creatives": [
               {
                 "advertiserId": "12345",
                 "createdAt": "2023-01-01",
-                "creativeInstanceId": "1",
                 "id": "1234",
                 "included": true,
                 "name": "a creative",
@@ -416,7 +414,6 @@ describe("edit form tests", () => {
               {
                 "advertiserId": "12345",
                 "createdAt": "2023-01-01",
-                "creativeInstanceId": "3",
                 "id": "1235",
                 "included": true,
                 "name": "a different creative",
@@ -451,12 +448,11 @@ describe("edit form tests", () => {
             "state": "active",
           },
           {
-            "conversions": [],
+            "conversion": undefined,
             "creatives": [
               {
                 "advertiserId": "12345",
                 "createdAt": "2023-01-01",
-                "creativeInstanceId": "1",
                 "id": "1234",
                 "included": true,
                 "name": "a creative",
@@ -475,7 +471,6 @@ describe("edit form tests", () => {
               {
                 "advertiserId": "12345",
                 "createdAt": "2023-01-01",
-                "creativeInstanceId": undefined,
                 "id": "1235",
                 "included": false,
                 "name": "a different creative",
@@ -535,82 +530,42 @@ describe("edit form tests", () => {
       { budget: editForm.budget } as CampaignForm,
       editForm.id ?? "",
     );
+
     const sorted = {
       ...update,
-      adSets: update.adSets?.sort(
-        (a, b) => a.id?.localeCompare(b.id ?? "") ?? 1,
-      ),
+      adSets: {
+        modify: update.adSets?.modify?.sort(
+          (a, b) => a.id?.localeCompare(b.id ?? "") ?? 1,
+        ),
+      },
     };
     expect(sorted).toMatchInlineSnapshot(`
       {
-        "adSets": [
-          {
-            "ads": [
-              {
-                "creativeId": "1234",
-                "creativeSetId": "11111",
-                "id": "1",
-              },
-              {
-                "creativeId": "1235",
-                "creativeSetId": "11111",
-                "id": "3",
-              },
-            ],
-            "billingType": "cpm",
-            "id": "11111",
-            "name": "11111",
-            "oses": [
-              {
-                "code": "1234",
-                "name": "macos",
-              },
-            ],
-            "perDay": 4,
-            "price": "6",
-            "segments": [
-              {
-                "code": "5678",
-                "name": "test",
-              },
-            ],
-            "totalMax": 28,
-          },
-          {
-            "ads": [
-              {
-                "creativeId": "1234",
-                "creativeSetId": "22222",
-                "id": "1",
-              },
-            ],
-            "billingType": "cpm",
-            "id": "22222",
-            "name": "22222",
-            "oses": [
-              {
-                "code": "1234",
-                "name": "linux",
-              },
-            ],
-            "perDay": 4,
-            "price": "6",
-            "segments": [
-              {
-                "code": "5678",
-                "name": "help",
-              },
-            ],
-            "totalMax": 28,
-          },
-        ],
+        "adSets": {
+          "modify": [
+            {
+              "conversion": undefined,
+              "creativeIds": undefined,
+              "id": "11111",
+              "name": undefined,
+              "osCodes": undefined,
+              "segmentCodes": undefined,
+            },
+            {
+              "conversion": undefined,
+              "creativeIds": undefined,
+              "id": "22222",
+              "name": undefined,
+              "osCodes": undefined,
+              "segmentCodes": undefined,
+            },
+          ],
+        },
         "budget": undefined,
         "endAt": undefined,
         "id": "000001",
         "name": "My first campaign",
-        "paymentType": "RADOM",
         "startAt": undefined,
-        "state": "active",
       }
     `);
   });

@@ -103,7 +103,6 @@ export const CampaignSchema = (prices: AdvertiserPrice[]) =>
             .of(
               object().shape({
                 code: string().required(),
-                name: string().required(),
               }),
             )
             .default([]),
@@ -111,48 +110,42 @@ export const CampaignSchema = (prices: AdvertiserPrice[]) =>
             .of(
               object().shape({
                 code: string().required(),
-                name: string().required(),
               }),
             )
             .min(1, t`At least one platform must be targeted`)
             .default([]),
-          conversions: array()
-            .min(0)
-            .max(1)
-            .of(
-              object().shape({
-                urlPattern: string()
-                  .required(t`Conversion URL required.`)
-                  .matches(
-                    NoSpacesRegex,
-                    t`Conversion URL must not contain any whitespace`,
-                  )
-                  .matches(
-                    HttpsRegex,
-                    t`Conversion URL must start with https://`,
-                  )
-                  .matches(
-                    SimpleUrlRegexp,
-                    t`Please enter a valid URL, for example https://brave.com/product/*`,
-                  )
-                  .matches(
-                    TrailingAsteriskRegex,
-                    t`Conversion URL must end in trailing asterisk (*)`,
-                  ),
-                observationWindow: number()
-                  .oneOf(
-                    [1, 7, 30],
-                    t`Observation window must be 1, 7, or 30 days.`,
-                  )
-                  .required(t`Observation window required.`),
-                type: string()
-                  .oneOf(
-                    ["postclick", "postview"],
-                    t`Conversion type must be Post Click or Post View`,
-                  )
-                  .required(t`Conversion type required.`),
-              }),
-            ),
+          conversion: object()
+            .shape({
+              urlPattern: string()
+                .required(t`Conversion URL required.`)
+                .matches(
+                  NoSpacesRegex,
+                  t`Conversion URL must not contain any whitespace`,
+                )
+                .matches(HttpsRegex, t`Conversion URL must start with https://`)
+                .matches(
+                  SimpleUrlRegexp,
+                  t`Please enter a valid URL, for example https://brave.com/product/*`,
+                )
+                .matches(
+                  TrailingAsteriskRegex,
+                  t`Conversion URL must end in trailing asterisk (*)`,
+                ),
+              observationWindow: number()
+                .oneOf(
+                  [1, 7, 30],
+                  t`Observation window must be 1, 7, or 30 days.`,
+                )
+                .required(t`Observation window required.`),
+              type: string()
+                .oneOf(
+                  ["postclick"],
+                  t`Conversion type must be Post Click or Post View`,
+                )
+                .required(t`Conversion type required.`),
+            })
+            .notRequired()
+            .default(undefined),
           creatives: array().test(
             "min-length",
             t`Ad sets must have at least one ad`,

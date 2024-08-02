@@ -32,6 +32,7 @@ const documents = {
     "\n  query OSBreakdown($filter: PerformanceFilter!) {\n    performance(filter: $filter) {\n      values {\n        dimensions {\n          os\n        }\n        metrics {\n          ...DisplayedMetrics\n        }\n      }\n    }\n  }\n": types.OsBreakdownDocument,
     "\n  query HourlyGraph($filter: PerformanceFilter!) {\n    performance(filter: $filter) {\n      values {\n        ...HourlyValues\n      }\n    }\n  }\n\n  fragment HourlyValues on Performance {\n    dimensions {\n      hour\n    }\n    metrics {\n      ...DisplayedMetrics\n    }\n  }\n": types.HourlyGraphDocument,
     "\n  mutation UpdateCurrentUser($input: UpdateCurrentUserInput!) {\n    updateCurrentUser(input: $input) {\n      ...User\n    }\n  }\n": types.UpdateCurrentUserDocument,
+    "\n  mutation AdsManagerUpdateCampaign($input: AdsManagerUpdateCampaignInput!) {\n    adsManagerUpdateCampaign(adsManagerUpdateCampaignInput: $input) {\n      id\n    }\n  }\n": types.AdsManagerUpdateCampaignDocument,
     "\n  query LoadCampaignSummary($id: String!) {\n    campaign(id: $id) {\n      ...CampaignOverview\n    }\n  }\n\n  fragment CampaignOverview on Campaign {\n    ...CampaignSummary\n    adSets {\n      id\n      conversions {\n        id\n        extractExternalId\n      }\n    }\n  }\n": types.LoadCampaignSummaryDocument,
     "\n  query CreateSearchCampaignLandingPageList(\n    $domain: String!\n    $country: String!\n    $offset: Float!\n    $limit: Float!\n  ) {\n    searchProspects {\n      landingPagesWithStats(\n        country: $country\n        domain: $domain\n        offset: $offset\n        limit: $limit\n      ) {\n        ...SearchProspectsLandingPageList\n      }\n    }\n  }\n\n  fragment SearchProspectsLandingPageList on SearchLandingPageWithStats {\n    url\n    rank\n    lastSeen\n    favicon\n    creatives {\n      title\n      body\n      lastSeen\n    }\n  }\n": types.CreateSearchCampaignLandingPageListDocument,
     "\n  query SearchProspectsLandingPageDetail(\n    $domain: String!\n    $country: String!\n    $url: String!\n  ) {\n    searchProspects {\n      landingPage(country: $country, domain: $domain, url: $url) {\n        ...SearchProspectsLandingPageDetail\n      }\n    }\n  }\n\n  fragment SearchProspectsLandingPageDetail on SearchLandingPage {\n    url\n    queries {\n      query\n    }\n  }\n": types.SearchProspectsLandingPageDetailDocument,
@@ -127,6 +128,10 @@ export function graphql(source: "\n  query HourlyGraph($filter: PerformanceFilte
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation UpdateCurrentUser($input: UpdateCurrentUserInput!) {\n    updateCurrentUser(input: $input) {\n      ...User\n    }\n  }\n"): (typeof documents)["\n  mutation UpdateCurrentUser($input: UpdateCurrentUserInput!) {\n    updateCurrentUser(input: $input) {\n      ...User\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation AdsManagerUpdateCampaign($input: AdsManagerUpdateCampaignInput!) {\n    adsManagerUpdateCampaign(adsManagerUpdateCampaignInput: $input) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation AdsManagerUpdateCampaign($input: AdsManagerUpdateCampaignInput!) {\n    adsManagerUpdateCampaign(adsManagerUpdateCampaignInput: $input) {\n      id\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

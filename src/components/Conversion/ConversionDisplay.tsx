@@ -1,18 +1,17 @@
 import { Conversion } from "@/user/views/adsManager/types";
-import { FormikErrors } from "formik";
 import { ReviewField } from "@/user/views/adsManager/views/advanced/components/review/components/ReviewField";
-import _ from "lodash";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { FormikErrors } from "formik";
 
 interface Props {
-  conversions: Conversion[];
-  convErrors?: FormikErrors<Conversion>[] | string[] | string;
+  conversion?: Conversion;
+  convErrors?: FormikErrors<Conversion>;
 }
 
-export function ConversionDisplay({ conversions, convErrors }: Props) {
+export function ConversionDisplay({ conversion, convErrors }: Props) {
   const { _: lingui } = useLingui();
-  if (conversions.length === 0) {
+  if (!conversion) {
     return (
       <ReviewField
         caption={msg`Conversion`}
@@ -21,39 +20,18 @@ export function ConversionDisplay({ conversions, convErrors }: Props) {
     );
   }
 
-  function extractConversionError(
-    idx: number,
-    field: keyof Conversion,
-  ): string | undefined {
-    const errorObj = convErrors?.[idx];
-
-    if (!errorObj) {
-      return undefined;
-    }
-
-    if (_.isString(errorObj)) {
-      return errorObj;
-    }
-
-    return errorObj[field];
-  }
-
   return (
-    <>
-      {conversions.map((c, idx) => (
-        <div key={idx}>
-          <ReviewField
-            caption={msg`Conversion URL Pattern`}
-            value={c.urlPattern}
-            error={extractConversionError(idx, "urlPattern")}
-          />
-          <ReviewField
-            caption={msg`Conversion Observation Window`}
-            value={`${c.observationWindow} days`}
-            error={extractConversionError(idx, "observationWindow")}
-          />
-        </div>
-      ))}
-    </>
+    <div>
+      <ReviewField
+        caption={msg`Conversion URL Pattern`}
+        value={conversion.urlPattern}
+        error={convErrors?.urlPattern}
+      />
+      <ReviewField
+        caption={msg`Conversion Observation Window`}
+        value={`${conversion.observationWindow} days`}
+        error={convErrors?.observationWindow}
+      />
+    </div>
   );
 }

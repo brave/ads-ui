@@ -1,4 +1,10 @@
-import { AdSetForm, Creative, OS, Segment } from "../../../../../types";
+import {
+  AdSetForm,
+  Conversion,
+  Creative,
+  OS,
+  Segment,
+} from "@/user/views/adsManager/types";
 import { FormikErrors } from "formik";
 import { ConversionDisplay } from "@/components/Conversion/ConversionDisplay";
 import { ReviewField } from "./ReviewField";
@@ -55,8 +61,10 @@ export function AdSetReview({ adSet, idx, errors, format }: Props) {
         error={hasErrors ? (adSetError?.oses as string) : ""}
       />
       <ConversionDisplay
-        conversions={adSet.conversions}
-        convErrors={adSetError?.conversions}
+        conversion={adSet.conversion}
+        convErrors={
+          hasErrors ? (adSetError?.conversion as FormikErrors<Conversion>) : {}
+        }
       />
       <CreativeSpecificPreview
         options={included}
