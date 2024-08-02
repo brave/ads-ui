@@ -169,8 +169,8 @@ msgstr ""
 msgid "Are you sure you want to pause"
 msgstr ""
 
-msgid "As effective as Google"
-msgstr ""
+#~ msgid "As effective as Google"
+#~ msgstr ""
 
 msgid "At a marketing/media conference"
 msgstr ""
@@ -223,17 +223,29 @@ msgstr ""
 msgid "Brave Search Ads"
 msgstr ""
 
-msgid "Brave Search Ads are privacy-preserving, text-based ads that appear at the top of a user’s search results page (SERP). Want to redefine your SEM program, and diversify from Big Tech? Get the first-mover advantage and start targeting your brand’s most important keywords today."
+#~ msgid "Brave Search ads are built to be easy to manage. Once enabled, brands will benefit from a passive increase in traffic without the need to constantly monitor and tweak campaigns."
+#~ msgstr ""
+
+msgid "Brave Search Ads are built to be easy to manage. Once enabled, brands will benefit from a passive increase in traffic without the need to constantly monitor and tweak campaigns."
 msgstr ""
 
-msgid "Brave Search Ads can reach audiences who use ad blockers, and don’t use traditional search engines."
+#~ msgid "Brave Search ads are built to perform and convert as well as - or better than - Google search ad clicks."
+#~ msgstr ""
+
+msgid "Brave Search Ads are built to perform and convert as well as - or better than - Google Search Ad clicks."
 msgstr ""
 
-msgid "Brave Search Ads convert as well as—or better than—Google Search ad clicks."
-msgstr ""
+#~ msgid "Brave Search Ads are privacy-preserving, text-based ads that appear at the top of a user’s search results page (SERP). Want to redefine your SEM program, and diversify from Big Tech? Get the first-mover advantage and start targeting your brand’s most important keywords today."
+#~ msgstr ""
 
-msgid "Brave Search is the fastest growing independent search engine since Bing, with more than 9 billion searches each year (and growing). It’s the default search engine for Brave’s tens of millions of worldwide users, and available in any other browser at <0>search.brave.com</0>"
-msgstr ""
+#~ msgid "Brave Search Ads can reach audiences who use ad blockers, and don’t use traditional search engines."
+#~ msgstr ""
+
+#~ msgid "Brave Search Ads convert as well as—or better than—Google Search ad clicks."
+#~ msgstr ""
+
+#~ msgid "Brave Search is the fastest growing independent search engine since Bing, with more than 9 billion searches each year (and growing). It’s the default search engine for Brave’s tens of millions of worldwide users, and available in any other browser at <0>search.brave.com</0>"
+#~ msgstr ""
 
 msgid "Brave’s 70+ million cord cutters, and tech savvy early adopters want privacy and performance over tracking and lag. Hundreds of thousands more make the switch every day. Want them to see your brand? Start your first campaign in minutes, and with as little as $500."
 msgstr ""
@@ -308,6 +320,15 @@ msgid "cannot create session"
 msgstr ""
 
 msgid "Check eligibility"
+msgstr ""
+
+#~ msgid "Check if your brand is eligible for a <0>free trial</0> of Brave Search ads. <1>Try Brave Search</1> to see why our users choose us over Google and Bing."
+#~ msgstr ""
+
+msgid "Check if your brand is eligible for a <0>free trial</0> of Brave Search Ads. <1>Try Brave Search</1> to see why our users choose us over Google and Bing."
+msgstr ""
+
+msgid "Check your brand's eligibility"
 msgstr ""
 
 msgid "Choose"
@@ -421,6 +442,9 @@ msgstr ""
 msgid "Conversions"
 msgstr ""
 
+msgid "Convert customers with AI-powered search ads"
+msgstr ""
+
 msgid "Copy this and keep this safe!"
 msgstr ""
 
@@ -464,6 +488,9 @@ msgid "Create new ad"
 msgstr ""
 
 msgid "Create new keypair?"
+msgstr ""
+
+msgid "create now"
 msgstr ""
 
 msgid "created"
@@ -667,6 +694,12 @@ msgstr ""
 msgid "Get in touch with our team"
 msgstr ""
 
+msgid "Get in touch."
+msgstr ""
+
+msgid "Get incremental traffic with paid ads on the world's fastest growing search engine."
+msgstr ""
+
 msgid "Get login link"
 msgstr ""
 
@@ -674,6 +707,9 @@ msgid "Get started"
 msgstr ""
 
 msgid "Get to your first million users with powerful ad placements on the world’s fastest-growing alternative browser & search engine."
+msgstr ""
+
+msgid "Have specific questions?"
 msgstr ""
 
 msgid "Help Center"
@@ -739,8 +775,8 @@ msgstr ""
 msgid "Include campaigns that ended over 6 months ago"
 msgstr ""
 
-msgid "Incremental"
-msgstr ""
+#~ msgid "Incremental"
+#~ msgstr ""
 
 msgid "Invalid format"
 msgstr ""
@@ -874,6 +910,12 @@ msgstr ""
 msgid "New tab takeovers"
 msgstr ""
 
+#~ msgid "New users are switching to Brave Search every single day. Don't miss out on meeting their intent to shop your product or services"
+#~ msgstr ""
+
+msgid "New users are switching to Brave Search every single day. Don't miss out on meeting their intent to shop your product or services."
+msgstr ""
+
 msgid "Newsfeed"
 msgstr ""
 
@@ -940,8 +982,8 @@ msgstr ""
 msgid "Once confirmed, your account’s keypair will be replaced with the new keypair."
 msgstr ""
 
-msgid "Or email <0>searchads@brave.com</0>"
-msgstr ""
+#~ msgid "Or email <0>searchads@brave.com</0>"
+#~ msgstr ""
 
 msgid "or sign in using a password"
 msgstr ""
@@ -1075,6 +1117,9 @@ msgstr ""
 msgid "Reach 70+ million highly engaged, otherwise unreachable users."
 msgstr ""
 
+msgid "Reach new audiences you're missing"
+msgstr ""
+
 msgid "Ready to reach your first million users? Start your first campaign today."
 msgstr ""
 
@@ -1096,7 +1141,10 @@ msgstr ""
 msgid "Review ads"
 msgstr ""
 
-msgid "Risk Free"
+#~ msgid "Risk Free"
+#~ msgstr ""
+
+msgid "Risk free trial for up to 30 days"
 msgstr ""
 
 msgid "Sample Queries"
@@ -1118,6 +1166,9 @@ msgid "Search keyword"
 msgstr ""
 
 msgid "Search keyword ads"
+msgstr ""
+
+msgid "searchads@brave.com"
 msgstr ""
 
 msgid "Select Account"
@@ -1145,6 +1196,9 @@ msgid "Select the platforms to target"
 msgstr ""
 
 msgid "Selected ads"
+msgstr ""
+
+msgid "Set up a trial campaign in minutes."
 msgstr ""
 
 msgid "Setup Progress"
@@ -1225,8 +1279,8 @@ msgstr ""
 msgid "Take our survey!"
 msgstr ""
 
-msgid "Tap into more than <0>9 billion</0> annual Web searches"
-msgstr ""
+#~ msgid "Tap into more than <0>9 billion</0> annual Web searches"
+#~ msgstr ""
 
 msgid "Target URL"
 msgstr ""
@@ -1288,7 +1342,10 @@ msgstr ""
 msgid "Today"
 msgstr ""
 
-msgid "Try a free one-month test to see how Brave Search Ads perform for your brand."
+#~ msgid "Try a free one-month test to see how Brave Search Ads perform for your brand."
+#~ msgstr ""
+
+msgid "Try a free one-month test to see how Brave Search Ads perform for your business."
 msgstr ""
 
 msgid "Unable to clone campaign"

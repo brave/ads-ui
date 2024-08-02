@@ -2,12 +2,13 @@ import { Form, Formik } from "formik";
 import { initialValues, RegistrationForm } from "@/auth/registration/types";
 import { FormikSubmitButton } from "@/form/FormikButton";
 import { useRegister } from "@/auth/hooks/mutations/useRegister";
-import { Box } from "@mui/material";
+import { Box, Card, Typography } from "@mui/material";
 import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
-import { msg } from "@lingui/macro";
-import { RegistrationContainer } from "@/auth/registration/RegistrationContainer";
+import { msg, Trans } from "@lingui/macro";
 import { RegistrationSchema } from "@/validation/RegistrationSchema";
 import { SearchForm } from "@/auth/registration/SearchForm";
+import logo from "@/assets/images/brave-icon-release-color.svg";
+import { PrivacyPolicy } from "@/basic-attention-token/PrivacyPolicy";
 
 export function SearchRegister() {
   useTrackMatomoPageView({
@@ -17,7 +18,19 @@ export function SearchRegister() {
   const { register } = useRegister();
 
   return (
-    <RegistrationContainer isSearch>
+    <Card
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+        p: 3,
+      }}
+    >
+      <img src={logo} height={50} />
+      <Typography variant="h5" mt={3} mb={2}>
+        <Trans>Check your brand's eligibility</Trans>
+      </Typography>
       <Formik
         initialValues={initialValues}
         onSubmit={async (v: RegistrationForm, { setSubmitting }) => {
@@ -38,7 +51,7 @@ export function SearchRegister() {
           <Box display="flex" justifyContent="center" m={3}>
             <FormikSubmitButton
               isCreate={true}
-              label={msg`Submit`}
+              label={msg`Check eligibility`}
               sx={{
                 padding: "12px 30px 12px 30px",
                 borderRadius: "12px",
@@ -47,6 +60,7 @@ export function SearchRegister() {
           </Box>
         </Form>
       </Formik>
-    </RegistrationContainer>
+      <PrivacyPolicy isSearch={true} />
+    </Card>
   );
 }

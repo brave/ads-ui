@@ -17,7 +17,7 @@ export function PrivacyPolicy(props: { isSearch?: boolean }) {
   );
 
   return (
-    <Typography variant="body2">
+    <Typography variant={props.isSearch ? "caption" : "body2"} flexWrap="wrap">
       <Trans>
         Please see our{" "}
         <PolicyLink to="https://brave.com/advertiser-privacy/">
