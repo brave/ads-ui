@@ -118,7 +118,6 @@ export function editCampaignValues(
     currency: campaign.currency,
     price: price.toString(),
     billingType: billingType,
-    validateStart: false,
     budget: campaign.budget,
     endAt: campaign.endAt,
     format: campaign.format,

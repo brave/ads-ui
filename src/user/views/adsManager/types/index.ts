@@ -19,7 +19,6 @@ export type CampaignForm = {
   startAt: string;
   endAt: string;
   budget: number;
-  validateStart: boolean;
   isCreating: boolean;
   currency: string;
   geoTargets: GeoTarget[];
@@ -124,7 +123,6 @@ export const initialCampaign = (
     advertiserId: advertiser.id,
     startAt: defaultStartDate(),
     endAt: defaultEndDate(),
-    validateStart: true,
     budget: MIN_PER_CAMPAIGN,
     geoTargets: [],
     newCreative: initialCreative,
