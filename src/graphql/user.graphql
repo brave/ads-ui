@@ -10,9 +10,3 @@ query LoadUser($id: String!) {
     ...User
   }
 }
-
-mutation UpdateUser($input: UpdateUserInput!) {
-  updateUser(updateUserInput: $input) {
-    ...User
-  }
-}

@@ -11,7 +11,6 @@ import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { Trans, msg } from "@lingui/macro";
 import { AdvertiserCampaignsDocument } from "@/graphql-client/graphql";
 import { useQuery } from "@apollo/client";
-import { ConversionAlert } from "@/user/views/user/ConversionAlert";
 
 export function CampaignView() {
   useTrackMatomoPageView({ documentTitle: "Advertiser Campaigns" });
@@ -39,25 +38,22 @@ export function CampaignView() {
 
   return (
     <MiniSideBar>
-      <Box display="flex" overflow="auto" flexDirection="column">
-        <ConversionAlert />
-        <CardContainer
-          header={<Trans>Campaigns</Trans>}
-          sx={{
-            flexGrow: 1,
-            overflowX: "auto",
-          }}
-          additionalAction={<CampaignAgeFilter disabled={loading} />}
-        >
-          {!loading ? (
-            <CampaignList advertiser={data?.advertiserCampaigns} />
-          ) : (
-            <Box m={3}>
-              <Skeleton variant="rounded" height={500} />
-            </Box>
-          )}
-        </CardContainer>
-      </Box>
+      <CardContainer
+        header={<Trans>Campaigns</Trans>}
+        sx={{
+          flexGrow: 1,
+          overflowX: "auto",
+        }}
+        additionalAction={<CampaignAgeFilter disabled={loading} />}
+      >
+        {!loading ? (
+          <CampaignList advertiser={data?.advertiserCampaigns} />
+        ) : (
+          <Box m={3}>
+            <Skeleton variant="rounded" height={500} />
+          </Box>
+        )}
+      </CardContainer>
     </MiniSideBar>
   );
 }

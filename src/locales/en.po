@@ -133,8 +133,8 @@ msgstr "Ads"
 msgid "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously created ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
 msgstr "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously created ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
 
-msgid "Ads Help Center"
-msgstr "Ads Help Center"
+#~ msgid "Ads Help Center"
+#~ msgstr "Ads Help Center"
 
 msgid "Advertiser Name"
 msgstr "Advertiser Name"
@@ -391,11 +391,11 @@ msgstr "Conversion Observation Window"
 msgid "Conversion Rate"
 msgstr "Conversion Rate"
 
-msgid "Conversion reporting change"
-msgstr "Conversion reporting change"
+#~ msgid "Conversion reporting change"
+#~ msgstr "Conversion reporting change"
 
-msgid "Conversion reporting for Brave Ads has changed to better uphold user privacy and security. Campaigns with conversion URLs that violate the newly clarified requirements for conversion URLs will now automatically be paused until their URLs have been updated. Please review the guidelines and take any necessary action to prevent campaign disruption. New guidelines can be found at the <0/>"
-msgstr "Conversion reporting for Brave Ads has changed to better uphold user privacy and security. Campaigns with conversion URLs that violate the newly clarified requirements for conversion URLs will now automatically be paused until their URLs have been updated. Please review the guidelines and take any necessary action to prevent campaign disruption. New guidelines can be found at the <0/>"
+#~ msgid "Conversion reporting for Brave Ads has changed to better uphold user privacy and security. Campaigns with conversion URLs that violate the newly clarified requirements for conversion URLs will now automatically be paused until their URLs have been updated. Please review the guidelines and take any necessary action to prevent campaign disruption. New guidelines can be found at the <0/>"
+#~ msgstr "Conversion reporting for Brave Ads has changed to better uphold user privacy and security. Campaigns with conversion URLs that violate the newly clarified requirements for conversion URLs will now automatically be paused until their URLs have been updated. Please review the guidelines and take any necessary action to prevent campaign disruption. New guidelines can be found at the <0/>"
 
 msgid "Conversion type must be Post Click or Post View"
 msgstr "Conversion type must be Post Click or Post View"

@@ -16,13 +16,21 @@ import { useLingui } from "@lingui/react";
 import {
   AdvertiserCampaignsDocument,
   LoadCampaignDocument,
-  UpdateCampaignDocument,
 } from "@/graphql-client/graphql";
 import { useMutation, useQuery } from "@apollo/client";
+import { graphql } from "@/graphql-client/index";
 
 interface Params {
   campaignId: string;
 }
+
+const UpdateCampaign = graphql(`
+  mutation AdsManagerUpdateCampaign($input: AdsManagerUpdateCampaignInput!) {
+    adsManagerUpdateCampaign(adsManagerUpdateCampaignInput: $input) {
+      id
+    }
+  }
+`);
 
 export function EditCampaign() {
   const { trackMatomoEvent } = useTrackWithMatomo({
@@ -49,15 +57,15 @@ export function EditCampaign() {
   });
 
   const hasPaymentIntent = initialData?.campaign?.hasPaymentIntent;
-  const [mutation] = useMutation(UpdateCampaignDocument, {
+  const [mutation] = useMutation(UpdateCampaign, {
     onCompleted(data) {
       trackMatomoEvent("campaign", "update-success");
       if (hasPaymentIntent) {
         history.push(
-          `/user/main/complete/edit?referenceId=${data.updateCampaign.id}`,
+          `/user/main/complete/edit?referenceId=${data.adsManagerUpdateCampaign.id}`,
         );
       } else {
-        void createPaymentSession(data.updateCampaign.id);
+        void createPaymentSession(data.adsManagerUpdateCampaign.id);
       }
     },
     onError() {

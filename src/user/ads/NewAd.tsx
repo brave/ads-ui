@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { useContext, useEffect } from "react";
 import { BoxContainer } from "@/components/Box/BoxContainer";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
@@ -53,6 +53,14 @@ export function NewAd() {
           <AddCircleOutlineIcon fontSize="large" />
         )}
       </Box>
+      <Typography
+        variant="caption"
+        marginLeft={1}
+        color={"text.primary"}
+        textAlign="right"
+      >
+        <Trans>create now</Trans>
+      </Typography>
     </BoxContainer>
   );
 }

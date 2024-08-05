@@ -1,4 +1,4 @@
-import { FormikTextField, useIsEdit } from "@/form/FormikHelpers";
+import { FormikTextField } from "@/form/FormikHelpers";
 import { CardContainer } from "@/components/Card/CardContainer";
 import { CampaignDateRange } from "@/components/Campaigns/CampaignDateRange";
 import { Typography } from "@mui/material";
@@ -15,7 +15,6 @@ import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 
 export function CampaignSettings(props: { prices: AdvertiserPrice[] }) {
-  const { isDraft } = useIsEdit();
   const { _ } = useLingui();
   const { advertiser } = useAdvertiser();
   useTrackMatomoPageView({ documentTitle: "Campaign Settings" });
@@ -38,7 +37,7 @@ export function CampaignSettings(props: { prices: AdvertiserPrice[] }) {
 
         <CampaignDateRange />
 
-        {isDraft && <LocationPicker />}
+        <LocationPicker />
       </CardContainer>
 
       <FormatField prices={props.prices} />

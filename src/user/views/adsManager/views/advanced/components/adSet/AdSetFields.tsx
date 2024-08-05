@@ -20,7 +20,6 @@ import { useLingui } from "@lingui/react";
 export function AdSetFields() {
   const { _ } = useLingui();
   const history = useHistory();
-  const { isDraft } = useIsEdit();
   const params = new URLSearchParams(history.location.search);
   const current = Number(params.get("current") ?? 0);
   const fakeCurrent = current + 1;
@@ -45,7 +44,7 @@ export function AdSetFields() {
 
       <PickerFields index={current} />
 
-      {isDraft && <ConversionField index={current} />}
+      <ConversionField index={current} />
 
       <AdSetAds index={current} />
     </>

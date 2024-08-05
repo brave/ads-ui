@@ -133,8 +133,8 @@ msgstr ""
 msgid "Ads are modular building blocks that can be paired with ad sets to build unique combinations. Your previously created ads will show here. Select by using the box next to the name. Use the \"Complete selection\" button to finish."
 msgstr ""
 
-msgid "Ads Help Center"
-msgstr ""
+#~ msgid "Ads Help Center"
+#~ msgstr ""
 
 msgid "Advertiser Name"
 msgstr ""
@@ -391,11 +391,11 @@ msgstr ""
 msgid "Conversion Rate"
 msgstr ""
 
-msgid "Conversion reporting change"
-msgstr ""
+#~ msgid "Conversion reporting change"
+#~ msgstr ""
 
-msgid "Conversion reporting for Brave Ads has changed to better uphold user privacy and security. Campaigns with conversion URLs that violate the newly clarified requirements for conversion URLs will now automatically be paused until their URLs have been updated. Please review the guidelines and take any necessary action to prevent campaign disruption. New guidelines can be found at the <0/>"
-msgstr ""
+#~ msgid "Conversion reporting for Brave Ads has changed to better uphold user privacy and security. Campaigns with conversion URLs that violate the newly clarified requirements for conversion URLs will now automatically be paused until their URLs have been updated. Please review the guidelines and take any necessary action to prevent campaign disruption. New guidelines can be found at the <0/>"
+#~ msgstr ""
 
 msgid "Conversion type must be Post Click or Post View"
 msgstr ""
