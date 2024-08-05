@@ -120,29 +120,30 @@ export const clearCredentials = async (): Promise<void> => {
 };
 
 export const getLink = async (user: { email: string }): Promise<void> => {
-  const encodedEmail = encodeURIComponent(user.email.trim());
-  await fetch(
-    buildAdServerV2Endpoint(`/auth/magic-link?email=${encodedEmail}`),
-    {
-      method: "GET",
-      mode: "cors",
-      credentials: "include",
+  await fetch(buildAdServerV2Endpoint(`/auth/magic-link`), {
+    method: "POST",
+    mode: "cors",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
     },
-  );
+    body: JSON.stringify({ email: user.email.trim() }),
+  });
 };
 
 export const authorize = async (req: {
   code: string;
   id: string;
 }): Promise<ResponseUser> => {
-  const res = await fetch(
-    buildAdServerV2Endpoint(`/auth/authorize?code=${req.code}&id=${req.id}`),
-    {
-      method: "GET",
-      mode: "cors",
-      credentials: "include",
+  const res = await fetch(buildAdServerV2Endpoint(`/auth/authorize`), {
+    method: "POST",
+    mode: "cors",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
     },
-  );
+    body: JSON.stringify({ code: req.code, id: req.id }),
+  });
 
   if (!res.ok) {
     throw new Error(t`Invalid Token`);
