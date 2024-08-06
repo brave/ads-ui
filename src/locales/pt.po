@@ -336,6 +336,9 @@ msgstr ""
 msgid "Check your brand's eligibility"
 msgstr ""
 
+msgid "Check your spam folder or <0>return to the login page</0> to try again."
+msgstr ""
+
 msgid "Choose"
 msgstr "Escolher"
 
@@ -356,6 +359,9 @@ msgstr "Clique Aqui!"
 
 msgid "Click on the secure login link in the email to access your Brave Ads account."
 msgstr "Clique no link seguro de login no seu e-mail para acessar sua conta dos Anúncios Brave."
+
+msgid "Click the continue button below to complete the login process."
+msgstr ""
 
 msgid "Click Through Rate"
 msgstr "Taxa de Cliques"
@@ -558,8 +564,11 @@ msgstr "O domínio não deve conter espaços em branco"
 msgid "Domain to advertise"
 msgstr "Domínio para anunciar"
 
-msgid "Don’t see the email? Check your spam folder or <0>try again.</0>"
-msgstr "Não recebeu o e-mail? Verifique sua pasta de spam ou <0>tente novamente.</0>"
+msgid "Don’t see the email?"
+msgstr ""
+
+#~ msgid "Don’t see the email? Check your spam folder or <0>try again.</0>"
+#~ msgstr "Não recebeu o e-mail? Verifique sua pasta de spam ou <0>tente novamente.</0>"
 
 msgid "Download Report"
 msgstr "Baixar Relatório"
@@ -855,8 +864,8 @@ msgstr "Entrar"
 msgid "Log into your Brave Ads account"
 msgstr "Faça login em sua conta dos Anúncios Brave"
 
-msgid "Logging in"
-msgstr "Fazendo login"
+#~ msgid "Logging in"
+#~ msgstr "Fazendo login"
 
 msgid "Logout"
 msgstr "Sair"
@@ -951,8 +960,8 @@ msgstr "Nenhum anúncio anterior disponível"
 msgid "no session created"
 msgstr "nenhuma sessão criada"
 
-msgid "Not automatically redirected? Click this link to go to the dashboard."
-msgstr "Não foi redirecionado automaticamente? Clique neste link para acessar o dashboard."
+#~ msgid "Not automatically redirected? Click this link to go to the dashboard."
+#~ msgstr "Não foi redirecionado automaticamente? Clique neste link para acessar o dashboard."
 
 msgid "Notes"
 msgstr "Notas"
@@ -1134,8 +1143,11 @@ msgstr "Remover"
 msgid "Remove Conversion tracking"
 msgstr "Remover rastreamento de Conversão"
 
-msgid "Request another link."
-msgstr "Solicitar outro link."
+#~ msgid "Request another link."
+#~ msgstr "Solicitar outro link."
+
+msgid "Return"
+msgstr ""
 
 msgid "Return to dashboard"
 msgstr "Voltar ao dashboard"
@@ -1275,8 +1287,8 @@ msgstr "Enviar"
 msgid "Success! Check your email."
 msgstr "Sucesso! Verifique seu e-mail."
 
-msgid "Successfully logged in!"
-msgstr "Login realizado com sucesso!"
+#~ msgid "Successfully logged in!"
+#~ msgstr "Login realizado com sucesso!"
 
 msgid "Support"
 msgstr "Suporte"
@@ -1311,11 +1323,17 @@ msgstr "É necessário concordar com os Termos e Condições"
 msgid "The <0>Basic Attention Token (BAT)</0> is Brave’s native crypto token. Brave Browser users who opt into <1>Brave Rewards</1> can earn BAT just for opting into viewing ads from the Brave Ads network. Earners can hold BAT like any other crypto asset, trade it, cash it in, or even donate it to their favorite creators."
 msgstr "O <0>Basic Attention Token (BAT)</0> é a criptomoeda nativa do Brave. Usuários do navegador Brave que optam pelas <1>Recompensas Brave</1> podem ganhar BAT apenas por visualizar anúncios da rede dos Anúncios Brave. Os ganhadores podem manter o BAT como qualquer outro ativo cripto, trocá-lo, convertê-lo em dinheiro ou até mesmo doá-lo aos seus criadores favoritos."
 
+msgid "The campaign will likely stop running before the end date provided due to budget constraints."
+msgstr ""
+
 msgid "The current value for this metric may be an underestimate."
 msgstr "O valor atual para esta métrica pode ser uma subestimativa."
 
 msgid "The following query string parameters will be added to your landing page URLs. This will allow you to track the performance of your ads."
 msgstr "Os seguintes parâmetros da string de consulta serão adicionados às URLs das suas páginas de destino. Isso permitirá que você acompanhe o desempenho dos seus anúncios."
+
+msgid "The magic link you have requested has either expired or has already been used. Please return to the login page and try again."
+msgstr ""
 
 msgid "The username or password did not match our records."
 msgstr "O nome de usuário ou senha não correspondem aos nossos registros."
@@ -1383,8 +1401,11 @@ msgstr "Não foi possível carregar o anúncio"
 msgid "Unable to load reporting details for campaign: {0}"
 msgstr "Não foi possível carregar os detalhes do relatório para a campanha: {0}"
 
-msgid "Unable to login, link has expired or has already been used."
-msgstr "Não foi possível fazer login, o link expirou ou já foi utilizado."
+#~ msgid "Unable to login, link has expired or has already been used."
+#~ msgstr "Não foi possível fazer login, o link expirou ou já foi utilizado."
+
+msgid "Unable to login."
+msgstr ""
 
 msgid "Unable to register your organization at this time. Please try again later."
 msgstr "No momento, não foi possível cadastrar sua organização. Por favor, tente novamente mais tarde."
@@ -1511,6 +1532,9 @@ msgstr "Sim"
 
 msgid "You are attempting to create a new keypair, this will replace any of your account’s existing keypairs. Please note, previous keypairs cannot be retrieved or used once replaced."
 msgstr "Você está tentando criar um novo par de chaves, isso substituirá qualquer um dos pares de chaves existentes na sua conta. Observe que os pares de chaves anteriores não podem ser recuperados ou usados uma vez que forem substituídos."
+
+msgid "You are logging into the Brave Ads Manager Dashboard."
+msgstr ""
 
 msgid "You have {0} errors that must be fixed before submitting."
 msgstr "Você tem {0} erros que devem ser corrigidos antes de enviar."

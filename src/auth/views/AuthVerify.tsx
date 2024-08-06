@@ -1,11 +1,11 @@
 import { AuthContainer } from "@/auth/views/components/AuthContainer";
 import { useAuthorize } from "@/auth/hooks/queries/useAuthorize";
-import { Link as RouterLink, useHistory } from "react-router-dom";
-import { CircularProgress, Link, Stack, Typography } from "@mui/material";
-import VerifiedIcon from "@mui/icons-material/Verified";
-import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import { Link as RouterLink, Switch, useHistory } from "react-router-dom";
+import { Alert, AlertTitle, Button, Typography } from "@mui/material";
 import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
 import { Trans } from "@lingui/macro";
+import { LoadingButton } from "@mui/lab";
+import logo from "@/assets/images/brave-icon-release-color.svg";
 
 export function AuthVerify() {
   const { trackMatomoEvent } = useTrackWithMatomo({
@@ -14,11 +14,7 @@ export function AuthVerify() {
   const history = useHistory();
   const params = new URLSearchParams(history.location.search);
 
-  const { loading, error } = useAuthorize({
-    variables: {
-      code: params.get("code") ?? "",
-      id: params.get("id") ?? "",
-    },
+  const { loading, error, verify } = useAuthorize({
     onCompleted() {
       history.push("/user/main");
       trackMatomoEvent("magic-link", "verified");
@@ -28,49 +24,61 @@ export function AuthVerify() {
     },
   });
 
+  const id = params.get("id");
+  const code = params.get("code");
+
+  if (!id || !code) {
+    return (
+      <Switch>
+        <RouterLink to="/auth/link" />
+      </Switch>
+    );
+  }
+
   return (
     <AuthContainer>
-      {loading && (
-        <Stack direction="column" alignItems="center" sx={{ mt: 7 }}>
-          <Typography variant="h4" sx={{ mb: 7 }}>
-            <Trans>Logging in</Trans>
-          </Typography>
-
-          <CircularProgress size={100} />
-        </Stack>
-      )}
-      {!loading && !error && (
-        <Stack direction="column" alignItems="center" sx={{ mt: 5 }}>
-          <Typography variant="h4" sx={{ mb: 5 }}>
-            <Trans>Successfully logged in!</Trans>
-          </Typography>
-          <VerifiedIcon sx={{ fontSize: "100px", mb: 5 }} color="success" />
-          <Link
-            variant="h5"
-            component={RouterLink}
-            sx={{ textAlign: "center" }}
-            to="/user/main"
-            replace
-          >
-            <Trans>
-              Not automatically redirected? Click this link to go to the
-              dashboard.
-            </Trans>
-          </Link>
-        </Stack>
-      )}
+      <img src={logo} height={50} />
+      <Typography gutterBottom variant="h6">
+        <Trans>You are logging into the Brave Ads Manager Dashboard.</Trans>
+      </Typography>
+      <Typography gutterBottom variant="subtitle1">
+        <Trans>
+          Click the continue button below to complete the login process.
+        </Trans>
+      </Typography>
+      <LoadingButton
+        loading={loading}
+        disabled={loading || !!error}
+        onClick={() => verify(code, id)}
+        variant="contained"
+        sx={{ mt: 2, pl: 5, pr: 5, borderRadius: "12px", mb: 2 }}
+        size="large"
+      >
+        <Trans>Continue</Trans>
+      </LoadingButton>
       {!loading && error && (
-        <Stack direction="column" alignItems="center" sx={{ mt: 5 }}>
-          <Typography variant="h4" sx={{ textAlign: "center", mb: 5 }}>
-            <Trans>
-              Unable to login, link has expired or has already been used.
-            </Trans>
-          </Typography>
-          <CancelOutlinedIcon sx={{ fontSize: "100px", mb: 5 }} color="error" />
-          <Link variant="h5" component={RouterLink} to="/auth/link" replace>
-            <Trans>Request another link.</Trans>
-          </Link>
-        </Stack>
+        <Alert
+          severity="error"
+          action={
+            <Button
+              variant="outlined"
+              color="inherit"
+              component={RouterLink}
+              to="/auth/link"
+              sx={{ alignSelf: "center" }}
+            >
+              <Trans>Return</Trans>
+            </Button>
+          }
+        >
+          <AlertTitle>
+            <Trans>Unable to login.</Trans>
+          </AlertTitle>
+          <Trans>
+            The magic link you have requested has either expired or has already
+            been used. Please return to the login page and try again.
+          </Trans>
+        </Alert>
       )}
     </AuthContainer>
   );

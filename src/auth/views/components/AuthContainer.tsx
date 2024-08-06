@@ -17,7 +17,7 @@ export function AuthContainer({ children, belowCard, aboveCard }: Props) {
       <LandingPageAppBar />
       <Box
         display="flex"
-        maxWidth="725px"
+        maxWidth="750px"
         minWidth={{ xs: "400px", sm: "700px" }}
         flexDirection="column"
         p={1}

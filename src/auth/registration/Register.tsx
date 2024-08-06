@@ -7,8 +7,8 @@ export function Register() {
     <Switch>
       <Route path="/register/browser" component={BrowserRegister} />
       <Route path="/register/complete" component={AdvertiserRegistered} />
-      <Redirect exact={true} from="" to="/register/browser" />
-      <Redirect to="/search" from="/register/search" exact={true} />
+      <Redirect exact from="/register/search" to="/search" />
+      <Redirect exact from="" to="/register/browser" />
     </Switch>
   );
 }
