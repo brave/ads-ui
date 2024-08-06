@@ -50,7 +50,6 @@ const validCampaign = {
   state: "any",
   type: "paid",
   pacingStrategy: CampaignPacingStrategies.ModelV1,
-  validateStart: true,
 };
 
 it("should pass on a valid object", () => {

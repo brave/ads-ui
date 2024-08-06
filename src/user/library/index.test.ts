@@ -239,7 +239,6 @@ describe("new form tests", () => {
     price: "6",
     startAt: dateString,
     state: CampaignState.Draft,
-    validateStart: false,
   };
 
   it("should transform campaign form", () => {
@@ -519,7 +518,6 @@ describe("edit form tests", () => {
         "price": "6000",
         "startAt": undefined,
         "state": "active",
-        "validateStart": false,
       }
     `);
   });

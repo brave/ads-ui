@@ -1,5 +1,7 @@
 import { CampaignFormat } from "@/graphql-client/graphql";
 import { t } from "@lingui/macro";
+import dayjs from "dayjs";
+import BigNumber from "bignumber.js";
 
 export function uiLabelsForCampaignFormat(format: CampaignFormat): string {
   const CAMPAIGN_FORMATS = [
@@ -12,3 +14,14 @@ export function uiLabelsForCampaignFormat(format: CampaignFormat): string {
 
   return CAMPAIGN_FORMATS.find((f) => f.value === format)?.label ?? format;
 }
+
+const MIN_PER_DAY = 33;
+export const isFuzzyCalculatedDailyBudgetOk = (startAt: Date, endAt: Date) => {
+  const campaignRuntime = dayjs(endAt).diff(dayjs(startAt), "day");
+  const hasRuntime = campaignRuntime > 0;
+
+  const min = BigNumber(MIN_PER_DAY).times(campaignRuntime);
+  const ok = (value: number) =>
+    hasRuntime ? BigNumber(value).div(campaignRuntime).gte(MIN_PER_DAY) : true;
+  return { ok, min };
+};

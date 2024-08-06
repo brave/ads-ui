@@ -1,7 +1,6 @@
 import {
   AnyObject,
   array,
-  boolean,
   date,
   number,
   object,
@@ -21,15 +20,16 @@ import { CampaignFormat } from "@/graphql-client/graphql";
 import BigNumber from "bignumber.js";
 import { AdvertiserPrice } from "@/user/hooks/useAdvertiserWithPrices";
 import { Billing } from "@/user/views/adsManager/types";
-import { uiLabelsForCampaignFormat } from "@/util/campaign";
+import {
+  isFuzzyCalculatedDailyBudgetOk,
+  uiLabelsForCampaignFormat,
+} from "@/util/campaign";
 import { t } from "@lingui/macro";
-import dayjs from "dayjs";
 
-const MIN_PER_DAY = 33;
 export const MIN_PER_CAMPAIGN = 500;
-
 export const CampaignSchema = (prices: AdvertiserPrice[]) =>
   object().shape({
+    id: string().optional(),
     name: string().required(t`Campaign Name is required`),
     format: string()
       .oneOf([CampaignFormat.NewsDisplayAd, CampaignFormat.PushNotification])
@@ -40,27 +40,21 @@ export const CampaignSchema = (prices: AdvertiserPrice[]) =>
         MIN_PER_CAMPAIGN,
         t`Lifetime budget must be $${MIN_PER_CAMPAIGN} or more`,
       )
-      .when(["startAt", "endAt"], ([startAt, endAt], schema) => {
-        const campaignRuntime = dayjs(endAt).diff(dayjs(startAt), "day");
-        const hasRuntime = campaignRuntime > 0;
-
-        const min = BigNumber(MIN_PER_DAY).times(campaignRuntime);
+      .when(["startAt", "endAt", "id"], ([startAt, endAt, id], schema) => {
+        if (id !== undefined) return schema;
+        const { ok, min } = isFuzzyCalculatedDailyBudgetOk(startAt, endAt);
         return schema.test(
           "is-valid-budget",
           t`Lifetime budget must be higher for date range provided. Minimum $${min}.`,
-          (value) =>
-            hasRuntime
-              ? BigNumber(value).div(campaignRuntime).gte(MIN_PER_DAY)
-              : true,
+          (value) => ok(value),
         );
       }),
     newCreative: object().when("isCreating", {
       is: true,
       then: () => CreativeSchema(),
     }),
-    validateStart: boolean(),
-    startAt: date().when("validateStart", {
-      is: true,
+    startAt: date().when("id", {
+      is: (val: string | undefined) => val === undefined,
       then: (schema) =>
         schema
           .min(
