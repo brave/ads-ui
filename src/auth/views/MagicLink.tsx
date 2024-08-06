@@ -40,8 +40,11 @@ export function MagicLink() {
           </Trans>
         </Typography>
         <Typography variant="subtitle1">
+          <Trans>Don&rsquo;t see the email?</Trans>
+        </Typography>
+        <Typography variant="subtitle2">
           <Trans>
-            Don&rsquo;t see the email? Check your spam folder or{" "}
+            Check your spam folder or{" "}
             <Link
               sx={{ cursor: "pointer" }}
               variant="inherit"
@@ -49,8 +52,9 @@ export function MagicLink() {
                 setRequested(false);
               }}
             >
-              try again.
-            </Link>
+              return to the login page
+            </Link>{" "}
+            to try again.
           </Trans>
         </Typography>
       </AuthContainer>

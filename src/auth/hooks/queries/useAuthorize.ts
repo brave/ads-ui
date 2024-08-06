@@ -1,28 +1,22 @@
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useAuthContext } from "@/auth/context/auth.hook";
-import { authorize, ResponseUser } from "@/auth/lib";
+import { authorize } from "@/auth/lib";
 
 interface Options {
-  variables: {
-    code: string;
-    id: string;
-  };
   onCompleted?: () => void;
   onError?: () => void;
 }
 
-export function useAuthorize({ variables, onCompleted, onError }: Options) {
+export function useAuthorize({ onCompleted, onError }: Options) {
   const { setSessionUser } = useAuthContext();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
-  const [data, setData] = useState<ResponseUser>();
 
-  useEffect(() => {
-    authorize(variables)
+  const verify = useCallback((code: string, id: string) => {
+    authorize({ code, id })
       .then((data) => {
         if (data) {
           setSessionUser(data);
-          setData(data);
         }
         if (onCompleted) {
           onCompleted();
@@ -40,5 +34,5 @@ export function useAuthorize({ variables, onCompleted, onError }: Options) {
       });
   }, []);
 
-  return { data, loading, error };
+  return { loading, error, verify };
 }
