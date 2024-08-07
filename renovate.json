@@ -10,7 +10,7 @@
     "schedule:weekends"
   ],
   "labels": ["dependencies"],
-  "postUpdateOptions": ["npmDedupe"],
+  "postUpdateOptions": ["pnpmDedupe"],
   "packageRules": [
     {
       "matchUpdateTypes": ["major"],
