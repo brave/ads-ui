@@ -76,7 +76,7 @@ async function fetchResource(url: string): Promise<Response> {
       cache: "no-cache",
     });
     return response;
-  } catch (e) {
+  } catch {
     return new Response(null, { status: 502 });
   }
 }
