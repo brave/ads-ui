@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchPaymentSession } from "@/checkout/lib";
+import { validatePaymentSession } from "@/checkout/lib";
 
 interface Props {
   sessionId: string | null;
@@ -13,7 +13,7 @@ export function useValidatePaymentSession(props: Props) {
   useEffect(() => {
     if (props.campaignId) {
       setLoading(true);
-      fetchPaymentSession(props.campaignId, props.sessionId)
+      validatePaymentSession(props.campaignId, props.sessionId)
         .catch((e) => {
           setError(e.message);
         })
