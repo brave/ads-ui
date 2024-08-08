@@ -27,19 +27,25 @@ export async function createPaymentSession(
   }
 }
 
-export async function fetchPaymentSession(
+export async function validatePaymentSession(
   campaignId: string,
   sessionId: string | null,
 ): Promise<void> {
-  let baseUrl = `/payments/checkout-session?referenceId=${campaignId}`;
+  const body: { referenceId: string; sessionId?: string } = {
+    referenceId: campaignId,
+  };
   if (sessionId) {
-    baseUrl = `${baseUrl}&sessionId=${sessionId}`;
+    body.sessionId = sessionId;
   }
 
-  const res = await fetch(buildAdServerEndpoint(baseUrl), {
+  const res = await fetch(buildAdServerEndpoint("/payments/checkout-session"), {
     method: "PUT",
     mode: "cors",
     credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
   });
 
   if (res.status !== 200) {
