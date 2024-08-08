@@ -78,6 +78,7 @@ export function useSubmitCreative(props: { id: string }) {
             variables: {
               input: {
                 id: props.id,
+                name: input.name,
                 payloadNotification: input.payloadNotification,
                 payloadInlineContent: _.omit(
                   input.payloadInlineContent,
