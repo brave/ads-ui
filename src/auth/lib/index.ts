@@ -152,6 +152,36 @@ export const authorize = async (req: {
   return await res.json();
 };
 
+export const verify = async (credential: string): Promise<ResponseUser> => {
+  const res = await fetch(buildAdServerV2Endpoint(`/auth/verify/google`), {
+    method: "POST",
+    mode: "cors",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ credential }),
+  });
+
+  if (!res.ok) {
+    throw new Error(t`Invalid Token`);
+  }
+
+  return await res.json();
+};
+
+export const nonce = async (): Promise<string> => {
+  const res = await fetch(buildAdServerV2Endpoint(`/auth/nonce`), {
+    method: "GET",
+    mode: "cors",
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    throw new Error(t`Invalid Token`);
+  }
+
+  return await res.text();
+};
+
 export const sendMarketingEmail = async (req: {
   email: string;
   fullName: string;

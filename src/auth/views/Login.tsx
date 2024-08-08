@@ -1,7 +1,7 @@
-import { Alert, Link, TextField, Typography } from "@mui/material";
+import { Alert, TextField, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
-import { Link as RouterLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useSignIn } from "@/auth/hooks/mutations/useSignIn";
 import { AuthContainer } from "@/auth/views/components/AuthContainer";
 import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
@@ -66,16 +66,6 @@ export function Login() {
       >
         <Trans>Log in</Trans>
       </LoadingButton>
-
-      <Link
-        underline="none"
-        component={RouterLink}
-        sx={{ mt: 1 }}
-        to="/auth/link"
-        replace
-      >
-        <Trans>or sign in using a secure link</Trans>
-      </Link>
     </AuthContainer>
   );
 }

@@ -1,15 +1,18 @@
 import { useState } from "react";
 
-import { Link, TextField, Typography } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import { Box, Link, Stack, TextField, Typography } from "@mui/material";
 import { useGetLink } from "@/auth/hooks/mutations/useGetLink";
 import { LoadingButton } from "@mui/lab";
 import { AuthContainer } from "@/auth/views/components/AuthContainer";
 import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { SignInWithGoogle } from "@/auth/components/SignInWithGoogle";
+import { useIsAuthenticated } from "@/auth/hooks/queries/useIsAuthenticated";
+import { Redirect, Switch } from "react-router-dom";
 
 export function MagicLink() {
+  const isAuthenticated = useIsAuthenticated();
   const { trackMatomoEvent } = useTrackWithMatomo({
     documentTitle: "Magic Link Login",
   });
@@ -26,6 +29,14 @@ export function MagicLink() {
       trackMatomoEvent("magic-link", "request-failed");
     },
   });
+
+  if (isAuthenticated) {
+    return (
+      <Switch>
+        <Redirect to="/user/main" exact={true} />
+      </Switch>
+    );
+  }
 
   if (requested) {
     return (
@@ -63,46 +74,47 @@ export function MagicLink() {
 
   return (
     <AuthContainer>
-      <Typography sx={{ textAlign: "center", mb: 3 }} variant="subtitle1">
-        <Trans>
-          Enter your email address to get a secure login link. Use this link to
-          access your Brave Ads account.
-        </Trans>
-      </Typography>
+      <Box display="flex" alignItems="center" flexDirection="column" p={3}>
+        <Typography sx={{ textAlign: "center", mb: 3 }} variant="h4">
+          <Trans>Sign in to Brave Ads Manager</Trans>
+        </Typography>
 
-      <TextField
-        sx={{ mb: 1 }}
-        fullWidth
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        label={_(msg`Email`)}
-        error={!!error}
-        helperText={error}
-      />
+        <Box p={2}>
+          <SignInWithGoogle />
+        </Box>
 
-      <LoadingButton
-        color="primary"
-        size="large"
-        variant="contained"
-        sx={{ mt: 2, mb: 1 }}
-        disabled={loading}
-        loading={loading}
-        onClick={() => {
-          requestLink(email);
-        }}
-      >
-        <Trans>Get login link</Trans>
-      </LoadingButton>
+        <Typography m={2}>
+          <Trans>or</Trans>
+        </Typography>
 
-      <Link
-        underline="none"
-        sx={{ mt: 1 }}
-        component={RouterLink}
-        to="/auth/signin"
-        replace
-      >
-        <Trans>or sign in using a password</Trans>
-      </Link>
+        <Stack direction="row" spacing={2}>
+          <TextField
+            sx={{ mb: 1, maxWidth: 350 }}
+            fullWidth
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            label={_(msg`Email`)}
+            error={!!error}
+            helperText={error}
+            size="small"
+            variant={"standard"}
+          />
+
+          <LoadingButton
+            color="primary"
+            size="small"
+            variant="contained"
+            sx={{ width: 220 }}
+            disabled={loading}
+            loading={loading}
+            onClick={() => {
+              requestLink(email);
+            }}
+          >
+            <Trans>Get login link</Trans>
+          </LoadingButton>
+        </Stack>
+      </Box>
     </AuthContainer>
   );
 }
