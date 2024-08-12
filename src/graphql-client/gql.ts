@@ -13,7 +13,7 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  mutation UpdateAdvertiser($input: UpdateSelfServeAdvertiserInput!) {\n    updateSelfServeAdvertiser(updateAdvertiserInput: $input) {\n      id\n      publicKey\n    }\n  }\n": types.UpdateAdvertiserDocument,
+    "\n  mutation UpdateAdvertiser($input: AdsManagerUpdateAdvertiserInput!) {\n    adsManagerUpdateAdvertiser(adsManagerUpdateAdvertiserInput: $input) {\n      id\n      publicKey\n    }\n  }\n": types.UpdateAdvertiserDocument,
     "\n  mutation AdsManagerUpdateCreativeState($id: String!, $state: String!) {\n    adsManagerUpdateCreativeState(id: $id, state: $state) {\n      id\n    }\n  }\n": types.AdsManagerUpdateCreativeStateDocument,
     "\n  mutation AdsManagerUpdateCreativePayload(\n    $input: AdsManagerUpdateCreativeInput!\n  ) {\n    adsManagerUpdateCreativePayload(adsManagerUpdateCreativeInput: $input) {\n      id\n    }\n  }\n": types.AdsManagerUpdateCreativePayloadDocument,
     "\n    mutation UpdateAdSetState($id: String!, $state: AdSetState!) {\n      adsManagerUpdateAdSetState(id: $id, state: $state) {\n        id\n      }\n    }\n  ": types.UpdateAdSetStateDocument,
@@ -55,7 +55,7 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation UpdateAdvertiser($input: UpdateSelfServeAdvertiserInput!) {\n    updateSelfServeAdvertiser(updateAdvertiserInput: $input) {\n      id\n      publicKey\n    }\n  }\n"): (typeof documents)["\n  mutation UpdateAdvertiser($input: UpdateSelfServeAdvertiserInput!) {\n    updateSelfServeAdvertiser(updateAdvertiserInput: $input) {\n      id\n      publicKey\n    }\n  }\n"];
+export function graphql(source: "\n  mutation UpdateAdvertiser($input: AdsManagerUpdateAdvertiserInput!) {\n    adsManagerUpdateAdvertiser(adsManagerUpdateAdvertiserInput: $input) {\n      id\n      publicKey\n    }\n  }\n"): (typeof documents)["\n  mutation UpdateAdvertiser($input: AdsManagerUpdateAdvertiserInput!) {\n    adsManagerUpdateAdvertiser(adsManagerUpdateAdvertiserInput: $input) {\n      id\n      publicKey\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
