@@ -43,7 +43,6 @@ export type Ad = {
   /** @deprecated rewardPaymentTokenValue has been moved to ad set */
   rewardPaymentTokenValue: Scalars['Numeric']['output'];
   state: Scalars['String']['output'];
-  webhooks: Array<Webhook>;
 };
 
 export type AdSet = {
@@ -147,6 +146,14 @@ export type AdsManagerUpdateAdSetInput = {
   segmentCodes?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
+export type AdsManagerUpdateAdvertiserInput = {
+  /** Agreed to Terms And Conditions - Advertiser Facing Dashboard */
+  agreed?: InputMaybe<Scalars['Boolean']['input']>;
+  billingAddress?: InputMaybe<UpdateAddressInput>;
+  id: Scalars['String']['input'];
+  publicKey?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type AdsManagerUpdateCampaignInput = {
   adSets?: InputMaybe<AdsManagerAdSetInput>;
   budget?: InputMaybe<Scalars['Numeric']['input']>;
@@ -195,6 +202,7 @@ export type Advertiser = {
   marketingChannel?: Maybe<Scalars['String']['output']>;
   modifiedAt: Scalars['DateTime']['output'];
   name: Scalars['String']['output'];
+  ofacCompliant: Scalars['Boolean']['output'];
   phone?: Maybe<Scalars['String']['output']>;
   prices: Array<AdvertiserPrice>;
   publicKey?: Maybe<Scalars['String']['output']>;
@@ -525,7 +533,6 @@ export type CreateAdInput = {
   creativeId?: InputMaybe<Scalars['String']['input']>;
   creativeSetId?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
-  webhooks?: InputMaybe<Array<CreateWebhookInput>>;
 };
 
 export type CreateAdSetInput = {
@@ -900,11 +907,11 @@ export type Metrics = {
 export type Mutation = {
   __typename?: 'Mutation';
   adsManagerUpdateAdSetState: AdSet;
+  adsManagerUpdateAdvertiser: Advertiser;
   adsManagerUpdateCampaign: Campaign;
   adsManagerUpdateCampaignState: Campaign;
   adsManagerUpdateCreativePayload: Creative;
   adsManagerUpdateCreativeState: Creative;
-  approveAdvertiser: Advertiser;
   approveAdvertiserRegistration: Advertiser;
   approveCampaign: Campaign;
   createAdSet: AdSet;
@@ -917,12 +924,10 @@ export type Mutation = {
   /** Logically deletes the ad */
   deleteAd: Ad;
   forceCampaignValidation?: Maybe<Campaign>;
-  rejectAdvertiser: Advertiser;
   rejectAdvertiserRegistration: Registration;
   rejectCampaign: Campaign;
   rejectCreative: Creative;
-  /** @deprecated This actually updates the state of the creative, not the ad as its name suggests! */
-  updateAd: Ad;
+  sendLoginEmail: Scalars['Boolean']['output'];
   updateAdSet: AdSet;
   updateAdvertiser: Advertiser;
   updateCampaign: Campaign;
@@ -936,6 +941,11 @@ export type Mutation = {
 export type MutationAdsManagerUpdateAdSetStateArgs = {
   id: Scalars['String']['input'];
   state: AdSetState;
+};
+
+
+export type MutationAdsManagerUpdateAdvertiserArgs = {
+  adsManagerUpdateAdvertiserInput: AdsManagerUpdateAdvertiserInput;
 };
 
 
@@ -958,11 +968,6 @@ export type MutationAdsManagerUpdateCreativePayloadArgs = {
 export type MutationAdsManagerUpdateCreativeStateArgs = {
   id: Scalars['String']['input'];
   state: Scalars['String']['input'];
-};
-
-
-export type MutationApproveAdvertiserArgs = {
-  id: Scalars['String']['input'];
 };
 
 
@@ -1021,12 +1026,6 @@ export type MutationForceCampaignValidationArgs = {
 };
 
 
-export type MutationRejectAdvertiserArgs = {
-  id: Scalars['String']['input'];
-  reason: Scalars['String']['input'];
-};
-
-
 export type MutationRejectAdvertiserRegistrationArgs = {
   code?: InputMaybe<RegistrationDenial>;
   id: Scalars['String']['input'];
@@ -1046,8 +1045,8 @@ export type MutationRejectCreativeArgs = {
 };
 
 
-export type MutationUpdateAdArgs = {
-  updateAdInput: UpdateAdInput;
+export type MutationSendLoginEmailArgs = {
+  id: Scalars['String']['input'];
 };
 
 
@@ -1566,14 +1565,6 @@ export type TargetUrlValidation = {
   redirects: Array<Redirect>;
 };
 
-export type UpdateAdInput = {
-  creativeId?: InputMaybe<Scalars['String']['input']>;
-  creativeSetId?: InputMaybe<Scalars['String']['input']>;
-  id?: InputMaybe<Scalars['String']['input']>;
-  state?: InputMaybe<Scalars['String']['input']>;
-  webhooks?: InputMaybe<Array<CreateWebhookInput>>;
-};
-
 export type UpdateAdSetInput = {
   ads?: InputMaybe<Array<CreateAdInput>>;
   bannedKeywords?: InputMaybe<Array<Scalars['String']['input']>>;
@@ -1627,6 +1618,7 @@ export type UpdateAdvertiserInput = {
   id: Scalars['String']['input'];
   marketingChannel?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
+  ofacCompliant?: InputMaybe<Scalars['Boolean']['input']>;
   phone?: InputMaybe<Scalars['String']['input']>;
   publicKey?: InputMaybe<Scalars['String']['input']>;
   referrer?: InputMaybe<Scalars['String']['input']>;
@@ -1732,23 +1724,12 @@ export type WallpaperInput = {
   imageUrl: Scalars['String']['input'];
 };
 
-export type Webhook = {
-  __typename?: 'Webhook';
-  type: Scalars['String']['output'];
-  url: Scalars['String']['output'];
-};
-
-export type CreateWebhookInput = {
-  type: Scalars['String']['input'];
-  url: Scalars['String']['input'];
-};
-
 export type UpdateAdvertiserMutationVariables = Exact<{
-  input: UpdateSelfServeAdvertiserInput;
+  input: AdsManagerUpdateAdvertiserInput;
 }>;
 
 
-export type UpdateAdvertiserMutation = { __typename?: 'Mutation', updateSelfServeAdvertiser: { __typename?: 'Advertiser', id: string, publicKey?: string | null } };
+export type UpdateAdvertiserMutation = { __typename?: 'Mutation', adsManagerUpdateAdvertiser: { __typename?: 'Advertiser', id: string, publicKey?: string | null } };
 
 export type AdsManagerUpdateCreativeStateMutationVariables = Exact<{
   id: Scalars['String']['input'];
@@ -2078,7 +2059,7 @@ export const HourlyValuesFragmentDoc = {"kind":"Document","definitions":[{"kind"
 export const CampaignOverviewFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CampaignOverview"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Campaign"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CampaignSummary"}},{"kind":"Field","name":{"kind":"Name","value":"adSets"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"conversions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"extractExternalId"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CampaignSummary"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Campaign"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"dailyCap"}},{"kind":"Field","name":{"kind":"Name","value":"priority"}},{"kind":"Field","name":{"kind":"Name","value":"passThroughRate"}},{"kind":"Field","name":{"kind":"Name","value":"pacingOverride"}},{"kind":"Field","name":{"kind":"Name","value":"pacingStrategy"}},{"kind":"Field","name":{"kind":"Name","value":"externalId"}},{"kind":"Field","name":{"kind":"Name","value":"currency"}},{"kind":"Field","name":{"kind":"Name","value":"budget"}},{"kind":"Field","name":{"kind":"Name","value":"paymentType"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"startAt"}},{"kind":"Field","name":{"kind":"Name","value":"endAt"}},{"kind":"Field","name":{"kind":"Name","value":"source"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"format"}},{"kind":"Field","name":{"kind":"Name","value":"dayProportion"}},{"kind":"Field","name":{"kind":"Name","value":"brandedKeywords"}},{"kind":"Field","name":{"kind":"Name","value":"advertiser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<CampaignOverviewFragment, unknown>;
 export const SearchProspectsLandingPageListFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"SearchProspectsLandingPageList"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SearchLandingPageWithStats"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"rank"}},{"kind":"Field","name":{"kind":"Name","value":"lastSeen"}},{"kind":"Field","name":{"kind":"Name","value":"favicon"}},{"kind":"Field","name":{"kind":"Name","value":"creatives"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"lastSeen"}}]}}]}}]} as unknown as DocumentNode<SearchProspectsLandingPageListFragment, unknown>;
 export const SearchProspectsLandingPageDetailFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"SearchProspectsLandingPageDetail"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SearchLandingPage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"queries"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"query"}}]}}]}}]} as unknown as DocumentNode<SearchProspectsLandingPageDetailFragment, unknown>;
-export const UpdateAdvertiserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateAdvertiser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateSelfServeAdvertiserInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateSelfServeAdvertiser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"updateAdvertiserInput"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"publicKey"}}]}}]}}]} as unknown as DocumentNode<UpdateAdvertiserMutation, UpdateAdvertiserMutationVariables>;
+export const UpdateAdvertiserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateAdvertiser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"AdsManagerUpdateAdvertiserInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"adsManagerUpdateAdvertiser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"adsManagerUpdateAdvertiserInput"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"publicKey"}}]}}]}}]} as unknown as DocumentNode<UpdateAdvertiserMutation, UpdateAdvertiserMutationVariables>;
 export const AdsManagerUpdateCreativeStateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"AdsManagerUpdateCreativeState"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"state"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"adsManagerUpdateCreativeState"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"state"},"value":{"kind":"Variable","name":{"kind":"Name","value":"state"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<AdsManagerUpdateCreativeStateMutation, AdsManagerUpdateCreativeStateMutationVariables>;
 export const AdsManagerUpdateCreativePayloadDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"AdsManagerUpdateCreativePayload"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"AdsManagerUpdateCreativeInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"adsManagerUpdateCreativePayload"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"adsManagerUpdateCreativeInput"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<AdsManagerUpdateCreativePayloadMutation, AdsManagerUpdateCreativePayloadMutationVariables>;
 export const UpdateAdSetStateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateAdSetState"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"state"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"AdSetState"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"adsManagerUpdateAdSetState"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"state"},"value":{"kind":"Variable","name":{"kind":"Name","value":"state"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<UpdateAdSetStateMutation, UpdateAdSetStateMutationVariables>;
