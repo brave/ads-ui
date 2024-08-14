@@ -22,8 +22,8 @@ import { useMutation, useQuery } from "@apollo/client";
 import { graphql } from "@/graphql-client/index";
 
 export const Advertiser_Update = graphql(`
-  mutation UpdateAdvertiser($input: UpdateSelfServeAdvertiserInput!) {
-    updateSelfServeAdvertiser(updateAdvertiserInput: $input) {
+  mutation UpdateAdvertiser($input: AdsManagerUpdateAdvertiserInput!) {
+    adsManagerUpdateAdvertiser(adsManagerUpdateAdvertiserInput: $input) {
       id
       publicKey
     }
