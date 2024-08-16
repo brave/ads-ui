@@ -248,7 +248,7 @@ export function transformEditForm(
         creativeIds: adSet.creatives
           .filter((c) => c.included && !!c.id)
           .map((c) => c.id) as string[],
-        price: form.price,
+        price: transformPrice(form),
         billingType: form.billingType,
       });
     }
