@@ -10,7 +10,7 @@ import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlin
 import PercentIcon from "@mui/icons-material/Percent";
 import ArticleIcon from "@mui/icons-material/Article";
 import { SearchData } from "./data";
-import { formatUsd, formatWholeNumber } from "@/user/library/format";
+import { formatWholeNumber } from "@/user/library/format";
 
 function SummaryEntry({
   title,
@@ -92,11 +92,6 @@ export function SummaryPanel({ searchData }: Props) {
         icon={<MonetizationOnOutlinedIcon sx={{ color: "text.secondary" }} />}
         value={
           <Box display="flex" gap={1} alignItems="center">
-            <Box component="span" sx={{ textDecoration: "line-through" }}>
-              {formatUsd(searchData.estimates.trialBudget, {
-                dollarsOnly: true,
-              })}
-            </Box>
             <Box
               color="primary.contrastText"
               bgcolor="primary.main"
