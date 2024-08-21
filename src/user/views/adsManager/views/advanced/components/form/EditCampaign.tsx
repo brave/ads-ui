@@ -14,8 +14,10 @@ import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import {
+  AdsManagerUpdateCampaignInput,
   AdvertiserCampaignsDocument,
   LoadCampaignDocument,
+  PaymentType,
 } from "@/graphql-client/graphql";
 import { useMutation, useQuery } from "@apollo/client";
 import { graphql } from "@/graphql-client/index";
@@ -57,31 +59,7 @@ export function EditCampaign() {
   });
 
   const hasPaymentIntent = initialData?.campaign?.hasPaymentIntent;
-  const [mutation] = useMutation(UpdateCampaign, {
-    onCompleted(data) {
-      trackMatomoEvent("campaign", "update-success");
-      if (hasPaymentIntent) {
-        history.push(
-          `/user/main/complete/edit?referenceId=${data.adsManagerUpdateCampaign.id}`,
-        );
-      } else {
-        void createPaymentSession(data.adsManagerUpdateCampaign.id);
-      }
-    },
-    onError() {
-      trackMatomoEvent("campaign", "update-failed");
-      alert(_(msg`Unable to Update Campaign.`));
-    },
-    refetchQueries: [
-      {
-        query: AdvertiserCampaignsDocument,
-        variables: {
-          id: data.id,
-          filter: { from: fromDate?.toISOString() },
-        },
-      },
-    ],
-  });
+  const [mutation] = useMutation(UpdateCampaign);
 
   if (error || priceError) {
     return (
@@ -102,6 +80,38 @@ export function EditCampaign() {
     return <LinearProgress />;
   }
 
+  const doSubmitEdit = async (
+    input: AdsManagerUpdateCampaignInput,
+    payment: PaymentType,
+  ) => {
+    return await mutation({
+      variables: { input },
+      onCompleted(data) {
+        trackMatomoEvent("campaign", "update-success");
+        if (hasPaymentIntent) {
+          history.push(
+            `/user/main/complete/edit?referenceId=${data.adsManagerUpdateCampaign.id}`,
+          );
+        } else {
+          void createPaymentSession(data.adsManagerUpdateCampaign.id, payment);
+        }
+      },
+      onError() {
+        trackMatomoEvent("campaign", "update-failed");
+        alert(_(msg`Unable to Update Campaign.`));
+      },
+      refetchQueries: [
+        {
+          query: AdvertiserCampaignsDocument,
+          variables: {
+            id: data.id,
+            filter: { from: fromDate?.toISOString() },
+          },
+        },
+      ],
+    });
+  };
+
   const initialValues = editCampaignValues(initialData.campaign, data.id);
   return (
     <Container maxWidth="xl">
@@ -110,7 +120,7 @@ export function EditCampaign() {
         onSubmit={async (v: CampaignForm, { setSubmitting }) => {
           setSubmitting(true);
           const input = transformEditForm(v, initialValues, params.campaignId);
-          await mutation({ variables: { input } });
+          await doSubmitEdit(input, v.paymentType);
           setSubmitting(false);
         }}
         validationSchema={CampaignSchema(data.prices)}
