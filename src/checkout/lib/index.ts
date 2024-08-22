@@ -1,9 +1,11 @@
 import { buildAdServerEndpoint } from "@/util/environment";
 import { t } from "@lingui/macro";
+import { PaymentType } from "@/graphql-client/graphql";
 
 export async function createPaymentSession(
   advertiserId: string,
   campaignId: string,
+  paymentMethod?: PaymentType,
 ): Promise<string> {
   const res = await fetch(buildAdServerEndpoint("/payments/checkout-session"), {
     method: "POST",
@@ -12,7 +14,11 @@ export async function createPaymentSession(
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ advertiserId, campaignId }),
+    body: JSON.stringify({
+      advertiserId,
+      campaignId,
+      paymentMethod: paymentMethod ? paymentMethod.toLowerCase() : undefined,
+    }),
   });
 
   if (res.status !== 200) {
