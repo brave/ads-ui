@@ -17,7 +17,7 @@ export async function createPaymentSession(
     body: JSON.stringify({
       advertiserId,
       campaignId,
-      paymentMethod,
+      paymentMethod: paymentMethod ? paymentMethod.toLowerCase() : undefined,
     }),
   });
 
