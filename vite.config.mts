@@ -58,13 +58,16 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         output: {
           manualChunks: {
-            lodash: ['lodash'],
-            highcharts: ['highcharts'],
+            lodash: ["lodash"],
+            highcharts: ["highcharts"],
             "highcharts-react-official": ["highcharts-react-official"],
             "react-dom": ["react-dom"],
-          }
-        }
-      }
+            forms: ["yup", "formik", "bignumber.js"],
+          },
+          minifyInternalExports: true,
+          assetFileNames: "static/[name].[hash][extname]",
+        },
+      },
     },
     test: {
       // see https://vitest.dev/config/#globals

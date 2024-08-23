@@ -7,7 +7,7 @@ import { SearchRegister } from "@/auth/registration/SearchRegister";
 import braveSearch from "@/assets/videos/setting_up_brave_search_ads.mp4";
 import { SearchTalkingPoints } from "@/search/SearchTalkingPoints";
 
-export function SearchLandingPage() {
+export default function SearchLandingPage() {
   useTrackMatomoPageView({ documentTitle: "Search Landing Page" });
 
   return (

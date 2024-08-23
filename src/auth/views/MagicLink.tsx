@@ -9,7 +9,7 @@ import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 
-export function MagicLink() {
+export default function MagicLink() {
   const { trackMatomoEvent } = useTrackWithMatomo({
     documentTitle: "Magic Link Login",
   });
