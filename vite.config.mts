@@ -61,6 +61,7 @@ export default defineConfig(({ mode }) => {
             lodash: ['lodash'],
             highcharts: ['highcharts'],
             "highcharts-react-official": ["highcharts-react-official"],
+            "react-dom": ["react-dom"],
           }
         }
       }
