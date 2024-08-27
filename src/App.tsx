@@ -1,9 +1,10 @@
-import { useState, lazy } from "react";
+import { useState, lazy, Suspense } from "react";
 
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import { DraftContext, getAllDrafts } from "@/state/context";
 import {
+  CircularProgress,
   CssBaseline,
   StyledEngineProvider,
   ThemeProvider,
@@ -41,24 +42,26 @@ export function App() {
             },
           }}
         >
-          <Switch>
-            <Route path="/auth/signin" component={SignIn} />
-            <Route path="/auth/link" component={AuthLink} />
-            <Route path="/auth/verify" component={AuthVerify} />
-            <Route path="/register" component={Register} />
-            <Route path="/contact" component={BraveAdsContactFrame} />
-            <Route
-              path="/bat"
-              component={() => (
-                <BasicAttentionTokenLandingPage reroute={true} />
-              )}
-            />
-            <Route path="/search/preview/:slug" component={SearchPreview} />
-            <Route path="/search" component={SearchLandingPage} />
-            <Route path="/user/main" component={UserView} />
-            <Route path="/" exact={true} component={LandingPage} />
-            <Redirect to="/user/main" />
-          </Switch>
+          <Suspense fallback={<CircularProgress />}>
+            <Switch>
+              <Route path="/auth/signin" component={SignIn} />
+              <Route path="/auth/link" component={AuthLink} />
+              <Route path="/auth/verify" component={AuthVerify} />
+              <Route path="/register" component={Register} />
+              <Route path="/contact" component={BraveAdsContactFrame} />
+              <Route
+                path="/bat"
+                component={() => (
+                  <BasicAttentionTokenLandingPage reroute={true} />
+                )}
+              />
+              <Route path="/search/preview/:slug" component={SearchPreview} />
+              <Route path="/search" component={SearchLandingPage} />
+              <Route path="/user/main" component={UserView} />
+              <Route path="/" exact={true} component={LandingPage} />
+              <Redirect to="/user/main" />
+            </Switch>
+          </Suspense>
         </DraftContext.Provider>
       </ThemeProvider>
     </StyledEngineProvider>
