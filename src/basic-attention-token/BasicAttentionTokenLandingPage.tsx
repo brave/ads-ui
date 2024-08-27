@@ -3,7 +3,7 @@ import {
   useTrackMatomoPageView,
 } from "@/hooks/useTrackWithMatomo";
 import { Box, Button, Link, Stack, Typography } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, Redirect } from "react-router-dom";
 import { Trans } from "@lingui/macro";
 import basicattentiontoken from "@/assets/images/basic-attention-token.svg";
 import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
@@ -11,10 +11,21 @@ import { Background } from "@/components/Background/Background";
 import { BottomSwoop } from "@/components/Assets/BottomSwoop";
 import { TopSwoop } from "@/components/Assets/TopSwoop";
 
-export function BasicAttentionTokenLandingPage() {
+interface Props {
+  reroute: boolean;
+}
+
+export function BasicAttentionTokenLandingPage({ reroute }: Props) {
   useTrackMatomoPageView({
     documentTitle: "Basic Attention Token Landing Page",
   });
+
+  if (reroute) {
+    // Not fully removing page (2024-08-23), but discounts need further evaluation
+    window.open("https://basicattentiontoken.org/", "_blank", "noopener");
+    return <Redirect to="/" />;
+  }
+
   return (
     <Background>
       <LandingPageAppBar />
