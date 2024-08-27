@@ -11,15 +11,11 @@ import { Background } from "@/components/Background/Background";
 import { BottomSwoop } from "@/components/Assets/BottomSwoop";
 import { TopSwoop } from "@/components/Assets/TopSwoop";
 
-<<<<<<< HEAD
 interface Props {
   reroute: boolean;
 }
 
 export function BasicAttentionTokenLandingPage({ reroute }: Props) {
-=======
-export default function BasicAttentionTokenLandingPage() {
->>>>>>> 40dc2d7d (chore(performance): lazy load and code split certain libraries)
   useTrackMatomoPageView({
     documentTitle: "Basic Attention Token Landing Page",
   });
