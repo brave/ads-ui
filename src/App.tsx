@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useState, lazy } from "react";
 
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import { DraftContext, getAllDrafts } from "@/state/context";
-import { User } from "@/user/User";
 import {
   CssBaseline,
   StyledEngineProvider,
@@ -12,15 +11,17 @@ import {
 import { theme } from "./theme";
 import { CampaignForm } from "@/user/views/adsManager/types";
 import { AuthVerify } from "@/auth/views/AuthVerify";
-import { Login } from "@/auth/views/Login";
-import { MagicLink } from "@/auth/views/MagicLink";
-import { Register } from "@/auth/registration/Register";
 import { LandingPage } from "@/auth/views/LandingPage";
 import { BraveAdsContactFrame } from "@/auth/registration/BraveAdsContactFrame";
 import { useMatomo } from "@jonkoops/matomo-tracker-react";
-import { SearchLandingPage } from "@/search/SearchLandingPage";
-import { SearchPreviewPage } from "./search/preview/SearchPreviewPage";
 import { BasicAttentionTokenLandingPage } from "@/basic-attention-token/BasicAttentionTokenLandingPage";
+
+const UserView = lazy(() => import("@/user/User"));
+const SearchPreview = lazy(() => import("@/search/preview/SearchPreviewPage"));
+const SignIn = lazy(() => import("@/auth/views/Login"));
+const Register = lazy(() => import("@/auth/registration/Register"));
+const AuthLink = lazy(() => import("@/auth/views/MagicLink"));
+const SearchLandingPage = lazy(() => import("@/search/SearchLandingPage"));
 
 export function App() {
   const { enableLinkTracking } = useMatomo();
@@ -41,8 +42,8 @@ export function App() {
           }}
         >
           <Switch>
-            <Route path="/auth/signin" component={Login} />
-            <Route path="/auth/link" component={MagicLink} />
+            <Route path="/auth/signin" component={SignIn} />
+            <Route path="/auth/link" component={AuthLink} />
             <Route path="/auth/verify" component={AuthVerify} />
             <Route path="/register" component={Register} />
             <Route path="/contact" component={BraveAdsContactFrame} />
@@ -52,9 +53,9 @@ export function App() {
                 <BasicAttentionTokenLandingPage reroute={true} />
               )}
             />
-            <Route path="/search/preview/:slug" component={SearchPreviewPage} />
+            <Route path="/search/preview/:slug" component={SearchPreview} />
             <Route path="/search" component={SearchLandingPage} />
-            <Route path="/user/main" component={User} />
+            <Route path="/user/main" component={UserView} />
             <Route path="/" exact={true} component={LandingPage} />
             <Redirect to="/user/main" />
           </Switch>
