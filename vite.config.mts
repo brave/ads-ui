@@ -55,6 +55,19 @@ export default defineConfig(({ mode }) => {
       sourcemap: true,
       // vite automagically decides whether to inline assets depending on their size. We are explicitly disabling this.
       assetsInlineLimit: 0,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            lodash: ["lodash"],
+            highcharts: ["highcharts"],
+            "highcharts-react-official": ["highcharts-react-official"],
+            "react-dom": ["react-dom"],
+            forms: ["yup", "formik", "bignumber.js"],
+          },
+          minifyInternalExports: true,
+          assetFileNames: "static/[name].[hash][extname]",
+        },
+      },
     },
     test: {
       // see https://vitest.dev/config/#globals

@@ -2,7 +2,7 @@ import { AdvertiserRegistered } from "@/auth/registration/AdvertiserRegistered";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { BrowserRegister } from "@/auth/registration/BrowserRegister";
 
-export function Register() {
+export default function Register() {
   return (
     <Switch>
       <Route path="/register/browser" component={BrowserRegister} />

@@ -9,7 +9,7 @@ import { NoPreviewAvailable } from "./NoPreviewAvailable";
 
 /* eslint-disable lingui/no-unlocalized-strings */
 
-export function SearchPreviewPage() {
+export default function SearchPreviewPage() {
   const { slug } = useParams<{ slug: string }>();
   const { loading, data } = useLandingPageData(slug);
   return (

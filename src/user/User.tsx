@@ -65,7 +65,7 @@ const buildApolloClient = () => {
   });
 };
 
-export function User() {
+export default function User() {
   const client = useMemo(() => buildApolloClient(), []);
   const [fromDate, setFromDate] = useState<Date | null>(
     dayjs().subtract(6, "month").startOf("day").toDate(),

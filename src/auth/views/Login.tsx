@@ -8,7 +8,7 @@ import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
 import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 
-export function Login() {
+export default function Login() {
   const { trackMatomoEvent } = useTrackWithMatomo({
     documentTitle: "Password Login",
   });
