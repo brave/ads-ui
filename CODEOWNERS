@@ -13,5 +13,6 @@
 .node-version @tackley @IanKrieger
 
 package*.json @tackley @IanKrieger
+pnpm-lock.yaml @tackley @IanKrieger
 
 
