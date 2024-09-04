@@ -4,12 +4,12 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@apollo/client": "3.11.4",
-    "@emotion/react": "11.13.0",
+    "@apollo/client": "3.11.5",
+    "@emotion/react": "11.13.3",
     "@emotion/styled": "11.13.0",
     "@fontsource/inter": "5.0.20",
-    "@fontsource/mulish": "5.0.18",
-    "@fontsource/poppins": "5.0.14",
+    "@fontsource/mulish": "5.0.19",
+    "@fontsource/poppins": "5.0.15",
     "@graphql-typed-document-node/core": "3.2.0",
     "@jonkoops/matomo-tracker-react": "0.7.0",
     "@lingui/conf": "4.11.3",
@@ -21,13 +21,13 @@
     "@mui/icons-material": "5.16.7",
     "@mui/lab": "5.0.0-alpha.173",
     "@mui/material": "5.16.7",
-    "@mui/x-data-grid": "7.13.0",
-    "@mui/x-date-pickers": "7.13.0",
+    "@mui/x-data-grid": "7.15.0",
+    "@mui/x-date-pickers": "7.15.0",
     "bignumber.js": "9.1.2",
-    "dayjs": "1.11.12",
+    "dayjs": "1.11.13",
     "formik": "2.4.6",
     "graphql": "16.9.0",
-    "highcharts": "11.4.7",
+    "highcharts": "11.4.8",
     "highcharts-react-official": "3.2.1",
     "immer": "10.1.1",
     "lodash": "4.17.21",
@@ -70,7 +70,7 @@
     "@parcel/watcher": "2.4.1",
     "@types/lodash": "4.17.7",
     "@types/papaparse": "5.3.14",
-    "@types/react": "18.3.3",
+    "@types/react": "18.3.5",
     "@types/react-dom": "18.3.0",
     "@types/react-router-dom": "5.3.3",
     "@types/react-window": "1.8.8",
@@ -82,14 +82,14 @@
     "eslint-plugin-lingui": "0.3.0",
     "eslint-plugin-react": "7.35.0",
     "eslint-plugin-react-hooks": "4.6.2",
-    "husky": "9.1.4",
-    "knip": "5.27.2",
+    "husky": "9.1.5",
+    "knip": "5.27.5",
     "lint-staged": "15.2.9",
     "npm-run-all2": "6.2.2",
     "prettier": "3.3.3",
     "typescript": "5.5.4",
-    "typescript-eslint": "8.1.0",
-    "vite": "5.4.1",
+    "typescript-eslint": "8.3.0",
+    "vite": "5.4.2",
     "vite-plugin-checker": "0.7.2",
     "vite-tsconfig-paths": "5.0.1",
     "vitest": "2.0.5"
@@ -114,12 +114,9 @@
   },
   "pnpm": {
     "overrides": {
-      "ws@>=8.0.0 <8.17.1": ">=8.17.1"
-    },
-    "auditConfig": {
-      "ignoreCves": [
-        "CVE-2024-4067"
-      ]
+      "ws@>=8.0.0 <8.17.1": ">=8.17.1",
+      "micromatch@<4.0.8": ">=4.0.8"
     }
-  }
+  },
+  "packageManager": "pnpm@9.9.0+sha512.60c18acd138bff695d339be6ad13f7e936eea6745660d4cc4a776d5247c540d0edee1a563695c183a66eb917ef88f2b4feb1fc25f32a7adcadc7aaf3438e99c1"
 }

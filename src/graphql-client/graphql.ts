@@ -22,42 +22,22 @@ export type Scalars = {
   Numeric: { input: string | number; output: string; }
 };
 
-export type ActiveGeocodesEntry = {
-  __typename?: 'ActiveGeocodesEntry';
-  code: Scalars['String']['output'];
-  name: Scalars['String']['output'];
-};
-
-export type ActiveGeocodesQueryDto = {
-  __typename?: 'ActiveGeocodesQueryDTO';
-  data: Array<ActiveGeocodesEntry>;
-};
-
 export type Ad = {
   __typename?: 'Ad';
   creative: Creative;
   id: Scalars['String']['output'];
-  /** @deprecated price configuration has been moved to ad set */
-  price: Scalars['Numeric']['output'];
-  priceType: ConfirmationType;
-  /** @deprecated rewardPaymentTokenValue has been moved to ad set */
-  rewardPaymentTokenValue: Scalars['Numeric']['output'];
   state: Scalars['String']['output'];
 };
 
 export type AdSet = {
   __typename?: 'AdSet';
   ads: Array<Ad>;
-  /** @deprecated has been moved to campaign level */
-  bannedKeywords?: Maybe<Array<Scalars['String']['output']>>;
   billingType?: Maybe<Scalars['String']['output']>;
   brandedDesktopPrice?: Maybe<Scalars['Numeric']['output']>;
   brandedMobilePrice?: Maybe<Scalars['Numeric']['output']>;
   conversions: Array<Conversion>;
   createdAt: Scalars['DateTime']['output'];
   externalId?: Maybe<Scalars['String']['output']>;
-  /** @deprecated price changes are now allowed */
-  hasConfirmations: Scalars['Boolean']['output'];
   id: Scalars['String']['output'];
   keywordSimilarity?: Maybe<Scalars['Float']['output']>;
   keywords?: Maybe<Array<Scalars['String']['output']>>;
@@ -74,7 +54,6 @@ export type AdSet = {
   rewardPaymentTokenValue: Scalars['Numeric']['output'];
   segments: Array<Segment>;
   state: AdSetState;
-  targetingTerms?: Maybe<Array<Scalars['String']['output']>>;
   totalMax: Scalars['Float']['output'];
   triggerUrls?: Maybe<Array<Scalars['String']['output']>>;
   validationFailures: Array<CampaignValidationFailure>;
@@ -299,8 +278,6 @@ export type Campaign = {
   dayProportion?: Maybe<Scalars['Float']['output']>;
   effectiveState: CampaignEffectiveState;
   endAt: Scalars['DateTime']['output'];
-  engagements: Array<Engagement>;
-  engagementsByCountry: Array<CountryEngagement>;
   externalId?: Maybe<Scalars['String']['output']>;
   format: CampaignFormat;
   geoTargets: Array<Geocode>;
@@ -452,13 +429,6 @@ export type CampaignValidationFailure = {
   description: Scalars['String']['output'];
 };
 
-export type CampaignsPerCountryEntry = {
-  __typename?: 'CampaignsPerCountryEntry';
-  count: Scalars['Int']['output'];
-  country: Scalars['String']['output'];
-  name: Scalars['String']['output'];
-};
-
 export type Change = {
   __typename?: 'Change';
   createdAt: Scalars['DateTime']['output'];
@@ -486,25 +456,6 @@ export type ChangeFilter = {
   referenceIds?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
-export enum ConfirmationType {
-  Bookmark = 'BOOKMARK',
-  Click = 'CLICK',
-  ClientView = 'CLIENT_VIEW',
-  Conversion = 'CONVERSION',
-  Dismiss = 'DISMISS',
-  Downvote = 'DOWNVOTE',
-  Flag = 'FLAG',
-  Land30 = 'LAND30',
-  Land60 = 'LAND60',
-  Landclick = 'LANDCLICK',
-  Landed = 'LANDED',
-  Media_25 = 'MEDIA_25',
-  Media_100 = 'MEDIA_100',
-  MediaPlay = 'MEDIA_PLAY',
-  Upvote = 'UPVOTE',
-  View = 'VIEW'
-}
-
 export type Conversion = {
   __typename?: 'Conversion';
   createdAt: Scalars['DateTime']['output'];
@@ -515,17 +466,6 @@ export type Conversion = {
   trailingAsteriskNotRequired: Scalars['Boolean']['output'];
   type: Scalars['String']['output'];
   urlPattern: Scalars['String']['output'];
-};
-
-export type CountryEngagement = {
-  __typename?: 'CountryEngagement';
-  click: Scalars['Float']['output'];
-  conversion: Scalars['Float']['output'];
-  country: Scalars['String']['output'];
-  dismiss: Scalars['Float']['output'];
-  landed: Scalars['Float']['output'];
-  spend?: Maybe<Scalars['Float']['output']>;
-  view: Scalars['Float']['output'];
 };
 
 export type CreateAdInput = {
@@ -558,7 +498,6 @@ export type CreateAdSetInput = {
   segments: Array<CreateSegmentInput>;
   splitTestGroup?: InputMaybe<Scalars['String']['input']>;
   state?: InputMaybe<AdSetState>;
-  targetingTerms?: InputMaybe<Array<Scalars['String']['input']>>;
   totalMax: Scalars['Float']['input'];
   triggerUrls?: InputMaybe<Array<Scalars['String']['input']>>;
 };
@@ -762,40 +701,6 @@ export type Dimensions = {
   segment?: Maybe<Scalars['String']['output']>;
 };
 
-export type Engagement = {
-  __typename?: 'Engagement';
-  android: Scalars['Float']['output'];
-  click: Scalars['Numeric']['output'];
-  clickthroughConversion: Scalars['Numeric']['output'];
-  conversion: Scalars['Numeric']['output'];
-  cost: Scalars['Float']['output'];
-  count: Scalars['Float']['output'];
-  createdat: Scalars['DateTime']['output'];
-  creativeid: Scalars['String']['output'];
-  creativeinstanceid: Scalars['String']['output'];
-  creativename: Scalars['String']['output'];
-  creativepayload: Scalars['String']['output'];
-  creativesetid: Scalars['String']['output'];
-  creativesetname?: Maybe<Scalars['String']['output']>;
-  creativestate: Scalars['String']['output'];
-  currency: Scalars['String']['output'];
-  dismiss: Scalars['Numeric']['output'];
-  downvote: Scalars['Numeric']['output'];
-  ios: Scalars['Float']['output'];
-  landed: Scalars['Numeric']['output'];
-  linux: Scalars['Float']['output'];
-  macos: Scalars['Float']['output'];
-  other: Scalars['Float']['output'];
-  price: Scalars['Float']['output'];
-  pricetype: Scalars['String']['output'];
-  spend: Scalars['Numeric']['output'];
-  type: Scalars['String']['output'];
-  upvote: Scalars['Numeric']['output'];
-  view: Scalars['Numeric']['output'];
-  viewthroughConversion: Scalars['Numeric']['output'];
-  windows: Scalars['Float']['output'];
-};
-
 export type FocalPoint = {
   __typename?: 'FocalPoint';
   x: Scalars['Float']['output'];
@@ -933,7 +838,6 @@ export type Mutation = {
   updateCampaign: Campaign;
   updateCreative: Creative;
   updateCurrentUser: User;
-  updateSelfServeAdvertiser: Advertiser;
   updateUser: User;
 };
 
@@ -1076,11 +980,6 @@ export type MutationUpdateCurrentUserArgs = {
 };
 
 
-export type MutationUpdateSelfServeAdvertiserArgs = {
-  updateAdvertiserInput: UpdateSelfServeAdvertiserInput;
-};
-
-
 export type MutationUpdateUserArgs = {
   updateUserInput: UpdateUserInput;
 };
@@ -1195,8 +1094,6 @@ export type PromotedContentPayloadInput = {
 
 export type Query = {
   __typename?: 'Query';
-  /** @deprecated use geocodes instead */
-  activeGeocodes: ActiveGeocodesQueryDto;
   ad?: Maybe<Ad>;
   adSet?: Maybe<AdSet>;
   advertiser?: Maybe<Advertiser>;
@@ -1207,7 +1104,6 @@ export type Query = {
   campaignCount: Scalars['Int']['output'];
   campaigns: Array<Campaign>;
   changes: Array<Change>;
-  confirmationCount: Scalars['Float']['output'];
   creative?: Maybe<Creative>;
   creativeCampaigns: Array<Campaign>;
   creatives: Array<Creative>;
@@ -1217,9 +1113,7 @@ export type Query = {
   registrations: Registrations;
   searchProspects: SearchProspects;
   segments: SegmentsQueryDto;
-  targetingTerms: Array<Scalars['String']['output']>;
   user: User;
-  userCount: Scalars['Int']['output'];
   users: Array<User>;
   validateTargetUrl: TargetUrlValidation;
 };
@@ -1315,8 +1209,6 @@ export type QueryValidateTargetUrlArgs = {
 
 export type Redirect = {
   __typename?: 'Redirect';
-  /** @deprecated use violations and warnings instead */
-  errors: Array<Scalars['String']['output']>;
   url: Scalars['String']['output'];
   violations: Array<ValidationDetail>;
   warnings: Array<ValidationDetail>;
@@ -1399,6 +1291,7 @@ export type SearchEligibilityCheck = {
   email: Scalars['String']['output'];
   fullName: Scalars['String']['output'];
   id: Scalars['String']['output'];
+  marketingChannel?: Maybe<Scalars['String']['output']>;
   status: Scalars['String']['output'];
   totalDomains?: Maybe<Scalars['Numeric']['output']>;
 };
@@ -1559,8 +1452,6 @@ export type SegmentsQueryDto = {
 
 export type TargetUrlValidation = {
   __typename?: 'TargetUrlValidation';
-  /** @deprecated use redirects.violations and redirects.warnings instead */
-  errors: Array<Scalars['String']['output']>;
   isValid: Scalars['Boolean']['output'];
   redirects: Array<Redirect>;
 };
@@ -1590,7 +1481,6 @@ export type UpdateAdSetInput = {
   segments?: InputMaybe<Array<UpdateSegmentInput>>;
   splitTestGroup?: InputMaybe<Scalars['String']['input']>;
   state?: InputMaybe<AdSetState>;
-  targetingTerms?: InputMaybe<Array<Scalars['String']['input']>>;
   totalMax?: InputMaybe<Scalars['Float']['input']>;
   triggerUrls?: InputMaybe<Array<Scalars['String']['input']>>;
 };
@@ -1678,14 +1568,6 @@ export type UpdateOSesInput = {
 export type UpdateSegmentInput = {
   code?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type UpdateSelfServeAdvertiserInput = {
-  /** Agreed to Terms And Conditions - Advertiser Facing Dashboard */
-  agreed?: InputMaybe<Scalars['Boolean']['input']>;
-  billingAddress?: InputMaybe<UpdateAddressInput>;
-  id: Scalars['String']['input'];
-  publicKey?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UpdateUserInput = {
@@ -1810,17 +1692,6 @@ export type UploadAdvertiserImageMutationVariables = Exact<{
 
 
 export type UploadAdvertiserImageMutation = { __typename?: 'Mutation', createAdvertiserImage: { __typename?: 'AdvertiserImage', id: string, name: string } };
-
-export type EngagementFragment = { __typename?: 'Engagement', creativeinstanceid: string, createdat: string, type: string, pricetype: string, creativesetname?: string | null, creativesetid: string, creativename: string, creativeid: string, creativestate: string, creativepayload: string, view: string, click: string, viewthroughConversion: string, clickthroughConversion: string, conversion: string, dismiss: string, downvote: string, landed: string, spend: string, upvote: string, price: number, android: number, ios: number, linux: number, macos: number, windows: number };
-
-export type CampaignWithEngagementsFragment = { __typename?: 'Campaign', id: string, name: string, state: CampaignState, budget: number, spent: number, createdAt: string, startAt: string, endAt: string, currency: string, pacingIndex?: number | null, format: CampaignFormat, adSets: Array<{ __typename?: 'AdSet', id: string, conversions: Array<{ __typename?: 'Conversion', id: string, type: string, extractExternalId: boolean }> }>, engagements: Array<{ __typename?: 'Engagement', creativeinstanceid: string, createdat: string, type: string, pricetype: string, creativesetname?: string | null, creativesetid: string, creativename: string, creativeid: string, creativestate: string, creativepayload: string, view: string, click: string, viewthroughConversion: string, clickthroughConversion: string, conversion: string, dismiss: string, downvote: string, landed: string, spend: string, upvote: string, price: number, android: number, ios: number, linux: number, macos: number, windows: number }> };
-
-export type AnalyticOverviewQueryVariables = Exact<{
-  id: Scalars['String']['input'];
-}>;
-
-
-export type AnalyticOverviewQuery = { __typename?: 'Query', campaign?: { __typename?: 'Campaign', id: string, name: string, state: CampaignState, budget: number, spent: number, createdAt: string, startAt: string, endAt: string, currency: string, pacingIndex?: number | null, format: CampaignFormat, adSets: Array<{ __typename?: 'AdSet', id: string, conversions: Array<{ __typename?: 'Conversion', id: string, type: string, extractExternalId: boolean }> }>, engagements: Array<{ __typename?: 'Engagement', creativeinstanceid: string, createdat: string, type: string, pricetype: string, creativesetname?: string | null, creativesetid: string, creativename: string, creativeid: string, creativestate: string, creativepayload: string, view: string, click: string, viewthroughConversion: string, clickthroughConversion: string, conversion: string, dismiss: string, downvote: string, landed: string, spend: string, upvote: string, price: number, android: number, ios: number, linux: number, macos: number, windows: number }> } | null };
 
 export type CampaignMetricSummaryValuesFragment = { __typename?: 'Metrics', click: string, impression: string, siteVisit: string, spendUsd: string, rates: { __typename?: 'MetricRates', clickThrough: string } };
 
@@ -2038,8 +1909,6 @@ export const CampaignSummaryFragmentDoc = {"kind":"Document","definitions":[{"ki
 export const AdvertiserCampaignsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AdvertiserCampaigns"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Advertiser"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"selfServiceManageCampaign"}},{"kind":"Field","name":{"kind":"Name","value":"selfServiceSetPrice"}},{"kind":"Field","name":{"kind":"Name","value":"campaigns"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CampaignSummary"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CampaignSummary"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Campaign"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"dailyCap"}},{"kind":"Field","name":{"kind":"Name","value":"priority"}},{"kind":"Field","name":{"kind":"Name","value":"passThroughRate"}},{"kind":"Field","name":{"kind":"Name","value":"pacingOverride"}},{"kind":"Field","name":{"kind":"Name","value":"pacingStrategy"}},{"kind":"Field","name":{"kind":"Name","value":"externalId"}},{"kind":"Field","name":{"kind":"Name","value":"currency"}},{"kind":"Field","name":{"kind":"Name","value":"budget"}},{"kind":"Field","name":{"kind":"Name","value":"paymentType"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"startAt"}},{"kind":"Field","name":{"kind":"Name","value":"endAt"}},{"kind":"Field","name":{"kind":"Name","value":"source"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"format"}},{"kind":"Field","name":{"kind":"Name","value":"dayProportion"}},{"kind":"Field","name":{"kind":"Name","value":"brandedKeywords"}},{"kind":"Field","name":{"kind":"Name","value":"advertiser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<AdvertiserCampaignsFragment, unknown>;
 export const AdvertiserImageFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AdvertiserImage"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AdvertiserImage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"imageUrl"}},{"kind":"Field","name":{"kind":"Name","value":"format"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}}]} as unknown as DocumentNode<AdvertiserImageFragment, unknown>;
 export const AdvertiserPriceFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AdvertiserPrice"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AdvertiserPrice"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"billingModelPrice"}},{"kind":"Field","name":{"kind":"Name","value":"billingType"}},{"kind":"Field","name":{"kind":"Name","value":"format"}}]}}]} as unknown as DocumentNode<AdvertiserPriceFragment, unknown>;
-export const EngagementFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Engagement"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Engagement"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"creativeinstanceid"}},{"kind":"Field","name":{"kind":"Name","value":"createdat"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"pricetype"}},{"kind":"Field","name":{"kind":"Name","value":"creativesetname"}},{"kind":"Field","name":{"kind":"Name","value":"creativesetid"}},{"kind":"Field","name":{"kind":"Name","value":"creativename"}},{"kind":"Field","name":{"kind":"Name","value":"creativeid"}},{"kind":"Field","name":{"kind":"Name","value":"creativestate"}},{"kind":"Field","name":{"kind":"Name","value":"creativepayload"}},{"kind":"Field","name":{"kind":"Name","value":"view"}},{"kind":"Field","name":{"kind":"Name","value":"click"}},{"kind":"Field","name":{"kind":"Name","value":"viewthroughConversion"}},{"kind":"Field","name":{"kind":"Name","value":"clickthroughConversion"}},{"kind":"Field","name":{"kind":"Name","value":"conversion"}},{"kind":"Field","name":{"kind":"Name","value":"dismiss"}},{"kind":"Field","name":{"kind":"Name","value":"downvote"}},{"kind":"Field","name":{"kind":"Name","value":"landed"}},{"kind":"Field","name":{"kind":"Name","value":"spend"}},{"kind":"Field","name":{"kind":"Name","value":"upvote"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"android"}},{"kind":"Field","name":{"kind":"Name","value":"ios"}},{"kind":"Field","name":{"kind":"Name","value":"linux"}},{"kind":"Field","name":{"kind":"Name","value":"macos"}},{"kind":"Field","name":{"kind":"Name","value":"windows"}}]}}]} as unknown as DocumentNode<EngagementFragment, unknown>;
-export const CampaignWithEngagementsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CampaignWithEngagements"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Campaign"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"budget"}},{"kind":"Field","name":{"kind":"Name","value":"spent"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"startAt"}},{"kind":"Field","name":{"kind":"Name","value":"endAt"}},{"kind":"Field","name":{"kind":"Name","value":"currency"}},{"kind":"Field","name":{"kind":"Name","value":"pacingIndex"}},{"kind":"Field","name":{"kind":"Name","value":"format"}},{"kind":"Field","name":{"kind":"Name","value":"adSets"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"conversions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"extractExternalId"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"engagements"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Engagement"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Engagement"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Engagement"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"creativeinstanceid"}},{"kind":"Field","name":{"kind":"Name","value":"createdat"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"pricetype"}},{"kind":"Field","name":{"kind":"Name","value":"creativesetname"}},{"kind":"Field","name":{"kind":"Name","value":"creativesetid"}},{"kind":"Field","name":{"kind":"Name","value":"creativename"}},{"kind":"Field","name":{"kind":"Name","value":"creativeid"}},{"kind":"Field","name":{"kind":"Name","value":"creativestate"}},{"kind":"Field","name":{"kind":"Name","value":"creativepayload"}},{"kind":"Field","name":{"kind":"Name","value":"view"}},{"kind":"Field","name":{"kind":"Name","value":"click"}},{"kind":"Field","name":{"kind":"Name","value":"viewthroughConversion"}},{"kind":"Field","name":{"kind":"Name","value":"clickthroughConversion"}},{"kind":"Field","name":{"kind":"Name","value":"conversion"}},{"kind":"Field","name":{"kind":"Name","value":"dismiss"}},{"kind":"Field","name":{"kind":"Name","value":"downvote"}},{"kind":"Field","name":{"kind":"Name","value":"landed"}},{"kind":"Field","name":{"kind":"Name","value":"spend"}},{"kind":"Field","name":{"kind":"Name","value":"upvote"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"android"}},{"kind":"Field","name":{"kind":"Name","value":"ios"}},{"kind":"Field","name":{"kind":"Name","value":"linux"}},{"kind":"Field","name":{"kind":"Name","value":"macos"}},{"kind":"Field","name":{"kind":"Name","value":"windows"}}]}}]} as unknown as DocumentNode<CampaignWithEngagementsFragment, unknown>;
 export const CampaignMetricSummaryValuesFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CampaignMetricSummaryValues"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Metrics"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"click"}},{"kind":"Field","name":{"kind":"Name","value":"impression"}},{"kind":"Field","name":{"kind":"Name","value":"siteVisit"}},{"kind":"Field","name":{"kind":"Name","value":"spendUsd"}},{"kind":"Field","name":{"kind":"Name","value":"rates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"clickThrough"}}]}}]}}]} as unknown as DocumentNode<CampaignMetricSummaryValuesFragment, unknown>;
 export const CampaignMetricDetailValuesFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CampaignMetricDetailValues"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Metrics"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"click"}},{"kind":"Field","name":{"kind":"Name","value":"impression"}},{"kind":"Field","name":{"kind":"Name","value":"siteVisit"}},{"kind":"Field","name":{"kind":"Name","value":"conversion"}},{"kind":"Field","name":{"kind":"Name","value":"dismiss"}},{"kind":"Field","name":{"kind":"Name","value":"spendUsd"}},{"kind":"Field","name":{"kind":"Name","value":"rates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"clickThrough"}},{"kind":"Field","name":{"kind":"Name","value":"clickToConversion"}},{"kind":"Field","name":{"kind":"Name","value":"costPerAcquisition"}}]}}]}}]} as unknown as DocumentNode<CampaignMetricDetailValuesFragment, unknown>;
 export const DailyValuesFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DailyValues"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Performance"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dimensions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"day"}}]}},{"kind":"Field","name":{"kind":"Name","value":"metrics"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CampaignMetricDetailValues"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CampaignMetricDetailValues"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Metrics"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"click"}},{"kind":"Field","name":{"kind":"Name","value":"impression"}},{"kind":"Field","name":{"kind":"Name","value":"siteVisit"}},{"kind":"Field","name":{"kind":"Name","value":"conversion"}},{"kind":"Field","name":{"kind":"Name","value":"dismiss"}},{"kind":"Field","name":{"kind":"Name","value":"spendUsd"}},{"kind":"Field","name":{"kind":"Name","value":"rates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"clickThrough"}},{"kind":"Field","name":{"kind":"Name","value":"clickToConversion"}},{"kind":"Field","name":{"kind":"Name","value":"costPerAcquisition"}}]}}]}}]} as unknown as DocumentNode<DailyValuesFragment, unknown>;
@@ -2069,7 +1938,6 @@ export const AdvertiserImagesDocument = {"kind":"Document","definitions":[{"kind
 export const AdvertiserPricesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AdvertiserPrices"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"advertiser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"prices"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"AdvertiserPrice"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AdvertiserPrice"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AdvertiserPrice"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"billingModelPrice"}},{"kind":"Field","name":{"kind":"Name","value":"billingType"}},{"kind":"Field","name":{"kind":"Name","value":"format"}}]}}]} as unknown as DocumentNode<AdvertiserPricesQuery, AdvertiserPricesQueryVariables>;
 export const AdvertiserBillingAddressDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AdvertiserBillingAddress"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"advertiser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"AdvertiserBillingAddress"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AdvertiserBillingAddress"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Advertiser"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"billingAddress"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"street1"}},{"kind":"Field","name":{"kind":"Name","value":"street2"}},{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"country"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"zipcode"}}]}}]}}]} as unknown as DocumentNode<AdvertiserBillingAddressQuery, AdvertiserBillingAddressQueryVariables>;
 export const UploadAdvertiserImageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UploadAdvertiserImage"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateAdvertiserImageInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createAdvertiserImage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"createImageInput"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<UploadAdvertiserImageMutation, UploadAdvertiserImageMutationVariables>;
-export const AnalyticOverviewDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AnalyticOverview"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"campaign"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CampaignWithEngagements"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Engagement"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Engagement"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"creativeinstanceid"}},{"kind":"Field","name":{"kind":"Name","value":"createdat"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"pricetype"}},{"kind":"Field","name":{"kind":"Name","value":"creativesetname"}},{"kind":"Field","name":{"kind":"Name","value":"creativesetid"}},{"kind":"Field","name":{"kind":"Name","value":"creativename"}},{"kind":"Field","name":{"kind":"Name","value":"creativeid"}},{"kind":"Field","name":{"kind":"Name","value":"creativestate"}},{"kind":"Field","name":{"kind":"Name","value":"creativepayload"}},{"kind":"Field","name":{"kind":"Name","value":"view"}},{"kind":"Field","name":{"kind":"Name","value":"click"}},{"kind":"Field","name":{"kind":"Name","value":"viewthroughConversion"}},{"kind":"Field","name":{"kind":"Name","value":"clickthroughConversion"}},{"kind":"Field","name":{"kind":"Name","value":"conversion"}},{"kind":"Field","name":{"kind":"Name","value":"dismiss"}},{"kind":"Field","name":{"kind":"Name","value":"downvote"}},{"kind":"Field","name":{"kind":"Name","value":"landed"}},{"kind":"Field","name":{"kind":"Name","value":"spend"}},{"kind":"Field","name":{"kind":"Name","value":"upvote"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"android"}},{"kind":"Field","name":{"kind":"Name","value":"ios"}},{"kind":"Field","name":{"kind":"Name","value":"linux"}},{"kind":"Field","name":{"kind":"Name","value":"macos"}},{"kind":"Field","name":{"kind":"Name","value":"windows"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CampaignWithEngagements"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Campaign"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"budget"}},{"kind":"Field","name":{"kind":"Name","value":"spent"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"startAt"}},{"kind":"Field","name":{"kind":"Name","value":"endAt"}},{"kind":"Field","name":{"kind":"Name","value":"currency"}},{"kind":"Field","name":{"kind":"Name","value":"pacingIndex"}},{"kind":"Field","name":{"kind":"Name","value":"format"}},{"kind":"Field","name":{"kind":"Name","value":"adSets"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"conversions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"extractExternalId"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"engagements"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Engagement"}}]}}]}}]} as unknown as DocumentNode<AnalyticOverviewQuery, AnalyticOverviewQueryVariables>;
 export const CampaignMetricsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CampaignMetrics"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"campaignIds"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"performance"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"campaignIds"},"value":{"kind":"Variable","name":{"kind":"Name","value":"campaignIds"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"values"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dimensions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"campaign"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"metrics"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CampaignMetricSummaryValues"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CampaignMetricSummaryValues"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Metrics"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"click"}},{"kind":"Field","name":{"kind":"Name","value":"impression"}},{"kind":"Field","name":{"kind":"Name","value":"siteVisit"}},{"kind":"Field","name":{"kind":"Name","value":"spendUsd"}},{"kind":"Field","name":{"kind":"Name","value":"rates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"clickThrough"}}]}}]}}]} as unknown as DocumentNode<CampaignMetricsQuery, CampaignMetricsQueryVariables>;
 export const FetchDailyMetricsForCampaignDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FetchDailyMetricsForCampaign"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PerformanceFilter"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"performance"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"values"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DailyValues"}}]}},{"kind":"Field","name":{"kind":"Name","value":"total"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"metrics"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CampaignMetricDetailValues"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CampaignMetricDetailValues"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Metrics"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"click"}},{"kind":"Field","name":{"kind":"Name","value":"impression"}},{"kind":"Field","name":{"kind":"Name","value":"siteVisit"}},{"kind":"Field","name":{"kind":"Name","value":"conversion"}},{"kind":"Field","name":{"kind":"Name","value":"dismiss"}},{"kind":"Field","name":{"kind":"Name","value":"spendUsd"}},{"kind":"Field","name":{"kind":"Name","value":"rates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"clickThrough"}},{"kind":"Field","name":{"kind":"Name","value":"clickToConversion"}},{"kind":"Field","name":{"kind":"Name","value":"costPerAcquisition"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DailyValues"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Performance"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dimensions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"day"}}]}},{"kind":"Field","name":{"kind":"Name","value":"metrics"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CampaignMetricDetailValues"}}]}}]}}]} as unknown as DocumentNode<FetchDailyMetricsForCampaignQuery, FetchDailyMetricsForCampaignQueryVariables>;
 export const FetchAdSetMetricsForCampaignDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FetchAdSetMetricsForCampaign"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PerformanceFilter"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"performance"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"values"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"AdSetValues"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CampaignMetricDetailValues"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Metrics"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"click"}},{"kind":"Field","name":{"kind":"Name","value":"impression"}},{"kind":"Field","name":{"kind":"Name","value":"siteVisit"}},{"kind":"Field","name":{"kind":"Name","value":"conversion"}},{"kind":"Field","name":{"kind":"Name","value":"dismiss"}},{"kind":"Field","name":{"kind":"Name","value":"spendUsd"}},{"kind":"Field","name":{"kind":"Name","value":"rates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"clickThrough"}},{"kind":"Field","name":{"kind":"Name","value":"clickToConversion"}},{"kind":"Field","name":{"kind":"Name","value":"costPerAcquisition"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AdSetValues"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Performance"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dimensions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"adSet"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"billingType"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"metrics"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CampaignMetricDetailValues"}}]}}]}}]} as unknown as DocumentNode<FetchAdSetMetricsForCampaignQuery, FetchAdSetMetricsForCampaignQueryVariables>;
