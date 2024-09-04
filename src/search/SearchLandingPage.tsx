@@ -22,7 +22,7 @@ export default function SearchLandingPage() {
           gap="50px"
           p={1}
         >
-          <Stack direction="column" spacing={3} maxWidth={650} alignSelf="top">
+          <Stack direction="column" spacing={3} maxWidth={750} alignSelf="top">
             <Typography variant="h1" color="white">
               <Trans>
                 Get incremental traffic with paid ads on the world's fastest
