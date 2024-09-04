@@ -22,42 +22,22 @@ export type Scalars = {
   Numeric: { input: string | number; output: string; }
 };
 
-export type ActiveGeocodesEntry = {
-  __typename?: 'ActiveGeocodesEntry';
-  code: Scalars['String']['output'];
-  name: Scalars['String']['output'];
-};
-
-export type ActiveGeocodesQueryDto = {
-  __typename?: 'ActiveGeocodesQueryDTO';
-  data: Array<ActiveGeocodesEntry>;
-};
-
 export type Ad = {
   __typename?: 'Ad';
   creative: Creative;
   id: Scalars['String']['output'];
-  /** @deprecated price configuration has been moved to ad set */
-  price: Scalars['Numeric']['output'];
-  priceType: ConfirmationType;
-  /** @deprecated rewardPaymentTokenValue has been moved to ad set */
-  rewardPaymentTokenValue: Scalars['Numeric']['output'];
   state: Scalars['String']['output'];
 };
 
 export type AdSet = {
   __typename?: 'AdSet';
   ads: Array<Ad>;
-  /** @deprecated has been moved to campaign level */
-  bannedKeywords?: Maybe<Array<Scalars['String']['output']>>;
   billingType?: Maybe<Scalars['String']['output']>;
   brandedDesktopPrice?: Maybe<Scalars['Numeric']['output']>;
   brandedMobilePrice?: Maybe<Scalars['Numeric']['output']>;
   conversions: Array<Conversion>;
   createdAt: Scalars['DateTime']['output'];
   externalId?: Maybe<Scalars['String']['output']>;
-  /** @deprecated price changes are now allowed */
-  hasConfirmations: Scalars['Boolean']['output'];
   id: Scalars['String']['output'];
   keywordSimilarity?: Maybe<Scalars['Float']['output']>;
   keywords?: Maybe<Array<Scalars['String']['output']>>;
@@ -298,8 +278,6 @@ export type Campaign = {
   dayProportion?: Maybe<Scalars['Float']['output']>;
   effectiveState: CampaignEffectiveState;
   endAt: Scalars['DateTime']['output'];
-  engagements: Array<Engagement>;
-  engagementsByCountry: Array<CountryEngagement>;
   externalId?: Maybe<Scalars['String']['output']>;
   format: CampaignFormat;
   geoTargets: Array<Geocode>;
@@ -451,13 +429,6 @@ export type CampaignValidationFailure = {
   description: Scalars['String']['output'];
 };
 
-export type CampaignsPerCountryEntry = {
-  __typename?: 'CampaignsPerCountryEntry';
-  count: Scalars['Int']['output'];
-  country: Scalars['String']['output'];
-  name: Scalars['String']['output'];
-};
-
 export type Change = {
   __typename?: 'Change';
   createdAt: Scalars['DateTime']['output'];
@@ -485,25 +456,6 @@ export type ChangeFilter = {
   referenceIds?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
-export enum ConfirmationType {
-  Bookmark = 'BOOKMARK',
-  Click = 'CLICK',
-  ClientView = 'CLIENT_VIEW',
-  Conversion = 'CONVERSION',
-  Dismiss = 'DISMISS',
-  Downvote = 'DOWNVOTE',
-  Flag = 'FLAG',
-  Land30 = 'LAND30',
-  Land60 = 'LAND60',
-  Landclick = 'LANDCLICK',
-  Landed = 'LANDED',
-  Media_25 = 'MEDIA_25',
-  Media_100 = 'MEDIA_100',
-  MediaPlay = 'MEDIA_PLAY',
-  Upvote = 'UPVOTE',
-  View = 'VIEW'
-}
-
 export type Conversion = {
   __typename?: 'Conversion';
   createdAt: Scalars['DateTime']['output'];
@@ -514,17 +466,6 @@ export type Conversion = {
   trailingAsteriskNotRequired: Scalars['Boolean']['output'];
   type: Scalars['String']['output'];
   urlPattern: Scalars['String']['output'];
-};
-
-export type CountryEngagement = {
-  __typename?: 'CountryEngagement';
-  click: Scalars['Float']['output'];
-  conversion: Scalars['Float']['output'];
-  country: Scalars['String']['output'];
-  dismiss: Scalars['Float']['output'];
-  landed: Scalars['Float']['output'];
-  spend?: Maybe<Scalars['Float']['output']>;
-  view: Scalars['Float']['output'];
 };
 
 export type CreateAdInput = {
@@ -758,40 +699,6 @@ export type Dimensions = {
   hour: Scalars['DateTime']['output'];
   os: Scalars['String']['output'];
   segment?: Maybe<Scalars['String']['output']>;
-};
-
-export type Engagement = {
-  __typename?: 'Engagement';
-  android: Scalars['Float']['output'];
-  click: Scalars['Numeric']['output'];
-  clickthroughConversion: Scalars['Numeric']['output'];
-  conversion: Scalars['Numeric']['output'];
-  cost: Scalars['Float']['output'];
-  count: Scalars['Float']['output'];
-  createdat: Scalars['DateTime']['output'];
-  creativeid: Scalars['String']['output'];
-  creativeinstanceid: Scalars['String']['output'];
-  creativename: Scalars['String']['output'];
-  creativepayload: Scalars['String']['output'];
-  creativesetid: Scalars['String']['output'];
-  creativesetname?: Maybe<Scalars['String']['output']>;
-  creativestate: Scalars['String']['output'];
-  currency: Scalars['String']['output'];
-  dismiss: Scalars['Numeric']['output'];
-  downvote: Scalars['Numeric']['output'];
-  ios: Scalars['Float']['output'];
-  landed: Scalars['Numeric']['output'];
-  linux: Scalars['Float']['output'];
-  macos: Scalars['Float']['output'];
-  other: Scalars['Float']['output'];
-  price: Scalars['Float']['output'];
-  pricetype: Scalars['String']['output'];
-  spend: Scalars['Numeric']['output'];
-  type: Scalars['String']['output'];
-  upvote: Scalars['Numeric']['output'];
-  view: Scalars['Numeric']['output'];
-  viewthroughConversion: Scalars['Numeric']['output'];
-  windows: Scalars['Float']['output'];
 };
 
 export type FocalPoint = {
@@ -1187,8 +1094,6 @@ export type PromotedContentPayloadInput = {
 
 export type Query = {
   __typename?: 'Query';
-  /** @deprecated use geocodes instead */
-  activeGeocodes: ActiveGeocodesQueryDto;
   ad?: Maybe<Ad>;
   adSet?: Maybe<AdSet>;
   advertiser?: Maybe<Advertiser>;
@@ -1199,7 +1104,6 @@ export type Query = {
   campaignCount: Scalars['Int']['output'];
   campaigns: Array<Campaign>;
   changes: Array<Change>;
-  confirmationCount: Scalars['Float']['output'];
   creative?: Maybe<Creative>;
   creativeCampaigns: Array<Campaign>;
   creatives: Array<Creative>;
@@ -1210,7 +1114,6 @@ export type Query = {
   searchProspects: SearchProspects;
   segments: SegmentsQueryDto;
   user: User;
-  userCount: Scalars['Int']['output'];
   users: Array<User>;
   validateTargetUrl: TargetUrlValidation;
 };
@@ -1306,8 +1209,6 @@ export type QueryValidateTargetUrlArgs = {
 
 export type Redirect = {
   __typename?: 'Redirect';
-  /** @deprecated use violations and warnings instead */
-  errors: Array<Scalars['String']['output']>;
   url: Scalars['String']['output'];
   violations: Array<ValidationDetail>;
   warnings: Array<ValidationDetail>;
@@ -1551,8 +1452,6 @@ export type SegmentsQueryDto = {
 
 export type TargetUrlValidation = {
   __typename?: 'TargetUrlValidation';
-  /** @deprecated use redirects.violations and redirects.warnings instead */
-  errors: Array<Scalars['String']['output']>;
   isValid: Scalars['Boolean']['output'];
   redirects: Array<Redirect>;
 };
