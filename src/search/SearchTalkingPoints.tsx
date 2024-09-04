@@ -21,7 +21,7 @@ export function SearchTalkingPoints() {
   return (
     <Stack
       direction={{ xs: "column", lg: "row" }}
-      justifyContent="space-between"
+      justifyContent={{ xs: "space-between", lg: "space-evenly" }}
       spacing={5}
       alignItems="center"
     >
