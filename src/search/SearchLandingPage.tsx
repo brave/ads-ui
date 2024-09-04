@@ -14,7 +14,7 @@ export default function SearchLandingPage() {
     <Background>
       <LandingPageAppBar />
       <Toolbar sx={{ mb: 5 }} />
-      <Box display="flex" flexDirection="column" gap="75px">
+      <Box display="flex" flexDirection="column" gap="75px" width="100%">
         <Box
           display="flex"
           flexDirection={{ xs: "column", md: "row" }}
@@ -63,6 +63,7 @@ export default function SearchLandingPage() {
           justifyContent="center"
           gap="50px"
           alignItems="center"
+          p={1}
         >
           <video
             src={braveSearch}
@@ -95,7 +96,7 @@ export default function SearchLandingPage() {
           alignItems="center"
           mb={{ xs: 5, md: 10 }}
         >
-          <Typography variant="h1" color="white">
+          <Typography variant="h1" color="white" textAlign="center">
             <Trans>Have specific questions?</Trans>
           </Typography>
           <Typography variant="h3" color="white" gutterBottom>
