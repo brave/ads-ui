@@ -44,9 +44,10 @@ function SummaryEntry({
 
 interface Props {
   searchData: SearchData;
+  hideEstimates: boolean;
 }
 
-export function SummaryPanel({ searchData }: Props) {
+export function SummaryPanel({ searchData, hideEstimates }: Props) {
   return (
     <CardContainer sx={{ width: 250 }}>
       <Typography variant="h2" marginBottom={1}>
@@ -68,53 +69,59 @@ export function SummaryPanel({ searchData }: Props) {
         icon={<ArticleIcon sx={{ color: "text.secondary" }} />}
       />
 
-      <Typography variant="h2" marginTop={3} marginBottom={1}>
-        Estimated weekly results
-      </Typography>
-      <SummaryEntry
-        title="Impressions"
-        value={formatWholeNumber(searchData.estimates.qpw.max)}
-        icon={<VisibilityOutlinedIcon sx={{ color: "text.secondary" }} />}
-      />
-      <SummaryEntry
-        title="Clicks"
-        value={formatWholeNumber(searchData.estimates.cpw.max)}
-        icon={<PanToolAltOutlinedIcon sx={{ color: "text.secondary" }} />}
-      />
-      <SummaryEntry
-        title="Click-through rate"
-        value="10%"
-        icon={<PercentIcon sx={{ color: "text.secondary" }} />}
-      />
+      {!hideEstimates && (
+        <>
+          <Typography variant="h2" marginTop={3} marginBottom={1}>
+            Estimated weekly results
+          </Typography>
+          <SummaryEntry
+            title="Impressions"
+            value={formatWholeNumber(searchData.estimates.qpw.max)}
+            icon={<VisibilityOutlinedIcon sx={{ color: "text.secondary" }} />}
+          />
+          <SummaryEntry
+            title="Clicks"
+            value={formatWholeNumber(searchData.estimates.cpw.max)}
+            icon={<PanToolAltOutlinedIcon sx={{ color: "text.secondary" }} />}
+          />
+          <SummaryEntry
+            title="Click-through rate"
+            value="10%"
+            icon={<PercentIcon sx={{ color: "text.secondary" }} />}
+          />
 
-      <SummaryEntry
-        title="Cost"
-        icon={<MonetizationOnOutlinedIcon sx={{ color: "text.secondary" }} />}
-        value={
-          <Box display="flex" gap={1} alignItems="center">
-            <Box
-              color="primary.contrastText"
-              bgcolor="primary.main"
-              padding={"2px 4px"}
-              borderRadius={1}
-              textTransform="uppercase"
-              whiteSpace="nowrap"
-              fontSize={"0.6rem"}
-            >
-              Trial Available
-            </Box>
-          </Box>
-        }
-      />
+          <SummaryEntry
+            title="Cost"
+            icon={
+              <MonetizationOnOutlinedIcon sx={{ color: "text.secondary" }} />
+            }
+            value={
+              <Box display="flex" gap={1} alignItems="center">
+                <Box
+                  color="primary.contrastText"
+                  bgcolor="primary.main"
+                  padding={"2px 4px"}
+                  borderRadius={1}
+                  textTransform="uppercase"
+                  whiteSpace="nowrap"
+                  fontSize={"0.6rem"}
+                >
+                  Trial Available
+                </Box>
+              </Box>
+            }
+          />
 
-      <Typography
-        variant="caption"
-        color="text.secondary"
-        marginTop={2}
-        fontSize="0.6rem"
-      >
-        Estimates only. Actual volume may vary.
-      </Typography>
+          <Typography
+            variant="caption"
+            color="text.secondary"
+            marginTop={2}
+            fontSize="0.6rem"
+          >
+            Estimates only. Actual volume may vary.
+          </Typography>
+        </>
+      )}
     </CardContainer>
   );
 }
