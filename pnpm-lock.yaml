@@ -7,7 +7,6 @@ settings:
 overrides:
   ws@>=8.0.0 <8.17.1: '>=8.17.1'
   micromatch@<4.0.8: '>=4.0.8'
-  path-to-regexp@>=0.2.0 <8.0.0: '>=8.0.0'
 
 importers:
 
@@ -3082,6 +3081,9 @@ packages:
     resolution: {integrity: sha512-eXK1UInq2bPmjyX6e3VHIzMLobc4J94i4AWn+Hpq3OU5KkrRC96OAcR3PRJ/pGu6m8TRnBHP9dkXQVsT/COVIA==}
     engines: {node: '>=0.10.0'}
 
+  isarray@0.0.1:
+    resolution: {integrity: sha512-D2S+3GLxWH+uhrNEcoh/fnmYeP8E8/zHl644d/jdA0g2uyXvy3sb0qxotE+ne0LtccHknQzWwZEzhak7oJ0COQ==}
+
   isarray@2.0.5:
     resolution: {integrity: sha512-xHjhDr3cNBK0BzdUJSPXZntQUx/mwMS5Rw4A7lPJ90XGAO6ISP/ePDNuo0vhqOZU+UD5JoodwCAAoZQd3FeAKw==}
 
@@ -3535,9 +3537,8 @@ packages:
     resolution: {integrity: sha512-QLcPegTHF11axjfojBIoDygmS2E3Lf+8+jI6wOVmNVenrKSo3mFdSGiIgdSHenczw3wPtlVMQaFVwGmM7BJdtg==}
     engines: {node: '>=0.10.0'}
 
-  path-to-regexp@8.1.0:
-    resolution: {integrity: sha512-Bqn3vc8CMHty6zuD+tG23s6v2kwxslHEhTj4eYaVKGIEB+YX/2wd0/rgXLFD9G9id9KCtbVy/3ZgmvZjpa0UdQ==}
-    engines: {node: '>=16'}
+  path-to-regexp@1.8.0:
+    resolution: {integrity: sha512-n43JRhlUKUAlibEJhPeir1ncUID16QnEjNpwzNdO3Lm4ywrBpBZ5oLD0I6br9evr1Y9JTqwRtAh7JLoOzAQdVA==}
 
   path-type@4.0.0:
     resolution: {integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==}
@@ -7967,6 +7968,8 @@ snapshots:
 
   is-windows@1.0.2: {}
 
+  isarray@0.0.1: {}
+
   isarray@2.0.5: {}
 
   isexe@2.0.0: {}
@@ -8430,7 +8433,9 @@ snapshots:
     dependencies:
       path-root-regex: 0.1.2
 
-  path-to-regexp@8.1.0: {}
+  path-to-regexp@1.8.0:
+    dependencies:
+      isarray: 0.0.1
 
   path-type@4.0.0: {}
 
@@ -8535,7 +8540,7 @@ snapshots:
       history: 4.10.1
       hoist-non-react-statics: 3.3.2
       loose-envify: 1.4.0
-      path-to-regexp: 8.1.0
+      path-to-regexp: 1.8.0
       prop-types: 15.8.1
       react: 18.3.1
       react-is: 16.13.1
