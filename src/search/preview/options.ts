@@ -14,7 +14,7 @@ export function extractOptionsFromUrlSlug(urlSlug: string): Options {
 
   So:
   - assume that any new slugs that may be longer than 15 characters will not have look-alike letters
-  - we can therefore safely parse an o and l from the suffix if it's longer that 15 characters
+  - we can therefore safely parse an 0 and l from the suffix if it's longer that 15 characters
   */
 
   const baseSlug = urlSlug.substring(0, 15);

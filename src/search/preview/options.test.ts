@@ -8,14 +8,14 @@ it("should always pass through a slug with less that 15 characters", () => {
     slug: "12345678901234",
   });
 
-  expect(extractOptionsFromUrlSlug("banana12ol")).toMatchObject({
+  expect(extractOptionsFromUrlSlug("banana120l")).toMatchObject({
     hideBookMeeting: false,
     hideEstimates: false,
-    slug: "banana12ol",
+    slug: "banana120l",
   });
 });
 
-// if the slug is longer than 15 characters, parse an o and l from the suffix
+// if the slug is longer than 15 characters, parse an 0 and l from the suffix
 it.each([
   {
     input: "123456789012345",
@@ -52,7 +52,7 @@ it.each([
   {
     input: "123456789012345pppp",
     expected: {
-      // the non 'o' and 'l' as passed through
+      // the non '0' and 'l' as passed through
       slug: "123456789012345pppp",
       hideBookMeeting: false,
       hideEstimates: false,
