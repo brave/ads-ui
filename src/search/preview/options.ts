@@ -9,7 +9,7 @@ export function extractOptionsFromUrlSlug(urlSlug: string): Options {
   Why this logic?
   
   Currently only ever create slugs that are 15 characters long, but we might want to change that
-  in the future. We don't use look-alike letters (e.g. "o" and "l") in the slugs nowadays, but we did 
+  in the future. We don't use look-alike letters (e.g. "0" and "l") in the slugs nowadays, but we did 
   in the past. 
 
   So:
