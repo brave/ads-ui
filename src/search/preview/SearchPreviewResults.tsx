@@ -10,10 +10,15 @@ import { CallToAction } from "./CallToAction";
 
 interface Props {
   data: SearchData;
+  hideEstimates: boolean;
+  hideBookMeeting: boolean;
 }
 
-export function SearchPreviewResults({ data }: Props) {
-  // we don't actually use the basket
+export function SearchPreviewResults({
+  data,
+  hideBookMeeting,
+  hideEstimates,
+}: Props) {
   const basket = useBasket();
   return (
     <Box sx={{ marginLeft: "auto", marginRight: "auto", maxWidth: "1005px" }}>
@@ -24,7 +29,10 @@ export function SearchPreviewResults({ data }: Props) {
             height: "calc(100vh - 110px)",
           }}
         >
-          <CallToAction domain={data.countryDomain.domain} />
+          <CallToAction
+            domain={data.countryDomain.domain}
+            hideBookMeeting={hideBookMeeting}
+          />
 
           <LandingPageList
             landingPages={data.landingPages}
@@ -34,7 +42,7 @@ export function SearchPreviewResults({ data }: Props) {
         </CardContainer>
 
         <Box display="flex" flexDirection="column" gap={2}>
-          <SummaryPanel searchData={data} />
+          <SummaryPanel searchData={data} hideEstimates={hideEstimates} />
         </Box>
       </Box>
     </Box>
