@@ -18,9 +18,9 @@
     "@lingui/format-po": "4.11.3",
     "@lingui/macro": "4.11.3",
     "@lingui/react": "4.11.3",
-    "@mui/icons-material": "5.16.7",
-    "@mui/lab": "5.0.0-alpha.173",
-    "@mui/material": "5.16.7",
+    "@mui/icons-material": "6.0.2",
+    "@mui/lab": "6.0.0-beta.9",
+    "@mui/material": "6.0.2",
     "@mui/x-data-grid": "7.15.0",
     "@mui/x-date-pickers": "7.15.0",
     "bignumber.js": "9.1.2",
@@ -115,8 +115,14 @@
   "pnpm": {
     "overrides": {
       "ws@>=8.0.0 <8.17.1": ">=8.17.1",
-      "micromatch@<4.0.8": ">=4.0.8"
+      "micromatch@<4.0.8": ">=4.0.8",
+      "dset@<3.1.4": ">=3.1.4"
+    },
+    "auditConfig": {
+      "ignoreGhsas": [
+        "GHSA-9wv6-86v2-598j"
+      ]
     }
   },
-  "packageManager": "pnpm@9.9.0+sha512.60c18acd138bff695d339be6ad13f7e936eea6745660d4cc4a776d5247c540d0edee1a563695c183a66eb917ef88f2b4feb1fc25f32a7adcadc7aaf3438e99c1"
+  "packageManager": "pnpm@9.10.0+sha512.73a29afa36a0d092ece5271de5177ecbf8318d454ecd701343131b8ebc0c1a91c487da46ab77c8e596d6acf1461e3594ced4becedf8921b074fbd8653ed7051c"
 }

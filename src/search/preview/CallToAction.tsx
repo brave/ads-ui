@@ -3,9 +3,10 @@ import { Box, Button, Link, Typography } from "@mui/material";
 
 interface Props {
   domain: string;
+  hideBookMeeting: boolean;
 }
 
-export function CallToAction({ domain }: Props) {
+export function CallToAction({ domain, hideBookMeeting }: Props) {
   return (
     <Box
       marginBottom={1}
@@ -33,24 +34,28 @@ export function CallToAction({ domain }: Props) {
           by analyzing existing Google campaigns and matching them with keyword
           volumes from Brave Search.
         </Typography>
-        <Typography variant="body2" marginBottom={2}>
-          To view and manage all available ads and get started with Search Ads
-          from Brave, please book a meeting with an account manager.
-        </Typography>
+        {!hideBookMeeting && (
+          <Typography variant="body2" marginBottom={2}>
+            To view and manage all available ads and get started with Search Ads
+            from Brave, please book a meeting with an account manager.
+          </Typography>
+        )}
       </Box>
 
-      <Box minWidth="100px">
-        <Button
-          variant="contained"
-          color="primary"
-          component="a"
-          href="https://calendar.google.com/calendar/u/0/appointments/AcZssZ2sEAG3kPSlTKpGd48pYAa2zTd-QpI2L2ewxao="
-          target="_blank"
-          rel="noreferrer"
-        >
-          Book a Meeting
-        </Button>
-      </Box>
+      {!hideBookMeeting && (
+        <Box minWidth="100px">
+          <Button
+            variant="contained"
+            color="primary"
+            component="a"
+            href="https://calendar.google.com/calendar/u/0/appointments/AcZssZ2sEAG3kPSlTKpGd48pYAa2zTd-QpI2L2ewxao="
+            target="_blank"
+            rel="noreferrer"
+          >
+            Book a Meeting
+          </Button>
+        </Box>
+      )}
     </Box>
   );
 }
