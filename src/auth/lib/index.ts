@@ -157,7 +157,7 @@ export const sendMarketingEmail = async (req: {
   fullName: string;
 }) => {
   const response = await fetch(
-    "https://brave-software.ghost.io/members/api/send-magic-link/",
+    "https://newsletter.brave.com/members/api/send-magic-link/",
     {
       method: "POST",
       mode: "cors",
