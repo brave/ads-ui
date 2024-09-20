@@ -19,6 +19,7 @@ import { NewKeyPairModal } from "@/user/settings/NewKeyPairModal";
 import MiniSideBar from "@/components/Drawer/MiniSideBar";
 import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
 import { Trans } from "@lingui/macro";
+import { AccountBalance } from "@/user/settings/AccountBalance";
 
 const Settings = () => {
   const { trackMatomoEvent } = useTrackWithMatomo({
@@ -73,6 +74,8 @@ const Settings = () => {
               </FormControl>
             </Box>
           </CardContainer>
+
+          <AccountBalance />
         </Stack>
       </Container>
     </MiniSideBar>

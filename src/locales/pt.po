@@ -63,6 +63,12 @@ msgstr "Sobre os Anúncios Brave"
 msgid "Account"
 msgstr "Conta"
 
+msgid "Account Balance"
+msgstr ""
+
+msgid "Account Balance will be applied to this campaign"
+msgstr ""
+
 msgid "Account Settings"
 msgstr "Configurações da Conta"
 
@@ -158,6 +164,12 @@ msgstr "Um anúncio do meu navegador Brave"
 
 msgid "An error has occurred while processing your request."
 msgstr "Ocorreu um erro ao processar sua solicitação."
+
+msgid "and you will be charged {amountToCharge} USD."
+msgstr ""
+
+msgid "and you will not be charged."
+msgstr ""
 
 msgid "Android"
 msgstr "Android"
@@ -387,6 +399,12 @@ msgstr "Clonar uma campanha vai copiar todas as configurações, incluindo conju
 msgid "Close"
 msgstr "Fechar"
 
+msgid "Close Campaign"
+msgstr ""
+
+msgid "Closing a campaign will immediately stop it from running. Once it has stopped running, any remaining funds will be transferred back to your account in 24-48 hours."
+msgstr ""
+
 msgid "Complete"
 msgstr "Concluir"
 
@@ -572,6 +590,9 @@ msgstr ""
 
 #~ msgid "Don’t see the email? Check your spam folder or <0>try again.</0>"
 #~ msgstr "Não recebeu o e-mail? Verifique sua pasta de spam ou <0>tente novamente.</0>"
+
+msgid "Don't show this message again"
+msgstr ""
 
 msgid "Download Report"
 msgstr "Baixar Relatório"
@@ -1329,6 +1350,9 @@ msgstr "O <0>Basic Attention Token (BAT)</0> é a criptomoeda nativa do Brave. U
 msgid "The campaign will likely stop running before the end date provided due to budget constraints."
 msgstr ""
 
+msgid "The current balance for your account that you can attribute to a new Campaign."
+msgstr ""
+
 msgid "The current value for this metric may be an underestimate."
 msgstr "O valor atual para esta métrica pode ser uma subestimativa."
 
@@ -1533,6 +1557,9 @@ msgstr "E-mail corporativo"
 msgid "Yes"
 msgstr "Sim"
 
+msgid "You are about to close this campaign."
+msgstr ""
+
 msgid "You are attempting to create a new keypair, this will replace any of your account’s existing keypairs. Please note, previous keypairs cannot be retrieved or used once replaced."
 msgstr "Você está tentando criar um novo par de chaves, isso substituirá qualquer um dos pares de chaves existentes na sua conta. Observe que os pares de chaves anteriores não podem ser recuperados ou usados uma vez que forem substituídos."
 
@@ -1550,6 +1577,9 @@ msgstr "Você pode ter acesso a várias contas. Alterne entre elas aqui."
 
 msgid "You will soon receive an email with the next steps of registration. While you wait, we recommend you check out our help center to get helpful information for getting started with Brave Ads."
 msgstr "Em breve, você receberá um e-mail com os próximos passos do cadastro. Enquanto isso, sugerimos que você dê uma olhada em nossa Central de Ajuda para obter informações úteis sobre como começar a usar os Anúncios Brave."
+
+msgid "Your account has a balance of ${0} USD. This will be applied to your campaign"
+msgstr ""
 
 msgid "Your account’s new private key will be:"
 msgstr "A nova chave privada da sua conta será:"

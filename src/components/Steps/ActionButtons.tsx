@@ -7,6 +7,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { Link as RouterLink } from "react-router-dom";
 import { Trans } from "@lingui/macro";
+import { CloseCampaignSidebar } from "@/components/Steps/CloseCampaignSidebar";
 
 export function ActionButtons() {
   const { values } = useFormikContext<CampaignForm>();
@@ -37,6 +38,8 @@ export function ActionButtons() {
       >
         <Trans>Return to dashboard</Trans>
       </Button>
+
+      <CloseCampaignSidebar />
     </Stack>
   );
 }
