@@ -424,8 +424,11 @@ msgstr ""
 #~ msgid "Conversion reporting for Brave Ads has changed to better uphold user privacy and security. Campaigns with conversion URLs that violate the newly clarified requirements for conversion URLs will now automatically be paused until their URLs have been updated. Please review the guidelines and take any necessary action to prevent campaign disruption. New guidelines can be found at the <0/>"
 #~ msgstr ""
 
-msgid "Conversion type must be Post Click or Post View"
+msgid "Conversion type must be Post Click"
 msgstr ""
+
+#~ msgid "Conversion type must be Post Click or Post View"
+#~ msgstr ""
 
 msgid "Conversion type required."
 msgstr ""
