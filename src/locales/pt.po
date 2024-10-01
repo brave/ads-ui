@@ -429,8 +429,11 @@ msgstr "Taxa de Conversão"
 #~ msgid "Conversion reporting for Brave Ads has changed to better uphold user privacy and security. Campaigns with conversion URLs that violate the newly clarified requirements for conversion URLs will now automatically be paused until their URLs have been updated. Please review the guidelines and take any necessary action to prevent campaign disruption. New guidelines can be found at the <0/>"
 #~ msgstr "A geração de relatórios de conversão para os Anúncios Brave foi alterada para melhor manter a privacidade e a segurança do usuário. Campanhas com URLs de conversão que violem os requisitos recentemente esclarecidos para URLs de conversão serão automaticamente pausadas até que suas URLs sejam atualizadas. Por favor, reveja as diretrizes e tome as ações necessárias para evitar a interrupção da campanha. As novas diretrizes podem ser encontradas em <0/>"
 
-msgid "Conversion type must be Post Click or Post View"
-msgstr "O tipo de conversão deve ser Pós-Clique ou Pós-Visualização"
+msgid "Conversion type must be Post Click"
+msgstr ""
+
+#~ msgid "Conversion type must be Post Click or Post View"
+#~ msgstr "O tipo de conversão deve ser Pós-Clique ou Pós-Visualização"
 
 msgid "Conversion type required."
 msgstr "Tipo de conversão obrigatório."
