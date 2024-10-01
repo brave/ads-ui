@@ -59,7 +59,7 @@ function createAdSetFromFragment(
     billingType: data.billingType ?? "cpm",
     conversions: (data.conversions ?? []).map((c) => ({
       observationWindow: c.observationWindow,
-      type: c.type,
+      type: "postclick",
       urlPattern: c.urlPattern,
     })),
     // eslint-disable-next-line lingui/no-unlocalized-strings
