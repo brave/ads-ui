@@ -166,6 +166,7 @@ export type AdsManagerUpdateNotificationPayloadInput = {
 
 export type Advertiser = {
   __typename?: 'Advertiser';
+  accountBalance: Scalars['Numeric']['output'];
   accountManager?: Maybe<User>;
   additionalBillingEmails?: Maybe<Array<Scalars['String']['output']>>;
   agreed: Scalars['Boolean']['output'];
@@ -178,6 +179,7 @@ export type Advertiser = {
   description?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
   images: Array<AdvertiserImage>;
+  ledgerEntries: Array<AdvertiserLedgerEntry>;
   marketingChannel?: Maybe<Scalars['String']['output']>;
   modifiedAt: Scalars['DateTime']['output'];
   name: Scalars['String']['output'];
@@ -220,6 +222,16 @@ export type AdvertiserImage = {
   name: Scalars['String']['output'];
 };
 
+export type AdvertiserLedgerEntry = {
+  __typename?: 'AdvertiserLedgerEntry';
+  amount: Scalars['Numeric']['output'];
+  balance: Scalars['Numeric']['output'];
+  description: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  timestamp: Scalars['DateTime']['output'];
+  transactionType: LedgerTransactionType;
+};
+
 export type AdvertiserPrice = {
   __typename?: 'AdvertiserPrice';
   billingModelPrice: Scalars['Numeric']['output'];
@@ -255,6 +267,7 @@ export type Campaign = {
   accountManager?: Maybe<User>;
   adSetCount: Scalars['Int']['output'];
   adSets: Array<AdSet>;
+  adsManagerCurrentBalance: Scalars['Numeric']['output'];
   advertiser: Advertiser;
   /** For Search campaigns, keywords the campaign must not be shown against */
   bannedKeywords?: Maybe<Array<Scalars['String']['output']>>;
@@ -279,17 +292,21 @@ export type Campaign = {
   effectiveState: CampaignEffectiveState;
   endAt: Scalars['DateTime']['output'];
   externalId?: Maybe<Scalars['String']['output']>;
+  externalPaymentUrl?: Maybe<Scalars['String']['output']>;
   format: CampaignFormat;
   geoTargets: Array<Geocode>;
+  hasInProcessOrCompleteTransfer: Scalars['Boolean']['output'];
   hasPaymentIntent: Scalars['Boolean']['output'];
   id: Scalars['String']['output'];
   modifiedAt: Scalars['DateTime']['output'];
   name: Scalars['String']['output'];
+  negativeKeywords?: Maybe<Array<Scalars['String']['output']>>;
   pacingIndex?: Maybe<Scalars['Float']['output']>;
   pacingOverride: Scalars['Boolean']['output'];
   pacingStrategy: CampaignPacingStrategies;
   passThroughRate: Scalars['Float']['output'];
   paymentType: PaymentType;
+  payments?: Maybe<Array<CampaignPaymentLedgerEntry>>;
   performance: PerformanceResults;
   priority: Scalars['Float']['output'];
   radomPaymentId?: Maybe<Scalars['String']['output']>;
@@ -370,6 +387,19 @@ export enum CampaignPacingStrategies {
   ModelV1 = 'MODEL_V1',
   Original = 'ORIGINAL'
 }
+
+export type CampaignPaymentLedgerEntry = {
+  __typename?: 'CampaignPaymentLedgerEntry';
+  amount: Scalars['Numeric']['output'];
+  balance: Scalars['Numeric']['output'];
+  currentBalance: Scalars['Numeric']['output'];
+  description: Scalars['String']['output'];
+  externalPaymentUrl?: Maybe<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
+  paymentSource: PaymentEventSource;
+  timestamp: Scalars['DateTime']['output'];
+  transactionType: LedgerTransactionType;
+};
 
 export type CampaignPerformanceFilter = {
   /** include only metrics for responses for all these countries */
@@ -552,6 +582,7 @@ export type CreateCampaignInput = {
   format: CampaignFormat;
   geoTargets: Array<GeocodeInput>;
   name: Scalars['String']['input'];
+  negativeKeywords?: InputMaybe<Array<Scalars['String']['input']>>;
   pacingStrategy?: InputMaybe<CampaignPacingStrategies>;
   paymentType?: InputMaybe<PaymentType>;
   priority?: InputMaybe<Scalars['Float']['input']>;
@@ -757,6 +788,12 @@ export type InlineContentPayloadInput = {
   title: Scalars['String']['input'];
 };
 
+export enum LedgerTransactionType {
+  CampaignTransfer = 'campaign_transfer',
+  ExternalCredit = 'external_credit',
+  ExternalDebit = 'external_debit'
+}
+
 export type Logo = {
   __typename?: 'Logo';
   alt: Scalars['String']['output'];
@@ -825,9 +862,11 @@ export type Mutation = {
   createCampaign: Campaign;
   createComment: CampaignComment;
   createCreative: Creative;
+  createSearchPreview: SearchPreview;
   createUser: User;
   /** Logically deletes the ad */
   deleteAd: Ad;
+  forceCampaignCompletionAndTransferFunds: Scalars['String']['output'];
   forceCampaignValidation?: Maybe<Campaign>;
   rejectAdvertiserRegistration: Registration;
   rejectCampaign: Campaign;
@@ -915,6 +954,12 @@ export type MutationCreateCreativeArgs = {
 };
 
 
+export type MutationCreateSearchPreviewArgs = {
+  country: Scalars['String']['input'];
+  domain: Scalars['String']['input'];
+};
+
+
 export type MutationCreateUserArgs = {
   createUserInput: CreateUserInput;
 };
@@ -922,6 +967,11 @@ export type MutationCreateUserArgs = {
 
 export type MutationDeleteAdArgs = {
   deleteAdInput: DeleteAdInput;
+};
+
+
+export type MutationForceCampaignCompletionAndTransferFundsArgs = {
+  id: Scalars['String']['input'];
 };
 
 
@@ -1025,7 +1075,14 @@ export type Payload = {
   wallpapers?: Maybe<Array<Wallpaper>>;
 };
 
+export enum PaymentEventSource {
+  Brave = 'brave',
+  Radom = 'radom',
+  Stripe = 'stripe'
+}
+
 export enum PaymentType {
+  BraveLedger = 'BRAVE_LEDGER',
   ManualBat = 'MANUAL_BAT',
   Netsuite = 'NETSUITE',
   Radom = 'RADOM',
@@ -1111,6 +1168,7 @@ export type Query = {
   geocodes: Array<Geocode>;
   performance: PerformanceResults;
   registrations: Registrations;
+  searchPreviews: Array<SearchPreview>;
   searchProspects: SearchProspects;
   segments: SegmentsQueryDto;
   user: User;
@@ -1381,6 +1439,14 @@ export type SearchPayloadInput = {
   title: Scalars['String']['input'];
 };
 
+export type SearchPreview = {
+  __typename?: 'SearchPreview';
+  country: Geocode;
+  domain: Scalars['String']['output'];
+  previewUrl: Scalars['String']['output'];
+  slug: Scalars['String']['output'];
+};
+
 export type SearchProspects = {
   __typename?: 'SearchProspects';
   domains: Array<SearchDomain>;
@@ -1536,6 +1602,7 @@ export type UpdateCampaignInput = {
   geoTargets?: InputMaybe<Array<GeocodeInput>>;
   id: Scalars['String']['input'];
   name?: InputMaybe<Scalars['String']['input']>;
+  negativeKeywords?: InputMaybe<Array<Scalars['String']['input']>>;
   pacingOverride?: InputMaybe<Scalars['Boolean']['input']>;
   pacingStrategy?: InputMaybe<CampaignPacingStrategies>;
   passThroughRate?: InputMaybe<Scalars['Float']['input']>;
