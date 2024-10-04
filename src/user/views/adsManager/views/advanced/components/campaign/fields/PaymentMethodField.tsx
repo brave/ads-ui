@@ -52,7 +52,7 @@ export function PaymentMethodField() {
           ]}
         />
       </Stack>
-      {balance.gt(0) && (
+      {balance.gt(0) && isDraft && (
         <Alert severity="info">
           <AlertTitle>
             <Trans>Account Balance will be applied to this campaign</Trans>

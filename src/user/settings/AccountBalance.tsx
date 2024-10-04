@@ -21,8 +21,8 @@ export function AccountBalance() {
           Campaign.
         </Trans>
       </Typography>
-      {loading && <Skeleton height="40px" />}
-      {data && data.advertiser && (
+      {loading && <Skeleton height="40px" sx={{ mt: 1 }} />}
+      {!loading && data && data.advertiser && (
         <Typography mt={2} fontSize="18px" fontWeight={500}>
           {renderMonetaryAmount(data.advertiser.accountBalance, "USD")}
         </Typography>
