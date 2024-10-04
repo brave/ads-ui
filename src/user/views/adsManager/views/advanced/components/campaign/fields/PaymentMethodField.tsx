@@ -31,7 +31,7 @@ export function PaymentMethodField() {
   );
 
   const chargeMessage = (b: BigNumber) => {
-    if (b.lte(0)) return t`and you will not be charged.`;
+    if (b.lte(0)) return t`no additional charge will be applied.`;
     const amountToCharge = b.toFormat(2);
     return t`and you will be charged ${amountToCharge} USD.`;
   };

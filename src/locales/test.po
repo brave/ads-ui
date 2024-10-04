@@ -163,8 +163,8 @@ msgstr ""
 msgid "and you will be charged {amountToCharge} USD."
 msgstr ""
 
-msgid "and you will not be charged."
-msgstr ""
+#~ msgid "and you will not be charged."
+#~ msgstr ""
 
 msgid "Android"
 msgstr ""
@@ -586,8 +586,8 @@ msgstr ""
 #~ msgid "Don’t see the email? Check your spam folder or <0>try again.</0>"
 #~ msgstr ""
 
-msgid "Don't show this message again"
-msgstr ""
+#~ msgid "Don't show this message again"
+#~ msgstr ""
 
 msgid "Download Report"
 msgstr ""
@@ -965,6 +965,9 @@ msgid "No"
 msgstr ""
 
 msgid "No {billingType} pricing available for {label}, contact selfserve@brave.com for help"
+msgstr ""
+
+msgid "no additional charge will be applied."
 msgstr ""
 
 msgid "No conversion URL setup"
@@ -1345,8 +1348,8 @@ msgstr ""
 msgid "The campaign will likely stop running before the end date provided due to budget constraints."
 msgstr ""
 
-msgid "The current balance for your account that you can attribute to a new Campaign."
-msgstr ""
+#~ msgid "The current balance for your account that you can attribute to a new Campaign."
+#~ msgstr ""
 
 msgid "The current value for this metric may be an underestimate."
 msgstr ""
@@ -1589,6 +1592,9 @@ msgid "Your campaign has been created and is now being reviewed by our ads team.
 msgstr ""
 
 msgid "Your campaign has been updated! <0/>If you added new ads, we’ll be in contact as soon as they are approved and activated. <1/>Thank you for using Brave Ads!"
+msgstr ""
+
+msgid "Your current account balance"
 msgstr ""
 
 msgid "Your trial campaign will be reviewed by an Account Manager. Add any notes or questions for them here."

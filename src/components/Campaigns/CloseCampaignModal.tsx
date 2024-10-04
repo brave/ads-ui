@@ -1,13 +1,5 @@
 import { graphql } from "@/graphql-client/index";
-import {
-  Box,
-  Button,
-  Checkbox,
-  FormControlLabel,
-  Modal,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Modal, Stack, Typography } from "@mui/material";
 import { useContext, useState } from "react";
 import { modalStyles } from "@/theme";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
@@ -15,7 +7,6 @@ import { useMutation } from "@apollo/client";
 import BigNumber from "bignumber.js";
 import { Trans } from "@lingui/macro";
 import { useHistory } from "react-router-dom";
-import { useStickyRef } from "@/hooks/useStickyRef";
 import { FilterContext } from "@/state/context";
 import {
   AdvertiserCampaignsDocument,
@@ -40,10 +31,6 @@ interface Props {
 
 export function CloseCampaignModal({ campaign, type, disabled }: Props) {
   const history = useHistory();
-  const [showAgain, setShowAgain] = useStickyRef(
-    `show-account-balance-warning-${type}`,
-    true,
-  );
   const [open, setOpen] = useState(false);
   const { advertiser } = useAdvertiser();
   const { fromDate } = useContext(FilterContext);
@@ -95,11 +82,7 @@ export function CloseCampaignModal({ campaign, type, disabled }: Props) {
         sx={{ borderRadius: "12px" }}
         startIcon={isInline ? <CancelIcon /> : undefined}
         onClick={() => {
-          if (showAgain) {
-            setOpen(true);
-          } else {
-            doMutate();
-          }
+          setOpen(true);
         }}
       >
         {isInline && <Trans>Close</Trans>}
@@ -124,19 +107,11 @@ export function CloseCampaignModal({ campaign, type, disabled }: Props) {
             </Trans>
           </Typography>
 
-          <FormControlLabel
-            control={
-              <Checkbox onChange={(e) => setShowAgain(!e.target.checked)} />
-            }
-            label={<Trans>Don't show this message again</Trans>}
-          />
-
           <Stack direction="row" mt={2} spacing={2}>
             <Button
               variant="outlined"
               size="medium"
               onClick={() => {
-                setShowAgain(true);
                 setOpen(false);
               }}
             >

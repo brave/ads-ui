@@ -16,10 +16,7 @@ export function AccountBalance() {
   return (
     <CardContainer header={<Trans>Account Balance</Trans>}>
       <Typography>
-        <Trans>
-          The current balance for your account that you can attribute to a new
-          Campaign.
-        </Trans>
+        <Trans>Your current account balance</Trans>
       </Typography>
       {loading && <Skeleton height="40px" sx={{ mt: 1 }} />}
       {!loading && data && data.advertiser && (

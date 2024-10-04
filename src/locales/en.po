@@ -163,8 +163,8 @@ msgstr "An error has occurred while processing your request."
 msgid "and you will be charged {amountToCharge} USD."
 msgstr "and you will be charged {amountToCharge} USD."
 
-msgid "and you will not be charged."
-msgstr "and you will not be charged."
+#~ msgid "and you will not be charged."
+#~ msgstr "and you will not be charged."
 
 msgid "Android"
 msgstr "Android"
@@ -586,8 +586,8 @@ msgstr "Don’t see the email?"
 #~ msgid "Don’t see the email? Check your spam folder or <0>try again.</0>"
 #~ msgstr "Don’t see the email? Check your spam folder or <0>try again.</0>"
 
-msgid "Don't show this message again"
-msgstr "Don't show this message again"
+#~ msgid "Don't show this message again"
+#~ msgstr "Don't show this message again"
 
 msgid "Download Report"
 msgstr "Download Report"
@@ -967,6 +967,9 @@ msgstr "No"
 msgid "No {billingType} pricing available for {label}, contact selfserve@brave.com for help"
 msgstr "No {billingType} pricing available for {label}, contact selfserve@brave.com for help"
 
+msgid "no additional charge will be applied."
+msgstr "no additional charge will be applied."
+
 msgid "No conversion URL setup"
 msgstr "No conversion URL setup"
 
@@ -1345,8 +1348,8 @@ msgstr "The <0>Basic Attention Token (BAT)</0> is Brave’s native crypto token.
 msgid "The campaign will likely stop running before the end date provided due to budget constraints."
 msgstr "The campaign will likely stop running before the end date provided due to budget constraints."
 
-msgid "The current balance for your account that you can attribute to a new Campaign."
-msgstr "The current balance for your account that you can attribute to a new Campaign."
+#~ msgid "The current balance for your account that you can attribute to a new Campaign."
+#~ msgstr "The current balance for your account that you can attribute to a new Campaign."
 
 msgid "The current value for this metric may be an underestimate."
 msgstr "The current value for this metric may be an underestimate."
@@ -1590,6 +1593,9 @@ msgstr "Your campaign has been created and is now being reviewed by our ads team
 
 msgid "Your campaign has been updated! <0/>If you added new ads, we’ll be in contact as soon as they are approved and activated. <1/>Thank you for using Brave Ads!"
 msgstr "Your campaign has been updated! <0/>If you added new ads, we’ll be in contact as soon as they are approved and activated. <1/>Thank you for using Brave Ads!"
+
+msgid "Your current account balance"
+msgstr "Your current account balance"
 
 msgid "Your trial campaign will be reviewed by an Account Manager. Add any notes or questions for them here."
 msgstr "Your trial campaign will be reviewed by an Account Manager. Add any notes or questions for them here."
