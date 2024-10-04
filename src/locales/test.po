@@ -58,6 +58,12 @@ msgstr ""
 msgid "Account"
 msgstr ""
 
+msgid "Account Balance"
+msgstr ""
+
+msgid "Account Balance will be applied to this campaign"
+msgstr ""
+
 msgid "Account Settings"
 msgstr ""
 
@@ -153,6 +159,12 @@ msgstr ""
 
 msgid "An error has occurred while processing your request."
 msgstr ""
+
+msgid "and you will be charged {amountToCharge} USD."
+msgstr ""
+
+#~ msgid "and you will not be charged."
+#~ msgstr ""
 
 msgid "Android"
 msgstr ""
@@ -382,6 +394,12 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
+msgid "Close Campaign"
+msgstr ""
+
+msgid "Closing a campaign will immediately stop it from running. Once it has stopped running, any remaining funds will be transferred back to your account in 24-48 hours."
+msgstr ""
+
 msgid "Complete"
 msgstr ""
 
@@ -566,6 +584,9 @@ msgid "Don’t see the email?"
 msgstr ""
 
 #~ msgid "Don’t see the email? Check your spam folder or <0>try again.</0>"
+#~ msgstr ""
+
+#~ msgid "Don't show this message again"
 #~ msgstr ""
 
 msgid "Download Report"
@@ -946,6 +967,9 @@ msgstr ""
 msgid "No {billingType} pricing available for {label}, contact selfserve@brave.com for help"
 msgstr ""
 
+msgid "no additional charge will be applied."
+msgstr ""
+
 msgid "No conversion URL setup"
 msgstr ""
 
@@ -1324,6 +1348,9 @@ msgstr ""
 msgid "The campaign will likely stop running before the end date provided due to budget constraints."
 msgstr ""
 
+#~ msgid "The current balance for your account that you can attribute to a new Campaign."
+#~ msgstr ""
+
 msgid "The current value for this metric may be an underestimate."
 msgstr ""
 
@@ -1528,6 +1555,9 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
+msgid "You are about to close this campaign."
+msgstr ""
+
 msgid "You are attempting to create a new keypair, this will replace any of your account’s existing keypairs. Please note, previous keypairs cannot be retrieved or used once replaced."
 msgstr ""
 
@@ -1546,6 +1576,9 @@ msgstr ""
 msgid "You will soon receive an email with the next steps of registration. While you wait, we recommend you check out our help center to get helpful information for getting started with Brave Ads."
 msgstr ""
 
+msgid "Your account has a balance of ${0} USD. This will be applied to your campaign"
+msgstr ""
+
 msgid "Your account’s new private key will be:"
 msgstr ""
 
@@ -1559,6 +1592,9 @@ msgid "Your campaign has been created and is now being reviewed by our ads team.
 msgstr ""
 
 msgid "Your campaign has been updated! <0/>If you added new ads, we’ll be in contact as soon as they are approved and activated. <1/>Thank you for using Brave Ads!"
+msgstr ""
+
+msgid "Your current account balance"
 msgstr ""
 
 msgid "Your trial campaign will be reviewed by an Account Manager. Add any notes or questions for them here."
