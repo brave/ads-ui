@@ -9,6 +9,7 @@ import BigNumber from "bignumber.js";
 import { useField } from "formik";
 import { useCallback } from "react";
 import { useGetAdvertiserAccountBalance } from "@/user/hooks/useGetAdvertiserAccountBalance";
+import { formatUsd } from "@/user/library/format";
 
 export function PaymentMethodField() {
   const { isDraft } = useIsEdit();
@@ -32,7 +33,7 @@ export function PaymentMethodField() {
 
   const chargeMessage = (b: BigNumber) => {
     if (b.lte(0)) return t`no additional charge will be applied.`;
-    const amountToCharge = b.toFormat(2);
+    const amountToCharge = formatUsd(b);
     return t`and you will be charged ${amountToCharge} USD.`;
   };
 
@@ -58,7 +59,7 @@ export function PaymentMethodField() {
             <Trans>Account Balance will be applied to this campaign</Trans>
           </AlertTitle>
           <Trans>
-            Your account has a balance of ${balance.toFormat(2)} USD. This will
+            Your account has a balance of ${formatUsd(balance)} USD. This will
             be applied to your campaign
           </Trans>
           {", "}
