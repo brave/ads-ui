@@ -160,6 +160,9 @@ msgstr "An ad from my Brave browser"
 msgid "An error has occurred while processing your request."
 msgstr "An error has occurred while processing your request."
 
+msgid "and no additional charges will be incurred."
+msgstr "and no additional charges will be incurred."
+
 msgid "and you will be charged {amountToCharge} USD."
 msgstr "and you will be charged {amountToCharge} USD."
 
@@ -967,8 +970,8 @@ msgstr "No"
 msgid "No {billingType} pricing available for {label}, contact selfserve@brave.com for help"
 msgstr "No {billingType} pricing available for {label}, contact selfserve@brave.com for help"
 
-msgid "no additional charge will be applied."
-msgstr "no additional charge will be applied."
+#~ msgid "no additional charge will be applied."
+#~ msgstr "no additional charge will be applied."
 
 msgid "No conversion URL setup"
 msgstr "No conversion URL setup"
@@ -1576,8 +1579,11 @@ msgstr "You may have access to multiple accounts. Switch between them here."
 msgid "You will soon receive an email with the next steps of registration. While you wait, we recommend you check out our help center to get helpful information for getting started with Brave Ads."
 msgstr "You will soon receive an email with the next steps of registration. While you wait, we recommend you check out our help center to get helpful information for getting started with Brave Ads."
 
-msgid "Your account has a balance of ${0} USD. This will be applied to your campaign"
-msgstr "Your account has a balance of ${0} USD. This will be applied to your campaign"
+msgid "Your account has a balance of {0} USD. This will be applied to your campaign"
+msgstr "Your account has a balance of {0} USD. This will be applied to your campaign"
+
+#~ msgid "Your account has a balance of ${0} USD. This will be applied to your campaign"
+#~ msgstr "Your account has a balance of ${0} USD. This will be applied to your campaign"
 
 msgid "Your account’s new private key will be:"
 msgstr "Your account’s new private key will be:"
