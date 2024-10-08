@@ -25,6 +25,7 @@ import {
   CampaignSummaryFragment,
 } from "@/graphql-client/graphql";
 import { useQuery } from "@apollo/client";
+import { CloseCampaignModal } from "@/components/Campaigns/CloseCampaignModal";
 
 interface Props {
   advertiser?: AdvertiserCampaignsFragment | null;
@@ -220,6 +221,14 @@ export function CampaignList({ advertiser }: Props) {
         {advertiser?.selfServiceManageCampaign && (
           <EditButton disabled={isDisabled} campaign={campaign} />
         )}
+        {advertiser?.selfServiceManageCampaign &&
+          !advertiser?.selfServiceSetPrice && (
+            <CloseCampaignModal
+              disabled={isDisabled}
+              campaign={campaign}
+              type="inline"
+            />
+          )}
       </CustomToolbar>
     );
   };

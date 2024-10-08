@@ -73,7 +73,7 @@ export const StandardRenderers: Record<string, CellValueRenderer> = {
 };
 
 export function renderMonetaryAmount(
-  value: BigNumber | number,
+  value: BigNumber | number | string,
   currency: string,
 ) {
   const val = BigNumber(value);

@@ -59,6 +59,8 @@ fragment CampaignSummary on Campaign {
   format
   dayProportion
   brandedKeywords
+  adsManagerCurrentBalance
+  hasInProcessOrCompleteTransfer
   advertiser {
     id
     name
