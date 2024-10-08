@@ -64,7 +64,7 @@ export function useSubmitCreative(props: { id: string }) {
       );
 
       const input = {
-        ..._.omit(valid, ["id", "targetUrlValid", "included"]),
+        ..._.omit(valid, ["id", "targetUrlValid", "included", "type"]),
         state: "under_review",
       };
 

@@ -176,23 +176,25 @@ export function validCreativeFields<T extends GenericCreative>(
     targetUrlValid: "",
     state: c.state,
     type: { code: c.type.code },
-    payloadNotification: c.payloadNotification
-      ? {
-          title: c.payloadNotification.title,
-          body: c.payloadNotification.body,
-          targetUrl: c.payloadNotification.targetUrl,
-        }
-      : undefined,
-    payloadInlineContent: c.payloadInlineContent
-      ? {
-          ctaText: c.payloadInlineContent.ctaText,
-          description: c.payloadInlineContent.description,
-          dimensions: "900x750",
-          imageUrl: c.payloadInlineContent.imageUrl,
-          targetUrl: c.payloadInlineContent.targetUrl,
-          title: c.payloadInlineContent.title,
-        }
-      : undefined,
+    payloadNotification:
+      c.type.code === "notification_all_v1" && !!c.payloadNotification
+        ? {
+            title: c.payloadNotification.title,
+            body: c.payloadNotification.body,
+            targetUrl: c.payloadNotification.targetUrl,
+          }
+        : undefined,
+    payloadInlineContent:
+      c.type.code === "inline_content_all_v1" && !!c.payloadInlineContent
+        ? {
+            ctaText: c.payloadInlineContent.ctaText,
+            description: c.payloadInlineContent.description,
+            dimensions: "900x750",
+            imageUrl: c.payloadInlineContent.imageUrl,
+            targetUrl: c.payloadInlineContent.targetUrl,
+            title: c.payloadInlineContent.title,
+          }
+        : undefined,
   };
 }
 
