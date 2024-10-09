@@ -305,7 +305,7 @@ describe("edit form tests", () => {
       title: "valid",
       body: "valid",
     },
-    type: { code: "notification_v1_all" },
+    type: { code: "notification_all_v1" },
   };
 
   const ad: Partial<AdFragment> = {
@@ -407,7 +407,7 @@ describe("edit form tests", () => {
                 "state": "active",
                 "targetUrlValid": "",
                 "type": {
-                  "code": "notification_v1_all",
+                  "code": "notification_all_v1",
                 },
               },
               {
@@ -425,7 +425,7 @@ describe("edit form tests", () => {
                 "state": "active",
                 "targetUrlValid": "",
                 "type": {
-                  "code": "notification_v1_all",
+                  "code": "notification_all_v1",
                 },
               },
             ],
@@ -464,7 +464,7 @@ describe("edit form tests", () => {
                 "state": "active",
                 "targetUrlValid": "",
                 "type": {
-                  "code": "notification_v1_all",
+                  "code": "notification_all_v1",
                 },
               },
               {
@@ -482,7 +482,7 @@ describe("edit form tests", () => {
                 "state": "active",
                 "targetUrlValid": "",
                 "type": {
-                  "code": "notification_v1_all",
+                  "code": "notification_all_v1",
                 },
               },
             ],
