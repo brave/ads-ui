@@ -49,7 +49,7 @@ export const UrlResolver = ({
   const isDirty = !_.isEqual(nameMeta.value, nameMeta.initialValue);
   const { _: lingui } = useLingui();
 
-  const urlValidation = useUrlValidation(nameField.value);
+  const urlValidation = useUrlValidation(nameField?.value ?? "");
 
   useEffect(() => {
     const { isValid } = urlValidation;
