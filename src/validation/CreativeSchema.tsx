@@ -60,7 +60,9 @@ export const CreativeSchema = () =>
               .max(15, t`Call to action must be less than 15 characters`)
               .required(t`Call to action is required`),
             description: string().required(t`Ad description is required`),
-            dimensions: string().required(t`Ad image dimensions are required`),
+            dimensions: string()
+              .required(t`Ad image dimensions are required`)
+              .default("900x750"),
             imageUrl: string()
               .url(t`Image URL must be valid`)
               .required()
