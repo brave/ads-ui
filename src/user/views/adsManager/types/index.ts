@@ -89,19 +89,6 @@ export const initialCreative: Creative = {
   advertiserId: "",
   // eslint-disable-next-line lingui/no-unlocalized-strings
   targetUrlValid: "Target URL validation incomplete",
-  payloadNotification: {
-    title: "",
-    targetUrl: "",
-    body: "",
-  },
-  payloadInlineContent: {
-    ctaText: "",
-    description: "",
-    dimensions: "900x750",
-    imageUrl: "",
-    targetUrl: "",
-    title: "",
-  },
   type: { code: "" },
   state: "draft",
   included: false,
