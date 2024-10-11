@@ -59,7 +59,7 @@ export function CreateCreativeButton({ index }: Props) {
         create({
           variables: {
             input: {
-              ..._.omit(newMeta.value, "included"),
+              ..._.omit(newMeta.value, ["included", "type"]),
               advertiserId: advertiser.id,
             },
           },
