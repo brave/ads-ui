@@ -663,8 +663,11 @@ msgstr "Falha ao buscar"
 msgid "Failed to load image"
 msgstr "Falha ao carregar imagem"
 
-msgid "Failed to update profile: {0}"
-msgstr "Falha ao atualizar o perfil: {0}"
+#~ msgid "Failed to update profile: {0}"
+#~ msgstr "Falha ao atualizar o perfil: {0}"
+
+msgid "Failed to update profile: {errorMessage}"
+msgstr ""
 
 msgid "Failed to upload image"
 msgstr "Falha ao enviar imagem"
@@ -1431,8 +1434,11 @@ msgstr "Não foi possível obter informações do perfil"
 msgid "Unable to load ad"
 msgstr "Não foi possível carregar o anúncio"
 
-msgid "Unable to load reporting details for campaign: {0}"
-msgstr "Não foi possível carregar os detalhes do relatório para a campanha: {0}"
+#~ msgid "Unable to load reporting details for campaign: {0}"
+#~ msgstr "Não foi possível carregar os detalhes do relatório para a campanha: {0}"
+
+msgid "Unable to load reporting details for campaign: {campaignName}"
+msgstr ""
 
 #~ msgid "Unable to login, link has expired or has already been used."
 #~ msgstr "Não foi possível fazer login, o link expirou ou já foi utilizado."
@@ -1572,8 +1578,11 @@ msgstr "Você está tentando criar um novo par de chaves, isso substituirá qual
 msgid "You are logging into the Brave Ads Manager Dashboard."
 msgstr ""
 
-msgid "You have {0} errors that must be fixed before submitting."
-msgstr "Você tem {0} erros que devem ser corrigidos antes de enviar."
+#~ msgid "You have {0} errors that must be fixed before submitting."
+#~ msgstr "Você tem {0} erros que devem ser corrigidos antes de enviar."
+
+msgid "You have {errorCount} errors that must be fixed before submitting."
+msgstr ""
 
 msgid "You have unsaved changes"
 msgstr "Você tem alterações não salvas"
@@ -1584,7 +1593,10 @@ msgstr "Você pode ter acesso a várias contas. Alterne entre elas aqui."
 msgid "You will soon receive an email with the next steps of registration. While you wait, we recommend you check out our help center to get helpful information for getting started with Brave Ads."
 msgstr "Em breve, você receberá um e-mail com os próximos passos do cadastro. Enquanto isso, sugerimos que você dê uma olhada em nossa Central de Ajuda para obter informações úteis sobre como começar a usar os Anúncios Brave."
 
-msgid "Your account has a balance of {0} USD. This will be applied to your campaign"
+#~ msgid "Your account has a balance of {0} USD. This will be applied to your campaign"
+#~ msgstr ""
+
+msgid "Your account has a balance of {accountBalance} USD. This will be applied to your campaign"
 msgstr ""
 
 #~ msgid "Your account has a balance of ${0} USD. This will be applied to your campaign"

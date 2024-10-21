@@ -658,8 +658,11 @@ msgstr "Failed to Fetch"
 msgid "Failed to load image"
 msgstr "Failed to load image"
 
-msgid "Failed to update profile: {0}"
-msgstr "Failed to update profile: {0}"
+#~ msgid "Failed to update profile: {0}"
+#~ msgstr "Failed to update profile: {0}"
+
+msgid "Failed to update profile: {errorMessage}"
+msgstr "Failed to update profile: {errorMessage}"
 
 msgid "Failed to upload image"
 msgstr "Failed to upload image"
@@ -1426,8 +1429,11 @@ msgstr "Unable to get profile information"
 msgid "Unable to load ad"
 msgstr "Unable to load ad"
 
-msgid "Unable to load reporting details for campaign: {0}"
-msgstr "Unable to load reporting details for campaign: {0}"
+#~ msgid "Unable to load reporting details for campaign: {0}"
+#~ msgstr "Unable to load reporting details for campaign: {0}"
+
+msgid "Unable to load reporting details for campaign: {campaignName}"
+msgstr "Unable to load reporting details for campaign: {campaignName}"
 
 #~ msgid "Unable to login, link has expired or has already been used."
 #~ msgstr "Unable to login, link has expired or has already been used."
@@ -1567,8 +1573,11 @@ msgstr "You are attempting to create a new keypair, this will replace any of you
 msgid "You are logging into the Brave Ads Manager Dashboard."
 msgstr "You are logging into the Brave Ads Manager Dashboard."
 
-msgid "You have {0} errors that must be fixed before submitting."
-msgstr "You have {0} errors that must be fixed before submitting."
+#~ msgid "You have {0} errors that must be fixed before submitting."
+#~ msgstr "You have {0} errors that must be fixed before submitting."
+
+msgid "You have {errorCount} errors that must be fixed before submitting."
+msgstr "You have {errorCount} errors that must be fixed before submitting."
 
 msgid "You have unsaved changes"
 msgstr "You have unsaved changes"
@@ -1579,8 +1588,11 @@ msgstr "You may have access to multiple accounts. Switch between them here."
 msgid "You will soon receive an email with the next steps of registration. While you wait, we recommend you check out our help center to get helpful information for getting started with Brave Ads."
 msgstr "You will soon receive an email with the next steps of registration. While you wait, we recommend you check out our help center to get helpful information for getting started with Brave Ads."
 
-msgid "Your account has a balance of {0} USD. This will be applied to your campaign"
-msgstr "Your account has a balance of {0} USD. This will be applied to your campaign"
+#~ msgid "Your account has a balance of {0} USD. This will be applied to your campaign"
+#~ msgstr "Your account has a balance of {0} USD. This will be applied to your campaign"
+
+msgid "Your account has a balance of {accountBalance} USD. This will be applied to your campaign"
+msgstr "Your account has a balance of {accountBalance} USD. This will be applied to your campaign"
 
 #~ msgid "Your account has a balance of ${0} USD. This will be applied to your campaign"
 #~ msgstr "Your account has a balance of ${0} USD. This will be applied to your campaign"
