@@ -28,11 +28,12 @@ function StatusMessage({
     return errors[0];
   }
 
+  const errorCount = errors.length;
   return (
     <Box>
       <Link underline="hover" onClick={() => setShowErrors((state) => !state)}>
         <Trans>
-          You have {errors.length} errors that must be fixed before submitting.
+          You have {errorCount} errors that must be fixed before submitting.
         </Trans>
       </Link>
       {showErrors && (

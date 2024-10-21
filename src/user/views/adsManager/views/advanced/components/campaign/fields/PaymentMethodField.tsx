@@ -37,6 +37,7 @@ export function PaymentMethodField() {
     return t`and you will be charged ${amountToCharge} USD.`;
   };
 
+  const accountBalance = formatUsd(balance);
   return (
     <CardContainer header={<Trans>Payment</Trans>}>
       <Stack spacing={1}>
@@ -59,7 +60,7 @@ export function PaymentMethodField() {
             <Trans>Account Balance will be applied to this campaign</Trans>
           </AlertTitle>
           <Trans>
-            Your account has a balance of {formatUsd(balance)} USD. This will be
+            Your account has a balance of {accountBalance} USD. This will be
             applied to your campaign
           </Trans>
           {", "}
