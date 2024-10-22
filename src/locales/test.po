@@ -730,6 +730,9 @@ msgstr ""
 msgid "Generating a new API key will result in the deactivation of your previous key, rendering it unusable for future requests. Make sure to update your code with the new key to avoid disruptions in your application’s functionality."
 msgstr ""
 
+msgid "Get a free testing period"
+msgstr ""
+
 msgid "Get in touch with our team"
 msgstr ""
 
@@ -1189,8 +1192,8 @@ msgstr ""
 #~ msgid "Risk Free"
 #~ msgstr ""
 
-msgid "Risk free trial for up to 30 days"
-msgstr ""
+#~ msgid "Risk free trial for up to 30 days"
+#~ msgstr ""
 
 msgid "Sample Queries"
 msgstr ""
@@ -1399,7 +1402,10 @@ msgstr ""
 #~ msgid "Try a free one-month test to see how Brave Search Ads perform for your brand."
 #~ msgstr ""
 
-msgid "Try a free one-month test to see how Brave Search Ads perform for your business."
+#~ msgid "Try a free one-month test to see how Brave Search Ads perform for your business."
+#~ msgstr ""
+
+msgid "Try Brave Search Ads risk-free to see how the ads perform for your website."
 msgstr ""
 
 msgid "Unable to clone campaign"

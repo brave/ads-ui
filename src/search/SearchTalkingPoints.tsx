@@ -13,8 +13,8 @@ export function SearchTalkingPoints() {
       description: msg`Brave Search Ads are built to perform and convert as well as - or better than - Google Search Ad clicks.`,
     },
     {
-      title: msg`Risk free trial for up to 30 days`,
-      description: msg`Try a free one-month test to see how Brave Search Ads perform for your business.`,
+      title: msg`Get a free testing period`,
+      description: msg`Try Brave Search Ads risk-free to see how the ads perform for your website.`,
     },
   ];
 
