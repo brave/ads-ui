@@ -663,8 +663,11 @@ msgstr "Error al recuperar"
 msgid "Failed to load image"
 msgstr "Error al cargar la imagen "
 
-msgid "Failed to update profile: {0}"
-msgstr "Error al actualizar el perfil: {0}"
+#~ msgid "Failed to update profile: {0}"
+#~ msgstr "Error al actualizar el perfil: {0}"
+
+msgid "Failed to update profile: {errorMessage}"
+msgstr ""
 
 msgid "Failed to upload image"
 msgstr "Error al subir la imagen"
@@ -731,6 +734,9 @@ msgstr "Generar una clave API"
 
 msgid "Generating a new API key will result in the deactivation of your previous key, rendering it unusable for future requests. Make sure to update your code with the new key to avoid disruptions in your application’s functionality."
 msgstr "La generación de una nueva clave API dará como resultado la desactivación de su clave anterior, dejándola inutilizable para futuras solicitudes. Asegúrese de actualizar el código con la nueva clave para evitar interrupciones en la funcionalidad de la aplicación."
+
+msgid "Get a free testing period"
+msgstr ""
 
 msgid "Get in touch with our team"
 msgstr "Póngase en contacto con nuestro equipo"
@@ -1191,8 +1197,8 @@ msgstr "Revisar anuncios"
 #~ msgid "Risk Free"
 #~ msgstr "Risk Free"
 
-msgid "Risk free trial for up to 30 days"
-msgstr "Prueba sin riesgos de hasta 30 días"
+#~ msgid "Risk free trial for up to 30 days"
+#~ msgstr "Prueba sin riesgos de hasta 30 días"
 
 msgid "Sample Queries"
 msgstr "Consultas de ejemplo"
@@ -1401,8 +1407,11 @@ msgstr "Hoy"
 #~ msgid "Try a free one-month test to see how Brave Search Ads perform for your brand."
 #~ msgstr "Try a free one-month test to see how Brave Search Ads perform for your brand."
 
-msgid "Try a free one-month test to see how Brave Search Ads perform for your business."
-msgstr "Haga una prueba gratuita de un mes para ver el rendimiento de los anuncios del Buscador de Brave en su empresa."
+#~ msgid "Try a free one-month test to see how Brave Search Ads perform for your business."
+#~ msgstr "Haga una prueba gratuita de un mes para ver el rendimiento de los anuncios del Buscador de Brave en su empresa."
+
+msgid "Try Brave Search Ads risk-free to see how the ads perform for your website."
+msgstr ""
 
 msgid "Unable to clone campaign"
 msgstr "No se puede clonar la campaña"
@@ -1431,8 +1440,11 @@ msgstr "No se puede obtener información del perfil"
 msgid "Unable to load ad"
 msgstr "No se puede cargar el anuncio"
 
-msgid "Unable to load reporting details for campaign: {0}"
-msgstr "No se pueden cargar los detalles de los informes de la campaña: {0}"
+#~ msgid "Unable to load reporting details for campaign: {0}"
+#~ msgstr "No se pueden cargar los detalles de los informes de la campaña: {0}"
+
+msgid "Unable to load reporting details for campaign: {campaignName}"
+msgstr ""
 
 #~ msgid "Unable to login, link has expired or has already been used."
 #~ msgstr "Unable to login, link has expired or has already been used."
@@ -1572,8 +1584,11 @@ msgstr "Está intentando crear un nuevo par de claves, que reemplazará cualquie
 msgid "You are logging into the Brave Ads Manager Dashboard."
 msgstr "Usted está iniciando sesión en el panel de control del Administrador de Anuncios de Brave."
 
-msgid "You have {0} errors that must be fixed before submitting."
-msgstr "Tiene {0} errores que deben corregirse antes de enviar."
+#~ msgid "You have {0} errors that must be fixed before submitting."
+#~ msgstr "Tiene {0} errores que deben corregirse antes de enviar."
+
+msgid "You have {errorCount} errors that must be fixed before submitting."
+msgstr ""
 
 msgid "You have unsaved changes"
 msgstr "Tiene cambios sin guardar"
@@ -1584,7 +1599,10 @@ msgstr "Es posible que tenga acceso a varias cuentas. Cambie entre ellas aquí."
 msgid "You will soon receive an email with the next steps of registration. While you wait, we recommend you check out our help center to get helpful information for getting started with Brave Ads."
 msgstr "Pronto recibirá un correo electrónico con los próximos pasos del registro. Mientras espera, le recomendamos que consulte nuestro centro de ayuda para obtener información útil para comenzar con Brave Ads."
 
-msgid "Your account has a balance of {0} USD. This will be applied to your campaign"
+#~ msgid "Your account has a balance of {0} USD. This will be applied to your campaign"
+#~ msgstr ""
+
+msgid "Your account has a balance of {accountBalance} USD. This will be applied to your campaign"
 msgstr ""
 
 #~ msgid "Your account has a balance of ${0} USD. This will be applied to your campaign"

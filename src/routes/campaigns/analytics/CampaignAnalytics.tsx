@@ -43,11 +43,12 @@ export function CampaignAnalytics({ campaignOverview }: CampaignOverviewProps) {
     },
   });
 
+  const campaignName = campaignOverview.name;
   if (error) {
     return (
       <ErrorDetail
         error={error}
-        additionalDetails={msg`Unable to load reporting details for campaign: ${campaignOverview.name}`}
+        additionalDetails={msg`Unable to load reporting details for campaign: ${campaignName}`}
       />
     );
   }

@@ -46,7 +46,8 @@ export function UserForm() {
       setInitialVals(user.updateCurrentUser);
     },
     onError(err) {
-      setErrorMessage(<Trans>Failed to update profile: {err.message}</Trans>);
+      const errorMessage = err.message;
+      setErrorMessage(<Trans>Failed to update profile: {errorMessage}</Trans>);
     },
   });
 

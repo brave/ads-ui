@@ -658,7 +658,10 @@ msgstr ""
 msgid "Failed to load image"
 msgstr ""
 
-msgid "Failed to update profile: {0}"
+#~ msgid "Failed to update profile: {0}"
+#~ msgstr ""
+
+msgid "Failed to update profile: {errorMessage}"
 msgstr ""
 
 msgid "Failed to upload image"
@@ -725,6 +728,9 @@ msgid "Generate API Key"
 msgstr ""
 
 msgid "Generating a new API key will result in the deactivation of your previous key, rendering it unusable for future requests. Make sure to update your code with the new key to avoid disruptions in your application’s functionality."
+msgstr ""
+
+msgid "Get a free testing period"
 msgstr ""
 
 msgid "Get in touch with our team"
@@ -1186,8 +1192,8 @@ msgstr ""
 #~ msgid "Risk Free"
 #~ msgstr ""
 
-msgid "Risk free trial for up to 30 days"
-msgstr ""
+#~ msgid "Risk free trial for up to 30 days"
+#~ msgstr ""
 
 msgid "Sample Queries"
 msgstr ""
@@ -1396,7 +1402,10 @@ msgstr ""
 #~ msgid "Try a free one-month test to see how Brave Search Ads perform for your brand."
 #~ msgstr ""
 
-msgid "Try a free one-month test to see how Brave Search Ads perform for your business."
+#~ msgid "Try a free one-month test to see how Brave Search Ads perform for your business."
+#~ msgstr ""
+
+msgid "Try Brave Search Ads risk-free to see how the ads perform for your website."
 msgstr ""
 
 msgid "Unable to clone campaign"
@@ -1426,7 +1435,10 @@ msgstr ""
 msgid "Unable to load ad"
 msgstr ""
 
-msgid "Unable to load reporting details for campaign: {0}"
+#~ msgid "Unable to load reporting details for campaign: {0}"
+#~ msgstr ""
+
+msgid "Unable to load reporting details for campaign: {campaignName}"
 msgstr ""
 
 #~ msgid "Unable to login, link has expired or has already been used."
@@ -1567,7 +1579,10 @@ msgstr ""
 msgid "You are logging into the Brave Ads Manager Dashboard."
 msgstr ""
 
-msgid "You have {0} errors that must be fixed before submitting."
+#~ msgid "You have {0} errors that must be fixed before submitting."
+#~ msgstr ""
+
+msgid "You have {errorCount} errors that must be fixed before submitting."
 msgstr ""
 
 msgid "You have unsaved changes"
@@ -1579,7 +1594,10 @@ msgstr ""
 msgid "You will soon receive an email with the next steps of registration. While you wait, we recommend you check out our help center to get helpful information for getting started with Brave Ads."
 msgstr ""
 
-msgid "Your account has a balance of {0} USD. This will be applied to your campaign"
+#~ msgid "Your account has a balance of {0} USD. This will be applied to your campaign"
+#~ msgstr ""
+
+msgid "Your account has a balance of {accountBalance} USD. This will be applied to your campaign"
 msgstr ""
 
 #~ msgid "Your account has a balance of ${0} USD. This will be applied to your campaign"
