@@ -132,7 +132,10 @@ export const CampaignSchema = (prices: AdvertiserPrice[]) =>
                 )
                 .required(t`Observation window required.`),
               type: string()
-                .oneOf(["postclick"], t`Conversion type must be Post Click`)
+                .oneOf(
+                  ["postclick", "postview"],
+                  t`Conversion type must be Post Click`,
+                )
                 .required(t`Conversion type required.`),
             })
             .notRequired()
