@@ -391,8 +391,11 @@ msgstr ""
 msgid "Clone campaign: \"{campaignName}\"?"
 msgstr ""
 
-msgid "Cloning a campaign will take all properties including ad sets and ads, and create a new draft campaign with them."
+msgid "Cloning a campaign will create a new draft campaign that inherits all properties of the original campaign, including ad sets. The new campaign will reuse any existing ads from the original campaign."
 msgstr ""
+
+#~ msgid "Cloning a campaign will take all properties including ad sets and ads, and create a new draft campaign with them."
+#~ msgstr ""
 
 msgid "Close"
 msgstr ""
