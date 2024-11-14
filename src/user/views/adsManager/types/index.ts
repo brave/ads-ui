@@ -2,8 +2,8 @@ import {
   AdSetState,
   CampaignFormat,
   CampaignState,
-  CreateTypeInput,
   CreativeInput,
+  CreativeTypeInput,
   PaymentType,
 } from "@/graphql-client/graphql";
 import { defaultEndDate, defaultStartDate } from "@/form/DateFieldHelpers";
@@ -66,7 +66,7 @@ export type Segment = {
 };
 
 export type CreativeInputWithType = CreativeInput & {
-  type: CreateTypeInput;
+  type: Pick<CreativeTypeInput, "code">;
 };
 
 export type Creative = CreativeInputWithType & {
