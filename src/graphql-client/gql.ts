@@ -11,13 +11,15 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  * 3. It does not support dead code elimination, so it will add unused operations.
  *
  * Therefore it is highly recommended to use the babel or swc plugin for production.
+ * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 const documents = {
     "\n  mutation UpdateAdvertiser($input: AdsManagerUpdateAdvertiserInput!) {\n    adsManagerUpdateAdvertiser(adsManagerUpdateAdvertiserInput: $input) {\n      id\n      publicKey\n    }\n  }\n": types.UpdateAdvertiserDocument,
+    "\n  mutation CopyCampaign($id: String!) {\n    copyCampaign(id: $id) {\n      id\n      state\n    }\n  }\n": types.CopyCampaignDocument,
+    "\n  mutation ForceCampaignComplete($id: String!) {\n    forceCampaignCompletionAndTransferFunds(id: $id)\n  }\n": types.ForceCampaignCompleteDocument,
     "\n  mutation AdsManagerUpdateCreativeState($id: String!, $state: String!) {\n    adsManagerUpdateCreativeState(id: $id, state: $state) {\n      id\n    }\n  }\n": types.AdsManagerUpdateCreativeStateDocument,
     "\n  mutation AdsManagerUpdateCreativePayload(\n    $input: AdsManagerUpdateCreativeInput!\n  ) {\n    adsManagerUpdateCreativePayload(adsManagerUpdateCreativeInput: $input) {\n      id\n    }\n  }\n": types.AdsManagerUpdateCreativePayloadDocument,
     "\n    mutation UpdateAdSetState($id: String!, $state: AdSetState!) {\n      adsManagerUpdateAdSetState(id: $id, state: $state) {\n        id\n      }\n    }\n  ": types.UpdateAdSetStateDocument,
-    "\n  mutation ForceCampaignComplete($id: String!) {\n    forceCampaignCompletionAndTransferFunds(id: $id)\n  }\n": types.ForceCampaignCompleteDocument,
     "\n  query CampaignTransferStatus($id: String!) {\n    campaign(id: $id) {\n      id\n      adsManagerCurrentBalance\n      hasInProcessOrCompleteTransfer\n    }\n  }\n": types.CampaignTransferStatusDocument,
     "fragment AdSet on AdSet {\n  id\n  price\n  createdAt\n  billingType\n  name\n  totalMax\n  perDay\n  state\n  segments {\n    code\n    name\n  }\n  oses {\n    code\n    name\n  }\n  conversions {\n    id\n    type\n    urlPattern\n    observationWindow\n  }\n  ads {\n    ...Ad\n  }\n}\n\nfragment Ad on Ad {\n  id\n  state\n  creative {\n    ...Creative\n  }\n}\n\nfragment AdSetWithDeletedAds on AdSet {\n  id\n  createdAt\n  name\n  state\n  billingType\n  oses {\n    code\n    name\n  }\n  segments {\n    code\n    name\n  }\n  conversions {\n    id\n  }\n  ads(includeDeleted: true) {\n    ...Ad\n  }\n}": types.AdSetFragmentDoc,
     "fragment AdvertiserBillingAddress on Advertiser {\n  billingAddress {\n    id\n    street1\n    street2\n    city\n    country\n    state\n    zipcode\n  }\n}\n\nquery Advertiser($id: String!) {\n  advertiser(id: $id) {\n    id\n    publicKey\n  }\n}\n\nfragment AdvertiserCampaigns on Advertiser {\n  id\n  name\n  selfServiceManageCampaign\n  selfServiceSetPrice\n  campaigns {\n    ...CampaignSummary\n  }\n}\n\nquery AdvertiserCampaigns($id: String!, $filter: AdvertiserCampaignFilter) {\n  advertiserCampaigns(id: $id, filter: $filter) {\n    ...AdvertiserCampaigns\n  }\n}\n\nfragment AdvertiserImage on AdvertiserImage {\n  name\n  imageUrl\n  format\n  id\n  createdAt\n}\n\nfragment AdvertiserPrice on AdvertiserPrice {\n  billingModelPrice\n  billingType\n  format\n}\n\nquery AdvertiserImages($id: String!) {\n  advertiser(id: $id) {\n    id\n    images {\n      ...AdvertiserImage\n    }\n  }\n}\n\nquery AdvertiserPrices($id: String!) {\n  advertiser(id: $id) {\n    id\n    prices {\n      ...AdvertiserPrice\n    }\n  }\n}\n\nquery AdvertiserBillingAddress($id: String!) {\n  advertiser(id: $id) {\n    id\n    ...AdvertiserBillingAddress\n  }\n}\n\nmutation UploadAdvertiserImage($input: CreateAdvertiserImageInput!) {\n  createAdvertiserImage(createImageInput: $input) {\n    id\n    name\n  }\n}": types.AdvertiserBillingAddressFragmentDoc,
@@ -33,8 +35,8 @@ const documents = {
     "\n  query CreativeBreakdown($filter: PerformanceFilter!) {\n    performance(filter: $filter) {\n      values {\n        dimensions {\n          ad {\n            id\n            creative {\n              id\n              name\n            }\n          }\n        }\n        metrics {\n          ...DisplayedMetrics\n        }\n      }\n    }\n  }\n": types.CreativeBreakdownDocument,
     "\n  query OSBreakdown($filter: PerformanceFilter!) {\n    performance(filter: $filter) {\n      values {\n        dimensions {\n          os\n        }\n        metrics {\n          ...DisplayedMetrics\n        }\n      }\n    }\n  }\n": types.OsBreakdownDocument,
     "\n  query HourlyGraph($filter: PerformanceFilter!) {\n    performance(filter: $filter) {\n      values {\n        ...HourlyValues\n      }\n    }\n  }\n\n  fragment HourlyValues on Performance {\n    dimensions {\n      hour\n    }\n    metrics {\n      ...DisplayedMetrics\n    }\n  }\n": types.HourlyGraphDocument,
-    "\n  mutation UpdateCurrentUser($input: UpdateCurrentUserInput!) {\n    updateCurrentUser(input: $input) {\n      ...User\n    }\n  }\n": types.UpdateCurrentUserDocument,
     "\n  query CurrentAdvertiserBalance($id: String!) {\n    advertiser(id: $id) {\n      id\n      accountBalance\n    }\n  }\n": types.CurrentAdvertiserBalanceDocument,
+    "\n  mutation UpdateCurrentUser($input: UpdateCurrentUserInput!) {\n    updateCurrentUser(input: $input) {\n      ...User\n    }\n  }\n": types.UpdateCurrentUserDocument,
     "\n  mutation AdsManagerUpdateCampaign($input: AdsManagerUpdateCampaignInput!) {\n    adsManagerUpdateCampaign(adsManagerUpdateCampaignInput: $input) {\n      id\n    }\n  }\n": types.AdsManagerUpdateCampaignDocument,
     "\n  query LoadCampaignSummary($id: String!) {\n    campaign(id: $id) {\n      ...CampaignOverview\n    }\n  }\n\n  fragment CampaignOverview on Campaign {\n    ...CampaignSummary\n    adSets {\n      id\n      conversions {\n        id\n        extractExternalId\n      }\n    }\n  }\n": types.LoadCampaignSummaryDocument,
     "\n  query CreateSearchCampaignLandingPageList(\n    $domain: String!\n    $country: String!\n    $offset: Float!\n    $limit: Float!\n  ) {\n    searchProspects {\n      landingPagesWithStats(\n        country: $country\n        domain: $domain\n        offset: $offset\n        limit: $limit\n      ) {\n        ...SearchProspectsLandingPageList\n      }\n    }\n  }\n\n  fragment SearchProspectsLandingPageList on SearchLandingPageWithStats {\n    url\n    rank\n    lastSeen\n    favicon\n    creatives {\n      title\n      body\n      lastSeen\n    }\n  }\n": types.CreateSearchCampaignLandingPageListDocument,
@@ -62,6 +64,14 @@ export function graphql(source: "\n  mutation UpdateAdvertiser($input: AdsManage
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n  mutation CopyCampaign($id: String!) {\n    copyCampaign(id: $id) {\n      id\n      state\n    }\n  }\n"): (typeof documents)["\n  mutation CopyCampaign($id: String!) {\n    copyCampaign(id: $id) {\n      id\n      state\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation ForceCampaignComplete($id: String!) {\n    forceCampaignCompletionAndTransferFunds(id: $id)\n  }\n"): (typeof documents)["\n  mutation ForceCampaignComplete($id: String!) {\n    forceCampaignCompletionAndTransferFunds(id: $id)\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n  mutation AdsManagerUpdateCreativeState($id: String!, $state: String!) {\n    adsManagerUpdateCreativeState(id: $id, state: $state) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation AdsManagerUpdateCreativeState($id: String!, $state: String!) {\n    adsManagerUpdateCreativeState(id: $id, state: $state) {\n      id\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -71,10 +81,6 @@ export function graphql(source: "\n  mutation AdsManagerUpdateCreativePayload(\n
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n    mutation UpdateAdSetState($id: String!, $state: AdSetState!) {\n      adsManagerUpdateAdSetState(id: $id, state: $state) {\n        id\n      }\n    }\n  "): (typeof documents)["\n    mutation UpdateAdSetState($id: String!, $state: AdSetState!) {\n      adsManagerUpdateAdSetState(id: $id, state: $state) {\n        id\n      }\n    }\n  "];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  mutation ForceCampaignComplete($id: String!) {\n    forceCampaignCompletionAndTransferFunds(id: $id)\n  }\n"): (typeof documents)["\n  mutation ForceCampaignComplete($id: String!) {\n    forceCampaignCompletionAndTransferFunds(id: $id)\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -138,11 +144,11 @@ export function graphql(source: "\n  query HourlyGraph($filter: PerformanceFilte
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation UpdateCurrentUser($input: UpdateCurrentUserInput!) {\n    updateCurrentUser(input: $input) {\n      ...User\n    }\n  }\n"): (typeof documents)["\n  mutation UpdateCurrentUser($input: UpdateCurrentUserInput!) {\n    updateCurrentUser(input: $input) {\n      ...User\n    }\n  }\n"];
+export function graphql(source: "\n  query CurrentAdvertiserBalance($id: String!) {\n    advertiser(id: $id) {\n      id\n      accountBalance\n    }\n  }\n"): (typeof documents)["\n  query CurrentAdvertiserBalance($id: String!) {\n    advertiser(id: $id) {\n      id\n      accountBalance\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query CurrentAdvertiserBalance($id: String!) {\n    advertiser(id: $id) {\n      id\n      accountBalance\n    }\n  }\n"): (typeof documents)["\n  query CurrentAdvertiserBalance($id: String!) {\n    advertiser(id: $id) {\n      id\n      accountBalance\n    }\n  }\n"];
+export function graphql(source: "\n  mutation UpdateCurrentUser($input: UpdateCurrentUserInput!) {\n    updateCurrentUser(input: $input) {\n      ...User\n    }\n  }\n"): (typeof documents)["\n  mutation UpdateCurrentUser($input: UpdateCurrentUserInput!) {\n    updateCurrentUser(input: $input) {\n      ...User\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
