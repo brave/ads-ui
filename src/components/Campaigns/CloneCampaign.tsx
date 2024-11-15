@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import { useContext, useState } from "react";
-import { createCampaignFromFragment } from "@/form/fragmentUtil";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { FilterContext } from "@/state/context";
@@ -20,17 +19,25 @@ import {
   CampaignFormat,
   CampaignSource,
   CampaignSummaryFragment,
-  CreateCampaignDocument,
-  LoadCampaignDocument,
 } from "@/graphql-client/graphql";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { useLazyQuery, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
+import { graphql } from "@/graphql-client/index";
 
 interface Props {
   campaign?: CampaignSummaryFragment;
   disabled?: boolean;
 }
+
+const Copy_Campaign = graphql(`
+  mutation CopyCampaign($id: String!) {
+    copyCampaign(id: $id) {
+      id
+      state
+    }
+  }
+`);
 
 export function CloneCampaign({ campaign, disabled }: Props) {
   const { advertiser } = useAdvertiser();
@@ -40,9 +47,7 @@ export function CloneCampaign({ campaign, disabled }: Props) {
   const { _ } = useLingui();
   const unableToClone = _(msg`Unable to clone campaign`);
 
-  const [getCampaign, { loading: getLoading }] =
-    useLazyQuery(LoadCampaignDocument);
-  const [copyCampaign, { loading }] = useMutation(CreateCampaignDocument, {
+  const [copyCampaign, { loading }] = useMutation(Copy_Campaign, {
     refetchQueries: [
       {
         query: AdvertiserCampaignsDocument,
@@ -54,32 +59,14 @@ export function CloneCampaign({ campaign, disabled }: Props) {
     ],
     onCompleted(data) {
       history.push(
-        `/user/main/adsmanager/advanced/${data.createCampaign.id}/settings`,
+        `/user/main/adsmanager/advanced/${data.copyCampaign.id}/settings`,
       );
+      setOpen(false);
     },
     onError() {
       alert(unableToClone);
     },
   });
-
-  const doClone = async () => {
-    if (campaign) {
-      getCampaign({
-        variables: { id: campaign.id },
-        onCompleted(data) {
-          if (data.campaign) {
-            copyCampaign({
-              variables: {
-                input: createCampaignFromFragment(data.campaign),
-              },
-            });
-          } else {
-            alert(unableToClone);
-          }
-        },
-      });
-    }
-  };
 
   const canClone =
     campaign &&
@@ -106,7 +93,7 @@ export function CloneCampaign({ campaign, disabled }: Props) {
               e.preventDefault();
               setOpen(true);
             }}
-            disabled={!canClone || loading || getLoading || disabled}
+            disabled={!canClone || loading || disabled}
             startIcon={<ContentCopyIcon />}
           >
             <Trans>Clone</Trans>
@@ -118,21 +105,25 @@ export function CloneCampaign({ campaign, disabled }: Props) {
         <DialogContent>
           <DialogContentText>
             <Trans>
-              Cloning a campaign will take all properties including ad sets and
-              ads, and create a new draft campaign with them.
+              Cloning a campaign will create a new draft campaign that inherits
+              all properties of the original campaign, including ad sets. The
+              new campaign will reuse any existing ads from the original
+              campaign.
             </Trans>
           </DialogContentText>
-          {(loading || getLoading) && <LinearProgress />}
+          {loading && <LinearProgress />}
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpen(false)} disabled={loading}>
             <Trans>Cancel</Trans>
           </Button>
           <Button
-            disabled={loading || getLoading}
+            disabled={loading && !campaign}
             onClick={(e) => {
               e.preventDefault();
-              doClone();
+              if (campaign) {
+                copyCampaign({ variables: { id: campaign.id } });
+              }
             }}
           >
             <Trans>Clone</Trans>
