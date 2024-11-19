@@ -21,7 +21,7 @@ export function PaymentMethodField() {
     return null;
   }
 
-  const balance = BigNumber(data?.advertiser?.accountBalance ?? "0");
+  const balance = BigNumber(data?.advertiser?.accountBalance ?? "0").dp(2);
   const amountOwed = useCallback(
     (balance: BigNumber) => {
       const budget = BigNumber(meta.value).minus(balance);
