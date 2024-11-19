@@ -118,7 +118,8 @@
       "micromatch@<4.0.8": ">=4.0.8",
       "dset@<3.1.4": ">=3.1.4",
       "path-to-regexp@>=0.2.0 <1.9.0": "^1.9.0",
-      "rollup@>=4.0.0 <4.22.4": ">=4.22.4"
+      "rollup@>=4.0.0 <4.22.4": ">=4.22.4",
+      "cross-spawn@>=7.0.0 <7.0.5": ">=7.0.5"
     }
   },
   "packageManager": "pnpm@9.12.3+sha512.cce0f9de9c5a7c95bef944169cc5dfe8741abfb145078c0d508b868056848a87c81e626246cb60967cbd7fd29a6c062ef73ff840d96b3c86c40ac92cf4a813ee"
