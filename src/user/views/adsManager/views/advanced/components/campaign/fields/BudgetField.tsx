@@ -18,12 +18,14 @@ import { msg, t, Trans } from "@lingui/macro";
 import { useIncreaseCampaignBudget } from "@/checkout/hooks/useIncreaseCampaignBudget";
 import { useState } from "react";
 import { formatUsd } from "@/user/library/format";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 
 export function BudgetField() {
   const { isDraft } = useIsEdit();
   const { _ } = useLingui();
   const { data } = useAdvertiserWithPrices();
   const { values, errors } = useFormikContext<CampaignForm>();
+  const { advertiser } = useAdvertiser();
 
   return (
     <Stack direction="row" alignItems="baseline" spacing={1} mt={1} mb={2}>
@@ -42,7 +44,7 @@ export function BudgetField() {
         error={!!errors.budget}
         disabled={!isDraft && !data.selfServiceSetPrice}
       />
-      {values.id && (
+      {values.id && !advertiser.selfServiceSetPrice && (
         <IncreaseBudgetDialog
           campaignId={values.id}
           campaignName={values.name}
