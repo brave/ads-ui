@@ -820,6 +820,12 @@ msgstr "In your local time this is"
 msgid "Include campaigns that ended over 6 months ago"
 msgstr "Include campaigns that ended over 6 months ago"
 
+msgid "Increase Budget"
+msgstr "Increase Budget"
+
+msgid "Increase budget for campaign: <0>{campaignName}</0>?"
+msgstr "Increase budget for campaign: <0>{campaignName}</0>?"
+
 #~ msgid "Incremental"
 #~ msgstr "Incremental"
 
@@ -882,6 +888,9 @@ msgstr "Lifetime budget must be ${MIN_PER_CAMPAIGN} or more"
 
 msgid "Lifetime budget must be higher for date range provided. Minimum ${min}."
 msgstr "Lifetime budget must be higher for date range provided. Minimum ${min}."
+
+msgid "Like your campaign's performance? Increase the budget to expand its reach and connect with more potential customers. Specify below how much you would like to add to your current budget of <0>{previousBudget}</0>"
+msgstr "Like your campaign's performance? Increase the budget to expand its reach and connect with more potential customers. Specify below how much you would like to add to your current budget of <0>{previousBudget}</0>"
 
 msgid "Linux"
 msgstr "Linux"
@@ -1083,6 +1092,9 @@ msgstr "Please confirm your account’s new private key:"
 
 msgid "Please enter a username and password"
 msgstr "Please enter a username and password"
+
+msgid "Please enter a valid amount"
+msgstr "Please enter a valid amount"
 
 msgid "Please enter a valid domain, for example: brave.com"
 msgstr "Please enter a valid domain, for example: brave.com"
