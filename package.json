@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@apollo/client": "3.11.9",
+    "@apollo/client": "3.11.10",
     "@emotion/react": "11.13.3",
     "@emotion/styled": "11.13.0",
     "@fontsource/inter": "5.1.0",
@@ -18,9 +18,9 @@
     "@lingui/format-po": "4.14.0",
     "@lingui/macro": "4.14.0",
     "@lingui/react": "4.14.0",
-    "@mui/icons-material": "6.1.6",
-    "@mui/lab": "6.0.0-beta.14",
-    "@mui/material": "6.1.6",
+    "@mui/icons-material": "6.1.7",
+    "@mui/lab": "6.0.0-beta.15",
+    "@mui/material": "6.1.7",
     "@mui/x-data-grid": "7.22.2",
     "@mui/x-date-pickers": "7.22.2",
     "bignumber.js": "9.1.2",
@@ -83,16 +83,16 @@
     "eslint-plugin-react": "7.37.2",
     "eslint-plugin-react-hooks": "5.0.0",
     "husky": "9.1.6",
-    "knip": "5.36.3",
+    "knip": "5.37.1",
     "lint-staged": "15.2.10",
     "npm-run-all2": "7.0.1",
     "prettier": "3.3.3",
     "typescript": "5.6.3",
-    "typescript-eslint": "8.13.0",
-    "vite": "5.4.10",
+    "typescript-eslint": "8.14.0",
+    "vite": "5.4.11",
     "vite-plugin-checker": "0.8.0",
-    "vite-tsconfig-paths": "5.1.1",
-    "vitest": "2.1.4"
+    "vite-tsconfig-paths": "5.1.2",
+    "vitest": "2.1.5"
   },
   "engines": {
     "node": ">=20",
@@ -122,5 +122,5 @@
       "cross-spawn@>=7.0.0 <7.0.5": ">=7.0.5"
     }
   },
-  "packageManager": "pnpm@9.12.3+sha512.cce0f9de9c5a7c95bef944169cc5dfe8741abfb145078c0d508b868056848a87c81e626246cb60967cbd7fd29a6c062ef73ff840d96b3c86c40ac92cf4a813ee"
+  "packageManager": "pnpm@9.13.2+sha512.88c9c3864450350e65a33587ab801acf946d7c814ed1134da4a924f6df5a2120fd36b46aab68f7cd1d413149112d53c7db3a4136624cfd00ff1846a0c6cef48a"
 }

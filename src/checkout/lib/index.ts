@@ -58,3 +58,37 @@ export async function validatePaymentSession(
     throw new Error(t`invalid session`);
   }
 }
+
+export async function increaseCampaignBudget(
+  advertiserId: string,
+  campaignId: string,
+  amount: string,
+): Promise<string> {
+  const res = await fetch(
+    buildAdServerEndpoint("/payments/checkout-session/increase-budget"),
+    {
+      method: "POST",
+      mode: "cors",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        advertiserId,
+        campaignId,
+        amount,
+      }),
+    },
+  );
+
+  if (res.status !== 200) {
+    throw new Error(t`cannot create session`);
+  }
+
+  const { url } = await res.json();
+  if (url) {
+    return url;
+  } else {
+    throw Error(t`no session created`);
+  }
+}
