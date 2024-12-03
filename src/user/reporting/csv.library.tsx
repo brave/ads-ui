@@ -101,6 +101,7 @@ async function transformConversionEnvelope(blob: Blob): Promise<Blob> {
         Papa.parse(text, {
           header: true,
           transform(value: string, field: string) {
+            // eslint-disable-next-line lingui/no-unlocalized-strings
             if (field.includes("Conversion")) {
               const { ciphertext, nonce, epk }: Envelope = JSON.parse(value);
               const res = tweetnacl.box.open(

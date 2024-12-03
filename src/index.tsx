@@ -20,6 +20,7 @@ import { useEffect } from "react";
 import { findLocale } from "./i18n";
 
 console.log(
+  // eslint-disable-next-line lingui/no-unlocalized-strings
   `https://github.com/brave/ads-ui rev ${VERSION.shortHash} built ${VERSION.buildTime}`,
 );
 
