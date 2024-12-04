@@ -107,6 +107,7 @@ export function CreateSearchCampaign({ domain }: Props) {
             <CardContainer
               childSx={{
                 width: "800px",
+                // eslint-disable-next-line lingui/no-unlocalized-strings
                 height: "calc(100vh - 110px)",
               }}
             >
