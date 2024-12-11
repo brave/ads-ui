@@ -14,7 +14,7 @@ export function OverTimeGraph({ series, hourly = false }: Props) {
       p={2}
       options={{
         time: {
-          useUTC: true,
+          timezone: "UTC",
         },
         title: {
           text: undefined,
