@@ -1,4 +1,5 @@
 fragment AdvertiserBillingAddress on Advertiser {
+  id
   billingAddress {
     id
     street1

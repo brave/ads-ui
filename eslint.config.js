@@ -60,7 +60,26 @@ export default tseslint.config(
       "lingui/no-unlocalized-strings": [
         "error",
         {
-          ignoreAttribute: [
+          ignore: [
+            // Ignore strings which are a single "word" (no spaces)
+            // and doesn't start with an uppercase letter
+            "^(?![A-Z])\\S+$",
+            // Ignore UPPERCASE literals
+            // Example: const test = "FOO"
+            "^[A-Z0-9_-]+$",
+          ],
+          ignoreFunctions: [
+            "createSvgIcon",
+            "log",
+            "useTrackMatomoPageView",
+            "useTrackWithMatomo",
+            "formatInTimeZone",
+            "zonedTimeToUtc",
+            "utcToZonedTime",
+            "graphql",
+            "getGenericMultiSelect",
+          ],
+          ignoreNames: [
             "style",
             "sx",
             "fontFamily",
@@ -74,19 +93,6 @@ export default tseslint.config(
             "gridTemplateRows",
             "gridTemplateAreas",
             "rel",
-          ],
-          ignoreFunction: [
-            "createSvgIcon",
-            "log",
-            "useTrackMatomoPageView",
-            "useTrackWithMatomo",
-            "formatInTimeZone",
-            "zonedTimeToUtc",
-            "utcToZonedTime",
-            "graphql",
-            "getGenericMultiSelect",
-          ],
-          ignoreProperty: [
             "documentTitle",
             "color",
             "border",
@@ -118,6 +124,7 @@ export default tseslint.config(
       "**/*.test.ts",
       "src/components/TimeZonePicker/useTimeZoneList.ts",
       "codegen.ts",
+      "eslint.config.js",
     ],
   },
   {
