@@ -10,6 +10,7 @@ export function uiLabelsForBillingType(
   billingType: string | undefined | null,
 ): BillingTypeLabels {
   if (!billingType) {
+    // eslint-disable-next-line lingui/no-unlocalized-strings
     return { value: "N/A", shortLabel: "N/A", longLabel: t`Unknown` };
   }
 

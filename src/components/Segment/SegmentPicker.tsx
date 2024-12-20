@@ -20,7 +20,7 @@ interface Props {
 
 export const SegmentPicker = ({ idx }: Props) => {
   const { data } = useQuery(SegmentsDocument);
-  const activeSegments = [...(data?.segments?.data ?? [])]
+  const activeSegments = [...(data?.adsManagerSegments ?? [])]
     .filter((s) => s.code !== "Svp7l-zGN")
     .sort((a, b) => {
       return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
