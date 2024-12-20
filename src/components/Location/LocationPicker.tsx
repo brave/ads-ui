@@ -8,6 +8,7 @@ import { useLingui } from "@lingui/react";
 import { msg, Trans } from "@lingui/macro";
 import { useQuery } from "@apollo/client";
 import { useIsEdit } from "@/form/FormikHelpers";
+import { useMemo } from "react";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -15,9 +16,15 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 export const LocationPicker = () => {
   const { isDraft } = useIsEdit();
   const { data } = useQuery(ActiveGeocodesDocument, { skip: !isDraft });
-  const sorted = _.sortBy(
-    (data?.geocodes ?? []).filter((c) => c.code !== "OTHER"),
-    "code",
+  const sorted = useMemo(
+    () =>
+      _.sortBy(
+        (data?.geocodes ?? []).filter(
+          (c) => c.code !== "OTHER" && c.code !== "JP",
+        ),
+        "name",
+      ),
+    [data],
   );
   const [formProps, meta, helper] = useField<GeocodeInput[]>("geoTargets");
   const errorMessage = meta.error;
