@@ -15,9 +15,7 @@ query ActiveGeocodes {
 }
 
 query Segments {
-  segments {
-    data {
-      ...Segment
-    }
+  adsManagerSegments {
+    ...Segment
   }
 }
