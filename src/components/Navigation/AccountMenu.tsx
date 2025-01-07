@@ -121,6 +121,7 @@ export function AccountMenu() {
         )}
         {nonCurrentAdvertisers.map((a, idx) => (
           <MenuItem
+            key={a.id}
             onClick={() => {
               setActiveAdvertiser(a.id);
               setSessionUser({ ...user, id: user.userId, advertisers } as any);
