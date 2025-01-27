@@ -8,7 +8,7 @@ msgstr ""
 "Language: es_419\n"
 "Project-Id-Version: 27b1a082298d0ee642e56f654bcd7273\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-09-05 17:42\n"
+"PO-Revision-Date: 2025-01-27 23:18\n"
 "Last-Translator: \n"
 "Language-Team: Spanish, Latin America\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -64,10 +64,10 @@ msgid "Account"
 msgstr "Cuenta"
 
 msgid "Account Balance"
-msgstr ""
+msgstr "Saldo de cuenta"
 
 msgid "Account Balance will be applied to this campaign"
-msgstr ""
+msgstr "El saldo de la cuenta se aplicará a esta campaña"
 
 msgid "Account Settings"
 msgstr "Configuración de la cuenta"
@@ -166,13 +166,13 @@ msgid "An error has occurred while processing your request."
 msgstr "Se ha producido un error al procesar su solicitud."
 
 msgid "and no additional charges will be incurred."
-msgstr ""
+msgstr "y no se aplicarán cargos adicionales."
 
 msgid "and you will be charged {amountToCharge} USD."
-msgstr ""
+msgstr "y se le cobrará {amountToCharge} USD."
 
 #~ msgid "and you will not be charged."
-#~ msgstr ""
+#~ msgstr "and you will not be charged."
 
 msgid "Android"
 msgstr "Android"
@@ -397,19 +397,19 @@ msgid "Clone campaign: \"{campaignName}\"?"
 msgstr "Clonar campaña: “{campaignName}”?"
 
 msgid "Cloning a campaign will create a new draft campaign that inherits all properties of the original campaign, including ad sets. The new campaign will reuse any existing ads from the original campaign."
-msgstr ""
+msgstr "Al clonar una campaña, se creará un nuevo borrador de campaña que heredará todas las propiedades de la campaña original, incluidos los conjuntos de anuncios. La nueva campaña reutilizará los anuncios existentes de la campaña original."
 
 #~ msgid "Cloning a campaign will take all properties including ad sets and ads, and create a new draft campaign with them."
-#~ msgstr "Al clonar una campaña, se tomarán todas las propiedades, incluidos los conjuntos de anuncios y los anuncios, y se creará un nuevo borrador de campaña con ellos."
+#~ msgstr "Cloning a campaign will take all properties including ad sets and ads, and create a new draft campaign with them."
 
 msgid "Close"
 msgstr "Cerrar"
 
 msgid "Close Campaign"
-msgstr ""
+msgstr "Cerrar campaña"
 
 msgid "Closing a campaign will immediately stop it from running. Once it has stopped running, any remaining funds will be transferred back to your account in 24-48 hours."
-msgstr ""
+msgstr "Al cerrar una campaña, se detendrá inmediatamente su ejecución. Una vez que haya dejado de funcionar, los fondos restantes se transferirán de nuevo a su cuenta en 24-48 horas."
 
 msgid "Complete"
 msgstr "Completar"
@@ -454,10 +454,10 @@ msgstr "Tasa de conversión"
 #~ msgstr "Conversion reporting for Brave Ads has changed to better uphold user privacy and security. Campaigns with conversion URLs that violate the newly clarified requirements for conversion URLs will now automatically be paused until their URLs have been updated. Please review the guidelines and take any necessary action to prevent campaign disruption. New guidelines can be found at the <0/>"
 
 msgid "Conversion type must be Post Click"
-msgstr ""
+msgstr "El tipo de conversión debe ser Post Clic "
 
 #~ msgid "Conversion type must be Post Click or Post View"
-#~ msgstr "El tipo de conversión debe ser Post Clic o Post Vista"
+#~ msgstr "Conversion type must be Post Click or Post View"
 
 msgid "Conversion type required."
 msgstr "Se requiere el tipo de conversión."
@@ -598,7 +598,7 @@ msgstr "¿No ve el correo electrónico?"
 #~ msgstr "Don’t see the email? Check your spam folder or <0>try again.</0>"
 
 #~ msgid "Don't show this message again"
-#~ msgstr ""
+#~ msgstr "Don't show this message again"
 
 msgid "Download Report"
 msgstr "Descargar informe"
@@ -667,10 +667,10 @@ msgid "Failed to load image"
 msgstr "Error al cargar la imagen "
 
 #~ msgid "Failed to update profile: {0}"
-#~ msgstr "Error al actualizar el perfil: {0}"
+#~ msgstr "Failed to update profile: {0}"
 
 msgid "Failed to update profile: {errorMessage}"
-msgstr ""
+msgstr "Error al actualizar el perfil: {errorMessage}"
 
 msgid "Failed to upload image"
 msgstr "Error al subir la imagen"
@@ -739,7 +739,7 @@ msgid "Generating a new API key will result in the deactivation of your previous
 msgstr "La generación de una nueva clave API dará como resultado la desactivación de su clave anterior, dejándola inutilizable para futuras solicitudes. Asegúrese de actualizar el código con la nueva clave para evitar interrupciones en la funcionalidad de la aplicación."
 
 msgid "Get a free testing period"
-msgstr ""
+msgstr "Obtenga un período de prueba gratuito"
 
 msgid "Get in touch with our team"
 msgstr "Póngase en contacto con nuestro equipo"
@@ -826,10 +826,10 @@ msgid "Include campaigns that ended over 6 months ago"
 msgstr "Incluir campañas que finalizaron hace más de 6 meses"
 
 msgid "Increase Budget"
-msgstr ""
+msgstr "Aumentar presupuesto"
 
 msgid "Increase budget for campaign: <0>{campaignName}</0>?"
-msgstr ""
+msgstr "¿Aumentar el presupuesto para la campaña: <0>{campaignName}</0>?"
 
 #~ msgid "Incremental"
 #~ msgstr "Incremental"
@@ -895,7 +895,7 @@ msgid "Lifetime budget must be higher for date range provided. Minimum ${min}."
 msgstr "El presupuesto vitalicio debe ser mayor para el intervalo de fechas proporcionado. Mínimo ${min}."
 
 msgid "Like your campaign's performance? Increase the budget to expand its reach and connect with more potential customers. Specify below how much you would like to add to your current budget of <0>{previousBudget}</0>"
-msgstr ""
+msgstr "¿Le gusta el rendimiento de su campaña? Aumente el presupuesto para ampliar su alcance y conectarse con más clientes potenciales. Especifique a continuación cuánto le gustaría añadir a su presupuesto actual de <0>{previousBudget}</0>"
 
 msgid "Linux"
 msgstr "Linux"
@@ -994,7 +994,7 @@ msgid "No {billingType} pricing available for {label}, contact selfserve@brave.c
 msgstr "No hay precios de {billingType} disponibles para {label}, contacte a selfserve@brave.com para obtener ayuda"
 
 #~ msgid "no additional charge will be applied."
-#~ msgstr ""
+#~ msgstr "no additional charge will be applied."
 
 msgid "No conversion URL setup"
 msgstr "No hay configuración de URL de conversión"
@@ -1099,7 +1099,7 @@ msgid "Please enter a username and password"
 msgstr "Por favor, introduzca un nombre de usuario y contraseña"
 
 msgid "Please enter a valid amount"
-msgstr ""
+msgstr "Por favor, introduzca una cantidad válida"
 
 msgid "Please enter a valid domain, for example: brave.com"
 msgstr "Por favor, introduzca un dominio válido, por ejemplo: brave.com"
@@ -1213,7 +1213,7 @@ msgstr "Revisar anuncios"
 #~ msgstr "Risk Free"
 
 #~ msgid "Risk free trial for up to 30 days"
-#~ msgstr "Prueba sin riesgos de hasta 30 días"
+#~ msgstr "Risk free trial for up to 30 days"
 
 msgid "Sample Queries"
 msgstr "Consultas de ejemplo"
@@ -1378,7 +1378,7 @@ msgid "The campaign will likely stop running before the end date provided due to
 msgstr "Es probable que la campaña deje de publicarse antes de la fecha de finalización proporcionada debido a restricciones presupuestarias."
 
 #~ msgid "The current balance for your account that you can attribute to a new Campaign."
-#~ msgstr ""
+#~ msgstr "The current balance for your account that you can attribute to a new Campaign."
 
 msgid "The current value for this metric may be an underestimate."
 msgstr "El valor actual de esta métrica puede ser una subestimación."
@@ -1423,10 +1423,10 @@ msgstr "Hoy"
 #~ msgstr "Try a free one-month test to see how Brave Search Ads perform for your brand."
 
 #~ msgid "Try a free one-month test to see how Brave Search Ads perform for your business."
-#~ msgstr "Haga una prueba gratuita de un mes para ver el rendimiento de los anuncios del Buscador de Brave en su empresa."
+#~ msgstr "Try a free one-month test to see how Brave Search Ads perform for your business."
 
 msgid "Try Brave Search Ads risk-free to see how the ads perform for your website."
-msgstr ""
+msgstr "Pruebe Anuncios de Búsqueda de Brave sin riesgos para ver cómo funcionan los anuncios para su sitio web."
 
 msgid "Unable to clone campaign"
 msgstr "No se puede clonar la campaña"
@@ -1456,10 +1456,10 @@ msgid "Unable to load ad"
 msgstr "No se puede cargar el anuncio"
 
 #~ msgid "Unable to load reporting details for campaign: {0}"
-#~ msgstr "No se pueden cargar los detalles de los informes de la campaña: {0}"
+#~ msgstr "Unable to load reporting details for campaign: {0}"
 
 msgid "Unable to load reporting details for campaign: {campaignName}"
-msgstr ""
+msgstr "No se pueden cargar los detalles de los informes de la campaña: {campaignName}"
 
 #~ msgid "Unable to login, link has expired or has already been used."
 #~ msgstr "Unable to login, link has expired or has already been used."
@@ -1591,7 +1591,7 @@ msgid "Yes"
 msgstr "Sí"
 
 msgid "You are about to close this campaign."
-msgstr ""
+msgstr "Usted está a punto de cerrar esta campaña."
 
 msgid "You are attempting to create a new keypair, this will replace any of your account’s existing keypairs. Please note, previous keypairs cannot be retrieved or used once replaced."
 msgstr "Está intentando crear un nuevo par de claves, que reemplazará cualquiera de los pares de claves existentes de su cuenta. Tenga en cuenta que los pares de claves anteriores no se pueden recuperar ni utilizar una vez reemplazados."
@@ -1600,10 +1600,10 @@ msgid "You are logging into the Brave Ads Manager Dashboard."
 msgstr "Usted está iniciando sesión en el panel de control del Administrador de Anuncios de Brave."
 
 #~ msgid "You have {0} errors that must be fixed before submitting."
-#~ msgstr "Tiene {0} errores que deben corregirse antes de enviar."
+#~ msgstr "You have {0} errors that must be fixed before submitting."
 
 msgid "You have {errorCount} errors that must be fixed before submitting."
-msgstr ""
+msgstr "Usted tiene {errorCount} errores que deben ser corregidos antes de enviar."
 
 msgid "You have unsaved changes"
 msgstr "Tiene cambios sin guardar"
@@ -1615,13 +1615,13 @@ msgid "You will soon receive an email with the next steps of registration. While
 msgstr "Pronto recibirá un correo electrónico con los próximos pasos del registro. Mientras espera, le recomendamos que consulte nuestro centro de ayuda para obtener información útil para comenzar con Brave Ads."
 
 #~ msgid "Your account has a balance of {0} USD. This will be applied to your campaign"
-#~ msgstr ""
+#~ msgstr "Your account has a balance of {0} USD. This will be applied to your campaign"
 
 msgid "Your account has a balance of {accountBalance} USD. This will be applied to your campaign"
-msgstr ""
+msgstr "Su cuenta tiene un saldo de {accountBalance} USD. Esto se aplicará a su campaña"
 
 #~ msgid "Your account has a balance of ${0} USD. This will be applied to your campaign"
-#~ msgstr ""
+#~ msgstr "Your account has a balance of ${0} USD. This will be applied to your campaign"
 
 msgid "Your account’s new private key will be:"
 msgstr "La nueva clave privada de su cuenta será:"
@@ -1639,10 +1639,11 @@ msgid "Your campaign has been updated! <0/>If you added new ads, we’ll be in c
 msgstr "¡Su campaña ha sido actualizada! <0/>Si agregó nuevos anuncios, nos pondremos en contacto con usted tan pronto como se aprueben y activen. <1/>¡Gracias por usar Brave Ads!"
 
 msgid "Your current account balance"
-msgstr ""
+msgstr "Saldo de su cuenta actual"
 
 msgid "Your trial campaign will be reviewed by an Account Manager. Add any notes or questions for them here."
 msgstr "Su campaña de prueba será revisada por un Gerente de Cuenta. Agregue cualquier nota o pregunta para ellos aquí."
 
 msgid "Zip / Postal Code"
 msgstr "Código postal"
+
