@@ -8,7 +8,7 @@ msgstr ""
 "Language: pt\n"
 "Project-Id-Version: 27b1a082298d0ee642e56f654bcd7273\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-01-28 13:14\n"
+"PO-Revision-Date: 2025-01-28 14:12\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese, Brazilian\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -169,7 +169,7 @@ msgid "and no additional charges will be incurred."
 msgstr "e não haverá cobrança adicional."
 
 msgid "and you will be charged {amountToCharge} USD."
-msgstr "e você será cobrado pelo valor de USD{amountToCharge}."
+msgstr "e você será cobrado pelo valor de USD {amountToCharge}."
 
 #~ msgid "and you will not be charged."
 #~ msgstr "and you will not be charged."
@@ -1618,7 +1618,7 @@ msgstr "Em breve, você receberá um e-mail com os próximos passos do cadastro.
 #~ msgstr "Your account has a balance of {0} USD. This will be applied to your campaign"
 
 msgid "Your account has a balance of {accountBalance} USD. This will be applied to your campaign"
-msgstr "Sua conta tem um saldo de USD{accountBalance}. Esse valor será aplicado à sua campanha"
+msgstr "Sua conta tem um saldo de USD {accountBalance}. Esse valor será aplicado à sua campanha"
 
 #~ msgid "Your account has a balance of ${0} USD. This will be applied to your campaign"
 #~ msgstr "Your account has a balance of ${0} USD. This will be applied to your campaign"
