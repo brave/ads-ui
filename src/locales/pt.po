@@ -8,7 +8,7 @@ msgstr ""
 "Language: pt\n"
 "Project-Id-Version: 27b1a082298d0ee642e56f654bcd7273\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-01-26 21:43\n"
+"PO-Revision-Date: 2025-01-28 13:14\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese, Brazilian\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -169,7 +169,7 @@ msgid "and no additional charges will be incurred."
 msgstr "e não haverá cobrança adicional."
 
 msgid "and you will be charged {amountToCharge} USD."
-msgstr "e você será cobrado pelo valor de {amountToCharge} dólares."
+msgstr "e você será cobrado pelo valor de USD{amountToCharge}."
 
 #~ msgid "and you will not be charged."
 #~ msgstr "and you will not be charged."
@@ -253,7 +253,7 @@ msgstr "Os Anúncios de Pesquisa do Brave foram criados para serem fáceis de ge
 #~ msgstr "Brave Search ads are built to perform and convert as well as - or better than - Google search ad clicks."
 
 msgid "Brave Search Ads are built to perform and convert as well as - or better than - Google Search Ad clicks."
-msgstr "Os Anúncios de Pesquisa do Brave foram criados para ter um desempenho e uma conversão tão bons quanto, ou ainda melhores que os cliques nos anúncios de pesquisa do Google."
+msgstr "Os Anúncios da Pesquisa Brave foram criados para ter um desempenho e uma conversão tão bons quanto, ou ainda melhores, que os cliques nos anúncios de pesquisa do Google."
 
 #~ msgid "Brave Search Ads are privacy-preserving, text-based ads that appear at the top of a user’s search results page (SERP). Want to redefine your SEM program, and diversify from Big Tech? Get the first-mover advantage and start targeting your brand’s most important keywords today."
 #~ msgstr "Brave Search Ads are privacy-preserving, text-based ads that appear at the top of a user’s search results page (SERP). Want to redefine your SEM program, and diversify from Big Tech? Get the first-mover advantage and start targeting your brand’s most important keywords today."
@@ -397,7 +397,7 @@ msgid "Clone campaign: \"{campaignName}\"?"
 msgstr "Clonar campanha: \"{campaignName}\"?"
 
 msgid "Cloning a campaign will create a new draft campaign that inherits all properties of the original campaign, including ad sets. The new campaign will reuse any existing ads from the original campaign."
-msgstr "A clonagem de uma campanha criará um novo rascunho de campanha que herdará todas as propriedades da campanha original, inclusive os conjuntos de anúncios. A nova campanha reutilizará todos os anúncios existentes da campanha original."
+msgstr "A clonagem de campanha criará um novo rascunho que herdará todas as propriedades da campanha original, inclusive os conjuntos de anúncios. A nova campanha reutilizará todos os anúncios existentes da campanha original."
 
 #~ msgid "Cloning a campaign will take all properties including ad sets and ads, and create a new draft campaign with them."
 #~ msgstr "Cloning a campaign will take all properties including ad sets and ads, and create a new draft campaign with them."
@@ -1426,7 +1426,7 @@ msgstr "Hoje"
 #~ msgstr "Try a free one-month test to see how Brave Search Ads perform for your business."
 
 msgid "Try Brave Search Ads risk-free to see how the ads perform for your website."
-msgstr "Experimente os Anúncios da Pesquisa Brave sem riscos para ver o desempenho dos anúncios em seu site."
+msgstr "Experimente os Anúncios sem riscos da Pesquisa Brave para ver o desempenho dos anúncios em seu site."
 
 msgid "Unable to clone campaign"
 msgstr "Não foi possível clonar a campanha"
