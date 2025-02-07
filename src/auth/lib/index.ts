@@ -153,7 +153,7 @@ export const sendMarketingEmail = async (req: {
   fullName: string;
 }) => {
   const response = await fetch(
-    "https://newsletter.brave.com/members/api/send-magic-link/",
+    "https://newsletter.brave.app/members/api/send-magic-link/",
     {
       method: "POST",
       mode: "cors",
