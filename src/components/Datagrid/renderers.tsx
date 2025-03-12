@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 import { Box, Tooltip } from "@mui/material";
 import _ from "lodash";
 import { ReactElement, ReactNode, useContext } from "react";

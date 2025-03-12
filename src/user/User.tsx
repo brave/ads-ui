@@ -94,6 +94,7 @@ export default function User() {
             flex={1}
             component="main"
             marginTop="64px"
+            // eslint-disable-next-line lingui/no-unlocalized-strings
             height="calc(100% - 64px)"
             overflow="auto"
             padding={1}

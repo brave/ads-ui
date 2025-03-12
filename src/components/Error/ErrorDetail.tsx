@@ -49,6 +49,7 @@ export const ErrorDetail = ({ error, additionalDetails }: Props) => {
 
   const stringError = JSON.stringify(error, undefined, 2);
 
+  // eslint-disable-next-line lingui/no-unlocalized-strings
   const errorDetails = `
 URL: ${document.location}
 VERSION: ${VERSION.shortHash}
