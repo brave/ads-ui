@@ -120,7 +120,9 @@
       "rollup@>=4.0.0 <4.22.4": ">=4.22.4",
       "cross-spawn@>=7.0.0 <7.0.5": ">=7.0.5",
       "nanoid@<3.3.8": "^3.3.8",
-      "esbuild@<=0.24.2": ">=0.25.0"
+      "esbuild@<=0.24.2": ">=0.25.0",
+      "@babel/helpers@<7.26.10": ">=7.26.10",
+      "@babel/runtime@<7.26.10": ">=7.26.10"
     }
   },
   "packageManager": "pnpm@10.5.2+sha512.da9dc28cd3ff40d0592188235ab25d3202add8a207afbedc682220e4a0029ffbff4562102b9e6e46b4e3f9e8bd53e6d05de48544b0c57d4b0179e22c76d1199b"
