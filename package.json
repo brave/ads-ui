@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@apollo/client": "3.13.1",
+    "@apollo/client": "3.13.4",
     "@emotion/react": "11.14.0",
     "@emotion/styled": "11.14.0",
     "@fontsource/inter": "5.2.5",
@@ -18,11 +18,11 @@
     "@lingui/format-po": "4.14.1",
     "@lingui/macro": "4.14.1",
     "@lingui/react": "4.14.1",
-    "@mui/icons-material": "6.4.6",
-    "@mui/lab": "6.0.0-beta.29",
-    "@mui/material": "6.4.6",
-    "@mui/x-data-grid": "7.27.2",
-    "@mui/x-date-pickers": "7.27.1",
+    "@mui/icons-material": "6.4.7",
+    "@mui/lab": "6.0.0-beta.30",
+    "@mui/material": "6.4.7",
+    "@mui/x-data-grid": "7.27.3",
+    "@mui/x-date-pickers": "7.27.3",
     "bignumber.js": "9.1.2",
     "dayjs": "1.11.13",
     "formik": "2.4.6",
@@ -37,7 +37,7 @@
     "react-router-dom": "5.3.4",
     "react-virtualized-auto-sizer": "1.0.25",
     "react-window": "1.8.11",
-    "swr": "2.3.2",
+    "swr": "2.3.3",
     "tweetnacl": "1.0.3",
     "yup": "1.6.1"
   },
@@ -62,7 +62,7 @@
   "devDependencies": {
     "@eslint/js": "8.57.1",
     "@graphql-codegen/cli": "5.0.5",
-    "@graphql-codegen/client-preset": "4.6.4",
+    "@graphql-codegen/client-preset": "4.7.0",
     "@graphql-codegen/introspection": "4.0.3",
     "@graphql-eslint/eslint-plugin": "4.3.0",
     "@lingui/cli": "4.14.1",
@@ -78,7 +78,7 @@
     "@vitejs/plugin-react": "4.3.4",
     "babel-plugin-macros": "3.1.0",
     "eslint": "8.57.1",
-    "eslint-config-prettier": "10.0.2",
+    "eslint-config-prettier": "10.1.1",
     "eslint-plugin-lingui": "0.10.0",
     "eslint-plugin-react": "7.37.4",
     "eslint-plugin-react-hooks": "5.2.0",
@@ -87,11 +87,11 @@
     "lint-staged": "15.4.3",
     "prettier": "3.5.3",
     "typescript": "5.8.2",
-    "typescript-eslint": "8.26.0",
-    "vite": "6.2.0",
+    "typescript-eslint": "8.26.1",
+    "vite": "6.2.1",
     "vite-plugin-checker": "0.9.0",
     "vite-tsconfig-paths": "5.1.4",
-    "vitest": "3.0.7"
+    "vitest": "3.0.8"
   },
   "engines": {
     "node": ">=20",
@@ -125,5 +125,5 @@
       "@babel/runtime@<7.26.10": ">=7.26.10"
     }
   },
-  "packageManager": "pnpm@10.5.2+sha512.da9dc28cd3ff40d0592188235ab25d3202add8a207afbedc682220e4a0029ffbff4562102b9e6e46b4e3f9e8bd53e6d05de48544b0c57d4b0179e22c76d1199b"
+  "packageManager": "pnpm@10.6.2+sha512.47870716bea1572b53df34ad8647b42962bc790ce2bf4562ba0f643237d7302a3d6a8ecef9e4bdfc01d23af1969aa90485d4cebb0b9638fa5ef1daef656f6c1b"
 }
