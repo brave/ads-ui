@@ -7,7 +7,7 @@ export function FormatHelp() {
       size="small"
       onClick={() =>
         window.open(
-          "https://brave.com/brave-ads/ad-formats/",
+          "https://brave.com/brave-ads/",
           "__blank",
           "noopener",
         )
