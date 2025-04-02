@@ -1,5 +1,4 @@
-import { Alert, Link, TextField, Typography } from "@mui/material";
-import { LoadingButton } from "@mui/lab";
+import { Alert, Button, Link, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { Link as RouterLink, useHistory } from "react-router-dom";
 import { useSignIn } from "@/auth/hooks/mutations/useSignIn";
@@ -53,7 +52,7 @@ export default function Login() {
 
       {error && <Alert severity="error">{error}</Alert>}
 
-      <LoadingButton
+      <Button
         color="primary"
         size="large"
         variant="contained"
@@ -65,7 +64,7 @@ export default function Login() {
         }}
       >
         <Trans>Log in</Trans>
-      </LoadingButton>
+      </Button>
 
       <Link
         underline="none"
