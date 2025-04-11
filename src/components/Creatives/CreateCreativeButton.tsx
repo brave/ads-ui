@@ -7,7 +7,6 @@ import {
 import _ from "lodash";
 import { useField, useFormikContext } from "formik";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
-import { LoadingButton } from "@mui/lab";
 import { validCreativeFields } from "@/user/library";
 import { Trans } from "@lingui/macro";
 import { useMutation } from "@apollo/client";
@@ -15,6 +14,7 @@ import {
   AdvertiserCreativesDocument,
   CreateCreativeDocument,
 } from "@/graphql-client/graphql";
+import { Button } from "@mui/material";
 
 interface Props {
   index: number;
@@ -56,7 +56,7 @@ export function CreateCreativeButton({ index }: Props) {
   );
 
   return (
-    <LoadingButton
+    <Button
       variant="contained"
       startIcon={<SaveIcon />}
       onClick={(e) => {
@@ -81,6 +81,6 @@ export function CreateCreativeButton({ index }: Props) {
       loading={loading}
     >
       <Trans>Save ad</Trans>
-    </LoadingButton>
+    </Button>
   );
 }

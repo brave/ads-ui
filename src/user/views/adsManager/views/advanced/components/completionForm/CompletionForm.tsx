@@ -1,8 +1,7 @@
 import { useState } from "react";
 
 import { useParams, Link as RouterLink } from "react-router-dom";
-import { Card, Container, Stack, Typography } from "@mui/material";
-import { LoadingButton } from "@mui/lab";
+import { Button, Card, Container, Stack, Typography } from "@mui/material";
 import { useValidatePaymentSession } from "@/checkout/hooks/useValidatePaymentSession";
 import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
 import { Trans } from "@lingui/macro";
@@ -52,7 +51,7 @@ export function CompletionForm() {
               </Trans>
             </Typography>
 
-            <LoadingButton
+            <Button
               variant="contained"
               size="large"
               sx={{ mt: 2, flexGrow: 0 }}
@@ -62,7 +61,7 @@ export function CompletionForm() {
               to="/user/main/campaigns"
             >
               <Trans>Continue</Trans>
-            </LoadingButton>
+            </Button>
           </>
         )}
 
@@ -126,7 +125,7 @@ function ValidateCampaignButton(props: {
       spacing={2}
     >
       {!props.clicked && (
-        <LoadingButton
+        <Button
           variant="contained"
           onClick={() => props.onClick()}
           href="https://www.surveymonkey.com/r/WSFWF5Y"
@@ -135,10 +134,10 @@ function ValidateCampaignButton(props: {
           disabled={props.loading}
         >
           <Trans>Take our survey!</Trans>
-        </LoadingButton>
+        </Button>
       )}
 
-      <LoadingButton
+      <Button
         variant={props.clicked ? "contained" : "outlined"}
         component={RouterLink}
         to="/user/main/campaign"
@@ -150,7 +149,7 @@ function ValidateCampaignButton(props: {
         ) : (
           <Trans>Skip survey and continue</Trans>
         )}
-      </LoadingButton>
+      </Button>
     </Stack>
   );
 }

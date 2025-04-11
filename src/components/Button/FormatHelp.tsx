@@ -6,11 +6,7 @@ export function FormatHelp() {
     <IconButton
       size="small"
       onClick={() =>
-        window.open(
-          "https://brave.com/brave-ads/ad-formats/",
-          "__blank",
-          "noopener",
-        )
+        window.open("https://brave.com/brave-ads/", "__blank", "noopener")
       }
     >
       <HelpIcon fontSize="small" />

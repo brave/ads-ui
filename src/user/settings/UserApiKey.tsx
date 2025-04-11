@@ -12,7 +12,6 @@ import {
   Link,
   Typography,
 } from "@mui/material";
-import { LoadingButton } from "@mui/lab";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { useGenerateApiKey } from "@/user/hooks/useGenerateApiKey";
 import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
@@ -112,13 +111,13 @@ export function UserApiKey() {
             {data ? <Trans>Close</Trans> : <Trans>Cancel</Trans>}
           </Button>
           {!data && (
-            <LoadingButton
+            <Button
               disabled={loading}
               loading={loading}
               onClick={() => generate(advertiser.id)}
             >
               <Trans>Generate</Trans>
-            </LoadingButton>
+            </Button>
           )}
         </DialogActions>
       </Dialog>

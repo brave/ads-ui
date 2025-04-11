@@ -6,8 +6,7 @@
     ":semanticCommitTypeAll(chore)",
     "npm:unpublishSafe",
     "helpers:pinGitHubActionDigests",
-    "group:allNonMajor",
-    "schedule:weekends"
+    "group:allNonMajor"
   ],
   "labels": ["dependencies"],
   "postUpdateOptions": ["pnpmDedupe"],
@@ -17,8 +16,12 @@
       "enabled": true
     },
     {
-      "matchDepTypes": ["overrides", "pnpm.overrides"],
-      "rangeStrategy": "replace"
+      "matchUpdateTypes": ["minor", "major", "patch"],
+      "schedule": ["* 0-8 * * *"]
+    },
+    {
+      "matchDepTypes": ["pnpm.overrides"],
+      "enabled": false
     }
   ]
 }

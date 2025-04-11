@@ -23,8 +23,7 @@ interface Props {
 export function NewKeyPairModal({ advertiser }: Props) {
   const [saving, setSaving] = useState(false);
   const { _ } = useLingui();
-  const publicKey = useRef<string | null>();
-  publicKey.current = advertiser.publicKey;
+  const publicKey = useRef<string | null>(advertiser.publicKey);
   const [newPublicKey, setNewPublicKey] = useState("");
   const [newPrivateKey, setNewPrivateKey] = useState("");
   const [privateKey, setPrivateKey] = useState("");
