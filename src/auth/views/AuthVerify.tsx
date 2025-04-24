@@ -4,7 +4,6 @@ import { Link as RouterLink, Switch, useHistory } from "react-router-dom";
 import { Alert, AlertTitle, Button, Typography } from "@mui/material";
 import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
 import { Trans } from "@lingui/macro";
-import { LoadingButton } from "@mui/lab";
 import logo from "@/assets/images/brave-icon-release-color.svg";
 
 export function AuthVerify() {
@@ -46,7 +45,7 @@ export function AuthVerify() {
           Click the continue button below to complete the login process.
         </Trans>
       </Typography>
-      <LoadingButton
+      <Button
         loading={loading}
         disabled={loading || !!error}
         onClick={() => verify(code, id)}
@@ -55,7 +54,7 @@ export function AuthVerify() {
         size="large"
       >
         <Trans>Continue</Trans>
-      </LoadingButton>
+      </Button>
       {!loading && error && (
         <Alert
           severity="error"

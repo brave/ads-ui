@@ -1,9 +1,8 @@
 import { useState } from "react";
 
-import { Link, TextField, Typography } from "@mui/material";
+import { Button, Link, TextField, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { useGetLink } from "@/auth/hooks/mutations/useGetLink";
-import { LoadingButton } from "@mui/lab";
 import { AuthContainer } from "@/auth/views/components/AuthContainer";
 import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
 import { msg, Trans } from "@lingui/macro";
@@ -80,7 +79,7 @@ export default function MagicLink() {
         helperText={error}
       />
 
-      <LoadingButton
+      <Button
         color="primary"
         size="large"
         variant="contained"
@@ -92,7 +91,7 @@ export default function MagicLink() {
         }}
       >
         <Trans>Get login link</Trans>
-      </LoadingButton>
+      </Button>
 
       <Link
         underline="none"
