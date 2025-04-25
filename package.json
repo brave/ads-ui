@@ -121,7 +121,8 @@
       "nanoid@<3.3.8": "^3.3.8",
       "esbuild@<=0.24.2": ">=0.25.0",
       "@babel/helpers@<7.26.10": ">=7.26.10",
-      "@babel/runtime@<7.26.10": ">=7.26.10"
+      "@babel/runtime@<7.26.10": ">=7.26.10",
+      "react-router@<7.5.2": ">=7.5.2"
     }
   },
   "packageManager": "pnpm@10.8.1+sha512.c50088ba998c67b8ca8c99df8a5e02fd2ae2e2b29aaf238feaa9e124248d3f48f9fb6db2424949ff901cffbb5e0f0cc1ad6aedb602cd29450751d11c35023677"
