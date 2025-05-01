@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@apollo/client": "3.13.7",
+    "@apollo/client": "3.13.8",
     "@emotion/react": "11.14.0",
     "@emotion/styled": "11.14.0",
     "@fontsource/inter": "5.2.5",
@@ -20,9 +20,9 @@
     "@lingui/react": "4.14.1",
     "@mui/icons-material": "6.4.11",
     "@mui/material": "6.4.11",
-    "@mui/x-data-grid": "7.28.3",
-    "@mui/x-date-pickers": "7.28.3",
-    "bignumber.js": "9.2.1",
+    "@mui/x-data-grid": "7.29.1",
+    "@mui/x-date-pickers": "7.29.1",
+    "bignumber.js": "9.3.0",
     "dayjs": "1.11.13",
     "formik": "2.4.6",
     "graphql": "16.10.0",
@@ -74,7 +74,7 @@
     "@types/react-router-dom": "5.3.3",
     "@types/react-window": "1.8.8",
     "@vitejs/plugin-basic-ssl": "2.0.0",
-    "@vitejs/plugin-react": "4.3.4",
+    "@vitejs/plugin-react": "4.4.1",
     "babel-plugin-macros": "3.1.0",
     "eslint": "8.57.1",
     "eslint-config-prettier": "10.1.2",
@@ -82,15 +82,15 @@
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "5.2.0",
     "husky": "9.1.7",
-    "knip": "5.50.4",
+    "knip": "5.50.5",
     "lint-staged": "15.5.1",
     "prettier": "3.5.3",
     "typescript": "5.8.3",
-    "typescript-eslint": "8.30.1",
-    "vite": "6.2.6",
+    "typescript-eslint": "8.31.0",
+    "vite": "6.3.4",
     "vite-plugin-checker": "0.9.1",
     "vite-tsconfig-paths": "5.1.4",
-    "vitest": "3.1.1"
+    "vitest": "3.1.2"
   },
   "engines": {
     "node": ">=20",
@@ -124,5 +124,5 @@
       "@babel/runtime@<7.26.10": ">=7.26.10"
     }
   },
-  "packageManager": "pnpm@10.8.1+sha512.c50088ba998c67b8ca8c99df8a5e02fd2ae2e2b29aaf238feaa9e124248d3f48f9fb6db2424949ff901cffbb5e0f0cc1ad6aedb602cd29450751d11c35023677"
+  "packageManager": "pnpm@10.9.0+sha512.0486e394640d3c1fb3c9d43d49cf92879ff74f8516959c235308f5a8f62e2e19528a65cdc2a3058f587cde71eba3d5b56327c8c33a97e4c4051ca48a10ca2d5f"
 }
