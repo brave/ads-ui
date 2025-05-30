@@ -639,6 +639,9 @@ msgstr "A data final é obrigatória"
 msgid "End date must be after start date"
 msgstr "A data final deve ser após a data de início"
 
+msgid "End date must be before 1 July 2025"
+msgstr ""
+
 msgid "End Time"
 msgstr "Horário de término"
 
@@ -1646,4 +1649,3 @@ msgstr "Sua campanha de teste será revisada por um Gerente de Conta. Adicione a
 
 msgid "Zip / Postal Code"
 msgstr "CEP"
-

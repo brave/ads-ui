@@ -1,7 +1,8 @@
 import { produce } from "immer";
 import {
   CampaignFormat,
-  CampaignPacingStrategies,
+  CampaignState,
+  PaymentType,
 } from "@/graphql-client/graphql";
 import { CampaignSchema } from "./CampaignSchema";
 import { describe } from "vitest";
@@ -42,15 +43,20 @@ const validCampaign = {
   currency: "GBP",
   billingType: "cpm",
   price: "6",
-  dailyCap: 1,
-  startAt: dayjs("2030-07-18").toDate(),
-  endAt: dayjs("2030-07-20").toDate(),
+  startAt: "2025-06-06",
+  endAt: "2025-06-28",
   format: CampaignFormat.PushNotification,
   geoTargets: [{ code: "a", name: "USA" }],
-  state: "any",
-  type: "paid",
-  pacingStrategy: CampaignPacingStrategies.ModelV1,
+  state: CampaignState.Draft,
+  isCreating: false,
+  paymentType: PaymentType.Stripe,
 };
+
+beforeAll(() => {
+  vi.useFakeTimers({
+    now: dayjs("2025-06-03").toDate(),
+  });
+});
 
 it("should pass on a valid object", () => {
   CampaignSchema(prices).validateSync(validCampaign);
@@ -58,7 +64,7 @@ it("should pass on a valid object", () => {
 
 it("should fail if the campaign start date is in past", () => {
   const nextState = produce(validCampaign, (draft) => {
-    draft.startAt = dayjs("2020-07-18").toDate();
+    draft.startAt = "2020-07-18";
   });
 
   expect(() =>
@@ -126,5 +132,45 @@ describe("pricing tests", () => {
     ).toThrowErrorMatchingInlineSnapshot(
       `[ValidationError: No cpc pricing available for Newsfeed, contact selfserve@brave.com for help]`,
     );
+  });
+
+  it("should allow push ads that end after 30 June 2025", () => {
+    const nextState = produce(validCampaign, (draft) => {
+      draft.startAt = "2025-06-05";
+      draft.endAt = "2025-07-20";
+      draft.budget = 2000;
+    });
+
+    CampaignSchema(prices).validateSync(nextState);
+  });
+
+  it("should prevent news ads that end after 30 June 2025", () => {
+    const nextState = produce(validCampaign, (draft) => {
+      draft.format = CampaignFormat.NewsDisplayAd;
+      draft.startAt = "2025-06-05";
+      draft.endAt = "2025-07-20";
+      draft.price = "20";
+      draft.budget = 2000;
+      draft.paymentType = PaymentType.BraveLedger;
+    });
+
+    expect(() =>
+      CampaignSchema(prices).validateSync(nextState),
+    ).toThrowErrorMatchingInlineSnapshot(
+      `[ValidationError: End date must be before 1 July 2025]`,
+    );
+  });
+
+  it("should permit news ads that end after 30 June 2025 if invoiced", () => {
+    const nextState = produce(validCampaign, (draft) => {
+      draft.format = CampaignFormat.NewsDisplayAd;
+      draft.startAt = "2025-06-05";
+      draft.endAt = "2025-07-20";
+      draft.price = "20";
+      draft.budget = 2000;
+      draft.paymentType = PaymentType.Netsuite;
+    });
+
+    CampaignSchema(prices).validateSync(nextState);
   });
 });
