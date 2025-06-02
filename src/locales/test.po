@@ -634,6 +634,9 @@ msgstr ""
 msgid "End date must be after start date"
 msgstr ""
 
+msgid "End date must be before 1 July 2025"
+msgstr ""
+
 msgid "End Time"
 msgstr ""
 
