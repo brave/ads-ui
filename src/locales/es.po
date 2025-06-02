@@ -639,6 +639,9 @@ msgstr "Se requiere fecha de finalización"
 msgid "End date must be after start date"
 msgstr "La fecha de finalización debe ser posterior a la fecha de inicio"
 
+msgid "End date must be before 1 July 2025"
+msgstr ""
+
 msgid "End Time"
 msgstr "Hora de finalización"
 
@@ -1646,4 +1649,3 @@ msgstr "Su campaña de prueba será revisada por un Gerente de Cuenta. Agregue c
 
 msgid "Zip / Postal Code"
 msgstr "Código postal"
-
