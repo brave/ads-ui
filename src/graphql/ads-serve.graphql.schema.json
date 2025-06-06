@@ -1,10 +1,12 @@
 {
   "__schema": {
     "queryType": {
-      "name": "Query"
+      "name": "Query",
+      "kind": "OBJECT"
     },
     "mutationType": {
-      "name": "Mutation"
+      "name": "Mutation",
+      "kind": "OBJECT"
     },
     "subscriptionType": null,
     "types": [
@@ -4650,6 +4652,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "campaignId",
+            "description": "only include changes for this campaign id and its adsets and creatives",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "createdAfter",
             "description": "exclude all changes whose time range is completely before this time",
             "type": {
@@ -4677,23 +4691,15 @@
             "name": "limit",
             "description": "limit the amount of results returned",
             "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
             },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "referenceId",
-            "description": "only include changes for this reference id",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
+            "defaultValue": "100",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -6795,7 +6801,7 @@
           },
           {
             "name": "payloadInPage",
-            "description": "populated for in_page creatives only",
+            "description": null,
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -6807,7 +6813,7 @@
           },
           {
             "name": "payloadInlineContent",
-            "description": "populated for inline_content creatives only",
+            "description": null,
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -6819,7 +6825,7 @@
           },
           {
             "name": "payloadNewTabPage",
-            "description": "populated for new_tab_page creatives only",
+            "description": null,
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -6831,7 +6837,7 @@
           },
           {
             "name": "payloadNotification",
-            "description": "populated for notification creatives only",
+            "description": null,
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -6843,7 +6849,7 @@
           },
           {
             "name": "payloadPromotedContent",
-            "description": "populated for promoted_content creatives only",
+            "description": null,
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -6854,8 +6860,20 @@
             "deprecationReason": null
           },
           {
+            "name": "payloadRichNewTabPage",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "RichNewTabPagePayload",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "payloadSearch",
-            "description": "populated for search SERP creatives only",
+            "description": null,
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -6867,7 +6885,7 @@
           },
           {
             "name": "payloadSearchHomepage",
-            "description": "populated for search homepage creatives only",
+            "description": null,
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -7103,6 +7121,18 @@
             "deprecationReason": null
           },
           {
+            "name": "payloadRichNewTabPage",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "RichNewTabPagePayloadInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "payloadSearch",
             "description": null,
             "type": {
@@ -7246,6 +7276,12 @@
           },
           {
             "name": "new_tab_page_all_v1",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "new_tab_page_all_v2",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -11664,22 +11700,6 @@
             "deprecationReason": null
           },
           {
-            "name": "segments",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "SegmentsQueryDTO",
-                "ofType": null
-              }
-            },
-            "isDeprecated": true,
-            "deprecationReason": "use adsManagerSegments or allSegments instead"
-          },
-          {
             "name": "user",
             "description": null,
             "args": [
@@ -12233,6 +12253,206 @@
               "ofType": {
                 "kind": "ENUM",
                 "name": "CampaignRejection",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "RichNewTabPagePayload",
+        "description": null,
+        "isOneOf": null,
+        "fields": [
+          {
+            "name": "assets",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description",
+            "description": "historically known as alt",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "entryPoint",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "targetUrl",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": "historically known as companyName",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "RichNewTabPagePayloadInput",
+        "description": null,
+        "isOneOf": false,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "assets",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description",
+            "description": "historically known as alt",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "entryPoint",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": "\"index.html\"",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "targetUrl",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": "historically known as companyName",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
                 "ofType": null
               }
             },
@@ -14145,42 +14365,6 @@
         ]
       },
       {
-        "kind": "OBJECT",
-        "name": "SegmentsQueryDTO",
-        "description": null,
-        "isOneOf": null,
-        "fields": [
-          {
-            "name": "data",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INTERFACE",
-                    "name": "SegmentsEntry",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "SCALAR",
         "name": "String",
         "description": "The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.",
@@ -15719,6 +15903,18 @@
             "deprecationReason": null
           },
           {
+            "name": "payloadRichNewTabPage",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "RichNewTabPagePayloadInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "payloadSearch",
             "description": null,
             "type": {
@@ -16158,26 +16354,6 @@
         "isOneOf": null,
         "fields": [
           {
-            "name": "conditionMatchers",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "ConditionMatchers",
-                  "ofType": null
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "focalPoint",
             "description": null,
             "args": [],
@@ -16222,26 +16398,6 @@
         "isOneOf": false,
         "fields": null,
         "inputFields": [
-          {
-            "name": "conditionMatchers",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "ConditionMatchersInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "focalPoint",
             "description": null,

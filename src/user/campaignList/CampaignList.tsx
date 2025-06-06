@@ -238,14 +238,18 @@ export function CampaignList({ advertiser }: Props) {
       rows={campaigns}
       columns={columns}
       density="compact"
-      autoHeight
+      sx={{
+        height: "auto",
+        borderStyle: "none",
+        backgroundColor: "background.paper",
+      }}
       disableRowSelectionOnClick
       checkboxSelection={advertiser?.selfServiceManageCampaign}
       slots={{ toolbar: Toolbar }}
-      sx={{ borderStyle: "none" }}
+      showToolbar
       onRowSelectionModelChange={(rowSelectionModel) => {
-        if (rowSelectionModel.length === 1) {
-          setSelectedCampaign(rowSelectionModel[0]);
+        if (rowSelectionModel.ids.size === 1) {
+          setSelectedCampaign(rowSelectionModel.ids.values().next().value);
         } else {
           setSelectedCampaign(undefined);
         }
