@@ -501,14 +501,14 @@ export type Change = {
 };
 
 export type ChangeFilter = {
+  /** only include changes for this campaign id and its adsets and creatives */
+  campaignId?: InputMaybe<Scalars['String']['input']>;
   /** exclude all changes whose time range is completely before this time */
   createdAfter?: InputMaybe<Scalars['DateTime']['input']>;
   /** include changes made by system user */
   includeSystemUser?: InputMaybe<Scalars['Boolean']['input']>;
   /** limit the amount of results returned */
-  limit?: InputMaybe<Scalars['Float']['input']>;
-  /** only include changes for this reference id */
-  referenceId?: InputMaybe<Scalars['String']['input']>;
+  limit?: Scalars['Float']['input'];
   /** only include changes for this set of reference ids */
   referenceIds?: InputMaybe<Array<Scalars['String']['input']>>;
 };
@@ -683,19 +683,13 @@ export type Creative = {
   name: Scalars['String']['output'];
   /** @deprecated use one of the specific payload types instead */
   payload: Payload;
-  /** populated for in_page creatives only */
   payloadInPage?: Maybe<InPagePayload>;
-  /** populated for inline_content creatives only */
   payloadInlineContent?: Maybe<InlineContentPayload>;
-  /** populated for new_tab_page creatives only */
   payloadNewTabPage?: Maybe<NewTabPagePayload>;
-  /** populated for notification creatives only */
   payloadNotification?: Maybe<NotificationPayload>;
-  /** populated for promoted_content creatives only */
   payloadPromotedContent?: Maybe<PromotedContentPayload>;
-  /** populated for search SERP creatives only */
+  payloadRichNewTabPage?: Maybe<RichNewTabPagePayload>;
   payloadSearch?: Maybe<SearchPayload>;
-  /** populated for search homepage creatives only */
   payloadSearchHomepage?: Maybe<SearchHomepagePayload>;
   queryStrings: Array<KeyValue>;
   startAt?: Maybe<Scalars['DateTime']['output']>;
@@ -724,6 +718,7 @@ export type CreativeInput = {
   payloadNewTabPage?: InputMaybe<NewTabPagePayloadInput>;
   payloadNotification?: InputMaybe<NotificationPayloadInput>;
   payloadPromotedContent?: InputMaybe<PromotedContentPayloadInput>;
+  payloadRichNewTabPage?: InputMaybe<RichNewTabPagePayloadInput>;
   payloadSearch?: InputMaybe<SearchPayloadInput>;
   payloadSearchHomepage?: InputMaybe<SearchHomepagePayloadInput>;
   queryStrings?: InputMaybe<Array<KeyValueInput>>;
@@ -743,6 +738,7 @@ export enum CreativeTypeCode {
   /** Used for news display ads */
   InlineContentAllV1 = 'inline_content_all_v1',
   NewTabPageAllV1 = 'new_tab_page_all_v1',
+  NewTabPageAllV2 = 'new_tab_page_all_v2',
   NotificationAllV1 = 'notification_all_v1',
   /** @deprecated Historic, no longer supported */
   PromotedContentAllV1 = 'promoted_content_all_v1',
@@ -1254,8 +1250,6 @@ export type Query = {
   registrations: Registrations;
   searchPreviews: Array<SearchPreview>;
   searchProspects: SearchProspects;
-  /** @deprecated use adsManagerSegments or allSegments instead */
-  segments: SegmentsQueryDto;
   user: User;
   users: Array<User>;
   validateTargetUrl: TargetUrlValidation;
@@ -1409,6 +1403,27 @@ export type RejectCampaignInput = {
   campaignId: Scalars['String']['input'];
   message?: InputMaybe<Scalars['String']['input']>;
   option: CampaignRejection;
+};
+
+export type RichNewTabPagePayload = {
+  __typename?: 'RichNewTabPagePayload';
+  assets: Array<Scalars['String']['output']>;
+  /** historically known as alt */
+  description: Scalars['String']['output'];
+  entryPoint: Scalars['String']['output'];
+  targetUrl: Scalars['String']['output'];
+  /** historically known as companyName */
+  title: Scalars['String']['output'];
+};
+
+export type RichNewTabPagePayloadInput = {
+  assets: Array<Scalars['String']['input']>;
+  /** historically known as alt */
+  description: Scalars['String']['input'];
+  entryPoint?: Scalars['String']['input'];
+  targetUrl: Scalars['String']['input'];
+  /** historically known as companyName */
+  title: Scalars['String']['input'];
 };
 
 export type SearchDomain = {
@@ -1612,11 +1627,6 @@ export type SegmentsEntry = {
   name: Scalars['String']['output'];
 };
 
-export type SegmentsQueryDto = {
-  __typename?: 'SegmentsQueryDTO';
-  data: Array<SegmentsEntry>;
-};
-
 export type TargetUrlValidation = {
   __typename?: 'TargetUrlValidation';
   isValid: Scalars['Boolean']['output'];
@@ -1743,6 +1753,7 @@ export type UpdateCreativeInput = {
   payloadNewTabPage?: InputMaybe<NewTabPagePayloadInput>;
   payloadNotification?: InputMaybe<NotificationPayloadInput>;
   payloadPromotedContent?: InputMaybe<PromotedContentPayloadInput>;
+  payloadRichNewTabPage?: InputMaybe<RichNewTabPagePayloadInput>;
   payloadSearch?: InputMaybe<SearchPayloadInput>;
   payloadSearchHomepage?: InputMaybe<SearchHomepagePayloadInput>;
   queryStrings?: InputMaybe<Array<KeyValueInput>>;
@@ -1792,13 +1803,11 @@ export type ValidationDetail = {
 
 export type Wallpaper = {
   __typename?: 'Wallpaper';
-  conditionMatchers?: Maybe<Array<ConditionMatchers>>;
   focalPoint: FocalPoint;
   imageUrl: Scalars['String']['output'];
 };
 
 export type WallpaperInput = {
-  conditionMatchers?: InputMaybe<Array<ConditionMatchersInput>>;
   focalPoint: FocalPointInput;
   imageUrl: Scalars['String']['input'];
 };

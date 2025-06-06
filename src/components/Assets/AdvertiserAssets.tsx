@@ -48,7 +48,7 @@ export function AdvertiserAssets() {
                 (a, b) => dayjs(b.createdAt).date() - dayjs(a.createdAt).date(),
               )
               .map((i, idx) => (
-                <Grid item xs="auto" key={idx}>
+                <Grid sx={{ width: "auto" }} key={idx}>
                   <GalleryItem image={i} />
                 </Grid>
               ))}

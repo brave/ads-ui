@@ -123,6 +123,7 @@ export function CreativeList() {
             hideFooterSelectedRowCount
             rowHeight={60}
             slots={{ toolbar: CustomToolbar }}
+            showToolbar
             sx={{ borderStyle: "none" }}
             pageSizeOptions={[10, 25, 50]}
             initialState={{
