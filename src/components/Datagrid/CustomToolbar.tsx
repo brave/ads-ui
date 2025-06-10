@@ -8,6 +8,7 @@ import {
   QuickFilterClear,
   ColumnsPanelTrigger,
   FilterPanelTrigger,
+  ToolbarButton,
 } from "@mui/x-data-grid";
 import {
   Box,
@@ -15,6 +16,7 @@ import {
   InputAdornment,
   Tooltip,
   Typography,
+  Badge,
 } from "@mui/material";
 import ViewColumnIcon from "@mui/icons-material/ViewColumn";
 import FilterListIcon from "@mui/icons-material/FilterList";
@@ -35,12 +37,48 @@ export function CustomToolbar({ children }: PropsWithChildren) {
         </ColumnsPanelTrigger>
       </Tooltip>
       <Tooltip title="Show filters">
-        <FilterPanelTrigger>
-          <FilterListIcon fontSize="small" />
-          <Typography variant="body2" sx={{ ml: 1 }}>
-            Filters
-          </Typography>
-        </FilterPanelTrigger>
+        <FilterPanelTrigger
+          render={(
+            {
+              onBlur,
+              onClick,
+              onFocus,
+              onMouseLeave,
+              onMouseOver,
+              onPointerUp,
+              onTouchEnd,
+              onTouchStart,
+              ref,
+            },
+            state,
+          ) => {
+            return (
+              <ToolbarButton
+                ref={ref as unknown as React.Ref<HTMLButtonElement>}
+                onBlur={onBlur}
+                onClick={onClick}
+                onFocus={onFocus}
+                onMouseLeave={onMouseLeave}
+                onMouseOver={onMouseOver}
+                onPointerUp={onPointerUp}
+                onTouchEnd={onTouchEnd}
+                onTouchStart={onTouchStart}
+                color="primary"
+              >
+                <Badge
+                  badgeContent={state.filterCount}
+                  color="primary"
+                  variant="dot"
+                >
+                  <FilterListIcon fontSize="small" />
+                  <Typography variant="body2" sx={{ ml: 1 }}>
+                    Filters
+                  </Typography>
+                </Badge>
+              </ToolbarButton>
+            );
+          }}
+        />
       </Tooltip>
 
       <Box flex={1} />
