@@ -9,7 +9,6 @@
     "group:allNonMajor"
   ],
   "labels": ["dependencies"],
-  "postUpdateOptions": ["pnpmDedupe"],
   "packageRules": [
     {
       "matchUpdateTypes": ["major"],
