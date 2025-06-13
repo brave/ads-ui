@@ -20,8 +20,8 @@
     "@lingui/react": "4.14.1",
     "@mui/icons-material": "7.1.1",
     "@mui/material": "7.1.1",
-    "@mui/x-data-grid": "8.5.0",
-    "@mui/x-date-pickers": "8.5.0",
+    "@mui/x-data-grid": "8.5.1",
+    "@mui/x-date-pickers": "8.5.1",
     "bignumber.js": "9.3.0",
     "dayjs": "1.11.13",
     "formik": "2.4.6",
@@ -60,8 +60,8 @@
   },
   "devDependencies": {
     "@eslint/js": "8.57.1",
-    "@graphql-codegen/cli": "5.0.6",
-    "@graphql-codegen/client-preset": "4.8.1",
+    "@graphql-codegen/cli": "5.0.7",
+    "@graphql-codegen/client-preset": "4.8.2",
     "@graphql-codegen/introspection": "4.0.3",
     "@graphql-eslint/eslint-plugin": "4.4.0",
     "@lingui/cli": "4.14.1",
@@ -70,7 +70,7 @@
     "@types/lodash": "4.17.17",
     "@types/papaparse": "5.3.16",
     "@types/react": "19.1.6",
-    "@types/react-dom": "19.1.5",
+    "@types/react-dom": "19.1.6",
     "@types/react-router-dom": "5.3.3",
     "@types/react-window": "1.8.8",
     "@vitejs/plugin-basic-ssl": "2.0.0",
@@ -82,7 +82,7 @@
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "5.2.0",
     "husky": "9.1.7",
-    "knip": "5.59.1",
+    "knip": "5.60.2",
     "lint-staged": "15.5.2",
     "prettier": "3.5.3",
     "typescript": "5.8.3",
@@ -90,7 +90,7 @@
     "vite": "6.3.5",
     "vite-plugin-checker": "0.9.3",
     "vite-tsconfig-paths": "5.1.4",
-    "vitest": "3.2.0"
+    "vitest": "3.2.2"
   },
   "engines": {
     "node": ">=20",
