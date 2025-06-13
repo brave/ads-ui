@@ -141,12 +141,6 @@ export const CampaignSchema = (prices: AdvertiserPrice[]) =>
                   t`Observation window must be 1, 7, or 30 days.`,
                 )
                 .required(t`Observation window required.`),
-              type: string()
-                .oneOf(
-                  ["postclick", "postview"],
-                  t`Conversion type must be Post Click`,
-                )
-                .required(t`Conversion type required.`),
             })
             .notRequired()
             .default(undefined),

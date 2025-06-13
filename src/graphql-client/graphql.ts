@@ -329,11 +329,14 @@ export type Campaign = {
   pacingIndex?: Maybe<Scalars['Float']['output']>;
   pacingOverride: Scalars['Boolean']['output'];
   pacingStrategy: CampaignPacingStrategies;
+  parent?: Maybe<Campaign>;
   passThroughRate: Scalars['Float']['output'];
   paymentType: PaymentType;
   payments?: Maybe<Array<CampaignPaymentLedgerEntry>>;
   performance: PerformanceResults;
   permitNonFamilyFriendly: Scalars['Boolean']['output'];
+  postSurvey?: Maybe<Campaign>;
+  preSurvey?: Maybe<Campaign>;
   priority: Scalars['Float']['output'];
   queryStrings: Array<KeyValue>;
   radomPaymentId?: Maybe<Scalars['String']['output']>;
@@ -634,6 +637,8 @@ export type CreateCampaignInput = {
   pacingStrategy?: InputMaybe<CampaignPacingStrategies>;
   paymentType?: InputMaybe<PaymentType>;
   permitNonFamilyFriendly?: InputMaybe<Scalars['Boolean']['input']>;
+  postSurveyCampaignId?: InputMaybe<Scalars['String']['input']>;
+  preSurveyCampaignId?: InputMaybe<Scalars['String']['input']>;
   priority?: InputMaybe<Scalars['Float']['input']>;
   queryStrings?: InputMaybe<Array<KeyValueInput>>;
   source: Scalars['String']['input'];
@@ -651,7 +656,6 @@ export type CreateConversionInput = {
   extractExternalId?: InputMaybe<Scalars['Boolean']['input']>;
   observationWindow: Scalars['Float']['input'];
   trailingAsteriskNotRequired?: InputMaybe<Scalars['Boolean']['input']>;
-  type: Scalars['String']['input'];
   urlPattern: Scalars['String']['input'];
 };
 
@@ -1728,6 +1732,8 @@ export type UpdateCampaignInput = {
   passThroughRate?: InputMaybe<Scalars['Float']['input']>;
   paymentType?: InputMaybe<PaymentType>;
   permitNonFamilyFriendly?: InputMaybe<Scalars['Boolean']['input']>;
+  postSurveyCampaignId?: InputMaybe<Scalars['String']['input']>;
+  preSurveyCampaignId?: InputMaybe<Scalars['String']['input']>;
   priority?: InputMaybe<Scalars['Float']['input']>;
   queryStrings?: InputMaybe<Array<KeyValueInput>>;
   startAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1740,7 +1746,6 @@ export type UpdateConversionsInput = {
   id?: InputMaybe<Scalars['String']['input']>;
   observationWindow?: InputMaybe<Scalars['Float']['input']>;
   trailingAsteriskNotRequired?: InputMaybe<Scalars['Boolean']['input']>;
-  type?: InputMaybe<Scalars['String']['input']>;
   urlPattern?: InputMaybe<Scalars['String']['input']>;
 };
 
