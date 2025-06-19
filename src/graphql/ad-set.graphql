@@ -17,7 +17,6 @@ fragment AdSet on AdSet {
   }
   conversions {
     id
-    type
     urlPattern
     observationWindow
   }

@@ -55,7 +55,6 @@ export type AdSetForm = {
 };
 
 export type Conversion = {
-  type: string;
   observationWindow: number;
   urlPattern: string;
 };
@@ -79,7 +78,6 @@ export type Creative = CreativeInputWithType & {
 };
 
 export const initialConversion: Conversion = {
-  type: "postclick",
   urlPattern: "",
   observationWindow: 30,
 };

@@ -69,7 +69,6 @@ function transformConversion(conv?: Conversion) {
     {
       observationWindow: conv.observationWindow * 1.0,
       urlPattern: conv.urlPattern,
-      type: conv.type,
     },
   ];
 }
@@ -97,7 +96,6 @@ export function editCampaignValues(
         state: adSet.state,
         conversion: (adSet.conversions ?? []).map((c) => ({
           id: c.id,
-          type: c.type,
           observationWindow: c.observationWindow,
           urlPattern: c.urlPattern,
         }))[0],
