@@ -67,7 +67,7 @@
     "@lingui/cli": "4.14.1",
     "@lingui/vite-plugin": "4.14.1",
     "@parcel/watcher": "2.5.1",
-    "@types/lodash": "4.17.17",
+    "@types/lodash": "4.17.18",
     "@types/papaparse": "5.3.16",
     "@types/react": "19.1.8",
     "@types/react-dom": "19.1.6",
@@ -90,7 +90,7 @@
     "vite": "6.3.5",
     "vite-plugin-checker": "0.9.3",
     "vite-tsconfig-paths": "5.1.4",
-    "vitest": "3.2.3"
+    "vitest": "3.2.4"
   },
   "engines": {
     "node": ">=20",
