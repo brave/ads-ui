@@ -16,7 +16,6 @@ import { Navbar } from "@/components/Navigation/Navbar";
 import { CampaignView } from "@/user/views/user/CampaignView";
 import { Profile } from "@/user/views/user/Profile";
 import { FilterContext } from "@/state/context";
-import { AdvertiserAssets } from "@/components/Assets/AdvertiserAssets";
 import { CreativeList } from "@/components/Creatives/CreativeList";
 import { CreativeForm } from "@/components/Creatives/CreativeForm";
 import { ProtectedRoute } from "@/components/Route/ProtectedRoute";
@@ -156,11 +155,6 @@ export default function User() {
                   path="/user/main/campaign"
                   authedComponent={CampaignView}
                   unauthedComponent={AdvertiserDetailsForm}
-                />
-
-                <ProtectedRoute
-                  path="/user/main/ads/assets"
-                  authedComponent={AdvertiserAssets}
                 />
 
                 <ProtectedRoute

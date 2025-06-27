@@ -61,7 +61,7 @@ export function BasicAttentionTokenLandingPage({ reroute }: Props) {
             <Trans>
               *Limited time only. Available to new advertisers, and those who
               ran campaigns prior to September 30, 2023. Eligible for Push
-              Notification and Newsfeed ads.
+              Notification ads.
             </Trans>
           </Typography>
 

@@ -26,7 +26,7 @@ export function transformNewForm(form: CampaignForm): CreateCampaignInput {
   return {
     currency: form.currency,
     externalId: "",
-    dailyCap: dailyLimit(form.format),
+    dailyCap: 4,
     endAt: form.endAt,
     geoTargets: form.geoTargets.map((g) => ({ code: g.code, name: g.name })),
     name: form.name,
@@ -283,15 +283,11 @@ function transformAdSet(
     name: adSet.name,
     price: transformPrice(campaign),
     billingType: campaign.billingType,
-    perDay: dailyLimit(campaign.format),
+    perDay: 4,
     segments: adSet.segments.map((s) => ({ code: s.code, name: s.name })),
     oses: adSet.oses.map((s) => ({ code: s.code, name: s.name })),
     totalMax: campaign.format === CampaignFormat.PushNotification ? 28 : 60,
   };
-}
-
-function dailyLimit(format: CampaignFormat) {
-  return format === CampaignFormat.NewsDisplayAd ? 6 : 4;
 }
 
 function uiTextForCreativeType(creativeType: string): string {

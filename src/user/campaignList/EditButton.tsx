@@ -16,9 +16,7 @@ export const EditButton = (props: {
   const canEdit =
     campaign &&
     campaign.source === CampaignSource.SelfServe &&
-    [CampaignFormat.PushNotification, CampaignFormat.NewsDisplayAd].includes(
-      campaign.format,
-    ) &&
+    campaign.format === CampaignFormat.PushNotification &&
     campaign.state !== "completed";
   const campaignName = campaign?.name;
 

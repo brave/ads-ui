@@ -34,27 +34,10 @@ query AdvertiserCampaigns($id: String!, $filter: AdvertiserCampaignFilter) {
   }
 }
 
-fragment AdvertiserImage on AdvertiserImage {
-  name
-  imageUrl
-  format
-  id
-  createdAt
-}
-
 fragment AdvertiserPrice on AdvertiserPrice {
   billingModelPrice
   billingType
   format
-}
-
-query AdvertiserImages($id: String!) {
-  advertiser(id: $id) {
-    id
-    images {
-      ...AdvertiserImage
-    }
-  }
 }
 
 query AdvertiserPrices($id: String!) {
@@ -70,12 +53,5 @@ query AdvertiserBillingAddress($id: String!) {
   advertiser(id: $id) {
     id
     ...AdvertiserBillingAddress
-  }
-}
-
-mutation UploadAdvertiserImage($input: CreateAdvertiserImageInput!) {
-  createAdvertiserImage(createImageInput: $input) {
-    id
-    name
   }
 }

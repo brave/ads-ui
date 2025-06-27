@@ -9,17 +9,17 @@ import { Link as RouterLink } from "react-router-dom";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { CreativeStatusSwitch } from "@/components/Creatives/CreativeStatusSwitch";
 import { CustomToolbar } from "@/components/Datagrid/CustomToolbar";
-import { RouteSelectionButton } from "@/components/Route/RouteSelectionButton";
 import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
-import { msg } from "@lingui/macro";
-import { Trans, useLingui } from "@lingui/react";
+import { useLingui, Trans as ReactTrans } from "@lingui/react";
+import { Trans, msg } from "@lingui/macro";
+
 import { MessageDescriptor } from "@lingui/core";
 import { useQuery } from "@apollo/client";
 import {
   AdvertiserCreativesDocument,
   CreativeFragment,
 } from "@/graphql-client/graphql";
-const ALLOWED_TYPES = ["notification_all_v1", "inline_content_all_v1"];
+const ALLOWED_TYPES = ["notification_all_v1"];
 
 export function CreativeList() {
   useTrackMatomoPageView({ documentTitle: "Advertiser Creatives" });
@@ -96,20 +96,10 @@ export function CreativeList() {
         />
       )}
       <CardContainer
-        header={
-          <RouteSelectionButton
-            routes={[
-              { label: msg`Ads`, value: "ads" },
-              { label: msg`Images`, value: "assets" },
-            ]}
-          />
-        }
-        useTypography={false}
+        header={<Trans>Ads</Trans>}
         sx={{
           flexGrow: 1,
           overflowX: "auto",
-          mr: 1,
-          mt: 0,
         }}
       >
         <Box>
@@ -157,19 +147,6 @@ function CreativePayloadList(props: { creative: CreativeFragment }) {
         />
       );
       break;
-    case "inline_content_all_v1":
-      listItems = (
-        <ListItems
-          items={[
-            { primary: msg`Title`, secondary: c.payloadInlineContent?.title },
-            {
-              primary: msg`Call To Action`,
-              secondary: c.payloadInlineContent?.ctaText,
-            },
-          ]}
-        />
-      );
-      break;
     default:
       listItems = null;
   }
@@ -192,7 +169,7 @@ const ListItems = (props: {
         paddingRight={1}
         fontWeight={600}
       >
-        <Trans id={i.primary.id} />
+        <ReactTrans id={i.primary.id} />
       </Typography>
       <Typography variant="body1" component="span">
         {i.secondary}

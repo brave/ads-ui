@@ -3,18 +3,12 @@ import { useContext, useEffect } from "react";
 import { BoxContainer } from "@/components/Box/BoxContainer";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import { useField, useFormikContext } from "formik";
-import {
-  CampaignForm,
-  Creative,
-  initialCreative,
-} from "@/user/views/adsManager/types";
+import { useField } from "formik";
+import { Creative, initialCreative } from "@/user/views/adsManager/types";
 import { FormContext } from "@/state/context";
-import { CampaignFormat } from "@/graphql-client/graphql";
 import { Trans } from "@lingui/macro";
 
 export function NewAd() {
-  const { values } = useFormikContext<CampaignForm>();
   const [, , newCreative] = useField<Creative | undefined>("newCreative");
   const [, meta, helper] = useField<boolean>("isCreating");
   const { setIsShowingAds } = useContext(FormContext);
@@ -34,12 +28,8 @@ export function NewAd() {
     >
       <Box
         component={Button}
-        height={
-          values.format !== CampaignFormat.NewsDisplayAd ? "80px" : "200px"
-        }
-        width={
-          values.format !== CampaignFormat.NewsDisplayAd ? "350px" : "300px"
-        }
+        height={"80px"}
+        width={"350px"}
         borderRadius="13px"
         border="1px solid #e2e2e2"
         onClick={() => {

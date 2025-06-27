@@ -71,9 +71,7 @@ export function CloneCampaign({ campaign, disabled }: Props) {
   const canClone =
     campaign &&
     campaign.source === CampaignSource.SelfServe &&
-    [CampaignFormat.PushNotification, CampaignFormat.NewsDisplayAd].includes(
-      campaign.format,
-    );
+    [CampaignFormat.PushNotification].includes(campaign.format);
   const campaignName = campaign?.name;
   return (
     <Box>

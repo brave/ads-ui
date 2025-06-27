@@ -16,7 +16,7 @@ import {
   TrailingAsteriskRegex,
 } from "@/validation/regex";
 import { CreativeSchema } from "@/validation/CreativeSchema";
-import { CampaignFormat, PaymentType } from "@/graphql-client/graphql";
+import { CampaignFormat } from "@/graphql-client/graphql";
 import BigNumber from "bignumber.js";
 import { AdvertiserPrice } from "@/user/hooks/useAdvertiserWithPrices";
 import { Billing } from "@/user/views/adsManager/types";
@@ -25,7 +25,6 @@ import {
   uiLabelsForCampaignFormat,
 } from "@/util/campaign";
 import { t } from "@lingui/macro";
-import dayjs from "dayjs";
 
 export const MIN_PER_CAMPAIGN = 500;
 export const CampaignSchema = (prices: AdvertiserPrice[]) =>
@@ -66,16 +65,7 @@ export const CampaignSchema = (prices: AdvertiserPrice[]) =>
     }),
     endAt: date()
       .required(t`End date is required`)
-      .min(ref("startAt"), t`End date must be after start date`)
-      .when(["format", "paymentType"], {
-        is: (f: CampaignFormat, p: PaymentType) =>
-          f === CampaignFormat.NewsDisplayAd && p !== PaymentType.Netsuite,
-        then: (schema) =>
-          schema.max(
-            dayjs("2025-07-01").toDate(),
-            t`End date must be before 1 July 2025`,
-          ),
-      }),
+      .min(ref("startAt"), t`End date must be after start date`),
     geoTargets: array()
       .of(
         object().shape({

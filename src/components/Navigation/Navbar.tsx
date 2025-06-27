@@ -4,7 +4,6 @@ import { DraftMenu } from "@/components/Navigation/DraftMenu";
 import ads from "@/assets/images/logo.svg";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { NewCampaignButton } from "@/components/Navigation/NewCampaignButton";
-import { UploadImage } from "@/components/Assets/UploadImage";
 import { useHistory } from "react-router-dom";
 import { NewCreativeButton } from "@/components/Navigation/NewCreativeButton";
 import { AccountMenu } from "@/components/Navigation/AccountMenu";
@@ -17,10 +16,6 @@ export function Navbar() {
     {
       route: "/user/main/campaign",
       component: <NewCampaignButton />,
-    },
-    {
-      route: "/user/main/ads/assets",
-      component: <UploadImage />,
     },
     {
       route: "/user/main/ads",

@@ -143,34 +143,4 @@ describe("pricing tests", () => {
 
     CampaignSchema(prices).validateSync(nextState);
   });
-
-  it("should prevent news ads that end after 30 June 2025", () => {
-    const nextState = produce(validCampaign, (draft) => {
-      draft.format = CampaignFormat.NewsDisplayAd;
-      draft.startAt = "2025-06-05";
-      draft.endAt = "2025-07-20";
-      draft.price = "20";
-      draft.budget = 2000;
-      draft.paymentType = PaymentType.BraveLedger;
-    });
-
-    expect(() =>
-      CampaignSchema(prices).validateSync(nextState),
-    ).toThrowErrorMatchingInlineSnapshot(
-      `[ValidationError: End date must be before 1 July 2025]`,
-    );
-  });
-
-  it("should permit news ads that end after 30 June 2025 if invoiced", () => {
-    const nextState = produce(validCampaign, (draft) => {
-      draft.format = CampaignFormat.NewsDisplayAd;
-      draft.startAt = "2025-06-05";
-      draft.endAt = "2025-07-20";
-      draft.price = "20";
-      draft.budget = 2000;
-      draft.paymentType = PaymentType.Netsuite;
-    });
-
-    CampaignSchema(prices).validateSync(nextState);
-  });
 });

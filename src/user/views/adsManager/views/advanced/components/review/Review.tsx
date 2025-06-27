@@ -20,7 +20,6 @@ export function Review() {
           key={`adSetReview-${adSetIdx}`}
           idx={adSetIdx}
           adSet={adSet}
-          format={values.format}
           errors={errors.adSets?.[adSetIdx]}
         />
       ))}

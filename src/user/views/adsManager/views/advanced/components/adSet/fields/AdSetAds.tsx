@@ -8,7 +8,6 @@ import { AdsExistingAd } from "@/user/ads/AdsExistingAd";
 import { ShowAdsButton } from "@/user/ads/ShowAdsButton";
 import { CampaignFormat } from "@/graphql-client/graphql";
 import { NotificationAd } from "@/user/ads/NotificationAd";
-import { InlineContentAd } from "@/user/ads/InlineContentAd";
 import { modalStyles } from "@/theme";
 import { LearnMoreButton } from "@/components/Button/LearnMoreButton";
 import { Trans } from "@lingui/macro";
@@ -57,19 +56,11 @@ function CampaignFormatSpecificModal(props: {
   const name = "newCreative";
 
   let adComponent;
-  if (props.format === CampaignFormat.PushNotification)
+  if (props.format === CampaignFormat.PushNotification) {
     adComponent = (
       <NotificationAd name={name} useContainer={false} index={props.index} />
     );
-  else if (props.format === CampaignFormat.NewsDisplayAd)
-    adComponent = (
-      <InlineContentAd
-        name={name}
-        useContainer={false}
-        alignPreview="row"
-        index={props.index}
-      />
-    );
+  }
 
   return (
     <Modal
