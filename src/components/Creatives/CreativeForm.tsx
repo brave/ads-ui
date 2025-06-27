@@ -7,7 +7,6 @@ import { CreativeSchema } from "@/validation/CreativeSchema";
 import MiniSideBar from "@/components/Drawer/MiniSideBar";
 import { CreativeType } from "@/components/Creatives/CreativeType";
 import { NotificationAd } from "@/user/ads/NotificationAd";
-import { InlineContentAd } from "@/user/ads/InlineContentAd";
 import { SubmitPanel } from "@/components/Button/SubmitPanel";
 import { useGetCreativeDetails } from "@/components/Creatives/hooks/useGetCreativeDetails";
 import { useSubmitCreative } from "@/components/Creatives/hooks/useSubmitCreative";
@@ -121,8 +120,6 @@ const CreativeTypeSpecificFields = ({
   creativeType?: string;
 }) => {
   if (creativeType === "notification_all_v1") return <NotificationAd />;
-  if (creativeType === "inline_content_all_v1")
-    return <InlineContentAd alignPreview="row" />;
 
   return null;
 };

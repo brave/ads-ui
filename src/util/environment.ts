@@ -18,22 +18,6 @@ export function getEnvironment(): Environment {
   return Environment.LOCAL;
 }
 
-interface EnvConfig {
-  pcdnHost: string;
-}
-
-export function getEnvConfig(): EnvConfig {
-  if (getEnvironment() === Environment.PRODUCTION) {
-    return {
-      pcdnHost: "pcdn.brave.com",
-    };
-  }
-
-  return {
-    pcdnHost: "pcdn.bravesoftware.com",
-  };
-}
-
 export function buildAdServerEndpoint(suffix: string): string {
   return `${import.meta.env.REACT_APP_SERVER_ADDRESS}${suffix}`;
 }
