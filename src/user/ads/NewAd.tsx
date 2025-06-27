@@ -28,8 +28,8 @@ export function NewAd() {
     >
       <Box
         component={Button}
-        height={"200px"}
-        width={"300px"}
+        height={"80px"}
+        width={"350px"}
         borderRadius="13px"
         border="1px solid #e2e2e2"
         onClick={() => {
