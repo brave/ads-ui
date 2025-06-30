@@ -119,10 +119,7 @@ export function AdsExistingAd({ index }: Props) {
           />
         </Box>
 
-        {[
-          CampaignFormat.PushNotification,
-          CampaignFormat.NewsDisplayAd,
-        ].includes(values.format) && (
+        {[CampaignFormat.PushNotification].includes(values.format) && (
           <CreativeSelect
             options={(options ?? []).map((o) => ({
               ...o,

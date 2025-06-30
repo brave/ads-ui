@@ -9,7 +9,6 @@ import { FormikErrors } from "formik";
 import { ConversionDisplay } from "@/components/Conversion/ConversionDisplay";
 import { ReviewField } from "./ReviewField";
 import { ReviewContainer } from "@/user/views/adsManager/views/advanced/components/review/components/ReviewContainer";
-import { CampaignFormat } from "@/graphql-client/graphql";
 import { CreativeSpecificPreview } from "@/components/Creatives/CreativeSpecificPreview";
 import { segmentNameWithNoDash } from "@/util/segment";
 import { msg } from "@lingui/macro";
@@ -18,11 +17,10 @@ import { useLingui } from "@lingui/react";
 interface Props {
   idx: number;
   adSet: AdSetForm;
-  format: CampaignFormat;
   errors?: string | FormikErrors<AdSetForm>;
 }
 
-export function AdSetReview({ adSet, idx, errors, format }: Props) {
+export function AdSetReview({ adSet, idx, errors }: Props) {
   const included = adSet.creatives.filter((c) => c.included);
   const { _ } = useLingui();
   const hasErrors = !!errors;
@@ -48,13 +46,11 @@ export function AdSetReview({ adSet, idx, errors, format }: Props) {
         value={adSet.name || adSetPos}
         error={hasErrors ? adSetError?.name : ""}
       />
-      {format !== CampaignFormat.NewsDisplayAd && (
-        <ReviewField
-          caption={msg`Audiences`}
-          value={segmentValue(mapToString(adSet.segments))}
-          error={hasErrors ? (adSetError?.segments as string) : ""}
-        />
-      )}
+      <ReviewField
+        caption={msg`Audiences`}
+        value={segmentValue(mapToString(adSet.segments))}
+        error={hasErrors ? (adSetError?.segments as string) : ""}
+      />
       <ReviewField
         caption={msg`Platforms`}
         value={mapToString(adSet.oses)}
