@@ -93,7 +93,14 @@ export function EditCampaign() {
             `/user/main/complete/edit?referenceId=${data.adsManagerUpdateCampaign.id}`,
           );
         } else {
-          void createPaymentSession(data.adsManagerUpdateCampaign.id, payment);
+          if (payment === PaymentType.BraveLedger) {
+            void createPaymentSession(data.adsManagerUpdateCampaign.id);
+          } else {
+            void createPaymentSession(
+              data.adsManagerUpdateCampaign.id,
+              payment,
+            );
+          }
         }
       },
       onError() {

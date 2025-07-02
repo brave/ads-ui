@@ -8,7 +8,6 @@ import { PropsWithChildren, useContext, useState } from "react";
 import { FormContext } from "@/state/context";
 import { useFormikContext } from "formik";
 import { CampaignFormat } from "@/graphql-client/graphql";
-import { ImagePreview } from "@/components/Assets/ImagePreview";
 import { Trans } from "@lingui/macro";
 import dayjs from "dayjs";
 
@@ -131,15 +130,6 @@ const CreativeType = (props: {
       <NotificationPreview
         title={co.payloadNotification?.title}
         body={co.payloadNotification?.body}
-        selected={props.selected}
-      />
-    );
-  } else if (props.format === CampaignFormat.NewsDisplayAd) {
-    return (
-      <ImagePreview
-        url={co.payloadInlineContent?.imageUrl ?? ""}
-        width={300}
-        height={200}
         selected={props.selected}
       />
     );

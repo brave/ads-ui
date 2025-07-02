@@ -13,10 +13,6 @@ export function CreativeType(props: { allowTypeChange?: boolean }) {
       value: "notification_all_v1",
       label: msg`Notification ads`,
     },
-    {
-      value: "inline_content_all_v1",
-      label: msg`Newsfeed ads`,
-    },
   ];
 
   return (

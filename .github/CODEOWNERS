@@ -8,10 +8,10 @@
 * @brave/ads-dev
 
 # to reduce renovate spam: just send these to the core team
-/.github/workflows @tackley
-.node-version @tackley
+/.github/workflows @tackley @CodePeters
+.node-version @tackley @CodePeters
 
-package*.json @tackley
-pnpm-lock.yaml @tackley
+package*.json @tackley @CodePeters
+pnpm-lock.yaml @tackley @CodePeters
 
 

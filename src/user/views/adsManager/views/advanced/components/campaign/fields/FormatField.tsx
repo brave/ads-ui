@@ -46,11 +46,6 @@ export function FormatField({ prices }: PriceProps) {
           prices={prices}
           name={msg`Notification ads`}
         />
-        <FormatItemButton
-          format={CampaignFormat.NewsDisplayAd}
-          prices={prices}
-          name={msg`Newsfeed ads`}
-        />
         <ProspectButton
           name={_(msg`New tab takeovers`)}
           salesLink="https://contact.ads.brave.com/"
@@ -83,7 +78,6 @@ const FormatItemButton = (
         await billing.setValue(formatPrices[0].billingType);
       }}
       sx={{
-        width: "25%",
         p: 2,
         borderRadius: "16px",
         border: "1px solid #7c91ff",
@@ -100,7 +94,7 @@ const ProspectButton = (props: { name: string; salesLink: string }) => {
   return (
     <ListItem
       sx={{
-        width: "25%",
+        width: "33%",
         borderRadius: "16px",
         border: "1px solid #CFCFCF",
         backgroundColor: "#EBEBEB",
