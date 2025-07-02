@@ -84,7 +84,7 @@
     "husky": "9.1.7",
     "knip": "5.61.2",
     "lint-staged": "16.1.2",
-    "prettier": "3.6.0",
+    "prettier": "3.6.1",
     "typescript": "5.8.3",
     "typescript-eslint": "8.35.0",
     "vite": "6.3.5",
@@ -126,5 +126,5 @@
       "brace-expansion@>=2.0.0 <=2.0.1": "^2.0.2"
     }
   },
-  "packageManager": "pnpm@10.12.2+sha512.a32540185b964ee30bb4e979e405adc6af59226b438ee4cc19f9e8773667a66d302f5bfee60a39d3cac69e35e4b96e708a71dd002b7e9359c4112a1722ac323f"
+  "packageManager": "pnpm@10.12.3+sha512.467df2c586056165580ad6dfb54ceaad94c5a30f80893ebdec5a44c5aa73c205ae4a5bb9d5ed6bb84ea7c249ece786642bbb49d06a307df218d03da41c317417"
 }
