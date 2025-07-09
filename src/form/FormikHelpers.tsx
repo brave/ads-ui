@@ -246,7 +246,8 @@ export const FormikSelect = (props: FormikSelectProps) => {
       <Select
         error={isError}
         label={labelOrError}
-        {...field}
+        name={field.name}
+        onBlur={field.onBlur}
         value={field.value ?? ""}
         onChange={handleChange}
       >
