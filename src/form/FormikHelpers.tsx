@@ -207,7 +207,7 @@ export function useIsEdit() {
 interface FormikSelectProps {
   name: string;
   label: string;
-  options: Array<{ label: string; value: string | null }>;
+  options: Array<{ label: string; value: string }>;
   disabled?: boolean;
   sx?: SxProps<Theme> | undefined;
   margin?: "normal" | "dense" | "none" | undefined;
@@ -229,30 +229,15 @@ export const FormikSelect = (props: FormikSelectProps) => {
   const [field, meta] = useField(props);
   const isError = meta.touched && Boolean(meta.error);
   const labelOrError = props.inlineError && isError ? meta.error : props.label;
-
-  const handleChange = (event: any) => {
-    const value = event.target.value;
-    // Convert empty string back to null for the actual field value
-    const actualValue = value === "" ? null : value;
-    field.onChange({ target: { name: field.name, value: actualValue } });
-  };
-
   return (
     <FormControl
       fullWidth={props.fullWidth !== undefined ? props.fullWidth : true}
       {...props}
     >
       <InputLabel id={`select-label-${props.name}`}>{labelOrError}</InputLabel>
-      <Select
-        error={isError}
-        label={labelOrError}
-        name={field.name}
-        onBlur={field.onBlur}
-        value={field.value ?? ""}
-        onChange={handleChange}
-      >
+      <Select error={isError} label={labelOrError} {...field}>
         {props.options.map((opt) => (
-          <MenuItem key={opt.value} value={opt.value ?? ""}>
+          <MenuItem key={opt.value} value={opt.value}>
             {opt.label}
           </MenuItem>
         ))}

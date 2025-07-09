@@ -103,7 +103,7 @@ export function VerticalPicker(props: { name: string }) {
         },
         {
           label: _(msg`Other`),
-          value: null,
+          value: "Other",
         },
       ]}
     />
