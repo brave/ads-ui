@@ -204,6 +204,7 @@ export type Advertiser = {
   state: Scalars['String']['output'];
   url?: Maybe<Scalars['String']['output']>;
   users: Array<User>;
+  vertical?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -609,6 +610,7 @@ export type CreateAdvertiserInput = {
   selfServiceManageCampaign?: InputMaybe<Scalars['Boolean']['input']>;
   state?: InputMaybe<Scalars['String']['input']>;
   url?: InputMaybe<Scalars['String']['input']>;
+  vertical?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type CreateCampaignInput = {
@@ -1702,6 +1704,7 @@ export type UpdateAdvertiserInput = {
   state?: InputMaybe<Scalars['String']['input']>;
   url?: InputMaybe<Scalars['String']['input']>;
   users?: InputMaybe<Array<UpdateUserInput>>;
+  vertical?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UpdateCampaignInput = {
