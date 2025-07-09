@@ -153,8 +153,8 @@ importers:
         specifier: 2.5.1
         version: 2.5.1
       '@types/lodash':
-        specifier: 4.17.19
-        version: 4.17.19
+        specifier: 4.17.20
+        version: 4.17.20
       '@types/papaparse':
         specifier: 5.3.16
         version: 5.3.16
@@ -171,8 +171,8 @@ importers:
         specifier: 1.8.8
         version: 1.8.8
       '@vitejs/plugin-basic-ssl':
-        specifier: 2.0.0
-        version: 2.0.0(vite@7.0.0(@types/node@20.13.0)(jiti@2.4.2)(yaml@2.8.0))
+        specifier: 2.1.0
+        version: 2.1.0(vite@7.0.0(@types/node@20.13.0)(jiti@2.4.2)(yaml@2.8.0))
       '@vitejs/plugin-react':
         specifier: 4.6.0
         version: 4.6.0(vite@7.0.0(@types/node@20.13.0)(jiti@2.4.2)(yaml@2.8.0))
@@ -1705,8 +1705,8 @@ packages:
   '@types/js-yaml@4.0.9':
     resolution: {integrity: sha512-k4MGaQl5TGo/iipqb2UDG2UwjXziSWkh0uysQelTlJpX1qGlpUZYm8PnO4DxG1qBomtJUdYJ6qR6xdIah10JLg==}
 
-  '@types/lodash@4.17.19':
-    resolution: {integrity: sha512-NYqRyg/hIQrYPT9lbOeYc3kIRabJDn/k4qQHIXUpx88CBDww2fD15Sg5kbXlW86zm2XEW4g0QxkTI3/Kfkc7xQ==}
+  '@types/lodash@4.17.20':
+    resolution: {integrity: sha512-H3MHACvFUEiujabxhaI/ImO6gUrd8oOurg7LQtS7mbwIXA/cUqWrvBsaeJ23aZEPk1TAYkurjfMbSELfoCXlGA==}
 
   '@types/node@20.13.0':
     resolution: {integrity: sha512-FM6AOb3khNkNIXPnHFDYaHerSv8uN22C91z098AnGccVu+Pcdhi+pNUFDi0iLmPIsVE0JBD0KVS7mzUYt4nRzQ==}
@@ -1841,11 +1841,11 @@ packages:
   '@ungap/structured-clone@1.2.0':
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
 
-  '@vitejs/plugin-basic-ssl@2.0.0':
-    resolution: {integrity: sha512-gc9Tjg8bUxBVSTzeWT3Njc0Cl3PakHFKdNfABnZWiUgbxqmHDEn7uECv3fHVylxoYgNzAcmU7ZrILz+BwSo3sA==}
+  '@vitejs/plugin-basic-ssl@2.1.0':
+    resolution: {integrity: sha512-dOxxrhgyDIEUADhb/8OlV9JIqYLgos03YorAueTIeOUskLJSEsfwCByjbu98ctXitUN3znXKp0bYD/WHSudCeA==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     peerDependencies:
-      vite: ^6.0.0
+      vite: ^6.0.0 || ^7.0.0
 
   '@vitejs/plugin-react@4.6.0':
     resolution: {integrity: sha512-5Kgff+m8e2PB+9j51eGHEpn5kUzRKH2Ry0qGoe8ItJg7pqnkPrYPkDQZGgGmTa0EGarHrkjLvOdU3b1fzI8otQ==}
@@ -6135,7 +6135,7 @@ snapshots:
 
   '@types/js-yaml@4.0.9': {}
 
-  '@types/lodash@4.17.19': {}
+  '@types/lodash@4.17.20': {}
 
   '@types/node@20.13.0':
     dependencies:
@@ -6319,7 +6319,7 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vitejs/plugin-basic-ssl@2.0.0(vite@7.0.0(@types/node@20.13.0)(jiti@2.4.2)(yaml@2.8.0))':
+  '@vitejs/plugin-basic-ssl@2.1.0(vite@7.0.0(@types/node@20.13.0)(jiti@2.4.2)(yaml@2.8.0))':
     dependencies:
       vite: 7.0.0(@types/node@20.13.0)(jiti@2.4.2)(yaml@2.8.0)
 
