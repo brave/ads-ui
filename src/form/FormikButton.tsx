@@ -74,7 +74,6 @@ export const FormikSubmitButton = ({
   sx,
 }: FormikSubmitButtonProps) => {
   const { _ } = useLingui();
-  const formik = useFormikContext<any>();
   const { saveButtonTooltip, saveEnabled, isSubmitting, submitForm } = useSave({
     isCreate,
   });
@@ -86,9 +85,6 @@ export const FormikSubmitButton = ({
           color="primary"
           variant="contained"
           onClick={() => {
-            if (formik.values.advertiser.vertical === "Other") {
-              formik.values.advertiser.vertical = null;
-            }
             submitForm();
           }}
           size="large"
