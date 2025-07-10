@@ -30,6 +30,7 @@ const BrowserRegistrationSchema = () =>
       description: string().required(
         t`Please let us know why you're interested in Brave Ads`,
       ),
+      vertical: string().required(t`Please select a vertical`),
     }),
   });
 
