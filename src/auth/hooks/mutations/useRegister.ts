@@ -14,9 +14,6 @@ export function useRegister() {
   const register = useCallback(
     (form: RegistrationForm, type: "search" | "browser") => {
       setLoading(true);
-      if (type === "browser" && form.advertiser.vertical === "Other") {
-        form.advertiser.vertical = null;
-      }
       submitRegistration(form, type)
         .then(() => {
           if (form.marketingOptIn) {
