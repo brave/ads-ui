@@ -56,19 +56,7 @@ export async function submitRegistration(
   type: "search" | "browser",
 ) {
   const path = type === "search" ? "/register/search" : "/register";
-  const body: {
-    advertiser: {
-      billingEmail: string;
-      name: string | undefined;
-      url: string | undefined;
-      description: string | undefined;
-      marketingChannel: string | undefined;
-      vertical?: string | null;
-    };
-    user: RegistrationForm["user"];
-    country: string | undefined;
-    mediaSpend: string | undefined;
-  } = {
+  const body = {
     advertiser: {
       billingEmail: form.user.email,
       name: form.advertiser.name,
@@ -78,6 +66,7 @@ export async function submitRegistration(
         form.advertiser.marketingChannel === "other"
           ? `other: ${form.advertiser.other}`
           : form.advertiser.marketingChannel,
+      vertical: form.advertiser.vertical,
     },
     user: form.user,
     country: form.country,
@@ -85,8 +74,10 @@ export async function submitRegistration(
   };
 
   if (type === "browser") {
-    body.advertiser.vertical =
-      form.advertiser.vertical === "Other" ? null : form.advertiser.vertical;
+    (body.advertiser as any)["vertical"] =
+      form.advertiser.vertical === "Other"
+        ? undefined
+        : form.advertiser.vertical;
   }
 
   const res = await fetch(buildAdServerEndpoint(path), {
