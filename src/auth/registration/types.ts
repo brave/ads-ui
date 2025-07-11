@@ -10,6 +10,7 @@ export type RegistrationForm = {
     description?: string;
     marketingChannel?: string;
     other?: string;
+    vertical?: string | null;
   };
   country?: string;
   mediaSpend?: string;
@@ -28,6 +29,7 @@ export const initialValues: RegistrationForm = {
     description: "",
     marketingChannel: "",
     other: "",
+    vertical: null,
   },
   country: "",
   mediaSpend: "",

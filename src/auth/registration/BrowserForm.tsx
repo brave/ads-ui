@@ -4,6 +4,7 @@ import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { MarketingChannel } from "@/auth/registration/MarketingChannel";
 import { Box } from "@mui/material";
+import { VerticalPicker } from "@/auth/registration/VerticalPicker";
 
 export function BrowserForm() {
   const { _ } = useLingui();
@@ -45,6 +46,8 @@ export function BrowserForm() {
         size="small"
         inlineError
       />
+
+      <VerticalPicker name="advertiser.vertical" />
 
       <MarketingChannel name="advertiser.marketingChannel" />
 
