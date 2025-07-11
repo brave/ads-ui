@@ -56,6 +56,26 @@ export async function submitRegistration(
   type: "search" | "browser",
 ) {
   const path = type === "search" ? "/register/search" : "/register";
+  const body = {
+    advertiser: {
+      billingEmail: form.user.email,
+      name: form.advertiser.name,
+      url: form.advertiser.url,
+      description: form.advertiser.description,
+      marketingChannel:
+        form.advertiser.marketingChannel === "other"
+          ? `other: ${form.advertiser.other}`
+          : form.advertiser.marketingChannel,
+      vertical:
+        form.advertiser.vertical === "Other"
+          ? undefined
+          : form.advertiser.vertical,
+    },
+    user: form.user,
+    country: form.country,
+    mediaSpend: form.mediaSpend,
+  };
+
   const res = await fetch(buildAdServerEndpoint(path), {
     method: "POST",
     mode: "cors",
@@ -63,21 +83,7 @@ export async function submitRegistration(
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      advertiser: {
-        billingEmail: form.user.email,
-        name: form.advertiser.name,
-        url: form.advertiser.url,
-        description: form.advertiser.description,
-        marketingChannel:
-          form.advertiser.marketingChannel === "other"
-            ? `other: ${form.advertiser.other}`
-            : form.advertiser.marketingChannel,
-      },
-      user: form.user,
-      country: form.country,
-      mediaSpend: form.mediaSpend,
-    }),
+    body: JSON.stringify(body),
   });
 
   if (!res.ok) {
