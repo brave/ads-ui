@@ -66,19 +66,15 @@ export async function submitRegistration(
         form.advertiser.marketingChannel === "other"
           ? `other: ${form.advertiser.other}`
           : form.advertiser.marketingChannel,
-      vertical: form.advertiser.vertical,
+      vertical:
+        form.advertiser.vertical === "Other"
+          ? undefined
+          : form.advertiser.vertical,
     },
     user: form.user,
     country: form.country,
     mediaSpend: form.mediaSpend,
   };
-
-  if (type === "browser") {
-    (body.advertiser as any)["vertical"] =
-      form.advertiser.vertical === "Other"
-        ? undefined
-        : form.advertiser.vertical;
-  }
 
   const res = await fetch(buildAdServerEndpoint(path), {
     method: "POST",
