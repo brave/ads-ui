@@ -186,6 +186,9 @@ msgstr "Aprimore a sua estratégia de marketing"
 msgid "Automatic interest targeting"
 msgstr "Direcionamento automático por interesse"
 
+msgid "Automotive"
+msgstr ""
+
 msgid "Back"
 msgstr "Voltar"
 
@@ -194,6 +197,9 @@ msgstr "Basic Attention Token"
 
 msgid "BAT holders can now also cash in their tokens to advertise their companies or products on the Brave Ads network."
 msgstr "Os detentores de BAT agora também podem trocar os seus tokens para anunciar as suas empresas ou produtos na rede de Anúncios Brave."
+
+msgid "Beauty & Personal Care"
+msgstr ""
 
 msgid "Billing Type"
 msgstr "Tipo de Cobrança"
@@ -351,6 +357,9 @@ msgstr "Complete o perfil da sua empresa para continuar"
 msgid "Congratulations! 🎉"
 msgstr "Parabéns! 🎉"
 
+msgid "Consumer Goods (CPG)"
+msgstr ""
+
 msgid "Contact"
 msgstr "Contato"
 
@@ -447,6 +456,9 @@ msgstr "criar agora"
 msgid "created"
 msgstr "criado"
 
+msgid "Cryptocurrency/NFT"
+msgstr ""
+
 msgid "CTR"
 msgstr "CTR (Taxa de Cliques)"
 
@@ -528,6 +540,9 @@ msgstr "Editar {campaignName}"
 msgid "Edit ad"
 msgstr "Editar anúncio"
 
+msgid "Education"
+msgstr ""
+
 msgid "Email"
 msgstr "E-mail"
 
@@ -546,11 +561,14 @@ msgstr "A data final é obrigatória"
 msgid "End date must be after start date"
 msgstr "A data final deve ser após a data de início"
 
-msgid "End date must be before 1 July 2025"
-msgstr ""
+#~ msgid "End date must be before 1 July 2025"
+#~ msgstr ""
 
 msgid "End Time"
 msgstr "Horário de término"
+
+msgid "Energy and Utilities"
+msgstr ""
 
 msgid "Enter a URL that indicates a desired action you want to measure, like a subscription or purchase confirmation page. Brave will count unique visits to that page as conversions if a user has seen or clicked your ad."
 msgstr "Insira uma URL que indique uma ação desejada que você deseja medir, como uma página de confirmação de assinatura ou compra. O Brave contará visitas únicas a essa página como conversões se um usuário tiver visto ou clicado no seu anúncio."
@@ -560,6 +578,9 @@ msgstr "Acessar o Gerenciador de Anúncios"
 
 msgid "Enter your email address to get a secure login link. Use this link to access your Brave Ads account."
 msgstr "Insira seu e-mail para obter um link seguro de login. Use este link para acessar sua conta dos Anúncios Brave."
+
+msgid "Entertainment"
+msgstr ""
 
 msgid "Escape the low CTR of display banners"
 msgstr "Fuja do baixo CTR dos banners de exibição"
@@ -573,6 +594,9 @@ msgstr "Exportar"
 msgid "Failed to update profile: {errorMessage}"
 msgstr "Falha ao atualizar o perfil: {errorMessage}"
 
+msgid "Fashion"
+msgstr ""
+
 msgid "Feedback"
 msgstr "Feedback"
 
@@ -582,8 +606,14 @@ msgstr "Filtrar anúncios por nome..."
 msgid "Finalize & submit"
 msgstr "Finalizar e submeter"
 
+msgid "Finance"
+msgstr ""
+
 msgid "First party tracking acknowledgement is required"
 msgstr "É necessário concordar com o rastreamento interno do site"
+
+msgid "Food & Beverage"
+msgstr ""
 
 msgid "For businesses of all sizes. Create your campaign in minutes, starting with as little as $500 per month."
 msgstr "Para negócios de todos os tamanhos. Crie sua campanha em minutos, começando com apenas $500 por mês."
@@ -614,6 +644,9 @@ msgstr "Nome Completo"
 
 msgid "Full name is required"
 msgstr "O nome completo é obrigatório"
+
+msgid "Gaming"
+msgstr ""
 
 msgid "General Ad Inquiries"
 msgstr "Dúvidas Gerais sobre Anúncios"
@@ -657,11 +690,17 @@ msgstr "Alcance seu primeiro milhão de usuários com anúncios potentes no nave
 msgid "Have specific questions?"
 msgstr "Você tem perguntas específicas?"
 
+msgid "Healthcare"
+msgstr ""
+
 msgid "Help Center"
 msgstr "Central de Ajuda"
 
 msgid "Hi"
 msgstr "Olá"
+
+msgid "Home & Garden"
+msgstr ""
 
 msgid "Hourly"
 msgstr "Por hora"
@@ -753,6 +792,9 @@ msgstr "Último mês"
 msgid "Learn More"
 msgstr "Saiba Mais"
 
+msgid "Legal and Professional Services"
+msgstr ""
+
 msgid "Let Brave pick categories for me."
 msgstr "Deixe o Brave escolher categorias para mim."
 
@@ -794,6 +836,9 @@ msgstr "Efetue o pagamento e envie para aprovação"
 
 msgid "Make sure to include your brand name in the title OR body of the ad. Otherwise, it will be rejected."
 msgstr "Certifique-se de incluir o nome da sua marca no título OU no corpo do anúncio. Caso contrário, ele será rejeitado."
+
+msgid "Manufacturing and Industrial"
+msgstr ""
 
 msgid "Max 30 Characters"
 msgstr "Máx. 30 caracteres"
@@ -867,6 +912,9 @@ msgstr "Nenhum anúncio anterior disponível"
 msgid "no session created"
 msgstr "nenhuma sessão criada"
 
+msgid "Non-Profit and NGOs"
+msgstr ""
+
 msgid "Notes"
 msgstr "Notas"
 
@@ -908,6 +956,9 @@ msgstr "ou faça login usando um link seguro"
 
 msgid "OS"
 msgstr "SO (Sistema Operacional)"
+
+msgid "Other"
+msgstr ""
 
 msgid "Other (please specify)"
 msgstr "Outro (por favor, especifique)"
@@ -981,6 +1032,9 @@ msgstr "Por favor, atualize a página e tente novamente, ou envie um e-mail para
 msgid "Please see our <0>Advertiser Privacy Policy</0> and <1>Terms of Service</1> applicable to Brave Ads."
 msgstr "Por favor, consulte nossa <0>Política de Privacidade do Anunciante</0> e <1>Termos de Serviço</1> que se aplicam aos Anúncios Brave."
 
+msgid "Please select a vertical"
+msgstr ""
+
 msgid "Please specify how you heard about Brave Ads"
 msgstr "Por favor, nos diga como você ficou sabendo sobre os Anúncios Brave"
 
@@ -1038,11 +1092,17 @@ msgstr "Alcance novos públicos que você está perdendo"
 msgid "Ready to reach your first million users? Start your first campaign today."
 msgstr "Pronto para alcançar o seu primeiro milhão de usuários? Comece a sua primeira campanha hoje."
 
+msgid "Real Estate"
+msgstr ""
+
 msgid "Remove"
 msgstr "Remover"
 
 msgid "Remove Conversion tracking"
 msgstr "Remover rastreamento de Conversão"
+
+msgid "Retail"
+msgstr ""
 
 msgid "Return"
 msgstr "Voltar"
@@ -1137,6 +1197,9 @@ msgstr "Gasto"
 msgid "Sponsored"
 msgstr "Patrocinado"
 
+msgid "Sports"
+msgstr ""
+
 msgid "Start"
 msgstr "Iniciar"
 
@@ -1200,6 +1263,12 @@ msgstr "URL de Destino não validada"
 msgid "Targeting"
 msgstr "Direcionamento"
 
+msgid "Technology/Software"
+msgstr ""
+
+msgid "Telecommunications"
+msgstr ""
+
 msgid "Tell us why you're interested in Brave Ads"
 msgstr "Nos conte por que você está interessado nos Anúncios Brave"
 
@@ -1247,6 +1316,9 @@ msgstr "Para proteger a privacidade do usuário, os dados de conversão do anún
 
 msgid "Today"
 msgstr "Hoje"
+
+msgid "Travel & Hospitality"
+msgstr ""
 
 msgid "Try Brave Search Ads risk-free to see how the ads perform for your website."
 msgstr "Experimente os Anúncios sem riscos da Pesquisa Brave para ver o desempenho dos anúncios em seu site."
@@ -1343,6 +1415,9 @@ msgstr "Valor"
 
 msgid "Verified Conversions Report"
 msgstr "Relatório de Conversões Verificadas"
+
+msgid "Verticals"
+msgstr ""
 
 msgid "View profile"
 msgstr "Ver perfil"
