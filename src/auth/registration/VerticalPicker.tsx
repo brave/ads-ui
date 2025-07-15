@@ -19,7 +19,7 @@ export function VerticalPicker(props: { name: string }) {
         },
         {
           label: _(msg`Beauty & Personal Care`),
-          value: "beauty & Personal Care",
+          value: "Beauty & Personal Care",
         },
         {
           label: _(msg`Consumer Goods (CPG)`),
