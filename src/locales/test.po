@@ -181,6 +181,9 @@ msgstr ""
 msgid "Automatic interest targeting"
 msgstr ""
 
+msgid "Automotive"
+msgstr ""
+
 msgid "Back"
 msgstr ""
 
@@ -188,6 +191,9 @@ msgid "Basic Attention Token"
 msgstr ""
 
 msgid "BAT holders can now also cash in their tokens to advertise their companies or products on the Brave Ads network."
+msgstr ""
+
+msgid "Beauty & Personal Care"
 msgstr ""
 
 msgid "Billing Type"
@@ -346,6 +352,9 @@ msgstr ""
 msgid "Congratulations! 🎉"
 msgstr ""
 
+msgid "Consumer Goods (CPG)"
+msgstr ""
+
 msgid "Contact"
 msgstr ""
 
@@ -442,6 +451,9 @@ msgstr ""
 msgid "created"
 msgstr ""
 
+msgid "Cryptocurrency/NFT"
+msgstr ""
+
 msgid "CTR"
 msgstr ""
 
@@ -523,6 +535,9 @@ msgstr ""
 msgid "Edit ad"
 msgstr ""
 
+msgid "Education"
+msgstr ""
+
 msgid "Email"
 msgstr ""
 
@@ -541,10 +556,13 @@ msgstr ""
 msgid "End date must be after start date"
 msgstr ""
 
-msgid "End date must be before 1 July 2025"
-msgstr ""
+#~ msgid "End date must be before 1 July 2025"
+#~ msgstr ""
 
 msgid "End Time"
+msgstr ""
+
+msgid "Energy and Utilities"
 msgstr ""
 
 msgid "Enter a URL that indicates a desired action you want to measure, like a subscription or purchase confirmation page. Brave will count unique visits to that page as conversions if a user has seen or clicked your ad."
@@ -554,6 +572,9 @@ msgid "Enter Ads Manager"
 msgstr ""
 
 msgid "Enter your email address to get a secure login link. Use this link to access your Brave Ads account."
+msgstr ""
+
+msgid "Entertainment"
 msgstr ""
 
 msgid "Escape the low CTR of display banners"
@@ -568,6 +589,9 @@ msgstr ""
 msgid "Failed to update profile: {errorMessage}"
 msgstr ""
 
+msgid "Fashion"
+msgstr ""
+
 msgid "Feedback"
 msgstr ""
 
@@ -577,7 +601,13 @@ msgstr ""
 msgid "Finalize & submit"
 msgstr ""
 
+msgid "Finance"
+msgstr ""
+
 msgid "First party tracking acknowledgement is required"
+msgstr ""
+
+msgid "Food & Beverage"
 msgstr ""
 
 msgid "For businesses of all sizes. Create your campaign in minutes, starting with as little as $500 per month."
@@ -608,6 +638,9 @@ msgid "Full Name"
 msgstr ""
 
 msgid "Full name is required"
+msgstr ""
+
+msgid "Gaming"
 msgstr ""
 
 msgid "General Ad Inquiries"
@@ -652,10 +685,16 @@ msgstr ""
 msgid "Have specific questions?"
 msgstr ""
 
+msgid "Healthcare"
+msgstr ""
+
 msgid "Help Center"
 msgstr ""
 
 msgid "Hi"
+msgstr ""
+
+msgid "Home & Garden"
 msgstr ""
 
 msgid "Hourly"
@@ -748,6 +787,9 @@ msgstr ""
 msgid "Learn More"
 msgstr ""
 
+msgid "Legal and Professional Services"
+msgstr ""
+
 msgid "Let Brave pick categories for me."
 msgstr ""
 
@@ -788,6 +830,9 @@ msgid "Make payment & submit for approval"
 msgstr ""
 
 msgid "Make sure to include your brand name in the title OR body of the ad. Otherwise, it will be rejected."
+msgstr ""
+
+msgid "Manufacturing and Industrial"
 msgstr ""
 
 msgid "Max 30 Characters"
@@ -862,6 +907,9 @@ msgstr ""
 msgid "no session created"
 msgstr ""
 
+msgid "Non-Profit and NGOs"
+msgstr ""
+
 msgid "Notes"
 msgstr ""
 
@@ -902,6 +950,9 @@ msgid "or sign in using a secure link"
 msgstr ""
 
 msgid "OS"
+msgstr ""
+
+msgid "Other"
 msgstr ""
 
 msgid "Other (please specify)"
@@ -976,6 +1027,9 @@ msgstr ""
 msgid "Please see our <0>Advertiser Privacy Policy</0> and <1>Terms of Service</1> applicable to Brave Ads."
 msgstr ""
 
+msgid "Please select a vertical"
+msgstr ""
+
 msgid "Please specify how you heard about Brave Ads"
 msgstr ""
 
@@ -1033,10 +1087,16 @@ msgstr ""
 msgid "Ready to reach your first million users? Start your first campaign today."
 msgstr ""
 
+msgid "Real Estate"
+msgstr ""
+
 msgid "Remove"
 msgstr ""
 
 msgid "Remove Conversion tracking"
+msgstr ""
+
+msgid "Retail"
 msgstr ""
 
 msgid "Return"
@@ -1132,6 +1192,9 @@ msgstr ""
 msgid "Sponsored"
 msgstr ""
 
+msgid "Sports"
+msgstr ""
+
 msgid "Start"
 msgstr ""
 
@@ -1195,6 +1258,12 @@ msgstr ""
 msgid "Targeting"
 msgstr ""
 
+msgid "Technology/Software"
+msgstr ""
+
+msgid "Telecommunications"
+msgstr ""
+
 msgid "Tell us why you're interested in Brave Ads"
 msgstr ""
 
@@ -1241,6 +1310,9 @@ msgid "To protect user’s privacy, verified ad conversion data is encrypted so 
 msgstr ""
 
 msgid "Today"
+msgstr ""
+
+msgid "Travel & Hospitality"
 msgstr ""
 
 msgid "Try Brave Search Ads risk-free to see how the ads perform for your website."
@@ -1337,6 +1409,9 @@ msgid "Value"
 msgstr ""
 
 msgid "Verified Conversions Report"
+msgstr ""
+
+msgid "Verticals"
 msgstr ""
 
 msgid "View profile"
