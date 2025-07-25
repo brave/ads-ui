@@ -74,7 +74,7 @@
     "@types/react-router-dom": "5.3.3",
     "@types/react-window": "1.8.8",
     "@vitejs/plugin-basic-ssl": "2.1.0",
-    "@vitejs/plugin-react": "4.6.0",
+    "@vitejs/plugin-react": "4.7.0",
     "babel-plugin-macros": "3.1.0",
     "eslint": "8.57.1",
     "eslint-config-prettier": "10.1.5",
@@ -87,7 +87,7 @@
     "prettier": "3.6.2",
     "typescript": "5.8.3",
     "typescript-eslint": "8.37.0",
-    "vite": "7.0.4",
+    "vite": "7.0.5",
     "vite-plugin-checker": "0.10.0",
     "vite-tsconfig-paths": "5.1.4",
     "vitest": "3.2.4"
