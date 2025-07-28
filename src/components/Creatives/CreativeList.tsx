@@ -11,7 +11,7 @@ import { CreativeStatusSwitch } from "@/components/Creatives/CreativeStatusSwitc
 import { CustomToolbar } from "@/components/Datagrid/CustomToolbar";
 import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { useLingui, Trans as ReactTrans } from "@lingui/react";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 
 import { MessageDescriptor } from "@lingui/core";
 import { useQuery } from "@apollo/client";
@@ -96,7 +96,7 @@ export function CreativeList() {
         />
       )}
       <CardContainer
-        header={<Trans>Ads</Trans>}
+        header={_(msg`Ads`)}
         sx={{
           flexGrow: 1,
           overflowX: "auto",
