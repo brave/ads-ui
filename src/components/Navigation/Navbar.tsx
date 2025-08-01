@@ -36,7 +36,7 @@ export function Navbar() {
     >
       <Toolbar>
         <Stack direction="row" alignItems="center" spacing={2}>
-          <img src={ads} alt="Ads" height="31px" width="180px" />
+          <img src={ads} alt="Ads" height="31px" width="74px" />
           <Divider orientation="vertical" flexItem />
           {advertiser.selfServiceManageCampaign && <DraftMenu />}
         </Stack>
