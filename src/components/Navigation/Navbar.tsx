@@ -1,8 +1,7 @@
 import { AppBar, Divider, Stack, Toolbar } from "@mui/material";
 
 import { DraftMenu } from "@/components/Navigation/DraftMenu";
-import adsManage from "@/assets/images/logo.svg";
-import adsReporting from "@/assets/images/logo-reporting.svg";
+import ads from "@/assets/images/logo.svg";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { NewCampaignButton } from "@/components/Navigation/NewCampaignButton";
 import { useHistory } from "react-router-dom";
@@ -37,11 +36,7 @@ export function Navbar() {
     >
       <Toolbar>
         <Stack direction="row" alignItems="center" spacing={2}>
-          {advertiser.selfServiceManageCampaign ? (
-            <img src={adsManage} alt="Ads" height="31px" width="180px" />
-          ) : (
-            <img src={adsReporting} alt="Ads" height="31px" width="180px" />
-          )}
+          <img src={ads} alt="Ads" height="31px" width="180px" />
           <Divider orientation="vertical" flexItem />
           {advertiser.selfServiceManageCampaign && <DraftMenu />}
         </Stack>
