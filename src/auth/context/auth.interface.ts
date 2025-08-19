@@ -12,6 +12,14 @@ export type IAdvertiser = {
   agreed?: boolean;
 };
 
+export type AdvertiserMessage = {
+  id: string;
+  message: string;
+  title: string;
+  actionUrl?: string;
+  expirationDate: Date;
+};
+
 export interface IAuthState {
   isInitialized: boolean;
   isAuthenticated: boolean;
@@ -21,6 +29,7 @@ export interface IAuthState {
   role?: string;
   userId?: string;
   advertisers: IAdvertiser[];
+  advertiserMessage?: AdvertiserMessage;
 }
 
 export interface IAuthProviderProps {

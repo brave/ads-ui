@@ -244,6 +244,19 @@ export type AdvertiserLedgerEntry = {
   transactionType: LedgerTransactionType;
 };
 
+export type AdvertiserMessage = {
+  __typename?: 'AdvertiserMessage';
+  actionUrl: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  createdBy: User;
+  expirationDate: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  message: Scalars['String']['output'];
+  modifiedAt: Scalars['DateTime']['output'];
+  title: Scalars['String']['output'];
+  user: User;
+};
+
 export type AdvertiserPrice = {
   __typename?: 'AdvertiserPrice';
   billingModelPrice: Scalars['Numeric']['output'];
@@ -500,7 +513,7 @@ export type Change = {
   referenceColumnName: Scalars['String']['output'];
   referenceId: Scalars['String']['output'];
   referenceTableName: Scalars['String']['output'];
-  user: User;
+  user?: Maybe<User>;
   userId: Scalars['String']['output'];
 };
 
@@ -611,6 +624,13 @@ export type CreateAdvertiserInput = {
   state?: InputMaybe<Scalars['String']['input']>;
   url?: InputMaybe<Scalars['String']['input']>;
   vertical?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CreateAdvertiserMessageInput = {
+  actionUrl: Scalars['String']['input'];
+  expirationDate: Scalars['DateTime']['input'];
+  message: Scalars['String']['input'];
+  title: Scalars['String']['input'];
 };
 
 export type CreateCampaignInput = {
@@ -935,6 +955,7 @@ export type Mutation = {
   createAdSet: AdSet;
   createAdvertiser: Advertiser;
   createAdvertiserImage: AdvertiserImage;
+  createAdvertiserMessage: AdvertiserMessage;
   createCampaign: Campaign;
   createComment: CampaignComment;
   createCreative: Creative;
@@ -950,6 +971,7 @@ export type Mutation = {
   sendLoginEmail: Scalars['Boolean']['output'];
   updateAdSet: AdSet;
   updateAdvertiser: Advertiser;
+  updateAdvertiserMessage: AdvertiserMessage;
   updateCampaign: Campaign;
   updateCreative: Creative;
   updateCurrentUser: User;
@@ -1017,6 +1039,11 @@ export type MutationCreateAdvertiserArgs = {
 
 export type MutationCreateAdvertiserImageArgs = {
   createImageInput: CreateAdvertiserImageInput;
+};
+
+
+export type MutationCreateAdvertiserMessageArgs = {
+  createAdvertiserMessageInput: CreateAdvertiserMessageInput;
 };
 
 
@@ -1092,6 +1119,11 @@ export type MutationUpdateAdSetArgs = {
 
 export type MutationUpdateAdvertiserArgs = {
   updateAdvertiserInput: UpdateAdvertiserInput;
+};
+
+
+export type MutationUpdateAdvertiserMessageArgs = {
+  updateAdvertiserMessageInput: UpdateAdvertiserMessageInput;
 };
 
 
@@ -1239,6 +1271,7 @@ export type Query = {
   advertiser?: Maybe<Advertiser>;
   advertiserCampaigns?: Maybe<Advertiser>;
   advertiserCount: Scalars['Float']['output'];
+  advertiserMessages: Array<AdvertiserMessage>;
   advertisers: Array<Advertiser>;
   allSegments: Array<Segment>;
   balanceTransfers: Array<BalanceTransfers>;
@@ -1258,6 +1291,7 @@ export type Query = {
   user: User;
   users: Array<User>;
   validateTargetUrl: TargetUrlValidation;
+  webriskThreats: Array<WebriskThreat>;
 };
 
 
@@ -1444,6 +1478,7 @@ export type SearchDomainEligibility = {
   estimatedQpw: Scalars['String']['output'];
   status: Scalars['String']['output'];
   trialBudget: Scalars['String']['output'];
+  visualRatio: Scalars['Numeric']['output'];
 };
 
 export type SearchEligibilityCheck = {
@@ -1707,6 +1742,14 @@ export type UpdateAdvertiserInput = {
   vertical?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type UpdateAdvertiserMessageInput = {
+  actionUrl: Scalars['String']['input'];
+  expirationDate: Scalars['DateTime']['input'];
+  id: Scalars['String']['input'];
+  message: Scalars['String']['input'];
+  title: Scalars['String']['input'];
+};
+
 export type UpdateCampaignInput = {
   accountManagerId?: InputMaybe<Scalars['String']['input']>;
   adSets?: InputMaybe<Array<UpdateAdSetInput>>;
@@ -1818,6 +1861,22 @@ export type WallpaperInput = {
   focalPoint: FocalPointInput;
   imageUrl: Scalars['String']['input'];
 };
+
+export type WebriskThreat = {
+  __typename?: 'WebriskThreat';
+  checksum?: Maybe<Scalars['String']['output']>;
+  id: WebriskThreatType;
+  lastUpdated?: Maybe<Scalars['DateTime']['output']>;
+  nextRefresh: Scalars['DateTime']['output'];
+  versionToken?: Maybe<Scalars['String']['output']>;
+};
+
+export enum WebriskThreatType {
+  Malware = 'MALWARE',
+  SocialEngineering = 'SOCIAL_ENGINEERING',
+  SocialEngineeringExtendedCoverage = 'SOCIAL_ENGINEERING_EXTENDED_COVERAGE',
+  UnwantedSoftware = 'UNWANTED_SOFTWARE'
+}
 
 export type UpdateAdvertiserMutationVariables = Exact<{
   input: AdsManagerUpdateAdvertiserInput;

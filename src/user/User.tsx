@@ -12,7 +12,11 @@ import { Box } from "@mui/material";
 import { NewCampaign } from "./views/adsManager/views/advanced/components/form/NewCampaign";
 import { EditCampaign } from "./views/adsManager/views/advanced/components/form/EditCampaign";
 import { CompletionForm } from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
-import { Navbar } from "@/components/Navigation/Navbar";
+import {
+  Navbar,
+  BannerHeightProvider,
+  useBannerHeight,
+} from "@/components/Navigation/Navbar";
 import { CampaignView } from "@/user/views/user/CampaignView";
 import { Profile } from "@/user/views/user/Profile";
 import { FilterContext } from "@/state/context";
@@ -25,6 +29,103 @@ import { CampaignReportViewSelector } from "./views/user/CampaignReportViewSelec
 import dayjs from "dayjs";
 import { useIsAuthenticated } from "@/auth/hooks/queries/useIsAuthenticated";
 import { CreateSearchCampaignBetaPage } from "./views/user/search/CreateSearchCampaignBetaPage";
+import { NAVBAR_HEIGHT } from "@/components/Navigation/Navbar";
+
+// Component that uses the banner height
+function UserContent() {
+  const { bannerHeight } = useBannerHeight();
+  const totalHeaderHeight = NAVBAR_HEIGHT + bannerHeight;
+
+  return (
+    <Box display="flex" height="100vh" width="100vw" flexDirection="row">
+      <Navbar />
+      <Box
+        flex={1}
+        component="main"
+        marginTop={`${totalHeaderHeight}px`}
+        // eslint-disable-next-line lingui/no-unlocalized-strings
+        height={`calc(100% - ${totalHeaderHeight}px)`}
+        overflow="auto"
+        padding={1}
+        // this is flexing vertically, so that screens that wish to be
+        // exactly in viewport without scrollbars can set flex=1 on the
+        // child they wish to fill the screen with
+        display="flex"
+        flexDirection="column"
+        bgcolor="background.default"
+      >
+        <ErrorBoundary>
+          <Switch>
+            {/* /adsmanager */}
+            <ProtectedRoute
+              path="/user/main/adsmanager/advanced/new/:draftId"
+              authedComponent={NewCampaign}
+              validateAdvertiserProperty={(a) => a.selfServiceManageCampaign}
+            />
+
+            <ProtectedRoute
+              path="/user/main/adsmanager/advanced/:campaignId"
+              authedComponent={EditCampaign}
+              validateAdvertiserProperty={(a) => a.selfServiceManageCampaign}
+            />
+
+            <ProtectedRoute
+              path="/user/main/creative/:id"
+              authedComponent={CreativeForm}
+              validateAdvertiserProperty={(a) => a.selfServiceManageCampaign}
+            />
+
+            <ProtectedRoute
+              path="/user/main/complete/:mode"
+              authedComponent={CompletionForm}
+            />
+
+            {/* /campaigns/:campaignId/analytics - */}
+            <ProtectedRoute
+              path="/user/main/report/:campaignId"
+              authedComponent={CampaignReportViewSelector}
+            />
+
+            <Redirect
+              to={"/user/main/report/:campaignId"}
+              from={"/user/main/campaign/:campaignId"}
+              exact={true}
+            />
+
+            <Route path="/user/main/settings" component={Settings} />
+            <Route path="/user/main/profile" component={Profile} />
+
+            <ProtectedRoute
+              path="/user/main/campaign"
+              authedComponent={CampaignView}
+              unauthedComponent={AdvertiserDetailsForm}
+            />
+
+            <ProtectedRoute
+              path="/user/main/ads"
+              authedComponent={CreativeList}
+            />
+
+            <Redirect from="/user/main/creatives" to="/user/main/ads" exact />
+            <Redirect
+              from="/user/main/assets"
+              to="/user/main/ads/assets"
+              exact
+            />
+
+            <ProtectedRoute
+              path="/user/main/search/new"
+              authedComponent={CreateSearchCampaignBetaPage}
+            />
+
+            {/* default */}
+            <Redirect to="/user/main/campaign" />
+          </Switch>
+        </ErrorBoundary>
+      </Box>
+    </Box>
+  );
+}
 
 const buildApolloClient = () => {
   const httpLink = createHttpLink({
@@ -87,103 +188,9 @@ export default function User() {
           setFromDate,
         }}
       >
-        <Box display="flex" height="100vh" width="100vw" flexDirection="row">
-          <Navbar />
-          <Box
-            flex={1}
-            component="main"
-            marginTop="64px"
-            // eslint-disable-next-line lingui/no-unlocalized-strings
-            height="calc(100% - 64px)"
-            overflow="auto"
-            padding={1}
-            // this is flexing vertically, so that screens that wish to be
-            // exactly in viewport without scrollbars can set flex=1 on the
-            // child they wish to fill the screen with
-            display="flex"
-            flexDirection="column"
-            bgcolor="background.default"
-          >
-            <ErrorBoundary>
-              <Switch>
-                {/* /adsmanager */}
-                <ProtectedRoute
-                  path="/user/main/adsmanager/advanced/new/:draftId"
-                  authedComponent={NewCampaign}
-                  validateAdvertiserProperty={(a) =>
-                    a.selfServiceManageCampaign
-                  }
-                />
-
-                <ProtectedRoute
-                  path="/user/main/adsmanager/advanced/:campaignId"
-                  authedComponent={EditCampaign}
-                  validateAdvertiserProperty={(a) =>
-                    a.selfServiceManageCampaign
-                  }
-                />
-
-                <ProtectedRoute
-                  path="/user/main/creative/:id"
-                  authedComponent={CreativeForm}
-                  validateAdvertiserProperty={(a) =>
-                    a.selfServiceManageCampaign
-                  }
-                />
-
-                <ProtectedRoute
-                  path="/user/main/complete/:mode"
-                  authedComponent={CompletionForm}
-                />
-
-                {/* /campaigns/:campaignId/analytics - */}
-                <ProtectedRoute
-                  path="/user/main/report/:campaignId"
-                  authedComponent={CampaignReportViewSelector}
-                />
-
-                <Redirect
-                  to={"/user/main/report/:campaignId"}
-                  from={"/user/main/campaign/:campaignId"}
-                  exact={true}
-                />
-
-                <Route path="/user/main/settings" component={Settings} />
-                <Route path="/user/main/profile" component={Profile} />
-
-                <ProtectedRoute
-                  path="/user/main/campaign"
-                  authedComponent={CampaignView}
-                  unauthedComponent={AdvertiserDetailsForm}
-                />
-
-                <ProtectedRoute
-                  path="/user/main/ads"
-                  authedComponent={CreativeList}
-                />
-
-                <Redirect
-                  from="/user/main/creatives"
-                  to="/user/main/ads"
-                  exact
-                />
-                <Redirect
-                  from="/user/main/assets"
-                  to="/user/main/ads/assets"
-                  exact
-                />
-
-                <ProtectedRoute
-                  path="/user/main/search/new"
-                  authedComponent={CreateSearchCampaignBetaPage}
-                />
-
-                {/* default */}
-                <Redirect to="/user/main/campaign" />
-              </Switch>
-            </ErrorBoundary>
-          </Box>
-        </Box>
+        <BannerHeightProvider>
+          <UserContent />
+        </BannerHeightProvider>
       </FilterContext.Provider>
     </ApolloProvider>
   );

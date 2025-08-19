@@ -1084,6 +1084,9 @@ msgstr ""
 msgid "Reach new audiences you're missing"
 msgstr ""
 
+msgid "Read more at"
+msgstr ""
+
 msgid "Ready to reach your first million users? Start your first campaign today."
 msgstr ""
 

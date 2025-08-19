@@ -5,6 +5,7 @@ import {
 } from "@/util/environment";
 import { RegistrationForm } from "@/auth/registration/types";
 import { t } from "@lingui/macro";
+import { AdvertiserMessage } from "@/auth/context/auth.interface";
 
 type Advertiser = {
   selfServiceSetPrice: boolean;
@@ -15,7 +16,9 @@ type Advertiser = {
   selfServicePaymentType: PaymentType;
 };
 
-export type ResponseUser = UserFragment & { advertisers: Advertiser[] };
+export type ResponseUser = UserFragment & {
+  advertisers: Advertiser[];
+} & { message: AdvertiserMessage };
 
 export const getCredentials = async (user: {
   email: string;
