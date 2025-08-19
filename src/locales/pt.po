@@ -1089,6 +1089,9 @@ msgstr "Alcance mais de 70 milhões de usuários altamente engajados, que de out
 msgid "Reach new audiences you're missing"
 msgstr "Alcance novos públicos que você está perdendo"
 
+msgid "Read more at"
+msgstr ""
+
 msgid "Ready to reach your first million users? Start your first campaign today."
 msgstr "Pronto para alcançar o seu primeiro milhão de usuários? Comece a sua primeira campanha hoje."
 
