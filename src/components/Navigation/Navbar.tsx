@@ -36,7 +36,6 @@ const BannerHeightContext = createContext<BannerHeightContextType | undefined>(
 export function useBannerHeight() {
   const context = useContext(BannerHeightContext);
   if (context === undefined) {
-    // eslint-disable-next-line lingui/no-unlocalized-strings
     throw new Error(
       "useBannerHeight must be used within a BannerHeightProvider",
     );
@@ -54,13 +53,12 @@ export function BannerHeightProvider({
   return (
     <BannerHeightContext.Provider value={{ bannerHeight, setBannerHeight }}>
       {children}
-      // eslint-disable-line lingui/no-unlocalized-strings
     </BannerHeightContext.Provider>
   );
 }
 
-export const NAVBAR_HEIGHT = 72; // eslint-disable-line lingui/no-unlocalized-strings
-const DISMISSED_MESSAGE_KEY = "brave_adv_message"; // eslint-disable-line lingui/no-unlocalized-strings
+export const NAVBAR_HEIGHT = 72;
+const DISMISSED_MESSAGE_KEY = "brave_adv_message";
 
 export function Navbar() {
   const { advertiser } = useAdvertiser();
@@ -135,7 +133,6 @@ export function Navbar() {
           severity="warning"
           action={
             <IconButton
-              // eslint-disable-next-line lingui/no-unlocalized-strings
               aria-label="close"
               color="inherit"
               size="small"
