@@ -43,13 +43,6 @@ export const IAuthProvider = ({ children }: IAuthProviderProps) => {
         fullName: u.fullName,
         advertisers: u.advertisers,
         isAuthenticated: u.advertisers.length > 0 && !!active,
-        // advertiserMessage: {
-        //   id: "1",
-        //   message: "We no longer support ads in country X.",
-        //   title: "Country Restriction Notice",
-        //   actionUrl: "https://www.brave.com",
-        //   expirationDate: new Date(),
-        // },
         advertiserMessage: u.message,
       }));
     } else {

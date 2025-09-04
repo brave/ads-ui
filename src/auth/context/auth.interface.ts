@@ -17,7 +17,6 @@ export type AdvertiserMessage = {
   message: string;
   title: string;
   actionUrl?: string;
-  expirationDate: Date;
 };
 
 export interface IAuthState {

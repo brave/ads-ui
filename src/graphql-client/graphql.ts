@@ -246,7 +246,7 @@ export type AdvertiserLedgerEntry = {
 
 export type AdvertiserMessage = {
   __typename?: 'AdvertiserMessage';
-  actionUrl: Scalars['String']['output'];
+  actionUrl?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['DateTime']['output'];
   createdBy: User;
   expirationDate: Scalars['DateTime']['output'];
@@ -254,7 +254,6 @@ export type AdvertiserMessage = {
   message: Scalars['String']['output'];
   modifiedAt: Scalars['DateTime']['output'];
   title: Scalars['String']['output'];
-  user: User;
 };
 
 export type AdvertiserPrice = {
@@ -627,7 +626,7 @@ export type CreateAdvertiserInput = {
 };
 
 export type CreateAdvertiserMessageInput = {
-  actionUrl: Scalars['String']['input'];
+  actionUrl?: InputMaybe<Scalars['String']['input']>;
   expirationDate: Scalars['DateTime']['input'];
   message: Scalars['String']['input'];
   title: Scalars['String']['input'];
@@ -1271,7 +1270,7 @@ export type Query = {
   advertiser?: Maybe<Advertiser>;
   advertiserCampaigns?: Maybe<Advertiser>;
   advertiserCount: Scalars['Float']['output'];
-  advertiserMessages: Array<AdvertiserMessage>;
+  advertiserMessage?: Maybe<AdvertiserMessage>;
   advertisers: Array<Advertiser>;
   allSegments: Array<Segment>;
   balanceTransfers: Array<BalanceTransfers>;
@@ -1743,11 +1742,11 @@ export type UpdateAdvertiserInput = {
 };
 
 export type UpdateAdvertiserMessageInput = {
-  actionUrl: Scalars['String']['input'];
-  expirationDate: Scalars['DateTime']['input'];
+  actionUrl?: InputMaybe<Scalars['String']['input']>;
+  expirationDate?: InputMaybe<Scalars['DateTime']['input']>;
   id: Scalars['String']['input'];
-  message: Scalars['String']['input'];
-  title: Scalars['String']['input'];
+  message?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UpdateCampaignInput = {
