@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { useAuthContext } from "@/auth/context/auth.hook";
-import { getCredentials } from "@/auth/lib";
+import { getAdvertiserMessage, getCredentials } from "@/auth/lib";
 
 interface Options {
   onError?: (message: string) => void;
@@ -15,10 +15,10 @@ export function useSignIn({ onError, onSuccess }: Options = {}) {
   const signIn = useCallback((email: string, password: string) => {
     setLoading(true);
     getCredentials({ email, password })
-      .then((data) => {
+      .then(async (data) => {
         if (data) {
-          setSessionUser(data);
-
+          const advertiserMessageResp = await getAdvertiserMessage();
+          setSessionUser({ ...data, ...advertiserMessageResp });
           if (onSuccess) {
             onSuccess();
           }

@@ -58,7 +58,7 @@ export function BannerHeightProvider({
 }
 
 export const NAVBAR_HEIGHT = 72;
-const DISMISSED_MESSAGE_KEY = "brave_adv_message";
+const DISMISSED_MESSAGE_KEY = "dismissedAdvertiserMessage";
 
 export function Navbar() {
   const { advertiser } = useAdvertiser();
@@ -174,7 +174,7 @@ export function Navbar() {
                     },
                   }}
                 >
-                  {new URL(advertiserMessage.actionUrl).hostname}
+                  {advertiserMessage.actionUrl}
                 </Link>
               </>
             )}

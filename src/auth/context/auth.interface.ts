@@ -28,7 +28,7 @@ export interface IAuthState {
   role?: string;
   userId?: string;
   advertisers: IAdvertiser[];
-  advertiserMessage?: AdvertiserMessage;
+  advertiserMessage?: AdvertiserMessage | null;
 }
 
 export interface IAuthProviderProps {

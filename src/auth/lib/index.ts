@@ -18,7 +18,7 @@ type Advertiser = {
 
 export type ResponseUser = UserFragment & {
   advertisers: Advertiser[];
-} & { message: AdvertiserMessage };
+} & { message: AdvertiserMessage | null };
 
 export const getCredentials = async (user: {
   email: string;
@@ -98,6 +98,22 @@ export async function submitRegistration(
 
 export const getUser = async (): Promise<ResponseUser> => {
   const res = await fetch(buildAdServerV2Endpoint("/auth/user"), {
+    method: "GET",
+    mode: "cors",
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    throw new Error(t`Invalid Session`);
+  }
+
+  return await res.json();
+};
+
+export const getAdvertiserMessage = async (): Promise<{
+  message: AdvertiserMessage | null;
+}> => {
+  const res = await fetch(buildAdServerEndpoint("/advertiser-message"), {
     method: "GET",
     mode: "cors",
     credentials: "include",
