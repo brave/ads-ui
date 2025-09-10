@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@apollo/client": "3.13.8",
+    "@apollo/client": "3.13.9",
     "@emotion/react": "11.14.0",
     "@emotion/styled": "11.14.1",
     "@fontsource/inter": "5.2.6",
@@ -18,10 +18,10 @@
     "@lingui/format-po": "4.14.1",
     "@lingui/macro": "4.14.1",
     "@lingui/react": "4.14.1",
-    "@mui/icons-material": "7.2.0",
-    "@mui/material": "7.2.0",
-    "@mui/x-data-grid": "8.9.1",
-    "@mui/x-date-pickers": "8.9.0",
+    "@mui/icons-material": "7.3.1",
+    "@mui/material": "7.3.1",
+    "@mui/x-data-grid": "8.10.0",
+    "@mui/x-date-pickers": "8.10.0",
     "bignumber.js": "9.3.1",
     "dayjs": "1.11.13",
     "formik": "2.4.6",
@@ -36,9 +36,9 @@
     "react-router-dom": "5.3.4",
     "react-virtualized-auto-sizer": "1.0.26",
     "react-window": "1.8.11",
-    "swr": "2.3.4",
+    "swr": "2.3.5",
     "tweetnacl": "1.0.3",
-    "yup": "1.6.1"
+    "yup": "1.7.0"
   },
   "scripts": {
     "start": "vite",
@@ -69,12 +69,12 @@
     "@parcel/watcher": "2.5.1",
     "@types/lodash": "4.17.20",
     "@types/papaparse": "5.3.16",
-    "@types/react": "19.1.8",
-    "@types/react-dom": "19.1.6",
+    "@types/react": "19.1.9",
+    "@types/react-dom": "19.1.7",
     "@types/react-router-dom": "5.3.3",
     "@types/react-window": "1.8.8",
     "@vitejs/plugin-basic-ssl": "2.1.0",
-    "@vitejs/plugin-react": "4.7.0",
+    "@vitejs/plugin-react": "5.0.0",
     "babel-plugin-macros": "3.1.0",
     "eslint": "8.57.1",
     "eslint-config-prettier": "10.1.8",
@@ -83,12 +83,12 @@
     "eslint-plugin-react-hooks": "5.2.0",
     "husky": "9.1.7",
     "knip": "5.62.0",
-    "lint-staged": "16.1.2",
+    "lint-staged": "16.1.5",
     "prettier": "3.6.2",
-    "typescript": "5.8.3",
-    "typescript-eslint": "8.38.0",
-    "vite": "7.0.6",
-    "vite-plugin-checker": "0.10.1",
+    "typescript": "5.9.2",
+    "typescript-eslint": "8.39.0",
+    "vite": "7.1.5",
+    "vite-plugin-checker": "0.10.2",
     "vite-tsconfig-paths": "5.1.4",
     "vitest": "3.2.4"
   },
@@ -123,8 +123,9 @@
       "@babel/helpers@<7.26.10": ">=7.26.10",
       "@babel/runtime@<7.26.10": ">=7.26.10",
       "brace-expansion@>=1.0.0 <=1.1.11": "^1.1.12",
-      "brace-expansion@>=2.0.0 <=2.0.1": "^2.0.2"
+      "brace-expansion@>=2.0.0 <=2.0.1": "^2.0.2",
+      "tmp@<=0.2.3": ">=0.2.4"
     }
   },
-  "packageManager": "pnpm@10.13.1+sha512.37ebf1a5c7a30d5fabe0c5df44ee8da4c965ca0c5af3dbab28c3a1681b70a256218d05c81c9c0dcf767ef6b8551eb5b960042b9ed4300c59242336377e01cfad"
+  "packageManager": "pnpm@10.14.0+sha512.ad27a79641b49c3e481a16a805baa71817a04bbe06a38d17e60e2eaee83f6a146c6a688125f5792e48dd5ba30e7da52a5cda4c3992b9ccf333f9ce223af84748"
 }

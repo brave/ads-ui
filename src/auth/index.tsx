@@ -5,7 +5,7 @@ import {
   IAuthState,
 } from "@/auth/context/auth.interface";
 import { IAuthContext, initialState } from "@/auth/context/auth.state";
-import { getUser, ResponseUser } from "./lib";
+import { getAdvertiserMessage, getUser, ResponseUser } from "./lib";
 import _ from "lodash";
 import { setActiveAdvertiser } from "./util";
 
@@ -43,6 +43,7 @@ export const IAuthProvider = ({ children }: IAuthProviderProps) => {
         fullName: u.fullName,
         advertisers: u.advertisers,
         isAuthenticated: u.advertisers.length > 0 && !!active,
+        advertiserMessage: u.message,
       }));
     } else {
       setState((cur) => ({
@@ -57,7 +58,8 @@ export const IAuthProvider = ({ children }: IAuthProviderProps) => {
     setLoading(true);
     getUser()
       .then(async (res) => {
-        setSessionUser(res);
+        const advertiserMessageResponse = await getAdvertiserMessage();
+        setSessionUser({ ...res, ...advertiserMessageResponse });
       })
       .catch((e) => {
         console.error(e);

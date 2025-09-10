@@ -13,10 +13,12 @@ import { AlwaysOnFormButton } from "@/components/Button/AlwaysOnFormButton";
 import { msg } from "@lingui/macro";
 import { SupportMenu } from "@/components/Drawer/SupportMenu";
 import { ItemBox, RouteOption } from "@/components/Drawer/components/ItemBox";
+import { useBannerHeight } from "../Navigation/Navbar";
 
 const drawerWidth = 85;
 export default function MiniSideBar({ children }: PropsWithChildren) {
   const { advertiser } = useAdvertiser();
+  const { bannerHeight } = useBannerHeight();
   const dashboardRoutes: RouteOption[] = [
     {
       label: msg`Campaigns`,
@@ -84,7 +86,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
           width: drawerWidth,
         }}
       >
-        <Toolbar />
+        <Toolbar sx={{ marginTop: `${bannerHeight}px` }} />
         <Box
           display="flex"
           justifyContent="space-between"
