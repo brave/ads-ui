@@ -8,7 +8,14 @@ export function WhyUseBraveAds() {
   const { _ } = useLingui();
 
   return (
-    <Stack maxWidth={1200} spacing={3} mt={5} mb={3} flexGrow={1}>
+    <Stack
+      maxWidth={1200}
+      spacing={3}
+      mt={5}
+      mb={3}
+      flexGrow={1}
+      paddingX={{ xs: 2, md: 1, xl: 0 }}
+    >
       <Typography
         variant="h4"
         textAlign="center"

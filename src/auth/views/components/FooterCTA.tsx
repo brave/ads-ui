@@ -4,7 +4,12 @@ import { Link as RouterLink } from "react-router-dom";
 
 export function FooterCTA() {
   return (
-    <Box display="flex" justifyContent="center" mt={5}>
+    <Box
+      display="flex"
+      justifyContent="center"
+      mt={5}
+      paddingX={{ xs: 1, lg: 0 }}
+    >
       <Stack maxWidth={1000} spacing={3}>
         <Typography variant="h4" textAlign="center" fontWeight={500}>
           <Trans>

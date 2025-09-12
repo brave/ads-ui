@@ -8,7 +8,7 @@ export function GetStartedLandingPage() {
   const isAuthenticated = useIsAuthenticated();
 
   return (
-    <Stack spacing={3}>
+    <Stack spacing={3} paddingX={{ xs: 1, xl: 0 }}>
       <Stack
         direction={{ xs: "column", md: "row" }}
         alignItems="center"
@@ -28,7 +28,15 @@ export function GetStartedLandingPage() {
             </Trans>
           </Typography>
         </Stack>
-        <img src={adFormats} height={287} width="100%" />
+        <img
+          src={adFormats}
+          style={{
+            height: 287,
+            width: "100%",
+            maxWidth: "600px",
+            objectFit: "contain",
+          }}
+        />
       </Stack>
 
       <Box display="flex" flexDirection="row" alignItems="baseline" gap="10px">
