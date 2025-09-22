@@ -7,8 +7,8 @@
     "@apollo/client": "3.14.0",
     "@emotion/react": "11.14.0",
     "@emotion/styled": "11.14.1",
-    "@fontsource/inter": "5.2.6",
-    "@fontsource/mulish": "5.2.6",
+    "@fontsource/inter": "5.2.7",
+    "@fontsource/mulish": "5.2.7",
     "@fontsource/poppins": "5.2.6",
     "@graphql-typed-document-node/core": "3.2.0",
     "@jonkoops/matomo-tracker-react": "0.7.0",
@@ -69,7 +69,7 @@
     "@parcel/watcher": "2.5.1",
     "@types/lodash": "4.17.20",
     "@types/papaparse": "5.3.16",
-    "@types/react": "19.1.12",
+    "@types/react": "19.1.13",
     "@types/react-dom": "19.1.9",
     "@types/react-router-dom": "5.3.3",
     "@types/react-window": "1.8.8",
@@ -127,5 +127,5 @@
       "tmp@<=0.2.3": ">=0.2.4"
     }
   },
-  "packageManager": "pnpm@10.15.1+sha512.34e538c329b5553014ca8e8f4535997f96180a1d0f614339357449935350d924e22f8614682191264ec33d1462ac21561aff97f6bb18065351c162c7e8f6de67"
+  "packageManager": "pnpm@10.16.1+sha512.0e155aa2629db8672b49e8475da6226aa4bdea85fdcdfdc15350874946d4f3c91faaf64cbdc4a5d1ab8002f473d5c3fcedcd197989cf0390f9badd3c04678706"
 }
