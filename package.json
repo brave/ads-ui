@@ -38,7 +38,7 @@
     "react-window": "1.8.11",
     "swr": "2.3.6",
     "tweetnacl": "1.0.3",
-    "yup": "1.7.0"
+    "yup": "1.7.1"
   },
   "scripts": {
     "start": "vite",
@@ -82,12 +82,12 @@
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "5.2.0",
     "husky": "9.1.7",
-    "knip": "5.63.1",
-    "lint-staged": "16.1.6",
+    "knip": "5.64.0",
+    "lint-staged": "16.2.0",
     "prettier": "3.6.2",
     "typescript": "5.9.2",
-    "typescript-eslint": "8.44.0",
-    "vite": "7.1.6",
+    "typescript-eslint": "8.44.1",
+    "vite": "7.1.7",
     "vite-plugin-checker": "0.10.3",
     "vite-tsconfig-paths": "5.1.4",
     "vitest": "3.2.4"
@@ -127,5 +127,5 @@
       "tmp@<=0.2.3": ">=0.2.4"
     }
   },
-  "packageManager": "pnpm@10.17.0+sha512.fce8a3dd29a4ed2ec566fb53efbb04d8c44a0f05bc6f24a73046910fb9c3ce7afa35a0980500668fa3573345bd644644fa98338fa168235c80f4aa17aa17fbef"
+  "packageManager": "pnpm@10.17.1+sha512.17c560fca4867ae9473a3899ad84a88334914f379be46d455cbf92e5cf4b39d34985d452d2583baf19967fa76cb5c17bc9e245529d0b98745721aa7200ecaf7a"
 }
