@@ -58,7 +58,9 @@ export type AdSet = {
   optimized: Scalars['Boolean']['output'];
   oses: Array<Os>;
   perDay: Scalars['Float']['output'];
+  preferOrganicCreative: Scalars['Boolean']['output'];
   price: Scalars['Numeric']['output'];
+  priority?: Maybe<Scalars['Float']['output']>;
   queryStrings: Array<KeyValue>;
   rewardPaymentTokenValue: Scalars['Numeric']['output'];
   segments: Array<Segment>;
@@ -198,7 +200,7 @@ export type Advertiser = {
   phone?: Maybe<Scalars['String']['output']>;
   prices: Array<AdvertiserPrice>;
   publicKey?: Maybe<Scalars['String']['output']>;
-  referrer?: Maybe<Scalars['String']['output']>;
+  salesperson?: Maybe<User>;
   selfServiceManageCampaign: Scalars['Boolean']['output'];
   selfServiceSetPrice: Scalars['Boolean']['output'];
   state: Scalars['String']['output'];
@@ -296,6 +298,23 @@ export enum BillingType {
   /** @deprecated Experiment, no longer supported */
   Cpsv = 'CPSV'
 }
+
+export type BulkUpdateAdSetsInput = {
+  brandedDesktopPrice?: InputMaybe<Scalars['Numeric']['input']>;
+  brandedMobilePrice?: InputMaybe<Scalars['Numeric']['input']>;
+  campaignId: Scalars['String']['input'];
+  keywordSimilarity?: InputMaybe<Scalars['Float']['input']>;
+  keywordSimilarityMobile?: InputMaybe<Scalars['Float']['input']>;
+  nonBrandedDesktopPrice?: InputMaybe<Scalars['Numeric']['input']>;
+  nonBrandedMobilePrice?: InputMaybe<Scalars['Numeric']['input']>;
+  oses?: InputMaybe<Array<CreateOsInput>>;
+  price?: InputMaybe<Scalars['Numeric']['input']>;
+};
+
+export type BulkUpdateAdSetsOutput = {
+  __typename?: 'BulkUpdateAdSetsOutput';
+  updatedCount: Scalars['Float']['output'];
+};
 
 export type Campaign = {
   __typename?: 'Campaign';
@@ -493,6 +512,7 @@ export enum CampaignType {
   MakeGood = 'MAKE_GOOD',
   Paid = 'PAID',
   Preemptive = 'PREEMPTIVE',
+  Product = 'PRODUCT',
   Survey = 'SURVEY',
   Trial = 'TRIAL'
 }
@@ -547,7 +567,6 @@ export type Conversion = {
   id: Scalars['String']['output'];
   modifiedAt: Scalars['DateTime']['output'];
   observationWindow: Scalars['Float']['output'];
-  trailingAsteriskNotRequired: Scalars['Boolean']['output'];
   urlPattern: Scalars['String']['output'];
 };
 
@@ -560,6 +579,7 @@ export type CreateAdInput = {
 
 export type CreateAdSetInput = {
   ads?: InputMaybe<Array<CreateAdInput>>;
+  /** @deprecated now configured at campaign level */
   bannedKeywords?: InputMaybe<Array<Scalars['String']['input']>>;
   billingType: Scalars['String']['input'];
   brandedDesktopPrice?: InputMaybe<Scalars['Numeric']['input']>;
@@ -580,8 +600,10 @@ export type CreateAdSetInput = {
   optimized?: InputMaybe<Scalars['Boolean']['input']>;
   oses?: InputMaybe<Array<CreateOsInput>>;
   perDay: Scalars['Float']['input'];
+  preferOrganicCreative?: InputMaybe<Scalars['Boolean']['input']>;
   /** The price in the owning campaign's currency for each single confirmation of the priceType specified. Note therefore that the caller is responsible for dividing cost-per-mille by 1000. */
   price: Scalars['Numeric']['input'];
+  priority?: InputMaybe<Scalars['Float']['input']>;
   queryStrings?: InputMaybe<Array<KeyValueInput>>;
   segments: Array<CreateSegmentInput>;
   splitTestGroup?: InputMaybe<Scalars['String']['input']>;
@@ -618,7 +640,7 @@ export type CreateAdvertiserInput = {
   marketingChannel?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
   phone?: InputMaybe<Scalars['String']['input']>;
-  referrer?: InputMaybe<Scalars['String']['input']>;
+  salespersonId?: InputMaybe<Scalars['String']['input']>;
   selfServiceManageCampaign?: InputMaybe<Scalars['Boolean']['input']>;
   state?: InputMaybe<Scalars['String']['input']>;
   url?: InputMaybe<Scalars['String']['input']>;
@@ -637,6 +659,7 @@ export type CreateCampaignInput = {
   adSets?: InputMaybe<Array<CreateAdSetInput>>;
   advertiserId: Scalars['String']['input'];
   bannedKeywords?: InputMaybe<Array<Scalars['String']['input']>>;
+  /** @deprecated use brandedKeywords instead */
   brandedKeyword?: InputMaybe<Scalars['String']['input']>;
   brandedKeywords?: InputMaybe<Array<Scalars['String']['input']>>;
   budget: Scalars['Numeric']['input'];
@@ -675,7 +698,6 @@ export type CreateCommentInput = {
 export type CreateConversionInput = {
   extractExternalId?: InputMaybe<Scalars['Boolean']['input']>;
   observationWindow: Scalars['Float']['input'];
-  trailingAsteriskNotRequired?: InputMaybe<Scalars['Boolean']['input']>;
   urlPattern: Scalars['String']['input'];
 };
 
@@ -692,6 +714,9 @@ export type CreateSegmentInput = {
 export type CreateUserInput = {
   email: Scalars['String']['input'];
   fullName: Scalars['String']['input'];
+  isAccountManager?: InputMaybe<Scalars['Boolean']['input']>;
+  isExternalReferrer?: InputMaybe<Scalars['Boolean']['input']>;
+  isSalesperson?: InputMaybe<Scalars['Boolean']['input']>;
   password?: InputMaybe<Scalars['String']['input']>;
   role: Scalars['String']['input'];
 };
@@ -823,6 +848,7 @@ export type Geocode = {
 
 export type GeocodeInput = {
   code: Scalars['String']['input'];
+  /** @deprecated Present for backwards compatibility only. The value is ignored. */
   name?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -950,6 +976,7 @@ export type Mutation = {
   adsManagerUpdateCreativeState: Creative;
   approveAdvertiserRegistration: Advertiser;
   approveCampaign: Campaign;
+  bulkUpdateAdSets: BulkUpdateAdSetsOutput;
   copyCampaign: Campaign;
   createAdSet: AdSet;
   createAdvertiser: Advertiser;
@@ -1018,6 +1045,11 @@ export type MutationApproveAdvertiserRegistrationArgs = {
 
 export type MutationApproveCampaignArgs = {
   approveCampaignInput: ApproveCampaignInput;
+};
+
+
+export type MutationBulkUpdateAdSetsArgs = {
+  input: BulkUpdateAdSetsInput;
 };
 
 
@@ -1695,8 +1727,10 @@ export type UpdateAdSetInput = {
   optimized?: InputMaybe<Scalars['Boolean']['input']>;
   oses?: InputMaybe<Array<UpdateOSesInput>>;
   perDay?: InputMaybe<Scalars['Float']['input']>;
+  preferOrganicCreative?: InputMaybe<Scalars['Boolean']['input']>;
   /** The price in the owning campaign's currency for each single confirmation of the priceType specified. Note therefore that the caller is responsible for dividing cost-per-mille by 1000. */
   price?: InputMaybe<Scalars['Numeric']['input']>;
+  priority?: InputMaybe<Scalars['Float']['input']>;
   queryStrings?: InputMaybe<Array<KeyValueInput>>;
   segments?: InputMaybe<Array<UpdateSegmentInput>>;
   splitTestGroup?: InputMaybe<Scalars['String']['input']>;
@@ -1733,7 +1767,7 @@ export type UpdateAdvertiserInput = {
   ofacCompliant?: InputMaybe<Scalars['Boolean']['input']>;
   phone?: InputMaybe<Scalars['String']['input']>;
   publicKey?: InputMaybe<Scalars['String']['input']>;
-  referrer?: InputMaybe<Scalars['String']['input']>;
+  salespersonId?: InputMaybe<Scalars['String']['input']>;
   selfServiceManageCampaign?: InputMaybe<Scalars['Boolean']['input']>;
   state?: InputMaybe<Scalars['String']['input']>;
   url?: InputMaybe<Scalars['String']['input']>;
@@ -1789,7 +1823,6 @@ export type UpdateConversionsInput = {
   extractExternalId?: InputMaybe<Scalars['Boolean']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   observationWindow?: InputMaybe<Scalars['Float']['input']>;
-  trailingAsteriskNotRequired?: InputMaybe<Scalars['Boolean']['input']>;
   urlPattern?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1829,6 +1862,9 @@ export type UpdateUserInput = {
   email?: InputMaybe<Scalars['String']['input']>;
   fullName?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
+  isAccountManager?: InputMaybe<Scalars['Boolean']['input']>;
+  isExternalReferrer?: InputMaybe<Scalars['Boolean']['input']>;
+  isSalesperson?: InputMaybe<Scalars['Boolean']['input']>;
   password?: InputMaybe<Scalars['String']['input']>;
   role?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1841,6 +1877,9 @@ export type User = {
   emailVerified: Scalars['Boolean']['output'];
   fullName: Scalars['String']['output'];
   id: Scalars['String']['output'];
+  isAccountManager: Scalars['Boolean']['output'];
+  isExternalReferrer: Scalars['Boolean']['output'];
+  isSalesperson: Scalars['Boolean']['output'];
   role: Scalars['String']['output'];
 };
 
