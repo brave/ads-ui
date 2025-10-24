@@ -14,7 +14,6 @@
     "@jonkoops/matomo-tracker-react": "0.7.0",
     "@lingui/conf": "4.14.1",
     "@lingui/core": "4.14.1",
-    "@lingui/detect-locale": "4.14.1",
     "@lingui/format-po": "4.14.1",
     "@lingui/macro": "4.14.1",
     "@lingui/react": "4.14.1",

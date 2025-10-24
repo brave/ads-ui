@@ -53,9 +53,6 @@ importers:
       '@lingui/core':
         specifier: 4.14.1
         version: 4.14.1
-      '@lingui/detect-locale':
-        specifier: 4.14.1
-        version: 4.14.1
       '@lingui/format-po':
         specifier: 4.14.1
         version: 4.14.1(typescript@5.9.3)
@@ -1326,10 +1323,6 @@ packages:
 
   '@lingui/core@4.14.1':
     resolution: {integrity: sha512-3O6bnNzApWjb+jIdXa7G2VbrP6jZ5nfCeYSVloEYg6YFIfsQ3GunccK6I2nL80mWgr2qGP4VilGD+ODCeXHITA==}
-    engines: {node: '>=16.0.0'}
-
-  '@lingui/detect-locale@4.14.1':
-    resolution: {integrity: sha512-w3sS+tVcZ8uDVJxLjHYArTjzUFK0NyMh2wukVGU52UO1WYjCCujf1DPboooIm5zeMquuTpa5XK017lnPJzB21w==}
     engines: {node: '>=16.0.0'}
 
   '@lingui/format-po@4.14.1':
@@ -5953,8 +5946,6 @@ snapshots:
       '@babel/runtime': 7.26.10
       '@lingui/message-utils': 4.14.1
       unraw: 3.0.0
-
-  '@lingui/detect-locale@4.14.1': {}
 
   '@lingui/format-po@4.14.1(typescript@5.9.3)':
     dependencies:
