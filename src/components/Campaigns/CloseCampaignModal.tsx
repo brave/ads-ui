@@ -5,7 +5,6 @@ import { modalStyles } from "@/theme";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { useMutation } from "@apollo/client";
 import BigNumber from "bignumber.js";
-import { Trans } from "@lingui/macro";
 import { useHistory } from "react-router-dom";
 import { FilterContext } from "@/state/context";
 import {
@@ -85,8 +84,8 @@ export function CloseCampaignModal({ campaign, type, disabled }: Props) {
           setOpen(true);
         }}
       >
-        {isInline && <Trans>Close</Trans>}
-        {!isInline && <Trans>Close Campaign</Trans>}
+        {isInline && <>Close</>}
+        {!isInline && <>Close Campaign</>}
       </Button>
       <Modal open={open} onClose={() => setOpen(false)}>
         <Box
@@ -96,15 +95,13 @@ export function CloseCampaignModal({ campaign, type, disabled }: Props) {
           }}
         >
           <Typography variant="h4" mb={2}>
-            <Trans>You are about to close this campaign.</Trans>
+            You are about to close this campaign.
           </Typography>
 
           <Typography variant="subtitle1" mb={2}>
-            <Trans>
-              Closing a campaign will immediately stop it from running. Once it
-              has stopped running, any remaining funds will be transferred back
-              to your account in 24-48 hours.
-            </Trans>
+            Closing a campaign will immediately stop it from running. Once it
+            has stopped running, any remaining funds will be transferred back to
+            your account in 24-48 hours.
           </Typography>
 
           <Stack direction="row" mt={2} spacing={2}>
@@ -115,7 +112,7 @@ export function CloseCampaignModal({ campaign, type, disabled }: Props) {
                 setOpen(false);
               }}
             >
-              <Trans>Cancel</Trans>
+              Cancel
             </Button>
             <Button
               variant="contained"
@@ -124,7 +121,7 @@ export function CloseCampaignModal({ campaign, type, disabled }: Props) {
                 doMutate();
               }}
             >
-              <Trans>Continue</Trans>
+              Continue
             </Button>
           </Stack>
         </Box>

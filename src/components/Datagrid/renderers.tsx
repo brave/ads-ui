@@ -1,4 +1,3 @@
-/* eslint-disable lingui/no-unlocalized-strings */
 import { Box, Tooltip } from "@mui/material";
 import _ from "lodash";
 import { ReactElement, ReactNode, useContext } from "react";
@@ -19,7 +18,6 @@ import {
 } from "@/graphql-client/graphql";
 import { toLocaleString } from "@/util/bignumber";
 import BigNumber from "bignumber.js";
-import { Trans } from "@lingui/macro";
 import dayjs from "dayjs";
 import { useMutation } from "@apollo/client";
 import { graphql } from "@/graphql-client/index";
@@ -34,7 +32,7 @@ function formatDateForTooltip(d: dayjs.Dayjs): ReactElement {
       <Box>{d.tz(ADS_DEFAULT_TIMEZONE).format(TOOLTIP_FORMAT)}</Box>
       <Box>{d.utc().format(TOOLTIP_FORMAT)}</Box>
       <Box mt={1}>
-        <Trans>In your local time this is</Trans>
+        In your local time this is
         <br />
         {d.format(TOOLTIP_FORMAT)}
       </Box>
@@ -70,7 +68,7 @@ export const StandardRenderers: Record<string, CellValueRenderer> = {
 
     return null;
   },
-  yesno: (v) => <Box>{v ? <Trans>Yes</Trans> : <Trans>No</Trans>}</Box>,
+  yesno: (v) => <Box>{v ? "Yes" : "No"}</Box>,
 };
 
 export function renderMonetaryAmount(

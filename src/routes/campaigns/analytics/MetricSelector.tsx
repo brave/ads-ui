@@ -3,7 +3,6 @@ import { MetricDefinition } from "./metrics";
 import { DisplayedMetricsFragment } from "@/graphql-client/graphql";
 import { RenderMetricValue } from "./RenderMetricValue";
 import { useMetricSelection } from "./hooks";
-import { Trans } from "@lingui/react";
 
 interface Props {
   metricDefinition: MetricDefinition;
@@ -51,9 +50,7 @@ export function MetricSelector({
           },
         }}
       />
-      <Typography variant="body2">
-        <Trans id={metricDefinition.caption.id} />
-      </Typography>
+      <Typography variant="body2">{metricDefinition.caption}</Typography>
       <Box flex="1" />
       <Box>
         <RenderMetricValue metric={metricDefinition} value={value} />

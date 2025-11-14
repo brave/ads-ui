@@ -1,4 +1,3 @@
-/* eslint-disable lingui/no-unlocalized-strings */
 import { CountryDomain } from "@/user/views/user/search/types";
 import { buildAdServerEndpoint } from "@/util/environment";
 import useSWRImmutable from "swr/immutable";

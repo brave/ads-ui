@@ -4,7 +4,6 @@ import reactRecommended from "eslint-plugin-react/configs/recommended.js";
 import jsxRuntime from "eslint-plugin-react/configs/jsx-runtime.js";
 import prettier from "eslint-config-prettier";
 import reactHooks from "eslint-plugin-react-hooks";
-import lingui from "eslint-plugin-lingui";
 import * as graphql from "@graphql-eslint/eslint-plugin";
 
 export default tseslint.config(
@@ -14,7 +13,6 @@ export default tseslint.config(
     plugins: {
       prettier,
       "react-hooks": reactHooks,
-      lingui,
     },
   },
   {
@@ -57,68 +55,6 @@ export default tseslint.config(
       ],
       "@typescript-eslint/no-empty-function": "off",
       "@typescript-eslint/no-require-imports": "error",
-      "lingui/no-unlocalized-strings": [
-        "error",
-        {
-          ignore: [
-            // Ignore strings which are a single "word" (no spaces)
-            // and doesn't start with an uppercase letter
-            "^(?![A-Z])\\S+$",
-            // Ignore UPPERCASE literals
-            // Example: const test = "FOO"
-            "^[A-Z0-9_-]+$",
-          ],
-          ignoreFunctions: [
-            "createSvgIcon",
-            "log",
-            "useTrackMatomoPageView",
-            "useTrackWithMatomo",
-            "formatInTimeZone",
-            "zonedTimeToUtc",
-            "utcToZonedTime",
-            "graphql",
-            "getGenericMultiSelect",
-          ],
-          ignoreNames: [
-            "style",
-            "sx",
-            "fontFamily",
-            "bgcolor",
-            "border",
-            "padding",
-            "color",
-            "alt",
-            "borderBottom",
-            "gridTemplateColumns",
-            "gridTemplateRows",
-            "gridTemplateAreas",
-            "rel",
-            "documentTitle",
-            "color",
-            "border",
-            "en",
-            "es",
-            "fontFamily",
-            "boxShadow",
-            "transform",
-            "format",
-            "name",
-            "padding",
-            "xDateFormat",
-            "day",
-            "week",
-            "month",
-            "Content-Type",
-            "Accept-Language",
-            "& .MuiAvatar-root",
-          ],
-        },
-      ],
-      "lingui/t-call-in-function": "error",
-      "lingui/no-single-variables-to-translate": "error",
-      "lingui/no-expression-in-message": "error",
-      "lingui/no-single-tag-to-translate": "error",
-      "lingui/no-trans-inside-trans": "error",
     },
     ignores: [
       "**/*.test.ts",

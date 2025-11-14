@@ -1,6 +1,5 @@
 import { Link } from "@mui/material";
 import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
-import { Trans } from "@lingui/macro";
 import { TypographyOwnProps } from "@mui/material/Typography";
 
 export function LearnMoreButton(props: {
@@ -20,7 +19,7 @@ export function LearnMoreButton(props: {
         window.open(url, "__blank", "noopener");
       }}
     >
-      <Trans>Learn More</Trans>
+      Learn More
     </Link>
   );
 }

@@ -6,7 +6,6 @@ import { PropsWithChildren } from "react";
 import { useField } from "formik";
 import { Creative } from "@/user/views/adsManager/types";
 import { DisplayError } from "@/user/views/adsManager/views/advanced/components/review/components/ReviewField";
-import { Trans } from "@lingui/macro";
 import { filterCreativesByCampaignFormat } from "@/user/ads/filterCreativesByCampaignFormat";
 
 interface Props extends PropsWithChildren {
@@ -40,7 +39,7 @@ export function CreativeSpecificPreview({
     return (
       <>
         <Typography variant="overline" component="span" paddingRight={1}>
-          <Trans>Ads</Trans>
+          Ads
         </Typography>
         <DisplayError error={error} />
       </>
@@ -51,7 +50,7 @@ export function CreativeSpecificPreview({
     <>
       {useSimpleHeader && (
         <Typography variant="overline" component="span" paddingRight={1}>
-          <Trans>Ads</Trans>
+          Ads
         </Typography>
       )}
       <Stack

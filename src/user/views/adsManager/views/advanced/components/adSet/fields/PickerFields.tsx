@@ -6,7 +6,6 @@ import { useField } from "formik";
 import { CampaignFormat, SegmentFragment } from "@/graphql-client/graphql";
 import { useEffect } from "react";
 import { LearnMoreButton } from "@/components/Button/LearnMoreButton";
-import { Trans } from "@lingui/macro";
 
 interface Props {
   index: number;
@@ -18,17 +17,14 @@ export function PickerFields({ index }: Props) {
 
   useEffect(() => {
     if (format.value === CampaignFormat.NewsDisplayAd) {
-      // eslint-disable-next-line lingui/no-unlocalized-strings
       helper.setValue([{ code: "Svp7l-zGN", name: "Untargeted" }]);
     }
   }, [format.value]);
 
   return (
-    <CardContainer header={<Trans>Targeting</Trans>}>
+    <CardContainer header="Targeting">
       <Typography variant="body2" sx={{ mb: 2 }}>
-        <Trans>
-          Select the interest segments and platforms you would like to target.
-        </Trans>{" "}
+        Select the interest segments and platforms you would like to target.{" "}
         <LearnMoreButton helpSection="campaign-performance/targeting" />
       </Typography>
       {format.value !== CampaignFormat.NewsDisplayAd && (

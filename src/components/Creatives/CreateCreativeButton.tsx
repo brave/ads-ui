@@ -8,7 +8,6 @@ import _ from "lodash";
 import { useField, useFormikContext } from "formik";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { validCreativeFields } from "@/user/library";
-import { Trans } from "@lingui/macro";
 import { useMutation } from "@apollo/client";
 import {
   AdvertiserCreativesDocument,
@@ -80,7 +79,7 @@ export function CreateCreativeButton({ index }: Props) {
       }
       loading={loading}
     >
-      <Trans>Save ad</Trans>
+      Save ad
     </Button>
   );
 }

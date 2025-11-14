@@ -4,7 +4,6 @@ import { useParams, Link as RouterLink } from "react-router-dom";
 import { Button, Card, Container, Stack, Typography } from "@mui/material";
 import { useValidatePaymentSession } from "@/checkout/hooks/useValidatePaymentSession";
 import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
-import { Trans } from "@lingui/macro";
 
 interface Params {
   mode: "edit" | "new";
@@ -37,18 +36,16 @@ export function CompletionForm() {
         }}
       >
         <Typography variant="h4" sx={{ textAlign: "center", mb: 3 }}>
-          <Trans>Congratulations! 🎉</Trans>
+          Congratulations! 🎉
         </Typography>
 
         {params.mode === "edit" && (
           <>
             <Typography sx={{ textAlign: "center" }} variant="h6">
-              <Trans>
-                Your campaign has been updated! <br />
-                If you added new ads, we&rsquo;ll be in contact as soon as they
-                are approved and activated. <br />
-                Thank you for using Brave Ads!
-              </Trans>
+              Your campaign has been updated! <br />
+              If you added new ads, we&rsquo;ll be in contact as soon as they
+              are approved and activated. <br />
+              Thank you for using Brave Ads!
             </Typography>
 
             <Button
@@ -60,7 +57,7 @@ export function CompletionForm() {
               component={RouterLink}
               to="/user/main/campaigns"
             >
-              <Trans>Continue</Trans>
+              Continue
             </Button>
           </>
         )}
@@ -68,25 +65,21 @@ export function CompletionForm() {
         {params.mode === "new" && (
           <>
             <Typography sx={{ textAlign: "center" }} variant="h6">
-              <Trans>
-                Your campaign has been created and is now being reviewed by our
-                ads team. <br />
-                We&rsquo;ll be in contact as soon as your campaign is approved
-                and activated.
-              </Trans>
+              Your campaign has been created and is now being reviewed by our
+              ads team. <br />
+              We&rsquo;ll be in contact as soon as your campaign is approved and
+              activated.
             </Typography>
 
             {!clickedSurvey && (
               <Typography sx={{ textAlign: "center", mt: 3 }} variant="h6">
-                <Trans>
-                  We value your feedback and would love to hear your thoughts on
-                  your recent experience. <br />
-                  Your input will help us improve the Brave Ads platform to
-                  better meet your needs. <br />
-                  It only takes a few minutes and your participation will be
-                  greatly appreciated! <br />
-                  Thank you for using Brave Ads! <br />
-                </Trans>
+                We value your feedback and would love to hear your thoughts on
+                your recent experience. <br />
+                Your input will help us improve the Brave Ads platform to better
+                meet your needs. <br />
+                It only takes a few minutes and your participation will be
+                greatly appreciated! <br />
+                Thank you for using Brave Ads! <br />
               </Typography>
             )}
 
@@ -133,7 +126,7 @@ function ValidateCampaignButton(props: {
           loading={props.loading}
           disabled={props.loading}
         >
-          <Trans>Take our survey!</Trans>
+          Take our survey!
         </Button>
       )}
 
@@ -144,11 +137,7 @@ function ValidateCampaignButton(props: {
         loading={props.loading}
         disabled={props.loading}
       >
-        {props.clicked ? (
-          <Trans>Continue</Trans>
-        ) : (
-          <Trans>Skip survey and continue</Trans>
-        )}
+        {props.clicked ? "Continue" : "Skip survey and continue"}
       </Button>
     </Stack>
   );

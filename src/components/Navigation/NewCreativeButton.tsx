@@ -1,7 +1,6 @@
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { Button } from "@mui/material";
 import { Link as RouterLink, useRouteMatch } from "react-router-dom";
-import { Trans } from "@lingui/macro";
 
 export function NewCreativeButton() {
   const newUrl = "/user/main/creative/new";
@@ -22,7 +21,7 @@ export function NewCreativeButton() {
       sx={{ mr: 3 }}
       disabled={isNewCreativePage || !advertiser.agreed}
     >
-      <Trans>New ad</Trans>
+      New ad
     </Button>
   );
 }

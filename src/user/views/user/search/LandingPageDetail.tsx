@@ -14,7 +14,6 @@ import { useQuery } from "@apollo/client";
 import { graphql } from "@/graphql-client";
 import {} from "@/graphql-client/graphql";
 import _ from "lodash";
-import { Trans } from "@lingui/macro";
 
 const SearchProspects_LandingPageDetail = graphql(`
   query SearchProspectsLandingPageDetail(
@@ -138,7 +137,7 @@ function LandingPageDetailContent({
   return (
     <Box sx={{ padding: 2, width: 600, height: 300 }}>
       <Typography variant="h2" gutterBottom>
-        <Trans>Full Landing Page URL</Trans>
+        Full Landing Page URL
       </Typography>
 
       <Typography gutterBottom fontFamily="monospace" fontSize="small">
@@ -146,7 +145,7 @@ function LandingPageDetailContent({
       </Typography>
 
       <Typography variant="h2" marginTop={2} marginBottom={1}>
-        <Trans>Sample Queries</Trans>
+        Sample Queries
       </Typography>
 
       <Box display="flex" flexWrap="wrap" gap={1} marginBottom={2}>

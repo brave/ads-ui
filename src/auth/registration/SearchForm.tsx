@@ -1,19 +1,15 @@
 import { Box } from "@mui/material";
 import { FormikTextField } from "@/form/FormikHelpers";
 import { MarketingOptIn } from "@/auth/registration/MarketingOptIn";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { MarketingChannel } from "@/auth/registration/MarketingChannel";
 import { CountryPicker } from "@/components/Country/CountryPicker";
 
 export function SearchForm() {
-  const { _ } = useLingui();
-
   return (
     <Box width={375} p={1}>
       <FormikTextField
         name="user.fullName"
-        label={_(msg`Full name`)}
+        label="Full name"
         margin="dense"
         autoComplete="given-name"
         size="small"
@@ -22,7 +18,7 @@ export function SearchForm() {
 
       <FormikTextField
         name="user.email"
-        label={_(msg`Work email`)}
+        label="Work email"
         type="email"
         margin="dense"
         autoComplete="email"
@@ -32,7 +28,7 @@ export function SearchForm() {
 
       <FormikTextField
         name="domain"
-        label={_(msg`Domain to advertise`)}
+        label="Domain to advertise"
         autoComplete="url"
         margin="dense"
         size="small"
@@ -41,7 +37,7 @@ export function SearchForm() {
 
       <CountryPicker
         name="country"
-        label={_(msg`Primary region of business`)}
+        label="Primary region of business"
         filter={["US", "GB", "DE", "FR", "CA", "IN"]}
       />
 

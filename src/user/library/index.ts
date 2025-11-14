@@ -19,7 +19,6 @@ import {
 } from "@/user/views/adsManager/types";
 import _ from "lodash";
 import BigNumber from "bignumber.js";
-import { t } from "@lingui/macro";
 import dayjs from "dayjs";
 
 export function transformNewForm(form: CampaignForm): CreateCampaignInput {
@@ -292,11 +291,11 @@ function transformAdSet(
 
 function uiTextForCreativeType(creativeType: string): string {
   const codeLookup: Record<string, string> = {
-    notification_all_v1: t`Notification`,
-    new_tab_page_all_v1: t`New tab takeover`,
-    inline_content_all_v1: t`Newsfeed`,
-    search_all_v1: t`Search keyword`,
-    search_homepage_all_v1: t`Search homepage`,
+    notification_all_v1: "Notification",
+    new_tab_page_all_v1: "New tab takeover",
+    inline_content_all_v1: "Newsfeed",
+    search_all_v1: "Search keyword",
+    search_homepage_all_v1: "Search homepage",
   };
 
   return codeLookup[creativeType] ?? creativeType;

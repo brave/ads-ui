@@ -1,13 +1,10 @@
 import { FilterProps } from "./FilterBar";
 import { FilterButton } from "./FilterButton";
-import { useLingui } from "@lingui/react";
-import { msg } from "@lingui/macro";
-import { MessageDescriptor, i18n } from "@lingui/core";
 import { useOsFilterParams } from "@/routes/campaigns/analytics/hooks";
 import { applySelection } from "@/routes/campaigns/analytics/filters/multi-filters";
 
 interface OsFilterEntry {
-  label: MessageDescriptor;
+  label: string;
   id: string;
   divider?: boolean;
 }
@@ -17,12 +14,12 @@ export interface LocalizedOsFilterEntry extends Omit<OsFilterEntry, "label"> {
 }
 
 const OS_FILTER_ITEMS: OsFilterEntry[] = [
-  { id: "all", label: msg`All OS`, divider: true },
-  { id: "android", label: msg`Android` },
-  { id: "ios", label: msg`iOS` },
-  { id: "linux", label: msg`Linux` },
-  { id: "macos", label: msg`macOS` },
-  { id: "windows", label: msg`Windows` },
+  { id: "all", label: "All OS", divider: true },
+  { id: "android", label: "Android" },
+  { id: "ios", label: "iOS" },
+  { id: "linux", label: "Linux" },
+  { id: "macos", label: "macOS" },
+  { id: "windows", label: "Windows" },
 ];
 
 const osLookup = new Map<string, OsFilterEntry>(
@@ -33,11 +30,10 @@ export function getOsFilter(
   id: string | null | undefined,
 ): LocalizedOsFilterEntry | undefined {
   const item = osLookup.get(id ?? "");
-  return item ? { id: item.id, label: i18n._(item.label) } : undefined;
+  return item ? { id: item.id, label: item.label } : undefined;
 }
 
 export function OsFilter(props: FilterProps) {
-  const { _ } = useLingui();
   const {
     isSelected,
     forceDefaultSelection,
@@ -74,7 +70,7 @@ export function OsFilter(props: FilterProps) {
       }}
       menuItems={OS_FILTER_ITEMS.map((item) => ({
         ...item,
-        label: _(item.label),
+        label: item.label,
       }))}
       itemSelectionState={(item) => {
         if (item.id === "all") return "no-selection-state";

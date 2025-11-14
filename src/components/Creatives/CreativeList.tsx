@@ -10,10 +10,7 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { CreativeStatusSwitch } from "@/components/Creatives/CreativeStatusSwitch";
 import { CustomToolbar } from "@/components/Datagrid/CustomToolbar";
 import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
-import { useLingui, Trans as ReactTrans } from "@lingui/react";
-import { msg } from "@lingui/macro";
 
-import { MessageDescriptor } from "@lingui/core";
 import { useQuery } from "@apollo/client";
 import {
   AdvertiserCreativesDocument,
@@ -24,7 +21,6 @@ const ALLOWED_TYPES = ["notification_all_v1"];
 export function CreativeList() {
   useTrackMatomoPageView({ documentTitle: "Advertiser Creatives" });
   const { advertiser } = useAdvertiser();
-  const { _ } = useLingui();
   const { data, error, loading } = useQuery(AdvertiserCreativesDocument, {
     variables: {
       advertiserId: advertiser.id,
@@ -36,7 +32,7 @@ export function CreativeList() {
     {
       field: "switch",
       type: "actions",
-      headerName: _(msg`On / Off`),
+      headerName: "On / Off",
       renderCell: ({ row }) => <CreativeStatusSwitch creative={row} />,
       filterable: false,
       sortable: false,
@@ -44,7 +40,7 @@ export function CreativeList() {
     {
       field: "name",
       type: "string",
-      headerName: _(msg`Name`),
+      headerName: "Name",
       renderCell: ({ row }) => (
         <Link
           underline="none"
@@ -62,14 +58,14 @@ export function CreativeList() {
     },
     {
       field: "type",
-      headerName: _(msg`Ad Format`),
+      headerName: "Ad Format",
       valueGetter: (_value, row) => uiTextForCreativeTypeCode(row.type),
       align: "left",
       width: 200,
     },
     {
       field: "content",
-      headerName: _(msg`Content`),
+      headerName: "Content",
       valueGetter: (_value, row) => creativeValuesGetter(row),
       renderCell: ({ row }) => <CreativePayloadList creative={row} />,
       flex: 1,
@@ -78,7 +74,7 @@ export function CreativeList() {
     },
     {
       field: "state",
-      headerName: _(msg`State`),
+      headerName: "State",
       renderCell: ({ row }) => <Status state={row.state} />,
       width: 200,
     },
@@ -92,11 +88,11 @@ export function CreativeList() {
       {error && (
         <ErrorDetail
           error={error}
-          additionalDetails={msg`Unable to retrieve images`}
+          additionalDetails={"Unable to retrieve images"}
         />
       )}
       <CardContainer
-        header={_(msg`Ads`)}
+        header={"Ads"}
         sx={{
           flexGrow: 1,
           overflowX: "auto",
@@ -141,8 +137,8 @@ function CreativePayloadList(props: { creative: CreativeFragment }) {
       listItems = (
         <ListItems
           items={[
-            { primary: msg`Title`, secondary: c.payloadNotification?.title },
-            { primary: msg`Body`, secondary: c.payloadNotification?.body },
+            { primary: "Title", secondary: c.payloadNotification?.title },
+            { primary: "Body", secondary: c.payloadNotification?.body },
           ]}
         />
       );
@@ -159,7 +155,7 @@ function CreativePayloadList(props: { creative: CreativeFragment }) {
 }
 
 const ListItems = (props: {
-  items: { primary: MessageDescriptor; secondary?: string }[];
+  items: { primary: string; secondary?: string }[];
 }) => {
   return props.items.map((i, idx) => (
     <Box key={idx}>
@@ -169,7 +165,7 @@ const ListItems = (props: {
         paddingRight={1}
         fontWeight={600}
       >
-        <ReactTrans id={i.primary.id} />
+        {i.primary}
       </Typography>
       <Typography variant="body1" component="span">
         {i.secondary}

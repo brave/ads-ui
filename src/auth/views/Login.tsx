@@ -4,8 +4,6 @@ import { Link as RouterLink, useHistory } from "react-router-dom";
 import { useSignIn } from "@/auth/hooks/mutations/useSignIn";
 import { AuthContainer } from "@/auth/views/components/AuthContainer";
 import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
-import { Trans, msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
 export default function Login() {
   const { trackMatomoEvent } = useTrackWithMatomo({
@@ -14,7 +12,6 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
-  const { _ } = useLingui();
 
   const { signIn, loading, error } = useSignIn({
     onSuccess() {
@@ -32,14 +29,14 @@ export default function Login() {
         sx={{ fontFamily: "Poppins", color: "#434251" }}
         variant="subtitle1"
       >
-        <Trans>Log into your Brave Ads account</Trans>
+        Log into your Brave Ads account
       </Typography>
       <TextField
         sx={{ mt: 5, mb: 3 }}
         fullWidth
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        label={_(msg`Email`)}
+        label="Email"
       />
       <TextField
         fullWidth
@@ -47,7 +44,7 @@ export default function Login() {
         type="password"
         sx={{ mb: 2 }}
         onChange={(e) => setPassword(e.target.value)}
-        label={_(msg`Password`)}
+        label="Password"
       />
 
       {error && <Alert severity="error">{error}</Alert>}
@@ -63,7 +60,7 @@ export default function Login() {
           signIn(email, password);
         }}
       >
-        <Trans>Log in</Trans>
+        Log in
       </Button>
 
       <Link
@@ -73,7 +70,7 @@ export default function Login() {
         to="/auth/link"
         replace
       >
-        <Trans>or sign in using a secure link</Trans>
+        or sign in using a secure link
       </Link>
     </AuthContainer>
   );

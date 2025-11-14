@@ -2,8 +2,6 @@ import { Stack } from "@mui/material";
 import { Dispatch } from "react";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { useLingui } from "@lingui/react";
-import { msg } from "@lingui/macro";
 import { Dayjs } from "dayjs";
 
 interface Props {
@@ -19,13 +17,11 @@ export const DateRangePicker = ({
   onFromChange,
   onToChange,
 }: Props) => {
-  const { _ } = useLingui();
-
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Stack direction="row" spacing={1}>
         <DatePicker
-          label={_(msg`From`)}
+          label="From"
           value={from}
           timezone="UTC"
           onChange={(newValue) => {
@@ -41,7 +37,7 @@ export const DateRangePicker = ({
           }}
         />
         <DatePicker
-          label={_(msg`To`)}
+          label="To"
           value={to}
           timezone="UTC"
           onChange={(newValue) => {

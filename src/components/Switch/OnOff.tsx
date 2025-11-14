@@ -1,6 +1,5 @@
 import { Switch, Tooltip, Typography } from "@mui/material";
 import { CampaignSource } from "@/graphql-client/graphql";
-import { Trans } from "@lingui/macro";
 import dayjs from "dayjs";
 
 interface Props {
@@ -32,8 +31,7 @@ export function OnOff({
     isInline ? null : (
       <Typography sx={{ textAlign: "center", p: 0 }}>-</Typography>
     );
-  const tooltip =
-    state === "paused" ? <Trans>Pause</Trans> : <Trans>Activate</Trans>;
+  const tooltip = state === "paused" ? "Pause" : "Activate";
 
   return (
     <Tooltip
@@ -43,7 +41,7 @@ export function OnOff({
             {tooltip} {type}
           </>
         ) : (
-          <Trans>{type} status cannot be updated</Trans>
+          `${type} status cannot be updated`
         )
       }
     >

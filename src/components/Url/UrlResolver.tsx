@@ -10,8 +10,6 @@ import { useEffect } from "react";
 import _ from "lodash";
 import { useField } from "formik";
 import { UrlValidationResult, useUrlValidation } from "./use-url-validation";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
 interface Props {
   name: string;
@@ -47,7 +45,6 @@ export const UrlResolver = ({
   const hasError = Boolean(nameMeta.error);
   const showError = hasError && nameMeta.touched;
   const isDirty = !_.isEqual(nameMeta.value, nameMeta.initialValue);
-  const { _: lingui } = useLingui();
 
   const urlValidation = useUrlValidation(nameField?.value ?? "");
 
@@ -55,8 +52,7 @@ export const UrlResolver = ({
     const { isValid } = urlValidation;
 
     if (isDirty) {
-      const val =
-        isValid !== true ? lingui(msg`Target URL is not valid`) : undefined;
+      const val = isValid !== true ? "Target URL is not valid" : undefined;
       isValidHelper.setValue(val, urlValidation.isValid === true);
     }
   }, [urlValidation.isValid]);
@@ -89,13 +85,13 @@ export const UrlResolver = ({
             icon={<CircularProgress size={20} color="secondary" />}
             severity="info"
           >
-            <Trans>Validating URL...</Trans>
+            Validating URL...
           </Alert>
         )}
 
         {urlValidation.isValid && (
           <Alert severity="success" sx={{ mb: 1 }}>
-            <Trans>URL is valid.</Trans>
+            URL is valid.
           </Alert>
         )}
 

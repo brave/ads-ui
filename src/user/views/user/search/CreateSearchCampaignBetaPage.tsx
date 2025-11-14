@@ -8,7 +8,6 @@ import { useUser } from "@/auth/hooks/queries/useUser";
 // before we've completed the full flow.
 
 // and as a result it's not worth translating:
-/* eslint-disable lingui/no-unlocalized-strings */
 
 export function CreateSearchCampaignBetaPage() {
   const domain = useQueryStringValue("domain");

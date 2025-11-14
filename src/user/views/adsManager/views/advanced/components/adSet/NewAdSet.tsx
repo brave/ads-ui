@@ -14,11 +14,8 @@ import { useRef } from "react";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { useAdvertiserCreatives } from "@/user/hooks/useAdvertiserCreatives";
 import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
 export function NewAdSet() {
-  const { _ } = useLingui();
   const { creatives } = useAdvertiserCreatives();
   const { trackMatomoEvent } = useTrackMatomoEvent();
   const history = useHistory();
@@ -61,10 +58,10 @@ export function NewAdSet() {
                   }
                   replace
                 >
-                  {adSet.name || `${_(msg`Ad Set`)} ${idx + 1}`}
+                  {adSet.name || `Ad Set ${idx + 1}`}
                 </Link>
                 {idx > 0 && !adSet.id && (
-                  <Tooltip title={<Trans>Remove</Trans>}>
+                  <Tooltip title="Remove">
                     <IconButton
                       onClick={() => {
                         const newIdx = idx - 1;
@@ -93,7 +90,7 @@ export function NewAdSet() {
                 border="1px solid #ededed"
               >
                 <Typography variant="overline" color="primary">
-                  <Trans>New</Trans>
+                  New
                 </Typography>
               </Box>
             )}

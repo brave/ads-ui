@@ -6,9 +6,6 @@ import {
   FormikDialogButton,
   FormikSubmitButton,
 } from "@/form/FormikButton";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
-import { MessageDescriptor } from "@lingui/core";
 
 function StatusMessage({
   errors,
@@ -17,11 +14,10 @@ function StatusMessage({
   errors: string[];
   isDirty: boolean;
 }): ReactNode {
-  const { _ } = useLingui();
   const [showErrors, setShowErrors] = useState(false);
 
   if (errors.length === 0) {
-    return isDirty ? _(msg`You have unsaved changes`) : null;
+    return isDirty ? "You have unsaved changes" : null;
   }
 
   if (errors.length === 1) {
@@ -32,9 +28,7 @@ function StatusMessage({
   return (
     <Box>
       <Link underline="hover" onClick={() => setShowErrors((state) => !state)}>
-        <Trans>
-          You have {errorCount} errors that must be fixed before submitting.
-        </Trans>
+        You have {errorCount} errors that must be fixed before submitting.
       </Link>
       {showErrors && (
         <ul>
@@ -50,8 +44,8 @@ function StatusMessage({
 interface Props {
   isCreate: boolean;
   hasDialog?: boolean;
-  dialogTitle?: MessageDescriptor;
-  dialogMessage?: MessageDescriptor;
+  dialogTitle?: string;
+  dialogMessage?: string;
 }
 
 export function SubmitPanel(props: PropsWithChildren<Props>) {
