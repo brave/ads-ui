@@ -8,6 +8,9 @@ on:
   pull_request:
     branches: [master, prod]
 
+permissions:
+  contents: read
+
 jobs:
   check:
     runs-on: ubuntu-latest
