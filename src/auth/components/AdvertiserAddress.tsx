@@ -2,8 +2,6 @@ import { Box, Stack } from "@mui/material";
 import { FormikTextField } from "@/form/FormikHelpers";
 import { CountryPicker } from "@/components/Country/CountryPicker";
 import { PropsWithChildren } from "react";
-import { useLingui } from "@lingui/react";
-import { msg } from "@lingui/macro";
 import { AdvertiserBillingAddressFragment } from "@/graphql-client/graphql";
 
 interface Props {
@@ -11,7 +9,6 @@ interface Props {
 }
 
 export function AdvertiserAddress({ address }: Props) {
-  const { _ } = useLingui();
   if (address?.street1 && address?.country && address?.city) {
     return null;
   }
@@ -22,7 +19,7 @@ export function AdvertiserAddress({ address }: Props) {
         <FormikTextField
           required
           name="address.street1"
-          label={_(msg`Street address`)}
+          label="Street address"
           autoComplete="address-line1"
           margin="dense"
           size="small"
@@ -34,7 +31,7 @@ export function AdvertiserAddress({ address }: Props) {
         <FormikTextField
           required
           name="address.city"
-          label={_(msg`City`)}
+          label="City"
           autoComplete="address-level2"
           margin="dense"
           size="small"
@@ -48,7 +45,7 @@ export function AdvertiserAddress({ address }: Props) {
           <FormikTextField
             required
             name="address.zipcode"
-            label={_(msg`Zip / Postal Code`)}
+            label="Zip / Postal Code"
             autoComplete="postal-code"
             margin="dense"
             size="small"

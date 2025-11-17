@@ -6,8 +6,6 @@ import { useEffect, useState } from "react";
 import { getDefaultTimezone, TimeZonePicker } from "../TimeZonePicker";
 import { TimezoneAwareDatePicker } from "../TimeZonePicker/TimezoneAwareDatePicker";
 import { useIsEdit } from "@/form/FormikHelpers";
-import { useLingui } from "@lingui/react";
-import { msg, Trans } from "@lingui/macro";
 import dayjs from "dayjs";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { isFuzzyCalculatedDailyBudgetOk } from "@/util/campaign";
@@ -20,7 +18,6 @@ export const CampaignDateRange = () => {
   const [, endMeta, endHelper] = useField("endAt");
   const [, budget] = useField("budget");
   const [willNotReachEndDate, setWillNotReachEndDate] = useState(false);
-  const { _ } = useLingui();
 
   useEffect(() => {
     if (!isEdit) return;
@@ -37,7 +34,7 @@ export const CampaignDateRange = () => {
     <Box>
       <Stack direction="row" spacing={2} alignItems="center" mt={1} mb={1}>
         <TimezoneAwareDatePicker
-          label={_(msg`Start Date`)}
+          label={"Start Date"}
           tz={tz}
           value={dayjs(startMeta.value).toDate()}
           error={!!startMeta.error}
@@ -52,7 +49,7 @@ export const CampaignDateRange = () => {
         <ArrowForwardIcon />
 
         <TimezoneAwareDatePicker
-          label={_(msg`End Date`)}
+          label={"End Date"}
           tz={tz}
           value={dayjs(endMeta.value).toDate()}
           error={!!endMeta.error}
@@ -71,10 +68,8 @@ export const CampaignDateRange = () => {
       </Stack>
       {willNotReachEndDate && (
         <Typography color="error" variant="caption">
-          <Trans>
-            The campaign will likely stop running before the end date provided
-            due to budget constraints.
-          </Trans>
+          The campaign will likely stop running before the end date provided due
+          to budget constraints.
         </Typography>
       )}
     </Box>

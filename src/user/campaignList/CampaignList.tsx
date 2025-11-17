@@ -14,8 +14,6 @@ import { CloneCampaign } from "@/components/Campaigns/CloneCampaign";
 import { EditButton } from "@/user/campaignList/EditButton";
 import { uiLabelsForCampaignFormat } from "@/util/campaign";
 import { stringFilterOperators } from "@/components/Datagrid/stringFilterOperators";
-import { useLingui } from "@lingui/react";
-import { msg } from "@lingui/macro";
 import { MetricValue } from "./MetricValue";
 import {
   AdvertiserCampaignsFragment,
@@ -32,7 +30,6 @@ interface Props {
 }
 
 export function CampaignList({ advertiser }: Props) {
-  const { _: lingui } = useLingui();
   const [selectedCampaign, setSelectedCampaign] = useState<string | number>();
 
   const { data, loading } = useQuery(CampaignMetricsDocument, {
@@ -60,7 +57,7 @@ export function CampaignList({ advertiser }: Props) {
   const columns: GridColDef<CampaignSummaryFragment>[] = [
     {
       field: "name",
-      headerName: lingui(msg`Campaign`),
+      headerName: "Campaign",
       renderCell: ({ row }) => (
         <Link
           component={RouterLink}
@@ -75,7 +72,7 @@ export function CampaignList({ advertiser }: Props) {
     },
     {
       field: "format",
-      headerName: lingui(msg`Ad Format`),
+      headerName: "Ad Format",
       valueGetter: (_value, row) => uiLabelsForCampaignFormat(row.format),
       align: "left",
       headerAlign: "left",
@@ -84,7 +81,7 @@ export function CampaignList({ advertiser }: Props) {
     },
     {
       field: "state",
-      headerName: lingui(msg`Status`),
+      headerName: "Status",
       valueGetter: (_value, row) =>
         isDateInThePast(row.endAt) ? "completed" : row.state,
       renderCell: ({ row }) => (
@@ -95,7 +92,7 @@ export function CampaignList({ advertiser }: Props) {
     },
     {
       field: "budget",
-      headerName: lingui(msg`Budget`),
+      headerName: "Budget",
       renderCell: ({ row }) => renderMonetaryAmount(row.budget, row.currency),
       align: "right",
       headerAlign: "right",
@@ -104,7 +101,7 @@ export function CampaignList({ advertiser }: Props) {
     },
     {
       field: "spend",
-      headerName: lingui(msg`Spend`),
+      headerName: "Spend",
       valueGetter: (_value, row) =>
         findMetricValuesForCampaign(row.id)?.spendUsd,
       renderCell: ({ value }) => (
@@ -117,7 +114,7 @@ export function CampaignList({ advertiser }: Props) {
     },
     {
       field: "view",
-      headerName: lingui(msg`Impressions`),
+      headerName: "Impressions",
       type: "number",
       valueGetter: (_value, row) =>
         findMetricValuesForCampaign(row.id)?.impression,
@@ -131,7 +128,7 @@ export function CampaignList({ advertiser }: Props) {
     },
     {
       field: "click",
-      headerName: lingui(msg`Clicks`),
+      headerName: "Clicks",
       type: "number",
       valueGetter: (_value, row) => findMetricValuesForCampaign(row.id)?.click,
       renderCell: ({ value }) => (
@@ -144,7 +141,7 @@ export function CampaignList({ advertiser }: Props) {
     },
     {
       field: "landed",
-      headerName: lingui(msg`Site visits`),
+      headerName: "Site visits",
       type: "number",
       valueGetter: (_value, row) =>
         row.format === CampaignFormat.Search
@@ -174,7 +171,7 @@ export function CampaignList({ advertiser }: Props) {
     },
     {
       field: "startAt",
-      headerName: lingui(msg`Start`),
+      headerName: "Start",
       valueGetter: (_value, row) => row.startAt,
       renderCell: ({ row }) => StandardRenderers.date(row.startAt),
       align: "right",
@@ -183,7 +180,7 @@ export function CampaignList({ advertiser }: Props) {
     },
     {
       field: "endAt",
-      headerName: lingui(msg`End`),
+      headerName: "End",
       valueGetter: (_value, row) => row.endAt,
       renderCell: ({ row }) => StandardRenderers.date(row.endAt),
       align: "right",
@@ -195,7 +192,7 @@ export function CampaignList({ advertiser }: Props) {
   if (advertiser?.selfServiceManageCampaign) {
     columns.unshift({
       field: "switch",
-      headerName: lingui(msg`On/Off`),
+      headerName: "On/Off",
       type: "actions",
       valueGetter: (_value, row) => row.state,
       renderCell: ({ row }) =>

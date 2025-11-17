@@ -13,8 +13,6 @@ import { FormikTextField, useIsEdit } from "@/form/FormikHelpers";
 import { useFormikContext } from "formik";
 import { CampaignForm } from "../../../../../types";
 import { useAdvertiserWithPrices } from "@/user/hooks/useAdvertiserWithPrices";
-import { useLingui } from "@lingui/react";
-import { msg, t, Trans } from "@lingui/macro";
 import { useIncreaseCampaignBudget } from "@/checkout/hooks/useIncreaseCampaignBudget";
 import { useState } from "react";
 import { formatUsd } from "@/user/library/format";
@@ -22,7 +20,6 @@ import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 
 export function BudgetField() {
   const { isDraft } = useIsEdit();
-  const { _ } = useLingui();
   const { data } = useAdvertiserWithPrices();
   const { values, errors } = useFormikContext<CampaignForm>();
   const { advertiser } = useAdvertiser();
@@ -31,7 +28,7 @@ export function BudgetField() {
     <Stack direction="row" alignItems="baseline" spacing={1} mt={1} mb={2}>
       <FormikTextField
         name="budget"
-        label={_(msg`Lifetime Budget`)}
+        label={"Lifetime Budget"}
         margin="normal"
         type="number"
         InputProps={{
@@ -73,7 +70,7 @@ function IncreaseBudgetDialog({
   const doSubmit = () => {
     const parsed = parseInt(amount);
     if (isNaN(parsed) || parsed <= 0) {
-      alert(t`Please enter a valid amount`);
+      alert("Please enter a valid amount");
     }
 
     void createPaymentSession(campaignId, parsed.toString());
@@ -87,22 +84,18 @@ function IncreaseBudgetDialog({
         onClick={() => setOpen(true)}
         sx={{ width: "250px", pt: 1, pb: 1, borderRadius: "16px" }}
       >
-        <Trans>Increase Budget</Trans>
+        Increase Budget
       </Button>
       <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle>
-          <Trans>
-            Increase budget for campaign: <strong>{campaignName}</strong>?
-          </Trans>
+          Increase budget for campaign: <strong>{campaignName}</strong>?
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            <Trans>
-              Like your campaign's performance? Increase the budget to expand
-              its reach and connect with more potential customers. Specify below
-              how much you would like to add to your current budget of{" "}
-              <strong>{previousBudget}</strong>
-            </Trans>
+            Like your campaign's performance? Increase the budget to expand its
+            reach and connect with more potential customers. Specify below how
+            much you would like to add to your current budget of{" "}
+            <strong>{previousBudget}</strong>
           </DialogContentText>
           <TextField
             autoFocus
@@ -130,14 +123,14 @@ function IncreaseBudgetDialog({
             disabled={loading}
             variant="outlined"
           >
-            <Trans>Cancel</Trans>
+            Cancel
           </Button>
           <Button
             onClick={() => doSubmit()}
             disabled={loading}
             variant="contained"
           >
-            <Trans>Continue</Trans>
+            Continue
           </Button>
         </DialogActions>
       </Dialog>

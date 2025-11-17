@@ -1,4 +1,3 @@
-import { Trans } from "@lingui/macro";
 import {
   Box,
   Button,
@@ -25,35 +24,29 @@ export function SetupProgress({ step, onNext, onPrev }: Props) {
   return (
     <Box margin={2}>
       <Typography variant="h2" marginBottom={2}>
-        <Trans>Setup Progress</Trans>
+        Setup Progress
       </Typography>
 
       <Stepper activeStep={step} orientation="vertical">
         <Step>
-          <StepLabel>
-            <Trans>Advertiser profile</Trans>
-          </StepLabel>
+          <StepLabel>Advertiser profile</StepLabel>
         </Step>
         <Step>
-          <StepLabel>
-            <Trans>Review ads</Trans>
-          </StepLabel>
+          <StepLabel>Review ads</StepLabel>
           <StepContent>
             <Button variant="contained" onClick={onNext} sx={{ mt: 1, mr: 1 }}>
-              <Trans>Proceed</Trans>
+              Proceed
             </Button>
           </StepContent>
         </Step>
         <Step>
-          <StepLabel>
-            <Trans>Finalize & submit</Trans>
-          </StepLabel>
+          <StepLabel>Finalize & submit</StepLabel>
           <StepContent>
             <Button variant="outlined" onClick={onPrev} sx={{ mt: 1, mr: 1 }}>
-              <Trans>Back</Trans>
+              Back
             </Button>
             <Button variant="contained" type="submit" sx={{ mt: 1, mr: 1 }}>
-              <Trans>Submit</Trans>
+              Submit
             </Button>
           </StepContent>
         </Step>

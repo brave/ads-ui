@@ -4,8 +4,6 @@ import {
   DisplayedMetricsFragment,
 } from "@/graphql-client/graphql";
 import BigNumber from "bignumber.js";
-import { MessageDescriptor } from "@lingui/core";
-import { msg } from "@lingui/macro";
 
 type MetricType = "number" | "rate" | "usd";
 
@@ -31,8 +29,8 @@ const isSearch = (campaign: CampaignSummaryFragment) => {
 
 export interface MetricDefinition {
   id: string;
-  caption: MessageDescriptor;
-  shortCaption?: MessageDescriptor;
+  caption: string;
+  shortCaption?: string;
   getValue: (metrics: DisplayedMetricsFragment) => BigNumber;
   type: MetricType;
   color: string;
@@ -45,29 +43,29 @@ export interface MetricDefinition {
 const METRICS: MetricDefinition[] = [
   {
     id: "impression",
-    caption: msg`Impressions`,
+    caption: "Impressions",
     getValue: (metrics) => BigNumber(metrics.impression),
     type: "number",
     color: colors[0],
   },
   {
     id: "click",
-    caption: msg`Clicks`,
+    caption: "Clicks",
     getValue: (metrics) => BigNumber(metrics.click),
     type: "number",
     color: colors[1],
   },
   {
     id: "ctr",
-    caption: msg`Click Through Rate`,
-    shortCaption: msg`CTR`,
+    caption: "Click Through Rate",
+    shortCaption: "CTR",
     getValue: (metrics) => BigNumber(metrics.rates.clickThrough),
     type: "rate",
     color: colors[2],
   },
   {
     id: "site-visit",
-    caption: msg`Site Visits`,
+    caption: "Site Visits",
     getValue: (metrics) => BigNumber(metrics.siteVisit),
     type: "number",
     color: colors[3],
@@ -76,7 +74,7 @@ const METRICS: MetricDefinition[] = [
   },
   {
     id: "conversion",
-    caption: msg`Conversions`,
+    caption: "Conversions",
     getValue: (metrics) => BigNumber(metrics.conversion),
     type: "number",
     color: colors[4],
@@ -85,7 +83,7 @@ const METRICS: MetricDefinition[] = [
   },
   {
     id: "view-through-conversion",
-    caption: msg`View-through Conversions`,
+    caption: "View-through Conversions",
     getValue: (metrics) => BigNumber(metrics.viewThroughConversion),
     type: "number",
     color: colors[5],
@@ -94,7 +92,7 @@ const METRICS: MetricDefinition[] = [
   },
   {
     id: "click-through-conversion",
-    caption: msg`Click-through Conversions`,
+    caption: "Click-through Conversions",
     getValue: (metrics) => BigNumber(metrics.clickThroughConversion),
     type: "number",
     color: colors[6],
@@ -103,7 +101,7 @@ const METRICS: MetricDefinition[] = [
   },
   {
     id: "conversion-rate",
-    caption: msg`Conversion Rate`,
+    caption: "Conversion Rate",
     getValue: (metrics) => BigNumber(metrics.rates.clickToConversion),
     type: "rate",
     color: colors[7],
@@ -112,7 +110,7 @@ const METRICS: MetricDefinition[] = [
   },
   {
     id: "click-to-site-visit-rate",
-    caption: msg`Site Visit Rate`,
+    caption: "Site Visit Rate",
     getValue: (metrics) => BigNumber(metrics.rates.clickToSiteVisit),
     type: "rate",
     color: colors[8],
@@ -121,15 +119,15 @@ const METRICS: MetricDefinition[] = [
   },
   {
     id: "spend",
-    caption: msg`Spend`,
+    caption: "Spend",
     getValue: (metrics) => BigNumber(metrics.spendUsd),
     type: "usd",
     color: colors[9],
   },
   {
     id: "cpa",
-    caption: msg`Cost per Acquisition`,
-    shortCaption: msg`CPA`,
+    caption: "Cost per Acquisition",
+    shortCaption: "CPA",
     getValue: (metrics) => BigNumber(metrics.rates.costPerAcquisition),
     type: "usd",
     color: colors[0],
@@ -137,7 +135,7 @@ const METRICS: MetricDefinition[] = [
   },
   {
     id: "upvote",
-    caption: msg`Upvotes`,
+    caption: "Upvotes",
     getValue: (metrics) => BigNumber(metrics.upvote),
     type: "number",
     color: colors[2],
@@ -145,7 +143,7 @@ const METRICS: MetricDefinition[] = [
   },
   {
     id: "downvote",
-    caption: msg`Downvotes`,
+    caption: "Downvotes",
     getValue: (metrics) => BigNumber(metrics.downvote),
     type: "number",
     color: colors[3],
@@ -153,7 +151,7 @@ const METRICS: MetricDefinition[] = [
   },
   {
     id: "dismiss",
-    caption: msg`Dismissals`,
+    caption: "Dismissals",
     getValue: (metrics) => BigNumber(metrics.dismiss),
     type: "number",
     color: colors[1],
@@ -161,7 +159,7 @@ const METRICS: MetricDefinition[] = [
   },
   {
     id: "dismiss-rate",
-    caption: msg`Dismissal Rate`,
+    caption: "Dismissal Rate",
     getValue: (metrics) => BigNumber(metrics.rates.impressionToDismiss),
     type: "rate",
     color: colors[4],

@@ -1,4 +1,3 @@
-/* eslint-disable lingui/no-unlocalized-strings */
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, Chip, IconButton, Popover, Typography } from "@mui/material";
 import { useState } from "react";

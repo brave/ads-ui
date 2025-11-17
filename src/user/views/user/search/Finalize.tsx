@@ -1,23 +1,16 @@
 import { Box, IconButton, Typography } from "@mui/material";
-import { Trans, msg } from "@lingui/macro";
 import { PropsWithChildren } from "react";
-import { useLingui } from "@lingui/react";
-import { MessageDescriptor } from "@lingui/core";
 import { FormikTextField } from "@/form/FormikHelpers";
 import { FieldArray, useFormikContext } from "formik";
 import { SearchOptions } from "./form";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
-function Section({
-  children,
-  title,
-}: { title: MessageDescriptor } & PropsWithChildren) {
-  const { _ } = useLingui();
+function Section({ children, title }: { title: string } & PropsWithChildren) {
   return (
     <Box marginBottom={2}>
       <Typography variant="h2" gutterBottom>
-        {_(title)}
+        {title}
       </Typography>
       {children}
     </Box>
@@ -25,32 +18,26 @@ function Section({
 }
 
 export function Finalize() {
-  const { _ } = useLingui();
   const { values } = useFormikContext<SearchOptions>();
 
   return (
     <Box>
-      <Section title={msg`Notes`}>
+      <Section title={"Notes"}>
         <FormikTextField
           fullWidth
-          label={_(msg`Notes`)}
+          label={"Notes"}
           multiline
           rows={4}
           name="notes"
           helperText={
-            <Trans>
-              Your trial campaign will be reviewed by an Account Manager. Add
-              any notes or questions for them here.
-            </Trans>
+            "Your trial campaign will be reviewed by an Account Manager. Add any notes or questions for them here."
           }
         />
       </Section>
-      <Section title={msg`Query string parameters`}>
+      <Section title={"Query string parameters"}>
         <Typography variant="body2">
-          <Trans>
-            The following query string parameters will be added to your landing
-            page URLs. This will allow you to track the performance of your ads.
-          </Trans>
+          The following query string parameters will be added to your landing
+          page URLs. This will allow you to track the performance of your ads.
         </Typography>
 
         <FieldArray name="queryParams">
@@ -65,12 +52,12 @@ export function Finalize() {
                   alignItems="baseline"
                 >
                   <FormikTextField
-                    label={_(msg`Query parameter`)}
+                    label={"Query parameter"}
                     name={`queryParams.${idx}.key`}
                   />
                   {" = "}
                   <FormikTextField
-                    label={_(msg`Value`)}
+                    label={"Value"}
                     name={`queryParams.${idx}.value`}
                   />
                   <IconButton

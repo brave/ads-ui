@@ -1,4 +1,3 @@
-/* eslint-disable lingui/no-unlocalized-strings */
 import { CardContainer } from "@/components/Card/CardContainer";
 import { Box, Typography } from "@mui/material";
 import { ReactNode } from "react";

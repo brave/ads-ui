@@ -1,5 +1,3 @@
-import { t } from "@lingui/macro";
-
 interface BillingTypeLabels {
   value: string;
   shortLabel: string;
@@ -10,14 +8,13 @@ export function uiLabelsForBillingType(
   billingType: string | undefined | null,
 ): BillingTypeLabels {
   if (!billingType) {
-    // eslint-disable-next-line lingui/no-unlocalized-strings
-    return { value: "N/A", shortLabel: "N/A", longLabel: t`Unknown` };
+    return { value: "N/A", shortLabel: "N/A", longLabel: "Unknown" };
   }
 
   const BILLING_TYPES = [
-    { value: "cpm", shortLabel: "CPM", longLabel: t`CPM (Impressions)` },
-    { value: "cpc", shortLabel: "CPC", longLabel: t`CPC (Clicks)` },
-    { value: "cpsv", shortLabel: "CPSV", longLabel: t`CPSV (Site Visits)` },
+    { value: "cpm", shortLabel: "CPM", longLabel: "CPM (Impressions)" },
+    { value: "cpc", shortLabel: "CPC", longLabel: "CPC (Clicks)" },
+    { value: "cpsv", shortLabel: "CPSV", longLabel: "CPSV (Site Visits)" },
   ];
 
   const entry = BILLING_TYPES.find(

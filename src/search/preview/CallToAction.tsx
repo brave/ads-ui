@@ -1,4 +1,3 @@
-/* eslint-disable lingui/no-unlocalized-strings */
 import { Box, Button, Link, Typography } from "@mui/material";
 
 interface Props {

@@ -1,108 +1,103 @@
-/* eslint-disable lingui/no-unlocalized-strings */
 import { FormikSelect } from "@/form/FormikHelpers";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 export function VerticalPicker(props: { name: string }) {
-  const { _ } = useLingui();
-
   return (
     <FormikSelect
-      label={_(msg`Verticals`)}
+      label="Verticals"
       name={props.name}
       margin="dense"
       size="small"
       inlineError
       options={[
         {
-          label: _(msg`Automotive`),
+          label: "Automotive",
           value: "Automotive",
         },
         {
-          label: _(msg`Beauty & Personal Care`),
+          label: "Beauty & Personal Care",
           value: "Beauty & Personal Care",
         },
         {
-          label: _(msg`Consumer Goods (CPG)`),
+          label: "Consumer Goods (CPG)",
           value: "Consumer Goods (CPG)",
         },
         {
-          label: _(msg`Cryptocurrency/NFT`),
+          label: "Cryptocurrency/NFT",
           value: "Cryptocurrency/NFT",
         },
         {
-          label: _(msg`Education`),
+          label: "Education",
           value: "Education",
         },
         {
-          label: _(msg`Energy and Utilities`),
+          label: "Energy and Utilities",
           value: "Energy and Utilities",
         },
         {
-          label: _(msg`Entertainment`),
+          label: "Entertainment",
           value: "Entertainment",
         },
         {
-          label: _(msg`Fashion`),
+          label: "Fashion",
           value: "Fashion",
         },
         {
-          label: _(msg`Finance`),
+          label: "Finance",
           value: "Finance",
         },
         {
-          label: _(msg`Food & Beverage`),
+          label: "Food & Beverage",
           value: "Food & Beverage",
         },
         {
-          label: _(msg`Gaming`),
+          label: "Gaming",
           value: "Gaming",
         },
         {
-          label: _(msg`Healthcare`),
+          label: "Healthcare",
           value: "Healthcare",
         },
         {
-          label: _(msg`Home & Garden`),
+          label: "Home & Garden",
           value: "Home & Garden",
         },
         {
-          label: _(msg`Legal and Professional Services`),
+          label: "Legal and Professional Services",
           value: "Legal and Professional Services",
         },
         {
-          label: _(msg`Manufacturing and Industrial`),
+          label: "Manufacturing and Industrial",
           value: "Manufacturing and Industrial",
         },
         {
-          label: _(msg`Non-Profit and NGOs`),
+          label: "Non-Profit and NGOs",
           value: "Non-Profit and NGOs",
         },
         {
-          label: _(msg`Real Estate`),
+          label: "Real Estate",
           value: "Real Estate",
         },
         {
-          label: _(msg`Retail`),
+          label: "Retail",
           value: "Retail",
         },
         {
-          label: _(msg`Sports`),
+          label: "Sports",
           value: "Sports",
         },
         {
-          label: _(msg`Technology/Software`),
+          label: "Technology/Software",
           value: "Technology/Software",
         },
         {
-          label: _(msg`Telecommunications`),
+          label: "Telecommunications",
           value: "Telecommunications",
         },
         {
-          label: _(msg`Travel & Hospitality`),
+          label: "Travel & Hospitality",
           value: "Travel & Hospitality",
         },
         {
-          label: _(msg`Other`),
+          label: "Other",
           value: "Other",
         },
       ]}

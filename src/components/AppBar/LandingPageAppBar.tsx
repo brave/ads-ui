@@ -15,8 +15,6 @@ import braveDark from "@/assets/images/full-brave-brand-black.svg";
 import { Link as RouterLink, useRouteMatch } from "react-router-dom";
 import { useIsAuthenticated } from "@/auth/hooks/queries/useIsAuthenticated";
 import { useIsMobile } from "@/hooks/useIsMobile";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { SupportMenu } from "@/components/Drawer/SupportMenu";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
@@ -25,7 +23,6 @@ import { AccountMenu } from "@/components/Navigation/AccountMenu";
 
 export function LandingPageAppBar() {
   const match = useRouteMatch();
-  const { _ } = useLingui();
   const isAuthenticated = useIsAuthenticated();
   const isMobile = useIsMobile();
   const isContact = match.path === "/contact";
@@ -36,36 +33,28 @@ export function LandingPageAppBar() {
       component: (
         <PageLink
           to="/register/browser"
-          msg={msg`Get started`}
+          msg={"Get started"}
           textColor={textColor}
         />
       ),
     },
     {
       component: (
-        <PageLink
-          to="/search"
-          msg={msg`Brave Search Ads`}
-          textColor={textColor}
-        />
+        <PageLink to="/search" msg={"Brave Search Ads"} textColor={textColor} />
       ),
     },
     {
       component: (
         <PageLink
           to="/bat"
-          msg={msg`Basic Attention Token`}
+          msg={"Basic Attention Token"}
           textColor={textColor}
         />
       ),
     },
     {
       component: (
-        <PageLink
-          to="/contact"
-          msg={msg`Contact sales`}
-          textColor={textColor}
-        />
+        <PageLink to="/contact" msg={"Contact sales"} textColor={textColor} />
       ),
     },
   ];
@@ -91,7 +80,7 @@ export function LandingPageAppBar() {
             <Box component={RouterLink} to="/" width={100} display="flex">
               <img
                 src={isContact ? braveDark : brave}
-                alt={_(msg`Ads`)}
+                alt={"Ads"}
                 height={30}
                 width={100}
               />
@@ -139,7 +128,7 @@ function AuthedButton(props: { isAuthenticated?: boolean }) {
       component={RouterLink}
       to="/auth/link"
     >
-      <Trans>Log in</Trans>
+      Log in
     </Button>
   );
 }
@@ -191,11 +180,7 @@ function MobileMenu(props: {
           to={!props.isAuthenticated ? "/auth/link" : "/user/main"}
         >
           <Typography variant={"body2"} color="text.primary">
-            {props.isAuthenticated ? (
-              <Trans>Dashboard</Trans>
-            ) : (
-              <Trans>Log in</Trans>
-            )}
+            {props.isAuthenticated ? <>Dashboard</> : <>Log in</>}
           </Typography>
         </MenuItem>
         <Divider />

@@ -1,7 +1,6 @@
 import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
 import { MouseEvent, useState } from "react";
 import { useIsMobile } from "@/hooks/useIsMobile";
-import { msg, Trans } from "@lingui/macro";
 import HeadsetMicOutlinedIcon from "@mui/icons-material/HeadsetMicOutlined";
 import { Link, Menu, MenuItem } from "@mui/material";
 import { ItemBox } from "@/components/Drawer/components/ItemBox";
@@ -28,7 +27,7 @@ export function SupportMenu({ usePlainLink, linkColor }: SupportProps) {
     <>
       {!usePlainLink && (
         <ItemBox
-          label={msg`Support`}
+          label={"Support"}
           href="#"
           icon={
             <HeadsetMicOutlinedIcon
@@ -47,7 +46,7 @@ export function SupportMenu({ usePlainLink, linkColor }: SupportProps) {
           sx={{ cursor: "pointer" }}
           onClick={handleClick}
         >
-          <Trans>Support</Trans>
+          Support
         </Link>
       )}
       <Menu open={open} anchorEl={anchorEl} onClose={() => setAnchorEl(null)}>
@@ -57,7 +56,7 @@ export function SupportMenu({ usePlainLink, linkColor }: SupportProps) {
             setAnchorEl(null);
           }}
         >
-          <Trans>Help Center</Trans>
+          Help Center
         </MenuItem>
         <MenuItem
           onClick={() => {
@@ -65,7 +64,7 @@ export function SupportMenu({ usePlainLink, linkColor }: SupportProps) {
             setAnchorEl(null);
           }}
         >
-          <Trans>About Brave Ads</Trans>
+          About Brave Ads
         </MenuItem>
         <MenuItem
           onClick={() => {
@@ -73,8 +72,7 @@ export function SupportMenu({ usePlainLink, linkColor }: SupportProps) {
             setAnchorEl(null);
           }}
         >
-          <Trans>Contact</Trans>:{" "}
-          {/* eslint-disable-next-line lingui/no-unlocalized-strings */}
+          Contact:{" "}
           <Link sx={{ ml: 1 }} underline="none">
             selfserve@brave.com
           </Link>

@@ -1,12 +1,7 @@
 import { Stack, Typography } from "@mui/material";
-import { Trans, useLingui } from "@lingui/react";
 import { PropsWithChildren } from "react";
-import { MessageDescriptor } from "@lingui/core";
-import { msg } from "@lingui/macro";
 
 export function WhyUseBraveAds() {
-  const { _ } = useLingui();
-
   return (
     <Stack
       maxWidth={1200}
@@ -22,24 +17,24 @@ export function WhyUseBraveAds() {
         fontWeight={600}
         justifySelf="center"
       >
-        {_(msg`Why use Brave Ads?`)}
+        Why use Brave Ads?
       </Typography>
 
       <NumberContainer
-        title={msg`Escape the low CTR of display banners`}
-        body={msg`Brave Ads deliver at the browser or search level, in dedicated placements that give your brand more spotlight and better engagement.`}
+        title="Escape the low CTR of display banners"
+        body="Brave Ads deliver at the browser or search level, in dedicated placements that give your brand more spotlight and better engagement."
         number={1}
       />
 
       <NumberContainer
-        title={msg`Augment your marketing strategy`}
-        body={msg`Reach 70+ million highly engaged, otherwise unreachable users.`}
+        title="Augment your marketing strategy"
+        body="Reach 70+ million highly engaged, otherwise unreachable users."
         number={2}
       />
 
       <NumberContainer
-        title={msg`Start fast and experiment`}
-        body={msg`For businesses of all sizes. Create your campaign in minutes, starting with as little as $500 per month.`}
+        title="Start fast and experiment"
+        body="For businesses of all sizes. Create your campaign in minutes, starting with as little as $500 per month."
         number={3}
       />
     </Stack>
@@ -48,8 +43,8 @@ export function WhyUseBraveAds() {
 
 const NumberContainer = (
   props: PropsWithChildren & {
-    title: MessageDescriptor;
-    body: MessageDescriptor;
+    title: string;
+    body: string;
     number: number;
   },
 ) => {
@@ -74,11 +69,9 @@ const NumberContainer = (
       </Typography>
       <Stack spacing={1}>
         <Typography variant="h4" fontWeight={500}>
-          <Trans id={props.title.id} />
+          {props.title}
         </Typography>
-        <Typography variant="subtitle1">
-          <Trans id={props.body.id} />
-        </Typography>
+        <Typography variant="subtitle1">{props.body}</Typography>
       </Stack>
     </Stack>
   );

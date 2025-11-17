@@ -2,7 +2,6 @@ import { FormControlLabel, Switch, Typography } from "@mui/material";
 import _ from "lodash";
 import { useContext } from "react";
 import { FilterContext } from "@/state/context";
-import { Trans } from "@lingui/macro";
 import dayjs from "dayjs";
 
 interface Props {
@@ -31,7 +30,7 @@ export const CampaignAgeFilter = ({ disabled }: Props) => {
       }
       label={
         <Typography variant="body1">
-          <Trans>Include campaigns that ended over 6 months ago</Trans>
+          Include campaigns that ended over 6 months ago
         </Typography>
       }
     />

@@ -10,7 +10,6 @@ import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined";
 import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { AlwaysOnFormButton } from "@/components/Button/AlwaysOnFormButton";
-import { msg } from "@lingui/macro";
 import { SupportMenu } from "@/components/Drawer/SupportMenu";
 import { ItemBox, RouteOption } from "@/components/Drawer/components/ItemBox";
 import { useBannerHeight } from "../Navigation/Navbar";
@@ -21,7 +20,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
   const { bannerHeight } = useBannerHeight();
   const dashboardRoutes: RouteOption[] = [
     {
-      label: msg`Campaigns`,
+      label: "Campaigns",
       href: "/user/main/campaign",
       icon: (
         <CampaignOutlinedIcon
@@ -31,7 +30,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
       ),
     },
     {
-      label: msg`Ads`,
+      label: "Ads",
       href: "/user/main/ads",
       icon: (
         <LightbulbOutlinedIcon
@@ -42,7 +41,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
       disabled: !advertiser.selfServiceManageCampaign,
     },
     {
-      label: msg`Audiences`,
+      label: "Audiences",
       href: "/user/main/audiences",
       icon: (
         <PeopleOutlineOutlinedIcon
@@ -56,7 +55,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
 
   const settingsRoutes: RouteOption[] = [
     {
-      label: msg`Account`,
+      label: "Account",
       href: "/user/main/settings",
       icon: (
         <AccountBalanceOutlinedIcon
@@ -66,7 +65,7 @@ export default function MiniSideBar({ children }: PropsWithChildren) {
       ),
     },
     {
-      label: msg`Profile`,
+      label: "Profile",
       href: "/user/main/profile",
       icon: (
         <AccountBoxOutlinedIcon

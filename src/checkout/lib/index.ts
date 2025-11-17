@@ -1,5 +1,4 @@
 import { buildAdServerEndpoint } from "@/util/environment";
-import { t } from "@lingui/macro";
 import { PaymentType } from "@/graphql-client/graphql";
 
 export async function createPaymentSession(
@@ -22,14 +21,14 @@ export async function createPaymentSession(
   });
 
   if (res.status !== 200) {
-    throw new Error(t`cannot create session`);
+    throw new Error("cannot create session");
   }
 
   const { url } = await res.json();
   if (url) {
     return url;
   } else {
-    throw Error(t`no session created`);
+    throw Error("no session created");
   }
 }
 
@@ -55,7 +54,7 @@ export async function validatePaymentSession(
   });
 
   if (res.status !== 200) {
-    throw new Error(t`invalid session`);
+    throw new Error("invalid session");
   }
 }
 
@@ -82,13 +81,13 @@ export async function increaseCampaignBudget(
   );
 
   if (res.status !== 200) {
-    throw new Error(t`cannot create session`);
+    throw new Error("cannot create session");
   }
 
   const { url } = await res.json();
   if (url) {
     return url;
   } else {
-    throw Error(t`no session created`);
+    throw Error("no session created");
   }
 }

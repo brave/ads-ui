@@ -15,7 +15,6 @@ import { setActiveAdvertiser } from "@/auth/util/index";
 import Logout from "@mui/icons-material/Logout";
 import { useSignOut } from "@/auth/hooks/mutations/useSignOut";
 import { useAuthContext } from "@/auth/context/auth.hook";
-import { Trans } from "@lingui/macro";
 
 const colors = ["red", "green", "orange", "blue"];
 const colorByIndex = (index: number) => colors[index % colors.length];
@@ -40,7 +39,7 @@ export function AccountMenu() {
 
   return (
     <>
-      <Tooltip title={<Trans>Account</Trans>} placement="bottom-start">
+      <Tooltip title={"Account"} placement="bottom-start">
         <IconButton onClick={(e) => setAnchorEl(e.currentTarget)} size="small">
           <Avatar sx={{ width: 43, height: 43, bgcolor: "#fe5907" }}>
             {advertiser.name.substring(0, 1)}
@@ -63,7 +62,6 @@ export function AccountMenu() {
               p: 2,
               borderRadius: "16px",
               overflow: "visible",
-              // eslint-disable-next-line lingui/no-unlocalized-strings
               filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
               mt: 1,
               "& .MuiAvatar-root": {
@@ -86,7 +84,7 @@ export function AccountMenu() {
             fontWeight={400}
             mt={2}
           >
-            <Trans>Hi</Trans>, {user.fullName?.split(" ")[0]}!
+            Hi, {user.fullName?.split(" ")[0]}!
           </Typography>
           <Button
             variant="outlined"
@@ -96,10 +94,10 @@ export function AccountMenu() {
             component={RouterLink}
             to="/user/main/profile"
           >
-            <Trans>View profile</Trans>
+            View profile
           </Button>
           <Typography variant="body2" mt={2}>
-            <Trans>Account</Trans>:
+            Account:
           </Typography>
           <Typography variant="body1" fontWeight={410}>
             {advertiser?.name}
@@ -108,7 +106,7 @@ export function AccountMenu() {
         <Divider />
         {nonCurrentAdvertisers.length > 0 && (
           <Box mt={1} display="flex" justifyContent="space-between">
-            <Trans>Other accounts</Trans>
+            Other accounts
             <IconButton
               size="small"
               sx={{ ml: 1 }}
@@ -139,7 +137,7 @@ export function AccountMenu() {
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
-          <Trans>Logout</Trans>
+          Logout
         </MenuItem>
       </Menu>
     </>

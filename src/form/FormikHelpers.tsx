@@ -25,7 +25,6 @@ import {
 import { ErrorMessage, useField, useFormikContext } from "formik";
 import _ from "lodash";
 import { CampaignForm } from "@/user/views/adsManager/types";
-import { Trans } from "@lingui/macro";
 import { TypographyOwnProps } from "@mui/material/Typography";
 
 type FormikTextFieldProps = TextFieldProps & {
@@ -50,11 +49,7 @@ export const FormikTextField = (props: FormikTextFieldProps) => {
   if (props.maxLengthInstantFeedback) {
     const length = meta?.value?.length ?? 0;
     const maxLength = props.maxLengthInstantFeedback;
-    helperText = (
-      <Trans>
-        {length}/{maxLength} characters
-      </Trans>
-    );
+    helperText = `${length}/${maxLength} characters`;
   }
 
   return (

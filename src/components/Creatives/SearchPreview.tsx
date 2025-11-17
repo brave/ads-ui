@@ -1,6 +1,5 @@
 import "@fontsource/inter/400.css";
 import "@fontsource/inter/600.css";
-import { Trans } from "@lingui/macro";
 import { Box } from "@mui/material";
 
 interface Props {
@@ -246,7 +245,7 @@ export function SearchPreview({ title, body, targetUrl, favicon }: Props) {
             color: "#000000",
           }}
         >
-          <Trans>Sponsored</Trans>
+          Sponsored
         </Box>
       </Box>
     </Box>

@@ -2,7 +2,6 @@ import { PropsWithChildren, ReactNode } from "react";
 import { useRouteMatch, Link as RouterLink } from "react-router-dom";
 import { CardContainer } from "@/components/Card/CardContainer";
 import { Button } from "@mui/material";
-import { Trans } from "@lingui/macro";
 
 interface Props {
   name: ReactNode;
@@ -29,7 +28,7 @@ export function ReviewContainer({
           to={`${baseRoute}/${path}`}
           replace
         >
-          <Trans>Edit</Trans>
+          Edit
         </Button>
       }
     >

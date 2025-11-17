@@ -7,7 +7,6 @@ import { FilterBar } from "./filters/FilterBar";
 import { ResultsPane } from "./ResultsPane";
 import { CampaignOverviewProps } from "@/util/CampaignIdProps";
 import { ErrorDetail } from "@/components/Error/ErrorDetail";
-import { msg } from "@lingui/macro";
 import { Status } from "@/components/Campaigns/Status";
 import _ from "lodash";
 import { VerticalBreakdown } from "@/routes/campaigns/analytics/filters/BreakdownSelector";
@@ -48,7 +47,7 @@ export function CampaignAnalytics({ campaignOverview }: CampaignOverviewProps) {
     return (
       <ErrorDetail
         error={error}
-        additionalDetails={msg`Unable to load reporting details for campaign: ${campaignName}`}
+        additionalDetails={`Unable to load reporting details for campaign: ${campaignName}`}
       />
     );
   }

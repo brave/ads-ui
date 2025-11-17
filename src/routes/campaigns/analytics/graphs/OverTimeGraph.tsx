@@ -84,7 +84,6 @@ export function OverTimeGraph({ series, hourly = false }: Props) {
         },
         tooltip: {
           split: true,
-          // eslint-disable-next-line lingui/no-unlocalized-strings
           xDateFormat: hourly ? "%a %e %b %Y %H:%M UTC" : "%a %e %b %Y",
         },
         plotOptions: {

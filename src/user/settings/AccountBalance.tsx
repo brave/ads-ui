@@ -1,5 +1,4 @@
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
-import { Trans } from "@lingui/macro";
 import { Skeleton, Typography } from "@mui/material";
 import { CardContainer } from "@/components/Card/CardContainer";
 import { useGetAdvertiserAccountBalance } from "@/user/hooks/useGetAdvertiserAccountBalance";
@@ -14,10 +13,8 @@ export function AccountBalance() {
   }
 
   return (
-    <CardContainer header={<Trans>Account Balance</Trans>}>
-      <Typography>
-        <Trans>Your current account balance</Trans>
-      </Typography>
+    <CardContainer header="Account Balance">
+      <Typography>Your current account balance</Typography>
       {loading && <Skeleton height="40px" sx={{ mt: 1 }} />}
       {!loading && data && data.advertiser && (
         <Typography mt={2} fontSize="18px" fontWeight={500}>

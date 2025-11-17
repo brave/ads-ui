@@ -4,8 +4,6 @@ import { Autocomplete, Checkbox, TextField } from "@mui/material";
 import { useField } from "formik";
 import _ from "lodash";
 import { ActiveGeocodesDocument, GeocodeInput } from "@/graphql-client/graphql";
-import { useLingui } from "@lingui/react";
-import { msg, Trans } from "@lingui/macro";
 import { useQuery } from "@apollo/client";
 import { useIsEdit } from "@/form/FormikHelpers";
 import { useMemo } from "react";
@@ -28,14 +26,13 @@ export const LocationPicker = () => {
   );
   const [formProps, meta, helper] = useField<GeocodeInput[]>("geoTargets");
   const errorMessage = meta.error;
-  const { _: lingui } = useLingui();
 
   return (
     <Autocomplete
       sx={{ mt: 2 }}
       disabled={!isDraft}
       limitTags={20}
-      getLimitTagsText={(count) => <Trans>+{count} more</Trans>}
+      getLimitTagsText={(count) => `+${count} more`}
       multiple
       loading={sorted.length === 0}
       options={sorted}
@@ -56,13 +53,11 @@ export const LocationPicker = () => {
       renderInput={(params) => (
         <TextField
           {...params}
-          label={lingui(msg`Country Targeting`)}
+          label={"Country Targeting"}
           helperText={
             meta.touched && !!errorMessage
               ? errorMessage
-              : lingui(
-                  msg`Select the geographic regions where your ads will be shown.`,
-                )
+              : "Select the geographic regions where your ads will be shown."
           }
           error={!!errorMessage && meta.touched}
         />

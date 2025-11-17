@@ -8,7 +8,6 @@ import {
   BillingType,
 } from "@/graphql-client/graphql";
 import { Billing } from "@/user/views/adsManager/types";
-import { t } from "@lingui/macro";
 import { useQuery } from "@apollo/client";
 
 export type AdvertiserPrice = Omit<AdvertiserPriceFragment, "billingType"> & {
@@ -35,7 +34,7 @@ export function useAdvertiserWithPrices(params: Params = {}) {
     onCompleted(data) {
       const prices = data.advertiser?.prices ?? [];
       if (_.isEmpty(prices)) {
-        setError(t`Unable to create a new campaign`);
+        setError("Unable to create a new campaign");
         return;
       }
 

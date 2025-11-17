@@ -1,7 +1,6 @@
 import { buildAdServerV2Endpoint } from "@/util/environment";
 import { useCallback, useState } from "react";
 import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
-import { t } from "@lingui/macro";
 
 export function useGenerateApiKey() {
   const { trackMatomoEvent } = useTrackMatomoEvent();
@@ -41,7 +40,7 @@ async function createKey(advertiserId: string): Promise<string> {
   });
 
   if (res.status !== 200) {
-    throw new Error(t`cannot create api key`);
+    throw new Error("cannot create api key");
   }
 
   const { apiKey } = await res.json();

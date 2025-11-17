@@ -16,7 +16,6 @@ interface Props {
 }
 
 const formatDateForInput = (d: Date, tz: string): string =>
-  // eslint-disable-next-line lingui/no-unlocalized-strings
   dayjs(d).tz(tz).format("YYYY-MM-DDTHH:mm");
 
 const parseDateFromInput = (s: string, tz: string): Date =>
