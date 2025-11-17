@@ -131,8 +131,7 @@ const dialogProps = (
   let message =
     "Modifying an ad will immediately put it into review. This means it will no longer be shown to users until it is approved.";
   if (campaignLength > 1) {
-    message =
-      "Modifying an ad will immediately put it into review. This means it will no longer be shown to users until it is approved. This ad is also shared across ${campaignLength} campaigns. Any modifications made will be effective for all campaigns using this creative.";
+    message = `Modifying an ad will immediately put it into review. This means it will no longer be shown to users until it is approved. This ad is also shared across ${campaignLength} campaigns. Any modifications made will be effective for all campaigns using this creative.`;
   }
 
   const creativeName = creative.name;
