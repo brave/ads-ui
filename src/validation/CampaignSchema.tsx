@@ -164,7 +164,7 @@ function validatePriceByBillingTypeAndFormat(
   const price = BigNumber(found.billingModelPrice);
   return schema.test(
     "is-lte-price",
-    "${billingType} price must be ${price} or higher",
+    `${billingType} price must be ${price} or higher`,
     (value) => (value ? price.isLessThanOrEqualTo(value) : true),
   );
 }
