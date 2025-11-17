@@ -8,7 +8,6 @@ import { PropsWithChildren, useContext, useState } from "react";
 import { FormContext } from "@/state/context";
 import { useFormikContext } from "formik";
 import { CampaignFormat } from "@/graphql-client/graphql";
-import { Trans } from "@lingui/macro";
 import dayjs from "dayjs";
 
 export function CreativeSelect(
@@ -85,7 +84,7 @@ export function CreativeSelect(
                 color={isSelected(co) ? "text.primary" : "rgba(0, 0, 0, 0.3)"}
                 textAlign="right"
               >
-                <Trans>created</Trans> {dayjs(co.createdAt).fromNow()}
+                created {dayjs(co.createdAt).fromNow()}
               </Typography>
             )}
           </BoxContainer>
@@ -112,7 +111,7 @@ export function CreativeSelect(
             setIsShowingAds(false);
           }}
         >
-          <Trans>Complete selection</Trans>
+          Complete selection
         </Button>
       )}
     </Box>

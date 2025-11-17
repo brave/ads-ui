@@ -1,4 +1,3 @@
-/* eslint-disable lingui/no-unlocalized-strings */
 import {
   AppBar,
   Divider,
@@ -10,7 +9,6 @@ import {
 } from "@mui/material";
 import { Close as CloseIcon } from "@mui/icons-material";
 import { useState, useRef, useEffect } from "react";
-import { Trans } from "@lingui/macro";
 
 import { DraftMenu } from "@/components/Navigation/DraftMenu";
 import ads from "@/assets/images/logo.svg";
@@ -161,7 +159,7 @@ export function Navbar() {
             <div>{advertiserMessage.message} </div>
             {advertiserMessage.actionUrl && (
               <>
-                <Trans>Read more at</Trans>{" "}
+                Read more at{" "}
                 <Link
                   href={advertiserMessage.actionUrl}
                   target="_blank"

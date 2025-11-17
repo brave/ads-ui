@@ -8,7 +8,6 @@ import {
 } from "@mui/material";
 import { Dispatch } from "react";
 import { useTimeZoneList } from "./useTimeZoneList";
-import { Trans } from "@lingui/macro";
 
 interface Props {
   timeZone: string;
@@ -25,15 +24,13 @@ export const TimeZonePicker = ({ timeZone, setTimeZone, sx }: Props) => {
 
   return (
     <FormControl variant="outlined" margin="normal" color="secondary" sx={sx}>
-      <InputLabel>
-        <Trans>Time Zone</Trans>
-      </InputLabel>
+      <InputLabel>Time Zone</InputLabel>
       <Select
         value={timeZone}
         autoWidth
         size="small"
         onChange={onChangeZone}
-        label={<Trans>Time Zone</Trans>}
+        label="Time Zone"
       >
         {timeZoneList.map((t) => (
           <MenuItem
@@ -50,6 +47,5 @@ export const TimeZonePicker = ({ timeZone, setTimeZone, sx }: Props) => {
 };
 
 export function getDefaultTimezone(): string {
-  // eslint-disable-next-line lingui/no-unlocalized-strings
   return "America/New_York";
 }

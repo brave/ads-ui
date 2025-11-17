@@ -4,7 +4,6 @@ import { PaymentType } from "@/graphql-client/graphql";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { CardContainer } from "@/components/Card/CardContainer";
 import { LearnMoreButton } from "@/components/Button/LearnMoreButton";
-import { t, Trans } from "@lingui/macro";
 import BigNumber from "bignumber.js";
 import { useField } from "formik";
 import { useCallback } from "react";
@@ -32,17 +31,17 @@ export function PaymentMethodField() {
   );
 
   const chargeMessage = (b: BigNumber) => {
-    if (b.lte(0)) return t`and no additional charges will be incurred.`;
+    if (b.lte(0)) return "and no additional charges will be incurred.";
     const amountToCharge = formatUsd(b);
-    return t`and you will be charged ${amountToCharge} USD.`;
+    return `and you will be charged ${amountToCharge} USD.`;
   };
 
   const accountBalance = formatUsd(balance);
   return (
-    <CardContainer header={<Trans>Payment</Trans>}>
+    <CardContainer header="Payment">
       <Stack spacing={1}>
         <Typography variant="body2">
-          <Trans>Payment is required before launching your campaign.</Trans>{" "}
+          Payment is required before launching your campaign.{" "}
           <LearnMoreButton helpSection="getting-started/launch-your-campaign" />
         </Typography>
         <FormikRadioControl
@@ -57,12 +56,10 @@ export function PaymentMethodField() {
       {balance.gt(0) && isDraft && (
         <Alert severity="info">
           <AlertTitle>
-            <Trans>Account Balance will be applied to this campaign</Trans>
+            Account Balance will be applied to this campaign
           </AlertTitle>
-          <Trans>
-            Your account has a balance of {accountBalance} USD. This will be
-            applied to your campaign
-          </Trans>
+          Your account has a balance of {accountBalance} USD. This will be
+          applied to your campaign
           {", "}
           {chargeMessage(amountOwed(balance))}
         </Alert>

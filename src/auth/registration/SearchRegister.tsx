@@ -4,7 +4,6 @@ import { FormikSubmitButton } from "@/form/FormikButton";
 import { useRegister } from "@/auth/hooks/mutations/useRegister";
 import { Box, Card, Typography } from "@mui/material";
 import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
-import { msg, Trans } from "@lingui/macro";
 import { RegistrationSchema } from "@/validation/RegistrationSchema";
 import { SearchForm } from "@/auth/registration/SearchForm";
 import logo from "@/assets/images/brave-icon-release-color.svg";
@@ -29,7 +28,7 @@ export function SearchRegister() {
     >
       <img src={logo} height={50} />
       <Typography variant="h5" mt={3} mb={2}>
-        <Trans>Check your brand's eligibility</Trans>
+        Check your brand's eligibility
       </Typography>
       <Formik
         initialValues={initialValues}
@@ -51,7 +50,7 @@ export function SearchRegister() {
           <Box display="flex" justifyContent="center" m={3}>
             <FormikSubmitButton
               isCreate={true}
-              label={msg`Check eligibility`}
+              label={"Check eligibility"}
               sx={{
                 padding: "12px 30px 12px 30px",
                 borderRadius: "12px",

@@ -8,8 +8,6 @@ import { FullScreenProgress } from "@/components/FullScreenProgress";
 import { NoPreviewAvailable } from "./NoPreviewAvailable";
 import { extractOptionsFromUrlSlug } from "./options";
 
-/* eslint-disable lingui/no-unlocalized-strings */
-
 export default function SearchPreviewPage() {
   const { slug } = useParams<{ slug: string }>();
   const options = extractOptionsFromUrlSlug(slug);

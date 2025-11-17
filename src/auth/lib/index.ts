@@ -4,7 +4,6 @@ import {
   buildAdServerV2Endpoint,
 } from "@/util/environment";
 import { RegistrationForm } from "@/auth/registration/types";
-import { t } from "@lingui/macro";
 import { AdvertiserMessage } from "@/auth/context/auth.interface";
 
 type Advertiser = {
@@ -25,7 +24,7 @@ export const getCredentials = async (user: {
   password: string;
 }): Promise<ResponseUser> => {
   if (user.email === "" || user.password === "") {
-    throw new Error(t`Please enter a username and password`);
+    throw new Error("Please enter a username and password");
   }
 
   const res = await fetch(buildAdServerV2Endpoint("/auth/token"), {
@@ -42,12 +41,12 @@ export const getCredentials = async (user: {
   });
 
   if (res.status === 400 || res.status === 401) {
-    throw new Error(t`The username or password did not match our records.`);
+    throw new Error("The username or password did not match our records.");
   }
 
   if (!res.ok) {
     throw new Error(
-      t`Unexpected error validating your credentials. Please try again later.`,
+      "Unexpected error validating your credentials. Please try again later.",
     );
   }
 
@@ -91,7 +90,7 @@ export async function submitRegistration(
 
   if (!res.ok) {
     throw new Error(
-      t`Unable to register your organization at this time. Please try again later.`,
+      "Unable to register your organization at this time. Please try again later.",
     );
   }
 }
@@ -104,7 +103,7 @@ export const getUser = async (): Promise<ResponseUser> => {
   });
 
   if (!res.ok) {
-    throw new Error(t`Invalid Session`);
+    throw new Error("Invalid Session");
   }
 
   return await res.json();
@@ -120,7 +119,7 @@ export const getAdvertiserMessage = async (): Promise<{
   });
 
   if (!res.ok) {
-    throw new Error(t`Invalid Session`);
+    throw new Error("Invalid Session");
   }
 
   return await res.json();
@@ -134,7 +133,7 @@ export const clearCredentials = async (): Promise<void> => {
   });
 
   if (!res.ok) {
-    throw new Error(t`Could not logout at this time. Please try again later.`);
+    throw new Error("Could not logout at this time. Please try again later.");
   }
 
   return;
@@ -167,7 +166,7 @@ export const authorize = async (req: {
   });
 
   if (!res.ok) {
-    throw new Error(t`Invalid Token`);
+    throw new Error("Invalid Token");
   }
 
   return await res.json();
@@ -186,7 +185,6 @@ export const sendMarketingEmail = async (req: {
       body: JSON.stringify({
         email: req.email,
         name: req.fullName,
-        // eslint-disable-next-line lingui/no-unlocalized-strings
         newsletters: [{ name: "Brave Ads" }],
       }),
     },

@@ -1,5 +1,4 @@
 import { object, string } from "yup";
-import { t } from "@lingui/macro";
 
 const SimpleUrlRegexp = /https:\/\/.+\.[a-zA-Z]{2,}\/?.*/g;
 const NoSpacesRegex = /^\S*$/;
@@ -9,28 +8,28 @@ const DomainRegex = /^(?!-)[A-Za-z0-9-]+([-.][a-z0-9]+)*\.[A-Za-z]{2,}$/;
 const UserSchema = () =>
   object().shape({
     email: string()
-      .required(t`Email address is required`)
-      .email(t`Please enter a valid email address`),
-    fullName: string().required(t`Full name is required`),
+      .required("Email address is required")
+      .email("Please enter a valid email address"),
+    fullName: string().required("Full name is required"),
   });
 
 const BrowserRegistrationSchema = () =>
   object().shape({
     user: UserSchema(),
     advertiser: AdvertiserDetailsSchema().shape({
-      name: string().required(t`Business name is required`),
+      name: string().required("Business name is required"),
       url: string()
-        .required(t`Business Website is required`)
-        .matches(NoSpacesRegex, t`Website must not contain any whitespace`)
-        .matches(HttpsRegex, t`Website must start with https://`)
+        .required("Business Website is required")
+        .matches(NoSpacesRegex, "Website must not contain any whitespace")
+        .matches(HttpsRegex, "Website must start with https://")
         .matches(
           SimpleUrlRegexp,
-          t`Please enter a valid URL, for example https://brave.com`,
+          "Please enter a valid URL, for example https://brave.com",
         ),
       description: string().required(
-        t`Please let us know why you're interested in Brave Ads`,
+        "Please let us know why you're interested in Brave Ads",
       ),
-      vertical: string().required(t`Please select a vertical`),
+      vertical: string().required("Please select a vertical"),
     }),
   });
 
@@ -39,30 +38,30 @@ const SearchRegistrationSchema = () =>
     user: UserSchema(),
     advertiser: AdvertiserDetailsSchema(),
     domain: string()
-      .required(t`Domain is required`)
-      .matches(NoSpacesRegex, t`Domain must not contain any whitespace`)
+      .required("Domain is required")
+      .matches(NoSpacesRegex, "Domain must not contain any whitespace")
       .matches(
         DomainRegex,
-        t`Please enter a valid domain, for example: brave.com`,
+        "Please enter a valid domain, for example: brave.com",
       ),
     mediaSpend: string().optional().nullable(),
     country: string()
-      .required(t`Primary region of business is required`)
+      .required("Primary region of business is required")
       .oneOf(
         ["US", "GB", "DE", "FR", "CA", "IN"],
-        t`Primary region of business is required`,
+        "Primary region of business is required",
       ),
   });
 
 const AdvertiserDetailsSchema = () =>
   object().shape({
     marketingChannel: string().required(
-      t`Please let us know how you heard about Brave Ads`,
+      "Please let us know how you heard about Brave Ads",
     ),
     other: string().when("marketingChannel", {
       is: "other",
       then: (schema) =>
-        schema.required(t`Please specify how you heard about Brave Ads`),
+        schema.required("Please specify how you heard about Brave Ads"),
     }),
   });
 

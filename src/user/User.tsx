@@ -43,7 +43,6 @@ function UserContent() {
         flex={1}
         component="main"
         marginTop={`${totalHeaderHeight}px`}
-        // eslint-disable-next-line lingui/no-unlocalized-strings
         height={`calc(100% - ${totalHeaderHeight}px)`}
         overflow="auto"
         padding={1}

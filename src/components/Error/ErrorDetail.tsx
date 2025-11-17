@@ -10,17 +10,13 @@ import {
   Typography,
 } from "@mui/material";
 import { VERSION } from "@/util/version";
-import { MessageDescriptor } from "@lingui/core";
-import { Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
 interface Props {
   error?: any;
-  additionalDetails?: MessageDescriptor;
+  additionalDetails?: string;
 }
 
 export const ErrorDetail = ({ error, additionalDetails }: Props) => {
-  const { _ } = useLingui();
   if (!error) {
     return null;
   }
@@ -35,13 +31,8 @@ export const ErrorDetail = ({ error, additionalDetails }: Props) => {
     return (
       <Box mt={2}>
         <Alert severity="warning">
-          <AlertTitle>
-            <Trans>401 Forbidden</Trans>
-          </AlertTitle>
-          <Trans>
-            A forbidden error was returned. You may need to log out and back in
-            again.
-          </Trans>
+          <AlertTitle>401 Forbidden</AlertTitle>A forbidden error was returned.
+          You may need to log out and back in again.
         </Alert>
       </Box>
     );
@@ -49,7 +40,6 @@ export const ErrorDetail = ({ error, additionalDetails }: Props) => {
 
   const stringError = JSON.stringify(error, undefined, 2);
 
-  // eslint-disable-next-line lingui/no-unlocalized-strings
   const errorDetails = `
 URL: ${document.location}
 VERSION: ${VERSION.shortHash}
@@ -62,29 +52,21 @@ ${stringError === "{}" ? "" : stringError}
   return (
     <Box mt={2}>
       <Alert severity="error">
-        <AlertTitle>
-          <Trans>Something went wrong.</Trans>
-        </AlertTitle>
+        <AlertTitle>Something went wrong.</AlertTitle>
+        <p>An error has occurred while processing your request.</p>
         <p>
-          <Trans>An error has occurred while processing your request.</Trans>
-        </p>
-        <p>
-          <Trans>
-            Please refresh the page to try again, or email <SelfServeMailTo />{" "}
-            for assistance.
-          </Trans>
+          Please refresh the page to try again, or email <SelfServeMailTo /> for
+          assistance.
         </p>
       </Alert>
 
       {additionalDetails && (
         <Accordion>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>
-              <Trans>Additional Details</Trans>
-            </Typography>
+            <Typography>Additional Details</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <pre style={{ overflow: "scroll" }}>{_(additionalDetails)}</pre>
+            <pre style={{ overflow: "scroll" }}>{additionalDetails}</pre>
           </AccordionDetails>
         </Accordion>
       )}
@@ -93,6 +75,5 @@ ${stringError === "{}" ? "" : stringError}
 };
 
 const SelfServeMailTo = () => (
-  // eslint-disable-next-line lingui/no-unlocalized-strings
   <a href="mailto:selfserve@brave.com">selfserve@brave.com</a>
 );

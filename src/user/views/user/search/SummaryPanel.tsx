@@ -6,8 +6,6 @@ import PublicIcon from "@mui/icons-material/Public";
 import DomainIcon from "@mui/icons-material/Domain";
 import PanToolAltOutlinedIcon from "@mui/icons-material/PanToolAltOutlined";
 import GridViewIcon from "@mui/icons-material/GridView";
-import { Trans, msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
 function SummaryEntry({
   title,
@@ -46,25 +44,23 @@ export function SummaryPanel({
   selectedCount,
   totalCount,
 }: Props) {
-  const { _ } = useLingui();
-
   return (
     <CardContainer sx={{ width: 250 }}>
       <Typography variant="h2" marginBottom={2}>
-        <Trans>Campaign Summary</Trans>
+        Campaign Summary
       </Typography>
       <SummaryEntry
-        title={_(msg`Country`)}
+        title={"Country"}
         value={countryName}
         icon={<PublicIcon />}
       />
       <SummaryEntry
-        title={_(msg`Domain`)}
+        title={"Domain"}
         value={domain.domain}
         icon={<DomainIcon />}
       />
       <SummaryEntry
-        title={_(msg`Selected ads`)}
+        title={"Selected ads"}
         value={
           selectedCount && totalCount ? (
             <span>
@@ -77,12 +73,12 @@ export function SummaryPanel({
         icon={<GridViewIcon />}
       />
       <SummaryEntry
-        title={_(msg`Cost per click`)}
+        title={"Cost per click"}
         value="$1.00"
         icon={<PanToolAltOutlinedIcon />}
       />
       {/* <SummaryEntry
-        title={_(msg`Estimated Impressions`)}
+        title={"Estimated Impressions"}
         value="999,999 per week"
         icon={<PanToolAltOutlinedIcon />}
       /> */}

@@ -11,8 +11,6 @@ import { useContext } from "react";
 import { FilterContext } from "@/state/context";
 import { useAdvertiserWithPrices } from "@/user/hooks/useAdvertiserWithPrices";
 import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import {
   AdsManagerUpdateCampaignInput,
   AdvertiserCampaignsDocument,
@@ -39,7 +37,6 @@ export function EditCampaign() {
     documentTitle: "Edit Campaign",
   });
   const { fromDate } = useContext(FilterContext);
-  const { _ } = useLingui();
   const history = useHistory();
   const params = useParams<Params>();
   const { createPaymentSession, loading } = useCreatePaymentSession();
@@ -65,7 +62,9 @@ export function EditCampaign() {
     return (
       <ErrorDetail
         error={error ?? priceError}
-        additionalDetails={msg`Campaign does not exist, or cannot be edited. Please try again later.`}
+        additionalDetails={
+          "Campaign does not exist, or cannot be edited. Please try again later."
+        }
       />
     );
   }
@@ -105,7 +104,7 @@ export function EditCampaign() {
       },
       onError() {
         trackMatomoEvent("campaign", "update-failed");
-        alert(_(msg`Unable to Update Campaign.`));
+        alert("Unable to Update Campaign.");
       },
       refetchQueries: [
         {

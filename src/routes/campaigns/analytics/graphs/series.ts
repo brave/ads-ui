@@ -3,7 +3,6 @@ import { MetricDefinition } from "../metrics";
 import { SeriesSplineOptions, SeriesTooltipOptionsObject } from "highcharts";
 import dayjs from "dayjs";
 import BigNumber from "bignumber.js";
-import { i18n } from "@lingui/core";
 
 type Interval = "day" | "hour";
 
@@ -65,7 +64,7 @@ export function makeLineChartSeries(
 
   return {
     type: "spline",
-    name: i18n._(metric.caption),
+    name: metric.caption,
     id: metric.id,
     color: metric.color,
     tooltip: tooltip(),

@@ -14,11 +14,8 @@ import { Status } from "@/components/Campaigns/Status";
 import { displayFromCampaignState } from "@/util/displayState";
 import { LearnMoreButton } from "@/components/Button/LearnMoreButton";
 import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
 export function AdSetFields() {
-  const { _ } = useLingui();
   const history = useHistory();
   const params = new URLSearchParams(history.location.search);
   const current = Number(params.get("current") ?? 0);
@@ -28,16 +25,16 @@ export function AdSetFields() {
   return (
     <>
       <CardContainer
-        header={`${_(msg`Ad Set`)} ${fakeCurrent}`}
+        header={`Ad Set ${fakeCurrent}`}
         additionalAction={<SwitchHeader current={current} />}
       >
         <Typography variant="body2" gutterBottom>
-          <Trans>Name your ad set to distinguish it from others.</Trans>{" "}
+          Name your ad set to distinguish it from others.{" "}
           <LearnMoreButton helpSection="getting-started/create-an-ad-set" />
         </Typography>
         <FormikTextField
           name={`adSets.${current}.name`}
-          label={_(msg`Ad set name`)}
+          label={"Ad set name"}
           margin="none"
         />
       </CardContainer>

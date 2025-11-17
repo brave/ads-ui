@@ -3,7 +3,6 @@ import { Alert, AlertTitle } from "@mui/material";
 import dayjs from "dayjs";
 import { Suspense } from "react";
 import { FullScreenProgress } from "@/components/FullScreenProgress";
-import { Trans } from "@lingui/macro";
 import { CampaignAnalytics } from "@/routes/campaigns/analytics/CampaignAnalytics";
 import { CampaignOverviewProps } from "@/util/CampaignIdProps";
 import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
@@ -22,10 +21,8 @@ export function AnalyticsOverview({ campaignOverview }: CampaignOverviewProps) {
   if (campaignStartDate.isAfter()) {
     return (
       <Alert severity="warning">
-        <AlertTitle>
-          <Trans>Campaign has not started yet</Trans>
-        </AlertTitle>
-        <Trans>It is scheduled to start {campaignStartFromNow}.</Trans>
+        <AlertTitle>Campaign has not started yet</AlertTitle>
+        It is scheduled to start {campaignStartFromNow}.
       </Alert>
     );
   }

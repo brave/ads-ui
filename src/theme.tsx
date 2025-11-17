@@ -1,5 +1,5 @@
 import { createTheme, responsiveFontSizes, SxProps } from "@mui/material";
-import { findLocale } from "./i18n";
+import { enUS } from "@mui/x-data-grid/locales";
 
 const appTheme = createTheme(
   {
@@ -68,7 +68,7 @@ const appTheme = createTheme(
       },
     },
   },
-  findLocale().gridTheme,
+  enUS,
 );
 
 export const theme = responsiveFontSizes(appTheme);

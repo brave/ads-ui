@@ -11,27 +11,20 @@ import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { LearnMoreButton } from "@/components/Button/LearnMoreButton";
 import { LocationPicker } from "@/components/Location/LocationPicker";
 import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
 export function CampaignSettings(props: { prices: AdvertiserPrice[] }) {
-  const { _ } = useLingui();
   const { advertiser } = useAdvertiser();
   useTrackMatomoPageView({ documentTitle: "Campaign Settings" });
 
   return (
     <>
-      <CardContainer header={<Trans>Campaign Settings</Trans>}>
+      <CardContainer header="Campaign Settings">
         <Typography variant="body2" gutterBottom>
-          <Trans>Define how you want your campaign to run.</Trans>{" "}
+          Define how you want your campaign to run.{" "}
           <LearnMoreButton helpSection="getting-started/create-a-campaign" />
         </Typography>
 
-        <FormikTextField
-          name="name"
-          label={_(msg`Campaign Name`)}
-          sx={{ mb: 1 }}
-        />
+        <FormikTextField name="name" label={"Campaign Name"} sx={{ mb: 1 }} />
 
         <BudgetField />
 
@@ -42,7 +35,7 @@ export function CampaignSettings(props: { prices: AdvertiserPrice[] }) {
 
       <FormatField prices={props.prices} />
 
-      <CardContainer header={<Trans>Pricing</Trans>}>
+      <CardContainer header="Pricing">
         {!advertiser.selfServiceSetPrice && (
           <BillingModelSelect prices={props.prices} />
         )}

@@ -1,6 +1,5 @@
 import { Box, Button, Link, Stack, Toolbar, Typography } from "@mui/material";
 import { Background } from "@/components/Background/Background";
-import { Trans } from "@lingui/macro";
 import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
 import { SearchRegister } from "@/auth/registration/SearchRegister";
@@ -24,10 +23,8 @@ export default function SearchLandingPage() {
         >
           <Stack direction="column" spacing={3} maxWidth={750} alignSelf="top">
             <Typography variant="h1" color="white">
-              <Trans>
-                Get incremental traffic with paid ads on the world's fastest
-                growing search engine.
-              </Trans>
+              Get incremental traffic with paid ads on the world's fastest
+              growing search engine.
             </Typography>
             <Typography
               variant="subtitle1"
@@ -35,24 +32,22 @@ export default function SearchLandingPage() {
               color="white"
               maxWidth={500}
             >
-              <Trans>
-                Check if your brand is eligible for a{" "}
-                <strong>free trial</strong> of Brave Search Ads.{" "}
-                <Link
-                  color="secondary"
-                  sx={{ cursor: "pointer" }}
-                  onClick={() => {
-                    window.open(
-                      "https://search.brave.com/",
-                      "_blank",
-                      "noopener",
-                    );
-                  }}
-                >
-                  Try Brave Search
-                </Link>{" "}
-                to see why our users choose us over Google and Bing.
-              </Trans>
+              Check if your brand is eligible for a <strong>free trial</strong>{" "}
+              of Brave Search Ads.{" "}
+              <Link
+                color="secondary"
+                sx={{ cursor: "pointer" }}
+                onClick={() => {
+                  window.open(
+                    "https://search.brave.com/",
+                    "_blank",
+                    "noopener",
+                  );
+                }}
+              >
+                Try Brave Search
+              </Link>{" "}
+              to see why our users choose us over Google and Bing.
             </Typography>
           </Stack>
           <SearchRegister />
@@ -78,14 +73,12 @@ export default function SearchLandingPage() {
             alignSelf="top"
           >
             <Typography variant="h1" color="white" maxWidth={500}>
-              <Trans>Set up a trial campaign in minutes.</Trans>
+              Set up a trial campaign in minutes.
             </Typography>
             <Typography variant="subtitle1" fontSize="18px" color="white">
-              <Trans>
-                Brave Search Ads are built to be easy to manage. Once enabled,
-                brands will benefit from a passive increase in traffic without
-                the need to constantly monitor and tweak campaigns.
-              </Trans>
+              Brave Search Ads are built to be easy to manage. Once enabled,
+              brands will benefit from a passive increase in traffic without the
+              need to constantly monitor and tweak campaigns.
             </Typography>
           </Stack>
         </Box>
@@ -97,10 +90,10 @@ export default function SearchLandingPage() {
           mb={{ xs: 5, md: 10 }}
         >
           <Typography variant="h1" color="white" textAlign="center">
-            <Trans>Have specific questions?</Trans>
+            Have specific questions?
           </Typography>
           <Typography variant="h3" color="white" gutterBottom>
-            <Trans>Get in touch.</Trans>
+            Get in touch.
           </Typography>
           <Button
             variant="contained"
@@ -108,7 +101,7 @@ export default function SearchLandingPage() {
             size="large"
             sx={{ pl: 4, pr: 4, pt: 1, pb: 1 }}
           >
-            <Trans>searchads@brave.com</Trans>
+            searchads@brave.com
           </Button>
         </Box>
       </Box>

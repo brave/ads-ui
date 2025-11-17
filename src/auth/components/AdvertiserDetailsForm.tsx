@@ -17,7 +17,6 @@ import { AdvertiserSchema } from "@/validation/AdvertiserSchema";
 import { useState } from "react";
 import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
 import _ from "lodash";
-import { msg, Trans } from "@lingui/macro";
 import { useMutation, useQuery } from "@apollo/client";
 import { graphql } from "@/graphql-client/index";
 
@@ -105,7 +104,7 @@ export function AdvertiserDetailsForm() {
                 }}
               >
                 <Typography variant="h4" alignSelf="center" sx={{ mb: 3 }}>
-                  <Trans>Complete your business profile to continue</Trans>
+                  Complete your business profile to continue
                 </Typography>
 
                 <AdvertiserAddress address={data?.advertiser?.billingAddress} />
@@ -115,7 +114,7 @@ export function AdvertiserDetailsForm() {
                 <Box alignSelf="center">
                   <FormikSubmitButton
                     isCreate={false}
-                    label={msg`Enter Ads Manager`}
+                    label={"Enter Ads Manager"}
                     sx={{ borderRadius: "10px", mt: 3 }}
                   />
                 </Box>

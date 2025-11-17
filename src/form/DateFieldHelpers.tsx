@@ -1,6 +1,5 @@
 import dayjs, { Dayjs } from "dayjs";
 
-// eslint-disable-next-line lingui/no-unlocalized-strings
 const ADS_DEFAULT_TIMEZONE = "America/New_York";
 
 export const defaultStartDate = (): string =>

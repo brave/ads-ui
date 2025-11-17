@@ -11,8 +11,6 @@ import {
   OsBreakdownQueryVariables,
   PerformanceFilter,
 } from "@/graphql-client/graphql";
-import { MessageDescriptor, i18n } from "@lingui/core";
-import { msg } from "@lingui/macro";
 import { TypedDocumentNode } from "@apollo/client";
 
 type GqlQueryParams = Exact<{
@@ -84,7 +82,7 @@ const OS_Breakdown_Load = graphql(`
 
 interface BreakdownDefinition {
   id: string;
-  label: MessageDescriptor;
+  label: string;
 }
 
 export interface LocalizedBreakdown {
@@ -106,8 +104,8 @@ interface BreakdownDefinitionWithQuery<
   ) => React.ReactNode;
 }
 
-const DAY_BREAKDOWN = { id: "day", label: msg`Daily` };
-const HOUR_BREAKDOWN = { id: "hour", label: msg`Hourly` };
+const DAY_BREAKDOWN = { id: "day", label: "Daily" };
+const HOUR_BREAKDOWN = { id: "hour", label: "Hourly" };
 
 const ADSET_BREAKDOWN: BreakdownDefinitionWithQuery<
   AdSetBreakdownQuery,
@@ -115,7 +113,7 @@ const ADSET_BREAKDOWN: BreakdownDefinitionWithQuery<
   AdSetBreakdownQuery["performance"]["values"][0]["dimensions"]
 > = {
   id: "adset",
-  label: msg`Ad Set`,
+  label: "Ad Set",
   query: AdSet_Breakdown_Load,
   extractId: (dims) => dims.adSet?.id ?? "",
   extractName: (dims) =>
@@ -129,7 +127,7 @@ const OS_BREAKDOWN: BreakdownDefinitionWithQuery<
   OsBreakdownQuery["performance"]["values"][0]["dimensions"]
 > = {
   id: "os",
-  label: msg`OS`,
+  label: "OS",
   query: OS_Breakdown_Load,
   extractId: (dims) => dims.os,
   extractName: (dims) => dims.os,
@@ -142,7 +140,7 @@ const CREATIVE_BREAKDOWN: BreakdownDefinitionWithQuery<
   CreativeBreakdownQuery["performance"]["values"][0]["dimensions"]
 > = {
   id: "creative",
-  label: msg`Ad`,
+  label: "Ad",
   query: Creative_Breakdown_Load,
   extractId: (dims) => dims.ad.creative.id ?? "unknown",
   extractName: (dims) => dims.ad.creative.name ?? "(unknown)",
@@ -167,7 +165,7 @@ export function getBreakdownDefinition(
   if (!id) return undefined;
   const breakdown = breakdownLookup.get(id);
   if (!breakdown) return undefined;
-  return { ...breakdown, label: i18n._(breakdown.label) };
+  return { ...breakdown, label: breakdown.label };
 }
 
 export function isBreakdownWithQuery(

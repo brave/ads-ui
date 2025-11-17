@@ -15,7 +15,6 @@ import { useState } from "react";
 import _ from "lodash";
 import { validCreativeFields } from "@/user/library";
 import { isReviewableState } from "@/util/displayState";
-import { Trans } from "@lingui/macro";
 import {
   AdvertiserCreativesDocument,
   CampaignsForCreativeDocument,
@@ -99,18 +98,13 @@ export function CreativeStatusSwitch({ creative }: Props) {
       />
       <Dialog open={relatedCampaigns.length > 0}>
         <DialogTitle>
-          {creative.state === "active" ? (
-            <Trans>Are you sure you want to pause</Trans>
-          ) : (
-            <Trans>Are you sure you want to activate</Trans>
-          )}
-          {` "${input.name}"`}
+          {creative.state === "active"
+            ? `Are you sure you want to pause ${input.name}`
+            : `Are you sure you want to activate ${input.name}`}
         </DialogTitle>
         <DialogContent>
           <Typography>
-            <Trans>
-              Modifying the state of this ad will effect more than one campaign:
-            </Trans>
+            Modifying the state of this ad will effect more than one campaign:
           </Typography>
           <List sx={{ listStyleType: "disc", pl: 2 }}>
             {relatedCampaigns.map((r) => (
@@ -130,7 +124,7 @@ export function CreativeStatusSwitch({ creative }: Props) {
             }}
             disabled={updateLoading}
           >
-            <Trans>Cancel</Trans>
+            Cancel
           </Button>
           <Button
             variant="contained"
@@ -144,7 +138,7 @@ export function CreativeStatusSwitch({ creative }: Props) {
             }}
             disabled={updateLoading}
           >
-            <Trans>Continue</Trans>
+            Continue
           </Button>
         </DialogActions>
       </Dialog>

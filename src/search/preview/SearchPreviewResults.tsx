@@ -6,8 +6,6 @@ import { SummaryPanel } from "./SummaryPanel";
 import { LandingPageList } from "./LandingPageList";
 import { CallToAction } from "./CallToAction";
 
-/* eslint-disable lingui/no-unlocalized-strings */
-
 interface Props {
   data: SearchData;
   hideEstimates: boolean;

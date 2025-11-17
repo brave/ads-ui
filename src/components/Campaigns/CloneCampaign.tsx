@@ -20,8 +20,6 @@ import {
   CampaignSource,
   CampaignSummaryFragment,
 } from "@/graphql-client/graphql";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useMutation } from "@apollo/client";
 import { graphql } from "@/graphql-client/index";
 
@@ -44,8 +42,7 @@ export function CloneCampaign({ campaign, disabled }: Props) {
   const { fromDate } = useContext(FilterContext);
   const history = useHistory();
   const [open, setOpen] = useState(false);
-  const { _ } = useLingui();
-  const unableToClone = _(msg`Unable to clone campaign`);
+  const unableToClone = "Unable to clone campaign";
 
   const [copyCampaign, { loading }] = useMutation(Copy_Campaign, {
     refetchQueries: [
@@ -77,9 +74,7 @@ export function CloneCampaign({ campaign, disabled }: Props) {
     <Box>
       <Tooltip
         title={
-          !campaign
-            ? _(msg`Select one campaign to clone`)
-            : _(msg`Clone ${campaignName}`)
+          !campaign ? "Select one campaign to clone" : `Clone ${campaignName}`
         }
       >
         <span>
@@ -94,26 +89,23 @@ export function CloneCampaign({ campaign, disabled }: Props) {
             disabled={!canClone || loading || disabled}
             startIcon={<ContentCopyIcon />}
           >
-            <Trans>Clone</Trans>
+            Clone
           </Button>
         </span>
       </Tooltip>
       <Dialog open={open} onClose={() => setOpen(false)}>
-        <DialogTitle>{_(msg`Clone campaign: "${campaignName}"?`)}</DialogTitle>
+        <DialogTitle>{`Clone campaign: ${campaignName}?`}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            <Trans>
-              Cloning a campaign will create a new draft campaign that inherits
-              all properties of the original campaign, including ad sets. The
-              new campaign will reuse any existing ads from the original
-              campaign.
-            </Trans>
+            Cloning a campaign will create a new draft campaign that inherits
+            all properties of the original campaign, including ad sets. The new
+            campaign will reuse any existing ads from the original campaign.
           </DialogContentText>
           {loading && <LinearProgress />}
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpen(false)} disabled={loading}>
-            <Trans>Cancel</Trans>
+            Cancel
           </Button>
           <Button
             disabled={loading && !campaign}
@@ -124,7 +116,7 @@ export function CloneCampaign({ campaign, disabled }: Props) {
               }
             }}
           >
-            <Trans>Clone</Trans>
+            Clone
           </Button>
         </DialogActions>
       </Dialog>

@@ -5,7 +5,6 @@ import { useRegister } from "@/auth/hooks/mutations/useRegister";
 import { Box } from "@mui/material";
 import { PersistRegistrationValues } from "@/form/PersistRegistrationValues";
 import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
-import { msg } from "@lingui/macro";
 import { RegistrationContainer } from "@/auth/registration/RegistrationContainer";
 import { BrowserForm } from "@/auth/registration/BrowserForm";
 import { RegistrationSchema } from "@/validation/RegistrationSchema";
@@ -34,7 +33,7 @@ export function BrowserRegister() {
           <Box display="flex" justifyContent="center" m={3}>
             <FormikSubmitButton
               isCreate={true}
-              label={msg`Submit`}
+              label={"Submit"}
               sx={{
                 padding: "12px 30px 12px 30px",
                 borderRadius: "12px",

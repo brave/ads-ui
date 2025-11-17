@@ -1,8 +1,6 @@
 import { FilterProps } from "./FilterBar";
 import { FilterButton } from "./FilterButton";
 import { buildTimeFilters } from "./time-filters";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useTimeFilterParams } from "@/routes/campaigns/analytics/hooks";
 import dayjs from "dayjs";
 import { DateRangePicker } from "@/components/Date/DateRangePicker";
@@ -10,7 +8,6 @@ import { Box } from "@mui/material";
 import { useStickyState } from "@/hooks/useStickyState";
 
 export function TimeFilter(props: FilterProps) {
-  const { _ } = useLingui();
   const [, setCustom] = useStickyState<string | undefined>(
     "custom-date",
     undefined,
@@ -44,7 +41,7 @@ export function TimeFilter(props: FilterProps) {
         />
       )}
       <FilterButton
-        label={selected?.label || _(msg`Custom`)}
+        label={selected?.label || "Custom"}
         value={selected}
         onChange={(item) => {
           setSelected(item);

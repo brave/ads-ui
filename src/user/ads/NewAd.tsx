@@ -6,7 +6,6 @@ import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { useField } from "formik";
 import { Creative, initialCreative } from "@/user/views/adsManager/types";
 import { FormContext } from "@/state/context";
-import { Trans } from "@lingui/macro";
 
 export function NewAd() {
   const [, , newCreative] = useField<Creative | undefined>("newCreative");
@@ -21,11 +20,7 @@ export function NewAd() {
   }, [meta.value]);
 
   return (
-    <BoxContainer
-      header={
-        meta.value ? <Trans>Discard ad</Trans> : <Trans>Create new ad</Trans>
-      }
-    >
+    <BoxContainer header={meta.value ? "Discard ad" : "Create new ad"}>
       <Box
         component={Button}
         height={"80px"}
@@ -49,7 +44,7 @@ export function NewAd() {
         color={"text.primary"}
         textAlign="right"
       >
-        <Trans>create now</Trans>
+        create now
       </Typography>
     </BoxContainer>
   );

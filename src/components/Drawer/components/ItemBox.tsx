@@ -5,12 +5,10 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import { Trans } from "@lingui/react";
-import { MessageDescriptor } from "@lingui/core";
 import { MouseEvent, ReactNode } from "react";
 
 export type RouteOption = {
-  label: MessageDescriptor;
+  label: string;
   href: string;
   icon: ReactNode;
   disabled?: boolean;
@@ -38,7 +36,7 @@ export const ItemBox = (props: RouteOption) => {
       <ListItemIcon sx={{ minWidth: "unset" }}>{props.icon}</ListItemIcon>
       <ListItemText disableTypography>
         <Typography textAlign="center" variant="caption" fontWeight={500}>
-          <Trans id={props.label.id} />
+          {props.label}
         </Typography>
       </ListItemText>
     </ListItemButton>
