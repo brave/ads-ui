@@ -1,6 +1,6 @@
 import { LandingPageListEntry } from "./LandingPageListEntry";
 
-import { List } from "@mui/material";
+import { List } from "react-window";
 import { Basket } from "@/user/views/user/search/basket";
 import { LandingPageInfo } from "./data";
 
@@ -10,6 +10,41 @@ interface Props {
   allowSelection?: boolean;
 }
 
+interface RowComponentProps {
+  index: number;
+  style: React.CSSProperties;
+  landingPages: LandingPageInfo[];
+  basket: Basket;
+  allowSelection: boolean;
+}
+
+function RowComponent({
+  index,
+  style,
+  landingPages,
+  basket,
+  allowSelection,
+}: RowComponentProps) {
+  const landingPage = landingPages[index];
+
+  return (
+    <LandingPageListEntry
+      key={landingPage.url}
+      style={style}
+      landingPage={landingPage}
+      allowSelection={allowSelection}
+      hasMultipleCreatives={landingPage.creatives.length > 1}
+      creativeIndex={basket.creativeIndexForLandingPage(landingPage.url)}
+      nextCreative={() =>
+        basket.nextCreativeForLandingPage(
+          landingPage.url,
+          landingPage.creatives.length,
+        )
+      }
+    />
+  );
+}
+
 export function LandingPageList({
   landingPages,
   basket,
@@ -17,26 +52,17 @@ export function LandingPageList({
 }: Props) {
   return (
     <List
-      sx={{
-        overflowY: "auto",
-        height: "100%",
-      }}
-    >
-      {landingPages.map((landingPage) => (
-        <LandingPageListEntry
-          key={landingPage.url}
-          landingPage={landingPage}
-          allowSelection={allowSelection}
-          hasMultipleCreatives={landingPage.creatives.length > 1}
-          creativeIndex={basket.creativeIndexForLandingPage(landingPage.url)}
-          nextCreative={() =>
-            basket.nextCreativeForLandingPage(
-              landingPage.url,
-              landingPage.creatives.length,
-            )
-          }
-        />
-      ))}
-    </List>
+      rowComponent={RowComponent}
+      rowCount={landingPages.length}
+      rowHeight={200}
+      rowProps={
+        {
+          landingPages,
+          basket,
+          allowSelection,
+        } as any
+      }
+      style={{ overflowX: "scroll" }}
+    />
   );
 }

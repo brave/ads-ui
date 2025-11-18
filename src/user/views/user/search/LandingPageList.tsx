@@ -2,7 +2,7 @@ import { SearchProspectsLandingPageListFragment } from "@/graphql-client/graphql
 import { LandingPageListEntry } from "./LandingPageListEntry";
 import { Basket } from "./basket";
 
-import { List } from "@mui/material";
+import { List } from "react-window";
 import { FullScreenProgress } from "@/components/FullScreenProgress";
 import { CountryDomain } from "./types";
 
@@ -11,6 +11,46 @@ interface Props {
   basket: Basket;
   landingPages: SearchProspectsLandingPageListFragment[] | undefined;
   allowSelection?: boolean;
+}
+
+interface RowComponentProps {
+  index: number;
+  style: React.CSSProperties;
+  landingPages: SearchProspectsLandingPageListFragment[];
+  basket: Basket;
+  domain: CountryDomain;
+  allowSelection: boolean;
+}
+
+function RowComponent({
+  index,
+  style,
+  landingPages,
+  basket,
+  domain,
+  allowSelection,
+}: RowComponentProps) {
+  const landingPage = landingPages[index];
+
+  return (
+    <LandingPageListEntry
+      key={landingPage.url}
+      style={style}
+      domain={domain}
+      landingPage={landingPage}
+      allowSelection={allowSelection}
+      hasMultipleCreatives={landingPage.creatives.length > 1}
+      selected={basket.isLandingPageSelected(landingPage.url)}
+      toggleSelection={() => basket.toggleLandingPageSelection(landingPage.url)}
+      creativeIndex={basket.creativeIndexForLandingPage(landingPage.url)}
+      nextCreative={() =>
+        basket.nextCreativeForLandingPage(
+          landingPage.url,
+          landingPage.creatives.length,
+        )
+      }
+    />
+  );
 }
 
 export function LandingPageList({
@@ -24,27 +64,19 @@ export function LandingPageList({
   }
 
   return (
-    <List sx={{ overflowY: "auto", height: "100%" }}>
-      {landingPages.map((landingPage) => (
-        <LandingPageListEntry
-          key={landingPage.url}
-          domain={domain}
-          landingPage={landingPage}
-          allowSelection={allowSelection}
-          hasMultipleCreatives={landingPage.creatives.length > 1}
-          selected={basket.isLandingPageSelected(landingPage.url)}
-          toggleSelection={() =>
-            basket.toggleLandingPageSelection(landingPage.url)
-          }
-          creativeIndex={basket.creativeIndexForLandingPage(landingPage.url)}
-          nextCreative={() =>
-            basket.nextCreativeForLandingPage(
-              landingPage.url,
-              landingPage.creatives.length,
-            )
-          }
-        />
-      ))}
-    </List>
+    <List
+      rowComponent={RowComponent}
+      rowCount={landingPages.length}
+      rowHeight={200}
+      rowProps={
+        {
+          landingPages,
+          basket,
+          domain,
+          allowSelection,
+        } as any
+      }
+      style={{ overflowX: "scroll" }}
+    />
   );
 }
