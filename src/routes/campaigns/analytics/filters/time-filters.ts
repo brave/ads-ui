@@ -1,5 +1,4 @@
 import dayjs from "dayjs";
-import { t } from "@lingui/macro";
 
 export interface TimeFilterEntry {
   label: string;
@@ -12,45 +11,45 @@ export interface TimeFilterEntry {
 export function buildTimeFilters(): TimeFilterEntry[] {
   return [
     {
-      label: t`All time`,
+      label: "All time",
       id: "all-time",
       divider: true,
       from: undefined,
       to: undefined,
     },
     {
-      label: t`Today`,
+      label: "Today",
       id: "today",
       from: dayjs().utc().startOf("day"),
       to: undefined,
     },
     {
-      label: t`Last 7 days`,
+      label: "Last 7 days",
       id: "last-seven-days",
       from: dayjs().utc().subtract(7, "day").startOf("day"),
       to: undefined,
     },
     {
-      label: t`This month`,
+      label: "This month",
       id: "this-month",
       from: dayjs().utc().startOf("month"),
       to: undefined,
     },
     {
-      label: t`Last 30 days`,
+      label: "Last 30 days",
       id: "last-thirty-days",
       from: dayjs().utc().subtract(30, "day").startOf("day"),
       to: undefined,
     },
     {
-      label: t`Last month`,
+      label: "Last month",
       id: "last-month",
       from: dayjs().utc().subtract(1, "month").startOf("month"),
       to: dayjs().utc().subtract(1, "month").endOf("month"),
     },
     {
       id: "custom",
-      label: t`Custom`,
+      label: "Custom",
       from: dayjs().utc().startOf("week"),
       to: undefined,
     },

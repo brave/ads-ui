@@ -1,27 +1,26 @@
 import { boolean, object, string } from "yup";
-import { t } from "@lingui/macro";
 
 export const AdvertiserSchema = () =>
   object().shape({
     tracking: boolean()
       .default(false)
-      .isTrue(t`First party tracking acknowledgement is required`),
+      .isTrue("First party tracking acknowledgement is required"),
     language: boolean()
       .default(false)
-      .isTrue(t`Language acknowledgement is required`),
+      .isTrue("Language acknowledgement is required"),
     payment: boolean()
       .default(false)
-      .isTrue(t`Payment acknowledgement is required`),
+      .isTrue("Payment acknowledgement is required"),
     terms: boolean()
       .default(false)
-      .isTrue(t`Terms & Conditions acknowledgement is required`),
+      .isTrue("Terms & Conditions acknowledgement is required"),
     address: object().shape({
       id: string().nullable(),
-      street1: string().required(t`Street address is required`),
+      street1: string().required("Street address is required"),
       street2: string().nullable(),
-      city: string().required(t`City is required`),
+      city: string().required("City is required"),
       state: string().nullable(),
-      country: string().required(t`Country is required`),
+      country: string().required("Country is required"),
       zipcode: string().nullable(),
     }),
   });

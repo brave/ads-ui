@@ -1,6 +1,5 @@
 import { useCallback, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { t } from "@lingui/macro";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { increaseCampaignBudget } from "@/checkout/lib/index";
 
@@ -17,7 +16,7 @@ export function useIncreaseCampaignBudget() {
           window.location.replace(url);
         })
         .catch(() => {
-          alert(t`Unable to create payment session. Please try again.`);
+          alert("Unable to create payment session. Please try again.");
           setLoading(false);
           history.push(`/user/main/adsmanager/advanced/${campaignId}/review`);
         });

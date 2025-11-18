@@ -7,9 +7,6 @@ import { useUser } from "@/auth/hooks/queries/useUser";
 // This page is a holding page so we can implement basic functionality
 // before we've completed the full flow.
 
-// and as a result it's not worth translating:
-/* eslint-disable lingui/no-unlocalized-strings */
-
 export function CreateSearchCampaignBetaPage() {
   const domain = useQueryStringValue("domain");
   const country = useQueryStringValue("country") ?? "us";

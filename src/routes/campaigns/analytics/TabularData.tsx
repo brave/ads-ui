@@ -7,13 +7,10 @@ import { RenderMetricValue } from "./RenderMetricValue";
 import { isBreakdownWithQuery, LocalizedBreakdown } from "./breakdowns";
 import { PerformanceFilter } from "@/graphql-client/graphql";
 import { CampaignOverviewProps } from "@/util/CampaignIdProps";
-import { useLingui } from "@lingui/react";
-import { msg } from "@lingui/macro";
-import { i18n } from "@lingui/core";
 
 function getColumnDefinitionForMetric(metric: MetricDefinition): GridColDef {
   return {
-    headerName: i18n._(metric.shortCaption ?? metric.caption),
+    headerName: metric.shortCaption ?? metric.caption,
     field: metric.id,
     type: "number",
     align: "right",
@@ -32,7 +29,6 @@ interface Props extends CampaignOverviewProps {
 }
 
 export function TabularData({ campaignOverview, breakdown, filters }: Props) {
-  const { _: lingui } = useLingui();
   if (!isBreakdownWithQuery(breakdown)) throw new Error("opps");
 
   const { isSelected } = useMetricSelection();
@@ -75,12 +71,12 @@ export function TabularData({ campaignOverview, breakdown, filters }: Props) {
         columnVisibilityModel={visibleColumns}
         columns={[
           {
-            headerName: lingui(msg`Id`),
+            headerName: "Id",
             field: "id",
             width: 350,
           },
           {
-            headerName: lingui(msg`Name`),
+            headerName: "Name",
             field: "name",
             flex: 1,
             renderCell: ({ row }) =>

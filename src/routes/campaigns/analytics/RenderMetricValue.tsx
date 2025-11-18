@@ -4,7 +4,6 @@ import _ from "lodash";
 import { Box, Skeleton, Tooltip, Typography } from "@mui/material";
 import { format } from "@/user/library/format";
 import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
-import { Trans } from "@lingui/macro";
 
 interface Props {
   metric: MetricDefinition;
@@ -19,11 +18,7 @@ export function RenderMetricValue({ metric, value }: Props) {
   if (metric.isLikelyUnderestimate) {
     return (
       <Tooltip
-        title={
-          <Trans>
-            The current value for this metric may be an underestimate.
-          </Trans>
-        }
+        title={"The current value for this metric may be an underestimate."}
         arrow
         placement="left"
       >

@@ -11,8 +11,6 @@ import { ReviewField } from "./ReviewField";
 import { ReviewContainer } from "@/user/views/adsManager/views/advanced/components/review/components/ReviewContainer";
 import { CreativeSpecificPreview } from "@/components/Creatives/CreativeSpecificPreview";
 import { segmentNameWithNoDash } from "@/util/segment";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
 interface Props {
   idx: number;
@@ -22,7 +20,6 @@ interface Props {
 
 export function AdSetReview({ adSet, idx, errors }: Props) {
   const included = adSet.creatives.filter((c) => c.included);
-  const { _ } = useLingui();
   const hasErrors = !!errors;
   if (typeof errors === "string") {
     return <>{errors}</>;
@@ -35,24 +32,24 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
   };
 
   const segmentValue = (v: string) => {
-    return v === "untargeted" ? _(msg`Let Brave pick categories for me.`) : v;
+    return v === "untargeted" ? "Let Brave pick categories for me." : v;
   };
 
-  const adSetPos = `${_(msg`Ad Set`)} ${idx + 1}`;
+  const adSetPos = `Ad Set ${idx + 1}`;
   return (
     <ReviewContainer name={adSetPos} path={`adSets?current=${idx}`}>
       <ReviewField
-        caption={msg`Name`}
+        caption={"Name"}
         value={adSet.name || adSetPos}
         error={hasErrors ? adSetError?.name : ""}
       />
       <ReviewField
-        caption={msg`Audiences`}
+        caption={"Audiences"}
         value={segmentValue(mapToString(adSet.segments))}
         error={hasErrors ? (adSetError?.segments as string) : ""}
       />
       <ReviewField
-        caption={msg`Platforms`}
+        caption={"Platforms"}
         value={mapToString(adSet.oses)}
         error={hasErrors ? (adSetError?.oses as string) : ""}
       />

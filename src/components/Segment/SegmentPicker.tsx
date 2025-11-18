@@ -6,8 +6,6 @@ import _ from "lodash";
 import { useEffect } from "react";
 import { FormikSwitch } from "@/form/FormikHelpers";
 import { segmentNameWithNoDash } from "@/util/segment";
-import { useLingui } from "@lingui/react";
-import { msg } from "@lingui/macro";
 import { useQuery } from "@apollo/client";
 import { SegmentFragment, SegmentsDocument } from "@/graphql-client/graphql";
 
@@ -25,7 +23,6 @@ export const SegmentPicker = ({ idx }: Props) => {
     .sort((a, b) => {
       return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
     });
-  const { _: lingui } = useLingui();
 
   const [, targetMeta] = useField<boolean>(`adSets.${idx}.isNotTargeting`);
 
@@ -46,7 +43,7 @@ export const SegmentPicker = ({ idx }: Props) => {
       <Box marginTop={3} marginLeft={1}>
         <FormikSwitch
           name={`adSets.${idx}.isNotTargeting`}
-          label={lingui(msg`Automatic interest targeting`)}
+          label={"Automatic interest targeting"}
         />
       </Box>
       {!targetMeta.value && (
@@ -76,11 +73,11 @@ export const SegmentPicker = ({ idx }: Props) => {
           renderInput={(params) => (
             <TextField
               {...params}
-              label={lingui(msg`Audiences`)}
+              label={"Audiences"}
               helperText={
                 meta.touched && !!meta.error
                   ? meta.error
-                  : lingui(msg`Select the audience segments to target`)
+                  : "Select the audience segments to target"
               }
               error={meta.touched && !!meta.error}
             />

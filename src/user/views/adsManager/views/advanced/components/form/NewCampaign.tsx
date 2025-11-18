@@ -19,8 +19,6 @@ import { useAdvertiserWithPrices } from "@/user/hooks/useAdvertiserWithPrices";
 import { ErrorDetail } from "@/components/Error/ErrorDetail";
 import _ from "lodash";
 import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useMutation } from "@apollo/client";
 
 interface Params {
@@ -32,7 +30,6 @@ export function NewCampaign() {
     documentTitle: "New Campaign",
   });
   const history = useHistory();
-  const { _: lingui } = useLingui();
   const { fromDate } = useContext(FilterContext);
   const params = useParams<Params>();
   const { setDrafts } = useContext(DraftContext);
@@ -66,7 +63,7 @@ export function NewCampaign() {
     },
     onError() {
       trackMatomoEvent("campaign", "creation-failed");
-      alert(lingui(msg`Unable to Create Campaign.`));
+      alert("Unable to Create Campaign.");
     },
     refetchQueries: [
       {
@@ -87,7 +84,7 @@ export function NewCampaign() {
     return (
       <ErrorDetail
         error={error}
-        additionalDetails={msg`Campaign creation is currently unavailable`}
+        additionalDetails={"Campaign creation is currently unavailable"}
       />
     );
   }

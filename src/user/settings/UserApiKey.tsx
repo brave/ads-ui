@@ -15,71 +15,56 @@ import {
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { useGenerateApiKey } from "@/user/hooks/useGenerateApiKey";
 import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
 export function UserApiKey() {
   const { advertiser } = useAdvertiser();
-  const { _ } = useLingui();
   const { generate, data, loading } = useGenerateApiKey();
   const [open, setOpen] = useState(false);
 
   return (
-    <CardContainer header={<Trans>Profile API Key</Trans>}>
+    <CardContainer header="Profile API Key">
       <Typography>
-        <Trans>
-          API keys are used to get data from the reporting endpoints. They are
-          unique to you.
-        </Trans>
+        API keys are used to get data from the reporting endpoints. They are
+        unique to you.
       </Typography>
 
       <div style={{ margin: "10px" }} />
 
       <Typography>
-        <Trans>
-          Documentation can be found{" "}
-          <Link
-            href="https://github.com/brave/ads-ui/wiki/Brave-Ads-Advertiser-API-Guide"
-            underline="none"
-          >
-            here
-          </Link>{" "}
-          on how to use the API.
-        </Trans>
+        Documentation can be found{" "}
+        <Link
+          href="https://github.com/brave/ads-ui/wiki/Brave-Ads-Advertiser-API-Guide"
+          underline="none"
+        >
+          here
+        </Link>{" "}
+        on how to use the API.
       </Typography>
 
       <div style={{ margin: "10px" }} />
 
       <Button onClick={() => setOpen(true)} variant="contained" size="large">
-        <Trans>Generate API Key</Trans>
+        Generate API Key
       </Button>
 
       <Dialog open={open} onClose={() => setOpen(false)} maxWidth="lg">
         <DialogTitle>
-          {data ? (
-            <Trans>New API Key</Trans>
-          ) : (
-            <Trans>Generate a new API key?</Trans>
-          )}
+          {data ? "New API Key" : "Generate a new API key?"}
         </DialogTitle>
         <DialogContent>
           {!data && (
             <DialogContentText>
-              <Trans>
-                Generating a new API key will result in the deactivation of your
-                previous key, rendering it unusable for future requests. Make
-                sure to update your code with the new key to avoid disruptions
-                in your application&rsquo;s functionality.
-              </Trans>
+              Generating a new API key will result in the deactivation of your
+              previous key, rendering it unusable for future requests. Make sure
+              to update your code with the new key to avoid disruptions in your
+              application&rsquo;s functionality.
             </DialogContentText>
           )}
           {data && (
             <Box>
               <DialogContentText>
-                <Trans>
-                  This key is unique to you, make sure to safely store it and
-                  avoid sharing it with others to prevent unauthorized access.
-                </Trans>
+                This key is unique to you, make sure to safely store it and
+                avoid sharing it with others to prevent unauthorized access.
               </DialogContentText>
               <Box
                 display="flex"
@@ -96,7 +81,7 @@ export function UserApiKey() {
                   onClick={() =>
                     window.navigator.clipboard
                       .writeText(data)
-                      .then(() => alert(_(msg`Key copied`)))
+                      .then(() => alert("Key copied"))
                   }
                   sx={{ ml: 1 }}
                 >
@@ -108,7 +93,7 @@ export function UserApiKey() {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpen(false)}>
-            {data ? <Trans>Close</Trans> : <Trans>Cancel</Trans>}
+            {data ? "Close" : "Cancel"}
           </Button>
           {!data && (
             <Button
@@ -116,7 +101,7 @@ export function UserApiKey() {
               loading={loading}
               onClick={() => generate(advertiser.id)}
             >
-              <Trans>Generate</Trans>
+              Generate
             </Button>
           )}
         </DialogActions>

@@ -6,7 +6,6 @@ import { CardContainer } from "@/components/Card/CardContainer";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { LearnMoreButton } from "@/components/Button/LearnMoreButton";
-import { Trans } from "@lingui/macro";
 
 interface Props {
   index: number;
@@ -19,15 +18,13 @@ export function ConversionField({ index }: Props) {
   const hasConversion = !!meta.value;
 
   return (
-    <CardContainer header={<Trans>Conversion</Trans>}>
+    <CardContainer header="Conversion">
       <Stack direction={hasConversion ? "row" : "column"} spacing={1}>
         <Typography variant="body2" sx={{ mb: 2 }}>
-          <Trans>
-            Enter a URL that indicates a desired action you want to measure,
-            like a subscription or purchase confirmation page. Brave will count
-            unique visits to that page as conversions if a user has seen or
-            clicked your ad.
-          </Trans>{" "}
+          Enter a URL that indicates a desired action you want to measure, like
+          a subscription or purchase confirmation page. Brave will count unique
+          visits to that page as conversions if a user has seen or clicked your
+          ad.{" "}
           <LearnMoreButton helpSection="campaign-performance/reporting#conversion-reporting-in-brave-ads-manager" />
         </Typography>
         {!hasConversion && (
@@ -40,7 +37,7 @@ export function ConversionField({ index }: Props) {
             }}
             endIcon={<AddIcon />}
           >
-            <Trans>Add Conversion tracking</Trans>
+            Add Conversion tracking
           </Button>
         )}
       </Stack>
@@ -60,7 +57,7 @@ export function ConversionField({ index }: Props) {
           }}
           endIcon={<RemoveIcon />}
         >
-          <Trans>Remove Conversion tracking</Trans>
+          Remove Conversion tracking
         </Button>
       )}
     </CardContainer>

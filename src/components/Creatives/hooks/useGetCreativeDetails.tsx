@@ -1,7 +1,5 @@
 import { LoadCreativeDocument } from "@/graphql-client/graphql";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
-import { useLingui } from "@lingui/react";
-import { msg } from "@lingui/macro";
 import { useQuery } from "@apollo/client";
 import { CreativeInputWithType } from "@/user/views/adsManager/types";
 
@@ -12,7 +10,6 @@ export function useGetCreativeDetails(props: { id: string }) {
     variables: { id: props.id },
     skip: isNew,
   });
-  const { _ } = useLingui();
 
   const defaultValue: CreativeInputWithType & { targetUrlValid?: string } = {
     advertiserId: advertiser.id,
@@ -21,7 +18,7 @@ export function useGetCreativeDetails(props: { id: string }) {
     type: {
       code: "notification_all_v1",
     },
-    targetUrlValid: _(msg`Target URL not validated`),
+    targetUrlValid: "Target URL not validated",
     payloadNotification: {
       body: "",
       targetUrl: "",

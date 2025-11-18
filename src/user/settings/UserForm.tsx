@@ -7,8 +7,6 @@ import { ErrorDetail } from "@/components/Error/ErrorDetail";
 import { UserSchema } from "@/validation/UserSchema";
 import { FormikSubmitButton } from "@/form/FormikButton";
 import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useMutation } from "@apollo/client";
 import { Snackbar, Stack } from "@mui/material";
 import { graphql } from "@/graphql-client";
@@ -29,15 +27,14 @@ interface UserFormValues {
 export function UserForm() {
   const user = useUser();
   const { trackMatomoEvent } = useTrackMatomoEvent();
-  const { _: lingui } = useLingui();
   const [initialVals, setInitialVals] = useState<UserFormValues>({
     fullName: user.fullName ?? "",
   });
   const [errorMessage, setErrorMessage] = useState<ReactNode | null>(null);
 
   if (!user.userId) {
-    const details = msg`Unable to get profile information`;
-    return <ErrorDetail error={details.id} additionalDetails={details} />;
+    const details = "Unable to get profile information";
+    return <ErrorDetail error={details} additionalDetails={details} />;
   }
 
   const [updateUser] = useMutation(UpdateCurrentUser, {
@@ -47,12 +44,12 @@ export function UserForm() {
     },
     onError(err) {
       const errorMessage = err.message;
-      setErrorMessage(<Trans>Failed to update profile: {errorMessage}</Trans>);
+      setErrorMessage(`Failed to update profile: ${errorMessage}`);
     },
   });
 
   return (
-    <CardContainer header={<Trans>Profile Details</Trans>}>
+    <CardContainer header="Profile Details">
       <Formik
         enableReinitialize
         initialValues={initialVals}
@@ -73,13 +70,13 @@ export function UserForm() {
           <Stack gap={2}>
             <FormikTextField
               name="fullName"
-              label={lingui(msg`Full Name`)}
+              label={"Full Name"}
               type="text"
               margin="none"
             />
             <FormikTextField
               name="password"
-              label={lingui(msg`Password`)}
+              label={"Password"}
               type="password"
               margin="none"
             />

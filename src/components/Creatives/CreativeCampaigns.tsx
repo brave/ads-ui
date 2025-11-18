@@ -12,7 +12,6 @@ import { CardContainer } from "@/components/Card/CardContainer";
 import _ from "lodash";
 import { Status } from "@/components/Campaigns/Status";
 import { ApolloError } from "@apollo/client";
-import { msg, Trans } from "@lingui/macro";
 import { CampaignsForCreativeQuery } from "@/graphql-client/graphql";
 
 interface Props {
@@ -30,23 +29,19 @@ export default function CreativeCampaigns({ data, error, loading }: Props) {
     return (
       <ErrorDetail
         error={error}
-        additionalDetails={msg`Unable to get campaign information for ad`}
+        additionalDetails={"Unable to get campaign information for ad"}
       />
     );
   }
 
   const campaigns = _.uniqBy(data.creativeCampaigns, "id");
   return (
-    <CardContainer header={<Trans>Campaigns</Trans>}>
+    <CardContainer header={<>Campaigns</>}>
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>
-              <Trans>Name</Trans>
-            </TableCell>
-            <TableCell>
-              <Trans>Status</Trans>
-            </TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell>Status</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

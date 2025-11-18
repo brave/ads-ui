@@ -10,7 +10,6 @@ import { CampaignFormat } from "@/graphql-client/graphql";
 import { NotificationAd } from "@/user/ads/NotificationAd";
 import { modalStyles } from "@/theme";
 import { LearnMoreButton } from "@/components/Button/LearnMoreButton";
-import { Trans } from "@lingui/macro";
 import { filterCreativesByCampaignFormat } from "@/user/ads/filterCreativesByCampaignFormat";
 
 interface Props {
@@ -26,12 +25,10 @@ export function AdSetAds({ index }: Props) {
   );
   return (
     <>
-      <CardContainer header={<Trans>Ads</Trans>}>
+      <CardContainer header="Ads">
         <Typography variant="body2" sx={{ mb: 3 }}>
-          <Trans>
-            Select the ads you would like to include in this ad set. Only
-            checked ads are included.
-          </Trans>{" "}
+          Select the ads you would like to include in this ad set. Only checked
+          ads are included.{" "}
           <LearnMoreButton helpSection="getting-started/create-an-ad" />
         </Typography>
 

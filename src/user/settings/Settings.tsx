@@ -18,7 +18,6 @@ import { DraftContext } from "@/state/context";
 import { NewKeyPairModal } from "@/user/settings/NewKeyPairModal";
 import MiniSideBar from "@/components/Drawer/MiniSideBar";
 import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
-import { Trans } from "@lingui/macro";
 import { AccountBalance } from "@/user/settings/AccountBalance";
 
 const Settings = () => {
@@ -47,22 +46,18 @@ const Settings = () => {
         <Stack spacing={2} mt={1}>
           <NewKeyPairModal advertiser={advertiser} />
 
-          <CardContainer header={<Trans>Account</Trans>}>
+          <CardContainer header="Account">
             <Typography>
-              <Trans>
-                You may have access to multiple accounts. Switch between them
-                here.
-              </Trans>
+              You may have access to multiple accounts. Switch between them
+              here.
             </Typography>
 
             <Box sx={{ mt: 2 }}>
               <FormControl fullWidth>
-                <InputLabel>
-                  <Trans>Select Account</Trans>
-                </InputLabel>
+                <InputLabel>Select Account</InputLabel>
                 <Select
                   value={advertiser.id}
-                  label={<Trans>Select Account</Trans>}
+                  label="Select Account"
                   onChange={(e) => setActiveAdvertiserWithId(e)}
                 >
                   {advertisers.map((a) => (

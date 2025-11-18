@@ -6,8 +6,6 @@ import { useField } from "formik";
 import { NotificationPreview } from "@/components/Creatives/NotificationPreview";
 import { CreateCreativeButton } from "@/components/Creatives/CreateCreativeButton";
 import { useEffect } from "react";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
 interface NotificationAdProps {
   name?: string;
@@ -40,27 +38,26 @@ export function NotificationAd(props: NotificationAdProps) {
 
 const NotificationAdForm = (props: NotificationAdProps) => {
   const withName = (s: string) => (props.name ? `${props.name}.${s}` : s);
-  const { _ } = useLingui();
 
   return (
     <>
       <Typography variant="h2" fontWeight={500}>
-        <Trans>Notification ad</Trans>
+        Notification ad
       </Typography>
 
-      <FormikTextField name={withName("name")} label={_(msg`Name`)} />
+      <FormikTextField name={withName("name")} label={"Name"} />
 
       <FormikTextField
         name={withName("payloadNotification.title")}
-        label={_(msg`Title`)}
-        helperText={_(msg`Max 30 Characters`)}
+        label={"Title"}
+        helperText={"Max 30 Characters"}
         maxLengthInstantFeedback={30}
       />
 
       <FormikTextField
         name={withName("payloadNotification.body")}
-        label={_(msg`Body`)}
-        helperText={_(msg`Max 60 Characters`)}
+        label={"Body"}
+        helperText={"Max 60 Characters"}
         maxLengthInstantFeedback={60}
       />
 
@@ -70,10 +67,8 @@ const NotificationAdForm = (props: NotificationAdProps) => {
         display="block"
         fontWeight={500}
       >
-        <Trans>
-          Make sure to include your brand name in the title OR body of the ad.
-          Otherwise, it will be rejected.
-        </Trans>
+        Make sure to include your brand name in the title OR body of the ad.
+        Otherwise, it will be rejected.
       </Typography>
 
       <NotificationPreview />
@@ -81,8 +76,8 @@ const NotificationAdForm = (props: NotificationAdProps) => {
       <UrlResolver
         name={withName("payloadNotification.targetUrl")}
         validator={withName("targetUrlValid")}
-        label={_(msg`Target URL`)}
-        helperText={_(msg`Example - https://brave.com/brave-rewards/`)}
+        label={"Target URL"}
+        helperText={"Example - https://brave.com/brave-rewards/"}
       />
 
       {props.index !== undefined && (

@@ -2,7 +2,6 @@ import { createPaymentSession } from "@/checkout/lib";
 import { useCallback, useState } from "react";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { useHistory } from "react-router-dom";
-import { t } from "@lingui/macro";
 import { PaymentType } from "@/graphql-client/graphql";
 
 export function useCreatePaymentSession() {
@@ -18,7 +17,7 @@ export function useCreatePaymentSession() {
           window.location.replace(url);
         })
         .catch(() => {
-          alert(t`Unable to create payment session. Please try again.`);
+          alert("Unable to create payment session. Please try again.");
           setLoading(false);
           history.push(`/user/main/adsmanager/advanced/${campaignId}/review`);
         });

@@ -8,7 +8,6 @@ import MiniSideBar from "@/components/Drawer/MiniSideBar";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { FilterContext } from "@/state/context";
 import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
-import { Trans, msg } from "@lingui/macro";
 import { AdvertiserCampaignsDocument } from "@/graphql-client/graphql";
 import { useQuery } from "@apollo/client";
 
@@ -31,7 +30,7 @@ export function CampaignView() {
     return (
       <ErrorDetail
         error={error}
-        additionalDetails={msg`Unable to retrieve Campaign data.`}
+        additionalDetails={"Unable to retrieve Campaign data."}
       />
     );
   }
@@ -39,7 +38,7 @@ export function CampaignView() {
   return (
     <MiniSideBar>
       <CardContainer
-        header={<Trans>Campaigns</Trans>}
+        header="Campaigns"
         sx={{
           flexGrow: 1,
           overflowX: "auto",

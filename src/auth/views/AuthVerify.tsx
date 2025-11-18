@@ -3,7 +3,6 @@ import { useAuthorize } from "@/auth/hooks/queries/useAuthorize";
 import { Link as RouterLink, Switch, useHistory } from "react-router-dom";
 import { Alert, AlertTitle, Button, Typography } from "@mui/material";
 import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
-import { Trans } from "@lingui/macro";
 import logo from "@/assets/images/brave-icon-release-color.svg";
 
 export function AuthVerify() {
@@ -38,12 +37,10 @@ export function AuthVerify() {
     <AuthContainer>
       <img src={logo} height={50} />
       <Typography gutterBottom variant="h6">
-        <Trans>You are logging into the Brave Ads Manager Dashboard.</Trans>
+        You are logging into the Brave Ads Manager Dashboard.
       </Typography>
       <Typography gutterBottom variant="subtitle1">
-        <Trans>
-          Click the continue button below to complete the login process.
-        </Trans>
+        Click the continue button below to complete the login process.
       </Typography>
       <Button
         loading={loading}
@@ -53,7 +50,7 @@ export function AuthVerify() {
         sx={{ mt: 2, pl: 5, pr: 5, borderRadius: "12px", mb: 2 }}
         size="large"
       >
-        <Trans>Continue</Trans>
+        Continue
       </Button>
       {!loading && error && (
         <Alert
@@ -66,17 +63,13 @@ export function AuthVerify() {
               to="/auth/link"
               sx={{ alignSelf: "center" }}
             >
-              <Trans>Return</Trans>
+              Return
             </Button>
           }
         >
-          <AlertTitle>
-            <Trans>Unable to login.</Trans>
-          </AlertTitle>
-          <Trans>
-            The magic link you have requested has either expired or has already
-            been used. Please return to the login page and try again.
-          </Trans>
+          <AlertTitle>Unable to login.</AlertTitle>
+          The magic link you have requested has either expired or has already
+          been used. Please return to the login page and try again.
         </Alert>
       )}
     </AuthContainer>

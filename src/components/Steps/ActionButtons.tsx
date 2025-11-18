@@ -6,7 +6,6 @@ import { CampaignForm } from "@/user/views/adsManager/types";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { Link as RouterLink } from "react-router-dom";
-import { Trans } from "@lingui/macro";
 import { CloseCampaignSidebar } from "@/components/Steps/CloseCampaignSidebar";
 
 export function ActionButtons() {
@@ -27,7 +26,7 @@ export function ActionButtons() {
             setDrafts();
           }}
         >
-          <Trans>Discard campaign</Trans>
+          Discard campaign
         </Button>
       )}
       <Button
@@ -36,7 +35,7 @@ export function ActionButtons() {
         to="/user/main/campaign"
         startIcon={<ArrowBackIcon />}
       >
-        <Trans>Return to dashboard</Trans>
+        Return to dashboard
       </Button>
 
       <CloseCampaignSidebar />

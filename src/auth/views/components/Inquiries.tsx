@@ -1,5 +1,4 @@
 import { Button, Stack, Typography } from "@mui/material";
-import { Trans } from "@lingui/macro";
 import { Link as RouterLink } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
@@ -32,9 +31,7 @@ export function Inquiries() {
         startIcon={<SearchIcon sx={{ color: "white" }} />}
         endIcon={<KeyboardArrowRightIcon sx={{ color: "white" }} />}
       >
-        <Typography color="white">
-          <Trans>Brave Search Ads</Trans>
-        </Typography>
+        <Typography color="white">Brave Search Ads</Typography>
       </Button>
       <Button
         component={RouterLink}
@@ -43,9 +40,7 @@ export function Inquiries() {
         startIcon={<AlternateEmailOutlinedIcon sx={{ color: "white" }} />}
         endIcon={<KeyboardArrowRightIcon sx={{ color: "white" }} />}
       >
-        <Typography color="white">
-          <Trans>General Ad Inquiries</Trans>
-        </Typography>
+        <Typography color="white">General Ad Inquiries</Typography>
       </Button>
       <Button
         component={RouterLink}
@@ -54,9 +49,7 @@ export function Inquiries() {
         startIcon={<img src={bat} alt="BAT" height={20} width={20} />}
         endIcon={<KeyboardArrowRightIcon sx={{ color: "white" }} />}
       >
-        <Typography color="white">
-          <Trans>Basic Attention Token</Trans>
-        </Typography>
+        <Typography color="white">Basic Attention Token</Typography>
       </Button>
       <Button
         component={Button}
@@ -67,9 +60,7 @@ export function Inquiries() {
         startIcon={<HelpOutlineOutlinedIcon sx={{ color: "white" }} />}
         endIcon={<KeyboardArrowRightIcon sx={{ color: "white" }} />}
       >
-        <Typography color="white">
-          <Trans>Help Center</Trans>
-        </Typography>
+        <Typography color="white">Help Center</Typography>
       </Button>
     </Stack>
   );

@@ -1,7 +1,6 @@
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { Button } from "@mui/material";
 import { Link as RouterLink, useRouteMatch } from "react-router-dom";
-import { Trans } from "@lingui/macro";
 import dayjs from "dayjs";
 
 export function NewCampaignButton() {
@@ -26,7 +25,7 @@ export function NewCampaignButton() {
       sx={{ mr: 3 }}
       disabled={isNewCampaignPage || isCompletePage || !advertiser.agreed}
     >
-      <Trans>New Campaign</Trans>
+      New Campaign
     </Button>
   );
 }

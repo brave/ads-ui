@@ -1,17 +1,15 @@
 import { useBreakdownParams } from "../hooks";
 import { BREAKDOWNS } from "../breakdowns";
-import { useLingui } from "@lingui/react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 
 export function VerticalBreakdown() {
-  const { _ } = useLingui();
   const { selected, setSelected, forceDefaultBreakdownSelection } =
     useBreakdownParams();
   const breakdowns = BREAKDOWNS.map((item) => ({
     ...item,
-    label: _(item.label),
+    label: item.label,
   }));
 
   if (!selected) {
