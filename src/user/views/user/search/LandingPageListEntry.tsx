@@ -22,7 +22,7 @@ interface Props {
 
   hasMultipleCreatives: boolean;
 
-  style: React.CSSProperties;
+  style?: React.CSSProperties;
 
   domain: CountryDomain;
 
