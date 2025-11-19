@@ -28,7 +28,6 @@
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "react-router-dom": "5.3.4",
-    "react-virtualized-auto-sizer": "1.0.26",
     "react-window": "2.2.3",
     "swr": "2.3.6",
     "tweetnacl": "1.0.3",
