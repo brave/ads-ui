@@ -1,6 +1,6 @@
 import { LandingPageListEntry } from "./LandingPageListEntry";
 
-import { List } from "react-window";
+import { List, type RowComponentProps } from "react-window";
 import { Basket } from "@/user/views/user/search/basket";
 import { LandingPageInfo } from "./data";
 
@@ -10,21 +10,17 @@ interface Props {
   allowSelection?: boolean;
 }
 
-interface RowComponentProps {
-  index: number;
-  style: React.CSSProperties;
-  landingPages: LandingPageInfo[];
-  basket: Basket;
-  allowSelection: boolean;
-}
-
 function RowComponent({
   index,
   style,
   landingPages,
   basket,
   allowSelection,
-}: RowComponentProps) {
+}: RowComponentProps<{
+  landingPages: LandingPageInfo[];
+  basket: Basket;
+  allowSelection: boolean;
+}>) {
   const landingPage = landingPages[index];
 
   return (

@@ -2,7 +2,7 @@ import { SearchProspectsLandingPageListFragment } from "@/graphql-client/graphql
 import { LandingPageListEntry } from "./LandingPageListEntry";
 import { Basket } from "./basket";
 
-import { List } from "react-window";
+import { List, type RowComponentProps } from "react-window";
 import { FullScreenProgress } from "@/components/FullScreenProgress";
 import { CountryDomain } from "./types";
 
@@ -13,15 +13,6 @@ interface Props {
   allowSelection?: boolean;
 }
 
-interface RowComponentProps {
-  index: number;
-  style: React.CSSProperties;
-  landingPages: SearchProspectsLandingPageListFragment[];
-  basket: Basket;
-  domain: CountryDomain;
-  allowSelection: boolean;
-}
-
 function RowComponent({
   index,
   style,
@@ -29,7 +20,12 @@ function RowComponent({
   basket,
   domain,
   allowSelection,
-}: RowComponentProps) {
+}: RowComponentProps<{
+  landingPages: SearchProspectsLandingPageListFragment[];
+  basket: Basket;
+  domain: CountryDomain;
+  allowSelection: boolean;
+}>) {
   const landingPage = landingPages[index];
 
   return (
@@ -68,14 +64,12 @@ export function LandingPageList({
       rowComponent={RowComponent}
       rowCount={landingPages.length}
       rowHeight={200}
-      rowProps={
-        {
-          landingPages,
-          basket,
-          domain,
-          allowSelection,
-        } as any
-      }
+      rowProps={{
+        landingPages,
+        basket,
+        domain,
+        allowSelection,
+      }}
       style={{ overflowX: "scroll" }}
     />
   );
