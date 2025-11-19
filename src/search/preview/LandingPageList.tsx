@@ -51,13 +51,11 @@ export function LandingPageList({
       rowComponent={RowComponent}
       rowCount={landingPages.length}
       rowHeight={200}
-      rowProps={
-        {
-          landingPages,
-          basket,
-          allowSelection,
-        } as any
-      }
+      rowProps={{
+        landingPages,
+        basket,
+        allowSelection,
+      }}
       style={{ overflowX: "scroll" }}
     />
   );
