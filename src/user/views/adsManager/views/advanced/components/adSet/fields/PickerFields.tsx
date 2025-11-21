@@ -22,7 +22,7 @@ export function PickerFields({ index }: Props) {
   }, [format.value]);
 
   return (
-    <CardContainer header="Targeting">
+    <CardContainer header="Target All Audiences">
       <Typography variant="body2" sx={{ mb: 2 }}>
         Select the interest segments and platforms you would like to target.{" "}
         <LearnMoreButton helpSection="campaign-performance/targeting" />
