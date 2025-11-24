@@ -2,8 +2,7 @@ import { SearchProspectsLandingPageListFragment } from "@/graphql-client/graphql
 import { LandingPageListEntry } from "./LandingPageListEntry";
 import { Basket } from "./basket";
 
-import { FixedSizeList } from "react-window";
-import AutoSizer from "react-virtualized-auto-sizer";
+import { List, type RowComponentProps } from "react-window";
 import { FullScreenProgress } from "@/components/FullScreenProgress";
 import { CountryDomain } from "./types";
 
@@ -12,6 +11,42 @@ interface Props {
   basket: Basket;
   landingPages: SearchProspectsLandingPageListFragment[] | undefined;
   allowSelection?: boolean;
+}
+
+function RowComponent({
+  index,
+  style,
+  landingPages,
+  basket,
+  domain,
+  allowSelection,
+}: RowComponentProps<{
+  landingPages: SearchProspectsLandingPageListFragment[];
+  basket: Basket;
+  domain: CountryDomain;
+  allowSelection: boolean;
+}>) {
+  const landingPage = landingPages[index];
+
+  return (
+    <LandingPageListEntry
+      key={landingPage.url}
+      style={style}
+      domain={domain}
+      landingPage={landingPage}
+      allowSelection={allowSelection}
+      hasMultipleCreatives={landingPage.creatives.length > 1}
+      selected={basket.isLandingPageSelected(landingPage.url)}
+      toggleSelection={() => basket.toggleLandingPageSelection(landingPage.url)}
+      creativeIndex={basket.creativeIndexForLandingPage(landingPage.url)}
+      nextCreative={() =>
+        basket.nextCreativeForLandingPage(
+          landingPage.url,
+          landingPage.creatives.length,
+        )
+      }
+    />
+  );
 }
 
 export function LandingPageList({
@@ -25,44 +60,17 @@ export function LandingPageList({
   }
 
   return (
-    <AutoSizer>
-      {({ height, width }) => (
-        <FixedSizeList
-          height={height}
-          width={width}
-          itemSize={200}
-          itemCount={landingPages.length}
-          style={{ overflowX: "scroll" }}
-        >
-          {({ index, style }) => {
-            const landingPage = landingPages[index];
-
-            return (
-              <LandingPageListEntry
-                key={index}
-                style={style}
-                domain={domain}
-                landingPage={landingPage}
-                allowSelection={allowSelection}
-                hasMultipleCreatives={landingPage.creatives.length > 1}
-                selected={basket.isLandingPageSelected(landingPage.url)}
-                toggleSelection={() =>
-                  basket.toggleLandingPageSelection(landingPage.url)
-                }
-                creativeIndex={basket.creativeIndexForLandingPage(
-                  landingPage.url,
-                )}
-                nextCreative={() =>
-                  basket.nextCreativeForLandingPage(
-                    landingPage.url,
-                    landingPage.creatives.length,
-                  )
-                }
-              />
-            );
-          }}
-        </FixedSizeList>
-      )}
-    </AutoSizer>
+    <List
+      rowComponent={RowComponent}
+      rowCount={landingPages.length}
+      rowHeight={200}
+      rowProps={{
+        landingPages,
+        basket,
+        domain,
+        allowSelection,
+      }}
+      style={{ overflowX: "scroll" }}
+    />
   );
 }
