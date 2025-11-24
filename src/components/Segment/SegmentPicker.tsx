@@ -43,7 +43,7 @@ export const SegmentPicker = ({ idx }: Props) => {
       <Box marginTop={3} marginLeft={1}>
         <FormikSwitch
           name={`adSets.${idx}.isNotTargeting`}
-          label={"Target All Audiences."}
+          label={"Target All Audiences"}
         />
       </Box>
       {!targetMeta.value && (
