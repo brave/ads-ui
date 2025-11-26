@@ -11,7 +11,7 @@ export function BraveAdsContactFrame() {
   });
 
   function handleIframeMessage(e: MessageEvent) {
-    if (e.origin !== window.location.origin) {
+    if (e.origin !== "https://contact.ads.brave.com") {
       console.warn("Untrusted origin:", e.origin);
       return;
     }
