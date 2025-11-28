@@ -14,8 +14,8 @@
     "@jonkoops/matomo-tracker-react": "0.7.0",
     "@mui/icons-material": "7.3.5",
     "@mui/material": "7.3.5",
-    "@mui/x-data-grid": "8.18.0",
-    "@mui/x-date-pickers": "8.18.0",
+    "@mui/x-data-grid": "8.19.0",
+    "@mui/x-date-pickers": "8.19.0",
     "bignumber.js": "9.3.1",
     "dayjs": "1.11.19",
     "formik": "2.4.9",
@@ -115,5 +115,5 @@
       "js-yaml@<4.1.1": ">=4.1.1"
     }
   },
-  "packageManager": "pnpm@10.22.0+sha512.bf049efe995b28f527fd2b41ae0474ce29186f7edcb3bf545087bd61fbbebb2bf75362d1307fda09c2d288e1e499787ac12d4fcb617a974718a6051f2eee741c"
+  "packageManager": "pnpm@10.23.0+sha512.21c4e5698002ade97e4efe8b8b4a89a8de3c85a37919f957e7a0f30f38fbc5bbdd05980ffe29179b2fb6e6e691242e098d945d1601772cad0fef5fb6411e2a4b"
 }
