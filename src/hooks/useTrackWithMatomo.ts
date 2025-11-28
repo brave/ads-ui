@@ -26,8 +26,8 @@ export const useTrackMatomoEvent = ({
   const { trackEvent } = useMatomo();
 
   const trackMatomoEvent = useCallback(
-    (category: string, action: string) => {
-      trackEvent({ documentTitle, category, action });
+    (category: string, action: string, name?: string) => {
+      trackEvent({ documentTitle, category, action, name });
     },
     [documentTitle],
   );
