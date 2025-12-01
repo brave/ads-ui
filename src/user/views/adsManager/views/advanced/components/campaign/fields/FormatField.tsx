@@ -44,7 +44,7 @@ export function FormatField({ prices }: PriceProps) {
         />
         <ProspectButton
           name={"New tab takeovers"}
-          salesLink="https://contact.ads.brave.com/"
+          salesLink="https://ads.brave.com/contact"
         />
         <ProspectButton
           name={"Search keyword ads"}
