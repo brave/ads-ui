@@ -1,10 +1,33 @@
 import { Box, Stack, Toolbar, Typography } from "@mui/material";
 import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
 import { Background } from "@/components/Background/Background";
-import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
+import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
+import { TrackEventParams } from "@jonkoops/matomo-tracker-react/lib/types";
+import { useEffect } from "react";
 
 export function BraveAdsContactFrame() {
-  useTrackMatomoPageView({ documentTitle: "Managed Services Form" });
+  const { trackMatomoEvent } = useTrackWithMatomo({
+    documentTitle: "Managed Services Form",
+  });
+
+  function handleIframeMessage(e: MessageEvent) {
+    if (e.origin !== "https://contact.ads.brave.com") {
+      console.warn("Untrusted origin:", e.origin);
+      return;
+    }
+
+    const eventData = e.data.dataLayer as TrackEventParams;
+    if (!eventData) {
+      return;
+    }
+
+    trackMatomoEvent(eventData.category, eventData.action, eventData.name);
+  }
+
+  useEffect(() => {
+    window.addEventListener("message", handleIframeMessage);
+    return () => window.removeEventListener("message", handleIframeMessage);
+  });
 
   return (
     <Background>
