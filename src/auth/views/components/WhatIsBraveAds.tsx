@@ -17,9 +17,9 @@ export function WhatIsBraveAds() {
           It is a modern <em>advertiser-first</em> ad platform made to help
           brands reach new users. Brave Ads are discrete, unobtrusive
           first-party ads built directly into the browser and search engine.
-          Brave's innovative on-device targeting respects a user's desire for
-          privacy while still delivering personalized ads based on their
-          interests, which drives high ROI for advertisers.
+          Brave&apos;s innovative on-device targeting respects a user&apos;s
+          desire for privacy while still delivering personalized ads based on
+          their interests, which drives high ROI for advertisers.
         </Typography>
       </Stack>
     </Box>

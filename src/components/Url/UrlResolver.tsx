@@ -47,15 +47,14 @@ export const UrlResolver = ({
   const isDirty = !_.isEqual(nameMeta.value, nameMeta.initialValue);
 
   const urlValidation = useUrlValidation(nameField?.value ?? "");
+  const { isValid } = urlValidation;
 
   useEffect(() => {
-    const { isValid } = urlValidation;
-
     if (isDirty) {
       const val = isValid !== true ? "Target URL is not valid" : undefined;
-      isValidHelper.setValue(val, urlValidation.isValid === true);
+      isValidHelper.setValue(val, isValid === true);
     }
-  }, [urlValidation.isValid]);
+  }, [isValid, isDirty, isValidHelper]);
 
   const urlViolations = extractViolations(urlValidation);
   return (

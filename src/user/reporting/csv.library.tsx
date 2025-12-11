@@ -14,63 +14,68 @@ export function useDownloadCSV(props: DownloadProps = {}) {
   const [error, setError] = useState<string>();
   const { trackMatomoEvent } = useTrackMatomoEvent();
 
-  const download = useCallback((campaignId: string, isVac: boolean) => {
-    setLoading(true);
-    setError(undefined);
-    trackMatomoEvent(
-      "report-download",
-      `${isVac ? "vac" : "performance"}-report`,
-    );
+  const { onComplete } = props;
 
-    const baseUrl = `/report/campaign/csv/${campaignId}`;
-    fetch(buildAdServerEndpoint(isVac ? `${baseUrl}/vac` : baseUrl), {
-      method: "GET",
-      mode: "cors",
-      credentials: "include",
-      headers: {
-        "Content-Type": "text/csv",
-      },
-    })
-      .then((res) => {
-        if (res.status !== 200) {
-          const err = "Unable to download CSV";
-          setError(err);
-          throw new Error(err);
-        }
+  const download = useCallback(
+    (campaignId: string, isVac: boolean) => {
+      setLoading(true);
+      setError(undefined);
+      trackMatomoEvent(
+        "report-download",
+        `${isVac ? "vac" : "performance"}-report`,
+      );
 
-        return res.blob();
+      const baseUrl = `/report/campaign/csv/${campaignId}`;
+      fetch(buildAdServerEndpoint(isVac ? `${baseUrl}/vac` : baseUrl), {
+        method: "GET",
+        mode: "cors",
+        credentials: "include",
+        headers: {
+          "Content-Type": "text/csv",
+        },
       })
-      .then((blob) => {
-        const file = new Blob([blob], {
-          type: "text/csv",
-          endings: "transparent",
+        .then((res) => {
+          if (res.status !== 200) {
+            const err = "Unable to download CSV";
+            setError(err);
+            throw new Error(err);
+          }
+
+          return res.blob();
+        })
+        .then((blob) => {
+          const file = new Blob([blob], {
+            type: "text/csv",
+            endings: "transparent",
+          });
+
+          if (isVac) {
+            return transformConversionEnvelope(file);
+          }
+
+          return Promise.resolve(file);
+        })
+        .then((file) => {
+          const fileURL = URL.createObjectURL(file);
+          const link = document.createElement("a");
+          link.href = fileURL;
+          link.setAttribute("download", `${campaignId}.csv`);
+          document.body.appendChild(link);
+          link.click();
+          if (onComplete) {
+            onComplete();
+          }
+        })
+        .catch((e) => {
+          setError(e.message);
+          trackMatomoEvent("report-download", `download-failed`);
+        })
+        .finally(() => {
+          setLoading(false);
         });
-
-        if (isVac) {
-          return transformConversionEnvelope(file);
-        }
-
-        return Promise.resolve(file);
-      })
-      .then((file) => {
-        const fileURL = URL.createObjectURL(file);
-        const link = document.createElement("a");
-        link.href = fileURL;
-        link.setAttribute("download", `${campaignId}.csv`);
-        document.body.appendChild(link);
-        link.click();
-        if (props.onComplete) {
-          props.onComplete();
-        }
-      })
-      .catch((e) => {
-        setError(e.message);
-        trackMatomoEvent("report-download", `download-failed`);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+    },
+    [onComplete, trackMatomoEvent],
+  );
 
   return { download, loading, error };
 }
@@ -127,6 +132,7 @@ async function transformConversionEnvelope(blob: Blob): Promise<Blob> {
           },
         });
       } catch (e) {
+        // eslint-disable-next-line no-console
         console.error(e);
         reject(new Error("Unable to decrypt conversion data"));
       }

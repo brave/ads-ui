@@ -16,10 +16,10 @@ export function FooterCTA() {
         </Typography>
 
         <Typography variant="subtitle1" textAlign="center">
-          Brave's 70+ million cord cutters, and tech savvy early adopters want
-          privacy and performance over tracking and lag. Hundreds of thousands
-          more make the switch every day. Want them to see your brand? Start
-          your first campaign in minutes, and with as little as $500.
+          Brave&apos;s 70+ million cord cutters, and tech savvy early adopters
+          want privacy and performance over tracking and lag. Hundreds of
+          thousands more make the switch every day. Want them to see your brand?
+          Start your first campaign in minutes, and with as little as $500.
         </Typography>
 
         <Button

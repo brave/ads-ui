@@ -21,7 +21,7 @@ export function useIncreaseCampaignBudget() {
           history.push(`/user/main/adsmanager/advanced/${campaignId}/review`);
         });
     },
-    [],
+    [advertiser.id, history],
   );
 
   return { createPaymentSession: replaceSession, loading };

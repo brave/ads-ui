@@ -23,7 +23,7 @@ export default function SearchLandingPage() {
         >
           <Stack direction="column" spacing={3} maxWidth={750} alignSelf="top">
             <Typography variant="h1" color="white">
-              Get incremental traffic with paid ads on the world's fastest
+              Get incremental traffic with paid ads on the world&apos;s fastest
               growing search engine.
             </Typography>
             <Typography

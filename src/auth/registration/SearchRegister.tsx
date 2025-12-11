@@ -28,7 +28,7 @@ export function SearchRegister() {
     >
       <img src={logo} height={50} />
       <Typography variant="h5" mt={3} mb={2}>
-        Check your brand's eligibility
+        Check your brand&apos;s eligibility
       </Typography>
       <Formik
         initialValues={initialValues}

@@ -29,7 +29,7 @@ export function useRegister() {
         })
         .finally(() => setLoading(false));
     },
-    [],
+    [history, trackMatomoEvent],
   );
 
   return { register, loading };

@@ -86,6 +86,7 @@ export function Navbar() {
       // 1. No dismissed message stored, OR
       // 2. Current message ID is different from dismissed message ID
       if (!dismissedMessageId || dismissedMessageId !== advertiserMessage.id) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setShowBanner(true);
       } else {
         setShowBanner(false);

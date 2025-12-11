@@ -104,7 +104,7 @@ export function editCampaignValues(
           code: o.code,
         })),
         isNotTargeting:
-          seg.length == 0 || (seg.length === 1 && seg[0].code === "Svp7l-zGN"),
+          seg.length === 0 || (seg.length === 1 && seg[0].code === "Svp7l-zGN"),
         name: adSet.name || adSet.id.split("-")[0],
         creatives: creativeList(advertiserId, adSet.ads, ads),
       };
