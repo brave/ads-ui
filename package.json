@@ -52,9 +52,9 @@
   },
   "devDependencies": {
     "@eslint/js": "8.57.1",
-    "@graphql-codegen/cli": "5.0.7",
-    "@graphql-codegen/client-preset": "4.8.3",
-    "@graphql-codegen/introspection": "4.0.3",
+    "@graphql-codegen/cli": "6.1.0",
+    "@graphql-codegen/client-preset": "5.2.1",
+    "@graphql-codegen/introspection": "5.0.0",
     "@graphql-eslint/eslint-plugin": "4.4.0",
     "@parcel/watcher": "2.5.1",
     "@types/lodash": "4.17.21",
