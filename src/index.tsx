@@ -15,6 +15,7 @@ import { Environment, getEnvironment } from "@/util/environment";
 import { createInstance, MatomoProvider } from "@jonkoops/matomo-tracker-react";
 import { VERSION } from "@/util/version";
 
+// eslint-disable-next-line no-console
 console.log(
   `https://github.com/brave/ads-ui rev ${VERSION.shortHash} built ${VERSION.buildTime}`,
 );

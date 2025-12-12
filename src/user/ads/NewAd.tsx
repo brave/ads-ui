@@ -17,7 +17,7 @@ export function NewAd() {
       newCreative.setValue(initialCreative);
       newCreative.setTouched(false);
     }
-  }, [meta.value]);
+  }, [meta.value, newCreative]);
 
   return (
     <BoxContainer header={meta.value ? "Discard ad" : "Create new ad"}>

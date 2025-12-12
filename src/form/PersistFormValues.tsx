@@ -7,19 +7,18 @@ export const PersistFormValues = () => {
   const { values, setValues, dirty } = useFormikContext<CampaignForm>();
   const { setDrafts } = useContext(DraftContext);
 
-  const setForm = (id?: string) => {
-    if (id) {
-      const form = localStorage.getItem(id);
-      if (form) {
-        setValues(JSON.parse(form));
-      }
-    }
-  };
-
   // read the values from localStorage on load
   useEffect(() => {
+    const setForm = (id?: string) => {
+      if (id) {
+        const form = localStorage.getItem(id);
+        if (form) {
+          setValues(JSON.parse(form));
+        }
+      }
+    };
     setForm(values.draftId);
-  }, []);
+  }, [values.draftId, setValues]);
 
   // save the values to localStorage on update
   useEffect(() => {
@@ -27,7 +26,7 @@ export const PersistFormValues = () => {
       localStorage.setItem(values.draftId, JSON.stringify(values));
     }
     setDrafts();
-  }, [values, dirty]);
+  }, [values, dirty, setDrafts]);
 
   return null;
 };

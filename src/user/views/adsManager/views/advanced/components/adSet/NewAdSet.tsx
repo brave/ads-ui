@@ -22,6 +22,7 @@ export function NewAdSet() {
   const { values } = useFormikContext<CampaignForm>();
   const params = new URLSearchParams(history.location.search);
   const selected = useRef(0);
+  // eslint-disable-next-line react-hooks/refs
   selected.current = Number(params.get("current") ?? 0);
 
   const initial = {

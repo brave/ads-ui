@@ -19,7 +19,7 @@ export function NotificationAd(props: NotificationAdProps) {
 
   useEffect(() => {
     code.setValue("notification_all_v1");
-  }, []);
+  }, [code]);
 
   if (props.useContainer === false) {
     return (

@@ -36,7 +36,7 @@ export const SegmentPicker = ({ idx }: Props) => {
     } else {
       helper.setValue(meta.value);
     }
-  }, [targetMeta.value]);
+  }, [targetMeta.value, helper, meta.value]);
 
   return (
     <Box>

@@ -32,11 +32,6 @@ export function UserForm() {
   });
   const [errorMessage, setErrorMessage] = useState<ReactNode | null>(null);
 
-  if (!user.userId) {
-    const details = "Unable to get profile information";
-    return <ErrorDetail error={details} additionalDetails={details} />;
-  }
-
   const [updateUser] = useMutation(UpdateCurrentUser, {
     onCompleted(user) {
       trackMatomoEvent("user", "update");
@@ -47,6 +42,11 @@ export function UserForm() {
       setErrorMessage(`Failed to update profile: ${errorMessage}`);
     },
   });
+
+  if (!user.userId) {
+    const details = "Unable to get profile information";
+    return <ErrorDetail error={details} additionalDetails={details} />;
+  }
 
   return (
     <CardContainer header="Profile Details">

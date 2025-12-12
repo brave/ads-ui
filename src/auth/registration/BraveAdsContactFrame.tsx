@@ -12,6 +12,7 @@ export function BraveAdsContactFrame() {
 
   function handleIframeMessage(e: MessageEvent) {
     if (e.origin !== "https://contact.ads.brave.com") {
+      // eslint-disable-next-line no-console
       console.warn("Untrusted origin:", e.origin);
       return;
     }
