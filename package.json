@@ -14,8 +14,8 @@
     "@jonkoops/matomo-tracker-react": "0.7.0",
     "@mui/icons-material": "7.3.6",
     "@mui/material": "7.3.6",
-    "@mui/x-data-grid": "8.21.0",
-    "@mui/x-date-pickers": "8.21.0",
+    "@mui/x-data-grid": "8.22.0",
+    "@mui/x-date-pickers": "8.22.0",
     "bignumber.js": "9.3.1",
     "dayjs": "1.11.19",
     "formik": "2.4.9",
@@ -25,8 +25,8 @@
     "immer": "11.0.1",
     "lodash": "4.17.21",
     "papaparse": "5.5.3",
-    "react": "19.2.1",
-    "react-dom": "19.2.1",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
     "react-router-dom": "5.3.4",
     "react-window": "2.2.3",
     "swr": "2.3.7",
@@ -63,19 +63,19 @@
     "@types/react-dom": "19.2.3",
     "@types/react-router-dom": "5.3.3",
     "@vitejs/plugin-basic-ssl": "2.1.0",
-    "@vitejs/plugin-react": "5.1.1",
+    "@vitejs/plugin-react": "5.1.2",
     "eslint": "9.39.1",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "7.0.1",
     "husky": "9.1.7",
-    "knip": "5.72.0",
+    "knip": "5.73.3",
     "lint-staged": "16.2.7",
     "prettier": "3.7.4",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.48.1",
+    "typescript-eslint": "8.49.0",
     "vite": "7.2.7",
-    "vite-plugin-checker": "0.11.0",
+    "vite-plugin-checker": "0.12.0",
     "vite-tsconfig-paths": "5.1.4",
     "vitest": "4.0.15"
   },
@@ -113,7 +113,11 @@
       "brace-expansion@>=2.0.0 <=2.0.1": "^2.0.2",
       "tmp@<=0.2.3": ">=0.2.4",
       "js-yaml@<4.1.1": ">=4.1.1"
-    }
+    },
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "oxc-resolver"
+    ]
   },
-  "packageManager": "pnpm@10.24.0+sha512.01ff8ae71b4419903b65c60fb2dc9d34cf8bb6e06d03bde112ef38f7a34d6904c424ba66bea5cdcf12890230bf39f9580473140ed9c946fef328b6e5238a345a"
+  "packageManager": "pnpm@10.25.0+sha512.5e82639027af37cf832061bcc6d639c219634488e0f2baebe785028a793de7b525ffcd3f7ff574f5e9860654e098fe852ba8ac5dd5cefe1767d23a020a92f501"
 }
