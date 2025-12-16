@@ -3,7 +3,7 @@ import { Stack, Typography } from "@mui/material";
 export function SearchTalkingPoints() {
   const talkingPoints = [
     {
-      title: "Reach new audiences you&apos;re missing",
+      title: "Reach new audiences you're missing",
       description:
         "New users are switching to Brave Search every single day. Don't miss out on meeting their intent to shop your product or services.",
     },

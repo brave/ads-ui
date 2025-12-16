@@ -20,7 +20,7 @@ export function GetStartedLandingPage() {
 
           <Typography variant="h4" color="white">
             Get to your first million users with powerful ad placements on the
-            world&apos;s fastest-growing alternative browser & search engine.
+            world&rsquo;s fastest-growing alternative browser & search engine.
           </Typography>
         </Stack>
         <img

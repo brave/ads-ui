@@ -46,7 +46,7 @@ export function BasicAttentionTokenLandingPage({ reroute }: Props) {
           </Typography>
 
           <Typography variant="subtitle1" textAlign="center">
-            Brave is where early adopters thrive. We&apos;re celebrating our
+            Brave is where early adopters thrive. We&rsquo;re celebrating our
             crypto roots by offering new and returning Brave Ads customers half
             off their first self-managed campaign if they buy with BAT
             <strong>*</strong>
@@ -126,7 +126,7 @@ function WhatIsBAT() {
           >
             Basic Attention Token (BAT)
           </Link>{" "}
-          is Brave&apos;s native crypto token. Brave Browser users who opt into{" "}
+          is Brave&rsquo;s native crypto token. Brave Browser users who opt into{" "}
           <Link
             color="secondary"
             sx={{ cursor: "pointer" }}
