@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense } from "react";
+import { useState, lazy, Suspense, useCallback } from "react";
 
 import { Redirect, Route, Switch } from "react-router-dom";
 
@@ -28,6 +28,10 @@ export function App() {
   const { enableLinkTracking } = useMatomo();
   const [drafts, setDrafts] = useState<CampaignForm[]>(getAllDrafts());
 
+  const reloadDrafts = useCallback(() => {
+    setDrafts(getAllDrafts());
+  }, []);
+
   enableLinkTracking();
 
   return (
@@ -37,9 +41,7 @@ export function App() {
         <DraftContext.Provider
           value={{
             drafts,
-            setDrafts: () => {
-              setDrafts(getAllDrafts());
-            },
+            setDrafts: reloadDrafts,
           }}
         >
           <Suspense fallback={<CircularProgress />}>

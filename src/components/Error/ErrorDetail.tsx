@@ -47,6 +47,7 @@ ERROR: ${error.stack ? error.stack : error}
 ${stringError === "{}" ? "" : stringError}
   `;
 
+  // eslint-disable-next-line no-console
   console.error(errorDetails);
 
   return (

@@ -92,7 +92,7 @@ export function useSubmitCreative(props: { id: string }) {
         submitting(false);
       }
     },
-    [createCreative, updateCreative, props.id],
+    [createCreative, updateCreative, props.id, advertiser.id, isNew],
   );
 
   return {

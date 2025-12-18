@@ -22,7 +22,7 @@ export function useCreatePaymentSession() {
           history.push(`/user/main/adsmanager/advanced/${campaignId}/review`);
         });
     },
-    [],
+    [advertiser.id, history],
   );
 
   return { createPaymentSession: replaceSession, loading };
