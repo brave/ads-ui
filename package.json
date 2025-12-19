@@ -29,7 +29,7 @@
     "react-dom": "19.2.3",
     "react-router-dom": "5.3.4",
     "react-window": "2.2.3",
-    "swr": "2.3.7",
+    "swr": "2.3.8",
     "tweetnacl": "1.0.3",
     "yup": "1.7.1"
   },
@@ -51,7 +51,7 @@
     "lint:fix": "eslint --fix src"
   },
   "devDependencies": {
-    "@eslint/js": "9.39.1",
+    "@eslint/js": "9.39.2",
     "@graphql-codegen/cli": "6.1.0",
     "@graphql-codegen/client-preset": "5.2.1",
     "@graphql-codegen/introspection": "5.0.0",
@@ -64,17 +64,17 @@
     "@types/react-router-dom": "5.3.3",
     "@vitejs/plugin-basic-ssl": "2.1.0",
     "@vitejs/plugin-react": "5.1.2",
-    "eslint": "9.39.1",
+    "eslint": "9.39.2",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "7.0.1",
     "husky": "9.1.7",
-    "knip": "5.73.4",
+    "knip": "5.74.0",
     "lint-staged": "16.2.7",
     "prettier": "3.7.4",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.49.0",
-    "vite": "7.2.7",
+    "typescript-eslint": "8.50.0",
+    "vite": "7.3.0",
     "vite-plugin-checker": "0.12.0",
     "vite-tsconfig-paths": "5.1.4",
     "vitest": "4.0.15"
@@ -119,5 +119,5 @@
       "oxc-resolver"
     ]
   },
-  "packageManager": "pnpm@10.25.0+sha512.5e82639027af37cf832061bcc6d639c219634488e0f2baebe785028a793de7b525ffcd3f7ff574f5e9860654e098fe852ba8ac5dd5cefe1767d23a020a92f501"
+  "packageManager": "pnpm@10.26.0+sha512.3b3f6c725ebe712506c0ab1ad4133cf86b1f4b687effce62a9b38b4d72e3954242e643190fc51fa1642949c735f403debd44f5cb0edd657abe63a8b6a7e1e402"
 }
