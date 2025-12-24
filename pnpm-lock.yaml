@@ -79,8 +79,8 @@ importers:
         specifier: 3.2.3
         version: 3.2.3(highcharts@12.4.0)(react@19.2.3)
       immer:
-        specifier: 11.0.1
-        version: 11.0.1
+        specifier: 11.1.0
+        version: 11.1.0
       lodash:
         specifier: 4.17.21
         version: 4.17.21
@@ -164,8 +164,8 @@ importers:
         specifier: 9.1.7
         version: 9.1.7
       knip:
-        specifier: 5.75.2
-        version: 5.75.2(@types/node@20.13.0)(typescript@5.9.3)
+        specifier: 5.76.1
+        version: 5.76.1(@types/node@20.13.0)(typescript@5.9.3)
       lint-staged:
         specifier: 16.2.7
         version: 16.2.7
@@ -2850,8 +2850,8 @@ packages:
     resolution: {integrity: sha512-Hs59xBNfUIunMFgWAbGX5cq6893IbWg4KnrjbYwX3tx0ztorVgTDA6B2sxf8ejHJ4wz8BqGUMYlnzNBer5NvGg==}
     engines: {node: '>= 4'}
 
-  immer@11.0.1:
-    resolution: {integrity: sha512-naDCyggtcBWANtIrjQEajhhBEuL9b0Zg4zmlWK2CzS6xCWSE39/vvf4LqnMjUAWHBhot4m9MHCM/Z+mfWhUkiA==}
+  immer@11.1.0:
+    resolution: {integrity: sha512-dlzb07f5LDY+tzs+iLCSXV2yuhaYfezqyZQc+n6baLECWkOMEWxkECAOnXL0ba7lsA25fM9b2jtzpu/uxo1a7g==}
 
   immutable@3.7.6:
     resolution: {integrity: sha512-AizQPcaofEtO11RZhPPHBOJRdo/20MKQF9mBLnVkBoyHi1/zXK8fzVdnEpSV9gxqtnh6Qomfp3F0xT5qP/vThw==}
@@ -3082,8 +3082,8 @@ packages:
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
 
-  knip@5.75.2:
-    resolution: {integrity: sha512-ZSO9gGKG/RztUYawrMbPTqO9VG3qvTW/ddINJqYM+N+9F/0bX6HEBolo8+HKaBuTIgyM4dn2rZ8M+JLObRdzog==}
+  knip@5.76.1:
+    resolution: {integrity: sha512-V9CgrzE8ZhqsJeZE4VFUXZHm1cRDmL8WiRRZUPBi65rWJkExdJkEmV2ab+jiOQTzhoBIL/d3DegOPpMq5IF3DA==}
     engines: {node: '>=18.18.0'}
     hasBin: true
     peerDependencies:
@@ -7367,7 +7367,7 @@ snapshots:
 
   ignore@7.0.5: {}
 
-  immer@11.0.1: {}
+  immer@11.1.0: {}
 
   immutable@3.7.6: {}
 
@@ -7587,7 +7587,7 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  knip@5.75.2(@types/node@20.13.0)(typescript@5.9.3):
+  knip@5.76.1(@types/node@20.13.0)(typescript@5.9.3):
     dependencies:
       '@nodelib/fs.walk': 1.2.8
       '@types/node': 20.13.0
