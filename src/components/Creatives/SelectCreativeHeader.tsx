@@ -12,6 +12,7 @@ export const SelectCreativeHeader = (props: {
 }) => {
   const [selected, setSelected] = useState<boolean>();
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSelected(props.creative.included);
   }, [props.creative]);
 

@@ -8,20 +8,23 @@ export function useGenerateApiKey() {
   const [data, setData] = useState<string>();
   const [error, setError] = useState<string>();
 
-  const generate = useCallback((advertiserId: string) => {
-    setLoading(true);
-    trackMatomoEvent("user", "generate-api-key");
-    createKey(advertiserId)
-      .then((res) => {
-        setData(res);
-      })
-      .catch((error) => {
-        setError(error.message);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+  const generate = useCallback(
+    (advertiserId: string) => {
+      setLoading(true);
+      trackMatomoEvent("user", "generate-api-key");
+      createKey(advertiserId)
+        .then((res) => {
+          setData(res);
+        })
+        .catch((error) => {
+          setError(error.message);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    },
+    [trackMatomoEvent],
+  );
 
   return { generate, data, loading, error };
 }

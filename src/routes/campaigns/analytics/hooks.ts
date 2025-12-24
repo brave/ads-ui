@@ -32,7 +32,7 @@ interface UseMetricSelectionResult {
 }
 
 export function useMetricSelection(): UseMetricSelectionResult {
-  return getGenericMultiSelect(
+  return useGenericMultiSelect(
     "metrics",
     getMetricDefinition,
     "impression ctr",
@@ -48,10 +48,10 @@ interface UseOsSelectionResult {
 }
 
 export function useOsFilterParams(): UseOsSelectionResult {
-  return getGenericMultiSelect("os", getOsFilter, "all");
+  return useGenericMultiSelect("os", getOsFilter, "all");
 }
 
-function getGenericMultiSelect<T extends { id: string }>(
+function useGenericMultiSelect<T extends { id: string }>(
   urlParam: string,
   selectedFunc: (id: string) => T | undefined,
   defaultSelection: string,
@@ -114,7 +114,7 @@ interface UseBreakdownParamsResult {
 }
 
 export function useBreakdownParams(): UseBreakdownParamsResult {
-  return getGenericFilterParams(
+  return useGenericFilterParams(
     "show",
     getBreakdownDefinition,
     BREAKDOWNS[0].id,
@@ -128,14 +128,14 @@ interface UseTimeParamsResult {
 }
 
 export function useTimeFilterParams(): UseTimeParamsResult {
-  return getGenericFilterParams(
+  return useGenericFilterParams(
     "time",
     getTimeFilter,
     buildTimeFilters()[0].id,
   );
 }
 
-function getGenericFilterParams<T extends { id: string }>(
+function useGenericFilterParams<T extends { id: string }>(
   urlParam: string,
   selectedFunc: (id: string | undefined | null) => T | undefined,
   defaultSelection: string,
@@ -193,20 +193,28 @@ export function useCampaignAnalyticFilter({
     if (customFilter.to) timeFilter.to = customFilter.to;
   }
 
-  useEffect(() => {
-    setFilter((prevFilter) => ({
-      ...prevFilter,
-      ...timeFilter,
-      os:
-        os.length === 0 || (os.length === 1 && os[0].id === "all")
-          ? undefined
-          : os.map((a) => a.id),
-    }));
-  }, [
-    JSON.stringify(selected),
-    JSON.stringify(os),
-    JSON.stringify(timeFilter),
-  ]);
+  useEffect(
+    () => {
+      setFilter((prevFilter: PerformanceFilter) => ({
+        ...prevFilter,
+        ...timeFilter,
+        os:
+          os.length === 0 || (os.length === 1 && os[0].id === "all")
+            ? undefined
+            : os.map((a) => a.id),
+      }));
+    },
+    // This is not a great way of using dependencies and should be fixed.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      JSON.stringify(selected),
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      JSON.stringify(os),
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      JSON.stringify(timeFilter),
+    ],
+  );
 
   return { filter, setFilter };
 }

@@ -92,9 +92,9 @@ function IncreaseBudgetDialog({
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Like your campaign's performance? Increase the budget to expand its
-            reach and connect with more potential customers. Specify below how
-            much you would like to add to your current budget of{" "}
+            Like your campaign&apos;s performance? Increase the budget to expand
+            its reach and connect with more potential customers. Specify below
+            how much you would like to add to your current budget of{" "}
             <strong>{previousBudget}</strong>
           </DialogContentText>
           <TextField

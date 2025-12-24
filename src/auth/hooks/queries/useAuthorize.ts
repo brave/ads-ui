@@ -12,27 +12,31 @@ export function useAuthorize({ onCompleted, onError }: Options) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
 
-  const verify = useCallback((code: string, id: string) => {
-    authorize({ code, id })
-      .then((data) => {
-        if (data) {
-          setSessionUser(data);
-        }
-        if (onCompleted) {
-          onCompleted();
-        }
-      })
-      .catch((e) => {
-        console.error(e.message);
-        setError(e.message);
-        if (onError) {
-          onError();
-        }
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+  const verify = useCallback(
+    (code: string, id: string) => {
+      authorize({ code, id })
+        .then((data) => {
+          if (data) {
+            setSessionUser(data);
+          }
+          if (onCompleted) {
+            onCompleted();
+          }
+        })
+        .catch((e) => {
+          // eslint-disable-next-line no-console
+          console.error(e.message);
+          setError(e.message);
+          if (onError) {
+            onError();
+          }
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    },
+    [setSessionUser, onCompleted, onError],
+  );
 
   return { loading, error, verify };
 }
