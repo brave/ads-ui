@@ -12,7 +12,7 @@ export const PersistRegistrationValues = () => {
     if (form) {
       setValues(JSON.parse(form));
     }
-  }, []);
+  }, [setValues]);
 
   // save the values to localStorage on update
   useEffect(() => {

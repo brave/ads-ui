@@ -19,7 +19,7 @@ export function PickerFields({ index }: Props) {
     if (format.value === CampaignFormat.NewsDisplayAd) {
       helper.setValue([{ code: "Svp7l-zGN", name: "Untargeted" }]);
     }
-  }, [format.value]);
+  }, [format.value, helper]);
 
   return (
     <CardContainer header="Targeting">

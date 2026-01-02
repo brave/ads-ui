@@ -31,7 +31,7 @@ export function useSignOut({ onSuccess, onError }: Options = {}) {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [setSessionUser, onSuccess, onError]);
 
   return { signOut, loading, error };
 }

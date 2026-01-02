@@ -22,7 +22,7 @@ export const IAuthProvider = ({ children }: IAuthProviderProps) => {
     }
 
     let isInGroup = false;
-    if (advertiserId != null) {
+    if (advertiserId !== null) {
       isInGroup = _.some(advertisers, { id: advertiserId });
     }
 
@@ -31,30 +31,31 @@ export const IAuthProvider = ({ children }: IAuthProviderProps) => {
       : advertisers[0];
   };
 
-  const setSessionUser = (u?: ResponseUser) => {
-    if (u) {
-      const active = getActiveAdvertiser(u.advertisers);
-      setActiveAdvertiser(active?.id);
-      setState((cur) => ({
-        ...cur,
-        email: u.email,
-        role: u.role,
-        userId: u.id,
-        fullName: u.fullName,
-        advertisers: u.advertisers,
-        isAuthenticated: u.advertisers.length > 0 && !!active,
-        advertiserMessage: u.message,
-      }));
-    } else {
-      setState((cur) => ({
-        ...cur,
-        isAuthenticated: false,
-      }));
-    }
-  };
-
   useEffect(() => {
+    const setSessionUser = (u?: ResponseUser) => {
+      if (u) {
+        const active = getActiveAdvertiser(u.advertisers);
+        setActiveAdvertiser(active?.id);
+        setState((cur) => ({
+          ...cur,
+          email: u.email,
+          role: u.role,
+          userId: u.id,
+          fullName: u.fullName,
+          advertisers: u.advertisers,
+          isAuthenticated: u.advertisers.length > 0 && !!active,
+          advertiserMessage: u.message,
+        }));
+      } else {
+        setState((cur) => ({
+          ...cur,
+          isAuthenticated: false,
+        }));
+      }
+    };
+
     // For each time a user refreshes (or lands on login for first time), check if their token is still valid
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLoading(true);
     getUser()
       .then(async (res) => {
@@ -62,6 +63,7 @@ export const IAuthProvider = ({ children }: IAuthProviderProps) => {
         setSessionUser({ ...res, ...advertiserMessageResponse });
       })
       .catch((e) => {
+        // eslint-disable-next-line no-console
         console.error(e);
         setState((cur) => ({
           ...cur,

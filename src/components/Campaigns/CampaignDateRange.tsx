@@ -27,8 +27,15 @@ export const CampaignDateRange = () => {
       startMeta.value,
       endMeta.value,
     );
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setWillNotReachEndDate(!ok(budget.value));
-  }, [endMeta.value, isEdit, budget.value, startMeta.value]);
+  }, [
+    endMeta.value,
+    isEdit,
+    budget.value,
+    startMeta.value,
+    advertiser.selfServiceSetPrice,
+  ]);
 
   return (
     <Box>

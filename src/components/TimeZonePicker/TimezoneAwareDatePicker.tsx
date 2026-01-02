@@ -32,6 +32,7 @@ export const TimezoneAwareDatePicker = ({
 }: Props) => {
   const [formValue, setFormValue] = useState(formatDateForInput(value, tz));
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setFormValue(formatDateForInput(value, tz));
   }, [tz, setFormValue, value]);
 

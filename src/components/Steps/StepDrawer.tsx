@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/refs */
+/* ^ this should be fixed but it requires an overhaul of the code */
 import { PropsWithChildren, ReactNode, useRef } from "react";
 import {
   Box,
