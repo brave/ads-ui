@@ -16,11 +16,6 @@ export function PaymentMethodField() {
   const [, meta] = useField<number>("budget");
   const { loading, data } = useGetAdvertiserAccountBalance();
 
-  if (advertiser.selfServiceSetPrice) {
-    return null;
-  }
-
-  const balance = BigNumber(data?.advertiser?.accountBalance ?? "0").dp(2);
   const amountOwed = useCallback(
     (balance: BigNumber) => {
       const budget = BigNumber(meta.value).minus(balance);
@@ -29,6 +24,12 @@ export function PaymentMethodField() {
     },
     [meta.value],
   );
+
+  if (advertiser.selfServiceSetPrice) {
+    return null;
+  }
+
+  const balance = BigNumber(data?.advertiser?.accountBalance ?? "0").dp(2);
 
   const chargeMessage = (b: BigNumber) => {
     if (b.lte(0)) return "and no additional charges will be incurred.";

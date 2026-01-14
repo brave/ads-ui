@@ -86,7 +86,12 @@ export function renderMonetaryAmount(
 export function campaignOnOffState(
   c: CampaignSummaryFragment & { advertiserId: string },
 ): ReactNode {
+  // This is completely wrong and the react hooks linter is correctly to complain about.
+  // I have no idea how this possibly works. But apparently it does and I don't want to
+  // mix up an overhaul of the code within this PR.
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { fromDate } = useContext(FilterContext);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [updateCampaign, { loading }] = useMutation(UpdateCampaignDocument, {
     refetchQueries: [
       {
@@ -132,6 +137,8 @@ export function adSetOnOffState(
     }
   `);
 
+  // see comment above - we should not be calling hooks from here
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [updateAdSet, { loading }] = useMutation(UpdateAdSetState, {
     refetchQueries: [
       {

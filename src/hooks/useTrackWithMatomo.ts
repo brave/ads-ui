@@ -17,7 +17,7 @@ export const useTrackMatomoPageView = ({ documentTitle }: TrackingProps) => {
 
   useEffect(() => {
     trackPageView({ documentTitle });
-  }, [documentTitle]);
+  }, [documentTitle, trackPageView]);
 };
 
 export const useTrackMatomoEvent = ({
@@ -29,7 +29,7 @@ export const useTrackMatomoEvent = ({
     (category: string, action: string, name?: string) => {
       trackEvent({ documentTitle, category, action, name });
     },
-    [documentTitle],
+    [documentTitle, trackEvent],
   );
 
   return { trackMatomoEvent };

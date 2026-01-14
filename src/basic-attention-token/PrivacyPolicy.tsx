@@ -1,20 +1,20 @@
 import { PropsWithChildren } from "react";
 import { Link, Typography } from "@mui/material";
 
-export function PrivacyPolicy(props: { isSearch?: boolean }) {
-  const PolicyLink = (props: { to: string } & PropsWithChildren) => (
-    <Link
-      underline="none"
-      component="a"
-      href={props.to}
-      sx={{ cursor: "pointer" }}
-      target="_blank"
-      rel="noopener"
-    >
-      {props.children}
-    </Link>
-  );
+const PolicyLink = (props: { to: string } & PropsWithChildren) => (
+  <Link
+    underline="none"
+    component="a"
+    href={props.to}
+    sx={{ cursor: "pointer" }}
+    target="_blank"
+    rel="noopener"
+  >
+    {props.children}
+  </Link>
+);
 
+export function PrivacyPolicy(props: { isSearch?: boolean }) {
   return (
     <Typography variant={props.isSearch ? "caption" : "body2"} flexWrap="wrap">
       Please see our{" "}

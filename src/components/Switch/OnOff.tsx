@@ -27,10 +27,6 @@ export function OnOff({
     (state === "active" || state === "paused") &&
     !isAfterEnd;
 
-  const DisabledDisplay = () =>
-    isInline ? null : (
-      <Typography sx={{ textAlign: "center", p: 0 }}>-</Typography>
-    );
   const tooltip = state === "paused" ? "Pause" : "Activate";
 
   return (
@@ -55,8 +51,8 @@ export function OnOff({
             checked={state === "active"}
             disabled={loading}
           />
-        ) : (
-          <DisabledDisplay />
+        ) : isInline ? null : (
+          <Typography sx={{ textAlign: "center", p: 0 }}>-</Typography>
         )}
       </span>
     </Tooltip>

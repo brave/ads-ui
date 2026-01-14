@@ -40,10 +40,14 @@ export function useUrlValidation(url: string): UrlValidationResult {
   );
 
   // cancel the debounce on onmount
-  useEffect(() => () => debouncedSetUrlToCheck.cancel(), []);
+  useEffect(
+    () => () => debouncedSetUrlToCheck.cancel(),
+    [debouncedSetUrlToCheck],
+  );
 
   // when the input url changes we should queue an update
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setResponse(undefined);
     setError(undefined);
     setValidating(false);
@@ -57,6 +61,7 @@ export function useUrlValidation(url: string): UrlValidationResult {
     // special check: if the url doesn't start with https:// then don't bother
     // to call the serve for validation since that will fail anyway
     if (!urlToCheck.startsWith("https://")) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setResponse(undefined);
       return;
     }
@@ -82,7 +87,7 @@ export function useUrlValidation(url: string): UrlValidationResult {
     return () => {
       notCancelled = false;
     };
-  }, [urlToCheck]);
+  }, [urlToCheck, validateUrl]);
 
   const currentUrlIsValid = urlToCheck === url ? response?.isValid : undefined;
 
