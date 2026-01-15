@@ -1,7 +1,5 @@
 import { useCallback, useState } from "react";
 import { buildAdServerEndpoint } from "@/util/environment";
-import Papa from "papaparse";
-import tweetnacl from "tweetnacl";
 import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
 
 interface DownloadProps {
@@ -17,16 +15,13 @@ export function useDownloadCSV(props: DownloadProps = {}) {
   const { onComplete } = props;
 
   const download = useCallback(
-    (campaignId: string, isVac: boolean) => {
+    (campaignId: string) => {
       setLoading(true);
       setError(undefined);
-      trackMatomoEvent(
-        "report-download",
-        `${isVac ? "vac" : "performance"}-report`,
-      );
+      trackMatomoEvent("report-download", "performance-report");
 
       const baseUrl = `/report/campaign/csv/${campaignId}`;
-      fetch(buildAdServerEndpoint(isVac ? `${baseUrl}/vac` : baseUrl), {
+      fetch(buildAdServerEndpoint(baseUrl), {
         method: "GET",
         mode: "cors",
         credentials: "include",
@@ -48,10 +43,6 @@ export function useDownloadCSV(props: DownloadProps = {}) {
             type: "text/csv",
             endings: "transparent",
           });
-
-          if (isVac) {
-            return transformConversionEnvelope(file);
-          }
 
           return Promise.resolve(file);
         })
@@ -78,66 +69,4 @@ export function useDownloadCSV(props: DownloadProps = {}) {
   );
 
   return { download, loading, error };
-}
-
-type Envelope = { ciphertext: string; epk: string; nonce: string };
-async function transformConversionEnvelope(blob: Blob): Promise<Blob> {
-  const ui8a = (s?: string | null) =>
-    s ? Uint8Array.from(atob(s), (c) => c.charCodeAt(0)) : new Uint8Array();
-  const privateKey = ui8a(
-    document.getElementById("private-key")?.getAttribute("value"),
-  );
-  if (privateKey.byteLength === 0) {
-    return Promise.resolve(blob);
-  }
-
-  const td = new TextDecoder();
-  return await new Promise((resolve, reject) => {
-    const fileReader = new FileReader();
-    fileReader.onload = () => {
-      const text = fileReader.result as string | null;
-      if (text === null) {
-        reject(new Error("No file result"));
-        return;
-      }
-
-      try {
-        Papa.parse(text, {
-          header: true,
-          transform(value: string, field: string) {
-            if (field.includes("Conversion")) {
-              const { ciphertext, nonce, epk }: Envelope = JSON.parse(value);
-              const res = tweetnacl.box.open(
-                ui8a(ciphertext),
-                ui8a(nonce),
-                ui8a(epk),
-                privateKey,
-              );
-              return res
-                ? td.decode(res.filter((v) => v !== 0x00))
-                : "Data not valid for this private key";
-            }
-
-            return value;
-          },
-          complete(results) {
-            const newCSV = Papa.unparse(results.data, {
-              skipEmptyLines: "greedy",
-            });
-            privateKey.fill(0);
-            resolve(new Blob([newCSV]));
-          },
-          error(error: Error) {
-            reject(error);
-          },
-        });
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error(e);
-        reject(new Error("Unable to decrypt conversion data"));
-      }
-    };
-
-    fileReader.readAsText(blob);
-  });
 }

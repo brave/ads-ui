@@ -14,7 +14,6 @@ fragment AdvertiserBillingAddress on Advertiser {
 query Advertiser($id: String!) {
   advertiser(id: $id) {
     id
-    publicKey
   }
 }
 

@@ -13,7 +13,6 @@ export function useAdvertiser(): {
     name: "",
     selfServiceManageCampaign: false,
     selfServiceSetPrice: false,
-    publicKey: null,
     selfServicePaymentType: PaymentType.Stripe,
   };
 

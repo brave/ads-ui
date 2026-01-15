@@ -28,7 +28,6 @@ const Campaign_Load = graphql(`
       id
       conversions {
         id
-        extractExternalId
       }
     }
   }
