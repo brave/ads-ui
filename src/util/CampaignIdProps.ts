@@ -1,5 +1,5 @@
-import { CampaignOverviewFragment } from "@/graphql-client/graphql";
+import { CampaignSummaryFragment } from "@/graphql-client/graphql";
 
 export interface CampaignOverviewProps {
-  campaignOverview: CampaignOverviewFragment;
+  campaignOverview: CampaignSummaryFragment;
 }
