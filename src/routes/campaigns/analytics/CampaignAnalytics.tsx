@@ -8,7 +8,6 @@ import { ResultsPane } from "./ResultsPane";
 import { CampaignOverviewProps } from "@/util/CampaignIdProps";
 import { ErrorDetail } from "@/components/Error/ErrorDetail";
 import { Status } from "@/components/Campaigns/Status";
-import _ from "lodash";
 import { VerticalBreakdown } from "@/routes/campaigns/analytics/filters/BreakdownSelector";
 
 const Analytics_Load = graphql(`
@@ -27,12 +26,6 @@ const Analytics_Load = graphql(`
 `);
 
 export function CampaignAnalytics({ campaignOverview }: CampaignOverviewProps) {
-  const conversions = _.flatMap(campaignOverview.adSets ?? [], "conversions");
-  const hasVerifiedConversions = _.some(
-    conversions ?? [],
-    (c) => c.extractExternalId,
-  );
-
   const { filter, setFilter } = useCampaignAnalyticFilter({ campaignOverview });
 
   const { data, error } = useQuery(Analytics_Load, {
@@ -105,7 +98,6 @@ export function CampaignAnalytics({ campaignOverview }: CampaignOverviewProps) {
             filters={filter}
             onChange={setFilter}
             campaignId={campaignOverview.id}
-            hasVerifiedConversions={hasVerifiedConversions}
           />
         </Box>
 

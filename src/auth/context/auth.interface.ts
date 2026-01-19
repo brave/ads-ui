@@ -8,7 +8,6 @@ export type IAdvertiser = {
   selfServiceManageCampaign: boolean;
   selfServiceSetPrice: boolean;
   selfServicePaymentType: PaymentType;
-  publicKey?: string | null;
   agreed?: boolean;
 };
 

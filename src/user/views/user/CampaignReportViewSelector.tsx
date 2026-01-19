@@ -18,18 +18,7 @@ interface Params {
 const Campaign_Load = graphql(`
   query LoadCampaignSummary($id: String!) {
     campaign(id: $id) {
-      ...CampaignOverview
-    }
-  }
-
-  fragment CampaignOverview on Campaign {
-    ...CampaignSummary
-    adSets {
-      id
-      conversions {
-        id
-        extractExternalId
-      }
+      ...CampaignSummary
     }
   }
 `);

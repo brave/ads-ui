@@ -15,7 +15,6 @@ import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { setActiveAdvertiser } from "@/auth/util";
 import { CardContainer } from "@/components/Card/CardContainer";
 import { DraftContext } from "@/state/context";
-import { NewKeyPairModal } from "@/user/settings/NewKeyPairModal";
 import MiniSideBar from "@/components/Drawer/MiniSideBar";
 import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
 import { AccountBalance } from "@/user/settings/AccountBalance";
@@ -44,8 +43,6 @@ const Settings = () => {
     <MiniSideBar>
       <Container>
         <Stack spacing={2} mt={1}>
-          <NewKeyPairModal advertiser={advertiser} />
-
           <CardContainer header="Account">
             <Typography>
               You may have access to multiple accounts. Switch between them

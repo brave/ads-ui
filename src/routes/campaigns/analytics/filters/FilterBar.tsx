@@ -9,10 +9,9 @@ export interface FilterProps {
   filters: PerformanceFilter;
   onChange: Dispatch<PerformanceFilter>;
   campaignId: string;
-  hasVerifiedConversions: boolean;
 }
 
-export function FilterBar(props: FilterProps) {
+export function FilterBar({ filters, onChange, campaignId }: FilterProps) {
   return (
     <Box
       display="flex"
@@ -23,12 +22,13 @@ export function FilterBar(props: FilterProps) {
       gap={1}
       height={50}
     >
-      <TimeFilter {...props} />
-      <OsFilter {...props} />
-      <ReportMenu
-        {...props}
-        hasVerifiedConversions={props.hasVerifiedConversions}
+      <TimeFilter
+        filters={filters}
+        onChange={onChange}
+        campaignId={campaignId}
       />
+      <OsFilter filters={filters} onChange={onChange} campaignId={campaignId} />
+      <ReportMenu campaignId={campaignId} />
     </Box>
   );
 }

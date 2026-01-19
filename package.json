@@ -24,13 +24,11 @@
     "highcharts-react-official": "3.2.3",
     "immer": "11.1.3",
     "lodash": "4.17.21",
-    "papaparse": "5.5.3",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-router-dom": "5.3.4",
     "react-window": "2.2.3",
     "swr": "2.3.8",
-    "tweetnacl": "1.0.3",
     "yup": "1.7.1"
   },
   "scripts": {
@@ -58,7 +56,6 @@
     "@graphql-eslint/eslint-plugin": "4.4.0",
     "@parcel/watcher": "2.5.1",
     "@types/lodash": "4.17.21",
-    "@types/papaparse": "5.5.2",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
     "@types/react-router-dom": "5.3.3",
