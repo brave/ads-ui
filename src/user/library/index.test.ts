@@ -570,13 +570,11 @@ describe("edit form tests", () => {
   });
 
   it("should include geoTargetCodes when adding geoTargets to an empty list", () => {
-    // Initial form has empty geoTargets
     const initialForm: CampaignForm = {
       ...editForm,
       geoTargets: [],
     };
 
-    // Updated form has geoTargets added
     const updatedForm: CampaignForm = {
       ...editForm,
       geoTargets: [
@@ -595,7 +593,6 @@ describe("edit form tests", () => {
   });
 
   it("should include empty geoTargetCodes when removing all geoTargets from a non-empty list", () => {
-    // Initial form has geoTargets
     const initialForm: CampaignForm = {
       ...editForm,
       geoTargets: [
@@ -604,7 +601,6 @@ describe("edit form tests", () => {
       ],
     };
 
-    // Updated form has empty geoTargets
     const updatedForm: CampaignForm = {
       ...editForm,
       geoTargets: [],
@@ -620,7 +616,6 @@ describe("edit form tests", () => {
   });
 
   it("should include updated geoTargetCodes when changing from one set of geoTargets to another", () => {
-    // Initial form has US and Canada
     const initialForm: CampaignForm = {
       ...editForm,
       geoTargets: [
@@ -629,7 +624,6 @@ describe("edit form tests", () => {
       ],
     };
 
-    // Updated form has UK and Germany instead
     const updatedForm: CampaignForm = {
       ...editForm,
       geoTargets: [
