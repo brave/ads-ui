@@ -561,10 +561,83 @@ describe("edit form tests", () => {
         },
         "budget": undefined,
         "endAt": undefined,
+        "geoTargetCodes": [],
         "id": "000001",
         "name": "My first campaign",
         "startAt": undefined,
       }
     `);
+  });
+
+  it("should include geoTargetCodes when adding geoTargets to an empty list", () => {
+    const initialForm: CampaignForm = {
+      ...editForm,
+      geoTargets: [],
+    };
+
+    const updatedForm: CampaignForm = {
+      ...editForm,
+      geoTargets: [
+        { code: "US", name: "United States" },
+        { code: "CA", name: "Canada" },
+      ],
+    };
+
+    const update = transformEditForm(
+      updatedForm,
+      initialForm,
+      editForm.id ?? "",
+    );
+
+    expect(update.geoTargetCodes).toEqual(["US", "CA"]);
+  });
+
+  it("should include empty geoTargetCodes when removing all geoTargets from a non-empty list", () => {
+    const initialForm: CampaignForm = {
+      ...editForm,
+      geoTargets: [
+        { code: "US", name: "United States" },
+        { code: "CA", name: "Canada" },
+      ],
+    };
+
+    const updatedForm: CampaignForm = {
+      ...editForm,
+      geoTargets: [],
+    };
+
+    const update = transformEditForm(
+      updatedForm,
+      initialForm,
+      editForm.id ?? "",
+    );
+
+    expect(update.geoTargetCodes).toEqual([]);
+  });
+
+  it("should include updated geoTargetCodes when changing from one set of geoTargets to another", () => {
+    const initialForm: CampaignForm = {
+      ...editForm,
+      geoTargets: [
+        { code: "US", name: "United States" },
+        { code: "CA", name: "Canada" },
+      ],
+    };
+
+    const updatedForm: CampaignForm = {
+      ...editForm,
+      geoTargets: [
+        { code: "GB", name: "United Kingdom" },
+        { code: "DE", name: "Germany" },
+      ],
+    };
+
+    const update = transformEditForm(
+      updatedForm,
+      initialForm,
+      editForm.id ?? "",
+    );
+
+    expect(update.geoTargetCodes).toEqual(["GB", "DE"]);
   });
 });

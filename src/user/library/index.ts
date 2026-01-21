@@ -267,6 +267,7 @@ export function transformEditForm(
     endAt: campaignFieldChange("endAt"),
     name: campaignFieldChange("name"),
     startAt: campaignFieldChange("startAt"),
+    geoTargetCodes: campaignFieldChange("geoTargets")?.map((g) => g.code),
     adSets: {
       add: toAdd,
       modify: toModify,
