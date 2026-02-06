@@ -16,7 +16,7 @@
     },
     {
       "matchUpdateTypes": ["minor", "major", "patch"],
-      "schedule": ["* 0-8 * * *"]
+      "schedule": ["* 0-8 * * 1,4"]
     },
     {
       "matchDepTypes": ["pnpm.overrides"],
