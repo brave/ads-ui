@@ -111,12 +111,17 @@
       "tmp@<=0.2.3": ">=0.2.4",
       "js-yaml@<4.1.1": ">=4.1.1",
       "lodash-es@>=4.0.0 <=4.17.22": ">=4.17.23",
-      "lodash@>=4.0.0 <=4.17.22": ">=4.17.23"
+      "lodash@>=4.0.0 <=4.17.22": ">=4.17.23",
+      "ajv@^8 <8.18.0": ">=8.18.0",
+      "minimatch@<10.2.1": ">=10.2.1"
     },
     "onlyBuiltDependencies": [
       "esbuild",
       "oxc-resolver"
-    ]
+    ],
+    "auditConfig": {
+      "ignoreGhsas": ["GHSA-2g4f-4pwh-qvx6"]
+    }
   },
   "packageManager": "pnpm@10.27.0+sha512.72d699da16b1179c14ba9e64dc71c9a40988cbdc65c264cb0e489db7de917f20dcf4d64d8723625f2969ba52d4b7e2a1170682d9ac2a5dcaeaab732b7e16f04a"
 }
