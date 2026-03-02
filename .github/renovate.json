@@ -4,7 +4,7 @@
     "config:js-app",
     ":semanticCommits",
     ":semanticCommitTypeAll(chore)",
-    "npm:unpublishSafe",
+    "security:minimumReleaseAgeNpm",
     "helpers:pinGitHubActionDigests",
     "group:allNonMajor"
   ],
