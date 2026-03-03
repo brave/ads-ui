@@ -1,14 +1,14 @@
+import basicattentiontoken from "@/assets/images/basic-attention-token.svg";
+import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
+import { BottomSwoop } from "@/components/Assets/BottomSwoop";
+import { TopSwoop } from "@/components/Assets/TopSwoop";
+import { Background } from "@/components/Background/Background";
 import {
   useTrackMatomoEvent,
   useTrackMatomoPageView,
 } from "@/hooks/useTrackWithMatomo";
 import { Box, Button, Link, Stack, Typography } from "@mui/material";
-import { Link as RouterLink, Redirect } from "react-router-dom";
-import basicattentiontoken from "@/assets/images/basic-attention-token.svg";
-import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
-import { Background } from "@/components/Background/Background";
-import { BottomSwoop } from "@/components/Assets/BottomSwoop";
-import { TopSwoop } from "@/components/Assets/TopSwoop";
+import { Redirect, Link as RouterLink } from "react-router-dom";
 
 interface Props {
   reroute: boolean;

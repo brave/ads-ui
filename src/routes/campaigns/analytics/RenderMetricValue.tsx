@@ -1,9 +1,9 @@
-import BigNumber from "bignumber.js";
-import { MetricDefinition } from "./metrics";
-import _ from "lodash";
-import { Box, Skeleton, Tooltip, Typography } from "@mui/material";
 import { format } from "@/user/library/format";
 import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
+import { Box, Skeleton, Tooltip, Typography } from "@mui/material";
+import BigNumber from "bignumber.js";
+import _ from "lodash";
+import { MetricDefinition } from "./metrics";
 
 interface Props {
   metric: MetricDefinition;

@@ -1,4 +1,4 @@
-import { isDateInThePast, isDateInTheFuture } from "@/util/isAfterEndDate";
+import { isDateInTheFuture, isDateInThePast } from "@/util/isAfterEndDate";
 
 export const displayFromCampaignState = (c: {
   campaignState: string;

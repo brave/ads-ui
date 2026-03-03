@@ -1,5 +1,5 @@
-import { IAuthState } from "./auth.interface";
 import { createContext } from "react";
+import { IAuthState } from "./auth.interface";
 
 export const initialState: IAuthState = {
   isInitialized: false,

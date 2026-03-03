@@ -1,8 +1,8 @@
-import { Box, Switch, Typography, switchClasses } from "@mui/material";
-import { MetricDefinition } from "./metrics";
 import { DisplayedMetricsFragment } from "@/graphql-client/graphql";
+import { Box, Switch, Typography, switchClasses } from "@mui/material";
 import { RenderMetricValue } from "./RenderMetricValue";
 import { useMetricSelection } from "./hooks";
+import { MetricDefinition } from "./metrics";
 
 interface Props {
   metricDefinition: MetricDefinition;

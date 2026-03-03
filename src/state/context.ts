@@ -1,6 +1,6 @@
+import { CampaignForm } from "@/user/views/adsManager/types";
 import dayjs from "dayjs";
 import { createContext } from "react";
-import { CampaignForm } from "@/user/views/adsManager/types";
 
 export const DraftContext = createContext({
   drafts: [] as CampaignForm[],

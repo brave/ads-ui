@@ -1,8 +1,8 @@
-import { graphql } from "@/graphql-client/index";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
+import { CloseCampaignModal } from "@/components/Campaigns/CloseCampaignModal";
+import { graphql } from "@/graphql-client/index";
 import { useQuery } from "@apollo/client";
 import { useField } from "formik";
-import { CloseCampaignModal } from "@/components/Campaigns/CloseCampaignModal";
 
 const CampaignTransferStatus = graphql(`
   query CampaignTransferStatus($id: String!) {

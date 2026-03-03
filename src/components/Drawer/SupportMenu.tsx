@@ -1,9 +1,9 @@
-import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
-import { MouseEvent, useState } from "react";
+import { ItemBox } from "@/components/Drawer/components/ItemBox";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
 import HeadsetMicOutlinedIcon from "@mui/icons-material/HeadsetMicOutlined";
 import { Link, Menu, MenuItem } from "@mui/material";
-import { ItemBox } from "@/components/Drawer/components/ItemBox";
+import { MouseEvent, useState } from "react";
 
 interface SupportProps {
   usePlainLink?: boolean;

@@ -1,10 +1,10 @@
 import { DailyMetricValuesFragment } from "@/graphql-client/graphql";
+import { isEnabledForCampaign } from "@/routes/campaigns/analytics/metrics";
+import { CampaignOverviewProps } from "@/util/CampaignIdProps";
 import { useMetricSelection } from "../hooks";
-import { makeLineChartSeries } from "./series";
 import { GraphSkeleton } from "./GraphSkeleton";
 import { OverTimeGraph } from "./OverTimeGraph";
-import { CampaignOverviewProps } from "@/util/CampaignIdProps";
-import { isEnabledForCampaign } from "@/routes/campaigns/analytics/metrics";
+import { makeLineChartSeries } from "./series";
 
 interface Props extends CampaignOverviewProps {
   dataSource: DailyMetricValuesFragment[] | undefined;

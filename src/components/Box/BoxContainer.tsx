@@ -1,5 +1,5 @@
-import { PropsWithChildren, ReactNode } from "react";
 import { Box, Typography } from "@mui/material";
+import { PropsWithChildren, ReactNode } from "react";
 
 export function BoxContainer(
   props: { useTypography?: boolean; header?: ReactNode } & PropsWithChildren,

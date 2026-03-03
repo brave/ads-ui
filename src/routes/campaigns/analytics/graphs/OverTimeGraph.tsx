@@ -1,5 +1,5 @@
-import { SeriesSplineOptions } from "highcharts";
 import { HighchartsWrapper } from "@/user/analytics/analyticsOverview/components/HighchartsWrapper";
+import { SeriesSplineOptions } from "highcharts";
 
 interface Props {
   series: SeriesSplineOptions[];

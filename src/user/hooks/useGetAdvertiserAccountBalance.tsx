@@ -1,6 +1,6 @@
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { graphql } from "@/graphql-client/index";
 import { useQuery } from "@apollo/client";
-import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 
 const CurrentAdvertiserBalance = graphql(`
   query CurrentAdvertiserBalance($id: String!) {

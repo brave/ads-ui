@@ -1,4 +1,3 @@
-import { Link as RouterLink, useRouteMatch } from "react-router-dom";
 import {
   ListItemButton,
   ListItemIcon,
@@ -6,6 +5,7 @@ import {
   Typography,
 } from "@mui/material";
 import { MouseEvent, ReactNode } from "react";
+import { Link as RouterLink, useRouteMatch } from "react-router-dom";
 
 export type RouteOption = {
   label: string;

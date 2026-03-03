@@ -1,11 +1,11 @@
 import { CardContainer } from "@/components/Card/CardContainer";
-import { CountryDomain } from "./types";
+import DomainIcon from "@mui/icons-material/Domain";
+import GridViewIcon from "@mui/icons-material/GridView";
+import PanToolAltOutlinedIcon from "@mui/icons-material/PanToolAltOutlined";
+import PublicIcon from "@mui/icons-material/Public";
 import { Box, Typography } from "@mui/material";
 import { ReactNode } from "react";
-import PublicIcon from "@mui/icons-material/Public";
-import DomainIcon from "@mui/icons-material/Domain";
-import PanToolAltOutlinedIcon from "@mui/icons-material/PanToolAltOutlined";
-import GridViewIcon from "@mui/icons-material/GridView";
+import { CountryDomain } from "./types";
 
 function SummaryEntry({
   title,

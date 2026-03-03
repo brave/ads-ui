@@ -1,11 +1,11 @@
-import { Box, Button, Typography } from "@mui/material";
-import { useContext, useEffect } from "react";
 import { BoxContainer } from "@/components/Box/BoxContainer";
+import { FormContext } from "@/state/context";
+import { Creative, initialCreative } from "@/user/views/adsManager/types";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import { Box, Button, Typography } from "@mui/material";
 import { useField } from "formik";
-import { Creative, initialCreative } from "@/user/views/adsManager/types";
-import { FormContext } from "@/state/context";
+import { useContext, useEffect } from "react";
 
 export function NewAd() {
   const [, , newCreative] = useField<Creative | undefined>("newCreative");

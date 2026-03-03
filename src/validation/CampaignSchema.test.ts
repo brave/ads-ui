@@ -1,13 +1,13 @@
-import { produce } from "immer";
 import {
   CampaignFormat,
   CampaignState,
   PaymentType,
 } from "@/graphql-client/graphql";
-import { CampaignSchema } from "./CampaignSchema";
-import { describe } from "vitest";
 import { AdvertiserPrice } from "@/user/hooks/useAdvertiserWithPrices";
 import dayjs from "dayjs";
+import { produce } from "immer";
+import { describe } from "vitest";
+import { CampaignSchema } from "./CampaignSchema";
 
 const prices: AdvertiserPrice[] = [
   {

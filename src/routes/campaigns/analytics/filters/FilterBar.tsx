@@ -1,9 +1,9 @@
-import { Box } from "@mui/material";
-import { TimeFilter } from "./TimeFilter";
 import { PerformanceFilter } from "@/graphql-client/graphql";
+import { ReportMenu } from "@/user/reporting/ReportMenu";
+import { Box } from "@mui/material";
 import { Dispatch } from "react";
 import { OsFilter } from "./OsFilter";
-import { ReportMenu } from "@/user/reporting/ReportMenu";
+import { TimeFilter } from "./TimeFilter";
 
 export interface FilterProps {
   filters: PerformanceFilter;

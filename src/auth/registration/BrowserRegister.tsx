@@ -1,13 +1,13 @@
-import { Form, Formik } from "formik";
+import { useRegister } from "@/auth/hooks/mutations/useRegister";
+import { BrowserForm } from "@/auth/registration/BrowserForm";
+import { RegistrationContainer } from "@/auth/registration/RegistrationContainer";
 import { initialValues, RegistrationForm } from "@/auth/registration/types";
 import { FormikSubmitButton } from "@/form/FormikButton";
-import { useRegister } from "@/auth/hooks/mutations/useRegister";
-import { Box } from "@mui/material";
 import { PersistRegistrationValues } from "@/form/PersistRegistrationValues";
 import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
-import { RegistrationContainer } from "@/auth/registration/RegistrationContainer";
-import { BrowserForm } from "@/auth/registration/BrowserForm";
 import { RegistrationSchema } from "@/validation/RegistrationSchema";
+import { Box } from "@mui/material";
+import { Form, Formik } from "formik";
 
 export function BrowserRegister() {
   useTrackMatomoPageView({

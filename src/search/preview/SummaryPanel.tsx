@@ -1,15 +1,15 @@
 import { CardContainer } from "@/components/Card/CardContainer";
+import { formatWholeNumber } from "@/user/library/format";
+import ArticleIcon from "@mui/icons-material/Article";
+import DomainIcon from "@mui/icons-material/Domain";
+import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
+import PanToolAltOutlinedIcon from "@mui/icons-material/PanToolAltOutlined";
+import PercentIcon from "@mui/icons-material/Percent";
+import PublicIcon from "@mui/icons-material/Public";
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import { Box, Typography } from "@mui/material";
 import { ReactNode } from "react";
-import PublicIcon from "@mui/icons-material/Public";
-import DomainIcon from "@mui/icons-material/Domain";
-import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
-import PanToolAltOutlinedIcon from "@mui/icons-material/PanToolAltOutlined";
-import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
-import PercentIcon from "@mui/icons-material/Percent";
-import ArticleIcon from "@mui/icons-material/Article";
 import { SearchData } from "./data";
-import { formatWholeNumber } from "@/user/library/format";
 
 function SummaryEntry({
   title,

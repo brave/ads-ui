@@ -1,8 +1,8 @@
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
-import { Skeleton, Typography } from "@mui/material";
 import { CardContainer } from "@/components/Card/CardContainer";
-import { useGetAdvertiserAccountBalance } from "@/user/hooks/useGetAdvertiserAccountBalance";
 import { renderMonetaryAmount } from "@/components/Datagrid/renderers";
+import { useGetAdvertiserAccountBalance } from "@/user/hooks/useGetAdvertiserAccountBalance";
+import { Skeleton, Typography } from "@mui/material";
 
 export function AccountBalance() {
   const { advertiser } = useAdvertiser();

@@ -1,11 +1,11 @@
-import * as Highcharts from "highcharts";
-import { Alert, AlertTitle } from "@mui/material";
-import dayjs from "dayjs";
-import { Suspense } from "react";
 import { FullScreenProgress } from "@/components/FullScreenProgress";
+import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { CampaignAnalytics } from "@/routes/campaigns/analytics/CampaignAnalytics";
 import { CampaignOverviewProps } from "@/util/CampaignIdProps";
-import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
+import { Alert, AlertTitle } from "@mui/material";
+import dayjs from "dayjs";
+import * as Highcharts from "highcharts";
+import { Suspense } from "react";
 
 Highcharts.setOptions({
   lang: {

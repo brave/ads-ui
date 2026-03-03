@@ -1,8 +1,8 @@
-import { useBreakdownParams } from "../hooks";
-import { BREAKDOWNS } from "../breakdowns";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import { BREAKDOWNS } from "../breakdowns";
+import { useBreakdownParams } from "../hooks";
 
 export function VerticalBreakdown() {
   const { selected, setSelected, forceDefaultBreakdownSelection } =

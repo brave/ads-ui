@@ -1,8 +1,8 @@
 import { DisplayedMetricsFragment } from "@/graphql-client/graphql";
-import { MetricDefinition } from "../metrics";
-import { SeriesSplineOptions, SeriesTooltipOptionsObject } from "highcharts";
-import dayjs from "dayjs";
 import BigNumber from "bignumber.js";
+import dayjs from "dayjs";
+import { SeriesSplineOptions, SeriesTooltipOptionsObject } from "highcharts";
+import { MetricDefinition } from "../metrics";
 
 type Interval = "day" | "hour";
 

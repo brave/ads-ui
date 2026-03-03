@@ -1,7 +1,7 @@
 import { SearchPreview } from "@/components/Creatives/SearchPreview";
+import LoopIcon from "@mui/icons-material/Loop";
 import { Box, IconButton, ListItem } from "@mui/material";
 import React, { DispatchWithoutAction } from "react";
-import LoopIcon from "@mui/icons-material/Loop";
 import { LandingPageDetail } from "./LandingPageDetail";
 import { LandingPageInfo } from "./data";
 

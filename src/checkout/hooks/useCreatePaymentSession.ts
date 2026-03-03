@@ -1,8 +1,8 @@
-import { createPaymentSession } from "@/checkout/lib";
-import { useCallback, useState } from "react";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
-import { useHistory } from "react-router-dom";
+import { createPaymentSession } from "@/checkout/lib";
 import { PaymentType } from "@/graphql-client/graphql";
+import { useCallback, useState } from "react";
+import { useHistory } from "react-router-dom";
 
 export function useCreatePaymentSession() {
   const [loading, setLoading] = useState(false);

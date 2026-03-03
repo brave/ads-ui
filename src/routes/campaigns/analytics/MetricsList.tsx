@@ -1,7 +1,7 @@
 import { DisplayedMetricsFragment } from "@/graphql-client/graphql";
+import { CampaignOverviewProps } from "@/util/CampaignIdProps";
 import { getMetricListForCampaign } from "./metrics";
 import { MetricSelector } from "./MetricSelector";
-import { CampaignOverviewProps } from "@/util/CampaignIdProps";
 
 interface Props extends CampaignOverviewProps {
   dataSource: DisplayedMetricsFragment | undefined;

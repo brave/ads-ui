@@ -1,12 +1,12 @@
+import { FullScreenProgress } from "@/components/FullScreenProgress";
+import { BannerHeightProvider, Navbar } from "@/components/Navigation/Navbar";
 import { ErrorBoundary } from "@/ErrorBoundary";
-import { Navbar, BannerHeightProvider } from "@/components/Navigation/Navbar";
 import { Box } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useLandingPageData } from "./data";
-import { SearchPreviewResults } from "./SearchPreviewResults";
-import { FullScreenProgress } from "@/components/FullScreenProgress";
 import { NoPreviewAvailable } from "./NoPreviewAvailable";
 import { extractOptionsFromUrlSlug } from "./options";
+import { SearchPreviewResults } from "./SearchPreviewResults";
 
 export default function SearchPreviewPage() {
   const { slug } = useParams<{ slug: string }>();

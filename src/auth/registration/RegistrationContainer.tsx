@@ -1,11 +1,11 @@
-import { PropsWithChildren } from "react";
-import { PaddedCardContainer } from "@/components/Card/PaddedCardContainer";
 import logo from "@/assets/images/brave-icon-release-color.svg";
-import Typography from "@mui/material/Typography";
 import { PrivacyPolicy } from "@/basic-attention-token/PrivacyPolicy";
 import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
 import { Background } from "@/components/Background/Background";
+import { PaddedCardContainer } from "@/components/Card/PaddedCardContainer";
 import { Box, Toolbar } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import { PropsWithChildren } from "react";
 
 export function RegistrationContainer(
   props: PropsWithChildren & { isSearch?: boolean },
