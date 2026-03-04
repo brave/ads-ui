@@ -1,5 +1,5 @@
-import { PropsWithChildren } from "react";
 import { Link, Typography } from "@mui/material";
+import { PropsWithChildren } from "react";
 
 const PolicyLink = (props: { to: string } & PropsWithChildren) => (
   <Link

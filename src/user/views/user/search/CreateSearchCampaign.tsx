@@ -1,18 +1,18 @@
-import { Box, Container } from "@mui/material";
-import { CountryDomain } from "./types";
 import { CardContainer } from "@/components/Card/CardContainer";
+import { useCountries } from "@/components/Country/useCountries";
 import { graphql } from "@/graphql-client";
 import { useQuery } from "@apollo/client";
-import { LandingPageList } from "./LandingPageList";
-import { useBasket } from "./basket";
-import { useCountries } from "@/components/Country/useCountries";
-import { SummaryPanel } from "./SummaryPanel";
-import { useMemo, useState } from "react";
-import { SetupProgress, Steps } from "./SetupProgress";
-import { Finalize } from "./Finalize";
-import { SearchOptions, SearchOptionsSchema } from "./form";
+import { Box, Container } from "@mui/material";
 import { Form, Formik } from "formik";
+import { useMemo, useState } from "react";
+import { Finalize } from "./Finalize";
+import { LandingPageList } from "./LandingPageList";
+import { SetupProgress, Steps } from "./SetupProgress";
+import { SummaryPanel } from "./SummaryPanel";
+import { useBasket } from "./basket";
+import { SearchOptions, SearchOptionsSchema } from "./form";
 import { generateAndDownloadFile } from "./generate-file";
+import { CountryDomain } from "./types";
 
 const CreateSearchCampaignLandingPageList = graphql(`
   query CreateSearchCampaignLandingPageList(

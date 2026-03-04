@@ -1,3 +1,11 @@
+import braveDark from "@/assets/images/full-brave-brand-black.svg";
+import brave from "@/assets/images/full-brave-brand.svg";
+import { useIsAuthenticated } from "@/auth/hooks/queries/useIsAuthenticated";
+import { PageLink } from "@/components/AppBar/PageLink";
+import { SupportMenu } from "@/components/Drawer/SupportMenu";
+import { AccountMenu } from "@/components/Navigation/AccountMenu";
+import { useIsMobile } from "@/hooks/useIsMobile";
+import MenuIcon from "@mui/icons-material/Menu";
 import {
   AppBar,
   Box,
@@ -10,16 +18,8 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import brave from "@/assets/images/full-brave-brand.svg";
-import braveDark from "@/assets/images/full-brave-brand-black.svg";
-import { Link as RouterLink, useRouteMatch } from "react-router-dom";
-import { useIsAuthenticated } from "@/auth/hooks/queries/useIsAuthenticated";
-import { useIsMobile } from "@/hooks/useIsMobile";
-import { SupportMenu } from "@/components/Drawer/SupportMenu";
-import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
-import { PageLink } from "@/components/AppBar/PageLink";
-import { AccountMenu } from "@/components/Navigation/AccountMenu";
+import { Link as RouterLink, useRouteMatch } from "react-router-dom";
 
 export function LandingPageAppBar() {
   const match = useRouteMatch();
@@ -33,14 +33,14 @@ export function LandingPageAppBar() {
       component: (
         <PageLink
           to="/register/browser"
-          msg={"Get started"}
+          msg="Brave Browser Ads"
           textColor={textColor}
         />
       ),
     },
     {
       component: (
-        <PageLink to="/search" msg={"Brave Search Ads"} textColor={textColor} />
+        <PageLink to="/search" msg="Brave Search Ads" textColor={textColor} />
       ),
     },
     {

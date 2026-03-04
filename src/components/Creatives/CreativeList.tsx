@@ -1,21 +1,21 @@
-import { uiTextForCreativeTypeCode } from "@/user/library";
-import { CardContainer } from "@/components/Card/CardContainer";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
-import { ErrorDetail } from "@/components/Error/ErrorDetail";
-import MiniSideBar from "@/components/Drawer/MiniSideBar";
-import { Box, Link, List, Typography } from "@mui/material";
 import { Status } from "@/components/Campaigns/Status";
-import { Link as RouterLink } from "react-router-dom";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { CardContainer } from "@/components/Card/CardContainer";
 import { CreativeStatusSwitch } from "@/components/Creatives/CreativeStatusSwitch";
 import { CustomToolbar } from "@/components/Datagrid/CustomToolbar";
+import MiniSideBar from "@/components/Drawer/MiniSideBar";
+import { ErrorDetail } from "@/components/Error/ErrorDetail";
 import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
+import { uiTextForCreativeTypeCode } from "@/user/library";
+import { Box, Link, List, Typography } from "@mui/material";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { Link as RouterLink } from "react-router-dom";
 
-import { useQuery } from "@apollo/client";
 import {
   AdvertiserCreativesDocument,
   CreativeFragment,
 } from "@/graphql-client/graphql";
+import { useQuery } from "@apollo/client";
 const ALLOWED_TYPES = ["notification_all_v1"];
 
 export function CreativeList() {

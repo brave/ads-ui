@@ -1,10 +1,10 @@
-import { Box, IconButton, Typography } from "@mui/material";
-import { PropsWithChildren } from "react";
 import { FormikTextField } from "@/form/FormikHelpers";
-import { FieldArray, useFormikContext } from "formik";
-import { SearchOptions } from "./form";
-import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import { Box, IconButton, Typography } from "@mui/material";
+import { FieldArray, useFormikContext } from "formik";
+import { PropsWithChildren } from "react";
+import { SearchOptions } from "./form";
 
 function Section({ children, title }: { title: string } & PropsWithChildren) {
   return (

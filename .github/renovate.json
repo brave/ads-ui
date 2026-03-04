@@ -4,7 +4,7 @@
     "config:js-app",
     ":semanticCommits",
     ":semanticCommitTypeAll(chore)",
-    "npm:unpublishSafe",
+    "security:minimumReleaseAgeNpm",
     "helpers:pinGitHubActionDigests",
     "group:allNonMajor"
   ],
@@ -16,7 +16,7 @@
     },
     {
       "matchUpdateTypes": ["minor", "major", "patch"],
-      "schedule": ["* 0-8 * * *"]
+      "schedule": ["* 0-8 * * 1,4"]
     },
     {
       "matchDepTypes": ["pnpm.overrides"],

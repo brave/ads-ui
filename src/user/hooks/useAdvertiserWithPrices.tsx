@@ -1,7 +1,5 @@
-import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
-import { useState } from "react";
 import { IAdvertiser } from "@/auth/context/auth.interface";
-import _ from "lodash";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import {
   AdvertiserPriceFragment,
   AdvertiserPricesDocument,
@@ -9,6 +7,8 @@ import {
 } from "@/graphql-client/graphql";
 import { Billing } from "@/user/views/adsManager/types";
 import { useQuery } from "@apollo/client";
+import _ from "lodash";
+import { useState } from "react";
 
 export type AdvertiserPrice = Omit<AdvertiserPriceFragment, "billingType"> & {
   billingType: Billing;

@@ -1,5 +1,10 @@
-import { useContext, useState } from "react";
-import _ from "lodash";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
+import { setActiveAdvertiser } from "@/auth/util";
+import { CardContainer } from "@/components/Card/CardContainer";
+import MiniSideBar from "@/components/Drawer/MiniSideBar";
+import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
+import { DraftContext } from "@/state/context";
+import { AccountBalance } from "@/user/settings/AccountBalance";
 import {
   Box,
   Container,
@@ -11,13 +16,8 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
-import { setActiveAdvertiser } from "@/auth/util";
-import { CardContainer } from "@/components/Card/CardContainer";
-import { DraftContext } from "@/state/context";
-import MiniSideBar from "@/components/Drawer/MiniSideBar";
-import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
-import { AccountBalance } from "@/user/settings/AccountBalance";
+import _ from "lodash";
+import { useContext, useState } from "react";
 
 const Settings = () => {
   const { trackMatomoEvent } = useTrackWithMatomo({

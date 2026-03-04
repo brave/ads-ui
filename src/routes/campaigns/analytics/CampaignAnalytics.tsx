@@ -1,14 +1,14 @@
-import { graphql } from "@/graphql-client";
-import { useQuery } from "@apollo/client";
-import { MetricsList } from "./MetricsList";
-import { Box, Card, Stack, Typography } from "@mui/material";
-import { useCampaignAnalyticFilter } from "./hooks";
-import { FilterBar } from "./filters/FilterBar";
-import { ResultsPane } from "./ResultsPane";
-import { CampaignOverviewProps } from "@/util/CampaignIdProps";
-import { ErrorDetail } from "@/components/Error/ErrorDetail";
 import { Status } from "@/components/Campaigns/Status";
+import { ErrorDetail } from "@/components/Error/ErrorDetail";
+import { graphql } from "@/graphql-client";
 import { VerticalBreakdown } from "@/routes/campaigns/analytics/filters/BreakdownSelector";
+import { CampaignOverviewProps } from "@/util/CampaignIdProps";
+import { useQuery } from "@apollo/client";
+import { Box, Card, Stack, Typography } from "@mui/material";
+import { FilterBar } from "./filters/FilterBar";
+import { useCampaignAnalyticFilter } from "./hooks";
+import { MetricsList } from "./MetricsList";
+import { ResultsPane } from "./ResultsPane";
 
 const Analytics_Load = graphql(`
   query CampaignAnalytics($filter: PerformanceFilter!) {

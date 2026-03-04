@@ -1,8 +1,8 @@
-import { Box, Stack, Toolbar, Typography } from "@mui/material";
 import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
 import { Background } from "@/components/Background/Background";
 import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
 import { TrackEventParams } from "@jonkoops/matomo-tracker-react/lib/types";
+import { Box, Stack, Toolbar, Typography } from "@mui/material";
 import { useEffect } from "react";
 
 export function BraveAdsContactFrame() {

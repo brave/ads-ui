@@ -1,13 +1,13 @@
-import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import { FormikSwitch } from "@/form/FormikHelpers";
+import { SegmentFragment, SegmentsDocument } from "@/graphql-client/graphql";
+import { segmentNameWithNoDash } from "@/util/segment";
+import { useQuery } from "@apollo/client";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import { Autocomplete, Box, Checkbox, TextField } from "@mui/material";
 import { useField } from "formik";
 import _ from "lodash";
 import { useEffect } from "react";
-import { FormikSwitch } from "@/form/FormikHelpers";
-import { segmentNameWithNoDash } from "@/util/segment";
-import { useQuery } from "@apollo/client";
-import { SegmentFragment, SegmentsDocument } from "@/graphql-client/graphql";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;

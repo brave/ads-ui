@@ -1,5 +1,5 @@
-import { CreativeSchema } from "./CreativeSchema";
 import { produce } from "immer";
+import { CreativeSchema } from "./CreativeSchema";
 
 const validPushCreative = {
   name: "some creative",

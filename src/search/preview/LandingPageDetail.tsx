@@ -1,9 +1,9 @@
+import { SkeletonQueryList } from "@/user/views/user/search/LandingPageDetail";
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, Chip, IconButton, Popover, Typography } from "@mui/material";
+import dayjs from "dayjs";
 import { useState } from "react";
 import { LandingPageInfo, useKeywordData } from "./data";
-import dayjs from "dayjs";
-import { SkeletonQueryList } from "@/user/views/user/search/LandingPageDetail";
 
 function QueryList({ queries }: { queries: string[] }) {
   const [visibleQueryCount, setVisibleQueryCount] = useState(20);

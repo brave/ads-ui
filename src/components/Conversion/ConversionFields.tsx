@@ -1,6 +1,6 @@
-import { Box, Typography } from "@mui/material";
-import { FormikRadioControl, FormikTextField } from "@/form/FormikHelpers";
 import { LearnMoreButton } from "@/components/Button/LearnMoreButton";
+import { FormikRadioControl, FormikTextField } from "@/form/FormikHelpers";
+import { Box, Typography } from "@mui/material";
 
 interface Props {
   name: string;

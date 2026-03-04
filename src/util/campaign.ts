@@ -1,6 +1,6 @@
 import { CampaignFormat } from "@/graphql-client/graphql";
-import dayjs from "dayjs";
 import BigNumber from "bignumber.js";
+import dayjs from "dayjs";
 
 export function uiLabelsForCampaignFormat(format: CampaignFormat): string {
   const CAMPAIGN_FORMATS = [

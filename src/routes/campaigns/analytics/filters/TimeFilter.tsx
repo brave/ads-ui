@@ -1,11 +1,11 @@
+import { DateRangePicker } from "@/components/Date/DateRangePicker";
+import { useStickyState } from "@/hooks/useStickyState";
+import { useTimeFilterParams } from "@/routes/campaigns/analytics/hooks";
+import { Box } from "@mui/material";
+import dayjs from "dayjs";
 import { FilterProps } from "./FilterBar";
 import { FilterButton } from "./FilterButton";
 import { buildTimeFilters } from "./time-filters";
-import { useTimeFilterParams } from "@/routes/campaigns/analytics/hooks";
-import dayjs from "dayjs";
-import { DateRangePicker } from "@/components/Date/DateRangePicker";
-import { Box } from "@mui/material";
-import { useStickyState } from "@/hooks/useStickyState";
 
 export function TimeFilter(props: FilterProps) {
   const [, setCustom] = useStickyState<string | undefined>(

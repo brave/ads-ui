@@ -1,15 +1,15 @@
-import { Box, Skeleton } from "@mui/material";
-import { useContext } from "react";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import { CampaignAgeFilter } from "@/components/Campaigns/CampaignAgeFilter";
-import { CampaignList } from "@/user/campaignList/CampaignList";
-import { ErrorDetail } from "@/components/Error/ErrorDetail";
 import { CardContainer } from "@/components/Card/CardContainer";
 import MiniSideBar from "@/components/Drawer/MiniSideBar";
-import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
-import { FilterContext } from "@/state/context";
-import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
+import { ErrorDetail } from "@/components/Error/ErrorDetail";
 import { AdvertiserCampaignsDocument } from "@/graphql-client/graphql";
+import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
+import { FilterContext } from "@/state/context";
+import { CampaignList } from "@/user/campaignList/CampaignList";
 import { useQuery } from "@apollo/client";
+import { Box, Skeleton } from "@mui/material";
+import { useContext } from "react";
 
 export function CampaignView() {
   useTrackMatomoPageView({ documentTitle: "Advertiser Campaigns" });

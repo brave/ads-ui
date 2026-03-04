@@ -1,4 +1,4 @@
-import { it, expect } from "vitest";
+import { expect, it } from "vitest";
 import { extractOptionsFromUrlSlug } from "./options";
 
 it("should always pass through a slug with less that 15 characters", () => {

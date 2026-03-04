@@ -1,23 +1,23 @@
+import { Close as CloseIcon } from "@mui/icons-material";
 import {
+  Alert,
   AppBar,
   Divider,
-  Stack,
-  Toolbar,
-  Alert,
   IconButton,
   Link,
+  Stack,
+  Toolbar,
 } from "@mui/material";
-import { Close as CloseIcon } from "@mui/icons-material";
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import { DraftMenu } from "@/components/Navigation/DraftMenu";
 import ads from "@/assets/images/logo.svg";
-import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
-import { NewCampaignButton } from "@/components/Navigation/NewCampaignButton";
-import { useHistory } from "react-router-dom";
-import { NewCreativeButton } from "@/components/Navigation/NewCreativeButton";
-import { AccountMenu } from "@/components/Navigation/AccountMenu";
 import { useAuthContext } from "@/auth/context/auth.hook";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
+import { AccountMenu } from "@/components/Navigation/AccountMenu";
+import { DraftMenu } from "@/components/Navigation/DraftMenu";
+import { NewCampaignButton } from "@/components/Navigation/NewCampaignButton";
+import { NewCreativeButton } from "@/components/Navigation/NewCreativeButton";
+import { useHistory } from "react-router-dom";
 
 // Context for banner height
 import { createContext, useContext } from "react";

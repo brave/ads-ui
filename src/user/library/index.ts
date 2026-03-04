@@ -1,4 +1,6 @@
 import {
+  AdFragment,
+  AdSetFragment,
   AdsManagerNewAdSetInput,
   AdsManagerUpdateAdSetInput,
   AdsManagerUpdateCampaignInput,
@@ -7,7 +9,6 @@ import {
   CreateCampaignInput,
   CreativeFragment,
 } from "@/graphql-client/graphql";
-import { AdFragment, AdSetFragment } from "@/graphql-client/graphql";
 import {
   AdSetForm,
   Billing,
@@ -17,9 +18,9 @@ import {
   initialCreative,
   Segment,
 } from "@/user/views/adsManager/types";
-import _ from "lodash";
 import BigNumber from "bignumber.js";
 import dayjs from "dayjs";
+import _ from "lodash";
 
 export function transformNewForm(form: CampaignForm): CreateCampaignInput {
   return {

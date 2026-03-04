@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/refs */
 /* ^ this should be fixed but it requires an overhaul of the code */
-import { PropsWithChildren, ReactNode, useRef } from "react";
+import { ActionButtons } from "@/components/Steps/ActionButtons";
+import { NextAndBack } from "@/components/Steps/NextAndBack";
 import {
   Box,
   CssBaseline,
@@ -12,9 +13,8 @@ import {
   Stepper,
   Toolbar,
 } from "@mui/material";
-import { NextAndBack } from "@/components/Steps/NextAndBack";
+import { PropsWithChildren, ReactNode, useRef } from "react";
 import { useHistory } from "react-router-dom";
-import { ActionButtons } from "@/components/Steps/ActionButtons";
 
 const drawerWidth = 222;
 

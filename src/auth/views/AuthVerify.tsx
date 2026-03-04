@@ -1,9 +1,9 @@
-import { AuthContainer } from "@/auth/views/components/AuthContainer";
-import { useAuthorize } from "@/auth/hooks/queries/useAuthorize";
-import { Link as RouterLink, Switch, useHistory } from "react-router-dom";
-import { Alert, AlertTitle, Button, Typography } from "@mui/material";
-import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
 import logo from "@/assets/images/brave-icon-release-color.svg";
+import { useAuthorize } from "@/auth/hooks/queries/useAuthorize";
+import { AuthContainer } from "@/auth/views/components/AuthContainer";
+import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
+import { Alert, AlertTitle, Button, Typography } from "@mui/material";
+import { Link as RouterLink, Switch, useHistory } from "react-router-dom";
 
 export function AuthVerify() {
   const { trackMatomoEvent } = useTrackWithMatomo({

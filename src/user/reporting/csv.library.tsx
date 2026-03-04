@@ -1,6 +1,6 @@
-import { useCallback, useState } from "react";
-import { buildAdServerEndpoint } from "@/util/environment";
 import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
+import { buildAdServerEndpoint } from "@/util/environment";
+import { useCallback, useState } from "react";
 
 interface DownloadProps {
   onComplete?: () => void;

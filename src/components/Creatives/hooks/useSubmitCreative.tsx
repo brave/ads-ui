@@ -1,16 +1,16 @@
-import { useCallback } from "react";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
 import {
   AdvertiserCreativesDocument,
   CreateCreativeDocument,
 } from "@/graphql-client/graphql";
-import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
-import { useHistory } from "react-router-dom";
-import { validCreativeFields } from "@/user/library";
-import _ from "lodash";
-import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
-import { useMutation } from "@apollo/client";
-import { CreativeInputWithType } from "@/user/views/adsManager/types";
 import { graphql } from "@/graphql-client/index";
+import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
+import { validCreativeFields } from "@/user/library";
+import { CreativeInputWithType } from "@/user/views/adsManager/types";
+import { useMutation } from "@apollo/client";
+import _ from "lodash";
+import { useCallback } from "react";
+import { useHistory } from "react-router-dom";
 
 const Update_Creative_Payload = graphql(`
   mutation AdsManagerUpdateCreativePayload(

@@ -1,15 +1,15 @@
-import { Background } from "@/components/Background/Background";
-import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
-import { Box, Toolbar } from "@mui/material";
-import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
-import { GetStartedLandingPage } from "@/auth/views/GetStartedLandingPage";
-import { BottomSwoop } from "@/components/Assets/BottomSwoop";
-import { TopSwoop } from "@/components/Assets/TopSwoop";
-import { WhyUseBraveAds } from "@/auth/views/components/WhyUseBraveAds";
+import { FooterCTA } from "@/auth/views/components/FooterCTA";
+import { Inquiries } from "@/auth/views/components/Inquiries";
 import { WhatIsBrave } from "@/auth/views/components/WhatIsBrave";
 import { WhatIsBraveAds } from "@/auth/views/components/WhatIsBraveAds";
-import { Inquiries } from "@/auth/views/components/Inquiries";
-import { FooterCTA } from "@/auth/views/components/FooterCTA";
+import { WhyUseBraveAds } from "@/auth/views/components/WhyUseBraveAds";
+import { GetStartedLandingPage } from "@/auth/views/GetStartedLandingPage";
+import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
+import { BottomSwoop } from "@/components/Assets/BottomSwoop";
+import { TopSwoop } from "@/components/Assets/TopSwoop";
+import { Background } from "@/components/Background/Background";
+import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
+import { Box, Toolbar } from "@mui/material";
 
 export function LandingPage() {
   useTrackMatomoPageView({ documentTitle: "Landing Page" });

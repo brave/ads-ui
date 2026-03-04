@@ -1,6 +1,6 @@
-import { Link as RouterLink } from "react-router-dom";
-import { Typography } from "@mui/material";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { Typography } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 
 interface Props {
   to: string;

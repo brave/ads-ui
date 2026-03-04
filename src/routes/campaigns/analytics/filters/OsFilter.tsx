@@ -1,7 +1,7 @@
+import { applySelection } from "@/routes/campaigns/analytics/filters/multi-filters";
+import { useOsFilterParams } from "@/routes/campaigns/analytics/hooks";
 import { FilterProps } from "./FilterBar";
 import { FilterButton } from "./FilterButton";
-import { useOsFilterParams } from "@/routes/campaigns/analytics/hooks";
-import { applySelection } from "@/routes/campaigns/analytics/filters/multi-filters";
 
 interface OsFilterEntry {
   label: string;

@@ -1,5 +1,5 @@
-import { Box, Typography } from "@mui/material";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import { Box, Typography } from "@mui/material";
 
 export function DisplayError({ error }: { error: string | undefined }) {
   if (!error) return null;

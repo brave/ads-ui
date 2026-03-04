@@ -1,4 +1,6 @@
+import { graphql } from "@/graphql-client";
 import { SearchProspectsLandingPageDetailFragment } from "@/graphql-client/graphql";
+import { useQuery } from "@apollo/client";
 import SearchIcon from "@mui/icons-material/Search";
 import {
   Box,
@@ -8,12 +10,9 @@ import {
   Skeleton,
   Typography,
 } from "@mui/material";
+import _ from "lodash";
 import { useState } from "react";
 import { CountryDomain } from "./types";
-import { useQuery } from "@apollo/client";
-import { graphql } from "@/graphql-client";
-import {} from "@/graphql-client/graphql";
-import _ from "lodash";
 
 const SearchProspects_LandingPageDetail = graphql(`
   query SearchProspectsLandingPageDetail(

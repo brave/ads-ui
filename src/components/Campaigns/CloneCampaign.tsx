@@ -1,3 +1,14 @@
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
+import {
+  AdvertiserCampaignsDocument,
+  CampaignFormat,
+  CampaignSource,
+  CampaignSummaryFragment,
+} from "@/graphql-client/graphql";
+import { graphql } from "@/graphql-client/index";
+import { FilterContext } from "@/state/context";
+import { useMutation } from "@apollo/client";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import {
   Box,
   Button,
@@ -9,19 +20,8 @@ import {
   LinearProgress,
   Tooltip,
 } from "@mui/material";
-import { useHistory } from "react-router-dom";
 import { useContext, useState } from "react";
-import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import { FilterContext } from "@/state/context";
-import {
-  AdvertiserCampaignsDocument,
-  CampaignFormat,
-  CampaignSource,
-  CampaignSummaryFragment,
-} from "@/graphql-client/graphql";
-import { useMutation } from "@apollo/client";
-import { graphql } from "@/graphql-client/index";
+import { useHistory } from "react-router-dom";
 
 interface Props {
   campaign?: CampaignSummaryFragment;

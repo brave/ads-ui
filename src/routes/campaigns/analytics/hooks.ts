@@ -1,24 +1,24 @@
-import { MetricDefinition, getMetricDefinition } from "./metrics";
+import { PerformanceFilter } from "@/graphql-client/graphql";
+import { useStickyState } from "@/hooks/useStickyState";
+import {
+  getOsFilter,
+  LocalizedOsFilterEntry,
+} from "@/routes/campaigns/analytics/filters/OsFilter";
+import {
+  buildTimeFilters,
+  getTimeFilter,
+  TimeFilterEntry,
+} from "@/routes/campaigns/analytics/filters/time-filters";
+import { CampaignOverviewProps } from "@/util/CampaignIdProps";
 import _ from "lodash";
+import { Dispatch, DispatchWithoutAction, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import {
   BREAKDOWNS,
   getBreakdownDefinition,
   LocalizedBreakdown,
 } from "./breakdowns";
-import { Dispatch, DispatchWithoutAction, useEffect, useState } from "react";
-import {
-  buildTimeFilters,
-  getTimeFilter,
-  TimeFilterEntry,
-} from "@/routes/campaigns/analytics/filters/time-filters";
-import {
-  getOsFilter,
-  LocalizedOsFilterEntry,
-} from "@/routes/campaigns/analytics/filters/OsFilter";
-import { useStickyState } from "@/hooks/useStickyState";
-import { PerformanceFilter } from "@/graphql-client/graphql";
-import { CampaignOverviewProps } from "@/util/CampaignIdProps";
+import { getMetricDefinition, MetricDefinition } from "./metrics";
 
 // it's nicest to use , to separate metrics, but that gets URL encoded.
 // but "space" gets encoded as "+", which is ok
