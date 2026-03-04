@@ -1,35 +1,35 @@
 import { useMemo, useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
+import { AdvertiserDetailsForm } from "@/auth/components/AdvertiserDetailsForm";
+import { useIsAuthenticated } from "@/auth/hooks/queries/useIsAuthenticated";
+import { CreativeForm } from "@/components/Creatives/CreativeForm";
+import { CreativeList } from "@/components/Creatives/CreativeList";
+import {
+  BannerHeightProvider,
+  Navbar,
+  NAVBAR_HEIGHT,
+  useBannerHeight,
+} from "@/components/Navigation/Navbar";
+import { ProtectedRoute } from "@/components/Route/ProtectedRoute";
+import { ErrorBoundary } from "@/ErrorBoundary";
+import { FilterContext } from "@/state/context";
+import { CampaignView } from "@/user/views/user/CampaignView";
+import { Profile } from "@/user/views/user/Profile";
 import {
   ApolloClient,
   ApolloProvider,
   createHttpLink,
   InMemoryCache,
 } from "@apollo/client";
-import Settings from "./settings/Settings";
 import { Box } from "@mui/material";
-import { NewCampaign } from "./views/adsManager/views/advanced/components/form/NewCampaign";
-import { EditCampaign } from "./views/adsManager/views/advanced/components/form/EditCampaign";
-import { CompletionForm } from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
-import {
-  Navbar,
-  BannerHeightProvider,
-  useBannerHeight,
-} from "@/components/Navigation/Navbar";
-import { CampaignView } from "@/user/views/user/CampaignView";
-import { Profile } from "@/user/views/user/Profile";
-import { FilterContext } from "@/state/context";
-import { CreativeList } from "@/components/Creatives/CreativeList";
-import { CreativeForm } from "@/components/Creatives/CreativeForm";
-import { ProtectedRoute } from "@/components/Route/ProtectedRoute";
-import { AdvertiserDetailsForm } from "@/auth/components/AdvertiserDetailsForm";
-import { ErrorBoundary } from "@/ErrorBoundary";
-import { CampaignReportViewSelector } from "./views/user/CampaignReportViewSelector";
 import dayjs from "dayjs";
-import { useIsAuthenticated } from "@/auth/hooks/queries/useIsAuthenticated";
+import Settings from "./settings/Settings";
+import { CompletionForm } from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
+import { EditCampaign } from "./views/adsManager/views/advanced/components/form/EditCampaign";
+import { NewCampaign } from "./views/adsManager/views/advanced/components/form/NewCampaign";
+import { CampaignReportViewSelector } from "./views/user/CampaignReportViewSelector";
 import { CreateSearchCampaignBetaPage } from "./views/user/search/CreateSearchCampaignBetaPage";
-import { NAVBAR_HEIGHT } from "@/components/Navigation/Navbar";
 
 // Component that uses the banner height
 function UserContent() {

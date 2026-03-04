@@ -1,12 +1,12 @@
-import { Box, LinearProgress } from "@mui/material";
 import { AlwaysOnFormButton } from "@/components/Button/AlwaysOnFormButton";
-import { useParams } from "react-router-dom";
-import { CampaignFormat } from "@/graphql-client/graphql";
-import { ConsultAccountManager } from "./reports/ConsultAccountManager";
-import { useQuery } from "@apollo/client";
-import { AnalyticsOverview } from "@/routes/campaigns/analytics/AnalyticsOverview";
 import MiniSideBar from "@/components/Drawer/MiniSideBar";
+import { CampaignFormat } from "@/graphql-client/graphql";
 import { graphql } from "@/graphql-client/index";
+import { AnalyticsOverview } from "@/routes/campaigns/analytics/AnalyticsOverview";
+import { useQuery } from "@apollo/client";
+import { Box, LinearProgress } from "@mui/material";
+import { useParams } from "react-router-dom";
+import { ConsultAccountManager } from "./reports/ConsultAccountManager";
 
 interface Params {
   campaignId: string;

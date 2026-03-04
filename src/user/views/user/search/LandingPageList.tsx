@@ -2,8 +2,8 @@ import { SearchProspectsLandingPageListFragment } from "@/graphql-client/graphql
 import { LandingPageListEntry } from "./LandingPageListEntry";
 import { Basket } from "./basket";
 
-import { List, type RowComponentProps } from "react-window";
 import { FullScreenProgress } from "@/components/FullScreenProgress";
+import { List, type RowComponentProps } from "react-window";
 import { CountryDomain } from "./types";
 
 interface Props {

@@ -1,5 +1,5 @@
-import { Link } from "@mui/material";
 import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
+import { Link } from "@mui/material";
 import { TypographyOwnProps } from "@mui/material/Typography";
 
 export function LearnMoreButton(props: {

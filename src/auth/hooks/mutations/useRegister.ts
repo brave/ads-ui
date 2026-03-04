@@ -1,8 +1,8 @@
-import { useCallback, useState } from "react";
-import { RegistrationForm } from "@/auth/registration/types";
 import { sendMarketingEmail, submitRegistration } from "@/auth/lib";
+import { RegistrationForm } from "@/auth/registration/types";
 import { clearRegistrationValues } from "@/form/PersistRegistrationValues";
 import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
+import { useCallback, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 export function useRegister() {

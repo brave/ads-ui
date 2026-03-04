@@ -1,6 +1,6 @@
 import { AdvertiserRegistered } from "@/auth/registration/AdvertiserRegistered";
-import { Redirect, Route, Switch } from "react-router-dom";
 import { BrowserRegister } from "@/auth/registration/BrowserRegister";
+import { Redirect, Route, Switch } from "react-router-dom";
 
 export default function Register() {
   return (

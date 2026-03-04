@@ -1,8 +1,8 @@
-import { getMetricDefinition } from "../metrics";
-import { DataValues, makeLineChartSeries } from "./series";
-import assert from "node:assert";
 import { DeepPartial } from "@apollo/client/utilities";
 import dayjs from "dayjs";
+import assert from "node:assert";
+import { getMetricDefinition } from "../metrics";
+import { DataValues, makeLineChartSeries } from "./series";
 
 it("should populate zero values for missing days in the date range", () => {
   // why? we show a line graph. If there are missing days, the graph will draw the line

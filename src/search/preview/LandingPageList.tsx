@@ -1,7 +1,7 @@
 import { LandingPageListEntry } from "./LandingPageListEntry";
 
-import { List, type RowComponentProps } from "react-window";
 import { Basket } from "@/user/views/user/search/basket";
+import { List, type RowComponentProps } from "react-window";
 import { LandingPageInfo } from "./data";
 
 interface Props {

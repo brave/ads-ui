@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-import { Button, Link, TextField, Typography } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
 import { useGetLink } from "@/auth/hooks/mutations/useGetLink";
 import { AuthContainer } from "@/auth/views/components/AuthContainer";
 import { useTrackWithMatomo } from "@/hooks/useTrackWithMatomo";
+import { Button, Link, TextField, Typography } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 
 export default function MagicLink() {
   const { trackMatomoEvent } = useTrackWithMatomo({

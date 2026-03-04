@@ -1,8 +1,8 @@
-import { FormikTextField } from "@/form/FormikHelpers";
-import { MarketingOptIn } from "@/auth/registration/MarketingOptIn";
 import { MarketingChannel } from "@/auth/registration/MarketingChannel";
-import { Box } from "@mui/material";
+import { MarketingOptIn } from "@/auth/registration/MarketingOptIn";
 import { VerticalPicker } from "@/auth/registration/VerticalPicker";
+import { FormikTextField } from "@/form/FormikHelpers";
+import { Box } from "@mui/material";
 
 export function BrowserForm() {
   return (

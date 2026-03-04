@@ -2,11 +2,11 @@ import {
   DailyMetricValuesFragment,
   PerformanceFilter,
 } from "@/graphql-client/graphql";
-import { useBreakdownParams } from "./hooks";
-import { TabularData } from "./TabularData";
+import { CampaignOverviewProps } from "@/util/CampaignIdProps";
 import { DailyGraph } from "./graphs/DailyGraph";
 import { HourlyGraph } from "./graphs/HourlyGraph";
-import { CampaignOverviewProps } from "@/util/CampaignIdProps";
+import { useBreakdownParams } from "./hooks";
+import { TabularData } from "./TabularData";
 
 interface Props extends CampaignOverviewProps {
   overTimeData: DailyMetricValuesFragment[] | undefined;

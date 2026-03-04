@@ -1,9 +1,9 @@
 import BigNumber from "bignumber.js";
 import {
-  formatWholeNumber,
   formatPercentAsPercent,
   formatRateAsPercent,
   formatUsd,
+  formatWholeNumber,
 } from "./format";
 
 // NB: the expected results here assume running on an en locale!

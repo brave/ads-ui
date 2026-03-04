@@ -1,5 +1,5 @@
 import { vi } from "vitest";
-import { isDateInThePast, isDateInTheFuture } from "./isAfterEndDate";
+import { isDateInTheFuture, isDateInThePast } from "./isAfterEndDate";
 
 it("should correctly calculate if a date is after the end date", () => {
   vi.setSystemTime("2023-02-01Z");

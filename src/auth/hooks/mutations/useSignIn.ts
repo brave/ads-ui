@@ -1,6 +1,6 @@
-import { useCallback, useState } from "react";
 import { useAuthContext } from "@/auth/context/auth.hook";
 import { getAdvertiserMessage, getCredentials } from "@/auth/lib";
+import { useCallback, useState } from "react";
 
 interface Options {
   onError?: (message: string) => void;

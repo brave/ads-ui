@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
 import {
   IAdvertiser,
   IAuthProviderProps,
   IAuthState,
 } from "@/auth/context/auth.interface";
 import { IAuthContext, initialState } from "@/auth/context/auth.state";
-import { getAdvertiserMessage, getUser, ResponseUser } from "./lib";
 import _ from "lodash";
+import { useEffect, useState } from "react";
+import { getAdvertiserMessage, getUser, ResponseUser } from "./lib";
 import { setActiveAdvertiser } from "./util";
 
 export const IAuthProvider = ({ children }: IAuthProviderProps) => {

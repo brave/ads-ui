@@ -1,8 +1,8 @@
-import { Box, IconButton, Typography } from "@mui/material";
+import { Status } from "@/components/Campaigns/Status";
+import { Creative } from "@/user/views/adsManager/types";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import { Creative } from "@/user/views/adsManager/types";
-import { Status } from "@/components/Campaigns/Status";
+import { Box, IconButton, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 export const SelectCreativeHeader = (props: {

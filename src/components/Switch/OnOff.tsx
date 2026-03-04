@@ -1,5 +1,5 @@
-import { Switch, Tooltip, Typography } from "@mui/material";
 import { CampaignSource } from "@/graphql-client/graphql";
+import { Switch, Tooltip, Typography } from "@mui/material";
 import dayjs from "dayjs";
 
 interface Props {

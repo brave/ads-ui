@@ -1,4 +1,8 @@
-import { Link as RouterLink } from "react-router-dom";
+import { Status } from "@/components/Campaigns/Status";
+import { CardContainer } from "@/components/Card/CardContainer";
+import { ErrorDetail } from "@/components/Error/ErrorDetail";
+import { CampaignsForCreativeQuery } from "@/graphql-client/graphql";
+import { ApolloError } from "@apollo/client";
 import {
   Link,
   Table,
@@ -7,12 +11,8 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { ErrorDetail } from "@/components/Error/ErrorDetail";
-import { CardContainer } from "@/components/Card/CardContainer";
 import _ from "lodash";
-import { Status } from "@/components/Campaigns/Status";
-import { ApolloError } from "@apollo/client";
-import { CampaignsForCreativeQuery } from "@/graphql-client/graphql";
+import { Link as RouterLink } from "react-router-dom";
 
 interface Props {
   data?: CampaignsForCreativeQuery;

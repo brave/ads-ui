@@ -1,6 +1,6 @@
+import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
 import { buildAdServerV2Endpoint } from "@/util/environment";
 import { useCallback, useState } from "react";
-import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
 
 export function useGenerateApiKey() {
   const { trackMatomoEvent } = useTrackMatomoEvent();

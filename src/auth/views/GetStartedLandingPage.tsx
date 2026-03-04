@@ -1,7 +1,7 @@
+import adFormats from "@/assets/images/ad-formats-hero@1x.png";
+import { useIsAuthenticated } from "@/auth/hooks/queries/useIsAuthenticated";
 import { Box, Button, Link, Stack, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
-import { useIsAuthenticated } from "@/auth/hooks/queries/useIsAuthenticated";
-import adFormats from "@/assets/images/ad-formats-hero@1x.png";
 
 export function GetStartedLandingPage() {
   const isAuthenticated = useIsAuthenticated();

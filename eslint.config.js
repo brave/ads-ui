@@ -1,10 +1,10 @@
 import eslint from "@eslint/js";
+import graphqlPlugin from "@graphql-eslint/eslint-plugin";
+import esLintConfigPrettier from "eslint-config-prettier";
+import react from "eslint-plugin-react";
+import reactHooks from "eslint-plugin-react-hooks";
 import { defineConfig } from "eslint/config";
 import tseslint from "typescript-eslint";
-import react from "eslint-plugin-react";
-import esLintConfigPrettier from "eslint-config-prettier";
-import reactHooks from "eslint-plugin-react-hooks";
-import graphqlPlugin from "@graphql-eslint/eslint-plugin";
 
 export default defineConfig(
   eslint.configs.recommended,
