@@ -1,5 +1,5 @@
-import { Component, PropsWithChildren } from "react";
 import { ErrorDetail } from "@/components/Error/ErrorDetail";
+import { Component, PropsWithChildren } from "react";
 
 interface State {
   error: unknown | null;

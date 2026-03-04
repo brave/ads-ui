@@ -1,6 +1,6 @@
-import { PropsWithChildren } from "react";
-import { Container } from "@mui/material";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { Container } from "@mui/material";
+import { PropsWithChildren } from "react";
 
 export function Background({ children }: PropsWithChildren) {
   const isMobile = useIsMobile();

@@ -1,8 +1,8 @@
 import { SearchProspectsLandingPageListFragment } from "@/graphql-client/graphql";
-import { Basket } from "./basket";
-import { CountryDomain } from "./types";
-import { SearchOptions } from "./form";
 import { triggerBrowserDownload } from "@/util/download";
+import { Basket } from "./basket";
+import { SearchOptions } from "./form";
+import { CountryDomain } from "./types";
 
 interface Params {
   domain: CountryDomain;

@@ -1,8 +1,8 @@
-import { Alert, AlertTitle } from "@mui/material";
+import { useUser } from "@/auth/hooks/queries/useUser";
 import { useQueryStringValue } from "@/user/hooks/useQueryStringParams";
+import { Alert, AlertTitle } from "@mui/material";
 import _ from "lodash";
 import { CreateSearchCampaign } from "./CreateSearchCampaign";
-import { useUser } from "@/auth/hooks/queries/useUser";
 
 // This page is a holding page so we can implement basic functionality
 // before we've completed the full flow.

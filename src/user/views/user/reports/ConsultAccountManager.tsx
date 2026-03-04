@@ -1,5 +1,5 @@
-import { Alert } from "@mui/material";
 import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
+import { Alert } from "@mui/material";
 
 export function ConsultAccountManager() {
   useTrackMatomoPageView({ documentTitle: "Consult Account Manager" });

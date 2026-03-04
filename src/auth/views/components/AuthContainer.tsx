@@ -1,9 +1,9 @@
-import { Box } from "@mui/material";
-import { Background } from "@/components/Background/Background";
-import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
-import { ReactNode } from "react";
-import { PaddedCardContainer } from "@/components/Card/PaddedCardContainer";
 import { UserRedirect } from "@/auth/components/UserRedirect";
+import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
+import { Background } from "@/components/Background/Background";
+import { PaddedCardContainer } from "@/components/Card/PaddedCardContainer";
+import { Box } from "@mui/material";
+import { ReactNode } from "react";
 
 interface Props {
   children?: ReactNode;

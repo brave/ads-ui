@@ -1,13 +1,13 @@
-import { Form, Formik } from "formik";
-import { initialValues, RegistrationForm } from "@/auth/registration/types";
-import { FormikSubmitButton } from "@/form/FormikButton";
+import logo from "@/assets/images/brave-icon-release-color.svg";
 import { useRegister } from "@/auth/hooks/mutations/useRegister";
-import { Box, Card, Typography } from "@mui/material";
+import { SearchForm } from "@/auth/registration/SearchForm";
+import { initialValues, RegistrationForm } from "@/auth/registration/types";
+import { PrivacyPolicy } from "@/basic-attention-token/PrivacyPolicy";
+import { FormikSubmitButton } from "@/form/FormikButton";
 import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { RegistrationSchema } from "@/validation/RegistrationSchema";
-import { SearchForm } from "@/auth/registration/SearchForm";
-import logo from "@/assets/images/brave-icon-release-color.svg";
-import { PrivacyPolicy } from "@/basic-attention-token/PrivacyPolicy";
+import { Box, Card, Typography } from "@mui/material";
+import { Form, Formik } from "formik";
 
 export function SearchRegister() {
   useTrackMatomoPageView({

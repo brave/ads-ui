@@ -1,7 +1,7 @@
-import { object, string } from "yup";
 import { HttpsRegex, NoSpacesRegex, SimpleUrlRegexp } from "@/validation/regex";
 import _ from "lodash";
 import * as Yup from "yup";
+import { object, string } from "yup";
 
 const validTargetUrl = () =>
   Yup.string()

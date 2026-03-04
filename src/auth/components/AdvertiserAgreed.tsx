@@ -1,6 +1,6 @@
-import { Box, Link, Stack } from "@mui/material";
-import { FormikCheckbox } from "@/form/FormikHelpers";
 import { LearnMoreButton } from "@/components/Button/LearnMoreButton";
+import { FormikCheckbox } from "@/form/FormikHelpers";
+import { Box, Link, Stack } from "@mui/material";
 
 export function AdvertiserAgreed(props: { requiresPaymentAgree: boolean }) {
   return (

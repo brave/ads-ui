@@ -1,5 +1,5 @@
-import { buildAdServerEndpoint } from "@/util/environment";
 import { PaymentType } from "@/graphql-client/graphql";
+import { buildAdServerEndpoint } from "@/util/environment";
 
 export async function createPaymentSession(
   advertiserId: string,

@@ -4,16 +4,16 @@ import { BrowserRouter } from "react-router-dom";
 
 import { App } from "./App";
 
-import "./index.css";
-import "@fontsource/poppins/latin.css";
 import "@fontsource/mulish/latin.css";
+import "@fontsource/poppins/latin.css";
+import "./index.css";
 
 import "./init_dayjs";
 
 import { IAuthProvider } from "@/auth";
 import { Environment, getEnvironment } from "@/util/environment";
-import { createInstance, MatomoProvider } from "@jonkoops/matomo-tracker-react";
 import { VERSION } from "@/util/version";
+import { createInstance, MatomoProvider } from "@jonkoops/matomo-tracker-react";
 
 // eslint-disable-next-line no-console
 console.log(

@@ -1,5 +1,6 @@
 import { SearchPreview } from "@/components/Creatives/SearchPreview";
 import { SearchProspectsLandingPageListFragment } from "@/graphql-client/graphql";
+import LoopIcon from "@mui/icons-material/Loop";
 import {
   Box,
   Checkbox,
@@ -8,7 +9,6 @@ import {
   ListItemIcon,
 } from "@mui/material";
 import React, { DispatchWithoutAction } from "react";
-import LoopIcon from "@mui/icons-material/Loop";
 import { LandingPageDetail } from "./LandingPageDetail";
 import { CountryDomain } from "./types";
 

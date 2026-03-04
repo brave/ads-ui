@@ -1,29 +1,29 @@
-import {
-  Alert,
-  Box,
-  InputAdornment,
-  LinearProgress,
-  TextField,
-  Typography,
-  Modal,
-} from "@mui/material";
-import { useFormikContext } from "formik";
+import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
+import { CreativeSelect } from "@/components/Creatives/CreativeSelect";
 import {
   AdvertiserCreativesDocument,
   CampaignFormat,
   CreativeFragment,
 } from "@/graphql-client/graphql";
-import _ from "lodash";
-import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
-import { CampaignForm } from "@/user/views/adsManager/types";
-import SearchIcon from "@mui/icons-material/Search";
-import { useContext, useRef, useState } from "react";
-import { CreativeSelect } from "@/components/Creatives/CreativeSelect";
 import { FormContext } from "@/state/context";
-import { useAdvertiserCreatives } from "@/user/hooks/useAdvertiserCreatives";
 import { modalStyles } from "@/theme";
-import { useQuery } from "@apollo/client";
 import { filterCreativesByCampaignFormat } from "@/user/ads/filterCreativesByCampaignFormat";
+import { useAdvertiserCreatives } from "@/user/hooks/useAdvertiserCreatives";
+import { CampaignForm } from "@/user/views/adsManager/types";
+import { useQuery } from "@apollo/client";
+import SearchIcon from "@mui/icons-material/Search";
+import {
+  Alert,
+  Box,
+  InputAdornment,
+  LinearProgress,
+  Modal,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { useFormikContext } from "formik";
+import _ from "lodash";
+import { useContext, useRef, useState } from "react";
 
 interface Props {
   index: number;

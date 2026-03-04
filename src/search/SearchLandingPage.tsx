@@ -1,10 +1,10 @@
-import { Box, Button, Link, Stack, Toolbar, Typography } from "@mui/material";
+import braveSearch from "@/assets/videos/setting_up_brave_search_ads.mp4";
+import { SearchRegister } from "@/auth/registration/SearchRegister";
+import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
 import { Background } from "@/components/Background/Background";
 import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
-import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
-import { SearchRegister } from "@/auth/registration/SearchRegister";
-import braveSearch from "@/assets/videos/setting_up_brave_search_ads.mp4";
 import { SearchTalkingPoints } from "@/search/SearchTalkingPoints";
+import { Box, Button, Link, Stack, Toolbar, Typography } from "@mui/material";
 
 export default function SearchLandingPage() {
   useTrackMatomoPageView({ documentTitle: "Search Landing Page" });

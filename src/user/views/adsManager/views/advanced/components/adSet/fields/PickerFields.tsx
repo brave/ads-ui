@@ -1,11 +1,11 @@
-import { Typography } from "@mui/material";
-import { SegmentPicker } from "@/components/Segment/SegmentPicker";
-import { PlatformPicker } from "@/components/Platform/PlatformPicker";
-import { CardContainer } from "@/components/Card/CardContainer";
-import { useField } from "formik";
-import { CampaignFormat, SegmentFragment } from "@/graphql-client/graphql";
-import { useEffect } from "react";
 import { LearnMoreButton } from "@/components/Button/LearnMoreButton";
+import { CardContainer } from "@/components/Card/CardContainer";
+import { PlatformPicker } from "@/components/Platform/PlatformPicker";
+import { SegmentPicker } from "@/components/Segment/SegmentPicker";
+import { CampaignFormat, SegmentFragment } from "@/graphql-client/graphql";
+import { Typography } from "@mui/material";
+import { useField } from "formik";
+import { useEffect } from "react";
 
 interface Props {
   index: number;

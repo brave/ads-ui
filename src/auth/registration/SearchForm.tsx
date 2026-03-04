@@ -1,8 +1,8 @@
-import { Box } from "@mui/material";
-import { FormikTextField } from "@/form/FormikHelpers";
-import { MarketingOptIn } from "@/auth/registration/MarketingOptIn";
 import { MarketingChannel } from "@/auth/registration/MarketingChannel";
+import { MarketingOptIn } from "@/auth/registration/MarketingOptIn";
 import { CountryPicker } from "@/components/Country/CountryPicker";
+import { FormikTextField } from "@/form/FormikHelpers";
+import { Box } from "@mui/material";
 
 export function SearchForm() {
   return (

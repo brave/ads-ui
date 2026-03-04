@@ -1,10 +1,10 @@
+import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
+import { PaymentMethodField } from "@/user/views/adsManager/views/advanced/components/campaign/fields/PaymentMethodField";
+import { Box, Typography } from "@mui/material";
 import { useFormikContext } from "formik";
 import { CampaignForm } from "../../../../types";
-import { Box, Typography } from "@mui/material";
-import { CampaignReview } from "./components/CampaignReview";
 import { AdSetReview } from "./components/AdSetReview";
-import { PaymentMethodField } from "@/user/views/adsManager/views/advanced/components/campaign/fields/PaymentMethodField";
-import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
+import { CampaignReview } from "./components/CampaignReview";
 
 export function Review() {
   const { values, errors } = useFormikContext<CampaignForm>();

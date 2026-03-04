@@ -1,15 +1,15 @@
-import { ReactNode, useState } from "react";
 import { useUser } from "@/auth/hooks/queries/useUser";
 import { CardContainer } from "@/components/Card/CardContainer";
-import { Form, Formik, FormikValues } from "formik";
-import { FormikTextField } from "@/form/FormikHelpers";
 import { ErrorDetail } from "@/components/Error/ErrorDetail";
-import { UserSchema } from "@/validation/UserSchema";
 import { FormikSubmitButton } from "@/form/FormikButton";
+import { FormikTextField } from "@/form/FormikHelpers";
+import { graphql } from "@/graphql-client";
 import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
+import { UserSchema } from "@/validation/UserSchema";
 import { useMutation } from "@apollo/client";
 import { Snackbar, Stack } from "@mui/material";
-import { graphql } from "@/graphql-client";
+import { Form, Formik, FormikValues } from "formik";
+import { ReactNode, useState } from "react";
 
 const UpdateCurrentUser = graphql(`
   mutation UpdateCurrentUser($input: UpdateCurrentUserInput!) {

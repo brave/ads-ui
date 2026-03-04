@@ -1,10 +1,10 @@
-import { Box } from "@mui/material";
-import { SearchData } from "./data";
 import { CardContainer } from "@/components/Card/CardContainer";
 import { useBasket } from "@/user/views/user/search/basket";
-import { SummaryPanel } from "./SummaryPanel";
-import { LandingPageList } from "./LandingPageList";
+import { Box } from "@mui/material";
 import { CallToAction } from "./CallToAction";
+import { SearchData } from "./data";
+import { LandingPageList } from "./LandingPageList";
+import { SummaryPanel } from "./SummaryPanel";
 
 interface Props {
   data: SearchData;

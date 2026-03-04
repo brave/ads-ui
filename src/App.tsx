@@ -1,8 +1,14 @@
-import { useState, lazy, Suspense, useCallback } from "react";
+import { lazy, Suspense, useCallback, useState } from "react";
 
 import { Redirect, Route, Switch } from "react-router-dom";
 
+import { BraveAdsContactFrame } from "@/auth/registration/BraveAdsContactFrame";
+import { AuthVerify } from "@/auth/views/AuthVerify";
+import { LandingPage } from "@/auth/views/LandingPage";
+import { BasicAttentionTokenLandingPage } from "@/basic-attention-token/BasicAttentionTokenLandingPage";
 import { DraftContext, getAllDrafts } from "@/state/context";
+import { CampaignForm } from "@/user/views/adsManager/types";
+import { useMatomo } from "@jonkoops/matomo-tracker-react";
 import {
   CircularProgress,
   CssBaseline,
@@ -10,12 +16,6 @@ import {
   ThemeProvider,
 } from "@mui/material";
 import { theme } from "./theme";
-import { CampaignForm } from "@/user/views/adsManager/types";
-import { AuthVerify } from "@/auth/views/AuthVerify";
-import { LandingPage } from "@/auth/views/LandingPage";
-import { BraveAdsContactFrame } from "@/auth/registration/BraveAdsContactFrame";
-import { useMatomo } from "@jonkoops/matomo-tracker-react";
-import { BasicAttentionTokenLandingPage } from "@/basic-attention-token/BasicAttentionTokenLandingPage";
 
 const UserView = lazy(() => import("@/user/User"));
 const SearchPreview = lazy(() => import("@/search/preview/SearchPreviewPage"));

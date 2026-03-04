@@ -1,5 +1,5 @@
-import { UserSchema } from "./UserSchema";
 import { produce } from "immer";
+import { UserSchema } from "./UserSchema";
 
 const validUser = {
   fullName: "Test User",

@@ -1,3 +1,4 @@
+import { VERSION } from "@/util/version";
 import { ApolloError } from "@apollo/client";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
@@ -9,7 +10,6 @@ import {
   Box,
   Typography,
 } from "@mui/material";
-import { VERSION } from "@/util/version";
 
 interface Props {
   error?: any;

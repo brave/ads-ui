@@ -1,10 +1,10 @@
+import { AdvertiserMessage } from "@/auth/context/auth.interface";
+import { RegistrationForm } from "@/auth/registration/types";
 import { PaymentType, UserFragment } from "@/graphql-client/graphql";
 import {
   buildAdServerEndpoint,
   buildAdServerV2Endpoint,
 } from "@/util/environment";
-import { RegistrationForm } from "@/auth/registration/types";
-import { AdvertiserMessage } from "@/auth/context/auth.interface";
 
 type Advertiser = {
   selfServiceSetPrice: boolean;

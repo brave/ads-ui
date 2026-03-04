@@ -1,7 +1,7 @@
-import { LoadCreativeDocument } from "@/graphql-client/graphql";
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
-import { useQuery } from "@apollo/client";
+import { LoadCreativeDocument } from "@/graphql-client/graphql";
 import { CreativeInputWithType } from "@/user/views/adsManager/types";
+import { useQuery } from "@apollo/client";
 
 export function useGetCreativeDetails(props: { id: string }) {
   const { advertiser } = useAdvertiser();
