@@ -33,14 +33,14 @@ export function LandingPageAppBar() {
       component: (
         <PageLink
           to="/register/browser"
-          msg={"Get started"}
+          msg="Brave Browser Ads"
           textColor={textColor}
         />
       ),
     },
     {
       component: (
-        <PageLink to="/search" msg={"Brave Search Ads"} textColor={textColor} />
+        <PageLink to="/search" msg="Brave Search Ads" textColor={textColor} />
       ),
     },
     {
