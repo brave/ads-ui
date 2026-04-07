@@ -1,4 +1,9 @@
-import { useDownloadCSV } from "@/user/reporting/csv.library";
+import { CampaignFormat } from "@/graphql-client/graphql";
+import {
+  isSupportedReportFormat,
+  type SupportedReportFormat,
+  useDownloadCSV,
+} from "@/user/reporting/csv.library";
 import DownloadIcon from "@mui/icons-material/Download";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
@@ -14,10 +19,27 @@ import { useState } from "react";
 
 interface ReportMenuProps {
   campaignId: string;
+  format: CampaignFormat;
 }
-export const ReportMenu = ({ campaignId }: ReportMenuProps) => {
+export const ReportMenu = ({ campaignId, format }: ReportMenuProps) => {
+  if (!isSupportedReportFormat(format)) {
+    return null;
+  }
+
+  return <ReportMenuInner campaignId={campaignId} format={format} />;
+};
+
+function ReportMenuInner({
+  campaignId,
+  format,
+}: {
+  campaignId: string;
+  format: SupportedReportFormat;
+}) {
   const [isError, setIsError] = useState(false);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { download, loading, error } = useDownloadCSV({
+    format,
     onComplete() {
       setAnchorEl(null);
     },
@@ -26,7 +48,6 @@ export const ReportMenu = ({ campaignId }: ReportMenuProps) => {
     },
   });
 
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const menu = Boolean(anchorEl);
   return (
     <>
@@ -74,4 +95,4 @@ export const ReportMenu = ({ campaignId }: ReportMenuProps) => {
       </Snackbar>
     </>
   );
-};
+}

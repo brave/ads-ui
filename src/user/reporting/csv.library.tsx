@@ -1,18 +1,106 @@
+import { CampaignFormat } from "@/graphql-client/graphql";
 import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
-import { buildAdServerEndpoint } from "@/util/environment";
+import { buildAdServerV3Endpoint } from "@/util/environment";
 import { useCallback, useState } from "react";
+
+export type SupportedReportFormat =
+  | CampaignFormat.PushNotification
+  | CampaignFormat.NtpSi
+  | CampaignFormat.Search;
+
+const DIMENSIONS_BY_FORMAT: Record<SupportedReportFormat, string[]> = {
+  [CampaignFormat.PushNotification]: [
+    "day",
+    "advertiser_id",
+    "advertiser_name",
+    "campaign_id",
+    "campaign_name",
+    "adset_id",
+    "adset_name",
+    "ad_id",
+    "creative_title",
+    "creative_body",
+    "target_url",
+    "country",
+    "os",
+  ],
+  [CampaignFormat.NtpSi]: [
+    "advertiser_id",
+    "advertiser_name",
+    "campaign_id",
+    "campaign_name",
+    "adset_id",
+    "adset_name",
+    "ad_id",
+    "target_url",
+    "country",
+    "os",
+  ],
+  [CampaignFormat.Search]: [
+    "day",
+    "advertiser_id",
+    "advertiser_name",
+    "campaign_id",
+    "campaign_name",
+    "adset_id",
+    "adset_name",
+    "ad_id",
+    "target_url",
+    "country",
+    "os",
+  ],
+};
+
+const METRICS_BY_FORMAT: Record<SupportedReportFormat, string[]> = {
+  [CampaignFormat.PushNotification]: [
+    "impressions",
+    "clicks",
+    "site_visits",
+    "billable_spend_usd",
+    "click_through_conversions",
+    "view_through_conversions",
+  ],
+  [CampaignFormat.NtpSi]: ["impressions", "clicks", "unique_impressions"],
+  [CampaignFormat.Search]: [
+    "impressions",
+    "clicks",
+    "billable_spend_usd",
+    "click_through_conversions",
+  ],
+};
+
+export function isSupportedReportFormat(
+  format: CampaignFormat,
+): format is SupportedReportFormat {
+  return format in DIMENSIONS_BY_FORMAT;
+}
+
+function buildReportUrl(
+  campaignId: string,
+  format: SupportedReportFormat,
+): string {
+  const dimensions = DIMENSIONS_BY_FORMAT[format];
+  const metrics = METRICS_BY_FORMAT[format];
+  const params = new URLSearchParams();
+  params.set("dimensions", dimensions.join(","));
+  params.set("metrics", metrics.join(","));
+  return buildAdServerV3Endpoint(
+    `/report/campaign/csv/${campaignId}?${params.toString()}`,
+  );
+}
 
 interface DownloadProps {
   onComplete?: () => void;
   onError?: () => void;
+  format: SupportedReportFormat;
 }
 
-export function useDownloadCSV(props: DownloadProps = {}) {
+export function useDownloadCSV(props: DownloadProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
   const { trackMatomoEvent } = useTrackMatomoEvent();
 
-  const { onComplete } = props;
+  const { onComplete, format } = props;
 
   const download = useCallback(
     (campaignId: string) => {
@@ -20,8 +108,7 @@ export function useDownloadCSV(props: DownloadProps = {}) {
       setError(undefined);
       trackMatomoEvent("report-download", "performance-report");
 
-      const baseUrl = `/report/campaign/csv/${campaignId}`;
-      fetch(buildAdServerEndpoint(baseUrl), {
+      fetch(buildReportUrl(campaignId, format), {
         method: "GET",
         mode: "cors",
         credentials: "include",
@@ -65,7 +152,7 @@ export function useDownloadCSV(props: DownloadProps = {}) {
           setLoading(false);
         });
     },
-    [onComplete, trackMatomoEvent],
+    [onComplete, trackMatomoEvent, format],
   );
 
   return { download, loading, error };
