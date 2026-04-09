@@ -19,7 +19,7 @@
       "schedule": ["* 0-8 * * 1,4"]
     },
     {
-      "matchDepTypes": ["pnpm.overrides"],
+      "matchDepTypes": ["pnpm.overrides", "pnpm-workspace.overrides"],
       "enabled": false
     }
   ]
