@@ -98,7 +98,7 @@ export function CampaignAnalytics({ campaignOverview }: CampaignOverviewProps) {
             filters={filter}
             onChange={setFilter}
             campaignId={campaignOverview.id}
-            format={campaignOverview.format}
+            campaign={campaignOverview}
           />
         </Box>
 
