@@ -142,12 +142,6 @@ const availableFields: FieldDefinitions = {
       search: "default",
     },
     {
-      name: "click_through_conversions",
-      ntt: "not_supported",
-      push: "optional",
-      search: "optional",
-    },
-    {
       name: "view_through_conversions",
       ntt: "not_supported",
       push: "optional",

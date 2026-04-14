@@ -98,7 +98,7 @@ export function ReportMenu({ campaign }: Props) {
           {legacyPath && (
             <>
               <Divider textAlign="left" sx={{ my: 1 }}>
-                Performance Report (old)
+                Performance Report (old format)
               </Divider>
               <Box display="flex" gap={1}>
                 <Button
