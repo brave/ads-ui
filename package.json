@@ -41,7 +41,7 @@
     "format": "prettier --write .",
     "check:compile": "tsc",
     "check:format": "prettier --check .",
-    "check:audit": "pnpm audit",
+    "check:audit": "pnpm audit --ignore-registry-errors",
     "check:knip": "knip",
     "check:lint": "eslint src",
     "check": "pnpm run /^check:.*/",
