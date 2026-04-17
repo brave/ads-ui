@@ -1,5 +1,5 @@
 import { PerformanceFilter } from "@/graphql-client/graphql";
-import { ReportMenu } from "@/user/reporting/ReportMenu";
+import { ReportMenu, ReportMenu_Campaign } from "@/user/reporting/ReportMenu";
 import { Box } from "@mui/material";
 import { Dispatch } from "react";
 import { OsFilter } from "./OsFilter";
@@ -11,7 +11,16 @@ export interface FilterProps {
   campaignId: string;
 }
 
-export function FilterBar({ filters, onChange, campaignId }: FilterProps) {
+interface FilterBarProps extends FilterProps {
+  campaign: ReportMenu_Campaign;
+}
+
+export function FilterBar({
+  filters,
+  onChange,
+  campaignId,
+  campaign,
+}: FilterBarProps) {
   return (
     <Box
       display="flex"
@@ -28,7 +37,7 @@ export function FilterBar({ filters, onChange, campaignId }: FilterProps) {
         campaignId={campaignId}
       />
       <OsFilter filters={filters} onChange={onChange} campaignId={campaignId} />
-      <ReportMenu campaignId={campaignId} />
+      <ReportMenu campaign={campaign} />
     </Box>
   );
 }
