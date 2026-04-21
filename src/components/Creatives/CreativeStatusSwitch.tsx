@@ -3,6 +3,7 @@ import {
   AdvertiserCreativesDocument,
   CampaignsForCreativeDocument,
   CreativeFragment,
+  CreativeState,
 } from "@/graphql-client/graphql";
 import { graphql } from "@/graphql-client/index";
 import { validCreativeFields } from "@/user/library";
@@ -73,7 +74,9 @@ export function CreativeStatusSwitch({ creative }: Props) {
     <Box>
       <Switch
         onChange={(e) => {
-          const theState = e.target.checked ? "active" : "paused";
+          const theState = e.target.checked
+            ? CreativeState.Active
+            : CreativeState.Paused;
           setCreativeState(theState);
           campaigns({
             onCompleted(data) {
