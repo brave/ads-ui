@@ -195,6 +195,7 @@ export function useCampaignAnalyticFilter({
 
   useEffect(
     () => {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setFilter((prevFilter: PerformanceFilter) => ({
         ...prevFilter,
         ...timeFilter,
