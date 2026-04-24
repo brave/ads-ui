@@ -4,8 +4,6 @@
     "config:js-app",
     ":semanticCommits",
     ":semanticCommitTypeAll(chore)",
-    "security:minimumReleaseAgeNpm",
-    "helpers:pinGitHubActionDigests",
     "group:allNonMajor"
   ],
   "labels": ["dependencies"],
