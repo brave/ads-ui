@@ -1,3 +1,4 @@
+import { safeBN } from "@/util/bignumber";
 import BigNumber from "bignumber.js";
 
 const percentageFormatter = new Intl.NumberFormat(undefined, {
@@ -24,11 +25,6 @@ const usdDollarsOnlyFormatter = new Intl.NumberFormat(undefined, {
 
 // use this function when you have a rate (such as 0.12) that you want to format as
 // a percentage (12%)
-function safeBN(value: BigNumber | number): BigNumber {
-  if (typeof value === "number" && isNaN(value)) return BigNumber(0);
-  return BigNumber.isBigNumber(value) ? value : BigNumber(value);
-}
-
 export function formatRateAsPercent(value: BigNumber | number): string {
   return percentageFormatter.format(safeBN(value).toNumber());
 }

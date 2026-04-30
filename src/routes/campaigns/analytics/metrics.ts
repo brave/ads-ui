@@ -3,16 +3,7 @@ import {
   CampaignSummaryFragment,
   DisplayedMetricsFragment,
 } from "@/graphql-client/graphql";
-import BigNumber from "bignumber.js";
-
-function toBN(value: string): BigNumber {
-  if (!value || value === "") return BigNumber(0);
-  try {
-    return BigNumber(value);
-  } catch {
-    return BigNumber(0);
-  }
-}
+import { toBN } from "@/util/bignumber";
 
 type MetricType = "number" | "rate" | "usd";
 
