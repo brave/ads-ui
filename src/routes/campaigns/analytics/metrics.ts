@@ -4,6 +4,7 @@ import {
   DisplayedMetricsFragment,
 } from "@/graphql-client/graphql";
 import { toBN } from "@/util/bignumber";
+import BigNumber from "bignumber.js";
 
 type MetricType = "number" | "rate" | "usd";
 
