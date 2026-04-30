@@ -2,6 +2,7 @@ import {
   AdFragment,
   AdSetFragment,
   AdSetState,
+  BillingType,
   CampaignFormat,
   CampaignFragment,
   CampaignPacingStrategies,
@@ -9,6 +10,7 @@ import {
   CampaignState,
   CampaignType,
   CreativeFragment,
+  CreativeState,
   PaymentType,
 } from "@/graphql-client/graphql";
 import {
@@ -60,7 +62,7 @@ const BASE_CPM_CAMPAIGN_FRAGMENT: Readonly<CampaignFragment> = {
       id: "39644642-b56a-430a-90f8-8917651bb62f",
       createdAt: "2023-07-11T16:13:31.286Z",
       price: "0.006",
-      billingType: "cpm",
+      billingType: BillingType.Cpm,
       name: "Demo ad set",
       totalMax: 10,
       perDay: 1,
@@ -103,7 +105,7 @@ const BASE_CPM_CAMPAIGN_FRAGMENT: Readonly<CampaignFragment> = {
             createdAt: "2023-07-11T16:13:19.322Z",
             modifiedAt: "2023-07-11T16:15:18.200Z",
             name: "Demo creative",
-            state: "under_review",
+            state: CreativeState.UnderReview,
             type: {
               code: "notification_all_v1",
             },
@@ -136,7 +138,7 @@ describe("pricing logic (read)", () => {
   it("should convert per-impression values to CPM when populating CampaignForm", () => {
     const campaign = produce(BASE_CPM_CAMPAIGN_FRAGMENT, (c) => {
       c.adSets.forEach((adset) => {
-        adset.billingType = "cpm";
+        adset.billingType = BillingType.Cpm;
         adset.price = "0.007";
       });
     });
@@ -148,7 +150,7 @@ describe("pricing logic (read)", () => {
   it("should convert per-impression values to CPM when populating CampaignForm", () => {
     const campaign = produce(BASE_CPM_CAMPAIGN_FRAGMENT, (c) => {
       c.adSets.forEach((adset) => {
-        adset.billingType = "cpc";
+        adset.billingType = BillingType.Cpc;
         adset.price = "1";
       });
     });
@@ -204,7 +206,7 @@ describe("new form tests", () => {
     advertiserId: "123456",
     included: true,
     name: "Test",
-    state: "draft",
+    state: CreativeState.Draft,
     type: { code: "notification_all_v1" },
   };
 
@@ -213,7 +215,7 @@ describe("new form tests", () => {
     advertiserId: "123456",
     included: false,
     name: "Dont include",
-    state: "draft",
+    state: CreativeState.Draft,
     type: { code: "test" },
   };
 
@@ -300,7 +302,7 @@ describe("edit form tests", () => {
     id: "1234",
     modifiedAt: "2024-01-01",
     name: "a creative",
-    state: "active",
+    state: CreativeState.Active,
     payloadNotification: {
       targetUrl: "valid",
       title: "valid",
@@ -326,7 +328,7 @@ describe("edit form tests", () => {
   const adSet: DeepPartial<AdSetFragment> = {
     ads: [ad, ad2],
     price: "6",
-    billingType: "cpm",
+    billingType: BillingType.Cpm,
     conversions: [],
     createdAt: undefined,
     id: "11111",
@@ -340,7 +342,7 @@ describe("edit form tests", () => {
   const adSet2: DeepPartial<AdSetFragment> = {
     ads: [ad],
     price: "6",
-    billingType: "cpm",
+    billingType: BillingType.Cpm,
     conversions: [],
     createdAt: undefined,
     id: "22222",

@@ -1,5 +1,5 @@
 import { useAdvertiser } from "@/auth/hooks/queries/useAdvertiser";
-import { LoadCreativeDocument } from "@/graphql-client/graphql";
+import { CreativeState, LoadCreativeDocument } from "@/graphql-client/graphql";
 import { CreativeInputWithType } from "@/user/views/adsManager/types";
 import { useQuery } from "@apollo/client";
 
@@ -13,7 +13,7 @@ export function useGetCreativeDetails(props: { id: string }) {
 
   const defaultValue: CreativeInputWithType & { targetUrlValid?: string } = {
     advertiserId: advertiser.id,
-    state: "under_review",
+    state: CreativeState.UnderReview,
     name: "",
     type: {
       code: "notification_all_v1",
