@@ -13,7 +13,7 @@ export function MetricValue({ loading = false, metricType, value }: Props) {
     <Box>
       {loading ? (
         <Skeleton width={75} />
-      ) : _.isNil(value) ? (
+      ) : _.isNil(value) || value === "" ? (
         "-"
       ) : (
         format(metricType, value)

@@ -72,9 +72,10 @@ export const StandardRenderers: Record<string, CellValueRenderer> = {
 };
 
 export function renderMonetaryAmount(
-  value: BigNumber | number | string,
+  value: BigNumber | number | string | null | undefined,
   currency: string,
 ) {
+  if (value === null || value === undefined || value === "") return "-";
   const val = BigNumber(value);
   if (currency === "USD") {
     return `$${toLocaleString(val)}`;

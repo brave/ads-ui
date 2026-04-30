@@ -161,10 +161,11 @@ function validatePriceByBillingTypeAndFormat(
     );
   }
 
-  const price = BigNumber(found.billingModelPrice);
+  const price = BigNumber(found.billingModelPrice || 0);
   return schema.test(
     "is-lte-price",
     `${billingType} price must be ${price} or higher`,
-    (value) => (value ? price.isLessThanOrEqualTo(value) : true),
+    (value) =>
+      value && value !== "" ? price.isLessThanOrEqualTo(value) : true,
   );
 }

@@ -39,7 +39,7 @@ export function CloseCampaignModal({ campaign, type, disabled }: Props) {
   });
 
   const isInline = type === "inline";
-  const currentBalance = BigNumber(campaign?.adsManagerCurrentBalance ?? 0);
+  const currentBalance = BigNumber(campaign?.adsManagerCurrentBalance || 0);
   const hasNoBalance = currentBalance.lte(0);
   if (!isInline && hasNoBalance) return null;
   const hasInProcessOrCompleteTransfer =

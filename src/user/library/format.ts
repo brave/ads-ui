@@ -24,18 +24,23 @@ const usdDollarsOnlyFormatter = new Intl.NumberFormat(undefined, {
 
 // use this function when you have a rate (such as 0.12) that you want to format as
 // a percentage (12%)
+function safeBN(value: BigNumber | number): BigNumber {
+  if (typeof value === "number" && isNaN(value)) return BigNumber(0);
+  return BigNumber.isBigNumber(value) ? value : BigNumber(value);
+}
+
 export function formatRateAsPercent(value: BigNumber | number): string {
-  return percentageFormatter.format(BigNumber(value).toNumber());
+  return percentageFormatter.format(safeBN(value).toNumber());
 }
 
 // use this function when you have a value that's already a percentage (such as 12)
 // that you want to format as a percentage (12%)
 export function formatPercentAsPercent(value: BigNumber | number): string {
-  return formatRateAsPercent(BigNumber(value).dividedBy(100));
+  return formatRateAsPercent(safeBN(value).dividedBy(100));
 }
 
 export function formatWholeNumber(value: BigNumber | number): string {
-  return numberFormatter.format(BigNumber(value).toNumber());
+  return numberFormatter.format(safeBN(value).toNumber());
 }
 
 export function formatUsd(
@@ -45,7 +50,7 @@ export function formatUsd(
   const formatter = options.dollarsOnly
     ? usdDollarsOnlyFormatter
     : usdFormatter;
-  return formatter.format(BigNumber(value).toNumber());
+  return formatter.format(safeBN(value).toNumber());
 }
 
 export function format(

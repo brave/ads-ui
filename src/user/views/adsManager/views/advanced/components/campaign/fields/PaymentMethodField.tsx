@@ -18,7 +18,7 @@ export function PaymentMethodField() {
 
   const amountOwed = useCallback(
     (balance: BigNumber) => {
-      const budget = BigNumber(meta.value).minus(balance);
+      const budget = BigNumber(meta.value ?? 0).minus(balance);
       if (budget.lte(0)) return BigNumber(0);
       return budget;
     },
@@ -29,7 +29,7 @@ export function PaymentMethodField() {
     return null;
   }
 
-  const balance = BigNumber(data?.advertiser?.accountBalance ?? "0").dp(2);
+  const balance = BigNumber(data?.advertiser?.accountBalance || "0").dp(2);
 
   const chargeMessage = (b: BigNumber) => {
     if (b.lte(0)) return "and no additional charges will be incurred.";
