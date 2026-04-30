@@ -3,7 +3,6 @@ import {
   CampaignSummaryFragment,
   DisplayedMetricsFragment,
 } from "@/graphql-client/graphql";
-import { toBN } from "@/util/bignumber";
 import BigNumber from "bignumber.js";
 
 type MetricType = "number" | "rate" | "usd";
@@ -45,14 +44,14 @@ const METRICS: MetricDefinition[] = [
   {
     id: "impression",
     caption: "Impressions",
-    getValue: (metrics) => toBN(metrics.impression),
+    getValue: (metrics) => BigNumber(metrics.impression),
     type: "number",
     color: colors[0],
   },
   {
     id: "click",
     caption: "Clicks",
-    getValue: (metrics) => toBN(metrics.click),
+    getValue: (metrics) => BigNumber(metrics.click),
     type: "number",
     color: colors[1],
   },
@@ -60,14 +59,14 @@ const METRICS: MetricDefinition[] = [
     id: "ctr",
     caption: "Click Through Rate",
     shortCaption: "CTR",
-    getValue: (metrics) => toBN(metrics.rates.clickThrough),
+    getValue: (metrics) => BigNumber(metrics.rates.clickThrough),
     type: "rate",
     color: colors[2],
   },
   {
     id: "site-visit",
     caption: "Site Visits",
-    getValue: (metrics) => toBN(metrics.siteVisit),
+    getValue: (metrics) => BigNumber(metrics.siteVisit),
     type: "number",
     color: colors[3],
     isLikelyUnderestimate: true,
@@ -76,7 +75,7 @@ const METRICS: MetricDefinition[] = [
   {
     id: "conversion",
     caption: "Conversions",
-    getValue: (metrics) => toBN(metrics.conversion),
+    getValue: (metrics) => BigNumber(metrics.conversion),
     type: "number",
     color: colors[4],
     isLikelyUnderestimate: true,
@@ -85,7 +84,7 @@ const METRICS: MetricDefinition[] = [
   {
     id: "view-through-conversion",
     caption: "View-through Conversions",
-    getValue: (metrics) => toBN(metrics.viewThroughConversion),
+    getValue: (metrics) => BigNumber(metrics.viewThroughConversion),
     type: "number",
     color: colors[5],
     isLikelyUnderestimate: true,
@@ -94,7 +93,7 @@ const METRICS: MetricDefinition[] = [
   {
     id: "click-through-conversion",
     caption: "Click-through Conversions",
-    getValue: (metrics) => toBN(metrics.clickThroughConversion),
+    getValue: (metrics) => BigNumber(metrics.clickThroughConversion),
     type: "number",
     color: colors[6],
     isLikelyUnderestimate: true,
@@ -103,7 +102,7 @@ const METRICS: MetricDefinition[] = [
   {
     id: "conversion-rate",
     caption: "Conversion Rate",
-    getValue: (metrics) => toBN(metrics.rates.clickToConversion),
+    getValue: (metrics) => BigNumber(metrics.rates.clickToConversion),
     type: "rate",
     color: colors[7],
     isLikelyUnderestimate: true,
@@ -112,7 +111,7 @@ const METRICS: MetricDefinition[] = [
   {
     id: "click-to-site-visit-rate",
     caption: "Site Visit Rate",
-    getValue: (metrics) => toBN(metrics.rates.clickToSiteVisit),
+    getValue: (metrics) => BigNumber(metrics.rates.clickToSiteVisit),
     type: "rate",
     color: colors[8],
     isLikelyUnderestimate: true,
@@ -121,7 +120,7 @@ const METRICS: MetricDefinition[] = [
   {
     id: "spend",
     caption: "Spend",
-    getValue: (metrics) => toBN(metrics.spendUsd),
+    getValue: (metrics) => BigNumber(metrics.spendUsd),
     type: "usd",
     color: colors[9],
   },
@@ -129,7 +128,7 @@ const METRICS: MetricDefinition[] = [
     id: "cpa",
     caption: "Cost per Acquisition",
     shortCaption: "CPA",
-    getValue: (metrics) => toBN(metrics.rates.costPerAcquisition),
+    getValue: (metrics) => BigNumber(metrics.rates.costPerAcquisition),
     type: "usd",
     color: colors[0],
     disableForCampaign: isSearch,
@@ -137,7 +136,7 @@ const METRICS: MetricDefinition[] = [
   {
     id: "upvote",
     caption: "Upvotes",
-    getValue: (metrics) => toBN(metrics.upvote),
+    getValue: (metrics) => BigNumber(metrics.upvote),
     type: "number",
     color: colors[2],
     disableForCampaign: isSearch,
@@ -145,7 +144,7 @@ const METRICS: MetricDefinition[] = [
   {
     id: "downvote",
     caption: "Downvotes",
-    getValue: (metrics) => toBN(metrics.downvote),
+    getValue: (metrics) => BigNumber(metrics.downvote),
     type: "number",
     color: colors[3],
     disableForCampaign: isSearch,
@@ -153,7 +152,7 @@ const METRICS: MetricDefinition[] = [
   {
     id: "dismiss",
     caption: "Dismissals",
-    getValue: (metrics) => toBN(metrics.dismiss),
+    getValue: (metrics) => BigNumber(metrics.dismiss),
     type: "number",
     color: colors[1],
     disableForCampaign: isSearch,
@@ -161,7 +160,7 @@ const METRICS: MetricDefinition[] = [
   {
     id: "dismiss-rate",
     caption: "Dismissal Rate",
-    getValue: (metrics) => toBN(metrics.rates.impressionToDismiss),
+    getValue: (metrics) => BigNumber(metrics.rates.impressionToDismiss),
     type: "rate",
     color: colors[4],
     disableForCampaign: isSearch,
