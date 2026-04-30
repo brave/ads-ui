@@ -1,4 +1,3 @@
-import { safeBN } from "@/util/bignumber";
 import BigNumber from "bignumber.js";
 
 const percentageFormatter = new Intl.NumberFormat(undefined, {
@@ -26,17 +25,17 @@ const usdDollarsOnlyFormatter = new Intl.NumberFormat(undefined, {
 // use this function when you have a rate (such as 0.12) that you want to format as
 // a percentage (12%)
 export function formatRateAsPercent(value: BigNumber | number): string {
-  return percentageFormatter.format(safeBN(value).toNumber());
+  return percentageFormatter.format(BigNumber(value).toNumber());
 }
 
 // use this function when you have a value that's already a percentage (such as 12)
 // that you want to format as a percentage (12%)
 export function formatPercentAsPercent(value: BigNumber | number): string {
-  return formatRateAsPercent(safeBN(value).dividedBy(100));
+  return formatRateAsPercent(BigNumber(value).dividedBy(100));
 }
 
 export function formatWholeNumber(value: BigNumber | number): string {
-  return numberFormatter.format(safeBN(value).toNumber());
+  return numberFormatter.format(BigNumber(value).toNumber());
 }
 
 export function formatUsd(
@@ -46,7 +45,7 @@ export function formatUsd(
   const formatter = options.dollarsOnly
     ? usdDollarsOnlyFormatter
     : usdFormatter;
-  return formatter.format(safeBN(value).toNumber());
+  return formatter.format(BigNumber(value).toNumber());
 }
 
 export function format(
