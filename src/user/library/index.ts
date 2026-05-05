@@ -54,7 +54,7 @@ export function transformNewForm(form: CampaignForm): CreateCampaignInput {
 export const transformPrice = (
   f: Pick<CampaignForm, "price" | "billingType">,
 ) => {
-  const price = BigNumber(f.price || 0);
+  const price = BigNumber(f.price);
   return f.billingType === "cpm"
     ? price.dividedBy(1000).toString()
     : price.toString();
@@ -83,7 +83,7 @@ export function editCampaignValues(
 
   const billingType = (_.head(campaign.adSets)?.billingType ??
     "cpm") as Billing;
-  const rawPrice = BigNumber(_.head(campaign.adSets)?.price || ".006");
+  const rawPrice = BigNumber(_.head(campaign.adSets)?.price ?? ".006");
   const price = billingType === "cpm" ? rawPrice.multipliedBy(1000) : rawPrice;
 
   return {
