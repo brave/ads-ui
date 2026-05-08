@@ -3,18 +3,15 @@ import { Creative } from "@/user/views/adsManager/types";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import { Box, IconButton, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export const SelectCreativeHeader = (props: {
   creative: Creative;
+  selected: boolean;
   onSelectCreative: (c: Creative, selected: boolean) => void;
   showState?: boolean;
 }) => {
-  const [selected, setSelected] = useState<boolean>();
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setSelected(props.creative.included);
-  }, [props.creative]);
+  const [selected, setSelected] = useState(props.selected);
 
   return (
     <Box
@@ -26,9 +23,9 @@ export const SelectCreativeHeader = (props: {
     >
       <IconButton
         onClick={() => {
-          const s = !selected;
-          setSelected(s);
-          props.onSelectCreative(props.creative, s);
+          const next = !selected;
+          setSelected(next);
+          props.onSelectCreative(props.creative, next);
         }}
         sx={{ p: 0 }}
       >

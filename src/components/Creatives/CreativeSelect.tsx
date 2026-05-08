@@ -48,6 +48,9 @@ export function CreativeSelect(
     setCurr(_.uniqBy(value, "id"));
   };
 
+  const isChecked = (co: Creative) =>
+    co.included || curr.some((c) => c.id === co.id);
+
   const isSelected = (co: Creative) =>
     props.useSelectedAdStyle === false || co.included;
 
@@ -66,6 +69,7 @@ export function CreativeSelect(
             header={
               <SelectCreativeHeader
                 creative={co}
+                selected={isChecked(co)}
                 onSelectCreative={onSelectCreative}
                 showState={props.showState}
               />
