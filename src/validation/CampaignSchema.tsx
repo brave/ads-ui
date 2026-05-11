@@ -99,12 +99,8 @@ export const CampaignSchema = (prices: AdvertiserPrice[]) =>
               }),
             )
             .default([]),
-          oses: array()
-            .of(
-              object().shape({
-                code: string().required(),
-              }),
-            )
+          operatingSystems: array()
+            .of(string().required())
             .min(1, "At least one platform must be targeted")
             .default([]),
           conversion: object()

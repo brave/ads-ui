@@ -6,6 +6,7 @@ import {
   CreativeInput,
   CreativeState,
   CreativeTypeInput,
+  OperatingSystem,
   PaymentType,
 } from "@/graphql-client/graphql";
 import { AdvertiserWithPrices } from "@/user/hooks/useAdvertiserWithPrices";
@@ -39,17 +40,12 @@ type GeoTarget = {
   name: string;
 };
 
-export type OS = {
-  code: string;
-  name: string;
-};
-
 export type AdSetForm = {
   id?: string;
   state?: AdSetState;
   name: string;
   segments: Segment[];
-  oses: OS[];
+  operatingSystems: OperatingSystem[];
   conversion?: Conversion;
   creatives: Creative[];
   isNotTargeting: boolean;
@@ -97,7 +93,7 @@ export const initialAdSet: AdSetForm = {
   name: "",
   isNotTargeting: false,
   segments: [],
-  oses: [],
+  operatingSystems: [],
   creatives: [],
 };
 

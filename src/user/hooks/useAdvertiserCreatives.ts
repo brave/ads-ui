@@ -9,7 +9,6 @@ export function useAdvertiserCreatives() {
     .map((c: Creative) => ({
       type: c.type,
       payloadNotification: c.payloadNotification,
-      payloadInlineContent: c.payloadInlineContent,
       id: c.id,
       advertiserId: c.advertiserId,
       name: c.name,

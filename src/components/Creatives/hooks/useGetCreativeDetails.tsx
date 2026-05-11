@@ -24,14 +24,6 @@ export function useGetCreativeDetails(props: { id: string }) {
       targetUrl: "",
       title: "",
     },
-    payloadInlineContent: {
-      title: "",
-      targetUrl: "",
-      ctaText: "",
-      description: "",
-      imageUrl: "",
-      dimensions: "900x750",
-    },
   };
 
   if (props.id === "new") {
