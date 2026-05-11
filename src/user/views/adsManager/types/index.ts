@@ -4,6 +4,7 @@ import {
   CampaignFormat,
   CampaignState,
   CreativeInput,
+  CreativeState,
   CreativeTypeInput,
   PaymentType,
 } from "@/graphql-client/graphql";
@@ -66,12 +67,13 @@ export type Segment = {
 
 export type CreativeInputWithType = CreativeInput & {
   type: Pick<CreativeTypeInput, "code">;
+  state: CreativeState;
 };
 
 export type Creative = CreativeInputWithType & {
   id?: string;
   targetUrlValid?: string;
-  state?: string;
+  state?: CreativeState;
   createdAt?: string;
   modifiedAt?: string;
   included: boolean;
@@ -87,7 +89,7 @@ export const initialCreative: Creative = {
   advertiserId: "",
   targetUrlValid: "Target URL validation incomplete",
   type: { code: "" },
-  state: "draft",
+  state: CreativeState.Draft,
   included: false,
 };
 

@@ -36,6 +36,10 @@ export default defineConfig(({ mode }) => {
           target: `${env.BACKEND_URL}`,
           changeOrigin: true,
         },
+        "/v3": {
+          target: `${env.BACKEND_URL}`,
+          changeOrigin: true,
+        },
         "/graphql": {
           target: `${env.BACKEND_URL}`,
           changeOrigin: true,

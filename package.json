@@ -12,20 +12,20 @@
     "@fontsource/poppins": "5.2.7",
     "@graphql-typed-document-node/core": "3.2.0",
     "@jonkoops/matomo-tracker-react": "0.7.0",
-    "@mui/icons-material": "7.3.9",
-    "@mui/material": "7.3.9",
+    "@mui/icons-material": "7.3.10",
+    "@mui/material": "7.3.10",
     "@mui/x-data-grid": "8.28.2",
-    "@mui/x-date-pickers": "8.27.2",
-    "bignumber.js": "9.3.1",
+    "@mui/x-date-pickers": "8.28.4",
+    "bignumber.js": "11.1.1",
     "dayjs": "1.11.20",
     "formik": "2.4.9",
     "graphql": "16.13.2",
-    "highcharts": "12.5.0",
+    "highcharts": "12.6.0",
     "highcharts-react-official": "3.2.3",
     "immer": "11.1.4",
     "lodash": "4.18.1",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
+    "react": "19.2.5",
+    "react-dom": "19.2.5",
     "react-router-dom": "5.3.4",
     "react-window": "2.2.7",
     "swr": "2.4.1",
@@ -41,7 +41,7 @@
     "format": "prettier --write .",
     "check:compile": "tsc",
     "check:format": "prettier --check .",
-    "check:audit": "pnpm audit",
+    "check:audit": "pnpm audit --ignore-registry-errors",
     "check:knip": "knip",
     "check:lint": "eslint src",
     "check": "pnpm run /^check:.*/",
@@ -50,9 +50,9 @@
   },
   "devDependencies": {
     "@eslint/js": "9.39.4",
-    "@graphql-codegen/cli": "6.2.1",
-    "@graphql-codegen/client-preset": "5.2.4",
-    "@graphql-codegen/introspection": "5.0.1",
+    "@graphql-codegen/cli": "6.3.1",
+    "@graphql-codegen/client-preset": "5.3.0",
+    "@graphql-codegen/introspection": "5.0.2",
     "@graphql-eslint/eslint-plugin": "4.4.0",
     "@parcel/watcher": "2.5.6",
     "@types/lodash": "4.17.24",
@@ -64,24 +64,31 @@
     "eslint": "9.39.4",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-react": "7.37.5",
-    "eslint-plugin-react-hooks": "7.0.1",
+    "eslint-plugin-react-hooks": "7.1.1",
     "husky": "9.1.7",
-    "knip": "6.3.0",
+    "knip": "6.11.0",
     "lint-staged": "16.4.0",
-    "prettier": "3.8.1",
+    "prettier": "3.8.3",
     "prettier-plugin-organize-imports": "4.3.0",
-    "typescript": "6.0.2",
-    "typescript-eslint": "8.58.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.59.1",
     "vite": "7.3.2",
-    "vite-plugin-checker": "0.12.0",
+    "vite-plugin-checker": "0.13.0",
     "vite-tsconfig-paths": "6.1.1",
-    "vitest": "4.1.2"
+    "vitest": "4.1.5"
   },
   "engines": {
-    "node": ">=20",
+    "node": ">=24",
     "npm": "please-use-pnpm",
     "yarn": "please-use-pnpm",
-    "pnpm": ">=9"
+    "pnpm": ">=10"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "24.14.1",
+      "onFail": "download"
+    }
   },
   "browserslist": [
     ">0.2%",
@@ -95,5 +102,5 @@
       "eslint"
     ]
   },
-  "packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319"
+  "packageManager": "pnpm@10.33.2+sha512.a90faf6feeab71ad6c6e57f94e0fe1a12f5dcc22cd754db40ae9593eb6a3e0b6b12e3540218bb37ae083404b1f2ce6db2a4121e979829b4aff94b99f49da1cf8"
 }

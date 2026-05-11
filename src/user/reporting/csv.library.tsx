@@ -1,72 +1,36 @@
-import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
-import { buildAdServerEndpoint } from "@/util/environment";
-import { useCallback, useState } from "react";
-
-interface DownloadProps {
-  onComplete?: () => void;
-  onError?: () => void;
+interface DownloadParams {
+  reportServerPath: string;
+  downloadFilename: string;
 }
 
-export function useDownloadCSV(props: DownloadProps = {}) {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string>();
-  const { trackMatomoEvent } = useTrackMatomoEvent();
-
-  const { onComplete } = props;
-
-  const download = useCallback(
-    (campaignId: string) => {
-      setLoading(true);
-      setError(undefined);
-      trackMatomoEvent("report-download", "performance-report");
-
-      const baseUrl = `/report/campaign/csv/${campaignId}`;
-      fetch(buildAdServerEndpoint(baseUrl), {
-        method: "GET",
-        mode: "cors",
-        credentials: "include",
-        headers: {
-          "Content-Type": "text/csv",
-        },
-      })
-        .then((res) => {
-          if (res.status !== 200) {
-            const err = "Unable to download CSV";
-            setError(err);
-            throw new Error(err);
-          }
-
-          return res.blob();
-        })
-        .then((blob) => {
-          const file = new Blob([blob], {
-            type: "text/csv",
-            endings: "transparent",
-          });
-
-          return Promise.resolve(file);
-        })
-        .then((file) => {
-          const fileURL = URL.createObjectURL(file);
-          const link = document.createElement("a");
-          link.href = fileURL;
-          link.setAttribute("download", `${campaignId}.csv`);
-          document.body.appendChild(link);
-          link.click();
-          if (onComplete) {
-            onComplete();
-          }
-        })
-        .catch((e) => {
-          setError(e.message);
-          trackMatomoEvent("report-download", `download-failed`);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+export async function downloadCSV(params: DownloadParams) {
+  const res = await fetch(params.reportServerPath, {
+    method: "GET",
+    mode: "cors",
+    credentials: "include",
+    headers: {
+      "Content-Type": "text/csv",
     },
-    [onComplete, trackMatomoEvent],
-  );
+  });
 
-  return { download, loading, error };
+  if (!res.ok) {
+    throw new Error("Unable to download CSV");
+  }
+
+  const blob = await res.blob();
+  const file = new Blob([blob], { type: "text/csv", endings: "transparent" });
+  const fileURL = URL.createObjectURL(file);
+  const link = document.createElement("a");
+  link.href = fileURL;
+  link.download = params.downloadFilename;
+
+  const clickHandler = () => {
+    setTimeout(() => {
+      URL.revokeObjectURL(fileURL);
+      link.removeEventListener("click", clickHandler);
+    }, 150);
+  };
+
+  link.addEventListener("click", clickHandler, false);
+  link.click();
 }
