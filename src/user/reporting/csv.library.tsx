@@ -1,17 +1,22 @@
+import { buildVersionlessAdServerEndpoint } from "@/util/environment";
+
 interface DownloadParams {
   reportServerPath: string;
   downloadFilename: string;
 }
 
 export async function downloadCSV(params: DownloadParams) {
-  const res = await fetch(params.reportServerPath, {
-    method: "GET",
-    mode: "cors",
-    credentials: "include",
-    headers: {
-      "Content-Type": "text/csv",
+  const res = await fetch(
+    buildVersionlessAdServerEndpoint(params.reportServerPath),
+    {
+      method: "GET",
+      mode: "cors",
+      credentials: "include",
+      headers: {
+        "Content-Type": "text/csv",
+      },
     },
-  });
+  );
 
   if (!res.ok) {
     throw new Error("Unable to download CSV");
