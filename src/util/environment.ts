@@ -28,3 +28,8 @@ export function buildAdServerV2Endpoint(suffix: string): string {
     "v2",
   )}${suffix}`;
 }
+
+export function buildVersionlessAdServerEndpoint(suffix: string): string {
+  const base = import.meta.env.REACT_APP_SERVER_ADDRESS.replace(/\/v\d+$/, "");
+  return `${base}${suffix}`;
+}
