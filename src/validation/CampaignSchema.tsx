@@ -1,5 +1,5 @@
 import { twoDaysOut } from "@/form/DateFieldHelpers";
-import { CampaignFormat } from "@/graphql-client/graphql";
+import { CampaignFormat, OperatingSystem } from "@/graphql-client/graphql";
 import { AdvertiserPrice } from "@/user/hooks/useAdvertiserWithPrices";
 import { Billing } from "@/user/views/adsManager/types";
 import {
