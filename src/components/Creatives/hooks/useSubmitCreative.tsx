@@ -5,10 +5,8 @@ import {
 } from "@/graphql-client/graphql";
 import { graphql } from "@/graphql-client/index";
 import { useTrackMatomoEvent } from "@/hooks/useTrackWithMatomo";
-import { validCreativeFields } from "@/user/library";
 import { CreativeInputWithType } from "@/user/views/adsManager/types";
 import { useMutation } from "@apollo/client";
-import _ from "lodash";
 import { useCallback } from "react";
 import { useHistory } from "react-router-dom";
 
@@ -58,32 +56,26 @@ export function useSubmitCreative(props: { id: string }) {
   const submit = useCallback(
     async (values: CreativeInputWithType, submitting: (s: boolean) => void) => {
       submitting(true);
-      const valid = validCreativeFields(
-        { id: props.id, ...values },
-        advertiser.id,
-      );
-
-      const input = {
-        ..._.omit(valid, ["id", "targetUrlValid", "included", "type"]),
-        state: "under_review",
-      };
 
       try {
         if (isNew) {
           await createCreative({
-            variables: { input: input },
+            variables: {
+              input: {
+                advertiserId: advertiser.id,
+                name: values.name,
+                state: "under_review",
+                payloadNotification: values.payloadNotification,
+              },
+            },
           });
         } else {
           await updateCreative({
             variables: {
               input: {
                 id: props.id,
-                name: input.name,
-                payloadNotification: input.payloadNotification,
-                payloadInlineContent: _.omit(
-                  input.payloadInlineContent,
-                  "dimensions",
-                ),
+                name: values.name,
+                payloadNotification: values.payloadNotification,
               },
             },
           });

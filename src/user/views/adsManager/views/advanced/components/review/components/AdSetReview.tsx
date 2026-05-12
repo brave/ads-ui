@@ -1,10 +1,10 @@
 import { ConversionDisplay } from "@/components/Conversion/ConversionDisplay";
 import { CreativeSpecificPreview } from "@/components/Creatives/CreativeSpecificPreview";
+import { OperatingSystem } from "@/graphql-client/graphql";
 import {
   AdSetForm,
   Conversion,
   Creative,
-  OS,
   Segment,
 } from "@/user/views/adsManager/types";
 import { ReviewContainer } from "@/user/views/adsManager/views/advanced/components/review/components/ReviewContainer";
@@ -27,8 +27,12 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
 
   const adSetError = errors;
 
-  const mapToString = (arr: Segment[] | OS[] | Creative[]) => {
+  const mapSegmentsOrCreatives = (arr: Segment[] | Creative[]) => {
     return arr.map((o) => segmentNameWithNoDash(o.name)).join(", ");
+  };
+
+  const mapOperatingSystems = (arr: OperatingSystem[]) => {
+    return arr.map((o) => segmentNameWithNoDash(o)).join(", ");
   };
 
   const segmentValue = (v: string) => {
@@ -45,13 +49,13 @@ export function AdSetReview({ adSet, idx, errors }: Props) {
       />
       <ReviewField
         caption={"Audiences"}
-        value={segmentValue(mapToString(adSet.segments))}
+        value={segmentValue(mapSegmentsOrCreatives(adSet.segments))}
         error={hasErrors ? (adSetError?.segments as string) : ""}
       />
       <ReviewField
         caption={"Platforms"}
-        value={mapToString(adSet.oses)}
-        error={hasErrors ? (adSetError?.oses as string) : ""}
+        value={mapOperatingSystems(adSet.operatingSystems)}
+        error={hasErrors ? (adSetError?.operatingSystems as string) : ""}
       />
       <ConversionDisplay
         conversion={adSet.conversion}

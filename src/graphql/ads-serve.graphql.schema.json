@@ -346,6 +346,18 @@
             "deprecationReason": null
           },
           {
+            "name": "meta",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "JSONObject",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "modifiedAt",
             "description": null,
             "args": [],
@@ -798,6 +810,18 @@
         "isOneOf": false,
         "fields": null,
         "inputFields": [
+          {
+            "name": "hasQueryStringParameters",
+            "description": "if true, only include adsets that have query string parameters configured; if false, only those without",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "name",
             "description": "only include adsets whose name contains this string (case-insensitive)",
@@ -3016,6 +3040,130 @@
         "possibleTypes": null
       },
       {
+        "kind": "OBJECT",
+        "name": "BillingReconciliation",
+        "description": null,
+        "isOneOf": null,
+        "fields": [
+          {
+            "name": "braveAsia",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Numeric",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "buySellAds",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Numeric",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "isReady",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "prepayment",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Numeric",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "redshiftRevenue",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Numeric",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "selfServe",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Numeric",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "totalInvoiced",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Numeric",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "ENUM",
         "name": "BillingType",
         "description": null,
@@ -3170,26 +3318,6 @@
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
-          },
-          {
-            "name": "oses",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "CreateOSInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": true,
-            "deprecationReason": "use operatingSystems instead"
           },
           {
             "name": "price",
@@ -6355,6 +6483,18 @@
                   "ofType": null
                 }
               }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "meta",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "JSONObject",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -11769,6 +11909,18 @@
             "description": null,
             "args": [
               {
+                "name": "filter",
+                "description": null,
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "AdSetFilter",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
                 "name": "input",
                 "description": null,
                 "type": {
@@ -14523,6 +14675,39 @@
                     "ofType": null
                   }
                 }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "billingReconciliation",
+            "description": null,
+            "args": [
+              {
+                "name": "billingMonth",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "DateTime",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "BillingReconciliation",
+                "ofType": null
               }
             },
             "isDeprecated": false,
@@ -18612,6 +18797,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "UpdateStringListInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "meta",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "JSONObject",
               "ofType": null
             },
             "defaultValue": null,

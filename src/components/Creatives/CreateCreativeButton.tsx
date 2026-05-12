@@ -49,11 +49,6 @@ export function CreateCreativeButton({ index }: Props) {
     ],
   });
 
-  const creative = validCreativeFields(
-    { ...newMeta.value, id: "" },
-    advertiser.id,
-  );
-
   return (
     <Button
       variant="contained"
@@ -64,10 +59,9 @@ export function CreateCreativeButton({ index }: Props) {
           variables: {
             input: {
               advertiserId: advertiser.id,
-              name: creative.name,
+              name: newMeta.value.name,
               state: "under_review",
-              payloadNotification: creative.payloadNotification,
-              payloadInlineContent: creative.payloadInlineContent,
+              payloadNotification: newMeta.value.payloadNotification,
             },
           },
         });

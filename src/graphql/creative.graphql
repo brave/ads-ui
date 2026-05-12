@@ -8,46 +8,40 @@ fragment Creative on Creative {
   type {
     code
   }
-  payloadNotification {
-    body
-    title
-    targetUrl
-  }
-  payloadNewTabPage {
-    logo {
-      imageUrl
-      alt
-      companyName
-      destinationUrl
+  payload {
+    notification {
+      body
+      title
+      targetUrl
     }
-    wallpapers {
-      imageUrl
-      focalPoint {
-        x
-        y
+    newTabPage {
+      logo {
+        imageUrl
+        alt
+        companyName
+        destinationUrl
+      }
+      wallpapers {
+        imageUrl
+        focalPoint {
+          x
+          y
+        }
       }
     }
-  }
-  payloadInlineContent {
-    title
-    ctaText
-    imageUrl
-    targetUrl
-    dimensions
-    description
-  }
-  payloadSearch {
-    body
-    title
-    targetUrl
-  }
-  payloadSearchHomepage {
-    body
-    imageUrl
-    imageDarkModeUrl
-    targetUrl
-    title
-    ctaText
+    search {
+      body
+      title
+      targetUrl
+    }
+    searchHomepage {
+      body
+      imageUrl
+      imageDarkModeUrl
+      targetUrl
+      title
+      ctaText
+    }
   }
 }
 

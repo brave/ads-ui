@@ -137,8 +137,8 @@ function CreativePayloadList(props: { creative: CreativeFragment }) {
       listItems = (
         <ListItems
           items={[
-            { primary: "Title", secondary: c.payloadNotification?.title },
-            { primary: "Body", secondary: c.payloadNotification?.body },
+            { primary: "Title", secondary: c.payload?.notification?.title },
+            { primary: "Body", secondary: c.payload?.notification?.body },
           ]}
         />
       );
@@ -175,7 +175,7 @@ const ListItems = (props: {
 };
 
 const creativeValuesGetter = (c: CreativeFragment) => {
-  const title = c.payloadNotification?.title ?? c.payloadInlineContent?.title;
-  const body = c.payloadNotification?.title ?? c.payloadInlineContent?.ctaText;
+  const title = c.payload?.notification?.title;
+  const body = c.payload?.notification?.body;
   return `${title} ${body}`;
 };
