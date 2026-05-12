@@ -19,6 +19,7 @@ const config: CodegenConfig = {
   config: {
     strictScalars: true,
     useTypeImports: true,
+    enumType: "native",
     scalars: {
       DateTime: "string",
       Numeric: {
