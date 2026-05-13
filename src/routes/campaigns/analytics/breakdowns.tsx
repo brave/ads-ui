@@ -6,16 +6,15 @@ import {
   CreativeBreakdownQuery,
   CreativeBreakdownQueryVariables,
   DisplayedMetricsFragment,
-  Exact,
   OsBreakdownQuery,
   OsBreakdownQueryVariables,
   PerformanceFilter,
 } from "@/graphql-client/graphql";
 import { TypedDocumentNode } from "@apollo/client";
 
-type GqlQueryParams = Exact<{
+type GqlQueryParams = {
   filter: PerformanceFilter;
-}>;
+};
 
 type GqlRequiredResponse<Dims> = {
   performance: {

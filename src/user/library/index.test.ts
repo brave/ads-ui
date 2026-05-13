@@ -50,6 +50,8 @@ const BASE_CPM_CAMPAIGN_FRAGMENT: Readonly<CampaignFragment> = {
   type: CampaignType.Paid,
   format: CampaignFormat.PushNotification,
   paymentType: PaymentType.Stripe,
+  dayProportion: null,
+  stripePaymentId: null,
   dayPartings: [],
   hasPaymentIntent: false,
   geoTargets: [
@@ -101,6 +103,9 @@ const BASE_CPM_CAMPAIGN_FRAGMENT: Readonly<CampaignFragment> = {
                 title: "demo title",
                 targetUrl: "https://brave.com/",
               },
+              newTabPage: null,
+              search: null,
+              searchHomepage: null,
             },
           },
         },
@@ -297,6 +302,9 @@ describe("edit form tests", () => {
         title: "valid",
         body: "valid",
       },
+      newTabPage: null,
+      search: null,
+      searchHomepage: null,
     },
     type: { code: "notification_all_v1" },
   };

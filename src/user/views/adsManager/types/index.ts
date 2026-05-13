@@ -5,7 +5,6 @@ import {
   CampaignState,
   CreativeInput,
   CreativeState,
-  CreativeTypeInput,
   OperatingSystem,
   PaymentType,
 } from "@/graphql-client/graphql";
@@ -62,7 +61,7 @@ export type Segment = {
 };
 
 export type CreativeInputWithType = CreativeInput & {
-  type: Pick<CreativeTypeInput, "code">;
+  type: { code: string };
   state: CreativeState;
 };
 
