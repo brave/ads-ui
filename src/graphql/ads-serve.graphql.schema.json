@@ -811,18 +811,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "hasQueryStringParameters",
-            "description": "if true, only include adsets that have query string parameters configured; if false, only those without",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "name",
             "description": "only include adsets whose name contains this string (case-insensitive)",
             "type": {
@@ -12530,6 +12518,55 @@
             "deprecationReason": null
           },
           {
+            "name": "moveCampaign",
+            "description": null,
+            "args": [
+              {
+                "name": "campaignId",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "newAdvertiserId",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Campaign",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "provisionNetsuiteCustomer",
             "description": null,
             "args": [
@@ -19668,8 +19705,8 @@
               "ofType": null
             },
             "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "Use moveCampaign mutation instead"
           },
           {
             "name": "bannedKeywords",
