@@ -5,6 +5,8 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import { BraveAdsContactFrame } from "@/auth/registration/BraveAdsContactFrame";
 import { AuthVerify } from "@/auth/views/AuthVerify";
 import { LandingPage } from "@/auth/views/LandingPage";
+import SignIn from "@/auth/views/Login";
+import AuthLink from "@/auth/views/MagicLink";
 import { BasicAttentionTokenLandingPage } from "@/basic-attention-token/BasicAttentionTokenLandingPage";
 import { DraftContext, getAllDrafts } from "@/state/context";
 import { CampaignForm } from "@/user/views/adsManager/types";
@@ -19,9 +21,7 @@ import { theme } from "./theme";
 
 const UserView = lazy(() => import("@/user/User"));
 const SearchPreview = lazy(() => import("@/search/preview/SearchPreviewPage"));
-const SignIn = lazy(() => import("@/auth/views/Login"));
 const Register = lazy(() => import("@/auth/registration/Register"));
-const AuthLink = lazy(() => import("@/auth/views/MagicLink"));
 const SearchLandingPage = lazy(() => import("@/search/SearchLandingPage"));
 
 export function App() {

@@ -11,7 +11,6 @@ import { setActiveAdvertiser } from "./util";
 
 export const IAuthProvider = ({ children }: IAuthProviderProps) => {
   const [state, setState] = useState<IAuthState>(initialState);
-  const [loading, setLoading] = useState(false);
 
   const getActiveAdvertiser = (
     advertisers: IAdvertiser[],
@@ -54,9 +53,6 @@ export const IAuthProvider = ({ children }: IAuthProviderProps) => {
       }
     };
 
-    // For each time a user refreshes (or lands on login for first time), check if their token is still valid
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setLoading(true);
     getUser()
       .then(async (res) => {
         const advertiserMessageResponse = await getAdvertiserMessage();
@@ -71,7 +67,6 @@ export const IAuthProvider = ({ children }: IAuthProviderProps) => {
         }));
       })
       .finally(() => {
-        setLoading(false);
         setState((cur) => ({
           ...cur,
           isInitialized: true,
@@ -81,8 +76,6 @@ export const IAuthProvider = ({ children }: IAuthProviderProps) => {
   }, []);
 
   return (
-    <IAuthContext.Provider value={state}>
-      {!loading && <>{children}</>}
-    </IAuthContext.Provider>
+    <IAuthContext.Provider value={state}>{children}</IAuthContext.Provider>
   );
 };
