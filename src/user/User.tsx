@@ -22,7 +22,7 @@ import {
   createHttpLink,
   InMemoryCache,
 } from "@apollo/client";
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import dayjs from "dayjs";
 import Settings from "./settings/Settings";
 import { CompletionForm } from "./views/adsManager/views/advanced/components/completionForm/CompletionForm";
@@ -171,6 +171,20 @@ export default function User() {
   );
 
   const isAuthenticated = useIsAuthenticated();
+
+  if (isAuthenticated === undefined) {
+    return (
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="100vh"
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
+
   if (!isAuthenticated) {
     return (
       <Switch>
