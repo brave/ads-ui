@@ -2,7 +2,6 @@ import basicSsl from "@vitejs/plugin-basic-ssl";
 import react from "@vitejs/plugin-react";
 import { defineConfig, loadEnv } from "vite";
 import checker from "vite-plugin-checker";
-import tsconfigPaths from "vite-tsconfig-paths";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -11,13 +10,13 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [
       react(),
-      tsconfigPaths(),
       checker({
         typescript: true,
         eslint: {
           lintCommand: "eslint src",
           useFlatConfig: true,
         },
+        enableBuild: false,
       }),
       basicSsl(), // used only to enable https on developer workstations,
     ],
@@ -51,21 +50,9 @@ export default defineConfig(({ mode }) => {
       assetsDir: "static",
       chunkSizeWarningLimit: 3000,
       sourcemap: true,
-      // vite automagically decides whether to inline assets depending on their size. We are explicitly disabling this.
-      assetsInlineLimit: 0,
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            lodash: ["lodash"],
-            highcharts: ["highcharts"],
-            "highcharts-react-official": ["highcharts-react-official"],
-            "react-dom": ["react-dom"],
-            forms: ["yup", "formik", "bignumber.js"],
-          },
-          minifyInternalExports: true,
-          assetFileNames: "static/[name].[hash][extname]",
-        },
-      },
+    },
+    resolve: {
+      tsconfigPaths: true,
     },
     test: {
       // see https://vitest.dev/config/#globals
