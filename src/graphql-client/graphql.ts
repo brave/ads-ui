@@ -455,8 +455,6 @@ export type UpdateAddressInput = {
 
 export type UpdateCampaignInput = {
   adSets?: Array<UpdateAdSetInput> | null | undefined;
-  /** @deprecated Use moveCampaign mutation instead */
-  advertiserId?: string | null | undefined;
   bannedKeywords?: Array<string> | null | undefined;
   brandedKeyword?: string | null | undefined;
   brandedKeywords?: Array<string> | null | undefined;
