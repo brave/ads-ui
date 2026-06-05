@@ -17,7 +17,7 @@
     "@mui/x-data-grid": "8.28.7",
     "@mui/x-date-pickers": "8.28.7",
     "bignumber.js": "11.1.1",
-    "dayjs": "1.11.20",
+    "dayjs": "1.11.21",
     "formik": "2.4.9",
     "graphql": "16.14.0",
     "highcharts": "12.6.0",
@@ -50,9 +50,9 @@
   },
   "devDependencies": {
     "@eslint/js": "9.39.4",
-    "@graphql-codegen/cli": "7.0.0",
-    "@graphql-codegen/client-preset": "6.0.0",
-    "@graphql-codegen/introspection": "6.0.0",
+    "@graphql-codegen/cli": "7.1.0",
+    "@graphql-codegen/client-preset": "6.0.1",
+    "@graphql-codegen/introspection": "6.0.1",
     "@graphql-eslint/eslint-plugin": "4.4.0",
     "@parcel/watcher": "2.5.6",
     "@types/lodash": "4.17.24",
@@ -66,14 +66,14 @@
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "7.1.1",
     "husky": "9.1.7",
-    "knip": "6.14.1",
+    "knip": "6.14.2",
     "lint-staged": "17.0.5",
     "prettier": "3.8.3",
     "prettier-plugin-organize-imports": "4.3.0",
     "typescript": "6.0.3",
-    "typescript-eslint": "8.59.4",
+    "typescript-eslint": "8.60.0",
     "vite": "7.3.3",
-    "vite-plugin-checker": "0.13.0",
+    "vite-plugin-checker": "0.14.1",
     "vite-tsconfig-paths": "6.1.1",
     "vitest": "4.1.7"
   },
@@ -102,5 +102,5 @@
       "eslint"
     ]
   },
-  "packageManager": "pnpm@10.33.4+sha512.1c67b3b359b2d408119ba1ed289f34b8fc3c6873412bec6fd264fbdc82489e510fcbecb9ce9d22dae7f3b76269d8441046014bdca53b9979cd7a561ad631b800"
+  "packageManager": "pnpm@10.34.1+sha512.b58fbde6dca66a929538021581f648b4570b6ca19b18e7cbd7f2c07a7b24454155388dacdf08f2af3678e88a6d1fe04f9d609df24bf51735a060ea041b374ab7"
 }
