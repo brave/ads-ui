@@ -99,8 +99,8 @@
   "lint-staged": {
     "*.{ts,tsx}": [
       "prettier --write",
-      "eslint"
+      "eslint --cache --no-warn-ignored"
     ]
   },
-  "packageManager": "pnpm@10.34.1+sha512.b58fbde6dca66a929538021581f648b4570b6ca19b18e7cbd7f2c07a7b24454155388dacdf08f2af3678e88a6d1fe04f9d609df24bf51735a060ea041b374ab7"
+  "packageManager": "pnpm@11.3.0+sha512.2c403d6594527287672b1f7056343a1f7c3634036a67ffabfcc2b3d7595d843768f8787148d1b57cf7956c90606bbd192857c363af19e96d2d0ec9ec5741d215"
 }
