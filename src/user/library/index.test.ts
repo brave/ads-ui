@@ -11,6 +11,7 @@ import {
   CampaignType,
   CreativeFragment,
   CreativeState,
+  OperatingSystem,
   PaymentType,
 } from "@/graphql-client/graphql";
 import {
@@ -49,6 +50,8 @@ const BASE_CPM_CAMPAIGN_FRAGMENT: Readonly<CampaignFragment> = {
   type: CampaignType.Paid,
   format: CampaignFormat.PushNotification,
   paymentType: PaymentType.Stripe,
+  dayProportion: null,
+  stripePaymentId: null,
   dayPartings: [],
   hasPaymentIntent: false,
   geoTargets: [
@@ -73,29 +76,14 @@ const BASE_CPM_CAMPAIGN_FRAGMENT: Readonly<CampaignFragment> = {
           name: "Arts & Entertainment",
         },
       ],
-      oses: [
-        {
-          code: "i1g4cO6Pl",
-          name: "windows",
-        },
-        {
-          code: "_Bt5nxrNo",
-          name: "macos",
-        },
-        {
-          code: "-Ug5OXisJ",
-          name: "linux",
-        },
-        {
-          code: "k80syyzDa",
-          name: "ios",
-        },
-        {
-          code: "mbwfZU-4W",
-          name: "android",
-        },
+      operatingSystems: [
+        OperatingSystem.Windows,
+        OperatingSystem.Macos,
+        OperatingSystem.Linux,
+        OperatingSystem.Ios,
+        OperatingSystem.Android,
       ],
-      conversions: [],
+      conversion: null,
       ads: [
         {
           id: "13e4d556-cec4-4b2a-85e6-73fdf625c0cb",
@@ -109,10 +97,15 @@ const BASE_CPM_CAMPAIGN_FRAGMENT: Readonly<CampaignFragment> = {
             type: {
               code: "notification_all_v1",
             },
-            payloadNotification: {
-              body: "demo body",
-              title: "demo title",
-              targetUrl: "https://brave.com/",
+            payload: {
+              notification: {
+                body: "demo body",
+                title: "demo title",
+                targetUrl: "https://brave.com/",
+              },
+              newTabPage: null,
+              search: null,
+              searchHomepage: null,
             },
           },
         },
@@ -223,7 +216,7 @@ describe("new form tests", () => {
     creatives: [creative, creative2],
     isNotTargeting: false,
     name: "",
-    oses: [{ name: "macos", code: "1234" }],
+    operatingSystems: [OperatingSystem.Macos],
     segments: [{ name: "test", code: "5678" }],
   };
 
@@ -260,7 +253,7 @@ describe("new form tests", () => {
             "name": "",
             "oses": [
               {
-                "code": "1234",
+                "code": "_Bt5nxrNo",
                 "name": "macos",
               },
             ],
@@ -303,10 +296,15 @@ describe("edit form tests", () => {
     modifiedAt: "2024-01-01",
     name: "a creative",
     state: CreativeState.Active,
-    payloadNotification: {
-      targetUrl: "valid",
-      title: "valid",
-      body: "valid",
+    payload: {
+      notification: {
+        targetUrl: "valid",
+        title: "valid",
+        body: "valid",
+      },
+      newTabPage: null,
+      search: null,
+      searchHomepage: null,
     },
     type: { code: "notification_all_v1" },
   };
@@ -329,11 +327,11 @@ describe("edit form tests", () => {
     ads: [ad, ad2],
     price: "6",
     billingType: BillingType.Cpm,
-    conversions: [],
+    conversion: null,
     createdAt: undefined,
     id: "11111",
     perDay: 1,
-    oses: [{ name: "macos", code: "1234" }],
+    operatingSystems: [OperatingSystem.Macos],
     segments: [{ name: "test", code: "5678" }],
     state: AdSetState.Active,
     totalMax: 100,
@@ -343,11 +341,11 @@ describe("edit form tests", () => {
     ads: [ad],
     price: "6",
     billingType: BillingType.Cpm,
-    conversions: [],
+    conversion: null,
     createdAt: undefined,
     id: "22222",
     perDay: 1,
-    oses: [{ name: "linux", code: "1234" }],
+    operatingSystems: [OperatingSystem.Linux],
     segments: [{ name: "help", code: "5678" }],
     state: AdSetState.Active,
     totalMax: 100,
@@ -401,7 +399,6 @@ describe("edit form tests", () => {
                 "id": "1234",
                 "included": true,
                 "name": "a creative",
-                "payloadInlineContent": undefined,
                 "payloadNotification": {
                   "body": "valid",
                   "targetUrl": "valid",
@@ -419,7 +416,6 @@ describe("edit form tests", () => {
                 "id": "1235",
                 "included": true,
                 "name": "a different creative",
-                "payloadInlineContent": undefined,
                 "payloadNotification": {
                   "body": "valid",
                   "targetUrl": "valid",
@@ -435,11 +431,8 @@ describe("edit form tests", () => {
             "id": "11111",
             "isNotTargeting": false,
             "name": "11111",
-            "oses": [
-              {
-                "code": "1234",
-                "name": "macos",
-              },
+            "operatingSystems": [
+              "macos",
             ],
             "segments": [
               {
@@ -458,7 +451,6 @@ describe("edit form tests", () => {
                 "id": "1234",
                 "included": true,
                 "name": "a creative",
-                "payloadInlineContent": undefined,
                 "payloadNotification": {
                   "body": "valid",
                   "targetUrl": "valid",
@@ -476,7 +468,6 @@ describe("edit form tests", () => {
                 "id": "1235",
                 "included": false,
                 "name": "a different creative",
-                "payloadInlineContent": undefined,
                 "payloadNotification": {
                   "body": "valid",
                   "targetUrl": "valid",
@@ -492,11 +483,8 @@ describe("edit form tests", () => {
             "id": "22222",
             "isNotTargeting": false,
             "name": "22222",
-            "oses": [
-              {
-                "code": "1234",
-                "name": "linux",
-              },
+            "operatingSystems": [
+              "linux",
             ],
             "segments": [
               {

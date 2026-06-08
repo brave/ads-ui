@@ -106,7 +106,9 @@ export function AdvertiserDetailsForm() {
                   Complete your business profile to continue
                 </Typography>
 
-                <AdvertiserAddress address={data?.advertiser?.billingAddress} />
+                <AdvertiserAddress
+                  address={data?.advertiser?.billingAddress ?? null}
+                />
 
                 <AdvertiserAgreed requiresPaymentAgree={requiresPaymentAgree} />
 

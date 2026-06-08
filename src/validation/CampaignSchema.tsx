@@ -1,5 +1,5 @@
 import { twoDaysOut } from "@/form/DateFieldHelpers";
-import { CampaignFormat } from "@/graphql-client/graphql";
+import { CampaignFormat, OperatingSystem } from "@/graphql-client/graphql";
 import { AdvertiserPrice } from "@/user/hooks/useAdvertiserWithPrices";
 import { Billing } from "@/user/views/adsManager/types";
 import {
@@ -99,12 +99,8 @@ export const CampaignSchema = (prices: AdvertiserPrice[]) =>
               }),
             )
             .default([]),
-          oses: array()
-            .of(
-              object().shape({
-                code: string().required(),
-              }),
-            )
+          operatingSystems: array()
+            .of(string().oneOf(Object.values(OperatingSystem)).required())
             .min(1, "At least one platform must be targeted")
             .default([]),
           conversion: object()

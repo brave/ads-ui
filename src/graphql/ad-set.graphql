@@ -11,11 +11,8 @@ fragment AdSet on AdSet {
     code
     name
   }
-  oses {
-    code
-    name
-  }
-  conversions {
+  operatingSystems
+  conversion {
     id
     urlPattern
     observationWindow
@@ -39,15 +36,12 @@ fragment AdSetWithDeletedAds on AdSet {
   name
   state
   billingType
-  oses {
-    code
-    name
-  }
+  operatingSystems
   segments {
     code
     name
   }
-  conversions {
+  conversion {
     id
   }
   ads(includeDeleted: true) {

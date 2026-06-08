@@ -8,6 +8,7 @@ import {
   CampaignFragment,
   CreateCampaignInput,
   CreativeFragment,
+  OperatingSystem,
 } from "@/graphql-client/graphql";
 import {
   AdSetForm,
@@ -94,12 +95,13 @@ export function editCampaignValues(
       return {
         id: adSet.id,
         state: adSet.state,
-        conversion: (adSet.conversions ?? []).map((c) => ({
-          id: c.id,
-          observationWindow: c.observationWindow,
-          urlPattern: c.urlPattern,
-        }))[0],
-        oses: (adSet.oses ?? []).map((o) => ({ name: o.name, code: o.code })),
+        conversion: adSet.conversion
+          ? {
+              observationWindow: adSet.conversion.observationWindow,
+              urlPattern: adSet.conversion.urlPattern,
+            }
+          : undefined,
+        operatingSystems: adSet.operatingSystems ?? [],
         segments: (adSet.segments ?? []).map((o) => ({
           name: o.name,
           code: o.code,
@@ -153,19 +155,13 @@ function creativeList(
   );
 }
 
-type GenericCreative = Omit<
-  CreativeFragment,
-  | "createdAt"
-  | "modifiedAt"
-  | "payloadSearchHomepage"
-  | "payloadSearch"
-  | "payloadNewTabPage"
->;
+type GenericCreative = Omit<CreativeFragment, "createdAt" | "modifiedAt">;
 export function validCreativeFields<T extends GenericCreative>(
   c: T,
   advertiserId: string,
   included?: boolean,
 ) {
+  const notification = c.payload?.notification;
   return {
     advertiserId,
     id: c.id,
@@ -175,22 +171,11 @@ export function validCreativeFields<T extends GenericCreative>(
     state: c.state,
     type: { code: c.type.code },
     payloadNotification:
-      c.type.code === "notification_all_v1" && !!c.payloadNotification
+      c.type.code === "notification_all_v1" && !!notification
         ? {
-            title: c.payloadNotification.title,
-            body: c.payloadNotification.body,
-            targetUrl: c.payloadNotification.targetUrl,
-          }
-        : undefined,
-    payloadInlineContent:
-      c.type.code === "inline_content_all_v1" && !!c.payloadInlineContent
-        ? {
-            ctaText: c.payloadInlineContent.ctaText,
-            description: c.payloadInlineContent.description,
-            dimensions: "900x750",
-            imageUrl: c.payloadInlineContent.imageUrl,
-            targetUrl: c.payloadInlineContent.targetUrl,
-            title: c.payloadInlineContent.title,
+            title: notification.title,
+            body: notification.body,
+            targetUrl: notification.targetUrl,
           }
         : undefined,
   };
@@ -231,7 +216,9 @@ export function transformEditForm(
         segmentCodes: adSetFieldChange("segments", idx, (s) =>
           s.map((s) => s.code),
         ),
-        osCodes: adSetFieldChange("oses", idx, (o) => o.map((o) => o.code)),
+        osCodes: adSetFieldChange("operatingSystems", idx, (o) =>
+          o.map((o) => osEnumToLegacyCode[o]),
+        ),
         creativeIds: adSetFieldChange(
           "creatives",
           idx,
@@ -244,7 +231,7 @@ export function transformEditForm(
         name: adSet.name,
         conversion: adSet.conversion ? _.omit(adSet.conversion, "type") : null,
         segmentCodes: adSet.segments.map((s) => s.code),
-        osCodes: adSet.oses.map((s) => s.code),
+        osCodes: adSet.operatingSystems.map((s) => osEnumToLegacyCode[s]),
         creativeIds: adSet.creatives
           .filter((c) => c.included && !!c.id)
           .map((c) => c.id) as string[],
@@ -276,6 +263,14 @@ export function transformEditForm(
   };
 }
 
+const osEnumToLegacyCode: Record<OperatingSystem, string> = {
+  [OperatingSystem.Windows]: "i1g4cO6Pl",
+  [OperatingSystem.Macos]: "_Bt5nxrNo",
+  [OperatingSystem.Linux]: "-Ug5OXisJ",
+  [OperatingSystem.Ios]: "k80syyzDa",
+  [OperatingSystem.Android]: "mbwfZU-4W",
+};
+
 function transformAdSet(
   adSet: AdSetForm,
   campaign: Pick<CampaignForm, "format" | "billingType" | "price">,
@@ -286,7 +281,10 @@ function transformAdSet(
     billingType: campaign.billingType,
     perDay: 4,
     segments: adSet.segments.map((s) => ({ code: s.code, name: s.name })),
-    oses: adSet.oses.map((s) => ({ code: s.code, name: s.name })),
+    oses: adSet.operatingSystems.map((os) => ({
+      code: osEnumToLegacyCode[os],
+      name: os,
+    })),
     totalMax: campaign.format === CampaignFormat.PushNotification ? 28 : 60,
   };
 }

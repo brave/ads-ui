@@ -1,7 +1,7 @@
 import { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
-  schema: "../ads-serve/src/graphql/schema.graphql",
+  schema: "../ads-serve/schema.graphql",
   documents: ["src/**/*.ts", "src/**/*.tsx", "src/**/*.graphql"],
   ignoreNoDocuments: true,
   overwrite: true,
@@ -19,6 +19,7 @@ const config: CodegenConfig = {
   config: {
     strictScalars: true,
     useTypeImports: true,
+    enumType: "native",
     scalars: {
       DateTime: "string",
       Numeric: {

@@ -46,6 +46,7 @@ export default defineConfig(
     rules: {
       ...graphqlPlugin.configs["operations-recommended"].rules,
       "@graphql-eslint/no-deprecated": "warn",
+      "@graphql-eslint/selection-set-depth": ["error", { maxDepth: 8 }],
     },
   },
   {

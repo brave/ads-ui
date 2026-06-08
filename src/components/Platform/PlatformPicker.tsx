@@ -1,19 +1,15 @@
+import { OperatingSystem } from "@/graphql-client/graphql";
 import { Autocomplete, TextField } from "@mui/material";
 import { useField } from "formik";
 import _ from "lodash";
-
-interface PlatformLookup {
-  code: string;
-  name: string;
-}
 
 interface Props {
   idx: number;
 }
 
 export const PlatformPicker = ({ idx }: Props) => {
-  const [formProps, meta, helper] = useField<PlatformLookup[]>({
-    name: `adSets.${idx}.oses`,
+  const [formProps, meta, helper] = useField<OperatingSystem[]>({
+    name: `adSets.${idx}.operatingSystems`,
   });
 
   const errorMessage = meta.error;
@@ -23,15 +19,15 @@ export const PlatformPicker = ({ idx }: Props) => {
       sx={{ mt: 3 }}
       multiple
       options={[
-        { code: "i1g4cO6Pl", name: "windows" },
-        { code: "_Bt5nxrNo", name: "macos" },
-        { code: "-Ug5OXisJ", name: "linux" },
-        { code: "k80syyzDa", name: "ios" },
-        { code: "mbwfZU-4W", name: "android" },
+        OperatingSystem.Windows,
+        OperatingSystem.Macos,
+        OperatingSystem.Linux,
+        OperatingSystem.Ios,
+        OperatingSystem.Android,
       ]}
       disableCloseOnSelect
       autoHighlight
-      getOptionLabel={(option) => option.name}
+      getOptionLabel={(option) => option}
       renderInput={(params) => (
         <TextField
           {...params}
@@ -44,10 +40,10 @@ export const PlatformPicker = ({ idx }: Props) => {
           error={meta.touched && !!errorMessage}
         />
       )}
-      isOptionEqualToValue={(option, value) => option.code === value.code}
+      isOptionEqualToValue={(option, value) => option === value}
       value={formProps.value}
       onChange={(_ev, value) => {
-        helper.setValue(_.sortBy(value, "name"));
+        helper.setValue(_.sortBy(value));
       }}
       onBlur={() => helper.setTouched(true)}
     />
