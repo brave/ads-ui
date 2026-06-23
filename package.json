@@ -20,7 +20,7 @@
     "dayjs": "1.11.21",
     "formik": "2.4.9",
     "graphql": "17.0.0",
-    "highcharts": "12.6.0",
+    "highcharts": "13.0.0",
     "highcharts-react-official": "3.2.3",
     "immer": "11.1.8",
     "lodash": "4.18.1",
