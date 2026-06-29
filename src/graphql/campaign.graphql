@@ -30,7 +30,7 @@ fragment Campaign on Campaign {
     code
     name
   }
-  adSets {
+  adSets(limit: 100000, offset: 0) {
     ...AdSet
   }
   advertiser {
@@ -79,7 +79,7 @@ fragment CampaignAds on Campaign {
   advertiser {
     id
   }
-  adSets {
+  adSets(limit: 100000, offset: 0) {
     ...AdSetWithDeletedAds
   }
 }
@@ -96,8 +96,8 @@ query LoadCampaignAds($id: String!) {
   }
 }
 
-mutation CreateCampaign($input: CreateCampaignInput!) {
-  createCampaign(createCampaignInput: $input) {
+mutation AdsManagerCreateCampaign($input: AdsManagerCreateCampaignInput!) {
+  adsManagerCreateCampaign(input: $input) {
     id
     paymentType
   }
