@@ -249,8 +249,8 @@ describe("new form tests", () => {
               "11111",
             ],
             "name": "",
-            "osCodes": [
-              "_Bt5nxrNo",
+            "operatingSystems": [
+              "macos",
             ],
             "price": "0.006",
             "segmentCodes": [
@@ -260,7 +260,6 @@ describe("new form tests", () => {
         ],
         "advertiserId": "12345",
         "budget": 1000,
-        "format": "PUSH_NOTIFICATION",
         "geoTargetCodes": [
           "US",
         ],
