@@ -30,7 +30,7 @@ fragment Campaign on Campaign {
     code
     name
   }
-  adSets(limit: 100000, offset: 0) {
+  adSets {
     ...AdSet
   }
   advertiser {
@@ -79,7 +79,7 @@ fragment CampaignAds on Campaign {
   advertiser {
     id
   }
-  adSets(limit: 100000, offset: 0) {
+  adSets {
     ...AdSetWithDeletedAds
   }
 }
