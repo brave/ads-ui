@@ -96,8 +96,8 @@ query LoadCampaignAds($id: String!) {
   }
 }
 
-mutation CreateCampaign($input: CreateCampaignInput!) {
-  createCampaign(createCampaignInput: $input) {
+mutation AdsManagerCreateCampaign($input: AdsManagerCreateCampaignInput!) {
+  adsManagerCreateCampaign(input: $input) {
     id
     paymentType
   }
