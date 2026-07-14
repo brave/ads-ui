@@ -15,11 +15,6 @@
     {
       "matchDepTypes": ["pnpm.overrides", "pnpm-workspace.overrides"],
       "enabled": false
-    },
-    {
-      "description": "Since running pnpm to generate the lockfile currently breaks renovate, just flag in the dashboard when npm deps need updates",
-      "matchDatasources": ["npm"],
-      "dependencyDashboardApproval": true
     }
   ]
 }
