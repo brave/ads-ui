@@ -168,18 +168,6 @@ export enum CampaignType {
   Trial = 'TRIAL'
 }
 
-export type ConditionMatchersInput = {
-  condition: string;
-  prefPath: string;
-};
-
-export type CreateAdInput = {
-  creative?: CreativeInput | null | undefined;
-  creativeId?: string | null | undefined;
-  creativeSetId?: string | null | undefined;
-  id?: string | null | undefined;
-};
-
 export type CreativeInput = {
   advertiserId: string;
   endAt?: string | null | undefined;
@@ -206,21 +194,9 @@ export enum CreativeState {
   UnderReview = 'under_review'
 }
 
-export type DayPartingInput = {
-  dow: string;
-  endMinute: number;
-  startMinute: number;
-};
-
 export type FocalPointInput = {
   x: number;
   y: number;
-};
-
-export type GeocodeInput = {
-  code: string;
-  /** @deprecated Present for backwards compatibility only. The value is ignored. */
-  name?: string | null | undefined;
 };
 
 export type InPagePayloadInput = {
@@ -336,43 +312,6 @@ export type SearchPayloadInput = {
   title: string;
 };
 
-export type UpdateAdSetInput = {
-  ads?: Array<CreateAdInput> | null | undefined;
-  bannedKeywords?: Array<string> | null | undefined;
-  billingType?: string | null | undefined;
-  brandedDesktopPrice?: string | number | null | undefined;
-  brandedMobilePrice?: string | number | null | undefined;
-  campaignId?: string | null | undefined;
-  conditionMatchers?: Array<ConditionMatchersInput> | null | undefined;
-  conversions?: Array<UpdateConversionsInput> | null | undefined;
-  externalId?: string | null | undefined;
-  id?: string | null | undefined;
-  keywordSimilarity?: number | null | undefined;
-  keywordSimilarityMobile?: number | null | undefined;
-  keywords?: Array<string> | null | undefined;
-  name?: string | null | undefined;
-  negativeKeywords?: Array<string> | null | undefined;
-  negativeTriggerUrls?: Array<string> | null | undefined;
-  negativeUrlPatterns?: Array<string> | null | undefined;
-  nonBrandedDesktopPrice?: string | number | null | undefined;
-  nonBrandedMobilePrice?: string | number | null | undefined;
-  optimized?: boolean | null | undefined;
-  oses?: Array<UpdateOSesInput> | null | undefined;
-  perDay?: number | null | undefined;
-  preferOrganicCreative?: boolean | null | undefined;
-  /** The price in the owning campaign's currency for each single confirmation of the priceType specified. Note therefore that the caller is responsible for dividing cost-per-mille by 1000. */
-  price?: string | number | null | undefined;
-  priority?: number | null | undefined;
-  queryStrings?: Array<KeyValueInput> | null | undefined;
-  segments?: Array<UpdateSegmentInput> | null | undefined;
-  splitTestGroup?: string | null | undefined;
-  state?: AdSetState | null | undefined;
-  totalMax?: number | null | undefined;
-  triggerDomainAsPrefix?: boolean | null | undefined;
-  triggerDomains?: Array<string> | null | undefined;
-  triggerUrls?: Array<string> | null | undefined;
-};
-
 export type UpdateAddressInput = {
   city?: string | null | undefined;
   country?: string | null | undefined;
@@ -384,62 +323,9 @@ export type UpdateAddressInput = {
   zipcode?: string | null | undefined;
 };
 
-export type UpdateCampaignInput = {
-  adSets?: Array<UpdateAdSetInput> | null | undefined;
-  bannedKeywords?: Array<string> | null | undefined;
-  brandedKeyword?: string | null | undefined;
-  brandedKeywords?: Array<string> | null | undefined;
-  budget?: string | number | null | undefined;
-  complianceBanner?: string | null | undefined;
-  currency?: string | null | undefined;
-  customFavicon?: string | null | undefined;
-  customSiteName?: string | null | undefined;
-  dailyBudget?: string | number | null | undefined;
-  dailyCap?: number | null | undefined;
-  dayPartings?: Array<DayPartingInput> | null | undefined;
-  dayProportion?: number | null | undefined;
-  endAt?: string | null | undefined;
-  externalId?: string | null | undefined;
-  geoTargets?: Array<GeocodeInput> | null | undefined;
-  id: string;
-  includeThumbnail?: boolean | null | undefined;
-  name?: string | null | undefined;
-  negativeKeywords?: Array<string> | null | undefined;
-  pacingOverride?: boolean | null | undefined;
-  pacingStrategy?: CampaignPacingStrategies | null | undefined;
-  passThroughRate?: number | null | undefined;
-  paymentType?: PaymentType | null | undefined;
-  permitInAi?: boolean | null | undefined;
-  permitNonFamilyFriendly?: boolean | null | undefined;
-  pharmaceuticalCompliance?: boolean | null | undefined;
-  postSurveyCampaignId?: string | null | undefined;
-  preSurveyCampaignId?: string | null | undefined;
-  priority?: number | null | undefined;
-  queryStrings?: Array<KeyValueInput> | null | undefined;
-  startAt?: string | null | undefined;
-  state?: CampaignState | null | undefined;
-  type?: CampaignType | null | undefined;
-};
-
-export type UpdateConversionsInput = {
-  id?: string | null | undefined;
-  observationWindow?: number | null | undefined;
-  urlPattern?: string | null | undefined;
-};
-
 export type UpdateCurrentUserInput = {
   fullName: string;
   password?: string | null | undefined;
-};
-
-export type UpdateOSesInput = {
-  code?: string | null | undefined;
-  name?: string | null | undefined;
-};
-
-export type UpdateSegmentInput = {
-  code?: string | null | undefined;
-  name?: string | null | undefined;
 };
 
 export type WallpaperInput = {
@@ -595,12 +481,13 @@ export type AdsManagerCreateCampaignMutationVariables = Exact<{
 
 export type AdsManagerCreateCampaignMutation = { adsManagerCreateCampaign: { id: string, paymentType: PaymentType } };
 
-export type UpdateCampaignMutationVariables = Exact<{
-  input: UpdateCampaignInput;
+export type AdsManagerUpdateCampaignStateMutationVariables = Exact<{
+  id: string;
+  state: CampaignState;
 }>;
 
 
-export type UpdateCampaignMutation = { updateCampaign: { id: string, paymentType: PaymentType, stripePaymentId: string | null } };
+export type AdsManagerUpdateCampaignStateMutation = { adsManagerUpdateCampaignState: { id: string } };
 
 export type GeocodeFragment = { code: string, name: string };
 
@@ -794,7 +681,7 @@ export const FetchAdSetMetricsForCampaignDocument = {"kind":"Document","definiti
 export const LoadCampaignDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"LoadCampaign"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"campaign"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Campaign"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Creative"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Creative"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"modifiedAt"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}}]}},{"kind":"Field","name":{"kind":"Name","value":"payload"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"notification"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"targetUrl"}}]}},{"kind":"Field","name":{"kind":"Name","value":"newTabPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"imageUrl"}},{"kind":"Field","name":{"kind":"Name","value":"alt"}},{"kind":"Field","name":{"kind":"Name","value":"companyName"}},{"kind":"Field","name":{"kind":"Name","value":"destinationUrl"}}]}},{"kind":"Field","name":{"kind":"Name","value":"wallpapers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"imageUrl"}},{"kind":"Field","name":{"kind":"Name","value":"focalPoint"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"x"}},{"kind":"Field","name":{"kind":"Name","value":"y"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"search"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"targetUrl"}}]}},{"kind":"Field","name":{"kind":"Name","value":"searchHomepage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"imageUrl"}},{"kind":"Field","name":{"kind":"Name","value":"imageDarkModeUrl"}},{"kind":"Field","name":{"kind":"Name","value":"targetUrl"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"ctaText"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Ad"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Ad"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"creative"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Creative"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AdSet"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AdSet"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"billingType"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"totalMax"}},{"kind":"Field","name":{"kind":"Name","value":"perDay"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"segments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"operatingSystems"}},{"kind":"Field","name":{"kind":"Name","value":"conversion"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"urlPattern"}},{"kind":"Field","name":{"kind":"Name","value":"observationWindow"}}]}},{"kind":"Field","name":{"kind":"Name","value":"ads"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Ad"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Campaign"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Campaign"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"dailyCap"}},{"kind":"Field","name":{"kind":"Name","value":"priority"}},{"kind":"Field","name":{"kind":"Name","value":"passThroughRate"}},{"kind":"Field","name":{"kind":"Name","value":"pacingOverride"}},{"kind":"Field","name":{"kind":"Name","value":"pacingStrategy"}},{"kind":"Field","name":{"kind":"Name","value":"externalId"}},{"kind":"Field","name":{"kind":"Name","value":"currency"}},{"kind":"Field","name":{"kind":"Name","value":"budget"}},{"kind":"Field","name":{"kind":"Name","value":"spent"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"startAt"}},{"kind":"Field","name":{"kind":"Name","value":"endAt"}},{"kind":"Field","name":{"kind":"Name","value":"source"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"format"}},{"kind":"Field","name":{"kind":"Name","value":"paymentType"}},{"kind":"Field","name":{"kind":"Name","value":"dayProportion"}},{"kind":"Field","name":{"kind":"Name","value":"stripePaymentId"}},{"kind":"Field","name":{"kind":"Name","value":"hasPaymentIntent"}},{"kind":"Field","name":{"kind":"Name","value":"dayPartings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dow"}},{"kind":"Field","name":{"kind":"Name","value":"startMinute"}},{"kind":"Field","name":{"kind":"Name","value":"endMinute"}}]}},{"kind":"Field","name":{"kind":"Name","value":"geoTargets"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"adSets"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"AdSet"}}]}},{"kind":"Field","name":{"kind":"Name","value":"advertiser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<LoadCampaignQuery, LoadCampaignQueryVariables>;
 export const LoadCampaignAdsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"LoadCampaignAds"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"campaign"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CampaignAds"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Creative"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Creative"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"modifiedAt"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}}]}},{"kind":"Field","name":{"kind":"Name","value":"payload"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"notification"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"targetUrl"}}]}},{"kind":"Field","name":{"kind":"Name","value":"newTabPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"imageUrl"}},{"kind":"Field","name":{"kind":"Name","value":"alt"}},{"kind":"Field","name":{"kind":"Name","value":"companyName"}},{"kind":"Field","name":{"kind":"Name","value":"destinationUrl"}}]}},{"kind":"Field","name":{"kind":"Name","value":"wallpapers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"imageUrl"}},{"kind":"Field","name":{"kind":"Name","value":"focalPoint"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"x"}},{"kind":"Field","name":{"kind":"Name","value":"y"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"search"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"targetUrl"}}]}},{"kind":"Field","name":{"kind":"Name","value":"searchHomepage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"imageUrl"}},{"kind":"Field","name":{"kind":"Name","value":"imageDarkModeUrl"}},{"kind":"Field","name":{"kind":"Name","value":"targetUrl"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"ctaText"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Ad"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Ad"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"creative"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Creative"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AdSetWithDeletedAds"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AdSet"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"billingType"}},{"kind":"Field","name":{"kind":"Name","value":"operatingSystems"}},{"kind":"Field","name":{"kind":"Name","value":"segments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"conversion"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"ads"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"includeDeleted"},"value":{"kind":"BooleanValue","value":true}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Ad"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CampaignAds"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Campaign"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"startAt"}},{"kind":"Field","name":{"kind":"Name","value":"endAt"}},{"kind":"Field","name":{"kind":"Name","value":"source"}},{"kind":"Field","name":{"kind":"Name","value":"currency"}},{"kind":"Field","name":{"kind":"Name","value":"format"}},{"kind":"Field","name":{"kind":"Name","value":"advertiser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"adSets"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"AdSetWithDeletedAds"}}]}}]}}]} as unknown as DocumentNode<LoadCampaignAdsQuery, LoadCampaignAdsQueryVariables>;
 export const AdsManagerCreateCampaignDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"AdsManagerCreateCampaign"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"AdsManagerCreateCampaignInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"adsManagerCreateCampaign"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"paymentType"}}]}}]}}]} as unknown as DocumentNode<AdsManagerCreateCampaignMutation, AdsManagerCreateCampaignMutationVariables>;
-export const UpdateCampaignDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateCampaign"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateCampaignInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateCampaign"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"updateCampaignInput"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"paymentType"}},{"kind":"Field","name":{"kind":"Name","value":"stripePaymentId"}}]}}]}}]} as unknown as DocumentNode<UpdateCampaignMutation, UpdateCampaignMutationVariables>;
+export const AdsManagerUpdateCampaignStateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"AdsManagerUpdateCampaignState"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"state"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CampaignState"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"adsManagerUpdateCampaignState"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"state"},"value":{"kind":"Variable","name":{"kind":"Name","value":"state"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<AdsManagerUpdateCampaignStateMutation, AdsManagerUpdateCampaignStateMutationVariables>;
 export const ActiveGeocodesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ActiveGeocodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"geocodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Geocode"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Geocode"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Geocode"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]} as unknown as DocumentNode<ActiveGeocodesQuery, ActiveGeocodesQueryVariables>;
 export const SegmentsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Segments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"adsManagerSegments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Segment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Segment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Segment"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]} as unknown as DocumentNode<SegmentsQuery, SegmentsQueryVariables>;
 export const AdvertiserCreativesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AdvertiserCreatives"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"advertiserId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"advertiser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"advertiserId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"creatives"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Creative"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Creative"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Creative"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"modifiedAt"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}}]}},{"kind":"Field","name":{"kind":"Name","value":"payload"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"notification"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"targetUrl"}}]}},{"kind":"Field","name":{"kind":"Name","value":"newTabPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"imageUrl"}},{"kind":"Field","name":{"kind":"Name","value":"alt"}},{"kind":"Field","name":{"kind":"Name","value":"companyName"}},{"kind":"Field","name":{"kind":"Name","value":"destinationUrl"}}]}},{"kind":"Field","name":{"kind":"Name","value":"wallpapers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"imageUrl"}},{"kind":"Field","name":{"kind":"Name","value":"focalPoint"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"x"}},{"kind":"Field","name":{"kind":"Name","value":"y"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"search"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"targetUrl"}}]}},{"kind":"Field","name":{"kind":"Name","value":"searchHomepage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"imageUrl"}},{"kind":"Field","name":{"kind":"Name","value":"imageDarkModeUrl"}},{"kind":"Field","name":{"kind":"Name","value":"targetUrl"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"ctaText"}}]}}]}}]}}]} as unknown as DocumentNode<AdvertiserCreativesQuery, AdvertiserCreativesQueryVariables>;

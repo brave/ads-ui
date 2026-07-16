@@ -5,14 +5,14 @@ import { ReactElement, ReactNode, useContext } from "react";
 import { OnOff } from "@/components/Switch/OnOff";
 import {
   AdSetState,
+  AdsManagerUpdateAdSetInput,
+  AdsManagerUpdateCampaignStateDocument,
   AdvertiserCampaignsDocument,
   CampaignSource,
   CampaignState,
   CampaignSummaryFragment,
   LoadCampaignAdsDocument,
   LoadCampaignDocument,
-  UpdateAdSetInput,
-  UpdateCampaignDocument,
 } from "@/graphql-client/graphql";
 import { graphql } from "@/graphql-client/index";
 import { FilterContext } from "@/state/context";
@@ -93,23 +93,26 @@ export function campaignOnOffState(
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { fromDate } = useContext(FilterContext);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [updateCampaign, { loading }] = useMutation(UpdateCampaignDocument, {
-    refetchQueries: [
-      {
-        query: AdvertiserCampaignsDocument,
-        variables: {
-          id: c.advertiserId,
-          filter: { from: fromDate?.toISOString() },
+  const [updateCampaignState, { loading }] = useMutation(
+    AdsManagerUpdateCampaignStateDocument,
+    {
+      refetchQueries: [
+        {
+          query: AdvertiserCampaignsDocument,
+          variables: {
+            id: c.advertiserId,
+            filter: { from: fromDate?.toISOString() },
+          },
         },
-      },
-    ],
-  });
+      ],
+    },
+  );
 
   return (
     <OnOff
       onChange={(s) => {
-        updateCampaign({
-          variables: { input: { id: c.id, state: s as CampaignState } },
+        updateCampaignState({
+          variables: { id: c.id, state: s as CampaignState },
         });
       }}
       loading={loading}
@@ -122,11 +125,13 @@ export function campaignOnOffState(
 }
 
 export function adSetOnOffState(
-  c: Omit<UpdateAdSetInput, "ads"> & {
+  c: Partial<AdsManagerUpdateAdSetInput> & {
+    campaignId: string;
     campaignStart: string;
     campaignEnd: string;
     campaignState: string;
     campaignSource: CampaignSource;
+    state?: string | null;
   },
   isInline?: boolean,
 ): ReactNode {
