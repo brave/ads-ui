@@ -1,5 +1,4 @@
 {
   "$schema": "https://unpkg.com/knip@2/schema.json",
   "project": ["src/**/*.{ts,tsx}"],
-  "ignore": ["src/graphql-client/*.ts"],
 }
