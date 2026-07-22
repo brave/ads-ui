@@ -4,7 +4,7 @@ allowBuilds:
 
 blockExoticSubdeps: true
 minimumReleaseAge: 10080
-minimumReleaseAgeExclude: [ shell-quote@1.8.4 || 1.8.5, ws@8.21.0, js-yaml@4.1.2 || 4.3.0, '@babel/core@7.29.1', brace-expansion@1.1.16 || 5.0.7 ]
+minimumReleaseAgeExclude: [ ]
 
 overrides:
   '@babel/core@<=7.29.0': ^7.29.1
@@ -42,5 +42,6 @@ overrides:
   ws@>=8.0.0 <8.21.0: ^8.21.0
   yaml@>=1.0.0 <1.10.3: "^1.10.3"
   yaml@>=2.0.0 <2.8.3: "^2.8.3"
+  immutable@^5: ^5.1.8
 
 verifyDepsBeforeRun: install
