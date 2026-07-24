@@ -1,12 +1,13 @@
 import {
   AdFragment,
   AdSetFragment,
+  AdsManagerCreateCampaignInput,
   AdsManagerNewAdSetInput,
   AdsManagerUpdateAdSetInput,
   AdsManagerUpdateCampaignInput,
+  BillingType,
   CampaignFormat,
   CampaignFragment,
-  CreateCampaignInput,
   CreativeFragment,
   OperatingSystem,
 } from "@/graphql-client/graphql";
@@ -23,32 +24,33 @@ import BigNumber from "bignumber.js";
 import dayjs from "dayjs";
 import _ from "lodash";
 
-export function transformNewForm(form: CampaignForm): CreateCampaignInput {
+export function transformNewForm(
+  form: CampaignForm,
+): AdsManagerCreateCampaignInput {
   return {
-    currency: form.currency,
-    externalId: "",
-    dailyCap: 4,
-    endAt: form.endAt,
-    geoTargets: form.geoTargets.map((g) => ({ code: g.code, name: g.name })),
-    name: form.name,
     advertiserId: form.advertiserId,
-    format: form.format,
-    source: "self_serve",
+    name: form.name,
     startAt: form.startAt,
-    state: form.state,
+    endAt: form.endAt,
     budget: form.budget,
+    paymentType: form.paymentType,
+    geoTargetCodes: form.geoTargets.map((g) => g.code),
     adSets: form.adSets.map((a) => ({
-      ...transformAdSet(a, form),
-      conversions: transformConversion(a.conversion),
-      ads: a.creatives
+      name: a.name,
+      billingType: form.billingType as BillingType,
+      price: transformPrice(form),
+      segmentCodes: a.segments.map((s) => s.code),
+      operatingSystems: a.operatingSystems,
+      conversion: transformConversionSingle(a.conversion),
+      creativeIds: a.creatives
         .filter(
           (c) =>
             c.included &&
             isCreativeTypeApplicableToCampaignFormat(c.type, form.format),
         )
-        .map((ad) => ({ creativeId: ad.id })),
+        .map((ad) => ad.id)
+        .filter((id): id is string => !!id),
     })),
-    paymentType: form.paymentType,
   };
 }
 
@@ -60,6 +62,17 @@ export const transformPrice = (
     ? price.dividedBy(1000).toString()
     : price.toString();
 };
+
+function transformConversionSingle(conv?: Conversion) {
+  if (!conv) {
+    return undefined;
+  }
+
+  return {
+    observationWindow: conv.observationWindow * 1.0,
+    urlPattern: conv.urlPattern,
+  };
+}
 
 function transformConversion(conv?: Conversion) {
   if (!conv) {
@@ -270,24 +283,6 @@ const osEnumToLegacyCode: Record<OperatingSystem, string> = {
   [OperatingSystem.Ios]: "k80syyzDa",
   [OperatingSystem.Android]: "mbwfZU-4W",
 };
-
-function transformAdSet(
-  adSet: AdSetForm,
-  campaign: Pick<CampaignForm, "format" | "billingType" | "price">,
-) {
-  return {
-    name: adSet.name,
-    price: transformPrice(campaign),
-    billingType: campaign.billingType,
-    perDay: 4,
-    segments: adSet.segments.map((s) => ({ code: s.code, name: s.name })),
-    oses: adSet.operatingSystems.map((os) => ({
-      code: osEnumToLegacyCode[os],
-      name: os,
-    })),
-    totalMax: campaign.format === CampaignFormat.PushNotification ? 28 : 60,
-  };
-}
 
 function uiTextForCreativeType(creativeType: string): string {
   const codeLookup: Record<string, string> = {

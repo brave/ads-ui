@@ -96,17 +96,15 @@ query LoadCampaignAds($id: String!) {
   }
 }
 
-mutation CreateCampaign($input: CreateCampaignInput!) {
-  createCampaign(createCampaignInput: $input) {
+mutation AdsManagerCreateCampaign($input: AdsManagerCreateCampaignInput!) {
+  adsManagerCreateCampaign(input: $input) {
     id
     paymentType
   }
 }
 
-mutation UpdateCampaign($input: UpdateCampaignInput!) {
-  updateCampaign(updateCampaignInput: $input) {
+mutation AdsManagerUpdateCampaignState($id: String!, $state: CampaignState!) {
+  adsManagerUpdateCampaignState(id: $id, state: $state) {
     id
-    paymentType
-    stripePaymentId
   }
 }
