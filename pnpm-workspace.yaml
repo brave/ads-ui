@@ -2,9 +2,15 @@ allowBuilds:
   "@parcel/watcher": true
   esbuild: true
 
+auditConfig:
+  ignoreGhsas: 
+    # this one has no fix available on the 1.x branch used by eslint v9
+    # ignoring since it is a DoS on a build-time tool (elint)
+    - GHSA-mh99-v99m-4gvg
+
 blockExoticSubdeps: true
 minimumReleaseAge: 10080
-minimumReleaseAgeExclude: [ ]
+minimumReleaseAgeExclude: [ brace-expansion@5.0.8 ]
 
 overrides:
   '@babel/core@<=7.29.0': ^7.29.1
@@ -14,7 +20,7 @@ overrides:
   ajv@^8 <8.18.0: ">=8.18.0"
   brace-expansion@^1: ^1.1.16
   brace-expansion@^2: ^2.0.2
-  brace-expansion@>=3.0.0 <5.0.7: ^5.0.7
+  brace-expansion@>=3.0.0 <5.0.8: ^5.0.8
   cross-spawn@>=7.0.0 <7.0.5: ">=7.0.5"
   dset@<3.1.4: ">=3.1.4"
   esbuild@<=0.24.2: ">=0.25.0"
