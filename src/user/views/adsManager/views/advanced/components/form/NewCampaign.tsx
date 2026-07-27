@@ -1,8 +1,8 @@
 import { useCreatePaymentSession } from "@/checkout/hooks/useCreatePaymentSession";
 import { PersistFormValues } from "@/form/PersistFormValues";
 import {
+  AdsManagerCreateCampaignDocument,
   AdvertiserCampaignsDocument,
-  CreateCampaignDocument,
   PaymentType,
 } from "@/graphql-client/graphql";
 import { DraftContext, FilterContext } from "@/state/context";
@@ -46,10 +46,10 @@ export function NewCampaign() {
     },
   });
 
-  const [mutation] = useMutation(CreateCampaignDocument, {
+  const [mutation] = useMutation(AdsManagerCreateCampaignDocument, {
     onCompleted(data) {
       trackMatomoEvent("campaign", "creation-success");
-      const campaign = data.createCampaign;
+      const campaign = data.adsManagerCreateCampaign;
       localStorage.removeItem(params.draftId);
       setDrafts();
       if (
@@ -58,7 +58,7 @@ export function NewCampaign() {
       ) {
         history.push(`/user/main/complete/new?referenceId=${campaign.id}`);
       } else {
-        createPaymentSession(data.createCampaign.id);
+        createPaymentSession(data.adsManagerCreateCampaign.id);
       }
     },
     onError() {

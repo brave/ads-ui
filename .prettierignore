@@ -6,7 +6,8 @@ src/locales/*.js
 src/graphql-client/*.ts
 src/graphql/ads-serve.graphql.schema.json
 
-# npm and prettier fight over a EOF on these files, let npm win:
+# pnpm and prettier fight over a EOF on these files, let npm win:
 package.json
 package-lock.json
 pnpm-lock.yaml
+pnpm-workspace.yaml

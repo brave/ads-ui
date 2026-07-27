@@ -1,5 +1,8 @@
 import { useIsEdit } from "@/form/FormikHelpers";
-import { ActiveGeocodesDocument, GeocodeInput } from "@/graphql-client/graphql";
+import {
+  ActiveGeocodesDocument,
+  GeocodeFragment,
+} from "@/graphql-client/graphql";
 import { useQuery } from "@apollo/client";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
@@ -24,7 +27,7 @@ export const LocationPicker = () => {
       ),
     [data],
   );
-  const [formProps, meta, helper] = useField<GeocodeInput[]>("geoTargets");
+  const [formProps, meta, helper] = useField<GeocodeFragment[]>("geoTargets");
   const errorMessage = meta.error;
 
   return (

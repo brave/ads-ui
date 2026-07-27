@@ -243,47 +243,28 @@ describe("new form tests", () => {
       {
         "adSets": [
           {
-            "ads": [
-              {
-                "creativeId": "11111",
-              },
-            ],
             "billingType": "cpm",
-            "conversions": [],
+            "conversion": undefined,
+            "creativeIds": [
+              "11111",
+            ],
             "name": "",
-            "oses": [
-              {
-                "code": "_Bt5nxrNo",
-                "name": "macos",
-              },
+            "operatingSystems": [
+              "macos",
             ],
-            "perDay": 4,
             "price": "0.006",
-            "segments": [
-              {
-                "code": "5678",
-                "name": "test",
-              },
+            "segmentCodes": [
+              "5678",
             ],
-            "totalMax": 28,
           },
         ],
         "advertiserId": "12345",
         "budget": 1000,
-        "currency": "USD",
-        "dailyCap": 4,
-        "externalId": "",
-        "format": "PUSH_NOTIFICATION",
-        "geoTargets": [
-          {
-            "code": "US",
-            "name": "United States",
-          },
+        "geoTargetCodes": [
+          "US",
         ],
         "name": "Test",
         "paymentType": "RADOM",
-        "source": "self_serve",
-        "state": "draft",
       }
     `);
   });
