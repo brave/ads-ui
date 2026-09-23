@@ -75,7 +75,7 @@
     "typescript-eslint": "8.70.0",
     "vite": "8.3.0",
     "vite-plugin-checker": "0.14.5",
-    "vitest": "5.0.0"
+    "vitest": "5.0.1"
   },
   "engines": {
     "node": ">=24",
@@ -102,5 +102,5 @@
       "eslint --cache --no-warn-ignored"
     ]
   },
-  "packageManager": "pnpm@12.4.1"
+  "packageManager": "pnpm@12.4.2"
 }
