@@ -1,4 +1,4 @@
-import { MouseEvent, useContext, useState } from "react";
+import { MouseEvent, use, useState } from "react";
 
 import { DraftContext } from "@/state/context";
 import { Badge, Button, Menu, MenuItem } from "@mui/material";
@@ -7,7 +7,7 @@ import { Link as RouterLink } from "react-router-dom";
 export function DraftMenu() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const { drafts } = useContext(DraftContext);
+  const { drafts } = use(DraftContext);
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);

@@ -1,16 +1,14 @@
+import eslintReact from "@eslint-react/eslint-plugin";
 import eslint from "@eslint/js";
 import graphqlPlugin from "@graphql-eslint/eslint-plugin";
 import esLintConfigPrettier from "eslint-config-prettier";
-import react from "eslint-plugin-react";
-import reactHooks from "eslint-plugin-react-hooks";
 import { defineConfig } from "eslint/config";
 import tseslint from "typescript-eslint";
 
 export default defineConfig(
   eslint.configs.recommended,
   tseslint.configs.recommended,
-  react.configs.flat.recommended,
-  react.configs.flat["jsx-runtime"],
+  eslintReact.configs["recommended-typescript"],
   {
     name: "ignore generated files",
     ignores: [
@@ -19,15 +17,6 @@ export default defineConfig(
       "src/graphql-client/*.ts",
       "build/**",
     ],
-  },
-  {
-    name: "react hooks",
-    plugins: {
-      "react-hooks": reactHooks,
-    },
-    rules: {
-      ...reactHooks.configs.recommended.rules,
-    },
   },
   {
     name: "apply graphql processor to all typescript files",
@@ -50,13 +39,6 @@ export default defineConfig(
     },
   },
   {
-    settings: {
-      react: {
-        version: "detect",
-      },
-    },
-  },
-  {
     name: "our specific rules",
     rules: {
       "@typescript-eslint/explicit-module-boundary-types": "off",
@@ -68,8 +50,8 @@ export default defineConfig(
       ],
       "@typescript-eslint/no-empty-function": "off",
       "@typescript-eslint/no-require-imports": "error",
-      "react/react-in-jsx-scope": "off",
-      "react-hooks/exhaustive-deps": "error",
+      // we should enable this in due course:
+      "@eslint-react/no-array-index-key": "off",
       "no-console": "error",
       eqeqeq: "error",
     },

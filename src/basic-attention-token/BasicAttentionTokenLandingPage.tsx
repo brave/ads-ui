@@ -21,6 +21,7 @@ export function BasicAttentionTokenLandingPage({ reroute }: Props) {
 
   if (reroute) {
     // Not fully removing page (2024-08-23), but discounts need further evaluation
+    // eslint-disable-next-line @eslint-react/purity
     window.open("https://basicattentiontoken.org/", "_blank", "noopener");
     return <Redirect to="/" />;
   }

@@ -1,10 +1,10 @@
 import { FormContext } from "@/state/context";
 import { Link } from "@mui/material";
 import { useField } from "formik";
-import { useContext } from "react";
+import { use } from "react";
 
 export function ShowAdsButton() {
-  const { isShowingAds, setIsShowingAds } = useContext(FormContext);
+  const { isShowingAds, setIsShowingAds } = use(FormContext);
   const [, , helper] = useField<boolean>("isCreating");
 
   if (!isShowingAds) {

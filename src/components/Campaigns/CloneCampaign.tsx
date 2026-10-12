@@ -20,7 +20,7 @@ import {
   LinearProgress,
   Tooltip,
 } from "@mui/material";
-import { useContext, useState } from "react";
+import { use, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 interface Props {
@@ -39,7 +39,7 @@ const Copy_Campaign = graphql(`
 
 export function CloneCampaign({ campaign, disabled }: Props) {
   const { advertiser } = useAdvertiser();
-  const { fromDate } = useContext(FilterContext);
+  const { fromDate } = use(FilterContext);
   const history = useHistory();
   const [open, setOpen] = useState(false);
   const unableToClone = "Unable to clone campaign";

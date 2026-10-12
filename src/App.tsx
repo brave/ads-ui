@@ -26,7 +26,7 @@ const SearchLandingPage = lazy(() => import("@/search/SearchLandingPage"));
 
 export function App() {
   const { enableLinkTracking } = useMatomo();
-  const [drafts, setDrafts] = useState<CampaignForm[]>(getAllDrafts());
+  const [drafts, setDrafts] = useState<CampaignForm[]>(() => getAllDrafts());
 
   const reloadDrafts = useCallback(() => {
     setDrafts(getAllDrafts());
@@ -38,7 +38,7 @@ export function App() {
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <DraftContext.Provider
+        <DraftContext
           value={{
             drafts,
             setDrafts: reloadDrafts,
@@ -64,7 +64,7 @@ export function App() {
               <Redirect to="/user/main" />
             </Switch>
           </Suspense>
-        </DraftContext.Provider>
+        </DraftContext>
       </ThemeProvider>
     </StyledEngineProvider>
   );
