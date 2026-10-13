@@ -8,7 +8,7 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import dayjs from "dayjs";
 import { useFormikContext } from "formik";
 import _ from "lodash";
-import { PropsWithChildren, useContext, useState } from "react";
+import { PropsWithChildren, use, useState } from "react";
 
 export function CreativeSelect(
   props: {
@@ -22,7 +22,7 @@ export function CreativeSelect(
 ) {
   const index = props.index;
   const { values, setFieldValue } = useFormikContext<CampaignForm>();
-  const { setIsShowingAds } = useContext(FormContext);
+  const { setIsShowingAds } = use(FormContext);
   const [curr, setCurr] = useState<Creative[]>([]);
 
   const onSelectCreative = (c: Creative, selected: boolean) => {

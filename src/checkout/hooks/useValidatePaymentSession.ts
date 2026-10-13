@@ -12,7 +12,7 @@ export function useValidatePaymentSession(props: Props) {
 
   useEffect(() => {
     if (props.campaignId) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+      // eslint-disable-next-line @eslint-react/set-state-in-effect
       setLoading(true);
       validatePaymentSession(props.campaignId, props.sessionId)
         .catch((e) => {

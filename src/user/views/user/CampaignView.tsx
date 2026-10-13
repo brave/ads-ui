@@ -9,12 +9,12 @@ import { FilterContext } from "@/state/context";
 import { CampaignList } from "@/user/campaignList/CampaignList";
 import { useQuery } from "@apollo/client";
 import { Box, Skeleton } from "@mui/material";
-import { useContext } from "react";
+import { use } from "react";
 
 export function CampaignView() {
   useTrackMatomoPageView({ documentTitle: "Advertiser Campaigns" });
   const { advertiser } = useAdvertiser();
-  const { fromDate } = useContext(FilterContext);
+  const { fromDate } = use(FilterContext);
 
   const { loading, data, error } = useQuery(AdvertiserCampaignsDocument, {
     variables: {

@@ -23,18 +23,18 @@ import {
 } from "@mui/material";
 import { useFormikContext } from "formik";
 import _ from "lodash";
-import { useContext, useRef, useState } from "react";
+import { use, useRef, useState } from "react";
 
 interface Props {
   index: number;
 }
 
 export function AdsExistingAd({ index }: Props) {
-  const { isShowingAds, setIsShowingAds } = useContext(FormContext);
+  const { isShowingAds, setIsShowingAds } = use(FormContext);
   const { creatives } = useAdvertiserCreatives();
   const { values } = useFormikContext<CampaignForm>();
   const { advertiser } = useAdvertiser();
-  const original = useRef<CreativeFragment[]>([]);
+  const originalRef = useRef<CreativeFragment[]>([]);
   const [options, setOptions] = useState<CreativeFragment[]>();
   const { loading } = useQuery(AdvertiserCreativesDocument, {
     variables: { advertiserId: advertiser.id },
@@ -55,7 +55,7 @@ export function AdsExistingAd({ index }: Props) {
         const associatedOptions = creatives ?? [];
         return associatedOptions.find((ao) => ao.id === e.id) === undefined;
       });
-      original.current = excludeExisting;
+      originalRef.current = excludeExisting;
       setOptions(excludeExisting);
     },
   });
@@ -103,12 +103,12 @@ export function AdsExistingAd({ index }: Props) {
               const value = e.target.value.toLowerCase();
               if (!value || value.trim() !== "") {
                 setOptions(
-                  original.current.filter((co) =>
+                  originalRef.current.filter((co) =>
                     co.name.toLowerCase().includes(value),
                   ),
                 );
               } else {
-                setOptions(original.current);
+                setOptions(originalRef.current);
               }
             }}
           />

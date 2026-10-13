@@ -38,7 +38,7 @@ export function AdvertiserDetailsForm() {
   const requiresPaymentAgree =
     advertiser.selfServiceManageCampaign &&
     advertiser.selfServicePaymentType !== PaymentType.Netsuite;
-  const [initial, setInitial] = useState<AdvertiserForm>(
+  const [initial, setInitial] = useState<AdvertiserForm>(() =>
     initialAdvertiserForm(!requiresPaymentAgree),
   );
 

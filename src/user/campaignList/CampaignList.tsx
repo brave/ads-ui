@@ -207,6 +207,7 @@ export function CampaignList({ advertiser }: Props) {
   }
 
   const campaigns = advertiser?.campaigns ?? [];
+  // eslint-disable-next-line @eslint-react/no-nested-component-definitions
   const Toolbar = () => {
     const campaign = campaigns.find((c) => c.id === selectedCampaign);
     const isDisabled = selectedCampaign === undefined;

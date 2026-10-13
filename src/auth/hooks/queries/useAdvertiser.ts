@@ -16,6 +16,7 @@ export function useAdvertiser(): {
     selfServicePaymentType: PaymentType.Stripe,
   };
 
+  // eslint-disable-next-line @eslint-react/purity
   const active = window.localStorage.getItem("activeAdvertiser") ?? "";
   const activeAdvertiser = advertisers.find((a) => a.id === active);
   return {

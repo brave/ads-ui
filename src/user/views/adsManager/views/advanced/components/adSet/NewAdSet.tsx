@@ -21,9 +21,8 @@ export function NewAdSet() {
   const history = useHistory();
   const { values } = useFormikContext<CampaignForm>();
   const params = new URLSearchParams(history.location.search);
-  const selected = useRef(0);
-  // eslint-disable-next-line react-hooks/refs
-  selected.current = Number(params.get("current") ?? 0);
+  const selectedRef = useRef(0);
+  selectedRef.current = Number(params.get("current") ?? 0);
 
   const initial = {
     ...initialAdSet,
@@ -45,7 +44,7 @@ export function NewAdSet() {
                   component={RouterLink}
                   underline="none"
                   onClick={() => {
-                    selected.current = idx;
+                    selectedRef.current = idx;
                   }}
                   to={`?current=${idx}`}
                   width="100%"
@@ -53,7 +52,7 @@ export function NewAdSet() {
                   color="secondary"
                   textAlign="left"
                   bgcolor={
-                    selected.current === idx
+                    selectedRef.current === idx
                       ? "rgba(248, 83, 43, 0.04)"
                       : "none"
                   }
@@ -66,7 +65,7 @@ export function NewAdSet() {
                     <IconButton
                       onClick={() => {
                         const newIdx = idx - 1;
-                        selected.current = newIdx;
+                        selectedRef.current = newIdx;
                         history.replace(`?current=${newIdx}`);
                         helper.remove(idx);
                         trackMatomoEvent("adSet", "remove-new-ad-set");

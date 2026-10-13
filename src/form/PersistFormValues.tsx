@@ -1,11 +1,11 @@
 import { DraftContext } from "@/state/context";
 import { CampaignForm } from "@/user/views/adsManager/types";
 import { useFormikContext } from "formik";
-import { useContext, useEffect } from "react";
+import { use, useEffect } from "react";
 
 export const PersistFormValues = () => {
   const { values, setValues, dirty } = useFormikContext<CampaignForm>();
-  const { setDrafts } = useContext(DraftContext);
+  const { setDrafts } = use(DraftContext);
 
   // read the values from localStorage on load
   useEffect(() => {

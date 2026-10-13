@@ -13,7 +13,7 @@ import { TimezoneAwareDatePicker } from "../TimeZonePicker/TimezoneAwareDatePick
 export const CampaignDateRange = () => {
   const { advertiser } = useAdvertiser();
   const { isDraft, isEdit } = useIsEdit();
-  const [tz, setTz] = useState<string>(getDefaultTimezone());
+  const [tz, setTz] = useState<string>(() => getDefaultTimezone());
   const [, startMeta, startHelper] = useField("startAt");
   const [, endMeta, endHelper] = useField("endAt");
   const [, budget] = useField("budget");
@@ -27,7 +27,7 @@ export const CampaignDateRange = () => {
       startMeta.value,
       endMeta.value,
     );
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+    // eslint-disable-next-line @eslint-react/set-state-in-effect
     setWillNotReachEndDate(!ok(budget.value));
   }, [
     endMeta.value,

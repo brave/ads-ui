@@ -75,7 +75,5 @@ export const IAuthProvider = ({ children }: IAuthProviderProps) => {
       });
   }, []);
 
-  return (
-    <IAuthContext.Provider value={state}>{children}</IAuthContext.Provider>
-  );
+  return <IAuthContext value={state}>{children}</IAuthContext>;
 };

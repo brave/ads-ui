@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/refs */
-/* ^ this should be fixed but it requires an overhaul of the code */
 import { ActionButtons } from "@/components/Steps/ActionButtons";
 import { NextAndBack } from "@/components/Steps/NextAndBack";
 import {
@@ -34,8 +32,8 @@ export function StepDrawer({
   children,
 }: Props & PropsWithChildren) {
   const history = useHistory();
-  const activeStep = useRef<number>(0);
-  activeStep.current = steps.findIndex((s) =>
+  const activeStepRef = useRef<number>(0);
+  activeStepRef.current = steps.findIndex((s) =>
     history.location.pathname.includes(s.path),
   );
 
@@ -56,15 +54,15 @@ export function StepDrawer({
         <Box ml={2} mt={1}>
           <Stepper
             nonLinear
-            activeStep={activeStep.current}
+            activeStep={activeStepRef.current}
             orientation="vertical"
           >
             {steps.map((step, index) => (
-              <Step key={step.path} completed={activeStep.current > index}>
+              <Step key={step.path} completed={activeStepRef.current > index}>
                 <StepButton
                   onClick={() => {
                     history.replace(`${step.path}${step.queryParams ?? ""}`);
-                    activeStep.current = index;
+                    activeStepRef.current = index;
                   }}
                 >
                   {step.label}
@@ -79,16 +77,16 @@ export function StepDrawer({
       <Stack flexGrow={1}>
         {children}
         <NextAndBack
-          activeStep={activeStep.current}
+          activeStep={activeStepRef.current}
           steps={steps.length - 1}
           onNext={() => {
-            const step = activeStep.current + 1;
-            activeStep.current = step;
+            const step = activeStepRef.current + 1;
+            activeStepRef.current = step;
             history.replace(steps[step].path);
           }}
           onBack={() => {
-            const step = activeStep.current - 1;
-            activeStep.current = step;
+            const step = activeStepRef.current - 1;
+            activeStepRef.current = step;
             history.replace(steps[step].path);
           }}
           final={finalComponent}

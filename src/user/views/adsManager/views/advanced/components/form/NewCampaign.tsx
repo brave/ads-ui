@@ -10,7 +10,7 @@ import { transformNewForm } from "@/user/library";
 import { CampaignSchema } from "@/validation/CampaignSchema";
 import { Container, LinearProgress } from "@mui/material";
 import { Formik } from "formik";
-import { useContext, useState } from "react";
+import { use, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { CampaignForm, initialCampaign } from "../../../../types";
 import { BaseForm } from "./components/BaseForm";
@@ -30,9 +30,9 @@ export function NewCampaign() {
     documentTitle: "New Campaign",
   });
   const history = useHistory();
-  const { fromDate } = useContext(FilterContext);
+  const { fromDate } = use(FilterContext);
   const params = useParams<Params>();
-  const { setDrafts } = useContext(DraftContext);
+  const { setDrafts } = use(DraftContext);
   const [initial, setInitial] = useState<CampaignForm>({} as CampaignForm);
 
   const { createPaymentSession, loading: sessionLoading } =

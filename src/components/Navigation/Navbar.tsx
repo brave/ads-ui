@@ -8,7 +8,7 @@ import {
   Stack,
   Toolbar,
 } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 
 import ads from "@/assets/images/logo.svg";
 import { useAuthContext } from "@/auth/context/auth.hook";
@@ -20,7 +20,7 @@ import { NewCreativeButton } from "@/components/Navigation/NewCreativeButton";
 import { useHistory } from "react-router-dom";
 
 // Context for banner height
-import { createContext, useContext } from "react";
+import { createContext } from "react";
 
 interface BannerHeightContextType {
   bannerHeight: number;
@@ -32,7 +32,7 @@ const BannerHeightContext = createContext<BannerHeightContextType | undefined>(
 );
 
 export function useBannerHeight() {
-  const context = useContext(BannerHeightContext);
+  const context = use(BannerHeightContext);
   if (context === undefined) {
     throw new Error(
       "useBannerHeight must be used within a BannerHeightProvider",
@@ -49,9 +49,9 @@ export function BannerHeightProvider({
   const [bannerHeight, setBannerHeight] = useState(0);
 
   return (
-    <BannerHeightContext.Provider value={{ bannerHeight, setBannerHeight }}>
+    <BannerHeightContext value={{ bannerHeight, setBannerHeight }}>
       {children}
-    </BannerHeightContext.Provider>
+    </BannerHeightContext>
   );
 }
 
@@ -86,9 +86,10 @@ export function Navbar() {
       // 1. No dismissed message stored, OR
       // 2. Current message ID is different from dismissed message ID
       if (!dismissedMessageId || dismissedMessageId !== advertiserMessage.id) {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
+        // eslint-disable-next-line @eslint-react/set-state-in-effect
         setShowBanner(true);
       } else {
+        // eslint-disable-next-line @eslint-react/set-state-in-effect
         setShowBanner(false);
       }
     }

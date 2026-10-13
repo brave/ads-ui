@@ -1,6 +1,6 @@
 import { Box, Tooltip } from "@mui/material";
 import _ from "lodash";
-import { ReactElement, ReactNode, useContext } from "react";
+import { ReactElement, ReactNode, use } from "react";
 
 import { OnOff } from "@/components/Switch/OnOff";
 import {
@@ -90,9 +90,9 @@ export function campaignOnOffState(
   // This is completely wrong and the react hooks linter is correctly to complain about.
   // I have no idea how this possibly works. But apparently it does and I don't want to
   // mix up an overhaul of the code within this PR.
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { fromDate } = useContext(FilterContext);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+  // eslint-disable-next-line @eslint-react/rules-of-hooks
+  const { fromDate } = use(FilterContext);
+  // eslint-disable-next-line @eslint-react/rules-of-hooks
   const [updateCampaignState, { loading }] = useMutation(
     AdsManagerUpdateCampaignStateDocument,
     {
@@ -144,7 +144,7 @@ export function adSetOnOffState(
   `);
 
   // see comment above - we should not be calling hooks from here
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+  // eslint-disable-next-line @eslint-react/rules-of-hooks
   const [updateAdSet, { loading }] = useMutation(UpdateAdSetState, {
     refetchQueries: [
       {
