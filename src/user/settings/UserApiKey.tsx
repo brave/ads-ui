@@ -33,8 +33,10 @@ export function UserApiKey() {
       <Typography>
         Documentation can be found{" "}
         <Link
-          href="https://github.com/brave/ads-ui/wiki/Brave-Ads-Advertiser-API-Guide"
+          href="https://ads-help.brave.com/campaign-performance/API"
           underline="none"
+          rel="noreferrer noopener"
+          target="_blank"
         >
           here
         </Link>{" "}

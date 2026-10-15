@@ -33,7 +33,7 @@ function oldReportPath(campaign: ReportMenu_Campaign): string | null {
 export function ReportMenu({ campaign }: Props) {
   const [isDownloading, setIsDownloading] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [v3fields, setV3fields] = useState<V3ReportFields>(
+  const [v3fields, setV3fields] = useState<V3ReportFields>(() =>
     defaultFieldsForFormat(campaign.format),
   );
 

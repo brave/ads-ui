@@ -166,7 +166,7 @@ const buildApolloClient = () => {
 
 export default function User() {
   const client = useMemo(() => buildApolloClient(), []);
-  const [fromDate, setFromDate] = useState<Date | null>(
+  const [fromDate, setFromDate] = useState<Date | null>(() =>
     dayjs().subtract(6, "month").startOf("day").toDate(),
   );
 
@@ -195,7 +195,7 @@ export default function User() {
 
   return (
     <ApolloProvider client={client}>
-      <FilterContext.Provider
+      <FilterContext
         value={{
           fromDate,
           setFromDate,
@@ -204,7 +204,7 @@ export default function User() {
         <BannerHeightProvider>
           <UserContent />
         </BannerHeightProvider>
-      </FilterContext.Provider>
+      </FilterContext>
     </ApolloProvider>
   );
 }

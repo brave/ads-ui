@@ -40,7 +40,7 @@ export function BaseForm({ hasPaymentIntent, prices }: Props) {
   ];
 
   return (
-    <FormContext.Provider
+    <FormContext
       value={{
         isShowingAds,
         setIsShowingAds,
@@ -62,6 +62,6 @@ export function BaseForm({ hasPaymentIntent, prices }: Props) {
           </Switch>
         </StepDrawer>
       </Form>
-    </FormContext.Provider>
+    </FormContext>
   );
 }

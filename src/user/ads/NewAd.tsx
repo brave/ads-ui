@@ -5,12 +5,12 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { Box, Button, Typography } from "@mui/material";
 import { useField } from "formik";
-import { useContext, useEffect } from "react";
+import { use, useEffect } from "react";
 
 export function NewAd() {
   const [, , newCreative] = useField<Creative | undefined>("newCreative");
   const [, meta, helper] = useField<boolean>("isCreating");
-  const { setIsShowingAds } = useContext(FormContext);
+  const { setIsShowingAds } = use(FormContext);
 
   useEffect(() => {
     if (!meta.value) {

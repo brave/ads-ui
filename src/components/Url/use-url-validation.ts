@@ -47,9 +47,11 @@ export function useUrlValidation(url: string): UrlValidationResult {
 
   // when the input url changes we should queue an update
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+    // eslint-disable-next-line @eslint-react/set-state-in-effect
     setResponse(undefined);
+    // eslint-disable-next-line @eslint-react/set-state-in-effect
     setError(undefined);
+    // eslint-disable-next-line @eslint-react/set-state-in-effect
     setValidating(false);
     debouncedSetUrlToCheck(url);
   }, [url, debouncedSetUrlToCheck]);
@@ -61,12 +63,13 @@ export function useUrlValidation(url: string): UrlValidationResult {
     // special check: if the url doesn't start with https:// then don't bother
     // to call the serve for validation since that will fail anyway
     if (!urlToCheck.startsWith("https://")) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+      // eslint-disable-next-line @eslint-react/set-state-in-effect
       setResponse(undefined);
       return;
     }
 
     let notCancelled = true;
+    // eslint-disable-next-line @eslint-react/set-state-in-effect
     setValidating(true);
 
     validateUrl({ variables: { url: urlToCheck } })

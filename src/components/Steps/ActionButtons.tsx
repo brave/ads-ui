@@ -5,12 +5,12 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { Button, Stack } from "@mui/material";
 import { useFormikContext } from "formik";
-import { useContext } from "react";
+import { use } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 export function ActionButtons() {
   const { values } = useFormikContext<CampaignForm>();
-  const { setDrafts } = useContext(DraftContext);
+  const { setDrafts } = use(DraftContext);
 
   return (
     <Stack mt={3} spacing={2} mr={1}>

@@ -195,7 +195,7 @@ export function useCampaignAnalyticFilter({
 
   useEffect(
     () => {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+      // eslint-disable-next-line @eslint-react/set-state-in-effect
       setFilter((prevFilter: PerformanceFilter) => ({
         ...prevFilter,
         ...timeFilter,
@@ -206,13 +206,13 @@ export function useCampaignAnalyticFilter({
       }));
     },
     // This is not a great way of using dependencies and should be fixed.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line @eslint-react/exhaustive-deps
     [
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+      // eslint-disable-next-line @eslint-react/exhaustive-deps
       JSON.stringify(selected),
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+      // eslint-disable-next-line @eslint-react/exhaustive-deps
       JSON.stringify(os),
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+      // eslint-disable-next-line @eslint-react/exhaustive-deps
       JSON.stringify(timeFilter),
     ],
   );

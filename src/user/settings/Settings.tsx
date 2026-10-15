@@ -17,7 +17,7 @@ import {
   Typography,
 } from "@mui/material";
 import _ from "lodash";
-import { useContext, useState } from "react";
+import { use, useState } from "react";
 
 const Settings = () => {
   const { trackMatomoEvent } = useTrackWithMatomo({
@@ -25,7 +25,7 @@ const Settings = () => {
   });
   const { advertiser: activeAdvertiser, advertisers } = useAdvertiser();
   const [advertiser, setAdvertiser] = useState(activeAdvertiser);
-  const { setDrafts } = useContext(DraftContext);
+  const { setDrafts } = use(DraftContext);
 
   const setActiveAdvertiserWithId = (e: SelectChangeEvent) => {
     const id = e.target.value;

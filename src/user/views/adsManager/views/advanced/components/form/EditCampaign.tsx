@@ -15,7 +15,7 @@ import { CampaignSchema } from "@/validation/CampaignSchema";
 import { useMutation, useQuery } from "@apollo/client";
 import { Container, LinearProgress } from "@mui/material";
 import { Formik } from "formik";
-import { useContext } from "react";
+import { use } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { CampaignForm } from "../../../../types";
 import { BaseForm } from "./components/BaseForm";
@@ -36,7 +36,7 @@ export function EditCampaign() {
   const { trackMatomoEvent } = useTrackWithMatomo({
     documentTitle: "Edit Campaign",
   });
-  const { fromDate } = useContext(FilterContext);
+  const { fromDate } = use(FilterContext);
   const history = useHistory();
   const params = useParams<Params>();
   const { createPaymentSession, loading } = useCreatePaymentSession();
