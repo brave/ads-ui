@@ -27,7 +27,7 @@
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "react-router-dom": "5.3.4",
-    "react-window": "2.5.0",
+    "react-window": "2.5.1",
     "swr": "2.5.1",
     "yup": "1.7.1"
   },
@@ -71,7 +71,7 @@
     "prettier": "3.9.10",
     "prettier-plugin-organize-imports": "4.3.0",
     "typescript": "npm:@typescript/typescript6@6.0.2",
-    "typescript-eslint": "8.72.0",
+    "typescript-eslint": "8.72.1",
     "vite": "8.3.5",
     "vite-plugin-checker": "0.14.5",
     "vitest": "5.0.5"
@@ -85,7 +85,7 @@
   "devEngines": {
     "runtime": {
       "name": "node",
-      "version": "24.22.1",
+      "version": "24.22.2",
       "onFail": "download"
     }
   },
@@ -101,5 +101,5 @@
       "eslint --cache --no-warn-ignored"
     ]
   },
-  "packageManager": "pnpm@12.15.0"
+  "packageManager": "pnpm@12.16.1"
 }
