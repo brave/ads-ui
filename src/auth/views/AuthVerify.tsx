@@ -6,11 +6,15 @@ import { Alert, AlertTitle, Button, Typography } from "@mui/material";
 import { Link as RouterLink, Switch, useHistory } from "react-router-dom";
 
 export function AuthVerify() {
-  const { trackMatomoEvent } = useTrackWithMatomo({
-    documentTitle: "Magic Link Verification",
-  });
   const history = useHistory();
   const params = new URLSearchParams(history.location.search);
+
+  // The `id` and `code` params are login credentials, so report this page to
+  // Matomo without its query string.
+  const { trackMatomoEvent } = useTrackWithMatomo({
+    documentTitle: "Magic Link Verification",
+    href: `${window.location.origin}${history.location.pathname}`,
+  });
 
   const { loading, error, verify } = useAuthorize({
     onCompleted() {
