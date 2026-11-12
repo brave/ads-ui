@@ -19,7 +19,7 @@
     "bignumber.js": "11.1.5",
     "dayjs": "1.11.23",
     "formik": "2.4.9",
-    "graphql": "16.14.2",
+    "graphql": "16.15.0",
     "highcharts": "12.6.2",
     "highcharts-react-official": "3.2.3",
     "immer": "11.2.9",
@@ -62,7 +62,7 @@
     "@types/react-router-dom": "5.3.3",
     "@typescript/native": "npm:typescript@7.0.2",
     "@vitejs/plugin-basic-ssl": "2.3.0",
-    "@vitejs/plugin-react": "6.1.2",
+    "@vitejs/plugin-react": "6.2.1",
     "eslint": "10.14.0",
     "eslint-config-prettier": "10.1.8",
     "husky": "9.1.7",
@@ -72,9 +72,9 @@
     "prettier-plugin-organize-imports": "4.3.0",
     "typescript": "npm:@typescript/typescript6@6.0.2",
     "typescript-eslint": "8.72.1",
-    "vite": "8.3.5",
+    "vite": "8.3.6",
     "vite-plugin-checker": "0.14.5",
-    "vitest": "5.0.5"
+    "vitest": "5.1.0"
   },
   "engines": {
     "node": ">=24",
@@ -101,5 +101,5 @@
       "eslint --cache --no-warn-ignored"
     ]
   },
-  "packageManager": "pnpm@12.17.0"
+  "packageManager": "pnpm@12.18.0"
 }
