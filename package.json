@@ -14,15 +14,15 @@
     "@jonkoops/matomo-tracker-react": "0.7.0",
     "@mui/icons-material": "7.3.11",
     "@mui/material": "7.3.11",
-    "@mui/x-data-grid": "8.29.5",
-    "@mui/x-date-pickers": "8.29.5",
+    "@mui/x-data-grid": "8.29.6",
+    "@mui/x-date-pickers": "8.29.6",
     "bignumber.js": "11.1.5",
     "dayjs": "1.11.23",
     "formik": "2.4.9",
     "graphql": "16.15.0",
     "highcharts": "12.6.2",
     "highcharts-react-official": "3.2.3",
-    "immer": "11.2.9",
+    "immer": "11.2.10",
     "lodash": "4.18.1",
     "react": "19.3.1",
     "react-dom": "19.3.1",
@@ -49,7 +49,7 @@
     "lint:fix": "eslint --fix src"
   },
   "devDependencies": {
-    "@eslint-react/eslint-plugin": "5.28.8",
+    "@eslint-react/eslint-plugin": "5.30.3",
     "@eslint/js": "10.0.1",
     "@graphql-codegen/cli": "8.0.0",
     "@graphql-codegen/client-preset": "7.0.0",
@@ -63,16 +63,16 @@
     "@typescript/native": "npm:typescript@7.0.2",
     "@vitejs/plugin-basic-ssl": "2.3.0",
     "@vitejs/plugin-react": "6.3.0",
-    "eslint": "10.14.0",
+    "eslint": "10.15.0",
     "eslint-config-prettier": "10.1.8",
     "husky": "9.1.7",
-    "knip": "6.44.2",
-    "lint-staged": "17.6.0",
-    "prettier": "3.9.10",
+    "knip": "6.45.1",
+    "lint-staged": "17.6.1",
+    "prettier": "3.10.1",
     "prettier-plugin-organize-imports": "4.3.0",
     "typescript": "npm:@typescript/typescript6@6.0.2",
-    "typescript-eslint": "8.72.1",
-    "vite": "8.3.6",
+    "typescript-eslint": "8.72.2",
+    "vite": "8.3.8",
     "vite-plugin-checker": "1.0.0",
     "vitest": "5.1.0"
   },
@@ -85,7 +85,7 @@
   "devEngines": {
     "runtime": {
       "name": "node",
-      "version": "26.13.0",
+      "version": "26.13.1",
       "onFail": "download"
     }
   },
@@ -101,5 +101,5 @@
       "eslint --cache --no-warn-ignored"
     ]
   },
-  "packageManager": "pnpm@12.18.0"
+  "packageManager": "pnpm@12.21.0"
 }
