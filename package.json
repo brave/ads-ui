@@ -66,7 +66,7 @@
     "eslint": "10.15.0",
     "eslint-config-prettier": "10.1.8",
     "husky": "9.1.7",
-    "knip": "6.46.1",
+    "knip": "6.47.0",
     "lint-staged": "17.6.1",
     "prettier": "3.10.1",
     "prettier-plugin-organize-imports": "4.3.0",
