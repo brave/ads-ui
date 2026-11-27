@@ -27,7 +27,7 @@ const INQUIRY_BODY = [
   "",
 ].join("\n");
 
-export function inquiryMailto(subject: string) {
+function inquiryMailto(subject: string) {
   const params = new URLSearchParams({ subject, body: INQUIRY_BODY });
   // URLSearchParams encodes spaces as "+", which mail clients render literally.
   return `mailto:${SALES_EMAIL}?${params.toString().replace(/\+/g, "%20")}`;
