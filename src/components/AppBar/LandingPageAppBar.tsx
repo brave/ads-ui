@@ -1,4 +1,3 @@
-import braveDark from "@/assets/images/full-brave-brand-black.svg";
 import brave from "@/assets/images/full-brave-brand.svg";
 import { useIsAuthenticated } from "@/auth/hooks/queries/useIsAuthenticated";
 import { PageLink } from "@/components/AppBar/PageLink";
@@ -19,14 +18,13 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { Link as RouterLink, useRouteMatch } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
+
+const textColor = "white";
 
 export function LandingPageAppBar() {
-  const match = useRouteMatch();
   const isAuthenticated = useIsAuthenticated();
   const isMobile = useIsMobile();
-  const isContact = match.path === "/contact";
-  const textColor = isContact ? "text.primary" : "white";
 
   const links = [
     {
@@ -78,12 +76,7 @@ export function LandingPageAppBar() {
             justifyContent="space-between"
           >
             <Box component={RouterLink} to="/" width={100} display="flex">
-              <img
-                src={isContact ? braveDark : brave}
-                alt={"Ads"}
-                height={30}
-                width={100}
-              />
+              <img src={brave} alt={"Ads"} height={30} width={100} />
             </Box>
 
             <Divider
@@ -107,7 +100,6 @@ export function LandingPageAppBar() {
               links={links}
               isAuthenticated={isAuthenticated}
               linkColor={textColor}
-              isContact={isContact}
             />
           )}
         </Toolbar>
@@ -137,7 +129,6 @@ function MobileMenu(props: {
   links: any[];
   isAuthenticated?: boolean;
   linkColor: string;
-  isContact?: boolean;
 }) {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
@@ -155,7 +146,7 @@ function MobileMenu(props: {
       <SupportMenu usePlainLink linkColor={props.linkColor} />
       <div style={{ flexGrow: 1 }} />
       <IconButton size="large" onClick={(e) => setAnchorElNav(e.currentTarget)}>
-        <MenuIcon sx={{ color: props.isContact ? "black" : "white" }} />
+        <MenuIcon sx={{ color: "white" }} />
       </IconButton>
       <Menu
         id="menu-appbar"

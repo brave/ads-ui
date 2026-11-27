@@ -1,8 +1,9 @@
 import { LandingPageAppBar } from "@/components/AppBar/LandingPageAppBar";
 import { Background } from "@/components/Background/Background";
+import { GetInTouch } from "@/components/Contact/GetInTouch";
 import { useTrackMatomoPageView } from "@/hooks/useTrackWithMatomo";
 import { SearchTalkingPoints } from "@/search/SearchTalkingPoints";
-import { Box, Button, Stack, Toolbar, Typography } from "@mui/material";
+import { Box, Stack, Toolbar, Typography } from "@mui/material";
 
 export default function SearchLandingPage() {
   useTrackMatomoPageView({ documentTitle: "Search Landing Page" });
@@ -27,24 +28,7 @@ export default function SearchLandingPage() {
           </Stack>
         </Box>
         <SearchTalkingPoints />
-        <Box
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          mb={{ xs: 5, md: 10 }}
-        >
-          <Typography variant="h3" color="white" gutterBottom>
-            Get in touch
-          </Typography>
-          <Button
-            variant="contained"
-            href="mailto:searchads@brave.com"
-            size="large"
-            sx={{ pl: 4, pr: 4, pt: 1, pb: 1 }}
-          >
-            searchads@brave.com
-          </Button>
-        </Box>
+        <GetInTouch heading="Get in touch" subject="Brave Search Ads inquiry" />
       </Box>
     </Background>
   );

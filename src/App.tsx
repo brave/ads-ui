@@ -2,7 +2,7 @@ import { lazy, Suspense, useCallback, useState } from "react";
 
 import { Redirect, Route, Switch } from "react-router-dom";
 
-import { BraveAdsContactFrame } from "@/auth/registration/BraveAdsContactFrame";
+import { BraveAdsContactPage } from "@/auth/registration/BraveAdsContactPage";
 import { AuthVerify } from "@/auth/views/AuthVerify";
 import { LandingPage } from "@/auth/views/LandingPage";
 import SignIn from "@/auth/views/Login";
@@ -50,7 +50,7 @@ export function App() {
               <Route path="/auth/link" component={AuthLink} />
               <Route path="/auth/verify" component={AuthVerify} />
               <Route path="/register" component={Register} />
-              <Route path="/contact" component={BraveAdsContactFrame} />
+              <Route path="/contact" component={BraveAdsContactPage} />
               <Route
                 path="/bat"
                 component={() => (
