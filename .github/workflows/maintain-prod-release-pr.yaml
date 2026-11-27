@@ -1,6 +1,13 @@
 on:
   # run manually from the actions panels
   workflow_dispatch:
+    inputs:
+      # underscored: a hyphen reads as subtraction in an actions expression, so
+      # `inputs.dry-run` would need `inputs['dry-run']` to work at all
+      dry_run:
+        description: log the computed title and body without updating the PR
+        type: boolean
+        default: false
 
   # since we can't currently create a PR and have the jobs run
   # successfully, run when one is manually created.
@@ -20,6 +27,9 @@ on:
 permissions:
   contents: read
   pull-requests: write
+  # `closingIssuesReferences` and `issue(number:)` both come back empty rather
+  # than failing without this, so the references silently disappear
+  issues: read
 
 jobs:
   main:
@@ -27,42 +37,311 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          DRY_RUN: ${{ inputs.dry_run }}
         with:
           script: |
             const owner = context.repo.owner;
             const repo = context.repo.repo;
+            const thisRepo = `${owner}/${repo}`;
+            const dryRun = process.env.DRY_RUN === "true";
 
-            function renderCommit(commitMsg) {
-              const prRegex = /\(#(\d+)\)$/m;
-              const allRefsRegex = /#(\d+)\s/g;
+            // `issue(number:)` resolves to null for a pull request number, or for
+            // one that doesn't exist, but reports a NOT_FOUND error alongside the
+            // null rather than just returning it, and octokit throws on any error
+            // even when it has the data. The partial data is on the error.
+            async function graphqlTolerateNotFound(query, parameters) {
+              try {
+                return await github.graphql(query, parameters);
+              } catch (err) {
+                if (
+                  err.name === "GraphqlResponseError" &&
+                  err.errors?.every((e) => e.type === "NOT_FOUND")
+                ) {
+                  return err.data;
+                }
+                throw err;
+              }
+            }
 
-              const prRef = commitMsg.match(prRegex);
+            const commitInfoFragment = `
+              fragment CommitInfo on Commit {
+                oid
+                message
+                associatedPullRequests(first: 5) {
+                  nodes {
+                    number
+                    title
+                    body
+                    mergeCommit { oid }
+                    author { __typename login }
+                    stackEntry {
+                      position
+                      stack {
+                        size
+                        entries(first: 1) {
+                          nodes {
+                            position
+                            pullRequest { url }
+                          }
+                        }
+                      }
+                    }
+                    closingIssuesReferences(first: 20) {
+                      nodes {
+                        number
+                        repository { nameWithOwner }
+                      }
+                    }
+                  }
+                }
+              }
+            `;
 
-              if (!prRef) {
-                return `- ${"???" + commitMsg}`;
+            async function paginateCommits(query, parameters, selectPage) {
+              const commits = [];
+              let cursor = null;
+
+              for (;;) {
+                const result = await github.graphql(query, { ...parameters, cursor });
+                const page = selectPage(result);
+
+                if (!page) return commits;
+
+                commits.push(...page.nodes);
+
+                if (!page.pageInfo.hasNextPage) return commits;
+                cursor = page.pageInfo.endCursor;
+              }
+            }
+
+            function releasePrCommits(prNumber) {
+              return paginateCommits(
+                `${commitInfoFragment}
+                query ($owner: String!, $repo: String!, $pr: Int!, $cursor: String) {
+                  repository(owner: $owner, name: $repo) {
+                    pullRequest(number: $pr) {
+                      commits(first: 100, after: $cursor) {
+                        pageInfo { hasNextPage endCursor }
+                        nodes { commit { ...CommitInfo } }
+                      }
+                    }
+                  }
+                }`,
+                { owner, repo, pr: prNumber },
+                (result) => {
+                  const page = result.repository.pullRequest.commits;
+                  return { ...page, nodes: page.nodes.map((n) => n.commit) };
+                }
+              );
+            }
+
+            function unreleasedCommits() {
+              return paginateCommits(
+                `${commitInfoFragment}
+                query ($owner: String!, $repo: String!, $cursor: String) {
+                  repository(owner: $owner, name: $repo) {
+                    ref(qualifiedName: "refs/heads/prod") {
+                      compare(headRef: "master") {
+                        commits(first: 100, after: $cursor) {
+                          pageInfo { hasNextPage endCursor }
+                          nodes { ...CommitInfo }
+                        }
+                      }
+                    }
+                  }
+                }`,
+                { owner, repo },
+                (result) => result.repository.ref?.compare?.commits
+              );
+            }
+
+            // the pull request that introduced the commit. GitHub only associates
+            // merged pull requests with a commit that is already on the default
+            // branch, so the open release pull request isn't among these, but match
+            // the merge commit anyway to stay exact under every merge strategy.
+            function introducingPullRequest(commit) {
+              const prs = commit.associatedPullRequests.nodes;
+              return prs.find((pr) => pr.mergeCommit?.oid === commit.oid) ?? prs[0];
+            }
+
+            // Renovate writes `&#8203;` (a zero width space) to stop its changelogs
+            // @-mentioning people, and markdown link targets carry `#` anchors;
+            // both read as references otherwise.
+            function scannable(body) {
+              return body
+                .replace(/```[\s\S]*?```/g, " ")
+                .replace(/`[^`\n]*`/g, " ")
+                .replace(/https?:\/\/\S+/g, " ")
+                .replace(/&#?\w+;/g, " ");
+            }
+
+            const referenceRegex = /(?<![\w/&])(?:([\w.-]+)\/([\w.-]+))?#(\d+)\b/g;
+
+            function scanReferences(pr, closes) {
+              const alreadyListed = new Set(
+                closes.map((ref) => `${ref.repoSlug ?? ""}#${ref.number}`)
+              );
+              alreadyListed.add(`#${pr.number}`);
+
+              const references = [];
+
+              for (const match of scannable(pr.body ?? "").matchAll(referenceRegex)) {
+                const [, refOwner, refRepo, digits] = match;
+                const slug = refOwner ? `${refOwner}/${refRepo}` : undefined;
+                const repoSlug = slug === thisRepo ? undefined : slug;
+                const key = `${repoSlug ?? ""}#${digits}`;
+
+                if (alreadyListed.has(key)) continue;
+                alreadyListed.add(key);
+
+                references.push({ number: Number(digits), repoSlug });
               }
 
-              const prNumber = prRef[1];
+              return references;
+            }
 
-              const otherReferences = [...commitMsg.matchAll(allRefsRegex)]
-                .map((m) => m[1])
-                .filter((r) => r !== prNumber);
+            // layers of one `gh stack` land as separate entries here, and often in
+            // different sections, because each carries its own commit type. They
+            // also routinely span releases, so the position is worth stating.
+            function describeStack(pr) {
+              const position = pr.stackEntry?.position;
+              const size = pr.stackEntry?.stack?.size;
 
-              const messages = [
-                `- #${prNumber}`,
-                ...otherReferences.map((r) => `  - re #${r}`),
+              // a one branch stack is real, but `1/1` says nothing
+              if (!position || !size || size < 2) return undefined;
+
+              const first = pr.stackEntry.stack.entries.nodes[0];
+
+              return {
+                position,
+                size,
+                // the stack itself has no page to link to, so point at the branch
+                // it starts from, and link nothing if that isn't what came back
+                url: first?.position === 1 ? first.pullRequest?.url : undefined,
+              };
+            }
+
+            function describeCommit(commit) {
+              const pr = introducingPullRequest(commit);
+
+              if (!pr) {
+                return {
+                  heading: commit.message.split("\n")[0],
+                  oid: commit.oid,
+                  isBot: false,
+                  references: [],
+                };
+              }
+
+              const closes = pr.closingIssuesReferences.nodes.map((issue) => ({
+                keyword: "closes",
+                number: issue.number,
+                repoSlug:
+                  issue.repository.nameWithOwner === thisRepo
+                    ? undefined
+                    : issue.repository.nameWithOwner,
+              }));
+
+              const isBot = pr.author?.__typename === "Bot";
+
+              // a bot's body is a changelog of other projects' references, so only
+              // take the ones GitHub itself has linked
+              const mentions = isBot
+                ? []
+                : scanReferences(pr, closes).map((ref) => ({ ...ref, keyword: "re" }));
+
+              return {
+                heading: pr.title,
+                pr,
+                isBot,
+                stack: describeStack(pr),
+                references: [...closes, ...mentions],
+              };
+            }
+
+            // a bare `#123` is only worth listing if it is a real issue: most of
+            // them turn out to be another pull request, or a number that belongs to
+            // a different repository entirely. Cross repository references are
+            // taken at face value, because the token can't read sibling repos.
+            async function keepReferencedIssues(descriptions) {
+              const numbers = [
+                ...new Set(
+                  descriptions.flatMap((d) =>
+                    d.references
+                      .filter((ref) => ref.keyword === "re" && !ref.repoSlug)
+                      .map((ref) => ref.number)
+                  )
+                ),
               ];
 
-              return messages.join("\n");
+              if (numbers.length === 0) return;
+
+              const result = await graphqlTolerateNotFound(
+                `query ($owner: String!, $repo: String!) {
+                  repository(owner: $owner, name: $repo) {
+                    ${numbers.map((n) => `n${n}: issue(number: ${n}) { number }`).join("\n")}
+                  }
+                }`,
+                { owner, repo }
+              );
+
+              const issues = new Set(
+                Object.values(result?.repository ?? {})
+                  .filter((issue) => issue)
+                  .map((issue) => issue.number)
+              );
+
+              for (const description of descriptions) {
+                description.references = description.references.filter(
+                  (ref) =>
+                    ref.keyword !== "re" || ref.repoSlug || issues.has(ref.number)
+                );
+              }
             }
 
-            function buildSection(title, commitMsgs) {
-              if (commitMsgs.length === 0) return "";
+            function renderReference(ref) {
+              const target = ref.repoSlug
+                ? `${ref.repoSlug}#${ref.number}`
+                : `#${ref.number}`;
 
-              return `\n## ${title}\n\n${commitMsgs.map(renderCommit).join("\n")}`;
+              return `  - ${ref.keyword} ${target}`;
             }
 
-            function buildBody(messages) {
+            function renderCommit(description) {
+              // a bare login, never `@login`: this body is rewritten on every push
+              // and again on the nightly schedule, and an @mention notifies them
+              // every time.
+              const author = description.pr?.author?.login;
+              // no title next to `#123`: GitHub renders a reference as its own
+              // title followed by the number, so writing it here says it twice.
+              // A bare sha is not expanded that way, so that one keeps its
+              // subject.
+              const title = description.pr
+                ? `#${description.pr.number}`
+                : `${description.oid.slice(0, 9)} ${description.heading}`;
+
+              const stack = description.stack;
+              const label = stack ? `stack: ${stack.position}/${stack.size}` : "";
+              const marker = !stack
+                ? ""
+                : stack.url
+                  ? ` ([${label}](${stack.url}))`
+                  : ` (${label})`;
+
+              return [
+                `- ${title}${author ? ` (${author})` : ""}${marker}`,
+                ...description.references.map(renderReference),
+              ].join("\n");
+            }
+
+            function buildSection(title, descriptions) {
+              if (descriptions.length === 0) return "";
+
+              return `\n## ${title}\n\n${descriptions.map(renderCommit).join("\n")}`;
+            }
+
+            function buildBody(descriptions) {
               const groups = [
                 {
                   type: "feat",
@@ -82,20 +361,35 @@ jobs:
                 },
               ];
 
+              const authored = descriptions.filter((d) => !d.isBot);
+
               const knownSections = groups.map((group) =>
                 buildSection(
                   group.title,
-                  messages.filter((m) => m.startsWith(group.type))
+                  authored.filter((d) => d.heading.startsWith(group.type))
                 )
               );
 
               const allKnownSections = groups.map((g) => g.type);
               const unknownSections = buildSection(
                 "Other",
-                messages.filter((m) => !allKnownSections.some((s) => m.startsWith(s)))
+                authored.filter((d) => !allKnownSections.some((s) => d.heading.startsWith(s)))
               );
 
-              return [...knownSections, unknownSections].join("\n");
+              const botSections = buildSection(
+                "Bot Changes",
+                descriptions.filter((d) => d.isBot)
+              );
+
+              return [...knownSections, unknownSections, botSections]
+                .filter((section) => section !== "")
+                .join("\n");
+            }
+
+            async function describeCommits(commits) {
+              const descriptions = commits.map(describeCommit);
+              await keepReferencedIssues(descriptions);
+              return descriptions;
             }
 
             async function findReleasePR() {
@@ -129,20 +423,14 @@ jobs:
 
             if (!pr) {
               console.log("checking commits...");
-              const commits = await github.rest.repos.compareCommitsWithBasehead({
-                owner,
-                repo,
-                basehead: "prod...master",
-              });
+              const commits = await unreleasedCommits();
 
-              if (commits.data.commits.length === 0) {
+              if (commits.length === 0) {
                 console.log("no changes to release!");
                 return;
               }
 
-              const commitMessages = commits.data.commits.map((c) => c.commit.message);
-
-              const result = buildBody(commitMessages);
+              const result = buildBody(await describeCommits(commits));
 
               console.log("need to create a draft release PR!", result);
 
@@ -163,17 +451,14 @@ jobs:
               console.log("created: " + newPr.data.html_url);
               */
             } else {
-              const { data: commits } = await github.rest.pulls.listCommits({
-                owner,
-                repo,
-                pull_number: pr.number,
-              });
+              const commits = await releasePrCommits(pr.number);
 
-              const commitMessages = commits.map((c) => c.commit.message);
-              const body = buildBody(commitMessages);
+              const body = buildBody(await describeCommits(commits));
               const title = `Production Release ${new Date().toISOString().slice(0, 10)}`;
 
-              if (body === pr.body && title === pr.title) {
+              if (dryRun) {
+                console.log("dry run, not updating the PR!", { title, body });
+              } else if (body === pr.body && title === pr.title) {
                 console.log("up to date!");
               } else {
                 console.log(`Updating PR!`, { title, body });
